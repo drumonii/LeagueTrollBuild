@@ -36,6 +36,12 @@ idea {
     }
 }
 
+jar {
+    manifest {
+        attributes('Implementation-Version': version, 'Build-Date': new Date(), 'Created-By': "Gradle ${gradle.gradleVersion}")
+    }
+}
+
 repositories {
     jcenter()
 }
