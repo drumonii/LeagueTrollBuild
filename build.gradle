@@ -1,0 +1,57 @@
+description = 'League of Legends Troll Build'
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'spring-boot' 
+apply plugin: 'io.spring.dependency-management'
+
+version = '1.0-SNAPSHOT'
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.2.5.RELEASE'
+        classpath 'io.spring.gradle:dependency-management-plugin:0.5.3.RELEASE'
+        classpath 'org.springframework:springloaded:1.2.4.RELEASE'
+    }
+}
+
+eclipse {
+    classpath {
+        containers.remove 'org.eclipse.jdt.launching.JRE_CONTAINER'
+        containers 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8'
+    }
+}
+
+idea {
+    module {
+        inheritOutputDirs = false
+        outputDir = file("$buildDir/classes/main/")
+    }
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+	// Spring Boot Starters
+    compile 'org.springframework.boot:spring-boot-starter-web'
+
+    // Lombok
+    compile 'org.projectlombok:lombok:1.16.6'
+    
+	// Testing
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
+    testCompile 'org.assertj:assertj-core:3.1.0'
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.6'
+}
