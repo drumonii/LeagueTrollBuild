@@ -1,4 +1,4 @@
-package com.drumonii.loltrollbuild.api;
+package com.drumonii.loltrollbuild.riot.api;
 
 import com.drumonii.loltrollbuild.model.SummonerSpell;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -9,7 +9,9 @@ import lombok.Setter;
 import java.util.Map;
 
 /**
- * Response class of a retrieval of LoL Summoner Spells from Riot's static-data API. Response example:
+ * Response class of a retrieval of LoL {@link SummonerSpell}s from Riot's {@code lol-static-data-v1.2} API. Response
+ * example:
+ *
  * <pre>
  *  {
  *      "type": "summoner",
@@ -41,6 +43,7 @@ import java.util.Map;
  *      }
  *  }
  * </pre>
+ *
  * <b>Note</b>: Not all attributes are retrieved from Riot, only the ones that are used.
  */
 @NoArgsConstructor

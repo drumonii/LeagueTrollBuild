@@ -1,4 +1,4 @@
-package com.drumonii.loltrollbuild.api;
+package com.drumonii.loltrollbuild.riot.api;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * Base response class from Riot's static-data API which contains common elements among retrievals.
+ * Base response class from Riot's {@code lol-static-data-v1.2} API which contains common elements among retrievals.
  */
 @NoArgsConstructor
 @AllArgsConstructor

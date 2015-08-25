@@ -1,4 +1,4 @@
-package com.drumonii.loltrollbuild.api;
+package com.drumonii.loltrollbuild.riot.api;
 
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.model.Champion;
