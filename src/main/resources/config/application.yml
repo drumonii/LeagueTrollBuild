@@ -41,10 +41,9 @@ spring:
 spring:
   profiles: external
   datasource:
-    name: loltrollbuild
     initialize: false
     driverClassName: org.postgresql.Driver
-    url: jdbc:postgresql://localhost/loltrollbuild
+    url: # url
     username: # postgres
     password: # postgres
   jpa:
@@ -52,6 +51,25 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQL9Dialect
         show_sql: false
+        format_sql: true
+        generate_statistics: false
+
+---
+
+# Development profile with a local PostgreSQL database
+spring:
+  profiles: dev
+  datasource:
+    initialize: false
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost/loltrollbuild
+    username: postgres
+    password: postgres
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL9Dialect
+        show_sql: true
         format_sql: true
         generate_statistics: false
 

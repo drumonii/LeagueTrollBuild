@@ -16,6 +16,11 @@ public class Profiles {
 	public static final String EXTERNAL = "external";
 
 	/**
+	 * Profile for local development.
+	 */
+	public static final String DEV = "dev";
+
+	/**
 	 * Profile for running unit tests.
 	 */
 	public static final String TESTING = "testing";

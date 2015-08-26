@@ -7,13 +7,13 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import static com.drumonii.loltrollbuild.config.Profiles.EXTERNAL;
+import static com.drumonii.loltrollbuild.config.Profiles.DEV;
 
 /**
- * Indicates an external database profile.
+ * Indicates an embedded database profile.
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@Profile(value = EXTERNAL)
-public @interface External {
+@Profile(value = DEV)
+public @interface Dev {
 }
