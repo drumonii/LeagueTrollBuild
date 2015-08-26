@@ -13,3 +13,57 @@ riot:
       champions:  /champion
       items: /item
       summoner-spells: /summoner-spell
+
+# ======================
+# Spring Boot Properties
+# ======================
+
+spring:
+  # Spring default profile (embedded or external)
+  profiles.default: embedded
+
+---
+
+# Production profile with an embedded H2 database
+spring:
+  profiles: embedded
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+        show_sql: false
+        format_sql: true
+        generate_statistics: false
+
+---
+
+# Production profile with an external PostgreSQL database
+spring:
+  profiles: external
+  datasource:
+    name: loltrollbuild
+    initialize: false
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost/loltrollbuild
+    username: # postgres
+    password: # postgres
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL9Dialect
+        show_sql: false
+        format_sql: true
+        generate_statistics: false
+
+---
+
+# Unit testing profile with an embedded H2 database
+spring:
+  profiles: testing
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+        show_sql: true
+        format_sql: true
+        generate_statistics: false
