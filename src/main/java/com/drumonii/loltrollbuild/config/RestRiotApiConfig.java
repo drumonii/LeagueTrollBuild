@@ -72,4 +72,15 @@ public class RestRiotApiConfig {
 				.buildAndExpand(staticData.getRegion());
 	}
 
+	@Bean
+	@Qualifier("versions")
+	public UriComponents versionsUri() {
+		return UriComponentsBuilder.newInstance()
+				.scheme(staticData.getScheme())
+				.host(staticData.getBaseUrl())
+				.path(staticData.getVersions())
+				.queryParam(staticData.getParam(), api.getKey())
+				.buildAndExpand(staticData.getRegion());
+	}
+
 }

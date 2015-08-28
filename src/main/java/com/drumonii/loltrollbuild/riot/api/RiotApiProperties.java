@@ -57,6 +57,9 @@ public class RiotApiProperties {
 		@NotEmpty
 		@Getter @Setter private String summonerSpells;
 
+		@NotEmpty
+		@Getter @Setter private String versions;
+
 	}
 
 }
