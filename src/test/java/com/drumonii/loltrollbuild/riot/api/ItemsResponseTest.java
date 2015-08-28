@@ -1,18 +1,18 @@
 package com.drumonii.loltrollbuild.riot.api;
 
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
-import com.drumonii.loltrollbuild.model.Image;
 import com.drumonii.loltrollbuild.model.Item;
 import com.drumonii.loltrollbuild.model.ItemGold;
+import com.drumonii.loltrollbuild.model.image.ItemImage;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashSet;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.StrictAssertions.entry;
 
 public class ItemsResponseTest extends BaseSpringTestRunner {
 
@@ -32,8 +32,8 @@ public class ItemsResponseTest extends BaseSpringTestRunner {
 				"gold from the enemy jungle\",\"from\":[\"1039\"],\"into\":[\"3719\",\"3720\",\"3721\",\"3722\"]," +
 				"\"image\":{\"full\":\"3711.png\",\"sprite\":\"item2.png\",\"group\":\"item\",\"x\":432,\"y\":192," +
 				"\"w\":48,\"h\":48},\"gold\":{\"base\":450,\"total\":850,\"sell\":595,\"purchasable\":true}}}}";
-
 		ItemsResponse itemsResponse = objectMapper.readValue(responseBody, ItemsResponse.class);
+
 		assertThat(itemsResponse).isNotNull();
 		assertThat(itemsResponse).isEqualToComparingOnlyGivenFields(new ItemsResponse("item", "5.16.1"),
 				"type", "version");
@@ -44,10 +44,10 @@ public class ItemsResponseTest extends BaseSpringTestRunner {
 				"Gold, and you gain 175% increased Movement Speed decaying over 2 seconds.<br><br><passive>Passive - " +
 				"Jungler:</passive> Deal 45 additional magic damage to monsters over 2 seconds and gain 10 Health " +
 				"Regen and 5 Mana Regen per second while under attack from neutral monsters.<br><br><groupLimit>" +
-				"Limited to 1 Jungle item</groupLimit>", Arrays.asList("1039"), Arrays.asList("3719", "3720", "3721",
-				"3722"), null, new Image("3711.png", "item2.png", "item", 432, 192, 48, 48), new ItemGold(450, 850, 595,
-				true));
-		assertThat(itemsResponse.getItems()).containsExactly(entry("3711", item));
+				"Limited to 1 Jungle item</groupLimit>", Arrays.asList("1039"), new HashSet<>(Arrays.asList("3719",
+				"3720", "3721", "3722")), null, new ItemImage("3711.png", "item2.png", "item", 432, 192, 48, 48),
+				new ItemGold(0, 450, 850, 595, true, null));
+		assertThat(itemsResponse.getItems().get("3711")).isEqualToIgnoringGivenFields(item, "gold");
 	}
 
 }

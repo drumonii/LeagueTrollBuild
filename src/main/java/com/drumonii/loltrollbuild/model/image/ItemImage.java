@@ -1,8 +1,8 @@
-package com.drumonii.loltrollbuild.model;
+package com.drumonii.loltrollbuild.model.image;
 
+import com.drumonii.loltrollbuild.model.Item;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,13 +13,17 @@ import org.hibernate.annotations.Parameter;
 import javax.persistence.*;
 
 /**
- * Gold information of an {@link Item}.
+ * Specific {@link Image} of a {@link ItemImage} which maps a {@link OneToOne} relationship.
  */
 @Entity
-@Table(name = "ITEM_GOLD")
+@Table(name = "ITEM_IMAGE")
 @NoArgsConstructor
 @AllArgsConstructor
-public class ItemGold {
+public class ItemImage extends Image {
+
+	public ItemImage(String full, String sprite, String group, int x, int y, int w, int h) {
+		super(full, sprite, group, x, y, w, h);
+	}
 
 	@Id
 	@GeneratedValue(generator = "generator")
@@ -28,22 +32,6 @@ public class ItemGold {
 	@Column(name = "ITEM_ID", unique = true, nullable = false)
 	@JsonIgnore
 	@Getter @Setter private int id;
-
-	@Column(name = "BASE", nullable = false)
-	@JsonProperty("base")
-	@Getter @Setter private int base;
-
-	@Column(name = "TOTAL", nullable = false)
-	@JsonProperty("total")
-	@Getter @Setter private int total;
-
-	@Column(name = "SELL", nullable = false)
-	@JsonProperty("sell")
-	@Getter @Setter private int sell;
-
-	@Column(name = "PURCHASABLE", nullable = false)
-	@JsonProperty("purchasable")
-	@Getter @Setter private boolean purchasable;
 
 	@OneToOne(optional = false, mappedBy = "image")
 	@JsonBackReference

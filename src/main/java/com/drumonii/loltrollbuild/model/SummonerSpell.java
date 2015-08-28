@@ -1,37 +1,57 @@
 package com.drumonii.loltrollbuild.model;
 
+import com.drumonii.loltrollbuild.model.image.SummonerSpellImage;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
-import java.util.List;
+import javax.persistence.*;
+import java.util.Set;
 
 /**
  * League of Legend Summoner Spell.
  *
  * @see <a href="http://leagueoflegends.wikia.com/wiki/Summoner">Summoner Spell Wiki</a>
  */
+@Entity
+@Table(name = "SUMMONER_SPELL")
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
 @ToString
 public class SummonerSpell {
 
+	@Id
+	@Column(name = "ID", unique = true, nullable = false)
 	@JsonProperty("id")
 	@Getter @Setter private int id;
 
+	@Column(name = "NAME", nullable = false)
 	@JsonProperty("name")
 	@Getter @Setter private String name;
 
+	@Column(name = "DESCRIPTION", nullable = false)
 	@JsonProperty("description")
 	@Getter @Setter private String description;
 
+	@OneToOne(cascade = CascadeType.ALL, optional = false)
+	@PrimaryKeyJoinColumn
+	@JsonManagedReference
 	@JsonProperty("image")
-	@Getter @Setter private Image image;
+	@Getter @Setter private SummonerSpellImage image;
 
+	@ElementCollection(fetch = FetchType.EAGER)
+	@CollectionTable(name = "SUMMONER_SPELL_COOLDOWN",
+			joinColumns = @JoinColumn(name = "SUMMONER_SPELL_ID"))
+	@Column(name = "COOLDOWN")
 	@JsonProperty("cooldown")
-	@Getter @Setter private List<Integer> cooldown;
+	@Getter @Setter private Set<Integer> cooldown;
 
+	@ElementCollection(fetch = FetchType.EAGER)
+	@CollectionTable(name = "SUMMONER_SPELL_MODE",
+			joinColumns = @JoinColumn(name = "SUMMONER_SPELL_ID"))
+	@Column(name = "MODE")
 	@JsonProperty("modes")
-	@Getter @Setter private List<String> modes;
+	@Getter @Setter private Set<String> modes;
 
 }
