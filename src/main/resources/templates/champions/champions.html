@@ -8,6 +8,14 @@
 <body>
 <div layout:fragment="content">
     <h1>Champions</h1>
+    <div th:each="champion : ${champions}">
+        <a th:href="@{/champions/{id}(id=${champion.id})}">
+            <h3 th:text="${champion.name}">Thresh</h3>
+        </a>
+        <ul>
+            <li th:text="${champion.title}">The Chain Warden</li>
+        </ul>
+    </div>
 </div>
 </body>
 </html>

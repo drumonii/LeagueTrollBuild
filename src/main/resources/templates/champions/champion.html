@@ -3,11 +3,16 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layouts/main">
 <head>
-    <title>Champion</title>
+    <title th:text="${champion.name}">Thresh</title>
 </head>
 <body>
 <div layout:fragment="content">
-    <h1>Champion</h1>
+    <h1 th:text="${champion.name}">Thresh</h1>
+    <h3 th:text="${champion.title}">The Chain Warden</h3>
+    <ul th:each="tag : ${champion.tags}">
+        <li th:text="${tag}">Support</li>
+    </ul>
+    <p th:text="${champion.partype}">Mana</p>
 </div>
 </body>
 </html>
