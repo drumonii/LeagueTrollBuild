@@ -64,6 +64,8 @@ spring:
 # Development profile with a local PostgreSQL database
 spring:
   profiles: dev
+  thymeleaf:
+    cache: false
   datasource:
     initialize: false
     driverClassName: org.postgresql.Driver
