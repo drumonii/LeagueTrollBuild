@@ -4,6 +4,7 @@ import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.model.Champion;
 import com.drumonii.loltrollbuild.riot.api.ChampionsResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -22,7 +23,7 @@ public class ChampionsRepositoryTest extends BaseSpringTestRunner {
 	@Test
 	public void crudOperations() throws IOException {
 		String responseBody = "{\"type\":\"champion\",\"version\":\"5.16.1\",\"data\":{\"Test\":{\"id\":10001,\"" +
-				"key\":\"Test\",\"name\":\"Test\",\"title\":\"Much Test Champion\",\"image\":{\"full\":" +
+				"key\":\"Test\",\"name\":\"Test\",\"title\":\"much Test Champion\",\"image\":{\"full\":" +
 				"\"Test.png\",\"sprite\":\"champion0.png\",\"group\":\"champion\",\"x\":336,\"y\":0,\"w\":48," +
 				"\"h\":48},\"tags\":[\"Testing1\",\"Testing2\"],\"partype\":\"TestParType\"}}}";
 		ChampionsResponse championsResponse = objectMapper.readValue(responseBody, ChampionsResponse.class);
@@ -35,6 +36,8 @@ public class ChampionsRepositoryTest extends BaseSpringTestRunner {
 		// Select
 		Champion championFromDb = championsRepository.findOne(10001);
 		assertThat(championFromDb).isNotNull();
+		assertThat(championFromDb.getTitle()).isEqualTo(StringUtils.capitalize(unmarshalChampion.getTitle()));
+		unmarshalChampion.setTitle(championFromDb.getTitle()); // title from Riot is uncapitalized, set from the db's
 		assertThat(championFromDb).isEqualToIgnoringNullFields(unmarshalChampion);
 
 		// Update
