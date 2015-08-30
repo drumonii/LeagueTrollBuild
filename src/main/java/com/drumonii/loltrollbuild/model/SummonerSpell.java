@@ -17,7 +17,7 @@ import java.util.Set;
 @Table(name = "SUMMONER_SPELL")
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
+@EqualsAndHashCode(of = "id")
 @ToString
 public class SummonerSpell {
 

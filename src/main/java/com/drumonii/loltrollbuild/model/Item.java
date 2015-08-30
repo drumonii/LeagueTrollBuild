@@ -19,7 +19,7 @@ import java.util.Set;
 @Table(name = "ITEM")
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
+@EqualsAndHashCode(of = "id")
 @ToString
 public class Item {
 

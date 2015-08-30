@@ -18,7 +18,7 @@ import java.util.Set;
 @Table(name = "CHAMPION")
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
+@EqualsAndHashCode(of = "id")
 @ToString
 public class Champion {
 
