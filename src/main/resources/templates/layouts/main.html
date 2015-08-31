@@ -6,7 +6,11 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
 </head>
 <body>
-<!--/* Main content */-->
+<!--/* header and nav */-->
+<header th:replace="fragments/header :: header"></header>
+<!--/* main content */-->
 <div layout:fragment="content"></div>
+<!--/* footer */-->
+<footer th:replace="fragments/footer :: footer"></footer>
 </body>
 </html>
