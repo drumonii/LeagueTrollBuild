@@ -29,16 +29,16 @@ public class ItemsRepositoryTest extends BaseSpringTestRunner {
 				"true}}}}";
 		ItemsResponse itemsResponse = objectMapper.readValue(responseBody, ItemsResponse.class);
 
-		Item unmarshalItem = itemsResponse.getItems().get("10001");
+		Item unmarshalledItem = itemsResponse.getItems().get("10001");
 
 		// Create
-		itemsRepository.save(unmarshalItem);
+		itemsRepository.save(unmarshalledItem);
 
 		// Select
 		Item itemFromDb = itemsRepository.findOne(10001);
 		assertThat(itemFromDb).isNotNull();
 		itemFromDb.setMaps(null); // It's empty and not null from the db
-		assertThat(itemFromDb).isEqualToIgnoringGivenFields(unmarshalItem, "from", "gold");
+		assertThat(itemFromDb).isEqualToIgnoringGivenFields(unmarshalledItem, "from", "gold");
 
 		// Update
 		itemFromDb.setConsumed(true);

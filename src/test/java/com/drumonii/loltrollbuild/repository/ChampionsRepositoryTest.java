@@ -28,17 +28,17 @@ public class ChampionsRepositoryTest extends BaseSpringTestRunner {
 				"\"h\":48},\"tags\":[\"Testing1\",\"Testing2\"],\"partype\":\"TestParType\"}}}";
 		ChampionsResponse championsResponse = objectMapper.readValue(responseBody, ChampionsResponse.class);
 
-		Champion unmarshalChampion = championsResponse.getChampions().get("Test");
+		Champion unmarshalledChampion = championsResponse.getChampions().get("Test");
 
 		// Create
-		championsRepository.save(unmarshalChampion);
+		championsRepository.save(unmarshalledChampion);
 
 		// Select
 		Champion championFromDb = championsRepository.findOne(10001);
 		assertThat(championFromDb).isNotNull();
-		assertThat(championFromDb.getTitle()).isEqualTo(StringUtils.capitalize(unmarshalChampion.getTitle()));
-		unmarshalChampion.setTitle(championFromDb.getTitle()); // title from Riot is uncapitalized, set from the db's
-		assertThat(championFromDb).isEqualToIgnoringNullFields(unmarshalChampion);
+		assertThat(championFromDb.getTitle()).isEqualTo(StringUtils.capitalize(unmarshalledChampion.getTitle()));
+		unmarshalledChampion.setTitle(championFromDb.getTitle()); // title from Riot is uncapitalized, set from the db's
+		assertThat(championFromDb).isEqualToIgnoringNullFields(unmarshalledChampion);
 
 		// Update
 		championFromDb.setPartype("Mana");

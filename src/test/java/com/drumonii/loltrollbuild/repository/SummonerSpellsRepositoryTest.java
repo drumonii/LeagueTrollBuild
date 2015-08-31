@@ -30,15 +30,15 @@ public class SummonerSpellsRepositoryTest extends BaseSpringTestRunner {
 				"[\"CLASSIC\", \"ARAM\"]}}}";
 		SummonerSpellsResponse spellsResponse = objectMapper.readValue(responseBody, SummonerSpellsResponse.class);
 
-		SummonerSpell unmarshalSummonerSpell = spellsResponse.getSummonerSpells().get("SummonerTest");
+		SummonerSpell unmarshalledSummonerSpell = spellsResponse.getSummonerSpells().get("SummonerTest");
 
 		// Create
-		summonerSpellsRepository.save(unmarshalSummonerSpell);
+		summonerSpellsRepository.save(unmarshalledSummonerSpell);
 
 		// Select
 		SummonerSpell summonerSpellFromDb = summonerSpellsRepository.findOne(10001);
 		assertThat(summonerSpellFromDb).isNotNull();
-		assertThat(summonerSpellFromDb).isEqualToIgnoringNullFields(unmarshalSummonerSpell);
+		assertThat(summonerSpellFromDb).isEqualToIgnoringNullFields(unmarshalledSummonerSpell);
 
 		// Update
 		summonerSpellFromDb.setModes(new HashSet<>(Arrays.asList("CLASSIC")));

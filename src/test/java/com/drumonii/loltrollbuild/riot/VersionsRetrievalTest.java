@@ -42,4 +42,15 @@ public class VersionsRetrievalTest extends BaseSpringTestRunner {
 		assertThat(versions).isNotEmpty();
 	}
 
+	@Test
+	public void latestPatch() throws Exception {
+		mockServer.expect(requestTo("/riot/versions/latest")).andExpect(method(HttpMethod.GET))
+				.andRespond(withSuccess("5.16.1", MediaType.APPLICATION_JSON));
+		String latestPatch = restTemplate.getForObject("/riot/versions/latest", String.class);
+
+		mockServer.verify();
+		assertThat(latestPatch).isNotNull();
+		assertThat(latestPatch).isEqualTo("5.16.1");
+	}
+
 }

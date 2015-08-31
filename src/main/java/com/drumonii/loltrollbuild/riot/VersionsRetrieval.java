@@ -31,4 +31,9 @@ public class VersionsRetrieval {
 		return Arrays.asList(restTemplate.getForObject(versionsUri.toString(), String[].class));
 	}
 
+	@RequestMapping(value = "/latest", method = RequestMethod.GET)
+	public String latestPatch() {
+		return Arrays.asList(restTemplate.getForObject(versionsUri.toString(), String[].class)).get(0);
+	}
+
 }
