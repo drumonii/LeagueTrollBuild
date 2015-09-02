@@ -7,6 +7,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 /**
  * Simple repository to the ITEM_GOLD table.
  */
-@RepositoryRestResource(exported = false)
+@RepositoryRestResource(path = "gold")
 public interface ItemGoldRepository extends Repository<ItemGold, Integer> {
 }
