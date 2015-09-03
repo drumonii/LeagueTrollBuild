@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.Arrays;
 
@@ -57,6 +58,23 @@ public class RestRiotApiConfigTest extends BaseSpringTestRunner {
 	}
 
 	@Autowired
+	@Qualifier("summonerSpell")
+	private UriComponentsBuilder summonerSpellUri;
+
+	@Test
+	public void summonerSpellUri() {
+		int id = 1;
+		UriComponents uriComponents = summonerSpellUri.buildAndExpand(staticData.getRegion(), id);
+		assertThat(uriComponents.getScheme()).isEqualTo(scheme);
+		assertThat(uriComponents.getHost()).isEqualTo(host);
+		assertThat(uriComponents.getPath()).isEqualTo(staticData.getSummonerSpell().replace("{id}",
+				String.valueOf(id)));
+		assertThat(uriComponents.getQueryParams()).contains(entry("spellData",
+				Arrays.asList("cooldown,image,modes")));
+		assertThat(uriComponents.getQueryParams()).contains(entry("api_key", Arrays.asList(apiKey)));
+	}
+
+	@Autowired
 	@Qualifier("items")
 	private UriComponents itemsUri;
 
@@ -66,8 +84,24 @@ public class RestRiotApiConfigTest extends BaseSpringTestRunner {
 		assertThat(itemsUri.getHost()).isEqualTo(host);
 		assertThat(itemsUri.getPath()).isEqualTo(staticData.getItems());
 		assertThat(itemsUri.getQueryParams()).contains(entry("itemListData",
-				Arrays.asList("consumed,from,gold,groups,image,into,maps")));
+				Arrays.asList("consumed,from,gold,image,into,maps")));
 		assertThat(itemsUri.getQueryParams()).contains(entry("api_key", Arrays.asList(apiKey)));
+	}
+
+	@Autowired
+	@Qualifier("item")
+	private UriComponentsBuilder itemUri;
+
+	@Test
+	public void itemUri() {
+		int id = 1;
+		UriComponents uriComponents = itemUri.buildAndExpand(staticData.getRegion(), id);
+		assertThat(uriComponents.getScheme()).isEqualTo(scheme);
+		assertThat(uriComponents.getHost()).isEqualTo(host);
+		assertThat(uriComponents.getPath()).isEqualTo(staticData.getItem().replace("{id}", String.valueOf(id)));
+		assertThat(uriComponents.getQueryParams()).contains(entry("itemData",
+				Arrays.asList("consumed,from,gold,image,into,maps")));
+		assertThat(uriComponents.getQueryParams()).contains(entry("api_key", Arrays.asList(apiKey)));
 	}
 
 	@Autowired
@@ -81,6 +115,21 @@ public class RestRiotApiConfigTest extends BaseSpringTestRunner {
 		assertThat(championsUri.getPath()).isEqualTo(staticData.getChampions());
 		assertThat(championsUri.getQueryParams()).contains(entry("champData", Arrays.asList("image,partype,tags")));
 		assertThat(championsUri.getQueryParams()).contains(entry("api_key", Arrays.asList(apiKey)));
+	}
+
+	@Autowired
+	@Qualifier("champion")
+	private UriComponentsBuilder championUri;
+
+	@Test
+	public void championUri() {
+		int id = 1;
+		UriComponents uriComponents = championUri.buildAndExpand(staticData.getRegion(), id);
+		assertThat(uriComponents.getScheme()).isEqualTo(scheme);
+		assertThat(uriComponents.getHost()).isEqualTo(host);
+		assertThat(uriComponents.getPath()).isEqualTo(staticData.getChampion().replace("{id}", String.valueOf(id)));
+		assertThat(uriComponents.getQueryParams()).contains(entry("champData", Arrays.asList("image,partype,tags")));
+		assertThat(uriComponents.getQueryParams()).contains(entry("api_key", Arrays.asList(apiKey)));
 	}
 
 	@Autowired

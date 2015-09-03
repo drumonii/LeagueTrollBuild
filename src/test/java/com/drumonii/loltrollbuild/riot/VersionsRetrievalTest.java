@@ -17,7 +17,8 @@ import org.springframework.web.util.UriComponents;
 
 import java.io.IOException;
 
-import static org.assertj.core.api.StrictAssertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Fail.fail;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
@@ -58,7 +59,9 @@ public class VersionsRetrievalTest extends BaseSpringTestRunner {
 				.andRespond(withSuccess(responseBody, MediaType.APPLICATION_JSON));
 		try {
 			versions = objectMapper.readValue(responseBody, String[].class);
-		} catch (IOException e) {}
+		} catch (IOException e) {
+			fail("Unable to unmarshal the Versions response.");
+		}
 		restTemplate = mock(RestTemplate.class);
 		when(restTemplate.getForObject(versionsUri.toString(), String[].class))
 				.thenReturn(versions);
@@ -104,6 +107,25 @@ public class VersionsRetrievalTest extends BaseSpringTestRunner {
 
 		assertThat(versionsRepository.findOne(latestVersion.getPatch())).isNull();
 		assertThat(versionsRepository.latestPatch()).isNotNull();
+	}
+
+	@Test
+	public void saveLatestPatchNoChange() throws Exception {
+		String responseBody = "[\"5.16.1\",\"5.15.1\",\"5.14.1\",\"5.13.1\",\"5.12.1\",\"5.11.1\",\"5.10.1\"," +
+				"\"5.9.1\",\"5.8.1\",\"5.7.2\",\"5.7.1\",\"5.6.2\",\"5.6.1\",\"5.5.3\",\"5.5.2\",\"5.5.1\"," +
+				"\"5.4.1\",\"5.3.1\",\"5.2.2\",\"5.2.1\",\"5.1.2\",\"5.1.1\"]";
+		String[] newVersions = objectMapper.readValue(responseBody, String[].class);
+		Version latestVersion = new Version(newVersions[0]);
+		versionsRepository.save(latestVersion);
+
+		mockMvc.perform(post("/riot/versions/latest"))
+				.andExpect(status().isOk())
+				.andExpect(content().contentType(PLAN_TEXT_UTF8))
+				.andExpect(content().string(versions[0]));
+		mockServer.verify();
+
+		assertThat(versionsRepository.latestPatch()).isNotNull();
+		assertThat(versionsRepository.latestPatch()).isEqualTo("5.16.1");
 	}
 
 }

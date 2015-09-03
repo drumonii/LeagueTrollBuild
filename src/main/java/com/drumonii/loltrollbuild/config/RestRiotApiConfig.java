@@ -49,15 +49,37 @@ public class RestRiotApiConfig {
 	}
 
 	@Bean
+	@Qualifier("summonerSpell")
+	public UriComponentsBuilder summonerSpellUri() {
+		return UriComponentsBuilder.newInstance()
+				.scheme(staticData.getScheme())
+				.host(staticData.getBaseUrl())
+				.path(staticData.getSummonerSpell())
+				.queryParam("spellData", "cooldown,image,modes")
+				.queryParam(staticData.getParam(), api.getKey());
+	}
+
+	@Bean
 	@Qualifier("items")
 	public UriComponents itemsUri() {
 		return UriComponentsBuilder.newInstance()
 				.scheme(staticData.getScheme())
 				.host(staticData.getBaseUrl())
 				.path(staticData.getItems())
-				.queryParam("itemListData", "consumed,from,gold,groups,image,into,maps")
+				.queryParam("itemListData", "consumed,from,gold,image,into,maps")
 				.queryParam(staticData.getParam(), api.getKey())
 				.buildAndExpand(staticData.getRegion());
+	}
+
+	@Bean
+	@Qualifier("item")
+	public UriComponentsBuilder itemUri() {
+		return UriComponentsBuilder.newInstance()
+				.scheme(staticData.getScheme())
+				.host(staticData.getBaseUrl())
+				.path(staticData.getItem())
+				.queryParam("itemData", "consumed,from,gold,image,into,maps")
+				.queryParam(staticData.getParam(), api.getKey());
 	}
 
 	@Bean
@@ -70,6 +92,17 @@ public class RestRiotApiConfig {
 				.queryParam("champData", "image,partype,tags")
 				.queryParam(staticData.getParam(), api.getKey())
 				.buildAndExpand(staticData.getRegion());
+	}
+
+	@Bean
+	@Qualifier("champion")
+	public UriComponentsBuilder championUri() {
+		return UriComponentsBuilder.newInstance()
+				.scheme(staticData.getScheme())
+				.host(staticData.getBaseUrl())
+				.path(staticData.getChampion())
+				.queryParam("champData", "image,partype,tags")
+				.queryParam(staticData.getParam(), api.getKey());
 	}
 
 	@Bean

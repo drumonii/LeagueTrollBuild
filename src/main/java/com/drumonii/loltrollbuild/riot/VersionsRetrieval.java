@@ -65,17 +65,20 @@ public class VersionsRetrieval {
 	}
 
 	/**
-	 * Persists the latest patch String version from Riot. The previous latest patch version is deleted from the
-	 * database.
+	 * Persists the latest patch String version from Riot. If the previous latest patch version is the same as the
+	 * current version from Riot, then no database changes are made and the existing patch versionn is returned.
+	 * Otherwise, the previous patch version is deleted from the database and the newest patch version is persisted.
 	 *
 	 * @param versions versions the {@link ModelAttribute} of {@link List} of String versions from Riot
-	 * @return the latest patch String version persisted to the database
+	 * @return the latest patch String version persisted to the database or the existing patch version
 	 */
 	@RequestMapping(value = "/latest", method = RequestMethod.POST)
 	public String saveLatestPatch(@ModelAttribute List<String> versions) {
-		versionsRepository.deleteAll();
 		Version latestPatchVersion = new Version(versions.get(0));
-		versionsRepository.save(latestPatchVersion);
+		if (!latestPatchVersion.getPatch().equals(versionsRepository.latestPatch())) {
+			versionsRepository.deleteAll();
+			return versionsRepository.save(latestPatchVersion).getPatch();
+		}
 		return latestPatchVersion.getPatch();
 	}
 

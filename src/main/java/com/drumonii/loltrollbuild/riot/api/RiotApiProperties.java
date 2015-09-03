@@ -52,10 +52,19 @@ public class RiotApiProperties {
 		@Getter @Setter private String champions;
 
 		@NotEmpty
+		@Getter @Setter private String champion;
+
+		@NotEmpty
 		@Getter @Setter private String items;
 
 		@NotEmpty
+		@Getter @Setter private String item;
+
+		@NotEmpty
 		@Getter @Setter private String summonerSpells;
+
+		@NotEmpty
+		@Getter @Setter private String summonerSpell;
 
 		@NotEmpty
 		@Getter @Setter private String versions;
