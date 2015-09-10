@@ -2,12 +2,18 @@ package com.drumonii.loltrollbuild.riot;
 
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.model.Item;
+import com.drumonii.loltrollbuild.model.Version;
+import com.drumonii.loltrollbuild.model.image.Image;
 import com.drumonii.loltrollbuild.repository.ItemsRepository;
+import com.drumonii.loltrollbuild.repository.VersionsRepository;
+import com.drumonii.loltrollbuild.riot.api.ImageSaver;
 import com.drumonii.loltrollbuild.riot.api.ItemsResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpMethod;
@@ -23,7 +29,8 @@ import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Fail.fail;
-import static org.mockito.Mockito.mock;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
@@ -50,13 +57,24 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 	@Qualifier("item")
 	private UriComponentsBuilder itemUriBuilder;
 
+	@Mock
+	private UriComponentsBuilder itemsImgBuilder;
+
+	@Mock
+	private UriComponents itemsImgUri;
+
+	@Mock
+	private ImageSaver imageSaver;
+
 	@Autowired
 	private ItemsRepository itemsRepository;
+
+	@Autowired
+	private VersionsRepository versionsRepository;
 
 	private MockRestServiceServer mockServer;
 
 	private String itemsResponseBody;
-	private ItemsResponse itemsResponse;
 	private Item poachersKnife;
 
 	private String itemResponseBody;
@@ -66,9 +84,10 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 	@Before
 	public void before() {
 		super.before();
+		MockitoAnnotations.initMocks(this);
+
 		// Only first request is handled. See: http://stackoverflow.com/q/30713734
 		mockServer = MockRestServiceServer.createServer(restTemplate);
-
 		itemsResponseBody = "{\"type\":\"item\",\"version\":\"5.16.1\",\"data\":{\"3711\":{\"id\":3711,\"name\":" +
 				"\"Poacher's Knife\",\"group\":\"JungleItems\",\"description\":\"<stats>+30 Bonus Gold per Large " +
 				"Monster Kill</stats><br><passive>Passive - Scavenging Smite:</passive> When you Smite a large " +
@@ -81,8 +100,7 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 				"\"image\":{\"full\":\"3711.png\",\"sprite\":\"item2.png\",\"group\":\"item\",\"x\":432,\"y\":192," +
 				"\"w\":48,\"h\":48},\"gold\":{\"base\":450,\"total\":850,\"sell\":595,\"purchasable\":true}}}}";
 		try {
-			itemsResponse = objectMapper.readValue(itemsResponseBody, ItemsResponse.class);
-			poachersKnife = itemsResponse.getItems().get("3711");
+			poachersKnife = objectMapper.readValue(itemsResponseBody, ItemsResponse.class).getItems().get("3711");
 		} catch (IOException e) {
 			fail("Unable to unmarshal the Items response.");
 		}
@@ -102,20 +120,19 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 			fail("Unable to unmarshal the Item by ID response.");
 		}
 
-		restTemplate = mock(RestTemplate.class);
+		versionsRepository.save(new Version("latest patch version"));
 	}
 
 	@After
 	public void after() {
 		itemsRepository.deleteAll();
+		versionsRepository.deleteAll();
 	}
 
 	@Test
 	public void items() throws Exception {
 		mockServer.expect(requestTo(itemsUri.toString())).andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(itemsResponseBody, MediaType.APPLICATION_JSON));
-		when(restTemplate.getForObject(itemsUri.toString(), ItemsResponse.class))
-				.thenReturn(itemsResponse);
 
 		mockMvc.perform(get("/riot/items"))
 				.andExpect(status().isOk())
@@ -128,8 +145,13 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 	public void saveItems() throws Exception {
 		mockServer.expect(requestTo(itemsUri.toString())).andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(itemsResponseBody, MediaType.APPLICATION_JSON));
-		when(restTemplate.getForObject(itemsUri.toString(), ItemsResponse.class))
-				.thenReturn(itemsResponse);
+
+		when(itemsImgBuilder.buildAndExpand(anyString(), anyString()))
+				.thenReturn(itemsImgUri);
+		when(itemsImgUri.toUriString())
+				.thenReturn(anyString());
+		when(imageSaver.copyImageFromURL(any(Image.class), itemsImgBuilder))
+				.thenReturn(1);
 
 		mockMvc.perform(post("/riot/items"))
 				.andExpect(status().isOk())
@@ -141,13 +163,30 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 	}
 
 	@Test
+	public void saveItemsNoPatchVersion() throws Exception {
+		mockServer.expect(requestTo(itemsUri.toString())).andExpect(method(HttpMethod.GET))
+				.andRespond(withSuccess(itemsResponseBody, MediaType.APPLICATION_JSON));
+
+		versionsRepository.deleteAll();
+
+		mockMvc.perform(post("/riot/items"))
+				.andExpect(status().isNotFound());
+		mockServer.verify();
+	}
+
+	@Test
 	public void saveDifferenceOfItems() throws Exception {
 		mockServer.expect(requestTo(itemsUri.toString())).andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(itemsResponseBody, MediaType.APPLICATION_JSON));
-		when(restTemplate.getForObject(itemsUri.toString(), ItemsResponse.class))
-				.thenReturn(itemsResponse);
-
 		itemsRepository.save(poachersKnife);
+
+		when(itemsImgBuilder.buildAndExpand(anyString(), anyString()))
+				.thenReturn(itemsImgUri);
+		when(itemsImgUri.toUriString())
+				.thenReturn(anyString());
+		when(imageSaver.copyImageFromURL(any(Image.class), itemsImgBuilder))
+				.thenReturn(1);
+
 		mockMvc.perform(post("/riot/items"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(APPLICATION_JSON_UTF8))
@@ -170,8 +209,13 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 
 		mockServer.expect(requestTo(itemsUri.toString())).andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(itemsResponseBody, MediaType.APPLICATION_JSON));
-		when(restTemplate.getForObject(itemsUri.toString(), ItemsResponse.class))
-				.thenReturn(itemsResponse);
+
+		when(itemsImgBuilder.buildAndExpand(anyString(), anyString()))
+				.thenReturn(itemsImgUri);
+		when(itemsImgUri.toUriString())
+				.thenReturn(anyString());
+		when(imageSaver.copyImageFromURL(any(Image.class), itemsImgBuilder))
+				.thenReturn(1);
 
 		mockMvc.perform(post("/riot/items?truncate=true"))
 				.andExpect(status().isOk())
@@ -187,8 +231,6 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 	public void item() throws Exception {
 		mockServer.expect(requestTo(itemUri.toString())).andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(itemResponseBody, MediaType.APPLICATION_JSON));
-		when(restTemplate.getForObject(itemUri.toString(), Item.class))
-				.thenReturn(lichBane);
 
 		mockMvc.perform(get("/riot/items/{id}", lichBane.getId()))
 				.andExpect(status().isOk())
@@ -201,8 +243,6 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 	public void itemNotFound() throws Exception {
 		mockServer.expect(requestTo(itemUri.toString())).andExpect(method(HttpMethod.GET))
 				.andRespond(withStatus(HttpStatus.NOT_FOUND));
-		when(restTemplate.getForObject(itemUri.toString(), Item.class))
-				.thenReturn(lichBane);
 
 		mockMvc.perform(get("/riot/items/{id}", lichBane.getId()))
 				.andExpect(status().isNotFound());
@@ -213,8 +253,13 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 	public void saveItem() throws Exception {
 		mockServer.expect(requestTo(itemUri.toString())).andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(itemResponseBody, MediaType.APPLICATION_JSON));
-		when(restTemplate.getForObject(itemUri.toString(), Item.class))
-				.thenReturn(lichBane);
+
+		when(itemsImgBuilder.buildAndExpand(anyString(), anyString()))
+				.thenReturn(itemsImgUri);
+		when(itemsImgUri.toUriString())
+				.thenReturn(anyString());
+		when(imageSaver.copyImageFromURL(any(Image.class), itemsImgBuilder))
+				.thenReturn(1);
 
 		mockMvc.perform(post("/riot/items/{id}", lichBane.getId()))
 				.andExpect(status().isOk())
@@ -229,8 +274,18 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 	public void saveItemNotFound() throws Exception {
 		mockServer.expect(requestTo(itemUri.toString())).andExpect(method(HttpMethod.GET))
 				.andRespond(withStatus(HttpStatus.NOT_FOUND));
-		when(restTemplate.getForObject(itemUri.toString(), Item.class))
-				.thenReturn(lichBane);
+
+		mockMvc.perform(post("/riot/items/{id}", lichBane.getId()))
+				.andExpect(status().isNotFound());
+		mockServer.verify();
+	}
+
+	@Test
+	public void saveItemNoPatchVersion() throws Exception {
+		mockServer.expect(requestTo(itemUri.toString())).andExpect(method(HttpMethod.GET))
+				.andRespond(withSuccess(itemResponseBody, MediaType.APPLICATION_JSON));
+
+		versionsRepository.deleteAll();
 
 		mockMvc.perform(post("/riot/items/{id}", lichBane.getId()))
 				.andExpect(status().isNotFound());
@@ -245,10 +300,15 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 
 		mockServer.expect(requestTo(itemUri.toString())).andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(itemResponseBody, MediaType.APPLICATION_JSON));
-		when(restTemplate.getForObject(itemUri.toString(), Item.class))
-				.thenReturn(lichBane);
 
-		mockMvc.perform(post("/riot/items/{id}?overwrite=true", lichBane.getId()))
+		when(itemsImgBuilder.buildAndExpand(anyString(), anyString()))
+				.thenReturn(itemsImgUri);
+		when(itemsImgUri.toUriString())
+				.thenReturn(anyString());
+		when(imageSaver.copyImageFromURL(any(Image.class), itemsImgBuilder))
+				.thenReturn(1);
+
+		mockMvc.perform(post("/riot/items/{id}", lichBane.getId()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(lichBane)));
@@ -256,22 +316,6 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 
 		assertThat(itemsRepository.findOne(lichBane.getId())).isNotNull();
 		assertThat(itemsRepository.findOne(lichBane.getId()).getName()).isEqualTo(lichBane.getName());
-	}
-
-	@Test
-	public void saveItemWithOverwriteAndNoPrevious() throws Exception {
-		mockServer.expect(requestTo(itemUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(itemResponseBody, MediaType.APPLICATION_JSON));
-		when(restTemplate.getForObject(itemUri.toString(), Item.class))
-				.thenReturn(lichBane);
-
-		mockMvc.perform(post("/riot/items/{id}?overwrite=true", lichBane.getId()))
-				.andExpect(status().isOk())
-				.andExpect(content().contentType(APPLICATION_JSON_UTF8))
-				.andExpect(content().json(objectMapper.writeValueAsString(lichBane)));
-		mockServer.verify();
-
-		assertThat(itemsRepository.findOne(lichBane.getId())).isNotNull();
 	}
 
 }

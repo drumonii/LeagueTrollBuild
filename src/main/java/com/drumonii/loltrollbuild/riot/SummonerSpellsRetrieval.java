@@ -1,10 +1,12 @@
 package com.drumonii.loltrollbuild.riot;
 
 import com.drumonii.loltrollbuild.model.SummonerSpell;
+import com.drumonii.loltrollbuild.model.image.Image;
 import com.drumonii.loltrollbuild.repository.SummonerSpellsRepository;
+import com.drumonii.loltrollbuild.riot.api.ImageSaver;
 import com.drumonii.loltrollbuild.riot.api.RiotApiProperties;
 import com.drumonii.loltrollbuild.riot.api.SummonerSpellsResponse;
-import lombok.extern.slf4j.Slf4j;
+import com.drumonii.loltrollbuild.util.MapUtil;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -16,8 +18,7 @@ import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
-
-import static com.drumonii.loltrollbuild.util.MapUtil.getElementsFromMap;
+import java.util.stream.Collectors;
 
 /**
  * A {@link RestController} which retrieves the list of {@link SummonerSpell} from Riot's {@code lol-static-data-v1.2}
@@ -25,7 +26,6 @@ import static com.drumonii.loltrollbuild.util.MapUtil.getElementsFromMap;
  */
 @RestController
 @RequestMapping("/riot/summoner-spells")
-@Slf4j
 public class SummonerSpellsRetrieval {
 
 	@Autowired
@@ -40,7 +40,14 @@ public class SummonerSpellsRetrieval {
 	private UriComponentsBuilder summonerSpellUri;
 
 	@Autowired
+	@Qualifier("summonerSpellsImg")
+	private UriComponentsBuilder summonerSpellsImgUri;
+
+	@Autowired
 	private SummonerSpellsRepository summonerSpellsRepository;
+
+	@Autowired
+	private ImageSaver imageSaver;
 
 	@Autowired
 	private RiotApiProperties riotProperties;
@@ -54,30 +61,39 @@ public class SummonerSpellsRetrieval {
 	public List<SummonerSpell> summonerSpells() {
 		SummonerSpellsResponse response = restTemplate.getForObject(summonerSpellsUri.toString(),
 				SummonerSpellsResponse.class);
-		return getElementsFromMap(response.getSummonerSpells());
+		return MapUtil.getElementsFromMap(response.getSummonerSpells());
 	}
 
 	/**
-	 * Persists the {@link List} of {@link SummonerSpell} from Riot. If Summoner Spells already exist in the database,
-	 * then only the difference (list from Riot not in the database) is persisted. If the {@code truncate} request
-	 * parameter is set to {@code true}, then all previous Summoner Spells are deleted and all the ones from Riot are
-	 * persisted.
+	 * Persists the {@link List} of {@link SummonerSpell} from Riot and saves their images. If Summoner Spells already
+	 * exist in the database, then only the difference (list from Riot not in the database) is persisted. If the {@code
+	 * truncate} request parameter is set to {@code true}, then all previous Summoner Spells and their images are
+	 * deleted and all the ones from Riot are persisted along with their images saved.
 	 *
-	 * @param truncate (optional) If {@code true}, all previous {@link SummonerSpell}s are deleted and all the ones from
-	 * Riot are persisted
+	 * @param truncate (optional) If {@code true}, all previous {@link SummonerSpell}s and their images are deleted and
+	 * all the ones from Riot are persisted along with their images saved
 	 * @return the {@link List} of {@link SummonerSpell} that are persisted to the database
 	 */
 	@RequestMapping(method = RequestMethod.POST)
 	public List<SummonerSpell> saveSummonerSpells(@RequestParam(required = false) boolean truncate) {
 		SummonerSpellsResponse response = restTemplate.getForObject(summonerSpellsUri.toString(),
 				SummonerSpellsResponse.class);
-		List<SummonerSpell> summonerSpells = getElementsFromMap(response.getSummonerSpells());
+		List<SummonerSpell> summonerSpells = MapUtil.getElementsFromMap(response.getSummonerSpells());
+
 		if (truncate) {
 			summonerSpellsRepository.deleteAll();
 		} else {
 			summonerSpells = (List<SummonerSpell>) CollectionUtils.subtract(summonerSpells,
 					summonerSpellsRepository.findAll());
 		}
+
+		List<Image> images = summonerSpells.stream()
+				.map(SummonerSpell::getImage)
+				.collect(Collectors.toList());
+		if (!images.isEmpty()) {
+			imageSaver.copyImagesFromURLs(images, truncate, summonerSpellsImgUri);
+		}
+
 		return (List<SummonerSpell>) summonerSpellsRepository.save(summonerSpells);
 	}
 
@@ -95,40 +111,37 @@ public class SummonerSpellsRetrieval {
 		try {
 			summonerSpell = restTemplate.getForObject(uriComponents.toString(), SummonerSpell.class);
 		} catch (RestClientException e) {
-			log.warn("Could not find Summoner Spell with ID: " + id);
-			throw new ResourceNotFoundException();
+			throw new ResourceNotFoundException("Could not find Summoner Spell with ID: " + id);
 		}
 		return summonerSpell;
 	}
 
 	/**
-	 * Persists a {@link SummonerSpell} from Riot. If the Summoner Spell already exists in the database, then the
-	 * existing Summoner Spell is returned. Otherwise, the persisted Summoner Spell is returned. If the {@code
-	 * overwrite} request parameter is set to {@code true}, then the previous Summoner Spell, obtained from the ID, is
-	 * deleted (if one exists) and the new Summoner Spell is persisted and returned.
+	 * Persists a {@link SummonerSpell} from Riot by its ID and saves its image. If the Summoner Spell already exists in
+	 * the database, then the previous Summoner Spell and its image are deleted and the one retrieved from Riot is
+	 * persisted along with its image saved.
 	 *
-	 * @param overwrite (optional) if {@code true}, the previous {@link SummonerSpell}, obtained from the ID, is deleted
-	 * (if one exists)
 	 * @param id the ID to lookup the {@link SummonerSpell} from Riot
-	 * @return the persisted {@link SummonerSpell} or existing the existing one in the database
+	 * @return the persisted {@link SummonerSpell}
 	 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.POST)
-	public SummonerSpell saveSummonerSpell(@PathVariable int id, @RequestParam(required = false) boolean overwrite) {
+	public SummonerSpell saveSummonerSpell(@PathVariable int id) {
 		UriComponents uriComponents =
 				summonerSpellUri.buildAndExpand(riotProperties.getApi().getStaticData().getRegion(), id);
 		SummonerSpell summonerSpell;
 		try {
 			summonerSpell = restTemplate.getForObject(uriComponents.toString(), SummonerSpell.class);
 		} catch (RestClientException e) {
-			log.warn("Could not find Summoner Spell with ID: " + id);
-			throw new ResourceNotFoundException();
+			throw new ResourceNotFoundException("Could not find Summoner Spell with ID: " + id);
 		}
+
 		SummonerSpell existing = summonerSpellsRepository.findOne(id);
-		if (overwrite && existing != null) {
+		if (existing != null) {
 			summonerSpellsRepository.delete(id);
-			return summonerSpellsRepository.save(summonerSpell);
 		}
-		return existing == null ? summonerSpellsRepository.save(summonerSpell) : existing;
+
+		imageSaver.copyImageFromURL(summonerSpell.getImage(), summonerSpellsImgUri);
+		return summonerSpellsRepository.save(summonerSpell);
 	}
 
 }

@@ -2,6 +2,7 @@ package com.drumonii.loltrollbuild.config;
 
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.riot.api.RiotApiProperties;
+import com.drumonii.loltrollbuild.riot.api.RiotApiProperties.Ddragon;
 import com.drumonii.loltrollbuild.riot.api.RiotApiProperties.StaticData;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,6 +26,7 @@ public class RestRiotApiConfigTest extends BaseSpringTestRunner {
 	private RiotApiProperties riotProperties;
 
 	private StaticData staticData;
+	private Ddragon ddragon;
 
 	private String scheme;
 	private String host;
@@ -33,6 +35,7 @@ public class RestRiotApiConfigTest extends BaseSpringTestRunner {
 	@Before
 	public void before() {
 		staticData = riotProperties.getApi().getStaticData();
+		ddragon = riotProperties.getApi().getDdragon();
 		scheme = staticData.getScheme();
 		host = staticData.getBaseUrl().replace("{region}", staticData.getRegion());
 		apiKey = getApiKeyFromProps(PROPERTIES);
@@ -75,6 +78,20 @@ public class RestRiotApiConfigTest extends BaseSpringTestRunner {
 	}
 
 	@Autowired
+	@Qualifier("summonerSpellsImg")
+	private UriComponentsBuilder summonerSpellImgBuilder;
+
+	@Test
+	public void summonerSpellImgUri() {
+		String imgFull = "SummonerBoost.png"; String patch = "some patch number";
+		UriComponents summonerSpellImgUri = summonerSpellImgBuilder.buildAndExpand(patch, imgFull);
+		assertThat(summonerSpellImgUri.getHost()).isEqualTo(ddragon.getBaseUrl());
+		assertThat(summonerSpellImgUri.getPath()).isEqualTo(ddragon.getSummonerSpellsImg().replace("{version}", patch)
+				.replace("{summonerSpellImgFull}", imgFull));
+		assertThat(summonerSpellImgUri.getScheme()).isEqualTo(ddragon.getScheme());
+	}
+
+	@Autowired
 	@Qualifier("items")
 	private UriComponents itemsUri;
 
@@ -105,6 +122,20 @@ public class RestRiotApiConfigTest extends BaseSpringTestRunner {
 	}
 
 	@Autowired
+	@Qualifier("itemsImg")
+	private UriComponentsBuilder itemsImgBuilder;
+
+	@Test
+	public void itemsImgUri() {
+		String imgFull = "1.png"; String patch = "some patch number";
+		UriComponents itemsImgUri = itemsImgBuilder.buildAndExpand(patch, imgFull);
+		assertThat(itemsImgUri.getHost()).isEqualTo(ddragon.getBaseUrl());
+		assertThat(itemsImgUri.getPath()).isEqualTo(ddragon.getItemsImg().replace("{version}", patch)
+				.replace("{itemImgFull}", imgFull));
+		assertThat(itemsImgUri.getScheme()).isEqualTo(ddragon.getScheme());
+	}
+
+	@Autowired
 	@Qualifier("champions")
 	private UriComponents championsUri;
 
@@ -130,6 +161,20 @@ public class RestRiotApiConfigTest extends BaseSpringTestRunner {
 		assertThat(uriComponents.getPath()).isEqualTo(staticData.getChampion().replace("{id}", String.valueOf(id)));
 		assertThat(uriComponents.getQueryParams()).contains(entry("champData", Arrays.asList("image,partype,tags")));
 		assertThat(uriComponents.getQueryParams()).contains(entry("api_key", Arrays.asList(apiKey)));
+	}
+
+	@Autowired
+	@Qualifier("championsImg")
+	private UriComponentsBuilder championsImgBuilder;
+
+	@Test
+	public void championsImgUri() {
+		String imgFull = "Champion.png"; String patch = "some patch number";
+		UriComponents championsImgUri = championsImgBuilder.buildAndExpand(patch, imgFull);
+		assertThat(championsImgUri.getHost()).isEqualTo(ddragon.getBaseUrl());
+		assertThat(championsImgUri.getPath()).isEqualTo(ddragon.getChampionsImg().replace("{version}", patch)
+				.replace("{championImgFull}", imgFull));
+		assertThat(championsImgUri.getScheme()).isEqualTo(ddragon.getScheme());
 	}
 
 	@Autowired

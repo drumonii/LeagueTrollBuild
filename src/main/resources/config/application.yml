@@ -17,6 +17,12 @@ riot:
       summoner-spells: /summoner-spell
       summoner-spell: /summoner-spell/{id}
       versions: /versions
+    ddragon:
+      base-url: ddragon.leagueoflegends.com/cdn
+      scheme: http
+      champions-img: /{version}/img/champion/{championImgFull}
+      items-img: /{version}/img/item/{itemImgFull}
+      summoner-spells-img: /{version}/img/spell/{summonerSpellImgFull}
 
 # ======================
 # Spring Boot Properties

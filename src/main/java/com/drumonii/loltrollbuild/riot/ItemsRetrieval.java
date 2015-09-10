@@ -1,10 +1,12 @@
 package com.drumonii.loltrollbuild.riot;
 
 import com.drumonii.loltrollbuild.model.Item;
+import com.drumonii.loltrollbuild.model.image.Image;
 import com.drumonii.loltrollbuild.repository.ItemsRepository;
+import com.drumonii.loltrollbuild.riot.api.ImageSaver;
 import com.drumonii.loltrollbuild.riot.api.ItemsResponse;
 import com.drumonii.loltrollbuild.riot.api.RiotApiProperties;
-import lombok.extern.slf4j.Slf4j;
+import com.drumonii.loltrollbuild.util.MapUtil;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -16,8 +18,7 @@ import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
-
-import static com.drumonii.loltrollbuild.util.MapUtil.getElementsFromMap;
+import java.util.stream.Collectors;
 
 /**
  * A {@link RestController} which retrieves the list of {@link Item} from Riot's {@code lol-static-data-v1.2} API with
@@ -25,7 +26,6 @@ import static com.drumonii.loltrollbuild.util.MapUtil.getElementsFromMap;
  */
 @RestController
 @RequestMapping("/riot/items")
-@Slf4j
 public class ItemsRetrieval {
 
 	@Autowired
@@ -40,7 +40,14 @@ public class ItemsRetrieval {
 	private UriComponentsBuilder itemUri;
 
 	@Autowired
+	@Qualifier("itemsImg")
+	private UriComponentsBuilder itemsImgUri;
+
+	@Autowired
 	private ItemsRepository itemsRepository;
+
+	@Autowired
+	private ImageSaver imageSaver;
 
 	@Autowired
 	private RiotApiProperties riotProperties;
@@ -53,27 +60,37 @@ public class ItemsRetrieval {
 	@RequestMapping(method = RequestMethod.GET)
 	public List<Item> items() {
 		ItemsResponse response = restTemplate.getForObject(itemsUri.toString(), ItemsResponse.class);
-		return getElementsFromMap(response.getItems());
+		return MapUtil.getElementsFromMap(response.getItems());
 	}
 
 	/**
-	 * Persists the {@link List} of {@link Item} from Riot. If Items already exist in the database, then only the
-	 * difference (list from Riot not in the database) is persisted. If the {@code truncate} request parameter is set to
-	 * {@code true}, then all previous Items are deleted and all the ones from Riot are persisted.
+	 * Persists the {@link List} of {@link Item} from Riot and saves their images. If Items already exist in the
+	 * database, then only the difference (list from Riot not in the database) is persisted. If the {@code truncate}
+	 * request parameter is set to {@code true}, then all previous Items and their images are deleted and all the ones
+	 * from Riot are persisted along with their images saved.
 	 *
-	 * @param truncate (optional) if {@code true}, all previous {@link Item}s are deleted and all the ones from Riot are
-	 * persisted
+	 * @param truncate (optional) If {@code true}, all previous {@link Item}s and their images are deleted and all the
+	 * ones from Riot are persisted along with their images saved
 	 * @return the {@link List} of {@link Item} that are persisted to the database
 	 */
 	@RequestMapping(method = RequestMethod.POST)
 	public List<Item> saveItems(@RequestParam(required = false) boolean truncate) {
 		ItemsResponse response = restTemplate.getForObject(itemsUri.toString(), ItemsResponse.class);
-		List<Item> items = getElementsFromMap(response.getItems());
+		List<Item> items = MapUtil.getElementsFromMap(response.getItems());
+
 		if (truncate) {
 			itemsRepository.deleteAll();
 		} else {
 			items = (List<Item>) CollectionUtils.subtract(items, itemsRepository.findAll());
 		}
+
+		List<Image> images = items.stream()
+				.map(Item::getImage)
+				.collect(Collectors.toList());
+		if (!images.isEmpty()) {
+			imageSaver.copyImagesFromURLs(images, truncate, itemsImgUri);
+		}
+
 		return (List<Item>) itemsRepository.save(items);
 	}
 
@@ -90,39 +107,36 @@ public class ItemsRetrieval {
 		try {
 			item = restTemplate.getForObject(uriComponents.toString(), Item.class);
 		} catch (RestClientException e) {
-			log.warn("Could not find Item with ID: " + id);
-			throw new ResourceNotFoundException();
+			throw new ResourceNotFoundException("Could not find Item with ID: " + id);
 		}
 		return item;
 	}
 
 	/**
-	 * Persists a {@link Item} from Riot. If the Item already exists in the database, then the existing Item is
-	 * returned. Otherwise, the persisted Item is returned. If the {@code overwrite} request parameter is set to {@code
-	 * true}, then the previous Item, obtained from the ID, is deleted (if one exists) and the new Item is persisted and
-	 * returned.
+	 * Persists a {@link Item} from Riot by its ID and saves its image. If the Item already exists in the database, then
+	 * the previous Item and its image are deleted and the one retrieved from Riot is persisted along with its image
+	 * saved.
 	 *
-	 * @param overwrite (optional) if {@code true}, the previous {@link Item}, obtained from the ID, is deleted (if one
-	 * exists)
 	 * @param id the ID to lookup the {@link Item} from Riot
-	 * @return the persisted {@link Item} or existing the existing one in the database
+	 * @return the persisted {@link Item}
 	 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.POST)
-	public Item saveItem(@PathVariable int id, @RequestParam(required = false) boolean overwrite) {
+	public Item saveItem(@PathVariable int id) {
 		UriComponents uriComponents = itemUri.buildAndExpand(riotProperties.getApi().getStaticData().getRegion(), id);
 		Item item;
 		try {
 			item = restTemplate.getForObject(uriComponents.toString(), Item.class);
 		} catch (RestClientException e) {
-			log.warn("Could not find Item with ID: " + id);
-			throw new ResourceNotFoundException();
+			throw new ResourceNotFoundException("Could not find Item with ID: " + id);
 		}
+
 		Item existing = itemsRepository.findOne(id);
-		if (overwrite && existing != null) {
+		if (existing != null) {
 			itemsRepository.delete(id);
-			return itemsRepository.save(item);
 		}
-		return existing == null ? itemsRepository.save(item) : existing;
+
+		imageSaver.copyImageFromURL(item.getImage(), itemsImgUri);
+		return itemsRepository.save(item);
 	}
 
 }

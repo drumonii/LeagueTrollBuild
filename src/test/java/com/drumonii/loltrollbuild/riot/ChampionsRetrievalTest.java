@@ -2,12 +2,18 @@ package com.drumonii.loltrollbuild.riot;
 
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.model.Champion;
+import com.drumonii.loltrollbuild.model.Version;
+import com.drumonii.loltrollbuild.model.image.Image;
 import com.drumonii.loltrollbuild.repository.ChampionsRepository;
+import com.drumonii.loltrollbuild.repository.VersionsRepository;
 import com.drumonii.loltrollbuild.riot.api.ChampionsResponse;
+import com.drumonii.loltrollbuild.riot.api.ImageSaver;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpMethod;
@@ -23,7 +29,7 @@ import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Fail.fail;
-import static org.mockito.Mockito.mock;
+import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
@@ -50,13 +56,24 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 	@Qualifier("champion")
 	private UriComponentsBuilder championUriBuilder;
 
+	@Mock
+	private UriComponentsBuilder championsImgBuilder;
+
+	@Mock
+	private UriComponents championsImgUri;
+
+	@Mock
+	private ImageSaver imageSaver;
+
 	@Autowired
 	private ChampionsRepository championsRepository;
+
+	@Autowired
+	private VersionsRepository versionsRepository;
 
 	private MockRestServiceServer mockServer;
 
 	private String championsResponseBody;
-	private ChampionsResponse championsResponse;
 	private Champion thresh;
 
 	private String championResponseBody;
@@ -66,17 +83,18 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 	@Before
 	public void before() {
 		super.before();
+		MockitoAnnotations.initMocks(this);
+
 		// Only first request is handled. See: http://stackoverflow.com/q/30713734
 		mockServer = MockRestServiceServer.createServer(restTemplate);
-
 		championsResponseBody = "{\"type\":\"champion\",\"version\":\"5.16.1\",\"data\":{\"Thresh\":{\"id\":412,\"" +
 				"key\":\"Thresh\",\"name\":\"Thresh\",\"title\":\"The Chain Warden\",\"image\":{\"full\":" +
 				"\"Thresh.png\",\"sprite\":\"champion3.png\",\"group\":\"champion\",\"x\":336,\"y\":0,\"w\":48," +
 				"\"h\":48},\"tags\":[\"Support\",\"Fighter\"],\"partype\":\"Mana\"}}}";
 
 		try {
-			championsResponse = objectMapper.readValue(championsResponseBody, ChampionsResponse.class);
-			thresh = championsResponse.getChampions().get("Thresh");
+			thresh = objectMapper.readValue(championsResponseBody, ChampionsResponse.class).getChampions()
+					.get("Thresh");
 		} catch (IOException e) {
 			fail("Unable to unmarshal the Champions response.");
 		}
@@ -91,20 +109,19 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 			fail("Unable to unmarshal the Champion by ID response.");
 		}
 
-		restTemplate = mock(RestTemplate.class);
+		versionsRepository.save(new Version("latest patch version"));
 	}
 
 	@After
 	public void after() {
 		championsRepository.deleteAll();
+		versionsRepository.deleteAll();
 	}
 
 	@Test
 	public void champions() throws Exception {
 		mockServer.expect(requestTo(championsUri.toString())).andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(championsResponseBody, MediaType.APPLICATION_JSON));
-		when(restTemplate.getForObject(championsUri.toString(), ChampionsResponse.class))
-				.thenReturn(championsResponse);
 
 		mockMvc.perform(get("/riot/champions"))
 				.andExpect(status().isOk())
@@ -117,8 +134,13 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 	public void saveChampions() throws Exception {
 		mockServer.expect(requestTo(championsUri.toString())).andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(championsResponseBody, MediaType.APPLICATION_JSON));
-		when(restTemplate.getForObject(championsUri.toString(), ChampionsResponse.class))
-				.thenReturn(championsResponse);
+
+		when(championsImgBuilder.buildAndExpand(anyString(), anyString()))
+				.thenReturn(championsImgUri);
+		when(championsImgUri.toUriString())
+				.thenReturn(anyString());
+		when(imageSaver.copyImagesFromURLs(anyListOf(Image.class), eq(false), championsImgBuilder))
+				.thenReturn(1);
 
 		mockMvc.perform(post("/riot/champions"))
 				.andExpect(status().isOk())
@@ -130,13 +152,30 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 	}
 
 	@Test
+	public void saveChampionsNoPatchVersion() throws Exception {
+		mockServer.expect(requestTo(championsUri.toString())).andExpect(method(HttpMethod.GET))
+				.andRespond(withSuccess(championsResponseBody, MediaType.APPLICATION_JSON));
+
+		versionsRepository.deleteAll();
+
+		mockMvc.perform(post("/riot/champions"))
+				.andExpect(status().isNotFound());
+		mockServer.verify();
+	}
+
+	@Test
 	public void saveDifferenceOfChampions() throws Exception {
 		mockServer.expect(requestTo(championsUri.toString())).andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(championsResponseBody, MediaType.APPLICATION_JSON));
-		when(restTemplate.getForObject(championsUri.toString(), ChampionsResponse.class))
-				.thenReturn(championsResponse);
-
 		championsRepository.save(thresh);
+
+		when(championsImgBuilder.buildAndExpand(anyString(), anyString()))
+				.thenReturn(championsImgUri);
+		when(championsImgUri.toUriString())
+				.thenReturn(anyString());
+		when(imageSaver.copyImageFromURL(any(Image.class), championsImgBuilder))
+				.thenReturn(1);
+
 		mockMvc.perform(post("/riot/champions"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(APPLICATION_JSON_UTF8))
@@ -157,8 +196,13 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 
 		mockServer.expect(requestTo(championsUri.toString())).andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(championsResponseBody, MediaType.APPLICATION_JSON));
-		when(restTemplate.getForObject(championsUri.toString(), ChampionsResponse.class))
-				.thenReturn(championsResponse);
+
+		when(championsImgBuilder.buildAndExpand(anyString(), anyString()))
+				.thenReturn(championsImgUri);
+		when(championsImgUri.toUriString())
+				.thenReturn(anyString());
+		when(imageSaver.copyImageFromURL(any(Image.class), championsImgBuilder))
+				.thenReturn(1);
 
 		mockMvc.perform(post("/riot/champions?truncate=true"))
 				.andExpect(status().isOk())
@@ -174,8 +218,6 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 	public void champion() throws Exception {
 		mockServer.expect(requestTo(championUri.toString())).andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(championResponseBody, MediaType.APPLICATION_JSON));
-		when(restTemplate.getForObject(championUri.toString(), Champion.class))
-				.thenReturn(leeSin);
 
 		mockMvc.perform(get("/riot/champions/{id}", leeSin.getId()))
 				.andExpect(status().isOk())
@@ -188,8 +230,6 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 	public void championNotFound() throws Exception {
 		mockServer.expect(requestTo(championUri.toString())).andExpect(method(HttpMethod.GET))
 				.andRespond(withStatus(HttpStatus.NOT_FOUND));
-		when(restTemplate.getForObject(championUri.toString(), Champion.class))
-				.thenReturn(leeSin);
 
 		mockMvc.perform(get("/riot/champions/{id}", leeSin.getId()))
 				.andExpect(status().isNotFound());
@@ -200,8 +240,13 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 	public void saveChampion() throws Exception {
 		mockServer.expect(requestTo(championUri.toString())).andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(championResponseBody, MediaType.APPLICATION_JSON));
-		when(restTemplate.getForObject(championUri.toString(), Champion.class))
-				.thenReturn(leeSin);
+
+		when(championsImgBuilder.buildAndExpand(anyString(), anyString()))
+				.thenReturn(championsImgUri);
+		when(championsImgUri.toUriString())
+				.thenReturn(anyString());
+		when(imageSaver.copyImageFromURL(any(Image.class), championsImgBuilder))
+				.thenReturn(1);
 
 		mockMvc.perform(post("/riot/champions/{id}", leeSin.getId()))
 				.andExpect(status().isOk())
@@ -216,8 +261,18 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 	public void saveChampionNotFound() throws Exception {
 		mockServer.expect(requestTo(championUri.toString())).andExpect(method(HttpMethod.GET))
 				.andRespond(withStatus(HttpStatus.NOT_FOUND));
-		when(restTemplate.getForObject(championUri.toString(), Champion.class))
-				.thenReturn(leeSin);
+
+		mockMvc.perform(post("/riot/champions/{id}", leeSin.getId()))
+				.andExpect(status().isNotFound());
+		mockServer.verify();
+	}
+
+	@Test
+	public void saveChampionNoPatchVersion() throws Exception {
+		mockServer.expect(requestTo(championUri.toString())).andExpect(method(HttpMethod.GET))
+				.andRespond(withSuccess(championResponseBody, MediaType.APPLICATION_JSON));
+
+		versionsRepository.deleteAll();
 
 		mockMvc.perform(post("/riot/champions/{id}", leeSin.getId()))
 				.andExpect(status().isNotFound());
@@ -232,10 +287,15 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 
 		mockServer.expect(requestTo(championUri.toString())).andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(championResponseBody, MediaType.APPLICATION_JSON));
-		when(restTemplate.getForObject(championUri.toString(), Champion.class))
-				.thenReturn(leeSin);
 
-		mockMvc.perform(post("/riot/champions/{id}?overwrite=true", leeSin.getId()))
+		when(championsImgBuilder.buildAndExpand(anyString(), anyString()))
+				.thenReturn(championsImgUri);
+		when(championsImgUri.toUriString())
+				.thenReturn(anyString());
+		when(imageSaver.copyImageFromURL(any(Image.class), championsImgBuilder))
+				.thenReturn(1);
+
+		mockMvc.perform(post("/riot/champions/{id}", leeSin.getId()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(leeSin)));
@@ -243,22 +303,6 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 
 		assertThat(championsRepository.findOne(leeSin.getId())).isNotNull();
 		assertThat(championsRepository.findOne(leeSin.getId()).getName()).isEqualTo(leeSin.getName());
-	}
-
-	@Test
-	public void saveChampionWithOverwriteAndNoPrevious() throws Exception {
-		mockServer.expect(requestTo(championUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(championResponseBody, MediaType.APPLICATION_JSON));
-		when(restTemplate.getForObject(championUri.toString(), Champion.class))
-				.thenReturn(leeSin);
-
-		mockMvc.perform(post("/riot/champions/{id}?overwrite=true", leeSin.getId()))
-				.andExpect(status().isOk())
-				.andExpect(content().contentType(APPLICATION_JSON_UTF8))
-				.andExpect(content().json(objectMapper.writeValueAsString(leeSin)));
-		mockServer.verify();
-
-		assertThat(championsRepository.findOne(leeSin.getId())).isNotNull();
 	}
 
 }

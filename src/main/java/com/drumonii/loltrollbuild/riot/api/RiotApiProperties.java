@@ -29,6 +29,10 @@ public class RiotApiProperties {
 		@Valid
 		@Getter @Setter private StaticData staticData;
 
+		@NotNull
+		@Valid
+		@Getter @Setter private Ddragon ddragon;
+
 	}
 
 	/**
@@ -68,6 +72,29 @@ public class RiotApiProperties {
 
 		@NotEmpty
 		@Getter @Setter private String versions;
+
+	}
+
+	/**
+	 * Configuration for Riot's {@code Data Dragon}, a web service that is meant to centralize League of Legends game
+	 * data.
+	 */
+	public static class Ddragon {
+
+		@NotEmpty
+		@Getter @Setter private String baseUrl;
+
+		@NotEmpty
+		@Getter @Setter private String scheme;
+
+		@NotEmpty
+		@Getter @Setter private String championsImg;
+
+		@NotEmpty
+		@Getter @Setter private String itemsImg;
+
+		@NotEmpty
+		@Getter @Setter private String summonerSpellsImg;
 
 	}
 

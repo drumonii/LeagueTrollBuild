@@ -2,6 +2,7 @@ package com.drumonii.loltrollbuild.config;
 
 import com.drumonii.loltrollbuild.riot.api.RiotApiProperties;
 import com.drumonii.loltrollbuild.riot.api.RiotApiProperties.Api;
+import com.drumonii.loltrollbuild.riot.api.RiotApiProperties.Ddragon;
 import com.drumonii.loltrollbuild.riot.api.RiotApiProperties.StaticData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -29,11 +30,13 @@ public class RestRiotApiConfig {
 
 	private Api api ;
 	private StaticData staticData;
+	private Ddragon ddragon;
 
 	@PostConstruct
 	public void postConstruct() {
 		api = riotProperties.getApi();
 		staticData = api.getStaticData();
+		ddragon = api.getDdragon();
 	}
 
 	@Bean
@@ -60,6 +63,15 @@ public class RestRiotApiConfig {
 	}
 
 	@Bean
+	@Qualifier("summonerSpellsImg")
+	public UriComponentsBuilder summonerSpellImgUri() {
+		return UriComponentsBuilder.newInstance()
+				.scheme(ddragon.getScheme())
+				.host(ddragon.getBaseUrl())
+				.path(ddragon.getSummonerSpellsImg());
+	}
+
+	@Bean
 	@Qualifier("items")
 	public UriComponents itemsUri() {
 		return UriComponentsBuilder.newInstance()
@@ -83,6 +95,15 @@ public class RestRiotApiConfig {
 	}
 
 	@Bean
+	@Qualifier("itemsImg")
+	public UriComponentsBuilder itemsImgUri() {
+		return UriComponentsBuilder.newInstance()
+				.scheme(ddragon.getScheme())
+				.host(ddragon.getBaseUrl())
+				.path(ddragon.getItemsImg());
+	}
+
+	@Bean
 	@Qualifier("champions")
 	public UriComponents championsUri() {
 		return UriComponentsBuilder.newInstance()
@@ -103,6 +124,15 @@ public class RestRiotApiConfig {
 				.path(staticData.getChampion())
 				.queryParam("champData", "image,partype,tags")
 				.queryParam(staticData.getParam(), api.getKey());
+	}
+
+	@Bean
+	@Qualifier("championsImg")
+	public UriComponentsBuilder championsImgUri() {
+		return UriComponentsBuilder.newInstance()
+				.scheme(ddragon.getScheme())
+				.host(ddragon.getBaseUrl())
+				.path(ddragon.getChampionsImg());
 	}
 
 	@Bean

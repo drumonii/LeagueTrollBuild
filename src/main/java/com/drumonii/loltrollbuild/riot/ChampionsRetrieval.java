@@ -1,10 +1,12 @@
 package com.drumonii.loltrollbuild.riot;
 
 import com.drumonii.loltrollbuild.model.Champion;
+import com.drumonii.loltrollbuild.model.image.Image;
 import com.drumonii.loltrollbuild.repository.ChampionsRepository;
 import com.drumonii.loltrollbuild.riot.api.ChampionsResponse;
+import com.drumonii.loltrollbuild.riot.api.ImageSaver;
 import com.drumonii.loltrollbuild.riot.api.RiotApiProperties;
-import lombok.extern.slf4j.Slf4j;
+import com.drumonii.loltrollbuild.util.MapUtil;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -16,8 +18,7 @@ import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
-
-import static com.drumonii.loltrollbuild.util.MapUtil.getElementsFromMap;
+import java.util.stream.Collectors;
 
 /**
  * A {@link RestController} which retrieves the list of {@link Champion} from Riot's {@code lol-static-data-v1.2} API
@@ -25,7 +26,6 @@ import static com.drumonii.loltrollbuild.util.MapUtil.getElementsFromMap;
  */
 @RestController
 @RequestMapping("/riot/champions")
-@Slf4j
 public class ChampionsRetrieval {
 
 	@Autowired
@@ -40,7 +40,14 @@ public class ChampionsRetrieval {
 	private UriComponentsBuilder championUri;
 
 	@Autowired
+	@Qualifier("championsImg")
+	private UriComponentsBuilder championsImgUri;
+
+	@Autowired
 	private ChampionsRepository championsRepository;
+
+	@Autowired
+	private ImageSaver imageSaver;
 
 	@Autowired
 	private RiotApiProperties riotProperties;
@@ -53,27 +60,37 @@ public class ChampionsRetrieval {
 	@RequestMapping(method = RequestMethod.GET)
 	public List<Champion> champions() {
 		ChampionsResponse response = restTemplate.getForObject(championsUri.toString(), ChampionsResponse.class);
-		return getElementsFromMap(response.getChampions());
+		return MapUtil.getElementsFromMap(response.getChampions());
 	}
 
 	/**
-	 * Persists the {@link List} of {@link Champion} from Riot. If Champions already exist in the database, then only
-	 * the difference (list from Riot not in the database) is persisted. If the {@code truncate} request parameter is
-	 * set to {@code true}, then all previous Champions are deleted and all the ones from Riot are persisted.
+	 * Persists the {@link List} of {@link Champion} from Riot and saves their images. If Champions already exist in the
+	 * database, then only the difference (list from Riot not in the database) is persisted. If the {@code truncate}
+	 * request parameter is set to {@code true}, then all previous Champions and their images are deleted and all the
+	 * ones from Riot are persisted along with their images saved.
 	 *
-	 * @param truncate (optional) if {@code true}, all previous {@link Champion}s are deleted and all the ones from Riot
-	 * are persisted
+	 * @param truncate (optional) If {@code true}, all previous {@link Champion}s and their images are deleted and all
+	 * the ones from Riot are persisted along with their images saved
 	 * @return the {@link List} of {@link Champion} that are persisted to the database
 	 */
 	@RequestMapping(method = RequestMethod.POST)
 	public List<Champion> saveChampions(@RequestParam(required = false) boolean truncate) {
 		ChampionsResponse response = restTemplate.getForObject(championsUri.toString(), ChampionsResponse.class);
-		List<Champion> champions = getElementsFromMap(response.getChampions());
+		List<Champion> champions = MapUtil.getElementsFromMap(response.getChampions());
+
 		if (truncate) {
 			championsRepository.deleteAll();
 		} else {
 			champions = (List<Champion>) CollectionUtils.subtract(champions, championsRepository.findAll());
 		}
+
+		List<Image> images = champions.stream()
+				.map(Champion::getImage)
+				.collect(Collectors.toList());
+		if (!images.isEmpty()) {
+			imageSaver.copyImagesFromURLs(images, truncate, championsImgUri);
+		}
+
 		return (List<Champion>) championsRepository.save(champions);
 	}
 
@@ -91,40 +108,37 @@ public class ChampionsRetrieval {
 		try {
 			champion = restTemplate.getForObject(uriComponents.toString(), Champion.class);
 		} catch (RestClientException e) {
-			log.warn("Could not find Champion with ID: " + id);
-			throw new ResourceNotFoundException();
+			throw new ResourceNotFoundException("Could not find Champion with ID: " + id);
 		}
 		return champion;
 	}
 
 	/**
-	 * Persists a {@link Champion} from Riot. If the Champion already exists in the database, then the existing Champion
-	 * is returned. Otherwise, the persisted Champion is returned. If the {@code overwrite} request parameter is set to
-	 * {@code true}, then the previous Champion, obtained from the ID, is deleted (if one exists) and the new Champion
-	 * is persisted and returned.
+	 * Persists a {@link Champion} from Riot by its ID and saves its image. If the Champion already exists in the
+	 * database, then the previous Champion and its image are deleted and the one retrieved from Riot is persisted along
+	 * with its image saved.
 	 *
-	 * @param overwrite (optional) if {@code true}, the previous {@link Champion}, obtained from the ID, is deleted (if
-	 * one exists)
 	 * @param id the ID to lookup the {@link Champion} from Riot
-	 * @return the persisted {@link Champion} or existing the existing one in the database
+	 * @return the persisted {@link Champion}
 	 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.POST)
-	public Champion saveChampion(@PathVariable int id, @RequestParam(required = false) boolean overwrite) {
+	public Champion saveChampion(@PathVariable int id) {
 		UriComponents uriComponents =
 				championUri.buildAndExpand(riotProperties.getApi().getStaticData().getRegion(), id);
 		Champion champion;
 		try {
 			champion = restTemplate.getForObject(uriComponents.toString(), Champion.class);
 		} catch (RestClientException e) {
-			log.warn("Could not find Champion with ID: " + id);
-			throw new ResourceNotFoundException();
+			throw new ResourceNotFoundException("Could not find Champion with ID: " + id);
 		}
+
 		Champion existing = championsRepository.findOne(id);
-		if (overwrite && existing != null) {
+		if (existing != null) {
 			championsRepository.delete(id);
-			return championsRepository.save(champion);
 		}
-		return existing == null ? championsRepository.save(champion) : existing;
+
+		imageSaver.copyImageFromURL(champion.getImage(), championsImgUri);
+		return championsRepository.save(champion);
 	}
 
 }
