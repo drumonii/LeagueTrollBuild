@@ -70,7 +70,7 @@ public class SummonerSpellsRetrieval {
 	 * truncate} request parameter is set to {@code true}, then all previous Summoner Spells and their images are
 	 * deleted and all the ones from Riot are persisted along with their images saved.
 	 *
-	 * @param truncate (optional) If {@code true}, all previous {@link SummonerSpell}s and their images are deleted and
+	 * @param truncate (optional) if {@code true}, all previous {@link SummonerSpell}s and their images are deleted and
 	 * all the ones from Riot are persisted along with their images saved
 	 * @return the {@link List} of {@link SummonerSpell} that are persisted to the database
 	 */

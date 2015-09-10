@@ -55,7 +55,8 @@ public class FileUtilTest extends BaseUnitTestRunner {
 
 		// With previous image, overwrite
 		assertThat(copyURLToFile(url, tempResourcePath.resolve(image), true)).isEqualTo(1);
-		FileUtils.cleanDirectory(tempResourcePath.toFile()); // cleanup
+
+		Files.delete(tempResourcePath.resolve(image)); // cleanup
 	}
 
 	@Test

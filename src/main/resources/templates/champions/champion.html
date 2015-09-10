@@ -7,8 +7,9 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <h1 th:text="${champion.name}">Thresh</h1>
-    <h3 th:text="${champion.title}">The Chain Warden</h3>
+    <h3 th:text="${champion.name}">Thresh</h3>
+    <img th:src="@{/resources/{image}(image=${champion.image.full})}"/>
+    <p th:text="${champion.title}">The Chain Warden</p>
     <ul th:each="tag : ${champion.tags}">
         <li th:text="${tag}">Support</li>
     </ul>

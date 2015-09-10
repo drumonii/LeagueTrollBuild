@@ -69,7 +69,7 @@ public class ItemsRetrieval {
 	 * request parameter is set to {@code true}, then all previous Items and their images are deleted and all the ones
 	 * from Riot are persisted along with their images saved.
 	 *
-	 * @param truncate (optional) If {@code true}, all previous {@link Item}s and their images are deleted and all the
+	 * @param truncate (optional) if {@code true}, all previous {@link Item}s and their images are deleted and all the
 	 * ones from Riot are persisted along with their images saved
 	 * @return the {@link List} of {@link Item} that are persisted to the database
 	 */
