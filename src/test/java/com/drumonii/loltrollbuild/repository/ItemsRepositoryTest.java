@@ -2,8 +2,8 @@ package com.drumonii.loltrollbuild.repository;
 
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.model.Item;
+import com.drumonii.loltrollbuild.model.ItemGold;
 import com.drumonii.loltrollbuild.riot.api.ItemsResponse;
-import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.assertj.core.api.Condition;
 import org.junit.After;
@@ -115,6 +115,105 @@ public class ItemsRepositoryTest extends BaseSpringTestRunner {
 				.doesNotHave(new Condition<>(name -> name.contains("Enchantment"), "non enchanted"));
 		assertThat(boots).extracting(Item::getDescription)
 				.have(new Condition<>(descr -> descr.contains("Enhanced Movement"), "movement"));
+	}
+
+	@Test
+	public void trinkets() throws IOException {
+		String responseBody = "{\"type\":\"item\",\"version\":\"5.16.1\",\"data\":{\"3345\":{\"id\":3345,\"name\":" +
+				"\"Soul Anchor (Trinket)\",\"group\":\"RelicBase\",\"description\":\"<groupLimit>Limited to 1 " +
+				"Trinket.</groupLimit><br><br><unique>Active:</unique> Consumes a charge to instantly revive at your " +
+				"Summoner Platform and grants 125% Movement Speed that decays over 12 seconds.<br><br><i>Additional " +
+				"charges are gained at levels 9 and 14.</i><br><br><font color='#BBFFFF'>(Max: 2 charges)</font></i>" +
+				"<br><br>\",\"plaintext\":\"Consumes charge to revive champion.\",\"image\":{\"full\":\"3345.png\"," +
+				"\"sprite\":\"item2.png\",\"group\":\"item\",\"x\":432,\"y\":0,\"w\":48,\"h\":48},\"gold\":{\"base\":" +
+				"0,\"total\":0,\"sell\":0,\"purchasable\":false}}}}";
+		Item soulAnchor = objectMapper.readValue(responseBody, ItemsResponse.class).getItems().get("3345");
+		itemsRepository.save(soulAnchor);
+
+		responseBody = "{\"type\":\"item\",\"version\":\"5.16.1\",\"data\":{\"3340\":{\"id\":3340,\"name\":" +
+				"\"Warding Totem (Trinket)\",\"group\":\"RelicBase\",\"description\":\"<groupLimit>Limited to 1 " +
+				"Trinket.</groupLimit><br><br><unique>Active:</unique> Places a <font color='#BBFFFF'>Stealth Ward" +
+				"</font> that lasts 60 seconds (120 second cooldown).<br><br>At level 9, this ward's duration " +
+				"increases to 120 seconds.<br><br>Limit 3 <font color='#BBFFFF'>Stealth Wards</font> on the map per " +
+				"player.<br><br><i>(Trinkets cannot be used in the first 30 seconds of a game. Selling a Trinket " +
+				"will disable Trinket use for 120 seconds).</i>\",\"plaintext\":\"Periodically place a Stealth " +
+				"Ward\",\"into\":[\"3361\",\"3362\"],\"image\":{\"full\":\"3340.png\",\"sprite\":\"item2.png\"," +
+				"\"group\":\"item\",\"x\":288,\"y\":0,\"w\":48,\"h\":48},\"gold\":{\"base\":0,\"total\":0,\"sell\":0," +
+				"\"purchasable\":true}}}}";
+		Item wardingTotem = objectMapper.readValue(responseBody, ItemsResponse.class).getItems().get("3340");
+		itemsRepository.save(wardingTotem);
+
+		responseBody = "{\"type\":\"item\",\"version\":\"5.16.1\",\"data\":{\"3364\":{\"id\":3364,\"name\":" +
+				"\"Oracle's Lens (Trinket)\",\"group\":\"RelicBase\",\"description\":\"<groupLimit>Limited to 1 " +
+				"Trinket.</groupLimit><levelLimit> *Level 9+ required to upgrade.</levelLimit><stats></stats><br>" +
+				"<br><unique>UNIQUE Active:</unique> Reveals and disables nearby invisible traps and invisible wards " +
+				"for 6 seconds in a medium radius and grants detection of nearby invisible units for 10 seconds " +
+				"(75 second cooldown).<br><br><i>(Trinkets cannot be used in the first 30 seconds of a game. Selling " +
+				"a Trinket will disable Trinket use for 120 seconds).</i>\",\"plaintext\":\"Disables nearby " +
+				"invisible wards and trap and grants true sight briefly\",\"from\":[\"3341\"],\"image\":{\"full\":" +
+				"\"3364.png\",\"sprite\":\"item2.png\",\"group\":\"item\",\"x\":144,\"y\":48,\"w\":48,\"h\":48}," +
+				"\"gold\":{\"base\":250,\"total\":250,\"sell\":175,\"purchasable\":true}}}}";
+		Item oraclesLens = objectMapper.readValue(responseBody, ItemsResponse.class).getItems().get("3364");
+		itemsRepository.save(oraclesLens);
+
+		List<Item> trinkets = itemsRepository.trinkets();
+		assertThat(trinkets).isNotEmpty();
+		assertThat(trinkets).extracting(Item::getGold).extracting(ItemGold::getTotal)
+				.containsOnly(0);
+		assertThat(trinkets).extracting(Item::getGold).extracting("purchasable", Boolean.class)
+				.containsOnly(true);
+		assertThat(trinkets).extracting(Item::getMaps)
+				.extracting("1").containsNull();
+		assertThat(trinkets).extracting(Item::getName)
+				.have(new Condition<>(name -> name.contains("Trinket"), "Trinket"));
+	}
+
+	@Test
+	public void viktorOnly() throws IOException {
+		String responseBody = "{\"type\":\"item\",\"version\":\"5.16.1\",\"data\":{\"3196\":{\"id\":3196,\"name\":" +
+				"\"The Hex Core mk-1\",\"description\":\"<stats>+3 Ability Power per level<br>+15 Mana per level" +
+				"</stats><br><br><passive>UNIQUE Passive - Progress:</passive> Viktor can upgrade one of his basic " +
+				"spells.\",\"plaintext\":\"Allows Viktor to improve an ability of his choice\",\"from\":[\"3200\"]," +
+				"\"into\":[\"3197\"],\"image\":{\"full\":\"3196.png\",\"sprite\":\"item1.png\",\"group\":\"item\"," +
+				"\"x\":48,\"y\":288,\"w\":48,\"h\":48},\"gold\":{\"base\":1000,\"total\":1000,\"sell\":700," +
+				"\"purchasable\":true}}}}";
+		Item hexCoreMk1 = objectMapper.readValue(responseBody, ItemsResponse.class).getItems().get("3196");
+		itemsRepository.save(hexCoreMk1);
+
+		responseBody = "{\"type\":\"item\",\"version\":\"5.16.1\",\"data\":{\"3198\":{\"id\":3198,\"name\":" +
+				"\"Perfect Hex Core\",\"description\":\"<stats>+10 Ability Power per level<br>+25 Mana per level" +
+				"</stats><br><br><passive>UNIQUE Passive - Glorious Evolution:</passive> Viktor has reached the " +
+				"pinnacle of his power, upgrading Chaos Storm in addition to his basic spells.\",\"plaintext\":" +
+				"\"Allows Viktor to improve an ability of his choice\",\"from\":[\"3197\"],\"image\":{\"full\":" +
+				"\"3198.png\",\"sprite\":\"item1.png\",\"group\":\"item\",\"x\":144,\"y\":288,\"w\":48,\"h\":48}," +
+				"\"gold\":{\"base\":1000,\"total\":3000,\"sell\":2100,\"purchasable\":true}}}}";
+		Item perfectHexCore = objectMapper.readValue(responseBody, ItemsResponse.class).getItems().get("3198");
+		itemsRepository.save(perfectHexCore);
+
+		responseBody = "{\"type\":\"item\",\"version\":\"5.16.1\",\"data\":{\"3140\":{\"id\":3140,\"name\":" +
+				"\"Quicksilver Sash\",\"description\":\"<stats>+30 Magic Resist</stats><br><br><active>UNIQUE Active " +
+				"- Quicksilver:</active> Removes all debuffs (90 second cooldown).\",\"plaintext\":\"Activate to " +
+				"remove all debuffs\",\"from\":[\"1033\"],\"into\":[\"3139\",\"3137\"],\"image\":{\"full\":" +
+				"\"3140.png\",\"sprite\":\"item1.png\",\"group\":\"item\",\"x\":384,\"y\":96,\"w\":48,\"h\":48}," +
+				"\"gold\":{\"base\":800,\"total\":1250,\"sell\":875,\"purchasable\":true}}}}";
+		Item quickSilverFlash = objectMapper.readValue(responseBody, ItemsResponse.class).getItems().get("3140");
+		itemsRepository.save(quickSilverFlash);
+
+		responseBody = "{\"type\":\"item\",\"version\":\"5.16.1\",\"data\":{\"3135\":{\"id\":3135,\"name\":" +
+				"\"Void Staff\",\"description\":\"<stats>+80 Ability Power</stats><br><br><unique>UNIQUE Passive:" +
+				"</unique> Magic damage ignores 35% of the target's Magic Resist (applies before Magic Penetration)." +
+				"\",\"plaintext\":\"Increases magic damage\",\"from\":[\"1026\",\"1052\"],\"image\":{\"full\":" +
+				"\"3135.png\",\"sprite\":\"item1.png\",\"group\":\"item\",\"x\":192,\"y\":96,\"w\":48,\"h\":48}," +
+				"\"gold\":{\"base\":1215,\"total\":2500,\"sell\":1750,\"purchasable\":true}}}}";
+		Item voidStaff = objectMapper.readValue(responseBody, ItemsResponse.class).getItems().get("3135");
+		itemsRepository.save(voidStaff);
+
+		List<Item> viktorOnlyItems = itemsRepository.viktorOnly();
+		assertThat(viktorOnlyItems).isNotEmpty();
+		assertThat(viktorOnlyItems).extracting(Item::getName)
+				.have(new Condition<>(name -> name.contains("Hex"), "Hex"));
+		assertThat(viktorOnlyItems).extracting(Item::getDescription)
+				.have(new Condition<>(name -> name.contains("Viktor"), "Viktor"));
 	}
 
 }
