@@ -45,4 +45,24 @@ public interface ItemsRepository extends CrudRepository<Item, Integer> {
 	@RestResource(path = "viktor-only", rel = "viktor-only")
 	List<Item> viktorOnly();
 
+	/**
+	 * Gets a {@link List} of {@link Item}s eligible for the troll build. That is, all purchasable (excluding items like
+	 * Muramana or Seraph's Embrace - they are non purchasable), non-consumable, and fully upgraded items found only on
+	 * Summoner's Rift. Excludes boots, Trinkets, Viktors' starting items, Crystalline Flask, jungle related items,
+	 * Doran's items, and stackable items upon champion kills/assists.
+	 *
+	 * @return a {@link List} of {@link Item}s eligible for the troll build
+	 */
+	@Query("select i from Item i left join i.into i_into left outer join i.maps m " +
+		   "where (m is null or not exists (select m2 from i.maps m2 where key(m2) = '1')) " +
+		   "and i.gold.purchasable = true and i.consumed is null and i_into is null " +
+		   "and i.id <> 1001 and i.description not like '%Enchants boots%' " +
+		   "and i.name not like '%Trinket%' " +
+		   "and i.id not in (3196, 3197, 3198, 3200) and i.id <> 2041 " +
+		   "and i.name not like 'Enchantment%' and i.name not like 'Doran%' " +
+		   "and i.description not like '%At 20 stacks%' " +
+		   "group by i.id")
+	@RestResource(path = "for-troll-build", rel = "for-troll-build")
+	List<Item> forTrollBuild();
+
 }

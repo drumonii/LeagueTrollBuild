@@ -61,7 +61,7 @@ public class ItemsRepositoryTest extends BaseSpringTestRunner {
 	}
 
 	@Test
-	public void items() throws IOException {
+	public void boots() throws IOException {
 		String responseBody = "{\"type\":\"item\",\"version\":\"5.16.1\",\"data\":{\"1001\":{\"id\":1001,\"name\":" +
 				"\"Boots of Speed\",\"group\":\"BootsNormal\",\"description\":\"<groupLimit>Limited to 1." +
 				"</groupLimit><br><br><unique>UNIQUE Passive - Enhanced Movement:</unique> +25 Movement Speed<br><br>" +
@@ -93,8 +93,8 @@ public class ItemsRepositoryTest extends BaseSpringTestRunner {
 				"Passives with the same name don't stack.)</i>\",\"from\":[\"3047\"],\"image\":{\"full\":" +
 				"\"1319.png\",\"sprite\":\"item2.png\",\"group\":\"item\",\"x\":432,\"y\":384,\"w\":48,\"h\":48}," +
 				"\"gold\":{\"base\":475,\"total\":1475,\"sell\":1033,\"purchasable\":true}}}}";
-		Item homeguard = objectMapper.readValue(responseBody, ItemsResponse.class).getItems().get("1319");
-		itemsRepository.save(homeguard);
+		Item homeguardEnchantment = objectMapper.readValue(responseBody, ItemsResponse.class).getItems().get("1319");
+		itemsRepository.save(homeguardEnchantment);
 
 		responseBody = "{\"type\":\"item\",\"version\":\"5.16.1\",\"data\":{\"3047\":{\"id\":3047,\"name\":" +
 				"\"Ninja Tabi\",\"description\":\"<stats>+25 Armor</stats><br><br><unique>UNIQUE Passive:</unique> " +
@@ -214,6 +214,136 @@ public class ItemsRepositoryTest extends BaseSpringTestRunner {
 				.have(new Condition<>(name -> name.contains("Hex"), "Hex"));
 		assertThat(viktorOnlyItems).extracting(Item::getDescription)
 				.have(new Condition<>(name -> name.contains("Viktor"), "Viktor"));
+	}
+
+	@Test
+	public void forTrollBuild() throws IOException {
+		String responseBody = "{\"type\":\"item\",\"version\":\"5.16.1\",\"data\":{\"1062\":{\"id\":1062,\"name\":" +
+				"\"Prospector's Blade\",\"description\":\"<stats>+16 Attack Damage<br>+15% Attack Speed </stats><br>" +
+				"<br><unique>UNIQUE Passive - Prospector:</unique> +150 Health<br><br><i>(Unique Passives with the " +
+				"same name don't stack.)</i>\",\"plaintext\":\"Good starting item for attackers\",\"maps\":{\"1\":" +
+				"false,\"10\":false,\"12\":false},\"image\":{\"full\":\"1062.png\",\"sprite\":\"item0.png\"," +
+				"\"group\":\"item\",\"x\":240,\"y\":96,\"w\":48,\"h\":48},\"gold\":{\"base\":950,\"total\":950," +
+				"\"sell\":380,\"purchasable\":true}}}}";
+		Item prospectorsBlade = objectMapper.readValue(responseBody, ItemsResponse.class).getItems().get("1062");
+		itemsRepository.save(prospectorsBlade);
+
+		responseBody = "{\"type\":\"item\",\"version\":\"5.16.1\",\"data\":{\"2010\":{\"id\":2010,\"name\":\"Total " +
+				"Biscuit of Rejuvenation\",\"group\":\"HealthPotion\",\"description\":\"<consumable>Click to " +
+				"Consume:</consumable> Restores 20 health and 10 mana immediately and then 150 Health over 15 " +
+				"seconds.\",\"consumed\":true,\"image\":{\"full\":\"2010.png\",\"sprite\":\"item0.png\",\"group\":" +
+				"\"item\",\"x\":144,\"y\":144,\"w\":48,\"h\":48},\"gold\":{\"base\":35,\"total\":35,\"sell\":14," +
+				"\"purchasable\":false}}}}";
+		Item biscuitOfRejuvenation = objectMapper.readValue(responseBody, ItemsResponse.class).getItems().get("2010");
+		itemsRepository.save(biscuitOfRejuvenation);
+
+		responseBody = "{\"type\":\"item\",\"version\":\"5.16.1\",\"data\":{\"3117\":{\"id\":3117,\"name\":" +
+				"\"Boots of Mobility\",\"description\":\"<unique>UNIQUE Passive - Enhanced Movement:</unique> +25 " +
+				"Movement Speed. Increases to +105 Movement Speed when out of combat for 5 seconds.<br><br><i>" +
+				"(Unique Passives with the same name don't stack.)</i>\",\"plaintext\":\"Greatly enhances Movement " +
+				"Speed when out of combat\",\"from\":[\"1001\"],\"into\":[\"1326\",\"1328\",\"1325\",\"1327\"," +
+				"\"1329\",\"1340\"],\"image\":{\"full\":\"3117.png\",\"sprite\":\"item1.png\",\"group\":\"item\"," +
+				"\"x\":0,\"y\":96,\"w\":48,\"h\":48},\"gold\":{\"base\":475,\"total\":800,\"sell\":560," +
+				"\"purchasable\":true}}}}";
+		Item bootsOfMobility = objectMapper.readValue(responseBody, ItemsResponse.class).getItems().get("3117");
+		itemsRepository.save(bootsOfMobility);
+
+		responseBody = "{\"type\":\"item\",\"version\":\"5.16.1\",\"data\":{\"3341\":{\"id\":3341,\"name\":" +
+				"\"Sweeping Lens (Trinket)\",\"group\":\"RelicBase\",\"description\":\"<groupLimit>Limited to 1 " +
+				"Trinket.</groupLimit><br><br><unique>Active:</unique> Reveals and disables nearby invisible traps " +
+				"and invisible wards for 6 seconds in a small radius (120 second cooldown).<br><br>At level 9, cast " +
+				"range and sweep radius increase by 50% each and the cooldown is reduced to 75 seconds.<br><br><i>" +
+				"(Trinkets cannot be used in the first 30 seconds of a game. Selling a Trinket will disable Trinket " +
+				"use for 120 seconds).</i>\",\"plaintext\":\"Detects and disables nearby invisible wards and traps\"," +
+				"\"into\":[\"3364\"],\"image\":{\"full\":\"3341.png\",\"sprite\":\"item2.png\",\"group\":\"item\"," +
+				"\"x\":336,\"y\":0,\"w\":48,\"h\":48},\"gold\":{\"base\":0,\"total\":0,\"sell\":0,\"purchasable\":" +
+				"true}}}}";
+		Item sweepingLens = objectMapper.readValue(responseBody, ItemsResponse.class).getItems().get("3341");
+		itemsRepository.save(sweepingLens);
+
+		responseBody = "{\"type\":\"item\",\"version\":\"5.16.1\",\"data\":{\"3197\":{\"id\":3197,\"name\":" +
+				"\"The Hex Core mk-2\",\"description\":\"<stats>+5 Ability Power per level<br>+40 Ability Power<br>" +
+				"+300 Mana</stats><br><br><passive>UNIQUE Passive - Progress:</passive> Viktor can upgrade one of " +
+				"his basic spells.\",\"plaintext\":\"Allows Viktor to improve an ability of his choice\",\"from\":" +
+				"[\"3196\"],\"into\":[\"3198\"],\"image\":{\"full\":\"3197.png\",\"sprite\":\"item1.png\",\"group\":" +
+				"\"item\",\"x\":96,\"y\":288,\"w\":48,\"h\":48},\"gold\":{\"base\":1000,\"total\":2000,\"sell\":1400," +
+				"\"purchasable\":true}}}}";
+		Item hexCoreMk2 = objectMapper.readValue(responseBody, ItemsResponse.class).getItems().get("3197");
+		itemsRepository.save(hexCoreMk2);
+
+		responseBody = "{\"type\":\"item\",\"version\":\"5.16.1\",\"data\":{\"2041\":{\"id\":2041,\"name\":" +
+				"\"Crystalline Flask\",\"description\":\"<unique>UNIQUE Passive:</unique> Holds 3 charges and " +
+				"refills upon visiting the shop.<br><active>UNIQUE Active:</active> Consumes a charge to restore " +
+				"120 Health and 60 Mana over 12 seconds.\",\"plaintext\":\"Restores Health and Mana over time, " +
+				"refills at shop\",\"maps\":{\"12\":false},\"image\":{\"full\":\"2041.png\",\"sprite\":\"item0.png\"," +
+				"\"group\":\"item\",\"x\":192,\"y\":144,\"w\":48,\"h\":48},\"gold\":{\"base\":345,\"total\":345," +
+				"\"sell\":138,\"purchasable\":true}}}}";
+		Item crystallineFlask = objectMapper.readValue(responseBody, ItemsResponse.class).getItems().get("2041");
+		itemsRepository.save(crystallineFlask);
+
+		responseBody = "{\"type\":\"item\",\"version\":\"5.16.1\",\"data\":{\"3242\":{\"id\":3242,\"name\":" +
+				"\"Enchantment: Captain\",\"group\":\"BootsCaptain\",\"description\":\"<groupLimit>Limited to 1 of " +
+				"each enchantment type.</groupLimit><br>Enchants boots to have Captain bonus.<br><br><unique>UNIQUE " +
+				"Passive - Captain:</unique> Grants +10% Movement Speed to nearby approaching allied champions.<br>" +
+				"<br><i>(Unique Passives with the same name don't stack.)</i>\",\"image\":{\"full\":\"3242.png\"," +
+				"\"sprite\":\"item3.png\",\"group\":\"item\",\"x\":336,\"y\":0,\"w\":48,\"h\":48},\"gold\":{" +
+				"\"base\":600,\"total\":600,\"sell\":420,\"purchasable\":true}}}}";
+		Item captainEnchantment = objectMapper.readValue(responseBody, ItemsResponse.class).getItems().get("3242");
+		itemsRepository.save(captainEnchantment);
+
+		responseBody = "{\"type\":\"item\",\"version\":\"5.16.1\",\"data\":{\"1056\":{\"id\":1056,\"name\":" +
+				"\"Doran's Ring\",\"description\":\"<stats>+60 Health<br>+15 Ability Power</stats><br><br><passive>" +
+				"Passive:</passive> <mana>+3 Mana Regen per 5 seconds.<br><passive>Passive:</passive> Restores 4 " +
+				"Mana upon killing a unit.</mana>\",\"plaintext\":\"Good starting item for casters\",\"image\":" +
+				"{\"full\":\"1056.png\",\"sprite\":\"item0.png\",\"group\":\"item\",\"x\":96,\"y\":96,\"w\":48," +
+				"\"h\":48},\"gold\":{\"base\":400,\"total\":400,\"sell\":160,\"purchasable\":true}}}}";
+		Item doransRing = objectMapper.readValue(responseBody, ItemsResponse.class).getItems().get("1056");
+		itemsRepository.save(doransRing);
+
+		responseBody = "{\"type\":\"item\",\"version\":\"5.16.1\",\"data\":{\"3041\":{\"id\":3041,\"name\":" +
+				"\"Mejai's Soulstealer\",\"description\":\"<stats>+20 Ability Power  </stats><br><br><unique>UNIQUE " +
+				"Passive:</unique> Grants +8 Ability Power per stack and 5 stacks upon first purchase. Grants 2 " +
+				"stacks for a kill or 1 stack for an assist (max 20 stacks). Half of the stacks are lost upon death. " +
+				"At 20 stacks, grants +15% Cooldown Reduction.\",\"plaintext\":\"Grants Ability Power for kills and " +
+				"assists\",\"from\":[\"1052\"],\"maps\":{\"10\":false,\"12\":false},\"image\":{\"full\":\"3041.png\"," +
+				"\"sprite\":\"item0.png\",\"group\":\"item\",\"x\":432,\"y\":288,\"w\":48,\"h\":48},\"gold\":" +
+				"{\"base\":965,\"total\":1400,\"sell\":980,\"purchasable\":true}}}}";
+		Item mejaisSoulstealer = objectMapper.readValue(responseBody, ItemsResponse.class).getItems().get("3041");
+		itemsRepository.save(mejaisSoulstealer);
+
+		responseBody = "{\"type\":\"item\",\"version\":\"5.16.1\",\"data\":{\"3072\":{\"id\":3072,\"name\":" +
+				"\"The Bloodthirster\",\"description\":\"<stats>+80 Attack Damage</stats><br><br><passive>UNIQUE " +
+				"Passive:</passive> +20% Life Steal<br><passive>UNIQUE Passive:</passive> Your basic attacks can now " +
+				"overheal you. Excess life is stored as a shield that can block 50-350 damage, based on champion " +
+				"level.<br><br>This shield decays slowly if you haven't dealt or taken damage in the last 25 seconds." +
+				"\",\"plaintext\":\"Grants Attack Damage, Life Steal and Life Steal now overheals\",\"from\":" +
+				"[\"1053\",\"1038\"],\"image\":{\"full\":\"3072.png\",\"sprite\":\"item0.png\",\"group\":\"item\"," +
+				"\"x\":288,\"y\":384,\"w\":48,\"h\":48},\"gold\":{\"base\":1150,\"total\":3500,\"sell\":2450," +
+				"\"purchasable\":true}}}}";
+		Item bloodThirster = objectMapper.readValue(responseBody, ItemsResponse.class).getItems().get("3072");
+		itemsRepository.save(bloodThirster);
+
+		List<Item> forTrollBuild = itemsRepository.forTrollBuild();
+		assertThat(forTrollBuild).isNotEmpty();
+		assertThat(forTrollBuild).extracting(Item::getMaps)
+				.extracting("1").containsNull();
+		assertThat(forTrollBuild).extracting(Item::getGold).extracting("purchasable", Boolean.class)
+				.containsOnly(true);
+		assertThat(forTrollBuild).extracting(Item::getConsumed)
+				.containsNull();
+		assertThat(forTrollBuild).flatExtracting(Item::getInto)
+				.isEmpty();
+		assertThat(forTrollBuild).extracting(Item::getId)
+				.doesNotContain(1001);
+		assertThat(forTrollBuild).extracting(Item::getName)
+				.doesNotHave(new Condition<>(name -> name.contains("Enchants boots"), "Enchants boots"))
+				.doesNotHave(new Condition<>(name -> name.contains("Trinket"), "Trinket"))
+				.doesNotHave(new Condition<>(name -> name.contains("Viktor"), "Viktor"))
+				.doesNotHave(new Condition<>(name -> name.contains("Crystalline Flask"), "Crystalline Flask"))
+				.doesNotHave(new Condition<>(name -> name.contains("Enchantment"), "Enchantment"))
+				.doesNotHave(new Condition<>(name -> name.contains("Doran"), "Doran"));
+		assertThat(forTrollBuild).extracting(Item::getDescription)
+				.doesNotHave(new Condition<>(descr -> descr.contains("At 20 stacks"), "At 20 stacks"));
 	}
 
 }
