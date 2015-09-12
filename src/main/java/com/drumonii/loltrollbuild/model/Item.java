@@ -58,6 +58,10 @@ public class Item {
 	@JsonProperty("into")
 	@Getter @Setter private Set<String> into;
 
+	@Column(name = "REQUIRED_CHAMPION")
+	@JsonProperty("requiredChampion")
+	@Getter @Setter private String requiredChampion;
+
 	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "ITEM_MAP",
 			joinColumns = @JoinColumn(name = "ITEM_ID"))

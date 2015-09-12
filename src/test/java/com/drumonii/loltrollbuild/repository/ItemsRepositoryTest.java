@@ -174,30 +174,11 @@ public class ItemsRepositoryTest extends BaseSpringTestRunner {
 				"\"The Hex Core mk-1\",\"description\":\"<stats>+3 Ability Power per level<br>+15 Mana per level" +
 				"</stats><br><br><passive>UNIQUE Passive - Progress:</passive> Viktor can upgrade one of his basic " +
 				"spells.\",\"plaintext\":\"Allows Viktor to improve an ability of his choice\",\"from\":[\"3200\"]," +
-				"\"into\":[\"3197\"],\"image\":{\"full\":\"3196.png\",\"sprite\":\"item1.png\",\"group\":\"item\"," +
-				"\"x\":48,\"y\":288,\"w\":48,\"h\":48},\"gold\":{\"base\":1000,\"total\":1000,\"sell\":700," +
-				"\"purchasable\":true}}}}";
+				"\"into\":[\"3197\"],\"requiredChampion\":\"Viktor\",\"image\":{\"full\":\"3196.png\",\"sprite\":" +
+				"\"item1.png\",\"group\":\"item\",\"x\":48,\"y\":288,\"w\":48,\"h\":48},\"gold\":{\"base\":1000," +
+				"\"total\":1000,\"sell\":700,\"purchasable\":true}}}}";
 		Item hexCoreMk1 = objectMapper.readValue(responseBody, ItemsResponse.class).getItems().get("3196");
 		itemsRepository.save(hexCoreMk1);
-
-		responseBody = "{\"type\":\"item\",\"version\":\"5.16.1\",\"data\":{\"3198\":{\"id\":3198,\"name\":" +
-				"\"Perfect Hex Core\",\"description\":\"<stats>+10 Ability Power per level<br>+25 Mana per level" +
-				"</stats><br><br><passive>UNIQUE Passive - Glorious Evolution:</passive> Viktor has reached the " +
-				"pinnacle of his power, upgrading Chaos Storm in addition to his basic spells.\",\"plaintext\":" +
-				"\"Allows Viktor to improve an ability of his choice\",\"from\":[\"3197\"],\"image\":{\"full\":" +
-				"\"3198.png\",\"sprite\":\"item1.png\",\"group\":\"item\",\"x\":144,\"y\":288,\"w\":48,\"h\":48}," +
-				"\"gold\":{\"base\":1000,\"total\":3000,\"sell\":2100,\"purchasable\":true}}}}";
-		Item perfectHexCore = objectMapper.readValue(responseBody, ItemsResponse.class).getItems().get("3198");
-		itemsRepository.save(perfectHexCore);
-
-		responseBody = "{\"type\":\"item\",\"version\":\"5.16.1\",\"data\":{\"3140\":{\"id\":3140,\"name\":" +
-				"\"Quicksilver Sash\",\"description\":\"<stats>+30 Magic Resist</stats><br><br><active>UNIQUE Active " +
-				"- Quicksilver:</active> Removes all debuffs (90 second cooldown).\",\"plaintext\":\"Activate to " +
-				"remove all debuffs\",\"from\":[\"1033\"],\"into\":[\"3139\",\"3137\"],\"image\":{\"full\":" +
-				"\"3140.png\",\"sprite\":\"item1.png\",\"group\":\"item\",\"x\":384,\"y\":96,\"w\":48,\"h\":48}," +
-				"\"gold\":{\"base\":800,\"total\":1250,\"sell\":875,\"purchasable\":true}}}}";
-		Item quickSilverFlash = objectMapper.readValue(responseBody, ItemsResponse.class).getItems().get("3140");
-		itemsRepository.save(quickSilverFlash);
 
 		responseBody = "{\"type\":\"item\",\"version\":\"5.16.1\",\"data\":{\"3135\":{\"id\":3135,\"name\":" +
 				"\"Void Staff\",\"description\":\"<stats>+80 Ability Power</stats><br><br><unique>UNIQUE Passive:" +
@@ -210,10 +191,10 @@ public class ItemsRepositoryTest extends BaseSpringTestRunner {
 
 		List<Item> viktorOnlyItems = itemsRepository.viktorOnly();
 		assertThat(viktorOnlyItems).isNotEmpty();
-		assertThat(viktorOnlyItems).extracting(Item::getName)
-				.have(new Condition<>(name -> name.contains("Hex"), "Hex"));
 		assertThat(viktorOnlyItems).extracting(Item::getDescription)
 				.have(new Condition<>(name -> name.contains("Viktor"), "Viktor"));
+		assertThat(viktorOnlyItems).extracting(Item::getRequiredChampion)
+				.have(new Condition<>(name -> name.equals("Viktor"), "Viktor"));
 	}
 
 	@Test
@@ -261,15 +242,16 @@ public class ItemsRepositoryTest extends BaseSpringTestRunner {
 		Item sweepingLens = objectMapper.readValue(responseBody, ItemsResponse.class).getItems().get("3341");
 		itemsRepository.save(sweepingLens);
 
-		responseBody = "{\"type\":\"item\",\"version\":\"5.16.1\",\"data\":{\"3197\":{\"id\":3197,\"name\":" +
-				"\"The Hex Core mk-2\",\"description\":\"<stats>+5 Ability Power per level<br>+40 Ability Power<br>" +
-				"+300 Mana</stats><br><br><passive>UNIQUE Passive - Progress:</passive> Viktor can upgrade one of " +
-				"his basic spells.\",\"plaintext\":\"Allows Viktor to improve an ability of his choice\",\"from\":" +
-				"[\"3196\"],\"into\":[\"3198\"],\"image\":{\"full\":\"3197.png\",\"sprite\":\"item1.png\",\"group\":" +
-				"\"item\",\"x\":96,\"y\":288,\"w\":48,\"h\":48},\"gold\":{\"base\":1000,\"total\":2000,\"sell\":1400," +
-				"\"purchasable\":true}}}}";
-		Item hexCoreMk2 = objectMapper.readValue(responseBody, ItemsResponse.class).getItems().get("3197");
-		itemsRepository.save(hexCoreMk2);
+		responseBody = "{\"type\":\"item\",\"version\":\"5.16.1\",\"data\":{\"3198\":{\"id\":3198,\"name\":" +
+				"\"Perfect Hex Core\",\"description\":\"<stats>+10 Ability Power per level<br>+25 Mana per level" +
+				"</stats><br><br><passive>UNIQUE Passive - Glorious Evolution:</passive> Viktor has reached the " +
+				"pinnacle of his power, upgrading Chaos Storm in addition to his basic spells.\",\"plaintext\":" +
+				"\"Allows Viktor to improve an ability of his choice\",\"from\":[\"3197\"],\"requiredChampion\":" +
+				"\"Viktor\",\"image\":{\"full\":\"3198.png\",\"sprite\":\"item1.png\",\"group\":\"item\",\"x\":144," +
+				"\"y\":288,\"w\":48,\"h\":48},\"gold\":{\"base\":1000,\"total\":3000,\"sell\":2100,\"purchasable\":" +
+				"true}}}}";
+		Item perfectHexCore = objectMapper.readValue(responseBody, ItemsResponse.class).getItems().get("3198");
+		itemsRepository.save(perfectHexCore);
 
 		responseBody = "{\"type\":\"item\",\"version\":\"5.16.1\",\"data\":{\"2041\":{\"id\":2041,\"name\":" +
 				"\"Crystalline Flask\",\"description\":\"<unique>UNIQUE Passive:</unique> Holds 3 charges and " +

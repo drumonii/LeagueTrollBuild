@@ -78,7 +78,7 @@ public class RestRiotApiConfig {
 				.scheme(staticData.getScheme())
 				.host(staticData.getBaseUrl())
 				.path(staticData.getItems())
-				.queryParam("itemListData", "consumed,from,gold,image,into,maps")
+				.queryParam("itemListData", "consumed,from,gold,image,into,maps,requiredChampion")
 				.queryParam(staticData.getParam(), api.getKey())
 				.buildAndExpand(staticData.getRegion());
 	}

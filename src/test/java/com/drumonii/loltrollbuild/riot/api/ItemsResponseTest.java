@@ -45,7 +45,7 @@ public class ItemsResponseTest extends BaseSpringTestRunner {
 				"Jungler:</passive> Deal 45 additional magic damage to monsters over 2 seconds and gain 10 Health " +
 				"Regen and 5 Mana Regen per second while under attack from neutral monsters.<br><br><groupLimit>" +
 				"Limited to 1 Jungle item</groupLimit>", Arrays.asList("1039"), new HashSet<>(Arrays.asList("3719",
-				"3720", "3721", "3722")), null, new ItemImage("3711.png", "item2.png", "item", 432, 192, 48, 48),
+				"3720", "3721", "3722")), null, null, new ItemImage("3711.png", "item2.png", "item", 432, 192, 48, 48),
 				new ItemGold(0, 450, 850, 595, true, null));
 		assertThat(itemsResponse.getItems().get("3711")).isEqualToIgnoringGivenFields(item, "gold");
 	}
