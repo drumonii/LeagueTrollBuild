@@ -3,7 +3,7 @@ description = 'League of Legends Troll Build'
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
-apply plugin: 'spring-boot' 
+apply plugin: 'spring-boot'
 apply plugin: 'io.spring.dependency-management'
 
 version = '1.0-SNAPSHOT'
@@ -74,6 +74,9 @@ dependencies {
     compile 'org.apache.commons:commons-lang3:3.4'
     compile 'org.apache.commons:commons-collections4:4.0'
     compile 'commons-io:commons-io:2.4'
+
+    // WebJars Locator
+    compile 'org.webjars:webjars-locator:0.28'
 
     // Testing
     testCompile 'org.springframework.boot:spring-boot-starter-test'
