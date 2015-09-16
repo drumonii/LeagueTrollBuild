@@ -3,14 +3,14 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layouts/main">
 <head>
-    <title>Champions</title>
+
 </head>
 <body>
 <div layout:fragment="content">
     <div th:each="champion : ${champions}">
         <h3 th:text="${champion.name}">Thresh</h3>
         <a th:href="@{/champions/{id}(id=${champion.id})}">
-            <img th:src="@{/resources/{image}(image=${champion.image.full})}"/>
+            <img th:src="@{/resources/{image}(image=${champion.image.full})}" />
         </a>
         <p th:text="${champion.title}">The Chain Warden</p>
     </div>

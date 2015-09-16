@@ -8,12 +8,24 @@
 <body>
 <div layout:fragment="content">
     <h3 th:text="${champion.name}">Thresh</h3>
-    <img th:src="@{/resources/{image}(image=${champion.image.full})}"/>
+    <img th:src="@{/resources/{image}(image=${champion.image.full})}" />
     <p th:text="${champion.title}">The Chain Warden</p>
     <ul th:each="tag : ${champion.tags}">
         <li th:text="${tag}">Support</li>
     </ul>
     <p th:text="${champion.partype}">Mana</p>
+
+    <button id="new-build" th:text="#{champion.newBuild}">New Build</button>
+    <h3 th:text="#{champion.items}">Items</h3>
+    <div id="items"></div>
+
+    <h3 th:text="#{champion.summonerSpells}">Summoner Spells</h3>
+    <div id="summoner-spells"></div>
+
+    <h3 th:text="#{champion.trinket}">Trinket</h3>
+    <div id="trinket"></div>
+
+    <script th:inline="javascript" th:include="champions/js/champion.js :: script"></script>
 </div>
 </body>
 </html>

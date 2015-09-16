@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+<script th:fragment="script">
+/*<![CDATA[*/
+$(function () {
+    getTrollBuild();
+    function getTrollBuild() {
+        $.ajax({
+            url: [[@{/champions/{id}/troll-build(id=${champion.id})}]],
+            success: function (data) {
+                $.each(data, function (id, list) {
+                    var html = [];
+                    $.each(list, function (id, element) {
+                        html.push('<p>' + element.name + '</p><img src="/resources/' + element.image.full + '" />');
+                    });
+                    $('#' + id).html(html);
+                });
+            }
+        });
+    }
+    $('#new-build').click(function() {
+        getTrollBuild();
+    });
+});
+/*]]>*/
+</script>
+</body>
+</html>

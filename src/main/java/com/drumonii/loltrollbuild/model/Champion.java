@@ -61,4 +61,8 @@ public class Champion {
 		title = StringUtils.capitalize(title);
 	}
 
+	public boolean isViktor() {
+		return name.equals("Viktor");
+	}
+
 }
