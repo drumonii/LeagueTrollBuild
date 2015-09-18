@@ -9,7 +9,7 @@
 <div layout:fragment="content">
     <div th:each="champion : ${champions}">
         <h3 th:text="${champion.name}">Thresh</h3>
-        <a th:href="@{/champions/{id}(id=${champion.id})}">
+        <a th:href="@{/champions/{key}(key=${champion.key})}">
             <img th:src="@{/resources/{image}(image=${champion.image.full})}" />
         </a>
         <p th:text="${champion.title}">The Chain Warden</p>

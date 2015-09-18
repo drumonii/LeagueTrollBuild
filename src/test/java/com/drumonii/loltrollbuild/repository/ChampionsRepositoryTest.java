@@ -5,6 +5,7 @@ import com.drumonii.loltrollbuild.model.Champion;
 import com.drumonii.loltrollbuild.riot.api.ChampionsResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang3.StringUtils;
+import org.junit.After;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -19,6 +20,11 @@ public class ChampionsRepositoryTest extends BaseSpringTestRunner {
 
 	@Autowired
 	private ObjectMapper objectMapper;
+
+	@After
+	public void after() {
+		championsRepository.deleteAll();
+	}
 
 	@Test
 	public void crudOperations() throws IOException {
@@ -49,6 +55,22 @@ public class ChampionsRepositoryTest extends BaseSpringTestRunner {
 		// Delete
 		championsRepository.delete(championFromDb);
 		assertThat(championsRepository.findOne(10001)).isNull();
+	}
+
+	@Test
+	public void findByName() throws IOException {
+		String responseBody = "{\"type\":\"champion\",\"version\":\"5.16.1\",\"data\":{\"Velkoz\":{\"id\":161," +
+				"\"key\":\"Velkoz\",\"name\":\"Vel'Koz\",\"title\":\"the Eye of the Void\",\"image\":{\"full\":" +
+				"\"Velkoz.png\",\"sprite\":\"champion3.png\",\"group\":\"champion\",\"x\":384,\"y\":48,\"w\":48," +
+				"\"h\":48},\"tags\":[\"Mage\"],\"partype\":\"Mana\"}}}";
+		Champion velKoz = objectMapper.readValue(responseBody, ChampionsResponse.class).getChampions().get("Velkoz");
+		championsRepository.save(velKoz);
+
+		velKoz = championsRepository.findByName("VelKoz");
+		assertThat(velKoz).isNotNull();
+
+		velKoz = championsRepository.findByName("vEl'kOz");
+		assertThat(velKoz).isNotNull();
 	}
 
 }

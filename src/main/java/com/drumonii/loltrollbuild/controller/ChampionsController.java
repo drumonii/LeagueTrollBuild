@@ -39,8 +39,15 @@ public class ChampionsController {
 		return "champions/champions";
 	}
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public String champion(@PathVariable("id") Champion champion, Model model) {
+	@RequestMapping(value = "/{value}", method = RequestMethod.GET)
+	public String champion(@PathVariable String value, Model model) {
+		Champion champion;
+		try {
+			int id = Integer.valueOf(value);
+			champion = championsRepository.findOne(id);
+		} catch (NumberFormatException e) {
+			champion = championsRepository.findByName(value);
+		}
 		if (champion == null) {
 			return "redirect:/champions";
 		}
