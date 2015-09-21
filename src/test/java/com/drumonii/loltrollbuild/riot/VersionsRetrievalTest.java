@@ -74,7 +74,7 @@ public class VersionsRetrievalTest extends BaseSpringTestRunner {
 
 	@Test
 	public void versions() throws Exception {
-		mockMvc.perform(get("/riot/versions"))
+		mockMvc.perform(get("/riot/versions").with(csrf()).session(mockHttpSession("admin")))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(versions)));
@@ -83,7 +83,7 @@ public class VersionsRetrievalTest extends BaseSpringTestRunner {
 
 	@Test
 	public void latestPatch() throws Exception {
-		mockMvc.perform(get("/riot/versions/latest"))
+		mockMvc.perform(get("/riot/versions/latest").with(csrf()).session(mockHttpSession("admin")))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(PLAN_TEXT_UTF8))
 				.andExpect(content().string(versions[0]));
@@ -99,7 +99,7 @@ public class VersionsRetrievalTest extends BaseSpringTestRunner {
 		Version latestVersion = new Version(newVersions[0]);
 		versionsRepository.save(latestVersion);
 
-		mockMvc.perform(post("/riot/versions/latest"))
+		mockMvc.perform(post("/riot/versions/latest").with(csrf()).session(mockHttpSession("admin")))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(PLAN_TEXT_UTF8))
 				.andExpect(content().string(versions[0]));
@@ -118,7 +118,7 @@ public class VersionsRetrievalTest extends BaseSpringTestRunner {
 		Version latestVersion = new Version(newVersions[0]);
 		versionsRepository.save(latestVersion);
 
-		mockMvc.perform(post("/riot/versions/latest"))
+		mockMvc.perform(post("/riot/versions/latest").with(csrf()).session(mockHttpSession("admin")))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(PLAN_TEXT_UTF8))
 				.andExpect(content().string(versions[0]));

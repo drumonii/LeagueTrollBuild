@@ -123,7 +123,7 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 		mockServer.expect(requestTo(championsUri.toString())).andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(championsResponseBody, MediaType.APPLICATION_JSON));
 
-		mockMvc.perform(get("/riot/champions"))
+		mockMvc.perform(get("/riot/champions").with(csrf()).session(mockHttpSession("admin")))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(Arrays.asList(thresh))));
@@ -142,7 +142,7 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 		when(imageSaver.copyImagesFromURLs(anyListOf(Image.class), eq(false), championsImgBuilder))
 				.thenReturn(1);
 
-		mockMvc.perform(post("/riot/champions"))
+		mockMvc.perform(post("/riot/champions").with(csrf()).session(mockHttpSession("admin")))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(Arrays.asList(thresh))));
@@ -158,7 +158,7 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 
 		versionsRepository.deleteAll();
 
-		mockMvc.perform(post("/riot/champions"))
+		mockMvc.perform(post("/riot/champions").with(csrf()).session(mockHttpSession("admin")))
 				.andExpect(status().isNotFound());
 		mockServer.verify();
 	}
@@ -176,7 +176,7 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 		when(imageSaver.copyImageFromURL(any(Image.class), championsImgBuilder))
 				.thenReturn(1);
 
-		mockMvc.perform(post("/riot/champions"))
+		mockMvc.perform(post("/riot/champions").with(csrf()).session(mockHttpSession("admin")))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(APPLICATION_JSON_UTF8))
 				.andExpect(content().json("[]"));
@@ -204,7 +204,7 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 		when(imageSaver.copyImageFromURL(any(Image.class), championsImgBuilder))
 				.thenReturn(1);
 
-		mockMvc.perform(post("/riot/champions?truncate=true"))
+		mockMvc.perform(post("/riot/champions?truncate=true").with(csrf()).session(mockHttpSession("admin")))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(Arrays.asList(thresh))));
@@ -219,7 +219,7 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 		mockServer.expect(requestTo(championUri.toString())).andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(championResponseBody, MediaType.APPLICATION_JSON));
 
-		mockMvc.perform(get("/riot/champions/{id}", leeSin.getId()))
+		mockMvc.perform(get("/riot/champions/{id}", leeSin.getId()).with(csrf()).session(mockHttpSession("admin")))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(leeSin)));
@@ -231,7 +231,7 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 		mockServer.expect(requestTo(championUri.toString())).andExpect(method(HttpMethod.GET))
 				.andRespond(withStatus(HttpStatus.NOT_FOUND));
 
-		mockMvc.perform(get("/riot/champions/{id}", leeSin.getId()))
+		mockMvc.perform(get("/riot/champions/{id}", leeSin.getId()).with(csrf()).session(mockHttpSession("admin")))
 				.andExpect(status().isNotFound());
 		mockServer.verify();
 	}
@@ -248,7 +248,7 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 		when(imageSaver.copyImageFromURL(any(Image.class), championsImgBuilder))
 				.thenReturn(1);
 
-		mockMvc.perform(post("/riot/champions/{id}", leeSin.getId()))
+		mockMvc.perform(post("/riot/champions/{id}", leeSin.getId()).with(csrf()).session(mockHttpSession("admin")))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(leeSin)));
@@ -262,7 +262,7 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 		mockServer.expect(requestTo(championUri.toString())).andExpect(method(HttpMethod.GET))
 				.andRespond(withStatus(HttpStatus.NOT_FOUND));
 
-		mockMvc.perform(post("/riot/champions/{id}", leeSin.getId()))
+		mockMvc.perform(post("/riot/champions/{id}", leeSin.getId()).with(csrf()).session(mockHttpSession("admin")))
 				.andExpect(status().isNotFound());
 		mockServer.verify();
 	}
@@ -274,7 +274,7 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 
 		versionsRepository.deleteAll();
 
-		mockMvc.perform(post("/riot/champions/{id}", leeSin.getId()))
+		mockMvc.perform(post("/riot/champions/{id}", leeSin.getId()).with(csrf()).session(mockHttpSession("admin")))
 				.andExpect(status().isNotFound());
 		mockServer.verify();
 	}
@@ -295,7 +295,7 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 		when(imageSaver.copyImageFromURL(any(Image.class), championsImgBuilder))
 				.thenReturn(1);
 
-		mockMvc.perform(post("/riot/champions/{id}", leeSin.getId()))
+		mockMvc.perform(post("/riot/champions/{id}", leeSin.getId()).with(csrf()).session(mockHttpSession("admin")))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(leeSin)));

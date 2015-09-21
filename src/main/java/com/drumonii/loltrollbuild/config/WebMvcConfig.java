@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.webjars.WebJarAssetLocator;
 
@@ -12,7 +13,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 /**
- * Configuration for web mvc related beans and overriding components.
+ * Configuration for web mvc related beans and overriding components in {@link WebMvcConfigurerAdapter}.
  */
 @Configuration
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
@@ -30,6 +31,11 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		Path path = Paths.get(TEMP_DIR, RESOURCE_DIR);
 		registry.addResourceHandler("/resources/**")
 				.addResourceLocations("file:///" + new FileSystemResource(path.toFile()).getPath() + "/");
+	}
+
+	@Override
+	public void addViewControllers(ViewControllerRegistry registry) {
+		registry.addViewController("/admin/login").setViewName("admin/login");
 	}
 
 }
