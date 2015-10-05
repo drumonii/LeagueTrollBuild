@@ -1,6 +1,7 @@
 package com.drumonii.loltrollbuild.model;
 
 import com.drumonii.loltrollbuild.model.image.ChampionImage;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
@@ -61,6 +62,7 @@ public class Champion {
 		title = StringUtils.capitalize(title);
 	}
 
+	@JsonIgnore
 	public boolean isViktor() {
 		return name.equals("Viktor");
 	}
