@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+<script th:fragment="script">
+/*<![CDATA[*/
+$(function() {
+    $('#items').DataTable({
+        order: [ [1, 'asc'] ],
+        columnDefs: [
+            { orderable: false, targets: [0] },
+            { searchable: false, targets: [0] }
+        ],
+        lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, 'All'] ]
+    });
+});
+/*]]>*/
+</script>
+</body>
+</html>

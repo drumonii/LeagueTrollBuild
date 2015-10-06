@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/admin">
+<head>
+    <title th:text="#{admin.champions}">Champions</title>
+    <script th:src="@{/webjars/datatables/media/js/jquery.dataTables.min.js}"></script>
+</head>
+<body>
+<div layout:fragment="content">
+    <h1 th:text="#{admin.champions}">Champions</h1>
+    <table id="champions">
+        <thead>
+        <tr>
+            <th></th>
+            <th th:text="#{admin.champion.name}">Name</th>
+            <th th:text="#{admin.champion.title}">Title</th>
+            <th th:text="#{admin.champion.tags}">Tags</th>
+            <th th:text="#{admin.champion.partype}">Partype</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="champion : ${champions}">
+            <td><img style="height:60px;width:auto;" th:src="@{/resources/{image}(image=${champion.image.full})}" /></td>
+            <td th:text="${champion.name}"></td>
+            <td th:text="${champion.title}"></td>
+            <td>
+                <span th:each="tag : ${champion.tags}" th:text="${tag}"></span>
+            </td>
+            <td th:text="${champion.partype}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <script th:inline="javascript" th:include="admin/champions/js/champions.js :: script"></script>
+</div>
+</body>
+</html>

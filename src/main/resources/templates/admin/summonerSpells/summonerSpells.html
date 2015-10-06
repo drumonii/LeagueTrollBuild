@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/admin">
+<head>
+    <title th:text="#{admin.summonerSpells}">Summoner Spells</title>
+    <script th:src="@{/webjars/datatables/media/js/jquery.dataTables.min.js}"></script>
+</head>
+<body>
+<div layout:fragment="content">
+    <h1 th:text="#{admin.summonerSpells}">Summoner Spells</h1>
+    <table id="summoner-spells">
+        <thead>
+        <tr>
+            <th></th>
+            <th th:text="#{admin.summonerSpells.name}">Name</th>
+            <th th:text="#{admin.summonerSpells.modes}">Modes</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="spell : ${spells}">
+            <td><img style="height:60px;width:auto;" th:src="@{/resources/{image}(image=${spell.image.full})}" /></td>
+            <td th:text="${spell.name}"></td>
+            <td>
+                <span th:each="mode : ${spell.modes}" th:text="${mode}"></span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <script th:inline="javascript" th:include="admin/summonerSpells/js/summonerSpells.js :: script"></script>
+</div>
+</body>
+</html>

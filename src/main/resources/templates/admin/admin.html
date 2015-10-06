@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/admin">
+<head>
+</head>
+<body>
+<div layout:fragment="content">
+    <a th:href="@{/admin/summoner-spells}" th:text="#{admin.summonerSpells}">Summoner Spells</a> |
+    <a th:href="@{/admin/items}" th:text="#{admin.items}">Items</a> |
+    <a th:href="@{/admin/champions}" th:text="#{admin.champions}">Champions</a>
+</div>
+</body>
+</html>

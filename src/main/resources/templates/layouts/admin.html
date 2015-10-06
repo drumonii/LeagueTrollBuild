@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ulteraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title layout:title-pattern="$DECORATOR_TITLE | $CONTENT_TITLE" th:text="#{admin.title}">League Troll Build Admin</title>
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+</head>
+<body>
+<!--/* admin header and nav */-->
+<header th:replace="fragments/admin/header :: header"></header>
+<!--/* admin main content */-->
+<div layout:fragment="content"></div>
+<!--/* footer */-->
+<footer th:replace="fragments/footer :: footer"></footer>
+</body>
+</html>

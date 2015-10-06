@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="layouts/main">
+      layout:decorator="layouts/admin">
 <head>
 </head>
 <body>
@@ -22,7 +22,7 @@
             <label for="password" th:text="#{login.password}">Password</label>
             <input type="password" id="password" name="password" />
 
-            <button type="submit" class="btn" th:text="#{login.login}">Login</button>
+            <button type="submit" th:text="#{login.login}">Login</button>
         </fieldset>
     </form>
 </div>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/admin">
+<head>
+    <title th:text="#{admin.items}">Items</title>
+    <script th:src="@{/webjars/datatables/media/js/jquery.dataTables.min.js}"></script>
+</head>
+<body>
+<div layout:fragment="content">
+    <h1 th:text="#{admin.items}">Items</h1>
+    <table id="items">
+        <thead>
+        <tr>
+            <th></th>
+            <th th:text="#{admin.item.name}">Name</th>
+            <th th:text="#{admin.item.group}">Group</th>
+            <th th:text="#{admin.item.requiredChampion}">Champion</th>
+            <th th:text="#{admin.item.maps}">Maps</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${items}">
+            <td><img style="height:60px;width:auto;" th:src="@{/resources/{image}(image=${item.image.full})}" /></td>
+            <td th:text="${item.name}"></td>
+            <td th:text="${item.group}"></td>
+            <td th:text="${item.requiredChampion}"></td>
+            <td>
+                <span th:each="map : ${item.maps}" th:text="${map.key}"></span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <script th:inline="javascript" th:include="admin/items/js/items.js :: script"></script>
+</div>
+</body>
+</html>

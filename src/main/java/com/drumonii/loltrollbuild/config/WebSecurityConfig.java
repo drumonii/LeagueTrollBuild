@@ -26,7 +26,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		// @formatter:off
 		http
 			.authorizeRequests()
-				.antMatchers("/riot/**") .hasRole("ADMIN")
+				.antMatchers("/riot/**")  .hasRole("ADMIN")
+				.antMatchers("/admin/**") .hasRole("ADMIN")
 			.and()
 			.formLogin()
 				.loginPage("/admin/login")
