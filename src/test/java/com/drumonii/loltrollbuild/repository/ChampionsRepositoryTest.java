@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -71,6 +72,29 @@ public class ChampionsRepositoryTest extends BaseSpringTestRunner {
 
 		velKoz = championsRepository.findByName("vEl'kOz");
 		assertThat(velKoz).isNotNull();
+	}
+
+	@Test
+	public void findByLikeName() throws IOException {
+		String responseBody = "{\"type\":\"champion\",\"version\":\"5.16.1\",\"data\":{\"FiddleSticks\":{\"id\":9," +
+				"\"key\":\"FiddleSticks\",\"name\":\"Fiddlesticks\",\"title\":\"the Harbinger of Doom\",\"image\":" +
+				"{\"full\":\"FiddleSticks.png\",\"sprite\":\"champion0.png\",\"group\":\"champion\",\"x\":144," +
+				"\"y\":96,\"w\":48,\"h\":48},\"tags\":[\"Mage\",\"Support\"],\"partype\":\"Mana\"}}}";
+		Champion fiddleSticks = objectMapper.readValue(responseBody, ChampionsResponse.class).getChampions()
+				.get("FiddleSticks");
+		championsRepository.save(fiddleSticks);
+		responseBody = "{\"type\":\"champion\",\"version\":\"5.16.1\",\"data\":{\"Fizz\":{\"id\":105,\"key\":" +
+				"\"Fizz\",\"name\":\"Fizz\",\"title\":\"the Tidal Trickster\",\"image\":{\"full\":\"Fizz.png\"," +
+				"\"sprite\":\"champion0.png\",\"group\":\"champion\",\"x\":240,\"y\":96,\"w\":48,\"h\":48},\"tags\":" +
+				"[\"Assassin\",\"Fighter\"],\"partype\":\"Mana\"}}}";
+		Champion fizz = objectMapper.readValue(responseBody, ChampionsResponse.class).getChampions().get("Fizz");
+		championsRepository.save(fizz);
+
+		List<Champion> champions = championsRepository.findByLikeName("fi");
+		assertThat(champions).isNotEmpty();
+
+		champions = championsRepository.findByLikeName("FI");
+		assertThat(champions).isNotEmpty();
 	}
 
 }
