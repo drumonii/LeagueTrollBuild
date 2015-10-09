@@ -24,7 +24,7 @@ public interface ChampionsRepository extends CrudRepository<Champion, Integer> {
 	Champion findByName(@Param("name") String name);
 
 	/**
-	 * Finds a {@link List} of {@link Champion} by a name using {@code LIKE}.
+	 * Finds a {@link List} of {@link Champion}s by a name using {@code LIKE}.
 	 *
 	 * @param name the name to lookup (non case sensitive)
 	 * @return a {@link List} of {@code LIKE} {@link Champion}s from a name
@@ -33,5 +33,29 @@ public interface ChampionsRepository extends CrudRepository<Champion, Integer> {
 		   "or lower(c.key) like concat('%', lower(:name), '%')")
 	@RestResource(path = "find-by-like-name", rel = "find-by-like-name")
 	List<Champion> findByLikeName(@Param("name") String name);
+
+	@Override
+	@RestResource(exported = false)
+	Champion save(Champion entity);
+
+	@Override
+	@RestResource(exported = false)
+	<S extends Champion> Iterable<S> save(Iterable<S> entities);
+
+	@Override
+	@RestResource(exported = false)
+	void delete(Integer id);
+
+	@Override
+	@RestResource(exported = false)
+	void delete(Champion entity);
+
+	@Override
+	@RestResource(exported = false)
+	void delete(Iterable<? extends Champion> entities);
+
+	@Override
+	@RestResource(exported = false)
+	void deleteAll();
 
 }

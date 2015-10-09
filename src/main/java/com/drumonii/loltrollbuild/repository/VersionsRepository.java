@@ -20,4 +20,28 @@ public interface VersionsRepository extends CrudRepository<Version, String> {
 	@RestResource(path = "latest-patch", rel = "latest-patch")
 	String latestPatch();
 
+	@Override
+	@RestResource(exported = false)
+	Version save(Version entity);
+
+	@Override
+	@RestResource(exported = false)
+	<S extends Version> Iterable<S> save(Iterable<S> entities);
+
+	@Override
+	@RestResource(exported = false)
+	void delete(String id);
+
+	@Override
+	@RestResource(exported = false)
+	void delete(Version entity);
+
+	@Override
+	@RestResource(exported = false)
+	void delete(Iterable<? extends Version> entities);
+
+	@Override
+	@RestResource(exported = false)
+	void deleteAll();
+
 }

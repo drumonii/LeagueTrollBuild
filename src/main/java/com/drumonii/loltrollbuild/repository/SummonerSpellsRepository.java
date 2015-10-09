@@ -4,6 +4,7 @@ import com.drumonii.loltrollbuild.model.SummonerSpell;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.data.rest.core.annotation.RestResource;
 
 import java.util.List;
 
@@ -21,5 +22,29 @@ public interface SummonerSpellsRepository extends CrudRepository<SummonerSpell, 
 	 */
 	@Query("select s from SummonerSpell s join s.modes m where m in ('CLASSIC')")
 	List<SummonerSpell> forTrollBuild();
+
+	@Override
+	@RestResource(exported = false)
+	SummonerSpell save(SummonerSpell entity);
+
+	@Override
+	@RestResource(exported = false)
+	<S extends SummonerSpell> Iterable<S> save(Iterable<S> entities);
+
+	@Override
+	@RestResource(exported = false)
+	void delete(Integer id);
+
+	@Override
+	@RestResource(exported = false)
+	void delete(SummonerSpell entity);
+
+	@Override
+	@RestResource(exported = false)
+	void delete(Iterable<? extends SummonerSpell> entities);
+
+	@Override
+	@RestResource(exported = false)
+	void deleteAll();
 
 }
