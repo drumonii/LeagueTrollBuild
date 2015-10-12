@@ -16,7 +16,7 @@ import javax.persistence.Table;
 @Table(name = "VERSION")
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(of = "patch")
+@EqualsAndHashCode
 @ToString
 public class Version {
 

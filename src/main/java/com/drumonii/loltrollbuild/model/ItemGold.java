@@ -3,10 +3,7 @@ package com.drumonii.loltrollbuild.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
@@ -19,6 +16,8 @@ import javax.persistence.*;
 @Table(name = "ITEM_GOLD")
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(exclude = { "id", "item" })
+@ToString(exclude = { "id", "item" })
 public class ItemGold {
 
 	@Id

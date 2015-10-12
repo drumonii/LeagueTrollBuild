@@ -17,7 +17,7 @@ import java.util.Set;
 @Table(name = "SUMMONER_SPELL")
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(of = "id")
+@EqualsAndHashCode
 @ToString
 public class SummonerSpell {
 
@@ -41,15 +41,13 @@ public class SummonerSpell {
 	@Getter @Setter private SummonerSpellImage image;
 
 	@ElementCollection(fetch = FetchType.EAGER)
-	@CollectionTable(name = "SUMMONER_SPELL_COOLDOWN",
-			joinColumns = @JoinColumn(name = "SUMMONER_SPELL_ID"))
+	@CollectionTable(name = "SUMMONER_SPELL_COOLDOWN", joinColumns = @JoinColumn(name = "SUMMONER_SPELL_ID"))
 	@Column(name = "COOLDOWN")
 	@JsonProperty("cooldown")
 	@Getter @Setter private Set<Integer> cooldown;
 
 	@ElementCollection(fetch = FetchType.EAGER)
-	@CollectionTable(name = "SUMMONER_SPELL_MODE",
-			joinColumns = @JoinColumn(name = "SUMMONER_SPELL_ID"))
+	@CollectionTable(name = "SUMMONER_SPELL_MODE", joinColumns = @JoinColumn(name = "SUMMONER_SPELL_ID"))
 	@Column(name = "MODE")
 	@JsonProperty("modes")
 	@Getter @Setter private Set<String> modes;

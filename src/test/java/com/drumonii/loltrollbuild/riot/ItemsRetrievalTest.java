@@ -97,8 +97,9 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 				"Health Regen and 5 Mana Regen per second while under attack from neutral monsters.<br><br>" +
 				"<groupLimit>Limited to 1 Jungle item</groupLimit>\",\"plaintext\":\"Makes your Smite give extra " +
 				"gold from the enemy jungle\",\"from\":[\"1039\"],\"into\":[\"3719\",\"3720\",\"3721\",\"3722\"]," +
-				"\"image\":{\"full\":\"3711.png\",\"sprite\":\"item2.png\",\"group\":\"item\",\"x\":432,\"y\":192," +
-				"\"w\":48,\"h\":48},\"gold\":{\"base\":450,\"total\":850,\"sell\":595,\"purchasable\":true}}}}";
+				"\"maps\":{\"1\":false,\"8\":false,\"10\":true,\"11\":true,\"12\":false,\"14\":false},\"image\":" +
+				"{\"full\":\"3711.png\",\"sprite\":\"item2.png\",\"group\":\"item\",\"x\":432,\"y\":192,\"w\":48," +
+				"\"h\":48},\"gold\":{\"base\":450,\"total\":850,\"sell\":595,\"purchasable\":true}}}}";
 		try {
 			poachersKnife = objectMapper.readValue(itemsResponseBody, ItemsResponse.class).getItems().get("3711");
 		} catch (IOException e) {
@@ -110,8 +111,9 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 				"</unique> After using an ability, the next basic attack deals 75% Base Attack Damage (+50% of " +
 				"Ability Power) bonus magic damage on hit (1.5 second cooldown).<br><br><i>(Unique Passives with the " +
 				"same name don't stack.)</i>\",\"plaintext\":\"Grants a bonus to next attack after spell cast\"," +
-				"\"from\":[\"3057\",\"3113\"],\"image\":{\"full\":\"3100.png\",\"sprite\":\"item1.png\",\"group\":" +
-				"\"item\",\"x\":288,\"y\":0,\"w\":48,\"h\":48},\"gold\":{\"base\":950,\"total\":3000,\"sell\":2100," +
+				"\"from\":[\"3057\",\"3113\"],\"maps\":{\"1\":false,\"8\":true,\"10\":true,\"11\":true,\"12\":true," +
+				"\"14\":false},\"image\":{\"full\":\"3100.png\",\"sprite\":\"item1.png\",\"group\":\"item\"," +
+				"\"x\":288,\"y\":0,\"w\":48,\"h\":48},\"gold\":{\"base\":950,\"total\":3000,\"sell\":2100," +
 				"\"purchasable\":true}}";
 		try {
 			lichBane = objectMapper.readValue(itemResponseBody, Item.class);

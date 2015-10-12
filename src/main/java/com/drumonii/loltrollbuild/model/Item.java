@@ -4,11 +4,11 @@ import com.drumonii.loltrollbuild.model.image.ItemImage;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * League of Legends Item.
@@ -19,7 +19,7 @@ import java.util.Set;
 @Table(name = "ITEM")
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(of = "id")
+@EqualsAndHashCode(exclude = { "from", "into" })
 @ToString
 public class Item {
 
@@ -45,15 +45,14 @@ public class Item {
 	@Getter @Setter private String description;
 
 	@ElementCollection(fetch = FetchType.EAGER)
-	@CollectionTable(name = "ITEM_FROM",
-			joinColumns = @JoinColumn(name = "ITEM_ID"))
+	@CollectionTable(name = "ITEM_FROM", joinColumns = @JoinColumn(name = "ITEM_ID"))
+	@Fetch(FetchMode.SELECT)
 	@Column(name = "ITEM_FROM")
 	@JsonProperty("from")
 	@Getter @Setter private List<String> from;
 
 	@ElementCollection(fetch = FetchType.EAGER)
-	@CollectionTable(name = "ITEM_INTO",
-			joinColumns = @JoinColumn(name = "ITEM_ID"))
+	@CollectionTable(name = "ITEM_INTO", joinColumns = @JoinColumn(name = "ITEM_ID"))
 	@Column(name = "ITEM_INTO")
 	@JsonProperty("into")
 	@Getter @Setter private Set<String> into;
@@ -63,8 +62,7 @@ public class Item {
 	@Getter @Setter private String requiredChampion;
 
 	@ElementCollection(fetch = FetchType.EAGER)
-	@CollectionTable(name = "ITEM_MAP",
-			joinColumns = @JoinColumn(name = "ITEM_ID"))
+	@CollectionTable(name = "ITEM_MAP", joinColumns = @JoinColumn(name = "ITEM_ID"))
 	@MapKeyColumn(name = "MAPS_KEY")
 	@Column(name = "MAP")
 	@JsonProperty("maps")

@@ -13,7 +13,7 @@ import org.hibernate.annotations.Parameter;
 import javax.persistence.*;
 
 /**
- * Specific {@link Image} of a {@link ItemImage} which maps a {@link OneToOne} relationship.
+ * Specific {@link Image} of a {@link Item} which maps a {@link OneToOne} relationship.
  */
 @Entity
 @Table(name = "ITEM_IMAGE")

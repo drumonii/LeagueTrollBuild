@@ -19,7 +19,7 @@ import java.util.Set;
 @Table(name = "CHAMPION")
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(of = "id")
+@EqualsAndHashCode(exclude = { "title" })
 @ToString
 public class Champion {
 
@@ -47,8 +47,7 @@ public class Champion {
 	@Getter @Setter private ChampionImage image;
 
 	@ElementCollection(fetch = FetchType.EAGER)
-	@CollectionTable(name = "CHAMPION_TAG",
-			joinColumns = @JoinColumn(name = "CHAMPION_ID"))
+	@CollectionTable(name = "CHAMPION_TAG", joinColumns = @JoinColumn(name = "CHAMPION_ID"))
 	@Column(name = "TAG")
 	@JsonProperty("tags")
 	@Getter @Setter private Set<String> tags;
