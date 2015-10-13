@@ -3,6 +3,8 @@ package com.drumonii.loltrollbuild.admin;
 import com.drumonii.loltrollbuild.repository.ChampionsRepository;
 import com.drumonii.loltrollbuild.repository.ItemsRepository;
 import com.drumonii.loltrollbuild.repository.SummonerSpellsRepository;
+import com.drumonii.loltrollbuild.repository.VersionsRepository;
+import com.drumonii.loltrollbuild.riot.VersionsRetrieval;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,8 +24,16 @@ public class AdminController {
 	@Autowired
 	private ChampionsRepository championsRepository;
 
+	@Autowired
+	private VersionsRepository versionsRepository;
+
+	@Autowired
+	private VersionsRetrieval versionsRetrieval;
+
 	@RequestMapping(method = RequestMethod.GET)
 	public String admin(Model model) {
+		model.addAttribute("latestRiotPatch", versionsRetrieval.latestPatch(versionsRetrieval.versionsFromResponse()));
+		model.addAttribute("latestSavedPatch", versionsRepository.latestPatch());
 		return "admin/admin";
 	}
 

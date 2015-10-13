@@ -6,9 +6,47 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <a th:href="@{/admin/summoner-spells}" th:text="#{admin.summonerSpells}">Summoner Spells</a> |
-    <a th:href="@{/admin/items}" th:text="#{admin.items}">Items</a> |
-    <a th:href="@{/admin/champions}" th:text="#{admin.champions}">Champions</a>
+    <table>
+        <thead>
+        <tr>
+            <th th:text="#{admin.version.latestPatch}">Latest Patch</th>
+            <th th:text="#{admin.version.savedPatch}">Current Saved Patch</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${latestRiotPatch}">5.19.1</td>
+            <td th:text="${latestSavedPatch}">5.17.1</td>
+        </tr>
+        </tbody>
+        <tfoot th:if="${latestRiotPatch != latestSavedPatch}">
+        <tr>
+            <th colspan="2">
+                <form id="save-patch-form">
+                    <button type="submit" th:text="#{admin.version.savePatch}">Save Latest Patch</button>
+                </form>
+            </th>
+        </tr>
+        </tfoot>
+    </table>
+
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        $(function() {
+            $('#save-patch-form').submit(function(event) {
+                $.ajax({
+                    type: 'POST',
+                    url: [[@{/riot/versions/latest}]],
+                    data: { _csrf: [[${_csrf.token}]] },
+                    success: function(data) {
+                        location.reload();
+                    }
+                });
+                event.preventDefault();
+            });
+        });
+        /*]]>*/
+    </script>
 </div>
 </body>
 </html>
