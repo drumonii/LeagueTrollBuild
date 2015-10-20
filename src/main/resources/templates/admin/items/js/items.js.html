@@ -5,13 +5,59 @@
 <script th:fragment="script">
 /*<![CDATA[*/
 $(function() {
-    $('#items').DataTable({
+    $('#items-difference').DataTable({
         order: [ [1, 'asc'] ],
         columnDefs: [
             { orderable: false, targets: [0] },
             { searchable: false, targets: [0] }
         ],
         lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, 'All'] ]
+    });
+    $('#save-items-form').submit(function(event) {
+        $.ajax({
+            type: 'POST',
+            url: [[@{/riot/items}]],
+            data: { truncate: $('#truncate').is(':checked'), _csrf: [[${_csrf.token}]] },
+            success: function(data) {
+                location.reload();
+            }
+        });
+        event.preventDefault();
+    });
+    $('#items').DataTable({
+        processing: true,
+        serverSide: true,
+        order: [ [1, 'asc'] ],
+        ajax: {
+            url: [[@{/api/items}]],
+            dataSrc: function(data) {
+                return data._embedded.items;
+            },
+            data: function(data) {
+                var sorts = [];
+                $.each(data.order, function (i, order) {
+                    sorts.push(data.columns[order.column].data + "," + order.dir);
+                });
+                return { page: Math.ceil(data.start / data.length), size: data.length, sort: sorts[0] };
+            }
+        },
+        columnDefs: [
+            { orderable: false, targets: [0] },
+            { searchable: false, targets: [0] }
+        ],
+        columns: [
+            { data: 'image.full',
+                render: function(data, type, full, meta) {
+                    return '<img style="height:60px;width:auto;" src="/resources/' + data + '" />';
+                }
+            },
+            { data: 'name' },
+            { data: 'group' },
+            { data: 'requiredChampion' }
+        ],
+        lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, 'All'] ],
+        searching: false,
+        info: false
     });
 });
 /*]]>*/

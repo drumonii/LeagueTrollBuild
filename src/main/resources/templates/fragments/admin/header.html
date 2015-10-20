@@ -1,13 +1,16 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
 </head>
 <body>
 <header th:fragment="header">
     <h1 th:text="#{admin.header.title}">League Troll Build Admin</h1>
-    <a th:href="@{/admin/summoner-spells}" th:text="#{admin.summonerSpells}">Summoner Spells</a> |
-    <a th:href="@{/admin/items}" th:text="#{admin.items}">Items</a> |
-    <a th:href="@{/admin/champions}" th:text="#{admin.champions}">Champions</a>
+    <div sec:authorize="hasRole('ROLE_ADMIN')">
+        <a th:href="@{/admin/summoner-spells}" th:text="#{admin.summonerSpells}">Summoner Spells</a> |
+        <a th:href="@{/admin/items}" th:text="#{admin.items}">Items</a> |
+        <a th:href="@{/admin/champions}" th:text="#{admin.champions}">Champions</a>
+    </div>
 </header>
 </body>
 </html>

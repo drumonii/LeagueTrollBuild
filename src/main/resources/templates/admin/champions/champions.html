@@ -9,7 +9,12 @@
 <body>
 <div layout:fragment="content">
     <h1 th:text="#{admin.champions}">Champions</h1>
-    <table id="champions">
+
+    <div th:unless="${#lists.isEmpty(difference)}">
+        <h3 th:text="#{admin.champions.diff}">Difference in Champions Found</h3>
+        <p th:text="#{admin.champions.diff.msg}">Differ Msg</p>
+    </div>
+    <table id="champions-difference" th:unless="${#lists.isEmpty(difference)}">
         <thead>
         <tr>
             <th></th>
@@ -20,8 +25,11 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="champion : ${champions}">
-            <td><img style="height:60px;width:auto;" th:src="@{/resources/{image}(image=${champion.image.full})}" /></td>
+        <tr th:each="champion : ${difference}">
+            <td><img style="height:60px;width:auto;"
+                     th:src="@{http://ddragon.leagueoflegends.com/cdn/{patch}/img/champion/{image}
+                     (patch=${latestSavedPatch}, image=${champion.image.full})}" />
+            </td>
             <td th:text="${champion.name}"></td>
             <td th:text="${champion.title}"></td>
             <td>
@@ -30,6 +38,29 @@
             <td th:text="${champion.partype}"></td>
         </tr>
         </tbody>
+        <tfoot>
+        <tr>
+            <th colspan="5">
+                <form id="save-champions-form">
+                    <input type="checkbox" id="truncate" name="truncate" />
+                    <label for="truncate" th:text="#{admin.champions.trunc}">Truncate</label>
+                    <button type="submit" th:text="#{admin.champions.save}">Save Champions</button>
+                </form>
+            </th>
+        </tr>
+        </tfoot>
+    </table>
+
+    <table id="champions">
+        <thead>
+        <tr>
+            <th></th>
+            <th th:text="#{admin.champion.name}">Name</th>
+            <th th:text="#{admin.champion.title}">Title</th>
+            <th th:text="#{admin.champion.tags}">Tags</th>
+            <th th:text="#{admin.champion.partype}">Partype</th>
+        </tr>
+        </thead>
     </table>
     <script th:inline="javascript" th:include="admin/champions/js/champions.js :: script"></script>
 </div>

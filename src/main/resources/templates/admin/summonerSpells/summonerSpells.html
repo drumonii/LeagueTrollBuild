@@ -3,29 +3,58 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layouts/admin">
 <head>
-    <title th:text="#{admin.summonerSpells}">Summoner Spells</title>
+    <title th:text="#{admin.summonerSpells}">Summoner Spells Found</title>
     <script th:src="@{/webjars/datatables/media/js/jquery.dataTables.min.js}"></script>
 </head>
 <body>
 <div layout:fragment="content">
     <h1 th:text="#{admin.summonerSpells}">Summoner Spells</h1>
-    <table id="summoner-spells">
+
+    <div th:unless="${#lists.isEmpty(difference)}">
+        <h3 th:text="#{admin.summonerSpells.diff}">Difference in Summoner Spells Found</h3>
+        <p th:text="#{admin.summonerSpells.diff.msg}">Differ Msg</p>
+    </div>
+    <table id="summoner-spells-difference" th:unless="${#lists.isEmpty(difference)}">
         <thead>
         <tr>
             <th></th>
-            <th th:text="#{admin.summonerSpells.name}">Name</th>
-            <th th:text="#{admin.summonerSpells.modes}">Modes</th>
+            <th th:text="#{admin.summonerSpell.name}">Name</th>
+            <th th:text="#{admin.summonerSpell.modes}">Modes</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="spell : ${spells}">
-            <td><img style="height:60px;width:auto;" th:src="@{/resources/{image}(image=${spell.image.full})}" /></td>
+        <tr th:each="spell : ${difference}">
+            <td><img style="height:60px;width:auto;"
+                     th:src="@{http://ddragon.leagueoflegends.com/cdn/{patch}/img/spell/{image}
+                     (patch=${latestSavedPatch}, image=${spell.image.full})}" />
+            </td>
             <td th:text="${spell.name}"></td>
             <td>
                 <span th:each="mode : ${spell.modes}" th:text="${mode}"></span>
             </td>
         </tr>
         </tbody>
+        <tfoot>
+        <tr>
+            <th colspan="3">
+                <form id="save-summoner-spells-form">
+                    <input type="checkbox" id="truncate" name="truncate" />
+                    <label for="truncate" th:text="#{admin.summonerSpells.trunc}">Truncate</label>
+                    <button type="submit" th:text="#{admin.summonerSpells.save}">Save Summoner Spells</button>
+                </form>
+            </th>
+        </tr>
+        </tfoot>
+    </table>
+
+    <table id="summoner-spells">
+        <thead>
+        <tr>
+            <th></th>
+            <th th:text="#{admin.summonerSpell.name}">Name</th>
+            <th th:text="#{admin.summonerSpell.modes}">Modes</th>
+        </tr>
+        </thead>
     </table>
     <script th:inline="javascript" th:include="admin/summonerSpells/js/summonerSpells.js :: script"></script>
 </div>

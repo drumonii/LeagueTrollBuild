@@ -77,6 +77,8 @@ spring:
   profiles: dev
   thymeleaf:
     cache: false
+  messages:
+    cache-seconds: 10
   datasource:
     initialize: false
     driverClassName: org.postgresql.Driver
@@ -89,7 +91,7 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQL9Dialect
         show_sql: true
         format_sql: true
-        generate_statistics: false
+        generate_statistics: true
         hbm2ddl.auto:
 
 ---

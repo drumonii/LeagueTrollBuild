@@ -5,13 +5,58 @@
 <script th:fragment="script">
 /*<![CDATA[*/
 $(function() {
-    $('#summoner-spells').DataTable({
+    $('#summoner-spells-difference').DataTable({
         order: [ [1, 'asc'] ],
         columnDefs: [
             { orderable: false, targets: [0, 2] },
             { searchable: false, targets: [0] }
         ],
         lengthMenu: [ [10, -1], [10, 'All'] ]
+    });
+    $('#save-summoner-spells-form').submit(function(event) {
+        $.ajax({
+            type: 'POST',
+            url: [[@{/riot/summoner-spells}]],
+            data: { truncate: $('#truncate').is(':checked'), _csrf: [[${_csrf.token}]] },
+            success: function(data) {
+                location.reload();
+            }
+        });
+        event.preventDefault();
+    });
+    $('#summoner-spells').DataTable({
+        processing: true,
+        serverSide: true,
+        order: [ [1, 'asc'] ],
+        ajax: {
+            url: [[@{/api/summoner-spells}]],
+            dataSrc: function(data) {
+                return data._embedded.summonerSpells;
+            },
+            data: function(data) {
+                var sorts = [];
+                $.each(data.order, function (i, order) {
+                    sorts.push(data.columns[order.column].data + "," + order.dir);
+                });
+                return { page: Math.ceil(data.start / data.length), size: data.length, sort: sorts[0] };
+            }
+        },
+        columnDefs: [
+            { orderable: false, targets: [0, 2] },
+            { searchable: false, targets: [0] }
+        ],
+        columns: [
+            { data: 'image.full',
+                render: function(data, type, full, meta) {
+                    return '<img style="height:60px;width:auto;" src="/resources/' + data + '" />';
+                }
+            },
+            { data: 'name' },
+            { data: 'modes[, ]' }
+        ],
+        lengthMenu: [ [10, -1], [10, 'All'] ],
+        searching: false,
+        info: false
     });
 });
 /*]]>*/

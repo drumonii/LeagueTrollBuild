@@ -2,16 +2,16 @@ package com.drumonii.loltrollbuild.repository;
 
 import com.drumonii.loltrollbuild.model.Champion;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 import java.util.List;
 
 /**
- * CRUD operations repository to the CHAMPION table.
+ * Paging, sorting, and CRUD operations repository to the CHAMPION table.
  */
-public interface ChampionsRepository extends CrudRepository<Champion, Integer> {
+public interface ChampionsRepository extends PagingAndSortingRepository<Champion, Integer> {
 
 	/**
 	 * Finds a {@link Champion} by its name.

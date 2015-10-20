@@ -2,15 +2,15 @@ package com.drumonii.loltrollbuild.repository;
 
 import com.drumonii.loltrollbuild.model.Item;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 import java.util.List;
 
 /**
- * CRUD operations repository to the ITEM table.
+ * Paging, sorting, and CRUD operations repository to the ITEM table.
  */
-public interface ItemsRepository extends CrudRepository<Item, Integer> {
+public interface ItemsRepository extends PagingAndSortingRepository<Item, Integer> {
 
 	/**
 	 * Gets a {@link List} of upgraded {@link Item} boots from {@code Boots of Speed} not including boot enchantments.
