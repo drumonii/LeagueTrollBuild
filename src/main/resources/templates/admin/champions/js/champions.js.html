@@ -42,7 +42,7 @@ $(function() {
             }
         },
         columnDefs: [
-            { orderable: false, targets: [0, 3] },
+            { orderable: false, targets: [0, 3, 5] },
             { searchable: false, targets: [0] }
         ],
         columns: [
@@ -54,11 +54,27 @@ $(function() {
             { data: 'name' },
             { data: 'title' },
             { data: 'tags[, ]' },
-            { data: 'partype' }
+            { data: 'partype' },
+            { data: '_links.self.href',
+                render: function(data, type, full, meta) {
+                    var id = data.substring(data.lastIndexOf('/') + 1, data.length);
+                    return '<button id="' + id + '">' + [[#{admin.champion.overwrite}]] + '</button>';
+                }
+            }
         ],
         lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, 'All'] ],
         searching: false,
         info: false
+    });
+    $('#champions tbody').on('click', 'button', function() {
+        $.ajax({
+            type: 'POST',
+            url: [[@{/riot/champions}]] + '/' + $(this).attr('id'),
+            data: { _csrf: [[${_csrf.token}]] },
+            success: function(data) {
+                location.reload();
+            }
+        });
     });
 });
 /*]]>*/

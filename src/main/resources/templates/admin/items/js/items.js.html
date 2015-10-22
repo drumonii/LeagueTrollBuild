@@ -42,7 +42,7 @@ $(function() {
             }
         },
         columnDefs: [
-            { orderable: false, targets: [0] },
+            { orderable: false, targets: [0, 4] },
             { searchable: false, targets: [0] }
         ],
         columns: [
@@ -53,11 +53,27 @@ $(function() {
             },
             { data: 'name' },
             { data: 'group' },
-            { data: 'requiredChampion' }
+            { data: 'requiredChampion' },
+            { data: '_links.self.href',
+                render: function(data, type, full, meta) {
+                    var id = data.substring(data.lastIndexOf('/') + 1, data.length);
+                    return '<button id="' + id + '">' + [[#{admin.item.overwrite}]] + '</button>';
+                }
+            }
         ],
         lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, 'All'] ],
         searching: false,
         info: false
+    });
+    $('#items tbody').on('click', 'button', function() {
+        $.ajax({
+            type: 'POST',
+            url: [[@{/riot/items}]] + '/' + $(this).attr('id'),
+            data: { _csrf: [[${_csrf.token}]] },
+            success: function(data) {
+                location.reload();
+            }
+        });
     });
 });
 /*]]>*/
