@@ -41,12 +41,13 @@ public class ItemsRepositoryTest extends BaseSpringTestRunner {
 		Item unmarshalledItem = itemsResponse.getItems().get("10001");
 
 		// Create
-		itemsRepository.save(unmarshalledItem);
+		assertThat(itemsRepository.save(unmarshalledItem)).isNotNull();
 
 		// Select
 		Item itemFromDb = itemsRepository.findOne(10001);
 		assertThat(itemFromDb).isNotNull();
-		itemFromDb.setMaps(null); // It's empty and not null from the db
+		assertThat(itemFromDb.getImage()).isNotNull();
+		itemFromDb.setMaps(null); // It's empty/not null from the db
 		assertThat(itemFromDb).isEqualToIgnoringGivenFields(unmarshalledItem, "from", "gold");
 
 		// Update

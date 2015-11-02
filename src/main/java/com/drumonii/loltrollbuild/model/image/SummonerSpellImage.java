@@ -7,8 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
 
 import javax.persistence.*;
 
@@ -26,13 +24,11 @@ public class SummonerSpellImage extends Image {
 	}
 
 	@Id
-	@GeneratedValue(generator = "generator")
-	@GenericGenerator(name = "generator", strategy = "foreign",
-			parameters = @Parameter(name = "property", value = "summonerSpell"))
 	@Column(name = "SUMMONER_SPELL_ID", unique = true, nullable = false)
 	@JsonIgnore
 	@Getter @Setter private int id;
 
+	@MapsId
 	@OneToOne(optional = false, mappedBy = "image")
 	@JsonBackReference
 	@Getter @Setter private SummonerSpell summonerSpell;

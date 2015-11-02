@@ -38,11 +38,12 @@ public class ChampionsRepositoryTest extends BaseSpringTestRunner {
 		Champion unmarshalledChampion = championsResponse.getChampions().get("Test");
 
 		// Create
-		championsRepository.save(unmarshalledChampion);
+		assertThat(championsRepository.save(unmarshalledChampion)).isNotNull();
 
 		// Select
 		Champion championFromDb = championsRepository.findOne(10001);
 		assertThat(championFromDb).isNotNull();
+		assertThat(championFromDb.getImage()).isNotNull();
 		assertThat(championFromDb.getTitle()).isEqualTo(StringUtils.capitalize(unmarshalledChampion.getTitle()));
 		unmarshalledChampion.setTitle(championFromDb.getTitle()); // title from Riot is uncapitalized, set from the db's
 		assertThat(championFromDb).isEqualToIgnoringNullFields(unmarshalledChampion);

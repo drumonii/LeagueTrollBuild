@@ -41,11 +41,12 @@ public class SummonerSpellsRepositoryTest extends BaseSpringTestRunner {
 		SummonerSpell unmarshalledSummonerSpell = spellsResponse.getSummonerSpells().get("SummonerTest");
 
 		// Create
-		summonerSpellsRepository.save(unmarshalledSummonerSpell);
+		assertThat(summonerSpellsRepository.save(unmarshalledSummonerSpell)).isNotNull();
 
 		// Select
 		SummonerSpell summonerSpellFromDb = summonerSpellsRepository.findOne(10001);
 		assertThat(summonerSpellFromDb).isNotNull();
+		assertThat(summonerSpellFromDb.getImage()).isNotNull();
 		assertThat(summonerSpellFromDb).isEqualToIgnoringNullFields(unmarshalledSummonerSpell);
 
 		// Update
