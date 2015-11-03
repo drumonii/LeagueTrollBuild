@@ -12,6 +12,10 @@ public class WebJarsControllerTest extends BaseSpringTestRunner {
 	public void locateWebjar() throws Exception {
 		mockMvc.perform(get("/webjars/{webjar}", "/jquery/jquery.min.js"))
 				.andExpect(status().isOk());
+		mockMvc.perform(get("/webjars/{webjar}", "/semantic/dist/semantic.min.css"))
+				.andExpect(status().isOk());
+		mockMvc.perform(get("/webjars/{webjar}", "/semantic/dist/semantic.min.js"))
+				.andExpect(status().isOk());
 		mockMvc.perform(get("/webjars/{webjar}", "/idontexist"))
 				.andExpect(status().isNotFound());
 	}
