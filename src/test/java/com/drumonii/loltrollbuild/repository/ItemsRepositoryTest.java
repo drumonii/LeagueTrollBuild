@@ -204,29 +204,30 @@ public class ItemsRepositoryTest extends BaseSpringTestRunner {
 				"\"Prospector's Blade\",\"description\":\"<stats>+16 Attack Damage<br>+15% Attack Speed </stats><br>" +
 				"<br><unique>UNIQUE Passive - Prospector:</unique> +150 Health<br><br><i>(Unique Passives with the " +
 				"same name don't stack.)</i>\",\"plaintext\":\"Good starting item for attackers\",\"maps\":{\"1\":" +
-				"false,\"10\":false,\"12\":false},\"image\":{\"full\":\"1062.png\",\"sprite\":\"item0.png\"," +
-				"\"group\":\"item\",\"x\":240,\"y\":96,\"w\":48,\"h\":48},\"gold\":{\"base\":950,\"total\":950," +
-				"\"sell\":380,\"purchasable\":true}}}}";
+				"false,\"8\":true,\"10\":false,\"11\":false,\"12\":false,\"14\":false},\"image\":{\"full\":" +
+				"\"1062.png\",\"sprite\":\"item0.png\",\"group\":\"item\",\"x\":240,\"y\":96,\"w\":48,\"h\":48}," +
+				"\"gold\":{\"base\":950,\"total\":950,\"sell\":380,\"purchasable\":true}}}}";
 		Item prospectorsBlade = objectMapper.readValue(responseBody, ItemsResponse.class).getItems().get("1062");
 		itemsRepository.save(prospectorsBlade);
 
-		responseBody = "{\"type\":\"item\",\"version\":\"5.16.1\",\"data\":{\"2010\":{\"id\":2010,\"name\":\"Total " +
-				"Biscuit of Rejuvenation\",\"group\":\"HealthPotion\",\"description\":\"<consumable>Click to " +
+		responseBody = "{\"type\":\"item\",\"version\":\"5.16.1\",\"data\":{\"2010\":{\"id\":2010,\"name\":" +
+				"\"Total Biscuit of Rejuvenation\",\"group\":\"HealthPotion\",\"description\":\"<consumable>Click to " +
 				"Consume:</consumable> Restores 20 health and 10 mana immediately and then 150 Health over 15 " +
-				"seconds.\",\"consumed\":true,\"image\":{\"full\":\"2010.png\",\"sprite\":\"item0.png\",\"group\":" +
-				"\"item\",\"x\":144,\"y\":144,\"w\":48,\"h\":48},\"gold\":{\"base\":35,\"total\":35,\"sell\":14," +
-				"\"purchasable\":false}}}}";
+				"seconds.\",\"consumed\":true,\"maps\":{\"1\":false,\"8\":true,\"10\":true,\"11\":true,\"12\":true," +
+				"\"14\":false},\"image\":{\"full\":\"2010.png\",\"sprite\":\"item0.png\",\"group\":\"item\",\"x\":" +
+				"144,\"y\":144,\"w\":48,\"h\":48},\"gold\":{\"base\":35,\"total\":35,\"sell\":14,\"purchasable\":" +
+				"false}}}}";
 		Item biscuitOfRejuvenation = objectMapper.readValue(responseBody, ItemsResponse.class).getItems().get("2010");
 		itemsRepository.save(biscuitOfRejuvenation);
 
 		responseBody = "{\"type\":\"item\",\"version\":\"5.16.1\",\"data\":{\"3117\":{\"id\":3117,\"name\":" +
 				"\"Boots of Mobility\",\"description\":\"<unique>UNIQUE Passive - Enhanced Movement:</unique> +25 " +
-				"Movement Speed. Increases to +105 Movement Speed when out of combat for 5 seconds.<br><br><i>" +
-				"(Unique Passives with the same name don't stack.)</i>\",\"plaintext\":\"Greatly enhances Movement " +
+				"Movement Speed. Increases to +105 Movement Speed when out of combat for 5 seconds.<br><br><i>(" +
+				"Unique Passives with the same name don't stack.)</i>\",\"plaintext\":\"Greatly enhances Movement " +
 				"Speed when out of combat\",\"from\":[\"1001\"],\"into\":[\"1326\",\"1328\",\"1325\",\"1327\"," +
-				"\"1329\",\"1340\"],\"image\":{\"full\":\"3117.png\",\"sprite\":\"item1.png\",\"group\":\"item\"," +
-				"\"x\":0,\"y\":96,\"w\":48,\"h\":48},\"gold\":{\"base\":475,\"total\":800,\"sell\":560," +
-				"\"purchasable\":true}}}}";
+				"\"1329\"],\"maps\":{\"1\":false,\"8\":true,\"10\":true,\"11\":true,\"12\":true,\"14\":false}," +
+				"\"image\":{\"full\":\"3117.png\",\"sprite\":\"item1.png\",\"group\":\"item\",\"x\":0,\"y\":96,\"w\":" +
+				"48,\"h\":48},\"gold\":{\"base\":475,\"total\":800,\"sell\":560,\"purchasable\":true}}}}";
 		Item bootsOfMobility = objectMapper.readValue(responseBody, ItemsResponse.class).getItems().get("3117");
 		itemsRepository.save(bootsOfMobility);
 
@@ -237,7 +238,8 @@ public class ItemsRepositoryTest extends BaseSpringTestRunner {
 				"range and sweep radius increase by 50% each and the cooldown is reduced to 75 seconds.<br><br><i>" +
 				"(Trinkets cannot be used in the first 30 seconds of a game. Selling a Trinket will disable Trinket " +
 				"use for 120 seconds).</i>\",\"plaintext\":\"Detects and disables nearby invisible wards and traps\"," +
-				"\"into\":[\"3364\"],\"image\":{\"full\":\"3341.png\",\"sprite\":\"item2.png\",\"group\":\"item\"," +
+				"\"into\":[\"3364\"],\"maps\":{\"1\":false,\"8\":false,\"10\":false,\"11\":true,\"12\":true," +
+				"\"14\":false},\"image\":{\"full\":\"3341.png\",\"sprite\":\"item2.png\",\"group\":\"item\"," +
 				"\"x\":336,\"y\":0,\"w\":48,\"h\":48},\"gold\":{\"base\":0,\"total\":0,\"sell\":0,\"purchasable\":" +
 				"true}}}}";
 		Item sweepingLens = objectMapper.readValue(responseBody, ItemsResponse.class).getItems().get("3341");
@@ -248,19 +250,19 @@ public class ItemsRepositoryTest extends BaseSpringTestRunner {
 				"</stats><br><br><passive>UNIQUE Passive - Glorious Evolution:</passive> Viktor has reached the " +
 				"pinnacle of his power, upgrading Chaos Storm in addition to his basic spells.\",\"plaintext\":" +
 				"\"Allows Viktor to improve an ability of his choice\",\"from\":[\"3197\"],\"requiredChampion\":" +
-				"\"Viktor\",\"image\":{\"full\":\"3198.png\",\"sprite\":\"item1.png\",\"group\":\"item\",\"x\":144," +
-				"\"y\":288,\"w\":48,\"h\":48},\"gold\":{\"base\":1000,\"total\":3000,\"sell\":2100,\"purchasable\":" +
-				"true}}}}";
+				"\"Viktor\",\"maps\":{\"1\":false,\"8\":true,\"10\":true,\"11\":true,\"12\":true,\"14\":false}," +
+				"\"image\":{\"full\":\"3198.png\",\"sprite\":\"item1.png\",\"group\":\"item\",\"x\":144,\"y\":288," +
+				"\"w\":48,\"h\":48},\"gold\":{\"base\":1000,\"total\":3000,\"sell\":2100,\"purchasable\":true}}}}";
 		Item perfectHexCore = objectMapper.readValue(responseBody, ItemsResponse.class).getItems().get("3198");
 		itemsRepository.save(perfectHexCore);
 
 		responseBody = "{\"type\":\"item\",\"version\":\"5.16.1\",\"data\":{\"2041\":{\"id\":2041,\"name\":" +
 				"\"Crystalline Flask\",\"description\":\"<unique>UNIQUE Passive:</unique> Holds 3 charges and " +
-				"refills upon visiting the shop.<br><active>UNIQUE Active:</active> Consumes a charge to restore " +
-				"120 Health and 60 Mana over 12 seconds.\",\"plaintext\":\"Restores Health and Mana over time, " +
-				"refills at shop\",\"maps\":{\"12\":false},\"image\":{\"full\":\"2041.png\",\"sprite\":\"item0.png\"," +
-				"\"group\":\"item\",\"x\":192,\"y\":144,\"w\":48,\"h\":48},\"gold\":{\"base\":345,\"total\":345," +
-				"\"sell\":138,\"purchasable\":true}}}}";
+				"refills upon visiting the shop.<br><active>UNIQUE Active:</active> Consumes a charge to restore 120 " +
+				"Health and 60 Mana over 12 seconds.\",\"plaintext\":\"Restores Health and Mana over time, refills " +
+				"at shop\",\"maps\":{\"1\":false,\"8\":true,\"10\":true,\"11\":true,\"12\":false,\"14\":false}," +
+				"\"image\":{\"full\":\"2041.png\",\"sprite\":\"item0.png\",\"group\":\"item\",\"x\":192,\"y\":144," +
+				"\"w\":48,\"h\":48},\"gold\":{\"base\":345,\"total\":345,\"sell\":138,\"purchasable\":true}}}}";
 		Item crystallineFlask = objectMapper.readValue(responseBody, ItemsResponse.class).getItems().get("2041");
 		itemsRepository.save(crystallineFlask);
 
@@ -268,29 +270,31 @@ public class ItemsRepositoryTest extends BaseSpringTestRunner {
 				"\"Enchantment: Captain\",\"group\":\"BootsCaptain\",\"description\":\"<groupLimit>Limited to 1 of " +
 				"each enchantment type.</groupLimit><br>Enchants boots to have Captain bonus.<br><br><unique>UNIQUE " +
 				"Passive - Captain:</unique> Grants +10% Movement Speed to nearby approaching allied champions.<br>" +
-				"<br><i>(Unique Passives with the same name don't stack.)</i>\",\"image\":{\"full\":\"3242.png\"," +
-				"\"sprite\":\"item3.png\",\"group\":\"item\",\"x\":336,\"y\":0,\"w\":48,\"h\":48},\"gold\":{" +
-				"\"base\":600,\"total\":600,\"sell\":420,\"purchasable\":true}}}}";
+				"<br><i>(Unique Passives with the same name don't stack.)</i>\",\"maps\":{\"1\":false,\"8\":true," +
+				"\"10\":true,\"11\":true,\"12\":true,\"14\":false},\"image\":{\"full\":\"3242.png\",\"sprite\":" +
+				"\"item3.png\",\"group\":\"item\",\"x\":336,\"y\":0,\"w\":48,\"h\":48},\"gold\":{\"base\":600," +
+				"\"total\":600,\"sell\":420,\"purchasable\":true}}}}";
 		Item captainEnchantment = objectMapper.readValue(responseBody, ItemsResponse.class).getItems().get("3242");
 		itemsRepository.save(captainEnchantment);
 
 		responseBody = "{\"type\":\"item\",\"version\":\"5.16.1\",\"data\":{\"1056\":{\"id\":1056,\"name\":" +
 				"\"Doran's Ring\",\"description\":\"<stats>+60 Health<br>+15 Ability Power</stats><br><br><passive>" +
 				"Passive:</passive> <mana>+3 Mana Regen per 5 seconds.<br><passive>Passive:</passive> Restores 4 " +
-				"Mana upon killing a unit.</mana>\",\"plaintext\":\"Good starting item for casters\",\"image\":" +
-				"{\"full\":\"1056.png\",\"sprite\":\"item0.png\",\"group\":\"item\",\"x\":96,\"y\":96,\"w\":48," +
-				"\"h\":48},\"gold\":{\"base\":400,\"total\":400,\"sell\":160,\"purchasable\":true}}}}";
+				"Mana upon killing a unit.</mana>\",\"plaintext\":\"Good starting item for casters\",\"maps\":{\"1\":" +
+				"false,\"8\":false,\"10\":true,\"11\":true,\"12\":true,\"14\":false},\"image\":{\"full\":" +
+				"\"1056.png\",\"sprite\":\"item0.png\",\"group\":\"item\",\"x\":96,\"y\":96,\"w\":48,\"h\":48}," +
+				"\"gold\":{\"base\":400,\"total\":400,\"sell\":160,\"purchasable\":true}}}}";
 		Item doransRing = objectMapper.readValue(responseBody, ItemsResponse.class).getItems().get("1056");
 		itemsRepository.save(doransRing);
 
-		responseBody = "{\"type\":\"item\",\"version\":\"5.16.1\",\"data\":{\"3041\":{\"id\":3041,\"name\":" +
-				"\"Mejai's Soulstealer\",\"description\":\"<stats>+20 Ability Power  </stats><br><br><unique>UNIQUE " +
-				"Passive:</unique> Grants +8 Ability Power per stack and 5 stacks upon first purchase. Grants 2 " +
-				"stacks for a kill or 1 stack for an assist (max 20 stacks). Half of the stacks are lost upon death. " +
-				"At 20 stacks, grants +15% Cooldown Reduction.\",\"plaintext\":\"Grants Ability Power for kills and " +
-				"assists\",\"from\":[\"1052\"],\"maps\":{\"10\":false,\"12\":false},\"image\":{\"full\":\"3041.png\"," +
-				"\"sprite\":\"item0.png\",\"group\":\"item\",\"x\":432,\"y\":288,\"w\":48,\"h\":48},\"gold\":" +
-				"{\"base\":965,\"total\":1400,\"sell\":980,\"purchasable\":true}}}}";
+		responseBody = "{\"type\":\"item\",\"version\":\"5.16.1\",\"data\":{\"3041\":{\"id\":3041,\"name\":\"Mejai's " +
+				"Soulstealer\",\"description\":\"<stats>+20 Ability Power  </stats><br><br><unique>UNIQUE Passive:" +
+				"</unique> Grants +8 Ability Power per stack and 5 stacks upon first purchase. Grants 2 stacks for a " +
+				"kill or 1 stack for an assist (max 20 stacks). Half of the stacks are lost upon death. At 20 stacks," +
+				" grants +15% Cooldown Reduction.\",\"plaintext\":\"Grants Ability Power for kills and assists\"," +
+				"\"from\":[\"1052\"],\"maps\":{\"1\":false,\"8\":false,\"10\":false,\"11\":true,\"12\":false,\"14\":" +
+				"false},\"image\":{\"full\":\"3041.png\",\"sprite\":\"item0.png\",\"group\":\"item\",\"x\":432,\"y\":" +
+				"288,\"w\":48,\"h\":48},\"gold\":{\"base\":965,\"total\":1400,\"sell\":980,\"purchasable\":true}}}}";
 		Item mejaisSoulstealer = objectMapper.readValue(responseBody, ItemsResponse.class).getItems().get("3041");
 		itemsRepository.save(mejaisSoulstealer);
 
@@ -300,16 +304,17 @@ public class ItemsRepositoryTest extends BaseSpringTestRunner {
 				"overheal you. Excess life is stored as a shield that can block 50-350 damage, based on champion " +
 				"level.<br><br>This shield decays slowly if you haven't dealt or taken damage in the last 25 seconds." +
 				"\",\"plaintext\":\"Grants Attack Damage, Life Steal and Life Steal now overheals\",\"from\":" +
-				"[\"1053\",\"1038\"],\"image\":{\"full\":\"3072.png\",\"sprite\":\"item0.png\",\"group\":\"item\"," +
-				"\"x\":288,\"y\":384,\"w\":48,\"h\":48},\"gold\":{\"base\":1150,\"total\":3500,\"sell\":2450," +
-				"\"purchasable\":true}}}}";
+				"[\"1053\",\"1038\"],\"maps\":{\"1\":false,\"8\":false,\"10\":false,\"11\":true,\"12\":true,\"14\":" +
+				"false},\"image\":{\"full\":\"3072.png\",\"sprite\":\"item0.png\",\"group\":\"item\",\"x\":288," +
+				"\"y\":384,\"w\":48,\"h\":48},\"gold\":{\"base\":1150,\"total\":3500,\"sell\":2450,\"purchasable\":" +
+				"true}}}}";
 		Item bloodThirster = objectMapper.readValue(responseBody, ItemsResponse.class).getItems().get("3072");
 		itemsRepository.save(bloodThirster);
 
 		List<Item> forTrollBuild = itemsRepository.forTrollBuild();
 		assertThat(forTrollBuild).isNotEmpty();
 		assertThat(forTrollBuild).extracting(Item::getMaps)
-				.extracting("1").containsNull();
+				.extracting("11").contains(true);
 		assertThat(forTrollBuild).extracting(Item::getGold).extracting("purchasable", Boolean.class)
 				.containsOnly(true);
 		assertThat(forTrollBuild).extracting(Item::getConsumed)

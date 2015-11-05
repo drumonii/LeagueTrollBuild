@@ -48,13 +48,13 @@ public interface ItemsRepository extends PagingAndSortingRepository<Item, Intege
 	/**
 	 * Gets a {@link List} of {@link Item}s eligible for the troll build. That is, all purchasable (excluding items like
 	 * Muramana or Seraph's Embrace - they are non purchasable), non-consumable, and fully upgraded items found only on
-	 * Summoner's Rift. Excludes boots, Trinkets, items not requiring a particular champion, Crystalline Flask, jungle
-	 * related items, Doran's items, and stackable items upon champion kills/assists.
+	 * (New) Summoner's Rift. Excludes boots, Trinkets, items not requiring a particular champion, Crystalline Flask,
+	 * jungle related items, Doran's items, and stackable items upon champion kills/assists.
 	 *
 	 * @return a {@link List} of {@link Item}s eligible for the troll build
 	 */
-	@Query("select i from Item i left join i.into i_into left outer join i.maps m " +
-		   "where (m is null or not exists (select m2 from i.maps m2 where key(m2) = '1')) " +
+	@Query("select i from Item i left join i.into i_into left join i.maps m " +
+		   "where not exists (select m2 from i.maps m2 where key(m2) = '11' and m2 = false) " +
 		   "and i.gold.purchasable = true and i.consumed is null and i_into is null " +
 		   "and i.id <> 1001 and i.description not like '%Enchants boots%' " +
 		   "and i.name not like '%Trinket%' " +
