@@ -4,19 +4,25 @@
 <body>
 <script th:fragment="script">
 /*<![CDATA[*/
-$(function () {
+$(function() {
     getTrollBuild();
     function getTrollBuild() {
         $.ajax({
             url: [[@{/champions/{id}/troll-build(id=${champion.id})}]],
-            success: function (data) {
-                $.each(data, function (id, list) {
+            beforeSend: function() {
+                $('#new-build').addClass('loading');
+            },
+            success: function(data) {
+                $.each(data, function(id, list) {
                     var html = [];
-                    $.each(list, function (id, element) {
+                    $.each(list, function(id, element) {
                         html.push('<p>' + element.name + '</p><img src="/resources/' + element.image.full + '" />');
                     });
                     $('#' + id).html(html);
                 });
+            },
+            complete: function() {
+                $('#new-build').removeClass('loading');
             }
         });
     }
