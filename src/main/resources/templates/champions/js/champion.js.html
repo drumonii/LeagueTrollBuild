@@ -16,7 +16,10 @@ $(function() {
                 $.each(data, function(id, list) {
                     var html = [];
                     $.each(list, function(id, element) {
-                        html.push('<p>' + element.name + '</p><img src="/resources/' + element.image.full + '" />');
+                        html.push(
+                        '<div class="item">' +
+                            '<img class="ui rounded image" src="/resources/' + element.image.full + '" />' +
+                        '</div>');
                     });
                     $('#' + id).html(html);
                 });

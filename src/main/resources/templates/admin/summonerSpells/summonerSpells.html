@@ -24,7 +24,7 @@
         </thead>
         <tbody>
         <tr th:each="spell : ${difference}">
-            <td><img style="height:60px;width:auto;"
+            <td><img class="ui rounded image" style="height:60px;width:auto;"
                      th:src="@{http://ddragon.leagueoflegends.com/cdn/{patch}/img/spell/{image}
                      (patch=${latestSavedPatch}, image=${spell.image.full})}" />
             </td>

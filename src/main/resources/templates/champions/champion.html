@@ -8,7 +8,7 @@
 <body>
 <div layout:fragment="content">
     <h3 th:text="${champion.name}">Thresh</h3>
-    <img th:src="@{/resources/{image}(image=${champion.image.full})}" />
+    <img class="ui rounded image" th:src="@{/resources/{image}(image=${champion.image.full})}" />
     <p th:text="${champion.title}">The Chain Warden</p>
     <ul th:each="tag : ${champion.tags}">
         <li th:text="${tag}">Support</li>
@@ -17,13 +17,13 @@
 
     <button id="new-build" class="ui button" th:text="#{champion.newBuild}">New Build</button>
     <h3 th:text="#{champion.items}">Items</h3>
-    <div id="items"></div>
+    <div id="items" class="ui horizontal list"></div>
 
     <h3 th:text="#{champion.summonerSpells}">Summoner Spells</h3>
-    <div id="summoner-spells"></div>
+    <div id="summoner-spells" class="ui horizontal list"></div>
 
     <h3 th:text="#{champion.trinket}">Trinket</h3>
-    <div id="trinket"></div>
+    <div id="trinket" class="ui horizontal list"></div>
 
     <script th:inline="javascript" th:include="champions/js/champion.js :: script"></script>
 </div>
