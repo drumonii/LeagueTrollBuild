@@ -15,6 +15,7 @@ import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 
+import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
@@ -73,35 +74,39 @@ public class AdminControllerTest extends BaseSpringTestRunner {
 		Version latestVersion = new Version(newVersions[0]);
 		versionsRepository.save(latestVersion);
 
-		mockMvc.perform(get("/admin").with(csrf()).session(mockHttpSession("admin")))
+		mockMvc.perform(get("/admin").session(mockHttpSession("admin")))
 				.andExpect(status().isOk())
 				.andExpect(model().attributeExists("latestRiotPatch", "latestSavedPatch"))
+				.andExpect(model().attribute("activeTab", is("home")))
 				.andExpect(view().name("admin/admin"));
 	}
 
 	@Test
 	public void summonerSpells() throws Exception {
-		versionsRepository.save(new Version("new version"));
-
 		String responseBody = "{\"type\":\"summoner\",\"version\":\"5.16.1\",\"data\":{\"SummonerMana\":{\"name\":" +
 				"\"Clarity\",\"description\":\"Restores 40% of your champion's maximum Mana. Also restores allies " +
 				"for 40% of their maximum Mana\",\"image\":{\"full\":\"SummonerMana.png\",\"sprite\":\"spell0.png\"," +
 				"\"group\":\"spell\",\"x\":384,\"y\":0,\"w\":48,\"h\":48},\"cooldown\":[180],\"summonerLevel\":1," +
 				"\"id\":13,\"key\":\"SummonerMana\",\"modes\":[\"CLASSIC\",\"ODIN\",\"TUTORIAL\",\"ARAM\"," +
 				"\"ASCENSION\"]}}}";
+
+		mockMvc.perform(get("/admin/summoner-spells").session(mockHttpSession("admin")))
+				.andExpect(status().is3xxRedirection())
+				.andExpect(redirectedUrl("/admin"));
+
 		mockServer.expect(requestTo(summonerSpellsUri.toString())).andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(responseBody, MediaType.APPLICATION_JSON));
+		versionsRepository.save(new Version("new version"));
 
-		mockMvc.perform(get("/admin/summoner-spells").with(csrf()).session(mockHttpSession("admin")))
+		mockMvc.perform(get("/admin/summoner-spells").session(mockHttpSession("admin")))
 				.andExpect(status().isOk())
 				.andExpect(model().attributeExists("latestSavedPatch", "difference"))
+				.andExpect(model().attribute("activeTab", is("summonerSpells")))
 				.andExpect(view().name("admin/summonerSpells/summonerSpells"));
 	}
 
 	@Test
 	public void items() throws Exception {
-		versionsRepository.save(new Version("new version"));
-
 		String responseBody = "{\"type\":\"item\",\"version\":\"5.16.1\",\"data\":{\"3751\":{\"id\":3751,\"name\":" +
 				"\"Bami's Cinder\",\"description\":\"<stats>+300 Health  </stats><br><br><unique>UNIQUE Passive - " +
 				"Immolate:</unique> Deals 5 (+1 per champion level) magic damage per second to nearby enemies. Deals " +
@@ -110,18 +115,24 @@ public class AdminControllerTest extends BaseSpringTestRunner {
 				"\"8\":true,\"10\":true,\"11\":true,\"12\":true,\"14\":false},\"image\":{\"full\":\"3751.png\"," +
 				"\"sprite\":\"item2.png\",\"group\":\"item\",\"x\":336,\"y\":288,\"w\":48,\"h\":48},\"gold\":" +
 				"{\"base\":600,\"total\":1000,\"sell\":700,\"purchasable\":true}}}}";
+
+		mockMvc.perform(get("/admin/items").session(mockHttpSession("admin")))
+				.andExpect(status().is3xxRedirection())
+				.andExpect(redirectedUrl("/admin"));
+
 		mockServer.expect(requestTo(itemsUri.toString())).andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(responseBody, MediaType.APPLICATION_JSON));
-		mockMvc.perform(get("/admin/items").with(csrf()).session(mockHttpSession("admin")))
+		versionsRepository.save(new Version("new version"));
+
+		mockMvc.perform(get("/admin/items").session(mockHttpSession("admin")))
 				.andExpect(status().isOk())
 				.andExpect(model().attributeExists("latestSavedPatch", "difference"))
+				.andExpect(model().attribute("activeTab", is("items")))
 				.andExpect(view().name("admin/items/items"));
 	}
 
 	@Test
 	public void champions() throws Exception {
-		versionsRepository.save(new Version("new version"));
-
 		String responseBody = "{\"type\":\"champion\",\"version\":\"5.16.1\",\"data\":{\"Nunu\":{\"id\":20,\"key\":" +
 				"\"Nunu\",\"name\":\"Nunu\",\"title\":\"the Yeti Rider\",\"image\":{\"full\":\"Nunu.png\"," +
 				"\"sprite\":\"champion2.png\",\"group\":\"champion\",\"x\":432,\"y\":0,\"w\":48,\"h\":48},\"tags\":" +
@@ -130,8 +141,17 @@ public class AdminControllerTest extends BaseSpringTestRunner {
 				.andRespond(withSuccess(responseBody, MediaType.APPLICATION_JSON));
 
 		mockMvc.perform(get("/admin/champions").with(csrf()).session(mockHttpSession("admin")))
+				.andExpect(status().is3xxRedirection())
+				.andExpect(redirectedUrl("/admin"));
+
+		mockServer.expect(requestTo(championsUri.toString())).andExpect(method(HttpMethod.GET))
+				.andRespond(withSuccess(responseBody, MediaType.APPLICATION_JSON));
+		versionsRepository.save(new Version("new version"));
+
+		mockMvc.perform(get("/admin/champions").session(mockHttpSession("admin")))
 				.andExpect(status().isOk())
 				.andExpect(model().attributeExists("latestSavedPatch", "difference"))
+				.andExpect(model().attribute("activeTab", is("champions")))
 				.andExpect(view().name("admin/champions/champions"));
 	}
 

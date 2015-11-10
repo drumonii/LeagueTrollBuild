@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+/**
+ * Controller for the administration area only used and authorized by the admin user.
+ */
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
@@ -34,6 +37,7 @@ public class AdminController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String admin(Model model) {
 		model.addAttribute("latestRiotPatch", versionsRetrieval.latestPatch(versionsRetrieval.versionsFromResponse()));
+		model.addAttribute("activeTab", "home");
 		return "admin/admin";
 	}
 
@@ -44,9 +48,13 @@ public class AdminController {
 	private SummonerSpellsRetrieval summonerSpellsRetrieval;
 
 	@RequestMapping(value = "/summoner-spells", method = RequestMethod.GET)
-	public String summonerSpells(Model model) {
+	public String summonerSpells(@ModelAttribute("latestSavedPatch") String latestSavedPatch, Model model) {
+		if (latestSavedPatch == null) {
+			return "redirect:/admin";
+		}
 		model.addAttribute("difference", CollectionUtils.subtract(summonerSpellsRetrieval.summonerSpells(),
 				summonerSpellsRepository.findAll()));
+		model.addAttribute("activeTab", "summonerSpells");
 		return "admin/summonerSpells/summonerSpells";
 	}
 
@@ -57,8 +65,12 @@ public class AdminController {
 	private ItemsRetrieval itemsRetrieval;
 
 	@RequestMapping(value = "/items", method = RequestMethod.GET)
-	public String items(Model model) {
+	public String items(@ModelAttribute("latestSavedPatch") String latestSavedPatch, Model model) {
+		if (latestSavedPatch == null) {
+			return "redirect:/admin";
+		}
 		model.addAttribute("difference", CollectionUtils.subtract(itemsRetrieval.items(), itemsRepository.findAll()));
+		model.addAttribute("activeTab", "items");
 		return "admin/items/items";
 	}
 
@@ -69,9 +81,13 @@ public class AdminController {
 	private ChampionsRetrieval championsRetrieval;
 
 	@RequestMapping(value = "/champions", method = RequestMethod.GET)
-	public String champions(Model model) {
+	public String champions(@ModelAttribute("latestSavedPatch") String latestSavedPatch, Model model) {
+		if (latestSavedPatch == null) {
+			return "redirect:/admin";
+		}
 		model.addAttribute("difference", CollectionUtils.subtract(championsRetrieval.champions(),
 				championsRepository.findAll()));
+		model.addAttribute("activeTab", "champions");
 		return "admin/champions/champions";
 	}
 
