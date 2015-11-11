@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  * Controller for the administration area only used and authorized by the admin user.
@@ -48,8 +49,10 @@ public class AdminController {
 	private SummonerSpellsRetrieval summonerSpellsRetrieval;
 
 	@RequestMapping(value = "/summoner-spells", method = RequestMethod.GET)
-	public String summonerSpells(@ModelAttribute("latestSavedPatch") String latestSavedPatch, Model model) {
+	public String summonerSpells(@ModelAttribute("latestSavedPatch") String latestSavedPatch,
+			RedirectAttributes redirectAttrs, Model model) {
 		if (latestSavedPatch == null) {
+			redirectAttrs.addFlashAttribute("noSavedPatch", "Summoner Spells");
 			return "redirect:/admin";
 		}
 		model.addAttribute("difference", CollectionUtils.subtract(summonerSpellsRetrieval.summonerSpells(),
@@ -65,8 +68,10 @@ public class AdminController {
 	private ItemsRetrieval itemsRetrieval;
 
 	@RequestMapping(value = "/items", method = RequestMethod.GET)
-	public String items(@ModelAttribute("latestSavedPatch") String latestSavedPatch, Model model) {
+	public String items(@ModelAttribute("latestSavedPatch") String latestSavedPatch,
+			RedirectAttributes redirectAttrs, Model model) {
 		if (latestSavedPatch == null) {
+			redirectAttrs.addFlashAttribute("noSavedPatch", "Items");
 			return "redirect:/admin";
 		}
 		model.addAttribute("difference", CollectionUtils.subtract(itemsRetrieval.items(), itemsRepository.findAll()));
@@ -81,8 +86,10 @@ public class AdminController {
 	private ChampionsRetrieval championsRetrieval;
 
 	@RequestMapping(value = "/champions", method = RequestMethod.GET)
-	public String champions(@ModelAttribute("latestSavedPatch") String latestSavedPatch, Model model) {
+	public String champions(@ModelAttribute("latestSavedPatch") String latestSavedPatch,
+			RedirectAttributes redirectAttrs, Model model) {
 		if (latestSavedPatch == null) {
+			redirectAttrs.addFlashAttribute("noSavedPatch", "Champions");
 			return "redirect:/admin";
 		}
 		model.addAttribute("difference", CollectionUtils.subtract(championsRetrieval.champions(),

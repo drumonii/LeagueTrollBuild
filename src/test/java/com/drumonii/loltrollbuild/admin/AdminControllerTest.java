@@ -92,6 +92,7 @@ public class AdminControllerTest extends BaseSpringTestRunner {
 
 		mockMvc.perform(get("/admin/summoner-spells").session(mockHttpSession("admin")))
 				.andExpect(status().is3xxRedirection())
+				.andExpect(flash().attribute("noSavedPatch", is("Summoner Spells")))
 				.andExpect(redirectedUrl("/admin"));
 
 		mockServer.expect(requestTo(summonerSpellsUri.toString())).andExpect(method(HttpMethod.GET))
@@ -118,6 +119,7 @@ public class AdminControllerTest extends BaseSpringTestRunner {
 
 		mockMvc.perform(get("/admin/items").session(mockHttpSession("admin")))
 				.andExpect(status().is3xxRedirection())
+				.andExpect(flash().attribute("noSavedPatch", is("Items")))
 				.andExpect(redirectedUrl("/admin"));
 
 		mockServer.expect(requestTo(itemsUri.toString())).andExpect(method(HttpMethod.GET))
@@ -142,6 +144,7 @@ public class AdminControllerTest extends BaseSpringTestRunner {
 
 		mockMvc.perform(get("/admin/champions").with(csrf()).session(mockHttpSession("admin")))
 				.andExpect(status().is3xxRedirection())
+				.andExpect(flash().attribute("noSavedPatch", is("Champions")))
 				.andExpect(redirectedUrl("/admin"));
 
 		mockServer.expect(requestTo(championsUri.toString())).andExpect(method(HttpMethod.GET))
