@@ -17,6 +17,9 @@ $(function() {
         $.ajax({
             type: 'POST',
             url: [[@{/riot/items}]],
+            beforeSend: function() {
+                $('#save-items-btn').addClass('loading');
+            },
             data: { truncate: $('#truncate').is(':checked'), _csrf: [[${_csrf.token}]] },
             success: function(data) {
                 location.reload();
@@ -57,7 +60,7 @@ $(function() {
             { data: '_links.self.href',
                 render: function(data, type, full, meta) {
                     var id = data.substring(data.lastIndexOf('/') + 1, data.length);
-                    return '<button id="' + id + '">' + [[#{admin.item.overwrite}]] + '</button>';
+                    return '<button id="' + id + '" class="ui button">' + [[#{admin.item.overwrite}]] + '</button>';
                 }
             }
         ],
@@ -74,9 +77,13 @@ $(function() {
         searching: false,
     });
     $('#items tbody').on('click', 'button', function() {
+        var overwriteBtn = $(this);
         $.ajax({
             type: 'POST',
             url: [[@{/riot/items}]] + '/' + $(this).attr('id'),
+            beforeSend: function() {
+                overwriteBtn.addClass('loading');
+            },
             data: { _csrf: [[${_csrf.token}]] },
             success: function(data) {
                 location.reload();

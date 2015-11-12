@@ -8,20 +8,21 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <h1 th:text="#{admin.champions}">Champions</h1>
-
-    <div th:unless="${#lists.isEmpty(difference)}">
-        <h3 th:text="#{admin.champions.diff}">Difference in Champions Found</h3>
-        <p th:text="#{admin.champions.diff.msg}">Differ Msg</p>
+    <div class="ui info message" th:unless="${#lists.isEmpty(difference)}">
+        <i class="close icon"></i>
+        <div class="header" th:text="#{admin.champions.diff}">Difference in Champions found</div>
+        <p th:text="#{admin.champions.diff.msg}">Differ msg</p>
     </div>
-    <table id="champions-difference" th:unless="${#lists.isEmpty(difference)}">
+
+    <h3 class="ui dividing header" th:text="#{admin.champions}">Champions</h3>
+    <table id="champions-difference" class="ui celled table" th:unless="${#lists.isEmpty(difference)}">
         <thead>
         <tr>
-            <th></th>
-            <th th:text="#{admin.champion.name}">Name</th>
-            <th th:text="#{admin.champion.title}">Title</th>
-            <th th:text="#{admin.champion.tags}">Tags</th>
-            <th th:text="#{admin.champion.partype}">Partype</th>
+            <th class="one wide"></th>
+            <th class="three wide" th:text="#{admin.champion.name}">Name</th>
+            <th class="four wide" th:text="#{admin.champion.title}">Title</th>
+            <th class="four wide" th:text="#{admin.champion.tags}">Tags</th>
+            <th class="four wide" th:text="#{admin.champion.partype}">Partype</th>
         </tr>
         </thead>
         <tbody>
@@ -38,28 +39,31 @@
             <td th:text="${champion.partype}"></td>
         </tr>
         </tbody>
-        <tfoot>
+        <tfoot class="full-width">
         <tr>
             <th colspan="5">
-                <form id="save-champions-form">
-                    <input type="checkbox" id="truncate" name="truncate" />
-                    <label for="truncate" th:text="#{admin.champions.trunc}">Truncate</label>
-                    <button type="submit" th:text="#{admin.champions.save}">Save Champions</button>
+                <form id="save-champions-form" class="ui form">
+                    <div class="ui checkbox">
+                        <input id="truncate" type="checkbox" name="truncate" />
+                        <label for="truncate" th:text="#{admin.champions.trunc}">Truncate</label>
+                    </div>
+                    <button id="save-champions-btn" type="submit" class="ui primary button"
+                            th:text="#{admin.champions.save}">Save Champions</button>
                 </form>
             </th>
         </tr>
         </tfoot>
     </table>
 
-    <table id="champions">
+    <table id="champions" class="ui celled table">
         <thead>
         <tr>
-            <th></th>
-            <th th:text="#{admin.champion.name}">Name</th>
-            <th th:text="#{admin.champion.title}">Title</th>
-            <th th:text="#{admin.champion.tags}">Tags</th>
-            <th th:text="#{admin.champion.partype}">Partype</th>
-            <th></th>
+            <th class="one wide"></th>
+            <th class="two wide" th:text="#{admin.champion.name}">Name</th>
+            <th class="four wide" th:text="#{admin.champion.title}">Title</th>
+            <th class="four wide" th:text="#{admin.champion.tags}">Tags</th>
+            <th class="four wide" th:text="#{admin.champion.partype}">Partype</th>
+            <th class="one wide"></th>
         </tr>
         </thead>
     </table>

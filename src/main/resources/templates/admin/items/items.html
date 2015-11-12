@@ -8,19 +8,20 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <h1 th:text="#{admin.items}">Items</h1>
-
-    <div th:unless="${#lists.isEmpty(difference)}">
-        <h3 th:text="#{admin.items.diff}">Difference in Items Found</h3>
-        <p th:text="#{admin.items.diff.msg}">Differ Msg</p>
+    <div class="ui info message" th:unless="${#lists.isEmpty(difference)}">
+        <i class="close icon"></i>
+        <div class="header" th:text="#{admin.items.diff}">Difference in Items found</div>
+        <p th:text="#{admin.items.diff.msg}">Differ msg</p>
     </div>
-    <table id="items-difference" th:unless="${#lists.isEmpty(difference)}">
+
+    <h3 class="ui dividing header" th:text="#{admin.items}">Items</h3>
+    <table id="items-difference" class="ui celled table" th:unless="${#lists.isEmpty(difference)}">
         <thead>
         <tr>
-            <th></th>
-            <th th:text="#{admin.item.name}">Name</th>
-            <th th:text="#{admin.item.group}">Group</th>
-            <th th:text="#{admin.item.requiredChampion}">Champion</th>
+            <th class="one wide"></th>
+            <th class="six wide" th:text="#{admin.item.name}">Name</th>
+            <th class="six wide" th:text="#{admin.item.group}">Group</th>
+            <th class="two wide" th:text="#{admin.item.requiredChampion}">Champion</th>
         </tr>
         </thead>
         <tbody>
@@ -34,27 +35,30 @@
             <td th:text="${item.requiredChampion}"></td>
         </tr>
         </tbody>
-        <tfoot>
+        <tfoot class="full-width">
         <tr>
-            <th colspan="5">
-                <form id="save-items-form">
-                    <input type="checkbox" id="truncate" name="truncate" />
-                    <label for="truncate" th:text="#{admin.items.trunc}">Truncate</label>
-                    <button type="submit" th:text="#{admin.items.save}">Save Items</button>
+            <th colspan="4">
+                <form id="save-items-form" class="ui form">
+                    <div class="ui checkbox">
+                        <input id="truncate" type="checkbox" name="truncate" />
+                        <label for="truncate" th:text="#{admin.items.trunc}">Truncate</label>
+                    </div>
+                    <button id="save-items-btn" type="submit" class="ui primary button"
+                            th:text="#{admin.items.save}">Save Items</button>
                 </form>
             </th>
         </tr>
         </tfoot>
     </table>
 
-    <table id="items">
+    <table id="items" class="ui celled table">
         <thead>
         <tr>
-            <th></th>
-            <th th:text="#{admin.item.name}">Name</th>
-            <th th:text="#{admin.item.group}">Group</th>
-            <th th:text="#{admin.item.requiredChampion}">Champion</th>
-            <th></th>
+            <th class="one wide"></th>
+            <th class="six wide" th:text="#{admin.item.name}">Name</th>
+            <th class="six wide" th:text="#{admin.item.group}">Group</th>
+            <th class="two wide" th:text="#{admin.item.requiredChampion}">Champion</th>
+            <th class="one wide"></th>
         </tr>
         </thead>
     </table>

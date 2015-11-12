@@ -57,9 +57,6 @@
                     data: { _csrf: [[${_csrf.token}]] },
                     success: function(data) {
                         location.reload();
-                    },
-                    complete: function() {
-                        $('#save-patch-btn').removeClass('loading');
                     }
                 });
                 event.preventDefault();

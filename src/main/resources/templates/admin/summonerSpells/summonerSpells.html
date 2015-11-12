@@ -8,18 +8,19 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <h1 th:text="#{admin.summonerSpells}">Summoner Spells</h1>
-
-    <div th:unless="${#lists.isEmpty(difference)}">
-        <h3 th:text="#{admin.summonerSpells.diff}">Difference in Summoner Spells Found</h3>
-        <p th:text="#{admin.summonerSpells.diff.msg}">Differ Msg</p>
+    <div class="ui info message" th:unless="${#lists.isEmpty(difference)}">
+        <i class="close icon"></i>
+        <div class="header" th:text="#{admin.summonerSpells.diff}">Difference in Summoner Spells found</div>
+        <p th:text="#{admin.summonerSpells.diff.msg}">Differ msg</p>
     </div>
-    <table id="summoner-spells-difference" th:unless="${#lists.isEmpty(difference)}">
+
+    <h3 class="ui dividing header" th:text="#{admin.summonerSpells}">Summoner Spells</h3>
+    <table id="summoner-spells-difference" class="ui celled table" th:unless="${#lists.isEmpty(difference)}">
         <thead>
         <tr>
-            <th></th>
-            <th th:text="#{admin.summonerSpell.name}">Name</th>
-            <th th:text="#{admin.summonerSpell.modes}">Modes</th>
+            <th class="one wide"></th>
+            <th class="three wide" th:text="#{admin.summonerSpell.name}">Name</th>
+            <th class="twelve wide" th:text="#{admin.summonerSpell.modes}">Modes</th>
         </tr>
         </thead>
         <tbody>
@@ -34,26 +35,29 @@
             </td>
         </tr>
         </tbody>
-        <tfoot>
+        <tfoot class="full-width">
         <tr>
             <th colspan="3">
-                <form id="save-summoner-spells-form">
-                    <input type="checkbox" id="truncate" name="truncate" />
-                    <label for="truncate" th:text="#{admin.summonerSpells.trunc}">Truncate</label>
-                    <button type="submit" th:text="#{admin.summonerSpells.save}">Save Summoner Spells</button>
+                <form id="save-summoner-spells-form" class="ui form">
+                    <div class="ui checkbox">
+                        <input id="truncate" type="checkbox" name="truncate" />
+                        <label for="truncate" th:text="#{admin.summonerSpells.trunc}">Truncate</label>
+                    </div>
+                    <button id="save-summoner-spells-btn" class="ui primary button" type="submit"
+                            th:text="#{admin.summonerSpells.save}">Save Summoner Spells</button>
                 </form>
             </th>
         </tr>
         </tfoot>
     </table>
 
-    <table id="summoner-spells">
+    <table id="summoner-spells" class="ui celled table">
         <thead>
         <tr>
-            <th></th>
-            <th th:text="#{admin.summonerSpell.name}">Name</th>
-            <th th:text="#{admin.summonerSpell.modes}">Modes</th>
-            <th></th>
+            <th class="one wide"></th>
+            <th class="three wide" th:text="#{admin.summonerSpell.name}">Name</th>
+            <th class="twelve wide" th:text="#{admin.summonerSpell.modes}">Modes</th>
+            <th class="one wide"></th>
         </tr>
         </thead>
     </table>
