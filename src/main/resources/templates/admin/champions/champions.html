@@ -8,7 +8,7 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <div class="ui info message" th:unless="${#lists.isEmpty(difference)}">
+    <div id="difference-msg" class="ui info message" th:unless="${#lists.isEmpty(difference)}">
         <i class="close icon"></i>
         <div class="header" th:text="#{admin.champions.diff}">Difference in Champions found</div>
         <p th:text="#{admin.champions.diff.msg}">Differ msg</p>
