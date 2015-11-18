@@ -5,14 +5,21 @@
 <script th:fragment="script">
 /*<![CDATA[*/
 $(function() {
+    var newBuildBtn = $('#new-build');
+    newBuildBtn.popup({
+        on: 'manual'
+    });
+
     getTrollBuild();
+
     function getTrollBuild() {
         $.ajax({
             url: [[@{/champions/{id}/troll-build(id=${champion.id})}]],
             beforeSend: function() {
-                $('#new-build').addClass('loading');
+                newBuildBtn.addClass('loading');
             },
             success: function(data) {
+                newBuildBtn.popup('hide');
                 $.each(data, function(id, list) {
                     var html = [];
                     $.each(list, function(id, element) {
@@ -23,17 +30,16 @@ $(function() {
                     });
                     $('#' + id).html(html);
                 });
-                $('#new-build').popup('hide');
             },
             error: function() {
-                $('#new-build').popup('show');
+                newBuildBtn.popup('show');
             },
             complete: function() {
-                $('#new-build').removeClass('loading');
+                newBuildBtn.removeClass('loading');
             }
         });
     }
-    $('#new-build').click(function() {
+    newBuildBtn.click(function() {
         getTrollBuild();
     });
 });
