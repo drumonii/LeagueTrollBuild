@@ -30,7 +30,8 @@
                 <input type="password" id="password" name="password"/>
             </div>
         </div>
-        <button class="ui primary button" type="submit"><i class="sign in icon"></i>
+        <button id="login-btn" class="ui primary button" type="submit">
+            <i class="sign in icon"></i>
             <span th:text="#{login}">Login</span>
         </button>
     </form>
@@ -39,6 +40,9 @@
         $(function() {
             $('.message .close').click(function() {
                 $(this).closest('.message').transition('fade');
+            });
+            $('#login-btn').click(function() {
+                $(this).addClass('loading');
             });
         });
         /*]]>*/
