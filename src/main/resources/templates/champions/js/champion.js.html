@@ -23,6 +23,10 @@ $(function() {
                     });
                     $('#' + id).html(html);
                 });
+                $('#new-build').popup('hide');
+            },
+            error: function() {
+                $('#new-build').popup('show');
             },
             complete: function() {
                 $('#new-build').removeClass('loading');
