@@ -87,16 +87,15 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 
 		// Only first request is handled. See: http://stackoverflow.com/q/30713734
 		mockServer = MockRestServiceServer.createServer(restTemplate);
-		championsResponseBody = "{\"type\":\"champion\",\"version\":\"5.16.1\",\"data\":{\"Thresh\":{\"id\":412,\"" +
-				"key\":\"Thresh\",\"name\":\"Thresh\",\"title\":\"The Chain Warden\",\"image\":{\"full\":" +
+		championsResponseBody = "{\"type\":\"champion\",\"version\":\"5.22.3\",\"data\":{\"Thresh\":{\"id\":412," +
+				"\"key\":\"Thresh\",\"name\":\"Thresh\",\"title\":\"The Chain Warden\",\"image\":{\"full\":" +
 				"\"Thresh.png\",\"sprite\":\"champion3.png\",\"group\":\"champion\",\"x\":336,\"y\":0,\"w\":48," +
 				"\"h\":48},\"tags\":[\"Support\",\"Fighter\"],\"partype\":\"Mana\"}}}";
-
 		try {
 			thresh = objectMapper.readValue(championsResponseBody, ChampionsResponse.class).getChampions()
 					.get("Thresh");
 		} catch (IOException e) {
-			fail("Unable to unmarshal the Champions response.");
+			fail("Unable to unmarshal the Champions response.", e);
 		}
 
 		championResponseBody = "{\"id\":64,\"key\":\"LeeSin\",\"name\":\"Lee Sin\",\"title\":\"The Blind Monk\"," +
@@ -106,7 +105,7 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 			leeSin = objectMapper.readValue(championResponseBody, Champion.class);
 			championUri = championUriBuilder.buildAndExpand("na", leeSin.getId());
 		} catch (IOException e) {
-			fail("Unable to unmarshal the Champion by ID response.");
+			fail("Unable to unmarshal the Champion by ID response.", e);
 		}
 
 		versionsRepository.save(new Version("latest patch version"));
@@ -187,11 +186,16 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 
 	@Test
 	public void saveChampionsWithTruncate() throws Exception {
-		String responseBody = "{\"type\":\"champion\",\"version\":\"5.16.1\",\"data\":{\"LeeSin\":{\"id\":64,\"key\":" +
-				"\"LeeSin\",\"name\":\"Lee Sin\",\"title\":\"The Blind Monk\",\"image\":{\"full\":\"LeeSin.png\"," +
+		String responseBody = "{\"type\":\"champion\",\"version\":\"5.22.3\",\"data\":{\"LeeSin\":{\"id\":64,\"key\":" +
+				"\"LeeSin\",\"name\":\"Lee Sin\",\"title\":\"the Blind Monk\",\"image\":{\"full\":\"LeeSin.png\"," +
 				"\"sprite\":\"champion1.png\",\"group\":\"champion\",\"x\":0,\"y\":96,\"w\":48,\"h\":48},\"tags\":" +
 				"[\"Fighter\",\"Assassin\"],\"partype\":\"Energy\"}}}}";
-		Champion leeSin = objectMapper.readValue(responseBody, ChampionsResponse.class).getChampions().get("LeeSin");
+		Champion leeSin = null;
+		try {
+			leeSin = objectMapper.readValue(responseBody, ChampionsResponse.class).getChampions().get("LeeSin");
+		} catch (IOException e) {
+			fail("Unable to unmarshal the Champions response.", e);
+		}
 		championsRepository.save(leeSin);
 
 		mockServer.expect(requestTo(championsUri.toString())).andExpect(method(HttpMethod.GET))
@@ -281,7 +285,12 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 
 	@Test
 	public void saveChampionWithOverwrite() throws Exception {
-		Champion newLeeSin = objectMapper.readValue(championResponseBody, Champion.class);
+		Champion newLeeSin = null;
+		try {
+			newLeeSin = objectMapper.readValue(championResponseBody, Champion.class);
+		} catch (IOException e) {
+			fail("Unable to unmarshal the Champions response.", e);
+		}
 		newLeeSin.setName("New Lee Sin");
 		championsRepository.save(newLeeSin);
 

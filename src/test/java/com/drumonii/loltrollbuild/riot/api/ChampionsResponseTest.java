@@ -12,7 +12,8 @@ import java.util.Arrays;
 import java.util.HashSet;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.StrictAssertions.entry;
+import static org.assertj.core.api.Fail.fail;
+import static org.assertj.core.data.MapEntry.entry;
 
 public class ChampionsResponseTest extends BaseSpringTestRunner {
 
@@ -20,15 +21,20 @@ public class ChampionsResponseTest extends BaseSpringTestRunner {
 	private ObjectMapper objectMapper;
 
 	@Test
-	public void championsResponseFromRiotIsMapped() throws IOException {
-		String responseBody = "{\"type\":\"champion\",\"version\":\"5.16.1\",\"data\":{\"Thresh\":{\"id\":412,\"" +
-				"key\":\"Thresh\",\"name\":\"Thresh\",\"title\":\"the Chain Warden\",\"image\":{\"full\":" +
+	public void championsResponseFromRiotIsMapped() {
+		String responseBody = "{\"type\":\"champion\",\"version\":\"5.22.3\",\"data\":{\"Thresh\":{\"id\":412," +
+				"\"key\":\"Thresh\",\"name\":\"Thresh\",\"title\":\"the Chain Warden\",\"image\":{\"full\":" +
 				"\"Thresh.png\",\"sprite\":\"champion3.png\",\"group\":\"champion\",\"x\":336,\"y\":0,\"w\":48," +
 				"\"h\":48},\"tags\":[\"Support\",\"Fighter\"],\"partype\":\"Mana\"}}}";
-		ChampionsResponse championsResponse = objectMapper.readValue(responseBody, ChampionsResponse.class);
+		ChampionsResponse championsResponse = null;
+		try {
+			championsResponse = objectMapper.readValue(responseBody, ChampionsResponse.class);
+		} catch (IOException e) {
+			fail("Unable to unmarshal the Champions response.", e);
+		}
 
 		assertThat(championsResponse).isNotNull();
-		assertThat(championsResponse).isEqualToComparingOnlyGivenFields(new ChampionsResponse("champion", "5.16.1"),
+		assertThat(championsResponse).isEqualToComparingOnlyGivenFields(new ChampionsResponse("champion", "5.22.3"),
 				"type", "version");
 		assertThat(championsResponse.getChampions()).hasSize(1);
 		Champion champion = new Champion(412, "Thresh", "Thresh", "the Chain Warden", new ChampionImage("Thresh.png",

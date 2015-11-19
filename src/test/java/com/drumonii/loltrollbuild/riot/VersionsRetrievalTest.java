@@ -60,7 +60,7 @@ public class VersionsRetrievalTest extends BaseSpringTestRunner {
 		try {
 			versions = objectMapper.readValue(responseBody, String[].class);
 		} catch (IOException e) {
-			fail("Unable to unmarshal the Versions response.");
+			fail("Unable to unmarshal the Versions response.", e);
 		}
 		restTemplate = mock(RestTemplate.class);
 		when(restTemplate.getForObject(versionsUri.toString(), String[].class))

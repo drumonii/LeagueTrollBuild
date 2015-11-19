@@ -15,7 +15,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.StrictAssertions.entry;
+import static org.assertj.core.data.MapEntry.entry;
 
 public class RestRiotApiConfigTest extends BaseSpringTestRunner {
 

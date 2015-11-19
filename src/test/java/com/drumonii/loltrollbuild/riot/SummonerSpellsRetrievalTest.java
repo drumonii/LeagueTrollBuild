@@ -87,32 +87,30 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 
 		// Only first request is handled. See: http://stackoverflow.com/q/30713734
 		mockServer = MockRestServiceServer.createServer(restTemplate);
-		summonerSpellsResponseBody = "{\"type\":\"summoner\",\"version\":\"5.16.1\",\"data\":{\"SummonerBoost\":" +
+		summonerSpellsResponseBody = "{\"type\":\"summoner\",\"version\":\"5.22.3\",\"data\":{\"SummonerBoost\":" +
 				"{\"name\":\"Cleanse\",\"description\":\"Removes all disables and summoner spell debuffs affecting " +
 				"your champion and lowers the duration of incoming disables by 65% for 3 seconds.\",\"image\":" +
 				"{\"full\":\"SummonerBoost.png\",\"sprite\":\"spell0.png\",\"group\":\"spell\",\"x\":48,\"y\":0," +
 				"\"w\":48,\"h\":48},\"cooldown\":[210.0],\"summonerLevel\":6,\"id\":1,\"key\":\"SummonerBoost\"," +
 				"\"modes\":[\"CLASSIC\",\"ODIN\",\"TUTORIAL\",\"ARAM\",\"ASCENSION\"]}}}";
-
 		try {
 			cleanse = objectMapper.readValue(summonerSpellsResponseBody, SummonerSpellsResponse.class)
 					.getSummonerSpells().get("SummonerBoost");
 		} catch (IOException e) {
-			fail("Unable to marshal the Summoner Spells response.");
+			fail("Unable to marshal the Summoner Spells response.", e);
 		}
 
 		summonerSpellResponseBody = "{\"name\":\"Ignite\",\"description\":\"Ignites target enemy champion, dealing " +
 				"70-410 true damage (depending on champion level) over 5 seconds, grants you vision of the target, " +
 				"and reduces healing effects on them for the duration.\",\"image\":{\"full\":\"SummonerDot.png\"," +
 				"\"sprite\":\"spell0.png\",\"group\":\"spell\",\"x\":144,\"y\":0,\"w\":48,\"h\":48},\"cooldown\":" +
-				"[180.0],\"summonerLevel\":10,\"id\":14,\"key\":\"SummonerDot\",\"modes\":[\"CLASSIC\",\"ODIN\"," +
+				"[180],\"summonerLevel\":10,\"id\":14,\"key\":\"SummonerDot\",\"modes\":[\"CLASSIC\",\"ODIN\"," +
 				"\"TUTORIAL\",\"ARAM\",\"ASCENSION\"]}";
-
 		try {
 			ignite = objectMapper.readValue(summonerSpellResponseBody, SummonerSpell.class);
 			summonerSpellUri = summonerSpellBuilder.buildAndExpand("na", ignite.getId());
 		} catch (IOException e) {
-			fail("Unable to unmarshal the Summoner Spell by ID response.");
+			fail("Unable to unmarshal the Summoner Spell by ID response.", e);
 		}
 
 		versionsRepository.save(new Version("latest patch version"));
@@ -193,13 +191,18 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 
 	@Test
 	public void saveSummonerSpellsWithTruncate() throws Exception {
-		String responseBody = "{\"type\":\"summoner\",\"version\":\"5.16.1\",\"data\":{\"SummonerFlash\":{\"name\":" +
+		String responseBody = "{\"type\":\"summoner\",\"version\":\"5.22.3\",\"data\":{\"SummonerFlash\":{\"name\":" +
 				"\"Flash\",\"description\":\"Teleports your champion a short distance toward your cursor's location." +
 				"\",\"image\":{\"full\":\"SummonerFlash.png\",\"sprite\":\"spell0.png\",\"group\":\"spell\",\"x\":" +
-				"240,\"y\":0,\"w\":48,\"h\":48},\"cooldown\":[300.0],\"summonerLevel\":8,\"id\":4,\"key\":" +
+				"240,\"y\":0,\"w\":48,\"h\":48},\"cooldown\":[300],\"summonerLevel\":8,\"id\":4,\"key\":" +
 				"\"SummonerFlash\",\"modes\":[\"CLASSIC\",\"ODIN\",\"TUTORIAL\",\"ARAM\",\"ASCENSION\"]}}}";
-		SummonerSpell teleport = objectMapper.readValue(responseBody, SummonerSpellsResponse.class).getSummonerSpells()
-				.get("SummonerFlash");
+		SummonerSpell teleport = null;
+		try {
+			teleport = objectMapper.readValue(responseBody, SummonerSpellsResponse.class).getSummonerSpells()
+					.get("SummonerFlash");
+		} catch (IOException e) {
+			fail("Unable to unmarshal the Summoner Spell by ID response.", e);
+		}
 		summonerSpellsRepository.save(teleport);
 
 		mockServer.expect(requestTo(summonerSpellsUri.toString())).andExpect(method(HttpMethod.GET))
@@ -282,7 +285,12 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 
 	@Test
 	public void saveSummonerSpellWithOverwrite() throws Exception {
-		SummonerSpell newIgnite = objectMapper.readValue(summonerSpellResponseBody, SummonerSpell.class);
+		SummonerSpell newIgnite = null;
+		try {
+			newIgnite = objectMapper.readValue(summonerSpellResponseBody, SummonerSpell.class);
+		} catch (IOException e) {
+			fail("Unable to unmarshal the Summoner Spell by ID response.", e);
+		}
 		newIgnite.setName("New Ignite");
 		summonerSpellsRepository.save(newIgnite);
 
