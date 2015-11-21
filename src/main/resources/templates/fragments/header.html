@@ -4,7 +4,12 @@
 </head>
 <body>
 <header th:fragment="header">
-    <h1 th:text="#{header.title}">League Troll Build</h1>
+    <div class="ui large inverted menu">
+        <div class="ui container">
+            <div class="header item" th:text="#{header.title}">League Troll Build</div>
+        </div>
+    </div>
+    <div class="ui hidden divider"></div>
 </header>
 </body>
 </html>

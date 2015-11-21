@@ -25,8 +25,8 @@
         <tbody>
         <tr>
             <td th:text="${latestRiotPatch}">5.19.1</td>
-            <td th:class="${latestRiotPatch} != ${latestSavedPatch} ? 'warning' : ''" th:if="${latestSavedPatch}"
-                th:text="${latestSavedPatch}">5.17.1</td>
+            <td th:class="${latestRiotPatch} != ${latestSavedPatch} ? 'warning' : 'positive'"
+                th:if="${latestSavedPatch}" th:text="${latestSavedPatch}">5.17.1</td>
             <td class="error" th:unless="${latestSavedPatch}">
                 <i class="warning circle icon"></i>
                 <span th:text="#{admin.version.noSavedPatch.header}">No saved patch exists</span>
@@ -36,7 +36,7 @@
         <tfoot th:if="${latestRiotPatch != latestSavedPatch}">
         <tr>
             <th colspan="2">
-                <form id="save-patch-form">
+                <form id="save-patch-form" class="ui form">
                     <button id="save-patch-btn" class="ui primary button" type="submit"
                         th:text="#{admin.version.savePatch}">Save Latest Patch</button>
                 </form>
