@@ -8,6 +8,7 @@ import com.drumonii.loltrollbuild.repository.ItemsRepository;
 import com.drumonii.loltrollbuild.repository.SummonerSpellsRepository;
 import com.drumonii.loltrollbuild.util.RandomizeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.*;
+
+import static org.springframework.data.domain.Sort.Direction.ASC;
 
 /**
  * Controller for {@link Champion}s and their views.
@@ -35,7 +38,7 @@ public class ChampionsController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String champions(Model model) {
-		model.addAttribute("champions", championsRepository.findAll());
+		model.addAttribute("champions", championsRepository.findAll(new Sort(ASC, "name")));
 		return "champions/champions";
 	}
 
