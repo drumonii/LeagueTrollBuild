@@ -2,17 +2,32 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layouts/main">
-<head>
-</head>
+<head></head>
 <body>
 <div layout:fragment="content">
-    <div th:each="champion : ${champions}">
-        <h3 th:text="${champion.name}">Thresh</h3>
-        <a th:href="@{/champions/{key}(key=${champion.key})}">
-            <img class="ui rounded image" th:src="@{/resources/{image}(image=${champion.image.full})}" />
-        </a>
-        <p th:text="${champion.title}">The Chain Warden</p>
+    <div class="ui ten link cards">
+        <div class="card" th:each="champion : ${champions}">
+            <div class="dimmable image">
+                <div class="ui dimmer">
+                    <div class="content">
+                        <div class="header" th:text="${champion.name}">Thresh</div>
+                    </div>
+                </div>
+                <a class="image" th:href="@{/champions/{key}(key=${champion.key})}">
+                    <img class="ui rounded image" th:src="@{/resources/{image}(image=${champion.image.full})}" />
+                </a>
+            </div>
+        </div>
     </div>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        $(function() {
+            $('.cards .image').dimmer({
+                on: 'hover'
+            });
+        });
+        /*]]>*/
+    </script>
 </div>
 </body>
 </html>
