@@ -2,32 +2,34 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layouts/main">
-<head></head>
+<head>
+    <script th:src="@{/webjars/hideseek/jquery.hideseek.min.js}"></script>
+</head>
 <body>
 <div layout:fragment="content">
+    <div class="ui search">
+        <div class="ui icon input">
+            <input class="prompt" th:placeholder="#{champions.search}" type="text" data-toggle="hideseek"
+                   data-list=".cards" />
+            <i class="search icon"></i>
+        </div>
+    </div>
+    <div class="ui hidden divider"></div>
     <div class="ui ten link cards">
         <div class="card" th:each="champion : ${champions}">
             <div class="dimmable image">
                 <div class="ui dimmer">
                     <div class="content">
-                        <div class="header" th:text="${champion.name}">Thresh</div>
+                        <a th:href="@{/champions/{key}(key=${champion.key})}">
+                            <p th:text="${champion.name}">Thresh</p>
+                        </a>
                     </div>
                 </div>
-                <a class="image" th:href="@{/champions/{key}(key=${champion.key})}">
-                    <img class="ui rounded image" th:src="@{/resources/{image}(image=${champion.image.full})}" />
-                </a>
+                <img class="ui rounded image" th:src="@{/resources/{image}(image=${champion.image.full})}" />
             </div>
         </div>
     </div>
-    <script th:inline="javascript">
-        /*<![CDATA[*/
-        $(function() {
-            $('.cards .image').dimmer({
-                on: 'hover'
-            });
-        });
-        /*]]>*/
-    </script>
+    <script th:inline="javascript" th:include="champions/js/champions.js :: script"></script>
 </div>
 </body>
 </html>
