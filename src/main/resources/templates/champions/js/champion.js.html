@@ -7,11 +7,11 @@
 $(function() {
     var newBuildBtn = $('#new-build');
     newBuildBtn.popup({
-        on: 'manual'
+        on: 'manual',
+        inline: true
     });
 
     getTrollBuild();
-
     function getTrollBuild() {
         $.ajax({
             url: [[@{/champions/{id}/troll-build(id=${champion.id})}]],
@@ -24,11 +24,18 @@ $(function() {
                     var html = [];
                     $.each(list, function(id, element) {
                         html.push(
-                        '<div class="item">' +
-                            '<img class="ui rounded image" src="/resources/' + element.image.full + '" />' +
-                        '</div>');
+                            $('<div>', {
+                                class: 'item',
+                                'data-html': '<h4>' + element.name + '</h4>' + element.description,
+                                'data-variation': 'wide'
+                            }).append($('<img>', {
+                                class: 'ui rounded image',
+                                src: '/resources/' + element.image.full
+                            }))
+                        );
                     });
                     $('#' + id).html(html);
+                    $('#items .item, #summoner-spells .item, #trinket .item').popup();
                 });
             },
             error: function() {
