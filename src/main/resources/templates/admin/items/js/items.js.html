@@ -20,7 +20,7 @@ $(function() {
             beforeSend: function() {
                 $('#save-items-btn').addClass('loading');
             },
-            data: { truncate: $('#truncate').is(':checked'), _csrf: [[${_csrf.token}]] },
+            data: { truncate: $('#truncate').is(':checked'), [[${_csrf.parameterName}]]: [[${_csrf.token}]] },
             success: function(data) {
                 location.reload();
             }
@@ -92,7 +92,7 @@ $(function() {
             beforeSend: function() {
                 overwriteBtn.addClass('loading');
             },
-            data: { _csrf: [[${_csrf.token}]] },
+            data: { [[${_csrf.parameterName}]]: [[${_csrf.token}]] },
             success: function(data) {
                 location.reload();
             }
