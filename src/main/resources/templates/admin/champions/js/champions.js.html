@@ -20,7 +20,13 @@ $(function() {
             beforeSend: function() {
                 $('#save-champions-btn').addClass('loading');
             },
-            data: { truncate: $('#truncate').is(':checked'), [[${_csrf.parameterName}]]: [[${_csrf.token}]] },
+            data: { 
+                truncate: $('#truncate').is(':checked'),
+                [[${_csrf.parameterName}]]: [[${_csrf.token}]] 
+            },
+            headers: {
+                _csrf_header: [[${_csrf.headerName}]]
+            },
             success: function(data) {
                 location.reload();
             }
@@ -93,7 +99,12 @@ $(function() {
             beforeSend: function() {
                 overwriteBtn.addClass('loading');
             },
-            data: { [[${_csrf.parameterName}]]: [[${_csrf.token}]] },
+            data: {
+                [[${_csrf.parameterName}]]: [[${_csrf.token}]]
+            },
+            headers: {
+                _csrf_header: [[${_csrf.headerName}]]
+            },
             success: function(data) {
                 location.reload();
             }

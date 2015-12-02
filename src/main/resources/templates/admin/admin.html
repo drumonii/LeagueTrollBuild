@@ -54,7 +54,12 @@
                     beforeSend: function() {
                         $('#save-patch-btn').addClass('loading');
                     },
-                    data: { [[${_csrf.parameterName}]]: [[${_csrf.token}]] },
+                    data: {
+                        [[${_csrf.parameterName}]]: [[${_csrf.token}]]
+                    },
+                    headers: {
+                        _csrf_header: [[${_csrf.headerName}]]
+                    },
                     success: function(data) {
                         location.reload();
                     }
