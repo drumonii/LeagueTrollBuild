@@ -64,28 +64,4 @@ public interface ItemsRepository extends PagingAndSortingRepository<Item, Intege
 	@RestResource(path = "for-troll-build", rel = "for-troll-build")
 	List<Item> forTrollBuild();
 
-	@Override
-	@RestResource(exported = false)
-	Item save(Item entity);
-
-	@Override
-	@RestResource(exported = false)
-	<S extends Item> Iterable<S> save(Iterable<S> entities);
-
-	@Override
-	@RestResource(exported = false)
-	void delete(Integer id);
-
-	@Override
-	@RestResource(exported = false)
-	void delete(Item entity);
-
-	@Override
-	@RestResource(exported = false)
-	void delete(Iterable<? extends Item> entities);
-
-	@Override
-	@RestResource(exported = false)
-	void deleteAll();
-
 }

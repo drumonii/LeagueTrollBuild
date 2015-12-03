@@ -9,6 +9,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import static org.springframework.http.HttpMethod.*;
+
 /**
  * Configuration for web security/authentication and overriding components in {@link WebSecurityConfigurerAdapter}.
  */
@@ -26,8 +28,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		// @formatter:off
 		http
 			.authorizeRequests()
-				.antMatchers("/riot/**")  .hasRole("ADMIN")
-				.antMatchers("/admin/**") .hasRole("ADMIN")
+				.antMatchers("/riot/**")       .hasRole("ADMIN")
+				.antMatchers("/admin/**")      .hasRole("ADMIN")
+				.antMatchers(POST,   "/api/**").hasRole("ADMIN")
+				.antMatchers(PUT,    "/api/**").hasRole("ADMIN")
+				.antMatchers(PATCH,  "/api/**").hasRole("ADMIN")
+				.antMatchers(DELETE, "/api/**").hasRole("ADMIN")
 			.and()
 			.formLogin()
 				.loginPage("/admin/login")

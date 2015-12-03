@@ -21,30 +21,7 @@ public interface SummonerSpellsRepository extends PagingAndSortingRepository<Sum
 	 * @return a {@link List} of {@link SummonerSpell}s eligible for the troll build
 	 */
 	@Query("select s from SummonerSpell s join s.modes m where m in ('CLASSIC')")
+	@RestResource(path = "for-troll-build", rel = "for-troll-build")
 	List<SummonerSpell> forTrollBuild();
-
-	@Override
-	@RestResource(exported = false)
-	SummonerSpell save(SummonerSpell entity);
-
-	@Override
-	@RestResource(exported = false)
-	<S extends SummonerSpell> Iterable<S> save(Iterable<S> entities);
-
-	@Override
-	@RestResource(exported = false)
-	void delete(Integer id);
-
-	@Override
-	@RestResource(exported = false)
-	void delete(SummonerSpell entity);
-
-	@Override
-	@RestResource(exported = false)
-	void delete(Iterable<? extends SummonerSpell> entities);
-
-	@Override
-	@RestResource(exported = false)
-	void deleteAll();
 
 }

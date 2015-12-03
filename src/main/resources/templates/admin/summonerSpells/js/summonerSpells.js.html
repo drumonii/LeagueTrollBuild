@@ -68,7 +68,14 @@ $(function() {
             { data: '_links.self.href',
                 render: function(data, type, full, meta) {
                     var id = data.substring(data.lastIndexOf('/') + 1, data.length);
-                    return '<button id="' + id + '" class="ui button">' + [[#{admin.summonerSpell.overwrite}]] +
+                    return '<button id="' + id + '" class="ui secondary button">' +
+                            [[#{admin.summonerSpell.overwrite}]] + '</button>';
+                }
+            },
+            { data: '_links.self.href',
+                render: function(data, type, full, meta) {
+                    var id = data.substring(data.lastIndexOf('/') + 1, data.length);
+                    return '<button id="' + id + '" class="negative ui button">' + [[#{admin.summonerSpell.delete}]] +
                             '</button>';
                 }
             }
@@ -90,19 +97,33 @@ $(function() {
         },
         searching: false,
     });
-    $('#summoner-spells tbody').on('click', 'button', function() {
-        var overwriteBtn = $(this);
+    $('#summoner-spells tbody').on('click', '.secondary', function(event) {
         $.ajax({
             type: 'POST',
             url: [[@{/riot/summoner-spells}]] + '/' + $(this).attr('id'),
             beforeSend: function() {
-                overwriteBtn.addClass('loading');
+                $(event.target).addClass('loading');
             },
             data: {
                 [[${_csrf.parameterName}]]: [[${_csrf.token}]]
             },
             headers: {
                 _csrf_header: [[${_csrf.headerName}]]
+            },
+            success: function(data) {
+                location.reload();
+            }
+        });
+    });
+    $('#summoner-spells tbody').on('click', '.negative', function(event) {
+        $.ajax({
+            type: 'DELETE',
+            url: [[@{/api/summoner-spells}]] + '/' + $(this).attr('id'),
+            beforeSend: function() {
+                $(event.target).addClass('loading');
+            },
+            headers: {
+                [[${_csrf.headerName}]]: [[${_csrf.token}]]
             },
             success: function(data) {
                 location.reload();

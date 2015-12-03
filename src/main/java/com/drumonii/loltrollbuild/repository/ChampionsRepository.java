@@ -34,28 +34,4 @@ public interface ChampionsRepository extends PagingAndSortingRepository<Champion
 	@RestResource(path = "find-by-like-name", rel = "find-by-like-name")
 	List<Champion> findByLikeName(@Param("name") String name);
 
-	@Override
-	@RestResource(exported = false)
-	Champion save(Champion entity);
-
-	@Override
-	@RestResource(exported = false)
-	<S extends Champion> Iterable<S> save(Iterable<S> entities);
-
-	@Override
-	@RestResource(exported = false)
-	void delete(Integer id);
-
-	@Override
-	@RestResource(exported = false)
-	void delete(Champion entity);
-
-	@Override
-	@RestResource(exported = false)
-	void delete(Iterable<? extends Champion> entities);
-
-	@Override
-	@RestResource(exported = false)
-	void deleteAll();
-
 }
