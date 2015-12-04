@@ -8,11 +8,14 @@ import org.apache.commons.lang3.StringUtils;
 import org.junit.After;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
 import java.io.IOException;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.data.domain.Sort.Direction.ASC;
 
 public class ChampionsRepositoryTest extends BaseSpringTestRunner {
 
@@ -96,6 +99,29 @@ public class ChampionsRepositoryTest extends BaseSpringTestRunner {
 
 		champions = championsRepository.findByLikeName("FI");
 		assertThat(champions).isNotEmpty();
+	}
+
+	@Test
+	public void findBy() throws IOException {
+		String responseBody = "{\"type\":\"champion\",\"version\":\"5.23.1\",\"data\":{\"Tristana\":{\"id\":18," +
+				"\"key\":\"Tristana\",\"name\":\"Tristana\",\"title\":\"the Yordle Gunner\",\"image\":{\"full\":" +
+				"\"Tristana.png\",\"sprite\":\"champion3.png\",\"group\":\"champion\",\"x\":384,\"y\":0,\"w\":48," +
+				"\"h\":48},\"tags\":[\"Marksman\",\"Assassin\"],\"partype\":\"Mana\"}}}";
+		Champion tristana = objectMapper.readValue(responseBody, ChampionsResponse.class).getChampions()
+				.get("Tristana");
+		championsRepository.save(tristana);
+
+		Page<Champion> champions = championsRepository.findBy("tris", new PageRequest(0, 20, ASC, "name"));
+		assertThat(champions).isNotEmpty().doesNotHaveDuplicates();
+
+		champions = championsRepository.findBy("Gunner", new PageRequest(0, 20, ASC, "name"));
+		assertThat(champions).isNotEmpty().doesNotHaveDuplicates();
+
+		champions = championsRepository.findBy("MarKsMan", new PageRequest(0, 20, ASC, "name"));
+		assertThat(champions).isNotEmpty().doesNotHaveDuplicates();
+
+		champions = championsRepository.findBy("mana", new PageRequest(0, 20, ASC, "name"));
+		assertThat(champions).isNotEmpty().doesNotHaveDuplicates();
 	}
 
 }

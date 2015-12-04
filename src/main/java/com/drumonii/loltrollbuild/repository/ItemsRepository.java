@@ -1,8 +1,11 @@
 package com.drumonii.loltrollbuild.repository;
 
 import com.drumonii.loltrollbuild.model.Item;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 import java.util.List;
@@ -63,5 +66,20 @@ public interface ItemsRepository extends PagingAndSortingRepository<Item, Intege
 		   "group by i.id")
 	@RestResource(path = "for-troll-build", rel = "for-troll-build")
 	List<Item> forTrollBuild();
+
+	/**
+	 * Finds a {@link Page} of {@link Item} from a search term by using {@code LIKE} for each searchable field.
+	 *
+	 * @param term the search term
+	 * @param pageable {@link Pageable} for paging and sorting
+	 * @return a {@link Page} of distinct {@link Item} from a search term
+	 */
+	@Query("select i from Item i " +
+		   "where lower(i.name) like concat('%', lower(:term), '%') " +
+		   "or lower(i.group) like concat('%', lower(:term), '%') " +
+		   "or lower(i.requiredChampion) like concat('%', lower(:term), '%') " +
+		   "group by i.id")
+	@RestResource(path = "find-by", rel = "find-by")
+	Page<Item> findBy(@Param("term") String term, Pageable pageable);
 
 }

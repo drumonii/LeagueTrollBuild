@@ -33,7 +33,7 @@ $(function() {
         });
         event.preventDefault();
     });
-    $('#items').DataTable({
+    var dataTable = $('#items').DataTable({
         processing: true,
         serverSide: true,
         order: [ [1, 'asc'] ],
@@ -50,6 +50,10 @@ $(function() {
                 $.each(data.order, function (i, order) {
                     sorts.push(data.columns[order.column].data + "," + order.dir);
                 });
+                if (data.search.value) {
+                    return { term: data.search.value, page: Math.ceil(data.start / data.length), size: data.length,
+                        sort: sorts[0] };
+                }
                 return { page: Math.ceil(data.start / data.length), size: data.length, sort: sorts[0] };
             }
         },
@@ -95,8 +99,14 @@ $(function() {
             }
             return 'Showing ' + start + ' to ' + end + ' of ' + json._embedded.items.length +
                     ' entries (filtered from ' + page.totalElements + ' total entries)';
-        },
-        searching: false,
+        }
+    });
+    dataTable.on('search.dt', function() {
+        if ($('#items_filter input').val()) {
+            dataTable.ajax.url([[@{/api/items/search/find-by}]]);
+        } else {
+            dataTable.ajax.url([[@{/api/items}]]);
+        }
     });
     $('#items tbody').on('click', '.secondary', function(event) {
         $.ajax({

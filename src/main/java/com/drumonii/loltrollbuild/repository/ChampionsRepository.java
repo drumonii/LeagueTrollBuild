@@ -1,6 +1,8 @@
 package com.drumonii.loltrollbuild.repository;
 
 import com.drumonii.loltrollbuild.model.Champion;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
@@ -33,5 +35,22 @@ public interface ChampionsRepository extends PagingAndSortingRepository<Champion
 		   "or lower(c.key) like concat('%', lower(:name), '%')")
 	@RestResource(path = "find-by-like-name", rel = "find-by-like-name")
 	List<Champion> findByLikeName(@Param("name") String name);
+
+	/**
+	 * Finds a {@link Page} of {@link Champion} from a search term by using {@code LIKE} for each searchable field.
+	 *
+	 * @param term the search term
+	 * @param pageable {@link Pageable} for paging and sorting
+	 * @return a {@link Page} of distinct {@link Champion} from a search term
+	 */
+	@Query("select c from Champion c " +
+		   "where lower(c.key) like concat('%', lower(:term), '%') " +
+		   "or lower(c.name) like concat('%', lower(:term), '%') " +
+		   "or lower(c.title) like concat('%', lower(:term), '%') " +
+		   "or exists (select t from c.tags t where lower(t) like concat('%', lower(:term), '%')) " +
+		   "or lower(c.partype) = :term " +
+		   "group by c.id")
+	@RestResource(path = "find-by", rel = "find-by")
+	Page<Champion> findBy(@Param("term") String term, Pageable pageable);
 
 }
