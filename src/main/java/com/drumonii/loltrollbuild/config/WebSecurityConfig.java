@@ -1,14 +1,20 @@
 package com.drumonii.loltrollbuild.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import javax.sql.DataSource;
+
+import static org.springframework.boot.autoconfigure.security.SecurityProperties.ACCESS_OVERRIDE_ORDER;
 import static org.springframework.http.HttpMethod.*;
 
 /**
@@ -16,12 +22,6 @@ import static org.springframework.http.HttpMethod.*;
  */
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-
-	@Bean
-	@Override
-	public UserDetailsService userDetailsServiceBean() throws Exception {
-		return super.userDetailsServiceBean();
-	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -46,14 +46,48 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		// @formatter:on
 	}
 
-	@Autowired
+	@Bean
 	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		// @formatter:off
-		auth
-			.inMemoryAuthentication()
-				.withUser("admin").password("admin").authorities("ROLE_ADMIN");
-		// @formatter:on
+	public UserDetailsService userDetailsServiceBean() throws Exception {
+		return super.userDetailsServiceBean();
+	}
+
+	@Order(ACCESS_OVERRIDE_ORDER)
+	@Configuration
+	@Dev @Testing
+	public static class WebDevTestingSecurityConfig extends WebSecurityConfigurerAdapter {
+
+		@Autowired
+		@Override
+		protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+			// @formatter:off
+			auth
+				.inMemoryAuthentication()
+					.withUser("admin").password("password").authorities("ROLE_ADMIN");
+			// @formatter:on
+		}
+
+	}
+
+	@Order(ACCESS_OVERRIDE_ORDER)
+	@Configuration
+	@Embedded @External
+	public static class WebEmbeddedExternalSecurityConfig extends WebSecurityConfigurerAdapter {
+
+		@Autowired
+		private DataSource dataSource;
+
+		@Autowired
+		@Override
+		protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+			// @formatter:off
+			auth
+				.jdbcAuthentication()
+					.dataSource(dataSource)
+					.passwordEncoder(new BCryptPasswordEncoder());
+			// @formatter:on
+		}
+
 	}
 
 }
