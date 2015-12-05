@@ -57,10 +57,7 @@ spring:
   profiles: external
   datasource:
     initialize: false
-    driverClassName: org.postgresql.Driver
-    url: # url
-    username: # postgres
-    password: # postgres
+    jndi-name: jdbc/leagueTrollBuild
   jpa:
     properties:
       hibernate:
