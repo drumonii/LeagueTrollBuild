@@ -1,7 +1,10 @@
 package com.drumonii.loltrollbuild.config;
 
+import com.drumonii.loltrollbuild.config.Profiles.Dev;
+import com.drumonii.loltrollbuild.config.Profiles.Embedded;
+import com.drumonii.loltrollbuild.config.Profiles.External;
+import com.drumonii.loltrollbuild.config.Profiles.Testing;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -52,6 +55,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		return super.userDetailsServiceBean();
 	}
 
+	/**
+	 * In memory authentication configuration for {@link Dev} and {@link Testing} profiles.
+	 */
 	@Order(ACCESS_OVERRIDE_ORDER)
 	@Configuration
 	@Dev @Testing
@@ -69,6 +75,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	}
 
+	/**
+	 * JDBC authentication configuration for {@link Embedded} and {@link External} profiles.
+	 */
 	@Order(ACCESS_OVERRIDE_ORDER)
 	@Configuration
 	@Embedded @External
