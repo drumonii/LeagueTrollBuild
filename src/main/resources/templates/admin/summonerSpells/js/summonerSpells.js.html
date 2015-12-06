@@ -64,23 +64,31 @@ $(function() {
         columns: [
             { data: 'image.full',
                 render: function(data, type, full, meta) {
-                    return '<img class="ui rounded image" style="height:60px;width:auto;" src="/resources/' + data + '" />';
+                    return $('<img>', {
+                        class: 'ui rounded image',
+                        style: 'height:60px;width:auto;',
+                        src: '/resources/' + data
+                    }).wrap('<span>').parent().html();
                 }
             },
             { data: 'name' },
             { data: 'modes[, ]' },
             { data: '_links.self.href',
                 render: function(data, type, full, meta) {
-                    var id = data.substring(data.lastIndexOf('/') + 1, data.length);
-                    return '<button id="' + id + '" class="ui secondary button">' +
-                            [[#{admin.summonerSpell.overwrite}]] + '</button>';
+                    return $('<button>', {
+                        id: data.substring(data.lastIndexOf('/') + 1, data.length),
+                        class: 'ui secondary button',
+                        text: [[#{admin.summonerSpell.overwrite}]]
+                    }).wrap('<span>').parent().html();
                 }
             },
             { data: '_links.self.href',
                 render: function(data, type, full, meta) {
-                    var id = data.substring(data.lastIndexOf('/') + 1, data.length);
-                    return '<button id="' + id + '" class="negative ui button">' + [[#{admin.summonerSpell.delete}]] +
-                            '</button>';
+                    return $('<button>', {
+                        id: data.substring(data.lastIndexOf('/') + 1, data.length),
+                        class: 'negative ui button',
+                        text: [[#{admin.summonerSpell.delete}]]
+                    }).wrap('<span>').parent().html();
                 }
             }
         ],
@@ -89,15 +97,18 @@ $(function() {
             var json = this.api().ajax.json();
             if (typeof json._embedded === 'undefined') {
                 $('#summoner-spells_paginate span').empty();
-                return 'Showing 0 to 0 of 0 entries';
+                return [[#{dataTables.noResults}]];
             }
             var page = this.api().ajax.json().page;
             end = (page.number + 1) * page.size;
             if (end > page.totalElements) {
                 end = page.totalElements;
             }
-            return 'Showing ' + start + ' to ' + end + ' of ' + json._embedded.summonerSpells.length +
-                    ' entries (filtered from ' + page.totalElements + ' total entries)';
+            var msg = [[#{dataTables.showing}]];
+            var args = [ start, end, json._embedded.summonerSpells.length, page.totalElements ];
+            return msg.replace(/{(\d+)}/g, function(match, number) {
+                return typeof args[number] != 'undefined' ? args[number] : match;
+            });
         }
     });
     dataTable.on('search.dt', function() {
