@@ -17,8 +17,8 @@ buildscript {
     }
     dependencies {
         classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.2.7.RELEASE'
-        classpath 'io.spring.gradle:dependency-management-plugin:0.5.3.RELEASE'
-        classpath 'org.springframework:springloaded:1.2.4.RELEASE'
+        classpath 'io.spring.gradle:dependency-management-plugin:0.5.4.RELEASE'
+        classpath 'org.springframework:springloaded:1.2.5.RELEASE'
     }
 }
 
@@ -69,14 +69,14 @@ dependencies {
     compile 'com.h2database:h2'
 
     // PostgreSQL
-    compile 'org.postgresql:postgresql:9.4-1205-jdbc42'
+    compile 'org.postgresql:postgresql:9.4-1206-jdbc42'
 
     // Flyway
     compile 'org.flywaydb:flyway-core'
 
     // Apache Commons
     compile 'org.apache.commons:commons-lang3:3.4'
-    compile 'org.apache.commons:commons-collections4:4.0'
+    compile 'org.apache.commons:commons-collections4:4.1'
     compile 'commons-io:commons-io:2.4'
 
     // WebJars Locator
