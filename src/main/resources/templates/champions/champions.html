@@ -7,15 +7,15 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <div class="ui search">
+    <div class="ui search" th:unless="${#lists.isEmpty(champions)}">
         <div class="ui icon input">
             <input class="prompt" th:placeholder="#{champions.search}" type="text" data-toggle="hideseek"
                    data-list=".cards" />
             <i class="search icon"></i>
         </div>
     </div>
-    <div class="ui hidden divider"></div>
-    <div class="ui ten link cards">
+    <div class="ui hidden divider" th:unless="${#lists.isEmpty(champions)}"></div>
+    <div class="ui ten link cards" th:unless="${#lists.isEmpty(champions)}">
         <div class="card" th:each="champion : ${champions}">
             <div class="dimmable image">
                 <div class="ui dimmer">
@@ -28,6 +28,16 @@
                 <img class="ui rounded image" th:src="@{/resources/{image}(image=${champion.image.full})}" />
             </div>
         </div>
+    </div>
+    <div class="ui warning message" th:if="${#lists.isEmpty(champions)}">
+        <div class="header">
+            <i class="warning circle icon"></i>
+            <span th:text="#{champions.empty.header}">No Champions exist in the database!</span>
+        </div>
+        <p>
+            <a th:href="@{/admin}" th:text="#{login}">Login</a>
+            <span th:text="#{champions.empty}">to the administration area in order to add Champions from Riot.</span>
+        </p>
     </div>
     <script th:inline="javascript" th:include="champions/js/champions.js :: script"></script>
 </div>
