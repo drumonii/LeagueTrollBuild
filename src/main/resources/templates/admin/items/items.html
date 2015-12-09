@@ -12,7 +12,7 @@
     <div id="difference-msg" class="ui info message" th:unless="${#lists.isEmpty(difference)}">
         <i class="close icon"></i>
         <div class="header" th:text="#{admin.items.diff}">Difference in Items found</div>
-        <p th:text="#{admin.items.diff.msg}">Differ msg</p>
+        <p th:text="#{admin.items.diff.msg(${latestSavedPatch})}">Differ msg</p>
     </div>
 
     <h3 class="ui dividing header" th:text="#{admin.items}">Items</h3>
@@ -27,7 +27,8 @@
         </thead>
         <tbody>
         <tr th:each="item : ${difference}">
-            <td><img class="ui rounded image" style="height:60px;width:auto;"
+            <td>
+                <img class="ui rounded image" style="height:60px;width:auto;"
                      th:src="@{http://ddragon.leagueoflegends.com/cdn/{patch}/img/item/{image}
                      (patch=${latestSavedPatch}, image=${item.image.full})}" />
             </td>
@@ -51,6 +52,8 @@
         </tr>
         </tfoot>
     </table>
+
+    <div class="ui hidden divider" th:unless="${#lists.isEmpty(difference)}"></div>
 
     <table id="items" class="ui celled table">
         <thead>

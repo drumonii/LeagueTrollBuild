@@ -12,7 +12,7 @@
     <div id="difference-msg" class="ui info message" th:unless="${#lists.isEmpty(difference)}">
         <i class="close icon"></i>
         <div class="header" th:text="#{admin.summonerSpells.diff}">Difference in Summoner Spells found</div>
-        <p th:text="#{admin.summonerSpells.diff.msg}">Differ msg</p>
+        <p th:text="#{admin.summonerSpells.diff.msg(${latestSavedPatch})}">Differ msg</p>
     </div>
 
     <h3 class="ui dividing header" th:text="#{admin.summonerSpells}">Summoner Spells</h3>
@@ -26,7 +26,8 @@
         </thead>
         <tbody>
         <tr th:each="spell : ${difference}">
-            <td><img class="ui rounded image" style="height:60px;width:auto;"
+            <td>
+                <img class="ui rounded image" style="height:60px;width:auto;"
                      th:src="@{http://ddragon.leagueoflegends.com/cdn/{patch}/img/spell/{image}
                      (patch=${latestSavedPatch}, image=${spell.image.full})}" />
             </td>
@@ -51,6 +52,8 @@
         </tr>
         </tfoot>
     </table>
+
+    <div class="ui hidden divider" th:unless="${#lists.isEmpty(difference)}"></div>
 
     <table id="summoner-spells" class="ui celled table">
         <thead>
