@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/admin">
+<head>
+    <title th:text="#{admin.maps}">Maps</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/datatables/media/css/jquery.dataTables.min.css}" />
+    <script th:src="@{/webjars/datatables/media/js/jquery.dataTables.min.js}"></script>
+</head>
+<body>
+<div layout:fragment="content">
+    <div id="difference-msg" class="ui info message" th:unless="${#lists.isEmpty(difference)}">
+        <i class="close icon"></i>
+        <div class="header" th:text="#{admin.maps.diff}">Difference in Maps found</div>
+        <p th:text="#{admin.maps.diff.msg(${latestSavedPatch})}">Differ msg</p>
+    </div>
+
+    <h3 class="ui dividing header" th:text="#{admin.maps}">Maps</h3>
+    <table id="maps-difference" class="ui celled table" th:unless="${#lists.isEmpty(difference)}">
+        <thead>
+        <tr>
+            <th class="one wide"></th>
+            <th class="fifteen wide" th:text="#{admin.map.mapName}">Name</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="map : ${difference}">
+            <td>
+                <img class="ui rounded image" style="height:60px;width:auto;"
+                     th:src="@{http://ddragon.leagueoflegends.com/cdn/{patch}/img/map/{image}
+                     (patch=${latestSavedPatch}, image=${map.image.full})}" />
+            </td>
+            <td th:text="${map.mapName}"></td>
+        </tr>
+        </tbody>
+        <tfoot class="full-width">
+        <tr>
+            <th colspan="2">
+                <form id="save-maps-form" class="ui form">
+                    <div class="ui checkbox">
+                        <input id="truncate" type="checkbox" name="truncate" />
+                        <label for="truncate" th:text="#{admin.maps.trunc}">Truncate</label>
+                    </div>
+                    <button id="save-maps-btn" class="ui primary button" type="submit"
+                            th:text="#{admin.maps.save}">Save Maps</button>
+                </form>
+            </th>
+        </tr>
+        </tfoot>
+    </table>
+    
+    <div class="ui hidden divider" th:unless="${#lists.isEmpty(difference)}"></div>
+    
+    <table id="maps" class="ui celled table">
+        <thead>
+        <tr>
+            <th class="one wide"></th>
+            <th class="thirteen wide" th:text="#{admin.map.mapName}">Name</th>
+            <th class="one wide"></th>
+            <th class="one wide"></th>
+        </tr>
+        </thead>
+    </table>
+    <script th:inline="javascript" th:include="admin/maps/js/maps.js :: script"></script>
+</div>
+</body>
+</html>

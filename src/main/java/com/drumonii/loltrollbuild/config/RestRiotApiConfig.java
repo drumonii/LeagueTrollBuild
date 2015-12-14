@@ -28,7 +28,7 @@ public class RestRiotApiConfig {
 		return new RestTemplate();
 	}
 
-	private Api api ;
+	private Api api;
 	private StaticData staticData;
 	private Ddragon ddragon;
 
@@ -133,6 +133,26 @@ public class RestRiotApiConfig {
 				.scheme(ddragon.getScheme())
 				.host(ddragon.getBaseUrl())
 				.path(ddragon.getChampionsImg());
+	}
+
+	@Bean
+	@Qualifier("maps")
+	public UriComponents mapsUri() {
+		return UriComponentsBuilder.newInstance()
+				.scheme(staticData.getScheme())
+				.host(staticData.getBaseUrl())
+				.path(staticData.getMaps())
+				.queryParam(staticData.getParam(), api.getKey())
+				.buildAndExpand(staticData.getRegion());
+	}
+
+	@Bean
+	@Qualifier("mapsImg")
+	public UriComponentsBuilder mapsImgUri() {
+		return UriComponentsBuilder.newInstance()
+				.scheme(ddragon.getScheme())
+				.host(ddragon.getBaseUrl())
+				.path(ddragon.getMapsImg());
 	}
 
 	@Bean

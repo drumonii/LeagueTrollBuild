@@ -178,6 +178,32 @@ public class RestRiotApiConfigTest extends BaseSpringTestRunner {
 	}
 
 	@Autowired
+	@Qualifier("maps")
+	private UriComponents mapsUri;
+
+	@Test
+	public void mapsUri() {
+		assertThat(mapsUri.getScheme()).isEqualTo(scheme);
+		assertThat(mapsUri.getHost()).isEqualTo(host);
+		assertThat(mapsUri.getPath()).isEqualTo(staticData.getMaps());
+		assertThat(mapsUri.getQueryParams()).contains(entry("api_key", Arrays.asList(apiKey)));
+	}
+
+	@Autowired
+	@Qualifier("mapsImg")
+	private UriComponentsBuilder mapsImgBuilder;
+
+	@Test
+	public void mapsImgUri() {
+		String imgFull = "Map.png"; String patch = "some patch number";
+		UriComponents mapsImgUri = mapsImgBuilder.buildAndExpand(patch, imgFull);
+		assertThat(mapsImgUri.getHost()).isEqualTo(ddragon.getBaseUrl());
+		assertThat(mapsImgUri.getPath()).isEqualTo(ddragon.getMapsImg().replace("{version}", patch)
+				.replace("{mapImgFull}", imgFull));
+		assertThat(mapsImgUri.getScheme()).isEqualTo(ddragon.getScheme());
+	}
+
+	@Autowired
 	@Qualifier("versions")
 	private UriComponents versionsUri;
 

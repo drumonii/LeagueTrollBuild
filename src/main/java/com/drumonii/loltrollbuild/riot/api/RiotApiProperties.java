@@ -65,6 +65,9 @@ public class RiotApiProperties {
 		@Getter @Setter private String item;
 
 		@NotEmpty
+		@Getter @Setter private String maps;
+
+		@NotEmpty
 		@Getter @Setter private String summonerSpells;
 
 		@NotEmpty
@@ -92,6 +95,9 @@ public class RiotApiProperties {
 
 		@NotEmpty
 		@Getter @Setter private String itemsImg;
+
+		@NotEmpty
+		@Getter @Setter private String mapsImg;
 
 		@NotEmpty
 		@Getter @Setter private String summonerSpellsImg;

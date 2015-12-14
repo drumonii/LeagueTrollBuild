@@ -1,13 +1,7 @@
 package com.drumonii.loltrollbuild.admin;
 
-import com.drumonii.loltrollbuild.repository.ChampionsRepository;
-import com.drumonii.loltrollbuild.repository.ItemsRepository;
-import com.drumonii.loltrollbuild.repository.SummonerSpellsRepository;
-import com.drumonii.loltrollbuild.repository.VersionsRepository;
-import com.drumonii.loltrollbuild.riot.ChampionsRetrieval;
-import com.drumonii.loltrollbuild.riot.ItemsRetrieval;
-import com.drumonii.loltrollbuild.riot.SummonerSpellsRetrieval;
-import com.drumonii.loltrollbuild.riot.VersionsRetrieval;
+import com.drumonii.loltrollbuild.repository.*;
+import com.drumonii.loltrollbuild.riot.*;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -96,6 +90,24 @@ public class AdminController {
 				championsRepository.findAll()));
 		model.addAttribute("activeTab", "champions");
 		return "admin/champions/champions";
+	}
+
+	@Autowired
+	private MapsRepository mapsRepository;
+
+	@Autowired
+	private MapsRetrieval mapsRetrieval;
+
+	@RequestMapping(value = "/maps", method = RequestMethod.GET)
+	public String maps(@ModelAttribute("latestSavedPatch") String latestSavedPatch,
+			RedirectAttributes redirectAttrs, Model model) {
+		if (latestSavedPatch == null) {
+			redirectAttrs.addFlashAttribute("noSavedPatch", "Maps");
+			return "redirect:/admin";
+		}
+		model.addAttribute("difference", CollectionUtils.subtract(mapsRetrieval.maps(), mapsRepository.findAll()));
+		model.addAttribute("activeTab", "maps");
+		return "admin/maps/maps";
 	}
 
 }

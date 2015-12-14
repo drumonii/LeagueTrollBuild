@@ -18,6 +18,9 @@
             <a class="item" sec:authorize="hasRole('ROLE_ADMIN')"
                th:classappend="${activeTab == 'champions' ? 'active' : ''}"
                th:href="@{/admin/champions}" th:text="#{admin.champions}">Champions</a>
+            <a class="item" sec:authorize="hasRole('ROLE_ADMIN')"
+               th:classappend="${activeTab == 'maps' ? 'active' : ''}"
+               th:href="@{/admin/maps}" th:text="#{admin.maps}">Maps</a>
             <div class="right menu" sec:authorize="hasRole('ROLE_ADMIN')">
                 <a class="ui item" th:href="@{/logout}"><i class="sign out icon"></i>
                     <span th:text="#{logout}">Logout</span>
