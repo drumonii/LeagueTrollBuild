@@ -1,22 +1,22 @@
 package com.drumonii.loltrollbuild.controller;
 
 import com.drumonii.loltrollbuild.model.Champion;
+import com.drumonii.loltrollbuild.model.GameMap;
 import com.drumonii.loltrollbuild.model.Item;
 import com.drumonii.loltrollbuild.model.SummonerSpell;
 import com.drumonii.loltrollbuild.repository.ChampionsRepository;
 import com.drumonii.loltrollbuild.repository.ItemsRepository;
+import com.drumonii.loltrollbuild.repository.MapsRepository;
 import com.drumonii.loltrollbuild.repository.SummonerSpellsRepository;
 import com.drumonii.loltrollbuild.util.RandomizeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.springframework.data.domain.Sort.Direction.ASC;
 
@@ -27,6 +27,9 @@ import static org.springframework.data.domain.Sort.Direction.ASC;
 @RequestMapping("/champions")
 public class ChampionsController {
 
+	private static final int ITEMS_MAX = 6;
+	private static final int SPELLS_MAX = 2;
+
 	@Autowired
 	private ChampionsRepository championsRepository;
 
@@ -35,6 +38,9 @@ public class ChampionsController {
 
 	@Autowired
 	private SummonerSpellsRepository summonerSpellsRepository;
+
+	@Autowired
+	private MapsRepository mapsRepository;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String champions(Model model) {
@@ -55,25 +61,26 @@ public class ChampionsController {
 			return "redirect:/champions";
 		}
 		model.addAttribute(champion);
+		model.addAttribute("maps", eligibleMaps((List<GameMap>) mapsRepository.findAll()));
 		return "champions/champion";
 	}
 
 	@RequestMapping(value = "/{id}/troll-build", method = RequestMethod.GET)
 	@ResponseBody
-	public Map<String, List<?>> trollBuild(@PathVariable("id") Champion champion) {
+	public Map<String, List<?>> trollBuild(@PathVariable("id") Champion champion, @RequestParam String mapId) {
 		Map<String, List<?>> trollBuild = new HashMap<>();
 
 		// Items
 		List<Item> items = new ArrayList<>();
 		// Add boots first
-		items.add(RandomizeUtil.getRandom(itemsRepository.boots()));
+		items.add(RandomizeUtil.getRandom(itemsRepository.boots(mapId)));
 		// If Viktor, add his starting item
 		if (champion.isViktor()) {
 			items.add(RandomizeUtil.getRandom(itemsRepository.viktorOnly()));
 		}
 		// Get all items for the troll build
-		List<Item> itemsForTrollBuild = itemsRepository.forTrollBuild();
-		while (items.size() < 6) {
+		List<Item> itemsForTrollBuild = itemsRepository.forTrollBuild(mapId);
+		while (items.size() < ITEMS_MAX) {
 			items.add(RandomizeUtil.getRandomAndRemove(itemsForTrollBuild));
 		}
 		trollBuild.put("items", items);
@@ -81,14 +88,30 @@ public class ChampionsController {
 		// Summoner Spells
 		List<SummonerSpell> summonerSpells = new ArrayList<>();
 		List<SummonerSpell> allSummonerSpells = summonerSpellsRepository.forTrollBuild();
-		while (summonerSpells.size() < 2) {
+		while (summonerSpells.size() < SPELLS_MAX) {
 			summonerSpells.add(RandomizeUtil.getRandomAndRemove(allSummonerSpells));
 		}
 		trollBuild.put("summoner-spells", summonerSpells);
 
 		// Trinket
-		trollBuild.put("trinket", Arrays.asList(RandomizeUtil.getRandom(itemsRepository.trinkets())));
+		trollBuild.put("trinket", Arrays.asList(RandomizeUtil.getRandom(itemsRepository.trinkets(mapId))));
 		return trollBuild;
+	}
+
+	/**
+	 * Gets {@link List} of all {@link GameMap}s that are eligible for the troll build. Map names are transformed into a
+	 * more legible format. Eligible maps: Crystal Scar, Twisted Treeline, Summoner's Rift, and Proving Grounds.
+	 *
+	 * @param maps a {@link List} of all {@link GameMap}s
+	 * @return only the eligible {@link List} of {@link GameMap}s
+	 */
+	private List<GameMap> eligibleMaps(List<GameMap> maps) {
+		maps.forEach(GameMap::useActualMapName);
+		maps = maps.stream()
+				.filter(map -> map.getMapId() != 1) // filter out the old Summoner's Rift
+				.sorted((m1, m2) -> m1.getMapName().compareTo(m2.getMapName()))
+				.collect(Collectors.toList());
+		return maps;
 	}
 
 }

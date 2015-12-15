@@ -20,6 +20,8 @@ import static org.springframework.data.domain.Sort.Direction.ASC;
 
 public class ItemsRepositoryTest extends BaseSpringTestRunner {
 
+	private static final String SUMMONERS_RIFT = "11";
+
 	@Autowired
 	private ItemsRepository itemsRepository;
 
@@ -113,7 +115,7 @@ public class ItemsRepositoryTest extends BaseSpringTestRunner {
 		Item ninjaTabi = objectMapper.readValue(responseBody, ItemsResponse.class).getItems().get("3047");
 		itemsRepository.save(ninjaTabi);
 
-		List<Item> boots = itemsRepository.boots();
+		List<Item> boots = itemsRepository.boots(SUMMONERS_RIFT);
 		assertThat(boots).isNotEmpty();
 		assertThat(boots).flatExtracting(Item::getFrom)
 				.contains("1001");
@@ -121,6 +123,8 @@ public class ItemsRepositoryTest extends BaseSpringTestRunner {
 				.doesNotHave(new Condition<>(name -> name.contains("Enchantment"), "non enchanted"));
 		assertThat(boots).extracting(Item::getDescription)
 				.have(new Condition<>(descr -> descr.contains("Enhanced Movement"), "movement"));
+		assertThat(boots).extracting(Item::getMaps)
+				.extracting(SUMMONERS_RIFT).contains(true);
 	}
 
 	@Test
@@ -165,14 +169,14 @@ public class ItemsRepositoryTest extends BaseSpringTestRunner {
 		Item oraclesLens = objectMapper.readValue(responseBody, ItemsResponse.class).getItems().get("3364");
 		itemsRepository.save(oraclesLens);
 
-		List<Item> trinkets = itemsRepository.trinkets();
+		List<Item> trinkets = itemsRepository.trinkets(SUMMONERS_RIFT);
 		assertThat(trinkets).isNotEmpty();
 		assertThat(trinkets).extracting(Item::getGold).extracting(ItemGold::getTotal)
 				.containsOnly(0);
 		assertThat(trinkets).extracting(Item::getGold).extracting("purchasable", Boolean.class)
 				.containsOnly(true);
 		assertThat(trinkets).extracting(Item::getMaps)
-				.extracting("11").contains(true);
+				.extracting(SUMMONERS_RIFT).contains(true);
 		assertThat(trinkets).extracting(Item::getName)
 				.have(new Condition<>(name -> name.contains("Trinket"), "Trinket"));
 	}
@@ -206,6 +210,8 @@ public class ItemsRepositoryTest extends BaseSpringTestRunner {
 				.have(new Condition<>(name -> name.contains("Viktor"), "Viktor"));
 		assertThat(viktorOnlyItems).extracting(Item::getRequiredChampion)
 				.have(new Condition<>(name -> name.equals("Viktor"), "Viktor"));
+		assertThat(viktorOnlyItems).extracting(Item::getMaps)
+				.extracting(SUMMONERS_RIFT).contains(true);
 	}
 
 	@Test
@@ -324,10 +330,10 @@ public class ItemsRepositoryTest extends BaseSpringTestRunner {
 		Item bloodThirster = objectMapper.readValue(responseBody, ItemsResponse.class).getItems().get("3072");
 		itemsRepository.save(bloodThirster);
 
-		List<Item> forTrollBuild = itemsRepository.forTrollBuild();
+		List<Item> forTrollBuild = itemsRepository.forTrollBuild("0");
 		assertThat(forTrollBuild).isNotEmpty();
 		assertThat(forTrollBuild).extracting(Item::getMaps)
-				.extracting("11").contains(true);
+				.extracting(SUMMONERS_RIFT).contains(true);
 		assertThat(forTrollBuild).extracting(Item::getGold).extracting("purchasable", Boolean.class)
 				.containsOnly(true);
 		assertThat(forTrollBuild).extracting(Item::getConsumed)

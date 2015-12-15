@@ -5,6 +5,7 @@
 <script th:fragment="script">
 /*<![CDATA[*/
 $(function() {
+    $('#map').dropdown();
     var newBuildBtn = $('#new-build');
     newBuildBtn.popup({
         on: 'manual',
@@ -14,9 +15,12 @@ $(function() {
     getTrollBuild();
     function getTrollBuild() {
         $.ajax({
-            url: [[@{/champions/{id}/troll-build(id=${champion.id})}]],
+            url: [[@{/champions/__${champion.id}__/troll-build}]],
             beforeSend: function() {
                 newBuildBtn.addClass('loading');
+            },
+            data: {
+                mapId: $('#map option:selected').val()
             },
             success: function(data) {
                 newBuildBtn.popup('hide');
@@ -43,10 +47,19 @@ $(function() {
             },
             complete: function() {
                 newBuildBtn.removeClass('loading');
+                // If map is Proving Grounds or Crystal Scar
+                if ($('#map option:selected').val() == 12 || $('#map option:selected').val() == 8) {
+                    $('#trinket .image').addClass('disabled');
+                } else {
+                    $('#trinket .image').removeClass('disabled');
+                }
             }
         });
     }
     newBuildBtn.click(function() {
+        getTrollBuild();
+    });
+    $('#map').change(function () {
         getTrollBuild();
     });
 });
