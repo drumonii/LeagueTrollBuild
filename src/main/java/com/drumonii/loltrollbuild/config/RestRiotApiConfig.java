@@ -90,7 +90,7 @@ public class RestRiotApiConfig {
 				.scheme(staticData.getScheme())
 				.host(staticData.getBaseUrl())
 				.path(staticData.getItem())
-				.queryParam("itemData", "consumed,from,gold,image,into,maps")
+				.queryParam("itemData", "consumed,from,gold,image,into,maps,requiredChampion")
 				.queryParam(staticData.getParam(), api.getKey());
 	}
 
