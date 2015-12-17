@@ -22,6 +22,8 @@ public class WebJarsControllerTest extends BaseSpringTestRunner {
 				.andExpect(status().isNotFound());
 		mockMvc.perform(get("/webjars/{webjar}", "malformed"))
 				.andExpect(status().isNotFound());
+		mockMvc.perform(get("/webjars/{webjar}", "jquery/jquery.js"))
+				.andExpect(status().isNotFound());
 	}
 
 }

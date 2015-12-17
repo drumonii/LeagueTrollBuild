@@ -38,6 +38,9 @@ public class WebJarsController {
 		} catch (MultipleMatchesException e) {
 			fullPath = assetLocator.getFullPathExact(webjar, mvcPath.substring(mvcPrefix.length()));
 		} catch (Exception e) {
+			fullPath = null;
+		}
+		if (fullPath == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<>(new ClassPathResource(fullPath), HttpStatus.OK);
