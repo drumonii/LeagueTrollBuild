@@ -93,4 +93,30 @@ public class ImageSaver {
 		return saved;
 	}
 
+	/**
+	 * Deletes a {@link List} of {@link Image} and returns the number of images that were deleted.
+	 *
+	 * @param images the {@link List} of a model's {@link Image}
+	 * @return the number of images deleted
+	 */
+	public int deleteImages(List<Image> images) {
+		int saved = 0;
+		for (Image image : images) {
+			Path path = Paths.get(TEMP_DIR, RESOURCE_DIR, image.getFull());
+			saved += FileUtil.deleteFile(path);
+		}
+		return saved;
+	}
+
+	/**
+	 * Deletes a {@link Image} and returns the number of image that was deleted.
+	 *
+	 * @param image model's {@link Image}
+	 * @return number of image deleted
+	 */
+	public int deleteImage(Image image) {
+		Path path = Paths.get(TEMP_DIR, RESOURCE_DIR, image.getFull());
+		return FileUtil.deleteFile(path);
+	}
+
 }

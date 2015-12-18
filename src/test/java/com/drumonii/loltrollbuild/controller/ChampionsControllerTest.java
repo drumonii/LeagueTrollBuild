@@ -11,6 +11,7 @@ import com.drumonii.loltrollbuild.riot.api.ChampionsResponse;
 import com.drumonii.loltrollbuild.riot.api.ItemsResponse;
 import com.drumonii.loltrollbuild.riot.api.SummonerSpellsResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.After;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -20,6 +21,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 public class ChampionsControllerTest extends BaseSpringTestRunner {
+
+	private static final int SUMMONERS_RIFT = 11;
 
 	@Autowired
 	private ChampionsRepository championsRepository;
@@ -32,6 +35,13 @@ public class ChampionsControllerTest extends BaseSpringTestRunner {
 
 	@Autowired
 	private ObjectMapper objectMapper;
+
+	@After
+	public void after() {
+		itemsRepository.deleteAll();
+		summonerSpellsRepository.deleteAll();
+		championsRepository.deleteAll();
+	}
 
 	@Test
 	public void champions() throws Exception {
@@ -48,7 +58,7 @@ public class ChampionsControllerTest extends BaseSpringTestRunner {
 				.andExpect(redirectedUrl("/champions"));
 
 		String responseBody = "{\"type\":\"champion\",\"version\":\"5.22.3\",\"data\":{\"TestTest\":{\"id\":10001,\"" +
-				"key\":\"TestTest\",\"name\":\"Test'Test\",\"title\":\"Much Test'Test Champion\",\"image\":{\"full\":" +
+				"key\":\"TestTest\",\"name\":\"Test'Test\",\"title\":\"much TestTest Champion\",\"image\":{\"full\":" +
 				"\"Test.png\",\"sprite\":\"champion0.png\",\"group\":\"champion\",\"x\":336,\"y\":0,\"w\":48," +
 				"\"h\":48},\"tags\":[\"Testing1\",\"Testing2\"],\"partype\":\"TestParType\"}}}";
 		ChampionsResponse championsResponse = objectMapper.readValue(responseBody, ChampionsResponse.class);
@@ -72,8 +82,6 @@ public class ChampionsControllerTest extends BaseSpringTestRunner {
 				.andExpect(model().attributeExists("champion"))
 				.andExpect(model().attribute("champion", is(unmarshalledChampion)))
 				.andExpect(view().name("champions/champion"));
-
-		championsRepository.delete(10001);
 	}
 
 	@Test
@@ -194,7 +202,7 @@ public class ChampionsControllerTest extends BaseSpringTestRunner {
 		Champion annie = objectMapper.readValue(responseBody, ChampionsResponse.class).getChampions().get("Annie");
 		championsRepository.save(annie);
 
-		mockMvc.perform(get("/champions/{id}/troll-build", 1))
+		mockMvc.perform(get("/champions/{id}/troll-build?mapId={mapId}", annie.getId(), SUMMONERS_RIFT))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(APPLICATION_JSON_UTF8))
 				.andExpect(jsonPath("$.items").exists())
@@ -202,11 +210,6 @@ public class ChampionsControllerTest extends BaseSpringTestRunner {
 				.andExpect(jsonPath("$.summoner-spells").exists())
 				.andExpect(jsonPath("$.summoner-spells", hasSize(2)))
 				.andExpect(jsonPath("$.trinket", hasSize(1)));
-
-		// Cleanup
-		itemsRepository.deleteAll();
-		summonerSpellsRepository.deleteAll();
-		championsRepository.deleteAll();
 	}
 
 }

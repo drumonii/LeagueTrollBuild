@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
-import org.apache.commons.lang3.StringUtils;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -19,7 +18,7 @@ import java.util.Set;
 @Table(name = "CHAMPION")
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(exclude = { "title" })
+@EqualsAndHashCode
 @ToString
 public class Champion {
 
@@ -55,11 +54,6 @@ public class Champion {
 	@Column(name = "PARTYPE", nullable = false)
 	@JsonProperty("partype")
 	@Getter @Setter private String partype;
-
-	@PrePersist
-	public void prePersist() {
-		title = StringUtils.capitalize(title);
-	}
 
 	@JsonIgnore
 	public boolean isViktor() {

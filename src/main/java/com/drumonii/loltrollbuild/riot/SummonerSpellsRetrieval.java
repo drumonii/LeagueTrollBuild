@@ -1,13 +1,12 @@
 package com.drumonii.loltrollbuild.riot;
 
 import com.drumonii.loltrollbuild.model.SummonerSpell;
-import com.drumonii.loltrollbuild.model.image.Image;
 import com.drumonii.loltrollbuild.repository.SummonerSpellsRepository;
 import com.drumonii.loltrollbuild.riot.api.ImageSaver;
 import com.drumonii.loltrollbuild.riot.api.RiotApiProperties;
 import com.drumonii.loltrollbuild.riot.api.SummonerSpellsResponse;
 import com.drumonii.loltrollbuild.util.MapUtil;
-import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.collections4.ListUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
@@ -66,9 +65,12 @@ public class SummonerSpellsRetrieval {
 
 	/**
 	 * Persists the {@link List} of {@link SummonerSpell} from Riot and saves their images. If Summoner Spells already
-	 * exist in the database, then only the difference (list from Riot not in the database) is persisted. If the {@code
-	 * truncate} request parameter is set to {@code true}, then all previous Summoner Spells and their images are
-	 * deleted and all the ones from Riot are persisted along with their images saved.
+	 * exist in the database, then only the difference (list from Riot not in the database) is persisted. And if
+	 * Summoner Spells not found in Riot exist in the database, then those Summoner Spells are deleted along with their
+	 * images.
+	 * <p></p>
+	 * If the {@code truncate} request parameter is set to {@code true}, then all previous Summoner Spells and their
+	 * images are deleted and all the ones from Riot are persisted along with their images saved.
 	 *
 	 * @param truncate (optional) if {@code true}, all previous {@link SummonerSpell}s and their images are deleted and
 	 * all the ones from Riot are persisted along with their images saved
@@ -83,16 +85,16 @@ public class SummonerSpellsRetrieval {
 		if (truncate) {
 			summonerSpellsRepository.deleteAll();
 		} else {
-			summonerSpells = (List<SummonerSpell>) CollectionUtils.subtract(summonerSpells,
-					summonerSpellsRepository.findAll());
+			List<SummonerSpell> summonerSpellsFromDb = (List<SummonerSpell>) summonerSpellsRepository.findAll();
+			List<SummonerSpell> deletedSummonerSpells = ListUtils.subtract(summonerSpellsFromDb, summonerSpells);
+			summonerSpellsRepository.delete(deletedSummonerSpells);
+			imageSaver.deleteImages(deletedSummonerSpells.stream().map(SummonerSpell::getImage)
+					.collect(Collectors.toList()));
+			summonerSpells = ListUtils.subtract(summonerSpells, summonerSpellsFromDb);
 		}
 
-		List<Image> images = summonerSpells.stream()
-				.map(SummonerSpell::getImage)
-				.collect(Collectors.toList());
-		if (!images.isEmpty()) {
-			imageSaver.copyImagesFromURLs(images, truncate, summonerSpellsImgUri);
-		}
+		imageSaver.copyImagesFromURLs(summonerSpells.stream().map(SummonerSpell::getImage).collect(Collectors.toList()),
+				truncate, summonerSpellsImgUri);
 
 		return (List<SummonerSpell>) summonerSpellsRepository.save(summonerSpells);
 	}
@@ -117,8 +119,8 @@ public class SummonerSpellsRetrieval {
 	}
 
 	/**
-	 * Persists a {@link SummonerSpell} from Riot by its ID and saves its image. If the Summoner Spell already exists in
-	 * the database, then the previous Summoner Spell and its image are deleted and the one retrieved from Riot is
+	 * Persists a {@link SummonerSpell} from Riot by its ID and saves its image. If the Summoner Spell already exists
+	 * in the database, then the previous Summoner Spell and its image are deleted and the one retrieved from Riot is
 	 * persisted along with its image saved.
 	 *
 	 * @param id the ID to lookup the {@link SummonerSpell} from Riot

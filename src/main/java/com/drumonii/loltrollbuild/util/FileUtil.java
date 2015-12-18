@@ -77,11 +77,29 @@ public class FileUtil {
 			try {
 				Files.createDirectory(resourceDir);
 			} catch (IOException e) {
-				log.warn("Unable to create the " + resourceDir);
+				log.warn("Unable to create the " + resourceDir + " because " + ExceptionUtils.getRootCauseMessage(e));
 				success = false;
 			}
 		}
 		return success;
+	}
+
+	/**
+	 * Deletes a file and returns the number of file that was deleted.
+	 *
+	 * @param file the specified {@link Path} to delete
+	 * @return the number of file deleted
+	 */
+	public static int deleteFile(Path file) {
+		int saved = 0;
+		try {
+			Files.delete(file);
+			log.info("Deleted " + file);
+			saved++;
+		} catch (IOException e) {
+			log.warn("Unable to delete path " + file + " because " + ExceptionUtils.getRootCauseMessage(e));
+		}
+		return saved;
 	}
 
 }

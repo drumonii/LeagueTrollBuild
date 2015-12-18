@@ -1,13 +1,12 @@
 package com.drumonii.loltrollbuild.riot;
 
 import com.drumonii.loltrollbuild.model.GameMap;
-import com.drumonii.loltrollbuild.model.image.Image;
 import com.drumonii.loltrollbuild.repository.MapsRepository;
 import com.drumonii.loltrollbuild.riot.api.ImageSaver;
 import com.drumonii.loltrollbuild.riot.api.MapsResponse;
 import com.drumonii.loltrollbuild.riot.api.RiotApiProperties;
 import com.drumonii.loltrollbuild.util.MapUtil;
-import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.collections4.ListUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
@@ -60,9 +59,11 @@ public class MapsRetrieval {
 
 	/**
 	 * Persists the {@link List} of {@link GameMap} from Riot and saves their images. If Maps already exist in the
-	 * database, then only the difference (list from Riot not in the database) is persisted. If the {@code truncate}
-	 * request parameter is set to {@code true}, then all previous Maps and their images are deleted and all the ones
-	 * from Riot are persisted along with their images saved.
+	 * database, then only the difference (list from Riot not in the database) is persisted. And if Maps not found in
+	 * Riot exist in the database, then those Maps are deleted along with their images.
+	 * <p></p>
+	 * If the {@code truncate} request parameter is set to {@code true}, then all previous Maps and their images are
+	 * deleted and all the ones from Riot are persisted along with their images saved.
 	 *
 	 * @param truncate (optional) if {@code true}, all previous {@link GameMap}s and their images are deleted and all
 	 * the ones from Riot are persisted along with their images saved
@@ -72,18 +73,19 @@ public class MapsRetrieval {
 	public List<GameMap> saveMaps(@RequestParam(required = false) boolean truncate) {
 		MapsResponse response = restTemplate.getForObject(mapsUri.toString(), MapsResponse.class);
 		List<GameMap> maps = MapUtil.getElementsFromMap(response.getMaps());
+
 		if (truncate) {
 			mapsRepository.deleteAll();
 		} else {
-			maps = (List<GameMap>) CollectionUtils.subtract(maps, mapsRepository.findAll());
+			List<GameMap> mapsFromDb = (List<GameMap>) mapsRepository.findAll();
+			List<GameMap> deletedMaps = ListUtils.subtract(mapsFromDb, maps);
+			mapsRepository.delete(deletedMaps);
+			imageSaver.deleteImages(deletedMaps.stream().map(GameMap::getImage).collect(Collectors.toList()));
+			maps = ListUtils.subtract(maps, mapsFromDb);
 		}
 
-		List<Image> images = maps.stream()
-				.map(GameMap::getImage)
-				.collect(Collectors.toList());
-		if (!images.isEmpty()) {
-			imageSaver.copyImagesFromURLs(images, truncate, mapsImgUri);
-		}
+		imageSaver.copyImagesFromURLs(maps.stream().map(GameMap::getImage).collect(Collectors.toList()), truncate,
+				mapsImgUri);
 
 		return (List<GameMap>) mapsRepository.save(maps);
 	}
@@ -106,8 +108,8 @@ public class MapsRetrieval {
 
 	/**
 	 * Persists a {@link GameMap} from Riot by its ID and saves its image. If the Map already exists in the database,
-	 * then the previous Map and its image are deleted and the one retrieved from Riot is persisted along with its image
-	 * saved.
+	 * then the previous Map and its image are deleted and the one retrieved from Riot is persisted along with its
+	 * image saved.
 	 *
 	 * @param id the ID to lookup the {@link GameMap} from Riot
 	 * @return the persisted {@link GameMap}

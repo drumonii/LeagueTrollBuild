@@ -117,7 +117,7 @@ public class RestRiotApiConfigTest extends BaseSpringTestRunner {
 		assertThat(uriComponents.getHost()).isEqualTo(host);
 		assertThat(uriComponents.getPath()).isEqualTo(staticData.getItem().replace("{id}", String.valueOf(id)));
 		assertThat(uriComponents.getQueryParams()).contains(entry("itemData",
-				Arrays.asList("consumed,from,gold,image,into,maps")));
+				Arrays.asList("consumed,from,gold,image,into,maps,requiredChampion")));
 		assertThat(uriComponents.getQueryParams()).contains(entry("api_key", Arrays.asList(apiKey)));
 	}
 

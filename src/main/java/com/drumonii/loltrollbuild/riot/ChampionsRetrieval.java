@@ -1,13 +1,12 @@
 package com.drumonii.loltrollbuild.riot;
 
 import com.drumonii.loltrollbuild.model.Champion;
-import com.drumonii.loltrollbuild.model.image.Image;
 import com.drumonii.loltrollbuild.repository.ChampionsRepository;
 import com.drumonii.loltrollbuild.riot.api.ChampionsResponse;
 import com.drumonii.loltrollbuild.riot.api.ImageSaver;
 import com.drumonii.loltrollbuild.riot.api.RiotApiProperties;
 import com.drumonii.loltrollbuild.util.MapUtil;
-import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.collections4.ListUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
@@ -64,10 +63,12 @@ public class ChampionsRetrieval {
 	}
 
 	/**
-	 * Persists the {@link List} of {@link Champion} from Riot and saves their images. If Champions already exist in the
-	 * database, then only the difference (list from Riot not in the database) is persisted. If the {@code truncate}
-	 * request parameter is set to {@code true}, then all previous Champions and their images are deleted and all the
-	 * ones from Riot are persisted along with their images saved.
+	 * Persists the {@link List} of {@link Champion} from Riot and saves their images. If Champions already exist in
+	 * the database, then only the difference (list from Riot not in the database) is persisted. And if Champions not
+	 * found in Riot exist in the database, then those Champions are deleted along with their images.
+	 * <p></p>
+	 * If the {@code truncate} request parameter is set to {@code true}, then all previous Champions and their images
+	 * are deleted and all the ones from Riot are persisted along with their images saved.
 	 *
 	 * @param truncate (optional) if {@code true}, all previous {@link Champion}s and their images are deleted and all
 	 * the ones from Riot are persisted along with their images saved
@@ -81,15 +82,15 @@ public class ChampionsRetrieval {
 		if (truncate) {
 			championsRepository.deleteAll();
 		} else {
-			champions = (List<Champion>) CollectionUtils.subtract(champions, championsRepository.findAll());
+			List<Champion> championsFromDb = (List<Champion>) championsRepository.findAll();
+			List<Champion> deletedChampions = ListUtils.subtract(championsFromDb, champions);
+			championsRepository.delete(deletedChampions);
+			imageSaver.deleteImages(deletedChampions.stream().map(Champion::getImage).collect(Collectors.toList()));
+			champions = ListUtils.subtract(champions, championsFromDb);
 		}
 
-		List<Image> images = champions.stream()
-				.map(Champion::getImage)
-				.collect(Collectors.toList());
-		if (!images.isEmpty()) {
-			imageSaver.copyImagesFromURLs(images, truncate, championsImgUri);
-		}
+		imageSaver.copyImagesFromURLs(champions.stream().map(Champion::getImage).collect(Collectors.toList()), truncate,
+				championsImgUri);
 
 		return (List<Champion>) championsRepository.save(champions);
 	}
@@ -115,8 +116,8 @@ public class ChampionsRetrieval {
 
 	/**
 	 * Persists a {@link Champion} from Riot by its ID and saves its image. If the Champion already exists in the
-	 * database, then the previous Champion and its image are deleted and the one retrieved from Riot is persisted along
-	 * with its image saved.
+	 * database, then the previous Champion and its image are deleted and the one retrieved from Riot is persisted
+	 * along with its image saved.
 	 *
 	 * @param id the ID to lookup the {@link Champion} from Riot
 	 * @return the persisted {@link Champion}

@@ -20,7 +20,7 @@
                             <div class="middle aligned content">
                                 <h4 class="header" th:text="${champion.name}">Thresh</h4>
                                 <div class="meta">
-                                    <span th:text="${champion.title}">The Chain Warden</span>
+                                    <span th:text="${#strings.capitalize(champion.title)}">The Chain Warden</span>
                                 </div>
                                 <div class="extra">
                                     <div class="ui label" th:each="tag : ${champion.tags}" th:text="${tag}">Support

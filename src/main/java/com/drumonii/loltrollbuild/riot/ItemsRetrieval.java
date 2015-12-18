@@ -1,13 +1,12 @@
 package com.drumonii.loltrollbuild.riot;
 
 import com.drumonii.loltrollbuild.model.Item;
-import com.drumonii.loltrollbuild.model.image.Image;
 import com.drumonii.loltrollbuild.repository.ItemsRepository;
 import com.drumonii.loltrollbuild.riot.api.ImageSaver;
 import com.drumonii.loltrollbuild.riot.api.ItemsResponse;
 import com.drumonii.loltrollbuild.riot.api.RiotApiProperties;
 import com.drumonii.loltrollbuild.util.MapUtil;
-import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.collections4.ListUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
@@ -65,9 +64,11 @@ public class ItemsRetrieval {
 
 	/**
 	 * Persists the {@link List} of {@link Item} from Riot and saves their images. If Items already exist in the
-	 * database, then only the difference (list from Riot not in the database) is persisted. If the {@code truncate}
-	 * request parameter is set to {@code true}, then all previous Items and their images are deleted and all the ones
-	 * from Riot are persisted along with their images saved.
+	 * database, then only the difference (list from Riot not in the database) is persisted. And if Items not
+	 * found in Riot exist in the database, then those Items are deleted along with their images.
+	 * <p></p>
+	 * If the {@code truncate} request parameter is set to {@code true}, then all previous Items and their images are
+	 * deleted and all the ones from Riot are persisted along with their images saved.
 	 *
 	 * @param truncate (optional) if {@code true}, all previous {@link Item}s and their images are deleted and all the
 	 * ones from Riot are persisted along with their images saved
@@ -81,15 +82,15 @@ public class ItemsRetrieval {
 		if (truncate) {
 			itemsRepository.deleteAll();
 		} else {
-			items = (List<Item>) CollectionUtils.subtract(items, itemsRepository.findAll());
+			List<Item> itemsFromDb = (List<Item>) itemsRepository.findAll();
+			List<Item> deletedItems = ListUtils.subtract(itemsFromDb, items);
+			itemsRepository.delete(deletedItems);
+			imageSaver.deleteImages(deletedItems.stream().map(Item::getImage).collect(Collectors.toList()));
+			items = ListUtils.subtract(items, itemsFromDb);
 		}
 
-		List<Image> images = items.stream()
-				.map(Item::getImage)
-				.collect(Collectors.toList());
-		if (!images.isEmpty()) {
-			imageSaver.copyImagesFromURLs(images, truncate, itemsImgUri);
-		}
+		imageSaver.copyImagesFromURLs(items.stream().map(Item::getImage).collect(Collectors.toList()), truncate,
+				itemsImgUri);
 
 		return (List<Item>) itemsRepository.save(items);
 	}
@@ -113,9 +114,9 @@ public class ItemsRetrieval {
 	}
 
 	/**
-	 * Persists a {@link Item} from Riot by its ID and saves its image. If the Item already exists in the database, then
-	 * the previous Item and its image are deleted and the one retrieved from Riot is persisted along with its image
-	 * saved.
+	 * Persists a {@link Item} from Riot by its ID and saves its image. If the Item already exists in the database,
+	 * then the previous Item and its image are deleted and the one retrieved from Riot is persisted along with its
+	 * image saved.
 	 *
 	 * @param id the ID to lookup the {@link Item} from Riot
 	 * @return the persisted {@link Item}

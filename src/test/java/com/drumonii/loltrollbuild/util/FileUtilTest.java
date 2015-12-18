@@ -16,8 +16,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import static com.drumonii.loltrollbuild.util.FileUtil.copyURLToFile;
-import static com.drumonii.loltrollbuild.util.FileUtil.createTempResourceDir;
+import static com.drumonii.loltrollbuild.util.FileUtil.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class FileUtilTest extends BaseUnitTestRunner {
@@ -77,6 +76,20 @@ public class FileUtilTest extends BaseUnitTestRunner {
 		assertThat(createTempResourceDir("|||")).isFalse();
 
 		Files.delete(tempResourcePath); // cleanup
+	}
+
+	@Test
+	public void fileIsDeleted() throws Exception {
+		String image = "boat.png";
+		URL url = new URL("http://homepages.cae.wisc.edu/~ece533/images/" + image);
+
+		String dirInTemp = RandomStringUtils.random(RandomUtils.nextInt(1, 11), true, false);
+		Path tempResourcePath = Paths.get(FileUtils.getTempDirectoryPath(), dirInTemp);
+
+		// No previous image, don't overwrite
+		assertThat(copyURLToFile(url, tempResourcePath.resolve(image), false)).isEqualTo(1);
+
+		assertThat(deleteFile(tempResourcePath.resolve(image))).isEqualTo(1);
 	}
 
 }

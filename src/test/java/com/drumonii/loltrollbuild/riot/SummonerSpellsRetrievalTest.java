@@ -3,17 +3,13 @@ package com.drumonii.loltrollbuild.riot;
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.model.SummonerSpell;
 import com.drumonii.loltrollbuild.model.Version;
-import com.drumonii.loltrollbuild.model.image.Image;
 import com.drumonii.loltrollbuild.repository.SummonerSpellsRepository;
 import com.drumonii.loltrollbuild.repository.VersionsRepository;
-import com.drumonii.loltrollbuild.riot.api.ImageSaver;
 import com.drumonii.loltrollbuild.riot.api.SummonerSpellsResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpMethod;
@@ -29,8 +25,6 @@ import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Fail.fail;
-import static org.mockito.Matchers.*;
-import static org.mockito.Mockito.when;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withStatus;
@@ -56,15 +50,6 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 	@Qualifier("summonerSpell")
 	private UriComponentsBuilder summonerSpellBuilder;
 
-	@Mock
-	private UriComponentsBuilder summonerSpellsImgBuilder;
-
-	@Mock
-	private UriComponents summonerSpellsImgUri;
-
-	@Mock
-	private ImageSaver imageSaver;
-
 	@Autowired
 	private SummonerSpellsRepository summonerSpellsRepository;
 
@@ -83,7 +68,6 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 	@Before
 	public void before() {
 		super.before();
-		MockitoAnnotations.initMocks(this);
 
 		// Only first request is handled. See: http://stackoverflow.com/q/30713734
 		mockServer = MockRestServiceServer.createServer(restTemplate);
@@ -139,13 +123,6 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 		mockServer.expect(requestTo(summonerSpellsUri.toString())).andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(summonerSpellsResponseBody, MediaType.APPLICATION_JSON));
 
-		when(summonerSpellsImgBuilder.buildAndExpand(anyString(), anyString()))
-				.thenReturn(summonerSpellsImgUri);
-		when(summonerSpellsImgUri.toUriString())
-				.thenReturn(anyString());
-		when(imageSaver.copyImagesFromURLs(anyListOf(Image.class), eq(false), summonerSpellsImgBuilder))
-				.thenReturn(1);
-
 		mockMvc.perform(post("/riot/summoner-spells").with(csrf()).session(mockHttpSession("admin")))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(APPLICATION_JSON_UTF8))
@@ -173,12 +150,21 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 				.andRespond(withSuccess(summonerSpellsResponseBody, MediaType.APPLICATION_JSON));
 		summonerSpellsRepository.save(cleanse);
 
-		when(summonerSpellsImgBuilder.buildAndExpand(anyString(), anyString()))
-				.thenReturn(summonerSpellsImgUri);
-		when(summonerSpellsImgUri.toUriString())
-				.thenReturn(anyString());
-		when(imageSaver.copyImagesFromURLs(anyListOf(Image.class), eq(false), summonerSpellsImgBuilder))
-				.thenReturn(1);
+		mockMvc.perform(post("/riot/summoner-spells").with(csrf()).session(mockHttpSession("admin")))
+				.andExpect(status().isOk())
+				.andExpect(content().contentType(APPLICATION_JSON_UTF8))
+				.andExpect(content().json("[]"));
+		mockServer.verify();
+
+		assertThat(summonerSpellsRepository.findOne(cleanse.getId())).isNotNull();
+	}
+
+	@Test
+	public void saveDifferenceOfSummonerSpellsWithDeleted() throws Exception {
+		mockServer.expect(requestTo(summonerSpellsUri.toString())).andExpect(method(HttpMethod.GET))
+				.andRespond(withSuccess(summonerSpellsResponseBody, MediaType.APPLICATION_JSON));
+		summonerSpellsRepository.save(cleanse);
+		summonerSpellsRepository.save(ignite);
 
 		mockMvc.perform(post("/riot/summoner-spells").with(csrf()).session(mockHttpSession("admin")))
 				.andExpect(status().isOk())
@@ -187,6 +173,7 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 		mockServer.verify();
 
 		assertThat(summonerSpellsRepository.findOne(cleanse.getId())).isNotNull();
+		assertThat(summonerSpellsRepository.findOne(ignite.getId())).isNull();
 	}
 
 	@Test
@@ -207,13 +194,6 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 
 		mockServer.expect(requestTo(summonerSpellsUri.toString())).andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(summonerSpellsResponseBody, MediaType.APPLICATION_JSON));
-
-		when(summonerSpellsImgBuilder.buildAndExpand(anyString(), anyString()))
-				.thenReturn(summonerSpellsImgUri);
-		when(summonerSpellsImgUri.toUriString())
-				.thenReturn(anyString());
-		when(imageSaver.copyImagesFromURLs(anyListOf(Image.class), eq(false), summonerSpellsImgBuilder))
-				.thenReturn(1);
 
 		mockMvc.perform(post("/riot/summoner-spells?truncate=true").with(csrf()).session(mockHttpSession("admin")))
 				.andExpect(status().isOk())
@@ -296,13 +276,6 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 
 		mockServer.expect(requestTo(summonerSpellUri.toString())).andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(summonerSpellResponseBody, MediaType.APPLICATION_JSON));
-
-		when(summonerSpellsImgBuilder.buildAndExpand(anyString(), anyString()))
-				.thenReturn(summonerSpellsImgUri);
-		when(summonerSpellsImgUri.toUriString())
-				.thenReturn(anyString());
-		when(imageSaver.copyImageFromURL(any(Image.class), summonerSpellsImgBuilder))
-				.thenReturn(1);
 
 		mockMvc.perform(post("/riot/summoner-spells/{id}", ignite.getId()).with(csrf()).session(mockHttpSession("admin")))
 				.andExpect(status().isOk())

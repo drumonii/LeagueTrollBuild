@@ -4,7 +4,6 @@ import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.model.Champion;
 import com.drumonii.loltrollbuild.riot.api.ChampionsResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.commons.lang3.StringUtils;
 import org.junit.After;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,9 +45,9 @@ public class ChampionsRepositoryTest extends BaseSpringTestRunner {
 		// Select
 		Champion championFromDb = championsRepository.findOne(10001);
 		assertThat(championFromDb).isNotNull();
+		assertThat(championFromDb.getKey()).isEqualTo(unmarshalledChampion.getKey());
 		assertThat(championFromDb.getImage()).isNotNull();
-		assertThat(championFromDb.getTitle()).isEqualTo(StringUtils.capitalize(unmarshalledChampion.getTitle()));
-		unmarshalledChampion.setTitle(championFromDb.getTitle()); // title from Riot is uncapitalized, set from the db's
+		assertThat(championFromDb.getTitle()).isEqualTo(unmarshalledChampion.getTitle());
 		assertThat(championFromDb).isEqualToIgnoringNullFields(unmarshalledChampion);
 
 		// Update

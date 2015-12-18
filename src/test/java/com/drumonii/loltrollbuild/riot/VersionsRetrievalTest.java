@@ -50,6 +50,7 @@ public class VersionsRetrievalTest extends BaseSpringTestRunner {
 	@Before
 	public void before() {
 		super.before();
+
 		// Only first request is handled. See: http://stackoverflow.com/q/30713734
 		mockServer = MockRestServiceServer.createServer(restTemplate);
 		String responseBody = "[\"5.16.1\",\"5.15.1\",\"5.14.1\",\"5.13.1\",\"5.12.1\",\"5.11.1\",\"5.10.1\"," +
