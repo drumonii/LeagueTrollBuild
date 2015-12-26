@@ -4,8 +4,6 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
 
 import javax.persistence.*;
 
@@ -21,9 +19,6 @@ import javax.persistence.*;
 public class ItemGold {
 
 	@Id
-	@GeneratedValue(generator = "generator")
-	@GenericGenerator(name = "generator", strategy = "foreign",
-			parameters = @Parameter(name = "property", value = "item"))
 	@Column(name = "ITEM_ID", unique = true, nullable = false)
 	@JsonIgnore
 	@Getter @Setter private int id;
@@ -44,6 +39,7 @@ public class ItemGold {
 	@JsonProperty("purchasable")
 	@Getter @Setter private boolean purchasable;
 
+	@MapsId
 	@OneToOne(optional = false, mappedBy = "image")
 	@JsonBackReference
 	@Getter @Setter private Item item;
