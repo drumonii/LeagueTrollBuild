@@ -1,5 +1,6 @@
 package com.drumonii.loltrollbuild.riot.api;
 
+import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.model.image.Image;
 import com.drumonii.loltrollbuild.repository.VersionsRepository;
 import com.drumonii.loltrollbuild.util.FileUtil;
@@ -43,12 +44,12 @@ public class ImageSaver {
 	public int copyImagesFromURLs(List<Image> images, boolean overwrite, UriComponentsBuilder builder) {
 		boolean success = FileUtil.createTempResourceDir(RESOURCE_DIR);
 		int saved = 0;
-		String latestPatch = versionsRepository.latestPatch();
-		if (latestPatch == null) {
+		Version latestVersion = versionsRepository.latestVersion();
+		if (latestVersion == null) {
 			throw new ResourceNotFoundException("No latest patch version in the database.");
 		}
 		for (Image image : images) {
-			UriComponents uriComponents = builder.buildAndExpand(latestPatch, image.getFull());
+			UriComponents uriComponents = builder.buildAndExpand(latestVersion.getPatch(), image.getFull());
 			URL url = null;
 			try {
 				url = new URL(uriComponents.toUriString());
@@ -75,11 +76,11 @@ public class ImageSaver {
 	public int copyImageFromURL(Image image, UriComponentsBuilder builder) {
 		boolean success = FileUtil.createTempResourceDir(RESOURCE_DIR);
 		int saved = 0;
-		String latestPatch = versionsRepository.latestPatch();
-		if (latestPatch == null) {
+		Version latestVersion = versionsRepository.latestVersion();
+		if (latestVersion == null) {
 			throw new ResourceNotFoundException("No latest patch version in the database.");
 		}
-		UriComponents uriComponents = builder.buildAndExpand(latestPatch, image.getFull());
+		UriComponents uriComponents = builder.buildAndExpand(latestVersion.getPatch(), image.getFull());
 		URL url = null;
 		try {
 			url = new URL(uriComponents.toUriString());

@@ -107,7 +107,7 @@ public class VersionsRetrievalTest extends BaseSpringTestRunner {
 		mockServer.verify();
 
 		assertThat(versionsRepository.findOne(latestVersion.getPatch())).isNull();
-		assertThat(versionsRepository.latestPatch()).isNotNull();
+		assertThat(versionsRepository.latestVersion()).isNotNull();
 	}
 
 	@Test
@@ -125,8 +125,8 @@ public class VersionsRetrievalTest extends BaseSpringTestRunner {
 				.andExpect(content().string(versions[0]));
 		mockServer.verify();
 
-		assertThat(versionsRepository.latestPatch()).isNotNull();
-		assertThat(versionsRepository.latestPatch()).isEqualTo("5.16.1");
+		assertThat(versionsRepository.latestVersion()).isNotNull();
+		assertThat(versionsRepository.latestVersion().getPatch()).isEqualTo("5.16.1");
 	}
 
 }

@@ -1,5 +1,6 @@
 package com.drumonii.loltrollbuild.admin;
 
+import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.repository.*;
 import com.drumonii.loltrollbuild.riot.*;
 import org.apache.commons.collections4.CollectionUtils;
@@ -20,7 +21,8 @@ public class AdminController {
 
 	@ModelAttribute("latestSavedPatch")
 	public String latestSavedPatch() {
-		return versionsRepository.latestPatch();
+		Version version = versionsRepository.latestVersion();
+		return version == null ? null : version.getPatch();
 	}
 
 	@Autowired

@@ -75,7 +75,7 @@ public class VersionsRetrieval {
 	@RequestMapping(value = "/latest", method = RequestMethod.POST)
 	public String saveLatestPatch(@ModelAttribute List<String> versions) {
 		Version latestPatchVersion = new Version(versions.get(0));
-		if (!latestPatchVersion.getPatch().equals(versionsRepository.latestPatch())) {
+		if (!latestPatchVersion.equals(versionsRepository.latestVersion())) {
 			versionsRepository.deleteAll();
 			return versionsRepository.save(latestPatchVersion).getPatch();
 		}

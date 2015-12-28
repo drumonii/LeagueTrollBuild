@@ -69,7 +69,7 @@ public class VersionsRepositoryTest extends BaseSpringTestRunner {
 	public void latestPatch() throws IOException {
 		versionsRepository.save(versions);
 
-		String latestVersion = versionsRepository.latestPatch();
+		String latestVersion = versionsRepository.latestVersion().getPatch();
 		assertThat(latestVersion).isEqualTo(versions.get(0).getPatch());
 	}
 
