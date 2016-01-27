@@ -7,19 +7,21 @@
     <div class="ui hidden divider"></div>
     <div class="ui inverted segment">
         <div class="ui container">
-            <div class="ui inverted divided padded grid">
-                <div class="four wide column">
-                    <h4 class="ui inverted header" th:text="#{footer.about.header}">About</h4>
-                    <p th:utext="#{footer.about}">Random Build Generator</p>
-                    <div class="ui inverted link list">
-                        <a class="item" href="https://github.com/drumonii/LeagueTrollBuild">
-                            <i class="github large icon"></i> GitHub
-                        </a>
+            <div class="ui inverted divided stackable padded grid">
+                <div class="row">
+                    <div class="six wide column">
+                        <h4 class="ui inverted header" th:text="#{footer.about.header}">About</h4>
+                        <p th:utext="#{footer.about}">Random Build Generator</p>
+                        <div class="ui inverted link list">
+                            <a class="item" href="https://github.com/drumonii/LeagueTrollBuild">
+                                <i class="github large icon"></i> GitHub
+                            </a>
+                        </div>
                     </div>
-                </div>
-                <div class="twelve wide column">
-                    <h4 class="ui inverted header" th:text="#{footer.non-endorsement.header}">Disclaimer</h4>
-                    <p th:utext="#{footer.non-endorsement}">Footer Non-Endorsement</p>
+                    <div class="ten wide column">
+                        <h4 class="ui inverted header" th:text="#{footer.non-endorsement.header}">Disclaimer</h4>
+                        <p th:utext="#{footer.non-endorsement}">Footer Non-Endorsement</p>
+                    </div>
                 </div>
             </div>
         </div>
