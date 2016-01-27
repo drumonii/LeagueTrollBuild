@@ -7,70 +7,73 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <div class="ui two column grid">
-        <div class="column">
-            <div class="ui center aligned stackable padded grid">
-                <div class="sixteen wide column row">
-                    <div class="ui items">
-                        <div class="item">
-                            <div class="ui small rounded image">
-                                <div class="ui grey ribbon label" th:text="${champion.partype}">Mana</div>
-                                <img th:src="@{/resources/{image}(image=${champion.image.full})}" />
-                            </div>
-                            <div class="middle aligned content">
-                                <h4 class="header" th:text="${champion.name}">Thresh</h4>
-                                <div class="meta">
-                                    <span th:text="${#strings.capitalize(champion.title)}">The Chain Warden</span>
-                                </div>
-                                <div class="extra">
-                                    <div class="ui label" th:each="tag : ${champion.tags}" th:text="${tag}">Support
-                                    </div>
-                                </div>
-                                <div class="extra">
-                                    <button id="new-build" class="ui primary button" th:text="#{champion.newBuild}">
-                                        New Build
-                                    </button>
-                                    <div class="ui negative message hidden popup">
-                                        <p>
-                                            <i class="warning circle icon"></i>
-                                            <span th:text="#{champion.trollBuild.error}">An error has occurred.</span>
-                                        </p>
-                                    </div>
+    <div class="ui padded grid">
+        <div class="row">
+            <div class="one wide computer column"><!--/* offset space for desktop */--></div>
+            <div class="eight wide mobile eight wide tablet four wide computer column">
+                <div class="ui card" style="width:220px!important;">
+                    <div class="ui image">
+                        <div class="ui grey ribbon label" th:text="${champion.partype}">Mana</div>
+                        <img th:src="@{/resources/{image}(image=${champion.image.full})}" />
+                    </div>
+                    <div class="content">
+                        <h4 class="header" th:text="${champion.name}">Thresh</h4>
+                        <div class="meta">
+                            <span th:text="${#strings.capitalize(champion.title)}">The Chain Warden</span>
+                        </div>
+                        <div class="description">
+                            <div class="extra">
+                                <div class="ui label" th:each="tag : ${champion.tags}" th:text="${tag}">
+                                    Support
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div class="extra content">
+                        <div class="ui form">
+                            <div class="field">
+                                <label th:text="#{champion.map}">Map</label>
+                                <select id="map" class="ui dropdown">
+                                    <option th:each="map : ${maps}"
+                                            th:value="${map.mapId}" th:text="${map.mapName}"
+                                            th:selected="${map.mapId} == 11">Summoner's Rift
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="new-build" class="ui bottom attached primary button" th:text="#{champion.newBuild}">
+                        New Build
+                    </div>
+                    <div class="ui negative message hidden popup">
+                        <p>
+                            <i class="warning circle icon"></i>
+                            <span th:text="#{champion.trollBuild.error}">An error has occurred.</span>
+                        </p>
+                    </div>
                 </div>
-                <div class="sixteen wide column row">
-                    <div class="ui form">
-                        <div class="field">
-                            <label th:text="#{champion.map}">Map</label>
-                            <select id="map" class="ui dropdown">
-                                <option th:each="map : ${maps}"
-                                        th:value="${map.mapId}" th:text="${map.mapName}"
-                                        th:selected="${map.mapId} == 11">Summoner's Rift
-                                </option>
-                            </select>
+            </div>
+            <div class="eight wide mobile eight wide tablet ten wide computer column">
+                <div class="ui stackable center aligned padded grid">
+                    <div class="row">
+                        <div class="sixteen wide column">
+                            <h4 class="ui horizontal divider header" th:text="#{champion.items}">Items</h4>
+                            <div id="items" class="ui horizontal list"><!--/* generated by js */--></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="ten wide column">
+                            <h4 class="ui horizontal divider header" th:text="#{champion.summonerSpells}">Summoner Spells</h4>
+                            <div id="summoner-spells" class="ui horizontal list"><!--/* generated by js */--></div>
+                        </div>
+                        <div class="six wide column">
+                            <h4 class="ui horizontal divider header" th:text="#{champion.trinket}">Trinket</h4>
+                            <div id="trinket" class="ui horizontal list"><!--/* generated by js */--></div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="column">
-            <div class="ui center aligned stackable padded grid">
-                <div class="sixteen wide column row">
-                    <h4 class="ui horizontal divider header" th:text="#{champion.items}">Items</h4>
-                    <div id="items" class="ui horizontal list"><!--/* generated by js */--></div>
-                </div>
-                <div class="eight wide column">
-                    <h4 class="ui horizontal divider header" th:text="#{champion.summonerSpells}">Summoner Spells</h4>
-                    <div id="summoner-spells" class="ui horizontal list"><!--/* generated by js */--></div>
-                </div>
-                <div class="eight wide column">
-                    <h4 class="ui horizontal divider header" th:text="#{champion.trinket}">Trinket</h4>
-                    <div id="trinket" class="ui horizontal list"><!--/* generated by js */--></div>
-                </div>
-            </div>
+            <div class="one wide computer column"><!--/* offset space for desktop */--></div>
         </div>
     </div>
     <script th:inline="javascript" th:include="champions/js/champion.js :: script"></script>
