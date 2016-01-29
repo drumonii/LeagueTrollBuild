@@ -11,7 +11,10 @@ $(function() {
             { orderable: false, targets: [0] },
             { searchable: false, targets: [0] }
         ],
-        lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, 'All'] ]
+        lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, 'All'] ],
+        drawCallback: function(settings) {
+            $('.item-description').popup();
+        }
     });
     $('#save-items-form').submit(function(event) {
         $.ajax({
@@ -58,17 +61,19 @@ $(function() {
             }
         },
         columnDefs: [
-            { orderable: false, targets: [0, 4] },
-            { searchable: false, targets: [0] }
+            { orderable: false, targets: [0, 4, 5] }
         ],
         columns: [
-            { data: 'image.full',
+            { data: null,
                 render: function(data, type, full, meta) {
-                    return $('<img>', {
+                    return $('<div>', {
+                        class: 'item-description',
+                        'data-html': data.description,
+                        'data-variation': 'wide'
+                    }).append($('<img>', {
                         class: 'ui rounded image',
-                        style: 'height:60px;width:auto;',
-                        src: '/resources/' + data
-                    }).wrap('<span>').parent().html();
+                        src: '/resources/' + data.image.full
+                    })).wrap('<span>').parent().html();
                 }
             },
             { data: 'name' },
@@ -110,6 +115,9 @@ $(function() {
             return msg.replace(/{(\d+)}/g, function(match, number) {
                 return typeof args[number] != 'undefined' ? args[number] : match;
             });
+        },
+        drawCallback: function(settings) {
+            $('.item-description').popup();
         }
     });
     dataTable.on('search.dt', function() {

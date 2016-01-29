@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layouts/admin">
 <head>
-    <title th:text="#{admin.summonerSpells}">Summoner Spells Found</title>
+    <title th:text="#{admin.summonerSpells}">Summoner Spells</title>
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/datatables/media/css/jquery.dataTables.min.css}" />
     <script th:src="@{/webjars/datatables/media/js/jquery.dataTables.min.js}"></script>
 </head>
@@ -27,13 +27,15 @@
         <tbody>
         <tr th:each="spell : ${difference}">
             <td>
-                <img class="ui rounded image" style="height:60px;width:auto;"
-                     th:src="@{http://ddragon.leagueoflegends.com/cdn/{patch}/img/spell/{image}
-                     (patch=${latestSavedPatch}, image=${spell.image.full})}" />
+                <div data-variation="wide" th:attr="data-html=${spell.description}" class="summoner-spell-description">
+                    <img class="ui rounded image" style="height:60px;width:auto;"
+                        th:src="@{http://ddragon.leagueoflegends.com/cdn/{patch}/img/spell/{image}
+                        (patch=${latestSavedPatch}, image=${spell.image.full})}" />
+                </div>
             </td>
             <td th:text="${spell.name}"></td>
             <td>
-                <span th:each="mode : ${spell.modes}" th:text="${mode}"></span>
+                <span th:each="mode, iterStat : ${spell.modes}" th:text="${iterStat.last} ? ${mode} : |${mode}, |"></span>
             </td>
         </tr>
         </tbody>
