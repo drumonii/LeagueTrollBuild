@@ -17,11 +17,16 @@ $(function() {
         }
     });
     $('#save-items-form').submit(function(event) {
+        var button = $('#save-items-btn');
+        button.popup({
+            on: 'click',
+            inline: true
+        });
         $.ajax({
             type: 'POST',
             url: [[@{/riot/items}]],
             beforeSend: function() {
-                $('#save-items-btn').addClass('loading');
+                button.addClass('loading');
             },
             data: {
                 truncate: $('#truncate').is(':checked'),
@@ -32,6 +37,12 @@ $(function() {
             },
             success: function(data) {
                 location.reload();
+            },
+            error: function() {
+                button.popup('show');
+            },
+            complete: function() {
+                button.removeClass('loading');
             }
         });
         event.preventDefault();
@@ -81,20 +92,36 @@ $(function() {
             { data: 'requiredChampion' },
             { data: '_links.self.href',
                 render: function(data, type, full, meta) {
-                    return $('<button>', {
-                        id: data.substring(data.lastIndexOf('/') + 1, data.length),
+                    var button = $('<button>', {
+                        'data-item-id': data.substring(data.lastIndexOf('/') + 1, data.length),
                         class: 'ui secondary button',
                         text: [[#{admin.item.overwrite}]]
-                    }).wrap('<span>').parent().html();
+                    });
+                    var popup = $('<div>', {
+                        class: 'ui negative message hidden popup',
+                    }).wrapInner($('<p>').append($('<i>', {
+                        class: 'warning circle icon'
+                    })).append($('<span>', {
+                        text: [[#{admin.item.overwrite.error}]]
+                    })));
+                    return button.wrap('<span>').parent().html() + popup.wrap('<span>').parent().html();
                 }
             },
             { data: '_links.self.href',
                 render: function(data, type, full, meta) {
-                    return $('<button>', {
-                        id: data.substring(data.lastIndexOf('/') + 1, data.length),
+                    var button = $('<button>', {
+                        'data-item-id': data.substring(data.lastIndexOf('/') + 1, data.length),
                         class: 'negative ui button',
                         text: [[#{admin.item.delete}]]
-                    }).wrap('<span>').parent().html();
+                    });
+                    var popup = $('<div>', {
+                        class: 'ui negative message hidden popup',
+                    }).wrapInner($('<p>').append($('<i>', {
+                        class: 'warning circle icon'
+                    })).append($('<span>', {
+                        text: [[#{admin.item.delete.error}]]
+                    })));
+                    return button.wrap('<span>').parent().html() + popup.wrap('<span>').parent().html();
                 }
             }
         ],
@@ -111,7 +138,7 @@ $(function() {
                 end = page.totalElements;
             }
             var msg = [[#{dataTables.showing}]];
-            var args = [ start, end, json._embedded.items.length, page.totalElements ];
+            var args = [start, end, json._embedded.items.length, page.totalElements];
             return msg.replace(/{(\d+)}/g, function(match, number) {
                 return typeof args[number] != 'undefined' ? args[number] : match;
             });
@@ -128,9 +155,13 @@ $(function() {
         }
     });
     $('#items tbody').on('click', '.secondary', function(event) {
+        $(event.target).popup({
+            on: 'click',
+            inline: true
+        });
         $.ajax({
             type: 'POST',
-            url: [[@{/riot/items}]] + '/' + $(this).attr('id'),
+            url: [[@{/riot/items}]] + '/' + $(this).data('item-id'),
             beforeSend: function() {
                 $(event.target).addClass('loading');
             },
@@ -142,13 +173,23 @@ $(function() {
             },
             success: function(data) {
                 location.reload();
+            },
+            error: function() {
+                $(event.target).popup('show');
+            },
+            complete: function() {
+                $(event.target).removeClass('loading');
             }
         });
     });
     $('#items tbody').on('click', '.negative', function(event) {
+        $(event.target).popup({
+            on: 'click',
+            inline: true
+        });
         $.ajax({
             type: 'DELETE',
-            url: [[@{/api/items}]] + '/' + $(this).attr('id'),
+            url: [[@{/api/items}]] + '/' + $(this).data('item-id'),
             beforeSend: function() {
                 $(event.target).addClass('loading');
             },
@@ -157,6 +198,12 @@ $(function() {
             },
             success: function(data) {
                 location.reload();
+            },
+            error: function() {
+                $(event.target).popup('show');
+            },
+            complete: function() {
+                $(event.target).removeClass('loading');
             }
         });
     });

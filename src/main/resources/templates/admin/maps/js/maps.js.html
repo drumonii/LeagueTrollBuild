@@ -14,11 +14,16 @@ $(function() {
         lengthMenu: [ [10, -1], [10, 'All'] ]
     });
     $('#save-maps-form').submit(function(event) {
+        var button = $('#save-maps-btn');
+        button.popup({
+            on: 'click',
+            inline: true
+        });
         $.ajax({
             type: 'POST',
             url: [[@{/riot/maps}]],
             beforeSend: function() {
-                $('#save-maps-btn').addClass('loading');
+                button.addClass('loading');
             },
             data: {
                 truncate: $('#truncate').is(':checked'),
@@ -29,6 +34,12 @@ $(function() {
             },
             success: function(data) {
                 location.reload();
+            },
+            error: function() {
+                button.popup('show');
+            },
+            complete: function() {
+                button.removeClass('loading');
             }
         });
         event.preventDefault();
@@ -73,20 +84,36 @@ $(function() {
             { data: 'mapName' },
             { data: '_links.self.href',
                 render: function(data, type, full, meta) {
-                    return $('<button>', {
-                        id: data.substring(data.lastIndexOf('/') + 1, data.length),
+                    var button = $('<button>', {
+                        'data-map-id': data.substring(data.lastIndexOf('/') + 1, data.length),
                         class: 'ui secondary button',
                         text: [[#{admin.map.overwrite}]]
-                    }).wrap('<span>').parent().html();
+                    });
+                    var popup = $('<div>', {
+                        class: 'ui negative message hidden popup',
+                    }).wrapInner($('<p>').append($('<i>', {
+                        class: 'warning circle icon'
+                    })).append($('<span>', {
+                        text: [[#{admin.map.overwrite.error}]]
+                    })));
+                    return button.wrap('<span>').parent().html() + popup.wrap('<span>').parent().html();
                 }
             },
             { data: '_links.self.href',
                 render: function(data, type, full, meta) {
-                    return $('<button>', {
-                        id: data.substring(data.lastIndexOf('/') + 1, data.length),
+                    var button = $('<button>', {
+                        'data-map-id': data.substring(data.lastIndexOf('/') + 1, data.length),
                         class: 'negative ui button',
                         text: [[#{admin.map.delete}]]
-                    }).wrap('<span>').parent().html();
+                    });
+                    var popup = $('<div>', {
+                        class: 'ui negative message hidden popup',
+                    }).wrapInner($('<p>').append($('<i>', {
+                        class: 'warning circle icon'
+                    })).append($('<span>', {
+                        text: [[#{admin.map.delete.error}]]
+                    })));
+                    return button.wrap('<span>').parent().html() + popup.wrap('<span>').parent().html();
                 }
             }
         ],
@@ -103,7 +130,7 @@ $(function() {
                 end = page.totalElements;
             }
             var msg = [[#{dataTables.showing}]];
-            var args = [ start, end, json._embedded.maps.length, page.totalElements ];
+            var args = [start, end, json._embedded.maps.length, page.totalElements];
             return msg.replace(/{(\d+)}/g, function(match, number) {
                 return typeof args[number] != 'undefined' ? args[number] : match;
             });
@@ -117,9 +144,13 @@ $(function() {
         }
     });
     $('#maps tbody').on('click', '.secondary', function(event) {
+        $(event.target).popup({
+            on: 'click',
+            inline: true
+        });
         $.ajax({
             type: 'POST',
-            url: [[@{/riot/maps}]] + '/' + $(this).attr('id'),
+            url: [[@{/riot/maps}]] + '/' + $(this).data('map-id'),
             beforeSend: function() {
                 $(event.target).addClass('loading');
             },
@@ -131,13 +162,23 @@ $(function() {
             },
             success: function(data) {
                 location.reload();
+            },
+            error: function() {
+                $(event.target).popup('show');
+            },
+            complete: function() {
+                $(event.target).removeClass('loading');
             }
         });
     });
     $('#maps tbody').on('click', '.negative', function(event) {
+        $(event.target).popup({
+            on: 'click',
+            inline: true
+        });
         $.ajax({
             type: 'DELETE',
-            url: [[@{/api/maps}]] + '/' + $(this).attr('id'),
+            url: [[@{/api/maps}]] + '/' + $(this).data('map-id'),
             beforeSend: function() {
                 $(event.target).addClass('loading');
             },
@@ -146,6 +187,12 @@ $(function() {
             },
             success: function(data) {
                 location.reload();
+            },
+            error: function() {
+                $(event.target).popup('show');
+            },
+            complete: function() {
+                $(event.target).removeClass('loading');
             }
         });
     });

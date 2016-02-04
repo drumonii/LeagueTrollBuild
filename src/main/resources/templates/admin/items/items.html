@@ -49,6 +49,12 @@
                     </div>
                     <button id="save-items-btn" type="submit" class="ui primary button"
                             th:text="#{admin.items.save}">Save Items</button>
+                    <div class="ui negative message hidden popup">
+                        <p>
+                            <i class="warning circle icon"></i>
+                            <span th:text="#{admin.items.save.error}">An error has occurred.</span>
+                        </p>
+                    </div>
                 </form>
             </th>
         </tr>

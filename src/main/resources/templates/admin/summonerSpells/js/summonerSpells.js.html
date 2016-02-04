@@ -17,11 +17,16 @@ $(function() {
         }
     });
     $('#save-summoner-spells-form').submit(function(event) {
+        var button = $('#save-summoner-spells-btn');
+        button.popup({
+            on: 'click',
+            inline: true
+        });
         $.ajax({
             type: 'POST',
             url: [[@{/riot/summoner-spells}]],
             beforeSend: function() {
-                $('#save-summoner-spells-btn').addClass('loading');
+                button.addClass('loading');
             },
             data: {
                 truncate: $('#truncate').is(':checked'),
@@ -32,6 +37,12 @@ $(function() {
             },
             success: function(data) {
                 location.reload();
+            },
+            error: function() {
+                button.popup('show');
+            },
+            complete: function() {
+                button.removeClass('loading');
             }
         });
         event.preventDefault();
@@ -80,20 +91,36 @@ $(function() {
             { data: 'modes[, ]' },
             { data: '_links.self.href',
                 render: function(data, type, full, meta) {
-                    return $('<button>', {
-                        id: data.substring(data.lastIndexOf('/') + 1, data.length),
+                    var button = $('<button>', {
+                        'data-summoner-spell-id': data.substring(data.lastIndexOf('/') + 1, data.length),
                         class: 'ui secondary button',
                         text: [[#{admin.summonerSpell.overwrite}]]
-                    }).wrap('<span>').parent().html();
+                    });
+                    var popup = $('<div>', {
+                        class: 'ui negative message hidden popup',
+                    }).wrapInner($('<p>').append($('<i>', {
+                        class: 'warning circle icon'
+                    })).append($('<span>', {
+                        text: [[#{admin.summonerSpell.overwrite.error}]]
+                    })));
+                    return button.wrap('<span>').parent().html() + popup.wrap('<span>').parent().html();
                 }
             },
             { data: '_links.self.href',
                 render: function(data, type, full, meta) {
-                    return $('<button>', {
-                        id: data.substring(data.lastIndexOf('/') + 1, data.length),
+                    var button = $('<button>', {
+                        'data-summoner-spell-id': data.substring(data.lastIndexOf('/') + 1, data.length),
                         class: 'negative ui button',
                         text: [[#{admin.summonerSpell.delete}]]
-                    }).wrap('<span>').parent().html();
+                    });
+                    var popup = $('<div>', {
+                        class: 'ui negative message hidden popup',
+                    }).wrapInner($('<p>').append($('<i>', {
+                        class: 'warning circle icon'
+                    })).append($('<span>', {
+                        text: [[#{admin.summonerSpell.delete.error}]]
+                    })));
+                    return button.wrap('<span>').parent().html() + popup.wrap('<span>').parent().html();
                 }
             }
         ],
@@ -110,7 +137,7 @@ $(function() {
                 end = page.totalElements;
             }
             var msg = [[#{dataTables.showing}]];
-            var args = [ start, end, json._embedded.summonerSpells.length, page.totalElements ];
+            var args = [start, end, json._embedded.summonerSpells.length, page.totalElements];
             return msg.replace(/{(\d+)}/g, function(match, number) {
                 return typeof args[number] != 'undefined' ? args[number] : match;
             });
@@ -127,9 +154,13 @@ $(function() {
         }
     });
     $('#summoner-spells tbody').on('click', '.secondary', function(event) {
+        $(event.target).popup({
+            on: 'click',
+            inline: true
+        });
         $.ajax({
             type: 'POST',
-            url: [[@{/riot/summoner-spells}]] + '/' + $(this).attr('id'),
+            url: [[@{/riot/summoner-spells}]] + '/' + $(this).data('summoner-spell-id'),
             beforeSend: function() {
                 $(event.target).addClass('loading');
             },
@@ -141,13 +172,23 @@ $(function() {
             },
             success: function(data) {
                 location.reload();
+            },
+            error: function() {
+                $(event.target).popup('show');
+            },
+            complete: function() {
+                $(event.target).removeClass('loading');
             }
         });
     });
     $('#summoner-spells tbody').on('click', '.negative', function(event) {
+        $(event.target).popup({
+            on: 'click',
+            inline: true
+        });
         $.ajax({
             type: 'DELETE',
-            url: [[@{/api/summoner-spells}]] + '/' + $(this).attr('id'),
+            url: [[@{/api/summoner-spells}]] + '/' + $(this).data('summoner-spell-id'),
             beforeSend: function() {
                 $(event.target).addClass('loading');
             },
@@ -156,6 +197,12 @@ $(function() {
             },
             success: function(data) {
                 location.reload();
+            },
+            error: function() {
+                $(event.target).popup('show');
+            },
+            complete: function() {
+                $(event.target).removeClass('loading');
             }
         });
     });

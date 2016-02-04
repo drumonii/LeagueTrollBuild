@@ -43,6 +43,12 @@
                     </div>
                     <button id="save-maps-btn" class="ui primary button" type="submit"
                             th:text="#{admin.maps.save}">Save Maps</button>
+                    <div class="ui negative message hidden popup">
+                        <p>
+                            <i class="warning circle icon"></i>
+                            <span th:text="#{admin.maps.save.error}">An error has occurred.</span>
+                        </p>
+                    </div>
                 </form>
             </th>
         </tr>

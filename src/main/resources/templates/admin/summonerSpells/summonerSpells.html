@@ -49,6 +49,12 @@
                     </div>
                     <button id="save-summoner-spells-btn" class="ui primary button" type="submit"
                             th:text="#{admin.summonerSpells.save}">Save Summoner Spells</button>
+                    <div class="ui negative message hidden popup">
+                        <p>
+                            <i class="warning circle icon"></i>
+                            <span th:text="#{admin.summonerSpells.save.error}">An error has occurred.</span>
+                        </p>
+                    </div>
                 </form>
             </th>
         </tr>

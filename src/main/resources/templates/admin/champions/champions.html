@@ -51,6 +51,12 @@
                     </div>
                     <button id="save-champions-btn" type="submit" class="ui primary button"
                             th:text="#{admin.champions.save}">Save Champions</button>
+                    <div class="ui negative message hidden popup">
+                        <p>
+                            <i class="warning circle icon"></i>
+                            <span th:text="#{admin.champions.save.error}">An error has occurred.</span>
+                        </p>
+                    </div>
                 </form>
             </th>
         </tr>
