@@ -4,7 +4,7 @@
 
 riot:
   api:
-    key: # Riot API key goes here
+    key: # from RIOT_API_KEY environment variable or -Driot.api.key argument property
     static-data:
       base-url: global.api.pvp.net/api/lol/static-data/{region}/v1.2
       param: api_key
@@ -32,7 +32,7 @@ riot:
 
 spring:
   # Spring active profile
-  profiles.active: embedded
+  profiles.active: external
   # Data REST base URI
   data.rest.base-uri: /api
   # Internalization
@@ -59,7 +59,10 @@ spring:
   profiles: external
   datasource:
     initialize: false
-    jndi-name: jdbc/leagueTrollBuild
+    driverClassName: org.postgresql.Driver
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
   jpa:
     properties:
       hibernate:

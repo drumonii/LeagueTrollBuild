@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.core.env.Environment;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -25,6 +26,9 @@ public class RestRiotApiConfigTest extends BaseSpringTestRunner {
 	@Autowired
 	private RiotApiProperties riotProperties;
 
+	@Autowired
+	private Environment env;
+
 	private StaticData staticData;
 	private Ddragon ddragon;
 
@@ -38,12 +42,16 @@ public class RestRiotApiConfigTest extends BaseSpringTestRunner {
 		ddragon = riotProperties.getApi().getDdragon();
 		scheme = staticData.getScheme();
 		host = staticData.getBaseUrl().replace("{region}", staticData.getRegion());
-		apiKey = getApiKeyFromProps(PROPERTIES);
+		apiKey = getApiKeyFromEnvOrProps(PROPERTIES);
 	}
 
-	private String getApiKeyFromProps(String[] properties) {
-		String[] splitProps = properties[0].split("riot.api.key=");
-		return splitProps[1];
+	private String getApiKeyFromEnvOrProps(String[] properties) {
+		String key = env.getProperty("RIOT_API_KEY");
+		if (key == null) {
+			String[] splitProps = properties[0].split("riot.api.key=");
+			return splitProps[1];
+		}
+		return key;
 	}
 
 	@Autowired
