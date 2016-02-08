@@ -6,7 +6,7 @@ apply plugin: 'idea'
 apply plugin: 'spring-boot'
 apply plugin: 'io.spring.dependency-management'
 
-version = '1.0-SNAPSHOT'
+version = '1.0'
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
@@ -83,7 +83,7 @@ dependencies {
     compile 'org.webjars:webjars-locator-core:0.30'
 
     // jQuery
-    compile 'org.webjars.bower:jquery:2.1.4'
+    compile 'org.webjars.bower:jquery:2.2.0'
 
     // DataTables
     compile 'org.webjars.bower:datatables:1.10.10'
