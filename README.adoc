@@ -4,7 +4,8 @@ League Troll Build is a random build generator (hence the terms "troll build") f
 online game: http://leagueoflegends.com/[League of Legends].
 
 = Technology stack, frameworks, and third-party libraries
-* http://www.oracle.com/technetwork/java/javase/overview/java8-2100321.html[Java 8] and https://github.com/gradle/gradle[Gradle]
+* http://www.oracle.com/technetwork/java/javase/overview/java8-2100321.html[Java 8] with https://projectlombok.org/[Lombok]
+* https://github.com/gradle/gradle[Gradle]
 * https://github.com/spring-projects/spring-boot[Spring Boot]
 * https://github.com/spring-projects/spring-data-jpa[Spring Data JPA] with https://github.com/hibernate/hibernate-orm[Hibernate]
 * https://github.com/spring-projects/spring-data-rest[Spring Data REST]
@@ -65,6 +66,17 @@ Next, `cd` to the `build/libs` folder in the project root and then run directly 
  java -jar -Dspring.profiles.active=PROFILE_IF_APPLICABLE -Driot.api.key=API_KEY_IF_NOT_ENV_VAR LeagueTrollBuild-VERSION.jar
 
 From either method and with the project running, view http://localhost:8080/[localhost:8080] on your browser.
+
+= Development/Importing the project
+`LeagueTrollBuild` is developed using the https://www.jetbrains.com/idea/[IntelliJ IDEA] IDE.
+
+If using IntelliJ, one must first download the https://plugins.jetbrains.com/plugin/6317[Lombok plugin] and
+`Enable annotation processing` in the `Annotation Processors` of the main settings. Then import the project from the
+`build.gradle`.
+
+If using Eclipse, one must first install the Lombok plugin manually using the `lombok.jar` and install the
+https://marketplace.eclipse.org/content/gradle-integration-eclipse-0[Gradle Integration plugin] from the Eclipse
+Marketplace. Then import the project as a Gradle project.
 
 = License
 `LeagueTrollBuild` is licensed under the MIT License (MIT).

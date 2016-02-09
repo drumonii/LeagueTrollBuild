@@ -72,9 +72,6 @@ public class FileUtilTest extends BaseUnitTestRunner {
 		// Directory already exists
 		assertThat(createTempResourceDir(dirInTemp)).isTrue();
 
-		// Invalid folder name
-		assertThat(createTempResourceDir("|||")).isFalse();
-
 		Files.delete(tempResourcePath); // cleanup
 	}
 
