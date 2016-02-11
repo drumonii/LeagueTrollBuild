@@ -5,6 +5,7 @@ import org.apache.commons.lang3.RandomUtils;
 import org.junit.Test;
 import org.springframework.boot.autoconfigure.web.DefaultErrorAttributes;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 
 import javax.servlet.RequestDispatcher;
 import java.util.Arrays;
@@ -21,7 +22,7 @@ public class ErrorPageControllerTest extends BaseSpringTestRunner {
 
 	@Test
 	public void forbidden403() throws Exception {
-		mockMvc.perform(get("/error")
+		mockMvc.perform(get("/error").accept(MediaType.TEXT_HTML)
 				.requestAttr(RequestDispatcher.ERROR_STATUS_CODE, 403)
 				.requestAttr(DefaultErrorAttributes.class.getName() + ".ERROR",
 						mock(BadController.AccessDeniedException.class))
@@ -33,7 +34,7 @@ public class ErrorPageControllerTest extends BaseSpringTestRunner {
 
 	@Test
 	public void notFound404() throws Exception {
-		mockMvc.perform(get("/error")
+		mockMvc.perform(get("/error").accept(MediaType.TEXT_HTML)
 				.requestAttr(RequestDispatcher.ERROR_STATUS_CODE, 404)
 				.requestAttr(DefaultErrorAttributes.class.getName() + ".ERROR",
 						mock(BadController.NotFoundException.class))
@@ -45,7 +46,7 @@ public class ErrorPageControllerTest extends BaseSpringTestRunner {
 
 	@Test
 	public void internalServerError500() throws Exception {
-		mockMvc.perform(get("/error")
+		mockMvc.perform(get("/error").accept(MediaType.TEXT_HTML)
 				.requestAttr(RequestDispatcher.ERROR_STATUS_CODE, 500)
 				.requestAttr(DefaultErrorAttributes.class.getName() + ".ERROR",
 						mock(BadController.InternalServerErrorException.class))
@@ -61,7 +62,7 @@ public class ErrorPageControllerTest extends BaseSpringTestRunner {
 				.filter(status -> status != HttpStatus.FORBIDDEN && status != HttpStatus.NOT_FOUND)
 				.collect(Collectors.toList());
 		HttpStatus httpStatus = httpStatuses.get(RandomUtils.nextInt(0, httpStatuses.size()));
-		mockMvc.perform(get("/error")
+		mockMvc.perform(get("/error").accept(MediaType.TEXT_HTML)
 				.requestAttr(RequestDispatcher.ERROR_STATUS_CODE, httpStatus.value())
 				.requestAttr(DefaultErrorAttributes.class.getName() + ".ERROR",
 						mock(RuntimeException.class))
