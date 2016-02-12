@@ -21,6 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Fail.fail;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
@@ -75,7 +76,7 @@ public class VersionsRetrievalTest extends BaseSpringTestRunner {
 
 	@Test
 	public void versions() throws Exception {
-		mockMvc.perform(get("/riot/versions").with(csrf()).session(mockHttpSession("admin")))
+		mockMvc.perform(get("/riot/versions").with(testUser()).with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(versions)));
@@ -84,7 +85,7 @@ public class VersionsRetrievalTest extends BaseSpringTestRunner {
 
 	@Test
 	public void latestPatch() throws Exception {
-		mockMvc.perform(get("/riot/versions/latest").with(csrf()).session(mockHttpSession("admin")))
+		mockMvc.perform(get("/riot/versions/latest").with(testUser()).with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(PLAN_TEXT_UTF8))
 				.andExpect(content().string(versions[0]));
@@ -100,7 +101,7 @@ public class VersionsRetrievalTest extends BaseSpringTestRunner {
 		Version latestVersion = new Version(newVersions[0]);
 		versionsRepository.save(latestVersion);
 
-		mockMvc.perform(post("/riot/versions/latest").with(csrf()).session(mockHttpSession("admin")))
+		mockMvc.perform(post("/riot/versions/latest").with(testUser()).with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(PLAN_TEXT_UTF8))
 				.andExpect(content().string(versions[0]));
@@ -119,7 +120,7 @@ public class VersionsRetrievalTest extends BaseSpringTestRunner {
 		Version latestVersion = new Version(newVersions[0]);
 		versionsRepository.save(latestVersion);
 
-		mockMvc.perform(post("/riot/versions/latest").with(csrf()).session(mockHttpSession("admin")))
+		mockMvc.perform(post("/riot/versions/latest").with(testUser()).with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(PLAN_TEXT_UTF8))
 				.andExpect(content().string(versions[0]));

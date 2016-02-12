@@ -5,6 +5,7 @@ import com.drumonii.loltrollbuild.config.Profiles.Embedded;
 import com.drumonii.loltrollbuild.config.Profiles.External;
 import com.drumonii.loltrollbuild.config.Profiles.Testing;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.data.rest.RepositoryRestProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -26,17 +27,23 @@ import static org.springframework.http.HttpMethod.*;
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+	public static final String ADMIN_ROLE = "ADMIN";
+
+	@Autowired
+	private RepositoryRestProperties restProperties;
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		String apiPath = restProperties.getBasePath() + "/**";
 		// @formatter:off
 		http
 			.authorizeRequests()
-				.antMatchers("/riot/**")       .hasRole("ADMIN")
-				.antMatchers("/admin/**")      .hasRole("ADMIN")
-				.antMatchers(POST,   "/api/**").hasRole("ADMIN")
-				.antMatchers(PUT,    "/api/**").hasRole("ADMIN")
-				.antMatchers(PATCH,  "/api/**").hasRole("ADMIN")
-				.antMatchers(DELETE, "/api/**").hasRole("ADMIN")
+				.antMatchers("/riot/**")     .hasRole(ADMIN_ROLE)
+				.antMatchers("/admin/**")    .hasRole(ADMIN_ROLE)
+				.antMatchers(POST,   apiPath).hasRole(ADMIN_ROLE)
+				.antMatchers(PUT,    apiPath).hasRole(ADMIN_ROLE)
+				.antMatchers(PATCH,  apiPath).hasRole(ADMIN_ROLE)
+				.antMatchers(DELETE, apiPath).hasRole(ADMIN_ROLE)
 			.and()
 			.formLogin()
 				.loginPage("/admin/login")
@@ -44,7 +51,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.permitAll()
 			.and()
 			.logout()
-				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+				.logoutRequestMatcher(new AntPathRequestMatcher("/admin/logout"))
 				.permitAll();
 		// @formatter:on
 	}
@@ -63,13 +70,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Dev @Testing
 	public static class WebDevTestingSecurityConfig extends WebSecurityConfigurerAdapter {
 
+		public static final String IN_MEM_USERNAME = "admin";
+		public static final String IN_MEM_PASSWORD = "password";
+
 		@Autowired
 		@Override
 		protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 			// @formatter:off
 			auth
 				.inMemoryAuthentication()
-					.withUser("admin").password("password").authorities("ROLE_ADMIN");
+					.withUser(IN_MEM_USERNAME).password(IN_MEM_PASSWORD).authorities("ROLE_" + ADMIN_ROLE);
 			// @formatter:on
 		}
 

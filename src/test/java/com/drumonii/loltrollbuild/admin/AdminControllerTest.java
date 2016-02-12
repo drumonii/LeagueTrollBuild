@@ -16,6 +16,11 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 
 import static org.hamcrest.Matchers.is;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.formLogin;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.logout;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.authenticated;
+import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.unauthenticated;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
@@ -63,6 +68,18 @@ public class AdminControllerTest extends BaseSpringTestRunner {
 	}
 
 	@Test
+	public void loginAndLogout() throws Exception {
+		mockMvc
+				.perform(formLogin("/admin/login").user(TESTING_USERNAME).password(TESTING_PASSWORD))
+				.andExpect(authenticated().withRoles(TESTING_USER_ROLE))
+				.andExpect(redirectedUrl("/admin"));
+		mockMvc
+				.perform(logout("/admin/logout"))
+				.andExpect(unauthenticated())
+				.andExpect(redirectedUrl("/admin"));
+	}
+
+	@Test
 	public void admin() throws Exception {
 		String responseBody = "[\"5.16.1\",\"5.15.1\",\"5.14.1\",\"5.13.1\",\"5.12.1\",\"5.11.1\",\"5.10.1\"," +
 				"\"5.9.1\",\"5.8.1\",\"5.7.2\",\"5.7.1\",\"5.6.2\",\"5.6.1\",\"5.5.3\",\"5.5.2\",\"5.5.1\"," +
@@ -74,7 +91,7 @@ public class AdminControllerTest extends BaseSpringTestRunner {
 		Version latestVersion = new Version(newVersions[0]);
 		versionsRepository.save(latestVersion);
 
-		mockMvc.perform(get("/admin").session(mockHttpSession("admin")))
+		mockMvc.perform(get("/admin").with(testUser()))
 				.andExpect(status().isOk())
 				.andExpect(model().attributeExists("latestRiotPatch", "latestSavedPatch"))
 				.andExpect(model().attribute("activeTab", is("home")))
@@ -89,7 +106,7 @@ public class AdminControllerTest extends BaseSpringTestRunner {
 				"\"group\":\"spell\",\"x\":384,\"y\":0,\"w\":48,\"h\":48},\"cooldown\":[180],\"summonerLevel\":1," +
 				"\"id\":13,\"key\":\"SummonerMana\",\"modes\":[\"ODIN\",\"TUTORIAL\",\"ARAM\",\"ASCENSION\"]}}}";
 
-		mockMvc.perform(get("/admin/summoner-spells").session(mockHttpSession("admin")))
+		mockMvc.perform(get("/admin/summoner-spells").with(testUser()))
 				.andExpect(status().is3xxRedirection())
 				.andExpect(flash().attribute("noSavedPatch", is("Summoner Spells")))
 				.andExpect(redirectedUrl("/admin"));
@@ -98,7 +115,7 @@ public class AdminControllerTest extends BaseSpringTestRunner {
 				.andRespond(withSuccess(responseBody, MediaType.APPLICATION_JSON));
 		versionsRepository.save(new Version("new version"));
 
-		mockMvc.perform(get("/admin/summoner-spells").session(mockHttpSession("admin")))
+		mockMvc.perform(get("/admin/summoner-spells").with(testUser()))
 				.andExpect(status().isOk())
 				.andExpect(model().attributeExists("latestSavedPatch", "difference"))
 				.andExpect(model().attribute("activeTab", is("summonerSpells")))
@@ -116,7 +133,7 @@ public class AdminControllerTest extends BaseSpringTestRunner {
 				"{\"full\":\"3751.png\",\"sprite\":\"item2.png\",\"group\":\"item\",\"x\":336,\"y\":288,\"w\":48," +
 				"\"h\":48},\"gold\":{\"base\":700,\"total\":1100,\"sell\":770,\"purchasable\":true}}}}";
 
-		mockMvc.perform(get("/admin/items").session(mockHttpSession("admin")))
+		mockMvc.perform(get("/admin/items").with(testUser()))
 				.andExpect(status().is3xxRedirection())
 				.andExpect(flash().attribute("noSavedPatch", is("Items")))
 				.andExpect(redirectedUrl("/admin"));
@@ -125,7 +142,7 @@ public class AdminControllerTest extends BaseSpringTestRunner {
 				.andRespond(withSuccess(responseBody, MediaType.APPLICATION_JSON));
 		versionsRepository.save(new Version("new version"));
 
-		mockMvc.perform(get("/admin/items").session(mockHttpSession("admin")))
+		mockMvc.perform(get("/admin/items").with(testUser()))
 				.andExpect(status().isOk())
 				.andExpect(model().attributeExists("latestSavedPatch", "difference"))
 				.andExpect(model().attribute("activeTab", is("items")))
@@ -141,7 +158,7 @@ public class AdminControllerTest extends BaseSpringTestRunner {
 		mockServer.expect(requestTo(championsUri.toString())).andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(responseBody, MediaType.APPLICATION_JSON));
 
-		mockMvc.perform(get("/admin/champions").with(csrf()).session(mockHttpSession("admin")))
+		mockMvc.perform(get("/admin/champions").with(testUser()).with(csrf()))
 				.andExpect(status().is3xxRedirection())
 				.andExpect(flash().attribute("noSavedPatch", is("Champions")))
 				.andExpect(redirectedUrl("/admin"));
@@ -150,7 +167,7 @@ public class AdminControllerTest extends BaseSpringTestRunner {
 				.andRespond(withSuccess(responseBody, MediaType.APPLICATION_JSON));
 		versionsRepository.save(new Version("new version"));
 
-		mockMvc.perform(get("/admin/champions").session(mockHttpSession("admin")))
+		mockMvc.perform(get("/admin/champions").with(testUser()))
 				.andExpect(status().isOk())
 				.andExpect(model().attributeExists("latestSavedPatch", "difference"))
 				.andExpect(model().attribute("activeTab", is("champions")))

@@ -23,6 +23,7 @@ import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Fail.fail;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
@@ -93,7 +94,7 @@ public class MapsRetrievalTest extends BaseSpringTestRunner {
 		mockServer.expect(requestTo(mapsUri.toString())).andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(mapsResponseBody, MediaType.APPLICATION_JSON));
 
-		mockMvc.perform(get("/riot/maps").with(csrf()).session(mockHttpSession("admin")))
+		mockMvc.perform(get("/riot/maps").with(testUser()).with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(Arrays.asList(provingGrounds))));
@@ -105,7 +106,7 @@ public class MapsRetrievalTest extends BaseSpringTestRunner {
 		mockServer.expect(requestTo(mapsUri.toString())).andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(mapsResponseBody, MediaType.APPLICATION_JSON));
 
-		mockMvc.perform(post("/riot/maps").with(csrf()).session(mockHttpSession("admin")))
+		mockMvc.perform(post("/riot/maps").with(testUser()).with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(Arrays.asList(provingGrounds))));
@@ -121,7 +122,7 @@ public class MapsRetrievalTest extends BaseSpringTestRunner {
 
 		versionsRepository.deleteAll();
 
-		mockMvc.perform(post("/riot/maps").with(csrf()).session(mockHttpSession("admin")))
+		mockMvc.perform(post("/riot/maps").with(testUser()).with(csrf()))
 				.andExpect(status().isNotFound());
 		mockServer.verify();
 	}
@@ -132,7 +133,7 @@ public class MapsRetrievalTest extends BaseSpringTestRunner {
 				.andRespond(withSuccess(mapsResponseBody, MediaType.APPLICATION_JSON));
 		mapsRepository.save(provingGrounds);
 
-		mockMvc.perform(post("/riot/maps").with(csrf()).session(mockHttpSession("admin")))
+		mockMvc.perform(post("/riot/maps").with(testUser()).with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(APPLICATION_JSON_UTF8))
 				.andExpect(content().json("[]"));
@@ -148,7 +149,7 @@ public class MapsRetrievalTest extends BaseSpringTestRunner {
 		mapsRepository.save(provingGrounds);
 		mapsRepository.save(summonersRift);
 
-		mockMvc.perform(post("/riot/maps").with(csrf()).session(mockHttpSession("admin")))
+		mockMvc.perform(post("/riot/maps").with(testUser()).with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(APPLICATION_JSON_UTF8))
 				.andExpect(content().json("[]"));
@@ -174,7 +175,7 @@ public class MapsRetrievalTest extends BaseSpringTestRunner {
 		mockServer.expect(requestTo(mapsUri.toString())).andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(mapsResponseBody, MediaType.APPLICATION_JSON));
 
-		mockMvc.perform(post("/riot/maps?truncate=true").with(csrf()).session(mockHttpSession("admin")))
+		mockMvc.perform(post("/riot/maps?truncate=true").with(testUser()).with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(Arrays.asList(provingGrounds))));
@@ -189,7 +190,7 @@ public class MapsRetrievalTest extends BaseSpringTestRunner {
 		mockServer.expect(requestTo(mapsUri.toString())).andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(mapsResponseBody, MediaType.APPLICATION_JSON));
 
-		mockMvc.perform(get("/riot/maps/{id}", provingGrounds.getMapId()).with(csrf()).session(mockHttpSession("admin")))
+		mockMvc.perform(get("/riot/maps/{id}", provingGrounds.getMapId()).with(testUser()).with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(provingGrounds)));
@@ -201,8 +202,7 @@ public class MapsRetrievalTest extends BaseSpringTestRunner {
 		mockServer.expect(requestTo(mapsUri.toString())).andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(mapsResponseBody, MediaType.APPLICATION_JSON));
 
-		mockMvc.perform(get("/riot/maps/{id}", 10001).with(csrf())
-				.session(mockHttpSession("admin")))
+		mockMvc.perform(get("/riot/maps/{id}", 10001).with(testUser()).with(csrf()))
 				.andExpect(status().isNotFound());
 		mockServer.verify();
 	}
@@ -212,7 +212,7 @@ public class MapsRetrievalTest extends BaseSpringTestRunner {
 		mockServer.expect(requestTo(mapsUri.toString())).andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(mapsResponseBody, MediaType.APPLICATION_JSON));
 
-		mockMvc.perform(post("/riot/maps/{id}", provingGrounds.getMapId()).with(csrf()).session(mockHttpSession("admin")))
+		mockMvc.perform(post("/riot/maps/{id}", provingGrounds.getMapId()).with(testUser()).with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(provingGrounds)));
@@ -226,7 +226,7 @@ public class MapsRetrievalTest extends BaseSpringTestRunner {
 		mockServer.expect(requestTo(mapsUri.toString())).andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(mapsResponseBody, MediaType.APPLICATION_JSON));
 
-		mockMvc.perform(post("/riot/maps/{id}", 10001).with(csrf()).session(mockHttpSession("admin")))
+		mockMvc.perform(post("/riot/maps/{id}", 10001).with(testUser()).with(csrf()))
 				.andExpect(status().isNotFound());
 		mockServer.verify();
 	}
@@ -238,7 +238,7 @@ public class MapsRetrievalTest extends BaseSpringTestRunner {
 
 		versionsRepository.deleteAll();
 
-		mockMvc.perform(post("/riot/maps/{id}", provingGrounds.getMapId()).with(csrf()).session(mockHttpSession("admin")))
+		mockMvc.perform(post("/riot/maps/{id}", provingGrounds.getMapId()).with(testUser()).with(csrf()))
 				.andExpect(status().isNotFound());
 		mockServer.verify();
 	}
@@ -252,7 +252,7 @@ public class MapsRetrievalTest extends BaseSpringTestRunner {
 		mockServer.expect(requestTo(mapsUri.toString())).andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(mapsResponseBody, MediaType.APPLICATION_JSON));
 
-		mockMvc.perform(post("/riot/maps/{id}", provingGrounds.getMapId()).with(csrf()).session(mockHttpSession("admin")))
+		mockMvc.perform(post("/riot/maps/{id}", provingGrounds.getMapId()).with(testUser()).with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(provingGrounds)));

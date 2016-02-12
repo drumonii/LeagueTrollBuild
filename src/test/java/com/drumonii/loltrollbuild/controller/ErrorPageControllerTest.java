@@ -68,7 +68,7 @@ public class ErrorPageControllerTest extends BaseSpringTestRunner {
 						mock(RuntimeException.class))
 				.requestAttr(RequestDispatcher.ERROR_REQUEST_URI, "/error"))
 				.andExpect(model().attributeExists("timestamp", "status", "error", "exception", "message", "path"))
-				.andExpect(model().attribute("error", is(httpStatus.getReasonPhrase())))
+				.andExpect(model().attribute("status", is(httpStatus.value())))
 				.andExpect(view().name("500"));
 	}
 
