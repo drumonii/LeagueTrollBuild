@@ -110,11 +110,11 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 	@Test
 	public void summonerSpells() throws Exception {
 		mockServer.expect(requestTo(summonerSpellsUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(summonerSpellsResponseBody, MediaType.APPLICATION_JSON));
+				.andRespond(withSuccess(summonerSpellsResponseBody, MediaType.APPLICATION_JSON_UTF8));
 
-		mockMvc.perform(get("/riot/summoner-spells").with(testUser()).with(csrf()))
+		mockMvc.perform(get("/riot/summoner-spells").with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(APPLICATION_JSON_UTF8))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(Arrays.asList(cleanse))));
 		mockServer.verify();
 	}
@@ -122,11 +122,11 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 	@Test
 	public void saveSummonerSpells() throws Exception {
 		mockServer.expect(requestTo(summonerSpellsUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(summonerSpellsResponseBody, MediaType.APPLICATION_JSON));
+				.andRespond(withSuccess(summonerSpellsResponseBody, MediaType.APPLICATION_JSON_UTF8));
 
-		mockMvc.perform(post("/riot/summoner-spells").with(testUser()).with(csrf()))
+		mockMvc.perform(post("/riot/summoner-spells").with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(APPLICATION_JSON_UTF8))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(Arrays.asList(cleanse))));
 		mockServer.verify();
 
@@ -136,11 +136,11 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 	@Test
 	public void saveSummonerSpellsNoPatchVersion() throws Exception {
 		mockServer.expect(requestTo(summonerSpellsUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(summonerSpellsResponseBody, MediaType.APPLICATION_JSON));
+				.andRespond(withSuccess(summonerSpellsResponseBody, MediaType.APPLICATION_JSON_UTF8));
 
 		versionsRepository.deleteAll();
 
-		mockMvc.perform(post("/riot/summoner-spells").with(testUser()).with(csrf()))
+		mockMvc.perform(post("/riot/summoner-spells").with(adminUser()).with(csrf()))
 				.andExpect(status().isNotFound());
 		mockServer.verify();
 	}
@@ -148,12 +148,12 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 	@Test
 	public void saveDifferenceOfSummonerSpells() throws Exception {
 		mockServer.expect(requestTo(summonerSpellsUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(summonerSpellsResponseBody, MediaType.APPLICATION_JSON));
+				.andRespond(withSuccess(summonerSpellsResponseBody, MediaType.APPLICATION_JSON_UTF8));
 		summonerSpellsRepository.save(cleanse);
 
-		mockMvc.perform(post("/riot/summoner-spells").with(testUser()).with(csrf()))
+		mockMvc.perform(post("/riot/summoner-spells").with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(APPLICATION_JSON_UTF8))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json("[]"));
 		mockServer.verify();
 
@@ -163,13 +163,13 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 	@Test
 	public void saveDifferenceOfSummonerSpellsWithDeleted() throws Exception {
 		mockServer.expect(requestTo(summonerSpellsUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(summonerSpellsResponseBody, MediaType.APPLICATION_JSON));
+				.andRespond(withSuccess(summonerSpellsResponseBody, MediaType.APPLICATION_JSON_UTF8));
 		summonerSpellsRepository.save(cleanse);
 		summonerSpellsRepository.save(ignite);
 
-		mockMvc.perform(post("/riot/summoner-spells").with(testUser()).with(csrf()))
+		mockMvc.perform(post("/riot/summoner-spells").with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(APPLICATION_JSON_UTF8))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json("[]"));
 		mockServer.verify();
 
@@ -194,11 +194,11 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 		summonerSpellsRepository.save(teleport);
 
 		mockServer.expect(requestTo(summonerSpellsUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(summonerSpellsResponseBody, MediaType.APPLICATION_JSON));
+				.andRespond(withSuccess(summonerSpellsResponseBody, MediaType.APPLICATION_JSON_UTF8));
 
-		mockMvc.perform(post("/riot/summoner-spells?truncate=true").with(testUser()).with(csrf()))
+		mockMvc.perform(post("/riot/summoner-spells?truncate=true").with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(APPLICATION_JSON_UTF8))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(Arrays.asList(cleanse))));
 		mockServer.verify();
 
@@ -209,11 +209,11 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 	@Test
 	public void summonerSpell() throws Exception {
 		mockServer.expect(requestTo(summonerSpellUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(summonerSpellResponseBody, MediaType.APPLICATION_JSON));
+				.andRespond(withSuccess(summonerSpellResponseBody, MediaType.APPLICATION_JSON_UTF8));
 
-		mockMvc.perform(get("/riot/summoner-spells/{id}", ignite.getId()).with(testUser()).with(csrf()))
+		mockMvc.perform(get("/riot/summoner-spells/{id}", ignite.getId()).with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(APPLICATION_JSON_UTF8))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(ignite)));
 		mockServer.verify();
 	}
@@ -223,7 +223,7 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 		mockServer.expect(requestTo(summonerSpellUri.toString())).andExpect(method(HttpMethod.GET))
 				.andRespond(withStatus(HttpStatus.NOT_FOUND));
 
-		mockMvc.perform(get("/riot/summoner-spells/{id}", ignite.getId()).with(testUser()).with(csrf()))
+		mockMvc.perform(get("/riot/summoner-spells/{id}", ignite.getId()).with(adminUser()).with(csrf()))
 				.andExpect(status().isNotFound());
 		mockServer.verify();
 	}
@@ -231,11 +231,11 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 	@Test
 	public void saveSummonerSpell() throws Exception {
 		mockServer.expect(requestTo(summonerSpellUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(summonerSpellResponseBody, MediaType.APPLICATION_JSON));
+				.andRespond(withSuccess(summonerSpellResponseBody, MediaType.APPLICATION_JSON_UTF8));
 
-		mockMvc.perform(post("/riot/summoner-spells/{id}", ignite.getId()).with(testUser()).with(csrf()))
+		mockMvc.perform(post("/riot/summoner-spells/{id}", ignite.getId()).with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(APPLICATION_JSON_UTF8))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(ignite)));
 		mockServer.verify();
 
@@ -247,7 +247,7 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 		mockServer.expect(requestTo(summonerSpellUri.toString())).andExpect(method(HttpMethod.GET))
 				.andRespond(withStatus(HttpStatus.NOT_FOUND));
 
-		mockMvc.perform(post("/riot/summoner-spells/{id}", ignite.getId()).with(testUser()).with(csrf()))
+		mockMvc.perform(post("/riot/summoner-spells/{id}", ignite.getId()).with(adminUser()).with(csrf()))
 				.andExpect(status().isNotFound());
 		mockServer.verify();
 	}
@@ -255,11 +255,11 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 	@Test
 	public void saveChampionNoPatchVersion() throws Exception {
 		mockServer.expect(requestTo(summonerSpellUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(summonerSpellResponseBody, MediaType.APPLICATION_JSON));
+				.andRespond(withSuccess(summonerSpellResponseBody, MediaType.APPLICATION_JSON_UTF8));
 
 		versionsRepository.deleteAll();
 
-		mockMvc.perform(post("/riot/summoner-spells/{id}", ignite.getId()).with(testUser()).with(csrf()))
+		mockMvc.perform(post("/riot/summoner-spells/{id}", ignite.getId()).with(adminUser()).with(csrf()))
 				.andExpect(status().isNotFound());
 		mockServer.verify();
 	}
@@ -276,11 +276,11 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 		summonerSpellsRepository.save(newIgnite);
 
 		mockServer.expect(requestTo(summonerSpellUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(summonerSpellResponseBody, MediaType.APPLICATION_JSON));
+				.andRespond(withSuccess(summonerSpellResponseBody, MediaType.APPLICATION_JSON_UTF8));
 
-		mockMvc.perform(post("/riot/summoner-spells/{id}", ignite.getId()).with(testUser()).with(csrf()))
+		mockMvc.perform(post("/riot/summoner-spells/{id}", ignite.getId()).with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(APPLICATION_JSON_UTF8))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(ignite)));
 		mockServer.verify();
 

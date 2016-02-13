@@ -52,6 +52,10 @@ public class AdminControllerTest extends BaseSpringTestRunner {
 	private UriComponents championsUri;
 
 	@Autowired
+	@Qualifier("maps")
+	private UriComponents mapsUri;
+
+	@Autowired
 	private VersionsRepository versionsRepository;
 
 	private MockRestServiceServer mockServer;
@@ -68,7 +72,7 @@ public class AdminControllerTest extends BaseSpringTestRunner {
 	}
 
 	@Test
-	public void loginAndLogout() throws Exception {
+	public void adminCanLoginAndLogout() throws Exception {
 		mockMvc
 				.perform(formLogin("/admin/login").user(TESTING_USERNAME).password(TESTING_PASSWORD))
 				.andExpect(authenticated().withRoles(TESTING_USER_ROLE))
@@ -76,7 +80,7 @@ public class AdminControllerTest extends BaseSpringTestRunner {
 		mockMvc
 				.perform(logout("/admin/logout"))
 				.andExpect(unauthenticated())
-				.andExpect(redirectedUrl("/admin"));
+				.andExpect(redirectedUrl("/admin/login?logout"));
 	}
 
 	@Test
@@ -85,13 +89,13 @@ public class AdminControllerTest extends BaseSpringTestRunner {
 				"\"5.9.1\",\"5.8.1\",\"5.7.2\",\"5.7.1\",\"5.6.2\",\"5.6.1\",\"5.5.3\",\"5.5.2\",\"5.5.1\"," +
 				"\"5.4.1\",\"5.3.1\",\"5.2.2\",\"5.2.1\",\"5.1.2\",\"5.1.1\"]";
 		mockServer.expect(requestTo(versionsUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(responseBody, MediaType.APPLICATION_JSON));
+				.andRespond(withSuccess(responseBody, MediaType.APPLICATION_JSON_UTF8));
 
 		String[] newVersions = objectMapper.readValue(responseBody, String[].class);
 		Version latestVersion = new Version(newVersions[0]);
 		versionsRepository.save(latestVersion);
 
-		mockMvc.perform(get("/admin").with(testUser()))
+		mockMvc.perform(get("/admin").with(adminUser()))
 				.andExpect(status().isOk())
 				.andExpect(model().attributeExists("latestRiotPatch", "latestSavedPatch"))
 				.andExpect(model().attribute("activeTab", is("home")))
@@ -106,16 +110,16 @@ public class AdminControllerTest extends BaseSpringTestRunner {
 				"\"group\":\"spell\",\"x\":384,\"y\":0,\"w\":48,\"h\":48},\"cooldown\":[180],\"summonerLevel\":1," +
 				"\"id\":13,\"key\":\"SummonerMana\",\"modes\":[\"ODIN\",\"TUTORIAL\",\"ARAM\",\"ASCENSION\"]}}}";
 
-		mockMvc.perform(get("/admin/summoner-spells").with(testUser()))
+		mockMvc.perform(get("/admin/summoner-spells").with(adminUser()))
 				.andExpect(status().is3xxRedirection())
 				.andExpect(flash().attribute("noSavedPatch", is("Summoner Spells")))
 				.andExpect(redirectedUrl("/admin"));
 
 		mockServer.expect(requestTo(summonerSpellsUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(responseBody, MediaType.APPLICATION_JSON));
+				.andRespond(withSuccess(responseBody, MediaType.APPLICATION_JSON_UTF8));
 		versionsRepository.save(new Version("new version"));
 
-		mockMvc.perform(get("/admin/summoner-spells").with(testUser()))
+		mockMvc.perform(get("/admin/summoner-spells").with(adminUser()))
 				.andExpect(status().isOk())
 				.andExpect(model().attributeExists("latestSavedPatch", "difference"))
 				.andExpect(model().attribute("activeTab", is("summonerSpells")))
@@ -133,16 +137,16 @@ public class AdminControllerTest extends BaseSpringTestRunner {
 				"{\"full\":\"3751.png\",\"sprite\":\"item2.png\",\"group\":\"item\",\"x\":336,\"y\":288,\"w\":48," +
 				"\"h\":48},\"gold\":{\"base\":700,\"total\":1100,\"sell\":770,\"purchasable\":true}}}}";
 
-		mockMvc.perform(get("/admin/items").with(testUser()))
+		mockMvc.perform(get("/admin/items").with(adminUser()))
 				.andExpect(status().is3xxRedirection())
 				.andExpect(flash().attribute("noSavedPatch", is("Items")))
 				.andExpect(redirectedUrl("/admin"));
 
 		mockServer.expect(requestTo(itemsUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(responseBody, MediaType.APPLICATION_JSON));
+				.andRespond(withSuccess(responseBody, MediaType.APPLICATION_JSON_UTF8));
 		versionsRepository.save(new Version("new version"));
 
-		mockMvc.perform(get("/admin/items").with(testUser()))
+		mockMvc.perform(get("/admin/items").with(adminUser()))
 				.andExpect(status().isOk())
 				.andExpect(model().attributeExists("latestSavedPatch", "difference"))
 				.andExpect(model().attribute("activeTab", is("items")))
@@ -156,22 +160,46 @@ public class AdminControllerTest extends BaseSpringTestRunner {
 				"\"champion2.png\",\"group\":\"champion\",\"x\":432,\"y\":0,\"w\":48,\"h\":48},\"tags\":[\"Support\"," +
 				"\"Fighter\"],\"partype\":\"Mana\"}}}}";
 		mockServer.expect(requestTo(championsUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(responseBody, MediaType.APPLICATION_JSON));
+				.andRespond(withSuccess(responseBody, MediaType.APPLICATION_JSON_UTF8));
 
-		mockMvc.perform(get("/admin/champions").with(testUser()).with(csrf()))
+		mockMvc.perform(get("/admin/champions").with(adminUser()).with(csrf()))
 				.andExpect(status().is3xxRedirection())
 				.andExpect(flash().attribute("noSavedPatch", is("Champions")))
 				.andExpect(redirectedUrl("/admin"));
 
 		mockServer.expect(requestTo(championsUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(responseBody, MediaType.APPLICATION_JSON));
+				.andRespond(withSuccess(responseBody, MediaType.APPLICATION_JSON_UTF8));
 		versionsRepository.save(new Version("new version"));
 
-		mockMvc.perform(get("/admin/champions").with(testUser()))
+		mockMvc.perform(get("/admin/champions").with(adminUser()))
 				.andExpect(status().isOk())
 				.andExpect(model().attributeExists("latestSavedPatch", "difference"))
 				.andExpect(model().attribute("activeTab", is("champions")))
 				.andExpect(view().name("admin/champions/champions"));
+	}
+
+	@Test
+	public void maps() throws Exception {
+		String responseBody = "{\"type\":\"map\",\"version\":\"5.24.2\",\"data\":{\"10\":{\"mapName\":" +
+				"\"NewTwistedTreeline\",\"mapId\":10,\"image\":{\"full\":\"map10.png\",\"sprite\":\"map0.png\"," +
+				"\"group\":\"map\",\"x\":0,\"y\":0,\"w\":48,\"h\":48}}}}";
+		mockServer.expect(requestTo(mapsUri.toString())).andExpect(method(HttpMethod.GET))
+				.andRespond(withSuccess(responseBody, MediaType.APPLICATION_JSON_UTF8));
+
+		mockMvc.perform(get("/admin/maps").with(adminUser()).with(csrf()))
+				.andExpect(status().is3xxRedirection())
+				.andExpect(flash().attribute("noSavedPatch", is("Maps")))
+				.andExpect(redirectedUrl("/admin"));
+
+		mockServer.expect(requestTo(championsUri.toString())).andExpect(method(HttpMethod.GET))
+				.andRespond(withSuccess(responseBody, MediaType.APPLICATION_JSON_UTF8));
+		versionsRepository.save(new Version("new version"));
+
+		mockMvc.perform(get("/admin/maps").with(adminUser()))
+				.andExpect(status().isOk())
+				.andExpect(model().attributeExists("latestSavedPatch", "difference"))
+				.andExpect(model().attribute("activeTab", is("maps")))
+				.andExpect(view().name("admin/maps/maps"));
 	}
 
 }

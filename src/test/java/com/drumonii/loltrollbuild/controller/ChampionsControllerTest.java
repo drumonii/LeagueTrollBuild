@@ -14,6 +14,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.After;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
@@ -204,7 +205,7 @@ public class ChampionsControllerTest extends BaseSpringTestRunner {
 
 		mockMvc.perform(get("/champions/{id}/troll-build?mapId={mapId}", annie.getId(), SUMMONERS_RIFT))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(APPLICATION_JSON_UTF8))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(jsonPath("$.items").exists())
 				.andExpect(jsonPath("$.items", hasSize(6)))
 				.andExpect(jsonPath("$.summoner-spells").exists())

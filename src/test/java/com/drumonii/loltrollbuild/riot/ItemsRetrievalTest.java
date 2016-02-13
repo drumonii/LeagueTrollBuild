@@ -119,11 +119,11 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 	@Test
 	public void items() throws Exception {
 		mockServer.expect(requestTo(itemsUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(itemsResponseBody, MediaType.APPLICATION_JSON));
+				.andRespond(withSuccess(itemsResponseBody, MediaType.APPLICATION_JSON_UTF8));
 
-		mockMvc.perform(get("/riot/items").with(testUser()).with(csrf()))
+		mockMvc.perform(get("/riot/items").with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(APPLICATION_JSON_UTF8))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(Arrays.asList(trackersKnife))));
 		mockServer.verify();
 	}
@@ -131,11 +131,11 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 	@Test
 	public void saveItems() throws Exception {
 		mockServer.expect(requestTo(itemsUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(itemsResponseBody, MediaType.APPLICATION_JSON));
+				.andRespond(withSuccess(itemsResponseBody, MediaType.APPLICATION_JSON_UTF8));
 
-		mockMvc.perform(post("/riot/items").with(testUser()).with(csrf()))
+		mockMvc.perform(post("/riot/items").with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(APPLICATION_JSON_UTF8))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(Arrays.asList(trackersKnife))));
 		mockServer.verify();
 
@@ -145,11 +145,11 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 	@Test
 	public void saveItemsNoPatchVersion() throws Exception {
 		mockServer.expect(requestTo(itemsUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(itemsResponseBody, MediaType.APPLICATION_JSON));
+				.andRespond(withSuccess(itemsResponseBody, MediaType.APPLICATION_JSON_UTF8));
 
 		versionsRepository.deleteAll();
 
-		mockMvc.perform(post("/riot/items").with(testUser()).with(csrf()))
+		mockMvc.perform(post("/riot/items").with(adminUser()).with(csrf()))
 				.andExpect(status().isNotFound());
 		mockServer.verify();
 	}
@@ -157,12 +157,12 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 	@Test
 	public void saveDifferenceOfItems() throws Exception {
 		mockServer.expect(requestTo(itemsUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(itemsResponseBody, MediaType.APPLICATION_JSON));
+				.andRespond(withSuccess(itemsResponseBody, MediaType.APPLICATION_JSON_UTF8));
 		itemsRepository.save(trackersKnife);
 
-		mockMvc.perform(post("/riot/items").with(testUser()).with(csrf()))
+		mockMvc.perform(post("/riot/items").with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(APPLICATION_JSON_UTF8))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json("[]"));
 		mockServer.verify();
 
@@ -172,13 +172,13 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 	@Test
 	public void saveDifferenceOfItemsWithDeleted() throws Exception {
 		mockServer.expect(requestTo(itemsUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(itemsResponseBody, MediaType.APPLICATION_JSON));
+				.andRespond(withSuccess(itemsResponseBody, MediaType.APPLICATION_JSON_UTF8));
 		itemsRepository.save(trackersKnife);
 		itemsRepository.save(lichBane);
 
-		mockMvc.perform(post("/riot/items").with(testUser()).with(csrf()))
+		mockMvc.perform(post("/riot/items").with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(APPLICATION_JSON_UTF8))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json("[]"));
 		mockServer.verify();
 
@@ -204,11 +204,11 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 		itemsRepository.save(deathCap);
 
 		mockServer.expect(requestTo(itemsUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(itemsResponseBody, MediaType.APPLICATION_JSON));
+				.andRespond(withSuccess(itemsResponseBody, MediaType.APPLICATION_JSON_UTF8));
 
-		mockMvc.perform(post("/riot/items?truncate=true").with(testUser()).with(csrf()))
+		mockMvc.perform(post("/riot/items?truncate=true").with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(APPLICATION_JSON_UTF8))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(Arrays.asList(trackersKnife))));
 		mockServer.verify();
 
@@ -219,11 +219,11 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 	@Test
 	public void item() throws Exception {
 		mockServer.expect(requestTo(itemUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(itemResponseBody, MediaType.APPLICATION_JSON));
+				.andRespond(withSuccess(itemResponseBody, MediaType.APPLICATION_JSON_UTF8));
 
-		mockMvc.perform(get("/riot/items/{id}", lichBane.getId()).with(testUser()).with(csrf()))
+		mockMvc.perform(get("/riot/items/{id}", lichBane.getId()).with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(APPLICATION_JSON_UTF8))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(lichBane)));
 		mockServer.verify();
 	}
@@ -233,7 +233,7 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 		mockServer.expect(requestTo(itemUri.toString())).andExpect(method(HttpMethod.GET))
 				.andRespond(withStatus(HttpStatus.NOT_FOUND));
 
-		mockMvc.perform(get("/riot/items/{id}", lichBane.getId()).with(testUser()).with(csrf()))
+		mockMvc.perform(get("/riot/items/{id}", lichBane.getId()).with(adminUser()).with(csrf()))
 				.andExpect(status().isNotFound());
 		mockServer.verify();
 	}
@@ -241,11 +241,11 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 	@Test
 	public void saveItem() throws Exception {
 		mockServer.expect(requestTo(itemUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(itemResponseBody, MediaType.APPLICATION_JSON));
+				.andRespond(withSuccess(itemResponseBody, MediaType.APPLICATION_JSON_UTF8));
 
-		mockMvc.perform(post("/riot/items/{id}", lichBane.getId()).with(testUser()).with(csrf()))
+		mockMvc.perform(post("/riot/items/{id}", lichBane.getId()).with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(APPLICATION_JSON_UTF8))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(lichBane)));
 		mockServer.verify();
 
@@ -257,7 +257,7 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 		mockServer.expect(requestTo(itemUri.toString())).andExpect(method(HttpMethod.GET))
 				.andRespond(withStatus(HttpStatus.NOT_FOUND));
 
-		mockMvc.perform(post("/riot/items/{id}", lichBane.getId()).with(testUser()).with(csrf()))
+		mockMvc.perform(post("/riot/items/{id}", lichBane.getId()).with(adminUser()).with(csrf()))
 				.andExpect(status().isNotFound());
 		mockServer.verify();
 	}
@@ -265,11 +265,11 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 	@Test
 	public void saveItemNoPatchVersion() throws Exception {
 		mockServer.expect(requestTo(itemUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(itemResponseBody, MediaType.APPLICATION_JSON));
+				.andRespond(withSuccess(itemResponseBody, MediaType.APPLICATION_JSON_UTF8));
 
 		versionsRepository.deleteAll();
 
-		mockMvc.perform(post("/riot/items/{id}", lichBane.getId()).with(testUser()).with(csrf()))
+		mockMvc.perform(post("/riot/items/{id}", lichBane.getId()).with(adminUser()).with(csrf()))
 				.andExpect(status().isNotFound());
 		mockServer.verify();
 	}
@@ -281,11 +281,11 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 		itemsRepository.save(newLichBane);
 
 		mockServer.expect(requestTo(itemUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(itemResponseBody, MediaType.APPLICATION_JSON));
+				.andRespond(withSuccess(itemResponseBody, MediaType.APPLICATION_JSON_UTF8));
 
-		mockMvc.perform(post("/riot/items/{id}", lichBane.getId()).with(testUser()).with(csrf()))
+		mockMvc.perform(post("/riot/items/{id}", lichBane.getId()).with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(APPLICATION_JSON_UTF8))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(lichBane)));
 		mockServer.verify();
 
