@@ -12,6 +12,9 @@ $(function() {
             { searchable: false, targets: [0] }
         ],
         lengthMenu: [ [10, -1], [10, 'All'] ],
+        language: {
+            zeroRecords: [[#{dataTables.zeroRecords(#{admin.summonerSpells})}]]
+        },
         drawCallback: function(settings) {
             $('.summoner-spell-description').popup();
         }
@@ -141,6 +144,9 @@ $(function() {
             return msg.replace(/{(\d+)}/g, function(match, number) {
                 return typeof args[number] != 'undefined' ? args[number] : match;
             });
+        },
+        language: {
+            zeroRecords: [[#{dataTables.zeroRecords(#{admin.summonerSpells})}]]
         },
         drawCallback: function(settings) {
             $('.summoner-spell-description').popup();

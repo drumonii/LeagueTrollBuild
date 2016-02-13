@@ -11,7 +11,10 @@ $(function() {
             { orderable: false, targets: [0] },
             { searchable: false, targets: [0] }
         ],
-        lengthMenu: [ [10, -1], [10, 'All'] ]
+        lengthMenu: [ [10, -1], [10, 'All'] ],
+        language: {
+            zeroRecords: [[#{dataTables.zeroRecords(#{admin.maps})}]]
+        }
     });
     $('#save-maps-form').submit(function(event) {
         var button = $('#save-maps-btn');
@@ -134,6 +137,9 @@ $(function() {
             return msg.replace(/{(\d+)}/g, function(match, number) {
                 return typeof args[number] != 'undefined' ? args[number] : match;
             });
+        },
+        language: {
+            zeroRecords: [[#{dataTables.zeroRecords(#{admin.maps})}]]
         }
     });
     dataTable.on('search.dt', function() {
