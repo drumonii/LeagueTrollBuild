@@ -61,7 +61,7 @@ public class ChampionsController {
 			return "redirect:/champions";
 		}
 		model.addAttribute(champion);
-		model.addAttribute("maps", eligibleMaps((List<GameMap>) mapsRepository.findAll()));
+		model.addAttribute("maps", eligibleMaps());
 		return "champions/champion";
 	}
 
@@ -100,16 +100,29 @@ public class ChampionsController {
 
 	/**
 	 * Gets {@link List} of all {@link GameMap}s that are eligible for the troll build. Map names are transformed into a
-	 * more legible format. Eligible maps: Crystal Scar, Twisted Treeline, Summoner's Rift, and Proving Grounds.
+	 * more legible format. Eligible maps: Twisted Treeline, Summoner's Rift, and Proving Grounds.
 	 *
-	 * @param maps a {@link List} of all {@link GameMap}s
 	 * @return only the eligible {@link List} of {@link GameMap}s
 	 */
-	private List<GameMap> eligibleMaps(List<GameMap> maps) {
-		maps.forEach(GameMap::useActualMapName);
+	public List<GameMap> eligibleMaps() {
+		List<GameMap> maps = (List<GameMap>) mapsRepository.findAll();
+		for (GameMap map : maps) {
+			switch (map.getMapName()) {
+				case "NewTwistedTreeline":
+					map.setMapName("Twisted Treeline");
+					break;
+				case "SummonersRiftNew":
+					map.setMapName("Summoner's Rift");
+					break;
+				case "ProvingGroundsNew":
+					map.setMapName("Proving Grounds");
+					break;
+			}
+		}
 		maps = maps.stream()
-				.filter(map -> map.getMapId() != 1) // filter out the old Summoner's Rift
-				.sorted((m1, m2) -> m1.getMapName().compareTo(m2.getMapName()))
+				.filter(map -> map.getMapName().equals("Twisted Treeline") ||
+						map.getMapName().equals("Summoner's Rift") || map.getMapName().equals("Proving Grounds"))
+				.sorted((map1, map2) -> map1.getMapName().compareTo(map2.getMapName()))
 				.collect(Collectors.toList());
 		return maps;
 	}

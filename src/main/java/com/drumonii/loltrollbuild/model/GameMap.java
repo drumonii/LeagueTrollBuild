@@ -37,21 +37,4 @@ public class GameMap {
 	@JsonProperty("image")
 	@Getter @Setter private GameMapImage image;
 
-	public void useActualMapName() {
-		switch (mapName) {
-			case "CrystalScar":
-				mapName = "Crystal Scar";
-				break;
-			case "NewTwistedTreeline":
-				mapName = "Twisted Treeline";
-				break;
-			case "SummonersRiftNew":
-				mapName = "Summoner's Rift";
-				break;
-			case "ProvingGroundsNew":
-				mapName = "Proving Grounds";
-				break;
-		}
-	}
-
 }

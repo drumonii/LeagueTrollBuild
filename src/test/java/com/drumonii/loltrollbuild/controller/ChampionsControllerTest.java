@@ -2,13 +2,16 @@ package com.drumonii.loltrollbuild.controller;
 
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.model.Champion;
+import com.drumonii.loltrollbuild.model.GameMap;
 import com.drumonii.loltrollbuild.model.Item;
 import com.drumonii.loltrollbuild.model.SummonerSpell;
 import com.drumonii.loltrollbuild.repository.ChampionsRepository;
 import com.drumonii.loltrollbuild.repository.ItemsRepository;
+import com.drumonii.loltrollbuild.repository.MapsRepository;
 import com.drumonii.loltrollbuild.repository.SummonerSpellsRepository;
 import com.drumonii.loltrollbuild.riot.api.ChampionsResponse;
 import com.drumonii.loltrollbuild.riot.api.ItemsResponse;
+import com.drumonii.loltrollbuild.riot.api.MapsResponse;
 import com.drumonii.loltrollbuild.riot.api.SummonerSpellsResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.After;
@@ -16,6 +19,9 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -24,6 +30,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class ChampionsControllerTest extends BaseSpringTestRunner {
 
 	private static final int SUMMONERS_RIFT = 11;
+
+	@Autowired
+	private ChampionsController championsController;
 
 	@Autowired
 	private ChampionsRepository championsRepository;
@@ -35,6 +44,9 @@ public class ChampionsControllerTest extends BaseSpringTestRunner {
 	private SummonerSpellsRepository summonerSpellsRepository;
 
 	@Autowired
+	private MapsRepository mapsRepository;
+
+	@Autowired
 	private ObjectMapper objectMapper;
 
 	@After
@@ -42,6 +54,7 @@ public class ChampionsControllerTest extends BaseSpringTestRunner {
 		itemsRepository.deleteAll();
 		summonerSpellsRepository.deleteAll();
 		championsRepository.deleteAll();
+		mapsRepository.deleteAll();
 	}
 
 	@Test
@@ -211,6 +224,39 @@ public class ChampionsControllerTest extends BaseSpringTestRunner {
 				.andExpect(jsonPath("$.summoner-spells").exists())
 				.andExpect(jsonPath("$.summoner-spells", hasSize(2)))
 				.andExpect(jsonPath("$.trinket", hasSize(1)));
+	}
+
+	@Test
+	public void eligibleMaps() throws Exception {
+		String responseBody = "{\"type\":\"map\",\"version\":\"6.3.1\",\"data\":{\"8\":{\"mapName\":\"CrystalScar\"," +
+				"\"mapId\":8,\"image\":{\"full\":\"map8.png\",\"sprite\":\"map0.png\",\"group\":\"map\",\"x\":192," +
+				"\"y\":0,\"w\":48,\"h\":48}}}}";
+		GameMap crystalScar = objectMapper.readValue(responseBody, MapsResponse.class).getMaps().get("8");
+		mapsRepository.save(crystalScar);
+
+		responseBody = "{\"type\":\"map\",\"version\":\"6.3.1\",\"data\":{\"11\":{\"mapName\":\"SummonersRiftNew\"," +
+				"\"mapId\":11,\"image\":{\"full\":\"map11.png\",\"sprite\":\"map0.png\",\"group\":\"map\",\"x\":144," +
+				"\"y\":0,\"w\":48,\"h\":48}}}}";
+		GameMap summonersRift = objectMapper.readValue(responseBody, MapsResponse.class).getMaps().get("11");
+		mapsRepository.save(summonersRift);
+
+		responseBody = "{\"type\":\"map\",\"version\":\"6.3.1\",\"data\":{\"12\":{\"mapName\":\"ProvingGroundsNew\"," +
+				"\"mapId\":12,\"image\":{\"full\":\"map12.png\",\"sprite\":\"map0.png\",\"group\":\"map\",\"x\":48," +
+				"\"y\":0,\"w\":48,\"h\":48}}}}";
+		GameMap provingGrounds = objectMapper.readValue(responseBody, MapsResponse.class).getMaps().get("12");
+		mapsRepository.save(provingGrounds);
+
+		responseBody = "{\"type\":\"map\",\"version\":\"6.3.1\",\"data\":{\"10\":{\"mapName\":" +
+				"\"NewTwistedTreeline\",\"mapId\":10,\"image\":{\"full\":\"map10.png\",\"sprite\":\"map0.png\"," +
+				"\"group\":\"map\",\"x\":0,\"y\":0,\"w\":48,\"h\":48}}}}";
+		GameMap twistedTreeline = objectMapper.readValue(responseBody, MapsResponse.class).getMaps().get("10");
+		mapsRepository.save(twistedTreeline);
+
+		List<GameMap> eligibleMaps = championsController.eligibleMaps();
+		assertThat(eligibleMaps).isNotEmpty();
+		assertThat(eligibleMaps).extracting("mapId")
+								.containsExactly(provingGrounds.getMapId(), summonersRift.getMapId(),
+										twistedTreeline.getMapId());
 	}
 
 }

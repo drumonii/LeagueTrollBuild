@@ -47,8 +47,8 @@ $(function() {
             },
             complete: function() {
                 newBuildBtn.removeClass('loading');
-                // If map is Proving Grounds or Crystal Scar
-                if ($('#map option:selected').val() == 12 || $('#map option:selected').val() == 8) {
+                // If map is Proving Grounds
+                if ($('#map option:selected').val() == 12) {
                     $('#trinket .image').addClass('disabled');
                 } else {
                     $('#trinket .image').removeClass('disabled');
