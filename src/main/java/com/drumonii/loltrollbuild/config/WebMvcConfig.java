@@ -1,13 +1,11 @@
 package com.drumonii.loltrollbuild.config;
 
 import org.apache.commons.io.FileUtils;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.webjars.WebJarAssetLocator;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -20,11 +18,6 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
 	public static final String TEMP_DIR = FileUtils.getTempDirectoryPath();
 	public static final String RESOURCE_DIR = "loltrollbuild";
-
-	@Bean
-	public WebJarAssetLocator webJarAssetLocator() {
-		return new WebJarAssetLocator();
-	}
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
