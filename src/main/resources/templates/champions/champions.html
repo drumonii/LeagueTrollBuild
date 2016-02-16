@@ -3,19 +3,18 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layouts/main">
 <head>
-    <script th:src="@{/webjars/hideseek/jquery.hideseek.min.js}"></script>
+    <script th:src="@{/webjars/jquery-searcher/dist/jquery.searcher.min.js}"></script>
 </head>
 <body>
 <div layout:fragment="content">
     <div class="ui search" th:unless="${#lists.isEmpty(champions)}">
         <div class="ui icon input">
-            <input class="prompt" th:placeholder="#{champions.search}" type="text" data-toggle="hideseek"
-                   data-list=".cards" />
+            <input id="champions-input" class="prompt" th:placeholder="#{champions.search}" type="text" />
             <i class="search icon"></i>
         </div>
     </div>
     <div class="ui hidden divider" th:unless="${#lists.isEmpty(champions)}"></div>
-    <div class="ui ten link cards" th:unless="${#lists.isEmpty(champions)}">
+    <div id="champions-cards" class="ui ten link cards" th:unless="${#lists.isEmpty(champions)}">
         <div class="card" th:each="champion : ${champions}">
             <div class="dimmable image">
                 <div class="ui dimmer">

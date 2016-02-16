@@ -8,6 +8,18 @@ $(function() {
     $('.cards .image').dimmer({
         on: 'hover'
     });
+    $("#champions-cards").searcher({
+        itemSelector: ".card",
+        textSelector: "div",
+        inputSelector: "#champions-input",
+        toggle: function(champion, containsText) {
+            if (containsText) {
+                $(champion).fadeIn();
+            } else {
+                $(champion).fadeOut();
+            }
+        }
+    });
 });
 /*]]>*/
 </script>
