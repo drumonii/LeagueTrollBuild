@@ -61,14 +61,19 @@ $(function() {
             },
             data: function(data) {
                 var sorts = [];
-                $.each(data.order, function (i, order) {
-                    sorts.push(data.columns[order.column].data + "," + order.dir);
+                $.each(data.order, function(i, order) {
+                    if (data.columns[order.column].orderable) {
+                        sorts.push(data.columns[order.column].data + ',' + order.dir);
+                    }
                 });
+                var parameters = {};
                 if (data.search.value) {
-                    return { term: data.search.value, page: Math.ceil(data.start / data.length), size: data.length,
-                        sort: sorts[0] };
+                    parameters['term'] = data.search.value;
                 }
-                return { page: Math.ceil(data.start / data.length), size: data.length, sort: sorts[0] };
+                parameters['page'] = Math.ceil(data.start / data.length);
+                parameters['size'] = data.length;
+                parameters['sort'] = sorts;
+                return $.param(parameters, true);
             }
         },
         columnDefs: [
