@@ -1,5 +1,6 @@
 package com.drumonii.loltrollbuild.model.image;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
@@ -27,6 +28,10 @@ public class Image {
 	@Column(name = "IMG_GROUP", nullable = false)
 	@JsonProperty("group")
 	@Getter @Setter String group;
+
+	@Column(name = "IMG_SRC", columnDefinition = "BYTEA", nullable = false)
+	@JsonIgnore
+	@Getter @Setter byte[] imgSrc = new byte[0];
 
 	@Column(name = "X", nullable = false)
 	@JsonProperty("x")

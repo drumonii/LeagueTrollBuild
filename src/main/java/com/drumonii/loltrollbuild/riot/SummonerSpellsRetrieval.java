@@ -2,13 +2,13 @@ package com.drumonii.loltrollbuild.riot;
 
 import com.drumonii.loltrollbuild.model.SummonerSpell;
 import com.drumonii.loltrollbuild.repository.SummonerSpellsRepository;
-import com.drumonii.loltrollbuild.riot.api.ImageSaver;
-import com.drumonii.loltrollbuild.riot.api.RiotApiProperties;
+import com.drumonii.loltrollbuild.riot.api.ImageFetcher;
 import com.drumonii.loltrollbuild.riot.api.SummonerSpellsResponse;
 import com.drumonii.loltrollbuild.util.MapUtil;
 import org.apache.commons.collections4.ListUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestClientException;
@@ -46,13 +46,13 @@ public class SummonerSpellsRetrieval {
 	private SummonerSpellsRepository summonerSpellsRepository;
 
 	@Autowired
-	private ImageSaver imageSaver;
+	private ImageFetcher imageFetcher;
 
-	@Autowired
-	private RiotApiProperties riotProperties;
+	@Value("${riot.api.static-data.region}")
+	private String region;
 
 	/**
-	 * Returns the {@link List} of {@link SummonerSpell} from Riot.
+	 * Returns the {@link List} of {@link SummonerSpell} from Riot for the most current patch.
 	 *
 	 * @return the {@link List} of {@link SummonerSpell} from Riot
 	 */
@@ -64,10 +64,10 @@ public class SummonerSpellsRetrieval {
 	}
 
 	/**
-	 * Persists the {@link List} of {@link SummonerSpell} from Riot and saves their images. If Summoner Spells already
-	 * exist in the database, then only the difference (list from Riot not in the database) is persisted. And if
-	 * Summoner Spells not found in Riot exist in the database, then those Summoner Spells are deleted along with their
-	 * images.
+	 * Persists the {@link List} of {@link SummonerSpell} from Riot for the most current patch and saves their images.
+	 * If Summoner Spells already exist in the database, then only the difference (list from Riot not in the database)
+	 * is persisted. And if Summoner Spells not found in Riot exist in the database, then those Summoner Spells are
+	 * deleted along with their images.
 	 * <p></p>
 	 * If the {@code truncate} request parameter is set to {@code true}, then all previous Summoner Spells and their
 	 * images are deleted and all the ones from Riot are persisted along with their images saved.
@@ -88,27 +88,23 @@ public class SummonerSpellsRetrieval {
 			List<SummonerSpell> summonerSpellsFromDb = (List<SummonerSpell>) summonerSpellsRepository.findAll();
 			List<SummonerSpell> deletedSummonerSpells = ListUtils.subtract(summonerSpellsFromDb, summonerSpells);
 			summonerSpellsRepository.delete(deletedSummonerSpells);
-			imageSaver.deleteImages(deletedSummonerSpells.stream().map(SummonerSpell::getImage)
-					.collect(Collectors.toList()));
 			summonerSpells = ListUtils.subtract(summonerSpells, summonerSpellsFromDb);
 		}
 
-		imageSaver.copyImagesFromURLs(summonerSpells.stream().map(SummonerSpell::getImage).collect(Collectors.toList()),
-				truncate, summonerSpellsImgUri);
-
+		imageFetcher.setImgsSrcs(summonerSpells.stream().map(SummonerSpell::getImage).collect(Collectors.toList()),
+				summonerSpellsImgUri);
 		return (List<SummonerSpell>) summonerSpellsRepository.save(summonerSpells);
 	}
 
 	/**
-	 * Returns a {@link SummonerSpell} from Riot by its ID.
+	 * Returns a {@link SummonerSpell} from Riot by its ID for the most current patch.
 	 *
 	 * @param id the ID to lookup the {@link SummonerSpell} from Riot
 	 * @return the {@link SummonerSpell} from Riot
 	 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public SummonerSpell summonerSpell(@PathVariable int id) {
-		UriComponents uriComponents =
-				summonerSpellUri.buildAndExpand(riotProperties.getApi().getStaticData().getRegion(), id);
+		UriComponents uriComponents = summonerSpellUri.buildAndExpand(region, id);
 		SummonerSpell summonerSpell;
 		try {
 			summonerSpell = restTemplate.getForObject(uriComponents.toString(), SummonerSpell.class);
@@ -119,17 +115,16 @@ public class SummonerSpellsRetrieval {
 	}
 
 	/**
-	 * Persists a {@link SummonerSpell} from Riot by its ID and saves its image. If the Summoner Spell already exists
-	 * in the database, then the previous Summoner Spell and its image are deleted and the one retrieved from Riot is
-	 * persisted along with its image saved.
+	 * Persists a {@link SummonerSpell} from Riot by its ID for the most current patch and saves its image. If the
+	 * Summoner Spell already exists in the database, then the previous Summoner Spell and its image are deleted and
+	 * the one retrieved from Riot is persisted along with its image saved.
 	 *
 	 * @param id the ID to lookup the {@link SummonerSpell} from Riot
 	 * @return the persisted {@link SummonerSpell}
 	 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.POST)
 	public SummonerSpell saveSummonerSpell(@PathVariable int id) {
-		UriComponents uriComponents =
-				summonerSpellUri.buildAndExpand(riotProperties.getApi().getStaticData().getRegion(), id);
+		UriComponents uriComponents = summonerSpellUri.buildAndExpand(region, id);
 		SummonerSpell summonerSpell;
 		try {
 			summonerSpell = restTemplate.getForObject(uriComponents.toString(), SummonerSpell.class);
@@ -142,7 +137,7 @@ public class SummonerSpellsRetrieval {
 			summonerSpellsRepository.delete(id);
 		}
 
-		imageSaver.copyImageFromURL(summonerSpell.getImage(), summonerSpellsImgUri);
+		imageFetcher.setImgSrc(summonerSpell.getImage(), summonerSpellsImgUri);
 		return summonerSpellsRepository.save(summonerSpell);
 	}
 

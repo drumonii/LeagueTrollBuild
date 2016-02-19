@@ -43,7 +43,7 @@ public class VersionsRetrieval {
 	}
 
 	/**
-	 * Returns the {@link List} of String versions from Riot.
+	 * Returns the {@link List} of String versions from Riot for the most current patch.
 	 *
 	 * @param versions the {@link ModelAttribute} of {@link List} of String versions from Riot
 	 * @return the {@link List} of String versions from Riot

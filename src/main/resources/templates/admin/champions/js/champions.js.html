@@ -80,12 +80,15 @@ $(function() {
             { orderable: false, targets: [0, 3, 5, 6] }
         ],
         columns: [
-            { data: 'image.full',
+            { data: null,
                 render: function(data, type, full, meta) {
+                    var href = data._links.self.href;
+                    var id = href.substring(href.lastIndexOf('/') + 1, href.length);
+                    var img = data.image.full;
                     return $('<img>', {
                         class: 'ui rounded image',
                         style: 'height:60px;width:auto;',
-                        src: '/resources/' + data
+                        src: '/img/champions/' + id + img.substring(img.lastIndexOf('.'), img.length),
                     }).wrap('<span>').parent().html();
                 }
             },

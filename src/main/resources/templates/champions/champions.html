@@ -24,7 +24,7 @@
                         </a>
                     </div>
                 </div>
-                <img class="ui rounded image" th:src="@{/resources/{image}(image=${champion.image.full})}" />
+                <img class="ui rounded image" th:src="@{/img/champions/{image}.png(image=${champion.id})}" />
             </div>
         </div>
     </div>

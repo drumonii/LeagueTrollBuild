@@ -2,13 +2,13 @@ package com.drumonii.loltrollbuild.riot;
 
 import com.drumonii.loltrollbuild.model.Item;
 import com.drumonii.loltrollbuild.repository.ItemsRepository;
-import com.drumonii.loltrollbuild.riot.api.ImageSaver;
+import com.drumonii.loltrollbuild.riot.api.ImageFetcher;
 import com.drumonii.loltrollbuild.riot.api.ItemsResponse;
-import com.drumonii.loltrollbuild.riot.api.RiotApiProperties;
 import com.drumonii.loltrollbuild.util.MapUtil;
 import org.apache.commons.collections4.ListUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestClientException;
@@ -46,13 +46,13 @@ public class ItemsRetrieval {
 	private ItemsRepository itemsRepository;
 
 	@Autowired
-	private ImageSaver imageSaver;
+	private ImageFetcher imageFetcher;
 
-	@Autowired
-	private RiotApiProperties riotProperties;
+	@Value("${riot.api.static-data.region}")
+	private String region;
 
 	/**
-	 * Returns the {@link List} of {@link Item} from Riot.
+	 * Returns the {@link List} of {@link Item} from Riot for the most current patch.
 	 *
 	 * @return the {@link List} of {@link Item} from Riot
 	 */
@@ -63,9 +63,9 @@ public class ItemsRetrieval {
 	}
 
 	/**
-	 * Persists the {@link List} of {@link Item} from Riot and saves their images. If Items already exist in the
-	 * database, then only the difference (list from Riot not in the database) is persisted. And if Items not
-	 * found in Riot exist in the database, then those Items are deleted along with their images.
+	 * Persists the {@link List} of {@link Item} from Riot for the most current patch and saves their images. If Items
+	 * already exist in the database, then only the difference (list from Riot not in the database) is persisted. And
+	 * if Items not found in Riot exist in the database, then those Items are deleted along with their images.
 	 * <p></p>
 	 * If the {@code truncate} request parameter is set to {@code true}, then all previous Items and their images are
 	 * deleted and all the ones from Riot are persisted along with their images saved.
@@ -85,25 +85,22 @@ public class ItemsRetrieval {
 			List<Item> itemsFromDb = (List<Item>) itemsRepository.findAll();
 			List<Item> deletedItems = ListUtils.subtract(itemsFromDb, items);
 			itemsRepository.delete(deletedItems);
-			imageSaver.deleteImages(deletedItems.stream().map(Item::getImage).collect(Collectors.toList()));
 			items = ListUtils.subtract(items, itemsFromDb);
 		}
 
-		imageSaver.copyImagesFromURLs(items.stream().map(Item::getImage).collect(Collectors.toList()), truncate,
-				itemsImgUri);
-
+		imageFetcher.setImgsSrcs(items.stream().map(Item::getImage).collect(Collectors.toList()), itemsImgUri);
 		return (List<Item>) itemsRepository.save(items);
 	}
 
 	/**
-	 * Returns a {@link Item} from Riot by its ID.
+	 * Returns a {@link Item} from Riot by its ID for the most current patch.
 	 *
 	 * @param id the ID to lookup the {@link Item} from Riot
 	 * @return the {@link Item} from Riot
 	 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public Item item(@PathVariable int id) {
-		UriComponents uriComponents = itemUri.buildAndExpand(riotProperties.getApi().getStaticData().getRegion(), id);
+		UriComponents uriComponents = itemUri.buildAndExpand(region, id);
 		Item item;
 		try {
 			item = restTemplate.getForObject(uriComponents.toString(), Item.class);
@@ -114,16 +111,16 @@ public class ItemsRetrieval {
 	}
 
 	/**
-	 * Persists a {@link Item} from Riot by its ID and saves its image. If the Item already exists in the database,
-	 * then the previous Item and its image are deleted and the one retrieved from Riot is persisted along with its
-	 * image saved.
+	 * Persists a {@link Item} from Riot by its ID for the most current patch and saves its image. If the Item already
+	 * exists in the database, then the previous Item and its image are deleted and the one retrieved from Riot is
+	 * persisted along with its image saved.
 	 *
 	 * @param id the ID to lookup the {@link Item} from Riot
 	 * @return the persisted {@link Item}
 	 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.POST)
 	public Item saveItem(@PathVariable int id) {
-		UriComponents uriComponents = itemUri.buildAndExpand(riotProperties.getApi().getStaticData().getRegion(), id);
+		UriComponents uriComponents = itemUri.buildAndExpand(region, id);
 		Item item;
 		try {
 			item = restTemplate.getForObject(uriComponents.toString(), Item.class);
@@ -136,7 +133,7 @@ public class ItemsRetrieval {
 			itemsRepository.delete(id);
 		}
 
-		imageSaver.copyImageFromURL(item.getImage(), itemsImgUri);
+		imageFetcher.setImgSrc(item.getImage(), itemsImgUri);
 		return itemsRepository.save(item);
 	}
 

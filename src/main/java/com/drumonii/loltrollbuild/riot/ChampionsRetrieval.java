@@ -3,12 +3,12 @@ package com.drumonii.loltrollbuild.riot;
 import com.drumonii.loltrollbuild.model.Champion;
 import com.drumonii.loltrollbuild.repository.ChampionsRepository;
 import com.drumonii.loltrollbuild.riot.api.ChampionsResponse;
-import com.drumonii.loltrollbuild.riot.api.ImageSaver;
-import com.drumonii.loltrollbuild.riot.api.RiotApiProperties;
+import com.drumonii.loltrollbuild.riot.api.ImageFetcher;
 import com.drumonii.loltrollbuild.util.MapUtil;
 import org.apache.commons.collections4.ListUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestClientException;
@@ -46,13 +46,13 @@ public class ChampionsRetrieval {
 	private ChampionsRepository championsRepository;
 
 	@Autowired
-	private ImageSaver imageSaver;
+	private ImageFetcher imageFetcher;
 
-	@Autowired
-	private RiotApiProperties riotProperties;
+	@Value("${riot.api.static-data.region}")
+	private String region;
 
 	/**
-	 * Returns the {@link List} of {@link Champion} from Riot.
+	 * Returns the {@link List} of {@link Champion} from Riot for the most current patch.
 	 *
 	 * @return the {@link List} of {@link Champion} from Riot
 	 */
@@ -63,9 +63,10 @@ public class ChampionsRetrieval {
 	}
 
 	/**
-	 * Persists the {@link List} of {@link Champion} from Riot and saves their images. If Champions already exist in
-	 * the database, then only the difference (list from Riot not in the database) is persisted. And if Champions not
-	 * found in Riot exist in the database, then those Champions are deleted along with their images.
+	 * Persists the {@link List} of {@link Champion} from Riot for the most current patch and saves their images. If
+	 * Champions already exist in the database, then only the difference (list from Riot not in the database) is
+	 * persisted. And if Champions not found in Riot exist in the database, then those Champions are deleted along with
+	 * their images.
 	 * <p></p>
 	 * If the {@code truncate} request parameter is set to {@code true}, then all previous Champions and their images
 	 * are deleted and all the ones from Riot are persisted along with their images saved.
@@ -85,26 +86,23 @@ public class ChampionsRetrieval {
 			List<Champion> championsFromDb = (List<Champion>) championsRepository.findAll();
 			List<Champion> deletedChampions = ListUtils.subtract(championsFromDb, champions);
 			championsRepository.delete(deletedChampions);
-			imageSaver.deleteImages(deletedChampions.stream().map(Champion::getImage).collect(Collectors.toList()));
 			champions = ListUtils.subtract(champions, championsFromDb);
 		}
 
-		imageSaver.copyImagesFromURLs(champions.stream().map(Champion::getImage).collect(Collectors.toList()), truncate,
+		imageFetcher.setImgsSrcs(champions.stream().map(Champion::getImage).collect(Collectors.toList()),
 				championsImgUri);
-
 		return (List<Champion>) championsRepository.save(champions);
 	}
 
 	/**
-	 * Returns a {@link Champion} from Riot by its ID.
+	 * Returns a {@link Champion} from Riot by its ID for the most current patch.
 	 *
 	 * @param id the ID to lookup the {@link Champion} from Riot
 	 * @return the {@link Champion} from Riot
 	 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public Champion champion(@PathVariable int id) {
-		UriComponents uriComponents =
-				championUri.buildAndExpand(riotProperties.getApi().getStaticData().getRegion(), id);
+		UriComponents uriComponents = championUri.buildAndExpand(region, id);
 		Champion champion;
 		try {
 			champion = restTemplate.getForObject(uriComponents.toString(), Champion.class);
@@ -115,17 +113,16 @@ public class ChampionsRetrieval {
 	}
 
 	/**
-	 * Persists a {@link Champion} from Riot by its ID and saves its image. If the Champion already exists in the
-	 * database, then the previous Champion and its image are deleted and the one retrieved from Riot is persisted
-	 * along with its image saved.
+	 * Persists a {@link Champion} from Riot by its ID for the most current patch and saves its image. If the Champion
+	 * already exists in the database, then the previous Champion and its image are deleted and the one retrieved from
+	 * Riot is persisted along with its image saved.
 	 *
 	 * @param id the ID to lookup the {@link Champion} from Riot
 	 * @return the persisted {@link Champion}
 	 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.POST)
 	public Champion saveChampion(@PathVariable int id) {
-		UriComponents uriComponents =
-				championUri.buildAndExpand(riotProperties.getApi().getStaticData().getRegion(), id);
+		UriComponents uriComponents = championUri.buildAndExpand(region, id);
 		Champion champion;
 		try {
 			champion = restTemplate.getForObject(uriComponents.toString(), Champion.class);
@@ -138,7 +135,7 @@ public class ChampionsRetrieval {
 			championsRepository.delete(id);
 		}
 
-		imageSaver.copyImageFromURL(champion.getImage(), championsImgUri);
+		imageFetcher.setImgSrc(champion.getImage(), championsImgUri);
 		return championsRepository.save(champion);
 	}
 

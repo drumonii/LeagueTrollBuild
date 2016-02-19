@@ -85,13 +85,16 @@ $(function() {
         columns: [
             { data: null,
                 render: function(data, type, full, meta) {
+                    var href = data._links.self.href;
+                    var id = href.substring(href.lastIndexOf('/') + 1, href.length);
+                    var img = data.image.full;
                     return $('<div>', {
                         class: 'summoner-spell-description',
                         'data-html': data.description,
                         'data-variation': 'wide'
                     }).append($('<img>', {
                         class: 'ui rounded image',
-                        src: '/resources/' + data.image.full
+                        src: '/img/summoner-spells/' + id + img.substring(img.lastIndexOf('.'), img.length),
                     })).wrap('<span>').parent().html();
                 }
             },

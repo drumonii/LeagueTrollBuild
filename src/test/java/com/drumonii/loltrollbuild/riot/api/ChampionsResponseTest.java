@@ -38,8 +38,8 @@ public class ChampionsResponseTest extends BaseSpringTestRunner {
 				"type", "version");
 		assertThat(championsResponse.getChampions()).hasSize(1);
 		Champion champion = new Champion(412, "Thresh", "Thresh", "the Chain Warden", new ChampionImage("Thresh.png",
-				"champion3.png", "champion", 336, 0, 48, 48), new HashSet<>(Arrays.asList("Support", "Fighter")),
-				"Mana");
+				"champion3.png", "champion", new byte[0], 336, 0, 48, 48), new HashSet<>(Arrays.asList("Support",
+				"Fighter")), "Mana");
 		assertThat(championsResponse.getChampions()).containsExactly(entry("Thresh", champion));
 	}
 

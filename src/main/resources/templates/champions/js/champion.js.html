@@ -26,7 +26,8 @@ $(function() {
                 newBuildBtn.popup('hide');
                 $.each(data, function(id, list) {
                     var html = [];
-                    $.each(list, function(id, element) {
+                    $.each(list, function(i, element) {
+                        var img = element.image.full;
                         html.push(
                             $('<div>', {
                                 class: 'item',
@@ -34,7 +35,8 @@ $(function() {
                                 'data-variation': 'wide'
                             }).append($('<img>', {
                                 class: 'ui rounded image',
-                                src: '/resources/' + element.image.full
+                                src: '/img/' + $('#' + id).data('model') + '/' + element.id +
+                                    img.substring(img.lastIndexOf('.'), img.length)
                             }))
                         );
                     });

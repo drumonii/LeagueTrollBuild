@@ -40,7 +40,8 @@ public class GameMapTest extends BaseSpringTestRunner {
 		GameMap twistedTreelineFromDb = mapsRepository.findOne(twistedTreeline.getMapId());
 		assertThat(twistedTreeline).isEqualTo(twistedTreelineFromDb);
 
-		twistedTreeline.setImage(new GameMapImage("NewTwistedTreeline.png", "map0.png", "map", 0, 0, 48, 48));
+		twistedTreeline.setImage(new GameMapImage("NewTwistedTreeline.png", "map0.png", "map", new byte[0], 0, 0, 48,
+				48));
 		assertThat(twistedTreeline).isNotEqualTo(twistedTreelineFromDb);
 	}
 

@@ -2,6 +2,7 @@ package com.drumonii.loltrollbuild.riot.api;
 
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.model.SummonerSpell;
+import com.drumonii.loltrollbuild.model.image.Image;
 import com.drumonii.loltrollbuild.model.image.SummonerSpellImage;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
@@ -41,7 +42,7 @@ public class SummonerSpellResponseTest extends BaseSpringTestRunner {
 		assertThat(spellsResponse.getSummonerSpells()).hasSize(1);
 		SummonerSpell summonerSpell = new SummonerSpell(1, "Cleanse", "Removes all disables and summoner spell " +
 				"debuffs affecting your champion and lowers the duration of incoming disables by 65% for 3 seconds.",
-				new SummonerSpellImage("SummonerBoost.png", "spell0.png", "spell", 48, 0, 48, 48),
+				new SummonerSpellImage("SummonerBoost.png", "spell0.png", "spell", new byte[0], 48, 0, 48, 48),
 				new HashSet<>(Arrays.asList(210)), new HashSet<>(Arrays.asList("CLASSIC", "ODIN", "TUTORIAL", "ARAM",
 				"ASCENSION")));
 		assertThat(spellsResponse.getSummonerSpells()).containsExactly(entry("SummonerBoost", summonerSpell));

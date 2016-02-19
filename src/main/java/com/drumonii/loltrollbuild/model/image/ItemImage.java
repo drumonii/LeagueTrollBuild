@@ -19,8 +19,8 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class ItemImage extends Image {
 
-	public ItemImage(String full, String sprite, String group, int x, int y, int w, int h) {
-		super(full, sprite, group, x, y, w, h);
+	public ItemImage(String full, String sprite, String group, byte[] imgSrc, int x, int y, int w, int h) {
+		super(full, sprite, group, imgSrc, x, y, w, h);
 	}
 
 	@Id

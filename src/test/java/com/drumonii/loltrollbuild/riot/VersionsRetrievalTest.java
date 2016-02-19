@@ -127,7 +127,7 @@ public class VersionsRetrievalTest extends BaseSpringTestRunner {
 		mockServer.verify();
 
 		assertThat(versionsRepository.latestVersion()).isNotNull();
-		assertThat(versionsRepository.latestVersion().getPatch()).isEqualTo("5.16.1");
+		assertThat(versionsRepository.latestVersion().getPatch()).isEqualTo(latestVersion.getPatch());
 	}
 
 }

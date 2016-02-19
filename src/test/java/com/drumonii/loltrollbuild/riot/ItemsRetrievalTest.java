@@ -107,7 +107,7 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 			fail("Unable to unmarshal the Item by ID response.", e);
 		}
 
-		versionsRepository.save(new Version("latest patch version"));
+		versionsRepository.save(new Version("5.22.3"));
 	}
 
 	@After

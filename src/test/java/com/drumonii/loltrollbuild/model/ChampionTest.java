@@ -59,7 +59,8 @@ public class ChampionTest extends BaseSpringTestRunner {
 		Champion nasusFromDb = championsRepository.findByName(nasusFromRiot.getName());
 		assertThat(nasusFromRiot).isEqualTo(nasusFromDb);
 
-		nasusFromRiot.setImage(new ChampionImage("Nasus.png", "champion1.png", "champion", 336, 48, 48, 48));
+		nasusFromRiot.setImage(new ChampionImage("Nasus.png", "champion1.png", "champion", new byte[0], 336, 48, 48,
+				48));
 		assertThat(nasusFromRiot).isNotEqualTo(nasusFromDb);
 	}
 

@@ -34,8 +34,8 @@ public class MapsResponseTest extends BaseSpringTestRunner {
 		assertThat(mapsResponse).isEqualToComparingOnlyGivenFields(new MapsResponse("map", "5.24.2"),
 				"type", "version");
 		assertThat(mapsResponse.getMaps()).hasSize(1);
-		GameMap map = new GameMap(11, "SummonersRiftNew", new GameMapImage("map11.png", "map0.png", "map", 144, 0, 48,
-				48));
+		GameMap map = new GameMap(11, "SummonersRiftNew", new GameMapImage("map11.png", "map0.png", "map", new byte[0],
+				144, 0, 48, 48));
 		assertThat(mapsResponse.getMaps()).containsExactly(entry("11", map));
 	}
 
