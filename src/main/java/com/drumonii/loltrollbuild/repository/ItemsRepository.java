@@ -26,7 +26,8 @@ public interface ItemsRepository extends PagingAndSortingRepository<Item, Intege
 	 */
 	@Query("select i from Item i join i.from f left join i.maps m " +
 		   "where i.id <> 1001 and i.name not like 'Enchantment%' and f in ('1001') " +
-		   "and (key(m) <> :mapId and m = false)")
+		   "and (key(m) <> :mapId and m = false) " +
+		   "group by i.id")
 	List<Item> boots(@Param("mapId") String mapId);
 
 	/**

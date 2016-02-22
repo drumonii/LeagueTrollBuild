@@ -117,6 +117,7 @@ public class ItemsRepositoryTest extends BaseSpringTestRunner {
 
 		List<Item> boots = itemsRepository.boots(SUMMONERS_RIFT);
 		assertThat(boots).isNotEmpty();
+		assertThat(boots).doesNotHaveDuplicates();
 		assertThat(boots).flatExtracting(Item::getFrom)
 				.contains("1001");
 		assertThat(boots).extracting(Item::getName)
@@ -171,6 +172,7 @@ public class ItemsRepositoryTest extends BaseSpringTestRunner {
 
 		List<Item> trinkets = itemsRepository.trinkets(SUMMONERS_RIFT);
 		assertThat(trinkets).isNotEmpty();
+		assertThat(trinkets).doesNotHaveDuplicates();
 		assertThat(trinkets).extracting(Item::getGold).extracting(ItemGold::getTotal)
 				.containsOnly(0);
 		assertThat(trinkets).extracting(Item::getGold).extracting("purchasable", Boolean.class)
@@ -206,6 +208,7 @@ public class ItemsRepositoryTest extends BaseSpringTestRunner {
 
 		List<Item> viktorOnlyItems = itemsRepository.viktorOnly();
 		assertThat(viktorOnlyItems).isNotEmpty();
+		assertThat(viktorOnlyItems).doesNotHaveDuplicates();
 		assertThat(viktorOnlyItems).extracting(Item::getDescription)
 				.have(new Condition<>(name -> name.contains("Viktor"), "Viktor"));
 		assertThat(viktorOnlyItems).extracting(Item::getRequiredChampion)
@@ -332,6 +335,7 @@ public class ItemsRepositoryTest extends BaseSpringTestRunner {
 
 		List<Item> forTrollBuild = itemsRepository.forTrollBuild("0");
 		assertThat(forTrollBuild).isNotEmpty();
+		assertThat(forTrollBuild).doesNotHaveDuplicates();
 		assertThat(forTrollBuild).extracting(Item::getMaps)
 				.extracting(SUMMONERS_RIFT).contains(true);
 		assertThat(forTrollBuild).extracting(Item::getGold).extracting("purchasable", Boolean.class)
