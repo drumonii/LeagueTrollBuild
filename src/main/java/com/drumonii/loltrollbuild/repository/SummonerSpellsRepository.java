@@ -1,6 +1,9 @@
 package com.drumonii.loltrollbuild.repository;
 
 import com.drumonii.loltrollbuild.model.SummonerSpell;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
@@ -15,6 +18,7 @@ import java.util.List;
  * Paging, sorting, and CRUD operations repository to the SUMMONER_SPELL table.
  */
 @RepositoryRestResource(path = "summoner-spells")
+@CacheConfig(cacheNames = "summonerSpells")
 public interface SummonerSpellsRepository extends PagingAndSortingRepository<SummonerSpell, Integer> {
 
 	/**
@@ -28,6 +32,7 @@ public interface SummonerSpellsRepository extends PagingAndSortingRepository<Sum
 		   "where m in (:mode) " +
 	       "group by s.id")
 	@RestResource(path = "for-troll-build", rel = "for-troll-build")
+	@Cacheable
 	List<SummonerSpell> forTrollBuild(@Param("mode") String mode);
 
 	/**
@@ -43,5 +48,9 @@ public interface SummonerSpellsRepository extends PagingAndSortingRepository<Sum
 		   "group by s.id")
 	@RestResource(path = "find-by", rel = "find-by")
 	Page<SummonerSpell> findBy(@Param("term") String term, Pageable pageable);
+
+	@CacheEvict(allEntries = true)
+	@Override
+	void deleteAll();
 
 }

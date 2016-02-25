@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Specific {@link Image} of a {@link SummonerSpell} which maps a {@link OneToOne} relationship.
@@ -17,7 +18,7 @@ import javax.persistence.*;
 @Table(name = "SUMMONER_SPELL_IMAGE")
 @NoArgsConstructor
 @AllArgsConstructor
-public class SummonerSpellImage extends Image {
+public class SummonerSpellImage extends Image implements Serializable {
 
 	public SummonerSpellImage(String full, String sprite, String group, byte[] imgSrc, int x, int y, int w, int h) {
 		super(full, sprite, group, imgSrc, x, y, w, h);

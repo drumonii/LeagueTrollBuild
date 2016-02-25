@@ -6,6 +6,7 @@ import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
+import java.io.Serializable;
 
 /**
  * Image of a model.
@@ -13,9 +14,9 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
+@EqualsAndHashCode(exclude = { "imgSrc" })
 @ToString
-public class Image {
+public class Image implements Serializable {
 
 	@Column(name = "IMG_FULL", unique = true, nullable = false)
 	@JsonProperty("full")

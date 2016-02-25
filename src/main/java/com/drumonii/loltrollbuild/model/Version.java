@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 /**
  * League of Legend Version (patch).
@@ -18,7 +19,7 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @EqualsAndHashCode
 @ToString
-public class Version {
+public class Version implements Serializable {
 
 	@Id
 	@Column(name = "PATCH", nullable = false)

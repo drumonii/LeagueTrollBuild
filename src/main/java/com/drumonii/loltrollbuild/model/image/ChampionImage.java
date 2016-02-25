@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Specific {@link Image} of a {@link Champion} which maps a {@link OneToOne} relationship.
@@ -17,7 +18,7 @@ import javax.persistence.*;
 @Table(name = "CHAMPION_IMAGE")
 @NoArgsConstructor
 @AllArgsConstructor
-public class ChampionImage extends Image {
+public class ChampionImage extends Image implements Serializable {
 
 	public ChampionImage(String full, String sprite, String group, byte[] imgSrc, int x, int y, int w, int h) {
 		super(full, sprite, group, imgSrc, x, y, w, h);

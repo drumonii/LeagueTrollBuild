@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.drumonii.loltrollbuild.util.RandomizeUtil.getRandom;
-import static com.drumonii.loltrollbuild.util.RandomizeUtil.getRandomAndRemove;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class RandomizeUtilTest extends BaseUnitTestRunner {
@@ -19,16 +18,6 @@ public class RandomizeUtilTest extends BaseUnitTestRunner {
 		strings.add("string 2");
 		String random = getRandom(strings);
 		assertThat(random).isNotNull().isNotEmpty();
-	}
-
-	@Test
-	public void getsRandomAndRemoves() throws Exception {
-		List<String> strings = new ArrayList<>();
-		strings.add("string 1");
-		strings.add("string 2");
-		String random = getRandomAndRemove(strings);
-		assertThat(random).isNotNull().isNotEmpty();
-		assertThat(strings).doesNotContain(random);
 	}
 
 }

@@ -1,6 +1,8 @@
 package com.drumonii.loltrollbuild.repository;
 
 import com.drumonii.loltrollbuild.model.GameMap;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
@@ -13,6 +15,7 @@ import org.springframework.data.rest.core.annotation.RestResource;
  * Paging, sorting, and CRUD operations repository to the MAP table.
  */
 @RepositoryRestResource(path = "maps", collectionResourceRel = "maps")
+@CacheConfig(cacheNames = "maps")
 public interface MapsRepository extends PagingAndSortingRepository<GameMap, Integer> {
 
 	/**
@@ -27,5 +30,9 @@ public interface MapsRepository extends PagingAndSortingRepository<GameMap, Inte
 		   "group by m.id")
 	@RestResource(path = "find-by", rel = "find-by")
 	Page<GameMap> findBy(@Param("term") String term, Pageable pageable);
+
+	@CacheEvict(allEntries = true)
+	@Override
+	void deleteAll();
 
 }

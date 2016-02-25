@@ -1,8 +1,12 @@
 package com.drumonii.loltrollbuild.repository;
 
 import com.drumonii.loltrollbuild.model.Champion;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
@@ -13,6 +17,7 @@ import java.util.List;
 /**
  * Paging, sorting, and CRUD operations repository to the CHAMPION table.
  */
+@CacheConfig(cacheNames = "champions")
 public interface ChampionsRepository extends PagingAndSortingRepository<Champion, Integer> {
 
 	/**
@@ -52,5 +57,13 @@ public interface ChampionsRepository extends PagingAndSortingRepository<Champion
 		   "group by c.id")
 	@RestResource(path = "find-by", rel = "find-by")
 	Page<Champion> findBy(@Param("term") String term, Pageable pageable);
+
+	@Cacheable
+	@Override
+	Iterable<Champion> findAll(Sort sort);
+
+	@CacheEvict(allEntries = true)
+	@Override
+	void deleteAll();
 
 }

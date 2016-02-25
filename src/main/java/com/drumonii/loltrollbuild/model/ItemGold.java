@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Gold information of an {@link Item}.
@@ -16,7 +17,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @EqualsAndHashCode(exclude = { "id", "item" })
 @ToString(exclude = { "id", "item" })
-public class ItemGold {
+public class ItemGold implements Serializable {
 
 	@Id
 	@Column(name = "ITEM_ID", unique = true, nullable = false)

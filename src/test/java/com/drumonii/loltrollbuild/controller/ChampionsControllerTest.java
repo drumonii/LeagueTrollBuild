@@ -18,6 +18,7 @@ import org.junit.After;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.test.annotation.Repeat;
 
 import java.util.List;
 
@@ -98,6 +99,7 @@ public class ChampionsControllerTest extends BaseSpringTestRunner {
 				.andExpect(view().name("champions/champion"));
 	}
 
+	@Repeat(50)
 	@Test
 	public void trollBuild() throws Exception {
 		// Items

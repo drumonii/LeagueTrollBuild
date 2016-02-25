@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Map;
 
 /**
@@ -20,7 +21,7 @@ import java.util.Map;
 @AllArgsConstructor
 @EqualsAndHashCode
 @ToString
-public class GameMap {
+public class GameMap implements Serializable {
 
 	@Id
 	@Column(name = "ID", unique = true, nullable = false)

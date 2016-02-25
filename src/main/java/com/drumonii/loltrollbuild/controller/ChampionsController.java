@@ -81,7 +81,10 @@ public class ChampionsController {
 		// Get all items for the troll build
 		List<Item> itemsForTrollBuild = itemsRepository.forTrollBuild(mapId);
 		while (items.size() < ITEMS_MAX) {
-			items.add(RandomizeUtil.getRandomAndRemove(itemsForTrollBuild));
+			Item randomItem = RandomizeUtil.getRandom(itemsForTrollBuild);
+			if (!items.contains(randomItem)) {
+				items.add(randomItem);
+			}
 		}
 		trollBuild.put("items", items);
 
@@ -89,7 +92,10 @@ public class ChampionsController {
 		List<SummonerSpell> summonerSpells = new ArrayList<>();
 		List<SummonerSpell> allSummonerSpells = summonerSpellsRepository.forTrollBuild(getModeFromMap(mapId));
 		while (summonerSpells.size() < SPELLS_MAX) {
-			summonerSpells.add(RandomizeUtil.getRandomAndRemove(allSummonerSpells));
+			SummonerSpell randomSummonerSpell = RandomizeUtil.getRandom(allSummonerSpells);
+			if (!summonerSpells.contains(randomSummonerSpell)) {
+				summonerSpells.add(randomSummonerSpell);
+			}
 		}
 		trollBuild.put("summoner-spells", summonerSpells);
 

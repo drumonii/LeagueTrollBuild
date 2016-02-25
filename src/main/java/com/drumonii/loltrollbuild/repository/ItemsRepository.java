@@ -2,6 +2,9 @@ package com.drumonii.loltrollbuild.repository;
 
 import com.drumonii.loltrollbuild.model.GameMap;
 import com.drumonii.loltrollbuild.model.Item;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
@@ -14,12 +17,14 @@ import java.util.List;
 /**
  * Paging, sorting, and CRUD operations repository to the ITEM table.
  */
+@CacheConfig(cacheNames = "items")
 public interface ItemsRepository extends PagingAndSortingRepository<Item, Integer> {
 
 	/**
 	 * Gets a {@link List} of upgraded {@link Item} boots from {@code Boots of Speed} not including boot enchantments
 	 * found only on the specified {@link GameMap}.
 	 *
+	 * @param mapId the {@link GameMap}'s ID
 	 * @return a {@link List} of upgraded {@link Item} boots without enchantments
 	 * @see <a href="http://leagueoflegends.wikia.com/wiki/Boots_of_Speed">Boots of Speed</a>
 	 * @see <a href="http://leagueoflegends.wikia.com/wiki/Advanced_item">Advanced Items</a>
@@ -33,6 +38,7 @@ public interface ItemsRepository extends PagingAndSortingRepository<Item, Intege
 	/**
 	 * Gets a {@link List} of basic Trinket {@link Item}s (non Advanced) found only on the specified {@link GameMap}.
 	 *
+	 * @param mapId the {@link GameMap}'s ID
 	 * @return a {@link List} of basic Trinket {@link Item}s
 	 * @see <a href="http://leagueoflegends.wikia.com/wiki/Trinket">Trinket</a>
 	 */
@@ -58,6 +64,7 @@ public interface ItemsRepository extends PagingAndSortingRepository<Item, Intege
 	 * the specified {@link GameMap}. This excludes boots, Trinkets, items not requiring a particular champion, jungle
 	 * related items, and Doran's items.
 	 *
+	 * @param mapId the {@link GameMap}'s ID
 	 * @return a {@link List} of {@link Item}s eligible for the troll build
 	 */
 	@Query("select i from Item i left join i.into i_into left join i.maps m " +
@@ -69,6 +76,7 @@ public interface ItemsRepository extends PagingAndSortingRepository<Item, Intege
 		   "and i.name not like 'Enchantment%' and i.name not like 'Doran%' " +
 		   "group by i.id")
 	@RestResource(path = "for-troll-build", rel = "for-troll-build")
+	@Cacheable
 	List<Item> forTrollBuild(@Param("mapId") String mapId);
 
 	/**
@@ -85,5 +93,9 @@ public interface ItemsRepository extends PagingAndSortingRepository<Item, Intege
 		   "group by i.id")
 	@RestResource(path = "find-by", rel = "find-by")
 	Page<Item> findBy(@Param("term") String term, Pageable pageable);
+
+	@CacheEvict(allEntries = true)
+	@Override
+	void deleteAll();
 
 }

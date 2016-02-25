@@ -8,7 +8,10 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
-import java.util.*;
+import java.io.Serializable;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * League of Legends Item.
@@ -21,7 +24,7 @@ import java.util.*;
 @AllArgsConstructor
 @EqualsAndHashCode(exclude = { "from", "into" })
 @ToString
-public class Item {
+public class Item implements Serializable {
 
 	@Id
 	@Column(name = "ID", unique = true, nullable = false)
