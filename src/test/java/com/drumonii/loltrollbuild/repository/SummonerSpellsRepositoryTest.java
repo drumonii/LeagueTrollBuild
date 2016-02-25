@@ -94,9 +94,17 @@ public class SummonerSpellsRepositoryTest extends BaseSpringTestRunner {
 				.getSummonerSpells().get("SummonerExhaust");
 		summonerSpellsRepository.save(exhaust);
 
-		List<SummonerSpell> forTrollBuild = summonerSpellsRepository.forTrollBuild();
+		List<SummonerSpell> forTrollBuild = summonerSpellsRepository.forTrollBuild("CLASSIC");
+		assertThat(forTrollBuild).doesNotHaveDuplicates();
 		assertThat(forTrollBuild).extracting(SummonerSpell::getModes)
 				.have(new Condition<>(mode -> mode.contains("CLASSIC"), "CLASSIC"));
+		assertThat(forTrollBuild).containsOnly(smite, exhaust);
+
+		forTrollBuild = summonerSpellsRepository.forTrollBuild("ARAM");
+		assertThat(forTrollBuild).doesNotHaveDuplicates();
+		assertThat(forTrollBuild).extracting(SummonerSpell::getModes)
+				.have(new Condition<>(mode -> mode.contains("ARAM"), "ARAM"));
+		assertThat(forTrollBuild).containsOnly(mark, exhaust);
 	}
 
 	@Test

@@ -209,6 +209,13 @@ public class ChampionsControllerTest extends BaseSpringTestRunner {
 		Item scryingOrb = objectMapper.readValue(responseBody, ItemsResponse.class).getItems().get("3341");
 		itemsRepository.save(scryingOrb); // 1
 
+		// Map
+		responseBody = "{\"type\":\"map\",\"version\":\"6.3.1\",\"data\":{\"11\":{\"mapName\":\"SummonersRiftNew\"," +
+				"\"mapId\":11,\"image\":{\"full\":\"map11.png\",\"sprite\":\"map0.png\",\"group\":\"map\",\"x\":144," +
+				"\"y\":0,\"w\":48,\"h\":48}}}}";
+		GameMap summonersRift = objectMapper.readValue(responseBody, MapsResponse.class).getMaps().get("11");
+		mapsRepository.save(summonersRift);
+
 		responseBody = "{\"type\":\"champion\",\"version\":\"5.22.3\",\"data\":{\"Annie\":{\"id\":1,\"key\":" +
 				"\"Annie\",\"name\":\"Annie\",\"title\":\"the Dark Child\",\"image\":{\"full\":\"Annie.png\"," +
 				"\"sprite\":\"champion0.png\",\"group\":\"champion\",\"x\":288,\"y\":0,\"w\":48,\"h\":48},\"tags\":" +
@@ -257,6 +264,36 @@ public class ChampionsControllerTest extends BaseSpringTestRunner {
 		assertThat(eligibleMaps).extracting("mapId")
 								.containsExactly(provingGrounds.getMapId(), summonersRift.getMapId(),
 										twistedTreeline.getMapId());
+	}
+
+	@Test
+	public void getModeFromMap() throws Exception {
+		String responseBody = "{\"type\":\"map\",\"version\":\"6.3.1\",\"data\":{\"8\":{\"mapName\":\"CrystalScar\"," +
+				"\"mapId\":8,\"image\":{\"full\":\"map8.png\",\"sprite\":\"map0.png\",\"group\":\"map\",\"x\":192," +
+				"\"y\":0,\"w\":48,\"h\":48}}}}";
+		GameMap crystalScar = objectMapper.readValue(responseBody, MapsResponse.class).getMaps().get("8");
+		mapsRepository.save(crystalScar);
+
+		String gameMode = championsController.getModeFromMap(String.valueOf(crystalScar.getMapId()));
+		assertThat(gameMode).isEqualTo("CLASSIC");
+
+		responseBody = "{\"type\":\"map\",\"version\":\"6.3.1\",\"data\":{\"11\":{\"mapName\":\"SummonersRiftNew\"," +
+				"\"mapId\":11,\"image\":{\"full\":\"map11.png\",\"sprite\":\"map0.png\",\"group\":\"map\",\"x\":144," +
+				"\"y\":0,\"w\":48,\"h\":48}}}}";
+		GameMap summonersRift = objectMapper.readValue(responseBody, MapsResponse.class).getMaps().get("11");
+		mapsRepository.save(summonersRift);
+
+		gameMode = championsController.getModeFromMap(String.valueOf(summonersRift.getMapId()));
+		assertThat(gameMode).isEqualTo("CLASSIC");
+
+		responseBody = "{\"type\":\"map\",\"version\":\"6.3.1\",\"data\":{\"12\":{\"mapName\":\"ProvingGroundsNew\"," +
+				"\"mapId\":12,\"image\":{\"full\":\"map12.png\",\"sprite\":\"map0.png\",\"group\":\"map\",\"x\":48," +
+				"\"y\":0,\"w\":48,\"h\":48}}}}";
+		GameMap provingGrounds = objectMapper.readValue(responseBody, MapsResponse.class).getMaps().get("12");
+		mapsRepository.save(provingGrounds);
+
+		gameMode = championsController.getModeFromMap(String.valueOf(provingGrounds.getMapId()));
+		assertThat(gameMode).isEqualTo("ARAM");
 	}
 
 }

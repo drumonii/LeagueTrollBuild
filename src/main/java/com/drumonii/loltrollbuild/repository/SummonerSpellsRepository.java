@@ -18,14 +18,17 @@ import java.util.List;
 public interface SummonerSpellsRepository extends PagingAndSortingRepository<SummonerSpell, Integer> {
 
 	/**
-	 * Gets a {@link List} of {@link SummonerSpell}s eligible for the troll build (all Summoner Spells used on
-	 * Summoner's Rift).
+	 * Gets a {@link List} of {@link SummonerSpell}s eligible for the troll build based on a game mode.
 	 *
+	 * @param mode the game mode to search
 	 * @return a {@link List} of {@link SummonerSpell}s eligible for the troll build
+	 * @see <a href="http://leagueoflegends.wikia.com/wiki/Category:Game_modes">Game Modes</a>
 	 */
-	@Query("select s from SummonerSpell s join s.modes m where m in ('CLASSIC')")
+	@Query("select s from SummonerSpell s join s.modes m " +
+		   "where m in (:mode) " +
+	       "group by s.id")
 	@RestResource(path = "for-troll-build", rel = "for-troll-build")
-	List<SummonerSpell> forTrollBuild();
+	List<SummonerSpell> forTrollBuild(@Param("mode") String mode);
 
 	/**
 	 * Finds a {@link Page} of {@link SummonerSpell} from a search term by using {@code LIKE} for each searchable field.

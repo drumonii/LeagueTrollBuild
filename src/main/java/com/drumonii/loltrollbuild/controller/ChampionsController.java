@@ -87,7 +87,7 @@ public class ChampionsController {
 
 		// Summoner Spells
 		List<SummonerSpell> summonerSpells = new ArrayList<>();
-		List<SummonerSpell> allSummonerSpells = summonerSpellsRepository.forTrollBuild();
+		List<SummonerSpell> allSummonerSpells = summonerSpellsRepository.forTrollBuild(getModeFromMap(mapId));
 		while (summonerSpells.size() < SPELLS_MAX) {
 			summonerSpells.add(RandomizeUtil.getRandomAndRemove(allSummonerSpells));
 		}
@@ -125,6 +125,23 @@ public class ChampionsController {
 				.sorted((map1, map2) -> map1.getMapName().compareTo(map2.getMapName()))
 				.collect(Collectors.toList());
 		return maps;
+	}
+
+	/**
+	 * Gets a game mode from a {@link GameMap}'s ID. If the map isn't the Howling Abyss (Proving Grounds) then the
+	 * game mode is considered as "CLASSIC", otherwise "ARAM" is returned.
+	 *
+	 * @param mapId the {@link GameMap}'s ID
+	 * @return the game mode
+	 * @see <a href="http://leagueoflegends.wikia.com/wiki/Category:Game_modes">Game Modes</a>
+	 */
+	public String getModeFromMap(String mapId) {
+		GameMap map = mapsRepository.findOne(Integer.valueOf(mapId));
+		String mode = "CLASSIC";
+		if (map.getMapName().equals("ProvingGroundsNew")) {
+			mode = "ARAM";
+		}
+		return mode;
 	}
 
 }
