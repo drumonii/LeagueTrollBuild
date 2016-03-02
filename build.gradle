@@ -45,6 +45,7 @@ jar {
 bootRun {
     systemProperty 'spring.profiles.active', System.properties['spring.profiles.active']
     systemProperty 'riot.api.key', System.properties['riot.api.key']
+    addResources = true
 }
 
 repositories {
