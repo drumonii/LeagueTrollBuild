@@ -5,7 +5,7 @@ import com.drumonii.loltrollbuild.config.Profiles.Embedded;
 import com.drumonii.loltrollbuild.config.Profiles.External;
 import com.drumonii.loltrollbuild.config.Profiles.Testing;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.data.rest.RepositoryRestProperties;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -29,12 +29,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	public static final String ADMIN_ROLE = "ADMIN";
 
-	@Autowired
-	private RepositoryRestProperties restProperties;
+	@Value("${spring.data.rest.base-path}/**")
+	private String apiPath;
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		String apiPath = restProperties.getBasePath() + "/**";
 		// @formatter:off
 		http
 			.authorizeRequests()
