@@ -4,6 +4,7 @@ import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.repository.VersionsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,8 +16,8 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * A {@link RestController} which retrieves the list of String versions from Riot's {@code lol-static-data-v1.2} API
- * with the {@code /riot/versions} URL mapping.
+ * A {@link RestController} which retrieves the list of versions from Riot's {@code lol-static-data-v1.2} API with the
+ * {@code /riot/versions} URL mapping.
  */
 @RestController
 @RequestMapping("/riot/versions")
@@ -33,53 +34,53 @@ public class VersionsRetrieval {
 	private VersionsRepository versionsRepository;
 
 	/**
-	 * Creates a {@link ModelAttribute} of a {@link List} of String versions from Riot.
+	 * Creates a {@link ModelAttribute} of a {@link List} of {@link Version}s from Riot.
 	 *
-	 * @return a {@link List} of String versions from Riot
+	 * @return a {@link List} of {@link Version}s from Riot
 	 */
 	@ModelAttribute
-	public List<String> versionsFromResponse() {
-		return Arrays.asList(restTemplate.getForObject(versionsUri.toString(), String[].class));
+	public List<Version> versionsFromResponse() {
+		return Arrays.asList(restTemplate.getForObject(versionsUri.toString(), Version[].class));
 	}
 
 	/**
-	 * Returns the {@link List} of String versions from Riot for the most current patch.
+	 * Returns the {@link List} of {@link Version}s from Riot for the most current patch.
 	 *
-	 * @param versions the {@link ModelAttribute} of {@link List} of String versions from Riot
-	 * @return the {@link List} of String versions from Riot
+	 * @param versions the {@link ModelAttribute} of {@link List} of {@link Version}s from Riot
+	 * @return the {@link List} of {@link Version}s from Riot
 	 */
 	@RequestMapping(method = RequestMethod.GET)
-	public List<String> versions(@ModelAttribute List<String> versions) {
+	public List<Version> versions(@ModelAttribute List<Version> versions) {
 		return versions;
 	}
 
 	/**
-	 * Returns the latest patch String version from Riot.
+	 * Returns the latest patch {@link Version} from Riot.
 	 *
-	 * @param versions the {@link ModelAttribute} of {@link List} of String versions from Riot
-	 * @return the latest patch String version from Riot
+	 * @param versions the {@link ModelAttribute} of {@link List} of {@link Version}s from Riot
+	 * @return the latest patch {@link Version} from Riot
 	 */
 	@RequestMapping(value = "/latest", method = RequestMethod.GET)
-	public String latestPatch(@ModelAttribute List<String> versions) {
+	public Version latestVersion(@ModelAttribute List<Version> versions) {
 		return versions.get(0);
 	}
 
 	/**
-	 * Persists the latest patch String version from Riot. If the previous latest patch version is the same as the
-	 * current version from Riot, then no database changes are made and the existing patch versionn is returned.
+	 * Persists the latest patch {@link Version} from Riot. If the previous latest patch version is the same as the
+	 * current version from Riot, then no database changes are made and the existing patch version is returned.
 	 * Otherwise, the previous patch version is deleted from the database and the newest patch version is persisted.
 	 *
-	 * @param versions versions the {@link ModelAttribute} of {@link List} of String versions from Riot
-	 * @return the latest patch String version persisted to the database or the existing patch version
+	 * @param versions versions the {@link ModelAttribute} of {@link List} of {@link Version}s from Riot
+	 * @return the latest patch {@link Version} is persisted to the database or the existing patch version
 	 */
-	@RequestMapping(value = "/latest", method = RequestMethod.POST)
-	public String saveLatestPatch(@ModelAttribute List<String> versions) {
-		Version latestPatchVersion = new Version(versions.get(0));
+	@RequestMapping(value = "/latest", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public Version saveLatestVersion(@ModelAttribute List<Version> versions) {
+		Version latestPatchVersion = versions.get(0);
 		if (!latestPatchVersion.equals(versionsRepository.latestVersion())) {
 			versionsRepository.deleteAll();
-			return versionsRepository.save(latestPatchVersion).getPatch();
+			return versionsRepository.save(latestPatchVersion);
 		}
-		return latestPatchVersion.getPatch();
+		return latestPatchVersion;
 	}
 
 }

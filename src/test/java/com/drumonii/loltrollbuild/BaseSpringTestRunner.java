@@ -37,8 +37,6 @@ public abstract class BaseSpringTestRunner {
 
 	protected MockMvc mockMvc;
 
-	protected MediaType PLAN_TEXT_UTF8 = MediaType.parseMediaType("text/plain;charset=UTF-8");
-
 	protected static final String TESTING_USERNAME = IN_MEM_USERNAME;
 	protected static final String TESTING_PASSWORD = IN_MEM_PASSWORD;
 	protected static final String TESTING_USER_ROLE = ADMIN_ROLE;

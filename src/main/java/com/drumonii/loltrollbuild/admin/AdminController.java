@@ -33,7 +33,8 @@ public class AdminController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String admin(Model model) {
-		model.addAttribute("latestRiotPatch", versionsRetrieval.latestPatch(versionsRetrieval.versionsFromResponse()));
+		model.addAttribute("latestRiotPatch", versionsRetrieval.latestVersion(versionsRetrieval.versionsFromResponse())
+				.getPatch());
 		model.addAttribute("activeTab", "home");
 		return "admin/admin";
 	}

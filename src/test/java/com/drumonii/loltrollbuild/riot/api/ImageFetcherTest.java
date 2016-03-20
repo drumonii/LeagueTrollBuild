@@ -57,7 +57,7 @@ public class ImageFetcherTest extends BaseSpringTestRunner {
 				.isInstanceOf(ResourceNotFoundException.class)
 				.hasMessage("No latest patch version in the database.");
 
-		versionsRepository.save(new Version("latest patch version"));
+		versionsRepository.save(new Version("6.5.1"));
 
 		when(builder.buildAndExpand(anyString(), anyString()))
 				.thenReturn(uriComponents);
@@ -84,7 +84,7 @@ public class ImageFetcherTest extends BaseSpringTestRunner {
 				.isInstanceOf(ResourceNotFoundException.class)
 				.hasMessage("No latest patch version in the database.");
 
-		versionsRepository.save(new Version("latest patch version"));
+		versionsRepository.save(new Version("6.5.1"));
 
 		when(builder.buildAndExpand(anyString(), anyString()))
 				.thenReturn(uriComponents);

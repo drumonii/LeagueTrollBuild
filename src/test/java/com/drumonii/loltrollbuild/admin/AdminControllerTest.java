@@ -117,7 +117,7 @@ public class AdminControllerTest extends BaseSpringTestRunner {
 
 		mockServer.expect(requestTo(summonerSpellsUri.toString())).andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(responseBody, MediaType.APPLICATION_JSON_UTF8));
-		versionsRepository.save(new Version("new version"));
+		versionsRepository.save(new Version("6.5.1"));
 
 		mockMvc.perform(get("/admin/summoner-spells").with(adminUser()))
 				.andExpect(status().isOk())
@@ -144,7 +144,7 @@ public class AdminControllerTest extends BaseSpringTestRunner {
 
 		mockServer.expect(requestTo(itemsUri.toString())).andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(responseBody, MediaType.APPLICATION_JSON_UTF8));
-		versionsRepository.save(new Version("new version"));
+		versionsRepository.save(new Version("6.5.1"));
 
 		mockMvc.perform(get("/admin/items").with(adminUser()))
 				.andExpect(status().isOk())
@@ -169,7 +169,7 @@ public class AdminControllerTest extends BaseSpringTestRunner {
 
 		mockServer.expect(requestTo(championsUri.toString())).andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(responseBody, MediaType.APPLICATION_JSON_UTF8));
-		versionsRepository.save(new Version("new version"));
+		versionsRepository.save(new Version("6.5.1"));
 
 		mockMvc.perform(get("/admin/champions").with(adminUser()))
 				.andExpect(status().isOk())
@@ -193,7 +193,7 @@ public class AdminControllerTest extends BaseSpringTestRunner {
 
 		mockServer.expect(requestTo(championsUri.toString())).andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(responseBody, MediaType.APPLICATION_JSON_UTF8));
-		versionsRepository.save(new Version("new version"));
+		versionsRepository.save(new Version("6.5.1"));
 
 		mockMvc.perform(get("/admin/maps").with(adminUser()))
 				.andExpect(status().isOk())

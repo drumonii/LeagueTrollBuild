@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Fail.fail;
 
 public class VersionsRepositoryTest extends BaseSpringTestRunner {
 
@@ -27,16 +28,16 @@ public class VersionsRepositoryTest extends BaseSpringTestRunner {
 
 	@Before
 	public void before() {
-		String responseBody = "[\"5.16.1\",\"5.15.1\",\"5.14.1\",\"5.13.1\",\"5.12.1\",\"5.11.1\",\"5.10.1\"," +
-				"\"5.9.1\",\"5.8.1\",\"5.7.2\",\"5.7.1\",\"5.6.2\",\"5.6.1\",\"5.5.3\",\"5.5.2\",\"5.5.1\",\"5.4.1\"," +
-				"\"5.3.1\",\"5.2.2\",\"5.2.1\",\"5.1.2\",\"5.1.1\"]";
-		List<String> unmarshalledVersions;
+		String responseBody = "[\"6.5.1\",\"6.4.2\",\"6.4.1\",\"6.3.1\",\"6.2.1\",\"6.1.1\",\"5.24.2\",\"5.24.1\"," +
+				"\"5.23.1\",\"5.22.3\",\"5.22.2\",\"5.22.1\",\"5.21.1\",\"5.20.1\",\"5.19.1\",\"5.18.1\",\"5.17.1\"," +
+				"\"5.16.1\",\"5.15.1\",\"5.14.1\",\"5.13.1\",\"5.12.1\",\"5.11.1\",\"5.10.1\",\"5.9.1\",\"5.8.1\"," +
+				"\"5.7.2\",\"5.7.1\",\"5.6.2\",\"5.6.1\",\"5.5.3\",\"5.5.2\",\"5.5.1\",\"5.4.1\",\"5.3.1\",\"5.2.2\"," +
+				"\"5.2.1\",\"5.1.2\",\"5.1.1\"]";
 		try {
-			unmarshalledVersions = Arrays.asList(objectMapper.readValue(responseBody, String[].class));
-			versions = unmarshalledVersions.stream()
-					.map(Version::new)
-					.collect(Collectors.toList());
-		} catch (IOException e) {}
+			versions = Arrays.asList(objectMapper.readValue(responseBody, Version[].class));
+		} catch (IOException e) {
+			fail("Unable to unmarshal the Versions response.", e);
+		}
 	}
 
 	@After
@@ -50,7 +51,7 @@ public class VersionsRepositoryTest extends BaseSpringTestRunner {
 		versionsRepository.save(versions);
 
 		// Select
-		Version versionFromDb = versionsRepository.findOne("5.16.1");
+		Version versionFromDb = versionsRepository.findOne("6.5.1");
 		assertThat(versionFromDb).isNotNull();
 		assertThat(versionFromDb).isEqualTo(versions.get(0));
 
