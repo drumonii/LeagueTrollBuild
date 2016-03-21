@@ -1,6 +1,7 @@
 package com.drumonii.loltrollbuild.model;
 
 import lombok.*;
+import org.apache.commons.lang3.builder.CompareToBuilder;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,9 +19,9 @@ import java.util.Comparator;
 @Table(name = "VERSION")
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
+@EqualsAndHashCode(of = { "patch" })
 @ToString
-public class Version implements Serializable {
+public class Version implements Serializable, Comparable<Version> {
 
 	public Version(String patch) {
 		String[] versioning = patch.split("\\.");
@@ -42,5 +43,14 @@ public class Version implements Serializable {
 
 	@Column(name = "REVISION", nullable = false)
 	@Getter @Setter private int revision;
+
+	@Override
+	public int compareTo(Version o) {
+		return new CompareToBuilder()
+				.append(major, o.getMajor())
+				.append(minor, o.getMinor())
+				.append(revision, o.getRevision())
+				.toComparison();
+	}
 
 }

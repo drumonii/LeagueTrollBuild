@@ -13,6 +13,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -40,7 +41,9 @@ public class VersionsRetrieval {
 	 */
 	@ModelAttribute
 	public List<Version> versionsFromResponse() {
-		return Arrays.asList(restTemplate.getForObject(versionsUri.toString(), Version[].class));
+		List<Version> versions = Arrays.asList(restTemplate.getForObject(versionsUri.toString(), Version[].class));
+		Collections.sort(versions, Collections.reverseOrder());
+		return versions;
 	}
 
 	/**

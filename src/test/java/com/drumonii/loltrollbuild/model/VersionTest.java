@@ -8,6 +8,9 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -26,10 +29,8 @@ public class VersionTest extends BaseSpringTestRunner {
 
 	@Test
 	public void equals() throws IOException {
-		String responseBody = "[\"5.16.1\",\"5.15.1\",\"5.14.1\",\"5.13.1\",\"5.12.1\",\"5.11.1\",\"5.10.1\"," +
-				"\"5.9.1\",\"5.8.1\",\"5.7.2\",\"5.7.1\",\"5.6.2\",\"5.6.1\",\"5.5.3\",\"5.5.2\",\"5.5.1\"," +
-				"\"5.4.1\",\"5.3.1\",\"5.2.2\",\"5.2.1\",\"5.1.2\",\"5.1.1\"]";
-		Version latestPatchFromRiot = new Version(objectMapper.readValue(responseBody, String[].class)[0]);
+		String responseBody = "\"5.16.1\"";
+		Version latestPatchFromRiot = objectMapper.readValue(responseBody, Version.class);
 		versionsRepository.save(latestPatchFromRiot);
 
 		Version versionFromDb = versionsRepository.findOne(latestPatchFromRiot.getPatch());
@@ -37,6 +38,25 @@ public class VersionTest extends BaseSpringTestRunner {
 
 		latestPatchFromRiot.setPatch("5.17.1");
 		assertThat(latestPatchFromRiot).isNotEqualTo(versionFromDb);
+	}
+
+	@Test
+	public void comparable() throws IOException {
+		Version version1 = new Version("5.13.1");
+		Version version2 = new Version("6.2.1");
+		assertThat(version1.compareTo(version2)).isEqualTo(-1); // less than
+		assertThat(version1.compareTo(version1)).isEqualTo(0); // equal
+		assertThat(version2.compareTo(version1)).isEqualTo(1); // greater than
+
+		String responseBody = "[\"5.13.1\",\"6.4.1\",\"5.22.3\",\"6.2.1\",\"5.14.1\",\"6.4.2\",\"5.24.2\"," +
+				"\"5.24.1\",\"6.3.1\",\"5.23.1\",\"6.1.1\",\"5.15.1\",\"5.11.1\",\"5.22.2\",\"5.22.1\",\"5.21.1\"," +
+				"\"5.17.1\",\"6.5.1\",\"5.16.1\",\"5.10.1\",\"5.12.1\"]";
+		List<Version> versions = Arrays.asList(objectMapper.readValue(responseBody, Version[].class));
+		Collections.sort(versions, Collections.reverseOrder());
+		assertThat(versions).isSortedAccordingTo(Collections.reverseOrder());
+		assertThat(versions.get(0)).isGreaterThan(versions.get(versions.size() - 1));
+		assertThat(versions.get(0)).isEqualTo(versions.get(0));
+		assertThat(versions.get(versions.size() - 1)).isLessThan(versions.get(0));
 	}
 
 }
