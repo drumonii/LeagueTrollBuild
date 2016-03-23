@@ -69,10 +69,10 @@ dependencies {
     compile 'org.thymeleaf.extras:thymeleaf-extras-springsecurity4'
 
     // H2
-    compile 'com.h2database:h2'
+    runtime 'com.h2database:h2'
 
     // PostgreSQL
-    compile 'org.postgresql:postgresql:9.4.1208'
+    runtime 'org.postgresql:postgresql:9.4.1208'
 
     // EhCache
     compile 'net.sf.ehcache:ehcache'
