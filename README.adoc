@@ -23,7 +23,7 @@ online game: http://leagueoflegends.com/[League of Legends].
 
 external::
 Production profile that is active by default and uses PostgreSQL along with environment variables to specify the
-database credentials. Use `DB_USERNAME`, `DB_PASSWORD`, `DB_URL` environment variables.
+database credentials. Use the `DB_USERNAME`, `DB_PASSWORD`, `DB_URL` environment variables for the database credentials.
 
 embedded::
 Secondary production profile that uses an embedded H2 for quickly running the app locally without a PostgreSQL install.
@@ -69,6 +69,8 @@ Next, `cd` to the `build/libs` folder in the project root and then run directly 
 From either method and with the project running, view http://localhost:8080/[localhost:8080] on your browser.
 
 = Development/Importing the project
+*Note*, a Java 8 JDK is required.
+
 `LeagueTrollBuild` is developed using the https://www.jetbrains.com/idea/[IntelliJ IDEA] IDE.
 
 If using IntelliJ, one must first download the https://plugins.jetbrains.com/plugin/6317[Lombok plugin] and
