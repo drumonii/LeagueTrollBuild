@@ -13,7 +13,17 @@ $(function() {
         ],
         lengthMenu: [ [10, -1], [10, 'All'] ],
         language: {
-            zeroRecords: [[#{dataTables.zeroRecords(#{admin.maps})}]]
+            emptyTable: [[#{dataTables.emptyTable(#{admin.maps})}]],
+            info: [[#{dataTables.info}]],
+            infoEmpty: [[#{dataTables.infoEmpty}]],
+            infoFiltered: [[#{dataTables.infoFiltered}]],
+            processing: [[#{dataTables.processing}]],
+            search: [[#{dataTables.search}]],
+            zeroRecords: [[#{dataTables.zeroRecords(#{admin.maps})}]],
+            paginate: {
+                next: [[#{dataTables.paginate.next}]],
+                previous: [[#{dataTables.paginate.previous}]]
+            }
         }
     });
     $('#save-maps-form').submit(function(event) {
@@ -51,30 +61,30 @@ $(function() {
         processing: true,
         serverSide: true,
         order: [ [1, 'asc'] ],
-        ajax: {
-            url: [[@{/api/maps}]],
-            dataSrc: function(data) {
-                if (typeof data._embedded === 'undefined') {
-                    return {};
+        ajax: function(data, callback, settings) {
+            var sorts = [];
+            $.each(data.order, function (i, order) {
+                if (data.columns[order.column].orderable) {
+                    sorts.push(data.columns[order.column].data + ',' + order.dir);
                 }
-                return data._embedded.maps;
-            },
-            data: function(data) {
-                var sorts = [];
-                $.each(data.order, function(i, order) {
-                    if (data.columns[order.column].orderable) {
-                        sorts.push(data.columns[order.column].data + ',' + order.dir);
-                    }
-                });
-                var parameters = {};
-                if (data.search.value) {
-                    parameters['term'] = data.search.value;
-                }
-                parameters['page'] = Math.ceil(data.start / data.length);
-                parameters['size'] = data.length;
-                parameters['sort'] = sorts;
-                return $.param(parameters, true);
+            });
+            var parameters = {};
+            if (data.search.value) {
+                parameters['term'] = data.search.value;
             }
+            parameters['page'] = Math.ceil(data.start / data.length);
+            parameters['size'] = data.length;
+            parameters['sort'] = sorts;
+            $.ajax({
+                url: parameters.hasOwnProperty('term') ?
+                    [[@{/api/maps/search/find-by?}]] + $.param(parameters, true) :
+                    [[@{/api/maps?}]] + $.param(parameters, true),
+                success: function(json) {
+                    callback({ draw: data.draw, recordsTotal: json.page.totalElements,
+                        recordsFiltered: json.page.totalElements, data: json._embedded.maps
+                    });
+                }
+            });
         },
         columnDefs: [
             { orderable: false, targets: [0, 2, 3] }
@@ -125,33 +135,19 @@ $(function() {
                 }
             }
         ],
-        lengthMenu: [ [10, -1], [10, 'All'] ],
-        infoCallback: function(settings, start, end, max, total, pre) {
-            var json = this.api().ajax.json();
-            if (typeof json._embedded === 'undefined') {
-                $('#maps_paginate span').empty();
-                return [[#{dataTables.noResults}]];
-            }
-            var page = this.api().ajax.json().page;
-            end = (page.number + 1) * page.size;
-            if (end > page.totalElements) {
-                end = page.totalElements;
-            }
-            var msg = [[#{dataTables.showing}]];
-            var args = [start, end, json._embedded.maps.length, page.totalElements];
-            return msg.replace(/{(\d+)}/g, function(match, number) {
-                return typeof args[number] != 'undefined' ? args[number] : match;
-            });
-        },
+        lengthMenu: [ [10, 1000], [10, 'All'] ],
         language: {
-            zeroRecords: [[#{dataTables.zeroRecords(#{admin.maps})}]]
-        }
-    });
-    dataTable.on('search.dt', function() {
-        if ($('#maps_filter input').val()) {
-            dataTable.ajax.url([[@{/api/maps/search/find-by}]]);
-        } else {
-            dataTable.ajax.url([[@{/api/maps}]]);
+            emptyTable: [[#{dataTables.emptyTable(#{admin.maps})}]],
+            info: [[#{dataTables.info}]],
+            infoEmpty: [[#{dataTables.infoEmpty}]],
+            infoFiltered: [[#{dataTables.infoFiltered}]],
+            processing: [[#{dataTables.processing}]],
+            search: [[#{dataTables.search}]],
+            zeroRecords: [[#{dataTables.zeroRecords(#{admin.maps})}]],
+            paginate: {
+                next: [[#{dataTables.paginate.next}]],
+                previous: [[#{dataTables.paginate.previous}]]
+            }
         }
     });
     $('#maps tbody').on('click', '.secondary', function(event) {

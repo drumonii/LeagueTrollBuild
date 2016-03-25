@@ -13,7 +13,17 @@ $(function() {
         ],
         lengthMenu: [ [10, -1], [10, 'All'] ],
         language: {
-            zeroRecords: [[#{dataTables.zeroRecords(#{admin.summonerSpells})}]]
+            emptyTable: [[#{dataTables.emptyTable}]],
+            info: [[#{dataTables.info}]],
+            infoEmpty: [[#{dataTables.infoEmpty}]],
+            infoFiltered: [[#{dataTables.infoFiltered}]],
+            processing: [[#{dataTables.processing}]],
+            search: [[#{dataTables.search}]],
+            zeroRecords: [[#{dataTables.zeroRecords(#{admin.summonerSpells})}]],
+            paginate: {
+                next: [[#{dataTables.paginate.next}]],
+                previous: [[#{dataTables.paginate.previous}]]
+            }
         },
         drawCallback: function(settings) {
             $('.summoner-spell-description').popup();
@@ -54,30 +64,30 @@ $(function() {
         processing: true,
         serverSide: true,
         order: [ [1, 'asc'] ],
-        ajax: {
-            url: [[@{/api/summoner-spells}]],
-            dataSrc: function(data) {
-                if (typeof data._embedded === 'undefined') {
-                    return {};
+        ajax: function(data, callback, settings) {
+            var sorts = [];
+            $.each(data.order, function (i, order) {
+                if (data.columns[order.column].orderable) {
+                    sorts.push(data.columns[order.column].data + ',' + order.dir);
                 }
-                return data._embedded.summonerSpells;
-            },
-            data: function(data) {
-                var sorts = [];
-                $.each(data.order, function(i, order) {
-                    if (data.columns[order.column].orderable) {
-                        sorts.push(data.columns[order.column].data + ',' + order.dir);
-                    }
-                });
-                var parameters = {};
-                if (data.search.value) {
-                    parameters['term'] = data.search.value;
-                }
-                parameters['page'] = Math.ceil(data.start / data.length);
-                parameters['size'] = data.length;
-                parameters['sort'] = sorts;
-                return $.param(parameters, true);
+            });
+            var parameters = {};
+            if (data.search.value) {
+                parameters['term'] = data.search.value;
             }
+            parameters['page'] = Math.ceil(data.start / data.length);
+            parameters['size'] = data.length;
+            parameters['sort'] = sorts;
+            $.ajax({
+                url: parameters.hasOwnProperty('term') ?
+                    [[@{/api/summoner-spells/search/find-by?}]] + $.param(parameters, true) :
+                    [[@{/api/summoner-spells?}]] + $.param(parameters, true),
+                    success: function(json) {
+                        callback({ draw: data.draw, recordsTotal: json.page.totalElements,
+                            recordsFiltered: json.page.totalElements, data: json._embedded.summonerSpells
+                    });
+                }
+            });
         },
         columnDefs: [
             { orderable: false, targets: [0, 2, 3, 4] }
@@ -135,36 +145,22 @@ $(function() {
                 }
             }
         ],
-        lengthMenu: [ [10, -1], [10, 'All'] ],
-        infoCallback: function(settings, start, end, max, total, pre) {
-            var json = this.api().ajax.json();
-            if (typeof json._embedded === 'undefined') {
-                $('#summoner-spells_paginate span').empty();
-                return [[#{dataTables.noResults}]];
-            }
-            var page = this.api().ajax.json().page;
-            end = (page.number + 1) * page.size;
-            if (end > page.totalElements) {
-                end = page.totalElements;
-            }
-            var msg = [[#{dataTables.showing}]];
-            var args = [start, end, json._embedded.summonerSpells.length, page.totalElements];
-            return msg.replace(/{(\d+)}/g, function(match, number) {
-                return typeof args[number] != 'undefined' ? args[number] : match;
-            });
-        },
+        lengthMenu: [ [10, 1000], [10, 'All'] ],
         language: {
-            zeroRecords: [[#{dataTables.zeroRecords(#{admin.summonerSpells})}]]
+            emptyTable: [[#{dataTables.emptyTable(#{admin.summonerSpells})}]],
+            info: [[#{dataTables.info}]],
+            infoEmpty: [[#{dataTables.infoEmpty}]],
+            infoFiltered: [[#{dataTables.infoFiltered}]],
+            processing: [[#{dataTables.processing}]],
+            search: [[#{dataTables.search}]],
+            zeroRecords: [[#{dataTables.zeroRecords(#{admin.summonerSpells})}]],
+            paginate: {
+                next: [[#{dataTables.paginate.next}]],
+                previous: [[#{dataTables.paginate.previous}]]
+            }
         },
         drawCallback: function(settings) {
             $('.summoner-spell-description').popup();
-        }
-    });
-    dataTable.on('search.dt', function() {
-        if ($('#summoner-spells_filter input').val()) {
-            dataTable.ajax.url([[@{/api/summoner-spells/search/find-by}]]);
-        } else {
-            dataTable.ajax.url([[@{/api/summoner-spells}]]);
         }
     });
     $('#summoner-spells tbody').on('click', '.secondary', function(event) {
