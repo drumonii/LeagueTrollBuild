@@ -1,18 +1,27 @@
 package com.drumonii.loltrollbuild.config;
 
+import com.drumonii.loltrollbuild.config.Profiles.Dev;
+import com.drumonii.loltrollbuild.config.Profiles.Embedded;
+import com.drumonii.loltrollbuild.config.Profiles.External;
+import com.drumonii.loltrollbuild.config.Profiles.Testing;
 import com.drumonii.loltrollbuild.riot.api.RiotApiProperties;
 import com.drumonii.loltrollbuild.riot.api.RiotApiProperties.Api;
 import com.drumonii.loltrollbuild.riot.api.RiotApiProperties.Ddragon;
 import com.drumonii.loltrollbuild.riot.api.RiotApiProperties.StaticData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.DefaultUriTemplateHandler;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.annotation.PostConstruct;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 /**
  * Configuration for using a {@link RestTemplate} to retrieve models from Riot's API.
@@ -38,6 +47,10 @@ public class RestRiotApiConfig {
 		staticData = api.getStaticData();
 		ddragon = api.getDdragon();
 	}
+
+	/*
+	 * Summoner Spells Uri Components
+	 */
 
 	@Bean
 	@Qualifier("summonerSpells")
@@ -71,6 +84,10 @@ public class RestRiotApiConfig {
 				.path(ddragon.getSummonerSpellsImg());
 	}
 
+	/*
+	 * Items Uri Components
+	 */
+
 	@Bean
 	@Qualifier("items")
 	public UriComponents itemsUri() {
@@ -102,6 +119,10 @@ public class RestRiotApiConfig {
 				.host(ddragon.getBaseUrl())
 				.path(ddragon.getItemsImg());
 	}
+
+	/*
+	 * Champions Uri Components
+	 */
 
 	@Bean
 	@Qualifier("champions")
@@ -135,6 +156,10 @@ public class RestRiotApiConfig {
 				.path(ddragon.getChampionsImg());
 	}
 
+	/*
+	 * Maps Uri Components
+	 */
+
 	@Bean
 	@Qualifier("maps")
 	public UriComponents mapsUri() {
@@ -154,6 +179,10 @@ public class RestRiotApiConfig {
 				.host(ddragon.getBaseUrl())
 				.path(ddragon.getMapsImg());
 	}
+
+	/*
+	 * Versions Uri Components
+	 */
 
 	@Bean
 	@Qualifier("versions")
