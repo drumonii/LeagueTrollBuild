@@ -16,11 +16,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 
 import static org.hamcrest.Matchers.is;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.formLogin;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.logout;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
-import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.authenticated;
-import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.unauthenticated;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
@@ -69,18 +65,6 @@ public class AdminControllerTest extends BaseSpringTestRunner {
 	@After
 	public void after() {
 		versionsRepository.deleteAll();
-	}
-
-	@Test
-	public void adminCanLoginAndLogout() throws Exception {
-		mockMvc
-				.perform(formLogin("/admin/login").user(TESTING_USERNAME).password(TESTING_PASSWORD))
-				.andExpect(authenticated().withRoles(TESTING_USER_ROLE))
-				.andExpect(redirectedUrl("/admin"));
-		mockMvc
-				.perform(logout("/admin/logout"))
-				.andExpect(unauthenticated())
-				.andExpect(redirectedUrl("/admin/login?logout"));
 	}
 
 	@Test
