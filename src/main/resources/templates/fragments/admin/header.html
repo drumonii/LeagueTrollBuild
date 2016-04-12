@@ -1,34 +1,29 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
 </head>
 <body>
 <header th:fragment="header">
-    <div class="ui inverted menu">
-        <div class="ui container">
-            <a class="item" th:classappend="${activeTab == 'home' ? 'active' : ''}" th:href="@{/admin}"
-               th:text="#{admin.header.title}">League Troll Build Admin</a>
-            <a class="item" sec:authorize="hasRole('ADMIN')"
-               th:classappend="${activeTab == 'summonerSpells' ? 'active' : ''}"
-               th:href="@{/admin/summoner-spells}" th:text="#{admin.summonerSpells}">Summoner Spells</a>
-            <a class="item" sec:authorize="hasRole('ADMIN')"
-               th:classappend="${activeTab == 'items' ? 'active' : ''}"
-               th:href="@{/admin/items}" th:text="#{admin.items}">Items</a>
-            <a class="item" sec:authorize="hasRole('ADMIN')"
-               th:classappend="${activeTab == 'champions' ? 'active' : ''}"
-               th:href="@{/admin/champions}" th:text="#{admin.champions}">Champions</a>
-            <a class="item" sec:authorize="hasRole('ADMIN')"
-               th:classappend="${activeTab == 'maps' ? 'active' : ''}"
-               th:href="@{/admin/maps}" th:text="#{admin.maps}">Maps</a>
-            <div class="right menu" sec:authorize="hasRole('ROLE_ADMIN')">
-                <a class="ui item" th:href="@{/admin/logout}"><i class="sign out icon"></i>
-                    <span th:text="#{logout}">Logout</span>
-                </a>
-            </div>
-        </div>
+    <div class="ui sidebar inverted vertical menu visible sidebar">
+        <a class="item" th:classappend="${activeTab == 'home' ? 'active' : ''}" th:href="@{/admin}">
+            <span th:text="#{admin.header.title}">League Troll Build Admin</span></a>
+        <a class="item" sec:authorize="hasRole('ADMIN')"
+           th:classappend="${activeTab == 'summonerSpells' ? 'active' : ''}"
+           th:href="@{/admin/summoner-spells}" th:text="#{admin.summonerSpells}">Summoner Spells</a>
+        <a class="item" sec:authorize="hasRole('ADMIN')"
+           th:classappend="${activeTab == 'items' ? 'active' : ''}"
+           th:href="@{/admin/items}" th:text="#{admin.items}">Items</a>
+        <a class="item" sec:authorize="hasRole('ADMIN')"
+           th:classappend="${activeTab == 'champions' ? 'active' : ''}"
+           th:href="@{/admin/champions}" th:text="#{admin.champions}">Champions</a>
+        <a class="item" sec:authorize="hasRole('ADMIN')"
+           th:classappend="${activeTab == 'maps' ? 'active' : ''}"
+           th:href="@{/admin/maps}" th:text="#{admin.maps}">Maps</a>
+        <a class="item" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin/logout}">
+            <i class="sign out icon"></i>
+            <span th:text="#{logout}">Logout</span></a>
     </div>
-    <div class="ui hidden divider"></div>
 </header>
 </body>
 </html>
