@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/admin">
+<head>
+    <title th:text="#{admin.actuator.flyway}">Flyway</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/datatables/media/css/dataTables.semanticui.min.css}" />
+    <script th:src="@{/webjars/datatables/media/js/jquery.dataTables.min.js}"></script>
+    <script th:src="@{/webjars/datatables/media/js/dataTables.semanticui.min.js}"></script>
+</head>
+<body>
+<div layout:fragment="content">
+    <h3 class="ui dividing header" th:text="#{admin.actuator.flyway}">Flyway</h3>
+
+    <table id="flyway" class="ui celled table">
+        <thead>
+        <tr>
+            <th class="four wide" th:text="#{admin.actuator.flyway.version}">Version</th>
+            <th class="four wide" th:text="#{admin.actuator.flyway.description}">Description</th>
+            <th class="four wide" th:text="#{admin.actuator.flyway.state}">State</th>
+            <th class="four wide" th:text="#{admin.actuator.flyway.executionTime}">Execution Time</th>
+        </tr>
+        </thead>
+    </table>
+    <script th:inline="javascript">
+    /*<![CDATA[*/
+    $(function() {
+        $.ajax({
+            url: [[@{/admin/actuator/flyway}]],
+            success: function(data) {
+                $('#flyway').DataTable({
+                    pageLength: 25,
+                    order: [ [0, 'desc'] ],
+                    data: data,
+                    columns: [
+                        { data: 'version' },
+                        { data: 'description' },
+                        { data: 'state' },
+                        { data: null,
+                            render: function(data, type, full, meta) {
+                                return data.executionTime + ' ms';
+                            }
+                        }
+                    ]
+                });
+            }
+        });
+    });
+    /*]]>*/
+    </script>
+</div>
+</body>
+</html>

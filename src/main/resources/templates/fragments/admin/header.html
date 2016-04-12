@@ -5,7 +5,7 @@
 </head>
 <body>
 <header th:fragment="header">
-    <div class="ui sidebar inverted vertical menu visible sidebar">
+    <div class="ui sidebar inverted vertical accordion menu visible sidebar">
         <a class="item" th:classappend="${activeTab == 'home' ? 'active' : ''}" th:href="@{/admin}">
             <span th:text="#{admin.header.title}">League Troll Build Admin</span></a>
         <a class="item" sec:authorize="hasRole('ADMIN')"
@@ -20,6 +20,17 @@
         <a class="item" sec:authorize="hasRole('ADMIN')"
            th:classappend="${activeTab == 'maps' ? 'active' : ''}"
            th:href="@{/admin/maps}" th:text="#{admin.maps}">Maps</a>
+        <div class="item" sec:authorize="hasRole('ADMIN')">
+            <a class="title" th:classappend="${activeTab == 'actuator' ? 'active' : ''}">
+                <i class="dropdown icon"></i>
+                <span th:text="#{admin.actuator}">Actuator</span>
+            </a>
+            <div class="content" th:classappend="${accordion == 'flyway' ? 'active' : ''}">
+                <a class="item" sec:authorize="hasRole('ADMIN')"
+                   th:classappend="${accordion == 'flyway' ? 'active' : ''}"
+                   th:href="@{/admin/flyway}" th:text="#{admin.actuator.flyway}">Flyway</a>
+            </div>
+        </div>
         <a class="item" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin/logout}">
             <i class="sign out icon"></i>
             <span th:text="#{logout}">Logout</span></a>
