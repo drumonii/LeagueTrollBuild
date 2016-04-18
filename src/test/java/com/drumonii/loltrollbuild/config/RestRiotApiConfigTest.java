@@ -9,7 +9,6 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.env.Environment;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -22,9 +21,6 @@ public class RestRiotApiConfigTest extends BaseSpringTestRunner {
 
 	@Autowired
 	private RiotApiProperties riotProperties;
-
-	@Autowired
-	private Environment env;
 
 	private StaticData staticData;
 	private Ddragon ddragon;
@@ -42,6 +38,10 @@ public class RestRiotApiConfigTest extends BaseSpringTestRunner {
 		scheme = staticData.getScheme();
 		host = staticData.getBaseUrl().replace("{region}", staticData.getRegion());
 	}
+
+	/*
+	 * Summoner Spells Uri Components Tests
+	 */
 
 	@Autowired
 	@Qualifier("summonerSpells")
@@ -88,6 +88,10 @@ public class RestRiotApiConfigTest extends BaseSpringTestRunner {
 		assertThat(summonerSpellImgUri.getScheme()).isEqualTo(ddragon.getScheme());
 	}
 
+	/*
+	 * Items Uri Components Tests
+	 */
+
 	@Autowired
 	@Qualifier("items")
 	private UriComponents itemsUri;
@@ -132,6 +136,10 @@ public class RestRiotApiConfigTest extends BaseSpringTestRunner {
 		assertThat(itemsImgUri.getScheme()).isEqualTo(ddragon.getScheme());
 	}
 
+	/*
+	 * Champions Uri Components Tests
+	 */
+
 	@Autowired
 	@Qualifier("champions")
 	private UriComponents championsUri;
@@ -174,6 +182,10 @@ public class RestRiotApiConfigTest extends BaseSpringTestRunner {
 		assertThat(championsImgUri.getScheme()).isEqualTo(ddragon.getScheme());
 	}
 
+	/*
+	 * Maps Uri Components Tests
+	 */
+
 	@Autowired
 	@Qualifier("maps")
 	private UriComponents mapsUri;
@@ -199,6 +211,10 @@ public class RestRiotApiConfigTest extends BaseSpringTestRunner {
 				.replace("{mapImgFull}", imgFull));
 		assertThat(mapsImgUri.getScheme()).isEqualTo(ddragon.getScheme());
 	}
+
+	/*
+	 * Versions Uri Components Tests
+	 */
 
 	@Autowired
 	@Qualifier("versions")
