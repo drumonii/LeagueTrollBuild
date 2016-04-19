@@ -57,7 +57,7 @@ $(function() {
         });
         event.preventDefault();
     });
-    var dataTable = $('#maps').DataTable({
+    $('#maps').DataTable({
         processing: true,
         serverSide: true,
         order: [ [1, 'asc'] ],
@@ -76,9 +76,8 @@ $(function() {
             parameters['size'] = data.length;
             parameters['sort'] = sorts;
             $.ajax({
-                url: parameters.hasOwnProperty('term') ?
-                    [[@{/api/maps/search/find-by?}]] + $.param(parameters, true) :
-                    [[@{/api/maps?}]] + $.param(parameters, true),
+                url: parameters.hasOwnProperty('term') ? [[@{/api/maps/search/find-by?}]] : [[@{/api/maps?}]],
+                data: $.param(parameters, true),
                 success: function(json) {
                     callback({ draw: data.draw, recordsTotal: json.page.totalElements,
                         recordsFiltered: json.page.totalElements, data: json._embedded.maps
