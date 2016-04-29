@@ -2,7 +2,6 @@ package com.drumonii.loltrollbuild.riot.api;
 
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.model.SummonerSpell;
-import com.drumonii.loltrollbuild.model.image.Image;
 import com.drumonii.loltrollbuild.model.image.SummonerSpellImage;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
@@ -12,6 +11,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashSet;
 
+import static com.drumonii.loltrollbuild.model.SummonerSpell.GameMode.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Fail.fail;
 import static org.assertj.core.data.MapEntry.entry;
@@ -43,8 +43,8 @@ public class SummonerSpellResponseTest extends BaseSpringTestRunner {
 		SummonerSpell summonerSpell = new SummonerSpell(1, "Cleanse", "Removes all disables and summoner spell " +
 				"debuffs affecting your champion and lowers the duration of incoming disables by 65% for 3 seconds.",
 				new SummonerSpellImage("SummonerBoost.png", "spell0.png", "spell", new byte[0], 48, 0, 48, 48),
-				new HashSet<>(Arrays.asList(210)), new HashSet<>(Arrays.asList("CLASSIC", "ODIN", "TUTORIAL", "ARAM",
-				"ASCENSION")));
+				new HashSet<>(Arrays.asList(210)), new HashSet<>(Arrays.asList(CLASSIC, ODIN, TUTORIAL, ARAM,
+				ASCENSION)));
 		assertThat(spellsResponse.getSummonerSpells()).containsExactly(entry("SummonerBoost", summonerSpell));
 	}
 

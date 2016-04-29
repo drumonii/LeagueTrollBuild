@@ -14,6 +14,8 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
+import static com.drumonii.loltrollbuild.model.SummonerSpell.GameMode.ARAM;
+import static com.drumonii.loltrollbuild.model.SummonerSpell.GameMode.CLASSIC;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class SummonerSpellTest extends BaseSpringTestRunner {
@@ -44,7 +46,7 @@ public class SummonerSpellTest extends BaseSpringTestRunner {
 		SummonerSpell markFromDb = summonerSpellsRepository.findOne(markFromRiot.getId());
 		assertThat(markFromRiot).isEqualTo(markFromDb);
 
-		markFromRiot.setModes(new HashSet<>(Arrays.asList("ARAM", "CLASSIC")));
+		markFromRiot.setModes(new HashSet<>(Arrays.asList(ARAM, CLASSIC)));
 		markFromRiot.setCooldown(new HashSet<>(Arrays.asList(50)));
 		assertThat(markFromRiot).isNotEqualTo(markFromDb);
 	}

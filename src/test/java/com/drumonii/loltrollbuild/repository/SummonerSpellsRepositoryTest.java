@@ -16,6 +16,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
+import static com.drumonii.loltrollbuild.model.SummonerSpell.GameMode.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.data.domain.Sort.Direction.ASC;
 
@@ -53,10 +54,10 @@ public class SummonerSpellsRepositoryTest extends BaseSpringTestRunner {
 		assertThat(summonerSpellFromDb).isEqualToIgnoringNullFields(unmarshalledSummonerSpell);
 
 		// Update
-		summonerSpellFromDb.setModes(new HashSet<>(Arrays.asList("CLASSIC")));
+		summonerSpellFromDb.setModes(new HashSet<>(Arrays.asList(CLASSIC)));
 		summonerSpellsRepository.save(summonerSpellFromDb);
 		summonerSpellFromDb = summonerSpellsRepository.findOne(10001);
-		assertThat(summonerSpellFromDb.getModes()).isEqualTo(new HashSet<>(Arrays.asList("CLASSIC")));
+		assertThat(summonerSpellFromDb.getModes()).isEqualTo(new HashSet<>(Arrays.asList(CLASSIC)));
 
 		// Delete
 		summonerSpellsRepository.delete(summonerSpellFromDb);
@@ -94,16 +95,16 @@ public class SummonerSpellsRepositoryTest extends BaseSpringTestRunner {
 				.getSummonerSpells().get("SummonerExhaust");
 		summonerSpellsRepository.save(exhaust);
 
-		List<SummonerSpell> forTrollBuild = summonerSpellsRepository.forTrollBuild("CLASSIC");
+		List<SummonerSpell> forTrollBuild = summonerSpellsRepository.forTrollBuild(CLASSIC);
 		assertThat(forTrollBuild).doesNotHaveDuplicates();
 		assertThat(forTrollBuild).extracting(SummonerSpell::getModes)
-				.have(new Condition<>(mode -> mode.contains("CLASSIC"), "CLASSIC"));
+				.have(new Condition<>(mode -> mode.contains(CLASSIC), "CLASSIC"));
 		assertThat(forTrollBuild).containsOnly(smite, exhaust);
 
-		forTrollBuild = summonerSpellsRepository.forTrollBuild("ARAM");
+		forTrollBuild = summonerSpellsRepository.forTrollBuild(ARAM);
 		assertThat(forTrollBuild).doesNotHaveDuplicates();
 		assertThat(forTrollBuild).extracting(SummonerSpell::getModes)
-				.have(new Condition<>(mode -> mode.contains("ARAM"), "ARAM"));
+				.have(new Condition<>(mode -> mode.contains(ARAM), "ARAM"));
 		assertThat(forTrollBuild).containsOnly(mark, exhaust);
 	}
 
@@ -123,7 +124,7 @@ public class SummonerSpellsRepositoryTest extends BaseSpringTestRunner {
 				new PageRequest(0, 20, ASC, "name"));
 		assertThat(summonerSpells).isNotEmpty().doesNotHaveDuplicates();
 
-		summonerSpells = summonerSpellsRepository.findBy("ODIN", new PageRequest(0, 20, ASC, "name"));
+		summonerSpells = summonerSpellsRepository.findBy(ODIN.name(), new PageRequest(0, 20, ASC, "name"));
 		assertThat(summonerSpells).isNotEmpty().doesNotHaveDuplicates();
 	}
 

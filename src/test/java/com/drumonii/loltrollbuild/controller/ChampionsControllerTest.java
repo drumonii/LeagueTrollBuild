@@ -5,6 +5,7 @@ import com.drumonii.loltrollbuild.model.Champion;
 import com.drumonii.loltrollbuild.model.GameMap;
 import com.drumonii.loltrollbuild.model.Item;
 import com.drumonii.loltrollbuild.model.SummonerSpell;
+import com.drumonii.loltrollbuild.model.SummonerSpell.GameMode;
 import com.drumonii.loltrollbuild.repository.ChampionsRepository;
 import com.drumonii.loltrollbuild.repository.ItemsRepository;
 import com.drumonii.loltrollbuild.repository.MapsRepository;
@@ -22,6 +23,8 @@ import org.springframework.test.annotation.Repeat;
 
 import java.util.List;
 
+import static com.drumonii.loltrollbuild.model.SummonerSpell.GameMode.ARAM;
+import static com.drumonii.loltrollbuild.model.SummonerSpell.GameMode.CLASSIC;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
@@ -276,8 +279,8 @@ public class ChampionsControllerTest extends BaseSpringTestRunner {
 		GameMap crystalScar = objectMapper.readValue(responseBody, MapsResponse.class).getMaps().get("8");
 		mapsRepository.save(crystalScar);
 
-		String gameMode = championsController.getModeFromMap(String.valueOf(crystalScar.getMapId()));
-		assertThat(gameMode).isEqualTo("CLASSIC");
+		GameMode gameMode = championsController.getModeFromMap(String.valueOf(crystalScar.getMapId()));
+		assertThat(gameMode).isEqualTo(CLASSIC);
 
 		responseBody = "{\"type\":\"map\",\"version\":\"6.3.1\",\"data\":{\"11\":{\"mapName\":\"SummonersRiftNew\"," +
 				"\"mapId\":11,\"image\":{\"full\":\"map11.png\",\"sprite\":\"map0.png\",\"group\":\"map\",\"x\":144," +
@@ -286,7 +289,7 @@ public class ChampionsControllerTest extends BaseSpringTestRunner {
 		mapsRepository.save(summonersRift);
 
 		gameMode = championsController.getModeFromMap(String.valueOf(summonersRift.getMapId()));
-		assertThat(gameMode).isEqualTo("CLASSIC");
+		assertThat(gameMode).isEqualTo(CLASSIC);
 
 		responseBody = "{\"type\":\"map\",\"version\":\"6.3.1\",\"data\":{\"12\":{\"mapName\":\"ProvingGroundsNew\"," +
 				"\"mapId\":12,\"image\":{\"full\":\"map12.png\",\"sprite\":\"map0.png\",\"group\":\"map\",\"x\":48," +
@@ -295,7 +298,7 @@ public class ChampionsControllerTest extends BaseSpringTestRunner {
 		mapsRepository.save(provingGrounds);
 
 		gameMode = championsController.getModeFromMap(String.valueOf(provingGrounds.getMapId()));
-		assertThat(gameMode).isEqualTo("ARAM");
+		assertThat(gameMode).isEqualTo(ARAM);
 	}
 
 }

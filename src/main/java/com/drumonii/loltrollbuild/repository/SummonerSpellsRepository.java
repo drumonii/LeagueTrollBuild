@@ -1,6 +1,7 @@
 package com.drumonii.loltrollbuild.repository;
 
 import com.drumonii.loltrollbuild.model.SummonerSpell;
+import com.drumonii.loltrollbuild.model.SummonerSpell.GameMode;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -33,7 +34,7 @@ public interface SummonerSpellsRepository extends PagingAndSortingRepository<Sum
 	       "group by s.id")
 	@RestResource(path = "for-troll-build", rel = "for-troll-build")
 	@Cacheable
-	List<SummonerSpell> forTrollBuild(@Param("mode") String mode);
+	List<SummonerSpell> forTrollBuild(@Param("mode") GameMode mode);
 
 	/**
 	 * Finds a {@link Page} of {@link SummonerSpell} from a search term by using {@code LIKE} for each searchable field.

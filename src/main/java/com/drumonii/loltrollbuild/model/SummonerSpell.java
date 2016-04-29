@@ -49,8 +49,15 @@ public class SummonerSpell implements Serializable {
 
 	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "SUMMONER_SPELL_MODE", joinColumns = @JoinColumn(name = "SUMMONER_SPELL_ID"))
+	@Enumerated(EnumType.STRING)
 	@Column(name = "MODE")
 	@JsonProperty("modes")
-	@Getter @Setter private Set<String> modes;
+	@Getter @Setter private Set<GameMode> modes;
+
+	public enum GameMode {
+
+		CLASSIC, ODIN, ARAM, TUTORIAL, ONEFORALL, ASCENSION, FIRSTBLOOD, KINGPORO
+
+	}
 
 }

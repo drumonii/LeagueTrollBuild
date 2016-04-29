@@ -4,6 +4,7 @@ import com.drumonii.loltrollbuild.model.Champion;
 import com.drumonii.loltrollbuild.model.GameMap;
 import com.drumonii.loltrollbuild.model.Item;
 import com.drumonii.loltrollbuild.model.SummonerSpell;
+import com.drumonii.loltrollbuild.model.SummonerSpell.GameMode;
 import com.drumonii.loltrollbuild.repository.ChampionsRepository;
 import com.drumonii.loltrollbuild.repository.ItemsRepository;
 import com.drumonii.loltrollbuild.repository.MapsRepository;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static com.drumonii.loltrollbuild.model.SummonerSpell.GameMode.ARAM;
+import static com.drumonii.loltrollbuild.model.SummonerSpell.GameMode.CLASSIC;
 import static org.springframework.data.domain.Sort.Direction.ASC;
 
 /**
@@ -134,18 +137,18 @@ public class ChampionsController {
 	}
 
 	/**
-	 * Gets a game mode from a {@link GameMap}'s ID. If the map isn't the Howling Abyss (Proving Grounds) then the
-	 * game mode is considered as "CLASSIC", otherwise "ARAM" is returned.
+	 * Gets a {@link GameMode} from a {@link GameMap}'s ID. If the map isn't the Howling Abyss (Proving Grounds) then
+	 * the game mode is considered as "CLASSIC", otherwise "ARAM" is returned.
 	 *
 	 * @param mapId the {@link GameMap}'s ID
-	 * @return the game mode
+	 * @return the {@link GameMode}
 	 * @see <a href="http://leagueoflegends.wikia.com/wiki/Category:Game_modes">Game Modes</a>
 	 */
-	public String getModeFromMap(String mapId) {
+	public GameMode getModeFromMap(String mapId) {
 		GameMap map = mapsRepository.findOne(Integer.valueOf(mapId));
-		String mode = "CLASSIC";
+		GameMode mode = CLASSIC;
 		if (map.getMapName().equals("ProvingGroundsNew")) {
-			mode = "ARAM";
+			mode = ARAM;
 		}
 		return mode;
 	}
