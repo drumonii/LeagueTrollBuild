@@ -23,18 +23,4 @@ public class RandomizeUtil {
 		return list.get(RandomUtils.nextInt(0, list.size()));
 	}
 
-	/**
-	 * Gets a random element {@code E} from the passed {@link List} and removes the chosen element from the list.
-	 *
-	 * @param list the {@link List} to get and remove the random element
-	 * @param <E> the element type
-	 * @return a random element from the {@link List}
-	 */
-	public static <E> E getRandomAndRemove(List<E> list) {
-		int randomInt = RandomUtils.nextInt(0, list.size());
-		E element = list.get(randomInt);
-		list.remove(randomInt);
-		return element;
-	}
-
 }
