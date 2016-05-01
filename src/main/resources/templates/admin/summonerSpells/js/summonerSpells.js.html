@@ -79,8 +79,8 @@ $(function() {
             parameters['size'] = data.length;
             parameters['sort'] = sorts;
             $.ajax({
-                url: parameters.hasOwnProperty('term') ? [[@{/api/summoner-spells/search/find-by?}]] :
-                    [[@{/api/summoner-spells?}]],
+                url: parameters.hasOwnProperty('term') ? [[@{/api/summoner-spells/search/find-by}]] :
+                    [[@{/api/summoner-spells}]],
                 data: $.param(parameters, true),
                 success: function(json) {
                     callback({ draw: data.draw, recordsTotal: json.page.totalElements,

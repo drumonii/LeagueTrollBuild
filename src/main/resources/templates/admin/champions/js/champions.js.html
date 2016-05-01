@@ -76,7 +76,7 @@ $(function() {
             parameters['size'] = data.length;
             parameters['sort'] = sorts;
             $.ajax({
-                url: parameters.hasOwnProperty('term') ? [[@{/api/champions/search/find-by?}]] : [[@{/api/champions?}]],
+                url: parameters.hasOwnProperty('term') ? [[@{/api/champions/search/find-by}]] : [[@{/api/champions}]],
                 data: $.param(parameters, true),
                 success: function(json) {
                     callback({ draw: data.draw, recordsTotal: json.page.totalElements,
