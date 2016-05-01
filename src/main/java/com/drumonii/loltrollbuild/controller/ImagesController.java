@@ -4,6 +4,7 @@ import com.drumonii.loltrollbuild.model.Champion;
 import com.drumonii.loltrollbuild.model.GameMap;
 import com.drumonii.loltrollbuild.model.Item;
 import com.drumonii.loltrollbuild.model.SummonerSpell;
+import com.drumonii.loltrollbuild.model.image.Image;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -24,8 +25,7 @@ public class ImagesController {
 		byte[] imgSrc = summonerSpell.getImage().getImgSrc();
 		return ResponseEntity.ok()
 				.contentLength(imgSrc.length)
-				.contentType(MediaType.parseMediaType("image/" + FilenameUtils.getExtension(summonerSpell.getImage()
-						.getFull())))
+				.contentType(MediaType.parseMediaType(createMediaType(summonerSpell.getImage())))
 				.body(imgSrc);
 	}
 
@@ -34,7 +34,7 @@ public class ImagesController {
 		byte[] imgSrc = item.getImage().getImgSrc();
 		return ResponseEntity.ok()
 				.contentLength(imgSrc.length)
-				.contentType(MediaType.parseMediaType("image/" + FilenameUtils.getExtension(item.getImage().getFull())))
+				.contentType(MediaType.parseMediaType(createMediaType(item.getImage())))
 				.body(imgSrc);
 	}
 
@@ -43,8 +43,7 @@ public class ImagesController {
 		byte[] imgSrc = champion.getImage().getImgSrc();
 		return ResponseEntity.ok()
 				.contentLength(imgSrc.length)
-				.contentType(MediaType.parseMediaType("image/" + FilenameUtils.getExtension(champion.getImage()
-						.getFull())))
+				.contentType(MediaType.parseMediaType(createMediaType(champion.getImage())))
 				.body(imgSrc);
 	}
 
@@ -53,8 +52,18 @@ public class ImagesController {
 		byte[] imgSrc = map.getImage().getImgSrc();
 		return ResponseEntity.ok()
 				.contentLength(imgSrc.length)
-				.contentType(MediaType.parseMediaType("image/" + FilenameUtils.getExtension(map.getImage().getFull())))
+				.contentType(MediaType.parseMediaType(createMediaType(map.getImage())))
 				.body(imgSrc);
+	}
+
+	/**
+	 * Creates a {@link MediaType} from an {@link Image} and its file extension.
+	 *
+	 * @param image the {@link Image}
+	 * @return the {@link MediaType}
+	 */
+	private String createMediaType(Image image) {
+		return "image/" + FilenameUtils.getExtension(image.getFull());
 	}
 
 }
