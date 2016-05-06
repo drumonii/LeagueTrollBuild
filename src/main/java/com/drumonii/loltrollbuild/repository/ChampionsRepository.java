@@ -25,7 +25,7 @@ public interface ChampionsRepository extends PagingAndSortingRepository<Champion
 	 * @return a {@link Champion} from its name
 	 */
 	@Query("select c from Champion c where lower(c.name) = lower(:name) or lower(c.key) = lower(:name)")
-	@RestResource(path = "find-by-name", rel = "find-by-name")
+	@RestResource(exported = false)
 	Champion findByName(@Param("name") String name);
 
 	/**

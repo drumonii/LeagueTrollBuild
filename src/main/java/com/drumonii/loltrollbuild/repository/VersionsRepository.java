@@ -20,7 +20,7 @@ public interface VersionsRepository extends CrudRepository<Version, String> {
 			"select v.patch, v.major, v.minor, v.revision from Version v " +
 			"order by v.major desc, v.minor desc, v.revision desc limit 1",
 			nativeQuery = true)
-	@RestResource(path = "latest-version", rel = "latest-version")
+	@RestResource(exported = false)
 	Version latestVersion();
 
 }
