@@ -1,11 +1,12 @@
 package com.drumonii.loltrollbuild;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.boot.test.WebIntegrationTest;
-import org.springframework.http.MediaType;
+import org.springframework.restdocs.RestDocumentation;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -17,6 +18,7 @@ import static com.drumonii.loltrollbuild.config.Profiles.TESTING;
 import static com.drumonii.loltrollbuild.config.WebSecurityConfig.ADMIN_ROLE;
 import static com.drumonii.loltrollbuild.config.WebSecurityConfig.WebDevTestingSecurityConfig.IN_MEM_PASSWORD;
 import static com.drumonii.loltrollbuild.config.WebSecurityConfig.WebDevTestingSecurityConfig.IN_MEM_USERNAME;
+import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
@@ -41,9 +43,16 @@ public abstract class BaseSpringTestRunner {
 	protected static final String TESTING_PASSWORD = IN_MEM_PASSWORD;
 	protected static final String TESTING_USER_ROLE = ADMIN_ROLE;
 
+	@Rule
+	public RestDocumentation restDocumentation = new RestDocumentation("build/generated-snippets");
+
 	@Before
 	public void before() {
 		mockMvc = webAppContextSetup(wac)
+				.apply(documentationConfiguration(restDocumentation).uris()
+					.withScheme("https")
+					.withHost("league-troll-build.herokuapp.com")
+					.withPort(443))
 				.apply(springSecurity())
 				.build();
 	}

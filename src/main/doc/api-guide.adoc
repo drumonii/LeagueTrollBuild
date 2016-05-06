@@ -1,0 +1,419 @@
+= League Troll Build API Guide
+drumonii;
+:doctype: book
+:source-highlighter: coderay
+:toc: left
+:toclevels: 4
+:sectlinks:
+
+[[overview]]
+= Overview
+Guide for understanding the API provided by League Troll Build. All data is aggregated from
+https://developer.riotgames.com/[Riot's API] for each patch version release.
+
+[[overview-http-verbs]]
+== HTTP Verbs
+Use of HTTP verbs in the API.
+
+|===
+| Verb | Usage
+
+| `GET`
+| Retrieves a resource
+|===
+
+[[overview-http-status-codes]]
+== HTTP Status Codes
+Use of HTTP status codes in the API
+
+|===
+| Status code | Usage
+
+| `200 OK`
+| Request completed successfully
+
+| `404 Not Found`
+| Requested resource did not exist
+|===
+
+[[resources]]
+= Resources
+
+[[resources-index]]
+== Index
+The index `/api` provides the entry point into the API.
+
+[[resources-index-access]]
+=== Accessing the Index
+A `GET` request is used to access the index.
+include::{snippets}/index/http-request.adoc[]
+
+==== Example Usage
+Usage with `CURL`:
+include::{snippets}/index/curl-request.adoc[]
+
+==== Response Structure
+include::{snippets}/index/http-response.adoc[]
+
+[[resources-index-links]]
+==== Links
+include::{snippets}/index/links.adoc[]
+
+[[resources-summoner-spells]]
+== Summoner Spells
+Resources for http://leagueoflegends.wikia.com/wiki/Summoner_spell[Summoner Spells].
+
+NOTE: `POST`, `PUT`, and `DELETE` methods are limited to an admin only
+
+[[resources-summoner-spells-list]]
+=== Listing Summoner Spells
+A `GET` request is used to access all `Summoner Spell` s.
+include::{snippets}/getSummonerSpells/http-request.adoc[]
+
+==== Example Usage
+Usage with `CURL`:
+include::{snippets}/getSummonerSpells/curl-request.adoc[]
+
+==== Response Structure
+include::{snippets}/getSummonerSpells/http-response.adoc[]
+
+include::{snippets}/getSummonerSpells/response-fields.adoc[]
+
+[[resources-summoner-spell-retrieve]]
+=== Retrieve a Summoner Spell
+A `GET` request will retrieve a specific `Summoner Spell` from its ID.
+include::{snippets}/getSummonerSpell/http-request.adoc[]
+
+==== Example Usage
+Usage with `CURL`:
+include::{snippets}/getSummonerSpell/curl-request.adoc[]
+
+==== Response Structure
+include::{snippets}/getSummonerSpell/http-response.adoc[]
+
+include::{snippets}/getSummonerSpell/response-fields.adoc[]
+
+[[resources-summoner-spells-troll-build]]
+=== Summoner Spells for Troll Build
+A `GET` request will retrieve all `Summoner Spell` s eligible for the troll build and the specified
+<<game-modes-table, game mode>>.
+include::{snippets}/summonerSpellsForTrollBuild/http-request.adoc[]
+
+==== Example Usage
+Usage with `CURL`:
+include::{snippets}/summonerSpellsForTrollBuild/curl-request.adoc[]
+
+==== Response Structure
+include::{snippets}/summonerSpellsForTrollBuild/http-response.adoc[]
+
+include::{snippets}/summonerSpellsForTrollBuild/response-fields.adoc[]
+
+[[resources-summoner-spells-find]]
+=== Find a Summoner Spell
+A `GET` request will retrieve all `Summoner Spell` s from a search term.
+include::{snippets}/summonerSpellsFindBy/http-request.adoc[]
+
+==== Example Usage
+Usage with `CURL`:
+include::{snippets}/summonerSpellsFindBy/curl-request.adoc[]
+
+==== Response Structure
+include::{snippets}/summonerSpellsFindBy/http-response.adoc[]
+
+include::{snippets}/summonerSpellsFindBy/response-fields.adoc[]
+
+[[resources-items]]
+== Items
+Resources for http://leagueoflegends.wikia.com/wiki/Item[Items].
+
+NOTE: `POST`, `PUT`, and `DELETE` methods are limited to an admin only
+
+[[resources-items-list]]
+=== Listing Items
+A `GET` request is used to access all `Item` s.
+include::{snippets}/getItems/http-request.adoc[]
+
+==== Example Usage
+Usage with `CURL`:
+include::{snippets}/getItems/curl-request.adoc[]
+
+==== Response Structure
+include::{snippets}/getItems/http-response.adoc[]
+
+include::{snippets}/getItems/response-fields.adoc[]
+
+[[resources-item-retrieve]]
+=== Retrieve an Item
+A `GET` request will retrieve a specific `Item` from its ID.
+
+include::{snippets}/getItem/http-request.adoc[]
+
+==== Example Usage
+Usage with `CURL`:
+include::{snippets}/getItem/curl-request.adoc[]
+
+==== Response Structure
+include::{snippets}/getItem/http-response.adoc[]
+
+include::{snippets}/getItem/response-fields.adoc[]
+
+[[resources-boots-items]]
+=== Boots Items
+A `GET` request will retrieve all upgraded boots `Item` s from http://leagueoflegends.wikia.com/wiki/Boots_of_Speed[Boots of Speed]
+(not including boot enchantment) eligible for the specified <<game-maps-table, game map>>.
+include::{snippets}/bootsItems/http-request.adoc[]
+
+==== Example Usage
+Usage with `CURL`:
+include::{snippets}/bootsItems/curl-request.adoc[]
+
+==== Response Structure
+include::{snippets}/bootsItems/http-response.adoc[]
+
+include::{snippets}/bootsItems/response-fields.adoc[]
+
+[[resources-trinket-items]]
+=== Trinket Items
+A `GET` request will retrieve all basic (non Advanced) http://leagueoflegends.wikia.com/wiki/Trinket[Trinket] `Item` s
+eligible for the specified <<game-maps-table, game map>>.
+include::{snippets}/trinketItems/http-request.adoc[]
+
+==== Example Usage
+Usage with `CURL`:
+include::{snippets}/trinketItems/curl-request.adoc[]
+
+==== Response Structure
+include::{snippets}/trinketItems/http-response.adoc[]
+
+include::{snippets}/trinketItems/response-fields.adoc[]
+
+[[resources-viktor-only-items]]
+=== Viktor Only Items
+A `GET` request will retrieve all starting `Item` s for only http://leagueoflegends.wikia.com/wiki/Viktor[Viktor].
+include::{snippets}/viktorOnlyItems/http-request.adoc[]
+
+==== Example Usage
+Usage with `CURL`:
+include::{snippets}/viktorOnlyItems/curl-request.adoc[]
+
+==== Response Structure
+include::{snippets}/viktorOnlyItems/http-response.adoc[]
+
+include::{snippets}/viktorOnlyItems/response-fields.adoc[]
+
+[[resources-items-troll-build]]
+=== Items for Troll Build
+A `GET` request will retrieve all `Items` s eligible for the troll build and the specified <<game-modes-table, game mode>>.
+That is, all purchasable (excluding items like Muramana or Seraph's Embrace - they are non purchasable), non-consumable,
+and fully upgraded items. This excludes boots, Trinkets, items not requiring a particular champion, jungle related items,
+and Doran's items.
+include::{snippets}/itemsForTrollBuild/http-request.adoc[]
+
+==== Example Usage
+Usage with `CURL`:
+include::{snippets}/itemsForTrollBuild/curl-request.adoc[]
+
+==== Response Structure
+include::{snippets}/itemsForTrollBuild/http-response.adoc[]
+
+include::{snippets}/itemsForTrollBuild/response-fields.adoc[]
+
+[[resources-items-find]]
+=== Find an Item
+A `GET` request will retrieve all `Item` s from a search term.
+include::{snippets}/itemsFindBy/http-request.adoc[]
+
+==== Example Usage
+Usage with `CURL`:
+include::{snippets}/itemsFindBy/curl-request.adoc[]
+
+==== Response Structure
+include::{snippets}/itemsFindBy/http-response.adoc[]
+
+include::{snippets}/itemsFindBy/response-fields.adoc[]
+
+[[resources-champions]]
+== Champions
+Resources for http://leagueoflegends.wikia.com/wiki/Champion[Champions].
+
+NOTE: `POST`, `PUT`, and `DELETE` methods are limited to an admin only
+
+[[resources-champions-list]]
+=== Listing Champions
+A `GET` request is used to access all `Champion` s.
+include::{snippets}/getChampions/http-request.adoc[]
+
+==== Example Usage
+Usage with `CURL`:
+include::{snippets}/getChampions/curl-request.adoc[]
+
+==== Response Structure
+include::{snippets}/getChampions/http-response.adoc[]
+
+include::{snippets}/getChampions/response-fields.adoc[]
+
+[[resources-champion-retrieve]]
+=== Retrieve a Champion
+A `GET` request will retrieve a specific `Champion` from its ID.
+
+include::{snippets}/getChampion/http-request.adoc[]
+
+==== Example Usage
+Usage with `CURL`:
+include::{snippets}/getChampion/curl-request.adoc[]
+
+==== Response Structure
+include::{snippets}/getChampion/http-response.adoc[]
+
+include::{snippets}/getChampion/response-fields.adoc[]
+
+[[resources-champions-find]]
+=== Find a Champion
+A `GET` request will retrieve all `Champions` s from a search term.
+include::{snippets}/championsFindBy/http-request.adoc[]
+
+==== Example Usage
+Usage with `CURL`:
+include::{snippets}/championsFindBy/curl-request.adoc[]
+
+==== Response Structure
+include::{snippets}/championsFindBy/http-response.adoc[]
+
+include::{snippets}/championsFindBy/response-fields.adoc[]
+
+[[resources-maps]]
+== Maps
+Resources for http://leagueoflegends.wikia.com/wiki/Field_of_Justice[Maps].
+
+NOTE: `POST`, `PUT`, and `DELETE` methods are limited to an admin only
+
+[[resources-maps-list]]
+=== Listing Maps
+A `GET` request is used to access all `Map` s.
+include::{snippets}/getMaps/http-request.adoc[]
+
+==== Example Usage
+Usage with `CURL`:
+include::{snippets}/getMaps/curl-request.adoc[]
+
+==== Response Structure
+include::{snippets}/getMaps/http-response.adoc[]
+
+include::{snippets}/getMaps/response-fields.adoc[]
+
+[[resources-map-retrieve]]
+=== Retrieve a Map
+A `GET` request will retrieve a specific `Map` from its ID.
+include::{snippets}/getMap/http-request.adoc[]
+
+==== Example Usage
+Usage with `CURL`:
+include::{snippets}/getMap/curl-request.adoc[]
+
+==== Response Structure
+include::{snippets}/getMap/http-response.adoc[]
+
+include::{snippets}/getMap/response-fields.adoc[]
+
+[[resources-maps-find]]
+=== Find a Map
+A `GET` request will retrieve all `Map` s from a search term.
+include::{snippets}/mapsFindBy/http-request.adoc[]
+
+==== Example Usage
+Usage with `CURL`:
+include::{snippets}/mapsFindBy/curl-request.adoc[]
+
+==== Response Structure
+include::{snippets}/mapsFindBy/http-response.adoc[]
+
+include::{snippets}/mapsFindBy/response-fields.adoc[]
+
+[[resources-versions]]
+== Versions
+Resources for http://leagueoflegends.wikia.com/wiki/Patch[Versions].
+
+NOTE: `POST`, `PUT`, and `DELETE` methods are limited to an admin only
+
+[[resources-versions-list]]
+=== Listing Versions
+A `GET` request is used to access all `Versions` s. Will only list the latest version.
+include::{snippets}/getVersions/http-request.adoc[]
+
+==== Example Usage
+Usage with `CURL`:
+include::{snippets}/getVersions/curl-request.adoc[]
+
+==== Response Structure
+include::{snippets}/getVersions/http-response.adoc[]
+
+include::{snippets}/getVersions/response-fields.adoc[]
+
+[[resources-version-retrieve]]
+=== Retrieve a Version
+A `GET` request will retrieve a specific `Version` from its patch.
+
+include::{snippets}/getVersion/http-request.adoc[]
+
+==== Example Usage
+Usage with `CURL`:
+include::{snippets}/getVersion/curl-request.adoc[]
+
+==== Response Structure
+include::{snippets}/getVersion/http-response.adoc[]
+
+include::{snippets}/getVersion/response-fields.adoc[]
+
+== Glossary
+
+[[game-modes-table]]
+.Game Modes
+|===
+|Game Mode |Description
+
+|http://leagueoflegends.wikia.com/wiki/Classic[CLASSIC]
+|Classic Summoner's Rift and Twisted Treeline games
+
+|http://leagueoflegends.wikia.com/wiki/Dominion[ODIN]
+|Dominion/Crystal Scar games
+
+|http://leagueoflegends.wikia.com/wiki/ARAM[ARAM]
+|ARAM games
+
+|http://leagueoflegends.wikia.com/wiki/Tutorial[TUTORIAL]
+|Tutorial games
+
+|http://leagueoflegends.wikia.com/wiki/One_for_All[ONEFORALL]
+|Tutorial games
+
+|http://leagueoflegends.wikia.com/wiki/Ascension[ASCENSION]
+|Ascension games
+
+|http://leagueoflegends.wikia.com/wiki/Snowdown_Showdown[FIRSTBLOOD]
+|Snowdown Showdown games
+
+|http://leagueoflegends.wikia.com/wiki/Poro[KINGPORO]
+|King Poro games
+|===
+
+[[game-maps-table]]
+.Game Maps
+|===
+|Map ID |Name |Notes
+
+|8
+|http://leagueoflegends.wikia.com/wiki/Crystal_Scar[The Crystal Scar]
+|Dominion Map
+
+|10
+|http://leagueoflegends.wikia.com/wiki/Twisted_Treeline[Twisted Treeline]
+|Current Version
+
+|11
+|http://leagueoflegends.wikia.com/wiki/Summoner's_Rift[Summoner's Rift]
+|Current Version
+
+|12
+|http://leagueoflegends.wikia.com/wiki/Murder_Bridge/Howling_Abyss[Howling Abyss]
+|ARAM Map
+|===
