@@ -59,7 +59,9 @@ public class ItemsRetrieval {
 	@RequestMapping(method = RequestMethod.GET)
 	public List<Item> items() {
 		ItemsResponse response = restTemplate.getForObject(itemsUri.toString(), ItemsResponse.class);
-		return MapUtil.getElementsFromMap(response.getItems());
+		return MapUtil.getElementsFromMap(response.getItems()).stream()
+				.filter(item -> item.getName() != null)
+				.collect(Collectors.toList());
 	}
 
 	/**
@@ -77,7 +79,9 @@ public class ItemsRetrieval {
 	@RequestMapping(method = RequestMethod.POST)
 	public List<Item> saveItems(@RequestParam(required = false) boolean truncate) {
 		ItemsResponse response = restTemplate.getForObject(itemsUri.toString(), ItemsResponse.class);
-		List<Item> items = MapUtil.getElementsFromMap(response.getItems());
+		List<Item> items = MapUtil.getElementsFromMap(response.getItems()).stream()
+				.filter(item -> item.getName() != null)
+				.collect(Collectors.toList());
 
 		if (truncate) {
 			itemsRepository.deleteAll();
