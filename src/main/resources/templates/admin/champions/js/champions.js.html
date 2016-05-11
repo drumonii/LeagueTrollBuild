@@ -162,7 +162,7 @@ $(function() {
         });
         $.ajax({
             type: 'POST',
-            url: [[@{/riot/champions}]] + '/' + $(this).data('champion-id'),
+            url: [[@{/riot/champions/}]] + $(this).data('champion-id'),
             beforeSend: function() {
                 $(event.target).addClass('loading');
             },
@@ -190,7 +190,7 @@ $(function() {
         });
         $.ajax({
             type: 'DELETE',
-            url: [[@{/api/champions}]] + '/' + $(this).data('champion-id'),
+            url: [[@{/api/champions/}]] + $(this).data('champion-id'),
             beforeSend: function() {
                 $(event.target).addClass('loading');
             },

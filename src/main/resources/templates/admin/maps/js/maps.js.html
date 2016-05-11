@@ -156,7 +156,7 @@ $(function() {
         });
         $.ajax({
             type: 'POST',
-            url: [[@{/riot/maps}]] + '/' + $(this).data('map-id'),
+            url: [[@{/riot/maps/}]] + $(this).data('map-id'),
             beforeSend: function() {
                 $(event.target).addClass('loading');
             },
@@ -184,7 +184,7 @@ $(function() {
         });
         $.ajax({
             type: 'DELETE',
-            url: [[@{/api/maps}]] + '/' + $(this).data('map-id'),
+            url: [[@{/api/maps/}]] + $(this).data('map-id'),
             beforeSend: function() {
                 $(event.target).addClass('loading');
             },

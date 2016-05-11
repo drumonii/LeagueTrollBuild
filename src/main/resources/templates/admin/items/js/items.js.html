@@ -167,7 +167,7 @@ $(function() {
         });
         $.ajax({
             type: 'POST',
-            url: [[@{/riot/items}]] + '/' + $(this).data('item-id'),
+            url: [[@{/riot/items/}]] + $(this).data('item-id'),
             beforeSend: function() {
                 $(event.target).addClass('loading');
             },
@@ -195,7 +195,7 @@ $(function() {
         });
         $.ajax({
             type: 'DELETE',
-            url: [[@{/api/items}]] + '/' + $(this).data('item-id'),
+            url: [[@{/api/items/}]] + $(this).data('item-id'),
             beforeSend: function() {
                 $(event.target).addClass('loading');
             },

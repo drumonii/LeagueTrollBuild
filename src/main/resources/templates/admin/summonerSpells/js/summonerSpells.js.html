@@ -170,7 +170,7 @@ $(function() {
         });
         $.ajax({
             type: 'POST',
-            url: [[@{/riot/summoner-spells}]] + '/' + $(this).data('summoner-spell-id'),
+            url: [[@{/riot/summoner-spells/}]] + $(this).data('summoner-spell-id'),
             beforeSend: function() {
                 $(event.target).addClass('loading');
             },
@@ -198,7 +198,7 @@ $(function() {
         });
         $.ajax({
             type: 'DELETE',
-            url: [[@{/api/summoner-spells}]] + '/' + $(this).data('summoner-spell-id'),
+            url: [[@{/api/summoner-spells/}]] + $(this).data('summoner-spell-id'),
             beforeSend: function() {
                 $(event.target).addClass('loading');
             },
