@@ -15,7 +15,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(exclude = { "imgSrc" })
-@ToString
+@ToString(exclude = { "imgSrc" })
 public class Image implements Serializable {
 
 	@Column(name = "IMG_FULL", unique = true, nullable = false)
