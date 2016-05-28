@@ -3,7 +3,6 @@ package com.drumonii.loltrollbuild.controller;
 import com.drumonii.loltrollbuild.model.Champion;
 import com.drumonii.loltrollbuild.model.GameMap;
 import com.drumonii.loltrollbuild.model.Item;
-import com.drumonii.loltrollbuild.model.SummonerSpell;
 import com.drumonii.loltrollbuild.model.SummonerSpell.GameMode;
 import com.drumonii.loltrollbuild.repository.ChampionsRepository;
 import com.drumonii.loltrollbuild.repository.ItemsRepository;
@@ -82,25 +81,12 @@ public class ChampionsController {
 			items.add(RandomizeUtil.getRandom(itemsRepository.viktorOnly()));
 		}
 		// Get all items for the troll build
-		List<Item> itemsForTrollBuild = itemsRepository.forTrollBuild(mapId);
-		while (items.size() < ITEMS_MAX) {
-			Item randomItem = RandomizeUtil.getRandom(itemsForTrollBuild);
-			if (!items.contains(randomItem)) {
-				items.add(randomItem);
-			}
-		}
+		items.addAll(RandomizeUtil.getRandoms(itemsRepository.forTrollBuild(mapId), ITEMS_MAX - 1));
 		trollBuild.put("items", items);
 
 		// Summoner Spells
-		List<SummonerSpell> summonerSpells = new ArrayList<>();
-		List<SummonerSpell> allSummonerSpells = summonerSpellsRepository.forTrollBuild(getModeFromMap(mapId));
-		while (summonerSpells.size() < SPELLS_MAX) {
-			SummonerSpell randomSummonerSpell = RandomizeUtil.getRandom(allSummonerSpells);
-			if (!summonerSpells.contains(randomSummonerSpell)) {
-				summonerSpells.add(randomSummonerSpell);
-			}
-		}
-		trollBuild.put("summoner-spells", summonerSpells);
+		trollBuild.put("summoner-spells",
+				RandomizeUtil.getRandoms(summonerSpellsRepository.forTrollBuild(getModeFromMap(mapId)), SPELLS_MAX));
 
 		// Trinket
 		trollBuild.put("trinket", Arrays.asList(RandomizeUtil.getRandom(itemsRepository.trinkets(mapId))));
@@ -113,7 +99,7 @@ public class ChampionsController {
 	 *
 	 * @return only the eligible {@link List} of {@link GameMap}s
 	 */
-	public List<GameMap> eligibleMaps() {
+	List<GameMap> eligibleMaps() {
 		List<GameMap> maps = (List<GameMap>) mapsRepository.findAll();
 		for (GameMap map : maps) {
 			switch (map.getMapName()) {
@@ -128,12 +114,11 @@ public class ChampionsController {
 					break;
 			}
 		}
-		maps = maps.stream()
+		return maps.stream()
 				.filter(map -> map.getMapName().equals("Twisted Treeline") ||
 						map.getMapName().equals("Summoner's Rift") || map.getMapName().equals("Proving Grounds"))
 				.sorted((map1, map2) -> map1.getMapName().compareTo(map2.getMapName()))
 				.collect(Collectors.toList());
-		return maps;
 	}
 
 	/**
@@ -144,7 +129,7 @@ public class ChampionsController {
 	 * @return the {@link GameMode}
 	 * @see <a href="http://leagueoflegends.wikia.com/wiki/Category:Game_modes">Game Modes</a>
 	 */
-	public GameMode getModeFromMap(String mapId) {
+	GameMode getModeFromMap(String mapId) {
 		GameMap map = mapsRepository.findOne(Integer.valueOf(mapId));
 		GameMode mode = CLASSIC;
 		if (map.getMapName().equals("ProvingGroundsNew")) {

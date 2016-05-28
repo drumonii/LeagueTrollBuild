@@ -231,9 +231,8 @@ public class ChampionsControllerTest extends BaseSpringTestRunner {
 		mockMvc.perform(get("/champions/{id}/troll-build?mapId={mapId}", annie.getId(), SUMMONERS_RIFT))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-				.andExpect(jsonPath("$.items").exists())
 				.andExpect(jsonPath("$.items", hasSize(6)))
-				.andExpect(jsonPath("$.summoner-spells").exists())
+				.andExpect(jsonPath("$.items[0].name").value(is(ninjaTabi.getName())))
 				.andExpect(jsonPath("$.summoner-spells", hasSize(2)))
 				.andExpect(jsonPath("$.trinket", hasSize(1)));
 	}
