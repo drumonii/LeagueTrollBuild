@@ -47,6 +47,7 @@ public class ChampionsController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String champions(Model model) {
 		model.addAttribute("champions", championsRepository.findAll(new Sort(ASC, "name")));
+		model.addAttribute("tags", championsRepository.getTags());
 		return "champions/champions";
 	}
 

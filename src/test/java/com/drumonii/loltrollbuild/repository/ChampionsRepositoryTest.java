@@ -99,4 +99,22 @@ public class ChampionsRepositoryTest extends BaseSpringTestRunner {
 		assertThat(champions).isNotEmpty().doesNotHaveDuplicates();
 	}
 
+	@Test
+	public void getTags() throws IOException {
+		String responseBody = "{\"type\":\"champion\",\"version\":\"5.23.1\",\"data\":{\"Zac\":{\"id\":154,\"key\":" +
+				"\"Zac\",\"name\":\"Zac\",\"title\":\"the Secret Weapon\",\"image\":{\"full\":\"Zac.png\",\"sprite\":" +
+				"\"champion4.png\",\"group\":\"champion\",\"x\":288,\"y\":0,\"w\":48,\"h\":48},\"tags\":[\"Tank\"," +
+				"\"Fighter\"],\"partype\":\"None\"}}}";
+		championsRepository.save(objectMapper.readValue(responseBody, ChampionsResponse.class).getChampions()
+				.get("Zac"));
+		responseBody = "{\"type\":\"champion\",\"version\":\"5.23.1\",\"data\":{\"Leona\":{\"id\":89,\"key\":" +
+				"\"Leona\",\"name\":\"Leona\",\"title\":\"the Radiant Dawn\",\"image\":{\"full\":\"Leona.png\"," +
+				"\"sprite\":\"champion1.png\",\"group\":\"champion\",\"x\":336,\"y\":96,\"w\":48,\"h\":48},\"tags\":" +
+				"[\"Tank\",\"Support\"],\"partype\":\"MP\"}}}";
+		championsRepository.save(objectMapper.readValue(responseBody, ChampionsResponse.class).getChampions()
+				.get("Leona"));
+
+		assertThat(championsRepository.getTags()).containsOnly("Tank", "Fighter", "Support");
+	}
+
 }

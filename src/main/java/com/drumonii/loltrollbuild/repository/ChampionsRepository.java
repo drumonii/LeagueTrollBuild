@@ -12,6 +12,8 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RestResource;
 
+import java.util.List;
+
 /**
  * Paging, sorting, and CRUD operations repository to the CHAMPION table.
  */
@@ -44,6 +46,14 @@ public interface ChampionsRepository extends PagingAndSortingRepository<Champion
 		   "group by c.id")
 	@RestResource(path = "find-by", rel = "find-by")
 	Page<Champion> findBy(@Param("term") String term, Pageable pageable);
+
+	/**
+	 * Gets all possible distinct tags a {@link Champion} could have.
+	 *
+	 * @return the {@link List} of string tags
+	 */
+	@Query(value = "select distinct c.tag from champion_tag c", nativeQuery = true)
+	List<String> getTags();
 
 	@Cacheable
 	@Override

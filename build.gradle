@@ -107,16 +107,18 @@ dependencies {
     compile 'org.webjars:webjars-locator'
 
     // jQuery
-    compile 'org.webjars.bower:jquery:2.2.3'
+    compile 'org.webjars.bower:jquery:2.2.4'
 
     // DataTables
-    compile 'org.webjars.bower:datatables:1.10.11'
+    compile 'org.webjars.bower:datatables:1.10.12'
 
     // Semantic UI
     compile 'org.webjars.bower:semantic:2.1.8'
 
-    // Searcher
-    compile 'org.webjars.bower:jquery-searcher:0.3.0'
+    // Isotope
+    compile('org.webjars.bower:isotope:3.0.0') {
+        exclude group: 'org.webjars.bower'
+    }
 
     // Testing
     testCompile 'org.springframework.boot:spring-boot-starter-test'

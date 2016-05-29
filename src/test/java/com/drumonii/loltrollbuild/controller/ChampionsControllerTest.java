@@ -66,6 +66,7 @@ public class ChampionsControllerTest extends BaseSpringTestRunner {
 		mockMvc.perform(get("/champions"))
 				.andExpect(status().isOk())
 				.andExpect(model().attributeExists("champions"))
+				.andExpect(model().attributeExists("tags"))
 				.andExpect(view().name("champions/champions"));
 	}
 
