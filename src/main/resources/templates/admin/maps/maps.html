@@ -21,7 +21,8 @@
         <thead>
         <tr>
             <th class="one wide"></th>
-            <th class="fifteen wide" th:text="#{admin.map.mapName}">Name</th>
+            <th class="thirteen wide" th:text="#{admin.map.mapName}">Name</th>
+            <th class="two wide"></th>
         </tr>
         </thead>
         <tbody>
@@ -32,11 +33,21 @@
                      (patch=${latestSavedPatch}, image=${map.image.full})}" />
             </td>
             <td th:text="${map.mapName}"></td>
+            <td>
+                <button class="ui fluid primary button" th:attr="data-map-id=${map.mapId}"
+                        th:text="#{admin.map.save}" style="box-sizing:border-box;">Save</button>
+                <div class="ui negative message hidden popup">
+                    <p>
+                        <i class="warning circle icon"></i>
+                        <span th:text="#{admin.map.save.error}">An error has occurred...</span>
+                    </p>
+                </div>
+            </td>
         </tr>
         </tbody>
         <tfoot class="full-width">
         <tr>
-            <th colspan="2">
+            <th colspan="3">
                 <form id="save-maps-form" class="ui form">
                     <div class="ui checkbox">
                         <input id="truncate" type="checkbox" name="truncate" />

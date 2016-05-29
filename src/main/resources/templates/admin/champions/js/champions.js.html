@@ -8,8 +8,8 @@ $(function() {
     $('#champions-difference').DataTable({
         order: [ [1, 'asc'] ],
         columnDefs: [
-            { orderable: false, targets: [0, 3] },
-            { searchable: false, targets: [0] }
+            { orderable: false, targets: [0, 3, 5] },
+            { searchable: false, targets: [0, 5] }
         ],
         lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, 'All'] ],
         language: {
@@ -25,6 +25,34 @@ $(function() {
                 previous: [[#{dataTables.paginate.previous}]]
             }
         }
+    });
+    $('#champions-difference tbody').on('click', '.primary', function(event) {
+        $(event.target).popup({
+            on: 'click',
+            inline: true
+        });
+        $.ajax({
+            type: 'POST',
+            url: [[@{/riot/champions/}]] + $(this).data('champion-id'),
+            beforeSend: function() {
+                $(event.target).addClass('loading');
+            },
+            data: {
+                [[${_csrf.parameterName}]]: [[${_csrf.token}]]
+            },
+            headers: {
+                _csrf_header: [[${_csrf.headerName}]]
+            },
+            success: function(data) {
+                location.reload();
+            },
+            error: function() {
+                $(event.target).popup('show');
+            },
+            complete: function() {
+                $(event.target).removeClass('loading');
+            }
+        });
     });
     $('#save-champions-form').submit(function(event) {
         var button = $('#save-champions-btn');

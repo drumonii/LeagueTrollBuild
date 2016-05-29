@@ -24,7 +24,8 @@
             <th class="three wide" th:text="#{admin.champion.name}">Name</th>
             <th class="four wide" th:text="#{admin.champion.title}">Title</th>
             <th class="four wide" th:text="#{admin.champion.tags}">Tags</th>
-            <th class="four wide" th:text="#{admin.champion.partype}">Partype</th>
+            <th class="two wide" th:text="#{admin.champion.partype}">Partype</th>
+            <th class="two wide"></th>
         </tr>
         </thead>
         <tbody>
@@ -37,14 +38,24 @@
             <td th:text="${champion.name}"></td>
             <td th:text="${champion.title}"></td>
             <td>
-                <span th:each="tag : ${champion.tags}" th:text="${tag}"></span>
+                <span th:each="tag, iterStat : ${champion.tags}" th:text="${iterStat.last} ? ${tag} : |${tag}, |"></span>
             </td>
             <td th:text="${champion.partype}"></td>
+            <td>
+                <button class="ui fluid primary button" th:attr="data-champion-id=${champion.id}"
+                        th:text="#{admin.champion.save}" style="box-sizing:border-box;">Save</button>
+                <div class="ui negative message hidden popup">
+                    <p>
+                        <i class="warning circle icon"></i>
+                        <span th:text="#{admin.champion.save.error}">An error has occurred...</span>
+                    </p>
+                </div>
+            </td>
         </tr>
         </tbody>
         <tfoot class="full-width">
         <tr>
-            <th colspan="5">
+            <th colspan="6">
                 <form id="save-champions-form" class="ui form">
                     <div class="ui checkbox">
                         <input id="truncate" type="checkbox" name="truncate" />

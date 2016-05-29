@@ -21,9 +21,10 @@
         <thead>
         <tr>
             <th class="one wide"></th>
-            <th class="six wide" th:text="#{admin.item.name}">Name</th>
-            <th class="five wide" th:text="#{admin.item.group}">Group</th>
-            <th class="three wide" th:text="#{admin.item.requiredChampion}">Champion</th>
+            <th class="five wide" th:text="#{admin.item.name}">Name</th>
+            <th class="four wide" th:text="#{admin.item.group}">Group</th>
+            <th class="four wide" th:text="#{admin.item.requiredChampion}">Champion</th>
+            <th class="two wide"></th>
         </tr>
         </thead>
         <tbody>
@@ -38,11 +39,21 @@
             <td th:text="${item.name}"></td>
             <td th:text="${item.group}"></td>
             <td th:text="${item.requiredChampion}"></td>
+            <td>
+                <button class="ui fluid primary button" th:attr="data-item-id=${item.id}"
+                        th:text="#{admin.item.save}" style="box-sizing:border-box;">Save</button>
+                <div class="ui negative message hidden popup">
+                    <p>
+                        <i class="warning circle icon"></i>
+                        <span th:text="#{admin.item.save.error}">An error has occurred...</span>
+                    </p>
+                </div>
+            </td>
         </tr>
         </tbody>
         <tfoot class="full-width">
         <tr>
-            <th colspan="4">
+            <th colspan="5">
                 <form id="save-items-form" class="ui form">
                     <div class="ui checkbox">
                         <input id="truncate" type="checkbox" name="truncate" />
