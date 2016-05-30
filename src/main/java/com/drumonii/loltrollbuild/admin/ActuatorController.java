@@ -36,4 +36,10 @@ public class ActuatorController {
 		return "admin/actuator/health";
 	}
 
+	@RequestMapping(value = "/metrics", method = RequestMethod.GET)
+	public String metrics(Model model) {
+		model.addAttribute("accordion", "metrics");
+		return "admin/actuator/metrics";
+	}
+
 }
