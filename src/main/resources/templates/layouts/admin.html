@@ -10,13 +10,11 @@
     <script th:src="@{/webjars/semantic/dist/semantic.min.js}"></script>
 </head>
 <body>
-<!--/* admin sidebar nav */-->
+<!--/* admin header and nav */-->
 <header th:include="fragments/admin/header :: header"></header>
 <!--/* admin main content */-->
-<div class="ui hidden divider"></div>
 <div class="ui container" layout:fragment="content"></div>
 <!--/* footer */-->
 <footer th:include="fragments/footer :: footer"></footer>
-<script>$('.ui.accordion').accordion();</script>
 </body>
 </html>
