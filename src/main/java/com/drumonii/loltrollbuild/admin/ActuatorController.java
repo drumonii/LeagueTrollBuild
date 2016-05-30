@@ -30,4 +30,10 @@ public class ActuatorController {
 		return "admin/actuator/flyway";
 	}
 
+	@RequestMapping(value = "/health", method = RequestMethod.GET)
+	public String health(Model model) {
+		model.addAttribute("accordion", "health");
+		return "admin/actuator/health";
+	}
+
 }

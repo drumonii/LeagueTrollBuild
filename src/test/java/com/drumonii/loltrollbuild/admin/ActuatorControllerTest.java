@@ -29,4 +29,14 @@ public class ActuatorControllerTest extends BaseSpringTestRunner {
 				.andExpect(view().name("admin/actuator/flyway"));
 	}
 
+	@Test
+	public void health() throws Exception {
+		mockMvc.perform(get("/admin/health").with(adminUser()))
+				.andExpect(status().isOk())
+				.andExpect(model().attributeExists("activeTab", "accordion"))
+				.andExpect(model().attribute("activeTab", is("actuator")))
+				.andExpect(model().attribute("accordion", is("health")))
+				.andExpect(view().name("admin/actuator/health"));
+	}
+
 }

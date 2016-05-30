@@ -30,6 +30,8 @@
                        th:href="@{/admin/env}" th:text="#{admin.actuator.env}">Environment</a>
                     <a class="item" th:classappend="${accordion == 'flyway' ? 'active' : ''}"
                        th:href="@{/admin/flyway}" th:text="#{admin.actuator.flyway}">Flyway</a>
+                    <a class="item" th:classappend="${accordion == 'health' ? 'active' : ''}"
+                       th:href="@{/admin/health}" th:text="#{admin.actuator.health}">Health</a>
                 </div>
             </div>
             <div class="right menu" sec:authorize="hasRole('ROLE_ADMIN')">
