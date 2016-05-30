@@ -26,6 +26,8 @@
                 <span th:text="#{admin.actuator}">Actuator</span>
                 <i class="dropdown icon"></i>
                 <div class="menu">
+                    <a class="item" th:classappend="${accordion == 'env' ? 'active' : ''}"
+                       th:href="@{/admin/env}" th:text="#{admin.actuator.env}">Environment</a>
                     <a class="item" th:classappend="${accordion == 'flyway' ? 'active' : ''}"
                        th:href="@{/admin/flyway}" th:text="#{admin.actuator.flyway}">Flyway</a>
                 </div>

@@ -18,6 +18,12 @@ public class ActuatorController {
 		return "actuator";
 	}
 
+	@RequestMapping(value = "/env", method = RequestMethod.GET)
+	public String env(Model model) {
+		model.addAttribute("accordion", "env");
+		return "admin/actuator/env";
+	}
+
 	@RequestMapping(value = "/flyway", method = RequestMethod.GET)
 	public String flyway(Model model) {
 		model.addAttribute("accordion", "flyway");
