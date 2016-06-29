@@ -106,16 +106,13 @@ $(function() {
             parameters['page'] = Math.ceil(data.start / data.length);
             parameters['size'] = data.length;
             parameters['sort'] = sorts;
-            $.ajax({
-                url: parameters.hasOwnProperty('term') ? [[@{/api/summoner-spells/search/find-by}]] :
-                    [[@{/api/summoner-spells}]],
-                data: $.param(parameters, true),
-                success: function(json) {
+            $.get(parameters.hasOwnProperty('term') ? [[@{/api/summoner-spells/search/find-by}]] : [[@{/api/summoner-spells}]],
+                $.param(parameters, true), function(json) {
                     callback({ draw: data.draw, recordsTotal: json.page.totalElements,
                         recordsFiltered: json.page.totalElements, data: json._embedded.summonerSpells
                     });
                 }
-            });
+            );
         },
         columnDefs: [
             { orderable: false, targets: [0, 2, 3, 4] }
