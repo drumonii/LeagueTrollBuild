@@ -50,10 +50,8 @@ $(function() {
                 location.reload();
             },
             error: function() {
-                $(event.target).popup('show');
-            },
-            complete: function() {
                 $(event.target).removeClass('loading');
+                $(event.target).popup('show');
             }
         });
     });
@@ -80,10 +78,8 @@ $(function() {
                 location.reload();
             },
             error: function() {
-                button.popup('show');
-            },
-            complete: function() {
                 button.removeClass('loading');
+                button.popup('show');
             }
         });
         event.preventDefault();
@@ -209,10 +205,8 @@ $(function() {
                 location.reload();
             },
             error: function() {
-                $(event.target).popup('show');
-            },
-            complete: function() {
                 $(event.target).removeClass('loading');
+                $(event.target).popup('show');
             }
         });
     });
@@ -234,10 +228,8 @@ $(function() {
                 location.reload();
             },
             error: function() {
-                $(event.target).popup('show');
-            },
-            complete: function() {
                 $(event.target).removeClass('loading');
+                $(event.target).popup('show');
             }
         });
     });
