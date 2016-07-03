@@ -54,9 +54,10 @@ public class VersionTest extends BaseSpringTestRunner {
 		List<Version> versions = Arrays.asList(objectMapper.readValue(responseBody, Version[].class));
 		Collections.sort(versions, Collections.reverseOrder());
 		assertThat(versions).isSortedAccordingTo(Collections.reverseOrder());
-		assertThat(versions.get(0)).isGreaterThan(versions.get(versions.size() - 1));
-		assertThat(versions.get(0)).isEqualTo(versions.get(0));
-		assertThat(versions.get(versions.size() - 1)).isLessThan(versions.get(0));
+		assertThat(versions.get(0)).satisfies(version -> {
+			assertThat(version).isGreaterThan(versions.get(versions.size() - 1));
+			assertThat(versions.get(versions.size() - 1)).isLessThan(version);
+		});
 	}
 
 }
