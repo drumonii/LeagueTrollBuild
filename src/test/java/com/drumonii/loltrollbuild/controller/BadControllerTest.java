@@ -9,9 +9,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class BadControllerTest extends BaseSpringTestRunner {
 
 	@Test
-	public void throws500() throws Exception {
-		mockMvc.perform(get("/500"))
-				.andExpect(status().isInternalServerError());
+	public void throws400() throws Exception {
+		mockMvc.perform(get("/400"))
+				.andExpect(status().isBadRequest());
+	}
+
+	@Test
+	public void throws403() throws Exception {
+		mockMvc.perform(get("/403"))
+				.andExpect(status().isForbidden());
 	}
 
 	@Test
@@ -21,9 +27,9 @@ public class BadControllerTest extends BaseSpringTestRunner {
 	}
 
 	@Test
-	public void throws403() throws Exception {
-		mockMvc.perform(get("/403"))
-				.andExpect(status().isForbidden());
+	public void throws500() throws Exception {
+		mockMvc.perform(get("/500"))
+				.andExpect(status().isInternalServerError());
 	}
 
 }

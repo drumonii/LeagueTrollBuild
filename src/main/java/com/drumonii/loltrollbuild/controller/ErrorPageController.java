@@ -23,7 +23,7 @@ import java.util.Map;
 @RequestMapping("${server.error.path:${error.path:/error}}")
 public class ErrorPageController extends BasicErrorController {
 
-	private ErrorAttributes errorAttributes;
+	private final ErrorAttributes errorAttributes;
 
 	@Autowired
 	public ErrorPageController(ErrorAttributes errorAttributes) {
@@ -37,6 +37,9 @@ public class ErrorPageController extends BasicErrorController {
 		Map<String, Object> model = errorAttributes.getErrorAttributes(new ServletRequestAttributes(request), false);
 		String view;
 		switch (getStatus(request)) {
+			case BAD_REQUEST: // 400
+				view = String.valueOf(HttpStatus.BAD_REQUEST.value());
+				break;
 			case FORBIDDEN: // 403
 				view = String.valueOf(HttpStatus.FORBIDDEN.value());
 				break;

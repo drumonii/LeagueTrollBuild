@@ -17,6 +17,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @Dev @Testing
 public class BadController {
 
+	@RequestMapping(value = "/400", method = RequestMethod.GET)
+	public String throw400() {
+		throw new BadRequestException();
+	}
+
 	@RequestMapping(value = "/403", method = RequestMethod.GET)
 	public String throw403() {
 		throw new AccessDeniedException();
@@ -32,24 +37,31 @@ public class BadController {
 		throw new InternalServerErrorException();
 	}
 
-	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-	public class InternalServerErrorException extends RuntimeException {
-		public InternalServerErrorException() {
-			super("Internal Server Error!", null);
-		}
-	}
-
-	@ResponseStatus(HttpStatus.NOT_FOUND)
-	public class NotFoundException extends RuntimeException {
-		public NotFoundException() {
-			super("Not Found!", null);
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	class BadRequestException extends RuntimeException {
+		BadRequestException() {
+			super("Bad Request!", null);
 		}
 	}
 
 	@ResponseStatus(HttpStatus.FORBIDDEN)
-	public class AccessDeniedException extends RuntimeException {
-		public AccessDeniedException() {
+	class AccessDeniedException extends RuntimeException {
+		AccessDeniedException() {
 			super("Access Denied!", null);
+		}
+	}
+
+	@ResponseStatus(HttpStatus.NOT_FOUND)
+	class NotFoundException extends RuntimeException {
+		NotFoundException() {
+			super("Not Found!", null);
+		}
+	}
+
+	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+	class InternalServerErrorException extends RuntimeException {
+		InternalServerErrorException() {
+			super("Internal Server Error!", null);
 		}
 	}
 

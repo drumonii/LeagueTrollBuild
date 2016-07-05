@@ -21,6 +21,18 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class ErrorPageControllerTest extends BaseSpringTestRunner {
 
 	@Test
+	public void badRequest400() throws Exception {
+		mockMvc.perform(get("/error").accept(MediaType.TEXT_HTML)
+				.requestAttr(RequestDispatcher.ERROR_STATUS_CODE, 400)
+				.requestAttr(DefaultErrorAttributes.class.getName() + ".ERROR",
+						mock(BadController.AccessDeniedException.class))
+				.requestAttr(RequestDispatcher.ERROR_REQUEST_URI, "/error"))
+				.andExpect(model().attributeExists("timestamp", "status", "error", "exception", "message", "path"))
+				.andExpect(model().attribute("error", is(HttpStatus.BAD_REQUEST.getReasonPhrase())))
+				.andExpect(view().name("400"));
+	}
+
+	@Test
 	public void forbidden403() throws Exception {
 		mockMvc.perform(get("/error").accept(MediaType.TEXT_HTML)
 				.requestAttr(RequestDispatcher.ERROR_STATUS_CODE, 403)
