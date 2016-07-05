@@ -85,7 +85,7 @@ public class SummonerSpellsRetrieval {
 		if (truncate) {
 			summonerSpellsRepository.deleteAll();
 		} else {
-			List<SummonerSpell> summonerSpellsFromDb = (List<SummonerSpell>) summonerSpellsRepository.findAll();
+			List<SummonerSpell> summonerSpellsFromDb = summonerSpellsRepository.findAll();
 			List<SummonerSpell> deletedSummonerSpells = ListUtils.subtract(summonerSpellsFromDb, summonerSpells);
 			summonerSpellsRepository.delete(deletedSummonerSpells);
 			summonerSpells = ListUtils.subtract(summonerSpells, summonerSpellsFromDb);
@@ -93,7 +93,7 @@ public class SummonerSpellsRetrieval {
 
 		imageFetcher.setImgsSrcs(summonerSpells.stream().map(SummonerSpell::getImage).collect(Collectors.toList()),
 				summonerSpellsImgUri);
-		return (List<SummonerSpell>) summonerSpellsRepository.save(summonerSpells);
+		return summonerSpellsRepository.save(summonerSpells);
 	}
 
 	/**

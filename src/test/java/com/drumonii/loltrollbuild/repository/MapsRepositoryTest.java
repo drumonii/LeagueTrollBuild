@@ -7,13 +7,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.After;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 
 import java.io.IOException;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.data.domain.Sort.Direction.ASC;
 
 public class MapsRepositoryTest extends BaseSpringTestRunner {
 
@@ -55,18 +52,6 @@ public class MapsRepositoryTest extends BaseSpringTestRunner {
 		// Delete
 		mapsRepository.delete(mapFromDb);
 		assertThat(mapsRepository.findOne(10001)).isNull();
-	}
-
-	@Test
-	public void findBy() throws IOException {
-		String responseBody = "{\"type\":\"map\",\"version\":\"5.24.2\",\"data\":{\"8\":{\"mapName\":\"CrystalScar\"," +
-				"\"mapId\":8,\"image\":{\"full\":\"map8.png\",\"sprite\":\"map0.png\",\"group\":\"map\",\"x\":192," +
-				"\"y\":0,\"w\":48,\"h\":48}}}}";
-		GameMap crystalScar = objectMapper.readValue(responseBody, MapsResponse.class).getMaps().get("8");
-		mapsRepository.save(crystalScar);
-
-		Page<GameMap> summonerSpells = mapsRepository.findBy("crystal", new PageRequest(0, 20, ASC, "mapName"));
-		assertThat(summonerSpells).isNotEmpty().doesNotHaveDuplicates();
 	}
 
 }

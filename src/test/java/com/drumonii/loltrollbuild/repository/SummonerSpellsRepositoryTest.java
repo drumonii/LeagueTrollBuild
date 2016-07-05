@@ -8,17 +8,15 @@ import org.assertj.core.api.Condition;
 import org.junit.After;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
-import static com.drumonii.loltrollbuild.model.SummonerSpell.GameMode.*;
+import static com.drumonii.loltrollbuild.model.SummonerSpell.GameMode.ARAM;
+import static com.drumonii.loltrollbuild.model.SummonerSpell.GameMode.CLASSIC;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.data.domain.Sort.Direction.ASC;
 
 public class SummonerSpellsRepositoryTest extends BaseSpringTestRunner {
 
@@ -106,26 +104,6 @@ public class SummonerSpellsRepositoryTest extends BaseSpringTestRunner {
 		assertThat(forTrollBuild).extracting(SummonerSpell::getModes)
 				.have(new Condition<>(mode -> mode.contains(ARAM), "ARAM"));
 		assertThat(forTrollBuild).containsOnly(mark, exhaust);
-	}
-
-	@Test
-	public void findBy() throws IOException {
-		String responseBody = "{\"type\":\"summoner\",\"version\":\"5.16.1\",\"data\":{\"SummonerOdinGarrison\":" +
-				"{\"name\":\"Garrison\",\"description\":\"Allied Turret: Grants massive regeneration for 8 seconds. " +
-				"Enemy Turret: Reduces damage dealt by 80% for 8 seconds.\",\"image\":{\"full\":" +
-				"\"SummonerOdinGarrison.png\",\"sprite\":\"spell0.png\",\"group\":\"spell\",\"x\":432,\"y\":0,\"w\":" +
-				"48,\"h\":48},\"cooldown\":[210],\"summonerLevel\":1,\"id\":17,\"key\":\"SummonerOdinGarrison\"," +
-				"\"modes\":[\"ODIN\"]}}}";
-		SummonerSpell garrison = objectMapper.readValue(responseBody, SummonerSpellsResponse.class)
-				.getSummonerSpells().get("SummonerOdinGarrison");
-		summonerSpellsRepository.save(garrison);
-
-		Page<SummonerSpell> summonerSpells = summonerSpellsRepository.findBy("garrison",
-				new PageRequest(0, 20, ASC, "name"));
-		assertThat(summonerSpells).isNotEmpty().doesNotHaveDuplicates();
-
-		summonerSpells = summonerSpellsRepository.findBy(ODIN.name(), new PageRequest(0, 20, ASC, "name"));
-		assertThat(summonerSpells).isNotEmpty().doesNotHaveDuplicates();
 	}
 
 }

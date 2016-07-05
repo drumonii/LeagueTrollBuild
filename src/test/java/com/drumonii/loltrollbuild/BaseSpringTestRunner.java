@@ -43,8 +43,10 @@ public abstract class BaseSpringTestRunner {
 	protected static final String TESTING_PASSWORD = IN_MEM_PASSWORD;
 	protected static final String TESTING_USER_ROLE = ADMIN_ROLE;
 
+	protected static final String SUMMONERS_RIFT = "11";
+
 	@Rule
-	public RestDocumentation restDocumentation = new RestDocumentation("build/generated-snippets");
+	public final RestDocumentation restDocumentation = new RestDocumentation("build/generated-snippets");
 
 	@Before
 	public void before() {

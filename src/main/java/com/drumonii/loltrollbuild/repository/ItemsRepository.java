@@ -5,10 +5,8 @@ import com.drumonii.loltrollbuild.model.Item;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RestResource;
 
@@ -18,7 +16,7 @@ import java.util.List;
  * Paging, sorting, and CRUD operations repository to the ITEM table.
  */
 @CacheConfig(cacheNames = "items")
-public interface ItemsRepository extends PagingAndSortingRepository<Item, Integer> {
+public interface ItemsRepository extends JpaRepository<Item, Integer> {
 
 	/**
 	 * Gets a {@link List} of upgraded {@link Item} boots from {@code Boots of Speed} not including boot enchantments
@@ -33,6 +31,7 @@ public interface ItemsRepository extends PagingAndSortingRepository<Item, Intege
 		   "where i.id <> 1001 and i.name not like 'Enchantment%' and f in ('1001') " +
 		   "and (key(m) <> :mapId and m = false) " +
 		   "group by i.id")
+	@RestResource(exported = false)
 	List<Item> boots(@Param("mapId") String mapId);
 
 	/**
@@ -46,6 +45,7 @@ public interface ItemsRepository extends PagingAndSortingRepository<Item, Intege
 		   "where i.name like '%Trinket%' and i.gold.total = 0 and i.gold.purchasable = true " +
 		   "and (key(m) <> :mapId and m = false) " +
 		   "group by i.id")
+	@RestResource(exported = false)
 	List<Item> trinkets(@Param("mapId") String mapId);
 
 	/**
@@ -55,7 +55,7 @@ public interface ItemsRepository extends PagingAndSortingRepository<Item, Intege
 	 * @see <a href="http://leagueoflegends.wikia.com/wiki/Viktor">Viktor</a>
 	 */
 	@Query("select i from Item i where i.requiredChampion = 'Viktor'")
-	@RestResource(path = "viktor-only", rel = "viktor-only")
+	@RestResource(exported = false)
 	List<Item> viktorOnly();
 
 	/**
@@ -75,24 +75,9 @@ public interface ItemsRepository extends PagingAndSortingRepository<Item, Intege
 		   "and i.requiredChampion is null " +
 		   "and i.name not like 'Enchantment%' and i.name not like 'Doran%' " +
 		   "group by i.id")
-	@RestResource(path = "for-troll-build", rel = "for-troll-build")
+	@RestResource(exported = false)
 	@Cacheable
 	List<Item> forTrollBuild(@Param("mapId") String mapId);
-
-	/**
-	 * Finds a {@link Page} of {@link Item} from a search term by using {@code LIKE} for each searchable field.
-	 *
-	 * @param term the search term
-	 * @param pageable {@link Pageable} for paging and sorting
-	 * @return a {@link Page} of distinct {@link Item} from a search term
-	 */
-	@Query("select i from Item i " +
-		   "where lower(i.name) like concat('%', lower(:term), '%') " +
-		   "or lower(i.group) like concat('%', lower(:term), '%') " +
-		   "or lower(i.requiredChampion) like concat('%', lower(:term), '%') " +
-		   "group by i.id")
-	@RestResource(path = "find-by", rel = "find-by")
-	Page<Item> findBy(@Param("term") String term, Pageable pageable);
 
 	@CacheEvict(allEntries = true)
 	@Override

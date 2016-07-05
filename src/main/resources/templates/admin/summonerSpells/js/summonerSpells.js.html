@@ -5,7 +5,7 @@
 <script th:fragment="script">
 /*<![CDATA[*/
 $(function() {
-    $('#summoner-spells-difference').DataTable({
+    var differenceDataTable = $('#summoner-spells-difference').DataTable({
         order: [ [1, 'asc'] ],
         columnDefs: [
             { orderable: false, targets: [0, 2, 3] },
@@ -28,6 +28,9 @@ $(function() {
         drawCallback: function(settings) {
             $('.summoner-spell-description').popup();
         }
+    });
+    $('.summoner-spells-difference-search-input').keyup(function() {
+        differenceDataTable.column($(this).data('column-index')).search($(this).val()).draw();
     });
     $('#summoner-spells-difference tbody').on('click', '.primary', function(event) {
         $(event.target).popup({
@@ -84,7 +87,7 @@ $(function() {
         });
         event.preventDefault();
     });
-    $('#summoner-spells').DataTable({
+    var dataTable = $('#summoner-spells').DataTable({
         processing: true,
         serverSide: true,
         order: [ [1, 'asc'] ],
@@ -97,15 +100,19 @@ $(function() {
             });
             var parameters = {};
             if (data.search.value) {
-                parameters['term'] = data.search.value;
+                var searches = data.search.value.split(',');
+                $.each(searches, function(index, value) {
+                    var search = value.split('|');
+                    parameters[search[0]] = search[1];
+                });
             }
             parameters['page'] = Math.ceil(data.start / data.length);
             parameters['size'] = data.length;
             parameters['sort'] = sorts;
-            $.get(parameters.hasOwnProperty('term') ? [[@{/api/summoner-spells/search/find-by}]] : [[@{/api/summoner-spells}]],
-                $.param(parameters, true), function(json) {
+            $.get([[@{/api/summoner-spells}]], $.param(parameters, true), function(json) {
                     callback({ draw: data.draw, recordsTotal: json.page.totalElements,
-                        recordsFiltered: json.page.totalElements, data: json._embedded.summonerSpells
+                        recordsFiltered: json.page.totalElements,
+                        data: typeof json._embedded == 'undefined' ? {} : json._embedded.summonerSpells
                     });
                 }
             );
@@ -139,7 +146,7 @@ $(function() {
                         text: [[#{admin.summonerSpell.overwrite}]]
                     });
                     var popup = $('<div>', {
-                        class: 'ui negative message hidden popup',
+                        class: 'ui negative message hidden popup'
                     }).wrapInner($('<p>').append($('<i>', {
                         class: 'warning circle icon'
                     })).append($('<span>', {
@@ -156,7 +163,7 @@ $(function() {
                         text: [[#{admin.summonerSpell.delete}]]
                     });
                     var popup = $('<div>', {
-                        class: 'ui negative message hidden popup',
+                        class: 'ui negative message hidden popup'
                     }).wrapInner($('<p>').append($('<i>', {
                         class: 'warning circle icon'
                     })).append($('<span>', {
@@ -183,6 +190,15 @@ $(function() {
         drawCallback: function(settings) {
             $('.summoner-spell-description').popup();
         }
+    });
+    $('.summoner-spells-search-input').keyup(function() {
+        var inputs = [];
+        $('.summoner-spells-search-input').each(function() {
+            if ($(this).val()) {
+                inputs.push($(this).data('column-name') + '|' + $(this).val());
+            }
+        });
+        dataTable.search(inputs).draw();
     });
     $('#summoner-spells tbody').on('click', '.secondary', function(event) {
         $(event.target).popup({

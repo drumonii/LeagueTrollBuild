@@ -83,7 +83,7 @@ public class ChampionsRetrieval {
 		if (truncate) {
 			championsRepository.deleteAll();
 		} else {
-			List<Champion> championsFromDb = (List<Champion>) championsRepository.findAll();
+			List<Champion> championsFromDb = championsRepository.findAll();
 			List<Champion> deletedChampions = ListUtils.subtract(championsFromDb, champions);
 			championsRepository.delete(deletedChampions);
 			champions = ListUtils.subtract(champions, championsFromDb);
@@ -91,7 +91,7 @@ public class ChampionsRetrieval {
 
 		imageFetcher.setImgsSrcs(champions.stream().map(Champion::getImage).collect(Collectors.toList()),
 				championsImgUri);
-		return (List<Champion>) championsRepository.save(champions);
+		return championsRepository.save(champions);
 	}
 
 	/**

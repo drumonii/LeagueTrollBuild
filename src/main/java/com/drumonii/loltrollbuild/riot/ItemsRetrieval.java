@@ -84,14 +84,14 @@ public class ItemsRetrieval {
 		if (truncate) {
 			itemsRepository.deleteAll();
 		} else {
-			List<Item> itemsFromDb = (List<Item>) itemsRepository.findAll();
+			List<Item> itemsFromDb = itemsRepository.findAll();
 			List<Item> deletedItems = ListUtils.subtract(itemsFromDb, items);
 			itemsRepository.delete(deletedItems);
 			items = ListUtils.subtract(items, itemsFromDb);
 		}
 
 		imageFetcher.setImgsSrcs(items.stream().map(Item::getImage).collect(Collectors.toList()), itemsImgUri);
-		return (List<Item>) itemsRepository.save(items);
+		return itemsRepository.save(items);
 	}
 
 	/**

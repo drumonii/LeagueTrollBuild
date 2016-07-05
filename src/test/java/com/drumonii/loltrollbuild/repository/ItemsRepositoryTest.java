@@ -9,18 +9,13 @@ import org.assertj.core.api.Condition;
 import org.junit.After;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 
 import java.io.IOException;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.data.domain.Sort.Direction.ASC;
 
 public class ItemsRepositoryTest extends BaseSpringTestRunner {
-
-	private static final String SUMMONERS_RIFT = "11";
 
 	@Autowired
 	private ItemsRepository itemsRepository;
@@ -357,29 +352,6 @@ public class ItemsRepositoryTest extends BaseSpringTestRunner {
 				.doesNotHave(new Condition<>(group -> group.contains("FlaskGroup"), "FlaskGroup"));
 		assertThat(forTrollBuild).extracting(Item::getGroup)
 				.doesNotHave(new Condition<>(group -> group.contains("RelicBase"), "RelicBase"));
-	}
-
-	@Test
-	public void findBy() throws IOException {
-		String responseBody = "{\"type\":\"item\",\"version\":\"5.23.1\",\"data\":{\"3901\":{\"id\":3901,\"name\":" +
-				"\"Fire at Will\",\"group\":\"GangplankRUpgrade01\",\"description\":\"Requires 500 Silver Serpents." +
-				"<br><br><unique>UNIQUE Passive:</unique> Cannon Barrage fires at an increasing rate over time " +
-				"(additional 6 waves over the duration).\",\"plaintext\":\"Cannon Barrage gains extra waves\"," +
-				"\"consumed\":true,\"requiredChampion\":\"Gangplank\",\"maps\":{\"1\":false,\"8\":true,\"10\":true," +
-				"\"11\":true,\"12\":true,\"14\":false},\"image\":{\"full\":\"3901.png\",\"sprite\":\"item3.png\"," +
-				"\"group\":\"item\",\"x\":384,\"y\":192,\"w\":48,\"h\":48},\"gold\":{\"base\":0,\"total\":0," +
-				"\"sell\":0,\"purchasable\":true}}}}";
-		Item fireAtWill = objectMapper.readValue(responseBody, ItemsResponse.class).getItems().get("3901");
-		itemsRepository.save(fireAtWill);
-
-		Page<Item> items = itemsRepository.findBy("fire", new PageRequest(0, 20, ASC, "name"));
-		assertThat(items).isNotEmpty().doesNotHaveDuplicates();
-
-		items = itemsRepository.findBy("upgrade", new PageRequest(0, 20, ASC, "name"));
-		assertThat(items).isNotEmpty().doesNotHaveDuplicates();
-
-		items = itemsRepository.findBy("GangPLANK", new PageRequest(0, 20, ASC, "name"));
-		assertThat(items).isNotEmpty().doesNotHaveDuplicates();
 	}
 
 }

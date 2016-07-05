@@ -7,6 +7,11 @@
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/datatables/media/css/dataTables.semanticui.min.css}" />
     <script th:src="@{/webjars/datatables/media/js/jquery.dataTables.min.js}"></script>
     <script th:src="@{/webjars/datatables/media/js/dataTables.semanticui.min.js}"></script>
+    <style>
+        #items_filter, #items-difference_filter {
+            display: none;
+        }
+    </style>
 </head>
 <body>
 <div layout:fragment="content">
@@ -21,9 +26,33 @@
         <thead>
         <tr>
             <th class="one wide"></th>
-            <th class="five wide" th:text="#{admin.item.name}">Name</th>
-            <th class="four wide" th:text="#{admin.item.group}">Group</th>
-            <th class="four wide" th:text="#{admin.item.requiredChampion}">Champion</th>
+            <th class="three wide">
+                <div class="ui input">
+                    <input class="items-difference-search-input" th:placeholder="#{admin.item.name.search}"
+                           type="text" data-column-index="1" />
+                </div>
+            </th>
+            <th class="three wide">
+                <div class="ui input">
+                    <input class="items-difference-search-input" th:placeholder="#{admin.item.group.search}"
+                           type="text" data-column-index="2" />
+                </div>
+            </th>
+            <th class="three wide">
+                <div class="ui input">
+                    <input class="items-difference-search-input" th:placeholder="#{admin.item.requiredChampion.search}"
+                           type="text" data-column-index="3" />
+                </div>
+            </th>
+            <th class="four wide"></th>
+            <th class="two wide"></th>
+        </tr>
+        <tr>
+            <th class="one wide"></th>
+            <th class="three wide" th:text="#{admin.item.name}">Name</th>
+            <th class="three wide" th:text="#{admin.item.group}">Group</th>
+            <th class="three wide" th:text="#{admin.item.requiredChampion}">Champion</th>
+            <th class="four wide" th:text="#{admin.item.maps}">Maps</th>
             <th class="two wide"></th>
         </tr>
         </thead>
@@ -37,8 +66,12 @@
                 </div>
             </td>
             <td th:text="${item.name}"></td>
-            <td th:text="${item.group}"></td>
-            <td th:text="${item.requiredChampion}"></td>
+            <td><span th:text="${item.group == null} ? #{none} : ${item.group}"></span></td>
+            <td><span th:text="${item.requiredChampion == null} ? #{none} : ${item.requiredChampion}"></span></td>
+            <td>
+                <span th:each="map, iterStat : ${T(com.drumonii.loltrollbuild.util.GameMapUtil).getAvailableMaps(item.maps)}"
+                          th:text="${iterStat.last} ? ${map} : |${map}, |"></span>
+            </td>
             <td>
                 <button class="ui fluid primary button" th:attr="data-item-id=${item.id}"
                         th:text="#{admin.item.save}" style="box-sizing:border-box;">Save</button>
@@ -53,7 +86,7 @@
         </tbody>
         <tfoot class="full-width">
         <tr>
-            <th colspan="5">
+            <th colspan="6">
                 <form id="save-items-form" class="ui form">
                     <div class="ui checkbox">
                         <input id="truncate" type="checkbox" name="truncate" />
@@ -79,9 +112,34 @@
         <thead>
         <tr>
             <th class="one wide"></th>
-            <th class="five wide" th:text="#{admin.item.name}">Name</th>
-            <th class="five wide" th:text="#{admin.item.group}">Group</th>
+            <th class="three wide">
+                <div class="ui input">
+                    <input class="items-search-input" th:placeholder="#{admin.item.name.search}" type="text"
+                       data-column-name="name" />
+                </div>
+            </th>
+            <th class="three wide">
+                <div class="ui input">
+                    <input class="items-search-input" th:placeholder="#{admin.item.group.search}" type="text"
+                           data-column-name="group" />
+                </div>
+            </th>
+            <th class="three wide">
+                <div class="ui input">
+                    <input class="items-search-input" th:placeholder="#{admin.item.requiredChampion.search}" type="text"
+                           data-column-name="requiredChampion" />
+                </div>
+            </th>
+            <th class="four wide"></th>
+            <th class="one wide"></th>
+            <th class="one wide"></th>
+        </tr>
+        <tr>
+            <th class="one wide"></th>
+            <th class="three wide" th:text="#{admin.item.name}">Name</th>
+            <th class="three wide" th:text="#{admin.item.group}">Group</th>
             <th class="three wide" th:text="#{admin.item.requiredChampion}">Champion</th>
+            <th class="four wide" th:text="#{admin.item.maps}">Maps</th>
             <th class="one wide"></th>
             <th class="one wide"></th>
         </tr>

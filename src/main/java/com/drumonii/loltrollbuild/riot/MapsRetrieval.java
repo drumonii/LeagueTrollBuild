@@ -73,14 +73,14 @@ public class MapsRetrieval {
 		if (truncate) {
 			mapsRepository.deleteAll();
 		} else {
-			List<GameMap> mapsFromDb = (List<GameMap>) mapsRepository.findAll();
+			List<GameMap> mapsFromDb = mapsRepository.findAll();
 			List<GameMap> deletedMaps = ListUtils.subtract(mapsFromDb, maps);
 			mapsRepository.delete(deletedMaps);
 			maps = ListUtils.subtract(maps, mapsFromDb);
 		}
 
 		imageFetcher.setImgsSrcs(maps.stream().map(GameMap::getImage).collect(Collectors.toList()), mapsImgUri);
-		return (List<GameMap>) mapsRepository.save(maps);
+		return mapsRepository.save(maps);
 	}
 
 	/**

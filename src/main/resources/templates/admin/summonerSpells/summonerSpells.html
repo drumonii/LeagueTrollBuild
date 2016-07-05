@@ -7,6 +7,11 @@
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/datatables/media/css/dataTables.semanticui.min.css}" />
     <script th:src="@{/webjars/datatables/media/js/jquery.dataTables.min.js}"></script>
     <script th:src="@{/webjars/datatables/media/js/dataTables.semanticui.min.js}"></script>
+    <style>
+        #summoner-spells_filter, #summoner-spells-difference_filter {
+            display: none;
+        }
+    </style>
 </head>
 <body>
 <div layout:fragment="content">
@@ -19,6 +24,17 @@
     <h3 class="ui dividing header" th:text="#{admin.summonerSpells}">Summoner Spells</h3>
     <table id="summoner-spells-difference" class="ui celled table" th:unless="${#lists.isEmpty(difference)}">
         <thead>
+        <tr>
+            <th class="one wide"></th>
+            <th class="three wide">
+                <div class="ui input">
+                    <input class="summoner-spells-difference-search-input"
+                           th:placeholder="#{admin.summonerSpell.name.search}" type="text" data-column-index="1" />
+                </div>
+            </th>
+            <th class="ten wide"></th>
+            <th class="two wide"></th>
+        </tr>
         <tr>
             <th class="one wide"></th>
             <th class="three wide" th:text="#{admin.summonerSpell.name}">Name</th>
@@ -77,6 +93,18 @@
 
     <table id="summoner-spells" class="ui celled table">
         <thead>
+        <tr>
+            <th class="one wide"></th>
+            <th class="three wide">
+                <div class="ui input">
+                    <input class="summoner-spells-search-input" th:placeholder="#{admin.summonerSpell.name.search}"
+                           type="text" data-column-name="name" />
+                </div>
+            </th>
+            <th class="eleven wide"></th>
+            <th class="one wide"></th>
+            <th class="one wide"></th>
+        </tr>
         <tr>
             <th class="one wide"></th>
             <th class="three wide" th:text="#{admin.summonerSpell.name}">Name</th>

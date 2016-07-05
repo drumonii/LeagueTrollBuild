@@ -11,7 +11,7 @@ import lombok.Setter;
  */
 @NoArgsConstructor
 @AllArgsConstructor
-public abstract class BaseResponse {
+abstract class BaseResponse {
 
 	@JsonProperty("type")
 	@Getter @Setter private String type;

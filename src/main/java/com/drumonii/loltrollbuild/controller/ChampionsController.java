@@ -1,13 +1,12 @@
 package com.drumonii.loltrollbuild.controller;
 
 import com.drumonii.loltrollbuild.model.Champion;
-import com.drumonii.loltrollbuild.model.GameMap;
 import com.drumonii.loltrollbuild.model.Item;
-import com.drumonii.loltrollbuild.model.SummonerSpell.GameMode;
 import com.drumonii.loltrollbuild.repository.ChampionsRepository;
 import com.drumonii.loltrollbuild.repository.ItemsRepository;
 import com.drumonii.loltrollbuild.repository.MapsRepository;
 import com.drumonii.loltrollbuild.repository.SummonerSpellsRepository;
+import com.drumonii.loltrollbuild.util.GameMapUtil;
 import com.drumonii.loltrollbuild.util.RandomizeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -16,10 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
-import static com.drumonii.loltrollbuild.model.SummonerSpell.GameMode.ARAM;
-import static com.drumonii.loltrollbuild.model.SummonerSpell.GameMode.CLASSIC;
 import static org.springframework.data.domain.Sort.Direction.ASC;
 
 /**
@@ -55,8 +51,7 @@ public class ChampionsController {
 	public String champion(@PathVariable String value, Model model) {
 		Champion champion;
 		try {
-			int id = Integer.valueOf(value);
-			champion = championsRepository.findOne(id);
+			champion = championsRepository.findOne(Integer.valueOf(value));
 		} catch (NumberFormatException e) {
 			champion = championsRepository.findByName(value);
 		}
@@ -64,10 +59,17 @@ public class ChampionsController {
 			return "redirect:/champions";
 		}
 		model.addAttribute(champion);
-		model.addAttribute("maps", eligibleMaps());
+		model.addAttribute("maps", GameMapUtil.eligibleMaps(mapsRepository.findAll()));
 		return "champions/champion";
 	}
 
+	/**
+	 * Generats the full troll build based on the specified {@link Champion} and map ID.
+	 *
+	 * @param champion the {@link Champion} to create the troll build for
+	 * @param mapId the map ID to generate the troll build
+	 * @return a {@link Map} of build type key with {@link List} of values.
+	 */
 	@RequestMapping(value = "/{id}/troll-build", method = RequestMethod.GET)
 	@ResponseBody
 	public Map<String, List<?>> trollBuild(@PathVariable("id") Champion champion, @RequestParam String mapId) {
@@ -87,56 +89,12 @@ public class ChampionsController {
 
 		// Summoner Spells
 		trollBuild.put("summoner-spells",
-				RandomizeUtil.getRandoms(summonerSpellsRepository.forTrollBuild(getModeFromMap(mapId)), SPELLS_MAX));
+				RandomizeUtil.getRandoms(summonerSpellsRepository.forTrollBuild(
+						GameMapUtil.getModeFromMap(mapsRepository.findOne(Integer.valueOf(mapId)))), SPELLS_MAX));
 
 		// Trinket
 		trollBuild.put("trinket", Arrays.asList(RandomizeUtil.getRandom(itemsRepository.trinkets(mapId))));
 		return trollBuild;
-	}
-
-	/**
-	 * Gets {@link List} of all {@link GameMap}s that are eligible for the troll build. Map names are transformed into a
-	 * more legible format. Eligible maps: Twisted Treeline, Summoner's Rift, and Proving Grounds.
-	 *
-	 * @return only the eligible {@link List} of {@link GameMap}s
-	 */
-	List<GameMap> eligibleMaps() {
-		List<GameMap> maps = (List<GameMap>) mapsRepository.findAll();
-		for (GameMap map : maps) {
-			switch (map.getMapName()) {
-				case "NewTwistedTreeline":
-					map.setMapName("Twisted Treeline");
-					break;
-				case "SummonersRiftNew":
-					map.setMapName("Summoner's Rift");
-					break;
-				case "ProvingGroundsNew":
-					map.setMapName("Proving Grounds");
-					break;
-			}
-		}
-		return maps.stream()
-				.filter(map -> map.getMapName().equals("Twisted Treeline") ||
-						map.getMapName().equals("Summoner's Rift") || map.getMapName().equals("Proving Grounds"))
-				.sorted((map1, map2) -> map1.getMapName().compareTo(map2.getMapName()))
-				.collect(Collectors.toList());
-	}
-
-	/**
-	 * Gets a {@link GameMode} from a {@link GameMap}'s ID. If the map isn't the Howling Abyss (Proving Grounds) then
-	 * the game mode is considered as "CLASSIC", otherwise "ARAM" is returned.
-	 *
-	 * @param mapId the {@link GameMap}'s ID
-	 * @return the {@link GameMode}
-	 * @see <a href="http://leagueoflegends.wikia.com/wiki/Category:Game_modes">Game Modes</a>
-	 */
-	GameMode getModeFromMap(String mapId) {
-		GameMap map = mapsRepository.findOne(Integer.valueOf(mapId));
-		GameMode mode = CLASSIC;
-		if (map.getMapName().equals("ProvingGroundsNew")) {
-			mode = ARAM;
-		}
-		return mode;
 	}
 
 }

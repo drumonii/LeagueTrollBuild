@@ -5,7 +5,7 @@
 <script th:fragment="script">
 /*<![CDATA[*/
 $(function() {
-    $('#champions-difference').DataTable({
+    var differenceDataTable = $('#champions-difference').DataTable({
         order: [ [1, 'asc'] ],
         columnDefs: [
             { orderable: false, targets: [0, 3, 5] },
@@ -25,6 +25,9 @@ $(function() {
                 previous: [[#{dataTables.paginate.previous}]]
             }
         }
+    });
+    $('.champions-different-search-input').keyup(function() {
+        differenceDataTable.column($(this).data('column-index')).search($(this).val()).draw();
     });
     $('#champions-difference tbody').on('click', '.primary', function(event) {
         $(event.target).popup({
@@ -81,7 +84,7 @@ $(function() {
         });
         event.preventDefault();
     });
-    $('#champions').DataTable({
+    var dataTable = $('#champions').DataTable({
         processing: true,
         serverSide: true,
         order: [ [1, 'asc'] ],
@@ -94,15 +97,19 @@ $(function() {
             });
             var parameters = {};
             if (data.search.value) {
-                parameters['term'] = data.search.value;
+                var searches = data.search.value.split(',');
+                $.each(searches, function(index, value) {
+                    var search = value.split('|');
+                    parameters[search[0]] = search[1];
+                });
             }
             parameters['page'] = Math.ceil(data.start / data.length);
             parameters['size'] = data.length;
             parameters['sort'] = sorts;
-            $.get(parameters.hasOwnProperty('term') ? [[@{/api/champions/search/find-by}]] : [[@{/api/champions}]],
-                $.param(parameters, true), function(json) {
+            $.get([[@{/api/champions}]], $.param(parameters, true), function(json) {
                     callback({ draw: data.draw, recordsTotal: json.page.totalElements,
-                        recordsFiltered: json.page.totalElements, data: json._embedded.champions
+                        recordsFiltered: json.page.totalElements,
+                        data: typeof json._embedded == 'undefined' ? {} : json._embedded.champions
                     });
                 }
             );
@@ -135,7 +142,7 @@ $(function() {
                         text: [[#{admin.champion.overwrite}]]
                     });
                     var popup = $('<div>', {
-                        class: 'ui negative message hidden popup',
+                        class: 'ui negative message hidden popup'
                     }).wrapInner($('<p>').append($('<i>', {
                         class: 'warning circle icon'
                     })).append($('<span>', {
@@ -152,7 +159,7 @@ $(function() {
                         text: [[#{admin.champion.delete}]]
                     });
                     var popup = $('<div>', {
-                        class: 'ui negative message hidden popup',
+                        class: 'ui negative message hidden popup'
                     }).wrapInner($('<p>').append($('<i>', {
                         class: 'warning circle icon'
                     })).append($('<span>', {
@@ -176,6 +183,15 @@ $(function() {
                 previous: [[#{dataTables.paginate.previous}]]
             }
         }
+    });
+    $('.champions-search-input').keyup(function() {
+        var inputs = [];
+        $('.champions-search-input').each(function() {
+            if ($(this).val()) {
+                inputs.push($(this).data('column-name') + '|' + $(this).val());
+            }
+        });
+        dataTable.search(inputs).draw();
     });
     $('#champions tbody').on('click', '.secondary', function(event) {
         $(event.target).popup({

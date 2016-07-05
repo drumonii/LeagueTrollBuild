@@ -110,8 +110,17 @@ include::{snippets}/summonerSpellsForTrollBuild/response-fields.adoc[]
 
 [[resources-summoner-spells-find]]
 === Find a Summoner Spell
-A `GET` request will retrieve all `Summoner Spell` s from a search term.
+A `GET` request will retrieve all `Summoner Spell` s filtered by its fields as query parameters with case insensitive values.
 include::{snippets}/summonerSpellsFindBy/http-request.adoc[]
+
+[[supported-summoner-spell-query-parameters]]
+.Supported Query Parameter Fields
+|===
+|Parameter
+
+|name
+
+|===
 
 ==== Example Usage
 Usage with `CURL`:
@@ -220,8 +229,21 @@ include::{snippets}/itemsForTrollBuild/response-fields.adoc[]
 
 [[resources-items-find]]
 === Find an Item
-A `GET` request will retrieve all `Item` s from a search term.
+A `GET` request will retrieve all `Item` s filtered by its fields as query parameters with case insensitive values.
 include::{snippets}/itemsFindBy/http-request.adoc[]
+
+[[supported-item-query-parameters]]
+.Supported Query Parameter Fields
+|===
+|Parameter
+
+|name
+
+|group
+
+|requiredChampion
+
+|===
 
 ==== Example Usage
 Usage with `CURL`:
@@ -269,8 +291,21 @@ include::{snippets}/getChampion/response-fields.adoc[]
 
 [[resources-champions-find]]
 === Find a Champion
-A `GET` request will retrieve all `Champions` s from a search term.
+A `GET` request will retrieve all `Champions` s filtered by its fields as query parameters with case insensitive values.
 include::{snippets}/championsFindBy/http-request.adoc[]
+
+[[supported-champion-query-parameters]]
+.Supported Query Parameter Fields
+|===
+|Parameter
+
+|name
+
+|title
+
+|partype
+
+|===
 
 ==== Example Usage
 Usage with `CURL`:
@@ -317,8 +352,17 @@ include::{snippets}/getMap/response-fields.adoc[]
 
 [[resources-maps-find]]
 === Find a Map
-A `GET` request will retrieve all `Map` s from a search term.
+A `GET` request will retrieve all `Map` s filtered by its fields as query parameters with case insensitive values.
 include::{snippets}/mapsFindBy/http-request.adoc[]
+
+[[supported-map-query-parameters]]
+.Supported Query Parameter Fields
+|===
+|Parameter
+
+|mapName
+
+|===
 
 ==== Example Usage
 Usage with `CURL`:

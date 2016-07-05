@@ -99,8 +99,34 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 								.description("An array of game modes eligible with the Summoner Spell"),
 						fieldWithPath("_links")
 								.description("Links to resources related to Summoner Spells"),
-						fieldWithPath("_links.search")
-								.description("Links to Summoner Spell searches"),
+						fieldWithPath("page")
+								.description("Current Page settings of the pagination"))));
+
+		responseBody = "{\"type\":\"summoner\",\"version\":\"6.8.1\",\"data\":{\"SummonerPoroThrow\":{\"name\":" +
+				"\"Poro Toss\",\"description\":\"Toss a Poro at your enemies. If it hits, you can quickly travel to " +
+				"your target as a follow up.\",\"image\":{\"full\":\"SummonerPoroThrow.png\",\"sprite\":" +
+				"\"spell0.png\",\"group\":\"spell\",\"x\":48,\"y\":48,\"w\":48,\"h\":48},\"cooldown\":[20],\"id\":31," +
+				"\"key\":\"SummonerPoroThrow\",\"modes\":[\"KINGPORO\"]}}}";
+		summonerSpellsRepository.save(objectMapper.readValue(responseBody, SummonerSpellsResponse.class)
+				.getSummonerSpells().get("SummonerPoroThrow"));
+
+		mockMvc.perform(get(apiPath + "/summoner-spells?name={name}", "poro"))
+				.andExpect(status().isOk())
+				.andDo(document("summonerSpellsFindBy", responseFields(
+						fieldWithPath("_embedded.summonerSpells")
+								.description("An array of Summoner Spells"),
+						fieldWithPath("_embedded.summonerSpells[*].name")
+								.description("The name of the Summoner Spell"),
+						fieldWithPath("_embedded.summonerSpells[*].description")
+								.description("The description of the Summoner Spell"),
+						fieldWithPath("_embedded.summonerSpells[*].image")
+								.description("The image of the Summoner Spell"),
+						fieldWithPath("_embedded.summonerSpells[*].cooldown")
+								.description("An array of cooldown values of the Summoner Spell"),
+						fieldWithPath("_embedded.summonerSpells[*].modes")
+								.description("An array of game modes eligible with the Summoner Spell"),
+						fieldWithPath("_links")
+								.description("Link to the self Summoner Spell"),
 						fieldWithPath("page")
 								.description("Current Page settings of the pagination"))));
 	}
@@ -140,10 +166,10 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 				"or large monster or enemy minion.\",\"image\":{\"full\":\"SummonerSmite.png\",\"sprite\":" +
 				"\"spell0.png\",\"group\":\"spell\",\"x\":96,\"y\":48,\"w\":48,\"h\":48},\"cooldown\":[90],\"id\":11," +
 				"\"key\":\"SummonerSmite\",\"modes\":[\"CLASSIC\",\"TUTORIAL\"]}}}";
-		SummonerSpell smite = summonerSpellsRepository.save(objectMapper.readValue(responseBody,
-				SummonerSpellsResponse.class).getSummonerSpells().get("SummonerSmite"));
+		summonerSpellsRepository.save(objectMapper.readValue(responseBody, SummonerSpellsResponse.class)
+				.getSummonerSpells().get("SummonerSmite"));
 
-		mockMvc.perform(get(apiPath + "/summoner-spells/search/for-troll-build?mode={mode}", "CLASSIC"))
+		mockMvc.perform(get(apiPath + "/summoner-spells/for-troll-build?mode={mode}", "CLASSIC"))
 				.andExpect(status().isOk())
 				.andDo(document("summonerSpellsForTrollBuild", responseFields(
 						fieldWithPath("_embedded.summonerSpells")
@@ -160,37 +186,6 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 								.description("An array of game modes eligible with the Summoner Spell"),
 						fieldWithPath("_links")
 								.description("Links to resources related to Summoner Spells"))));
-	}
-
-	@Test
-	public void summonerSpellsFindBy() throws Exception {
-		String responseBody = "{\"type\":\"summoner\",\"version\":\"6.8.1\",\"data\":{\"SummonerPoroThrow\":{" +
-				"\"name\":\"Poro Toss\",\"description\":\"Toss a Poro at your enemies. If it hits, you can quickly " +
-				"travel to your target as a follow up.\",\"image\":{\"full\":\"SummonerPoroThrow.png\",\"sprite\":" +
-				"\"spell0.png\",\"group\":\"spell\",\"x\":48,\"y\":48,\"w\":48,\"h\":48},\"cooldown\":[20],\"id\":31," +
-				"\"key\":\"SummonerPoroThrow\",\"modes\":[\"KINGPORO\"]}}}";
-		summonerSpellsRepository.save(objectMapper.readValue(responseBody, SummonerSpellsResponse.class)
-				.getSummonerSpells().get("SummonerPoroThrow"));
-
-		mockMvc.perform(get(apiPath + "/summoner-spells/search/find-by?term={term}", "poro"))
-				.andExpect(status().isOk())
-				.andDo(document("summonerSpellsFindBy", responseFields(
-						fieldWithPath("_embedded.summonerSpells")
-								.description("An array of Summoner Spells"),
-						fieldWithPath("_embedded.summonerSpells[*].name")
-								.description("The name of the Summoner Spell"),
-						fieldWithPath("_embedded.summonerSpells[*].description")
-								.description("The description of the Summoner Spell"),
-						fieldWithPath("_embedded.summonerSpells[*].image")
-								.description("The image of the Summoner Spell"),
-						fieldWithPath("_embedded.summonerSpells[*].cooldown")
-								.description("An array of cooldown values of the Summoner Spell"),
-						fieldWithPath("_embedded.summonerSpells[*].modes")
-								.description("An array of game modes eligible with the Summoner Spell"),
-						fieldWithPath("_links")
-								.description("Link to the self Summoner Spell"),
-						fieldWithPath("page")
-								.description("Current Page settings of the pagination"))));
 	}
 
 	/*
@@ -241,8 +236,52 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 								.description("The gold of the Item"),
 						fieldWithPath("_links")
 								.description("Links to resources related to Items"),
-						fieldWithPath("_links.search")
-								.description("Links to Item searches"),
+						fieldWithPath("page")
+								.description("Current Page settings of the pagination"))));
+
+		responseBody = "{\"type\":\"item\",\"version\":\"6.8.1\",\"data\":{\"3069\":{\"id\":3069,\"name\":" +
+				"\"Talisman of Ascension\",\"group\":\"GoldBase\",\"description\":\"<stats>+100% Base Health Regen " +
+				"<br><mana>+100% Base Mana Regen <br></mana>+10% Cooldown Reduction</stats><br><br><unique>UNIQUE " +
+				"Passive - Favor:</unique> Being near a minion's death without dealing the killing blow grants 6 Gold" +
+				" and 10 Health.<br><active>UNIQUE Active:</active> Grants nearby allies +40% Movement Speed for 3" +
+				" seconds (60 second cooldown).<br><br><groupLimit>Limited to 1 Gold Income Item.</groupLimit><br>" +
+				"<br><rules><font color='#447777'>''Praise the sun.'' - Historian Shurelya, 22 September, 25 CLE" +
+				"</font></rules>\",\"from\":[\"3096\",\"3114\"],\"maps\":{\"1\":\"false\",\"8\":\"true\",\"10\":" +
+				"\"true\",\"11\":\"true\",\"12\":\"true\",\"14\":\"false\"},\"image\":{\"full\":\"3069.png\"," +
+				"\"sprite\":\"item0.png\",\"group\":\"item\",\"x\":144,\"y\":384,\"w\":48,\"h\":48},\"gold\":" +
+				"{\"base\":800,\"total\":2200,\"sell\":880,\"purchasable\":\"true\"}}}}";
+		itemsRepository.save(objectMapper.readValue(responseBody, ItemsResponse.class).getItems().get("3069"));
+
+		mockMvc.perform(get(apiPath + "/items?name={name}", "talisman"))
+				.andExpect(status().isOk())
+				.andDo(document("itemsFindBy", responseFields(
+						fieldWithPath("_embedded.items")
+								.description("An array of Items"),
+						fieldWithPath("_embedded.items[*].name")
+								.description("The name of the Item"),
+						fieldWithPath("_embedded.items[*].group")
+								.type(JsonFieldType.STRING)
+								.description("The group of the Item"),
+						fieldWithPath("_embedded.items[*].consumed")
+								.type(JsonFieldType.BOOLEAN)
+								.description("Whether the Item is consumable"),
+						fieldWithPath("_embedded.items[*].description")
+								.description("The group of the Item"),
+						fieldWithPath("_embedded.items[*].from")
+								.description("An array of Item IDs that the Item is built from as part of the Item's recipe"),
+						fieldWithPath("_embedded.items[*].into")
+								.description("An array of Item IDs that the Item builds into as part of the Item's recipe"),
+						fieldWithPath("_embedded.items[*].requiredChampion")
+								.type(JsonFieldType.STRING)
+								.description("The required champion of the Item"),
+						fieldWithPath("_embedded.items[*].maps")
+								.description("A map of Map IDs keys and boolean values whether the Item can be purchased in the Map"),
+						fieldWithPath("_embedded.items[*].image")
+								.description("The image of the Item"),
+						fieldWithPath("_embedded.items[*].gold")
+								.description("The gold of the Item"),
+						fieldWithPath("_links")
+								.description("Links to resources related to Items"),
 						fieldWithPath("page")
 								.description("Current Page settings of the pagination"))));
 	}
@@ -306,7 +345,7 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 				"{\"base\":600,\"total\":900,\"sell\":630,\"purchasable\":\"true\"}}}}";
 		itemsRepository.save(objectMapper.readValue(responseBody, ItemsResponse.class).getItems().get("3158"));
 
-		mockMvc.perform(get(apiPath + "/items/search/boots?mapId={mapId}", "11"))
+		mockMvc.perform(get(apiPath + "/items/boots?mapId={mapId}", "11"))
 				.andExpect(status().isOk())
 				.andDo(document("bootsItems", responseFields(
 						fieldWithPath("_embedded.items")
@@ -352,7 +391,7 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 				"\"total\":0,\"sell\":0,\"purchasable\":\"true\"}}}}";
 		itemsRepository.save(objectMapper.readValue(responseBody, ItemsResponse.class).getItems().get("3341"));
 
-		mockMvc.perform(get(apiPath + "/items/search/trinkets?mapId={mapId}", "11"))
+		mockMvc.perform(get(apiPath + "/items/trinkets?mapId={mapId}", "11"))
 				.andExpect(status().isOk())
 				.andDo(document("trinketItems", responseFields(
 						fieldWithPath("_embedded.items")
@@ -395,7 +434,7 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 				"\"w\":48,\"h\":48},\"gold\":{\"base\":0,\"total\":0,\"sell\":0,\"purchasable\":\"false\"}}}}";
 		itemsRepository.save(objectMapper.readValue(responseBody, ItemsResponse.class).getItems().get("3200"));
 
-		mockMvc.perform(get(apiPath + "/items/search/viktor-only"))
+		mockMvc.perform(get(apiPath + "/items/viktor-only"))
 				.andExpect(status().isOk())
 				.andDo(document("viktorOnlyItems", responseFields(
 						fieldWithPath("_embedded.items")
@@ -441,7 +480,7 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 				"\"total\":2650,\"sell\":1855,\"purchasable\":\"true\"}}}}";
 		itemsRepository.save(objectMapper.readValue(responseBody, ItemsResponse.class).getItems().get("3056"));
 
-		mockMvc.perform(get(apiPath + "/items/search/for-troll-build?mapId={mapId}", "11"))
+		mockMvc.perform(get(apiPath + "/items/for-troll-build?mapId={mapId}", "11"))
 				.andExpect(status().isOk())
 				.andDo(document("itemsForTrollBuild", responseFields(
 						fieldWithPath("_embedded.items")
@@ -471,55 +510,6 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 								.description("The gold of the Item"),
 						fieldWithPath("_links")
 								.description("Links to resources related to Items"))));
-	}
-
-	@Test
-	public void itemsFindBy() throws Exception {
-		String responseBody = "{\"type\":\"item\",\"version\":\"6.8.1\",\"data\":{\"3069\":{\"id\":3069,\"name\":" +
-				"\"Talisman of Ascension\",\"group\":\"GoldBase\",\"description\":\"<stats>+100% Base Health Regen " +
-				"<br><mana>+100% Base Mana Regen <br></mana>+10% Cooldown Reduction</stats><br><br><unique>UNIQUE " +
-				"Passive - Favor:</unique> Being near a minion's death without dealing the killing blow grants 6 Gold" +
-				" and 10 Health.<br><active>UNIQUE Active:</active> Grants nearby allies +40% Movement Speed for 3" +
-				" seconds (60 second cooldown).<br><br><groupLimit>Limited to 1 Gold Income Item.</groupLimit><br>" +
-				"<br><rules><font color='#447777'>''Praise the sun.'' - Historian Shurelya, 22 September, 25 CLE" +
-				"</font></rules>\",\"from\":[\"3096\",\"3114\"],\"maps\":{\"1\":\"false\",\"8\":\"true\",\"10\":" +
-				"\"true\",\"11\":\"true\",\"12\":\"true\",\"14\":\"false\"},\"image\":{\"full\":\"3069.png\"," +
-				"\"sprite\":\"item0.png\",\"group\":\"item\",\"x\":144,\"y\":384,\"w\":48,\"h\":48},\"gold\":" +
-				"{\"base\":800,\"total\":2200,\"sell\":880,\"purchasable\":\"true\"}}}}";
-		itemsRepository.save(objectMapper.readValue(responseBody, ItemsResponse.class).getItems().get("3069"));
-
-		mockMvc.perform(get(apiPath + "/items/search/find-by?term={term}", "talisman"))
-				.andExpect(status().isOk())
-				.andDo(document("itemsFindBy", responseFields(
-						fieldWithPath("_embedded.items")
-								.description("An array of Items"),
-						fieldWithPath("_embedded.items[*].name")
-								.description("The name of the Item"),
-						fieldWithPath("_embedded.items[*].group")
-								.type(JsonFieldType.STRING)
-								.description("The group of the Item"),
-						fieldWithPath("_embedded.items[*].consumed")
-								.type(JsonFieldType.BOOLEAN)
-								.description("Whether the Item is consumable"),
-						fieldWithPath("_embedded.items[*].description")
-								.description("The group of the Item"),
-						fieldWithPath("_embedded.items[*].from")
-								.description("An array of Item IDs that the Item is built from as part of the Item's recipe"),
-						fieldWithPath("_embedded.items[*].into")
-								.description("An array of Item IDs that the Item builds into as part of the Item's recipe"),
-						fieldWithPath("_embedded.items[*].requiredChampion")
-								.type(JsonFieldType.STRING)
-								.description("The required champion of the Item"),
-						fieldWithPath("_embedded.items[*].maps")
-								.description("A map of Map IDs keys and boolean values whether the Item can be purchased in the Map"),
-						fieldWithPath("_embedded.items[*].image")
-								.description("The image of the Item"),
-						fieldWithPath("_embedded.items[*].gold")
-								.description("The gold of the Item"),
-						fieldWithPath("_links")
-								.description("Links to resources related to Items"),
-						fieldWithPath("page")
-								.description("Current Page settings of the pagination"))));
 	}
 
 	/*
@@ -554,8 +544,35 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 								.description("The ability resource of the Champion"),
 						fieldWithPath("_links")
 								.description("Links to resources related to Champions"),
-						fieldWithPath("_links.search")
-								.description("Links to Champion searches"),
+						fieldWithPath("page")
+								.description("Current Page settings of the pagination"))));
+
+		responseBody = "{\"type\":\"champion\",\"version\":\"6.8.1\",\"data\":{\"Blitzcrank\":{\"id\":53,\"key\":" +
+				"\"Blitzcrank\",\"name\":\"Blitzcrank\",\"title\":\"the Great Steam Golem\",\"image\":{\"full\":" +
+				"\"Blitzcrank.png\",\"sprite\":\"champion0.png\",\"group\":\"champion\",\"x\":432,\"y\":0,\"w\":48," +
+				"\"h\":48},\"tags\":[\"Tank\",\"Fighter\"],\"partype\":\"MP\"}}}";
+		championsRepository.save(objectMapper.readValue(responseBody, ChampionsResponse.class).getChampions()
+				.get("Blitzcrank"));
+
+		mockMvc.perform(get(apiPath + "/champions?name={name}", "blitz"))
+				.andExpect(status().isOk())
+				.andDo(document("championsFindBy", responseFields(
+						fieldWithPath("_embedded.champions")
+								.description("An array of Champions"),
+						fieldWithPath("_embedded.champions[*].key")
+								.description("The key of the Champion. Usually the same as the name"),
+						fieldWithPath("_embedded.champions[*].name")
+								.description("The name of the Champion"),
+						fieldWithPath("_embedded.champions[*].title")
+								.description("The title of the Champion"),
+						fieldWithPath("_embedded.champions[*].image")
+								.description("The image of the Champion"),
+						fieldWithPath("_embedded.champions[*].tags")
+								.description("An array of tags of the Champion"),
+						fieldWithPath("_embedded.champions[*].partype")
+								.description("The ability resource of the Champion"),
+						fieldWithPath("_links")
+								.description("Links to resources related to Champions"),
 						fieldWithPath("page")
 								.description("Current Page settings of the pagination"))));
 	}
@@ -589,39 +606,6 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 								.description("Link to the self Champion"))));
 	}
 
-	@Test
-	public void championsFindBy() throws Exception {
-		String responseBody = "{\"type\":\"champion\",\"version\":\"6.8.1\",\"data\":{\"Blitzcrank\":{\"id\":53," +
-				"\"key\":\"Blitzcrank\",\"name\":\"Blitzcrank\",\"title\":\"the Great Steam Golem\",\"image\":" +
-				"{\"full\":\"Blitzcrank.png\",\"sprite\":\"champion0.png\",\"group\":\"champion\",\"x\":432,\"y\":0," +
-				"\"w\":48,\"h\":48},\"tags\":[\"Tank\",\"Fighter\"],\"partype\":\"MP\"}}}";
-		championsRepository.save(objectMapper.readValue(responseBody, ChampionsResponse.class).getChampions()
-				.get("Blitzcrank"));
-
-		mockMvc.perform(get(apiPath + "/champions/search/find-by?term={term}", "fighter"))
-				.andExpect(status().isOk())
-				.andDo(document("championsFindBy", responseFields(
-						fieldWithPath("_embedded.champions")
-								.description("An array of Champions"),
-						fieldWithPath("_embedded.champions[*].key")
-								.description("The key of the Champion. Usually the same as the name"),
-						fieldWithPath("_embedded.champions[*].name")
-								.description("The name of the Champion"),
-						fieldWithPath("_embedded.champions[*].title")
-								.description("The title of the Champion"),
-						fieldWithPath("_embedded.champions[*].image")
-								.description("The image of the Champion"),
-						fieldWithPath("_embedded.champions[*].tags")
-								.description("An array of tags of the Champion"),
-						fieldWithPath("_embedded.champions[*].partype")
-								.description("The ability resource of the Champion"),
-						fieldWithPath("_links")
-								.description("Links to resources related to Champions"),
-						fieldWithPath("page")
-								.description("Current Page settings of the pagination"))));
-	}
-
-
 	/*
 	 * Maps doc
 	 */
@@ -636,6 +620,25 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 		mockMvc.perform(get(apiPath + "/maps"))
 				.andExpect(status().isOk())
 				.andDo(document("getMaps", responseFields(
+						fieldWithPath("_embedded.maps")
+								.description("An array of Maps"),
+						fieldWithPath("_embedded.maps[*].mapName")
+								.description("The name of the Map"),
+						fieldWithPath("_embedded.maps[*].image")
+								.description("The image of the Map"),
+						fieldWithPath("_links")
+								.description("Links to resources related to Maps"),
+						fieldWithPath("page")
+								.description("Current Page settings of the pagination"))));
+
+		responseBody = "{\"type\":\"map\",\"version\":\"6.8.1\",\"data\":{\"10\":{\"mapName\":\"NewTwistedTreeline\"," +
+				"\"mapId\":10,\"image\":{\"full\":\"map10.png\",\"sprite\":\"map0.png\",\"group\":\"map\",\"x\":0," +
+				"\"y\":0,\"w\":48,\"h\":48}}}}";
+		mapsRepository.save(objectMapper.readValue(responseBody, MapsResponse.class).getMaps().get("10"));
+
+		mockMvc.perform(get(apiPath + "/maps?mapName={mapName}", "treeline"))
+				.andExpect(status().isOk())
+				.andDo(document("mapsFindBy", responseFields(
 						fieldWithPath("_embedded.maps")
 								.description("An array of Maps"),
 						fieldWithPath("_embedded.maps[*].mapName")
@@ -665,28 +668,6 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 								.description("The image of the Map"),
 						fieldWithPath("_links")
 								.description("Links to resources related to Maps"))));
-	}
-
-	@Test
-	public void mapsFindBy() throws Exception {
-		String responseBody = "{\"type\":\"map\",\"version\":\"6.8.1\",\"data\":{\"10\":{\"mapName\":" +
-				"\"NewTwistedTreeline\",\"mapId\":10,\"image\":{\"full\":\"map10.png\",\"sprite\":\"map0.png\"," +
-				"\"group\":\"map\",\"x\":0,\"y\":0,\"w\":48,\"h\":48}}}}";
-		mapsRepository.save(objectMapper.readValue(responseBody, MapsResponse.class).getMaps().get("10"));
-
-		mockMvc.perform(get(apiPath + "/maps/search/find-by?term={term}", "treeline"))
-				.andExpect(status().isOk())
-				.andDo(document("mapsFindBy", responseFields(
-						fieldWithPath("_embedded.maps")
-								.description("An array of Maps"),
-						fieldWithPath("_embedded.maps[*].mapName")
-								.description("The name of the Map"),
-						fieldWithPath("_embedded.maps[*].image")
-								.description("The image of the Map"),
-						fieldWithPath("_links")
-								.description("Links to resources related to Maps"),
-						fieldWithPath("page")
-								.description("Current Page settings of the pagination"))));
 	}
 
 	/*
