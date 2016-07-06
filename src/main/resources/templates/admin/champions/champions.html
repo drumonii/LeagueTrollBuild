@@ -60,7 +60,7 @@
         <tr th:each="champion : ${difference}">
             <td>
                 <img class="ui rounded image" style="height:60px;width:auto;"
-                     th:src="@{http://ddragon.leagueoflegends.com/cdn/{patch}/img/champion/{image}
+                     th:src="@{https://ddragon.leagueoflegends.com/cdn/{patch}/img/champion/{image}
                      (patch=${latestSavedPatch}, image=${champion.image.full})}" />
             </td>
             <td th:text="${champion.name}"></td>

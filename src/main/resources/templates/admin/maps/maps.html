@@ -44,7 +44,7 @@
         <tr th:each="map : ${difference}">
             <td>
                 <img class="ui rounded image" style="height:60px;width:auto;"
-                     th:src="@{http://ddragon.leagueoflegends.com/cdn/{patch}/img/map/{image}
+                     th:src="@{https://ddragon.leagueoflegends.com/cdn/{patch}/img/map/{image}
                      (patch=${latestSavedPatch}, image=${map.image.full})}" />
             </td>
             <td th:text="${map.mapName}"></td>
