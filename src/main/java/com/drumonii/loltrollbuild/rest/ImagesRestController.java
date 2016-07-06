@@ -1,4 +1,4 @@
-package com.drumonii.loltrollbuild.controller;
+package com.drumonii.loltrollbuild.rest;
 
 import com.drumonii.loltrollbuild.model.Champion;
 import com.drumonii.loltrollbuild.model.GameMap;
@@ -6,6 +6,7 @@ import com.drumonii.loltrollbuild.model.Item;
 import com.drumonii.loltrollbuild.model.SummonerSpell;
 import com.drumonii.loltrollbuild.model.image.Image;
 import org.apache.commons.io.FilenameUtils;
+import org.springframework.http.CacheControl;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,47 +14,53 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * REST controller for returning images of a model as a web response body.
  */
 @RestController
 @RequestMapping("/img")
-public class ImagesController {
+public class ImagesRestController {
 
 	@RequestMapping(value = "/summoner-spells/{id}.*", method = RequestMethod.GET)
 	public ResponseEntity<byte[]> summonerSpellImg(@PathVariable("id") SummonerSpell summonerSpell) {
-		byte[] imgSrc = summonerSpell.getImage().getImgSrc();
 		return ResponseEntity.ok()
-				.contentLength(imgSrc.length)
+				.contentLength(summonerSpell.getImage().getImgSrc().length)
 				.contentType(MediaType.parseMediaType(createMediaType(summonerSpell.getImage())))
-				.body(imgSrc);
+				.cacheControl(CacheControl.maxAge(31556926, TimeUnit.SECONDS))
+				.lastModified(summonerSpell.getLastModifiedDate().getTime())
+				.body(summonerSpell.getImage().getImgSrc());
 	}
 
 	@RequestMapping(value = "/items/{id}.*", method = RequestMethod.GET)
 	public ResponseEntity<byte[]> itemImg(@PathVariable("id") Item item) {
-		byte[] imgSrc = item.getImage().getImgSrc();
 		return ResponseEntity.ok()
-				.contentLength(imgSrc.length)
+				.contentLength(item.getImage().getImgSrc().length)
 				.contentType(MediaType.parseMediaType(createMediaType(item.getImage())))
-				.body(imgSrc);
+				.cacheControl(CacheControl.maxAge(31556926, TimeUnit.SECONDS))
+				.lastModified(item.getLastModifiedDate().getTime())
+				.body(item.getImage().getImgSrc());
 	}
 
 	@RequestMapping(value = "/champions/{id}.*", method = RequestMethod.GET)
 	public ResponseEntity<byte[]> championImg(@PathVariable("id") Champion champion) {
-		byte[] imgSrc = champion.getImage().getImgSrc();
 		return ResponseEntity.ok()
-				.contentLength(imgSrc.length)
+				.contentLength(champion.getImage().getImgSrc().length)
 				.contentType(MediaType.parseMediaType(createMediaType(champion.getImage())))
-				.body(imgSrc);
+				.cacheControl(CacheControl.maxAge(31556926, TimeUnit.SECONDS))
+				.lastModified(champion.getLastModifiedDate().getTime())
+				.body(champion.getImage().getImgSrc());
 	}
 
 	@RequestMapping(value = "/maps/map{id}.*", method = RequestMethod.GET)
-	public ResponseEntity<byte[]> mapImg(@PathVariable("id") GameMap map) {
-		byte[] imgSrc = map.getImage().getImgSrc();
+	public ResponseEntity<byte[]> mapImg(@PathVariable("id") GameMap gameMap) {
 		return ResponseEntity.ok()
-				.contentLength(imgSrc.length)
-				.contentType(MediaType.parseMediaType(createMediaType(map.getImage())))
-				.body(imgSrc);
+				.contentLength(gameMap.getImage().getImgSrc().length)
+				.contentType(MediaType.parseMediaType(createMediaType(gameMap.getImage())))
+				.cacheControl(CacheControl.maxAge(31556926, TimeUnit.SECONDS))
+				.lastModified(gameMap.getLastModifiedDate().getTime())
+				.body(gameMap.getImage().getImgSrc());
 	}
 
 	/**

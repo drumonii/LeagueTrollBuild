@@ -48,7 +48,7 @@ public class ItemsRepositoryTest extends BaseSpringTestRunner {
 		assertThat(itemFromDb).isNotNull();
 		assertThat(itemFromDb.getImage()).isNotNull();
 		itemFromDb.setMaps(null); // It's empty/not null from the db
-		assertThat(itemFromDb).isEqualToIgnoringGivenFields(unmarshalledItem, "from", "gold");
+		assertThat(itemFromDb).isEqualToIgnoringGivenFields(unmarshalledItem, "from", "gold", "lastModifiedDate");
 
 		// Update
 		itemFromDb.setConsumed(true);

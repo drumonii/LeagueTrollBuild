@@ -5,9 +5,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
 
 /**
@@ -17,9 +20,10 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "CHAMPION")
+@EntityListeners(AuditingEntityListener.class)
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
+@EqualsAndHashCode(exclude = "lastModifiedDate")
 @ToString
 public class Champion implements Serializable {
 
@@ -40,6 +44,15 @@ public class Champion implements Serializable {
 	@JsonProperty("title")
 	@Getter @Setter private String title;
 
+	@Column(name = "PARTYPE", nullable = false)
+	@JsonProperty("partype")
+	@Getter @Setter private String partype;
+
+	@Column(name = "LAST_MODIFIED_DATE", nullable = false)
+	@LastModifiedDate
+	@JsonIgnore
+	@Getter @Setter private Date lastModifiedDate;
+
 	@OneToOne(cascade = CascadeType.ALL, optional = false)
 	@PrimaryKeyJoinColumn
 	@JsonManagedReference
@@ -51,10 +64,6 @@ public class Champion implements Serializable {
 	@Column(name = "TAG")
 	@JsonProperty("tags")
 	@Getter @Setter private Set<String> tags;
-
-	@Column(name = "PARTYPE", nullable = false)
-	@JsonProperty("partype")
-	@Getter @Setter private String partype;
 
 	@JsonIgnore
 	public boolean isViktor() {

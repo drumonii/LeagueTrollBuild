@@ -57,7 +57,7 @@ public class ItemsResponseTest extends BaseSpringTestRunner {
 				" up to 2 charges which refill upon visiting the shop. <br><br><rules>(A player may only have 3 <font" +
 				" color='#BBFFFF'>Stealth Wards</font> on the map at one time. Unique Passives with the same name " +
 				"don't stack.)</rules>", Arrays.asList("1039", "1041"), new HashSet<>(Arrays.asList("1411", "1410",
-				"1409", "1408")), null, new HashMap<String, Boolean>() {{ put("1", false); put("8", false);
+				"1409", "1408")), null, null, new HashMap<String, Boolean>() {{ put("1", false); put("8", false);
 				put("10", false);put("11", true); put("12", false); put("14", false); }}, new ItemImage("3711.png",
 				"item2.png", "item", new byte[0], 432, 192, 48, 48), new ItemGold(0, 350, 1050, 735, true, null));
 		assertThat(itemsResponse.getItems().get("3711")).isEqualToIgnoringGivenFields(item, "gold");

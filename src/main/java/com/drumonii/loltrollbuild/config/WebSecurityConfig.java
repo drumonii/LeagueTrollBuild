@@ -44,6 +44,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers(PATCH,  apiPath).hasRole(ADMIN_ROLE)
 				.antMatchers(DELETE, apiPath).hasRole(ADMIN_ROLE)
 			.and()
+			.headers().cacheControl().disable()
+			.and()
 			.formLogin()
 				.loginPage("/admin/login")
 				.defaultSuccessUrl("/admin")

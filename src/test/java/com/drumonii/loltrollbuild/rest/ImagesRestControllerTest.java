@@ -1,4 +1,4 @@
-package com.drumonii.loltrollbuild.controller;
+package com.drumonii.loltrollbuild.rest;
 
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.model.Champion;
@@ -19,11 +19,11 @@ import org.junit.After;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-public class ImagesControllerTest extends BaseSpringTestRunner {
+public class ImagesRestControllerTest extends BaseSpringTestRunner {
 	
 	@Autowired
 	private ObjectMapper objectMapper;
@@ -63,7 +63,9 @@ public class ImagesControllerTest extends BaseSpringTestRunner {
 
 		mockMvc.perform(get("/img/summoner-spells/{img}", smite.getId() + "." + fileExt))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType("image/" + fileExt));
+				.andExpect(content().contentType("image/" + fileExt))
+				.andExpect(header().string("Cache-Control", is("max-age=" + 31556926)))
+				.andExpect(header().dateValue("Last-Modified", smite.getLastModifiedDate().getTime()));
 	}
 
 	@Test
@@ -85,7 +87,9 @@ public class ImagesControllerTest extends BaseSpringTestRunner {
 
 		mockMvc.perform(get("/img/items/{img}", thornmail.getId() + "." + fileExt))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType("image/" + fileExt));
+				.andExpect(content().contentType("image/" + fileExt))
+				.andExpect(header().string("Cache-Control", is("max-age=" + 31556926)))
+				.andExpect(header().dateValue("Last-Modified", thornmail.getLastModifiedDate().getTime()));
 	}
 
 	@Test
@@ -101,7 +105,9 @@ public class ImagesControllerTest extends BaseSpringTestRunner {
 
 		mockMvc.perform(get("/img/champions/{img}", shen.getId() + "." + fileExt))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType("image/" + fileExt));
+				.andExpect(content().contentType("image/" + fileExt))
+				.andExpect(header().string("Cache-Control", is("max-age=" + 31556926)))
+				.andExpect(header().dateValue("Last-Modified", shen.getLastModifiedDate().getTime()));
 	}
 
 	@Test
@@ -116,7 +122,9 @@ public class ImagesControllerTest extends BaseSpringTestRunner {
 
 		mockMvc.perform(get("/img/maps/map{img}", summonersRift.getMapId() + "." + fileExt))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType("image/" + fileExt));
+				.andExpect(content().contentType("image/" + fileExt))
+				.andExpect(header().string("Cache-Control", is("max-age=" + 31556926)))
+				.andExpect(header().dateValue("Last-Modified", summonersRift.getLastModifiedDate().getTime()));
 	}
 
 }
