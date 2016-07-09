@@ -94,24 +94,18 @@ public class VersionsRetrievalTest extends BaseSpringTestRunner {
 
 	@Test
 	public void saveLatestPatch() throws Exception {
-		String responseBody = "\"6.5.1\"";
-		Version latestVersion = objectMapper.readValue(responseBody, Version.class);
-		versionsRepository.save(latestVersion);
-
 		mockMvc.perform(post("/riot/versions/latest").with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-				.andExpect(content().json(objectMapper.writeValueAsString(versions[0])));
+				.andExpect(content().json(objectMapper.writeValueAsString(this.versions[0])));
 		mockServer.verify();
 
-		assertThat(versionsRepository.findOne(latestVersion.getPatch())).isNull();
-		assertThat(versionsRepository.latestVersion()).isNotNull();
+		assertThat(versionsRepository.latestVersion()).isEqualTo(this.versions[0]);
 	}
 
 	@Test
 	public void saveLatestPatchNoChange() throws Exception {
-		String responseBody = "\"5.16.1\"";
-		Version latestVersion = objectMapper.readValue(responseBody, Version.class);
+		Version latestVersion = new Version("5.16.1");
 		versionsRepository.save(latestVersion);
 
 		mockMvc.perform(post("/riot/versions/latest").with(adminUser()).with(csrf()))
@@ -120,8 +114,8 @@ public class VersionsRetrievalTest extends BaseSpringTestRunner {
 				.andExpect(content().json(objectMapper.writeValueAsString(versions[0])));
 		mockServer.verify();
 
-		assertThat(versionsRepository.latestVersion()).isNotNull();
-		assertThat(versionsRepository.latestVersion().getPatch()).isEqualTo(latestVersion.getPatch());
+		assertThat(versionsRepository.latestVersion()).isNotNull()
+				.isEqualTo(latestVersion);
 	}
 
 }

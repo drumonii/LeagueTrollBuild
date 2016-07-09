@@ -71,16 +71,15 @@ public class VersionsRetrieval {
 	/**
 	 * Persists the latest patch {@link Version} from Riot. If the previous latest patch version is the same as the
 	 * current version from Riot, then no database changes are made and the existing patch version is returned.
-	 * Otherwise, the previous patch version is deleted from the database and the newest patch version is persisted.
+	 * Otherwise, the newest patch version is persisted.
 	 *
 	 * @param versions versions the {@link ModelAttribute} of {@link List} of {@link Version}s from Riot
 	 * @return the latest patch {@link Version} is persisted to the database or the existing patch version
 	 */
 	@RequestMapping(value = "/latest", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public Version saveLatestVersion(@ModelAttribute List<Version> versions) {
-		Version latestPatchVersion = versions.get(0);
+		Version latestPatchVersion = versions.stream().findFirst().orElse(new Version("0.0.0"));
 		if (!latestPatchVersion.equals(versionsRepository.latestVersion())) {
-			versionsRepository.deleteAll();
 			return versionsRepository.save(latestPatchVersion);
 		}
 		return latestPatchVersion;
