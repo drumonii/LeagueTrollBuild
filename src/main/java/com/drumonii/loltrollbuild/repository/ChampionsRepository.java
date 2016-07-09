@@ -43,6 +43,10 @@ public interface ChampionsRepository extends JpaRepository<Champion, Integer> {
 
 	@CacheEvict(allEntries = true)
 	@Override
+	<S extends Champion> List<S> save(Iterable<S> entities);
+
+	@CacheEvict(allEntries = true)
+	@Override
 	void deleteAll();
 
 }
