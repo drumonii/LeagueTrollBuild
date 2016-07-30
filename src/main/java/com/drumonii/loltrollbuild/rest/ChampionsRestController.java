@@ -47,8 +47,7 @@ public class ChampionsRestController {
 				.withIgnorePaths("id")
 				.withIgnoreNullValues();
 		Example<Champion> example = Example.of(champion, exampleMatcher);
-		return pagedAssembler.toResource(championsRepository.findAll(example, pageable),
-				entity -> new Resource<>(entity));
+		return pagedAssembler.toResource(championsRepository.findAll(example, pageable));
 	}
 
 }

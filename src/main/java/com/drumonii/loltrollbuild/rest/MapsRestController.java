@@ -45,8 +45,7 @@ public class MapsRestController {
 				.withIgnorePaths("mapId")
 				.withIgnoreNullValues();
 		Example<GameMap> example = Example.of(gameMap, exampleMatcher);
-		return pagedAssembler.toResource(mapsRepository.findAll(example, pageable),
-				entity -> new Resource<>(entity));
+		return pagedAssembler.toResource(mapsRepository.findAll(example, pageable));
 	}
 
 }

@@ -52,8 +52,7 @@ public class ItemsRestController {
 				.withIgnorePaths("id")
 				.withIgnoreNullValues();
 		Example<Item> example = Example.of(item, exampleMatcher);
-		return pagedAssembler.toResource(itemsRepository.findAll(example, pageable),
-				entity -> new Resource<>(entity));
+		return pagedAssembler.toResource(itemsRepository.findAll(example, pageable));
 	}
 
 	/**

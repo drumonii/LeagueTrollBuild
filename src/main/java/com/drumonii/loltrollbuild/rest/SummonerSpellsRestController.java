@@ -51,8 +51,7 @@ public class SummonerSpellsRestController {
 				.withIgnorePaths("id")
 				.withIgnoreNullValues();
 		Example<SummonerSpell> example = Example.of(summonerSpell, exampleMatcher);
-		return pagedAssembler.toResource(summonerSpellsRepository.findAll(example, pageable),
-				entity -> new Resource<>(entity));
+		return pagedAssembler.toResource(summonerSpellsRepository.findAll(example, pageable));
 	}
 
 	/**
