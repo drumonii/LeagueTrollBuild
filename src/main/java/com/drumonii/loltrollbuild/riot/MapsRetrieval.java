@@ -4,7 +4,6 @@ import com.drumonii.loltrollbuild.model.GameMap;
 import com.drumonii.loltrollbuild.repository.MapsRepository;
 import com.drumonii.loltrollbuild.riot.api.ImageFetcher;
 import com.drumonii.loltrollbuild.riot.api.MapsResponse;
-import com.drumonii.loltrollbuild.util.MapUtil;
 import org.apache.commons.collections4.ListUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -14,6 +13,8 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -48,9 +49,9 @@ public class MapsRetrieval {
 	 * @return the {@link List} of {@link GameMap} from Riot
 	 */
 	@RequestMapping(method = RequestMethod.GET)
-	public List<GameMap> maps() {
+	public Collection<GameMap> maps() {
 		MapsResponse response = restTemplate.getForObject(mapsUri.toString(), MapsResponse.class);
-		return MapUtil.getElementsFromMap(response.getMaps());
+		return response.getMaps().values();
 	}
 
 	/**
@@ -68,7 +69,7 @@ public class MapsRetrieval {
 	@RequestMapping(method = RequestMethod.POST)
 	public List<GameMap> saveMaps(@RequestParam(required = false) boolean truncate) {
 		MapsResponse response = restTemplate.getForObject(mapsUri.toString(), MapsResponse.class);
-		List<GameMap> maps = MapUtil.getElementsFromMap(response.getMaps());
+		List<GameMap> maps = new ArrayList<>(response.getMaps().values());
 
 		if (truncate) {
 			mapsRepository.deleteAll();

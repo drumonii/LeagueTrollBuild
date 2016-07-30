@@ -4,7 +4,6 @@ import com.drumonii.loltrollbuild.model.Champion;
 import com.drumonii.loltrollbuild.repository.ChampionsRepository;
 import com.drumonii.loltrollbuild.riot.api.ChampionsResponse;
 import com.drumonii.loltrollbuild.riot.api.ImageFetcher;
-import com.drumonii.loltrollbuild.util.MapUtil;
 import org.apache.commons.collections4.ListUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -16,6 +15,8 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -57,9 +58,9 @@ public class ChampionsRetrieval {
 	 * @return the {@link List} of {@link Champion} from Riot
 	 */
 	@RequestMapping(method = RequestMethod.GET)
-	public List<Champion> champions() {
+	public Collection<Champion> champions() {
 		ChampionsResponse response = restTemplate.getForObject(championsUri.toString(), ChampionsResponse.class);
-		return MapUtil.getElementsFromMap(response.getChampions());
+		return response.getChampions().values();
 	}
 
 	/**
@@ -78,7 +79,7 @@ public class ChampionsRetrieval {
 	@RequestMapping(method = RequestMethod.POST)
 	public List<Champion> saveChampions(@RequestParam(required = false) boolean truncate) {
 		ChampionsResponse response = restTemplate.getForObject(championsUri.toString(), ChampionsResponse.class);
-		List<Champion> champions = MapUtil.getElementsFromMap(response.getChampions());
+		List<Champion> champions = new ArrayList<>(response.getChampions().values());
 
 		if (truncate) {
 			championsRepository.deleteAll();

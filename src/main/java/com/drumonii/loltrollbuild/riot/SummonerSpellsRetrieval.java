@@ -4,7 +4,6 @@ import com.drumonii.loltrollbuild.model.SummonerSpell;
 import com.drumonii.loltrollbuild.repository.SummonerSpellsRepository;
 import com.drumonii.loltrollbuild.riot.api.ImageFetcher;
 import com.drumonii.loltrollbuild.riot.api.SummonerSpellsResponse;
-import com.drumonii.loltrollbuild.util.MapUtil;
 import org.apache.commons.collections4.ListUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -16,6 +15,8 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -57,10 +58,10 @@ public class SummonerSpellsRetrieval {
 	 * @return the {@link List} of {@link SummonerSpell} from Riot
 	 */
 	@RequestMapping(method = RequestMethod.GET)
-	public List<SummonerSpell> summonerSpells() {
+	public Collection<SummonerSpell> summonerSpells() {
 		SummonerSpellsResponse response = restTemplate.getForObject(summonerSpellsUri.toString(),
 				SummonerSpellsResponse.class);
-		return MapUtil.getElementsFromMap(response.getSummonerSpells());
+		return response.getSummonerSpells().values();
 	}
 
 	/**
@@ -80,7 +81,7 @@ public class SummonerSpellsRetrieval {
 	public List<SummonerSpell> saveSummonerSpells(@RequestParam(required = false) boolean truncate) {
 		SummonerSpellsResponse response = restTemplate.getForObject(summonerSpellsUri.toString(),
 				SummonerSpellsResponse.class);
-		List<SummonerSpell> summonerSpells = MapUtil.getElementsFromMap(response.getSummonerSpells());
+		List<SummonerSpell> summonerSpells = new ArrayList<>(response.getSummonerSpells().values());
 
 		if (truncate) {
 			summonerSpellsRepository.deleteAll();

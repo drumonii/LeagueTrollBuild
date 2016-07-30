@@ -4,7 +4,6 @@ import com.drumonii.loltrollbuild.model.Item;
 import com.drumonii.loltrollbuild.repository.ItemsRepository;
 import com.drumonii.loltrollbuild.riot.api.ImageFetcher;
 import com.drumonii.loltrollbuild.riot.api.ItemsResponse;
-import com.drumonii.loltrollbuild.util.MapUtil;
 import org.apache.commons.collections4.ListUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -16,6 +15,8 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -57,9 +58,9 @@ public class ItemsRetrieval {
 	 * @return the {@link List} of {@link Item} from Riot
 	 */
 	@RequestMapping(method = RequestMethod.GET)
-	public List<Item> items() {
+	public Collection<Item> items() {
 		ItemsResponse response = restTemplate.getForObject(itemsUri.toString(), ItemsResponse.class);
-		return MapUtil.getElementsFromMap(response.getItems());
+		return response.getItems().values();
 	}
 
 	/**
@@ -77,7 +78,7 @@ public class ItemsRetrieval {
 	@RequestMapping(method = RequestMethod.POST)
 	public List<Item> saveItems(@RequestParam(required = false) boolean truncate) {
 		ItemsResponse response = restTemplate.getForObject(itemsUri.toString(), ItemsResponse.class);
-		List<Item> items = MapUtil.getElementsFromMap(response.getItems()).stream()
+		List<Item> items = new ArrayList<>(response.getItems().values()).stream()
 				.filter(item -> item.getName() != null && item.getDescription() != null)
 				.collect(Collectors.toList());
 
