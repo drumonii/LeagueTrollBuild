@@ -76,11 +76,17 @@ public class GameMapUtilTest extends BaseSpringTestRunner {
 		GameMap crystalScar = objectMapper.readValue(responseBody, MapsResponse.class).getMaps().get("8");
 		mapsRepository.save(crystalScar);
 
+		responseBody = "{\"type\":\"map\",\"version\":\"6.3.1\",\"data\":{\"1\":{\"mapName\":\"SummonersRift\"," +
+				"\"mapId\":1,\"image\":{\"full\":\"map1.png\",\"sprite\":\"map0.png\",\"group\":\"map\",\"x\":144," +
+				"\"y\":0,\"w\":48,\"h\":48}}}}";
+		GameMap summonersRift = objectMapper.readValue(responseBody, MapsResponse.class).getMaps().get("1");
+		mapsRepository.save(summonersRift);
+
 		responseBody = "{\"type\":\"map\",\"version\":\"6.3.1\",\"data\":{\"11\":{\"mapName\":\"SummonersRiftNew\"," +
 				"\"mapId\":11,\"image\":{\"full\":\"map11.png\",\"sprite\":\"map0.png\",\"group\":\"map\",\"x\":144," +
 				"\"y\":0,\"w\":48,\"h\":48}}}}";
-		GameMap summonersRift = objectMapper.readValue(responseBody, MapsResponse.class).getMaps().get("11");
-		mapsRepository.save(summonersRift);
+		GameMap summonersRiftNew = objectMapper.readValue(responseBody, MapsResponse.class).getMaps().get("11");
+		mapsRepository.save(summonersRiftNew);
 
 		responseBody = "{\"type\":\"map\",\"version\":\"6.3.1\",\"data\":{\"12\":{\"mapName\":\"ProvingGroundsNew\"," +
 				"\"mapId\":12,\"image\":{\"full\":\"map12.png\",\"sprite\":\"map0.png\",\"group\":\"map\",\"x\":48," +
@@ -95,7 +101,7 @@ public class GameMapUtilTest extends BaseSpringTestRunner {
 		mapsRepository.save(twistedTreeline);
 
 		assertThat(eligibleMaps(mapsRepository.findAll())).extracting("mapId")
-				.containsExactly(provingGrounds.getMapId(), summonersRift.getMapId(), twistedTreeline.getMapId());
+				.containsExactly(provingGrounds.getMapId(), summonersRiftNew.getMapId(), twistedTreeline.getMapId());
 	}
 
 	@Test

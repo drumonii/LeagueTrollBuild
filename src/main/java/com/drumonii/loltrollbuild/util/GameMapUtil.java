@@ -19,6 +19,12 @@ import static com.drumonii.loltrollbuild.model.SummonerSpell.GameMode.CLASSIC;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class GameMapUtil {
 
+	private static final int SUMMONERS_RIFT_ID = 1;
+	private static final int CRYSTAL_SCAR_ID = 8;
+	private static final int TWISTED_TREELINE_ID = 10;
+	private static final int SUMMONERS_RIFT_NEW_ID = 11;
+	private static final int HOWLING_ABYSS_ID = 12;
+
 	private static final String CRYSTAL_SCAR = "Crystal Scar";
 	private static final String HOWLING_ABYSS = "Howling Abyss";
 	private static final String SUMMONERS_RIFT = "Summoner's Rift";
@@ -34,34 +40,34 @@ public class GameMapUtil {
 		try {
 			int mapId = Integer.valueOf(mapName);
 			switch (mapId) {
-			case 1:
-				return SUMMONERS_RIFT;
-			case 8:
-				return CRYSTAL_SCAR;
-			case 10:
-				return TWISTED_TREELINE;
-			case 11:
-				return SUMMONERS_RIFT;
-			case 12:
-				return HOWLING_ABYSS;
+				case SUMMONERS_RIFT_ID:
+					return SUMMONERS_RIFT;
+				case CRYSTAL_SCAR_ID:
+					return CRYSTAL_SCAR;
+				case TWISTED_TREELINE_ID:
+					return TWISTED_TREELINE;
+				case SUMMONERS_RIFT_NEW_ID:
+					return SUMMONERS_RIFT;
+				case HOWLING_ABYSS_ID:
+					return HOWLING_ABYSS;
 			}
 		} catch (NumberFormatException e) {
 			switch (mapName) {
-			case "SummonersRift":
-				return SUMMONERS_RIFT;
-			case "CrystalScar":
-				return CRYSTAL_SCAR;
-			case "NewTwistedTreeline":
-				return TWISTED_TREELINE;
-			case "SummonersRiftNew":
-				return SUMMONERS_RIFT;
-			case "ProvingGroundsNew":
-				return HOWLING_ABYSS;
-			default:
-				return mapName;
+				case "SummonersRift":
+					return SUMMONERS_RIFT;
+				case "CrystalScar":
+					return CRYSTAL_SCAR;
+				case "NewTwistedTreeline":
+					return TWISTED_TREELINE;
+				case "SummonersRiftNew":
+					return SUMMONERS_RIFT;
+				case "ProvingGroundsNew":
+					return HOWLING_ABYSS;
+				default:
+					return mapName;
 			}
 		}
-		return null; // Shouldn't happen
+		return ""; // Shouldn't happen
 	}
 
 	/**
@@ -72,12 +78,10 @@ public class GameMapUtil {
 	 * @return only the eligible {@link List} of {@link GameMap}s
 	 */
 	public static List<GameMap> eligibleMaps(List<GameMap> maps) {
-		for (GameMap map : maps) {
-			map.setMapName(GameMapUtil.getActualMapName(map.getMapName()));
-		}
 		return maps.stream()
-				.filter(map -> map.getMapName().equals("Twisted Treeline") ||
-						map.getMapName().equals("Summoner's Rift") || map.getMapName().equals("Howling Abyss"))
+				.map(map -> { map.setMapName(GameMapUtil.getActualMapName(map.getMapName())); return map; })
+				.filter(map -> map.getMapId() == TWISTED_TREELINE_ID ||
+						map.getMapId() == SUMMONERS_RIFT_NEW_ID || map.getMapId() == HOWLING_ABYSS_ID)
 				.sorted((map1, map2) -> map1.getMapName().compareTo(map2.getMapName()))
 				.collect(Collectors.toList());
 	}
