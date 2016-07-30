@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @Controller
 @RequestMapping("/admin/login")
-public class LoginController {
+public class AdminLoginController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String getLogin(@AuthenticationPrincipal UserDetails userDetails) {

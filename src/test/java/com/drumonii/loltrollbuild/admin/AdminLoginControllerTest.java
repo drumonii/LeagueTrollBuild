@@ -10,7 +10,7 @@ import static org.springframework.security.test.web.servlet.response.SecurityMoc
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-public class LoginControllerTest extends BaseSpringTestRunner {
+public class AdminLoginControllerTest extends BaseSpringTestRunner {
 
 	@Test
 	public void adminCanLoginAndLogout() throws Exception {
