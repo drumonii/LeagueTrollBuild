@@ -29,7 +29,7 @@ public class ErrorPageControllerTest extends BaseSpringTestRunner {
 				.requestAttr(RequestDispatcher.ERROR_REQUEST_URI, "/error"))
 				.andExpect(model().attributeExists("timestamp", "status", "error", "exception", "message", "path"))
 				.andExpect(model().attribute("error", is(HttpStatus.BAD_REQUEST.getReasonPhrase())))
-				.andExpect(view().name("400"));
+				.andExpect(view().name("/error/400"));
 	}
 
 	@Test
@@ -41,7 +41,7 @@ public class ErrorPageControllerTest extends BaseSpringTestRunner {
 				.requestAttr(RequestDispatcher.ERROR_REQUEST_URI, "/error"))
 				.andExpect(model().attributeExists("timestamp", "status", "error", "exception", "message", "path"))
 				.andExpect(model().attribute("error", is(HttpStatus.FORBIDDEN.getReasonPhrase())))
-				.andExpect(view().name("403"));
+				.andExpect(view().name("/error/403"));
 	}
 
 	@Test
@@ -53,7 +53,7 @@ public class ErrorPageControllerTest extends BaseSpringTestRunner {
 				.requestAttr(RequestDispatcher.ERROR_REQUEST_URI, "/error"))
 				.andExpect(model().attributeExists("timestamp", "status", "error", "exception", "message", "path"))
 				.andExpect(model().attribute("error", is(HttpStatus.NOT_FOUND.getReasonPhrase())))
-				.andExpect(view().name("404"));
+				.andExpect(view().name("/error/404"));
 	}
 
 	@Test
@@ -65,12 +65,12 @@ public class ErrorPageControllerTest extends BaseSpringTestRunner {
 				.requestAttr(RequestDispatcher.ERROR_REQUEST_URI, "/error"))
 				.andExpect(model().attributeExists("timestamp", "status", "error", "exception", "message", "path"))
 				.andExpect(model().attribute("error", is(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase())))
-				.andExpect(view().name("500"));
+				.andExpect(view().name("/error/500"));
 	}
 
 	@Test
 	public void otherError() throws Exception {
-		List<HttpStatus> httpStatuses = Arrays.asList(HttpStatus.values()).stream()
+		List<HttpStatus> httpStatuses = Arrays.stream(HttpStatus.values())
 				.filter(status -> status != HttpStatus.FORBIDDEN && status != HttpStatus.NOT_FOUND)
 				.collect(Collectors.toList());
 		HttpStatus httpStatus = httpStatuses.get(RandomUtils.nextInt(0, httpStatuses.size()));
@@ -81,7 +81,7 @@ public class ErrorPageControllerTest extends BaseSpringTestRunner {
 				.requestAttr(RequestDispatcher.ERROR_REQUEST_URI, "/error"))
 				.andExpect(model().attributeExists("timestamp", "status", "error", "exception", "message", "path"))
 				.andExpect(model().attribute("status", is(httpStatus.value())))
-				.andExpect(view().name("500"));
+				.andExpect(view().name("/error/500"));
 	}
 
 }

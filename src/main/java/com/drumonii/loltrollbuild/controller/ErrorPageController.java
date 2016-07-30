@@ -35,19 +35,19 @@ public class ErrorPageController extends BasicErrorController {
 	@RequestMapping(produces = "text/html")
 	public ModelAndView errorHtml(HttpServletRequest request, HttpServletResponse response) {
 		Map<String, Object> model = errorAttributes.getErrorAttributes(new ServletRequestAttributes(request), false);
-		String view;
+		String view = "/error/";
 		switch (getStatus(request)) {
 			case BAD_REQUEST: // 400
-				view = String.valueOf(HttpStatus.BAD_REQUEST.value());
+				view += String.valueOf(HttpStatus.BAD_REQUEST.value());
 				break;
 			case FORBIDDEN: // 403
-				view = String.valueOf(HttpStatus.FORBIDDEN.value());
+				view += String.valueOf(HttpStatus.FORBIDDEN.value());
 				break;
 			case NOT_FOUND: // 404
-				view = String.valueOf(HttpStatus.NOT_FOUND.value());
+				view += String.valueOf(HttpStatus.NOT_FOUND.value());
 				break;
 			default: // 500 and other
-				view = String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value());
+				view += String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value());
 				break;
 		}
 		return new ModelAndView(view, model);
