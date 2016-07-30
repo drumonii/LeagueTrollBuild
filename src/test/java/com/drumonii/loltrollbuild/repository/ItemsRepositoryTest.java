@@ -85,20 +85,6 @@ public class ItemsRepositoryTest extends BaseSpringTestRunner {
 		Item mercTreads = objectMapper.readValue(responseBody, ItemsResponse.class).getItems().get("3111");
 		itemsRepository.save(mercTreads);
 
-		responseBody = "{\"type\":\"item\",\"version\":\"5.22.3\",\"data\":{\"1319\":{\"id\":1319,\"name\":" +
-				"\"Enchantment: Homeguard\",\"group\":\"BootsHomeguard\",\"description\":\"<groupLimit>Limited to 1 " +
-				"of each enchantment type.</groupLimit><br>Enchants boots to have Homeguard bonus.<br><br><unique>" +
-				"UNIQUE Passive - Homeguard:</unique> Visiting the shop vastly increases Health and Mana Regeneration" +
-				" and grants 200% bonus Movement Speed that decays over 8 seconds. Bonus Movement Speed and " +
-				"regeneration are disabled for 6 seconds upon dealing or taking damage.<br><br><rules>(Unique " +
-				"Passives with the same name don't stack.)</rules>\",\"plaintext\":\"Fully restores health, mana, and" +
-				" grants a massive speed boost while visiting the shop\",\"from\":[\"3047\"],\"maps\":{\"1\":false," +
-				"\"8\":false,\"10\":false,\"11\":true,\"12\":false,\"14\":false},\"image\":{\"full\":\"1319.png\"," +
-				"\"sprite\":\"item2.png\",\"group\":\"item\",\"x\":432,\"y\":384,\"w\":48,\"h\":48},\"gold\":" +
-				"{\"base\":450,\"total\":1550,\"sell\":1085,\"purchasable\":true}}}}";
-		Item homeguardEnchantment = objectMapper.readValue(responseBody, ItemsResponse.class).getItems().get("1319");
-		itemsRepository.save(homeguardEnchantment);
-
 		responseBody = "{\"type\":\"item\",\"version\":\"5.22.3\",\"data\":{\"3047\":{\"id\":3047,\"name\":" +
 				"\"Ninja Tabi\",\"description\":\"<stats>+30 Armor</stats><br><br><unique>UNIQUE Passive:</unique> " +
 				"Blocks 10% of the damage from basic attacks.<br><unique>UNIQUE Passive - Enhanced Movement:</unique>" +
@@ -115,8 +101,6 @@ public class ItemsRepositoryTest extends BaseSpringTestRunner {
 		assertThat(boots).doesNotHaveDuplicates();
 		assertThat(boots).flatExtracting(Item::getFrom)
 				.contains("1001");
-		assertThat(boots).extracting(Item::getName)
-				.doesNotHave(new Condition<>(name -> name.contains("Enchantment"), "non enchanted"));
 		assertThat(boots).extracting(Item::getDescription)
 				.have(new Condition<>(descr -> descr.contains("Enhanced Movement"), "movement"));
 		assertThat(boots).extracting(Item::getMaps)

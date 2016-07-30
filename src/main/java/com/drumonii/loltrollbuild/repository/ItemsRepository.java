@@ -19,16 +19,16 @@ import java.util.List;
 public interface ItemsRepository extends JpaRepository<Item, Integer> {
 
 	/**
-	 * Gets a {@link List} of upgraded {@link Item} boots from {@code Boots of Speed} not including boot enchantments
-	 * found only on the specified {@link GameMap}.
+	 * Gets a {@link List} of upgraded {@link Item} boots from Boots of Speed found only on the specified
+	 * {@link GameMap}.
 	 *
 	 * @param mapId the {@link GameMap}'s ID
-	 * @return a {@link List} of upgraded {@link Item} boots without enchantments
+	 * @return a {@link List} of upgraded {@link Item} boots
 	 * @see <a href="http://leagueoflegends.wikia.com/wiki/Boots_of_Speed">Boots of Speed</a>
 	 * @see <a href="http://leagueoflegends.wikia.com/wiki/Advanced_item">Advanced Items</a>
 	 */
 	@Query("select i from Item i join i.from f left join i.maps m " +
-		   "where i.id <> 1001 and i.name not like 'Enchantment%' and f in ('1001') " +
+		   "where i.id <> 1001 and f in ('1001') " +
 		   "and (key(m) <> :mapId and m = false) " +
 		   "group by i.id")
 	@RestResource(exported = false)
