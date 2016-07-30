@@ -2,9 +2,11 @@ package com.drumonii.loltrollbuild.util;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import org.apache.commons.collections4.IterableUtils;
 import org.apache.commons.lang3.RandomUtils;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -14,26 +16,29 @@ import java.util.List;
 public class RandomizeUtil {
 
 	/**
-	 * Gets a random element {@code E} from the passed {@link List}.
+	 * Gets a random element {@code E} from the passed {@link Collection}.
 	 *
-	 * @param list the {@link List} to get the random element
+	 * @param collection the {@link Collection} to get the random element
 	 * @param <E> the element type
-	 * @return a random element from the passed {@link List}
+	 * @return a random element from the passed {@link Collection}
 	 */
-	public static <E> E getRandom(List<E> list) {
-		return list.get(RandomUtils.nextInt(0, list.size()));
+	public static <E> E getRandom(Collection<E> collection) {
+		return IterableUtils.get(collection, RandomUtils.nextInt(0, collection.size()));
 	}
 
 	/**
-	 * Gets a {@link List} of random elements {@code E} from the passed list to choose from.
+	 * Gets a {@link List} of random elements {@code E} from the passed {@link Collection} to choose from.
 	 *
-	 * @param list the {@link List} to choose the random elements
-	 * @param maxSize the maximum size of the {@link List} to generate
+	 * @param list the {@link Collection} to choose the random elements
+	 * @param size the size of the {@link List} to generate
 	 * @return a {@link List} of random elements from the passed {@link List}
 	 */
-	public static <E> List<E> getRandoms(List<E> list, int maxSize) {
+	public static <E> List<E> getRandoms(Collection<E> list, int size) {
 		List<E> randoms = new ArrayList<>();
-		while (randoms.size() < maxSize) {
+		if (size > list.size()) {
+			size = list.size();
+		}
+		while (randoms.size() < size) {
 			E randomElement = getRandom(list);
 			if (!randoms.contains(randomElement)) {
 				randoms.add(randomElement);

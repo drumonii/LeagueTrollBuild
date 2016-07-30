@@ -30,6 +30,9 @@ public class RandomizeUtilTest extends BaseUnitTestRunner {
 		assertThat(getRandoms(strings, 1))
 				.isNotNull()
 				.hasSize(1);
+		assertThat(getRandoms(strings, strings.size() + 1))
+				.isNotNull()
+				.hasSize(2);
 	}
 
 }

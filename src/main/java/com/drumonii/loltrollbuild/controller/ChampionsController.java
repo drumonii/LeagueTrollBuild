@@ -25,8 +25,8 @@ import static org.springframework.data.domain.Sort.Direction.ASC;
 @RequestMapping("/champions")
 public class ChampionsController {
 
-	private static final int ITEMS_MAX = 6;
-	private static final int SPELLS_MAX = 2;
+	private static final int ITEMS_SIZE = 6;
+	private static final int SPELLS_SIZE = 2;
 
 	@Autowired
 	private ChampionsRepository championsRepository;
@@ -84,13 +84,13 @@ public class ChampionsController {
 			items.add(RandomizeUtil.getRandom(itemsRepository.viktorOnly()));
 		}
 		// Get all items for the troll build
-		items.addAll(RandomizeUtil.getRandoms(itemsRepository.forTrollBuild(mapId), ITEMS_MAX - 1));
+		items.addAll(RandomizeUtil.getRandoms(itemsRepository.forTrollBuild(mapId), ITEMS_SIZE - 1));
 		trollBuild.put("items", items);
 
 		// Summoner Spells
 		trollBuild.put("summoner-spells",
 				RandomizeUtil.getRandoms(summonerSpellsRepository.forTrollBuild(
-						GameMapUtil.getModeFromMap(mapsRepository.findOne(Integer.valueOf(mapId)))), SPELLS_MAX));
+						GameMapUtil.getModeFromMap(mapsRepository.findOne(Integer.valueOf(mapId)))), SPELLS_SIZE));
 
 		// Trinket
 		trollBuild.put("trinket", Arrays.asList(RandomizeUtil.getRandom(itemsRepository.trinkets(mapId))));
