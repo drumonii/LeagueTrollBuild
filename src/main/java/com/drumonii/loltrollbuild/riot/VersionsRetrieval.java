@@ -4,6 +4,8 @@ import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.repository.VersionsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -41,7 +42,8 @@ public class VersionsRetrieval {
 	 */
 	@ModelAttribute
 	public List<Version> versionsFromResponse() {
-		List<Version> versions = Arrays.asList(restTemplate.getForObject(versionsUri.toString(), Version[].class));
+		List<Version> versions = restTemplate.exchange(versionsUri.toString(), HttpMethod.GET, null,
+				new ParameterizedTypeReference<List<Version>>() {}).getBody();
 		Collections.sort(versions, Collections.reverseOrder());
 		return versions;
 	}
