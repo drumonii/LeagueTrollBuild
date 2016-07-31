@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -115,6 +116,18 @@ public class ItemsRepositoryTest extends BaseSpringTestRunner {
 
 	@Test
 	public void forTrollBuild() throws IOException {
+		Item nullName = itemsResponse.getItems().get("3632");
+		itemsRepository.save(nullName);
+
+		Item nullDescription = itemsResponse.getItems().get("3648");
+		itemsRepository.save(nullDescription);
+
+		Item bloodrazerEnchantment = itemsResponse.getItems().get("3675");
+		itemsRepository.save(bloodrazerEnchantment);
+
+		Item bootsOfSpeed = itemsResponse.getItems().get("1001");
+		itemsRepository.save(bootsOfSpeed);
+
 		Item biscuitOfRejuvenation = itemsResponse.getItems().get("2010");
 		itemsRepository.save(biscuitOfRejuvenation);
 
@@ -152,8 +165,11 @@ public class ItemsRepositoryTest extends BaseSpringTestRunner {
 				.containsNull();
 		assertThat(forTrollBuild).flatExtracting(Item::getInto)
 				.isEmpty();
-		assertThat(forTrollBuild).doesNotContain(itemsResponse.getItems().get("1001")); // boots of speed
+		assertThat(forTrollBuild).doesNotContain(bootsOfSpeed);
+		assertThat(forTrollBuild).extracting(Item::getDescription)
+				.isNotNull();
 		assertThat(forTrollBuild).extracting(Item::getName)
+				.isNotNull()
 				.doesNotHave(new Condition<>(name -> name.contains("Enchants boots"), "Enchants boots"))
 				.doesNotHave(new Condition<>(name -> name.contains("Trinket"), "Trinket"))
 				.doesNotHave(new Condition<>(name -> name.contains("Viktor"), "Viktor"))

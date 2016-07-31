@@ -36,7 +36,7 @@ public class Item implements Serializable {
 	@JsonProperty("id")
 	@Getter @Setter private int id;
 
-	@Column(name = "NAME", nullable = false)
+	@Column(name = "NAME")
 	@JsonProperty("name")
 	@Getter @Setter private String name;
 
@@ -48,7 +48,7 @@ public class Item implements Serializable {
 	@JsonProperty("consumed")
 	@Getter @Setter private Boolean consumed;
 
-	@Column(name = "DESCRIPTION", nullable = false)
+	@Column(name = "DESCRIPTION")
 	@JsonProperty("description")
 	@Getter @Setter private String description;
 

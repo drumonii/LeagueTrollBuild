@@ -78,9 +78,7 @@ public class ItemsRetrieval {
 	@RequestMapping(method = RequestMethod.POST)
 	public List<Item> saveItems(@RequestParam(required = false) boolean truncate) {
 		ItemsResponse response = restTemplate.getForObject(itemsUri.toString(), ItemsResponse.class);
-		List<Item> items = new ArrayList<>(response.getItems().values()).stream()
-				.filter(item -> item.getName() != null && item.getDescription() != null)
-				.collect(Collectors.toList());
+		List<Item> items = new ArrayList<>(response.getItems().values());
 
 		if (truncate) {
 			itemsRepository.deleteAll();

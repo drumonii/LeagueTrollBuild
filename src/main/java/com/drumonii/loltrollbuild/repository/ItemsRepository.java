@@ -68,9 +68,10 @@ public interface ItemsRepository extends JpaRepository<Item, Integer> {
 	 * @return a {@link List} of {@link Item}s eligible for the troll build
 	 */
 	@Query("select i from Item i left join i.into i_into left join i.maps m " +
-		   "where i.gold.purchasable = true and i.consumed is null and (i.group is null or i.group <> 'FlaskGroup') " +
+		   "where i.name is not null and i.description is not null " +
+		   "and i.gold.purchasable = true and i.consumed is null and (i.group is null or i.group <> 'FlaskGroup') " +
 		   "and i_into is null and not exists (select m2 from i.maps m2 where key(m2) = :mapId and m2 = false)" +
-		   "and i.id <> 1001 and i.description not like '%Enchants boots%' " +
+		   "and i.id <> 1001 " +
 		   "and (i.group is null or i.group <> 'RelicBase') " +
 		   "and i.requiredChampion is null " +
 		   "and i.name not like 'Enchantment%' and i.name not like 'Doran%' " +
