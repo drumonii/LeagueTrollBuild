@@ -2,11 +2,11 @@ package com.drumonii.loltrollbuild.riot;
 
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.model.SummonerSpell;
-import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.repository.SummonerSpellsRepository;
 import com.drumonii.loltrollbuild.repository.VersionsRepository;
 import com.drumonii.loltrollbuild.riot.api.SummonerSpellsResponse;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.drumonii.loltrollbuild.util.RandomizeUtil;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,8 +20,8 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.io.IOException;
-import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Fail.fail;
@@ -37,11 +37,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 
-	@Autowired
-	private RestTemplate restTemplate;
+	private static final int MAX_RESPONSE_SIZE = 10;
 
 	@Autowired
-	private ObjectMapper objectMapper;
+	private RestTemplate restTemplate;
 
 	@Autowired
 	@Qualifier("summonerSpells")
@@ -59,8 +58,8 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 
 	private MockRestServiceServer mockServer;
 
+	private SummonerSpellsResponse summonerSpellsResponseSlice;
 	private String summonerSpellsResponseBody;
-	private SummonerSpell cleanse;
 
 	private String summonerSpellResponseBody;
 	private UriComponents summonerSpellUri;
@@ -72,33 +71,30 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 
 		// Only first request is handled. See: http://stackoverflow.com/q/30713734
 		mockServer = MockRestServiceServer.createServer(restTemplate);
-		summonerSpellsResponseBody = "{\"type\":\"summoner\",\"version\":\"5.22.3\",\"data\":{\"SummonerBoost\":" +
-				"{\"name\":\"Cleanse\",\"description\":\"Removes all disables and summoner spell debuffs affecting " +
-				"your champion and lowers the duration of incoming disables by 65% for 3 seconds.\",\"image\":" +
-				"{\"full\":\"SummonerBoost.png\",\"sprite\":\"spell0.png\",\"group\":\"spell\",\"x\":48,\"y\":0," +
-				"\"w\":48,\"h\":48},\"cooldown\":[210.0],\"summonerLevel\":6,\"id\":1,\"key\":\"SummonerBoost\"," +
-				"\"modes\":[\"CLASSIC\",\"ODIN\",\"TUTORIAL\",\"ARAM\",\"ASCENSION\"]}}}";
+
+		// Create a random "slice" of ItemsResponse with size of MAX_RESPONSE_SIZE
+		summonerSpellsResponseSlice = new SummonerSpellsResponse();
+		summonerSpellsResponseSlice.setType(championsResponse.getType());
+		summonerSpellsResponseSlice.setVersion(championsResponse.getVersion());
+		summonerSpellsResponseSlice.setSummonerSpells(RandomizeUtil.getRandoms(
+				summonerSpellsResponse.getSummonerSpells().values(), MAX_RESPONSE_SIZE).stream()
+				.collect(Collectors.toMap(spell -> String.valueOf(spell.getId()), spell -> spell)));
+
 		try {
-			cleanse = objectMapper.readValue(summonerSpellsResponseBody, SummonerSpellsResponse.class)
-					.getSummonerSpells().get("SummonerBoost");
-		} catch (IOException e) {
+			summonerSpellsResponseBody = objectMapper.writeValueAsString(summonerSpellsResponseSlice);
+		} catch (JsonProcessingException e) {
 			fail("Unable to marshal the Summoner Spells response.", e);
 		}
 
-		summonerSpellResponseBody = "{\"name\":\"Ignite\",\"description\":\"Ignites target enemy champion, dealing " +
-				"70-410 true damage (depending on champion level) over 5 seconds, grants you vision of the target, " +
-				"and reduces healing effects on them for the duration.\",\"image\":{\"full\":\"SummonerDot.png\"," +
-				"\"sprite\":\"spell0.png\",\"group\":\"spell\",\"x\":144,\"y\":0,\"w\":48,\"h\":48},\"cooldown\":" +
-				"[180],\"summonerLevel\":10,\"id\":14,\"key\":\"SummonerDot\",\"modes\":[\"CLASSIC\",\"ODIN\"," +
-				"\"TUTORIAL\",\"ARAM\",\"ASCENSION\"]}";
+		ignite = summonerSpellsResponse.getSummonerSpells().get("SummonerDot");
 		try {
-			ignite = objectMapper.readValue(summonerSpellResponseBody, SummonerSpell.class);
-			summonerSpellUri = summonerSpellBuilder.buildAndExpand("na", ignite.getId());
-		} catch (IOException e) {
-			fail("Unable to unmarshal the Summoner Spell by ID response.", e);
+			summonerSpellResponseBody = objectMapper.writeValueAsString(ignite);
+		} catch (JsonProcessingException e) {
+			fail("Unable to marshal the Summoner Spell.", e);
 		}
+		summonerSpellUri = summonerSpellBuilder.buildAndExpand("na", ignite.getId());
 
-		versionsRepository.save(new Version("5.22.3"));
+		versionsRepository.save(versions.get(0));
 	}
 
 	@After
@@ -115,7 +111,8 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 		mockMvc.perform(get("/riot/summoner-spells").with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-				.andExpect(content().json(objectMapper.writeValueAsString(Arrays.asList(cleanse))));
+				.andExpect(content().json(objectMapper.writeValueAsString(summonerSpellsResponseSlice
+						.getSummonerSpells().values())));
 		mockServer.verify();
 	}
 
@@ -127,10 +124,12 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 		mockMvc.perform(post("/riot/summoner-spells").with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-				.andExpect(content().json(objectMapper.writeValueAsString(Arrays.asList(cleanse))));
+				.andExpect(content().json(objectMapper.writeValueAsString(summonerSpellsResponseSlice
+						.getSummonerSpells().values())));
 		mockServer.verify();
 
-		assertThat(summonerSpellsRepository.findOne(cleanse.getId())).isNotNull();
+		assertThat(summonerSpellsRepository.findAll())
+				.containsOnlyElementsOf(summonerSpellsResponseSlice.getSummonerSpells().values());
 	}
 
 	@Test
@@ -149,7 +148,9 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 	public void saveDifferenceOfSummonerSpells() throws Exception {
 		mockServer.expect(requestTo(summonerSpellsUri.toString())).andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(summonerSpellsResponseBody, MediaType.APPLICATION_JSON_UTF8));
-		summonerSpellsRepository.save(cleanse);
+
+		List<SummonerSpell> summonerSpells = summonerSpellsRepository.save(summonerSpellsResponseSlice
+				.getSummonerSpells().values());
 
 		mockMvc.perform(post("/riot/summoner-spells").with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
@@ -157,15 +158,19 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 				.andExpect(content().json("[]"));
 		mockServer.verify();
 
-		assertThat(summonerSpellsRepository.findOne(cleanse.getId())).isNotNull();
+		assertThat(summonerSpellsRepository.findAll()).containsOnlyElementsOf(summonerSpells);
 	}
 
 	@Test
 	public void saveDifferenceOfSummonerSpellsWithDeleted() throws Exception {
+		List<SummonerSpell> summonerSpells = summonerSpellsRepository.save(summonerSpellsResponseSlice
+				.getSummonerSpells().values());
+		SummonerSpell summonerSpellToDelete = RandomizeUtil.getRandom(summonerSpells);
+		summonerSpellsResponseSlice.getSummonerSpells().remove(String.valueOf(summonerSpellToDelete.getId()));
+
 		mockServer.expect(requestTo(summonerSpellsUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(summonerSpellsResponseBody, MediaType.APPLICATION_JSON_UTF8));
-		summonerSpellsRepository.save(cleanse);
-		summonerSpellsRepository.save(ignite);
+				.andRespond(withSuccess(objectMapper.writeValueAsString(summonerSpellsResponseSlice),
+						MediaType.APPLICATION_JSON_UTF8));
 
 		mockMvc.perform(post("/riot/summoner-spells").with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
@@ -173,37 +178,23 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 				.andExpect(content().json("[]"));
 		mockServer.verify();
 
-		assertThat(summonerSpellsRepository.findOne(cleanse.getId())).isNotNull();
-		assertThat(summonerSpellsRepository.findOne(ignite.getId())).isNull();
+		assertThat(summonerSpellsRepository.findOne(summonerSpellToDelete.getId())).isNull();
 	}
 
 	@Test
 	public void saveSummonerSpellsWithTruncate() throws Exception {
-		String responseBody = "{\"type\":\"summoner\",\"version\":\"5.22.3\",\"data\":{\"SummonerFlash\":{\"name\":" +
-				"\"Flash\",\"description\":\"Teleports your champion a short distance toward your cursor's location." +
-				"\",\"image\":{\"full\":\"SummonerFlash.png\",\"sprite\":\"spell0.png\",\"group\":\"spell\",\"x\":" +
-				"240,\"y\":0,\"w\":48,\"h\":48},\"cooldown\":[300],\"summonerLevel\":8,\"id\":4,\"key\":" +
-				"\"SummonerFlash\",\"modes\":[\"CLASSIC\",\"ODIN\",\"TUTORIAL\",\"ARAM\",\"ASCENSION\"]}}}";
-		SummonerSpell teleport = null;
-		try {
-			teleport = objectMapper.readValue(responseBody, SummonerSpellsResponse.class).getSummonerSpells()
-					.get("SummonerFlash");
-		} catch (IOException e) {
-			fail("Unable to unmarshal the Summoner Spell by ID response.", e);
-		}
-		summonerSpellsRepository.save(teleport);
-
 		mockServer.expect(requestTo(summonerSpellsUri.toString())).andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(summonerSpellsResponseBody, MediaType.APPLICATION_JSON_UTF8));
 
 		mockMvc.perform(post("/riot/summoner-spells?truncate=true").with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-				.andExpect(content().json(objectMapper.writeValueAsString(Arrays.asList(cleanse))));
+				.andExpect(content().json(objectMapper.writeValueAsString(summonerSpellsResponseSlice
+						.getSummonerSpells().values())));
 		mockServer.verify();
 
-		assertThat(summonerSpellsRepository.findOne(teleport.getId())).isNull();
-		assertThat(summonerSpellsRepository.findOne(cleanse.getId())).isNotNull();
+		assertThat(summonerSpellsRepository.findAll())
+				.containsOnlyElementsOf(summonerSpellsResponseSlice.getSummonerSpells().values());
 	}
 
 	@Test
@@ -266,26 +257,21 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 
 	@Test
 	public void saveSummonerSpellWithOverwrite() throws Exception {
-		SummonerSpell newIgnite = null;
-		try {
-			newIgnite = objectMapper.readValue(summonerSpellResponseBody, SummonerSpell.class);
-		} catch (IOException e) {
-			fail("Unable to unmarshal the Summoner Spell by ID response.", e);
-		}
+		SummonerSpell newIgnite = summonerSpellsResponse.getSummonerSpells().get("SummonerDot");
 		newIgnite.setName("New Ignite");
 		summonerSpellsRepository.save(newIgnite);
 
 		mockServer.expect(requestTo(summonerSpellUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(summonerSpellResponseBody, MediaType.APPLICATION_JSON_UTF8));
+				.andRespond(withSuccess(objectMapper.writeValueAsString(newIgnite), MediaType.APPLICATION_JSON_UTF8));
 
 		mockMvc.perform(post("/riot/summoner-spells/{id}", ignite.getId()).with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-				.andExpect(content().json(objectMapper.writeValueAsString(ignite)));
+				.andExpect(content().json(objectMapper.writeValueAsString(newIgnite)));
 		mockServer.verify();
 
-		assertThat(summonerSpellsRepository.findOne(ignite.getId())).isNotNull();
-		assertThat(summonerSpellsRepository.findOne(ignite.getId()).getName()).isEqualTo(ignite.getName());
+		assertThat(summonerSpellsRepository.findOne(newIgnite.getId())).isNotNull()
+				.isEqualTo(newIgnite);
 	}
 
 }

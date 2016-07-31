@@ -3,8 +3,6 @@ package com.drumonii.loltrollbuild.rest;
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.model.Champion;
 import com.drumonii.loltrollbuild.repository.ChampionsRepository;
-import com.drumonii.loltrollbuild.riot.api.ChampionsResponse;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.After;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +19,6 @@ public class ChampionsRestControllerTest extends BaseSpringTestRunner {
 	private String apiPath;
 
 	@Autowired
-	private ObjectMapper objectMapper;
-
-	@Autowired
 	private ChampionsRepository championsRepository;
 
 	@After
@@ -33,11 +28,7 @@ public class ChampionsRestControllerTest extends BaseSpringTestRunner {
 
 	@Test
 	public void getChampions() throws Exception {
-		String responseBody = "{\"type\":\"champion\",\"version\":\"6.13.1\",\"data\":{\"Tristana\":{\"id\":18," +
-				"\"key\":\"Tristana\",\"name\":\"Tristana\",\"title\":\"the Yordle Gunner\",\"image\":{\"full\":" +
-				"\"Tristana.png\",\"sprite\":\"champion3.png\",\"group\":\"champion\",\"x\":288,\"y\":48,\"w\":48," +
-				"\"h\":48},\"tags\":[\"Marksman\",\"Assassin\"],\"partype\":\"MP\"}}}";
-		Champion tristana = objectMapper.readValue(responseBody, ChampionsResponse.class).getChampions().get("Tristana");
+		Champion tristana = championsResponse.getChampions().get("Tristana");
 		championsRepository.save(tristana);
 
 		// qbe with name

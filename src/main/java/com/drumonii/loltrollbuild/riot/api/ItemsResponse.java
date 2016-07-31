@@ -57,10 +57,6 @@ import java.util.Map;
 @NoArgsConstructor
 public class ItemsResponse extends BaseResponse {
 
-	public ItemsResponse(String type, String version) {
-		super(type, version);
-	}
-
 	@JsonProperty("data")
 	@Getter @Setter private Map<String, Item> items;
 

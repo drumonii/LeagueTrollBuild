@@ -46,10 +46,6 @@ import java.util.Map;
 @NoArgsConstructor
 public class ChampionsResponse extends BaseResponse {
 
-	public ChampionsResponse(String type, String version) {
-		super(type, version);
-	}
-
 	@JsonProperty("data")
 	@Getter @Setter private Map<String, Champion> champions;
 

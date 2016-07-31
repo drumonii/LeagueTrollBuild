@@ -36,10 +36,6 @@ import java.util.Map;
 @NoArgsConstructor
 public class MapsResponse extends BaseResponse {
 
-	public MapsResponse(String type, String version) {
-		super(type, version);
-	}
-
 	@JsonProperty("data")
 	@Getter @Setter private Map<String, GameMap> maps;
 

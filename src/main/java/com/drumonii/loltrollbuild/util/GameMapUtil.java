@@ -19,11 +19,11 @@ import static com.drumonii.loltrollbuild.model.SummonerSpell.GameMode.CLASSIC;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class GameMapUtil {
 
-	private static final int SUMMONERS_RIFT_ID = 1;
-	private static final int CRYSTAL_SCAR_ID = 8;
-	private static final int TWISTED_TREELINE_ID = 10;
-	private static final int SUMMONERS_RIFT_NEW_ID = 11;
-	private static final int HOWLING_ABYSS_ID = 12;
+	public static final int SUMMONERS_RIFT_ID = 1;
+	public static final int CRYSTAL_SCAR_ID = 8;
+	public static final int TWISTED_TREELINE_ID = 10;
+	public static final int SUMMONERS_RIFT_NEW_ID = 11;
+	public static final int HOWLING_ABYSS_ID = 12;
 
 	private static final String CRYSTAL_SCAR = "Crystal Scar";
 	private static final String HOWLING_ABYSS = "Howling Abyss";

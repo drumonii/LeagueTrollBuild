@@ -49,10 +49,6 @@ import java.util.Map;
 @NoArgsConstructor
 public class SummonerSpellsResponse extends BaseResponse {
 
-	public SummonerSpellsResponse(String type, String version) {
-		super(type, version);
-	}
-
 	@JsonProperty("data")
 	@Getter @Setter private Map<String, SummonerSpell> summonerSpells;
 

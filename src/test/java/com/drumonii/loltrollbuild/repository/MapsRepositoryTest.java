@@ -2,8 +2,6 @@ package com.drumonii.loltrollbuild.repository;
 
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.model.GameMap;
-import com.drumonii.loltrollbuild.riot.api.MapsResponse;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.After;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +15,6 @@ public class MapsRepositoryTest extends BaseSpringTestRunner {
 	@Autowired
 	private MapsRepository mapsRepository;
 
-	@Autowired
-	private ObjectMapper objectMapper;
-
 	@After
 	public void after() {
 		mapsRepository.deleteAll();
@@ -27,31 +22,26 @@ public class MapsRepositoryTest extends BaseSpringTestRunner {
 
 	@Test
 	public void crudOperations() throws IOException {
-		String responseBody = "{\"type\":\"map\",\"version\":\"5.24.2\",\"data\":{\"10001\":{\"mapName\":" +
-				"\"Cool Map\",\"mapId\":10001,\"image\":{\"full\":\"map10001.png\",\"sprite\":\"map0.png\",\"group\":" +
-				"\"map\",\"x\":192,\"y\":0,\"w\":48,\"h\":48}}}}";
-		MapsResponse mapsResponse = objectMapper.readValue(responseBody, MapsResponse.class);
-
-		GameMap unmarshalledMap = mapsResponse.getMaps().get("10001");
+		GameMap crystalScar = mapsResponse.getMaps().get(CRYSTAL_SCAR);
 
 		// Create
-		assertThat(mapsRepository.save(unmarshalledMap)).isNotNull();
+		assertThat(mapsRepository.save(crystalScar)).isNotNull();
 
 		// Select
-		GameMap mapFromDb = mapsRepository.findOne(10001);
+		GameMap mapFromDb = mapsRepository.findOne(crystalScar.getMapId());
 		assertThat(mapFromDb).isNotNull();
 		assertThat(mapFromDb.getImage()).isNotNull();
-		assertThat(mapFromDb).isEqualTo(unmarshalledMap);
+		assertThat(mapFromDb).isEqualTo(crystalScar);
 
 		// Update
 		mapFromDb.setMapName("NewMapName");
 		mapsRepository.save(mapFromDb);
-		mapFromDb = mapsRepository.findOne(10001);
+		mapFromDb = mapsRepository.findOne(crystalScar.getMapId());
 		assertThat(mapFromDb.getMapName()).isEqualTo("NewMapName");
 
 		// Delete
 		mapsRepository.delete(mapFromDb);
-		assertThat(mapsRepository.findOne(10001)).isNull();
+		assertThat(mapsRepository.findOne(crystalScar.getMapId())).isNull();
 	}
 
 }

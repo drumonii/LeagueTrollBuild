@@ -3,8 +3,6 @@ package com.drumonii.loltrollbuild.rest;
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.model.SummonerSpell;
 import com.drumonii.loltrollbuild.repository.SummonerSpellsRepository;
-import com.drumonii.loltrollbuild.riot.api.SummonerSpellsResponse;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.After;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +20,6 @@ public class SummonerSpellsRestControllerTest extends BaseSpringTestRunner {
 	private String apiPath;
 
 	@Autowired
-	private ObjectMapper objectMapper;
-
-	@Autowired
 	private SummonerSpellsRepository summonerSpellsRepository;
 
 	@After
@@ -34,14 +29,7 @@ public class SummonerSpellsRestControllerTest extends BaseSpringTestRunner {
 
 	@Test
 	public void getSummonerSpells() throws Exception {
-		String responseBody = "{\"type\":\"summoner\",\"version\":\"6.13.1\",\"data\":{\"SummonerHaste\":{\"name\":" +
-				"\"Ghost\",\"description\":\"Your champion can move through units and has 28-45% (depending on " +
-				"champion level) increased Movement Speed for 10 seconds.\",\"image\":{\"full\":\"SummonerHaste.png\"," +
-				"\"sprite\":\"spell0.png\",\"group\":\"spell\",\"x\":288,\"y\":0,\"w\":48,\"h\":48},\"cooldown\":" +
-				"[210],\"summonerLevel\":1,\"id\":6,\"key\":\"SummonerHaste\",\"modes\":[\"CLASSIC\",\"ODIN\"," +
-				"\"TUTORIAL\",\"ARAM\",\"ASCENSION\",\"FIRSTBLOOD\"]}}}";
-		SummonerSpell ghost = objectMapper.readValue(responseBody, SummonerSpellsResponse.class).getSummonerSpells()
-				.get("SummonerHaste");
+		SummonerSpell ghost = summonerSpellsResponse.getSummonerSpells().get("SummonerHaste");
 		summonerSpellsRepository.save(ghost);
 
 		// qbe with name
