@@ -40,7 +40,7 @@ public class MapsRepositoryTest extends BaseSpringTestRunner {
 		assertThat(mapFromDb.getMapName()).isEqualTo("NewMapName");
 
 		// Delete
-		mapsRepository.delete(mapFromDb);
+		mapsRepository.delete(mapFromDb.getMapId());
 		assertThat(mapsRepository.findOne(crystalScar.getMapId())).isNull();
 	}
 

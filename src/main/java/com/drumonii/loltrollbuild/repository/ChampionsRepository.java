@@ -4,6 +4,9 @@ import com.drumonii.loltrollbuild.model.Champion;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -26,6 +29,7 @@ public interface ChampionsRepository extends JpaRepository<Champion, Integer> {
 	 */
 	@Query("select c from Champion c where lower(c.name) = lower(:name) or lower(c.key) = lower(:name)")
 	@RestResource(exported = false)
+	@Cacheable
 	Champion findByName(@Param("name") String name);
 
 	/**
@@ -35,7 +39,12 @@ public interface ChampionsRepository extends JpaRepository<Champion, Integer> {
 	 */
 	@Query(value = "select distinct c.tag from champion_tag c", nativeQuery = true)
 	@RestResource(exported = false)
+	@Cacheable(key = "#root.methodName")
 	List<String> getTags();
+
+	@Cacheable
+	@Override
+	List<Champion> findAll();
 
 	@Cacheable
 	@Override
@@ -47,6 +56,26 @@ public interface ChampionsRepository extends JpaRepository<Champion, Integer> {
 
 	@CacheEvict(allEntries = true)
 	@Override
+	<S extends Champion> S save(S entity);
+
+	@Cacheable
+	@Override
+	Champion findOne(Integer integer);
+
+	@CacheEvict(allEntries = true)
+	@Override
+	void delete(Integer integer);
+
+	@CacheEvict(allEntries = true)
+	@Override
+	void delete(Iterable<? extends Champion> entities);
+
+	@CacheEvict(allEntries = true)
+	@Override
 	void deleteAll();
+
+	@Cacheable(key = "{#example.probe, #pageable}")
+	@Override
+	<S extends Champion> Page<S> findAll(Example<S> example, Pageable pageable);
 
 }

@@ -42,7 +42,7 @@ public class ChampionsRepositoryTest extends BaseSpringTestRunner {
 		assertThat(championFromDb.getPartype()).isEqualTo("Mana");
 
 		// Delete
-		championsRepository.delete(championFromDb);
+		championsRepository.delete(championFromDb.getId());
 		assertThat(championsRepository.findOne(sejuani.getId())).isNull();
 	}
 

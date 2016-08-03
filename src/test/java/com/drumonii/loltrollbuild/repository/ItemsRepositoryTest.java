@@ -44,7 +44,7 @@ public class ItemsRepositoryTest extends BaseSpringTestRunner {
 		assertThat(itemFromDb.getConsumed()).isTrue();
 
 		// Delete
-		itemsRepository.delete(itemFromDb);
+		itemsRepository.delete(itemFromDb.getId());
 		assertThat(itemsRepository.findOne(witsEnd.getId())).isNull();
 	}
 

@@ -5,6 +5,9 @@ import com.drumonii.loltrollbuild.model.SummonerSpell.GameMode;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -31,11 +34,39 @@ public interface SummonerSpellsRepository extends JpaRepository<SummonerSpell, I
 		   "where m in (:mode) " +
 	       "group by s.id")
 	@RestResource(exported = false)
-	@Cacheable
+	@Cacheable(key = "{#root.methodName, #mode}")
 	List<SummonerSpell> forTrollBuild(@Param("mode") GameMode mode);
+
+	@Cacheable
+	@Override
+	List<SummonerSpell> findAll();
+
+	@CacheEvict(allEntries = true)
+	@Override
+	<S extends SummonerSpell> List<S> save(Iterable<S> entities);
+
+	@CacheEvict(allEntries = true)
+	@Override
+	<S extends SummonerSpell> S save(S entity);
+
+	@Cacheable
+	@Override
+	SummonerSpell findOne(Integer integer);
+
+	@CacheEvict(allEntries = true)
+	@Override
+	void delete(Integer integer);
+
+	@CacheEvict(allEntries = true)
+	@Override
+	void delete(Iterable<? extends SummonerSpell> entities);
 
 	@CacheEvict(allEntries = true)
 	@Override
 	void deleteAll();
+
+	@Cacheable(key = "{#example.probe, #pageable}")
+	@Override
+	<S extends SummonerSpell> Page<S> findAll(Example<S> example, Pageable pageable);
 
 }

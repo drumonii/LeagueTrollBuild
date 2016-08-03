@@ -5,6 +5,9 @@ import com.drumonii.loltrollbuild.model.Item;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -32,6 +35,7 @@ public interface ItemsRepository extends JpaRepository<Item, Integer> {
 		   "and (key(m) <> :mapId and m = false) " +
 		   "group by i.id")
 	@RestResource(exported = false)
+	@Cacheable(key = "{#root.methodName, #mapId}")
 	List<Item> boots(@Param("mapId") String mapId);
 
 	/**
@@ -46,6 +50,7 @@ public interface ItemsRepository extends JpaRepository<Item, Integer> {
 		   "and (key(m) <> :mapId and m = false) " +
 		   "group by i.id")
 	@RestResource(exported = false)
+	@Cacheable(key = "{#root.methodName, #mapId}")
 	List<Item> trinkets(@Param("mapId") String mapId);
 
 	/**
@@ -56,6 +61,7 @@ public interface ItemsRepository extends JpaRepository<Item, Integer> {
 	 */
 	@Query("select i from Item i where i.requiredChampion = 'Viktor'")
 	@RestResource(exported = false)
+	@Cacheable(key = "#root.methodName")
 	List<Item> viktorOnly();
 
 	/**
@@ -77,11 +83,39 @@ public interface ItemsRepository extends JpaRepository<Item, Integer> {
 		   "and i.name not like 'Enchantment%' and i.name not like 'Doran%' " +
 		   "group by i.id")
 	@RestResource(exported = false)
-	@Cacheable
+	@Cacheable(key = "{#root.methodName, #mapId}")
 	List<Item> forTrollBuild(@Param("mapId") String mapId);
+
+	@Cacheable
+	@Override
+	List<Item> findAll();
+
+	@CacheEvict(allEntries = true)
+	@Override
+	<S extends Item> List<S> save(Iterable<S> entities);
+
+	@CacheEvict(allEntries = true)
+	@Override
+	<S extends Item> S save(S entity);
+
+	@Cacheable
+	@Override
+	Item findOne(Integer integer);
+
+	@CacheEvict(allEntries = true)
+	@Override
+	void delete(Integer integer);
+
+	@CacheEvict(allEntries = true)
+	@Override
+	void delete(Iterable<? extends Item> entities);
 
 	@CacheEvict(allEntries = true)
 	@Override
 	void deleteAll();
+
+	@Cacheable(key = "{#example.probe, #pageable}")
+	@Override
+	<S extends Item> Page<S> findAll(Example<S> example, Pageable pageable);
 
 }

@@ -12,7 +12,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
-import static com.drumonii.loltrollbuild.model.SummonerSpell.GameMode.ARAM;
 import static com.drumonii.loltrollbuild.model.SummonerSpell.GameMode.CLASSIC;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -46,7 +45,7 @@ public class SummonerSpellsRepositoryTest extends BaseSpringTestRunner {
 		assertThat(summonerSpellFromDb.getModes()).isEqualTo(new HashSet<>(Arrays.asList(CLASSIC)));
 
 		// Delete
-		summonerSpellsRepository.delete(summonerSpellFromDb);
+		summonerSpellsRepository.delete(summonerSpellFromDb.getId());
 		assertThat(summonerSpellsRepository.findOne(clarity.getId())).isNull();
 	}
 
@@ -66,12 +65,6 @@ public class SummonerSpellsRepositoryTest extends BaseSpringTestRunner {
 		assertThat(forTrollBuild).extracting(SummonerSpell::getModes)
 				.have(new Condition<>(mode -> mode.contains(CLASSIC), "CLASSIC"));
 		assertThat(forTrollBuild).containsOnly(smite, exhaust);
-
-		forTrollBuild = summonerSpellsRepository.forTrollBuild(ARAM);
-		assertThat(forTrollBuild).doesNotHaveDuplicates();
-		assertThat(forTrollBuild).extracting(SummonerSpell::getModes)
-				.have(new Condition<>(mode -> mode.contains(ARAM), "ARAM"));
-		assertThat(forTrollBuild).containsOnly(mark, exhaust);
 	}
 
 }

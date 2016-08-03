@@ -9,14 +9,20 @@ import com.drumonii.loltrollbuild.repository.ChampionsRepository;
 import com.drumonii.loltrollbuild.repository.ItemsRepository;
 import com.drumonii.loltrollbuild.repository.MapsRepository;
 import com.drumonii.loltrollbuild.repository.SummonerSpellsRepository;
+import com.drumonii.loltrollbuild.riot.api.ChampionsResponse;
+import com.drumonii.loltrollbuild.util.RandomizeUtil;
 import org.junit.After;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.annotation.Repeat;
 
-import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.Matchers.is;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -44,10 +50,23 @@ public class ChampionsControllerTest extends BaseSpringTestRunner {
 
 	@Test
 	public void champions() throws Exception {
+		ChampionsResponse championsResponseSlice = new ChampionsResponse();
+		championsResponseSlice.setType(championsResponse.getType());
+		championsResponseSlice.setVersion(championsResponse.getVersion());
+		championsResponseSlice.setChampions(RandomizeUtil.getRandoms(
+				championsResponse.getChampions().values(), 10).stream()
+				.collect(Collectors.toMap(champion -> String.valueOf(champion.getId()), champion -> champion)));
+		List<Champion> champions = championsRepository.save(championsResponseSlice.getChampions().values());
+
+		Set<String> tags = new HashSet<>();
+		champions.forEach(champion -> tags.addAll(champion.getTags()));
+
 		mockMvc.perform(get("/champions"))
 				.andExpect(status().isOk())
 				.andExpect(model().attributeExists("champions"))
+				.andExpect(model().attribute("champions", hasItems(champions.toArray(new Champion[champions.size()]))))
 				.andExpect(model().attributeExists("tags"))
+				.andExpect(model().attribute("tags", hasItems(tags.toArray(new String[tags.size()]))))
 				.andExpect(view().name("champions/champions"));
 	}
 
