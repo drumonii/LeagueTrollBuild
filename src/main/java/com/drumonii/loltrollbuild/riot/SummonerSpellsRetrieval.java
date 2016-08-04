@@ -57,7 +57,7 @@ public class SummonerSpellsRetrieval {
 	 *
 	 * @return the {@link List} of {@link SummonerSpell} from Riot
 	 */
-	@RequestMapping(method = RequestMethod.GET)
+	@GetMapping
 	public Collection<SummonerSpell> summonerSpells() {
 		SummonerSpellsResponse response = restTemplate.getForObject(summonerSpellsUri.toString(),
 				SummonerSpellsResponse.class);
@@ -77,7 +77,7 @@ public class SummonerSpellsRetrieval {
 	 * all the ones from Riot are persisted along with their images saved
 	 * @return the {@link List} of {@link SummonerSpell} that are persisted to the database
 	 */
-	@RequestMapping(method = RequestMethod.POST)
+	@PostMapping
 	public List<SummonerSpell> saveSummonerSpells(@RequestParam(required = false) boolean truncate) {
 		SummonerSpellsResponse response = restTemplate.getForObject(summonerSpellsUri.toString(),
 				SummonerSpellsResponse.class);
@@ -103,7 +103,7 @@ public class SummonerSpellsRetrieval {
 	 * @param id the ID to lookup the {@link SummonerSpell} from Riot
 	 * @return the {@link SummonerSpell} from Riot
 	 */
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	@GetMapping(value = "/{id}")
 	public SummonerSpell summonerSpell(@PathVariable int id) {
 		UriComponents uriComponents = summonerSpellUri.buildAndExpand(region, id);
 		SummonerSpell summonerSpell;
@@ -123,7 +123,7 @@ public class SummonerSpellsRetrieval {
 	 * @param id the ID to lookup the {@link SummonerSpell} from Riot
 	 * @return the persisted {@link SummonerSpell}
 	 */
-	@RequestMapping(value = "/{id}", method = RequestMethod.POST)
+	@PostMapping(value = "/{id}")
 	public SummonerSpell saveSummonerSpell(@PathVariable int id) {
 		UriComponents uriComponents = summonerSpellUri.buildAndExpand(region, id);
 		SummonerSpell summonerSpell;

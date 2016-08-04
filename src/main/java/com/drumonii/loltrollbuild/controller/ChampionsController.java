@@ -40,14 +40,14 @@ public class ChampionsController {
 	@Autowired
 	private MapsRepository mapsRepository;
 
-	@RequestMapping(method = RequestMethod.GET)
+	@GetMapping
 	public String champions(Model model) {
 		model.addAttribute("champions", championsRepository.findAll(new Sort(ASC, "name")));
 		model.addAttribute("tags", championsRepository.getTags());
 		return "champions/champions";
 	}
 
-	@RequestMapping(value = "/{value}", method = RequestMethod.GET)
+	@GetMapping(value = "/{value}")
 	public String champion(@PathVariable String value, Model model) {
 		Champion champion;
 		try {
@@ -70,7 +70,7 @@ public class ChampionsController {
 	 * @param mapId the map ID to generate the troll build
 	 * @return a {@link Map} of build type key with {@link List} of values.
 	 */
-	@RequestMapping(value = "/{id}/troll-build", method = RequestMethod.GET)
+	@GetMapping(value = "/{id}/troll-build")
 	@ResponseBody
 	public Map<String, List<?>> trollBuild(@PathVariable("id") Champion champion, @RequestParam String mapId) {
 		Map<String, List<?>> trollBuild = new HashMap<>();

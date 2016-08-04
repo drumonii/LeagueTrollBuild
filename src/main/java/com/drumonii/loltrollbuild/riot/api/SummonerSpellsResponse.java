@@ -2,6 +2,7 @@ package com.drumonii.loltrollbuild.riot.api;
 
 import com.drumonii.loltrollbuild.model.SummonerSpell;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -47,6 +48,7 @@ import java.util.Map;
  * <b>Note</b>: Not all attributes are retrieved from Riot, only the ones that are used.
  */
 @NoArgsConstructor
+@AllArgsConstructor
 public class SummonerSpellsResponse extends BaseResponse {
 
 	@JsonProperty("data")

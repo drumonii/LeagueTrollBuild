@@ -11,8 +11,8 @@ import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.PagedResources;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -42,7 +42,7 @@ public class ItemsRestController {
 	 * @param item the search {@link Item} to define as the QBE
 	 * @return the {@link PagedResources} of {@link Item} {@link Resource}
 	 */
-	@RequestMapping(method = RequestMethod.GET)
+	@GetMapping
 	public PagedResources<Resource<Item>> getItems(Pageable pageable, Item item) {
 		ExampleMatcher exampleMatcher = ExampleMatcher.matching()
 				.withMatcher("name", matcher -> matcher.stringMatcher(CONTAINING))
@@ -62,7 +62,7 @@ public class ItemsRestController {
 	 * @param mapId the map ID to get eligible {@link Item}s
 	 * @return the {@link Resources} of {@link Item} {@link Resource}
 	 */
-	@RequestMapping(value = "/boots", method = RequestMethod.GET)
+	@GetMapping(value = "/boots")
 	public Resources<Resource<Item>> getBoots(@RequestParam String mapId) {
 		return new Resources<>(itemsRepository.boots(mapId).stream()
 				.map(item -> new Resource<>(item))
@@ -76,7 +76,7 @@ public class ItemsRestController {
 	 * @param mapId the map ID to get eligible trinkets
 	 * @return the {@link Resources} of {@link Item} {@link Resource}
 	 */
-	@RequestMapping(value = "/trinkets", method = RequestMethod.GET)
+	@GetMapping(value = "/trinkets")
 	public Resources<Resource<Item>> getTrinkets(@RequestParam String mapId) {
 		return new Resources<>(itemsRepository.trinkets(mapId).stream()
 				.map(item -> new Resource<>(item))
@@ -89,7 +89,7 @@ public class ItemsRestController {
 	 *
 	 * @return the {@link Resources} of {@link Item} {@link Resource}
 	 */
-	@RequestMapping(value = "/viktor-only", method = RequestMethod.GET)
+	@GetMapping(value = "/viktor-only")
 	public Resources<Resource<Item>> getViktorOnly() {
 		return new Resources<>(itemsRepository.viktorOnly().stream()
 				.map(item -> new Resource<>(item))
@@ -103,7 +103,7 @@ public class ItemsRestController {
 	 * @param mapId the map ID to get eligible {@link Item}s for the troll build
 	 * @return the {@link Resources} of {@link Item} {@link Resource}
 	 */
-	@RequestMapping(value = "/for-troll-build", method = RequestMethod.GET)
+	@GetMapping(value = "/for-troll-build")
 	public Resources<Resource<Item>> getForTrollBuild(@RequestParam String mapId) {
 		return new Resources<>(itemsRepository.forTrollBuild(mapId).stream()
 				.map(item -> new Resource<>(item))

@@ -7,7 +7,6 @@ import org.junit.After;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.hateoas.MediaTypes;
 
 import static com.drumonii.loltrollbuild.model.SummonerSpell.GameMode.CLASSIC;
 import static org.hamcrest.Matchers.hasSize;
@@ -36,7 +35,7 @@ public class SummonerSpellsRestControllerTest extends BaseSpringTestRunner {
 		mockMvc.perform(get(apiPath + "/summoner-spells")
 				.param("name", "ghost"))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaTypes.HAL_JSON))
+				.andExpect(content().contentType(HAL_JSON_UTF8))
 				.andExpect(jsonPath("$._embedded.summonerSpells", hasSize(1)))
 				.andExpect(jsonPath("$._links").exists())
 				.andExpect(jsonPath("$.page").exists());
@@ -45,7 +44,7 @@ public class SummonerSpellsRestControllerTest extends BaseSpringTestRunner {
 		mockMvc.perform(get(apiPath + "/summoner-spells")
 				.param("name", "notfound"))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaTypes.HAL_JSON))
+				.andExpect(content().contentType(HAL_JSON_UTF8))
 				.andExpect(jsonPath("$._embedded").doesNotExist())
 				.andExpect(jsonPath("$._links").exists())
 				.andExpect(jsonPath("$.page").exists());
@@ -56,7 +55,7 @@ public class SummonerSpellsRestControllerTest extends BaseSpringTestRunner {
 		mockMvc.perform(get(apiPath + "/summoner-spells/for-troll-build")
 				.param("mode", CLASSIC.name()))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaTypes.HAL_JSON))
+				.andExpect(content().contentType(HAL_JSON_UTF8))
 				.andExpect(jsonPath("$._links").exists());
 	}
 

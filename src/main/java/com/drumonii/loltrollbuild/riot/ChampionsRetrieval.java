@@ -57,7 +57,7 @@ public class ChampionsRetrieval {
 	 *
 	 * @return the {@link List} of {@link Champion} from Riot
 	 */
-	@RequestMapping(method = RequestMethod.GET)
+	@GetMapping
 	public Collection<Champion> champions() {
 		ChampionsResponse response = restTemplate.getForObject(championsUri.toString(), ChampionsResponse.class);
 		return response.getChampions().values();
@@ -76,7 +76,7 @@ public class ChampionsRetrieval {
 	 * the ones from Riot are persisted along with their images saved
 	 * @return the {@link List} of {@link Champion} that are persisted to the database
 	 */
-	@RequestMapping(method = RequestMethod.POST)
+	@PostMapping
 	public List<Champion> saveChampions(@RequestParam(required = false) boolean truncate) {
 		ChampionsResponse response = restTemplate.getForObject(championsUri.toString(), ChampionsResponse.class);
 		List<Champion> champions = new ArrayList<>(response.getChampions().values());
@@ -101,7 +101,7 @@ public class ChampionsRetrieval {
 	 * @param id the ID to lookup the {@link Champion} from Riot
 	 * @return the {@link Champion} from Riot
 	 */
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	@GetMapping(value = "/{id}")
 	public Champion champion(@PathVariable int id) {
 		UriComponents uriComponents = championUri.buildAndExpand(region, id);
 		Champion champion;
@@ -121,7 +121,7 @@ public class ChampionsRetrieval {
 	 * @param id the ID to lookup the {@link Champion} from Riot
 	 * @return the persisted {@link Champion}
 	 */
-	@RequestMapping(value = "/{id}", method = RequestMethod.POST)
+	@PostMapping(value = "/{id}")
 	public Champion saveChampion(@PathVariable int id) {
 		UriComponents uriComponents = championUri.buildAndExpand(region, id);
 		Champion champion;

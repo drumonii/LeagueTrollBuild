@@ -57,7 +57,7 @@ public class ItemsRetrieval {
 	 *
 	 * @return the {@link List} of {@link Item} from Riot
 	 */
-	@RequestMapping(method = RequestMethod.GET)
+	@GetMapping
 	public Collection<Item> items() {
 		ItemsResponse response = restTemplate.getForObject(itemsUri.toString(), ItemsResponse.class);
 		return response.getItems().values();
@@ -75,7 +75,7 @@ public class ItemsRetrieval {
 	 * ones from Riot are persisted along with their images saved
 	 * @return the {@link List} of {@link Item} that are persisted to the database
 	 */
-	@RequestMapping(method = RequestMethod.POST)
+	@PostMapping
 	public List<Item> saveItems(@RequestParam(required = false) boolean truncate) {
 		ItemsResponse response = restTemplate.getForObject(itemsUri.toString(), ItemsResponse.class);
 		List<Item> items = new ArrayList<>(response.getItems().values());
@@ -99,7 +99,7 @@ public class ItemsRetrieval {
 	 * @param id the ID to lookup the {@link Item} from Riot
 	 * @return the {@link Item} from Riot
 	 */
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	@GetMapping(value = "/{id}")
 	public Item item(@PathVariable int id) {
 		UriComponents uriComponents = itemUri.buildAndExpand(region, id);
 		Item item;
@@ -119,7 +119,7 @@ public class ItemsRetrieval {
 	 * @param id the ID to lookup the {@link Item} from Riot
 	 * @return the persisted {@link Item}
 	 */
-	@RequestMapping(value = "/{id}", method = RequestMethod.POST)
+	@PostMapping(value = "/{id}")
 	public Item saveItem(@PathVariable int id) {
 		UriComponents uriComponents = itemUri.buildAndExpand(region, id);
 		Item item;

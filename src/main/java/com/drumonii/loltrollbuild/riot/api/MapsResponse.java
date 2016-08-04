@@ -2,6 +2,7 @@ package com.drumonii.loltrollbuild.riot.api;
 
 import com.drumonii.loltrollbuild.model.GameMap;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -34,6 +35,7 @@ import java.util.Map;
  * </pre>
  */
 @NoArgsConstructor
+@AllArgsConstructor
 public class MapsResponse extends BaseResponse {
 
 	@JsonProperty("data")

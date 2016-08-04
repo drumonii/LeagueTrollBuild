@@ -7,9 +7,9 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
@@ -31,7 +31,7 @@ public class AdminController {
 	@Autowired
 	private VersionsRetrieval versionsRetrieval;
 
-	@RequestMapping(method = RequestMethod.GET)
+	@GetMapping
 	public String admin(Model model) {
 		model.addAttribute("latestRiotPatch", versionsRetrieval.latestVersion(versionsRetrieval.versionsFromResponse())
 				.getPatch());
@@ -45,7 +45,7 @@ public class AdminController {
 	@Autowired
 	private SummonerSpellsRetrieval summonerSpellsRetrieval;
 
-	@RequestMapping(value = "/summoner-spells", method = RequestMethod.GET)
+	@GetMapping(value = "/summoner-spells")
 	public String summonerSpells(@ModelAttribute("latestSavedPatch") String latestSavedPatch,
 			RedirectAttributes redirectAttrs, Model model) {
 		if (latestSavedPatch == null) {
@@ -64,7 +64,7 @@ public class AdminController {
 	@Autowired
 	private ItemsRetrieval itemsRetrieval;
 
-	@RequestMapping(value = "/items", method = RequestMethod.GET)
+	@GetMapping(value = "/items")
 	public String items(@ModelAttribute("latestSavedPatch") String latestSavedPatch,
 			RedirectAttributes redirectAttrs, Model model) {
 		if (latestSavedPatch == null) {
@@ -82,7 +82,7 @@ public class AdminController {
 	@Autowired
 	private ChampionsRetrieval championsRetrieval;
 
-	@RequestMapping(value = "/champions", method = RequestMethod.GET)
+	@GetMapping(value = "/champions")
 	public String champions(@ModelAttribute("latestSavedPatch") String latestSavedPatch,
 			RedirectAttributes redirectAttrs, Model model) {
 		if (latestSavedPatch == null) {
@@ -101,7 +101,7 @@ public class AdminController {
 	@Autowired
 	private MapsRetrieval mapsRetrieval;
 
-	@RequestMapping(value = "/maps", method = RequestMethod.GET)
+	@GetMapping(value = "/maps")
 	public String maps(@ModelAttribute("latestSavedPatch") String latestSavedPatch,
 			RedirectAttributes redirectAttrs, Model model) {
 		if (latestSavedPatch == null) {

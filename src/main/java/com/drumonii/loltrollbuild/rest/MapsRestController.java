@@ -10,8 +10,8 @@ import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.PagedResources;
 import org.springframework.hateoas.Resource;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import static org.springframework.data.domain.ExampleMatcher.StringMatcher.CONTAINING;
@@ -37,7 +37,7 @@ public class MapsRestController {
 	 * @param gameMap the search {@link GameMap} to define as the QBE
 	 * @return the {@link PagedResources} of {@link GameMap} {@link Resource}
 	 */
-	@RequestMapping(method = RequestMethod.GET)
+	@GetMapping
 	public PagedResources<Resource<GameMap>> getGameMaps(Pageable pageable, GameMap gameMap) {
 		ExampleMatcher exampleMatcher = ExampleMatcher.matching()
 				.withMatcher("mapName", matcher -> matcher.stringMatcher(CONTAINING))

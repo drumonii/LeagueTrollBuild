@@ -7,7 +7,6 @@ import org.junit.After;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.hateoas.MediaTypes;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -35,7 +34,7 @@ public class ItemsRestControllerTest extends BaseSpringTestRunner {
 		mockMvc.perform(get(apiPath + "/items")
 				.param("name", "fire"))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaTypes.HAL_JSON))
+				.andExpect(content().contentType(HAL_JSON_UTF8))
 				.andExpect(jsonPath("$._embedded.items", hasSize(1)))
 				.andExpect(jsonPath("$._links").exists())
 				.andExpect(jsonPath("$.page").exists());
@@ -44,7 +43,7 @@ public class ItemsRestControllerTest extends BaseSpringTestRunner {
 		mockMvc.perform(get(apiPath + "/items")
 				.param("group", "upgrade"))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaTypes.HAL_JSON))
+				.andExpect(content().contentType(HAL_JSON_UTF8))
 				.andExpect(jsonPath("$._embedded.items", hasSize(1)))
 				.andExpect(jsonPath("$._links").exists())
 				.andExpect(jsonPath("$.page").exists());
@@ -53,7 +52,7 @@ public class ItemsRestControllerTest extends BaseSpringTestRunner {
 		mockMvc.perform(get(apiPath + "/items")
 				.param("requiredChampion", "gang"))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaTypes.HAL_JSON))
+				.andExpect(content().contentType(HAL_JSON_UTF8))
 				.andExpect(jsonPath("$._embedded.items", hasSize(1)))
 				.andExpect(jsonPath("$._links").exists())
 				.andExpect(jsonPath("$.page").exists());
@@ -62,7 +61,7 @@ public class ItemsRestControllerTest extends BaseSpringTestRunner {
 		mockMvc.perform(get(apiPath + "/items")
 				.param("name", "notfound"))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaTypes.HAL_JSON))
+				.andExpect(content().contentType(HAL_JSON_UTF8))
 				.andExpect(jsonPath("$._embedded").doesNotExist())
 				.andExpect(jsonPath("$._links").exists())
 				.andExpect(jsonPath("$.page").exists());
@@ -73,7 +72,7 @@ public class ItemsRestControllerTest extends BaseSpringTestRunner {
 		mockMvc.perform(get(apiPath + "/items/boots")
 				.param("mapId", SUMMONERS_RIFT))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaTypes.HAL_JSON))
+				.andExpect(content().contentType(HAL_JSON_UTF8))
 				.andExpect(jsonPath("$._links").exists());
 	}
 
@@ -82,7 +81,7 @@ public class ItemsRestControllerTest extends BaseSpringTestRunner {
 		mockMvc.perform(get(apiPath + "/items/trinkets")
 				.param("mapId", SUMMONERS_RIFT))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaTypes.HAL_JSON))
+				.andExpect(content().contentType(HAL_JSON_UTF8))
 				.andExpect(jsonPath("$._links").exists());
 	}
 
@@ -90,7 +89,7 @@ public class ItemsRestControllerTest extends BaseSpringTestRunner {
 	public void getViktorOnly() throws Exception {
 		mockMvc.perform(get(apiPath + "/items/viktor-only"))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaTypes.HAL_JSON))
+				.andExpect(content().contentType(HAL_JSON_UTF8))
 				.andExpect(jsonPath("$._links").exists());
 	}
 
@@ -99,7 +98,7 @@ public class ItemsRestControllerTest extends BaseSpringTestRunner {
 		mockMvc.perform(get(apiPath + "/items/for-troll-build")
 				.param("mapId", SUMMONERS_RIFT))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaTypes.HAL_JSON))
+				.andExpect(content().contentType(HAL_JSON_UTF8))
 				.andExpect(jsonPath("$._links").exists());
 	}
 

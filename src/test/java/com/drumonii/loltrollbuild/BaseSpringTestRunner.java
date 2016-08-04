@@ -12,13 +12,13 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.boot.test.WebIntegrationTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.restdocs.RestDocumentation;
+import org.springframework.http.MediaType;
+import org.springframework.restdocs.JUnitRestDocumentation;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.RequestPostProcessor;
 import org.springframework.web.context.WebApplicationContext;
@@ -30,19 +30,20 @@ import static com.drumonii.loltrollbuild.config.Profiles.TESTING;
 import static com.drumonii.loltrollbuild.config.WebSecurityConfig.ADMIN_ROLE;
 import static com.drumonii.loltrollbuild.config.WebSecurityConfig.WebDevTestingSecurityConfig.IN_MEM_PASSWORD;
 import static com.drumonii.loltrollbuild.config.WebSecurityConfig.WebDevTestingSecurityConfig.IN_MEM_USERNAME;
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.fail;
+import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
 /**
- * Base {@link SpringJUnit4ClassRunner} for Spring JUnit 4 tests that runs on a random unused port to avoid conflicts
- * from the main application (potentially) already running on port 8080.
+ * Base {@link SpringRunner} for Spring JUnit 4 tests that runs on a random unused port to avoid conflicts from the
+ * main application (potentially) already running on port 8080.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = LeagueTrollBuildApplication.class)
-@WebIntegrationTest(randomPort = true)
+@RunWith(SpringRunner.class)
+@SpringBootTest(webEnvironment = RANDOM_PORT)
 @ActiveProfiles(TESTING)
 @TestPropertySource(properties = "riot.api.key=API_KEY")
 public abstract class BaseSpringTestRunner {
@@ -54,6 +55,8 @@ public abstract class BaseSpringTestRunner {
 	protected ObjectMapper objectMapper;
 
 	protected MockMvc mockMvc;
+
+	protected static final MediaType HAL_JSON_UTF8 = new MediaType("application", "hal+json", UTF_8);
 
 	protected static final String TESTING_USERNAME = IN_MEM_USERNAME;
 	protected static final String TESTING_PASSWORD = IN_MEM_PASSWORD;
@@ -71,7 +74,7 @@ public abstract class BaseSpringTestRunner {
 	protected List<Version> versions;
 
 	@Rule
-	public final RestDocumentation restDocumentation = new RestDocumentation("build/generated-snippets");
+	public final JUnitRestDocumentation restDocumentation = new JUnitRestDocumentation("build/generated-snippets");
 
 	@Before
 	public void before() {

@@ -7,7 +7,6 @@ import org.junit.After;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.hateoas.MediaTypes;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -35,7 +34,7 @@ public class MapsRestControllerTest extends BaseSpringTestRunner {
 		mockMvc.perform(get(apiPath + "/maps")
 				.param("mapName", "crystal"))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaTypes.HAL_JSON))
+				.andExpect(content().contentType(HAL_JSON_UTF8))
 				.andExpect(jsonPath("$._embedded.maps", hasSize(1)))
 				.andExpect(jsonPath("$._links").exists())
 				.andExpect(jsonPath("$.page").exists());
@@ -44,7 +43,7 @@ public class MapsRestControllerTest extends BaseSpringTestRunner {
 		mockMvc.perform(get(apiPath + "/maps")
 				.param("mapName", "notfound"))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaTypes.HAL_JSON))
+				.andExpect(content().contentType(HAL_JSON_UTF8))
 				.andExpect(jsonPath("$._embedded").doesNotExist())
 				.andExpect(jsonPath("$._links").exists())
 				.andExpect(jsonPath("$.page").exists());

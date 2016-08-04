@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 
@@ -54,7 +51,7 @@ public class VersionsRetrieval {
 	 * @param versions the {@link ModelAttribute} of {@link List} of {@link Version}s from Riot
 	 * @return the {@link List} of {@link Version}s from Riot
 	 */
-	@RequestMapping(method = RequestMethod.GET)
+	@GetMapping
 	public List<Version> versions(@ModelAttribute List<Version> versions) {
 		return versions;
 	}
@@ -65,7 +62,7 @@ public class VersionsRetrieval {
 	 * @param versions the {@link ModelAttribute} of {@link List} of {@link Version}s from Riot
 	 * @return the latest patch {@link Version} from Riot
 	 */
-	@RequestMapping(value = "/latest", method = RequestMethod.GET)
+	@GetMapping(value = "/latest")
 	public Version latestVersion(@ModelAttribute List<Version> versions) {
 		return versions.get(0);
 	}
@@ -78,7 +75,7 @@ public class VersionsRetrieval {
 	 * @param versions versions the {@link ModelAttribute} of {@link List} of {@link Version}s from Riot
 	 * @return the latest patch {@link Version} is persisted to the database or the existing patch version
 	 */
-	@RequestMapping(value = "/latest", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@PostMapping(value = "/latest", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public Version saveLatestVersion(@ModelAttribute List<Version> versions) {
 		Version latestPatchVersion = versions.stream().findFirst().orElse(new Version("0.0.0"));
 		if (!latestPatchVersion.equals(versionsRepository.latestVersion())) {

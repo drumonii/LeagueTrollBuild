@@ -1,7 +1,6 @@
 package com.drumonii.loltrollbuild.riot.api;
 
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
-import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.model.image.Image;
 import com.drumonii.loltrollbuild.repository.VersionsRepository;
 import org.junit.After;
@@ -57,7 +56,7 @@ public class ImageFetcherTest extends BaseSpringTestRunner {
 				.isInstanceOf(ResourceNotFoundException.class)
 				.hasMessage("No latest patch version in the database.");
 
-		versionsRepository.save(new Version("6.5.1"));
+		versionsRepository.save(versions.get(0));
 
 		when(builder.buildAndExpand(anyString(), anyString()))
 				.thenReturn(uriComponents);
@@ -84,7 +83,7 @@ public class ImageFetcherTest extends BaseSpringTestRunner {
 				.isInstanceOf(ResourceNotFoundException.class)
 				.hasMessage("No latest patch version in the database.");
 
-		versionsRepository.save(new Version("6.5.1"));
+		versionsRepository.save(versions.get(0));
 
 		when(builder.buildAndExpand(anyString(), anyString()))
 				.thenReturn(uriComponents);

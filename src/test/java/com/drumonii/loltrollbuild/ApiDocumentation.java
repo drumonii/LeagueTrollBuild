@@ -6,7 +6,6 @@ import org.junit.After;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.restdocs.payload.JsonFieldType;
 
 import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.linkWithRel;
 import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.links;
@@ -171,10 +170,8 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 						fieldWithPath("_embedded.items[*].name")
 								.description("The name of the Item"),
 						fieldWithPath("_embedded.items[*].group")
-								.type(JsonFieldType.STRING)
 								.description("The group of the Item"),
 						fieldWithPath("_embedded.items[*].consumed")
-								.type(JsonFieldType.BOOLEAN)
 								.description("Whether the Item is consumable"),
 						fieldWithPath("_embedded.items[*].description")
 								.description("The group of the Item"),
@@ -183,7 +180,6 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 						fieldWithPath("_embedded.items[*].into")
 								.description("An array of Item IDs that the Item builds into as part of the Item's recipe"),
 						fieldWithPath("_embedded.items[*].requiredChampion")
-								.type(JsonFieldType.STRING)
 								.description("The required champion of the Item"),
 						fieldWithPath("_embedded.items[*].maps")
 								.description("A map of Map IDs keys and boolean values whether the Item can be purchased in the Map"),
@@ -206,10 +202,8 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 						fieldWithPath("_embedded.items[*].name")
 								.description("The name of the Item"),
 						fieldWithPath("_embedded.items[*].group")
-								.type(JsonFieldType.STRING)
 								.description("The group of the Item"),
 						fieldWithPath("_embedded.items[*].consumed")
-								.type(JsonFieldType.BOOLEAN)
 								.description("Whether the Item is consumable"),
 						fieldWithPath("_embedded.items[*].description")
 								.description("The group of the Item"),
@@ -218,7 +212,6 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 						fieldWithPath("_embedded.items[*].into")
 								.description("An array of Item IDs that the Item builds into as part of the Item's recipe"),
 						fieldWithPath("_embedded.items[*].requiredChampion")
-								.type(JsonFieldType.STRING)
 								.description("The required champion of the Item"),
 						fieldWithPath("_embedded.items[*].maps")
 								.description("A map of Map IDs keys and boolean values whether the Item can be purchased in the Map"),
@@ -242,10 +235,8 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 						fieldWithPath("name")
 								.description("The name of the Item"),
 						fieldWithPath("group")
-								.type(JsonFieldType.STRING)
 								.description("The group of the Item"),
 						fieldWithPath("consumed")
-								.type(JsonFieldType.BOOLEAN)
 								.description("Whether the Item is consumable"),
 						fieldWithPath("description")
 								.description("The group of the Item"),
@@ -254,7 +245,6 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 						fieldWithPath("into")
 								.description("An array of Item IDs that the Item builds into as part of the Item's recipe"),
 						fieldWithPath("requiredChampion")
-								.type(JsonFieldType.STRING)
 								.description("The required champion of the Item"),
 						fieldWithPath("maps")
 								.description("A map of Map IDs keys and boolean values whether the Item can be purchased in the Map"),
@@ -279,10 +269,8 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 						fieldWithPath("_embedded.items[*].name")
 								.description("The name of the Item"),
 						fieldWithPath("_embedded.items[*].group")
-								.type(JsonFieldType.STRING)
 								.description("The group of the Item"),
 						fieldWithPath("_embedded.items[*].consumed")
-								.type(JsonFieldType.BOOLEAN)
 								.description("Whether the Item is consumable"),
 						fieldWithPath("_embedded.items[*].description")
 								.description("The group of the Item"),
@@ -291,7 +279,6 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 						fieldWithPath("_embedded.items[*].into")
 								.description("An array of Item IDs that the Item builds into as part of the Item's recipe"),
 						fieldWithPath("_embedded.items[*].requiredChampion")
-								.type(JsonFieldType.STRING)
 								.description("The required champion of the Item"),
 						fieldWithPath("_embedded.items[*].maps")
 								.description("A map of Map IDs keys and boolean values whether the Item can be purchased in the Map"),
@@ -315,10 +302,8 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 						fieldWithPath("_embedded.items[*].name")
 								.description("The name of the Item"),
 						fieldWithPath("_embedded.items[*].group")
-								.type(JsonFieldType.STRING)
 								.description("The group of the Item"),
 						fieldWithPath("_embedded.items[*].consumed")
-								.type(JsonFieldType.BOOLEAN)
 								.description("Whether the Item is consumable"),
 						fieldWithPath("_embedded.items[*].description")
 								.description("The group of the Item"),
@@ -327,7 +312,6 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 						fieldWithPath("_embedded.items[*].into")
 								.description("An array of Item IDs that the Item builds into as part of the Item's recipe"),
 						fieldWithPath("_embedded.items[*].requiredChampion")
-								.type(JsonFieldType.STRING)
 								.description("The required champion of the Item"),
 						fieldWithPath("_embedded.items[*].maps")
 								.description("A map of Map IDs keys and boolean values whether the Item can be purchased in the Map"),
@@ -351,10 +335,8 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 						fieldWithPath("_embedded.items[*].name")
 								.description("The name of the Item"),
 						fieldWithPath("_embedded.items[*].group")
-								.type(JsonFieldType.STRING)
 								.description("The group of the Item"),
 						fieldWithPath("_embedded.items[*].consumed")
-								.type(JsonFieldType.BOOLEAN)
 								.description("Whether the Item is consumable"),
 						fieldWithPath("_embedded.items[*].description")
 								.description("The group of the Item"),
@@ -363,7 +345,6 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 						fieldWithPath("_embedded.items[*].into")
 								.description("An array of Item IDs that the Item builds into as part of the Item's recipe"),
 						fieldWithPath("_embedded.items[*].requiredChampion")
-								.type(JsonFieldType.STRING)
 								.description("The required champion of the Item"),
 						fieldWithPath("_embedded.items[*].maps")
 								.description("A map of Map IDs keys and boolean values whether the Item can be purchased in the Map"),
@@ -387,10 +368,8 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 						fieldWithPath("_embedded.items[*].name")
 								.description("The name of the Item"),
 						fieldWithPath("_embedded.items[*].group")
-								.type(JsonFieldType.STRING)
 								.description("The group of the Item"),
 						fieldWithPath("_embedded.items[*].consumed")
-								.type(JsonFieldType.BOOLEAN)
 								.description("Whether the Item is consumable"),
 						fieldWithPath("_embedded.items[*].description")
 								.description("The group of the Item"),
@@ -399,7 +378,6 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 						fieldWithPath("_embedded.items[*].into")
 								.description("An array of Item IDs that the Item builds into as part of the Item's recipe"),
 						fieldWithPath("_embedded.items[*].requiredChampion")
-								.type(JsonFieldType.STRING)
 								.description("The required champion of the Item"),
 						fieldWithPath("_embedded.items[*].maps")
 								.description("A map of Map IDs keys and boolean values whether the Item can be purchased in the Map"),

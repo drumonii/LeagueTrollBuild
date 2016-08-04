@@ -48,7 +48,7 @@ public class MapsRetrieval {
 	 *
 	 * @return the {@link List} of {@link GameMap} from Riot
 	 */
-	@RequestMapping(method = RequestMethod.GET)
+	@GetMapping
 	public Collection<GameMap> maps() {
 		MapsResponse response = restTemplate.getForObject(mapsUri.toString(), MapsResponse.class);
 		return response.getMaps().values();
@@ -66,7 +66,7 @@ public class MapsRetrieval {
 	 * the ones from Riot are persisted along with their images saved
 	 * @return the {@link List} of {@link GameMap} that are persisted to the database
 	 */
-	@RequestMapping(method = RequestMethod.POST)
+	@PostMapping
 	public List<GameMap> saveMaps(@RequestParam(required = false) boolean truncate) {
 		MapsResponse response = restTemplate.getForObject(mapsUri.toString(), MapsResponse.class);
 		List<GameMap> maps = new ArrayList<>(response.getMaps().values());
@@ -90,7 +90,7 @@ public class MapsRetrieval {
 	 * @param id the ID to lookup the {@link GameMap} from Riot
 	 * @return the {@link GameMap} from Riot
 	 */
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	@GetMapping(value = "/{id}")
 	public GameMap map(@PathVariable int id) {
 		MapsResponse response = restTemplate.getForObject(mapsUri.toString(), MapsResponse.class);
 		GameMap map = response.getMaps().get(String.valueOf(id));
@@ -108,7 +108,7 @@ public class MapsRetrieval {
 	 * @param id the ID to lookup the {@link GameMap} from Riot
 	 * @return the persisted {@link GameMap}
 	 */
-	@RequestMapping(value = "/{id}", method = RequestMethod.POST)
+	@PostMapping(value = "/{id}")
 	public GameMap saveMap(@PathVariable int id) {
 		MapsResponse response = restTemplate.getForObject(mapsUri.toString(), MapsResponse.class);
 		GameMap map = response.getMaps().get(String.valueOf(id));

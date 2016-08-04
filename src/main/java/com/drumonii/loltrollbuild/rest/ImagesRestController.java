@@ -9,9 +9,9 @@ import org.apache.commons.io.FilenameUtils;
 import org.springframework.http.CacheControl;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.concurrent.TimeUnit;
@@ -23,7 +23,7 @@ import java.util.concurrent.TimeUnit;
 @RequestMapping("/img")
 public class ImagesRestController {
 
-	@RequestMapping(value = "/summoner-spells/{id}.*", method = RequestMethod.GET)
+	@GetMapping(value = "/summoner-spells/{id}.*")
 	public ResponseEntity<byte[]> summonerSpellImg(@PathVariable("id") SummonerSpell summonerSpell) {
 		return ResponseEntity.ok()
 				.contentLength(summonerSpell.getImage().getImgSrc().length)
@@ -33,7 +33,7 @@ public class ImagesRestController {
 				.body(summonerSpell.getImage().getImgSrc());
 	}
 
-	@RequestMapping(value = "/items/{id}.*", method = RequestMethod.GET)
+	@GetMapping(value = "/items/{id}.*")
 	public ResponseEntity<byte[]> itemImg(@PathVariable("id") Item item) {
 		return ResponseEntity.ok()
 				.contentLength(item.getImage().getImgSrc().length)
@@ -43,7 +43,7 @@ public class ImagesRestController {
 				.body(item.getImage().getImgSrc());
 	}
 
-	@RequestMapping(value = "/champions/{id}.*", method = RequestMethod.GET)
+	@GetMapping(value = "/champions/{id}.*")
 	public ResponseEntity<byte[]> championImg(@PathVariable("id") Champion champion) {
 		return ResponseEntity.ok()
 				.contentLength(champion.getImage().getImgSrc().length)
@@ -53,7 +53,7 @@ public class ImagesRestController {
 				.body(champion.getImage().getImgSrc());
 	}
 
-	@RequestMapping(value = "/maps/map{id}.*", method = RequestMethod.GET)
+	@GetMapping(value = "/maps/map{id}.*")
 	public ResponseEntity<byte[]> mapImg(@PathVariable("id") GameMap gameMap) {
 		return ResponseEntity.ok()
 				.contentLength(gameMap.getImage().getImgSrc().length)

@@ -4,8 +4,7 @@ import com.drumonii.loltrollbuild.config.Profiles.Dev;
 import com.drumonii.loltrollbuild.config.Profiles.Testing;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
@@ -17,22 +16,22 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @Dev @Testing
 public class BadController {
 
-	@RequestMapping(value = "/400", method = RequestMethod.GET)
+	@GetMapping(value = "/400")
 	public String throw400() {
 		throw new BadRequestException();
 	}
 
-	@RequestMapping(value = "/403", method = RequestMethod.GET)
+	@GetMapping(value = "/403")
 	public String throw403() {
 		throw new AccessDeniedException();
 	}
 
-	@RequestMapping(value = "/404", method = RequestMethod.GET)
+	@GetMapping(value = "/404")
 	public String throw404() {
 		throw new NotFoundException();
 	}
 
-	@RequestMapping(value = "/500", method = RequestMethod.GET)
+	@GetMapping(value = "/500")
 	public String throw500() {
 		throw new InternalServerErrorException();
 	}

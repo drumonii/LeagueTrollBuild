@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
