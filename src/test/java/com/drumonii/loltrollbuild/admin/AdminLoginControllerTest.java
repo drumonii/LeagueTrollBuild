@@ -14,12 +14,10 @@ public class AdminLoginControllerTest extends BaseSpringTestRunner {
 
 	@Test
 	public void adminCanLoginAndLogout() throws Exception {
-		mockMvc
-				.perform(formLogin("/admin/login").user(TESTING_USERNAME).password(TESTING_PASSWORD))
+		mockMvc.perform(formLogin("/admin/login").user(TESTING_USERNAME).password(TESTING_PASSWORD))
 				.andExpect(authenticated().withRoles(TESTING_USER_ROLE))
 				.andExpect(redirectedUrl("/admin"));
-		mockMvc
-				.perform(logout("/admin/logout"))
+		mockMvc.perform(logout("/admin/logout"))
 				.andExpect(unauthenticated())
 				.andExpect(redirectedUrl("/admin/login?logout"));
 	}

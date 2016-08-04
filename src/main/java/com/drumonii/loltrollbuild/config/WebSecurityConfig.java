@@ -4,6 +4,7 @@ import com.drumonii.loltrollbuild.config.Profiles.Dev;
 import com.drumonii.loltrollbuild.config.Profiles.Embedded;
 import com.drumonii.loltrollbuild.config.Profiles.External;
 import com.drumonii.loltrollbuild.config.Profiles.Testing;
+import com.drumonii.loltrollbuild.security.CsrfTokenExpiredAccessDeniedHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -51,7 +52,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.and()
 			.logout()
 				.logoutRequestMatcher(new AntPathRequestMatcher("/admin/logout"))
-				.permitAll();
+				.permitAll()
+			.and()
+				.exceptionHandling()
+					.accessDeniedHandler(new CsrfTokenExpiredAccessDeniedHandler());
 		// @formatter:on
 	}
 
