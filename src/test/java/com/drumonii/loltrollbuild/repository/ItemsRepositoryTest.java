@@ -115,41 +115,7 @@ public class ItemsRepositoryTest extends BaseSpringTestRunner {
 
 	@Test
 	public void forTrollBuild() throws IOException {
-		Item nullName = itemsResponse.getItems().get("3632");
-		itemsRepository.save(nullName);
-
-		Item nullDescription = itemsResponse.getItems().get("3648");
-		itemsRepository.save(nullDescription);
-
-		Item bloodrazerEnchantment = itemsResponse.getItems().get("3675");
-		itemsRepository.save(bloodrazerEnchantment);
-
-		Item bootsOfSpeed = itemsResponse.getItems().get("1001");
-		itemsRepository.save(bootsOfSpeed);
-
-		Item biscuitOfRejuvenation = itemsResponse.getItems().get("2010");
-		itemsRepository.save(biscuitOfRejuvenation);
-
-		Item bootsOfMobility = itemsResponse.getItems().get("3117");
-		itemsRepository.save(bootsOfMobility);
-
-		Item sweepingLens = itemsResponse.getItems().get("3341");
-		itemsRepository.save(sweepingLens);
-
-		Item perfectHexCore = itemsResponse.getItems().get("3198");
-		itemsRepository.save(perfectHexCore);
-
-		Item doransRing = itemsResponse.getItems().get("1056");
-		itemsRepository.save(doransRing);
-
-		Item huntersPotion = itemsResponse.getItems().get("2032");
-		itemsRepository.save(huntersPotion);
-
-		Item poroSnax = itemsResponse.getItems().get("2052");
-		itemsRepository.save(poroSnax);
-
-		Item bloodThirster = itemsResponse.getItems().get("3072");
-		itemsRepository.save(bloodThirster);
+		itemsRepository.save(itemsResponse.getItems().values());
 
 		List<Item> forTrollBuild = itemsRepository.forTrollBuild(SUMMONERS_RIFT);
 		assertThat(forTrollBuild).isNotEmpty();
@@ -164,7 +130,7 @@ public class ItemsRepositoryTest extends BaseSpringTestRunner {
 				.containsNull();
 		assertThat(forTrollBuild).flatExtracting(Item::getInto)
 				.isEmpty();
-		assertThat(forTrollBuild).doesNotContain(bootsOfSpeed);
+		assertThat(forTrollBuild).doesNotContain(itemsResponse.getItems().get("1001"));
 		assertThat(forTrollBuild).extracting(Item::getDescription)
 				.isNotNull();
 		assertThat(forTrollBuild).extracting(Item::getName)

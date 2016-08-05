@@ -48,6 +48,9 @@ public class GameMapUtilTest extends BaseSpringTestRunner {
 		GameMap twistedTreeline = mapsResponse.getMaps().get(TWISTED_TREELINE);
 		assertThat(getActualMapName(TWISTED_TREELINE)).isEqualTo("Twisted Treeline");
 		assertThat(getActualMapName(twistedTreeline.getMapName())).isEqualTo("Twisted Treeline");
+
+		assertThat(getActualMapName("-1")).isEqualTo("-1");
+		assertThat(getActualMapName("Negative One")).isEqualTo("Negative One");
 	}
 
 	@Test

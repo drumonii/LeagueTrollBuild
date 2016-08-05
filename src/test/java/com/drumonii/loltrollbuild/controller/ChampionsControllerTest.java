@@ -15,7 +15,6 @@ import org.junit.After;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.test.annotation.Repeat;
 
 import java.util.HashSet;
 import java.util.List;
@@ -98,15 +97,14 @@ public class ChampionsControllerTest extends BaseSpringTestRunner {
 				.andExpect(view().name("champions/champion"));
 	}
 
-	@Repeat(50)
 	@Test
 	public void trollBuild() throws Exception {
 		// Items
 		Item ninjaTabi = itemsResponse.getItems().get("3047");
 		itemsRepository.save(ninjaTabi); // 1
 
-		Item bloodThirster = itemsResponse.getItems().get("3072");
-		itemsRepository.save(bloodThirster); // 2
+		Item perfectHexCore = itemsResponse.getItems().get("3198");
+		itemsRepository.save(perfectHexCore); // 2
 
 		Item randuinsOmen = itemsResponse.getItems().get("3143");
 		itemsRepository.save(randuinsOmen); // 3
@@ -135,10 +133,10 @@ public class ChampionsControllerTest extends BaseSpringTestRunner {
 		GameMap summonersRift = mapsResponse.getMaps().get("11");
 		mapsRepository.save(summonersRift);
 
-		Champion annie = championsResponse.getChampions().get("Annie");
-		championsRepository.save(annie);
+		Champion viktor = championsResponse.getChampions().get("Viktor");
+		championsRepository.save(viktor);
 
-		mockMvc.perform(get("/champions/{id}/troll-build?mapId={mapId}", annie.getId(), SUMMONERS_RIFT))
+		mockMvc.perform(get("/champions/{id}/troll-build?mapId={mapId}", viktor.getId(), SUMMONERS_RIFT))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(jsonPath("$.items", hasSize(6)))

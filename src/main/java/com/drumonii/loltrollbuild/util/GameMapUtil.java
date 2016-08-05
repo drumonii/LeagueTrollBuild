@@ -50,6 +50,8 @@ public class GameMapUtil {
 					return SUMMONERS_RIFT;
 				case HOWLING_ABYSS_ID:
 					return HOWLING_ABYSS;
+				default:
+					return mapName;
 			}
 		} catch (NumberFormatException e) {
 			switch (mapName) {
@@ -67,7 +69,6 @@ public class GameMapUtil {
 					return mapName;
 			}
 		}
-		return ""; // Shouldn't happen
 	}
 
 	/**
