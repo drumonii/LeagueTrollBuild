@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.PagedResources;
 import org.springframework.hateoas.Resource;
@@ -38,7 +41,9 @@ public class MapsRestController {
 	 * @return the {@link PagedResources} of {@link GameMap} {@link Resource}
 	 */
 	@GetMapping
-	public PagedResources<Resource<GameMap>> getGameMaps(Pageable pageable, GameMap gameMap) {
+	public PagedResources<Resource<GameMap>> getGameMaps(
+			@PageableDefault(size = 20, sort = "mapName", direction = Direction.ASC) Pageable pageable,
+			GameMap gameMap) {
 		ExampleMatcher exampleMatcher = ExampleMatcher.matching()
 				.withMatcher("mapName", matcher -> matcher.stringMatcher(CONTAINING))
 				.withIgnoreCase()

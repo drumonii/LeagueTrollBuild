@@ -7,7 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.PagedResources;
 import org.springframework.hateoas.Resource;
@@ -44,7 +47,9 @@ public class SummonerSpellsRestController {
 	 * @return the {@link PagedResources} of {@link SummonerSpell} {@link Resource}
 	 */
 	@GetMapping
-	public PagedResources<Resource<SummonerSpell>> getSummonerSpells(Pageable pageable, SummonerSpell summonerSpell) {
+	public PagedResources<Resource<SummonerSpell>> getSummonerSpells(
+			@PageableDefault(size = 20, sort = "name", direction = Direction.ASC) Pageable pageable,
+			SummonerSpell summonerSpell) {
 		ExampleMatcher exampleMatcher = ExampleMatcher.matching()
 				.withMatcher("name", matcher -> matcher.stringMatcher(CONTAINING))
 				.withIgnoreCase()
