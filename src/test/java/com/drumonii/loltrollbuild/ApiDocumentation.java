@@ -473,7 +473,7 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 
 	@Test
 	public void getMaps() throws Exception {
-		mapsRepository.save(mapsResponse.getMaps().get(SUMMONERS_RIFT));
+		mapsRepository.save(mapsResponse.getMaps().get(String.valueOf(SUMMONERS_RIFT)));
 
 		mockMvc.perform(get(apiPath + "/maps"))
 				.andExpect(status().isOk())
@@ -489,7 +489,7 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 						fieldWithPath("page")
 								.description("Current Page settings of the pagination"))));
 
-		mapsRepository.save(mapsResponse.getMaps().get(TWISTED_TREELINE));
+		mapsRepository.save(mapsResponse.getMaps().get(String.valueOf(TWISTED_TREELINE)));
 
 		mockMvc.perform(get(apiPath + "/maps?mapName={mapName}", "treeline"))
 				.andExpect(status().isOk())
@@ -508,7 +508,7 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 
 	@Test
 	public void getMap() throws Exception {
-		GameMap summonersRift = mapsResponse.getMaps().get(HOWLING_ABYSS);
+		GameMap summonersRift = mapsResponse.getMaps().get(String.valueOf(HOWLING_ABYSS));
 		mapsRepository.save(summonersRift);
 
 		mockMvc.perform(get(apiPath + "/maps/{id}", summonersRift.getMapId()))

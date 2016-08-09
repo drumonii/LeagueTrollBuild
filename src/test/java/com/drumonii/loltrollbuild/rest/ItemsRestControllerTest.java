@@ -13,12 +13,13 @@ import org.springframework.beans.factory.annotation.Value;
 
 import java.util.stream.Collectors;
 
-import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 public class ItemsRestControllerTest extends BaseSpringTestRunner {
+
+	private static final int DEFAULT_PAGE_SIZE = 20;
 
 	@Value("${spring.data.rest.base-path}")
 	private String apiPath;
@@ -35,10 +36,6 @@ public class ItemsRestControllerTest extends BaseSpringTestRunner {
 		itemsResponseSlice = new ItemsResponse();
 		itemsResponseSlice.setType(itemsResponse.getType());
 		itemsResponseSlice.setVersion(itemsResponse.getVersion());
-		itemsResponseSlice.setItems(itemsResponse.getItems().values().stream()
-				.filter(item -> item.getGroup() != null && item.getRequiredChampion() != null)
-				.collect(Collectors.toMap(item -> String.valueOf(item.getId()), item -> item)));
-		itemsRepository.save(itemsResponseSlice.getItems().values());
 	}
 
 	@After
@@ -48,6 +45,11 @@ public class ItemsRestControllerTest extends BaseSpringTestRunner {
 
 	@Test
 	public void getItems() throws Exception {
+		itemsResponseSlice.setItems(itemsResponse.getItems().values().stream()
+				.filter(item -> item.getGroup() != null && item.getRequiredChampion() != null)
+				.collect(Collectors.toMap(item -> String.valueOf(item.getId()), item -> item)));
+		itemsRepository.save(itemsResponseSlice.getItems().values());
+
 		Item item = RandomizeUtil.getRandom(itemsResponseSlice.getItems().values());
 
 		// qbe
@@ -145,37 +147,104 @@ public class ItemsRestControllerTest extends BaseSpringTestRunner {
 
 	@Test
 	public void getBoots() throws Exception {
+		itemsResponseSlice.setItems(itemsResponse.getItems().values().stream()
+				.filter(item -> item.getFrom() != null && item.getFrom().contains("1001"))
+				.collect(Collectors.toMap(item -> String.valueOf(item.getId()), item -> item)));
+		itemsRepository.save(itemsResponseSlice.getItems().values());
+
 		mockMvc.perform(get(apiPath + "/items/boots")
 				.param("mapId", SUMMONERS_RIFT))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(HAL_JSON_UTF8))
-				.andExpect(jsonPath("$._links").exists());
+				.andExpect(jsonPath("$._embedded.items").exists())
+				.andExpect(jsonPath("$._embedded.items[*].group", hasItem("BootsUpgrades")))
+				.andExpect(jsonPath("$._embedded.items[*].from").isNotEmpty())
+				.andExpect(jsonPath("$._embedded.items[*].into").isNotEmpty())
+				.andExpect(jsonPath("$._embedded.items[*].maps", hasItem(hasEntry(SUMMONERS_RIFT, true))))
+				.andExpect(jsonPath("$._embedded.items[*].gold.purchasable", hasItem(true)))
+				.andExpect(jsonPath("$._embedded.items[*]._links").exists())
+				.andExpect(jsonPath("$._embedded.items[*]._links.from").exists())
+				.andExpect(jsonPath("$._embedded.items[*]._links.into").exists())
+				.andExpect(jsonPath("$._embedded.items[*]._links.maps").exists())
+				.andExpect(jsonPath("$._links").exists())
+				.andExpect(jsonPath("$._links.self").exists())
+				.andExpect(jsonPath("$._links.self.href").exists());
 	}
 
 	@Test
 	public void getTrinkets() throws Exception {
+		itemsResponseSlice.setItems(itemsResponse.getItems().values().stream()
+				.filter(item -> item.getGroup() != null && item.getGroup().equals("RelicBase"))
+				.collect(Collectors.toMap(item -> String.valueOf(item.getId()), item -> item)));
+		itemsRepository.save(itemsResponseSlice.getItems().values());
+
 		mockMvc.perform(get(apiPath + "/items/trinkets")
 				.param("mapId", SUMMONERS_RIFT))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(HAL_JSON_UTF8))
-				.andExpect(jsonPath("$._links").exists());
+				.andExpect(jsonPath("$._embedded.items").exists())
+				.andExpect(jsonPath("$._embedded.items[*].group", hasItem("RelicBase")))
+				.andExpect(jsonPath("$._embedded.items[*].from").isNotEmpty())
+				.andExpect(jsonPath("$._embedded.items[*].into").isNotEmpty())
+				.andExpect(jsonPath("$._embedded.items[*].maps", hasItem(hasEntry(SUMMONERS_RIFT, true))))
+				.andExpect(jsonPath("$._embedded.items[*].gold.purchasable", hasItem(true)))
+				.andExpect(jsonPath("$._embedded.items[*]._links").exists())
+				.andExpect(jsonPath("$._embedded.items[*]._links.from").doesNotExist())
+				.andExpect(jsonPath("$._embedded.items[*]._links.into").doesNotExist())
+				.andExpect(jsonPath("$._embedded.items[*]._links.maps").exists())
+				.andExpect(jsonPath("$._links").exists())
+				.andExpect(jsonPath("$._links.self").exists())
+				.andExpect(jsonPath("$._links.self.href").exists());
 	}
 
 	@Test
 	public void getViktorOnly() throws Exception {
+		itemsResponseSlice.setItems(itemsResponse.getItems().values().stream()
+				.filter(item -> item.getRequiredChampion() != null &&
+						item.getRequiredChampion().equals("Viktor"))
+				.collect(Collectors.toMap(item -> String.valueOf(item.getId()), item -> item)));
+		itemsRepository.save(itemsResponseSlice.getItems().values());
+
 		mockMvc.perform(get(apiPath + "/items/viktor-only"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(HAL_JSON_UTF8))
-				.andExpect(jsonPath("$._links").exists());
+				.andExpect(jsonPath("$._embedded.items").exists())
+				.andExpect(jsonPath("$._embedded.items[*].from").isNotEmpty())
+				.andExpect(jsonPath("$._embedded.items[*].into").isNotEmpty())
+				.andExpect(jsonPath("$._embedded.items[*].requiredChampion", hasItem("Viktor")))
+				.andExpect(jsonPath("$._embedded.items[*].maps", hasItem(hasEntry(SUMMONERS_RIFT, true))))
+				.andExpect(jsonPath("$._embedded.items[*]._links").exists())
+				.andExpect(jsonPath("$._embedded.items[*]._links.from").exists())
+				.andExpect(jsonPath("$._embedded.items[*]._links.into").exists())
+				.andExpect(jsonPath("$._embedded.items[*]._links.maps").exists())
+				.andExpect(jsonPath("$._links").exists())
+				.andExpect(jsonPath("$._links.self").exists())
+				.andExpect(jsonPath("$._links.self.href").exists());
 	}
 
 	@Test
 	public void getForTrollBuild() throws Exception {
+		itemsResponseSlice.setItems(RandomizeUtil.getRandoms(
+				itemsResponse.getItems().values(), DEFAULT_PAGE_SIZE).stream()
+				.collect(Collectors.toMap(champion -> String.valueOf(champion.getId()), champion -> champion)));
+		itemsRepository.save(itemsResponseSlice.getItems().values());
+
 		mockMvc.perform(get(apiPath + "/items/for-troll-build")
 				.param("mapId", SUMMONERS_RIFT))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(HAL_JSON_UTF8))
-				.andExpect(jsonPath("$._links").exists());
+				.andExpect(jsonPath("$._embedded.items").exists())
+				.andExpect(jsonPath("$._embedded.items[*].from").isNotEmpty())
+				.andExpect(jsonPath("$._embedded.items[*].into").isNotEmpty())
+				.andExpect(jsonPath("$._embedded.items[*].maps", hasItem(hasEntry(SUMMONERS_RIFT, true))))
+				.andExpect(jsonPath("$._embedded.items[*].gold.purchasable", hasItem(true)))
+				.andExpect(jsonPath("$._embedded.items[*]._links").exists())
+				.andExpect(jsonPath("$._embedded.items[*]._links.from").exists())
+				.andExpect(jsonPath("$._embedded.items[*]._links.into").doesNotExist())
+				.andExpect(jsonPath("$._embedded.items[*]._links.maps").exists())
+				.andExpect(jsonPath("$._links").exists())
+				.andExpect(jsonPath("$._links.self").exists())
+				.andExpect(jsonPath("$._links.self.href").exists());
 	}
 
 }

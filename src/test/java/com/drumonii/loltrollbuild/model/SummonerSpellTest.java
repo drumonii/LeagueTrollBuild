@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
+import java.util.TreeSet;
 
 import static com.drumonii.loltrollbuild.model.SummonerSpell.GameMode.ARAM;
 import static com.drumonii.loltrollbuild.model.SummonerSpell.GameMode.CLASSIC;
@@ -34,8 +34,8 @@ public class SummonerSpellTest extends BaseSpringTestRunner {
 		SummonerSpell markFromDb = summonerSpellsRepository.findOne(markFromRiot.getId());
 		assertThat(markFromRiot).isEqualTo(markFromDb);
 
-		markFromRiot.setModes(new HashSet<>(Arrays.asList(ARAM, CLASSIC)));
-		markFromRiot.setCooldown(new HashSet<>(Arrays.asList(50)));
+		markFromRiot.setModes(new TreeSet<>(Arrays.asList(ARAM, CLASSIC)));
+		markFromRiot.setCooldown(new TreeSet<>(Arrays.asList(50)));
 		assertThat(markFromRiot).isNotEqualTo(markFromDb);
 	}
 

@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
+import java.util.TreeSet;
 
 import static com.drumonii.loltrollbuild.model.SummonerSpell.GameMode.CLASSIC;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -39,10 +39,10 @@ public class SummonerSpellsRepositoryTest extends BaseSpringTestRunner {
 		assertThat(summonerSpellFromDb).isEqualToIgnoringNullFields(clarity);
 
 		// Update
-		summonerSpellFromDb.setModes(new HashSet<>(Arrays.asList(CLASSIC)));
+		summonerSpellFromDb.setModes(new TreeSet<>(Arrays.asList(CLASSIC)));
 		summonerSpellsRepository.save(summonerSpellFromDb);
 		summonerSpellFromDb = summonerSpellsRepository.findOne(clarity.getId());
-		assertThat(summonerSpellFromDb.getModes()).isEqualTo(new HashSet<>(Arrays.asList(CLASSIC)));
+		assertThat(summonerSpellFromDb.getModes()).isEqualTo(new TreeSet<>(Arrays.asList(CLASSIC)));
 
 		// Delete
 		summonerSpellsRepository.delete(summonerSpellFromDb.getId());

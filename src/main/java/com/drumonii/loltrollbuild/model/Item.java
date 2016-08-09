@@ -14,8 +14,8 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.SortedMap;
+import java.util.SortedSet;
 
 /**
  * League of Legends Item.
@@ -56,14 +56,16 @@ public class Item implements Serializable {
 	@CollectionTable(name = "ITEM_FROM", joinColumns = @JoinColumn(name = "ITEM_ID"))
 	@Fetch(FetchMode.SELECT)
 	@Column(name = "ITEM_FROM")
+	@OrderBy("ITEM_FROM ASC")
 	@JsonProperty("from")
 	@Getter @Setter private List<String> from;
 
 	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "ITEM_INTO", joinColumns = @JoinColumn(name = "ITEM_ID"))
 	@Column(name = "ITEM_INTO")
+	@OrderBy("ITEM_INTO ASC")
 	@JsonProperty("into")
-	@Getter @Setter private Set<String> into;
+	@Getter @Setter private SortedSet<String> into;
 
 	@Column(name = "REQUIRED_CHAMPION")
 	@JsonProperty("requiredChampion")
@@ -78,8 +80,9 @@ public class Item implements Serializable {
 	@CollectionTable(name = "ITEM_MAP", joinColumns = @JoinColumn(name = "ITEM_ID"))
 	@MapKeyColumn(name = "MAPS_KEY")
 	@Column(name = "MAP")
+	@OrderBy("MAPS_KEY ASC")
 	@JsonProperty("maps")
-	@Getter @Setter private Map<String, Boolean> maps;
+	@Getter @Setter private SortedMap<Integer, Boolean> maps;
 
 	@OneToOne(cascade = CascadeType.ALL, optional = false)
 	@PrimaryKeyJoinColumn

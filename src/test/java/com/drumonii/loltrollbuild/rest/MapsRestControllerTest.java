@@ -84,11 +84,11 @@ public class MapsRestControllerTest extends BaseSpringTestRunner {
 				.andExpect(jsonPath("$.page.size", is(20)))
 				.andExpect(jsonPath("$.page.totalElements", is(
 						(int) mapsResponseSlice.getMaps().values().stream()
-								.filter(m -> m.getMapName().equals(map.getMapName()))
+								.filter(m -> m.getMapName().contains(map.getMapName()))
 								.count())))
 				.andExpect(jsonPath("$.page.totalPages", is(
 						(int) Math.ceil((double) mapsResponseSlice.getMaps().values().stream()
-								.filter(m -> m.getMapName().equals(map.getMapName()))
+								.filter(m -> m.getMapName().contains(map.getMapName()))
 								.count() / (double) 20))))
 				.andExpect(jsonPath("$.page.number", is(0)));
 

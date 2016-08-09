@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.data.web.PageableDefault;
@@ -62,13 +61,13 @@ public class ItemsRestController {
 
 	/**
 	 * Gets a {@link Resources} of boots {@link Item} {@link Resource} based on the specified map ID.
-	 * See {@link ItemsRepository#boots(String mapId)} for details on data retrieved.
+	 * See {@link ItemsRepository#boots(int mapId)} for details on data retrieved.
 	 *
 	 * @param mapId the map ID to get eligible {@link Item}s
 	 * @return the {@link Resources} of {@link Item} {@link Resource}
 	 */
 	@GetMapping(value = "/boots")
-	public Resources<Resource<Item>> getBoots(@RequestParam String mapId) {
+	public Resources<Resource<Item>> getBoots(@RequestParam int mapId) {
 		return new Resources<>(itemsRepository.boots(mapId).stream()
 				.map(item -> new Resource<>(item))
 				.collect(Collectors.toList()), linkToCurrentMapping().withSelfRel());
@@ -76,13 +75,13 @@ public class ItemsRestController {
 
 	/**
 	 * Gets a {@link Resources} of trinkets {@link Item} {@link Resource} based on the specified map ID.
-	 * See {@link ItemsRepository#trinkets(String mapId)} for details on data retrieved.
+	 * See {@link ItemsRepository#trinkets(int mapId)} for details on data retrieved.
 	 *
 	 * @param mapId the map ID to get eligible trinkets
 	 * @return the {@link Resources} of {@link Item} {@link Resource}
 	 */
 	@GetMapping(value = "/trinkets")
-	public Resources<Resource<Item>> getTrinkets(@RequestParam String mapId) {
+	public Resources<Resource<Item>> getTrinkets(@RequestParam int mapId) {
 		return new Resources<>(itemsRepository.trinkets(mapId).stream()
 				.map(item -> new Resource<>(item))
 				.collect(Collectors.toList()), linkToCurrentMapping().withSelfRel());
@@ -103,13 +102,13 @@ public class ItemsRestController {
 
 	/**
 	 * Gets a {@link Resources} of {@link Item} {@link Resource} for the troll build based on the specified map ID.
-	 * See {@link ItemsRepository#forTrollBuild(String mapId)} for details on data retrieved.
+	 * See {@link ItemsRepository#forTrollBuild(int mapId)} for details on data retrieved.
 	 *
 	 * @param mapId the map ID to get eligible {@link Item}s for the troll build
 	 * @return the {@link Resources} of {@link Item} {@link Resource}
 	 */
 	@GetMapping(value = "/for-troll-build")
-	public Resources<Resource<Item>> getForTrollBuild(@RequestParam String mapId) {
+	public Resources<Resource<Item>> getForTrollBuild(@RequestParam int mapId) {
 		return new Resources<>(itemsRepository.forTrollBuild(mapId).stream()
 				.map(item -> new Resource<>(item))
 				.collect(Collectors.toList()), linkToCurrentMapping().withSelfRel());

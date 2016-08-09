@@ -21,8 +21,8 @@ import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -258,7 +258,7 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 	@Test
 	public void saveChampionWithOverwrite() throws Exception {
 		Champion newLeeSin = championsResponse.getChampions().get("LeeSin");
-		newLeeSin.setTags(new HashSet<>(Arrays.asList("NEW_TAG")));
+		newLeeSin.setTags(new TreeSet<>(Arrays.asList("NEW_TAG")));
 		newLeeSin = championsRepository.save(newLeeSin);
 
 		mockServer.expect(requestTo(championUri.toString())).andExpect(method(HttpMethod.GET))

@@ -16,9 +16,9 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 import static org.hamcrest.Matchers.*;
@@ -57,7 +57,7 @@ public class ChampionsControllerTest extends BaseSpringTestRunner {
 				.collect(Collectors.toMap(champion -> String.valueOf(champion.getId()), champion -> champion)));
 		List<Champion> champions = championsRepository.save(championsResponseSlice.getChampions().values());
 
-		Set<String> tags = new HashSet<>();
+		SortedSet<String> tags = new TreeSet<>();
 		champions.forEach(champion -> tags.addAll(champion.getTags()));
 
 		mockMvc.perform(get("/champions"))

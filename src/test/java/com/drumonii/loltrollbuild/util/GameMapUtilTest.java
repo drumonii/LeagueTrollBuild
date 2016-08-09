@@ -30,26 +30,26 @@ public class GameMapUtilTest extends BaseSpringTestRunner {
 	@Test
 	public void getsActualMapNameFromGameMap() throws Exception {
 		GameMap summonersRiftNewFromRiot = mapsResponse.getMaps().get(SUMMONERS_RIFT);
-		assertThat(getActualMapName(SUMMONERS_RIFT)).isEqualTo("Summoner's Rift");
+		assertThat(getActualMapName(Integer.valueOf(SUMMONERS_RIFT))).isEqualTo("Summoner's Rift");
 		assertThat(getActualMapName(summonersRiftNewFromRiot.getMapName())).isEqualTo("Summoner's Rift");
 
 		GameMap crystalScar = mapsResponse.getMaps().get(CRYSTAL_SCAR);
-		assertThat(getActualMapName(CRYSTAL_SCAR)).isEqualTo("Crystal Scar");
+		assertThat(getActualMapName(Integer.valueOf(CRYSTAL_SCAR))).isEqualTo("Crystal Scar");
 		assertThat(getActualMapName(crystalScar.getMapName())).isEqualTo("Crystal Scar");
 
 		GameMap provingGroundsFromRiot = mapsResponse.getMaps().get(HOWLING_ABYSS);
-		assertThat(getActualMapName(HOWLING_ABYSS)).isEqualTo("Howling Abyss");
+		assertThat(getActualMapName(Integer.valueOf(HOWLING_ABYSS))).isEqualTo("Howling Abyss");
 		assertThat(getActualMapName(provingGroundsFromRiot.getMapName())).isEqualTo("Howling Abyss");
 
 		GameMap summonersRiftOldFromRiot = mapsResponse.getMaps().get(SUMMONERS_RIFT_OLD);
-		assertThat(getActualMapName(SUMMONERS_RIFT_OLD)).isEqualTo("Summoner's Rift");
+		assertThat(getActualMapName(Integer.valueOf(SUMMONERS_RIFT_OLD))).isEqualTo("Summoner's Rift");
 		assertThat(getActualMapName(summonersRiftOldFromRiot.getMapName())).isEqualTo("Summoner's Rift");
 
 		GameMap twistedTreeline = mapsResponse.getMaps().get(TWISTED_TREELINE);
-		assertThat(getActualMapName(TWISTED_TREELINE)).isEqualTo("Twisted Treeline");
+		assertThat(getActualMapName(Integer.valueOf(TWISTED_TREELINE))).isEqualTo("Twisted Treeline");
 		assertThat(getActualMapName(twistedTreeline.getMapName())).isEqualTo("Twisted Treeline");
 
-		assertThat(getActualMapName("-1")).isEqualTo("-1");
+		assertThat(getActualMapName(-1)).isEqualTo("-1");
 		assertThat(getActualMapName("Negative One")).isEqualTo("Negative One");
 	}
 
@@ -94,9 +94,10 @@ public class GameMapUtilTest extends BaseSpringTestRunner {
 
 	@Test
 	public void getsAvailableMaps() {
-		Map<String, Boolean> maps = new HashMap<>();
-		maps.put("1", false); // Summoner's Rift
-		maps.put("10", true); // Twisted Treeline
+		Map<Integer, Boolean> maps = new HashMap<Integer, Boolean>() {{
+			put(GameMapUtil.SUMMONERS_RIFT_NEW_ID, false); // Summoner's Rift
+			put(GameMapUtil.TWISTED_TREELINE_ID, true); // Twisted Treeline
+		}};
 
 		assertThat(getAvailableMaps(maps)).containsExactly("Twisted Treeline");
 	}

@@ -37,38 +37,43 @@ public class GameMapUtil {
 	 * @return the actual formatted map name
 	 */
 	public static String getActualMapName(String mapName) {
-		try {
-			int mapId = Integer.valueOf(mapName);
-			switch (mapId) {
-				case SUMMONERS_RIFT_ID:
-					return SUMMONERS_RIFT;
-				case CRYSTAL_SCAR_ID:
-					return CRYSTAL_SCAR;
-				case TWISTED_TREELINE_ID:
-					return TWISTED_TREELINE;
-				case SUMMONERS_RIFT_NEW_ID:
-					return SUMMONERS_RIFT;
-				case HOWLING_ABYSS_ID:
-					return HOWLING_ABYSS;
-				default:
-					return mapName;
-			}
-		} catch (NumberFormatException e) {
-			switch (mapName) {
-				case "SummonersRift":
-					return SUMMONERS_RIFT;
-				case "CrystalScar":
-					return CRYSTAL_SCAR;
-				case "NewTwistedTreeline":
-					return TWISTED_TREELINE;
-				case "SummonersRiftNew":
-					return SUMMONERS_RIFT;
-				case "ProvingGroundsNew":
-					return HOWLING_ABYSS;
-				default:
-					return mapName;
-			}
+		switch (mapName) {
+			case "SummonersRift":
+				return SUMMONERS_RIFT;
+			case "CrystalScar":
+				return CRYSTAL_SCAR;
+			case "NewTwistedTreeline":
+				return TWISTED_TREELINE;
+			case "SummonersRiftNew":
+				return SUMMONERS_RIFT;
+			case "ProvingGroundsNew":
+				return HOWLING_ABYSS;
+			default:
+				return mapName; // shouldn't happen
 		}
+	}
+
+	/**
+	 * Gets the {@link GameMap}'s actual map name.
+	 *
+	 * @param mapId the map ID from Riot to infer
+	 * @return the actual formatted map name
+	 */
+	public static String getActualMapName(Integer mapId) {
+		switch (mapId) {
+			case SUMMONERS_RIFT_ID:
+				return SUMMONERS_RIFT;
+			case CRYSTAL_SCAR_ID:
+				return CRYSTAL_SCAR;
+			case TWISTED_TREELINE_ID:
+				return TWISTED_TREELINE;
+			case SUMMONERS_RIFT_NEW_ID:
+				return SUMMONERS_RIFT;
+			case HOWLING_ABYSS_ID:
+				return HOWLING_ABYSS;
+			default:
+				return mapId + ""; // shouldn't happen
+			}
 	}
 
 	/**
@@ -110,7 +115,7 @@ public class GameMapUtil {
 	 * @param maps the {@link Map} of game maps
 	 * @return the {@link List} of available game map (actual) names
 	 */
-	public static List<String> getAvailableMaps(Map<String, Boolean> maps) {
+	public static List<String> getAvailableMaps(Map<Integer, Boolean> maps) {
 		List<String> availableMaps = new ArrayList<>();
 		maps.forEach((k, v) -> {
 			if (v) {

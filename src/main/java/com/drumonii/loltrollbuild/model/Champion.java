@@ -11,7 +11,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Set;
+import java.util.SortedSet;
 
 /**
  * League of Legends Champion.
@@ -62,8 +62,9 @@ public class Champion implements Serializable {
 	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "CHAMPION_TAG", joinColumns = @JoinColumn(name = "CHAMPION_ID"))
 	@Column(name = "TAG")
+	@OrderBy("TAG ASC")
 	@JsonProperty("tags")
-	@Getter @Setter private Set<String> tags;
+	@Getter @Setter private SortedSet<String> tags;
 
 	@JsonIgnore
 	public boolean isViktor() {

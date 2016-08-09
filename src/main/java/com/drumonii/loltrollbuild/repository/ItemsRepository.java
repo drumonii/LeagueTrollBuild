@@ -36,7 +36,7 @@ public interface ItemsRepository extends JpaRepository<Item, Integer> {
 		   "group by i.id")
 	@RestResource(exported = false)
 	@Cacheable(key = "{#root.methodName, #mapId}")
-	List<Item> boots(@Param("mapId") String mapId);
+	List<Item> boots(@Param("mapId") int mapId);
 
 	/**
 	 * Gets a {@link List} of basic Trinket {@link Item}s (non Advanced) found only on the specified {@link GameMap}.
@@ -51,7 +51,7 @@ public interface ItemsRepository extends JpaRepository<Item, Integer> {
 		   "group by i.id")
 	@RestResource(exported = false)
 	@Cacheable(key = "{#root.methodName, #mapId}")
-	List<Item> trinkets(@Param("mapId") String mapId);
+	List<Item> trinkets(@Param("mapId") int mapId);
 
 	/**
 	 * Gets a {@link List} of Viktor only starting {@link Item}s.
@@ -84,7 +84,7 @@ public interface ItemsRepository extends JpaRepository<Item, Integer> {
 		   "group by i.id")
 	@RestResource(exported = false)
 	@Cacheable(key = "{#root.methodName, #mapId}")
-	List<Item> forTrollBuild(@Param("mapId") String mapId);
+	List<Item> forTrollBuild(@Param("mapId") int mapId);
 
 	@Cacheable
 	@Override

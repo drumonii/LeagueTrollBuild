@@ -11,7 +11,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Set;
+import java.util.SortedSet;
 
 /**
  * League of Legend Summoner Spell.
@@ -54,15 +54,17 @@ public class SummonerSpell implements Serializable {
 	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "SUMMONER_SPELL_COOLDOWN", joinColumns = @JoinColumn(name = "SUMMONER_SPELL_ID"))
 	@Column(name = "COOLDOWN")
+	@OrderBy("COOLDOWN ASC")
 	@JsonProperty("cooldown")
-	@Getter @Setter private Set<Integer> cooldown;
+	@Getter @Setter private SortedSet<Integer> cooldown;
 
 	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "SUMMONER_SPELL_MODE", joinColumns = @JoinColumn(name = "SUMMONER_SPELL_ID"))
 	@Enumerated(EnumType.STRING)
 	@Column(name = "MODE")
+	@OrderBy("MODE ASC")
 	@JsonProperty("modes")
-	@Getter @Setter private Set<GameMode> modes;
+	@Getter @Setter private SortedSet<GameMode> modes;
 
 	public enum GameMode {
 

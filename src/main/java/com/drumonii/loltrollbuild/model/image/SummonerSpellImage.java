@@ -20,10 +20,6 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class SummonerSpellImage extends Image implements Serializable {
 
-	public SummonerSpellImage(String full, String sprite, String group, byte[] imgSrc, int x, int y, int w, int h) {
-		super(full, sprite, group, imgSrc, x, y, w, h);
-	}
-
 	@Id
 	@Column(name = "SUMMONER_SPELL_ID", unique = true, nullable = false)
 	@JsonIgnore

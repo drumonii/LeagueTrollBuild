@@ -3,6 +3,7 @@ package com.drumonii.loltrollbuild.model;
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.repository.ItemsRepository;
 import org.apache.commons.collections4.ListUtils;
+import org.apache.commons.lang3.RandomUtils;
 import org.junit.After;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +44,8 @@ public class ItemTest extends BaseSpringTestRunner {
 		Item righteousGloryFromDb = itemsRepository.findOne(righteousGloryFromRiot.getId());
 		assertThat(righteousGloryFromRiot).isEqualTo(righteousGloryFromDb);
 
-		righteousGloryFromRiot.setGold(new ItemGold(0, 700, 2500, 1750, true, null));
+		righteousGloryFromRiot.setGold(new ItemGold(0, RandomUtils.nextInt(500, 1001), RandomUtils.nextInt(2000, 3001),
+				RandomUtils.nextInt(1000, 2001), true, null));
 		assertThat(righteousGloryFromRiot).isNotEqualTo(righteousGloryFromDb);
 	}
 

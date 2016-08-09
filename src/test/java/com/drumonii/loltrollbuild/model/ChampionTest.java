@@ -10,8 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
+import java.util.TreeSet;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -42,8 +42,9 @@ public class ChampionTest extends BaseSpringTestRunner {
 		Champion nasusFromDb = championsRepository.findByName(nasusFromRiot.getName());
 		assertThat(nasusFromRiot).isEqualTo(nasusFromDb);
 
-		nasusFromRiot.setImage(new ChampionImage("Nasus.png", "champion2.png", "champion", new byte[0], 336, 48, 48,
-				48));
+		ChampionImage image = nasusFromRiot.getImage();
+		image.setFull("NewNasus.png");
+		nasusFromRiot.setImage(image);
 		assertThat(nasusFromRiot).isNotEqualTo(nasusFromDb);
 	}
 
@@ -51,7 +52,7 @@ public class ChampionTest extends BaseSpringTestRunner {
 	public void cardinality() throws IOException {
 		Champion gnarFromRiot = championsResponse.getChampions().get("Gnar");
 		Champion gnarFromDb = championsRepository.save(gnarFromRiot);
-		gnarFromRiot.setTags(new HashSet<>(Arrays.asList("NEW_TAG")));
+		gnarFromRiot.setTags(new TreeSet<>(Arrays.asList("NEW_TAG")));
 
 		Champion gravesFromRiot = championsResponse.getChampions().get("Graves");
 		Champion gravesFromDb = championsRepository.save(gravesFromRiot);

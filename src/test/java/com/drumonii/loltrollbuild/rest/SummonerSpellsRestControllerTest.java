@@ -106,7 +106,10 @@ public class SummonerSpellsRestControllerTest extends BaseSpringTestRunner {
 				.param("mode", CLASSIC.name()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(HAL_JSON_UTF8))
-				.andExpect(jsonPath("$._links").exists());
+				.andExpect(jsonPath("$._embedded.summonerSpells").exists())
+				.andExpect(jsonPath("$._links").exists())
+				.andExpect(jsonPath("$._links.self").exists())
+				.andExpect(jsonPath("$._links.self.href").exists());
 	}
 
 }

@@ -72,7 +72,7 @@ public class ChampionsController {
 	 */
 	@GetMapping(value = "/{id}/troll-build")
 	@ResponseBody
-	public Map<String, List<?>> trollBuild(@PathVariable("id") Champion champion, @RequestParam String mapId) {
+	public Map<String, List<?>> trollBuild(@PathVariable("id") Champion champion, @RequestParam int mapId) {
 		Map<String, List<?>> trollBuild = new HashMap<>();
 
 		// Items
@@ -90,7 +90,7 @@ public class ChampionsController {
 		// Summoner Spells
 		trollBuild.put("summoner-spells",
 				RandomizeUtil.getRandoms(summonerSpellsRepository.forTrollBuild(
-						GameMapUtil.getModeFromMap(mapsRepository.findOne(Integer.valueOf(mapId)))), SPELLS_SIZE));
+						GameMapUtil.getModeFromMap(mapsRepository.findOne(mapId))), SPELLS_SIZE));
 
 		// Trinket
 		trollBuild.put("trinket", Arrays.asList(RandomizeUtil.getRandom(itemsRepository.trinkets(mapId))));

@@ -4,12 +4,14 @@ import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.model.Item;
 import com.drumonii.loltrollbuild.model.ItemGold;
 import org.assertj.core.api.Condition;
+import org.assertj.core.api.iterable.Extractor;
 import org.junit.After;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.SortedMap;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -58,7 +60,7 @@ public class ItemsRepositoryTest extends BaseSpringTestRunner {
 		Item ninjaTabi = itemsResponse.getItems().get("3047");
 		itemsRepository.save(ninjaTabi);
 
-		List<Item> boots = itemsRepository.boots(SUMMONERS_RIFT);
+		List<Item> boots = itemsRepository.boots(Integer.valueOf(SUMMONERS_RIFT));
 		assertThat(boots).isNotEmpty();
 		assertThat(boots).doesNotHaveDuplicates();
 		assertThat(boots).doesNotContain(bootsOfSpeed);
@@ -66,7 +68,9 @@ public class ItemsRepositoryTest extends BaseSpringTestRunner {
 				.contains("1001");
 		assertThat(boots).extracting(Item::getDescription)
 				.have(new Condition<>(descr -> descr.contains("Enhanced Movement"), "movement"));
-		assertThat(boots).extracting(Item::getMaps).extracting(SUMMONERS_RIFT)
+		assertThat(boots).extracting(Item::getMaps)
+				.extracting((Extractor<SortedMap<Integer, Boolean>, Object>) input ->
+						input.get(Integer.valueOf(SUMMONERS_RIFT)))
 				.contains(true);
 	}
 
@@ -81,7 +85,7 @@ public class ItemsRepositoryTest extends BaseSpringTestRunner {
 		Item oraclesLens = itemsResponse.getItems().get("3364");
 		itemsRepository.save(oraclesLens);
 
-		List<Item> trinkets = itemsRepository.trinkets(SUMMONERS_RIFT);
+		List<Item> trinkets = itemsRepository.trinkets(Integer.valueOf(SUMMONERS_RIFT));
 		assertThat(trinkets).isNotEmpty();
 		assertThat(trinkets).doesNotHaveDuplicates();
 		assertThat(trinkets).extracting(Item::getGold).extracting(ItemGold::getTotal)
@@ -89,7 +93,9 @@ public class ItemsRepositoryTest extends BaseSpringTestRunner {
 		assertThat(trinkets).extracting(Item::getGold).extracting("purchasable", Boolean.class)
 				.containsOnly(true);
 		assertThat(trinkets).extracting(Item::getMaps)
-				.extracting(SUMMONERS_RIFT).contains(true);
+				.extracting((Extractor<SortedMap<Integer, Boolean>, Object>) input ->
+						input.get(Integer.valueOf(SUMMONERS_RIFT)))
+				.contains(true);
 		assertThat(trinkets).extracting(Item::getName)
 				.have(new Condition<>(name -> name.contains("Trinket"), "Trinket"));
 	}
@@ -110,18 +116,21 @@ public class ItemsRepositoryTest extends BaseSpringTestRunner {
 		assertThat(viktorOnlyItems).extracting(Item::getRequiredChampion)
 				.have(new Condition<>(name -> name.equals("Viktor"), "Viktor"));
 		assertThat(viktorOnlyItems).extracting(Item::getMaps)
-				.extracting(SUMMONERS_RIFT).contains(true);
+				.extracting((Extractor<SortedMap<Integer, Boolean>, Object>) input ->
+						input.get(Integer.valueOf(SUMMONERS_RIFT)))
+				.contains(true);
 	}
 
 	@Test
 	public void forTrollBuild() throws IOException {
 		itemsRepository.save(itemsResponse.getItems().values());
 
-		List<Item> forTrollBuild = itemsRepository.forTrollBuild(SUMMONERS_RIFT);
+		List<Item> forTrollBuild = itemsRepository.forTrollBuild(Integer.valueOf(SUMMONERS_RIFT));
 		assertThat(forTrollBuild).isNotEmpty();
 		assertThat(forTrollBuild).doesNotHaveDuplicates();
 		assertThat(forTrollBuild).extracting(Item::getMaps)
-				.extracting(SUMMONERS_RIFT)
+				.extracting((Extractor<SortedMap<Integer, Boolean>, Object>) input ->
+						input.get(Integer.valueOf(SUMMONERS_RIFT)))
 				.contains(true);
 		assertThat(forTrollBuild).extracting(Item::getGold)
 				.extracting("purchasable", Boolean.class)
