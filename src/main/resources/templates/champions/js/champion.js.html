@@ -18,6 +18,7 @@ $(function() {
             url: [[@{/champions/__${champion.id}__/troll-build}]],
             beforeSend: function() {
                 newBuildBtn.addClass('loading');
+                $('#build-segment').addClass('loading');
             },
             data: {
                 mapId: $('#map option:selected').val()
@@ -49,6 +50,7 @@ $(function() {
             },
             complete: function() {
                 newBuildBtn.removeClass('loading');
+                $('#build-segment').removeClass('loading');
                 // If map is Proving Grounds
                 if ($('#map option:selected').val() == 12) {
                     $('#trinket .image').addClass('disabled');
