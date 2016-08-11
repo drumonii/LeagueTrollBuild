@@ -15,136 +15,142 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <div id="difference-msg" class="ui info message" th:unless="${#lists.isEmpty(difference)}">
-        <i class="close icon"></i>
-        <div class="header" th:text="#{admin.items.diff}">Difference in Items found</div>
-        <p th:text="#{admin.items.diff.msg(${latestSavedPatch})}">Differ msg</p>
-    </div>
+    <div class="ui basic segment">
+        <div id="difference-msg" class="ui info message" th:unless="${#lists.isEmpty(difference)}">
+            <i class="close icon"></i>
+            <div class="header" th:text="#{admin.items.diff}">Difference in Items found</div>
+            <p th:text="#{admin.items.diff.msg(${latestSavedPatch})}">Differ msg</p>
+        </div>
 
-    <h3 class="ui dividing header" th:text="#{admin.items}">Items</h3>
-    <table id="items-difference" class="ui celled table" th:unless="${#lists.isEmpty(difference)}">
-        <thead>
-        <tr>
-            <th class="one wide"></th>
-            <th class="three wide">
-                <div class="ui input">
-                    <input class="items-difference-search-input" th:placeholder="#{admin.item.name.search}"
-                           type="text" data-column-index="1" />
-                </div>
-            </th>
-            <th class="three wide">
-                <div class="ui input">
-                    <input class="items-difference-search-input" th:placeholder="#{admin.item.group.search}"
-                           type="text" data-column-index="2" />
-                </div>
-            </th>
-            <th class="three wide">
-                <div class="ui input">
-                    <input class="items-difference-search-input" th:placeholder="#{admin.item.requiredChampion.search}"
-                           type="text" data-column-index="3" />
-                </div>
-            </th>
-            <th class="four wide"></th>
-            <th class="two wide"></th>
-        </tr>
-        <tr>
-            <th class="one wide"></th>
-            <th class="three wide" th:text="#{admin.item.name}">Name</th>
-            <th class="three wide" th:text="#{admin.item.group}">Group</th>
-            <th class="three wide" th:text="#{admin.item.requiredChampion}">Champion</th>
-            <th class="four wide" th:text="#{admin.item.maps}">Maps</th>
-            <th class="two wide"></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="item : ${difference}">
-            <td>
-                <div data-variation="wide" th:attr="data-html=${item.description}" class="item-description">
-                    <img class="ui rounded image" style="height:60px;width:auto;"
-                        th:src="@{https://ddragon.leagueoflegends.com/cdn/{patch}/img/item/{image}
-                        (patch=${latestSavedPatch}, image=${item.image.full})}" />
-                </div>
-            </td>
-            <td th:text="${item.name}"></td>
-            <td><span th:text="${item.group == null} ? #{none} : ${item.group}"></span></td>
-            <td><span th:text="${item.requiredChampion == null} ? #{none} : ${item.requiredChampion}"></span></td>
-            <td>
-                <span th:each="map, iterStat : ${T(com.drumonii.loltrollbuild.util.GameMapUtil).getAvailableMaps(item.maps)}"
-                          th:text="${iterStat.last} ? ${map} : |${map}, |"></span>
-            </td>
-            <td>
-                <button class="ui fluid primary button" th:attr="data-item-id=${item.id}"
-                        th:text="#{admin.item.save}" style="box-sizing:border-box;">Save</button>
-                <div class="ui negative message hidden popup">
-                    <p>
-                        <i class="warning circle icon"></i>
-                        <span th:text="#{admin.item.save.error}">An error has occurred...</span>
-                    </p>
-                </div>
-            </td>
-        </tr>
-        </tbody>
-        <tfoot class="full-width">
-        <tr>
-            <th colspan="6">
-                <form id="save-items-form" class="ui form">
-                    <div class="ui checkbox">
-                        <input id="truncate" type="checkbox" name="truncate" />
-                        <label for="truncate" th:text="#{admin.items.trunc}">Truncate</label>
+        <h3 class="ui dividing header" th:text="#{admin.items}">Items</h3>
+        <table id="items-difference" class="ui celled table" th:unless="${#lists.isEmpty(difference)}">
+            <thead>
+            <tr>
+                <th class="one wide"></th>
+                <th class="three wide">
+                    <div class="ui input">
+                        <input class="items-difference-search-input" th:placeholder="#{admin.item.name.search}"
+                               type="text" data-column-index="1"/>
                     </div>
-                    <button id="save-items-btn" type="submit" class="ui primary button"
-                            th:text="#{admin.items.save}">Save Items</button>
+                </th>
+                <th class="three wide">
+                    <div class="ui input">
+                        <input class="items-difference-search-input" th:placeholder="#{admin.item.group.search}"
+                               type="text" data-column-index="2"/>
+                    </div>
+                </th>
+                <th class="three wide">
+                    <div class="ui input">
+                        <input class="items-difference-search-input"
+                               th:placeholder="#{admin.item.requiredChampion.search}"
+                               type="text" data-column-index="3"/>
+                    </div>
+                </th>
+                <th class="four wide"></th>
+                <th class="two wide"></th>
+            </tr>
+            <tr>
+                <th class="one wide"></th>
+                <th class="three wide" th:text="#{admin.item.name}">Name</th>
+                <th class="three wide" th:text="#{admin.item.group}">Group</th>
+                <th class="three wide" th:text="#{admin.item.requiredChampion}">Champion</th>
+                <th class="four wide" th:text="#{admin.item.maps}">Maps</th>
+                <th class="two wide"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${difference}">
+                <td>
+                    <div data-variation="wide" th:attr="data-html=${item.description}" class="item-description">
+                        <img class="ui rounded image" style="height:60px;width:auto;"
+                             th:src="@{https://ddragon.leagueoflegends.com/cdn/{patch}/img/item/{image}
+                        (patch=${latestSavedPatch}, image=${item.image.full})}"/>
+                    </div>
+                </td>
+                <td th:text="${item.name}"></td>
+                <td><span th:text="${item.group == null} ? #{none} : ${item.group}"></span></td>
+                <td><span th:text="${item.requiredChampion == null} ? #{none} : ${item.requiredChampion}"></span></td>
+                <td>
+                <span th:each="map, iterStat : ${T(com.drumonii.loltrollbuild.util.GameMapUtil).getAvailableMaps(item.maps)}"
+                      th:text="${iterStat.last} ? ${map} : |${map}, |"></span>
+                </td>
+                <td>
+                    <button class="ui fluid primary button" th:attr="data-item-id=${item.id}"
+                            th:text="#{admin.item.save}" style="box-sizing:border-box;">Save
+                    </button>
                     <div class="ui negative message hidden popup">
                         <p>
                             <i class="warning circle icon"></i>
-                            <span th:text="#{admin.items.save.error}">An error has occurred.</span>
+                            <span th:text="#{admin.item.save.error}">An error has occurred...</span>
                         </p>
                     </div>
-                </form>
-            </th>
-        </tr>
-        </tfoot>
-    </table>
+                </td>
+            </tr>
+            </tbody>
+            <tfoot class="full-width">
+            <tr>
+                <th colspan="6">
+                    <form id="save-items-form" class="ui form">
+                        <div class="ui checkbox">
+                            <input id="truncate" type="checkbox" name="truncate"/>
+                            <label for="truncate" th:text="#{admin.items.trunc}">Truncate</label>
+                        </div>
+                        <button id="save-items-btn" type="submit" class="ui primary button"
+                                th:text="#{admin.items.save}">Save Items
+                        </button>
+                        <div class="ui negative message hidden popup">
+                            <p>
+                                <i class="warning circle icon"></i>
+                                <span th:text="#{admin.items.save.error}">An error has occurred.</span>
+                            </p>
+                        </div>
+                    </form>
+                </th>
+            </tr>
+            </tfoot>
+        </table>
 
-    <div class="ui hidden divider" th:unless="${#lists.isEmpty(difference)}"></div>
+        <div class="ui hidden divider" th:unless="${#lists.isEmpty(difference)}"></div>
 
-    <table id="items" class="ui celled table">
-        <thead>
-        <tr>
-            <th class="one wide"></th>
-            <th class="three wide">
-                <div class="ui input">
-                    <input class="items-search-input" th:placeholder="#{admin.item.name.search}" type="text"
-                       data-column-name="name" />
-                </div>
-            </th>
-            <th class="three wide">
-                <div class="ui input">
-                    <input class="items-search-input" th:placeholder="#{admin.item.group.search}" type="text"
-                           data-column-name="group" />
-                </div>
-            </th>
-            <th class="three wide">
-                <div class="ui input">
-                    <input class="items-search-input" th:placeholder="#{admin.item.requiredChampion.search}" type="text"
-                           data-column-name="requiredChampion" />
-                </div>
-            </th>
-            <th class="four wide"></th>
-            <th class="one wide"></th>
-            <th class="one wide"></th>
-        </tr>
-        <tr>
-            <th class="one wide"></th>
-            <th class="three wide" th:text="#{admin.item.name}">Name</th>
-            <th class="three wide" th:text="#{admin.item.group}">Group</th>
-            <th class="three wide" th:text="#{admin.item.requiredChampion}">Champion</th>
-            <th class="four wide" th:text="#{admin.item.maps}">Maps</th>
-            <th class="one wide"></th>
-            <th class="one wide"></th>
-        </tr>
-        </thead>
-    </table>
+        <table id="items" class="ui celled table">
+            <thead>
+            <tr>
+                <th class="one wide"></th>
+                <th class="three wide">
+                    <div class="ui input">
+                        <input class="items-search-input" th:placeholder="#{admin.item.name.search}" type="text"
+                               data-column-name="name"/>
+                    </div>
+                </th>
+                <th class="three wide">
+                    <div class="ui input">
+                        <input class="items-search-input" th:placeholder="#{admin.item.group.search}" type="text"
+                               data-column-name="group"/>
+                    </div>
+                </th>
+                <th class="three wide">
+                    <div class="ui input">
+                        <input class="items-search-input" th:placeholder="#{admin.item.requiredChampion.search}"
+                               type="text"
+                               data-column-name="requiredChampion"/>
+                    </div>
+                </th>
+                <th class="four wide"></th>
+                <th class="one wide"></th>
+                <th class="one wide"></th>
+            </tr>
+            <tr>
+                <th class="one wide"></th>
+                <th class="three wide" th:text="#{admin.item.name}">Name</th>
+                <th class="three wide" th:text="#{admin.item.group}">Group</th>
+                <th class="three wide" th:text="#{admin.item.requiredChampion}">Champion</th>
+                <th class="four wide" th:text="#{admin.item.maps}">Maps</th>
+                <th class="one wide"></th>
+                <th class="one wide"></th>
+            </tr>
+            </thead>
+        </table>
+    </div>
     <script th:inline="javascript" th:include="admin/items/js/items.js :: script"></script>
 </div>
 </body>

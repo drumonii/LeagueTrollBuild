@@ -7,20 +7,23 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <div class="ui one column center aligned page grid">
-        <div class="column">
-            <h2 class="ui icon header">
-                <i class="huge ban icon"></i>
-                <div class="content">
-                    <span th:text="#{error.403}" th:remove="tag">Access denied.</span>
-                    <div class="sub header" th:text="#{error.code(${status})}">Error code: 403</div>
-                </div>
-            </h2>
-            <div class="ui divider"></div>
-            <h4 th:text="${#strings.contains(message, 'CSRF')} ? ${message} : #{error.403.msg}">You are not auth...</h4>
-            <a class="ui primary button" th:href="@{/}">
-                <i class="home icon"></i><span th:text="#{error.return}">Return to home</span>
-            </a>
+    <div class="ui basic segment">
+        <div class="ui one column center aligned page grid">
+            <div class="column">
+                <h2 class="ui icon header">
+                    <i class="huge ban icon"></i>
+                    <div class="content">
+                        <span th:text="#{error.403}" th:remove="tag">Access denied.</span>
+                        <div class="sub header" th:text="#{error.code(${status})}">Error code: 403</div>
+                    </div>
+                </h2>
+                <div class="ui divider"></div>
+                <h4 th:text="${#strings.contains(message, 'CSRF')} ? ${message} : #{error.403.msg}">You are not
+                    auth...</h4>
+                <a class="ui primary button" th:href="@{/}">
+                    <i class="home icon"></i><span th:text="#{error.return}">Return to home</span>
+                </a>
+            </div>
         </div>
     </div>
 </div>

@@ -15,133 +15,141 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <div id="difference-msg" class="ui info message" th:unless="${#lists.isEmpty(difference)}">
-        <i class="close icon"></i>
-        <div class="header" th:text="#{admin.champions.diff}">Difference in Champions found</div>
-        <p th:text="#{admin.champions.diff.msg(${latestSavedPatch})}">Differ msg</p>
-    </div>
+    <div class="ui basic segment">
+        <div id="difference-msg" class="ui info message" th:unless="${#lists.isEmpty(difference)}">
+            <i class="close icon"></i>
+            <div class="header" th:text="#{admin.champions.diff}">Difference in Champions found</div>
+            <p th:text="#{admin.champions.diff.msg(${latestSavedPatch})}">Differ msg</p>
+        </div>
 
-    <h3 class="ui dividing header" th:text="#{admin.champions}">Champions</h3>
-    <table id="champions-difference" class="ui celled table" th:unless="${#lists.isEmpty(difference)}">
-        <thead>
-        <tr>
-            <th class="one wide"></th>
-            <th class="three wide">
-                <div class="ui input">
-                    <input class="champions-different-search-input" th:placeholder="#{admin.champion.name.search}"
-                           type="text" data-column-index="1" />
-                </div>
-            </th>
-            <th class="four wide">
-                <div class="ui input">
-                    <input class="champions-different-search-input" th:placeholder="#{admin.champion.title.search}"
-                           type="text" data-column-index="2" />
-                </div>
-            </th>
-            <th class="four wide"></th>
-            <th class="two wide">
-                <div class="ui input">
-                    <input class="champions-different-search-input" th:placeholder="#{admin.champion.partype.search}"
-                           type="text" data-column-index="4" />
-                </div>
-            </th>
-            <th class="two wide"></th>
-        </tr>
-        <tr>
-            <th class="one wide"></th>
-            <th class="three wide" th:text="#{admin.champion.name}">Name</th>
-            <th class="four wide" th:text="#{admin.champion.title}">Title</th>
-            <th class="four wide" th:text="#{admin.champion.tags}">Tags</th>
-            <th class="two wide" th:text="#{admin.champion.partype}">Partype</th>
-            <th class="two wide"></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="champion : ${difference}">
-            <td>
-                <img class="ui rounded image" style="height:60px;width:auto;"
-                     th:src="@{https://ddragon.leagueoflegends.com/cdn/{patch}/img/champion/{image}
-                     (patch=${latestSavedPatch}, image=${champion.image.full})}" />
-            </td>
-            <td th:text="${champion.name}"></td>
-            <td th:text="${champion.title}"></td>
-            <td>
-                <span th:each="tag, iterStat : ${champion.tags}" th:text="${iterStat.last} ? ${tag} : |${tag}, |"></span>
-            </td>
-            <td th:text="${champion.partype}"></td>
-            <td>
-                <button class="ui fluid primary button" th:attr="data-champion-id=${champion.id}"
-                        th:text="#{admin.champion.save}" style="box-sizing:border-box;">Save</button>
-                <div class="ui negative message hidden popup">
-                    <p>
-                        <i class="warning circle icon"></i>
-                        <span th:text="#{admin.champion.save.error}">An error has occurred...</span>
-                    </p>
-                </div>
-            </td>
-        </tr>
-        </tbody>
-        <tfoot class="full-width">
-        <tr>
-            <th colspan="6">
-                <form id="save-champions-form" class="ui form">
-                    <div class="ui checkbox">
-                        <input id="truncate" type="checkbox" name="truncate" />
-                        <label for="truncate" th:text="#{admin.champions.trunc}">Truncate</label>
+        <h3 class="ui dividing header" th:text="#{admin.champions}">Champions</h3>
+        <table id="champions-difference" class="ui celled table" th:unless="${#lists.isEmpty(difference)}">
+            <thead>
+            <tr>
+                <th class="one wide"></th>
+                <th class="three wide">
+                    <div class="ui input">
+                        <input class="champions-different-search-input" th:placeholder="#{admin.champion.name.search}"
+                               type="text" data-column-index="1"/>
                     </div>
-                    <button id="save-champions-btn" type="submit" class="ui primary button"
-                            th:text="#{admin.champions.save}">Save Champions</button>
+                </th>
+                <th class="four wide">
+                    <div class="ui input">
+                        <input class="champions-different-search-input" th:placeholder="#{admin.champion.title.search}"
+                               type="text" data-column-index="2"/>
+                    </div>
+                </th>
+                <th class="four wide"></th>
+                <th class="two wide">
+                    <div class="ui input">
+                        <input class="champions-different-search-input"
+                               th:placeholder="#{admin.champion.partype.search}"
+                               type="text" data-column-index="4"/>
+                    </div>
+                </th>
+                <th class="two wide"></th>
+            </tr>
+            <tr>
+                <th class="one wide"></th>
+                <th class="three wide" th:text="#{admin.champion.name}">Name</th>
+                <th class="four wide" th:text="#{admin.champion.title}">Title</th>
+                <th class="four wide" th:text="#{admin.champion.tags}">Tags</th>
+                <th class="two wide" th:text="#{admin.champion.partype}">Partype</th>
+                <th class="two wide"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="champion : ${difference}">
+                <td>
+                    <img class="ui rounded image" style="height:60px;width:auto;"
+                         th:src="@{https://ddragon.leagueoflegends.com/cdn/{patch}/img/champion/{image}
+                     (patch=${latestSavedPatch}, image=${champion.image.full})}"/>
+                </td>
+                <td th:text="${champion.name}"></td>
+                <td th:text="${champion.title}"></td>
+                <td>
+                    <span th:each="tag, iterStat : ${champion.tags}"
+                          th:text="${iterStat.last} ? ${tag} : |${tag}, |"></span>
+                </td>
+                <td th:text="${champion.partype}"></td>
+                <td>
+                    <button class="ui fluid primary button" th:attr="data-champion-id=${champion.id}"
+                            th:text="#{admin.champion.save}" style="box-sizing:border-box;">Save
+                    </button>
                     <div class="ui negative message hidden popup">
                         <p>
                             <i class="warning circle icon"></i>
-                            <span th:text="#{admin.champions.save.error}">An error has occurred.</span>
+                            <span th:text="#{admin.champion.save.error}">An error has occurred...</span>
                         </p>
                     </div>
-                </form>
-            </th>
-        </tr>
-        </tfoot>
-    </table>
+                </td>
+            </tr>
+            </tbody>
+            <tfoot class="full-width">
+            <tr>
+                <th colspan="6">
+                    <form id="save-champions-form" class="ui form">
+                        <div class="ui checkbox">
+                            <input id="truncate" type="checkbox" name="truncate"/>
+                            <label for="truncate" th:text="#{admin.champions.trunc}">Truncate</label>
+                        </div>
+                        <button id="save-champions-btn" type="submit" class="ui primary button"
+                                th:text="#{admin.champions.save}">Save Champions
+                        </button>
+                        <div class="ui negative message hidden popup">
+                            <p>
+                                <i class="warning circle icon"></i>
+                                <span th:text="#{admin.champions.save.error}">An error has occurred.</span>
+                            </p>
+                        </div>
+                    </form>
+                </th>
+            </tr>
+            </tfoot>
+        </table>
 
-    <div class="ui hidden divider" th:unless="${#lists.isEmpty(difference)}"></div>
+        <div class="ui hidden divider" th:unless="${#lists.isEmpty(difference)}"></div>
 
-    <table id="champions" class="ui celled table">
-        <thead>
-        <tr>
-            <th class="one wide"></th>
-            <th class="two wide">
-                <div class="ui input">
-                    <input class="champions-search-input" th:placeholder="#{admin.champion.name.search}" type="text"
-                           data-column-name="name" />
-                </div>
-            </th>
-            <th class="four wide">
-                <div class="ui input">
-                    <input class="champions-search-input" th:placeholder="#{admin.champion.title.search}" type="text"
-                           data-column-name="title" />
-                </div>
-            </th>
-            <th class="four wide"></th>
-            <th class="three wide">
-                <div class="ui input">
-                    <input class="champions-search-input" th:placeholder="#{admin.champion.partype.search}" type="text"
-                           data-column-name="partype" />
-                </div>
-            </th>
-            <th class="one wide"></th>
-            <th class="one wide"></th>
-        </tr>
-        <tr>
-            <th class="one wide"></th>
-            <th class="two wide" th:text="#{admin.champion.name}">Name</th>
-            <th class="four wide" th:text="#{admin.champion.title}">Title</th>
-            <th class="four wide" th:text="#{admin.champion.tags}">Tags</th>
-            <th class="three wide" th:text="#{admin.champion.partype}">Partype</th>
-            <th class="one wide"></th>
-            <th class="one wide"></th>
-        </tr>
-        </thead>
-    </table>
+        <table id="champions" class="ui celled table">
+            <thead>
+            <tr>
+                <th class="one wide"></th>
+                <th class="two wide">
+                    <div class="ui input">
+                        <input class="champions-search-input" th:placeholder="#{admin.champion.name.search}" type="text"
+                               data-column-name="name"/>
+                    </div>
+                </th>
+                <th class="four wide">
+                    <div class="ui input">
+                        <input class="champions-search-input" th:placeholder="#{admin.champion.title.search}"
+                               type="text"
+                               data-column-name="title"/>
+                    </div>
+                </th>
+                <th class="four wide"></th>
+                <th class="three wide">
+                    <div class="ui input">
+                        <input class="champions-search-input" th:placeholder="#{admin.champion.partype.search}"
+                               type="text"
+                               data-column-name="partype"/>
+                    </div>
+                </th>
+                <th class="one wide"></th>
+                <th class="one wide"></th>
+            </tr>
+            <tr>
+                <th class="one wide"></th>
+                <th class="two wide" th:text="#{admin.champion.name}">Name</th>
+                <th class="four wide" th:text="#{admin.champion.title}">Title</th>
+                <th class="four wide" th:text="#{admin.champion.tags}">Tags</th>
+                <th class="three wide" th:text="#{admin.champion.partype}">Partype</th>
+                <th class="one wide"></th>
+                <th class="one wide"></th>
+            </tr>
+            </thead>
+        </table>
+    </div>
     <script th:inline="javascript" th:include="admin/champions/js/champions.js :: script"></script>
 </div>
 </body>

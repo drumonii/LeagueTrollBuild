@@ -7,28 +7,30 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <h3 class="ui dividing header" th:text="#{admin.actuator.health}">Health</h3>
+    <div class="ui basic segment">
+        <h3 class="ui dividing header" th:text="#{admin.actuator.health}">Health</h3>
 
-    <div class="ui stackable grid">
-        <div class="eight wide column">
-            <h2 class="ui header">
-                <i class="database icon"></i>
-                <div class="content">
-                    <span id="database"></span>
-                    <div id="database-status" class="sub header"></div>
-                    <div id="database-test-sql" class="sub header"></div>
-                </div>
-            </h2>
-        </div>
-        <div class="eight wide column">
-            <h2 class="ui header">
-                <i class="disk outline icon"></i>
-                <div class="content">
-                    <span th:text="#{admin.actuator.health.disk}"></span>
-                    <div id="disk-total" class="sub header"></div>
-                    <div id="disk-free" class="sub header"></div>
-                </div>
-            </h2>
+        <div class="ui stackable grid">
+            <div class="eight wide column">
+                <h2 class="ui header">
+                    <i class="database icon"></i>
+                    <div class="content">
+                        <span id="database"></span>
+                        <div id="database-status" class="sub header"></div>
+                        <div id="database-test-sql" class="sub header"></div>
+                    </div>
+                </h2>
+            </div>
+            <div class="eight wide column">
+                <h2 class="ui header">
+                    <i class="disk outline icon"></i>
+                    <div class="content">
+                        <span th:text="#{admin.actuator.health.disk}"></span>
+                        <div id="disk-total" class="sub header"></div>
+                        <div id="disk-free" class="sub header"></div>
+                    </div>
+                </h2>
+            </div>
         </div>
     </div>
     <script th:inline="javascript">
