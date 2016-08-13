@@ -4,17 +4,17 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title layout:title-pattern="$DECORATOR_TITLE | $CONTENT_TITLE" th:text="#{admin.title}">League Troll Build Admin</title>
+    <title layout:title-pattern="$LAYOUT_TITLE | $CONTENT_TITLE" th:text="#{admin.title}">League Troll Build Admin</title>
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/semantic-ui/dist/semantic.min.css}" />
     <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
     <script th:src="@{/webjars/semantic-ui/dist/semantic.min.js}"></script>
 </head>
 <body>
 <!--/* admin header and nav */-->
-<header th:include="fragments/admin/header :: header"></header>
+<header th:include="~{fragments/admin/header :: header}"></header>
 <!--/* admin main content */-->
 <div class="ui container" layout:fragment="content"></div>
 <!--/* footer */-->
-<footer th:include="fragments/footer :: footer"></footer>
+<footer th:include="~{fragments/footer :: footer}"></footer>
 </body>
 </html>

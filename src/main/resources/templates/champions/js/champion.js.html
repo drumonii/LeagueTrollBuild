@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head></head>
 <body>
-<script th:fragment="script">
+<script th:inline="javascript" th:fragment="script">
 /*<![CDATA[*/
 $(function() {
     $('#map').dropdown();
@@ -12,8 +12,7 @@ $(function() {
         inline: true
     });
 
-    getTrollBuild();
-    function getTrollBuild() {
+    var trollBuild = function getTrollBuild() {
         $.ajax({
             url: [[@{/champions/__${champion.id}__/troll-build}]],
             beforeSend: function() {
@@ -60,11 +59,13 @@ $(function() {
             }
         });
     }
+    trollBuild();
+
     newBuildBtn.click(function() {
-        getTrollBuild();
+        trollBuild();
     });
     $('#map').change(function () {
-        getTrollBuild();
+        trollBuild();
     });
 });
 /*]]>*/

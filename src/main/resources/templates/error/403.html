@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="layouts/main">
+      layout:decorate="~{layouts/main}">
 <head>
     <title th:text="#{error.code(${status})}">Error code: ...</title>
 </head>

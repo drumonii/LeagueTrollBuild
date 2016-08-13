@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head></head>
 <body>
-<script th:fragment="script">
+<script th:inline="javascript" th:fragment="script">
 /*<![CDATA[*/
 $(function() {
     var differenceDataTable = $('#items-difference').DataTable({

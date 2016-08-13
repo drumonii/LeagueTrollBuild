@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="layouts/main">
+      layout:decorate="~{layouts/main}">
 <head>
     <title th:text="${champion.name}">Thresh</title>
 </head>
@@ -115,7 +115,7 @@
             <div class="one wide computer column"><!--/* offset space for desktop */--></div>
         </div>
     </div>
-    <script th:inline="javascript" th:include="champions/js/champion.js :: script"></script>
+    <script th:inline="javascript" th:include="~{champions/js/champion.js :: script}"></script>
 </div>
 </body>
 </html>

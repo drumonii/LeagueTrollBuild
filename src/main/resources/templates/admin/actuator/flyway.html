@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="layouts/admin">
+      layout:decorate="~{layouts/admin}">
 <head>
     <title th:text="#{admin.actuator.flyway}">Flyway</title>
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/datatables/media/css/dataTables.semanticui.min.css}" />

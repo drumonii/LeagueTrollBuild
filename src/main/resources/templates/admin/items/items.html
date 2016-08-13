@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="layouts/admin">
+      layout:decorate="~{layouts/admin}">
 <head>
     <title th:text="#{admin.items}">Items</title>
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/datatables/media/css/dataTables.semanticui.min.css}" />
@@ -118,21 +118,20 @@
                 <th class="one wide"></th>
                 <th class="three wide">
                     <div class="ui input">
-                        <input class="items-search-input" th:placeholder="#{admin.item.name.search}" type="text"
-                               data-column-name="name"/>
+                        <input class="items-search-input" th:placeholder="#{admin.item.name.search}"
+                               type="text" data-column-name="name"/>
                     </div>
                 </th>
                 <th class="three wide">
                     <div class="ui input">
-                        <input class="items-search-input" th:placeholder="#{admin.item.group.search}" type="text"
-                               data-column-name="group"/>
+                        <input class="items-search-input" th:placeholder="#{admin.item.group.search}"
+                               type="text" data-column-name="group"/>
                     </div>
                 </th>
                 <th class="three wide">
                     <div class="ui input">
                         <input class="items-search-input" th:placeholder="#{admin.item.requiredChampion.search}"
-                               type="text"
-                               data-column-name="requiredChampion"/>
+                               type="text" data-column-name="requiredChampion"/>
                     </div>
                 </th>
                 <th class="four wide"></th>
@@ -151,7 +150,7 @@
             </thead>
         </table>
     </div>
-    <script th:inline="javascript" th:include="admin/items/js/items.js :: script"></script>
+    <script th:inline="javascript" th:include="~{admin/items/js/items.js :: script}"></script>
 </div>
 </body>
 </html>
