@@ -15,15 +15,15 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <div class="ui basic segment">
-        <div id="difference-msg" class="ui info message" th:unless="${#lists.isEmpty(difference)}">
+    <div class="ui basic segment" th:unless="${#lists.isEmpty(difference)}">
+        <div id="difference-msg" class="ui info message">
             <i class="close icon"></i>
             <div class="header" th:text="#{admin.items.diff}">Difference in Items found</div>
             <p th:text="#{admin.items.diff.msg(${latestSavedPatch})}">Differ msg</p>
         </div>
 
-        <h3 class="ui dividing header" th:text="#{admin.items}">Items</h3>
-        <table id="items-difference" class="ui celled table" th:unless="${#lists.isEmpty(difference)}">
+        <h3 class="ui dividing header" th:text="#{admin.items.riot}">Difference in Items from Riot</h3>
+        <table id="items-difference" class="ui celled table">
             <thead>
             <tr>
                 <th class="one wide"></th>
@@ -109,9 +109,9 @@
             </tr>
             </tfoot>
         </table>
-
-        <div class="ui hidden divider" th:unless="${#lists.isEmpty(difference)}"></div>
-
+    </div>
+    <div class="ui basic segment">
+        <h3 class="ui dividing header" th:text="#{admin.items}">Items</h3>
         <table id="items" class="ui celled table">
             <thead>
             <tr>

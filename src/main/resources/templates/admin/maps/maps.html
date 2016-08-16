@@ -15,15 +15,15 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <div class="ui basic segment">
-        <div id="difference-msg" class="ui info message" th:unless="${#lists.isEmpty(difference)}">
+    <div class="ui basic segment" th:unless="${#lists.isEmpty(difference)}">
+        <div id="difference-msg" class="ui info message">
             <i class="close icon"></i>
             <div class="header" th:text="#{admin.maps.diff}">Difference in Maps found</div>
             <p th:text="#{admin.maps.diff.msg(${latestSavedPatch})}">Differ msg</p>
         </div>
 
-        <h3 class="ui dividing header" th:text="#{admin.maps}">Maps</h3>
-        <table id="maps-difference" class="ui celled table" th:unless="${#lists.isEmpty(difference)}">
+        <h3 class="ui dividing header" th:text="#{admin.maps.riot}">Difference in Maps from Riot</h3>
+        <table id="maps-difference" class="ui celled table">
             <thead>
             <tr>
                 <th class="one wide"></th>
@@ -84,9 +84,9 @@
             </tr>
             </tfoot>
         </table>
-
-        <div class="ui hidden divider" th:unless="${#lists.isEmpty(difference)}"></div>
-
+    </div>
+    <div class="ui basic segment">
+        <h3 class="ui dividing header" th:text="#{admin.maps}">Maps</h3>
         <table id="maps" class="ui celled table">
             <thead>
             <tr>
