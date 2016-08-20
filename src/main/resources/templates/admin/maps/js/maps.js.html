@@ -5,11 +5,41 @@
 <script th:inline="javascript" th:fragment="script">
 /*<![CDATA[*/
 $(function() {
+    // Maps difference
     var differenceDataTable = $('#maps-difference').DataTable({
         order: [ [1, 'asc'] ],
+        ajax: {
+            url: [[@{/admin/maps/diff}]],
+            dataSrc: ''
+        },
         columnDefs: [
             { orderable: false, targets: [0, 2] },
             { searchable: false, targets: [0, 2] }
+        ],
+        columns: [
+            { data: null,
+                render: function(data, type, full, meta) {
+                    return $('<img>', {
+                        'class': 'ui rounded image',
+                        style: 'height:60px;width:auto;',
+                        src: 'https://ddragon.leagueoflegends.com/cdn/' + [[${latestSavedPatch}]] + '/img/map/' +
+                        data.image.full,
+                    }).wrap('<span>').parent().html();
+                }
+            },
+            { data: 'mapName' },
+            { data: null,
+                render: function(data, type, full, meta) {
+                    console.log(data);
+                    var button = $('<button>', {
+                        'data-map-id': data.mapId,
+                        'class': 'ui fluid primary button',
+                        style: 'box-sizing:border-box;',
+                        text: [[#{admin.map.save}]]
+                    });
+                    return button.wrap('<span>').parent().html();
+                }
+            }
         ],
         lengthMenu: [ [10, -1], [10, 'All'] ],
         language: {
@@ -30,10 +60,6 @@ $(function() {
         differenceDataTable.column($(this).data('column-index')).search($(this).val()).draw();
     });
     $('#maps-difference tbody').on('click', '.primary', function(event) {
-        $(event.target).popup({
-            on: 'click',
-            inline: true
-        });
         $.ajax({
             type: 'POST',
             url: [[@{/riot/maps/}]] + $(this).data('map-id'),
@@ -47,25 +73,26 @@ $(function() {
                 _csrf_header: [[${_csrf.headerName}]]
             },
             success: function(data) {
-                location.reload();
+                $('#maps-difference-error-msg').removeClass('visible').addClass('hidden');
+                differenceDataTable.ajax.reload();
+                dataTable.ajax.reload();
             },
             error: function() {
                 $(event.target).removeClass('loading');
-                $(event.target).popup('show');
+                $('#maps-difference-error-msg .header').text([[#{admin.map.save.error}]]);
+                $('#maps-difference-error-msg').removeClass('hidden').addClass('visible');
+            },
+            complete: function() {
+                $(event.target).removeClass('loading');
             }
         });
     });
     $('#save-maps-form').submit(function(event) {
-        var button = $('#save-maps-btn');
-        button.popup({
-            on: 'click',
-            inline: true
-        });
         $.ajax({
             type: 'POST',
             url: [[@{/riot/maps}]],
             beforeSend: function() {
-                button.addClass('loading');
+                $('#save-maps-btn').addClass('loading');
             },
             data: {
                 truncate: $('#truncate').is(':checked'),
@@ -75,15 +102,29 @@ $(function() {
                 _csrf_header: [[${_csrf.headerName}]]
             },
             success: function(data) {
-                location.reload();
+                $('#maps-difference-error-msg').removeClass('visible').addClass('hidden');
+                differenceDataTable.ajax.reload();
+                dataTable.ajax.reload();
             },
             error: function() {
-                button.removeClass('loading');
-                button.popup('show');
+                $('#save-maps-btn').removeClass('loading');
+                $('#maps-difference-error-msg .header').text([[#{admin.maps.save.error}]]);
+                $('#maps-difference-error-msg').removeClass('hidden').addClass('visible');
+            },
+            complete: function() {
+                $('#save-maps-btn').removeClass('loading');
             }
         });
         event.preventDefault();
     });
+    differenceDataTable.on('xhr', function() {
+        if ($.isEmptyObject(differenceDataTable.ajax.json())) {
+            $('#maps-difference-segment').slideUp();
+        } else {
+            $('#maps-difference-segment').slideDown();
+        }
+    });
+    // Maps from the db
     var dataTable = $('#maps').DataTable({
         processing: true,
         serverSide: true,
@@ -121,7 +162,7 @@ $(function() {
             { data: 'image.full',
                 render: function(data, type, full, meta) {
                     return $('<img>', {
-                        class: 'ui rounded image',
+                        'class': 'ui rounded image',
                         style: 'height:60px;width:auto;',
                         src: '/img/maps/' + data
                     }).wrap('<span>').parent().html();
@@ -132,34 +173,20 @@ $(function() {
                 render: function(data, type, full, meta) {
                     var button = $('<button>', {
                         'data-map-id': data.substring(data.lastIndexOf('/') + 1, data.length),
-                        class: 'ui secondary button',
+                        'class': 'ui secondary button',
                         text: [[#{admin.map.overwrite}]]
                     });
-                    var popup = $('<div>', {
-                        class: 'ui negative message hidden popup'
-                    }).wrapInner($('<p>').append($('<i>', {
-                        class: 'warning circle icon'
-                    })).append($('<span>', {
-                        text: [[#{admin.map.overwrite.error}]]
-                    })));
-                    return button.wrap('<span>').parent().html() + popup.wrap('<span>').parent().html();
+                    return button.wrap('<span>').parent().html();
                 }
             },
             { data: '_links.self.href',
                 render: function(data, type, full, meta) {
                     var button = $('<button>', {
                         'data-map-id': data.substring(data.lastIndexOf('/') + 1, data.length),
-                        class: 'negative ui button',
+                        'class': 'negative ui button',
                         text: [[#{admin.map.delete}]]
                     });
-                    var popup = $('<div>', {
-                        class: 'ui negative message hidden popup'
-                    }).wrapInner($('<p>').append($('<i>', {
-                        class: 'warning circle icon'
-                    })).append($('<span>', {
-                        text: [[#{admin.map.delete.error}]]
-                    })));
-                    return button.wrap('<span>').parent().html() + popup.wrap('<span>').parent().html();
+                    return button.wrap('<span>').parent().html();
                 }
             }
         ],
@@ -188,10 +215,6 @@ $(function() {
         dataTable.search(inputs).draw();
     });
     $('#maps tbody').on('click', '.secondary', function(event) {
-        $(event.target).popup({
-            on: 'click',
-            inline: true
-        });
         $.ajax({
             type: 'POST',
             url: [[@{/riot/maps/}]] + $(this).data('map-id'),
@@ -205,19 +228,20 @@ $(function() {
                 _csrf_header: [[${_csrf.headerName}]]
             },
             success: function(data) {
-                location.reload();
+                $('#maps-error-msg').removeClass('visible').addClass('hidden');
+                dataTable.ajax.reload();
             },
             error: function() {
                 $(event.target).removeClass('loading');
-                $(event.target).popup('show');
+                $('#maps-error-msg .header').text([[#{admin.map.overwrite.error}]]);
+                $('#maps-error-msg').removeClass('hidden').addClass('visible');
+            },
+            complete: function() {
+                $(event.target).removeClass('loading');
             }
         });
     });
     $('#maps tbody').on('click', '.negative', function(event) {
-        $(event.target).popup({
-            on: 'click',
-            inline: true
-        });
         $.ajax({
             type: 'DELETE',
             url: [[@{/api/maps/}]] + $(this).data('map-id'),
@@ -228,15 +252,21 @@ $(function() {
                 [[${_csrf.headerName}]]: [[${_csrf.token}]]
             },
             success: function(data) {
-                location.reload();
+                $('#maps-error-msg').removeClass('visible').addClass('hidden');
+                differenceDataTable.ajax.reload();
+                dataTable.ajax.reload();
             },
             error: function() {
                 $(event.target).removeClass('loading');
-                $(event.target).popup('show');
+                $('#maps-error-msg .header').text([[#{admin.map.delete.error}]]);
+                $('#maps-error-msg').removeClass('hidden').addClass('visible');
+            },
+            complete: function() {
+                $(event.target).removeClass('loading');
             }
         });
     });
-    $('#difference-msg').click(function() {
+    $('.message').click(function() {
         $(this).transition('fade');
     });
 });

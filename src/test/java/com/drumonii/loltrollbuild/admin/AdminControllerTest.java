@@ -89,7 +89,7 @@ public class AdminControllerTest extends BaseSpringTestRunner {
 
 		mockMvc.perform(get("/admin/summoner-spells").with(adminUser()))
 				.andExpect(status().isOk())
-				.andExpect(model().attributeExists("latestSavedPatch", "difference"))
+				.andExpect(model().attributeExists("latestSavedPatch"))
 				.andExpect(model().attribute("activeTab", is("summonerSpells")))
 				.andExpect(view().name("admin/summonerSpells/summonerSpells"));
 	}
@@ -107,7 +107,7 @@ public class AdminControllerTest extends BaseSpringTestRunner {
 
 		mockMvc.perform(get("/admin/items").with(adminUser()))
 				.andExpect(status().isOk())
-				.andExpect(model().attributeExists("latestSavedPatch", "difference"))
+				.andExpect(model().attributeExists("latestSavedPatch"))
 				.andExpect(model().attribute("activeTab", is("items")))
 				.andExpect(view().name("admin/items/items"));
 	}
@@ -128,7 +128,7 @@ public class AdminControllerTest extends BaseSpringTestRunner {
 
 		mockMvc.perform(get("/admin/champions").with(adminUser()))
 				.andExpect(status().isOk())
-				.andExpect(model().attributeExists("latestSavedPatch", "difference"))
+				.andExpect(model().attributeExists("latestSavedPatch"))
 				.andExpect(model().attribute("activeTab", is("champions")))
 				.andExpect(view().name("admin/champions/champions"));
 	}
@@ -149,7 +149,7 @@ public class AdminControllerTest extends BaseSpringTestRunner {
 
 		mockMvc.perform(get("/admin/maps").with(adminUser()))
 				.andExpect(status().isOk())
-				.andExpect(model().attributeExists("latestSavedPatch", "difference"))
+				.andExpect(model().attributeExists("latestSavedPatch"))
 				.andExpect(model().attribute("activeTab", is("maps")))
 				.andExpect(view().name("admin/maps/maps"));
 	}

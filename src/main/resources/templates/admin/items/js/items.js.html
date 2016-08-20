@@ -5,11 +5,81 @@
 <script th:inline="javascript" th:fragment="script">
 /*<![CDATA[*/
 $(function() {
+    // Items difference
     var differenceDataTable = $('#items-difference').DataTable({
         order: [ [1, 'asc'] ],
+        ajax: {
+            url: [[@{/admin/items/diff}]],
+            dataSrc: ''
+        },
         columnDefs: [
             { orderable: false, targets: [0, 4, 5] },
             { searchable: false, targets: [0, 4, 5] }
+        ],
+        columns: [
+            { data: null,
+                render: function(data, type, full, meta) {
+                    return $('<img>', {
+                        'class': 'ui rounded image',
+                        style: 'height:60px;width:auto;',
+                        src: 'https://ddragon.leagueoflegends.com/cdn/' + [[${latestSavedPatch}]] + '/img/item/' +
+                        data.image.full,
+                    }).wrap('<span>').parent().html();
+                }
+            },
+            { data: 'name' },
+            { data: 'group',
+                render: function(data, type, full, meta) {
+                    if (data) {
+                        return data;
+                    }
+                    return [[#{none}]];
+                }
+            },
+            { data: 'requiredChampion',
+                render: function(data, type, full, meta) {
+                    if (data) {
+                        return data;
+                    }
+                    return [[#{none}]];
+                }
+            },
+            { data: 'maps',
+                render: function(data, type, full, meta) {
+                    var maps = [];
+                    $.each(data, function(index, value) {
+                        if (value) {
+                            switch(index) {
+                                case '8':
+                                    maps.push(' The Crystal Scar');
+                                    break;
+                                case '10':
+                                    maps.push(' Twisted Treeline');
+                                    break;
+                                case '11':
+                                    maps.push(' Summoner’s Rift');
+                                    break;
+                                case '12':
+                                    maps.push(' Howling Abyss');
+                                break;
+                            }
+                        }
+                    });
+                    maps.sort();
+                    return maps;
+                }
+            },
+            { data: null,
+                render: function(data, type, full, meta) {
+                    var button = $('<button>', {
+                        'data-item-id': data.id,
+                        'class': 'ui fluid primary button',
+                        style: 'box-sizing:border-box;',
+                        text: [[#{admin.item.save}]]
+                    });
+                    return button.wrap('<span>').parent().html();
+                }
+            }
         ],
         lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, 'All'] ],
         language: {
@@ -33,10 +103,6 @@ $(function() {
         differenceDataTable.column($(this).data('column-index')).search($(this).val()).draw();
     });
     $('#items-difference tbody').on('click', '.primary', function(event) {
-        $(event.target).popup({
-            on: 'click',
-            inline: true
-        });
         $.ajax({
             type: 'POST',
             url: [[@{/riot/items/}]] + $(this).data('item-id'),
@@ -50,25 +116,26 @@ $(function() {
                 _csrf_header: [[${_csrf.headerName}]]
             },
             success: function(data) {
-                location.reload();
+                $('#items-difference-error-msg').removeClass('visible').addClass('hidden');
+                differenceDataTable.ajax.reload();
+                dataTable.ajax.reload();
             },
             error: function() {
                 $(event.target).removeClass('loading');
-                $(event.target).popup('show');
+                $('#items-difference-error-msg .header').text([[#{admin.item.save.error}]]);
+                $('#items-difference-error-msg').removeClass('hidden').addClass('visible');
+            },
+            complete: function() {
+                $(event.target).removeClass('loading');
             }
         });
     });
     $('#save-items-form').submit(function(event) {
-        var button = $('#save-items-btn');
-        button.popup({
-            on: 'click',
-            inline: true
-        });
         $.ajax({
             type: 'POST',
             url: [[@{/riot/items}]],
             beforeSend: function() {
-                button.addClass('loading');
+                $('#save-items-btn').addClass('loading');
             },
             data: {
                 truncate: $('#truncate').is(':checked'),
@@ -78,15 +145,29 @@ $(function() {
                 _csrf_header: [[${_csrf.headerName}]]
             },
             success: function(data) {
-                location.reload();
+                $('#items-difference-error-msg').removeClass('visible').addClass('hidden');
+                differenceDataTable.ajax.reload();
+                dataTable.ajax.reload();
             },
             error: function() {
-                button.removeClass('loading');
-                button.popup('show');
+                $('#save-items-btn').removeClass('loading');
+                $('#items-difference-error-msg .header').text([[#{admin.items.save.error}]]);
+                $('#items-difference-error-msg').removeClass('hidden').addClass('visible');
+            },
+            complete: function() {
+                $('#save-items-btn').removeClass('loading');
             }
         });
         event.preventDefault();
     });
+    differenceDataTable.on('xhr', function() {
+        if ($.isEmptyObject(differenceDataTable.ajax.json())) {
+            $('#items-difference-segment').slideUp();
+        } else {
+            $('#items-difference-segment').slideDown();
+        }
+    });
+    // Items from the db
     var dataTable = $('#items').DataTable({
         processing: true,
         serverSide: true,
@@ -124,11 +205,11 @@ $(function() {
             { data: null,
                 render: function(data, type, full, meta) {
                     return $('<div>', {
-                        class: 'item-description',
+                        'class': 'item-description',
                         'data-html': data.description,
                         'data-variation': 'wide'
                     }).append($('<img>', {
-                        class: 'ui rounded image',
+                        'class': 'ui rounded image',
                         src: '/img/items/' + data.image.full
                     })).wrap('<span>').parent().html();
                 }
@@ -179,34 +260,20 @@ $(function() {
                 render: function(data, type, full, meta) {
                     var button = $('<button>', {
                         'data-item-id': data.substring(data.lastIndexOf('/') + 1, data.length),
-                        class: 'ui secondary button',
+                        'class': 'ui secondary button',
                         text: [[#{admin.item.overwrite}]]
                     });
-                    var popup = $('<div>', {
-                        class: 'ui negative message hidden popup'
-                    }).wrapInner($('<p>').append($('<i>', {
-                        class: 'warning circle icon'
-                    })).append($('<span>', {
-                        text: [[#{admin.item.overwrite.error}]]
-                    })));
-                    return button.wrap('<span>').parent().html() + popup.wrap('<span>').parent().html();
+                    return button.wrap('<span>').parent().html();
                 }
             },
             { data: '_links.self.href',
                 render: function(data, type, full, meta) {
                     var button = $('<button>', {
                         'data-item-id': data.substring(data.lastIndexOf('/') + 1, data.length),
-                        class: 'negative ui button',
+                        'class': 'negative ui button',
                         text: [[#{admin.item.delete}]]
                     });
-                    var popup = $('<div>', {
-                        class: 'ui negative message hidden popup'
-                    }).wrapInner($('<p>').append($('<i>', {
-                        class: 'warning circle icon'
-                    })).append($('<span>', {
-                        text: [[#{admin.item.delete.error}]]
-                    })));
-                    return button.wrap('<span>').parent().html() + popup.wrap('<span>').parent().html();
+                    return button.wrap('<span>').parent().html();
                 }
             }
         ],
@@ -238,10 +305,6 @@ $(function() {
         dataTable.search(inputs).draw();
     });
     $('#items tbody').on('click', '.secondary', function(event) {
-        $(event.target).popup({
-            on: 'click',
-            inline: true
-        });
         $.ajax({
             type: 'POST',
             url: [[@{/riot/items/}]] + $(this).data('item-id'),
@@ -255,19 +318,20 @@ $(function() {
                 _csrf_header: [[${_csrf.headerName}]]
             },
             success: function(data) {
-                location.reload();
+                $('#items-error-msg').removeClass('visible').addClass('hidden');
+                dataTable.ajax.reload();
             },
             error: function() {
                 $(event.target).removeClass('loading');
-                $(event.target).popup('show');
+                $('#items-error-msg .header').text([[#{admin.item.overwrite.error}]]);
+                $('#items-error-msg').removeClass('hidden').addClass('visible');
+            },
+            complete: function() {
+                $(event.target).removeClass('loading');
             }
         });
     });
     $('#items tbody').on('click', '.negative', function(event) {
-        $(event.target).popup({
-            on: 'click',
-            inline: true
-        });
         $.ajax({
             type: 'DELETE',
             url: [[@{/api/items/}]] + $(this).data('item-id'),
@@ -278,15 +342,21 @@ $(function() {
                 [[${_csrf.headerName}]]: [[${_csrf.token}]]
             },
             success: function(data) {
-                location.reload();
+                $('#items-error-msg').removeClass('visible').addClass('hidden');
+                differenceDataTable.ajax.reload();
+                dataTable.ajax.reload();
             },
             error: function() {
                 $(event.target).removeClass('loading');
-                $(event.target).popup('show');
+                $('#items-error-msg .header').text([[#{admin.item.delete.error}]]);
+                $('#items-error-msg').removeClass('hidden').addClass('visible');
+            },
+            complete: function() {
+                $(event.target).removeClass('loading');
             }
         });
     });
-    $('#difference-msg').click(function() {
+    $('.message').click(function() {
         $(this).transition('fade');
     });
 });

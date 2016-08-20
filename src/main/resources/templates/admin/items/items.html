@@ -15,15 +15,19 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <div class="ui basic segment" th:unless="${#lists.isEmpty(difference)}">
-        <div id="difference-msg" class="ui info message">
+    <div id="items-difference-segment" class="ui basic segment" style="display:none;">
+        <div  class="ui info message">
             <i class="close icon"></i>
             <div class="header" th:text="#{admin.items.diff}">Difference in Items found</div>
             <p th:text="#{admin.items.diff.msg(${latestSavedPatch})}">Differ msg</p>
         </div>
+        <div id="items-difference-error-msg" class="ui mini negative hidden message">
+            <i class="close icon"></i>
+            <div class="header">An error has occurred.</div>
+        </div>
 
         <h3 class="ui dividing header" th:text="#{admin.items.riot}">Difference in Items from Riot</h3>
-        <table id="items-difference" class="ui celled table">
+        <table id="items-difference" class="ui celled table" width="100%">
             <thead>
             <tr>
                 <th class="one wide"></th>
@@ -58,35 +62,6 @@
                 <th class="two wide"></th>
             </tr>
             </thead>
-            <tbody>
-            <tr th:each="item : ${difference}">
-                <td>
-                    <div data-variation="wide" th:attr="data-html=${item.description}" class="item-description">
-                        <img class="ui rounded image" style="height:60px;width:auto;"
-                             th:src="@{https://ddragon.leagueoflegends.com/cdn/{patch}/img/item/{image}
-                        (patch=${latestSavedPatch}, image=${item.image.full})}"/>
-                    </div>
-                </td>
-                <td th:text="${item.name}"></td>
-                <td><span th:text="${item.group == null} ? #{none} : ${item.group}"></span></td>
-                <td><span th:text="${item.requiredChampion == null} ? #{none} : ${item.requiredChampion}"></span></td>
-                <td>
-                <span th:each="map, iterStat : ${T(com.drumonii.loltrollbuild.util.GameMapUtil).getAvailableMaps(item.maps)}"
-                      th:text="${iterStat.last} ? ${map} : |${map}, |"></span>
-                </td>
-                <td>
-                    <button class="ui fluid primary button" th:attr="data-item-id=${item.id}"
-                            th:text="#{admin.item.save}" style="box-sizing:border-box;">Save
-                    </button>
-                    <div class="ui negative message hidden popup">
-                        <p>
-                            <i class="warning circle icon"></i>
-                            <span th:text="#{admin.item.save.error}">An error has occurred...</span>
-                        </p>
-                    </div>
-                </td>
-            </tr>
-            </tbody>
             <tfoot class="full-width">
             <tr>
                 <th colspan="6">
@@ -98,12 +73,6 @@
                         <button id="save-items-btn" type="submit" class="ui primary button"
                                 th:text="#{admin.items.save}">Save Items
                         </button>
-                        <div class="ui negative message hidden popup">
-                            <p>
-                                <i class="warning circle icon"></i>
-                                <span th:text="#{admin.items.save.error}">An error has occurred.</span>
-                            </p>
-                        </div>
                     </form>
                 </th>
             </tr>
@@ -111,8 +80,13 @@
         </table>
     </div>
     <div class="ui basic segment">
+        <div id="items-error-msg" class="ui mini negative hidden message">
+            <i class="close icon"></i>
+            <div class="header">An error has occurred.</div>
+        </div>
+
         <h3 class="ui dividing header" th:text="#{admin.items}">Items</h3>
-        <table id="items" class="ui celled table">
+        <table id="items" class="ui celled table" width="100%">
             <thead>
             <tr>
                 <th class="one wide"></th>

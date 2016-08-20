@@ -5,11 +5,41 @@
 <script th:inline="javascript" th:fragment="script">
 /*<![CDATA[*/
 $(function() {
+    // Summoner Spells difference
     var differenceDataTable = $('#summoner-spells-difference').DataTable({
         order: [ [1, 'asc'] ],
+        ajax: {
+            url: [[@{/admin/summoner-spells/diff}]],
+            dataSrc: ''
+        },
         columnDefs: [
             { orderable: false, targets: [0, 2, 3] },
             { searchable: false, targets: [0, 3] }
+        ],
+        columns: [
+            { data: null,
+                render: function(data, type, full, meta) {
+                    return $('<img>', {
+                        'class': 'ui rounded image',
+                        style: 'height:60px;width:auto;',
+                        src: 'https://ddragon.leagueoflegends.com/cdn/' + [[${latestSavedPatch}]] + '/img/spell/' +
+                        data.image.full,
+                    }).wrap('<span>').parent().html();
+                }
+            },
+            { data: 'name' },
+            { data: 'modes[, ]' },
+            { data: null,
+                render: function(data, type, full, meta) {
+                    var button = $('<button>', {
+                        'data-summoner-spell-id': data.id,
+                        'class': 'ui fluid primary button',
+                        style: 'box-sizing:border-box;',
+                        text: [[#{admin.summonerSpell.save}]]
+                    });
+                    return button.wrap('<span>').parent().html();
+                }
+            }
         ],
         lengthMenu: [ [10, -1], [10, 'All'] ],
         language: {
@@ -33,10 +63,6 @@ $(function() {
         differenceDataTable.column($(this).data('column-index')).search($(this).val()).draw();
     });
     $('#summoner-spells-difference tbody').on('click', '.primary', function(event) {
-        $(event.target).popup({
-            on: 'click',
-            inline: true
-        });
         $.ajax({
             type: 'POST',
             url: [[@{/riot/summoner-spells/}]] + $(this).data('summoner-spell-id'),
@@ -50,25 +76,26 @@ $(function() {
                 _csrf_header: [[${_csrf.headerName}]]
             },
             success: function(data) {
-                location.reload();
+                $('#summoner-spells-difference-error-msg').removeClass('visible').addClass('hidden');
+                differenceDataTable.ajax.reload();
+                dataTable.ajax.reload();
             },
             error: function() {
                 $(event.target).removeClass('loading');
-                $(event.target).popup('show');
+                $('#summoner-spells-difference-error-msg .header').text([[#{admin.summonerSpell.save.error}]]);
+                $('#summoner-spells-difference-error-msg').removeClass('hidden').addClass('visible');
+            },
+            complete: function() {
+                $(event.target).removeClass('loading');
             }
         });
     });
     $('#save-summoner-spells-form').submit(function(event) {
-        var button = $('#save-summoner-spells-btn');
-        button.popup({
-            on: 'click',
-            inline: true
-        });
         $.ajax({
             type: 'POST',
             url: [[@{/riot/summoner-spells}]],
             beforeSend: function() {
-                button.addClass('loading');
+                $('#save-summoner-spells-btn').addClass('loading');
             },
             data: {
                 truncate: $('#truncate').is(':checked'),
@@ -78,15 +105,29 @@ $(function() {
                 _csrf_header: [[${_csrf.headerName}]]
             },
             success: function(data) {
-                location.reload();
+                $('#summoner-spells-difference-error-msg').removeClass('visible').addClass('hidden');
+                differenceDataTable.ajax.reload();
+                dataTable.ajax.reload();
             },
             error: function() {
-                button.removeClass('loading');
-                button.popup('show');
+                $('#save-summoner-spells-btn').removeClass('loading');
+                $('#summoner-spells-difference-error-msg .header').text([[#{admin.summonerSpells.save.error}]]);
+                $('#summoner-spells-difference-error-msg').removeClass('hidden').addClass('visible');
+            },
+            complete: function() {
+                $('#save-summoner-spells-btn').removeClass('loading');
             }
         });
         event.preventDefault();
     });
+    differenceDataTable.on('xhr', function() {
+        if ($.isEmptyObject(differenceDataTable.ajax.json())) {
+            $('#summoner-spells-difference-segment').slideUp();
+        } else {
+            $('#summoner-spells-difference-segment').slideDown();
+        }
+    });
+    // Summoner Spells from the db
     var dataTable = $('#summoner-spells').DataTable({
         processing: true,
         serverSide: true,
@@ -127,11 +168,11 @@ $(function() {
                     var id = href.substring(href.lastIndexOf('/') + 1, href.length);
                     var img = data.image.full;
                     return $('<div>', {
-                        class: 'summoner-spell-description',
+                        'class': 'summoner-spell-description',
                         'data-html': data.description,
                         'data-variation': 'wide'
                     }).append($('<img>', {
-                        class: 'ui rounded image',
+                        'class': 'ui rounded image',
                         src: '/img/summoner-spells/' + id + img.substring(img.lastIndexOf('.'), img.length),
                     })).wrap('<span>').parent().html();
                 }
@@ -142,34 +183,20 @@ $(function() {
                 render: function(data, type, full, meta) {
                     var button = $('<button>', {
                         'data-summoner-spell-id': data.substring(data.lastIndexOf('/') + 1, data.length),
-                        class: 'ui secondary button',
+                        'class': 'ui secondary button',
                         text: [[#{admin.summonerSpell.overwrite}]]
                     });
-                    var popup = $('<div>', {
-                        class: 'ui negative message hidden popup'
-                    }).wrapInner($('<p>').append($('<i>', {
-                        class: 'warning circle icon'
-                    })).append($('<span>', {
-                        text: [[#{admin.summonerSpell.overwrite.error}]]
-                    })));
-                    return button.wrap('<span>').parent().html() + popup.wrap('<span>').parent().html();
+                    return button.wrap('<span>').parent().html();
                 }
             },
             { data: '_links.self.href',
                 render: function(data, type, full, meta) {
                     var button = $('<button>', {
                         'data-summoner-spell-id': data.substring(data.lastIndexOf('/') + 1, data.length),
-                        class: 'negative ui button',
+                        'class': 'negative ui button',
                         text: [[#{admin.summonerSpell.delete}]]
                     });
-                    var popup = $('<div>', {
-                        class: 'ui negative message hidden popup'
-                    }).wrapInner($('<p>').append($('<i>', {
-                        class: 'warning circle icon'
-                    })).append($('<span>', {
-                        text: [[#{admin.summonerSpell.delete.error}]]
-                    })));
-                    return button.wrap('<span>').parent().html() + popup.wrap('<span>').parent().html();
+                    return button.wrap('<span>').parent().html();
                 }
             }
         ],
@@ -201,10 +228,6 @@ $(function() {
         dataTable.search(inputs).draw();
     });
     $('#summoner-spells tbody').on('click', '.secondary', function(event) {
-        $(event.target).popup({
-            on: 'click',
-            inline: true
-        });
         $.ajax({
             type: 'POST',
             url: [[@{/riot/summoner-spells/}]] + $(this).data('summoner-spell-id'),
@@ -218,19 +241,20 @@ $(function() {
                 _csrf_header: [[${_csrf.headerName}]]
             },
             success: function(data) {
-                location.reload();
+                $('#summoner-spells-error-msg').removeClass('visible').addClass('hidden');
+                dataTable.ajax.reload();
             },
             error: function() {
                 $(event.target).removeClass('loading');
-                $(event.target).popup('show');
+                $('#summoner-spells-error-msg .header').text([[#{admin.summonerSpell.overwrite.error}]]);
+                $('#summoner-spells-error-msg').removeClass('hidden').addClass('visible');
+            },
+            complete: function() {
+                $(event.target).removeClass('loading');
             }
         });
     });
     $('#summoner-spells tbody').on('click', '.negative', function(event) {
-        $(event.target).popup({
-            on: 'click',
-            inline: true
-        });
         $.ajax({
             type: 'DELETE',
             url: [[@{/api/summoner-spells/}]] + $(this).data('summoner-spell-id'),
@@ -241,15 +265,21 @@ $(function() {
                 [[${_csrf.headerName}]]: [[${_csrf.token}]]
             },
             success: function(data) {
-                location.reload();
+                $('#summoner-spells-error-msg').removeClass('visible').addClass('hidden');
+                differenceDataTable.ajax.reload();
+                dataTable.ajax.reload();
             },
             error: function() {
                 $(event.target).removeClass('loading');
-                $(event.target).popup('show');
+                $('#summoner-spells-error-msg .header').text([[#{admin.summonerSpell.delete.error}]]);
+                $('#summoner-spells-error-msg').removeClass('hidden').addClass('visible');
+            },
+            complete: function() {
+                $(event.target).removeClass('loading');
             }
         });
     });
-    $('#difference-msg').click(function() {
+    $('.message').click(function() {
         $(this).transition('fade');
     });
 });

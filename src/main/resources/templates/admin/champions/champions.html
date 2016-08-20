@@ -15,15 +15,19 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <div class="ui basic segment" th:unless="${#lists.isEmpty(difference)}">
-        <div id="difference-msg" class="ui info message">
+    <div id="champions-difference-segment" class="ui basic segment" style="display:none;">
+        <div class="ui info message">
             <i class="close icon"></i>
             <div class="header" th:text="#{admin.champions.diff}">Difference in Champions found</div>
             <p th:text="#{admin.champions.diff.msg(${latestSavedPatch})}">Differ msg</p>
         </div>
+        <div id="champions-difference-error-msg" class="ui mini negative hidden message">
+            <i class="close icon"></i>
+            <div class="header">An error has occurred.</div>
+        </div>
 
         <h3 class="ui dividing header" th:text="#{admin.champions.riot}">Difference in Champions from Riot</h3>
-        <table id="champions-difference" class="ui celled table">
+        <table id="champions-difference" class="ui celled table" width="100%">
             <thead>
             <tr>
                 <th class="one wide"></th>
@@ -58,33 +62,6 @@
                 <th class="two wide"></th>
             </tr>
             </thead>
-            <tbody>
-            <tr th:each="champion : ${difference}">
-                <td>
-                    <img class="ui rounded image" style="height:60px;width:auto;"
-                         th:src="@{https://ddragon.leagueoflegends.com/cdn/{patch}/img/champion/{image}
-                     (patch=${latestSavedPatch}, image=${champion.image.full})}"/>
-                </td>
-                <td th:text="${champion.name}"></td>
-                <td th:text="${champion.title}"></td>
-                <td>
-                    <span th:each="tag, iterStat : ${champion.tags}"
-                          th:text="${iterStat.last} ? ${tag} : |${tag}, |"></span>
-                </td>
-                <td th:text="${champion.partype}"></td>
-                <td>
-                    <button class="ui fluid primary button" th:attr="data-champion-id=${champion.id}"
-                            th:text="#{admin.champion.save}" style="box-sizing:border-box;">Save
-                    </button>
-                    <div class="ui negative message hidden popup">
-                        <p>
-                            <i class="warning circle icon"></i>
-                            <span th:text="#{admin.champion.save.error}">An error has occurred...</span>
-                        </p>
-                    </div>
-                </td>
-            </tr>
-            </tbody>
             <tfoot class="full-width">
             <tr>
                 <th colspan="6">
@@ -96,21 +73,21 @@
                         <button id="save-champions-btn" type="submit" class="ui primary button"
                                 th:text="#{admin.champions.save}">Save Champions
                         </button>
-                        <div class="ui negative message hidden popup">
-                            <p>
-                                <i class="warning circle icon"></i>
-                                <span th:text="#{admin.champions.save.error}">An error has occurred.</span>
-                            </p>
-                        </div>
                     </form>
                 </th>
             </tr>
             </tfoot>
         </table>
     </div>
-    <div class="ui basic segment">
+
+    <div id="champions-segment" class="ui basic segment">
+        <div id="champions-error-msg" class="ui mini negative hidden message">
+            <i class="close icon"></i>
+            <div class="header">An error has occurred.</div>
+        </div>
+
         <h3 class="ui dividing header" th:text="#{admin.champions}">Champions</h3>
-        <table id="champions" class="ui celled table">
+        <table id="champions" class="ui celled table" width="100%">
             <thead>
             <tr>
                 <th class="one wide"></th>

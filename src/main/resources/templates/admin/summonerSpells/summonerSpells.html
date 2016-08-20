@@ -15,15 +15,19 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <div class="ui basic segment" th:unless="${#lists.isEmpty(difference)}">
-        <div id="difference-msg" class="ui info message">
+    <div id="summoner-spells-difference-segment" class="ui basic segment" style="display:none;">
+        <div class="ui info message">
             <i class="close icon"></i>
             <div class="header" th:text="#{admin.summonerSpells.diff}">Difference in Summoner Spells found</div>
             <p th:text="#{admin.summonerSpells.diff.msg(${latestSavedPatch})}">Differ msg</p>
         </div>
+        <div id="summoner-spells-difference-error-msg" class="ui mini negative hidden message">
+            <i class="close icon"></i>
+            <div class="header">An error has occurred.</div>
+        </div>
 
         <h3 class="ui dividing header" th:text="#{admin.summonerSpells.riot}">Difference in Summoner Spells from Riot</h3>
-        <table id="summoner-spells-difference" class="ui celled table">
+        <table id="summoner-spells-difference" class="ui celled table" width="100%">
             <thead>
             <tr>
                 <th class="one wide"></th>
@@ -43,33 +47,6 @@
                 <th class="two wide"></th>
             </tr>
             </thead>
-            <tbody>
-            <tr th:each="spell : ${difference}">
-                <td>
-                    <div data-variation="wide" th:attr="data-html=${spell.description}"
-                         class="summoner-spell-description">
-                        <img class="ui rounded image" style="height:60px;width:auto;"
-                             th:src="@{https://ddragon.leagueoflegends.com/cdn/{patch}/img/spell/{image}
-                        (patch=${latestSavedPatch}, image=${spell.image.full})}"/>
-                    </div>
-                </td>
-                <td th:text="${spell.name}"></td>
-                <td>
-                    <span th:each="mode, iterStat : ${spell.modes}" th:text="${iterStat.last} ? ${mode} : |${mode}, |"></span>
-                </td>
-                <td>
-                    <button class="ui fluid primary button" th:attr="data-summoner-spell-id=${spell.id}"
-                            th:text="#{admin.summonerSpell.save}" style="box-sizing:border-box;">Save
-                    </button>
-                    <div class="ui negative message hidden popup">
-                        <p>
-                            <i class="warning circle icon"></i>
-                            <span th:text="#{admin.summonerSpell.save.error}">An error has occurred...</span>
-                        </p>
-                    </div>
-                </td>
-            </tr>
-            </tbody>
             <tfoot class="full-width">
             <tr>
                 <th colspan="4">
@@ -81,12 +58,6 @@
                         <button id="save-summoner-spells-btn" class="ui primary button" type="submit"
                                 th:text="#{admin.summonerSpells.save}">Save Summoner Spells
                         </button>
-                        <div class="ui negative message hidden popup">
-                            <p>
-                                <i class="warning circle icon"></i>
-                                <span th:text="#{admin.summonerSpells.save.error}">An error has occurred.</span>
-                            </p>
-                        </div>
                     </form>
                 </th>
             </tr>
@@ -94,8 +65,13 @@
         </table>
     </div>
     <div class="ui basic segment">
+        <div id="summoner-spells-error-msg" class="ui mini negative hidden message">
+            <i class="close icon"></i>
+            <div class="header">An error has occurred.</div>
+        </div>
+
         <h3 class="ui dividing header" th:text="#{admin.summonerSpells}">Summoner Spells</h3>
-        <table id="summoner-spells" class="ui celled table">
+        <table id="summoner-spells" class="ui celled table" width="100%">
             <thead>
             <tr>
                 <th class="one wide"></th>
