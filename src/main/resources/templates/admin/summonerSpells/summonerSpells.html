@@ -33,11 +33,16 @@
                 <th class="one wide"></th>
                 <th class="three wide">
                     <div class="ui input">
-                        <input class="summoner-spells-difference-search-input"
-                               th:placeholder="#{admin.summonerSpell.name.search}" type="text" data-column-index="1"/>
+                        <input class="summoner-spells-difference-search-input" th:placeholder="#{admin.summonerSpell.name.search}"
+                               type="text" data-column-index="1"/>
                     </div>
                 </th>
-                <th class="ten wide"></th>
+                <th class="ten wide">
+                    <div class="ui input">
+                        <input class="summoner-spells-difference-search-input" th:placeholder="#{admin.summonerSpell.modes.search}"
+                               type="text" data-column-index="2"/>
+                    </div>
+                </th>
                 <th class="two wide"></th>
             </tr>
             <tr>
@@ -81,7 +86,12 @@
                                type="text" data-column-name="name"/>
                     </div>
                 </th>
-                <th class="eleven wide"></th>
+                <th class="eleven wide">
+                    <div class="ui disabled input">
+                        <input class="summoner-spells-search-input" th:placeholder="#{admin.summonerSpell.modes.search}"
+                               type="text" data-column-name="modes"/>
+                    </div>
+                </th>
                 <th class="one wide"></th>
                 <th class="one wide"></th>
             </tr>

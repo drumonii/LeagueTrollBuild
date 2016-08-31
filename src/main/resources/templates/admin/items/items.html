@@ -34,23 +34,27 @@
                 <th class="three wide">
                     <div class="ui input">
                         <input class="items-difference-search-input" th:placeholder="#{admin.item.name.search}"
-                               type="text" data-column-index="1"/>
+                               type="text" data-column-index="1" size="15"/>
                     </div>
                 </th>
                 <th class="three wide">
                     <div class="ui input">
                         <input class="items-difference-search-input" th:placeholder="#{admin.item.group.search}"
-                               type="text" data-column-index="2"/>
+                               type="text" data-column-index="2" size="15"/>
                     </div>
                 </th>
                 <th class="three wide">
                     <div class="ui input">
-                        <input class="items-difference-search-input"
-                               th:placeholder="#{admin.item.requiredChampion.search}"
-                               type="text" data-column-index="3"/>
+                        <input class="items-difference-search-input" th:placeholder="#{admin.item.requiredChampion.search}"
+                               type="text" data-column-index="3" size="15"/>
                     </div>
                 </th>
-                <th class="four wide"></th>
+                <th class="four wide">
+                    <div class="ui input">
+                        <input class="items-difference-search-input" th:placeholder="#{admin.item.maps.search}"
+                               type="text" data-column-index="4" size="15"/>
+                    </div>
+                </th>
                 <th class="two wide"></th>
             </tr>
             <tr>
@@ -93,22 +97,27 @@
                 <th class="three wide">
                     <div class="ui input">
                         <input class="items-search-input" th:placeholder="#{admin.item.name.search}"
-                               type="text" data-column-name="name"/>
+                               type="text" data-column-name="name" size="15"/>
                     </div>
                 </th>
                 <th class="three wide">
                     <div class="ui input">
                         <input class="items-search-input" th:placeholder="#{admin.item.group.search}"
-                               type="text" data-column-name="group"/>
+                               type="text" data-column-name="group" size="15"/>
                     </div>
                 </th>
                 <th class="three wide">
                     <div class="ui input">
                         <input class="items-search-input" th:placeholder="#{admin.item.requiredChampion.search}"
-                               type="text" data-column-name="requiredChampion"/>
+                               type="text" data-column-name="requiredChampion" size="15"/>
                     </div>
                 </th>
-                <th class="four wide"></th>
+                <th class="four wide">
+                    <div class="ui disabled input">
+                        <input class="items-search-input" th:placeholder="#{admin.item.maps.search}"
+                               type="text" data-column-name="maps" size="15"/>
+                    </div>
+                </th>
                 <th class="one wide"></th>
                 <th class="one wide"></th>
             </tr>

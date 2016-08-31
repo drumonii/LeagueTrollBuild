@@ -34,21 +34,25 @@
                 <th class="three wide">
                     <div class="ui input">
                         <input class="champions-different-search-input" th:placeholder="#{admin.champion.name.search}"
-                               type="text" data-column-index="1"/>
+                               type="text" data-column-index="1" size="15"/>
                     </div>
                 </th>
                 <th class="four wide">
                     <div class="ui input">
                         <input class="champions-different-search-input" th:placeholder="#{admin.champion.title.search}"
-                               type="text" data-column-index="2"/>
+                               type="text" data-column-index="2" size="20"/>
                     </div>
                 </th>
-                <th class="four wide"></th>
+                <th class="four wide">
+                    <div class="ui input">
+                        <input class="champions-different-search-input" th:placeholder="#{admin.champion.tags.search}"
+                               type="text" data-column-index="3" size="15"/>
+                    </div>
+                </th>
                 <th class="two wide">
                     <div class="ui input">
-                        <input class="champions-different-search-input"
-                               th:placeholder="#{admin.champion.partype.search}"
-                               type="text" data-column-index="4"/>
+                        <input class="champions-different-search-input" th:placeholder="#{admin.champion.partype.search}"
+                               type="text" data-column-index="4" size="15"/>
                     </div>
                 </th>
                 <th class="two wide"></th>
@@ -94,20 +98,25 @@
                 <th class="two wide">
                     <div class="ui input">
                         <input class="champions-search-input" th:placeholder="#{admin.champion.name.search}"
-                               type="text" data-column-name="name"/>
+                               type="text" data-column-name="name" size="15"/>
                     </div>
                 </th>
                 <th class="four wide">
                     <div class="ui input">
                         <input class="champions-search-input" th:placeholder="#{admin.champion.title.search}"
-                               type="text" data-column-name="title"/>
+                               type="text" data-column-name="title" size="20"/>
                     </div>
                 </th>
-                <th class="four wide"></th>
+                <th class="four wide">
+                    <div class="ui disabled input">
+                        <input class="champions-search-input" th:placeholder="#{admin.champion.tags.search}"
+                               type="text" data-column-name="tags" size="15"/>
+                    </div>
+                </th>
                 <th class="three wide">
                     <div class="ui input">
                         <input class="champions-search-input" th:placeholder="#{admin.champion.partype.search}"
-                               type="text" data-column-name="partype"/>
+                               type="text" data-column-name="partype" size="15"/>
                     </div>
                 </th>
                 <th class="one wide"></th>
