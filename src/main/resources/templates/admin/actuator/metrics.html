@@ -24,14 +24,11 @@
     <script th:inline="javascript">
         /*<![CDATA[*/
         $(function() {
-            $.ajax({
-                url: [[@{/admin/actuator/metrics}]],
-                success: function(data) {
-                    var uptime = data.uptime + '';
-                    var instanceUptime = data['instance.uptime'] + '';
-                    $('#uptime').text(uptime.substring(0, uptime.length - 3));
-                    $('#instance-uptime').text(instanceUptime.substring(0, instanceUptime.length - 3));
-                }
+            $.get(/*[[@{/admin/actuator/metrics}]]*/ '/admin/actuator/metrics', function(data) {
+                var uptime = data.uptime + '';
+                var instanceUptime = data['instance.uptime'] + '';
+                $('#uptime').text(uptime.substring(0, uptime.length - 3));
+                $('#instance-uptime').text(instanceUptime.substring(0, instanceUptime.length - 3));
             });
         });
         /*]]>*/

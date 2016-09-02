@@ -27,25 +27,22 @@
     <script th:inline="javascript">
     /*<![CDATA[*/
     $(function() {
-        $.ajax({
-            url: [[@{/admin/actuator/flyway}]],
-            success: function(data) {
-                $('#flyway').DataTable({
-                    pageLength: 25,
-                    order: [ [0, 'desc'] ],
-                    data: data,
-                    columns: [
-                        { data: 'version' },
-                        { data: 'description' },
-                        { data: 'state' },
-                        { data: null,
-                            render: function(data, type, full, meta) {
-                                return data.executionTime + ' ms';
-                            }
+        $.get(/*[[@{/admin/actuator/flyway}]]*/ '/admin/actuator/flyway', function(data) {
+            $('#flyway').DataTable({
+                pageLength: 25,
+                order: [ [0, 'desc'] ],
+                data: data,
+                columns: [
+                    { data: 'version' },
+                    { data: 'description' },
+                    { data: 'state' },
+                    { data: null,
+                        render: function(data, type, full, meta) {
+                            return data.executionTime + ' ms';
                         }
-                    ]
-                });
-            }
+                    }
+                ]
+            });
         });
     });
     /*]]>*/

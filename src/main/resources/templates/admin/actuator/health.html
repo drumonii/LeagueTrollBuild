@@ -36,15 +36,12 @@
     <script th:inline="javascript">
         /*<![CDATA[*/
         $(function() {
-            $.ajax({
-                url: [[@{/admin/actuator/health}]],
-                success: function(data) {
-                    $('#database').text(data.db.database);
-                    $('#database-status').text(data.db.status);
-                    $('#database-test-sql').text(Object.keys(data.db)[2] + ' ' + data.db.hello);
-                    $('#disk-total').text([[#{admin.actuator.health.disk.total}]] + ' ' + data.diskSpace.total / 1073741824 + ' GB');
-                    $('#disk-free').text([[#{admin.actuator.health.disk.free}]] + ' ' + data.diskSpace.free / 1073741824 + ' GB');
-                }
+            $.get(/*[[@{/admin/actuator/health}]]*/ '/admin/actuator/health', function(data) {
+                $('#database').text(data.db.database);
+                $('#database-status').text(data.db.status);
+                $('#database-test-sql').text(Object.keys(data.db)[2] + ' ' + data.db.hello);
+                $('#disk-total').text([[#{admin.actuator.health.disk.total}]] + ' ' + data.diskSpace.total / 1073741824 + ' GB');
+                $('#disk-free').text([[#{admin.actuator.health.disk.free}]] + ' ' + data.diskSpace.free / 1073741824 + ' GB');
             });
         });
         /*]]>*/
