@@ -9,7 +9,7 @@ $(function() {
     var differenceDataTable = $('#summoner-spells-difference').DataTable({
         order: [ [1, 'asc'] ],
         ajax: {
-            url: [[@{/admin/summoner-spells/diff}]],
+            url: /*[[@{/admin/summoner-spells/diff}]]*/ '/admin/summoner-spells/diff',
             dataSrc: ''
         },
         columnDefs: [
@@ -23,7 +23,7 @@ $(function() {
                         'class': 'ui rounded image',
                         style: 'height:60px;width:auto;',
                         src: 'https://ddragon.leagueoflegends.com/cdn/' + [[${latestSavedPatch}]] + '/img/spell/' +
-                        data.image.full,
+                        data.image.full
                     }).wrap('<span>').parent().html();
                 }
             },
@@ -35,7 +35,7 @@ $(function() {
                         'data-summoner-spell-id': data.id,
                         'class': 'ui fluid primary button',
                         style: 'box-sizing:border-box;',
-                        text: [[#{admin.summonerSpell.save}]]
+                        text: /*[[#{admin.summonerSpell.save}]]*/ 'admin.summonerSpell.save'
                     });
                     return button.wrap('<span>').parent().html();
                 }
@@ -43,16 +43,16 @@ $(function() {
         ],
         lengthMenu: [ [10, -1], [10, 'All'] ],
         language: {
-            emptyTable: [[#{dataTables.emptyTable}]],
-            info: [[#{dataTables.info}]],
-            infoEmpty: [[#{dataTables.infoEmpty}]],
-            infoFiltered: [[#{dataTables.infoFiltered}]],
-            processing: [[#{dataTables.processing}]],
-            search: [[#{dataTables.search}]],
-            zeroRecords: [[#{dataTables.zeroRecords(#{admin.summonerSpells})}]],
+            emptyTable: /*[[#{dataTables.emptyTable(#{admin.summonerSpells})}]]*/ 'dataTables.emptyTable',
+            info: /*[[#{dataTables.info}]]*/ 'dataTables.info',
+            infoEmpty: /*[[#{dataTables.infoEmpty}]]*/ 'dataTables.infoEmpty',
+            infoFiltered: /*[[#{dataTables.infoFiltered}]]*/ 'dataTables.infoFiltered',
+            processing: /*[[#{dataTables.processing}]]*/ 'dataTables.processing',
+            search: /*[[#{dataTables.search}]]*/ 'dataTables.search',
+            zeroRecords: /*[[#{dataTables.zeroRecords(#{admin.summonerSpells})}]]*/ 'dataTables.zeroRecords',
             paginate: {
-                next: [[#{dataTables.paginate.next}]],
-                previous: [[#{dataTables.paginate.previous}]]
+                next: /*[[#{dataTables.paginate.next}]]*/ 'dataTables.paginate.next',
+                previous: /*[[#{dataTables.paginate.previous}]]*/ 'dataTables.paginate.previous'
             }
         },
         drawCallback: function(settings) {
@@ -65,15 +65,15 @@ $(function() {
     $('#summoner-spells-difference tbody').on('click', '.primary', function(event) {
         $.ajax({
             type: 'POST',
-            url: [[@{/riot/summoner-spells/}]] + $(this).data('summoner-spell-id'),
+            url: (/*[[@{/riot/summoner-spells/}]]*/ '/riot/summoner-spells/') + $(this).data('summoner-spell-id'),
             beforeSend: function() {
                 $(event.target).addClass('loading');
             },
             data: {
-                [[${_csrf.parameterName}]]: [[${_csrf.token}]]
+                _csrf: /*[[${_csrf.token}]]*/ '_csrf.token'
             },
             headers: {
-                _csrf_header: [[${_csrf.headerName}]]
+                _csrf_header: /*[[${_csrf.headerName}]]*/ '_csrf.headerName'
             },
             success: function(data) {
                 $('#summoner-spells-difference-error-msg').removeClass('visible').addClass('hidden');
@@ -82,7 +82,7 @@ $(function() {
             },
             error: function() {
                 $(event.target).removeClass('loading');
-                $('#summoner-spells-difference-error-msg .header').text([[#{admin.summonerSpell.save.error}]]);
+                $('#summoner-spells-difference-error-msg .header').text(/*[[#{admin.summonerSpell.save.error}]]*/ 'admin.summonerSpell.save.error');
                 $('#summoner-spells-difference-error-msg').removeClass('hidden').addClass('visible');
             },
             complete: function() {
@@ -93,16 +93,16 @@ $(function() {
     $('#save-summoner-spells-form').submit(function(event) {
         $.ajax({
             type: 'POST',
-            url: [[@{/riot/summoner-spells}]],
+            url: /*[[@{/riot/summoner-spells}]]*/ '/riot/summoner-spells',
             beforeSend: function() {
                 $('#save-summoner-spells-btn').addClass('loading');
             },
             data: {
                 truncate: $('#truncate').is(':checked'),
-                [[${_csrf.parameterName}]]: [[${_csrf.token}]]
+                _csrf: /*[[${_csrf.token}]]*/ '_csrf.token'
             },
             headers: {
-                _csrf_header: [[${_csrf.headerName}]]
+                _csrf_header: /*[[${_csrf.headerName}]]*/ '_csrf.headerName'
             },
             success: function(data) {
                 $('#summoner-spells-difference-error-msg').removeClass('visible').addClass('hidden');
@@ -111,7 +111,7 @@ $(function() {
             },
             error: function() {
                 $('#save-summoner-spells-btn').removeClass('loading');
-                $('#summoner-spells-difference-error-msg .header').text([[#{admin.summonerSpells.save.error}]]);
+                $('#summoner-spells-difference-error-msg .header').text(/*[[#{admin.summonerSpells.save.error}]]*/ 'admin.summonerSpells.save.error');
                 $('#summoner-spells-difference-error-msg').removeClass('hidden').addClass('visible');
             },
             complete: function() {
@@ -150,7 +150,7 @@ $(function() {
             parameters['page'] = Math.ceil(data.start / data.length);
             parameters['size'] = data.length;
             parameters['sort'] = sorts;
-            $.get([[@{/api/summoner-spells}]], $.param(parameters, true), function(json) {
+            $.get(/*[[@{/api/summoner-spells}]]*/ '/api/summoner-spells', $.param(parameters, true), function(json) {
                     callback({ draw: data.draw, recordsTotal: json.page.totalElements,
                         recordsFiltered: json.page.totalElements,
                         data: json._embedded === undefined ? {} : json._embedded.summonerSpells
@@ -173,7 +173,7 @@ $(function() {
                         'data-variation': 'wide'
                     }).append($('<img>', {
                         'class': 'ui rounded image',
-                        src: '/img/summoner-spells/' + id + img.substring(img.lastIndexOf('.'), img.length),
+                        src: '/img/summoner-spells/' + id + img.substring(img.lastIndexOf('.'), img.length)
                     })).wrap('<span>').parent().html();
                 }
             },
@@ -184,7 +184,7 @@ $(function() {
                     var button = $('<button>', {
                         'data-summoner-spell-id': data.substring(data.lastIndexOf('/') + 1, data.length),
                         'class': 'ui secondary button',
-                        text: [[#{admin.summonerSpell.overwrite}]]
+                        text: /*[[#{admin.summonerSpell.overwrite}]]*/ 'admin.summonerSpell.overwrite'
                     });
                     return button.wrap('<span>').parent().html();
                 }
@@ -194,7 +194,7 @@ $(function() {
                     var button = $('<button>', {
                         'data-summoner-spell-id': data.substring(data.lastIndexOf('/') + 1, data.length),
                         'class': 'negative ui button',
-                        text: [[#{admin.summonerSpell.delete}]]
+                        text: /*[[#{admin.summonerSpell.delete}]]*/ 'admin.summonerSpell.delete'
                     });
                     return button.wrap('<span>').parent().html();
                 }
@@ -202,16 +202,16 @@ $(function() {
         ],
         lengthMenu: [ [10, 1000], [10, 'All'] ],
         language: {
-            emptyTable: [[#{dataTables.emptyTable(#{admin.summonerSpells})}]],
-            info: [[#{dataTables.info}]],
-            infoEmpty: [[#{dataTables.infoEmpty}]],
-            infoFiltered: [[#{dataTables.infoFiltered}]],
-            processing: [[#{dataTables.processing}]],
-            search: [[#{dataTables.search}]],
-            zeroRecords: [[#{dataTables.zeroRecords(#{admin.summonerSpells})}]],
+            emptyTable: /*[[#{dataTables.emptyTable(#{admin.summonerSpells})}]]*/ 'dataTables.emptyTable',
+            info: /*[[#{dataTables.info}]]*/ 'dataTables.info',
+            infoEmpty: /*[[#{dataTables.infoEmpty}]]*/ 'dataTables.infoEmpty',
+            infoFiltered: /*[[#{dataTables.infoFiltered}]]*/ 'dataTables.infoFiltered',
+            processing: /*[[#{dataTables.processing}]]*/ 'dataTables.processing',
+            search: /*[[#{dataTables.search}]]*/ 'dataTables.search',
+            zeroRecords: /*[[#{dataTables.zeroRecords(#{admin.summonerSpells})}]]*/ 'dataTables.zeroRecords',
             paginate: {
-                next: [[#{dataTables.paginate.next}]],
-                previous: [[#{dataTables.paginate.previous}]]
+                next: /*[[#{dataTables.paginate.next}]]*/ 'dataTables.paginate.next',
+                previous: /*[[#{dataTables.paginate.previous}]]*/ 'dataTables.paginate.previous'
             }
         },
         drawCallback: function(settings) {
@@ -230,15 +230,15 @@ $(function() {
     $('#summoner-spells tbody').on('click', '.secondary', function(event) {
         $.ajax({
             type: 'POST',
-            url: [[@{/riot/summoner-spells/}]] + $(this).data('summoner-spell-id'),
+            url: (/*[[@{/riot/summoner-spells/}]]*/ '/riot/summoner-spells/') + $(this).data('summoner-spell-id'),
             beforeSend: function() {
                 $(event.target).addClass('loading');
             },
             data: {
-                [[${_csrf.parameterName}]]: [[${_csrf.token}]]
+                _csrf: /*[[${_csrf.token}]]*/ '_csrf.token'
             },
             headers: {
-                _csrf_header: [[${_csrf.headerName}]]
+                _csrf_header: /*[[${_csrf.headerName}]]*/ '_csrf.headerName'
             },
             success: function(data) {
                 $('#summoner-spells-error-msg').removeClass('visible').addClass('hidden');
@@ -246,7 +246,7 @@ $(function() {
             },
             error: function() {
                 $(event.target).removeClass('loading');
-                $('#summoner-spells-error-msg .header').text([[#{admin.summonerSpell.overwrite.error}]]);
+                $('#summoner-spells-error-msg .header').text(/*[[#{admin.summonerSpell.overwrite.error}]]*/ 'admin.summonerSpell.overwrite.error');
                 $('#summoner-spells-error-msg').removeClass('hidden').addClass('visible');
             },
             complete: function() {
@@ -257,12 +257,12 @@ $(function() {
     $('#summoner-spells tbody').on('click', '.negative', function(event) {
         $.ajax({
             type: 'DELETE',
-            url: [[@{/api/summoner-spells/}]] + $(this).data('summoner-spell-id'),
+            url: (/*[[@{/api/summoner-spells/}]]*/ '/api/summoner-spells/') + $(this).data('summoner-spell-id'),
             beforeSend: function() {
                 $(event.target).addClass('loading');
             },
             headers: {
-                [[${_csrf.headerName}]]: [[${_csrf.token}]]
+                'X-CSRF-TOKEN': /*[[${_csrf.token}]]*/ '_csrf.token'
             },
             success: function(data) {
                 $('#summoner-spells-error-msg').removeClass('visible').addClass('hidden');
@@ -271,7 +271,7 @@ $(function() {
             },
             error: function() {
                 $(event.target).removeClass('loading');
-                $('#summoner-spells-error-msg .header').text([[#{admin.summonerSpell.delete.error}]]);
+                $('#summoner-spells-error-msg .header').text(/*[[#{admin.summonerSpell.delete.error}]]*/ 'admin.summonerSpell.delete.error');
                 $('#summoner-spells-error-msg').removeClass('hidden').addClass('visible');
             },
             complete: function() {

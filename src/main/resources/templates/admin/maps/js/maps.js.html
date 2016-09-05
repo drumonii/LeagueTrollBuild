@@ -9,7 +9,7 @@ $(function() {
     var differenceDataTable = $('#maps-difference').DataTable({
         order: [ [1, 'asc'] ],
         ajax: {
-            url: [[@{/admin/maps/diff}]],
+            url: /*[[@{/admin/maps/diff}]]*/ '/admin/maps/diff',
             dataSrc: ''
         },
         columnDefs: [
@@ -23,7 +23,7 @@ $(function() {
                         'class': 'ui rounded image',
                         style: 'height:60px;width:auto;',
                         src: 'https://ddragon.leagueoflegends.com/cdn/' + [[${latestSavedPatch}]] + '/img/map/' +
-                        data.image.full,
+                        data.image.full
                     }).wrap('<span>').parent().html();
                 }
             },
@@ -35,7 +35,7 @@ $(function() {
                         'data-map-id': data.mapId,
                         'class': 'ui fluid primary button',
                         style: 'box-sizing:border-box;',
-                        text: [[#{admin.map.save}]]
+                        text: /*[[#{admin.map.save}]]*/ 'admin.map.save'
                     });
                     return button.wrap('<span>').parent().html();
                 }
@@ -43,16 +43,16 @@ $(function() {
         ],
         lengthMenu: [ [10, -1], [10, 'All'] ],
         language: {
-            emptyTable: [[#{dataTables.emptyTable(#{admin.maps})}]],
-            info: [[#{dataTables.info}]],
-            infoEmpty: [[#{dataTables.infoEmpty}]],
-            infoFiltered: [[#{dataTables.infoFiltered}]],
-            processing: [[#{dataTables.processing}]],
-            search: [[#{dataTables.search}]],
-            zeroRecords: [[#{dataTables.zeroRecords(#{admin.maps})}]],
+            emptyTable: /*[[#{dataTables.emptyTable(#{admin.maps})}]]*/ 'dataTables.emptyTable',
+            info: /*[[#{dataTables.info}]]*/ 'dataTables.info',
+            infoEmpty: /*[[#{dataTables.infoEmpty}]]*/ 'dataTables.infoEmpty',
+            infoFiltered: /*[[#{dataTables.infoFiltered}]]*/ 'dataTables.infoFiltered',
+            processing: /*[[#{dataTables.processing}]]*/ 'dataTables.processing',
+            search: /*[[#{dataTables.search}]]*/ 'dataTables.search',
+            zeroRecords: /*[[#{dataTables.zeroRecords(#{admin.maps})}]]*/ 'dataTables.zeroRecords',
             paginate: {
-                next: [[#{dataTables.paginate.next}]],
-                previous: [[#{dataTables.paginate.previous}]]
+                next: /*[[#{dataTables.paginate.next}]]*/ 'dataTables.paginate.next',
+                previous: /*[[#{dataTables.paginate.previous}]]*/ 'dataTables.paginate.previous'
             }
         }
     });
@@ -62,15 +62,15 @@ $(function() {
     $('#maps-difference tbody').on('click', '.primary', function(event) {
         $.ajax({
             type: 'POST',
-            url: [[@{/riot/maps/}]] + $(this).data('map-id'),
+            url: (/*[[@{/riot/maps/}]]*/ '/riot/maps/') + $(this).data('map-id'),
             beforeSend: function() {
                 $(event.target).addClass('loading');
             },
             data: {
-                [[${_csrf.parameterName}]]: [[${_csrf.token}]]
+                _csrf: /*[[${_csrf.token}]]*/ '_csrf.token'
             },
             headers: {
-                _csrf_header: [[${_csrf.headerName}]]
+                _csrf_header: /*[[${_csrf.headerName}]]*/ '_csrf.headerName'
             },
             success: function(data) {
                 $('#maps-difference-error-msg').removeClass('visible').addClass('hidden');
@@ -79,7 +79,7 @@ $(function() {
             },
             error: function() {
                 $(event.target).removeClass('loading');
-                $('#maps-difference-error-msg .header').text([[#{admin.map.save.error}]]);
+                $('#maps-difference-error-msg .header').text(/*[[#{admin.map.save.error}]]*/ 'admin.map.save.error');
                 $('#maps-difference-error-msg').removeClass('hidden').addClass('visible');
             },
             complete: function() {
@@ -90,16 +90,16 @@ $(function() {
     $('#save-maps-form').submit(function(event) {
         $.ajax({
             type: 'POST',
-            url: [[@{/riot/maps}]],
+            url: /*[[@{/riot/maps}]]*/ '/riot/maps',
             beforeSend: function() {
                 $('#save-maps-btn').addClass('loading');
             },
             data: {
                 truncate: $('#truncate').is(':checked'),
-                [[${_csrf.parameterName}]]: [[${_csrf.token}]]
+                _csrf: /*[[${_csrf.token}]]*/ '_csrf.token'
             },
             headers: {
-                _csrf_header: [[${_csrf.headerName}]]
+                _csrf_header: /*[[${_csrf.headerName}]]*/ '_csrf.headerName'
             },
             success: function(data) {
                 $('#maps-difference-error-msg').removeClass('visible').addClass('hidden');
@@ -108,7 +108,7 @@ $(function() {
             },
             error: function() {
                 $('#save-maps-btn').removeClass('loading');
-                $('#maps-difference-error-msg .header').text([[#{admin.maps.save.error}]]);
+                $('#maps-difference-error-msg .header').text(/*[[#{admin.maps.save.error}]]*/ 'admin.maps.save.error');
                 $('#maps-difference-error-msg').removeClass('hidden').addClass('visible');
             },
             complete: function() {
@@ -147,7 +147,7 @@ $(function() {
             parameters['page'] = Math.ceil(data.start / data.length);
             parameters['size'] = data.length;
             parameters['sort'] = sorts;
-            $.get([[@{/api/maps}]], $.param(parameters, true), function(json) {
+            $.get(/*[[@{/api/maps}]]*/ '/api/maps', $.param(parameters, true), function(json) {
                     callback({ draw: data.draw, recordsTotal: json.page.totalElements,
                         recordsFiltered: json.page.totalElements,
                         data: json._embedded === undefined ? {} : json._embedded.maps
@@ -174,7 +174,7 @@ $(function() {
                     var button = $('<button>', {
                         'data-map-id': data.substring(data.lastIndexOf('/') + 1, data.length),
                         'class': 'ui secondary button',
-                        text: [[#{admin.map.overwrite}]]
+                        text: /*[[#{admin.map.overwrite}]]*/ 'admin.map.overwrite'
                     });
                     return button.wrap('<span>').parent().html();
                 }
@@ -184,7 +184,7 @@ $(function() {
                     var button = $('<button>', {
                         'data-map-id': data.substring(data.lastIndexOf('/') + 1, data.length),
                         'class': 'negative ui button',
-                        text: [[#{admin.map.delete}]]
+                        text: /*[[#{admin.map.delete}]]*/ 'admin.map.delete'
                     });
                     return button.wrap('<span>').parent().html();
                 }
@@ -192,16 +192,16 @@ $(function() {
         ],
         lengthMenu: [ [10, 1000], [10, 'All'] ],
         language: {
-            emptyTable: [[#{dataTables.emptyTable(#{admin.maps})}]],
-            info: [[#{dataTables.info}]],
-            infoEmpty: [[#{dataTables.infoEmpty}]],
-            infoFiltered: [[#{dataTables.infoFiltered}]],
-            processing: [[#{dataTables.processing}]],
-            search: [[#{dataTables.search}]],
-            zeroRecords: [[#{dataTables.zeroRecords(#{admin.maps})}]],
+            emptyTable: /*[[#{dataTables.emptyTable(#{admin.maps})}]]*/ 'dataTables.emptyTable',
+            info: /*[[#{dataTables.info}]]*/ 'dataTables.info',
+            infoEmpty: /*[[#{dataTables.infoEmpty}]]*/ 'dataTables.infoEmpty',
+            infoFiltered: /*[[#{dataTables.infoFiltered}]]*/ 'dataTables.infoFiltered',
+            processing: /*[[#{dataTables.processing}]]*/ 'dataTables.processing',
+            search: /*[[#{dataTables.search}]]*/ 'dataTables.search',
+            zeroRecords: /*[[#{dataTables.zeroRecords(#{admin.maps})}]]*/ 'dataTables.zeroRecords',
             paginate: {
-                next: [[#{dataTables.paginate.next}]],
-                previous: [[#{dataTables.paginate.previous}]]
+                next: /*[[#{dataTables.paginate.next}]]*/ 'dataTables.paginate.next',
+                previous: /*[[#{dataTables.paginate.previous}]]*/ 'dataTables.paginate.previous'
             }
         }
     });
@@ -217,15 +217,15 @@ $(function() {
     $('#maps tbody').on('click', '.secondary', function(event) {
         $.ajax({
             type: 'POST',
-            url: [[@{/riot/maps/}]] + $(this).data('map-id'),
+            url: (/*[[@{/riot/maps/}]]*/ '/riot/maps/') + $(this).data('map-id'),
             beforeSend: function() {
                 $(event.target).addClass('loading');
             },
             data: {
-                [[${_csrf.parameterName}]]: [[${_csrf.token}]]
+                _csrf: /*[[${_csrf.token}]]*/ '_csrf.token'
             },
             headers: {
-                _csrf_header: [[${_csrf.headerName}]]
+                _csrf_header: /*[[${_csrf.headerName}]]*/ '_csrf.headerName'
             },
             success: function(data) {
                 $('#maps-error-msg').removeClass('visible').addClass('hidden');
@@ -233,7 +233,7 @@ $(function() {
             },
             error: function() {
                 $(event.target).removeClass('loading');
-                $('#maps-error-msg .header').text([[#{admin.map.overwrite.error}]]);
+                $('#maps-error-msg .header').text(/*[[#{admin.map.overwrite.error}]]*/ 'admin.map.overwrite.error');
                 $('#maps-error-msg').removeClass('hidden').addClass('visible');
             },
             complete: function() {
@@ -244,12 +244,12 @@ $(function() {
     $('#maps tbody').on('click', '.negative', function(event) {
         $.ajax({
             type: 'DELETE',
-            url: [[@{/api/maps/}]] + $(this).data('map-id'),
+            url: (/*[[@{/api/maps/}]]*/ '/api/maps/') + $(this).data('map-id'),
             beforeSend: function() {
                 $(event.target).addClass('loading');
             },
             headers: {
-                [[${_csrf.headerName}]]: [[${_csrf.token}]]
+                'X-CSRF-TOKEN': /*[[${_csrf.token}]]*/ '_csrf.token'
             },
             success: function(data) {
                 $('#maps-error-msg').removeClass('visible').addClass('hidden');
@@ -258,7 +258,7 @@ $(function() {
             },
             error: function() {
                 $(event.target).removeClass('loading');
-                $('#maps-error-msg .header').text([[#{admin.map.delete.error}]]);
+                $('#maps-error-msg .header').text(/*[[#{admin.map.delete.error}]]*/ 'admin.map.delete.error');
                 $('#maps-error-msg').removeClass('hidden').addClass('visible');
             },
             complete: function() {
