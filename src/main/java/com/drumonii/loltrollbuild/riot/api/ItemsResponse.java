@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -60,6 +61,6 @@ import java.util.Map;
 public class ItemsResponse extends BaseResponse {
 
 	@JsonProperty("data")
-	@Getter @Setter private Map<String, Item> items;
+	@Getter @Setter private Map<String, Item> items = new LinkedHashMap<>();
 
 }
