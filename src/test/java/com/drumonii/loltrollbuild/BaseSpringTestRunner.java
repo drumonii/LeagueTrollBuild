@@ -11,6 +11,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.runner.RunWith;
+import org.springframework.batch.core.launch.JobLauncher;
+import org.springframework.batch.core.repository.JobRepository;
+import org.springframework.batch.test.JobLauncherTestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.io.ClassPathResource;
@@ -54,6 +57,12 @@ public abstract class BaseSpringTestRunner {
 	@Autowired
 	protected ObjectMapper objectMapper;
 
+	@Autowired
+	public JobLauncher jobLauncher;
+
+	@Autowired
+	private JobRepository jobRepository;
+
 	protected MockMvc mockMvc;
 
 	protected static final MediaType HAL_JSON_UTF8 = new MediaType("application", "hal+json", UTF_8);
@@ -72,6 +81,8 @@ public abstract class BaseSpringTestRunner {
 	protected MapsResponse mapsResponse;
 	protected SummonerSpellsResponse summonerSpellsResponse;
 	protected List<Version> versions;
+
+	protected JobLauncherTestUtils jobLauncherTestUtils;
 
 	@Rule
 	public final JUnitRestDocumentation restDocumentation = new JUnitRestDocumentation("build/generated-snippets");
@@ -125,6 +136,10 @@ public abstract class BaseSpringTestRunner {
 		} catch (IOException e) {
 			fail("Unable to unmarshal the Versions response.", e);
 		}
+
+		jobLauncherTestUtils = new JobLauncherTestUtils();
+		jobLauncherTestUtils.setJobLauncher(jobLauncher);
+		jobLauncherTestUtils.setJobRepository(jobRepository);
 	}
 
 	protected static RequestPostProcessor adminUser() {

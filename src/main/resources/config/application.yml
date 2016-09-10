@@ -41,6 +41,10 @@ spring:
   resources.cache-period: 31556926
   # Thymeleaf
   thymeleaf.mode: HTML
+  # Batch
+  batch:
+    initializer.enabled: false
+    job.enabled: false
 # Actuator
 management.context-path: /admin/actuator
 
