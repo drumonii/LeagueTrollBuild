@@ -4,8 +4,9 @@ import com.drumonii.loltrollbuild.model.Version;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.List;
  * CRUD operations repository to the VERSION table.
  */
 @CacheConfig(cacheNames = "versions")
-public interface VersionsRepository extends CrudRepository<Version, String> {
+public interface VersionsRepository extends JpaRepository<Version, String> {
 
 	/**
 	 * Gets the latest {@link Version}. It is fault safe if there are more than one patch versions existing in the
@@ -29,6 +30,14 @@ public interface VersionsRepository extends CrudRepository<Version, String> {
 	@RestResource(exported = false)
 	@Cacheable
 	Version latestVersion();
+
+	@Cacheable
+	@Override
+	List<Version> findAll();
+
+	@Cacheable
+	@Override
+	List<Version> findAll(Sort sort);
 
 	@CacheEvict(allEntries = true)
 	@Override

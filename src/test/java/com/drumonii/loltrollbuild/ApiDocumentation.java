@@ -542,7 +542,9 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 						fieldWithPath("_embedded.versions[*].revision")
 								.description("The revision version number of the Version"),
 						fieldWithPath("_links")
-								.description("Links to resources related to Version"))));
+								.description("Links to resources related to Version"),
+						fieldWithPath("page")
+								.description("Current Page settings of the pagination"))));
 	}
 
 	@Test
