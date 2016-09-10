@@ -54,7 +54,7 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.H2Dialect
         show_sql: false
-        format_sql: true
+        format_sql: false
         generate_statistics: false
         hbm2ddl.auto:
 
@@ -74,7 +74,7 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQL9Dialect
         show_sql: false
-        format_sql: true
+        format_sql: false
         generate_statistics: false
         hbm2ddl.auto:
   h2.console.enabled: false
@@ -95,8 +95,8 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQL9Dialect
         show_sql: true
-        format_sql: true
-        generate_statistics: true
+        format_sql: false
+        generate_statistics: false
         hbm2ddl.auto:
   h2.console.enabled: false
 
@@ -110,6 +110,6 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.H2Dialect
         show_sql: true
-        format_sql: true
+        format_sql: false
         generate_statistics: false
         hbm2ddl.auto:
