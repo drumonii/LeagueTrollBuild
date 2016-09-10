@@ -22,22 +22,25 @@ import java.util.Collection;
 @RequestMapping("/admin")
 public class AdminController {
 
-	@ModelAttribute("latestSavedPatch")
-	public String latestSavedPatch() {
-		Version version = versionsRepository.latestVersion();
-		return version == null ? null : version.getPatch();
-	}
-
 	@Autowired
 	private VersionsRepository versionsRepository;
 
 	@Autowired
 	private VersionsRetrieval versionsRetrieval;
 
+	@ModelAttribute("latestSavedPatch")
+	public String latestSavedPatch() {
+		Version version = versionsRepository.latestVersion();
+		return version == null ? null : version.getPatch();
+	}
+
+	@ModelAttribute("latestRiotPatch")
+	public String latestRiotPatch() {
+		return versionsRetrieval.latestVersion(versionsRetrieval.versionsFromResponse()).getPatch();
+	}
+
 	@GetMapping
 	public String admin(Model model) {
-		model.addAttribute("latestRiotPatch", versionsRetrieval.latestVersion(versionsRetrieval.versionsFromResponse())
-				.getPatch());
 		model.addAttribute("activeTab", "home");
 		return "admin/admin";
 	}
