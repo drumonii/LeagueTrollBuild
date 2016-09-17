@@ -48,6 +48,12 @@ public class Champion implements Serializable {
 	@JsonProperty("partype")
 	@Getter @Setter private String partype;
 
+	@OneToOne(cascade = CascadeType.ALL, optional = false)
+	@PrimaryKeyJoinColumn
+	@JsonManagedReference
+	@JsonProperty("info")
+	@Getter @Setter private ChampionInfo info;
+
 	@Column(name = "LAST_MODIFIED_DATE", nullable = false)
 	@LastModifiedDate
 	@JsonIgnore

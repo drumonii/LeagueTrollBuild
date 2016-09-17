@@ -123,7 +123,7 @@ public class RiotApiRestConfig {
 				.scheme(staticData.getScheme())
 				.host(staticData.getBaseUrl())
 				.path(staticData.getChampions())
-				.queryParam("champData", "image,partype,tags")
+				.queryParam("champData", "image,info,partype,tags")
 				.queryParam(staticData.getParam(), api.getKey())
 				.buildAndExpand(staticData.getRegion());
 	}
@@ -135,7 +135,7 @@ public class RiotApiRestConfig {
 				.scheme(staticData.getScheme())
 				.host(staticData.getBaseUrl())
 				.path(staticData.getChampion())
-				.queryParam("champData", "image,partype,tags")
+				.queryParam("champData", "image,info,partype,tags")
 				.queryParam(staticData.getParam(), api.getKey());
 	}
 

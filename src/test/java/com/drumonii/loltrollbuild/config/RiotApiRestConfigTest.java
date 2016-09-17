@@ -149,7 +149,7 @@ public class RiotApiRestConfigTest extends BaseSpringTestRunner {
 		assertThat(championsUri.getScheme()).isEqualTo(scheme);
 		assertThat(championsUri.getHost()).isEqualTo(host);
 		assertThat(championsUri.getPath()).isEqualTo(staticData.getChampions());
-		assertThat(championsUri.getQueryParams()).contains(entry("champData", Arrays.asList("image,partype,tags")));
+		assertThat(championsUri.getQueryParams()).contains(entry("champData", Arrays.asList("image,info,partype,tags")));
 		assertThat(championsUri.getQueryParams()).contains(entry("api_key", Arrays.asList(apiKey)));
 	}
 
@@ -164,7 +164,7 @@ public class RiotApiRestConfigTest extends BaseSpringTestRunner {
 		assertThat(uriComponents.getScheme()).isEqualTo(scheme);
 		assertThat(uriComponents.getHost()).isEqualTo(host);
 		assertThat(uriComponents.getPath()).isEqualTo(staticData.getChampion().replace("{id}", String.valueOf(id)));
-		assertThat(uriComponents.getQueryParams()).contains(entry("champData", Arrays.asList("image,partype,tags")));
+		assertThat(uriComponents.getQueryParams()).contains(entry("champData", Arrays.asList("image,info,partype,tags")));
 		assertThat(uriComponents.getQueryParams()).contains(entry("api_key", Arrays.asList(apiKey)));
 	}
 
