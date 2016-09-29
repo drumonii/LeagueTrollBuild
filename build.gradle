@@ -18,7 +18,7 @@ buildscript {
         maven { url 'http://repo.spring.io/plugins-release' }
     }
     dependencies {
-        classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.4.0.RELEASE'
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.4.1.RELEASE'
         classpath 'org.springframework.build.gradle:propdeps-plugin:0.0.7'
         classpath 'org.asciidoctor:asciidoctor-gradle-plugin:1.5.3'
     }
@@ -73,9 +73,10 @@ bootRun {
 }
 
 ext['assertj.version'] = '3.5.2'
-ext['thymeleaf.version'] = '3.0.1.RELEASE'
+ext['spring-data-releasetrain.version'] = 'Hopper-SR4'
+ext['thymeleaf.version'] = '3.0.2.RELEASE'
 ext['thymeleaf-extras-springsecurity4.version'] = '3.0.0.RELEASE'
-ext['thymeleaf-layout-dialect.version'] = '2.0.1'
+ext['thymeleaf-layout-dialect.version'] = '2.0.3'
 
 repositories {
     jcenter()
