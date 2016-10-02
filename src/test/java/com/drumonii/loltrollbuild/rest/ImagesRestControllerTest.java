@@ -1,14 +1,12 @@
 package com.drumonii.loltrollbuild.rest;
 
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
-import com.drumonii.loltrollbuild.model.Champion;
-import com.drumonii.loltrollbuild.model.GameMap;
-import com.drumonii.loltrollbuild.model.Item;
-import com.drumonii.loltrollbuild.model.SummonerSpell;
+import com.drumonii.loltrollbuild.model.*;
 import com.drumonii.loltrollbuild.repository.ChampionsRepository;
 import com.drumonii.loltrollbuild.repository.ItemsRepository;
 import com.drumonii.loltrollbuild.repository.MapsRepository;
 import com.drumonii.loltrollbuild.repository.SummonerSpellsRepository;
+import com.drumonii.loltrollbuild.util.RandomizeUtil;
 import org.apache.commons.io.FilenameUtils;
 import org.junit.After;
 import org.junit.Test;
@@ -80,6 +78,21 @@ public class ImagesRestControllerTest extends BaseSpringTestRunner {
 				.andExpect(content().contentType("image/" + fileExt))
 				.andExpect(header().string("Cache-Control", is("max-age=" + 31556926)))
 				.andExpect(header().dateValue("Last-Modified", shen.getLastModifiedDate().getTime()));
+	}
+
+	@Test
+	public void championSpellImg() throws Exception {
+		Champion azir = championsResponse.getChampions().get("Azir");
+		azir = championsRepository.save(azir);
+		ChampionSpell spell = RandomizeUtil.getRandom(azir.getSpells());
+
+		String fileExt = FilenameUtils.getExtension(spell.getImage().getFull());
+
+		mockMvc.perform(get("/img/champions/{id}/spell/{img}", azir.getId(), spell.getKey() + "." + fileExt))
+				.andExpect(status().isOk())
+				.andExpect(content().contentType("image/" + fileExt))
+				.andExpect(header().string("Cache-Control", is("max-age=" + 31556926)))
+				.andExpect(header().dateValue("Last-Modified", azir.getLastModifiedDate().getTime()));
 	}
 
 	@Test

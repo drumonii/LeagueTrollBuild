@@ -36,7 +36,7 @@ public class SummonerSpellsRepositoryTest extends BaseSpringTestRunner {
 		SummonerSpell summonerSpellFromDb = summonerSpellsRepository.findOne(clarity.getId());
 		assertThat(summonerSpellFromDb).isNotNull();
 		assertThat(summonerSpellFromDb.getImage()).isNotNull();
-		assertThat(summonerSpellFromDb).isEqualToIgnoringNullFields(clarity);
+		assertThat(summonerSpellFromDb).isEqualTo(clarity);
 
 		// Update
 		summonerSpellFromDb.setModes(new TreeSet<>(Arrays.asList(CLASSIC)));

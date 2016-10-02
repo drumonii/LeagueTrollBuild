@@ -149,7 +149,8 @@ public class RiotApiRestConfigTest extends BaseSpringTestRunner {
 		assertThat(championsUri.getScheme()).isEqualTo(scheme);
 		assertThat(championsUri.getHost()).isEqualTo(host);
 		assertThat(championsUri.getPath()).isEqualTo(staticData.getChampions());
-		assertThat(championsUri.getQueryParams()).contains(entry("champData", Arrays.asList("image,info,partype,tags")));
+		assertThat(championsUri.getQueryParams()).contains(entry("champData",
+				Arrays.asList("image,info,partype,spells,tags")));
 		assertThat(championsUri.getQueryParams()).contains(entry("api_key", Arrays.asList(apiKey)));
 	}
 
@@ -164,7 +165,8 @@ public class RiotApiRestConfigTest extends BaseSpringTestRunner {
 		assertThat(uriComponents.getScheme()).isEqualTo(scheme);
 		assertThat(uriComponents.getHost()).isEqualTo(host);
 		assertThat(uriComponents.getPath()).isEqualTo(staticData.getChampion().replace("{id}", String.valueOf(id)));
-		assertThat(uriComponents.getQueryParams()).contains(entry("champData", Arrays.asList("image,info,partype,tags")));
+		assertThat(uriComponents.getQueryParams()).contains(entry("champData",
+				Arrays.asList("image,info,partype,spells,tags")));
 		assertThat(uriComponents.getQueryParams()).contains(entry("api_key", Arrays.asList(apiKey)));
 	}
 
@@ -179,6 +181,20 @@ public class RiotApiRestConfigTest extends BaseSpringTestRunner {
 		assertThat(championsImgUri.getHost()).isEqualTo(ddragon.getBaseUrl());
 		assertThat(championsImgUri.getPath()).isEqualTo(ddragon.getChampionsImg().replace("{version}", patch)
 				.replace("{championImgFull}", imgFull));
+		assertThat(championsImgUri.getScheme()).isEqualTo(ddragon.getScheme());
+	}
+
+	@Autowired
+	@Qualifier("championsSpellImg")
+	private UriComponentsBuilder championsSpellImgBuilder;
+
+	@Test
+	public void championsSpellImgUri() {
+		String spellImgFull = "ChampionSpell.png"; String patch = "some patch number";
+		UriComponents championsImgUri = championsSpellImgBuilder.buildAndExpand(patch, spellImgFull);
+		assertThat(championsImgUri.getHost()).isEqualTo(ddragon.getBaseUrl());
+		assertThat(championsImgUri.getPath()).isEqualTo(ddragon.getChampionsSpellImg().replace("{version}", patch)
+				.replace("{championSpellImgFull}", spellImgFull));
 		assertThat(championsImgUri.getScheme()).isEqualTo(ddragon.getScheme());
 	}
 

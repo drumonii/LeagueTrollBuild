@@ -53,6 +53,20 @@ public class ImagesRestController {
 				.body(champion.getImage().getImgSrc());
 	}
 
+	@GetMapping(value = "/champions/{id}/spell/{spellKey}.*")
+	public ResponseEntity<byte[]> championSpellImg(@PathVariable("id") Champion champion,
+			@PathVariable String spellKey) {
+		Image image = champion.getSpells().stream()
+				.filter(spell -> spell.getKey().equals(spellKey))
+				.findFirst().get().getImage();
+		return ResponseEntity.ok()
+				.contentLength(image.getImgSrc().length)
+				.contentType(MediaType.parseMediaType(createMediaType(image)))
+				.cacheControl(CacheControl.maxAge(31556926, TimeUnit.SECONDS))
+				.lastModified(champion.getLastModifiedDate().getTime())
+				.body(image.getImgSrc());
+	}
+
 	@GetMapping(value = "/maps/map{id}.*")
 	public ResponseEntity<byte[]> mapImg(@PathVariable("id") GameMap gameMap) {
 		return ResponseEntity.ok()

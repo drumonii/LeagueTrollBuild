@@ -5,12 +5,16 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.SortedSet;
 
 /**
@@ -54,6 +58,12 @@ public class Champion implements Serializable {
 	@JsonProperty("info")
 	@Getter @Setter private ChampionInfo info;
 
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "champion")
+	@Fetch(FetchMode.SELECT)
+	@JsonManagedReference
+	@JsonProperty("spells")
+	@Getter @Setter private List<ChampionSpell> spells;
+
 	@Column(name = "LAST_MODIFIED_DATE", nullable = false)
 	@LastModifiedDate
 	@JsonIgnore
@@ -75,6 +85,39 @@ public class Champion implements Serializable {
 	@JsonIgnore
 	public boolean isViktor() {
 		return name.equals("Viktor");
+	}
+
+	@PostPersist
+	public void postPersist() {
+		// Hibernate's PersistentBag does not honor equals()
+		spells = new ArrayList<>(spells);
+		for (ChampionSpell spell : spells) {
+			spell.setCosts(new ArrayList<>(spell.getCosts()));
+			spell.setCooldowns(new ArrayList<>(spell.getCooldowns()));
+			spell.setRange(new ArrayList<>(spell.getRange()));
+		}
+	}
+
+	@PostLoad
+	public void postLoad() {
+		// Hibernate's PersistentBag does not honor equals()
+		spells = new ArrayList<>(spells);
+		for (ChampionSpell spell : spells) {
+			spell.setCosts(new ArrayList<>(spell.getCosts()));
+			spell.setCooldowns(new ArrayList<>(spell.getCooldowns()));
+			spell.setRange(new ArrayList<>(spell.getRange()));
+		}
+	}
+
+	@PostUpdate
+	public void postUpdate() {
+		// Hibernate's PersistentBag does not honor equals()
+		spells = new ArrayList<>(spells);
+		for (ChampionSpell spell : spells) {
+			spell.setCosts(new ArrayList<>(spell.getCosts()));
+			spell.setCooldowns(new ArrayList<>(spell.getCooldowns()));
+			spell.setRange(new ArrayList<>(spell.getRange()));
+		}
 	}
 
 }

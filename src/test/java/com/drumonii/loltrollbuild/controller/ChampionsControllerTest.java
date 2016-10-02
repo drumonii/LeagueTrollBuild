@@ -76,7 +76,7 @@ public class ChampionsControllerTest extends BaseSpringTestRunner {
 				.andExpect(redirectedUrl("/champions"));
 
 		Champion xin = championsResponse.getChampions().get("XinZhao");
-		championsRepository.save(xin);
+		xin = championsRepository.save(xin);
 
 		mockMvc.perform(get("/champions/{id}", xin.getId()))
 				.andExpect(status().isOk())

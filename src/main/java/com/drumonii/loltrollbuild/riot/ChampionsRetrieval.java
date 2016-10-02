@@ -1,6 +1,7 @@
 package com.drumonii.loltrollbuild.riot;
 
 import com.drumonii.loltrollbuild.model.Champion;
+import com.drumonii.loltrollbuild.model.ChampionSpell;
 import com.drumonii.loltrollbuild.repository.ChampionsRepository;
 import com.drumonii.loltrollbuild.riot.api.ChampionsResponse;
 import com.drumonii.loltrollbuild.riot.api.ImageFetcher;
@@ -42,6 +43,10 @@ public class ChampionsRetrieval {
 	@Autowired
 	@Qualifier("championsImg")
 	private UriComponentsBuilder championsImgUri;
+
+	@Autowired
+	@Qualifier("championsSpellImg")
+	private UriComponentsBuilder championsSpellImgUri;
 
 	@Autowired
 	private ChampionsRepository championsRepository;
@@ -92,6 +97,9 @@ public class ChampionsRetrieval {
 
 		imageFetcher.setImgsSrcs(champions.stream().map(Champion::getImage).collect(Collectors.toList()),
 				championsImgUri);
+		imageFetcher.setImgsSrcs(champions.stream()
+				.flatMap(champion -> champion.getSpells().stream()
+						.map(ChampionSpell::getImage)).collect(Collectors.toList()), championsSpellImgUri);
 		return championsRepository.save(champions);
 	}
 
@@ -137,6 +145,8 @@ public class ChampionsRetrieval {
 		}
 
 		imageFetcher.setImgSrc(champion.getImage(), championsImgUri);
+		imageFetcher.setImgsSrcs(champion.getSpells().stream().map(ChampionSpell::getImage).collect(Collectors.toList()),
+				championsSpellImgUri);
 		return championsRepository.save(champion);
 	}
 

@@ -123,7 +123,7 @@ public class RiotApiRestConfig {
 				.scheme(staticData.getScheme())
 				.host(staticData.getBaseUrl())
 				.path(staticData.getChampions())
-				.queryParam("champData", "image,info,partype,tags")
+				.queryParam("champData", "image,info,partype,spells,tags")
 				.queryParam(staticData.getParam(), api.getKey())
 				.buildAndExpand(staticData.getRegion());
 	}
@@ -135,7 +135,7 @@ public class RiotApiRestConfig {
 				.scheme(staticData.getScheme())
 				.host(staticData.getBaseUrl())
 				.path(staticData.getChampion())
-				.queryParam("champData", "image,info,partype,tags")
+				.queryParam("champData", "image,info,partype,spells,tags")
 				.queryParam(staticData.getParam(), api.getKey());
 	}
 
@@ -146,6 +146,15 @@ public class RiotApiRestConfig {
 				.scheme(ddragon.getScheme())
 				.host(ddragon.getBaseUrl())
 				.path(ddragon.getChampionsImg());
+	}
+
+	@Bean
+	@Qualifier("championsSpellImg")
+	public UriComponentsBuilder championsSpellImgUri() {
+		return UriComponentsBuilder.newInstance()
+				.scheme(ddragon.getScheme())
+				.host(ddragon.getBaseUrl())
+				.path(ddragon.getChampionsSpellImg());
 	}
 
 	/*

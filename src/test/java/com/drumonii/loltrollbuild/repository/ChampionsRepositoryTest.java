@@ -30,10 +30,7 @@ public class ChampionsRepositoryTest extends BaseSpringTestRunner {
 		// Select
 		Champion championFromDb = championsRepository.findOne(sejuani.getId());
 		assertThat(championFromDb).isNotNull();
-		assertThat(championFromDb.getKey()).isEqualTo(sejuani.getKey());
-		assertThat(championFromDb.getImage()).isNotNull();
-		assertThat(championFromDb.getTitle()).isEqualTo(sejuani.getTitle());
-		assertThat(championFromDb).isEqualToIgnoringNullFields(sejuani);
+		assertThat(championFromDb).isEqualTo(sejuani);
 
 		// Update
 		championFromDb.setPartype("Mana");

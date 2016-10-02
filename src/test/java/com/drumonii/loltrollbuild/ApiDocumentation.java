@@ -412,6 +412,8 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 								.description("The ability resource of the Champion"),
 						fieldWithPath("_embedded.champions[*].info")
 								.description("Statistical information of the Champion"),
+						fieldWithPath("_embedded.champions[*].spells")
+								.description("Spell abilities of the Champion"),
 						fieldWithPath("_embedded.champions[*].image")
 								.description("The image of the Champion"),
 						fieldWithPath("_embedded.champions[*].tags")
@@ -434,6 +436,10 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 								.description("The name of the Champion"),
 						fieldWithPath("_embedded.champions[*].title")
 								.description("The title of the Champion"),
+						fieldWithPath("_embedded.champions[*].info")
+								.description("Statistical information of the Champion"),
+						fieldWithPath("_embedded.champions[*].spells")
+								.description("Spell abilities of the Champion"),
 						fieldWithPath("_embedded.champions[*].image")
 								.description("The image of the Champion"),
 						fieldWithPath("_embedded.champions[*].tags")
@@ -463,6 +469,8 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 								.description("The ability resource of the Champion"),
 						fieldWithPath("info")
 								.description("Statistical information of the Champion"),
+						fieldWithPath("spells")
+								.description("Spell abilities of the Champion"),
 						fieldWithPath("image")
 								.description("The image of the Champion"),
 						fieldWithPath("tags")
