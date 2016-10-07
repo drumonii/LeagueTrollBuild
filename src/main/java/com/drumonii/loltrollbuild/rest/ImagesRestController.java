@@ -67,6 +67,16 @@ public class ImagesRestController {
 				.body(image.getImgSrc());
 	}
 
+	@GetMapping(value = "/champions/{id}/passive/{passive}.*")
+	public ResponseEntity<byte[]> championPassiveImg(@PathVariable("id") Champion champion) {
+		return ResponseEntity.ok()
+				.contentLength(champion.getPassive().getImage().getImgSrc().length)
+				.contentType(MediaType.parseMediaType(createMediaType(champion.getPassive().getImage())))
+				.cacheControl(CacheControl.maxAge(31556926, TimeUnit.SECONDS))
+				.lastModified(champion.getLastModifiedDate().getTime())
+				.body(champion.getPassive().getImage().getImgSrc());
+	}
+
 	@GetMapping(value = "/maps/map{id}.*")
 	public ResponseEntity<byte[]> mapImg(@PathVariable("id") GameMap gameMap) {
 		return ResponseEntity.ok()

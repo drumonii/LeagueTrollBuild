@@ -27,6 +27,10 @@ public class ChampionsRetrievalItemProcessor implements ItemProcessor<Champion, 
 	private UriComponentsBuilder championsSpellImgUri;
 
 	@Autowired
+	@Qualifier("championsPassiveImgUri")
+	private UriComponentsBuilder championsPassiveImgUri;
+
+	@Autowired
 	private ChampionsRepository championsRepository;
 
 	@Autowired
@@ -52,6 +56,7 @@ public class ChampionsRetrievalItemProcessor implements ItemProcessor<Champion, 
 		imageFetcher.setImgSrc(champion.getImage(), championsImgUri);
 		imageFetcher.setImgsSrcs(champion.getSpells().stream().map(ChampionSpell::getImage).collect(Collectors.toList()),
 				championsSpellImgUri);
+		imageFetcher.setImgSrc(champion.getPassive().getImage(), championsPassiveImgUri);
 		return champion;
 	}
 

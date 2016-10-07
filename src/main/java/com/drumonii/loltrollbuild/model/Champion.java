@@ -64,6 +64,11 @@ public class Champion implements Serializable {
 	@JsonProperty("spells")
 	@Getter @Setter private List<ChampionSpell> spells;
 
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "champion")
+	@JsonManagedReference
+	@JsonProperty("passive")
+	@Getter @Setter private ChampionPassive passive;
+
 	@Column(name = "LAST_MODIFIED_DATE", nullable = false)
 	@LastModifiedDate
 	@JsonIgnore

@@ -96,6 +96,21 @@ public class ImagesRestControllerTest extends BaseSpringTestRunner {
 	}
 
 	@Test
+	public void championPassiveImg() throws Exception {
+		Champion ekko = championsResponse.getChampions().get("Ekko");
+		ekko = championsRepository.save(ekko);
+
+		String fileExt = FilenameUtils.getExtension(ekko.getPassive().getImage().getFull());
+
+		mockMvc.perform(get("/img//champions/{id}/passive/{passive}.*", ekko.getId(),
+				ekko.getPassive().getImage().getFull() + "." + fileExt))
+				.andExpect(status().isOk())
+				.andExpect(content().contentType("image/" + fileExt))
+				.andExpect(header().string("Cache-Control", is("max-age=" + 31556926)))
+				.andExpect(header().dateValue("Last-Modified", ekko.getLastModifiedDate().getTime()));
+	}
+
+	@Test
 	public void mapImg() throws Exception {
 		GameMap summonersRift = mapsResponse.getMaps().get(SUMMONERS_RIFT);
 		summonersRift = mapsRepository.save(summonersRift);

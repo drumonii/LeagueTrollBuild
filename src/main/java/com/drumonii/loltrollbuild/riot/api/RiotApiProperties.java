@@ -97,6 +97,9 @@ public class RiotApiProperties {
 		@Getter @Setter private String championsSpellImg;
 
 		@NotEmpty
+		@Getter @Setter private String championsPassiveImg;
+
+		@NotEmpty
 		@Getter @Setter private String itemsImg;
 
 		@NotEmpty

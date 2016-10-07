@@ -49,6 +49,10 @@ public class ChampionsRetrieval {
 	private UriComponentsBuilder championsSpellImgUri;
 
 	@Autowired
+	@Qualifier("championsPassiveImgUri")
+	private UriComponentsBuilder championsPassiveImgUri;
+
+	@Autowired
 	private ChampionsRepository championsRepository;
 
 	@Autowired
@@ -100,6 +104,8 @@ public class ChampionsRetrieval {
 		imageFetcher.setImgsSrcs(champions.stream()
 				.flatMap(champion -> champion.getSpells().stream()
 						.map(ChampionSpell::getImage)).collect(Collectors.toList()), championsSpellImgUri);
+		imageFetcher.setImgsSrcs(champions.stream().map(champion -> champion.getPassive().getImage())
+						.collect(Collectors.toList()), championsPassiveImgUri);
 		return championsRepository.save(champions);
 	}
 
@@ -147,6 +153,7 @@ public class ChampionsRetrieval {
 		imageFetcher.setImgSrc(champion.getImage(), championsImgUri);
 		imageFetcher.setImgsSrcs(champion.getSpells().stream().map(ChampionSpell::getImage).collect(Collectors.toList()),
 				championsSpellImgUri);
+		imageFetcher.setImgSrc(champion.getPassive().getImage(), championsPassiveImgUri);
 		return championsRepository.save(champion);
 	}
 
