@@ -42,7 +42,8 @@ public class ItemGold implements Serializable {
 	@Getter @Setter private boolean purchasable;
 
 	@MapsId
-	@OneToOne(optional = false, mappedBy = "image")
+	@OneToOne(fetch = FetchType.LAZY, optional = false)
+	@PrimaryKeyJoinColumn
 	@JsonBackReference
 	@RestResource(exported = false)
 	@Getter @Setter private Item item;

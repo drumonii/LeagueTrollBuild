@@ -7,5 +7,6 @@ CREATE TABLE CHAMPION_PASSIVE_IMAGE (
   X           INT          NOT NULL,
   Y           INT          NOT NULL,
   W           INT          NOT NULL,
-  H           INT          NOT NULL
+  H           INT          NOT NULL,
+  FOREIGN KEY (CHAMPION_ID) REFERENCES CHAMPION_PASSIVE (CHAMPION_ID)
 );

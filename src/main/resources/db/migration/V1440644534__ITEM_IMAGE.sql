@@ -7,5 +7,6 @@ CREATE TABLE ITEM_IMAGE (
   X         INT          NOT NULL,
   Y         INT          NOT NULL,
   W         INT          NOT NULL,
-  H         INT          NOT NULL
+  H         INT          NOT NULL,
+  FOREIGN KEY (ITEM_ID) REFERENCES ITEM (ID)
 );

@@ -35,13 +35,13 @@ public class ChampionPassive implements Serializable {
 	@JsonProperty("description")
 	@Getter @Setter private String description;
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "passive")
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "passive")
 	@JsonManagedReference
 	@JsonProperty("image")
 	@Getter @Setter private ChampionPassiveImage image;
 
 	@MapsId
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY, optional = false)
 	@PrimaryKeyJoinColumn
 	@JsonBackReference
 	@RestResource(exported = false)

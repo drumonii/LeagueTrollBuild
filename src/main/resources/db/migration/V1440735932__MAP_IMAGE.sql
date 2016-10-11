@@ -7,5 +7,6 @@ CREATE TABLE MAP_IMAGE (
   X         INT          NOT NULL,
   Y         INT          NOT NULL,
   W         INT          NOT NULL,
-  H         INT          NOT NULL
+  H         INT          NOT NULL,
+  FOREIGN KEY (MAP_ID) REFERENCES MAP (ID)
 );

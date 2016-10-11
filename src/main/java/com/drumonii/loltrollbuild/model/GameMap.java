@@ -42,8 +42,7 @@ public class GameMap implements Serializable {
 	@JsonIgnore
 	@Getter @Setter private Date lastModifiedDate;
 
-	@OneToOne(cascade = CascadeType.ALL, optional = false)
-	@PrimaryKeyJoinColumn
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "map")
 	@JsonManagedReference
 	@JsonProperty("image")
 	@Getter @Setter private GameMapImage image;

@@ -84,14 +84,12 @@ public class Item implements Serializable {
 	@JsonProperty("maps")
 	@Getter @Setter private SortedMap<Integer, Boolean> maps;
 
-	@OneToOne(cascade = CascadeType.ALL, optional = false)
-	@PrimaryKeyJoinColumn
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "item")
 	@JsonManagedReference
 	@JsonProperty("image")
 	@Getter @Setter private ItemImage image;
 
-	@OneToOne(cascade = CascadeType.ALL, optional = false)
-	@PrimaryKeyJoinColumn
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "item")
 	@JsonManagedReference
 	@JsonProperty("gold")
 	@Getter @Setter private ItemGold gold;

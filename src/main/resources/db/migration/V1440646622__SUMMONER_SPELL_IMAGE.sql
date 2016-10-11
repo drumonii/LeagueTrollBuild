@@ -7,5 +7,6 @@ CREATE TABLE SUMMONER_SPELL_IMAGE (
   X                 INT          NOT NULL,
   Y                 INT          NOT NULL,
   W                 INT          NOT NULL,
-  H                 INT          NOT NULL
+  H                 INT          NOT NULL,
+  FOREIGN KEY (SUMMONER_SPELL_ID) REFERENCES SUMMONER_SPELL (ID)
 );

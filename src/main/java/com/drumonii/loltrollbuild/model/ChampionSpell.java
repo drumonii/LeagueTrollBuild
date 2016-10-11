@@ -41,8 +41,7 @@ public class ChampionSpell implements Serializable {
 	@JsonProperty("tooltip")
 	@Getter @Setter private String tooltip;
 
-	@OneToOne(cascade = CascadeType.ALL, optional = false)
-	@PrimaryKeyJoinColumn
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "spell")
 	@JsonManagedReference
 	@JsonProperty("image")
 	@Getter @Setter private ChampionSpellImage image;

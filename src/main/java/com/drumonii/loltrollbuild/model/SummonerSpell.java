@@ -45,8 +45,7 @@ public class SummonerSpell implements Serializable {
 	@JsonIgnore
 	@Getter @Setter private Date lastModifiedDate;
 
-	@OneToOne(cascade = CascadeType.ALL, optional = false)
-	@PrimaryKeyJoinColumn
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "summonerSpell")
 	@JsonManagedReference
 	@JsonProperty("image")
 	@Getter @Setter private SummonerSpellImage image;

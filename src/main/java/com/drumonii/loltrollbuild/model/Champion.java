@@ -52,8 +52,7 @@ public class Champion implements Serializable {
 	@JsonProperty("partype")
 	@Getter @Setter private String partype;
 
-	@OneToOne(cascade = CascadeType.ALL, optional = false)
-	@PrimaryKeyJoinColumn
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "champion")
 	@JsonManagedReference
 	@JsonProperty("info")
 	@Getter @Setter private ChampionInfo info;
@@ -64,7 +63,7 @@ public class Champion implements Serializable {
 	@JsonProperty("spells")
 	@Getter @Setter private List<ChampionSpell> spells;
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "champion")
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "champion")
 	@JsonManagedReference
 	@JsonProperty("passive")
 	@Getter @Setter private ChampionPassive passive;
@@ -74,8 +73,7 @@ public class Champion implements Serializable {
 	@JsonIgnore
 	@Getter @Setter private Date lastModifiedDate;
 
-	@OneToOne(cascade = CascadeType.ALL, optional = false)
-	@PrimaryKeyJoinColumn
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "champion")
 	@JsonManagedReference
 	@JsonProperty("image")
 	@Getter @Setter private ChampionImage image;

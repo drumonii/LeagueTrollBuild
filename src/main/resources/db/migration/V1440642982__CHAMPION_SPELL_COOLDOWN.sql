@@ -1,5 +1,6 @@
 CREATE TABLE CHAMPION_SPELL_COOLDOWN (
   CHAMPION_SPELL_KEY VARCHAR(255),
-  COOLDOWN           INT
+  COOLDOWN           INT,
   -- No PK here because a spell cooldown can have the same key and cooldown
+  FOREIGN KEY (CHAMPION_SPELL_KEY) REFERENCES CHAMPION_SPELL (KEY)
 );

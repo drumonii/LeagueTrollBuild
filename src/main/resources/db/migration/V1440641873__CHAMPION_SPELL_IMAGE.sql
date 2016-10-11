@@ -7,5 +7,6 @@ CREATE TABLE CHAMPION_SPELL_IMAGE (
   X                  INT          NOT NULL,
   Y                  INT          NOT NULL,
   W                  INT          NOT NULL,
-  H                  INT          NOT NULL
+  H                  INT          NOT NULL,
+  FOREIGN KEY (CHAMPION_SPELL_KEY) REFERENCES CHAMPION_SPELL (KEY)
 );
