@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
+import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -43,6 +44,7 @@ public class ItemGold implements Serializable {
 	@MapsId
 	@OneToOne(optional = false, mappedBy = "image")
 	@JsonBackReference
+	@RestResource(exported = false)
 	@Getter @Setter private Item item;
 
 }

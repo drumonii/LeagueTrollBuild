@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -28,6 +29,7 @@ public class ChampionImage extends Image implements Serializable {
 	@MapsId
 	@OneToOne(optional = false, mappedBy = "image")
 	@JsonBackReference
+	@RestResource(exported = false)
 	@Getter @Setter private Champion champion;
 
 }
