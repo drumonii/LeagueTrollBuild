@@ -46,7 +46,6 @@ public class VersionsRetrievalTest extends BaseSpringTestRunner {
 	public void before() {
 		super.before();
 
-		// Only first request is handled. See: http://stackoverflow.com/q/30713734
 		mockServer = MockRestServiceServer.createServer(restTemplate);
 
 		String versionsResponseBody = null;

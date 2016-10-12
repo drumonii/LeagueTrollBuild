@@ -3,7 +3,6 @@ package com.drumonii.loltrollbuild.batch.champions;
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.model.Champion;
 import com.drumonii.loltrollbuild.repository.ChampionsRepository;
-import com.drumonii.loltrollbuild.repository.VersionsRepository;
 import com.drumonii.loltrollbuild.riot.api.ChampionsResponse;
 import com.drumonii.loltrollbuild.util.RandomizeUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -21,11 +20,15 @@ import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Fail.fail;
+import static org.springframework.test.web.client.ExpectedCount.once;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
@@ -46,15 +49,18 @@ public class ChampionsRetrievalJobTest extends BaseSpringTestRunner {
 	private Job championsRetrievalJob;
 
 	@Autowired
-	private ChampionsRepository championsRepository;
+	@Qualifier("versions")
+	private UriComponents versionsUri;
 
 	@Autowired
-	private VersionsRepository versionsRepository;
+	private ChampionsRepository championsRepository;
 
 	private MockRestServiceServer mockServer;
 
 	private ChampionsResponse championsResponseSlice;
 	private String championsResponseBody;
+
+	private String versionsResponseBody;
 
 	@Before
 	public void before() {
@@ -77,7 +83,11 @@ public class ChampionsRetrievalJobTest extends BaseSpringTestRunner {
 			fail("Unable to marshal the Champions response.", e);
 		}
 
-		versionsRepository.save(versions.get(0));
+		try {
+			versionsResponseBody = objectMapper.writeValueAsString(versions);
+		} catch (JsonProcessingException e) {
+			fail("Unable to marshal the Versions.", e);
+		}
 
 		jobLauncherTestUtils.setJob(championsRetrievalJob);
 	}
@@ -92,7 +102,10 @@ public class ChampionsRetrievalJobTest extends BaseSpringTestRunner {
 		mockServer.expect(requestTo(championsUri.toString())).andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(championsResponseBody, MediaType.APPLICATION_JSON_UTF8));
 
-		JobExecution jobExecution = jobLauncherTestUtils.launchJob(jobLauncherTestUtils.getUniqueJobParameters());
+		mockServer.expect(once(), requestTo(versionsUri.toString())).andExpect(method(HttpMethod.GET))
+				.andRespond(withSuccess(versionsResponseBody, MediaType.APPLICATION_JSON_UTF8));
+
+		JobExecution jobExecution = jobLauncherTestUtils.launchJob(getJobParameters());
 		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
 
 		assertThat(championsRepository.findAll()).containsOnlyElementsOf(championsResponseSlice.getChampions().values());
@@ -103,6 +116,9 @@ public class ChampionsRetrievalJobTest extends BaseSpringTestRunner {
 		mockServer.expect(requestTo(championsUri.toString())).andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(championsResponseBody, MediaType.APPLICATION_JSON_UTF8));
 
+		mockServer.expect(once(), requestTo(versionsUri.toString())).andExpect(method(HttpMethod.GET))
+				.andRespond(withSuccess(versionsResponseBody, MediaType.APPLICATION_JSON_UTF8));
+
 		List<Champion> champions = championsRepository.save(championsResponseSlice.getChampions().values());
 
 		Champion championToEdit = RandomizeUtil.getRandom(champions);
@@ -110,7 +126,7 @@ public class ChampionsRetrievalJobTest extends BaseSpringTestRunner {
 
 		championsRepository.save(championToEdit);
 
-		JobExecution jobExecution = jobLauncherTestUtils.launchJob(jobLauncherTestUtils.getUniqueJobParameters());
+		JobExecution jobExecution = jobLauncherTestUtils.launchJob(getJobParameters());
 		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
 
 		assertThat(championsRepository.findAll()).containsOnlyElementsOf(championsResponseSlice.getChampions().values());
@@ -127,7 +143,10 @@ public class ChampionsRetrievalJobTest extends BaseSpringTestRunner {
 				.andRespond(withSuccess(objectMapper.writeValueAsString(championsResponseSlice),
 						MediaType.APPLICATION_JSON_UTF8));
 
-		JobExecution jobExecution = jobLauncherTestUtils.launchJob(jobLauncherTestUtils.getUniqueJobParameters());
+		mockServer.expect(once(), requestTo(versionsUri.toString())).andExpect(method(HttpMethod.GET))
+				.andRespond(withSuccess(versionsResponseBody, MediaType.APPLICATION_JSON_UTF8));
+
+		JobExecution jobExecution = jobLauncherTestUtils.launchJob(getJobParameters());
 		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
 
 		assertThat(championsRepository.findAll()).containsOnlyElementsOf(championsResponseSlice.getChampions().values());

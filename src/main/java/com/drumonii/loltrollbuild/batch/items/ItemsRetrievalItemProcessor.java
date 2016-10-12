@@ -1,6 +1,7 @@
 package com.drumonii.loltrollbuild.batch.items;
 
 import com.drumonii.loltrollbuild.model.Item;
+import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.repository.ItemsRepository;
 import com.drumonii.loltrollbuild.riot.api.ImageFetcher;
 import org.springframework.batch.item.ItemProcessor;
@@ -23,13 +24,19 @@ public class ItemsRetrievalItemProcessor implements ItemProcessor<Item, Item> {
 	@Autowired
 	private ImageFetcher imageFetcher;
 
+	private Version latestVersion;
+
+	public ItemsRetrievalItemProcessor(Version latestVersion) {
+		this.latestVersion = latestVersion;
+	}
+
 	@Override
 	public Item process(Item item) throws Exception {
 		Item itemFromDb = itemsRepository.findOne(item.getId());
 		if (itemFromDb != null && itemFromDb.equals(item)) {
 			return null;
 		}
-		imageFetcher.setImgSrc(item.getImage(), itemsImgUri);
+		imageFetcher.setImgSrc(item.getImage(), itemsImgUri, latestVersion);
 		return item;
 	}
 

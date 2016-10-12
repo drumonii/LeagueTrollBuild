@@ -69,7 +69,7 @@ public class VersionsRetrievalJobTest extends BaseSpringTestRunner {
 
 	@Test
 	public void savesNewVersions() throws Exception {
-		JobExecution jobExecution = jobLauncherTestUtils.launchJob(jobLauncherTestUtils.getUniqueJobParameters());
+		JobExecution jobExecution = jobLauncherTestUtils.launchJob(getJobParameters());
 		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
 
 		assertThat(versionsRepository.findAll(new Sort(DESC, "major", "minor", "revision")))
@@ -80,7 +80,7 @@ public class VersionsRetrievalJobTest extends BaseSpringTestRunner {
 	public void ignoresOldVersions() throws Exception {
 		versionsRepository.save(versions);
 
-		JobExecution jobExecution = jobLauncherTestUtils.launchJob(jobLauncherTestUtils.getUniqueJobParameters());
+		JobExecution jobExecution = jobLauncherTestUtils.launchJob(getJobParameters());
 		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
 
 		assertThat(versionsRepository.findAll(new Sort(DESC, "major", "minor", "revision")))

@@ -1,6 +1,7 @@
 package com.drumonii.loltrollbuild.riot;
 
 import com.drumonii.loltrollbuild.model.GameMap;
+import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.repository.MapsRepository;
 import com.drumonii.loltrollbuild.riot.api.ImageFetcher;
 import com.drumonii.loltrollbuild.riot.api.MapsResponse;
@@ -43,6 +44,9 @@ public class MapsRetrieval {
 	@Autowired
 	private ImageFetcher imageFetcher;
 
+	@Autowired
+	private VersionsRetrieval versionsRetrieval;
+
 	/**
 	 * Returns the {@link List} of {@link GameMap} from Riot for the most current patch.
 	 *
@@ -80,7 +84,10 @@ public class MapsRetrieval {
 			maps = ListUtils.subtract(maps, mapsFromDb);
 		}
 
-		imageFetcher.setImgsSrcs(maps.stream().map(GameMap::getImage).collect(Collectors.toList()), mapsImgUri);
+		Version latestVersion = versionsRetrieval.latestVersion(versionsRetrieval.versionsFromResponse());
+
+		imageFetcher.setImgsSrcs(maps.stream().map(GameMap::getImage).collect(Collectors.toList()), mapsImgUri,
+				latestVersion);
 		return mapsRepository.save(maps);
 	}
 
@@ -121,7 +128,9 @@ public class MapsRetrieval {
 			mapsRepository.delete(id);
 		}
 
-		imageFetcher.setImgSrc(map.getImage(), mapsImgUri);
+		Version latestVersion = versionsRetrieval.latestVersion(versionsRetrieval.versionsFromResponse());
+
+		imageFetcher.setImgSrc(map.getImage(), mapsImgUri, latestVersion);
 		return mapsRepository.save(map);
 	}
 

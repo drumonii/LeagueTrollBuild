@@ -1,6 +1,7 @@
 package com.drumonii.loltrollbuild.batch.summonerSpells;
 
 import com.drumonii.loltrollbuild.model.SummonerSpell;
+import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.repository.SummonerSpellsRepository;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -8,10 +9,10 @@ import org.springframework.batch.core.configuration.annotation.JobBuilderFactory
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
-import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.data.RepositoryItemWriter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -43,7 +44,7 @@ public class SummonerSpellsRetrievalJobConfig {
 		return stepBuilderFactory.get("summonerSpellsRetrievalStep")
 				.<SummonerSpell, SummonerSpell> chunk(25)
 				.reader(summonerSpellsRetrievalItemReader())
-				.processor(summonerSpellsRetrievalItemProcessor())
+				.processor(summonerSpellsRetrievalItemProcessor(null))
 				.writer(summonerSpellsRetrievalItemWriter())
 				.build();
 	}
@@ -54,9 +55,11 @@ public class SummonerSpellsRetrievalJobConfig {
 		return new SummonerSpellsRetrievalItemReader();
 	}
 
+	@StepScope
 	@Bean
-	public ItemProcessor<SummonerSpell, SummonerSpell> summonerSpellsRetrievalItemProcessor() {
-		return new SummonerSpellsRetrievalItemProcessor();
+	public SummonerSpellsRetrievalItemProcessor summonerSpellsRetrievalItemProcessor(
+			@Value("#{jobParameters['latestRiotPatch']}") Version latestVersion) {
+		return new SummonerSpellsRetrievalItemProcessor(latestVersion);
 	}
 
 	@Bean

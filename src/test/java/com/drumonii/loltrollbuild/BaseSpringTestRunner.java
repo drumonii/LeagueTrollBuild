@@ -8,9 +8,12 @@ import com.drumonii.loltrollbuild.riot.api.SummonerSpellsResponse;
 import com.drumonii.loltrollbuild.util.GameMapUtil;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.lang3.RandomUtils;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.runner.RunWith;
+import org.springframework.batch.core.JobParameters;
+import org.springframework.batch.core.JobParametersBuilder;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.test.JobLauncherTestUtils;
@@ -113,7 +116,7 @@ public abstract class BaseSpringTestRunner {
 			fail("Unable to unmarshal the Items response.", e);
 		}
 
-		// Build Items from the JSON file
+		// Build Maps from the JSON file
 		ClassPathResource mapsJson = new ClassPathResource("maps.json");
 		try {
 			mapsResponse = objectMapper.readValue(mapsJson.getFile(), MapsResponse.class);
@@ -121,7 +124,7 @@ public abstract class BaseSpringTestRunner {
 			fail("Unable to unmarshal the Maps response.", e);
 		}
 
-		// Build Items from the JSON file
+		// Build Summoner Spells from the JSON file
 		ClassPathResource summonerSpellsJson = new ClassPathResource("summoners.json");
 		try {
 			summonerSpellsResponse = objectMapper.readValue(summonerSpellsJson.getFile(), SummonerSpellsResponse.class);
@@ -144,6 +147,13 @@ public abstract class BaseSpringTestRunner {
 
 	protected static RequestPostProcessor adminUser() {
 		return user(TESTING_USERNAME).password(TESTING_PASSWORD).roles(TESTING_USER_ROLE);
+	}
+
+	protected JobParameters getJobParameters() {
+		return new JobParametersBuilder()
+				.addString("latestRiotPatch", versions.get(0).getPatch())
+				.addLong("random", RandomUtils.nextLong(1, 1000000))
+				.toJobParameters();
 	}
 
 }

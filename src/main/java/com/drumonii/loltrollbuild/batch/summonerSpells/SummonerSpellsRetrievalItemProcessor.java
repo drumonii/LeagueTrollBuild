@@ -1,6 +1,7 @@
 package com.drumonii.loltrollbuild.batch.summonerSpells;
 
 import com.drumonii.loltrollbuild.model.SummonerSpell;
+import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.repository.SummonerSpellsRepository;
 import com.drumonii.loltrollbuild.riot.api.ImageFetcher;
 import org.springframework.batch.item.ItemProcessor;
@@ -23,13 +24,19 @@ public class SummonerSpellsRetrievalItemProcessor implements ItemProcessor<Summo
 	@Autowired
 	private ImageFetcher imageFetcher;
 
+	private Version latestVersion;
+
+	public SummonerSpellsRetrievalItemProcessor(Version latestVersion) {
+		this.latestVersion = latestVersion;
+	}
+
 	@Override
 	public SummonerSpell process(SummonerSpell summonerSpell) throws Exception {
 		SummonerSpell summonerSpellFromDb = summonerSpellsRepository.findOne(summonerSpell.getId());
 		if (summonerSpellFromDb != null && summonerSpellFromDb.equals(summonerSpell)) {
 			return null;
 		}
-		imageFetcher.setImgSrc(summonerSpell.getImage(), summonerSpellsImgUri);
+		imageFetcher.setImgSrc(summonerSpell.getImage(), summonerSpellsImgUri, latestVersion);
 		return summonerSpell;
 	}
 

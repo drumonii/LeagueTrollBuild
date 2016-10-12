@@ -1,6 +1,7 @@
 package com.drumonii.loltrollbuild.riot;
 
 import com.drumonii.loltrollbuild.model.SummonerSpell;
+import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.repository.SummonerSpellsRepository;
 import com.drumonii.loltrollbuild.riot.api.ImageFetcher;
 import com.drumonii.loltrollbuild.riot.api.SummonerSpellsResponse;
@@ -49,6 +50,9 @@ public class SummonerSpellsRetrieval {
 	@Autowired
 	private ImageFetcher imageFetcher;
 
+	@Autowired
+	private VersionsRetrieval versionsRetrieval;
+
 	@Value("${riot.api.static-data.region}")
 	private String region;
 
@@ -92,8 +96,10 @@ public class SummonerSpellsRetrieval {
 			summonerSpells = ListUtils.subtract(summonerSpells, summonerSpellsFromDb);
 		}
 
+		Version latestVersion = versionsRetrieval.latestVersion(versionsRetrieval.versionsFromResponse());
+
 		imageFetcher.setImgsSrcs(summonerSpells.stream().map(SummonerSpell::getImage).collect(Collectors.toList()),
-				summonerSpellsImgUri);
+				summonerSpellsImgUri, latestVersion);
 		return summonerSpellsRepository.save(summonerSpells);
 	}
 
@@ -138,7 +144,9 @@ public class SummonerSpellsRetrieval {
 			summonerSpellsRepository.delete(id);
 		}
 
-		imageFetcher.setImgSrc(summonerSpell.getImage(), summonerSpellsImgUri);
+		Version latestVersion = versionsRetrieval.latestVersion(versionsRetrieval.versionsFromResponse());
+
+		imageFetcher.setImgSrc(summonerSpell.getImage(), summonerSpellsImgUri, latestVersion);
 		return summonerSpellsRepository.save(summonerSpell);
 	}
 

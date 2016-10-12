@@ -2,6 +2,7 @@ package com.drumonii.loltrollbuild.riot;
 
 import com.drumonii.loltrollbuild.model.Champion;
 import com.drumonii.loltrollbuild.model.ChampionSpell;
+import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.repository.ChampionsRepository;
 import com.drumonii.loltrollbuild.riot.api.ChampionsResponse;
 import com.drumonii.loltrollbuild.riot.api.ImageFetcher;
@@ -58,6 +59,9 @@ public class ChampionsRetrieval {
 	@Autowired
 	private ImageFetcher imageFetcher;
 
+	@Autowired
+	private VersionsRetrieval versionsRetrieval;
+
 	@Value("${riot.api.static-data.region}")
 	private String region;
 
@@ -99,13 +103,15 @@ public class ChampionsRetrieval {
 			champions = ListUtils.subtract(champions, championsFromDb);
 		}
 
+		Version latestVersion = versionsRetrieval.latestVersion(versionsRetrieval.versionsFromResponse());
+
 		imageFetcher.setImgsSrcs(champions.stream().map(Champion::getImage).collect(Collectors.toList()),
-				championsImgUri);
+				championsImgUri, latestVersion);
 		imageFetcher.setImgsSrcs(champions.stream()
 				.flatMap(champion -> champion.getSpells().stream()
-						.map(ChampionSpell::getImage)).collect(Collectors.toList()), championsSpellImgUri);
+						.map(ChampionSpell::getImage)).collect(Collectors.toList()), championsSpellImgUri, latestVersion);
 		imageFetcher.setImgsSrcs(champions.stream().map(champion -> champion.getPassive().getImage())
-						.collect(Collectors.toList()), championsPassiveImgUri);
+						.collect(Collectors.toList()), championsPassiveImgUri, latestVersion);
 		return championsRepository.save(champions);
 	}
 
@@ -150,10 +156,12 @@ public class ChampionsRetrieval {
 			championsRepository.delete(id);
 		}
 
-		imageFetcher.setImgSrc(champion.getImage(), championsImgUri);
+		Version latestVersion = versionsRetrieval.latestVersion(versionsRetrieval.versionsFromResponse());
+
+		imageFetcher.setImgSrc(champion.getImage(), championsImgUri, latestVersion);
 		imageFetcher.setImgsSrcs(champion.getSpells().stream().map(ChampionSpell::getImage).collect(Collectors.toList()),
-				championsSpellImgUri);
-		imageFetcher.setImgSrc(champion.getPassive().getImage(), championsPassiveImgUri);
+				championsSpellImgUri, latestVersion);
+		imageFetcher.setImgSrc(champion.getPassive().getImage(), championsPassiveImgUri, latestVersion);
 		return championsRepository.save(champion);
 	}
 

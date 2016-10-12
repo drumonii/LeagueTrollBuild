@@ -3,7 +3,6 @@ package com.drumonii.loltrollbuild.batch.maps;
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.model.GameMap;
 import com.drumonii.loltrollbuild.repository.MapsRepository;
-import com.drumonii.loltrollbuild.repository.VersionsRepository;
 import com.drumonii.loltrollbuild.riot.api.MapsResponse;
 import com.drumonii.loltrollbuild.util.RandomizeUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -26,6 +25,7 @@ import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Fail.fail;
+import static org.springframework.test.web.client.ExpectedCount.once;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
@@ -46,15 +46,18 @@ public class MapsRetrievalJobTest extends BaseSpringTestRunner {
 	private Job mapsRetrievalJob;
 
 	@Autowired
-	private MapsRepository mapsRepository;
+	@Qualifier("versions")
+	private UriComponents versionsUri;
 
 	@Autowired
-	private VersionsRepository versionsRepository;
+	private MapsRepository mapsRepository;
 
 	private MockRestServiceServer mockServer;
 
 	private MapsResponse mapsResponseSlice;
 	private String mapsResponseBody;
+
+	private String versionsResponseBody;
 
 	@Before
 	public void before() {
@@ -76,7 +79,11 @@ public class MapsRetrievalJobTest extends BaseSpringTestRunner {
 			fail("Unable to marshal the Maps response.", e);
 		}
 
-		versionsRepository.save(versions.get(0));
+		try {
+			versionsResponseBody = objectMapper.writeValueAsString(versions);
+		} catch (JsonProcessingException e) {
+			fail("Unable to marshal the Versions.", e);
+		}
 
 		jobLauncherTestUtils.setJob(mapsRetrievalJob);
 	}
@@ -91,7 +98,10 @@ public class MapsRetrievalJobTest extends BaseSpringTestRunner {
 		mockServer.expect(requestTo(mapsUri.toString())).andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(mapsResponseBody, MediaType.APPLICATION_JSON_UTF8));
 
-		JobExecution jobExecution = jobLauncherTestUtils.launchJob();
+		mockServer.expect(once(), requestTo(versionsUri.toString())).andExpect(method(HttpMethod.GET))
+				.andRespond(withSuccess(versionsResponseBody, MediaType.APPLICATION_JSON_UTF8));
+
+		JobExecution jobExecution = jobLauncherTestUtils.launchJob(getJobParameters());
 		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
 
 		assertThat(mapsRepository.findAll()).containsOnlyElementsOf(mapsResponseSlice.getMaps().values());
@@ -102,6 +112,9 @@ public class MapsRetrievalJobTest extends BaseSpringTestRunner {
 		mockServer.expect(requestTo(mapsUri.toString())).andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(mapsResponseBody, MediaType.APPLICATION_JSON_UTF8));
 
+		mockServer.expect(once(), requestTo(versionsUri.toString())).andExpect(method(HttpMethod.GET))
+				.andRespond(withSuccess(versionsResponseBody, MediaType.APPLICATION_JSON_UTF8));
+
 		List<GameMap> maps = mapsRepository.save(mapsResponseSlice.getMaps().values());
 
 		GameMap mapToEdit = RandomizeUtil.getRandom(maps);
@@ -109,7 +122,7 @@ public class MapsRetrievalJobTest extends BaseSpringTestRunner {
 
 		mapsRepository.save(mapToEdit);
 		
-		JobExecution jobExecution = jobLauncherTestUtils.launchJob();
+		JobExecution jobExecution = jobLauncherTestUtils.launchJob(getJobParameters());
 		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
 
 		assertThat(mapsRepository.findAll()).containsOnlyElementsOf(mapsResponseSlice.getMaps().values());
@@ -125,8 +138,11 @@ public class MapsRetrievalJobTest extends BaseSpringTestRunner {
 		mockServer.expect(requestTo(mapsUri.toString())).andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(objectMapper.writeValueAsString(mapsResponseSlice),
 						MediaType.APPLICATION_JSON_UTF8));
+
+		mockServer.expect(once(), requestTo(versionsUri.toString())).andExpect(method(HttpMethod.GET))
+				.andRespond(withSuccess(versionsResponseBody, MediaType.APPLICATION_JSON_UTF8));
 		
-		JobExecution jobExecution = jobLauncherTestUtils.launchJob();
+		JobExecution jobExecution = jobLauncherTestUtils.launchJob(getJobParameters());
 		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
 
 		assertThat(mapsRepository.findAll()).containsOnlyElementsOf(mapsResponseSlice.getMaps().values());

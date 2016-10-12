@@ -3,7 +3,6 @@ package com.drumonii.loltrollbuild.batch.summonerSpells;
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.model.SummonerSpell;
 import com.drumonii.loltrollbuild.repository.SummonerSpellsRepository;
-import com.drumonii.loltrollbuild.repository.VersionsRepository;
 import com.drumonii.loltrollbuild.riot.api.SummonerSpellsResponse;
 import com.drumonii.loltrollbuild.util.RandomizeUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -26,6 +25,7 @@ import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Fail.fail;
+import static org.springframework.test.web.client.ExpectedCount.once;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
@@ -46,15 +46,18 @@ public class SummonerSpellsRetrievalJobTest extends BaseSpringTestRunner {
 	private Job summonerSpellsRetrievalJob;
 
 	@Autowired
-	private SummonerSpellsRepository summonerSpellsRepository;
+	@Qualifier("versions")
+	private UriComponents versionsUri;
 
 	@Autowired
-	private VersionsRepository versionsRepository;
+	private SummonerSpellsRepository summonerSpellsRepository;
 
 	private MockRestServiceServer mockServer;
 
 	private SummonerSpellsResponse summonerSpellsResponseSlice;
 	private String summonerSpellsResponseBody;
+
+	private String versionsResponseBody;
 
 	@Before
 	public void before() {
@@ -76,7 +79,11 @@ public class SummonerSpellsRetrievalJobTest extends BaseSpringTestRunner {
 			fail("Unable to marshal the Summoner Spells response.", e);
 		}
 
-		versionsRepository.save(versions.get(0));
+		try {
+			versionsResponseBody = objectMapper.writeValueAsString(versions);
+		} catch (JsonProcessingException e) {
+			fail("Unable to marshal the Versions.", e);
+		}
 
 		jobLauncherTestUtils.setJob(summonerSpellsRetrievalJob);
 	}
@@ -90,8 +97,11 @@ public class SummonerSpellsRetrievalJobTest extends BaseSpringTestRunner {
 	public void savesNewSummonerSpells() throws Exception {
 		mockServer.expect(requestTo(summonerSpellsUri.toString())).andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(summonerSpellsResponseBody, MediaType.APPLICATION_JSON_UTF8));
+
+		mockServer.expect(once(), requestTo(versionsUri.toString())).andExpect(method(HttpMethod.GET))
+				.andRespond(withSuccess(versionsResponseBody, MediaType.APPLICATION_JSON_UTF8));
 		
-		JobExecution jobExecution = jobLauncherTestUtils.launchJob();
+		JobExecution jobExecution = jobLauncherTestUtils.launchJob(getJobParameters());
 		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
 
 		assertThat(summonerSpellsRepository.findAll()).containsOnlyElementsOf(summonerSpellsResponseSlice
@@ -103,6 +113,9 @@ public class SummonerSpellsRetrievalJobTest extends BaseSpringTestRunner {
 		mockServer.expect(requestTo(summonerSpellsUri.toString())).andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(summonerSpellsResponseBody, MediaType.APPLICATION_JSON_UTF8));
 
+		mockServer.expect(once(), requestTo(versionsUri.toString())).andExpect(method(HttpMethod.GET))
+				.andRespond(withSuccess(versionsResponseBody, MediaType.APPLICATION_JSON_UTF8));
+
 		List<SummonerSpell> summonerSpells = summonerSpellsRepository.save(summonerSpellsResponseSlice
 				.getSummonerSpells().values());
 
@@ -111,7 +124,7 @@ public class SummonerSpellsRetrievalJobTest extends BaseSpringTestRunner {
 
 		summonerSpellsRepository.save(summonerSpellToEdit);
 		
-		JobExecution jobExecution = jobLauncherTestUtils.launchJob();
+		JobExecution jobExecution = jobLauncherTestUtils.launchJob(getJobParameters());
 		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
 
 		assertThat(summonerSpellsRepository.findAll()).containsOnlyElementsOf(summonerSpellsResponseSlice
@@ -129,8 +142,11 @@ public class SummonerSpellsRetrievalJobTest extends BaseSpringTestRunner {
 		mockServer.expect(requestTo(summonerSpellsUri.toString())).andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(objectMapper.writeValueAsString(summonerSpellsResponseSlice),
 						MediaType.APPLICATION_JSON_UTF8));
+
+		mockServer.expect(once(), requestTo(versionsUri.toString())).andExpect(method(HttpMethod.GET))
+				.andRespond(withSuccess(versionsResponseBody, MediaType.APPLICATION_JSON_UTF8));
 		
-		JobExecution jobExecution = jobLauncherTestUtils.launchJob();
+		JobExecution jobExecution = jobLauncherTestUtils.launchJob(getJobParameters());
 		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
 
 		assertThat(summonerSpellsRepository.findAll()).containsOnlyElementsOf(summonerSpellsResponseSlice

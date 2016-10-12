@@ -1,6 +1,7 @@
 package com.drumonii.loltrollbuild.riot;
 
 import com.drumonii.loltrollbuild.model.Item;
+import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.repository.ItemsRepository;
 import com.drumonii.loltrollbuild.riot.api.ImageFetcher;
 import com.drumonii.loltrollbuild.riot.api.ItemsResponse;
@@ -49,6 +50,9 @@ public class ItemsRetrieval {
 	@Autowired
 	private ImageFetcher imageFetcher;
 
+	@Autowired
+	private VersionsRetrieval versionsRetrieval;
+
 	@Value("${riot.api.static-data.region}")
 	private String region;
 
@@ -89,7 +93,10 @@ public class ItemsRetrieval {
 			items = ListUtils.subtract(items, itemsFromDb);
 		}
 
-		imageFetcher.setImgsSrcs(items.stream().map(Item::getImage).collect(Collectors.toList()), itemsImgUri);
+		Version latestVersion = versionsRetrieval.latestVersion(versionsRetrieval.versionsFromResponse());
+
+		imageFetcher.setImgsSrcs(items.stream().map(Item::getImage).collect(Collectors.toList()), itemsImgUri,
+				latestVersion);
 		return itemsRepository.save(items);
 	}
 
@@ -134,7 +141,9 @@ public class ItemsRetrieval {
 			itemsRepository.delete(id);
 		}
 
-		imageFetcher.setImgSrc(item.getImage(), itemsImgUri);
+		Version latestVersion = versionsRetrieval.latestVersion(versionsRetrieval.versionsFromResponse());
+
+		imageFetcher.setImgSrc(item.getImage(), itemsImgUri, latestVersion);
 		return itemsRepository.save(item);
 	}
 

@@ -2,6 +2,7 @@ package com.drumonii.loltrollbuild.batch.champions;
 
 import com.drumonii.loltrollbuild.model.Champion;
 import com.drumonii.loltrollbuild.model.ChampionSpell;
+import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.repository.ChampionsRepository;
 import com.drumonii.loltrollbuild.riot.api.ImageFetcher;
 import org.hibernate.collection.internal.PersistentBag;
@@ -36,6 +37,12 @@ public class ChampionsRetrievalItemProcessor implements ItemProcessor<Champion, 
 	@Autowired
 	private ImageFetcher imageFetcher;
 
+	private Version latestVersion;
+
+	public ChampionsRetrievalItemProcessor(Version latestVersion) {
+		this.latestVersion = latestVersion;
+	}
+
 	@Override
 	public Champion process(Champion champion) throws Exception {
 		Champion championFromDb = championsRepository.findOne(champion.getId());
@@ -53,10 +60,10 @@ public class ChampionsRetrievalItemProcessor implements ItemProcessor<Champion, 
 				return null;
 			}
 		}
-		imageFetcher.setImgSrc(champion.getImage(), championsImgUri);
+		imageFetcher.setImgSrc(champion.getImage(), championsImgUri, latestVersion);
 		imageFetcher.setImgsSrcs(champion.getSpells().stream().map(ChampionSpell::getImage).collect(Collectors.toList()),
-				championsSpellImgUri);
-		imageFetcher.setImgSrc(champion.getPassive().getImage(), championsPassiveImgUri);
+				championsSpellImgUri, latestVersion);
+		imageFetcher.setImgSrc(champion.getPassive().getImage(), championsPassiveImgUri, latestVersion);
 		return champion;
 	}
 
