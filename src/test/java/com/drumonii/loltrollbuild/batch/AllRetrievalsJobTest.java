@@ -2,7 +2,6 @@ package com.drumonii.loltrollbuild.batch;
 
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.model.Version;
-import com.drumonii.loltrollbuild.repository.VersionsRepository;
 import com.drumonii.loltrollbuild.riot.api.ChampionsResponse;
 import com.drumonii.loltrollbuild.riot.api.ItemsResponse;
 import com.drumonii.loltrollbuild.riot.api.MapsResponse;
@@ -14,8 +13,7 @@ import org.junit.Test;
 import org.springframework.batch.core.BatchStatus;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecution;
-import org.springframework.batch.core.JobParametersBuilder;
-import org.springframework.batch.core.repository.JobInstanceAlreadyCompleteException;
+import org.springframework.batch.core.JobParameters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpMethod;
@@ -28,6 +26,7 @@ import java.util.ArrayList;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Fail.fail;
+import static org.springframework.test.web.client.ExpectedCount.times;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
@@ -61,9 +60,6 @@ public class AllRetrievalsJobTest extends BaseSpringTestRunner {
 	@Qualifier("allRetrievalsJob")
 	private Job allRetrievalsJob;
 
-	@Autowired
-	private VersionsRepository versionsRepository;
-
 	private MockRestServiceServer mockServer;
 
 	@Before
@@ -79,6 +75,9 @@ public class AllRetrievalsJobTest extends BaseSpringTestRunner {
 			Assertions.fail("Unable to marshal the Versions.", e);
 		}
 
+		// times(2) fails with incorrect order for some reason
+		mockServer.expect(requestTo(versionsUri.toString())).andExpect(method(HttpMethod.GET))
+				.andRespond(withSuccess(versionsResponseBody, MediaType.APPLICATION_JSON_UTF8));
 		mockServer.expect(requestTo(versionsUri.toString())).andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(versionsResponseBody, MediaType.APPLICATION_JSON_UTF8));
 
@@ -127,21 +126,12 @@ public class AllRetrievalsJobTest extends BaseSpringTestRunner {
 
 	@Test
 	public void runsAllRetrievalJobs() throws Exception {
-		JobParametersBuilder builder = new JobParametersBuilder();
-		builder.addString("latestRiotPatch", versions.get(0).getPatch());
+		JobParameters jobParameters = jobLauncherTestUtils.getJob().getJobParametersIncrementer().getNext(null);
+		assertThat(jobParameters.getParameters()).containsKey("latestRiotPatch");
 
-		JobExecution jobExecution = jobLauncherTestUtils.launchJob(builder.toJobParameters());
+		JobExecution jobExecution = jobLauncherTestUtils.launchJob(jobParameters);
 		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
-
-		// Run again with same version patch
-		builder = new JobParametersBuilder();
-		builder.addString("latestRiotPatch", versionsRepository.save(versions.get(0)).getPatch());
-
-		try {
-			jobLauncherTestUtils.launchJob(builder.toJobParameters());
-		} catch (JobInstanceAlreadyCompleteException e) {
-			assertThat(e).hasMessageContaining(versions.get(0).getPatch());
-		}
+		mockServer.verify();
 	}
 
 }

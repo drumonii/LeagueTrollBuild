@@ -64,6 +64,9 @@ public class VersionsRetrieval {
 	 */
 	@GetMapping(value = "/latest")
 	public Version latestVersion(@ModelAttribute List<Version> versions) {
+		if (versions.isEmpty()) {
+			return new Version("0", 0, 0, 0);
+		}
 		return versions.get(0);
 	}
 

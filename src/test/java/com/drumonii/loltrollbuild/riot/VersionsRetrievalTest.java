@@ -15,6 +15,8 @@ import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 
+import java.util.ArrayList;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
 import static org.mockito.Mockito.mock;
@@ -83,6 +85,16 @@ public class VersionsRetrievalTest extends BaseSpringTestRunner {
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(versions.get(0))));
+		mockServer.verify();
+		mockServer.reset();
+
+		mockServer.expect(requestTo(versionsUri.toString())).andExpect(method(HttpMethod.GET))
+				.andRespond(withSuccess(objectMapper.writeValueAsString(new ArrayList<>()), MediaType.APPLICATION_JSON_UTF8));
+
+		mockMvc.perform(get("/riot/versions/latest").with(adminUser()).with(csrf()))
+				.andExpect(status().isOk())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+				.andExpect(content().json(objectMapper.writeValueAsString(new Version("0", 0, 0, 0))));
 		mockServer.verify();
 	}
 

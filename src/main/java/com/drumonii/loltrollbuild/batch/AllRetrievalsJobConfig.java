@@ -1,10 +1,11 @@
 package com.drumonii.loltrollbuild.batch;
 
+import com.drumonii.loltrollbuild.riot.VersionsRetrieval;
 import org.springframework.batch.core.Job;
+import org.springframework.batch.core.JobParametersBuilder;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
-import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -21,6 +22,9 @@ public class AllRetrievalsJobConfig {
 
 	@Autowired
 	public StepBuilderFactory stepBuilderFactory;
+
+	@Autowired
+	private VersionsRetrieval versionsRetrieval;
 
 	@Autowired
 	@Qualifier("versionsRetrievalJob")
@@ -45,7 +49,17 @@ public class AllRetrievalsJobConfig {
 	@Bean
 	public Job allRetrievalsJob() {
 		return jobBuilderFactory.get("allRetrievalsJob")
-				.incrementer(new RunIdIncrementer())
+				.incrementer(parameters -> {
+					if (parameters == null || parameters.isEmpty()) {
+						return new JobParametersBuilder()
+								.addLong("run.id", 1L)
+								.addString("latestRiotPatch",
+										versionsRetrieval.latestVersion(versionsRetrieval.versionsFromResponse()).getPatch())
+								.toJobParameters();
+					}
+					long id = parameters.getLong("run.id", 1L) + 1;
+					return new JobParametersBuilder().addLong("run.id", id).toJobParameters();
+				})
 				.flow(versionsRetrievalJobStep())
 				.next(mapsRetrievalJobStep())
 				.next(summonerSpellsRetrievalJobStep())
