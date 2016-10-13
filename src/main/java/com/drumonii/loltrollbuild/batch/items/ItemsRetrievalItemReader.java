@@ -4,7 +4,10 @@ import com.drumonii.loltrollbuild.model.Item;
 import com.drumonii.loltrollbuild.repository.ItemsRepository;
 import com.drumonii.loltrollbuild.riot.api.ItemsResponse;
 import org.apache.commons.collections4.ListUtils;
+import org.springframework.batch.item.ExecutionContext;
 import org.springframework.batch.item.ItemReader;
+import org.springframework.batch.item.ItemStreamException;
+import org.springframework.batch.item.support.AbstractItemStreamItemReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.client.RestTemplate;
@@ -16,7 +19,7 @@ import java.util.List;
 /**
  * {@link ItemReader} for reading {@link Item}s from Riot's API.
  */
-public class ItemsRetrievalItemReader implements ItemReader<Item> {
+public class ItemsRetrievalItemReader extends AbstractItemStreamItemReader<Item> {
 
 	@Autowired
 	private RestTemplate restTemplate;
@@ -33,24 +36,18 @@ public class ItemsRetrievalItemReader implements ItemReader<Item> {
 
 	@Override
 	public Item read() throws Exception {
-		if (isNotInitialized()) {
-			items = new ArrayList<>(restTemplate.getForObject(itemsUri.toString(), ItemsResponse.class).getItems()
-					.values());
-			List<Item> deletedItems = ListUtils.subtract(itemsRepository.findAll(), items);
-			itemsRepository.delete(deletedItems);
-		}
-
-		Item item = null;
 		if (nextItem < items.size()) {
-			item = items.get(nextItem);
-			nextItem++;
+			return items.get(nextItem++);
 		}
-
-		return item;
+		return null;
 	}
 
-	private boolean isNotInitialized() {
-		return items == null;
+	@Override
+	public void open(ExecutionContext executionContext) throws ItemStreamException {
+		items = new ArrayList<>(restTemplate.getForObject(itemsUri.toString(), ItemsResponse.class).getItems()
+				.values());
+		List<Item> deletedItems = ListUtils.subtract(itemsRepository.findAll(), items);
+		itemsRepository.delete(deletedItems);
 	}
 
 }

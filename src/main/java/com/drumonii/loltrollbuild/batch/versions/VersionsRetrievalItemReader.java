@@ -1,7 +1,10 @@
 package com.drumonii.loltrollbuild.batch.versions;
 
 import com.drumonii.loltrollbuild.model.Version;
+import org.springframework.batch.item.ExecutionContext;
 import org.springframework.batch.item.ItemReader;
+import org.springframework.batch.item.ItemStreamException;
+import org.springframework.batch.item.support.AbstractItemStreamItemReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.ParameterizedTypeReference;
@@ -15,7 +18,7 @@ import java.util.List;
 /**
  * {@link ItemReader} for reading {@link Version}s from Riot's API.
  */
-public class VersionsRetrievalItemReader implements ItemReader<Version> {
+public class VersionsRetrievalItemReader extends AbstractItemStreamItemReader<Version> {
 
 	@Autowired
 	private RestTemplate restTemplate;
@@ -25,27 +28,21 @@ public class VersionsRetrievalItemReader implements ItemReader<Version> {
 	private UriComponents versionsUri;
 
 	private List<Version> versions;
-	private int nextChampion;
+	private int nextVersion;
 
 	@Override
 	public Version read() throws Exception {
-		if (isNotInitialized()) {
-			versions = restTemplate.exchange(versionsUri.toString(), HttpMethod.GET, null,
-					new ParameterizedTypeReference<List<Version>>() {}).getBody();
-			Collections.sort(versions);
+		if (nextVersion < versions.size()) {
+			return versions.get(nextVersion++);
 		}
-
-		Version version = null;
-		if (nextChampion < versions.size()) {
-			version = versions.get(nextChampion);
-			nextChampion++;
-		}
-
-		return version;
+		return null;
 	}
 
-	private boolean isNotInitialized() {
-		return versions == null;
+	@Override
+	public void open(ExecutionContext executionContext) throws ItemStreamException {
+		versions = restTemplate.exchange(versionsUri.toString(), HttpMethod.GET, null,
+				new ParameterizedTypeReference<List<Version>>() {}).getBody();
+		Collections.sort(versions);
 	}
 
 }
