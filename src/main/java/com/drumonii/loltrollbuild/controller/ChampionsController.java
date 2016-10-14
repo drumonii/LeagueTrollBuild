@@ -72,7 +72,8 @@ public class ChampionsController {
 	 */
 	@GetMapping(value = "/{id}/troll-build")
 	@ResponseBody
-	public Map<String, List<?>> trollBuild(@PathVariable("id") Champion champion, @RequestParam int mapId) {
+	public Map<String, List<?>> trollBuild(@PathVariable("id") Champion champion,
+			@RequestParam(required = false, defaultValue = "11") int mapId) {
 		Map<String, List<?>> trollBuild = new HashMap<>();
 
 		// Items
