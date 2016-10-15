@@ -6,6 +6,9 @@
 /*<![CDATA[*/
 $(function() {
     $('#map').dropdown();
+    $('.message').click(function() {
+        $(this).transition('fade');
+    });
     var newBuildBtn = $('#new-build');
     newBuildBtn.popup({
         on: 'manual',
@@ -23,6 +26,7 @@ $(function() {
                 mapId: $('#map option:selected').val()
             },
             success: function(data) {
+                $('#champion-error-msg').hide();
                 newBuildBtn.popup('hide');
                 $.each(data, function(id, list) {
                     var html = [];
@@ -45,7 +49,8 @@ $(function() {
                 });
             },
             error: function() {
-                newBuildBtn.popup('show');
+                $('#champion-error-msg .header').text(/*[[#{champion.trollBuild.error}]]*/ 'champion.trollBuild.error');
+                $('#champion-error-msg').show();
             },
             complete: function() {
                 newBuildBtn.removeClass('loading');

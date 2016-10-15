@@ -7,112 +7,157 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <div class="ui padded grid">
-        <div class="row">
-            <div class="one wide computer column"><!--/* offset space for desktop */--></div>
-            <!--/* champion view */-->
+    <div class="ui stackable grid">
+        <div id="champion-error-msg" class="sixteen wide column" style="display:none;">
             <div class="ui basic segment">
-                <div class="eight wide mobile eight wide tablet four wide computer column">
-                    <div class="ui card" style="width:220px!important;">
+                <div class="ui mini negative message">
+                    <i class="close icon"></i>
+                    <div class="header">An error has occurred.</div>
+                </div>
+            </div>
+        </div>
+        <div class="eight wide column">
+            <div class="ui stackable grid">
+                <div class="row">
+                    <div class="twelve wide column">
+                        <div class="ui basic segment">
+                            <div class="ui divided items">
+                                <div class="item">
+                                    <div class="ui small image">
+                                        <div class="ui grey ribbon label" th:text="${champion.partype}">Mana</div>
+                                        <img th:src="@{/img/champions/{image}.png(image=${champion.id})}"/>
+                                        <div id="new-build" class="ui bottom attached primary button"
+                                             th:text="#{champion.newBuild}">
+                                            New Build
+                                        </div>
+                                    </div>
+                                    <div class="content">
+                                        <div class="header" th:text="${champion.name}">Thresh</div>
+                                        <div class="meta">
+                                            <span th:text="${#strings.capitalize(champion.title)}">The Chain Warden</span>
+                                        </div>
+                                        <div class="description">
+                                            <div class="extra">
+                                                <div class="ui label" th:each="tag : ${champion.tags}"
+                                                     th:text="${tag}">
+                                                    Support
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="extra">
+                                            <div class="ui form">
+                                                <div class="field">
+                                                    <label th:text="#{champion.map}">Map</label>
+                                                    <select id="map" class="ui dropdown">
+                                                        <option th:each="map : ${maps}"
+                                                                th:value="${map.mapId}" th:text="${map.mapName}"
+                                                                th:selected="${map.mapId} == 11">Summoner's Rift
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="sixteen wide column">
+                        <div id="build-segment" class="ui basic segment">
+                            <div class="ui stackable center aligned padded grid">
+                                <div class="row">
+                                    <div class="sixteen wide column">
+                                        <h4 class="ui horizontal divider header" th:text="#{champion.items}">
+                                            Items</h4>
+                                        <div id="items" class="ui horizontal list" data-model="items">
+                                            <!--/* dummy data replaced by js */-->
+                                            <div data-variation="wide" class="item">
+                                                <img th:src="@{/images/dummy.png}" class="ui rounded image"/>
+                                            </div>
+                                            <div data-variation="wide" class="item">
+                                                <img th:src="@{/images/dummy.png}" class="ui rounded image"/>
+                                            </div>
+                                            <div data-variation="wide" class="item">
+                                                <img th:src="@{/images/dummy.png}" class="ui rounded image"/>
+                                            </div>
+                                            <div data-variation="wide" class="item">
+                                                <img th:src="@{/images/dummy.png}" class="ui rounded image"/>
+                                            </div>
+                                            <div data-variation="wide" class="item">
+                                                <img th:src="@{/images/dummy.png}" class="ui rounded image"/>
+                                            </div>
+                                            <div data-variation="wide" class="item">
+                                                <img th:src="@{/images/dummy.png}" class="ui rounded image"/>
+                                            </div>
+                                            <div data-variation="wide" class="item">
+                                                <img th:src="@{/images/dummy.png}" class="ui rounded image"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="ten wide column">
+                                        <h4 class="ui horizontal divider header"
+                                            th:text="#{champion.summonerSpells}">Summoner
+                                            Spells</h4>
+                                        <div id="summoner-spells" class="ui horizontal list"
+                                             data-model="summoner-spells">
+                                            <!--/* dummy data replaced by js */-->
+                                            <div data-variation="wide" class="item">
+                                                <img th:src="@{/images/dummy.png}" class="ui rounded image"/>
+                                            </div>
+                                            <div data-variation="wide" class="item">
+                                                <img th:src="@{/images/dummy.png}" class="ui rounded image"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="six wide column">
+                                        <h4 class="ui horizontal divider header" th:text="#{champion.trinket}">
+                                            Trinket</h4>
+                                        <div id="trinket" class="ui horizontal list" data-model="items">
+                                            <!--/* dummy data replaced by js */-->
+                                            <div data-variation="wide" class="item">
+                                                <img th:src="@{/images/dummy.png}" class="ui rounded image"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="eight wide column">
+            <div class="ui basic segment">
+                <div class="ui divided items">
+                    <div class="item">
                         <div class="ui image">
-                            <div class="ui grey ribbon label" th:text="${champion.partype}">Mana</div>
-                            <img th:src="@{/img/champions/{image}.png(image=${champion.id})}"/>
+                            <img th:src="@{/img/champions/{id}/passive/{passive}(id=${champion.id}, passive=${champion.passive.image.full})}"/>
                         </div>
                         <div class="content">
-                            <h4 class="header" th:text="${champion.name}">Thresh</h4>
-                            <div class="meta">
-                                <span th:text="${#strings.capitalize(champion.title)}">The Chain Warden</span>
+                            <div class="header" th:text="|${champion.passive.name} (#{champion.passive})|">Damnation
                             </div>
                             <div class="description">
-                                <div class="extra">
-                                    <div class="ui label" th:each="tag : ${champion.tags}" th:text="${tag}">
-                                        Support
-                                    </div>
-                                </div>
+                                <p th:utext="${champion.passive.description}">Thresh can harvest the souls of...</p>
                             </div>
-                        </div>
-                        <div class="extra content">
-                            <div class="ui form">
-                                <div class="field">
-                                    <label th:text="#{champion.map}">Map</label>
-                                    <select id="map" class="ui dropdown">
-                                        <option th:each="map : ${maps}"
-                                                th:value="${map.mapId}" th:text="${map.mapName}"
-                                                th:selected="${map.mapId} == 11">Summoner's Rift
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="new-build" class="ui bottom attached primary button" th:text="#{champion.newBuild}">
-                            New Build
-                        </div>
-                        <div class="ui negative message hidden popup">
-                            <p>
-                                <i class="warning circle icon"></i>
-                                <span th:text="#{champion.trollBuild.error}">An error has occurred.</span>
-                            </p>
                         </div>
                     </div>
-                </div>
-            </div>
-            <!--/* build view */-->
-            <div id="build-segment" class="ui basic segment">
-                <div class="eight wide mobile eight wide tablet ten wide computer column">
-                    <div class="ui stackable center aligned padded grid">
-                        <div class="row">
-                            <div class="sixteen wide column">
-                                <h4 class="ui horizontal divider header" th:text="#{champion.items}">Items</h4>
-                                <div id="items" class="ui horizontal list" data-model="items">
-                                    <!--/* dummy data replaced by js */-->
-                                    <div data-variation="wide" class="item">
-                                        <img th:src="@{/images/dummy.png}" class="ui rounded image"/>
-                                    </div>
-                                    <div data-variation="wide" class="item">
-                                        <img th:src="@{/images/dummy.png}" class="ui rounded image"/>
-                                    </div>
-                                    <div data-variation="wide" class="item">
-                                        <img th:src="@{/images/dummy.png}" class="ui rounded image"/>
-                                    </div>
-                                    <div data-variation="wide" class="item">
-                                        <img th:src="@{/images/dummy.png}" class="ui rounded image"/>
-                                    </div>
-                                    <div data-variation="wide" class="item">
-                                        <img th:src="@{/images/dummy.png}" class="ui rounded image"/>
-                                    </div>
-                                    <div data-variation="wide" class="item">
-                                        <img th:src="@{/images/dummy.png}" class="ui rounded image"/>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="item" th:each="spell : ${champion.spells}">
+                        <div class="ui image">
+                            <img th:src="@{/img/champions/{id}/spell/{spellKey}(id=${champion.id}, spellKey=${spell.image.full})}"/>
                         </div>
-                        <div class="row">
-                            <div class="ten wide column">
-                                <h4 class="ui horizontal divider header" th:text="#{champion.summonerSpells}">Summoner Spells</h4>
-                                <div id="summoner-spells" class="ui horizontal list" data-model="summoner-spells">
-                                    <!--/* dummy data replaced by js */-->
-                                    <div data-variation="wide" class="item">
-                                        <img th:src="@{/images/dummy.png}" class="ui rounded image"/>
-                                    </div>
-                                    <div data-variation="wide" class="item">
-                                        <img th:src="@{/images/dummy.png}" class="ui rounded image"/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="six wide column">
-                                <h4 class="ui horizontal divider header" th:text="#{champion.trinket}">Trinket</h4>
-                                <div id="trinket" class="ui horizontal list" data-model="items">
-                                    <!--/* dummy data replaced by js */-->
-                                    <div data-variation="wide" class="item">
-                                        <img th:src="@{/images/dummy.png}" class="ui rounded image"/>
-                                    </div>
-                                </div>
+                        <div class="content">
+                            <div class="header" th:text="${spell.name}">Death Sentence</div>
+                            <div class="description">
+                                <p th:utext="${spell.description}">Thresh binds an enemy in chains...</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="one wide computer column"><!--/* offset space for desktop */--></div>
         </div>
     </div>
     <script th:inline="javascript" th:include="~{champions/js/champion.js :: script}"></script>
