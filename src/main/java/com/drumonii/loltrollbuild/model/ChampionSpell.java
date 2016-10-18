@@ -5,13 +5,10 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * Spells of a {@link Champion} which maps a {@link ManyToOne} relationship.
@@ -45,27 +42,6 @@ public class ChampionSpell implements Serializable {
 	@JsonManagedReference
 	@JsonProperty("image")
 	@Getter @Setter private ChampionSpellImage image;
-
-	@ElementCollection(fetch = FetchType.EAGER)
-	@CollectionTable(name = "CHAMPION_SPELL_COST", joinColumns = @JoinColumn(name = "CHAMPION_SPELL_KEY"))
-	@Fetch(value = FetchMode.SELECT)
-	@Column(name = "COST")
-	@JsonProperty("cost")
-	@Getter @Setter private List<Integer> costs;
-
-	@ElementCollection(fetch = FetchType.EAGER)
-	@CollectionTable(name = "CHAMPION_SPELL_COOLDOWN", joinColumns = @JoinColumn(name = "CHAMPION_SPELL_KEY"))
-	@Fetch(value = FetchMode.SELECT)
-	@Column(name = "COOLDOWN")
-	@JsonProperty("cooldown")
-	@Getter @Setter private List<Integer> cooldowns;
-
-	@ElementCollection(fetch = FetchType.EAGER)
-	@CollectionTable(name = "CHAMPION_SPELL_RANGE", joinColumns = @JoinColumn(name = "CHAMPION_SPELL_KEY"))
-	@Fetch(value = FetchMode.SELECT)
-	@Column(name = "RANGE")
-	@JsonProperty("range")
-	@Getter @Setter private List<Integer> range;
 
 	@ManyToOne(optional = false)
 	@JsonBackReference

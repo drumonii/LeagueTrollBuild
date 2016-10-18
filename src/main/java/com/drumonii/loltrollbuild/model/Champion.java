@@ -90,37 +90,21 @@ public class Champion implements Serializable {
 		return name.equals("Viktor");
 	}
 
+	// Hibernate's PersistentBag does not honor equals()
+
 	@PostPersist
 	public void postPersist() {
-		// Hibernate's PersistentBag does not honor equals()
 		spells = new ArrayList<>(spells);
-		for (ChampionSpell spell : spells) {
-			spell.setCosts(new ArrayList<>(spell.getCosts()));
-			spell.setCooldowns(new ArrayList<>(spell.getCooldowns()));
-			spell.setRange(new ArrayList<>(spell.getRange()));
-		}
 	}
 
 	@PostLoad
 	public void postLoad() {
-		// Hibernate's PersistentBag does not honor equals()
 		spells = new ArrayList<>(spells);
-		for (ChampionSpell spell : spells) {
-			spell.setCosts(new ArrayList<>(spell.getCosts()));
-			spell.setCooldowns(new ArrayList<>(spell.getCooldowns()));
-			spell.setRange(new ArrayList<>(spell.getRange()));
-		}
 	}
 
 	@PostUpdate
 	public void postUpdate() {
-		// Hibernate's PersistentBag does not honor equals()
 		spells = new ArrayList<>(spells);
-		for (ChampionSpell spell : spells) {
-			spell.setCosts(new ArrayList<>(spell.getCosts()));
-			spell.setCooldowns(new ArrayList<>(spell.getCooldowns()));
-			spell.setRange(new ArrayList<>(spell.getRange()));
-		}
 	}
 
 }
