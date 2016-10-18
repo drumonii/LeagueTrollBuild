@@ -7,7 +7,7 @@ apply plugin: 'spring-boot'
 apply plugin: 'propdeps'
 apply plugin: 'org.asciidoctor.convert'
 
-version = '2.3.2'
+version = '2.3.3-SNAPSHOT'
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
@@ -104,7 +104,7 @@ dependencies {
     runtime 'com.h2database:h2'
 
     // PostgreSQL
-    runtime 'org.postgresql:postgresql:9.4.1209'
+    runtime 'org.postgresql:postgresql:9.4.1211'
 
     // EhCache
     compile 'net.sf.ehcache:ehcache'
