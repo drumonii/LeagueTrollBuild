@@ -7,7 +7,7 @@ apply plugin: 'spring-boot'
 apply plugin: 'propdeps'
 apply plugin: 'org.asciidoctor.convert'
 
-version = '2.3.3'
+version = '2.3.4-SNAPSHOT'
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
@@ -129,7 +129,7 @@ dependencies {
     }
 
     // Semantic UI
-    compile('org.webjars.bower:semantic-ui:2.2.4') {
+    compile('org.webjars.bower:semantic-ui:2.2.6') {
         exclude group: 'org.webjars.bower'
     }
 
