@@ -62,7 +62,7 @@ spring:
         show_sql: false
         format_sql: false
         generate_statistics: false
-        hbm2ddl.auto:
+        hbm2ddl.auto: none
 
 ---
 
@@ -82,7 +82,7 @@ spring:
         show_sql: false
         format_sql: false
         generate_statistics: false
-        hbm2ddl.auto:
+        hbm2ddl.auto: none
   h2.console.enabled: false
 
 ---
@@ -103,7 +103,7 @@ spring:
         show_sql: true
         format_sql: false
         generate_statistics: false
-        hbm2ddl.auto:
+        hbm2ddl.auto: none
   h2.console.enabled: false
 
 ---
@@ -118,4 +118,4 @@ spring:
         show_sql: true
         format_sql: false
         generate_statistics: false
-        hbm2ddl.auto:
+        hbm2ddl.auto: none
