@@ -67,7 +67,7 @@ public class ItemsRestController {
 	 * @return the {@link Resources} of {@link Item} {@link Resource}
 	 */
 	@GetMapping(value = "/boots")
-	public Resources<Resource<Item>> getBoots(@RequestParam int mapId) {
+	public Resources<Resource<Item>> getBoots(@RequestParam(required = false, defaultValue = "11") int mapId) {
 		return new Resources<>(itemsRepository.boots(mapId).stream()
 				.map(item -> new Resource<>(item))
 				.collect(Collectors.toList()), linkToCurrentMapping().withSelfRel());
@@ -81,7 +81,7 @@ public class ItemsRestController {
 	 * @return the {@link Resources} of {@link Item} {@link Resource}
 	 */
 	@GetMapping(value = "/trinkets")
-	public Resources<Resource<Item>> getTrinkets(@RequestParam int mapId) {
+	public Resources<Resource<Item>> getTrinkets(@RequestParam(required = false, defaultValue = "11") int mapId) {
 		return new Resources<>(itemsRepository.trinkets(mapId).stream()
 				.map(item -> new Resource<>(item))
 				.collect(Collectors.toList()), linkToCurrentMapping().withSelfRel());
@@ -108,7 +108,7 @@ public class ItemsRestController {
 	 * @return the {@link Resources} of {@link Item} {@link Resource}
 	 */
 	@GetMapping(value = "/for-troll-build")
-	public Resources<Resource<Item>> getForTrollBuild(@RequestParam int mapId) {
+	public Resources<Resource<Item>> getForTrollBuild(@RequestParam(required = false, defaultValue = "11") int mapId) {
 		return new Resources<>(itemsRepository.forTrollBuild(mapId).stream()
 				.map(item -> new Resource<>(item))
 				.collect(Collectors.toList()), linkToCurrentMapping().withSelfRel());
