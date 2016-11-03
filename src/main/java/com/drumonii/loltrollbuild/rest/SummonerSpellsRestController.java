@@ -67,7 +67,8 @@ public class SummonerSpellsRestController {
 	 * @return the {@link Resources} of {@link SummonerSpell} {@link Resource}
 	 */
 	@GetMapping(value = "/for-troll-build")
-	public Resources<Resource<SummonerSpell>> getForTrollBuild(@RequestParam GameMode mode) {
+	public Resources<Resource<SummonerSpell>> getForTrollBuild(
+			@RequestParam(required = false, defaultValue = "CLASSIC") GameMode mode) {
 		return new Resources<>(summonerSpellsRepository.forTrollBuild(mode).stream()
 				.map(spell -> new Resource<>(spell))
 				.collect(Collectors.toList()), linkToCurrentMapping().withSelfRel());
