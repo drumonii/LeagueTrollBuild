@@ -54,15 +54,15 @@
             $('#save-patch-form').submit(function(event) {
                 $.ajax({
                     type: 'POST',
-                    url: [[@{/riot/versions/latest}]],
+                    url: /*[[@{/riot/versions/latest}]]*/ '/riot/versions/latest',
                     beforeSend: function() {
                         $('#save-patch-btn').addClass('loading');
                     },
                     data: {
-                        [[${_csrf.parameterName}]]: [[${_csrf.token}]]
+                        _csrf: /*[[${_csrf.token}]]*/ '_csrf.token'
                     },
                     headers: {
-                        _csrf_header: [[${_csrf.headerName}]]
+                        _csrf_header: /*[[${_csrf.headerName}]]*/ '_csrf.headerName'
                     },
                     success: function(data) {
                         location.reload();
