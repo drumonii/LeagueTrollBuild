@@ -4,6 +4,7 @@
       layout:decorate="~{layouts/main}">
 <head>
     <title th:text="${champion.name}">Thresh</title>
+    <script th:src="@{/webjars/clipboard/dist/clipboard.min.js}"></script>
 </head>
 <body>
 <div layout:fragment="content">
@@ -32,7 +33,10 @@
                                         </div>
                                     </div>
                                     <div class="content">
-                                        <div class="header" th:text="${champion.name}">Thresh</div>
+                                        <div id="champion-header" class="header"
+                                             th:text="${champion.name}" th:attr="data-champion-id=${champion.id}">
+                                            Thresh
+                                        </div>
                                         <div class="meta">
                                             <span th:text="${#strings.capitalize(champion.title)}">The Chain Warden</span>
                                         </div>
@@ -51,6 +55,7 @@
                                                     <select id="map" class="ui dropdown">
                                                         <option th:each="map : ${maps}"
                                                                 th:value="${map.mapId}" th:text="${map.mapName}"
+                                                                th:attr="data-map-id=${map.mapId}"
                                                                 th:selected="${map.mapId} == 11">Summoner's Rift
                                                         </option>
                                                     </select>
@@ -122,6 +127,30 @@
                                                 <img th:src="@{/images/dummy.png}" class="ui rounded image"/>
                                             </div>
                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="sixteen wide column">
+                        <div class="ui basic segment">
+                            <div id="build-form" class="ui form">
+                                <div class="fields">
+                                    <div class="thirteen wide field">
+                                        <div class="ui action input">
+                                            <input id="build-url-input" type="text" readonly="readonly"/>
+                                            <button id="copy-button" class="ui right icon button"
+                                                    data-clipboard-target="#build-url-input">
+                                                <i class="copy icon"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="two wide field">
+                                        <button id="build-submit-btn" class="ui submit grey button"
+                                                th:text="#{builds.save}">Save
+                                        </button>
                                     </div>
                                 </div>
                             </div>

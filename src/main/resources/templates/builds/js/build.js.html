@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+<script th:inline="javascript" th:fragment="script">
+/*<![CDATA[*/
+$(function() {
+    $('#map').dropdown();
+    $('#items .item, #summoner-spells .item, #trinket .item').popup();
+    // If map is Proving Grounds
+    if ($('#map option:selected').val() == 12) {
+        $('#trinket .image').addClass('disabled');
+    }
+});
+/*]]>*/
+</script>
+</body>
+</html>

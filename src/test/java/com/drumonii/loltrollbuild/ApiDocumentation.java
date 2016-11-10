@@ -33,6 +33,9 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 	private MapsRepository mapsRepository;
 
 	@Autowired
+	private BuildsRepository buildsRepository;
+
+	@Autowired
 	private VersionsRepository versionsRepository;
 
 	@After
@@ -42,6 +45,7 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 		championsRepository.deleteAll();
 		mapsRepository.deleteAll();
 		versionsRepository.deleteAll();
+		buildsRepository.deleteAll();
 	}
 
 	@Test
@@ -54,6 +58,7 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 						linkWithRel("champions").description("<<resources-champions, Champions resource>>"),
 						linkWithRel("maps").description("<<resources-maps, Maps resource>>"),
 						linkWithRel("versions").description("<<resources-versions, Versions resource>>"),
+						linkWithRel("builds").description("<<resources-builds, Builds resource>>"),
 						linkWithRel("profile").description("Profile resource"))));
 	}
 
@@ -580,6 +585,104 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 								.description("The revision version number of the Version"),
 						fieldWithPath("_links")
 								.description("Link to the self Version"))));
+	}
+
+	/*
+	 * Builds doc
+	 */
+
+	@Test
+	public void getBuilds() throws Exception {
+		Build build = new Build();
+		build.setChampionId(championsResponse.getChampions().get("Karthus").getId());
+		build.setItem1Id(itemsResponse.getItems().get("3117").getId());
+		build.setItem2Id(itemsResponse.getItems().get("3512").getId());
+		build.setItem3Id(itemsResponse.getItems().get("3135").getId());
+		build.setItem4Id(itemsResponse.getItems().get("3508").getId());
+		build.setItem5Id(itemsResponse.getItems().get("3075").getId());
+		build.setItem6Id(itemsResponse.getItems().get("3046").getId());
+		build.setSummonerSpell1Id(summonerSpellsResponse.getSummonerSpells().get("SummonerSmite").getId());
+		build.setSummonerSpell2Id(summonerSpellsResponse.getSummonerSpells().get("SummonerTeleport").getId());
+		build.setTrinketId(itemsResponse.getItems().get("3341").getId());
+		build.setMapId(mapsResponse.getMaps().get(SUMMONERS_RIFT).getMapId());
+		buildsRepository.save(build);
+
+		mockMvc.perform(get(apiPath + "/builds"))
+				.andExpect(status().isOk())
+				.andDo(document("getBuilds", responseFields(
+						fieldWithPath("_embedded.builds")
+								.description("An array of Builds"),
+						fieldWithPath("_embedded.builds[*].champion")
+								.description("The Champion Id of the Build"),
+						fieldWithPath("_embedded.builds[*].item1")
+								.description("The Item 1 Id (boots) of the Build"),
+						fieldWithPath("_embedded.builds[*].item2")
+								.description("The Item 2 Id of the Build"),
+						fieldWithPath("_embedded.builds[*].item3")
+								.description("The Item 3 Id of the Build"),
+						fieldWithPath("_embedded.builds[*].item4")
+								.description("The Item 4 Id of the Build"),
+						fieldWithPath("_embedded.builds[*].item5")
+								.description("The Item 5 Id of the Build"),
+						fieldWithPath("_embedded.builds[*].item6")
+								.description("The Item 6 Id of the Build"),
+						fieldWithPath("_embedded.builds[*].summonerSpell1")
+								.description("The Summoner Spell 1 Id of the Build"),
+						fieldWithPath("_embedded.builds[*].summonerSpell2")
+								.description("The Summoner Spell 2 Id of the Build"),
+						fieldWithPath("_embedded.builds[*].trinket")
+								.description("The Trinket Id of the Build"),
+						fieldWithPath("_embedded.builds[*].map")
+								.description("The Map Id of the Build"),
+						fieldWithPath("_links")
+								.description("Links to resources related to Builds"),
+						fieldWithPath("page")
+								.description("Current Page settings of the pagination"))));
+	}
+
+	@Test
+	public void getBuild() throws Exception {
+		Build build = new Build();
+		build.setChampionId(championsResponse.getChampions().get("Pantheon").getId());
+		build.setItem1Id(itemsResponse.getItems().get("3091").getId());
+		build.setItem2Id(itemsResponse.getItems().get("3009").getId());
+		build.setItem3Id(itemsResponse.getItems().get("3027").getId());
+		build.setItem4Id(itemsResponse.getItems().get("3050").getId());
+		build.setItem5Id(itemsResponse.getItems().get("3110").getId());
+		build.setItem6Id(itemsResponse.getItems().get("3078").getId());
+		build.setSummonerSpell1Id(summonerSpellsResponse.getSummonerSpells().get("SummonerHaste").getId());
+		build.setSummonerSpell2Id(summonerSpellsResponse.getSummonerSpells().get("SummonerHeal").getId());
+		build.setTrinketId(itemsResponse.getItems().get("3341").getId());
+		build.setMapId(mapsResponse.getMaps().get(SUMMONERS_RIFT).getMapId());
+		build = buildsRepository.save(build);
+
+		mockMvc.perform(get(apiPath + "/builds/{id}", build.getId()))
+				.andExpect(status().isOk())
+				.andDo(document("getBuild", responseFields(
+						fieldWithPath("champion")
+								.description("The Champion Id of the Build"),
+						fieldWithPath("item1")
+								.description("The Item 1 Id (boots) of the Build"),
+						fieldWithPath("item2")
+								.description("The Item 2 Id of the Build"),
+						fieldWithPath("item3")
+								.description("The Item 3 Id of the Build"),
+						fieldWithPath("item4")
+								.description("The Item 4 Id of the Build"),
+						fieldWithPath("item5")
+								.description("The Item 5 Id of the Build"),
+						fieldWithPath("item6")
+								.description("The Item 6 Id of the Build"),
+						fieldWithPath("summonerSpell1")
+								.description("The Summoner Spell 1 Id of the Build"),
+						fieldWithPath("summonerSpell2")
+								.description("The Summoner Spell 2 Id of the Build"),
+						fieldWithPath("trinket")
+								.description("The Trinket Id of the Build"),
+						fieldWithPath("map")
+								.description("The Map Id of the Build"),
+						fieldWithPath("_links")
+								.description("Links to resources related to Builds"))));
 	}
 
 }

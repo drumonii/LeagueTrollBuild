@@ -13,6 +13,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
@@ -38,6 +39,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.authorizeRequests()
 				.antMatchers("/riot/**")     .hasRole(ADMIN_ROLE)
 				.antMatchers("/admin/**")    .hasRole(ADMIN_ROLE)
+				.antMatchers(POST,   apiPath + "/builds").permitAll()
 				.antMatchers(POST,   apiPath).hasRole(ADMIN_ROLE)
 				.antMatchers(PUT,    apiPath).hasRole(ADMIN_ROLE)
 				.antMatchers(PATCH,  apiPath).hasRole(ADMIN_ROLE)
@@ -53,6 +55,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.logout()
 				.logoutRequestMatcher(new AntPathRequestMatcher("/admin/logout"))
 				.permitAll()
+			.and()
+			.csrf().csrfTokenRepository(new HttpSessionCsrfTokenRepository())
 			.and()
 				.exceptionHandling()
 					.accessDeniedHandler(new CsrfTokenExpiredAccessDeniedHandler());

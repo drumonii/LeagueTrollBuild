@@ -9,7 +9,8 @@ drumonii;
 [[overview]]
 = Overview
 Guide for understanding the API provided by League Troll Build. All data is aggregated from
-https://developer.riotgames.com/[Riot's API] for each patch version release.
+https://developer.riotgames.com/[Riot's API] for each patch version release daily at 4 AM America/New_York TZ via
+batch processing.
 
 [[overview-http-verbs]]
 == HTTP Verbs
@@ -407,6 +408,41 @@ include::{snippets}/getVersion/curl-request.adoc[]
 include::{snippets}/getVersion/http-response.adoc[]
 
 include::{snippets}/getVersion/response-fields.adoc[]
+
+[[resources-builds]]
+== Builds
+Resources for saved Builds.
+
+NOTE: `PUT` and `DELETE` methods are not exposed at all including to an admin
+
+[[resources-versions-list]]
+=== Listing Builds
+A `GET` request is used to access all `Build` s.
+include::{snippets}/getBuilds/http-request.adoc[]
+
+==== Example Usage
+Usage with `CURL`:
+include::{snippets}/getBuilds/curl-request.adoc[]
+
+==== Response Structure
+include::{snippets}/getBuilds/http-response.adoc[]
+
+include::{snippets}/getBuilds/response-fields.adoc[]
+
+[[resources-build-retrieve]]
+=== Retrieve a Build
+A `GET` request will retrieve a specific `Build`.
+
+include::{snippets}/getBuild/http-request.adoc[]
+
+==== Example Usage
+Usage with `CURL`:
+include::{snippets}/getBuild/curl-request.adoc[]
+
+==== Response Structure
+include::{snippets}/getBuild/http-response.adoc[]
+
+include::{snippets}/getBuild/response-fields.adoc[]
 
 == Glossary
 

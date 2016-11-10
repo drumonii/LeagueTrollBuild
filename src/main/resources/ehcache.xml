@@ -17,7 +17,7 @@
     </cache>
 
     <cache name="items"
-           maxElementsInMemory="350"
+           maxElementsInMemory="300"
            eternal="false"
            timeToIdleSeconds="0"
            timeToLiveSeconds="0"
@@ -28,7 +28,7 @@
     </cache>
 
     <cache name="champions"
-           maxElementsInMemory="200"
+           maxElementsInMemory="150"
            eternal="false"
            timeToIdleSeconds="0"
            timeToLiveSeconds="0"
@@ -50,12 +50,23 @@
     </cache>
 
     <cache name="versions"
-           maxElementsInMemory="75"
+           maxElementsInMemory="50"
            eternal="false"
            timeToIdleSeconds="0"
            timeToLiveSeconds="0"
            maxElementsOnDisk="150"
            diskExpiryThreadIntervalSeconds="3600"
+           memoryStoreEvictionPolicy="LRU">
+        <persistence strategy="localTempSwap"/>
+    </cache>
+
+    <cache name="builds"
+           maxElementsInMemory="50"
+           eternal="false"
+           timeToIdleSeconds="0"
+           timeToLiveSeconds="0"
+           maxElementsOnDisk="150"
+           diskExpiryThreadIntervalSeconds="120"
            memoryStoreEvictionPolicy="LRU">
         <persistence strategy="localTempSwap"/>
     </cache>
