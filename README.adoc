@@ -1,7 +1,7 @@
 = LeagueTrollBuild
 
-League Troll Build is a random build generator (hence the terms "troll build") for playable Champions of the popular
-online game: http://leagueoflegends.com/[League of Legends].
+League Troll Build is a random, shareable build generator (hence the terms "troll build") for playable Champions of
+the popular online game: http://leagueoflegends.com/[League of Legends].
 
 = Tech stack, frameworks, and libraries
 * http://www.oracle.com/technetwork/java/javase/overview/java8-2100321.html[Java 8] with https://projectlombok.org/[Lombok]
@@ -41,7 +41,8 @@ To override an active profile, set the `spring.profiles.active` argument propert
 
  -Dspring.profiles.active=dev
 
-Or using the environment variable `SPRING_PROFILES_ACTIVE`. Otherwise, the `external` profile will be active.
+Or using the environment variable `SPRING_PROFILES_ACTIVE`. Otherwise, if a profile is not specified, the `external`
+profile will be active.
 
 = Riot API Key
 An API key provided from Riot is required to use https://developer.riotgames.com/[Riot's API].
@@ -51,7 +52,7 @@ When running `LeagueTrollBuild`, the API key is supplied using the `RIOT_API_KEY
 and thus the app will not start (by design).
 
 = Running locally
-*Note*, a Java 8 JRE is required.
+*Note*, a Java 8 JRE is required. Previous JREs are not supported.
 
 First, download or clone the project. With the project saved locally, one may either:
 
@@ -80,8 +81,11 @@ Optionally, run with the following argument properties to trigger on startup the
 This is useful to avoid manual saving of data through the admin area. If data already exists in the database, a new
 patch is out, and the retrievals job is run, then new data will be saved and absent data will be deleted.
 
+== API Documentation
+To view the generated API guide, visit http://localhost:8080/[localhost:8080/docs/api-guide.html].
+
 = Development/Importing the project
-*Note*, a Java 8 JDK is required.
+*Note*, a Java 8 JDK is required. Previous JDKs are not supported.
 
 `LeagueTrollBuild` is developed using the https://www.jetbrains.com/idea/[IntelliJ IDEA] IDE.
 
@@ -92,6 +96,9 @@ If using IntelliJ, one must first download the https://plugins.jetbrains.com/plu
 If using Eclipse, one must first install the Lombok plugin manually using the `lombok.jar` and install the
 https://marketplace.eclipse.org/content/gradle-integration-eclipse-0[Gradle Integration plugin] from the Eclipse
 Marketplace. Then import the project as a Gradle project.
+
+In addition, one must specify the Riot API key either as an argument property or environment variable when creating a
+run configuration in the IDE.
 
 = License
 `LeagueTrollBuild` is licensed under the MIT License (MIT).
