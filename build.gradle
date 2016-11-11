@@ -7,7 +7,7 @@ apply plugin: 'spring-boot'
 apply plugin: 'propdeps'
 apply plugin: 'org.asciidoctor.convert'
 
-version = '2.3.4'
+version = '2.3.5-SNAPSHOT'
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
@@ -81,9 +81,14 @@ repositories {
     jcenter()
 }
 
+configurations {
+    compile.exclude module: 'spring-boot-starter-tomcat'
+}
+
 dependencies {
     // Spring Boot Starters
     compile 'org.springframework.boot:spring-boot-starter-web'
+    compile 'org.springframework.boot:spring-boot-starter-undertow'
     compile 'org.springframework.boot:spring-boot-starter-data-jpa'
     compile 'org.springframework.boot:spring-boot-starter-data-rest'
     compile 'org.springframework.boot:spring-boot-starter-cache'
