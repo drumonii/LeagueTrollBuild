@@ -91,7 +91,6 @@ public class Build implements Serializable, Validator {
 
     @Column(name = "CREATED_DATE", nullable = false)
     @CreatedDate
-    @JsonIgnore
     @Getter @Setter private Date createdDate;
 
     @Transient

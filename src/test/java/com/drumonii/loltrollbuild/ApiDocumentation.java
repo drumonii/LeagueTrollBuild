@@ -612,6 +612,8 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 				.andDo(document("getBuilds", responseFields(
 						fieldWithPath("_embedded.builds")
 								.description("An array of Builds"),
+						fieldWithPath("_embedded.builds[*].createdDate")
+								.description("The date the Build was created"),
 						fieldWithPath("_embedded.builds[*].champion")
 								.description("The Champion Id of the Build"),
 						fieldWithPath("_embedded.builds[*].item1")
@@ -659,6 +661,8 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 		mockMvc.perform(get(apiPath + "/builds/{id}", build.getId()))
 				.andExpect(status().isOk())
 				.andDo(document("getBuild", responseFields(
+						fieldWithPath("createdDate")
+								.description("The date the Build was created"),
 						fieldWithPath("champion")
 								.description("The Champion Id of the Build"),
 						fieldWithPath("item1")
