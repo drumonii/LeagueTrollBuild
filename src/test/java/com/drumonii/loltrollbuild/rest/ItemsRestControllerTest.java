@@ -46,7 +46,7 @@ public class ItemsRestControllerTest extends BaseSpringTestRunner {
 	@Test
 	public void getItems() throws Exception {
 		itemsResponseSlice.setItems(itemsResponse.getItems().values().stream()
-				.filter(item -> item.getGroup() != null && item.getRequiredChampion() != null)
+				.filter(item -> item.getRequiredChampion() != null)
 				.collect(Collectors.toMap(item -> String.valueOf(item.getId()), item -> item)));
 		itemsRepository.save(itemsResponseSlice.getItems().values());
 
@@ -81,30 +81,6 @@ public class ItemsRestControllerTest extends BaseSpringTestRunner {
 				.andExpect(jsonPath("$.page.size", is(20)))
 				.andExpect(jsonPath("$.page.totalElements", is(1)))
 				.andExpect(jsonPath("$.page.totalPages", is(1)))
-				.andExpect(jsonPath("$.page.number", is(0)));
-
-		// qbe with group
-		mockMvc.perform(get(apiPath + "/items")
-				.param("group", item.getGroup().toLowerCase()))
-				.andExpect(status().isOk())
-				.andExpect(content().contentType(HAL_JSON_UTF8))
-				.andExpect(jsonPath("$._embedded.items", hasSize(
-						(int) itemsResponseSlice.getItems().values().stream()
-								.filter(i -> i.getGroup().equals(item.getGroup()))
-								.count())))
-				.andExpect(jsonPath("$._links").exists())
-				.andExpect(jsonPath("$._links.self").exists())
-				.andExpect(jsonPath("$._links.self.href").exists())
-				.andExpect(jsonPath("$.page").exists())
-				.andExpect(jsonPath("$.page.size", is(20)))
-				.andExpect(jsonPath("$.page.totalElements", is(
-						(int) itemsResponseSlice.getItems().values().stream()
-								.filter(i -> i.getGroup().equals(item.getGroup()))
-								.count())))
-				.andExpect(jsonPath("$.page.totalPages", is(
-						(int) Math.ceil((double) itemsResponseSlice.getItems().values().stream()
-								.filter(i -> i.getGroup().equals(item.getGroup()))
-								.count() / (double) 20))))
 				.andExpect(jsonPath("$.page.number", is(0)));
 
 		// qbe with required champion
@@ -157,7 +133,7 @@ public class ItemsRestControllerTest extends BaseSpringTestRunner {
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(HAL_JSON_UTF8))
 				.andExpect(jsonPath("$._embedded.items").exists())
-				.andExpect(jsonPath("$._embedded.items[*].group", hasItem("BootsUpgrades")))
+				.andExpect(jsonPath("$._embedded.items[*].group").exists())
 				.andExpect(jsonPath("$._embedded.items[*].from").isNotEmpty())
 				.andExpect(jsonPath("$._embedded.items[*].into").isNotEmpty())
 				.andExpect(jsonPath("$._embedded.items[*].maps", hasItem(hasEntry(SUMMONERS_RIFT, true))))
@@ -174,7 +150,8 @@ public class ItemsRestControllerTest extends BaseSpringTestRunner {
 	@Test
 	public void getTrinkets() throws Exception {
 		itemsResponseSlice.setItems(itemsResponse.getItems().values().stream()
-				.filter(item -> item.getGroup() != null && item.getGroup().equals("RelicBase"))
+				.filter(item -> item.getName() != null && item.getName().contains("Trinket") &&
+						item.getDescription() != null && item.getDescription().contains("Trinket"))
 				.collect(Collectors.toMap(item -> String.valueOf(item.getId()), item -> item)));
 		itemsRepository.save(itemsResponseSlice.getItems().values());
 
@@ -183,7 +160,7 @@ public class ItemsRestControllerTest extends BaseSpringTestRunner {
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(HAL_JSON_UTF8))
 				.andExpect(jsonPath("$._embedded.items").exists())
-				.andExpect(jsonPath("$._embedded.items[*].group", hasItem("RelicBase")))
+				.andExpect(jsonPath("$._embedded.items[*].group").exists())
 				.andExpect(jsonPath("$._embedded.items[*].from").isNotEmpty())
 				.andExpect(jsonPath("$._embedded.items[*].into").isNotEmpty())
 				.andExpect(jsonPath("$._embedded.items[*].maps", hasItem(hasEntry(SUMMONERS_RIFT, true))))

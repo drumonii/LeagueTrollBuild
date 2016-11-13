@@ -48,20 +48,20 @@ public class SummonerSpellTest extends BaseSpringTestRunner {
 		SummonerSpell teleportFromRiot = summonerSpellsResponse.getSummonerSpells().get("SummonerTeleport");
 		SummonerSpell teleportFromDb = summonerSpellsRepository.save(teleportFromRiot);
 
-		SummonerSpell clairvoyanceFromRiot = summonerSpellsResponse.getSummonerSpells().get("SummonerClairvoyance");
-		SummonerSpell clairvoyanceFromDb = summonerSpellsRepository.save(clairvoyanceFromRiot);
+		SummonerSpell smiteFromRiot = summonerSpellsResponse.getSummonerSpells().get("SummonerSmite");
+		SummonerSpell smiteFromDb = summonerSpellsRepository.save(smiteFromRiot);
 
-		// Clarity, Teleport, and Clairvoyance
-		List<SummonerSpell> summonerSpellsFromDb = Arrays.asList(clarityFromDb, teleportFromDb, clairvoyanceFromDb);
+		// Clarity, Teleport, and Smite
+		List<SummonerSpell> summonerSpellsFromDb = Arrays.asList(clarityFromDb, teleportFromDb, smiteFromDb);
 
 		SummonerSpell barrierFromRiot = summonerSpellsResponse.getSummonerSpells().get("SummonerBarrier");
 
-		// Updated Clarity, same Teleport, "new" Barrier, and no Clairvoyance
+		// Updated Clarity, same Teleport, "new" Barrier, and no Smite
 		List<SummonerSpell> summonerSpellsFromRiot = Arrays.asList(clarityFromRiot, teleportFromRiot, barrierFromRiot);
 
 		List<SummonerSpell> deletedSummonerSpells = ListUtils.subtract(summonerSpellsFromDb, summonerSpellsFromRiot);
 		assertThat(deletedSummonerSpells).hasSize(2);
-		assertThat(deletedSummonerSpells).containsOnly(clarityFromDb, clairvoyanceFromDb);
+		assertThat(deletedSummonerSpells).containsOnly(clarityFromDb, smiteFromDb);
 
 		List<SummonerSpell> unmodifiedSummonerSpells = ListUtils.intersection(summonerSpellsFromDb,
 				summonerSpellsFromRiot);

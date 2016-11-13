@@ -46,8 +46,9 @@ public interface ItemsRepository extends JpaRepository<Item, Integer> {
 	 * @see <a href="http://leagueoflegends.wikia.com/wiki/Trinket">Trinket</a>
 	 */
 	@Query("select i from Item i left join i.maps m " +
-		   "where i.name like '%Trinket%' and i.gold.total = 0 and i.gold.purchasable = true " +
-		   "and (key(m) <> :mapId and m = false) " +
+		   "where (i.name like '%Trinket%' or i.description like '%Trinket%') " +
+		   "and i.gold.total = 0 and i.gold.purchasable = true " +
+	       "and (key(m) <> :mapId and m = false) " +
 		   "group by i.id")
 	@RestResource(exported = false)
 	@Cacheable(key = "{#root.methodName, #mapId}")
@@ -78,7 +79,7 @@ public interface ItemsRepository extends JpaRepository<Item, Integer> {
 		   "and i.gold.purchasable = true and i.consumed is null and (i.group is null or i.group <> 'FlaskGroup') " +
 		   "and i_into is null and not exists (select m2 from i.maps m2 where key(m2) = :mapId and m2 = false)" +
 		   "and i.id <> 1001 " +
-		   "and (i.group is null or i.group <> 'RelicBase') " +
+		   "and (i.name not like '%Trinket%' and i.description not like '%Trinket%') " +
 		   "and i.requiredChampion is null " +
 		   "and i.name not like 'Enchantment%' and i.name not like 'Doran%' and i.name not like '%(Quick Charge)' " +
 		   "group by i.id")

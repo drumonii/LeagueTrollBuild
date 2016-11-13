@@ -96,8 +96,9 @@ public class ItemsRepositoryTest extends BaseSpringTestRunner {
 				.extracting((Extractor<SortedMap<Integer, Boolean>, Object>) input ->
 						input.get(Integer.valueOf(SUMMONERS_RIFT)))
 				.contains(true);
-		assertThat(trinkets).extracting(Item::getName)
-				.have(new Condition<>(name -> name.contains("Trinket"), "Trinket"));
+		assertThat(trinkets).extracting(Item::getDescription)
+				.isNotNull()
+				.have(new Condition<>(descr -> descr.contains("Trinket"), "Trinket"));
 	}
 
 	@Test
@@ -141,7 +142,8 @@ public class ItemsRepositoryTest extends BaseSpringTestRunner {
 				.isEmpty();
 		assertThat(forTrollBuild).doesNotContain(itemsResponse.getItems().get("1001"));
 		assertThat(forTrollBuild).extracting(Item::getDescription)
-				.isNotNull();
+				.isNotNull()
+				.doesNotHave(new Condition<>(descr -> descr.contains("Trinket"), "Trinket"));
 		assertThat(forTrollBuild).extracting(Item::getName)
 				.isNotNull()
 				.doesNotHave(new Condition<>(name -> name.contains("Enchants boots"), "Enchants boots"))
