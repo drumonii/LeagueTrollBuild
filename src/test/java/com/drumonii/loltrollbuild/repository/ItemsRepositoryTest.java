@@ -143,10 +143,12 @@ public class ItemsRepositoryTest extends BaseSpringTestRunner {
 		assertThat(forTrollBuild).doesNotContain(itemsResponse.getItems().get("1001"));
 		assertThat(forTrollBuild).extracting(Item::getDescription)
 				.isNotNull()
+				.doesNotHave(new Condition<>(descr -> descr.contains("Potion"), "Potion"))
 				.doesNotHave(new Condition<>(descr -> descr.contains("Trinket"), "Trinket"));
 		assertThat(forTrollBuild).extracting(Item::getName)
 				.isNotNull()
 				.doesNotHave(new Condition<>(name -> name.contains("Enchants boots"), "Enchants boots"))
+				.doesNotHave(new Condition<>(name -> name.contains("Potion"), "Potion"))
 				.doesNotHave(new Condition<>(name -> name.contains("Trinket"), "Trinket"))
 				.doesNotHave(new Condition<>(name -> name.contains("Viktor"), "Viktor"))
 				.doesNotHave(new Condition<>(name -> name.contains("Crystalline Flask"), "Crystalline Flask"))
