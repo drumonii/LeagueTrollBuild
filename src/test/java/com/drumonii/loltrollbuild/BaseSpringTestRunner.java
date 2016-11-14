@@ -23,7 +23,6 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.JUnitRestDocumentation;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.RequestPostProcessor;
@@ -49,9 +48,8 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
  * main application (potentially) already running on port 8080.
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = RANDOM_PORT)
+@SpringBootTest(webEnvironment = RANDOM_PORT, properties = { "riot.api.key=API_KEY" })
 @ActiveProfiles(TESTING)
-@TestPropertySource(properties = "riot.api.key=API_KEY")
 public abstract class BaseSpringTestRunner {
 
 	@Autowired
