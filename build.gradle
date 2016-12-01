@@ -3,7 +3,7 @@ description = 'League of Legends Troll Build'
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
-apply plugin: 'spring-boot'
+apply plugin: 'org.springframework.boot'
 apply plugin: 'propdeps'
 apply plugin: 'org.asciidoctor.convert'
 
@@ -72,10 +72,10 @@ bootRun {
     addResources = true
 }
 
-ext['assertj.version'] = '3.5.2'
+ext['assertj.version'] = '3.6.1'
 ext['thymeleaf.version'] = '3.0.2.RELEASE'
-ext['thymeleaf-extras-springsecurity4.version'] = '3.0.0.RELEASE'
-ext['thymeleaf-layout-dialect.version'] = '2.0.3'
+ext['thymeleaf-extras-springsecurity4.version'] = '3.0.1.RELEASE'
+ext['thymeleaf-layout-dialect.version'] = '2.1.2'
 
 repositories {
     jcenter()
@@ -103,7 +103,7 @@ dependencies {
     runtime 'com.h2database:h2'
 
     // PostgreSQL
-    runtime 'org.postgresql:postgresql:9.4.1211'
+    runtime 'org.postgresql:postgresql:9.4.1212'
 
     // EhCache
     compile 'net.sf.ehcache:ehcache'
@@ -112,7 +112,7 @@ dependencies {
     compile 'org.flywaydb:flyway-core'
 
     // Apache Commons
-    compile 'org.apache.commons:commons-lang3:3.4'
+    compile 'org.apache.commons:commons-lang3:3.5'
     compile 'org.apache.commons:commons-collections4:4.1'
     compile 'commons-io:commons-io:2.4'
 
