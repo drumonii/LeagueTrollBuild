@@ -34,23 +34,8 @@ public class ImageFetcher {
 	public int setImgsSrcs(List<Image> images, UriComponentsBuilder builder, Version latestVersion) {
 		int count = 0;
 		for (Image image : images) {
-			UriComponents uriComponents = builder.buildAndExpand(latestVersion.getPatch(), image.getFull());
-			InputStream inputStream;
-			URL url = null;
-			try {
-				url = new URL(uriComponents.toUriString());
-			} catch (MalformedURLException e) {
-				log.error("Unable to create the URL with " + uriComponents.toString());
-			}
-			if (url != null) {
-				try {
-					inputStream = url.openStream();
-					image.setImgSrc(IOUtils.toByteArray(inputStream));
-					count++;
-				} catch (IOException e) {
-					log.warn("Unable to retrieve the image from URL: " + url + " because " +
-							ExceptionUtils.getRootCauseMessage(e));
-				}
+			if (setImgSrc(image, builder, latestVersion) == 1) {
+				count++;
 			}
 		}
 		return count;
@@ -68,7 +53,6 @@ public class ImageFetcher {
 	public int setImgSrc(Image image, UriComponentsBuilder builder, Version latestVersion) {
 		int count = 0;
 		UriComponents uriComponents = builder.buildAndExpand(latestVersion.getPatch(), image.getFull());
-		InputStream inputStream;
 		URL url = null;
 		try {
 			url = new URL(uriComponents.toUriString());
@@ -77,8 +61,7 @@ public class ImageFetcher {
 		}
 		if (url != null) {
 			try {
-				inputStream = url.openStream();
-				image.setImgSrc(IOUtils.toByteArray(inputStream));
+				image.setImgSrc(IOUtils.toByteArray(url.openStream()));
 				count++;
 			} catch (IOException e) {
 				log.warn("Unable to retrieve the image from URL: " + url + " because " +
