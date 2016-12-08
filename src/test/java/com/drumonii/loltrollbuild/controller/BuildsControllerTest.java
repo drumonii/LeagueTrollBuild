@@ -4,6 +4,7 @@ import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.model.Build;
 import com.drumonii.loltrollbuild.repository.*;
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -31,6 +32,13 @@ public class BuildsControllerTest extends BaseSpringTestRunner {
 	@Autowired
 	private VersionsRepository versionsRepository;
 
+	@Before
+	public void before() {
+		super.before();
+
+		versionsRepository.save(versions.get(0));
+	}
+
 	@After
 	public void after() {
 		championsRepository.deleteAll();
@@ -50,8 +58,6 @@ public class BuildsControllerTest extends BaseSpringTestRunner {
 
 	@Test
 	public void build() throws Exception {
-		versionsRepository.save(versions.get(0));
-
 		// With missing build
 		mockMvc.perform(get("/builds/{id}", -1))
 				.andExpect(status().isOk())
@@ -101,6 +107,7 @@ public class BuildsControllerTest extends BaseSpringTestRunner {
 		// With full build attributes
 		mockMvc.perform(get("/builds/{id}", build.getId()))
 				.andExpect(status().isOk())
+				.andExpect(model().attributeExists("latestSavedPatch"))
 				.andExpect(model().attribute("build", is(build)))
 				.andExpect(view().name("builds/build"));
 	}

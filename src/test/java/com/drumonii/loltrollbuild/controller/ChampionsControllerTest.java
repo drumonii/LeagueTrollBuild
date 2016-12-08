@@ -9,9 +9,11 @@ import com.drumonii.loltrollbuild.repository.ChampionsRepository;
 import com.drumonii.loltrollbuild.repository.ItemsRepository;
 import com.drumonii.loltrollbuild.repository.MapsRepository;
 import com.drumonii.loltrollbuild.repository.SummonerSpellsRepository;
+import com.drumonii.loltrollbuild.repository.VersionsRepository;
 import com.drumonii.loltrollbuild.riot.api.ChampionsResponse;
 import com.drumonii.loltrollbuild.util.RandomizeUtil;
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -39,12 +41,23 @@ public class ChampionsControllerTest extends BaseSpringTestRunner {
 	@Autowired
 	private MapsRepository mapsRepository;
 
+	@Autowired
+	private VersionsRepository versionsRepository;
+
+	@Before
+	public void before() {
+		super.before();
+
+		versionsRepository.save(versions.get(0));
+	}
+
 	@After
 	public void after() {
 		itemsRepository.deleteAll();
 		summonerSpellsRepository.deleteAll();
 		championsRepository.deleteAll();
 		mapsRepository.deleteAll();
+		versionsRepository.deleteAll();
 	}
 
 	@Test
@@ -62,7 +75,7 @@ public class ChampionsControllerTest extends BaseSpringTestRunner {
 
 		mockMvc.perform(get("/champions"))
 				.andExpect(status().isOk())
-				.andExpect(model().attributeExists("champions"))
+				.andExpect(model().attributeExists("champions", "latestSavedPatch"))
 				.andExpect(model().attribute("champions", hasItems(champions.toArray(new Champion[champions.size()]))))
 				.andExpect(model().attributeExists("tags"))
 				.andExpect(model().attribute("tags", hasItems(tags.toArray(new String[tags.size()]))))
@@ -80,19 +93,19 @@ public class ChampionsControllerTest extends BaseSpringTestRunner {
 
 		mockMvc.perform(get("/champions/{id}", xin.getId()))
 				.andExpect(status().isOk())
-				.andExpect(model().attributeExists("champion"))
+				.andExpect(model().attributeExists("champion", "latestSavedPatch"))
 				.andExpect(model().attribute("champion", is(xin)))
 				.andExpect(view().name("champions/champion"));
 
 		mockMvc.perform(get("/champions/{name}", "xinzhao"))
 				.andExpect(status().isOk())
-				.andExpect(model().attributeExists("champion"))
+				.andExpect(model().attributeExists("champion", "latestSavedPatch"))
 				.andExpect(model().attribute("champion", is(xin)))
 				.andExpect(view().name("champions/champion"));
 
 		mockMvc.perform(get("/champions/{name}", "XinZhao"))
 				.andExpect(status().isOk())
-				.andExpect(model().attributeExists("champion"))
+				.andExpect(model().attributeExists("champion", "latestSavedPatch"))
 				.andExpect(model().attribute("champion", is(xin)))
 				.andExpect(view().name("champions/champion"));
 	}

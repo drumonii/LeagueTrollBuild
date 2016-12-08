@@ -59,7 +59,7 @@ public abstract class BaseSpringTestRunner {
 	protected ObjectMapper objectMapper;
 
 	@Autowired
-	public JobLauncher jobLauncher;
+	protected JobLauncher jobLauncher;
 
 	@Autowired
 	private JobRepository jobRepository;

@@ -23,16 +23,7 @@ import java.util.Collection;
 public class AdminController {
 
 	@Autowired
-	private VersionsRepository versionsRepository;
-
-	@Autowired
 	private VersionsRetrieval versionsRetrieval;
-
-	@ModelAttribute("latestSavedPatch")
-	public String latestSavedPatch() {
-		Version version = versionsRepository.latestVersion();
-		return version == null ? null : version.getPatch();
-	}
 
 	@ModelAttribute("latestRiotPatch")
 	public String latestRiotPatch() {
