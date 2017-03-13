@@ -18,7 +18,7 @@ buildscript {
         maven { url 'http://repo.spring.io/plugins-release' }
     }
     dependencies {
-        classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.4.2.RELEASE'
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.5.2.RELEASE'
         classpath 'org.springframework.build.gradle:propdeps-plugin:0.0.7'
         classpath 'org.asciidoctor:asciidoctor-gradle-plugin:1.5.3'
     }
@@ -72,10 +72,10 @@ bootRun {
     addResources = true
 }
 
-ext['assertj.version'] = '3.6.1'
+ext['assertj.version'] = '3.6.2'
 ext['thymeleaf.version'] = '3.0.2.RELEASE'
-ext['thymeleaf-extras-springsecurity4.version'] = '3.0.1.RELEASE'
-ext['thymeleaf-layout-dialect.version'] = '2.1.2'
+ext['thymeleaf-extras-springsecurity4.version'] = '3.0.2.RELEASE'
+ext['thymeleaf-layout-dialect.version'] = '2.2.0'
 
 repositories {
     jcenter()
@@ -92,9 +92,10 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-starter-actuator'
     compile 'org.springframework.boot:spring-boot-starter-batch'
     optional 'org.springframework.boot:spring-boot-devtools'
+    compileOnly 'org.springframework.boot:spring-boot-configuration-processor'
 
     // Lombok
-    compile 'org.projectlombok:lombok'
+    compileOnly 'org.projectlombok:lombok'
 
     // Thymeleaf Extras
     compile 'org.thymeleaf.extras:thymeleaf-extras-springsecurity4'
@@ -103,7 +104,7 @@ dependencies {
     runtime 'com.h2database:h2'
 
     // PostgreSQL
-    runtime 'org.postgresql:postgresql:9.4.1212'
+    runtime 'org.postgresql:postgresql:42.0.0'
 
     // EhCache
     compile 'net.sf.ehcache:ehcache'
@@ -123,22 +124,22 @@ dependencies {
     compile 'org.webjars.bower:jquery:2.2.4'
 
     // DataTables
-    compile('org.webjars.bower:datatables:1.10.12') {
+    compile('org.webjars.bower:datatables:1.10.13') {
         exclude group: 'org.webjars.bower'
     }
 
     // Semantic UI
-    compile('org.webjars.bower:semantic-ui:2.2.6') {
+    compile('org.webjars.bower:semantic-ui:2.2.9') {
         exclude group: 'org.webjars.bower'
     }
 
     // Isotope
-    compile('org.webjars.bower:isotope:3.0.1') {
+    compile('org.webjars.bower:isotope:3.0.3') {
         exclude group: 'org.webjars.bower'
     }
 
     // Clipboard JS
-    compile 'org.webjars.bower:clipboard:1.5.15'
+    compile 'org.webjars.bower:clipboard:1.6.1'
 
     // Testing
     testCompile 'org.springframework.boot:spring-boot-starter-test'

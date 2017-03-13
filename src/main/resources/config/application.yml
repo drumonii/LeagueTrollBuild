@@ -48,7 +48,10 @@ spring:
     initializer.enabled: false
     job.enabled: false
 # Actuator
-management.context-path: /admin/actuator
+management:
+  context-path: /admin/actuator
+  security:
+    roles: ADMIN
 
 ---
 

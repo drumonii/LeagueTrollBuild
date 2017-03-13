@@ -4,7 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.NestedConfigurationProperty;
 import org.springframework.stereotype.Component;
+import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -13,13 +15,18 @@ import javax.validation.constraints.NotNull;
  * Configuration properties for Riot's API found in config/application.yml of the resources folder.
  */
 @Component
+@Validated
 @ConfigurationProperties(prefix = "riot")
 public class RiotApiProperties {
 
 	@NotNull
 	@Valid
+	@NestedConfigurationProperty
 	@Getter @Setter private Api api;
 
+	/**
+	 * General configuration properties for Riot's API not specific to {@link StaticData} or {@link Ddragon}.
+	 */
 	public static class Api {
 
 		@NotEmpty
@@ -27,10 +34,12 @@ public class RiotApiProperties {
 
 		@NotNull
 		@Valid
+		@NestedConfigurationProperty
 		@Getter @Setter private StaticData staticData;
 
 		@NotNull
 		@Valid
+		@NestedConfigurationProperty
 		@Getter @Setter private Ddragon ddragon;
 
 	}

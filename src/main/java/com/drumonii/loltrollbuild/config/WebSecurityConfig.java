@@ -80,7 +80,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			// @formatter:off
 			auth
 				.inMemoryAuthentication()
-					.withUser(IN_MEM_USERNAME).password(IN_MEM_PASSWORD).authorities("ROLE_" + ADMIN_ROLE);
+					.withUser(IN_MEM_USERNAME).password(IN_MEM_PASSWORD).roles(ADMIN_ROLE);
 			// @formatter:on
 		}
 
