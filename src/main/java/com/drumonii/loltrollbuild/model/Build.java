@@ -11,7 +11,7 @@ import org.springframework.validation.Validator;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * Saved Troll Build.
@@ -91,7 +91,7 @@ public class Build implements Serializable, Validator {
 
     @Column(name = "CREATED_DATE", nullable = false)
     @CreatedDate
-    @Getter @Setter private Date createdDate;
+    @Getter @Setter private LocalDateTime createdDate;
 
     @Transient
     @JsonIgnore

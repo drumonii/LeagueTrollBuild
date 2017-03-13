@@ -12,8 +12,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.SortedSet;
 
@@ -71,7 +71,7 @@ public class Champion implements Serializable {
 	@Column(name = "LAST_MODIFIED_DATE", nullable = false)
 	@LastModifiedDate
 	@JsonIgnore
-	@Getter @Setter private Date lastModifiedDate;
+	@Getter @Setter private LocalDateTime lastModifiedDate;
 
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "champion")
 	@JsonManagedReference

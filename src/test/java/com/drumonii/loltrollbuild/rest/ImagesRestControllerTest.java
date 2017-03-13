@@ -12,9 +12,13 @@ import org.junit.After;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.time.ZoneId;
+
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class ImagesRestControllerTest extends BaseSpringTestRunner {
 
@@ -49,7 +53,8 @@ public class ImagesRestControllerTest extends BaseSpringTestRunner {
 				.andExpect(status().isOk())
 				.andExpect(content().contentType("image/" + fileExt))
 				.andExpect(header().string("Cache-Control", is("max-age=" + 31556926)))
-				.andExpect(header().dateValue("Last-Modified", smite.getLastModifiedDate().getTime()));
+				.andExpect(header().dateValue("Last-Modified", smite.getLastModifiedDate()
+						.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()));
 	}
 
 	@Test
@@ -63,7 +68,8 @@ public class ImagesRestControllerTest extends BaseSpringTestRunner {
 				.andExpect(status().isOk())
 				.andExpect(content().contentType("image/" + fileExt))
 				.andExpect(header().string("Cache-Control", is("max-age=" + 31556926)))
-				.andExpect(header().dateValue("Last-Modified", thornmail.getLastModifiedDate().getTime()));
+				.andExpect(header().dateValue("Last-Modified", thornmail.getLastModifiedDate()
+						.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()));
 	}
 
 	@Test
@@ -77,7 +83,8 @@ public class ImagesRestControllerTest extends BaseSpringTestRunner {
 				.andExpect(status().isOk())
 				.andExpect(content().contentType("image/" + fileExt))
 				.andExpect(header().string("Cache-Control", is("max-age=" + 31556926)))
-				.andExpect(header().dateValue("Last-Modified", shen.getLastModifiedDate().getTime()));
+				.andExpect(header().dateValue("Last-Modified", shen.getLastModifiedDate()
+						.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()));
 	}
 
 	@Test
@@ -92,7 +99,8 @@ public class ImagesRestControllerTest extends BaseSpringTestRunner {
 				.andExpect(status().isOk())
 				.andExpect(content().contentType("image/" + fileExt))
 				.andExpect(header().string("Cache-Control", is("max-age=" + 31556926)))
-				.andExpect(header().dateValue("Last-Modified", azir.getLastModifiedDate().getTime()));
+				.andExpect(header().dateValue("Last-Modified", azir.getLastModifiedDate()
+						.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()));
 	}
 
 	@Test
@@ -107,7 +115,8 @@ public class ImagesRestControllerTest extends BaseSpringTestRunner {
 				.andExpect(status().isOk())
 				.andExpect(content().contentType("image/" + fileExt))
 				.andExpect(header().string("Cache-Control", is("max-age=" + 31556926)))
-				.andExpect(header().dateValue("Last-Modified", ekko.getLastModifiedDate().getTime()));
+				.andExpect(header().dateValue("Last-Modified", ekko.getLastModifiedDate()
+						.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()));
 	}
 
 	@Test
@@ -121,7 +130,8 @@ public class ImagesRestControllerTest extends BaseSpringTestRunner {
 				.andExpect(status().isOk())
 				.andExpect(content().contentType("image/" + fileExt))
 				.andExpect(header().string("Cache-Control", is("max-age=" + 31556926)))
-				.andExpect(header().dateValue("Last-Modified", summonersRift.getLastModifiedDate().getTime()));
+				.andExpect(header().dateValue("Last-Modified", summonersRift.getLastModifiedDate()
+						.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()));
 	}
 
 }

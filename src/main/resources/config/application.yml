@@ -47,6 +47,10 @@ spring:
   batch:
     initializer.enabled: false
     job.enabled: false
+  # Jackson
+  jackson:
+    serialization:
+      write_dates_as_timestamps: false
 # Actuator
 management:
   context-path: /admin/actuator

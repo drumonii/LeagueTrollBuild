@@ -12,7 +12,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.SortedMap;
 import java.util.SortedSet;
@@ -74,7 +74,7 @@ public class Item implements Serializable {
 	@Column(name = "LAST_MODIFIED_DATE", nullable = false)
 	@LastModifiedDate
 	@JsonIgnore
-	@Getter @Setter private Date lastModifiedDate;
+	@Getter @Setter private LocalDateTime lastModifiedDate;
 
 	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "ITEM_MAP", joinColumns = @JoinColumn(name = "ITEM_ID"))

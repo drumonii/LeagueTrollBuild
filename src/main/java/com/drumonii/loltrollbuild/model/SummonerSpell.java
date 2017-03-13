@@ -10,7 +10,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.SortedSet;
 
 /**
@@ -43,7 +43,7 @@ public class SummonerSpell implements Serializable {
 	@Column(name = "LAST_MODIFIED_DATE", nullable = false)
 	@LastModifiedDate
 	@JsonIgnore
-	@Getter @Setter private Date lastModifiedDate;
+	@Getter @Setter private LocalDateTime lastModifiedDate;
 
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "summonerSpell")
 	@JsonManagedReference
