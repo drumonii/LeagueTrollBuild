@@ -22,10 +22,10 @@ import org.springframework.context.annotation.Configuration;
 public class VersionsRetrievalJobConfig {
 
 	@Autowired
-	public JobBuilderFactory jobBuilderFactory;
+	private JobBuilderFactory jobBuilderFactory;
 
 	@Autowired
-	public StepBuilderFactory stepBuilderFactory;
+	private StepBuilderFactory stepBuilderFactory;
 
 	@Autowired
 	private VersionsRepository versionsRepository;

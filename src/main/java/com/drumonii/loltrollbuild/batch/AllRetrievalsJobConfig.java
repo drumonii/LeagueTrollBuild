@@ -18,10 +18,10 @@ import org.springframework.context.annotation.Configuration;
 public class AllRetrievalsJobConfig {
 
 	@Autowired
-	public JobBuilderFactory jobBuilderFactory;
+	private JobBuilderFactory jobBuilderFactory;
 
 	@Autowired
-	public StepBuilderFactory stepBuilderFactory;
+	private StepBuilderFactory stepBuilderFactory;
 
 	@Autowired
 	private VersionsRetrieval versionsRetrieval;
