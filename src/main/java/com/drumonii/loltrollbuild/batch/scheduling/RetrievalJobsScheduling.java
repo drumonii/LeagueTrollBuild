@@ -11,14 +11,16 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
-
 /**
  * Simple scheduling for retrievals {@link Job}s.
  */
 @Component
 @Slf4j
 public class RetrievalJobsScheduling {
+
+	public static final String LATEST_PATCH_KEY = "latestRiotPatch";
+
+	static final String CRON_SCHEDULE = "0 0 4 * * ?";
 
 	@Autowired
 	private VersionsRetrieval versionsRetrieval;
@@ -34,11 +36,11 @@ public class RetrievalJobsScheduling {
 	 * Runs the allRetrievalsJob {@link Job} every day of every month at 4 AM. Only if there's a new patch will the
 	 * job actually run.
 	 */
-	@Scheduled(cron = "0 0 4 * * ?")
+	@Scheduled(cron = CRON_SCHEDULE)
 	public void runAllRetrievalsJob() {
 		try {
 			jobLauncher.run(allRetrievalsJob, new JobParametersBuilder()
-					.addString("latestRiotPatch",
+					.addString(LATEST_PATCH_KEY,
 							versionsRetrieval.latestVersion(versionsRetrieval.versionsFromResponse()).getPatch())
 					.toJobParameters());
 		} catch (JobInstanceAlreadyCompleteException e) {

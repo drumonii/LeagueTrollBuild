@@ -9,13 +9,14 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 
+import static com.drumonii.loltrollbuild.batch.scheduling.RetrievalJobsScheduling.CRON_SCHEDULE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class RetrievalJobsSchedulingTest extends BaseSpringTestRunner {
 
 	@Test
 	public void allRetrievalsCronExpression() throws Exception {
-		CronTrigger cronTrigger = new CronTrigger("0 0 4 * * ?");
+		CronTrigger cronTrigger = new CronTrigger(CRON_SCHEDULE);
 		Date triggerDate = Date.from(LocalDateTime.now().withHour(4).withMinute(0).withSecond(0).withNano(0)
 				.atZone(ZoneId.systemDefault()).toInstant());
 		LocalDateTime nextExecutionTime = LocalDateTime.ofInstant(cronTrigger.nextExecutionTime(new
