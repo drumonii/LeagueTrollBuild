@@ -21,29 +21,6 @@ public class ChampionsRepositoryTest extends BaseSpringTestRunner {
 	}
 
 	@Test
-	public void crudOperations() throws IOException {
-		Champion sejuani = championsResponse.getChampions().get("Sejuani");
-
-		// Create
-		assertThat(championsRepository.save(sejuani)).isNotNull();
-
-		// Select
-		Champion championFromDb = championsRepository.findOne(sejuani.getId());
-		assertThat(championFromDb).isNotNull();
-		assertThat(championFromDb).isEqualTo(sejuani);
-
-		// Update
-		championFromDb.setPartype("Mana");
-		championsRepository.save(championFromDb);
-		championFromDb = championsRepository.findOne(sejuani.getId());
-		assertThat(championFromDb.getPartype()).isEqualTo("Mana");
-
-		// Delete
-		championsRepository.delete(championFromDb.getId());
-		assertThat(championsRepository.findOne(sejuani.getId())).isNull();
-	}
-
-	@Test
 	public void findByName() throws IOException {
 		Champion velKoz = championsResponse.getChampions().get("Velkoz");
 		championsRepository.save(velKoz);

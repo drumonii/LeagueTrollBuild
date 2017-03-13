@@ -26,30 +26,6 @@ public class ItemsRepositoryTest extends BaseSpringTestRunner {
 	}
 
 	@Test
-	public void crudOperations() throws IOException {
-		Item witsEnd = itemsResponse.getItems().get("3091");
-
-		// Create
-		assertThat(itemsRepository.save(witsEnd)).isNotNull();
-
-		// Select
-		Item itemFromDb = itemsRepository.findOne(witsEnd.getId());
-		assertThat(itemFromDb).isNotNull();
-		assertThat(itemFromDb.getImage()).isNotNull();
-		assertThat(itemFromDb).isEqualTo(witsEnd);
-
-		// Update
-		itemFromDb.setConsumed(true);
-		itemsRepository.save(itemFromDb);
-		itemFromDb = itemsRepository.findOne(witsEnd.getId());
-		assertThat(itemFromDb.getConsumed()).isTrue();
-
-		// Delete
-		itemsRepository.delete(itemFromDb.getId());
-		assertThat(itemsRepository.findOne(witsEnd.getId())).isNull();
-	}
-
-	@Test
 	public void boots() throws IOException {
 		Item bootsOfSpeed = itemsResponse.getItems().get("1001");
 		itemsRepository.save(bootsOfSpeed);

@@ -8,9 +8,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
-import java.util.TreeSet;
 
 import static com.drumonii.loltrollbuild.model.SummonerSpell.GameMode.CLASSIC;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -23,30 +21,6 @@ public class SummonerSpellsRepositoryTest extends BaseSpringTestRunner {
 	@After
 	public void after() {
 		summonerSpellsRepository.deleteAll();
-	}
-
-	@Test
-	public void crudOperations() throws IOException {
-		SummonerSpell clarity = summonerSpellsResponse.getSummonerSpells().get("SummonerMana");
-
-		// Create
-		assertThat(summonerSpellsRepository.save(clarity)).isNotNull();
-
-		// Select
-		SummonerSpell summonerSpellFromDb = summonerSpellsRepository.findOne(clarity.getId());
-		assertThat(summonerSpellFromDb).isNotNull();
-		assertThat(summonerSpellFromDb.getImage()).isNotNull();
-		assertThat(summonerSpellFromDb).isEqualTo(clarity);
-
-		// Update
-		summonerSpellFromDb.setModes(new TreeSet<>(Arrays.asList(CLASSIC)));
-		summonerSpellsRepository.save(summonerSpellFromDb);
-		summonerSpellFromDb = summonerSpellsRepository.findOne(clarity.getId());
-		assertThat(summonerSpellFromDb.getModes()).isEqualTo(new TreeSet<>(Arrays.asList(CLASSIC)));
-
-		// Delete
-		summonerSpellsRepository.delete(summonerSpellFromDb.getId());
-		assertThat(summonerSpellsRepository.findOne(clarity.getId())).isNull();
 	}
 
 	@Test
