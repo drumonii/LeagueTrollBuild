@@ -17,7 +17,7 @@ import org.springframework.data.rest.core.annotation.RestResource;
 import java.util.List;
 
 /**
- * Paging, sorting, and CRUD operations repository to the SUMMONER_SPELL table.
+ * JPA repository to the SUMMONER_SPELL table.
  */
 @RepositoryRestResource(path = "summoner-spells")
 @CacheConfig(cacheNames = "summonerSpells")

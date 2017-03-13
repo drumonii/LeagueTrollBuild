@@ -12,7 +12,7 @@ import org.springframework.data.rest.core.annotation.RestResource;
 import java.util.List;
 
 /**
- * CRUD operations repository to the VERSION table.
+ * JPA repository to the VERSION table.
  */
 @CacheConfig(cacheNames = "versions")
 public interface VersionsRepository extends JpaRepository<Version, String> {

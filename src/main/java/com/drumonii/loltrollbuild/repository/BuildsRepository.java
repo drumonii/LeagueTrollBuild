@@ -12,7 +12,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 /**
- * Paging, sorting, and CRUD operations repository to the CHAMPION table.
+ * JPA repository to the CHAMPION table.
  */
 @CacheConfig(cacheNames = "builds")
 public interface BuildsRepository extends JpaRepository<Build, Integer> {

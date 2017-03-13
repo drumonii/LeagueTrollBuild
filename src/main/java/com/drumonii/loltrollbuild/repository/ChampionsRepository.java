@@ -16,7 +16,7 @@ import org.springframework.data.rest.core.annotation.RestResource;
 import java.util.List;
 
 /**
- * Paging, sorting, and CRUD operations repository to the CHAMPION table.
+ * JPA repository to the CHAMPION table.
  */
 @CacheConfig(cacheNames = "champions")
 public interface ChampionsRepository extends JpaRepository<Champion, Integer> {

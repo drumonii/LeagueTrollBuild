@@ -16,7 +16,7 @@ import org.springframework.data.rest.core.annotation.RestResource;
 import java.util.List;
 
 /**
- * Paging, sorting, and CRUD operations repository to the ITEM table.
+ * JPA repository to the ITEM table.
  */
 @CacheConfig(cacheNames = "items")
 public interface ItemsRepository extends JpaRepository<Item, Integer> {

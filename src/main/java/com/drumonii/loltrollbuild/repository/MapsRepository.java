@@ -13,7 +13,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import java.util.List;
 
 /**
- * Paging, sorting, and CRUD operations repository to the MAP table.
+ * JPA repository to the MAP table.
  */
 @RepositoryRestResource(path = "maps", collectionResourceRel = "maps")
 @CacheConfig(cacheNames = "maps")
