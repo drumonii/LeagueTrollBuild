@@ -48,7 +48,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
  * main application (potentially) already running on port 8080.
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = RANDOM_PORT, properties = { "riot.api.key=API_KEY" })
+@SpringBootTest(webEnvironment = RANDOM_PORT, properties = { "riot.api.key=API_KEY", "spring.cache.type=simple" })
 @ActiveProfiles(TESTING)
 public abstract class BaseSpringTestRunner {
 
@@ -59,7 +59,7 @@ public abstract class BaseSpringTestRunner {
 	protected ObjectMapper objectMapper;
 
 	@Autowired
-	protected JobLauncher jobLauncher;
+	private JobLauncher jobLauncher;
 
 	@Autowired
 	private JobRepository jobRepository;
