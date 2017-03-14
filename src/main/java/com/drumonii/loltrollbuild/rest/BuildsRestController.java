@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.data.web.PagedResourcesAssembler;
@@ -50,8 +50,7 @@ public class BuildsRestController {
 	 */
 	@GetMapping
 	public PagedResources<Resource<Build>> getBuilds(
-			@PageableDefault(size = 20, sort = "id", direction = Sort.Direction.ASC) Pageable pageable,
-			Build build) {
+			@PageableDefault(size = 20, sort = "id", direction = Direction.ASC) Pageable pageable, Build build) {
 		ExampleMatcher exampleMatcher = ExampleMatcher.matching()
 				.withIgnorePaths("id")
 				.withIgnoreNullValues();
