@@ -97,7 +97,7 @@ public class BuildsControllerTest extends BaseSpringTestRunner {
 		// With missing build attributes
 		mockMvc.perform(get("/builds/{id}", build.getId()))
 				.andExpect(status().isOk())
-				.andExpect(model().attribute("latestVersion", is(versionsRepository.latestVersion())))
+				.andExpect(model().attributeExists("latestSavedPatch"))
 				.andExpect(view().name("builds/invalidAttributes"));
 
 		build.setChampion(championsRepository.save(championsResponse.getChampions().get("Teemo")));

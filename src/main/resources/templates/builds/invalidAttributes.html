@@ -17,7 +17,7 @@
                     </div>
                 </h2>
                 <div class="ui divider"></div>
-                <h4 th:text="#{builds.invalidAttributes.msg(${latestVersion.patch})}">This troll build...</h4>
+                <h4 th:text="#{builds.invalidAttributes.msg(${latestSavedPatch})}">This troll build...</h4>
                 <a class="ui primary button" th:href="@{/}">
                     <i class="home icon"></i><span th:text="#{error.return}">Return to home</span>
                 </a>
