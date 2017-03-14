@@ -6,6 +6,7 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -88,7 +89,7 @@ public class GameMapUtil {
 				.map(map -> { map.setMapName(GameMapUtil.getActualMapName(map.getMapName())); return map; })
 				.filter(map -> map.getMapId() == TWISTED_TREELINE_ID ||
 						map.getMapId() == SUMMONERS_RIFT_NEW_ID || map.getMapId() == HOWLING_ABYSS_ID)
-				.sorted((map1, map2) -> map1.getMapName().compareTo(map2.getMapName()))
+				.sorted(Comparator.comparing(GameMap::getMapName))
 				.collect(Collectors.toList());
 	}
 
