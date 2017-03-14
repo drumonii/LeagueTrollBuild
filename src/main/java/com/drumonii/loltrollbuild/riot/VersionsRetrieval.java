@@ -64,7 +64,7 @@ public class VersionsRetrieval {
 	 */
 	@GetMapping(value = "/latest")
 	public Version latestVersion(@ModelAttribute List<Version> versions) {
-		if (versions.isEmpty()) {
+		if (versions == null || versions.isEmpty()) {
 			return new Version("0", 0, 0, 0);
 		}
 		return versions.get(0);
@@ -80,7 +80,7 @@ public class VersionsRetrieval {
 	 */
 	@PostMapping(value = "/latest", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public Version saveLatestVersion(@ModelAttribute List<Version> versions) {
-		Version latestPatchVersion = versions.stream().findFirst().orElse(new Version("0.0.0"));
+		Version latestPatchVersion = versions.stream().findFirst().orElse(new Version("0", 0, 0, 0));
 		if (!latestPatchVersion.equals(versionsRepository.latestVersion())) {
 			return versionsRepository.save(latestPatchVersion);
 		}
