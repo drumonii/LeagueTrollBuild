@@ -12,6 +12,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -40,8 +41,8 @@ public class VersionsRetrievalItemReader extends AbstractItemStreamItemReader<Ve
 
 	@Override
 	public void open(ExecutionContext executionContext) throws ItemStreamException {
-		versions = restTemplate.exchange(versionsUri.toString(), HttpMethod.GET, null,
-				new ParameterizedTypeReference<List<Version>>() {}).getBody();
+		versions = new ArrayList<>(restTemplate.exchange(versionsUri.toString(), HttpMethod.GET, null,
+				new ParameterizedTypeReference<List<Version>>() {}).getBody());
 		Collections.sort(versions);
 	}
 
