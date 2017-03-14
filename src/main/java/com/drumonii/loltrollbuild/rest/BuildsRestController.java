@@ -3,6 +3,7 @@ package com.drumonii.loltrollbuild.rest;
 import com.drumonii.loltrollbuild.model.Build;
 import com.drumonii.loltrollbuild.repository.BuildsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Pageable;
@@ -34,6 +35,7 @@ public class BuildsRestController {
 	private PagedResourcesAssembler<Build> pagedAssembler;
 
 	@Autowired
+	@Qualifier("mvcValidator")
 	private Validator validator;
 
 	@InitBinder
@@ -58,6 +60,12 @@ public class BuildsRestController {
 		return pagedAssembler.toResource(buildsRepository.findAll(example, pageable));
 	}
 
+	/**
+	 * Saves a {@link Build}.
+	 *
+	 * @param build the {@link Build} to save, if valid
+	 * @return the {@link Resource} of {@link Build}
+	 */
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	@ResponseBody
