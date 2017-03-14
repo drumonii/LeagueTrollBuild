@@ -57,6 +57,10 @@ public class SummonerSpell implements Serializable {
 	@JsonProperty("cooldown")
 	@Getter @Setter private SortedSet<Integer> cooldown;
 
+	@Column(name = "KEY", nullable = false)
+	@JsonProperty("key")
+	@Getter @Setter private String key;
+
 	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "SUMMONER_SPELL_MODE", joinColumns = @JoinColumn(name = "SUMMONER_SPELL_ID"))
 	@Enumerated(EnumType.STRING)

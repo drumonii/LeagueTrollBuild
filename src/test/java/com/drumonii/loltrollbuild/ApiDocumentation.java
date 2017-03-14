@@ -129,6 +129,8 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 								.description("The image of the Summoner Spell"),
 						fieldWithPath("cooldown")
 								.description("An array of cooldown values of the Summoner Spell"),
+						fieldWithPath("key")
+								.description("The key of the Summoner Spell"),
 						fieldWithPath("modes")
 								.description("An array of game modes eligible with the Summoner Spell"),
 						fieldWithPath("_links")
@@ -153,6 +155,8 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 								.description("The image of the Summoner Spell"),
 						fieldWithPath("_embedded.summonerSpells[*].cooldown")
 								.description("An array of cooldown values of the Summoner Spell"),
+						fieldWithPath("_embedded.summonerSpells[*].key")
+								.description("The key of the Summoner Spell"),
 						fieldWithPath("_embedded.summonerSpells[*].modes")
 								.description("An array of game modes eligible with the Summoner Spell"),
 						fieldWithPath("_links")

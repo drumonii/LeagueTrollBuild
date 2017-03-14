@@ -51,7 +51,7 @@ public class RiotApiRestConfig {
 				.scheme(staticData.getScheme())
 				.host(staticData.getBaseUrl())
 				.path(staticData.getSummonerSpells())
-				.queryParam("spellData", "cooldown,image,modes")
+				.queryParam("spellData", "cooldown,image,key,modes")
 				.queryParam(staticData.getParam(), api.getKey())
 				.buildAndExpand(staticData.getRegion());
 	}
@@ -63,7 +63,7 @@ public class RiotApiRestConfig {
 				.scheme(staticData.getScheme())
 				.host(staticData.getBaseUrl())
 				.path(staticData.getSummonerSpell())
-				.queryParam("spellData", "cooldown,image,modes")
+				.queryParam("spellData", "cooldown,image,key,modes")
 				.queryParam(staticData.getParam(), api.getKey());
 	}
 

@@ -53,7 +53,7 @@ public class RiotApiRestConfigTest extends BaseSpringTestRunner {
 		assertThat(summonerSpellsUri.getHost()).isEqualTo(host);
 		assertThat(summonerSpellsUri.getPath()).isEqualTo(staticData.getSummonerSpells());
 		assertThat(summonerSpellsUri.getQueryParams()).contains(entry("spellData",
-				Arrays.asList("cooldown,image,modes")));
+				Arrays.asList("cooldown,image,key,modes")));
 		assertThat(summonerSpellsUri.getQueryParams()).contains(entry("api_key", Arrays.asList(apiKey)));
 	}
 
@@ -70,7 +70,7 @@ public class RiotApiRestConfigTest extends BaseSpringTestRunner {
 		assertThat(uriComponents.getPath()).isEqualTo(staticData.getSummonerSpell().replace("{id}",
 				String.valueOf(id)));
 		assertThat(uriComponents.getQueryParams()).contains(entry("spellData",
-				Arrays.asList("cooldown,image,modes")));
+				Arrays.asList("cooldown,image,key,modes")));
 		assertThat(uriComponents.getQueryParams()).contains(entry("api_key", Arrays.asList(apiKey)));
 	}
 
