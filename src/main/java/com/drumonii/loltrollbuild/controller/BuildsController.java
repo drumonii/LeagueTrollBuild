@@ -34,9 +34,6 @@ public class BuildsController {
 	@Autowired
 	private MapsRepository mapsRepository;
 
-	@Autowired
-	private VersionsRepository versionsRepository;
-
 	@GetMapping
 	public String builds() {
 		return "redirect:/builds/" + RandomUtils.nextInt(1, (int) buildsRepository.count() + 1);
@@ -64,7 +61,6 @@ public class BuildsController {
 		BindingResult result = new BeanPropertyBindingResult(build, "build");
 		build.validate(build, result);
 		if (result.hasErrors()) {
-			model.addAttribute("latestVersion", versionsRepository.latestVersion());
 			return "builds/invalidAttributes";
 		}
 
