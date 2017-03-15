@@ -22,7 +22,6 @@
         </div>
     </div>
     <script th:inline="javascript">
-        /*<![CDATA[*/
         $(function() {
             $.get(/*[[@{/admin/actuator/metrics}]]*/ '/admin/actuator/metrics', function(data) {
                 var uptime = data.uptime + '';
@@ -31,7 +30,6 @@
                 $('#instance-uptime').text(instanceUptime.substring(0, instanceUptime.length - 3));
             });
         });
-        /*]]>*/
     </script>
 </div>
 </body>

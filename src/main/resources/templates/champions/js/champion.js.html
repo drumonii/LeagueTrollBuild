@@ -1,9 +1,4 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head></head>
-<body>
-<script th:inline="javascript" th:fragment="script">
-/*<![CDATA[*/
+<script th:inline="javascript" xmlns:th="http://www.thymeleaf.org">
 $(function() {
     $('#map').dropdown();
     $('.message').click(function() {
@@ -112,7 +107,4 @@ $(function() {
         event.preventDefault();
     });
 });
-/*]]>*/
 </script>
-</body>
-</html>

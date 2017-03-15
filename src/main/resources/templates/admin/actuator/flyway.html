@@ -25,7 +25,6 @@
         </table>
     </div>
     <script th:inline="javascript">
-    /*<![CDATA[*/
     $(function() {
         $.get(/*[[@{/admin/actuator/flyway}]]*/ '/admin/actuator/flyway', function(data) {
             $('#flyway').DataTable({
@@ -45,7 +44,6 @@
             });
         });
     });
-    /*]]>*/
     </script>
 </div>
 </body>

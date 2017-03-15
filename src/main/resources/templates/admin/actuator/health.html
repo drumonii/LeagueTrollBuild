@@ -34,7 +34,6 @@
         </div>
     </div>
     <script th:inline="javascript">
-        /*<![CDATA[*/
         $(function() {
             $.get(/*[[@{/admin/actuator/health}]]*/ '/admin/actuator/health', function(data) {
                 $('#database').text(data.db.database);
@@ -44,7 +43,6 @@
                 $('#disk-free').text([[#{admin.actuator.health.disk.free}]] + ' ' + data.diskSpace.free / 1073741824 + ' GB');
             });
         });
-        /*]]>*/
     </script>
 </div>
 </body>

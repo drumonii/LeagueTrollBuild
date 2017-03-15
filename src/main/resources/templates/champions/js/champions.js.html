@@ -1,9 +1,4 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head></head>
-<body>
-<script th:inline="javascript" th:fragment="script">
-/*<![CDATA[*/
+<script th:inline="javascript" xmlns:th="http://www.thymeleaf.org">
 $(function() {
     $('.cards .image').dimmer({
         on: 'hover'
@@ -23,7 +18,7 @@ $(function() {
                     filterResult = true;
                 } else {
                     filterResult = tagFilter ? $.inArray(tagFilter, $(this).find('.content').data('champion-tags')
-                    .replace('[', '').replace(']', '').split(', ')) > -1 : true;
+                            .replace('[', '').replace(']', '').split(', ')) > -1 : true;
                 }
                 return searchResult && filterResult;
             }
@@ -41,7 +36,4 @@ $(function() {
         isotope.isotope();
     });
 });
-/*]]>*/
 </script>
-</body>
-</html>

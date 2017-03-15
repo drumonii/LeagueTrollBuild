@@ -1,9 +1,4 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head></head>
-<body>
-<script th:inline="javascript" th:fragment="script">
-/*<![CDATA[*/
+<script th:inline="javascript" xmlns:th="http://www.thymeleaf.org">
 $(function() {
     $('#map').dropdown();
     $('#items .item, #summoner-spells .item, #trinket .item').popup();
@@ -12,7 +7,4 @@ $(function() {
         $('#trinket .image').addClass('disabled');
     }
 });
-/*]]>*/
 </script>
-</body>
-</html>
