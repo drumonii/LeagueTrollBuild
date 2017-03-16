@@ -69,7 +69,8 @@ spring:
         show_sql: false
         format_sql: false
         generate_statistics: false
-        hbm2ddl.auto: none
+        id.new_generator_mappings: true
+        hbm2ddl.auto:
 
 ---
 
@@ -89,7 +90,8 @@ spring:
         show_sql: false
         format_sql: false
         generate_statistics: false
-        hbm2ddl.auto: none
+        id.new_generator_mappings: true
+        hbm2ddl.auto:
   h2.console.enabled: false
 
 ---
@@ -110,7 +112,8 @@ spring:
         show_sql: true
         format_sql: false
         generate_statistics: false
-        hbm2ddl.auto: none
+        id.new_generator_mappings: true
+        hbm2ddl.auto:
   h2.console.enabled: false
 
 ---
@@ -125,4 +128,5 @@ spring:
         show_sql: true
         format_sql: false
         generate_statistics: false
-        hbm2ddl.auto: none
+        id.new_generator_mappings: true
+        hbm2ddl.auto:
