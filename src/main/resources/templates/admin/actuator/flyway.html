@@ -25,25 +25,38 @@
         </table>
     </div>
     <script th:inline="javascript">
-    $(function() {
-        $.get(/*[[@{/admin/actuator/flyway}]]*/ '/admin/actuator/flyway', function(data) {
-            $('#flyway').DataTable({
-                pageLength: 25,
-                order: [ [0, 'desc'] ],
-                data: data,
-                columns: [
-                    { data: 'version' },
-                    { data: 'description' },
-                    { data: 'state' },
-                    { data: null,
-                        render: function(data, type, full, meta) {
-                            return data.executionTime + ' ms';
+        $(function() {
+            $.get(/*[[@{/admin/actuator/flyway}]]*/ '/admin/actuator/flyway', function(data) {
+                $('#flyway').DataTable({
+                    pageLength: 25,
+                    order: [ [0, 'desc'] ],
+                    data: data[0].migrations,
+                    columns: [
+                        { data: 'version' },
+                        { data: 'description' },
+                        { data: 'state' },
+                        { data: null,
+                            render: function(data, type, full, meta) {
+                                return data.executionTime + ' ms';
+                            }
+                        }
+                    ],
+                    language: {
+                        emptyTable: /*[[#{dataTables.emptyTable(#{admin.champions})}]]*/ 'dataTables.emptyTable',
+                        info: /*[[#{dataTables.info}]]*/ 'dataTables.info',
+                        infoEmpty: /*[[#{dataTables.infoEmpty}]]*/ 'dataTables.infoEmpty',
+                        infoFiltered: /*[[#{dataTables.infoFiltered}]]*/ 'dataTables.infoFiltered',
+                        processing: /*[[#{dataTables.processing}]]*/ 'dataTables.processing',
+                        search: /*[[#{dataTables.search}]]*/ 'dataTables.search',
+                        zeroRecords: /*[[#{dataTables.zeroRecords(#{admin.champions})}]]*/ 'dataTables.zeroRecords',
+                        paginate: {
+                            next: /*[[#{dataTables.paginate.next}]]*/ 'dataTables.paginate.next',
+                            previous: /*[[#{dataTables.paginate.previous}]]*/ 'dataTables.paginate.previous'
                         }
                     }
-                ]
+                });
             });
         });
-    });
     </script>
 </div>
 </body>
