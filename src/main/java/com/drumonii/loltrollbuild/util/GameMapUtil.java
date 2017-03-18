@@ -20,62 +20,10 @@ import static com.drumonii.loltrollbuild.model.SummonerSpell.GameMode.CLASSIC;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class GameMapUtil {
 
-	public static final int SUMMONERS_RIFT_ID = 1;
 	public static final int CRYSTAL_SCAR_ID = 8;
 	public static final int TWISTED_TREELINE_ID = 10;
-	public static final int SUMMONERS_RIFT_NEW_ID = 11;
+	public static final int SUMMONERS_RIFT_ID = 11;
 	public static final int HOWLING_ABYSS_ID = 12;
-
-	private static final String CRYSTAL_SCAR = "Crystal Scar";
-	private static final String HOWLING_ABYSS = "Howling Abyss";
-	private static final String SUMMONERS_RIFT = "Summoner's Rift";
-	private static final String TWISTED_TREELINE = "Twisted Treeline";
-
-	/**
-	 * Gets the {@link GameMap}'s actual map name.
-	 *
-	 * @param mapName the map name from Riot to infer
-	 * @return the actual formatted map name
-	 */
-	public static String getActualMapName(String mapName) {
-		switch (mapName) {
-			case "SummonersRift":
-				return SUMMONERS_RIFT;
-			case "CrystalScar":
-				return CRYSTAL_SCAR;
-			case "NewTwistedTreeline":
-				return TWISTED_TREELINE;
-			case "SummonersRiftNew":
-				return SUMMONERS_RIFT;
-			case "ProvingGroundsNew":
-				return HOWLING_ABYSS;
-			default:
-				return mapName; // shouldn't happen
-		}
-	}
-
-	/**
-	 * Gets the {@link GameMap}'s actual map name.
-	 *
-	 * @param mapId the map ID from Riot to infer
-	 * @return the actual formatted map name
-	 */
-	public static String getActualMapName(Integer mapId) {
-		switch (mapId) {
-			case SUMMONERS_RIFT_ID:
-				return SUMMONERS_RIFT;
-			case CRYSTAL_SCAR_ID:
-				return CRYSTAL_SCAR;
-			case TWISTED_TREELINE_ID:
-				return TWISTED_TREELINE;
-			case SUMMONERS_RIFT_NEW_ID:
-				return SUMMONERS_RIFT;
-			case HOWLING_ABYSS_ID:
-				return HOWLING_ABYSS;
-			default:
-				return mapId + ""; // shouldn't happen
-			}
-	}
 
 	/**
 	 * Gets {@link List} of all {@link GameMap}s that are eligible for the troll build. Map names are transformed into a
@@ -86,9 +34,8 @@ public class GameMapUtil {
 	 */
 	public static List<GameMap> eligibleMaps(List<GameMap> maps) {
 		return maps.stream()
-				.map(map -> { map.setMapName(GameMapUtil.getActualMapName(map.getMapName())); return map; })
 				.filter(map -> map.getMapId() == TWISTED_TREELINE_ID ||
-						map.getMapId() == SUMMONERS_RIFT_NEW_ID || map.getMapId() == HOWLING_ABYSS_ID)
+						map.getMapId() == SUMMONERS_RIFT_ID || map.getMapId() == HOWLING_ABYSS_ID)
 				.sorted(Comparator.comparing(GameMap::getMapName))
 				.collect(Collectors.toList());
 	}
@@ -103,27 +50,10 @@ public class GameMapUtil {
 	 */
 	public static GameMode getModeFromMap(GameMap map) {
 		GameMode mode = CLASSIC;
-		if (map.getMapName().equals("ProvingGroundsNew")) {
+		if (map.getMapName().contains("Howling")) {
 			mode = ARAM;
 		}
 		return mode;
-	}
-
-	/**
-	 * Gets a {@link List} of String actual map names that are available, or listed as {@code true} based on its
-	 * particular map ID.
-	 *
-	 * @param maps the {@link Map} of game maps
-	 * @return the {@link List} of available game map (actual) names
-	 */
-	public static List<String> getAvailableMaps(Map<Integer, Boolean> maps) {
-		List<String> availableMaps = new ArrayList<>();
-		maps.forEach((k, v) -> {
-			if (v) {
-				availableMaps.add(getActualMapName(k));
-			}
-		});
-		return availableMaps;
 	}
 
 }

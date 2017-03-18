@@ -74,7 +74,7 @@ public abstract class BaseSpringTestRunner {
 
 	protected static final String CRYSTAL_SCAR = String.valueOf(GameMapUtil.CRYSTAL_SCAR_ID);
 	protected static final String TWISTED_TREELINE = String.valueOf(GameMapUtil.TWISTED_TREELINE_ID);
-	protected static final String SUMMONERS_RIFT = String.valueOf(GameMapUtil.SUMMONERS_RIFT_NEW_ID);
+	protected static final String SUMMONERS_RIFT = String.valueOf(GameMapUtil.SUMMONERS_RIFT_ID);
 	protected static final String HOWLING_ABYSS = String.valueOf(GameMapUtil.HOWLING_ABYSS_ID);
 
 	protected ChampionsResponse championsResponse;

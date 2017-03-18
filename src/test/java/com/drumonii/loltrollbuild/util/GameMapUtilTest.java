@@ -7,17 +7,13 @@ import org.junit.After;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import static com.drumonii.loltrollbuild.model.SummonerSpell.GameMode.ARAM;
 import static com.drumonii.loltrollbuild.model.SummonerSpell.GameMode.CLASSIC;
-import static com.drumonii.loltrollbuild.util.GameMapUtil.*;
+import static com.drumonii.loltrollbuild.util.GameMapUtil.eligibleMaps;
+import static com.drumonii.loltrollbuild.util.GameMapUtil.getModeFromMap;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class GameMapUtilTest extends BaseSpringTestRunner {
-
-	private static final String SUMMONERS_RIFT_OLD = String.valueOf(GameMapUtil.SUMMONERS_RIFT_ID);
 
 	@Autowired
 	private MapsRepository mapsRepository;
@@ -28,38 +24,9 @@ public class GameMapUtilTest extends BaseSpringTestRunner {
 	}
 
 	@Test
-	public void getsActualMapNameFromGameMap() throws Exception {
-		GameMap summonersRiftNewFromRiot = mapsResponse.getMaps().get(SUMMONERS_RIFT);
-		assertThat(getActualMapName(Integer.valueOf(SUMMONERS_RIFT))).isEqualTo("Summoner's Rift");
-		assertThat(getActualMapName(summonersRiftNewFromRiot.getMapName())).isEqualTo("Summoner's Rift");
-
-		GameMap crystalScar = mapsResponse.getMaps().get(CRYSTAL_SCAR);
-		assertThat(getActualMapName(Integer.valueOf(CRYSTAL_SCAR))).isEqualTo("Crystal Scar");
-		assertThat(getActualMapName(crystalScar.getMapName())).isEqualTo("Crystal Scar");
-
-		GameMap provingGroundsFromRiot = mapsResponse.getMaps().get(HOWLING_ABYSS);
-		assertThat(getActualMapName(Integer.valueOf(HOWLING_ABYSS))).isEqualTo("Howling Abyss");
-		assertThat(getActualMapName(provingGroundsFromRiot.getMapName())).isEqualTo("Howling Abyss");
-
-		GameMap summonersRiftOldFromRiot = mapsResponse.getMaps().get(SUMMONERS_RIFT_OLD);
-		assertThat(getActualMapName(Integer.valueOf(SUMMONERS_RIFT_OLD))).isEqualTo("Summoner's Rift");
-		assertThat(getActualMapName(summonersRiftOldFromRiot.getMapName())).isEqualTo("Summoner's Rift");
-
-		GameMap twistedTreeline = mapsResponse.getMaps().get(TWISTED_TREELINE);
-		assertThat(getActualMapName(Integer.valueOf(TWISTED_TREELINE))).isEqualTo("Twisted Treeline");
-		assertThat(getActualMapName(twistedTreeline.getMapName())).isEqualTo("Twisted Treeline");
-
-		assertThat(getActualMapName(-1)).isEqualTo("-1");
-		assertThat(getActualMapName("Negative One")).isEqualTo("Negative One");
-	}
-
-	@Test
 	public void getsEligibleMaps() throws Exception {
 		GameMap crystalScar = mapsResponse.getMaps().get(CRYSTAL_SCAR);
 		mapsRepository.save(crystalScar);
-
-		GameMap summonersRift = mapsResponse.getMaps().get(SUMMONERS_RIFT_OLD);
-		mapsRepository.save(summonersRift);
 
 		GameMap summonersRiftNew = mapsResponse.getMaps().get(SUMMONERS_RIFT);
 		mapsRepository.save(summonersRiftNew);
@@ -90,16 +57,6 @@ public class GameMapUtilTest extends BaseSpringTestRunner {
 		mapsRepository.save(provingGrounds);
 
 		assertThat(getModeFromMap(mapsRepository.findOne(provingGrounds.getMapId()))).isEqualTo(ARAM);
-	}
-
-	@Test
-	public void getsAvailableMaps() {
-		Map<Integer, Boolean> maps = new HashMap<Integer, Boolean>() {{
-			put(GameMapUtil.SUMMONERS_RIFT_NEW_ID, false); // Summoner's Rift
-			put(GameMapUtil.TWISTED_TREELINE_ID, true); // Twisted Treeline
-		}};
-
-		assertThat(getAvailableMaps(maps)).containsExactly("Twisted Treeline");
 	}
 
 }
