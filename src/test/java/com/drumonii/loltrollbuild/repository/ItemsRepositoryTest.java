@@ -5,9 +5,8 @@ import com.drumonii.loltrollbuild.model.Item;
 import com.drumonii.loltrollbuild.model.ItemGold;
 import org.assertj.core.api.Condition;
 import org.assertj.core.api.iterable.Extractor;
-import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 import java.util.List;
@@ -17,12 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ItemsRepositoryTest extends BaseSpringTestRunner {
 
-	@Autowired
-	private ItemsRepository itemsRepository;
 
-	@After
-	public void after() {
-		itemsRepository.deleteAll();
 	}
 
 	@Test

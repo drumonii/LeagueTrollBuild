@@ -2,11 +2,8 @@ package com.drumonii.loltrollbuild.model;
 
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.model.image.GameMapImage;
-import com.drumonii.loltrollbuild.repository.MapsRepository;
 import org.apache.commons.collections4.ListUtils;
-import org.junit.After;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -15,14 +12,6 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class GameMapTest extends BaseSpringTestRunner {
-
-	@Autowired
-	private MapsRepository mapsRepository;
-
-	@After
-	public void after() {
-		mapsRepository.deleteAll();
-	}
 
 	@Test
 	public void equals() throws IOException {

@@ -1,11 +1,8 @@
 package com.drumonii.loltrollbuild.rest;
 
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
-import com.drumonii.loltrollbuild.repository.VersionsRepository;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
 import static org.hamcrest.Matchers.hasSize;
@@ -21,19 +18,11 @@ public class VersionsRestControllerTest extends BaseSpringTestRunner {
 	@Value("${spring.data.rest.base-path}")
 	private String apiPath;
 
-	@Autowired
-	private VersionsRepository versionsRepository;
-
 	@Before
 	public void before() {
 		super.before();
 
 		versionsRepository.save(versions);
-	}
-
-	@After
-	public void after() {
-		versionsRepository.deleteAll();
 	}
 
 	@Test

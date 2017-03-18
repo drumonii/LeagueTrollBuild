@@ -2,11 +2,10 @@ package com.drumonii.loltrollbuild.riot;
 
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.model.SummonerSpell;
-import com.drumonii.loltrollbuild.repository.SummonerSpellsRepository;
+import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.riot.api.SummonerSpellsResponse;
 import com.drumonii.loltrollbuild.util.RandomizeUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,9 +53,6 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 	@Qualifier("versions")
 	private UriComponents versionsUri;
 
-	@Autowired
-	private SummonerSpellsRepository summonerSpellsRepository;
-
 	private MockRestServiceServer mockServer;
 
 	private SummonerSpellsResponse summonerSpellsResponseSlice;
@@ -103,9 +99,6 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 		}
 	}
 
-	@After
-	public void after() {
-		summonerSpellsRepository.deleteAll();
 	}
 
 	@Test

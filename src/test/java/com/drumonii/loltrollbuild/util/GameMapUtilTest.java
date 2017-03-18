@@ -2,10 +2,7 @@ package com.drumonii.loltrollbuild.util;
 
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.model.GameMap;
-import com.drumonii.loltrollbuild.repository.MapsRepository;
-import org.junit.After;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import static com.drumonii.loltrollbuild.model.SummonerSpell.GameMode.ARAM;
 import static com.drumonii.loltrollbuild.model.SummonerSpell.GameMode.CLASSIC;
@@ -14,14 +11,6 @@ import static com.drumonii.loltrollbuild.util.GameMapUtil.getModeFromMap;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class GameMapUtilTest extends BaseSpringTestRunner {
-
-	@Autowired
-	private MapsRepository mapsRepository;
-
-	@After
-	public void after() {
-		mapsRepository.deleteAll();
-	}
 
 	@Test
 	public void getsEligibleMaps() throws Exception {

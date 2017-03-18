@@ -2,12 +2,8 @@ package com.drumonii.loltrollbuild.rest;
 
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.model.Build;
-import com.drumonii.loltrollbuild.repository.BuildsRepository;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 
 import static org.hamcrest.Matchers.hasSize;
@@ -21,9 +17,6 @@ public class BuildsRestControllerTest extends BaseSpringTestRunner {
 
 	@Value("${spring.data.rest.base-path}")
 	private String apiPath;
-
-	@Autowired
-	private BuildsRepository buildsRepository;
 
 	@Before
 	public void before() {
@@ -42,11 +35,6 @@ public class BuildsRestControllerTest extends BaseSpringTestRunner {
 		build.setTrinketId(itemsResponse.getItems().get("3341").getId());
 		build.setMapId(mapsResponse.getMaps().get(SUMMONERS_RIFT).getMapId());
 		buildsRepository.save(build);
-	}
-
-	@After
-	public void after() {
-		buildsRepository.deleteAll();
 	}
 
 	@Test

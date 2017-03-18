@@ -2,13 +2,10 @@ package com.drumonii.loltrollbuild.rest;
 
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.model.GameMap;
-import com.drumonii.loltrollbuild.repository.MapsRepository;
 import com.drumonii.loltrollbuild.riot.api.MapsResponse;
 import com.drumonii.loltrollbuild.util.RandomizeUtil;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.util.stream.Collectors;
@@ -25,9 +22,6 @@ public class MapsRestControllerTest extends BaseSpringTestRunner {
 	@Value("${spring.data.rest.base-path}")
 	private String apiPath;
 
-	@Autowired
-	private MapsRepository mapsRepository;
-
 	private MapsResponse mapsResponseSlice;
 
 	@Before
@@ -41,11 +35,6 @@ public class MapsRestControllerTest extends BaseSpringTestRunner {
 				mapsResponse.getMaps().values(), DEFAULT_PAGE_SIZE).stream()
 				.collect(Collectors.toMap(map -> String.valueOf(map.getMapId()), map -> map)));
 		mapsRepository.save(mapsResponseSlice.getMaps().values());
-	}
-
-	@After
-	public void after() {
-		mapsRepository.deleteAll();
 	}
 
 	@Test

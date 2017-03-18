@@ -2,9 +2,6 @@ package com.drumonii.loltrollbuild.riot;
 
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.model.Version;
-import com.drumonii.loltrollbuild.repository.VersionsRepository;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,14 +30,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class VersionsRetrievalTest extends BaseSpringTestRunner {
 
 	@Autowired
-	private RestTemplate restTemplate;
-
 	@Autowired
 	@Qualifier("versions")
 	private UriComponents versionsUri;
-
-	@Autowired
-	private VersionsRepository versionsRepository;
 
 	private MockRestServiceServer mockServer;
 
@@ -65,9 +57,6 @@ public class VersionsRetrievalTest extends BaseSpringTestRunner {
 				.thenReturn(versions.toArray(new Version[versions.size()]));
 	}
 
-	@After
-	public void after() {
-		versionsRepository.deleteAll();
 	}
 
 	@Test

@@ -4,18 +4,10 @@ import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.model.Champion;
 import com.drumonii.loltrollbuild.model.GameMap;
 import com.drumonii.loltrollbuild.model.Item;
-import com.drumonii.loltrollbuild.model.SummonerSpell;
-import com.drumonii.loltrollbuild.repository.ChampionsRepository;
-import com.drumonii.loltrollbuild.repository.ItemsRepository;
-import com.drumonii.loltrollbuild.repository.MapsRepository;
-import com.drumonii.loltrollbuild.repository.SummonerSpellsRepository;
-import com.drumonii.loltrollbuild.repository.VersionsRepository;
 import com.drumonii.loltrollbuild.riot.api.ChampionsResponse;
 import com.drumonii.loltrollbuild.util.RandomizeUtil;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 
 import java.util.List;
@@ -29,35 +21,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class ChampionsControllerTest extends BaseSpringTestRunner {
 
-	@Autowired
-	private ChampionsRepository championsRepository;
-
-	@Autowired
-	private ItemsRepository itemsRepository;
-
-	@Autowired
-	private SummonerSpellsRepository summonerSpellsRepository;
-
-	@Autowired
-	private MapsRepository mapsRepository;
-
-	@Autowired
-	private VersionsRepository versionsRepository;
-
 	@Before
 	public void before() {
 		super.before();
 
 		versionsRepository.save(versions.get(0));
-	}
-
-	@After
-	public void after() {
-		itemsRepository.deleteAll();
-		summonerSpellsRepository.deleteAll();
-		championsRepository.deleteAll();
-		mapsRepository.deleteAll();
-		versionsRepository.deleteAll();
 	}
 
 	@Test

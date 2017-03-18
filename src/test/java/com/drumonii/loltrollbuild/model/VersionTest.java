@@ -1,10 +1,7 @@
 package com.drumonii.loltrollbuild.model;
 
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
-import com.drumonii.loltrollbuild.repository.VersionsRepository;
-import org.junit.After;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -12,14 +9,6 @@ import java.util.Collections;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class VersionTest extends BaseSpringTestRunner {
-
-	@Autowired
-	private VersionsRepository versionsRepository;
-
-	@After
-	public void after() {
-		versionsRepository.deleteAll();
-	}
 
 	@Test
 	public void equals() throws IOException {

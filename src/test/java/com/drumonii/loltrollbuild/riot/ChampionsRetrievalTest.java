@@ -2,11 +2,10 @@ package com.drumonii.loltrollbuild.riot;
 
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.model.Champion;
-import com.drumonii.loltrollbuild.repository.ChampionsRepository;
+import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.riot.api.ChampionsResponse;
 import com.drumonii.loltrollbuild.util.RandomizeUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,9 +55,6 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 	@Qualifier("versions")
 	private UriComponents versionsUri;
 
-	@Autowired
-	private ChampionsRepository championsRepository;
-
 	private MockRestServiceServer mockServer;
 
 	private ChampionsResponse championsResponseSlice;
@@ -105,9 +101,6 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 		}
 	}
 
-	@After
-	public void after() {
-		championsRepository.deleteAll();
 	}
 
 	@Test

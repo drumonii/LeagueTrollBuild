@@ -2,13 +2,10 @@ package com.drumonii.loltrollbuild.rest;
 
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.model.Item;
-import com.drumonii.loltrollbuild.repository.ItemsRepository;
 import com.drumonii.loltrollbuild.riot.api.ItemsResponse;
 import com.drumonii.loltrollbuild.util.RandomizeUtil;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.util.stream.Collectors;
@@ -24,9 +21,6 @@ public class ItemsRestControllerTest extends BaseSpringTestRunner {
 	@Value("${spring.data.rest.base-path}")
 	private String apiPath;
 
-	@Autowired
-	private ItemsRepository itemsRepository;
-
 	private ItemsResponse itemsResponseSlice;
 
 	@Before
@@ -36,11 +30,6 @@ public class ItemsRestControllerTest extends BaseSpringTestRunner {
 		itemsResponseSlice = new ItemsResponse();
 		itemsResponseSlice.setType(itemsResponse.getType());
 		itemsResponseSlice.setVersion(itemsResponse.getVersion());
-	}
-
-	@After
-	public void after() {
-		itemsRepository.deleteAll();
 	}
 
 	@Test

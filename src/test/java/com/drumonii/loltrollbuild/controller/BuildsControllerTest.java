@@ -2,51 +2,23 @@ package com.drumonii.loltrollbuild.controller;
 
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.model.Build;
-import com.drumonii.loltrollbuild.repository.*;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 public class BuildsControllerTest extends BaseSpringTestRunner {
-
-	@Autowired
-	private ChampionsRepository championsRepository;
-
-	@Autowired
-	private ItemsRepository itemsRepository;
-
-	@Autowired
-	private SummonerSpellsRepository summonerSpellsRepository;
-
-	@Autowired
-	private MapsRepository mapsRepository;
-
-	@Autowired
-	private BuildsRepository buildsRepository;
-
-	@Autowired
-	private VersionsRepository versionsRepository;
 
 	@Before
 	public void before() {
 		super.before();
 
 		versionsRepository.save(versions.get(0));
-	}
-
-	@After
-	public void after() {
-		championsRepository.deleteAll();
-		itemsRepository.deleteAll();
-		summonerSpellsRepository.deleteAll();
-		mapsRepository.deleteAll();
-		buildsRepository.deleteAll();
-		versionsRepository.deleteAll();
 	}
 
 	@Test

@@ -1,12 +1,9 @@
 package com.drumonii.loltrollbuild.model;
 
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
-import com.drumonii.loltrollbuild.repository.ItemsRepository;
 import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang3.RandomUtils;
-import org.junit.After;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -15,14 +12,6 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ItemTest extends BaseSpringTestRunner {
-
-	@Autowired
-	private ItemsRepository itemsRepository;
-
-	@After
-	public void after() {
-		itemsRepository.deleteAll();
-	}
 
 	@Test
 	public void equals() throws IOException {

@@ -1,22 +1,11 @@
 package com.drumonii.loltrollbuild.model;
 
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
-import com.drumonii.loltrollbuild.repository.BuildsRepository;
-import org.junit.After;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class BuildTest extends BaseSpringTestRunner {
-
-	@Autowired
-	private BuildsRepository buildsRepository;
-
-	@After
-	public void after() {
-		buildsRepository.deleteAll();
-	}
 
 	@Test
 	public void equals() {

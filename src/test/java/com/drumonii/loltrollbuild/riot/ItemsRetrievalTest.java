@@ -2,11 +2,10 @@ package com.drumonii.loltrollbuild.riot;
 
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.model.Item;
-import com.drumonii.loltrollbuild.repository.ItemsRepository;
+import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.riot.api.ItemsResponse;
 import com.drumonii.loltrollbuild.util.RandomizeUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,9 +53,6 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 	@Qualifier("versions")
 	private UriComponents versionsUri;
 
-	@Autowired
-	private ItemsRepository itemsRepository;
-
 	private MockRestServiceServer mockServer;
 
 	private ItemsResponse itemsResponseSlice;
@@ -103,9 +99,6 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 		}
 	}
 
-	@After
-	public void after() {
-		itemsRepository.deleteAll();
 	}
 
 	@Test

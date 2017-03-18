@@ -1,11 +1,8 @@
 package com.drumonii.loltrollbuild.model;
 
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
-import com.drumonii.loltrollbuild.repository.SummonerSpellsRepository;
 import org.apache.commons.collections4.ListUtils;
-import org.junit.After;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -17,14 +14,6 @@ import static com.drumonii.loltrollbuild.model.SummonerSpell.GameMode.CLASSIC;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class SummonerSpellTest extends BaseSpringTestRunner {
-
-	@Autowired
-	private SummonerSpellsRepository summonerSpellsRepository;
-
-	@After
-	public void after() {
-		summonerSpellsRepository.deleteAll();
-	}
 
 	@Test
 	public void equals() throws IOException {

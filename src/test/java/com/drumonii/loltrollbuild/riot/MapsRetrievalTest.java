@@ -2,12 +2,10 @@ package com.drumonii.loltrollbuild.riot;
 
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.model.GameMap;
-import com.drumonii.loltrollbuild.repository.MapsRepository;
-import com.drumonii.loltrollbuild.repository.VersionsRepository;
+import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.riot.api.MapsResponse;
 import com.drumonii.loltrollbuild.util.RandomizeUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,9 +34,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class MapsRetrievalTest extends BaseSpringTestRunner {
 
 	private static final int MAX_RESPONSE_SIZE = 10;
-
-	@Autowired
-	private RestTemplate restTemplate;
 
 	@Autowired
 	@Qualifier("maps")
@@ -89,9 +84,6 @@ public class MapsRetrievalTest extends BaseSpringTestRunner {
 		}
 	}
 
-	@After
-	public void after() {
-		mapsRepository.deleteAll();
 	}
 
 	@Test

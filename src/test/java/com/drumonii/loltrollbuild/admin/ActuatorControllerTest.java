@@ -1,31 +1,22 @@
 package com.drumonii.loltrollbuild.admin;
 
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
-import com.drumonii.loltrollbuild.repository.VersionsRepository;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 public class ActuatorControllerTest extends BaseSpringTestRunner {
-
-	@Autowired
-	private VersionsRepository versionsRepository;
 
 	@Before
 	public void before() {
 		super.before();
 
 		versionsRepository.save(versions.get(0));
-	}
-
-	@After
-	public void after() {
-		versionsRepository.deleteAll();
 	}
 
 	@Test

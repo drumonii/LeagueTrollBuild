@@ -3,9 +3,7 @@ package com.drumonii.loltrollbuild.repository;
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.model.SummonerSpell;
 import org.assertj.core.api.Condition;
-import org.junit.After;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 import java.util.List;
@@ -14,14 +12,6 @@ import static com.drumonii.loltrollbuild.model.SummonerSpell.GameMode.CLASSIC;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class SummonerSpellsRepositoryTest extends BaseSpringTestRunner {
-
-	@Autowired
-	private SummonerSpellsRepository summonerSpellsRepository;
-
-	@After
-	public void after() {
-		summonerSpellsRepository.deleteAll();
-	}
 
 	@Test
 	public void forTrollBuild() throws IOException {

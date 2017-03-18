@@ -2,13 +2,10 @@ package com.drumonii.loltrollbuild.rest;
 
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.model.Champion;
-import com.drumonii.loltrollbuild.repository.ChampionsRepository;
 import com.drumonii.loltrollbuild.riot.api.ChampionsResponse;
 import com.drumonii.loltrollbuild.util.RandomizeUtil;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.util.stream.Collectors;
@@ -25,9 +22,6 @@ public class ChampionsRestControllerTest extends BaseSpringTestRunner {
 	@Value("${spring.data.rest.base-path}")
 	private String apiPath;
 
-	@Autowired
-	private ChampionsRepository championsRepository;
-
 	private ChampionsResponse championsResponseSlice;
 
 	@Before
@@ -41,11 +35,6 @@ public class ChampionsRestControllerTest extends BaseSpringTestRunner {
 				championsResponse.getChampions().values(), DEFAULT_PAGE_SIZE).stream()
 				.collect(Collectors.toMap(champion -> String.valueOf(champion.getId()), champion -> champion)));
 		championsRepository.save(championsResponseSlice.getChampions().values());
-	}
-
-	@After
-	public void after() {
-		championsRepository.deleteAll();
 	}
 
 	@Test

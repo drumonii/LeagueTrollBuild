@@ -2,15 +2,9 @@ package com.drumonii.loltrollbuild.rest;
 
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.model.*;
-import com.drumonii.loltrollbuild.repository.ChampionsRepository;
-import com.drumonii.loltrollbuild.repository.ItemsRepository;
-import com.drumonii.loltrollbuild.repository.MapsRepository;
-import com.drumonii.loltrollbuild.repository.SummonerSpellsRepository;
 import com.drumonii.loltrollbuild.util.RandomizeUtil;
 import org.apache.commons.io.FilenameUtils;
-import org.junit.After;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.ZoneId;
 
@@ -21,26 +15,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class ImagesRestControllerTest extends BaseSpringTestRunner {
-
-	@Autowired
-	private SummonerSpellsRepository summonerSpellsRepository;
-
-	@Autowired
-	private ItemsRepository itemsRepository;
-
-	@Autowired
-	private ChampionsRepository championsRepository;
-
-	@Autowired
-	private MapsRepository mapsRepository;
-
-	@After
-	public void after() {
-		summonerSpellsRepository.deleteAll();
-		itemsRepository.deleteAll();
-		championsRepository.deleteAll();
-		mapsRepository.deleteAll();
-	}
 
 	@Test
 	public void summonerSpellImg() throws Exception {

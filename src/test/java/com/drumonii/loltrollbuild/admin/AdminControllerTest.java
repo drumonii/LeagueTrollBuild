@@ -1,8 +1,6 @@
 package com.drumonii.loltrollbuild.admin;
 
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
-import com.drumonii.loltrollbuild.repository.VersionsRepository;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,9 +45,6 @@ public class AdminControllerTest extends BaseSpringTestRunner {
 	@Qualifier("maps")
 	private UriComponents mapsUri;
 
-	@Autowired
-	private VersionsRepository versionsRepository;
-
 	private MockRestServiceServer mockServer;
 
 	@Before
@@ -57,11 +52,6 @@ public class AdminControllerTest extends BaseSpringTestRunner {
 		super.before();
 
 		mockServer = MockRestServiceServer.createServer(restTemplate);
-	}
-
-	@After
-	public void after() {
-		versionsRepository.deleteAll();
 	}
 
 	@Test

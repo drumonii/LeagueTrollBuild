@@ -2,13 +2,10 @@ package com.drumonii.loltrollbuild.rest;
 
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.model.SummonerSpell;
-import com.drumonii.loltrollbuild.repository.SummonerSpellsRepository;
 import com.drumonii.loltrollbuild.riot.api.SummonerSpellsResponse;
 import com.drumonii.loltrollbuild.util.RandomizeUtil;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.util.stream.Collectors;
@@ -26,9 +23,6 @@ public class SummonerSpellsRestControllerTest extends BaseSpringTestRunner {
 	@Value("${spring.data.rest.base-path}")
 	private String apiPath;
 
-	@Autowired
-	private SummonerSpellsRepository summonerSpellsRepository;
-
 	private SummonerSpellsResponse summonerSpellsResponseSlice;
 
 	@Before
@@ -42,11 +36,6 @@ public class SummonerSpellsRestControllerTest extends BaseSpringTestRunner {
 				summonerSpellsResponse.getSummonerSpells().values(), DEFAULT_PAGE_SIZE).stream()
 				.collect(Collectors.toMap(spell -> String.valueOf(spell.getId()), spell -> spell)));
 		summonerSpellsRepository.save(summonerSpellsResponseSlice.getSummonerSpells().values());
-	}
-
-	@After
-	public void after() {
-		summonerSpellsRepository.deleteAll();
 	}
 
 	@Test

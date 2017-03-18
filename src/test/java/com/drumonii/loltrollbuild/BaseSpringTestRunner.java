@@ -1,6 +1,8 @@
 package com.drumonii.loltrollbuild;
 
 import com.drumonii.loltrollbuild.model.Version;
+import com.drumonii.loltrollbuild.repository.*;
+import com.drumonii.loltrollbuild.riot.api.*;
 import com.drumonii.loltrollbuild.riot.api.ChampionsResponse;
 import com.drumonii.loltrollbuild.riot.api.ItemsResponse;
 import com.drumonii.loltrollbuild.riot.api.MapsResponse;
@@ -9,6 +11,7 @@ import com.drumonii.loltrollbuild.util.GameMapUtil;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang3.RandomUtils;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.runner.RunWith;
@@ -63,6 +66,24 @@ public abstract class BaseSpringTestRunner {
 
 	@Autowired
 	private JobRepository jobRepository;
+
+	@Autowired
+	protected ChampionsRepository championsRepository;
+
+	@Autowired
+	protected ItemsRepository itemsRepository;
+
+	@Autowired
+	protected MapsRepository mapsRepository;
+
+	@Autowired
+	protected SummonerSpellsRepository summonerSpellsRepository;
+
+	@Autowired
+	protected VersionsRepository versionsRepository;
+
+	@Autowired
+	protected BuildsRepository buildsRepository;
 
 	protected MockMvc mockMvc;
 
@@ -141,6 +162,16 @@ public abstract class BaseSpringTestRunner {
 		jobLauncherTestUtils = new JobLauncherTestUtils();
 		jobLauncherTestUtils.setJobLauncher(jobLauncher);
 		jobLauncherTestUtils.setJobRepository(jobRepository);
+	}
+
+	@After
+	public void after() {
+		championsRepository.deleteAll();
+		itemsRepository.deleteAll();
+		mapsRepository.deleteAll();
+		summonerSpellsRepository.deleteAll();
+		versionsRepository.deleteAll();
+		buildsRepository.deleteAll();
 	}
 
 	protected static RequestPostProcessor adminUser() {

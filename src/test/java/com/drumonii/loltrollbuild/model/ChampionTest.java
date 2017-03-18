@@ -2,11 +2,8 @@ package com.drumonii.loltrollbuild.model;
 
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.model.image.ChampionImage;
-import com.drumonii.loltrollbuild.repository.ChampionsRepository;
 import org.apache.commons.collections4.ListUtils;
-import org.junit.After;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -16,14 +13,6 @@ import java.util.TreeSet;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ChampionTest extends BaseSpringTestRunner {
-
-	@Autowired
-	private ChampionsRepository championsRepository;
-
-	@After
-	public void after() {
-		championsRepository.deleteAll();
-	}
 
 	@Test
 	public void isViktor() throws IOException {

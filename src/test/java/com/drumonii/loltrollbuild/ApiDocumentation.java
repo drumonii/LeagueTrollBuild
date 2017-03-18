@@ -1,10 +1,7 @@
 package com.drumonii.loltrollbuild;
 
 import com.drumonii.loltrollbuild.model.*;
-import com.drumonii.loltrollbuild.repository.*;
-import org.junit.After;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
 import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.linkWithRel;
@@ -20,33 +17,6 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 	@Value("${spring.data.rest.base-path}")
 	private String apiPath;
 
-	@Autowired
-	private SummonerSpellsRepository summonerSpellsRepository;
-
-	@Autowired
-	private ItemsRepository itemsRepository;
-
-	@Autowired
-	private ChampionsRepository championsRepository;
-
-	@Autowired
-	private MapsRepository mapsRepository;
-
-	@Autowired
-	private BuildsRepository buildsRepository;
-
-	@Autowired
-	private VersionsRepository versionsRepository;
-
-	@After
-	public void after() {
-		summonerSpellsRepository.deleteAll();
-		itemsRepository.deleteAll();
-		championsRepository.deleteAll();
-		mapsRepository.deleteAll();
-		versionsRepository.deleteAll();
-		buildsRepository.deleteAll();
-	}
 
 	@Test
 	public void index() throws Exception {
