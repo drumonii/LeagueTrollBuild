@@ -2,6 +2,7 @@ package com.drumonii.loltrollbuild;
 
 import com.drumonii.loltrollbuild.model.*;
 import org.junit.Test;
+import org.springframework.restdocs.payload.FieldDescriptor;
 import org.springframework.beans.factory.annotation.Value;
 
 import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.linkWithRel;
@@ -17,6 +18,8 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 	@Value("${spring.data.rest.base-path}")
 	private String apiPath;
 
+	private final FieldDescriptor pageField =
+			fieldWithPath("page").description("Current page settings of the paginated results");
 
 	@Test
 	public void index() throws Exception {
@@ -57,8 +60,7 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 								.description("An array of game modes eligible with the Summoner Spell"),
 						fieldWithPath("_links")
 								.description("Links to resources related to Summoner Spells"),
-						fieldWithPath("page")
-								.description("Current Page settings of the pagination"))));
+						pageField)));
 
 		summonerSpellsRepository.save(summonerSpellsResponse.getSummonerSpells().get("SummonerPoroThrow"));
 
@@ -66,7 +68,7 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 				.andExpect(status().isOk())
 				.andDo(document("summonerSpellsFindBy", responseFields(
 						fieldWithPath("_embedded.summonerSpells")
-								.description("An array of Summoner Spells"),
+								.description("An array of Summoner Spells").attributes(),
 						fieldWithPath("_embedded.summonerSpells[*].name")
 								.description("The name of the Summoner Spell"),
 						fieldWithPath("_embedded.summonerSpells[*].description")
@@ -79,8 +81,7 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 								.description("An array of game modes eligible with the Summoner Spell"),
 						fieldWithPath("_links")
 								.description("Link to the self Summoner Spell"),
-						fieldWithPath("page")
-								.description("Current Page settings of the pagination"))));
+						pageField)));
 	}
 
 	@Test
@@ -168,8 +169,7 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 								.description("The gold of the Item"),
 						fieldWithPath("_links")
 								.description("Links to resources related to Items"),
-						fieldWithPath("page")
-								.description("Current Page settings of the pagination"))));
+						pageField)));
 
 		itemsRepository.save(itemsResponse.getItems().get("3069"));
 
@@ -200,8 +200,7 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 								.description("The gold of the Item"),
 						fieldWithPath("_links")
 								.description("Links to resources related to Items"),
-						fieldWithPath("page")
-								.description("Current Page settings of the pagination"))));
+						pageField)));
 	}
 
 	@Test
@@ -401,8 +400,7 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 								.description("An array of tags of the Champion"),
 						fieldWithPath("_links")
 								.description("Links to resources related to Champions"),
-						fieldWithPath("page")
-								.description("Current Page settings of the pagination"))));
+						pageField)));
 
 		championsRepository.save(championsResponse.getChampions().get("Blitzcrank"));
 
@@ -431,8 +429,7 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 								.description("The ability resource of the Champion"),
 						fieldWithPath("_links")
 								.description("Links to resources related to Champions"),
-						fieldWithPath("page")
-								.description("Current Page settings of the pagination"))));
+						pageField)));
 	}
 
 	@Test
@@ -483,8 +480,7 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 								.description("The image of the Map"),
 						fieldWithPath("_links")
 								.description("Links to resources related to Maps"),
-						fieldWithPath("page")
-								.description("Current Page settings of the pagination"))));
+						pageField)));
 
 		mapsRepository.save(mapsResponse.getMaps().get(String.valueOf(TWISTED_TREELINE)));
 
@@ -499,8 +495,7 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 								.description("The image of the Map"),
 						fieldWithPath("_links")
 								.description("Links to resources related to Maps"),
-						fieldWithPath("page")
-								.description("Current Page settings of the pagination"))));
+						pageField)));
 	}
 
 	@Test
@@ -540,8 +535,7 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 								.description("The revision version number of the Version"),
 						fieldWithPath("_links")
 								.description("Links to resources related to Version"),
-						fieldWithPath("page")
-								.description("Current Page settings of the pagination"))));
+						pageField)));
 	}
 
 	@Test
@@ -612,8 +606,7 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 								.description("The Map Id of the Build"),
 						fieldWithPath("_links")
 								.description("Links to resources related to Builds"),
-						fieldWithPath("page")
-								.description("Current Page settings of the pagination"))));
+						pageField)));
 	}
 
 	@Test
