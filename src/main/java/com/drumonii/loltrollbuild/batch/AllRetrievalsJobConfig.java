@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import static com.drumonii.loltrollbuild.batch.scheduling.RetrievalJobsScheduling.LATEST_PATCH_KEY;
+
 /**
  * {@link Job} configuration for running all retrieval jobs sequentially starting with versions.
  */
@@ -50,22 +52,18 @@ public class AllRetrievalsJobConfig {
 	public Job allRetrievalsJob() {
 		return jobBuilderFactory.get("allRetrievalsJob")
 				.incrementer(parameters -> {
-					if (parameters == null || parameters.isEmpty()) {
-						return new JobParametersBuilder()
-								.addLong("run.id", 1L)
-								.addString("latestRiotPatch",
-										versionsRetrieval.latestVersion(versionsRetrieval.versionsFromResponse()).getPatch())
-								.toJobParameters();
+					JobParametersBuilder builder = new JobParametersBuilder();
+					if (parameters.getString(LATEST_PATCH_KEY) == null) {
+						builder.addString(LATEST_PATCH_KEY,
+								versionsRetrieval.latestVersion(versionsRetrieval.versionsFromResponse()).getPatch());
 					}
-					long id = parameters.getLong("run.id", 1L) + 1;
-					return new JobParametersBuilder().addLong("run.id", id).toJobParameters();
+					return builder.toJobParameters();
 				})
-				.flow(versionsRetrievalJobStep())
+				.start(versionsRetrievalJobStep())
 				.next(mapsRetrievalJobStep())
 				.next(summonerSpellsRetrievalJobStep())
 				.next(championsRetrievalJobStep())
 				.next(itemsRetrievalJobStep())
-				.end()
 				.build();
 	}
 
