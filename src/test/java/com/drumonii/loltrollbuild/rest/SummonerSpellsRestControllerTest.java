@@ -6,7 +6,6 @@ import com.drumonii.loltrollbuild.riot.api.SummonerSpellsResponse;
 import com.drumonii.loltrollbuild.util.RandomizeUtil;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Value;
 
 import java.util.stream.Collectors;
 
@@ -14,14 +13,11 @@ import static com.drumonii.loltrollbuild.model.SummonerSpell.GameMode.CLASSIC;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class SummonerSpellsRestControllerTest extends BaseSpringTestRunner {
-
-	private static final int DEFAULT_PAGE_SIZE = 20;
-
-	@Value("${spring.data.rest.base-path}")
-	private String apiPath;
 
 	private SummonerSpellsResponse summonerSpellsResponseSlice;
 
@@ -65,13 +61,13 @@ public class SummonerSpellsRestControllerTest extends BaseSpringTestRunner {
 				.param("name", summonerSpell.getName().toLowerCase()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(HAL_JSON_UTF8))
-				.andExpect(jsonPath("$._embedded.summonerSpells", hasSize(1)))
+				.andExpect(jsonPath("$._embedded.summonerSpells").isNotEmpty())
 				.andExpect(jsonPath("$._links").exists())
 				.andExpect(jsonPath("$._links.self").exists())
 				.andExpect(jsonPath("$._links.self.href").exists())
 				.andExpect(jsonPath("$.page").exists())
 				.andExpect(jsonPath("$.page.size", is(20)))
-				.andExpect(jsonPath("$.page.totalElements", is(1)))
+				.andExpect(jsonPath("$.page.totalElements").exists())
 				.andExpect(jsonPath("$.page.totalPages", is(1)))
 				.andExpect(jsonPath("$.page.number", is(0)));
 

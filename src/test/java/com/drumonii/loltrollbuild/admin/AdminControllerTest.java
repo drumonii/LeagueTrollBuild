@@ -1,64 +1,55 @@
 package com.drumonii.loltrollbuild.admin;
 
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
+import com.drumonii.loltrollbuild.model.BatchJobInstance;
+import com.drumonii.loltrollbuild.model.Version;
+import com.drumonii.loltrollbuild.repository.BatchJobInstancesRepository;
+import com.drumonii.loltrollbuild.riot.*;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.HttpMethod;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.web.client.MockRestServiceServer;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponents;
+
+import java.util.ArrayList;
 
 import static org.hamcrest.Matchers.is;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Matchers.anyListOf;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
-import static org.springframework.test.web.client.ExpectedCount.times;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
-import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 public class AdminControllerTest extends BaseSpringTestRunner {
 
 	@Autowired
-	private RestTemplate restTemplate;
+	private BatchJobInstancesRepository batchJobInstancesRepository;
 
-	@Autowired
-	@Qualifier("versions")
-	private UriComponents versionsUri;
+	@MockBean
+	private VersionsRetrieval versionsRetrieval;
 
-	@Autowired
-	@Qualifier("summonerSpells")
-	private UriComponents summonerSpellsUri;
+	@MockBean
+	private SummonerSpellsRetrieval summonerSpellsRetrieval;
 
-	@Autowired
-	@Qualifier("items")
-	private UriComponents itemsUri;
+	@MockBean
+	private ItemsRetrieval itemsRetrieval;
 
-	@Autowired
-	@Qualifier("champions")
-	private UriComponents championsUri;
+	@MockBean
+	private ChampionsRetrieval championsRetrieval;
 
-	@Autowired
-	@Qualifier("maps")
-	private UriComponents mapsUri;
-
-	private MockRestServiceServer mockServer;
+	@MockBean
+	private MapsRetrieval mapsRetrieval;
 
 	@Before
 	public void before() {
 		super.before();
 
-		mockServer = MockRestServiceServer.createServer(restTemplate);
+		given(versionsRetrieval.latestVersion(anyListOf(Version.class))).willReturn(versions.get(0));
 	}
 
 	@Test
 	public void admin() throws Exception {
-		mockServer.expect(requestTo(versionsUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(objectMapper.writeValueAsString(versions), MediaType.APPLICATION_JSON_UTF8));
-
 		versionsRepository.save(versions.get(0));
 
 		mockMvc.perform(get("/admin").with(adminUser()))
@@ -70,11 +61,6 @@ public class AdminControllerTest extends BaseSpringTestRunner {
 
 	@Test
 	public void summonerSpells() throws Exception {
-		mockServer.expect(times(2), requestTo(versionsUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(objectMapper.writeValueAsString(versions), MediaType.APPLICATION_JSON_UTF8));
-		mockServer.expect(times(2), requestTo(summonerSpellsUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(objectMapper.writeValueAsString(summonerSpellsResponse), MediaType.APPLICATION_JSON_UTF8));
-
 		mockMvc.perform(get("/admin/summoner-spells").with(adminUser()))
 				.andExpect(status().is3xxRedirection())
 				.andExpect(flash().attribute("noSavedPatch", is("Summoner Spells")))
@@ -90,12 +76,17 @@ public class AdminControllerTest extends BaseSpringTestRunner {
 	}
 
 	@Test
-	public void items() throws Exception {
-		mockServer.expect(times(2), requestTo(versionsUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(objectMapper.writeValueAsString(versions), MediaType.APPLICATION_JSON_UTF8));
-		mockServer.expect(times(2), requestTo(itemsUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(objectMapper.writeValueAsString(itemsResponse), MediaType.APPLICATION_JSON_UTF8));
+	public void summonerSpellsDifference() throws Exception {
+		given(summonerSpellsRetrieval.summonerSpells()).willReturn(new ArrayList<>());
 
+		mockMvc.perform(get("/admin/summoner-spells/diff").with(adminUser()))
+				.andExpect(status().isOk())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+				.andExpect(content().json("[]"));
+	}
+
+	@Test
+	public void items() throws Exception {
 		mockMvc.perform(get("/admin/items").with(adminUser()))
 				.andExpect(status().is3xxRedirection())
 				.andExpect(flash().attribute("noSavedPatch", is("Items")))
@@ -111,12 +102,17 @@ public class AdminControllerTest extends BaseSpringTestRunner {
 	}
 
 	@Test
-	public void champions() throws Exception {
-		mockServer.expect(times(2), requestTo(versionsUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(objectMapper.writeValueAsString(versions), MediaType.APPLICATION_JSON_UTF8));
-		mockServer.expect(times(2), requestTo(championsUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(objectMapper.writeValueAsString(championsResponse), MediaType.APPLICATION_JSON_UTF8));
+	public void itemsDifference() throws Exception {
+		given(itemsRetrieval.items()).willReturn(new ArrayList<>());
 
+		mockMvc.perform(get("/admin/items/diff").with(adminUser()))
+				.andExpect(status().isOk())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+				.andExpect(content().json("[]"));
+	}
+
+	@Test
+	public void champions() throws Exception {
 		mockMvc.perform(get("/admin/champions").with(adminUser()).with(csrf()))
 				.andExpect(status().is3xxRedirection())
 				.andExpect(flash().attribute("noSavedPatch", is("Champions")))
@@ -132,12 +128,17 @@ public class AdminControllerTest extends BaseSpringTestRunner {
 	}
 
 	@Test
-	public void maps() throws Exception {
-		mockServer.expect(times(2), requestTo(versionsUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(objectMapper.writeValueAsString(versions), MediaType.APPLICATION_JSON_UTF8));
-		mockServer.expect(times(2), requestTo(mapsUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(objectMapper.writeValueAsString(mapsResponse), MediaType.APPLICATION_JSON_UTF8));
+	public void championsDifference() throws Exception {
+		given(championsRetrieval.champions()).willReturn(new ArrayList<>());
 
+		mockMvc.perform(get("/admin/champions/diff").with(adminUser()))
+				.andExpect(status().isOk())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+				.andExpect(content().json("[]"));
+	}
+
+	@Test
+	public void maps() throws Exception {
 		mockMvc.perform(get("/admin/maps").with(adminUser()).with(csrf()))
 				.andExpect(status().is3xxRedirection())
 				.andExpect(flash().attribute("noSavedPatch", is("Maps")))

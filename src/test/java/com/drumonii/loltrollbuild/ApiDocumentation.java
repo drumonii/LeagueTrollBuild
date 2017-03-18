@@ -3,7 +3,6 @@ package com.drumonii.loltrollbuild;
 import com.drumonii.loltrollbuild.model.*;
 import org.junit.Test;
 import org.springframework.restdocs.payload.FieldDescriptor;
-import org.springframework.beans.factory.annotation.Value;
 
 import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.linkWithRel;
 import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.links;
@@ -14,9 +13,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class ApiDocumentation extends BaseSpringTestRunner {
-
-	@Value("${spring.data.rest.base-path}")
-	private String apiPath;
 
 	private final FieldDescriptor pageField =
 			fieldWithPath("page").description("Current page settings of the paginated results");

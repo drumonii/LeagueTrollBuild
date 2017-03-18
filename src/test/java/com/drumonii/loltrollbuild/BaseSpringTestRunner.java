@@ -3,10 +3,6 @@ package com.drumonii.loltrollbuild;
 import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.repository.*;
 import com.drumonii.loltrollbuild.riot.api.*;
-import com.drumonii.loltrollbuild.riot.api.ChampionsResponse;
-import com.drumonii.loltrollbuild.riot.api.ItemsResponse;
-import com.drumonii.loltrollbuild.riot.api.MapsResponse;
-import com.drumonii.loltrollbuild.riot.api.SummonerSpellsResponse;
 import com.drumonii.loltrollbuild.util.GameMapUtil;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -21,7 +17,9 @@ import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.test.JobLauncherTestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.JUnitRestDocumentation;
@@ -29,6 +27,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.RequestPostProcessor;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.io.IOException;
@@ -85,9 +84,20 @@ public abstract class BaseSpringTestRunner {
 	@Autowired
 	protected BuildsRepository buildsRepository;
 
+	@MockBean
+	protected RestTemplate restTemplate;
+
+	@MockBean
+	protected ImageFetcher imageFetcher;
+
 	protected MockMvc mockMvc;
 
 	protected static final MediaType HAL_JSON_UTF8 = new MediaType("application", "hal+json", UTF_8);
+
+	@Value("${spring.data.rest.base-path}")
+	protected String apiPath;
+
+	protected static final int DEFAULT_PAGE_SIZE = 20;
 
 	protected static final String TESTING_USERNAME = IN_MEM_USERNAME;
 	protected static final String TESTING_PASSWORD = IN_MEM_PASSWORD;

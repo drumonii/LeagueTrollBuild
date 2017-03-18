@@ -16,19 +16,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ItemsRepositoryTest extends BaseSpringTestRunner {
 
+	@Before
+	public void before() {
+		super.before();
 
+		itemsRepository.save(itemsResponse.getItems().values());
 	}
 
 	@Test
 	public void boots() throws IOException {
 		Item bootsOfSpeed = itemsResponse.getItems().get("1001");
-		itemsRepository.save(bootsOfSpeed);
-
-		Item mercTreads = itemsResponse.getItems().get("3111");
-		itemsRepository.save(mercTreads);
-
-		Item ninjaTabi = itemsResponse.getItems().get("3047");
-		itemsRepository.save(ninjaTabi);
 
 		List<Item> boots = itemsRepository.boots(Integer.valueOf(SUMMONERS_RIFT));
 		assertThat(boots).isNotEmpty();
@@ -46,15 +43,6 @@ public class ItemsRepositoryTest extends BaseSpringTestRunner {
 
 	@Test
 	public void trinkets() throws IOException {
-		Item soulAnchor = itemsResponse.getItems().get("3345");
-		itemsRepository.save(soulAnchor);
-
-		Item wardingTotem = itemsResponse.getItems().get("3340");
-		itemsRepository.save(wardingTotem);
-
-		Item oraclesLens = itemsResponse.getItems().get("3364");
-		itemsRepository.save(oraclesLens);
-
 		List<Item> trinkets = itemsRepository.trinkets(Integer.valueOf(SUMMONERS_RIFT));
 		assertThat(trinkets).isNotEmpty();
 		assertThat(trinkets).doesNotHaveDuplicates();
@@ -73,12 +61,6 @@ public class ItemsRepositoryTest extends BaseSpringTestRunner {
 
 	@Test
 	public void viktorOnly() throws IOException {
-		Item hexCoreMk1 = itemsResponse.getItems().get("3196");
-		itemsRepository.save(hexCoreMk1);
-
-		Item voidStaff = itemsResponse.getItems().get("3135");
-		itemsRepository.save(voidStaff);
-
 		List<Item> viktorOnlyItems = itemsRepository.viktorOnly();
 		assertThat(viktorOnlyItems).isNotEmpty();
 		assertThat(viktorOnlyItems).doesNotHaveDuplicates();
@@ -94,8 +76,6 @@ public class ItemsRepositoryTest extends BaseSpringTestRunner {
 
 	@Test
 	public void forTrollBuild() throws IOException {
-		itemsRepository.save(itemsResponse.getItems().values());
-
 		List<Item> forTrollBuild = itemsRepository.forTrollBuild(Integer.valueOf(SUMMONERS_RIFT));
 		assertThat(forTrollBuild).isNotEmpty();
 		assertThat(forTrollBuild).doesNotHaveDuplicates();

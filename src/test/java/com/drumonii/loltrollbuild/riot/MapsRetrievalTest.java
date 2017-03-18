@@ -3,37 +3,38 @@ package com.drumonii.loltrollbuild.riot;
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.model.GameMap;
 import com.drumonii.loltrollbuild.model.Version;
+import com.drumonii.loltrollbuild.model.image.Image;
 import com.drumonii.loltrollbuild.riot.api.MapsResponse;
 import com.drumonii.loltrollbuild.util.RandomizeUtil;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
-import org.springframework.test.web.client.MockRestServiceServer;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Fail.fail;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyListOf;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Matchers.isNull;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
-import static org.springframework.test.web.client.ExpectedCount.once;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
-import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class MapsRetrievalTest extends BaseSpringTestRunner {
-
-	private static final int MAX_RESPONSE_SIZE = 10;
 
 	@Autowired
 	@Qualifier("maps")
@@ -43,213 +44,182 @@ public class MapsRetrievalTest extends BaseSpringTestRunner {
 	@Qualifier("versions")
 	private UriComponents versionsUri;
 
-	@Autowired
-	private MapsRepository mapsRepository;
-
-	private MockRestServiceServer mockServer;
-
-	private MapsResponse mapsResponseSlice;
-	private String mapsResponseBody;
-
 	private GameMap summonersRift;
-
-	private String versionsResponseBody;
 
 	@Before
 	public void before() {
 		super.before();
 
-		mockServer = MockRestServiceServer.createServer(restTemplate);
-
-		// Create a random "slice" of MapsResponse with size of MAX_RESPONSE_SIZE
-		mapsResponseSlice = new MapsResponse();
-		mapsResponseSlice.setType(championsResponse.getType());
-		mapsResponseSlice.setVersion(championsResponse.getVersion());
-		mapsResponseSlice.setMaps(RandomizeUtil.getRandoms(
-				mapsResponse.getMaps().values(), MAX_RESPONSE_SIZE).stream()
-				.collect(Collectors.toMap(map -> String.valueOf(map.getMapId()), map -> map)));
-
-		try {
-			mapsResponseBody = objectMapper.writeValueAsString(mapsResponseSlice);
-		} catch (JsonProcessingException e) {
-			fail("Unable to marshal the Maps response.", e);
-		}
-
 		summonersRift = mapsResponse.getMaps().get(SUMMONERS_RIFT);
-
-		try {
-			versionsResponseBody = objectMapper.writeValueAsString(versions);
-		} catch (JsonProcessingException e) {
-			fail("Unable to marshal the Versions.", e);
-		}
-	}
-
 	}
 
 	@Test
 	public void maps() throws Exception {
-		mockServer.expect(requestTo(mapsUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(mapsResponseBody, MediaType.APPLICATION_JSON_UTF8));
+		given(restTemplate.getForObject(eq(mapsUri.toString()), eq(MapsResponse.class)))
+				.willReturn(mapsResponse);
 
 		mockMvc.perform(get("/riot/maps").with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-				.andExpect(content().json(objectMapper.writeValueAsString(mapsResponseSlice.getMaps().values())));
-		mockServer.verify();
+				.andExpect(content().json(objectMapper.writeValueAsString(mapsResponse.getMaps().values())));
 	}
 
 	@Test
 	public void saveMaps() throws Exception {
-		mockServer.expect(requestTo(mapsUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(mapsResponseBody, MediaType.APPLICATION_JSON_UTF8));
+		given(restTemplate.getForObject(eq(mapsUri.toString()), eq(MapsResponse.class)))
+				.willReturn(mapsResponse);
 
-		mockServer.expect(once(), requestTo(versionsUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(versionsResponseBody, MediaType.APPLICATION_JSON_UTF8));
+		given(restTemplate.exchange(eq(versionsUri.toString()), eq(HttpMethod.GET), isNull(HttpEntity.class),
+				eq(new ParameterizedTypeReference<List<Version>>() {}))).willReturn(ResponseEntity.ok(versions));
 
 		mockMvc.perform(post("/riot/maps").with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-				.andExpect(content().json(objectMapper.writeValueAsString(mapsResponseSlice.getMaps().values())));
-		mockServer.verify();
+				.andExpect(content().json(objectMapper.writeValueAsString(mapsResponse.getMaps().values())));
+
+		verify(imageFetcher, times(1))
+				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(versions.get(0)));
 
 		assertThat(mapsRepository.findAll())
-				.containsOnlyElementsOf(mapsResponseSlice.getMaps().values());
+				.containsOnlyElementsOf(mapsResponse.getMaps().values());
 	}
 
 	@Test
 	public void saveDifferenceOfMaps() throws Exception {
-		mockServer.expect(requestTo(mapsUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(mapsResponseBody, MediaType.APPLICATION_JSON_UTF8));
+		given(restTemplate.getForObject(eq(mapsUri.toString()), eq(MapsResponse.class)))
+				.willReturn(mapsResponse);
 
-		mockServer.expect(once(), requestTo(versionsUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(versionsResponseBody, MediaType.APPLICATION_JSON_UTF8));
+		given(restTemplate.exchange(eq(versionsUri.toString()), eq(HttpMethod.GET), isNull(HttpEntity.class),
+				eq(new ParameterizedTypeReference<List<Version>>() {}))).willReturn(ResponseEntity.ok(versions));
 
-		List<GameMap> maps = mapsRepository.save(mapsResponseSlice.getMaps().values());
+		List<GameMap> maps = mapsRepository.save(mapsResponse.getMaps().values());
 
 		mockMvc.perform(post("/riot/maps").with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json("[]"));
-		mockServer.verify();
+
+		verify(imageFetcher, times(1))
+				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(versions.get(0)));
 
 		assertThat(mapsRepository.findAll()).containsOnlyElementsOf(maps);
 	}
 
 	@Test
 	public void saveDifferenceOfMapsWithDelete() throws Exception {
-		List<GameMap> items = mapsRepository.save(mapsResponseSlice.getMaps().values());
+		List<GameMap> items = mapsRepository.save(mapsResponse.getMaps().values());
 		GameMap mapToDelete = RandomizeUtil.getRandom(items);
-		mapsResponseSlice.getMaps().remove(String.valueOf(mapToDelete.getMapId()));
+		mapsResponse.getMaps().remove(String.valueOf(mapToDelete.getMapId()));
 
-		mockServer.expect(requestTo(mapsUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(objectMapper.writeValueAsString(mapsResponseSlice),
-						MediaType.APPLICATION_JSON_UTF8));
+		given(restTemplate.getForObject(eq(mapsUri.toString()), eq(MapsResponse.class)))
+				.willReturn(mapsResponse);
 
-		mockServer.expect(once(), requestTo(versionsUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(versionsResponseBody, MediaType.APPLICATION_JSON_UTF8));
+		given(restTemplate.exchange(eq(versionsUri.toString()), eq(HttpMethod.GET), isNull(HttpEntity.class),
+				eq(new ParameterizedTypeReference<List<Version>>() {}))).willReturn(ResponseEntity.ok(versions));
 
 		mockMvc.perform(post("/riot/maps").with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json("[]"));
-		mockServer.verify();
+
+		verify(imageFetcher, times(1))
+				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(versions.get(0)));
 
 		assertThat(mapsRepository.findOne(mapToDelete.getMapId())).isNull();
 	}
 
 	@Test
 	public void saveMapsWithTruncate() throws Exception {
-		mockServer.expect(requestTo(mapsUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(mapsResponseBody, MediaType.APPLICATION_JSON_UTF8));
+		given(restTemplate.getForObject(eq(mapsUri.toString()), eq(MapsResponse.class)))
+				.willReturn(mapsResponse);
 
-		mockServer.expect(once(), requestTo(versionsUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(versionsResponseBody, MediaType.APPLICATION_JSON_UTF8));
+		given(restTemplate.exchange(eq(versionsUri.toString()), eq(HttpMethod.GET), isNull(HttpEntity.class),
+				eq(new ParameterizedTypeReference<List<Version>>() {}))).willReturn(ResponseEntity.ok(versions));
 
 		mockMvc.perform(post("/riot/maps?truncate=true").with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-				.andExpect(content().json(objectMapper.writeValueAsString(mapsResponseSlice.getMaps().values())));
-		mockServer.verify();
+				.andExpect(content().json(objectMapper.writeValueAsString(mapsResponse.getMaps().values())));
+
+		verify(imageFetcher, times(1))
+				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(versions.get(0)));
 
 		assertThat(mapsRepository.findAll())
-				.containsOnlyElementsOf(mapsResponseSlice.getMaps().values());
+				.containsOnlyElementsOf(mapsResponse.getMaps().values());
 	}
 
 	@Test
 	public void map() throws Exception {
-		mockServer.expect(requestTo(mapsUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(mapsResponseBody, MediaType.APPLICATION_JSON_UTF8));
+		given(restTemplate.getForObject(eq(mapsUri.toString()), eq(MapsResponse.class)))
+				.willReturn(mapsResponse);
 
 		mockMvc.perform(get("/riot/maps/{id}", summonersRift.getMapId()).with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(summonersRift)));
-		mockServer.verify();
 	}
 
 	@Test
 	public void mapNotFound() throws Exception {
-		mapsResponseSlice.getMaps().remove(String.valueOf(summonersRift.getMapId()));
+		mapsResponse.getMaps().remove(String.valueOf(summonersRift.getMapId()));
 
-		mockServer.expect(requestTo(mapsUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(objectMapper.writeValueAsString(mapsResponseSlice),
-						MediaType.APPLICATION_JSON_UTF8));
+		given(restTemplate.getForObject(eq(mapsUri.toString()), eq(MapsResponse.class)))
+				.willReturn(mapsResponse);
 
 		mockMvc.perform(get("/riot/maps/{id}", summonersRift.getMapId()).with(adminUser()).with(csrf()))
 				.andExpect(status().isNotFound());
-		mockServer.verify();
 	}
 
 	@Test
 	public void saveMap() throws Exception {
-		mockServer.expect(requestTo(mapsUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(mapsResponseBody, MediaType.APPLICATION_JSON_UTF8));
+		given(restTemplate.getForObject(eq(mapsUri.toString()), eq(MapsResponse.class)))
+				.willReturn(mapsResponse);
 
-		mockServer.expect(once(), requestTo(versionsUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(versionsResponseBody, MediaType.APPLICATION_JSON_UTF8));
+		given(restTemplate.exchange(eq(versionsUri.toString()), eq(HttpMethod.GET), isNull(HttpEntity.class),
+				eq(new ParameterizedTypeReference<List<Version>>() {}))).willReturn(ResponseEntity.ok(versions));
 
 		mockMvc.perform(post("/riot/maps/{id}", summonersRift.getMapId()).with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(summonersRift)));
-		mockServer.verify();
+
+		verify(imageFetcher, times(1))
+				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(versions.get(0)));
 
 		assertThat(mapsRepository.findOne(summonersRift.getMapId())).isNotNull();
 	}
 
 	@Test
 	public void saveMapNotFound() throws Exception {
-		mapsResponseSlice.getMaps().remove(String.valueOf(summonersRift.getMapId()));
+		mapsResponse.getMaps().remove(String.valueOf(summonersRift.getMapId()));
 
-		mockServer.expect(requestTo(mapsUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(objectMapper.writeValueAsString(mapsResponseSlice),
-						MediaType.APPLICATION_JSON_UTF8));
+		given(restTemplate.getForObject(eq(mapsUri.toString()), eq(MapsResponse.class)))
+				.willReturn(mapsResponse);
 
 		mockMvc.perform(post("/riot/maps/{id}", summonersRift.getMapId()).with(adminUser()).with(csrf()))
 				.andExpect(status().isNotFound());
-		mockServer.verify();
 	}
 
 	@Test
 	public void saveMapWithOverwrite() throws Exception {
 		mapsRepository.save(summonersRift);
-		GameMap newSummonersRift = objectMapper.readValue(mapsResponseBody, MapsResponse.class).getMaps()
-				.get(SUMMONERS_RIFT);
+		GameMap newSummonersRift = mapsResponse.getMaps().get(SUMMONERS_RIFT);
 		newSummonersRift.setMapName("New Summoners Rift");
-		mapsResponseSlice.getMaps().put(String.valueOf(newSummonersRift.getMapId()), newSummonersRift);
+		mapsResponse.getMaps().put(String.valueOf(newSummonersRift.getMapId()), newSummonersRift);
 
-		mockServer.expect(requestTo(mapsUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(objectMapper.writeValueAsString(mapsResponseSlice),
-						MediaType.APPLICATION_JSON_UTF8));
+		given(restTemplate.getForObject(eq(mapsUri.toString()), eq(MapsResponse.class)))
+				.willReturn(mapsResponse);
 
-		mockServer.expect(once(), requestTo(versionsUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(versionsResponseBody, MediaType.APPLICATION_JSON_UTF8));
+		given(restTemplate.exchange(eq(versionsUri.toString()), eq(HttpMethod.GET), isNull(HttpEntity.class),
+				eq(new ParameterizedTypeReference<List<Version>>() {}))).willReturn(ResponseEntity.ok(versions));
 
 		mockMvc.perform(post("/riot/maps/{id}", summonersRift.getMapId()).with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(newSummonersRift)));
-		mockServer.verify();
+
+		verify(imageFetcher, times(1))
+				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(versions.get(0)));
 
 		assertThat(mapsRepository.findOne(newSummonersRift.getMapId())).isNotNull()
 				.isEqualTo(newSummonersRift);

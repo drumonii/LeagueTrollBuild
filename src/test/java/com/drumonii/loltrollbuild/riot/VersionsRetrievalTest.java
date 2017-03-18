@@ -6,22 +6,21 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
-import org.springframework.test.web.client.MockRestServiceServer;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.util.UriComponents;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.fail;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Matchers.isNull;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
-import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -30,33 +29,18 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class VersionsRetrievalTest extends BaseSpringTestRunner {
 
 	@Autowired
-	@Autowired
 	@Qualifier("versions")
 	private UriComponents versionsUri;
-
-	private MockRestServiceServer mockServer;
 
 	@Before
 	public void before() {
 		super.before();
 
-		mockServer = MockRestServiceServer.createServer(restTemplate);
+		given(restTemplate.exchange(eq(versionsUri.toString()), eq(HttpMethod.GET), isNull(HttpEntity.class),
+				eq(new ParameterizedTypeReference<List<Version>>() {}))).willReturn(ResponseEntity.ok(versions));
 
-		String versionsResponseBody = null;
-		try {
-			versionsResponseBody = objectMapper.writeValueAsString(versions);
-		} catch (JsonProcessingException e) {
-			fail("Unable to marshal the Versions.", e);
-		}
-
-		mockServer.expect(requestTo(versionsUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(versionsResponseBody, MediaType.APPLICATION_JSON_UTF8));
-
-		restTemplate = mock(RestTemplate.class);
-		when(restTemplate.getForObject(versionsUri.toString(), Version[].class))
-				.thenReturn(versions.toArray(new Version[versions.size()]));
-	}
-
+		given(restTemplate.getForObject(eq(versionsUri.toString()), eq(Version[].class)))
+				.willReturn(versions.toArray(new Version[versions.size()]));
 	}
 
 	@Test
@@ -65,7 +49,6 @@ public class VersionsRetrievalTest extends BaseSpringTestRunner {
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(versions)));
-		mockServer.verify();
 	}
 
 	@Test
@@ -74,17 +57,14 @@ public class VersionsRetrievalTest extends BaseSpringTestRunner {
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(versions.get(0))));
-		mockServer.verify();
-		mockServer.reset();
 
-		mockServer.expect(requestTo(versionsUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(objectMapper.writeValueAsString(new ArrayList<>()), MediaType.APPLICATION_JSON_UTF8));
+		given(restTemplate.exchange(eq(versionsUri.toString()), eq(HttpMethod.GET), isNull(HttpEntity.class),
+				eq(new ParameterizedTypeReference<List<Version>>() {}))).willReturn(ResponseEntity.ok(new ArrayList<>()));
 
 		mockMvc.perform(get("/riot/versions/latest").with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(new Version("0", 0, 0, 0))));
-		mockServer.verify();
 	}
 
 	@Test
@@ -93,7 +73,6 @@ public class VersionsRetrievalTest extends BaseSpringTestRunner {
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(versions.get(0))));
-		mockServer.verify();
 
 		assertThat(versionsRepository.latestVersion()).isEqualTo(versions.get(0));
 	}
@@ -106,7 +85,6 @@ public class VersionsRetrievalTest extends BaseSpringTestRunner {
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(versions.get(0))));
-		mockServer.verify();
 
 		assertThat(versionsRepository.latestVersion()).isNotNull()
 				.isEqualTo(versions.get(0));

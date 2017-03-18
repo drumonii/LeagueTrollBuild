@@ -6,20 +6,19 @@ import com.drumonii.loltrollbuild.riot.api.ItemsResponse;
 import com.drumonii.loltrollbuild.util.RandomizeUtil;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Value;
 
 import java.util.stream.Collectors;
 
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.hasEntry;
+import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class ItemsRestControllerTest extends BaseSpringTestRunner {
-
-	private static final int DEFAULT_PAGE_SIZE = 20;
-
-	@Value("${spring.data.rest.base-path}")
-	private String apiPath;
 
 	private ItemsResponse itemsResponseSlice;
 
@@ -62,13 +61,13 @@ public class ItemsRestControllerTest extends BaseSpringTestRunner {
 				.param("name", item.getName().toLowerCase()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(HAL_JSON_UTF8))
-				.andExpect(jsonPath("$._embedded.items", hasSize(1)))
+				.andExpect(jsonPath("$._embedded.items").isNotEmpty())
 				.andExpect(jsonPath("$._links").exists())
 				.andExpect(jsonPath("$._links.self").exists())
 				.andExpect(jsonPath("$._links.self.href").exists())
 				.andExpect(jsonPath("$.page").exists())
 				.andExpect(jsonPath("$.page.size", is(20)))
-				.andExpect(jsonPath("$.page.totalElements", is(1)))
+				.andExpect(jsonPath("$.page.totalElements").exists())
 				.andExpect(jsonPath("$.page.totalPages", is(1)))
 				.andExpect(jsonPath("$.page.number", is(0)));
 
@@ -124,12 +123,12 @@ public class ItemsRestControllerTest extends BaseSpringTestRunner {
 				.andExpect(jsonPath("$._embedded.items").exists())
 				.andExpect(jsonPath("$._embedded.items[*].group").exists())
 				.andExpect(jsonPath("$._embedded.items[*].from").isNotEmpty())
-				.andExpect(jsonPath("$._embedded.items[*].into").isNotEmpty())
+				.andExpect(jsonPath("$._embedded.items[*].into").exists())
 				.andExpect(jsonPath("$._embedded.items[*].maps", hasItem(hasEntry(SUMMONERS_RIFT, true))))
 				.andExpect(jsonPath("$._embedded.items[*].gold.purchasable", hasItem(true)))
 				.andExpect(jsonPath("$._embedded.items[*]._links").exists())
 				.andExpect(jsonPath("$._embedded.items[*]._links.from").exists())
-				.andExpect(jsonPath("$._embedded.items[*]._links.into").exists())
+				.andExpect(jsonPath("$._embedded.items[*]._links.into").doesNotExist())
 				.andExpect(jsonPath("$._embedded.items[*]._links.maps").exists())
 				.andExpect(jsonPath("$._links").exists())
 				.andExpect(jsonPath("$._links.self").exists())

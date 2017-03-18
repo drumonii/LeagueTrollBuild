@@ -3,20 +3,15 @@ package com.drumonii.loltrollbuild.rest;
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Value;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class VersionsRestControllerTest extends BaseSpringTestRunner {
-
-	@Value("${spring.data.rest.base-path}")
-	private String apiPath;
 
 	@Before
 	public void before() {

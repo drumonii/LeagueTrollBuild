@@ -3,45 +3,41 @@ package com.drumonii.loltrollbuild.riot;
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.model.Champion;
 import com.drumonii.loltrollbuild.model.Version;
+import com.drumonii.loltrollbuild.model.image.Image;
 import com.drumonii.loltrollbuild.riot.api.ChampionsResponse;
 import com.drumonii.loltrollbuild.util.RandomizeUtil;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.test.web.client.MockRestServiceServer;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.TreeSet;
-import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Fail.fail;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyListOf;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Matchers.isNull;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
-import static org.springframework.test.web.client.ExpectedCount.once;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
-import static org.springframework.test.web.client.response.MockRestResponseCreators.withStatus;
-import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class ChampionsRetrievalTest extends BaseSpringTestRunner {
-
-	private static final int MAX_RESPONSE_SIZE = 10;
-
-	@Autowired
-	private RestTemplate restTemplate;
 
 	@Autowired
 	@Qualifier("champions")
@@ -55,193 +51,158 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 	@Qualifier("versions")
 	private UriComponents versionsUri;
 
-	private MockRestServiceServer mockServer;
-
-	private ChampionsResponse championsResponseSlice;
-	private String championsResponseBody;
-
-	private String championResponseBody;
 	private UriComponents championUri;
 	private Champion leeSin;
-
-	private String versionsResponseBody;
 
 	@Before
 	public void before() {
 		super.before();
 
-		mockServer = MockRestServiceServer.createServer(restTemplate);
-
-		// Create a random "slice" of ChampionsResponse with size of MAX_RESPONSE_SIZE
-		championsResponseSlice = new ChampionsResponse();
-		championsResponseSlice.setType(championsResponse.getType());
-		championsResponseSlice.setVersion(championsResponse.getVersion());
-		championsResponseSlice.setChampions(RandomizeUtil.getRandoms(
-				championsResponse.getChampions().values(), MAX_RESPONSE_SIZE).stream()
-				.collect(Collectors.toMap(champion -> String.valueOf(champion.getId()), champion -> champion)));
-
-		try {
-			championsResponseBody = objectMapper.writeValueAsString(championsResponseSlice);
-		} catch (JsonProcessingException e) {
-			fail("Unable to marshal the Champions response.", e);
-		}
-
 		leeSin = championsResponse.getChampions().get("LeeSin");
-		try {
-			championResponseBody = objectMapper.writeValueAsString(leeSin);
-		} catch (JsonProcessingException e) {
-			fail("Unable to marshal the Champion.", e);
-		}
 		championUri = championUriBuilder.buildAndExpand("na", leeSin.getId());
-
-		try {
-			versionsResponseBody = objectMapper.writeValueAsString(versions);
-		} catch (JsonProcessingException e) {
-			fail("Unable to marshal the Versions.", e);
-		}
-	}
-
 	}
 
 	@Test
 	public void champions() throws Exception {
-		mockServer.expect(requestTo(championsUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(championsResponseBody, MediaType.APPLICATION_JSON_UTF8));
+		given(restTemplate.getForObject(eq(championsUri.toString()), eq(ChampionsResponse.class)))
+				.willReturn(championsResponse);
 
 		mockMvc.perform(get("/riot/champions").with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-				.andExpect(content().json(objectMapper.writeValueAsString(championsResponseSlice.getChampions()
-						.values())));
-		mockServer.verify();
+				.andExpect(content().json(objectMapper.writeValueAsString(championsResponse.getChampions().values())));
 	}
 
 	@Test
 	public void saveChampions() throws Exception {
-		mockServer.expect(requestTo(championsUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(championsResponseBody, MediaType.APPLICATION_JSON_UTF8));
+		given(restTemplate.getForObject(eq(championsUri.toString()), eq(ChampionsResponse.class)))
+				.willReturn(championsResponse);
 
-		mockServer.expect(once(), requestTo(versionsUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(versionsResponseBody, MediaType.APPLICATION_JSON_UTF8));
+		given(restTemplate.exchange(eq(versionsUri.toString()), eq(HttpMethod.GET), isNull(HttpEntity.class),
+				eq(new ParameterizedTypeReference<List<Version>>() {}))).willReturn(ResponseEntity.ok(versions));
 
 		mockMvc.perform(post("/riot/champions").with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-				.andExpect(content().json(objectMapper.writeValueAsString(championsResponseSlice.getChampions()
-						.values())));
-		mockServer.verify();
+				.andExpect(content().json(objectMapper.writeValueAsString(championsResponse.getChampions().values())));
 
-		assertThat(championsRepository.findAll())
-				.containsOnlyElementsOf(championsResponseSlice.getChampions().values());
+		verify(imageFetcher, times(3))
+				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(versions.get(0)));
+
+		assertThat(championsRepository.findAll()).containsOnlyElementsOf(championsResponse.getChampions().values());
 	}
 
 	@Test
 	public void saveDifferenceOfChampions() throws Exception {
-		mockServer.expect(requestTo(championsUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(championsResponseBody, MediaType.APPLICATION_JSON_UTF8));
+		given(restTemplate.getForObject(eq(championsUri.toString()), eq(ChampionsResponse.class)))
+				.willReturn(championsResponse);
 
-		mockServer.expect(once(), requestTo(versionsUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(versionsResponseBody, MediaType.APPLICATION_JSON_UTF8));
+		given(restTemplate.exchange(eq(versionsUri.toString()), eq(HttpMethod.GET), isNull(HttpEntity.class),
+				eq(new ParameterizedTypeReference<List<Version>>() {}))).willReturn(ResponseEntity.ok(versions));
 
-		List<Champion> champions = championsRepository.save(championsResponseSlice.getChampions().values());
+		List<Champion> champions = championsRepository.save(championsResponse.getChampions().values());
 
 		mockMvc.perform(post("/riot/champions").with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json("[]"));
-		mockServer.verify();
+
+		verify(imageFetcher, times(3))
+				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(versions.get(0)));
 
 		assertThat(championsRepository.findAll()).containsOnlyElementsOf(champions);
 	}
 
 	@Test
 	public void saveDifferenceOfChampionsWithDeleted() throws Exception {
-		List<Champion> champions = championsRepository.save(championsResponseSlice.getChampions().values());
+		List<Champion> champions = championsRepository.save(championsResponse.getChampions().values());
 		Champion championToDelete = RandomizeUtil.getRandom(champions);
-		championsResponseSlice.getChampions().remove(String.valueOf(championToDelete.getId()));
+		championsResponse.getChampions().remove(championToDelete.getKey());
 
-		mockServer.expect(requestTo(championsUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(objectMapper.writeValueAsString(championsResponseSlice),
-						MediaType.APPLICATION_JSON_UTF8));
+		given(restTemplate.getForObject(eq(championsUri.toString()), eq(ChampionsResponse.class)))
+				.willReturn(championsResponse);
 
-		mockServer.expect(once(), requestTo(versionsUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(versionsResponseBody, MediaType.APPLICATION_JSON_UTF8));
+		given(restTemplate.exchange(eq(versionsUri.toString()), eq(HttpMethod.GET), isNull(HttpEntity.class),
+				eq(new ParameterizedTypeReference<List<Version>>() {}))).willReturn(ResponseEntity.ok(versions));
 
 		mockMvc.perform(post("/riot/champions").with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json("[]"));
-		mockServer.verify();
+
+		verify(imageFetcher, times(3))
+				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(versions.get(0)));
 
 		assertThat(championsRepository.findOne(championToDelete.getId())).isNull();
 	}
 
 	@Test
 	public void saveChampionsWithTruncate() throws Exception {
-		mockServer.expect(requestTo(championsUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(championsResponseBody, MediaType.APPLICATION_JSON_UTF8));
+		given(restTemplate.getForObject(eq(championsUri.toString()), eq(ChampionsResponse.class)))
+				.willReturn(championsResponse);
 
-		mockServer.expect(once(), requestTo(versionsUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(versionsResponseBody, MediaType.APPLICATION_JSON_UTF8));
+		given(restTemplate.exchange(eq(versionsUri.toString()), eq(HttpMethod.GET), isNull(HttpEntity.class),
+				eq(new ParameterizedTypeReference<List<Version>>() {}))).willReturn(ResponseEntity.ok(versions));
 
 		mockMvc.perform(post("/riot/champions?truncate=true").with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-				.andExpect(content().json(objectMapper.writeValueAsString(championsResponseSlice.getChampions()
-						.values())));
-		mockServer.verify();
+				.andExpect(content().json(objectMapper.writeValueAsString(championsResponse.getChampions().values())));
 
-		assertThat(championsRepository.findAll())
-				.containsOnlyElementsOf(championsResponseSlice.getChampions().values());
+		verify(imageFetcher, times(3))
+				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(versions.get(0)));
+
+		assertThat(championsRepository.findAll()).containsOnlyElementsOf(championsResponse.getChampions().values());
 	}
 
 	@Test
 	public void champion() throws Exception {
-		mockServer.expect(requestTo(championUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(championResponseBody, MediaType.APPLICATION_JSON_UTF8));
+		given(restTemplate.getForObject(eq(championUri.toString()), eq(Champion.class)))
+				.willReturn(leeSin);
 
 		mockMvc.perform(get("/riot/champions/{id}", leeSin.getId()).with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(leeSin)));
-		mockServer.verify();
 	}
 
 	@Test
 	public void championNotFound() throws Exception {
-		mockServer.expect(requestTo(championUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withStatus(HttpStatus.NOT_FOUND));
+		given(restTemplate.getForObject(eq(championUri.toString()), eq(Champion.class)))
+				.willThrow(new RestClientException("404 Not Found"));
 
 		mockMvc.perform(get("/riot/champions/{id}", leeSin.getId()).with(adminUser()).with(csrf()))
 				.andExpect(status().isNotFound());
-		mockServer.verify();
 	}
 
 	@Test
 	public void saveChampion() throws Exception {
-		mockServer.expect(requestTo(championUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(championResponseBody, MediaType.APPLICATION_JSON_UTF8));
+		given(restTemplate.getForObject(eq(championUri.toString()), eq(Champion.class)))
+				.willReturn(leeSin);
 
-		mockServer.expect(once(), requestTo(versionsUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(versionsResponseBody, MediaType.APPLICATION_JSON_UTF8));
+		given(restTemplate.exchange(eq(versionsUri.toString()), eq(HttpMethod.GET), isNull(HttpEntity.class),
+				eq(new ParameterizedTypeReference<List<Version>>() {}))).willReturn(ResponseEntity.ok(versions));
 
 		mockMvc.perform(post("/riot/champions/{id}", leeSin.getId()).with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(leeSin)));
-		mockServer.verify();
+
+		verify(imageFetcher, times(2))
+				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(versions.get(0)));
+		verify(imageFetcher, times(1))
+				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(versions.get(0)));
 
 		assertThat(championsRepository.findOne(leeSin.getId())).isNotNull();
 	}
 
 	@Test
 	public void saveChampionNotFound() throws Exception {
-		mockServer.expect(requestTo(championUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withStatus(HttpStatus.NOT_FOUND));
+		given(restTemplate.getForObject(eq(championUri.toString()), eq(Champion.class)))
+				.willThrow(new RestClientException("404 Not Found"));
 
 		mockMvc.perform(post("/riot/champions/{id}", leeSin.getId()).with(adminUser()).with(csrf()))
 				.andExpect(status().isNotFound());
-		mockServer.verify();
 	}
 
 	@Test
@@ -250,17 +211,21 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 		newLeeSin.setTags(new TreeSet<>(Arrays.asList("NEW_TAG")));
 		newLeeSin = championsRepository.save(newLeeSin);
 
-		mockServer.expect(requestTo(championUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(objectMapper.writeValueAsString(newLeeSin), MediaType.APPLICATION_JSON_UTF8));
+		given(restTemplate.getForObject(eq(championUri.toString()), eq(Champion.class)))
+				.willReturn(newLeeSin);
 
-		mockServer.expect(once(), requestTo(versionsUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(versionsResponseBody, MediaType.APPLICATION_JSON_UTF8));
+		given(restTemplate.exchange(eq(versionsUri.toString()), eq(HttpMethod.GET), isNull(HttpEntity.class),
+				eq(new ParameterizedTypeReference<List<Version>>() {}))).willReturn(ResponseEntity.ok(versions));
 
 		mockMvc.perform(post("/riot/champions/{id}", leeSin.getId()).with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(newLeeSin)));
-		mockServer.verify();
+
+		verify(imageFetcher, times(2))
+				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(versions.get(0)));
+		verify(imageFetcher, times(1))
+				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(versions.get(0)));
 
 		assertThat(championsRepository.findOne(newLeeSin.getId())).isNotNull()
 				.isEqualTo(newLeeSin);
