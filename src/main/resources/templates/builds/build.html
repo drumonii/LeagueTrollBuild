@@ -45,7 +45,7 @@
                                                     <label th:text="#{champion.map}">Map</label>
                                                     <select id="map" class="ui dropdown">
                                                         <option th:value="${build.map.mapId}"
-                                                                th:text="${T(com.drumonii.loltrollbuild.util.GameMapUtil).getActualMapName(build.map.mapName)}">
+                                                                th:text="${build.map.mapName}">
                                                             Summoner's Rift
                                                         </option>
                                                     </select>
