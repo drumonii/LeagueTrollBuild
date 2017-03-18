@@ -85,7 +85,8 @@ public class ChampionsController {
 			items.add(RandomizeUtil.getRandom(itemsRepository.viktorOnly()));
 		}
 		// Get all items for the troll build
-		items.addAll(RandomizeUtil.getRandoms(itemsRepository.forTrollBuild(mapId), ITEMS_SIZE - 1));
+		items.addAll(RandomizeUtil.getRandoms(itemsRepository.forTrollBuild(mapId),
+				champion.isViktor() ? ITEMS_SIZE - 2: ITEMS_SIZE - 1));
 		trollBuild.put("items", items);
 
 		// Summoner Spells
