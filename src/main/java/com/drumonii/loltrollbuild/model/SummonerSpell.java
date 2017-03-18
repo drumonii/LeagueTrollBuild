@@ -1,9 +1,11 @@
 package com.drumonii.loltrollbuild.model;
 
+import com.drumonii.loltrollbuild.model.deserializer.GameModeDeserializer;
 import com.drumonii.loltrollbuild.model.image.SummonerSpellImage;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.*;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -66,12 +68,13 @@ public class SummonerSpell implements Serializable {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "MODE")
 	@OrderBy("MODE ASC")
+	@JsonDeserialize(using = GameModeDeserializer.class)
 	@JsonProperty("modes")
 	@Getter @Setter private SortedSet<GameMode> modes;
 
 	public enum GameMode {
 
-		CLASSIC, ODIN, ARAM, TUTORIAL, ONEFORALL, ASCENSION, FIRSTBLOOD, KINGPORO
+		CLASSIC, ODIN, ARAM, TUTORIAL, OTHER
 
 	}
 
