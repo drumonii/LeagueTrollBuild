@@ -54,7 +54,7 @@ test {
 
 asciidoctor {
     sourceDir 'src/main/doc'
-    attributes 'snippets': snippetsDir
+    attributes 'snippets': snippetsDir, 'version': version
     inputs.dir snippetsDir
     dependsOn test
 }
