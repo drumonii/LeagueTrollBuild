@@ -75,6 +75,9 @@ public class ImagesRestControllerTest extends BaseSpringTestRunner {
 				.andExpect(header().string("Cache-Control", is("max-age=" + 31556926)))
 				.andExpect(header().dateValue("Last-Modified", azir.getLastModifiedDate()
 						.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()));
+
+		mockMvc.perform(get("/img/champions/{id}/spell/{img}", azir.getId(), "test." + fileExt))
+				.andExpect(status().isNotFound());
 	}
 
 	@Test

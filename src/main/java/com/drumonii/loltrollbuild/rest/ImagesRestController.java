@@ -1,9 +1,6 @@
 package com.drumonii.loltrollbuild.rest;
 
-import com.drumonii.loltrollbuild.model.Champion;
-import com.drumonii.loltrollbuild.model.GameMap;
-import com.drumonii.loltrollbuild.model.Item;
-import com.drumonii.loltrollbuild.model.SummonerSpell;
+import com.drumonii.loltrollbuild.model.*;
 import com.drumonii.loltrollbuild.model.image.Image;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.http.CacheControl;
@@ -15,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.ZoneId;
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -57,15 +55,18 @@ public class ImagesRestController {
 	@GetMapping(value = "/champions/{id}/spell/{spellKey}.*")
 	public ResponseEntity<byte[]> championSpellImg(@PathVariable("id") Champion champion,
 			@PathVariable String spellKey) {
-		Image image = champion.getSpells().stream()
-				.filter(spell -> spell.getKey().equals(spellKey))
-				.findFirst().get().getImage();
+		Optional<ChampionSpell> spell = champion.getSpells().stream()
+				.filter(s -> spellKey.equals(s.getKey()))
+				.findFirst();
+		if (!spell.isPresent()) {
+			return ResponseEntity.notFound().build();
+		}
 		return ResponseEntity.ok()
-				.contentLength(image.getImgSrc().length)
-				.contentType(MediaType.parseMediaType(createMediaType(image)))
+				.contentLength(spell.get().getImage().getImgSrc().length)
+				.contentType(MediaType.parseMediaType(createMediaType(spell.get().getImage())))
 				.cacheControl(CacheControl.maxAge(31556926, TimeUnit.SECONDS))
 				.lastModified(champion.getLastModifiedDate().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli())
-				.body(image.getImgSrc());
+				.body(spell.get().getImage().getImgSrc());
 	}
 
 	@GetMapping(value = "/champions/{id}/passive/{passive}.*")
