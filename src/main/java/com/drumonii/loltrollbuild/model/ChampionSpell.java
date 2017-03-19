@@ -36,7 +36,7 @@ public class ChampionSpell implements Serializable {
 
 	@Column(name = "TOOLTIP", nullable = false)
 	@JsonProperty("tooltip")
-	@Getter @Setter private String tooltip;
+	@Getter @Setter private String tooltip = "";
 
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "spell")
 	@JsonManagedReference
