@@ -332,7 +332,7 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 
 	@Test
 	public void itemsForTrollBuild() throws Exception {
-		itemsRepository.save(itemsResponse.getItems().get("3056"));
+		itemsRepository.save(itemsResponse.getItems().get("3065"));
 
 		mockMvc.perform(get(apiPath + "/items/for-troll-build?mapId={mapId}", "11"))
 				.andExpect(status().isOk())

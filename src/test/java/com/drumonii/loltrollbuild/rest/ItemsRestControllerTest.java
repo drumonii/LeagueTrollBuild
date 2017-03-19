@@ -189,10 +189,7 @@ public class ItemsRestControllerTest extends BaseSpringTestRunner {
 
 	@Test
 	public void getForTrollBuild() throws Exception {
-		itemsResponseSlice.setItems(RandomizeUtil.getRandoms(
-				itemsResponse.getItems().values(), DEFAULT_PAGE_SIZE).stream()
-				.collect(Collectors.toMap(champion -> String.valueOf(champion.getId()), champion -> champion)));
-		itemsRepository.save(itemsResponseSlice.getItems().values());
+		itemsRepository.save(itemsResponse.getItems().values());
 
 		mockMvc.perform(get(apiPath + "/items/for-troll-build")
 				.param("mapId", SUMMONERS_RIFT))
