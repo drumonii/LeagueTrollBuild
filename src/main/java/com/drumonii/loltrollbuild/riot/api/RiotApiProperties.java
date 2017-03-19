@@ -22,12 +22,12 @@ public class RiotApiProperties {
 	@NotNull
 	@Valid
 	@NestedConfigurationProperty
-	@Getter @Setter private Api api;
+	@Getter @Setter private RiotApi api;
 
 	/**
 	 * General configuration properties for Riot's API not specific to {@link StaticData} or {@link Ddragon}.
 	 */
-	public static class Api {
+	public static class RiotApi {
 
 		@NotEmpty
 		@Getter @Setter private String key;

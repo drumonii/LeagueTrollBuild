@@ -1,7 +1,7 @@
 package com.drumonii.loltrollbuild.config;
 
 import com.drumonii.loltrollbuild.riot.api.RiotApiProperties;
-import com.drumonii.loltrollbuild.riot.api.RiotApiProperties.Api;
+import com.drumonii.loltrollbuild.riot.api.RiotApiProperties.RiotApi;
 import com.drumonii.loltrollbuild.riot.api.RiotApiProperties.Ddragon;
 import com.drumonii.loltrollbuild.riot.api.RiotApiProperties.StaticData;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ public class RiotApiRestConfig {
 		return builder.build();
 	}
 
-	private Api api;
+	private RiotApi api;
 	private StaticData staticData;
 	private Ddragon ddragon;
 
