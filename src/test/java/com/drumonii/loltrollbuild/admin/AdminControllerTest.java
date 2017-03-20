@@ -1,17 +1,19 @@
 package com.drumonii.loltrollbuild.admin;
 
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
+import com.drumonii.loltrollbuild.model.BatchJobExecution;
 import com.drumonii.loltrollbuild.model.BatchJobInstance;
+import com.drumonii.loltrollbuild.model.BatchStepExecution;
 import com.drumonii.loltrollbuild.model.Version;
-import com.drumonii.loltrollbuild.repository.BatchJobInstancesRepository;
 import com.drumonii.loltrollbuild.riot.*;
+import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.RandomUtils;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import static org.hamcrest.Matchers.is;
@@ -22,9 +24,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 public class AdminControllerTest extends BaseSpringTestRunner {
-
-	@Autowired
-	private BatchJobInstancesRepository batchJobInstancesRepository;
 
 	@MockBean
 	private VersionsRetrieval versionsRetrieval;
@@ -151,6 +150,49 @@ public class AdminControllerTest extends BaseSpringTestRunner {
 				.andExpect(model().attributeExists("latestRiotPatch", "latestSavedPatch"))
 				.andExpect(model().attribute("activeTab", is("maps")))
 				.andExpect(view().name("admin/maps/maps"));
+	}
+
+	@Test
+	public void mapsDifference() throws Exception {
+		given(mapsRetrieval.maps()).willReturn(new ArrayList<>());
+
+		mockMvc.perform(get("/admin/maps/diff").with(adminUser()))
+				.andExpect(status().isOk())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+				.andExpect(content().json("[]"));
+	}
+
+	@Test
+	public void jobInstances() throws Exception {
+		mockMvc.perform(get("/admin/job-instances").with(adminUser()))
+				.andExpect(status().isOk())
+				.andExpect(model().attribute("activeTab", is("jobInstances")))
+				.andExpect(view().name("admin/jobs/jobInstances"));
+	}
+
+	@Test
+	public void stepExecutions() throws Exception {
+		BatchJobInstance jobInstance = new BatchJobInstance();
+		jobInstance.setName(RandomStringUtils.randomAlphabetic(7));
+		jobInstance.setKey(RandomStringUtils.randomAlphabetic(10));
+		jobInstance = batchJobInstancesRepository.save(jobInstance);
+
+		BatchJobExecution jobExecution = new BatchJobExecution();
+		jobExecution.setCreateTime(LocalDateTime.now());
+		jobExecution.setJobInstance(jobInstance);
+		jobExecution = batchJobExecutionsRepository.save(jobExecution);
+
+		BatchStepExecution stepExecution = new BatchStepExecution();
+		stepExecution.setVersion(RandomUtils.nextLong());
+		stepExecution.setName(RandomStringUtils.randomAlphabetic(10));
+		stepExecution.setStartTime(LocalDateTime.now());
+		stepExecution.setJobExecution(jobExecution);
+		batchStepExecutionsRepository.save(stepExecution);
+
+		mockMvc.perform(get("/admin/job-instances/{jobInstanceId}/step-executions", jobInstance.getId()).with(adminUser()))
+				.andExpect(status().isOk())
+				.andExpect(model().attribute("activeTab", is("jobInstances")))
+				.andExpect(view().name("admin/jobs/stepExecutions"));
 	}
 
 }

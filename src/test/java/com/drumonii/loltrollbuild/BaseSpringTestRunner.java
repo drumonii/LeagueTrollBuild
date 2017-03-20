@@ -84,6 +84,15 @@ public abstract class BaseSpringTestRunner {
 	@Autowired
 	protected BuildsRepository buildsRepository;
 
+	@Autowired
+	protected BatchJobInstancesRepository batchJobInstancesRepository;
+
+	@Autowired
+	protected BatchJobExecutionsRepository batchJobExecutionsRepository;
+
+	@Autowired
+	protected BatchStepExecutionsRepository batchStepExecutionsRepository;
+
 	@MockBean
 	protected RestTemplate restTemplate;
 

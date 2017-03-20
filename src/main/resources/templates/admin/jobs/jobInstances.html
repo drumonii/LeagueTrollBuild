@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/admin}">
+<head>
+    <title th:text="#{admin.jobInstances}">Job Instances</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/datatables/media/css/dataTables.semanticui.min.css}" />
+    <script th:src="@{/webjars/datatables/media/js/jquery.dataTables.min.js}"></script>
+    <script th:src="@{/webjars/datatables/media/js/dataTables.semanticui.min.js}"></script>
+    <style>
+        #job-instances_filter {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="ui basic segment">
+        <h3 class="ui dividing header" th:text="#{admin.jobInstances}">Job Instances</h3>
+        <table id="job-instances" class="ui celled table" width="100%">
+            <thead>
+            <tr>
+                <th>
+                    <div class="ui input">
+                        <input class="job-instances-search-input" th:placeholder="#{admin.jobInstance.name.search}"
+                               type="text" data-column-name="name" size="15"/>
+                    </div>
+                </th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+            <tr>
+                <th th:text="#{admin.jobInstance.name}"></th>
+                <th th:text="#{admin.jobInstance.jobExecution.startTime}"></th>
+                <th th:text="#{admin.jobInstance.jobExecution.endTime}"></th>
+                <th th:text="#{admin.jobInstance.jobExecution.status}"></th>
+                <th></th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+    <script th:inline="javascript" th:include="~{admin/jobs/js/jobInstances.js :: script}"></script>
+</div>
+</body>
+</html>
