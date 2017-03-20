@@ -4,15 +4,6 @@
       layout:decorate="~{layouts/main}">
 <head>
     <script th:src="@{/webjars/isotope/dist/isotope.pkgd.min.js}"></script>
-    <style>
-        /* workaround for SUI and Isotope transition shake bug */
-        .card.no-transition {
-            -webkit-transition: none !important;
-            -moz-transition: none !important;
-            -o-transition: none !important;
-            transition: none !important;
-        }
-    </style>
 </head>
 <body>
 <div layout:fragment="content">
@@ -41,7 +32,7 @@
         </div>
         <div class="ui hidden divider" th:unless="${#lists.isEmpty(champions)}"></div>
         <div id="champions-cards" class="ui ten link cards" th:unless="${#lists.isEmpty(champions)}">
-            <div class="card no-transition" th:each="champion : ${champions}">
+            <div class="card" th:each="champion : ${champions}">
                 <div class="dimmable image">
                     <div class="ui dimmer">
                         <div class="content" th:attr="data-champion-tags=${champion.tags}">
