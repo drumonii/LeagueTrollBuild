@@ -4,17 +4,17 @@
 </head>
 <body>
 <footer th:fragment="footer">
-    <div class="ui inverted segment">
+    <div class="ui segment">
         <div class="ui container">
-            <div class="ui inverted divided stackable padded grid">
+            <div class="ui divided stackable padded grid">
                 <div class="row">
                     <div class="eight wide column">
-                        <h4 class="ui inverted header" th:text="#{footer.about.header}">About</h4>
+                        <h4 class="ui header" th:text="#{footer.about.header}">About</h4>
                         <p th:utext="#{footer.about}">Random Build Generator</p>
                         <div class="ui grid">
                             <div class="four column row">
                                 <div class="left floated column">
-                                    <div class="ui inverted link list">
+                                    <div class="ui link list">
                                         <a class="item" href="https://github.com/drumonii/LeagueTrollBuild">
                                             <i class="github large icon"></i> GitHub
                                         </a>
@@ -29,7 +29,7 @@
 
                     </div>
                     <div class="eight wide column">
-                        <h4 class="ui inverted header" th:text="#{footer.non-endorsement.header}">Disclaimer</h4>
+                        <h4 class="ui header" th:text="#{footer.non-endorsement.header}">Disclaimer</h4>
                         <p th:utext="#{footer.non-endorsement}">Footer Non-Endorsement</p>
                     </div>
                 </div>

@@ -5,7 +5,7 @@
 </head>
 <body>
 <header th:fragment="header">
-    <div class="ui inverted menu">
+    <div class="ui menu">
         <div class="ui container">
             <a class="item" th:classappend="${activeTab == 'home' ? 'active' : _}" th:href="@{/admin}"
                th:text="#{admin.header.title}">League Troll Build Admin</a>
