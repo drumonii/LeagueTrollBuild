@@ -38,12 +38,6 @@ idea {
     }
 }
 
-jar {
-    manifest {
-        attributes('Implementation-Version': version, 'Build-Date': new Date(), 'Created-By': "Gradle ${gradle.gradleVersion}")
-    }
-}
-
 ext {
     snippetsDir = file('build/generated-snippets')
 }
@@ -63,6 +57,9 @@ jar {
     dependsOn asciidoctor
     from ("${asciidoctor.outputDir}/html5") {
         into 'static/docs'
+    }
+    manifest {
+        attributes('Implementation-Version': version, 'Build-Date': new Date(), 'Created-By': "Gradle ${gradle.gradleVersion}")
     }
 }
 
