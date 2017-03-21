@@ -10,33 +10,31 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <div class="ui basic segment">
-        <h3 class="ui dividing header" th:text="#{admin.stepExecutions.for(${jobInstance.name})}">Step Executions for {0}</h3>
-        <table id="step-executions" class="ui celled table" width="100%">
-            <thead>
-            <tr>
-                <th th:text="#{admin.stepExecutions.name}"></th>
-                <th th:text="#{admin.stepExecutions.startTime}"></th>
-                <th th:text="#{admin.stepExecutions.endTime}"></th>
-                <th th:text="#{admin.stepExecutions.status}"></th>
-                <th th:text="#{admin.stepExecutions.readCount}"></th>
-                <th th:text="#{admin.stepExecutions.filterCount}"></th>
-                <th th:text="#{admin.stepExecutions.writeCount}"></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="stepExecution : ${jobInstance.jobExecution.stepExecutions}">
-                <td th:text="${stepExecution.name}"></td>
-                <td th:text="${stepExecution.startTime}"></td>
-                <td th:text="${stepExecution.endTime}"></td>
-                <td th:text="${stepExecution.status}"></td>
-                <td th:text="${stepExecution.readCount}"></td>
-                <td th:text="${stepExecution.filterCount}"></td>
-                <td th:text="${stepExecution.writeCount}"></td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+    <h3 class="ui dividing header" th:text="#{admin.stepExecutions.for(${jobInstance.name})}">Step Executions for {0}</h3>
+    <table id="step-executions" class="ui celled table" width="100%">
+        <thead>
+        <tr>
+            <th th:text="#{admin.stepExecutions.name}"></th>
+            <th th:text="#{admin.stepExecutions.startTime}"></th>
+            <th th:text="#{admin.stepExecutions.endTime}"></th>
+            <th th:text="#{admin.stepExecutions.status}"></th>
+            <th th:text="#{admin.stepExecutions.readCount}"></th>
+            <th th:text="#{admin.stepExecutions.filterCount}"></th>
+            <th th:text="#{admin.stepExecutions.writeCount}"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="stepExecution : ${jobInstance.jobExecution.stepExecutions}">
+            <td th:text="${stepExecution.name}"></td>
+            <td th:text="${stepExecution.startTime}"></td>
+            <td th:text="${stepExecution.endTime}"></td>
+            <td th:text="${stepExecution.status}"></td>
+            <td th:text="${stepExecution.readCount}"></td>
+            <td th:text="${stepExecution.filterCount}"></td>
+            <td th:text="${stepExecution.writeCount}"></td>
+        </tr>
+        </tbody>
+    </table>
     <script th:inline="javascript" th:include="~{admin/jobs/js/stepExecutions.js :: script}"></script>
 </div>
 </body>

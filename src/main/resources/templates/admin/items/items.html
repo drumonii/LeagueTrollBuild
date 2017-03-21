@@ -15,7 +15,7 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <div id="items-difference-segment" class="ui basic segment" style="display:none;">
+    <div id="items-difference-segment" style="display:none;">
         <div  class="ui info message">
             <i class="close icon"></i>
             <div class="header" th:text="#{admin.items.diff}">Difference in Items found</div>
@@ -83,56 +83,54 @@
             </tfoot>
         </table>
     </div>
-    <div class="ui basic segment">
-        <div id="items-error-msg" class="ui mini negative hidden message">
-            <i class="close icon"></i>
-            <div class="header">An error has occurred.</div>
-        </div>
-
-        <h3 class="ui dividing header" th:text="#{admin.items}">Items</h3>
-        <table id="items" class="ui celled table" width="100%">
-            <thead>
-            <tr>
-                <th class="one wide"></th>
-                <th class="three wide">
-                    <div class="ui input">
-                        <input class="items-search-input" th:placeholder="#{admin.item.name.search}"
-                               type="text" data-column-name="name" size="15"/>
-                    </div>
-                </th>
-                <th class="three wide">
-                    <div class="ui input">
-                        <input class="items-search-input" th:placeholder="#{admin.item.group.search}"
-                               type="text" data-column-name="group" size="15"/>
-                    </div>
-                </th>
-                <th class="three wide">
-                    <div class="ui input">
-                        <input class="items-search-input" th:placeholder="#{admin.item.requiredChampion.search}"
-                               type="text" data-column-name="requiredChampion" size="15"/>
-                    </div>
-                </th>
-                <th class="four wide">
-                    <div class="ui disabled input">
-                        <input class="items-search-input" th:placeholder="#{admin.item.maps.search}"
-                               type="text" data-column-name="maps" size="15"/>
-                    </div>
-                </th>
-                <th class="one wide"></th>
-                <th class="one wide"></th>
-            </tr>
-            <tr>
-                <th class="one wide"></th>
-                <th class="three wide" th:text="#{admin.item.name}">Name</th>
-                <th class="three wide" th:text="#{admin.item.group}">Group</th>
-                <th class="three wide" th:text="#{admin.item.requiredChampion}">Champion</th>
-                <th class="four wide" th:text="#{admin.item.maps}">Maps</th>
-                <th class="one wide"></th>
-                <th class="one wide"></th>
-            </tr>
-            </thead>
-        </table>
+    <div id="items-error-msg" class="ui mini negative hidden message">
+        <i class="close icon"></i>
+        <div class="header">An error has occurred.</div>
     </div>
+
+    <h3 class="ui dividing header" th:text="#{admin.items}">Items</h3>
+    <table id="items" class="ui celled table" width="100%">
+        <thead>
+        <tr>
+            <th class="one wide"></th>
+            <th class="three wide">
+                <div class="ui input">
+                    <input class="items-search-input" th:placeholder="#{admin.item.name.search}"
+                           type="text" data-column-name="name" size="15"/>
+                </div>
+            </th>
+            <th class="three wide">
+                <div class="ui input">
+                    <input class="items-search-input" th:placeholder="#{admin.item.group.search}"
+                           type="text" data-column-name="group" size="15"/>
+                </div>
+            </th>
+            <th class="three wide">
+                <div class="ui input">
+                    <input class="items-search-input" th:placeholder="#{admin.item.requiredChampion.search}"
+                           type="text" data-column-name="requiredChampion" size="15"/>
+                </div>
+            </th>
+            <th class="four wide">
+                <div class="ui disabled input">
+                    <input class="items-search-input" th:placeholder="#{admin.item.maps.search}"
+                           type="text" data-column-name="maps" size="15"/>
+                </div>
+            </th>
+            <th class="one wide"></th>
+            <th class="one wide"></th>
+        </tr>
+        <tr>
+            <th class="one wide"></th>
+            <th class="three wide" th:text="#{admin.item.name}">Name</th>
+            <th class="three wide" th:text="#{admin.item.group}">Group</th>
+            <th class="three wide" th:text="#{admin.item.requiredChampion}">Champion</th>
+            <th class="four wide" th:text="#{admin.item.maps}">Maps</th>
+            <th class="one wide"></th>
+            <th class="one wide"></th>
+        </tr>
+        </thead>
+    </table>
     <script th:inline="javascript" th:include="~{admin/items/js/items.js :: script}"></script>
 </div>
 </body>

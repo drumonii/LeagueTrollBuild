@@ -6,48 +6,46 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <div class="ui basic segment">
-        <div id="no-saved-patch-msg" class="ui negative message" th:if="${noSavedPatch}">
-            <i class="close icon"></i>
-            <div class="header"><i class="warning circle icon"></i>
-                <span th:text="#{admin.version.noSavedPatch.header}">No saved patch exists</span>
-            </div>
-            <p th:text="#{admin.version.noSavedPatch(${noSavedPatch})}">Save a patch before...</p>
+    <div id="no-saved-patch-msg" class="ui negative message" th:if="${noSavedPatch}">
+        <i class="close icon"></i>
+        <div class="header"><i class="warning circle icon"></i>
+            <span th:text="#{admin.version.noSavedPatch.header}">No saved patch exists</span>
         </div>
-
-        <h3 class="ui dividing header" th:text="#{admin.versions}">Patch Versions</h3>
-        <table class="ui celled table">
-            <thead>
-            <tr>
-                <th th:text="#{admin.version.latestPatch}">Latest Patch</th>
-                <th th:text="#{admin.version.savedPatch}">Current Saved Patch</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td th:text="${latestRiotPatch}">5.19.1</td>
-                <td th:class="${latestRiotPatch} != ${latestSavedPatch} ? 'warning' : 'positive'"
-                    th:if="${latestSavedPatch}" th:text="${latestSavedPatch}">5.17.1
-                </td>
-                <td class="error" th:unless="${latestSavedPatch}">
-                    <i class="warning circle icon"></i>
-                    <span th:text="#{admin.version.noSavedPatch.header}">No saved patch exists</span>
-                </td>
-            </tr>
-            </tbody>
-            <tfoot th:if="${latestRiotPatch != latestSavedPatch}">
-            <tr>
-                <th colspan="2">
-                    <form id="save-patch-form" class="ui form">
-                        <button id="save-patch-btn" class="ui primary button" type="submit"
-                                th:text="#{admin.version.savePatch}">Save Latest Patch
-                        </button>
-                    </form>
-                </th>
-            </tr>
-            </tfoot>
-        </table>
+        <p th:text="#{admin.version.noSavedPatch(${noSavedPatch})}">Save a patch before...</p>
     </div>
+
+    <h3 class="ui dividing header" th:text="#{admin.versions}">Patch Versions</h3>
+    <table class="ui celled table">
+        <thead>
+        <tr>
+            <th th:text="#{admin.version.latestPatch}">Latest Patch</th>
+            <th th:text="#{admin.version.savedPatch}">Current Saved Patch</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${latestRiotPatch}">5.19.1</td>
+            <td th:class="${latestRiotPatch} != ${latestSavedPatch} ? 'warning' : 'positive'"
+                th:if="${latestSavedPatch}" th:text="${latestSavedPatch}">5.17.1
+            </td>
+            <td class="error" th:unless="${latestSavedPatch}">
+                <i class="warning circle icon"></i>
+                <span th:text="#{admin.version.noSavedPatch.header}">No saved patch exists</span>
+            </td>
+        </tr>
+        </tbody>
+        <tfoot th:if="${latestRiotPatch != latestSavedPatch}">
+        <tr>
+            <th colspan="2">
+                <form id="save-patch-form" class="ui form">
+                    <button id="save-patch-btn" class="ui primary button" type="submit"
+                            th:text="#{admin.version.savePatch}">Save Latest Patch
+                    </button>
+                </form>
+            </th>
+        </tr>
+        </tfoot>
+    </table>
     <script th:inline="javascript">
         $(function() {
             $('#save-patch-form').submit(function(event) {

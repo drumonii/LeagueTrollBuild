@@ -7,18 +7,16 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <div class="ui basic segment">
-        <h3 class="ui dividing header" th:text="#{admin.actuator.metrics}">Metrics</h3>
+    <h3 class="ui dividing header" th:text="#{admin.actuator.metrics}">Metrics</h3>
 
-        <div class="ui two statistics">
-            <div class="statistic">
-                <div id="uptime" class="value"></div>
-                <div class="label" th:text="#{admin.actuator.metrics.uptime}">Uptime</div>
-            </div>
-            <div class="statistic">
-                <div id="instance-uptime" class="value"></div>
-                <div class="label" th:text="#{admin.actuator.metrics.instanceUptime}">Instance Uptime</div>
-            </div>
+    <div class="ui two statistics">
+        <div class="statistic">
+            <div id="uptime" class="value"></div>
+            <div class="label" th:text="#{admin.actuator.metrics.uptime}">Uptime</div>
+        </div>
+        <div class="statistic">
+            <div id="instance-uptime" class="value"></div>
+            <div class="label" th:text="#{admin.actuator.metrics.instanceUptime}">Instance Uptime</div>
         </div>
     </div>
     <script th:inline="javascript">

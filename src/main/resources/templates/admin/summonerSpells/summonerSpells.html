@@ -69,42 +69,40 @@
             </tfoot>
         </table>
     </div>
-    <div class="ui basic segment">
-        <div id="summoner-spells-error-msg" class="ui mini negative hidden message">
-            <i class="close icon"></i>
-            <div class="header">An error has occurred.</div>
-        </div>
-
-        <h3 class="ui dividing header" th:text="#{admin.summonerSpells}">Summoner Spells</h3>
-        <table id="summoner-spells" class="ui celled table" width="100%">
-            <thead>
-            <tr>
-                <th class="one wide"></th>
-                <th class="three wide">
-                    <div class="ui input">
-                        <input class="summoner-spells-search-input" th:placeholder="#{admin.summonerSpell.name.search}"
-                               type="text" data-column-name="name"/>
-                    </div>
-                </th>
-                <th class="eleven wide">
-                    <div class="ui disabled input">
-                        <input class="summoner-spells-search-input" th:placeholder="#{admin.summonerSpell.modes.search}"
-                               type="text" data-column-name="modes"/>
-                    </div>
-                </th>
-                <th class="one wide"></th>
-                <th class="one wide"></th>
-            </tr>
-            <tr>
-                <th class="one wide"></th>
-                <th class="three wide" th:text="#{admin.summonerSpell.name}">Name</th>
-                <th class="eleven wide" th:text="#{admin.summonerSpell.modes}">Modes</th>
-                <th class="one wide"></th>
-                <th class="one wide"></th>
-            </tr>
-            </thead>
-        </table>
+    <div id="summoner-spells-error-msg" class="ui mini negative hidden message">
+        <i class="close icon"></i>
+        <div class="header">An error has occurred.</div>
     </div>
+
+    <h3 class="ui dividing header" th:text="#{admin.summonerSpells}">Summoner Spells</h3>
+    <table id="summoner-spells" class="ui celled table" width="100%">
+        <thead>
+        <tr>
+            <th class="one wide"></th>
+            <th class="three wide">
+                <div class="ui input">
+                    <input class="summoner-spells-search-input" th:placeholder="#{admin.summonerSpell.name.search}"
+                           type="text" data-column-name="name"/>
+                </div>
+            </th>
+            <th class="eleven wide">
+                <div class="ui disabled input">
+                    <input class="summoner-spells-search-input" th:placeholder="#{admin.summonerSpell.modes.search}"
+                           type="text" data-column-name="modes"/>
+                </div>
+            </th>
+            <th class="one wide"></th>
+            <th class="one wide"></th>
+        </tr>
+        <tr>
+            <th class="one wide"></th>
+            <th class="three wide" th:text="#{admin.summonerSpell.name}">Name</th>
+            <th class="eleven wide" th:text="#{admin.summonerSpell.modes}">Modes</th>
+            <th class="one wide"></th>
+            <th class="one wide"></th>
+        </tr>
+        </thead>
+    </table>
     <script th:inline="javascript" th:include="~{admin/summonerSpells/js/summonerSpells.js :: script}"></script>
 </div>
 </body>

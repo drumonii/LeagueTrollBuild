@@ -15,7 +15,9 @@
 <!--/* header and nav */-->
 <header th:include="~{fragments/header :: header}"></header>
 <!--/* main content */-->
-<div class="ui container" layout:fragment="content"></div>
+<div class="ui container">
+    <div class="ui main segment" layout:fragment="content"></div>
+</div>
 <!--/* footer */-->
 <footer th:include="~{fragments/footer :: footer}"></footer>
 </body>

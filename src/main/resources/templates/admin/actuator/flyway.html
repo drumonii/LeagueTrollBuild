@@ -10,20 +10,18 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <div class="ui basic segment">
-        <h3 class="ui dividing header" th:text="#{admin.actuator.flyway}">Flyway</h3>
+    <h3 class="ui dividing header" th:text="#{admin.actuator.flyway}">Flyway</h3>
 
-        <table id="flyway" class="ui celled table">
-            <thead>
-            <tr>
-                <th class="four wide" th:text="#{admin.actuator.flyway.version}">Version</th>
-                <th class="four wide" th:text="#{admin.actuator.flyway.description}">Description</th>
-                <th class="four wide" th:text="#{admin.actuator.flyway.state}">State</th>
-                <th class="four wide" th:text="#{admin.actuator.flyway.executionTime}">Execution Time</th>
-            </tr>
-            </thead>
-        </table>
-    </div>
+    <table id="flyway" class="ui celled table">
+        <thead>
+        <tr>
+            <th class="four wide" th:text="#{admin.actuator.flyway.version}">Version</th>
+            <th class="four wide" th:text="#{admin.actuator.flyway.description}">Description</th>
+            <th class="four wide" th:text="#{admin.actuator.flyway.state}">State</th>
+            <th class="four wide" th:text="#{admin.actuator.flyway.executionTime}">Execution Time</th>
+        </tr>
+        </thead>
+    </table>
     <script th:inline="javascript">
         $(function() {
             $.get(/*[[@{/admin/actuator/flyway}]]*/ '/admin/actuator/flyway', function(data) {

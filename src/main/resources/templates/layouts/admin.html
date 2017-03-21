@@ -13,7 +13,9 @@
 <!--/* admin header and nav */-->
 <header th:include="~{fragments/admin/header :: header}"></header>
 <!--/* admin main content */-->
-<div class="ui container" layout:fragment="content"></div>
+<div class="ui container">
+    <div class="ui main segment" layout:fragment="content"></div>
+</div>
 <!--/* footer */-->
 <footer th:include="~{fragments/footer :: footer}"></footer>
 </body>

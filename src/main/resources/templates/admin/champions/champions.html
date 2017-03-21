@@ -15,7 +15,7 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <div id="champions-difference-segment" class="ui basic segment" style="display:none;">
+    <div id="champions-difference-segment" style="display:none;">
         <div class="ui info message">
             <i class="close icon"></i>
             <div class="header" th:text="#{admin.champions.diff}">Difference in Champions found</div>
@@ -84,56 +84,54 @@
         </table>
     </div>
 
-    <div id="champions-segment" class="ui basic segment">
-        <div id="champions-error-msg" class="ui mini negative hidden message">
-            <i class="close icon"></i>
-            <div class="header">An error has occurred.</div>
-        </div>
-
-        <h3 class="ui dividing header" th:text="#{admin.champions}">Champions</h3>
-        <table id="champions" class="ui celled table" width="100%">
-            <thead>
-            <tr>
-                <th class="one wide"></th>
-                <th class="two wide">
-                    <div class="ui input">
-                        <input class="champions-search-input" th:placeholder="#{admin.champion.name.search}"
-                               type="text" data-column-name="name" size="15"/>
-                    </div>
-                </th>
-                <th class="four wide">
-                    <div class="ui input">
-                        <input class="champions-search-input" th:placeholder="#{admin.champion.title.search}"
-                               type="text" data-column-name="title" size="20"/>
-                    </div>
-                </th>
-                <th class="four wide">
-                    <div class="ui disabled input">
-                        <input class="champions-search-input" th:placeholder="#{admin.champion.tags.search}"
-                               type="text" data-column-name="tags" size="15"/>
-                    </div>
-                </th>
-                <th class="three wide">
-                    <div class="ui input">
-                        <input class="champions-search-input" th:placeholder="#{admin.champion.partype.search}"
-                               type="text" data-column-name="partype" size="15"/>
-                    </div>
-                </th>
-                <th class="one wide"></th>
-                <th class="one wide"></th>
-            </tr>
-            <tr>
-                <th class="one wide"></th>
-                <th class="two wide" th:text="#{admin.champion.name}">Name</th>
-                <th class="four wide" th:text="#{admin.champion.title}">Title</th>
-                <th class="four wide" th:text="#{admin.champion.tags}">Tags</th>
-                <th class="three wide" th:text="#{admin.champion.partype}">Partype</th>
-                <th class="one wide"></th>
-                <th class="one wide"></th>
-            </tr>
-            </thead>
-        </table>
+    <div id="champions-error-msg" class="ui mini negative hidden message">
+        <i class="close icon"></i>
+        <div class="header">An error has occurred.</div>
     </div>
+
+    <h3 class="ui dividing header" th:text="#{admin.champions}">Champions</h3>
+    <table id="champions" class="ui celled table" width="100%">
+        <thead>
+        <tr>
+            <th class="one wide"></th>
+            <th class="two wide">
+                <div class="ui input">
+                    <input class="champions-search-input" th:placeholder="#{admin.champion.name.search}"
+                           type="text" data-column-name="name" size="15"/>
+                </div>
+            </th>
+            <th class="four wide">
+                <div class="ui input">
+                    <input class="champions-search-input" th:placeholder="#{admin.champion.title.search}"
+                           type="text" data-column-name="title" size="20"/>
+                </div>
+            </th>
+            <th class="four wide">
+                <div class="ui disabled input">
+                    <input class="champions-search-input" th:placeholder="#{admin.champion.tags.search}"
+                           type="text" data-column-name="tags" size="15"/>
+                </div>
+            </th>
+            <th class="three wide">
+                <div class="ui input">
+                    <input class="champions-search-input" th:placeholder="#{admin.champion.partype.search}"
+                           type="text" data-column-name="partype" size="15"/>
+                </div>
+            </th>
+            <th class="one wide"></th>
+            <th class="one wide"></th>
+        </tr>
+        <tr>
+            <th class="one wide"></th>
+            <th class="two wide" th:text="#{admin.champion.name}">Name</th>
+            <th class="four wide" th:text="#{admin.champion.title}">Title</th>
+            <th class="four wide" th:text="#{admin.champion.tags}">Tags</th>
+            <th class="three wide" th:text="#{admin.champion.partype}">Partype</th>
+            <th class="one wide"></th>
+            <th class="one wide"></th>
+        </tr>
+        </thead>
+    </table>
     <script th:inline="javascript" th:include="~{admin/champions/js/champions.js :: script}"></script>
 </div>
 </body>

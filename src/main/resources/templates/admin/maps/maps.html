@@ -62,35 +62,33 @@
             </tfoot>
         </table>
     </div>
-    <div class="ui basic segment">
-        <div id="maps-error-msg" class="ui mini negative hidden message">
-            <i class="close icon"></i>
-            <div class="header">An error has occurred.</div>
-        </div>
-
-        <h3 class="ui dividing header" th:text="#{admin.maps}">Maps</h3>
-        <table id="maps" class="ui celled table" width="100%">
-            <thead>
-            <tr>
-                <th class="one wide"></th>
-                <th class="thirteen wide">
-                    <div class="ui input">
-                        <input class="maps-search-input" th:placeholder="#{admin.map.mapName.search}"
-                               type="text" data-column-name="mapName"/>
-                    </div>
-                </th>
-                <th class="one wide"></th>
-                <th class="one wide"></th>
-            </tr>
-            <tr>
-                <th class="one wide"></th>
-                <th class="thirteen wide" th:text="#{admin.map.mapName}">Name</th>
-                <th class="one wide"></th>
-                <th class="one wide"></th>
-            </tr>
-            </thead>
-        </table>
+    <div id="maps-error-msg" class="ui mini negative hidden message">
+        <i class="close icon"></i>
+        <div class="header">An error has occurred.</div>
     </div>
+
+    <h3 class="ui dividing header" th:text="#{admin.maps}">Maps</h3>
+    <table id="maps" class="ui celled table" width="100%">
+        <thead>
+        <tr>
+            <th class="one wide"></th>
+            <th class="thirteen wide">
+                <div class="ui input">
+                    <input class="maps-search-input" th:placeholder="#{admin.map.mapName.search}"
+                           type="text" data-column-name="mapName"/>
+                </div>
+            </th>
+            <th class="one wide"></th>
+            <th class="one wide"></th>
+        </tr>
+        <tr>
+            <th class="one wide"></th>
+            <th class="thirteen wide" th:text="#{admin.map.mapName}">Name</th>
+            <th class="one wide"></th>
+            <th class="one wide"></th>
+        </tr>
+        </thead>
+    </table>
     <script th:inline="javascript" th:include="~{admin/maps/js/maps.js :: script}"></script>
 </div>
 </body>

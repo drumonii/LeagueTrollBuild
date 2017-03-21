@@ -6,41 +6,39 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <div class="ui basic segment">
-        <h3 class="ui dividing header" th:text="#{login.title}">Admin Login</h3>
-        <div th:if="${param.error}" class="ui negative message">
-            <i class="close icon"></i>
-            <span th:text="#{login.error}">
-            Invalid username and password
-        </span>
-        </div>
-        <div th:if="${param.logout}" class="ui positive message">
-            <i class="close icon"></i>
-            <span th:text="#{login.loggedOut}">
-            You have been logged out
-        </span>
-        </div>
-        <form class="ui form" th:action="@{/admin/login}" method="post">
-            <div class="two fields">
-                <div class="field">
-                    <label for="username" th:text="#{login.username}">Username</label>
-                    <input type="text" id="username" name="username"/>
-                </div>
-                <div class="field">
-                    <label for="password" th:text="#{login.password}">Password</label>
-                    <input type="password" id="password" name="password"/>
-                </div>
-            </div>
-            <button id="login-btn" class="ui primary button" type="submit">
-                <i class="sign in icon"></i>
-                <span th:text="#{login}">Login</span>
-            </button>
-            <a th:href="@{/}" class="ui button">
-                <i class="home icon"></i>
-                <span th:text="#{login.home}">Home</span>
-            </a>
-        </form>
+    <h3 class="ui dividing header" th:text="#{login.title}">Admin Login</h3>
+    <div th:if="${param.error}" class="ui negative message">
+        <i class="close icon"></i>
+        <span th:text="#{login.error}">
+        Invalid username and password
+    </span>
     </div>
+    <div th:if="${param.logout}" class="ui positive message">
+        <i class="close icon"></i>
+        <span th:text="#{login.loggedOut}">
+        You have been logged out
+    </span>
+    </div>
+    <form class="ui form" th:action="@{/admin/login}" method="post">
+        <div class="two fields">
+            <div class="field">
+                <label for="username" th:text="#{login.username}">Username</label>
+                <input type="text" id="username" name="username"/>
+            </div>
+            <div class="field">
+                <label for="password" th:text="#{login.password}">Password</label>
+                <input type="password" id="password" name="password"/>
+            </div>
+        </div>
+        <button id="login-btn" class="ui primary button" type="submit">
+            <i class="sign in icon"></i>
+            <span th:text="#{login}">Login</span>
+        </button>
+        <a th:href="@{/}" class="ui button">
+            <i class="home icon"></i>
+            <span th:text="#{login.home}">Home</span>
+        </a>
+    </form>
     <script th:inline="javascript">
         $(function() {
             $('.message .close').click(function() {
