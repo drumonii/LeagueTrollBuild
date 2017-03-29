@@ -5,7 +5,9 @@
 <body>
 <header th:fragment="header">
     <div class="ui center aligned header segment">
-        <a class="ui primary button" th:href="@{/}" th:text="#{header.title}">League Troll Build</a>
+        <div class="ui huge header">
+            <a th:href="@{/}" th:text="#{header.title}">League Troll Build</a>
+        </div>
     </div>
 </header>
 </body>
