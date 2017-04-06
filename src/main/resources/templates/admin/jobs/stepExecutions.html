@@ -28,7 +28,27 @@
             <td th:text="${stepExecution.name}"></td>
             <td th:text="${stepExecution.startTime}"></td>
             <td th:text="${stepExecution.endTime}"></td>
-            <td th:text="${stepExecution.status}"></td>
+            <td th:classappend="${stepExecution.status == 'FAILED' ? 'negative' : 'positive'}">
+                <button id="step-execution-failed-btn" class="ui negative basic button"
+                        th:text="${stepExecution.status}" th:if="${stepExecution.status == 'FAILED'}">Positive</button>
+                <div id="exit-msg-modal" class="ui modal" th:if="${stepExecution.status == 'FAILED'}">
+                    <div class="header" th:text="#{admin.stepExecutions.exitMessage}">
+                        Exit Message
+                    </div>
+                    <div class="image content">
+                        <div class="description">
+                            <pre th:text="${stepExecution.exitMessage}">
+                                java.lang.NullPointerException
+                                  at ...
+                            </pre>
+                        </div>
+                    </div>
+                    <div class="actions">
+                        <div class="ui positive right labeled icon button" th:text="#{ok}">OK</div>
+                    </div>
+                </div>
+                <span th:text="${stepExecution.status}" th:unless="${stepExecution.status == 'FAILED'}"></span>
+            </td>
             <td th:text="${stepExecution.readCount}"></td>
             <td th:text="${stepExecution.filterCount}"></td>
             <td th:text="${stepExecution.writeCount}"></td>

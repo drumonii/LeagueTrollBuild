@@ -1,19 +1,6 @@
 <script th:inline="javascript" xmlns:th="http://www.thymeleaf.org">
 $(function() {
     $('#step-executions').DataTable({
-        columnDefs: [
-            { targets: [3], createdCell: function (td, cellData, rowData, row, col) {
-                    switch(cellData) {
-                        case 'COMPLETED':
-                            $(td).addClass('positive');
-                            break;
-                        case 'FAILED':
-                            $(td).addClass('negative');
-                            break;
-                    }
-                }
-            }
-        ],
         language: {
             emptyTable: /*[[#{dataTables.emptyTable(#{admin.stepExecutions})}]]*/ 'dataTables.emptyTable',
             info: /*[[#{dataTables.info}]]*/ 'dataTables.info',
@@ -28,5 +15,6 @@ $(function() {
             }
         }
     });
+    $('#exit-msg-modal').modal('attach events', '#step-execution-failed-btn', 'show');
 });
 </script>
