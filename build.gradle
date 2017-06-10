@@ -18,7 +18,7 @@ buildscript {
         maven { url 'http://repo.spring.io/plugins-release' }
     }
     dependencies {
-        classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.5.2.RELEASE'
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.5.4.RELEASE'
         classpath 'org.springframework.build.gradle:propdeps-plugin:0.0.7'
         classpath 'org.asciidoctor:asciidoctor-gradle-plugin:1.5.3'
     }
@@ -69,9 +69,9 @@ bootRun {
     addResources = true
 }
 
-ext['assertj.version'] = '3.6.2'
-ext['thymeleaf.version'] = '3.0.2.RELEASE'
-ext['thymeleaf-extras-springsecurity4.version'] = '3.0.1.RELEASE'
+ext['assertj.version'] = '3.8.0'
+ext['thymeleaf.version'] = '3.0.5.RELEASE'
+ext['thymeleaf-extras-springsecurity4.version'] = '3.0.2.RELEASE'
 ext['thymeleaf-layout-dialect.version'] = '2.2.0'
 
 repositories {
@@ -101,7 +101,7 @@ dependencies {
     runtime 'com.h2database:h2'
 
     // PostgreSQL
-    runtime 'org.postgresql:postgresql:42.0.0'
+    runtime 'org.postgresql:postgresql:42.1.1'
 
     // EhCache
     compile 'net.sf.ehcache:ehcache'
@@ -127,17 +127,17 @@ dependencies {
     compile 'org.webjars.bower:jquery:2.2.4'
 
     // DataTables
-    compile('org.webjars.bower:datatables:1.10.13') {
+    compile('org.webjars.bower:datatables:1.10.15') {
         exclude group: 'org.webjars.bower'
     }
 
     // Isotope
-    compile('org.webjars.bower:isotope:3.0.3') {
+    compile('org.webjars.bower:isotope:3.0.4') {
         exclude group: 'org.webjars.bower'
     }
 
     // Clipboard JS
-    compile 'org.webjars.bower:clipboard:1.6.1'
+    compile 'org.webjars.bower:clipboard:1.7.1'
 
     // Testing
     testCompile 'org.springframework.boot:spring-boot-starter-test'
