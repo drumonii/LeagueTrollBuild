@@ -26,6 +26,7 @@
         $(function() {
             $.get(/*[[@{/admin/actuator/flyway}]]*/ '/admin/actuator/flyway', function(data) {
                 $('#flyway').DataTable({
+                    processing: true,
                     pageLength: 25,
                     order: [ [0, 'desc'] ],
                     data: data[0].migrations,
