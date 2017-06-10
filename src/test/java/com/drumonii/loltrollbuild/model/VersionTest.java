@@ -27,8 +27,8 @@ public class VersionTest extends BaseSpringTestRunner {
 		Version version1 = new Version("5.13.1");
 		Version version2 = new Version("6.2.1");
 		assertThat(version1.compareTo(version2)).isEqualTo(-1); // less than
-		assertThat(version1.compareTo(version1)).isEqualTo(0); // equal
-		assertThat(version2.compareTo(version1)).isEqualTo(1); // greater than
+		assertThat(version1.compareTo(version1)).isZero(); // equal
+		assertThat(version2.compareTo(version1)).isOne(); // greater than
 
 		Collections.sort(versions, Collections.reverseOrder());
 		assertThat(versions).isSortedAccordingTo(Collections.reverseOrder());

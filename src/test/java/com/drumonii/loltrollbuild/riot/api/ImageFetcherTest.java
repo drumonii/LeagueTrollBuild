@@ -84,7 +84,7 @@ public class ImageFetcherTest {
 				.willReturn(uriComponents);
 		given(uriComponents.toUriString())
 				.willReturn("http://homepages.cae.wisc.edu/~ece533/images/" + image.getFull());
-		assertThat(imageFetcher.setImgSrc(image, builder, latestVersion)).isEqualTo(1);
+		assertThat(imageFetcher.setImgSrc(image, builder, latestVersion)).isOne();
 	}
 
 }
