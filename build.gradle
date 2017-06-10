@@ -72,10 +72,17 @@ bootRun {
 ext['assertj.version'] = '3.8.0'
 ext['thymeleaf.version'] = '3.0.5.RELEASE'
 ext['thymeleaf-extras-springsecurity4.version'] = '3.0.2.RELEASE'
-ext['thymeleaf-layout-dialect.version'] = '2.2.0'
 
 repositories {
     jcenter()
+}
+
+configurations.all {
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        if (details.requested.group == 'nz.net.ultraq.thymeleaf' && details.requested.name == 'thymeleaf-layout-dialect') {
+            details.useTarget 'com.github.zhanhb:thymeleaf-layout-dialect:2.2.1'
+        }
+    }
 }
 
 dependencies {
