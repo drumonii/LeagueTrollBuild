@@ -52,7 +52,7 @@ public class BuildsRestController {
 	 */
 	@GetMapping
 	public PagedResources<Resource<Build>> getBuilds(
-			@PageableDefault(size = 20, sort = "id", direction = Direction.ASC) Pageable pageable, Build build) {
+			@PageableDefault(size = 20, sort = "id", direction = Direction.DESC) Pageable pageable, Build build) {
 		ExampleMatcher exampleMatcher = ExampleMatcher.matching()
 				.withIgnorePaths("id")
 				.withIgnoreNullValues();
