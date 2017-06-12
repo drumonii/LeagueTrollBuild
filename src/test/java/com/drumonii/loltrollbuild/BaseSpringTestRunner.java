@@ -133,7 +133,7 @@ public abstract class BaseSpringTestRunner {
 		mockMvc = webAppContextSetup(wac)
 				.apply(documentationConfiguration(restDocumentation).uris()
 						.withScheme("https")
-						.withHost("league-troll-build.herokuapp.com")
+						.withHost("loltrollbuild.com")
 						.withPort(443))
 				.apply(springSecurity())
 				.build();
