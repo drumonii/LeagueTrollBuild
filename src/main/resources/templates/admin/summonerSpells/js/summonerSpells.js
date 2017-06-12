@@ -1,4 +1,3 @@
-<script th:inline="javascript" xmlns:th="http://www.thymeleaf.org">
 $(function() {
     // Summoner Spells difference
     var differenceDataTable = $('#summoner-spells-difference').DataTable({
@@ -278,4 +277,3 @@ $(function() {
         $(this).transition('fade');
     });
 });
-</script>

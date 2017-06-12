@@ -1,5 +1,8 @@
-<script th:inline="javascript" xmlns:th="http://www.thymeleaf.org">
 $(function() {
+    var crystalScarId = /*[[${T(com.drumonii.loltrollbuild.util.GameMapUtil).CRYSTAL_SCAR_ID}]]*/ 8;
+    var twistedTreelineId = /*[[${T(com.drumonii.loltrollbuild.util.GameMapUtil).TWISTED_TREELINE_ID}]]*/ 10;
+    var summonersRiftId = /*[[${T(com.drumonii.loltrollbuild.util.GameMapUtil).SUMMONERS_RIFT_ID}]]*/ 11;
+    var howlingAbyssId = /*[[${T(com.drumonii.loltrollbuild.util.GameMapUtil).HOWLING_ABYSS_ID}]]*/ 12;
     // Items difference
     var differenceDataTable = $('#items-difference').DataTable({
         order: [ [1, 'asc'] ],
@@ -44,17 +47,17 @@ $(function() {
                     var maps = [];
                     $.each(data, function(index, value) {
                         if (value) {
-                            switch(index) {
-                                case '8':
+                            switch(parseInt(index)) {
+                                case crystalScarId:
                                     maps.push(' The Crystal Scar');
                                     break;
-                                case '10':
+                                case twistedTreelineId:
                                     maps.push(' Twisted Treeline');
                                     break;
-                                case '11':
+                                case summonersRiftId:
                                     maps.push(' Summoner’s Rift');
                                     break;
-                                case '12':
+                                case howlingAbyssId:
                                     maps.push(' Howling Abyss');
                                 break;
                             }
@@ -231,17 +234,17 @@ $(function() {
                     var maps = [];
                     $.each(data, function(index, value) {
                         if (value) {
-                            switch(index) {
-                                case '8':
+                            switch(parseInt(index)) {
+                                case crystalScarId:
                                     maps.push(' The Crystal Scar');
                                     break;
-                                case '10':
+                                case twistedTreelineId:
                                     maps.push(' Twisted Treeline');
                                     break;
-                                case '11':
+                                case summonersRiftId:
                                     maps.push(' Summoner’s Rift');
                                     break;
-                                case '12':
+                                case howlingAbyssId:
                                     maps.push(' Howling Abyss');
                                     break;
                             }
@@ -355,4 +358,3 @@ $(function() {
         $(this).transition('fade');
     });
 });
-</script>

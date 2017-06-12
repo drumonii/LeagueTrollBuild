@@ -1,4 +1,3 @@
-<script th:inline="javascript" xmlns:th="http://www.thymeleaf.org">
 $(function() {
     // Champions difference
     var differenceDataTable = $('#champions-difference').DataTable({
@@ -274,4 +273,3 @@ $(function() {
         $(this).transition('fade');
     });
 });
-</script>

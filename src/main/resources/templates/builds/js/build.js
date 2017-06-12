@@ -1,4 +1,3 @@
-<script th:inline="javascript" xmlns:th="http://www.thymeleaf.org">
 $(function() {
     $('#map').dropdown();
     $('#items .item, #summoner-spells .item, #trinket .item').popup();
@@ -8,4 +7,3 @@ $(function() {
     }
     $('#build-url-input').val(window.location.protocol + '//' + window.location.host + window.location.pathname);
 });
-</script>

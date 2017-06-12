@@ -1,4 +1,3 @@
-<script th:inline="javascript" xmlns:th="http://www.thymeleaf.org">
 $(function() {
     // Maps difference
     var differenceDataTable = $('#maps-difference').DataTable({
@@ -265,4 +264,3 @@ $(function() {
         $(this).transition('fade');
     });
 });
-</script>

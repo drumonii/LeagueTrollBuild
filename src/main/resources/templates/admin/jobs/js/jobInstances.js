@@ -1,4 +1,3 @@
-<script th:inline="javascript" xmlns:th="http://www.thymeleaf.org">
 $(function() {
     var dataTable = $('#job-instances').DataTable({
         processing: true,
@@ -86,4 +85,3 @@ $(function() {
         dataTable.search(inputs).draw();
     });
 });
-</script>

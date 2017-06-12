@@ -1,4 +1,3 @@
-<script th:inline="javascript" xmlns:th="http://www.thymeleaf.org">
 $(function() {
     $('#step-executions').DataTable({
         language: {
@@ -17,4 +16,3 @@ $(function() {
     });
     $('#exit-msg-modal').modal('attach events', '#step-execution-failed-btn', 'show');
 });
-</script>

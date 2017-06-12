@@ -54,7 +54,7 @@
             <span th:text="#{champions.empty}">to the administration area in order to add Champions from Riot.</span>
         </p>
     </div>
-    <script th:inline="javascript" th:include="champions/js/champions.js :: script"></script>
+    <script th:inline="javascript" th:insert="~{champions/js/champions.js}"></script>
 </div>
 </body>
 </html>

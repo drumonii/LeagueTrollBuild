@@ -1,4 +1,3 @@
-<script th:inline="javascript" xmlns:th="http://www.thymeleaf.org">
 $(function() {
     $('#map').dropdown();
     $('.message').click(function() {
@@ -107,4 +106,3 @@ $(function() {
         event.preventDefault();
     });
 });
-</script>

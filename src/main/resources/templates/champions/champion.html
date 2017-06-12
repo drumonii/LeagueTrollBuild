@@ -56,7 +56,7 @@
                                                         <option th:each="map : ${maps}"
                                                                 th:value="${map.mapId}" th:text="${map.mapName}"
                                                                 th:attr="data-map-id=${map.mapId}"
-                                                                th:selected="${map.mapId} == 11">Summoner's Rift
+                                                                th:selected="${map.mapId} == ${T(com.drumonii.loltrollbuild.util.GameMapUtil).SUMMONERS_RIFT_ID}">Summoner's Rift
                                                         </option>
                                                     </select>
                                                 </div>
@@ -189,7 +189,7 @@
             </div>
         </div>
     </div>
-    <script th:inline="javascript" th:include="~{champions/js/champion.js :: script}"></script>
+    <script th:inline="javascript" th:insert="~{champions/js/champion.js}"></script>
 </div>
 </body>
 </html>

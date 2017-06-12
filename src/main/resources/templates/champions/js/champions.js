@@ -1,4 +1,3 @@
-<script th:inline="javascript" xmlns:th="http://www.thymeleaf.org">
 $(function() {
     $('.cards .image').dimmer({
         on: 'hover'
@@ -36,4 +35,3 @@ $(function() {
         isotope.isotope();
     });
 });
-</script>

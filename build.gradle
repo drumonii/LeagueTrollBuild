@@ -7,7 +7,7 @@ apply plugin: 'org.springframework.boot'
 apply plugin: 'propdeps'
 apply plugin: 'org.asciidoctor.convert'
 
-version = '2.3.10'
+version = '2.3.11-SNAPSHOT'
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
@@ -70,7 +70,7 @@ bootRun {
 }
 
 ext['assertj.version'] = '3.8.0'
-ext['thymeleaf.version'] = '3.0.5.RELEASE'
+ext['thymeleaf.version'] = '3.0.6.RELEASE'
 ext['thymeleaf-extras-springsecurity4.version'] = '3.0.2.RELEASE'
 
 repositories {
