@@ -1,28 +1,28 @@
-$(function() {
+$(window).on('load', function() {
     $('.cards .image').dimmer({
         on: 'hover'
     });
     var regex,
         tagFilter,
         isotope;
-    $(window).load(function() {
-        isotope = $('#champions-cards').isotope({
-            itemSelector: '.card',
-            category: '[data-champion-tags]',
-            transitionDuration: 0,
-            filter: function() {
-                var searchResult = regex ? $(this).text().match(regex) : true;
-                var filterResult;
-                if (tagFilter === '*') {
-                    filterResult = true;
-                } else {
-                    filterResult = tagFilter ? $.inArray(tagFilter, $(this).find('.content').data('champion-tags')
-                            .replace('[', '').replace(']', '').split(', ')) > -1 : true;
-                }
-                return searchResult && filterResult;
+
+    isotope = $('#champions-cards').isotope({
+        itemSelector: '.card',
+        category: '[data-champion-tags]',
+        transitionDuration: 0,
+        filter: function() {
+            var searchResult = regex ? $(this).text().match(regex) : true;
+            var filterResult;
+            if (tagFilter === '*') {
+                filterResult = true;
+            } else {
+                filterResult = tagFilter ? $.inArray(tagFilter, $(this).find('.content').data('champion-tags')
+                        .replace('[', '').replace(']', '').split(', ')) > -1 : true;
             }
-        });
+            return searchResult && filterResult;
+        }
     });
+
     $('#champions-search-input').keyup(function() {
         regex = new RegExp($(this).val(), 'gi');
         isotope.isotope();
