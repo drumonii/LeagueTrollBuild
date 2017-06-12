@@ -74,7 +74,7 @@ public class SummonerSpell implements Serializable {
 
 	public enum GameMode {
 
-		CLASSIC, ODIN, ARAM, TUTORIAL, OTHER
+		CLASSIC, ARAM, TUTORIAL
 
 	}
 

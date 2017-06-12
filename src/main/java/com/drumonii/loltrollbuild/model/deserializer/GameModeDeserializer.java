@@ -13,7 +13,7 @@ import java.util.TreeSet;
 
 /**
  * A {@link JsonDeserializer} which evaluates a Summoner Spell's {@link GameMode}s, It will ignore non Troll Build
- * related game modes and return it as {@code OTHER}.
+ * related game modes.
  */
 public class GameModeDeserializer extends JsonDeserializer<SortedSet<GameMode>> {
 
@@ -24,13 +24,11 @@ public class GameModeDeserializer extends JsonDeserializer<SortedSet<GameMode>> 
 		JsonNode jsonNodes = oc.readTree(p);
 		for (JsonNode jsonNode : jsonNodes) {
 			String gameModeText = jsonNode.asText();
-			GameMode gameMode;
 			try {
-				gameMode = GameMode.valueOf(gameModeText);
+				gameModes.add(GameMode.valueOf(gameModeText));
 			} catch (IllegalArgumentException e) {
-				gameMode = GameMode.OTHER;
+				// Ignore the game mode if can't be parsed
 			}
-			gameModes.add(gameMode);
 		}
 		return gameModes;
 	}
