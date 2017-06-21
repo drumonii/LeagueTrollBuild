@@ -64,7 +64,7 @@ public class ChampionsController {
 	}
 
 	/**
-	 * Generats the full troll build based on the specified {@link Champion} and map ID.
+	 * Generates the full troll build based on the specified {@link Champion} and map ID.
 	 *
 	 * @param champion the {@link Champion} to create the troll build for
 	 * @param mapId the map ID to generate the troll build
