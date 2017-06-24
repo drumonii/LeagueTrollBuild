@@ -51,8 +51,11 @@ public class RiotApiRestConfig {
 				.scheme(staticData.getScheme())
 				.host(staticData.getBaseUrl())
 				.path(staticData.getSummonerSpells())
-				.queryParam("spellData", "cooldown,image,key,modes")
-				.queryParam(staticData.getParam(), api.getKey())
+				.queryParam("tags", "cooldown")
+				.queryParam("tags", "image")
+				.queryParam("tags", "key")
+				.queryParam("tags", "modes")
+				.queryParam(staticData.getKeyParam(), api.getKey())
 				.buildAndExpand(staticData.getRegion());
 	}
 
@@ -63,8 +66,11 @@ public class RiotApiRestConfig {
 				.scheme(staticData.getScheme())
 				.host(staticData.getBaseUrl())
 				.path(staticData.getSummonerSpell())
-				.queryParam("spellData", "cooldown,image,key,modes")
-				.queryParam(staticData.getParam(), api.getKey());
+				.queryParam("tags", "cooldown")
+				.queryParam("tags", "image")
+				.queryParam("tags", "key")
+				.queryParam("tags", "modes")
+				.queryParam(staticData.getKeyParam(), api.getKey());
 	}
 
 	@Bean
@@ -87,8 +93,14 @@ public class RiotApiRestConfig {
 				.scheme(staticData.getScheme())
 				.host(staticData.getBaseUrl())
 				.path(staticData.getItems())
-				.queryParam("itemListData", "consumed,from,gold,image,into,maps,requiredChampion")
-				.queryParam(staticData.getParam(), api.getKey())
+				.queryParam("tags", "consumed")
+				.queryParam("tags", "from")
+				.queryParam("tags", "gold")
+				.queryParam("tags", "image")
+				.queryParam("tags", "into")
+				.queryParam("tags", "maps")
+				.queryParam("tags", "requiredChampion")
+				.queryParam(staticData.getKeyParam(), api.getKey())
 				.buildAndExpand(staticData.getRegion());
 	}
 
@@ -99,8 +111,14 @@ public class RiotApiRestConfig {
 				.scheme(staticData.getScheme())
 				.host(staticData.getBaseUrl())
 				.path(staticData.getItem())
-				.queryParam("itemData", "consumed,from,gold,image,into,maps,requiredChampion")
-				.queryParam(staticData.getParam(), api.getKey());
+				.queryParam("tags", "consumed")
+				.queryParam("tags", "from")
+				.queryParam("tags", "gold")
+				.queryParam("tags", "image")
+				.queryParam("tags", "into")
+				.queryParam("tags", "maps")
+				.queryParam("tags", "requiredChampion")
+				.queryParam(staticData.getKeyParam(), api.getKey());
 	}
 
 	@Bean
@@ -123,8 +141,13 @@ public class RiotApiRestConfig {
 				.scheme(staticData.getScheme())
 				.host(staticData.getBaseUrl())
 				.path(staticData.getChampions())
-				.queryParam("champData", "image,info,passive,partype,spells,tags")
-				.queryParam(staticData.getParam(), api.getKey())
+				.queryParam("tags", "image")
+				.queryParam("tags", "info")
+				.queryParam("tags", "passive")
+				.queryParam("tags", "partype")
+				.queryParam("tags", "spells")
+				.queryParam("tags", "tags")
+				.queryParam(staticData.getKeyParam(), api.getKey())
 				.buildAndExpand(staticData.getRegion());
 	}
 
@@ -135,8 +158,13 @@ public class RiotApiRestConfig {
 				.scheme(staticData.getScheme())
 				.host(staticData.getBaseUrl())
 				.path(staticData.getChampion())
-				.queryParam("champData", "image,info,passive,partype,spells,tags")
-				.queryParam(staticData.getParam(), api.getKey());
+				.queryParam("tags", "image")
+				.queryParam("tags", "info")
+				.queryParam("tags", "passive")
+				.queryParam("tags", "partype")
+				.queryParam("tags", "spells")
+				.queryParam("tags", "tags")
+				.queryParam(staticData.getKeyParam(), api.getKey());
 	}
 
 	@Bean
@@ -177,7 +205,7 @@ public class RiotApiRestConfig {
 				.scheme(staticData.getScheme())
 				.host(staticData.getBaseUrl())
 				.path(staticData.getMaps())
-				.queryParam(staticData.getParam(), api.getKey())
+				.queryParam(staticData.getKeyParam(), api.getKey())
 				.buildAndExpand(staticData.getRegion());
 	}
 
@@ -201,7 +229,7 @@ public class RiotApiRestConfig {
 				.scheme(staticData.getScheme())
 				.host(staticData.getBaseUrl())
 				.path(staticData.getVersions())
-				.queryParam(staticData.getParam(), api.getKey())
+				.queryParam(staticData.getKeyParam(), api.getKey())
 				.buildAndExpand(staticData.getRegion());
 	}
 

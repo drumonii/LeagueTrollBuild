@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -51,6 +52,9 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 	@Qualifier("versions")
 	private UriComponents versionsUri;
 
+	@Value("${riot.api.static-data.region}")
+	private String region;
+
 	private UriComponents championUri;
 	private Champion leeSin;
 
@@ -59,7 +63,7 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 		super.before();
 
 		leeSin = championsResponse.getChampions().get("LeeSin");
-		championUri = championUriBuilder.buildAndExpand("na", leeSin.getId());
+		championUri = championUriBuilder.buildAndExpand(region, leeSin.getId());
 	}
 
 	@Test

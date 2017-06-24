@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -49,6 +50,9 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 	@Qualifier("versions")
 	private UriComponents versionsUri;
 
+	@Value("${riot.api.static-data.region}")
+	private String region;
+
 	private UriComponents itemUri;
 	private Item lichBane;
 
@@ -57,7 +61,7 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 		super.before();
 
 		lichBane = itemsResponse.getItems().get("3100");
-		itemUri = itemUriBuilder.buildAndExpand("na", lichBane.getId());
+		itemUri = itemUriBuilder.buildAndExpand(region, lichBane.getId());
 	}
 
 	@Test

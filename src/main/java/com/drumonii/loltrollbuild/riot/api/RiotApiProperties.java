@@ -53,7 +53,7 @@ public class RiotApiProperties {
 		@Getter @Setter private String baseUrl;
 
 		@NotEmpty
-		@Getter @Setter private String param;
+		@Getter @Setter private String keyParam;
 
 		@NotEmpty
 		@Getter @Setter private String region;

@@ -52,9 +52,9 @@ public class RiotApiRestConfigTest extends BaseSpringTestRunner {
 		assertThat(summonerSpellsUri.getScheme()).isEqualTo(scheme);
 		assertThat(summonerSpellsUri.getHost()).isEqualTo(host);
 		assertThat(summonerSpellsUri.getPath()).isEqualTo(staticData.getSummonerSpells());
-		assertThat(summonerSpellsUri.getQueryParams()).contains(entry("spellData",
-				Arrays.asList("cooldown,image,key,modes")));
-		assertThat(summonerSpellsUri.getQueryParams()).contains(entry("api_key", Arrays.asList(apiKey)));
+		assertThat(summonerSpellsUri.getQueryParams()).contains(
+				entry("tags", Arrays.asList("cooldown", "image", "key", "modes")),
+				entry("api_key", Arrays.asList(apiKey)));
 	}
 
 	@Autowired
@@ -69,9 +69,9 @@ public class RiotApiRestConfigTest extends BaseSpringTestRunner {
 		assertThat(uriComponents.getHost()).isEqualTo(host);
 		assertThat(uriComponents.getPath()).isEqualTo(staticData.getSummonerSpell().replace("{id}",
 				String.valueOf(id)));
-		assertThat(uriComponents.getQueryParams()).contains(entry("spellData",
-				Arrays.asList("cooldown,image,key,modes")));
-		assertThat(uriComponents.getQueryParams()).contains(entry("api_key", Arrays.asList(apiKey)));
+		assertThat(uriComponents.getQueryParams()).contains(
+				entry("tags", Arrays.asList("cooldown", "image", "key", "modes")),
+				entry("api_key", Arrays.asList(apiKey)));
 	}
 
 	@Autowired
@@ -101,9 +101,9 @@ public class RiotApiRestConfigTest extends BaseSpringTestRunner {
 		assertThat(itemsUri.getScheme()).isEqualTo(scheme);
 		assertThat(itemsUri.getHost()).isEqualTo(host);
 		assertThat(itemsUri.getPath()).isEqualTo(staticData.getItems());
-		assertThat(itemsUri.getQueryParams()).contains(entry("itemListData",
-				Arrays.asList("consumed,from,gold,image,into,maps,requiredChampion")));
-		assertThat(itemsUri.getQueryParams()).contains(entry("api_key", Arrays.asList(apiKey)));
+		assertThat(itemsUri.getQueryParams()).contains(
+				entry("tags", Arrays.asList("consumed", "from", "gold", "image", "into", "maps", "requiredChampion")),
+				entry("api_key", Arrays.asList(apiKey)));
 	}
 
 	@Autowired
@@ -117,9 +117,9 @@ public class RiotApiRestConfigTest extends BaseSpringTestRunner {
 		assertThat(uriComponents.getScheme()).isEqualTo(scheme);
 		assertThat(uriComponents.getHost()).isEqualTo(host);
 		assertThat(uriComponents.getPath()).isEqualTo(staticData.getItem().replace("{id}", String.valueOf(id)));
-		assertThat(uriComponents.getQueryParams()).contains(entry("itemData",
-				Arrays.asList("consumed,from,gold,image,into,maps,requiredChampion")));
-		assertThat(uriComponents.getQueryParams()).contains(entry("api_key", Arrays.asList(apiKey)));
+		assertThat(uriComponents.getQueryParams()).contains(
+				entry("tags", Arrays.asList("consumed", "from", "gold", "image", "into", "maps", "requiredChampion")),
+				entry("api_key", Arrays.asList(apiKey)));
 	}
 
 	@Autowired
@@ -149,9 +149,9 @@ public class RiotApiRestConfigTest extends BaseSpringTestRunner {
 		assertThat(championsUri.getScheme()).isEqualTo(scheme);
 		assertThat(championsUri.getHost()).isEqualTo(host);
 		assertThat(championsUri.getPath()).isEqualTo(staticData.getChampions());
-		assertThat(championsUri.getQueryParams()).contains(entry("champData",
-				Arrays.asList("image,info,passive,partype,spells,tags")));
-		assertThat(championsUri.getQueryParams()).contains(entry("api_key", Arrays.asList(apiKey)));
+		assertThat(championsUri.getQueryParams()).contains(
+				entry("tags", Arrays.asList("image", "info", "passive", "partype", "spells", "tags")),
+				entry("api_key", Arrays.asList(apiKey)));
 	}
 
 	@Autowired
@@ -165,9 +165,9 @@ public class RiotApiRestConfigTest extends BaseSpringTestRunner {
 		assertThat(uriComponents.getScheme()).isEqualTo(scheme);
 		assertThat(uriComponents.getHost()).isEqualTo(host);
 		assertThat(uriComponents.getPath()).isEqualTo(staticData.getChampion().replace("{id}", String.valueOf(id)));
-		assertThat(uriComponents.getQueryParams()).contains(entry("champData",
-				Arrays.asList("image,info,passive,partype,spells,tags")));
-		assertThat(uriComponents.getQueryParams()).contains(entry("api_key", Arrays.asList(apiKey)));
+		assertThat(uriComponents.getQueryParams()).contains(
+				entry("tags", Arrays.asList("image", "info", "passive", "partype", "spells", "tags")),
+				entry("api_key", Arrays.asList(apiKey)));
 	}
 
 	@Autowired

@@ -6,17 +6,17 @@ riot:
   api:
     key: # from RIOT_API_KEY environment variable or -Driot.api.key argument property
     static-data:
-      base-url: global.api.pvp.net/api/lol/static-data/{region}/v1.2
-      param: api_key
-      region: na
+      base-url: "{region}.api.riotgames.com/lol/static-data/v3"
+      keyParam: api_key
+      region: na1
       scheme: https
-      champions:  /champion
-      champion:  /champion/{id}
-      items: /item
-      item: /item/{id}
-      maps: /map
-      summoner-spells: /summoner-spell
-      summoner-spell: /summoner-spell/{id}
+      champions:  /champions
+      champion:  /champions/{id}
+      items: /items
+      item: /items/{id}
+      maps: /maps
+      summoner-spells: /summoner-spells
+      summoner-spell: /summoner-spells/{id}
       versions: /versions
     ddragon:
       base-url: ddragon.leagueoflegends.com/cdn

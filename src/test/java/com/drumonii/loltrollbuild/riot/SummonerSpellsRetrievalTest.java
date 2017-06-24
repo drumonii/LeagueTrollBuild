@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -49,6 +50,9 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 	@Qualifier("versions")
 	private UriComponents versionsUri;
 
+	@Value("${riot.api.static-data.region}")
+	private String region;
+
 	private UriComponents summonerSpellUri;
 	private SummonerSpell ignite;
 
@@ -57,7 +61,7 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 		super.before();
 
 		ignite = summonerSpellsResponse.getSummonerSpells().get("SummonerDot");
-		summonerSpellUri = summonerSpellBuilder.buildAndExpand("na", ignite.getId());
+		summonerSpellUri = summonerSpellBuilder.buildAndExpand(region, ignite.getId());
 	}
 
 	@Test
