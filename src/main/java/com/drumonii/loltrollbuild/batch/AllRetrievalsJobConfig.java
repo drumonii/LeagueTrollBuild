@@ -51,14 +51,10 @@ public class AllRetrievalsJobConfig {
 	@Bean
 	public Job allRetrievalsJob() {
 		return jobBuilderFactory.get("allRetrievalsJob")
-				.incrementer(parameters -> {
-					JobParametersBuilder builder = new JobParametersBuilder();
-					if (parameters.getString(LATEST_PATCH_KEY) == null) {
-						builder.addString(LATEST_PATCH_KEY,
-								versionsRetrieval.latestVersion(versionsRetrieval.versionsFromResponse()).getPatch());
-					}
-					return builder.toJobParameters();
-				})
+				.incrementer(parameters -> new JobParametersBuilder()
+						.addString(LATEST_PATCH_KEY,
+								versionsRetrieval.latestVersion(versionsRetrieval.versionsFromResponse()).getPatch())
+				.toJobParameters())
 				.start(versionsRetrievalJobStep())
 				.next(mapsRetrievalJobStep())
 				.next(summonerSpellsRetrievalJobStep())
