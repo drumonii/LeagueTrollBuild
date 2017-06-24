@@ -39,8 +39,6 @@ spring:
   data.rest.base-path: /api
   # Internalization
   messages.basename: i18n/messages
-  # Resource handling
-  resources.cache-period: 31556926
   # Thymeleaf
   thymeleaf.mode: HTML
   # Batch
@@ -56,6 +54,12 @@ management:
   context-path: /admin/actuator
   security:
     roles: ADMIN
+#Wro4j
+wro4j:
+  filter-url: /assets
+  manager-factory:
+    pre-processors: cssMinJawr, jsMin
+  debug: false
 
 ---
 
