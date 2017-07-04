@@ -3,6 +3,7 @@ $(function() {
     var twistedTreelineId = /*[[${T(com.drumonii.loltrollbuild.util.GameMapUtil).TWISTED_TREELINE_ID}]]*/ 10;
     var summonersRiftId = /*[[${T(com.drumonii.loltrollbuild.util.GameMapUtil).SUMMONERS_RIFT_ID}]]*/ 11;
     var howlingAbyssId = /*[[${T(com.drumonii.loltrollbuild.util.GameMapUtil).HOWLING_ABYSS_ID}]]*/ 12;
+    var patch = /*[[${latestRiotPatch}]]*/ '7.12.1';
     // Items difference
     var differenceDataTable = $('#items-difference').DataTable({
         order: [ [1, 'asc'] ],
@@ -20,8 +21,7 @@ $(function() {
                     return $('<img>', {
                         'class': 'ui rounded image',
                         style: 'height:60px;width:auto;',
-                        src: 'https://ddragon.leagueoflegends.com/cdn/' + [[${latestRiotPatch}]] + '/img/item/' +
-                        data.image.full
+                        src: 'https://ddragon.leagueoflegends.com/cdn/' + patch + '/img/item/' + data.image.full
                     }).wrap('<span>').parent().html();
                 }
             },

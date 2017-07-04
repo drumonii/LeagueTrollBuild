@@ -1,4 +1,5 @@
 $(function() {
+    var patch = /*[[${latestRiotPatch}]]*/ '7.12.1';
     // Summoner Spells difference
     var differenceDataTable = $('#summoner-spells-difference').DataTable({
         order: [ [1, 'asc'] ],
@@ -16,8 +17,7 @@ $(function() {
                     return $('<img>', {
                         'class': 'ui rounded image',
                         style: 'height:60px;width:auto;',
-                        src: 'https://ddragon.leagueoflegends.com/cdn/' + [[${latestRiotPatch}]] + '/img/spell/' +
-                        data.image.full
+                        src: 'https://ddragon.leagueoflegends.com/cdn/' + patch + '/img/spell/' + data.image.full
                     }).wrap('<span>').parent().html();
                 }
             },

@@ -1,4 +1,5 @@
 $(function() {
+    var patch = /*[[${latestRiotPatch}]]*/ '7.12.1';
     // Champions difference
     var differenceDataTable = $('#champions-difference').DataTable({
         processing: true,
@@ -17,8 +18,7 @@ $(function() {
                     return $('<img>', {
                         'class': 'ui rounded image',
                         style: 'height:60px;width:auto;',
-                        src: 'https://ddragon.leagueoflegends.com/cdn/' + [[${latestRiotPatch}]] + '/img/champion/' +
-                            data.image.full
+                        src: 'https://ddragon.leagueoflegends.com/cdn/' + patch + '/img/champion/' + data.image.full
                     }).wrap('<span>').parent().html();
                 }
             },
