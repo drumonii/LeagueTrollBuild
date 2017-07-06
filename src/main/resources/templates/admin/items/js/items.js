@@ -149,7 +149,7 @@ $(function() {
             },
             error: function() {
                 $('#save-items-btn').removeClass('loading');
-                $('#items-difference-error-msg .header').text([[#{admin.items.save.error}]]);
+                $('#items-difference-error-msg .header').text(/*[[#{admin.items.save.error}]]*/ 'admin.items.save.error');
                 $('#items-difference-error-msg').removeClass('hidden').addClass('visible');
             },
             complete: function() {
