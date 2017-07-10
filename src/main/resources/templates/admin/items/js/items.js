@@ -28,18 +28,12 @@ $(function() {
             { data: 'name' },
             { data: 'group',
                 render: function(data, type, full, meta) {
-                    if (data) {
-                        return data;
-                    }
-                    return /*[[#{none}]]*/ 'none';
+					return data ? data : /*[[#{none}]]*/ 'none';
                 }
             },
             { data: 'requiredChampion',
                 render: function(data, type, full, meta) {
-                    if (data) {
-                        return data;
-                    }
-                    return /*[[#{none}]]*/ 'none';
+					return data ? data : /*[[#{none}]]*/ 'none';
                 }
             },
             { data: 'maps',
@@ -215,18 +209,12 @@ $(function() {
             { data: 'name' },
             { data: 'group',
                 render: function(data, type, full, meta) {
-                    if (data) {
-                        return data;
-                    }
-                    return /*[[#{none}]]*/ 'none';
+					return data ? data : /*[[#{none}]]*/ 'none';
                 }
             },
             { data: 'requiredChampion',
                 render: function(data, type, full, meta) {
-                    if (data) {
-                        return data;
-                    }
-                    return /*[[#{none}]]*/ 'none';
+					return data ? data : /*[[#{none}]]*/ 'none';
                 }
             },
             { data: 'maps',
