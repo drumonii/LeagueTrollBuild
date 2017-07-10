@@ -4,17 +4,15 @@ import com.drumonii.loltrollbuild.model.GameMap;
 import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.repository.MapsRepository;
 import com.drumonii.loltrollbuild.riot.api.ImageFetcher;
-import com.drumonii.loltrollbuild.riot.api.MapsResponse;
+import com.drumonii.loltrollbuild.riot.service.MapsService;
+import com.drumonii.loltrollbuild.riot.service.VersionsService;
 import org.apache.commons.collections4.ListUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,11 +26,7 @@ import java.util.stream.Collectors;
 public class MapsRetrieval {
 
 	@Autowired
-	private RestTemplate restTemplate;
-
-	@Autowired
-	@Qualifier("maps")
-	private UriComponents mapsUri;
+	private MapsService mapsService;
 
 	@Autowired
 	@Qualifier("mapsImg")
@@ -45,7 +39,7 @@ public class MapsRetrieval {
 	private ImageFetcher imageFetcher;
 
 	@Autowired
-	private VersionsRetrieval versionsRetrieval;
+	private VersionsService versionsService;
 
 	/**
 	 * Returns the {@link List} of {@link GameMap} from Riot for the most current patch.
@@ -54,8 +48,7 @@ public class MapsRetrieval {
 	 */
 	@GetMapping
 	public Collection<GameMap> maps() {
-		MapsResponse response = restTemplate.getForObject(mapsUri.toString(), MapsResponse.class);
-		return response.getMaps().values();
+		return mapsService.getMaps();
 	}
 
 	/**
@@ -72,8 +65,7 @@ public class MapsRetrieval {
 	 */
 	@PostMapping
 	public List<GameMap> saveMaps(@RequestParam(required = false) boolean truncate) {
-		MapsResponse response = restTemplate.getForObject(mapsUri.toString(), MapsResponse.class);
-		List<GameMap> maps = new ArrayList<>(response.getMaps().values());
+		List<GameMap> maps = mapsService.getMaps();
 
 		if (truncate) {
 			mapsRepository.deleteAll();
@@ -84,7 +76,7 @@ public class MapsRetrieval {
 			maps = ListUtils.subtract(maps, mapsFromDb);
 		}
 
-		Version latestVersion = versionsRetrieval.latestVersion(versionsRetrieval.versionsFromResponse());
+		Version latestVersion = versionsService.getLatestVersion();
 
 		imageFetcher.setImgsSrcs(maps.stream().map(GameMap::getImage).collect(Collectors.toList()), mapsImgUri,
 				latestVersion);
@@ -99,8 +91,7 @@ public class MapsRetrieval {
 	 */
 	@GetMapping(value = "/{id}")
 	public GameMap map(@PathVariable int id) {
-		MapsResponse response = restTemplate.getForObject(mapsUri.toString(), MapsResponse.class);
-		GameMap map = response.getMaps().get(String.valueOf(id));
+		GameMap map = mapsService.getMap(id);
 		if (map == null) {
 			throw new ResourceNotFoundException("Could not find Map with ID: " + id);
 		}
@@ -117,8 +108,7 @@ public class MapsRetrieval {
 	 */
 	@PostMapping(value = "/{id}")
 	public GameMap saveMap(@PathVariable int id) {
-		MapsResponse response = restTemplate.getForObject(mapsUri.toString(), MapsResponse.class);
-		GameMap map = response.getMaps().get(String.valueOf(id));
+		GameMap map = mapsService.getMap(id);
 		if (map == null) {
 			throw new ResourceNotFoundException("Could not find Map with ID: " + id);
 		}
@@ -128,7 +118,7 @@ public class MapsRetrieval {
 			mapsRepository.delete(id);
 		}
 
-		Version latestVersion = versionsRetrieval.latestVersion(versionsRetrieval.versionsFromResponse());
+		Version latestVersion = versionsService.getLatestVersion();
 
 		imageFetcher.setImgSrc(map.getImage(), mapsImgUri, latestVersion);
 		return mapsRepository.save(map);

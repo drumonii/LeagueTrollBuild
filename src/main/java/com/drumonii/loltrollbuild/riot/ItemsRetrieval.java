@@ -4,19 +4,15 @@ import com.drumonii.loltrollbuild.model.Item;
 import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.repository.ItemsRepository;
 import com.drumonii.loltrollbuild.riot.api.ImageFetcher;
-import com.drumonii.loltrollbuild.riot.api.ItemsResponse;
+import com.drumonii.loltrollbuild.riot.service.ItemsService;
+import com.drumonii.loltrollbuild.riot.service.VersionsService;
 import org.apache.commons.collections4.ListUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestClientException;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -30,17 +26,6 @@ import java.util.stream.Collectors;
 public class ItemsRetrieval {
 
 	@Autowired
-	private RestTemplate restTemplate;
-
-	@Autowired
-	@Qualifier("items")
-	private UriComponents itemsUri;
-
-	@Autowired
-	@Qualifier("item")
-	private UriComponentsBuilder itemUri;
-
-	@Autowired
 	@Qualifier("itemsImg")
 	private UriComponentsBuilder itemsImgUri;
 
@@ -51,10 +36,10 @@ public class ItemsRetrieval {
 	private ImageFetcher imageFetcher;
 
 	@Autowired
-	private VersionsRetrieval versionsRetrieval;
+	private VersionsService versionsService;
 
-	@Value("${riot.api.static-data.region}")
-	private String region;
+	@Autowired
+	private ItemsService itemsService;
 
 	/**
 	 * Returns the {@link List} of {@link Item} from Riot for the most current patch.
@@ -63,8 +48,7 @@ public class ItemsRetrieval {
 	 */
 	@GetMapping
 	public Collection<Item> items() {
-		ItemsResponse response = restTemplate.getForObject(itemsUri.toString(), ItemsResponse.class);
-		return response.getItems().values();
+		return itemsService.getItems();
 	}
 
 	/**
@@ -81,8 +65,7 @@ public class ItemsRetrieval {
 	 */
 	@PostMapping
 	public List<Item> saveItems(@RequestParam(required = false) boolean truncate) {
-		ItemsResponse response = restTemplate.getForObject(itemsUri.toString(), ItemsResponse.class);
-		List<Item> items = new ArrayList<>(response.getItems().values());
+		List<Item> items = itemsService.getItems();
 
 		if (truncate) {
 			itemsRepository.deleteAll();
@@ -93,7 +76,7 @@ public class ItemsRetrieval {
 			items = ListUtils.subtract(items, itemsFromDb);
 		}
 
-		Version latestVersion = versionsRetrieval.latestVersion(versionsRetrieval.versionsFromResponse());
+		Version latestVersion = versionsService.getLatestVersion();
 
 		imageFetcher.setImgsSrcs(items.stream().map(Item::getImage).collect(Collectors.toList()), itemsImgUri,
 				latestVersion);
@@ -108,11 +91,8 @@ public class ItemsRetrieval {
 	 */
 	@GetMapping(value = "/{id}")
 	public Item item(@PathVariable int id) {
-		UriComponents uriComponents = itemUri.buildAndExpand(region, id);
-		Item item;
-		try {
-			item = restTemplate.getForObject(uriComponents.toString(), Item.class);
-		} catch (RestClientException e) {
+		Item item = itemsService.getItem(id);
+		if (item == null) {
 			throw new ResourceNotFoundException("Could not find Item with ID: " + id);
 		}
 		return item;
@@ -128,11 +108,8 @@ public class ItemsRetrieval {
 	 */
 	@PostMapping(value = "/{id}")
 	public Item saveItem(@PathVariable int id) {
-		UriComponents uriComponents = itemUri.buildAndExpand(region, id);
-		Item item;
-		try {
-			item = restTemplate.getForObject(uriComponents.toString(), Item.class);
-		} catch (RestClientException e) {
+		Item item = itemsService.getItem(id);
+		if (item == null) {
 			throw new ResourceNotFoundException("Could not find Item with ID: " + id);
 		}
 
@@ -141,7 +118,7 @@ public class ItemsRetrieval {
 			itemsRepository.delete(id);
 		}
 
-		Version latestVersion = versionsRetrieval.latestVersion(versionsRetrieval.versionsFromResponse());
+		Version latestVersion = versionsService.getLatestVersion();
 
 		imageFetcher.setImgSrc(item.getImage(), itemsImgUri, latestVersion);
 		return itemsRepository.save(item);

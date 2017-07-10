@@ -4,20 +4,16 @@ import com.drumonii.loltrollbuild.model.Champion;
 import com.drumonii.loltrollbuild.model.ChampionSpell;
 import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.repository.ChampionsRepository;
-import com.drumonii.loltrollbuild.riot.api.ChampionsResponse;
 import com.drumonii.loltrollbuild.riot.api.ImageFetcher;
+import com.drumonii.loltrollbuild.riot.service.ChampionsService;
+import com.drumonii.loltrollbuild.riot.service.VersionsService;
 import org.apache.commons.collections4.ListUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestClientException;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,17 +25,6 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/riot/champions")
 public class ChampionsRetrieval {
-
-	@Autowired
-	private RestTemplate restTemplate;
-
-	@Autowired
-	@Qualifier("champions")
-	private UriComponents championsUri;
-
-	@Autowired
-	@Qualifier("champion")
-	private UriComponentsBuilder championUri;
 
 	@Autowired
 	@Qualifier("championsImg")
@@ -60,10 +45,10 @@ public class ChampionsRetrieval {
 	private ImageFetcher imageFetcher;
 
 	@Autowired
-	private VersionsRetrieval versionsRetrieval;
+	private VersionsService versionsService;
 
-	@Value("${riot.api.static-data.region}")
-	private String region;
+	@Autowired
+	private ChampionsService championsService;
 
 	/**
 	 * Returns the {@link List} of {@link Champion} from Riot for the most current patch.
@@ -72,8 +57,7 @@ public class ChampionsRetrieval {
 	 */
 	@GetMapping
 	public Collection<Champion> champions() {
-		ChampionsResponse response = restTemplate.getForObject(championsUri.toString(), ChampionsResponse.class);
-		return response.getChampions().values();
+		return championsService.getChampions();
 	}
 
 	/**
@@ -91,8 +75,7 @@ public class ChampionsRetrieval {
 	 */
 	@PostMapping
 	public List<Champion> saveChampions(@RequestParam(required = false) boolean truncate) {
-		ChampionsResponse response = restTemplate.getForObject(championsUri.toString(), ChampionsResponse.class);
-		List<Champion> champions = new ArrayList<>(response.getChampions().values());
+		List<Champion> champions = championsService.getChampions();
 
 		if (truncate) {
 			championsRepository.deleteAll();
@@ -103,7 +86,7 @@ public class ChampionsRetrieval {
 			champions = ListUtils.subtract(champions, championsFromDb);
 		}
 
-		Version latestVersion = versionsRetrieval.latestVersion(versionsRetrieval.versionsFromResponse());
+		Version latestVersion = versionsService.getLatestVersion();
 
 		imageFetcher.setImgsSrcs(champions.stream().map(Champion::getImage).collect(Collectors.toList()),
 				championsImgUri, latestVersion);
@@ -123,11 +106,8 @@ public class ChampionsRetrieval {
 	 */
 	@GetMapping(value = "/{id}")
 	public Champion champion(@PathVariable int id) {
-		UriComponents uriComponents = championUri.buildAndExpand(region, id);
-		Champion champion;
-		try {
-			champion = restTemplate.getForObject(uriComponents.toString(), Champion.class);
-		} catch (RestClientException e) {
+		Champion champion = championsService.getChampion(id);
+		if (champion == null) {
 			throw new ResourceNotFoundException("Could not find Champion with ID: " + id);
 		}
 		return champion;
@@ -143,11 +123,8 @@ public class ChampionsRetrieval {
 	 */
 	@PostMapping(value = "/{id}")
 	public Champion saveChampion(@PathVariable int id) {
-		UriComponents uriComponents = championUri.buildAndExpand(region, id);
-		Champion champion;
-		try {
-			champion = restTemplate.getForObject(uriComponents.toString(), Champion.class);
-		} catch (RestClientException e) {
+		Champion champion = championsService.getChampion(id);
+		if (champion == null) {
 			throw new ResourceNotFoundException("Could not find Champion with ID: " + id);
 		}
 
@@ -156,7 +133,7 @@ public class ChampionsRetrieval {
 			championsRepository.delete(id);
 		}
 
-		Version latestVersion = versionsRetrieval.latestVersion(versionsRetrieval.versionsFromResponse());
+		Version latestVersion = versionsService.getLatestVersion();
 
 		imageFetcher.setImgSrc(champion.getImage(), championsImgUri, latestVersion);
 		imageFetcher.setImgsSrcs(champion.getSpells().stream().map(ChampionSpell::getImage).collect(Collectors.toList()),

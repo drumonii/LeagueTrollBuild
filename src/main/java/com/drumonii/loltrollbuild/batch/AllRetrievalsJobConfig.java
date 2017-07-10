@@ -52,8 +52,7 @@ public class AllRetrievalsJobConfig {
 	public Job allRetrievalsJob() {
 		return jobBuilderFactory.get("allRetrievalsJob")
 				.incrementer(parameters -> new JobParametersBuilder()
-						.addString(LATEST_PATCH_KEY,
-								versionsRetrieval.latestVersion(versionsRetrieval.versionsFromResponse()).getPatch())
+						.addString(LATEST_PATCH_KEY, versionsRetrieval.latestVersion().getPatch())
 				.toJobParameters())
 				.start(versionsRetrievalJobStep())
 				.next(mapsRetrievalJobStep())

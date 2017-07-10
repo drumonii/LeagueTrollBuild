@@ -4,8 +4,11 @@ import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.model.BatchJobExecution;
 import com.drumonii.loltrollbuild.model.BatchJobInstance;
 import com.drumonii.loltrollbuild.model.BatchStepExecution;
-import com.drumonii.loltrollbuild.model.Version;
-import com.drumonii.loltrollbuild.riot.*;
+import com.drumonii.loltrollbuild.riot.ChampionsRetrieval;
+import com.drumonii.loltrollbuild.riot.ItemsRetrieval;
+import com.drumonii.loltrollbuild.riot.MapsRetrieval;
+import com.drumonii.loltrollbuild.riot.SummonerSpellsRetrieval;
+import com.drumonii.loltrollbuild.riot.service.VersionsService;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
 import org.junit.Before;
@@ -18,7 +21,6 @@ import java.util.ArrayList;
 
 import static org.hamcrest.Matchers.is;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.anyListOf;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -26,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class AdminControllerTest extends BaseSpringTestRunner {
 
 	@MockBean
-	private VersionsRetrieval versionsRetrieval;
+	private VersionsService versionsService;
 
 	@MockBean
 	private SummonerSpellsRetrieval summonerSpellsRetrieval;
@@ -44,7 +46,7 @@ public class AdminControllerTest extends BaseSpringTestRunner {
 	public void before() {
 		super.before();
 
-		given(versionsRetrieval.latestVersion(anyListOf(Version.class))).willReturn(versions.get(0));
+		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
 	}
 
 	@Test

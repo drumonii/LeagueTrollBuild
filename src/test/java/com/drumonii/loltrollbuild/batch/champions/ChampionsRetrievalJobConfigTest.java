@@ -2,9 +2,8 @@ package com.drumonii.loltrollbuild.batch.champions;
 
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.model.Champion;
-import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.model.image.Image;
-import com.drumonii.loltrollbuild.riot.api.ChampionsResponse;
+import com.drumonii.loltrollbuild.riot.service.ChampionsService;
 import com.drumonii.loltrollbuild.util.RandomizeUtil;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,13 +12,10 @@ import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.util.UriComponents;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.TreeSet;
@@ -29,23 +25,17 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyListOf;
 import static org.mockito.Matchers.eq;
-import static org.mockito.Matchers.isNull;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 public class ChampionsRetrievalJobConfigTest extends BaseSpringTestRunner {
 
-	@Autowired
-	@Qualifier("champions")
-	private UriComponents championsUri;
+	@MockBean
+	private ChampionsService championsService;
 
 	@Autowired
 	@Qualifier("championsRetrievalJob")
 	private Job championsRetrievalJob;
-
-	@Autowired
-	@Qualifier("versions")
-	private UriComponents versionsUri;
 
 	@Before
 	public void before() {
@@ -56,11 +46,7 @@ public class ChampionsRetrievalJobConfigTest extends BaseSpringTestRunner {
 
 	@Test
 	public void savesNewChampions() throws Exception {
-		given(restTemplate.getForObject(eq(championsUri.toString()), eq(ChampionsResponse.class)))
-				.willReturn(championsResponse);
-
-		given(restTemplate.exchange(eq(versionsUri.toString()), eq(HttpMethod.GET), isNull(HttpEntity.class),
-				eq(new ParameterizedTypeReference<List<Version>>() {}))).willReturn(ResponseEntity.ok(versions));
+		given(championsService.getChampions()).willReturn(new ArrayList<>(championsResponse.getChampions().values()));
 
 		JobExecution jobExecution = jobLauncherTestUtils.launchJob(getJobParameters());
 		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
@@ -76,11 +62,7 @@ public class ChampionsRetrievalJobConfigTest extends BaseSpringTestRunner {
 
 	@Test
 	public void savesChampionsDifference() throws Exception {
-		given(restTemplate.getForObject(eq(championsUri.toString()), eq(ChampionsResponse.class)))
-				.willReturn(championsResponse);
-
-		given(restTemplate.exchange(eq(versionsUri.toString()), eq(HttpMethod.GET), isNull(HttpEntity.class),
-				eq(new ParameterizedTypeReference<List<Version>>() {}))).willReturn(ResponseEntity.ok(versions));
+		given(championsService.getChampions()).willReturn(new ArrayList<>(championsResponse.getChampions().values()));
 
 		List<Champion> champions = championsRepository.save(championsResponse.getChampions().values());
 
@@ -100,7 +82,6 @@ public class ChampionsRetrievalJobConfigTest extends BaseSpringTestRunner {
 		assertThat(championsRepository.findAll()).containsOnlyElementsOf(championsResponse.getChampions().values());
 	}
 
-
 	@Test
 	public void deletesChampionsDifference() throws Exception {
 		List<Champion> champions = championsRepository.save(championsResponse.getChampions().values());
@@ -108,11 +89,7 @@ public class ChampionsRetrievalJobConfigTest extends BaseSpringTestRunner {
 		Champion championToDelete = RandomizeUtil.getRandom(champions);
 		championsResponse.getChampions().remove(championToDelete.getKey());
 
-		given(restTemplate.getForObject(eq(championsUri.toString()), eq(ChampionsResponse.class)))
-				.willReturn(championsResponse);
-
-		given(restTemplate.exchange(eq(versionsUri.toString()), eq(HttpMethod.GET), isNull(HttpEntity.class),
-				eq(new ParameterizedTypeReference<List<Version>>() {}))).willReturn(ResponseEntity.ok(versions));
+		given(championsService.getChampions()).willReturn(new ArrayList<>(championsResponse.getChampions().values()));
 
 		JobExecution jobExecution = jobLauncherTestUtils.launchJob(getJobParameters());
 		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);

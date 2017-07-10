@@ -2,24 +2,17 @@ package com.drumonii.loltrollbuild.riot;
 
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.model.SummonerSpell;
-import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.model.image.Image;
-import com.drumonii.loltrollbuild.riot.api.SummonerSpellsResponse;
+import com.drumonii.loltrollbuild.riot.service.SummonerSpellsService;
+import com.drumonii.loltrollbuild.riot.service.VersionsService;
 import com.drumonii.loltrollbuild.util.RandomizeUtil;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.RestClientException;
-import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -27,7 +20,6 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyListOf;
 import static org.mockito.Matchers.eq;
-import static org.mockito.Matchers.isNull;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
@@ -38,22 +30,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 
-	@Autowired
-	@Qualifier("summonerSpells")
-	private UriComponents summonerSpellsUri;
+	@MockBean
+	private SummonerSpellsService summonerSpellsService;
 
-	@Autowired
-	@Qualifier("summonerSpell")
-	private UriComponentsBuilder summonerSpellBuilder;
+	@MockBean
+	private VersionsService versionsService;
 
-	@Autowired
-	@Qualifier("versions")
-	private UriComponents versionsUri;
-
-	@Value("${riot.api.static-data.region}")
-	private String region;
-
-	private UriComponents summonerSpellUri;
 	private SummonerSpell ignite;
 
 	@Before
@@ -61,13 +43,12 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 		super.before();
 
 		ignite = summonerSpellsResponse.getSummonerSpells().get("SummonerDot");
-		summonerSpellUri = summonerSpellBuilder.buildAndExpand(region, ignite.getId());
 	}
 
 	@Test
 	public void summonerSpells() throws Exception {
-		given(restTemplate.getForObject(eq(summonerSpellsUri.toString()), eq(SummonerSpellsResponse.class)))
-				.willReturn(summonerSpellsResponse);
+		given(summonerSpellsService.getSummonerSpells())
+				.willReturn(new ArrayList<>(summonerSpellsResponse.getSummonerSpells().values()));
 
 		mockMvc.perform(get("/riot/summoner-spells").with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
@@ -78,11 +59,10 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 
 	@Test
 	public void saveSummonerSpells() throws Exception {
-		given(restTemplate.getForObject(eq(summonerSpellsUri.toString()), eq(SummonerSpellsResponse.class)))
-				.willReturn(summonerSpellsResponse);
+		given(summonerSpellsService.getSummonerSpells())
+				.willReturn(new ArrayList<>(summonerSpellsResponse.getSummonerSpells().values()));
 
-		given(restTemplate.exchange(eq(versionsUri.toString()), eq(HttpMethod.GET), isNull(HttpEntity.class),
-				eq(new ParameterizedTypeReference<List<Version>>() {}))).willReturn(ResponseEntity.ok(versions));
+		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
 
 		mockMvc.perform(post("/riot/summoner-spells").with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
@@ -99,11 +79,10 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 
 	@Test
 	public void saveDifferenceOfSummonerSpells() throws Exception {
-		given(restTemplate.getForObject(eq(summonerSpellsUri.toString()), eq(SummonerSpellsResponse.class)))
-				.willReturn(summonerSpellsResponse);
+		given(summonerSpellsService.getSummonerSpells())
+				.willReturn(new ArrayList<>(summonerSpellsResponse.getSummonerSpells().values()));
 
-		given(restTemplate.exchange(eq(versionsUri.toString()), eq(HttpMethod.GET), isNull(HttpEntity.class),
-				eq(new ParameterizedTypeReference<List<Version>>() {}))).willReturn(ResponseEntity.ok(versions));
+		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
 
 		List<SummonerSpell> summonerSpells = summonerSpellsRepository.save(summonerSpellsResponse
 				.getSummonerSpells().values());
@@ -126,11 +105,10 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 		SummonerSpell summonerSpellToDelete = RandomizeUtil.getRandom(summonerSpells);
 		summonerSpellsResponse.getSummonerSpells().remove(summonerSpellToDelete.getKey());
 
-		given(restTemplate.getForObject(eq(summonerSpellsUri.toString()), eq(SummonerSpellsResponse.class)))
-				.willReturn(summonerSpellsResponse);
+		given(summonerSpellsService.getSummonerSpells())
+				.willReturn(new ArrayList<>(summonerSpellsResponse.getSummonerSpells().values()));
 
-		given(restTemplate.exchange(eq(versionsUri.toString()), eq(HttpMethod.GET), isNull(HttpEntity.class),
-				eq(new ParameterizedTypeReference<List<Version>>() {}))).willReturn(ResponseEntity.ok(versions));
+		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
 
 		mockMvc.perform(post("/riot/summoner-spells").with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
@@ -145,11 +123,10 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 
 	@Test
 	public void saveSummonerSpellsWithTruncate() throws Exception {
-		given(restTemplate.getForObject(eq(summonerSpellsUri.toString()), eq(SummonerSpellsResponse.class)))
-				.willReturn(summonerSpellsResponse);
+		given(summonerSpellsService.getSummonerSpells())
+				.willReturn(new ArrayList<>(summonerSpellsResponse.getSummonerSpells().values()));
 
-		given(restTemplate.exchange(eq(versionsUri.toString()), eq(HttpMethod.GET), isNull(HttpEntity.class),
-				eq(new ParameterizedTypeReference<List<Version>>() {}))).willReturn(ResponseEntity.ok(versions));
+		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
 
 		mockMvc.perform(post("/riot/summoner-spells?truncate=true").with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
@@ -166,8 +143,7 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 
 	@Test
 	public void summonerSpell() throws Exception {
-		given(restTemplate.getForObject(eq(summonerSpellUri.toString()), eq(SummonerSpell.class)))
-				.willReturn(ignite);
+		given(summonerSpellsService.getSummonerSpell(eq(ignite.getId()))).willReturn(ignite);
 
 		mockMvc.perform(get("/riot/summoner-spells/{id}", ignite.getId()).with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
@@ -177,8 +153,7 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 
 	@Test
 	public void summonerSpellNotFound() throws Exception {
-		given(restTemplate.getForObject(eq(summonerSpellUri.toString()), eq(SummonerSpell.class)))
-				.willThrow(new RestClientException("404 Not Found"));
+		given(summonerSpellsService.getSummonerSpell(eq(ignite.getId()))).willReturn(null);
 
 		mockMvc.perform(get("/riot/summoner-spells/{id}", ignite.getId()).with(adminUser()).with(csrf()))
 				.andExpect(status().isNotFound());
@@ -186,11 +161,9 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 
 	@Test
 	public void saveSummonerSpell() throws Exception {
-		given(restTemplate.getForObject(eq(summonerSpellUri.toString()), eq(SummonerSpell.class)))
-				.willReturn(ignite);
+		given(summonerSpellsService.getSummonerSpell(eq(ignite.getId()))).willReturn(ignite);
 
-		given(restTemplate.exchange(eq(versionsUri.toString()), eq(HttpMethod.GET), isNull(HttpEntity.class),
-				eq(new ParameterizedTypeReference<List<Version>>() {}))).willReturn(ResponseEntity.ok(versions));
+		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
 
 		mockMvc.perform(post("/riot/summoner-spells/{id}", ignite.getId()).with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
@@ -205,8 +178,7 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 
 	@Test
 	public void saveSummonerSpellNotFound() throws Exception {
-		given(restTemplate.getForObject(eq(summonerSpellUri.toString()), eq(SummonerSpell.class)))
-				.willThrow(new RestClientException("404 Not Found"));
+		given(summonerSpellsService.getSummonerSpell(eq(ignite.getId()))).willReturn(null);
 
 		mockMvc.perform(post("/riot/summoner-spells/{id}", ignite.getId()).with(adminUser()).with(csrf()))
 				.andExpect(status().isNotFound());
@@ -218,11 +190,9 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 		newIgnite.setName("New Ignite");
 		summonerSpellsRepository.save(newIgnite);
 
-		given(restTemplate.getForObject(eq(summonerSpellUri.toString()), eq(SummonerSpell.class)))
-				.willReturn(newIgnite);
+		given(summonerSpellsService.getSummonerSpell(eq(ignite.getId()))).willReturn(newIgnite);
 
-		given(restTemplate.exchange(eq(versionsUri.toString()), eq(HttpMethod.GET), isNull(HttpEntity.class),
-				eq(new ParameterizedTypeReference<List<Version>>() {}))).willReturn(ResponseEntity.ok(versions));
+		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
 
 		mockMvc.perform(post("/riot/summoner-spells/{id}", ignite.getId()).with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())

@@ -2,9 +2,8 @@ package com.drumonii.loltrollbuild.batch.summonerSpells;
 
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.model.SummonerSpell;
-import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.model.image.Image;
-import com.drumonii.loltrollbuild.riot.api.SummonerSpellsResponse;
+import com.drumonii.loltrollbuild.riot.service.SummonerSpellsService;
 import com.drumonii.loltrollbuild.util.RandomizeUtil;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,36 +12,27 @@ import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.util.UriComponents;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
-import static org.mockito.Matchers.isNull;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 public class SummonerSpellsRetrievalJobConfigTest extends BaseSpringTestRunner {
 
-	@Autowired
-	@Qualifier("summonerSpells")
-	private UriComponents summonerSpellsUri;
+	@MockBean
+	private SummonerSpellsService summonerSpellsService;
 
 	@Autowired
 	@Qualifier("summonerSpellsRetrievalJob")
 	private Job summonerSpellsRetrievalJob;
-
-	@Autowired
-	@Qualifier("versions")
-	private UriComponents versionsUri;
 
 	@Before
 	public void before() {
@@ -53,12 +43,9 @@ public class SummonerSpellsRetrievalJobConfigTest extends BaseSpringTestRunner {
 
 	@Test
 	public void savesNewSummonerSpells() throws Exception {
-		given(restTemplate.getForObject(eq(summonerSpellsUri.toString()), eq(SummonerSpellsResponse.class)))
-				.willReturn(summonerSpellsResponse);
+		given(summonerSpellsService.getSummonerSpells())
+				.willReturn(new ArrayList<>(summonerSpellsResponse.getSummonerSpells().values()));
 
-		given(restTemplate.exchange(eq(versionsUri.toString()), eq(HttpMethod.GET), isNull(HttpEntity.class),
-				eq(new ParameterizedTypeReference<List<Version>>() {}))).willReturn(ResponseEntity.ok(versions));
-		
 		JobExecution jobExecution = jobLauncherTestUtils.launchJob(getJobParameters());
 		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
 
@@ -71,11 +58,8 @@ public class SummonerSpellsRetrievalJobConfigTest extends BaseSpringTestRunner {
 
 	@Test
 	public void savesSummonerSpellsDifference() throws Exception {
-		given(restTemplate.getForObject(eq(summonerSpellsUri.toString()), eq(SummonerSpellsResponse.class)))
-				.willReturn(summonerSpellsResponse);
-
-		given(restTemplate.exchange(eq(versionsUri.toString()), eq(HttpMethod.GET), isNull(HttpEntity.class),
-				eq(new ParameterizedTypeReference<List<Version>>() {}))).willReturn(ResponseEntity.ok(versions));
+		given(summonerSpellsService.getSummonerSpells())
+				.willReturn(new ArrayList<>(summonerSpellsResponse.getSummonerSpells().values()));
 
 		List<SummonerSpell> summonerSpells = summonerSpellsRepository.save(summonerSpellsResponse
 				.getSummonerSpells().values());
@@ -103,12 +87,9 @@ public class SummonerSpellsRetrievalJobConfigTest extends BaseSpringTestRunner {
 		SummonerSpell summonerSpellToDelete = RandomizeUtil.getRandom(summonerSpells);
 		summonerSpellsResponse.getSummonerSpells().remove(summonerSpellToDelete.getKey());
 
-		given(restTemplate.getForObject(eq(summonerSpellsUri.toString()), eq(SummonerSpellsResponse.class)))
-				.willReturn(summonerSpellsResponse);
+		given(summonerSpellsService.getSummonerSpells())
+				.willReturn(new ArrayList<>(summonerSpellsResponse.getSummonerSpells().values()));
 
-		given(restTemplate.exchange(eq(versionsUri.toString()), eq(HttpMethod.GET), isNull(HttpEntity.class),
-				eq(new ParameterizedTypeReference<List<Version>>() {}))).willReturn(ResponseEntity.ok(versions));
-		
 		JobExecution jobExecution = jobLauncherTestUtils.launchJob(getJobParameters());
 		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
 

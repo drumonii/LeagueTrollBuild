@@ -2,9 +2,8 @@ package com.drumonii.loltrollbuild.batch.items;
 
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.model.Item;
-import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.model.image.Image;
-import com.drumonii.loltrollbuild.riot.api.ItemsResponse;
+import com.drumonii.loltrollbuild.riot.service.ItemsService;
 import com.drumonii.loltrollbuild.util.RandomizeUtil;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,36 +12,27 @@ import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.util.UriComponents;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
-import static org.mockito.Matchers.isNull;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 public class ItemsRetrievalJobConfigTest extends BaseSpringTestRunner {
 
-	@Autowired
-	@Qualifier("items")
-	private UriComponents itemsUri;
+	@MockBean
+	private ItemsService itemsService;
 
 	@Autowired
 	@Qualifier("itemsRetrievalJob")
 	private Job itemsRetrievalJob;
-
-	@Autowired
-	@Qualifier("versions")
-	private UriComponents versionsUri;
 
 	@Before
 	public void before() {
@@ -53,12 +43,8 @@ public class ItemsRetrievalJobConfigTest extends BaseSpringTestRunner {
 
 	@Test
 	public void savesNewItems() throws Exception {
-		given(restTemplate.getForObject(eq(itemsUri.toString()), eq(ItemsResponse.class)))
-				.willReturn(itemsResponse);
+		given(itemsService.getItems()).willReturn(new ArrayList<>(itemsResponse.getItems().values()));
 
-		given(restTemplate.exchange(eq(versionsUri.toString()), eq(HttpMethod.GET), isNull(HttpEntity.class),
-				eq(new ParameterizedTypeReference<List<Version>>() {}))).willReturn(ResponseEntity.ok(versions));
-		
 		JobExecution jobExecution = jobLauncherTestUtils.launchJob(getJobParameters());
 		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
 
@@ -71,11 +57,7 @@ public class ItemsRetrievalJobConfigTest extends BaseSpringTestRunner {
 
 	@Test
 	public void savesItemsDifference() throws Exception {
-		given(restTemplate.getForObject(eq(itemsUri.toString()), eq(ItemsResponse.class)))
-				.willReturn(itemsResponse);
-
-		given(restTemplate.exchange(eq(versionsUri.toString()), eq(HttpMethod.GET), isNull(HttpEntity.class),
-				eq(new ParameterizedTypeReference<List<Version>>() {}))).willReturn(ResponseEntity.ok(versions));
+		given(itemsService.getItems()).willReturn(new ArrayList<>(itemsResponse.getItems().values()));
 
 		List<Item> items = itemsRepository.save(itemsResponse.getItems().values());
 
@@ -101,12 +83,8 @@ public class ItemsRetrievalJobConfigTest extends BaseSpringTestRunner {
 		Item itemToDelete = RandomizeUtil.getRandom(items);
 		itemsResponse.getItems().remove(String.valueOf(itemToDelete.getId()));
 
-		given(restTemplate.getForObject(eq(itemsUri.toString()), eq(ItemsResponse.class)))
-				.willReturn(itemsResponse);
+		given(itemsService.getItems()).willReturn(new ArrayList<>(itemsResponse.getItems().values()));
 
-		given(restTemplate.exchange(eq(versionsUri.toString()), eq(HttpMethod.GET), isNull(HttpEntity.class),
-				eq(new ParameterizedTypeReference<List<Version>>() {}))).willReturn(ResponseEntity.ok(versions));
-		
 		JobExecution jobExecution = jobLauncherTestUtils.launchJob(getJobParameters());
 		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
 

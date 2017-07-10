@@ -2,18 +2,14 @@ package com.drumonii.loltrollbuild.batch.items;
 
 import com.drumonii.loltrollbuild.model.Item;
 import com.drumonii.loltrollbuild.repository.ItemsRepository;
-import com.drumonii.loltrollbuild.riot.api.ItemsResponse;
+import com.drumonii.loltrollbuild.riot.service.ItemsService;
 import org.apache.commons.collections4.ListUtils;
 import org.springframework.batch.item.ExecutionContext;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.ItemStreamException;
 import org.springframework.batch.item.support.AbstractItemStreamItemReader;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponents;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,11 +18,7 @@ import java.util.List;
 public class ItemsRetrievalItemReader extends AbstractItemStreamItemReader<Item> {
 
 	@Autowired
-	private RestTemplate restTemplate;
-
-	@Autowired
-	@Qualifier("items")
-	private UriComponents itemsUri;
+	private ItemsService itemsService;
 
 	@Autowired
 	private ItemsRepository itemsRepository;
@@ -44,8 +36,7 @@ public class ItemsRetrievalItemReader extends AbstractItemStreamItemReader<Item>
 
 	@Override
 	public void open(ExecutionContext executionContext) throws ItemStreamException {
-		items = new ArrayList<>(restTemplate.getForObject(itemsUri.toString(), ItemsResponse.class).getItems()
-				.values());
+		items = itemsService.getItems();
 		List<Item> deletedItems = ListUtils.subtract(itemsRepository.findAll(), items);
 		itemsRepository.delete(deletedItems);
 	}

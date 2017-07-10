@@ -94,9 +94,6 @@ public abstract class BaseSpringTestRunner {
 	protected BatchStepExecutionsRepository batchStepExecutionsRepository;
 
 	@MockBean
-	protected RestTemplate restTemplate;
-
-	@MockBean
 	protected ImageFetcher imageFetcher;
 
 	protected MockMvc mockMvc;

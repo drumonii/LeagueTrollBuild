@@ -1,8 +1,15 @@
 package com.drumonii.loltrollbuild.admin;
 
-import com.drumonii.loltrollbuild.model.*;
+import com.drumonii.loltrollbuild.model.Champion;
+import com.drumonii.loltrollbuild.model.GameMap;
+import com.drumonii.loltrollbuild.model.Item;
+import com.drumonii.loltrollbuild.model.SummonerSpell;
 import com.drumonii.loltrollbuild.repository.*;
-import com.drumonii.loltrollbuild.riot.*;
+import com.drumonii.loltrollbuild.riot.ChampionsRetrieval;
+import com.drumonii.loltrollbuild.riot.ItemsRetrieval;
+import com.drumonii.loltrollbuild.riot.MapsRetrieval;
+import com.drumonii.loltrollbuild.riot.SummonerSpellsRetrieval;
+import com.drumonii.loltrollbuild.riot.service.VersionsService;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,11 +27,11 @@ import java.util.Collection;
 public class AdminController {
 
 	@Autowired
-	private VersionsRetrieval versionsRetrieval;
+	private VersionsService versionsService;
 
 	@ModelAttribute("latestRiotPatch")
 	public String latestRiotPatch() {
-		return versionsRetrieval.latestVersion(versionsRetrieval.versionsFromResponse()).getPatch();
+		return versionsService.getLatestVersion().getPatch();
 	}
 
 	@GetMapping

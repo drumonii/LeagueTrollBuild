@@ -4,19 +4,15 @@ import com.drumonii.loltrollbuild.model.SummonerSpell;
 import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.repository.SummonerSpellsRepository;
 import com.drumonii.loltrollbuild.riot.api.ImageFetcher;
-import com.drumonii.loltrollbuild.riot.api.SummonerSpellsResponse;
+import com.drumonii.loltrollbuild.riot.service.SummonerSpellsService;
+import com.drumonii.loltrollbuild.riot.service.VersionsService;
 import org.apache.commons.collections4.ListUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestClientException;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -30,15 +26,7 @@ import java.util.stream.Collectors;
 public class SummonerSpellsRetrieval {
 
 	@Autowired
-	private RestTemplate restTemplate;
-
-	@Autowired
-	@Qualifier("summonerSpells")
-	private UriComponents summonerSpellsUri;
-
-	@Autowired
-	@Qualifier("summonerSpell")
-	private UriComponentsBuilder summonerSpellUri;
+	private SummonerSpellsService summonerSpellsService;
 
 	@Autowired
 	@Qualifier("summonerSpellsImg")
@@ -51,10 +39,7 @@ public class SummonerSpellsRetrieval {
 	private ImageFetcher imageFetcher;
 
 	@Autowired
-	private VersionsRetrieval versionsRetrieval;
-
-	@Value("${riot.api.static-data.region}")
-	private String region;
+	private VersionsService versionsService;
 
 	/**
 	 * Returns the {@link List} of {@link SummonerSpell} from Riot for the most current patch.
@@ -63,9 +48,7 @@ public class SummonerSpellsRetrieval {
 	 */
 	@GetMapping
 	public Collection<SummonerSpell> summonerSpells() {
-		SummonerSpellsResponse response = restTemplate.getForObject(summonerSpellsUri.toString(),
-				SummonerSpellsResponse.class);
-		return response.getSummonerSpells().values();
+		return summonerSpellsService.getSummonerSpells();
 	}
 
 	/**
@@ -83,9 +66,7 @@ public class SummonerSpellsRetrieval {
 	 */
 	@PostMapping
 	public List<SummonerSpell> saveSummonerSpells(@RequestParam(required = false) boolean truncate) {
-		SummonerSpellsResponse response = restTemplate.getForObject(summonerSpellsUri.toString(),
-				SummonerSpellsResponse.class);
-		List<SummonerSpell> summonerSpells = new ArrayList<>(response.getSummonerSpells().values());
+		List<SummonerSpell> summonerSpells = summonerSpellsService.getSummonerSpells();
 
 		if (truncate) {
 			summonerSpellsRepository.deleteAll();
@@ -96,7 +77,7 @@ public class SummonerSpellsRetrieval {
 			summonerSpells = ListUtils.subtract(summonerSpells, summonerSpellsFromDb);
 		}
 
-		Version latestVersion = versionsRetrieval.latestVersion(versionsRetrieval.versionsFromResponse());
+		Version latestVersion = versionsService.getLatestVersion();
 
 		imageFetcher.setImgsSrcs(summonerSpells.stream().map(SummonerSpell::getImage).collect(Collectors.toList()),
 				summonerSpellsImgUri, latestVersion);
@@ -111,11 +92,8 @@ public class SummonerSpellsRetrieval {
 	 */
 	@GetMapping(value = "/{id}")
 	public SummonerSpell summonerSpell(@PathVariable int id) {
-		UriComponents uriComponents = summonerSpellUri.buildAndExpand(region, id);
-		SummonerSpell summonerSpell;
-		try {
-			summonerSpell = restTemplate.getForObject(uriComponents.toString(), SummonerSpell.class);
-		} catch (RestClientException e) {
+		SummonerSpell summonerSpell = summonerSpellsService.getSummonerSpell(id);
+		if (summonerSpell == null) {
 			throw new ResourceNotFoundException("Could not find Summoner Spell with ID: " + id);
 		}
 		return summonerSpell;
@@ -131,11 +109,8 @@ public class SummonerSpellsRetrieval {
 	 */
 	@PostMapping(value = "/{id}")
 	public SummonerSpell saveSummonerSpell(@PathVariable int id) {
-		UriComponents uriComponents = summonerSpellUri.buildAndExpand(region, id);
-		SummonerSpell summonerSpell;
-		try {
-			summonerSpell = restTemplate.getForObject(uriComponents.toString(), SummonerSpell.class);
-		} catch (RestClientException e) {
+		SummonerSpell summonerSpell = summonerSpellsService.getSummonerSpell(id);
+		if (summonerSpell == null) {
 			throw new ResourceNotFoundException("Could not find Summoner Spell with ID: " + id);
 		}
 
@@ -144,7 +119,7 @@ public class SummonerSpellsRetrieval {
 			summonerSpellsRepository.delete(id);
 		}
 
-		Version latestVersion = versionsRetrieval.latestVersion(versionsRetrieval.versionsFromResponse());
+		Version latestVersion = versionsService.getLatestVersion();
 
 		imageFetcher.setImgSrc(summonerSpell.getImage(), summonerSpellsImgUri, latestVersion);
 		return summonerSpellsRepository.save(summonerSpell);

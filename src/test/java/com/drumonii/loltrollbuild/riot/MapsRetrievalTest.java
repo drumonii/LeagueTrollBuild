@@ -2,22 +2,17 @@ package com.drumonii.loltrollbuild.riot;
 
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.model.GameMap;
-import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.model.image.Image;
-import com.drumonii.loltrollbuild.riot.api.MapsResponse;
+import com.drumonii.loltrollbuild.riot.service.MapsService;
+import com.drumonii.loltrollbuild.riot.service.VersionsService;
 import com.drumonii.loltrollbuild.util.RandomizeUtil;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -25,7 +20,6 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyListOf;
 import static org.mockito.Matchers.eq;
-import static org.mockito.Matchers.isNull;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
@@ -36,13 +30,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class MapsRetrievalTest extends BaseSpringTestRunner {
 
-	@Autowired
-	@Qualifier("maps")
-	private UriComponents mapsUri;
+	@MockBean
+	private MapsService mapsService;
 
-	@Autowired
-	@Qualifier("versions")
-	private UriComponents versionsUri;
+	@MockBean
+	private VersionsService versionsService;
 
 	private GameMap summonersRift;
 
@@ -55,8 +47,7 @@ public class MapsRetrievalTest extends BaseSpringTestRunner {
 
 	@Test
 	public void maps() throws Exception {
-		given(restTemplate.getForObject(eq(mapsUri.toString()), eq(MapsResponse.class)))
-				.willReturn(mapsResponse);
+		given(mapsService.getMaps()).willReturn(new ArrayList<>(mapsResponse.getMaps().values()));
 
 		mockMvc.perform(get("/riot/maps").with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
@@ -66,11 +57,9 @@ public class MapsRetrievalTest extends BaseSpringTestRunner {
 
 	@Test
 	public void saveMaps() throws Exception {
-		given(restTemplate.getForObject(eq(mapsUri.toString()), eq(MapsResponse.class)))
-				.willReturn(mapsResponse);
+		given(mapsService.getMaps()).willReturn(new ArrayList<>(mapsResponse.getMaps().values()));
 
-		given(restTemplate.exchange(eq(versionsUri.toString()), eq(HttpMethod.GET), isNull(HttpEntity.class),
-				eq(new ParameterizedTypeReference<List<Version>>() {}))).willReturn(ResponseEntity.ok(versions));
+		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
 
 		mockMvc.perform(post("/riot/maps").with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
@@ -86,11 +75,9 @@ public class MapsRetrievalTest extends BaseSpringTestRunner {
 
 	@Test
 	public void saveDifferenceOfMaps() throws Exception {
-		given(restTemplate.getForObject(eq(mapsUri.toString()), eq(MapsResponse.class)))
-				.willReturn(mapsResponse);
+		given(mapsService.getMaps()).willReturn(new ArrayList<>(mapsResponse.getMaps().values()));
 
-		given(restTemplate.exchange(eq(versionsUri.toString()), eq(HttpMethod.GET), isNull(HttpEntity.class),
-				eq(new ParameterizedTypeReference<List<Version>>() {}))).willReturn(ResponseEntity.ok(versions));
+		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
 
 		List<GameMap> maps = mapsRepository.save(mapsResponse.getMaps().values());
 
@@ -111,11 +98,9 @@ public class MapsRetrievalTest extends BaseSpringTestRunner {
 		GameMap mapToDelete = RandomizeUtil.getRandom(items);
 		mapsResponse.getMaps().remove(String.valueOf(mapToDelete.getMapId()));
 
-		given(restTemplate.getForObject(eq(mapsUri.toString()), eq(MapsResponse.class)))
-				.willReturn(mapsResponse);
+		given(mapsService.getMaps()).willReturn(new ArrayList<>(mapsResponse.getMaps().values()));
 
-		given(restTemplate.exchange(eq(versionsUri.toString()), eq(HttpMethod.GET), isNull(HttpEntity.class),
-				eq(new ParameterizedTypeReference<List<Version>>() {}))).willReturn(ResponseEntity.ok(versions));
+		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
 
 		mockMvc.perform(post("/riot/maps").with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
@@ -130,11 +115,9 @@ public class MapsRetrievalTest extends BaseSpringTestRunner {
 
 	@Test
 	public void saveMapsWithTruncate() throws Exception {
-		given(restTemplate.getForObject(eq(mapsUri.toString()), eq(MapsResponse.class)))
-				.willReturn(mapsResponse);
+		given(mapsService.getMaps()).willReturn(new ArrayList<>(mapsResponse.getMaps().values()));
 
-		given(restTemplate.exchange(eq(versionsUri.toString()), eq(HttpMethod.GET), isNull(HttpEntity.class),
-				eq(new ParameterizedTypeReference<List<Version>>() {}))).willReturn(ResponseEntity.ok(versions));
+		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
 
 		mockMvc.perform(post("/riot/maps?truncate=true").with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
@@ -150,8 +133,7 @@ public class MapsRetrievalTest extends BaseSpringTestRunner {
 
 	@Test
 	public void map() throws Exception {
-		given(restTemplate.getForObject(eq(mapsUri.toString()), eq(MapsResponse.class)))
-				.willReturn(mapsResponse);
+		given(mapsService.getMap(eq(summonersRift.getMapId()))).willReturn(summonersRift);
 
 		mockMvc.perform(get("/riot/maps/{id}", summonersRift.getMapId()).with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
@@ -161,10 +143,7 @@ public class MapsRetrievalTest extends BaseSpringTestRunner {
 
 	@Test
 	public void mapNotFound() throws Exception {
-		mapsResponse.getMaps().remove(String.valueOf(summonersRift.getMapId()));
-
-		given(restTemplate.getForObject(eq(mapsUri.toString()), eq(MapsResponse.class)))
-				.willReturn(mapsResponse);
+		given(mapsService.getMap(eq(summonersRift.getMapId()))).willReturn(null);
 
 		mockMvc.perform(get("/riot/maps/{id}", summonersRift.getMapId()).with(adminUser()).with(csrf()))
 				.andExpect(status().isNotFound());
@@ -172,11 +151,9 @@ public class MapsRetrievalTest extends BaseSpringTestRunner {
 
 	@Test
 	public void saveMap() throws Exception {
-		given(restTemplate.getForObject(eq(mapsUri.toString()), eq(MapsResponse.class)))
-				.willReturn(mapsResponse);
+		given(mapsService.getMap(eq(summonersRift.getMapId()))).willReturn(summonersRift);
 
-		given(restTemplate.exchange(eq(versionsUri.toString()), eq(HttpMethod.GET), isNull(HttpEntity.class),
-				eq(new ParameterizedTypeReference<List<Version>>() {}))).willReturn(ResponseEntity.ok(versions));
+		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
 
 		mockMvc.perform(post("/riot/maps/{id}", summonersRift.getMapId()).with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
@@ -191,10 +168,7 @@ public class MapsRetrievalTest extends BaseSpringTestRunner {
 
 	@Test
 	public void saveMapNotFound() throws Exception {
-		mapsResponse.getMaps().remove(String.valueOf(summonersRift.getMapId()));
-
-		given(restTemplate.getForObject(eq(mapsUri.toString()), eq(MapsResponse.class)))
-				.willReturn(mapsResponse);
+		given(mapsService.getMap(eq(summonersRift.getMapId()))).willReturn(null);
 
 		mockMvc.perform(post("/riot/maps/{id}", summonersRift.getMapId()).with(adminUser()).with(csrf()))
 				.andExpect(status().isNotFound());
@@ -207,11 +181,9 @@ public class MapsRetrievalTest extends BaseSpringTestRunner {
 		newSummonersRift.setMapName("New Summoners Rift");
 		mapsResponse.getMaps().put(String.valueOf(newSummonersRift.getMapId()), newSummonersRift);
 
-		given(restTemplate.getForObject(eq(mapsUri.toString()), eq(MapsResponse.class)))
-				.willReturn(mapsResponse);
+		given(mapsService.getMap(eq(summonersRift.getMapId()))).willReturn(newSummonersRift);
 
-		given(restTemplate.exchange(eq(versionsUri.toString()), eq(HttpMethod.GET), isNull(HttpEntity.class),
-				eq(new ParameterizedTypeReference<List<Version>>() {}))).willReturn(ResponseEntity.ok(versions));
+		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
 
 		mockMvc.perform(post("/riot/maps/{id}", summonersRift.getMapId()).with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
