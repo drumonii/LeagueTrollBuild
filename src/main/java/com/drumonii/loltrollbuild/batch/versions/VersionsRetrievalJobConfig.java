@@ -1,7 +1,6 @@
 package com.drumonii.loltrollbuild.batch.versions;
 
 import com.drumonii.loltrollbuild.model.Version;
-import com.drumonii.loltrollbuild.repository.VersionsRepository;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
@@ -10,10 +9,13 @@ import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.ItemWriter;
-import org.springframework.batch.item.data.RepositoryItemWriter;
+import org.springframework.batch.item.database.BeanPropertyItemSqlParameterSourceProvider;
+import org.springframework.batch.item.database.JdbcBatchItemWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import javax.sql.DataSource;
 
 /**
  * {@link Job} configuration for retrieving the latest {@link Version} data from Riot's API.
@@ -28,7 +30,7 @@ public class VersionsRetrievalJobConfig {
 	private StepBuilderFactory stepBuilderFactory;
 
 	@Autowired
-	private VersionsRepository versionsRepository;
+	private DataSource dataSource;
 
 	@Bean
 	public Job versionsRetrievalJob() {
@@ -61,9 +63,13 @@ public class VersionsRetrievalJobConfig {
 
 	@Bean
 	public ItemWriter<Version> versionsRetrievalItemWriter() {
-		RepositoryItemWriter<Version> itemWriter = new RepositoryItemWriter<>();
-		itemWriter.setRepository(versionsRepository);
-		itemWriter.setMethodName("save");
+		JdbcBatchItemWriter<Version> itemWriter = new JdbcBatchItemWriter<>();
+		itemWriter.setDataSource(dataSource);
+		itemWriter.setSql(
+				"INSERT INTO VERSION (PATCH, MAJOR, MINOR, REVISION) VALUES (:patch, :major, :minor, :revision)"
+		);
+		itemWriter.setItemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<>());
+		itemWriter.setAssertUpdates(false);
 		return itemWriter;
 	}
 
