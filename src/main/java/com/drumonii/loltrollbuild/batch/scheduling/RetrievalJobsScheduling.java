@@ -1,6 +1,7 @@
 package com.drumonii.loltrollbuild.batch.scheduling;
 
 import com.drumonii.loltrollbuild.riot.VersionsRetrieval;
+import com.drumonii.loltrollbuild.riot.service.VersionsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobParametersBuilder;
@@ -23,7 +24,7 @@ public class RetrievalJobsScheduling {
 	static final String CRON_SCHEDULE = "0 0 4 * * ?";
 
 	@Autowired
-	private VersionsRetrieval versionsRetrieval;
+	private VersionsService versionsService;
 
 	@Autowired
 	private JobLauncher jobLauncher;
@@ -41,7 +42,7 @@ public class RetrievalJobsScheduling {
 		try {
 			jobLauncher.run(allRetrievalsJob, new JobParametersBuilder()
 					.addString(LATEST_PATCH_KEY,
-							versionsRetrieval.latestVersion(versionsRetrieval.versionsFromResponse()).getPatch())
+							versionsService.getLatestVersion().getPatch())
 					.toJobParameters());
 		} catch (JobInstanceAlreadyCompleteException e) {
 			log.warn("Job instance was already completed with the latest Riot patch", e);

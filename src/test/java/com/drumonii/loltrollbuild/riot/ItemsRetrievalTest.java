@@ -2,24 +2,17 @@ package com.drumonii.loltrollbuild.riot;
 
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.model.Item;
-import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.model.image.Image;
-import com.drumonii.loltrollbuild.riot.api.ItemsResponse;
+import com.drumonii.loltrollbuild.riot.service.ItemsService;
+import com.drumonii.loltrollbuild.riot.service.VersionsService;
 import com.drumonii.loltrollbuild.util.RandomizeUtil;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.RestClientException;
-import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -27,7 +20,6 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyListOf;
 import static org.mockito.Matchers.eq;
-import static org.mockito.Matchers.isNull;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
@@ -38,22 +30,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class ItemsRetrievalTest extends BaseSpringTestRunner {
 
-	@Autowired
-	@Qualifier("items")
-	private UriComponents itemsUri;
+	@MockBean
+	private ItemsService itemsService;
 
-	@Autowired
-	@Qualifier("item")
-	private UriComponentsBuilder itemUriBuilder;
+	@MockBean
+	private VersionsService versionsService;
 
-	@Autowired
-	@Qualifier("versions")
-	private UriComponents versionsUri;
-
-	@Value("${riot.api.static-data.region}")
-	private String region;
-
-	private UriComponents itemUri;
 	private Item lichBane;
 
 	@Before
@@ -61,13 +43,11 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 		super.before();
 
 		lichBane = itemsResponse.getItems().get("3100");
-		itemUri = itemUriBuilder.buildAndExpand(region, lichBane.getId());
 	}
 
 	@Test
 	public void items() throws Exception {
-		given(restTemplate.getForObject(eq(itemsUri.toString()), eq(ItemsResponse.class)))
-				.willReturn(itemsResponse);
+		given(itemsService.getItems()).willReturn(new ArrayList<>(itemsResponse.getItems().values()));
 
 		mockMvc.perform(get("/riot/items").with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
@@ -77,11 +57,9 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 
 	@Test
 	public void saveItems() throws Exception {
-		given(restTemplate.getForObject(eq(itemsUri.toString()), eq(ItemsResponse.class)))
-				.willReturn(itemsResponse);
+		given(itemsService.getItems()).willReturn(new ArrayList<>(itemsResponse.getItems().values()));
 
-		given(restTemplate.exchange(eq(versionsUri.toString()), eq(HttpMethod.GET), isNull(HttpEntity.class),
-				eq(new ParameterizedTypeReference<List<Version>>() {}))).willReturn(ResponseEntity.ok(versions));
+		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
 
 		mockMvc.perform(post("/riot/items").with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
@@ -97,11 +75,9 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 
 	@Test
 	public void saveDifferenceOfItems() throws Exception {
-		given(restTemplate.getForObject(eq(itemsUri.toString()), eq(ItemsResponse.class)))
-				.willReturn(itemsResponse);
+		given(itemsService.getItems()).willReturn(new ArrayList<>(itemsResponse.getItems().values()));
 
-		given(restTemplate.exchange(eq(versionsUri.toString()), eq(HttpMethod.GET), isNull(HttpEntity.class),
-				eq(new ParameterizedTypeReference<List<Version>>() {}))).willReturn(ResponseEntity.ok(versions));
+		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
 
 		List<Item> champions = itemsRepository.save(itemsResponse.getItems().values());
 
@@ -122,11 +98,9 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 		Item itemToDelete = RandomizeUtil.getRandom(items);
 		itemsResponse.getItems().remove(String.valueOf(itemToDelete.getId()));
 
-		given(restTemplate.getForObject(eq(itemsUri.toString()), eq(ItemsResponse.class)))
-				.willReturn(itemsResponse);
+		given(itemsService.getItems()).willReturn(new ArrayList<>(itemsResponse.getItems().values()));
 
-		given(restTemplate.exchange(eq(versionsUri.toString()), eq(HttpMethod.GET), isNull(HttpEntity.class),
-				eq(new ParameterizedTypeReference<List<Version>>() {}))).willReturn(ResponseEntity.ok(versions));
+		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
 
 		mockMvc.perform(post("/riot/items").with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
@@ -141,11 +115,9 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 
 	@Test
 	public void saveItemsWithTruncate() throws Exception {
-		given(restTemplate.getForObject(eq(itemsUri.toString()), eq(ItemsResponse.class)))
-				.willReturn(itemsResponse);
+		given(itemsService.getItems()).willReturn(new ArrayList<>(itemsResponse.getItems().values()));
 
-		given(restTemplate.exchange(eq(versionsUri.toString()), eq(HttpMethod.GET), isNull(HttpEntity.class),
-				eq(new ParameterizedTypeReference<List<Version>>() {}))).willReturn(ResponseEntity.ok(versions));
+		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
 
 		mockMvc.perform(post("/riot/items?truncate=true").with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
@@ -161,8 +133,7 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 
 	@Test
 	public void item() throws Exception {
-		given(restTemplate.getForObject(eq(itemUri.toString()), eq(Item.class)))
-				.willReturn(lichBane);
+		given(itemsService.getItem(eq(lichBane.getId()))).willReturn(lichBane);
 
 		mockMvc.perform(get("/riot/items/{id}", lichBane.getId()).with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
@@ -172,8 +143,7 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 
 	@Test
 	public void itemNotFound() throws Exception {
-		given(restTemplate.getForObject(eq(itemUri.toString()), eq(Item.class)))
-				.willThrow(new RestClientException("404 Not Found"));
+		given(itemsService.getItem(eq(lichBane.getId()))).willReturn(null);
 
 		mockMvc.perform(get("/riot/items/{id}", lichBane.getId()).with(adminUser()).with(csrf()))
 				.andExpect(status().isNotFound());
@@ -181,11 +151,9 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 
 	@Test
 	public void saveItem() throws Exception {
-		given(restTemplate.getForObject(eq(itemUri.toString()), eq(Item.class)))
-				.willReturn(lichBane);
+		given(itemsService.getItem(eq(lichBane.getId()))).willReturn(lichBane);
 
-		given(restTemplate.exchange(eq(versionsUri.toString()), eq(HttpMethod.GET), isNull(HttpEntity.class),
-				eq(new ParameterizedTypeReference<List<Version>>() {}))).willReturn(ResponseEntity.ok(versions));
+		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
 
 		mockMvc.perform(post("/riot/items/{id}", lichBane.getId()).with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
@@ -200,8 +168,7 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 
 	@Test
 	public void saveItemNotFound() throws Exception {
-		given(restTemplate.getForObject(eq(itemUri.toString()), eq(Item.class)))
-				.willThrow(new RestClientException("404 Not Found"));
+		given(itemsService.getItem(eq(lichBane.getId()))).willReturn(null);
 
 		mockMvc.perform(post("/riot/items/{id}", lichBane.getId()).with(adminUser()).with(csrf()))
 				.andExpect(status().isNotFound());
@@ -213,11 +180,9 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 		Item newLichBane = itemsResponse.getItems().get("3100");
 		newLichBane.setName("New Lich Bane");
 
-		given(restTemplate.getForObject(eq(itemUri.toString()), eq(Item.class)))
-				.willReturn(newLichBane);
+		given(itemsService.getItem(eq(lichBane.getId()))).willReturn(newLichBane);
 
-		given(restTemplate.exchange(eq(versionsUri.toString()), eq(HttpMethod.GET), isNull(HttpEntity.class),
-				eq(new ParameterizedTypeReference<List<Version>>() {}))).willReturn(ResponseEntity.ok(versions));
+		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
 
 		mockMvc.perform(post("/riot/items/{id}", lichBane.getId()).with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())

@@ -1,54 +1,36 @@
 package com.drumonii.loltrollbuild.batch;
 
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
-import com.drumonii.loltrollbuild.model.Version;
-import com.drumonii.loltrollbuild.riot.api.ChampionsResponse;
-import com.drumonii.loltrollbuild.riot.api.ItemsResponse;
-import com.drumonii.loltrollbuild.riot.api.MapsResponse;
-import com.drumonii.loltrollbuild.riot.api.SummonerSpellsResponse;
+import com.drumonii.loltrollbuild.riot.service.*;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.batch.core.BatchStatus;
-import org.springframework.batch.core.Job;
-import org.springframework.batch.core.JobExecution;
-import org.springframework.batch.core.JobParameters;
+import org.springframework.batch.core.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.util.UriComponents;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import static com.drumonii.loltrollbuild.batch.scheduling.RetrievalJobsScheduling.LATEST_PATCH_KEY;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Matchers.isNull;
 
 public class AllRetrievalsJobConfigTest extends BaseSpringTestRunner {
 
-	@Autowired
-	@Qualifier("versions")
-	private UriComponents versionsUri;
+	@MockBean
+	private VersionsService versionsService;
 
-	@Autowired
-	@Qualifier("maps")
-	private UriComponents mapsUri;
+	@MockBean
+	private MapsService mapsService;
 
-	@Autowired
-	@Qualifier("summonerSpells")
-	private UriComponents summonerSpellsUri;
+	@MockBean
+	private SummonerSpellsService summonerSpellsService;
 
-	@Autowired
-	@Qualifier("champions")
-	private UriComponents championsUri;
+	@MockBean
+	private ChampionsService championsService;
 
-	@Autowired
-	@Qualifier("items")
-	private UriComponents itemsUri;
+	@MockBean
+	private ItemsService itemsService;
 
 	@Autowired
 	@Qualifier("allRetrievalsJob")
@@ -58,20 +40,15 @@ public class AllRetrievalsJobConfigTest extends BaseSpringTestRunner {
 	public void before() {
 		super.before();
 
-		given(restTemplate.exchange(eq(versionsUri.toString()), eq(HttpMethod.GET), isNull(HttpEntity.class),
-				eq(new ParameterizedTypeReference<List<Version>>() {}))).willReturn(ResponseEntity.ok(versions));
+		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
 
-		given(restTemplate.getForObject(eq(mapsUri.toString()), eq(MapsResponse.class)))
-				.willReturn(new MapsResponse());
+		given(mapsService.getMaps()).willReturn(new ArrayList<>());
 
-		given(restTemplate.getForObject(eq(summonerSpellsUri.toString()), eq(SummonerSpellsResponse.class)))
-				.willReturn(new SummonerSpellsResponse());
+		given(summonerSpellsService.getSummonerSpells()).willReturn(new ArrayList<>());
 
-		given(restTemplate.getForObject(eq(championsUri.toString()), eq(ChampionsResponse.class)))
-				.willReturn(new ChampionsResponse());
+		given(championsService.getChampions()).willReturn(new ArrayList<>());
 
-		given(restTemplate.getForObject(eq(itemsUri.toString()), eq(ItemsResponse.class)))
-				.willReturn(new ItemsResponse());
+		given(itemsService.getItems()).willReturn(new ArrayList<>());
 
 		jobLauncherTestUtils.setJob(allRetrievalsJob);
 	}
@@ -85,6 +62,9 @@ public class AllRetrievalsJobConfigTest extends BaseSpringTestRunner {
 		JobExecution jobExecution = jobLauncherTestUtils.launchJob(jobParameters);
 		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
 		assertThat(jobExecution.getJobParameters().getString(LATEST_PATCH_KEY)).isNotNull();
+		assertThat(jobExecution.getStepExecutions()).extracting(StepExecution::getStepName)
+				.containsExactly("versionsRetrievalJobStep", "mapsRetrievalJobStep", "summonerSpellsRetrievalJobStep",
+						"championsRetrievalJobStep", "itemsRetrievalJobStep");
 	}
 
 }

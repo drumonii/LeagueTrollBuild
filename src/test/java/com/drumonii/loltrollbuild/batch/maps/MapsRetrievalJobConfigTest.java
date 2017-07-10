@@ -2,9 +2,8 @@ package com.drumonii.loltrollbuild.batch.maps;
 
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.model.GameMap;
-import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.model.image.Image;
-import com.drumonii.loltrollbuild.riot.api.MapsResponse;
+import com.drumonii.loltrollbuild.riot.service.MapsService;
 import com.drumonii.loltrollbuild.util.RandomizeUtil;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,36 +12,27 @@ import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.util.UriComponents;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
-import static org.mockito.Matchers.isNull;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 public class MapsRetrievalJobConfigTest extends BaseSpringTestRunner {
 
-	@Autowired
-	@Qualifier("maps")
-	private UriComponents mapsUri;
+	@MockBean
+	private MapsService mapsService;
 
 	@Autowired
 	@Qualifier("mapsRetrievalJob")
 	private Job mapsRetrievalJob;
-
-	@Autowired
-	@Qualifier("versions")
-	private UriComponents versionsUri;
 
 	@Before
 	public void before() {
@@ -53,11 +43,7 @@ public class MapsRetrievalJobConfigTest extends BaseSpringTestRunner {
 
 	@Test
 	public void savesNewMaps() throws Exception {
-		given(restTemplate.getForObject(eq(mapsUri.toString()), eq(MapsResponse.class)))
-				.willReturn(mapsResponse);
-
-		given(restTemplate.exchange(eq(versionsUri.toString()), eq(HttpMethod.GET), isNull(HttpEntity.class),
-				eq(new ParameterizedTypeReference<List<Version>>() {}))).willReturn(ResponseEntity.ok(versions));
+		given(mapsService.getMaps()).willReturn(new ArrayList<>(mapsResponse.getMaps().values()));
 
 		JobExecution jobExecution = jobLauncherTestUtils.launchJob(getJobParameters());
 		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
@@ -71,11 +57,7 @@ public class MapsRetrievalJobConfigTest extends BaseSpringTestRunner {
 
 	@Test
 	public void savesMapsDifference() throws Exception {
-		given(restTemplate.getForObject(eq(mapsUri.toString()), eq(MapsResponse.class)))
-				.willReturn(mapsResponse);
-
-		given(restTemplate.exchange(eq(versionsUri.toString()), eq(HttpMethod.GET), isNull(HttpEntity.class),
-				eq(new ParameterizedTypeReference<List<Version>>() {}))).willReturn(ResponseEntity.ok(versions));
+		given(mapsService.getMaps()).willReturn(new ArrayList<>(mapsResponse.getMaps().values()));
 
 		List<GameMap> maps = mapsRepository.save(mapsResponse.getMaps().values());
 
@@ -101,12 +83,8 @@ public class MapsRetrievalJobConfigTest extends BaseSpringTestRunner {
 		GameMap mapToDelete = RandomizeUtil.getRandom(maps);
 		mapsResponse.getMaps().remove(String.valueOf(mapToDelete.getMapId()));
 
-		given(restTemplate.getForObject(eq(mapsUri.toString()), eq(MapsResponse.class)))
-				.willReturn(mapsResponse);
+		given(mapsService.getMaps()).willReturn(new ArrayList<>(mapsResponse.getMaps().values()));
 
-		given(restTemplate.exchange(eq(versionsUri.toString()), eq(HttpMethod.GET), isNull(HttpEntity.class),
-				eq(new ParameterizedTypeReference<List<Version>>() {}))).willReturn(ResponseEntity.ok(versions));
-		
 		JobExecution jobExecution = jobLauncherTestUtils.launchJob(getJobParameters());
 		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
 

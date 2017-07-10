@@ -2,24 +2,17 @@ package com.drumonii.loltrollbuild.riot;
 
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.model.Champion;
-import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.model.image.Image;
-import com.drumonii.loltrollbuild.riot.api.ChampionsResponse;
+import com.drumonii.loltrollbuild.riot.service.ChampionsService;
+import com.drumonii.loltrollbuild.riot.service.VersionsService;
 import com.drumonii.loltrollbuild.util.RandomizeUtil;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.RestClientException;
-import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.TreeSet;
@@ -29,7 +22,6 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyListOf;
 import static org.mockito.Matchers.eq;
-import static org.mockito.Matchers.isNull;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
@@ -40,22 +32,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 
-	@Autowired
-	@Qualifier("champions")
-	private UriComponents championsUri;
+	@MockBean
+	private ChampionsService championsService;
 
-	@Autowired
-	@Qualifier("champion")
-	private UriComponentsBuilder championUriBuilder;
+	@MockBean
+	private VersionsService versionsService;
 
-	@Autowired
-	@Qualifier("versions")
-	private UriComponents versionsUri;
-
-	@Value("${riot.api.static-data.region}")
-	private String region;
-
-	private UriComponents championUri;
 	private Champion leeSin;
 
 	@Before
@@ -63,13 +45,11 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 		super.before();
 
 		leeSin = championsResponse.getChampions().get("LeeSin");
-		championUri = championUriBuilder.buildAndExpand(region, leeSin.getId());
 	}
 
 	@Test
 	public void champions() throws Exception {
-		given(restTemplate.getForObject(eq(championsUri.toString()), eq(ChampionsResponse.class)))
-				.willReturn(championsResponse);
+		given(championsService.getChampions()).willReturn(new ArrayList<>(championsResponse.getChampions().values()));
 
 		mockMvc.perform(get("/riot/champions").with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
@@ -79,11 +59,9 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 
 	@Test
 	public void saveChampions() throws Exception {
-		given(restTemplate.getForObject(eq(championsUri.toString()), eq(ChampionsResponse.class)))
-				.willReturn(championsResponse);
+		given(championsService.getChampions()).willReturn(new ArrayList<>(championsResponse.getChampions().values()));
 
-		given(restTemplate.exchange(eq(versionsUri.toString()), eq(HttpMethod.GET), isNull(HttpEntity.class),
-				eq(new ParameterizedTypeReference<List<Version>>() {}))).willReturn(ResponseEntity.ok(versions));
+		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
 
 		mockMvc.perform(post("/riot/champions").with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
@@ -98,11 +76,9 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 
 	@Test
 	public void saveDifferenceOfChampions() throws Exception {
-		given(restTemplate.getForObject(eq(championsUri.toString()), eq(ChampionsResponse.class)))
-				.willReturn(championsResponse);
+		given(championsService.getChampions()).willReturn(new ArrayList<>(championsResponse.getChampions().values()));
 
-		given(restTemplate.exchange(eq(versionsUri.toString()), eq(HttpMethod.GET), isNull(HttpEntity.class),
-				eq(new ParameterizedTypeReference<List<Version>>() {}))).willReturn(ResponseEntity.ok(versions));
+		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
 
 		List<Champion> champions = championsRepository.save(championsResponse.getChampions().values());
 
@@ -123,11 +99,9 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 		Champion championToDelete = RandomizeUtil.getRandom(champions);
 		championsResponse.getChampions().remove(championToDelete.getKey());
 
-		given(restTemplate.getForObject(eq(championsUri.toString()), eq(ChampionsResponse.class)))
-				.willReturn(championsResponse);
+		given(championsService.getChampions()).willReturn(new ArrayList<>(championsResponse.getChampions().values()));
 
-		given(restTemplate.exchange(eq(versionsUri.toString()), eq(HttpMethod.GET), isNull(HttpEntity.class),
-				eq(new ParameterizedTypeReference<List<Version>>() {}))).willReturn(ResponseEntity.ok(versions));
+		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
 
 		mockMvc.perform(post("/riot/champions").with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
@@ -142,11 +116,9 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 
 	@Test
 	public void saveChampionsWithTruncate() throws Exception {
-		given(restTemplate.getForObject(eq(championsUri.toString()), eq(ChampionsResponse.class)))
-				.willReturn(championsResponse);
+		given(championsService.getChampions()).willReturn(new ArrayList<>(championsResponse.getChampions().values()));
 
-		given(restTemplate.exchange(eq(versionsUri.toString()), eq(HttpMethod.GET), isNull(HttpEntity.class),
-				eq(new ParameterizedTypeReference<List<Version>>() {}))).willReturn(ResponseEntity.ok(versions));
+		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
 
 		mockMvc.perform(post("/riot/champions?truncate=true").with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
@@ -161,8 +133,7 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 
 	@Test
 	public void champion() throws Exception {
-		given(restTemplate.getForObject(eq(championUri.toString()), eq(Champion.class)))
-				.willReturn(leeSin);
+		given(championsService.getChampion(eq(leeSin.getId()))).willReturn(leeSin);
 
 		mockMvc.perform(get("/riot/champions/{id}", leeSin.getId()).with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
@@ -172,8 +143,7 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 
 	@Test
 	public void championNotFound() throws Exception {
-		given(restTemplate.getForObject(eq(championUri.toString()), eq(Champion.class)))
-				.willThrow(new RestClientException("404 Not Found"));
+		given(championsService.getChampion(eq(leeSin.getId()))).willReturn(null);
 
 		mockMvc.perform(get("/riot/champions/{id}", leeSin.getId()).with(adminUser()).with(csrf()))
 				.andExpect(status().isNotFound());
@@ -181,11 +151,9 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 
 	@Test
 	public void saveChampion() throws Exception {
-		given(restTemplate.getForObject(eq(championUri.toString()), eq(Champion.class)))
-				.willReturn(leeSin);
+		given(championsService.getChampion(eq(leeSin.getId()))).willReturn(leeSin);
 
-		given(restTemplate.exchange(eq(versionsUri.toString()), eq(HttpMethod.GET), isNull(HttpEntity.class),
-				eq(new ParameterizedTypeReference<List<Version>>() {}))).willReturn(ResponseEntity.ok(versions));
+		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
 
 		mockMvc.perform(post("/riot/champions/{id}", leeSin.getId()).with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
@@ -202,8 +170,7 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 
 	@Test
 	public void saveChampionNotFound() throws Exception {
-		given(restTemplate.getForObject(eq(championUri.toString()), eq(Champion.class)))
-				.willThrow(new RestClientException("404 Not Found"));
+		given(championsService.getChampion(eq(leeSin.getId()))).willReturn(null);
 
 		mockMvc.perform(post("/riot/champions/{id}", leeSin.getId()).with(adminUser()).with(csrf()))
 				.andExpect(status().isNotFound());
@@ -215,11 +182,9 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 		newLeeSin.setTags(new TreeSet<>(Arrays.asList("NEW_TAG")));
 		newLeeSin = championsRepository.save(newLeeSin);
 
-		given(restTemplate.getForObject(eq(championUri.toString()), eq(Champion.class)))
-				.willReturn(newLeeSin);
+		given(championsService.getChampion(eq(leeSin.getId()))).willReturn(newLeeSin);
 
-		given(restTemplate.exchange(eq(versionsUri.toString()), eq(HttpMethod.GET), isNull(HttpEntity.class),
-				eq(new ParameterizedTypeReference<List<Version>>() {}))).willReturn(ResponseEntity.ok(versions));
+		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
 
 		mockMvc.perform(post("/riot/champions/{id}", leeSin.getId()).with(adminUser()).with(csrf()))
 				.andExpect(status().isOk())
