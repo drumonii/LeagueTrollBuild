@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * A {@link RestController} which retrieves the list of {@link Item} from Riot's {@code lol-static-data-v1.2} API with
+ * A {@link RestController} which retrieves the list of {@link Item} from Riot's {@code lol-static-data-v3} API with
  * the {@code /riot/items} URL mapping.
  */
 @RestController

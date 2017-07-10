@@ -45,7 +45,7 @@ public class RiotApiProperties {
 	}
 
 	/**
-	 * Query configuration for Riot's {@code lol-static-data-v1.2} API part of Riot's full API.
+	 * Query configuration for Riot's {@code lol-static-data-v3} API part of Riot's full API.
 	 */
 	public static class StaticData {
 

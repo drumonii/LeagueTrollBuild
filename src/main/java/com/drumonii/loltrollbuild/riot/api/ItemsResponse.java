@@ -11,7 +11,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * Response class of a retrieval of LoL {@link Item}s from Riot's {@code lol-static-data-v1.2} API. Response example:
+ * Response class of a retrieval of LoL {@link Item}s from Riot's {@code lol-static-data-v3} API. Response example:
  *
  * <pre>
  *  {

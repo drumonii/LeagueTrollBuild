@@ -11,7 +11,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * Response class of a retrieval of LoL {@link SummonerSpell}s from Riot's {@code lol-static-data-v1.2} API. Response
+ * Response class of a retrieval of LoL {@link SummonerSpell}s from Riot's {@code lol-static-data-v3} API. Response
  * example:
  *
  * <pre>
