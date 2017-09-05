@@ -7,7 +7,7 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 
-version = '2.3.12'
+version = '2.3.13-SNAPSHOT'
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
@@ -35,10 +35,10 @@ test {
 }
 
 asciidoctor {
+    dependsOn test
     sourceDir 'src/main/doc'
     attributes 'snippets': snippetsDir, 'version': version
     inputs.dir snippetsDir
-    dependsOn test
 }
 
 jar {
@@ -144,7 +144,7 @@ dependencies {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '4.0'
+    gradleVersion = '4.1'
 }
 
 task stage {
