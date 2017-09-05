@@ -26,7 +26,6 @@ import org.springframework.restdocs.JUnitRestDocumentation;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.RequestPostProcessor;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.context.WebApplicationContext;
 
@@ -34,14 +33,10 @@ import java.io.IOException;
 import java.util.List;
 
 import static com.drumonii.loltrollbuild.config.Profiles.TESTING;
-import static com.drumonii.loltrollbuild.config.WebSecurityConfig.ADMIN_ROLE;
-import static com.drumonii.loltrollbuild.config.WebSecurityConfig.WebDevTestingSecurityConfig.IN_MEM_PASSWORD;
-import static com.drumonii.loltrollbuild.config.WebSecurityConfig.WebDevTestingSecurityConfig.IN_MEM_USERNAME;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.fail;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
@@ -104,10 +99,6 @@ public abstract class BaseSpringTestRunner {
 	protected String apiPath;
 
 	protected static final int DEFAULT_PAGE_SIZE = 20;
-
-	protected static final String TESTING_USERNAME = IN_MEM_USERNAME;
-	protected static final String TESTING_PASSWORD = IN_MEM_PASSWORD;
-	protected static final String TESTING_USER_ROLE = ADMIN_ROLE;
 
 	protected static final String CRYSTAL_SCAR = String.valueOf(GameMapUtil.CRYSTAL_SCAR_ID);
 	protected static final String TWISTED_TREELINE = String.valueOf(GameMapUtil.TWISTED_TREELINE_ID);
@@ -188,10 +179,6 @@ public abstract class BaseSpringTestRunner {
 		summonerSpellsRepository.deleteAll();
 		versionsRepository.deleteAll();
 		buildsRepository.deleteAll();
-	}
-
-	protected static RequestPostProcessor adminUser() {
-		return user(TESTING_USERNAME).password(TESTING_PASSWORD).roles(TESTING_USER_ROLE);
 	}
 
 	protected JobParameters getJobParameters() {

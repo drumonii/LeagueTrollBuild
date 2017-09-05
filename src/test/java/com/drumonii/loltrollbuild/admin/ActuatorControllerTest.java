@@ -1,6 +1,7 @@
 package com.drumonii.loltrollbuild.admin;
 
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
+import com.drumonii.loltrollbuild.annotation.WithMockAdminUser;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,9 +20,10 @@ public class ActuatorControllerTest extends BaseSpringTestRunner {
 		versionsRepository.save(versions.get(0));
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void env() throws Exception {
-		mockMvc.perform(get("/admin/env").with(adminUser()))
+		mockMvc.perform(get("/admin/env"))
 				.andExpect(status().isOk())
 				.andExpect(model().attributeExists("activeTab", "accordion", "latestSavedPatch"))
 				.andExpect(model().attribute("activeTab", is("actuator")))
@@ -29,9 +31,10 @@ public class ActuatorControllerTest extends BaseSpringTestRunner {
 				.andExpect(view().name("admin/actuator/env"));
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void flyway() throws Exception {
-		mockMvc.perform(get("/admin/flyway").with(adminUser()))
+		mockMvc.perform(get("/admin/flyway"))
 				.andExpect(status().isOk())
 				.andExpect(model().attributeExists("activeTab", "accordion", "latestSavedPatch"))
 				.andExpect(model().attribute("activeTab", is("actuator")))
@@ -39,9 +42,10 @@ public class ActuatorControllerTest extends BaseSpringTestRunner {
 				.andExpect(view().name("admin/actuator/flyway"));
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void health() throws Exception {
-		mockMvc.perform(get("/admin/health").with(adminUser()))
+		mockMvc.perform(get("/admin/health"))
 				.andExpect(status().isOk())
 				.andExpect(model().attributeExists("activeTab", "accordion", "latestSavedPatch"))
 				.andExpect(model().attribute("activeTab", is("actuator")))
@@ -49,9 +53,10 @@ public class ActuatorControllerTest extends BaseSpringTestRunner {
 				.andExpect(view().name("admin/actuator/health"));
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void metrics() throws Exception {
-		mockMvc.perform(get("/admin/metrics").with(adminUser()))
+		mockMvc.perform(get("/admin/metrics"))
 				.andExpect(status().isOk())
 				.andExpect(model().attributeExists("activeTab", "accordion", "latestSavedPatch"))
 				.andExpect(model().attribute("activeTab", is("actuator")))

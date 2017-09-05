@@ -1,6 +1,7 @@
 package com.drumonii.loltrollbuild.riot;
 
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
+import com.drumonii.loltrollbuild.annotation.WithMockAdminUser;
 import com.drumonii.loltrollbuild.model.SummonerSpell;
 import com.drumonii.loltrollbuild.model.image.Image;
 import com.drumonii.loltrollbuild.riot.service.SummonerSpellsService;
@@ -45,18 +46,20 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 		ignite = summonerSpellsResponse.getSummonerSpells().get("SummonerDot");
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void summonerSpells() throws Exception {
 		given(summonerSpellsService.getSummonerSpells())
 				.willReturn(new ArrayList<>(summonerSpellsResponse.getSummonerSpells().values()));
 
-		mockMvc.perform(get("/riot/summoner-spells").with(adminUser()).with(csrf()))
+		mockMvc.perform(get("/riot/summoner-spells").with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(summonerSpellsResponse
 						.getSummonerSpells().values())));
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void saveSummonerSpells() throws Exception {
 		given(summonerSpellsService.getSummonerSpells())
@@ -64,7 +67,7 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 
 		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
 
-		mockMvc.perform(post("/riot/summoner-spells").with(adminUser()).with(csrf()))
+		mockMvc.perform(post("/riot/summoner-spells").with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(summonerSpellsResponse
@@ -77,6 +80,7 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 				.containsOnlyElementsOf(summonerSpellsResponse.getSummonerSpells().values());
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void saveDifferenceOfSummonerSpells() throws Exception {
 		given(summonerSpellsService.getSummonerSpells())
@@ -87,7 +91,7 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 		List<SummonerSpell> summonerSpells = summonerSpellsRepository.save(summonerSpellsResponse
 				.getSummonerSpells().values());
 
-		mockMvc.perform(post("/riot/summoner-spells").with(adminUser()).with(csrf()))
+		mockMvc.perform(post("/riot/summoner-spells").with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json("[]"));
@@ -98,6 +102,7 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 		assertThat(summonerSpellsRepository.findAll()).containsOnlyElementsOf(summonerSpells);
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void saveDifferenceOfSummonerSpellsWithDeleted() throws Exception {
 		List<SummonerSpell> summonerSpells = summonerSpellsRepository.save(summonerSpellsResponse
@@ -110,7 +115,7 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 
 		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
 
-		mockMvc.perform(post("/riot/summoner-spells").with(adminUser()).with(csrf()))
+		mockMvc.perform(post("/riot/summoner-spells").with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json("[]"));
@@ -121,6 +126,7 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 		assertThat(summonerSpellsRepository.findOne(summonerSpellToDelete.getId())).isNull();
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void saveSummonerSpellsWithTruncate() throws Exception {
 		given(summonerSpellsService.getSummonerSpells())
@@ -128,7 +134,7 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 
 		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
 
-		mockMvc.perform(post("/riot/summoner-spells?truncate=true").with(adminUser()).with(csrf()))
+		mockMvc.perform(post("/riot/summoner-spells?truncate=true").with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(summonerSpellsResponse
@@ -141,31 +147,34 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 				.containsOnlyElementsOf(summonerSpellsResponse.getSummonerSpells().values());
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void summonerSpell() throws Exception {
 		given(summonerSpellsService.getSummonerSpell(eq(ignite.getId()))).willReturn(ignite);
 
-		mockMvc.perform(get("/riot/summoner-spells/{id}", ignite.getId()).with(adminUser()).with(csrf()))
+		mockMvc.perform(get("/riot/summoner-spells/{id}", ignite.getId()).with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(ignite)));
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void summonerSpellNotFound() throws Exception {
 		given(summonerSpellsService.getSummonerSpell(eq(ignite.getId()))).willReturn(null);
 
-		mockMvc.perform(get("/riot/summoner-spells/{id}", ignite.getId()).with(adminUser()).with(csrf()))
+		mockMvc.perform(get("/riot/summoner-spells/{id}", ignite.getId()).with(csrf()))
 				.andExpect(status().isNotFound());
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void saveSummonerSpell() throws Exception {
 		given(summonerSpellsService.getSummonerSpell(eq(ignite.getId()))).willReturn(ignite);
 
 		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
 
-		mockMvc.perform(post("/riot/summoner-spells/{id}", ignite.getId()).with(adminUser()).with(csrf()))
+		mockMvc.perform(post("/riot/summoner-spells/{id}", ignite.getId()).with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(ignite)));
@@ -176,14 +185,16 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 		assertThat(summonerSpellsRepository.findOne(ignite.getId())).isNotNull();
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void saveSummonerSpellNotFound() throws Exception {
 		given(summonerSpellsService.getSummonerSpell(eq(ignite.getId()))).willReturn(null);
 
-		mockMvc.perform(post("/riot/summoner-spells/{id}", ignite.getId()).with(adminUser()).with(csrf()))
+		mockMvc.perform(post("/riot/summoner-spells/{id}", ignite.getId()).with(csrf()))
 				.andExpect(status().isNotFound());
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void saveSummonerSpellWithOverwrite() throws Exception {
 		SummonerSpell newIgnite = summonerSpellsResponse.getSummonerSpells().get("SummonerDot");
@@ -194,7 +205,7 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 
 		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
 
-		mockMvc.perform(post("/riot/summoner-spells/{id}", ignite.getId()).with(adminUser()).with(csrf()))
+		mockMvc.perform(post("/riot/summoner-spells/{id}", ignite.getId()).with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(newIgnite)));

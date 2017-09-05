@@ -1,6 +1,7 @@
 package com.drumonii.loltrollbuild.rest;
 
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
+import com.drumonii.loltrollbuild.annotation.WithMockAdminUser;
 import com.drumonii.loltrollbuild.model.BatchJobExecution;
 import com.drumonii.loltrollbuild.model.BatchJobInstance;
 import com.drumonii.loltrollbuild.model.BatchStepExecution;
@@ -44,9 +45,10 @@ public class BatchStepExecutionsRestControllerTest extends BaseSpringTestRunner 
 		batchStepExecutionsRepository.save(stepExecution);
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void getBatchStepExecutions() throws Exception {
-		mockMvc.perform(get(apiPath + "/job-instances/{jobInstanceId}/step-executions", jobInstance.getId()).with(adminUser()))
+		mockMvc.perform(get(apiPath + "/job-instances/{jobInstanceId}/step-executions", jobInstance.getId()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(HAL_JSON_UTF8))
 				.andExpect(jsonPath("$._embedded.stepExecutions", hasSize(1)))
@@ -54,14 +56,15 @@ public class BatchStepExecutionsRestControllerTest extends BaseSpringTestRunner 
 				.andExpect(jsonPath("$._links.self").exists())
 				.andExpect(jsonPath("$._links.self.href").exists());
 
-		mockMvc.perform(get(apiPath + "/job-instances/{jobInstanceId}/step-executions", -1).with(adminUser()))
+		mockMvc.perform(get(apiPath + "/job-instances/{jobInstanceId}/step-executions", -1))
 				.andExpect(status().isNotFound());
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void getBatchStepExecution() throws Exception {
 		mockMvc.perform(get(apiPath + "/job-instances/{jobInstanceId}/step-executions/{stepExecutionId}",
-				jobInstance.getId(), stepExecution.getId()).with(adminUser()))
+				jobInstance.getId(), stepExecution.getId()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(HAL_JSON_UTF8))
 				.andExpect(jsonPath("$._links").exists())
@@ -69,7 +72,7 @@ public class BatchStepExecutionsRestControllerTest extends BaseSpringTestRunner 
 				.andExpect(jsonPath("$._links.self.href").exists());
 
 		mockMvc.perform(get(apiPath + "/job-instances/{jobInstanceId}/step-executions/{stepExecutionId}",
-				-1, -1).with(adminUser()))
+				-1, -1))
 				.andExpect(status().isNotFound());
 
 	}

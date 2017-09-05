@@ -1,6 +1,7 @@
 package com.drumonii.loltrollbuild.riot;
 
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
+import com.drumonii.loltrollbuild.annotation.WithMockAdminUser;
 import com.drumonii.loltrollbuild.model.GameMap;
 import com.drumonii.loltrollbuild.model.image.Image;
 import com.drumonii.loltrollbuild.riot.service.MapsService;
@@ -45,23 +46,25 @@ public class MapsRetrievalTest extends BaseSpringTestRunner {
 		summonersRift = mapsResponse.getMaps().get(SUMMONERS_RIFT);
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void maps() throws Exception {
 		given(mapsService.getMaps()).willReturn(new ArrayList<>(mapsResponse.getMaps().values()));
 
-		mockMvc.perform(get("/riot/maps").with(adminUser()).with(csrf()))
+		mockMvc.perform(get("/riot/maps").with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(mapsResponse.getMaps().values())));
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void saveMaps() throws Exception {
 		given(mapsService.getMaps()).willReturn(new ArrayList<>(mapsResponse.getMaps().values()));
 
 		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
 
-		mockMvc.perform(post("/riot/maps").with(adminUser()).with(csrf()))
+		mockMvc.perform(post("/riot/maps").with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(mapsResponse.getMaps().values())));
@@ -73,6 +76,7 @@ public class MapsRetrievalTest extends BaseSpringTestRunner {
 				.containsOnlyElementsOf(mapsResponse.getMaps().values());
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void saveDifferenceOfMaps() throws Exception {
 		given(mapsService.getMaps()).willReturn(new ArrayList<>(mapsResponse.getMaps().values()));
@@ -81,7 +85,7 @@ public class MapsRetrievalTest extends BaseSpringTestRunner {
 
 		List<GameMap> maps = mapsRepository.save(mapsResponse.getMaps().values());
 
-		mockMvc.perform(post("/riot/maps").with(adminUser()).with(csrf()))
+		mockMvc.perform(post("/riot/maps").with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json("[]"));
@@ -92,6 +96,7 @@ public class MapsRetrievalTest extends BaseSpringTestRunner {
 		assertThat(mapsRepository.findAll()).containsOnlyElementsOf(maps);
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void saveDifferenceOfMapsWithDelete() throws Exception {
 		List<GameMap> items = mapsRepository.save(mapsResponse.getMaps().values());
@@ -102,7 +107,7 @@ public class MapsRetrievalTest extends BaseSpringTestRunner {
 
 		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
 
-		mockMvc.perform(post("/riot/maps").with(adminUser()).with(csrf()))
+		mockMvc.perform(post("/riot/maps").with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json("[]"));
@@ -113,13 +118,14 @@ public class MapsRetrievalTest extends BaseSpringTestRunner {
 		assertThat(mapsRepository.findOne(mapToDelete.getMapId())).isNull();
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void saveMapsWithTruncate() throws Exception {
 		given(mapsService.getMaps()).willReturn(new ArrayList<>(mapsResponse.getMaps().values()));
 
 		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
 
-		mockMvc.perform(post("/riot/maps?truncate=true").with(adminUser()).with(csrf()))
+		mockMvc.perform(post("/riot/maps?truncate=true").with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(mapsResponse.getMaps().values())));
@@ -131,31 +137,34 @@ public class MapsRetrievalTest extends BaseSpringTestRunner {
 				.containsOnlyElementsOf(mapsResponse.getMaps().values());
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void map() throws Exception {
 		given(mapsService.getMap(eq(summonersRift.getMapId()))).willReturn(summonersRift);
 
-		mockMvc.perform(get("/riot/maps/{id}", summonersRift.getMapId()).with(adminUser()).with(csrf()))
+		mockMvc.perform(get("/riot/maps/{id}", summonersRift.getMapId()).with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(summonersRift)));
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void mapNotFound() throws Exception {
 		given(mapsService.getMap(eq(summonersRift.getMapId()))).willReturn(null);
 
-		mockMvc.perform(get("/riot/maps/{id}", summonersRift.getMapId()).with(adminUser()).with(csrf()))
+		mockMvc.perform(get("/riot/maps/{id}", summonersRift.getMapId()).with(csrf()))
 				.andExpect(status().isNotFound());
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void saveMap() throws Exception {
 		given(mapsService.getMap(eq(summonersRift.getMapId()))).willReturn(summonersRift);
 
 		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
 
-		mockMvc.perform(post("/riot/maps/{id}", summonersRift.getMapId()).with(adminUser()).with(csrf()))
+		mockMvc.perform(post("/riot/maps/{id}", summonersRift.getMapId()).with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(summonersRift)));
@@ -166,14 +175,16 @@ public class MapsRetrievalTest extends BaseSpringTestRunner {
 		assertThat(mapsRepository.findOne(summonersRift.getMapId())).isNotNull();
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void saveMapNotFound() throws Exception {
 		given(mapsService.getMap(eq(summonersRift.getMapId()))).willReturn(null);
 
-		mockMvc.perform(post("/riot/maps/{id}", summonersRift.getMapId()).with(adminUser()).with(csrf()))
+		mockMvc.perform(post("/riot/maps/{id}", summonersRift.getMapId()).with(csrf()))
 				.andExpect(status().isNotFound());
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void saveMapWithOverwrite() throws Exception {
 		mapsRepository.save(summonersRift);
@@ -185,7 +196,7 @@ public class MapsRetrievalTest extends BaseSpringTestRunner {
 
 		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
 
-		mockMvc.perform(post("/riot/maps/{id}", summonersRift.getMapId()).with(adminUser()).with(csrf()))
+		mockMvc.perform(post("/riot/maps/{id}", summonersRift.getMapId()).with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(newSummonersRift)));

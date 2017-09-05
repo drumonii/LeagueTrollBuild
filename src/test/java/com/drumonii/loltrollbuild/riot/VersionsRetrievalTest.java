@@ -1,6 +1,7 @@
 package com.drumonii.loltrollbuild.riot;
 
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
+import com.drumonii.loltrollbuild.annotation.WithMockAdminUser;
 import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.riot.service.VersionsService;
 import org.junit.Test;
@@ -20,31 +21,34 @@ public class VersionsRetrievalTest extends BaseSpringTestRunner {
 	@MockBean
 	private VersionsService versionsService;
 
+	@WithMockAdminUser
 	@Test
 	public void versions() throws Exception {
 		given(versionsService.getVersions()).willReturn(versions);
 
-		mockMvc.perform(get("/riot/versions").with(adminUser()).with(csrf()))
+		mockMvc.perform(get("/riot/versions").with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(versions)));
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void latestPatch() throws Exception {
 		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
 
-		mockMvc.perform(get("/riot/versions/latest").with(adminUser()).with(csrf()))
+		mockMvc.perform(get("/riot/versions/latest").with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(versions.get(0))));
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void saveLatestPatch() throws Exception {
 		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
 
-		mockMvc.perform(post("/riot/versions/latest").with(adminUser()).with(csrf()))
+		mockMvc.perform(post("/riot/versions/latest").with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(versions.get(0))));
@@ -52,22 +56,24 @@ public class VersionsRetrievalTest extends BaseSpringTestRunner {
 		assertThat(versionsRepository.latestVersion()).isEqualTo(versions.get(0));
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void saveLatestPatchWithNoPatches() throws Exception {
 		given(versionsService.getLatestVersion()).willReturn(null);
 
-		mockMvc.perform(post("/riot/versions/latest").with(adminUser()).with(csrf()))
+		mockMvc.perform(post("/riot/versions/latest").with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(new Version("0", 0, 0, 0))));
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void saveLatestPatchWithPreviousPatch() throws Exception {
 		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
 		versionsRepository.save(versions.get(1));
 
-		mockMvc.perform(post("/riot/versions/latest").with(adminUser()).with(csrf()))
+		mockMvc.perform(post("/riot/versions/latest").with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(versions.get(0))));
@@ -75,12 +81,13 @@ public class VersionsRetrievalTest extends BaseSpringTestRunner {
 		assertThat(versionsRepository.latestVersion()).isEqualTo(versions.get(0));
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void saveLatestPatchNoChange() throws Exception {
 		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
 		versionsRepository.save(versions.get(0));
 
-		mockMvc.perform(post("/riot/versions/latest").with(adminUser()).with(csrf()))
+		mockMvc.perform(post("/riot/versions/latest").with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(versions.get(0))));

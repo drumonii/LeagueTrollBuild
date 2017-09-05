@@ -1,8 +1,12 @@
 package com.drumonii.loltrollbuild.admin;
 
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
+import com.drumonii.loltrollbuild.annotation.WithMockAdminUser;
 import org.junit.Test;
 
+import static com.drumonii.loltrollbuild.config.WebSecurityConfig.ADMIN_ROLE;
+import static com.drumonii.loltrollbuild.config.WebSecurityConfig.WebDevTestingSecurityConfig.IN_MEM_PASSWORD;
+import static com.drumonii.loltrollbuild.config.WebSecurityConfig.WebDevTestingSecurityConfig.IN_MEM_USERNAME;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.formLogin;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.logout;
 import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.authenticated;
@@ -16,8 +20,8 @@ public class AdminLoginControllerTest extends BaseSpringTestRunner {
 
 	@Test
 	public void adminCanLoginAndLogout() throws Exception {
-		mockMvc.perform(formLogin("/admin/login").user(TESTING_USERNAME).password(TESTING_PASSWORD))
-				.andExpect(authenticated().withRoles(TESTING_USER_ROLE))
+		mockMvc.perform(formLogin("/admin/login").user(IN_MEM_USERNAME).password(IN_MEM_PASSWORD))
+				.andExpect(authenticated().withRoles(ADMIN_ROLE))
 				.andExpect(redirectedUrl("/admin"));
 		mockMvc.perform(logout("/admin/logout"))
 				.andExpect(unauthenticated())
@@ -25,12 +29,16 @@ public class AdminLoginControllerTest extends BaseSpringTestRunner {
 	}
 
 	@Test
-	public void getLogin() throws Exception {
+	public void getLoginAsNotLoggedIn() throws Exception {
 		mockMvc.perform(get("/admin/login"))
 				.andExpect(status().isOk())
 				.andExpect(view().name("admin/login"));
+	}
 
-		mockMvc.perform(get("/admin/login").with(adminUser()))
+	@WithMockAdminUser
+	@Test
+	public void getLoginAsLoggedIn() throws Exception {
+		mockMvc.perform(get("/admin/login"))
 				.andExpect(status().is3xxRedirection())
 				.andExpect(redirectedUrl("/admin"));
 	}

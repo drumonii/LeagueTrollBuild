@@ -1,6 +1,7 @@
 package com.drumonii.loltrollbuild.rest;
 
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
+import com.drumonii.loltrollbuild.annotation.WithMockAdminUser;
 import com.drumonii.loltrollbuild.model.BatchJobExecution;
 import com.drumonii.loltrollbuild.model.BatchJobInstance;
 import com.drumonii.loltrollbuild.model.BatchStepExecution;
@@ -44,10 +45,11 @@ public class BatchJobInstancesRestControllerTest extends BaseSpringTestRunner {
 		batchStepExecutionsRepository.save(stepExecution);
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void getBatchJobInstances() throws Exception {
 		// qbe
-		mockMvc.perform(get(apiPath + "/job-instances").with(adminUser()))
+		mockMvc.perform(get(apiPath + "/job-instances"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(HAL_JSON_UTF8))
 				.andExpect(jsonPath("$._embedded.jobInstances").exists())
@@ -63,7 +65,7 @@ public class BatchJobInstancesRestControllerTest extends BaseSpringTestRunner {
 
 		// qbe with name
 		mockMvc.perform(get(apiPath + "/job-instances")
-				.param("name", jobInstance.getName().toLowerCase()).with(adminUser()))
+				.param("name", jobInstance.getName().toLowerCase()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(HAL_JSON_UTF8))
 				.andExpect(jsonPath("$._embedded.jobInstances", hasSize(1)))
@@ -79,7 +81,7 @@ public class BatchJobInstancesRestControllerTest extends BaseSpringTestRunner {
 
 		// qbe with no results
 		mockMvc.perform(get(apiPath + "/job-instances")
-				.param("name", "abcd1234").with(adminUser()))
+				.param("name", "abcd1234"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(HAL_JSON_UTF8))
 				.andExpect(jsonPath("$._embedded").doesNotExist())
@@ -91,16 +93,17 @@ public class BatchJobInstancesRestControllerTest extends BaseSpringTestRunner {
 				.andExpect(jsonPath("$.page.number", is(0)));
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void getBatchJobInstance() throws Exception {
-		mockMvc.perform(get(apiPath + "/job-instances/{jobInstanceId}", jobInstance.getId()).with(adminUser()))
+		mockMvc.perform(get(apiPath + "/job-instances/{jobInstanceId}", jobInstance.getId()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(HAL_JSON_UTF8))
 				.andExpect(jsonPath("$.jobExecution").exists())
 				.andExpect(jsonPath("$._links.self").exists())
 				.andExpect(jsonPath("$._links.self.href").exists());
 
-		mockMvc.perform(get(apiPath + "/job-instances/{jobInstanceId}", -1).with(adminUser()))
+		mockMvc.perform(get(apiPath + "/job-instances/{jobInstanceId}", -1))
 				.andExpect(status().isNotFound());
 	}
 

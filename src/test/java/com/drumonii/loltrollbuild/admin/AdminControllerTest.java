@@ -1,6 +1,7 @@
 package com.drumonii.loltrollbuild.admin;
 
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
+import com.drumonii.loltrollbuild.annotation.WithMockAdminUser;
 import com.drumonii.loltrollbuild.model.BatchJobExecution;
 import com.drumonii.loltrollbuild.model.BatchJobInstance;
 import com.drumonii.loltrollbuild.model.BatchStepExecution;
@@ -49,129 +50,149 @@ public class AdminControllerTest extends BaseSpringTestRunner {
 		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void admin() throws Exception {
 		versionsRepository.save(versions.get(0));
 
-		mockMvc.perform(get("/admin").with(adminUser()))
+		mockMvc.perform(get("/admin"))
 				.andExpect(status().isOk())
 				.andExpect(model().attributeExists("latestRiotPatch", "latestSavedPatch"))
 				.andExpect(model().attribute("activeTab", is("home")))
 				.andExpect(view().name("admin/admin"));
+
+		given(versionsService.getLatestVersion()).willReturn(null);
+
+		mockMvc.perform(get("/admin"))
+				.andExpect(status().isOk())
+				.andExpect(model().attributeExists("latestSavedPatch"))
+				.andExpect(model().attributeDoesNotExist("latestRiotPatch"))
+				.andExpect(model().attribute("activeTab", is("home")))
+				.andExpect(view().name("admin/admin"));
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void summonerSpells() throws Exception {
-		mockMvc.perform(get("/admin/summoner-spells").with(adminUser()))
+		mockMvc.perform(get("/admin/summoner-spells"))
 				.andExpect(status().is3xxRedirection())
 				.andExpect(flash().attribute("noSavedPatch", is("Summoner Spells")))
 				.andExpect(redirectedUrl("/admin"));
 
 		versionsRepository.save(versions.get(0));
 
-		mockMvc.perform(get("/admin/summoner-spells").with(adminUser()))
+		mockMvc.perform(get("/admin/summoner-spells"))
 				.andExpect(status().isOk())
 				.andExpect(model().attributeExists("latestRiotPatch", "latestSavedPatch"))
 				.andExpect(model().attribute("activeTab", is("summonerSpells")))
 				.andExpect(view().name("admin/summonerSpells/summonerSpells"));
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void summonerSpellsDifference() throws Exception {
 		given(summonerSpellsRetrieval.summonerSpells()).willReturn(new ArrayList<>());
 
-		mockMvc.perform(get("/admin/summoner-spells/diff").with(adminUser()))
+		mockMvc.perform(get("/admin/summoner-spells/diff"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json("[]"));
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void items() throws Exception {
-		mockMvc.perform(get("/admin/items").with(adminUser()))
+		mockMvc.perform(get("/admin/items"))
 				.andExpect(status().is3xxRedirection())
 				.andExpect(flash().attribute("noSavedPatch", is("Items")))
 				.andExpect(redirectedUrl("/admin"));
 
 		versionsRepository.save(versions.get(0));
 
-		mockMvc.perform(get("/admin/items").with(adminUser()))
+		mockMvc.perform(get("/admin/items"))
 				.andExpect(status().isOk())
 				.andExpect(model().attributeExists("latestRiotPatch", "latestSavedPatch"))
 				.andExpect(model().attribute("activeTab", is("items")))
 				.andExpect(view().name("admin/items/items"));
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void itemsDifference() throws Exception {
 		given(itemsRetrieval.items()).willReturn(new ArrayList<>());
 
-		mockMvc.perform(get("/admin/items/diff").with(adminUser()))
+		mockMvc.perform(get("/admin/items/diff"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json("[]"));
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void champions() throws Exception {
-		mockMvc.perform(get("/admin/champions").with(adminUser()).with(csrf()))
+		mockMvc.perform(get("/admin/champions").with(csrf()))
 				.andExpect(status().is3xxRedirection())
 				.andExpect(flash().attribute("noSavedPatch", is("Champions")))
 				.andExpect(redirectedUrl("/admin"));
 
 		versionsRepository.save(versions.get(0));
 
-		mockMvc.perform(get("/admin/champions").with(adminUser()))
+		mockMvc.perform(get("/admin/champions"))
 				.andExpect(status().isOk())
 				.andExpect(model().attributeExists("latestRiotPatch", "latestSavedPatch"))
 				.andExpect(model().attribute("activeTab", is("champions")))
 				.andExpect(view().name("admin/champions/champions"));
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void championsDifference() throws Exception {
 		given(championsRetrieval.champions()).willReturn(new ArrayList<>());
 
-		mockMvc.perform(get("/admin/champions/diff").with(adminUser()))
+		mockMvc.perform(get("/admin/champions/diff"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json("[]"));
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void maps() throws Exception {
-		mockMvc.perform(get("/admin/maps").with(adminUser()).with(csrf()))
+		mockMvc.perform(get("/admin/maps").with(csrf()))
 				.andExpect(status().is3xxRedirection())
 				.andExpect(flash().attribute("noSavedPatch", is("Maps")))
 				.andExpect(redirectedUrl("/admin"));
 
 		versionsRepository.save(versions.get(0));
 
-		mockMvc.perform(get("/admin/maps").with(adminUser()))
+		mockMvc.perform(get("/admin/maps"))
 				.andExpect(status().isOk())
 				.andExpect(model().attributeExists("latestRiotPatch", "latestSavedPatch"))
 				.andExpect(model().attribute("activeTab", is("maps")))
 				.andExpect(view().name("admin/maps/maps"));
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void mapsDifference() throws Exception {
 		given(mapsRetrieval.maps()).willReturn(new ArrayList<>());
 
-		mockMvc.perform(get("/admin/maps/diff").with(adminUser()))
+		mockMvc.perform(get("/admin/maps/diff"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json("[]"));
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void jobInstances() throws Exception {
-		mockMvc.perform(get("/admin/job-instances").with(adminUser()))
+		mockMvc.perform(get("/admin/job-instances"))
 				.andExpect(status().isOk())
 				.andExpect(model().attribute("activeTab", is("jobInstances")))
 				.andExpect(view().name("admin/jobs/jobInstances"));
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void stepExecutions() throws Exception {
 		BatchJobInstance jobInstance = new BatchJobInstance();
@@ -191,7 +212,7 @@ public class AdminControllerTest extends BaseSpringTestRunner {
 		stepExecution.setJobExecution(jobExecution);
 		batchStepExecutionsRepository.save(stepExecution);
 
-		mockMvc.perform(get("/admin/job-instances/{jobInstanceId}/step-executions", jobInstance.getId()).with(adminUser()))
+		mockMvc.perform(get("/admin/job-instances/{jobInstanceId}/step-executions", jobInstance.getId()))
 				.andExpect(status().isOk())
 				.andExpect(model().attribute("activeTab", is("jobInstances")))
 				.andExpect(view().name("admin/jobs/stepExecutions"));

@@ -1,6 +1,7 @@
 package com.drumonii.loltrollbuild.riot;
 
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
+import com.drumonii.loltrollbuild.annotation.WithMockAdminUser;
 import com.drumonii.loltrollbuild.model.Item;
 import com.drumonii.loltrollbuild.model.image.Image;
 import com.drumonii.loltrollbuild.riot.service.ItemsService;
@@ -45,23 +46,25 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 		lichBane = itemsResponse.getItems().get("3100");
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void items() throws Exception {
 		given(itemsService.getItems()).willReturn(new ArrayList<>(itemsResponse.getItems().values()));
 
-		mockMvc.perform(get("/riot/items").with(adminUser()).with(csrf()))
+		mockMvc.perform(get("/riot/items").with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(itemsResponse.getItems().values())));
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void saveItems() throws Exception {
 		given(itemsService.getItems()).willReturn(new ArrayList<>(itemsResponse.getItems().values()));
 
 		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
 
-		mockMvc.perform(post("/riot/items").with(adminUser()).with(csrf()))
+		mockMvc.perform(post("/riot/items").with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(itemsResponse.getItems().values())));
@@ -73,6 +76,7 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 				.containsOnlyElementsOf(itemsResponse.getItems().values());
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void saveDifferenceOfItems() throws Exception {
 		given(itemsService.getItems()).willReturn(new ArrayList<>(itemsResponse.getItems().values()));
@@ -81,7 +85,7 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 
 		List<Item> champions = itemsRepository.save(itemsResponse.getItems().values());
 
-		mockMvc.perform(post("/riot/items").with(adminUser()).with(csrf()))
+		mockMvc.perform(post("/riot/items").with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json("[]"));
@@ -92,6 +96,7 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 		assertThat(itemsRepository.findAll()).containsOnlyElementsOf(champions);
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void saveDifferenceOfItemsWithDeleted() throws Exception {
 		List<Item> items = itemsRepository.save(itemsResponse.getItems().values());
@@ -102,7 +107,7 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 
 		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
 
-		mockMvc.perform(post("/riot/items").with(adminUser()).with(csrf()))
+		mockMvc.perform(post("/riot/items").with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json("[]"));
@@ -113,13 +118,14 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 		assertThat(itemsRepository.findOne(itemToDelete.getId())).isNull();
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void saveItemsWithTruncate() throws Exception {
 		given(itemsService.getItems()).willReturn(new ArrayList<>(itemsResponse.getItems().values()));
 
 		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
 
-		mockMvc.perform(post("/riot/items?truncate=true").with(adminUser()).with(csrf()))
+		mockMvc.perform(post("/riot/items?truncate=true").with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(itemsResponse.getItems().values())));
@@ -131,31 +137,34 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 				.containsOnlyElementsOf(itemsResponse.getItems().values());
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void item() throws Exception {
 		given(itemsService.getItem(eq(lichBane.getId()))).willReturn(lichBane);
 
-		mockMvc.perform(get("/riot/items/{id}", lichBane.getId()).with(adminUser()).with(csrf()))
+		mockMvc.perform(get("/riot/items/{id}", lichBane.getId()).with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(lichBane)));
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void itemNotFound() throws Exception {
 		given(itemsService.getItem(eq(lichBane.getId()))).willReturn(null);
 
-		mockMvc.perform(get("/riot/items/{id}", lichBane.getId()).with(adminUser()).with(csrf()))
+		mockMvc.perform(get("/riot/items/{id}", lichBane.getId()).with(csrf()))
 				.andExpect(status().isNotFound());
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void saveItem() throws Exception {
 		given(itemsService.getItem(eq(lichBane.getId()))).willReturn(lichBane);
 
 		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
 
-		mockMvc.perform(post("/riot/items/{id}", lichBane.getId()).with(adminUser()).with(csrf()))
+		mockMvc.perform(post("/riot/items/{id}", lichBane.getId()).with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(lichBane)));
@@ -166,14 +175,16 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 		assertThat(itemsRepository.findOne(lichBane.getId())).isNotNull();
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void saveItemNotFound() throws Exception {
 		given(itemsService.getItem(eq(lichBane.getId()))).willReturn(null);
 
-		mockMvc.perform(post("/riot/items/{id}", lichBane.getId()).with(adminUser()).with(csrf()))
+		mockMvc.perform(post("/riot/items/{id}", lichBane.getId()).with(csrf()))
 				.andExpect(status().isNotFound());
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void saveItemWithOverwrite() throws Exception {
 		itemsRepository.save(lichBane);
@@ -184,7 +195,7 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 
 		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
 
-		mockMvc.perform(post("/riot/items/{id}", lichBane.getId()).with(adminUser()).with(csrf()))
+		mockMvc.perform(post("/riot/items/{id}", lichBane.getId()).with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(newLichBane)));

@@ -1,6 +1,7 @@
 package com.drumonii.loltrollbuild.riot;
 
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
+import com.drumonii.loltrollbuild.annotation.WithMockAdminUser;
 import com.drumonii.loltrollbuild.model.Champion;
 import com.drumonii.loltrollbuild.model.image.Image;
 import com.drumonii.loltrollbuild.riot.service.ChampionsService;
@@ -47,23 +48,25 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 		leeSin = championsResponse.getChampions().get("LeeSin");
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void champions() throws Exception {
 		given(championsService.getChampions()).willReturn(new ArrayList<>(championsResponse.getChampions().values()));
 
-		mockMvc.perform(get("/riot/champions").with(adminUser()).with(csrf()))
+		mockMvc.perform(get("/riot/champions").with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(championsResponse.getChampions().values())));
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void saveChampions() throws Exception {
 		given(championsService.getChampions()).willReturn(new ArrayList<>(championsResponse.getChampions().values()));
 
 		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
 
-		mockMvc.perform(post("/riot/champions").with(adminUser()).with(csrf()))
+		mockMvc.perform(post("/riot/champions").with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(championsResponse.getChampions().values())));
@@ -74,6 +77,7 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 		assertThat(championsRepository.findAll()).containsOnlyElementsOf(championsResponse.getChampions().values());
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void saveDifferenceOfChampions() throws Exception {
 		given(championsService.getChampions()).willReturn(new ArrayList<>(championsResponse.getChampions().values()));
@@ -82,7 +86,7 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 
 		List<Champion> champions = championsRepository.save(championsResponse.getChampions().values());
 
-		mockMvc.perform(post("/riot/champions").with(adminUser()).with(csrf()))
+		mockMvc.perform(post("/riot/champions").with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json("[]"));
@@ -93,6 +97,7 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 		assertThat(championsRepository.findAll()).containsOnlyElementsOf(champions);
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void saveDifferenceOfChampionsWithDeleted() throws Exception {
 		List<Champion> champions = championsRepository.save(championsResponse.getChampions().values());
@@ -103,7 +108,7 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 
 		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
 
-		mockMvc.perform(post("/riot/champions").with(adminUser()).with(csrf()))
+		mockMvc.perform(post("/riot/champions").with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json("[]"));
@@ -114,13 +119,14 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 		assertThat(championsRepository.findOne(championToDelete.getId())).isNull();
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void saveChampionsWithTruncate() throws Exception {
 		given(championsService.getChampions()).willReturn(new ArrayList<>(championsResponse.getChampions().values()));
 
 		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
 
-		mockMvc.perform(post("/riot/champions?truncate=true").with(adminUser()).with(csrf()))
+		mockMvc.perform(post("/riot/champions?truncate=true").with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(championsResponse.getChampions().values())));
@@ -131,31 +137,34 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 		assertThat(championsRepository.findAll()).containsOnlyElementsOf(championsResponse.getChampions().values());
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void champion() throws Exception {
 		given(championsService.getChampion(eq(leeSin.getId()))).willReturn(leeSin);
 
-		mockMvc.perform(get("/riot/champions/{id}", leeSin.getId()).with(adminUser()).with(csrf()))
+		mockMvc.perform(get("/riot/champions/{id}", leeSin.getId()).with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(leeSin)));
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void championNotFound() throws Exception {
 		given(championsService.getChampion(eq(leeSin.getId()))).willReturn(null);
 
-		mockMvc.perform(get("/riot/champions/{id}", leeSin.getId()).with(adminUser()).with(csrf()))
+		mockMvc.perform(get("/riot/champions/{id}", leeSin.getId()).with(csrf()))
 				.andExpect(status().isNotFound());
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void saveChampion() throws Exception {
 		given(championsService.getChampion(eq(leeSin.getId()))).willReturn(leeSin);
 
 		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
 
-		mockMvc.perform(post("/riot/champions/{id}", leeSin.getId()).with(adminUser()).with(csrf()))
+		mockMvc.perform(post("/riot/champions/{id}", leeSin.getId()).with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(leeSin)));
@@ -168,14 +177,16 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 		assertThat(championsRepository.findOne(leeSin.getId())).isNotNull();
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void saveChampionNotFound() throws Exception {
 		given(championsService.getChampion(eq(leeSin.getId()))).willReturn(null);
 
-		mockMvc.perform(post("/riot/champions/{id}", leeSin.getId()).with(adminUser()).with(csrf()))
+		mockMvc.perform(post("/riot/champions/{id}", leeSin.getId()).with(csrf()))
 				.andExpect(status().isNotFound());
 	}
 
+	@WithMockAdminUser
 	@Test
 	public void saveChampionWithOverwrite() throws Exception {
 		Champion newLeeSin = championsResponse.getChampions().get("LeeSin");
@@ -186,7 +197,7 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 
 		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
 
-		mockMvc.perform(post("/riot/champions/{id}", leeSin.getId()).with(adminUser()).with(csrf()))
+		mockMvc.perform(post("/riot/champions/{id}", leeSin.getId()).with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(newLeeSin)));
