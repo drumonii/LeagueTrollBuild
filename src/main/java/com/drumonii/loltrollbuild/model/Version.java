@@ -1,5 +1,6 @@
 package com.drumonii.loltrollbuild.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import org.apache.commons.lang3.builder.CompareToBuilder;
 
@@ -32,15 +33,19 @@ public class Version implements Serializable, Comparable<Version> {
 
 	@Id
 	@Column(name = "PATCH", nullable = false)
+	@JsonProperty("patch")
 	@Getter @Setter private String patch;
 
 	@Column(name = "MAJOR", nullable = false)
+	@JsonProperty("major")
 	@Getter @Setter private int major;
 
 	@Column(name = "MINOR", nullable = false)
+	@JsonProperty("minor")
 	@Getter @Setter private int minor;
 
 	@Column(name = "REVISION", nullable = false)
+	@JsonProperty("revision")
 	@Getter @Setter private int revision;
 
 	@Override
