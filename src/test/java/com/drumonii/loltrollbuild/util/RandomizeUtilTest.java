@@ -1,7 +1,8 @@
 package com.drumonii.loltrollbuild.util;
 
-import com.drumonii.loltrollbuild.BaseUnitTestRunner;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +11,8 @@ import static com.drumonii.loltrollbuild.util.RandomizeUtil.getRandom;
 import static com.drumonii.loltrollbuild.util.RandomizeUtil.getRandoms;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class RandomizeUtilTest extends BaseUnitTestRunner {
+@RunWith(JUnit4.class)
+public class RandomizeUtilTest {
 
 	@Test
 	public void getsRandom() throws Exception {
