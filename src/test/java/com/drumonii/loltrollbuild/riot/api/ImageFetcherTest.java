@@ -2,33 +2,25 @@ package com.drumonii.loltrollbuild.riot.api;
 
 import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.model.image.Image;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static com.drumonii.loltrollbuild.config.Profiles.TESTING;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.anyString;
-import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = RANDOM_PORT, properties = { "riot.api.key=API_KEY", "spring.cache.type=simple" })
-@ActiveProfiles(TESTING)
+@RunWith(MockitoJUnitRunner.class)
 public class ImageFetcherTest {
 
-	@Autowired
+	@InjectMocks
 	private ImageFetcher imageFetcher;
 
 	@Mock
@@ -36,12 +28,6 @@ public class ImageFetcherTest {
 
 	@Mock
 	private UriComponents uriComponents;
-
-	@Before
-	public void before() {
-
-		MockitoAnnotations.initMocks(this);
-	}
 
 	@Test
 	public void setImgsSrcs() throws Exception {
