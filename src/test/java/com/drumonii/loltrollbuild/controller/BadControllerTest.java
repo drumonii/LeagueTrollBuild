@@ -1,12 +1,26 @@
 package com.drumonii.loltrollbuild.controller;
 
-import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.context.annotation.ComponentScan.Filter;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 
+import static com.drumonii.loltrollbuild.config.Profiles.TESTING;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class BadControllerTest extends BaseSpringTestRunner {
+@RunWith(SpringRunner.class)
+@WebMvcTest(value = BadController.class, excludeFilters = @Filter(ControllerAdvice.class), secure = false)
+@ActiveProfiles({ TESTING })
+public class BadControllerTest {
+
+	@Autowired
+	private MockMvc mockMvc;
 
 	@Test
 	public void throws400() throws Exception {
