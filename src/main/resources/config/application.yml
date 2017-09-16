@@ -49,6 +49,8 @@ spring:
   jackson:
     serialization:
       write_dates_as_timestamps: false
+    deserialization:
+      fail_on_unknown_properties: false
 # Actuator
 management:
   context-path: /admin/actuator
