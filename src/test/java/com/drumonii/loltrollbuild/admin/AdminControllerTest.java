@@ -5,11 +5,7 @@ import com.drumonii.loltrollbuild.annotation.WithMockAdminUser;
 import com.drumonii.loltrollbuild.model.BatchJobExecution;
 import com.drumonii.loltrollbuild.model.BatchJobInstance;
 import com.drumonii.loltrollbuild.model.BatchStepExecution;
-import com.drumonii.loltrollbuild.riot.ChampionsRetrieval;
-import com.drumonii.loltrollbuild.riot.ItemsRetrieval;
-import com.drumonii.loltrollbuild.riot.MapsRetrieval;
-import com.drumonii.loltrollbuild.riot.SummonerSpellsRetrieval;
-import com.drumonii.loltrollbuild.riot.service.VersionsService;
+import com.drumonii.loltrollbuild.riot.service.*;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
 import org.junit.Before;
@@ -32,16 +28,16 @@ public class AdminControllerTest extends BaseSpringTestRunner {
 	private VersionsService versionsService;
 
 	@MockBean
-	private SummonerSpellsRetrieval summonerSpellsRetrieval;
+	private SummonerSpellsService summonerSpellsService;
 
 	@MockBean
-	private ItemsRetrieval itemsRetrieval;
+	private ItemsService itemsService;
 
 	@MockBean
-	private ChampionsRetrieval championsRetrieval;
+	private ChampionsService championsService;
 
 	@MockBean
-	private MapsRetrieval mapsRetrieval;
+	private MapsService mapsService;
 
 	@Before
 	public void before() {
@@ -91,7 +87,7 @@ public class AdminControllerTest extends BaseSpringTestRunner {
 	@WithMockAdminUser
 	@Test
 	public void summonerSpellsDifference() throws Exception {
-		given(summonerSpellsRetrieval.summonerSpells()).willReturn(new ArrayList<>());
+		given(summonerSpellsService.getSummonerSpells()).willReturn(new ArrayList<>());
 
 		mockMvc.perform(get("/admin/summoner-spells/diff"))
 				.andExpect(status().isOk())
@@ -119,7 +115,7 @@ public class AdminControllerTest extends BaseSpringTestRunner {
 	@WithMockAdminUser
 	@Test
 	public void itemsDifference() throws Exception {
-		given(itemsRetrieval.items()).willReturn(new ArrayList<>());
+		given(itemsService.getItems()).willReturn(new ArrayList<>());
 
 		mockMvc.perform(get("/admin/items/diff"))
 				.andExpect(status().isOk())
@@ -147,7 +143,7 @@ public class AdminControllerTest extends BaseSpringTestRunner {
 	@WithMockAdminUser
 	@Test
 	public void championsDifference() throws Exception {
-		given(championsRetrieval.champions()).willReturn(new ArrayList<>());
+		given(championsService.getChampions()).willReturn(new ArrayList<>());
 
 		mockMvc.perform(get("/admin/champions/diff"))
 				.andExpect(status().isOk())
@@ -175,7 +171,7 @@ public class AdminControllerTest extends BaseSpringTestRunner {
 	@WithMockAdminUser
 	@Test
 	public void mapsDifference() throws Exception {
-		given(mapsRetrieval.maps()).willReturn(new ArrayList<>());
+		given(mapsService.getMaps()).willReturn(new ArrayList<>());
 
 		mockMvc.perform(get("/admin/maps/diff"))
 				.andExpect(status().isOk())
