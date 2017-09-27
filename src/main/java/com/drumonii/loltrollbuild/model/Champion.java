@@ -87,7 +87,7 @@ public class Champion implements Serializable {
 
 	@JsonIgnore
 	public boolean isViktor() {
-		return name.equals("Viktor");
+		return "Viktor".equals(name);
 	}
 
 	// Hibernate's PersistentBag does not honor equals()
