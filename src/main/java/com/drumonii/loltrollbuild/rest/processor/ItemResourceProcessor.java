@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
 /**
@@ -27,20 +27,20 @@ public class ItemResourceProcessor implements ResourceProcessor<Resource<Item>> 
 	@Override
 	public Resource<Item> process(Resource<Item> resource) {
 		List<Link> links = new ArrayList<>();
-		if (!resource.getContent().getFrom().isEmpty()) {
+		if (resource.getContent().getFrom() != null && !resource.getContent().getFrom().isEmpty()) {
 			links.addAll(resource.getContent().getFrom().stream()
 					.map(from -> repositoryEntityLinks.linkToSingleResource(Item.class, from)
 							.withRel("from"))
 					.collect(Collectors.toList()));
 		}
-		if (!resource.getContent().getInto().isEmpty()) {
+		if (resource.getContent().getInto() != null && !resource.getContent().getInto().isEmpty()) {
 			links.addAll(resource.getContent().getInto().stream()
 					.map(into -> repositoryEntityLinks.linkToSingleResource(Item.class, into)
 							.withRel("into"))
 					.collect(Collectors.toList()));
 		}
 		links.addAll(resource.getContent().getMaps().entrySet().stream()
-				.filter(Map.Entry::getValue)
+				.filter(Entry::getValue)
 				.map(entry -> repositoryEntityLinks.linkToSingleResource(GameMap.class, entry.getKey()).withRel("maps"))
 				.collect(Collectors.toList()));
 		links.add(repositoryEntityLinks.linkToSingleResource(Item.class, resource.getContent().getId())
