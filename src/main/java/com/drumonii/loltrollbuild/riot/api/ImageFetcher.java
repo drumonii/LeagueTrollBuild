@@ -10,7 +10,6 @@ import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
@@ -23,8 +22,7 @@ import java.util.List;
 public class ImageFetcher {
 
 	/**
-	 * Sets a {@link List} of {@link Image} sources from a {@link UriComponentsBuilder}. Note, a patch version must
-	 * exist in the database, else a 404 response status will be thrown.
+	 * Sets a {@link List} of {@link Image} sources from a {@link UriComponentsBuilder}.
 	 *
 	 * @param images the {@link List} of a model's {@link Image}
 	 * @param builder the {@link UriComponentsBuilder} to build the URI from a patch version and the image's filename
@@ -42,8 +40,7 @@ public class ImageFetcher {
 	}
 
 	/**
-	 * Sets a single {@link Image} source from a {@link UriComponentsBuilder}. Note, a patch version must exist in the
-	 * database, else a 404 response status will be thrown.
+	 * Sets a single {@link Image} source from a {@link UriComponentsBuilder}.
 	 *
 	 * @param image the model's {@link Image}
 	 * @param builder the {@link UriComponentsBuilder} to build the URI from a patch version and the image's filename
@@ -52,10 +49,13 @@ public class ImageFetcher {
 	 */
 	public int setImgSrc(Image image, UriComponentsBuilder builder, Version latestVersion) {
 		int count = 0;
-		UriComponents uriComponents = builder.buildAndExpand(latestVersion.getPatch(), image.getFull());
+		UriComponents uriComponents = null;
+		if (latestVersion != null) {
+			uriComponents = builder.buildAndExpand(latestVersion.getPatch(), image.getFull());
+		}
 		URL url = null;
 		try {
-			url = new URL(uriComponents.toUriString());
+			url = uriComponents == null ? null : new URL(uriComponents.toUriString());
 		} catch (MalformedURLException e) {
 			log.error("Unable to create the URL with " + uriComponents.toString());
 		}
