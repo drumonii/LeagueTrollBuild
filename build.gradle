@@ -1,6 +1,6 @@
 plugins {
-    id 'org.springframework.boot' version '1.5.7.RELEASE'
-    id 'org.asciidoctor.convert' version '1.5.3'
+    id 'org.springframework.boot' version '1.5.8.RELEASE'
+    id 'org.asciidoctor.convert' version '1.5.6'
 }
 
 apply plugin: 'java'
@@ -59,7 +59,7 @@ bootRun {
 }
 
 ext['assertj.version'] = '3.8.0'
-ext['thymeleaf.version'] = '3.0.7.RELEASE'
+ext['thymeleaf.version'] = '3.0.8.RELEASE'
 ext['thymeleaf-extras-springsecurity4.version'] = '3.0.2.RELEASE'
 
 repositories {
@@ -85,7 +85,7 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-starter-actuator'
     compile 'org.springframework.boot:spring-boot-starter-batch'
     compile 'org.springframework.boot:spring-boot-devtools'
-    compile 'eu.michael-simons:wro4j-spring-boot-starter:0.3.5'
+    compile 'eu.michael-simons:wro4j-spring-boot-starter:0.3.7'
     compileOnly 'org.springframework.boot:spring-boot-configuration-processor'
 
     // Lombok
@@ -98,7 +98,7 @@ dependencies {
     runtime 'com.h2database:h2'
 
     // PostgreSQL
-    runtime 'org.postgresql:postgresql:42.1.1'
+    runtime 'org.postgresql:postgresql:42.1.4'
 
     // EhCache
     compile 'net.sf.ehcache:ehcache'
@@ -113,9 +113,9 @@ dependencies {
     compile 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
 
     // Apache Commons
-    compile 'org.apache.commons:commons-lang3:3.5'
+    compile 'org.apache.commons:commons-lang3:3.6'
     compile 'org.apache.commons:commons-collections4:4.1'
-    compile 'commons-io:commons-io:2.4'
+    compile 'commons-io:commons-io:2.5'
 
     // WebJars Locator
     compile 'org.webjars:webjars-locator'
@@ -124,7 +124,7 @@ dependencies {
     compile 'org.webjars.bower:jquery:3.2.1'
 
     // DataTables
-    compile('org.webjars.bower:datatables:1.10.15') {
+    compile('org.webjars.bower:datatables:1.10.16') {
         exclude group: 'org.webjars.bower'
     }
 
