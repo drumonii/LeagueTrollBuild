@@ -121,20 +121,20 @@ dependencies {
     compile 'org.webjars:webjars-locator'
 
     // jQuery
-    compile 'org.webjars.bower:jquery:3.2.1'
+	runtime 'org.webjars.bower:jquery:3.2.1'
 
     // DataTables
-    compile('org.webjars.bower:datatables:1.10.16') {
+	runtime('org.webjars.bower:datatables:1.10.16') {
         exclude group: 'org.webjars.bower'
     }
 
     // Isotope
-    compile('org.webjars.bower:isotope:3.0.4') {
+	runtime('org.webjars.bower:isotope:3.0.4') {
         exclude group: 'org.webjars.bower'
     }
 
     // Clipboard JS
-    compile 'org.webjars.bower:clipboard:1.7.1'
+	runtime 'org.webjars.bower:clipboard:1.7.1'
 
     // Testing
     testCompile 'org.springframework.boot:spring-boot-starter-test'
