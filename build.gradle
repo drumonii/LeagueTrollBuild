@@ -1,5 +1,5 @@
 plugins {
-    id 'org.springframework.boot' version '1.5.8.RELEASE'
+    id 'org.springframework.boot' version '1.5.9.RELEASE'
     id 'org.asciidoctor.convert' version '1.5.6'
 }
 
@@ -59,7 +59,7 @@ bootRun {
 }
 
 ext['assertj.version'] = '3.8.0'
-ext['thymeleaf.version'] = '3.0.8.RELEASE'
+ext['thymeleaf.version'] = '3.0.9.RELEASE'
 ext['thymeleaf-extras-springsecurity4.version'] = '3.0.2.RELEASE'
 
 repositories {
@@ -85,7 +85,7 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-starter-actuator'
     compile 'org.springframework.boot:spring-boot-starter-batch'
     compile 'org.springframework.boot:spring-boot-devtools'
-    compile 'eu.michael-simons:wro4j-spring-boot-starter:0.3.7'
+    compile 'eu.michael-simons:wro4j-spring-boot-starter:0.3.9'
     compileOnly 'org.springframework.boot:spring-boot-configuration-processor'
 
     // Lombok
