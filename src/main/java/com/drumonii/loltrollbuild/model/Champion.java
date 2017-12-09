@@ -85,11 +85,6 @@ public class Champion implements Serializable {
 	@JsonProperty("tags")
 	@Getter @Setter private SortedSet<String> tags;
 
-	@JsonIgnore
-	public boolean isViktor() {
-		return "Viktor".equals(name);
-	}
-
 	// Hibernate's PersistentBag does not honor equals()
 
 	@PostPersist

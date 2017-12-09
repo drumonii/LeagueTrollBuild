@@ -81,12 +81,12 @@ public class ChampionsController {
 		// Add boots first
 		items.add(RandomizeUtil.getRandom(itemsRepository.boots(mapId)));
 		// If Viktor, add his starting item
-		if (champion.isViktor()) {
+		if (ChampionUtil.isViktor(champion)) {
 			items.add(RandomizeUtil.getRandom(itemsRepository.viktorOnly()));
 		}
 		// Get all items for the troll build
 		items.addAll(RandomizeUtil.getRandoms(itemsRepository.forTrollBuild(mapId),
-				champion.isViktor() ? ITEMS_SIZE - 2: ITEMS_SIZE - 1));
+				ChampionUtil.isViktor(champion) ? ITEMS_SIZE - 2: ITEMS_SIZE - 1));
 		trollBuild.put("items", items);
 
 		// Summoner Spells
