@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class RandomizeUtilTest {
 
 	@Test
-	public void getsRandom() throws Exception {
+	public void getsRandom() {
 		List<String> strings = new ArrayList<>();
 		strings.add("string 1");
 		strings.add("string 2");
@@ -25,7 +25,7 @@ public class RandomizeUtilTest {
 	}
 
 	@Test
-	public void getsRandoms() throws Exception {
+	public void getsRandoms() {
 		List<String> strings = new ArrayList<>();
 		strings.add("string 1");
 		strings.add("string 2");
