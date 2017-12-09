@@ -1,4 +1,4 @@
-package com.drumonii.loltrollbuild.controller;
+package com.drumonii.loltrollbuild.controller.advice;
 
 import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.repository.VersionsRepository;
