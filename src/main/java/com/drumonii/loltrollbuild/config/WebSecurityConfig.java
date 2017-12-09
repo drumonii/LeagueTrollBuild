@@ -5,22 +5,27 @@ import com.drumonii.loltrollbuild.config.Profiles.Embedded;
 import com.drumonii.loltrollbuild.config.Profiles.External;
 import com.drumonii.loltrollbuild.config.Profiles.Testing;
 import com.drumonii.loltrollbuild.security.CsrfTokenExpiredAccessDeniedHandler;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
 
-import static org.springframework.boot.autoconfigure.security.SecurityProperties.ACCESS_OVERRIDE_ORDER;
-import static org.springframework.http.HttpMethod.*;
+import static org.springframework.http.HttpMethod.DELETE;
+import static org.springframework.http.HttpMethod.PATCH;
+import static org.springframework.http.HttpMethod.POST;
+import static org.springframework.http.HttpMethod.PUT;
 
 /**
  * Configuration for web security/authentication and overriding components in {@link WebSecurityConfigurerAdapter}.
@@ -68,22 +73,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	/**
 	 * In memory authentication configuration for {@link Dev} and {@link Testing} profiles.
 	 */
-	@Order(ACCESS_OVERRIDE_ORDER)
 	@Configuration
 	@Dev @Testing
-	public static class WebDevTestingSecurityConfig extends WebSecurityConfigurerAdapter {
+	public static class WebDevTestingSecurityConfig {
 
 		public static final String IN_MEM_USERNAME = "admin";
 		public static final String IN_MEM_PASSWORD = "password";
 
-		@Autowired
-		@Override
-		protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-			// @formatter:off
-			auth
-				.inMemoryAuthentication()
-					.withUser(IN_MEM_USERNAME).password(IN_MEM_PASSWORD).roles(ADMIN_ROLE);
-			// @formatter:on
+		@Bean
+		public UserDetailsService userDetailsService() {
+			InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
+			manager.createUser(User.withUsername(IN_MEM_USERNAME).password(IN_MEM_PASSWORD).roles(ADMIN_ROLE).build());
+			return manager;
 		}
 
 	}
@@ -91,23 +92,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	/**
 	 * JDBC authentication configuration for {@link Embedded} and {@link External} profiles.
 	 */
-	@Order(ACCESS_OVERRIDE_ORDER)
 	@Configuration
 	@Embedded @External
-	public static class WebEmbeddedExternalSecurityConfig extends WebSecurityConfigurerAdapter {
+	public static class WebEmbeddedExternalSecurityConfig {
 
-		@Autowired
-		private DataSource dataSource;
+		@Bean
+		public UserDetailsService userDetailsService(DataSource dataSource) {
+			JdbcUserDetailsManager manager = new JdbcUserDetailsManager();
+			manager.setDataSource(dataSource);
+			return manager;
+		}
 
-		@Autowired
-		@Override
-		protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-			// @formatter:off
-			auth
-				.jdbcAuthentication()
-					.dataSource(dataSource)
-					.passwordEncoder(new BCryptPasswordEncoder());
-			// @formatter:on
+		@Bean
+		public PasswordEncoder passwordEncoder() {
+			return new BCryptPasswordEncoder();
 		}
 
 	}
