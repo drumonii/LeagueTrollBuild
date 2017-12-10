@@ -27,7 +27,7 @@ public class ItemsRetrievalItemReader extends AbstractItemStreamItemReader<Item>
 	private int nextItem;
 
 	@Override
-	public Item read() throws Exception {
+	public Item read() {
 		if (nextItem < items.size()) {
 			return items.get(nextItem++);
 		}

@@ -27,7 +27,7 @@ public class SummonerSpellsRetrievalItemReader extends AbstractItemStreamItemRea
 	private int nextSummonerSpell;
 
 	@Override
-	public SummonerSpell read() throws Exception {
+	public SummonerSpell read() {
 		if (nextSummonerSpell < summonerSpells.size()) {
 			return summonerSpells.get(nextSummonerSpell++);
 		}

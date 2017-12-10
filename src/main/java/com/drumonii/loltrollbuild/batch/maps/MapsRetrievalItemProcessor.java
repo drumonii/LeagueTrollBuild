@@ -31,7 +31,7 @@ public class MapsRetrievalItemProcessor implements ItemProcessor<GameMap, GameMa
 	}
 
 	@Override
-	public GameMap process(GameMap map) throws Exception {
+	public GameMap process(GameMap map) {
 		GameMap mapFromDb = mapsRepository.findOne(map.getMapId());
 		if (mapFromDb != null && mapFromDb.equals(map)) {
 			return null;

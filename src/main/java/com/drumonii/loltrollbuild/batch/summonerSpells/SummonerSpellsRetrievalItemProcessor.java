@@ -31,7 +31,7 @@ public class SummonerSpellsRetrievalItemProcessor implements ItemProcessor<Summo
 	}
 
 	@Override
-	public SummonerSpell process(SummonerSpell summonerSpell) throws Exception {
+	public SummonerSpell process(SummonerSpell summonerSpell) {
 		SummonerSpell summonerSpellFromDb = summonerSpellsRepository.findOne(summonerSpell.getId());
 		if (summonerSpellFromDb != null && summonerSpellFromDb.equals(summonerSpell)) {
 			return null;

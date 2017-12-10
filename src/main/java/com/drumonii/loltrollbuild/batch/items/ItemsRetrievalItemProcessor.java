@@ -31,7 +31,7 @@ public class ItemsRetrievalItemProcessor implements ItemProcessor<Item, Item> {
 	}
 
 	@Override
-	public Item process(Item item) throws Exception {
+	public Item process(Item item) {
 		Item itemFromDb = itemsRepository.findOne(item.getId());
 		if (itemFromDb != null && itemFromDb.equals(item)) {
 			return null;

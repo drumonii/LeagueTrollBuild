@@ -42,7 +42,7 @@ public class ChampionsRetrievalItemProcessor implements ItemProcessor<Champion, 
 	}
 
 	@Override
-	public Champion process(Champion champion) throws Exception {
+	public Champion process(Champion champion) {
 		Champion championFromDb = championsRepository.findOne(champion.getId());
 		if (championFromDb != null && championFromDb.equals(champion)) {
 			return null;

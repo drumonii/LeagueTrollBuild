@@ -27,7 +27,7 @@ public class ChampionsRetrievalItemReader extends AbstractItemStreamItemReader<C
 	private int nextChampion;
 
 	@Override
-	public Champion read() throws Exception {
+	public Champion read() {
 		if (nextChampion < champions.size()) {
 			return champions.get(nextChampion++);
 		}

@@ -14,7 +14,7 @@ public class VersionsRetrievalItemProcessor implements ItemProcessor<Version, Ve
 	private VersionsRepository versionsRepository;
 
 	@Override
-	public Version process(Version version) throws Exception {
+	public Version process(Version version) {
 		Version latestVersion = versionsRepository.latestVersion();
 		if (latestVersion != null && version.compareTo(latestVersion) <= 0) {
 			return null;

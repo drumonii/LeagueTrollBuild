@@ -27,7 +27,7 @@ public class MapsRetrievalItemReader extends AbstractItemStreamItemReader<GameMa
 	private int nextMap;
 
 	@Override
-	public GameMap read() throws Exception {
+	public GameMap read() {
 		if (nextMap < maps.size()) {
 			return maps.get(nextMap++);
 		}

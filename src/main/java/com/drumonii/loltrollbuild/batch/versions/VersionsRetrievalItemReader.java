@@ -22,7 +22,7 @@ public class VersionsRetrievalItemReader extends AbstractItemStreamItemReader<Ve
 	private int nextVersion;
 
 	@Override
-	public Version read() throws Exception {
+	public Version read() {
 		if (nextVersion < versions.size()) {
 			return versions.get(nextVersion++);
 		}
