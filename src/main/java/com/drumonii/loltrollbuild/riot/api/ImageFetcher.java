@@ -4,7 +4,6 @@ import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.model.image.Image;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -64,8 +63,7 @@ public class ImageFetcher {
 				image.setImgSrc(IOUtils.toByteArray(url.openStream()));
 				count++;
 			} catch (IOException e) {
-				log.warn("Unable to retrieve the image from URL: " + url + " because " +
-						ExceptionUtils.getRootCauseMessage(e));
+				log.warn("Unable to retrieve the image from URL: " + url + " because: ", e);
 			}
 		}
 		return count;
