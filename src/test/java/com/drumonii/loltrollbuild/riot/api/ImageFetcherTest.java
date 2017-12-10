@@ -30,7 +30,7 @@ public class ImageFetcherTest {
 	private UriComponents uriComponents;
 
 	@Test
-	public void setsImagesSourcesWithInvalidUrl() throws Exception {
+	public void setsImagesSourcesWithInvalidUrl() {
 		Image image1 = new Image("arctichare.png", "arctichare.png", "group", new byte[0], 144, 48, 48, 48);
 		List<Image> images = Arrays.asList(image1);
 
@@ -45,7 +45,7 @@ public class ImageFetcherTest {
 	}
 
 	@Test
-	public void setsImagesSourcesWithValidUrl() throws Exception {
+	public void setsImagesSourcesWithValidUrl() {
 		Image image1 = new Image("arctichare.png", "arctichare.png", "group", new byte[0], 144, 48, 48, 48);
 		List<Image> images = Arrays.asList(image1);
 
@@ -60,7 +60,7 @@ public class ImageFetcherTest {
 	}
 
 	@Test
-	public void setImagesSourcesWithNullVersion() throws Exception {
+	public void setImagesSourcesWithNullVersion() {
 		Image image1 = new Image("arctichare.png", "arctichare.png", "group", new byte[0], 144, 48, 48, 48);
 		List<Image> images = Arrays.asList(image1);
 
@@ -71,7 +71,7 @@ public class ImageFetcherTest {
 	}
 
 	@Test
-	public void setsImageSourceWithInvalidUrl() throws Exception {
+	public void setsImageSourceWithInvalidUrl() {
 		Image image = new Image("monarch.png", "monarch0.png", "group", new byte[0], 144, 48, 48, 48);
 
 		Version latestVersion = new Version("1.0.0");
@@ -85,7 +85,7 @@ public class ImageFetcherTest {
 	}
 
 	@Test
-	public void setsImageSourceWithValidUrl() throws Exception {
+	public void setsImageSourceWithValidUrl() {
 		Image image = new Image("monarch.png", "monarch0.png", "group", new byte[0], 144, 48, 48, 48);
 
 		Version latestVersion = new Version("1.0.0");
@@ -99,7 +99,7 @@ public class ImageFetcherTest {
 	}
 
 	@Test
-	public void setImageSourceWithNullVersion() throws Exception {
+	public void setImageSourceWithNullVersion() {
 		Image image = new Image("monarch.png", "monarch0.png", "group", new byte[0], 144, 48, 48, 48);
 
 		given(uriComponents.toUriString())

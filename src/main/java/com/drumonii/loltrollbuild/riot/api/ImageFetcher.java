@@ -3,12 +3,13 @@ package com.drumonii.loltrollbuild.riot.api;
 import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.model.image.Image;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.io.IOUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
@@ -19,6 +20,9 @@ import java.util.List;
 @Component
 @Slf4j
 public class ImageFetcher {
+
+	private static final int EOF = -1;
+	private static final int DEFAULT_BUFFER_SIZE = 1024 * 4;
 
 	/**
 	 * Sets a {@link List} of {@link Image} sources from a {@link UriComponentsBuilder}.
@@ -60,13 +64,30 @@ public class ImageFetcher {
 		}
 		if (url != null) {
 			try {
-				image.setImgSrc(IOUtils.toByteArray(url.openStream()));
+				image.setImgSrc(toByteArray(url.openStream()));
 				count++;
 			} catch (IOException e) {
 				log.warn("Unable to retrieve the image from URL: " + url + " because: ", e);
 			}
 		}
 		return count;
+	}
+
+	/**
+	 * Gets the contents of the {@link InputStream} as an array of {@code byte}s.
+	 *
+	 * @param input the {@link InputStream} to read
+	 * @return the array of {@code byte}s.
+	 * @throws IOException if an I/O error occurs
+	 */
+	private byte[] toByteArray(InputStream input) throws IOException {
+		ByteArrayOutputStream output = new ByteArrayOutputStream();
+		int bytes;
+		byte[] buffer = new byte[DEFAULT_BUFFER_SIZE];
+		while (EOF != (bytes = input.read(buffer))) {
+			output.write(buffer, 0, bytes);
+		}
+		return output.toByteArray();
 	}
 
 }
