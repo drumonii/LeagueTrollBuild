@@ -3,17 +3,19 @@ package com.drumonii.loltrollbuild.util;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.apache.commons.collections4.IterableUtils;
-import org.apache.commons.lang3.RandomUtils;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Utility methods for randomizing.
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class RandomizeUtil {
+
+	private static final Random random = new Random();
 
 	/**
 	 * Gets a random element {@code E} from the passed {@link Collection}.
@@ -23,7 +25,9 @@ public class RandomizeUtil {
 	 * @return a random element from the passed {@link Collection}
 	 */
 	public static <E> E getRandom(Collection<E> collection) {
-		return IterableUtils.get(collection, RandomUtils.nextInt(0, collection.size()));
+		int start = 0;
+		int end = collection.size();
+		return IterableUtils.get(collection, start == end ? start : start + random.nextInt(end - start));
 	}
 
 	/**
