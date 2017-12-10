@@ -1,35 +1,54 @@
 package com.drumonii.loltrollbuild.security;
 
-import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import org.junit.Test;
-import org.springframework.security.test.context.support.WithMockUser;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.security.web.csrf.CsrfToken;
+import org.springframework.security.web.csrf.DefaultCsrfToken;
+import org.springframework.security.web.csrf.InvalidCsrfTokenException;
+import org.springframework.security.web.csrf.MissingCsrfTokenException;
 
-import static com.drumonii.loltrollbuild.config.WebSecurityConfig.WebDevTestingSecurityConfig.IN_MEM_PASSWORD;
-import static com.drumonii.loltrollbuild.config.WebSecurityConfig.WebDevTestingSecurityConfig.IN_MEM_USERNAME;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import javax.servlet.http.HttpServletResponse;
+import java.util.UUID;
 
+import static org.assertj.core.api.Assertions.assertThat;
 
-public class CsrfTokenExpiredAccessDeniedHandlerTest extends BaseSpringTestRunner {
+@RunWith(JUnit4.class)
+public class CsrfTokenExpiredAccessDeniedHandlerTest {
+
+	private CsrfTokenExpiredAccessDeniedHandler handler = new CsrfTokenExpiredAccessDeniedHandler();
 
 	@Test
 	public void expiredCsrfTokenRedirectsToPreviousRequest() throws Exception {
-		mockMvc.perform(post("/admin/login")
-				.param("username", IN_MEM_USERNAME)
-				.param("password", IN_MEM_PASSWORD))
-				.andExpect(status().is3xxRedirection())
-				.andExpect(redirectedUrl("/admin/login"));
+		String requestUri = "http://localhost/request-uri";
+
+		MockHttpServletRequest request = new MockHttpServletRequest();
+		request.setRequestURI(requestUri);
+
+		MockHttpServletResponse response = new MockHttpServletResponse();
+
+		MissingCsrfTokenException missingCsrfTokenException = new MissingCsrfTokenException(UUID.randomUUID().toString());
+
+		handler.handle(request, response, missingCsrfTokenException);
+
+		assertThat(response.getStatus()).isEqualTo(HttpServletResponse.SC_MOVED_TEMPORARILY);
+		assertThat(response.getRedirectedUrl()).isEqualTo(requestUri);
 	}
 
-	@WithMockUser
 	@Test
 	public void csrfNotExpiredSendsForbiddenErrorCode() throws Exception {
-		mockMvc.perform(post("/admin").with(csrf())
-				.param("username", "bad_username")
-				.param("password", "bad_password"))
-				.andExpect(status().isForbidden());
+		MockHttpServletRequest request = new MockHttpServletRequest();
+
+		MockHttpServletResponse response = new MockHttpServletResponse();
+
+		CsrfToken csrfToken = new DefaultCsrfToken("HEADER_NAME", "PARAMETER_NAME", UUID.randomUUID().toString());
+		InvalidCsrfTokenException invalidCsrfTokenException = new InvalidCsrfTokenException(csrfToken, null);
+
+		handler.handle(request, response, invalidCsrfTokenException);
+
+		assertThat(response.getStatus()).isEqualTo(HttpServletResponse.SC_FORBIDDEN);
 	}
 
 }
