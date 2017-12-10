@@ -2,7 +2,6 @@ package com.drumonii.loltrollbuild.controller;
 
 import com.drumonii.loltrollbuild.model.Build;
 import com.drumonii.loltrollbuild.repository.*;
-import org.apache.commons.lang3.RandomUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +10,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.Random;
 
 /**
  * Controller for {@link Build}s and their views.
@@ -34,9 +35,13 @@ public class BuildsController {
 	@Autowired
 	private MapsRepository mapsRepository;
 
+	private Random random = new Random();
+
 	@GetMapping
 	public String builds() {
-		return "redirect:/builds/" + RandomUtils.nextInt(1, (int) buildsRepository.count() + 1);
+		int start = 1;
+		int end = (int) buildsRepository.count() + 1;
+		return "redirect:/builds/" + (start == end ? start : start + random.nextInt(end - start));
 	}
 
 	@GetMapping(value = "/{id}")
