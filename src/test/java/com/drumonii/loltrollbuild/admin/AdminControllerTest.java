@@ -1,55 +1,91 @@
 package com.drumonii.loltrollbuild.admin;
 
-import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.annotation.WithMockAdminUser;
+import com.drumonii.loltrollbuild.config.WebSecurityConfig;
 import com.drumonii.loltrollbuild.model.BatchJobExecution;
 import com.drumonii.loltrollbuild.model.BatchJobInstance;
 import com.drumonii.loltrollbuild.model.BatchStepExecution;
+import com.drumonii.loltrollbuild.model.Version;
+import com.drumonii.loltrollbuild.repository.*;
 import com.drumonii.loltrollbuild.riot.service.*;
-import org.apache.commons.lang3.RandomStringUtils;
-import org.apache.commons.lang3.RandomUtils;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 
+import static com.drumonii.loltrollbuild.config.Profiles.TESTING;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Matchers.eq;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-public class AdminControllerTest extends BaseSpringTestRunner {
+@RunWith(SpringRunner.class)
+@WebMvcTest(AdminController.class)
+@Import(WebSecurityConfig.class)
+@ActiveProfiles({ TESTING })
+public class AdminControllerTest {
+
+	@Autowired
+	private MockMvc mockMvc;
+
+	@MockBean
+	private VersionsRepository versionsRepository;
+
+	@MockBean
+	private BatchJobInstancesRepository batchJobInstancesRepository;
 
 	@MockBean
 	private VersionsService versionsService;
 
 	@MockBean
+	private SummonerSpellsRepository summonerSpellsRepository;
+
+	@MockBean
 	private SummonerSpellsService summonerSpellsService;
+
+	@MockBean
+	private ItemsRepository itemsRepository;
 
 	@MockBean
 	private ItemsService itemsService;
 
 	@MockBean
+	private ChampionsRepository championsRepository;
+
+	@MockBean
 	private ChampionsService championsService;
+
+	@MockBean
+	private MapsRepository mapsRepository;
 
 	@MockBean
 	private MapsService mapsService;
 
+	private Version latestVersion = new Version("7.17.2");
+
 	@Before
 	public void before() {
-		super.before();
-
-		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
+		given(versionsService.getLatestVersion()).willReturn(latestVersion);
 	}
 
 	@WithMockAdminUser
 	@Test
 	public void admin() throws Exception {
-		versionsRepository.save(versions.get(0));
+		given(versionsRepository.latestVersion()).willReturn(latestVersion);
 
 		mockMvc.perform(get("/admin"))
 				.andExpect(status().isOk())
@@ -75,7 +111,7 @@ public class AdminControllerTest extends BaseSpringTestRunner {
 				.andExpect(flash().attribute("noSavedPatch", is("Summoner Spells")))
 				.andExpect(redirectedUrl("/admin"));
 
-		versionsRepository.save(versions.get(0));
+		given(versionsRepository.latestVersion()).willReturn(latestVersion);
 
 		mockMvc.perform(get("/admin/summoner-spells"))
 				.andExpect(status().isOk())
@@ -103,7 +139,7 @@ public class AdminControllerTest extends BaseSpringTestRunner {
 				.andExpect(flash().attribute("noSavedPatch", is("Items")))
 				.andExpect(redirectedUrl("/admin"));
 
-		versionsRepository.save(versions.get(0));
+		given(versionsRepository.latestVersion()).willReturn(latestVersion);
 
 		mockMvc.perform(get("/admin/items"))
 				.andExpect(status().isOk())
@@ -131,7 +167,7 @@ public class AdminControllerTest extends BaseSpringTestRunner {
 				.andExpect(flash().attribute("noSavedPatch", is("Champions")))
 				.andExpect(redirectedUrl("/admin"));
 
-		versionsRepository.save(versions.get(0));
+		given(versionsRepository.latestVersion()).willReturn(latestVersion);
 
 		mockMvc.perform(get("/admin/champions"))
 				.andExpect(status().isOk())
@@ -159,7 +195,7 @@ public class AdminControllerTest extends BaseSpringTestRunner {
 				.andExpect(flash().attribute("noSavedPatch", is("Maps")))
 				.andExpect(redirectedUrl("/admin"));
 
-		versionsRepository.save(versions.get(0));
+		given(versionsRepository.latestVersion()).willReturn(latestVersion);
 
 		mockMvc.perform(get("/admin/maps"))
 				.andExpect(status().isOk())
@@ -192,21 +228,23 @@ public class AdminControllerTest extends BaseSpringTestRunner {
 	@Test
 	public void stepExecutions() throws Exception {
 		BatchJobInstance jobInstance = new BatchJobInstance();
-		jobInstance.setName(RandomStringUtils.randomAlphabetic(7));
-		jobInstance.setKey(RandomStringUtils.randomAlphabetic(10));
-		jobInstance = batchJobInstancesRepository.save(jobInstance);
+		jobInstance.setId(1);
+		jobInstance.setName("jobInstanceName");
+		jobInstance.setKey("jobInstanceKey");
 
 		BatchJobExecution jobExecution = new BatchJobExecution();
 		jobExecution.setCreateTime(LocalDateTime.now());
 		jobExecution.setJobInstance(jobInstance);
-		jobExecution = batchJobExecutionsRepository.save(jobExecution);
+		jobInstance.setJobExecution(jobExecution);
 
 		BatchStepExecution stepExecution = new BatchStepExecution();
-		stepExecution.setVersion(RandomUtils.nextLong());
-		stepExecution.setName(RandomStringUtils.randomAlphabetic(10));
+		stepExecution.setVersion(1L);
+		stepExecution.setName("step1");
 		stepExecution.setStartTime(LocalDateTime.now());
 		stepExecution.setJobExecution(jobExecution);
-		batchStepExecutionsRepository.save(stepExecution);
+		jobExecution.setStepExecutions(new HashSet<>(Arrays.asList(stepExecution)));
+
+		given(batchJobInstancesRepository.findOne(eq(jobInstance.getId()))).willReturn(jobInstance);
 
 		mockMvc.perform(get("/admin/job-instances/{jobInstanceId}/step-executions", jobInstance.getId()))
 				.andExpect(status().isOk())
