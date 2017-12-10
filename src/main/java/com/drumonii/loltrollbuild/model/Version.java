@@ -2,13 +2,13 @@ package com.drumonii.loltrollbuild.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
-import org.apache.commons.lang3.builder.CompareToBuilder;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.util.Comparator;
 
 /**
  * League of Legend Version (patch).
@@ -49,12 +49,11 @@ public class Version implements Serializable, Comparable<Version> {
 	@Getter @Setter private int revision;
 
 	@Override
-	public int compareTo(Version o) {
-		return new CompareToBuilder()
-				.append(major, o.getMajor())
-				.append(minor, o.getMinor())
-				.append(revision, o.getRevision())
-				.toComparison();
+	public int compareTo(Version version) {
+		return Comparator.comparing(Version::getMajor)
+				.thenComparing(Version::getMinor)
+				.thenComparingInt(Version::getRevision)
+				.compare(this, version);
 	}
 
 }
