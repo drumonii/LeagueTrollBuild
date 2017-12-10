@@ -1,23 +1,43 @@
 package com.drumonii.loltrollbuild.admin;
 
-import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.annotation.WithMockAdminUser;
+import com.drumonii.loltrollbuild.config.WebSecurityConfig;
+import com.drumonii.loltrollbuild.model.Version;
+import com.drumonii.loltrollbuild.repository.VersionsRepository;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
 
+import static com.drumonii.loltrollbuild.config.Profiles.TESTING;
 import static org.hamcrest.Matchers.is;
+import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
-public class ActuatorControllerTest extends BaseSpringTestRunner {
+@RunWith(SpringRunner.class)
+@WebMvcTest(ActuatorController.class)
+@Import(WebSecurityConfig.class)
+@ActiveProfiles({ TESTING })
+public class ActuatorControllerTest {
+
+	@Autowired
+	private MockMvc mockMvc;
+
+	@MockBean
+	private VersionsRepository versionsRepository;
 
 	@Before
 	public void before() {
-		super.before();
-
-		versionsRepository.save(versions.get(0));
+		given(versionsRepository.latestVersion()).willReturn(new Version("7.17.2"));
 	}
 
 	@WithMockAdminUser
