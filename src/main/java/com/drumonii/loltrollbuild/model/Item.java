@@ -58,14 +58,14 @@ public class Item implements Serializable {
 	@Column(name = "ITEM_FROM")
 	@OrderBy("ITEM_FROM ASC")
 	@JsonProperty("from")
-	@Getter @Setter private List<String> from;
+	@Getter @Setter private List<Integer> from;
 
 	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "ITEM_INTO", joinColumns = @JoinColumn(name = "ITEM_ID"))
 	@Column(name = "ITEM_INTO")
 	@OrderBy("ITEM_INTO ASC")
 	@JsonProperty("into")
-	@Getter @Setter private SortedSet<String> into;
+	@Getter @Setter private SortedSet<Integer> into;
 
 	@Column(name = "REQUIRED_CHAMPION")
 	@JsonProperty("requiredChampion")

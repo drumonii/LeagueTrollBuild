@@ -112,7 +112,7 @@ public class ItemsRestControllerTest extends BaseSpringTestRunner {
 	@Test
 	public void getBoots() throws Exception {
 		itemsResponseSlice.setItems(itemsResponse.getItems().values().stream()
-				.filter(item -> item.getFrom() != null && item.getFrom().contains("1001"))
+				.filter(item -> item.getFrom() != null && item.getFrom().contains(1001))
 				.collect(Collectors.toMap(item -> String.valueOf(item.getId()), item -> item)));
 		itemsRepository.save(itemsResponseSlice.getItems().values());
 

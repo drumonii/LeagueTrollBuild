@@ -65,13 +65,13 @@ public class ItemResourceProcessorTest {
 
 	@Test
 	public void processesItemResourceWithFrom() {
-		item.setFrom(Arrays.asList("2513", "1026"));
+		item.setFrom(Arrays.asList(2513, 1026));
 
 		Resource<Item> resourceToProcess = new Resource<>(item);
 
-		given(repositoryEntityLinks.linkToSingleResource(eq(Item.class), eq("2513")))
+		given(repositoryEntityLinks.linkToSingleResource(eq(Item.class), eq(2513)))
 				.willReturn(new Link("http://localhost:8080/api/items/2513"));
-		given(repositoryEntityLinks.linkToSingleResource(eq(Item.class), eq("1026")))
+		given(repositoryEntityLinks.linkToSingleResource(eq(Item.class), eq(1026)))
 				.willReturn(new Link("http://localhost:8080/api/items/1026"));
 
 		Resource<Item> processedResource = resourceProcessor.process(resourceToProcess);
@@ -88,13 +88,13 @@ public class ItemResourceProcessorTest {
 
 	@Test
 	public void processesItemResourceWithInto() {
-		item.setInto(new TreeSet<>(Arrays.asList("4351", "9361")));
+		item.setInto(new TreeSet<>(Arrays.asList(4351, 9361)));
 
 		Resource<Item> resourceToProcess = new Resource<>(item);
 
-		given(repositoryEntityLinks.linkToSingleResource(eq(Item.class), eq("4351")))
+		given(repositoryEntityLinks.linkToSingleResource(eq(Item.class), eq(4351)))
 				.willReturn(new Link("http://localhost:8080/api/items/4351"));
-		given(repositoryEntityLinks.linkToSingleResource(eq(Item.class), eq("9361")))
+		given(repositoryEntityLinks.linkToSingleResource(eq(Item.class), eq(9361)))
 				.willReturn(new Link("http://localhost:8080/api/items/9361"));
 
 		Resource<Item> processedResource = resourceProcessor.process(resourceToProcess);
