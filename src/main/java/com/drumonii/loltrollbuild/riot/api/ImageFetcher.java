@@ -60,14 +60,14 @@ public class ImageFetcher {
 		try {
 			url = uriComponents == null ? null : new URL(uriComponents.toUriString());
 		} catch (MalformedURLException e) {
-			log.error("Unable to create the URL with " + uriComponents.toString());
+			log.error("Unable to create the URL with {}", uriComponents.toString(), e);
 		}
 		if (url != null) {
 			try {
 				image.setImgSrc(toByteArray(url.openStream()));
 				count++;
 			} catch (IOException e) {
-				log.warn("Unable to retrieve the image from URL: " + url + " because: ", e);
+				log.warn("Unable to retrieve the image from URL: {} because: ", url, e);
 			}
 		}
 		return count;
