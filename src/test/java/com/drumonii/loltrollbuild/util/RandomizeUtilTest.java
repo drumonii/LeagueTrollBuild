@@ -22,6 +22,7 @@ public class RandomizeUtilTest {
 		assertThat(getRandom(strings))
 				.isNotNull()
 				.isNotEmpty();
+		assertThat(getRandom(new ArrayList<Integer>())).isNull();
 	}
 
 	@Test

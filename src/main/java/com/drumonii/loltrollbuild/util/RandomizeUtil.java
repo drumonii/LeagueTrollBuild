@@ -27,7 +27,11 @@ public class RandomizeUtil {
 	public static <E> E getRandom(Collection<E> collection) {
 		int start = 0;
 		int end = collection.size();
-		return IterableUtils.get(collection, start == end ? start : start + random.nextInt(end - start));
+		try {
+			return IterableUtils.get(collection, start == end ? start : start + random.nextInt(end - start));
+		} catch (IndexOutOfBoundsException e) {
+			return null;
+		}
 	}
 
 	/**
