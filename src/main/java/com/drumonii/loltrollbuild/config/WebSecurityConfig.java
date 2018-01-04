@@ -30,7 +30,6 @@ import static org.springframework.http.HttpMethod.PUT;
 /**
  * Configuration for web security/authentication and overriding components in {@link WebSecurityConfigurerAdapter}.
  */
-@Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
