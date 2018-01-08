@@ -6,6 +6,7 @@ import com.drumonii.loltrollbuild.repository.ChampionsRepository;
 import com.drumonii.loltrollbuild.repository.ItemsRepository;
 import com.drumonii.loltrollbuild.repository.MapsRepository;
 import com.drumonii.loltrollbuild.repository.SummonerSpellsRepository;
+import com.drumonii.loltrollbuild.util.ChampionUtil;
 import com.drumonii.loltrollbuild.util.GameMapUtil;
 import com.drumonii.loltrollbuild.util.RandomizeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,15 +67,19 @@ public class ChampionsController {
 	/**
 	 * Generates the full troll build based on the specified {@link Champion} and map ID.
 	 *
-	 * @param champion the {@link Champion} to create the troll build for
+	 * @param id the {@link Champion} to create the troll build for
 	 * @param mapId the map ID to generate the troll build
 	 * @return a {@link Map} of build type key with {@link List} of values.
 	 */
 	@GetMapping(value = "/{id}/troll-build")
 	@ResponseBody
-	public Map<String, List<?>> trollBuild(@PathVariable("id") Champion champion,
+	public Map<String, List<?>> trollBuild(@PathVariable int id,
 			@RequestParam(required = false, defaultValue = "11") int mapId) {
 		Map<String, List<?>> trollBuild = new HashMap<>();
+		Champion champion = championsRepository.findOne(id);
+		if (champion == null) {
+			return trollBuild;
+		}
 
 		// Items
 		List<Item> items = new ArrayList<>();
