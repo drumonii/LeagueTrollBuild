@@ -22,6 +22,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
@@ -88,7 +89,7 @@ public class MapsRetrievalJobConfigTest extends BaseSpringTestRunner {
 		JobExecution jobExecution = jobLauncherTestUtils.launchJob(getJobParameters());
 		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
 
-		verify(imageFetcher, times(0))
+		verify(imageFetcher, never())
 				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(versions.get(0)));
 
 		assertThat(mapsRepository.findAll())
