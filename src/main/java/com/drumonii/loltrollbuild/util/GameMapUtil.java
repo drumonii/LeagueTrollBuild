@@ -5,10 +5,8 @@ import com.drumonii.loltrollbuild.model.SummonerSpell.GameMode;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import static com.drumonii.loltrollbuild.model.SummonerSpell.GameMode.ARAM;
@@ -24,6 +22,11 @@ public class GameMapUtil {
 	public static final int TWISTED_TREELINE_ID = 10;
 	public static final int SUMMONERS_RIFT_ID = 11;
 	public static final int HOWLING_ABYSS_ID = 12;
+
+	public static final String CRYSTAL_SCAR = "The Crystal Scar";
+	public static final String TWISTED_TREELINE = "The Twisted Treeline";
+	public static final String SUMMONERS_RIFT = "Summoner's Rift";
+	public static final String HOWLING_ABYSS = "Howling Abyss";
 
 	/**
 	 * Gets {@link List} of all {@link GameMap}s that are eligible for the troll build. Map names are transformed into a
@@ -57,6 +60,27 @@ public class GameMapUtil {
 			mode = ARAM;
 		}
 		return mode;
+	}
+
+	/**
+	 * Gets the map name from the provided map Id.
+	 *
+	 * @param mapId the map Id
+	 * @return the map name
+	 */
+	public static String getNameFromId(int mapId) {
+		switch (mapId) {
+		case CRYSTAL_SCAR_ID:
+			return CRYSTAL_SCAR;
+		case TWISTED_TREELINE_ID:
+			return TWISTED_TREELINE;
+		case SUMMONERS_RIFT_ID:
+			return SUMMONERS_RIFT;
+		case HOWLING_ABYSS_ID:
+			return HOWLING_ABYSS;
+		default:
+			return "";
+		}
 	}
 
 }

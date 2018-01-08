@@ -10,8 +10,7 @@ import java.util.Arrays;
 
 import static com.drumonii.loltrollbuild.model.SummonerSpell.GameMode.ARAM;
 import static com.drumonii.loltrollbuild.model.SummonerSpell.GameMode.CLASSIC;
-import static com.drumonii.loltrollbuild.util.GameMapUtil.eligibleMaps;
-import static com.drumonii.loltrollbuild.util.GameMapUtil.getModeFromMap;
+import static com.drumonii.loltrollbuild.util.GameMapUtil.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(JUnit4.class)
@@ -64,6 +63,12 @@ public class GameMapUtilTest {
 		assertThat(getModeFromMap(null)).isEqualTo(CLASSIC);
 	}
 
+	@Test
+	public void getsNameFromId() {
+		assertThat(getNameFromId(CRYSTAL_SCAR_ID)).isEqualTo(CRYSTAL_SCAR);
+		assertThat(getNameFromId(TWISTED_TREELINE_ID)).isEqualTo(TWISTED_TREELINE);
+		assertThat(getNameFromId(SUMMONERS_RIFT_ID)).isEqualTo(SUMMONERS_RIFT);
+		assertThat(getNameFromId(HOWLING_ABYSS_ID)).isEqualTo(HOWLING_ABYSS);
 	}
 
 }
