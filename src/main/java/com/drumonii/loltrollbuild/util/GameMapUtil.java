@@ -50,6 +50,9 @@ public class GameMapUtil {
 	 */
 	public static GameMode getModeFromMap(GameMap map) {
 		GameMode mode = CLASSIC;
+		if (map == null) {
+			return mode;
+		}
 		if (map.getMapName().contains("Howling")) {
 			mode = ARAM;
 		}

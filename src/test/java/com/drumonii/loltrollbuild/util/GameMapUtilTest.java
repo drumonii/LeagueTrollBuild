@@ -1,8 +1,12 @@
 package com.drumonii.loltrollbuild.util;
 
-import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.model.GameMap;
+import com.drumonii.loltrollbuild.model.builder.GameMapBuilder;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
+
+import java.util.Arrays;
 
 import static com.drumonii.loltrollbuild.model.SummonerSpell.GameMode.ARAM;
 import static com.drumonii.loltrollbuild.model.SummonerSpell.GameMode.CLASSIC;
@@ -10,42 +14,56 @@ import static com.drumonii.loltrollbuild.util.GameMapUtil.eligibleMaps;
 import static com.drumonii.loltrollbuild.util.GameMapUtil.getModeFromMap;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class GameMapUtilTest extends BaseSpringTestRunner {
+@RunWith(JUnit4.class)
+public class GameMapUtilTest {
 
 	@Test
-	public void getsEligibleMaps() throws Exception {
-		GameMap crystalScar = mapsResponse.getMaps().get(CRYSTAL_SCAR);
-		mapsRepository.save(crystalScar);
+	public void getsEligibleMaps() {
+		GameMap crystalScar = new GameMapBuilder()
+				.withMapId(8)
+				.withMapName("The Crystal Scar")
+				.build();
+		GameMap summonersRiftNew = new GameMapBuilder()
+				.withMapId(11)
+				.withMapName("Summoner's Rift")
+				.build();
+		GameMap provingGrounds = new GameMapBuilder()
+				.withMapId(12)
+				.withMapName("Howling Abyss")
+				.build();
+		GameMap twistedTreeline = new GameMapBuilder()
+				.withMapId(10)
+				.withMapName("The Twisted Treeline")
+				.build();
 
-		GameMap summonersRiftNew = mapsResponse.getMaps().get(SUMMONERS_RIFT);
-		mapsRepository.save(summonersRiftNew);
-
-		GameMap provingGrounds = mapsResponse.getMaps().get(HOWLING_ABYSS);
-		mapsRepository.save(provingGrounds);
-
-		GameMap twistedTreeline = mapsResponse.getMaps().get(TWISTED_TREELINE);
-		mapsRepository.save(twistedTreeline);
-
-		assertThat(eligibleMaps(mapsRepository.findAll())).extracting("mapId")
+		assertThat(eligibleMaps(Arrays.asList(crystalScar, summonersRiftNew, provingGrounds, twistedTreeline)))
+				.extracting("mapId")
 				.containsExactly(provingGrounds.getMapId(), summonersRiftNew.getMapId(), twistedTreeline.getMapId());
 	}
 
 	@Test
-	public void getsModeFromMap() throws Exception {
-		GameMap crystalScar = mapsResponse.getMaps().get(CRYSTAL_SCAR);
-		mapsRepository.save(crystalScar);
+	public void getsModeFromMap() {
+		GameMap crystalScar = new GameMapBuilder()
+				.withMapId(8)
+				.withMapName("The Crystal Scar")
+				.build();
+		assertThat(getModeFromMap(crystalScar)).isEqualTo(CLASSIC);
 
-		assertThat(getModeFromMap(mapsRepository.findOne(crystalScar.getMapId()))).isEqualTo(CLASSIC);
+		GameMap summonersRift = new GameMapBuilder()
+				.withMapId(11)
+				.withMapName("Summoner's Rift")
+				.build();
+		assertThat(getModeFromMap(summonersRift)).isEqualTo(CLASSIC);
 
-		GameMap summonersRift = mapsResponse.getMaps().get(SUMMONERS_RIFT);
-		mapsRepository.save(summonersRift);
+		GameMap provingGrounds = new GameMapBuilder()
+				.withMapId(12)
+				.withMapName("Howling Abyss")
+				.build();
+		assertThat(getModeFromMap(provingGrounds)).isEqualTo(ARAM);
 
-		assertThat(getModeFromMap(mapsRepository.findOne(summonersRift.getMapId()))).isEqualTo(CLASSIC);
+		assertThat(getModeFromMap(null)).isEqualTo(CLASSIC);
+	}
 
-		GameMap provingGrounds = mapsResponse.getMaps().get(HOWLING_ABYSS);
-		mapsRepository.save(provingGrounds);
-
-		assertThat(getModeFromMap(mapsRepository.findOne(provingGrounds.getMapId()))).isEqualTo(ARAM);
 	}
 
 }
