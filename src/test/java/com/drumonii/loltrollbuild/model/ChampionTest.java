@@ -1,58 +1,69 @@
 package com.drumonii.loltrollbuild.model;
 
-import com.drumonii.loltrollbuild.BaseSpringTestRunner;
-import com.drumonii.loltrollbuild.model.image.ChampionImage;
+import com.drumonii.loltrollbuild.model.builder.ChampionBuilder;
 import org.apache.commons.collections4.ListUtils;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-import java.util.TreeSet;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ChampionTest extends BaseSpringTestRunner {
+@RunWith(JUnit4.class)
+public class ChampionTest {
 
 	@Test
-	public void isViktor() throws IOException {
-		Champion viktor = championsResponse.getChampions().get("Viktor");
-		assertThat(viktor.isViktor()).isTrue();
+	public void cardinality() {
+		Champion gnarFromRiot = new ChampionBuilder()
+				.withId(150)
+				.withKey("Gnar")
+				.withName("Gnar")
+				.withTitle("the Missing Link")
+				.withTags("Fighter", "Tank", "NEW_TAG")
+				.build();
+		Champion gnarFromDb = new ChampionBuilder()
+				.withId(150)
+				.withKey("Gnar")
+				.withName("Gnar")
+				.withTitle("the Missing Link")
+				.withTags("Fighter", "Tank")
+				.build();
 
-		Champion rammus = championsResponse.getChampions().get("Rammus");
-		assertThat(rammus.isViktor()).isFalse();
-	}
+		Champion gravesFromRiot = new ChampionBuilder()
+				.withId(104)
+				.withKey("Graves")
+				.withName("Graves")
+				.withTitle("the Outlaw")
+				.withTags("Marksman")
+				.build();
+		Champion gravesFromDb = new ChampionBuilder()
+				.withId(104)
+				.withKey("Graves")
+				.withName("Graves")
+				.withTitle("the Outlaw")
+				.withTags("Marksman")
+				.build();
 
-	@Test
-	public void equals() throws IOException {
-		Champion nasusFromRiot = championsResponse.getChampions().get("Nasus");
-		championsRepository.save(nasusFromRiot);
-
-		Champion nasusFromDb = championsRepository.findByName(nasusFromRiot.getName());
-		assertThat(nasusFromRiot).isEqualTo(nasusFromDb);
-
-		ChampionImage image = nasusFromRiot.getImage();
-		image.setFull("NewNasus.png");
-		nasusFromRiot.setImage(image);
-		assertThat(nasusFromRiot).isNotEqualTo(nasusFromDb);
-	}
-
-	@Test
-	public void cardinality() throws IOException {
-		Champion gnarFromRiot = championsResponse.getChampions().get("Gnar");
-		Champion gnarFromDb = championsRepository.save(gnarFromRiot);
-		gnarFromRiot.setTags(new TreeSet<>(Arrays.asList("NEW_TAG")));
-
-		Champion gravesFromRiot = championsResponse.getChampions().get("Graves");
-		Champion gravesFromDb = championsRepository.save(gravesFromRiot);
-
-		Champion evelynnFromRiot = championsResponse.getChampions().get("Evelynn");
-		Champion evelynnFromDb = championsRepository.save(evelynnFromRiot);
+		Champion evelynnFromDb = new ChampionBuilder()
+				.withId(28)
+				.withKey("Evelynn")
+				.withName("Evelynn")
+				.withTitle("Agony's Embrace")
+				.withTags("Assassin", "Mage")
+				.build();
 
 		// Gnar, Illaoi, and Graves
 		List<Champion> championsFromDb = Arrays.asList(gnarFromDb, gravesFromDb, evelynnFromDb);
 
-		Champion illaoiFromRiot = championsResponse.getChampions().get("Illaoi");
+		Champion illaoiFromRiot = new ChampionBuilder()
+				.withId(420)
+				.withKey("Illaoi")
+				.withName("Illaoi")
+				.withTitle("the Kraken Priestess")
+				.withTags("Fighter", "Tank")
+				.build();
 
 		// Updated Gnar, same Graves, "new" Illaoi, and no Evelynn
 		List<Champion> championsFromRiot = Arrays.asList(gnarFromRiot, gravesFromRiot, illaoiFromRiot);

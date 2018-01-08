@@ -1,63 +1,66 @@
 package com.drumonii.loltrollbuild.model;
 
-import com.drumonii.loltrollbuild.BaseSpringTestRunner;
-import com.drumonii.loltrollbuild.model.image.GameMapImage;
+import com.drumonii.loltrollbuild.model.builder.GameMapBuilder;
 import org.apache.commons.collections4.ListUtils;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class GameMapTest extends BaseSpringTestRunner {
+@RunWith(JUnit4.class)
+public class GameMapTest {
 
 	@Test
-	public void equals() throws IOException {
-		GameMap crystalScar = mapsResponse.getMaps().get(CRYSTAL_SCAR);
-		mapsRepository.save(crystalScar);
+	public void cardinality() {
+		GameMap summonersRiftFromRiot = new GameMapBuilder()
+				.withMapId(11)
+				.withMapName("Summoner's Rift New")
+				.build();
+		GameMap summonersRiftNewFromDb = new GameMapBuilder()
+				.withMapId(11)
+				.withMapName("Summoner's Rift")
+				.build();
 
-		GameMap twistedTreelineFromDb = mapsRepository.findOne(crystalScar.getMapId());
-		assertThat(crystalScar).isEqualTo(twistedTreelineFromDb);
+		GameMap howlingAbyssFromRiot = new GameMapBuilder()
+				.withMapId(12)
+				.withMapName("Howling Abyss")
+				.build();
+		GameMap howlingAbyssFromDb = new GameMapBuilder()
+				.withMapId(12)
+				.withMapName("Howling Abyss")
+				.build();
 
-		GameMapImage image = crystalScar.getImage();
-		image.setFull("NewCrystalScar.png");
-		crystalScar.setImage(image);
-		assertThat(crystalScar).isNotEqualTo(twistedTreelineFromDb);
-	}
+		GameMap crystalScarFromDb = new GameMapBuilder()
+				.withMapId(8)
+				.withMapName("The Crystal Scar")
+				.build();
 
-	@Test
-	public void cardinality() throws IOException {
-		GameMap summonersRiftFromRiot = mapsResponse.getMaps().get(SUMMONERS_RIFT);
-		GameMap summonersRiftNewFromDb =  mapsRepository.save(summonersRiftFromRiot);
-		summonersRiftFromRiot.setMapName("NEW_MAP_NAME");
+		// Summoner's Rift, Howling Abyss, and Crystal Scar
+		List<GameMap> mapsFromDb = Arrays.asList(summonersRiftNewFromDb, howlingAbyssFromDb, crystalScarFromDb);
 
-		GameMap provingGroundsFromRiot = mapsResponse.getMaps().get(HOWLING_ABYSS);
-		GameMap provingGroundsFromDb = mapsRepository.save(provingGroundsFromRiot);
+		GameMap butchersBridgeFromRiot = new GameMapBuilder()
+				.withMapId(14)
+				.withMapName("Butcher's Bridge")
+				.build();
 
-		GameMap twistedTreeline = mapsResponse.getMaps().get(TWISTED_TREELINE);
-		GameMap summonersRiftOldFromDb = mapsRepository.save(twistedTreeline);
-
-		// Summoner's Rift, Proving Grounds, and Twisted Treeline
-		List<GameMap> mapsFromDb = Arrays.asList(summonersRiftNewFromDb, provingGroundsFromDb, summonersRiftOldFromDb);
-
-		GameMap crystalScar = mapsResponse.getMaps().get(CRYSTAL_SCAR);
-
-		// Updated Summoner's Rift, same Proving Grounds, "new" Crystal Scar, and no Twisted Treeline
-		List<GameMap> mapsFromRiot = Arrays.asList(summonersRiftFromRiot, provingGroundsFromDb, crystalScar);
+		// Updated Summoner's Rift, same Proving Grounds, "new" Butcher's Bridge, and no Crystal Scar
+		List<GameMap> mapsFromRiot = Arrays.asList(summonersRiftFromRiot, howlingAbyssFromRiot, butchersBridgeFromRiot);
 
 		List<GameMap> deletedMaps = ListUtils.subtract(mapsFromDb, mapsFromRiot);
 		assertThat(deletedMaps).hasSize(2);
-		assertThat(deletedMaps).containsOnly(summonersRiftNewFromDb, summonersRiftOldFromDb);
+		assertThat(deletedMaps).containsOnly(summonersRiftNewFromDb, crystalScarFromDb);
 
 		List<GameMap> unmodifiedMaps = ListUtils.intersection(mapsFromDb, mapsFromRiot);
 		assertThat(unmodifiedMaps).hasSize(1);
-		assertThat(unmodifiedMaps).containsOnly(provingGroundsFromDb);
+		assertThat(unmodifiedMaps).containsOnly(howlingAbyssFromDb);
 
 		List<GameMap> mapsToUpdate = ListUtils.subtract(mapsFromRiot, mapsFromDb);
 		assertThat(mapsToUpdate).hasSize(2);
-		assertThat(mapsToUpdate).containsOnly(summonersRiftFromRiot, crystalScar);
+		assertThat(mapsToUpdate).containsOnly(summonersRiftFromRiot, butchersBridgeFromRiot);
 	}
 
 }

@@ -1,75 +1,73 @@
 package com.drumonii.loltrollbuild.model;
 
-import com.drumonii.loltrollbuild.BaseSpringTestRunner;
+import com.drumonii.loltrollbuild.model.builder.ItemBuilder;
 import org.apache.commons.collections4.ListUtils;
-import org.apache.commons.lang3.RandomUtils;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
-import java.io.IOException;
+import java.util.AbstractMap.SimpleEntry;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ItemTest extends BaseSpringTestRunner {
+@RunWith(JUnit4.class)
+public class ItemTest {
 
 	@Test
-	public void equals() throws IOException {
-		Item orbOfWinterFromRiot = itemsResponse.getItems().get("3112");
-		itemsRepository.save(orbOfWinterFromRiot);
+	public void cardinality() {
+		Item guinsoosRagebladeFromRiot = new ItemBuilder()
+				.withId(3124)
+				.withName("Guinsoo's Rageblade")
+				.withMapEntries(new SimpleEntry<>(11, true))
+				.build();
+		Item guinsoosRagebladeFromDb = new ItemBuilder()
+				.withId(3124)
+				.withName("Guinsoo's Rageblade")
+				.withMapEntries(new SimpleEntry<>(11, false))
+				.build();
 
-		Item orbOfWinterFromDb = itemsRepository.findOne(orbOfWinterFromRiot.getId());
-		assertThat(orbOfWinterFromRiot).isEqualTo(orbOfWinterFromDb);
+		Item hauntingGuiseFromRiot = new ItemBuilder()
+				.withId(3136)
+				.withName("Haunting Guise")
+				.withMapEntries(new SimpleEntry<>(11, true))
+				.build();
+		Item hauntingGuiseFromDb = new ItemBuilder()
+				.withId(3136)
+				.withName("Haunting Guise")
+				.withMapEntries(new SimpleEntry<>(11, true))
+				.build();
 
-		Item faerieCharmFromRiot = itemsResponse.getItems().get("1004");
-		itemsRepository.save(faerieCharmFromRiot);
-
-		Item faerieCharmFromDb = itemsRepository.findOne(faerieCharmFromRiot.getId());
-		assertThat(faerieCharmFromRiot).isEqualTo(faerieCharmFromDb);
-
-		Item righteousGloryFromRiot = itemsResponse.getItems().get("3800");
-		itemsRepository.save(righteousGloryFromRiot);
-
-		Item righteousGloryFromDb = itemsRepository.findOne(righteousGloryFromRiot.getId());
-		assertThat(righteousGloryFromRiot).isEqualTo(righteousGloryFromDb);
-
-		righteousGloryFromRiot.setGold(new ItemGold(0, RandomUtils.nextInt(500, 1001), RandomUtils.nextInt(2000, 3001),
-				RandomUtils.nextInt(1000, 2001), true, null));
-		assertThat(righteousGloryFromRiot).isNotEqualTo(righteousGloryFromDb);
-	}
-
-	@Test
-	public void cardinality() throws IOException {
-		Item guinsoosRagebladeFromRiot = itemsResponse.getItems().get("3124");
-		Item guinsoosRagebladeFromDb = itemsRepository.save(guinsoosRagebladeFromRiot);
-		guinsoosRagebladeFromRiot.setGroup("NEW_GROUP");
-
-		Item hauntingGuiseFromRiot = itemsResponse.getItems().get("3136");
-		Item hauntingGuiseFromDb = itemsRepository.save(hauntingGuiseFromRiot);
-
-		Item moonflairSpellbladeFromRiot = itemsResponse.getItems().get("3170");
-		Item moonflairSpellbladeFromDb = itemsRepository.save(moonflairSpellbladeFromRiot);
+		Item moonflairSpellbladeFromDb = new ItemBuilder()
+				.withId(3170)
+				.withName("Moonflair Spellblade")
+				.withMapEntries(new SimpleEntry<>(11, true))
+				.build();
 
 		// Rageblade, Haunting Guise, and Moonflair
 		List<Item> itemsFromDb = Arrays.asList(guinsoosRagebladeFromDb, hauntingGuiseFromDb, moonflairSpellbladeFromDb);
 
-		Item giantsBeltFromRiot = itemsResponse.getItems().get("1011");
+		Item sightStoneFromRiot = new ItemBuilder()
+				.withId(2049)
+				.withName("Sightstone")
+				.withMapEntries(new SimpleEntry<>(11, true))
+				.build();
 
-		// Updated Rageblade, same Moonflair, "new" Giant's Belt, and no Haunting Guise
-		List<Item> itemsFromRiot = Arrays.asList(guinsoosRagebladeFromRiot, moonflairSpellbladeFromRiot,
-				giantsBeltFromRiot);
+		// Updated Rageblade, same Haunting Guise, "new" Sightstone, and no Moonflair
+		List<Item> itemsFromRiot = Arrays.asList(guinsoosRagebladeFromRiot, hauntingGuiseFromRiot, sightStoneFromRiot);
 
 		List<Item> deletedItems = ListUtils.subtract(itemsFromDb, itemsFromRiot);
 		assertThat(deletedItems).hasSize(2);
-		assertThat(deletedItems).containsOnly(guinsoosRagebladeFromDb, hauntingGuiseFromDb);
+		assertThat(deletedItems).containsOnly(guinsoosRagebladeFromDb, moonflairSpellbladeFromDb);
 
 		List<Item> unmodifiedItems = ListUtils.intersection(itemsFromDb, itemsFromRiot);
 		assertThat(unmodifiedItems).hasSize(1);
-		assertThat(unmodifiedItems).containsOnly(moonflairSpellbladeFromDb);
+		assertThat(unmodifiedItems).containsOnly(hauntingGuiseFromDb);
 
 		List<Item> itemsToUpdate = ListUtils.subtract(itemsFromRiot, itemsFromDb);
 		assertThat(itemsToUpdate).hasSize(2);
-		assertThat(itemsToUpdate).containsOnly(guinsoosRagebladeFromRiot, giantsBeltFromRiot);
+		assertThat(itemsToUpdate).containsOnly(guinsoosRagebladeFromRiot, sightStoneFromRiot);
 	}
 
 }
