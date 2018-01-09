@@ -24,17 +24,25 @@
         </thead>
         <tbody>
         <tr>
-            <td th:text="${latestRiotPatch}">5.19.1</td>
-            <td th:class="${latestRiotPatch} != ${latestSavedPatch} ? 'warning' : 'positive'"
-                th:if="${latestSavedPatch}" th:text="${latestSavedPatch}">5.17.1
-            </td>
-            <td class="error" th:unless="${latestSavedPatch}">
+			<!--/* Latest Patch */-->
+            <td width="50%"
+				th:text="${latestRiotPatch} ? ${latestRiotPatch} : #{admin.versions.latestPatch.error}">5.19.1</td>
+			<!--/* Current Saved Patch */-->
+			<td width="50%" th:if="${latestSavedPatch} and ${latestRiotPatch}"
+				th:class="${latestSavedPatch.compareTo(latestRiotPatch) == -1} ? 'warning' : 'positive'"
+				th:text="${latestSavedPatch}">
+				5.17.1
+			</td>
+			<td width="50%" th:if="${latestSavedPatch} and ${latestRiotPatch == null}" th:text="${latestSavedPatch}">
+				5.17.1
+			</td>
+			<td width="50%" class="error" th:unless="${latestSavedPatch}">
                 <i class="warning circle icon"></i>
                 <span th:text="#{admin.version.noSavedPatch.header}">No saved patch exists</span>
             </td>
         </tr>
         </tbody>
-        <tfoot th:if="${latestRiotPatch != latestSavedPatch}">
+        <tfoot th:if="${latestSavedPatch == null} or (${latestRiotPatch} and ${latestSavedPatch.compareTo(latestRiotPatch) == -1})">
         <tr>
             <th colspan="2">
                 <form id="save-patch-form" class="ui form">
