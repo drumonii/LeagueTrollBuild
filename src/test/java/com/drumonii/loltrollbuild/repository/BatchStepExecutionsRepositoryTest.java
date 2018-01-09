@@ -3,7 +3,6 @@ package com.drumonii.loltrollbuild.repository;
 import com.drumonii.loltrollbuild.model.BatchJobExecution;
 import com.drumonii.loltrollbuild.model.BatchJobInstance;
 import com.drumonii.loltrollbuild.model.BatchStepExecution;
-import org.apache.commons.lang3.RandomUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-@ActiveProfiles(TESTING)
+@ActiveProfiles({ TESTING })
 public class BatchStepExecutionsRepositoryTest {
 
 	@Autowired
@@ -41,7 +40,7 @@ public class BatchStepExecutionsRepositoryTest {
 		jobExecution = testEntityManager.persistAndFlush(jobExecution);
 
 		BatchStepExecution stepExecution = new BatchStepExecution();
-		stepExecution.setVersion(RandomUtils.nextLong());
+		stepExecution.setVersion(1L);
 		stepExecution.setName("step1");
 		stepExecution.setStartTime(LocalDateTime.now());
 		stepExecution.setJobExecution(jobExecution);

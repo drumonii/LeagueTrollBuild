@@ -4,19 +4,17 @@ import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.model.image.Image;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.junit.runners.JUnit4;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(JUnit4.class)
 public class ImageFetcherTest {
 
-	@InjectMocks
-	private ImageFetcher imageFetcher;
+	private ImageFetcher imageFetcher = new ImageFetcher();
 
 	@Test
 	public void setsImagesSourcesWithInvalidUrl() {

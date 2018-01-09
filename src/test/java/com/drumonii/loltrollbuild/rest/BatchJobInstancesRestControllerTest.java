@@ -6,7 +6,6 @@ import com.drumonii.loltrollbuild.model.BatchJobExecution;
 import com.drumonii.loltrollbuild.model.BatchJobInstance;
 import com.drumonii.loltrollbuild.model.BatchStepExecution;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.apache.commons.lang3.RandomUtils;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -38,7 +37,7 @@ public class BatchJobInstancesRestControllerTest extends BaseSpringTestRunner {
 		jobExecution = batchJobExecutionsRepository.save(jobExecution);
 
 		BatchStepExecution stepExecution = new BatchStepExecution();
-		stepExecution.setVersion(RandomUtils.nextLong());
+		stepExecution.setVersion(1L);
 		stepExecution.setName(RandomStringUtils.randomAlphabetic(10));
 		stepExecution.setStartTime(LocalDateTime.now());
 		stepExecution.setJobExecution(jobExecution);
