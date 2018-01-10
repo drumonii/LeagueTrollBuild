@@ -12,6 +12,10 @@ import java.lang.annotation.Target;
  */
 public class Profiles {
 
+	/*
+	 * Database profiles
+	 */
+
 	/**
 	 * Profile for using an embedded database.
 	 */
@@ -21,6 +25,20 @@ public class Profiles {
 	 * Profile for using an external database.
 	 */
 	public static final String EXTERNAL = "external";
+
+	/*
+	 * Riot API profiles
+	 */
+
+	/**
+	 * Profile for using Riot's {@code lol-static-data-v3} API.
+	 */
+	public static final String STATIC_DATA = "static-data";
+
+	/**
+	 * Profile for using Riot's {@code Data Dragon} API.
+	 */
+	public static final String DDRAGON = "ddragon";
 
 	/**
 	 * Profile for local development.
@@ -33,7 +51,7 @@ public class Profiles {
 	public static final String TESTING = "testing";
 
 	/**
-	 * Indicates an embedded database profile.
+	 * Indicates a local dev profile.
 	 */
 	@Target(ElementType.TYPE)
 	@Retention(RetentionPolicy.RUNTIME)
@@ -49,6 +67,10 @@ public class Profiles {
 	@Profile(value = TESTING)
 	public @interface Testing {
 	}
+
+	/*
+	 * Database profiles
+	 */
 
 	/**
 	 * Indicates an embedded database profile.
@@ -66,6 +88,28 @@ public class Profiles {
 	@Retention(RetentionPolicy.RUNTIME)
 	@Profile(value = EXTERNAL)
 	public @interface External {
+	}
+
+	/*
+	 * Riot API profiles
+	 */
+
+	/**
+	 * Indicates a {@code lol-static-data-v3} API profile.
+	 */
+	@Target(ElementType.TYPE)
+	@Retention(RetentionPolicy.RUNTIME)
+	@Profile(value = STATIC_DATA)
+	public @interface StaticData {
+	}
+
+	/**
+	 * Indicates a {@code Data Dragon} API profile.
+	 */
+	@Target(ElementType.TYPE)
+	@Retention(RetentionPolicy.RUNTIME)
+	@Profile(value = DDRAGON)
+	public @interface Ddragon {
 	}
 
 }

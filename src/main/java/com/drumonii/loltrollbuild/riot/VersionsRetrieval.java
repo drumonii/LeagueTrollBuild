@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 /**
- * A {@link RestController} which retrieves the list of versions from Riot's {@code lol-static-data-v3} API with the
- * {@code /riot/versions} URL mapping.
+ * A {@link RestController} which retrieves the list of versions from Riot's {@code lol-static-data-v3} or
+ * {@code Data Dragon} API with the {@code /riot/versions} URL mapping.
  */
 @RestController
 @RequestMapping("/riot/versions")

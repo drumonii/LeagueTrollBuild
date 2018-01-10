@@ -3,30 +3,36 @@
 # ======================
 
 riot:
-  api:
-    key: # from RIOT_API_KEY environment variable or -Driot.api.key argument property
-    static-data:
-      base-url: "{region}.api.riotgames.com/lol/static-data/v3"
-      keyParam: api_key
-      region: na1
-      scheme: https
-      champions:  /champions
-      champion:  /champions/{id}
-      items: /items
-      item: /items/{id}
-      maps: /maps
-      summoner-spells: /summoner-spells
-      summoner-spell: /summoner-spells/{id}
-      versions: /versions
-    ddragon:
-      base-url: ddragon.leagueoflegends.com/cdn
-      scheme: https
-      champions-img: /{version}/img/champion/{championImgFull}
-      champions-spell-img: /{version}/img/spell/{championSpellImgFull}
-      champions-passive-img: /{version}/img/passive/{championPassiveImgFull}
-      items-img: /{version}/img/item/{itemImgFull}
-      maps-img: /{version}/img/map/{mapImgFull}
-      summoner-spells-img: /{version}/img/spell/{summonerSpellImgFull}
+  static-data:
+    apiKey: # from RIOT_STATICDATA_APIKEY environment variable or -Driot.staticdata.apiKey argument property
+    base-url: "{region}.api.riotgames.com/lol/static-data/v3"
+    keyParam: api_key
+    localeParam: locale
+    locale: en_US
+    region: na1
+    champions: /champions
+    champion: /champions/{id}
+    items: /items
+    item: /items/{id}
+    maps: /maps
+    summoner-spells: /summoner-spells
+    summoner-spell: /summoner-spells/{id}
+    versions: /versions
+  ddragon:
+    base-url: ddragon.leagueoflegends.com
+    locale: en_US
+    champions: /cdn/{version}/data/{locale}/champion.json
+    champion: /cdn/{version}/data/{locale}/champion/{id}.json
+    champions-img: /cdn/{version}/img/champion/{championImgFull}
+    champions-spell-img: /cdn/{version}/img/spell/{championSpellImgFull}
+    champions-passive-img: /cdn/{version}/img/passive/{championPassiveImgFull}
+    items: /cdn/{version}/data/{locale}/item.json
+    items-img: /cdn/{version}/img/item/{itemImgFull}
+    maps: /cdn/{version}/data/{locale}/map.json
+    maps-img: /cdn/{version}/img/map/{mapImgFull}
+    summoner-spells: /cdn/{version}/data/{locale}/summoner.json
+    summoner-spells-img: /cdn/{version}/img/spell/{summonerSpellImgFull}
+    versions: /api/versions.json
 
 # ======================
 # Spring Boot Properties
@@ -34,7 +40,7 @@ riot:
 
 spring:
   # Spring active profile
-  profiles.active: external
+  profiles.active: external, ddragon
   # Data REST base URI
   data.rest.base-path: /api
   # Internalization

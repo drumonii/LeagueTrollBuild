@@ -7,7 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * Base response class from Riot's {@code lol-static-data-v3} API which contains common elements among retrievals.
+ * Base response class from Riot's {@code lol-static-data-v3} or {@code Data Dragon} API which contains common elements
+ * among retrievals.
  */
 @NoArgsConstructor
 @AllArgsConstructor

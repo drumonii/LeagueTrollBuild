@@ -32,6 +32,7 @@ import org.springframework.web.context.WebApplicationContext;
 import java.io.IOException;
 import java.util.List;
 
+import static com.drumonii.loltrollbuild.config.Profiles.STATIC_DATA;
 import static com.drumonii.loltrollbuild.config.Profiles.TESTING;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.fail;
@@ -45,8 +46,8 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
  * main application (potentially) already running on port 8080.
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = RANDOM_PORT, properties = { "riot.api.key=API_KEY", "spring.cache.type=simple" })
-@ActiveProfiles(TESTING)
+@SpringBootTest(webEnvironment = RANDOM_PORT, properties = { "riot.static-data.apiKey=API_KEY", "spring.cache.type=simple" })
+@ActiveProfiles({ TESTING, STATIC_DATA })
 public abstract class BaseSpringTestRunner {
 
 	@Autowired

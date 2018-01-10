@@ -21,8 +21,8 @@ the popular online game: http://leagueoflegends.com/[League of Legends].
 * https://github.com/DataTables/DataTablesSrc[DataTables]
 * https://github.com/metafizzy/isotope[Isotope]
 
-`LeagueTrollBuild` provides four profiles:
 == Profiles
+`LeagueTrollBuild` provides four database profiles:
 
 external::
 Production profile that is active by default and uses PostgreSQL along with environment variables to specify the
@@ -37,19 +37,29 @@ Development profile that also uses PostgreSQL but neither caches message propert
 test::
 Testing profile for https://github.com/junit-team/junit[JUnit 4] tests.
 
+In addition, there are two Riot API profiles:
+
+static-data::
+lol-static-data-v3
+
+ddragon::
+Data Dragon
+
 To override an active profile, set the `spring.profiles.active` argument property such as:
 
- -Dspring.profiles.active=dev
+ -Dspring.profiles.active=dev,static-data
 
 Or using the environment variable `SPRING_PROFILES_ACTIVE`. Otherwise, if a profile is not specified, the `external`
-profile will be active.
+and `ddragon` profiles will be active.
 
 == Riot API Key
-An API key provided from Riot is required to use https://developer.riotgames.com/[Riot's API].
+An https://developer.riotgames.com/api-keys.html[API key] provided from Riot is required to use https://developer.riotgames.com/api-methods/#lol-static-data-v3[lol-static-data-v3].
 
-When running `LeagueTrollBuild`, the API key is supplied using the `RIOT_API_KEY` environment variable or the
-`-Driot.api.key` argument property. If the API key is not supplied, the configuration properties validation will fail
-and thus the app will not start (by design).
+When running `LeagueTrollBuild` with the `static-data` profile, the API key is supplied using the `RIOT_STATICDATA_APIKEY` environment
+variable or the `-Driot.static-data.apiKey` argument property. If the API key is not supplied, the configuration properties validation
+will fail and thus the app will not start (by design).
+
+If running `LeagueTrollBuild` with the `ddragon` profile, no API key is required.
 
 == Running locally
 *Note*, a Java 8 JRE is required. Previous JREs are not supported.
@@ -58,7 +68,7 @@ First, download or clone the project. With the project saved locally, one may ei
 
 Run the app using Gradle:
 
- gradlew -Dspring.profiles.active=PROFILE_OVERRIDE -Driot.api.key=API_KEY_IF_NOT_ENV_VAR
+ gradlew -Dspring.profiles.active=PROFILE_OVERRIDE
 
 Or `build` the project as a `jar` using Gradle and run with `java`:
 
@@ -68,7 +78,7 @@ To do so, build the project first using Gradle:
 
 Next, `cd` to the `build/libs` folder in the project root and then run directly using `java`:
 
- java -jar -Dspring.profiles.active=PROFILE_OVERRIDE -Driot.api.key=API_KEY_IF_NOT_ENV_VAR LeagueTrollBuild-VERSION.jar
+ java -jar -Dspring.profiles.active=PROFILE_OVERRIDE LeagueTrollBuild-VERSION.jar
 
 From either method and with the project running, view http://localhost:8080/[localhost:8080] on your browser.
 

@@ -1,88 +1,59 @@
 package com.drumonii.loltrollbuild.riot.api;
 
+import com.drumonii.loltrollbuild.constraint.ValidRiotApiProperties;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.NestedConfigurationProperty;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
-
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 
 /**
  * Configuration properties for Riot's API found in config/application.yml of the resources folder.
  */
 @Component
 @Validated
+@ValidRiotApiProperties
 @ConfigurationProperties(prefix = "riot")
 public class RiotApiProperties {
 
-	@NotNull
-	@Valid
 	@NestedConfigurationProperty
-	@Getter @Setter private RiotApi api;
+	@Getter @Setter private StaticData staticData;
 
-	/**
-	 * General configuration properties for Riot's API not specific to {@link StaticData} or {@link Ddragon}.
-	 */
-	public static class RiotApi {
-
-		@NotEmpty
-		@Getter @Setter private String key;
-
-		@NotNull
-		@Valid
-		@NestedConfigurationProperty
-		@Getter @Setter private StaticData staticData;
-
-		@NotNull
-		@Valid
-		@NestedConfigurationProperty
-		@Getter @Setter private Ddragon ddragon;
-
-	}
+	@NestedConfigurationProperty
+	@Getter @Setter private Ddragon ddragon;
 
 	/**
 	 * Query configuration for Riot's {@code lol-static-data-v3} API part of Riot's full API.
 	 */
 	public static class StaticData {
 
-		@NotEmpty
+		@Getter @Setter private String apiKey;
+
 		@Getter @Setter private String baseUrl;
 
-		@NotEmpty
 		@Getter @Setter private String keyParam;
 
-		@NotEmpty
+		@Getter @Setter private String localeParam;
+
+		@Getter @Setter private String locale;
+
 		@Getter @Setter private String region;
 
-		@NotEmpty
-		@Getter @Setter private String scheme;
-
-		@NotEmpty
 		@Getter @Setter private String champions;
 
-		@NotEmpty
 		@Getter @Setter private String champion;
 
-		@NotEmpty
 		@Getter @Setter private String items;
 
-		@NotEmpty
 		@Getter @Setter private String item;
 
-		@NotEmpty
 		@Getter @Setter private String maps;
 
-		@NotEmpty
 		@Getter @Setter private String summonerSpells;
 
-		@NotEmpty
 		@Getter @Setter private String summonerSpell;
 
-		@NotEmpty
 		@Getter @Setter private String versions;
 
 	}
@@ -93,29 +64,33 @@ public class RiotApiProperties {
 	 */
 	public static class Ddragon {
 
-		@NotEmpty
 		@Getter @Setter private String baseUrl;
 
-		@NotEmpty
-		@Getter @Setter private String scheme;
+		@Getter @Setter private String locale;
 
-		@NotEmpty
+		@Getter @Setter private String champions;
+
+		@Getter @Setter private String champion;
+
 		@Getter @Setter private String championsImg;
 
-		@NotEmpty
 		@Getter @Setter private String championsSpellImg;
 
-		@NotEmpty
 		@Getter @Setter private String championsPassiveImg;
 
-		@NotEmpty
+		@Getter @Setter private String items;
+
 		@Getter @Setter private String itemsImg;
 
-		@NotEmpty
+		@Getter @Setter private String maps;
+
 		@Getter @Setter private String mapsImg;
 
-		@NotEmpty
+		@Getter @Setter private String summonerSpells;
+
 		@Getter @Setter private String summonerSpellsImg;
+
+		@Getter @Setter private String versions;
 
 	}
 
