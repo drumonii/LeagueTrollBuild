@@ -24,11 +24,18 @@ import java.util.Comparator;
 public class Version implements Serializable, Comparable<Version> {
 
 	public Version(String patch) {
-		String[] versioning = patch.split("\\.");
-		this.patch = patch;
-		this.major = Integer.parseInt(versioning[0]);
-		this.minor = Integer.parseInt(versioning[1]);
-		this.revision = Integer.parseInt(versioning[2]);
+		String[] versioning = patch.split("\\."); // 7.10.1 style
+		if (versioning.length == 3) {
+			this.patch = patch;
+			this.major = Integer.parseInt(versioning[0]);
+			this.minor = Integer.parseInt(versioning[1]);
+			this.revision = Integer.parseInt(versioning[2]);
+		} else {
+			versioning = patch.substring(patch.lastIndexOf('_') + 1, patch.length()).split("\\."); // lolpatch_7.17 style
+			this.major = Integer.parseInt(versioning[0]);
+			this.minor = Integer.parseInt(versioning[1]);
+			this.patch = major + "." + minor + "." + 0;
+		}
 	}
 
 	@Id
