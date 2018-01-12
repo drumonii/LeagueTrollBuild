@@ -120,10 +120,12 @@ public final class ItemBuilder {
 		item.setMaps(maps);
 		item.setImage(image);
 		if (image != null) {
+			image.setId(id);
 			image.setItem(item);
 		}
 		item.setGold(gold);
 		if (gold != null) {
+			gold.setId(id);
 			gold.setItem(item);
 		}
 		return item;

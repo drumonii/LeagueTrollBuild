@@ -33,6 +33,7 @@ public final class GameMapBuilder {
 		gameMap.setMapName(mapName);
 		gameMap.setImage(image);
 		if (image != null) {
+			image.setId(mapId);
 			image.setMap(gameMap);
 		}
 		return gameMap;

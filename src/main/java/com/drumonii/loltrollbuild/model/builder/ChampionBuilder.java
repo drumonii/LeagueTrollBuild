@@ -93,20 +93,21 @@ public final class ChampionBuilder {
 		champion.setPartype(partype);
 		champion.setInfo(info);
 		if (info != null) {
+			info.setId(id);
 			info.setChampion(champion);
 		}
 		champion.setSpells(spells);
-		if (spells != null) {
-			for (ChampionSpell spell : spells) {
-				spell.setChampion(champion);
-			}
+		for (ChampionSpell spell : spells) {
+			spell.setChampion(champion);
 		}
 		champion.setPassive(passive);
 		if (passive != null) {
+			passive.setId(id);
 			passive.setChampion(champion);
 		}
 		champion.setImage(image);
 		if (image != null) {
+			image.setId(id);
 			image.setChampion(champion);
 		}
 		champion.setTags(tags);

@@ -8,6 +8,7 @@ import org.springframework.boot.test.json.JacksonTester;
 import org.springframework.boot.test.json.JsonContent;
 import org.springframework.boot.test.json.ObjectContent;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.IOException;
@@ -18,6 +19,7 @@ import static org.assertj.core.api.Assertions.fail;
 
 @RunWith(SpringRunner.class)
 @JsonTest
+@TestPropertySource(properties = "riot.static-data.apiKey=API_KEY")
 @ActiveProfiles({ STATIC_DATA })
 public class VersionStaticDataTest {
 

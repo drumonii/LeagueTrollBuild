@@ -86,6 +86,7 @@ public final class SummonerSpellBuilder {
 		summonerSpell.setDescription(description);
 		summonerSpell.setImage(image);
 		if (image != null) {
+			image.setId(id);
 			image.setSummonerSpell(summonerSpell);
 		}
 		summonerSpell.setCooldown(cooldown);
