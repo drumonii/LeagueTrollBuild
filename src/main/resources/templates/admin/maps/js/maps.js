@@ -24,7 +24,6 @@ $(function() {
             { data: 'mapName' },
             { data: null,
                 render: function(data, type, full, meta) {
-                    console.log(data);
                     var button = $('<button>', {
                         'data-map-id': data.mapId,
                         'class': 'ui fluid primary button',
