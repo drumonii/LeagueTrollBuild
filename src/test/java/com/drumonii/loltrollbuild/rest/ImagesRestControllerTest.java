@@ -2,12 +2,13 @@ package com.drumonii.loltrollbuild.rest;
 
 import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.model.*;
-import com.drumonii.loltrollbuild.util.RandomizeUtil;
 import org.apache.commons.io.FilenameUtils;
 import org.junit.Test;
 
 import java.time.ZoneId;
+import java.util.Optional;
 
+import static org.assertj.core.api.Fail.fail;
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -23,7 +24,7 @@ public class ImagesRestControllerTest extends BaseSpringTestRunner {
 
 		String fileExt = FilenameUtils.getExtension(smite.getImage().getFull());
 
-		mockMvc.perform(get("/img/summoner-spells/{img}", smite.getId() + "." + fileExt))
+		mockMvc.perform(get("/img/summoner-spells/{img}.{fileExt}", smite.getId(),  fileExt))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType("image/" + fileExt))
 				.andExpect(header().string("Cache-Control", is("max-age=" + 31556926)))
@@ -38,7 +39,7 @@ public class ImagesRestControllerTest extends BaseSpringTestRunner {
 
 		String fileExt = FilenameUtils.getExtension(thornmail.getImage().getFull());
 
-		mockMvc.perform(get("/img/items/{img}", thornmail.getId() + "." + fileExt))
+		mockMvc.perform(get("/img/items/{img}.{fileExt}", thornmail.getId(), fileExt))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType("image/" + fileExt))
 				.andExpect(header().string("Cache-Control", is("max-age=" + 31556926)))
@@ -53,7 +54,7 @@ public class ImagesRestControllerTest extends BaseSpringTestRunner {
 
 		String fileExt = FilenameUtils.getExtension(shen.getImage().getFull());
 
-		mockMvc.perform(get("/img/champions/{img}", shen.getId() + "." + fileExt))
+		mockMvc.perform(get("/img/champions/{img}.{fileExt}", shen.getId(), fileExt))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType("image/" + fileExt))
 				.andExpect(header().string("Cache-Control", is("max-age=" + 31556926)))
@@ -65,11 +66,13 @@ public class ImagesRestControllerTest extends BaseSpringTestRunner {
 	public void championSpellImg() throws Exception {
 		Champion azir = championsResponse.getChampions().get("Azir");
 		azir = championsRepository.save(azir);
-		ChampionSpell spell = RandomizeUtil.getRandom(azir.getSpells());
+		Optional<ChampionSpell> spell = azir.getSpells().stream().findAny();
+		if (!spell.isPresent()) {
+			fail("Unable to get a Champion Spell from the Champion");
+		}
+		String fileExt = FilenameUtils.getExtension(spell.get().getImage().getFull());
 
-		String fileExt = FilenameUtils.getExtension(spell.getImage().getFull());
-
-		mockMvc.perform(get("/img/champions/{id}/spell/{img}", azir.getId(), spell.getKey() + "." + fileExt))
+		mockMvc.perform(get("/img/champions/{id}/spell/{img}.{fileExt}", azir.getId(), spell.get().getKey(), fileExt))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType("image/" + fileExt))
 				.andExpect(header().string("Cache-Control", is("max-age=" + 31556926)))
@@ -103,7 +106,7 @@ public class ImagesRestControllerTest extends BaseSpringTestRunner {
 
 		String fileExt = FilenameUtils.getExtension(summonersRift.getImage().getFull());
 
-		mockMvc.perform(get("/img/maps/map{img}", summonersRift.getMapId() + "." + fileExt))
+		mockMvc.perform(get("/img/maps/map{img}.{fileExt}", summonersRift.getMapId(), fileExt))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType("image/" + fileExt))
 				.andExpect(header().string("Cache-Control", is("max-age=" + 31556926)))
