@@ -26,7 +26,7 @@ public class ImagesRestController {
 	public ResponseEntity<byte[]> summonerSpellImg(@PathVariable("id") SummonerSpell summonerSpell) {
 		return ResponseEntity.ok()
 				.contentLength(summonerSpell.getImage().getImgSrc().length)
-				.contentType(MediaType.parseMediaType(createMediaType(summonerSpell.getImage())))
+				.contentType(createMediaType(summonerSpell.getImage()))
 				.cacheControl(CacheControl.maxAge(31556926, TimeUnit.SECONDS))
 				.lastModified(summonerSpell.getLastModifiedDate().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli())
 				.body(summonerSpell.getImage().getImgSrc());
@@ -36,7 +36,7 @@ public class ImagesRestController {
 	public ResponseEntity<byte[]> itemImg(@PathVariable("id") Item item) {
 		return ResponseEntity.ok()
 				.contentLength(item.getImage().getImgSrc().length)
-				.contentType(MediaType.parseMediaType(createMediaType(item.getImage())))
+				.contentType(createMediaType(item.getImage()))
 				.cacheControl(CacheControl.maxAge(31556926, TimeUnit.SECONDS))
 				.lastModified(item.getLastModifiedDate().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli())
 				.body(item.getImage().getImgSrc());
@@ -46,7 +46,7 @@ public class ImagesRestController {
 	public ResponseEntity<byte[]> championImg(@PathVariable("id") Champion champion) {
 		return ResponseEntity.ok()
 				.contentLength(champion.getImage().getImgSrc().length)
-				.contentType(MediaType.parseMediaType(createMediaType(champion.getImage())))
+				.contentType(createMediaType(champion.getImage()))
 				.cacheControl(CacheControl.maxAge(31556926, TimeUnit.SECONDS))
 				.lastModified(champion.getLastModifiedDate().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli())
 				.body(champion.getImage().getImgSrc());
@@ -63,7 +63,7 @@ public class ImagesRestController {
 		}
 		return ResponseEntity.ok()
 				.contentLength(spell.get().getImage().getImgSrc().length)
-				.contentType(MediaType.parseMediaType(createMediaType(spell.get().getImage())))
+				.contentType(createMediaType(spell.get().getImage()))
 				.cacheControl(CacheControl.maxAge(31556926, TimeUnit.SECONDS))
 				.lastModified(champion.getLastModifiedDate().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli())
 				.body(spell.get().getImage().getImgSrc());
@@ -73,7 +73,7 @@ public class ImagesRestController {
 	public ResponseEntity<byte[]> championPassiveImg(@PathVariable("id") Champion champion) {
 		return ResponseEntity.ok()
 				.contentLength(champion.getPassive().getImage().getImgSrc().length)
-				.contentType(MediaType.parseMediaType(createMediaType(champion.getPassive().getImage())))
+				.contentType(createMediaType(champion.getPassive().getImage()))
 				.cacheControl(CacheControl.maxAge(31556926, TimeUnit.SECONDS))
 				.lastModified(champion.getLastModifiedDate().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli())
 				.body(champion.getPassive().getImage().getImgSrc());
@@ -83,7 +83,7 @@ public class ImagesRestController {
 	public ResponseEntity<byte[]> mapImg(@PathVariable("id") GameMap gameMap) {
 		return ResponseEntity.ok()
 				.contentLength(gameMap.getImage().getImgSrc().length)
-				.contentType(MediaType.parseMediaType(createMediaType(gameMap.getImage())))
+				.contentType(createMediaType(gameMap.getImage()))
 				.cacheControl(CacheControl.maxAge(31556926, TimeUnit.SECONDS))
 				.lastModified(gameMap.getLastModifiedDate().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli())
 				.body(gameMap.getImage().getImgSrc());
@@ -95,8 +95,8 @@ public class ImagesRestController {
 	 * @param image the {@link Image}
 	 * @return the {@link MediaType}
 	 */
-	private String createMediaType(Image image) {
-		return "image/" + FilenameUtils.getExtension(image.getFull());
+	private MediaType createMediaType(Image image) {
+		return MediaType.parseMediaType("image/" + FilenameUtils.getExtension(image.getFull()));
 	}
 
 }
