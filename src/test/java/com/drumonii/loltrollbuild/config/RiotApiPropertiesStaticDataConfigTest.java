@@ -9,7 +9,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
 import org.springframework.boot.autoconfigure.web.WebClientAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -25,6 +24,7 @@ import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 import static com.drumonii.loltrollbuild.config.Profiles.STATIC_DATA;
 import static com.drumonii.loltrollbuild.config.Profiles.TESTING;
@@ -91,7 +91,7 @@ public class RiotApiPropertiesStaticDataConfigTest {
 		assertThat(summonerSpellsUri.getPath()).isEqualTo(staticData.getSummonerSpells());
 		assertThat(summonerSpellsUri.getQueryParams()).contains(
 				entry("tags", Arrays.asList("cooldown", "image", "key", "modes")),
-				entry("api_key", Arrays.asList(apiKey)));
+				entry("api_key", Collections.singletonList(apiKey)));
 	}
 
 	@Autowired
@@ -108,7 +108,7 @@ public class RiotApiPropertiesStaticDataConfigTest {
 				String.valueOf(id)));
 		assertThat(uriComponents.getQueryParams()).contains(
 				entry("tags", Arrays.asList("cooldown", "image", "key", "modes")),
-				entry("api_key", Arrays.asList(apiKey)));
+				entry("api_key", Collections.singletonList(apiKey)));
 	}
 
 	@Autowired
@@ -140,7 +140,7 @@ public class RiotApiPropertiesStaticDataConfigTest {
 		assertThat(itemsUri.getPath()).isEqualTo(staticData.getItems());
 		assertThat(itemsUri.getQueryParams()).contains(
 				entry("tags", Arrays.asList("consumed", "from", "gold", "image", "into", "maps", "requiredChampion")),
-				entry("api_key", Arrays.asList(apiKey)));
+				entry("api_key", Collections.singletonList(apiKey)));
 	}
 
 	@Autowired
@@ -156,7 +156,7 @@ public class RiotApiPropertiesStaticDataConfigTest {
 		assertThat(uriComponents.getPath()).isEqualTo(staticData.getItem().replace("{id}", String.valueOf(id)));
 		assertThat(uriComponents.getQueryParams()).contains(
 				entry("tags", Arrays.asList("consumed", "from", "gold", "image", "into", "maps", "requiredChampion")),
-				entry("api_key", Arrays.asList(apiKey)));
+				entry("api_key", Collections.singletonList(apiKey)));
 	}
 
 	@Autowired
@@ -188,7 +188,7 @@ public class RiotApiPropertiesStaticDataConfigTest {
 		assertThat(championsUri.getPath()).isEqualTo(staticData.getChampions());
 		assertThat(championsUri.getQueryParams()).contains(
 				entry("tags", Arrays.asList("image", "info", "passive", "partype", "spells", "tags")),
-				entry("api_key", Arrays.asList(apiKey)));
+				entry("api_key", Collections.singletonList(apiKey)));
 	}
 
 	@Autowired
@@ -204,7 +204,7 @@ public class RiotApiPropertiesStaticDataConfigTest {
 		assertThat(uriComponents.getPath()).isEqualTo(staticData.getChampion().replace("{id}", String.valueOf(id)));
 		assertThat(uriComponents.getQueryParams()).contains(
 				entry("tags", Arrays.asList("image", "info", "passive", "partype", "spells", "tags")),
-				entry("api_key", Arrays.asList(apiKey)));
+				entry("api_key", Collections.singletonList(apiKey)));
 	}
 
 	@Autowired
@@ -262,7 +262,7 @@ public class RiotApiPropertiesStaticDataConfigTest {
 		assertThat(mapsUri.getScheme()).isEqualTo("https");
 		assertThat(mapsUri.getHost()).isEqualTo(host);
 		assertThat(mapsUri.getPath()).isEqualTo(staticData.getMaps());
-		assertThat(mapsUri.getQueryParams()).contains(entry("api_key", Arrays.asList(apiKey)));
+		assertThat(mapsUri.getQueryParams()).contains(entry("api_key", Collections.singletonList(apiKey)));
 	}
 
 	@Autowired
@@ -292,7 +292,7 @@ public class RiotApiPropertiesStaticDataConfigTest {
 		assertThat(versionsUri.getScheme()).isEqualTo("https");
 		assertThat(versionsUri.getHost()).isEqualTo(host);
 		assertThat(versionsUri.getPath()).isEqualTo(staticData.getVersions());
-		assertThat(versionsUri.getQueryParams()).contains(entry("api_key", Arrays.asList(apiKey)));
+		assertThat(versionsUri.getQueryParams()).contains(entry("api_key", Collections.singletonList(apiKey)));
 	}
 
 }

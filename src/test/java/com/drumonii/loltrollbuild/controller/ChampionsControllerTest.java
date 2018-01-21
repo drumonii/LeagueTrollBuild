@@ -23,6 +23,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static com.drumonii.loltrollbuild.config.Profiles.TESTING;
@@ -133,7 +134,7 @@ public class ChampionsControllerTest {
 				.withSpells(nasusSpell1)
 				.build();
 
-		given(championsRepository.findAll(any(Sort.class))).willReturn(Arrays.asList(nasus));
+		given(championsRepository.findAll(any(Sort.class))).willReturn(Collections.singletonList(nasus));
 
 		List<String> tags = Arrays.asList("Tank", "Support", "Mage", "Marksman");
 		given(championsRepository.getTags()).willReturn(tags);

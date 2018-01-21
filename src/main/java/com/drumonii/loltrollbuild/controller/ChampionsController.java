@@ -100,7 +100,7 @@ public class ChampionsController {
 						GameMapUtil.getModeFromMap(mapsRepository.findOne(mapId))), SPELLS_SIZE));
 
 		// Trinket
-		trollBuild.put("trinket", Arrays.asList(RandomizeUtil.getRandom(itemsRepository.trinkets(mapId))));
+		trollBuild.put("trinket", Collections.singletonList(RandomizeUtil.getRandom(itemsRepository.trinkets(mapId))));
 		return trollBuild;
 	}
 

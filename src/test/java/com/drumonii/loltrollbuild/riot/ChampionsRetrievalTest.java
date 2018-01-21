@@ -14,7 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.TreeSet;
 
@@ -190,7 +190,7 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 	@Test
 	public void saveChampionWithOverwrite() throws Exception {
 		Champion newLeeSin = championsResponse.getChampions().get("LeeSin");
-		newLeeSin.setTags(new TreeSet<>(Arrays.asList("NEW_TAG")));
+		newLeeSin.setTags(new TreeSet<>(Collections.singletonList("NEW_TAG")));
 		newLeeSin = championsRepository.save(newLeeSin);
 
 		given(championsService.getChampion(eq(leeSin.getId()))).willReturn(newLeeSin);

@@ -16,7 +16,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.TreeSet;
 
@@ -68,7 +68,7 @@ public class ChampionsRetrievalJobConfigTest extends BaseSpringTestRunner {
 		List<Champion> champions = championsRepository.save(championsResponse.getChampions().values());
 
 		Champion championToEdit = RandomizeUtil.getRandom(champions);
-		championToEdit.setTags(new TreeSet<>(Arrays.asList("NEW_TAG")));
+		championToEdit.setTags(new TreeSet<>(Collections.singletonList("NEW_TAG")));
 
 		championsRepository.save(championToEdit);
 

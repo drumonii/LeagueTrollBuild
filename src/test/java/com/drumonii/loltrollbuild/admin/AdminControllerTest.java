@@ -22,7 +22,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 
 import static com.drumonii.loltrollbuild.config.Profiles.TESTING;
@@ -242,7 +242,7 @@ public class AdminControllerTest {
 		stepExecution.setName("step1");
 		stepExecution.setStartTime(LocalDateTime.now());
 		stepExecution.setJobExecution(jobExecution);
-		jobExecution.setStepExecutions(new HashSet<>(Arrays.asList(stepExecution)));
+		jobExecution.setStepExecutions(new HashSet<>(Collections.singletonList(stepExecution)));
 
 		given(batchJobInstancesRepository.findOne(eq(jobInstance.getId()))).willReturn(jobInstance);
 
