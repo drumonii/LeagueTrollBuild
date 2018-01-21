@@ -58,9 +58,9 @@ public class VersionsRetrieval {
 		Version latestPatchVersion = versionsService.getLatestVersion();
 		Version latestSavedVersion = versionsRepository.latestVersion();
 		if (latestPatchVersion == null && latestSavedVersion == null) {
-			return new Version("0", 0, 0, 0);
+			return new Version("0.0.0");
 		} else if ((latestPatchVersion != null && latestSavedVersion == null) ||
-				(latestPatchVersion != null && latestSavedVersion.compareTo(latestPatchVersion) == -1)) {
+				(latestPatchVersion != null && latestSavedVersion.compareTo(latestPatchVersion) < 0)) {
 			return versionsRepository.save(latestPatchVersion);
 		}
 		return latestSavedVersion;

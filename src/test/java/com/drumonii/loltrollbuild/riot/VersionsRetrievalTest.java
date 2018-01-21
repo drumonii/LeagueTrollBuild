@@ -64,7 +64,7 @@ public class VersionsRetrievalTest extends BaseSpringTestRunner {
 		mockMvc.perform(post("/riot/versions/latest").with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-				.andExpect(content().json(objectMapper.writeValueAsString(new Version("0", 0, 0, 0))));
+				.andExpect(content().json(objectMapper.writeValueAsString(new Version("0.0.0"))));
 	}
 
 	@WithMockAdminUser
