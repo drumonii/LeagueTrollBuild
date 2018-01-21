@@ -58,15 +58,12 @@ public class ImagesRestController {
 		Optional<ChampionSpell> spell = champion.getSpells().stream()
 				.filter(s -> spellKey.equals(s.getKey()))
 				.findFirst();
-		if (!spell.isPresent()) {
-			return ResponseEntity.notFound().build();
-		}
-		return ResponseEntity.ok()
-				.contentLength(spell.get().getImage().getImgSrc().length)
-				.contentType(createMediaType(spell.get().getImage()))
+		return spell.map(championSpell -> ResponseEntity.ok()
+				.contentLength(championSpell.getImage().getImgSrc().length)
+				.contentType(createMediaType(championSpell.getImage()))
 				.cacheControl(CacheControl.maxAge(31556926, TimeUnit.SECONDS))
 				.lastModified(champion.getLastModifiedDate().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli())
-				.body(spell.get().getImage().getImgSrc());
+				.body(championSpell.getImage().getImgSrc())).orElseGet(() -> ResponseEntity.notFound().build());
 	}
 
 	@GetMapping(value = "/champions/{id}/passive/{passive}.*")
