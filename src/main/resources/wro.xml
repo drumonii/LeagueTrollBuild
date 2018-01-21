@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <groups xmlns="http://www.isdc.ro/wro">
+
     <!-- DataTables -->
     <group name="datatables">
-        <js minimize="false">/webjars/datatables/media/js/jquery.dataTables.min.js</js>
-        <js minimize="false">/webjars/datatables/media/js/dataTables.semanticui.min.js</js>
-        <css minimize="false">/webjars/datatables/media/css/dataTables.semanticui.min.css</css>
+        <js>/webjars/datatables.net/js/jquery.dataTables.js</js>
+        <js>/webjars/datatables.net-se/js/dataTables.semanticui.js</js>
+        <css>/webjars/datatables.net-se/css/dataTables.semanticui.css</css>
     </group>
 
     <!-- Isotope -->
     <group name="isotope">
-        <js minimize="false">/webjars/isotope/dist/isotope.pkgd.min.js</js>
+        <js minimize="false">/webjars/isotope-layout/dist/isotope.pkgd.min.js</js>
     </group>
 
     <!-- Clipboard -->
@@ -20,7 +21,7 @@
     <!-- Semantic UI -->
     <group name="semantic-ui">
         <css minimize="false">/semantic-ui/dist/semantic.min.css</css>
-        <js minimize="false">/webjars/jquery/jquery.min.js</js>
+        <js minimize="false">/webjars/jquery/dist/jquery.min.js</js>
         <js minimize="false">/semantic-ui/dist/semantic.min.js</js>
     </group>
 
