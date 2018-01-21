@@ -21,6 +21,12 @@ public interface VersionsService {
 	 *
 	 * @return the latest patch {@link Version} from Riot
 	 */
-	Version getLatestVersion();
+	default Version getLatestVersion() {
+		List<Version> versions = getVersions();
+		if (versions.isEmpty()) {
+			return null;
+		}
+		return versions.get(0);
+	}
 
 }
