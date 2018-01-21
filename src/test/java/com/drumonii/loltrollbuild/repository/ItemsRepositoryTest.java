@@ -1,51 +1,75 @@
 package com.drumonii.loltrollbuild.repository;
 
-import com.drumonii.loltrollbuild.BaseSpringTestRunner;
+import com.drumonii.loltrollbuild.config.JpaConfig;
 import com.drumonii.loltrollbuild.model.Item;
 import com.drumonii.loltrollbuild.model.ItemGold;
+import com.drumonii.loltrollbuild.riot.api.ItemsResponse;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.assertj.core.api.iterable.Extractor;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
+import org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration;
+import org.springframework.boot.jackson.JsonComponent;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.context.annotation.ComponentScan.Filter;
+import org.springframework.context.annotation.Import;
+import org.springframework.test.annotation.Repeat;
+import org.springframework.test.context.junit4.SpringRunner;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.SortedMap;
 import java.util.function.Consumer;
 
+import static com.drumonii.loltrollbuild.util.GameMapUtil.SUMMONERS_RIFT_ID;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ItemsRepositoryTest extends BaseSpringTestRunner {
+@RunWith(SpringRunner.class)
+@DataJpaTest(includeFilters = @Filter(JsonComponent.class))
+@ImportAutoConfiguration(JacksonAutoConfiguration.class)
+@Import(JpaConfig.class)
+public abstract class ItemsRepositoryTest {
+
+	@Autowired
+	protected ItemsRepository itemsRepository;
+
+	@Autowired
+	protected ObjectMapper objectMapper;
+
+	private ItemsResponse itemsResponse;
+
+	protected abstract ItemsResponse getItemsResponse();
 
 	@Before
 	public void before() {
-		super.before();
-
+		itemsResponse = getItemsResponse();
 		itemsRepository.save(itemsResponse.getItems().values());
 	}
 
 	@Test
-	public void boots() throws IOException {
+	public void boots() {
 		Item bootsOfSpeed = itemsResponse.getItems().get("1001");
 
-		List<Item> boots = itemsRepository.boots(Integer.valueOf(SUMMONERS_RIFT));
+		List<Item> boots = itemsRepository.boots(SUMMONERS_RIFT_ID);
 		assertThat(boots).isNotEmpty();
 		assertThat(boots).doesNotHaveDuplicates();
 		assertThat(boots).doesNotContain(bootsOfSpeed);
 		assertThat(boots).flatExtracting(Item::getFrom)
-				.contains("1001");
+				.contains(1001);
 		assertThat(boots).extracting(Item::getDescription).allSatisfy((Consumer<String>) description -> {
 			assertThat(description).isNotNull();
 			assertThat(description).contains("Movement");
 		});
 		assertThat(boots).extracting(Item::getMaps)
-				.extracting((Extractor<SortedMap<Integer, Boolean>, Object>) input ->
-						input.get(Integer.valueOf(SUMMONERS_RIFT)))
+				.extracting((Extractor<SortedMap<Integer, Boolean>, Object>) input -> input.get(SUMMONERS_RIFT_ID))
 				.contains(true);
 	}
 
 	@Test
-	public void trinkets() throws IOException {
-		List<Item> trinkets = itemsRepository.trinkets(Integer.valueOf(SUMMONERS_RIFT));
+	public void trinkets() {
+		List<Item> trinkets = itemsRepository.trinkets(SUMMONERS_RIFT_ID);
 		assertThat(trinkets).isNotEmpty();
 		assertThat(trinkets).doesNotHaveDuplicates();
 		assertThat(trinkets).extracting(Item::getGold).extracting(ItemGold::getTotal)
@@ -53,8 +77,7 @@ public class ItemsRepositoryTest extends BaseSpringTestRunner {
 		assertThat(trinkets).extracting(Item::getGold).extracting("purchasable", Boolean.class)
 				.containsOnly(true);
 		assertThat(trinkets).extracting(Item::getMaps)
-				.extracting((Extractor<SortedMap<Integer, Boolean>, Object>) input ->
-						input.get(Integer.valueOf(SUMMONERS_RIFT)))
+				.extracting((Extractor<SortedMap<Integer, Boolean>, Object>) input -> input.get(SUMMONERS_RIFT_ID))
 				.contains(true);
 		assertThat(trinkets).extracting(Item::getDescription).allSatisfy((Consumer<String>) description -> {
 			assertThat(description).isNotNull();
@@ -63,7 +86,7 @@ public class ItemsRepositoryTest extends BaseSpringTestRunner {
 	}
 
 	@Test
-	public void viktorOnly() throws IOException {
+	public void viktorOnly() {
 		List<Item> viktorOnlyItems = itemsRepository.viktorOnly();
 		assertThat(viktorOnlyItems).isNotEmpty();
 		assertThat(viktorOnlyItems).doesNotHaveDuplicates();
@@ -76,26 +99,25 @@ public class ItemsRepositoryTest extends BaseSpringTestRunner {
 			assertThat(description).contains("Viktor");
 		});
 		assertThat(viktorOnlyItems).extracting(Item::getMaps)
-				.extracting((Extractor<SortedMap<Integer, Boolean>, Object>) input ->
-						input.get(Integer.valueOf(SUMMONERS_RIFT)))
+				.extracting((Extractor<SortedMap<Integer, Boolean>, Object>) input -> input.get(SUMMONERS_RIFT_ID))
 				.contains(true);
 	}
 
+	@Repeat(15)
 	@Test
-	public void forTrollBuild() throws IOException {
-		List<Item> forTrollBuild = itemsRepository.forTrollBuild(Integer.valueOf(SUMMONERS_RIFT));
+	public void forTrollBuild() {
+		List<Item> forTrollBuild = itemsRepository.forTrollBuild(SUMMONERS_RIFT_ID);
 		assertThat(forTrollBuild).isNotEmpty();
 		assertThat(forTrollBuild).doesNotHaveDuplicates();
 		assertThat(forTrollBuild).extracting(Item::getMaps)
-				.extracting((Extractor<SortedMap<Integer, Boolean>, Object>) input ->
-						input.get(Integer.valueOf(SUMMONERS_RIFT)))
+				.extracting((Extractor<SortedMap<Integer, Boolean>, Object>) input -> input.get(SUMMONERS_RIFT_ID))
 				.contains(true);
 		assertThat(forTrollBuild).extracting(Item::getGold)
 				.extracting("purchasable", Boolean.class)
 				.containsOnly(true);
 		assertThat(forTrollBuild).extracting(Item::getConsumed)
 				.containsNull();
-		assertThat(forTrollBuild).flatExtracting(Item::getInto)
+		assertThat(forTrollBuild).filteredOn(item -> item.getInto() != null).flatExtracting(Item::getInto)
 				.isEmpty();
 		assertThat(forTrollBuild).doesNotContain(itemsResponse.getItems().get("1001"));
 		assertThat(forTrollBuild).extracting(Item::getDescription).allSatisfy((Consumer<String>) description -> {
