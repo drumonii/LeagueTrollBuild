@@ -128,7 +128,7 @@ public abstract class BaseSpringTestRunner {
 				.build();
 
 		// Build Champions from the JSON file
-		ClassPathResource championsJson = new ClassPathResource("champions.json");
+		ClassPathResource championsJson = new ClassPathResource("champions_static_data.json");
 		try {
 			championsResponse = objectMapper.readValue(championsJson.getFile(), ChampionsResponse.class);
 		} catch (IOException e) {
@@ -136,7 +136,7 @@ public abstract class BaseSpringTestRunner {
 		}
 
 		// Build Items from the JSON file
-		ClassPathResource itemsJson = new ClassPathResource("items.json");
+		ClassPathResource itemsJson = new ClassPathResource("items_static_data.json");
 		try {
 			itemsResponse = objectMapper.readValue(itemsJson.getFile(), ItemsResponse.class);
 		} catch (IOException e) {
@@ -144,7 +144,7 @@ public abstract class BaseSpringTestRunner {
 		}
 
 		// Build Maps from the JSON file
-		ClassPathResource mapsJson = new ClassPathResource("maps.json");
+		ClassPathResource mapsJson = new ClassPathResource("maps_static_data.json");
 		try {
 			mapsResponse = objectMapper.readValue(mapsJson.getFile(), MapsResponse.class);
 		} catch (IOException e) {
@@ -152,7 +152,7 @@ public abstract class BaseSpringTestRunner {
 		}
 
 		// Build Summoner Spells from the JSON file
-		ClassPathResource summonerSpellsJson = new ClassPathResource("summoners.json");
+		ClassPathResource summonerSpellsJson = new ClassPathResource("summoners_static_data.json");
 		try {
 			summonerSpellsResponse = objectMapper.readValue(summonerSpellsJson.getFile(), SummonerSpellsResponse.class);
 		} catch (IOException e) {
@@ -160,7 +160,7 @@ public abstract class BaseSpringTestRunner {
 		}
 
 		// Build Versions from the JSON file
-		ClassPathResource versionsJson = new ClassPathResource("versions.json");
+		ClassPathResource versionsJson = new ClassPathResource("versions_static_data.json");
 		try {
 			versions = objectMapper.readValue(versionsJson.getFile(), new TypeReference<List<Version>>() {});
 		} catch (IOException e) {
