@@ -1,5 +1,6 @@
 package com.drumonii.loltrollbuild.riot.service;
 
+import com.drumonii.loltrollbuild.config.Profiles.StaticData;
 import com.drumonii.loltrollbuild.model.Champion;
 import com.drumonii.loltrollbuild.riot.api.ChampionsResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +18,8 @@ import java.util.List;
 
 @Service
 @Slf4j
-public class ChampionsServiceImpl implements ChampionsService {
+@StaticData
+public class ChampionsStaticDataService implements ChampionsService {
 
 	@Autowired
 	private RestTemplate restTemplate;
@@ -30,7 +32,7 @@ public class ChampionsServiceImpl implements ChampionsService {
 	@Qualifier("champion")
 	private UriComponentsBuilder championUri;
 
-	@Value("${riot.api.static-data.region}")
+	@Value("${riot.static-data.region}")
 	private String region;
 
 	@Override
@@ -39,7 +41,7 @@ public class ChampionsServiceImpl implements ChampionsService {
 		try {
 			response = restTemplate.getForObject(championsUri.toString(), ChampionsResponse.class);
 		} catch (RestClientException e) {
-			log.warn("Unable to retrieve Champions from Riot's API due to:", e);
+			log.warn("Unable to retrieve Champions from lol-static-data-v3 due to:", e);
 			return new ArrayList<>();
 		}
 		return new ArrayList<>(response.getChampions().values());
@@ -52,7 +54,7 @@ public class ChampionsServiceImpl implements ChampionsService {
 		try {
 			champion = restTemplate.getForObject(uriComponents.toString(), Champion.class);
 		} catch (RestClientException e) {
-			log.warn("Unable to retrieve the Champion with ID: {} from Riot's API due to:", id, e);
+			log.warn("Unable to retrieve the Champion with ID: {} from lol-static-data-v3 due to:", id, e);
 			return null;
 		}
 		return champion;

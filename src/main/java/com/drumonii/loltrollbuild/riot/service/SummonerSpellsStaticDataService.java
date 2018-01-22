@@ -1,5 +1,6 @@
 package com.drumonii.loltrollbuild.riot.service;
 
+import com.drumonii.loltrollbuild.config.Profiles.StaticData;
 import com.drumonii.loltrollbuild.model.SummonerSpell;
 import com.drumonii.loltrollbuild.riot.api.SummonerSpellsResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +18,8 @@ import java.util.List;
 
 @Service
 @Slf4j
-public class SummonerSpellsServiceImpl implements SummonerSpellsService {
+@StaticData
+public class SummonerSpellsStaticDataService implements SummonerSpellsService {
 
 	@Autowired
 	private RestTemplate restTemplate;
@@ -30,7 +32,7 @@ public class SummonerSpellsServiceImpl implements SummonerSpellsService {
 	@Qualifier("summonerSpell")
 	private UriComponentsBuilder summonerSpellUri;
 
-	@Value("${riot.api.static-data.region}")
+	@Value("${riot.static-data.region}")
 	private String region;
 
 	@Override
@@ -39,7 +41,7 @@ public class SummonerSpellsServiceImpl implements SummonerSpellsService {
 		try {
 			response = restTemplate.getForObject(summonerSpellsUri.toString(), SummonerSpellsResponse.class);
 		} catch (RestClientException e) {
-			log.warn("Unable to retrieve Summoner Spells from Riot's API due to:", e);
+			log.warn("Unable to retrieve Summoner Spells from lol-static-data-v3 due to:", e);
 			return new ArrayList<>();
 		}
 		return new ArrayList<>(response.getSummonerSpells().values());
@@ -52,7 +54,7 @@ public class SummonerSpellsServiceImpl implements SummonerSpellsService {
 		try {
 			summonerSpell = restTemplate.getForObject(uriComponents.toString(), SummonerSpell.class);
 		} catch (RestClientException e) {
-			log.warn("Unable to retrieve the Summoner Spells with ID: {} from Riot's API due to:", id, e);
+			log.warn("Unable to retrieve the Summoner Spells with ID: {} from lol-static-data-v3 due to:", id, e);
 			return null;
 		}
 		return summonerSpell;

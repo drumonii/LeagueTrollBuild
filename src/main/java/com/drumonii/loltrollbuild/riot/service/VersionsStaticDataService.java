@@ -1,5 +1,6 @@
 package com.drumonii.loltrollbuild.riot.service;
 
+import com.drumonii.loltrollbuild.config.Profiles.StaticData;
 import com.drumonii.loltrollbuild.model.Version;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,8 @@ import java.util.List;
 
 @Service
 @Slf4j
-public class VersionsServiceImpl implements VersionsService {
+@StaticData
+public class VersionsStaticDataService implements VersionsService {
 
 	@Autowired
 	private RestTemplate restTemplate;
@@ -33,20 +35,11 @@ public class VersionsServiceImpl implements VersionsService {
 			versions = restTemplate.exchange(versionsUri.toString(), HttpMethod.GET, null,
 				new ParameterizedTypeReference<List<Version>>() {}).getBody();
 		} catch (RestClientException e) {
-			log.warn("Unable to retrieve Versions from Riot's API due to:", e);
+			log.warn("Unable to retrieve Versions from lol-static-data-v3 due to:", e);
 			return new ArrayList<>();
 		}
-		Collections.sort(versions, Collections.reverseOrder());
+		versions.sort(Collections.reverseOrder());
 		return versions;
-	}
-
-	@Override
-	public Version getLatestVersion() {
-		List<Version> versions = getVersions();
-		if (versions.isEmpty()) {
-			return null;
-		}
-		return versions.get(0);
 	}
 
 }

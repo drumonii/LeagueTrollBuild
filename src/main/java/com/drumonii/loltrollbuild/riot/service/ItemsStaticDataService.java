@@ -1,5 +1,6 @@
 package com.drumonii.loltrollbuild.riot.service;
 
+import com.drumonii.loltrollbuild.config.Profiles.StaticData;
 import com.drumonii.loltrollbuild.model.Item;
 import com.drumonii.loltrollbuild.riot.api.ItemsResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +18,8 @@ import java.util.List;
 
 @Service
 @Slf4j
-public class ItemsServiceImpl implements ItemsService {
+@StaticData
+public class ItemsStaticDataService implements ItemsService {
 
 	@Autowired
 	private RestTemplate restTemplate;
@@ -30,7 +32,7 @@ public class ItemsServiceImpl implements ItemsService {
 	@Qualifier("item")
 	private UriComponentsBuilder itemUri;
 
-	@Value("${riot.api.static-data.region}")
+	@Value("${riot.static-data.region}")
 	private String region;
 
 	@Override
@@ -39,7 +41,7 @@ public class ItemsServiceImpl implements ItemsService {
 		try {
 			response = restTemplate.getForObject(itemsUri.toString(), ItemsResponse.class);
 		} catch (RestClientException e) {
-			log.warn("Unable to retrieve Items from Riot's API due to:", e);
+			log.warn("Unable to retrieve Items from lol-static-data-v3 due to:", e);
 			return new ArrayList<>();
 		}
 		return new ArrayList<>(response.getItems().values());
@@ -52,7 +54,7 @@ public class ItemsServiceImpl implements ItemsService {
 		try {
 			item = restTemplate.getForObject(uriComponents.toString(), Item.class);
 		} catch (RestClientException e) {
-			log.warn("Unable to retrieve the Item with ID: {} from Riot's API due to:", id, e);
+			log.warn("Unable to retrieve the Item with ID: {} from lol-static-data-v3 due to:", id, e);
 			return null;
 		}
 		return item;

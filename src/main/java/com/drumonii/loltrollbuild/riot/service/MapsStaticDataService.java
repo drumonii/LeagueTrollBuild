@@ -1,5 +1,6 @@
 package com.drumonii.loltrollbuild.riot.service;
 
+import com.drumonii.loltrollbuild.config.Profiles.StaticData;
 import com.drumonii.loltrollbuild.model.GameMap;
 import com.drumonii.loltrollbuild.riot.api.MapsResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +16,8 @@ import java.util.List;
 
 @Service
 @Slf4j
-public class MapsServiceImpl implements MapsService {
+@StaticData
+public class MapsStaticDataService implements MapsService {
 
 	@Autowired
 	private RestTemplate restTemplate;
@@ -30,7 +32,7 @@ public class MapsServiceImpl implements MapsService {
 		try {
 			response = restTemplate.getForObject(mapsUri.toString(), MapsResponse.class);
 		} catch (RestClientException e) {
-			log.warn("Unable to retrieve Maps from Riot's API due to:", e);
+			log.warn("Unable to retrieve Maps from lol-static-data-v3 due to:", e);
 			return new ArrayList<>();
 		}
 		return new ArrayList<>(response.getMaps().values());
@@ -42,7 +44,7 @@ public class MapsServiceImpl implements MapsService {
 		try {
 			response = restTemplate.getForObject(mapsUri.toString(), MapsResponse.class);
 		} catch (RestClientException e) {
-			log.warn("Unable to retrieve the Map with ID: {} from Riot's API due to:", id, e);
+			log.warn("Unable to retrieve the Map with ID: {} from lol-static-data-v3 due to:", id, e);
 			return null;
 		}
 		return response.getMaps().get(String.valueOf(id));
