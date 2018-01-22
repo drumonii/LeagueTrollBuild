@@ -1,5 +1,5 @@
 /*!
- * # Semantic UI 2.2.10 - Table
+ * # Semantic UI 2.2.13 - Table
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -947,7 +947,7 @@
 .ui.inverted.table th {
   background-color: rgba(0, 0, 0, 0.15);
   border-color: rgba(255, 255, 255, 0.1) !important;
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 0.9) !important;
 }
 .ui.inverted.table tr td {
   border-color: rgba(255, 255, 255, 0.1) !important;
@@ -1106,3 +1106,22 @@
          Site Overrides
 *******************************/
 
+#champions_filter,
+#champions-difference_filter {
+  display: none;
+}
+#items_filter,
+#items-difference_filter {
+  display: none;
+}
+#job-instances_filter {
+  display: none;
+}
+#maps_filter,
+#maps-difference_filter {
+  display: none;
+}
+#summoner-spells_filter,
+#summoner-spells-difference_filter {
+  display: none;
+}
