@@ -1,18 +1,26 @@
 package com.drumonii.loltrollbuild.batch.champions;
 
-import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.model.Champion;
+import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.model.image.Image;
+import com.drumonii.loltrollbuild.repository.ChampionsRepository;
+import com.drumonii.loltrollbuild.riot.api.ChampionsResponse;
+import com.drumonii.loltrollbuild.riot.api.ImageFetcher;
 import com.drumonii.loltrollbuild.riot.service.ChampionsService;
 import com.drumonii.loltrollbuild.util.RandomizeUtil;
-import org.junit.Before;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.After;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.batch.core.BatchStatus;
-import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecution;
+import org.springframework.batch.core.JobParameters;
+import org.springframework.batch.core.JobParametersBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.ArrayList;
@@ -29,20 +37,35 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-public class ChampionsRetrievalJobConfigTest extends BaseSpringTestRunner {
+@RunWith(SpringRunner.class)
+@SpringBootTest
+@Import(ChampionsRetrievalJobConfigTestConfiguration.class)
+public abstract class ChampionsRetrievalJobConfigTest {
 
 	@MockBean
 	private ChampionsService championsService;
 
 	@Autowired
-	@Qualifier("championsRetrievalJob")
-	private Job championsRetrievalJob;
+	private ChampionsRepository championsRepository;
 
-	@Before
-	public void before() {
-		super.before();
+	@Autowired
+	protected ObjectMapper objectMapper;
 
-		jobLauncherTestUtils.setJob(championsRetrievalJob);
+	@MockBean
+	protected ImageFetcher imageFetcher;
+
+	@Autowired
+	private ChampionsRetrievalJobLauncherTestUtils jobLauncherTestUtils;
+
+	protected ChampionsResponse championsResponse;
+
+	protected Version latestVersion;
+
+	public abstract void before();
+
+	@After
+	public void after() {
+		championsRepository.deleteAll();
 	}
 
 	@Test
@@ -53,9 +76,9 @@ public class ChampionsRetrievalJobConfigTest extends BaseSpringTestRunner {
 		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
 
 		verify(imageFetcher, times(championsResponse.getChampions().values().size() * 2))
-				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(versions.get(0)));
+				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 		verify(imageFetcher, times(championsResponse.getChampions().values().size()))
-				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(versions.get(0)));
+				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 
 		assertThat(championsRepository.findAll())
 				.containsOnlyElementsOf(championsResponse.getChampions().values());
@@ -76,9 +99,9 @@ public class ChampionsRetrievalJobConfigTest extends BaseSpringTestRunner {
 		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
 
 		verify(imageFetcher, times(2))
-				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(versions.get(0)));
+				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 		verify(imageFetcher, times(1))
-				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(versions.get(0)));
+				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 
 		assertThat(championsRepository.findAll()).containsOnlyElementsOf(championsResponse.getChampions().values());
 	}
@@ -96,12 +119,19 @@ public class ChampionsRetrievalJobConfigTest extends BaseSpringTestRunner {
 		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
 
 		verify(imageFetcher, never())
-				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(versions.get(0)));
+				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 		verify(imageFetcher, never())
-				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(versions.get(0)));
+				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 
 		assertThat(championsRepository.findAll())
 				.containsOnlyElementsOf(championsResponse.getChampions().values());
+	}
+
+	private JobParameters getJobParameters() {
+		return new JobParametersBuilder()
+				.addString("latestRiotPatch", latestVersion.getPatch())
+				.addDouble("random", Math.random())
+				.toJobParameters();
 	}
 
 }

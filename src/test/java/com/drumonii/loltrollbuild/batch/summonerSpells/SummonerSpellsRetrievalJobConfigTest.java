@@ -1,18 +1,26 @@
 package com.drumonii.loltrollbuild.batch.summonerSpells;
 
-import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.model.SummonerSpell;
+import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.model.image.Image;
+import com.drumonii.loltrollbuild.repository.SummonerSpellsRepository;
+import com.drumonii.loltrollbuild.riot.api.ImageFetcher;
+import com.drumonii.loltrollbuild.riot.api.SummonerSpellsResponse;
 import com.drumonii.loltrollbuild.riot.service.SummonerSpellsService;
 import com.drumonii.loltrollbuild.util.RandomizeUtil;
-import org.junit.Before;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.After;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.batch.core.BatchStatus;
-import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecution;
+import org.springframework.batch.core.JobParameters;
+import org.springframework.batch.core.JobParametersBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.ArrayList;
@@ -26,20 +34,35 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-public class SummonerSpellsRetrievalJobConfigTest extends BaseSpringTestRunner {
+@RunWith(SpringRunner.class)
+@SpringBootTest
+@Import(SummonerSpellsRetrievalJobConfigTestConfiguration.class)
+public abstract class SummonerSpellsRetrievalJobConfigTest {
 
 	@MockBean
 	private SummonerSpellsService summonerSpellsService;
 
 	@Autowired
-	@Qualifier("summonerSpellsRetrievalJob")
-	private Job summonerSpellsRetrievalJob;
+	private SummonerSpellsRepository summonerSpellsRepository;
 
-	@Before
-	public void before() {
-		super.before();
+	@Autowired
+	protected ObjectMapper objectMapper;
 
-		jobLauncherTestUtils.setJob(summonerSpellsRetrievalJob);
+	@MockBean
+	protected ImageFetcher imageFetcher;
+
+	@Autowired
+	private SummonerSpellsRetrievalJobLauncherTestUtils jobLauncherTestUtils;
+
+	protected SummonerSpellsResponse summonerSpellsResponse;
+
+	protected Version latestVersion;
+
+	public abstract void before();
+
+	@After
+	public void after() {
+		summonerSpellsRepository.deleteAll();
 	}
 
 	@Test
@@ -51,7 +74,7 @@ public class SummonerSpellsRetrievalJobConfigTest extends BaseSpringTestRunner {
 		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
 
 		verify(imageFetcher, times(summonerSpellsResponse.getSummonerSpells().values().size()))
-				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(versions.get(0)));
+				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 
 		assertThat(summonerSpellsRepository.findAll()).containsOnlyElementsOf(summonerSpellsResponse
 				.getSummonerSpells().values());
@@ -69,12 +92,12 @@ public class SummonerSpellsRetrievalJobConfigTest extends BaseSpringTestRunner {
 		summonerSpellToEdit.setDescription("New Description");
 
 		summonerSpellsRepository.save(summonerSpellToEdit);
-		
+
 		JobExecution jobExecution = jobLauncherTestUtils.launchJob(getJobParameters());
 		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
 
 		verify(imageFetcher, times(1))
-				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(versions.get(0)));
+				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 
 		assertThat(summonerSpellsRepository.findAll()).containsOnlyElementsOf(summonerSpellsResponse
 				.getSummonerSpells().values());
@@ -95,10 +118,17 @@ public class SummonerSpellsRetrievalJobConfigTest extends BaseSpringTestRunner {
 		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
 
 		verify(imageFetcher, never())
-				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(versions.get(0)));
+				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 
 		assertThat(summonerSpellsRepository.findAll()).containsOnlyElementsOf(summonerSpellsResponse
 				.getSummonerSpells().values());
+	}
+
+	private JobParameters getJobParameters() {
+		return new JobParametersBuilder()
+				.addString("latestRiotPatch", latestVersion.getPatch())
+				.addDouble("random", Math.random())
+				.toJobParameters();
 	}
 
 }
