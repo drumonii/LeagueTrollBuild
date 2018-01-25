@@ -28,6 +28,8 @@ import javax.validation.Valid;
 @RepositoryRestController
 public class BuildsRestController {
 
+	static final int PAGE_SIZE = 20;
+
 	@Autowired
 	private BuildsRepository buildsRepository;
 
@@ -52,7 +54,7 @@ public class BuildsRestController {
 	 */
 	@GetMapping
 	public PagedResources<Resource<Build>> getBuilds(
-			@PageableDefault(size = 20, sort = "id", direction = Direction.DESC) Pageable pageable, Build build) {
+			@PageableDefault(size = PAGE_SIZE, sort = "id", direction = Direction.DESC) Pageable pageable, Build build) {
 		ExampleMatcher exampleMatcher = ExampleMatcher.matching()
 				.withIgnorePaths("id")
 				.withIgnoreNullValues();

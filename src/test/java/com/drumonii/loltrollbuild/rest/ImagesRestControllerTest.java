@@ -1,13 +1,30 @@
 package com.drumonii.loltrollbuild.rest;
 
-import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.model.*;
+import com.drumonii.loltrollbuild.repository.ChampionsRepository;
+import com.drumonii.loltrollbuild.repository.ItemsRepository;
+import com.drumonii.loltrollbuild.repository.MapsRepository;
+import com.drumonii.loltrollbuild.repository.SummonerSpellsRepository;
+import com.drumonii.loltrollbuild.riot.api.ChampionsResponse;
+import com.drumonii.loltrollbuild.riot.api.ItemsResponse;
+import com.drumonii.loltrollbuild.riot.api.MapsResponse;
+import com.drumonii.loltrollbuild.riot.api.SummonerSpellsResponse;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.io.FilenameUtils;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.core.AutoConfigureCache;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.ZoneId;
 import java.util.Optional;
 
+import static com.drumonii.loltrollbuild.util.GameMapUtil.SUMMONERS_RIFT_SID;
 import static org.assertj.core.api.Fail.fail;
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -15,7 +32,37 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class ImagesRestControllerTest extends BaseSpringTestRunner {
+@RunWith(SpringRunner.class)
+@SpringBootTest
+@AutoConfigureMockMvc
+@AutoConfigureCache
+@Transactional
+public abstract class ImagesRestControllerTest {
+
+	@Autowired
+	private MockMvc mockMvc;
+
+	@Autowired
+	protected ObjectMapper objectMapper;
+
+	@Autowired
+	private ChampionsRepository championsRepository;
+
+	@Autowired
+	private ItemsRepository itemsRepository;
+
+	@Autowired
+	private MapsRepository mapsRepository;
+
+	@Autowired
+	private SummonerSpellsRepository summonerSpellsRepository;
+
+	protected ChampionsResponse championsResponse;
+	protected ItemsResponse itemsResponse;
+	protected MapsResponse mapsResponse;
+	protected SummonerSpellsResponse summonerSpellsResponse;
+
+	public abstract void before();
 
 	@Test
 	public void summonerSpellImg() throws Exception {
@@ -101,7 +148,7 @@ public class ImagesRestControllerTest extends BaseSpringTestRunner {
 
 	@Test
 	public void mapImg() throws Exception {
-		GameMap summonersRift = mapsResponse.getMaps().get(SUMMONERS_RIFT);
+		GameMap summonersRift = mapsResponse.getMaps().get(SUMMONERS_RIFT_SID);
 		summonersRift = mapsRepository.save(summonersRift);
 
 		String fileExt = FilenameUtils.getExtension(summonersRift.getImage().getFull());

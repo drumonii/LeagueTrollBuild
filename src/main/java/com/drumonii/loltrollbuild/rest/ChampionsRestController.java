@@ -26,6 +26,8 @@ import static org.springframework.data.domain.ExampleMatcher.StringMatcher.CONTA
 @RepositoryRestController
 public class ChampionsRestController {
 
+	static final int PAGE_SIZE = 20;
+
 	@Autowired
 	private ChampionsRepository championsRepository;
 
@@ -41,7 +43,7 @@ public class ChampionsRestController {
 	 */
 	@GetMapping
 	public PagedResources<Resource<Champion>> getChampions(
-			@PageableDefault(size = 20, sort = "name", direction = Direction.ASC) Pageable pageable,
+			@PageableDefault(size = PAGE_SIZE, sort = "name", direction = Direction.ASC) Pageable pageable,
 			Champion champion) {
 		ExampleMatcher exampleMatcher = ExampleMatcher.matching()
 				.withMatcher("name", matcher -> matcher.stringMatcher(CONTAINING))

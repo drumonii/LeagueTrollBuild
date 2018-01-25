@@ -19,9 +19,13 @@ import static com.drumonii.loltrollbuild.model.SummonerSpell.GameMode.CLASSIC;
 public class GameMapUtil {
 
 	public static final int CRYSTAL_SCAR_ID = 8;
+	public static final String CRYSTAL_SCAR_SID = "8";
 	public static final int TWISTED_TREELINE_ID = 10;
+	public static final String TWISTED_TREELINE_SID = "10";
 	public static final int SUMMONERS_RIFT_ID = 11;
+	public static final String SUMMONERS_RIFT_SID = "11";
 	public static final int HOWLING_ABYSS_ID = 12;
+	public static final String HOWLING_ABYSS_SID = "12";
 
 	public static final String CRYSTAL_SCAR = "The Crystal Scar";
 	public static final String TWISTED_TREELINE = "The Twisted Treeline";

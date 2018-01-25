@@ -31,6 +31,8 @@ import static org.springframework.hateoas.mvc.BasicLinkBuilder.linkToCurrentMapp
 @RepositoryRestController
 public class ItemsRestController {
 
+	static final int PAGE_SIZE = 20;
+
 	@Autowired
 	private ItemsRepository itemsRepository;
 
@@ -46,7 +48,7 @@ public class ItemsRestController {
 	 */
 	@GetMapping
 	public PagedResources<Resource<Item>> getItems(
-			@PageableDefault(size = 20, sort = "name", direction = Direction.ASC) Pageable pageable,
+			@PageableDefault(size = PAGE_SIZE, sort = "name", direction = Direction.ASC) Pageable pageable,
 			Item item) {
 		ExampleMatcher exampleMatcher = ExampleMatcher.matching()
 				.withMatcher("name", matcher -> matcher.stringMatcher(CONTAINING))

@@ -1,130 +1,143 @@
 package com.drumonii.loltrollbuild.rest;
 
-import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.model.Item;
+import com.drumonii.loltrollbuild.repository.ItemsRepository;
 import com.drumonii.loltrollbuild.riot.api.ItemsResponse;
 import com.drumonii.loltrollbuild.util.RandomizeUtil;
-import org.junit.Before;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.test.autoconfigure.core.AutoConfigureCache;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.stream.Collectors;
 
+import static com.drumonii.loltrollbuild.rest.ItemsRestController.PAGE_SIZE;
+import static com.drumonii.loltrollbuild.util.GameMapUtil.SUMMONERS_RIFT_SID;
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.hamcrest.Matchers.hasEntry;
 import static org.hamcrest.Matchers.hasItem;
-import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class ItemsRestControllerTest extends BaseSpringTestRunner {
+@RunWith(SpringRunner.class)
+@SpringBootTest
+@AutoConfigureMockMvc
+@AutoConfigureCache
+@Transactional
+public abstract class ItemsRestControllerTest {
 
-	private ItemsResponse itemsResponseSlice;
+	private static final MediaType HAL_JSON_UTF8 = new MediaType("application", "hal+json", UTF_8);
 
-	@Before
-	public void before() {
-		super.before();
+	@Autowired
+	private MockMvc mockMvc;
 
-		itemsResponseSlice = new ItemsResponse();
-		itemsResponseSlice.setType(itemsResponse.getType());
-		itemsResponseSlice.setVersion(itemsResponse.getVersion());
-	}
+	@Autowired
+	protected ItemsRepository itemsRepository;
+
+	@Autowired
+	protected ObjectMapper objectMapper;
+
+	@Value("${spring.data.rest.base-path}")
+	private String apiPath;
+
+	protected ItemsResponse itemsResponse;
+
+	public abstract void before();
 
 	@Test
 	public void getItems() throws Exception {
-		itemsResponseSlice.setItems(itemsResponse.getItems().values().stream()
+		itemsResponse.setItems(itemsResponse.getItems().values().stream()
 				.filter(item -> item.getRequiredChampion() != null)
 				.collect(Collectors.toMap(item -> String.valueOf(item.getId()), item -> item)));
-		itemsRepository.save(itemsResponseSlice.getItems().values());
+		itemsRepository.save(itemsResponse.getItems().values());
 
-		Item item = RandomizeUtil.getRandom(itemsResponseSlice.getItems().values());
+		Item item = RandomizeUtil.getRandom(itemsResponse.getItems().values());
 
 		// qbe
-		mockMvc.perform(get(apiPath + "/items"))
+		mockMvc.perform(get("{apiPath}/items", apiPath))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(HAL_JSON_UTF8))
-				.andExpect(jsonPath("$._embedded.items",
-						hasSize(itemsResponseSlice.getItems().values().size())))
+				.andExpect(jsonPath("$._embedded.items").exists())
 				.andExpect(jsonPath("$._links").exists())
 				.andExpect(jsonPath("$._links.self").exists())
 				.andExpect(jsonPath("$._links.self.href").exists())
 				.andExpect(jsonPath("$.page").exists())
-				.andExpect(jsonPath("$.page.size", is(20)))
-				.andExpect(jsonPath("$.page.totalElements", is(itemsResponseSlice.getItems().values().size())))
-				.andExpect(jsonPath("$.page.totalPages", is(
-						(int) Math.ceil((double) itemsResponseSlice.getItems().values().size() / (double) 20))))
+				.andExpect(jsonPath("$.page.size", is(PAGE_SIZE)))
+				.andExpect(jsonPath("$.page.totalElements").exists())
+				.andExpect(jsonPath("$.page.totalPages").exists())
 				.andExpect(jsonPath("$.page.number", is(0)));
 
 		// qbe with name
-		mockMvc.perform(get(apiPath + "/items")
+		mockMvc.perform(get("{apiPath}/items", apiPath)
 				.param("name", item.getName().toLowerCase()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(HAL_JSON_UTF8))
-				.andExpect(jsonPath("$._embedded.items").isNotEmpty())
+				.andExpect(jsonPath("$._embedded.items").exists())
 				.andExpect(jsonPath("$._links").exists())
 				.andExpect(jsonPath("$._links.self").exists())
 				.andExpect(jsonPath("$._links.self.href").exists())
 				.andExpect(jsonPath("$.page").exists())
-				.andExpect(jsonPath("$.page.size", is(20)))
+				.andExpect(jsonPath("$.page.size", is(PAGE_SIZE)))
 				.andExpect(jsonPath("$.page.totalElements").exists())
-				.andExpect(jsonPath("$.page.totalPages", is(1)))
-				.andExpect(jsonPath("$.page.number", is(0)));
+				.andExpect(jsonPath("$.page.totalPages").exists())
+				.andExpect(jsonPath("$.page.number").exists());
 
 		// qbe with required champion
-		mockMvc.perform(get(apiPath + "/items")
+		mockMvc.perform(get("{apiPath}/items", apiPath)
 				.param("requiredChampion", item.getRequiredChampion().toLowerCase()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(HAL_JSON_UTF8))
-				.andExpect(jsonPath("$._embedded.items", hasSize(
-						(int) itemsResponseSlice.getItems().values().stream()
-								.filter(i -> i.getRequiredChampion().equals(item.getRequiredChampion()))
-								.count())))
+				.andExpect(jsonPath("$._embedded.items").exists())
 				.andExpect(jsonPath("$._links").exists())
 				.andExpect(jsonPath("$._links.self").exists())
 				.andExpect(jsonPath("$._links.self.href").exists())
 				.andExpect(jsonPath("$.page").exists())
-				.andExpect(jsonPath("$.page.size", is(20)))
-				.andExpect(jsonPath("$.page.totalElements", is(
-						(int) itemsResponseSlice.getItems().values().stream()
-								.filter(i -> i.getRequiredChampion().equals(item.getRequiredChampion()))
-								.count())))
-				.andExpect(jsonPath("$.page.totalPages", is(
-						(int) Math.ceil((double) itemsResponseSlice.getItems().values().stream()
-								.filter(i -> i.getRequiredChampion().equals(item.getRequiredChampion()))
-								.count() / (double) 20))))
+				.andExpect(jsonPath("$.page.size", is(PAGE_SIZE)))
+				.andExpect(jsonPath("$.page.totalElements").exists())
+				.andExpect(jsonPath("$.page.totalPages").exists())
 				.andExpect(jsonPath("$.page.number", is(0)));
 
 		// qbe with no results
-		mockMvc.perform(get(apiPath + "/items")
+		mockMvc.perform(get("{apiPath}/items", apiPath)
 				.param("name", "abcd1234"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(HAL_JSON_UTF8))
 				.andExpect(jsonPath("$._embedded").doesNotExist())
 				.andExpect(jsonPath("$._links.self").exists())
 				.andExpect(jsonPath("$._links.self.href").exists())
-				.andExpect(jsonPath("$.page.size", is(20)))
-				.andExpect(jsonPath("$.page.totalElements", is(0)))
-				.andExpect(jsonPath("$.page.totalPages", is(0)))
-				.andExpect(jsonPath("$.page.number", is(0)));
+				.andExpect(jsonPath("$.page.size", is(PAGE_SIZE)))
+				.andExpect(jsonPath("$.page.totalElements").exists())
+				.andExpect(jsonPath("$.page.totalPages").exists())
+				.andExpect(jsonPath("$.page.number").exists());
 	}
 
 	@Test
 	public void getBoots() throws Exception {
-		itemsResponseSlice.setItems(itemsResponse.getItems().values().stream()
+		itemsResponse.setItems(itemsResponse.getItems().values().stream()
 				.filter(item -> item.getFrom() != null && item.getFrom().contains(1001))
 				.collect(Collectors.toMap(item -> String.valueOf(item.getId()), item -> item)));
-		itemsRepository.save(itemsResponseSlice.getItems().values());
+		itemsRepository.save(itemsResponse.getItems().values());
 
-		mockMvc.perform(get(apiPath + "/items/boots")
-				.param("mapId", SUMMONERS_RIFT))
+		mockMvc.perform(get("{apiPath}/items/boots", apiPath)
+				.param("mapId", SUMMONERS_RIFT_SID))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(HAL_JSON_UTF8))
 				.andExpect(jsonPath("$._embedded.items").exists())
 				.andExpect(jsonPath("$._embedded.items[*].group").exists())
 				.andExpect(jsonPath("$._embedded.items[*].from").isNotEmpty())
 				.andExpect(jsonPath("$._embedded.items[*].into").exists())
-				.andExpect(jsonPath("$._embedded.items[*].maps", hasItem(hasEntry(SUMMONERS_RIFT, true))))
+				.andExpect(jsonPath("$._embedded.items[*].maps", hasItem(hasEntry(SUMMONERS_RIFT_SID, true))))
 				.andExpect(jsonPath("$._embedded.items[*].gold.purchasable", hasItem(true)))
 				.andExpect(jsonPath("$._embedded.items[*]._links").exists())
 				.andExpect(jsonPath("$._embedded.items[*]._links.from").exists())
@@ -137,21 +150,21 @@ public class ItemsRestControllerTest extends BaseSpringTestRunner {
 
 	@Test
 	public void getTrinkets() throws Exception {
-		itemsResponseSlice.setItems(itemsResponse.getItems().values().stream()
+		itemsResponse.setItems(itemsResponse.getItems().values().stream()
 				.filter(item -> item.getName() != null && item.getName().contains("Trinket") &&
 						item.getDescription() != null && item.getDescription().contains("Trinket"))
 				.collect(Collectors.toMap(item -> String.valueOf(item.getId()), item -> item)));
-		itemsRepository.save(itemsResponseSlice.getItems().values());
+		itemsRepository.save(itemsResponse.getItems().values());
 
-		mockMvc.perform(get(apiPath + "/items/trinkets")
-				.param("mapId", SUMMONERS_RIFT))
+		mockMvc.perform(get("{apiPath}/items/trinkets", apiPath)
+				.param("mapId", SUMMONERS_RIFT_SID))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(HAL_JSON_UTF8))
 				.andExpect(jsonPath("$._embedded.items").exists())
 				.andExpect(jsonPath("$._embedded.items[*].group").exists())
 				.andExpect(jsonPath("$._embedded.items[*].from").isNotEmpty())
 				.andExpect(jsonPath("$._embedded.items[*].into").isNotEmpty())
-				.andExpect(jsonPath("$._embedded.items[*].maps", hasItem(hasEntry(SUMMONERS_RIFT, true))))
+				.andExpect(jsonPath("$._embedded.items[*].maps", hasItem(hasEntry(SUMMONERS_RIFT_SID, true))))
 				.andExpect(jsonPath("$._embedded.items[*].gold.purchasable", hasItem(true)))
 				.andExpect(jsonPath("$._embedded.items[*]._links").exists())
 				.andExpect(jsonPath("$._embedded.items[*]._links.from").doesNotExist())
@@ -164,20 +177,20 @@ public class ItemsRestControllerTest extends BaseSpringTestRunner {
 
 	@Test
 	public void getViktorOnly() throws Exception {
-		itemsResponseSlice.setItems(itemsResponse.getItems().values().stream()
+		itemsResponse.setItems(itemsResponse.getItems().values().stream()
 				.filter(item -> item.getRequiredChampion() != null &&
 						item.getRequiredChampion().equals("Viktor"))
 				.collect(Collectors.toMap(item -> String.valueOf(item.getId()), item -> item)));
-		itemsRepository.save(itemsResponseSlice.getItems().values());
+		itemsRepository.save(itemsResponse.getItems().values());
 
-		mockMvc.perform(get(apiPath + "/items/viktor-only"))
+		mockMvc.perform(get("{apiPath}/items/viktor-only", apiPath))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(HAL_JSON_UTF8))
 				.andExpect(jsonPath("$._embedded.items").exists())
 				.andExpect(jsonPath("$._embedded.items[*].from").isNotEmpty())
 				.andExpect(jsonPath("$._embedded.items[*].into").isNotEmpty())
 				.andExpect(jsonPath("$._embedded.items[*].requiredChampion", hasItem("Viktor")))
-				.andExpect(jsonPath("$._embedded.items[*].maps", hasItem(hasEntry(SUMMONERS_RIFT, true))))
+				.andExpect(jsonPath("$._embedded.items[*].maps", hasItem(hasEntry(SUMMONERS_RIFT_SID, true))))
 				.andExpect(jsonPath("$._embedded.items[*]._links").exists())
 				.andExpect(jsonPath("$._embedded.items[*]._links.from").exists())
 				.andExpect(jsonPath("$._embedded.items[*]._links.into").exists())
@@ -191,14 +204,14 @@ public class ItemsRestControllerTest extends BaseSpringTestRunner {
 	public void getForTrollBuild() throws Exception {
 		itemsRepository.save(itemsResponse.getItems().values());
 
-		mockMvc.perform(get(apiPath + "/items/for-troll-build")
-				.param("mapId", SUMMONERS_RIFT))
+		mockMvc.perform(get("{apiPath}/items/for-troll-build", apiPath)
+				.param("mapId", SUMMONERS_RIFT_SID))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(HAL_JSON_UTF8))
 				.andExpect(jsonPath("$._embedded.items").exists())
 				.andExpect(jsonPath("$._embedded.items[*].from").isNotEmpty())
 				.andExpect(jsonPath("$._embedded.items[*].into").isNotEmpty())
-				.andExpect(jsonPath("$._embedded.items[*].maps", hasItem(hasEntry(SUMMONERS_RIFT, true))))
+				.andExpect(jsonPath("$._embedded.items[*].maps", hasItem(hasEntry(SUMMONERS_RIFT_SID, true))))
 				.andExpect(jsonPath("$._embedded.items[*].gold.purchasable", hasItem(true)))
 				.andExpect(jsonPath("$._embedded.items[*]._links").exists())
 				.andExpect(jsonPath("$._embedded.items[*]._links.from").exists())

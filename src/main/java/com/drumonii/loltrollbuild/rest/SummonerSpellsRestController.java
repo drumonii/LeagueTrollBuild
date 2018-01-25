@@ -32,6 +32,8 @@ import static org.springframework.hateoas.mvc.BasicLinkBuilder.linkToCurrentMapp
 @RepositoryRestController
 public class SummonerSpellsRestController {
 
+	static final int PAGE_SIZE = 20;
+
 	@Autowired
 	private SummonerSpellsRepository summonerSpellsRepository;
 
@@ -47,7 +49,7 @@ public class SummonerSpellsRestController {
 	 */
 	@GetMapping
 	public PagedResources<Resource<SummonerSpell>> getSummonerSpells(
-			@PageableDefault(size = 20, sort = "name", direction = Direction.ASC) Pageable pageable,
+			@PageableDefault(size = PAGE_SIZE, sort = "name", direction = Direction.ASC) Pageable pageable,
 			SummonerSpell summonerSpell) {
 		ExampleMatcher exampleMatcher = ExampleMatcher.matching()
 				.withMatcher("name", matcher -> matcher.stringMatcher(CONTAINING))

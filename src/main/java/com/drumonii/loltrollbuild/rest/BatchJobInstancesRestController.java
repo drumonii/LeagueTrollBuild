@@ -32,6 +32,8 @@ import static org.springframework.data.domain.ExampleMatcher.StringMatcher.CONTA
 @PreAuthorize("hasRole('ADMIN')")
 public class BatchJobInstancesRestController {
 
+	static final int PAGE_SIZE = 20;
+
 	@Autowired
 	private ProjectionFactory projectionFactory;
 
@@ -50,7 +52,7 @@ public class BatchJobInstancesRestController {
 	 */
 	@GetMapping
 	public PagedResources<Resource<BatchJobInstanceProjection>> getBatchJobInstances(
-			@PageableDefault(size = 20, sort = "id", direction = Direction.ASC) Pageable pageable,
+			@PageableDefault(size = PAGE_SIZE, sort = "id", direction = Direction.ASC) Pageable pageable,
 			BatchJobInstance jobInstance) {
 		ExampleMatcher exampleMatcher = ExampleMatcher.matching()
 				.withMatcher("name", matcher -> matcher.stringMatcher(CONTAINING))

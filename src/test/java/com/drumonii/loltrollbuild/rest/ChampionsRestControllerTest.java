@@ -1,124 +1,130 @@
 package com.drumonii.loltrollbuild.rest;
 
-import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.model.Champion;
+import com.drumonii.loltrollbuild.repository.ChampionsRepository;
 import com.drumonii.loltrollbuild.riot.api.ChampionsResponse;
 import com.drumonii.loltrollbuild.util.RandomizeUtil;
-import org.junit.Before;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.test.autoconfigure.core.AutoConfigureCache;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.stream.Collectors;
-
-import static org.hamcrest.Matchers.hasSize;
+import static com.drumonii.loltrollbuild.rest.ChampionsRestController.PAGE_SIZE;
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class ChampionsRestControllerTest extends BaseSpringTestRunner {
+@RunWith(SpringRunner.class)
+@SpringBootTest
+@AutoConfigureMockMvc
+@AutoConfigureCache
+@Transactional
+public abstract class ChampionsRestControllerTest {
 
-	private ChampionsResponse championsResponseSlice;
+	private static final MediaType HAL_JSON_UTF8 = new MediaType("application", "hal+json", UTF_8);
 
-	@Before
-	public void before() {
-		super.before();
+	@Autowired
+	private MockMvc mockMvc;
 
-		championsResponseSlice = new ChampionsResponse();
-		championsResponseSlice.setType(championsResponse.getType());
-		championsResponseSlice.setVersion(championsResponse.getVersion());
-		championsResponseSlice.setChampions(RandomizeUtil.getRandoms(
-				championsResponse.getChampions().values(), DEFAULT_PAGE_SIZE).stream()
-				.collect(Collectors.toMap(champion -> String.valueOf(champion.getId()), champion -> champion)));
-		championsRepository.save(championsResponseSlice.getChampions().values());
-	}
+	@Autowired
+	protected ChampionsRepository championsRepository;
+
+	@Autowired
+	protected ObjectMapper objectMapper;
+
+	@Value("${spring.data.rest.base-path}")
+	private String apiPath;
+
+	protected ChampionsResponse championsResponse;
+
+	public abstract void before();
 
 	@Test
 	public void getChampions() throws Exception {
-		Champion champion = RandomizeUtil.getRandom(championsResponseSlice.getChampions().values());
+		Champion champion = RandomizeUtil.getRandom(championsResponse.getChampions().values());
 
 		// qbe
-		mockMvc.perform(get(apiPath + "/champions"))
+		mockMvc.perform(get("{apiPath}/champions", apiPath))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(HAL_JSON_UTF8))
-				.andExpect(jsonPath("$._embedded.champions",
-						hasSize(championsResponseSlice.getChampions().values().size())))
+				.andExpect(jsonPath("$._embedded.champions").exists())
 				.andExpect(jsonPath("$._links").exists())
 				.andExpect(jsonPath("$._links.self").exists())
 				.andExpect(jsonPath("$._links.self.href").exists())
 				.andExpect(jsonPath("$.page").exists())
-				.andExpect(jsonPath("$.page.size", is(20)))
-				.andExpect(jsonPath("$.page.totalElements", is(championsResponseSlice.getChampions().values().size())))
-				.andExpect(jsonPath("$.page.totalPages", is(
-						(int) Math.ceil((double) championsResponseSlice.getChampions().values().size() / (double) 20))))
-				.andExpect(jsonPath("$.page.number", is(0)));
+				.andExpect(jsonPath("$.page.size", is(PAGE_SIZE)))
+				.andExpect(jsonPath("$.page.totalElements").exists())
+				.andExpect(jsonPath("$.page.totalPages").exists())
+				.andExpect(jsonPath("$.page.number").exists());
 
 		// qbe with name
-		mockMvc.perform(get(apiPath + "/champions")
+		mockMvc.perform(get("{apiPath}/champions", apiPath)
 				.param("name", champion.getName().toLowerCase()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(HAL_JSON_UTF8))
-				.andExpect(jsonPath("$._embedded.champions", hasSize(1)))
+				.andExpect(jsonPath("$._embedded.champions").exists())
 				.andExpect(jsonPath("$._links").exists())
 				.andExpect(jsonPath("$._links.self").exists())
 				.andExpect(jsonPath("$._links.self.href").exists())
 				.andExpect(jsonPath("$.page").exists())
-				.andExpect(jsonPath("$.page.size", is(20)))
-				.andExpect(jsonPath("$.page.totalElements", is(1)))
-				.andExpect(jsonPath("$.page.totalPages", is(1)))
-				.andExpect(jsonPath("$.page.number", is(0)));
+				.andExpect(jsonPath("$.page.size", is(PAGE_SIZE)))
+				.andExpect(jsonPath("$.page.totalElements").exists())
+				.andExpect(jsonPath("$.page.totalPages").exists())
+				.andExpect(jsonPath("$.page.number").exists());
 
 		// qbe with title
-		mockMvc.perform(get(apiPath + "/champions")
+		mockMvc.perform(get("{apiPath}/champions", apiPath)
 				.param("title", champion.getTitle().toLowerCase()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(HAL_JSON_UTF8))
-				.andExpect(jsonPath("$._embedded.champions", hasSize(1)))
+				.andExpect(jsonPath("$._embedded.champions").exists())
 				.andExpect(jsonPath("$._links").exists())
 				.andExpect(jsonPath("$._links.self").exists())
 				.andExpect(jsonPath("$._links.self.href").exists())
 				.andExpect(jsonPath("$.page").exists())
-				.andExpect(jsonPath("$.page.size", is(20)))
-				.andExpect(jsonPath("$.page.totalElements", is(1)))
-				.andExpect(jsonPath("$.page.totalPages", is(1)))
-				.andExpect(jsonPath("$.page.number", is(0)));
+				.andExpect(jsonPath("$.page.size", is(PAGE_SIZE)))
+				.andExpect(jsonPath("$.page.totalElements").exists())
+				.andExpect(jsonPath("$.page.totalPages").exists())
+				.andExpect(jsonPath("$.page.number").exists());
 
 		// qbe with partype
-		mockMvc.perform(get(apiPath + "/champions")
+		mockMvc.perform(get("{apiPath}/champions", apiPath)
 				.param("partype", champion.getPartype().toLowerCase()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(HAL_JSON_UTF8))
-				.andExpect(jsonPath("$._embedded.champions", hasSize(
-						(int) championsResponseSlice.getChampions().values().stream()
-								.filter(c -> c.getPartype().equals(champion.getPartype()))
-								.count())))
+				.andExpect(jsonPath("$._embedded.champions").exists())
 				.andExpect(jsonPath("$._links").exists())
 				.andExpect(jsonPath("$._links.self").exists())
 				.andExpect(jsonPath("$._links.self.href").exists())
 				.andExpect(jsonPath("$.page").exists())
-				.andExpect(jsonPath("$.page.size", is(20)))
-				.andExpect(jsonPath("$.page.totalElements", is(
-						(int) championsResponseSlice.getChampions().values().stream()
-								.filter(c -> c.getPartype().equals(champion.getPartype()))
-								.count())))
-				.andExpect(jsonPath("$.page.totalPages", is(
-						(int) Math.ceil((double) championsResponseSlice.getChampions().values().stream()
-								.filter(c -> c.getPartype().equals(champion.getPartype()))
-								.count() / (double) 20))))
-				.andExpect(jsonPath("$.page.number", is(0)));
+				.andExpect(jsonPath("$.page.size", is(PAGE_SIZE)))
+				.andExpect(jsonPath("$.page.totalElements").exists())
+				.andExpect(jsonPath("$.page.totalPages").exists())
+				.andExpect(jsonPath("$.page.number").exists());
 
 		// qbe with no results
-		mockMvc.perform(get(apiPath + "/champions")
+		mockMvc.perform(get("{apiPath}/champions", apiPath)
 				.param("name", "abcd1234"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(HAL_JSON_UTF8))
 				.andExpect(jsonPath("$._embedded").doesNotExist())
 				.andExpect(jsonPath("$._links.self").exists())
 				.andExpect(jsonPath("$._links.self.href").exists())
-				.andExpect(jsonPath("$.page.size", is(20)))
-				.andExpect(jsonPath("$.page.totalElements", is(0)))
-				.andExpect(jsonPath("$.page.totalPages", is(0)))
-				.andExpect(jsonPath("$.page.number", is(0)));
+				.andExpect(jsonPath("$.page.size", is(PAGE_SIZE)))
+				.andExpect(jsonPath("$.page.totalElements").exists())
+				.andExpect(jsonPath("$.page.totalPages").exists())
+				.andExpect(jsonPath("$.page.number").exists());
 	}
 
 }

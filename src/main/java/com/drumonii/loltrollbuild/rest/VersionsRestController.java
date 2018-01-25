@@ -24,6 +24,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RepositoryRestController
 public class VersionsRestController {
 
+	static final int PAGE_SIZE = 20;
+
 	@Autowired
 	private VersionsRepository versionsRepository;
 
@@ -39,7 +41,7 @@ public class VersionsRestController {
 	 */
 	@GetMapping
 	public PagedResources<Resource<Version>> getVersions(
-			@PageableDefault(size = 20, sort =  { "major", "minor", "revision" }, direction = Direction.DESC)
+			@PageableDefault(size = PAGE_SIZE, sort =  { "major", "minor", "revision" }, direction = Direction.DESC)
 					Pageable pageable, Version version) {
 		ExampleMatcher exampleMatcher = ExampleMatcher.matching()
 				.withIgnorePaths("major", "minor", "revision");
