@@ -1,9 +1,38 @@
-package com.drumonii.loltrollbuild;
+package com.drumonii.loltrollbuild.doc;
 
 import com.drumonii.loltrollbuild.model.*;
+import com.drumonii.loltrollbuild.repository.*;
+import com.drumonii.loltrollbuild.riot.api.ChampionsResponse;
+import com.drumonii.loltrollbuild.riot.api.ItemsResponse;
+import com.drumonii.loltrollbuild.riot.api.MapsResponse;
+import com.drumonii.loltrollbuild.riot.api.SummonerSpellsResponse;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.restdocs.payload.FieldDescriptor;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
+import java.util.Collections;
+import java.util.List;
+
+import static com.drumonii.loltrollbuild.config.Profiles.STATIC_DATA;
+import static com.drumonii.loltrollbuild.config.Profiles.TESTING;
+import static com.drumonii.loltrollbuild.util.GameMapUtil.HOWLING_ABYSS_SID;
+import static com.drumonii.loltrollbuild.util.GameMapUtil.SUMMONERS_RIFT_SID;
+import static com.drumonii.loltrollbuild.util.GameMapUtil.TWISTED_TREELINE_SID;
+import static org.assertj.core.api.Assertions.fail;
 import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.linkWithRel;
 import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.links;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
@@ -12,10 +41,84 @@ import static org.springframework.restdocs.payload.PayloadDocumentation.response
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class ApiDocumentation extends BaseSpringTestRunner {
+@RunWith(SpringRunner.class)
+@SpringBootTest(properties = { "riot.static-data.apiKey=API_KEY" })
+@AutoConfigureMockMvc
+@AutoConfigureRestDocs(outputDir = "build/generated-snippets", uriScheme = "https", uriHost = "loltrollbuild.com", uriPort = 443)
+@Transactional
+@ActiveProfiles({ TESTING, STATIC_DATA })
+public class ApiDocumentation {
 
 	private final FieldDescriptor pageField =
 			fieldWithPath("page").description("Current page settings of the paginated results");
+
+	@Autowired
+	private MockMvc mockMvc;
+
+	@Autowired
+	private ObjectMapper objectMapper;
+
+	@Value("${spring.data.rest.base-path}")
+	private String apiPath;
+
+	@Autowired
+	private BuildsRepository buildsRepository;
+
+	@Autowired
+	private ChampionsRepository championsRepository;
+
+	@Autowired
+	private ItemsRepository itemsRepository;
+
+	@Autowired
+	private MapsRepository mapsRepository;
+
+	@Autowired
+	private SummonerSpellsRepository summonerSpellsRepository;
+
+	@Autowired
+	private VersionsRepository versionsRepository;
+
+	private ChampionsResponse championsResponse;
+	private ItemsResponse itemsResponse;
+	private MapsResponse mapsResponse;
+	private SummonerSpellsResponse summonerSpellsResponse;
+	private List<Version> versions;
+
+	@Before
+	public void before() {
+		ClassPathResource championsJsonResource = new ClassPathResource("champions_static_data.json");
+		try {
+			championsResponse = objectMapper.readValue(championsJsonResource.getFile(), ChampionsResponse.class);
+		} catch (IOException e) {
+			fail("Unable to unmarshal the Champions response.", e);
+		}
+		ClassPathResource itemsJsonResource = new ClassPathResource("items_static_data.json");
+		try {
+			itemsResponse = objectMapper.readValue(itemsJsonResource.getFile(), ItemsResponse.class);
+		} catch (IOException e) {
+			fail("Unable to unmarshal the Items response.", e);
+		}
+		ClassPathResource mapsJsonResource = new ClassPathResource("maps_static_data.json");
+		try {
+			mapsResponse = objectMapper.readValue(mapsJsonResource.getFile(), MapsResponse.class);
+		} catch (IOException e) {
+			fail("Unable to unmarshal the Maps response.", e);
+		}
+		ClassPathResource summonerSpellsJson = new ClassPathResource("summoners_static_data.json");
+		try {
+			summonerSpellsResponse = objectMapper.readValue(summonerSpellsJson.getFile(), SummonerSpellsResponse.class);
+		} catch (IOException e) {
+			fail("Unable to unmarshal the Summoner Spells response.", e);
+		}
+		ClassPathResource versionsJson = new ClassPathResource("versions_static_data.json");
+		try {
+			versions = objectMapper.readValue(versionsJson.getFile(), new TypeReference<List<Version>>() {});
+			versions.sort(Collections.reverseOrder());
+		} catch (IOException e) {
+			fail("Unable to unmarshal the Versions response.", e);
+		}
+	}
 
 	@Test
 	public void index() throws Exception {
@@ -39,7 +142,7 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 	public void getSummonerSpells() throws Exception {
 		summonerSpellsRepository.save(summonerSpellsResponse.getSummonerSpells().get("SummonerExhaust"));
 
-		mockMvc.perform(get(apiPath + "/summoner-spells"))
+		mockMvc.perform(get("{apiPath}/summoner-spells", apiPath))
 				.andExpect(status().isOk())
 				.andDo(document("getSummonerSpells", responseFields(
 						fieldWithPath("_embedded.summonerSpells")
@@ -60,7 +163,7 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 
 		summonerSpellsRepository.save(summonerSpellsResponse.getSummonerSpells().get("SummonerPoroThrow"));
 
-		mockMvc.perform(get(apiPath + "/summoner-spells?name={name}", "poro"))
+		mockMvc.perform(get("{apiPath}/summoner-spells?name={name}", apiPath, "poro"))
 				.andExpect(status().isOk())
 				.andDo(document("summonerSpellsFindBy", responseFields(
 						fieldWithPath("_embedded.summonerSpells")
@@ -85,7 +188,7 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 		SummonerSpell teleport = summonerSpellsRepository.save(summonerSpellsResponse.getSummonerSpells()
 				.get("SummonerTeleport"));
 
-		mockMvc.perform(get(apiPath + "/summoner-spells/{id}", teleport.getId()))
+		mockMvc.perform(get("{apiPath}/summoner-spells/{id}", apiPath, teleport.getId()))
 				.andExpect(status().isOk())
 				.andDo(document("getSummonerSpell", responseFields(
 						fieldWithPath("name")
@@ -109,7 +212,7 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 	public void summonerSpellsForTrollBuild() throws Exception {
 		summonerSpellsRepository.save(summonerSpellsResponse.getSummonerSpells().get("SummonerSmite"));
 
-		mockMvc.perform(get(apiPath + "/summoner-spells/for-troll-build?mode={mode}", "CLASSIC"))
+		mockMvc.perform(get("{apiPath}/summoner-spells/for-troll-build?mode={mode}", apiPath, "CLASSIC"))
 				.andExpect(status().isOk())
 				.andDo(document("summonerSpellsForTrollBuild", responseFields(
 						fieldWithPath("_embedded.summonerSpells")
@@ -138,7 +241,7 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 	public void getItems() throws Exception {
 		itemsRepository.save(itemsResponse.getItems().get("3512"));
 
-		mockMvc.perform(get(apiPath + "/items"))
+		mockMvc.perform(get("{apiPath}/items", apiPath))
 				.andExpect(status().isOk())
 				.andDo(document("getItems", responseFields(
 						fieldWithPath("_embedded.items")
@@ -169,7 +272,7 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 
 		itemsRepository.save(itemsResponse.getItems().get("3069"));
 
-		mockMvc.perform(get(apiPath + "/items?name={name}", "talisman"))
+		mockMvc.perform(get("{apiPath}/items?name={name}", apiPath, "talisman"))
 				.andExpect(status().isOk())
 				.andDo(document("itemsFindBy", responseFields(
 						fieldWithPath("_embedded.items")
@@ -203,7 +306,7 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 	public void getItem() throws Exception {
 		Item warmogs = itemsRepository.save(itemsResponse.getItems().get("3083"));
 
-		mockMvc.perform(get(apiPath + "/items/{id}", warmogs.getId()))
+		mockMvc.perform(get("{apiPath}/items/{id}", apiPath, warmogs.getId()))
 				.andExpect(status().isOk())
 				.andDo(document("getItem", responseFields(
 						fieldWithPath("name")
@@ -235,7 +338,7 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 	public void bootsItems() throws Exception {
 		itemsRepository.save(itemsResponse.getItems().get("3158"));
 
-		mockMvc.perform(get(apiPath + "/items/boots?mapId={mapId}", "11"))
+		mockMvc.perform(get("{apiPath}/items/boots?mapId={mapId}", apiPath, "11"))
 				.andExpect(status().isOk())
 				.andDo(document("bootsItems", responseFields(
 						fieldWithPath("_embedded.items")
@@ -268,7 +371,7 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 	public void trinketItems() throws Exception {
 		itemsRepository.save(itemsResponse.getItems().get("3341"));
 
-		mockMvc.perform(get(apiPath + "/items/trinkets?mapId={mapId}", "11"))
+		mockMvc.perform(get("{apiPath}/items/trinkets?mapId={mapId}", apiPath, "11"))
 				.andExpect(status().isOk())
 				.andDo(document("trinketItems", responseFields(
 						fieldWithPath("_embedded.items")
@@ -301,7 +404,7 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 	public void viktorOnlyItems() throws Exception {
 		itemsRepository.save(itemsResponse.getItems().get("3200"));
 
-		mockMvc.perform(get(apiPath + "/items/viktor-only"))
+		mockMvc.perform(get("{apiPath}/items/viktor-only", apiPath))
 				.andExpect(status().isOk())
 				.andDo(document("viktorOnlyItems", responseFields(
 						fieldWithPath("_embedded.items")
@@ -334,7 +437,7 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 	public void itemsForTrollBuild() throws Exception {
 		itemsRepository.save(itemsResponse.getItems().get("3065"));
 
-		mockMvc.perform(get(apiPath + "/items/for-troll-build?mapId={mapId}", "11"))
+		mockMvc.perform(get("{apiPath}/items/for-troll-build?mapId={mapId}", apiPath, "11"))
 				.andExpect(status().isOk())
 				.andDo(document("itemsForTrollBuild", responseFields(
 						fieldWithPath("_embedded.items")
@@ -371,7 +474,7 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 	public void getChampions() throws Exception {
 		championsRepository.save(championsResponse.getChampions().get("Warwick"));
 
-		mockMvc.perform(get(apiPath + "/champions"))
+		mockMvc.perform(get("{apiPath}/champions", apiPath))
 				.andExpect(status().isOk())
 				.andDo(document("getChampions", responseFields(
 						fieldWithPath("_embedded.champions")
@@ -400,7 +503,7 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 
 		championsRepository.save(championsResponse.getChampions().get("Blitzcrank"));
 
-		mockMvc.perform(get(apiPath + "/champions?name={name}", "blitz"))
+		mockMvc.perform(get("{apiPath}/champions?name={name}", apiPath, "blitz"))
 				.andExpect(status().isOk())
 				.andDo(document("championsFindBy", responseFields(
 						fieldWithPath("_embedded.champions")
@@ -432,7 +535,7 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 	public void getChampion() throws Exception {
 		Champion talon = championsRepository.save(championsResponse.getChampions().get("Talon"));
 
-		mockMvc.perform(get(apiPath + "/champions/{id}", talon.getId()))
+		mockMvc.perform(get("{apiPath}/champions/{id}", apiPath, talon.getId()))
 				.andExpect(status().isOk())
 				.andDo(document("getChampion", responseFields(
 						fieldWithPath("key")
@@ -463,9 +566,9 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 
 	@Test
 	public void getMaps() throws Exception {
-		mapsRepository.save(mapsResponse.getMaps().get(String.valueOf(SUMMONERS_RIFT)));
+		mapsRepository.save(mapsResponse.getMaps().get(SUMMONERS_RIFT_SID));
 
-		mockMvc.perform(get(apiPath + "/maps"))
+		mockMvc.perform(get("{apiPath}/maps", apiPath))
 				.andExpect(status().isOk())
 				.andDo(document("getMaps", responseFields(
 						fieldWithPath("_embedded.maps")
@@ -478,9 +581,9 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 								.description("Links to resources related to Maps"),
 						pageField)));
 
-		mapsRepository.save(mapsResponse.getMaps().get(String.valueOf(TWISTED_TREELINE)));
+		mapsRepository.save(mapsResponse.getMaps().get(TWISTED_TREELINE_SID));
 
-		mockMvc.perform(get(apiPath + "/maps?mapName={mapName}", "treeline"))
+		mockMvc.perform(get("{apiPath}/maps?mapName={mapName}", apiPath, "treeline"))
 				.andExpect(status().isOk())
 				.andDo(document("mapsFindBy", responseFields(
 						fieldWithPath("_embedded.maps")
@@ -496,10 +599,10 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 
 	@Test
 	public void getMap() throws Exception {
-		GameMap summonersRift = mapsResponse.getMaps().get(String.valueOf(HOWLING_ABYSS));
+		GameMap summonersRift = mapsResponse.getMaps().get(HOWLING_ABYSS_SID);
 		mapsRepository.save(summonersRift);
 
-		mockMvc.perform(get(apiPath + "/maps/{id}", summonersRift.getMapId()))
+		mockMvc.perform(get("{apiPath}/maps/{id}", apiPath, summonersRift.getMapId()))
 				.andExpect(status().isOk())
 				.andDo(document("getMap", responseFields(
 						fieldWithPath("mapName")
@@ -518,7 +621,7 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 	public void getVersions() throws Exception {
 		versionsRepository.save(versions.get(0));
 
-		mockMvc.perform(get(apiPath + "/versions"))
+		mockMvc.perform(get("{apiPath}/versions", apiPath))
 				.andExpect(status().isOk())
 				.andDo(document("getVersions", responseFields(
 						fieldWithPath("_embedded.versions")
@@ -538,7 +641,7 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 	public void getVersion() throws Exception {
 		Version version = versionsRepository.save(versions.get(0));
 
-		mockMvc.perform(get(apiPath + "/versions/{version}", version.getPatch()))
+		mockMvc.perform(get("{apiPath}/versions/{version}", apiPath, version.getPatch()))
 				.andExpect(status().isOk())
 				.andDo(document("getVersion", responseFields(
 						fieldWithPath("major")
@@ -568,10 +671,10 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 		build.setSummonerSpell1Id(summonerSpellsResponse.getSummonerSpells().get("SummonerSmite").getId());
 		build.setSummonerSpell2Id(summonerSpellsResponse.getSummonerSpells().get("SummonerTeleport").getId());
 		build.setTrinketId(itemsResponse.getItems().get("3341").getId());
-		build.setMapId(mapsResponse.getMaps().get(SUMMONERS_RIFT).getMapId());
+		build.setMapId(mapsResponse.getMaps().get(SUMMONERS_RIFT_SID).getMapId());
 		buildsRepository.save(build);
 
-		mockMvc.perform(get(apiPath + "/builds"))
+		mockMvc.perform(get("{apiPath}/builds", apiPath))
 				.andExpect(status().isOk())
 				.andDo(document("getBuilds", responseFields(
 						fieldWithPath("_embedded.builds")
@@ -618,10 +721,10 @@ public class ApiDocumentation extends BaseSpringTestRunner {
 		build.setSummonerSpell1Id(summonerSpellsResponse.getSummonerSpells().get("SummonerHaste").getId());
 		build.setSummonerSpell2Id(summonerSpellsResponse.getSummonerSpells().get("SummonerHeal").getId());
 		build.setTrinketId(itemsResponse.getItems().get("3341").getId());
-		build.setMapId(mapsResponse.getMaps().get(SUMMONERS_RIFT).getMapId());
+		build.setMapId(mapsResponse.getMaps().get(SUMMONERS_RIFT_SID).getMapId());
 		build = buildsRepository.save(build);
 
-		mockMvc.perform(get(apiPath + "/builds/{id}", build.getId()))
+		mockMvc.perform(get("{apiPath}/builds/{id}", apiPath, build.getId()))
 				.andExpect(status().isOk())
 				.andDo(document("getBuild", responseFields(
 						fieldWithPath("createdDate")
