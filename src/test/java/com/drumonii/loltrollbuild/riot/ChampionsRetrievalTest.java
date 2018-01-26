@@ -1,16 +1,28 @@
 package com.drumonii.loltrollbuild.riot;
 
-import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.annotation.WithMockAdminUser;
 import com.drumonii.loltrollbuild.model.Champion;
+import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.model.image.Image;
+import com.drumonii.loltrollbuild.repository.ChampionsRepository;
+import com.drumonii.loltrollbuild.riot.api.ChampionsResponse;
+import com.drumonii.loltrollbuild.riot.api.ImageFetcher;
 import com.drumonii.loltrollbuild.riot.service.ChampionsService;
 import com.drumonii.loltrollbuild.riot.service.VersionsService;
 import com.drumonii.loltrollbuild.util.RandomizeUtil;
-import org.junit.Before;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.core.AutoConfigureCache;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.ArrayList;
@@ -31,7 +43,25 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class ChampionsRetrievalTest extends BaseSpringTestRunner {
+@RunWith(SpringRunner.class)
+@SpringBootTest
+@AutoConfigureMockMvc
+@AutoConfigureCache
+@AutoConfigureTestDatabase
+@Transactional
+public abstract class ChampionsRetrievalTest {
+
+	@Autowired
+	private MockMvc mockMvc;
+
+	@Autowired
+	protected ObjectMapper objectMapper;
+
+	@Autowired
+	private ChampionsRepository championsRepository;
+
+	@MockBean
+	private ImageFetcher imageFetcher;
 
 	@MockBean
 	private ChampionsService championsService;
@@ -39,14 +69,13 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 	@MockBean
 	private VersionsService versionsService;
 
-	private Champion leeSin;
+	protected ChampionsResponse championsResponse;
 
-	@Before
-	public void before() {
-		super.before();
+	protected Champion leeSin;
 
-		leeSin = championsResponse.getChampions().get("LeeSin");
-	}
+	protected Version latestVersion;
+
+	public abstract void before();
 
 	@WithMockAdminUser
 	@Test
@@ -64,7 +93,7 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 	public void saveChampions() throws Exception {
 		given(championsService.getChampions()).willReturn(new ArrayList<>(championsResponse.getChampions().values()));
 
-		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
+		given(versionsService.getLatestVersion()).willReturn(latestVersion);
 
 		mockMvc.perform(post("/riot/champions").with(csrf()))
 				.andExpect(status().isOk())
@@ -72,7 +101,7 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 				.andExpect(content().json(objectMapper.writeValueAsString(championsResponse.getChampions().values())));
 
 		verify(imageFetcher, times(3))
-				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(versions.get(0)));
+				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 
 		assertThat(championsRepository.findAll()).containsOnlyElementsOf(championsResponse.getChampions().values());
 	}
@@ -82,7 +111,7 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 	public void saveDifferenceOfChampions() throws Exception {
 		given(championsService.getChampions()).willReturn(new ArrayList<>(championsResponse.getChampions().values()));
 
-		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
+		given(versionsService.getLatestVersion()).willReturn(latestVersion);
 
 		List<Champion> champions = championsRepository.save(championsResponse.getChampions().values());
 
@@ -92,7 +121,7 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 				.andExpect(content().json("[]"));
 
 		verify(imageFetcher, times(3))
-				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(versions.get(0)));
+				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 
 		assertThat(championsRepository.findAll()).containsOnlyElementsOf(champions);
 	}
@@ -106,7 +135,7 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 
 		given(championsService.getChampions()).willReturn(new ArrayList<>(championsResponse.getChampions().values()));
 
-		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
+		given(versionsService.getLatestVersion()).willReturn(latestVersion);
 
 		mockMvc.perform(post("/riot/champions").with(csrf()))
 				.andExpect(status().isOk())
@@ -114,7 +143,7 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 				.andExpect(content().json("[]"));
 
 		verify(imageFetcher, times(3))
-				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(versions.get(0)));
+				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 
 		assertThat(championsRepository.findOne(championToDelete.getId())).isNull();
 	}
@@ -124,7 +153,7 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 	public void saveChampionsWithTruncate() throws Exception {
 		given(championsService.getChampions()).willReturn(new ArrayList<>(championsResponse.getChampions().values()));
 
-		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
+		given(versionsService.getLatestVersion()).willReturn(latestVersion);
 
 		mockMvc.perform(post("/riot/champions?truncate=true").with(csrf()))
 				.andExpect(status().isOk())
@@ -132,7 +161,7 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 				.andExpect(content().json(objectMapper.writeValueAsString(championsResponse.getChampions().values())));
 
 		verify(imageFetcher, times(3))
-				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(versions.get(0)));
+				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 
 		assertThat(championsRepository.findAll()).containsOnlyElementsOf(championsResponse.getChampions().values());
 	}
@@ -162,7 +191,7 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 	public void saveChampion() throws Exception {
 		given(championsService.getChampion(eq(leeSin.getId()))).willReturn(leeSin);
 
-		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
+		given(versionsService.getLatestVersion()).willReturn(latestVersion);
 
 		mockMvc.perform(post("/riot/champions/{id}", leeSin.getId()).with(csrf()))
 				.andExpect(status().isOk())
@@ -170,9 +199,9 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 				.andExpect(content().json(objectMapper.writeValueAsString(leeSin)));
 
 		verify(imageFetcher, times(2))
-				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(versions.get(0)));
+				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 		verify(imageFetcher, times(1))
-				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(versions.get(0)));
+				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 
 		assertThat(championsRepository.findOne(leeSin.getId())).isNotNull();
 	}
@@ -195,7 +224,7 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 
 		given(championsService.getChampion(eq(leeSin.getId()))).willReturn(newLeeSin);
 
-		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
+		given(versionsService.getLatestVersion()).willReturn(latestVersion);
 
 		mockMvc.perform(post("/riot/champions/{id}", leeSin.getId()).with(csrf()))
 				.andExpect(status().isOk())
@@ -203,9 +232,9 @@ public class ChampionsRetrievalTest extends BaseSpringTestRunner {
 				.andExpect(content().json(objectMapper.writeValueAsString(newLeeSin)));
 
 		verify(imageFetcher, times(2))
-				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(versions.get(0)));
+				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 		verify(imageFetcher, times(1))
-				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(versions.get(0)));
+				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 
 		assertThat(championsRepository.findOne(newLeeSin.getId())).isNotNull()
 				.isEqualTo(newLeeSin);

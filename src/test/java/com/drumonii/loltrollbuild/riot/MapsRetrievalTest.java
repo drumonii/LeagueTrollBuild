@@ -1,21 +1,34 @@
 package com.drumonii.loltrollbuild.riot;
 
-import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.annotation.WithMockAdminUser;
 import com.drumonii.loltrollbuild.model.GameMap;
+import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.model.image.Image;
+import com.drumonii.loltrollbuild.repository.MapsRepository;
+import com.drumonii.loltrollbuild.riot.api.ImageFetcher;
+import com.drumonii.loltrollbuild.riot.api.MapsResponse;
 import com.drumonii.loltrollbuild.riot.service.MapsService;
 import com.drumonii.loltrollbuild.riot.service.VersionsService;
 import com.drumonii.loltrollbuild.util.RandomizeUtil;
-import org.junit.Before;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.core.AutoConfigureCache;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.drumonii.loltrollbuild.util.GameMapUtil.SUMMONERS_RIFT_SID;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
@@ -29,7 +42,25 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class MapsRetrievalTest extends BaseSpringTestRunner {
+@RunWith(SpringRunner.class)
+@SpringBootTest
+@AutoConfigureMockMvc
+@AutoConfigureCache
+@AutoConfigureTestDatabase
+@Transactional
+public abstract class MapsRetrievalTest {
+
+	@Autowired
+	private MockMvc mockMvc;
+
+	@Autowired
+	protected ObjectMapper objectMapper;
+
+	@Autowired
+	private MapsRepository mapsRepository;
+
+	@MockBean
+	private ImageFetcher imageFetcher;
 
 	@MockBean
 	private MapsService mapsService;
@@ -37,14 +68,13 @@ public class MapsRetrievalTest extends BaseSpringTestRunner {
 	@MockBean
 	private VersionsService versionsService;
 
-	private GameMap summonersRift;
+	protected MapsResponse mapsResponse;
 
-	@Before
-	public void before() {
-		super.before();
+	protected GameMap summonersRift;
 
-		summonersRift = mapsResponse.getMaps().get(SUMMONERS_RIFT);
-	}
+	protected Version latestVersion;
+
+	public abstract void before();
 
 	@WithMockAdminUser
 	@Test
@@ -62,7 +92,7 @@ public class MapsRetrievalTest extends BaseSpringTestRunner {
 	public void saveMaps() throws Exception {
 		given(mapsService.getMaps()).willReturn(new ArrayList<>(mapsResponse.getMaps().values()));
 
-		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
+		given(versionsService.getLatestVersion()).willReturn(latestVersion);
 
 		mockMvc.perform(post("/riot/maps").with(csrf()))
 				.andExpect(status().isOk())
@@ -70,7 +100,7 @@ public class MapsRetrievalTest extends BaseSpringTestRunner {
 				.andExpect(content().json(objectMapper.writeValueAsString(mapsResponse.getMaps().values())));
 
 		verify(imageFetcher, times(1))
-				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(versions.get(0)));
+				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 
 		assertThat(mapsRepository.findAll())
 				.containsOnlyElementsOf(mapsResponse.getMaps().values());
@@ -81,7 +111,7 @@ public class MapsRetrievalTest extends BaseSpringTestRunner {
 	public void saveDifferenceOfMaps() throws Exception {
 		given(mapsService.getMaps()).willReturn(new ArrayList<>(mapsResponse.getMaps().values()));
 
-		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
+		given(versionsService.getLatestVersion()).willReturn(latestVersion);
 
 		List<GameMap> maps = mapsRepository.save(mapsResponse.getMaps().values());
 
@@ -91,7 +121,7 @@ public class MapsRetrievalTest extends BaseSpringTestRunner {
 				.andExpect(content().json("[]"));
 
 		verify(imageFetcher, times(1))
-				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(versions.get(0)));
+				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 
 		assertThat(mapsRepository.findAll()).containsOnlyElementsOf(maps);
 	}
@@ -105,7 +135,7 @@ public class MapsRetrievalTest extends BaseSpringTestRunner {
 
 		given(mapsService.getMaps()).willReturn(new ArrayList<>(mapsResponse.getMaps().values()));
 
-		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
+		given(versionsService.getLatestVersion()).willReturn(latestVersion);
 
 		mockMvc.perform(post("/riot/maps").with(csrf()))
 				.andExpect(status().isOk())
@@ -113,7 +143,7 @@ public class MapsRetrievalTest extends BaseSpringTestRunner {
 				.andExpect(content().json("[]"));
 
 		verify(imageFetcher, times(1))
-				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(versions.get(0)));
+				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 
 		assertThat(mapsRepository.findOne(mapToDelete.getMapId())).isNull();
 	}
@@ -123,7 +153,7 @@ public class MapsRetrievalTest extends BaseSpringTestRunner {
 	public void saveMapsWithTruncate() throws Exception {
 		given(mapsService.getMaps()).willReturn(new ArrayList<>(mapsResponse.getMaps().values()));
 
-		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
+		given(versionsService.getLatestVersion()).willReturn(latestVersion);
 
 		mockMvc.perform(post("/riot/maps?truncate=true").with(csrf()))
 				.andExpect(status().isOk())
@@ -131,7 +161,7 @@ public class MapsRetrievalTest extends BaseSpringTestRunner {
 				.andExpect(content().json(objectMapper.writeValueAsString(mapsResponse.getMaps().values())));
 
 		verify(imageFetcher, times(1))
-				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(versions.get(0)));
+				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 
 		assertThat(mapsRepository.findAll())
 				.containsOnlyElementsOf(mapsResponse.getMaps().values());
@@ -162,7 +192,7 @@ public class MapsRetrievalTest extends BaseSpringTestRunner {
 	public void saveMap() throws Exception {
 		given(mapsService.getMap(eq(summonersRift.getMapId()))).willReturn(summonersRift);
 
-		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
+		given(versionsService.getLatestVersion()).willReturn(latestVersion);
 
 		mockMvc.perform(post("/riot/maps/{id}", summonersRift.getMapId()).with(csrf()))
 				.andExpect(status().isOk())
@@ -170,7 +200,7 @@ public class MapsRetrievalTest extends BaseSpringTestRunner {
 				.andExpect(content().json(objectMapper.writeValueAsString(summonersRift)));
 
 		verify(imageFetcher, times(1))
-				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(versions.get(0)));
+				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 
 		assertThat(mapsRepository.findOne(summonersRift.getMapId())).isNotNull();
 	}
@@ -188,13 +218,13 @@ public class MapsRetrievalTest extends BaseSpringTestRunner {
 	@Test
 	public void saveMapWithOverwrite() throws Exception {
 		mapsRepository.save(summonersRift);
-		GameMap newSummonersRift = mapsResponse.getMaps().get(SUMMONERS_RIFT);
+		GameMap newSummonersRift = mapsResponse.getMaps().get(SUMMONERS_RIFT_SID);
 		newSummonersRift.setMapName("New Summoners Rift");
 		mapsResponse.getMaps().put(String.valueOf(newSummonersRift.getMapId()), newSummonersRift);
 
 		given(mapsService.getMap(eq(summonersRift.getMapId()))).willReturn(newSummonersRift);
 
-		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
+		given(versionsService.getLatestVersion()).willReturn(latestVersion);
 
 		mockMvc.perform(post("/riot/maps/{id}", summonersRift.getMapId()).with(csrf()))
 				.andExpect(status().isOk())
@@ -202,7 +232,7 @@ public class MapsRetrievalTest extends BaseSpringTestRunner {
 				.andExpect(content().json(objectMapper.writeValueAsString(newSummonersRift)));
 
 		verify(imageFetcher, times(1))
-				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(versions.get(0)));
+				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 
 		assertThat(mapsRepository.findOne(newSummonersRift.getMapId())).isNotNull()
 				.isEqualTo(newSummonersRift);

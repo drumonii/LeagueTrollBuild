@@ -1,16 +1,28 @@
 package com.drumonii.loltrollbuild.riot;
 
-import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.annotation.WithMockAdminUser;
 import com.drumonii.loltrollbuild.model.Item;
+import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.model.image.Image;
+import com.drumonii.loltrollbuild.repository.ItemsRepository;
+import com.drumonii.loltrollbuild.riot.api.ImageFetcher;
+import com.drumonii.loltrollbuild.riot.api.ItemsResponse;
 import com.drumonii.loltrollbuild.riot.service.ItemsService;
 import com.drumonii.loltrollbuild.riot.service.VersionsService;
 import com.drumonii.loltrollbuild.util.RandomizeUtil;
-import org.junit.Before;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.core.AutoConfigureCache;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.ArrayList;
@@ -29,7 +41,25 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class ItemsRetrievalTest extends BaseSpringTestRunner {
+@RunWith(SpringRunner.class)
+@SpringBootTest
+@AutoConfigureMockMvc
+@AutoConfigureCache
+@AutoConfigureTestDatabase
+@Transactional
+public abstract class ItemsRetrievalTest {
+
+	@Autowired
+	private MockMvc mockMvc;
+
+	@Autowired
+	protected ObjectMapper objectMapper;
+
+	@Autowired
+	private ItemsRepository itemsRepository;
+
+	@MockBean
+	private ImageFetcher imageFetcher;
 
 	@MockBean
 	private ItemsService itemsService;
@@ -37,14 +67,13 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 	@MockBean
 	private VersionsService versionsService;
 
-	private Item lichBane;
+	protected ItemsResponse itemsResponse;
 
-	@Before
-	public void before() {
-		super.before();
+	protected Item lichBane;
 
-		lichBane = itemsResponse.getItems().get("3100");
-	}
+	protected Version latestVersion;
+
+	public abstract void before();
 
 	@WithMockAdminUser
 	@Test
@@ -62,7 +91,7 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 	public void saveItems() throws Exception {
 		given(itemsService.getItems()).willReturn(new ArrayList<>(itemsResponse.getItems().values()));
 
-		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
+		given(versionsService.getLatestVersion()).willReturn(latestVersion);
 
 		mockMvc.perform(post("/riot/items").with(csrf()))
 				.andExpect(status().isOk())
@@ -70,7 +99,7 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 				.andExpect(content().json(objectMapper.writeValueAsString(itemsResponse.getItems().values())));
 
 		verify(imageFetcher, times(1))
-				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(versions.get(0)));
+				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 
 		assertThat(itemsRepository.findAll())
 				.containsOnlyElementsOf(itemsResponse.getItems().values());
@@ -81,7 +110,7 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 	public void saveDifferenceOfItems() throws Exception {
 		given(itemsService.getItems()).willReturn(new ArrayList<>(itemsResponse.getItems().values()));
 
-		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
+		given(versionsService.getLatestVersion()).willReturn(latestVersion);
 
 		List<Item> champions = itemsRepository.save(itemsResponse.getItems().values());
 
@@ -91,7 +120,7 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 				.andExpect(content().json("[]"));
 
 		verify(imageFetcher, times(1))
-				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(versions.get(0)));
+				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 
 		assertThat(itemsRepository.findAll()).containsOnlyElementsOf(champions);
 	}
@@ -105,7 +134,7 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 
 		given(itemsService.getItems()).willReturn(new ArrayList<>(itemsResponse.getItems().values()));
 
-		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
+		given(versionsService.getLatestVersion()).willReturn(latestVersion);
 
 		mockMvc.perform(post("/riot/items").with(csrf()))
 				.andExpect(status().isOk())
@@ -113,7 +142,7 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 				.andExpect(content().json("[]"));
 
 		verify(imageFetcher, times(1))
-				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(versions.get(0)));
+				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 
 		assertThat(itemsRepository.findOne(itemToDelete.getId())).isNull();
 	}
@@ -123,7 +152,7 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 	public void saveItemsWithTruncate() throws Exception {
 		given(itemsService.getItems()).willReturn(new ArrayList<>(itemsResponse.getItems().values()));
 
-		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
+		given(versionsService.getLatestVersion()).willReturn(latestVersion);
 
 		mockMvc.perform(post("/riot/items?truncate=true").with(csrf()))
 				.andExpect(status().isOk())
@@ -131,7 +160,7 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 				.andExpect(content().json(objectMapper.writeValueAsString(itemsResponse.getItems().values())));
 
 		verify(imageFetcher, times(1))
-				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(versions.get(0)));
+				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 
 		assertThat(itemsRepository.findAll())
 				.containsOnlyElementsOf(itemsResponse.getItems().values());
@@ -162,7 +191,7 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 	public void saveItem() throws Exception {
 		given(itemsService.getItem(eq(lichBane.getId()))).willReturn(lichBane);
 
-		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
+		given(versionsService.getLatestVersion()).willReturn(latestVersion);
 
 		mockMvc.perform(post("/riot/items/{id}", lichBane.getId()).with(csrf()))
 				.andExpect(status().isOk())
@@ -170,7 +199,7 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 				.andExpect(content().json(objectMapper.writeValueAsString(lichBane)));
 
 		verify(imageFetcher, times(1))
-				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(versions.get(0)));
+				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 
 		assertThat(itemsRepository.findOne(lichBane.getId())).isNotNull();
 	}
@@ -193,7 +222,7 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 
 		given(itemsService.getItem(eq(lichBane.getId()))).willReturn(newLichBane);
 
-		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
+		given(versionsService.getLatestVersion()).willReturn(latestVersion);
 
 		mockMvc.perform(post("/riot/items/{id}", lichBane.getId()).with(csrf()))
 				.andExpect(status().isOk())
@@ -201,7 +230,7 @@ public class ItemsRetrievalTest extends BaseSpringTestRunner {
 				.andExpect(content().json(objectMapper.writeValueAsString(newLichBane)));
 
 		verify(imageFetcher, times(1))
-				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(versions.get(0)));
+				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 
 		assertThat(itemsRepository.findOne(newLichBane.getId())).isNotNull()
 				.isEqualTo(newLichBane);

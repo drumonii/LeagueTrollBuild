@@ -1,16 +1,28 @@
 package com.drumonii.loltrollbuild.riot;
 
-import com.drumonii.loltrollbuild.BaseSpringTestRunner;
 import com.drumonii.loltrollbuild.annotation.WithMockAdminUser;
 import com.drumonii.loltrollbuild.model.SummonerSpell;
+import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.model.image.Image;
+import com.drumonii.loltrollbuild.repository.SummonerSpellsRepository;
+import com.drumonii.loltrollbuild.riot.api.ImageFetcher;
+import com.drumonii.loltrollbuild.riot.api.SummonerSpellsResponse;
 import com.drumonii.loltrollbuild.riot.service.SummonerSpellsService;
 import com.drumonii.loltrollbuild.riot.service.VersionsService;
 import com.drumonii.loltrollbuild.util.RandomizeUtil;
-import org.junit.Before;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.core.AutoConfigureCache;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.ArrayList;
@@ -29,7 +41,25 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
+@RunWith(SpringRunner.class)
+@SpringBootTest
+@AutoConfigureMockMvc
+@AutoConfigureCache
+@AutoConfigureTestDatabase
+@Transactional
+public abstract class SummonerSpellsRetrievalTest {
+
+	@Autowired
+	private MockMvc mockMvc;
+
+	@Autowired
+	protected ObjectMapper objectMapper;
+
+	@Autowired
+	private SummonerSpellsRepository summonerSpellsRepository;
+
+	@MockBean
+	private ImageFetcher imageFetcher;
 
 	@MockBean
 	private SummonerSpellsService summonerSpellsService;
@@ -37,14 +67,13 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 	@MockBean
 	private VersionsService versionsService;
 
-	private SummonerSpell ignite;
+	protected SummonerSpellsResponse summonerSpellsResponse;
 
-	@Before
-	public void before() {
-		super.before();
+	protected SummonerSpell ignite;
 
-		ignite = summonerSpellsResponse.getSummonerSpells().get("SummonerDot");
-	}
+	protected Version latestVersion;
+
+	public abstract void before();
 
 	@WithMockAdminUser
 	@Test
@@ -65,7 +94,7 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 		given(summonerSpellsService.getSummonerSpells())
 				.willReturn(new ArrayList<>(summonerSpellsResponse.getSummonerSpells().values()));
 
-		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
+		given(versionsService.getLatestVersion()).willReturn(latestVersion);
 
 		mockMvc.perform(post("/riot/summoner-spells").with(csrf()))
 				.andExpect(status().isOk())
@@ -74,7 +103,7 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 						.getSummonerSpells().values())));
 
 		verify(imageFetcher, times(1))
-				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(versions.get(0)));
+				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 
 		assertThat(summonerSpellsRepository.findAll())
 				.containsOnlyElementsOf(summonerSpellsResponse.getSummonerSpells().values());
@@ -86,7 +115,7 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 		given(summonerSpellsService.getSummonerSpells())
 				.willReturn(new ArrayList<>(summonerSpellsResponse.getSummonerSpells().values()));
 
-		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
+		given(versionsService.getLatestVersion()).willReturn(latestVersion);
 
 		List<SummonerSpell> summonerSpells = summonerSpellsRepository.save(summonerSpellsResponse
 				.getSummonerSpells().values());
@@ -97,7 +126,7 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 				.andExpect(content().json("[]"));
 
 		verify(imageFetcher, times(1))
-				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(versions.get(0)));
+				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 
 		assertThat(summonerSpellsRepository.findAll()).containsOnlyElementsOf(summonerSpells);
 	}
@@ -113,7 +142,7 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 		given(summonerSpellsService.getSummonerSpells())
 				.willReturn(new ArrayList<>(summonerSpellsResponse.getSummonerSpells().values()));
 
-		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
+		given(versionsService.getLatestVersion()).willReturn(latestVersion);
 
 		mockMvc.perform(post("/riot/summoner-spells").with(csrf()))
 				.andExpect(status().isOk())
@@ -121,7 +150,7 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 				.andExpect(content().json("[]"));
 
 		verify(imageFetcher, times(1))
-				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(versions.get(0)));
+				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 
 		assertThat(summonerSpellsRepository.findOne(summonerSpellToDelete.getId())).isNull();
 	}
@@ -132,7 +161,7 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 		given(summonerSpellsService.getSummonerSpells())
 				.willReturn(new ArrayList<>(summonerSpellsResponse.getSummonerSpells().values()));
 
-		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
+		given(versionsService.getLatestVersion()).willReturn(latestVersion);
 
 		mockMvc.perform(post("/riot/summoner-spells?truncate=true").with(csrf()))
 				.andExpect(status().isOk())
@@ -141,7 +170,7 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 						.getSummonerSpells().values())));
 
 		verify(imageFetcher, times(1))
-				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(versions.get(0)));
+				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 
 		assertThat(summonerSpellsRepository.findAll())
 				.containsOnlyElementsOf(summonerSpellsResponse.getSummonerSpells().values());
@@ -172,7 +201,7 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 	public void saveSummonerSpell() throws Exception {
 		given(summonerSpellsService.getSummonerSpell(eq(ignite.getId()))).willReturn(ignite);
 
-		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
+		given(versionsService.getLatestVersion()).willReturn(latestVersion);
 
 		mockMvc.perform(post("/riot/summoner-spells/{id}", ignite.getId()).with(csrf()))
 				.andExpect(status().isOk())
@@ -180,7 +209,7 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 				.andExpect(content().json(objectMapper.writeValueAsString(ignite)));
 
 		verify(imageFetcher, times(1))
-				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(versions.get(0)));
+				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 
 		assertThat(summonerSpellsRepository.findOne(ignite.getId())).isNotNull();
 	}
@@ -203,7 +232,7 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 
 		given(summonerSpellsService.getSummonerSpell(eq(ignite.getId()))).willReturn(newIgnite);
 
-		given(versionsService.getLatestVersion()).willReturn(versions.get(0));
+		given(versionsService.getLatestVersion()).willReturn(latestVersion);
 
 		mockMvc.perform(post("/riot/summoner-spells/{id}", ignite.getId()).with(csrf()))
 				.andExpect(status().isOk())
@@ -211,7 +240,7 @@ public class SummonerSpellsRetrievalTest extends BaseSpringTestRunner {
 				.andExpect(content().json(objectMapper.writeValueAsString(newIgnite)));
 
 		verify(imageFetcher, times(1))
-				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(versions.get(0)));
+				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 
 		assertThat(summonerSpellsRepository.findOne(newIgnite.getId())).isNotNull()
 				.isEqualTo(newIgnite);
