@@ -113,11 +113,6 @@ public class MapsRetrieval {
 			throw new ResourceNotFoundException("Could not find Map with ID: " + id);
 		}
 
-		GameMap existing = mapsRepository.findOne(id);
-		if (existing != null) {
-			mapsRepository.delete(id);
-		}
-
 		Version latestVersion = versionsService.getLatestVersion();
 
 		imageFetcher.setImgSrc(map.getImage(), mapsImgUri, latestVersion);

@@ -113,11 +113,6 @@ public class ItemsRetrieval {
 			throw new ResourceNotFoundException("Could not find Item with ID: " + id);
 		}
 
-		Item existing = itemsRepository.findOne(id);
-		if (existing != null) {
-			itemsRepository.delete(id);
-		}
-
 		Version latestVersion = versionsService.getLatestVersion();
 
 		imageFetcher.setImgSrc(item.getImage(), itemsImgUri, latestVersion);

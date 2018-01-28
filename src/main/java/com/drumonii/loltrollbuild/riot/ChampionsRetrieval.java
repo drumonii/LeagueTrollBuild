@@ -128,11 +128,6 @@ public class ChampionsRetrieval {
 			throw new ResourceNotFoundException("Could not find Champion with ID: " + id);
 		}
 
-		Champion existing = championsRepository.findOne(id);
-		if (existing != null) {
-			championsRepository.delete(id);
-		}
-
 		Version latestVersion = versionsService.getLatestVersion();
 
 		imageFetcher.setImgSrc(champion.getImage(), championsImgUri, latestVersion);

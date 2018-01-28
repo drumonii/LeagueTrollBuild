@@ -114,11 +114,6 @@ public class SummonerSpellsRetrieval {
 			throw new ResourceNotFoundException("Could not find Summoner Spell with ID: " + id);
 		}
 
-		SummonerSpell existing = summonerSpellsRepository.findOne(id);
-		if (existing != null) {
-			summonerSpellsRepository.delete(id);
-		}
-
 		Version latestVersion = versionsService.getLatestVersion();
 
 		imageFetcher.setImgSrc(summonerSpell.getImage(), summonerSpellsImgUri, latestVersion);
