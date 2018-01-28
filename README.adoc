@@ -94,6 +94,12 @@ patch is out, and the retrievals job is run, then new data will be saved and abs
 === API Documentation
 To view the generated API guide, visit http://localhost:8080/docs/api-guide.html[localhost:8080/docs/api-guide.html].
 
+To generate the API Documentation locally, run the asciidoctor Gradle task with the single test `ApiDocumentation`:
+
+  asciidoctor -Dtest.single=ApiDocumentation
+
+Then navigate to `/build/asciidoc/html5/api-guide.html` to view the generated API guide.
+
 == Development/Importing the project
 *Note*, a Java 8 JDK is required. Previous JDKs are not supported.
 
