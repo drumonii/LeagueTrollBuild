@@ -318,6 +318,24 @@ include::{snippets}/championsFindBy/http-response.adoc[]
 
 include::{snippets}/championsFindBy/response-fields.adoc[]
 
+[[resources-troll-build-for-champion]]
+=== Troll Build for Champion
+A `GET` request will generate a troll build for a specific `Champion` from its ID and a `Map` from its ID.
+
+include::{snippets}/getTrollBuildForChampion/http-request.adoc[]
+
+==== Request Parameters
+include::{snippets}/getTrollBuildForChampion/request-parameters.adoc[]
+
+==== Example Usage
+Usage with `CURL`:
+include::{snippets}/getTrollBuildForChampion/curl-request.adoc[]
+
+==== Response Structure
+include::{snippets}/getTrollBuildForChampion/http-response.adoc[]
+
+include::{snippets}/getTrollBuildForChampion/response-fields.adoc[]
+
 [[resources-maps]]
 == Maps
 Resources for http://leagueoflegends.wikia.com/wiki/Field_of_Justice[Maps].

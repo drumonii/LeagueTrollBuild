@@ -18,6 +18,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
 import static com.drumonii.loltrollbuild.rest.ChampionsRestController.PAGE_SIZE;
+import static com.drumonii.loltrollbuild.util.GameMapUtil.HOWLING_ABYSS_ID;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -125,6 +126,39 @@ public abstract class ChampionsRestControllerTest {
 				.andExpect(jsonPath("$.page.totalElements").exists())
 				.andExpect(jsonPath("$.page.totalPages").exists())
 				.andExpect(jsonPath("$.page.number").exists());
+	}
+
+	@Test
+	public void trollBuildWithChampionThatDoesNotExist() throws Exception {
+		mockMvc.perform(get("{apiPath}/champions/{id}/troll-build", apiPath, 0))
+				.andExpect(status().isOk())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+				.andExpect(content().json("{}"));
+	}
+
+	@Test
+	public void trollBuild() throws Exception {
+		Champion azir = championsResponse.getChampions().get("Azir");
+
+		mockMvc.perform(get("{apiPath}/champions/{id}/troll-build", apiPath, azir.getId())
+				.param("mapId", String.valueOf(HOWLING_ABYSS_ID)))
+				.andExpect(status().isOk())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+				.andExpect(jsonPath("$.items").exists())
+				.andExpect(jsonPath("$.summoner-spells").exists())
+				.andExpect(jsonPath("$.trinket").exists());
+	}
+
+	@Test
+	public void trollBuildForViktor() throws Exception {
+		Champion viktor = championsResponse.getChampions().get("Viktor");
+
+		mockMvc.perform(get("{apiPath}/champions/{id}/troll-build", apiPath, viktor.getId()))
+				.andExpect(status().isOk())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+				.andExpect(jsonPath("$.items").exists())
+				.andExpect(jsonPath("$.summoner-spells").exists())
+				.andExpect(jsonPath("$.trinket").exists());
 	}
 
 }

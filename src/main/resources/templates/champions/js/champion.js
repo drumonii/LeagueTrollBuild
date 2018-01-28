@@ -12,7 +12,7 @@ $(function() {
 
     var trollBuild = function getTrollBuild() {
         $.ajax({
-            url: /*[[@{/champions/__${champion.id}__/troll-build}]]*/ '/champions/1/troll-build',
+            url: /*[[@{/api/champions/__${champion.id}__/troll-build}]]*/ '/api/champions/1/troll-build',
             beforeSend: function() {
                 newBuildBtn.addClass('loading');
                 $('#build-segment').addClass('loading');

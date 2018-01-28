@@ -2,7 +2,6 @@ package com.drumonii.loltrollbuild.controller;
 
 import com.drumonii.loltrollbuild.config.WebSecurityConfig;
 import com.drumonii.loltrollbuild.model.*;
-import com.drumonii.loltrollbuild.model.SummonerSpell.GameMode;
 import com.drumonii.loltrollbuild.model.builder.*;
 import com.drumonii.loltrollbuild.model.image.ChampionImage;
 import com.drumonii.loltrollbuild.model.image.GameMapImage;
@@ -15,20 +14,16 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithAnonymousUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 import static com.drumonii.loltrollbuild.config.Profiles.TESTING;
-import static com.drumonii.loltrollbuild.util.GameMapUtil.HOWLING_ABYSS_ID;
-import static com.drumonii.loltrollbuild.util.GameMapUtil.SUMMONERS_RIFT_ID;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.BDDMockito.given;
@@ -36,12 +31,14 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.springframework.data.domain.Sort.Direction.ASC;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(ChampionsController.class)
@@ -385,76 +382,6 @@ public class ChampionsControllerTest {
 				.andExpect(redirectedUrl("/champions"));
 
 		verify(championsRepository, times(1)).findByName(eq("not exist"));
-	}
-
-	@WithAnonymousUser
-	@Test
-	public void trollBuildWithChampionThatDoesNotExist() throws Exception {
-		given(championsRepository.findOne(anyInt())).willReturn(null);
-
-		mockMvc.perform(get("/champions/{id}/troll-build", 0))
-				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-				.andExpect(content().json("{}"));
-	}
-
-	@WithAnonymousUser
-	@Test
-	public void trollBuild() throws Exception {
-		Champion azir = new ChampionBuilder()
-				.withId(268)
-				.build();
-		given(championsRepository.findOne(anyInt())).willReturn(azir);
-
-		given(itemsRepository.boots(anyInt())).willReturn(new ArrayList<>());
-		given(itemsRepository.forTrollBuild(anyInt())).willReturn(new ArrayList<>());
-		given(summonerSpellsRepository.forTrollBuild(any(GameMode.class))).willReturn(new ArrayList<>());
-		given(mapsRepository.findOne(anyInt())).willReturn(new GameMapBuilder().withMapName("Howling Abyss").build());
-		given(itemsRepository.trinkets(anyInt())).willReturn(new ArrayList<>());
-
-		mockMvc.perform(get("/champions/{id}/troll-build", azir.getId())
-				.param("mapId", String.valueOf(HOWLING_ABYSS_ID)))
-				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-				.andExpect(jsonPath("$.items").exists())
-				.andExpect(jsonPath("$.summoner-spells").exists())
-				.andExpect(jsonPath("$.trinket").exists());
-
-		verify(itemsRepository, times(1)).boots(eq(HOWLING_ABYSS_ID));
-		verify(itemsRepository, never()).viktorOnly();
-		verify(itemsRepository, times(1)).forTrollBuild(eq(HOWLING_ABYSS_ID));
-		verify(summonerSpellsRepository, times(1)).forTrollBuild(eq(GameMode.ARAM));
-		verify(itemsRepository, times(1)).forTrollBuild(eq(HOWLING_ABYSS_ID));
-	}
-
-	@WithAnonymousUser
-	@Test
-	public void trollBuildForViktor() throws Exception {
-		Champion viktor = new ChampionBuilder()
-				.withId(112)
-				.withName("Viktor")
-				.build();
-		given(championsRepository.findOne(anyInt())).willReturn(viktor);
-
-		given(itemsRepository.boots(anyInt())).willReturn(new ArrayList<>());
-		given(itemsRepository.viktorOnly()).willReturn(new ArrayList<>());
-		given(itemsRepository.forTrollBuild(anyInt())).willReturn(new ArrayList<>());
-		given(summonerSpellsRepository.forTrollBuild(any(GameMode.class))).willReturn(new ArrayList<>());
-		given(mapsRepository.findOne(anyInt())).willReturn(new GameMapBuilder().withMapName("Summoner's Rift").build());
-		given(itemsRepository.trinkets(anyInt())).willReturn(new ArrayList<>());
-
-		mockMvc.perform(get("/champions/{id}/troll-build", viktor.getId()))
-				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-				.andExpect(jsonPath("$.items").exists())
-				.andExpect(jsonPath("$.summoner-spells").exists())
-				.andExpect(jsonPath("$.trinket").exists());
-
-		verify(itemsRepository, times(1)).boots(eq(SUMMONERS_RIFT_ID));
-		verify(itemsRepository, times(1)).viktorOnly();
-		verify(itemsRepository, times(1)).forTrollBuild(eq(SUMMONERS_RIFT_ID));
-		verify(summonerSpellsRepository, times(1)).forTrollBuild(eq(GameMode.CLASSIC));
-		verify(itemsRepository, times(1)).forTrollBuild(eq(SUMMONERS_RIFT_ID));
 	}
 
 }

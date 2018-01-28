@@ -38,6 +38,8 @@ import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.li
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
+import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
+import static org.springframework.restdocs.request.RequestDocumentation.requestParameters;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -560,6 +562,36 @@ public class ApiDocumentation {
 								.description("Link to the self Champion"))));
 	}
 
+	@Test
+	public void getTrollBuildForChampion() throws Exception {
+		Champion jayce = championsRepository.save(championsResponse.getChampions().get("Jayce"));
+
+		itemsRepository.save(itemsResponse.getItems().get("3341")); // Sweeping Lens (Trinket)
+
+		summonerSpellsRepository.save(summonerSpellsResponse.getSummonerSpells().get("SummonerFlash"));
+		summonerSpellsRepository.save(summonerSpellsResponse.getSummonerSpells().get("SummonerMana"));
+
+		itemsRepository.save(itemsResponse.getItems().get("3020")); // Sorcerer's Shoes
+		itemsRepository.save(itemsResponse.getItems().get("3004")); // Manamune
+		itemsRepository.save(itemsResponse.getItems().get("3742")); // Dead Man's Plate
+		itemsRepository.save(itemsResponse.getItems().get("3074")); // Ravenous Hydra
+		itemsRepository.save(itemsResponse.getItems().get("3116")); // Rylai's Crystal Scepter
+		itemsRepository.save(itemsResponse.getItems().get("3401")); // Face of the Mountain
+
+		mockMvc.perform(get("{apiPath}/champions/{id}/troll-build", apiPath, jayce.getId()))
+				.andExpect(status().isOk())
+				.andDo(document("getTrollBuildForChampion", requestParameters(
+						parameterWithName("mapId")
+								.description("The Map Id. Defaults to Summoner's Rift if unspecified. See <<game-maps-table, Game Maps Table>> for Map IDs")
+								.optional()), responseFields(
+						fieldWithPath("trinket")
+							.description("The trinket of the Troll Build"),
+						fieldWithPath("summoner-spells")
+								.description("The Summoner Spells of the Troll Build"),
+						fieldWithPath("items")
+								.description("The Items of the Troll Build, with the first always a boots Item"))));
+	}
+
 	/*
 	 * Maps doc
 	 */
@@ -668,7 +700,7 @@ public class ApiDocumentation {
 		build.setItem4Id(itemsResponse.getItems().get("3508").getId());
 		build.setItem5Id(itemsResponse.getItems().get("3075").getId());
 		build.setItem6Id(itemsResponse.getItems().get("3046").getId());
-		build.setSummonerSpell1Id(summonerSpellsResponse.getSummonerSpells().get("SummonerSmite").getId());
+		build.setSummonerSpell1Id(summonerSpellsResponse.getSummonerSpells().get("SummonerDot").getId());
 		build.setSummonerSpell2Id(summonerSpellsResponse.getSummonerSpells().get("SummonerTeleport").getId());
 		build.setTrinketId(itemsResponse.getItems().get("3341").getId());
 		build.setMapId(mapsResponse.getMaps().get(SUMMONERS_RIFT_SID).getMapId());
