@@ -5,13 +5,11 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.NestedConfigurationProperty;
-import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
 
 /**
  * Configuration properties for Riot's API found in config/application.yml of the resources folder.
  */
-@Component
 @Validated
 @ValidRiotApiProperties
 @ConfigurationProperties(prefix = "riot")
