@@ -34,7 +34,7 @@ import static com.drumonii.loltrollbuild.util.GameMapUtil.SUMMONERS_RIFT_SID;
 import static com.drumonii.loltrollbuild.util.GameMapUtil.TWISTED_TREELINE_SID;
 import static org.assertj.core.api.Assertions.fail;
 import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.linkWithRel;
-import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.links;
+import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.relaxedLinks;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
@@ -126,14 +126,13 @@ public class ApiDocumentation {
 	public void index() throws Exception {
 		mockMvc.perform(get(apiPath))
 				.andExpect(status().isOk())
-				.andDo(document("index", links(
+				.andDo(document("index", relaxedLinks(
 						linkWithRel("summonerSpells").description("<<resources-summoner-spells, Summoner Spells resource>>"),
 						linkWithRel("items").description("<<resources-items, Items resource>>"),
 						linkWithRel("champions").description("<<resources-champions, Champions resource>>"),
 						linkWithRel("maps").description("<<resources-maps, Maps resource>>"),
 						linkWithRel("versions").description("<<resources-versions, Versions resource>>"),
-						linkWithRel("builds").description("<<resources-builds, Builds resource>>"),
-						linkWithRel("profile").description("Profile resource"))));
+						linkWithRel("builds").description("<<resources-builds, Builds resource>>"))));
 	}
 
 	/*
