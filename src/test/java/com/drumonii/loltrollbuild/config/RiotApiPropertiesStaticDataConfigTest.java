@@ -139,7 +139,7 @@ public class RiotApiPropertiesStaticDataConfigTest {
 		assertThat(itemsUri.getHost()).isEqualTo(host);
 		assertThat(itemsUri.getPath()).isEqualTo(staticData.getItems());
 		assertThat(itemsUri.getQueryParams()).contains(
-				entry("tags", Arrays.asList("consumed", "from", "gold", "image", "into", "maps", "requiredChampion")),
+				entry("tags", Arrays.asList("colloq", "consumed", "from", "gold", "image", "into", "maps", "requiredChampion")),
 				entry("api_key", Collections.singletonList(apiKey)));
 	}
 
@@ -155,7 +155,7 @@ public class RiotApiPropertiesStaticDataConfigTest {
 		assertThat(uriComponents.getHost()).isEqualTo(host);
 		assertThat(uriComponents.getPath()).isEqualTo(staticData.getItem().replace("{id}", String.valueOf(id)));
 		assertThat(uriComponents.getQueryParams()).contains(
-				entry("tags", Arrays.asList("consumed", "from", "gold", "image", "into", "maps", "requiredChampion")),
+				entry("tags", Arrays.asList("colloq", "consumed", "from", "gold", "image", "into", "maps", "requiredChampion")),
 				entry("api_key", Collections.singletonList(apiKey)));
 	}
 

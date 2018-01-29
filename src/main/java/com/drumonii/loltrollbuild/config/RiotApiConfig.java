@@ -88,13 +88,14 @@ public class RiotApiConfig {
 					.scheme("https")
 					.host(riotProperties.getStaticData().getBaseUrl())
 					.path(riotProperties.getStaticData().getItems())
+					.queryParam("tags", "colloq")
 					.queryParam("tags", "consumed")
 					.queryParam("tags", "from")
 					.queryParam("tags", "gold")
 					.queryParam("tags", "image")
 					.queryParam("tags", "into")
 					.queryParam("tags", "maps")
-					.queryParam("tags", "requiredChampion") // &tags=consumed&tags=from&tags=gold&tags=image&tags=into&tags=maps&tags=requiredChampion
+					.queryParam("tags", "requiredChampion") // &tags=colloq&tags=consumed&tags=from&tags=gold&tags=image&tags=into&tags=maps&tags=requiredChampion
 					.queryParam(riotProperties.getStaticData().getLocaleParam(),
 							riotProperties.getStaticData().getLocale())
 					.queryParam(riotProperties.getStaticData().getKeyParam(), riotProperties.getStaticData().getApiKey())
@@ -108,13 +109,14 @@ public class RiotApiConfig {
 					.scheme("https")
 					.host(riotProperties.getStaticData().getBaseUrl())
 					.path(riotProperties.getStaticData().getItem())
+					.queryParam("tags", "colloq")
 					.queryParam("tags", "consumed")
 					.queryParam("tags", "from")
 					.queryParam("tags", "gold")
 					.queryParam("tags", "image")
 					.queryParam("tags", "into")
 					.queryParam("tags", "maps")
-					.queryParam("tags", "requiredChampion") // &tags=consumed&tags=from&tags=gold&tags=image&tags=into&tags=maps&tags=requiredChampion
+					.queryParam("tags", "requiredChampion") // &tags=colloq&tags=consumed&tags=from&tags=gold&tags=image&tags=into&tags=maps&tags=requiredChampion
 					.queryParam(riotProperties.getStaticData().getLocaleParam(),
 							riotProperties.getStaticData().getLocale())
 					.queryParam(riotProperties.getStaticData().getKeyParam(), riotProperties.getStaticData().getApiKey());

@@ -5,6 +5,7 @@ import com.drumonii.loltrollbuild.model.Item;
 import com.drumonii.loltrollbuild.model.ItemGold;
 import com.drumonii.loltrollbuild.model.builder.ItemBuilder;
 import com.drumonii.loltrollbuild.model.image.ItemImage;
+import com.drumonii.loltrollbuild.util.ItemUtil;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.core.TreeNode;
@@ -59,6 +60,12 @@ public class ItemStaticDataDeserializer extends JsonObjectDeserializer<Item> {
 
 		JsonNode requiredChampionNode = tree.get("requiredChampion");
 		itemBuilder.withRequiredChampion(nullSafeValue(requiredChampionNode, String.class));
+
+		JsonNode colloqNode = tree.get("colloq");
+		if (colloqNode != null) {
+			String colloq = nullSafeValue(colloqNode, String.class);
+			itemBuilder.withRequiredAlly(ItemUtil.requiresAllyOrnn(colloq) ? "Ornn" : null);
+		}
 
 		JsonParser mapsParser = tree.get("maps").traverse();
 		mapsParser.setCodec(codec);

@@ -324,6 +324,8 @@ public class ApiDocumentation {
 								.description("An array of Item IDs that the Item builds into as part of the Item's recipe"),
 						fieldWithPath("requiredChampion")
 								.description("The required champion of the Item"),
+						fieldWithPath("requiredAlly")
+								.description("The required ally champion of the Item"),
 						fieldWithPath("maps")
 								.description("A map of Map IDs keys and boolean values whether the Item can be purchased in the Map"),
 						fieldWithPath("image")

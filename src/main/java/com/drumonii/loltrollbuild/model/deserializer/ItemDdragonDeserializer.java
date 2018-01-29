@@ -57,6 +57,9 @@ public class ItemDdragonDeserializer extends JsonObjectDeserializer<Item> {
 		JsonNode requiredChampionNode = tree.get("requiredChampion");
 		itemBuilder.withRequiredChampion(nullSafeValue(requiredChampionNode, String.class));
 
+		JsonNode requiredAllyNode = tree.get("requiredAlly");
+		itemBuilder.withRequiredAlly(nullSafeValue(requiredAllyNode, String.class));
+
 		JsonParser mapsParser = tree.get("maps").traverse();
 		mapsParser.setCodec(codec);
 		itemBuilder.withMaps(mapsParser.readValueAs(new TypeReference<SortedMap<Integer, Boolean>>(){}));

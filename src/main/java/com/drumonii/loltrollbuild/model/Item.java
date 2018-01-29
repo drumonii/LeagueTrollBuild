@@ -71,6 +71,10 @@ public class Item implements Serializable {
 	@JsonProperty("requiredChampion")
 	@Getter @Setter private String requiredChampion;
 
+	@Column(name = "REQUIRED_ALLY")
+	@JsonProperty("requiredAlly")
+	@Getter @Setter private String requiredAlly;
+
 	@Column(name = "LAST_MODIFIED_DATE", nullable = false)
 	@LastModifiedDate
 	@JsonIgnore

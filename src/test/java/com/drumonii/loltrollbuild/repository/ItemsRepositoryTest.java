@@ -20,6 +20,7 @@ import org.springframework.test.annotation.Repeat;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.SortedMap;
 import java.util.function.Consumer;
 
@@ -126,6 +127,12 @@ public abstract class ItemsRepositoryTest {
 			assertThat(description).doesNotContain("Potion");
 			assertThat(description).doesNotContain("Trinket");
 		});
+		assertThat(forTrollBuild).extracting(Item::getRequiredChampion).allSatisfy((Consumer<String>) requiredChampion -> {
+			assertThat(requiredChampion).isNull();
+		});
+		assertThat(forTrollBuild).extracting(Item::getRequiredAlly).allSatisfy((Consumer<String>) requiredAlly -> {
+			assertThat(requiredAlly).isNull();
+		});
 		assertThat(forTrollBuild).extracting(Item::getName).allSatisfy((Consumer<String>) name -> {
 			assertThat(name).isNotNull();
 			assertThat(name).doesNotContain("Movement");
@@ -137,11 +144,10 @@ public abstract class ItemsRepositoryTest {
 			assertThat(name).doesNotContain("Doran");
 			assertThat(name).doesNotContain("Quick");
 		});
-		assertThat(forTrollBuild).extracting(Item::getGroup).allSatisfy((Consumer<String>) group -> {
-			if (group != null) {
-				assertThat(group).doesNotContain("FlaskGroup");
-				assertThat(group).doesNotContain("RelicBase");
-			}
+		assertThat(forTrollBuild).extracting(Item::getGroup).filteredOn(Objects::nonNull)
+				.allSatisfy((Consumer<String>) group -> {
+					assertThat(group).doesNotContain("FlaskGroup");
+					assertThat(group).doesNotContain("RelicBase");
 		});
 	}
 

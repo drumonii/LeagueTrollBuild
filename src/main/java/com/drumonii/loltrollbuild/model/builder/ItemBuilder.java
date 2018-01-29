@@ -22,6 +22,7 @@ public final class ItemBuilder {
 	private List<Integer> from = new ArrayList<>();
 	private SortedSet<Integer> into = new TreeSet<>();
 	private String requiredChampion;
+	private String requiredAlly;
 	private SortedMap<Integer, Boolean> maps = new TreeMap<>();
 	private ItemImage image;
 	private ItemGold gold;
@@ -85,6 +86,11 @@ public final class ItemBuilder {
 		return this;
 	}
 
+	public ItemBuilder withRequiredAlly(String requiredAlly) {
+		this.requiredAlly = requiredAlly;
+		return this;
+	}
+
 	public ItemBuilder withMaps(SortedMap<Integer, Boolean> maps) {
 		this.maps = maps;
 		return this;
@@ -117,6 +123,7 @@ public final class ItemBuilder {
 		item.setFrom(from);
 		item.setInto(into);
 		item.setRequiredChampion(requiredChampion);
+		item.setRequiredAlly(requiredAlly);
 		item.setMaps(maps);
 		item.setImage(image);
 		if (image != null) {

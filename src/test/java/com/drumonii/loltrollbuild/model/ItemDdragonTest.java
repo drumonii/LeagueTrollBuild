@@ -146,6 +146,7 @@ public class ItemDdragonTest {
 		assertThat(item.getObject().getImage().getW()).isEqualTo(48);
 		assertThat(item.getObject().getImage().getH()).isEqualTo(48);
 		assertThat(item.getObject().getRequiredChampion()).isNull();
+		assertThat(item.getObject().getRequiredAlly()).isNull();
 		assertThat(item.getObject().getMaps())
 				.containsExactly(entry(1, false), entry(8, true), entry(10, true), entry(11, true), entry(12, true),
 						entry(14, false));
