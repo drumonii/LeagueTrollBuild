@@ -24,7 +24,7 @@ public class ItemsRetrievalItemProcessor implements ItemProcessor<Item, Item> {
 	@Autowired
 	private ImageFetcher imageFetcher;
 
-	private Version latestVersion;
+	private final Version latestVersion;
 
 	public ItemsRetrievalItemProcessor(Version latestVersion) {
 		this.latestVersion = latestVersion;

@@ -35,7 +35,7 @@ public class ChampionsRetrievalItemProcessor implements ItemProcessor<Champion, 
 	@Autowired
 	private ImageFetcher imageFetcher;
 
-	private Version latestVersion;
+	private final Version latestVersion;
 
 	public ChampionsRetrievalItemProcessor(Version latestVersion) {
 		this.latestVersion = latestVersion;

@@ -24,7 +24,7 @@ public class MapsRetrievalItemProcessor implements ItemProcessor<GameMap, GameMa
 	@Autowired
 	private ImageFetcher imageFetcher;
 
-	private Version latestVersion;
+	private final Version latestVersion;
 
 	public MapsRetrievalItemProcessor(Version latestVersion) {
 		this.latestVersion = latestVersion;

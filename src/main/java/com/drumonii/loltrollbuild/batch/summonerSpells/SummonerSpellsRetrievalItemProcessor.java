@@ -24,7 +24,7 @@ public class SummonerSpellsRetrievalItemProcessor implements ItemProcessor<Summo
 	@Autowired
 	private ImageFetcher imageFetcher;
 
-	private Version latestVersion;
+	private final Version latestVersion;
 
 	public SummonerSpellsRetrievalItemProcessor(Version latestVersion) {
 		this.latestVersion = latestVersion;
