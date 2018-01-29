@@ -35,13 +35,13 @@ public class BuildsController {
 	@Autowired
 	private MapsRepository mapsRepository;
 
-	private Random random = new Random();
+	private static final Random RANDOM = new Random();
 
 	@GetMapping
 	public String builds() {
 		int start = 1;
 		int end = (int) buildsRepository.count() + 1;
-		return "redirect:/builds/" + (start == end ? start : start + random.nextInt(end - start));
+		return "redirect:/builds/" + (start == end ? start : start + RANDOM.nextInt(end - start));
 	}
 
 	@GetMapping(value = "/{id}")
