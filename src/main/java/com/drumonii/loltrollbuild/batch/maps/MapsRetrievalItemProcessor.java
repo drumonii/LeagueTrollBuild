@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.Optional;
+
 /**
  * {@link ItemProcessor} for processing {@link GameMap}s from Riot's API.
  */
@@ -32,8 +34,8 @@ public class MapsRetrievalItemProcessor implements ItemProcessor<GameMap, GameMa
 
 	@Override
 	public GameMap process(GameMap map) {
-		GameMap mapFromDb = mapsRepository.findOne(map.getMapId());
-		if (mapFromDb != null && mapFromDb.equals(map)) {
+		Optional<GameMap> mapFromDb = mapsRepository.findById(map.getMapId());
+		if (mapFromDb.isPresent() && mapFromDb.get().equals(map)) {
 			return null;
 		}
 		imageFetcher.setImgSrc(map.getImage(), mapsImgUri, latestVersion);

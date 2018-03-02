@@ -24,7 +24,7 @@ public class MapsStaticDataRestControllerTest extends MapsRestControllerTest {
 		} catch (IOException e) {
 			fail("Unable to unmarshal the Maps response.", e);
 		}
-		mapsRepository.save(mapsResponse.getMaps().values());
+		mapsRepository.saveAll(mapsResponse.getMaps().values());
 	}
 
 }

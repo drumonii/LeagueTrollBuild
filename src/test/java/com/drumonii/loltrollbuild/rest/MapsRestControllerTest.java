@@ -12,13 +12,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.core.AutoConfigureCache;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
+import org.springframework.hateoas.MediaTypes;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
 import static com.drumonii.loltrollbuild.rest.MapsRestController.PAGE_SIZE;
-import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -31,8 +30,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureCache
 @Transactional
 public abstract class MapsRestControllerTest {
-
-	private static final MediaType HAL_JSON_UTF8 = new MediaType("application", "hal+json", UTF_8);
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -57,7 +54,7 @@ public abstract class MapsRestControllerTest {
 		// qbe
 		mockMvc.perform(get("{apiPath}/maps", apiPath))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(HAL_JSON_UTF8))
+				.andExpect(content().contentType(MediaTypes.HAL_JSON_UTF8))
 				.andExpect(jsonPath("$._embedded.maps").exists())
 				.andExpect(jsonPath("$._links").exists())
 				.andExpect(jsonPath("$._links.self").exists())
@@ -72,7 +69,7 @@ public abstract class MapsRestControllerTest {
 		mockMvc.perform(get("{apiPath}/maps", apiPath)
 				.param("mapName", map.getMapName().toLowerCase()))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(HAL_JSON_UTF8))
+				.andExpect(content().contentType(MediaTypes.HAL_JSON_UTF8))
 				.andExpect(jsonPath("$._embedded.maps").exists())
 				.andExpect(jsonPath("$._links").exists())
 				.andExpect(jsonPath("$._links.self").exists())
@@ -87,7 +84,7 @@ public abstract class MapsRestControllerTest {
 		mockMvc.perform(get("{apiPath}/maps", apiPath)
 				.param("mapName", "abcd1234"))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(HAL_JSON_UTF8))
+				.andExpect(content().contentType(MediaTypes.HAL_JSON_UTF8))
 				.andExpect(jsonPath("$._embedded").doesNotExist())
 				.andExpect(jsonPath("$._links.self").exists())
 				.andExpect(jsonPath("$._links.self.href").exists())

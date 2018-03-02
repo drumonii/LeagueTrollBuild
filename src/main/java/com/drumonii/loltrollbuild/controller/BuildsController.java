@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.Optional;
 import java.util.Random;
 
 /**
@@ -46,30 +47,30 @@ public class BuildsController {
 
 	@GetMapping(value = "/{id}")
 	public String build(@PathVariable int id, Model model) {
-		Build build = buildsRepository.findOne(id);
-		if (build == null) {
+		Optional<Build> build = buildsRepository.findById(id);
+		if (!build.isPresent()) {
 			return "builds/notFound";
 		}
 
-		build.setChampion(championsRepository.findOne(build.getChampionId()));
-		build.setItem1(itemsRepository.findOne(build.getItem1Id()));
-		build.setItem2(itemsRepository.findOne(build.getItem2Id()));
-		build.setItem3(itemsRepository.findOne(build.getItem3Id()));
-		build.setItem4(itemsRepository.findOne(build.getItem4Id()));
-		build.setItem5(itemsRepository.findOne(build.getItem5Id()));
-		build.setItem6(itemsRepository.findOne(build.getItem6Id()));
-		build.setSummonerSpell1(summonerSpellsRepository.findOne(build.getSummonerSpell1Id()));
-		build.setSummonerSpell2(summonerSpellsRepository.findOne(build.getSummonerSpell2Id()));
-		build.setTrinket(itemsRepository.findOne(build.getTrinketId()));
-		build.setMap(mapsRepository.findOne(build.getMapId()));
+		build.get().setChampion(championsRepository.findById(build.get().getChampionId()).orElse(null));
+		build.get().setItem1(itemsRepository.findById(build.get().getItem1Id()).orElse(null));
+		build.get().setItem2(itemsRepository.findById(build.get().getItem2Id()).orElse(null));
+		build.get().setItem3(itemsRepository.findById(build.get().getItem3Id()).orElse(null));
+		build.get().setItem4(itemsRepository.findById(build.get().getItem4Id()).orElse(null));
+		build.get().setItem5(itemsRepository.findById(build.get().getItem5Id()).orElse(null));
+		build.get().setItem6(itemsRepository.findById(build.get().getItem6Id()).orElse(null));
+		build.get().setSummonerSpell1(summonerSpellsRepository.findById(build.get().getSummonerSpell1Id()).orElse(null));
+		build.get().setSummonerSpell2(summonerSpellsRepository.findById(build.get().getSummonerSpell2Id()).orElse(null));
+		build.get().setTrinket(itemsRepository.findById(build.get().getTrinketId()).orElse(null));
+		build.get().setMap(mapsRepository.findById(build.get().getMapId()).orElse(null));
 
-		BindingResult result = new BeanPropertyBindingResult(build, "build");
-		build.validate(build, result);
+		BindingResult result = new BeanPropertyBindingResult(build.get(), "build");
+		build.get().validate(build.get(), result);
 		if (result.hasErrors()) {
 			return "builds/invalidAttributes";
 		}
 
-		model.addAttribute(build);
+		model.addAttribute(build.get());
 		return "builds/build";
 	}
 

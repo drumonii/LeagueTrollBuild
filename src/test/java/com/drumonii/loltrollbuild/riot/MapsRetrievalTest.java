@@ -30,10 +30,10 @@ import java.util.List;
 
 import static com.drumonii.loltrollbuild.util.GameMapUtil.SUMMONERS_RIFT_SID;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyList;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyListOf;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
@@ -100,7 +100,7 @@ public abstract class MapsRetrievalTest {
 				.andExpect(content().json(objectMapper.writeValueAsString(mapsResponse.getMaps().values())));
 
 		verify(imageFetcher, times(1))
-				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
+				.setImgsSrcs(anyList(), any(UriComponentsBuilder.class), eq(latestVersion));
 
 		assertThat(mapsRepository.findAll())
 				.containsOnlyElementsOf(mapsResponse.getMaps().values());
@@ -113,7 +113,7 @@ public abstract class MapsRetrievalTest {
 
 		given(versionsService.getLatestVersion()).willReturn(latestVersion);
 
-		List<GameMap> maps = mapsRepository.save(mapsResponse.getMaps().values());
+		List<GameMap> maps = mapsRepository.saveAll(mapsResponse.getMaps().values());
 
 		mockMvc.perform(post("/riot/maps").with(csrf()))
 				.andExpect(status().isOk())
@@ -121,7 +121,7 @@ public abstract class MapsRetrievalTest {
 				.andExpect(content().json("[]"));
 
 		verify(imageFetcher, times(1))
-				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
+				.setImgsSrcs(anyList(), any(UriComponentsBuilder.class), eq(latestVersion));
 
 		assertThat(mapsRepository.findAll()).containsOnlyElementsOf(maps);
 	}
@@ -129,7 +129,7 @@ public abstract class MapsRetrievalTest {
 	@WithMockAdminUser
 	@Test
 	public void saveDifferenceOfMapsWithDelete() throws Exception {
-		List<GameMap> items = mapsRepository.save(mapsResponse.getMaps().values());
+		List<GameMap> items = mapsRepository.saveAll(mapsResponse.getMaps().values());
 		GameMap mapToDelete = RandomizeUtil.getRandom(items);
 		mapsResponse.getMaps().remove(String.valueOf(mapToDelete.getMapId()));
 
@@ -143,9 +143,9 @@ public abstract class MapsRetrievalTest {
 				.andExpect(content().json("[]"));
 
 		verify(imageFetcher, times(1))
-				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
+				.setImgsSrcs(anyList(), any(UriComponentsBuilder.class), eq(latestVersion));
 
-		assertThat(mapsRepository.findOne(mapToDelete.getMapId())).isNull();
+		assertThat(mapsRepository.findById(mapToDelete.getMapId())).isNotPresent();
 	}
 
 	@WithMockAdminUser
@@ -161,7 +161,7 @@ public abstract class MapsRetrievalTest {
 				.andExpect(content().json(objectMapper.writeValueAsString(mapsResponse.getMaps().values())));
 
 		verify(imageFetcher, times(1))
-				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
+				.setImgsSrcs(anyList(), any(UriComponentsBuilder.class), eq(latestVersion));
 
 		assertThat(mapsRepository.findAll())
 				.containsOnlyElementsOf(mapsResponse.getMaps().values());
@@ -202,7 +202,7 @@ public abstract class MapsRetrievalTest {
 		verify(imageFetcher, times(1))
 				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 
-		assertThat(mapsRepository.findOne(summonersRift.getMapId())).isNotNull();
+		assertThat(mapsRepository.findById(summonersRift.getMapId())).isPresent();
 	}
 
 	@WithMockAdminUser
@@ -234,8 +234,8 @@ public abstract class MapsRetrievalTest {
 		verify(imageFetcher, times(1))
 				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 
-		assertThat(mapsRepository.findOne(newSummonersRift.getMapId())).isNotNull()
-				.isEqualTo(newSummonersRift);
+		assertThat(mapsRepository.findById(newSummonersRift.getMapId())).isPresent()
+				.get().isEqualTo(newSummonersRift);
 	}
 
 }

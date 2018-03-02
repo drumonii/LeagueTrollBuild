@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.Optional;
+
 /**
  * {@link ItemProcessor} for processing {@link Item}s from Riot's API.
  */
@@ -32,8 +34,8 @@ public class ItemsRetrievalItemProcessor implements ItemProcessor<Item, Item> {
 
 	@Override
 	public Item process(Item item) {
-		Item itemFromDb = itemsRepository.findOne(item.getId());
-		if (itemFromDb != null && itemFromDb.equals(item)) {
+		Optional<Item> itemFromDb = itemsRepository.findById(item.getId());
+		if (itemFromDb.isPresent() && itemFromDb.get().equals(item)) {
 			return null;
 		}
 		imageFetcher.setImgSrc(item.getImage(), itemsImgUri, latestVersion);

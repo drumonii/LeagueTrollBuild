@@ -10,7 +10,7 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
-import org.springframework.boot.autoconfigure.web.WebClientAutoConfiguration;
+import org.springframework.boot.autoconfigure.web.client.RestTemplateAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.test.context.ConfigFileApplicationContextInitializer;
 import org.springframework.context.ApplicationContext;
@@ -36,7 +36,7 @@ import static org.assertj.core.data.MapEntry.entry;
 @Import(RiotApiConfig.class)
 @ContextConfiguration(initializers = ConfigFileApplicationContextInitializer.class)
 @EnableConfigurationProperties(RiotApiProperties.class)
-@ImportAutoConfiguration(WebClientAutoConfiguration.class)
+@ImportAutoConfiguration(RestTemplateAutoConfiguration.class)
 @TestPropertySource(properties = "riot.static-data.apiKey=API_KEY")
 @ActiveProfiles({ TESTING, STATIC_DATA })
 public class RiotApiPropertiesStaticDataConfigTest {

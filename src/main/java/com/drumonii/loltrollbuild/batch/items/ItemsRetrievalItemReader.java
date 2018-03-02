@@ -38,7 +38,7 @@ public class ItemsRetrievalItemReader extends AbstractItemStreamItemReader<Item>
 	public void open(ExecutionContext executionContext) throws ItemStreamException {
 		items = itemsService.getItems();
 		List<Item> deletedItems = ListUtils.subtract(itemsRepository.findAll(), items);
-		itemsRepository.delete(deletedItems);
+		itemsRepository.deleteAll(deletedItems);
 	}
 
 }

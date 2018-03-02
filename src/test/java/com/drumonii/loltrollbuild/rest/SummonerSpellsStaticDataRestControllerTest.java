@@ -24,7 +24,7 @@ public class SummonerSpellsStaticDataRestControllerTest extends SummonerSpellsRe
 		} catch (IOException e) {
 			fail("Unable to unmarshal the Summoner Spells response.", e);
 		}
-		summonerSpellsRepository.save(summonerSpellsResponse.getSummonerSpells().values());
+		summonerSpellsRepository.saveAll(summonerSpellsResponse.getSummonerSpells().values());
 	}
 
 }

@@ -11,6 +11,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * JPA repository to the MAP table.
@@ -25,7 +26,7 @@ public interface MapsRepository extends JpaRepository<GameMap, Integer> {
 
 	@CacheEvict(allEntries = true)
 	@Override
-	<S extends GameMap> List<S> save(Iterable<S> entities);
+	<S extends GameMap> List<S> saveAll(Iterable<S> entities);
 
 	@CacheEvict(allEntries = true)
 	@Override
@@ -33,15 +34,15 @@ public interface MapsRepository extends JpaRepository<GameMap, Integer> {
 
 	@Cacheable
 	@Override
-	GameMap findOne(Integer integer);
+	Optional<GameMap> findById(Integer integer);
 
 	@CacheEvict(allEntries = true)
 	@Override
-	void delete(Integer integer);
+	void deleteById(Integer integer);
 
 	@CacheEvict(allEntries = true)
 	@Override
-	void delete(Iterable<? extends GameMap> entities);
+	void deleteAll(Iterable<? extends GameMap> entities);
 
 	@CacheEvict(allEntries = true)
 	@Override

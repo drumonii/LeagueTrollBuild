@@ -15,18 +15,20 @@
             <div class="label" th:text="#{admin.actuator.metrics.uptime}">Uptime</div>
         </div>
         <div class="statistic">
-            <div id="instance-uptime" class="value"></div>
-            <div class="label" th:text="#{admin.actuator.metrics.instanceUptime}">Instance Uptime</div>
+            <div id="cpu-usage" class="value"></div>
+            <div class="label" th:text="#{admin.actuator.metrics.cpuUsage}">CPU Usage</div>
         </div>
     </div>
     <script th:inline="javascript">
         $(function() {
-            $.get(/*[[@{/admin/actuator/metrics}]]*/ '/admin/actuator/metrics', function(data) {
-                var uptime = data.uptime + '';
-                var instanceUptime = data['instance.uptime'] + '';
-                $('#uptime').text(uptime.substring(0, uptime.length - 3));
-                $('#instance-uptime').text(instanceUptime.substring(0, instanceUptime.length - 3));
+            $.get(/*[[@{/admin/actuator/metrics/process.start.time}]]*/ '/admin/actuator/metrics/process.start.time', function(data) {
+                var uptime = data.measurements[0].value + '';
+                $('#uptime').text(uptime.substring(0, uptime.indexOf('.')));
             });
+			$.get(/*[[@{/admin/actuator/metrics/system.cpu.usage}]]*/ '/admin/actuator/metrics/system.cpu.usage', function(data) {
+				var cpuUsage = data.measurements[0].value;
+				$('#cpu-usage').text((cpuUsage * 100).toFixed(2) + '%');
+			});
         });
     </script>
 </div>

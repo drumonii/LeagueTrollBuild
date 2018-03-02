@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.core.AutoConfigureCache;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
+import org.springframework.hateoas.MediaTypes;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +18,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 import static com.drumonii.loltrollbuild.rest.VersionsRestController.PAGE_SIZE;
-import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -31,8 +30,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureCache
 @Transactional
 public abstract class VersionsRestControllerTest {
-
-	private static final MediaType HAL_JSON_UTF8 = new MediaType("application", "hal+json", UTF_8);
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -55,7 +52,7 @@ public abstract class VersionsRestControllerTest {
 		// qbe
 		mockMvc.perform(get("{apiPath}/versions", apiPath))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(HAL_JSON_UTF8))
+				.andExpect(content().contentType(MediaTypes.HAL_JSON_UTF8))
 				.andExpect(jsonPath("$._embedded.versions").exists())
 				.andExpect(jsonPath("$._embedded.versions[0].major", is(versions.get(0).getMajor())))
 				.andExpect(jsonPath("$._embedded.versions[0].minor", is(versions.get(0).getMinor())))
@@ -73,7 +70,7 @@ public abstract class VersionsRestControllerTest {
 		mockMvc.perform(get("{apiPath}/versions", apiPath)
 				.param("patch", "1234"))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(HAL_JSON_UTF8))
+				.andExpect(content().contentType(MediaTypes.HAL_JSON_UTF8))
 				.andExpect(jsonPath("$._embedded").doesNotExist())
 				.andExpect(jsonPath("$._links.self").exists())
 				.andExpect(jsonPath("$._links.self.href").exists())

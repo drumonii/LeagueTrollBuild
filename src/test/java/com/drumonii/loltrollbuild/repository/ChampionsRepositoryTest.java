@@ -16,6 +16,8 @@ import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Optional;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
@@ -37,16 +39,16 @@ public abstract class ChampionsRepositoryTest {
 	@Before
 	public void before() {
 		championsResponse = getChampionsResponse();
-		championsRepository.save(championsResponse.getChampions().values());
+		championsRepository.saveAll(championsResponse.getChampions().values());
 	}
 
 	@Test
 	public void findByName() {
-		Champion velKoz = championsRepository.findByName("VelKoz");
-		assertThat(velKoz).isNotNull();
+		Optional<Champion> velKoz = championsRepository.findByName("VelKoz");
+		assertThat(velKoz).isPresent();
 
 		velKoz = championsRepository.findByName("vEl'kOz");
-		assertThat(velKoz).isNotNull();
+		assertThat(velKoz).isPresent();
 	}
 
 	@Test

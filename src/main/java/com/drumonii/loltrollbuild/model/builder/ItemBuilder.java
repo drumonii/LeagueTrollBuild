@@ -4,8 +4,8 @@ import com.drumonii.loltrollbuild.model.Item;
 import com.drumonii.loltrollbuild.model.ItemGold;
 import com.drumonii.loltrollbuild.model.image.ItemImage;
 
-import java.util.*;
 import java.util.AbstractMap.SimpleEntry;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -64,7 +64,7 @@ public final class ItemBuilder {
 
 	public ItemBuilder withFrom(Integer... from) {
 		if (from != null) {
-			this.from = Arrays.asList(from);
+			withFrom(Arrays.asList(from));
 		}
 		return this;
 	}
@@ -76,7 +76,7 @@ public final class ItemBuilder {
 
 	public ItemBuilder withInto(Integer... into) {
 		if (into != null) {
-			this.into = new TreeSet<>(Arrays.asList(into));
+			withInto(new TreeSet<>(Arrays.asList(into)));
 		}
 		return this;
 	}

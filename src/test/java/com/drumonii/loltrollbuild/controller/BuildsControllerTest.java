@@ -16,12 +16,14 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.Optional;
+
 import static com.drumonii.loltrollbuild.config.Profiles.TESTING;
 import static com.drumonii.loltrollbuild.util.GameMapUtil.SUMMONERS_RIFT_ID;
 import static org.hamcrest.Matchers.is;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -89,13 +91,13 @@ public class BuildsControllerTest {
 	@WithAnonymousUser
 	@Test
 	public void missingBuild() throws Exception {
-		given(buildsRepository.findOne(anyInt())).willReturn(null);
+		given(buildsRepository.findById(anyInt())).willReturn(Optional.empty());
 
 		mockMvc.perform(get("/builds/{id}", 1))
 				.andExpect(status().isOk())
 				.andExpect(view().name("builds/notFound"));
 
-		verify(buildsRepository, times(1)).findOne(eq(1));
+		verify(buildsRepository, times(1)).findById(eq(1));
 	}
 
 	@WithAnonymousUser
@@ -114,36 +116,36 @@ public class BuildsControllerTest {
 		build.setTrinketId(10);
 		build.setMapId(11);
 
-		given(championsRepository.findOne(anyInt())).willReturn(null);
-		given(itemsRepository.findOne(anyInt())).willReturn(null);
-		given(itemsRepository.findOne(anyInt())).willReturn(null);
-		given(itemsRepository.findOne(anyInt())).willReturn(null);
-		given(itemsRepository.findOne(anyInt())).willReturn(null);
-		given(itemsRepository.findOne(anyInt())).willReturn(null);
-		given(itemsRepository.findOne(anyInt())).willReturn(null);
-		given(summonerSpellsRepository.findOne(anyInt())).willReturn(null);
-		given(summonerSpellsRepository.findOne(anyInt())).willReturn(null);
-		given(itemsRepository.findOne(anyInt())).willReturn(null);
-		given(mapsRepository.findOne(anyInt())).willReturn(null);
+		given(championsRepository.findById(anyInt())).willReturn(Optional.empty());
+		given(itemsRepository.findById(anyInt())).willReturn(Optional.empty());
+		given(itemsRepository.findById(anyInt())).willReturn(Optional.empty());
+		given(itemsRepository.findById(anyInt())).willReturn(Optional.empty());
+		given(itemsRepository.findById(anyInt())).willReturn(Optional.empty());
+		given(itemsRepository.findById(anyInt())).willReturn(Optional.empty());
+		given(itemsRepository.findById(anyInt())).willReturn(Optional.empty());
+		given(summonerSpellsRepository.findById(anyInt())).willReturn(Optional.empty());
+		given(summonerSpellsRepository.findById(anyInt())).willReturn(Optional.empty());
+		given(itemsRepository.findById(anyInt())).willReturn(Optional.empty());
+		given(mapsRepository.findById(anyInt())).willReturn(Optional.empty());
 
-		given(buildsRepository.findOne(anyInt())).willReturn(build);
+		given(buildsRepository.findById(anyInt())).willReturn(Optional.of(build));
 
 		mockMvc.perform(get("/builds/{id}", 1))
 				.andExpect(status().isOk())
 				.andExpect(model().attributeExists("latestSavedPatch"))
 				.andExpect(view().name("builds/invalidAttributes"));
 
-		verify(championsRepository, times(1)).findOne(eq(1));
-		verify(itemsRepository, times(1)).findOne(eq(2));
-		verify(itemsRepository, times(1)).findOne(eq(3));
-		verify(itemsRepository, times(1)).findOne(eq(4));
-		verify(itemsRepository, times(1)).findOne(eq(5));
-		verify(itemsRepository, times(1)).findOne(eq(6));
-		verify(itemsRepository, times(1)).findOne(eq(7));
-		verify(summonerSpellsRepository, times(1)).findOne(eq(8));
-		verify(summonerSpellsRepository, times(1)).findOne(eq(9));
-		verify(itemsRepository, times(1)).findOne(eq(10));
-		verify(mapsRepository, times(1)).findOne(eq(11));
+		verify(championsRepository, times(1)).findById(eq(1));
+		verify(itemsRepository, times(1)).findById(eq(2));
+		verify(itemsRepository, times(1)).findById(eq(3));
+		verify(itemsRepository, times(1)).findById(eq(4));
+		verify(itemsRepository, times(1)).findById(eq(5));
+		verify(itemsRepository, times(1)).findById(eq(6));
+		verify(itemsRepository, times(1)).findById(eq(7));
+		verify(summonerSpellsRepository, times(1)).findById(eq(8));
+		verify(summonerSpellsRepository, times(1)).findById(eq(9));
+		verify(itemsRepository, times(1)).findById(eq(10));
+		verify(mapsRepository, times(1)).findById(eq(11));
 	}
 
 	@WithAnonymousUser
@@ -249,19 +251,19 @@ public class BuildsControllerTest {
 		build.setTrinketId(trinket.getId());
 		build.setMapId(map.getMapId());
 
-		given(championsRepository.findOne(anyInt())).willReturn(champion);
-		given(itemsRepository.findOne(anyInt())).willReturn(boots);
-		given(itemsRepository.findOne(anyInt())).willReturn(item2);
-		given(itemsRepository.findOne(anyInt())).willReturn(item3);
-		given(itemsRepository.findOne(anyInt())).willReturn(item4);
-		given(itemsRepository.findOne(anyInt())).willReturn(item5);
-		given(itemsRepository.findOne(anyInt())).willReturn(item6);
-		given(summonerSpellsRepository.findOne(anyInt())).willReturn(summonerSpell1);
-		given(summonerSpellsRepository.findOne(anyInt())).willReturn(summonerSpell2);
-		given(itemsRepository.findOne(anyInt())).willReturn(trinket);
-		given(mapsRepository.findOne(anyInt())).willReturn(map);
+		given(championsRepository.findById(anyInt())).willReturn(Optional.of(champion));
+		given(itemsRepository.findById(anyInt())).willReturn(Optional.of(boots));
+		given(itemsRepository.findById(anyInt())).willReturn(Optional.of(item2));
+		given(itemsRepository.findById(anyInt())).willReturn(Optional.of(item3));
+		given(itemsRepository.findById(anyInt())).willReturn(Optional.of(item4));
+		given(itemsRepository.findById(anyInt())).willReturn(Optional.of(item5));
+		given(itemsRepository.findById(anyInt())).willReturn(Optional.of(item6));
+		given(summonerSpellsRepository.findById(anyInt())).willReturn(Optional.of(summonerSpell1));
+		given(summonerSpellsRepository.findById(anyInt())).willReturn(Optional.of(summonerSpell2));
+		given(itemsRepository.findById(anyInt())).willReturn(Optional.of(trinket));
+		given(mapsRepository.findById(anyInt())).willReturn(Optional.of(map));
 
-		given(buildsRepository.findOne(anyInt())).willReturn(build);
+		given(buildsRepository.findById(anyInt())).willReturn(Optional.of(build));
 
 		mockMvc.perform(get("/builds/{id}", build.getId()))
 				.andExpect(status().isOk())
@@ -269,17 +271,17 @@ public class BuildsControllerTest {
 				.andExpect(model().attribute("build", is(build)))
 				.andExpect(view().name("builds/build"));
 
-		verify(championsRepository, times(1)).findOne(eq(champion.getId()));
-		verify(itemsRepository, times(1)).findOne(eq(boots.getId()));
-		verify(itemsRepository, times(1)).findOne(eq(item2.getId()));
-		verify(itemsRepository, times(1)).findOne(eq(item3.getId()));
-		verify(itemsRepository, times(1)).findOne(eq(item4.getId()));
-		verify(itemsRepository, times(1)).findOne(eq(item5.getId()));
-		verify(itemsRepository, times(1)).findOne(eq(item6.getId()));
-		verify(summonerSpellsRepository, times(1)).findOne(eq(summonerSpell1.getId()));
-		verify(summonerSpellsRepository, times(1)).findOne(eq(summonerSpell2.getId()));
-		verify(itemsRepository, times(1)).findOne(eq(trinket.getId()));
-		verify(mapsRepository, times(1)).findOne(eq(map.getMapId()));
+		verify(championsRepository, times(1)).findById(eq(champion.getId()));
+		verify(itemsRepository, times(1)).findById(eq(boots.getId()));
+		verify(itemsRepository, times(1)).findById(eq(item2.getId()));
+		verify(itemsRepository, times(1)).findById(eq(item3.getId()));
+		verify(itemsRepository, times(1)).findById(eq(item4.getId()));
+		verify(itemsRepository, times(1)).findById(eq(item5.getId()));
+		verify(itemsRepository, times(1)).findById(eq(item6.getId()));
+		verify(summonerSpellsRepository, times(1)).findById(eq(summonerSpell1.getId()));
+		verify(summonerSpellsRepository, times(1)).findById(eq(summonerSpell2.getId()));
+		verify(itemsRepository, times(1)).findById(eq(trinket.getId()));
+		verify(mapsRepository, times(1)).findById(eq(map.getMapId()));
 	}
 
 }

@@ -41,7 +41,7 @@ public interface VersionsRepository extends JpaRepository<Version, String> {
 
 	@CacheEvict(allEntries = true)
 	@Override
-	<S extends Version> List<S> save(Iterable<S> entities);
+	<S extends Version> List<S> saveAll(Iterable<S> entities);
 
 	@CacheEvict(allEntries = true)
 	@Override
@@ -53,7 +53,7 @@ public interface VersionsRepository extends JpaRepository<Version, String> {
 
 	@CacheEvict(allEntries = true)
 	@Override
-	void delete(Iterable<? extends Version> entities);
+	void deleteAll(Iterable<? extends Version> entities);
 
 	@CacheEvict(allEntries = true)
 	@Override

@@ -29,10 +29,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyList;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyListOf;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
@@ -103,7 +103,7 @@ public abstract class SummonerSpellsRetrievalTest {
 						.getSummonerSpells().values())));
 
 		verify(imageFetcher, times(1))
-				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
+				.setImgsSrcs(anyList(), any(UriComponentsBuilder.class), eq(latestVersion));
 
 		assertThat(summonerSpellsRepository.findAll())
 				.containsOnlyElementsOf(summonerSpellsResponse.getSummonerSpells().values());
@@ -117,7 +117,7 @@ public abstract class SummonerSpellsRetrievalTest {
 
 		given(versionsService.getLatestVersion()).willReturn(latestVersion);
 
-		List<SummonerSpell> summonerSpells = summonerSpellsRepository.save(summonerSpellsResponse
+		List<SummonerSpell> summonerSpells = summonerSpellsRepository.saveAll(summonerSpellsResponse
 				.getSummonerSpells().values());
 
 		mockMvc.perform(post("/riot/summoner-spells").with(csrf()))
@@ -126,7 +126,7 @@ public abstract class SummonerSpellsRetrievalTest {
 				.andExpect(content().json("[]"));
 
 		verify(imageFetcher, times(1))
-				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
+				.setImgsSrcs(anyList(), any(UriComponentsBuilder.class), eq(latestVersion));
 
 		assertThat(summonerSpellsRepository.findAll()).containsOnlyElementsOf(summonerSpells);
 	}
@@ -134,7 +134,7 @@ public abstract class SummonerSpellsRetrievalTest {
 	@WithMockAdminUser
 	@Test
 	public void saveDifferenceOfSummonerSpellsWithDeleted() throws Exception {
-		List<SummonerSpell> summonerSpells = summonerSpellsRepository.save(summonerSpellsResponse
+		List<SummonerSpell> summonerSpells = summonerSpellsRepository.saveAll(summonerSpellsResponse
 				.getSummonerSpells().values());
 		SummonerSpell summonerSpellToDelete = RandomizeUtil.getRandom(summonerSpells);
 		summonerSpellsResponse.getSummonerSpells().remove(summonerSpellToDelete.getKey());
@@ -150,9 +150,9 @@ public abstract class SummonerSpellsRetrievalTest {
 				.andExpect(content().json("[]"));
 
 		verify(imageFetcher, times(1))
-				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
+				.setImgsSrcs(anyList(), any(UriComponentsBuilder.class), eq(latestVersion));
 
-		assertThat(summonerSpellsRepository.findOne(summonerSpellToDelete.getId())).isNull();
+		assertThat(summonerSpellsRepository.findById(summonerSpellToDelete.getId())).isNotPresent();
 	}
 
 	@WithMockAdminUser
@@ -170,7 +170,7 @@ public abstract class SummonerSpellsRetrievalTest {
 						.getSummonerSpells().values())));
 
 		verify(imageFetcher, times(1))
-				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
+				.setImgsSrcs(anyList(), any(UriComponentsBuilder.class), eq(latestVersion));
 
 		assertThat(summonerSpellsRepository.findAll())
 				.containsOnlyElementsOf(summonerSpellsResponse.getSummonerSpells().values());
@@ -211,7 +211,7 @@ public abstract class SummonerSpellsRetrievalTest {
 		verify(imageFetcher, times(1))
 				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 
-		assertThat(summonerSpellsRepository.findOne(ignite.getId())).isNotNull();
+		assertThat(summonerSpellsRepository.findById(ignite.getId())).isPresent();
 	}
 
 	@WithMockAdminUser
@@ -242,8 +242,8 @@ public abstract class SummonerSpellsRetrievalTest {
 		verify(imageFetcher, times(1))
 				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 
-		assertThat(summonerSpellsRepository.findOne(newIgnite.getId())).isNotNull()
-				.isEqualTo(newIgnite);
+		assertThat(summonerSpellsRepository.findById(newIgnite.getId())).isPresent()
+				.get().isEqualTo(newIgnite);
 	}
 
 }

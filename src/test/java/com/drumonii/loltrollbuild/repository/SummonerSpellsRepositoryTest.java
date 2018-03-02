@@ -40,7 +40,7 @@ public abstract class SummonerSpellsRepositoryTest {
 	@Before
 	public void before() {
 		summonerSpellsResponse = getSummonerSpellsResponse();
-		summonerSpellsRepository.save(summonerSpellsResponse.getSummonerSpells().values());
+		summonerSpellsRepository.saveAll(summonerSpellsResponse.getSummonerSpells().values());
 	}
 
 	@Test

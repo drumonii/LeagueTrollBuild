@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Optional;
+
 import static org.springframework.data.domain.ExampleMatcher.StringMatcher.CONTAINING;
 
 /**
@@ -72,11 +74,11 @@ public class BatchJobInstancesRestController {
 	 */
 	@GetMapping(value = "/{jobInstanceId}")
 	public Resource<BatchJobInstanceProjection> getBatchJobInstance(@PathVariable long jobInstanceId) {
-		BatchJobInstance jobInstance = batchJobInstancesRepository.findOne(jobInstanceId);
-		if (jobInstance == null) {
+		Optional<BatchJobInstance> jobInstance = batchJobInstancesRepository.findById(jobInstanceId);
+		if (!jobInstance.isPresent()) {
 			throw new ResourceNotFoundException("Unable to find Batch Job Instance with Id: " + jobInstanceId);
 		}
-		return new Resource<>(projectionFactory.createProjection(BatchJobInstanceProjection.class, jobInstance));
+		return new Resource<>(projectionFactory.createProjection(BatchJobInstanceProjection.class, jobInstance.get()));
 	}
 
 }

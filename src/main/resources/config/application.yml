@@ -49,19 +49,23 @@ spring:
   thymeleaf.mode: HTML
   # Batch
   batch:
-    initializer.enabled: false
-    job.enabled: false
+    initialize-schema: never
+    job:
+      enabled: false
   # Jackson
   jackson:
-    serialization:
-      write_dates_as_timestamps: false
     deserialization:
       fail_on_unknown_properties: false
 # Actuator
 management:
-  context-path: /admin/actuator
-  security:
-    roles: ADMIN
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      base-path: /admin/actuator
+      exposure:
+        include: env, flyway, health, metrics
 #Wro4j
 wro4j:
   filter-url: /assets
@@ -83,6 +87,7 @@ spring:
         generate_statistics: false
         id.new_generator_mappings: true
         hbm2ddl.auto:
+        temp.use_jdbc_metadata_defaults: false
 
 ---
 
@@ -90,7 +95,6 @@ spring:
 spring:
   profiles: external
   datasource:
-    initialize: false
     driverClassName: org.postgresql.Driver
     url: ${DB_URL}
     username: ${DB_USERNAME}
@@ -104,6 +108,7 @@ spring:
         generate_statistics: false
         id.new_generator_mappings: true
         hbm2ddl.auto:
+        temp.use_jdbc_metadata_defaults: false
 
 ---
 
@@ -111,7 +116,6 @@ spring:
 spring:
   profiles: dev
   datasource:
-    initialize: false
     driverClassName: org.postgresql.Driver
     url: jdbc:postgresql://localhost/loltrollbuild
     username: postgres
@@ -125,7 +129,7 @@ spring:
         generate_statistics: false
         id.new_generator_mappings: true
         hbm2ddl.auto:
-
+        temp.use_jdbc_metadata_defaults: false
 #Wro4j
 wro4j:
   resource-watcher-update-period: 5
@@ -144,6 +148,7 @@ spring:
         generate_statistics: false
         id.new_generator_mappings: true
         hbm2ddl.auto:
+        temp.use_jdbc_metadata_defaults: false
   # Cache
   cache:
     type: simple

@@ -19,7 +19,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.http.MediaType;
+import org.springframework.hateoas.MediaTypes;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.MetaDataAccessException;
 import org.springframework.test.context.ActiveProfiles;
@@ -31,7 +31,6 @@ import javax.sql.DataSource;
 
 import static com.drumonii.loltrollbuild.config.Profiles.TESTING;
 import static com.drumonii.loltrollbuild.rest.BatchJobInstancesRestController.PAGE_SIZE;
-import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -46,8 +45,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Transactional
 @ActiveProfiles({ TESTING })
 public class BatchJobInstancesRestControllerTest {
-
-	private static final MediaType HAL_JSON_UTF8 = new MediaType("application", "hal+json", UTF_8);
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -101,7 +98,7 @@ public class BatchJobInstancesRestControllerTest {
 		// qbe
 		mockMvc.perform(get("{apiPath}/job-instances", apiPath))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(HAL_JSON_UTF8))
+				.andExpect(content().contentType(MediaTypes.HAL_JSON_UTF8))
 				.andExpect(jsonPath("$._embedded.jobInstances").exists())
 				.andExpect(jsonPath("$._embedded.jobInstances[*].jobExecution").exists())
 				.andExpect(jsonPath("$._links").exists())
@@ -117,7 +114,7 @@ public class BatchJobInstancesRestControllerTest {
 		mockMvc.perform(get("{apiPath}/job-instances", apiPath)
 				.param("name", jobInstance.getJobName().toLowerCase()))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(HAL_JSON_UTF8))
+				.andExpect(content().contentType(MediaTypes.HAL_JSON_UTF8))
 				.andExpect(jsonPath("$._embedded.jobInstances", hasSize(1)))
 				.andExpect(jsonPath("$._embedded.jobInstances[*].jobExecution").exists())
 				.andExpect(jsonPath("$._links").exists())
@@ -133,7 +130,7 @@ public class BatchJobInstancesRestControllerTest {
 		mockMvc.perform(get("{apiPath}/job-instances", apiPath)
 				.param("name", "abcd1234"))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(HAL_JSON_UTF8))
+				.andExpect(content().contentType(MediaTypes.HAL_JSON_UTF8))
 				.andExpect(jsonPath("$._embedded").doesNotExist())
 				.andExpect(jsonPath("$._links.self").exists())
 				.andExpect(jsonPath("$._links.self.href").exists())
@@ -148,7 +145,7 @@ public class BatchJobInstancesRestControllerTest {
 	public void getBatchJobInstance() throws Exception {
 		mockMvc.perform(get("{apiPath}/job-instances/{jobInstanceId}", apiPath, jobInstance.getId()))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(HAL_JSON_UTF8))
+				.andExpect(content().contentType(MediaTypes.HAL_JSON_UTF8))
 				.andExpect(jsonPath("$.jobExecution").exists())
 				.andExpect(jsonPath("$._links.self").exists())
 				.andExpect(jsonPath("$._links.self.href").exists());

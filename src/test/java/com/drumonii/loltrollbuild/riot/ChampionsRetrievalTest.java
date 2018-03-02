@@ -31,10 +31,10 @@ import java.util.List;
 import java.util.TreeSet;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyList;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyListOf;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
@@ -101,7 +101,7 @@ public abstract class ChampionsRetrievalTest {
 				.andExpect(content().json(objectMapper.writeValueAsString(championsResponse.getChampions().values())));
 
 		verify(imageFetcher, times(3))
-				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
+				.setImgsSrcs(anyList(), any(UriComponentsBuilder.class), eq(latestVersion));
 
 		assertThat(championsRepository.findAll()).containsOnlyElementsOf(championsResponse.getChampions().values());
 	}
@@ -113,7 +113,7 @@ public abstract class ChampionsRetrievalTest {
 
 		given(versionsService.getLatestVersion()).willReturn(latestVersion);
 
-		List<Champion> champions = championsRepository.save(championsResponse.getChampions().values());
+		List<Champion> champions = championsRepository.saveAll(championsResponse.getChampions().values());
 
 		mockMvc.perform(post("/riot/champions").with(csrf()))
 				.andExpect(status().isOk())
@@ -121,7 +121,7 @@ public abstract class ChampionsRetrievalTest {
 				.andExpect(content().json("[]"));
 
 		verify(imageFetcher, times(3))
-				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
+				.setImgsSrcs(anyList(), any(UriComponentsBuilder.class), eq(latestVersion));
 
 		assertThat(championsRepository.findAll()).containsOnlyElementsOf(champions);
 	}
@@ -129,7 +129,7 @@ public abstract class ChampionsRetrievalTest {
 	@WithMockAdminUser
 	@Test
 	public void saveDifferenceOfChampionsWithDeleted() throws Exception {
-		List<Champion> champions = championsRepository.save(championsResponse.getChampions().values());
+		List<Champion> champions = championsRepository.saveAll(championsResponse.getChampions().values());
 		Champion championToDelete = RandomizeUtil.getRandom(champions);
 		championsResponse.getChampions().remove(championToDelete.getKey());
 
@@ -143,9 +143,9 @@ public abstract class ChampionsRetrievalTest {
 				.andExpect(content().json("[]"));
 
 		verify(imageFetcher, times(3))
-				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
+				.setImgsSrcs(anyList(), any(UriComponentsBuilder.class), eq(latestVersion));
 
-		assertThat(championsRepository.findOne(championToDelete.getId())).isNull();
+		assertThat(championsRepository.findById(championToDelete.getId())).isNotPresent();
 	}
 
 	@WithMockAdminUser
@@ -161,7 +161,7 @@ public abstract class ChampionsRetrievalTest {
 				.andExpect(content().json(objectMapper.writeValueAsString(championsResponse.getChampions().values())));
 
 		verify(imageFetcher, times(3))
-				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
+				.setImgsSrcs(anyList(), any(UriComponentsBuilder.class), eq(latestVersion));
 
 		assertThat(championsRepository.findAll()).containsOnlyElementsOf(championsResponse.getChampions().values());
 	}
@@ -201,9 +201,9 @@ public abstract class ChampionsRetrievalTest {
 		verify(imageFetcher, times(2))
 				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 		verify(imageFetcher, times(1))
-				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
+				.setImgsSrcs(anyList(), any(UriComponentsBuilder.class), eq(latestVersion));
 
-		assertThat(championsRepository.findOne(leeSin.getId())).isNotNull();
+		assertThat(championsRepository.findById(leeSin.getId())).isPresent();
 	}
 
 	@WithMockAdminUser
@@ -234,10 +234,10 @@ public abstract class ChampionsRetrievalTest {
 		verify(imageFetcher, times(2))
 				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 		verify(imageFetcher, times(1))
-				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
+				.setImgsSrcs(anyList(), any(UriComponentsBuilder.class), eq(latestVersion));
 
-		assertThat(championsRepository.findOne(newLeeSin.getId())).isNotNull()
-				.isEqualTo(newLeeSin);
+		assertThat(championsRepository.findById(newLeeSin.getId())).isPresent()
+				.get().isEqualTo(newLeeSin);
 	}
 
 }

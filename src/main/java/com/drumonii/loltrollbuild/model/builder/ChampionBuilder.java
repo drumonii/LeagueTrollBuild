@@ -60,7 +60,7 @@ public final class ChampionBuilder {
 	}
 
 	public ChampionBuilder withSpells(ChampionSpell... spells) {
-		this.spells = Arrays.asList(spells);
+		withSpells(Arrays.asList(spells));
 		return this;
 	}
 
@@ -80,7 +80,7 @@ public final class ChampionBuilder {
 	}
 
 	public ChampionBuilder withTags(String... tags) {
-		this.tags = new TreeSet<>(Arrays.asList(tags));
+		withTags(new TreeSet<>(Arrays.asList(tags)));
 		return this;
 	}
 
@@ -98,10 +98,13 @@ public final class ChampionBuilder {
 		}
 		champion.setSpells(spells);
 		for (ChampionSpell spell : spells) {
+			spell.getImage().setKey(spell.getKey());
+			spell.getImage().setSpell(spell);
 			spell.setChampion(champion);
 		}
 		champion.setPassive(passive);
 		if (passive != null) {
+			passive.getImage().setId(id);
 			passive.setId(id);
 			passive.setChampion(champion);
 		}

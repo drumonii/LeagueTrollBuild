@@ -14,6 +14,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * JPA repository to the ITEM table.
@@ -95,7 +96,7 @@ public interface ItemsRepository extends JpaRepository<Item, Integer> {
 
 	@CacheEvict(allEntries = true)
 	@Override
-	<S extends Item> List<S> save(Iterable<S> entities);
+	<S extends Item> List<S> saveAll(Iterable<S> entities);
 
 	@CacheEvict(allEntries = true)
 	@Override
@@ -103,15 +104,15 @@ public interface ItemsRepository extends JpaRepository<Item, Integer> {
 
 	@Cacheable
 	@Override
-	Item findOne(Integer integer);
+	Optional<Item> findById(Integer integer);
 
 	@CacheEvict(allEntries = true)
 	@Override
-	void delete(Integer integer);
+	void deleteById(Integer integer);
 
 	@CacheEvict(allEntries = true)
 	@Override
-	void delete(Iterable<? extends Item> entities);
+	void deleteAll(Iterable<? extends Item> entities);
 
 	@CacheEvict(allEntries = true)
 	@Override

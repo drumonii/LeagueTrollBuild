@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
 import org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration;
-import org.springframework.boot.autoconfigure.web.WebClientAutoConfiguration;
+import org.springframework.boot.autoconfigure.web.client.RestTemplateAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.test.context.ConfigFileApplicationContextInitializer;
 import org.springframework.context.ApplicationContext;
@@ -33,7 +33,7 @@ import static org.assertj.core.api.Assertions.fail;
 @Import(RiotApiConfig.class)
 @ContextConfiguration(initializers = ConfigFileApplicationContextInitializer.class)
 @EnableConfigurationProperties(RiotApiProperties.class)
-@ImportAutoConfiguration({ WebClientAutoConfiguration.class, JacksonAutoConfiguration.class })
+@ImportAutoConfiguration({ RestTemplateAutoConfiguration.class, JacksonAutoConfiguration.class })
 @ActiveProfiles({ TESTING, DDRAGON })
 public class RiotApiPropertiesDdragonConfigTest {
 

@@ -5,7 +5,10 @@ import com.drumonii.loltrollbuild.config.Profiles.Embedded;
 import com.drumonii.loltrollbuild.config.Profiles.External;
 import com.drumonii.loltrollbuild.config.Profiles.Testing;
 import com.drumonii.loltrollbuild.security.CsrfTokenExpiredAccessDeniedHandler;
+import com.drumonii.loltrollbuild.security.NoOpPasswordEncoder;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -43,6 +46,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		// @formatter:off
 		http
 			.authorizeRequests()
+				.requestMatchers(EndpointRequest.toAnyEndpoint()).hasRole(ADMIN_ROLE)
+				.requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
 				.antMatchers("/riot/**")     .hasRole(ADMIN_ROLE)
 				.antMatchers("/admin/**")    .hasRole(ADMIN_ROLE)
 				.antMatchers(POST,   apiPath + "/builds").permitAll()
@@ -50,8 +55,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers(PUT,    apiPath).hasRole(ADMIN_ROLE)
 				.antMatchers(PATCH,  apiPath).hasRole(ADMIN_ROLE)
 				.antMatchers(DELETE, apiPath).hasRole(ADMIN_ROLE)
-			.and()
-			.headers().cacheControl().disable()
 			.and()
 			.formLogin()
 				.loginPage("/admin/login")
@@ -84,6 +87,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
 			manager.createUser(User.withUsername(IN_MEM_USERNAME).password(IN_MEM_PASSWORD).roles(ADMIN_ROLE).build());
 			return manager;
+		}
+
+		@Bean
+		public PasswordEncoder passwordEncoder() {
+			return new NoOpPasswordEncoder();
 		}
 
 	}

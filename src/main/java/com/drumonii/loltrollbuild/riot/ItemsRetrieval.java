@@ -72,7 +72,7 @@ public class ItemsRetrieval {
 		} else {
 			List<Item> itemsFromDb = itemsRepository.findAll();
 			List<Item> deletedItems = ListUtils.subtract(itemsFromDb, items);
-			itemsRepository.delete(deletedItems);
+			itemsRepository.deleteAll(deletedItems);
 			items = ListUtils.subtract(items, itemsFromDb);
 		}
 
@@ -80,7 +80,7 @@ public class ItemsRetrieval {
 
 		imageFetcher.setImgsSrcs(items.stream().map(Item::getImage).collect(Collectors.toList()), itemsImgUri,
 				latestVersion);
-		return itemsRepository.save(items);
+		return itemsRepository.saveAll(items);
 	}
 
 	/**

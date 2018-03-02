@@ -22,15 +22,16 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import static com.drumonii.loltrollbuild.config.Profiles.TESTING;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.is;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.springframework.data.domain.Sort.Direction.ASC;
@@ -210,7 +211,7 @@ public class ChampionsControllerTest {
 				.withSpells(xinSpell1)
 				.build();
 
-		given(championsRepository.findOne(anyInt())).willReturn(xin);
+		given(championsRepository.findById(anyInt())).willReturn(Optional.of(xin));
 
 		GameMapImage crystalScarImage = new GameMapImageBuilder()
 				.withFull("map8.png")
@@ -253,7 +254,7 @@ public class ChampionsControllerTest {
 				.andExpect(model().attribute("maps", containsInAnyOrder(summonersRift)))
 				.andExpect(view().name("champions/champion"));
 
-		verify(championsRepository, times(1)).findOne(eq(xin.getId()));
+		verify(championsRepository, times(1)).findById(eq(xin.getId()));
 	}
 
 	@WithAnonymousUser
@@ -318,7 +319,7 @@ public class ChampionsControllerTest {
 				.withSpells(brandSpell1)
 				.build();
 
-		given(championsRepository.findByName(anyString())).willReturn(brand);
+		given(championsRepository.findByName(anyString())).willReturn(Optional.of(brand));
 
 		GameMapImage butchersBridgeImage = new GameMapImageBuilder()
 				.withFull("map14.png")
@@ -367,21 +368,21 @@ public class ChampionsControllerTest {
 	@WithAnonymousUser
 	@Test
 	public void championDoesNotExist() throws Exception {
-		given(championsRepository.findOne(anyInt())).willReturn(null);
+		given(championsRepository.findById(anyInt())).willReturn(Optional.empty());
 
 		mockMvc.perform(get("/champions/{id}", 0))
 				.andExpect(status().is3xxRedirection())
 				.andExpect(redirectedUrl("/champions"));
 
-		verify(championsRepository, times(1)).findOne(eq(0));
+		verify(championsRepository, times(1)).findById(eq(0));
 
-		given(championsRepository.findByName(anyString())).willReturn(null);
+		given(championsRepository.findByName(anyString())).willReturn(Optional.empty());
 
-		mockMvc.perform(get("/champions/{id}", "not exist"))
+		mockMvc.perform(get("/champions/{id}", "not_exist"))
 				.andExpect(status().is3xxRedirection())
 				.andExpect(redirectedUrl("/champions"));
 
-		verify(championsRepository, times(1)).findByName(eq("not exist"));
+		verify(championsRepository, times(1)).findByName(eq("not_exist"));
 	}
 
 }

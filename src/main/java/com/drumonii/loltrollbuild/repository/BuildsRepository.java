@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * JPA repository to the CHAMPION table.
@@ -23,7 +24,7 @@ public interface BuildsRepository extends JpaRepository<Build, Integer> {
 
 	@CacheEvict(allEntries = true)
 	@Override
-	<S extends Build> List<S> save(Iterable<S> entities);
+	<S extends Build> List<S> saveAll(Iterable<S> entities);
 
 	@CacheEvict(allEntries = true)
 	@Override
@@ -31,15 +32,15 @@ public interface BuildsRepository extends JpaRepository<Build, Integer> {
 
 	@Cacheable
 	@Override
-	Build findOne(Integer integer);
+	Optional<Build> findById(Integer integer);
 
 	@CacheEvict(allEntries = true)
 	@Override
-	void delete(Integer integer);
+	void deleteById(Integer integer);
 
 	@CacheEvict(allEntries = true)
 	@Override
-	void delete(Iterable<? extends Build> entities);
+	void deleteAll(Iterable<? extends Build> entities);
 
 	@CacheEvict(allEntries = true)
 	@Override

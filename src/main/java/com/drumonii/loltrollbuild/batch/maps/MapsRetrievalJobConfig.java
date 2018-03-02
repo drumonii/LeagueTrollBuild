@@ -10,7 +10,7 @@ import org.springframework.batch.core.configuration.annotation.StepBuilderFactor
 import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.item.ItemWriter;
-import org.springframework.batch.item.data.RepositoryItemWriter;
+import org.springframework.batch.item.data.builder.RepositoryItemWriterBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -64,10 +64,10 @@ public class MapsRetrievalJobConfig {
 
 	@Bean
 	public ItemWriter<GameMap> mapsRetrievalItemWriter() {
-		RepositoryItemWriter<GameMap> itemWriter = new RepositoryItemWriter<>();
-		itemWriter.setRepository(mapsRepository);
-		itemWriter.setMethodName("save");
-		return itemWriter;
+		return new RepositoryItemWriterBuilder<GameMap>()
+				.repository(mapsRepository)
+				.methodName("save")
+				.build();
 	}
 
 }

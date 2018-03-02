@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.Optional;
+
 import static org.springframework.data.domain.Sort.Direction.ASC;
 
 /**
@@ -36,16 +38,16 @@ public class ChampionsController {
 
 	@GetMapping(value = "/{value}")
 	public String champion(@PathVariable String value, Model model) {
-		Champion champion;
+		Optional<Champion> champion;
 		try {
-			champion = championsRepository.findOne(Integer.valueOf(value));
+			champion = championsRepository.findById(Integer.valueOf(value));
 		} catch (NumberFormatException e) {
 			champion = championsRepository.findByName(value);
 		}
-		if (champion == null) {
+		if (!champion.isPresent()) {
 			return "redirect:/champions";
 		}
-		model.addAttribute(champion);
+		model.addAttribute(champion.get());
 		model.addAttribute("maps", GameMapUtil.eligibleMaps(mapsRepository.findAll()));
 		return "champions/champion";
 	}

@@ -10,7 +10,7 @@ import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.database.BeanPropertyItemSqlParameterSourceProvider;
-import org.springframework.batch.item.database.JdbcBatchItemWriter;
+import org.springframework.batch.item.database.builder.JdbcBatchItemWriterBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -63,14 +63,12 @@ public class VersionsRetrievalJobConfig {
 
 	@Bean
 	public ItemWriter<Version> versionsRetrievalItemWriter() {
-		JdbcBatchItemWriter<Version> itemWriter = new JdbcBatchItemWriter<>();
-		itemWriter.setDataSource(dataSource);
-		itemWriter.setSql(
-				"INSERT INTO VERSION (PATCH, MAJOR, MINOR, REVISION) VALUES (:patch, :major, :minor, :revision)"
-		);
-		itemWriter.setItemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<>());
-		itemWriter.setAssertUpdates(false);
-		return itemWriter;
+		return new JdbcBatchItemWriterBuilder<Version>()
+				.dataSource(dataSource)
+				.sql("INSERT INTO VERSION (PATCH, MAJOR, MINOR, REVISION) VALUES (:patch, :major, :minor, :revision)")
+				.itemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<>())
+				.assertUpdates(false)
+				.build();
 	}
 
 }

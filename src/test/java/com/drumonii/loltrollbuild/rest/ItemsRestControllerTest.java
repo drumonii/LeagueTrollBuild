@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.core.AutoConfigureCache;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
+import org.springframework.hateoas.MediaTypes;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,7 +21,6 @@ import java.util.stream.Collectors;
 
 import static com.drumonii.loltrollbuild.rest.ItemsRestController.PAGE_SIZE;
 import static com.drumonii.loltrollbuild.util.GameMapUtil.SUMMONERS_RIFT_SID;
-import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.hamcrest.Matchers.hasEntry;
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.is;
@@ -36,8 +35,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureCache
 @Transactional
 public abstract class ItemsRestControllerTest {
-
-	private static final MediaType HAL_JSON_UTF8 = new MediaType("application", "hal+json", UTF_8);
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -60,14 +57,14 @@ public abstract class ItemsRestControllerTest {
 		itemsResponse.setItems(itemsResponse.getItems().values().stream()
 				.filter(item -> item.getRequiredChampion() != null)
 				.collect(Collectors.toMap(item -> String.valueOf(item.getId()), item -> item)));
-		itemsRepository.save(itemsResponse.getItems().values());
+		itemsRepository.saveAll(itemsResponse.getItems().values());
 
 		Item item = RandomizeUtil.getRandom(itemsResponse.getItems().values());
 
 		// qbe
 		mockMvc.perform(get("{apiPath}/items", apiPath))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(HAL_JSON_UTF8))
+				.andExpect(content().contentType(MediaTypes.HAL_JSON_UTF8))
 				.andExpect(jsonPath("$._embedded.items").exists())
 				.andExpect(jsonPath("$._links").exists())
 				.andExpect(jsonPath("$._links.self").exists())
@@ -82,7 +79,7 @@ public abstract class ItemsRestControllerTest {
 		mockMvc.perform(get("{apiPath}/items", apiPath)
 				.param("name", item.getName().toLowerCase()))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(HAL_JSON_UTF8))
+				.andExpect(content().contentType(MediaTypes.HAL_JSON_UTF8))
 				.andExpect(jsonPath("$._embedded.items").exists())
 				.andExpect(jsonPath("$._links").exists())
 				.andExpect(jsonPath("$._links.self").exists())
@@ -97,7 +94,7 @@ public abstract class ItemsRestControllerTest {
 		mockMvc.perform(get("{apiPath}/items", apiPath)
 				.param("requiredChampion", item.getRequiredChampion().toLowerCase()))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(HAL_JSON_UTF8))
+				.andExpect(content().contentType(MediaTypes.HAL_JSON_UTF8))
 				.andExpect(jsonPath("$._embedded.items").exists())
 				.andExpect(jsonPath("$._links").exists())
 				.andExpect(jsonPath("$._links.self").exists())
@@ -112,7 +109,7 @@ public abstract class ItemsRestControllerTest {
 		mockMvc.perform(get("{apiPath}/items", apiPath)
 				.param("name", "abcd1234"))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(HAL_JSON_UTF8))
+				.andExpect(content().contentType(MediaTypes.HAL_JSON_UTF8))
 				.andExpect(jsonPath("$._embedded").doesNotExist())
 				.andExpect(jsonPath("$._links.self").exists())
 				.andExpect(jsonPath("$._links.self.href").exists())
@@ -127,12 +124,12 @@ public abstract class ItemsRestControllerTest {
 		itemsResponse.setItems(itemsResponse.getItems().values().stream()
 				.filter(item -> item.getFrom() != null && item.getFrom().contains(1001))
 				.collect(Collectors.toMap(item -> String.valueOf(item.getId()), item -> item)));
-		itemsRepository.save(itemsResponse.getItems().values());
+		itemsRepository.saveAll(itemsResponse.getItems().values());
 
 		mockMvc.perform(get("{apiPath}/items/boots", apiPath)
 				.param("mapId", SUMMONERS_RIFT_SID))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(HAL_JSON_UTF8))
+				.andExpect(content().contentType(MediaTypes.HAL_JSON_UTF8))
 				.andExpect(jsonPath("$._embedded.items").exists())
 				.andExpect(jsonPath("$._embedded.items[*].group").exists())
 				.andExpect(jsonPath("$._embedded.items[*].from").isNotEmpty())
@@ -154,12 +151,12 @@ public abstract class ItemsRestControllerTest {
 				.filter(item -> item.getName() != null && item.getName().contains("Trinket") &&
 						item.getDescription() != null && item.getDescription().contains("Trinket"))
 				.collect(Collectors.toMap(item -> String.valueOf(item.getId()), item -> item)));
-		itemsRepository.save(itemsResponse.getItems().values());
+		itemsRepository.saveAll(itemsResponse.getItems().values());
 
 		mockMvc.perform(get("{apiPath}/items/trinkets", apiPath)
 				.param("mapId", SUMMONERS_RIFT_SID))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(HAL_JSON_UTF8))
+				.andExpect(content().contentType(MediaTypes.HAL_JSON_UTF8))
 				.andExpect(jsonPath("$._embedded.items").exists())
 				.andExpect(jsonPath("$._embedded.items[*].group").exists())
 				.andExpect(jsonPath("$._embedded.items[*].from").isNotEmpty())
@@ -181,11 +178,11 @@ public abstract class ItemsRestControllerTest {
 				.filter(item -> item.getRequiredChampion() != null &&
 						item.getRequiredChampion().equals("Viktor"))
 				.collect(Collectors.toMap(item -> String.valueOf(item.getId()), item -> item)));
-		itemsRepository.save(itemsResponse.getItems().values());
+		itemsRepository.saveAll(itemsResponse.getItems().values());
 
 		mockMvc.perform(get("{apiPath}/items/viktor-only", apiPath))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(HAL_JSON_UTF8))
+				.andExpect(content().contentType(MediaTypes.HAL_JSON_UTF8))
 				.andExpect(jsonPath("$._embedded.items").exists())
 				.andExpect(jsonPath("$._embedded.items[*].from").isNotEmpty())
 				.andExpect(jsonPath("$._embedded.items[*].into").isNotEmpty())
@@ -202,12 +199,12 @@ public abstract class ItemsRestControllerTest {
 
 	@Test
 	public void getForTrollBuild() throws Exception {
-		itemsRepository.save(itemsResponse.getItems().values());
+		itemsRepository.saveAll(itemsResponse.getItems().values());
 
 		mockMvc.perform(get("{apiPath}/items/for-troll-build", apiPath)
 				.param("mapId", SUMMONERS_RIFT_SID))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(HAL_JSON_UTF8))
+				.andExpect(content().contentType(MediaTypes.HAL_JSON_UTF8))
 				.andExpect(jsonPath("$._embedded.items").exists())
 				.andExpect(jsonPath("$._embedded.items[*].from").isNotEmpty())
 				.andExpect(jsonPath("$._embedded.items[*].into").isNotEmpty())

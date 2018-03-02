@@ -137,7 +137,7 @@ public class AdminController {
 
 	@GetMapping(value = "/job-instances/{jobInstanceId}/step-executions")
 	public String stepExecutions(@PathVariable long jobInstanceId, Model model) {
-		model.addAttribute("jobInstance", batchJobInstancesRepository.findOne(jobInstanceId));
+		model.addAttribute("jobInstance", batchJobInstancesRepository.findById(jobInstanceId).get());
 		model.addAttribute("activeTab", "jobInstances");
 		return "admin/jobs/stepExecutions";
 	}

@@ -29,10 +29,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyList;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyListOf;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
@@ -99,7 +99,7 @@ public abstract class ItemsRetrievalTest {
 				.andExpect(content().json(objectMapper.writeValueAsString(itemsResponse.getItems().values())));
 
 		verify(imageFetcher, times(1))
-				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
+				.setImgsSrcs(anyList(), any(UriComponentsBuilder.class), eq(latestVersion));
 
 		assertThat(itemsRepository.findAll())
 				.containsOnlyElementsOf(itemsResponse.getItems().values());
@@ -112,7 +112,7 @@ public abstract class ItemsRetrievalTest {
 
 		given(versionsService.getLatestVersion()).willReturn(latestVersion);
 
-		List<Item> champions = itemsRepository.save(itemsResponse.getItems().values());
+		List<Item> champions = itemsRepository.saveAll(itemsResponse.getItems().values());
 
 		mockMvc.perform(post("/riot/items").with(csrf()))
 				.andExpect(status().isOk())
@@ -120,7 +120,7 @@ public abstract class ItemsRetrievalTest {
 				.andExpect(content().json("[]"));
 
 		verify(imageFetcher, times(1))
-				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
+				.setImgsSrcs(anyList(), any(UriComponentsBuilder.class), eq(latestVersion));
 
 		assertThat(itemsRepository.findAll()).containsOnlyElementsOf(champions);
 	}
@@ -128,7 +128,7 @@ public abstract class ItemsRetrievalTest {
 	@WithMockAdminUser
 	@Test
 	public void saveDifferenceOfItemsWithDeleted() throws Exception {
-		List<Item> items = itemsRepository.save(itemsResponse.getItems().values());
+		List<Item> items = itemsRepository.saveAll(itemsResponse.getItems().values());
 		Item itemToDelete = RandomizeUtil.getRandom(items);
 		itemsResponse.getItems().remove(String.valueOf(itemToDelete.getId()));
 
@@ -142,9 +142,9 @@ public abstract class ItemsRetrievalTest {
 				.andExpect(content().json("[]"));
 
 		verify(imageFetcher, times(1))
-				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
+				.setImgsSrcs(anyList(), any(UriComponentsBuilder.class), eq(latestVersion));
 
-		assertThat(itemsRepository.findOne(itemToDelete.getId())).isNull();
+		assertThat(itemsRepository.findById(itemToDelete.getId())).isNotPresent();
 	}
 
 	@WithMockAdminUser
@@ -160,7 +160,7 @@ public abstract class ItemsRetrievalTest {
 				.andExpect(content().json(objectMapper.writeValueAsString(itemsResponse.getItems().values())));
 
 		verify(imageFetcher, times(1))
-				.setImgsSrcs(anyListOf(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
+				.setImgsSrcs(anyList(), any(UriComponentsBuilder.class), eq(latestVersion));
 
 		assertThat(itemsRepository.findAll())
 				.containsOnlyElementsOf(itemsResponse.getItems().values());
@@ -201,7 +201,7 @@ public abstract class ItemsRetrievalTest {
 		verify(imageFetcher, times(1))
 				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 
-		assertThat(itemsRepository.findOne(lichBane.getId())).isNotNull();
+		assertThat(itemsRepository.findById(lichBane.getId())).isPresent();
 	}
 
 	@WithMockAdminUser
@@ -216,7 +216,6 @@ public abstract class ItemsRetrievalTest {
 	@WithMockAdminUser
 	@Test
 	public void saveItemWithOverwrite() throws Exception {
-		itemsRepository.save(lichBane);
 		Item newLichBane = itemsResponse.getItems().get("3100");
 		newLichBane.setName("New Lich Bane");
 
@@ -232,8 +231,8 @@ public abstract class ItemsRetrievalTest {
 		verify(imageFetcher, times(1))
 				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 
-		assertThat(itemsRepository.findOne(newLichBane.getId())).isNotNull()
-				.isEqualTo(newLichBane);
+		assertThat(itemsRepository.findById(newLichBane.getId())).isPresent()
+				.get().isEqualTo(newLichBane);
 	}
 
 }

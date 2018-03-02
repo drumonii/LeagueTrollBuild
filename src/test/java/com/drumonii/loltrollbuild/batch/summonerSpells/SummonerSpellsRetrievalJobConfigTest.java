@@ -9,6 +9,7 @@ import com.drumonii.loltrollbuild.riot.api.SummonerSpellsResponse;
 import com.drumonii.loltrollbuild.riot.service.SummonerSpellsService;
 import com.drumonii.loltrollbuild.util.RandomizeUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.lang3.RandomUtils;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,11 +26,13 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -85,13 +88,16 @@ public abstract class SummonerSpellsRetrievalJobConfigTest {
 		given(summonerSpellsService.getSummonerSpells())
 				.willReturn(new ArrayList<>(summonerSpellsResponse.getSummonerSpells().values()));
 
-		List<SummonerSpell> summonerSpells = summonerSpellsRepository.save(summonerSpellsResponse
+		List<SummonerSpell> summonerSpells = summonerSpellsRepository.saveAll(summonerSpellsResponse
 				.getSummonerSpells().values());
 
-		SummonerSpell summonerSpellToEdit = RandomizeUtil.getRandom(summonerSpells);
-		summonerSpellToEdit.setDescription("New Description");
-
-		summonerSpellsRepository.save(summonerSpellToEdit);
+		Optional<SummonerSpell> summonerSpellToEdit =
+				summonerSpellsRepository.findById(summonerSpells.get(RandomUtils.nextInt(1, summonerSpells.size())).getId());
+		if (!summonerSpellToEdit.isPresent()) {
+			fail("Unable to get a random Summoner Spell to edit");
+		}
+		summonerSpellToEdit.get().setDescription("New Description");
+		summonerSpellsRepository.save(summonerSpellToEdit.get());
 
 		JobExecution jobExecution = jobLauncherTestUtils.launchJob(getJobParameters());
 		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
@@ -105,7 +111,7 @@ public abstract class SummonerSpellsRetrievalJobConfigTest {
 
 	@Test
 	public void deletesSummonerSpellsDifference() throws Exception {
-		List<SummonerSpell> summonerSpells = summonerSpellsRepository.save(summonerSpellsResponse
+		List<SummonerSpell> summonerSpells = summonerSpellsRepository.saveAll(summonerSpellsResponse
 				.getSummonerSpells().values());
 
 		SummonerSpell summonerSpellToDelete = RandomizeUtil.getRandom(summonerSpells);

@@ -39,7 +39,7 @@ public class SummonerSpellsRetrievalItemReader extends AbstractItemStreamItemRea
 		summonerSpells = summonerSpellsService.getSummonerSpells();
 		List<SummonerSpell> deletedSummonerSpells = ListUtils.subtract(summonerSpellsRepository.findAll(),
 				summonerSpells);
-		summonerSpellsRepository.delete(deletedSummonerSpells);
+		summonerSpellsRepository.deleteAll(deletedSummonerSpells);
 	}
 
 }

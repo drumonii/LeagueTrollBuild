@@ -14,6 +14,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * JPA repository to the CHAMPION table.
@@ -30,7 +31,7 @@ public interface ChampionsRepository extends JpaRepository<Champion, Integer> {
 	@Query("select c from Champion c where lower(c.name) = lower(:name) or lower(c.key) = lower(:name)")
 	@RestResource(exported = false)
 	@Cacheable
-	Champion findByName(@Param("name") String name);
+	Optional<Champion> findByName(@Param("name") String name);
 
 	/**
 	 * Gets all possible distinct tags a {@link Champion} could have.
@@ -52,7 +53,7 @@ public interface ChampionsRepository extends JpaRepository<Champion, Integer> {
 
 	@CacheEvict(allEntries = true)
 	@Override
-	<S extends Champion> List<S> save(Iterable<S> entities);
+	<S extends Champion> List<S> saveAll(Iterable<S> entities);
 
 	@CacheEvict(allEntries = true)
 	@Override
@@ -60,15 +61,15 @@ public interface ChampionsRepository extends JpaRepository<Champion, Integer> {
 
 	@Cacheable
 	@Override
-	Champion findOne(Integer integer);
+	Optional<Champion> findById(Integer integer);
 
 	@CacheEvict(allEntries = true)
 	@Override
-	void delete(Integer integer);
+	void deleteById(Integer integer);
 
 	@CacheEvict(allEntries = true)
 	@Override
-	void delete(Iterable<? extends Champion> entities);
+	void deleteAll(Iterable<? extends Champion> entities);
 
 	@CacheEvict(allEntries = true)
 	@Override

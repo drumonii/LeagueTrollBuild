@@ -46,7 +46,7 @@ public abstract class ItemsRepositoryTest {
 	@Before
 	public void before() {
 		itemsResponse = getItemsResponse();
-		itemsRepository.save(itemsResponse.getItems().values());
+		itemsRepository.saveAll(itemsResponse.getItems().values());
 	}
 
 	@Test

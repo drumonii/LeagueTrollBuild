@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.Optional;
+
 /**
  * {@link ItemProcessor} for processing {@link SummonerSpell}s from Riot's API.
  */
@@ -32,8 +34,8 @@ public class SummonerSpellsRetrievalItemProcessor implements ItemProcessor<Summo
 
 	@Override
 	public SummonerSpell process(SummonerSpell summonerSpell) {
-		SummonerSpell summonerSpellFromDb = summonerSpellsRepository.findOne(summonerSpell.getId());
-		if (summonerSpellFromDb != null && summonerSpellFromDb.equals(summonerSpell)) {
+		Optional<SummonerSpell> summonerSpellFromDb = summonerSpellsRepository.findById(summonerSpell.getId());
+		if (summonerSpellFromDb.isPresent() && summonerSpellFromDb.get().equals(summonerSpell)) {
 			return null;
 		}
 		imageFetcher.setImgSrc(summonerSpell.getImage(), summonerSpellsImgUri, latestVersion);

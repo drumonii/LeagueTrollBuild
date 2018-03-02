@@ -38,7 +38,7 @@ public abstract class VersionsRepositoryTest {
 	@Before
 	public void before() {
 		versions = getVersions();
-		versionsRepository.save(versions);
+		versionsRepository.saveAll(versions);
 	}
 
 	@Test

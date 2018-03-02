@@ -24,11 +24,12 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Optional;
 
 import static com.drumonii.loltrollbuild.config.Profiles.TESTING;
 import static org.hamcrest.Matchers.is;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.eq;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -244,7 +245,7 @@ public class AdminControllerTest {
 		stepExecution.setJobExecution(jobExecution);
 		jobExecution.setStepExecutions(new HashSet<>(Collections.singletonList(stepExecution)));
 
-		given(batchJobInstancesRepository.findOne(eq(jobInstance.getId()))).willReturn(jobInstance);
+		given(batchJobInstancesRepository.findById(eq(jobInstance.getId()))).willReturn(Optional.of(jobInstance));
 
 		mockMvc.perform(get("/admin/job-instances/{jobInstanceId}/step-executions", jobInstance.getId()))
 				.andExpect(status().isOk())

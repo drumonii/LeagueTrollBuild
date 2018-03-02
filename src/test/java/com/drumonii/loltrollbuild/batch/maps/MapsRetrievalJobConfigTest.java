@@ -9,6 +9,7 @@ import com.drumonii.loltrollbuild.riot.api.MapsResponse;
 import com.drumonii.loltrollbuild.riot.service.MapsService;
 import com.drumonii.loltrollbuild.util.RandomizeUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.lang3.RandomUtils;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,11 +26,13 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -83,12 +86,14 @@ public abstract class MapsRetrievalJobConfigTest {
 	public void savesMapsDifference() throws Exception {
 		given(mapsService.getMaps()).willReturn(new ArrayList<>(mapsResponse.getMaps().values()));
 
-		List<GameMap> maps = mapsRepository.save(mapsResponse.getMaps().values());
+		List<GameMap> maps = mapsRepository.saveAll(mapsResponse.getMaps().values());
 
-		GameMap mapToEdit = RandomizeUtil.getRandom(maps);
-		mapToEdit.setMapName("New Map Name");
-
-		mapsRepository.save(mapToEdit);
+		Optional<GameMap> mapToEdit = mapsRepository.findById(maps.get(RandomUtils.nextInt(1, maps.size())).getMapId());
+		if (!mapToEdit.isPresent()) {
+			fail("Unable to get a random Map to edit");
+		}
+		mapToEdit.get().setMapName("New Map Name");
+		mapsRepository.save(mapToEdit.get());
 		
 		JobExecution jobExecution = jobLauncherTestUtils.launchJob(getJobParameters());
 		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
@@ -102,7 +107,7 @@ public abstract class MapsRetrievalJobConfigTest {
 
 	@Test
 	public void deletesMapsDifference() throws Exception {
-		List<GameMap> maps = mapsRepository.save(mapsResponse.getMaps().values());
+		List<GameMap> maps = mapsRepository.saveAll(mapsResponse.getMaps().values());
 
 		GameMap mapToDelete = RandomizeUtil.getRandom(maps);
 		mapsResponse.getMaps().remove(String.valueOf(mapToDelete.getMapId()));

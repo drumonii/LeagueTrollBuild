@@ -34,11 +34,11 @@
     <script th:inline="javascript">
         $(function() {
             $.get(/*[[@{/admin/actuator/health}]]*/ '/admin/actuator/health', function(data) {
-                $('#database').text(data.db.database);
-                $('#database-status').text(data.db.status);
-                $('#database-test-sql').text(Object.keys(data.db)[2] + ' ' + data.db.hello);
-                $('#disk-total').text([[#{admin.actuator.health.disk.total}]] + ' ' + data.diskSpace.total / 1073741824 + ' GB');
-                $('#disk-free').text([[#{admin.actuator.health.disk.free}]] + ' ' + data.diskSpace.free / 1073741824 + ' GB');
+                $('#database').text(data.details.db.details.database);
+                $('#database-status').text(data.details.db.status);
+                $('#database-test-sql').text(data.details.db.details.database + ' ' + data.details.db.details.hello);
+                $('#disk-total').text([[#{admin.actuator.health.disk.total}]] + ' ' + data.details.diskSpace.details.total / 1073741824 + ' GB');
+                $('#disk-free').text([[#{admin.actuator.health.disk.free}]] + ' ' + data.details.diskSpace.details.free / 1073741824 + ' GB');
             });
         });
     </script>

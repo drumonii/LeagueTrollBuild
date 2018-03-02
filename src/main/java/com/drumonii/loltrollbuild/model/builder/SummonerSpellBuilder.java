@@ -47,7 +47,7 @@ public final class SummonerSpellBuilder {
 	}
 
 	public SummonerSpellBuilder withCooldown(Integer... cooldown) {
-		this.cooldown = new TreeSet<>(Arrays.asList(cooldown));
+		withCooldown(new TreeSet<>(Arrays.asList(cooldown)));
 		return this;
 	}
 
@@ -62,7 +62,7 @@ public final class SummonerSpellBuilder {
 	}
 
 	public SummonerSpellBuilder withModes(GameMode... modes) {
-		this.modes = new TreeSet<>(Arrays.asList(modes));
+		withModes(new TreeSet<>(Arrays.asList(modes)));
 		return this;
 	}
 

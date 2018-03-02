@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.core.AutoConfigureCache;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -21,7 +22,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import static com.drumonii.loltrollbuild.rest.BuildsRestController.PAGE_SIZE;
 import static com.drumonii.loltrollbuild.util.GameMapUtil.SUMMONERS_RIFT_SID;
-import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.hamcrest.Matchers.is;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -36,8 +36,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureCache
 @Transactional
 public abstract class BuildsRestControllerTest {
-
-	private static final MediaType HAL_JSON_UTF8 = new MediaType("application", "hal+json", UTF_8);
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -63,7 +61,7 @@ public abstract class BuildsRestControllerTest {
 		// qbe
 		mockMvc.perform(get("{apiPath}/builds", apiPath))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(HAL_JSON_UTF8))
+				.andExpect(content().contentType(MediaTypes.HAL_JSON_UTF8))
 				.andExpect(jsonPath("$._embedded.builds").exists())
 				.andExpect(jsonPath("$._links.self").exists())
 				.andExpect(jsonPath("$._links.self.href").exists())
@@ -101,7 +99,7 @@ public abstract class BuildsRestControllerTest {
 				.contentType(MediaType.APPLICATION_JSON_UTF8)
 				.content(objectMapper.writeValueAsString(build)))
 				.andExpect(status().isCreated())
-				.andExpect(content().contentType(HAL_JSON_UTF8));
+				.andExpect(content().contentType(MediaTypes.HAL_JSON_UTF8));
 	}
 
 }

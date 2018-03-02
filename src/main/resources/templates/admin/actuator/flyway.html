@@ -4,9 +4,6 @@
       layout:decorate="~{layouts/admin}">
 <head>
     <title th:text="#{admin.actuator.flyway}">Flyway</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/webjars/datatables/media/css/dataTables.semanticui.min.css}" />
-    <script th:src="@{/webjars/datatables/media/js/jquery.dataTables.min.js}"></script>
-    <script th:src="@{/webjars/datatables/media/js/dataTables.semanticui.min.js}"></script>
 </head>
 <body>
 <div layout:fragment="content">
@@ -30,7 +27,7 @@
                 order: [ [0, 'desc'] ],
                 ajax: {
                     url: /*[[@{/admin/actuator/flyway}]]*/ '/admin/actuator/flyway',
-                    dataSrc: '0.migrations'
+                    dataSrc: 'contexts.application.flywayBeans.flyway.migrations'
                 },
                 columns: [
                     { data: 'version' },

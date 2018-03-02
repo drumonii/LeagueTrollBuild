@@ -15,6 +15,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * JPA repository to the SUMMONER_SPELL table.
@@ -43,7 +44,7 @@ public interface SummonerSpellsRepository extends JpaRepository<SummonerSpell, I
 
 	@CacheEvict(allEntries = true)
 	@Override
-	<S extends SummonerSpell> List<S> save(Iterable<S> entities);
+	<S extends SummonerSpell> List<S> saveAll(Iterable<S> entities);
 
 	@CacheEvict(allEntries = true)
 	@Override
@@ -51,15 +52,15 @@ public interface SummonerSpellsRepository extends JpaRepository<SummonerSpell, I
 
 	@Cacheable
 	@Override
-	SummonerSpell findOne(Integer integer);
+	Optional<SummonerSpell> findById(Integer integer);
 
 	@CacheEvict(allEntries = true)
 	@Override
-	void delete(Integer integer);
+	void deleteById(Integer integer);
 
 	@CacheEvict(allEntries = true)
 	@Override
-	void delete(Iterable<? extends SummonerSpell> entities);
+	void deleteAll(Iterable<? extends SummonerSpell> entities);
 
 	@CacheEvict(allEntries = true)
 	@Override

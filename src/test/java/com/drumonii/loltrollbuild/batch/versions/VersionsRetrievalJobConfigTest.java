@@ -61,7 +61,7 @@ public abstract class VersionsRetrievalJobConfigTest {
 
 	@Test
 	public void ignoresOldVersions() throws Exception {
-		versionsRepository.save(versions);
+		versionsRepository.saveAll(versions);
 
 		JobExecution jobExecution = jobLauncherTestUtils.launchJob(getJobParameters());
 		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);

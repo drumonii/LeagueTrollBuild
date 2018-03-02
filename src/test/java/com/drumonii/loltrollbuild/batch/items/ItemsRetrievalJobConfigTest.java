@@ -9,6 +9,7 @@ import com.drumonii.loltrollbuild.riot.api.ItemsResponse;
 import com.drumonii.loltrollbuild.riot.service.ItemsService;
 import com.drumonii.loltrollbuild.util.RandomizeUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.lang3.RandomUtils;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,11 +26,13 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -83,12 +86,14 @@ public abstract class ItemsRetrievalJobConfigTest {
 	public void savesItemsDifference() throws Exception {
 		given(itemsService.getItems()).willReturn(new ArrayList<>(itemsResponse.getItems().values()));
 
-		List<Item> items = itemsRepository.save(itemsResponse.getItems().values());
+		List<Item> items = itemsRepository.saveAll(itemsResponse.getItems().values());
 
-		Item itemToEdit = RandomizeUtil.getRandom(items);
-		itemToEdit.setGroup("New Group");
-
-		itemsRepository.save(itemToEdit);
+		Optional<Item> itemToEdit = itemsRepository.findById(items.get(RandomUtils.nextInt(1, items.size())).getId());
+		if (!itemToEdit.isPresent()) {
+			fail("Unable to get a random Item to edit");
+		}
+		itemToEdit.get().setGroup("New Group");
+		itemsRepository.save(itemToEdit.get());
 		
 		JobExecution jobExecution = jobLauncherTestUtils.launchJob(getJobParameters());
 		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
@@ -102,7 +107,7 @@ public abstract class ItemsRetrievalJobConfigTest {
 
 	@Test
 	public void deletesItemsDifference() throws Exception {
-		List<Item> items = itemsRepository.save(itemsResponse.getItems().values());
+		List<Item> items = itemsRepository.saveAll(itemsResponse.getItems().values());
 
 		Item itemToDelete = RandomizeUtil.getRandom(items);
 		itemsResponse.getItems().remove(String.valueOf(itemToDelete.getId()));

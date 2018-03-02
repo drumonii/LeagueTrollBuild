@@ -24,7 +24,7 @@ public class ChampionsStaticDataRestControllerTest extends ChampionsRestControll
 		} catch (IOException e) {
 			fail("Unable to unmarshal the Champions response.", e);
 		}
-		championsRepository.save(championsResponse.getChampions().values());
+		championsRepository.saveAll(championsResponse.getChampions().values());
 	}
 
 }

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static org.springframework.hateoas.mvc.BasicLinkBuilder.linkToCurrentMapping;
@@ -58,12 +59,12 @@ public class BatchStepExecutionsRestController {
 	@GetMapping(value = "/{stepExecutionId}")
 	public Resource<BatchStepExecution> getBatchStepExecution(@PathVariable long jobInstanceId,
 			@PathVariable long stepExecutionId) {
-		BatchStepExecution stepExecution = batchStepExecutionsRepository.findOne(stepExecutionId);
-		if (stepExecution == null) {
+		Optional<BatchStepExecution> stepExecution = batchStepExecutionsRepository.findById(stepExecutionId);
+		if (!stepExecution.isPresent()) {
 			throw new ResourceNotFoundException("Unable to find Batch Step Execution with Job Instance Id: " +
 					jobInstanceId + " and Step Execution Id: " + stepExecutionId);
 		}
-		return new Resource<>(stepExecution);
+		return new Resource<>(stepExecution.get());
 	}
 
 }

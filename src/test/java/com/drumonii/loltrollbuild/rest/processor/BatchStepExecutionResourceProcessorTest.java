@@ -3,16 +3,12 @@ package com.drumonii.loltrollbuild.rest.processor;
 import com.drumonii.loltrollbuild.model.BatchJobExecution;
 import com.drumonii.loltrollbuild.model.BatchJobInstance;
 import com.drumonii.loltrollbuild.model.BatchStepExecution;
-import com.drumonii.loltrollbuild.rest.BatchStepExecutionsRestController;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.hateoas.Link;
-import org.springframework.hateoas.LinkBuilder;
-import org.springframework.hateoas.LinkBuilderFactory;
 import org.springframework.hateoas.Resource;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.util.ReflectionTestUtils;
@@ -20,17 +16,12 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.BDDMockito.given;
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BatchStepExecutionResourceProcessorTest {
 
 	@InjectMocks
 	private BatchStepExecutionResourceProcessor resourceProcessor;
-
-	@Mock
-	private LinkBuilderFactory<LinkBuilder> linkBuilderFactory;
 
 	@Before
 	public void before() {
@@ -39,9 +30,6 @@ public class BatchStepExecutionResourceProcessorTest {
 		MockHttpServletRequest request = new MockHttpServletRequest();
 		ServletRequestAttributes requestAttributes = new ServletRequestAttributes(request);
 		RequestContextHolder.setRequestAttributes(requestAttributes);
-
-		given(linkBuilderFactory.linkTo(BatchStepExecutionsRestController.class))
-				.willReturn(linkTo(BatchStepExecutionsRestController.class, "api", 1, 2));
 	}
 
 	@Test

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -43,8 +44,8 @@ public class ChampionsRetrievalItemProcessor implements ItemProcessor<Champion, 
 
 	@Override
 	public Champion process(Champion champion) {
-		Champion championFromDb = championsRepository.findOne(champion.getId());
-		if (championFromDb != null && championFromDb.equals(champion)) {
+		Optional<Champion> championFromDb = championsRepository.findById(champion.getId());
+		if (championFromDb.isPresent() && championFromDb.get().equals(champion)) {
 			return null;
 		}
 		imageFetcher.setImgSrc(champion.getImage(), championsImgUri, latestVersion);

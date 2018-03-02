@@ -19,7 +19,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.http.MediaType;
+import org.springframework.hateoas.MediaTypes;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.MetaDataAccessException;
@@ -34,7 +34,6 @@ import java.sql.SQLException;
 import java.util.List;
 
 import static com.drumonii.loltrollbuild.config.Profiles.TESTING;
-import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Fail.fail;
 import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -49,8 +48,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Transactional
 @ActiveProfiles({ TESTING })
 public class BatchStepExecutionsRestControllerTest {
-
-	private static final MediaType HAL_JSON_UTF8 = new MediaType("application", "hal+json", UTF_8);
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -114,7 +111,7 @@ public class BatchStepExecutionsRestControllerTest {
 	public void getBatchStepExecutions() throws Exception {
 		mockMvc.perform(get(apiPath + "/job-instances/{jobInstanceId}/step-executions", jobInstance.getId()))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(HAL_JSON_UTF8))
+				.andExpect(content().contentType(MediaTypes.HAL_JSON_UTF8))
 				.andExpect(jsonPath("$._embedded.stepExecutions", hasSize(1)))
 				.andExpect(jsonPath("$._links").exists())
 				.andExpect(jsonPath("$._links.self").exists())
@@ -130,7 +127,7 @@ public class BatchStepExecutionsRestControllerTest {
 		mockMvc.perform(get("{apiPath}/job-instances/{jobInstanceId}/step-executions/{stepExecutionId}", apiPath,
 				jobInstance.getId(), stepExecution.getId()))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(HAL_JSON_UTF8))
+				.andExpect(content().contentType(MediaTypes.HAL_JSON_UTF8))
 				.andExpect(jsonPath("$._links").exists())
 				.andExpect(jsonPath("$._links.self").exists())
 				.andExpect(jsonPath("$._links.self.href").exists());

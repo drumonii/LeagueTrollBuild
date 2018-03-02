@@ -37,7 +37,7 @@ import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.li
 import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.relaxedLinks;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
-import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
+import static org.springframework.restdocs.payload.PayloadDocumentation.relaxedResponseFields;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
 import static org.springframework.restdocs.request.RequestDocumentation.requestParameters;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -145,7 +145,7 @@ public class ApiDocumentation {
 
 		mockMvc.perform(get("{apiPath}/summoner-spells", apiPath))
 				.andExpect(status().isOk())
-				.andDo(document("getSummonerSpells", responseFields(
+				.andDo(document("getSummonerSpells", relaxedResponseFields(
 						fieldWithPath("_embedded.summonerSpells")
 								.description("An array of Summoner Spells"),
 						fieldWithPath("_embedded.summonerSpells[*].name")
@@ -166,7 +166,7 @@ public class ApiDocumentation {
 
 		mockMvc.perform(get("{apiPath}/summoner-spells?name={name}", apiPath, "poro"))
 				.andExpect(status().isOk())
-				.andDo(document("summonerSpellsFindBy", responseFields(
+				.andDo(document("summonerSpellsFindBy", relaxedResponseFields(
 						fieldWithPath("_embedded.summonerSpells")
 								.description("An array of Summoner Spells").attributes(),
 						fieldWithPath("_embedded.summonerSpells[*].name")
@@ -191,7 +191,7 @@ public class ApiDocumentation {
 
 		mockMvc.perform(get("{apiPath}/summoner-spells/{id}", apiPath, teleport.getId()))
 				.andExpect(status().isOk())
-				.andDo(document("getSummonerSpell", responseFields(
+				.andDo(document("getSummonerSpell", relaxedResponseFields(
 						fieldWithPath("name")
 								.description("The name of the Summoner Spell"),
 						fieldWithPath("description")
@@ -215,7 +215,7 @@ public class ApiDocumentation {
 
 		mockMvc.perform(get("{apiPath}/summoner-spells/for-troll-build?mode={mode}", apiPath, "CLASSIC"))
 				.andExpect(status().isOk())
-				.andDo(document("summonerSpellsForTrollBuild", responseFields(
+				.andDo(document("summonerSpellsForTrollBuild", relaxedResponseFields(
 						fieldWithPath("_embedded.summonerSpells")
 								.description("An array of Summoner Spells"),
 						fieldWithPath("_embedded.summonerSpells[*].name")
@@ -244,7 +244,7 @@ public class ApiDocumentation {
 
 		mockMvc.perform(get("{apiPath}/items", apiPath))
 				.andExpect(status().isOk())
-				.andDo(document("getItems", responseFields(
+				.andDo(document("getItems", relaxedResponseFields(
 						fieldWithPath("_embedded.items")
 								.description("An array of Items"),
 						fieldWithPath("_embedded.items[*].name")
@@ -275,7 +275,7 @@ public class ApiDocumentation {
 
 		mockMvc.perform(get("{apiPath}/items?name={name}", apiPath, "talisman"))
 				.andExpect(status().isOk())
-				.andDo(document("itemsFindBy", responseFields(
+				.andDo(document("itemsFindBy", relaxedResponseFields(
 						fieldWithPath("_embedded.items")
 								.description("An array of Items"),
 						fieldWithPath("_embedded.items[*].name")
@@ -309,7 +309,7 @@ public class ApiDocumentation {
 
 		mockMvc.perform(get("{apiPath}/items/{id}", apiPath, warmogs.getId()))
 				.andExpect(status().isOk())
-				.andDo(document("getItem", responseFields(
+				.andDo(document("getItem", relaxedResponseFields(
 						fieldWithPath("name")
 								.description("The name of the Item"),
 						fieldWithPath("group")
@@ -343,7 +343,7 @@ public class ApiDocumentation {
 
 		mockMvc.perform(get("{apiPath}/items/boots?mapId={mapId}", apiPath, "11"))
 				.andExpect(status().isOk())
-				.andDo(document("bootsItems", responseFields(
+				.andDo(document("bootsItems", relaxedResponseFields(
 						fieldWithPath("_embedded.items")
 								.description("An array of Items"),
 						fieldWithPath("_embedded.items[*].name")
@@ -376,7 +376,7 @@ public class ApiDocumentation {
 
 		mockMvc.perform(get("{apiPath}/items/trinkets?mapId={mapId}", apiPath, "11"))
 				.andExpect(status().isOk())
-				.andDo(document("trinketItems", responseFields(
+				.andDo(document("trinketItems", relaxedResponseFields(
 						fieldWithPath("_embedded.items")
 								.description("An array of Items"),
 						fieldWithPath("_embedded.items[*].name")
@@ -409,7 +409,7 @@ public class ApiDocumentation {
 
 		mockMvc.perform(get("{apiPath}/items/viktor-only", apiPath))
 				.andExpect(status().isOk())
-				.andDo(document("viktorOnlyItems", responseFields(
+				.andDo(document("viktorOnlyItems", relaxedResponseFields(
 						fieldWithPath("_embedded.items")
 								.description("An array of Items"),
 						fieldWithPath("_embedded.items[*].name")
@@ -442,7 +442,7 @@ public class ApiDocumentation {
 
 		mockMvc.perform(get("{apiPath}/items/for-troll-build?mapId={mapId}", apiPath, "11"))
 				.andExpect(status().isOk())
-				.andDo(document("itemsForTrollBuild", responseFields(
+				.andDo(document("itemsForTrollBuild", relaxedResponseFields(
 						fieldWithPath("_embedded.items")
 								.description("An array of Items"),
 						fieldWithPath("_embedded.items[*].name")
@@ -479,7 +479,7 @@ public class ApiDocumentation {
 
 		mockMvc.perform(get("{apiPath}/champions", apiPath))
 				.andExpect(status().isOk())
-				.andDo(document("getChampions", responseFields(
+				.andDo(document("getChampions", relaxedResponseFields(
 						fieldWithPath("_embedded.champions")
 								.description("An array of Champions"),
 						fieldWithPath("_embedded.champions[*].key")
@@ -508,7 +508,7 @@ public class ApiDocumentation {
 
 		mockMvc.perform(get("{apiPath}/champions?name={name}", apiPath, "blitz"))
 				.andExpect(status().isOk())
-				.andDo(document("championsFindBy", responseFields(
+				.andDo(document("championsFindBy", relaxedResponseFields(
 						fieldWithPath("_embedded.champions")
 								.description("An array of Champions"),
 						fieldWithPath("_embedded.champions[*].key")
@@ -540,7 +540,7 @@ public class ApiDocumentation {
 
 		mockMvc.perform(get("{apiPath}/champions/{id}", apiPath, talon.getId()))
 				.andExpect(status().isOk())
-				.andDo(document("getChampion", responseFields(
+				.andDo(document("getChampion", relaxedResponseFields(
 						fieldWithPath("key")
 								.description("The key of the Champion. Usually the same as the name"),
 						fieldWithPath("name")
@@ -584,7 +584,7 @@ public class ApiDocumentation {
 				.andDo(document("getTrollBuildForChampion", requestParameters(
 						parameterWithName("mapId")
 								.description("The Map Id. Defaults to Summoner's Rift if unspecified. See <<game-maps-table, Game Maps Table>> for Map IDs")
-								.optional()), responseFields(
+								.optional()), relaxedResponseFields(
 						fieldWithPath("trinket")
 							.description("The trinket of the Troll Build"),
 						fieldWithPath("summoner-spells")
@@ -603,7 +603,7 @@ public class ApiDocumentation {
 
 		mockMvc.perform(get("{apiPath}/maps", apiPath))
 				.andExpect(status().isOk())
-				.andDo(document("getMaps", responseFields(
+				.andDo(document("getMaps", relaxedResponseFields(
 						fieldWithPath("_embedded.maps")
 								.description("An array of Maps"),
 						fieldWithPath("_embedded.maps[*].mapName")
@@ -618,7 +618,7 @@ public class ApiDocumentation {
 
 		mockMvc.perform(get("{apiPath}/maps?mapName={mapName}", apiPath, "treeline"))
 				.andExpect(status().isOk())
-				.andDo(document("mapsFindBy", responseFields(
+				.andDo(document("mapsFindBy", relaxedResponseFields(
 						fieldWithPath("_embedded.maps")
 								.description("An array of Maps"),
 						fieldWithPath("_embedded.maps[*].mapName")
@@ -637,7 +637,7 @@ public class ApiDocumentation {
 
 		mockMvc.perform(get("{apiPath}/maps/{id}", apiPath, summonersRift.getMapId()))
 				.andExpect(status().isOk())
-				.andDo(document("getMap", responseFields(
+				.andDo(document("getMap", relaxedResponseFields(
 						fieldWithPath("mapName")
 								.description("The name of the Map"),
 						fieldWithPath("image")
@@ -656,7 +656,7 @@ public class ApiDocumentation {
 
 		mockMvc.perform(get("{apiPath}/versions", apiPath))
 				.andExpect(status().isOk())
-				.andDo(document("getVersions", responseFields(
+				.andDo(document("getVersions", relaxedResponseFields(
 						fieldWithPath("_embedded.versions")
 								.description("An array of Versions"),
 						fieldWithPath("_embedded.versions[*].major")
@@ -676,7 +676,7 @@ public class ApiDocumentation {
 
 		mockMvc.perform(get("{apiPath}/versions/{version}", apiPath, version.getPatch()))
 				.andExpect(status().isOk())
-				.andDo(document("getVersion", responseFields(
+				.andDo(document("getVersion", relaxedResponseFields(
 						fieldWithPath("major")
 								.description("The major version number of the Version"),
 						fieldWithPath("minor")
@@ -709,7 +709,7 @@ public class ApiDocumentation {
 
 		mockMvc.perform(get("{apiPath}/builds", apiPath))
 				.andExpect(status().isOk())
-				.andDo(document("getBuilds", responseFields(
+				.andDo(document("getBuilds", relaxedResponseFields(
 						fieldWithPath("_embedded.builds")
 								.description("An array of Builds"),
 						fieldWithPath("_embedded.builds[*].createdDate")
@@ -759,7 +759,7 @@ public class ApiDocumentation {
 
 		mockMvc.perform(get("{apiPath}/builds/{id}", apiPath, build.getId()))
 				.andExpect(status().isOk())
-				.andDo(document("getBuild", responseFields(
+				.andDo(document("getBuild", relaxedResponseFields(
 						fieldWithPath("createdDate")
 								.description("The date the Build was created"),
 						fieldWithPath("champion")

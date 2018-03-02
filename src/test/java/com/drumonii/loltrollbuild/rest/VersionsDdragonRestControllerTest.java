@@ -26,7 +26,7 @@ public class VersionsDdragonRestControllerTest extends VersionsRestControllerTes
 		} catch (IOException e) {
 			fail("Unable to unmarshal the Versions response.", e);
 		}
-		versionsRepository.save(versions);
+		versionsRepository.saveAll(versions);
 	}
 
 }

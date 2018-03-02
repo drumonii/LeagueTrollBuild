@@ -72,7 +72,7 @@ public class MapsRetrieval {
 		} else {
 			List<GameMap> mapsFromDb = mapsRepository.findAll();
 			List<GameMap> deletedMaps = ListUtils.subtract(mapsFromDb, maps);
-			mapsRepository.delete(deletedMaps);
+			mapsRepository.deleteAll(deletedMaps);
 			maps = ListUtils.subtract(maps, mapsFromDb);
 		}
 
@@ -80,7 +80,7 @@ public class MapsRetrieval {
 
 		imageFetcher.setImgsSrcs(maps.stream().map(GameMap::getImage).collect(Collectors.toList()), mapsImgUri,
 				latestVersion);
-		return mapsRepository.save(maps);
+		return mapsRepository.saveAll(maps);
 	}
 
 	/**

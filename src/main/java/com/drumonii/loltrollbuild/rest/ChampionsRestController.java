@@ -86,8 +86,8 @@ public class ChampionsRestController {
 	public Map<String, List<?>> trollBuild(@PathVariable int id,
 			@RequestParam(required = false, defaultValue = "11") int mapId) {
 		Map<String, List<?>> trollBuild = new HashMap<>();
-		Champion champion = championsRepository.findOne(id);
-		if (champion == null) {
+		Optional<Champion> champion = championsRepository.findById(id);
+		if (!champion.isPresent()) {
 			return trollBuild;
 		}
 
@@ -96,18 +96,18 @@ public class ChampionsRestController {
 		// Add boots first
 		items.add(RandomizeUtil.getRandom(itemsRepository.boots(mapId)));
 		// If Viktor, add his starting item
-		if (ChampionUtil.isViktor(champion)) {
+		if (ChampionUtil.isViktor(champion.get())) {
 			items.add(RandomizeUtil.getRandom(itemsRepository.viktorOnly()));
 		}
 		// Get all items for the troll build
 		items.addAll(RandomizeUtil.getRandoms(itemsRepository.forTrollBuild(mapId),
-				ChampionUtil.isViktor(champion) ? ITEMS_SIZE - 2: ITEMS_SIZE - 1));
+				ChampionUtil.isViktor(champion.get()) ? ITEMS_SIZE - 2: ITEMS_SIZE - 1));
 		trollBuild.put("items", items);
 
 		// Summoner Spells
 		trollBuild.put("summoner-spells",
 				RandomizeUtil.getRandoms(summonerSpellsRepository.forTrollBuild(
-						GameMapUtil.getModeFromMap(mapsRepository.findOne(mapId))), SPELLS_SIZE));
+						GameMapUtil.getModeFromMap(mapsRepository.findById(mapId).orElse(null))), SPELLS_SIZE));
 
 		// Trinket
 		trollBuild.put("trinket", Collections.singletonList(RandomizeUtil.getRandom(itemsRepository.trinkets(mapId))));
