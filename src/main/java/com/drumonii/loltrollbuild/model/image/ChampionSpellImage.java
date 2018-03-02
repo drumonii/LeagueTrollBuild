@@ -27,7 +27,6 @@ public class ChampionSpellImage extends Image implements Serializable {
 	@JsonIgnore
 	@Getter @Setter private String key;
 
-	@MapsId
 	@OneToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "CHAMPION_SPELL_KEY")
 	@JsonBackReference

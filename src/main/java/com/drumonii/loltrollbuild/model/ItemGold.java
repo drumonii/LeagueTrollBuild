@@ -41,7 +41,6 @@ public class ItemGold implements Serializable {
 	@JsonProperty("purchasable")
 	@Getter @Setter private boolean purchasable;
 
-	@MapsId
 	@OneToOne(fetch = FetchType.LAZY, optional = false)
 	@PrimaryKeyJoinColumn
 	@JsonBackReference

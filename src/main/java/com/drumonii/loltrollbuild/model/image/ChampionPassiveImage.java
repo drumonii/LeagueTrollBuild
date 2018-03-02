@@ -27,7 +27,6 @@ public class ChampionPassiveImage extends Image implements Serializable {
 	@JsonIgnore
 	@Getter @Setter private int id;
 
-	@MapsId
 	@OneToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "CHAMPION_ID")
 	@JsonBackReference

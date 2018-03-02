@@ -26,7 +26,6 @@ public class SummonerSpellImage extends Image implements Serializable {
 	@JsonIgnore
 	@Getter @Setter private int id;
 
-	@MapsId
 	@OneToOne(fetch = FetchType.LAZY, optional = false)
 	@PrimaryKeyJoinColumn
 	@JsonBackReference

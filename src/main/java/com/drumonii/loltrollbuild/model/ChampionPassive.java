@@ -40,7 +40,6 @@ public class ChampionPassive implements Serializable {
 	@JsonProperty("image")
 	@Getter @Setter private ChampionPassiveImage image;
 
-	@MapsId
 	@OneToOne(fetch = FetchType.LAZY, optional = false)
 	@PrimaryKeyJoinColumn
 	@JsonBackReference

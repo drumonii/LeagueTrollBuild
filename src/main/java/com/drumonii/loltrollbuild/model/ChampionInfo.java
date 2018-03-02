@@ -41,7 +41,6 @@ public class ChampionInfo implements Serializable {
 	@JsonProperty("difficulty")
 	@Getter @Setter private int difficulty;
 
-	@MapsId
 	@OneToOne(fetch = FetchType.LAZY, optional = false)
 	@PrimaryKeyJoinColumn
 	@JsonBackReference
