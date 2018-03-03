@@ -1,6 +1,6 @@
 {
   "type": "summoner",
-  "version": "8.1.1",
+  "version": "8.5.1",
   "data": {
     "SummonerBarrier": {
       "id": "SummonerBarrier",
@@ -77,7 +77,8 @@
         "ARSR",
         "DOOMBOTSTEEMO",
         "STARGUARDIAN",
-        "PROJECT"
+        "PROJECT",
+        "ONEFORALL"
       ],
       "costType": "No Cost",
       "maxammo": "-1",
@@ -175,7 +176,8 @@
         "URF",
         "ARSR",
         "DOOMBOTSTEEMO",
-        "PROJECT"
+        "PROJECT",
+        "ONEFORALL"
       ],
       "costType": "No Cost",
       "maxammo": "-1",
@@ -456,7 +458,8 @@
         "ASSASSINATE",
         "URF",
         "ARSR",
-        "DOOMBOTSTEEMO"
+        "DOOMBOTSTEEMO",
+        "ONEFORALL"
       ],
       "costType": "No Cost",
       "maxammo": "-1",
@@ -547,7 +550,8 @@
         "FIRSTBLOOD",
         "URF",
         "ARSR",
-        "DOOMBOTSTEEMO"
+        "DOOMBOTSTEEMO",
+        "ONEFORALL"
       ],
       "costType": "No Cost",
       "maxammo": "-1",
@@ -642,7 +646,8 @@
         "DOOMBOTSTEEMO",
         "STARGUARDIAN",
         "PROJECT",
-        "SNOWURF"
+        "SNOWURF",
+        "ONEFORALL"
       ],
       "costType": "No Cost",
       "maxammo": "-1",
@@ -742,7 +747,8 @@
         "ARSR",
         "DOOMBOTSTEEMO",
         "STARGUARDIAN",
-        "PROJECT"
+        "PROJECT",
+        "ONEFORALL"
       ],
       "costType": "No Cost",
       "maxammo": "-1",
@@ -754,7 +760,7 @@
         "full": "SummonerHaste.png",
         "sprite": "spell0.png",
         "group": "spell",
-        "x": 336,
+        "x": 432,
         "y": 0,
         "w": 48,
         "h": 48
@@ -861,7 +867,8 @@
         "ARSR",
         "DOOMBOTSTEEMO",
         "STARGUARDIAN",
-        "PROJECT"
+        "PROJECT",
+        "ONEFORALL"
       ],
       "costType": "No Cost",
       "maxammo": "-1",
@@ -873,8 +880,8 @@
         "full": "SummonerHeal.png",
         "sprite": "spell0.png",
         "group": "spell",
-        "x": 384,
-        "y": 0,
+        "x": 0,
+        "y": 48,
         "w": 48,
         "h": 48
       },
@@ -1007,8 +1014,8 @@
         "full": "SummonerMana.png",
         "sprite": "spell0.png",
         "group": "spell",
-        "x": 432,
-        "y": 0,
+        "x": 48,
+        "y": 48,
         "w": 48,
         "h": 48
       },
@@ -1090,7 +1097,7 @@
         "full": "SummonerPoroRecall.png",
         "sprite": "spell0.png",
         "group": "spell",
-        "x": 0,
+        "x": 96,
         "y": 48,
         "w": 48,
         "h": 48
@@ -1173,7 +1180,7 @@
         "full": "SummonerPoroThrow.png",
         "sprite": "spell0.png",
         "group": "spell",
-        "x": 48,
+        "x": 144,
         "y": 48,
         "w": 48,
         "h": 48
@@ -1256,7 +1263,7 @@
         "full": "SummonerSiegeChampSelect1.png",
         "sprite": "spell0.png",
         "group": "spell",
-        "x": 96,
+        "x": 192,
         "y": 48,
         "w": 48,
         "h": 48
@@ -1338,7 +1345,7 @@
         "full": "SummonerSiegeChampSelect2.png",
         "sprite": "spell0.png",
         "group": "spell",
-        "x": 144,
+        "x": 240,
         "y": 48,
         "w": 48,
         "h": 48
@@ -1438,7 +1445,8 @@
         "FIRSTBLOOD",
         "URF",
         "ARSR",
-        "DOOMBOTSTEEMO"
+        "DOOMBOTSTEEMO",
+        "ONEFORALL"
       ],
       "costType": "No Cost",
       "maxammo": "2",
@@ -1450,7 +1458,7 @@
         "full": "SummonerSmite.png",
         "sprite": "spell0.png",
         "group": "spell",
-        "x": 192,
+        "x": 288,
         "y": 48,
         "w": 48,
         "h": 48
@@ -1533,88 +1541,7 @@
         "full": "SummonerSnowURFSnowball_Mark.png",
         "sprite": "spell0.png",
         "group": "spell",
-        "x": 240,
-        "y": 48,
-        "w": 48,
-        "h": 48
-      },
-      "resource": "No Cost"
-    },
-    "SummonerSnowURFSnowball_Mark_FollowupCast": {
-      "id": "SummonerSnowURFSnowball_Mark_FollowupCast",
-      "name": "Ultra (Really Fast) Dash",
-      "description": "Quickly travel to the unit you hit with Ultra Mark.",
-      "tooltip": "Ultra Dash to the unit hit by your snowball (or your Poro, you monster). Casting Ultra Dash will reduce the cooldown of Ultra Mark by 25%.<br /><br /><span class=\"colorFFFF00\">PUSH THIS BUTTON YOU KNOW YOU WANT TO</span>",
-      "maxrank": 1,
-      "cooldown": [
-        0
-      ],
-      "cooldownBurn": "0",
-      "cost": [
-        0
-      ],
-      "costBurn": "0",
-      "effect": [
-        null,
-        [
-          0
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ]
-      ],
-      "effectBurn": [
-        null,
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0"
-      ],
-      "vars": [],
-      "key": "-1",
-      "summonerLevel": 0,
-      "modes": [],
-      "costType": "No Cost",
-      "maxammo": "-1",
-      "range": [
-        200
-      ],
-      "rangeBurn": "200",
-      "image": {
-        "full": "SummonerSnowURFSnowball_Mark_FollowupCast.png",
-        "sprite": "spell0.png",
-        "group": "spell",
-        "x": 288,
+        "x": 336,
         "y": 48,
         "w": 48,
         "h": 48
@@ -1698,7 +1625,7 @@
         "full": "SummonerSnowball.png",
         "sprite": "spell0.png",
         "group": "spell",
-        "x": 336,
+        "x": 432,
         "y": 48,
         "w": 48,
         "h": 48
@@ -1780,7 +1707,8 @@
         "ASSASSINATE",
         "URF",
         "ARSR",
-        "DOOMBOTSTEEMO"
+        "DOOMBOTSTEEMO",
+        "ONEFORALL"
       ],
       "costType": "No Cost",
       "maxammo": "-1",
@@ -1792,8 +1720,8 @@
         "full": "SummonerTeleport.png",
         "sprite": "spell0.png",
         "group": "spell",
-        "x": 384,
-        "y": 48,
+        "x": 0,
+        "y": 96,
         "w": 48,
         "h": 48
       },

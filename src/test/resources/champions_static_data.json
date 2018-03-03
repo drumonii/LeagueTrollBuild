@@ -1,6 +1,6 @@
 {
   "type": "champion",
-  "version": "8.1.1",
+  "version": "8.4.1",
   "data": {
     "Jax": {
       "id": 24,
@@ -695,14 +695,14 @@
           "resource": "{{ cost }} Mana",
           "maxrank": 5,
           "cost": [
+            50,
+            55,
             60,
             65,
-            70,
-            75,
-            80
+            70
           ],
           "costType": " Mana",
-          "costBurn": "60/65/70/75/80",
+          "costBurn": "50/55/60/65/70",
           "cooldown": [
             8,
             8,
@@ -1778,11 +1778,11 @@
           "costType": " Mana",
           "costBurn": "100",
           "cooldown": [
-            100,
-            85,
-            70
+            120,
+            110,
+            100
           ],
-          "cooldownBurn": "100/85/70",
+          "cooldownBurn": "120/110/100",
           "effect": [
             null,
             [
@@ -6775,8 +6775,8 @@
             null,
             [
               50,
-              115,
-              180
+              125,
+              200
             ],
             [
               200,
@@ -6826,7 +6826,7 @@
           ],
           "effectBurn": [
             "",
-            "50/115/180",
+            "50/125/200",
             "200",
             "80",
             "0.5",
@@ -9533,10 +9533,10 @@
         },
         {
           "name": "Bellows Breath",
-          "description": "Ornn advances unstoppably, breathing fire and shielding himself. Enemies hit by the final gout of flame become Brittle.",
-          "sanitizedDescription": "Ornn advances unstoppably, breathing fire and shielding himself. Enemies hit by the final gout of flame become Brittle.",
-          "tooltip": "Ornn stomps forwards unstoppably, breathing fire and shielding himself for <span class=\"colorCC3300\">{{ f5 }}</span> (12% max health) for {{ e5 }} seconds. The fire deals up to {{ e0 }}% of the enemy's max health as magic damage (minimum {{ e3 }}).<br /><br />Enemies hit by the final gout of flame become <span class=\"colorFF5733\">Brittle</span> for {{ f9 }} seconds. The next immobilizing effect against a Brittle enemy has its duration increased by 30% and deals <span class=\"colorFFFFFF\">{{ f8 }}</span>% of their max health as magic damage.<br /><br /><span class=\"size16 color8C8C8C\">Ornn's basic attacks knock back Brittle targets.</span>",
-          "sanitizedTooltip": "Ornn stomps forwards unstoppably, breathing fire and shielding himself for {{ f5 }} (12% max health) for {{ e5 }} seconds. The fire deals up to {{ e0 }}% of the enemy's max health as magic damage (minimum {{ e3 }}). Enemies hit by the final gout of flame become Brittle for {{ f9 }} seconds. The next immobilizing effect against a Brittle enemy has its duration increased by 30% and deals {{ f8 }}% of their max health as magic damage. Ornn's basic attacks knock back Brittle targets.",
+          "description": "Ornn advances, breathing fire and shielding himself. Enemies hit by the final gout of flame become Brittle.",
+          "sanitizedDescription": "Ornn advances, breathing fire and shielding himself. Enemies hit by the final gout of flame become Brittle.",
+          "tooltip": "Ornn stomps forwards, breathing fire and shielding himself for <span class=\"colorCC3300\">{{ f5 }}</span> (12% max health) for {{ e5 }} seconds. The fire deals up to {{ e0 }}% of the enemy's max health as magic damage (minimum {{ e3 }}).<br /><br />Enemies hit by the final gout of flame become <span class=\"colorFF5733\">Brittle</span> for {{ f9 }} seconds. The next immobilizing effect against a Brittle enemy has its duration increased by 30% and deals <span class=\"colorFFFFFF\">{{ f8 }}</span>% of their max health as magic damage.<br /><br /><span class=\"size16 color8C8C8C\">Ornn's basic attacks knock back Brittle targets.</span>",
+          "sanitizedTooltip": "Ornn stomps forwards, breathing fire and shielding himself for {{ f5 }} (12% max health) for {{ e5 }} seconds. The fire deals up to {{ e0 }}% of the enemy's max health as magic damage (minimum {{ e3 }}). Enemies hit by the final gout of flame become Brittle for {{ f9 }} seconds. The next immobilizing effect against a Brittle enemy has its duration increased by 30% and deals {{ f8 }}% of their max health as magic damage. Ornn's basic attacks knock back Brittle targets.",
           "leveltip": {
             "label": [
               "Max Damage",
@@ -9572,13 +9572,13 @@
           "costType": " Mana",
           "costBurn": "45/50/55/60/65",
           "cooldown": [
+            17,
+            15,
             13,
-            12,
             11,
-            10,
             9
           ],
-          "cooldownBurn": "13/12/11/10/9",
+          "cooldownBurn": "17/15/13/11/9",
           "effect": [
             null,
             [
@@ -9603,18 +9603,18 @@
               280
             ],
             [
-              0.02,
               0.024,
+              0.026,
               0.028,
-              0.032,
-              0.036
+              0.03,
+              0.032
             ],
             [
-              2.5,
-              2.5,
-              2.5,
-              2.5,
-              2.5
+              3.5,
+              3.5,
+              3.5,
+              3.5,
+              3.5
             ],
             [
               225,
@@ -9645,11 +9645,11 @@
               1.5
             ],
             [
-              10,
               12,
+              13,
               14,
-              16,
-              18
+              15,
+              16
             ]
           ],
           "effectBurn": [
@@ -9657,13 +9657,13 @@
             "0.75",
             "0",
             "80/130/180/230/280",
-            "0.02/0.024/0.028/0.032/0.036",
-            "2.5",
+            "0.024/0.026/0.028/0.03/0.032",
+            "3.5",
             "225",
             "550",
             "0.5",
             "1.5",
-            "10/12/14/16/18"
+            "12/13/14/15/16"
           ],
           "range": [
             25000,
@@ -9679,8 +9679,8 @@
           "name": "Searing Charge",
           "description": "Ornn charges, dealing damage to enemies he passes through. If Ornn collides with terrain while charging, the impact creates a shockwave around him which deals damage and knocks up enemies.",
           "sanitizedDescription": "Ornn charges, dealing damage to enemies he passes through. If Ornn collides with terrain while charging, the impact creates a shockwave around him which deals damage and knocks up enemies.",
-          "tooltip": "Ornn charges, dealing {{ e1 }} <span class=\"colorFFFF00\">(+{{ f2 }})</span><span class=\"colorFF00FF\">(+{{ f3 }})</span> physical damage to enemies hit.<br /><br />If Ornn rams into terrain, the resulting shockwave will deal {{ e2 }} <span class=\"colorFFFF00\">(+{{ f2 }})</span><span class=\"colorFF00FF\">(+{{ f3 }})</span> physical damage and knock up enemies for {{ e6 }} second.<br /><br /><span class=\"size16 color8C8C8C\">The shockwave destroys magma pillars and terrain created by enemy champions.</span>",
-          "sanitizedTooltip": "Ornn charges, dealing {{ e1 }} (+{{ f2 }})(+{{ f3 }}) physical damage to enemies hit. If Ornn rams into terrain, the resulting shockwave will deal {{ e2 }} (+{{ f2 }})(+{{ f3 }}) physical damage and knock up enemies for {{ e6 }} second. The shockwave destroys magma pillars and terrain created by enemy champions.",
+          "tooltip": "Ornn charges, dealing {{ e1 }} <span class=\"colorFFFF00\">(+{{ f2 }})</span><span class=\"colorFF00FF\">(+{{ f3 }})</span> physical damage to enemies hit.<br /><br />If Ornn rams into terrain, he creates a shockwave that knocks up enemies for {{ e6 }} second and applies Searing Charge's damage to those not hit by the charge.<br /><br /><span class=\"size16 color8C8C8C\">The shockwave destroys magma pillars and terrain created by enemy champions.</span>",
+          "sanitizedTooltip": "Ornn charges, dealing {{ e1 }} (+{{ f2 }})(+{{ f3 }}) physical damage to enemies hit. If Ornn rams into terrain, he creates a shockwave that knocks up enemies for {{ e6 }} second and applies Searing Charge's damage to those not hit by the charge. The shockwave destroys magma pillars and terrain created by enemy champions.",
           "leveltip": {
             "label": [
               "Dash Damage",
@@ -9724,18 +9724,18 @@
           "effect": [
             null,
             [
-              30,
-              50,
-              70,
-              90,
-              110
+              80,
+              125,
+              170,
+              215,
+              260
             ],
             [
-              50,
-              90,
-              130,
+              80,
+              125,
               170,
-              210
+              215,
+              260
             ],
             [
               1600,
@@ -9796,8 +9796,8 @@
           ],
           "effectBurn": [
             "",
-            "30/50/70/90/110",
-            "50/90/130/170/210",
+            "80/125/170/215/260",
+            "80/125/170/215/260",
             "1600",
             "650",
             "360",
@@ -9819,8 +9819,8 @@
         },
         {
           "name": "Call of the Forge God",
-          "description": "Ornn summons a massive elemental at a location which travels toward him with increasing speed. Enemies run over by the elemental take damage, are slowed and are made Brittle. Ornn can recast the ability to charge into the elemental, redirecting it in the direction he hits it, causing the elemental to affect any enemies it runs over to be knocked up for 1 second, dealing the same damage and re-applying Brittle.",
-          "sanitizedDescription": "Ornn summons a massive elemental at a location which travels toward him with increasing speed. Enemies run over by the elemental take damage, are slowed and are made Brittle. Ornn can recast the ability to charge into the elemental, redirecting it in the direction he hits it, causing the elemental to affect any enemies it runs over to be knocked up for 1 second, dealing the same damage and re-applying Brittle.",
+          "description": "Ornn summons a massive elemental at a location which travels toward him with increasing speed. Enemies run over by the elemental take damage, are slowed and are made Brittle. Ornn can recast the ability to charge into the elemental, redirecting it in the direction he hits it, causing the elemental to affect any enemies it runs over to be knocked up, dealing the same damage and re-applying Brittle.",
+          "sanitizedDescription": "Ornn summons a massive elemental at a location which travels toward him with increasing speed. Enemies run over by the elemental take damage, are slowed and are made Brittle. Ornn can recast the ability to charge into the elemental, redirecting it in the direction he hits it, causing the elemental to affect any enemies it runs over to be knocked up, dealing the same damage and re-applying Brittle.",
           "tooltip": "Ornn summons a massive lava elemental which stampedes toward him. Enemies run over by the elemental take {{ e2 }} <span class=\"color99FF99\">(+{{ f4 }})</span> magic damage, are slowed by {{ e5 }}% for {{ e6 }} seconds and become <span class=\"colorFF5733\">Brittle</span> for {{ f10 }} seconds.<br /><br />Ornn can recast this ability to smash into the elemental to redirect and empower it. The empowered elemental knocks up enemies for 1.5 seconds, deals {{ e2 }} <span class=\"color99FF99\">(+{{ f4 }})</span> magic damage and applies <span class=\"colorFF5733\">Brittle</span>.",
           "sanitizedTooltip": "Ornn summons a massive lava elemental which stampedes toward him. Enemies run over by the elemental take {{ e2 }} (+{{ f4 }}) magic damage, are slowed by {{ e5 }}% for {{ e6 }} seconds and become Brittle for {{ f10 }} seconds. Ornn can recast this ability to smash into the elemental to redirect and empower it. The empowered elemental knocks up enemies for 1.5 seconds, deals {{ e2 }} (+{{ f4 }}) magic damage and applies Brittle.",
           "leveltip": {
@@ -9854,11 +9854,11 @@
           "costType": " Mana",
           "costBurn": "100",
           "cooldown": [
-            130,
-            100,
-            70
+            140,
+            120,
+            100
           ],
-          "cooldownBurn": "130/100/70",
+          "cooldownBurn": "140/120/100",
           "effect": [
             null,
             [
@@ -13072,14 +13072,14 @@
           "name": "Steel Tempest",
           "description": "A skillshot basic attack. After two successful Steel Tempests, the next fires a tornado that knocks enemies Airborne.",
           "sanitizedDescription": "A skillshot basic attack. After two successful Steel Tempests, the next fires a tornado that knocks enemies Airborne.",
-          "tooltip": "Thrusts forward, dealing {{ e1 }} <span class=\"colorFF8C00\">(+{{ a1 }})</span> physical damage.<br /><br />On hit, Steel Tempest grants a stack of Gathering Storm for 6 seconds. At 2 stacks, Steel Tempest fires a whirlwind that knocks <span class=\"color6655CC\">Airborne</span>.<br /><br />Steel Tempest is treated as a basic attack: It can critically strike, applies on-hit effects, is interruptible by crowd control and its cooldown and cast time are reduced by Attack Speed.<br /><br /><span class=\"color99FF99\">If cast while dashing, Steel Tempest will strike as a circle.</span>",
-          "sanitizedTooltip": "Thrusts forward, dealing {{ e1 }} (+{{ a1 }}) physical damage. On hit, Steel Tempest grants a stack of Gathering Storm for 6 seconds. At 2 stacks, Steel Tempest fires a whirlwind that knocks Airborne. Steel Tempest is treated as a basic attack: It can critically strike, applies on-hit effects, is interruptible by crowd control and its cooldown and cast time are reduced by Attack Speed. If cast while dashing, Steel Tempest will strike as a circle.",
+          "tooltip": "Thrusts forward, dealing {{ f2.0 }} <span class=\"colorFF8C00\">(+{{ f3.0 }})</span> physical damage.<br /><br />On hit, Steel Tempest grants a stack of Gathering Storm for 6 seconds. At 2 stacks, Steel Tempest fires a whirlwind that knocks <span class=\"color6655CC\">Airborne</span>.<br /><br />Steel Tempest is treated as a basic attack: It can critically strike, applies on-hit effects, is interruptible by crowd control and its cooldown and cast time are reduced by Attack Speed.<br /><br /><span class=\"color99FF99\">If cast while dashing, Steel Tempest will strike as a circle.</span>",
+          "sanitizedTooltip": "Thrusts forward, dealing {{ f2.0 }} (+{{ f3.0 }}) physical damage. On hit, Steel Tempest grants a stack of Gathering Storm for 6 seconds. At 2 stacks, Steel Tempest fires a whirlwind that knocks Airborne. Steel Tempest is treated as a basic attack: It can critically strike, applies on-hit effects, is interruptible by crowd control and its cooldown and cast time are reduced by Attack Speed. If cast while dashing, Steel Tempest will strike as a circle.",
           "leveltip": {
             "label": [
               "Damage"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}"
+              "{{ f2.0 }} -> {{ f4.0 }}"
             ]
           },
           "image": {
@@ -13127,11 +13127,11 @@
               100
             ],
             [
-              85,
-              95,
-              105,
-              115,
-              125
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               4,
@@ -13187,7 +13187,7 @@
             "",
             "20/45/70/95/120",
             "100",
-            "85/95/105/115/125",
+            "0",
             "4",
             "0",
             "0",
@@ -13195,15 +13195,6 @@
             "0",
             "0",
             "0"
-          ],
-          "vars": [
-            {
-              "key": "a1",
-              "link": "attackdamage",
-              "coeff": [
-                1
-              ]
-            }
           ],
           "range": [
             475,
@@ -13508,8 +13499,8 @@
           "name": "Last Breath",
           "description": "Moves to a unit and strikes them repeatedly for heavy damage. Can only be cast on Airborne targets.",
           "sanitizedDescription": "Moves to a unit and strikes them repeatedly for heavy damage. Can only be cast on Airborne targets.",
-          "tooltip": "Blinks to an <span class=\"color6655CC\">Airborne</span> enemy champion, dealing {{ e1 }} <span class=\"colorFF8C00\">(+{{ a1 }})</span> physical damage and holding all <span class=\"color6655CC\">Airborne</span> enemies in the area in the air for an additional 1 second. Grants maximum Flow but resets all stacks of Gathering Storm.<br /><br />For 15 seconds, Yasuo's critical strikes gain {{ e5 }}% Bonus Armor Penetration - this affects Armor from items, buffs, runes and masteries.",
-          "sanitizedTooltip": "Blinks to an Airborne enemy champion, dealing {{ e1 }} (+{{ a1 }}) physical damage and holding all Airborne enemies in the area in the air for an additional 1 second. Grants maximum Flow but resets all stacks of Gathering Storm. For 15 seconds, Yasuo's critical strikes gain {{ e5 }}% Bonus Armor Penetration - this affects Armor from items, buffs, runes and masteries.",
+          "tooltip": "Blinks to an <span class=\"color6655CC\">Airborne</span> enemy champion, dealing {{ e1 }} <span class=\"colorFF8C00\">(+{{ a1 }})</span> physical damage and holding all <span class=\"color6655CC\">Airborne</span> enemies in the area in the air for an additional 1 second. Grants maximum Flow but resets all stacks of Gathering Storm.<br /><br />For 15 seconds, Yasuo's critical strikes gain {{ e5 }}% Bonus Armor Penetration - this affects Armor from items, buffs, and runes.",
+          "sanitizedTooltip": "Blinks to an Airborne enemy champion, dealing {{ e1 }} (+{{ a1 }}) physical damage and holding all Airborne enemies in the area in the air for an additional 1 second. Grants maximum Flow but resets all stacks of Gathering Storm. For 15 seconds, Yasuo's critical strikes gain {{ e5 }}% Bonus Armor Penetration - this affects Armor from items, buffs, and runes.",
           "leveltip": {
             "label": [
               "Damage",
@@ -13995,12 +13986,14 @@
             "label": [
               "Passive Damage",
               "Active Damage",
-              "Damage to Nearby Enemies Ratio "
+              "Damage to Nearby Enemies Ratio",
+              "Cooldown "
             ],
             "effect": [
               "{{ e4 }} -> {{ e4NL }}",
               "{{ e1 }} -> {{ e1NL }}",
-              "{{ e3 }} -> {{ e3NL }}"
+              "{{ e3 }} -> {{ e3NL }}",
+              "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
           "image": {
@@ -15000,10 +14993,10 @@
             null,
             [
               65,
-              95,
-              125,
-              155,
-              185
+              100,
+              135,
+              170,
+              205
             ],
             [
               3,
@@ -15034,11 +15027,11 @@
               300
             ],
             [
-              95,
-              140,
-              185,
-              230,
-              275
+              100,
+              150,
+              200,
+              250,
+              300
             ],
             [
               9,
@@ -15071,12 +15064,12 @@
           ],
           "effectBurn": [
             "",
-            "65/95/125/155/185",
+            "65/100/135/170/205",
             "3/4.5/6/7.5/9",
             "0.04",
             "50/75/100/125/150",
             "300",
-            "95/140/185/230/275",
+            "100/150/200/250/300",
             "9/13.5/18/22.5/27",
             "0.12",
             "150/225/300/375/450",
@@ -17093,10 +17086,10 @@
             ],
             [
               3,
-              4,
-              5,
-              6,
-              7
+              3.75,
+              4.5,
+              5.25,
+              6
             ],
             [
               8,
@@ -17158,7 +17151,7 @@
           "effectBurn": [
             "",
             "130/150/170/190/210",
-            "3/4/5/6/7",
+            "3/3.75/4.5/5.25/6",
             "8",
             "100",
             "100",
@@ -18752,8 +18745,8 @@
           "name": "Switcheroo!",
           "description": "Jinx modifies her basic attacks by swapping between Pow-Pow, her minigun and Fishbones, her rocket launcher. Attacks with Pow-Pow grant Attack Speed, while attacks with Fishbones deal area of effect damage, gain increased range, and drain Mana.",
           "sanitizedDescription": "Jinx modifies her basic attacks by swapping between Pow-Pow, her minigun and Fishbones, her rocket launcher. Attacks with Pow-Pow grant Attack Speed, while attacks with Fishbones deal area of effect damage, gain increased range, and drain Mana.",
-          "tooltip": "Jinx swaps weapons.<br /><br /><span class=\"colorFF9900\">Fishbones, the Rocket Launcher:</span> Basic attacks deal 110% Damage to the target and nearby enemies, gain {{ e3 }} range, drain Mana, and scale {{ e5 }}% less with bonus Attack Speed.<br /><br /><span class=\"colorFF9900\">Pow-Pow, the Minigun:</span> Basic attacks grant bonus Attack Speed for 2.5 seconds. This effect stacks up to 3 times for a total bonus of <span class=\"colorFFFFFF\">{{ f4 }}%</span> (bonus scales with spell rank and Jinx's level). Stacks fall off one at a time and only benefit Jinx's first attack after switching to Rocket Launcher.",
-          "sanitizedTooltip": "Jinx swaps weapons. Fishbones, the Rocket Launcher: Basic attacks deal 110% Damage to the target and nearby enemies, gain {{ e3 }} range, drain Mana, and scale {{ e5 }}% less with bonus Attack Speed. Pow-Pow, the Minigun: Basic attacks grant bonus Attack Speed for 2.5 seconds. This effect stacks up to 3 times for a total bonus of {{ f4 }}% (bonus scales with spell rank and Jinx's level). Stacks fall off one at a time and only benefit Jinx's first attack after switching to Rocket Launcher.",
+          "tooltip": "Jinx swaps weapons.<br /><br /><span class=\"colorFF9900\">Fishbones, the Rocket Launcher:</span> Basic attacks deal 110% Damage to the target and nearby enemies, gain {{ e3 }} range, drain Mana, and scale {{ e5 }}% less with bonus Attack Speed.<br /><br /><span class=\"colorFF9900\">Pow-Pow, the Minigun:</span> Basic attacks grant bonus Attack Speed for 2.5 seconds. This effect stacks up to 3 times for a total bonus of {{ e1 }}%.<br /><br /><rules>Stacks fall off one at a time and only benefit Jinx's first attack after switching to Rocket Launcher.</rules>",
+          "sanitizedTooltip": "Jinx swaps weapons. Fishbones, the Rocket Launcher: Basic attacks deal 110% Damage to the target and nearby enemies, gain {{ e3 }} range, drain Mana, and scale {{ e5 }}% less with bonus Attack Speed. Pow-Pow, the Minigun: Basic attacks grant bonus Attack Speed for 2.5 seconds. This effect stacks up to 3 times for a total bonus of {{ e1 }}%. Stacks fall off one at a time and only benefit Jinx's first attack after switching to Rocket Launcher.",
           "leveltip": {
             "label": [
               "Rocket Bonus Range",
@@ -18761,7 +18754,7 @@
             ],
             "effect": [
               "{{ e3 }} -> {{ e3NL }}",
-              "{{ f4 }}% -> {{ f5 }}%"
+              "{{ e1 }}% -> {{ e1NL }}%"
             ]
           },
           "image": {
@@ -18796,10 +18789,10 @@
             null,
             [
               30,
-              40,
-              50,
-              60,
-              70
+              55,
+              80,
+              105,
+              130
             ],
             [
               100,
@@ -18867,7 +18860,7 @@
           ],
           "effectBurn": [
             "",
-            "30/40/50/60/70",
+            "30/55/80/105/130",
             "100",
             "75/100/125/150/175",
             "0",
@@ -20270,18 +20263,16 @@
           "name": "Dark Wind",
           "description": "A wisp of wind strikes an enemy unit and then bounces to nearby enemy units, dealing damage and silencing the victims.",
           "sanitizedDescription": "A wisp of wind strikes an enemy unit and then bounces to nearby enemy units, dealing damage and silencing the victims.",
-          "tooltip": "Unleashes a Crow at the targeted enemy, dealing {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage before bouncing to another target. Units struck are also silenced for {{ e2 }} seconds the first time per cast.<br /><br />Dark Wind can strike up to {{ e3 }} times and will prioritize enemies being <span class=\"colorFFEB7F\">Drained</span> or ones it has not yet hit. Deals {{ e4 }}% damage to minions and monsters.",
-          "sanitizedTooltip": "Unleashes a Crow at the targeted enemy, dealing {{ e1 }} (+{{ a1 }}) magic damage before bouncing to another target. Units struck are also silenced for {{ e2 }} seconds the first time per cast. Dark Wind can strike up to {{ e3 }} times and will prioritize enemies being Drained or ones it has not yet hit. Deals {{ e4 }}% damage to minions and monsters.",
+          "tooltip": "Unleashes a Crow at the targeted enemy, dealing {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage before bouncing to another target. Units struck are also silenced for {{ e2 }} seconds the first time per cast.<br /><br />Dark Wind can strike up to {{ e3 }} times and will prioritize enemies being <span class=\"colorFFEB7F\">Drained</span> or ones it has not yet hit. Deals {{ e4 }}% damage to monsters.",
+          "sanitizedTooltip": "Unleashes a Crow at the targeted enemy, dealing {{ e1 }} (+{{ a1 }}) magic damage before bouncing to another target. Units struck are also silenced for {{ e2 }} seconds the first time per cast. Dark Wind can strike up to {{ e3 }} times and will prioritize enemies being Drained or ones it has not yet hit. Deals {{ e4 }}% damage to monsters.",
           "leveltip": {
             "label": [
               "Damage",
-              "Mana Cost",
-              "Cooldown"
+              "Mana Cost"
             ],
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
-              "{{ cost }} -> {{ costNL }}",
-              "{{ cooldown }} -> {{ cooldownNL }}"
+              "{{ cost }} -> {{ costNL }}"
             ]
           },
           "image": {
@@ -20305,13 +20296,13 @@
           "costType": " Mana",
           "costBurn": "50/60/70/80/90",
           "cooldown": [
-            12,
-            11.5,
-            11,
-            10.5,
+            10,
+            10,
+            10,
+            10,
             10
           ],
-          "cooldownBurn": "12/11.5/11/10.5/10",
+          "cooldownBurn": "10",
           "effect": [
             null,
             [
@@ -20336,11 +20327,11 @@
               6
             ],
             [
-              150,
-              150,
-              150,
-              150,
-              150
+              200,
+              200,
+              200,
+              200,
+              200
             ],
             [
               0,
@@ -20390,7 +20381,7 @@
             "65/85/105/125/145",
             "1.25",
             "6",
-            "150",
+            "200",
             "0",
             "0",
             "0",
@@ -20452,11 +20443,11 @@
           "costType": " Mana",
           "costBurn": "100",
           "cooldown": [
-            150,
             140,
-            130
+            110,
+            80
           ],
-          "cooldownBurn": "150/140/130",
+          "cooldownBurn": "140/110/80",
           "effect": [
             null,
             [
@@ -22262,8 +22253,8 @@
           "name": "Shadow Assault",
           "description": "Talon disperses a ring of blades and becomes Invisible while gaining additional Movement Speed. When Talon emerges from Invisibility, the blades converge on his location. Each time the blades move, Shadow Assault deals physical damage to enemies hit by at least one blade.  ",
           "sanitizedDescription": "Talon disperses a ring of blades and becomes Invisible while gaining additional Movement Speed. When Talon emerges from Invisibility, the blades converge on his location. Each time the blades move, Shadow Assault deals physical damage to enemies hit by at least one blade.",
-          "tooltip": "Talon disperses a ring of blades that deal {{ e1 }} <span class=\"colorFF8C00\">(+{{ a1 }})</span> physical damage to all units they hit, gains {{ e3 }}% increased movement speed, and becomes <span class=\"color91d7ee\">Invisible</span> for up to {{ e5 }} seconds. When the <span class=\"color91d7ee\">Invisibility</span> ends, the blades converge, dealing the same damage again to enemies they pass through.<br /><br />If Talon cancels <span class=\"color91d7ee\">Invisibility</span> with an attack or Noxian Diplomacy, the blades converge on his target's location instead.<br /><br /><u><span class=\"size16 color91d7ee\">Stealth - Invisible</span></u><span class=\"size16 colorb3b3b3\">: Talon can only be revealed by nearby enemy Turrets or <span class=\"size16 coloree91d7\">True Sight</span>.",
-          "sanitizedTooltip": "Talon disperses a ring of blades that deal {{ e1 }} (+{{ a1 }}) physical damage to all units they hit, gains {{ e3 }}% increased movement speed, and becomes Invisible for up to {{ e5 }} seconds. When the Invisibility ends, the blades converge, dealing the same damage again to enemies they pass through. If Talon cancels Invisibility with an attack or Noxian Diplomacy, the blades converge on his target's location instead. Stealth - Invisible: Talon can only be revealed by nearby enemy Turrets or True Sight.",
+          "tooltip": "Talon disperses a ring of blades that deal {{ e1 }} <span class=\"colorFF8C00\">(+{{ a1 }})</span> physical damage to all units they hit, gains {{ e2 }}% increased movement speed, and becomes <span class=\"color91d7ee\">Invisible</span> for up to {{ e3 }} seconds. When the <span class=\"color91d7ee\">Invisibility</span> ends, the blades converge, dealing the same damage again to enemies they pass through.<br /><br />If Talon cancels <span class=\"color91d7ee\">Invisibility</span> with an attack or Noxian Diplomacy, the blades converge on his target's location instead.<br /><br /><u><span class=\"size16 color91d7ee\">Stealth - Invisible</span></u><span class=\"size16 colorb3b3b3\">: Talon can only be revealed by nearby enemy Turrets or <span class=\"size16 coloree91d7\">True Sight</span>.",
+          "sanitizedTooltip": "Talon disperses a ring of blades that deal {{ e1 }} (+{{ a1 }}) physical damage to all units they hit, gains {{ e2 }}% increased movement speed, and becomes Invisible for up to {{ e3 }} seconds. When the Invisibility ends, the blades converge, dealing the same damage again to enemies they pass through. If Talon cancels Invisibility with an attack or Noxian Diplomacy, the blades converge on his target's location instead. Stealth - Invisible: Talon can only be revealed by nearby enemy Turrets or True Sight.",
           "leveltip": {
             "label": [
               "Damage",
@@ -22272,7 +22263,7 @@
             ],
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
-              "{{ e3 }}% -> {{ e3NL }}%",
+              "{{ e2 }}% -> {{ e2NL }}%",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
@@ -22308,19 +22299,9 @@
               180
             ],
             [
-              200,
-              300,
-              400
-            ],
-            [
               40,
               55,
               70
-            ],
-            [
-              70,
-              85,
-              100
             ],
             [
               2.5,
@@ -22351,15 +22332,25 @@
               0,
               0,
               0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
             ]
           ],
           "effectBurn": [
             "",
             "90/135/180",
-            "200/300/400",
             "40/55/70",
-            "70/85/100",
             "2.5",
+            "0",
+            "0",
             "0",
             "0",
             "0",
@@ -22434,12 +22425,14 @@
             "label": [
               "Damage",
               "Plunder Gold",
-              "Plunder Silver Serpents"
+              "Plunder Silver Serpents",
+              "Mana Cost"
             ],
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
               "{{ e2 }} -> {{ e2NL }}",
-              "{{ e5 }} -> {{ e5NL }}"
+              "{{ e5 }} -> {{ e5NL }}",
+              "{{ cost }} -> {{ costNL }}"
             ]
           },
           "image": {
@@ -22454,14 +22447,14 @@
           "resource": "{{ cost }} Mana",
           "maxrank": 5,
           "cost": [
-            40,
-            40,
-            40,
-            40,
+            60,
+            55,
+            50,
+            45,
             40
           ],
           "costType": " Mana",
-          "costBurn": "40",
+          "costBurn": "60/55/50/45/40",
           "cooldown": [
             5,
             5,
@@ -22803,11 +22796,11 @@
               80
             ],
             [
-              60,
-              60,
-              60,
-              60,
-              60
+              25,
+              25,
+              25,
+              25,
+              25
             ],
             [
               2,
@@ -22851,7 +22844,7 @@
             "2",
             "60/90/120/150/180",
             "40/50/60/70/80",
-            "60",
+            "25",
             "2",
             "10",
             "100",
@@ -23082,10 +23075,10 @@
           "effect": [
             null,
             [
-              35,
-              55,
-              75,
-              95,
+              15,
+              40,
+              65,
+              90,
               115
             ],
             [
@@ -23154,7 +23147,7 @@
           ],
           "effectBurn": [
             "",
-            "35/55/75/95/115",
+            "15/40/65/90/115",
             "1.5",
             "0",
             "0",
@@ -24039,11 +24032,11 @@
           "effect": [
             null,
             [
-              20,
-              60,
-              100,
-              140,
-              180
+              50,
+              85,
+              120,
+              155,
+              190
             ],
             [
               20,
@@ -24111,7 +24104,7 @@
           ],
           "effectBurn": [
             "",
-            "20/60/100/140/180",
+            "50/85/120/155/190",
             "20/30/40/50/60",
             "600",
             "-0.8",
@@ -24136,20 +24129,18 @@
           "name": "GNAR!",
           "description": "Mega Gnar throws everything around him in a chosen direction, dealing damage and slowing them.  Any enemy that hits a wall is stunned and takes bonus damage.",
           "sanitizedDescription": "Mega Gnar throws everything around him in a chosen direction, dealing damage and slowing them. Any enemy that hits a wall is stunned and takes bonus damage.",
-          "tooltip": "<span class=\"color33FF33\">Mini Gnar: </span><span class=\"colorFF9900\">Passive:</span> Increases Boomerang Throw's cooldown reduction on catch to {{ e4 }}% and Hyper's Movement Speed bonus to {{ e2 }}%.<br /><br /><span class=\"colorFF3300\">Mega Gnar: </span>Knocks nearby enemies in the specified direction, dealing {{ e1 }} <span class=\"colorFF8C00\">(+{{ a1 }})</span> <span class=\"color99FF99\">(+{{ a2 }})</span> physical damage and slowing them by {{ e8 }}% for {{ e3 }} seconds. Enemies that hit a wall take {{ e7 }}% damage and are stunned instead of slowed.",
-          "sanitizedTooltip": "Mini Gnar: Passive: Increases Boomerang Throw's cooldown reduction on catch to {{ e4 }}% and Hyper's Movement Speed bonus to {{ e2 }}%. Mega Gnar: Knocks nearby enemies in the specified direction, dealing {{ e1 }} (+{{ a1 }}) (+{{ a2 }}) physical damage and slowing them by {{ e8 }}% for {{ e3 }} seconds. Enemies that hit a wall take {{ e7 }}% damage and are stunned instead of slowed.",
+          "tooltip": "<span class=\"color33FF33\">Mini Gnar: </span><span class=\"colorFF9900\">Passive:</span> Increases Hyper's Movement Speed bonus to {{ e2 }}%.<br /><br /><span class=\"colorFF3300\">Mega Gnar: </span>Knocks nearby enemies in the specified direction, dealing {{ e1 }} <span class=\"colorFF8C00\">(+{{ a1 }})</span> <span class=\"color99FF99\">(+{{ a2 }})</span> physical damage and slowing them by {{ e8 }}% for {{ e3 }} seconds. Enemies that hit a wall take {{ e7 }}% damage and are stunned instead of slowed.",
+          "sanitizedTooltip": "Mini Gnar: Passive: Increases Hyper's Movement Speed bonus to {{ e2 }}%. Mega Gnar: Knocks nearby enemies in the specified direction, dealing {{ e1 }} (+{{ a1 }}) (+{{ a2 }}) physical damage and slowing them by {{ e8 }}% for {{ e3 }} seconds. Enemies that hit a wall take {{ e7 }}% damage and are stunned instead of slowed.",
           "leveltip": {
             "label": [
               "Damage",
               "Slow/Stun Duration",
-              "Boomerang Cooldown Reduction",
               "Hyper Movement Speed",
               "Cooldown"
             ],
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
               "{{ e3 }} -> {{ e3NL }}",
-              "{{ e4 }}% -> {{ e4NL }}%",
               "{{ e2 }}% -> {{ e2NL }}%",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
@@ -24196,9 +24187,9 @@
               1.75
             ],
             [
-              50,
-              55,
-              60
+              40,
+              40,
+              40
             ],
             [
               475,
@@ -24236,7 +24227,7 @@
             "200/300/400",
             "45/60/75",
             "1.25/1.5/1.75",
-            "50/55/60",
+            "40",
             "475",
             "500",
             "150",
@@ -26257,10 +26248,10 @@
               25
             ],
             [
-              11,
-              9.5,
-              8,
-              6.5,
+              15,
+              12.5,
+              10,
+              7.5,
               5
             ],
             [
@@ -26317,7 +26308,7 @@
             "",
             "70/95/120/145/170",
             "25",
-            "11/9.5/8/6.5/5",
+            "15/12.5/10/7.5/5",
             "70",
             "1600",
             "200",
@@ -29681,18 +29672,18 @@
           "effect": [
             null,
             [
-              55,
-              75,
-              95,
-              115,
-              135
+              60,
+              80,
+              100,
+              120,
+              140
             ],
             [
-              55,
-              75,
-              95,
-              115,
-              135
+              60,
+              80,
+              100,
+              120,
+              140
             ],
             [
               1.6,
@@ -29753,8 +29744,8 @@
           ],
           "effectBurn": [
             "",
-            "55/75/95/115/135",
-            "55/75/95/115/135",
+            "60/80/100/120/140",
+            "60/80/100/120/140",
             "1.6/1.7/1.8/1.9/2",
             "1800",
             "400",
@@ -30410,8 +30401,8 @@
         },
         {
           "name": "Weaver's Wall",
-          "description": "Stone Weaver creates a very long wall and then surfs it.",
-          "sanitizedDescription": "Stone Weaver creates a very long wall and then surfs it.",
+          "description": "Taliyah creates a very long wall and then surfs it.",
+          "sanitizedDescription": "Taliyah creates a very long wall and then surfs it.",
           "tooltip": "Cast once to create a wall. Recast immediately to ride ahead of the wall. Moving or receiving damage will cause Taliyah to stop.<br /><br />Weaver's Wall lasts for {{ e1 }} seconds. Deactivate this spell to break the wall early.",
           "sanitizedTooltip": "Cast once to create a wall. Recast immediately to ride ahead of the wall. Moving or receiving damage will cause Taliyah to stop. Weaver's Wall lasts for {{ e1 }} seconds. Deactivate this spell to break the wall early.",
           "leveltip": {
@@ -32166,8 +32157,8 @@
         },
         {
           "name": "Trample",
-          "description": "Alistar tramples nearby enemy units, ignoring unit colision and gaining stacks if he damages an enemy champion. At full stacks Alistar's next basic attack against an enemy champion deals additional magic damage and stuns them.",
-          "sanitizedDescription": "Alistar tramples nearby enemy units, ignoring unit colision and gaining stacks if he damages an enemy champion. At full stacks Alistar's next basic attack against an enemy champion deals additional magic damage and stuns them.",
+          "description": "Alistar tramples nearby enemy units, ignoring unit collision and gaining stacks if he damages an enemy champion. At full stacks Alistar's next basic attack against an enemy champion deals additional magic damage and stuns them.",
+          "sanitizedDescription": "Alistar tramples nearby enemy units, ignoring unit collision and gaining stacks if he damages an enemy champion. At full stacks Alistar's next basic attack against an enemy champion deals additional magic damage and stuns them.",
           "tooltip": "Alistar tramples the ground, ignoring unit collision and dealing {{ f1 }} <span class=\"color99FF99\">(+{{ f2 }})</span> magic damage over {{ e3 }} seconds to nearby enemies. Each pulse that damages at least one enemy champion grants Alistar a <span class=\"colorFF6E1C\">Trample</span> stack.<br /><br />At {{ e5 }} <span class=\"colorFF6E1C\">Trample</span> stacks Alistar empowers his next basic attack against an enemy champion to deal an additional <span class=\"colorFFFFFF\">{{ f3 }}</span> magic damage and stun for {{ e6 }} second.",
           "sanitizedTooltip": "Alistar tramples the ground, ignoring unit collision and dealing {{ f1 }} (+{{ f2 }}) magic damage over {{ e3 }} seconds to nearby enemies. Each pulse that damages at least one enemy champion grants Alistar a Trample stack. At {{ e5 }} Trample stacks Alistar empowers his next basic attack against an enemy champion to deal an additional {{ f3 }} magic damage and stun for {{ e6 }} second.",
           "leveltip": {
@@ -32604,8 +32595,8 @@
         },
         {
           "name": "Wind Becomes Lightning",
-          "description": "Xin Zhao slashes in front of himself with his spear, then thrusts it forward.",
-          "sanitizedDescription": "Xin Zhao slashes in front of himself with his spear, then thrusts it forward.",
+          "description": "Xin Zhao slashes in front of himself with his spear, then thrusts it forward, slowing affected enemies.",
+          "sanitizedDescription": "Xin Zhao slashes in front of himself with his spear, then thrusts it forward, slowing affected enemies.",
           "tooltip": "Xin Zhao slashes in front of himself with his spear, then thrusts it forward.<br /><br /><span class=\"colorDDDD77\">Slash</span>: {{ e1 }} <span class=\"colorFF8C00\">(+{{ a1 }})</span> damage.<br /><span class=\"colorDDDD77\">Thrust</span>: {{ e2 }} <span class=\"colorFF8C00\">(+{{ a2 }})</span> damage and slows by {{ e6 }}% for {{ e7 }} seconds.<br /><br />Cast time is reduced with Attack Speed provided from items and levels (minimum of 0.4 seconds). Current cast time: <span class=\"colorFFFFFF\">{{ f5 }}</fontcolor><br /><br /><rules>Deals 50% less damage to minions.<br />Lifesteal is 33% effective on both attacks.<br />Extends the current duration of Xin Zhao's other abilities by {{ f5 }} seconds.</rules>",
           "sanitizedTooltip": "Xin Zhao slashes in front of himself with his spear, then thrusts it forward. Slash: {{ e1 }} (+{{ a1 }}) damage. Thrust: {{ e2 }} (+{{ a2 }}) damage and slows by {{ e6 }}% for {{ e7 }} seconds. Cast time is reduced with Attack Speed provided from items and levels (minimum of 0.4 seconds). Current cast time: {{ f5 }} Deals 50% less damage to minions. Lifesteal is 33% effective on both attacks. Extends the current duration of Xin Zhao's other abilities by {{ f5 }} seconds.",
           "leveltip": {
@@ -32665,18 +32656,18 @@
               170
             ],
             [
-              0.6,
-              0.6,
-              0.6,
-              0.6,
-              0.6
-            ],
-            [
               0.5,
               0.5,
               0.5,
               0.5,
               0.5
+            ],
+            [
+              0.4,
+              0.4,
+              0.4,
+              0.4,
+              0.4
             ],
             [
               0.4,
@@ -32700,18 +32691,18 @@
               1.5
             ],
             [
-              55,
-              55,
-              55,
-              55,
-              55
+              140,
+              140,
+              140,
+              140,
+              140
             ],
             [
-              110,
-              110,
-              110,
-              110,
-              110
+              200,
+              200,
+              200,
+              200,
+              200
             ],
             [
               0,
@@ -32725,13 +32716,13 @@
             "",
             "30/40/50/60/70",
             "30/65/100/135/170",
-            "0.6",
             "0.5",
+            "0.4",
             "0.4",
             "50",
             "1.5",
-            "55",
-            "110",
+            "140",
+            "200",
             "0"
           ],
           "vars": [
@@ -33704,13 +33695,15 @@
           "leveltip": {
             "label": [
               "Bonus Damage",
-              "Enhanced Movement Speed",
-              "Cooldown"
+              "Cooldown",
+              "Bonus Movement Speed Min",
+              "Bonus Movement Speed Max"
             ],
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
-              "{{ e2 }}% -> {{ e2NL }}%",
-              "{{ cooldown }} -> {{ cooldownNL }}"
+              "{{ cooldown }} -> {{ cooldownNL }}",
+              "{{ e4 }}% -> {{ e4NL }}%",
+              "{{ e2 }}% -> {{ e2NL }}%"
             ]
           },
           "image": {
@@ -33752,10 +33745,10 @@
             ],
             [
               30,
-              35,
-              40,
+              37.5,
               45,
-              50
+              52.5,
+              60
             ],
             [
               4,
@@ -33766,10 +33759,10 @@
             ],
             [
               15,
-              15,
-              15,
-              15,
-              15
+              17.5,
+              20,
+              22.5,
+              25
             ],
             [
               400,
@@ -33779,11 +33772,11 @@
               400
             ],
             [
-              0,
-              0,
-              0,
-              0,
-              0
+              1,
+              1,
+              1,
+              1,
+              1
             ],
             [
               0,
@@ -33817,11 +33810,11 @@
           "effectBurn": [
             "",
             "30/60/90/120/150",
-            "30/35/40/45/50",
+            "30/37.5/45/52.5/60",
             "4",
-            "15",
+            "15/17.5/20/22.5/25",
             "400",
-            "0",
+            "1",
             "0",
             "0",
             "0",
@@ -33841,8 +33834,8 @@
           "name": "Frenzy",
           "description": "Volibear's repeated attacks grant him additional Attack Speed. Once Volibear has repeatedly attacked three times, he can perform a vicious bite on his target which deals increased damage based on the target's missing Health.",
           "sanitizedDescription": "Volibear's repeated attacks grant him additional Attack Speed. Once Volibear has repeatedly attacked three times, he can perform a vicious bite on his target which deals increased damage based on the target's missing Health.",
-          "tooltip": "<span class=\"colorFF9900\">Passive: </span>Volibear gains {{ e1 }}% Attack Speed with each attack. Stacks up to {{ e2 }} times.<br /><br /><span class=\"colorFF9900\">Active: </span>When Volibear has {{ e2 }} stacks of Frenzy, he can bite an enemy to deal {{ e3 }} <span class=\"colorCC3300\">(+{{ f1 }} [{{ e4 }}% of bonus Health])</span> physical damage, increased by {{ e5 }}% for each {{ e7 }}% Health the target is missing. If Volibear bites a monster, Frenzy's cooldown is reduced by {{ e6 }}%.",
-          "sanitizedTooltip": "Passive: Volibear gains {{ e1 }}% Attack Speed with each attack. Stacks up to {{ e2 }} times. Active: When Volibear has {{ e2 }} stacks of Frenzy, he can bite an enemy to deal {{ e3 }} (+{{ f1 }} [{{ e4 }}% of bonus Health]) physical damage, increased by {{ e5 }}% for each {{ e7 }}% Health the target is missing. If Volibear bites a monster, Frenzy's cooldown is reduced by {{ e6 }}%.",
+          "tooltip": "<span class=\"colorFF9900\">Passive: </span>Volibear gains {{ e1 }}% Attack Speed with each attack. Stacks up to {{ e2 }} times.<br /><br /><span class=\"colorFF9900\">Active: </span>When Volibear has {{ e2 }} stacks of Frenzy, he can bite an enemy to deal {{ e3 }} <span class=\"colorCC3300\">(+{{ f1 }} [{{ e4 }}% of bonus Health])</span> physical damage, increased by {{ e5 }}% for each {{ e7 }}% Health the target is missing. If Volibear bites a minion or monster, Frenzy's cooldown is reduced by {{ e6 }}%.",
+          "sanitizedTooltip": "Passive: Volibear gains {{ e1 }}% Attack Speed with each attack. Stacks up to {{ e2 }} times. Active: When Volibear has {{ e2 }} stacks of Frenzy, he can bite an enemy to deal {{ e3 }} (+{{ f1 }} [{{ e4 }}% of bonus Health]) physical damage, increased by {{ e5 }}% for each {{ e7 }}% Health the target is missing. If Volibear bites a minion or monster, Frenzy's cooldown is reduced by {{ e6 }}%.",
           "leveltip": {
             "label": [
               "Attack Speed Bonus",
@@ -33988,18 +33981,20 @@
         },
         {
           "name": "Majestic Roar",
-          "description": "Volibear lets out a powerful roar that damages and slows enemies. Minions and monsters are feared as well.",
-          "sanitizedDescription": "Volibear lets out a powerful roar that damages and slows enemies. Minions and monsters are feared as well.",
-          "tooltip": "Volibear deals {{ e2 }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage to nearby enemies and slows them by {{ e1 }}% for {{ e3 }} seconds.<br /><br />Minions and monsters are feared as well.",
-          "sanitizedTooltip": "Volibear deals {{ e2 }} (+{{ a1 }}) magic damage to nearby enemies and slows them by {{ e1 }}% for {{ e3 }} seconds. Minions and monsters are feared as well.",
+          "description": "Volibear lets out a powerful roar that damages, slows, and slightly knocks back enemies. Enemies who are airborne or dashing are dealt additional damage. Minions and monsters are feared as well.",
+          "sanitizedDescription": "Volibear lets out a powerful roar that damages, slows, and slightly knocks back enemies. Enemies who are airborne or dashing are dealt additional damage. Minions and monsters are feared as well.",
+          "tooltip": "Volibear deals {{ e2 }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage to nearby enemies, knocking them back slightly and slowing them by {{ e1 }}% for {{ e3 }} seconds. Enemies who are airborne or dashing are dealt an additional {{ e5 }} <span class=\"color99FF99\">(+{{ a2 }})</span> magic damage.<br /><br />Additionally, minions and monsters are feared for 3 seconds.",
+          "sanitizedTooltip": "Volibear deals {{ e2 }} (+{{ a1 }}) magic damage to nearby enemies, knocking them back slightly and slowing them by {{ e1 }}% for {{ e3 }} seconds. Enemies who are airborne or dashing are dealt an additional {{ e5 }} (+{{ a2 }}) magic damage. Additionally, minions and monsters are feared for 3 seconds.",
           "leveltip": {
             "label": [
               "Damage",
+              "Bonus Damage",
               "Slow Amount ",
               "Mana Cost "
             ],
             "effect": [
               "{{ e2 }} -> {{ e2NL }}",
+              "{{ e5 }} -> {{ e5NL }}",
               "{{ e1 }}% -> {{ e1NL }}%",
               "{{ cost }} -> {{ costNL }}"
             ]
@@ -34063,32 +34058,32 @@
               49
             ],
             [
-              0,
-              0,
-              0,
-              0,
-              0
+              40,
+              60,
+              80,
+              100,
+              120
             ],
             [
-              0,
-              0,
-              0,
-              0,
-              0
+              70,
+              70,
+              70,
+              70,
+              70
             ],
             [
-              0,
-              0,
-              0,
-              0,
-              0
+              140,
+              140,
+              140,
+              140,
+              140
             ],
             [
-              0,
-              0,
-              0,
-              0,
-              0
+              100,
+              100,
+              100,
+              100,
+              100
             ],
             [
               0,
@@ -34111,10 +34106,10 @@
             "60/105/150/195/240",
             "3",
             "49",
-            "0",
-            "0",
-            "0",
-            "0",
+            "40/60/80/100/120",
+            "70",
+            "140",
+            "100",
             "0",
             "0"
           ],
@@ -34124,6 +34119,13 @@
               "link": "spelldamage",
               "coeff": [
                 0.6
+              ]
+            },
+            {
+              "key": "a2",
+              "link": "spelldamage",
+              "coeff": [
+                0.3
               ]
             }
           ],
@@ -34348,13 +34350,13 @@
           "costType": " Mana",
           "costBurn": "70/75/80/85/90",
           "cooldown": [
-            13,
+            17,
+            15.5,
+            14,
             12.5,
-            12,
-            11.5,
             11
           ],
-          "cooldownBurn": "13/12.5/12/11.5/11",
+          "cooldownBurn": "17/15.5/14/12.5/11",
           "effect": [
             null,
             [
@@ -37280,10 +37282,10 @@
           "costBurn": "0",
           "cooldown": [
             120,
-            100,
-            80
+            90,
+            60
           ],
-          "cooldownBurn": "120/100/80",
+          "cooldownBurn": "120/90/60",
           "effect": [
             null,
             [
@@ -42906,7 +42908,7 @@
       "id": 50,
       "key": "Swain",
       "name": "Swain",
-      "title": "the Master Tactician",
+      "title": "the Noxian Grand General",
       "image": {
         "full": "Swain.png",
         "sprite": "champion3.png",
@@ -42929,339 +42931,30 @@
       },
       "spells": [
         {
-          "name": "Decrepify",
-          "description": "Swain sends Beatrice to cripple enemies within the target area. Crippled targets are slowed and damaged over time.",
-          "sanitizedDescription": "Swain sends Beatrice to cripple enemies within the target area. Crippled targets are slowed and damaged over time.",
-          "tooltip": "Beatrice lands on the target area for {{ e3 }} seconds and attacks the closest enemy unit prioritizing champions, dealing {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage per second and slowing it down by <span class=\"colorFFFFFF\">{{ e2 }}%</span>. Damage is doubled to {{ f1 }} <span class=\"color99FF99\">(+{{ a2 }})</span> magic damage against minions.<br /><br />Beatrice will look for a new target if the current one moves away or dies. If any nearby enemy unit is afflicted by <span class=\"colorFFFF00\">Torment</span> then it will become Beatrice's target.<br /><br />Max damage: {{ f2 }} <span class=\"color99FF99\">(+{{ f3 }})</span> to non-minions and {{ f4 }} <span class=\"color99FF99\">(+{{ f5 }})</span> to enemy minions.",
-          "sanitizedTooltip": "Beatrice lands on the target area for {{ e3 }} seconds and attacks the closest enemy unit prioritizing champions, dealing {{ e1 }} (+{{ a1 }}) magic damage per second and slowing it down by {{ e2 }}%. Damage is doubled to {{ f1 }} (+{{ a2 }}) magic damage against minions. Beatrice will look for a new target if the current one moves away or dies. If any nearby enemy unit is afflicted by Torment then it will become Beatrice's target. Max damage: {{ f2 }} (+{{ f3 }}) to non-minions and {{ f4 }} (+{{ f5 }}) to enemy minions.",
+          "name": "Death's Hand",
+          "description": "Swain unleashes several bolts of eldritch power that pierce through targets killed. Enemies hit take more damage for each bolt they are struck by.",
+          "sanitizedDescription": "Swain unleashes several bolts of eldritch power that pierce through targets killed. Enemies hit take more damage for each bolt they are struck by.",
+          "tooltip": "Swain unleashes {{ e5 }} bolts of eldritch power that strike the first enemy they hit and pierce through enemies they kill. Enemies hit take {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage, plus {{ e2 }}% per additional bolt. Max Damage: {{ f2 }}.<br /><br />Each unit killed by Death's Hand restores <span class=\"color44DDFF\">{{ f1 }}</span> Mana ({{ e4 }}% max mana).",
+          "sanitizedTooltip": "Swain unleashes {{ e5 }} bolts of eldritch power that strike the first enemy they hit and pierce through enemies they kill. Enemies hit take {{ e1 }} (+{{ a1 }}) magic damage, plus {{ e2 }}% per additional bolt. Max Damage: {{ f2 }}. Each unit killed by Death's Hand restores {{ f1 }} Mana ({{ e4 }}% max mana).",
           "leveltip": {
             "label": [
-              "Damage Per Second",
-              "Slow",
-              "Mana Cost",
-              "Cooldown"
-            ],
-            "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
-              "{{ e2 }}% -> {{ e2NL }}%",
-              "{{ cost }} -> {{ costNL }}",
-              "{{ cooldown }} -> {{ cooldownNL }}"
-            ]
-          },
-          "image": {
-            "full": "SwainDecrepify.png",
-            "sprite": "spell10.png",
-            "group": "spell",
-            "x": 240,
-            "y": 144,
-            "w": 48,
-            "h": 48
-          },
-          "resource": "{{ cost }} Mana",
-          "maxrank": 5,
-          "cost": [
-            60,
-            65,
-            70,
-            75,
-            80
-          ],
-          "costType": " Mana",
-          "costBurn": "60/65/70/75/80",
-          "cooldown": [
-            14,
-            13,
-            12,
-            11,
-            10
-          ],
-          "cooldownBurn": "14/13/12/11/10",
-          "effect": [
-            null,
-            [
-              30,
-              48,
-              65,
-              83,
-              100
-            ],
-            [
-              20,
-              25,
-              30,
-              35,
-              40
-            ],
-            [
-              4,
-              4,
-              4,
-              4,
-              4
-            ],
-            [
-              350,
-              350,
-              350,
-              350,
-              350
-            ],
-            [
-              0.5,
-              0.5,
-              0.5,
-              0.5,
-              0.5
-            ],
-            [
-              0.25,
-              0.25,
-              0.25,
-              0.25,
-              0.25
-            ],
-            [
-              2,
-              2,
-              2,
-              2,
-              2
-            ],
-            [
-              0,
-              0,
-              0,
-              0,
-              0
-            ],
-            [
-              0,
-              0,
-              0,
-              0,
-              0
-            ],
-            [
-              0,
-              0,
-              0,
-              0,
-              0
-            ]
-          ],
-          "effectBurn": [
-            "",
-            "30/48/65/83/100",
-            "20/25/30/35/40",
-            "4",
-            "350",
-            "0.5",
-            "0.25",
-            "2",
-            "0",
-            "0",
-            "0"
-          ],
-          "vars": [
-            {
-              "key": "a1",
-              "link": "spelldamage",
-              "coeff": [
-                0.3
-              ]
-            },
-            {
-              "key": "a2",
-              "link": "spelldamage",
-              "coeff": [
-                0.6
-              ]
-            }
-          ],
-          "range": [
-            700,
-            700,
-            700,
-            700,
-            700
-          ],
-          "rangeBurn": "700",
-          "key": "SwainDecrepify"
-        },
-        {
-          "name": "Nevermove",
-          "description": "Swain marks a target area. After a short delay, mighty talons grab hold of enemy units, dealing damage and rooting them.",
-          "sanitizedDescription": "Swain marks a target area. After a short delay, mighty talons grab hold of enemy units, dealing damage and rooting them.",
-          "tooltip": "Swain marks the target area that triggers after a brief delay dealing {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage to enemies within range and rooting them for <span class=\"colorFFFFFF\">{{ e2 }}</span> second(s).",
-          "sanitizedTooltip": "Swain marks the target area that triggers after a brief delay dealing {{ e1 }} (+{{ a1 }}) magic damage to enemies within range and rooting them for {{ e2 }} second(s).",
-          "leveltip": {
-            "label": [
-              "Damage",
-              "Root Duration",
+              "Bolt Damage",
+              "Additional Bolt Damage",
               "Cooldown",
               "Mana Cost"
             ],
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
-              "{{ e2 }} -> {{ e2NL }}",
+              "{{ e2 }}% -> {{ e2NL }}%",
               "{{ cooldown }} -> {{ cooldownNL }}",
               "{{ cost }} -> {{ costNL }}"
             ]
           },
           "image": {
-            "full": "SwainShadowGrasp.png",
+            "full": "SwainQ.png",
             "sprite": "spell10.png",
             "group": "spell",
-            "x": 288,
-            "y": 144,
-            "w": 48,
-            "h": 48
-          },
-          "resource": "{{ cost }} Mana",
-          "maxrank": 5,
-          "cost": [
-            80,
-            85,
-            90,
-            95,
-            100
-          ],
-          "costType": " Mana",
-          "costBurn": "80/85/90/95/100",
-          "cooldown": [
-            18,
-            16,
-            14,
-            12,
-            10
-          ],
-          "cooldownBurn": "18/16/14/12/10",
-          "effect": [
-            null,
-            [
-              80,
-              120,
-              160,
-              200,
-              240
-            ],
-            [
-              1,
-              1.25,
-              1.5,
-              1.75,
-              2
-            ],
-            [
-              0.875,
-              0.875,
-              0.875,
-              0.875,
-              0.875
-            ],
-            [
-              0,
-              0,
-              0,
-              0,
-              0
-            ],
-            [
-              0.875,
-              0.875,
-              0.875,
-              0.875,
-              0.875
-            ],
-            [
-              0,
-              0,
-              0,
-              0,
-              0
-            ],
-            [
-              0,
-              0,
-              0,
-              0,
-              0
-            ],
-            [
-              0,
-              0,
-              0,
-              0,
-              0
-            ],
-            [
-              0,
-              0,
-              0,
-              0,
-              0
-            ],
-            [
-              0,
-              0,
-              0,
-              0,
-              0
-            ]
-          ],
-          "effectBurn": [
-            "",
-            "80/120/160/200/240",
-            "1/1.25/1.5/1.75/2",
-            "0.88",
-            "0",
-            "0.88",
-            "0",
-            "0",
-            "0",
-            "0",
-            "0"
-          ],
-          "vars": [
-            {
-              "key": "a1",
-              "link": "spelldamage",
-              "coeff": [
-                0.7
-              ]
-            }
-          ],
-          "range": [
-            900,
-            900,
-            900,
-            900,
-            900
-          ],
-          "rangeBurn": "900",
-          "key": "SwainShadowGrasp"
-        },
-        {
-          "name": "Torment",
-          "description": "Swain afflicts his target, dealing damage to them over time and causing them to take increased damage from Swain. Enemies afflicted by Torment are focused by Beatrice while Decrepify is active.",
-          "sanitizedDescription": "Swain afflicts his target, dealing damage to them over time and causing them to take increased damage from Swain. Enemies afflicted by Torment are focused by Beatrice while Decrepify is active.",
-          "tooltip": "Swain afflicts his target with a curse that deals {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage over 4 seconds and amplifies Swain's damage against it by {{ e2 }}%.",
-          "sanitizedTooltip": "Swain afflicts his target with a curse that deals {{ e1 }} (+{{ a1 }}) magic damage over 4 seconds and amplifies Swain's damage against it by {{ e2 }}%.",
-          "leveltip": {
-            "label": [
-              "Base Damage Over Time",
-              "Mana Cost"
-            ],
-            "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
-              "{{ cost }} -> {{ costNL }}"
-            ]
-          },
-          "image": {
-            "full": "SwainTorment.png",
-            "sprite": "spell10.png",
-            "group": "spell",
-            "x": 336,
+            "x": 240,
             "y": 144,
             "w": 48,
             "h": 48
@@ -43278,138 +42971,455 @@
           "costType": " Mana",
           "costBurn": "65/70/75/80/85",
           "cooldown": [
-            10,
-            10,
-            10,
-            10,
-            10
+            7.5,
+            6.25,
+            5,
+            3.75,
+            2.5
           ],
-          "cooldownBurn": "10",
+          "cooldownBurn": "7.5/6.25/5/3.75/2.5",
           "effect": [
             null,
             [
-              50,
-              80,
-              110,
-              140,
-              170
+              65,
+              85,
+              105,
+              125,
+              145
             ],
             [
+              15,
               20,
+              25,
+              30,
+              35
+            ],
+            [
+              3,
+              3,
+              3,
+              3,
+              3
+            ],
+            [
+              3,
+              3,
+              3,
+              3,
+              3
+            ],
+            [
+              5,
+              5,
+              5,
+              5,
+              5
+            ],
+            [
+              0.4,
+              0.4,
+              0.4,
+              0.4,
+              0.4
+            ],
+            [
+              700,
+              700,
+              700,
+              700,
+              700
+            ],
+            [
+              15,
+              17.5,
               20,
-              20,
-              20,
-              20
+              22.5,
+              25
             ],
             [
-              6,
-              7,
-              8,
-              9,
-              10
+              0.75,
+              0.75,
+              0.75,
+              0.75,
+              0.75
             ],
             [
-              4,
-              4,
-              4,
-              4,
-              4
-            ],
-            [
-              0,
-              0,
-              0,
-              0,
-              0
-            ],
-            [
-              0,
-              0,
-              0,
-              0,
-              0
-            ],
-            [
-              0,
-              0,
-              0,
-              0,
-              0
-            ],
-            [
-              0,
-              0,
-              0,
-              0,
-              0
-            ],
-            [
-              0,
-              0,
-              0,
-              0,
-              0
-            ],
-            [
-              0,
-              0,
-              0,
-              0,
-              0
+              -0.4,
+              -0.4,
+              -0.4,
+              -0.4,
+              -0.4
             ]
           ],
           "effectBurn": [
             "",
-            "50/80/110/140/170",
-            "20",
-            "6/7/8/9/10",
-            "4",
-            "0",
-            "0",
-            "0",
-            "0",
-            "0",
-            "0"
+            "65/85/105/125/145",
+            "15/20/25/30/35",
+            "3",
+            "3",
+            "5",
+            "0.4",
+            "700",
+            "15/17.5/20/22.5/25",
+            "0.75",
+            "-0.4"
           ],
           "vars": [
             {
               "key": "a1",
               "link": "spelldamage",
               "coeff": [
-                1
+                0.4
               ]
             }
           ],
           "range": [
-            625,
-            625,
-            625,
-            625,
-            625
+            725,
+            725,
+            725,
+            725,
+            725
           ],
-          "rangeBurn": "625",
-          "key": "SwainTorment"
+          "rangeBurn": "725",
+          "key": "SwainQ"
         },
         {
-          "name": "Ravenous Flock",
-          "description": "Swain inspires dread in his enemies by temporarily taking the form of a raven. During this time ravens strike out at up to 5 nearby enemies. Each raven deals damage and heals Swain by a flat amount.",
-          "sanitizedDescription": "Swain inspires dread in his enemies by temporarily taking the form of a raven. During this time ravens strike out at up to 5 nearby enemies. Each raven deals damage and heals Swain by a flat amount.",
-          "tooltip": "<span class=\"colorFF9900\">Toggle:</span> Swain transforms into a monstrous raven, spawning up to {{ e7 }} lesser ravens per second that strike out at nearby enemies, prioritizing champions. Each raven deals {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage and heals Swain for {{ e2 }} <span class=\"color99FF99\">(+{{ f9 }})</span> against champions and {{ e9 }} <span class=\"color99FF99\">(+{{ f10 }})</span> against minions and monsters.<br /><br />Ravens can't attack the same target for 1 second and the mana cost to sustain Ravenous Flock increases by {{ e8 }} Mana each second.",
-          "sanitizedTooltip": "Toggle: Swain transforms into a monstrous raven, spawning up to {{ e7 }} lesser ravens per second that strike out at nearby enemies, prioritizing champions. Each raven deals {{ e1 }} (+{{ a1 }}) magic damage and heals Swain for {{ e2 }} (+{{ f9 }}) against champions and {{ e9 }} (+{{ f10 }}) against minions and monsters. Ravens can't attack the same target for 1 second and the mana cost to sustain Ravenous Flock increases by {{ e8 }} Mana each second.",
+          "name": "Vision of Empire",
+          "description": "Swain opens a demon eye that deals damage and slows enemies. Champions hit are revealed and also grant Swain a Soul Fragment.",
+          "sanitizedDescription": "Swain opens a demon eye that deals damage and slows enemies. Champions hit are revealed and also grant Swain a Soul Fragment.",
+          "tooltip": "Swain opens a demon eye up to {{ castrange }} range away that deals {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage and slows for {{ e4 }}% for {{ e7 }} seconds.<br /><br />Champions hit grant Swain a <span class=\"size18 colorFF3F3F\">Soul Fragment</span> and are revealed for {{ e9 }} seconds.<br /><br /><rules>Damage is reduced by {{ e6 }}% against minions.</rules>",
+          "sanitizedTooltip": "Swain opens a demon eye up to {{ castrange }} range away that deals {{ e1 }} (+{{ a1 }}) magic damage and slows for {{ e4 }}% for {{ e7 }} seconds. Champions hit grant Swain a Soul Fragment and are revealed for {{ e9 }} seconds. Damage is reduced by {{ e6 }}% against minions.",
           "leveltip": {
             "label": [
-              "Damage Amount",
-              "Heal From Champions",
-              "Heal From Minions and Monsters"
+              "Damage",
+              "Slow",
+              "Reveal Duration",
+              "Cooldown",
+              "Mana Cost"
             ],
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
-              "{{ e2 }} -> {{ e2NL }}",
-              "{{ e9 }} -> {{ e9NL }}"
+              "{{ e4 }}% -> {{ e4NL }}%",
+              "{{ e9 }} -> {{ e9NL }}",
+              "{{ cooldown }} -> {{ cooldownNL }}",
+              "{{ cost }} -> {{ costNL }}"
             ]
           },
           "image": {
-            "full": "SwainMetamorphism.png",
+            "full": "SwainW.png",
+            "sprite": "spell10.png",
+            "group": "spell",
+            "x": 288,
+            "y": 144,
+            "w": 48,
+            "h": 48
+          },
+          "resource": "{{ cost }} Mana",
+          "maxrank": 5,
+          "cost": [
+            70,
+            85,
+            100,
+            115,
+            130
+          ],
+          "costType": " Mana",
+          "costBurn": "70/85/100/115/130",
+          "cooldown": [
+            22,
+            21,
+            20,
+            19,
+            18
+          ],
+          "cooldownBurn": "22/21/20/19/18",
+          "effect": [
+            null,
+            [
+              100,
+              150,
+              200,
+              250,
+              300
+            ],
+            [
+              0.05,
+              0.05,
+              0.05,
+              0.05,
+              0.05
+            ],
+            [
+              265,
+              265,
+              265,
+              265,
+              265
+            ],
+            [
+              25,
+              35,
+              45,
+              55,
+              65
+            ],
+            [
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              0.5
+            ],
+            [
+              50,
+              50,
+              50,
+              50,
+              50
+            ],
+            [
+              2.5,
+              2.5,
+              2.5,
+              2.5,
+              2.5
+            ],
+            [
+              420,
+              420,
+              420,
+              420,
+              420
+            ],
+            [
+              4,
+              5,
+              6,
+              7,
+              8
+            ],
+            [
+              4,
+              5,
+              6,
+              7,
+              8
+            ]
+          ],
+          "effectBurn": [
+            "",
+            "100/150/200/250/300",
+            "0.05",
+            "265",
+            "25/35/45/55/65",
+            "0.5",
+            "50",
+            "2.5",
+            "420",
+            "4/5/6/7/8",
+            "4/5/6/7/8"
+          ],
+          "vars": [
+            {
+              "key": "a1",
+              "link": "spelldamage",
+              "coeff": [
+                0.7
+              ]
+            }
+          ],
+          "range": [
+            3500,
+            3500,
+            3500,
+            3500,
+            3500
+          ],
+          "rangeBurn": "3500",
+          "key": "SwainW"
+        },
+        {
+          "name": "Nevermove",
+          "description": "Swain launches a wave of demonic power forward. It then returns to Swain and roots enemies it hits.",
+          "sanitizedDescription": "Swain launches a wave of demonic power forward. It then returns to Swain and roots enemies it hits.",
+          "tooltip": "Swain launches a wave of demonic power, dealing {{ e2 }} <span class=\"color99FF99\">(+{{ a2 }})</span> magic damage to enemies it passes through.<br /><br />Swain then commands the wave to return, detonating it on the first enemy hit. Enemies hit take {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage and are rooted for {{ e3 }} seconds.",
+          "sanitizedTooltip": "Swain launches a wave of demonic power, dealing {{ e2 }} (+{{ a2 }}) magic damage to enemies it passes through. Swain then commands the wave to return, detonating it on the first enemy hit. Enemies hit take {{ e1 }} (+{{ a1 }}) magic damage and are rooted for {{ e3 }} seconds.",
+          "leveltip": {
+            "label": [
+              "Pass-through Damage",
+              "Detonation Damage",
+              "Cooldown",
+              "Mana Cost"
+            ],
+            "effect": [
+              "{{ e2 }} -> {{ e2NL }}",
+              "{{ e1 }} -> {{ e1NL }}",
+              "{{ cooldown }} -> {{ cooldownNL }}",
+              "{{ cost }} -> {{ costNL }}"
+            ]
+          },
+          "image": {
+            "full": "SwainE.png",
+            "sprite": "spell10.png",
+            "group": "spell",
+            "x": 336,
+            "y": 144,
+            "w": 48,
+            "h": 48
+          },
+          "resource": "{{ cost }} Mana",
+          "maxrank": 5,
+          "cost": [
+            60,
+            65,
+            70,
+            75,
+            80
+          ],
+          "costType": " Mana",
+          "costBurn": "60/65/70/75/80",
+          "cooldown": [
+            13,
+            12,
+            11,
+            10,
+            9
+          ],
+          "cooldownBurn": "13/12/11/10/9",
+          "effect": [
+            null,
+            [
+              35,
+              45,
+              55,
+              65,
+              75
+            ],
+            [
+              35,
+              70,
+              105,
+              140,
+              175
+            ],
+            [
+              1.5,
+              1.5,
+              1.5,
+              1.5,
+              1.5
+            ],
+            [
+              1500,
+              1500,
+              1500,
+              1500,
+              1500
+            ],
+            [
+              -0.5,
+              -0.5,
+              -0.5,
+              -0.5,
+              -0.5
+            ],
+            [
+              0.75,
+              0.75,
+              0.75,
+              0.75,
+              0.75
+            ],
+            [
+              60,
+              85,
+              105,
+              125,
+              150
+            ],
+            [
+              60,
+              85,
+              105,
+              125,
+              150
+            ],
+            [
+              15,
+              15,
+              15,
+              15,
+              15
+            ],
+            [
+              400,
+              400,
+              400,
+              400,
+              400
+            ]
+          ],
+          "effectBurn": [
+            "",
+            "35/45/55/65/75",
+            "35/70/105/140/175",
+            "1.5",
+            "1500",
+            "-0.5",
+            "0.75",
+            "60/85/105/125/150",
+            "60/85/105/125/150",
+            "15",
+            "400"
+          ],
+          "vars": [
+            {
+              "key": "a2",
+              "link": "spelldamage",
+              "coeff": [
+                0.25
+              ]
+            },
+            {
+              "key": "a1",
+              "link": "spelldamage",
+              "coeff": [
+                0.25
+              ]
+            }
+          ],
+          "range": [
+            850,
+            850,
+            850,
+            850,
+            850
+          ],
+          "rangeBurn": "850",
+          "key": "SwainE"
+        },
+        {
+          "name": "Demonic Ascension",
+          "description": "Swain transforms into a demon and drains health from the 3 closest enemy champions. After draining enough health, Swain can cast Demonflare to end his transformation and decimate nearby enemies with a nova of soulfire.",
+          "sanitizedDescription": "Swain transforms into a demon and drains health from the 3 closest enemy champions. After draining enough health, Swain can cast Demonflare to end his transformation and decimate nearby enemies with a nova of soulfire.",
+          "tooltip": "Swain frees the demon within for {{ e3 }} seconds, gaining {{ e6 }} health. Every second, he drains the 3 closest enemy champions for {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage, healing him for {{ e4 }} <span class=\"color99FF99\">(+{{ a2 }})</span> health. After draining <scaleLevel>{{ f7 }}</scaleLevel> health, Swain gains the ability to cast Demonflare.<br /><br /><span class=\"colorDDDD77\">Demonflare:</span> Swain unleashes a nova of soulfire dealing magic damage and ending his transformation. Damage per <span class=\"size18 colorFF3F3F\">Soul Fragment</span>: {{ e0 }} <span class=\"color99FF99\">(+{{ f1 }})</span>.<br /><br />Current Damage: {{ f3 }}<br />Max Damage: {{ f2 }}<br /><br /><rules>Swain can drain non-champions to heal for {{ e7 }}% of the normal amount.",
+          "sanitizedTooltip": "Swain frees the demon within for {{ e3 }} seconds, gaining {{ e6 }} health. Every second, he drains the 3 closest enemy champions for {{ e1 }} (+{{ a1 }}) magic damage, healing him for {{ e4 }} (+{{ a2 }}) health. After draining {{ f7 }} health, Swain gains the ability to cast Demonflare. Demonflare: Swain unleashes a nova of soulfire dealing magic damage and ending his transformation. Damage per Soul Fragment: {{ e0 }} (+{{ f1 }}). Current Damage: {{ f3 }} Max Damage: {{ f2 }} Swain can drain non-champions to heal for {{ e7 }}% of the normal amount.",
+          "leveltip": {
+            "label": [
+              "Health Gain",
+              "Drain Damage",
+              "Drain Heal",
+              "Damage Per Soul"
+            ],
+            "effect": [
+              "{{ e6 }} -> {{ e6NL }}",
+              "{{ e1 }} -> {{ e1NL }}",
+              "{{ e4 }} -> {{ e4NL }}",
+              "{{ e0 }} -> {{ e0NL }}"
+            ]
+          },
+          "image": {
+            "full": "SwainR.png",
             "sprite": "spell10.png",
             "group": "spell",
             "x": 384,
@@ -43417,111 +43427,118 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Initial Mana Cost per Second",
+          "resource": "All Soul Fragments",
           "maxrank": 3,
           "cost": [
-            25,
-            25,
-            25
+            0,
+            0,
+            0
           ],
-          "costType": " Initial Mana Cost per Second",
-          "costBurn": "25",
+          "costType": "All Soul Fragments",
+          "costBurn": "0",
           "cooldown": [
-            20,
-            20,
-            20
+            120,
+            120,
+            120
           ],
-          "cooldownBurn": "20",
+          "cooldownBurn": "120",
           "effect": [
             null,
             [
+              35,
               50,
-              70,
-              90
+              65
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              12,
+              12,
+              12
             ],
             [
               20,
-              30,
-              40
+              35,
+              50
             ],
             [
-              0.12,
-              0.12,
-              0.12
+              0.04,
+              0.06,
+              0.08
             ],
             [
-              25,
-              25,
-              25
+              150,
+              275,
+              400
             ],
             [
-              2,
-              2,
-              2
+              20,
+              20,
+              20
             ],
             [
-              25000,
-              25000,
-              25000
+              0.27,
+              0.27,
+              0.27
             ],
             [
-              5,
-              5,
-              5
+              0,
+              0,
+              0
             ],
             [
-              5,
-              5,
-              5
-            ],
-            [
-              8,
-              11,
-              14
-            ],
-            [
-              0.03,
-              0.03,
-              0.03
+              45,
+              60,
+              75
             ]
           ],
           "effectBurn": [
             "",
-            "50/70/90",
-            "20/30/40",
-            "0.12",
-            "25",
-            "2",
-            "25000",
-            "5",
-            "5",
-            "8/11/14",
-            "0.03"
+            "35/50/65",
+            "1",
+            "12",
+            "20/35/50",
+            "0.04/0.06/0.08",
+            "150/275/400",
+            "20",
+            "0.27",
+            "0",
+            "45/60/75"
           ],
           "vars": [
             {
               "key": "a1",
               "link": "spelldamage",
               "coeff": [
-                0.2
+                0.14
+              ]
+            },
+            {
+              "key": "a2",
+              "link": "spelldamage",
+              "coeff": [
+                0.16
               ]
             }
           ],
           "range": [
-            625,
-            625,
-            625
+            650,
+            650,
+            650
           ],
-          "rangeBurn": "625",
-          "key": "SwainMetamorphism"
+          "rangeBurn": "650",
+          "key": "SwainR"
         }
       ],
       "passive": {
-        "name": "Carrion Renewal",
-        "description": "Swain regenerates Mana each time he kills a unit. This amount increases each level.",
-        "sanitizedDescription": "Swain regenerates Mana each time he kills a unit. This amount increases each level.",
+        "name": "Ravenous Flock",
+        "description": "Swain's ravens collect <i>Soul Fragments</i> that heal him. Swain can right-click an immobilized enemy champions to pull them closer to him, dealing damage and ripping out a <i>Soul Fragment</i>.",
+        "sanitizedDescription": "Swain's ravens collect Soul Fragments that heal him. Swain can right-click an immobilized enemy champions to pull them closer to him, dealing damage and ripping out a Soul Fragment.",
         "image": {
-          "full": "SwainCarrionRenewal.png",
+          "full": "Swain_P.png",
           "sprite": "passive3.png",
           "group": "passive",
           "x": 192,
@@ -50572,9 +50589,11 @@
           "sanitizedTooltip": "Darius's next basic attack deals {{ f1 }} physical damage and slows the target by {{ e2 }}% for {{ e5 }} second. Crippling Strike refunds its Mana cost and {{ e3 }}% of its cooldown if it kills the target.",
           "leveltip": {
             "label": [
+              "Attack Damage Scaling",
               "Cooldown"
             ],
             "effect": [
+              "{{ e4 }}% -> {{ e4NL }}%",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
@@ -50599,13 +50618,13 @@
           "costType": " Mana",
           "costBurn": "30",
           "cooldown": [
-            9,
-            8,
             7,
+            6.5,
             6,
+            5.5,
             5
           ],
-          "cooldownBurn": "9/8/7/6/5",
+          "cooldownBurn": "7/6.5/6/5.5/5",
           "effect": [
             null,
             [
@@ -50630,11 +50649,11 @@
               50
             ],
             [
-              1.4,
-              1.4,
-              1.4,
-              1.4,
-              1.4
+              140,
+              145,
+              150,
+              155,
+              160
             ],
             [
               1,
@@ -50684,7 +50703,7 @@
             "0",
             "90",
             "50",
-            "1.4",
+            "140/145/150/155/160",
             "1",
             "0",
             "0",
@@ -50749,11 +50768,11 @@
           "effect": [
             null,
             [
-              5,
               10,
               15,
               20,
-              25
+              25,
+              30
             ],
             [
               40,
@@ -50821,7 +50840,7 @@
           ],
           "effectBurn": [
             "",
-            "5/10/15/20/25",
+            "10/15/20/25/30",
             "40",
             "1",
             "0",
@@ -51018,7 +51037,7 @@
           "name": "Bloodlust",
           "description": "Tryndamere thrives on the thrills of combat, increasing his Attack Damage as he is more and more wounded. He can cast Bloodlust to consume his Fury and heal himself.",
           "sanitizedDescription": "Tryndamere thrives on the thrills of combat, increasing his Attack Damage as he is more and more wounded. He can cast Bloodlust to consume his Fury and heal himself.",
-          "tooltip": "<span class=\"colorFF9900\">Passive: </span>Tryndamere thirsts for blood, gaining {{ e1 }} Attack Damage plus {{ e2 }} per 1% Health missing.<br /><br /><span class=\"colorFF9900\">Active: </span>Tryndamere consumes his Fury, restoring {{ e3 }} <span class=\"color99FF99\">(+{{ a1 }})</span> Health, plus {{ e4 }} <span class=\"color99FF99\"> (+{{ f2 }}) </span>Health per Fury consumed.",
+          "tooltip": "<spellPassive>Passive:</spellPassive> Tryndamere thirsts for blood, gaining {{ e1 }} Attack Damage plus {{ e2 }} per 1% Health missing.<br /><br /><spellActive>Active:</spellActive> Tryndamere consumes his Fury, restoring {{ e3 }} <scaleAP>(+{{ a1 }})</scaleAP> Health, plus {{ e4 }} <scaleAP>(+{{ f2 }})</scaleAP> Health per Fury consumed.",
           "sanitizedTooltip": "Passive: Tryndamere thirsts for blood, gaining {{ e1 }} Attack Damage plus {{ e2 }} per 1% Health missing. Active: Tryndamere consumes his Fury, restoring {{ e3 }} (+{{ a1 }}) Health, plus {{ e4 }} (+{{ f2 }}) Health per Fury consumed.",
           "leveltip": {
             "label": [
@@ -51311,8 +51330,8 @@
           "name": "Spinning Slash",
           "description": "Tryndamere slices toward a target unit, dealing damage to enemies in his path.",
           "sanitizedDescription": "Tryndamere slices toward a target unit, dealing damage to enemies in his path.",
-          "tooltip": "Tryndamere spins through his enemies, dealing {{ e1 }} <span class=\"colorFF8C00\">(+{{ f1 }})</span> <span class=\"color99FF99\">(+{{ a1 }})</span> physical damage to enemies in his path and generating Fury.<br /><br />Spinning Slash's cooldown is reduced by {{ e2 }} second whenever Tryndamere critically strikes. This reduction is increased to {{ e3 }} seconds against champions.",
-          "sanitizedTooltip": "Tryndamere spins through his enemies, dealing {{ e1 }} (+{{ f1 }}) (+{{ a1 }}) physical damage to enemies in his path and generating Fury. Spinning Slash's cooldown is reduced by {{ e2 }} second whenever Tryndamere critically strikes. This reduction is increased to {{ e3 }} seconds against champions.",
+          "tooltip": "Tryndamere spins through his enemies, dealing {{ e1 }} <scaleAD>(+{{ a2 }})</scaleAD> <scaleAP>(+{{ a1 }})</scaleAP> physical damage to enemies in his path and generating Fury.<br /><br />Spinning Slash's cooldown is reduced by {{ e2 }} second whenever Tryndamere critically strikes. This reduction is increased to {{ e3 }} seconds against champions.",
+          "sanitizedTooltip": "Tryndamere spins through his enemies, dealing {{ e1 }} (+{{ a2 }}) (+{{ a1 }}) physical damage to enemies in his path and generating Fury. Spinning Slash's cooldown is reduced by {{ e2 }} second whenever Tryndamere critically strikes. This reduction is increased to {{ e3 }} seconds against champions.",
           "leveltip": {
             "label": [
               "Base Damage",
@@ -51438,6 +51457,13 @@
             "0"
           ],
           "vars": [
+            {
+              "key": "a2",
+              "link": "bonusattackdamage",
+              "coeff": [
+                1.3
+              ]
+            },
             {
               "key": "a1",
               "link": "spelldamage",
@@ -53384,9 +53410,9 @@
           "effect": [
             null,
             [
+              20,
               30,
-              50,
-              70
+              40
             ],
             [
               8,
@@ -53436,7 +53462,7 @@
           ],
           "effectBurn": [
             "",
-            "30/50/70",
+            "20/30/40",
             "8/10/12",
             "1",
             "90",
@@ -54075,8 +54101,8 @@
       ],
       "passive": {
         "name": "Blaze",
-        "description": "Brand's spells light his targets ablaze, dealing 4% of their maximum Health in magic damage over 4 seconds, stacking up to 3 times. If Brand kills an enemy while it is ablaze he regains mana. When Blaze reaches max stacks on a Champion or monster, it becomes unstable. It detonates in 2 seconds, applying spell effects and dealing massive damage in an area around the victim.",
-        "sanitizedDescription": "Brand's spells light his targets ablaze, dealing 4% of their maximum Health in magic damage over 4 seconds, stacking up to 3 times. If Brand kills an enemy while it is ablaze he regains mana. When Blaze reaches max stacks on a Champion or monster, it becomes unstable. It detonates in 2 seconds, applying spell effects and dealing massive damage in an area around the victim.",
+        "description": "Brand's spells light his targets ablaze, dealing 4% of their maximum Health in magic damage over 4 seconds, stacking up to 3 times. If Brand kills an enemy while it is ablaze he regains mana. When Blaze reaches max stacks on a Champion or large monster, it becomes unstable. It detonates in 2 seconds, applying spell effects and dealing massive damage in an area around the victim.",
+        "sanitizedDescription": "Brand's spells light his targets ablaze, dealing 4% of their maximum Health in magic damage over 4 seconds, stacking up to 3 times. If Brand kills an enemy while it is ablaze he regains mana. When Blaze reaches max stacks on a Champion or large monster, it becomes unstable. It detonates in 2 seconds, applying spell effects and dealing massive damage in an area around the victim.",
         "image": {
           "full": "BrandP.png",
           "sprite": "passive0.png",
@@ -54118,8 +54144,8 @@
           "name": "Paddle Star!",
           "description": "Zoe fires a missile that she can redirect in flight. Deals more damage the longer it flies in a straight line.",
           "sanitizedDescription": "Zoe fires a missile that she can redirect in flight. Deals more damage the longer it flies in a straight line.",
-          "tooltip": "Fire a missile that deals increasing damage the further it travels -- {{ f2 }} <span class=\"color99FF99\">(+{{ f1 }})</span> to {{ f2*2.5 }} <span class=\"color99FF99\">(+{{ f1*2.5 }})</span> magic damage.<span class=\"size5\"><br /><br /><br /></span>Recast to redirect the missile to a new position near Zoe.<br /><br /><rules>Base damage is {{ e1 }} + {{ e3 }}% of Ability Power + More Sparkles' bonus damage</rules>",
-          "sanitizedTooltip": "Fire a missile that deals increasing damage the further it travels -- {{ f2 }} (+{{ f1 }}) to {{ f2*2.5 }} (+{{ f1*2.5 }}) magic damage. Recast to redirect the missile to a new position near Zoe. Base damage is {{ e1 }} + {{ e3 }}% of Ability Power + More Sparkles' bonus damage",
+          "tooltip": "Fire a missile that deals increasing damage the further it travels -- {{ e1 }} <span class=\"color99FF99\">(+{{ f1 }})</span> to {{ f2 }} <span class=\"color99FF99\">(+{{ f1*2.5 }})</span> magic damage.<span class=\"size5\"><br /><br /><br /></span>Recast to redirect the missile to a new position near Zoe.<br /><br /><rules>Paddle Star applies More Sparkles to the first enemy hit, dealing an additional {{ f3 }} <span class=\"color99FF99\">(+{{ f4 }})</span> to {{ f3*2.5 }} <span class=\"color99FF99\">(+{{ f4*2.5 }})</span> magic damage.</rules>",
+          "sanitizedTooltip": "Fire a missile that deals increasing damage the further it travels -- {{ e1 }} (+{{ f1 }}) to {{ f2 }} (+{{ f1*2.5 }}) magic damage. Recast to redirect the missile to a new position near Zoe. Paddle Star applies More Sparkles to the first enemy hit, dealing an additional {{ f3 }} (+{{ f4 }}) to {{ f3*2.5 }} (+{{ f4*2.5 }}) magic damage.",
           "leveltip": {
             "label": [
               "Damage",
@@ -54153,13 +54179,13 @@
           "costType": " Mana",
           "costBurn": "50/55/60/65/70",
           "cooldown": [
+            8.5,
+            8,
             7.5,
             7,
-            6.75,
-            6.5,
-            6.25
+            6.5
           ],
-          "cooldownBurn": "7.5/7/6.75/6.5/6.25",
+          "cooldownBurn": "8.5/8/7.5/7/6.5",
           "effect": [
             null,
             [
@@ -54177,11 +54203,11 @@
               1.5
             ],
             [
-              40,
-              40,
-              40,
-              40,
-              40
+              0.4,
+              0.4,
+              0.4,
+              0.4,
+              0.4
             ],
             [
               0,
@@ -54237,7 +54263,7 @@
             "",
             "45/75/105/135/165",
             "1.5",
-            "40",
+            "0.4",
             "0",
             "0",
             "0",
@@ -54411,20 +54437,18 @@
           "name": "Sleepy Trouble Bubble",
           "description": "Causes the target to become drowsy, then fall asleep. The first source of damage that breaks the sleep is doubled, up to a cap.",
           "sanitizedDescription": "Causes the target to become drowsy, then fall asleep. The first source of damage that breaks the sleep is doubled, up to a cap.",
-          "tooltip": "Dropkick a bubble that deals {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage, lingering as a trap if it hits nothing. The bubble's range is extended when flying over a wall.<br /><br />After a delay, the victim falls asleep for 2 seconds. Attacks and spell hits break sleep but deal double damage, up to {{ e6 }} <span class=\"color99FF99\">(+{{ a2 }})</span> bonus true damage.<br /><br />When an enemy champion falls asleep, Sleepy Trouble Bubble's cooldown is reduced by {{ e2 }}%.",
-          "sanitizedTooltip": "Dropkick a bubble that deals {{ e1 }} (+{{ a1 }}) magic damage, lingering as a trap if it hits nothing. The bubble's range is extended when flying over a wall. After a delay, the victim falls asleep for 2 seconds. Attacks and spell hits break sleep but deal double damage, up to {{ e6 }} (+{{ a2 }}) bonus true damage. When an enemy champion falls asleep, Sleepy Trouble Bubble's cooldown is reduced by {{ e2 }}%.",
+          "tooltip": "Dropkick a bubble that deals {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage, lingering as a trap if it hits nothing. The bubble's range is extended when flying over a wall.<br /><br />After a delay, the victim falls asleep for 2 seconds. Attacks and spell hits break sleep but deal double damage, up to {{ e6 }} <span class=\"color99FF99\">(+{{ a2 }})</span> bonus true damage.",
+          "sanitizedTooltip": "Dropkick a bubble that deals {{ e1 }} (+{{ a1 }}) magic damage, lingering as a trap if it hits nothing. The bubble's range is extended when flying over a wall. After a delay, the victim falls asleep for 2 seconds. Attacks and spell hits break sleep but deal double damage, up to {{ e6 }} (+{{ a2 }}) bonus true damage.",
           "leveltip": {
             "label": [
               "Damage",
               "Bonus Damage Cap",
-              "Cooldown",
-              "Cooldown reduction"
+              "Cooldown"
             ],
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
               "{{ e6 }} -> {{ e6NL }}",
-              "{{ cooldown }}s -> {{ cooldownNL }}s",
-              "{{ e2 }}% -> {{ e2NL }}%"
+              "{{ cooldown }}s -> {{ cooldownNL }}s"
             ]
           },
           "image": {
@@ -54465,11 +54489,11 @@
               220
             ],
             [
-              10,
-              15,
-              20,
-              25,
-              30
+              0.1,
+              0.15,
+              0.2,
+              0.25,
+              0.3
             ],
             [
               5,
@@ -54531,7 +54555,7 @@
           "effectBurn": [
             "",
             "60/100/140/180/220",
-            "10/15/20/25/30",
+            "0.1/0.15/0.2/0.25/0.3",
             "5/15/25/35/45",
             "5",
             "0.1/0.2/0.3/0.4/0.5",
@@ -59030,11 +59054,11 @@
           "effect": [
             null,
             [
-              40,
-              55,
-              70,
-              85,
-              100
+              20,
+              35,
+              50,
+              65,
+              80
             ],
             [
               250,
@@ -59102,7 +59126,7 @@
           ],
           "effectBurn": [
             "",
-            "40/55/70/85/100",
+            "20/35/50/65/80",
             "250",
             "0.5",
             "0",
@@ -61587,7 +61611,7 @@
               "key": "a1",
               "link": "bonusattackdamage",
               "coeff": [
-                1.1
+                1.2
               ]
             }
           ],
@@ -63155,8 +63179,8 @@
           "name": "Destiny",
           "description": "Twisted Fate predicts the fortunes of his foes, revealing all enemy champions and enabling the use of Gate, which teleports Twisted Fate to any target location in 1.5 seconds.",
           "sanitizedDescription": "Twisted Fate predicts the fortunes of his foes, revealing all enemy champions and enabling the use of Gate, which teleports Twisted Fate to any target location in 1.5 seconds.",
-          "tooltip": "Grants <span class=\"coloree91d7\">True Sight</span> all enemy champions on the map for {{ e1 }} seconds.<br /><br />While Destiny is active, Twisted Fate can teleport up to {{ e4 }} units away in 1.5 seconds.",
-          "sanitizedTooltip": "Grants True Sight all enemy champions on the map for {{ e1 }} seconds. While Destiny is active, Twisted Fate can teleport up to {{ e4 }} units away in 1.5 seconds.",
+          "tooltip": "Grants <span class=\"coloree91d7\">True Sight</span> on all enemy champions on the map for {{ e1 }} seconds.<br /><br />While Destiny is active, Twisted Fate can teleport up to {{ e4 }} units away in 1.5 seconds.",
+          "sanitizedTooltip": "Grants True Sight on all enemy champions on the map for {{ e1 }} seconds. While Destiny is active, Twisted Fate can teleport up to {{ e4 }} units away in 1.5 seconds.",
           "leveltip": {
             "label": [
               "Duration",
@@ -63313,16 +63337,18 @@
           "name": "Consume",
           "description": "Nunu commands the yeti to take a bite out of a target minion or monster, dealing heavy damage to it and healing himself.",
           "sanitizedDescription": "Nunu commands the yeti to take a bite out of a target minion or monster, dealing heavy damage to it and healing himself.",
-          "tooltip": "Nunu commands the yeti to take a bite out of a minion or monster, dealing {{ e1 }} true damage and healing himself for {{ e2 }} <span class=\"color99FF99\">(+{{ a1 }})</span>.<br /><br /><span class=\"colorFF9900\">Passive -</span><span class=\"color33FF33\"> Feed The Yeti</span>: For every Large or Epic Monster Consumed, Nunu gains increased Size, {{ e0 }}% Maximum Health, and {{ e9 }} out of combat Movement Speed for the next <span class=\"colorFFFFFF\">{{ f5 }}</span> seconds (max {{ e6 }} stacks).<br /><br /><span class=\"colorDDDD77\">Recently Consumed monsters will not grant additional bonuses ({{ e5 }} second cooldown).</span>",
-          "sanitizedTooltip": "Nunu commands the yeti to take a bite out of a minion or monster, dealing {{ e1 }} true damage and healing himself for {{ e2 }} (+{{ a1 }}). Passive - Feed The Yeti: For every Large or Epic Monster Consumed, Nunu gains increased Size, {{ e0 }}% Maximum Health, and {{ e9 }} out of combat Movement Speed for the next {{ f5 }} seconds (max {{ e6 }} stacks). Recently Consumed monsters will not grant additional bonuses ({{ e5 }} second cooldown).",
+          "tooltip": "Nunu commands the yeti to take a bite out of a minion or monster, dealing {{ e1 }} true damage and healing himself for {{ e2 }} <span class=\"color99FF99\">(+{{ a1 }})</span>.<br /><br /><span class=\"colorFF9900\">Passive -</span><span class=\"color33FF33\"> Feed The Yeti</span>: For every Large or Epic Monster the yeti bites, Nunu gains {{ e4 }} <scaleAP>(+{{ a2 }})</scaleAP> magic damage on hit, {{ e0 }}% Maximum Health, increased size, and {{ e9 }} out of combat Movement Speed for the next <span class=\"colorFFFFFF\">{{ f5 }}</span> seconds (max {{ e6 }} stacks).<br /><br /><span class=\"colorDDDD77\">Recently Consumed monsters will not grant additional bonuses ({{ e5 }} second cooldown).</span>",
+          "sanitizedTooltip": "Nunu commands the yeti to take a bite out of a minion or monster, dealing {{ e1 }} true damage and healing himself for {{ e2 }} (+{{ a1 }}). Passive - Feed The Yeti: For every Large or Epic Monster the yeti bites, Nunu gains {{ e4 }} (+{{ a2 }}) magic damage on hit, {{ e0 }}% Maximum Health, increased size, and {{ e9 }} out of combat Movement Speed for the next {{ f5 }} seconds (max {{ e6 }} stacks). Recently Consumed monsters will not grant additional bonuses ({{ e5 }} second cooldown).",
           "leveltip": {
             "label": [
-              "Damage",
+              "Damage (bite)",
+              "Damage (on hit)",
               "Health Restore",
               "Cooldown"
             ],
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
+              "{{ e4 }} -> {{ e4NL }}",
               "{{ e2 }} -> {{ e2NL }}",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
@@ -63379,11 +63405,11 @@
               240
             ],
             [
-              0,
-              0,
-              0,
-              0,
-              0
+              1,
+              2,
+              3,
+              4,
+              5
             ],
             [
               60,
@@ -63433,7 +63459,7 @@
             "340/500/660/820/980",
             "50/100/150/200/250",
             "120/150/180/210/240",
-            "0",
+            "1/2/3/4/5",
             "60",
             "5",
             "5",
@@ -63447,6 +63473,13 @@
               "link": "spelldamage",
               "coeff": [
                 0.75
+              ]
+            },
+            {
+              "key": "a2",
+              "link": "spelldamage",
+              "coeff": [
+                0.05
               ]
             }
           ],
@@ -63462,18 +63495,20 @@
         },
         {
           "name": "Blood Boil",
-          "description": "Nunu invigorates himself and an allied unit by heating their blood, increasing their Movement and Attack Speeds.",
-          "sanitizedDescription": "Nunu invigorates himself and an allied unit by heating their blood, increasing their Movement and Attack Speeds.",
-          "tooltip": "The heat of Nunu and a target ally's blood rises, increasing Movement Speed by {{ e2 }}% and Attack Speed by {{ e1 }}% for {{ e3 }} seconds.<br /><br />If Nunu targets himself, Blood Boil will try to target the nearest Ally champion.",
-          "sanitizedTooltip": "The heat of Nunu and a target ally's blood rises, increasing Movement Speed by {{ e2 }}% and Attack Speed by {{ e1 }}% for {{ e3 }} seconds. If Nunu targets himself, Blood Boil will try to target the nearest Ally champion.",
+          "description": "Nunu invigorates himself and an allied unit by heating their blood, increasing their Attack Speed, Movement Speed, and Ability Power.",
+          "sanitizedDescription": "Nunu invigorates himself and an allied unit by heating their blood, increasing their Attack Speed, Movement Speed, and Ability Power.",
+          "tooltip": "The heat of Nunu and a target ally's blood rises, increasing Ability Power by {{ e4 }}% (max: {{ e5 }}), Movement Speed by {{ e2 }}%, and Attack Speed by {{ e1 }}% for {{ e3 }} seconds.<br /><br />If Nunu targets himself, Blood Boil will try to target the nearest Ally champion.",
+          "sanitizedTooltip": "The heat of Nunu and a target ally's blood rises, increasing Ability Power by {{ e4 }}% (max: {{ e5 }}), Movement Speed by {{ e2 }}%, and Attack Speed by {{ e1 }}% for {{ e3 }} seconds. If Nunu targets himself, Blood Boil will try to target the nearest Ally champion.",
           "leveltip": {
             "label": [
               "Attack Speed",
+              "Ability Power (max)",
               "Movement Speed"
             ],
             "effect": [
               "{{ e1 }}% -> {{ e1NL }}%",
-              " {{ e2 }}% -> {{ e2NL }}%"
+              "{{ e5 }} -> {{ e5NL }}",
+              "{{ e2 }}% -> {{ e2NL }}%"
             ]
           },
           "image": {
@@ -63528,18 +63563,18 @@
               12
             ],
             [
-              0,
-              0,
-              0,
-              0,
-              0
+              40,
+              40,
+              40,
+              40,
+              40
             ],
             [
-              0,
-              0,
-              0,
-              0,
-              0
+              40,
+              60,
+              80,
+              100,
+              120
             ],
             [
               0,
@@ -63582,8 +63617,8 @@
             "25/30/35/40/45",
             "8/9/10/11/12",
             "12",
-            "0",
-            "0",
+            "40",
+            "40/60/80/100/120",
             "0",
             "0",
             "0",
@@ -63922,16 +63957,16 @@
           "name": "Savagery",
           "description": "Rengar slashes all enemies in an arc before piercing all enemies in a line. Casting this outside the max range moves Rengar a short distance in that direction.<br><br>Ferocity effect: deals increased damage.",
           "sanitizedDescription": "Rengar slashes all enemies in an arc before piercing all enemies in a line. Casting this outside the max range moves Rengar a short distance in that direction. Ferocity effect: deals increased damage.",
-          "tooltip": "Slash all enemies in an arc before piercing all enemies in a line for {{ e1 }} <span class=\"colorF88017\">(+{{ f2 }})</span> physical damage per strike.<br /><br /><span class=\"colorEDDA74\">Ferocity effect:</span><br />Each hit deals <span class=\"colorFFFFFF\">{{ f1 }}</span> <span class=\"colorFF8C00\">(+{{ a2 }})</span> damage.<br /><br /><rules><span class=\"color8c8c8c\">If cast outside max range, Rengar lunges forward to extend the range of the piercing attack.<br />If used during leap, Savagery is cast immediately following the leap.</span></rules>",
-          "sanitizedTooltip": "Slash all enemies in an arc before piercing all enemies in a line for {{ e1 }} (+{{ f2 }}) physical damage per strike. Ferocity effect: Each hit deals {{ f1 }} (+{{ a2 }}) damage. If cast outside max range, Rengar lunges forward to extend the range of the piercing attack. If used during leap, Savagery is cast immediately following the leap.",
+          "tooltip": "Rengar gains {{ e5 }}% Attack Speed for his next 2 attacks. The first attack deals {{ e1 }} <span class=\"colorF88017\">(+{{ f2 }})</span> physical damage.<br /><br /><span class=\"colorEDDA74\">Ferocity effect:</span><br />Savagery's damage is increased to <span class=\"colorFFFFFF\">{{ f3 }}</span> <span class=\"colorFF8C00\">(+{{ a2 }})</span> and grants Rengar <span class=\"colorFFFFFF\">{{ f4 }}</span>% Attack Speed for {{ e3 }} seconds.",
+          "sanitizedTooltip": "Rengar gains {{ e5 }}% Attack Speed for his next 2 attacks. The first attack deals {{ e1 }} (+{{ f2 }}) physical damage. Ferocity effect: Savagery's damage is increased to {{ f3 }} (+{{ a2 }}) and grants Rengar {{ f4 }}% Attack Speed for {{ e3 }} seconds.",
           "leveltip": {
             "label": [
-              "Base Damage",
-              "Bonus Attack Damage Ratio"
+              "Damage",
+              "Cooldown"
             ],
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
-              "{{ e7 }} -> {{ e7NL }}"
+              "{{ ammorechargetime }} -> {{ ammorechargetimeNL }}"
             ]
           },
           "image": {
@@ -63965,46 +64000,46 @@
           "effect": [
             null,
             [
-              30,
+              20,
               50,
-              70,
-              90,
+              80,
+              110,
+              140
+            ],
+            [
+              110,
+              110,
+              110,
+              110,
               110
             ],
             [
-              0.3,
-              0.3,
-              0.3,
-              0.3,
-              0.3
+              5,
+              5,
+              5,
+              5,
+              5
             ],
             [
-              350,
-              350,
-              350,
-              350,
-              350
+              5,
+              5,
+              5,
+              5,
+              5
             ],
             [
-              90,
-              90,
-              90,
-              90,
-              90
+              40,
+              40,
+              40,
+              40,
+              40
             ],
             [
-              150,
-              150,
-              150,
-              150,
-              150
-            ],
-            [
-              0.15,
-              0.15,
-              0.15,
-              0.15,
-              0.15
+              3,
+              3,
+              3,
+              3,
+              3
             ],
             [
               0.2,
@@ -64037,12 +64072,12 @@
           ],
           "effectBurn": [
             "",
-            "30/50/70/90/110",
-            "0.3",
-            "350",
-            "90",
-            "150",
-            "0.15",
+            "20/50/80/110/140",
+            "110",
+            "5",
+            "5",
+            "40",
+            "3",
             "0.2/0.3/0.4/0.5/0.6",
             "0",
             "0",
@@ -64050,17 +64085,10 @@
           ],
           "vars": [
             {
-              "key": "f1",
-              "link": "@dynamic.attackdamage",
-              "coeff": [
-                1
-              ]
-            },
-            {
               "key": "a2",
-              "link": "bonusattackdamage",
+              "link": "attackdamage",
               "coeff": [
-                1.1
+                1.3
               ]
             }
           ],
@@ -64390,17 +64418,21 @@
           "name": "Thrill of the Hunt",
           "description": "Rengar's predatory instincts take over, <font color='#cd90ee'>Camouflaging</font> him and revealing the nearest enemy champion in a large radius around him. During Thrill of the Hunt, Rengar gains Movement Speed and he can leap to the tracked enemy for a guaranteed critical strike, even without being in brush.",
           "sanitizedDescription": "Rengar's predatory instincts take over, Camouflaging him and revealing the nearest enemy champion in a large radius around him. During Thrill of the Hunt, Rengar gains Movement Speed and he can leap to the tracked enemy for a guaranteed critical strike, even without being in brush.",
-          "tooltip": "Rengar gains {{ e1 }}% Movement Speed and <span class=\"coloree91d7\">True Sight</span> of the nearest enemy champion (within {{ e3 }} range) for {{ e2 }} seconds.<br /><br />After the first {{ e6 }} seconds, Rengar becomes <span class=\"colorcd90ee\">Camouflaged</span> and can leap to an enemy without being in brush. Leaping to the nearest champion results in a critical strike.<br /><br /><rules><span class=\"color8c8c8c\">Attacking or casting most spells ends Thrill of the Hunt.</span><br /><span class=\"colorcd90ee\"><u>Stealth - Camouflaged:</u></span><span class=\"color8c8c8c\"> This character is hidden from view. It is revealed by nearby enemy champions and turrets.</span></rules>",
-          "sanitizedTooltip": "Rengar gains {{ e1 }}% Movement Speed and True Sight of the nearest enemy champion (within {{ e3 }} range) for {{ e2 }} seconds. After the first {{ e6 }} seconds, Rengar becomes Camouflaged and can leap to an enemy without being in brush. Leaping to the nearest champion results in a critical strike. Attacking or casting most spells ends Thrill of the Hunt. Stealth - Camouflaged: This character is hidden from view. It is revealed by nearby enemy champions and turrets.",
+          "tooltip": "Rengar gains {{ e1 }}% Movement Speed and <span class=\"coloree91d7\">True Sight</span> of the nearest enemy champion within {{ e9 }} range for {{ e2 }} seconds.<br /><br />After the first {{ e6 }} seconds, Rengar becomes <span class=\"colorcd90ee\">Camouflaged</span> and can leap to an enemy without being in brush. Leaping to the nearest champion deals <span class=\"colorF88017\">{{ a1 }}</span> bonus physical damage and reduces their Armor by {{ e8 }} for {{ e7 }} seconds.<br /><br /><rules><span class=\"color8c8c8c\">Enemy champions within {{ e3 }} range and their nearby allies can sense Rengar during Thrill of the Hunt.<br />Enemies revealed by Thrill of the Hunt stay revealed for the spell's duration.<br />Attacking or casting most spells ends Thrill of the Hunt.</span><br /><span class=\"colorcd90ee\"><u>Stealth - Camouflaged:</u></span><span class=\"color8c8c8c\"> This character is hidden from view. It is revealed by nearby enemy champions and turrets.</span></rules>",
+          "sanitizedTooltip": "Rengar gains {{ e1 }}% Movement Speed and True Sight of the nearest enemy champion within {{ e9 }} range for {{ e2 }} seconds. After the first {{ e6 }} seconds, Rengar becomes Camouflaged and can leap to an enemy without being in brush. Leaping to the nearest champion deals {{ a1 }} bonus physical damage and reduces their Armor by {{ e8 }} for {{ e7 }} seconds. Enemy champions within {{ e3 }} range and their nearby allies can sense Rengar during Thrill of the Hunt. Enemies revealed by Thrill of the Hunt stay revealed for the spell's duration. Attacking or casting most spells ends Thrill of the Hunt. Stealth - Camouflaged: This character is hidden from view. It is revealed by nearby enemy champions and turrets.",
           "leveltip": {
             "label": [
+              "Armor Shred",
               "Duration",
-              "Detection Range",
+              "Movement Speed",
+              "Tracking Range",
               "Cooldown"
             ],
             "effect": [
+              "{{ e8 }} -> {{ e8NL }}",
               "{{ e2 }} -> {{ e2NL }}",
-              "{{ e3 }} -> {{ e3NL }}",
+              "{{ e1 }}% -> {{ e1NL }}%",
+              "{{ e9 }} -> {{ e9NL }}",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
@@ -64432,8 +64464,8 @@
             null,
             [
               40,
-              40,
-              40
+              50,
+              60
             ],
             [
               12,
@@ -64441,9 +64473,9 @@
               20
             ],
             [
-              2000,
-              3000,
-              4000
+              1600,
+              1600,
+              1600
             ],
             [
               750,
@@ -64461,45 +64493,54 @@
               2
             ],
             [
-              0,
-              0,
-              0
+              4,
+              4,
+              4
             ],
             [
-              0,
-              0,
-              0
+              12,
+              18,
+              24
             ],
             [
-              0,
-              0,
-              0
+              2500,
+              3000,
+              3500
             ],
             [
-              0,
-              0,
-              0
+              50,
+              100,
+              150
             ]
           ],
           "effectBurn": [
             "",
-            "40",
+            "40/50/60",
             "12/16/20",
-            "2000/3000/4000",
+            "1600",
             "750",
             "725",
             "2",
-            "0",
-            "0",
-            "0",
-            "0"
+            "4",
+            "12/18/24",
+            "2500/3000/3500",
+            "50/100/150"
+          ],
+          "vars": [
+            {
+              "key": "a1",
+              "link": "attackdamage",
+              "coeff": [
+                0.3
+              ]
+            }
           ],
           "range": [
-            2000,
-            3000,
-            4000
+            1600,
+            1600,
+            1600
           ],
-          "rangeBurn": "2000/3000/4000",
+          "rangeBurn": "1600",
           "key": "RengarR"
         }
       ],
@@ -67698,16 +67739,18 @@
         },
         {
           "name": "Sentinel",
-          "description": "Passively gain Attack Speed when near her Oathsworn ally, and deal bonus damage when striking the same target. <br><br>Activate to send a soul to scout out the path, revealing the area in front of it.",
-          "sanitizedDescription": "Passively gain Attack Speed when near her Oathsworn ally, and deal bonus damage when striking the same target. Activate to send a soul to scout out the path, revealing the area in front of it.",
-          "tooltip": "<span class=\"colorFF9900\">Passive: </span>When Kalista is near her <i>Oathsworn</i>, she gains <span class=\"colorFFFFFF\">+{{ f1 }}%</span> Attack Speed. If they both basic attack the same target, she deals {{ e2 }}% of their max health as magic damage. {{ e7 }} second cooldown per target.<br /><br /><span class=\"colorFF9900\">Active: </span>Send a soul Sentinel to patrol an unseen area. Champions spotted are revealed for 4 seconds. Sentinels last 3 laps.<br /><br />Kalista gains a charge of Sentinel every {{ e4 }} seconds.",
-          "sanitizedTooltip": "Passive: When Kalista is near her Oathsworn, she gains +{{ f1 }}% Attack Speed. If they both basic attack the same target, she deals {{ e2 }}% of their max health as magic damage. {{ e7 }} second cooldown per target. Active: Send a soul Sentinel to patrol an unseen area. Champions spotted are revealed for 4 seconds. Sentinels last 3 laps. Kalista gains a charge of Sentinel every {{ e4 }} seconds.",
+          "description": "Passively gain Attack Damage when near her Oathsworn ally, and deal bonus damage when striking the same target. <br><br>Activate to send a soul to scout out the path, revealing the area in front of it.",
+          "sanitizedDescription": "Passively gain Attack Damage when near her Oathsworn ally, and deal bonus damage when striking the same target. Activate to send a soul to scout out the path, revealing the area in front of it.",
+          "tooltip": "<span class=\"colorFF9900\">Passive: </span>When Kalista is near her <i>Oathsworn</i>, she gains {{ e8 }} Attack Damage. If they both basic attack the same target, she deals {{ e2 }}% of their max health as magic damage. {{ e7 }} second cooldown per target.<br /><br /><span class=\"colorFF9900\">Active: </span>Send a soul Sentinel to patrol an unseen area. Champions spotted are revealed for 4 seconds. Sentinels last 3 laps.<br /><br />Kalista gains a charge of Sentinel every {{ e4 }} seconds.",
+          "sanitizedTooltip": "Passive: When Kalista is near her Oathsworn, she gains {{ e8 }} Attack Damage. If they both basic attack the same target, she deals {{ e2 }}% of their max health as magic damage. {{ e7 }} second cooldown per target. Active: Send a soul Sentinel to patrol an unseen area. Champions spotted are revealed for 4 seconds. Sentinels last 3 laps. Kalista gains a charge of Sentinel every {{ e4 }} seconds.",
           "leveltip": {
             "label": [
+              "Passive Attack Damage",
               "Damage",
               "Ammo Recharge"
             ],
             "effect": [
+              "{{ e8 }} -> {{ e8NL }}",
               "{{ e2 }}% -> {{ e2NL }}%",
               "{{ e4 }} -> {{ e4NL }}"
             ]
@@ -67792,11 +67835,11 @@
               10
             ],
             [
-              0,
-              0,
-              0,
-              0,
-              0
+              5,
+              10,
+              15,
+              20,
+              25
             ],
             [
               0,
@@ -67822,7 +67865,7 @@
             "0",
             "75/100/125/150/175",
             "10",
-            "0",
+            "5/10/15/20/25",
             "0",
             "0"
           ],
@@ -67840,17 +67883,19 @@
           "name": "Rend",
           "description": "Attacks impale their targets with spears. Activate to rip the spears out, slowing and dealing escalating damage.",
           "sanitizedDescription": "Attacks impale their targets with spears. Activate to rip the spears out, slowing and dealing escalating damage.",
-          "tooltip": "<span class=\"colorFF9900\">Passive: </span>Kalista's spears pierce their target, lingering for 4 seconds.<br /><br /><span class=\"colorFF9900\">Active: </span>Rip the spears from nearby targets, dealing {{ e1 }} <span class=\"colorFF8C00\">(+{{ a1 }})</span> physical damage and slowing their Movement Speed by {{ e2 }}% for {{ e6 }} seconds.</span><br /><br /><span class=\"colorFFFF00\">If </span><span class=\"colorFFFFFF\"><i>Rend</i></span><span class=\"colorFFFF00\"> kills at least one target, its cooldown is reset and its mana cost is refunded.</span>",
-          "sanitizedTooltip": "Passive: Kalista's spears pierce their target, lingering for 4 seconds. Active: Rip the spears from nearby targets, dealing {{ e1 }} (+{{ a1 }}) physical damage and slowing their Movement Speed by {{ e2 }}% for {{ e6 }} seconds. If Rend kills at least one target, its cooldown is reset and its mana cost is refunded.",
+          "tooltip": "<span class=\"colorFF9900\">Passive: </span>Kalista's spears pierce their target, lingering for 4 seconds.<br /><br /><span class=\"colorFF9900\">Active: </span>Rip the spears from nearby targets, dealing {{ e1 }} <span class=\"colorFF8C00\">(+{{ a1 }})</span> physical damage and slowing their Movement Speed by {{ e2 }}% for {{ e6 }} seconds.</span><br /><br /><span class=\"colorFFFF00\">If </span><span class=\"colorFFFFFF\"><i>Rend</i></span><span class=\"colorFFFF00\"> kills at least one target, its cooldown is reset and it refunds <span class=\"color44DDFF\">{{ e8 }}</span> mana.</span>",
+          "sanitizedTooltip": "Passive: Kalista's spears pierce their target, lingering for 4 seconds. Active: Rip the spears from nearby targets, dealing {{ e1 }} (+{{ a1 }}) physical damage and slowing their Movement Speed by {{ e2 }}% for {{ e6 }} seconds. If Rend kills at least one target, its cooldown is reset and it refunds {{ e8 }} mana.",
           "leveltip": {
             "label": [
               "Damage",
               "Slow",
+              "Mana Refund",
               "Cooldown"
             ],
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
               "{{ e2 }}% -> {{ e2NL }}%",
+              "{{ e8 }} -> {{ e8NL }}",
               "{{ e5 }} -> {{ e5NL }}"
             ]
           },
@@ -67935,10 +67980,10 @@
             ],
             [
               10,
-              10,
-              10,
-              10,
-              10
+              15,
+              20,
+              25,
+              30
             ],
             [
               10,
@@ -67964,7 +68009,7 @@
             "14/12.5/11/9.5/8",
             "2",
             "254",
-            "10",
+            "10/15/20/25/30",
             "10/14/19/25/32",
             "0"
           ],
@@ -73778,10 +73823,10 @@
       "spells": [
         {
           "name": "Siphon Power",
-          "description": "Viktor blasts an enemy unit dealing magic damage, gaining a shield and empowering his next basic attack.<br><br>Augment: Viktor gains bonus Movement Speed after casting.",
-          "sanitizedDescription": "Viktor blasts an enemy unit dealing magic damage, gaining a shield and empowering his next basic attack. Augment: Viktor gains bonus Movement Speed after casting.",
-          "tooltip": "Viktor blasts an enemy unit, dealing {{ e1 }}<span class=\"color99FF99\"> (+{{ a1 }})</span> magic damage while granting Viktor a shield that absorbs up to <span class=\"color44DDFF\">{{ f1 }}</span> <span class=\"color99FF99\">(+{{ f2 }})</span> damage over the next {{ e2 }} seconds.<br /><br />Viktor's next basic attack deals {{ e5 }}<span class=\"color99FF99\"> (+{{ a2 }})</span> bonus magic damage.<br /><br /><span class=\"colorFFCC00\">Augment - Turbocharge:</span> Viktor gains {{ e3 }}% Movement Speed for {{ e2 }} seconds.",
-          "sanitizedTooltip": "Viktor blasts an enemy unit, dealing {{ e1 }} (+{{ a1 }}) magic damage while granting Viktor a shield that absorbs up to {{ f1 }} (+{{ f2 }}) damage over the next {{ e2 }} seconds. Viktor's next basic attack deals {{ e5 }} (+{{ a2 }}) bonus magic damage. Augment - Turbocharge: Viktor gains {{ e3 }}% Movement Speed for {{ e2 }} seconds.",
+          "description": "Viktor blasts an enemy unit dealing magic damage, gaining a shield and empowering his next basic attack.<br><br>Augment: Siphon Power's shield is increased by 60% and Viktor gains bonus Movement Speed after casting.",
+          "sanitizedDescription": "Viktor blasts an enemy unit dealing magic damage, gaining a shield and empowering his next basic attack. Augment: Siphon Power's shield is increased by 60% and Viktor gains bonus Movement Speed after casting.",
+          "tooltip": "Viktor blasts an enemy unit, dealing {{ e1 }}<span class=\"color99FF99\"> (+{{ a1 }})</span> magic damage while granting Viktor a shield that absorbs up to <span class=\"color44DDFF\">{{ f1 }}</span> <span class=\"color99FF99\">(+{{ f2 }})</span> damage over the next {{ e2 }} seconds.<br /><br />Viktor's next basic attack deals {{ e5 }}<span class=\"color99FF99\"> (+{{ a2 }})</span> bonus magic damage.<br /><br /><span class=\"colorFFCC00\">Augment - Turbocharge:</span> Siphon Power's shield is increased by 60% and Viktor gains {{ e3 }}% Movement Speed for {{ e2 }} seconds.",
+          "sanitizedTooltip": "Viktor blasts an enemy unit, dealing {{ e1 }} (+{{ a1 }}) magic damage while granting Viktor a shield that absorbs up to {{ f1 }} (+{{ f2 }}) damage over the next {{ e2 }} seconds. Viktor's next basic attack deals {{ e5 }} (+{{ a2 }}) bonus magic damage. Augment - Turbocharge: Siphon Power's shield is increased by 60% and Viktor gains {{ e3 }}% Movement Speed for {{ e2 }} seconds.",
           "leveltip": {
             "label": [
               "Damage (missile)",
@@ -73876,11 +73921,11 @@
               0.15
             ],
             [
-              0,
-              0,
-              0,
-              0,
-              0
+              0.6,
+              0.6,
+              0.6,
+              0.6,
+              0.6
             ],
             [
               0,
@@ -73906,7 +73951,7 @@
             "20/40/60/80/100",
             "0.08",
             "0.15",
-            "0",
+            "0.6",
             "0",
             "0"
           ],
@@ -74274,10 +74319,10 @@
           "costBurn": "100",
           "cooldown": [
             120,
-            110,
-            100
+            100,
+            80
           ],
-          "cooldownBurn": "120/110/100",
+          "cooldownBurn": "120/100/80",
           "effect": [
             null,
             [
@@ -76003,10 +76048,10 @@
             ],
             [
               20,
+              25,
+              30,
               35,
-              50,
-              65,
-              80
+              40
             ],
             [
               0,
@@ -76068,7 +76113,7 @@
           "effectBurn": [
             "",
             "15/20/25/30/35",
-            "20/35/50/65/80",
+            "20/25/30/35/40",
             "0",
             "0",
             "0",
@@ -77812,8 +77857,8 @@
               "Mana Cost"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }} Damage",
-              "{{ e2 }} -> {{ e2NL }} Damage",
+              "{{ e1 }} -> {{ e1NL }}",
+              "{{ e2 }} -> {{ e2NL }}",
               "{{ cost }} -> {{ costNL }}"
             ]
           },
@@ -77848,18 +77893,18 @@
           "effect": [
             null,
             [
-              40,
               55,
               70,
               85,
-              100
+              100,
+              115
             ],
             [
-              70,
-              90,
-              110,
-              130,
-              150
+              95,
+              115,
+              135,
+              155,
+              175
             ],
             [
               30,
@@ -77876,18 +77921,18 @@
               2
             ],
             [
+              3,
+              3,
+              3,
+              3,
+              3
+            ],
+            [
               4,
               4,
               4,
               4,
               4
-            ],
-            [
-              6,
-              6,
-              6,
-              6,
-              6
             ],
             [
               450,
@@ -77920,12 +77965,12 @@
           ],
           "effectBurn": [
             "",
-            "40/55/70/85/100",
-            "70/90/110/130/150",
+            "55/70/85/100/115",
+            "95/115/135/155/175",
             "30",
             "2",
+            "3",
             "4",
-            "6",
             "450",
             "0.5/0.6/0.7/0.8/0.9",
             "2",
@@ -77943,14 +77988,14 @@
               "key": "a1",
               "link": "spelldamage",
               "coeff": [
-                0.025
+                0.015
               ]
             },
             {
               "key": "a2",
               "link": "spelldamage",
               "coeff": [
-                0.035
+                0.025
               ]
             }
           ],
@@ -80662,13 +80707,13 @@
           "maxrank": 5,
           "cost": [
             70,
+            75,
             80,
-            90,
-            100,
-            110
+            85,
+            90
           ],
           "costType": " Mana",
-          "costBurn": "70/80/90/100/110",
+          "costBurn": "70/75/80/85/90",
           "cooldown": [
             18,
             17,
@@ -80793,16 +80838,16 @@
           "name": "Meditate",
           "description": "Master Yi rejuvenates his body by focus of mind, restoring Health and taking reduced damage for a short time. In addition, Master Yi will gain stacks of Double Strike and pause the remaining duration on Wuju Style and Highlander for each second he channels.",
           "sanitizedDescription": "Master Yi rejuvenates his body by focus of mind, restoring Health and taking reduced damage for a short time. In addition, Master Yi will gain stacks of Double Strike and pause the remaining duration on Wuju Style and Highlander for each second he channels.",
-          "tooltip": "Master Yi channels, restoring {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> Health per second for 4 seconds. This healing is increased by {{ e4 }}% for every {{ e5 }}% of Master Yi's missing Health.<br /><br />While channeling, Master Yi reduces incoming damage by {{ e3 }}%. This damage reduction is halved against turrets. <br /><br />In addition, Master Yi will gain stacks of Double Strike and pause the remaining duration on Wuju Style and Highlander for each second he channels.",
-          "sanitizedTooltip": "Master Yi channels, restoring {{ e1 }} (+{{ a1 }}) Health per second for 4 seconds. This healing is increased by {{ e4 }}% for every {{ e5 }}% of Master Yi's missing Health. While channeling, Master Yi reduces incoming damage by {{ e3 }}%. This damage reduction is halved against turrets. In addition, Master Yi will gain stacks of Double Strike and pause the remaining duration on Wuju Style and Highlander for each second he channels.",
+          "tooltip": "Master Yi channels, reducing incoming damage by {{ e2 }}% and restoring {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> health over {{ f1.-1 }} seconds. This healing is increased by up to {{ e0 }}% based on Master Yi's missing health.<br /><br />In addition, Master Yi will gain stacks of Double Strike and pause the remaining duration on Wuju Style and Highlander for each second he channels.<br /><br /><rules>Meditate's damage reduction is halved against structures.</rules>",
+          "sanitizedTooltip": "Master Yi channels, reducing incoming damage by {{ e2 }}% and restoring {{ e1 }} (+{{ a1 }}) health over {{ f1.-1 }} seconds. This healing is increased by up to {{ e0 }}% based on Master Yi's missing health. In addition, Master Yi will gain stacks of Double Strike and pause the remaining duration on Wuju Style and Highlander for each second he channels. Meditate's damage reduction is halved against structures.",
           "leveltip": {
             "label": [
-              "Damage Reduction",
-              "Health Restored"
+              "Health Restored",
+              "Damage Reduction"
             ],
             "effect": [
-              "{{ e3 }}% -> {{ e3NL }}%",
-              "{{ e1 }} -> {{ e1NL }}"
+              "{{ e1 }} -> {{ e1NL }}",
+              "{{ e2 }}% -> {{ e2NL }}%"
             ]
           },
           "image": {
@@ -80836,18 +80881,11 @@
           "effect": [
             null,
             [
-              30,
-              50,
-              70,
-              90,
-              110
-            ],
-            [
-              100,
-              150,
+              120,
               200,
-              250,
-              300
+              280,
+              360,
+              440
             ],
             [
               50,
@@ -80857,25 +80895,11 @@
               70
             ],
             [
-              1,
-              1,
-              1,
-              1,
-              1
-            ],
-            [
-              1,
-              1,
-              1,
-              1,
-              1
-            ],
-            [
-              50,
-              50,
-              50,
-              50,
-              50
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              0.5
             ],
             [
               4,
@@ -80883,6 +80907,13 @@
               4,
               4,
               4
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               0.5,
@@ -80904,27 +80935,41 @@
               0,
               0,
               0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1,
+              1,
+              1
             ]
           ],
           "effectBurn": [
             "",
-            "30/50/70/90/110",
-            "100/150/200/250/300",
+            "120/200/280/360/440",
             "50/55/60/65/70",
-            "1",
-            "1",
-            "50",
+            "0.5",
             "4",
+            "0",
             "0.5",
             "0",
-            "0"
+            "0",
+            "0",
+            "1"
           ],
           "vars": [
             {
               "key": "a1",
               "link": "spelldamage",
               "coeff": [
-                0.25
+                1
               ]
             }
           ],
@@ -80992,17 +81037,17 @@
               10
             ],
             [
-              25,
-              25,
-              25,
-              25,
-              25
+              35,
+              35,
+              35,
+              35,
+              35
             ],
             [
-              14,
-              23,
-              32,
-              41,
+              18,
+              26,
+              34,
+              42,
               50
             ],
             [
@@ -81058,8 +81103,8 @@
           "effectBurn": [
             "",
             "10",
-            "25",
-            "14/23/32/41/50",
+            "35",
+            "18/26/34/42/50",
             "20/30/40/50/60",
             "5",
             "0",
@@ -84436,7 +84481,7 @@
               "key": "a1",
               "link": "spelldamage",
               "coeff": [
-                0.8
+                0.65
               ]
             }
           ],
@@ -84796,11 +84841,11 @@
           "costType": " Mana",
           "costBurn": "100",
           "cooldown": [
-            120,
-            100,
+            140,
+            110,
             80
           ],
-          "cooldownBurn": "120/100/80",
+          "cooldownBurn": "140/110/80",
           "effect": [
             null,
             [
