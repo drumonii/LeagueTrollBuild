@@ -273,7 +273,7 @@ public class ApiDocumentation {
 
 		itemsRepository.save(itemsResponse.getItems().get("3069"));
 
-		mockMvc.perform(get("{apiPath}/items?name={name}", apiPath, "talisman"))
+		mockMvc.perform(get("{apiPath}/items?name={name}", apiPath, "remnant"))
 				.andExpect(status().isOk())
 				.andDo(document("itemsFindBy", relaxedResponseFields(
 						fieldWithPath("_embedded.items")
