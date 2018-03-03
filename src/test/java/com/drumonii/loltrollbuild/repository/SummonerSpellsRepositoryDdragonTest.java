@@ -13,7 +13,8 @@ import static org.assertj.core.api.Assertions.fail;
 @ActiveProfiles({ TESTING, DDRAGON })
 public class SummonerSpellsRepositoryDdragonTest extends SummonerSpellsRepositoryTest {
 
-	@Override protected SummonerSpellsResponse getSummonerSpellsResponse() {
+	@Override
+	protected SummonerSpellsResponse getSummonerSpellsResponse() {
 		ClassPathResource summonerSpellsJsonResource = new ClassPathResource("summoners_data_dragon.json");
 		try {
 			return objectMapper.readValue(summonerSpellsJsonResource.getFile(), SummonerSpellsResponse.class);
