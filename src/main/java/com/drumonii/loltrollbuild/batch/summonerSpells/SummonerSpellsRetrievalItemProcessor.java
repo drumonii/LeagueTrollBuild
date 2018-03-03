@@ -34,6 +34,9 @@ public class SummonerSpellsRetrievalItemProcessor implements ItemProcessor<Summo
 
 	@Override
 	public SummonerSpell process(SummonerSpell summonerSpell) {
+		if (summonerSpell.getModes().isEmpty()) {
+			return null;
+		}
 		Optional<SummonerSpell> summonerSpellFromDb = summonerSpellsRepository.findById(summonerSpell.getId());
 		if (summonerSpellFromDb.isPresent() && summonerSpellFromDb.get().equals(summonerSpell)) {
 			return null;

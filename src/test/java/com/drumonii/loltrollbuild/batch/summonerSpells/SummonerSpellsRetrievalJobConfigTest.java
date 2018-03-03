@@ -26,6 +26,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
@@ -67,14 +68,17 @@ public abstract class SummonerSpellsRetrievalJobConfigTest {
 		given(summonerSpellsService.getSummonerSpells())
 				.willReturn(new ArrayList<>(summonerSpellsResponse.getSummonerSpells().values()));
 
+		List<SummonerSpell> summonerSpellsWithModes = summonerSpellsResponse.getSummonerSpells().values().stream()
+				.filter(summonerSpell -> !summonerSpell.getModes().isEmpty())
+				.collect(Collectors.toList());
+
 		JobExecution jobExecution = jobLauncherTestUtils.launchJob(getJobParameters());
 		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
 
-		verify(imageFetcher, times(summonerSpellsResponse.getSummonerSpells().values().size()))
+		verify(imageFetcher, times(summonerSpellsWithModes.size()))
 				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 
-		assertThat(summonerSpellsRepository.findAll()).containsOnlyElementsOf(summonerSpellsResponse
-				.getSummonerSpells().values());
+		assertThat(summonerSpellsRepository.findAll()).containsOnlyElementsOf(summonerSpellsWithModes);
 	}
 
 	@Test
@@ -82,11 +86,14 @@ public abstract class SummonerSpellsRetrievalJobConfigTest {
 		given(summonerSpellsService.getSummonerSpells())
 				.willReturn(new ArrayList<>(summonerSpellsResponse.getSummonerSpells().values()));
 
-		List<SummonerSpell> summonerSpells = summonerSpellsRepository.saveAll(summonerSpellsResponse
-				.getSummonerSpells().values());
+		List<SummonerSpell> summonerSpellsWithModes = summonerSpellsResponse.getSummonerSpells().values().stream()
+				.filter(summonerSpell -> !summonerSpell.getModes().isEmpty())
+				.collect(Collectors.toList());
+
+		List<SummonerSpell> summonerSpells = summonerSpellsRepository.saveAll(summonerSpellsWithModes);
 
 		Optional<SummonerSpell> summonerSpellToEdit =
-				summonerSpellsRepository.findById(summonerSpells.get(RandomUtils.nextInt(1, summonerSpells.size())).getId());
+				summonerSpellsRepository.findById(summonerSpellsWithModes.get(RandomUtils.nextInt(1, summonerSpells.size())).getId());
 		if (!summonerSpellToEdit.isPresent()) {
 			fail("Unable to get a random Summoner Spell to edit");
 		}
@@ -99,8 +106,7 @@ public abstract class SummonerSpellsRetrievalJobConfigTest {
 		verify(imageFetcher, times(1))
 				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 
-		assertThat(summonerSpellsRepository.findAll()).containsOnlyElementsOf(summonerSpellsResponse
-				.getSummonerSpells().values());
+		assertThat(summonerSpellsRepository.findAll()).containsOnlyElementsOf(summonerSpellsWithModes);
 	}
 
 	@Test
