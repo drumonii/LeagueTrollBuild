@@ -1,5 +1,6 @@
 CREATE TABLE ITEM (
   ID                 INT PRIMARY KEY,
+  VERSION            INT NOT NULL,
   NAME               VARCHAR(255),
   ITEM_GROUP         VARCHAR(255),
   CONSUMED           BOOLEAN,

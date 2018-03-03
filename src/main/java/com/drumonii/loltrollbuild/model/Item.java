@@ -11,6 +11,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import javax.persistence.Version;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -27,7 +28,7 @@ import java.util.SortedSet;
 @EntityListeners(AuditingEntityListener.class)
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(exclude = { "from", "into", "lastModifiedDate" })
+@EqualsAndHashCode(exclude = { "version", "from", "into", "lastModifiedDate" })
 @ToString
 public class Item implements Serializable {
 
@@ -35,6 +36,11 @@ public class Item implements Serializable {
 	@Column(name = "ID", unique = true, nullable = false)
 	@JsonProperty("id")
 	@Getter @Setter private int id;
+
+	@Version
+	@Column(name = "VERSION", nullable = false)
+	@JsonIgnore
+	@Getter @Setter private Long version;
 
 	@Column(name = "NAME")
 	@JsonProperty("name")

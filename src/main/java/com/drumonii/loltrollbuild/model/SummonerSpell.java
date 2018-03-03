@@ -9,6 +9,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import javax.persistence.Version;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.SortedSet;
@@ -23,7 +24,7 @@ import java.util.SortedSet;
 @EntityListeners(AuditingEntityListener.class)
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(exclude = "lastModifiedDate")
+@EqualsAndHashCode(exclude = { "version", "lastModifiedDate" })
 @ToString
 public class SummonerSpell implements Serializable {
 
@@ -31,6 +32,11 @@ public class SummonerSpell implements Serializable {
 	@Column(name = "ID", unique = true, nullable = false)
 	@JsonProperty("id")
 	@Getter @Setter private int id;
+
+	@Version
+	@Column(name = "VERSION", nullable = false)
+	@JsonIgnore
+	@Getter @Setter private Long version;
 
 	@Column(name = "NAME", nullable = false)
 	@JsonProperty("name")

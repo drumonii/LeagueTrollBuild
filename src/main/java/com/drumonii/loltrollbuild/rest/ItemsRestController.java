@@ -55,7 +55,7 @@ public class ItemsRestController {
 				.withMatcher("group", matcher -> matcher.stringMatcher(CONTAINING))
 				.withMatcher("requiredChampion", matcher -> matcher.stringMatcher(CONTAINING))
 				.withIgnoreCase()
-				.withIgnorePaths("id")
+				.withIgnorePaths("id", "version")
 				.withIgnoreNullValues();
 		Example<Item> example = Example.of(item, exampleMatcher);
 		return pagedAssembler.toResource(itemsRepository.findAll(example, pageable));

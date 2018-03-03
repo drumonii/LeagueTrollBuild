@@ -69,7 +69,7 @@ public class ChampionsRestController {
 				.withMatcher("title", matcher -> matcher.stringMatcher(CONTAINING))
 				.withMatcher("partype", matcher -> matcher.stringMatcher(CONTAINING))
 				.withIgnoreCase()
-				.withIgnorePaths("id")
+				.withIgnorePaths("id", "version")
 				.withIgnoreNullValues();
 		Example<Champion> example = Example.of(champion, exampleMatcher);
 		return pagedAssembler.toResource(championsRepository.findAll(example, pageable));

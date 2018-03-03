@@ -54,7 +54,7 @@ public class SummonerSpellsRestController {
 		ExampleMatcher exampleMatcher = ExampleMatcher.matching()
 				.withMatcher("name", matcher -> matcher.stringMatcher(CONTAINING))
 				.withIgnoreCase()
-				.withIgnorePaths("id")
+				.withIgnorePaths("id", "version")
 				.withIgnoreNullValues();
 		Example<SummonerSpell> example = Example.of(summonerSpell, exampleMatcher);
 		return pagedAssembler.toResource(summonerSpellsRepository.findAll(example, pageable));

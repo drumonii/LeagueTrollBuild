@@ -48,7 +48,7 @@ public class MapsRestController {
 		ExampleMatcher exampleMatcher = ExampleMatcher.matching()
 				.withMatcher("mapName", matcher -> matcher.stringMatcher(CONTAINING))
 				.withIgnoreCase()
-				.withIgnorePaths("mapId")
+				.withIgnorePaths("mapId", "version")
 				.withIgnoreNullValues();
 		Example<GameMap> example = Example.of(gameMap, exampleMatcher);
 		return pagedAssembler.toResource(mapsRepository.findAll(example, pageable));
