@@ -5,6 +5,7 @@ import com.drumonii.loltrollbuild.repository.MapsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.ExampleMatcher.GenericPropertyMatcher;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
@@ -15,8 +16,6 @@ import org.springframework.hateoas.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import static org.springframework.data.domain.ExampleMatcher.StringMatcher.CONTAINING;
 
 /**
  * Repository REST controller for {@link GameMap}s.
@@ -46,7 +45,7 @@ public class MapsRestController {
 			@PageableDefault(size = PAGE_SIZE, sort = "mapName", direction = Direction.ASC) Pageable pageable,
 			GameMap gameMap) {
 		ExampleMatcher exampleMatcher = ExampleMatcher.matching()
-				.withMatcher("mapName", matcher -> matcher.stringMatcher(CONTAINING))
+				.withMatcher("mapName", GenericPropertyMatcher::contains)
 				.withIgnoreCase()
 				.withIgnorePaths("mapId", "version")
 				.withIgnoreNullValues();

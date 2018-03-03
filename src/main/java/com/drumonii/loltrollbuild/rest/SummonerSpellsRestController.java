@@ -6,6 +6,7 @@ import com.drumonii.loltrollbuild.repository.SummonerSpellsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.ExampleMatcher.GenericPropertyMatcher;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
@@ -21,7 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.stream.Collectors;
 
-import static org.springframework.data.domain.ExampleMatcher.StringMatcher.CONTAINING;
 import static org.springframework.hateoas.mvc.BasicLinkBuilder.linkToCurrentMapping;
 
 /**
@@ -52,7 +52,7 @@ public class SummonerSpellsRestController {
 			@PageableDefault(size = PAGE_SIZE, sort = "name", direction = Direction.ASC) Pageable pageable,
 			SummonerSpell summonerSpell) {
 		ExampleMatcher exampleMatcher = ExampleMatcher.matching()
-				.withMatcher("name", matcher -> matcher.stringMatcher(CONTAINING))
+				.withMatcher("name", GenericPropertyMatcher::contains)
 				.withIgnoreCase()
 				.withIgnorePaths("id", "version")
 				.withIgnoreNullValues();

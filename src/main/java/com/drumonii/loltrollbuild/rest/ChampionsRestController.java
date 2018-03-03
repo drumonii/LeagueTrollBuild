@@ -12,6 +12,7 @@ import com.drumonii.loltrollbuild.util.RandomizeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.ExampleMatcher.GenericPropertyMatcher;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
@@ -24,7 +25,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
 import static com.drumonii.loltrollbuild.util.GameMapUtil.SUMMONERS_RIFT_SID;
-import static org.springframework.data.domain.ExampleMatcher.StringMatcher.CONTAINING;
 
 /**
  * Repository REST controller for {@link Champion}s.
@@ -66,9 +66,9 @@ public class ChampionsRestController {
 			@PageableDefault(size = PAGE_SIZE, sort = "name", direction = Direction.ASC) Pageable pageable,
 			Champion champion) {
 		ExampleMatcher exampleMatcher = ExampleMatcher.matching()
-				.withMatcher("name", matcher -> matcher.stringMatcher(CONTAINING))
-				.withMatcher("title", matcher -> matcher.stringMatcher(CONTAINING))
-				.withMatcher("partype", matcher -> matcher.stringMatcher(CONTAINING))
+				.withMatcher("name", GenericPropertyMatcher::contains)
+				.withMatcher("title", GenericPropertyMatcher::contains)
+				.withMatcher("partype", GenericPropertyMatcher::contains)
 				.withIgnoreCase()
 				.withIgnorePaths("id", "version")
 				.withIgnoreNullValues();

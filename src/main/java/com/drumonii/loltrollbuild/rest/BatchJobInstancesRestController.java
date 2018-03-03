@@ -6,6 +6,7 @@ import com.drumonii.loltrollbuild.rest.projection.BatchJobInstanceProjection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.ExampleMatcher.GenericPropertyMatcher;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.projection.ProjectionFactory;
@@ -22,8 +23,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
-
-import static org.springframework.data.domain.ExampleMatcher.StringMatcher.CONTAINING;
 
 /**
  * Repository REST controller for {@link BatchJobInstance}s.
@@ -57,7 +56,7 @@ public class BatchJobInstancesRestController {
 			@PageableDefault(size = PAGE_SIZE, sort = "id", direction = Direction.ASC) Pageable pageable,
 			BatchJobInstance jobInstance) {
 		ExampleMatcher exampleMatcher = ExampleMatcher.matching()
-				.withMatcher("name", matcher -> matcher.stringMatcher(CONTAINING))
+				.withMatcher("name", GenericPropertyMatcher::contains)
 				.withIgnoreCase()
 				.withIgnorePaths("id")
 				.withIgnoreNullValues();
