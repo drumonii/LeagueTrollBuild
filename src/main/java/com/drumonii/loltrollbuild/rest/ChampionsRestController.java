@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
+import static com.drumonii.loltrollbuild.util.GameMapUtil.SUMMONERS_RIFT_SID;
 import static org.springframework.data.domain.ExampleMatcher.StringMatcher.CONTAINING;
 
 /**
@@ -84,7 +85,7 @@ public class ChampionsRestController {
 	 */
 	@GetMapping(value = "/{id}/troll-build")
 	public Map<String, List<?>> trollBuild(@PathVariable int id,
-			@RequestParam(required = false, defaultValue = "11") int mapId) {
+			@RequestParam(required = false, defaultValue = SUMMONERS_RIFT_SID) int mapId) {
 		Map<String, List<?>> trollBuild = new HashMap<>();
 		Optional<Champion> champion = championsRepository.findById(id);
 		if (!champion.isPresent()) {
