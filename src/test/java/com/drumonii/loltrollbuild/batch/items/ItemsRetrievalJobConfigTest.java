@@ -7,10 +7,10 @@ import com.drumonii.loltrollbuild.repository.ItemsRepository;
 import com.drumonii.loltrollbuild.riot.api.ImageFetcher;
 import com.drumonii.loltrollbuild.riot.api.ItemsResponse;
 import com.drumonii.loltrollbuild.riot.service.ItemsService;
+import com.drumonii.loltrollbuild.test.batch.BatchTest;
 import com.drumonii.loltrollbuild.util.RandomizeUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang3.RandomUtils;
-import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.batch.core.BatchStatus;
@@ -18,7 +18,6 @@ import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.JobParametersBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -38,7 +37,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@BatchTest(ItemsRetrievalJobConfig.class)
 @Import(ItemsRetrievalJobConfigTestConfiguration.class)
 public abstract class ItemsRetrievalJobConfigTest {
 
@@ -62,11 +61,6 @@ public abstract class ItemsRetrievalJobConfigTest {
 	protected Version latestVersion;
 
 	public abstract void before();
-
-	@After
-	public void after() {
-		itemsRepository.deleteAll();
-	}
 
 	@Test
 	public void savesNewItems() throws Exception {

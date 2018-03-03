@@ -3,8 +3,8 @@ package com.drumonii.loltrollbuild.batch.versions;
 import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.repository.VersionsRepository;
 import com.drumonii.loltrollbuild.riot.service.VersionsService;
+import com.drumonii.loltrollbuild.test.batch.BatchTest;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.batch.core.BatchStatus;
@@ -12,7 +12,6 @@ import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.JobParametersBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.domain.Sort;
@@ -24,7 +23,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.data.domain.Sort.Direction.DESC;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@BatchTest(VersionsRetrievalJobConfig.class)
 @Import(VersionsRetrievalJobConfigTestConfiguration.class)
 public abstract class VersionsRetrievalJobConfigTest {
 
@@ -44,11 +43,6 @@ public abstract class VersionsRetrievalJobConfigTest {
 	protected Version latestVersion;
 
 	public abstract void before();
-
-	@After
-	public void after() {
-		versionsRepository.deleteAll();
-	}
 
 	@Test
 	public void savesNewVersions() throws Exception {

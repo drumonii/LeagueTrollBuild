@@ -1,7 +1,13 @@
 package com.drumonii.loltrollbuild.batch;
 
+import com.drumonii.loltrollbuild.batch.champions.ChampionsRetrievalJobConfig;
+import com.drumonii.loltrollbuild.batch.items.ItemsRetrievalJobConfig;
+import com.drumonii.loltrollbuild.batch.maps.MapsRetrievalJobConfig;
+import com.drumonii.loltrollbuild.batch.summonerSpells.SummonerSpellsRetrievalJobConfig;
+import com.drumonii.loltrollbuild.batch.versions.VersionsRetrievalJobConfig;
 import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.riot.service.*;
+import com.drumonii.loltrollbuild.test.batch.BatchTest;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,7 +15,6 @@ import org.springframework.batch.core.*;
 import org.springframework.batch.test.JobLauncherTestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
@@ -24,7 +29,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@BatchTest({ AllRetrievalsJobConfig.class, ChampionsRetrievalJobConfig.class, ItemsRetrievalJobConfig.class,
+		MapsRetrievalJobConfig.class, SummonerSpellsRetrievalJobConfig.class, VersionsRetrievalJobConfig.class})
 @ActiveProfiles({ TESTING })
 public class AllRetrievalsJobConfigTest {
 
