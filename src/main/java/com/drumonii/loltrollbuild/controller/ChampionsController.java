@@ -3,7 +3,6 @@ package com.drumonii.loltrollbuild.controller;
 import com.drumonii.loltrollbuild.model.Champion;
 import com.drumonii.loltrollbuild.repository.ChampionsRepository;
 import com.drumonii.loltrollbuild.repository.MapsRepository;
-import com.drumonii.loltrollbuild.util.GameMapUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
@@ -48,7 +47,7 @@ public class ChampionsController {
 			return "redirect:/champions";
 		}
 		model.addAttribute(champion.get());
-		model.addAttribute("maps", GameMapUtil.eligibleMaps(mapsRepository.findAll()));
+		model.addAttribute("maps", mapsRepository.forTrollBuild());
 		return "champions/champion";
 	}
 

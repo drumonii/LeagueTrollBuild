@@ -245,7 +245,7 @@ public class ChampionsControllerTest {
 				.withImage(summonersRiftImage)
 				.build();
 
-		given(mapsRepository.findAll()).willReturn(Arrays.asList(crystalScar, summonersRift));
+		given(mapsRepository.forTrollBuild()).willReturn(Collections.singletonList(summonersRift));
 
 		mockMvc.perform(get("/champions/{id}", xin.getId()))
 				.andExpect(status().isOk())
@@ -353,7 +353,7 @@ public class ChampionsControllerTest {
 				.withImage(twistedTreeLineImage)
 				.build();
 
-		given(mapsRepository.findAll()).willReturn(Arrays.asList(butchersBridge, twistedTreeLine));
+		given(mapsRepository.forTrollBuild()).willReturn(Collections.singletonList(twistedTreeLine));
 
 		mockMvc.perform(get("/champions/{name}", brand.getName()))
 				.andExpect(status().isOk())
