@@ -83,7 +83,7 @@ public class ChampionsRestController {
 	 * @param mapId the map ID to generate the troll build
 	 * @return a {@link Map} of build type key with {@link List} of values.
 	 */
-	@GetMapping(value = "/{id}/troll-build")
+	@GetMapping(path = "/{id}/troll-build")
 	public Map<String, List<?>> trollBuild(@PathVariable int id,
 			@RequestParam(required = false, defaultValue = SUMMONERS_RIFT_SID) int mapId) {
 		Map<String, List<?>> trollBuild = new HashMap<>();

@@ -90,7 +90,7 @@ public class SummonerSpellsRetrieval {
 	 * @param id the ID to lookup the {@link SummonerSpell} from Riot
 	 * @return the {@link SummonerSpell} from Riot
 	 */
-	@GetMapping(value = "/{id}")
+	@GetMapping(path = "/{id}")
 	public SummonerSpell summonerSpell(@PathVariable int id) {
 		SummonerSpell summonerSpell = summonerSpellsService.getSummonerSpell(id);
 		if (summonerSpell == null) {

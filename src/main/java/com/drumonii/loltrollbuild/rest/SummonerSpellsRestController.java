@@ -67,7 +67,7 @@ public class SummonerSpellsRestController {
 	 * @param mode the {@link GameMode} to get eligible {@link SummonerSpell}s for the troll build
 	 * @return the {@link Resources} of {@link SummonerSpell} {@link Resource}
 	 */
-	@GetMapping(value = "/for-troll-build")
+	@GetMapping(path = "/for-troll-build")
 	public Resources<Resource<SummonerSpell>> getForTrollBuild(
 			@RequestParam(required = false, defaultValue = "CLASSIC") GameMode mode) {
 		return new Resources<>(summonerSpellsRepository.forTrollBuild(mode).stream()

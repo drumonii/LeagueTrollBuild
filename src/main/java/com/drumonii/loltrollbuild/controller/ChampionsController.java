@@ -36,7 +36,7 @@ public class ChampionsController {
 		return "champions/champions";
 	}
 
-	@GetMapping(value = "/{value}")
+	@GetMapping(path = "/{value}")
 	public String champion(@PathVariable String value, Model model) {
 		Optional<Champion> champion;
 		try {

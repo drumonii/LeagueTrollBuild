@@ -104,7 +104,7 @@ public class ChampionsRetrieval {
 	 * @param id the ID to lookup the {@link Champion} from Riot
 	 * @return the {@link Champion} from Riot
 	 */
-	@GetMapping(value = "/{id}")
+	@GetMapping(path = "/{id}")
 	public Champion champion(@PathVariable int id) {
 		Champion champion = championsService.getChampion(id);
 		if (champion == null) {

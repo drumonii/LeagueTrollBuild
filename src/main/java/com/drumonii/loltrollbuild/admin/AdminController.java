@@ -40,7 +40,7 @@ public class AdminController {
 	@Autowired
 	private SummonerSpellsService summonerSpellsService;
 
-	@GetMapping(value = "/summoner-spells")
+	@GetMapping(path = "/summoner-spells")
 	public String summonerSpells(@ModelAttribute("latestSavedPatch") String latestSavedPatch,
 			RedirectAttributes redirectAttrs, Model model) {
 		if (latestSavedPatch == null) {
@@ -51,7 +51,7 @@ public class AdminController {
 		return "admin/summonerSpells/summonerSpells";
 	}
 
-	@GetMapping(value = "/summoner-spells/diff")
+	@GetMapping(path = "/summoner-spells/diff")
 	@ResponseBody
 	public Collection<SummonerSpell> summonerSpellsDifference() {
 		return CollectionUtils.subtract(summonerSpellsService.getSummonerSpells(), summonerSpellsRepository.findAll());
@@ -63,7 +63,7 @@ public class AdminController {
 	@Autowired
 	private ItemsService itemsService;
 
-	@GetMapping(value = "/items")
+	@GetMapping(path = "/items")
 	public String items(@ModelAttribute("latestSavedPatch") String latestSavedPatch,
 			RedirectAttributes redirectAttrs, Model model) {
 		if (latestSavedPatch == null) {
@@ -74,7 +74,7 @@ public class AdminController {
 		return "admin/items/items";
 	}
 
-	@GetMapping(value = "/items/diff")
+	@GetMapping(path = "/items/diff")
 	@ResponseBody
 	public Collection<Item> itemsDifference() {
 		return CollectionUtils.subtract(itemsService.getItems(), itemsRepository.findAll());
@@ -86,7 +86,7 @@ public class AdminController {
 	@Autowired
 	private ChampionsService championsService;
 
-	@GetMapping(value = "/champions")
+	@GetMapping(path = "/champions")
 	public String champions(@ModelAttribute("latestSavedPatch") String latestSavedPatch,
 			RedirectAttributes redirectAttrs, Model model) {
 		if (latestSavedPatch == null) {
@@ -97,7 +97,7 @@ public class AdminController {
 		return "admin/champions/champions";
 	}
 
-	@GetMapping(value = "/champions/diff")
+	@GetMapping(path = "/champions/diff")
 	@ResponseBody
 	public Collection<Champion> championsDifference() {
 		return CollectionUtils.subtract(championsService.getChampions(), championsRepository.findAll());
@@ -109,7 +109,7 @@ public class AdminController {
 	@Autowired
 	private MapsService mapsService;
 
-	@GetMapping(value = "/maps")
+	@GetMapping(path = "/maps")
 	public String maps(@ModelAttribute("latestSavedPatch") String latestSavedPatch,
 			RedirectAttributes redirectAttrs, Model model) {
 		if (latestSavedPatch == null) {
@@ -120,13 +120,13 @@ public class AdminController {
 		return "admin/maps/maps";
 	}
 
-	@GetMapping(value = "/maps/diff")
+	@GetMapping(path = "/maps/diff")
 	@ResponseBody
 	public Collection<GameMap> mapsDifference() {
 		return CollectionUtils.subtract(mapsService.getMaps(), mapsRepository.findAll());
 	}
 
-	@GetMapping(value = "/job-instances")
+	@GetMapping(path = "/job-instances")
 	public String jobInstances(Model model) {
 		model.addAttribute("activeTab", "jobInstances");
 		return "admin/jobs/jobInstances";
@@ -135,7 +135,7 @@ public class AdminController {
 	@Autowired
 	private BatchJobInstancesRepository batchJobInstancesRepository;
 
-	@GetMapping(value = "/job-instances/{jobInstanceId}/step-executions")
+	@GetMapping(path = "/job-instances/{jobInstanceId}/step-executions")
 	public String stepExecutions(@PathVariable long jobInstanceId, Model model) {
 		model.addAttribute("jobInstance", batchJobInstancesRepository.findById(jobInstanceId).get());
 		model.addAttribute("activeTab", "jobInstances");

@@ -18,25 +18,25 @@ public class ActuatorController {
 		return "actuator";
 	}
 
-	@GetMapping(value = "/env")
+	@GetMapping(path = "/env")
 	public String env(Model model) {
 		model.addAttribute("accordion", "env");
 		return "admin/actuator/env";
 	}
 
-	@GetMapping(value = "/flyway")
+	@GetMapping(path = "/flyway")
 	public String flyway(Model model) {
 		model.addAttribute("accordion", "flyway");
 		return "admin/actuator/flyway";
 	}
 
-	@GetMapping(value = "/health")
+	@GetMapping(path = "/health")
 	public String health(Model model) {
 		model.addAttribute("accordion", "health");
 		return "admin/actuator/health";
 	}
 
-	@GetMapping(value = "/metrics")
+	@GetMapping(path = "/metrics")
 	public String metrics(Model model) {
 		model.addAttribute("accordion", "metrics");
 		return "admin/actuator/metrics";

@@ -68,7 +68,7 @@ public class ItemsRestController {
 	 * @param mapId the map ID to get eligible {@link Item}s
 	 * @return the {@link Resources} of {@link Item} {@link Resource}
 	 */
-	@GetMapping(value = "/boots")
+	@GetMapping(path = "/boots")
 	public Resources<Resource<Item>> getBoots(@RequestParam(required = false, defaultValue = "11") int mapId) {
 		return new Resources<>(itemsRepository.boots(mapId).stream()
 				.map(item -> new Resource<>(item))
@@ -82,7 +82,7 @@ public class ItemsRestController {
 	 * @param mapId the map ID to get eligible trinkets
 	 * @return the {@link Resources} of {@link Item} {@link Resource}
 	 */
-	@GetMapping(value = "/trinkets")
+	@GetMapping(path = "/trinkets")
 	public Resources<Resource<Item>> getTrinkets(@RequestParam(required = false, defaultValue = "11") int mapId) {
 		return new Resources<>(itemsRepository.trinkets(mapId).stream()
 				.map(item -> new Resource<>(item))

@@ -89,7 +89,7 @@ public class MapsRetrieval {
 	 * @param id the ID to lookup the {@link GameMap} from Riot
 	 * @return the {@link GameMap} from Riot
 	 */
-	@GetMapping(value = "/{id}")
+	@GetMapping(path = "/{id}")
 	public GameMap map(@PathVariable int id) {
 		GameMap map = mapsService.getMap(id);
 		if (map == null) {

@@ -41,7 +41,7 @@ public class VersionsRetrieval {
 	 *
 	 * @return the latest patch {@link Version} from Riot
 	 */
-	@GetMapping(value = "/latest")
+	@GetMapping(path = "/latest")
 	public Version latestVersion() {
 		return versionsService.getLatestVersion();
 	}

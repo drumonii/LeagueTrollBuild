@@ -45,7 +45,7 @@ public class BuildsController {
 		return "redirect:/builds/" + (start == end ? start : start + RANDOM.nextInt(end - start));
 	}
 
-	@GetMapping(value = "/{id}")
+	@GetMapping(path = "/{id}")
 	public String build(@PathVariable int id, Model model) {
 		Optional<Build> build = buildsRepository.findById(id);
 		if (!build.isPresent()) {

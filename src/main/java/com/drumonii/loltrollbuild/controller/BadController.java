@@ -16,22 +16,22 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @Dev @Testing
 public class BadController {
 
-	@GetMapping(value = "/400")
+	@GetMapping(path = "/400")
 	public String throw400() {
 		throw new BadRequestException();
 	}
 
-	@GetMapping(value = "/403")
+	@GetMapping(path = "/403")
 	public String throw403() {
 		throw new AccessDeniedException();
 	}
 
-	@GetMapping(value = "/404")
+	@GetMapping(path = "/404")
 	public String throw404() {
 		throw new NotFoundException();
 	}
 
-	@GetMapping(value = "/500")
+	@GetMapping(path = "/500")
 	public String throw500() {
 		throw new InternalServerErrorException();
 	}

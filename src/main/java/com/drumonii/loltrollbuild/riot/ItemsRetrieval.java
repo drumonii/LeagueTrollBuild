@@ -89,7 +89,7 @@ public class ItemsRetrieval {
 	 * @param id the ID to lookup the {@link Item} from Riot
 	 * @return the {@link Item} from Riot
 	 */
-	@GetMapping(value = "/{id}")
+	@GetMapping(path = "/{id}")
 	public Item item(@PathVariable int id) {
 		Item item = itemsService.getItem(id);
 		if (item == null) {
