@@ -113,10 +113,13 @@ $(function() {
     differenceDataTable.on('xhr', function() {
         if ($.isEmptyObject(differenceDataTable.ajax.json())) {
             $('#maps-difference-segment').slideUp();
-        } else {
+			$('#maps-difference-none').removeClass('hidden')
+		} else {
             $('#maps-difference-segment').slideDown();
-        }
-    });
+			$('#maps-difference-none').addClass('hidden');
+		}
+		$('#maps-difference-loading').addClass('hidden');
+	});
     // Maps from the db
     var dataTable = $('#maps').DataTable({
         processing: true,

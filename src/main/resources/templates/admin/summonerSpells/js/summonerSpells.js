@@ -117,10 +117,13 @@ $(function() {
     differenceDataTable.on('xhr', function() {
         if ($.isEmptyObject(differenceDataTable.ajax.json())) {
             $('#summoner-spells-difference-segment').slideUp();
-        } else {
+			$('#summoner-spells-difference-none').removeClass('hidden')
+		} else {
             $('#summoner-spells-difference-segment').slideDown();
+            $('#summoner-spells-difference-none').addClass('hidden');
         }
-    });
+		$('#summoner-spells-difference-loading').addClass('hidden');
+	});
     // Summoner Spells from the db
     var dataTable = $('#summoner-spells').DataTable({
         processing: true,

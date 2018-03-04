@@ -7,6 +7,20 @@
 </head>
 <body>
 <div layout:fragment="content">
+	<div id="items-difference-loading" class="ui icon message">
+		<i class="notched circle loading icon"></i>
+		<div class="content">
+			<div class="header" th:text="#{admin.items.diff.looking}">
+				Looking for new or updated Items from Riot.
+			</div>
+		</div>
+	</div>
+	<div id="items-difference-none" class="ui success hidden message">
+		<i class="close icon"></i>
+		<div class="header" th:text="#{admin.items.diff.none}">
+			No difference in Items found.
+		</div>
+	</div>
     <div id="items-difference-segment" style="display:none;">
         <div  class="ui info message">
             <i class="close icon"></i>

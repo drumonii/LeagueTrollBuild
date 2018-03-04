@@ -117,10 +117,13 @@ $(function() {
     differenceDataTable.on('xhr', function() {
         if ($.isEmptyObject(differenceDataTable.ajax.json())) {
             $('#champions-difference-segment').slideUp();
-        } else {
+			$('#champions-difference-none').removeClass('hidden')
+		} else {
             $('#champions-difference-segment').slideDown();
-        }
-    });
+			$('#champions-difference-none').addClass('hidden');
+		}
+		$('#champions-difference-loading').addClass('hidden');
+	});
     // Champions from the db
     var dataTable = $('#champions').DataTable({
         processing: true,

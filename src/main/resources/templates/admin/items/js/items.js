@@ -155,10 +155,13 @@ $(function() {
     differenceDataTable.on('xhr', function() {
         if ($.isEmptyObject(differenceDataTable.ajax.json())) {
             $('#items-difference-segment').slideUp();
-        } else {
+			$('#items-difference-none').removeClass('hidden')
+		} else {
             $('#items-difference-segment').slideDown();
-        }
-    });
+			$('#items-difference-none').addClass('hidden');
+		}
+		$('#items-difference-loading').addClass('hidden');
+	});
     // Items from the db
     var dataTable = $('#items').DataTable({
         processing: true,

@@ -7,6 +7,20 @@
 </head>
 <body>
 <div layout:fragment="content">
+	<div id="summoner-spells-difference-loading" class="ui icon message">
+		<i class="notched circle loading icon"></i>
+		<div class="content">
+			<div class="header" th:text="#{admin.summonerSpells.diff.looking}">
+				Looking for new or updated Summoner Spells from Riot.
+			</div>
+		</div>
+	</div>
+	<div id="summoner-spells-difference-none" class="ui success hidden message">
+		<i class="close icon"></i>
+		<div class="header" th:text="#{admin.summonerSpells.diff.none}">
+			No difference in Summoner Spells found.
+		</div>
+	</div>
     <div id="summoner-spells-difference-segment" style="display:none;">
         <div class="ui info message">
             <i class="close icon"></i>
@@ -15,7 +29,7 @@
         </div>
         <div id="summoner-spells-difference-error-msg" class="ui mini negative hidden message">
             <i class="close icon"></i>
-            <div class="header">An error has occurred.</div>
+            <div class="header" th:text="#{admin.summonerSpells.error}">An error has occurred.</div>
         </div>
 
         <h3 class="ui dividing header" th:text="#{admin.summonerSpells.riot}">Difference in Summoner Spells from Riot</h3>
@@ -63,7 +77,7 @@
     </div>
     <div id="summoner-spells-error-msg" class="ui mini negative hidden message">
         <i class="close icon"></i>
-        <div class="header">An error has occurred.</div>
+		<div class="header" th:text="#{admin.summonerSpells.error}">An error has occurred.</div>
     </div>
 
     <h3 class="ui dividing header" th:text="#{admin.summonerSpells}">Summoner Spells</h3>
@@ -78,7 +92,7 @@
                 </div>
             </th>
             <th class="eleven wide">
-                <div class="ui disabled input">
+                <div class="ui input">
                     <input class="summoner-spells-search-input" th:placeholder="#{admin.summonerSpell.modes.search}"
                            type="text" data-column-name="modes"/>
                 </div>

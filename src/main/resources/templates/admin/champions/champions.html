@@ -7,6 +7,20 @@
 </head>
 <body>
 <div layout:fragment="content">
+	<div id="champions-difference-loading" class="ui icon message">
+		<i class="notched circle loading icon"></i>
+		<div class="content">
+			<div class="header" th:text="#{admin.champions.diff.looking}">
+				Looking for new or updated Champions from Riot.
+			</div>
+		</div>
+	</div>
+	<div id="champions-difference-none" class="ui success hidden message">
+		<i class="close icon"></i>
+		<div class="header" th:text="#{admin.champions.diff.none}">
+			No difference in Champions found.
+		</div>
+	</div>
     <div id="champions-difference-segment" style="display:none;">
         <div class="ui info message">
             <i class="close icon"></i>
