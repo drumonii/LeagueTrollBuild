@@ -75,17 +75,16 @@ public interface ItemsRepository extends JpaRepository<Item, Integer> {
 	 * @param mapId the {@link GameMap}'s ID
 	 * @return a {@link List} of {@link Item}s eligible for the troll build
 	 */
-	@Query("select i from Item i left join i.into i_into left join i.maps m " +
+	@Query("select i from Item i left join i.into i_into join i.maps m " +
 		   "where i.name is not null and i.description is not null " +
 		   "and i.gold.purchasable = true and i.consumed is null and (i.group is null or i.group <> 'FlaskGroup') " +
-		   "and i_into is null and not exists (select m2 from i.maps m2 where key(m2) = :mapId and m2 = false)" +
+		   "and i_into is null and key(m) = :mapId and m = true " +
 		   "and i.id <> 1001 and i.description not like '%Movement%' " +
 		   "and (i.name not like '%Potion%' and i.description not like '%Potion%') " +
 		   "and (i.name not like '%Trinket%' and i.description not like '%Trinket%') " +
 		   "and i.requiredAlly is null " +
 		   "and i.requiredChampion is null " +
-		   "and i.name not like 'Enchantment%' and i.name not like 'Doran%' and i.name not like '%(Quick Charge)' " +
-		   "group by i.id")
+		   "and i.name not like 'Enchantment%' and i.name not like 'Doran%' and i.name not like '%(Quick Charge)'")
 	@RestResource(exported = false)
 	@Cacheable(key = "{#root.methodName, #mapId}")
 	List<Item> forTrollBuild(@Param("mapId") int mapId);
