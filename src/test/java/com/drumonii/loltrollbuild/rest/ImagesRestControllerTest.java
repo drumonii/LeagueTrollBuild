@@ -66,6 +66,9 @@ public abstract class ImagesRestControllerTest {
 
 	@Test
 	public void summonerSpellImg() throws Exception {
+		mockMvc.perform(get("/img/summoner-spells/{img}.{fileExt}", 0,  "jpg"))
+				.andExpect(status().isNotFound());
+
 		SummonerSpell smite = summonerSpellsResponse.getSummonerSpells().get("SummonerSmite");
 		smite = summonerSpellsRepository.save(smite);
 
@@ -81,6 +84,9 @@ public abstract class ImagesRestControllerTest {
 
 	@Test
 	public void itemImg() throws Exception {
+		mockMvc.perform(get("/img/items/{img}.{fileExt}", 0, "jpg"))
+				.andExpect(status().isNotFound());
+
 		Item thornmail = itemsResponse.getItems().get("3075");
 		thornmail = itemsRepository.save(thornmail);
 
@@ -96,6 +102,9 @@ public abstract class ImagesRestControllerTest {
 
 	@Test
 	public void championImg() throws Exception {
+		mockMvc.perform(get("/img/champions/{img}.{fileExt}", 0, "jpg"))
+				.andExpect(status().isNotFound());
+
 		Champion shen = championsResponse.getChampions().get("Shen");
 		shen = championsRepository.save(shen);
 
@@ -111,6 +120,9 @@ public abstract class ImagesRestControllerTest {
 
 	@Test
 	public void championSpellImg() throws Exception {
+		mockMvc.perform(get("/img/champions/{id}/spell/{img}.{fileExt}", 0, "key", "jpg"))
+				.andExpect(status().isNotFound());
+
 		Champion azir = championsResponse.getChampions().get("Azir");
 		azir = championsRepository.save(azir);
 		Optional<ChampionSpell> spell = azir.getSpells().stream().findAny();
@@ -132,6 +144,9 @@ public abstract class ImagesRestControllerTest {
 
 	@Test
 	public void championPassiveImg() throws Exception {
+		mockMvc.perform(get("/img//champions/{id}/passive/{passive}.*", 0, "image.jpg"))
+				.andExpect(status().isNotFound());
+
 		Champion ekko = championsResponse.getChampions().get("Ekko");
 		ekko = championsRepository.save(ekko);
 
@@ -148,6 +163,9 @@ public abstract class ImagesRestControllerTest {
 
 	@Test
 	public void mapImg() throws Exception {
+		mockMvc.perform(get("/img/maps/map{img}.{fileExt}", 0, "jpg"))
+				.andExpect(status().isNotFound());
+
 		GameMap summonersRift = mapsResponse.getMaps().get(SUMMONERS_RIFT_SID);
 		summonersRift = mapsRepository.save(summonersRift);
 

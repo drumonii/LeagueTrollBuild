@@ -24,6 +24,9 @@ public class ImagesRestController {
 
 	@GetMapping(value = "/summoner-spells/{id}.*")
 	public ResponseEntity<byte[]> summonerSpellImg(@PathVariable("id") SummonerSpell summonerSpell) {
+		if (summonerSpell == null) {
+			return ResponseEntity.notFound().build();
+		}
 		return ResponseEntity.ok()
 				.contentLength(summonerSpell.getImage().getImgSrc().length)
 				.contentType(createMediaType(summonerSpell.getImage()))
@@ -34,6 +37,9 @@ public class ImagesRestController {
 
 	@GetMapping(value = "/items/{id}.*")
 	public ResponseEntity<byte[]> itemImg(@PathVariable("id") Item item) {
+		if (item == null) {
+			return ResponseEntity.notFound().build();
+		}
 		return ResponseEntity.ok()
 				.contentLength(item.getImage().getImgSrc().length)
 				.contentType(createMediaType(item.getImage()))
@@ -44,6 +50,9 @@ public class ImagesRestController {
 
 	@GetMapping(value = "/champions/{id}.*")
 	public ResponseEntity<byte[]> championImg(@PathVariable("id") Champion champion) {
+		if (champion == null) {
+			return ResponseEntity.notFound().build();
+		}
 		return ResponseEntity.ok()
 				.contentLength(champion.getImage().getImgSrc().length)
 				.contentType(createMediaType(champion.getImage()))
@@ -53,8 +62,10 @@ public class ImagesRestController {
 	}
 
 	@GetMapping(value = "/champions/{id}/spell/{spellKey}.*")
-	public ResponseEntity<byte[]> championSpellImg(@PathVariable("id") Champion champion,
-			@PathVariable String spellKey) {
+	public ResponseEntity<byte[]> championSpellImg(@PathVariable("id") Champion champion, @PathVariable String spellKey) {
+		if (champion == null) {
+			return ResponseEntity.notFound().build();
+		}
 		Optional<ChampionSpell> spell = champion.getSpells().stream()
 				.filter(s -> spellKey.equals(s.getKey()))
 				.findFirst();
@@ -68,6 +79,9 @@ public class ImagesRestController {
 
 	@GetMapping(value = "/champions/{id}/passive/{passive}.*")
 	public ResponseEntity<byte[]> championPassiveImg(@PathVariable("id") Champion champion) {
+		if (champion == null) {
+			return ResponseEntity.notFound().build();
+		}
 		return ResponseEntity.ok()
 				.contentLength(champion.getPassive().getImage().getImgSrc().length)
 				.contentType(createMediaType(champion.getPassive().getImage()))
@@ -78,6 +92,9 @@ public class ImagesRestController {
 
 	@GetMapping(value = "/maps/map{id}.*")
 	public ResponseEntity<byte[]> mapImg(@PathVariable("id") GameMap gameMap) {
+		if (gameMap == null) {
+			return ResponseEntity.notFound().build();
+		}
 		return ResponseEntity.ok()
 				.contentLength(gameMap.getImage().getImgSrc().length)
 				.contentType(createMediaType(gameMap.getImage()))
