@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.stream.Collectors;
 
+import static com.drumonii.loltrollbuild.util.GameMapUtil.SUMMONERS_RIFT_SID;
 import static org.springframework.hateoas.mvc.BasicLinkBuilder.linkToCurrentMapping;
 
 /**
@@ -70,7 +71,8 @@ public class ItemsRestController {
 	 * @return the {@link Resources} of {@link Item} {@link Resource}
 	 */
 	@GetMapping(path = "/boots")
-	public Resources<Resource<Item>> getBoots(@RequestParam(required = false, defaultValue = "11") int mapId) {
+	public Resources<Resource<Item>> getBoots(
+			@RequestParam(required = false, defaultValue = SUMMONERS_RIFT_SID) int mapId) {
 		return new Resources<>(itemsRepository.boots(mapId).stream()
 				.map(item -> new Resource<>(item))
 				.collect(Collectors.toList()), linkToCurrentMapping().withSelfRel());
@@ -84,7 +86,8 @@ public class ItemsRestController {
 	 * @return the {@link Resources} of {@link Item} {@link Resource}
 	 */
 	@GetMapping(path = "/trinkets")
-	public Resources<Resource<Item>> getTrinkets(@RequestParam(required = false, defaultValue = "11") int mapId) {
+	public Resources<Resource<Item>> getTrinkets(
+			@RequestParam(required = false, defaultValue = SUMMONERS_RIFT_SID) int mapId) {
 		return new Resources<>(itemsRepository.trinkets(mapId).stream()
 				.map(item -> new Resource<>(item))
 				.collect(Collectors.toList()), linkToCurrentMapping().withSelfRel());
@@ -111,7 +114,8 @@ public class ItemsRestController {
 	 * @return the {@link Resources} of {@link Item} {@link Resource}
 	 */
 	@GetMapping(value = "/for-troll-build")
-	public Resources<Resource<Item>> getForTrollBuild(@RequestParam(required = false, defaultValue = "11") int mapId) {
+	public Resources<Resource<Item>> getForTrollBuild(
+			@RequestParam(required = false, defaultValue = SUMMONERS_RIFT_SID) int mapId) {
 		return new Resources<>(itemsRepository.forTrollBuild(mapId).stream()
 				.map(item -> new Resource<>(item))
 				.collect(Collectors.toList()), linkToCurrentMapping().withSelfRel());
