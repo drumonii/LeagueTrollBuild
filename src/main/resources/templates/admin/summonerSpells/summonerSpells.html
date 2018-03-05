@@ -94,7 +94,7 @@
             <th class="eleven wide">
                 <div class="ui input">
                     <input class="summoner-spells-search-input" th:placeholder="#{admin.summonerSpell.modes.search}"
-                           type="text" data-column-name="modes"/>
+                           type="text" data-column-name="modes" oninput="this.value = this.value.toUpperCase();"/>
                 </div>
             </th>
             <th class="one wide"></th>
