@@ -137,13 +137,10 @@ $(function() {
                 }
             });
             var parameters = {};
-            if (data.search.value) {
-                var searches = data.search.value.split(',');
-                $.each(searches, function(index, value) {
-                    var search = value.split('|');
-                    parameters[search[0]] = search[1];
-                });
-            }
+			if (data.search.value) {
+				var searches = JSON.parse(data.search.value);
+				parameters[searches.column] = searches.values;
+			}
             parameters['page'] = Math.ceil(data.start / data.length);
             parameters['size'] = data.length;
             parameters['sort'] = sorts;
@@ -219,7 +216,12 @@ $(function() {
         var inputs = [];
         $('.summoner-spells-search-input').each(function() {
             if ($(this).val()) {
-                inputs.push($(this).data('column-name') + '|' + $(this).val());
+				inputs.push(JSON.stringify({
+					column: $(this).data('column-name'),
+					values: $(this).val().split(',').map(function(value) {
+						return value.trim();
+					})
+				}));
             }
         });
         dataTable.search(inputs).draw();
