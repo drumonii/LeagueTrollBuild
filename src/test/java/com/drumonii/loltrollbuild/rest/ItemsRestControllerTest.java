@@ -105,6 +105,21 @@ public abstract class ItemsRestControllerTest {
 				.andExpect(jsonPath("$.page.totalPages").exists())
 				.andExpect(jsonPath("$.page.number", is(0)));
 
+		// qbe with maps
+		mockMvc.perform(get("{apiPath}/items", apiPath)
+				.param("maps[12]", Boolean.TRUE.toString()))
+				.andExpect(status().isOk())
+				.andExpect(content().contentType(MediaTypes.HAL_JSON_UTF8))
+				.andExpect(jsonPath("$._embedded.items").exists())
+				.andExpect(jsonPath("$._links").exists())
+				.andExpect(jsonPath("$._links.self").exists())
+				.andExpect(jsonPath("$._links.self.href").exists())
+				.andExpect(jsonPath("$.page").exists())
+				.andExpect(jsonPath("$.page.size", is(PAGE_SIZE)))
+				.andExpect(jsonPath("$.page.totalElements").exists())
+				.andExpect(jsonPath("$.page.totalPages").exists())
+				.andExpect(jsonPath("$.page.number", is(0)));
+
 		// qbe with no results
 		mockMvc.perform(get("{apiPath}/items", apiPath)
 				.param("name", "abcd1234"))

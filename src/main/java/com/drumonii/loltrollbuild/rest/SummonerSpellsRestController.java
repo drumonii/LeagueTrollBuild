@@ -3,6 +3,7 @@ package com.drumonii.loltrollbuild.rest;
 import com.drumonii.loltrollbuild.model.SummonerSpell;
 import com.drumonii.loltrollbuild.model.SummonerSpell.GameMode;
 import com.drumonii.loltrollbuild.repository.SummonerSpellsRepository;
+import com.drumonii.loltrollbuild.rest.specification.SummonerSpellsSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -57,7 +58,7 @@ public class SummonerSpellsRestController {
 				.withIgnorePaths("id", "version")
 				.withIgnoreNullValues();
 		Example<SummonerSpell> example = Example.of(summonerSpell, exampleMatcher);
-		return pagedAssembler.toResource(summonerSpellsRepository.findAll(example, pageable));
+		return pagedAssembler.toResource(summonerSpellsRepository.findAll(new SummonerSpellsSpecification(example), pageable));
 	}
 
 	/**

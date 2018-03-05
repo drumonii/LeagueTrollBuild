@@ -112,6 +112,21 @@ public abstract class ChampionsRestControllerTest {
 				.andExpect(jsonPath("$.page.totalPages").exists())
 				.andExpect(jsonPath("$.page.number").exists());
 
+		// qbe with tags
+		mockMvc.perform(get("/api/champions")
+				.param("tags", champion.getTags().iterator().next()))
+				.andExpect(status().isOk())
+				.andExpect(content().contentType(MediaTypes.HAL_JSON_UTF8))
+				.andExpect(jsonPath("$._embedded.champions").exists())
+				.andExpect(jsonPath("$._links").exists())
+				.andExpect(jsonPath("$._links.self").exists())
+				.andExpect(jsonPath("$._links.self.href").exists())
+				.andExpect(jsonPath("$.page").exists())
+				.andExpect(jsonPath("$.page.size", is(PAGE_SIZE)))
+				.andExpect(jsonPath("$.page.totalElements").exists())
+				.andExpect(jsonPath("$.page.totalPages").exists())
+				.andExpect(jsonPath("$.page.number").exists());
+
 		// qbe with no results
 		mockMvc.perform(get("{apiPath}/champions", apiPath)
 				.param("name", "abcd1234"))

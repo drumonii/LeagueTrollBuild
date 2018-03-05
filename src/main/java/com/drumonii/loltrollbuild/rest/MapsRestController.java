@@ -2,6 +2,7 @@ package com.drumonii.loltrollbuild.rest;
 
 import com.drumonii.loltrollbuild.model.GameMap;
 import com.drumonii.loltrollbuild.repository.MapsRepository;
+import com.drumonii.loltrollbuild.rest.specification.MapsSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -50,7 +51,7 @@ public class MapsRestController {
 				.withIgnorePaths("mapId", "version")
 				.withIgnoreNullValues();
 		Example<GameMap> example = Example.of(gameMap, exampleMatcher);
-		return pagedAssembler.toResource(mapsRepository.findAll(example, pageable));
+		return pagedAssembler.toResource(mapsRepository.findAll(new MapsSpecification(example), pageable));
 	}
 
 }

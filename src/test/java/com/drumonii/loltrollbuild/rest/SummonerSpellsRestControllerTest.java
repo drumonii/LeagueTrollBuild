@@ -17,6 +17,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.stream.Collectors;
+
 import static com.drumonii.loltrollbuild.model.SummonerSpell.GameMode.CLASSIC;
 import static com.drumonii.loltrollbuild.rest.SummonerSpellsRestController.PAGE_SIZE;
 import static org.hamcrest.Matchers.is;
@@ -50,7 +52,9 @@ public abstract class SummonerSpellsRestControllerTest {
 
 	@Test
 	public void getSummonerSpells() throws Exception {
-		SummonerSpell summonerSpell = RandomizeUtil.getRandom(summonerSpellsResponse.getSummonerSpells().values());
+		SummonerSpell summonerSpell = RandomizeUtil.getRandom(summonerSpellsResponse.getSummonerSpells().values().stream()
+				.filter(spell -> !spell.getModes().isEmpty())
+				.collect(Collectors.toSet()));
 
 		// qbe
 		mockMvc.perform(get("{apiPath}/summoner-spells", apiPath))
@@ -69,6 +73,21 @@ public abstract class SummonerSpellsRestControllerTest {
 		// qbe with name
 		mockMvc.perform(get("{apiPath}/summoner-spells", apiPath)
 				.param("name", summonerSpell.getName().toLowerCase()))
+				.andExpect(status().isOk())
+				.andExpect(content().contentType(MediaTypes.HAL_JSON_UTF8))
+				.andExpect(jsonPath("$._embedded.summonerSpells").exists())
+				.andExpect(jsonPath("$._links").exists())
+				.andExpect(jsonPath("$._links.self").exists())
+				.andExpect(jsonPath("$._links.self.href").exists())
+				.andExpect(jsonPath("$.page").exists())
+				.andExpect(jsonPath("$.page.size", is(PAGE_SIZE)))
+				.andExpect(jsonPath("$.page.totalElements").exists())
+				.andExpect(jsonPath("$.page.totalPages").exists())
+				.andExpect(jsonPath("$.page.number").exists());
+
+		// qbe with modes
+		mockMvc.perform(get("/api/summoner-spells")
+				.param("modes", summonerSpell.getModes().iterator().next().name()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaTypes.HAL_JSON_UTF8))
 				.andExpect(jsonPath("$._embedded.summonerSpells").exists())

@@ -2,6 +2,7 @@ package com.drumonii.loltrollbuild.rest;
 
 import com.drumonii.loltrollbuild.model.Item;
 import com.drumonii.loltrollbuild.repository.ItemsRepository;
+import com.drumonii.loltrollbuild.rest.specification.ItemSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -58,7 +59,7 @@ public class ItemsRestController {
 				.withIgnorePaths("id", "version")
 				.withIgnoreNullValues();
 		Example<Item> example = Example.of(item, exampleMatcher);
-		return pagedAssembler.toResource(itemsRepository.findAll(example, pageable));
+		return pagedAssembler.toResource(itemsRepository.findAll(new ItemSpecification(example), pageable));
 	}
 
 	/**
