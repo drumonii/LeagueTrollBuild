@@ -3,6 +3,12 @@ $(function() {
     var twistedTreelineId = /*[[${T(com.drumonii.loltrollbuild.util.GameMapUtil).TWISTED_TREELINE_ID}]]*/ 10;
     var summonersRiftId = /*[[${T(com.drumonii.loltrollbuild.util.GameMapUtil).SUMMONERS_RIFT_ID}]]*/ 11;
     var howlingAbyssId = /*[[${T(com.drumonii.loltrollbuild.util.GameMapUtil).HOWLING_ABYSS_ID}]]*/ 12;
+
+	var crystalScar = /*[[${T(com.drumonii.loltrollbuild.util.GameMapUtil).CRYSTAL_SCAR}]]*/ 'Crystal Scar';
+	var twistedTreeline = /*[[${T(com.drumonii.loltrollbuild.util.GameMapUtil).TWISTED_TREELINE}]]*/ 'Twisted Treeline';
+	var summonersRift = /*[[${T(com.drumonii.loltrollbuild.util.GameMapUtil).SUMMONERS_RIFT}]]*/ 'Summoner\'s Rift';
+	var howlingAbyss = /*[[${T(com.drumonii.loltrollbuild.util.GameMapUtil).HOWLING_ABYSS}]]*/ 'Howling Abyss';
+
     var patch = /*[[${latestRiotPatch}]]*/ '7.12.1';
     // Items difference
     var differenceDataTable = $('#items-difference').DataTable({
@@ -38,27 +44,7 @@ $(function() {
             },
             { data: 'maps',
                 render: function(data, type, full, meta) {
-                    var maps = [];
-                    $.each(data, function(index, value) {
-                        if (value) {
-                            switch(parseInt(index)) {
-                                case crystalScarId:
-                                    maps.push(' The Crystal Scar');
-                                    break;
-                                case twistedTreelineId:
-                                    maps.push(' Twisted Treeline');
-                                    break;
-                                case summonersRiftId:
-                                    maps.push(' Summoner’s Rift');
-                                    break;
-                                case howlingAbyssId:
-                                    maps.push(' Howling Abyss');
-                                break;
-                            }
-                        }
-                    });
-                    maps.sort();
-                    return maps;
+                    return getMaps(data);
                 }
             },
             { data: null,
@@ -222,27 +208,7 @@ $(function() {
             },
             { data: 'maps',
                 render: function(data, type, full, meta) {
-                    var maps = [];
-                    $.each(data, function(index, value) {
-                        if (value) {
-                            switch(parseInt(index)) {
-                                case crystalScarId:
-                                    maps.push(' The Crystal Scar');
-                                    break;
-                                case twistedTreelineId:
-                                    maps.push(' Twisted Treeline');
-                                    break;
-                                case summonersRiftId:
-                                    maps.push(' Summoner’s Rift');
-                                    break;
-                                case howlingAbyssId:
-                                    maps.push(' Howling Abyss');
-                                    break;
-                            }
-                        }
-                    });
-                    maps.sort();
-                    return maps;
+					return getMaps(data);
                 }
             },
             { data: '_links.self.href',
@@ -348,4 +314,27 @@ $(function() {
     $('.message').click(function() {
         $(this).transition('fade');
     });
+    function getMaps(data) {
+		var maps = [];
+		$.each(data, function (index, value) {
+			if (value) {
+				switch (parseInt(index)) {
+					case crystalScarId:
+						maps.push(' ' + crystalScar);
+						break;
+					case twistedTreelineId:
+						maps.push(' ' + twistedTreeline);
+						break;
+					case summonersRiftId:
+						maps.push(' ' + summonersRift);
+						break;
+					case howlingAbyssId:
+						maps.push(' ' + howlingAbyss);
+						break;
+				}
+			}
+		});
+		maps.sort();
+		return maps;
+	}
 });
