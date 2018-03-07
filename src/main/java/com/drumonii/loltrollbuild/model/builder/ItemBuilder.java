@@ -64,7 +64,7 @@ public final class ItemBuilder {
 
 	public ItemBuilder withFrom(Integer... from) {
 		if (from != null) {
-			withFrom(Arrays.asList(from));
+			withFrom(Arrays.stream(from).collect(Collectors.toCollection(ArrayList::new)));
 		}
 		return this;
 	}

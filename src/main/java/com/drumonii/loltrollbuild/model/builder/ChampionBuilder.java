@@ -7,6 +7,7 @@ import com.drumonii.loltrollbuild.model.ChampionSpell;
 import com.drumonii.loltrollbuild.model.image.ChampionImage;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Builder for {@link Champion}s.
@@ -60,7 +61,7 @@ public final class ChampionBuilder {
 	}
 
 	public ChampionBuilder withSpells(ChampionSpell... spells) {
-		withSpells(Arrays.asList(spells));
+		withSpells(Arrays.stream(spells).collect(Collectors.toCollection(ArrayList::new)));
 		return this;
 	}
 
