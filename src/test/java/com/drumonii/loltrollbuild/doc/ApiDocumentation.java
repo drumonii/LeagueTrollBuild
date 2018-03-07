@@ -2,10 +2,13 @@ package com.drumonii.loltrollbuild.doc;
 
 import com.drumonii.loltrollbuild.model.*;
 import com.drumonii.loltrollbuild.repository.*;
+import com.drumonii.loltrollbuild.rest.*;
+import com.drumonii.loltrollbuild.rest.processor.*;
 import com.drumonii.loltrollbuild.riot.api.ChampionsResponse;
 import com.drumonii.loltrollbuild.riot.api.ItemsResponse;
 import com.drumonii.loltrollbuild.riot.api.MapsResponse;
 import com.drumonii.loltrollbuild.riot.api.SummonerSpellsResponse;
+import com.drumonii.loltrollbuild.test.rest.WebMvcRestTest;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
@@ -14,14 +17,14 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.ComponentScan.Filter;
+import org.springframework.context.annotation.FilterType;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.restdocs.payload.FieldDescriptor;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -44,10 +47,18 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(properties = { "riot.static-data.apiKey=API_KEY" })
-@AutoConfigureMockMvc
-@AutoConfigureRestDocs(outputDir = "build/generated-snippets", uriScheme = "https", uriHost = "loltrollbuild.com", uriPort = 443)
-@Transactional
+@WebMvcRestTest( // below is a bit hard on the eyes...i apologize
+		controllers = { BuildsRestController.class, ChampionsRestController.class, ItemsRestController.class,
+				MapsRestController.class, SummonerSpellsRestController.class, VersionsRestController.class },
+		includeFilters = { @Filter(type = FilterType.ASSIGNABLE_TYPE, classes = BuildResourceProcessor.class),
+				@Filter(type = FilterType.ASSIGNABLE_TYPE, classes = ChampionResourceProcessor.class),
+				@Filter(type = FilterType.ASSIGNABLE_TYPE, classes = ItemResourceProcessor.class),
+				@Filter(type = FilterType.ASSIGNABLE_TYPE, classes = MapResourceProcessor.class),
+				@Filter(type = FilterType.ASSIGNABLE_TYPE, classes = SummonerSpellResourceProcessor.class),
+				@Filter(type = FilterType.ASSIGNABLE_TYPE, classes = VersionResourceProcessor.class) })
+@AutoConfigureRestDocs(outputDir = "build/generated-snippets", uriScheme = "https", uriHost = "loltrollbuild.com",
+		uriPort = 443)
+@TestPropertySource(properties = "riot.static-data.apiKey=API_KEY")
 @ActiveProfiles({ TESTING, STATIC_DATA })
 public class ApiDocumentation {
 

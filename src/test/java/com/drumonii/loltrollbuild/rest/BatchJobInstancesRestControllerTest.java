@@ -1,7 +1,9 @@
 package com.drumonii.loltrollbuild.rest;
 
 import com.drumonii.loltrollbuild.annotation.WithMockAdminUser;
+import com.drumonii.loltrollbuild.rest.processor.BatchJobInstanceProjectionResourceProcessor;
 import com.drumonii.loltrollbuild.riot.service.*;
+import com.drumonii.loltrollbuild.test.rest.WebMvcRestTest;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,19 +15,17 @@ import org.springframework.batch.item.database.support.DefaultDataFieldMaxValueI
 import org.springframework.batch.support.DatabaseType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.test.autoconfigure.core.AutoConfigureCache;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan.Filter;
+import org.springframework.context.annotation.FilterType;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.MetaDataAccessException;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.sql.DataSource;
 
@@ -39,10 +39,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
-@AutoConfigureMockMvc
-@AutoConfigureCache
-@Transactional
+@WebMvcRestTest(controllers = BatchJobInstancesRestController.class,
+		includeFilters = @Filter(type = FilterType.ASSIGNABLE_TYPE, classes = BatchJobInstanceProjectionResourceProcessor.class))
 @ActiveProfiles({ TESTING })
 public class BatchJobInstancesRestControllerTest {
 

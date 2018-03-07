@@ -2,20 +2,20 @@ package com.drumonii.loltrollbuild.rest;
 
 import com.drumonii.loltrollbuild.model.GameMap;
 import com.drumonii.loltrollbuild.repository.MapsRepository;
+import com.drumonii.loltrollbuild.rest.processor.MapResourceProcessor;
 import com.drumonii.loltrollbuild.riot.api.MapsResponse;
+import com.drumonii.loltrollbuild.test.rest.WebMvcRestTest;
 import com.drumonii.loltrollbuild.util.RandomizeUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.test.autoconfigure.core.AutoConfigureCache;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.ComponentScan.Filter;
+import org.springframework.context.annotation.FilterType;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.transaction.annotation.Transactional;
 
 import static com.drumonii.loltrollbuild.rest.MapsRestController.PAGE_SIZE;
 import static org.hamcrest.Matchers.is;
@@ -25,10 +25,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
-@AutoConfigureMockMvc
-@AutoConfigureCache
-@Transactional
+@WebMvcRestTest(controllers = MapsRestController.class,
+		includeFilters = @Filter(type = FilterType.ASSIGNABLE_TYPE, classes = MapResourceProcessor.class))
 public abstract class MapsRestControllerTest {
 
 	@Autowired
