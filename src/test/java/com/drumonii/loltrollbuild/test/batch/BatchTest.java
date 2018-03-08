@@ -16,6 +16,7 @@ import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.annotation.AliasFor;
 import org.springframework.test.context.BootstrapWith;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.lang.annotation.*;
@@ -37,6 +38,7 @@ import java.lang.annotation.*;
 @ImportAutoConfiguration({ BatchAutoConfiguration.class })
 @Import({ BatchConfig.class, CacheConfig.class, JpaConfig.class, RiotApiConfig.class })
 @Sql("/CLEAN_TABLES.sql") // have to use because Spring Batch complains about @Transactional
+@TestPropertySource(properties = "spring.datasource.generate-unique-name=true")
 public @interface BatchTest {
 
 	/**
