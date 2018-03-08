@@ -95,7 +95,6 @@ spring:
 spring:
   profiles: external
   datasource:
-    driverClassName: org.postgresql.Driver
     url: ${DB_URL}
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
@@ -116,7 +115,6 @@ spring:
 spring:
   profiles: dev
   datasource:
-    driverClassName: org.postgresql.Driver
     url: jdbc:postgresql://localhost/loltrollbuild
     username: postgres
     password: postgres
