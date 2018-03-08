@@ -46,7 +46,7 @@ public abstract class ChampionsRepositoryTest {
 	@Test
 	public void getTags() {
 		assertThat(championsRepository.getTags())
-				.containsOnly("Mage", "Tank", "Marksman", "Fighter", "Assassin", "Support");
+				.containsOnly("Assassin", "Fighter", "Mage", "Marksman", "Support", "Tank");
 	}
 
 }

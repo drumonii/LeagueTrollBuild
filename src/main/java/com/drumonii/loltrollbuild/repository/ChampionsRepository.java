@@ -39,7 +39,7 @@ public interface ChampionsRepository extends JpaRepository<Champion, Integer>, J
 	 *
 	 * @return the {@link List} of string tags
 	 */
-	@Query(value = "select distinct c.tag from champion_tag c", nativeQuery = true)
+	@Query(value = "select distinct c.tag from champion_tag c order by c.tag", nativeQuery = true)
 	@RestResource(exported = false)
 	@Cacheable(key = "#root.methodName")
 	List<String> getTags();
