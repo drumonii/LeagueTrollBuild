@@ -45,8 +45,6 @@ Use of HTTP status codes in the API
 == Summoner Spells
 Resources for http://leagueoflegends.wikia.com/wiki/Summoner_spell[Summoner Spells].
 
-NOTE: `POST`, `PUT`, and `DELETE` methods are limited to an admin only
-
 [[resources-summoner-spells-list]]
 === Listing Summoner Spells
 A `GET` request is used to access all `Summoner Spell` s.
@@ -116,8 +114,6 @@ include::{snippets}/summonerSpellsFindBy/response-fields.adoc[]
 [[resources-items]]
 == Items
 Resources for http://leagueoflegends.wikia.com/wiki/Item[Items].
-
-NOTE: `POST`, `PUT`, and `DELETE` methods are limited to an admin only
 
 [[resources-items-list]]
 === Listing Items
@@ -240,8 +236,6 @@ include::{snippets}/itemsFindBy/response-fields.adoc[]
 == Champions
 Resources for http://leagueoflegends.wikia.com/wiki/Champion[Champions].
 
-NOTE: `POST`, `PUT`, and `DELETE` methods are limited to an admin only
-
 [[resources-champions-list]]
 === Listing Champions
 A `GET` request is used to access all `Champion` s.
@@ -320,8 +314,6 @@ include::{snippets}/getTrollBuildForChampion/response-fields.adoc[]
 == Maps
 Resources for http://leagueoflegends.wikia.com/wiki/Field_of_Justice[Maps].
 
-NOTE: `POST`, `PUT`, and `DELETE` methods are limited to an admin only
-
 [[resources-maps-list]]
 === Listing Maps
 A `GET` request is used to access all `Map` s.
@@ -377,8 +369,6 @@ include::{snippets}/mapsFindBy/response-fields.adoc[]
 == Versions
 Resources for http://leagueoflegends.wikia.com/wiki/Patch[Versions].
 
-NOTE: `POST`, `PUT`, and `DELETE` methods are limited to an admin only
-
 [[resources-versions-list]]
 === Listing Versions
 A `GET` request is used to access all `Versions` s. Will only list the latest version.
@@ -411,8 +401,6 @@ include::{snippets}/getVersion/response-fields.adoc[]
 [[resources-builds]]
 == Builds
 Resources for saved Builds.
-
-NOTE: `PUT` and `DELETE` methods are not exposed at all including to an admin
 
 [[resources-builds-list]]
 === Listing Builds
