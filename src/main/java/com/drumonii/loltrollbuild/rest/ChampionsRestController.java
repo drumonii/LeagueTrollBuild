@@ -68,15 +68,20 @@ public class ChampionsRestController {
 	}
 
 	/**
-	 * Gets a {@link Champion} by its ID. If not found, returns a 404, otherwise a 200.
+	 * Gets a {@link Champion} by either its ID or name. If not found, returns a 404, otherwise a 200.
 	 *
-	 * @param id the ID to lookup the {@link Champion}
+	 * @param value the value to lookup the {@link Champion}
 	 * @return the {@link Champion}
 	 */
-	@GetMapping(path = "/{id}")
-	public Champion getChampion(@PathVariable int id) {
-		Optional<Champion> champion = championsRepository.findById(id);
-		return champion.orElseThrow(() -> new ResourceNotFoundException("Unable to find a Champion with Id: " + id));
+	@GetMapping(path = "/{value}")
+	public Champion getChampion(@PathVariable String value) {
+		Optional<Champion> champion;
+		try {
+			champion = championsRepository.findById(Integer.valueOf(value));
+		} catch (NumberFormatException e) {
+			champion = championsRepository.findByName(value);
+		}
+		return champion.orElseThrow(() -> new ResourceNotFoundException("Unable to find a Champion with value: " + value));
 	}
 
 	/**

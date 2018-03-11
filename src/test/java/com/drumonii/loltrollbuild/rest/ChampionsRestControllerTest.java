@@ -99,6 +99,12 @@ public abstract class ChampionsRestControllerTest {
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
 				.andExpect(jsonPath("$.[*]").isNotEmpty());
+
+		// find with existing champion name
+		mockMvc.perform(get("/api/champions/{id}", poppy.getName()))
+				.andExpect(status().isOk())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(jsonPath("$.[*]").isNotEmpty());
 	}
 
 	@Test
