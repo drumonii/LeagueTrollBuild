@@ -126,7 +126,17 @@ public abstract class ChampionsRestControllerTest {
 	public void trollBuild() throws Exception {
 		Champion azir = championsResponse.getChampions().get("Azir");
 
+		// get with champion Id
 		mockMvc.perform(get("{apiPath}/champions/{id}/troll-build", apiPath, azir.getId())
+				.param("mapId", String.valueOf(HOWLING_ABYSS_ID)))
+				.andExpect(status().isOk())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+				.andExpect(jsonPath("$.items").exists())
+				.andExpect(jsonPath("$.summoner-spells").exists())
+				.andExpect(jsonPath("$.trinket").exists());
+
+		// get with champion name
+		mockMvc.perform(get("/api/champions/{id}/troll-build", azir.getName())
 				.param("mapId", String.valueOf(HOWLING_ABYSS_ID)))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))

@@ -97,15 +97,20 @@ public class ChampionsRestController {
 	/**
 	 * Generates the full troll build based on the specified {@link Champion} and map ID.
 	 *
-	 * @param id the {@link Champion} to create the troll build for
+	 * @param value the value to lookup the {@link Champion} to create the troll build for
 	 * @param mapId the map ID to generate the troll build
 	 * @return a {@link Map} of build type key with {@link List} of values.
 	 */
-	@GetMapping(path = "/{id}/troll-build")
-	public Map<String, List<?>> trollBuild(@PathVariable int id,
+	@GetMapping(path = "/{value}/troll-build")
+	public Map<String, List<?>> trollBuild(@PathVariable String value,
 			@RequestParam(required = false, defaultValue = SUMMONERS_RIFT_SID) int mapId) {
 		Map<String, List<?>> trollBuild = new HashMap<>();
-		Optional<Champion> champion = championsRepository.findById(id);
+		Optional<Champion> champion;
+		try {
+			champion = championsRepository.findById(Integer.valueOf(value));
+		} catch (NumberFormatException e) {
+			champion = championsRepository.findByName(value);
+		}
 		if (!champion.isPresent()) {
 			return trollBuild;
 		}
