@@ -8,13 +8,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.hateoas.MediaTypes;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
 
-import static com.drumonii.loltrollbuild.rest.VersionsRestController.PAGE_SIZE;
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -34,7 +33,7 @@ public abstract class VersionsRestControllerTest {
 	@Autowired
 	protected ObjectMapper objectMapper;
 
-	@Value("${spring.data.rest.base-path}")
+	@Value("${api.base-path}")
 	private String apiPath;
 
 	protected List<Version> versions;
@@ -46,32 +45,30 @@ public abstract class VersionsRestControllerTest {
 		// qbe
 		mockMvc.perform(get("{apiPath}/versions", apiPath))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaTypes.HAL_JSON_UTF8))
-				.andExpect(jsonPath("$._embedded.versions").exists())
-				.andExpect(jsonPath("$._embedded.versions[0].major", is(versions.get(0).getMajor())))
-				.andExpect(jsonPath("$._embedded.versions[0].minor", is(versions.get(0).getMinor())))
-				.andExpect(jsonPath("$._embedded.versions[0].revision", is(versions.get(0).getRevision())))
-				.andExpect(jsonPath("$._links").exists())
-				.andExpect(jsonPath("$._links.self").exists())
-				.andExpect(jsonPath("$._links.self.href").exists())
-				.andExpect(jsonPath("$.page").exists())
-				.andExpect(jsonPath("$.page.size", is(PAGE_SIZE)))
-				.andExpect(jsonPath("$.page.totalElements").exists())
-				.andExpect(jsonPath("$.page.totalPages").exists())
-				.andExpect(jsonPath("$.page.number").exists());
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(jsonPath("$.[0].major", is(versions.get(0).getMajor())))
+				.andExpect(jsonPath("$.[0].minor", is(versions.get(0).getMinor())))
+				.andExpect(jsonPath("$.[0].revision", is(versions.get(0).getRevision())));
 
 		// qbe with no results
 		mockMvc.perform(get("{apiPath}/versions", apiPath)
 				.param("patch", "1234"))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaTypes.HAL_JSON_UTF8))
-				.andExpect(jsonPath("$._embedded").doesNotExist())
-				.andExpect(jsonPath("$._links.self").exists())
-				.andExpect(jsonPath("$._links.self.href").exists())
-				.andExpect(jsonPath("$.page.size", is(PAGE_SIZE)))
-				.andExpect(jsonPath("$.page.totalElements").exists())
-				.andExpect(jsonPath("$.page.totalPages").exists())
-				.andExpect(jsonPath("$.page.number").exists());
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(content().json("[]"));
+	}
+
+	@Test
+	public void getVersion() throws Exception {
+		// find with non existing version
+		mockMvc.perform(get("{apiPath}/versions/{patch}", apiPath, "1234"))
+				.andExpect(status().isNotFound());
+
+		// find with existing version
+		mockMvc.perform(get("{apiPath}/versions/{patch}", apiPath, versions.get(0).getPatch()))
+				.andExpect(status().isOk())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(jsonPath("$.[*]").isNotEmpty());
 	}
 
 }

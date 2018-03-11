@@ -10,8 +10,6 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.rest.core.annotation.RepositoryRestResource;
-import org.springframework.data.rest.core.annotation.RestResource;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,7 +17,6 @@ import java.util.Optional;
 /**
  * JPA repository to the MAP table.
  */
-@RepositoryRestResource(path = "maps", collectionResourceRel = "maps")
 @CacheConfig(cacheNames = "maps")
 public interface MapsRepository extends JpaRepository<GameMap, Integer>, JpaSpecificationExecutor<GameMap> {
 
@@ -30,7 +27,6 @@ public interface MapsRepository extends JpaRepository<GameMap, Integer>, JpaSpec
 	 * @return only the eligible {@link List} of {@link GameMap}s
 	 */
 	@Query("select m from GameMap m where m.mapId in ('10', '11', '12') order by m.mapName")
-	@RestResource(exported = false)
 	@Cacheable(key = "#root.methodName")
 	List<GameMap> forTrollBuild();
 

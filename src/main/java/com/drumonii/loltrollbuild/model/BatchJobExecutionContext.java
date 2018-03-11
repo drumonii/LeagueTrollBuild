@@ -6,7 +6,6 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -28,7 +27,6 @@ public class BatchJobExecutionContext implements Serializable {
 	@OneToOne(fetch = FetchType.LAZY)
 	@PrimaryKeyJoinColumn
 	@JsonBackReference
-	@RestResource(exported = false)
 	@Getter @Setter private BatchJobExecution jobExecution;
 
 	@Column(name = "SHORT_CONTEXT", nullable = false, length = 2500)

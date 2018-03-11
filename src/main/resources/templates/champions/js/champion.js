@@ -97,8 +97,8 @@ $(function() {
                 'X-CSRF-TOKEN': /*[[${_csrf.token}]]*/ '_csrf.token'
             },
             success: function(data) {
-                var url = data['_links'].self.href;
-                $('#build-url-input').val(url.replace(new RegExp(/\/(api)/, 'g'), ''));
+				var baseUrl = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '');
+                $('#build-url-input').val(baseUrl + '/builds/' + data.id);
                 $('#build-submit-btn').addClass('disabled');
                 $('#build-submit-btn').text(/*[[#{builds.saved}]]*/ 'builds.saved');
             }

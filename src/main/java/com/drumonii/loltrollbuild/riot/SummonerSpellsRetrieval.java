@@ -3,13 +3,13 @@ package com.drumonii.loltrollbuild.riot;
 import com.drumonii.loltrollbuild.model.SummonerSpell;
 import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.repository.SummonerSpellsRepository;
+import com.drumonii.loltrollbuild.rest.status.ResourceNotFoundException;
 import com.drumonii.loltrollbuild.riot.api.ImageFetcher;
 import com.drumonii.loltrollbuild.riot.service.SummonerSpellsService;
 import com.drumonii.loltrollbuild.riot.service.VersionsService;
 import org.apache.commons.collections4.ListUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 

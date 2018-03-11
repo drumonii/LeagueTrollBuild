@@ -3,7 +3,6 @@ package com.drumonii.loltrollbuild.doc;
 import com.drumonii.loltrollbuild.model.*;
 import com.drumonii.loltrollbuild.repository.*;
 import com.drumonii.loltrollbuild.rest.*;
-import com.drumonii.loltrollbuild.rest.processor.*;
 import com.drumonii.loltrollbuild.riot.api.ChampionsResponse;
 import com.drumonii.loltrollbuild.riot.api.ItemsResponse;
 import com.drumonii.loltrollbuild.riot.api.MapsResponse;
@@ -17,10 +16,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
-import org.springframework.context.annotation.ComponentScan.Filter;
-import org.springframework.context.annotation.FilterType;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.restdocs.payload.FieldDescriptor;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -36,8 +32,6 @@ import static com.drumonii.loltrollbuild.util.GameMapUtil.HOWLING_ABYSS_SID;
 import static com.drumonii.loltrollbuild.util.GameMapUtil.SUMMONERS_RIFT_SID;
 import static com.drumonii.loltrollbuild.util.GameMapUtil.TWISTED_TREELINE_SID;
 import static org.assertj.core.api.Assertions.fail;
-import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.linkWithRel;
-import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.relaxedLinks;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.relaxedResponseFields;
@@ -49,21 +43,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @WebMvcRestTest( // below is a bit hard on the eyes...i apologize
 		controllers = { BuildsRestController.class, ChampionsRestController.class, ItemsRestController.class,
-				MapsRestController.class, SummonerSpellsRestController.class, VersionsRestController.class },
-		includeFilters = { @Filter(type = FilterType.ASSIGNABLE_TYPE, classes = BuildResourceProcessor.class),
-				@Filter(type = FilterType.ASSIGNABLE_TYPE, classes = ChampionResourceProcessor.class),
-				@Filter(type = FilterType.ASSIGNABLE_TYPE, classes = ItemResourceProcessor.class),
-				@Filter(type = FilterType.ASSIGNABLE_TYPE, classes = MapResourceProcessor.class),
-				@Filter(type = FilterType.ASSIGNABLE_TYPE, classes = SummonerSpellResourceProcessor.class),
-				@Filter(type = FilterType.ASSIGNABLE_TYPE, classes = VersionResourceProcessor.class) })
+				MapsRestController.class, SummonerSpellsRestController.class, VersionsRestController.class })
 @AutoConfigureRestDocs(outputDir = "build/generated-snippets", uriScheme = "https", uriHost = "loltrollbuild.com",
 		uriPort = 443)
 @TestPropertySource(properties = "riot.static-data.apiKey=API_KEY")
 @ActiveProfiles({ TESTING, STATIC_DATA })
 public class ApiDocumentation {
-
-	private final FieldDescriptor pageField =
-			fieldWithPath("page").description("Current page settings of the paginated results");
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -71,7 +56,7 @@ public class ApiDocumentation {
 	@Autowired
 	private ObjectMapper objectMapper;
 
-	@Value("${spring.data.rest.base-path}")
+	@Value("${api.base-path}")
 	private String apiPath;
 
 	@Autowired
@@ -133,19 +118,6 @@ public class ApiDocumentation {
 		}
 	}
 
-	@Test
-	public void index() throws Exception {
-		mockMvc.perform(get(apiPath))
-				.andExpect(status().isOk())
-				.andDo(document("index", relaxedLinks(
-						linkWithRel("summonerSpells").description("<<resources-summoner-spells, Summoner Spells resource>>"),
-						linkWithRel("items").description("<<resources-items, Items resource>>"),
-						linkWithRel("champions").description("<<resources-champions, Champions resource>>"),
-						linkWithRel("maps").description("<<resources-maps, Maps resource>>"),
-						linkWithRel("versions").description("<<resources-versions, Versions resource>>"),
-						linkWithRel("builds").description("<<resources-builds, Builds resource>>"))));
-	}
-
 	/*
 	 * Summoner Spells doc
 	 */
@@ -157,42 +129,40 @@ public class ApiDocumentation {
 		mockMvc.perform(get("{apiPath}/summoner-spells", apiPath))
 				.andExpect(status().isOk())
 				.andDo(document("getSummonerSpells", relaxedResponseFields(
-						fieldWithPath("_embedded.summonerSpells")
-								.description("An array of Summoner Spells"),
-						fieldWithPath("_embedded.summonerSpells[*].name")
+						fieldWithPath("[*].id")
+								.description("The Id of the Summoner Spell"),
+						fieldWithPath("[*].name")
 								.description("The name of the Summoner Spell"),
-						fieldWithPath("_embedded.summonerSpells[*].description")
+						fieldWithPath("[*].description")
 								.description("The description of the Summoner Spell"),
-						fieldWithPath("_embedded.summonerSpells[*].image")
+						fieldWithPath("[*].image")
 								.description("The image of the Summoner Spell"),
-						fieldWithPath("_embedded.summonerSpells[*].cooldown")
+						fieldWithPath("[*].cooldown")
 								.description("An array of cooldown values of the Summoner Spell"),
-						fieldWithPath("_embedded.summonerSpells[*].modes")
-								.description("An array of game modes eligible with the Summoner Spell"),
-						fieldWithPath("_links")
-								.description("Links to resources related to Summoner Spells"),
-						pageField)));
+						fieldWithPath("[*].key")
+								.description("The key of the Summoner Spell"),
+						fieldWithPath("[*].modes")
+								.description("An array of game modes eligible with the Summoner Spell"))));
 
 		summonerSpellsRepository.save(summonerSpellsResponse.getSummonerSpells().get("SummonerPoroThrow"));
 
 		mockMvc.perform(get("{apiPath}/summoner-spells?name={name}", apiPath, "poro"))
 				.andExpect(status().isOk())
 				.andDo(document("summonerSpellsFindBy", relaxedResponseFields(
-						fieldWithPath("_embedded.summonerSpells")
-								.description("An array of Summoner Spells").attributes(),
-						fieldWithPath("_embedded.summonerSpells[*].name")
+						fieldWithPath("[*].id")
+								.description("The ID of the Summoner Spell"),
+						fieldWithPath("[*].name")
 								.description("The name of the Summoner Spell"),
-						fieldWithPath("_embedded.summonerSpells[*].description")
+						fieldWithPath("[*].description")
 								.description("The description of the Summoner Spell"),
-						fieldWithPath("_embedded.summonerSpells[*].image")
+						fieldWithPath("[*].image")
 								.description("The image of the Summoner Spell"),
-						fieldWithPath("_embedded.summonerSpells[*].cooldown")
+						fieldWithPath("[*].cooldown")
 								.description("An array of cooldown values of the Summoner Spell"),
-						fieldWithPath("_embedded.summonerSpells[*].modes")
-								.description("An array of game modes eligible with the Summoner Spell"),
-						fieldWithPath("_links")
-								.description("Link to the self Summoner Spell"),
-						pageField)));
+						fieldWithPath("[*].key")
+								.description("The key of the Summoner Spell"),
+						fieldWithPath("[*].modes")
+								.description("An array of game modes eligible with the Summoner Spell"))));
 	}
 
 	@Test
@@ -203,6 +173,8 @@ public class ApiDocumentation {
 		mockMvc.perform(get("{apiPath}/summoner-spells/{id}", apiPath, teleport.getId()))
 				.andExpect(status().isOk())
 				.andDo(document("getSummonerSpell", relaxedResponseFields(
+						fieldWithPath("id")
+								.description("The Id of the Summoner Spell"),
 						fieldWithPath("name")
 								.description("The name of the Summoner Spell"),
 						fieldWithPath("description")
@@ -214,10 +186,7 @@ public class ApiDocumentation {
 						fieldWithPath("key")
 								.description("The key of the Summoner Spell"),
 						fieldWithPath("modes")
-								.description("An array of game modes eligible with the Summoner Spell"),
-						fieldWithPath("_links")
-								.description("Link to the self Summoner Spell"))));
-
+								.description("An array of game modes eligible with the Summoner Spell"))));
 	}
 
 	@Test
@@ -227,22 +196,20 @@ public class ApiDocumentation {
 		mockMvc.perform(get("{apiPath}/summoner-spells/for-troll-build?mode={mode}", apiPath, "CLASSIC"))
 				.andExpect(status().isOk())
 				.andDo(document("summonerSpellsForTrollBuild", relaxedResponseFields(
-						fieldWithPath("_embedded.summonerSpells")
-								.description("An array of Summoner Spells"),
-						fieldWithPath("_embedded.summonerSpells[*].name")
+						fieldWithPath("[*].id")
+								.description("The Id of the Summoner Spell"),
+						fieldWithPath("[*].name")
 								.description("The name of the Summoner Spell"),
-						fieldWithPath("_embedded.summonerSpells[*].description")
+						fieldWithPath("[*].description")
 								.description("The description of the Summoner Spell"),
-						fieldWithPath("_embedded.summonerSpells[*].image")
+						fieldWithPath("[*].image")
 								.description("The image of the Summoner Spell"),
-						fieldWithPath("_embedded.summonerSpells[*].cooldown")
+						fieldWithPath("[*].cooldown")
 								.description("An array of cooldown values of the Summoner Spell"),
-						fieldWithPath("_embedded.summonerSpells[*].key")
+						fieldWithPath("[*].key")
 								.description("The key of the Summoner Spell"),
-						fieldWithPath("_embedded.summonerSpells[*].modes")
-								.description("An array of game modes eligible with the Summoner Spell"),
-						fieldWithPath("_links")
-								.description("Links to resources related to Summoner Spells"))));
+						fieldWithPath("[*].modes")
+								.description("An array of game modes eligible with the Summoner Spell"))));
 	}
 
 	/*
@@ -256,62 +223,60 @@ public class ApiDocumentation {
 		mockMvc.perform(get("{apiPath}/items", apiPath))
 				.andExpect(status().isOk())
 				.andDo(document("getItems", relaxedResponseFields(
-						fieldWithPath("_embedded.items")
-								.description("An array of Items"),
-						fieldWithPath("_embedded.items[*].name")
+						fieldWithPath("[*].id")
+								.description("The Id of the Item"),
+						fieldWithPath("[*].name")
 								.description("The name of the Item"),
-						fieldWithPath("_embedded.items[*].group")
+						fieldWithPath("[*].group")
 								.description("The group of the Item"),
-						fieldWithPath("_embedded.items[*].consumed")
+						fieldWithPath("[*].consumed")
 								.description("Whether the Item is consumable"),
-						fieldWithPath("_embedded.items[*].description")
+						fieldWithPath("[*].description")
 								.description("The group of the Item"),
-						fieldWithPath("_embedded.items[*].from")
+						fieldWithPath("[*].from")
 								.description("An array of Item IDs that the Item is built from as part of the Item's recipe"),
-						fieldWithPath("_embedded.items[*].into")
+						fieldWithPath("[*].into")
 								.description("An array of Item IDs that the Item builds into as part of the Item's recipe"),
-						fieldWithPath("_embedded.items[*].requiredChampion")
+						fieldWithPath("[*].requiredChampion")
 								.description("The required champion of the Item"),
-						fieldWithPath("_embedded.items[*].maps")
+						fieldWithPath("[*].requiredAlly")
+								.description("The required ally champion of the Item"),
+						fieldWithPath("[*].maps")
 								.description("A map of Map IDs keys and boolean values whether the Item can be purchased in the Map"),
-						fieldWithPath("_embedded.items[*].image")
+						fieldWithPath("[*].image")
 								.description("The image of the Item"),
-						fieldWithPath("_embedded.items[*].gold")
-								.description("The gold of the Item"),
-						fieldWithPath("_links")
-								.description("Links to resources related to Items"),
-						pageField)));
+						fieldWithPath("[*].gold")
+								.description("The gold of the Item"))));
 
 		itemsRepository.save(itemsResponse.getItems().get("3069"));
 
 		mockMvc.perform(get("{apiPath}/items?name={name}", apiPath, "remnant"))
 				.andExpect(status().isOk())
 				.andDo(document("itemsFindBy", relaxedResponseFields(
-						fieldWithPath("_embedded.items")
-								.description("An array of Items"),
-						fieldWithPath("_embedded.items[*].name")
+						fieldWithPath("[*].id")
+								.description("The Id of the Item"),
+						fieldWithPath("[*].name")
 								.description("The name of the Item"),
-						fieldWithPath("_embedded.items[*].group")
+						fieldWithPath("[*].group")
 								.description("The group of the Item"),
-						fieldWithPath("_embedded.items[*].consumed")
+						fieldWithPath("[*].consumed")
 								.description("Whether the Item is consumable"),
-						fieldWithPath("_embedded.items[*].description")
+						fieldWithPath("[*].description")
 								.description("The group of the Item"),
-						fieldWithPath("_embedded.items[*].from")
+						fieldWithPath("[*].from")
 								.description("An array of Item IDs that the Item is built from as part of the Item's recipe"),
-						fieldWithPath("_embedded.items[*].into")
+						fieldWithPath("[*].into")
 								.description("An array of Item IDs that the Item builds into as part of the Item's recipe"),
-						fieldWithPath("_embedded.items[*].requiredChampion")
+						fieldWithPath("[*].requiredChampion")
 								.description("The required champion of the Item"),
-						fieldWithPath("_embedded.items[*].maps")
+						fieldWithPath("[*].requiredAlly")
+								.description("The required ally champion of the Item"),
+						fieldWithPath("[*].maps")
 								.description("A map of Map IDs keys and boolean values whether the Item can be purchased in the Map"),
-						fieldWithPath("_embedded.items[*].image")
+						fieldWithPath("[*].image")
 								.description("The image of the Item"),
-						fieldWithPath("_embedded.items[*].gold")
-								.description("The gold of the Item"),
-						fieldWithPath("_links")
-								.description("Links to resources related to Items"),
-						pageField)));
+						fieldWithPath("[*].gold")
+								.description("The gold of the Item"))));
 	}
 
 	@Test
@@ -321,6 +286,8 @@ public class ApiDocumentation {
 		mockMvc.perform(get("{apiPath}/items/{id}", apiPath, warmogs.getId()))
 				.andExpect(status().isOk())
 				.andDo(document("getItem", relaxedResponseFields(
+						fieldWithPath("id")
+								.description("The Id of the Item"),
 						fieldWithPath("name")
 								.description("The name of the Item"),
 						fieldWithPath("group")
@@ -342,9 +309,7 @@ public class ApiDocumentation {
 						fieldWithPath("image")
 								.description("The image of the Item"),
 						fieldWithPath("gold")
-								.description("The gold of the Item"),
-						fieldWithPath("_links")
-								.description("Links to resources related to Items"))));
+								.description("The gold of the Item"))));
 
 	}
 
@@ -355,30 +320,30 @@ public class ApiDocumentation {
 		mockMvc.perform(get("{apiPath}/items/boots?mapId={mapId}", apiPath, "11"))
 				.andExpect(status().isOk())
 				.andDo(document("bootsItems", relaxedResponseFields(
-						fieldWithPath("_embedded.items")
-								.description("An array of Items"),
-						fieldWithPath("_embedded.items[*].name")
+						fieldWithPath("[*].id")
+								.description("The Id of the Item"),
+						fieldWithPath("[*].name")
 								.description("The name of the Item"),
-						fieldWithPath("_embedded.items[*].group")
+						fieldWithPath("[*].group")
 								.description("The group of the Item"),
-						fieldWithPath("_embedded.items[*].consumed")
+						fieldWithPath("[*].consumed")
 								.description("Whether the Item is consumable"),
-						fieldWithPath("_embedded.items[*].description")
+						fieldWithPath("[*].description")
 								.description("The group of the Item"),
-						fieldWithPath("_embedded.items[*].from")
+						fieldWithPath("[*].from")
 								.description("An array of Item IDs that the Item is built from as part of the Item's recipe"),
-						fieldWithPath("_embedded.items[*].into")
+						fieldWithPath("[*].into")
 								.description("An array of Item IDs that the Item builds into as part of the Item's recipe"),
-						fieldWithPath("_embedded.items[*].requiredChampion")
+						fieldWithPath("[*].requiredChampion")
 								.description("The required champion of the Item"),
-						fieldWithPath("_embedded.items[*].maps")
+						fieldWithPath("[*].requiredAlly")
+								.description("The required ally champion of the Item"),
+						fieldWithPath("[*].maps")
 								.description("A map of Map IDs keys and boolean values whether the Item can be purchased in the Map"),
-						fieldWithPath("_embedded.items[*].image")
+						fieldWithPath("[*].image")
 								.description("The image of the Item"),
-						fieldWithPath("_embedded.items[*].gold")
-								.description("The gold of the Item"),
-						fieldWithPath("_links")
-								.description("Links to resources related to Items"))));
+						fieldWithPath("[*].gold")
+								.description("The gold of the Item"))));
 	}
 
 	@Test
@@ -388,30 +353,30 @@ public class ApiDocumentation {
 		mockMvc.perform(get("{apiPath}/items/trinkets?mapId={mapId}", apiPath, "11"))
 				.andExpect(status().isOk())
 				.andDo(document("trinketItems", relaxedResponseFields(
-						fieldWithPath("_embedded.items")
-								.description("An array of Items"),
-						fieldWithPath("_embedded.items[*].name")
+						fieldWithPath("[*].id")
+								.description("The ID of the Item"),
+						fieldWithPath("[*].name")
 								.description("The name of the Item"),
-						fieldWithPath("_embedded.items[*].group")
+						fieldWithPath("[*].group")
 								.description("The group of the Item"),
-						fieldWithPath("_embedded.items[*].consumed")
+						fieldWithPath("[*].consumed")
 								.description("Whether the Item is consumable"),
-						fieldWithPath("_embedded.items[*].description")
+						fieldWithPath("[*].description")
 								.description("The group of the Item"),
-						fieldWithPath("_embedded.items[*].from")
+						fieldWithPath("[*].from")
 								.description("An array of Item IDs that the Item is built from as part of the Item's recipe"),
-						fieldWithPath("_embedded.items[*].into")
+						fieldWithPath("[*].into")
 								.description("An array of Item IDs that the Item builds into as part of the Item's recipe"),
-						fieldWithPath("_embedded.items[*].requiredChampion")
+						fieldWithPath("[*].requiredChampion")
 								.description("The required champion of the Item"),
-						fieldWithPath("_embedded.items[*].maps")
+						fieldWithPath("[*].requiredAlly")
+								.description("The required ally champion of the Item"),
+						fieldWithPath("[*].maps")
 								.description("A map of Map IDs keys and boolean values whether the Item can be purchased in the Map"),
-						fieldWithPath("_embedded.items[*].image")
+						fieldWithPath("[*].image")
 								.description("The image of the Item"),
-						fieldWithPath("_embedded.items[*].gold")
-								.description("The gold of the Item"),
-						fieldWithPath("_links")
-								.description("Links to resources related to Items"))));
+						fieldWithPath("[*].gold")
+								.description("The gold of the Item"))));
 	}
 
 	@Test
@@ -421,30 +386,30 @@ public class ApiDocumentation {
 		mockMvc.perform(get("{apiPath}/items/viktor-only", apiPath))
 				.andExpect(status().isOk())
 				.andDo(document("viktorOnlyItems", relaxedResponseFields(
-						fieldWithPath("_embedded.items")
-								.description("An array of Items"),
-						fieldWithPath("_embedded.items[*].name")
+						fieldWithPath("[*].id")
+								.description("The Id of the Item"),
+						fieldWithPath("[*].name")
 								.description("The name of the Item"),
-						fieldWithPath("_embedded.items[*].group")
+						fieldWithPath("[*].group")
 								.description("The group of the Item"),
-						fieldWithPath("_embedded.items[*].consumed")
+						fieldWithPath("[*].consumed")
 								.description("Whether the Item is consumable"),
-						fieldWithPath("_embedded.items[*].description")
+						fieldWithPath("[*].description")
 								.description("The group of the Item"),
-						fieldWithPath("_embedded.items[*].from")
+						fieldWithPath("[*].from")
 								.description("An array of Item IDs that the Item is built from as part of the Item's recipe"),
-						fieldWithPath("_embedded.items[*].into")
+						fieldWithPath("[*].into")
 								.description("An array of Item IDs that the Item builds into as part of the Item's recipe"),
-						fieldWithPath("_embedded.items[*].requiredChampion")
+						fieldWithPath("[*].requiredChampion")
 								.description("The required champion of the Item"),
-						fieldWithPath("_embedded.items[*].maps")
+						fieldWithPath("[*].requiredAlly")
+								.description("The required ally champion of the Item"),
+						fieldWithPath("[*].maps")
 								.description("A map of Map IDs keys and boolean values whether the Item can be purchased in the Map"),
-						fieldWithPath("_embedded.items[*].image")
+						fieldWithPath("[*].image")
 								.description("The image of the Item"),
-						fieldWithPath("_embedded.items[*].gold")
-								.description("The gold of the Item"),
-						fieldWithPath("_links")
-								.description("Links to resources related to Items"))));
+						fieldWithPath("[*].gold")
+								.description("The gold of the Item"))));
 	}
 
 	@Test
@@ -454,30 +419,30 @@ public class ApiDocumentation {
 		mockMvc.perform(get("{apiPath}/items/for-troll-build?mapId={mapId}", apiPath, "11"))
 				.andExpect(status().isOk())
 				.andDo(document("itemsForTrollBuild", relaxedResponseFields(
-						fieldWithPath("_embedded.items")
-								.description("An array of Items"),
-						fieldWithPath("_embedded.items[*].name")
+						fieldWithPath("[*].id")
+								.description("The Id of the Item"),
+						fieldWithPath("[*].name")
 								.description("The name of the Item"),
-						fieldWithPath("_embedded.items[*].group")
+						fieldWithPath("[*].group")
 								.description("The group of the Item"),
-						fieldWithPath("_embedded.items[*].consumed")
+						fieldWithPath("[*].consumed")
 								.description("Whether the Item is consumable"),
-						fieldWithPath("_embedded.items[*].description")
+						fieldWithPath("[*].description")
 								.description("The group of the Item"),
-						fieldWithPath("_embedded.items[*].from")
+						fieldWithPath("[*].from")
 								.description("An array of Item IDs that the Item is built from as part of the Item's recipe"),
-						fieldWithPath("_embedded.items[*].into")
+						fieldWithPath("[*].into")
 								.description("An array of Item IDs that the Item builds into as part of the Item's recipe"),
-						fieldWithPath("_embedded.items[*].requiredChampion")
+						fieldWithPath("[*].requiredChampion")
 								.description("The required champion of the Item"),
-						fieldWithPath("_embedded.items[*].maps")
+						fieldWithPath("[*].requiredAlly")
+								.description("The required ally champion of the Item"),
+						fieldWithPath("[*].maps")
 								.description("A map of Map IDs keys and boolean values whether the Item can be purchased in the Map"),
-						fieldWithPath("_embedded.items[*].image")
+						fieldWithPath("[*].image")
 								.description("The image of the Item"),
-						fieldWithPath("_embedded.items[*].gold")
-								.description("The gold of the Item"),
-						fieldWithPath("_links")
-								.description("Links to resources related to Items"))));
+						fieldWithPath("[*].gold")
+								.description("The gold of the Item"))));
 	}
 
 	/*
@@ -491,58 +456,52 @@ public class ApiDocumentation {
 		mockMvc.perform(get("{apiPath}/champions", apiPath))
 				.andExpect(status().isOk())
 				.andDo(document("getChampions", relaxedResponseFields(
-						fieldWithPath("_embedded.champions")
-								.description("An array of Champions"),
-						fieldWithPath("_embedded.champions[*].key")
+						fieldWithPath("[*].id")
+								.description("The Id of the Champion"),
+						fieldWithPath("[*].key")
 								.description("The key of the Champion. Usually the same as the name"),
-						fieldWithPath("_embedded.champions[*].name")
+						fieldWithPath("[*].name")
 								.description("The name of the Champion"),
-						fieldWithPath("_embedded.champions[*].title")
+						fieldWithPath("[*].title")
 								.description("The title of the Champion"),
-						fieldWithPath("_embedded.champions[*].partype")
+						fieldWithPath("[*].partype")
 								.description("The ability resource of the Champion"),
-						fieldWithPath("_embedded.champions[*].passive")
+						fieldWithPath("[*].passive")
 								.description("The passive ability of the Champion"),
-						fieldWithPath("_embedded.champions[*].info")
+						fieldWithPath("[*].info")
 								.description("Statistical information of the Champion"),
-						fieldWithPath("_embedded.champions[*].spells")
+						fieldWithPath("[*].spells")
 								.description("Spell abilities of the Champion"),
-						fieldWithPath("_embedded.champions[*].image")
+						fieldWithPath("[*].image")
 								.description("The image of the Champion"),
-						fieldWithPath("_embedded.champions[*].tags")
-								.description("An array of tags of the Champion"),
-						fieldWithPath("_links")
-								.description("Links to resources related to Champions"),
-						pageField)));
+						fieldWithPath("[*].tags")
+								.description("An array of tags of the Champion"))));
 
 		championsRepository.save(championsResponse.getChampions().get("Blitzcrank"));
 
 		mockMvc.perform(get("{apiPath}/champions?name={name}", apiPath, "blitz"))
 				.andExpect(status().isOk())
 				.andDo(document("championsFindBy", relaxedResponseFields(
-						fieldWithPath("_embedded.champions")
-								.description("An array of Champions"),
-						fieldWithPath("_embedded.champions[*].key")
+						fieldWithPath("[*].id")
+								.description("The Id of the Champion"),
+						fieldWithPath("[*].key")
 								.description("The key of the Champion. Usually the same as the name"),
-						fieldWithPath("_embedded.champions[*].name")
+						fieldWithPath("[*].name")
 								.description("The name of the Champion"),
-						fieldWithPath("_embedded.champions[*].title")
+						fieldWithPath("[*].title")
 								.description("The title of the Champion"),
-						fieldWithPath("_embedded.champions[*].info")
+						fieldWithPath("[*].info")
 								.description("Statistical information of the Champion"),
-						fieldWithPath("_embedded.champions[*].spells")
+						fieldWithPath("[*].spells")
 								.description("Spell abilities of the Champion"),
-						fieldWithPath("_embedded.champions[*].passive")
+						fieldWithPath("[*].passive")
 								.description("The passive ability of the Champion"),
-						fieldWithPath("_embedded.champions[*].image")
+						fieldWithPath("[*].image")
 								.description("The image of the Champion"),
-						fieldWithPath("_embedded.champions[*].tags")
+						fieldWithPath("[*].tags")
 								.description("An array of tags of the Champion"),
-						fieldWithPath("_embedded.champions[*].partype")
-								.description("The ability resource of the Champion"),
-						fieldWithPath("_links")
-								.description("Links to resources related to Champions"),
-						pageField)));
+						fieldWithPath("[*].partype")
+								.description("The ability resource of the Champion"))));
 	}
 
 	@Test
@@ -552,6 +511,8 @@ public class ApiDocumentation {
 		mockMvc.perform(get("{apiPath}/champions/{id}", apiPath, talon.getId()))
 				.andExpect(status().isOk())
 				.andDo(document("getChampion", relaxedResponseFields(
+						fieldWithPath("id")
+								.description("The Id of the Champion"),
 						fieldWithPath("key")
 								.description("The key of the Champion. Usually the same as the name"),
 						fieldWithPath("name")
@@ -569,9 +530,16 @@ public class ApiDocumentation {
 						fieldWithPath("image")
 								.description("The image of the Champion"),
 						fieldWithPath("tags")
-								.description("An array of tags of the Champion"),
-						fieldWithPath("_links")
-								.description("Link to the self Champion"))));
+								.description("An array of tags of the Champion"))));
+	}
+
+	@Test
+	public void getTags() throws Exception {
+		championsRepository.save(championsResponse.getChampions().get("Nocturne"));
+
+		mockMvc.perform(get("{apiPath}/champions/tags", apiPath))
+				.andExpect(status().isOk())
+				.andDo(document("getChampionTags"));
 	}
 
 	@Test
@@ -597,7 +565,7 @@ public class ApiDocumentation {
 								.description("The Map Id. Defaults to Summoner's Rift if unspecified. See <<game-maps-table, Game Maps Table>> for Map IDs")
 								.optional()), relaxedResponseFields(
 						fieldWithPath("trinket")
-							.description("The trinket of the Troll Build"),
+								.description("The trinket of the Troll Build"),
 						fieldWithPath("summoner-spells")
 								.description("The Summoner Spells of the Troll Build"),
 						fieldWithPath("items")
@@ -615,30 +583,24 @@ public class ApiDocumentation {
 		mockMvc.perform(get("{apiPath}/maps", apiPath))
 				.andExpect(status().isOk())
 				.andDo(document("getMaps", relaxedResponseFields(
-						fieldWithPath("_embedded.maps")
-								.description("An array of Maps"),
-						fieldWithPath("_embedded.maps[*].mapName")
+						fieldWithPath("[*].mapId")
+								.description("The Id of the Map"),
+						fieldWithPath("[*].mapName")
 								.description("The name of the Map"),
-						fieldWithPath("_embedded.maps[*].image")
-								.description("The image of the Map"),
-						fieldWithPath("_links")
-								.description("Links to resources related to Maps"),
-						pageField)));
+						fieldWithPath("[*].image")
+								.description("The image of the Map"))));
 
 		mapsRepository.save(mapsResponse.getMaps().get(TWISTED_TREELINE_SID));
 
 		mockMvc.perform(get("{apiPath}/maps?mapName={mapName}", apiPath, "treeline"))
 				.andExpect(status().isOk())
 				.andDo(document("mapsFindBy", relaxedResponseFields(
-						fieldWithPath("_embedded.maps")
-								.description("An array of Maps"),
-						fieldWithPath("_embedded.maps[*].mapName")
+						fieldWithPath("[*].mapId")
+								.description("The Id of the Map"),
+						fieldWithPath("[*].mapName")
 								.description("The name of the Map"),
-						fieldWithPath("_embedded.maps[*].image")
-								.description("The image of the Map"),
-						fieldWithPath("_links")
-								.description("Links to resources related to Maps"),
-						pageField)));
+						fieldWithPath("[*].image")
+								.description("The image of the Map"))));
 	}
 
 	@Test
@@ -649,12 +611,12 @@ public class ApiDocumentation {
 		mockMvc.perform(get("{apiPath}/maps/{id}", apiPath, summonersRift.getMapId()))
 				.andExpect(status().isOk())
 				.andDo(document("getMap", relaxedResponseFields(
+						fieldWithPath("mapId")
+								.description("The Id of the Map"),
 						fieldWithPath("mapName")
 								.description("The name of the Map"),
 						fieldWithPath("image")
-								.description("The image of the Map"),
-						fieldWithPath("_links")
-								.description("Links to resources related to Maps"))));
+								.description("The image of the Map"))));
 	}
 
 	/*
@@ -668,34 +630,31 @@ public class ApiDocumentation {
 		mockMvc.perform(get("{apiPath}/versions", apiPath))
 				.andExpect(status().isOk())
 				.andDo(document("getVersions", relaxedResponseFields(
-						fieldWithPath("_embedded.versions")
-								.description("An array of Versions"),
-						fieldWithPath("_embedded.versions[*].major")
+						fieldWithPath("[*].patch")
+								.description("The patch number"),
+						fieldWithPath("[*].major")
 								.description("The major version number of the Version"),
-						fieldWithPath("_embedded.versions[*].minor")
+						fieldWithPath("[*].minor")
 								.description("The minor version number of the Map"),
-						fieldWithPath("_embedded.versions[*].revision")
-								.description("The revision version number of the Version"),
-						fieldWithPath("_links")
-								.description("Links to resources related to Version"),
-						pageField)));
+						fieldWithPath("[*].revision")
+								.description("The revision version number of the Version"))));
 	}
 
 	@Test
 	public void getVersion() throws Exception {
 		Version version = versionsRepository.save(versions.get(0));
 
-		mockMvc.perform(get("{apiPath}/versions/{version}", apiPath, version.getPatch()))
+		mockMvc.perform(get("{apiPath}/versions/{version}/", apiPath, version.getPatch()))
 				.andExpect(status().isOk())
 				.andDo(document("getVersion", relaxedResponseFields(
+						fieldWithPath("patch")
+								.description("The patch number"),
 						fieldWithPath("major")
 								.description("The major version number of the Version"),
 						fieldWithPath("minor")
 								.description("The minor version number of the Map"),
 						fieldWithPath("revision")
-								.description("The revision version number of the Version"),
-						fieldWithPath("_links")
-								.description("Link to the self Version"))));
+								.description("The revision version number of the Version"))));
 	}
 
 	/*
@@ -721,35 +680,32 @@ public class ApiDocumentation {
 		mockMvc.perform(get("{apiPath}/builds", apiPath))
 				.andExpect(status().isOk())
 				.andDo(document("getBuilds", relaxedResponseFields(
-						fieldWithPath("_embedded.builds")
-								.description("An array of Builds"),
-						fieldWithPath("_embedded.builds[*].createdDate")
+						fieldWithPath("content.[*].id")
+								.description("The Id of the Build"),
+						fieldWithPath("content.[*].createdDate")
 								.description("The date the Build was created"),
-						fieldWithPath("_embedded.builds[*].champion")
+						fieldWithPath("content.[*].champion")
 								.description("The Champion Id of the Build"),
-						fieldWithPath("_embedded.builds[*].item1")
+						fieldWithPath("content.[*].item1")
 								.description("The Item 1 Id (boots) of the Build"),
-						fieldWithPath("_embedded.builds[*].item2")
+						fieldWithPath("content.[*].item2")
 								.description("The Item 2 Id of the Build"),
-						fieldWithPath("_embedded.builds[*].item3")
+						fieldWithPath("content.[*].item3")
 								.description("The Item 3 Id of the Build"),
-						fieldWithPath("_embedded.builds[*].item4")
+						fieldWithPath("content.[*].item4")
 								.description("The Item 4 Id of the Build"),
-						fieldWithPath("_embedded.builds[*].item5")
+						fieldWithPath("content.[*].item5")
 								.description("The Item 5 Id of the Build"),
-						fieldWithPath("_embedded.builds[*].item6")
+						fieldWithPath("content.[*].item6")
 								.description("The Item 6 Id of the Build"),
-						fieldWithPath("_embedded.builds[*].summonerSpell1")
+						fieldWithPath("content.[*].summonerSpell1")
 								.description("The Summoner Spell 1 Id of the Build"),
-						fieldWithPath("_embedded.builds[*].summonerSpell2")
+						fieldWithPath("content.[*].summonerSpell2")
 								.description("The Summoner Spell 2 Id of the Build"),
-						fieldWithPath("_embedded.builds[*].trinket")
+						fieldWithPath("content.[*].trinket")
 								.description("The Trinket Id of the Build"),
-						fieldWithPath("_embedded.builds[*].map")
-								.description("The Map Id of the Build"),
-						fieldWithPath("_links")
-								.description("Links to resources related to Builds"),
-						pageField)));
+						fieldWithPath("content.[*].map")
+								.description("The Map Id of the Build"))));
 	}
 
 	@Test
@@ -771,6 +727,8 @@ public class ApiDocumentation {
 		mockMvc.perform(get("{apiPath}/builds/{id}", apiPath, build.getId()))
 				.andExpect(status().isOk())
 				.andDo(document("getBuild", relaxedResponseFields(
+						fieldWithPath(".id")
+								.description("The Id of the Build"),
 						fieldWithPath("createdDate")
 								.description("The date the Build was created"),
 						fieldWithPath("champion")
@@ -794,9 +752,7 @@ public class ApiDocumentation {
 						fieldWithPath("trinket")
 								.description("The Trinket Id of the Build"),
 						fieldWithPath("map")
-								.description("The Map Id of the Build"),
-						fieldWithPath("_links")
-								.description("Links to resources related to Builds"))));
+								.description("The Map Id of the Build"))));
 	}
 
 }

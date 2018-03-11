@@ -6,7 +6,6 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -33,7 +32,6 @@ public class BatchStepExecution implements Serializable {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "JOB_EXECUTION_ID", nullable = false)
 	@JsonBackReference
-	@RestResource(exported = false)
 	@Getter @Setter private BatchJobExecution jobExecution;
 
 	@Column(name = "STEP_NAME", nullable = false, length = 100)

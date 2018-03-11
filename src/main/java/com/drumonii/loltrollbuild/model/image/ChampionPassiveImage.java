@@ -8,7 +8,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -30,7 +29,6 @@ public class ChampionPassiveImage extends Image implements Serializable {
 	@OneToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "CHAMPION_ID")
 	@JsonBackReference
-	@RestResource(exported = false)
 	@Getter @Setter private ChampionPassive passive;
 
 }

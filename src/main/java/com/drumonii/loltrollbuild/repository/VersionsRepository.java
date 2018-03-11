@@ -7,7 +7,6 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.rest.core.annotation.RestResource;
 
 import java.util.List;
 
@@ -27,7 +26,6 @@ public interface VersionsRepository extends JpaRepository<Version, String> {
 			"select v.patch, v.major, v.minor, v.revision from Version v " +
 			"order by v.major desc, v.minor desc, v.revision desc limit 1",
 			nativeQuery = true)
-	@RestResource(exported = false)
 	@Cacheable
 	Version latestVersion();
 

@@ -126,31 +126,10 @@ $(function() {
 	});
     // Champions from the db
     var dataTable = $('#champions').DataTable({
-        processing: true,
-        serverSide: true,
         order: [ [1, 'asc'] ],
-        ajax: function(data, callback, settings) {
-            var sorts = [];
-            $.each(data.order, function (i, order) {
-                if (data.columns[order.column].orderable) {
-                    sorts.push(data.columns[order.column].data + ',' + order.dir);
-                }
-            });
-            var parameters = {};
-            if (data.search.value) {
-                var searches = JSON.parse(data.search.value);
-                parameters[searches.column] = searches.values;
-            }
-            parameters['page'] = Math.ceil(data.start / data.length);
-            parameters['size'] = data.length;
-            parameters['sort'] = sorts;
-            $.get(/*[[@{/api/champions}]]*/ '/api/champions', $.param(parameters, true), function(json) {
-                    callback({ draw: data.draw, recordsTotal: json.page.totalElements,
-                        recordsFiltered: json.page.totalElements,
-                        data: json._embedded === undefined ? {} : json._embedded.champions
-                    });
-                }
-            );
+        ajax: {
+            url: /*[[@{/api/champions}]]*/ '/api/champions',
+			dataSrc: ''
         },
         columnDefs: [
             { orderable: false, targets: [0, 3, 5, 6] }
@@ -158,8 +137,7 @@ $(function() {
         columns: [
             { data: null,
                 render: function(data, type, full, meta) {
-                    var href = data._links.self.href;
-                    var id = href.substring(href.lastIndexOf('/') + 1, href.length);
+                    var id = data.id;
                     var img = data.image.full;
                     return $('<img>', {
                         'class': 'ui rounded image',
@@ -172,20 +150,20 @@ $(function() {
             { data: 'title' },
             { data: 'tags[, ]' },
             { data: 'partype' },
-            { data: '_links.self.href',
+            { data: 'id',
                 render: function(data, type, full, meta) {
                     var button = $('<button>', {
-                        'data-champion-id': data.substring(data.lastIndexOf('/') + 1, data.length),
+                        'data-champion-id': data,
                         'class': 'ui secondary button',
                         text: /*[[#{admin.champion.overwrite}]]*/ 'admin.champion.overwrite'
                     });
                     return button.wrap('<span>').parent().html();
                 }
             },
-            { data: '_links.self.href',
+            { data: 'id',
                 render: function(data, type, full, meta) {
                     var button = $('<button>', {
-                        'data-champion-id': data.substring(data.lastIndexOf('/') + 1, data.length),
+                        'data-champion-id': data,
                         'class': 'negative ui button',
                         text: /*[[#{admin.champion.delete}]]*/ 'admin.champion.delete'
                     });
@@ -209,16 +187,7 @@ $(function() {
         }
     });
     $('.champions-search-input').keyup(function() {
-        var inputs = [];
-        $('.champions-search-input').each(function() {
-            if ($(this).val()) {
-				inputs.push(JSON.stringify({
-					column: $(this).data('column-name'),
-					values: $(this).val()
-				}));
-            }
-        });
-        dataTable.search(inputs).draw();
+		dataTable.column($(this).data('column-index')).search($(this).val()).draw();
     });
     $('#champions tbody').on('click', '.secondary', function(event) {
         $.ajax({

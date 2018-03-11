@@ -34,6 +34,9 @@ riot:
     summoner-spells-img: /cdn/{version}/img/spell/{summonerSpellImgFull}
     versions: /api/versions.json
 
+api:
+  base-path: /api
+
 # ======================
 # Spring Boot Properties
 # ======================
@@ -41,8 +44,6 @@ riot:
 spring:
   # Spring active profile
   profiles.active: external, ddragon
-  # Data REST base URI
-  data.rest.base-path: /api
   # Internalization
   messages.basename: i18n/messages
   # Thymeleaf

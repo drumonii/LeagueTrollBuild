@@ -2,7 +2,6 @@ package com.drumonii.loltrollbuild.rest;
 
 import com.drumonii.loltrollbuild.model.GameMap;
 import com.drumonii.loltrollbuild.repository.MapsRepository;
-import com.drumonii.loltrollbuild.rest.processor.MapResourceProcessor;
 import com.drumonii.loltrollbuild.riot.api.MapsResponse;
 import com.drumonii.loltrollbuild.test.rest.WebMvcRestTest;
 import com.drumonii.loltrollbuild.util.RandomizeUtil;
@@ -11,22 +10,17 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.ComponentScan.Filter;
-import org.springframework.context.annotation.FilterType;
-import org.springframework.hateoas.MediaTypes;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static com.drumonii.loltrollbuild.rest.MapsRestController.PAGE_SIZE;
-import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@WebMvcRestTest(controllers = MapsRestController.class,
-		includeFilters = @Filter(type = FilterType.ASSIGNABLE_TYPE, classes = MapResourceProcessor.class))
+@WebMvcRestTest(controllers = MapsRestController.class)
 public abstract class MapsRestControllerTest {
 
 	@Autowired
@@ -38,7 +32,7 @@ public abstract class MapsRestControllerTest {
 	@Autowired
 	protected ObjectMapper objectMapper;
 
-	@Value("${spring.data.rest.base-path}")
+	@Value("${api.base-path}")
 	private String apiPath;
 
 	protected MapsResponse mapsResponse;
@@ -52,44 +46,45 @@ public abstract class MapsRestControllerTest {
 		// qbe
 		mockMvc.perform(get("{apiPath}/maps", apiPath))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaTypes.HAL_JSON_UTF8))
-				.andExpect(jsonPath("$._embedded.maps").exists())
-				.andExpect(jsonPath("$._links").exists())
-				.andExpect(jsonPath("$._links.self").exists())
-				.andExpect(jsonPath("$._links.self.href").exists())
-				.andExpect(jsonPath("$.page").exists())
-				.andExpect(jsonPath("$.page.size", is(PAGE_SIZE)))
-				.andExpect(jsonPath("$.page.totalElements").exists())
-				.andExpect(jsonPath("$.page.totalPages").exists())
-				.andExpect(jsonPath("$.page.number").exists());
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(jsonPath("$.[*]").isNotEmpty());
 
 		// qbe with name
 		mockMvc.perform(get("{apiPath}/maps", apiPath)
 				.param("mapName", map.getMapName().toLowerCase()))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaTypes.HAL_JSON_UTF8))
-				.andExpect(jsonPath("$._embedded.maps").exists())
-				.andExpect(jsonPath("$._links").exists())
-				.andExpect(jsonPath("$._links.self").exists())
-				.andExpect(jsonPath("$._links.self.href").exists())
-				.andExpect(jsonPath("$.page").exists())
-				.andExpect(jsonPath("$.page.size", is(PAGE_SIZE)))
-				.andExpect(jsonPath("$.page.totalElements").exists())
-				.andExpect(jsonPath("$.page.totalPages").exists())
-				.andExpect(jsonPath("$.page.number").exists());
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(jsonPath("$.[*]").isNotEmpty());
 
 		// qbe with no results
 		mockMvc.perform(get("{apiPath}/maps", apiPath)
 				.param("mapName", "abcd1234"))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaTypes.HAL_JSON_UTF8))
-				.andExpect(jsonPath("$._embedded").doesNotExist())
-				.andExpect(jsonPath("$._links.self").exists())
-				.andExpect(jsonPath("$._links.self.href").exists())
-				.andExpect(jsonPath("$.page.size", is(PAGE_SIZE)))
-				.andExpect(jsonPath("$.page.totalElements").exists())
-				.andExpect(jsonPath("$.page.totalPages").exists())
-				.andExpect(jsonPath("$.page.number").exists());
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(content().json("[]"));
+	}
+
+	@Test
+	public void getGameMap() throws Exception {
+		// find with non existing map Id
+		mockMvc.perform(get("{apiPath}/maps/{id}", apiPath, 0))
+				.andExpect(status().isNotFound());
+
+		GameMap butchersBridge = mapsResponse.getMaps().get("14");
+
+		// find with existing map Id
+		mockMvc.perform(get("{apiPath}/maps/{id}", apiPath, butchersBridge.getMapId()))
+				.andExpect(status().isOk())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(jsonPath("$.[*]").isNotEmpty());
+	}
+
+	@Test
+	public void getForTrollBuild() throws Exception {
+		mockMvc.perform(get("{apiPath}/maps/for-troll-build", apiPath))
+				.andExpect(status().isOk())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(jsonPath("$.[*]").isNotEmpty());
 	}
 
 }

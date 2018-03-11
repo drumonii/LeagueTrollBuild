@@ -12,7 +12,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import org.springframework.data.rest.core.annotation.RestResource;
 
 import java.util.List;
 import java.util.Optional;
@@ -30,7 +29,6 @@ public interface ChampionsRepository extends JpaRepository<Champion, Integer>, J
 	 * @return a {@link Champion} from its name
 	 */
 	@Query("select c from Champion c where lower(c.name) = lower(:name) or lower(c.key) = lower(:name)")
-	@RestResource(exported = false)
 	@Cacheable
 	Optional<Champion> findByName(@Param("name") String name);
 
@@ -40,7 +38,6 @@ public interface ChampionsRepository extends JpaRepository<Champion, Integer>, J
 	 * @return the {@link List} of string tags
 	 */
 	@Query(value = "select distinct c.tag from champion_tag c order by c.tag", nativeQuery = true)
-	@RestResource(exported = false)
 	@Cacheable(key = "#root.methodName")
 	List<String> getTags();
 

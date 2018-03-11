@@ -1,8 +1,10 @@
 package com.drumonii.loltrollbuild.test.rest;
 
-import com.drumonii.loltrollbuild.config.*;
+import com.drumonii.loltrollbuild.config.CacheConfig;
+import com.drumonii.loltrollbuild.config.JpaConfig;
+import com.drumonii.loltrollbuild.config.RiotApiConfig;
+import com.drumonii.loltrollbuild.config.WebSecurityConfig;
 import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
-import org.springframework.boot.autoconfigure.data.rest.RepositoryRestMvcAutoConfiguration;
 import org.springframework.boot.autoconfigure.data.web.SpringDataWebAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.OverrideAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.core.AutoConfigureCache;
@@ -14,7 +16,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureWebM
 import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.annotation.AliasFor;
-import org.springframework.data.web.config.HateoasAwareSpringDataWebConfiguration;
 import org.springframework.test.context.BootstrapWith;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,9 +38,8 @@ import java.lang.annotation.*;
 @AutoConfigureWebMvc
 @AutoConfigureWebClient
 @AutoConfigureMockMvc(secure = false)
-@ImportAutoConfiguration({ RepositoryRestMvcAutoConfiguration.class, SpringDataWebAutoConfiguration.class })
-@Import({ CacheConfig.class, DataRestConfig.class, HateoasAwareSpringDataWebConfiguration.class, JpaConfig.class,
-		RiotApiConfig.class, WebSecurityConfig.class })
+@ImportAutoConfiguration({ SpringDataWebAutoConfiguration.class })
+@Import({ CacheConfig.class, JpaConfig.class, RiotApiConfig.class, WebSecurityConfig.class })
 public @interface WebMvcRestTest {
 
 	/**

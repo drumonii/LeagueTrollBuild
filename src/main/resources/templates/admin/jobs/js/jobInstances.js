@@ -4,27 +4,24 @@ $(function() {
         serverSide: true,
         order: [ [1, 'desc'] ],
         ajax: function(data, callback, settings) {
-            var sorts = [];
-            $.each(data.order, function (i, order) {
-                if (data.columns[order.column].orderable) {
-                    sorts.push(data.columns[order.column].data + ',' + order.dir);
-                }
-            });
-            var parameters = {};
-            if (data.search.value) {
-                var searches = data.search.value.split(',');
-                $.each(searches, function(index, value) {
-                    var search = value.split('|');
-                    parameters[search[0]] = search[1];
-                });
-            }
+			var sorts = [];
+			$.each(data.order, function (i, order) {
+				if (data.columns[order.column].orderable) {
+					sorts.push(data.columns[order.column].data + ',' + order.dir);
+				}
+			});
+			var parameters = {};
+			if (data.search.value) {
+				var searches = JSON.parse(data.search.value);
+				parameters[searches.column] = searches.values;
+			}
             parameters['page'] = Math.ceil(data.start / data.length);
             parameters['size'] = data.length;
             parameters['sort'] = sorts;
             $.get(/*[[@{/api/job-instances}]]*/ '/api/job-instances', $.param(parameters, true), function(json) {
-                    callback({ draw: data.draw, recordsTotal: json.page.totalElements,
-                        recordsFiltered: json.page.totalElements,
-                        data: json._embedded === undefined ? {} : json._embedded.jobInstances
+                    callback({ draw: data.draw, recordsTotal: json.totalElements,
+                        recordsFiltered: json.totalElements,
+                        data: json.content
                     });
                 }
             );
@@ -48,12 +45,12 @@ $(function() {
             { data: 'jobExecution.startTime' },
             { data: 'jobExecution.endTime' },
             { data: 'jobExecution.status' },
-            { data: '_links.self.href',
+            { data: 'id',
                 render: function(data, type, full, meta) {
-                    var ctx = /*[[@{/admin/job-instances}]]*/ '/admin/job-instances';
+                    var ctx = /*[[@{/admin/job-instances/}]]*/ '/admin/job-instances/';
                     var a = $('<a/>', {
                         'class': 'ui button',
-                        href: ctx + data.substring(data.lastIndexOf('/')) + '/step-executions',
+                        href: ctx + data + '/step-executions',
                         text: /*[[#{admin.stepExecutions}]]*/ 'admin.stepExecutions'
                     });
                     return a.wrap('<span>').parent().html()
@@ -76,12 +73,15 @@ $(function() {
         }
     });
     $('.job-instances-search-input').keyup(function() {
-        var inputs = [];
-        $('.job-instances-search-input').each(function() {
-            if ($(this).val()) {
-                inputs.push($(this).data('column-name') + '|' + $(this).val());
-            }
-        });
-        dataTable.search(inputs).draw();
+		var inputs = [];
+		$('.job-instances-search-input').each(function() {
+			if ($(this).val()) {
+				inputs.push(JSON.stringify({
+					column: $(this).data('column-name'),
+					values: $(this).val()
+				}));
+			}
+		});
+		dataTable.search(inputs).draw();
     });
 });

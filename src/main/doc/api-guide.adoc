@@ -41,26 +41,6 @@ Use of HTTP status codes in the API
 [[resources]]
 = Resources
 
-[[resources-index]]
-== Index
-The index `/api` provides the entry point into the API.
-
-[[resources-index-access]]
-=== Accessing the Index
-A `GET` request is used to access the index.
-include::{snippets}/index/http-request.adoc[]
-
-==== Example Usage
-Usage with `CURL`:
-include::{snippets}/index/curl-request.adoc[]
-
-==== Response Structure
-include::{snippets}/index/http-response.adoc[]
-
-[[resources-index-links]]
-==== Links
-include::{snippets}/index/links.adoc[]
-
 [[resources-summoner-spells]]
 == Summoner Spells
 Resources for http://leagueoflegends.wikia.com/wiki/Summoner_spell[Summoner Spells].

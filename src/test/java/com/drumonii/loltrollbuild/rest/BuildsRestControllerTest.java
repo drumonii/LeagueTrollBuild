@@ -1,8 +1,7 @@
 package com.drumonii.loltrollbuild.rest;
 
-import com.drumonii.loltrollbuild.model.Build;
+import com.drumonii.loltrollbuild.model.*;
 import com.drumonii.loltrollbuild.repository.BuildsRepository;
-import com.drumonii.loltrollbuild.rest.processor.BuildResourceProcessor;
 import com.drumonii.loltrollbuild.riot.api.ChampionsResponse;
 import com.drumonii.loltrollbuild.riot.api.ItemsResponse;
 import com.drumonii.loltrollbuild.riot.api.MapsResponse;
@@ -13,16 +12,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.ComponentScan.Filter;
-import org.springframework.context.annotation.FilterType;
-import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static com.drumonii.loltrollbuild.rest.BuildsRestController.PAGE_SIZE;
 import static com.drumonii.loltrollbuild.util.GameMapUtil.SUMMONERS_RIFT_SID;
-import static org.hamcrest.Matchers.is;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -31,8 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@WebMvcRestTest(controllers = BuildsRestController.class,
-		includeFilters = @Filter(type = FilterType.ASSIGNABLE_TYPE, classes = BuildResourceProcessor.class))
+@WebMvcRestTest(controllers = BuildsRestController.class)
 public abstract class BuildsRestControllerTest {
 
 	@Autowired
@@ -44,7 +38,7 @@ public abstract class BuildsRestControllerTest {
 	@Autowired
 	protected ObjectMapper objectMapper;
 
-	@Value("${spring.data.rest.base-path}")
+	@Value("${api.base-path}")
 	private String apiPath;
 
 	protected ChampionsResponse championsResponse;
@@ -59,15 +53,35 @@ public abstract class BuildsRestControllerTest {
 		// qbe
 		mockMvc.perform(get("{apiPath}/builds", apiPath))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaTypes.HAL_JSON_UTF8))
-				.andExpect(jsonPath("$._embedded.builds").exists())
-				.andExpect(jsonPath("$._links.self").exists())
-				.andExpect(jsonPath("$._links.self.href").exists())
-				.andExpect(jsonPath("$.page").exists())
-				.andExpect(jsonPath("$.page.size", is(PAGE_SIZE)))
-				.andExpect(jsonPath("$.page.totalElements").exists())
-				.andExpect(jsonPath("$.page.totalPages").exists())
-				.andExpect(jsonPath("$.page.number").exists());
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(jsonPath("$.[*]").isNotEmpty());
+	}
+
+	@Test
+	public void getBuild() throws Exception {
+		// find with non existing build Id
+		mockMvc.perform(get("{apiPath}/builds/{id}", apiPath, 0))
+				.andExpect(status().isNotFound());
+
+		Build build = new Build();
+		build.setChampionId(championsResponse.getChampions().get("Zed").getId());
+		build.setItem1Id(itemsResponse.getItems().get("3117").getId());
+		build.setItem2Id(itemsResponse.getItems().get("3194").getId());
+		build.setItem3Id(itemsResponse.getItems().get("3193").getId());
+		build.setItem4Id(itemsResponse.getItems().get("3036").getId());
+		build.setItem5Id(itemsResponse.getItems().get("3812").getId());
+		build.setItem6Id(itemsResponse.getItems().get("3092").getId());
+		build.setSummonerSpell1Id(summonerSpellsResponse.getSummonerSpells().get("SummonerSmite").getId());
+		build.setSummonerSpell2Id(summonerSpellsResponse.getSummonerSpells().get("SummonerMana").getId());
+		build.setTrinketId(itemsResponse.getItems().get("3364").getId());
+		build.setMapId(mapsResponse.getMaps().get(SUMMONERS_RIFT_SID).getMapId());
+		build = buildsRepository.save(build);
+
+		// find with existing build Id
+		mockMvc.perform(get("{apiPath}/builds/{id}", apiPath, build.getId()))
+				.andExpect(status().isOk())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(jsonPath("$.[*]").isNotEmpty());
 	}
 
 	@Test
@@ -80,24 +94,51 @@ public abstract class BuildsRestControllerTest {
 				.content(objectMapper.writeValueAsString(build)))
 				.andExpect(status().isBadRequest());
 
-		build.setChampionId(championsResponse.getChampions().get("Nasus").getId());
-		build.setItem1Id(itemsResponse.getItems().get("3009").getId());
-		build.setItem2Id(itemsResponse.getItems().get("3001").getId());
-		build.setItem3Id(itemsResponse.getItems().get("3089").getId());
-		build.setItem4Id(itemsResponse.getItems().get("3056").getId());
-		build.setItem5Id(itemsResponse.getItems().get("3083").getId());
-		build.setItem6Id(itemsResponse.getItems().get("3092").getId());
-		build.setSummonerSpell1Id(summonerSpellsResponse.getSummonerSpells().get("SummonerTeleport").getId());
+		Champion tahmKench = championsResponse.getChampions().get("TahmKench");
+		Item item1 = itemsResponse.getItems().get("3009");
+		Item item2 = itemsResponse.getItems().get("3001");
+		Item item3 = itemsResponse.getItems().get("3056");
+		Item item4 = itemsResponse.getItems().get("3009");
+		Item item5 = itemsResponse.getItems().get("3083");
+		Item item6 = itemsResponse.getItems().get("3092");
+		SummonerSpell summonerSpell1 = summonerSpellsResponse.getSummonerSpells().get("SummonerTeleport");
+		SummonerSpell summonerSpell2 = summonerSpellsResponse.getSummonerSpells().get("SummonerHaste");
+		Item trinket = itemsResponse.getItems().get("3340");
+		GameMap map = mapsResponse.getMaps().get(SUMMONERS_RIFT_SID);
+
+		build.setChampionId(tahmKench.getId());
+		build.setItem1Id(item1.getId());
+		build.setItem2Id(item2.getId());
+		build.setItem3Id(item3.getId());
+		build.setItem4Id(item4.getId());
+		build.setItem5Id(item5.getId());
+		build.setItem6Id(item6.getId());
+		build.setSummonerSpell1Id(summonerSpell1.getId());
 		build.setSummonerSpell2Id(summonerSpellsResponse.getSummonerSpells().get("SummonerHaste").getId());
 		build.setTrinketId(itemsResponse.getItems().get("3340").getId());
-		build.setMapId(mapsResponse.getMaps().get(SUMMONERS_RIFT_SID).getMapId());
+		build.setMapId(map.getMapId());
 
 		// Save full build
 		mockMvc.perform(post("{apiPath}/builds", apiPath).with(csrf())
 				.contentType(MediaType.APPLICATION_JSON_UTF8)
 				.content(objectMapper.writeValueAsString(build)))
 				.andExpect(status().isCreated())
-				.andExpect(content().contentType(MediaTypes.HAL_JSON_UTF8));
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(jsonPath("$.[*]").isNotEmpty());
+
+		assertThat(buildsRepository.findAll())
+				.filteredOn(savedBuild -> savedBuild.getChampionId() == tahmKench.getId() &&
+						savedBuild.getItem1Id() == item1.getId() &&
+						savedBuild.getItem2Id() == item2.getId() &&
+						savedBuild.getItem3Id() == item3.getId() &&
+						savedBuild.getItem4Id() == item4.getId() &&
+						savedBuild.getItem5Id() == item5.getId() &&
+						savedBuild.getItem6Id() == item6.getId() &&
+						savedBuild.getSummonerSpell1Id() == summonerSpell1.getId() &&
+						savedBuild.getSummonerSpell2Id() == summonerSpell2.getId() &&
+						savedBuild.getTrinketId() == trinket.getId() &&
+						savedBuild.getMapId() == map.getMapId())
+				.isNotEmpty();
 	}
 
 }

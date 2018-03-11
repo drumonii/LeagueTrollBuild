@@ -7,6 +7,7 @@ import com.drumonii.loltrollbuild.repository.ItemsRepository;
 import com.drumonii.loltrollbuild.repository.MapsRepository;
 import com.drumonii.loltrollbuild.repository.SummonerSpellsRepository;
 import com.drumonii.loltrollbuild.rest.specification.ChampionsSpecification;
+import com.drumonii.loltrollbuild.rest.status.ResourceNotFoundException;
 import com.drumonii.loltrollbuild.util.ChampionUtil;
 import com.drumonii.loltrollbuild.util.GameMapUtil;
 import com.drumonii.loltrollbuild.util.RandomizeUtil;
@@ -14,13 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.ExampleMatcher.GenericPropertyMatcher;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
-import org.springframework.data.rest.webmvc.RepositoryRestController;
-import org.springframework.data.web.PageableDefault;
-import org.springframework.data.web.PagedResourcesAssembler;
-import org.springframework.hateoas.PagedResources;
-import org.springframework.hateoas.Resource;
+import org.springframework.data.web.SortDefault;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -31,11 +28,8 @@ import static com.drumonii.loltrollbuild.util.GameMapUtil.SUMMONERS_RIFT_SID;
  * Repository REST controller for {@link Champion}s.
  */
 @RestController
-@RequestMapping("/${spring.data.rest.base-path}/champions")
-@RepositoryRestController
+@RequestMapping("/${api.base-path}/champions")
 public class ChampionsRestController {
-
-	static final int PAGE_SIZE = 20;
 
 	private static final int ITEMS_SIZE = 6;
 	private static final int SPELLS_SIZE = 2;
@@ -52,20 +46,16 @@ public class ChampionsRestController {
 	@Autowired
 	private MapsRepository mapsRepository;
 
-	@Autowired
-	private PagedResourcesAssembler<Champion> pagedAssembler;
-
 	/**
-	 * Gets a {@link PagedResources} of {@link Champion} {@link Resource} from the pagination and search parameters.
+	 * Gets a {@link List} of {@link Champion}s from the sort and search parameters.
 	 *
-	 * @param pageable the {@link Pageable}
+	 * @param sort the {@link Sort}
 	 * @param champion the search {@link Champion} to define as the QBE
-	 * @return the {@link PagedResources} of {@link Champion} {@link Resource}
+	 * @return the {@link List} of {@link Champion}s
 	 */
 	@GetMapping
-	public PagedResources<Resource<Champion>> getChampions(
-			@PageableDefault(size = PAGE_SIZE, sort = "name", direction = Direction.ASC) Pageable pageable,
-			Champion champion) {
+	public List<Champion> getChampions(
+			@SortDefault(sort = "name", direction = Direction.ASC) Sort sort, Champion champion) {
 		ExampleMatcher exampleMatcher = ExampleMatcher.matching()
 				.withMatcher("name", GenericPropertyMatcher::contains)
 				.withMatcher("title", GenericPropertyMatcher::contains)
@@ -74,7 +64,29 @@ public class ChampionsRestController {
 				.withIgnorePaths("id", "version")
 				.withIgnoreNullValues();
 		Example<Champion> example = Example.of(champion, exampleMatcher);
-		return pagedAssembler.toResource(championsRepository.findAll(new ChampionsSpecification(example), pageable));
+		return championsRepository.findAll(new ChampionsSpecification(example), sort);
+	}
+
+	/**
+	 * Gets a {@link Champion} by its ID. If not found, returns a 404, otherwise a 200.
+	 *
+	 * @param id the ID to lookup the {@link Champion}
+	 * @return the {@link Champion}
+	 */
+	@GetMapping(path = "/{id}")
+	public Champion getChampion(@PathVariable int id) {
+		Optional<Champion> champion = championsRepository.findById(id);
+		return champion.orElseThrow(() -> new ResourceNotFoundException("Unable to find a Champion with Id: " + id));
+	}
+
+	/**
+	 * Gets the distinct {@link List} of {@link Champion} tags.
+	 *
+	 * @return the {@link List} of tags
+	 */
+	@GetMapping(path = "/tags")
+	public List<String> getTags() {
+		return championsRepository.getTags();
 	}
 
 	/**

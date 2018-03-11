@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
-import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -45,7 +44,6 @@ public class ChampionSpell implements Serializable {
 
 	@ManyToOne(optional = false)
 	@JsonBackReference
-	@RestResource(exported = false)
 	@Getter @Setter private Champion champion;
 
 }

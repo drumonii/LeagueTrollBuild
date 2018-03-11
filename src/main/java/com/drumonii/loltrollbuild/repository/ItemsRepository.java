@@ -12,7 +12,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import org.springframework.data.rest.core.annotation.RestResource;
 
 import java.util.List;
 import java.util.Optional;
@@ -36,7 +35,6 @@ public interface ItemsRepository extends JpaRepository<Item, Integer>, JpaSpecif
 		   "where i.id <> 1001 and f in ('1001') " +
 		   "and (key(m) <> :mapId and m = false) " +
 		   "group by i.id")
-	@RestResource(exported = false)
 	@Cacheable(key = "{#root.methodName, #mapId}")
 	List<Item> boots(@Param("mapId") int mapId);
 
@@ -52,7 +50,6 @@ public interface ItemsRepository extends JpaRepository<Item, Integer>, JpaSpecif
 		   "and i.gold.total = 0 and i.gold.purchasable = true " +
 	       "and (key(m) <> :mapId and m = false) " +
 		   "group by i.id")
-	@RestResource(exported = false)
 	@Cacheable(key = "{#root.methodName, #mapId}")
 	List<Item> trinkets(@Param("mapId") int mapId);
 
@@ -63,7 +60,6 @@ public interface ItemsRepository extends JpaRepository<Item, Integer>, JpaSpecif
 	 * @see <a href="http://leagueoflegends.wikia.com/wiki/Viktor">Viktor</a>
 	 */
 	@Query("select i from Item i where i.requiredChampion = 'Viktor'")
-	@RestResource(exported = false)
 	@Cacheable(key = "#root.methodName")
 	List<Item> viktorOnly();
 
@@ -86,7 +82,6 @@ public interface ItemsRepository extends JpaRepository<Item, Integer>, JpaSpecif
 		   "and i.requiredAlly is null " +
 		   "and i.requiredChampion is null " +
 		   "and i.name not like 'Enchantment%' and i.name not like 'Doran%' and i.name not like '%(Quick Charge)'")
-	@RestResource(exported = false)
 	@Cacheable(key = "{#root.methodName, #mapId}")
 	List<Item> forTrollBuild(@Param("mapId") int mapId);
 

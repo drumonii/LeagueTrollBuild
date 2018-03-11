@@ -38,7 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	public static final String ADMIN_ROLE = "ADMIN";
 
-	@Value("${spring.data.rest.base-path}/**")
+	@Value("${api.base-path}/**")
 	private String apiPath;
 
 	@Override

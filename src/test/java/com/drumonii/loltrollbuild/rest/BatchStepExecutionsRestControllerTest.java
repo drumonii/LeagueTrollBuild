@@ -1,7 +1,6 @@
 package com.drumonii.loltrollbuild.rest;
 
 import com.drumonii.loltrollbuild.annotation.WithMockAdminUser;
-import com.drumonii.loltrollbuild.rest.processor.BatchStepExecutionResourceProcessor;
 import com.drumonii.loltrollbuild.riot.service.*;
 import com.drumonii.loltrollbuild.test.rest.WebMvcRestTest;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -18,9 +17,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan.Filter;
-import org.springframework.context.annotation.FilterType;
-import org.springframework.hateoas.MediaTypes;
+import org.springframework.http.MediaType;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.MetaDataAccessException;
@@ -42,8 +39,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@WebMvcRestTest(controllers = BatchStepExecutionsRestController.class,
-		includeFilters = @Filter(type = FilterType.ASSIGNABLE_TYPE, classes = BatchStepExecutionResourceProcessor.class))
+@WebMvcRestTest(controllers = BatchStepExecutionsRestController.class)
 @ActiveProfiles({ TESTING })
 public class BatchStepExecutionsRestControllerTest {
 
@@ -77,7 +73,7 @@ public class BatchStepExecutionsRestControllerTest {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
-	@Value("${spring.data.rest.base-path}")
+	@Value("${api.base-path}")
 	private String apiPath;
 
 	private JobInstance jobInstance;
@@ -107,15 +103,12 @@ public class BatchStepExecutionsRestControllerTest {
 	@WithMockAdminUser
 	@Test
 	public void getBatchStepExecutions() throws Exception {
-		mockMvc.perform(get(apiPath + "/job-instances/{jobInstanceId}/step-executions", jobInstance.getId()))
+		mockMvc.perform(get("{apiPath}/job-instances/{jobInstanceId}/step-executions", apiPath, jobInstance.getId()))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaTypes.HAL_JSON_UTF8))
-				.andExpect(jsonPath("$._embedded.stepExecutions", hasSize(1)))
-				.andExpect(jsonPath("$._links").exists())
-				.andExpect(jsonPath("$._links.self").exists())
-				.andExpect(jsonPath("$._links.self.href").exists());
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(jsonPath("$.[*]", hasSize(1)));
 
-		mockMvc.perform(get(apiPath + "/job-instances/{jobInstanceId}/step-executions", -1))
+		mockMvc.perform(get("{apiPath}//job-instances/{jobInstanceId}/step-executions", apiPath, -1))
 				.andExpect(status().isNotFound());
 	}
 
@@ -125,10 +118,8 @@ public class BatchStepExecutionsRestControllerTest {
 		mockMvc.perform(get("{apiPath}/job-instances/{jobInstanceId}/step-executions/{stepExecutionId}", apiPath,
 				jobInstance.getId(), stepExecution.getId()))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaTypes.HAL_JSON_UTF8))
-				.andExpect(jsonPath("$._links").exists())
-				.andExpect(jsonPath("$._links.self").exists())
-				.andExpect(jsonPath("$._links.self.href").exists());
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(jsonPath("$..*").isNotEmpty());
 
 		mockMvc.perform(get("{apiPath}/job-instances/{jobInstanceId}/step-executions/{stepExecutionId}", apiPath, -1, -1))
 				.andExpect(status().isNotFound());

@@ -150,31 +150,10 @@ $(function() {
 	});
     // Items from the db
     var dataTable = $('#items').DataTable({
-        processing: true,
-        serverSide: true,
         order: [ [1, 'asc'] ],
-        ajax: function(data, callback, settings) {
-            var sorts = [];
-            $.each(data.order, function (i, order) {
-                if (data.columns[order.column].orderable) {
-                    sorts.push(data.columns[order.column].data + ',' + order.dir);
-                }
-            });
-            var parameters = {};
-			if (data.search.value) {
-				var searches = JSON.parse(data.search.value);
-				parameters[searches.column] = searches.values;
-			}
-            parameters['page'] = Math.ceil(data.start / data.length);
-            parameters['size'] = data.length;
-            parameters['sort'] = sorts;
-            $.get(/*[[@{/api/items}]]*/ '/api/items', $.param(parameters, true), function(json) {
-                    callback({ draw: data.draw, recordsTotal: json.page.totalElements,
-                        recordsFiltered: json.page.totalElements,
-                        data: json._embedded === undefined ? {} : json._embedded.items
-                    });
-                }
-            );
+        ajax: {
+            url: /*[[@{/api/items}]]*/ '/api/items',
+			dataSrc: ''
         },
         columnDefs: [
             { orderable: false, targets: [0, 4, 5, 6] }
@@ -208,20 +187,20 @@ $(function() {
 					return getMaps(data);
                 }
             },
-            { data: '_links.self.href',
+            { data: 'id',
                 render: function(data, type, full, meta) {
                     var button = $('<button>', {
-                        'data-item-id': data.substring(data.lastIndexOf('/') + 1, data.length),
+                        'data-item-id': data,
                         'class': 'ui secondary button',
                         text: /*[[#{admin.item.overwrite}]]*/ 'admin.item.overwrite'
                     });
                     return button.wrap('<span>').parent().html();
                 }
             },
-            { data: '_links.self.href',
+            { data: 'id',
                 render: function(data, type, full, meta) {
                     var button = $('<button>', {
-                        'data-item-id': data.substring(data.lastIndexOf('/') + 1, data.length),
+                        'data-item-id': data,
                         'class': 'negative ui button',
                         text: /*[[#{admin.item.delete}]]*/ 'admin.item.delete'
                     });
@@ -248,16 +227,7 @@ $(function() {
         }
     });
     $('.items-search-input').keyup(function() {
-        var inputs = [];
-        $('.items-search-input').each(function() {
-            if ($(this).val()) {
-				inputs.push(JSON.stringify({
-					column: $(this).data('column-name'),
-					values: $(this).val()
-				}));
-            }
-        });
-        dataTable.search(inputs).draw();
+		dataTable.column($(this).data('column-index')).search($(this).val()).draw();
     });
     $('#items tbody').on('click', '.secondary', function(event) {
         $.ajax({

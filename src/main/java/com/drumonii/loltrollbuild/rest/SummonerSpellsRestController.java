@@ -4,76 +4,70 @@ import com.drumonii.loltrollbuild.model.SummonerSpell;
 import com.drumonii.loltrollbuild.model.SummonerSpell.GameMode;
 import com.drumonii.loltrollbuild.repository.SummonerSpellsRepository;
 import com.drumonii.loltrollbuild.rest.specification.SummonerSpellsSpecification;
+import com.drumonii.loltrollbuild.rest.status.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.ExampleMatcher.GenericPropertyMatcher;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
-import org.springframework.data.rest.webmvc.RepositoryRestController;
-import org.springframework.data.web.PageableDefault;
-import org.springframework.data.web.PagedResourcesAssembler;
-import org.springframework.hateoas.PagedResources;
-import org.springframework.hateoas.Resource;
-import org.springframework.hateoas.Resources;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.web.SortDefault;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.stream.Collectors;
-
-import static org.springframework.hateoas.mvc.BasicLinkBuilder.linkToCurrentMapping;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * Repository REST controller for {@link SummonerSpell}s.
  */
 @RestController
-@RequestMapping("/${spring.data.rest.base-path}/summoner-spells")
-@RepositoryRestController
+@RequestMapping("/${api.base-path}/summoner-spells")
 public class SummonerSpellsRestController {
-
-	static final int PAGE_SIZE = 20;
 
 	@Autowired
 	private SummonerSpellsRepository summonerSpellsRepository;
 
-	@Autowired
-	private PagedResourcesAssembler<SummonerSpell> pagedAssembler;
-
 	/**
-	 * Gets a {@link PagedResources} of {@link SummonerSpell} {@link Resource} from the pagination and search parameters.
+	 * Gets a {@link List} of {@link SummonerSpell}s from the sort and search parameters.
 	 *
-	 * @param pageable the {@link Pageable}
+	 * @param sort the {@link Sort}
 	 * @param summonerSpell the search {@link SummonerSpell} to define as the QBE
-	 * @return the {@link PagedResources} of {@link SummonerSpell} {@link Resource}
+	 * @return the {@link List} of {@link SummonerSpell}s
 	 */
 	@GetMapping
-	public PagedResources<Resource<SummonerSpell>> getSummonerSpells(
-			@PageableDefault(size = PAGE_SIZE, sort = "name", direction = Direction.ASC) Pageable pageable,
-			SummonerSpell summonerSpell) {
+	public List<SummonerSpell> getSummonerSpells(
+			@SortDefault(sort = "name", direction = Direction.ASC) Sort sort, SummonerSpell summonerSpell) {
 		ExampleMatcher exampleMatcher = ExampleMatcher.matching()
 				.withMatcher("name", GenericPropertyMatcher::contains)
 				.withIgnoreCase()
 				.withIgnorePaths("id", "version")
 				.withIgnoreNullValues();
 		Example<SummonerSpell> example = Example.of(summonerSpell, exampleMatcher);
-		return pagedAssembler.toResource(summonerSpellsRepository.findAll(new SummonerSpellsSpecification(example), pageable));
+		return summonerSpellsRepository.findAll(new SummonerSpellsSpecification(example), sort);
 	}
 
 	/**
-	 * Gets a {@link Resources} of {@link SummonerSpell} {@link Resource} for the troll build based on the specified
-	 * {@link GameMode}. See {@link SummonerSpellsRepository#forTrollBuild(GameMode mode)} for details on data retrieved.
+	 * Gets a {@link SummonerSpell} by its ID. If not found, returns a 404, otherwise a 200.
+	 *
+	 * @param id the ID to lookup the {@link SummonerSpell}
+	 * @return the {@link SummonerSpell}
+	 */
+	@GetMapping(path = "/{id}")
+	public SummonerSpell getSummonerSpell(@PathVariable int id) {
+		Optional<SummonerSpell> summonerSpell = summonerSpellsRepository.findById(id);
+		return summonerSpell.orElseThrow(() -> new ResourceNotFoundException("Unable to find a Summoner Spell with Id: " + id));
+	}
+
+	/**
+	 * Gets a {@link List} of {@link SummonerSpell}s for the troll build based on the specified {@link GameMode}. See
+	 * {@link SummonerSpellsRepository#forTrollBuild(GameMode mode)} for details on data retrieved.
 	 *
 	 * @param mode the {@link GameMode} to get eligible {@link SummonerSpell}s for the troll build
-	 * @return the {@link Resources} of {@link SummonerSpell} {@link Resource}
+	 * @return the {@link List} of {@link SummonerSpell}s
 	 */
 	@GetMapping(path = "/for-troll-build")
-	public Resources<Resource<SummonerSpell>> getForTrollBuild(
-			@RequestParam(required = false, defaultValue = "CLASSIC") GameMode mode) {
-		return new Resources<>(summonerSpellsRepository.forTrollBuild(mode).stream()
-				.map(spell -> new Resource<>(spell))
-				.collect(Collectors.toList()), linkToCurrentMapping().withSelfRel());
+	public List<SummonerSpell> getForTrollBuild(@RequestParam(required = false, defaultValue = "CLASSIC") GameMode mode) {
+		return summonerSpellsRepository.forTrollBuild(mode);
 	}
 
 }

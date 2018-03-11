@@ -12,8 +12,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import org.springframework.data.rest.core.annotation.RepositoryRestResource;
-import org.springframework.data.rest.core.annotation.RestResource;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,7 +19,6 @@ import java.util.Optional;
 /**
  * JPA repository to the SUMMONER_SPELL table.
  */
-@RepositoryRestResource(path = "summoner-spells")
 @CacheConfig(cacheNames = "summonerSpells")
 public interface SummonerSpellsRepository extends JpaRepository<SummonerSpell, Integer>, JpaSpecificationExecutor<SummonerSpell> {
 
@@ -35,7 +32,6 @@ public interface SummonerSpellsRepository extends JpaRepository<SummonerSpell, I
 	@Query("select s from SummonerSpell s join s.modes m " +
 		   "where m in (:mode) " +
 	       "group by s.id")
-	@RestResource(exported = false)
 	@Cacheable(key = "{#root.methodName, #mode}")
 	List<SummonerSpell> forTrollBuild(@Param("mode") GameMode mode);
 

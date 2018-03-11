@@ -3,11 +3,8 @@ package com.drumonii.loltrollbuild.rest;
 import com.drumonii.loltrollbuild.model.BatchJobInstance;
 import com.drumonii.loltrollbuild.model.BatchStepExecution;
 import com.drumonii.loltrollbuild.repository.BatchStepExecutionsRepository;
+import com.drumonii.loltrollbuild.rest.status.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.rest.webmvc.RepositoryRestController;
-import org.springframework.data.rest.webmvc.ResourceNotFoundException;
-import org.springframework.hateoas.Resource;
-import org.springframework.hateoas.Resources;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,16 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-
-import static org.springframework.hateoas.mvc.BasicLinkBuilder.linkToCurrentMapping;
 
 /**
  * Repository REST controller for {@link BatchStepExecution}s.
  */
 @RestController
-@RequestMapping("/${spring.data.rest.base-path}/job-instances/{jobInstanceId}/step-executions")
-@RepositoryRestController
+@RequestMapping("/${api.base-path}/job-instances/{jobInstanceId}/step-executions")
 @PreAuthorize("hasRole('ADMIN')")
 public class BatchStepExecutionsRestController {
 
@@ -36,17 +29,15 @@ public class BatchStepExecutionsRestController {
 	 * Gets {@link BatchStepExecution} from its {@link BatchJobInstance} looked up by the job instance Id, if found.
 	 *
 	 * @param jobInstanceId the job instance Id to lookup
-	 * @return the {@link Resources} of {@link BatchStepExecution} {@link Resource}
+	 * @return the {@link List} of {@link BatchStepExecution}
 	 */
 	@GetMapping
-	public Resources<Resource<BatchStepExecution>> getBatchStepExecutions(@PathVariable long jobInstanceId) {
+	public List<BatchStepExecution> getBatchStepExecutions(@PathVariable long jobInstanceId) {
 		List<BatchStepExecution> stepExecutions = batchStepExecutionsRepository.findByJobInstanceId(jobInstanceId);
 		if (stepExecutions.isEmpty()) {
 			throw new ResourceNotFoundException("Unable to find Batch Step Execution with Job Instance Id: " + jobInstanceId);
 		}
-		return new Resources<>(stepExecutions.stream()
-				.map(item -> new Resource<>(item))
-				.collect(Collectors.toList()), linkToCurrentMapping().withSelfRel());
+		return stepExecutions;
 	}
 
 	/**
@@ -54,17 +45,14 @@ public class BatchStepExecutionsRestController {
 	 *
 	 * @param jobInstanceId the job instance Id to lookup
 	 * @param stepExecutionId the step execution Id to lookup
-	 * @return the {@link BatchStepExecution} {@link Resource}
+	 * @return the {@link BatchStepExecution}
 	 */
-	@GetMapping(value = "/{stepExecutionId}")
-	public Resource<BatchStepExecution> getBatchStepExecution(@PathVariable long jobInstanceId,
+	@GetMapping(path = "/{stepExecutionId}")
+	public BatchStepExecution getBatchStepExecution(@PathVariable long jobInstanceId,
 			@PathVariable long stepExecutionId) {
 		Optional<BatchStepExecution> stepExecution = batchStepExecutionsRepository.findById(stepExecutionId);
-		if (!stepExecution.isPresent()) {
-			throw new ResourceNotFoundException("Unable to find Batch Step Execution with Job Instance Id: " +
-					jobInstanceId + " and Step Execution Id: " + stepExecutionId);
-		}
-		return new Resource<>(stepExecution.get());
+		return stepExecution.orElseThrow(() -> new ResourceNotFoundException("Unable to find Batch Step Execution with Job Instance Id: " +
+				jobInstanceId + " and Step Execution Id: " + stepExecutionId));
 	}
 
 }
