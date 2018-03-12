@@ -10,7 +10,6 @@ import com.drumonii.loltrollbuild.riot.service.SummonerSpellsService;
 import com.drumonii.loltrollbuild.test.batch.BatchTest;
 import com.drumonii.loltrollbuild.util.RandomizeUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.commons.lang3.RandomUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.batch.core.BatchStatus;
@@ -92,8 +91,9 @@ public abstract class SummonerSpellsRetrievalJobConfigTest {
 
 		List<SummonerSpell> summonerSpells = summonerSpellsRepository.saveAll(summonerSpellsWithModes);
 
+		int index = (int) (Math.random() * (summonerSpells.size() - 1)) + 1;
 		Optional<SummonerSpell> summonerSpellToEdit =
-				summonerSpellsRepository.findById(summonerSpellsWithModes.get(RandomUtils.nextInt(1, summonerSpells.size())).getId());
+				summonerSpellsRepository.findById(summonerSpellsWithModes.get(index).getId());
 		if (!summonerSpellToEdit.isPresent()) {
 			fail("Unable to get a random Summoner Spell to edit");
 		}

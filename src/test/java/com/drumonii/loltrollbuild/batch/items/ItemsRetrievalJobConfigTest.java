@@ -10,7 +10,6 @@ import com.drumonii.loltrollbuild.riot.service.ItemsService;
 import com.drumonii.loltrollbuild.test.batch.BatchTest;
 import com.drumonii.loltrollbuild.util.RandomizeUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.commons.lang3.RandomUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.batch.core.BatchStatus;
@@ -82,7 +81,8 @@ public abstract class ItemsRetrievalJobConfigTest {
 
 		List<Item> items = itemsRepository.saveAll(itemsResponse.getItems().values());
 
-		Optional<Item> itemToEdit = itemsRepository.findById(items.get(RandomUtils.nextInt(1, items.size())).getId());
+		int index = (int) (Math.random() * (items.size() - 1)) + 1;
+		Optional<Item> itemToEdit = itemsRepository.findById(items.get(index).getId());
 		if (!itemToEdit.isPresent()) {
 			fail("Unable to get a random Item to edit");
 		}

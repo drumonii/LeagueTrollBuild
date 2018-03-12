@@ -10,7 +10,6 @@ import com.drumonii.loltrollbuild.riot.service.MapsService;
 import com.drumonii.loltrollbuild.test.batch.BatchTest;
 import com.drumonii.loltrollbuild.util.RandomizeUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.commons.lang3.RandomUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.batch.core.BatchStatus;
@@ -82,7 +81,8 @@ public abstract class MapsRetrievalJobConfigTest {
 
 		List<GameMap> maps = mapsRepository.saveAll(mapsResponse.getMaps().values());
 
-		Optional<GameMap> mapToEdit = mapsRepository.findById(maps.get(RandomUtils.nextInt(1, maps.size())).getMapId());
+		int index = (int) (Math.random() * (maps.size() - 1)) + 1;
+		Optional<GameMap> mapToEdit = mapsRepository.findById(maps.get(index).getMapId());
 		if (!mapToEdit.isPresent()) {
 			fail("Unable to get a random Map to edit");
 		}

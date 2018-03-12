@@ -10,7 +10,6 @@ import com.drumonii.loltrollbuild.riot.service.ChampionsService;
 import com.drumonii.loltrollbuild.test.batch.BatchTest;
 import com.drumonii.loltrollbuild.util.RandomizeUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.commons.lang3.RandomUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.batch.core.BatchStatus;
@@ -83,8 +82,9 @@ public abstract class ChampionsRetrievalJobConfigTest {
 
 		List<Champion> champions = championsRepository.saveAll(championsResponse.getChampions().values());
 
+		int index = (int) (Math.random() * (champions.size() - 1)) + 1;
 		Optional<Champion> championToEdit =
-				championsRepository.findById(champions.get(RandomUtils.nextInt(1, champions.size())).getId());
+				championsRepository.findById(champions.get(index).getId());
 		if (!championToEdit.isPresent()) {
 			fail("Unable to get a random Champion to edit");
 		}
