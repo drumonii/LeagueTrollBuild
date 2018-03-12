@@ -65,12 +65,6 @@ management:
       base-path: /admin/actuator
       exposure:
         include: env, flyway, health, metrics
-#Wro4j
-wro4j:
-  filter-url: /assets
-  manager-factory:
-    pre-processors: cssMinJawr, jsMin
-  debug: false
 
 ---
 
@@ -127,9 +121,6 @@ spring:
         id.new_generator_mappings: true
         hbm2ddl.auto:
         temp.use_jdbc_metadata_defaults: false
-#Wro4j
-wro4j:
-  resource-watcher-update-period: 5
 
 ---
 

@@ -3,7 +3,6 @@ package com.drumonii.loltrollbuild.rest;
 import com.drumonii.loltrollbuild.annotation.WithMockAdminUser;
 import com.drumonii.loltrollbuild.riot.service.*;
 import com.drumonii.loltrollbuild.test.rest.WebMvcRestTest;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -72,15 +71,15 @@ public class BatchJobInstancesRestControllerTest {
 	@Before
 	public void before() {
 		JobParameters jobParameters = new JobParametersBuilder()
-				.addString("someJobParameter", RandomStringUtils.randomAlphabetic(15))
+				.addString("someJobParameter", "someJobParameterValue")
 				.toJobParameters();
 
-		jobInstance = jobInstanceDao.createJobInstance(RandomStringUtils.randomAlphabetic(7), jobParameters);
+		jobInstance = jobInstanceDao.createJobInstance("jobName", jobParameters);
 
-		jobExecutionDao.saveJobExecution(new JobExecution(jobInstance, jobParameters, RandomStringUtils.randomAlphabetic(5)));
+		jobExecutionDao.saveJobExecution(new JobExecution(jobInstance, jobParameters, "jobConfigName"));
 		JobExecution jobExecution = jobExecutionDao.getLastJobExecution(jobInstance);
 
-		stepExecutionDao.saveStepExecution(new StepExecution(RandomStringUtils.randomAlphabetic(8), jobExecution));
+		stepExecutionDao.saveStepExecution(new StepExecution("stepName", jobExecution));
 	}
 
 	@WithMockAdminUser

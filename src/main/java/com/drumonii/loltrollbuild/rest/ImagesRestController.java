@@ -2,7 +2,6 @@ package com.drumonii.loltrollbuild.rest;
 
 import com.drumonii.loltrollbuild.model.*;
 import com.drumonii.loltrollbuild.model.image.Image;
-import org.apache.commons.io.FilenameUtils;
 import org.springframework.http.CacheControl;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -110,7 +109,17 @@ public class ImagesRestController {
 	 * @return the {@link MediaType}
 	 */
 	private MediaType createMediaType(Image image) {
-		return MediaType.parseMediaType("image/" + FilenameUtils.getExtension(image.getFull()));
+		return MediaType.parseMediaType("image/" + getFileExtension(image.getFull()));
+	}
+
+	/**
+	 * Gets the file extension from the filename.
+	 *
+	 * @param filename the filename
+	 * @return the file extension
+	 */
+	private String getFileExtension(String filename) {
+		return filename.substring(filename.lastIndexOf('.') + 1);
 	}
 
 }
