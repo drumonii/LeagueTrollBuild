@@ -48,7 +48,6 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-starter-data-jpa'
     compile 'org.springframework.boot:spring-boot-starter-cache'
     compile 'org.springframework.boot:spring-boot-starter-security'
-    compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
     compile 'org.springframework.boot:spring-boot-starter-actuator'
     compile 'org.springframework.boot:spring-boot-starter-batch'
     compile 'org.springframework.boot:spring-boot-devtools'
@@ -57,10 +56,6 @@ dependencies {
 
     // Lombok
     compileOnly 'org.projectlombok:lombok'
-
-    // Thymeleaf Extras
-    compile 'org.thymeleaf.extras:thymeleaf-extras-springsecurity4'
-    compile 'com.github.zhanhb:thymeleaf-layout-dialect:2.3.0'
 
     // H2
     runtime 'com.h2database:h2'
