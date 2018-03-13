@@ -90,26 +90,30 @@ include::{snippets}/summonerSpellsForTrollBuild/response-fields.adoc[]
 
 [[resources-summoner-spells-find]]
 === Find a Summoner Spell
-A `GET` request will retrieve all `Summoner Spell` s filtered by its fields as query parameters with case insensitive values.
-include::{snippets}/summonerSpellsFindBy/http-request.adoc[]
+A `GET` request will retrieve all `Summoner Spell` s filtered by its fields as query parameters.
 
 [[supported-summoner-spell-query-parameters]]
 .Supported Query Parameter Fields
 |===
-|Parameter
+|Parameter|Case Sensitive|Example
 
-|name
+|`name`
+|N
+|`?name=poro`
+
+|`modes`
+|Y
+|`?modes=CLASSIC&modes=ARAM`
+
+|`cooldown`
+|N/A
+|`?cooldown=180`
+
+|`key`
+|Y
+|`?key=SummonerBarrier`
 
 |===
-
-==== Example Usage
-Usage with `CURL`:
-include::{snippets}/summonerSpellsFindBy/curl-request.adoc[]
-
-==== Response Structure
-include::{snippets}/summonerSpellsFindBy/http-response.adoc[]
-
-include::{snippets}/summonerSpellsFindBy/response-fields.adoc[]
 
 [[resources-items]]
 == Items
@@ -207,30 +211,42 @@ include::{snippets}/itemsForTrollBuild/response-fields.adoc[]
 
 [[resources-items-find]]
 === Find an Item
-A `GET` request will retrieve all `Item` s filtered by its fields as query parameters with case insensitive values.
-include::{snippets}/itemsFindBy/http-request.adoc[]
+A `GET` request will retrieve all `Item` s filtered by its fields as query parameters.
 
 [[supported-item-query-parameters]]
 .Supported Query Parameter Fields
 |===
-|Parameter
+|Parameter|Case Sensitive|Example
 
-|name
+|`name`
+|N
+|`?name=boots`
 
-|group
+|`group`
+|N
+|`?group=flask`
 
-|requiredChampion
+|`requiredChampion`
+|N
+|`?requiredChampion=gang`
+
+|`requiredAlly`
+|Y
+|`?requiredAlly=Ornn`
+
+|into
+|N/A
+|`?into=3006`
+
+|`from`
+|N/A
+|`?from=1029`
+
+|`maps`
+|N/A
+|`?maps[10]=true`
 
 |===
-
-==== Example Usage
-Usage with `CURL`:
-include::{snippets}/itemsFindBy/curl-request.adoc[]
-
-==== Response Structure
-include::{snippets}/itemsFindBy/http-response.adoc[]
-
-include::{snippets}/itemsFindBy/response-fields.adoc[]
 
 [[resources-champions]]
 == Champions
@@ -265,33 +281,6 @@ include::{snippets}/getChampion/http-response.adoc[]
 
 include::{snippets}/getChampion/response-fields.adoc[]
 
-[[resources-champions-find]]
-=== Find a Champion
-A `GET` request will retrieve all `Champions` s filtered by its fields as query parameters with case insensitive values.
-include::{snippets}/championsFindBy/http-request.adoc[]
-
-[[supported-champion-query-parameters]]
-.Supported Query Parameter Fields
-|===
-|Parameter
-
-|name
-
-|title
-
-|partype
-
-|===
-
-==== Example Usage
-Usage with `CURL`:
-include::{snippets}/championsFindBy/curl-request.adoc[]
-
-==== Response Structure
-include::{snippets}/championsFindBy/http-response.adoc[]
-
-include::{snippets}/championsFindBy/response-fields.adoc[]
-
 [[resources-troll-build-for-champion]]
 === Troll Build for Champion
 A `GET` request will generate a troll build for a specific `Champion` from its ID and a `Map` from its ID.
@@ -309,6 +298,33 @@ include::{snippets}/getTrollBuildForChampion/curl-request.adoc[]
 include::{snippets}/getTrollBuildForChampion/http-response.adoc[]
 
 include::{snippets}/getTrollBuildForChampion/response-fields.adoc[]
+
+[[resources-champions-find]]
+=== Find a Champion
+A `GET` request will retrieve all `Champions` s filtered by its fields as query parameters.
+
+[[supported-champion-query-parameters]]
+.Supported Query Parameter Fields
+|===
+|Parameter|Case Sensitive|Example
+
+|`name`
+|N
+|`?name=blitz`
+
+|`title`
+|N
+|`?title=monkey`
+
+|`partype`
+|N
+|`?partype=mana`
+
+|`tags`
+|Y
+|`?tags=Fighter&tags=Tank`
+
+|===
 
 [[resources-maps]]
 == Maps
@@ -345,25 +361,17 @@ include::{snippets}/getMap/response-fields.adoc[]
 [[resources-maps-find]]
 === Find a Map
 A `GET` request will retrieve all `Map` s filtered by its fields as query parameters with case insensitive values.
-include::{snippets}/mapsFindBy/http-request.adoc[]
 
 [[supported-map-query-parameters]]
 .Supported Query Parameter Fields
 |===
-|Parameter
+|Parameter|Case Sensitive|Example
 
-|mapName
+|`mapName`
+|N
+|`?mapName=summoner`
 
 |===
-
-==== Example Usage
-Usage with `CURL`:
-include::{snippets}/mapsFindBy/curl-request.adoc[]
-
-==== Response Structure
-include::{snippets}/mapsFindBy/http-response.adoc[]
-
-include::{snippets}/mapsFindBy/response-fields.adoc[]
 
 [[resources-versions]]
 == Versions

@@ -143,26 +143,6 @@ public class ApiDocumentation {
 								.description("The key of the Summoner Spell"),
 						fieldWithPath("[*].modes")
 								.description("An array of game modes eligible with the Summoner Spell"))));
-
-		summonerSpellsRepository.save(summonerSpellsResponse.getSummonerSpells().get("SummonerPoroThrow"));
-
-		mockMvc.perform(get("{apiPath}/summoner-spells?name={name}", apiPath, "poro"))
-				.andExpect(status().isOk())
-				.andDo(document("summonerSpellsFindBy", relaxedResponseFields(
-						fieldWithPath("[*].id")
-								.description("The ID of the Summoner Spell"),
-						fieldWithPath("[*].name")
-								.description("The name of the Summoner Spell"),
-						fieldWithPath("[*].description")
-								.description("The description of the Summoner Spell"),
-						fieldWithPath("[*].image")
-								.description("The image of the Summoner Spell"),
-						fieldWithPath("[*].cooldown")
-								.description("An array of cooldown values of the Summoner Spell"),
-						fieldWithPath("[*].key")
-								.description("The key of the Summoner Spell"),
-						fieldWithPath("[*].modes")
-								.description("An array of game modes eligible with the Summoner Spell"))));
 	}
 
 	@Test
@@ -223,36 +203,6 @@ public class ApiDocumentation {
 		mockMvc.perform(get("{apiPath}/items", apiPath))
 				.andExpect(status().isOk())
 				.andDo(document("getItems", relaxedResponseFields(
-						fieldWithPath("[*].id")
-								.description("The Id of the Item"),
-						fieldWithPath("[*].name")
-								.description("The name of the Item"),
-						fieldWithPath("[*].group")
-								.description("The group of the Item"),
-						fieldWithPath("[*].consumed")
-								.description("Whether the Item is consumable"),
-						fieldWithPath("[*].description")
-								.description("The group of the Item"),
-						fieldWithPath("[*].from")
-								.description("An array of Item IDs that the Item is built from as part of the Item's recipe"),
-						fieldWithPath("[*].into")
-								.description("An array of Item IDs that the Item builds into as part of the Item's recipe"),
-						fieldWithPath("[*].requiredChampion")
-								.description("The required champion of the Item"),
-						fieldWithPath("[*].requiredAlly")
-								.description("The required ally champion of the Item"),
-						fieldWithPath("[*].maps")
-								.description("A map of Map IDs keys and boolean values whether the Item can be purchased in the Map"),
-						fieldWithPath("[*].image")
-								.description("The image of the Item"),
-						fieldWithPath("[*].gold")
-								.description("The gold of the Item"))));
-
-		itemsRepository.save(itemsResponse.getItems().get("3069"));
-
-		mockMvc.perform(get("{apiPath}/items?name={name}", apiPath, "remnant"))
-				.andExpect(status().isOk())
-				.andDo(document("itemsFindBy", relaxedResponseFields(
 						fieldWithPath("[*].id")
 								.description("The Id of the Item"),
 						fieldWithPath("[*].name")
@@ -476,32 +426,6 @@ public class ApiDocumentation {
 								.description("The image of the Champion"),
 						fieldWithPath("[*].tags")
 								.description("An array of tags of the Champion"))));
-
-		championsRepository.save(championsResponse.getChampions().get("Blitzcrank"));
-
-		mockMvc.perform(get("{apiPath}/champions?name={name}", apiPath, "blitz"))
-				.andExpect(status().isOk())
-				.andDo(document("championsFindBy", relaxedResponseFields(
-						fieldWithPath("[*].id")
-								.description("The Id of the Champion"),
-						fieldWithPath("[*].key")
-								.description("The key of the Champion. Usually the same as the name"),
-						fieldWithPath("[*].name")
-								.description("The name of the Champion"),
-						fieldWithPath("[*].title")
-								.description("The title of the Champion"),
-						fieldWithPath("[*].info")
-								.description("Statistical information of the Champion"),
-						fieldWithPath("[*].spells")
-								.description("Spell abilities of the Champion"),
-						fieldWithPath("[*].passive")
-								.description("The passive ability of the Champion"),
-						fieldWithPath("[*].image")
-								.description("The image of the Champion"),
-						fieldWithPath("[*].tags")
-								.description("An array of tags of the Champion"),
-						fieldWithPath("[*].partype")
-								.description("The ability resource of the Champion"))));
 	}
 
 	@Test
@@ -583,18 +507,6 @@ public class ApiDocumentation {
 		mockMvc.perform(get("{apiPath}/maps", apiPath))
 				.andExpect(status().isOk())
 				.andDo(document("getMaps", relaxedResponseFields(
-						fieldWithPath("[*].mapId")
-								.description("The Id of the Map"),
-						fieldWithPath("[*].mapName")
-								.description("The name of the Map"),
-						fieldWithPath("[*].image")
-								.description("The image of the Map"))));
-
-		mapsRepository.save(mapsResponse.getMaps().get(TWISTED_TREELINE_SID));
-
-		mockMvc.perform(get("{apiPath}/maps?mapName={mapName}", apiPath, "treeline"))
-				.andExpect(status().isOk())
-				.andDo(document("mapsFindBy", relaxedResponseFields(
 						fieldWithPath("[*].mapId")
 								.description("The Id of the Map"),
 						fieldWithPath("[*].mapName")
