@@ -21,7 +21,7 @@ import java.util.Optional;
  * Repository REST controller for {@link SummonerSpell}s.
  */
 @RestController
-@RequestMapping("/${api.base-path}/summoner-spells")
+@RequestMapping("${api.base-path}/summoner-spells")
 public class SummonerSpellsRestController {
 
 	@Autowired

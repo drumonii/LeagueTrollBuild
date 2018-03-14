@@ -23,7 +23,7 @@ import java.util.Optional;
  * Repository REST controller for {@link GameMap}s.
  */
 @RestController
-@RequestMapping("/${api.base-path}/maps")
+@RequestMapping("${api.base-path}/maps")
 public class MapsRestController {
 
 	@Autowired

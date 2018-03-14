@@ -27,7 +27,7 @@ import java.util.Optional;
  * Repository REST controller for {@link Build}s.
  */
 @RestController
-@RequestMapping("/${api.base-path}/builds")
+@RequestMapping("${api.base-path}/builds")
 public class BuildsRestController {
 
 	static final int PAGE_SIZE = 20;

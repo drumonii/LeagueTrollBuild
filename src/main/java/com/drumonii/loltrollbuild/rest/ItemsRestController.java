@@ -20,7 +20,7 @@ import java.util.Optional;
  * Repository REST controller for {@link Item}s.
  */
 @RestController
-@RequestMapping("/${api.base-path}/items")
+@RequestMapping("${api.base-path}/items")
 public class ItemsRestController {
 
 	@Autowired
