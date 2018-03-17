@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { ChampionsService } from './service/champions.service';
+import { GameMapsService } from './service/game-maps.service';
 
 import { BaseUrlHttpInterceptor } from './interceptor/base-url.http-interceptor';
 
@@ -21,6 +22,7 @@ import { BaseUrlHttpInterceptor } from './interceptor/base-url.http-interceptor'
   ],
   providers: [
     ChampionsService,
+    GameMapsService,
     { provide: HTTP_INTERCEPTORS, useClass: BaseUrlHttpInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
