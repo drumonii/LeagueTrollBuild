@@ -6,6 +6,8 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 
+import { ChampionsService } from './service/champions.service';
+
 import { BaseUrlHttpInterceptor } from './interceptor/base-url.http-interceptor';
 
 @NgModule({
@@ -18,6 +20,7 @@ import { BaseUrlHttpInterceptor } from './interceptor/base-url.http-interceptor'
     HttpClientModule
   ],
   providers: [
+    ChampionsService,
     { provide: HTTP_INTERCEPTORS, useClass: BaseUrlHttpInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
