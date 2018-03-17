@@ -17,6 +17,76 @@ describe('ChampionsService', () => {
     httpMock.verify();
   }));
 
+  it('should get a Champion', inject([ChampionsService, HttpTestingController],
+    (service: ChampionsService, httpMock: HttpTestingController) => {
+    const mockChampion: Champion = {
+      id: 9,
+      key: 'Fiddlesticks',
+      name: 'Fiddlesticks',
+      title: 'the Harbinger of Doom',
+      partype: 'Mana',
+      info: {
+        attack: 2,
+        defense: 3,
+        magic: 9,
+        difficulty: 9
+      },
+      spells: [], // omitted for brevity
+      passive: {
+        name: 'Dread',
+        description: 'Standing still or channeling abilities for 1.5 seconds empowers Fiddlesticks with Dread. ' +
+          'Immobilizing crowd control resets this timer.<br><br>Dread grants Movement Speed, but only lasts for 1.5s ' +
+          'after Fiddlesticks starts moving.',
+        image: {
+          full: 'Fiddlesticks_Passive.png',
+          sprite: 'passive0.png',
+          group: 'passive',
+          imgSrc: [],
+          x: 336,
+          y: 96,
+          w: 48,
+          h: 48
+        }
+      },
+      image: {
+        full: 'Fiddlesticks.png',
+        sprite: 'champion0.png',
+        group: 'champion',
+        imgSrc: [],
+        x: 336,
+        y: 96,
+        w: 48,
+        h: 48
+      },
+      tags: [
+        'Mage',
+        'Support'
+      ]
+    };
+
+    service.getChampion(mockChampion.name).subscribe(champion => {
+      expect(champion).toEqual(mockChampion);
+    });
+
+    const testReq = httpMock.expectOne(`/api/champions/${mockChampion.name}`);
+    expect(testReq.request.method).toEqual('GET');
+
+    testReq.flush(mockChampion);
+  }));
+
+  it('should get a Champion with REST error', inject([ChampionsService, HttpTestingController],
+    (service: ChampionsService, httpMock: HttpTestingController) => {
+    const name = 'Graves';
+    service.getChampion(name).subscribe(champion => {
+      expect(champion).toBeNull();
+    });
+
+    const testReq = httpMock.expectOne(`/api/champions/${name}`);
+    expect(testReq.request.method).toEqual('GET');
+
+    testReq.error(new ErrorEvent('An unexpected error occurred'));
+  }));
+
   it('should get Champions', inject([ChampionsService, HttpTestingController],
     (service: ChampionsService, httpMock: HttpTestingController) => {
     const mockChampions: Champion[] = [

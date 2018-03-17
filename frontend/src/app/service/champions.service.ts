@@ -12,6 +12,16 @@ export class ChampionsService {
 
   constructor(private httpClient: HttpClient) {}
 
+  getChampion(name: string): Observable<Champion> {
+    return this.httpClient.get<Champion>(`/api/champions/${name}`)
+      .pipe(
+        catchError((error) => {
+          console.error(`Caught error while GETing Champion ${name}: ${JSON.stringify(error)}`);
+          return of(null);
+        })
+      );
+  }
+
   getChampions(): Observable<Champion[]> {
     return this.httpClient.get<Champion[]>('/api/champions')
       .pipe(
