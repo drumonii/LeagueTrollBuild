@@ -86,4 +86,30 @@ describe('ChampionsService', () => {
 
     testReq.error(new ErrorEvent('An unexpected error occurred'));
   }));
+
+  it('should get Champion tags', inject([ChampionsService, HttpTestingController],
+    (service: ChampionsService, httpMock: HttpTestingController) => {
+    const mockTags: string[] = [ 'Assassin', 'Fighter', 'Mage', 'Marksman', 'Support', 'Tank' ];
+
+    service.getChampionTags().subscribe(tags => {
+      expect(tags).toEqual(mockTags);
+    });
+
+    const testReq = httpMock.expectOne('/api/champions/tags');
+    expect(testReq.request.method).toEqual('GET');
+
+    testReq.flush(mockTags);
+  }));
+
+  it('should get Champion tags with REST error', inject([ChampionsService, HttpTestingController],
+    (service: ChampionsService, httpMock: HttpTestingController) => {
+    service.getChampionTags().subscribe(tags => {
+      expect(tags).toEqual([]);
+    });
+
+    const testReq = httpMock.expectOne('/api/champions/tags', 'GET Champion Tags');
+    expect(testReq.request.method).toEqual('GET');
+
+    testReq.error(new ErrorEvent('An unexpected error occurred'));
+  }));
 });

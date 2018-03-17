@@ -22,4 +22,11 @@ export class ChampionsService {
       );
   }
 
+  getChampionTags(): Observable<string[]> {
+    return this.httpClient.get<string[]>('/api/champions/tags')
+      .pipe(
+        catchError(() => of([]))
+      );
+  }
+
 }
