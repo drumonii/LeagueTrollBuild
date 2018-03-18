@@ -126,7 +126,7 @@ public abstract class ChampionsRestControllerTest {
 	public void trollBuild() throws Exception {
 		Champion azir = championsResponse.getChampions().get("Azir");
 
-		// get with champion Id
+		// get with champion Id and map specified
 		mockMvc.perform(get("{apiPath}/champions/{id}/troll-build", apiPath, azir.getId())
 				.param("mapId", String.valueOf(HOWLING_ABYSS_ID)))
 				.andExpect(status().isOk())
@@ -135,9 +135,25 @@ public abstract class ChampionsRestControllerTest {
 				.andExpect(jsonPath("$.summoner-spells").exists())
 				.andExpect(jsonPath("$.trinket").exists());
 
-		// get with champion name
+		// get with champion name and map specified
 		mockMvc.perform(get("/api/champions/{id}/troll-build", azir.getName())
 				.param("mapId", String.valueOf(HOWLING_ABYSS_ID)))
+				.andExpect(status().isOk())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+				.andExpect(jsonPath("$.items").exists())
+				.andExpect(jsonPath("$.summoner-spells").exists())
+				.andExpect(jsonPath("$.trinket").exists());
+
+		// get with champion Id and no map specified
+		mockMvc.perform(get("{apiPath}/champions/{id}/troll-build", apiPath, azir.getId()))
+				.andExpect(status().isOk())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+				.andExpect(jsonPath("$.items").exists())
+				.andExpect(jsonPath("$.summoner-spells").exists())
+				.andExpect(jsonPath("$.trinket").exists());
+
+		// get with champion name and no map specified
+		mockMvc.perform(get("/api/champions/{id}/troll-build", azir.getName()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(jsonPath("$.items").exists())
@@ -149,7 +165,34 @@ public abstract class ChampionsRestControllerTest {
 	public void trollBuildForViktor() throws Exception {
 		Champion viktor = championsResponse.getChampions().get("Viktor");
 
+		// get with Viktor Id and map specified
+		mockMvc.perform(get("{apiPath}/champions/{id}/troll-build", apiPath, viktor.getId())
+				.param("mapId", String.valueOf(HOWLING_ABYSS_ID)))
+				.andExpect(status().isOk())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+				.andExpect(jsonPath("$.items").exists())
+				.andExpect(jsonPath("$.summoner-spells").exists())
+				.andExpect(jsonPath("$.trinket").exists());
+
+		// get with Viktor name and map specified
+		mockMvc.perform(get("{apiPath}/champions/{id}/troll-build", apiPath, viktor.getName())
+				.param("mapId", String.valueOf(HOWLING_ABYSS_ID)))
+				.andExpect(status().isOk())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+				.andExpect(jsonPath("$.items").exists())
+				.andExpect(jsonPath("$.summoner-spells").exists())
+				.andExpect(jsonPath("$.trinket").exists());
+
+		// get with Viktor Id and no map specified
 		mockMvc.perform(get("{apiPath}/champions/{id}/troll-build", apiPath, viktor.getId()))
+				.andExpect(status().isOk())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+				.andExpect(jsonPath("$.items").exists())
+				.andExpect(jsonPath("$.summoner-spells").exists())
+				.andExpect(jsonPath("$.trinket").exists());
+
+		// get with Viktor name and no map specified
+		mockMvc.perform(get("{apiPath}/champions/{id}/troll-build", apiPath, viktor.getName()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(jsonPath("$.items").exists())
