@@ -6,6 +6,8 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 
+import { FooterComponent } from './layout/footer/footer.component';
+
 import { ChampionsService } from '@service/champions.service';
 import { GameMapsService } from '@service/game-maps.service';
 
@@ -13,7 +15,8 @@ import { BaseUrlHttpInterceptor } from './interceptor/base-url.http-interceptor'
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    FooterComponent
   ],
   imports: [
     AppRoutingModule,
