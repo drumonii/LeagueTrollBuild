@@ -4,8 +4,7 @@ import com.drumonii.loltrollbuild.model.GameMap;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
@@ -58,8 +57,8 @@ public interface MapsRepository extends JpaRepository<GameMap, Integer>, JpaSpec
 	@Override
 	void deleteAll();
 
-	@Cacheable(key = "{#spec.example.probe, #pageable}")
+	@Cacheable(key = "{#spec.example.probe, #sort}")
 	@Override
-	Page<GameMap> findAll(Specification<GameMap> example, Pageable pageable);
+	List<GameMap> findAll(Specification<GameMap> example, Sort sort);
 
 }

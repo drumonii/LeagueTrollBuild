@@ -4,8 +4,6 @@ import com.drumonii.loltrollbuild.model.Champion;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -73,8 +71,8 @@ public interface ChampionsRepository extends JpaRepository<Champion, Integer>, J
 	@Override
 	void deleteAll();
 
-	@Cacheable(key = "{#spec.example.probe, #pageable}")
+	@Cacheable(key = "{#spec.example.probe, #sort}")
 	@Override
-	Page<Champion> findAll(Specification<Champion> spec, Pageable pageable);
+	List<Champion> findAll(Specification<Champion> spec, Sort sort);
 
 }

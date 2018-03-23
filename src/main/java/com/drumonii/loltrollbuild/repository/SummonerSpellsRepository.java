@@ -5,8 +5,7 @@ import com.drumonii.loltrollbuild.model.SummonerSpell.GameMode;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
@@ -63,8 +62,8 @@ public interface SummonerSpellsRepository extends JpaRepository<SummonerSpell, I
 	@Override
 	void deleteAll();
 
-	@Cacheable(key = "{#spec.example.probe, #pageable}")
+	@Cacheable(key = "{#spec.example.probe, #sort}")
 	@Override
-	Page<SummonerSpell> findAll(Specification<SummonerSpell> spec, Pageable pageable);
+	List<SummonerSpell> findAll(Specification<SummonerSpell> spec, Sort sort);
 
 }

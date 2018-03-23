@@ -5,8 +5,7 @@ import com.drumonii.loltrollbuild.model.Item;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
@@ -113,8 +112,8 @@ public interface ItemsRepository extends JpaRepository<Item, Integer>, JpaSpecif
 	@Override
 	void deleteAll();
 
-	@Cacheable(key = "{#spec.example.probe, #pageable}")
+	@Cacheable(key = "{#spec.example.probe, #sort}")
 	@Override
-	Page<Item> findAll(Specification<Item> spec, Pageable pageable);
+	List<Item> findAll(Specification<Item> spec, Sort sort);
 
 }
