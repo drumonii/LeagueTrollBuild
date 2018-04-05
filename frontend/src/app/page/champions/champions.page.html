@@ -1,5 +1,7 @@
 <ul>
   <li *ngFor="let champion of champions$ | async">
-    {{champion.name}}
+    <a [routerLink]="['/champions', champion.key]">
+      {{champion.name}}
+    </a>
   </li>
 </ul>
