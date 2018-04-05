@@ -11,7 +11,7 @@ import { HeaderComponent } from '@layout/header/header.component';
 
 import { ChampionsPage } from '@page/champions/champions.page';
 
-import { ChampionsNameFilterPipe } from './pipe/champions-name-filter.pipe';
+import { ChampionsNameFilterPipe } from '@pipe/champions-name-filter.pipe';
 
 import { ChampionsService } from '@service/champions.service';
 import { GameMapsService } from '@service/game-maps.service';
