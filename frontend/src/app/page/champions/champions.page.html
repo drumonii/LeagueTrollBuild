@@ -1,3 +1,5 @@
-<p>
-  champions works!
-</p>
+<ul>
+  <li *ngFor="let champion of champions$ | async">
+    {{champion.name}}
+  </li>
+</ul>

@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Observable } from 'rxjs/Observable';
+
+import { ChampionsService } from '@service/champions.service';
+import { Champion } from '@model/champion';
+
 @Component({
   selector: 'ltb-champions',
   templateUrl: './champions.page.html',
@@ -7,9 +12,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChampionsPage implements OnInit {
 
-  constructor() { }
+  champions$: Observable<Champion[]>;
+
+  constructor(private championsService: ChampionsService) {}
 
   ngOnInit() {
+    this.getChampions();
+  }
+
+  getChampions(): void {
+    this.champions$ = this.championsService.getChampions();
   }
 
 }
