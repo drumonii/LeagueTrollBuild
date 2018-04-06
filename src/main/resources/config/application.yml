@@ -88,9 +88,9 @@ spring:
 spring:
   profiles: external
   datasource:
-    url: ${DB_URL}
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+    url: ${LTB_DB_URL}
+    username: ${LTB_DB_USERNAME}
+    password: ${LTB_DB_PASSWORD}
   jpa:
     properties:
       hibernate:
