@@ -1,11 +1,13 @@
 import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { FormsModule } from '@angular/forms';
 
 import { of } from 'rxjs/observable/of';
 
 import { ChampionsPage } from './champions.page';
 import { ChampionsService } from '@service/champions.service';
+import { ChampionsNameFilterPipe } from '@pipe/champions-name-filter.pipe';
 
 describe('ChampionsPage', () => {
   let component: ChampionsPage;
@@ -13,8 +15,8 @@ describe('ChampionsPage', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, RouterTestingModule],
-      declarations: [ChampionsPage],
+      imports: [FormsModule, HttpClientTestingModule, RouterTestingModule],
+      declarations: [ChampionsPage, ChampionsNameFilterPipe],
       providers: [ChampionsService]
     })
     .compileComponents();

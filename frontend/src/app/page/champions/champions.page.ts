@@ -13,6 +13,7 @@ import { Champion } from '@model/champion';
 export class ChampionsPage implements OnInit {
 
   champions$: Observable<Champion[]>;
+  championsSearchName: string;
 
   constructor(private championsService: ChampionsService) {}
 

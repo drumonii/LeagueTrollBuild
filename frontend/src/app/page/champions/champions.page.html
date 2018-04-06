@@ -1,5 +1,7 @@
+<input type="text" placeholder="Search by Champion" [(ngModel)]="championsSearchName"/>
+
 <ul>
-  <li *ngFor="let champion of champions$ | async">
+  <li *ngFor="let champion of (champions$ | async | championsNameFilter : championsSearchName)">
     <a [routerLink]="['/champions', champion.key]">
       {{champion.name}}
     </a>

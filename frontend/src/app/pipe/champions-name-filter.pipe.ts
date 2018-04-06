@@ -1,12 +1,18 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
+import { Champion } from '@model/champion';
+
 @Pipe({
   name: 'championsNameFilter'
 })
 export class ChampionsNameFilterPipe implements PipeTransform {
 
-  transform(value: any, args?: any): any {
-    return null;
+  transform(champions: Champion[], championsSearchName: string): Champion[] {
+    if (championsSearchName && champions) {
+      return champions.filter(champion =>
+        champion.name.toLowerCase().includes(championsSearchName.toLowerCase()));
+    }
+    return champions;
   }
 
 }

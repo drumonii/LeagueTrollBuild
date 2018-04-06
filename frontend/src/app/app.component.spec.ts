@@ -1,5 +1,6 @@
 import { TestBed, async } from '@angular/core/testing';
 import { APP_BASE_HREF } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -10,17 +11,21 @@ import { HeaderComponent } from '@layout/header/header.component';
 
 import { ChampionsPage } from '@page/champions/champions.page';
 
+import { ChampionsNameFilterPipe } from '@pipe/champions-name-filter.pipe';
+
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
         AppComponent,
+        ChampionsNameFilterPipe,
         ChampionsPage,
         FooterComponent,
         HeaderComponent
       ],
       imports: [
-        AppRoutingModule
+        AppRoutingModule,
+        FormsModule
       ],
       providers: [
         { provide: APP_BASE_HREF, useValue: '/' }
