@@ -13,6 +13,7 @@ import { HeaderComponent } from '@layout/header/header.component';
 import { ChampionsPage } from '@page/champions/champions.page';
 
 import { ChampionsNameFilterPipe } from '@pipe/champions-name-filter.pipe';
+import { ChampionsTagsFilterPipe } from '@pipe/champions-tags-filter.pipe';
 
 import { ChampionsService } from '@service/champions.service';
 import { GameMapsService } from '@service/game-maps.service';
@@ -23,6 +24,7 @@ import { BaseUrlHttpInterceptor } from './interceptor/base-url.http-interceptor'
   declarations: [
     AppComponent,
     ChampionsNameFilterPipe,
+    ChampionsTagsFilterPipe,
     ChampionsPage,
     FooterComponent,
     HeaderComponent
