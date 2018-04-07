@@ -29,9 +29,11 @@ describe('ChampionsPage', () => {
 
   it('should create', inject([ChampionsService], (championsService: ChampionsService) => {
     spyOn(championsService, 'getChampions').and.returnValue(of([]));
+    spyOn(championsService, 'getChampionTags').and.returnValue(of([]));
 
     fixture.detectChanges();
 
     expect(championsService.getChampions).toHaveBeenCalled();
+    expect(championsService.getChampionTags).toHaveBeenCalled();
   }));
 });

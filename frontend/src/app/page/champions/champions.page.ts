@@ -13,16 +13,22 @@ import { Champion } from '@model/champion';
 export class ChampionsPage implements OnInit {
 
   champions$: Observable<Champion[]>;
+  championTags$: Observable<string[]>;
   championsSearchName: string;
 
   constructor(private championsService: ChampionsService) {}
 
   ngOnInit() {
     this.getChampions();
+    this.getChampionTags();
   }
 
   getChampions(): void {
     this.champions$ = this.championsService.getChampions();
+  }
+
+  getChampionTags(): void {
+    this.championTags$ = this.championsService.getChampionTags();
   }
 
 }
