@@ -12,6 +12,7 @@ import { HeaderComponent } from '@layout/header/header.component';
 import { ChampionsPage } from '@page/champions/champions.page';
 
 import { ChampionsNameFilterPipe } from '@pipe/champions-name-filter.pipe';
+import { ChampionsTagsFilterPipe } from '@pipe/champions-tags-filter.pipe';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -19,6 +20,7 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent,
         ChampionsNameFilterPipe,
+        ChampionsTagsFilterPipe,
         ChampionsPage,
         FooterComponent,
         HeaderComponent

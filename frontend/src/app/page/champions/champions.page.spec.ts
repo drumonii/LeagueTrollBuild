@@ -8,6 +8,7 @@ import { of } from 'rxjs/observable/of';
 import { ChampionsPage } from './champions.page';
 import { ChampionsService } from '@service/champions.service';
 import { ChampionsNameFilterPipe } from '@pipe/champions-name-filter.pipe';
+import { ChampionsTagsFilterPipe } from '@pipe/champions-tags-filter.pipe';
 
 describe('ChampionsPage', () => {
   let component: ChampionsPage;
@@ -16,7 +17,7 @@ describe('ChampionsPage', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [FormsModule, HttpClientTestingModule, RouterTestingModule],
-      declarations: [ChampionsPage, ChampionsNameFilterPipe],
+      declarations: [ChampionsPage, ChampionsNameFilterPipe, ChampionsTagsFilterPipe],
       providers: [ChampionsService]
     })
     .compileComponents();

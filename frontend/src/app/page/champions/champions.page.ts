@@ -15,6 +15,7 @@ export class ChampionsPage implements OnInit {
   champions$: Observable<Champion[]>;
   championTags$: Observable<string[]>;
   championsSearchName: string;
+  championsFilterTag: string;
 
   constructor(private championsService: ChampionsService) {}
 
@@ -29,6 +30,14 @@ export class ChampionsPage implements OnInit {
 
   getChampionTags(): void {
     this.championTags$ = this.championsService.getChampionTags();
+  }
+
+  setChampionsFilterTag(selectedFilterTag: string): void {
+    if (this.championsFilterTag === selectedFilterTag) {
+      this.championsFilterTag = '';
+    } else {
+      this.championsFilterTag = selectedFilterTag;
+    }
   }
 
 }
