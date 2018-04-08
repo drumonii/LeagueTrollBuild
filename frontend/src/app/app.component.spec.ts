@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { FooterComponent } from '@layout/footer/footer.component';
 import { HeaderComponent } from '@layout/header/header.component';
 
+import { ChampionPage } from '@page/champion/champion.page';
 import { ChampionsPage } from '@page/champions/champions.page';
 
 import { ChampionsNameFilterPipe } from '@pipe/champions-name-filter.pipe';
@@ -21,6 +22,7 @@ describe('AppComponent', () => {
         AppComponent,
         ChampionsNameFilterPipe,
         ChampionsTagsFilterPipe,
+        ChampionPage,
         ChampionsPage,
         FooterComponent,
         HeaderComponent
