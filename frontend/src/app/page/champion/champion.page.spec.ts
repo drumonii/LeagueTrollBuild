@@ -1,6 +1,12 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture,  inject, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { ActivatedRoute, convertToParamMap } from '@angular/router';
+
+import { of } from 'rxjs/observable/of';
 
 import { ChampionPage } from './champion.page';
+import { ChampionsService } from '@service/champions.service';
 
 describe('ChampionPage', () => {
   let component: ChampionPage;
@@ -8,7 +14,17 @@ describe('ChampionPage', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ChampionPage]
+      imports: [HttpClientTestingModule, RouterTestingModule],
+      declarations: [ChampionPage],
+      providers: [
+        ChampionsService,
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            paramMap: of(convertToParamMap({'name': 'Skarner'}))
+          }
+        }
+      ]
     })
     .compileComponents();
   }));
@@ -16,10 +32,13 @@ describe('ChampionPage', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ChampionPage);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+  it('should create', inject([ChampionsService], (championsService: ChampionsService) => {
+    spyOn(championsService, 'getChampion').and.returnValue(of(null));
+
+    fixture.detectChanges();
+
+    expect(championsService.getChampion).toHaveBeenCalledWith('Skarner');
+  }));
 });

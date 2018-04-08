@@ -1,3 +1,17 @@
-<p>
-  champion works!
-</p>
+<ng-container *ngIf="(champion$ | async) as champion">
+  <h4>{{champion.name}} - {{champion.title}}</h4>
+  <p>({{champion.partype}})</p>
+  <ul>
+    <li *ngFor="let tag of champion.tags">{{tag}}</li>
+  </ul>
+  <div>
+    <p>{{champion.passive.name}}</p>
+    <p>{{champion.passive.description}}</p>
+  </div>
+  <div *ngFor="let spell of champion.spells">
+    <p>{{spell.name}}</p>
+    <p>{{spell.description}}</p>
+  </div>
+
+  <hr>
+</ng-container>
