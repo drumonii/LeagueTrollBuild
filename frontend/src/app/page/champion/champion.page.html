@@ -14,4 +14,13 @@
   </div>
 
   <hr>
+  
+  <div>
+    <h4>Map</h4>
+    <select>
+      <option *ngFor="let gameMap of gameMaps$ | async" [ngValue]="gameMap.mapId">
+        {{gameMap.mapName}}
+      </option>
+    </select>
+  </div>
 </ng-container>
