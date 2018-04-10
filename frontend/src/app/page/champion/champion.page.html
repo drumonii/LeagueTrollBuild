@@ -17,7 +17,7 @@
   
   <div>
     <h4>Map</h4>
-    <select>
+    <select [(ngModel)]="gameMapId">
       <option *ngFor="let gameMap of gameMaps$ | async" [ngValue]="gameMap.mapId">
         {{gameMap.mapName}}
       </option>

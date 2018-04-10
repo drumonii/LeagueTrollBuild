@@ -17,11 +17,14 @@ import { GameMap } from '@model/game-map';
 })
 export class ChampionPage implements OnInit {
 
+  gameMapId: number;
   champion$: Observable<Champion>;
   gameMaps$: Observable<GameMap[]>;
 
   constructor(private championService: ChampionsService, private gameMapsService: GameMapsService,
-    private route: ActivatedRoute) {}
+    private route: ActivatedRoute) {
+    this.gameMapId = GameMap.summonersRiftId;
+  }
 
   ngOnInit() {
     this.getChampion();
