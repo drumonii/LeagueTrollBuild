@@ -9,7 +9,6 @@ import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.ItemWriter;
-import org.springframework.batch.item.database.BeanPropertyItemSqlParameterSourceProvider;
 import org.springframework.batch.item.database.builder.JdbcBatchItemWriterBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -66,7 +65,7 @@ public class VersionsRetrievalJobConfig {
 		return new JdbcBatchItemWriterBuilder<Version>()
 				.dataSource(dataSource)
 				.sql("INSERT INTO VERSION (PATCH, MAJOR, MINOR, REVISION) VALUES (:patch, :major, :minor, :revision)")
-				.itemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<>())
+				.beanMapped()
 				.assertUpdates(false)
 				.build();
 	}
