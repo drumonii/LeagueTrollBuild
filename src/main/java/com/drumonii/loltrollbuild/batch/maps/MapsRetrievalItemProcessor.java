@@ -26,10 +26,10 @@ public class MapsRetrievalItemProcessor implements ItemProcessor<GameMap, GameMa
 	@Autowired
 	private ImageFetcher imageFetcher;
 
-	private final Version latestVersion;
+	private final Version latestRiotPatch;
 
 	public MapsRetrievalItemProcessor(Version latestVersion) {
-		this.latestVersion = latestVersion;
+		this.latestRiotPatch = latestVersion;
 	}
 
 	@Override
@@ -38,7 +38,7 @@ public class MapsRetrievalItemProcessor implements ItemProcessor<GameMap, GameMa
 		if (mapFromDb.isPresent() && mapFromDb.get().equals(map)) {
 			return null;
 		}
-		imageFetcher.setImgSrc(map.getImage(), mapsImgUri, latestVersion);
+		imageFetcher.setImgSrc(map.getImage(), mapsImgUri, latestRiotPatch);
 		return map;
 	}
 

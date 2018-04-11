@@ -2,7 +2,6 @@ package com.drumonii.loltrollbuild.batch.summonerSpells;
 
 import com.drumonii.loltrollbuild.model.SummonerSpell;
 import com.drumonii.loltrollbuild.repository.SummonerSpellsRepository;
-import com.drumonii.loltrollbuild.riot.service.SummonerSpellsService;
 import org.apache.commons.collections4.ListUtils;
 import org.springframework.batch.item.ExecutionContext;
 import org.springframework.batch.item.ItemReader;
@@ -18,25 +17,24 @@ import java.util.List;
 public class SummonerSpellsRetrievalItemReader extends AbstractItemStreamItemReader<SummonerSpell> {
 
 	@Autowired
-	private SummonerSpellsService summonerSpellsService;
-
-	@Autowired
 	private SummonerSpellsRepository summonerSpellsRepository;
 
 	private List<SummonerSpell> summonerSpells;
-	private int nextSummonerSpell;
+
+	public SummonerSpellsRetrievalItemReader(List<SummonerSpell> summonerSpells) {
+		this.summonerSpells = summonerSpells;
+	}
 
 	@Override
 	public SummonerSpell read() {
-		if (nextSummonerSpell < summonerSpells.size()) {
-			return summonerSpells.get(nextSummonerSpell++);
+		if (!summonerSpells.isEmpty()) {
+			return summonerSpells.remove(0);
 		}
 		return null;
 	}
 
 	@Override
 	public void open(ExecutionContext executionContext) throws ItemStreamException {
-		summonerSpells = summonerSpellsService.getSummonerSpells();
 		List<SummonerSpell> deletedSummonerSpells = ListUtils.subtract(summonerSpellsRepository.findAll(),
 				summonerSpells);
 		summonerSpellsRepository.deleteAll(deletedSummonerSpells);

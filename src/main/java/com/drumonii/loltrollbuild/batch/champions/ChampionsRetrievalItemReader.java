@@ -2,7 +2,6 @@ package com.drumonii.loltrollbuild.batch.champions;
 
 import com.drumonii.loltrollbuild.model.Champion;
 import com.drumonii.loltrollbuild.repository.ChampionsRepository;
-import com.drumonii.loltrollbuild.riot.service.ChampionsService;
 import org.apache.commons.collections4.ListUtils;
 import org.springframework.batch.item.ExecutionContext;
 import org.springframework.batch.item.ItemReader;
@@ -18,25 +17,24 @@ import java.util.List;
 public class ChampionsRetrievalItemReader extends AbstractItemStreamItemReader<Champion> {
 
 	@Autowired
-	private ChampionsService championsService;
-
-	@Autowired
 	private ChampionsRepository championsRepository;
 
 	private List<Champion> champions;
-	private int nextChampion;
+
+	public ChampionsRetrievalItemReader(List<Champion> champions) {
+		this.champions = champions;
+	}
 
 	@Override
 	public Champion read() {
-		if (nextChampion < champions.size()) {
-			return champions.get(nextChampion++);
+		if (!champions.isEmpty()) {
+			return champions.remove(0);
 		}
 		return null;
 	}
 
 	@Override
 	public void open(ExecutionContext executionContext) throws ItemStreamException {
-		champions = championsService.getChampions();
 		List<Champion> deletedChampions = ListUtils.subtract(championsRepository.findAll(), champions);
 		championsRepository.deleteAll(deletedChampions);
 	}

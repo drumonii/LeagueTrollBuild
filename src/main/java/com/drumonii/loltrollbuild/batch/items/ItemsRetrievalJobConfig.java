@@ -3,6 +3,7 @@ package com.drumonii.loltrollbuild.batch.items;
 import com.drumonii.loltrollbuild.model.Item;
 import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.repository.ItemsRepository;
+import com.drumonii.loltrollbuild.riot.service.ItemsService;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
@@ -43,7 +44,7 @@ public class ItemsRetrievalJobConfig {
 	public Step itemsRetrievalStep() {
 		return stepBuilderFactory.get("itemsRetrievalStep")
 				.<Item, Item> chunk(25)
-				.reader(itemsRetrievalItemReader())
+				.reader(itemsRetrievalItemReader(null))
 				.processor(itemsRetrievalItemProcessor(null))
 				.writer(itemsRetrievalItemWriter())
 				.build();
@@ -51,15 +52,15 @@ public class ItemsRetrievalJobConfig {
 
 	@StepScope
 	@Bean
-	public ItemsRetrievalItemReader itemsRetrievalItemReader() {
-		return new ItemsRetrievalItemReader();
+	public ItemsRetrievalItemReader itemsRetrievalItemReader(ItemsService itemsService) {
+		return new ItemsRetrievalItemReader(itemsService.getItems());
 	}
 
 	@StepScope
 	@Bean
 	public ItemsRetrievalItemProcessor itemsRetrievalItemProcessor(
-			@Value("#{jobParameters['latestRiotPatch']}") Version latestVersion) {
-		return new ItemsRetrievalItemProcessor(latestVersion);
+			@Value("#{jobParameters['latestRiotPatch']}") Version latestRiotPatch) {
+		return new ItemsRetrievalItemProcessor(latestRiotPatch);
 	}
 
 	@Bean

@@ -26,10 +26,10 @@ public class SummonerSpellsRetrievalItemProcessor implements ItemProcessor<Summo
 	@Autowired
 	private ImageFetcher imageFetcher;
 
-	private final Version latestVersion;
+	private final Version latestRiotPatch;
 
-	public SummonerSpellsRetrievalItemProcessor(Version latestVersion) {
-		this.latestVersion = latestVersion;
+	public SummonerSpellsRetrievalItemProcessor(Version latestRiotPatch) {
+		this.latestRiotPatch = latestRiotPatch;
 	}
 
 	@Override
@@ -41,7 +41,7 @@ public class SummonerSpellsRetrievalItemProcessor implements ItemProcessor<Summo
 		if (summonerSpellFromDb.isPresent() && summonerSpellFromDb.get().equals(summonerSpell)) {
 			return null;
 		}
-		imageFetcher.setImgSrc(summonerSpell.getImage(), summonerSpellsImgUri, latestVersion);
+		imageFetcher.setImgSrc(summonerSpell.getImage(), summonerSpellsImgUri, latestRiotPatch);
 		return summonerSpell;
 	}
 

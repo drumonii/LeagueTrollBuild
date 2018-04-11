@@ -26,10 +26,10 @@ public class ItemsRetrievalItemProcessor implements ItemProcessor<Item, Item> {
 	@Autowired
 	private ImageFetcher imageFetcher;
 
-	private final Version latestVersion;
+	private final Version latestRiotPatch;
 
-	public ItemsRetrievalItemProcessor(Version latestVersion) {
-		this.latestVersion = latestVersion;
+	public ItemsRetrievalItemProcessor(Version latestRiotPatch) {
+		this.latestRiotPatch = latestRiotPatch;
 	}
 
 	@Override
@@ -38,7 +38,7 @@ public class ItemsRetrievalItemProcessor implements ItemProcessor<Item, Item> {
 		if (itemFromDb.isPresent() && itemFromDb.get().equals(item)) {
 			return null;
 		}
-		imageFetcher.setImgSrc(item.getImage(), itemsImgUri, latestVersion);
+		imageFetcher.setImgSrc(item.getImage(), itemsImgUri, latestRiotPatch);
 		return item;
 	}
 

@@ -36,10 +36,10 @@ public class ChampionsRetrievalItemProcessor implements ItemProcessor<Champion, 
 	@Autowired
 	private ImageFetcher imageFetcher;
 
-	private final Version latestVersion;
+	private final Version latestRiotPatch;
 
-	public ChampionsRetrievalItemProcessor(Version latestVersion) {
-		this.latestVersion = latestVersion;
+	public ChampionsRetrievalItemProcessor(Version latestRiotPatch) {
+		this.latestRiotPatch = latestRiotPatch;
 	}
 
 	@Override
@@ -48,10 +48,10 @@ public class ChampionsRetrievalItemProcessor implements ItemProcessor<Champion, 
 		if (championFromDb.isPresent() && championFromDb.get().equals(champion)) {
 			return null;
 		}
-		imageFetcher.setImgSrc(champion.getImage(), championsImgUri, latestVersion);
+		imageFetcher.setImgSrc(champion.getImage(), championsImgUri, latestRiotPatch);
 		imageFetcher.setImgsSrcs(champion.getSpells().stream().map(ChampionSpell::getImage).collect(Collectors.toList()),
-				championsSpellImgUri, latestVersion);
-		imageFetcher.setImgSrc(champion.getPassive().getImage(), championsPassiveImgUri, latestVersion);
+				championsSpellImgUri, latestRiotPatch);
+		imageFetcher.setImgSrc(champion.getPassive().getImage(), championsPassiveImgUri, latestRiotPatch);
 		return champion;
 	}
 

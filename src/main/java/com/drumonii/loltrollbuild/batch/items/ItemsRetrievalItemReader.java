@@ -2,7 +2,6 @@ package com.drumonii.loltrollbuild.batch.items;
 
 import com.drumonii.loltrollbuild.model.Item;
 import com.drumonii.loltrollbuild.repository.ItemsRepository;
-import com.drumonii.loltrollbuild.riot.service.ItemsService;
 import org.apache.commons.collections4.ListUtils;
 import org.springframework.batch.item.ExecutionContext;
 import org.springframework.batch.item.ItemReader;
@@ -18,25 +17,24 @@ import java.util.List;
 public class ItemsRetrievalItemReader extends AbstractItemStreamItemReader<Item> {
 
 	@Autowired
-	private ItemsService itemsService;
-
-	@Autowired
 	private ItemsRepository itemsRepository;
 
 	private List<Item> items;
-	private int nextItem;
+
+	public ItemsRetrievalItemReader(List<Item> items) {
+		this.items = items;
+	}
 
 	@Override
 	public Item read() {
-		if (nextItem < items.size()) {
-			return items.get(nextItem++);
+		if (!items.isEmpty()) {
+			return items.remove(0);
 		}
 		return null;
 	}
 
 	@Override
 	public void open(ExecutionContext executionContext) throws ItemStreamException {
-		items = itemsService.getItems();
 		List<Item> deletedItems = ListUtils.subtract(itemsRepository.findAll(), items);
 		itemsRepository.deleteAll(deletedItems);
 	}
