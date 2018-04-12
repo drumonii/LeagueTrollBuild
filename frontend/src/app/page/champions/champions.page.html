@@ -1,13 +1,15 @@
-<input type="text" placeholder="Search by Champion" [(ngModel)]="championsSearchName"/>
+<ng-container *ngIf="(champions$ | async) as champions">
+  <input type="text" placeholder="Search by Champion" [(ngModel)]="championsSearchName"/>
 
-<button *ngFor="let tag of championTags$ | async" (click)="setChampionsFilterTag(tag)">
-  {{tag}}
-</button>
+  <button *ngFor="let tag of championTags$ | async" (click)="setChampionsFilterTag(tag)">
+    {{tag}}
+  </button>
 
-<ul>
-  <li *ngFor="let champion of (champions$ | async | championsNameFilter : championsSearchName | championsTagsFilter : championsFilterTag)">
-    <a [routerLink]="['/champions', champion.key]">
-      {{champion.name}}
-    </a>
-  </li>
-</ul>
+  <ul>
+    <li *ngFor="let champion of (champions | championsNameFilter : championsSearchName | championsTagsFilter : championsFilterTag)">
+      <a [routerLink]="['/champions', champion.key]">
+        {{champion.name}}
+      </a>
+    </li>
+  </ul>
+</ng-container>
