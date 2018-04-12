@@ -44,7 +44,7 @@ public class MapsRetrievalJobConfig {
 	public Step mapsRetrievalStep() {
 		return stepBuilderFactory.get("mapsRetrievalStep")
 				.<GameMap, GameMap> chunk(25)
-				.reader(mapsRetrievalItemReader(null))
+				.reader(mapsRetrievalItemReader(null, null))
 				.processor(mapsRetrievalItemProcessor(null))
 				.writer(mapsRetrievalItemWriter())
 				.build();
@@ -52,8 +52,9 @@ public class MapsRetrievalJobConfig {
 
 	@StepScope
 	@Bean
-	public MapsRetrievalItemReader mapsRetrievalItemReader(MapsService mapsService) {
-		return new MapsRetrievalItemReader(mapsService.getMaps());
+	public MapsRetrievalItemReader mapsRetrievalItemReader(MapsService mapsService,
+			@Value("#{jobParameters['latestRiotPatch']}") Version latestRiotPatch) {
+		return new MapsRetrievalItemReader(mapsService.getMaps(latestRiotPatch));
 	}
 
 	@StepScope

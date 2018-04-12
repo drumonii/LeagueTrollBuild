@@ -2,7 +2,10 @@ package com.drumonii.loltrollbuild.riot.service;
 
 import com.drumonii.loltrollbuild.config.RiotApiConfig;
 import com.drumonii.loltrollbuild.model.Champion;
+import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.riot.api.RiotApiProperties;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -57,10 +60,15 @@ public class ChampionsStaticDataServiceTest {
 	@Qualifier("champion")
 	private UriComponentsBuilder championUriBuilder;
 
+	@Autowired
+	private ObjectMapper objectMapper;
+
 	@Value("${riot.static-data.region}")
 	private String region;
 
 	private String championsJson;
+
+	private Version latestVersion;
 
 	@Before
 	public void before() {
@@ -70,6 +78,39 @@ public class ChampionsStaticDataServiceTest {
 		} catch (IOException e) {
 			fail("Unable to read the Champions JSON.", e);
 		}
+		ClassPathResource versionsJson = new ClassPathResource("versions_static_data.json");
+		try {
+			List<Version> versions = objectMapper.readValue(versionsJson.getFile(), new TypeReference<List<Version>>() {});
+			latestVersion = versions.get(0);
+		} catch (IOException e) {
+			fail("Unable to unmarshal the Versions response.", e);
+		}
+	}
+
+	@Test
+	public void getChampionsFromVersion() {
+		mockServer.expect(requestTo(UriComponentsBuilder.fromUriString(championsUri.toUriString())
+				.queryParam("version", latestVersion.getPatch()).build().toString()))
+				.andExpect(method(HttpMethod.GET))
+				.andRespond(withSuccess(championsJson, MediaType.APPLICATION_JSON_UTF8));
+
+		List<Champion> champions = championsService.getChampions(latestVersion);
+		mockServer.verify();
+
+		assertThat(champions).isNotEmpty();
+	}
+
+	@Test
+	public void getChampionsFromVersionWithRestClientException() {
+		mockServer.expect(requestTo(UriComponentsBuilder.fromUriString(championsUri.toUriString())
+				.queryParam("version", latestVersion.getPatch()).build().toString()))
+				.andExpect(method(HttpMethod.GET))
+				.andRespond(withServerError());
+
+		List<Champion> champions = championsService.getChampions(latestVersion);
+		mockServer.verify();
+
+		assertThat(champions).isEmpty();
 	}
 
 	@Test

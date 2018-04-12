@@ -43,12 +43,8 @@ public class ChampionsDdragonService implements ChampionsService {
 	private String locale;
 
 	@Override
-	public List<Champion> getChampions() {
-		Version version = versionsService.getLatestVersion();
-		if (version == null) {
-			return new ArrayList<>();
-		}
-		ChampionsResponse response = getChampions(version);
+	public List<Champion> getChampions(Version version) {
+		ChampionsResponse response = getChampionsResponse(version);
 		if (response == null) {
 			return new ArrayList<>();
 		}
@@ -56,7 +52,16 @@ public class ChampionsDdragonService implements ChampionsService {
 				.collect(Collectors.toMap(Entry::getKey, entry -> getChampion(version, entry.getKey()))).values());
 	}
 
-	private ChampionsResponse getChampions(Version version) {
+	@Override
+	public List<Champion> getChampions() {
+		Version version = versionsService.getLatestVersion();
+		if (version == null) {
+			return new ArrayList<>();
+		}
+		return getChampions(version);
+	}
+
+	private ChampionsResponse getChampionsResponse(Version version) {
 		try {
 			return restTemplate.getForObject(championsUri.buildAndExpand(version.getPatch(), locale).toString(),
 					ChampionsResponse.class);
@@ -72,7 +77,7 @@ public class ChampionsDdragonService implements ChampionsService {
 		if (version == null) {
 			return null;
 		}
-		ChampionsResponse response = getChampions(version);
+		ChampionsResponse response = getChampionsResponse(version);
 		if (response == null) {
 			return null;
 		}

@@ -94,6 +94,30 @@ public class MapsDdragonServiceTest {
 	}
 
 	@Test
+	public void getMapsFromVersion() {
+		mockServer.expect(requestTo(mapsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
+				.andExpect(method(HttpMethod.GET))
+				.andRespond(withSuccess(mapsJson, MediaType.APPLICATION_JSON_UTF8));
+
+		List<GameMap> maps = mapsService.getMaps(latestVersion);
+		mockServer.verify();
+
+		assertThat(maps).isNotEmpty();
+	}
+
+	@Test
+	public void getMapsFromVersionWithRestClientException() {
+		mockServer.expect(requestTo(mapsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
+				.andExpect(method(HttpMethod.GET))
+				.andRespond(withServerError());
+
+		List<GameMap> maps = mapsService.getMaps(latestVersion);
+		mockServer.verify();
+
+		assertThat(maps).isEmpty();
+	}
+
+	@Test
 	public void getMaps() {
 		mockServer.expect(requestTo(versionsUri.toString()))
 				.andExpect(method(HttpMethod.GET))

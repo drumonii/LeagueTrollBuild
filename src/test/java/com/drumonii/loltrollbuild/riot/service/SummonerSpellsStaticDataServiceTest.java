@@ -2,7 +2,10 @@ package com.drumonii.loltrollbuild.riot.service;
 
 import com.drumonii.loltrollbuild.config.RiotApiConfig;
 import com.drumonii.loltrollbuild.model.SummonerSpell;
+import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.riot.api.RiotApiProperties;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -57,10 +60,15 @@ public class SummonerSpellsStaticDataServiceTest {
 	@Qualifier("summonerSpell")
 	private UriComponentsBuilder summonerSpellBuilder;
 
+	@Autowired
+	private ObjectMapper objectMapper;
+
 	@Value("${riot.static-data.region}")
 	private String region;
 
 	private String summonerSpellsJson;
+
+	private Version latestVersion;
 
 	@Before
 	public void before() {
@@ -70,6 +78,39 @@ public class SummonerSpellsStaticDataServiceTest {
 		} catch (IOException e) {
 			fail("Unable to read the Summoner Spells JSON.", e);
 		}
+		ClassPathResource versionsJson = new ClassPathResource("versions_static_data.json");
+		try {
+			List<Version> versions = objectMapper.readValue(versionsJson.getFile(), new TypeReference<List<Version>>() {});
+			latestVersion = versions.get(0);
+		} catch (IOException e) {
+			fail("Unable to unmarshal the Versions response.", e);
+		}
+	}
+
+	@Test
+	public void getSummonerSpellsFromVersion() {
+		mockServer.expect(requestTo(UriComponentsBuilder.fromUriString(summonerSpellsUri.toUriString())
+				.queryParam("version", latestVersion.getPatch()).build().toString()))
+				.andExpect(method(HttpMethod.GET))
+				.andRespond(withSuccess(summonerSpellsJson, MediaType.APPLICATION_JSON_UTF8));
+
+		List<SummonerSpell> summonerSpells = summonerSpellsService.getSummonerSpells(latestVersion);
+		mockServer.verify();
+
+		assertThat(summonerSpells).isNotEmpty();
+	}
+
+	@Test
+	public void getSummonerSpellsFromVersionWithRestClientException() {
+		mockServer.expect(requestTo(UriComponentsBuilder.fromUriString(summonerSpellsUri.toUriString())
+				.queryParam("version", latestVersion.getPatch()).build().toString()))
+				.andExpect(method(HttpMethod.GET))
+				.andRespond(withServerError());
+
+		List<SummonerSpell> summonerSpells = summonerSpellsService.getSummonerSpells(latestVersion);
+		mockServer.verify();
+
+		assertThat(summonerSpells).isEmpty();
 	}
 
 	@Test

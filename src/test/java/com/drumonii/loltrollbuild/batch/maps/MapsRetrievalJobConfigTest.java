@@ -63,7 +63,8 @@ public abstract class MapsRetrievalJobConfigTest {
 
 	@Test
 	public void savesNewMaps() throws Exception {
-		given(mapsService.getMaps()).willReturn(new ArrayList<>(mapsResponse.getMaps().values()));
+		given(mapsService.getMaps(eq(latestVersion)))
+				.willReturn(new ArrayList<>(mapsResponse.getMaps().values()));
 
 		JobExecution jobExecution = jobLauncherTestUtils.launchJob(getJobParameters());
 		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
@@ -77,7 +78,8 @@ public abstract class MapsRetrievalJobConfigTest {
 
 	@Test
 	public void savesMapsDifference() throws Exception {
-		given(mapsService.getMaps()).willReturn(new ArrayList<>(mapsResponse.getMaps().values()));
+		given(mapsService.getMaps(eq(latestVersion)))
+				.willReturn(new ArrayList<>(mapsResponse.getMaps().values()));
 
 		List<GameMap> maps = mapsRepository.saveAll(mapsResponse.getMaps().values());
 
@@ -106,7 +108,8 @@ public abstract class MapsRetrievalJobConfigTest {
 		GameMap mapToDelete = RandomizeUtil.getRandom(maps);
 		mapsResponse.getMaps().remove(String.valueOf(mapToDelete.getMapId()));
 
-		given(mapsService.getMaps()).willReturn(new ArrayList<>(mapsResponse.getMaps().values()));
+		given(mapsService.getMaps(eq(latestVersion)))
+				.willReturn(new ArrayList<>(mapsResponse.getMaps().values()));
 
 		JobExecution jobExecution = jobLauncherTestUtils.launchJob(getJobParameters());
 		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);

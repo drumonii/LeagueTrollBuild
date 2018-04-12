@@ -64,7 +64,7 @@ public abstract class SummonerSpellsRetrievalJobConfigTest {
 
 	@Test
 	public void savesNewSummonerSpells() throws Exception {
-		given(summonerSpellsService.getSummonerSpells())
+		given(summonerSpellsService.getSummonerSpells(eq(latestVersion)))
 				.willReturn(new ArrayList<>(summonerSpellsResponse.getSummonerSpells().values()));
 
 		List<SummonerSpell> summonerSpellsWithModes = summonerSpellsResponse.getSummonerSpells().values().stream()
@@ -82,7 +82,7 @@ public abstract class SummonerSpellsRetrievalJobConfigTest {
 
 	@Test
 	public void savesSummonerSpellsDifference() throws Exception {
-		given(summonerSpellsService.getSummonerSpells())
+		given(summonerSpellsService.getSummonerSpells(eq(latestVersion)))
 				.willReturn(new ArrayList<>(summonerSpellsResponse.getSummonerSpells().values()));
 
 		List<SummonerSpell> summonerSpellsWithModes = summonerSpellsResponse.getSummonerSpells().values().stream()
@@ -117,7 +117,7 @@ public abstract class SummonerSpellsRetrievalJobConfigTest {
 		SummonerSpell summonerSpellToDelete = RandomizeUtil.getRandom(summonerSpells);
 		summonerSpellsResponse.getSummonerSpells().remove(summonerSpellToDelete.getKey());
 
-		given(summonerSpellsService.getSummonerSpells())
+		given(summonerSpellsService.getSummonerSpells(eq(latestVersion)))
 				.willReturn(new ArrayList<>(summonerSpellsResponse.getSummonerSpells().values()));
 
 		JobExecution jobExecution = jobLauncherTestUtils.launchJob(getJobParameters());

@@ -36,11 +36,7 @@ public class MapsDdragonService implements MapsService {
 	private String locale;
 
 	@Override
-	public List<GameMap> getMaps() {
-		Version version = versionsService.getLatestVersion();
-		if (version == null) {
-			return new ArrayList<>();
-		}
+	public List<GameMap> getMaps(Version version) {
 		MapsResponse response;
 		try {
 			response = restTemplate.getForObject(mapsUri.buildAndExpand(version.getPatch(), locale).toString(),
@@ -50,6 +46,15 @@ public class MapsDdragonService implements MapsService {
 			return new ArrayList<>();
 		}
 		return new ArrayList<>(response.getMaps().values());
+	}
+
+	@Override
+	public List<GameMap> getMaps() {
+		Version version = versionsService.getLatestVersion();
+		if (version == null) {
+			return new ArrayList<>();
+		}
+		return getMaps(version);
 	}
 
 	@Override

@@ -63,7 +63,8 @@ public abstract class ItemsRetrievalJobConfigTest {
 
 	@Test
 	public void savesNewItems() throws Exception {
-		given(itemsService.getItems()).willReturn(new ArrayList<>(itemsResponse.getItems().values()));
+		given(itemsService.getItems(eq(latestVersion)))
+				.willReturn(new ArrayList<>(itemsResponse.getItems().values()));
 
 		JobExecution jobExecution = jobLauncherTestUtils.launchJob(getJobParameters());
 		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
@@ -77,7 +78,8 @@ public abstract class ItemsRetrievalJobConfigTest {
 
 	@Test
 	public void savesItemsDifference() throws Exception {
-		given(itemsService.getItems()).willReturn(new ArrayList<>(itemsResponse.getItems().values()));
+		given(itemsService.getItems(eq(latestVersion)))
+				.willReturn(new ArrayList<>(itemsResponse.getItems().values()));
 
 		List<Item> items = itemsRepository.saveAll(itemsResponse.getItems().values());
 
@@ -106,7 +108,8 @@ public abstract class ItemsRetrievalJobConfigTest {
 		Item itemToDelete = RandomizeUtil.getRandom(items);
 		itemsResponse.getItems().remove(String.valueOf(itemToDelete.getId()));
 
-		given(itemsService.getItems()).willReturn(new ArrayList<>(itemsResponse.getItems().values()));
+		given(itemsService.getItems(eq(latestVersion)))
+				.willReturn(new ArrayList<>(itemsResponse.getItems().values()));
 
 		JobExecution jobExecution = jobLauncherTestUtils.launchJob(getJobParameters());
 		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);

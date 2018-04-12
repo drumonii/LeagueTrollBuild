@@ -2,8 +2,11 @@ package com.drumonii.loltrollbuild.riot.service;
 
 import com.drumonii.loltrollbuild.config.RiotApiConfig;
 import com.drumonii.loltrollbuild.model.GameMap;
+import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.riot.api.RiotApiProperties;
 import com.drumonii.loltrollbuild.util.GameMapUtil;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,6 +24,7 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -53,10 +57,15 @@ public class MapsStaticDataServiceTest {
 	@Qualifier("maps")
 	private UriComponents mapsUri;
 
+	@Autowired
+	private ObjectMapper objectMapper;
+
 	@Value("${riot.static-data.region}")
 	private String region;
 
 	private String mapsJson;
+
+	private Version latestVersion;
 
 	@Before
 	public void before() {
@@ -66,6 +75,39 @@ public class MapsStaticDataServiceTest {
 		} catch (IOException e) {
 			fail("Unable to read the Maps JSON.", e);
 		}
+		ClassPathResource versionsJson = new ClassPathResource("versions_static_data.json");
+		try {
+			List<Version> versions = objectMapper.readValue(versionsJson.getFile(), new TypeReference<List<Version>>() {});
+			latestVersion = versions.get(0);
+		} catch (IOException e) {
+			fail("Unable to unmarshal the Versions response.", e);
+		}
+	}
+
+	@Test
+	public void getMapsFromVersion() {
+		mockServer.expect(requestTo(UriComponentsBuilder.fromUriString(mapsUri.toUriString())
+				.queryParam("version", latestVersion.getPatch()).build().toString()))
+				.andExpect(method(HttpMethod.GET))
+				.andRespond(withSuccess(mapsJson, MediaType.APPLICATION_JSON_UTF8));
+
+		List<GameMap> maps = mapsService.getMaps(latestVersion);
+		mockServer.verify();
+
+		assertThat(maps).isNotEmpty();
+	}
+
+	@Test
+	public void getMapsFromVersionWithRestClientException() {
+		mockServer.expect(requestTo(UriComponentsBuilder.fromUriString(mapsUri.toUriString())
+				.queryParam("version", latestVersion.getPatch()).build().toString()))
+				.andExpect(method(HttpMethod.GET))
+				.andRespond(withServerError());
+
+		List<GameMap> maps = mapsService.getMaps(latestVersion);
+		mockServer.verify();
+
+		assertThat(maps).isEmpty();
 	}
 
 	@Test

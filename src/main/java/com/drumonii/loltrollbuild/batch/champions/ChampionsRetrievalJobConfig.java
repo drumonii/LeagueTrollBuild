@@ -44,7 +44,7 @@ public class ChampionsRetrievalJobConfig {
 	public Step championsRetrievalStep() {
 		return stepBuilderFactory.get("championsRetrievalStep")
 				.<Champion, Champion> chunk(25)
-				.reader(championsRetrievalItemReader(null))
+				.reader(championsRetrievalItemReader(null, null))
 				.processor(championsRetrievalItemProcessor(null))
 				.writer(championsRetrievalItemWriter())
 				.build();
@@ -52,8 +52,9 @@ public class ChampionsRetrievalJobConfig {
 
 	@StepScope
 	@Bean
-	public ChampionsRetrievalItemReader championsRetrievalItemReader(ChampionsService championsService) {
-		return new ChampionsRetrievalItemReader(championsService.getChampions());
+	public ChampionsRetrievalItemReader championsRetrievalItemReader(ChampionsService championsService,
+			@Value("#{jobParameters['latestRiotPatch']}") Version latestRiotPatch) {
+		return new ChampionsRetrievalItemReader(championsService.getChampions(latestRiotPatch));
 	}
 
 	@StepScope

@@ -93,6 +93,30 @@ public class ItemsDdragonServiceTest {
 	}
 
 	@Test
+	public void getItemsFromVersion() {
+		mockServer.expect(requestTo(itemsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
+				.andExpect(method(HttpMethod.GET))
+				.andRespond(withSuccess(itemsJson, MediaType.APPLICATION_JSON_UTF8));
+
+		List<Item> items = itemsService.getItems(latestVersion);
+		mockServer.verify();
+
+		assertThat(items).isNotEmpty();
+	}
+
+	@Test
+	public void getItemsFromVersionWithRestClientException() {
+		mockServer.expect(requestTo(itemsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
+				.andExpect(method(HttpMethod.GET))
+				.andRespond(withServerError());
+
+		List<Item> items = itemsService.getItems(latestVersion);
+		mockServer.verify();
+
+		assertThat(items).isEmpty();
+	}
+
+	@Test
 	public void getItems() {
 		mockServer.expect(requestTo(versionsUri.toString()))
 				.andExpect(method(HttpMethod.GET))

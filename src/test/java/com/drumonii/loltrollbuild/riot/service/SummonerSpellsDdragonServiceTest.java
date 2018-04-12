@@ -93,6 +93,30 @@ public class SummonerSpellsDdragonServiceTest {
 	}
 
 	@Test
+	public void getSummonerSpellsFromVersion() {
+		mockServer.expect(requestTo(summonerSpellsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
+				.andExpect(method(HttpMethod.GET))
+				.andRespond(withSuccess(summonerSpellsJson, MediaType.APPLICATION_JSON_UTF8));
+
+		List<SummonerSpell> summonerSpells = summonerSpellsService.getSummonerSpells(latestVersion);
+		mockServer.verify();
+
+		assertThat(summonerSpells).isNotEmpty();
+	}
+
+	@Test
+	public void getSummonerSpellsFromVersionWithRestClientException() {
+		mockServer.expect(requestTo(summonerSpellsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
+				.andExpect(method(HttpMethod.GET))
+				.andRespond(withServerError());
+
+		List<SummonerSpell> summonerSpells = summonerSpellsService.getSummonerSpells(latestVersion);
+		mockServer.verify();
+
+		assertThat(summonerSpells).isEmpty();
+	}
+
+	@Test
 	public void getSummonerSpells() {
 		mockServer.expect(requestTo(versionsUri.toString()))
 				.andExpect(method(HttpMethod.GET))

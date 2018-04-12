@@ -36,11 +36,7 @@ public class ItemsDdragonService implements ItemsService {
 	private String locale;
 
 	@Override
-	public List<Item> getItems() {
-		Version version = versionsService.getLatestVersion();
-		if (version == null) {
-			return new ArrayList<>();
-		}
+	public List<Item> getItems(Version version) {
 		ItemsResponse response;
 		try {
 			response = restTemplate.getForObject(itemsUri.buildAndExpand(version.getPatch(), locale).toString(),
@@ -50,6 +46,15 @@ public class ItemsDdragonService implements ItemsService {
 			return new ArrayList<>();
 		}
 		return new ArrayList<>(response.getItems().values());
+	}
+
+	@Override
+	public List<Item> getItems() {
+		Version version = versionsService.getLatestVersion();
+		if (version == null) {
+			return new ArrayList<>();
+		}
+		return getItems(version);
 	}
 
 	@Override

@@ -44,7 +44,7 @@ public class SummonerSpellsRetrievalJobConfig {
 	public Step summonerSpellsRetrievalStep() {
 		return stepBuilderFactory.get("summonerSpellsRetrievalStep")
 				.<SummonerSpell, SummonerSpell> chunk(25)
-				.reader(summonerSpellsRetrievalItemReader(null))
+				.reader(summonerSpellsRetrievalItemReader(null, null))
 				.processor(summonerSpellsRetrievalItemProcessor(null))
 				.writer(summonerSpellsRetrievalItemWriter())
 				.build();
@@ -52,8 +52,9 @@ public class SummonerSpellsRetrievalJobConfig {
 
 	@StepScope
 	@Bean
-	public SummonerSpellsRetrievalItemReader summonerSpellsRetrievalItemReader(SummonerSpellsService summonerSpellsService) {
-		return new SummonerSpellsRetrievalItemReader(summonerSpellsService.getSummonerSpells());
+	public SummonerSpellsRetrievalItemReader summonerSpellsRetrievalItemReader(SummonerSpellsService summonerSpellsService,
+			@Value("#{jobParameters['latestRiotPatch']}") Version latestRiotPatch) {
+		return new SummonerSpellsRetrievalItemReader(summonerSpellsService.getSummonerSpells(latestRiotPatch));
 	}
 
 	@StepScope

@@ -44,7 +44,7 @@ public class ItemsRetrievalJobConfig {
 	public Step itemsRetrievalStep() {
 		return stepBuilderFactory.get("itemsRetrievalStep")
 				.<Item, Item> chunk(25)
-				.reader(itemsRetrievalItemReader(null))
+				.reader(itemsRetrievalItemReader(null, null))
 				.processor(itemsRetrievalItemProcessor(null))
 				.writer(itemsRetrievalItemWriter())
 				.build();
@@ -52,8 +52,9 @@ public class ItemsRetrievalJobConfig {
 
 	@StepScope
 	@Bean
-	public ItemsRetrievalItemReader itemsRetrievalItemReader(ItemsService itemsService) {
-		return new ItemsRetrievalItemReader(itemsService.getItems());
+	public ItemsRetrievalItemReader itemsRetrievalItemReader(ItemsService itemsService,
+			@Value("#{jobParameters['latestRiotPatch']}") Version latestRiotPatch) {
+		return new ItemsRetrievalItemReader(itemsService.getItems(latestRiotPatch));
 	}
 
 	@StepScope

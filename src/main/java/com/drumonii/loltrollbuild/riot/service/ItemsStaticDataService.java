@@ -2,6 +2,7 @@ package com.drumonii.loltrollbuild.riot.service;
 
 import com.drumonii.loltrollbuild.config.Profiles.StaticData;
 import com.drumonii.loltrollbuild.model.Item;
+import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.riot.api.ItemsResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,15 +37,24 @@ public class ItemsStaticDataService implements ItemsService {
 	private String region;
 
 	@Override
+	public List<Item> getItems(Version version) {
+		UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(itemsUri.toUriString())
+				.queryParam("version", version.getPatch());
+		return getItems(builder.toUriString());
+	}
+
+	@Override
 	public List<Item> getItems() {
-		ItemsResponse response;
+		return getItems(itemsUri.toString());
+	}
+
+	private List<Item> getItems(String url) {
 		try {
-			response = restTemplate.getForObject(itemsUri.toString(), ItemsResponse.class);
+			return new ArrayList<>(restTemplate.getForObject(url, ItemsResponse.class).getItems().values());
 		} catch (RestClientException e) {
 			log.warn("Unable to retrieve Items from lol-static-data-v3 due to:", e);
 			return new ArrayList<>();
 		}
-		return new ArrayList<>(response.getItems().values());
 	}
 
 	@Override

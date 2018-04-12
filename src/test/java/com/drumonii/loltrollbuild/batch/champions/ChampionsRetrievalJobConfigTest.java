@@ -62,7 +62,8 @@ public abstract class ChampionsRetrievalJobConfigTest {
 
 	@Test
 	public void savesNewChampions() throws Exception {
-		given(championsService.getChampions()).willReturn(new ArrayList<>(championsResponse.getChampions().values()));
+		given(championsService.getChampions(eq(latestVersion)))
+				.willReturn(new ArrayList<>(championsResponse.getChampions().values()));
 
 		JobExecution jobExecution = jobLauncherTestUtils.launchJob(getJobParameters());
 		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
@@ -78,7 +79,8 @@ public abstract class ChampionsRetrievalJobConfigTest {
 
 	@Test
 	public void savesChampionsDifference() throws Exception {
-		given(championsService.getChampions()).willReturn(new ArrayList<>(championsResponse.getChampions().values()));
+		given(championsService.getChampions(eq(latestVersion)))
+				.willReturn(new ArrayList<>(championsResponse.getChampions().values()));
 
 		List<Champion> champions = championsRepository.saveAll(championsResponse.getChampions().values());
 
@@ -109,7 +111,8 @@ public abstract class ChampionsRetrievalJobConfigTest {
 		Champion championToDelete = RandomizeUtil.getRandom(champions);
 		championsResponse.getChampions().remove(championToDelete.getKey());
 
-		given(championsService.getChampions()).willReturn(new ArrayList<>(championsResponse.getChampions().values()));
+		given(championsService.getChampions(eq(latestVersion)))
+				.willReturn(new ArrayList<>(championsResponse.getChampions().values()));
 
 		JobExecution jobExecution = jobLauncherTestUtils.launchJob(getJobParameters());
 		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);

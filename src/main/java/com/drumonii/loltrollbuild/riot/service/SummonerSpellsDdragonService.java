@@ -36,11 +36,7 @@ public class SummonerSpellsDdragonService implements SummonerSpellsService {
 	private String locale;
 
 	@Override
-	public List<SummonerSpell> getSummonerSpells() {
-		Version version = versionsService.getLatestVersion();
-		if (version == null) {
-			return new ArrayList<>();
-		}
+	public List<SummonerSpell> getSummonerSpells(Version version) {
 		SummonerSpellsResponse response;
 		try {
 			response = restTemplate.getForObject(summonerSpellsUri.buildAndExpand(version.getPatch(), locale).toString(),
@@ -50,6 +46,15 @@ public class SummonerSpellsDdragonService implements SummonerSpellsService {
 			return new ArrayList<>();
 		}
 		return new ArrayList<>(response.getSummonerSpells().values());
+	}
+
+	@Override
+	public List<SummonerSpell> getSummonerSpells() {
+		Version version = versionsService.getLatestVersion();
+		if (version == null) {
+			return new ArrayList<>();
+		}
+		return getSummonerSpells(version);
 	}
 
 	@Override

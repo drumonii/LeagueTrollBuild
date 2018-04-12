@@ -2,6 +2,7 @@ package com.drumonii.loltrollbuild.riot.service;
 
 import com.drumonii.loltrollbuild.config.Profiles.StaticData;
 import com.drumonii.loltrollbuild.model.Champion;
+import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.riot.api.ChampionsResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,15 +37,24 @@ public class ChampionsStaticDataService implements ChampionsService {
 	private String region;
 
 	@Override
+	public List<Champion> getChampions(Version version) {
+		UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(championsUri.toUriString())
+				.queryParam("version", version.getPatch());
+		return getChampions(builder.toUriString());
+	}
+
+	@Override
 	public List<Champion> getChampions() {
-		ChampionsResponse response;
+		return getChampions(championsUri.toString());
+	}
+
+	private List<Champion> getChampions(String url) {
 		try {
-			response = restTemplate.getForObject(championsUri.toString(), ChampionsResponse.class);
+			return new ArrayList<>(restTemplate.getForObject(url, ChampionsResponse.class).getChampions().values());
 		} catch (RestClientException e) {
 			log.warn("Unable to retrieve Champions from lol-static-data-v3 due to:", e);
 			return new ArrayList<>();
 		}
-		return new ArrayList<>(response.getChampions().values());
 	}
 
 	@Override
