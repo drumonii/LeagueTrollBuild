@@ -13,7 +13,6 @@ import java.util.List;
 import static com.drumonii.loltrollbuild.config.Profiles.DDRAGON;
 import static com.drumonii.loltrollbuild.config.Profiles.TESTING;
 import static org.assertj.core.api.Assertions.fail;
-import static org.mockito.BDDMockito.given;
 
 @ActiveProfiles({ TESTING, DDRAGON })
 public class VersionsDdragonRetrievalJobConfigTest extends VersionsRetrievalJobConfigTest {
@@ -28,8 +27,6 @@ public class VersionsDdragonRetrievalJobConfigTest extends VersionsRetrievalJobC
 		} catch (IOException e) {
 			fail("Unable to unmarshal the Versions response.", e);
 		}
-
-		given(versionsService.getVersions()).willReturn(versions);
 	}
 
 }

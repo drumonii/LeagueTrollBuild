@@ -14,7 +14,6 @@ import java.util.List;
 import static com.drumonii.loltrollbuild.config.Profiles.STATIC_DATA;
 import static com.drumonii.loltrollbuild.config.Profiles.TESTING;
 import static org.assertj.core.api.Assertions.fail;
-import static org.mockito.BDDMockito.given;
 
 @TestPropertySource(properties = { "riot.static-data.apiKey=API_KEY" })
 @ActiveProfiles({ TESTING, STATIC_DATA })
@@ -30,8 +29,6 @@ public class VersionsStaticDataRetrievalJobConfigTest extends VersionsRetrievalJ
 		} catch (IOException e) {
 			fail("Unable to unmarshal the Versions response.", e);
 		}
-
-		given(versionsService.getVersions()).willReturn(versions);
 	}
 
 }

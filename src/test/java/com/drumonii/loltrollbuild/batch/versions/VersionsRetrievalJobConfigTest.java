@@ -17,9 +17,12 @@ import org.springframework.context.annotation.Import;
 import org.springframework.data.domain.Sort;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
 import static org.springframework.data.domain.Sort.Direction.DESC;
 
 @RunWith(SpringRunner.class)
@@ -46,6 +49,30 @@ public abstract class VersionsRetrievalJobConfigTest {
 
 	@Test
 	public void savesNewVersions() throws Exception {
+		given(versionsService.getVersions()).willReturn(new ArrayList<>(versions));
+
+		JobExecution jobExecution = jobLauncherTestUtils.launchJob(getJobParameters());
+		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
+
+		assertThat(versionsRepository.findAll(new Sort(DESC, "major", "minor", "revision")))
+				.containsExactlyElementsOf(versions);
+	}
+
+	@Test
+	public void savesNewerVersion() throws Exception {
+		List<Version> versions = versionsRepository.saveAll(this.versions);
+
+		Version newerVersion = new Version();
+		newerVersion.setMajor(latestVersion.getMajor() + 1);
+		newerVersion.setMinor(latestVersion.getMinor() + 1);
+		newerVersion.setRevision(latestVersion.getRevision() + 1);
+		newerVersion.setPatch(newerVersion.getMajor() + "." + newerVersion.getMinor() + "." + newerVersion.getRevision());
+
+		versions.add(newerVersion);
+		versions.sort(Collections.reverseOrder());
+
+		given(versionsService.getVersions()).willReturn(new ArrayList<>(versions));
+
 		JobExecution jobExecution = jobLauncherTestUtils.launchJob(getJobParameters());
 		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
 
@@ -55,7 +82,9 @@ public abstract class VersionsRetrievalJobConfigTest {
 
 	@Test
 	public void ignoresOldVersions() throws Exception {
-		versions = versionsRepository.saveAll(versions);
+		List<Version> versions = versionsRepository.saveAll(this.versions);
+
+		given(versionsService.getVersions()).willReturn(new ArrayList<>(versions));
 
 		JobExecution jobExecution = jobLauncherTestUtils.launchJob(getJobParameters());
 		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
