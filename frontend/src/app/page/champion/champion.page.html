@@ -14,13 +14,37 @@
   </div>
 
   <hr>
-  
+
   <div>
     <h4>Map</h4>
-    <select [(ngModel)]="gameMapId">
+    <select [(ngModel)]="gameMapId" (change)="getTrollBuild(gameMapId)">
       <option *ngFor="let gameMap of gameMaps$ | async" [ngValue]="gameMap.mapId">
         {{gameMap.mapName}}
       </option>
     </select>
+    <button (click)="getTrollBuild(gameMapId)">New Build</button>
+  </div>
+
+  <hr>
+
+  <div *ngIf="(trollBuild$ | async) as trollBuild">
+    <div>
+      <h4>Items</h4>
+      <div *ngFor="let item of trollBuild.items">
+        {{item.name}}
+      </div>
+    </div>
+    <div>
+      <h4>Summoner Spells</h4>
+      <div *ngFor="let summonerSpell of trollBuild['summoner-spells']">
+        {{summonerSpell.name}}
+      </div>
+    </div>
+    <div>
+      <h4>Trinket</h4>
+      <div *ngFor="let trinket of trollBuild.trinket">
+        {{trinket.name}}
+      </div>
+    </div>
   </div>
 </ng-container>

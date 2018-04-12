@@ -9,6 +9,8 @@ import { ChampionsService } from '@service/champions.service';
 import { GameMapsService } from '@service/game-maps.service';
 import { Champion } from '@model/champion';
 import { GameMap } from '@model/game-map';
+import { Item } from '@model/item';
+import { SummonerSpell } from '@model/summoner-spell';
 
 @Component({
   selector: 'ltb-champion',
@@ -20,6 +22,7 @@ export class ChampionPage implements OnInit {
   gameMapId: number;
   champion$: Observable<Champion>;
   gameMaps$: Observable<GameMap[]>;
+  trollBuild$: Observable<Map<String, Item[] | SummonerSpell[]>>;
 
   constructor(private championService: ChampionsService, private gameMapsService: GameMapsService,
     private route: ActivatedRoute) {
@@ -29,6 +32,7 @@ export class ChampionPage implements OnInit {
   ngOnInit() {
     this.getChampion();
     this.getGameMaps();
+    this.getTrollBuild();
   }
 
   getChampion(): void {
@@ -38,6 +42,11 @@ export class ChampionPage implements OnInit {
 
   getGameMaps(): void {
     this.gameMaps$ = this.gameMapsService.forTrollBuild();
+  }
+
+  getTrollBuild(gameMapId?: number): void {
+    this.trollBuild$ = this.route.paramMap
+      .switchMap((params: ParamMap) => this.championService.getTrollBuild(params.get('name'), gameMapId));
   }
 
 }
