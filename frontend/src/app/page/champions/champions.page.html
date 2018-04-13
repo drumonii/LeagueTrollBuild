@@ -1,4 +1,4 @@
-<ng-container *ngIf="(champions$ | async) as champions">
+<ng-container *ngIf="(champions$ | async) as champions; else championsLoading">
   <ng-container *ngIf="champions.length; else noChampions">
     <input type="text" placeholder="Search by Champion" [(ngModel)]="championsSearchName"/>
 
@@ -19,3 +19,7 @@
     <p>No Champions exist in the database!</p>
   </ng-template>
 </ng-container>
+
+<ng-template #championsLoading>
+  <!-- Loading -->
+</ng-template>
