@@ -27,7 +27,7 @@
 
   <hr>
 
-  <div *ngIf="(trollBuild$ | async) as trollBuild">
+  <div *ngIf="(trollBuild$ | async) as trollBuild; else loadingTrollBuild">
     <div>
       <h4>Items</h4>
       <div *ngFor="let item of trollBuild.items">
@@ -47,4 +47,25 @@
       </div>
     </div>
   </div>
+
+  <ng-template #loadingTrollBuild>
+    <div>
+      <h4>Items</h4>
+      <div *ngFor="let item of [0, 1, 2, 3, 4, 5]">
+        Item
+      </div>
+    </div>
+    <div>
+      <h4>Summoner Spells</h4>
+      <div *ngFor="let summonerSpell of [0, 1]">
+        Summoner Spell
+      </div>
+    </div>
+    <div>
+      <h4>Trinket</h4>
+      <div *ngFor="let trinket of [0]">
+        Trinket
+      </div>
+    </div>
+  </ng-template>
 </ng-container>
