@@ -1,6 +1,6 @@
 {
   "type": "summoner",
-  "version": "8.5.1",
+  "version": "8.7.1",
   "data": {
     "SummonerBarrier": {
       "id": "SummonerBarrier",
@@ -363,7 +363,7 @@
     "SummonerDot": {
       "id": "SummonerDot",
       "name": "Ignite",
-      "description": "Ignites target enemy champion, dealing 70-410 true damage (depending on champion level) over 5 seconds, grants you vision of the target, and reduces healing effects on them for the duration.",
+      "description": "Ignites target enemy champion, dealing 80-505 true damage (depending on champion level) over 5 seconds, grants you vision of the target, and reduces healing effects on them for the duration.",
       "tooltip": "Ignite deals <span class=\"colorFEFCFF\">{{ f1 }}</span> true damage to target enemy champion over 5 seconds, grants you vision of the target and applies Grievous Wounds for the duration.<br /><br /><rules>(Grievous Wounds reduces healing effects by 40%. This vision does not reveal stealthed enemies.)</rules>",
       "maxrank": 1,
       "cooldown": [
@@ -380,10 +380,10 @@
           5
         ],
         [
-          10
+          11
         ],
         [
-          4
+          5
         ],
         [
           100
@@ -410,8 +410,8 @@
       "effectBurn": [
         null,
         "5",
-        "10",
-        "4",
+        "11",
+        "5",
         "100",
         "0",
         "0",
@@ -760,7 +760,7 @@
         "full": "SummonerHaste.png",
         "sprite": "spell0.png",
         "group": "spell",
-        "x": 432,
+        "x": 336,
         "y": 0,
         "w": 48,
         "h": 48
@@ -774,9 +774,9 @@
       "tooltip": "Restores {{ f1 }} Health and grants 30% Movement Speed for 1 second to your champion and target allied champion. This healing is halved for units recently affected by Summoner Heal.<br /><br /><span class=\"colorFFFF00\">If this spell cannot find a target, it will cast on the most wounded allied champion in range.</span>",
       "maxrank": 1,
       "cooldown": [
-        240
+        270
       ],
-      "cooldownBurn": "240",
+      "cooldownBurn": "270",
       "cost": [
         0
       ],
@@ -799,7 +799,7 @@
           826
         ],
         [
-          0
+          0.5
         ],
         [
           0
@@ -821,7 +821,7 @@
         "15",
         "0.5",
         "826",
-        "0",
+        "0.5",
         "0",
         "0",
         "0",
@@ -880,8 +880,8 @@
         "full": "SummonerHeal.png",
         "sprite": "spell0.png",
         "group": "spell",
-        "x": 0,
-        "y": 48,
+        "x": 384,
+        "y": 0,
         "w": 48,
         "h": 48
       },
@@ -1014,8 +1014,8 @@
         "full": "SummonerMana.png",
         "sprite": "spell0.png",
         "group": "spell",
-        "x": 48,
-        "y": 48,
+        "x": 432,
+        "y": 0,
         "w": 48,
         "h": 48
       },
@@ -1097,7 +1097,7 @@
         "full": "SummonerPoroRecall.png",
         "sprite": "spell0.png",
         "group": "spell",
-        "x": 96,
+        "x": 0,
         "y": 48,
         "w": 48,
         "h": 48
@@ -1180,7 +1180,7 @@
         "full": "SummonerPoroThrow.png",
         "sprite": "spell0.png",
         "group": "spell",
-        "x": 144,
+        "x": 48,
         "y": 48,
         "w": 48,
         "h": 48
@@ -1263,7 +1263,7 @@
         "full": "SummonerSiegeChampSelect1.png",
         "sprite": "spell0.png",
         "group": "spell",
-        "x": 192,
+        "x": 96,
         "y": 48,
         "w": 48,
         "h": 48
@@ -1345,7 +1345,7 @@
         "full": "SummonerSiegeChampSelect2.png",
         "sprite": "spell0.png",
         "group": "spell",
-        "x": 240,
+        "x": 144,
         "y": 48,
         "w": 48,
         "h": 48
@@ -1458,7 +1458,7 @@
         "full": "SummonerSmite.png",
         "sprite": "spell0.png",
         "group": "spell",
-        "x": 288,
+        "x": 192,
         "y": 48,
         "w": 48,
         "h": 48
@@ -1541,7 +1541,7 @@
         "full": "SummonerSnowURFSnowball_Mark.png",
         "sprite": "spell0.png",
         "group": "spell",
-        "x": 336,
+        "x": 240,
         "y": 48,
         "w": 48,
         "h": 48
@@ -1625,7 +1625,7 @@
         "full": "SummonerSnowball.png",
         "sprite": "spell0.png",
         "group": "spell",
-        "x": 432,
+        "x": 288,
         "y": 48,
         "w": 48,
         "h": 48
@@ -1720,8 +1720,8 @@
         "full": "SummonerTeleport.png",
         "sprite": "spell0.png",
         "group": "spell",
-        "x": 0,
-        "y": 96,
+        "x": 336,
+        "y": 48,
         "w": 48,
         "h": 48
       },
