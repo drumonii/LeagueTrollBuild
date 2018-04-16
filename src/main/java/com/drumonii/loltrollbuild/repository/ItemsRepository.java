@@ -32,7 +32,7 @@ public interface ItemsRepository extends JpaRepository<Item, Integer>, JpaSpecif
 	 */
 	@Query("select i from Item i join i.from f left join i.maps m " +
 		   "where i.id <> 1001 and f in ('1001') " +
-		   "and (key(m) <> :mapId and m = false) " +
+		   "and (key(m) <> :mapId and m = true) " +
 		   "group by i.id")
 	@Cacheable(key = "{#root.methodName, #mapId}")
 	List<Item> boots(@Param("mapId") int mapId);
