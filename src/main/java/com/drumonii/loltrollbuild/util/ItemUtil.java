@@ -17,6 +17,9 @@ public class ItemUtil {
 	 * @return {@code true} if requires Ornn, otherwise {@code false}
 	 */
 	public static boolean requiresAllyOrnn(String colloq) {
+		if (colloq == null) {
+			return false;
+		}
 		return colloq.contains("Ornn");
 	}
 

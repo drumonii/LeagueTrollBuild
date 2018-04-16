@@ -11,6 +11,8 @@ public class ItemUtilTest {
 
 	@Test
 	public void determinesIfRequiresAllyOrnn() {
+		assertThat(ItemUtil.requiresAllyOrnn(null)).isFalse();
+
 		String colloq = "ie;Ornn;forge;Masterwork";
 
 		assertThat(ItemUtil.requiresAllyOrnn(colloq)).isTrue();
