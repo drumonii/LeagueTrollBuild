@@ -70,10 +70,10 @@ public abstract class MapsRestControllerTest {
 		mockMvc.perform(get("{apiPath}/maps/{id}", apiPath, 0))
 				.andExpect(status().isNotFound());
 
-		GameMap butchersBridge = mapsResponse.getMaps().get("14");
+		GameMap howlingAbyss = mapsResponse.getMaps().get("12");
 
 		// find with existing map Id
-		mockMvc.perform(get("{apiPath}/maps/{id}", apiPath, butchersBridge.getMapId()))
+		mockMvc.perform(get("{apiPath}/maps/{id}", apiPath, howlingAbyss.getMapId()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
 				.andExpect(jsonPath("$.[*]").isNotEmpty());
