@@ -30,10 +30,9 @@ public interface ItemsRepository extends JpaRepository<Item, Integer>, JpaSpecif
 	 * @see <a href="http://leagueoflegends.wikia.com/wiki/Boots_of_Speed">Boots of Speed</a>
 	 * @see <a href="http://leagueoflegends.wikia.com/wiki/Advanced_item">Advanced Items</a>
 	 */
-	@Query("select i from Item i join i.from f left join i.maps m " +
+	@Query("select distinct i from Item i join i.from f join i.maps m " +
 		   "where i.id <> 1001 and f in ('1001') " +
-		   "and (key(m) <> :mapId and m = true) " +
-		   "group by i.id")
+		   "and (key(m) <> :mapId and m = true)")
 	@Cacheable(key = "{#root.methodName, #mapId}")
 	List<Item> boots(@Param("mapId") int mapId);
 
@@ -44,11 +43,10 @@ public interface ItemsRepository extends JpaRepository<Item, Integer>, JpaSpecif
 	 * @return a {@link List} of basic Trinket {@link Item}s
 	 * @see <a href="http://leagueoflegends.wikia.com/wiki/Trinket">Trinket</a>
 	 */
-	@Query("select i from Item i left join i.maps m " +
+	@Query("select distinct i from Item i join i.maps m " +
 		   "where (i.name like '%Trinket%' or i.description like '%Trinket%') " +
 		   "and i.gold.total = 0 and i.gold.purchasable = true " +
-	       "and (key(m) <> :mapId and m = false) " +
-		   "group by i.id")
+	       "and (key(m) <> :mapId and m = false)")
 	@Cacheable(key = "{#root.methodName, #mapId}")
 	List<Item> trinkets(@Param("mapId") int mapId);
 
