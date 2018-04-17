@@ -6,13 +6,12 @@
       {{tag}}
     </button>
 
-    <ul>
-      <li *ngFor="let champion of (champions | championsNameFilter : championsSearchName | championsTagsFilter : championsFilterTag)">
-        <a [routerLink]="['/champions', champion.key]">
-          {{champion.name}}
-        </a>
-      </li>
-    </ul>
+    <div *ngFor="let champion of (champions | championsNameFilter : championsSearchName | championsTagsFilter : championsFilterTag)">
+      <a [routerLink]="['/champions', champion.key]">
+        <img src="data:image/png;base64,{{champion.image.imgSrc}}">
+        {{champion.name}}
+      </a>
+    </div>
   </ng-container>
 
   <ng-template #noChampions>

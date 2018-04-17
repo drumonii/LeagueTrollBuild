@@ -1,14 +1,17 @@
 <ng-container *ngIf="(champion$ | async) as champion">
   <h4>{{champion.name}} - {{champion.title}}</h4>
+  <img src="data:image/png;base64,{{champion.image.imgSrc}}">
   <p>({{champion.partype}})</p>
   <ul>
     <li *ngFor="let tag of champion.tags">{{tag}}</li>
   </ul>
   <div>
+    <img src="data:image/png;base64,{{champion.passive.image.imgSrc}}">
     <p>{{champion.passive.name}}</p>
     <p>{{champion.passive.description}}</p>
   </div>
   <div *ngFor="let spell of champion.spells">
+    <img src="data:image/png;base64,{{spell.image.imgSrc}}">
     <p>{{spell.name}}</p>
     <p>{{spell.description}}</p>
   </div>
@@ -31,18 +34,21 @@
     <div>
       <h4>Items</h4>
       <div *ngFor="let item of trollBuild.items">
+        <img src="data:image/png;base64,{{item.image.imgSrc}}">
         {{item.name}}
       </div>
     </div>
     <div>
       <h4>Summoner Spells</h4>
       <div *ngFor="let summonerSpell of trollBuild['summoner-spells']">
+        <img src="data:image/png;base64,{{summonerSpell.image.imgSrc}}">
         {{summonerSpell.name}}
       </div>
     </div>
     <div>
       <h4>Trinket</h4>
       <div *ngFor="let trinket of trollBuild.trinket">
+        <img src="data:image/png;base64,{{trinket.image.imgSrc}}">
         {{trinket.name}}
       </div>
     </div>
