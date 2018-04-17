@@ -31,7 +31,7 @@ public class Image implements Serializable {
 	@Getter @Setter String group;
 
 	@Column(name = "IMG_SRC", columnDefinition = "BYTEA", nullable = false)
-	@JsonIgnore
+	@JsonProperty("imgSrc")
 	@Getter @Setter byte[] imgSrc = new byte[0];
 
 	@Column(name = "X", nullable = false)
