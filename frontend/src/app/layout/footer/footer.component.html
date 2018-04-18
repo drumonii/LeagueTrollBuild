@@ -1,3 +1,5 @@
 <footer>
-  footer works!
+  <p id="latest-saved-version" *ngIf="(latestVersion$ | async) as latestVersion">
+    Patch {{latestVersion.patch}}
+  </p>
 </footer>
