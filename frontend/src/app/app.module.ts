@@ -16,6 +16,7 @@ import { ChampionsPage } from '@page/champions/champions.page';
 import { ChampionsNameFilterPipe } from '@pipe/champions-name-filter.pipe';
 import { ChampionsTagsFilterPipe } from '@pipe/champions-tags-filter.pipe';
 
+import { BuildsService } from '@service/builds.service';
 import { ChampionsService } from '@service/champions.service';
 import { GameMapsService } from '@service/game-maps.service';
 import { VersionsService } from '@service/versions.service';
@@ -39,6 +40,7 @@ import { BaseUrlHttpInterceptor } from './interceptor/base-url.http-interceptor'
     HttpClientModule
   ],
   providers: [
+    BuildsService,
     ChampionsService,
     GameMapsService,
     VersionsService,
