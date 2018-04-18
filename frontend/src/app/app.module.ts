@@ -18,6 +18,7 @@ import { ChampionsTagsFilterPipe } from '@pipe/champions-tags-filter.pipe';
 
 import { ChampionsService } from '@service/champions.service';
 import { GameMapsService } from '@service/game-maps.service';
+import { VersionsService } from '@service/versions.service';
 
 import { BaseUrlHttpInterceptor } from './interceptor/base-url.http-interceptor';
 
@@ -40,6 +41,7 @@ import { BaseUrlHttpInterceptor } from './interceptor/base-url.http-interceptor'
   providers: [
     ChampionsService,
     GameMapsService,
+    VersionsService,
     { provide: HTTP_INTERCEPTORS, useClass: BaseUrlHttpInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
