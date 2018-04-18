@@ -71,4 +71,21 @@ public abstract class VersionsRestControllerTest {
 				.andExpect(jsonPath("$.[*]").isNotEmpty());
 	}
 
+	@Test
+	public void getLatestVersion() throws Exception {
+		// get latest version with saved versions
+		mockMvc.perform(get("{apiPath}/versions/latest", apiPath))
+				.andExpect(status().isOk())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(jsonPath("$.major", is(versions.get(0).getMajor())))
+				.andExpect(jsonPath("$.minor", is(versions.get(0).getMinor())))
+				.andExpect(jsonPath("$.revision", is(versions.get(0).getRevision())));
+
+		versionsRepository.deleteAll();
+
+		// get latest version with no saved versions
+		mockMvc.perform(get("{apiPath}/versions/latest", apiPath))
+				.andExpect(status().isNotFound());
+	}
+
 }

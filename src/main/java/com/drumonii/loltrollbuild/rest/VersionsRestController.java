@@ -55,4 +55,18 @@ public class VersionsRestController {
 		return version.orElseThrow(() -> new ResourceNotFoundException("Unable to find a Version with patch: " + patch));
 	}
 
+	/**
+	 * Gets the latest saved {@link Version}. If there's no versions, returns 404, otherwise a 200.
+	 *
+	 * @return the {@link Version}
+	 */
+	@GetMapping(path = "/latest")
+	public Version getLatestVersion() {
+		Version version = versionsRepository.latestVersion();
+		if (version == null) {
+			throw new ResourceNotFoundException("Unable to get the latest Version with no saved Versions");
+		}
+		return version;
+	}
+
 }
