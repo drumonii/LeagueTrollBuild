@@ -50,7 +50,7 @@ and `ddragon` profiles will be active.
 == Riot API Key
 An https://developer.riotgames.com/api-keys.html[API key] provided from Riot is required to use https://developer.riotgames.com/api-methods/#lol-static-data-v3[lol-static-data-v3].
 
-When running `LeagueTrollBuild` with the `static-data` profile, the API key is supplied using the `RIOT_STATICDATA_APIKEY` environment
+When running `LeagueTrollBuild` with the `static-data` profile, the API key is supplied using the `RIOT_STATIC_DATA_API_KEY` environment
 variable or the `-Driot.static-data.apiKey` argument property. If the API key is not supplied, the configuration properties validation
 will fail and thus the app will not start (by design).
 

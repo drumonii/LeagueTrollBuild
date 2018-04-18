@@ -4,10 +4,10 @@
 
 riot:
   static-data:
-    apiKey: # from RIOT_STATICDATA_APIKEY environment variable or -Driot.staticdata.apiKey argument property
+    api-key: # from RIOT_STATICDATA_APIKEY environment variable or -Driot.staticdata.apiKey argument property
     base-url: "{region}.api.riotgames.com/lol/static-data/v3"
-    keyParam: api_key
-    localeParam: locale
+    key-param: api_key
+    locale-param: locale
     locale: en_US
     region: na1
     champions: /champions
