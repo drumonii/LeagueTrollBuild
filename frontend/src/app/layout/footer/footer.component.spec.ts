@@ -35,5 +35,8 @@ describe('FooterComponent', () => {
 
     const latestVersionDe = fixture.debugElement.query(By.css('#latest-saved-version'));
     expect(latestVersionDe.nativeElement.textContent.trim()).toBe(`Patch ${latestVersion.patch}`);
+
+    const disclaimerDe = fixture.debugElement.query(By.css('#disclaimer'));
+    expect(disclaimerDe).toBeTruthy();
   }));
 });
