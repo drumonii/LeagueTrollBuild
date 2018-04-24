@@ -55,6 +55,9 @@ spring:
   jackson:
     deserialization:
       fail_on_unknown_properties: false
+  # JPA
+  jpa:
+    open-in-view: false
 # Actuator
 management:
   endpoint:
