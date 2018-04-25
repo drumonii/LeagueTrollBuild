@@ -86,8 +86,12 @@ public class BuildsRestController {
 		if (bindingResult.hasErrors()) {
 			throw new BadRequestException(bindingResult.getAllErrors());
 		}
-		return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest().build().toUri())
-				.body(buildsRepository.save(build));
+		Build savedBuild = buildsRepository.save(build);
+		return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest()
+				.path("/{id}")
+				.buildAndExpand(savedBuild.getId())
+				.toUri())
+				.body(savedBuild);
 	}
 
 }
