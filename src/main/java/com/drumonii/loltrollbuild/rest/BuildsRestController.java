@@ -84,7 +84,7 @@ public class BuildsRestController {
 	@ResponseBody
 	public ResponseEntity<Build> saveBuild(@RequestBody @Valid Build build, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
-			throw new BadRequestException(bindingResult.getAllErrors());
+			throw new BadRequestException(bindingResult.getFieldErrors());
 		}
 		Build savedBuild = buildsRepository.save(build);
 		return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest()
