@@ -596,27 +596,27 @@ public class ApiDocumentation {
 								.description("The Id of the Build"),
 						fieldWithPath("content.[*].createdDate")
 								.description("The date the Build was created"),
-						fieldWithPath("content.[*].champion")
+						fieldWithPath("content.[*].championId")
 								.description("The Champion Id of the Build"),
-						fieldWithPath("content.[*].item1")
+						fieldWithPath("content.[*].item1Id")
 								.description("The Item 1 Id (boots) of the Build"),
-						fieldWithPath("content.[*].item2")
+						fieldWithPath("content.[*].item2Id")
 								.description("The Item 2 Id of the Build"),
-						fieldWithPath("content.[*].item3")
+						fieldWithPath("content.[*].item3Id")
 								.description("The Item 3 Id of the Build"),
-						fieldWithPath("content.[*].item4")
+						fieldWithPath("content.[*].item4Id")
 								.description("The Item 4 Id of the Build"),
-						fieldWithPath("content.[*].item5")
+						fieldWithPath("content.[*].item5Id")
 								.description("The Item 5 Id of the Build"),
-						fieldWithPath("content.[*].item6")
+						fieldWithPath("content.[*].item6Id")
 								.description("The Item 6 Id of the Build"),
-						fieldWithPath("content.[*].summonerSpell1")
+						fieldWithPath("content.[*].summonerSpell1Id")
 								.description("The Summoner Spell 1 Id of the Build"),
-						fieldWithPath("content.[*].summonerSpell2")
+						fieldWithPath("content.[*].summonerSpell2Id")
 								.description("The Summoner Spell 2 Id of the Build"),
-						fieldWithPath("content.[*].trinket")
+						fieldWithPath("content.[*].trinketId")
 								.description("The Trinket Id of the Build"),
-						fieldWithPath("content.[*].map")
+						fieldWithPath("content.[*].mapId")
 								.description("The Map Id of the Build"))));
 	}
 
@@ -643,27 +643,27 @@ public class ApiDocumentation {
 								.description("The Id of the Build"),
 						fieldWithPath("createdDate")
 								.description("The date the Build was created"),
-						fieldWithPath("champion")
+						fieldWithPath("championId")
 								.description("The Champion Id of the Build"),
-						fieldWithPath("item1")
+						fieldWithPath("item1Id")
 								.description("The Item 1 Id (boots) of the Build"),
-						fieldWithPath("item2")
+						fieldWithPath("item2Id")
 								.description("The Item 2 Id of the Build"),
-						fieldWithPath("item3")
+						fieldWithPath("item3Id")
 								.description("The Item 3 Id of the Build"),
-						fieldWithPath("item4")
+						fieldWithPath("item4Id")
 								.description("The Item 4 Id of the Build"),
-						fieldWithPath("item5")
+						fieldWithPath("item5Id")
 								.description("The Item 5 Id of the Build"),
-						fieldWithPath("item6")
+						fieldWithPath("item6Id")
 								.description("The Item 6 Id of the Build"),
-						fieldWithPath("summonerSpell1")
+						fieldWithPath("summonerSpell1Id")
 								.description("The Summoner Spell 1 Id of the Build"),
-						fieldWithPath("summonerSpell2")
+						fieldWithPath("summonerSpell2Id")
 								.description("The Summoner Spell 2 Id of the Build"),
-						fieldWithPath("trinket")
+						fieldWithPath("trinketId")
 								.description("The Trinket Id of the Build"),
-						fieldWithPath("map")
+						fieldWithPath("mapId")
 								.description("The Map Id of the Build"))));
 	}
 

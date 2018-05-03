@@ -1,6 +1,7 @@
 package com.drumonii.loltrollbuild.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -19,6 +20,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "BUILD")
 @EntityListeners(AuditingEntityListener.class)
+@JsonInclude(Include.NON_NULL)
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(exclude = { "id", "createdDate", "champion", "item1", "item2", "item3", "item4", "item5", "item6",
@@ -36,57 +38,57 @@ public class Build implements Serializable, Validator {
 
     @NotNull
     @Column(name = "CHAMPION_ID", nullable = false)
-    @JsonProperty("champion")
+    @JsonProperty("championId")
     @Getter @Setter private Integer championId;
 
     @NotNull
     @Column(name = "ITEM_1_ID", nullable = false)
-    @JsonProperty("item1")
+    @JsonProperty("item1Id")
     @Getter @Setter private Integer item1Id;
 
     @NotNull
     @Column(name = "ITEM_2_ID", nullable = false)
-    @JsonProperty("item2")
+    @JsonProperty("item2Id")
     @Getter @Setter private Integer item2Id;
 
     @NotNull
     @Column(name = "ITEM_3_ID", nullable = false)
-    @JsonProperty("item3")
+    @JsonProperty("item3Id")
     @Getter @Setter private Integer item3Id;
 
     @NotNull
     @Column(name = "ITEM_4_ID", nullable = false)
-    @JsonProperty("item4")
+    @JsonProperty("item4Id")
     @Getter @Setter private Integer item4Id;
 
     @NotNull
     @Column(name = "ITEM_5_ID", nullable = false)
-    @JsonProperty("item5")
+    @JsonProperty("item5Id")
     @Getter @Setter private Integer item5Id;
 
     @NotNull
     @Column(name = "ITEM_6_ID", nullable = false)
-    @JsonProperty("item6")
+    @JsonProperty("item6Id")
     @Getter @Setter private Integer item6Id;
 
     @NotNull
     @Column(name = "SUMMONER_SPELL_1_ID", nullable = false)
-    @JsonProperty("summonerSpell1")
+    @JsonProperty("summonerSpell1Id")
     @Getter @Setter private Integer summonerSpell1Id;
 
     @NotNull
     @Column(name = "SUMMONER_SPELL_2_ID", nullable = false)
-    @JsonProperty("summonerSpell2")
+    @JsonProperty("summonerSpell2Id")
     @Getter @Setter private Integer summonerSpell2Id;
 
     @NotNull
     @Column(name = "TRINKET_ID")
-    @JsonProperty("trinket")
+    @JsonProperty("trinketId")
     @Getter @Setter private Integer trinketId;
 
     @NotNull
     @Column(name = "MAP_ID", nullable = false)
-    @JsonProperty("map")
+    @JsonProperty("mapId")
     @Getter @Setter private Integer mapId;
 
     @Column(name = "CREATED_DATE", nullable = false)
@@ -94,47 +96,47 @@ public class Build implements Serializable, Validator {
     @Getter @Setter private LocalDateTime createdDate;
 
     @Transient
-    @JsonIgnore
+	@JsonProperty("champion")
     @Getter @Setter private Champion champion;
 
     @Transient
-    @JsonIgnore
+	@JsonProperty("item1")
     @Getter @Setter private Item item1;
 
     @Transient
-    @JsonIgnore
+	@JsonProperty("item2")
     @Getter @Setter private Item item2;
 
     @Transient
-    @JsonIgnore
+	@JsonProperty("item3")
     @Getter @Setter private Item item3;
 
     @Transient
-    @JsonIgnore
+	@JsonProperty("item4")
     @Getter @Setter private Item item4;
 
     @Transient
-    @JsonIgnore
+	@JsonProperty("item5")
     @Getter @Setter private Item item5;
 
     @Transient
-    @JsonIgnore
+	@JsonProperty("item6")
     @Getter @Setter private Item item6;
 
     @Transient
-    @JsonIgnore
+	@JsonProperty("summonerSpell1")
     @Getter @Setter private SummonerSpell summonerSpell1;
 
     @Transient
-    @JsonIgnore
+	@JsonProperty("summonerSpell2")
     @Getter @Setter private SummonerSpell summonerSpell2;
 
     @Transient
-    @JsonIgnore
+	@JsonProperty("trinket")
     @Getter @Setter private Item trinket;
 
     @Transient
-    @JsonIgnore
+	@JsonProperty("map")
     @Getter @Setter private GameMap map;
 
     @Override

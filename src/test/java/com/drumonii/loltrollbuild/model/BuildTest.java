@@ -46,17 +46,17 @@ public class BuildTest {
 			fail("Unable to serialize Build into JSON", e);
 		}
 
-		assertThat(jsonContent).hasJsonPathNumberValue("$.champion");
-		assertThat(jsonContent).hasJsonPathNumberValue("$.item1");
-		assertThat(jsonContent).hasJsonPathNumberValue("$.item2");
-		assertThat(jsonContent).hasJsonPathNumberValue("$.item3");
-		assertThat(jsonContent).hasJsonPathNumberValue("$.item4");
-		assertThat(jsonContent).hasJsonPathNumberValue("$.item5");
-		assertThat(jsonContent).hasJsonPathNumberValue("$.item6");
-		assertThat(jsonContent).hasJsonPathNumberValue("$.summonerSpell1");
-		assertThat(jsonContent).hasJsonPathNumberValue("$.summonerSpell2");
-		assertThat(jsonContent).hasJsonPathNumberValue("$.trinket");
-		assertThat(jsonContent).hasJsonPathNumberValue("$.map");
+		assertThat(jsonContent).hasJsonPathNumberValue("$.championId");
+		assertThat(jsonContent).hasJsonPathNumberValue("$.item1Id");
+		assertThat(jsonContent).hasJsonPathNumberValue("$.item2Id");
+		assertThat(jsonContent).hasJsonPathNumberValue("$.item3Id");
+		assertThat(jsonContent).hasJsonPathNumberValue("$.item4Id");
+		assertThat(jsonContent).hasJsonPathNumberValue("$.item5Id");
+		assertThat(jsonContent).hasJsonPathNumberValue("$.item6Id");
+		assertThat(jsonContent).hasJsonPathNumberValue("$.summonerSpell1Id");
+		assertThat(jsonContent).hasJsonPathNumberValue("$.summonerSpell2Id");
+		assertThat(jsonContent).hasJsonPathNumberValue("$.trinketId");
+		assertThat(jsonContent).hasJsonPathNumberValue("$.mapId");
 	}
 
 	@Test
@@ -65,17 +65,17 @@ public class BuildTest {
 				"{ " +
 				"  \"createdDate\": \"2017-09-14T22:55:26.47\", " +
 				"  \"id\": 1, " +
-				"  \"champion\": 1, " +
-				"  \"item1\": 1, " +
-				"  \"item2\": 2, " +
-				"  \"item3\": 3, " +
-				"  \"item4\": 4, " +
-				"  \"item5\": 5, " +
-				"  \"item6\": 6, " +
-				"  \"summonerSpell1\": 1, " +
-				"  \"summonerSpell2\": 2, " +
-				"  \"trinket\": 7, " +
-				"  \"map\": 1 " +
+				"  \"championId\": 1, " +
+				"  \"item1Id\": 1, " +
+				"  \"item2Id\": 2, " +
+				"  \"item3Id\": 3, " +
+				"  \"item4Id\": 4, " +
+				"  \"item5Id\": 5, " +
+				"  \"item6Id\": 6, " +
+				"  \"summonerSpell1Id\": 1, " +
+				"  \"summonerSpell2Id\": 2, " +
+				"  \"trinketId\": 7, " +
+				"  \"mapId\": 1 " +
 				"}";
 
 		ObjectContent<Build> build = null;
