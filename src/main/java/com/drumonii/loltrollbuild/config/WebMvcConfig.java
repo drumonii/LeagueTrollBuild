@@ -15,7 +15,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
 		// for Angular
 		registry.addMapping("/**")
 				.allowedOrigins("http://localhost:4200")
-				.allowCredentials(true);
+				.allowCredentials(true)
+				.exposedHeaders("Location");
 	}
 
 }
