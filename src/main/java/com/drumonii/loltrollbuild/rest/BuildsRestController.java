@@ -1,7 +1,7 @@
 package com.drumonii.loltrollbuild.rest;
 
 import com.drumonii.loltrollbuild.model.Build;
-import com.drumonii.loltrollbuild.repository.BuildsRepository;
+import com.drumonii.loltrollbuild.repository.*;
 import com.drumonii.loltrollbuild.rest.status.BadRequestException;
 import com.drumonii.loltrollbuild.rest.status.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +14,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 import org.springframework.web.bind.WebDataBinder;
@@ -34,6 +35,18 @@ public class BuildsRestController {
 
 	@Autowired
 	private BuildsRepository buildsRepository;
+
+	@Autowired
+	private ChampionsRepository championsRepository;
+
+	@Autowired
+	private ItemsRepository itemsRepository;
+
+	@Autowired
+	private SummonerSpellsRepository summonerSpellsRepository;
+
+	@Autowired
+	private MapsRepository mapsRepository;
 
 	@Autowired
 	@Qualifier("mvcValidator")
@@ -62,15 +75,37 @@ public class BuildsRestController {
 	}
 
 	/**
-	 * Gets a {@link Build} by its ID. If not found, returns a 404, otherwise a 200.
+	 * Gets a {@link Build} by its ID. If not found, returns a 404, or if some of its attributes no longer exist a 400,
+	 * otherwise a 200.
 	 *
 	 * @param id the ID to lookup the {@link Build}
 	 * @return the {@link Build}
 	 */
 	@GetMapping(path = "/{id}")
 	public Build getBuild(@PathVariable int id) {
-		Optional<Build> build = buildsRepository.findById(id);
-		return build.orElseThrow(() -> new ResourceNotFoundException("Unable to find a Build with Id: " + id));
+		Optional<Build> optionalBuild = buildsRepository.findById(id);
+		if (!optionalBuild.isPresent()) {
+			throw new ResourceNotFoundException("Unable to find a Build with Id: " + id);
+		}
+		Build build = optionalBuild.get();
+		build.setChampion(championsRepository.findById(build.getChampionId()).orElse(null));
+		build.setItem1(itemsRepository.findById(build.getItem1Id()).orElse(null));
+		build.setItem2(itemsRepository.findById(build.getItem2Id()).orElse(null));
+		build.setItem3(itemsRepository.findById(build.getItem3Id()).orElse(null));
+		build.setItem4(itemsRepository.findById(build.getItem4Id()).orElse(null));
+		build.setItem5(itemsRepository.findById(build.getItem5Id()).orElse(null));
+		build.setItem6(itemsRepository.findById(build.getItem6Id()).orElse(null));
+		build.setSummonerSpell1(summonerSpellsRepository.findById(build.getSummonerSpell1Id()).orElse(null));
+		build.setSummonerSpell2(summonerSpellsRepository.findById(build.getSummonerSpell2Id()).orElse(null));
+		build.setTrinket(itemsRepository.findById(build.getTrinketId()).orElse(null));
+		build.setMap(mapsRepository.findById(build.getMapId()).orElse(null));
+
+		BindingResult result = new BeanPropertyBindingResult(build, "build");
+		build.validate(build, result);
+		if (result.hasErrors()) {
+			throw new BadRequestException(result.getFieldErrors());
+		}
+		return build;
 	}
 
 	/**

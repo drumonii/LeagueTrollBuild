@@ -1,7 +1,7 @@
 package com.drumonii.loltrollbuild.rest;
 
 import com.drumonii.loltrollbuild.model.*;
-import com.drumonii.loltrollbuild.repository.BuildsRepository;
+import com.drumonii.loltrollbuild.repository.*;
 import com.drumonii.loltrollbuild.riot.api.ChampionsResponse;
 import com.drumonii.loltrollbuild.riot.api.ItemsResponse;
 import com.drumonii.loltrollbuild.riot.api.MapsResponse;
@@ -18,6 +18,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import static com.drumonii.loltrollbuild.util.GameMapUtil.SUMMONERS_RIFT_SID;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.is;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -32,6 +33,18 @@ public abstract class BuildsRestControllerTest {
 
 	@Autowired
 	protected BuildsRepository buildsRepository;
+
+	@Autowired
+	private ChampionsRepository championsRepository;
+
+	@Autowired
+	private ItemsRepository itemsRepository;
+
+	@Autowired
+	private SummonerSpellsRepository summonerSpellsRepository;
+
+	@Autowired
+	private MapsRepository mapsRepository;
 
 	@Autowired
 	protected ObjectMapper objectMapper;
@@ -61,25 +74,63 @@ public abstract class BuildsRestControllerTest {
 		mockMvc.perform(get("{apiPath}/builds/{id}", apiPath, 0))
 				.andExpect(status().isNotFound());
 
+		Champion zed = championsResponse.getChampions().get("Zed");
+		Item item1 = itemsResponse.getItems().get("3117");
+		Item item2 = itemsResponse.getItems().get("3194");
+		Item item3 = itemsResponse.getItems().get("3193");
+		Item item4 = itemsResponse.getItems().get("3036");
+		Item item5 = itemsResponse.getItems().get("3812");
+		Item item6 = itemsResponse.getItems().get("3092");
+		SummonerSpell summonerSpell1 = summonerSpellsResponse.getSummonerSpells().get("SummonerSmite");
+		SummonerSpell summonerSpell2 = summonerSpellsResponse.getSummonerSpells().get("SummonerMana");
+		Item trinket = itemsResponse.getItems().get("3364");
+		GameMap map = mapsResponse.getMaps().get(SUMMONERS_RIFT_SID);
+
 		Build build = new Build();
-		build.setChampionId(championsResponse.getChampions().get("Zed").getId());
-		build.setItem1Id(itemsResponse.getItems().get("3117").getId());
-		build.setItem2Id(itemsResponse.getItems().get("3194").getId());
-		build.setItem3Id(itemsResponse.getItems().get("3193").getId());
-		build.setItem4Id(itemsResponse.getItems().get("3036").getId());
-		build.setItem5Id(itemsResponse.getItems().get("3812").getId());
-		build.setItem6Id(itemsResponse.getItems().get("3092").getId());
-		build.setSummonerSpell1Id(summonerSpellsResponse.getSummonerSpells().get("SummonerSmite").getId());
-		build.setSummonerSpell2Id(summonerSpellsResponse.getSummonerSpells().get("SummonerMana").getId());
-		build.setTrinketId(itemsResponse.getItems().get("3364").getId());
-		build.setMapId(mapsResponse.getMaps().get(SUMMONERS_RIFT_SID).getMapId());
+		build.setChampionId(zed.getId());
+		build.setItem1Id(item1.getId());
+		build.setItem2Id(item2.getId());
+		build.setItem3Id(item3.getId());
+		build.setItem4Id(item4.getId());
+		build.setItem5Id(item5.getId());
+		build.setItem6Id(item6.getId());
+		build.setSummonerSpell1Id(summonerSpell1.getId());
+		build.setSummonerSpell2Id(summonerSpell2.getId());
+		build.setTrinketId(trinket.getId());
+		build.setMapId(map.getMapId());
 		build = buildsRepository.save(build);
 
-		// find with existing build Id
+		// find with missing build attributes
+		mockMvc.perform(get("{apiPath}/builds/{id}", apiPath, build.getId()))
+				.andExpect(status().isBadRequest());
+
+		championsRepository.save(zed);
+		itemsRepository.save(item1);
+		itemsRepository.save(item2);
+		itemsRepository.save(item3);
+		itemsRepository.save(item4);
+		itemsRepository.save(item5);
+		itemsRepository.save(item6);
+		summonerSpellsRepository.save(summonerSpell1);
+		summonerSpellsRepository.save(summonerSpell2);
+		itemsRepository.save(trinket);
+		mapsRepository.save(map);
+
+		// find with existing build Id with attributes
 		mockMvc.perform(get("{apiPath}/builds/{id}", apiPath, build.getId()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-				.andExpect(jsonPath("$.[*]").isNotEmpty());
+				.andExpect(jsonPath("$.champion").exists())
+				.andExpect(jsonPath("$.item1").exists())
+				.andExpect(jsonPath("$.item2").exists())
+				.andExpect(jsonPath("$.item3").exists())
+				.andExpect(jsonPath("$.item4").exists())
+				.andExpect(jsonPath("$.item5").exists())
+				.andExpect(jsonPath("$.item6").exists())
+				.andExpect(jsonPath("$.summonerSpell1").exists())
+				.andExpect(jsonPath("$.summonerSpell2").exists())
+				.andExpect(jsonPath("$.trinket").exists())
+				.andExpect(jsonPath("$.map").exists());
 	}
 
 	@Test
@@ -112,8 +163,8 @@ public abstract class BuildsRestControllerTest {
 		build.setItem5Id(item5.getId());
 		build.setItem6Id(item6.getId());
 		build.setSummonerSpell1Id(summonerSpell1.getId());
-		build.setSummonerSpell2Id(summonerSpellsResponse.getSummonerSpells().get("SummonerHaste").getId());
-		build.setTrinketId(itemsResponse.getItems().get("3340").getId());
+		build.setSummonerSpell2Id(summonerSpell2.getId());
+		build.setTrinketId(trinket.getId());
 		build.setMapId(map.getMapId());
 
 		// Save full build
@@ -123,7 +174,17 @@ public abstract class BuildsRestControllerTest {
 				.andExpect(status().isCreated())
 				.andExpect(header().exists("Location"))
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-				.andExpect(jsonPath("$.[*]").isNotEmpty());
+				.andExpect(jsonPath("$.championId", is(build.getChampionId())))
+				.andExpect(jsonPath("$.item1Id", is(build.getItem1Id())))
+				.andExpect(jsonPath("$.item2Id", is(build.getItem2Id())))
+				.andExpect(jsonPath("$.item3Id", is(build.getItem3Id())))
+				.andExpect(jsonPath("$.item4Id", is(build.getItem4Id())))
+				.andExpect(jsonPath("$.item5Id", is(build.getItem5Id())))
+				.andExpect(jsonPath("$.item6Id", is(build.getItem6Id())))
+				.andExpect(jsonPath("$.summonerSpell1Id", is(build.getSummonerSpell1Id())))
+				.andExpect(jsonPath("$.summonerSpell2Id", is(build.getSummonerSpell2Id())))
+				.andExpect(jsonPath("$.trinketId", is(build.getTrinketId())))
+				.andExpect(jsonPath("$.mapId", is(build.getMapId())));
 
 		assertThat(buildsRepository.findAll())
 				.filteredOn(savedBuild -> savedBuild.getChampionId() == tahmKench.getId() &&

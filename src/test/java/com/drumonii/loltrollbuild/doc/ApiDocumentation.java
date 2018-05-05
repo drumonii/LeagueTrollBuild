@@ -622,18 +622,30 @@ public class ApiDocumentation {
 
 	@Test
 	public void getBuild() throws Exception {
+		Champion pantheon = championsRepository.save(championsResponse.getChampions().get("Pantheon"));
+		Item item1 = itemsRepository.save(itemsResponse.getItems().get("3091"));
+		Item item2 = itemsRepository.save(itemsResponse.getItems().get("3009"));
+		Item item3 = itemsRepository.save(itemsResponse.getItems().get("3027"));
+		Item item4 = itemsRepository.save(itemsResponse.getItems().get("3050"));
+		Item item5 = itemsRepository.save(itemsResponse.getItems().get("3110"));
+		Item item6 = itemsRepository.save(itemsResponse.getItems().get("3078"));
+		SummonerSpell summonerSpell1 = summonerSpellsRepository.save(summonerSpellsResponse.getSummonerSpells().get("SummonerHaste"));
+		SummonerSpell summonerSpell2 = summonerSpellsRepository.save(summonerSpellsResponse.getSummonerSpells().get("SummonerHeal"));
+		Item trinket = itemsRepository.save(itemsRepository.save(itemsResponse.getItems().get("3341")));
+		GameMap map = mapsRepository.save(mapsResponse.getMaps().get(SUMMONERS_RIFT_SID));
+
 		Build build = new Build();
-		build.setChampionId(championsResponse.getChampions().get("Pantheon").getId());
-		build.setItem1Id(itemsResponse.getItems().get("3091").getId());
-		build.setItem2Id(itemsResponse.getItems().get("3009").getId());
-		build.setItem3Id(itemsResponse.getItems().get("3027").getId());
-		build.setItem4Id(itemsResponse.getItems().get("3050").getId());
-		build.setItem5Id(itemsResponse.getItems().get("3110").getId());
-		build.setItem6Id(itemsResponse.getItems().get("3078").getId());
-		build.setSummonerSpell1Id(summonerSpellsResponse.getSummonerSpells().get("SummonerHaste").getId());
-		build.setSummonerSpell2Id(summonerSpellsResponse.getSummonerSpells().get("SummonerHeal").getId());
-		build.setTrinketId(itemsResponse.getItems().get("3341").getId());
-		build.setMapId(mapsResponse.getMaps().get(SUMMONERS_RIFT_SID).getMapId());
+		build.setChampionId(pantheon.getId());
+		build.setItem1Id(item1.getId());
+		build.setItem2Id(item2.getId());
+		build.setItem3Id(item3.getId());
+		build.setItem4Id(item4.getId());
+		build.setItem5Id(item5.getId());
+		build.setItem6Id(item6.getId());
+		build.setSummonerSpell1Id(summonerSpell1.getId());
+		build.setSummonerSpell2Id(summonerSpell2.getId());
+		build.setTrinketId(trinket.getId());
+		build.setMapId(map.getMapId());
 		build = buildsRepository.save(build);
 
 		mockMvc.perform(get("{apiPath}/builds/{id}", apiPath, build.getId()))
