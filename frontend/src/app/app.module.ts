@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { FooterComponent } from '@layout/footer/footer.component';
 import { HeaderComponent } from '@layout/header/header.component';
 
+import { BuildsPage } from '@page/builds/builds.page';
 import { ChampionPage } from '@page/champion/champion.page';
 import { ChampionsPage } from '@page/champions/champions.page';
 
@@ -28,6 +29,7 @@ import { BaseUrlHttpInterceptor } from './interceptor/base-url.http-interceptor'
     AppComponent,
     ChampionsNameFilterPipe,
     ChampionsTagsFilterPipe,
+    BuildsPage,
     ChampionPage,
     ChampionsPage,
     FooterComponent,
