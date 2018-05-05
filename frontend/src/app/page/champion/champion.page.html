@@ -1,4 +1,4 @@
-<ng-container *ngIf="(champion$ | async) as champion">
+<ng-container *ngIf="champion">
   <h4>{{champion.name}} - {{champion.title}}</h4>
   <img src="data:image/png;base64,{{champion.image.imgSrc}}">
   <p>({{champion.partype}})</p>
@@ -20,12 +20,12 @@
 
   <div>
     <h4>Map</h4>
-    <select [(ngModel)]="gameMapId" (change)="getTrollBuild(gameMapId)">
-      <option *ngFor="let gameMap of gameMaps$ | async" [ngValue]="gameMap.mapId">
+    <select *ngIf="gameMaps" [(ngModel)]="gameMap" (ngModelChange)="getTrollBuild()">
+      <option *ngFor="let gameMap of gameMaps" [ngValue]="gameMap">
         {{gameMap.mapName}}
       </option>
     </select>
-    <button (click)="getTrollBuild(gameMapId)">New Build</button>
+    <button (click)="getTrollBuild()">New Build</button>
   </div>
 
   <hr>
@@ -52,6 +52,8 @@
         {{trinket.name}}
       </div>
     </div>
+    <button (click)="saveBuild(trollBuild)">Save Build</button>
+    <p *ngIf="build">{{build.selfRef}}</p>
   </div>
 
   <ng-template #loadingTrollBuild>

@@ -7,6 +7,7 @@ import { ActivatedRoute, convertToParamMap } from '@angular/router';
 import { of } from 'rxjs/observable/of';
 
 import { ChampionPage } from './champion.page';
+import { BuildsService } from '@service/builds.service';
 import { ChampionsService } from '@service/champions.service';
 import { GameMapsService } from '@service/game-maps.service';
 import { GameMap } from '@model/game-map';
@@ -20,6 +21,7 @@ describe('ChampionPage', () => {
       imports: [FormsModule, HttpClientTestingModule, RouterTestingModule],
       declarations: [ChampionPage],
       providers: [
+        BuildsService,
         ChampionsService,
         GameMapsService,
         {
