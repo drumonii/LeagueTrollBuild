@@ -29,8 +29,7 @@ public interface SummonerSpellsRepository extends JpaRepository<SummonerSpell, I
 	 * @see <a href="http://leagueoflegends.wikia.com/wiki/Category:Game_modes">Game Modes</a>
 	 */
 	@Query("select s from SummonerSpell s join s.modes m " +
-		   "where m in (:mode) " +
-	       "group by s.id")
+		   "where m in (:mode)")
 	@Cacheable(key = "{#root.methodName, #mode}")
 	List<SummonerSpell> forTrollBuild(@Param("mode") GameMode mode);
 
