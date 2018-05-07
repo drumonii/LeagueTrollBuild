@@ -52,7 +52,7 @@
         {{trinket.name}}
       </div>
     </div>
-    <button (click)="saveBuild(trollBuild)">Save Build</button>
+    <button (click)="saveBuild(trollBuild)" [disabled]="build">Save Build</button>
     <p *ngIf="build">{{build.selfRef}}</p>
   </div>
 
