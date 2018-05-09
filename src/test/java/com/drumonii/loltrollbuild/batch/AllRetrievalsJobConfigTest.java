@@ -52,9 +52,11 @@ public class AllRetrievalsJobConfigTest {
 	@Autowired
 	private JobLauncherTestUtils jobLauncherTestUtils;
 
+	private Version latestVersion = new Version("8.1.1");
+
 	@Before
 	public void before() {
-		given(versionsService.getLatestVersion()).willReturn(new Version("8.1.1"));
+		given(versionsService.getLatestVersion()).willReturn(latestVersion);
 
 		given(mapsService.getMaps()).willReturn(new ArrayList<>());
 
@@ -73,7 +75,7 @@ public class AllRetrievalsJobConfigTest {
 
 		JobExecution jobExecution = jobLauncherTestUtils.launchJob(jobParameters);
 		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
-		assertThat(jobExecution.getJobParameters().getString(LATEST_PATCH_KEY)).isNotNull();
+		assertThat(jobExecution.getJobParameters().getString(LATEST_PATCH_KEY)).isEqualTo(latestVersion.getPatch());
 		assertThat(jobExecution.getStepExecutions()).extracting(StepExecution::getStepName)
 				.containsExactly("versionsRetrievalJobStep", "mapsRetrievalJobStep", "summonerSpellsRetrievalJobStep",
 						"championsRetrievalJobStep", "itemsRetrievalJobStep");
