@@ -23,7 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@WebMvcRestTest(controllers = SummonerSpellsRestController.class)
+@WebMvcRestTest(SummonerSpellsRestController.class)
 public abstract class SummonerSpellsRestControllerTest {
 
 	@Autowired

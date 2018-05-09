@@ -25,7 +25,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringRunner.class)
-@WebMvcRestTest(controllers = BuildsRestController.class)
+@WebMvcRestTest(BuildsRestController.class)
 public abstract class BuildsRestControllerTest {
 
 	@Autowired

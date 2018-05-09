@@ -32,7 +32,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@WebMvcRestTest(controllers = BatchJobInstancesRestController.class)
+@WebMvcRestTest(BatchJobInstancesRestController.class)
 @ActiveProfiles({ TESTING })
 public class BatchJobInstancesRestControllerTest {
 

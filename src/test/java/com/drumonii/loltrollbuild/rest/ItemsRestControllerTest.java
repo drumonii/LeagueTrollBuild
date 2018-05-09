@@ -25,7 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@WebMvcRestTest(controllers = ItemsRestController.class)
+@WebMvcRestTest(ItemsRestController.class)
 public abstract class ItemsRestControllerTest {
 
 	@Autowired

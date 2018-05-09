@@ -41,9 +41,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@WebMvcRestTest( // below is a bit hard on the eyes...i apologize
-		controllers = { BuildsRestController.class, ChampionsRestController.class, ItemsRestController.class,
-				MapsRestController.class, SummonerSpellsRestController.class, VersionsRestController.class })
+@WebMvcRestTest({ BuildsRestController.class, ChampionsRestController.class, ItemsRestController.class,
+		MapsRestController.class, SummonerSpellsRestController.class, VersionsRestController.class })
 @AutoConfigureRestDocs(outputDir = "build/generated-snippets", uriScheme = "https", uriHost = "loltrollbuild.com",
 		uriPort = 443)
 @TestPropertySource(properties = "riot.static-data.apiKey=API_KEY")
