@@ -65,7 +65,16 @@ public abstract class BuildsRestControllerTest {
 		mockMvc.perform(get("{apiPath}/builds", apiPath))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-				.andExpect(jsonPath("$.[*]").isNotEmpty());
+				.andExpect(jsonPath("$.content").exists())
+				.andExpect(jsonPath("$.pageable").exists())
+				.andExpect(jsonPath("$.totalPages").exists())
+				.andExpect(jsonPath("$.totalElements").exists())
+				.andExpect(jsonPath("$.last").exists())
+				.andExpect(jsonPath("$.size", is(BuildsRestController.PAGE_SIZE)))
+				.andExpect(jsonPath("$.number").exists())
+				.andExpect(jsonPath("$.sort").exists())
+				.andExpect(jsonPath("$.numberOfElements").exists())
+				.andExpect(jsonPath("$.first").exists());
 	}
 
 	@Test
