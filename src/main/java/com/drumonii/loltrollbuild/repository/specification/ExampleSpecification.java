@@ -1,6 +1,5 @@
 package com.drumonii.loltrollbuild.repository.specification;
 
-import com.drumonii.loltrollbuild.model.Item;
 import org.springframework.data.domain.Example;
 import org.springframework.data.jpa.domain.Specification;
 
@@ -10,18 +9,20 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 /**
- * {@link Specification} to build a {@link Item} {@link Predicate} from a QBE {@link Example}.
+ * {@link Specification} to build a {@link Predicate} from a QBE {@link Example} of {@code <T>}.
+ *
+ * @param <T> the Example and Specification type
  */
-public class ItemSpecification implements Specification<Item> {
+public class ExampleSpecification<T> implements Specification<T> {
 
-	public Example<Item> example;
+	public Example<T> example; // must be public for Cacheable key
 
-	public ItemSpecification(Example<Item> example) {
+	public ExampleSpecification(Example<T> example) {
 		this.example = example;
 	}
 
 	@Override
-	public Predicate toPredicate(Root<Item> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+	public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
 		return QueryByExampleFromSpecificationPredicateBuilder.getPredicate(root, cb, example);
 	}
 

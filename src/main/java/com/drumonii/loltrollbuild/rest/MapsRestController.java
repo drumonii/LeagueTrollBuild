@@ -2,7 +2,7 @@ package com.drumonii.loltrollbuild.rest;
 
 import com.drumonii.loltrollbuild.model.GameMap;
 import com.drumonii.loltrollbuild.repository.MapsRepository;
-import com.drumonii.loltrollbuild.repository.specification.MapsSpecification;
+import com.drumonii.loltrollbuild.repository.specification.ExampleSpecification;
 import com.drumonii.loltrollbuild.rest.status.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -45,7 +45,7 @@ public class MapsRestController {
 				.withIgnorePaths("mapId", "version")
 				.withIgnoreNullValues();
 		Example<GameMap> example = Example.of(gameMap, exampleMatcher);
-		return mapsRepository.findAll(new MapsSpecification(example), sort);
+		return mapsRepository.findAll(new ExampleSpecification<>(example), sort);
 	}
 
 	/**

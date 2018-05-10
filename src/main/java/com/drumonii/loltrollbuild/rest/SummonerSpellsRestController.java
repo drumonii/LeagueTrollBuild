@@ -3,7 +3,7 @@ package com.drumonii.loltrollbuild.rest;
 import com.drumonii.loltrollbuild.model.SummonerSpell;
 import com.drumonii.loltrollbuild.model.SummonerSpell.GameMode;
 import com.drumonii.loltrollbuild.repository.SummonerSpellsRepository;
-import com.drumonii.loltrollbuild.repository.specification.SummonerSpellsSpecification;
+import com.drumonii.loltrollbuild.repository.specification.ExampleSpecification;
 import com.drumonii.loltrollbuild.rest.status.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -43,7 +43,7 @@ public class SummonerSpellsRestController {
 				.withIgnorePaths("id", "version")
 				.withIgnoreNullValues();
 		Example<SummonerSpell> example = Example.of(summonerSpell, exampleMatcher);
-		return summonerSpellsRepository.findAll(new SummonerSpellsSpecification(example), sort);
+		return summonerSpellsRepository.findAll(new ExampleSpecification<>(example), sort);
 	}
 
 	/**
