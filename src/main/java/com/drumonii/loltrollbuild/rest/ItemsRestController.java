@@ -2,7 +2,7 @@ package com.drumonii.loltrollbuild.rest;
 
 import com.drumonii.loltrollbuild.model.Item;
 import com.drumonii.loltrollbuild.repository.ItemsRepository;
-import com.drumonii.loltrollbuild.rest.specification.ItemSpecification;
+import com.drumonii.loltrollbuild.repository.specification.ItemSpecification;
 import com.drumonii.loltrollbuild.rest.status.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;

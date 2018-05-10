@@ -3,7 +3,7 @@ package com.drumonii.loltrollbuild.rest;
 import com.drumonii.loltrollbuild.model.SummonerSpell;
 import com.drumonii.loltrollbuild.model.SummonerSpell.GameMode;
 import com.drumonii.loltrollbuild.repository.SummonerSpellsRepository;
-import com.drumonii.loltrollbuild.rest.specification.SummonerSpellsSpecification;
+import com.drumonii.loltrollbuild.repository.specification.SummonerSpellsSpecification;
 import com.drumonii.loltrollbuild.rest.status.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;

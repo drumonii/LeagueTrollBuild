@@ -6,7 +6,7 @@ import com.drumonii.loltrollbuild.repository.ChampionsRepository;
 import com.drumonii.loltrollbuild.repository.ItemsRepository;
 import com.drumonii.loltrollbuild.repository.MapsRepository;
 import com.drumonii.loltrollbuild.repository.SummonerSpellsRepository;
-import com.drumonii.loltrollbuild.rest.specification.ChampionsSpecification;
+import com.drumonii.loltrollbuild.repository.specification.ChampionsSpecification;
 import com.drumonii.loltrollbuild.rest.status.ResourceNotFoundException;
 import com.drumonii.loltrollbuild.util.ChampionUtil;
 import com.drumonii.loltrollbuild.util.GameMapUtil;

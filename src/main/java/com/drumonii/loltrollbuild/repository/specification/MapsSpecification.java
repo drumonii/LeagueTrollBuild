@@ -1,4 +1,4 @@
-package com.drumonii.loltrollbuild.rest.specification;
+package com.drumonii.loltrollbuild.repository.specification;
 
 import com.drumonii.loltrollbuild.model.GameMap;
 import org.springframework.data.domain.Example;
