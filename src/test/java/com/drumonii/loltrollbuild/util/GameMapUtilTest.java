@@ -43,6 +43,7 @@ public class GameMapUtilTest {
 		assertThat(getNameFromId(TWISTED_TREELINE_ID)).isEqualTo(TWISTED_TREELINE);
 		assertThat(getNameFromId(SUMMONERS_RIFT_ID)).isEqualTo(SUMMONERS_RIFT);
 		assertThat(getNameFromId(HOWLING_ABYSS_ID)).isEqualTo(HOWLING_ABYSS);
+		assertThat(getNameFromId(0)).isEmpty();
 	}
 
 }
