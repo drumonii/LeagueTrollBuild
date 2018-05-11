@@ -4,9 +4,9 @@ import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.riot.service.VersionsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;
+import org.springframework.batch.core.JobExecutionException;
 import org.springframework.batch.core.JobParametersBuilder;
 import org.springframework.batch.core.launch.JobLauncher;
-import org.springframework.batch.core.repository.JobInstanceAlreadyCompleteException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -46,7 +46,7 @@ public class RetrievalJobsScheduling {
 						.addString(LATEST_PATCH_KEY, latestVersion.getPatch())
 						.toJobParameters());
 			}
-		} catch (JobInstanceAlreadyCompleteException e) {
+		} catch (JobExecutionException e) {
 			log.warn("Job instance was already completed with the latest Riot patch", e);
 		} catch (Exception e) {
 			log.error("Caught exception while running all retrievals job", e);
