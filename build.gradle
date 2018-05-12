@@ -1,6 +1,6 @@
 plugins {
-    id 'org.springframework.boot' version '2.0.1.RELEASE'
-	id 'io.spring.dependency-management' version '1.0.4.RELEASE'
+    id 'org.springframework.boot' version '2.0.2.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.5.RELEASE'
     id 'org.asciidoctor.convert' version '1.5.6'
 	id 'com.moowork.node' version '1.2.0'
 }
@@ -77,7 +77,7 @@ dependencies {
     runtime 'com.h2database:h2'
 
     // PostgreSQL
-    runtime 'org.postgresql:postgresql:42.2.1'
+    runtime 'org.postgresql:postgresql:42.2.2'
 
     // EhCache
     compile 'net.sf.ehcache:ehcache'
