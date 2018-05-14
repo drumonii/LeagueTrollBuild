@@ -1,12 +1,12 @@
 <ng-container *ngIf="(champions$ | async) as champions; else championsLoading">
   <ng-container *ngIf="champions.length; else noChampions">
-    <input type="text" placeholder="Search by Champion" [(ngModel)]="championsSearchName"/>
+    <input id="champions-search-input" type="text" placeholder="Search by Champion" [(ngModel)]="championsSearchName"/>
 
-    <button *ngFor="let tag of championTags$ | async" (click)="setChampionsFilterTag(tag)">
+    <button class="champion-tag-btn" *ngFor="let tag of championTags$ | async" (click)="setChampionsFilterTag(tag)">
       {{tag}}
     </button>
 
-    <div *ngFor="let champion of (champions | championsNameFilter : championsSearchName | championsTagsFilter : championsFilterTag)">
+    <div class="champion" *ngFor="let champion of (champions | championsNameFilter : championsSearchName | championsTagsFilter : championsFilterTag)">
       <a [routerLink]="['/champions', champion.key]">
         <img src="data:image/png;base64,{{champion.image.imgSrc}}">
         {{champion.name}}
@@ -15,7 +15,7 @@
   </ng-container>
 
   <ng-template #noChampions>
-    <p>No Champions exist in the database!</p>
+    <p id="no-champions-alert">No Champions exist in the database!</p>
   </ng-template>
 </ng-container>
 

@@ -1,11 +1,14 @@
 import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { RouterLinkWithHref } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { By } from '@angular/platform-browser';
 
 import { of } from 'rxjs/observable/of';
 
 import { ChampionsPage } from './champions.page';
+import { Champion } from '@model/champion';
 import { ChampionsService } from '@service/champions.service';
 import { ChampionsNameFilterPipe } from '@pipe/champions-name-filter.pipe';
 import { ChampionsTagsFilterPipe } from '@pipe/champions-tags-filter.pipe';
@@ -28,11 +31,134 @@ describe('ChampionsPage', () => {
     component = fixture.componentInstance;
   });
 
-  it('should create', inject([ChampionsService], (championsService: ChampionsService) => {
+  it('should show Champions and Champion tags', inject([ChampionsService], (championsService: ChampionsService) => {
+    const champions: Champion[] = [
+      {
+        id: 57,
+        key: 'Maokai',
+        name: 'Maokai',
+        title: 'the Twisted Treant',
+        partype: 'Mana',
+        info: {
+          attack: 3,
+          defense: 8,
+          magic: 6,
+          difficulty: 3
+        },
+        spells: [], // omitted for brevity
+        passive: {
+          name: 'Sap Magic',
+          description: 'Maokai\'s basic attack also heal him on a moderate cooldown. Each time Maokai casts a spell ' +
+            'or is struck by an enemy\'s spell, this cooldown is reduced.',
+          image: {
+            full: 'Maokai_Passive.png',
+            sprite: 'passive2.png',
+            group: 'passive',
+            imgSrc: [],
+            x: 432,
+            y: 0,
+            w: 48,
+            h: 48
+          }
+        },
+        image: {
+          full: 'Maokai.png',
+          sprite: 'champion2.png',
+          group: 'champion',
+          imgSrc: [],
+          x: 432,
+          y: 0,
+          w: 48,
+          h: 48
+        },
+        tags: [
+          'Mage',
+          'Tank'
+        ]
+      },
+      {
+        id: 14,
+        key: 'Sion',
+        name: 'Sion',
+        title: 'The Undead Juggernaut',
+        partype: 'Mana',
+        info: {
+          attack: 5,
+          defense: 9,
+          magic: 3,
+          difficulty: 5
+        },
+        spells: [], // omitted for brevity
+        passive: {
+          name: 'Glory in Death',
+          description: 'After being killed, Sion will reanimate with rapidly decaying Health. His attacks become very ' +
+            'rapid, gain 100% Lifesteal and deal bonus damage equal to 10% of his target\'s maximum Health ' +
+            '(max 75 to monsters).<br><br>All his abilities are replaced with Death Surge, which grants a burst of Movement Speed.',
+          image: {
+            full: 'Sion_Passive1.png',
+            sprite: 'passive3.png',
+            group: 'passive',
+            imgSrc: [],
+            x: 0,
+            y: 48,
+            w: 48,
+            h: 48
+          }
+        },
+        image: {
+          full: 'Sion.png',
+          sprite: 'champion3.png',
+          group: 'champion',
+          imgSrc: [],
+          x: 0,
+          y: 48,
+          w: 48,
+          h: 48
+        },
+        tags: [
+          'Fighter',
+          'Tank'
+        ]
+      }
+    ];
+    const tags = ['Assassin', 'Fighter', 'Mage', 'Marksman', 'Support', 'Tank'];
+
+    spyOn(championsService, 'getChampions').and.returnValue(of(champions));
+    spyOn(championsService, 'getChampionTags').and.returnValue(of(tags));
+
+    fixture.detectChanges();
+
+    const championsSearchDe = fixture.debugElement.query(By.css('#champions-search-input'));
+    expect(championsSearchDe.nativeElement.placeholder).toBe('Search by Champion');
+
+    const championTagsDe = fixture.debugElement.queryAll(By.css('.champion-tag-btn'));
+    expect(championTagsDe.map(championTagDe => championTagDe.nativeElement.textContent.trim())).toEqual(tags);
+
+    const championsDe = fixture.debugElement.queryAll(By.css('.champion'));
+    expect(championsDe.length).toBe(champions.length);
+
+    const maokaiLinkDe = championsDe[0].query(By.css('a'));
+    expect(maokaiLinkDe.nativeElement.textContent).toContain('Maokai');
+    const maokaiRouterLink = maokaiLinkDe.injector.get(RouterLinkWithHref);
+    expect(maokaiRouterLink.href).toBe('/champions/Maokai');
+
+    const sionLinkDe = championsDe[1].query(By.css('a'));
+    expect(sionLinkDe.nativeElement.textContent).toContain('Sion');
+    const sionRouterLink = sionLinkDe.injector.get(RouterLinkWithHref);
+    expect(sionRouterLink.href).toBe('/champions/Sion');
+
+    expect(championsService.getChampions).toHaveBeenCalled();
+    expect(championsService.getChampionTags).toHaveBeenCalled();
+  }));
+
+  it('should show the no Champions alert when there are no Champions', inject([ChampionsService], (championsService: ChampionsService) => {
     spyOn(championsService, 'getChampions').and.returnValue(of([]));
     spyOn(championsService, 'getChampionTags').and.returnValue(of([]));
 
     fixture.detectChanges();
+
+    const alertDe = fixture.debugElement.query(By.css('#no-champions-alert'));
+    expect(alertDe.nativeElement.textContent).toBe('No Champions exist in the database!');
 
     expect(championsService.getChampions).toHaveBeenCalled();
     expect(championsService.getChampionTags).toHaveBeenCalled();
