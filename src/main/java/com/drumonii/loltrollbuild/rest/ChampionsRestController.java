@@ -129,9 +129,8 @@ public class ChampionsRestController {
 		trollBuild.put("items", items);
 
 		// Summoner Spells
-		trollBuild.put("summoner-spells",
-				RandomizeUtil.getRandoms(summonerSpellsRepository.forTrollBuild(
-						GameMapUtil.getModeFromMap(mapsRepository.findById(mapId).orElse(null))), SPELLS_SIZE));
+		trollBuild.put("summoner-spells", RandomizeUtil.getRandoms(summonerSpellsRepository
+				.forTrollBuild(GameMapUtil.getModeFromMap(mapsRepository.findById(mapId).orElse(null))), SPELLS_SIZE));
 
 		// Trinket
 		trollBuild.put("trinket", Collections.singletonList(RandomizeUtil.getRandom(itemsRepository.trinkets(mapId))));
