@@ -5,7 +5,6 @@ import com.drumonii.loltrollbuild.config.Profiles.Embedded;
 import com.drumonii.loltrollbuild.config.Profiles.External;
 import com.drumonii.loltrollbuild.config.Profiles.Testing;
 import com.drumonii.loltrollbuild.security.CsrfTokenExpiredAccessDeniedHandler;
-import com.drumonii.loltrollbuild.security.NoOpPasswordEncoder;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
@@ -17,6 +16,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
@@ -88,13 +88,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		@Bean
 		public UserDetailsService userDetailsService() {
 			InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-			manager.createUser(User.withUsername(IN_MEM_USERNAME).password(IN_MEM_PASSWORD).roles(ADMIN_ROLE).build());
+			manager.createUser(User.withUsername(IN_MEM_USERNAME).password("{noop}" + IN_MEM_PASSWORD).roles(ADMIN_ROLE).build());
 			return manager;
 		}
 
 		@Bean
 		public PasswordEncoder passwordEncoder() {
-			return new NoOpPasswordEncoder();
+			return PasswordEncoderFactories.createDelegatingPasswordEncoder();
 		}
 
 	}
