@@ -4,7 +4,6 @@ import com.drumonii.loltrollbuild.config.Profiles.Dev;
 import com.drumonii.loltrollbuild.config.Profiles.Embedded;
 import com.drumonii.loltrollbuild.config.Profiles.External;
 import com.drumonii.loltrollbuild.config.Profiles.Testing;
-import com.drumonii.loltrollbuild.security.CsrfTokenExpiredAccessDeniedHandler;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
@@ -68,10 +67,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.permitAll()
 			.and()
 			.csrf()
-				.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-			.and()
-				.exceptionHandling()
-					.accessDeniedHandler(new CsrfTokenExpiredAccessDeniedHandler());
+				.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
 		// @formatter:on
 	}
 
