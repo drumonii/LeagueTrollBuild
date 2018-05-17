@@ -23,6 +23,7 @@ import { GameMapsService } from '@service/game-maps.service';
 import { VersionsService } from '@service/versions.service';
 
 import { BaseUrlHttpInterceptor } from './interceptor/base-url.http-interceptor';
+import { WithCredentialsHttpInterceptor } from './interceptor/with-credentials.http-interceptor';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { BaseUrlHttpInterceptor } from './interceptor/base-url.http-interceptor'
     ChampionsService,
     GameMapsService,
     VersionsService,
-    { provide: HTTP_INTERCEPTORS, useClass: BaseUrlHttpInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: BaseUrlHttpInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: WithCredentialsHttpInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

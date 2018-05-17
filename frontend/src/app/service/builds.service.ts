@@ -18,8 +18,7 @@ export class BuildsService {
         headers: new HttpHeaders({
           'Content-Type': 'application/json'
         }),
-        observe: 'response',
-        withCredentials: true
+        observe: 'response'
       })
     .pipe(
       catchError((error) => {

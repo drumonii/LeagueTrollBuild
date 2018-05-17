@@ -41,7 +41,6 @@ describe('BuildsService', () => {
     const testReq = httpMock.expectOne('/api/builds');
     expect(testReq.request.method).toBe('POST');
     expect(testReq.request.detectContentTypeHeader()).toBe('application/json');
-    expect(testReq.request.withCredentials).toBe(true);
     expect(testReq.request.body).toEqual(mockBuild);
 
     testReq.flush(new HttpResponse<Build>({
