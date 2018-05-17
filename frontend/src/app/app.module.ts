@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HTTP_INTERCEPTORS, HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
+import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -21,9 +21,6 @@ import { BuildsService } from '@service/builds.service';
 import { ChampionsService } from '@service/champions.service';
 import { GameMapsService } from '@service/game-maps.service';
 import { VersionsService } from '@service/versions.service';
-
-import { BaseUrlHttpInterceptor } from './interceptor/base-url.http-interceptor';
-import { WithCredentialsHttpInterceptor } from './interceptor/with-credentials.http-interceptor';
 
 @NgModule({
   declarations: [
@@ -47,9 +44,7 @@ import { WithCredentialsHttpInterceptor } from './interceptor/with-credentials.h
     BuildsService,
     ChampionsService,
     GameMapsService,
-    VersionsService,
-    { provide: HTTP_INTERCEPTORS, useClass: BaseUrlHttpInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: WithCredentialsHttpInterceptor, multi: true }
+    VersionsService
   ],
   bootstrap: [AppComponent]
 })
