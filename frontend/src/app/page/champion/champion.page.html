@@ -40,16 +40,16 @@
     </div>
     <div>
       <h4>Summoner Spells</h4>
-      <div *ngFor="let summonerSpell of trollBuild['summoner-spells']">
+      <div *ngFor="let summonerSpell of trollBuild.summonerSpells">
         <img src="data:image/png;base64,{{summonerSpell.image.imgSrc}}">
         {{summonerSpell.name}}
       </div>
     </div>
     <div>
       <h4>Trinket</h4>
-      <div *ngFor="let trinket of trollBuild.trinket">
-        <img src="data:image/png;base64,{{trinket.image.imgSrc}}">
-        {{trinket.name}}
+      <div>
+        <img src="data:image/png;base64,{{trollBuild.trinket.image.imgSrc}}">
+        {{trollBuild.trinket.name}}
       </div>
     </div>
     <button (click)="saveBuild(trollBuild)" [disabled]="build">Save Build</button>
@@ -71,7 +71,7 @@
     </div>
     <div>
       <h4>Trinket</h4>
-      <div *ngFor="let trinket of [0]">
+      <div>
         <img src="assets/images/dummy.png">
       </div>
     </div>

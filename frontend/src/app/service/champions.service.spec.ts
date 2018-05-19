@@ -4,8 +4,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { ChampionsService } from './champions.service';
 
 import { Champion } from '@model/champion';
-import { Item } from '@model/item';
-import { SummonerSpell } from '@model/summoner-spell';
+import { TrollBuild } from '@model/troll-build';
 
 describe('ChampionsService', () => {
   beforeEach(() => {
@@ -94,9 +93,9 @@ describe('ChampionsService', () => {
     const name = 'Talon';
     const gameMapId = 11;
 
-    const mockTrollBuild = new Map<String, Item[] | SummonerSpell[]>();
+    const mockTrollBuild = new TrollBuild();
 
-    mockTrollBuild.set('summoner-spells', [
+    mockTrollBuild.summonerSpells = [
       {
         id: 7,
         name: 'Heal',
@@ -144,9 +143,9 @@ describe('ChampionsService', () => {
           'TUTORIAL'
         ]
       }
-    ]);
+    ];
 
-    mockTrollBuild.set('items', [
+    mockTrollBuild.items = [
       {
         id: 3111,
         name: 'Mercury\'s Treads',
@@ -346,40 +345,38 @@ describe('ChampionsService', () => {
           purchasable: true
         }
       }
-    ]);
+    ];
 
-    mockTrollBuild.set('trinket', [
-      {
-        id: 3363,
-        name: 'Farsight Alteration',
-        group: null,
-        consumed: null,
-        description: '',
-        from: [],
-        into: [],
-        requiredChampion: null,
-        requiredAlly: null,
-        maps: {
-          '11': true
-        },
-        image: {
-          full: '3363.png',
-          sprite: 'item2.png',
-          group: 'item',
-          imgSrc: [],
-          x: 96,
-          y: 48,
-          w: 48,
-          h: 48
-        },
-        gold: {
-          base: 0,
-          total: 0,
-          sell: 0,
-          purchasable: true
-        }
+    mockTrollBuild.trinket = {
+      id: 3363,
+      name: 'Farsight Alteration',
+      group: null,
+      consumed: null,
+      description: '',
+      from: [],
+      into: [],
+      requiredChampion: null,
+      requiredAlly: null,
+      maps: {
+        '11': true
+      },
+      image: {
+        full: '3363.png',
+        sprite: 'item2.png',
+        group: 'item',
+        imgSrc: [],
+        x: 96,
+        y: 48,
+        w: 48,
+        h: 48
+      },
+      gold: {
+        base: 0,
+        total: 0,
+        sell: 0,
+        purchasable: true
       }
-    ]);
+    };
 
     service.getTrollBuild(name, gameMapId).subscribe(trollBuild => {
       expect(trollBuild).toEqual(mockTrollBuild);
@@ -395,9 +392,9 @@ describe('ChampionsService', () => {
     (service: ChampionsService, httpMock: HttpTestingController) => {
     const name = 'Hecarim';
 
-    const mockTrollBuild = new Map<String, Item[] | SummonerSpell[]>();
+    const mockTrollBuild = new TrollBuild();
 
-    mockTrollBuild.set('summoner-spells', [
+    mockTrollBuild.summonerSpells = [
       {
         id: 4,
         name: 'Flash',
@@ -446,9 +443,9 @@ describe('ChampionsService', () => {
           'TUTORIAL'
         ]
       }
-    ]);
+    ];
 
-    mockTrollBuild.set('items', [
+    mockTrollBuild.items = [
       {
         id: 3009,
         name: 'Boots of Swiftness',
@@ -663,42 +660,40 @@ describe('ChampionsService', () => {
           purchasable: true
         }
       }
-    ]);
+    ];
 
-    mockTrollBuild.set('trinket', [
-      {
-        id: 3363,
-        name: 'Farsight Alteration',
-        group: null,
-        consumed: null,
-        description: '',
-        from: [],
-        into: [],
-        requiredChampion: null,
-        requiredAlly: null,
-        maps: {
-          '10': false,
-          '11': true,
-          '12': true
-        },
-        image: {
-          full: '3363.png',
-          sprite: 'item2.png',
-          group: 'item',
-          imgSrc: [],
-          x: 0,
-          y: 48,
-          w: 48,
-          h: 48
-        },
-        gold: {
-          base: 0,
-          total: 0,
-          sell: 0,
-          purchasable: true
-        }
+    mockTrollBuild.trinket = {
+      id: 3363,
+      name: 'Farsight Alteration',
+      group: null,
+      consumed: null,
+      description: '',
+      from: [],
+      into: [],
+      requiredChampion: null,
+      requiredAlly: null,
+      maps: {
+        '10': false,
+        '11': true,
+        '12': true
+      },
+      image: {
+        full: '3363.png',
+        sprite: 'item2.png',
+        group: 'item',
+        imgSrc: [],
+        x: 0,
+        y: 48,
+        w: 48,
+        h: 48
+      },
+      gold: {
+        base: 0,
+        total: 0,
+        sell: 0,
+        purchasable: true
       }
-    ]);
+    };
 
     service.getTrollBuild(name).subscribe(trollBuild => {
       expect(trollBuild).toEqual(mockTrollBuild);
@@ -716,7 +711,7 @@ describe('ChampionsService', () => {
     const gameMapId = 11;
 
     service.getTrollBuild(name, gameMapId).subscribe(trollBuild => {
-      expect(trollBuild).toEqual(new Map());
+      expect(trollBuild).toBeNull();
     });
 
     const testReq = httpMock.expectOne(`/api/champions/${name}/troll-build?mapId=${gameMapId}`);
@@ -730,7 +725,7 @@ describe('ChampionsService', () => {
     const name = 'Bard';
 
     service.getTrollBuild(name).subscribe(trollBuild => {
-      expect(trollBuild).toEqual(new Map());
+      expect(trollBuild).toBeNull();
     });
 
     const testReq = httpMock.expectOne(`/api/champions/${name}/troll-build`);

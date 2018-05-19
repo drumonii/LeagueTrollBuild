@@ -96,8 +96,8 @@ export class BuildBuilder {
     return this;
   }
 
-  withTrinket(trinket: Item[]): BuildBuilder {
-    this.trinketId = trinket[0].id;
+  withTrinket(trinket: Item): BuildBuilder {
+    this.trinketId = trinket.id;
     return this;
   }
 

@@ -12,8 +12,7 @@ import { GameMapsService } from '@service/game-maps.service';
 import { Build, BuildBuilder } from '@model/build';
 import { Champion } from '@model/champion';
 import { GameMap } from '@model/game-map';
-import { Item } from '@model/item';
-import { SummonerSpell } from '@model/summoner-spell';
+import { TrollBuild } from '@model/troll-build';
 
 @Component({
   selector: 'ltb-champion',
@@ -25,7 +24,7 @@ export class ChampionPage implements OnInit {
   gameMap: GameMap;
   champion: Champion;
   gameMaps: GameMap[];
-  trollBuild$: Observable<Map<String, Item[] | SummonerSpell[]>>;
+  trollBuild$: Observable<TrollBuild>;
   build: Build;
 
   constructor(private championService: ChampionsService, private gameMapsService: GameMapsService,
@@ -64,12 +63,12 @@ export class ChampionPage implements OnInit {
     this.build = null;
   }
 
-  saveBuild(trollBuild: Item[] | SummonerSpell[]): void {
+  saveBuild(trollBuild: TrollBuild): void {
     const build = new BuildBuilder()
       .withChampion(this.champion)
-      .withItems(trollBuild['items'] as Item[])
-      .withSummonerSpells(trollBuild['summoner-spells'] as SummonerSpell[])
-      .withTrinket(trollBuild['trinket'] as Item[])
+      .withItems(trollBuild.items)
+      .withSummonerSpells(trollBuild.summonerSpells)
+      .withTrinket(trollBuild.trinket)
       .withGameMap(this.gameMap)
       .build();
     this.buildsService.saveBuild(build).subscribe(res => {
