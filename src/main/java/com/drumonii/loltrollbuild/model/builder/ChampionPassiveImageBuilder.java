@@ -7,6 +7,7 @@ import com.drumonii.loltrollbuild.model.image.ChampionPassiveImage;
  */
 public final class ChampionPassiveImageBuilder extends ImageBuilder<ChampionPassiveImageBuilder> {
 
+	@Override
 	public ChampionPassiveImage build() {
 		ChampionPassiveImage championPassiveImage = new ChampionPassiveImage();
 		championPassiveImage.setFull(full);

@@ -7,6 +7,7 @@ import com.drumonii.loltrollbuild.model.image.GameMapImage;
  */
 public final class GameMapImageBuilder extends ImageBuilder<GameMapImageBuilder> {
 
+	@Override
 	public GameMapImage build() {
 		GameMapImage gameMapImage = new GameMapImage();
 		gameMapImage.setFull(full);

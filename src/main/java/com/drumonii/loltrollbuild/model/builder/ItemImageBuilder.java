@@ -7,6 +7,7 @@ import com.drumonii.loltrollbuild.model.image.ItemImage;
  */
 public final class ItemImageBuilder extends ImageBuilder<ItemImageBuilder> {
 
+	@Override
 	public ItemImage build() {
 		ItemImage itemImage = new ItemImage();
 		itemImage.setFull(full);

@@ -7,6 +7,7 @@ import com.drumonii.loltrollbuild.model.image.SummonerSpellImage;
  */
 public final class SummonerSpellImageBuilder extends ImageBuilder<SummonerSpellImageBuilder> {
 
+	@Override
 	public SummonerSpellImage build() {
 		SummonerSpellImage summonerSpellImage = new SummonerSpellImage();
 		summonerSpellImage.setFull(full);

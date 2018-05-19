@@ -7,6 +7,7 @@ import com.drumonii.loltrollbuild.model.image.ChampionSpellImage;
  */
 public final class ChampionSpellImageBuilder extends ImageBuilder<ChampionSpellImageBuilder> {
 
+	@Override
 	public ChampionSpellImage build() {
 		ChampionSpellImage championSpellImage = new ChampionSpellImage();
 		championSpellImage.setFull(full);

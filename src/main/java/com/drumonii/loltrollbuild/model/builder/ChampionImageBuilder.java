@@ -7,6 +7,7 @@ import com.drumonii.loltrollbuild.model.image.ChampionImage;
  */
 public final class ChampionImageBuilder extends ImageBuilder<ChampionImageBuilder> {
 
+	@Override
 	public ChampionImage build() {
 		ChampionImage championImage = new ChampionImage();
 		championImage.setFull(full);

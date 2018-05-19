@@ -53,16 +53,6 @@ public abstract class ImageBuilder<B extends ImageBuilder<B>> {
 		return (B) this;
 	}
 
-	public Image build() {
-		Image image = new Image();
-		image.setFull(full);
-		image.setSprite(sprite);
-		image.setGroup(group);
-		image.setX(x);
-		image.setY(y);
-		image.setW(w);
-		image.setH(h);
-		return image;
-	}
+	public abstract Image build();
 
 }
