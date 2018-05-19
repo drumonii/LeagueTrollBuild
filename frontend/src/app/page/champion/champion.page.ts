@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 
 import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs/observable/of';
 import 'rxjs/add/operator/switchMap';
 
 import { BuildsService } from '@service/builds.service';
@@ -28,12 +29,19 @@ export class ChampionPage implements OnInit {
   build: Build;
 
   constructor(private championService: ChampionsService, private gameMapsService: GameMapsService,
-    private buildsService: BuildsService, private route: ActivatedRoute) {}
+    private buildsService: BuildsService, private title: Title, private route: ActivatedRoute) {}
 
   ngOnInit() {
+    this.setTitle();
     this.getChampion();
     this.getGameMaps();
     this.getTrollBuild();
+  }
+
+  setTitle(): void {
+    this.route.paramMap
+      .switchMap((params: ParamMap) => of(params.get('name')))
+      .subscribe(name => this.title.setTitle(`${this.title.getTitle()} | ${name}`));
   }
 
   getChampion(): void {
