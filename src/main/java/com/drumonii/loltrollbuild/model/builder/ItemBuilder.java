@@ -32,11 +32,6 @@ public final class ItemBuilder {
 		return this;
 	}
 
-	public ItemBuilder withId(String id) {
-		this.id = Integer.parseInt(id);
-		return this;
-	}
-
 	public ItemBuilder withName(String name) {
 		this.name = name;
 		return this;
