@@ -2,6 +2,8 @@ package com.drumonii.loltrollbuild.rest;
 
 import com.drumonii.loltrollbuild.model.Champion;
 import com.drumonii.loltrollbuild.repository.ChampionsRepository;
+import com.drumonii.loltrollbuild.repository.ItemsRepository;
+import com.drumonii.loltrollbuild.repository.SummonerSpellsRepository;
 import com.drumonii.loltrollbuild.riot.api.ChampionsResponse;
 import com.drumonii.loltrollbuild.test.rest.WebMvcRestTest;
 import com.drumonii.loltrollbuild.util.RandomizeUtil;
@@ -15,10 +17,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static com.drumonii.loltrollbuild.util.GameMapUtil.HOWLING_ABYSS_ID;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.core.IsNull.nullValue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringRunner.class)
 @WebMvcRestTest(ChampionsRestController.class)
@@ -29,6 +31,12 @@ public abstract class ChampionsRestControllerTest {
 
 	@Autowired
 	protected ChampionsRepository championsRepository;
+
+	@Autowired
+	protected ItemsRepository itemsRepository;
+
+	@Autowired
+	protected SummonerSpellsRepository summonerSpellsRepository;
 
 	@Autowired
 	protected ObjectMapper objectMapper;
@@ -117,9 +125,7 @@ public abstract class ChampionsRestControllerTest {
 	@Test
 	public void trollBuildWithChampionThatDoesNotExist() throws Exception {
 		mockMvc.perform(get("{apiPath}/champions/{id}/troll-build", apiPath, 0))
-				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-				.andExpect(content().json("{}"));
+				.andExpect(status().isNotFound());
 	}
 
 	@Test
@@ -132,7 +138,9 @@ public abstract class ChampionsRestControllerTest {
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(jsonPath("$.items").exists())
-				.andExpect(jsonPath("$.summoner-spells").exists())
+				.andExpect(jsonPath("$.items.length()", is(6)))
+				.andExpect(jsonPath("$.summonerSpells").exists())
+				.andExpect(jsonPath("$.summonerSpells.length()", is(2)))
 				.andExpect(jsonPath("$.trinket").exists());
 
 		// get with champion name and map specified
@@ -141,7 +149,9 @@ public abstract class ChampionsRestControllerTest {
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(jsonPath("$.items").exists())
-				.andExpect(jsonPath("$.summoner-spells").exists())
+				.andExpect(jsonPath("$.items.length()", is(6)))
+				.andExpect(jsonPath("$.summonerSpells").exists())
+				.andExpect(jsonPath("$.summonerSpells.length()", is(2)))
 				.andExpect(jsonPath("$.trinket").exists());
 
 		// get with champion Id and no map specified
@@ -149,7 +159,9 @@ public abstract class ChampionsRestControllerTest {
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(jsonPath("$.items").exists())
-				.andExpect(jsonPath("$.summoner-spells").exists())
+				.andExpect(jsonPath("$.items.length()", is(6)))
+				.andExpect(jsonPath("$.summonerSpells").exists())
+				.andExpect(jsonPath("$.summonerSpells.length()", is(2)))
 				.andExpect(jsonPath("$.trinket").exists());
 
 		// get with champion name and no map specified
@@ -157,7 +169,9 @@ public abstract class ChampionsRestControllerTest {
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(jsonPath("$.items").exists())
-				.andExpect(jsonPath("$.summoner-spells").exists())
+				.andExpect(jsonPath("$.items.length()", is(6)))
+				.andExpect(jsonPath("$.summonerSpells").exists())
+				.andExpect(jsonPath("$.summonerSpells.length()", is(2)))
 				.andExpect(jsonPath("$.trinket").exists());
 	}
 
@@ -171,7 +185,9 @@ public abstract class ChampionsRestControllerTest {
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(jsonPath("$.items").exists())
-				.andExpect(jsonPath("$.summoner-spells").exists())
+				.andExpect(jsonPath("$.items.length()", is(6)))
+				.andExpect(jsonPath("$.summonerSpells").exists())
+				.andExpect(jsonPath("$.summonerSpells.length()", is(2)))
 				.andExpect(jsonPath("$.trinket").exists());
 
 		// get with Viktor name and map specified
@@ -180,7 +196,9 @@ public abstract class ChampionsRestControllerTest {
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(jsonPath("$.items").exists())
-				.andExpect(jsonPath("$.summoner-spells").exists())
+				.andExpect(jsonPath("$.items.length()", is(6)))
+				.andExpect(jsonPath("$.summonerSpells").exists())
+				.andExpect(jsonPath("$.summonerSpells.length()", is(2)))
 				.andExpect(jsonPath("$.trinket").exists());
 
 		// get with Viktor Id and no map specified
@@ -188,7 +206,9 @@ public abstract class ChampionsRestControllerTest {
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(jsonPath("$.items").exists())
-				.andExpect(jsonPath("$.summoner-spells").exists())
+				.andExpect(jsonPath("$.items.length()", is(6)))
+				.andExpect(jsonPath("$.summonerSpells").exists())
+				.andExpect(jsonPath("$.summonerSpells.length()", is(2)))
 				.andExpect(jsonPath("$.trinket").exists());
 
 		// get with Viktor name and no map specified
@@ -196,8 +216,60 @@ public abstract class ChampionsRestControllerTest {
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(jsonPath("$.items").exists())
-				.andExpect(jsonPath("$.summoner-spells").exists())
+				.andExpect(jsonPath("$.items.length()", is(6)))
+				.andExpect(jsonPath("$.summonerSpells").exists())
+				.andExpect(jsonPath("$.summonerSpells.length()", is(2)))
 				.andExpect(jsonPath("$.trinket").exists());
+	}
+
+	@Test
+	public void trollBuildWithNoItems() throws Exception {
+		itemsRepository.deleteAll();
+		summonerSpellsRepository.deleteAll();
+
+		Champion orianna = championsResponse.getChampions().get("Orianna");
+
+		// get with champion Id and map specified
+		mockMvc.perform(get("{apiPath}/champions/{id}/troll-build", apiPath, orianna.getId())
+				.param("mapId", String.valueOf(HOWLING_ABYSS_ID)))
+				.andExpect(status().isOk())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+				.andExpect(jsonPath("$.items").exists())
+				.andExpect(jsonPath("$.items.length()", is(0)))
+				.andExpect(jsonPath("$.summonerSpells").exists())
+				.andExpect(jsonPath("$.summonerSpells.length()", is(0)))
+				.andExpect(jsonPath("$.trinket", nullValue()));
+
+		// get with champion name and map specified
+		mockMvc.perform(get("/api/champions/{id}/troll-build", orianna.getName())
+				.param("mapId", String.valueOf(HOWLING_ABYSS_ID)))
+				.andExpect(status().isOk())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+				.andExpect(jsonPath("$.items").exists())
+				.andExpect(jsonPath("$.items.length()", is(0)))
+				.andExpect(jsonPath("$.summonerSpells").exists())
+				.andExpect(jsonPath("$.summonerSpells.length()", is(0)))
+				.andExpect(jsonPath("$.trinket", nullValue()));
+
+		// get with champion Id and no map specified
+		mockMvc.perform(get("{apiPath}/champions/{id}/troll-build", apiPath, orianna.getId()))
+				.andExpect(status().isOk())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+				.andExpect(jsonPath("$.items").exists())
+				.andExpect(jsonPath("$.items.length()", is(0)))
+				.andExpect(jsonPath("$.summonerSpells").exists())
+				.andExpect(jsonPath("$.summonerSpells.length()", is(0)))
+				.andExpect(jsonPath("$.trinket", nullValue()));
+
+		// get with champion name and no map specified
+		mockMvc.perform(get("/api/champions/{id}/troll-build", orianna.getName()))
+				.andExpect(status().isOk())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+				.andExpect(jsonPath("$.items").exists())
+				.andExpect(jsonPath("$.items.length()", is(0)))
+				.andExpect(jsonPath("$.summonerSpells").exists())
+				.andExpect(jsonPath("$.summonerSpells.length()", is(0)))
+				.andExpect(jsonPath("$.trinket", nullValue()));
 	}
 
 }

@@ -1,7 +1,8 @@
 package com.drumonii.loltrollbuild.rest;
 
 import com.drumonii.loltrollbuild.model.Champion;
-import com.drumonii.loltrollbuild.model.Item;
+import com.drumonii.loltrollbuild.model.TrollBuild;
+import com.drumonii.loltrollbuild.model.builder.TrollBuildBuilder;
 import com.drumonii.loltrollbuild.repository.ChampionsRepository;
 import com.drumonii.loltrollbuild.repository.ItemsRepository;
 import com.drumonii.loltrollbuild.repository.MapsRepository;
@@ -10,7 +11,6 @@ import com.drumonii.loltrollbuild.repository.specification.ExampleSpecification;
 import com.drumonii.loltrollbuild.rest.status.ResourceNotFoundException;
 import com.drumonii.loltrollbuild.util.ChampionUtil;
 import com.drumonii.loltrollbuild.util.GameMapUtil;
-import com.drumonii.loltrollbuild.util.RandomizeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -20,7 +20,9 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.SortDefault;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 import static com.drumonii.loltrollbuild.util.GameMapUtil.SUMMONERS_RIFT_SID;
 
@@ -30,9 +32,6 @@ import static com.drumonii.loltrollbuild.util.GameMapUtil.SUMMONERS_RIFT_SID;
 @RestController
 @RequestMapping("${api.base-path}/champions")
 public class ChampionsRestController {
-
-	private static final int ITEMS_SIZE = 6;
-	private static final int SPELLS_SIZE = 2;
 
 	@Autowired
 	private ChampionsRepository championsRepository;
@@ -102,9 +101,8 @@ public class ChampionsRestController {
 	 * @return a {@link Map} of build type key with {@link List} of values.
 	 */
 	@GetMapping(path = "/{value}/troll-build")
-	public Map<String, List<?>> trollBuild(@PathVariable String value,
+	public TrollBuild trollBuild(@PathVariable String value,
 			@RequestParam(required = false, defaultValue = SUMMONERS_RIFT_SID) int mapId) {
-		Map<String, List<?>> trollBuild = new HashMap<>();
 		Optional<Champion> champion;
 		try {
 			champion = championsRepository.findById(Integer.valueOf(value));
@@ -112,29 +110,17 @@ public class ChampionsRestController {
 			champion = championsRepository.findByName(value);
 		}
 		if (!champion.isPresent()) {
-			return trollBuild;
+			throw new ResourceNotFoundException("Unable to find a Champion with value: " + value);
 		}
 
-		// Items
-		List<Item> items = new ArrayList<>();
-		// Add boots first
-		items.add(RandomizeUtil.getRandom(itemsRepository.boots(mapId)));
-		// If Viktor, add his starting item
-		if (ChampionUtil.isViktor(champion.get())) {
-			items.add(RandomizeUtil.getRandom(itemsRepository.viktorOnly()));
-		}
-		// Get all items for the troll build
-		items.addAll(RandomizeUtil.getRandoms(itemsRepository.forTrollBuild(mapId),
-				ChampionUtil.isViktor(champion.get()) ? ITEMS_SIZE - 2: ITEMS_SIZE - 1));
-		trollBuild.put("items", items);
-
-		// Summoner Spells
-		trollBuild.put("summoner-spells", RandomizeUtil.getRandoms(summonerSpellsRepository
-				.forTrollBuild(GameMapUtil.getModeFromMap(mapsRepository.findById(mapId).orElse(null))), SPELLS_SIZE));
-
-		// Trinket
-		trollBuild.put("trinket", Collections.singletonList(RandomizeUtil.getRandom(itemsRepository.trinkets(mapId))));
-		return trollBuild;
+		return new TrollBuildBuilder()
+				.withBoots(itemsRepository.boots(mapId))
+				.withItems(itemsRepository.forTrollBuild(mapId))
+				.withSummonerSpells(summonerSpellsRepository.forTrollBuild(GameMapUtil
+						.getModeFromMap(mapsRepository.findById(mapId).orElse(null))))
+				.withTrinket(itemsRepository.trinkets(mapId))
+				.withViktor(ChampionUtil.isViktor(champion.get()) ? itemsRepository.viktorOnly() : null)
+				.build();
 	}
 
 }

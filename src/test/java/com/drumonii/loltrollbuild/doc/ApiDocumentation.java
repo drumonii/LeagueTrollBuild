@@ -489,7 +489,7 @@ public class ApiDocumentation {
 								.optional()), relaxedResponseFields(
 						fieldWithPath("trinket")
 								.description("The trinket of the Troll Build"),
-						fieldWithPath("summoner-spells")
+						fieldWithPath("summonerSpells")
 								.description("The Summoner Spells of the Troll Build"),
 						fieldWithPath("items")
 								.description("The Items of the Troll Build, with the first always a boots Item"))));
