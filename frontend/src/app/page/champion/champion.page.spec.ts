@@ -3,6 +3,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, convertToParamMap } from '@angular/router';
+import { By } from '@angular/platform-browser';
 
 import { of } from 'rxjs/observable/of';
 
@@ -581,6 +582,61 @@ describe('ChampionPage', () => {
     spyOn(gameMapsService, 'forTrollBuild').and.returnValue(of(maps));
 
     fixture.detectChanges();
+
+    // Champion
+    const championsNameAndTitleDe = fixture.debugElement.query(By.css('#champion-name-and-title'));
+    expect(championsNameAndTitleDe.nativeElement.textContent).toBe(`${skarner.name} - ${skarner.title}`);
+
+    const championPartypeDe = fixture.debugElement.query(By.css('#champion-partype'));
+    expect(championPartypeDe.nativeElement.textContent).toBe(`(${skarner.partype})`);
+
+    const championTagsDe = fixture.debugElement.queryAll(By.css('.champion-tag'));
+    expect(championTagsDe.map(championTagDe => championTagDe.nativeElement.textContent)).toEqual(skarner.tags);
+
+    const championsPassiveDe = fixture.debugElement.query(By.css('#champion-passive-name'));
+    expect(championsPassiveDe.nativeElement.textContent).toBe(skarner.passive.name);
+
+    const championsPassiveDescDe = fixture.debugElement.query(By.css('#champion-passive-description'));
+    expect(championsPassiveDescDe.nativeElement.textContent).toBe(skarner.passive.description);
+
+    const championSpellsDe = fixture.debugElement.queryAll(By.css('.champion-spell'));
+    expect(championSpellsDe.length).toBe(skarner.spells.length);
+    for (let i = 0; i < championSpellsDe.length; i++) {
+      const championSpellNameDe = championSpellsDe[i].query(By.css('.champion-spell-name'));
+      expect(championSpellNameDe.nativeElement.textContent).toBe(skarner.spells[i].name);
+      const championSpellDescDe = championSpellsDe[i].query(By.css('.champion-spell-description'));
+      expect(championSpellDescDe.nativeElement.textContent).toBe(skarner.spells[i].description);
+    }
+
+    // Maps
+    const mapsHeaderDe = fixture.debugElement.query(By.css('#troll-build-maps-header'));
+    expect(mapsHeaderDe.nativeElement.textContent).toBe('Map');
+
+    const mapsOptionDe = fixture.debugElement.queryAll(By.css('.map-option'));
+    expect(mapsOptionDe.map(mapOptionDe => mapOptionDe.nativeElement.textContent.trim()))
+      .toEqual(maps.map(map => map.mapName));
+    const newBuildBtnDe = fixture.debugElement.query(By.css('#new-build-btn'));
+    expect(newBuildBtnDe.nativeElement.textContent).toBe('New Build');
+
+    // Troll Build
+    const trollBuildItemsHeaderDe = fixture.debugElement.query(By.css('#troll-build-items-header'));
+    expect(trollBuildItemsHeaderDe.nativeElement.textContent).toBe('Items');
+    const trollBuildItemsDe = fixture.debugElement.queryAll(By.css('.troll-build-item'));
+    for (let i = 0; i < trollBuildItemsDe.length; i++) {
+      expect(trollBuildItemsDe[i].nativeElement.textContent.trim()).toBe(trollBuild.items[i].name);
+    }
+
+    const trollBuildSummonerSpellsHeaderDe = fixture.debugElement.query(By.css('#troll-build-summoner-spells-header'));
+    expect(trollBuildSummonerSpellsHeaderDe.nativeElement.textContent).toBe('Summoner Spells');
+    const trollBuildSummonerSpellsDe = fixture.debugElement.queryAll(By.css('.troll-build-summoner-spell'));
+    for (let i = 0; i < trollBuildSummonerSpellsDe.length; i++) {
+      expect(trollBuildSummonerSpellsDe[i].nativeElement.textContent.trim()).toBe(trollBuild.summonerSpells[i].name);
+    }
+
+    const trollBuildTrinketHeaderDe = fixture.debugElement.query(By.css('#troll-build-trinket-header'));
+    expect(trollBuildTrinketHeaderDe.nativeElement.textContent).toBe('Trinket');
+    const trollBuildTrinketDe = fixture.debugElement.query(By.css('.troll-build-trinket'));
+    expect(trollBuildTrinketDe.nativeElement.textContent.trim()).toBe(trollBuild.trinket.name);
 
     expect(championsService.getChampion).toHaveBeenCalledWith('Skarner');
     expect(championsService.getTrollBuild).toHaveBeenCalledWith('Skarner', GameMap.summonersRiftId);

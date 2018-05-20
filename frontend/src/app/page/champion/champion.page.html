@@ -1,53 +1,53 @@
 <ng-container *ngIf="champion">
-  <h4>{{champion.name}} - {{champion.title}}</h4>
+  <h4 id="champion-name-and-title">{{champion.name}} - {{champion.title}}</h4>
   <img src="data:image/png;base64,{{champion.image.imgSrc}}">
-  <p>({{champion.partype}})</p>
-  <ul>
-    <li *ngFor="let tag of champion.tags">{{tag}}</li>
+  <p id="champion-partype">({{champion.partype}})</p>
+  <ul id="champion-tags">
+    <li class="champion-tag" *ngFor="let tag of champion.tags">{{tag}}</li>
   </ul>
   <div>
     <img src="data:image/png;base64,{{champion.passive.image.imgSrc}}">
-    <p>{{champion.passive.name}}</p>
-    <p>{{champion.passive.description}}</p>
+    <p id="champion-passive-name">{{champion.passive.name}}</p>
+    <p id="champion-passive-description">{{champion.passive.description}}</p>
   </div>
-  <div *ngFor="let spell of champion.spells">
+  <div class="champion-spell" *ngFor="let spell of champion.spells">
     <img src="data:image/png;base64,{{spell.image.imgSrc}}">
-    <p>{{spell.name}}</p>
-    <p>{{spell.description}}</p>
+    <p class="champion-spell-name">{{spell.name}}</p>
+    <p class="champion-spell-description">{{spell.description}}</p>
   </div>
 
   <hr>
 
   <div>
-    <h4>Map</h4>
-    <select *ngIf="gameMaps" [(ngModel)]="gameMap" (ngModelChange)="getTrollBuild()">
-      <option *ngFor="let gameMap of gameMaps" [ngValue]="gameMap">
+    <h4 id="troll-build-maps-header">Map</h4>
+    <select id="map-select" *ngIf="gameMaps" [(ngModel)]="gameMap" (ngModelChange)="getTrollBuild()">
+      <option class="map-option" *ngFor="let gameMap of gameMaps" [ngValue]="gameMap">
         {{gameMap.mapName}}
       </option>
     </select>
-    <button (click)="getTrollBuild()">New Build</button>
+    <button id="new-build-btn" (click)="getTrollBuild()">New Build</button>
   </div>
 
   <hr>
 
-  <div *ngIf="(trollBuild$ | async) as trollBuild; else loadingTrollBuild">
+  <div id="troll-build" *ngIf="(trollBuild$ | async) as trollBuild; else loadingTrollBuild">
     <div>
-      <h4>Items</h4>
-      <div *ngFor="let item of trollBuild.items">
+      <h4 id="troll-build-items-header">Items</h4>
+      <div class="troll-build-item" *ngFor="let item of trollBuild.items">
         <img src="data:image/png;base64,{{item.image.imgSrc}}">
         {{item.name}}
       </div>
     </div>
     <div>
-      <h4>Summoner Spells</h4>
-      <div *ngFor="let summonerSpell of trollBuild.summonerSpells">
+      <h4 id="troll-build-summoner-spells-header">Summoner Spells</h4>
+      <div class="troll-build-summoner-spell" *ngFor="let summonerSpell of trollBuild.summonerSpells">
         <img src="data:image/png;base64,{{summonerSpell.image.imgSrc}}">
         {{summonerSpell.name}}
       </div>
     </div>
     <div>
-      <h4>Trinket</h4>
-      <div>
+      <h4 id="troll-build-trinket-header">Trinket</h4>
+      <div class="troll-build-trinket">
         <img src="data:image/png;base64,{{trollBuild.trinket.image.imgSrc}}">
         {{trollBuild.trinket.name}}
       </div>
