@@ -3,7 +3,7 @@ import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 
 import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
+import { zip } from 'rxjs/observable/zip';
 import 'rxjs/add/operator/switchMap';
 
 import { BuildsService } from '@service/builds.service';
@@ -31,36 +31,35 @@ export class ChampionPage implements OnInit {
     private buildsService: BuildsService, private title: Title, private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.setTitle();
-    this.getChampion();
-    this.getGameMaps();
-    this.getTrollBuild();
-  }
-
-  setTitle(): void {
     this.route.paramMap
-      .switchMap((params: ParamMap) => of(params.get('name')))
-      .subscribe(name => this.title.setTitle(`${this.title.getTitle()} | ${name}`));
+      .switchMap(((params: ParamMap) => {
+        const name = params.get('name');
+        this.setTitle(name);
+        return zip(this.getChampion(name), this.getGameMaps(), (champion: Champion, gameMaps: GameMap[]) => ({ champion, gameMaps }));
+      }))
+      .subscribe(({ champion, gameMaps }) => {
+        this.champion = champion;
+        this.gameMap = gameMaps.find(gameMap => gameMap.mapId === GameMap.summonersRiftId);
+        this.gameMaps = gameMaps;
+        this.getTrollBuild();
+      });
   }
 
-  getChampion(): void {
-    this.route.paramMap
-      .switchMap((params: ParamMap) => this.championService.getChampion(params.get('name')))
-      .subscribe(champion => this.champion = champion);
+  private setTitle(name: string) {
+    this.title.setTitle(`${this.title.getTitle()} | ${name}`);
   }
 
-  getGameMaps(): void {
-    this.gameMapsService.forTrollBuild().subscribe(gameMaps => {
-      this.gameMaps = gameMaps;
-      this.gameMap = gameMaps.find(gameMap => gameMap.mapId === GameMap.summonersRiftId);
-    });
+  private getChampion(name: string): Observable<Champion> {
+    return this.championService.getChampion(name);
+  }
+
+  private getGameMaps(): Observable<GameMap[]> {
+    return this.gameMapsService.forTrollBuild();
   }
 
   getTrollBuild(): void {
-    this.trollBuild$ = this.route.paramMap
-      .switchMap((params: ParamMap) => this.championService.getTrollBuild(params.get('name'),
-        this.gameMap ? this.gameMap.mapId : GameMap.summonersRiftId));
     this.build = null;
+    this.trollBuild$ = this.championService.getTrollBuild(this.champion.name, this.gameMap.mapId);
   }
 
   saveBuild(trollBuild: TrollBuild): void {
