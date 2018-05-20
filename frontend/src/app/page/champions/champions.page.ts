@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 import { Observable } from 'rxjs/Observable';
 
@@ -17,11 +18,18 @@ export class ChampionsPage implements OnInit {
   championsSearchName: string;
   championsFilterTag: string;
 
-  constructor(private championsService: ChampionsService) {}
+  constructor(private championsService: ChampionsService, private title: Title) {}
 
   ngOnInit() {
+    this.setTitle();
     this.getChampions();
     this.getChampionTags();
+  }
+
+  private setTitle(): void {
+    if (this.title.getTitle().indexOf('|') > -1) {
+      this.title.setTitle(this.title.getTitle().substring(0, this.title.getTitle().indexOf('|') - 1));
+    }
   }
 
   getChampions(): void {

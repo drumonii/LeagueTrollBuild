@@ -46,7 +46,11 @@ export class ChampionPage implements OnInit {
   }
 
   private setTitle(name: string) {
-    this.title.setTitle(`${this.title.getTitle()} | ${name}`);
+    if (this.title.getTitle().indexOf('|') === -1) {
+      this.title.setTitle(`${this.title.getTitle()} | ${name}`);
+    } else {
+      this.title.setTitle(`${this.title.getTitle().substring(0, this.title.getTitle().indexOf('|') - 1)} | ${name}`);
+    }
   }
 
   private getChampion(name: string): Observable<Champion> {

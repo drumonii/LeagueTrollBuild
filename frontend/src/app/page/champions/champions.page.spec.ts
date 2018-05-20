@@ -3,7 +3,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { RouterLinkWithHref } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { By } from '@angular/platform-browser';
+import { By, Title } from '@angular/platform-browser';
 
 import { of } from 'rxjs/observable/of';
 
@@ -31,7 +31,8 @@ describe('ChampionsPage', () => {
     component = fixture.componentInstance;
   });
 
-  it('should show Champions and Champion tags', inject([ChampionsService], (championsService: ChampionsService) => {
+  describe('with Champions and Champion tags', () => {
+
     const champions: Champion[] = [
       {
         id: 57,
@@ -121,46 +122,83 @@ describe('ChampionsPage', () => {
         ]
       }
     ];
+
     const tags = ['Assassin', 'Fighter', 'Mage', 'Marksman', 'Support', 'Tank'];
 
-    spyOn(championsService, 'getChampions').and.returnValue(of(champions));
-    spyOn(championsService, 'getChampionTags').and.returnValue(of(tags));
+    beforeEach(inject([ChampionsService, Title], (championsService: ChampionsService) => {
+      spyOn(championsService, 'getChampions').and.returnValue(of(champions));
+      spyOn(championsService, 'getChampionTags').and.returnValue(of(tags));
+    }));
 
-    fixture.detectChanges();
+    afterEach(inject([ChampionsService, Title], (championsService: ChampionsService) => {
+      expect(championsService.getChampions).toHaveBeenCalled();
+      expect(championsService.getChampionTags).toHaveBeenCalled();
+    }));
 
-    const championsSearchDe = fixture.debugElement.query(By.css('#champions-search-input'));
-    expect(championsSearchDe.nativeElement.placeholder).toBe('Search by Champion');
+    it('should leave title as is with no content title', inject([Title], (title: Title) => {
+      spyOn(title, 'getTitle').and.returnValue('League Troll Build');
+      spyOn(title, 'setTitle').and.callThrough();
 
-    const championTagsDe = fixture.debugElement.queryAll(By.css('.champion-tag-btn'));
-    expect(championTagsDe.map(championTagDe => championTagDe.nativeElement.textContent.trim())).toEqual(tags);
+      fixture.detectChanges();
 
-    const championsDe = fixture.debugElement.queryAll(By.css('.champion'));
-    expect(championsDe.length).toBe(champions.length);
+      expectChampionAndTags();
 
-    const maokaiLinkDe = championsDe[0].query(By.css('a'));
-    expect(maokaiLinkDe.nativeElement.textContent).toContain('Maokai');
-    const maokaiRouterLink = maokaiLinkDe.injector.get(RouterLinkWithHref);
-    expect(maokaiRouterLink.href).toBe('/champions/Maokai');
+      expect(title.setTitle).not.toHaveBeenCalled();
+    }));
 
-    const sionLinkDe = championsDe[1].query(By.css('a'));
-    expect(sionLinkDe.nativeElement.textContent).toContain('Sion');
-    const sionRouterLink = sionLinkDe.injector.get(RouterLinkWithHref);
-    expect(sionRouterLink.href).toBe('/champions/Sion');
+    it('should reset title with existing content title', inject([Title], (title: Title) => {
+      spyOn(title, 'getTitle').and.returnValue('League Troll Build | Ryze');
+      spyOn(title, 'setTitle').and.callThrough();
 
-    expect(championsService.getChampions).toHaveBeenCalled();
-    expect(championsService.getChampionTags).toHaveBeenCalled();
-  }));
+      fixture.detectChanges();
 
-  it('should show the no Champions alert when there are no Champions', inject([ChampionsService], (championsService: ChampionsService) => {
-    spyOn(championsService, 'getChampions').and.returnValue(of([]));
-    spyOn(championsService, 'getChampionTags').and.returnValue(of([]));
+      expectChampionAndTags();
 
-    fixture.detectChanges();
+      expect(title.setTitle).toHaveBeenCalledWith('League Troll Build');
+    }));
 
-    const alertDe = fixture.debugElement.query(By.css('#no-champions-alert'));
-    expect(alertDe.nativeElement.textContent).toBe('No Champions exist in the database!');
+    function expectChampionAndTags() {
+      const championsSearchDe = fixture.debugElement.query(By.css('#champions-search-input'));
+      expect(championsSearchDe.nativeElement.placeholder).toBe('Search by Champion');
 
-    expect(championsService.getChampions).toHaveBeenCalled();
-    expect(championsService.getChampionTags).toHaveBeenCalled();
-  }));
+      const championTagsDe = fixture.debugElement.queryAll(By.css('.champion-tag-btn'));
+      expect(championTagsDe.map(championTagDe => championTagDe.nativeElement.textContent.trim())).toEqual(tags);
+
+      const championsDe = fixture.debugElement.queryAll(By.css('.champion'));
+      expect(championsDe.length).toBe(champions.length);
+
+      const maokaiLinkDe = championsDe[0].query(By.css('a'));
+      expect(maokaiLinkDe.nativeElement.textContent).toContain('Maokai');
+      const maokaiRouterLink = maokaiLinkDe.injector.get(RouterLinkWithHref);
+      expect(maokaiRouterLink.href).toBe('/champions/Maokai');
+
+      const sionLinkDe = championsDe[1].query(By.css('a'));
+      expect(sionLinkDe.nativeElement.textContent).toContain('Sion');
+      const sionRouterLink = sionLinkDe.injector.get(RouterLinkWithHref);
+      expect(sionRouterLink.href).toBe('/champions/Sion');
+    }
+
+  });
+
+  describe('with no Champions nor Champion tags', () => {
+
+    beforeEach(inject([ChampionsService], (championsService: ChampionsService) => {
+      spyOn(championsService, 'getChampions').and.returnValue(of([]));
+      spyOn(championsService, 'getChampionTags').and.returnValue(of([]));
+    }));
+
+    afterEach(inject([ChampionsService], (championsService: ChampionsService) => {
+      expect(championsService.getChampions).toHaveBeenCalled();
+      expect(championsService.getChampionTags).toHaveBeenCalled();
+    }));
+
+    it('should show the no Champions alert', () => {
+      fixture.detectChanges();
+
+      const alertDe = fixture.debugElement.query(By.css('#no-champions-alert'));
+      expect(alertDe.nativeElement.textContent).toBe('No Champions exist in the database!');
+    });
+
+  });
+
 });
