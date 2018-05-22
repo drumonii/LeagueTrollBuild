@@ -38,7 +38,6 @@ export class Build {
  */
 export class BuildBuilder {
 
-  private id: number;
   private championId: number;
   private item1Id: number;
   private item2Id: number;
@@ -108,7 +107,6 @@ export class BuildBuilder {
 
   build(): Build {
     const build = new Build();
-    build.id = this.id;
     build.championId = this.championId;
     build.item1Id = this.item1Id;
     build.item2Id = this.item2Id;

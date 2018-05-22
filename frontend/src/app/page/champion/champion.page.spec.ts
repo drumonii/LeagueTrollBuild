@@ -1,8 +1,9 @@
-import { async, ComponentFixture,  inject, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, convertToParamMap } from '@angular/router';
+import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { By, Title } from '@angular/platform-browser';
 
 import { of } from 'rxjs/observable/of';
@@ -14,6 +15,7 @@ import { GameMapsService } from '@service/game-maps.service';
 import { Champion } from '@model/champion';
 import { GameMap } from '@model/game-map';
 import { TrollBuild } from '@model/troll-build';
+import { Build } from '@model/build';
 
 describe('ChampionPage', () => {
   let component: ChampionPage;
@@ -577,6 +579,19 @@ describe('ChampionPage', () => {
       }
     ];
 
+    const build = new Build();
+    build.championId = skarner.id;
+    build.item1Id = trollBuild.items[0].id;
+    build.item2Id = trollBuild.items[1].id;
+    build.item3Id = trollBuild.items[2].id;
+    build.item4Id = trollBuild.items[3].id;
+    build.item5Id = trollBuild.items[4].id;
+    build.item6Id = trollBuild.items[5].id;
+    build.summonerSpell1Id = trollBuild.summonerSpells[0].id;
+    build.summonerSpell2Id = trollBuild.summonerSpells[1].id;
+    build.trinketId = trollBuild.trinket.id;
+    build.mapId = GameMap.summonersRiftId;
+
     beforeEach(inject([ChampionsService, GameMapsService], (championsService: ChampionsService, gameMapsService: GameMapsService) => {
       spyOn(championsService, 'getChampion').and.returnValue(of(skarner));
       spyOn(championsService, 'getTrollBuild').and.returnValue(of(trollBuild));
@@ -609,6 +624,82 @@ describe('ChampionPage', () => {
       expectChampionAndMapsAndTrollBuild();
 
       expect(title.setTitle).toHaveBeenCalledWith(`League Troll Build | Skarner`);
+    }));
+
+    it('should generate a new Troll Build after selecting a new map',
+      inject([ChampionsService], (championsService: ChampionsService) => {
+      fixture.detectChanges();
+
+      expectChampionAndMapsAndTrollBuild();
+
+      const notSummonersRift = maps.find(gameMap => gameMap.mapId !== GameMap.summonersRiftId);
+      const notSummonersRifIndex = maps.findIndex(gameMap => gameMap.mapId === notSummonersRift.mapId);
+
+      const mapSelectDe = fixture.debugElement.query(By.css('#map-select'));
+      mapSelectDe.nativeElement.value = mapSelectDe.nativeElement.options[notSummonersRifIndex].value;
+      mapSelectDe.nativeElement.dispatchEvent(new Event('change'));
+
+      fixture.detectChanges();
+
+      expect(championsService.getTrollBuild).toHaveBeenCalledWith('Skarner', notSummonersRift.mapId);
+      expect(component.build).toBeNull();
+    }));
+
+    it('should reset the saved Build and generate a new Troll Build after clicking the new build button',
+      inject([ChampionsService], (championsService: ChampionsService) => {
+      fixture.detectChanges();
+
+      expectChampionAndMapsAndTrollBuild();
+
+      const notSummonersRift = maps.find(gameMap => gameMap.mapId !== GameMap.summonersRiftId);
+      component.gameMap = notSummonersRift;
+      component.build = build;
+
+      const newBuildDe = fixture.debugElement.query(By.css('#new-build-btn'));
+      newBuildDe.triggerEventHandler('click', trollBuild);
+
+      fixture.detectChanges();
+
+      expect(championsService.getTrollBuild).toHaveBeenCalledWith('Skarner', notSummonersRift.mapId);
+      expect(component.build).toBeNull();
+    }));
+
+    it('should save a Troll Build with after clicking the save build button and then show its self link',
+      inject([BuildsService], (buildsService: BuildsService) => {
+      fixture.detectChanges();
+
+      const savedBuild = new Build();
+      savedBuild.championId = build.championId;
+      savedBuild.item1Id = build.item1Id;
+      savedBuild.item2Id = build.item2Id;
+      savedBuild.item3Id = build.item3Id;
+      savedBuild.item4Id = build.item4Id;
+      savedBuild.item5Id = build.item5Id;
+      savedBuild.item6Id = build.item6Id;
+      savedBuild.summonerSpell1Id = build.summonerSpell1Id;
+      savedBuild.summonerSpell2Id = build.summonerSpell2Id;
+      savedBuild.trinketId = build.trinketId;
+      savedBuild.mapId = build.mapId;
+      savedBuild.selfRef = 'http://localhost/build/1';
+
+      spyOn(buildsService, 'saveBuild').and.returnValue(of(new HttpResponse<Build>({
+        body: savedBuild,
+        headers: new HttpHeaders({
+          'Location': savedBuild.selfRef
+        }),
+        status: 201
+      })));
+
+      const newBuildBtnDe = fixture.debugElement.query(By.css('#save-build-btn'));
+      newBuildBtnDe.triggerEventHandler('click', null);
+
+      fixture.detectChanges();
+
+      expect(buildsService.saveBuild).toHaveBeenCalledWith(build);
+
+      const savedBuildDe = fixture.debugElement.query(By.css('#saved-build-link'));
+      expect(savedBuildDe.nativeElement.textContent).toBe(savedBuild.selfRef);
+      expect(newBuildBtnDe.nativeElement.disabled).toBeTruthy('Expected save build button to be disabled');
     }));
 
     function expectChampionAndMapsAndTrollBuild() {
@@ -666,6 +757,10 @@ describe('ChampionPage', () => {
       expect(trollBuildTrinketHeaderDe.nativeElement.textContent).toBe('Trinket');
       const trollBuildTrinketDe = fixture.debugElement.query(By.css('.troll-build-trinket'));
       expect(trollBuildTrinketDe.nativeElement.textContent.trim()).toBe(trollBuild.trinket.name);
+
+      // Save Troll Build
+      const saveBuildBtnDe = fixture.debugElement.query(By.css('#save-build-btn'));
+      expect(saveBuildBtnDe.nativeElement.textContent).toBe('Save Build');
     }
 
   });

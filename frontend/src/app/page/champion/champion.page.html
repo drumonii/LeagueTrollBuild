@@ -52,8 +52,8 @@
         {{trollBuild.trinket.name}}
       </div>
     </div>
-    <button (click)="saveBuild(trollBuild)" [disabled]="build">Save Build</button>
-    <p *ngIf="build">{{build.selfRef}}</p>
+    <button id="save-build-btn" (click)="saveBuild(trollBuild)" [disabled]="build">Save Build</button>
+    <p id="saved-build-link" *ngIf="build">{{build.selfRef}}</p>
   </div>
 
   <ng-template #loadingTrollBuild>
