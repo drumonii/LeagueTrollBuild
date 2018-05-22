@@ -157,6 +157,60 @@ describe('ChampionsPage', () => {
       expect(title.setTitle).toHaveBeenCalledWith('League Troll Build');
     }));
 
+    it('should filter Champions with clicking a tag', () => {
+      fixture.detectChanges();
+
+      expectChampionAndTags();
+
+      const tagToFilter = 'Mage';
+      const tagToFilterIndex = tags.findIndex(tag => tag === tagToFilter);
+
+      const championTagsDe: DebugElement[] = fixture.debugElement.queryAll(By.css('.champion-tag-btn'));
+      championTagsDe[tagToFilterIndex].triggerEventHandler('click', null);
+
+      fixture.detectChanges();
+
+      expect(component.championsFilterTag).toBe(tagToFilter);
+
+      const championsDe: DebugElement[] = fixture.debugElement.queryAll(By.css('.champion'));
+      expect(championsDe.length).toBe(1);
+    });
+
+    it('should reset the Champions filter with re-clicking the same tag', () => {
+      fixture.detectChanges();
+
+      expectChampionAndTags();
+
+      const tagToFilter = 'Fighter';
+      const tagToFilterIndex = tags.findIndex(tag => tag === tagToFilter);
+      component.championsFilterTag = tagToFilter;
+
+      const championTagsDe: DebugElement[] = fixture.debugElement.queryAll(By.css('.champion-tag-btn'));
+      championTagsDe[tagToFilterIndex].triggerEventHandler('click', null);
+
+      fixture.detectChanges();
+
+      expect(component.championsFilterTag).toBe('');
+
+      const championsDe: DebugElement[] = fixture.debugElement.queryAll(By.css('.champion'));
+      expect(championsDe.length).toBe(champions.length);
+    });
+
+    it('should filter Champions with search input', () => {
+      fixture.detectChanges();
+
+      expectChampionAndTags();
+
+      const championsSearchDe: DebugElement = fixture.debugElement.query(By.css('#champions-search-input'));
+      championsSearchDe.nativeElement.value = 'maokai';
+      championsSearchDe.nativeElement.dispatchEvent(new Event('input'));
+
+      fixture.detectChanges();
+
+      const championsDe: DebugElement[] = fixture.debugElement.queryAll(By.css('.champion'));
+      expect(championsDe.length).toBe(1);
+    });
+
     function expectChampionAndTags() {
       const championsSearchDe = fixture.debugElement.query(By.css('#champions-search-input'));
       expect(championsSearchDe.nativeElement.placeholder).toBe('Search by Champion');
