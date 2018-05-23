@@ -57,22 +57,24 @@
   </div>
 
   <ng-template #loadingTrollBuild>
-    <div>
-      <h4>Items</h4>
-      <div *ngFor="let item of [0, 1, 2, 3, 4, 5]">
-        <img src="assets/images/dummy.png">
-      </div>
-    </div>
-    <div>
-      <h4>Summoner Spells</h4>
-      <div *ngFor="let summonerSpell of [0, 1]">
-        <img src="assets/images/dummy.png">
-      </div>
-    </div>
-    <div>
-      <h4>Trinket</h4>
+    <div id="troll-build-loading">
       <div>
-        <img src="assets/images/dummy.png">
+        <h4 id="troll-build-loading-items-header">Items</h4>
+        <div class="troll-build-loading-item" *ngFor="let item of [0, 1, 2, 3, 4, 5]">
+          <img src="assets/images/dummy.png">
+        </div>
+      </div>
+      <div>
+        <h4 id="troll-build-loading-summoner-spells-header">Summoner Spells</h4>
+        <div class="troll-build-loading-summoner-spell" *ngFor="let summonerSpell of [0, 1]">
+          <img src="assets/images/dummy.png">
+        </div>
+      </div>
+      <div>
+        <h4 id="troll-build-loading-trinket-header">Trinket</h4>
+        <div class="troll-build-loading-trinket" *ngFor="let trinket of [0]">
+          <img src="assets/images/dummy.png">
+        </div>
       </div>
     </div>
   </ng-template>

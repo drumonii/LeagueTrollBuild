@@ -45,135 +45,180 @@ describe('ChampionPage', () => {
     component = fixture.componentInstance;
   });
 
-  describe('show Champion by name with a Troll Build and maps to select', () => {
-
-    const skarner: Champion = {
-      id: 72,
-      key: 'Skarner',
-      name: 'Skarner',
-      title: 'the Crystal Vanguard',
-      partype: 'Mana',
-      info: {
-        attack: 7,
-        defense: 6,
-        magic: 5,
-        difficulty: 5
-      },
-      spells: [
-        {
-          key: 'SkarnerVirulentSlash',
-          name: 'Crystal Slash',
-          description: 'Skarner lashes out with his claws, dealing physical damage to all nearby enemies and charging ' +
-            'himself with Crystal Energy for several seconds if a unit is struck. If he casts Crystal Slash again while ' +
-            'powered by Crystal Energy, he deals bonus magic damage.',
-          tooltip: 'Skarner deals <span class=\'colorFF8C00\'>{{ f1 }}</span> physical damage to all nearby enemies. ' +
-            'If a unit is struck, he charges himself with Crystal Energy for {{ e2 }} seconds.<br /><br />While Skarner ' +
-            'is charged, Crystal Slash deals <span class=\'colorFF8C00\'>{{ f1 }}</span> <span class=\'color99FF99\'> ' +
-            '(+{{ a1 }})</span> bonus magic damage.<br /><br />Basic attacks against non-structures lower Crystal ' +
-            'Slash\'s cooldown by 0.25 seconds (quadrupled against champions).',
-          image: {
-            full: 'SkarnerVirulentSlash.png',
-            sprite: 'spell10.png',
-            group: 'spell',
-            imgSrc: [],
-            x: 288,
-            y: 96,
-            w: 48,
-            h: 48
-          }
-        },
-        {
-          key: 'SkarnerExoskeleton',
-          name: 'Crystalline Exoskeleton',
-          description: 'Skarner gains a shield and has increased Movement Speed while the shield persists.',
-          tooltip: 'Skarner is shielded for <span class=\'colorCC3300\'>{{ f1 }}</span> ({{ e1 }}% of his maximum health) ' +
-            '<span class=\'color99FF99\'>(+{{ a1 }})</span> damage for {{ e4 }} seconds. While the shield persists, ' +
-            'Skarner gains movement speed that ramps up to {{ e5 }}% over 3 seconds.',
-          image: {
-            full: 'SkarnerExoskeleton.png',
-            sprite: 'spell10.png',
-            group: 'spell',
-            imgSrc: [],
-            x: 336,
-            y: 96,
-            w: 48,
-            h: 48
-          }
-        },
-        {
-          key: 'SkarnerFracture',
-          name: 'Fracture',
-          description: 'Skarner summons a blast of crystalline energy which deals damage to enemies struck and slows them. ' +
-            'Basic attacking these enemies within a short window will stun them.',
-          tooltip: '<span class=\'colorFF9900\'>Passive:</span> Crystallizing enemies with Fracture and Impale grants ' +
-            '<span class=\'colorFFF673\'>Crystal Charge</span> for the disable duration and reduces the cooldown of ' +
-            'Fracture by the same amount.<br /><br /><span class=\'colorFF9900\'>Active:</span> Skarner summons a blast ' +
-            'of crystalline energy, dealing {{ e1 }} <span class=\'color99FF99\'>(+{{ a1 }})</span> magic damage, slowing ' +
-            'targets hit by {{ e8 }}% for {{ e7 }} seconds and reducing the blast\'s speed.<br /><br />Enemies hit by ' +
-            'Fracture are afflicted with Crystal Venom for {{ e6 }} seconds, causing Skarner\'s next basic attack against ' +
-            'them to deal {{ e2 }} additional physical damage and stun the target for {{ e3 }} second.',
-          image: {
-            full: 'SkarnerFracture.png',
-            sprite: 'spell10.png',
-            group: 'spell',
-            imgSrc: [],
-            x: 384,
-            y: 96,
-            w: 48,
-            h: 48
-          }
-        },
-        {
-          key: 'SkarnerImpale',
-          name: 'Impale',
-          description: 'Skarner suppresses an enemy champion and deals damage to it. During this time, Skarner can move ' +
-            'freely and will drag his helpless victim around with him. When the effect ends, the target will be dealt additional damage.',
-          tooltip: 'Skarner suppresses an enemy champion for {{ e1 }} seconds, dealing <span class=\'colorFF8C00\'> ' +
-            '{{ a2 }}</span> physical damage plus {{ e2 }} <span class=\'color99FF99\'>(+{{ a1 }})</span> magic damage. ' +
-            'Skarner can move freely during this time, and will drag his helpless victim around with him. When the effect ' +
-            'ends, Skarner\'s target will be dealt the same damage again.',
-          image: {
-            full: 'SkarnerImpale.png',
-            sprite: 'spell10.png',
-            group: 'spell',
-            imgSrc: [],
-            x: 432,
-            y: 96,
-            w: 48,
-            h: 48
-          }
-        }
-      ],
-      passive: {
-        name: 'Crystal Spires',
-        description: 'Skarner\'s presence causes crystals to spawn in set locations around the map. While near crystals ' +
-          'his team owns, Skarner gains tremendous movement speed, attack speed, and mana regeneration.',
+  const skarner: Champion = {
+    id: 72,
+    key: 'Skarner',
+    name: 'Skarner',
+    title: 'the Crystal Vanguard',
+    partype: 'Mana',
+    info: {
+      attack: 7,
+      defense: 6,
+      magic: 5,
+      difficulty: 5
+    },
+    spells: [
+      {
+        key: 'SkarnerVirulentSlash',
+        name: 'Crystal Slash',
+        description: 'Skarner lashes out with his claws, dealing physical damage to all nearby enemies and charging ' +
+          'himself with Crystal Energy for several seconds if a unit is struck. If he casts Crystal Slash again while ' +
+          'powered by Crystal Energy, he deals bonus magic damage.',
+        tooltip: 'Skarner deals <span class=\'colorFF8C00\'>{{ f1 }}</span> physical damage to all nearby enemies. ' +
+          'If a unit is struck, he charges himself with Crystal Energy for {{ e2 }} seconds.<br /><br />While Skarner ' +
+          'is charged, Crystal Slash deals <span class=\'colorFF8C00\'>{{ f1 }}</span> <span class=\'color99FF99\'> ' +
+          '(+{{ a1 }})</span> bonus magic damage.<br /><br />Basic attacks against non-structures lower Crystal ' +
+          'Slash\'s cooldown by 0.25 seconds (quadrupled against champions).',
         image: {
-          full: 'Skarner_Passive.png',
-          sprite: 'passive3.png',
-          group: 'passive',
+          full: 'SkarnerVirulentSlash.png',
+          sprite: 'spell10.png',
+          group: 'spell',
           imgSrc: [],
-          x: 96,
-          y: 48,
+          x: 288,
+          y: 96,
           w: 48,
           h: 48
         }
       },
+      {
+        key: 'SkarnerExoskeleton',
+        name: 'Crystalline Exoskeleton',
+        description: 'Skarner gains a shield and has increased Movement Speed while the shield persists.',
+        tooltip: 'Skarner is shielded for <span class=\'colorCC3300\'>{{ f1 }}</span> ({{ e1 }}% of his maximum health) ' +
+          '<span class=\'color99FF99\'>(+{{ a1 }})</span> damage for {{ e4 }} seconds. While the shield persists, ' +
+          'Skarner gains movement speed that ramps up to {{ e5 }}% over 3 seconds.',
+        image: {
+          full: 'SkarnerExoskeleton.png',
+          sprite: 'spell10.png',
+          group: 'spell',
+          imgSrc: [],
+          x: 336,
+          y: 96,
+          w: 48,
+          h: 48
+        }
+      },
+      {
+        key: 'SkarnerFracture',
+        name: 'Fracture',
+        description: 'Skarner summons a blast of crystalline energy which deals damage to enemies struck and slows them. ' +
+          'Basic attacking these enemies within a short window will stun them.',
+        tooltip: '<span class=\'colorFF9900\'>Passive:</span> Crystallizing enemies with Fracture and Impale grants ' +
+          '<span class=\'colorFFF673\'>Crystal Charge</span> for the disable duration and reduces the cooldown of ' +
+          'Fracture by the same amount.<br /><br /><span class=\'colorFF9900\'>Active:</span> Skarner summons a blast ' +
+          'of crystalline energy, dealing {{ e1 }} <span class=\'color99FF99\'>(+{{ a1 }})</span> magic damage, slowing ' +
+          'targets hit by {{ e8 }}% for {{ e7 }} seconds and reducing the blast\'s speed.<br /><br />Enemies hit by ' +
+          'Fracture are afflicted with Crystal Venom for {{ e6 }} seconds, causing Skarner\'s next basic attack against ' +
+          'them to deal {{ e2 }} additional physical damage and stun the target for {{ e3 }} second.',
+        image: {
+          full: 'SkarnerFracture.png',
+          sprite: 'spell10.png',
+          group: 'spell',
+          imgSrc: [],
+          x: 384,
+          y: 96,
+          w: 48,
+          h: 48
+        }
+      },
+      {
+        key: 'SkarnerImpale',
+        name: 'Impale',
+        description: 'Skarner suppresses an enemy champion and deals damage to it. During this time, Skarner can move ' +
+          'freely and will drag his helpless victim around with him. When the effect ends, the target will be dealt additional damage.',
+        tooltip: 'Skarner suppresses an enemy champion for {{ e1 }} seconds, dealing <span class=\'colorFF8C00\'> ' +
+          '{{ a2 }}</span> physical damage plus {{ e2 }} <span class=\'color99FF99\'>(+{{ a1 }})</span> magic damage. ' +
+          'Skarner can move freely during this time, and will drag his helpless victim around with him. When the effect ' +
+          'ends, Skarner\'s target will be dealt the same damage again.',
+        image: {
+          full: 'SkarnerImpale.png',
+          sprite: 'spell10.png',
+          group: 'spell',
+          imgSrc: [],
+          x: 432,
+          y: 96,
+          w: 48,
+          h: 48
+        }
+      }
+    ],
+    passive: {
+      name: 'Crystal Spires',
+      description: 'Skarner\'s presence causes crystals to spawn in set locations around the map. While near crystals ' +
+        'his team owns, Skarner gains tremendous movement speed, attack speed, and mana regeneration.',
       image: {
-        full: 'Skarner.png',
-        sprite: 'champion3.png',
-        group: 'champion',
+        full: 'Skarner_Passive.png',
+        sprite: 'passive3.png',
+        group: 'passive',
         imgSrc: [],
         x: 96,
         y: 48,
         w: 48,
         h: 48
-      },
-      tags: [
-        'Fighter',
-        'Tank'
-      ]
-    };
+      }
+    },
+    image: {
+      full: 'Skarner.png',
+      sprite: 'champion3.png',
+      group: 'champion',
+      imgSrc: [],
+      x: 96,
+      y: 48,
+      w: 48,
+      h: 48
+    },
+    tags: [
+      'Fighter',
+      'Tank'
+    ]
+  };
+
+  const maps = [
+    {
+      mapId: 12,
+      mapName: 'Howling Abyss',
+      image: {
+        full: 'map12.png',
+        sprite: 'map0.png',
+        group: 'map',
+        imgSrc: [],
+        x: 144,
+        y: 0,
+        w: 48,
+        h: 48
+      }
+    },
+    {
+      mapId: 11,
+      mapName: 'Summoner\'s Rift',
+      image: {
+        full: 'map11.png',
+        sprite: 'map0.png',
+        group: 'map',
+        imgSrc: [],
+        x: 96,
+        y: 0,
+        w: 48,
+        h: 48
+      }
+    },
+    {
+      mapId: 10,
+      mapName: 'The Twisted Treeline',
+      image: {
+        full: 'map10.png',
+        sprite: 'map0.png',
+        group: 'map',
+        imgSrc: [],
+        x: 48,
+        y: 0,
+        w: 48,
+        h: 48
+      }
+    }
+  ];
+
+  describe('show Champion by name with a Troll Build and maps to select', () => {
 
     const trollBuild = new TrollBuild();
 
@@ -534,51 +579,6 @@ describe('ChampionPage', () => {
       }
     };
 
-    const maps = [
-      {
-        mapId: 12,
-        mapName: 'Howling Abyss',
-        image: {
-          full: 'map12.png',
-          sprite: 'map0.png',
-          group: 'map',
-          imgSrc: [],
-          x: 144,
-          y: 0,
-          w: 48,
-          h: 48
-        }
-      },
-      {
-        mapId: 11,
-        mapName: 'Summoner\'s Rift',
-        image: {
-          full: 'map11.png',
-          sprite: 'map0.png',
-          group: 'map',
-          imgSrc: [],
-          x: 96,
-          y: 0,
-          w: 48,
-          h: 48
-        }
-      },
-      {
-        mapId: 10,
-        mapName: 'The Twisted Treeline',
-        image: {
-          full: 'map10.png',
-          sprite: 'map0.png',
-          group: 'map',
-          imgSrc: [],
-          x: 48,
-          y: 0,
-          w: 48,
-          h: 48
-        }
-      }
-    ];
-
     const build = new Build();
     build.championId = skarner.id;
     build.item1Id = trollBuild.items[0].id;
@@ -762,6 +762,44 @@ describe('ChampionPage', () => {
       const saveBuildBtnDe = fixture.debugElement.query(By.css('#save-build-btn'));
       expect(saveBuildBtnDe.nativeElement.textContent).toBe('Save Build');
     }
+
+  });
+
+  describe('show Champion by name with a loading Troll Build and maps to select', () => {
+
+    beforeEach(inject([ChampionsService, GameMapsService], (championsService: ChampionsService, gameMapsService: GameMapsService) => {
+      spyOn(championsService, 'getChampion').and.returnValue(of(skarner));
+      spyOn(championsService, 'getTrollBuild').and.callThrough();
+      spyOn(gameMapsService, 'forTrollBuild').and.returnValue(of(maps));
+    }));
+
+    afterEach(inject([ChampionsService, GameMapsService], (championsService: ChampionsService, gameMapsService: GameMapsService) => {
+      expect(championsService.getChampion).toHaveBeenCalledWith('Skarner');
+      expect(championsService.getTrollBuild).toHaveBeenCalledWith('Skarner', GameMap.summonersRiftId);
+      expect(gameMapsService.forTrollBuild).toHaveBeenCalled();
+    }));
+
+    it('should show placeholders indicating a loading Troll Build ', () => {
+      fixture.detectChanges();
+
+      const trollBuildLoadingDe: DebugElement = fixture.debugElement.query(By.css('#troll-build-loading'));
+      expect(trollBuildLoadingDe).toBeTruthy();
+
+      const trollBuildLoadingItemsHeaderDe: DebugElement = fixture.debugElement.query(By.css('#troll-build-loading-items-header'));
+      expect(trollBuildLoadingItemsHeaderDe.nativeElement.textContent).toBe('Items');
+      const trollBuildLoadingItemsDe: DebugElement[] = fixture.debugElement.queryAll(By.css('.troll-build-loading-item'));
+      expect(trollBuildLoadingItemsDe.length).toBe(6);
+
+      const trollBuildLoadingSummonerSpellsHeaderDe: DebugElement = fixture.debugElement.query(By.css('#troll-build-loading-summoner-spells-header'));
+      expect(trollBuildLoadingSummonerSpellsHeaderDe.nativeElement.textContent).toBe('Summoner Spells');
+      const trollBuildLoadingSummonerSpellsDe: DebugElement[] = fixture.debugElement.queryAll(By.css('.troll-build-loading-summoner-spell'));
+      expect(trollBuildLoadingSummonerSpellsDe.length).toBe(2);
+
+      const trollBuildLoadingTrinketHeaderDe: DebugElement = fixture.debugElement.query(By.css('#troll-build-loading-trinket-header'));
+      expect(trollBuildLoadingTrinketHeaderDe.nativeElement.textContent).toBe('Trinket');
+      const trollBuildLoadingTrinketDe: DebugElement = fixture.debugElement.query(By.css('.troll-build-loading-trinket'));
+      expect(trollBuildLoadingTrinketDe).toBeTruthy();
+    });
 
   });
 
