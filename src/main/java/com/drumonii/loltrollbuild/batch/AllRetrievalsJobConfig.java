@@ -2,9 +2,7 @@ package com.drumonii.loltrollbuild.batch;
 
 import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.riot.service.VersionsService;
-import org.springframework.batch.core.Job;
-import org.springframework.batch.core.JobParametersBuilder;
-import org.springframework.batch.core.Step;
+import org.springframework.batch.core.*;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,18 +50,7 @@ public class AllRetrievalsJobConfig {
 	@Bean
 	public Job allRetrievalsJob() {
 		return jobBuilderFactory.get("allRetrievalsJob")
-				.incrementer(parameters -> {
-					Version latestVersion = versionsService.getLatestVersion();
-					String patch;
-					if (latestVersion == null) {
-						patch = new Version("0.0.0").getPatch();
-					} else {
-						patch = latestVersion.getPatch();
-					}
-					return new JobParametersBuilder()
-							.addString(LATEST_PATCH_KEY, patch)
-							.toJobParameters();
-				})
+				.incrementer(new AllRetrievalsJobParametersIncrementer())
 				.start(versionsRetrievalJobStep())
 				.next(mapsRetrievalJobStep())
 				.next(summonerSpellsRetrievalJobStep())
@@ -105,6 +92,24 @@ public class AllRetrievalsJobConfig {
 		return stepBuilderFactory.get("itemsRetrievalJobStep")
 				.job(itemsRetrievalJob)
 				.build();
+	}
+
+	private class AllRetrievalsJobParametersIncrementer implements JobParametersIncrementer {
+
+		@Override
+		public JobParameters getNext(JobParameters parameters) {
+			Version latestVersion = versionsService.getLatestVersion();
+			String patch;
+			if (latestVersion == null) {
+				patch = new Version("0.0.0").getPatch();
+			} else {
+				patch = latestVersion.getPatch();
+			}
+			return new JobParametersBuilder()
+					.addString(LATEST_PATCH_KEY, patch)
+					.toJobParameters();
+		}
+
 	}
 
 }
