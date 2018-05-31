@@ -77,7 +77,7 @@ public class AllRetrievalsJobConfigTest {
 		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
 		assertThat(jobExecution.getJobParameters().getString(LATEST_PATCH_KEY)).isEqualTo(latestVersion.getPatch());
 		assertThat(jobExecution.getStepExecutions()).extracting(StepExecution::getStepName)
-				.containsExactly("versionsRetrievalJobStep", "mapsRetrievalJobStep", "summonerSpellsRetrievalJobStep",
+				.containsOnly("versionsRetrievalJobStep", "mapsRetrievalJobStep", "summonerSpellsRetrievalJobStep",
 						"championsRetrievalJobStep", "itemsRetrievalJobStep");
 	}
 
