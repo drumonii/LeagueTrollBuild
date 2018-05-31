@@ -8,7 +8,6 @@ import com.drumonii.loltrollbuild.batch.versions.VersionsRetrievalJobConfig;
 import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.riot.service.*;
 import com.drumonii.loltrollbuild.test.batch.BatchTest;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.batch.core.*;
@@ -26,11 +25,12 @@ import java.util.ArrayList;
 import static com.drumonii.loltrollbuild.batch.scheduling.RetrievalJobsScheduling.LATEST_PATCH_KEY;
 import static com.drumonii.loltrollbuild.config.Profiles.TESTING;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
 import static org.mockito.BDDMockito.given;
 
 @RunWith(SpringRunner.class)
 @BatchTest({ AllRetrievalsJobConfig.class, ChampionsRetrievalJobConfig.class, ItemsRetrievalJobConfig.class,
-		MapsRetrievalJobConfig.class, SummonerSpellsRetrievalJobConfig.class, VersionsRetrievalJobConfig.class})
+		MapsRetrievalJobConfig.class, SummonerSpellsRetrievalJobConfig.class, VersionsRetrievalJobConfig.class })
 @ActiveProfiles({ TESTING })
 public class AllRetrievalsJobConfigTest {
 
@@ -52,25 +52,16 @@ public class AllRetrievalsJobConfigTest {
 	@Autowired
 	private JobLauncherTestUtils jobLauncherTestUtils;
 
-	private Version latestVersion = new Version("8.1.1");
-
-	@Before
-	public void before() {
-		given(versionsService.getLatestVersion()).willReturn(latestVersion);
-
-		given(mapsService.getMaps()).willReturn(new ArrayList<>());
-
-		given(summonerSpellsService.getSummonerSpells()).willReturn(new ArrayList<>());
-
-		given(championsService.getChampions()).willReturn(new ArrayList<>());
-
-		given(itemsService.getItems()).willReturn(new ArrayList<>());
-	}
-
 	@Test
-	public void runsAllRetrievalJobs() throws Exception {
-		JobParameters jobParameters = jobLauncherTestUtils.getJob().getJobParametersIncrementer()
-				.getNext(new JobParameters());
+	public void runsAllRetrievalJob() throws Exception {
+		Version latestVersion = new Version("8.1.1");
+		given(versionsService.getLatestVersion()).willReturn(latestVersion);
+		given(mapsService.getMaps()).willReturn(new ArrayList<>());
+		given(summonerSpellsService.getSummonerSpells()).willReturn(new ArrayList<>());
+		given(championsService.getChampions()).willReturn(new ArrayList<>());
+		given(itemsService.getItems()).willReturn(new ArrayList<>());
+
+		JobParameters jobParameters = getJobParameters();
 		assertThat(jobParameters.getParameters()).containsKey(LATEST_PATCH_KEY);
 
 		JobExecution jobExecution = jobLauncherTestUtils.launchJob(jobParameters);
@@ -79,6 +70,24 @@ public class AllRetrievalsJobConfigTest {
 		assertThat(jobExecution.getStepExecutions()).extracting(StepExecution::getStepName)
 				.containsOnly("versionsRetrievalJobStep", "mapsRetrievalJobStep", "summonerSpellsRetrievalJobStep",
 						"championsRetrievalJobStep", "itemsRetrievalJobStep");
+	}
+
+	@Test
+	public void doesNotRunsAllRetrievalJobWithNoLatestPatch() {
+		given(versionsService.getLatestVersion()).willReturn(null);
+
+		JobParameters jobParameters = getJobParameters();
+
+		try {
+			jobLauncherTestUtils.launchJob(jobParameters);
+			fail("Expected JobParametersInvalidException to be thrown");
+		} catch (Exception e) {
+			assertThat(e).isInstanceOf(JobParametersInvalidException.class);
+		}
+	}
+
+	private JobParameters getJobParameters() {
+		return jobLauncherTestUtils.getJob().getJobParametersIncrementer().getNext(new JobParameters());
 	}
 
 	@TestConfiguration

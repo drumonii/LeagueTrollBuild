@@ -5,6 +5,7 @@ import com.drumonii.loltrollbuild.riot.service.VersionsService;
 import org.springframework.batch.core.*;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
+import org.springframework.batch.core.job.DefaultJobParametersValidator;
 import org.springframework.batch.core.job.builder.FlowBuilder;
 import org.springframework.batch.core.job.flow.Flow;
 import org.springframework.batch.core.job.flow.support.SimpleFlow;
@@ -55,6 +56,7 @@ public class AllRetrievalsJobConfig {
 	public Job allRetrievalsJob() {
 		return jobBuilderFactory.get("allRetrievalsJob")
 				.incrementer(new AllRetrievalsJobParametersIncrementer())
+				.validator(new AllRetrievalsJobParametersValidator())
 				.start(allRetrievalsJobFlow())
 				.end()
 				.build();
@@ -144,15 +146,19 @@ public class AllRetrievalsJobConfig {
 		@Override
 		public JobParameters getNext(JobParameters parameters) {
 			Version latestVersion = versionsService.getLatestVersion();
-			String patch;
-			if (latestVersion == null) {
-				patch = new Version("0.0.0").getPatch();
-			} else {
-				patch = latestVersion.getPatch();
+			JobParametersBuilder jobParametersBuilder = new JobParametersBuilder();
+			if (latestVersion != null) {
+				jobParametersBuilder.addString(LATEST_PATCH_KEY, latestVersion.getPatch());
 			}
-			return new JobParametersBuilder()
-					.addString(LATEST_PATCH_KEY, patch)
-					.toJobParameters();
+			return jobParametersBuilder.toJobParameters();
+		}
+
+	}
+
+	private class AllRetrievalsJobParametersValidator extends DefaultJobParametersValidator {
+
+		AllRetrievalsJobParametersValidator() {
+			super(new String[] { LATEST_PATCH_KEY }, new String[0]);
 		}
 
 	}
