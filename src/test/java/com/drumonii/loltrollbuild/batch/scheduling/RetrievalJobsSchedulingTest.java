@@ -1,5 +1,11 @@
 package com.drumonii.loltrollbuild.batch.scheduling;
 
+import com.drumonii.loltrollbuild.batch.AllRetrievalsJobConfig;
+import com.drumonii.loltrollbuild.batch.champions.ChampionsRetrievalJobConfig;
+import com.drumonii.loltrollbuild.batch.items.ItemsRetrievalJobConfig;
+import com.drumonii.loltrollbuild.batch.maps.MapsRetrievalJobConfig;
+import com.drumonii.loltrollbuild.batch.summonerSpells.SummonerSpellsRetrievalJobConfig;
+import com.drumonii.loltrollbuild.batch.versions.VersionsRetrievalJobConfig;
 import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.riot.service.VersionsService;
 import com.drumonii.loltrollbuild.test.batch.BatchTest;
@@ -7,7 +13,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobParameters;
-import org.springframework.batch.core.JobParametersBuilder;
+import org.springframework.batch.core.JobParametersInvalidException;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.batch.core.repository.JobExecutionAlreadyRunningException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +40,9 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 
 @RunWith(SpringRunner.class)
-@BatchTest(includeFilters = @Filter(type = FilterType.ASSIGNABLE_TYPE, classes = RetrievalJobsScheduling.class))
+@BatchTest(includeFilters = @Filter(type = FilterType.ASSIGNABLE_TYPE, classes = RetrievalJobsScheduling.class),
+		jobs = { AllRetrievalsJobConfig.class, ChampionsRetrievalJobConfig.class, ItemsRetrievalJobConfig.class,
+				MapsRetrievalJobConfig.class, SummonerSpellsRetrievalJobConfig.class, VersionsRetrievalJobConfig.class })
 @ActiveProfiles({ TESTING })
 public class RetrievalJobsSchedulingTest {
 
@@ -47,7 +55,7 @@ public class RetrievalJobsSchedulingTest {
 	@MockBean
 	private JobLauncher jobLauncher;
 
-	@MockBean
+	@Autowired
 	@Qualifier("allRetrievalsJob")
 	private Job allRetrievalsJob;
 
@@ -64,29 +72,26 @@ public class RetrievalJobsSchedulingTest {
 
 	@Test
 	public void runsAllRetrievalsJob() throws Exception {
-		Version latestVersion = new Version("8.7.1");
-		given(versionsService.getLatestVersion()).willReturn(latestVersion);
+		given(versionsService.getLatestVersion()).willReturn(new Version("8.7.1"));
 
 		retrievalJobsScheduling.runAllRetrievalsJob();
 
-		verify(jobLauncher, times(1)).run(eq(allRetrievalsJob), eq(buildJobParameters(latestVersion)));
+		verify(jobLauncher, times(1)).run(eq(allRetrievalsJob), any(JobParameters.class));
 	}
 
 	@Test
 	public void skipsAllRetrievalsJobRunWithNoLatestPatch() throws Exception {
 		given(versionsService.getLatestVersion()).willReturn(null);
 
-		retrievalJobsScheduling.runAllRetrievalsJob();
+		given(jobLauncher.run(eq(allRetrievalsJob), any(JobParameters.class)))
+				.willThrow(new JobParametersInvalidException("The JobParameters do not contain required keys: " + LATEST_PATCH_KEY));
 
-		verify(jobLauncher, never()).run(eq(allRetrievalsJob), any(JobParameters.class));
+		retrievalJobsScheduling.runAllRetrievalsJob();
 	}
 
 	@Test
 	public void runsAllRetrievalJobWithInstanceOfJobExecutionExceptionThrown() throws Exception {
-		Version latestVersion = new Version("8.7.1");
-		given(versionsService.getLatestVersion()).willReturn(latestVersion);
-
-		given(jobLauncher.run(eq(allRetrievalsJob), eq(buildJobParameters(latestVersion))))
+		given(jobLauncher.run(eq(allRetrievalsJob), any(JobParameters.class)))
 				.willThrow(new JobExecutionAlreadyRunningException("A job execution for this job is already running"));
 
 		retrievalJobsScheduling.runAllRetrievalsJob();
@@ -94,19 +99,12 @@ public class RetrievalJobsSchedulingTest {
 
 	@Test
 	public void runsAllRetrievalJobWithExceptionThrown() throws Exception {
-		Version latestVersion = new Version("8.7.1");
-		given(versionsService.getLatestVersion()).willReturn(latestVersion);
+		given(versionsService.getLatestVersion()).willReturn(new Version("8.7.1"));
 
-		given(jobLauncher.run(eq(allRetrievalsJob), eq(buildJobParameters(latestVersion))))
+		given(jobLauncher.run(eq(allRetrievalsJob), any(JobParameters.class)))
 				.willThrow(new NullPointerException());
 
 		retrievalJobsScheduling.runAllRetrievalsJob();
-	}
-
-	private JobParameters buildJobParameters(Version latestVersion) {
-		return new JobParametersBuilder()
-				.addString(LATEST_PATCH_KEY, latestVersion.getPatch())
-				.toJobParameters();
 	}
 
 }

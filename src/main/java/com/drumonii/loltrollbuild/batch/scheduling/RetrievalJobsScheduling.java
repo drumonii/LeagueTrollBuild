@@ -1,11 +1,9 @@
 package com.drumonii.loltrollbuild.batch.scheduling;
 
-import com.drumonii.loltrollbuild.model.Version;
-import com.drumonii.loltrollbuild.riot.service.VersionsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecutionException;
-import org.springframework.batch.core.JobParametersBuilder;
+import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -24,9 +22,6 @@ public class RetrievalJobsScheduling {
 	static final String CRON_SCHEDULE = "0 0 4 * * ?";
 
 	@Autowired
-	private VersionsService versionsService;
-
-	@Autowired
 	private JobLauncher jobLauncher;
 
 	@Autowired
@@ -40,14 +35,9 @@ public class RetrievalJobsScheduling {
 	@Scheduled(cron = CRON_SCHEDULE)
 	public void runAllRetrievalsJob() {
 		try {
-			Version latestVersion = versionsService.getLatestVersion();
-			if (latestVersion != null) {
-				jobLauncher.run(allRetrievalsJob, new JobParametersBuilder()
-						.addString(LATEST_PATCH_KEY, latestVersion.getPatch())
-						.toJobParameters());
-			}
+			jobLauncher.run(allRetrievalsJob, allRetrievalsJob.getJobParametersIncrementer().getNext(new JobParameters()));
 		} catch (JobExecutionException e) {
-			log.warn("Job instance was already completed with the latest Riot patch", e);
+			log.warn("Caught JobExecutionException while running all retrievals job", e);
 		} catch (Exception e) {
 			log.error("Caught exception while running all retrievals job", e);
 		}
