@@ -28,4 +28,17 @@ export class BuildsService {
     );
   }
 
+  getBuild(buildId: number): Observable<Build> {
+    return this.httpClient.get<Build>(`/api/builds/${buildId}`)
+      .pipe(
+        catchError((error) => {
+          console.error(`${JSON.stringify(error)}`);
+          if (error.status === 404) {
+            return of(null);
+          }
+          return of(new Build());
+        })
+      );
+  }
+
 }
