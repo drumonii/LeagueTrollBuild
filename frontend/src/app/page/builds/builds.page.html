@@ -1,3 +1,100 @@
-<p>
-  builds works!
-</p>
+<ng-container *ngIf="buildType" [ngSwitch]="buildType">
+
+  <ng-container *ngSwitchCase="'Ok'">
+    <h4 id="champion-name-and-title">{{build.champion.name}} - {{build.champion.title}}</h4>
+    <img src="data:image/png;base64,{{build.champion.image.imgSrc}}">
+    <p id="champion-partype">({{build.champion.partype}})</p>
+    <ul id="champion-tags">
+      <li class="champion-tag" *ngFor="let tag of build.champion.tags">{{tag}}</li>
+    </ul>
+    <div>
+      <img src="data:image/png;base64,{{build.champion.passive.image.imgSrc}}">
+      <p id="champion-passive-name">{{build.champion.passive.name}}</p>
+      <p id="champion-passive-description">{{build.champion.passive.description}}</p>
+    </div>
+    <div class="champion-spell" *ngFor="let spell of build.champion.spells">
+      <img src="data:image/png;base64,{{spell.image.imgSrc}}">
+      <p class="champion-spell-name">{{spell.name}}</p>
+      <p class="champion-spell-description">{{spell.description}}</p>
+    </div>
+
+    <hr>
+
+    <div>
+      <h4 id="troll-build-maps-header">Map</h4>
+      <select id="map-select">
+        <option class="map-option">
+          {{build.map.mapName}}
+        </option>
+      </select>
+      <button id="new-build-btn" (click)="getTrollBuild()">New Build</button>
+    </div>
+
+    <hr>
+
+    <div id="troll-build">
+      <div>
+        <h4 id="troll-build-items-header">Items</h4>
+        <div class="troll-build-item">
+          <img src="data:image/png;base64,{{build.item1.image.imgSrc}}">
+          {{build.item1.name}}
+        </div>
+        <div class="troll-build-item">
+          <img src="data:image/png;base64,{{build.item2.image.imgSrc}}">
+          {{build.item2.name}}
+        </div>
+        <div class="troll-build-item">
+          <img src="data:image/png;base64,{{build.item3.image.imgSrc}}">
+          {{build.item3.name}}
+        </div>
+        <div class="troll-build-item">
+          <img src="data:image/png;base64,{{build.item4.image.imgSrc}}">
+          {{build.item4.name}}
+        </div>
+        <div class="troll-build-item">
+          <img src="data:image/png;base64,{{build.item5.image.imgSrc}}">
+          {{build.item5.name}}
+        </div>
+        <div class="troll-build-item">
+          <img src="data:image/png;base64,{{build.item6.image.imgSrc}}">
+          {{build.item6.name}}
+        </div>
+      </div>
+      <div>
+        <h4 id="troll-build-summoner-spells-header">Summoner Spells</h4>
+        <div class="troll-build-summoner-spell">
+          <img src="data:image/png;base64,{{build.summonerSpell1.image.imgSrc}}">
+          {{build.summonerSpell1.name}}
+        </div>
+        <div class="troll-build-summoner-spell">
+          <img src="data:image/png;base64,{{build.summonerSpell2.image.imgSrc}}">
+          {{build.summonerSpell2.name}}
+        </div>
+      </div>
+      <div>
+        <h4 id="troll-build-trinket-header">Trinket</h4>
+        <div class="troll-build-trinket">
+          <img src="data:image/png;base64,{{build.trinket.image.imgSrc}}">
+          {{build.trinket.name}}
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'NotFound'">
+    <p id="build-not-found-alert">Couldn't find a saved Troll Build with ID {{buildId}}</p>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'InvalidItems'">
+    <p id="build-invalid-items-alert">This Troll Build with ID {{buildId}} has become invalid due to outdated Items</p>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'InvalidSummonerSpells'">
+    <p id="build-invalid-summoner-spells-alert">This Troll Build with ID {{buildId}} has become invalid due to outdated Summoner Spells</p>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'InvalidTrinket'">
+    <p id="build-invalid-trinket-alert">This Troll Build with ID {{buildId}} has become invalid due to an outdated Trinket</p>
+  </ng-container>
+
+</ng-container>

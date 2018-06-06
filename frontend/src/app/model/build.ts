@@ -122,3 +122,13 @@ export class BuildBuilder {
   }
 
 }
+
+/**
+ * Build type enumeration depending of what build was returned from the API.
+ */
+export enum BuildType {
+
+  Ok = 'Ok', NotFound = 'NotFound', InvalidItems = 'InvalidItems', InvalidSummonerSpells = 'InvalidSummonerSpells',
+  InvalidTrinket = 'InvalidTrinket'
+
+}
