@@ -75,7 +75,7 @@ export class ChampionPage implements OnInit {
       .build();
     this.buildsService.saveBuild(build).subscribe(res => {
       this.build = res.body;
-      this.build.selfRef = res.headers.get('Location');
+      this.build.selfRef = res.headers.get('Location').replace('/api', '');
     });
   }
 

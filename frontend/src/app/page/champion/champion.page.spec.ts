@@ -680,12 +680,12 @@ describe('ChampionPage', () => {
       savedBuild.summonerSpell2Id = build.summonerSpell2Id;
       savedBuild.trinketId = build.trinketId;
       savedBuild.mapId = build.mapId;
-      savedBuild.selfRef = 'http://localhost/build/1';
+      const selfRef = 'http://localhost/api/build/1';
 
       spyOn(buildsService, 'saveBuild').and.returnValue(of(new HttpResponse<Build>({
         body: savedBuild,
         headers: new HttpHeaders({
-          'Location': savedBuild.selfRef
+          'Location': selfRef
         }),
         status: 201
       })));
@@ -698,7 +698,7 @@ describe('ChampionPage', () => {
       expect(buildsService.saveBuild).toHaveBeenCalledWith(build);
 
       const savedBuildDe = fixture.debugElement.query(By.css('#saved-build-link'));
-      expect(savedBuildDe.nativeElement.textContent).toBe(savedBuild.selfRef);
+      expect(savedBuildDe.nativeElement.textContent).toBe('http://localhost/build/1');
       expect(newBuildBtnDe.nativeElement.disabled).toBeTruthy('Expected save build button to be disabled');
     }));
 
@@ -782,22 +782,22 @@ describe('ChampionPage', () => {
     it('should show placeholders indicating a loading Troll Build ', () => {
       fixture.detectChanges();
 
-      const trollBuildLoadingDe: DebugElement = fixture.debugElement.query(By.css('#troll-build-loading'));
+      const trollBuildLoadingDe = fixture.debugElement.query(By.css('#troll-build-loading'));
       expect(trollBuildLoadingDe).toBeTruthy();
 
-      const trollBuildLoadingItemsHeaderDe: DebugElement = fixture.debugElement.query(By.css('#troll-build-loading-items-header'));
+      const trollBuildLoadingItemsHeaderDe = fixture.debugElement.query(By.css('#troll-build-loading-items-header'));
       expect(trollBuildLoadingItemsHeaderDe.nativeElement.textContent).toBe('Items');
-      const trollBuildLoadingItemsDe: DebugElement[] = fixture.debugElement.queryAll(By.css('.troll-build-loading-item'));
+      const trollBuildLoadingItemsDe = fixture.debugElement.queryAll(By.css('.troll-build-loading-item'));
       expect(trollBuildLoadingItemsDe.length).toBe(6);
 
-      const trollBuildLoadingSummonerSpellsHeaderDe: DebugElement = fixture.debugElement.query(By.css('#troll-build-loading-summoner-spells-header'));
+      const trollBuildLoadingSummonerSpellsHeaderDe = fixture.debugElement.query(By.css('#troll-build-loading-summoner-spells-header'));
       expect(trollBuildLoadingSummonerSpellsHeaderDe.nativeElement.textContent).toBe('Summoner Spells');
-      const trollBuildLoadingSummonerSpellsDe: DebugElement[] = fixture.debugElement.queryAll(By.css('.troll-build-loading-summoner-spell'));
+      const trollBuildLoadingSummonerSpellsDe = fixture.debugElement.queryAll(By.css('.troll-build-loading-summoner-spell'));
       expect(trollBuildLoadingSummonerSpellsDe.length).toBe(2);
 
-      const trollBuildLoadingTrinketHeaderDe: DebugElement = fixture.debugElement.query(By.css('#troll-build-loading-trinket-header'));
+      const trollBuildLoadingTrinketHeaderDe = fixture.debugElement.query(By.css('#troll-build-loading-trinket-header'));
       expect(trollBuildLoadingTrinketHeaderDe.nativeElement.textContent).toBe('Trinket');
-      const trollBuildLoadingTrinketDe: DebugElement = fixture.debugElement.query(By.css('.troll-build-loading-trinket'));
+      const trollBuildLoadingTrinketDe = fixture.debugElement.query(By.css('.troll-build-loading-trinket'));
       expect(trollBuildLoadingTrinketDe).toBeTruthy();
     });
 
