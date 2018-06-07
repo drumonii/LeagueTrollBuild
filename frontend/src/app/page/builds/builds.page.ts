@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
+import { switchMap } from 'rxjs/operators';
+
 import { BuildsService } from '@service/builds.service';
 import { Build, BuildType } from '@model/build';
 import { Title } from '@angular/platform-browser';
@@ -43,11 +45,11 @@ export class BuildsPage implements OnInit {
   }
 
   private getBuild(): void {
-    this.route.paramMap
-      .switchMap(((params: ParamMap) => {
+    this.route.paramMap.pipe(
+      switchMap(((params: ParamMap) => {
         this.buildId = +params.get('buildId');
         return this.buildsService.getBuild(this.buildId);
-      }))
+      })))
       .subscribe(build => {
         this.buildType = this.getBuildType(build);
         this.build = build;

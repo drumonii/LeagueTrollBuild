@@ -6,7 +6,7 @@ import { ActivatedRoute, convertToParamMap } from '@angular/router';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { By, Title } from '@angular/platform-browser';
 
-import { of } from 'rxjs/observable/of';
+import { of } from 'rxjs';
 
 import { ChampionPage } from './champion.page';
 import { BuildsService } from '@service/builds.service';

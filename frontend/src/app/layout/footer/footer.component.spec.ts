@@ -2,7 +2,7 @@ import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing'
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { By } from '@angular/platform-browser';
 
-import { of } from 'rxjs/observable/of';
+import { of } from 'rxjs';
 
 import { FooterComponent } from './footer.component';
 import { Version } from '@model/version';

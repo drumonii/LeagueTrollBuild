@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 
-import { Observable } from 'rxjs/Observable';
-import { zip } from 'rxjs/observable/zip';
-import 'rxjs/add/operator/switchMap';
+import { Observable, forkJoin } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 import { BuildsService } from '@service/builds.service';
 import { ChampionsService } from '@service/champions.service';
@@ -31,13 +30,13 @@ export class ChampionPage implements OnInit {
     private buildsService: BuildsService, private title: Title, private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.route.paramMap
-      .switchMap(((params: ParamMap) => {
+    this.route.paramMap.pipe(
+      switchMap(((params: ParamMap) => {
         const name = params.get('name');
         this.setTitle(name);
-        return zip(this.getChampion(name), this.getGameMaps(), (champion: Champion, gameMaps: GameMap[]) => ({ champion, gameMaps }));
-      }))
-      .subscribe(({ champion, gameMaps }) => {
+        return forkJoin(this.getChampion(name), this.getGameMaps());
+      })))
+      .subscribe(([champion, gameMaps]) => {
         this.champion = champion;
         this.gameMap = gameMaps.find(gameMap => gameMap.mapId === GameMap.summonersRiftId);
         this.gameMaps = gameMaps;

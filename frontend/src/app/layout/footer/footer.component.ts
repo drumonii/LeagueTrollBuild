@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 import { Version } from '@model/version';
 import { VersionsService } from '@service/versions.service';

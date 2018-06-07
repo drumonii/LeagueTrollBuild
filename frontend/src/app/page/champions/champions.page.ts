@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 import { ChampionsService } from '@service/champions.service';
 import { Champion } from '@model/champion';

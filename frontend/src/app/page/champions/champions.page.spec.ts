@@ -5,7 +5,7 @@ import { RouterLinkWithHref } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { By, Title } from '@angular/platform-browser';
 
-import { of } from 'rxjs/observable/of';
+import { of } from 'rxjs';
 
 import { ChampionsPage } from './champions.page';
 import { Champion } from '@model/champion';

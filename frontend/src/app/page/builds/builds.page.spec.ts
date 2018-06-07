@@ -4,7 +4,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { ActivatedRoute, convertToParamMap, Router } from '@angular/router';
 import { By, Title } from '@angular/platform-browser';
 
-import { of } from 'rxjs/observable/of';
+import { of } from 'rxjs';
 
 import { BuildsPage } from './builds.page';
 import { BuildsService } from '@service/builds.service';
