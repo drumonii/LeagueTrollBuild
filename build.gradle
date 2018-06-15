@@ -19,6 +19,7 @@ node {
 	npmVersion = '5.10.0'
 	download = true
 	workDir = file("${project.buildDir}/node")
+    npmWorkDir = file("${project.buildDir}/npm")
 	nodeModulesDir = file("${project.projectDir}/frontend")
 }
 
