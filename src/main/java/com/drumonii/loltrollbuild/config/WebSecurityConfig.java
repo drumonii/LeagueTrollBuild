@@ -24,11 +24,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
 
-import static org.springframework.http.HttpMethod.DELETE;
-import static org.springframework.http.HttpMethod.PATCH;
-import static org.springframework.http.HttpMethod.POST;
-import static org.springframework.http.HttpMethod.PUT;
-
 /**
  * Configuration for web security/authentication and overriding components in {@link WebSecurityConfigurerAdapter}.
  */
@@ -47,13 +42,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.authorizeRequests()
 				.requestMatchers(EndpointRequest.toAnyEndpoint()).hasRole(ADMIN_ROLE)
 				.requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-				.antMatchers("/riot/**")     .hasRole(ADMIN_ROLE)
-				.antMatchers("/admin/**")    .hasRole(ADMIN_ROLE)
-				.antMatchers(POST,   apiPath + "/builds").permitAll()
-				.antMatchers(POST,   apiPath).hasRole(ADMIN_ROLE)
-				.antMatchers(PUT,    apiPath).hasRole(ADMIN_ROLE)
-				.antMatchers(PATCH,  apiPath).hasRole(ADMIN_ROLE)
-				.antMatchers(DELETE, apiPath).hasRole(ADMIN_ROLE)
 			.and()
 			.formLogin()
 				.loginPage("/admin/login")

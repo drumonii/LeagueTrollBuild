@@ -11,6 +11,7 @@ import com.drumonii.loltrollbuild.riot.service.VersionsService;
 import org.apache.commons.collections4.ListUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -24,6 +25,7 @@ import java.util.stream.Collectors;
  */
 @RestController
 @RequestMapping("/riot/champions")
+@PreAuthorize("hasRole('ADMIN')")
 public class ChampionsRetrieval {
 
 	@Autowired
