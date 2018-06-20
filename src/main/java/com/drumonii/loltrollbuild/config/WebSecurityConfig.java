@@ -30,8 +30,6 @@ import javax.sql.DataSource;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-	public static final String ADMIN_ROLE = "ADMIN";
-
 	@Value("${api.base-path}/**")
 	private String apiPath;
 
@@ -40,7 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		// @formatter:off
 		http
 			.authorizeRequests()
-				.requestMatchers(EndpointRequest.toAnyEndpoint()).hasRole(ADMIN_ROLE)
+				.requestMatchers(EndpointRequest.toAnyEndpoint()).hasRole(UserRole.ADMIN)
 				.requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
 			.and()
 			.formLogin()
@@ -70,7 +68,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		@Bean
 		public UserDetailsService userDetailsService() {
 			InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-			manager.createUser(User.withUsername(IN_MEM_USERNAME).password("{noop}" + IN_MEM_PASSWORD).roles(ADMIN_ROLE).build());
+			manager.createUser(User.withUsername(IN_MEM_USERNAME)
+					.password("{noop}" + IN_MEM_PASSWORD)
+					.roles(UserRole.ADMIN)
+					.build());
 			return manager;
 		}
 
@@ -99,6 +100,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		public PasswordEncoder passwordEncoder() {
 			return new BCryptPasswordEncoder();
 		}
+
+	}
+
+	public static class UserRole {
+
+		public static final String ADMIN = "ADMIN";
 
 	}
 
