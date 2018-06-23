@@ -13,6 +13,7 @@ import { HeaderComponent } from '@layout/header/header.component';
 import { BuildsPage } from '@page/builds/builds.page';
 import { ChampionPage } from '@page/champion/champion.page';
 import { ChampionsPage } from '@page/champions/champions.page';
+import { NotFoundPage } from '@page/error/not-found.page';
 
 import { ChampionsNameFilterPipe } from '@pipe/champions-name-filter.pipe';
 import { ChampionsTagsFilterPipe } from '@pipe/champions-tags-filter.pipe';
@@ -30,6 +31,7 @@ import { VersionsService } from '@service/versions.service';
     BuildsPage,
     ChampionPage,
     ChampionsPage,
+    NotFoundPage,
     FooterComponent,
     HeaderComponent
   ],
