@@ -39,6 +39,10 @@ describe('FooterComponent', () => {
     const aboutDe = fixture.debugElement.query(By.css('#about'));
     expect(aboutDe).toBeTruthy();
 
+    const githubLinkDe = fixture.debugElement.query(By.css('#github-link'));
+    expect(githubLinkDe.nativeElement.textContent.trim()).toBe('GitHub');
+    expect(githubLinkDe.nativeElement.href).toBe('https://github.com/drumonii/LeagueTrollBuild');
+
     const disclaimerDe = fixture.debugElement.query(By.css('#disclaimer'));
     expect(disclaimerDe).toBeTruthy();
   }));

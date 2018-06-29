@@ -1,15 +1,36 @@
-<footer>
-  <p id="about">
-    League Troll Build is a random build generator (hence the terms "troll build") for playable Champions of the popular
-    online game: <a href="http://leagueoflegends.com/">League of Legends</a>.
-  </p>
-  <p id="latest-saved-version" *ngIf="(latestVersion$ | async) as latestVersion">
-    Patch {{latestVersion.patch}}
-  </p>
-  <p id="disclaimer">
-    Disclaimer:
-    League Troll Build isn't endorsed by Riot Games and doesn't reflect the views or opinions of
-    Riot Games or anyone officially involved in producing or managing League of Legends. League of Legends and Riot
-    Games are trademarks or registered trademarks of Riot Games, Inc. League of Legends &copy; Riot Games, Inc.
-  </p>
+<footer id="footer" class="footer">
+  <div class="container">
+    <div class="columns">
+      <div class="column">
+        <p id="about">
+          League Troll Build is a random build generator (hence the terms "troll build") for playable Champions of the popular
+          online game: <a href="http://leagueoflegends.com/">League of Legends</a>.
+        </p>
+        <div class="columns">
+          <div class="column">
+            <div class="is-pulled-left">
+              <a id="github-link" href="https://github.com/drumonii/LeagueTrollBuild">
+                <i class="fa fa-github" aria-hidden="true"></i> GitHub
+              </a>
+            </div>
+          </div>
+          <div class="column">
+            <div class="is-pulled-right">
+              <span id="latest-saved-version" *ngIf="(latestVersion$ | async) as latestVersion">
+                Patch {{latestVersion.patch}}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <p id="disclaimer">
+          Disclaimer:
+          League Troll Build isn't endorsed by Riot Games and doesn't reflect the views or opinions of
+          Riot Games or anyone officially involved in producing or managing League of Legends. League of Legends and Riot
+          Games are trademarks or registered trademarks of Riot Games, Inc. League of Legends &copy; Riot Games, Inc.
+        </p>
+      </div>
+    </div>
+  </div>
 </footer>
