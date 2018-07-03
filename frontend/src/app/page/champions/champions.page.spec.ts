@@ -165,14 +165,14 @@ describe('ChampionsPage', () => {
       const tagToFilter = 'Mage';
       const tagToFilterIndex = tags.findIndex(tag => tag === tagToFilter);
 
-      const championTagsDe: DebugElement[] = fixture.debugElement.queryAll(By.css('.champion-tag-btn'));
+      const championTagsDe = fixture.debugElement.queryAll(By.css('.champion-tag-btn'));
       championTagsDe[tagToFilterIndex].triggerEventHandler('click', null);
 
       fixture.detectChanges();
 
       expect(component.championsFilterTag).toBe(tagToFilter);
 
-      const championsDe: DebugElement[] = fixture.debugElement.queryAll(By.css('.champion'));
+      const championsDe = fixture.debugElement.queryAll(By.css('.champion'));
       expect(championsDe.length).toBe(1);
     });
 
@@ -185,14 +185,14 @@ describe('ChampionsPage', () => {
       const tagToFilterIndex = tags.findIndex(tag => tag === tagToFilter);
       component.championsFilterTag = tagToFilter;
 
-      const championTagsDe: DebugElement[] = fixture.debugElement.queryAll(By.css('.champion-tag-btn'));
+      const championTagsDe = fixture.debugElement.queryAll(By.css('.champion-tag-btn'));
       championTagsDe[tagToFilterIndex].triggerEventHandler('click', null);
 
       fixture.detectChanges();
 
       expect(component.championsFilterTag).toBe('');
 
-      const championsDe: DebugElement[] = fixture.debugElement.queryAll(By.css('.champion'));
+      const championsDe = fixture.debugElement.queryAll(By.css('.champion'));
       expect(championsDe.length).toBe(champions.length);
     });
 
@@ -201,13 +201,13 @@ describe('ChampionsPage', () => {
 
       expectChampionAndTags();
 
-      const championsSearchDe: DebugElement = fixture.debugElement.query(By.css('#champions-search-input'));
+      const championsSearchDe = fixture.debugElement.query(By.css('#champions-search-input'));
       championsSearchDe.nativeElement.value = 'maokai';
       championsSearchDe.nativeElement.dispatchEvent(new Event('input'));
 
       fixture.detectChanges();
 
-      const championsDe: DebugElement[] = fixture.debugElement.queryAll(By.css('.champion'));
+      const championsDe = fixture.debugElement.queryAll(By.css('.champion'));
       expect(championsDe.length).toBe(1);
     });
 
@@ -221,12 +221,14 @@ describe('ChampionsPage', () => {
       const championsDe = fixture.debugElement.queryAll(By.css('.champion'));
       expect(championsDe.length).toBe(champions.length);
 
-      const maokaiLinkDe = championsDe[0].query(By.css('a'));
+      const championLinksDe = fixture.debugElement.queryAll(By.css('.champion-link'));
+
+      const maokaiLinkDe = championLinksDe[0];
       expect(maokaiLinkDe.nativeElement.textContent).toContain('Maokai');
       const maokaiRouterLink = maokaiLinkDe.injector.get(RouterLinkWithHref);
       expect(maokaiRouterLink.href).toBe('/champions/Maokai');
 
-      const sionLinkDe = championsDe[1].query(By.css('a'));
+      const sionLinkDe = championLinksDe[1];
       expect(sionLinkDe.nativeElement.textContent).toContain('Sion');
       const sionRouterLink = sionLinkDe.injector.get(RouterLinkWithHref);
       expect(sionRouterLink.href).toBe('/champions/Sion');
@@ -250,7 +252,10 @@ describe('ChampionsPage', () => {
       fixture.detectChanges();
 
       const alertDe = fixture.debugElement.query(By.css('#no-champions-alert'));
-      expect(alertDe.nativeElement.textContent).toBe('No Champions exist in the database!');
+      expect(alertDe).toBeTruthy();
+
+      const alertMsgDe = fixture.debugElement.query(By.css('#no-champions-alert-msg'));
+      expect(alertMsgDe.nativeElement.textContent).toBe('No Champions exist in the database!');
     });
 
   });
