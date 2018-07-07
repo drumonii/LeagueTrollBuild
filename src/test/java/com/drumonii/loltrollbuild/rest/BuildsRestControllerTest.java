@@ -130,16 +130,27 @@ public abstract class BuildsRestControllerTest {
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
 				.andExpect(jsonPath("$.champion").exists())
+				.andExpect(jsonPath("$.championId", is(build.getChampionId())))
 				.andExpect(jsonPath("$.item1").exists())
+				.andExpect(jsonPath("$.item1Id", is(build.getItem1Id())))
 				.andExpect(jsonPath("$.item2").exists())
+				.andExpect(jsonPath("$.item2Id", is(build.getItem2Id())))
 				.andExpect(jsonPath("$.item3").exists())
+				.andExpect(jsonPath("$.item3Id", is(build.getItem3Id())))
 				.andExpect(jsonPath("$.item4").exists())
+				.andExpect(jsonPath("$.item4Id", is(build.getItem4Id())))
 				.andExpect(jsonPath("$.item5").exists())
+				.andExpect(jsonPath("$.item5Id", is(build.getItem5Id())))
 				.andExpect(jsonPath("$.item6").exists())
+				.andExpect(jsonPath("$.item6Id", is(build.getItem6Id())))
 				.andExpect(jsonPath("$.summonerSpell1").exists())
+				.andExpect(jsonPath("$.summonerSpell1Id", is(build.getSummonerSpell1Id())))
 				.andExpect(jsonPath("$.summonerSpell2").exists())
+				.andExpect(jsonPath("$.summonerSpell2Id", is(build.getSummonerSpell2Id())))
 				.andExpect(jsonPath("$.trinket").exists())
-				.andExpect(jsonPath("$.map").exists());
+				.andExpect(jsonPath("$.trinketId", is(build.getTrinketId())))
+				.andExpect(jsonPath("$.map").exists())
+				.andExpect(jsonPath("$.mapId", is(build.getMapId())));
 	}
 
 	@Test
