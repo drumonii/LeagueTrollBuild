@@ -20,7 +20,6 @@ public class RandomizeUtilTest {
 		strings.add("string 1");
 		strings.add("string 2");
 		assertThat(getRandom(strings))
-				.isNotNull()
 				.isNotEmpty();
 		assertThat(getRandom(new ArrayList<Integer>())).isNull();
 	}
@@ -31,10 +30,8 @@ public class RandomizeUtilTest {
 		strings.add("string 1");
 		strings.add("string 2");
 		assertThat(getRandoms(strings, 1))
-				.isNotNull()
 				.hasSize(1);
 		assertThat(getRandoms(strings, strings.size() + 1))
-				.isNotNull()
 				.hasSize(2);
 	}
 
