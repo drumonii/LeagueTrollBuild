@@ -21,7 +21,16 @@ public class RandomizeUtilTest {
 		strings.add("string 2");
 		assertThat(getRandom(strings))
 				.isNotEmpty();
-		assertThat(getRandom(new ArrayList<Integer>())).isNull();
+		try {
+			getRandom(null);
+		} catch (Exception e) {
+			assertThat(e).isInstanceOf(IllegalArgumentException.class);
+		}
+		try {
+			getRandom(new ArrayList<Integer>());
+		} catch (Exception e) {
+			assertThat(e).isInstanceOf(IllegalArgumentException.class);
+		}
 	}
 
 	@Test

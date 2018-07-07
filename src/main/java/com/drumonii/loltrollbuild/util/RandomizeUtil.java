@@ -25,13 +25,12 @@ public class RandomizeUtil {
 	 * @return a random element from the passed {@link Collection}
 	 */
 	public static <E> E getRandom(Collection<E> collection) {
+		if (collection == null || collection.isEmpty()) {
+			throw new IllegalArgumentException("Unable to get a random element from an empty Collection");
+		}
 		int start = 0;
 		int end = collection.size();
-		try {
-			return IterableUtils.get(collection, start == end ? start : start + random.nextInt(end - start));
-		} catch (IndexOutOfBoundsException e) {
-			return null;
-		}
+		return IterableUtils.get(collection, start + random.nextInt(end - start));
 	}
 
 	/**
