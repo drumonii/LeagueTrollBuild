@@ -24,12 +24,10 @@ import javax.persistence.metamodel.*;
 import javax.persistence.metamodel.Attribute.PersistentAttributeType;
 import javax.persistence.metamodel.Type.PersistenceType;
 import java.lang.reflect.Member;
-import java.util.AbstractMap.SimpleEntry;
 import java.util.*;
 import java.util.Map.Entry;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
+import static java.util.Map.entry;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.isNull;
@@ -65,7 +63,7 @@ public class QueryByExampleFromSpecificationPredicateBuilderTest {
 				.willReturn(new SingularAttributePath<>(cb, String.class, null, personNameAttribute));
 
 		given(personEntityType.getSingularAttributes())
-				.willReturn(Stream.of(personIdAttribute, personNameAttribute).collect(Collectors.toSet()));
+				.willReturn(Set.of(personIdAttribute, personNameAttribute));
 
 		PluralAttribute<Person, Set, String> personTagsAttribute =
 				new DummyPluralAttribute<>(Person.class, Set.class, String.class, PersistenceType.BASIC,
@@ -79,7 +77,7 @@ public class QueryByExampleFromSpecificationPredicateBuilderTest {
 		given(root.joinMap(eq("skills"))).willReturn(mock(MapAttributeJoin.class));
 
 		given(personEntityType.getPluralAttributes())
-				.willReturn(Stream.of(personTagsAttribute, personSkillsAttribute).collect(Collectors.toSet()));
+				.willReturn(Set.of(personTagsAttribute, personSkillsAttribute));
 	}
 
 	@Test
@@ -220,8 +218,7 @@ public class QueryByExampleFromSpecificationPredicateBuilderTest {
 	@Test
 	public void elementCollectionOfTypeMapShouldCreateEqualPredicateFromMapJoin() {
 		Person person = new Person();
-		person.setSkills(Stream.of(new SimpleEntry<>("drawing", 8))
-				.collect(Collectors.toMap(SimpleEntry::getKey, SimpleEntry::getValue)));
+		person.setSkills(Map.ofEntries(entry("drawing", 8)));
 		Example<Person> example = Example.of(person);
 
 		QueryByExampleFromSpecificationPredicateBuilder.getPredicate(root, cb, example);
