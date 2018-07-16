@@ -4,7 +4,7 @@ League Troll Build is a random, shareable build generator (hence the terms "trol
 the popular online game: http://leagueoflegends.com/[League of Legends].
 
 == Tech stack, frameworks, and libraries
-* http://www.oracle.com/technetwork/java/javase/overview/java8-2100321.html[Java 8] with https://projectlombok.org/[Lombok]
+* https://www.oracle.com/java/java9.html[Java 9] with https://projectlombok.org/[Lombok]
 * https://github.com/gradle/gradle[Gradle]
 * https://github.com/spring-projects/spring-boot[Spring Boot]
 * https://github.com/angular/angular[Angular 6]
@@ -58,7 +58,7 @@ will fail and thus the app will not start (by design).
 If running `LeagueTrollBuild` with the `ddragon` profile, no API key is required.
 
 == Running the Backend locally
-*Note*, a Java 8 JRE is required. Previous JREs are not supported.
+*Note*, a Java 9 JRE is required. Previous JREs are not supported.
 
 One may either:
 
@@ -109,7 +109,7 @@ To generate the API Documentation locally, run the asciidoctor Gradle task with 
 Then navigate to `/build/asciidoc/html5/api-guide.html` to view the generated API guide.
 
 == Development/Importing the project
-*Note*, a Java 8 JDK is required. Previous JDKs are not supported.
+*Note*, a Java 9 JDK is required. Previous JDKs are not supported.
 
 `LeagueTrollBuild` is developed using the https://www.jetbrains.com/idea/[IntelliJ IDEA] IDE.
 
