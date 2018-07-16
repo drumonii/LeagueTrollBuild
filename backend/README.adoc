@@ -1,0 +1,64 @@
+= LeagueTrollBuild Spring Boot Backend
+
+== Profiles
+There are 4 database profiles:
+
+external::
+Production profile that is active by default and uses PostgreSQL along with environment variables to specify the
+database credentials. Use the `LTB_DB_USERNAME`, `LTB_DB_PASSWORD`, `LTB_DB_URL` environment variables for the database credentials.
+
+embedded::
+Secondary production profile that uses an embedded H2 for quickly running the app locally without a PostgreSQL install.
+
+dev::
+Development profile that also uses PostgreSQL but neither caches message properties nor Thymeleaf's HTML templates.
+
+test::
+Testing profile for https://github.com/junit-team/junit[JUnit 4] tests.
+
+In addition, there are two Riot API profiles:
+
+static-data::
+lol-static-data-v3
+
+ddragon::
+Data Dragon
+
+To override an active profile, set the `spring.profiles.active` argument property such as:
+
+ -Dspring.profiles.active=dev,static-data
+
+Or using the environment variable `SPRING_PROFILES_ACTIVE`. Otherwise, if a profile is not specified, the `external`
+and `ddragon` profiles will be active.
+
+== Riot API Key
+An https://developer.riotgames.com/api-keys.html[API key] provided from Riot is required to use https://developer.riotgames.com/api-methods/#lol-static-data-v3[lol-static-data-v3].
+
+When running with the `static-data` profile, the API key is supplied using the `RIOT_STATIC_DATA_API_KEY` environment
+variable or the `-Driot.static-data.apiKey` argument property. If the API key is not supplied, the configuration properties validation
+will fail and thus the app will not start (by design).
+
+If running with the `ddragon` profile, no API key is required.
+
+== Running the Backend locally
+Create a run config that uses the `LeagueTrollBuildApplication` main class
+
+Once the backend starts, view http://localhost:8080/api[localhost:8080/api] on your browser.
+
+=== All Retrievals from Riot
+Optionally, run with the following argument properties to trigger on startup the retrieval of the latest data (Items,
+ Maps, Champions, Summoner Spells) from Riot's API in order to perform a troll build of a Champion.
+
+  -Dspring.batch.job.enabled=true -Dspring.batch.job.names=allRetrievalsJob
+
+This is useful to avoid manual saving of data through the admin area. If data already exists in the database, a new
+patch is out, and the retrievals job is run, then new data will be saved and absent data will be deleted.
+
+=== API Documentation
+To view the generated API guide, visit http://localhost:8080/docs/api-guide.html[localhost:8080/docs/api-guide.html].
+
+To generate the API Documentation locally, run the asciidoctor Gradle task with the single test `ApiDocumentation`:
+
+  asciidoctor -Dtest.single=ApiDocumentation
+
+Then navigate to `/build/asciidoc/html5/api-guide.html` to view the generated API guide.
