@@ -1,25 +1,45 @@
 package com.drumonii.loltrollbuild.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.*;
 
 import java.util.List;
 
 /**
  * Troll Build (random build).
  */
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
 public class TrollBuild {
 
 	@JsonProperty
-	@Getter @Setter private List<Item> items;
+	private List<Item> items;
 
 	@JsonProperty
-	@Getter @Setter private List<SummonerSpell> summonerSpells;
+	private List<SummonerSpell> summonerSpells;
 
 	@JsonProperty
-	@Getter @Setter private Item trinket;
+	private Item trinket;
+
+	public List<Item> getItems() {
+		return items;
+	}
+
+	public void setItems(List<Item> items) {
+		this.items = items;
+	}
+
+	public List<SummonerSpell> getSummonerSpells() {
+		return summonerSpells;
+	}
+
+	public void setSummonerSpells(List<SummonerSpell> summonerSpells) {
+		this.summonerSpells = summonerSpells;
+	}
+
+	public Item getTrinket() {
+		return trinket;
+	}
+
+	public void setTrinket(Item trinket) {
+		this.trinket = trinket;
+	}
 
 }

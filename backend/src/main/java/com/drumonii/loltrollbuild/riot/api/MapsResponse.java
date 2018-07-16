@@ -2,10 +2,6 @@ package com.drumonii.loltrollbuild.riot.api;
 
 import com.drumonii.loltrollbuild.model.GameMap;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -36,11 +32,17 @@ import java.util.Map;
  *  }
  * </pre>
  */
-@NoArgsConstructor
-@AllArgsConstructor
 public class MapsResponse extends BaseResponse {
 
 	@JsonProperty("data")
-	@Getter @Setter private Map<String, GameMap> maps = new LinkedHashMap<>();
+	private Map<String, GameMap> maps = new LinkedHashMap<>();
+
+	public Map<String, GameMap> getMaps() {
+		return maps;
+	}
+
+	public void setMaps(Map<String, GameMap> maps) {
+		this.maps = maps;
+	}
 
 }

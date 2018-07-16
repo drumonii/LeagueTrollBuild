@@ -4,7 +4,8 @@ import com.drumonii.loltrollbuild.config.Profiles.StaticData;
 import com.drumonii.loltrollbuild.model.GameMap;
 import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.riot.api.MapsResponse;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -17,9 +18,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@Slf4j
 @StaticData
 public class MapsStaticDataService implements MapsService {
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(MapsStaticDataService.class);
 
 	@Autowired
 	private RestTemplate restTemplate;
@@ -44,7 +46,7 @@ public class MapsStaticDataService implements MapsService {
 		try {
 			return new ArrayList<>(restTemplate.getForObject(url, MapsResponse.class).getMaps().values());
 		} catch (RestClientException e) {
-			log.warn("Unable to retrieve Maps from lol-static-data-v3 due to:", e);
+			LOGGER.warn("Unable to retrieve Maps from lol-static-data-v3 due to:", e);
 			return new ArrayList<>();
 		}
 	}
@@ -55,7 +57,7 @@ public class MapsStaticDataService implements MapsService {
 		try {
 			response = restTemplate.getForObject(mapsUri.toString(), MapsResponse.class);
 		} catch (RestClientException e) {
-			log.warn("Unable to retrieve the Map with ID: {} from lol-static-data-v3 due to:", id, e);
+			LOGGER.warn("Unable to retrieve the Map with ID: {} from lol-static-data-v3 due to:", id, e);
 			return null;
 		}
 		return response.getMaps().get(String.valueOf(id));

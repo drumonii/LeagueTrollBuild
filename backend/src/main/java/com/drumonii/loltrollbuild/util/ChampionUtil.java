@@ -1,14 +1,13 @@
 package com.drumonii.loltrollbuild.util;
 
 import com.drumonii.loltrollbuild.model.Champion;
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
 
 /**
  * Utility methods relating to {@link Champion}s.
  */
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ChampionUtil {
+
+	private ChampionUtil() {}
 
 	/**
 	 * Determines if the Champion is Viktor.

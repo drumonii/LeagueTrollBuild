@@ -1,6 +1,7 @@
 package com.drumonii.loltrollbuild.batch.scheduling;
 
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecutionException;
 import org.springframework.batch.core.JobParameters;
@@ -14,8 +15,9 @@ import org.springframework.stereotype.Component;
  * Simple scheduling for retrievals {@link Job}s.
  */
 @Component
-@Slf4j
 public class RetrievalJobsScheduling {
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(RetrievalJobsScheduling.class);
 
 	public static final String LATEST_PATCH_KEY = "latestRiotPatch";
 
@@ -37,9 +39,9 @@ public class RetrievalJobsScheduling {
 		try {
 			jobLauncher.run(allRetrievalsJob, allRetrievalsJob.getJobParametersIncrementer().getNext(new JobParameters()));
 		} catch (JobExecutionException e) {
-			log.warn("Caught JobExecutionException while running all retrievals job", e);
+			LOGGER.warn("Caught JobExecutionException while running all retrievals job", e);
 		} catch (Exception e) {
-			log.error("Caught exception while running all retrievals job", e);
+			LOGGER.error("Caught exception while running all retrievals job", e);
 		}
 	}
 

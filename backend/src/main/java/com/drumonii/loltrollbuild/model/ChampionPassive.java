@@ -5,43 +5,107 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * {@link Champion}'s passive which maps a {@link OneToOne} relationship.
  */
 @Entity
 @Table(name = "CHAMPION_PASSIVE")
-@NoArgsConstructor
-@AllArgsConstructor
-@EqualsAndHashCode(exclude = { "id", "champion" })
-@ToString(exclude = { "id", "champion" })
 public class ChampionPassive implements Serializable {
 
 	@Id
 	@Column(name = "CHAMPION_ID", unique = true, nullable = false)
 	@JsonIgnore
-	@Getter @Setter private int id;
+	private int id;
 
 	@Column(name = "NAME", nullable = false)
 	@JsonProperty("name")
-	@Getter @Setter private String name;
+	private String name;
 
 	@Column(name = "DESCRIPTION", nullable = false)
 	@JsonProperty("description")
-	@Getter @Setter private String description;
+	private String description;
 
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "passive")
 	@JsonManagedReference
 	@JsonProperty("image")
-	@Getter @Setter private ChampionPassiveImage image;
+	private ChampionPassiveImage image;
 
 	@OneToOne(fetch = FetchType.LAZY, optional = false)
 	@PrimaryKeyJoinColumn
 	@JsonBackReference
-	@Getter @Setter private Champion champion;
+	private Champion champion;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public ChampionPassiveImage getImage() {
+		return image;
+	}
+
+	public void setImage(ChampionPassiveImage image) {
+		this.image = image;
+	}
+
+	public Champion getChampion() {
+		return champion;
+	}
+
+	public void setChampion(Champion champion) {
+		this.champion = champion;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		ChampionPassive that = (ChampionPassive) o;
+		return Objects.equals(name, that.name) &&
+				Objects.equals(description, that.description) &&
+				Objects.equals(image, that.image);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(name, description, image);
+	}
+
+	@Override
+	public String toString() {
+		return "ChampionPassive{" +
+				"name='" + name + '\'' +
+				", description='" + description + '\'' +
+				", image=" + image +
+				'}';
+	}
 
 }

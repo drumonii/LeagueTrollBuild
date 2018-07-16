@@ -2,10 +2,6 @@ package com.drumonii.loltrollbuild.riot.api;
 
 import com.drumonii.loltrollbuild.model.Champion;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -45,11 +41,17 @@ import java.util.Map;
  *
  * <b>Note</b>: Not all attributes are retrieved from Riot, only the ones that are used.
  */
-@NoArgsConstructor
-@AllArgsConstructor
 public class ChampionsResponse extends BaseResponse {
 
 	@JsonProperty("data")
-	@Getter @Setter private Map<String, Champion> champions = new LinkedHashMap<>();
+	private Map<String, Champion> champions = new LinkedHashMap<>();
+
+	public Map<String, Champion> getChampions() {
+		return champions;
+	}
+
+	public void setChampions(Map<String, Champion> champions) {
+		this.champions = champions;
+	}
 
 }

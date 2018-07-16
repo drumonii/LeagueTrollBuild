@@ -1,14 +1,13 @@
 package com.drumonii.loltrollbuild.util;
 
 import com.drumonii.loltrollbuild.model.Item;
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
 
 /**
  * Utility methods relating to {@link Item}s.
  */
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ItemUtil {
+
+	private ItemUtil() {}
 
 	/**
 	 * Determines if the Item requires Ornn as an ally.

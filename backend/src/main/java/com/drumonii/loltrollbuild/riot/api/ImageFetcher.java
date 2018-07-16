@@ -2,7 +2,8 @@ package com.drumonii.loltrollbuild.riot.api;
 
 import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.model.image.Image;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -18,8 +19,9 @@ import java.util.List;
  * Component for fetching {@link Image}s of a model from Riot.
  */
 @Component
-@Slf4j
 public class ImageFetcher {
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(ImageFetcher.class);
 
 	private static final int EOF = -1;
 	private static final int DEFAULT_BUFFER_SIZE = 1024 * 4;
@@ -60,14 +62,14 @@ public class ImageFetcher {
 		try {
 			url = uriComponents == null ? null : new URL(uriComponents.toUriString());
 		} catch (MalformedURLException e) {
-			log.error("Unable to create the URL with {}", uriComponents.toString(), e);
+			LOGGER.error("Unable to create the URL with {}", uriComponents.toString(), e);
 		}
 		if (url != null) {
 			try {
 				image.setImgSrc(toByteArray(url.openStream()));
 				count++;
 			} catch (IOException e) {
-				log.warn("Unable to retrieve the image from URL: {} because: ", url, e);
+				LOGGER.warn("Unable to retrieve the image from URL: {} because: ", url, e);
 			}
 		}
 		return count;

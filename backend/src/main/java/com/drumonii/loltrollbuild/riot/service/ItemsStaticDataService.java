@@ -4,7 +4,8 @@ import com.drumonii.loltrollbuild.config.Profiles.StaticData;
 import com.drumonii.loltrollbuild.model.Item;
 import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.riot.api.ItemsResponse;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,9 +19,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@Slf4j
 @StaticData
 public class ItemsStaticDataService implements ItemsService {
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(ItemsStaticDataService.class);
 
 	@Autowired
 	private RestTemplate restTemplate;
@@ -52,7 +54,7 @@ public class ItemsStaticDataService implements ItemsService {
 		try {
 			return new ArrayList<>(restTemplate.getForObject(url, ItemsResponse.class).getItems().values());
 		} catch (RestClientException e) {
-			log.warn("Unable to retrieve Items from lol-static-data-v3 due to:", e);
+			LOGGER.warn("Unable to retrieve Items from lol-static-data-v3 due to:", e);
 			return new ArrayList<>();
 		}
 	}
@@ -64,7 +66,7 @@ public class ItemsStaticDataService implements ItemsService {
 		try {
 			item = restTemplate.getForObject(uriComponents.toString(), Item.class);
 		} catch (RestClientException e) {
-			log.warn("Unable to retrieve the Item with ID: {} from lol-static-data-v3 due to:", id, e);
+			LOGGER.warn("Unable to retrieve the Item with ID: {} from lol-static-data-v3 due to:", id, e);
 			return null;
 		}
 		return item;

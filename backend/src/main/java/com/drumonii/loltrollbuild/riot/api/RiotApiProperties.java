@@ -1,8 +1,6 @@
 package com.drumonii.loltrollbuild.riot.api;
 
 import com.drumonii.loltrollbuild.constraint.ValidRiotApiProperties;
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.NestedConfigurationProperty;
 import org.springframework.validation.annotation.Validated;
@@ -16,43 +14,158 @@ import org.springframework.validation.annotation.Validated;
 public class RiotApiProperties {
 
 	@NestedConfigurationProperty
-	@Getter @Setter private StaticData staticData;
+	private StaticData staticData;
 
 	@NestedConfigurationProperty
-	@Getter @Setter private Ddragon ddragon;
+	private Ddragon ddragon;
+
+	public StaticData getStaticData() {
+		return staticData;
+	}
+
+	public void setStaticData(StaticData staticData) {
+		this.staticData = staticData;
+	}
+
+	public Ddragon getDdragon() {
+		return ddragon;
+	}
+
+	public void setDdragon(Ddragon ddragon) {
+		this.ddragon = ddragon;
+	}
 
 	/**
 	 * Query configuration for Riot's {@code lol-static-data-v3} API part of Riot's full API.
 	 */
 	public static class StaticData {
 
-		@Getter @Setter private String apiKey;
+		private String apiKey;
+		private String baseUrl;
+		private String keyParam;
+		private String localeParam;
+		private String locale;
+		private String region;
+		private String champions;
+		private String champion;
+		private String items;
+		private String item;
+		private String maps;
+		private String summonerSpells;
+		private String summonerSpell;
+		private String versions;
 
-		@Getter @Setter private String baseUrl;
+		public String getApiKey() {
+			return apiKey;
+		}
 
-		@Getter @Setter private String keyParam;
+		public void setApiKey(String apiKey) {
+			this.apiKey = apiKey;
+		}
 
-		@Getter @Setter private String localeParam;
+		public String getBaseUrl() {
+			return baseUrl;
+		}
 
-		@Getter @Setter private String locale;
+		public void setBaseUrl(String baseUrl) {
+			this.baseUrl = baseUrl;
+		}
 
-		@Getter @Setter private String region;
+		public String getKeyParam() {
+			return keyParam;
+		}
 
-		@Getter @Setter private String champions;
+		public void setKeyParam(String keyParam) {
+			this.keyParam = keyParam;
+		}
 
-		@Getter @Setter private String champion;
+		public String getLocaleParam() {
+			return localeParam;
+		}
 
-		@Getter @Setter private String items;
+		public void setLocaleParam(String localeParam) {
+			this.localeParam = localeParam;
+		}
 
-		@Getter @Setter private String item;
+		public String getLocale() {
+			return locale;
+		}
 
-		@Getter @Setter private String maps;
+		public void setLocale(String locale) {
+			this.locale = locale;
+		}
 
-		@Getter @Setter private String summonerSpells;
+		public String getRegion() {
+			return region;
+		}
 
-		@Getter @Setter private String summonerSpell;
+		public void setRegion(String region) {
+			this.region = region;
+		}
 
-		@Getter @Setter private String versions;
+		public String getChampions() {
+			return champions;
+		}
+
+		public void setChampions(String champions) {
+			this.champions = champions;
+		}
+
+		public String getChampion() {
+			return champion;
+		}
+
+		public void setChampion(String champion) {
+			this.champion = champion;
+		}
+
+		public String getItems() {
+			return items;
+		}
+
+		public void setItems(String items) {
+			this.items = items;
+		}
+
+		public String getItem() {
+			return item;
+		}
+
+		public void setItem(String item) {
+			this.item = item;
+		}
+
+		public String getMaps() {
+			return maps;
+		}
+
+		public void setMaps(String maps) {
+			this.maps = maps;
+		}
+
+		public String getSummonerSpells() {
+			return summonerSpells;
+		}
+
+		public void setSummonerSpells(String summonerSpells) {
+			this.summonerSpells = summonerSpells;
+		}
+
+		public String getSummonerSpell() {
+			return summonerSpell;
+		}
+
+		public void setSummonerSpell(String summonerSpell) {
+			this.summonerSpell = summonerSpell;
+		}
+
+		public String getVersions() {
+			return versions;
+		}
+
+		public void setVersions(String versions) {
+			this.versions = versions;
+		}
 
 	}
 
@@ -62,33 +175,132 @@ public class RiotApiProperties {
 	 */
 	public static class Ddragon {
 
-		@Getter @Setter private String baseUrl;
+		private String baseUrl;
+		private String locale;
+		private String champions;
+		private String champion;
+		private String championsImg;
+		private String championsSpellImg;
+		private String championsPassiveImg;
+		private String items;
+		private String itemsImg;
+		private String maps;
+		private String mapsImg;
+		private String summonerSpells;
+		private String summonerSpellsImg;
+		private String versions;
 
-		@Getter @Setter private String locale;
+		public String getBaseUrl() {
+			return baseUrl;
+		}
 
-		@Getter @Setter private String champions;
+		public void setBaseUrl(String baseUrl) {
+			this.baseUrl = baseUrl;
+		}
 
-		@Getter @Setter private String champion;
+		public String getLocale() {
+			return locale;
+		}
 
-		@Getter @Setter private String championsImg;
+		public void setLocale(String locale) {
+			this.locale = locale;
+		}
 
-		@Getter @Setter private String championsSpellImg;
+		public String getChampions() {
+			return champions;
+		}
 
-		@Getter @Setter private String championsPassiveImg;
+		public void setChampions(String champions) {
+			this.champions = champions;
+		}
 
-		@Getter @Setter private String items;
+		public String getChampion() {
+			return champion;
+		}
 
-		@Getter @Setter private String itemsImg;
+		public void setChampion(String champion) {
+			this.champion = champion;
+		}
 
-		@Getter @Setter private String maps;
+		public String getChampionsImg() {
+			return championsImg;
+		}
 
-		@Getter @Setter private String mapsImg;
+		public void setChampionsImg(String championsImg) {
+			this.championsImg = championsImg;
+		}
 
-		@Getter @Setter private String summonerSpells;
+		public String getChampionsSpellImg() {
+			return championsSpellImg;
+		}
 
-		@Getter @Setter private String summonerSpellsImg;
+		public void setChampionsSpellImg(String championsSpellImg) {
+			this.championsSpellImg = championsSpellImg;
+		}
 
-		@Getter @Setter private String versions;
+		public String getChampionsPassiveImg() {
+			return championsPassiveImg;
+		}
+
+		public void setChampionsPassiveImg(String championsPassiveImg) {
+			this.championsPassiveImg = championsPassiveImg;
+		}
+
+		public String getItems() {
+			return items;
+		}
+
+		public void setItems(String items) {
+			this.items = items;
+		}
+
+		public String getItemsImg() {
+			return itemsImg;
+		}
+
+		public void setItemsImg(String itemsImg) {
+			this.itemsImg = itemsImg;
+		}
+
+		public String getMaps() {
+			return maps;
+		}
+
+		public void setMaps(String maps) {
+			this.maps = maps;
+		}
+
+		public String getMapsImg() {
+			return mapsImg;
+		}
+
+		public void setMapsImg(String mapsImg) {
+			this.mapsImg = mapsImg;
+		}
+
+		public String getSummonerSpells() {
+			return summonerSpells;
+		}
+
+		public void setSummonerSpells(String summonerSpells) {
+			this.summonerSpells = summonerSpells;
+		}
+
+		public String getSummonerSpellsImg() {
+			return summonerSpellsImg;
+		}
+
+		public void setSummonerSpellsImg(String summonerSpellsImg) {
+			this.summonerSpellsImg = summonerSpellsImg;
+		}
+
+		public String getVersions() {
+			return versions;
+		}
+
+		public void setVersions(String versions) {
+			this.versions = versions;
+		}
 
 	}
 

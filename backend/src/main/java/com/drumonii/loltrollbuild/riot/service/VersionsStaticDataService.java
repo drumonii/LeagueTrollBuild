@@ -2,7 +2,8 @@ package com.drumonii.loltrollbuild.riot.service;
 
 import com.drumonii.loltrollbuild.config.Profiles.StaticData;
 import com.drumonii.loltrollbuild.model.Version;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.ParameterizedTypeReference;
@@ -17,9 +18,10 @@ import java.util.Collections;
 import java.util.List;
 
 @Service
-@Slf4j
 @StaticData
 public class VersionsStaticDataService implements VersionsService {
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(VersionsStaticDataService.class);
 
 	@Autowired
 	private RestTemplate restTemplate;
@@ -35,7 +37,7 @@ public class VersionsStaticDataService implements VersionsService {
 			versions = restTemplate.exchange(versionsUri.toString(), HttpMethod.GET, null,
 				new ParameterizedTypeReference<List<Version>>() {}).getBody();
 		} catch (RestClientException e) {
-			log.warn("Unable to retrieve Versions from lol-static-data-v3 due to:", e);
+			LOGGER.warn("Unable to retrieve Versions from lol-static-data-v3 due to:", e);
 			return new ArrayList<>();
 		}
 		versions.sort(Collections.reverseOrder());

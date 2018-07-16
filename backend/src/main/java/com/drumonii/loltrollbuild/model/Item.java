@@ -4,7 +4,6 @@ import com.drumonii.loltrollbuild.model.image.ItemImage;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.*;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -15,6 +14,7 @@ import javax.persistence.Version;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.SortedMap;
 import java.util.SortedSet;
 
@@ -26,37 +26,33 @@ import java.util.SortedSet;
 @Entity
 @Table(name = "ITEM")
 @EntityListeners(AuditingEntityListener.class)
-@NoArgsConstructor
-@AllArgsConstructor
-@EqualsAndHashCode(exclude = { "version", "from", "into", "lastModifiedDate" })
-@ToString
 public class Item implements Serializable {
 
 	@Id
 	@Column(name = "ID", unique = true, nullable = false)
 	@JsonProperty("id")
-	@Getter @Setter private int id;
+	private int id;
 
 	@Version
 	@Column(name = "VERSION", nullable = false)
 	@JsonIgnore
-	@Getter @Setter private Long version;
+	private Long version;
 
 	@Column(name = "NAME")
 	@JsonProperty("name")
-	@Getter @Setter private String name;
+	private String name;
 
 	@Column(name = "ITEM_GROUP")
 	@JsonProperty("group")
-	@Getter @Setter private String group;
+	private String group;
 
 	@Column(name = "CONSUMED")
 	@JsonProperty("consumed")
-	@Getter @Setter private Boolean consumed;
+	private Boolean consumed;
 
 	@Column(name = "DESCRIPTION")
 	@JsonProperty("description")
-	@Getter @Setter private String description;
+	private String description;
 
 	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "ITEM_FROM", joinColumns = @JoinColumn(name = "ITEM_ID"))
@@ -64,27 +60,27 @@ public class Item implements Serializable {
 	@Column(name = "ITEM_FROM")
 	@OrderBy("ITEM_FROM ASC")
 	@JsonProperty("from")
-	@Getter @Setter private List<Integer> from;
+	private List<Integer> from;
 
 	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "ITEM_INTO", joinColumns = @JoinColumn(name = "ITEM_ID"))
 	@Column(name = "ITEM_INTO")
 	@OrderBy("ITEM_INTO ASC")
 	@JsonProperty("into")
-	@Getter @Setter private SortedSet<Integer> into;
+	private SortedSet<Integer> into;
 
 	@Column(name = "REQUIRED_CHAMPION")
 	@JsonProperty("requiredChampion")
-	@Getter @Setter private String requiredChampion;
+	private String requiredChampion;
 
 	@Column(name = "REQUIRED_ALLY")
 	@JsonProperty("requiredAlly")
-	@Getter @Setter private String requiredAlly;
+	private String requiredAlly;
 
 	@Column(name = "LAST_MODIFIED_DATE", nullable = false)
 	@LastModifiedDate
 	@JsonIgnore
-	@Getter @Setter private LocalDateTime lastModifiedDate;
+	private LocalDateTime lastModifiedDate;
 
 	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "ITEM_MAP", joinColumns = @JoinColumn(name = "ITEM_ID"))
@@ -92,16 +88,174 @@ public class Item implements Serializable {
 	@Column(name = "MAP")
 	@OrderBy("MAPS_KEY ASC")
 	@JsonProperty("maps")
-	@Getter @Setter private SortedMap<Integer, Boolean> maps;
+	private SortedMap<Integer, Boolean> maps;
 
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "item")
 	@JsonManagedReference
 	@JsonProperty("image")
-	@Getter @Setter private ItemImage image;
+	private ItemImage image;
 
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "item")
 	@JsonManagedReference
 	@JsonProperty("gold")
-	@Getter @Setter private ItemGold gold;
+	private ItemGold gold;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(Long version) {
+		this.version = version;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getGroup() {
+		return group;
+	}
+
+	public void setGroup(String group) {
+		this.group = group;
+	}
+
+	public Boolean getConsumed() {
+		return consumed;
+	}
+
+	public void setConsumed(Boolean consumed) {
+		this.consumed = consumed;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public List<Integer> getFrom() {
+		return from;
+	}
+
+	public void setFrom(List<Integer> from) {
+		this.from = from;
+	}
+
+	public SortedSet<Integer> getInto() {
+		return into;
+	}
+
+	public void setInto(SortedSet<Integer> into) {
+		this.into = into;
+	}
+
+	public String getRequiredChampion() {
+		return requiredChampion;
+	}
+
+	public void setRequiredChampion(String requiredChampion) {
+		this.requiredChampion = requiredChampion;
+	}
+
+	public String getRequiredAlly() {
+		return requiredAlly;
+	}
+
+	public void setRequiredAlly(String requiredAlly) {
+		this.requiredAlly = requiredAlly;
+	}
+
+	public LocalDateTime getLastModifiedDate() {
+		return lastModifiedDate;
+	}
+
+	public void setLastModifiedDate(LocalDateTime lastModifiedDate) {
+		this.lastModifiedDate = lastModifiedDate;
+	}
+
+	public SortedMap<Integer, Boolean> getMaps() {
+		return maps;
+	}
+
+	public void setMaps(SortedMap<Integer, Boolean> maps) {
+		this.maps = maps;
+	}
+
+	public ItemImage getImage() {
+		return image;
+	}
+
+	public void setImage(ItemImage image) {
+		this.image = image;
+	}
+
+	public ItemGold getGold() {
+		return gold;
+	}
+
+	public void setGold(ItemGold gold) {
+		this.gold = gold;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		Item item = (Item) o;
+		return id == item.id &&
+				Objects.equals(name, item.name) &&
+				Objects.equals(group, item.group) &&
+				Objects.equals(consumed, item.consumed) &&
+				Objects.equals(description, item.description) &&
+				Objects.equals(requiredChampion, item.requiredChampion) &&
+				Objects.equals(requiredAlly, item.requiredAlly) &&
+				Objects.equals(maps, item.maps) &&
+				Objects.equals(image, item.image) &&
+				Objects.equals(gold, item.gold);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, name, group, consumed, description, requiredChampion, requiredAlly, maps, image, gold);
+	}
+
+	@Override
+	public String toString() {
+		return "Item{" +
+				"id=" + id +
+				", version=" + version +
+				", name='" + name + '\'' +
+				", group='" + group + '\'' +
+				", consumed=" + consumed +
+				", description='" + description + '\'' +
+				", from=" + from +
+				", into=" + into +
+				", requiredChampion='" + requiredChampion + '\'' +
+				", requiredAlly='" + requiredAlly + '\'' +
+				", lastModifiedDate=" + lastModifiedDate +
+				", maps=" + maps +
+				", image=" + image +
+				", gold=" + gold +
+				'}';
+	}
 
 }

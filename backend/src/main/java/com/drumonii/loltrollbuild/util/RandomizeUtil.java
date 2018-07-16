@@ -1,7 +1,5 @@
 package com.drumonii.loltrollbuild.util;
 
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
 import org.apache.commons.collections4.IterableUtils;
 
 import java.util.ArrayList;
@@ -12,8 +10,9 @@ import java.util.Random;
 /**
  * Utility methods for randomizing.
  */
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class RandomizeUtil {
+
+	private RandomizeUtil() {}
 
 	private static final Random random = new Random();
 

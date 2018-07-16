@@ -4,7 +4,8 @@ import com.drumonii.loltrollbuild.config.Profiles.Ddragon;
 import com.drumonii.loltrollbuild.model.Champion;
 import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.riot.api.ChampionsResponse;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,9 +22,10 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-@Slf4j
 @Ddragon
 public class ChampionsDdragonService implements ChampionsService {
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(ChampionsDdragonService.class);
 
 	@Autowired
 	private RestTemplate restTemplate;
@@ -66,7 +68,7 @@ public class ChampionsDdragonService implements ChampionsService {
 			return restTemplate.getForObject(championsUri.buildAndExpand(version.getPatch(), locale).toString(),
 					ChampionsResponse.class);
 		} catch (RestClientException e) {
-			log.warn("Unable to retrieve Champions from Data Dragon due to:", e);
+			LOGGER.warn("Unable to retrieve Champions from Data Dragon due to:", e);
 			return null;
 		}
 	}
@@ -93,7 +95,7 @@ public class ChampionsDdragonService implements ChampionsService {
 			ChampionsResponse response = restTemplate.getForObject(uriComponents.toString(), ChampionsResponse.class);
 			return response.getChampions().get(key);
 		} catch (RestClientException e) {
-			log.warn("Unable to retrieve the Champion with Key: {} from Data Dragon due to:", key, e);
+			LOGGER.warn("Unable to retrieve the Champion with Key: {} from Data Dragon due to:", key, e);
 			return null;
 		}
 	}

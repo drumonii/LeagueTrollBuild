@@ -2,21 +2,16 @@ package com.drumonii.loltrollbuild.model;
 
 import com.drumonii.loltrollbuild.model.id.BatchJobExecutionParamsId;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * Spring Batch BATCH_JOB_EXECUTION_PARAMS table.
  */
 @Entity
 @Table(name = "BATCH_JOB_EXECUTION_PARAMS")
-@EqualsAndHashCode(of = "id")
-@ToString(exclude = "jobExecution")
 public class BatchJobExecutionParams implements Serializable {
 
 	@EmbeddedId
@@ -29,11 +24,51 @@ public class BatchJobExecutionParams implements Serializable {
 			@AttributeOverride(name = "longVal", column = @Column(name = "LONG_VAL")),
 			@AttributeOverride(name = "doubleVal", column = @Column(name = "DOUBLE_VAL", precision = 17, scale = 17)),
 			@AttributeOverride(name = "identifying", column = @Column(name = "IDENTIFYING", nullable = false, length = 1)) })
-	@Getter @Setter private BatchJobExecutionParamsId id;
+	private BatchJobExecutionParamsId id;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "JOB_EXECUTION_ID", nullable = false, insertable = false, updatable = false)
 	@JsonBackReference
-	@Getter @Setter private BatchJobExecution jobExecution;
+	private BatchJobExecution jobExecution;
+
+	public BatchJobExecutionParamsId getId() {
+		return id;
+	}
+
+	public void setId(BatchJobExecutionParamsId id) {
+		this.id = id;
+	}
+
+	public BatchJobExecution getJobExecution() {
+		return jobExecution;
+	}
+
+	public void setJobExecution(BatchJobExecution jobExecution) {
+		this.jobExecution = jobExecution;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		BatchJobExecutionParams that = (BatchJobExecutionParams) o;
+		return Objects.equals(id, that.id);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public String toString() {
+		return "BatchJobExecutionParams{" +
+				"id=" + id +
+				'}';
+	}
 
 }

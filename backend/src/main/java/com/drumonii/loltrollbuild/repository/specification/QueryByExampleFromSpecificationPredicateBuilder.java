@@ -1,7 +1,5 @@
 package com.drumonii.loltrollbuild.repository.specification;
 
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -22,8 +20,9 @@ import java.util.stream.Stream;
 /**
  * Creates a single {@link Predicate} for a given {@link Example}.
  */
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class QueryByExampleFromSpecificationPredicateBuilder {
+
+	private QueryByExampleFromSpecificationPredicateBuilder() {}
 
 	/**
 	 * Extract the {@link Predicate} representing the {@link Example}.

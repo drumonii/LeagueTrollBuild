@@ -4,7 +4,8 @@ import com.drumonii.loltrollbuild.config.Profiles.Ddragon;
 import com.drumonii.loltrollbuild.model.SummonerSpell;
 import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.riot.api.SummonerSpellsResponse;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,9 +19,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Slf4j
 @Ddragon
 public class SummonerSpellsDdragonService implements SummonerSpellsService {
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(SummonerSpellsDdragonService.class);
 
 	@Autowired
 	private RestTemplate restTemplate;
@@ -42,7 +44,7 @@ public class SummonerSpellsDdragonService implements SummonerSpellsService {
 			response = restTemplate.getForObject(summonerSpellsUri.buildAndExpand(version.getPatch(), locale).toString(),
 					SummonerSpellsResponse.class);
 		} catch (RestClientException e) {
-			log.warn("Unable to retrieve Summoner Spells from Data Dragon due to:", e);
+			LOGGER.warn("Unable to retrieve Summoner Spells from Data Dragon due to:", e);
 			return new ArrayList<>();
 		}
 		return new ArrayList<>(response.getSummonerSpells().values());

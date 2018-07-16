@@ -4,7 +4,8 @@ import com.drumonii.loltrollbuild.config.Profiles.StaticData;
 import com.drumonii.loltrollbuild.model.Champion;
 import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.riot.api.ChampionsResponse;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,9 +19,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@Slf4j
 @StaticData
 public class ChampionsStaticDataService implements ChampionsService {
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(ChampionsStaticDataService.class);
 
 	@Autowired
 	private RestTemplate restTemplate;
@@ -52,7 +54,7 @@ public class ChampionsStaticDataService implements ChampionsService {
 		try {
 			return new ArrayList<>(restTemplate.getForObject(url, ChampionsResponse.class).getChampions().values());
 		} catch (RestClientException e) {
-			log.warn("Unable to retrieve Champions from lol-static-data-v3 due to:", e);
+			LOGGER.warn("Unable to retrieve Champions from lol-static-data-v3 due to:", e);
 			return new ArrayList<>();
 		}
 	}
@@ -64,7 +66,7 @@ public class ChampionsStaticDataService implements ChampionsService {
 		try {
 			champion = restTemplate.getForObject(uriComponents.toString(), Champion.class);
 		} catch (RestClientException e) {
-			log.warn("Unable to retrieve the Champion with ID: {} from lol-static-data-v3 due to:", id, e);
+			LOGGER.warn("Unable to retrieve the Champion with ID: {} from lol-static-data-v3 due to:", id, e);
 			return null;
 		}
 		return champion;

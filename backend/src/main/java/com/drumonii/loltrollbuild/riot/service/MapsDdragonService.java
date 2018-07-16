@@ -4,7 +4,8 @@ import com.drumonii.loltrollbuild.config.Profiles.Ddragon;
 import com.drumonii.loltrollbuild.model.GameMap;
 import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.riot.api.MapsResponse;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,9 +19,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Slf4j
 @Ddragon
 public class MapsDdragonService implements MapsService {
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(MapsDdragonService.class);
 
 	@Autowired
 	private RestTemplate restTemplate;
@@ -42,7 +44,7 @@ public class MapsDdragonService implements MapsService {
 			response = restTemplate.getForObject(mapsUri.buildAndExpand(version.getPatch(), locale).toString(),
 					MapsResponse.class);
 		} catch (RestClientException e) {
-			log.warn("Unable to retrieve Maps from Data Dragon due to:", e);
+			LOGGER.warn("Unable to retrieve Maps from Data Dragon due to:", e);
 			return new ArrayList<>();
 		}
 		return new ArrayList<>(response.getMaps().values());

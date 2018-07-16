@@ -2,8 +2,6 @@ package com.drumonii.loltrollbuild.util;
 
 import com.drumonii.loltrollbuild.model.GameMap;
 import com.drumonii.loltrollbuild.model.SummonerSpell.GameMode;
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
 
 import static com.drumonii.loltrollbuild.model.SummonerSpell.GameMode.ARAM;
 import static com.drumonii.loltrollbuild.model.SummonerSpell.GameMode.CLASSIC;
@@ -11,8 +9,9 @@ import static com.drumonii.loltrollbuild.model.SummonerSpell.GameMode.CLASSIC;
 /**
  * Utility methods relating to {@link GameMap}s.
  */
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class GameMapUtil {
+
+	private GameMapUtil() {}
 
 	public static final int CRYSTAL_SCAR_ID = 8;
 	public static final String CRYSTAL_SCAR_SID = "8";
