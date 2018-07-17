@@ -30,7 +30,6 @@ import static com.drumonii.loltrollbuild.config.Profiles.STATIC_DATA;
 import static com.drumonii.loltrollbuild.config.Profiles.TESTING;
 import static com.drumonii.loltrollbuild.util.GameMapUtil.HOWLING_ABYSS_SID;
 import static com.drumonii.loltrollbuild.util.GameMapUtil.SUMMONERS_RIFT_SID;
-import static com.drumonii.loltrollbuild.util.GameMapUtil.TWISTED_TREELINE_SID;
 import static org.assertj.core.api.Assertions.fail;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
