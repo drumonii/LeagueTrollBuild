@@ -9,12 +9,7 @@ import { AppComponent } from './app.component';
 
 import { FooterComponent } from '@layout/footer/footer.component';
 import { HeaderComponent } from '@layout/header/header.component';
-
-import { ChampionsPage } from '@page/champions/champions.page';
 import { NotFoundPage } from '@page/error/not-found.page';
-
-import { ChampionsNameFilterPipe } from '@pipe/champions-name-filter.pipe';
-import { ChampionsTagsFilterPipe } from '@pipe/champions-tags-filter.pipe';
 
 import { VersionsService } from '@service/versions.service';
 
@@ -23,9 +18,6 @@ describe('AppComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         AppComponent,
-        ChampionsNameFilterPipe,
-        ChampionsTagsFilterPipe,
-        ChampionsPage,
         NotFoundPage,
         FooterComponent,
         HeaderComponent
