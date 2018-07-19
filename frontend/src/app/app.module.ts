@@ -10,14 +10,12 @@ import { AppComponent } from './app.component';
 import { FooterComponent } from '@layout/footer/footer.component';
 import { HeaderComponent } from '@layout/header/header.component';
 
-import { ChampionPage } from '@page/champion/champion.page';
 import { ChampionsPage } from '@page/champions/champions.page';
 import { NotFoundPage } from '@page/error/not-found.page';
 
 import { ChampionsNameFilterPipe } from '@pipe/champions-name-filter.pipe';
 import { ChampionsTagsFilterPipe } from '@pipe/champions-tags-filter.pipe';
 
-import { BuildsService } from '@service/builds.service';
 import { ChampionsService } from '@service/champions.service';
 import { GameMapsService } from '@service/game-maps.service';
 import { VersionsService } from '@service/versions.service';
@@ -27,7 +25,6 @@ import { VersionsService } from '@service/versions.service';
     AppComponent,
     ChampionsNameFilterPipe,
     ChampionsTagsFilterPipe,
-    ChampionPage,
     ChampionsPage,
     NotFoundPage,
     FooterComponent,
@@ -41,7 +38,6 @@ import { VersionsService } from '@service/versions.service';
     HttpClientXsrfModule
   ],
   providers: [
-    BuildsService,
     ChampionsService,
     GameMapsService,
     VersionsService
