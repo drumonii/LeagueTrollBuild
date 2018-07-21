@@ -1,4 +1,4 @@
-package com.drumonii.loltrollbuild.rest;
+package com.drumonii.loltrollbuild.rest.admin;
 
 import com.drumonii.loltrollbuild.model.BatchJobInstance;
 import com.drumonii.loltrollbuild.model.BatchStepExecution;
