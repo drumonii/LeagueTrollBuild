@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
-import { Observable, forkJoin } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 import { BuildsService } from '@service/builds.service';
 import { ChampionsService } from '@service/champions.service';
@@ -30,18 +29,15 @@ export class ChampionPage implements OnInit {
     private buildsService: BuildsService, private title: Title, private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.route.paramMap.pipe(
-      switchMap(((params: ParamMap) => {
-        const name = params.get('name');
-        this.setTitle(name);
-        return forkJoin(this.getChampion(name), this.getGameMaps());
-      })))
-      .subscribe(([champion, gameMaps]) => {
-        this.champion = champion;
+    this.route.data.subscribe((data: { champion: Champion }) => {
+      this.champion = data.champion;
+      this.setTitle(data.champion.name);
+      this.getGameMaps().subscribe(gameMaps => {
         this.gameMap = gameMaps.find(gameMap => gameMap.mapId === GameMap.summonersRiftId);
         this.gameMaps = gameMaps;
         this.getTrollBuild();
       });
+    });
   }
 
   private setTitle(name: string) {
@@ -50,10 +46,6 @@ export class ChampionPage implements OnInit {
     } else {
       this.title.setTitle(`${this.title.getTitle().substring(0, this.title.getTitle().indexOf('|') - 1)} | ${name}`);
     }
-  }
-
-  private getChampion(name: string): Observable<Champion> {
-    return this.championService.getChampion(name);
   }
 
   private getGameMaps(): Observable<GameMap[]> {

@@ -2,7 +2,7 @@ import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing'
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, convertToParamMap } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { By, Title } from '@angular/platform-browser';
 
@@ -32,7 +32,7 @@ describe('ChampionPage', () => {
         {
           provide: ActivatedRoute,
           useValue: {
-            paramMap: of(convertToParamMap({'name': 'Skarner'}))
+            data: of({ champion: skarner })
           }
         }
       ]
@@ -599,7 +599,7 @@ describe('ChampionPage', () => {
     }));
 
     afterEach(inject([ChampionsService, GameMapsService], (championsService: ChampionsService, gameMapsService: GameMapsService) => {
-      expect(championsService.getChampion).toHaveBeenCalledWith('Skarner');
+      expect(championsService.getChampion).not.toHaveBeenCalledWith('Skarner');
       expect(championsService.getTrollBuild).toHaveBeenCalledWith('Skarner', GameMap.summonersRiftId);
       expect(gameMapsService.forTrollBuild).toHaveBeenCalled();
     }));
@@ -774,7 +774,7 @@ describe('ChampionPage', () => {
     }));
 
     afterEach(inject([ChampionsService, GameMapsService], (championsService: ChampionsService, gameMapsService: GameMapsService) => {
-      expect(championsService.getChampion).toHaveBeenCalledWith('Skarner');
+      expect(championsService.getChampion).not.toHaveBeenCalledWith('Skarner');
       expect(championsService.getTrollBuild).toHaveBeenCalledWith('Skarner', GameMap.summonersRiftId);
       expect(gameMapsService.forTrollBuild).toHaveBeenCalled();
     }));
