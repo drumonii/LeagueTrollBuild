@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -14,7 +14,7 @@ export class GameMapsService {
   forTrollBuild(): Observable<GameMap[]> {
     return this.httpClient.get<GameMap[]>('/api/maps/for-troll-build')
       .pipe(
-        catchError((error) => {
+        catchError((error: HttpErrorResponse) => {
           console.error(`Caught error while GETing Game Maps for Troll Build: ${JSON.stringify(error)}`);
           return of([]);
         })

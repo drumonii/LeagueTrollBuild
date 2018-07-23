@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -15,7 +15,7 @@ export class ChampionsService {
   getChampion(name: string): Observable<Champion> {
     return this.httpClient.get<Champion>(`/api/champions/${name}`)
       .pipe(
-        catchError((error) => {
+        catchError((error: HttpErrorResponse) => {
           console.error(`Caught error while GETing Champion ${name}: ${JSON.stringify(error)}`);
           return of(null);
         })
@@ -26,7 +26,7 @@ export class ChampionsService {
     const params = gameMapId ? new HttpParams().set('mapId', gameMapId.toString()) : new HttpParams();
     return this.httpClient.get<TrollBuild>(`/api/champions/${name}/troll-build`, { params: params })
       .pipe(
-        catchError((error) => {
+        catchError((error: HttpErrorResponse) => {
           console.error(`Caught error while GETing a Troll Build for Champion ${name} and params ${JSON.stringify(params)}: ${JSON.stringify(error)}`);
           return of(null);
         })
@@ -36,7 +36,7 @@ export class ChampionsService {
   getChampions(): Observable<Champion[]> {
     return this.httpClient.get<Champion[]>('/api/champions')
       .pipe(
-        catchError((error) => {
+        catchError((error: HttpErrorResponse) => {
           console.error(`Caught error while GETing Champions: ${JSON.stringify(error)}`);
           return of([]);
         })

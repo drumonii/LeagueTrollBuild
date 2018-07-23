@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -20,7 +20,7 @@ export class BuildsService {
         observe: 'response'
       })
     .pipe(
-      catchError((error) => {
+      catchError((error: HttpErrorResponse) => {
         console.error(`Caught error while POSTing build ${JSON.stringify(build)}: ${JSON.stringify(error)}`);
         return of(null);
       })
@@ -30,7 +30,7 @@ export class BuildsService {
   getBuild(buildId: number): Observable<Build> {
     return this.httpClient.get<Build>(`/api/builds/${buildId}`)
       .pipe(
-        catchError((error) => {
+        catchError((error: HttpErrorResponse) => {
           console.error(`${JSON.stringify(error)}`);
           if (error.status === 404) {
             return of(null);
