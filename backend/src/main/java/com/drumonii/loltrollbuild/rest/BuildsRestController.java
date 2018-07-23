@@ -129,4 +129,14 @@ public class BuildsRestController {
 				.body(savedBuild);
 	}
 
+	/**
+	 * Gets the number of saved {@link Build}s.
+	 *
+	 * @return the count of saved {@link Build}s
+	 */
+	@GetMapping(path = "/count")
+	public long countBuilds() {
+		return buildsRepository.count();
+	}
+
 }

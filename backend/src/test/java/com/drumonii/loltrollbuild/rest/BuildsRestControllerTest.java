@@ -221,4 +221,14 @@ public abstract class BuildsRestControllerTest {
 				.isNotEmpty();
 	}
 
+	@Test
+	public void countBuild() throws Exception {
+		long count = buildsRepository.count();
+
+		mockMvc.perform(get("{apiPath}/builds/count", apiPath))
+				.andExpect(status().isOk())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(content().json(count + ""));
+	}
+
 }
