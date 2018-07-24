@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { BuildsService } from '@service/builds.service';
-import { ChampionsService } from '@service/champions.service';
+import { ChampionService } from '@service/champion.service';
 import { GameMapsService } from '@service/game-maps.service';
 import { Build, BuildBuilder } from '@model/build';
 import { Champion } from '@model/champion';
@@ -25,7 +25,7 @@ export class ChampionPage implements OnInit {
   trollBuild$: Observable<TrollBuild>;
   build: Build;
 
-  constructor(private championService: ChampionsService, private gameMapsService: GameMapsService,
+  constructor(private championService: ChampionService, private gameMapsService: GameMapsService,
     private buildsService: BuildsService, private title: Title, private route: ActivatedRoute) {}
 
   ngOnInit() {

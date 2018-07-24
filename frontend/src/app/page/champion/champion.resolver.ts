@@ -5,17 +5,17 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { Champion } from '@model/champion';
-import { ChampionsService } from '@service/champions.service';
+import { ChampionService } from '@service/champion.service';
 
 @Injectable()
 export class ChampionResolver implements Resolve<Champion> {
 
-  constructor(private championsService: ChampionsService, private router: Router) {}
+  constructor(private championService: ChampionService, private router: Router) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Champion> {
     const name = route.paramMap.get('name');
 
-    return this.championsService.getChampion(name)
+    return this.championService.getChampion(name)
       .pipe(
         map(champion => {
           if (champion) {

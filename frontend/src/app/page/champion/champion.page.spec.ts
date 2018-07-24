@@ -10,7 +10,7 @@ import { of } from 'rxjs';
 
 import { ChampionPage } from './champion.page';
 import { BuildsService } from '@service/builds.service';
-import { ChampionsService } from '@service/champions.service';
+import { ChampionService } from '@service/champion.service';
 import { GameMapsService } from '@service/game-maps.service';
 import { Champion } from '@model/champion';
 import { GameMap } from '@model/game-map';
@@ -27,7 +27,7 @@ describe('ChampionPage', () => {
       declarations: [ChampionPage],
       providers: [
         BuildsService,
-        ChampionsService,
+        ChampionService,
         GameMapsService,
         {
           provide: ActivatedRoute,
@@ -592,13 +592,13 @@ describe('ChampionPage', () => {
     build.trinketId = trollBuild.trinket.id;
     build.mapId = GameMap.summonersRiftId;
 
-    beforeEach(inject([ChampionsService, GameMapsService], (championsService: ChampionsService, gameMapsService: GameMapsService) => {
+    beforeEach(inject([ChampionService, GameMapsService], (championsService: ChampionService, gameMapsService: GameMapsService) => {
       spyOn(championsService, 'getChampion').and.returnValue(of(skarner));
       spyOn(championsService, 'getTrollBuild').and.returnValue(of(trollBuild));
       spyOn(gameMapsService, 'forTrollBuild').and.returnValue(of(maps));
     }));
 
-    afterEach(inject([ChampionsService, GameMapsService], (championsService: ChampionsService, gameMapsService: GameMapsService) => {
+    afterEach(inject([ChampionService, GameMapsService], (championsService: ChampionService, gameMapsService: GameMapsService) => {
       expect(championsService.getChampion).not.toHaveBeenCalledWith('Skarner');
       expect(championsService.getTrollBuild).toHaveBeenCalledWith('Skarner', GameMap.summonersRiftId);
       expect(gameMapsService.forTrollBuild).toHaveBeenCalled();
@@ -627,7 +627,7 @@ describe('ChampionPage', () => {
     }));
 
     it('should generate a new Troll Build after selecting a new map',
-      inject([ChampionsService], (championsService: ChampionsService) => {
+      inject([ChampionService], (championsService: ChampionService) => {
       fixture.detectChanges();
 
       expectChampionAndMapsAndTrollBuild();
@@ -646,7 +646,7 @@ describe('ChampionPage', () => {
     }));
 
     it('should reset the saved Build and generate a new Troll Build after clicking the new build button',
-      inject([ChampionsService], (championsService: ChampionsService) => {
+      inject([ChampionService], (championsService: ChampionService) => {
       fixture.detectChanges();
 
       expectChampionAndMapsAndTrollBuild();
@@ -767,13 +767,13 @@ describe('ChampionPage', () => {
 
   describe('show Champion by name with a loading Troll Build and maps to select', () => {
 
-    beforeEach(inject([ChampionsService, GameMapsService], (championsService: ChampionsService, gameMapsService: GameMapsService) => {
+    beforeEach(inject([ChampionService, GameMapsService], (championsService: ChampionService, gameMapsService: GameMapsService) => {
       spyOn(championsService, 'getChampion').and.returnValue(of(skarner));
       spyOn(championsService, 'getTrollBuild').and.callThrough();
       spyOn(gameMapsService, 'forTrollBuild').and.returnValue(of(maps));
     }));
 
-    afterEach(inject([ChampionsService, GameMapsService], (championsService: ChampionsService, gameMapsService: GameMapsService) => {
+    afterEach(inject([ChampionService, GameMapsService], (championsService: ChampionService, gameMapsService: GameMapsService) => {
       expect(championsService.getChampion).not.toHaveBeenCalledWith('Skarner');
       expect(championsService.getTrollBuild).toHaveBeenCalledWith('Skarner', GameMap.summonersRiftId);
       expect(gameMapsService.forTrollBuild).toHaveBeenCalled();

@@ -6,7 +6,7 @@ import { ActivatedRouteSnapshot, convertToParamMap, Router } from '@angular/rout
 import { Observable, of } from 'rxjs';
 
 import { ChampionResolver } from './champion.resolver';
-import { ChampionsService } from '@service/champions.service';
+import { ChampionService } from '@service/champion.service';
 import { Champion } from '@model/champion';
 
 describe('ChampionResolver', () => {
@@ -15,7 +15,7 @@ describe('ChampionResolver', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, RouterTestingModule],
-      providers: [ChampionResolver, ChampionsService,
+      providers: [ChampionResolver, ChampionService,
         {
           provide: ActivatedRouteSnapshot,
           useValue: {
@@ -33,13 +33,13 @@ describe('ChampionResolver', () => {
     spyOn(router, 'navigate').and.returnValue(true);
   }));
 
-  afterEach(inject([ChampionsService], (championsService: ChampionsService) => {
+  afterEach(inject([ChampionService], (championsService: ChampionService) => {
     expect(championsService.getChampion).toHaveBeenCalledWith('Kennen');
   }));
 
   it('should resolve a Champion',
-    fakeAsync(inject([ChampionsService, Router, ActivatedRouteSnapshot],
-      (championsService: ChampionsService, router: Router, route: ActivatedRouteSnapshot) => {
+    fakeAsync(inject([ChampionService, Router, ActivatedRouteSnapshot],
+      (championsService: ChampionService, router: Router, route: ActivatedRouteSnapshot) => {
     const kennen: Champion = {
       id: 85,
       key: 'Kennen',
@@ -97,8 +97,8 @@ describe('ChampionResolver', () => {
   })));
 
   it('should redirect to /champions when unable to resolve a Champion',
-    fakeAsync(inject([ChampionsService, Router, ActivatedRouteSnapshot],
-      (championsService: ChampionsService, router: Router, route: ActivatedRouteSnapshot) => {
+    fakeAsync(inject([ChampionService, Router, ActivatedRouteSnapshot],
+      (championsService: ChampionService, router: Router, route: ActivatedRouteSnapshot) => {
     spyOn(championsService, 'getChampion').and.returnValue(of(null));
 
     const championObservable: Observable<Champion> = resolver.resolve(route, null);
