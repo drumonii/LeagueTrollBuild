@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { BuildsPage } from './builds.page';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/champions', pathMatch: 'full' },
+  { path: '', component: BuildsPage },
   { path: ':buildId', component: BuildsPage }
 ];
 

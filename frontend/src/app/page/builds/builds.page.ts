@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
-import { switchMap } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 
 import { BuildsService } from '@service/builds.service';
 import { Build, BuildType } from '@model/build';
@@ -47,13 +48,15 @@ export class BuildsPage implements OnInit {
   private getBuild(): void {
     this.route.paramMap.pipe(
       switchMap(((params: ParamMap) => {
-        this.buildId = +params.get('buildId');
-        return this.buildsService.getBuild(this.buildId);
+        return this.getBuildId(+params.get('buildId'));
       })))
-      .subscribe(build => {
-        this.buildType = this.getBuildType(build);
-        this.build = build;
-        this.setTitle();
+      .subscribe((buildId) => {
+        this.buildId = buildId;
+        this.buildsService.getBuild(this.buildId).subscribe(build => {
+          this.buildType = this.getBuildType(build);
+          this.build = build;
+          this.setTitle();
+        });
       });
   }
 
@@ -69,6 +72,21 @@ export class BuildsPage implements OnInit {
       return BuildType.InvalidTrinket;
     }
     return BuildType.Ok;
+  }
+
+  private getBuildId(buildId: number): Observable<number> {
+    if (buildId) {
+      return of(buildId);
+    }
+    return this.getRandomBuildId();
+  }
+
+  private getRandomBuildId(): Observable<number> {
+    const start = 1;
+    return this.buildsService.countBuilds()
+      .pipe(
+        map(end => start === end ? start : start + Math.floor(Math.random() * (end - start)))
+      );
   }
 
   getTrollBuild(): void {
