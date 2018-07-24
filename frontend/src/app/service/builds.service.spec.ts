@@ -119,4 +119,30 @@ describe('BuildsService', () => {
 
     testReq.error(new ErrorEvent('champion: null'), { status: 400 });
   }));
+
+  it('should GET count of builds', inject([BuildsService, HttpTestingController],
+    (service: BuildsService, httpMock: HttpTestingController) => {
+    const numberOfBuilds = 1;
+
+    service.countBuilds().subscribe(count => {
+      expect(count).toBe(numberOfBuilds);
+    });
+
+    const testReq = httpMock.expectOne('/api/builds/count');
+    expect(testReq.request.method).toEqual('GET');
+
+    testReq.flush(numberOfBuilds);
+  }));
+
+  it('should GET count of builds with REST error', inject([BuildsService, HttpTestingController],
+    (service: BuildsService, httpMock: HttpTestingController) => {
+    service.countBuilds().subscribe(count => {
+      expect(count).toBe(0);
+    });
+
+    const testReq = httpMock.expectOne('/api/builds/count');
+    expect(testReq.request.method).toEqual('GET');
+
+    testReq.error(new ErrorEvent('An unexpected error occurred'));
+  }));
 });

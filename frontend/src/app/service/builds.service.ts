@@ -40,4 +40,14 @@ export class BuildsService {
       );
   }
 
+  countBuilds(): Observable<number> {
+    return this.httpClient.get<number>('/api/builds/count')
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          console.error(`Caught error while GETing count of builds ${JSON.stringify(error)}`);
+          return of(0);
+        })
+     );
+  }
+
 }
