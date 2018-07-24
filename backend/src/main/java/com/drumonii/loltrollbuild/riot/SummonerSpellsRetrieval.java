@@ -19,8 +19,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * A {@link RestController} which retrieves the list of {@link SummonerSpell} from Riot's {@code lol-static-data-v3} or
- * {@code Data Dragon} API with the {@code /riot/summoner-spells} URL mapping.
+ * A {@link RestController} which retrieves the list of {@link SummonerSpell} from Riot's {@code Data Dragon} API with
+ * the {@code /riot/summoner-spells} URL mapping.
  */
 @RestController
 @RequestMapping("/riot/summoner-spells")

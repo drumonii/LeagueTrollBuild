@@ -3,21 +3,6 @@
 # ======================
 
 riot:
-  static-data:
-    api-key: # from RIOT_STATICDATA_APIKEY environment variable or -Driot.staticdata.apiKey argument property
-    base-url: "{region}.api.riotgames.com/lol/static-data/v3"
-    key-param: api_key
-    locale-param: locale
-    locale: en_US
-    region: na1
-    champions: /champions
-    champion: /champions/{id}
-    items: /items
-    item: /items/{id}
-    maps: /maps
-    summoner-spells: /summoner-spells
-    summoner-spell: /summoner-spells/{id}
-    versions: /versions
   ddragon:
     base-url: ddragon.leagueoflegends.com
     locale: en_US

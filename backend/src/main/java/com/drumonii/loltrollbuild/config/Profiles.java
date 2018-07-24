@@ -31,11 +31,6 @@ public class Profiles {
 	 */
 
 	/**
-	 * Profile for using Riot's {@code lol-static-data-v3} API.
-	 */
-	public static final String STATIC_DATA = "static-data";
-
-	/**
 	 * Profile for using Riot's {@code Data Dragon} API.
 	 */
 	public static final String DDRAGON = "ddragon";
@@ -93,15 +88,6 @@ public class Profiles {
 	/*
 	 * Riot API profiles
 	 */
-
-	/**
-	 * Indicates a {@code lol-static-data-v3} API profile.
-	 */
-	@Target(ElementType.TYPE)
-	@Retention(RetentionPolicy.RUNTIME)
-	@Profile(value = STATIC_DATA)
-	public @interface StaticData {
-	}
 
 	/**
 	 * Indicates a {@code Data Dragon} API profile.

@@ -3,8 +3,7 @@ package com.drumonii.loltrollbuild.riot.api;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Base response class from Riot's {@code lol-static-data-v3} or {@code Data Dragon} API which contains common elements
- * among retrievals.
+ * Base response class from Riot's {@code Data Dragon} API which contains common elements among retrievals.
  */
 abstract class BaseResponse {
 

@@ -20,8 +20,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * A {@link RestController} which retrieves the list of {@link Champion} from Riot's {@code lol-static-data-v3} or
- * {@code Data Dragon} API with the {@code /riot/champions} URL mapping.
+ * A {@link RestController} which retrieves the list of {@link Champion} from Riot's {@code Data Dragon} API with the
+ * {@code /riot/champions} URL mapping.
  */
 @RestController
 @RequestMapping("/riot/champions")

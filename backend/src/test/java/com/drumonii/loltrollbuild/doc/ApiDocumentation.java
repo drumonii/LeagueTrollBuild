@@ -18,7 +18,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -26,7 +25,7 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
-import static com.drumonii.loltrollbuild.config.Profiles.STATIC_DATA;
+import static com.drumonii.loltrollbuild.config.Profiles.DDRAGON;
 import static com.drumonii.loltrollbuild.config.Profiles.TESTING;
 import static com.drumonii.loltrollbuild.util.GameMapUtil.HOWLING_ABYSS_SID;
 import static com.drumonii.loltrollbuild.util.GameMapUtil.SUMMONERS_RIFT_SID;
@@ -43,8 +42,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcRestTest({ BuildsRestController.class, ChampionsRestController.class, ItemsRestController.class,
 		MapsRestController.class, SummonerSpellsRestController.class, VersionsRestController.class })
 @AutoConfigureRestDocs(uriScheme = "https", uriHost = "loltrollbuild.com", uriPort = 443)
-@TestPropertySource(properties = "riot.static-data.apiKey=API_KEY")
-@ActiveProfiles({ TESTING, STATIC_DATA })
+@ActiveProfiles({ TESTING, DDRAGON })
 public class ApiDocumentation {
 
 	@Autowired
@@ -82,31 +80,31 @@ public class ApiDocumentation {
 
 	@Before
 	public void before() {
-		ClassPathResource championsJsonResource = new ClassPathResource("champions_static_data.json");
+		ClassPathResource championsJsonResource = new ClassPathResource("champions_data_dragon.json");
 		try {
 			championsResponse = objectMapper.readValue(championsJsonResource.getFile(), ChampionsResponse.class);
 		} catch (IOException e) {
 			fail("Unable to unmarshal the Champions response.", e);
 		}
-		ClassPathResource itemsJsonResource = new ClassPathResource("items_static_data.json");
+		ClassPathResource itemsJsonResource = new ClassPathResource("items_data_dragon.json");
 		try {
 			itemsResponse = objectMapper.readValue(itemsJsonResource.getFile(), ItemsResponse.class);
 		} catch (IOException e) {
 			fail("Unable to unmarshal the Items response.", e);
 		}
-		ClassPathResource mapsJsonResource = new ClassPathResource("maps_static_data.json");
+		ClassPathResource mapsJsonResource = new ClassPathResource("maps_data_dragon.json");
 		try {
 			mapsResponse = objectMapper.readValue(mapsJsonResource.getFile(), MapsResponse.class);
 		} catch (IOException e) {
 			fail("Unable to unmarshal the Maps response.", e);
 		}
-		ClassPathResource summonerSpellsJson = new ClassPathResource("summoners_static_data.json");
+		ClassPathResource summonerSpellsJson = new ClassPathResource("summoners_data_dragon.json");
 		try {
 			summonerSpellsResponse = objectMapper.readValue(summonerSpellsJson.getFile(), SummonerSpellsResponse.class);
 		} catch (IOException e) {
 			fail("Unable to unmarshal the Summoner Spells response.", e);
 		}
-		ClassPathResource versionsJson = new ClassPathResource("versions_static_data.json");
+		ClassPathResource versionsJson = new ClassPathResource("versions_data_dragon.json");
 		try {
 			versions = objectMapper.readValue(versionsJson.getFile(), new TypeReference<List<Version>>() {});
 			versions.sort(Collections.reverseOrder());

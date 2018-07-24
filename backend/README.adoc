@@ -11,34 +11,22 @@ embedded::
 Secondary production profile that uses an embedded H2 for quickly running the app locally without a PostgreSQL install.
 
 dev::
-Development profile that also uses PostgreSQL but neither caches message properties nor Thymeleaf's HTML templates.
+Development profile that also uses PostgreSQL with the url: `jdbc:postgresql://localhost/loltrollbuild`
 
 test::
-Testing profile for https://github.com/junit-team/junit[JUnit 4] tests.
+Testing profile for https://github.com/junit-team/junit[JUnit 4] tests using H2.
 
-In addition, there are two Riot API profiles:
-
-static-data::
-lol-static-data-v3
+In addition, there is one Riot API profile:
 
 ddragon::
 Data Dragon
 
 To override an active profile, set the `spring.profiles.active` argument property such as:
 
- -Dspring.profiles.active=dev,static-data
+ -Dspring.profiles.active=dev
 
 Or using the environment variable `SPRING_PROFILES_ACTIVE`. Otherwise, if a profile is not specified, the `external`
 and `ddragon` profiles will be active.
-
-== Riot API Key
-An https://developer.riotgames.com/api-keys.html[API key] provided from Riot is required to use https://developer.riotgames.com/api-methods/#lol-static-data-v3[lol-static-data-v3].
-
-When running with the `static-data` profile, the API key is supplied using the `RIOT_STATIC_DATA_API_KEY` environment
-variable or the `-Driot.static-data.apiKey` argument property. If the API key is not supplied, the configuration properties validation
-will fail and thus the app will not start (by design).
-
-If running with the `ddragon` profile, no API key is required.
 
 == Running the Backend locally
 Create a run config that uses the `LeagueTrollBuildApplication` main class
@@ -47,7 +35,8 @@ Once the backend starts, view http://localhost:8080/api[localhost:8080/api] on y
 
 === All Retrievals from Riot
 Optionally, run with the following argument properties to trigger on startup the retrieval of the latest data (Items,
- Maps, Champions, Summoner Spells) from Riot's API in order to perform a troll build of a Champion.
+ Maps, Champions, Summoner Spells) from Riot's https://developer.riotgames.com/static-data.html[Data Dragon API] in
+ order to perform a troll build of a Champion.
 
   -Dspring.batch.job.enabled=true -Dspring.batch.job.names=allRetrievalsJob
 
