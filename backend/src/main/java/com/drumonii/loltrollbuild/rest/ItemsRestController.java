@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+import static com.drumonii.loltrollbuild.util.GameMapUtil.SUMMONERS_RIFT_SID;
+
 /**
  * Repository REST controller for {@link Item}s.
  */
@@ -67,7 +69,7 @@ public class ItemsRestController {
 	 * @return the {@link List} of {@link Item}s
 	 */
 	@GetMapping(path = "/boots")
-	public List<Item> getBoots(@RequestParam(required = false, defaultValue = "11") int mapId) {
+	public List<Item> getBoots(@RequestParam(required = false, defaultValue = SUMMONERS_RIFT_SID) int mapId) {
 		return itemsRepository.boots(mapId);
 	}
 
@@ -79,7 +81,7 @@ public class ItemsRestController {
 	 * @return the {@link List} of {@link Item}s
 	 */
 	@GetMapping(path = "/trinkets")
-	public List<Item> getTrinkets(@RequestParam(required = false, defaultValue = "11") int mapId) {
+	public List<Item> getTrinkets(@RequestParam(required = false, defaultValue = SUMMONERS_RIFT_SID) int mapId) {
 		return itemsRepository.trinkets(mapId);
 	}
 
@@ -102,7 +104,7 @@ public class ItemsRestController {
 	 * @return the {@link List} of {@link Item}s
 	 */
 	@GetMapping(value = "/for-troll-build")
-	public List<Item> getForTrollBuild(@RequestParam(required = false, defaultValue = "11") int mapId) {
+	public List<Item> getForTrollBuild(@RequestParam(required = false, defaultValue = SUMMONERS_RIFT_SID) int mapId) {
 		return itemsRepository.forTrollBuild(mapId);
 	}
 
