@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
-import { Observable, of } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
-
+import { BuildsResolverData } from './builds.resolver.data';
 import { BuildsService } from '@service/builds.service';
 import { Build, BuildType } from '@model/build';
 import { Title } from '@angular/platform-browser';
@@ -37,7 +35,7 @@ export class BuildsPage implements OnInit {
   private getTitle(): string {
     switch (this.buildType) {
       case BuildType.Ok:
-        return `${this.build.champion.name} Build`;
+        return `${this.build.champion.name} Build | ${this.buildId}`;
       case BuildType.NotFound:
         return `Couldn't find Troll Build ${this.buildId}`;
       default:
@@ -46,18 +44,12 @@ export class BuildsPage implements OnInit {
   }
 
   private getBuild(): void {
-    this.route.paramMap.pipe(
-      switchMap(((params: ParamMap) => {
-        return this.getBuildId(+params.get('buildId'));
-      })))
-      .subscribe((buildId) => {
-        this.buildId = buildId;
-        this.buildsService.getBuild(this.buildId).subscribe(build => {
-          this.buildType = this.getBuildType(build);
-          this.build = build;
-          this.setTitle();
-        });
-      });
+    this.route.data.subscribe((data: { build: BuildsResolverData }) => {
+      this.buildId = data.build.id;
+      this.build = data.build.savedBuild;
+      this.buildType = this.getBuildType(data.build.savedBuild);
+      this.setTitle();
+    });
   }
 
   private getBuildType(build: Build): BuildType {
@@ -72,21 +64,6 @@ export class BuildsPage implements OnInit {
       return BuildType.InvalidTrinket;
     }
     return BuildType.Ok;
-  }
-
-  private getBuildId(buildId: number): Observable<number> {
-    if (buildId) {
-      return of(buildId);
-    }
-    return this.getRandomBuildId();
-  }
-
-  private getRandomBuildId(): Observable<number> {
-    const start = 1;
-    return this.buildsService.countBuilds()
-      .pipe(
-        map(end => start === end ? start : start + Math.floor(Math.random() * (end - start)))
-      );
   }
 
   getTrollBuild(): void {
