@@ -168,7 +168,8 @@ public class ApiDocumentation {
 	public void summonerSpellsForTrollBuild() throws Exception {
 		summonerSpellsRepository.save(summonerSpellsResponse.getSummonerSpells().get("SummonerSmite"));
 
-		mockMvc.perform(get("{apiPath}/summoner-spells/for-troll-build?mode={mode}", apiPath, "CLASSIC"))
+		mockMvc.perform(get("{apiPath}/summoner-spells/for-troll-build", apiPath)
+				.param("mode", "CLASSIC"))
 				.andExpect(status().isOk())
 				.andDo(document("summonerSpellsForTrollBuild", relaxedResponseFields(
 						fieldWithPath("[*].id")
@@ -262,7 +263,8 @@ public class ApiDocumentation {
 	public void bootsItems() throws Exception {
 		itemsRepository.save(itemsResponse.getItems().get("3158"));
 
-		mockMvc.perform(get("{apiPath}/items/boots?mapId={mapId}", apiPath, "11"))
+		mockMvc.perform(get("{apiPath}/items/boots", apiPath)
+				.param("mapId", SUMMONERS_RIFT_SID))
 				.andExpect(status().isOk())
 				.andDo(document("bootsItems", relaxedResponseFields(
 						fieldWithPath("[*].id")
@@ -295,7 +297,8 @@ public class ApiDocumentation {
 	public void trinketItems() throws Exception {
 		itemsRepository.save(itemsResponse.getItems().get("3364"));
 
-		mockMvc.perform(get("{apiPath}/items/trinkets?mapId={mapId}", apiPath, "11"))
+		mockMvc.perform(get("{apiPath}/items/trinkets", apiPath)
+				.param("mapId", SUMMONERS_RIFT_SID))
 				.andExpect(status().isOk())
 				.andDo(document("trinketItems", relaxedResponseFields(
 						fieldWithPath("[*].id")
@@ -361,7 +364,8 @@ public class ApiDocumentation {
 	public void itemsForTrollBuild() throws Exception {
 		itemsRepository.save(itemsResponse.getItems().get("3065"));
 
-		mockMvc.perform(get("{apiPath}/items/for-troll-build?mapId={mapId}", apiPath, "11"))
+		mockMvc.perform(get("{apiPath}/items/for-troll-build", apiPath)
+				.param("mapId", SUMMONERS_RIFT_SID))
 				.andExpect(status().isOk())
 				.andDo(document("itemsForTrollBuild", relaxedResponseFields(
 						fieldWithPath("[*].id")
