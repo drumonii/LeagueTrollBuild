@@ -123,7 +123,7 @@ public abstract class ItemsRestControllerTest {
 	@Test
 	public void getTrinkets() throws Exception {
 		itemsResponse.setItems(itemsResponse.getItems().values().stream()
-				.filter(item -> item.getName() != null && item.getName().contains("Trinket") &&
+				.filter(item -> item.getName() != null && item.getName().contains("Trinket") ||
 						item.getDescription() != null && item.getDescription().contains("Trinket"))
 				.collect(Collectors.toMap(item -> String.valueOf(item.getId()), item -> item)));
 		itemsRepository.saveAll(itemsResponse.getItems().values());
