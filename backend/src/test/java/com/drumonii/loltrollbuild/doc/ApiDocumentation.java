@@ -293,7 +293,7 @@ public class ApiDocumentation {
 
 	@Test
 	public void trinketItems() throws Exception {
-		itemsRepository.save(itemsResponse.getItems().get("3341"));
+		itemsRepository.save(itemsResponse.getItems().get("3364"));
 
 		mockMvc.perform(get("{apiPath}/items/trinkets?mapId={mapId}", apiPath, "11"))
 				.andExpect(status().isOk())
@@ -465,7 +465,7 @@ public class ApiDocumentation {
 	public void getTrollBuildForChampion() throws Exception {
 		Champion jayce = championsRepository.save(championsResponse.getChampions().get("Jayce"));
 
-		itemsRepository.save(itemsResponse.getItems().get("3341")); // Sweeping Lens (Trinket)
+		itemsRepository.save(itemsResponse.getItems().get("3340")); // Warding Totem (Trinket)
 
 		summonerSpellsRepository.save(summonerSpellsResponse.getSummonerSpells().get("SummonerFlash"));
 		summonerSpellsRepository.save(summonerSpellsResponse.getSummonerSpells().get("SummonerMana"));
@@ -580,7 +580,7 @@ public class ApiDocumentation {
 		build.setItem6Id(itemsResponse.getItems().get("3046").getId());
 		build.setSummonerSpell1Id(summonerSpellsResponse.getSummonerSpells().get("SummonerDot").getId());
 		build.setSummonerSpell2Id(summonerSpellsResponse.getSummonerSpells().get("SummonerTeleport").getId());
-		build.setTrinketId(itemsResponse.getItems().get("3341").getId());
+		build.setTrinketId(itemsResponse.getItems().get("3340").getId());
 		build.setMapId(mapsResponse.getMaps().get(SUMMONERS_RIFT_SID).getMapId());
 		buildsRepository.save(build);
 
@@ -626,7 +626,7 @@ public class ApiDocumentation {
 		Item item6 = itemsRepository.save(itemsResponse.getItems().get("3078"));
 		SummonerSpell summonerSpell1 = summonerSpellsRepository.save(summonerSpellsResponse.getSummonerSpells().get("SummonerHaste"));
 		SummonerSpell summonerSpell2 = summonerSpellsRepository.save(summonerSpellsResponse.getSummonerSpells().get("SummonerHeal"));
-		Item trinket = itemsRepository.save(itemsRepository.save(itemsResponse.getItems().get("3341")));
+		Item trinket = itemsRepository.save(itemsRepository.save(itemsResponse.getItems().get("3340")));
 		GameMap map = mapsRepository.save(mapsResponse.getMaps().get(SUMMONERS_RIFT_SID));
 
 		Build build = new Build();

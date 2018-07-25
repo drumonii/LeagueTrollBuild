@@ -56,7 +56,7 @@ public class BuildsDdragonRestControllerTest extends BuildsRestControllerTest {
 		build.setItem6Id(itemsResponse.getItems().get("3157").getId());
 		build.setSummonerSpell1Id(summonerSpellsResponse.getSummonerSpells().get("SummonerTeleport").getId());
 		build.setSummonerSpell2Id(summonerSpellsResponse.getSummonerSpells().get("SummonerHaste").getId());
-		build.setTrinketId(itemsResponse.getItems().get("3341").getId());
+		build.setTrinketId(itemsResponse.getItems().get("3364").getId());
 		build.setMapId(mapsResponse.getMaps().get(SUMMONERS_RIFT_SID).getMapId());
 		buildsRepository.save(build);
 	}
