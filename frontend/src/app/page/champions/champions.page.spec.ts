@@ -8,10 +8,9 @@ import { By, Title } from '@angular/platform-browser';
 import { of } from 'rxjs';
 
 import { ChampionsPage } from './champions.page';
+import { ChampionsModule } from './champions.module';
 import { Champion } from '@model/champion';
 import { ChampionsService } from '@service/champions.service';
-import { ChampionsNameFilterPipe } from '@pipe/champions-name-filter.pipe';
-import { ChampionsTagsFilterPipe } from '@pipe/champions-tags-filter.pipe';
 
 describe('ChampionsPage', () => {
   let component: ChampionsPage;
@@ -19,9 +18,7 @@ describe('ChampionsPage', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [FormsModule, HttpClientTestingModule, RouterTestingModule],
-      declarations: [ChampionsPage, ChampionsNameFilterPipe, ChampionsTagsFilterPipe],
-      providers: [ChampionsService]
+      imports: [ChampionsModule, FormsModule, HttpClientTestingModule, RouterTestingModule],
     })
     .compileComponents();
   }));

@@ -6,6 +6,7 @@ import { ActivatedRouteSnapshot, convertToParamMap, Router } from '@angular/rout
 import { Observable, of } from 'rxjs';
 
 import { ChampionResolver } from './champion.resolver';
+import { ChampionModule } from './champion.module';
 import { ChampionService } from '@service/champion.service';
 import { Champion } from '@model/champion';
 
@@ -14,8 +15,8 @@ describe('ChampionResolver', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, RouterTestingModule],
-      providers: [ChampionResolver, ChampionService,
+      imports: [ChampionModule, HttpClientTestingModule, RouterTestingModule],
+      providers: [
         {
           provide: ActivatedRouteSnapshot,
           useValue: {

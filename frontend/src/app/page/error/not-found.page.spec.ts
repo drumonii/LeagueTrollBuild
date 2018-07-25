@@ -4,6 +4,7 @@ import { RouterLinkWithHref } from '@angular/router';
 import { By } from '@angular/platform-browser';
 
 import { NotFoundPage } from './not-found.page';
+import { NotFoundModule } from './not-found.module';
 
 describe('NotFoundPage', () => {
   let component: NotFoundPage;
@@ -11,8 +12,7 @@ describe('NotFoundPage', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
-      declarations: [NotFoundPage]
+      imports: [NotFoundModule, RouterTestingModule]
     })
     .compileComponents();
   }));

@@ -9,6 +9,7 @@ import { By, Title } from '@angular/platform-browser';
 import { of } from 'rxjs';
 
 import { ChampionPage } from './champion.page';
+import { ChampionModule } from './champion.module';
 import { BuildsService } from '@service/builds.service';
 import { ChampionService } from '@service/champion.service';
 import { GameMapsService } from '@service/game-maps.service';
@@ -23,12 +24,8 @@ describe('ChampionPage', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [FormsModule, HttpClientTestingModule, RouterTestingModule],
-      declarations: [ChampionPage],
+      imports: [ChampionModule, FormsModule, HttpClientTestingModule, RouterTestingModule],
       providers: [
-        BuildsService,
-        ChampionService,
-        GameMapsService,
         {
           provide: ActivatedRoute,
           useValue: {

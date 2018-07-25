@@ -7,6 +7,7 @@ import { By, Title } from '@angular/platform-browser';
 import { of } from 'rxjs';
 
 import { BuildsPage } from './builds.page';
+import { BuildsModule } from './builds.module';
 import { BuildsService } from '@service/builds.service';
 import { Build } from '@model/build';
 import { Item } from '@model/item';
@@ -492,10 +493,8 @@ describe('BuildsPage', () => {
   describe('with valid Build', () => {
     beforeEach(async(() => {
       TestBed.configureTestingModule({
-        imports: [HttpClientTestingModule, RouterTestingModule],
-        declarations: [BuildsPage],
+        imports: [BuildsModule, HttpClientTestingModule, RouterTestingModule],
         providers: [
-          BuildsService,
           {
             provide: ActivatedRoute,
             useValue: {
@@ -550,10 +549,8 @@ describe('BuildsPage', () => {
   describe('with not found 404 Build', () => {
     beforeEach(async(() => {
       TestBed.configureTestingModule({
-        imports: [HttpClientTestingModule, RouterTestingModule],
-        declarations: [BuildsPage],
+        imports: [BuildsModule, HttpClientTestingModule, RouterTestingModule],
         providers: [
-          BuildsService,
           {
             provide: ActivatedRoute,
             useValue: {
@@ -592,10 +589,8 @@ describe('BuildsPage', () => {
 
     beforeEach(async(() => {
       TestBed.configureTestingModule({
-        imports: [HttpClientTestingModule, RouterTestingModule],
-        declarations: [BuildsPage],
+        imports: [BuildsModule, HttpClientTestingModule, RouterTestingModule],
         providers: [
-          BuildsService,
           {
             provide: ActivatedRoute,
             useValue: {
@@ -634,10 +629,8 @@ describe('BuildsPage', () => {
 
     beforeEach(async(() => {
       TestBed.configureTestingModule({
-        imports: [HttpClientTestingModule, RouterTestingModule],
-        declarations: [BuildsPage],
+        imports: [BuildsModule, HttpClientTestingModule, RouterTestingModule],
         providers: [
-          BuildsService,
           {
             provide: ActivatedRoute,
             useValue: {
@@ -676,10 +669,8 @@ describe('BuildsPage', () => {
 
     beforeEach(async(() => {
       TestBed.configureTestingModule({
-        imports: [HttpClientTestingModule, RouterTestingModule],
-        declarations: [BuildsPage],
+        imports: [BuildsModule, HttpClientTestingModule, RouterTestingModule],
         providers: [
-          BuildsService,
           {
             provide: ActivatedRoute,
             useValue: {
