@@ -25,12 +25,12 @@
         {{gameMap.mapName}}
       </option>
     </select>
-    <button id="new-build-btn" (click)="getTrollBuild()">New Build</button>
   </div>
 
   <hr>
 
   <div id="troll-build" *ngIf="(trollBuild$ | async) as trollBuild; else loadingTrollBuild">
+    <button id="new-build-btn" (click)="getTrollBuild()">New Build</button>
     <div>
       <h4 id="troll-build-items-header">Items</h4>
       <div class="troll-build-item" *ngFor="let item of trollBuild.items">
@@ -57,6 +57,7 @@
   </div>
 
   <ng-template #loadingTrollBuild>
+    <button id="new-build-btn-loading">New Build</button>
     <div id="troll-build-loading">
       <div>
         <h4 id="troll-build-loading-items-header">Items</h4>

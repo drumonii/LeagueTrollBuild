@@ -779,6 +779,9 @@ describe('ChampionPage', () => {
     it('should show placeholders indicating a loading Troll Build ', () => {
       fixture.detectChanges();
 
+      const newBuildBtnLoadingDe = fixture.debugElement.query(By.css('#new-build-btn-loading'));
+      expect(newBuildBtnLoadingDe).toBeTruthy();
+
       const trollBuildLoadingDe = fixture.debugElement.query(By.css('#troll-build-loading'));
       expect(trollBuildLoadingDe).toBeTruthy();
 
