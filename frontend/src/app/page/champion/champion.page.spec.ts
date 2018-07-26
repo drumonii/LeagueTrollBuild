@@ -22,26 +22,6 @@ describe('ChampionPage', () => {
   let component: ChampionPage;
   let fixture: ComponentFixture<ChampionPage>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [ChampionModule, FormsModule, HttpClientTestingModule, RouterTestingModule],
-      providers: [
-        {
-          provide: ActivatedRoute,
-          useValue: {
-            data: of({ champion: skarner })
-          }
-        }
-      ]
-    })
-    .compileComponents();
-  }));
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(ChampionPage);
-    component = fixture.componentInstance;
-  });
-
   const skarner: Champion = {
     id: 72,
     key: 'Skarner',
@@ -214,6 +194,26 @@ describe('ChampionPage', () => {
       }
     }
   ];
+
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      imports: [ChampionModule, FormsModule, HttpClientTestingModule, RouterTestingModule],
+      providers: [
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            data: of({ champion: skarner })
+          }
+        }
+      ]
+    })
+    .compileComponents();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(ChampionPage);
+    component = fixture.componentInstance;
+  });
 
   describe('show Champion by name with a Troll Build and maps to select', () => {
 
