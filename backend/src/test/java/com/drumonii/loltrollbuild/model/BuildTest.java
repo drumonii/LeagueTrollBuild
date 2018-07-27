@@ -129,10 +129,14 @@ public class BuildTest {
 		build2.setTrinketId(build1.getTrinketId());
 		build2.setMapId(build1.getMapId());
 
+		assertThat(build1).isEqualTo(build1);
+
 		assertThat(build1).isEqualTo(build2);
 
 		build2.setItem2Id(100);
 		assertThat(build1).isNotEqualTo(build2);
+
+		assertThat(build1).isNotEqualTo(null);
 	}
 
 }
