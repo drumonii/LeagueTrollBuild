@@ -147,7 +147,8 @@ public abstract class ChampionsRetrievalTest {
 
 		given(versionsService.getLatestVersion()).willReturn(latestVersion);
 
-		mockMvc.perform(post("/riot/champions?truncate=true").with(csrf()))
+		mockMvc.perform(post("/riot/champions").with(csrf())
+				.param("truncate", "true"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(championsResponse.getChampions().values())));

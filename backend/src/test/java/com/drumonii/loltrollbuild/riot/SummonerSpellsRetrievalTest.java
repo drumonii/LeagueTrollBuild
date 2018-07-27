@@ -155,7 +155,8 @@ public abstract class SummonerSpellsRetrievalTest {
 
 		given(versionsService.getLatestVersion()).willReturn(latestVersion);
 
-		mockMvc.perform(post("/riot/summoner-spells?truncate=true").with(csrf()))
+		mockMvc.perform(post("/riot/summoner-spells").with(csrf())
+				.param("truncate", "true"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(summonerSpellsResponse

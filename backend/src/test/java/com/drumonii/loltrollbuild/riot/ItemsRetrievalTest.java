@@ -146,7 +146,8 @@ public abstract class ItemsRetrievalTest {
 
 		given(versionsService.getLatestVersion()).willReturn(latestVersion);
 
-		mockMvc.perform(post("/riot/items?truncate=true").with(csrf()))
+		mockMvc.perform(post("/riot/items").with(csrf())
+				.param("truncate", "true"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(content().json(objectMapper.writeValueAsString(itemsResponse.getItems().values())));
