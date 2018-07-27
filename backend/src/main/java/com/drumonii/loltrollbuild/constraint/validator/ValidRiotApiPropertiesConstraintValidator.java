@@ -3,22 +3,12 @@ package com.drumonii.loltrollbuild.constraint.validator;
 import com.drumonii.loltrollbuild.constraint.ValidRiotApiProperties;
 import com.drumonii.loltrollbuild.riot.api.RiotApiProperties;
 import com.drumonii.loltrollbuild.riot.api.RiotApiProperties.Ddragon;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
 import org.springframework.util.StringUtils;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-import java.util.Arrays;
-import java.util.List;
-
-import static com.drumonii.loltrollbuild.config.Profiles.DDRAGON;
-import static com.drumonii.loltrollbuild.config.Profiles.TESTING;
 
 public class ValidRiotApiPropertiesConstraintValidator implements ConstraintValidator<ValidRiotApiProperties, RiotApiProperties> {
-
-	@Autowired
-	private Environment env;
 
 	@Override
 	public void initialize(ValidRiotApiProperties constraintAnnotation) {
@@ -27,13 +17,7 @@ public class ValidRiotApiPropertiesConstraintValidator implements ConstraintVali
 
 	@Override
 	public boolean isValid(RiotApiProperties properties, ConstraintValidatorContext context) {
-		List<String> activeProfiles = Arrays.asList(env.getActiveProfiles());
-		if (activeProfiles.contains(DDRAGON)) {
-			return validate(properties.getDdragon(), context) && validateImgs(properties.getDdragon(), context);
-		} else if (activeProfiles.contains(TESTING) && !activeProfiles.contains(DDRAGON)) {
-			return true; // exception case if only testing profile is active
-		}
-		return false; // didn't have an active api profile
+		return validate(properties.getDdragon(), context) && validateImgs(properties.getDdragon(), context);
 	}
 
 	/**
