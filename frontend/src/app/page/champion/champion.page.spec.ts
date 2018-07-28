@@ -800,6 +800,9 @@ describe('ChampionPage', () => {
       expect(trollBuildLoadingTrinketHeaderDe.nativeElement.textContent).toBe('Trinket');
       const trollBuildLoadingTrinketDe = fixture.debugElement.query(By.css('.troll-build-loading-trinket'));
       expect(trollBuildLoadingTrinketDe).toBeTruthy();
+
+      const saveBuildBtnDe = fixture.debugElement.query(By.css('#save-build-btn'));
+      expect(saveBuildBtnDe).toBeFalsy();
     });
 
   });
