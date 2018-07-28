@@ -758,6 +758,7 @@ describe('ChampionPage', () => {
       // Save Troll Build
       const saveBuildBtnDe = fixture.debugElement.query(By.css('#save-build-btn'));
       expect(saveBuildBtnDe.nativeElement.textContent).toBe('Save Build');
+      expect(newBuildBtnDe.nativeElement.disabled).toBeFalsy('Expected save build button to be enabled');
     }
 
   });
