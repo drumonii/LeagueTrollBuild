@@ -25,7 +25,7 @@ describe('HeaderComponent', () => {
   it('should show header with link to root', () => {
     fixture.detectChanges();
 
-    const headerLinkDe = fixture.debugElement.query(By.css('#header-title'));
+    const headerLinkDe = fixture.debugElement.query(By.css('#header-title-link'));
     expect(headerLinkDe.nativeElement.textContent).toBe(component.header);
     const headerRouterLink = headerLinkDe.injector.get(RouterLinkWithHref);
     expect(headerRouterLink.href).toBe('/');
