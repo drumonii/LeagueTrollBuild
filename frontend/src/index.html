@@ -12,7 +12,32 @@
   <ltb-root></ltb-root>
 
   <noscript>
-    <p>This site requires Javascript.</p>
+    <style>
+      body {
+        margin: 0 auto;
+        max-width: 50em;
+        font-family: "Helvetica", "Arial", sans-serif;
+      }
+      #javascript-required-alert {
+        border-radius: 0 5px 5px 0;
+        color: #cd0930;
+        border-color: #ff3860;
+        border-style: solid;
+        border-width: 0 0 0 5px;
+        background-color: #f5f5f5;
+        padding: 0.5em 1em;
+        margin-top: 1em;
+      }
+      #javascript-required-alert a {
+        color: #cd0930;
+      }
+      #javascript-required-alert a:visited {
+        color: #cd0930;
+      }
+    </style>
+    <div id="javascript-required-alert">
+      <p>Unfortunately this web site <strong>requires</strong> Javascript because it's a <a href="https://en.wikipedia.org/wiki/Single-page_application">single page application</a>.</p>
+    </div>
   </noscript>
 </body>
 </html>
