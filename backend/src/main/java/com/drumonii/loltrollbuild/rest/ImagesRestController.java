@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
@@ -30,7 +31,7 @@ public class ImagesRestController {
 				.contentLength(summonerSpell.getImage().getImgSrc().length)
 				.contentType(createMediaType(summonerSpell.getImage()))
 				.cacheControl(CacheControl.maxAge(31556926, TimeUnit.SECONDS))
-				.lastModified(summonerSpell.getLastModifiedDate().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli())
+				.lastModified(getLastModified(summonerSpell.getLastModifiedDate()))
 				.body(summonerSpell.getImage().getImgSrc());
 	}
 
@@ -43,7 +44,7 @@ public class ImagesRestController {
 				.contentLength(item.getImage().getImgSrc().length)
 				.contentType(createMediaType(item.getImage()))
 				.cacheControl(CacheControl.maxAge(31556926, TimeUnit.SECONDS))
-				.lastModified(item.getLastModifiedDate().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli())
+				.lastModified(getLastModified(item.getLastModifiedDate()))
 				.body(item.getImage().getImgSrc());
 	}
 
@@ -56,7 +57,7 @@ public class ImagesRestController {
 				.contentLength(champion.getImage().getImgSrc().length)
 				.contentType(createMediaType(champion.getImage()))
 				.cacheControl(CacheControl.maxAge(31556926, TimeUnit.SECONDS))
-				.lastModified(champion.getLastModifiedDate().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli())
+				.lastModified(getLastModified(champion.getLastModifiedDate()))
 				.body(champion.getImage().getImgSrc());
 	}
 
@@ -72,7 +73,7 @@ public class ImagesRestController {
 				.contentLength(championSpell.getImage().getImgSrc().length)
 				.contentType(createMediaType(championSpell.getImage()))
 				.cacheControl(CacheControl.maxAge(31556926, TimeUnit.SECONDS))
-				.lastModified(champion.getLastModifiedDate().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli())
+				.lastModified(getLastModified(champion.getLastModifiedDate()))
 				.body(championSpell.getImage().getImgSrc())).orElseGet(() -> ResponseEntity.notFound().build());
 	}
 
@@ -85,7 +86,7 @@ public class ImagesRestController {
 				.contentLength(champion.getPassive().getImage().getImgSrc().length)
 				.contentType(createMediaType(champion.getPassive().getImage()))
 				.cacheControl(CacheControl.maxAge(31556926, TimeUnit.SECONDS))
-				.lastModified(champion.getLastModifiedDate().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli())
+				.lastModified(getLastModified(champion.getLastModifiedDate()))
 				.body(champion.getPassive().getImage().getImgSrc());
 	}
 
@@ -98,7 +99,7 @@ public class ImagesRestController {
 				.contentLength(gameMap.getImage().getImgSrc().length)
 				.contentType(createMediaType(gameMap.getImage()))
 				.cacheControl(CacheControl.maxAge(31556926, TimeUnit.SECONDS))
-				.lastModified(gameMap.getLastModifiedDate().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli())
+				.lastModified(getLastModified(gameMap.getLastModifiedDate()))
 				.body(gameMap.getImage().getImgSrc());
 	}
 
@@ -120,6 +121,16 @@ public class ImagesRestController {
 	 */
 	private String getFileExtension(String filename) {
 		return filename.substring(filename.lastIndexOf('.') + 1);
+	}
+
+	/**
+	 * Gets the last modified time in milliseconds from the last modified date.
+	 *
+	 * @param lastModifiedDate the last modified date
+	 * @return the last modified time in milliseconds
+	 */
+	private long getLastModified(LocalDateTime lastModifiedDate) {
+		return lastModifiedDate.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
 	}
 
 }
