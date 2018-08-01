@@ -14,6 +14,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -50,6 +51,9 @@ public abstract class ImagesRestControllerTest {
 	@Autowired
 	private SummonerSpellsRepository summonerSpellsRepository;
 
+	@Value("${api.base-path}")
+	private String apiPath;
+
 	protected ChampionsResponse championsResponse;
 	protected ItemsResponse itemsResponse;
 	protected MapsResponse mapsResponse;
@@ -59,7 +63,7 @@ public abstract class ImagesRestControllerTest {
 
 	@Test
 	public void summonerSpellImg() throws Exception {
-		mockMvc.perform(get("/img/summoner-spells/{img}{fileExt}", 0,  ".jpg"))
+		mockMvc.perform(get("{apiPath}/img/summoner-spells/{img}{fileExt}", apiPath, 0,  ".jpg"))
 				.andExpect(status().isNotFound());
 
 		SummonerSpell smite = summonerSpellsResponse.getSummonerSpells().get("SummonerSmite");
@@ -67,7 +71,7 @@ public abstract class ImagesRestControllerTest {
 
 		String fileExt = getExtension(smite.getImage().getFull());
 
-		mockMvc.perform(get("/img/summoner-spells/{img}{fileExt}", smite.getId(),  fileExt))
+		mockMvc.perform(get("{apiPath}/img/summoner-spells/{img}{fileExt}", apiPath, smite.getId(),  fileExt))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(getContentType(fileExt)))
 				.andExpect(header().string("Cache-Control", is("max-age=" + 31536000)))
@@ -77,7 +81,7 @@ public abstract class ImagesRestControllerTest {
 
 	@Test
 	public void itemImg() throws Exception {
-		mockMvc.perform(get("/img/items/{img}{fileExt}", 0, ".jpg"))
+		mockMvc.perform(get("{apiPath}/img/items/{img}{fileExt}", apiPath, 0, ".jpg"))
 				.andExpect(status().isNotFound());
 
 		Item thornmail = itemsResponse.getItems().get("3075");
@@ -85,7 +89,7 @@ public abstract class ImagesRestControllerTest {
 
 		String fileExt = getExtension(thornmail.getImage().getFull());
 
-		mockMvc.perform(get("/img/items/{img}{fileExt}", thornmail.getId(), fileExt))
+		mockMvc.perform(get("{apiPath}/img/items/{img}{fileExt}", apiPath, thornmail.getId(), fileExt))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(getContentType(fileExt)))
 				.andExpect(header().string("Cache-Control", is("max-age=" + 31536000)))
@@ -95,7 +99,7 @@ public abstract class ImagesRestControllerTest {
 
 	@Test
 	public void championImg() throws Exception {
-		mockMvc.perform(get("/img/champions/{img}{fileExt}", 0, ".jpg"))
+		mockMvc.perform(get("{apiPath}/img/champions/{img}{fileExt}", apiPath, 0, ".jpg"))
 				.andExpect(status().isNotFound());
 
 		Champion shen = championsResponse.getChampions().get("Shen");
@@ -103,7 +107,7 @@ public abstract class ImagesRestControllerTest {
 
 		String fileExt = getExtension(shen.getImage().getFull());
 
-		mockMvc.perform(get("/img/champions/{img}{fileExt}", shen.getId(), fileExt))
+		mockMvc.perform(get("{apiPath}/img/champions/{img}{fileExt}", apiPath, shen.getId(), fileExt))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(getContentType(fileExt)))
 				.andExpect(header().string("Cache-Control", is("max-age=" + 31536000)))
@@ -113,7 +117,7 @@ public abstract class ImagesRestControllerTest {
 
 	@Test
 	public void championSpellImg() throws Exception {
-		mockMvc.perform(get("/img/champions/{id}/spell/{img}{fileExt}", 0, "key", ".jpg"))
+		mockMvc.perform(get("{apiPath}/img/champions/{id}/spell/{img}{fileExt}", apiPath, 0, "key", ".jpg"))
 				.andExpect(status().isNotFound());
 
 		Champion azir = championsResponse.getChampions().get("Azir");
@@ -124,20 +128,20 @@ public abstract class ImagesRestControllerTest {
 		}
 		String fileExt = getExtension(spell.get().getImage().getFull());
 
-		mockMvc.perform(get("/img/champions/{id}/spell/{img}{fileExt}", azir.getId(), spell.get().getKey(), fileExt))
+		mockMvc.perform(get("{apiPath}/img/champions/{id}/spell/{img}{fileExt}", apiPath, azir.getId(), spell.get().getKey(), fileExt))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(getContentType(fileExt)))
 				.andExpect(header().string("Cache-Control", is("max-age=" + 31536000)))
 				.andExpect(header().dateValue("Last-Modified", azir.getLastModifiedDate()
 						.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()));
 
-		mockMvc.perform(get("/img/champions/{id}/spell/{img}", azir.getId(), "test." + fileExt))
+		mockMvc.perform(get("{apiPath}/img/champions/{id}/spell/{img}", apiPath, azir.getId(), "test." + fileExt))
 				.andExpect(status().isNotFound());
 	}
 
 	@Test
 	public void championPassiveImg() throws Exception {
-		mockMvc.perform(get("/img//champions/{id}/passive/{passive}*", 0, "image.jpg"))
+		mockMvc.perform(get("{apiPath}/img//champions/{id}/passive/{passive}*", apiPath, 0, "image.jpg"))
 				.andExpect(status().isNotFound());
 
 		Champion ekko = championsResponse.getChampions().get("Ekko");
@@ -145,7 +149,7 @@ public abstract class ImagesRestControllerTest {
 
 		String fileExt = getExtension(ekko.getPassive().getImage().getFull());
 
-		mockMvc.perform(get("/img//champions/{id}/passive/{passive}*", ekko.getId(),
+		mockMvc.perform(get("{apiPath}/img//champions/{id}/passive/{passive}*", apiPath, ekko.getId(),
 				ekko.getPassive().getImage().getFull() + "." + fileExt))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(getContentType(fileExt)))
@@ -156,7 +160,7 @@ public abstract class ImagesRestControllerTest {
 
 	@Test
 	public void mapImg() throws Exception {
-		mockMvc.perform(get("/img/maps/map{img}{fileExt}", 0, ".jpg"))
+		mockMvc.perform(get("{apiPath}/img/maps/map{img}{fileExt}", apiPath, 0, ".jpg"))
 				.andExpect(status().isNotFound());
 
 		GameMap summonersRift = mapsResponse.getMaps().get(SUMMONERS_RIFT_SID);
@@ -164,7 +168,7 @@ public abstract class ImagesRestControllerTest {
 
 		String fileExt = getExtension(summonersRift.getImage().getFull());
 
-		mockMvc.perform(get("/img/maps/map{img}{fileExt}", summonersRift.getMapId(), fileExt))
+		mockMvc.perform(get("{apiPath}/img/maps/map{img}{fileExt}", apiPath, summonersRift.getMapId(), fileExt))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(getContentType(fileExt)))
 				.andExpect(header().string("Cache-Control", is("max-age=" + 31536000)))

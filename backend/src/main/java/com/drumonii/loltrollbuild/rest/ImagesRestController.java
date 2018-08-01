@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
  * REST controller for returning images of a model as a cacheable web response body.
  */
 @RestController
-@RequestMapping("/img")
+@RequestMapping("${api.base-path}/img")
 public class ImagesRestController {
 
 	@GetMapping(path = "/summoner-spells/{id}.*")
