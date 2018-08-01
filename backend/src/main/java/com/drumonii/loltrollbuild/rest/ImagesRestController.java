@@ -22,7 +22,7 @@ import java.util.concurrent.TimeUnit;
 @RequestMapping("/img")
 public class ImagesRestController {
 
-	@GetMapping(value = "/summoner-spells/{id}.*")
+	@GetMapping(path = "/summoner-spells/{id}.*")
 	public ResponseEntity<byte[]> summonerSpellImg(@PathVariable("id") SummonerSpell summonerSpell) {
 		if (summonerSpell == null) {
 			return ResponseEntity.notFound().build();
@@ -35,7 +35,7 @@ public class ImagesRestController {
 				.body(summonerSpell.getImage().getImgSrc());
 	}
 
-	@GetMapping(value = "/items/{id}.*")
+	@GetMapping(path = "/items/{id}.*")
 	public ResponseEntity<byte[]> itemImg(@PathVariable("id") Item item) {
 		if (item == null) {
 			return ResponseEntity.notFound().build();
@@ -48,7 +48,7 @@ public class ImagesRestController {
 				.body(item.getImage().getImgSrc());
 	}
 
-	@GetMapping(value = "/champions/{id}.*")
+	@GetMapping(path = "/champions/{id}.*")
 	public ResponseEntity<byte[]> championImg(@PathVariable("id") Champion champion) {
 		if (champion == null) {
 			return ResponseEntity.notFound().build();
@@ -61,7 +61,7 @@ public class ImagesRestController {
 				.body(champion.getImage().getImgSrc());
 	}
 
-	@GetMapping(value = "/champions/{id}/spell/{spellKey}.*")
+	@GetMapping(path = "/champions/{id}/spell/{spellKey}.*")
 	public ResponseEntity<byte[]> championSpellImg(@PathVariable("id") Champion champion, @PathVariable String spellKey) {
 		if (champion == null) {
 			return ResponseEntity.notFound().build();
@@ -77,7 +77,7 @@ public class ImagesRestController {
 				.body(championSpell.getImage().getImgSrc())).orElseGet(() -> ResponseEntity.notFound().build());
 	}
 
-	@GetMapping(value = "/champions/{id}/passive/{passive}.*")
+	@GetMapping(path = "/champions/{id}/passive/{passive}.*")
 	public ResponseEntity<byte[]> championPassiveImg(@PathVariable("id") Champion champion) {
 		if (champion == null) {
 			return ResponseEntity.notFound().build();
@@ -90,7 +90,7 @@ public class ImagesRestController {
 				.body(champion.getPassive().getImage().getImgSrc());
 	}
 
-	@GetMapping(value = "/maps/map{id}.*")
+	@GetMapping(path = "/maps/map{id}.*")
 	public ResponseEntity<byte[]> mapImg(@PathVariable("id") GameMap gameMap) {
 		if (gameMap == null) {
 			return ResponseEntity.notFound().build();
