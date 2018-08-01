@@ -30,7 +30,7 @@ public class ImagesRestController {
 		return ResponseEntity.ok()
 				.contentLength(summonerSpell.getImage().getImgSrc().length)
 				.contentType(createMediaType(summonerSpell.getImage()))
-				.cacheControl(CacheControl.maxAge(31556926, TimeUnit.SECONDS))
+				.cacheControl(CacheControl.maxAge(365, TimeUnit.DAYS))
 				.lastModified(getLastModified(summonerSpell.getLastModifiedDate()))
 				.body(summonerSpell.getImage().getImgSrc());
 	}
@@ -43,7 +43,7 @@ public class ImagesRestController {
 		return ResponseEntity.ok()
 				.contentLength(item.getImage().getImgSrc().length)
 				.contentType(createMediaType(item.getImage()))
-				.cacheControl(CacheControl.maxAge(31556926, TimeUnit.SECONDS))
+				.cacheControl(CacheControl.maxAge(365, TimeUnit.DAYS))
 				.lastModified(getLastModified(item.getLastModifiedDate()))
 				.body(item.getImage().getImgSrc());
 	}
@@ -56,7 +56,7 @@ public class ImagesRestController {
 		return ResponseEntity.ok()
 				.contentLength(champion.getImage().getImgSrc().length)
 				.contentType(createMediaType(champion.getImage()))
-				.cacheControl(CacheControl.maxAge(31556926, TimeUnit.SECONDS))
+				.cacheControl(CacheControl.maxAge(365, TimeUnit.DAYS))
 				.lastModified(getLastModified(champion.getLastModifiedDate()))
 				.body(champion.getImage().getImgSrc());
 	}
@@ -72,7 +72,7 @@ public class ImagesRestController {
 		return spell.map(championSpell -> ResponseEntity.ok()
 				.contentLength(championSpell.getImage().getImgSrc().length)
 				.contentType(createMediaType(championSpell.getImage()))
-				.cacheControl(CacheControl.maxAge(31556926, TimeUnit.SECONDS))
+				.cacheControl(CacheControl.maxAge(365, TimeUnit.DAYS))
 				.lastModified(getLastModified(champion.getLastModifiedDate()))
 				.body(championSpell.getImage().getImgSrc())).orElseGet(() -> ResponseEntity.notFound().build());
 	}
@@ -85,7 +85,7 @@ public class ImagesRestController {
 		return ResponseEntity.ok()
 				.contentLength(champion.getPassive().getImage().getImgSrc().length)
 				.contentType(createMediaType(champion.getPassive().getImage()))
-				.cacheControl(CacheControl.maxAge(31556926, TimeUnit.SECONDS))
+				.cacheControl(CacheControl.maxAge(365, TimeUnit.DAYS))
 				.lastModified(getLastModified(champion.getLastModifiedDate()))
 				.body(champion.getPassive().getImage().getImgSrc());
 	}
@@ -98,7 +98,7 @@ public class ImagesRestController {
 		return ResponseEntity.ok()
 				.contentLength(gameMap.getImage().getImgSrc().length)
 				.contentType(createMediaType(gameMap.getImage()))
-				.cacheControl(CacheControl.maxAge(31556926, TimeUnit.SECONDS))
+				.cacheControl(CacheControl.maxAge(365, TimeUnit.DAYS))
 				.lastModified(getLastModified(gameMap.getLastModifiedDate()))
 				.body(gameMap.getImage().getImgSrc());
 	}

@@ -70,7 +70,7 @@ public abstract class ImagesRestControllerTest {
 		mockMvc.perform(get("/img/summoner-spells/{img}{fileExt}", smite.getId(),  fileExt))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(getContentType(fileExt)))
-				.andExpect(header().string("Cache-Control", is("max-age=" + 31556926)))
+				.andExpect(header().string("Cache-Control", is("max-age=" + 31536000)))
 				.andExpect(header().dateValue("Last-Modified", smite.getLastModifiedDate()
 						.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()));
 	}
@@ -88,7 +88,7 @@ public abstract class ImagesRestControllerTest {
 		mockMvc.perform(get("/img/items/{img}{fileExt}", thornmail.getId(), fileExt))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(getContentType(fileExt)))
-				.andExpect(header().string("Cache-Control", is("max-age=" + 31556926)))
+				.andExpect(header().string("Cache-Control", is("max-age=" + 31536000)))
 				.andExpect(header().dateValue("Last-Modified", thornmail.getLastModifiedDate()
 						.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()));
 	}
@@ -106,7 +106,7 @@ public abstract class ImagesRestControllerTest {
 		mockMvc.perform(get("/img/champions/{img}{fileExt}", shen.getId(), fileExt))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(getContentType(fileExt)))
-				.andExpect(header().string("Cache-Control", is("max-age=" + 31556926)))
+				.andExpect(header().string("Cache-Control", is("max-age=" + 31536000)))
 				.andExpect(header().dateValue("Last-Modified", shen.getLastModifiedDate()
 						.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()));
 	}
@@ -127,7 +127,7 @@ public abstract class ImagesRestControllerTest {
 		mockMvc.perform(get("/img/champions/{id}/spell/{img}{fileExt}", azir.getId(), spell.get().getKey(), fileExt))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(getContentType(fileExt)))
-				.andExpect(header().string("Cache-Control", is("max-age=" + 31556926)))
+				.andExpect(header().string("Cache-Control", is("max-age=" + 31536000)))
 				.andExpect(header().dateValue("Last-Modified", azir.getLastModifiedDate()
 						.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()));
 
@@ -149,7 +149,7 @@ public abstract class ImagesRestControllerTest {
 				ekko.getPassive().getImage().getFull() + "." + fileExt))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(getContentType(fileExt)))
-				.andExpect(header().string("Cache-Control", is("max-age=" + 31556926)))
+				.andExpect(header().string("Cache-Control", is("max-age=" + 31536000)))
 				.andExpect(header().dateValue("Last-Modified", ekko.getLastModifiedDate()
 						.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()));
 	}
@@ -167,7 +167,7 @@ public abstract class ImagesRestControllerTest {
 		mockMvc.perform(get("/img/maps/map{img}{fileExt}", summonersRift.getMapId(), fileExt))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(getContentType(fileExt)))
-				.andExpect(header().string("Cache-Control", is("max-age=" + 31556926)))
+				.andExpect(header().string("Cache-Control", is("max-age=" + 31536000)))
 				.andExpect(header().dateValue("Last-Modified", summonersRift.getLastModifiedDate()
 						.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()));
 	}
