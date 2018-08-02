@@ -708,11 +708,17 @@ describe('BuildsPage', () => {
     const championsNameAndTitleDe = fixture.debugElement.query(By.css('#champion-name-and-title'));
     expect(championsNameAndTitleDe.nativeElement.textContent).toBe(`${build.champion.name} - ${build.champion.title}`);
 
+    const championImgDe = fixture.debugElement.query(By.css('#champion-img'));
+    expect(championImgDe.nativeElement.src).toContain(`/api/img/champions/${build.champion.id}`);
+
     const championPartypeDe = fixture.debugElement.query(By.css('#champion-partype'));
     expect(championPartypeDe.nativeElement.textContent).toBe(`(${build.champion.partype})`);
 
     const championTagsDe = fixture.debugElement.queryAll(By.css('.champion-tag'));
     expect(championTagsDe.map(championTagDe => championTagDe.nativeElement.textContent)).toEqual(build.champion.tags);
+
+    const championPassiveImgDe = fixture.debugElement.query(By.css('#champion-passive-img'));
+    expect(championPassiveImgDe.nativeElement.src).toContain(`/api/img/champions/${build.champion.id}/passive`);
 
     const championsPassiveDe = fixture.debugElement.query(By.css('#champion-passive-name'));
     expect(championsPassiveDe.nativeElement.textContent).toBe(build.champion.passive.name);
@@ -723,6 +729,8 @@ describe('BuildsPage', () => {
     const championSpellsDe = fixture.debugElement.queryAll(By.css('.champion-spell'));
     expect(championSpellsDe.length).toBe(build.champion.spells.length);
     for (let i = 0; i < championSpellsDe.length; i++) {
+      const championSpellImgDe = championSpellsDe[i].query(By.css('.champion-spell-img'));
+      expect(championSpellImgDe.nativeElement.src).toContain(`/api/img/champions/${build.champion.id}/spell/${build.champion.spells[i].key}`);
       const championSpellNameDe = championSpellsDe[i].query(By.css('.champion-spell-name'));
       expect(championSpellNameDe.nativeElement.textContent).toBe(build.champion.spells[i].name);
       const championSpellDescDe = championSpellsDe[i].query(By.css('.champion-spell-description'));
@@ -743,6 +751,8 @@ describe('BuildsPage', () => {
     expect(trollBuildItemsHeaderDe.nativeElement.textContent).toBe('Items');
     const trollBuildItemsDe = fixture.debugElement.queryAll(By.css('.troll-build-item'));
     for (let i = 0; i < trollBuildItemsDe.length; i++) {
+      const trollBuildItemImgDe = trollBuildItemsDe[i].query(By.css(`#troll-build-item${i + 1}-img`));
+      expect(trollBuildItemImgDe.nativeElement.src).toContain(`/api/img/items/${getItem(i).id}`);
       expect(trollBuildItemsDe[i].nativeElement.textContent.trim()).toBe(getItem(i).name);
     }
 
@@ -750,12 +760,16 @@ describe('BuildsPage', () => {
     expect(trollBuildSummonerSpellsHeaderDe.nativeElement.textContent).toBe('Summoner Spells');
     const trollBuildSummonerSpellsDe = fixture.debugElement.queryAll(By.css('.troll-build-summoner-spell'));
     for (let i = 0; i < trollBuildSummonerSpellsDe.length; i++) {
+      const trollBuildSummonerSpellsImgDe = trollBuildSummonerSpellsDe[i].query(By.css(`#troll-build-summoner-spell${i + 1}-img`));
+      expect(trollBuildSummonerSpellsImgDe.nativeElement.src).toContain(`/api/img/summoner-spells/${getSummonerSpell(i).id}`);
       expect(trollBuildSummonerSpellsDe[i].nativeElement.textContent.trim()).toBe(getSummonerSpell(i).name);
     }
 
     const trollBuildTrinketHeaderDe = fixture.debugElement.query(By.css('#troll-build-trinket-header'));
     expect(trollBuildTrinketHeaderDe.nativeElement.textContent).toBe('Trinket');
     const trollBuildTrinketDe = fixture.debugElement.query(By.css('.troll-build-trinket'));
+    const trollBuildTrinketImgDe = fixture.debugElement.query(By.css('#troll-build-trinket-img'));
+    expect(trollBuildTrinketImgDe.nativeElement.src).toContain(`/api/img/items/${build.trinket.id}`);
     expect(trollBuildTrinketDe.nativeElement.textContent.trim()).toBe(build.trinket.name);
 
     function getItem(index: number): Item {

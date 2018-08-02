@@ -1,17 +1,17 @@
 <ng-container *ngIf="champion">
   <h4 id="champion-name-and-title" class="is-capitalized">{{champion.name}} - {{champion.title}}</h4>
-  <img src="data:image/png;base64,{{champion.image.imgSrc}}">
+  <img id="champion-img" src="/api/img/champions/{{champion.id}}">
   <p id="champion-partype">({{champion.partype}})</p>
   <ul id="champion-tags">
     <li class="champion-tag" *ngFor="let tag of champion.tags">{{tag}}</li>
   </ul>
   <div>
-    <img src="data:image/png;base64,{{champion.passive.image.imgSrc}}">
+    <img id="champion-passive-img" src="/api/img/champions/{{champion.id}}/passive">
     <p id="champion-passive-name">{{champion.passive.name}}</p>
     <p id="champion-passive-description">{{champion.passive.description}}</p>
   </div>
   <div class="champion-spell" *ngFor="let spell of champion.spells">
-    <img src="data:image/png;base64,{{spell.image.imgSrc}}">
+    <img class="champion-spell-img" src="/api/img/champions/{{champion.id}}/spell/{{spell.key}}">
     <p class="champion-spell-name">{{spell.name}}</p>
     <p class="champion-spell-description">{{spell.description}}</p>
   </div>
@@ -34,21 +34,21 @@
     <div>
       <h4 id="troll-build-items-header">Items</h4>
       <div class="troll-build-item" *ngFor="let item of trollBuild.items">
-        <img src="data:image/png;base64,{{item.image.imgSrc}}">
+        <img class="troll-build-item-img" src="/api/img/items/{{item.id}}">
         {{item.name}}
       </div>
     </div>
     <div>
       <h4 id="troll-build-summoner-spells-header">Summoner Spells</h4>
       <div class="troll-build-summoner-spell" *ngFor="let summonerSpell of trollBuild.summonerSpells">
-        <img src="data:image/png;base64,{{summonerSpell.image.imgSrc}}">
+        <img class="troll-build-summoner-spells-img" src="/api/img/summoner-spells/{{summonerSpell.id}}">
         {{summonerSpell.name}}
       </div>
     </div>
     <div>
       <h4 id="troll-build-trinket-header">Trinket</h4>
       <div class="troll-build-trinket">
-        <img src="data:image/png;base64,{{trollBuild.trinket.image.imgSrc}}">
+        <img class="troll-build-trinket-img" src="/api/img/items/{{trollBuild.trinket.id}}">
         {{trollBuild.trinket.name}}
       </div>
     </div>

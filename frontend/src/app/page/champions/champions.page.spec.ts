@@ -30,95 +30,96 @@ describe('ChampionsPage', () => {
 
   describe('with Champions and Champion tags', () => {
 
-    const champions: Champion[] = [
-      {
-        id: 57,
-        key: 'Maokai',
-        name: 'Maokai',
-        title: 'the Twisted Treant',
-        partype: 'Mana',
-        info: {
-          attack: 3,
-          defense: 8,
-          magic: 6,
-          difficulty: 3
-        },
-        spells: [], // omitted for brevity
-        passive: {
-          name: 'Sap Magic',
-          description: 'Maokai\'s basic attack also heal him on a moderate cooldown. Each time Maokai casts a spell ' +
-            'or is struck by an enemy\'s spell, this cooldown is reduced.',
-          image: {
-            full: 'Maokai_Passive.png',
-            sprite: 'passive2.png',
-            group: 'passive',
-            imgSrc: [],
-            x: 432,
-            y: 0,
-            w: 48,
-            h: 48
-          }
-        },
+    const maokai: Champion =  {
+      id: 57,
+      key: 'Maokai',
+      name: 'Maokai',
+      title: 'the Twisted Treant',
+      partype: 'Mana',
+      info: {
+        attack: 3,
+        defense: 8,
+        magic: 6,
+        difficulty: 3
+      },
+      spells: [], // omitted for brevity
+      passive: {
+        name: 'Sap Magic',
+        description: 'Maokai\'s basic attack also heal him on a moderate cooldown. Each time Maokai casts a spell ' +
+          'or is struck by an enemy\'s spell, this cooldown is reduced.',
         image: {
-          full: 'Maokai.png',
-          sprite: 'champion2.png',
-          group: 'champion',
+          full: 'Maokai_Passive.png',
+          sprite: 'passive2.png',
+          group: 'passive',
           imgSrc: [],
           x: 432,
           y: 0,
           w: 48,
           h: 48
-        },
-        tags: [
-          'Mage',
-          'Tank'
-        ]
+        }
       },
-      {
-        id: 14,
-        key: 'Sion',
-        name: 'Sion',
-        title: 'The Undead Juggernaut',
-        partype: 'Mana',
-        info: {
-          attack: 5,
-          defense: 9,
-          magic: 3,
-          difficulty: 5
-        },
-        spells: [], // omitted for brevity
-        passive: {
-          name: 'Glory in Death',
-          description: 'After being killed, Sion will reanimate with rapidly decaying Health. His attacks become very ' +
-            'rapid, gain 100% Lifesteal and deal bonus damage equal to 10% of his target\'s maximum Health ' +
-            '(max 75 to monsters).<br><br>All his abilities are replaced with Death Surge, which grants a burst of Movement Speed.',
-          image: {
-            full: 'Sion_Passive1.png',
-            sprite: 'passive3.png',
-            group: 'passive',
-            imgSrc: [],
-            x: 0,
-            y: 48,
-            w: 48,
-            h: 48
-          }
-        },
+      image: {
+        full: 'Maokai.png',
+        sprite: 'champion2.png',
+        group: 'champion',
+        imgSrc: [],
+        x: 432,
+        y: 0,
+        w: 48,
+        h: 48
+      },
+      tags: [
+        'Mage',
+        'Tank'
+      ]
+    };
+
+    const sion: Champion = {
+      id: 14,
+      key: 'Sion',
+      name: 'Sion',
+      title: 'The Undead Juggernaut',
+      partype: 'Mana',
+      info: {
+        attack: 5,
+        defense: 9,
+        magic: 3,
+        difficulty: 5
+      },
+      spells: [], // omitted for brevity
+      passive: {
+        name: 'Glory in Death',
+        description: 'After being killed, Sion will reanimate with rapidly decaying Health. His attacks become very ' +
+          'rapid, gain 100% Lifesteal and deal bonus damage equal to 10% of his target\'s maximum Health ' +
+          '(max 75 to monsters).<br><br>All his abilities are replaced with Death Surge, which grants a burst of Movement Speed.',
         image: {
-          full: 'Sion.png',
-          sprite: 'champion3.png',
-          group: 'champion',
+          full: 'Sion_Passive1.png',
+          sprite: 'passive3.png',
+          group: 'passive',
           imgSrc: [],
           x: 0,
           y: 48,
           w: 48,
           h: 48
-        },
-        tags: [
-          'Fighter',
-          'Tank'
-        ]
-      }
-    ];
+        }
+      },
+      image: {
+        full: 'Sion.png',
+        sprite: 'champion3.png',
+        group: 'champion',
+        imgSrc: [],
+        x: 0,
+        y: 48,
+        w: 48,
+        h: 48
+      },
+      tags: [
+        'Fighter',
+        'Tank'
+      ]
+    };
+
+    const champions: Champion[] = [maokai, sion];
 
     const tags = ['Assassin', 'Fighter', 'Mage', 'Marksman', 'Support', 'Tank'];
 
@@ -219,16 +220,20 @@ describe('ChampionsPage', () => {
       expect(championsDe.length).toBe(champions.length);
 
       const championLinksDe = fixture.debugElement.queryAll(By.css('.champion-link'));
+      const championNamesDe = fixture.debugElement.queryAll(By.css('.champion-name'));
+      const championImgsDe = fixture.debugElement.queryAll(By.css('.champion-img'));
 
       const maokaiLinkDe = championLinksDe[0];
-      expect(maokaiLinkDe.nativeElement.textContent).toContain('Maokai');
       const maokaiRouterLink = maokaiLinkDe.injector.get(RouterLinkWithHref);
-      expect(maokaiRouterLink.href).toBe('/champions/Maokai');
+      expect(maokaiRouterLink.href).toBe(`/champions/${maokai.name}`);
+      expect(championNamesDe[0].nativeElement.textContent).toBe(maokai.name);
+      expect(championImgsDe[0].nativeElement.src).toContain(`/api/img/champions/${maokai.id}`);
 
       const sionLinkDe = championLinksDe[1];
-      expect(sionLinkDe.nativeElement.textContent).toContain('Sion');
       const sionRouterLink = sionLinkDe.injector.get(RouterLinkWithHref);
-      expect(sionRouterLink.href).toBe('/champions/Sion');
+      expect(sionRouterLink.href).toBe(`/champions/${sion.name}`);
+      expect(championNamesDe[1].nativeElement.textContent).toBe(sion.name);
+      expect(championImgsDe[1].nativeElement.src).toContain(`/api/img/champions/${sion.id}`);
     }
 
   });

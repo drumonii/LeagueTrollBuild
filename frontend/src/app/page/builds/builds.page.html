@@ -2,18 +2,18 @@
 
   <ng-container *ngSwitchCase="'Ok'">
     <h4 id="champion-name-and-title">{{build.champion.name}} - {{build.champion.title}}</h4>
-    <img src="data:image/png;base64,{{build.champion.image.imgSrc}}">
+    <img id="champion-img" src="/api/img/champions/{{build.champion.id}}">
     <p id="champion-partype">({{build.champion.partype}})</p>
     <ul id="champion-tags">
       <li class="champion-tag" *ngFor="let tag of build.champion.tags">{{tag}}</li>
     </ul>
     <div>
-      <img src="data:image/png;base64,{{build.champion.passive.image.imgSrc}}">
+      <img id="champion-passive-img" src="/api/img/champions/{{build.champion.id}}/passive">
       <p id="champion-passive-name">{{build.champion.passive.name}}</p>
       <p id="champion-passive-description">{{build.champion.passive.description}}</p>
     </div>
     <div class="champion-spell" *ngFor="let spell of build.champion.spells">
-      <img src="data:image/png;base64,{{spell.image.imgSrc}}">
+      <img class="champion-spell-img" src="/api/img/champions/{{build.champion.id}}/spell/{{spell.key}}">
       <p class="champion-spell-name">{{spell.name}}</p>
       <p class="champion-spell-description">{{spell.description}}</p>
     </div>
@@ -36,45 +36,45 @@
       <div>
         <h4 id="troll-build-items-header">Items</h4>
         <div class="troll-build-item">
-          <img src="data:image/png;base64,{{build.item1.image.imgSrc}}">
+          <img id="troll-build-item1-img" src="/api/img/items/{{build.item1.id}}">
           {{build.item1.name}}
         </div>
         <div class="troll-build-item">
-          <img src="data:image/png;base64,{{build.item2.image.imgSrc}}">
+          <img id="troll-build-item2-img" src="/api/img/items/{{build.item2.id}}">
           {{build.item2.name}}
         </div>
         <div class="troll-build-item">
-          <img src="data:image/png;base64,{{build.item3.image.imgSrc}}">
+          <img id="troll-build-item3-img" src="/api/img/items/{{build.item3.id}}">
           {{build.item3.name}}
         </div>
         <div class="troll-build-item">
-          <img src="data:image/png;base64,{{build.item4.image.imgSrc}}">
+          <img id="troll-build-item4-img" src="/api/img/items/{{build.item4.id}}">
           {{build.item4.name}}
         </div>
         <div class="troll-build-item">
-          <img src="data:image/png;base64,{{build.item5.image.imgSrc}}">
+          <img id="troll-build-item5-img" src="/api/img/items/{{build.item5.id}}">
           {{build.item5.name}}
         </div>
         <div class="troll-build-item">
-          <img src="data:image/png;base64,{{build.item6.image.imgSrc}}">
+          <img id="troll-build-item6-img" src="/api/img/items/{{build.item6.id}}">
           {{build.item6.name}}
         </div>
       </div>
       <div>
         <h4 id="troll-build-summoner-spells-header">Summoner Spells</h4>
         <div class="troll-build-summoner-spell">
-          <img src="data:image/png;base64,{{build.summonerSpell1.image.imgSrc}}">
+          <img id="troll-build-summoner-spell1-img" src="/api/img/summoner-spells/{{build.summonerSpell1.id}}">
           {{build.summonerSpell1.name}}
         </div>
         <div class="troll-build-summoner-spell">
-          <img src="data:image/png;base64,{{build.summonerSpell2.image.imgSrc}}">
+          <img id="troll-build-summoner-spell2-img" src="/api/img/summoner-spells/{{build.summonerSpell2.id}}">
           {{build.summonerSpell2.name}}
         </div>
       </div>
       <div>
         <h4 id="troll-build-trinket-header">Trinket</h4>
         <div class="troll-build-trinket">
-          <img src="data:image/png;base64,{{build.trinket.image.imgSrc}}">
+          <img id="troll-build-trinket-img" src="/api/img/items/{{build.trinket.id}}">
           {{build.trinket.name}}
         </div>
       </div>
