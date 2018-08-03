@@ -1,9 +1,11 @@
 package com.drumonii.loltrollbuild.model;
 
 import com.drumonii.loltrollbuild.model.image.GameMapImage;
+import com.drumonii.loltrollbuild.rest.view.ApiViews;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -28,6 +30,7 @@ public class GameMap implements Serializable {
 	@Id
 	@Column(name = "ID", unique = true, nullable = false)
 	@JsonProperty("mapId")
+	@JsonView({ ApiViews.AllApis.class })
 	private int mapId;
 
 	@Version
@@ -37,6 +40,7 @@ public class GameMap implements Serializable {
 
 	@Column(name = "NAME", nullable = false)
 	@JsonProperty("mapName")
+	@JsonView({ ApiViews.AllApis.class })
 	private String mapName;
 
 	@Column(name = "LAST_MODIFIED_DATE", nullable = false)
@@ -47,6 +51,7 @@ public class GameMap implements Serializable {
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "map")
 	@JsonManagedReference
 	@JsonProperty("image")
+	@JsonView({ ApiViews.RiotApi.class })
 	private GameMapImage image;
 
 	public int getMapId() {

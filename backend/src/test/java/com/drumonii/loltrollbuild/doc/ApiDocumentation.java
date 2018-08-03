@@ -130,8 +130,6 @@ public class ApiDocumentation {
 								.description("The name of the Summoner Spell"),
 						fieldWithPath("[*].description")
 								.description("The description of the Summoner Spell"),
-						fieldWithPath("[*].image")
-								.description("The image of the Summoner Spell"),
 						fieldWithPath("[*].cooldown")
 								.description("An array of cooldown values of the Summoner Spell"),
 						fieldWithPath("[*].key")
@@ -154,8 +152,6 @@ public class ApiDocumentation {
 								.description("The name of the Summoner Spell"),
 						fieldWithPath("description")
 								.description("The description of the Summoner Spell"),
-						fieldWithPath("image")
-								.description("The image of the Summoner Spell"),
 						fieldWithPath("cooldown")
 								.description("An array of cooldown values of the Summoner Spell"),
 						fieldWithPath("key")
@@ -178,8 +174,6 @@ public class ApiDocumentation {
 								.description("The name of the Summoner Spell"),
 						fieldWithPath("[*].description")
 								.description("The description of the Summoner Spell"),
-						fieldWithPath("[*].image")
-								.description("The image of the Summoner Spell"),
 						fieldWithPath("[*].cooldown")
 								.description("An array of cooldown values of the Summoner Spell"),
 						fieldWithPath("[*].key")
@@ -219,8 +213,6 @@ public class ApiDocumentation {
 								.description("The required ally champion of the Item"),
 						fieldWithPath("[*].maps")
 								.description("A map of Map IDs keys and boolean values whether the Item can be purchased in the Map"),
-						fieldWithPath("[*].image")
-								.description("The image of the Item"),
 						fieldWithPath("[*].gold")
 								.description("The gold of the Item"))));
 	}
@@ -252,8 +244,6 @@ public class ApiDocumentation {
 								.description("The required ally champion of the Item"),
 						fieldWithPath("maps")
 								.description("A map of Map IDs keys and boolean values whether the Item can be purchased in the Map"),
-						fieldWithPath("image")
-								.description("The image of the Item"),
 						fieldWithPath("gold")
 								.description("The gold of the Item"))));
 
@@ -287,8 +277,6 @@ public class ApiDocumentation {
 								.description("The required ally champion of the Item"),
 						fieldWithPath("[*].maps")
 								.description("A map of Map IDs keys and boolean values whether the Item can be purchased in the Map"),
-						fieldWithPath("[*].image")
-								.description("The image of the Item"),
 						fieldWithPath("[*].gold")
 								.description("The gold of the Item"))));
 	}
@@ -321,8 +309,6 @@ public class ApiDocumentation {
 								.description("The required ally champion of the Item"),
 						fieldWithPath("[*].maps")
 								.description("A map of Map IDs keys and boolean values whether the Item can be purchased in the Map"),
-						fieldWithPath("[*].image")
-								.description("The image of the Item"),
 						fieldWithPath("[*].gold")
 								.description("The gold of the Item"))));
 	}
@@ -354,8 +340,6 @@ public class ApiDocumentation {
 								.description("The required ally champion of the Item"),
 						fieldWithPath("[*].maps")
 								.description("A map of Map IDs keys and boolean values whether the Item can be purchased in the Map"),
-						fieldWithPath("[*].image")
-								.description("The image of the Item"),
 						fieldWithPath("[*].gold")
 								.description("The gold of the Item"))));
 	}
@@ -388,8 +372,6 @@ public class ApiDocumentation {
 								.description("The required ally champion of the Item"),
 						fieldWithPath("[*].maps")
 								.description("A map of Map IDs keys and boolean values whether the Item can be purchased in the Map"),
-						fieldWithPath("[*].image")
-								.description("The image of the Item"),
 						fieldWithPath("[*].gold")
 								.description("The gold of the Item"))));
 	}
@@ -421,8 +403,6 @@ public class ApiDocumentation {
 								.description("Statistical information of the Champion"),
 						fieldWithPath("[*].spells")
 								.description("Spell abilities of the Champion"),
-						fieldWithPath("[*].image")
-								.description("The image of the Champion"),
 						fieldWithPath("[*].tags")
 								.description("An array of tags of the Champion"))));
 	}
@@ -450,8 +430,6 @@ public class ApiDocumentation {
 								.description("Spell abilities of the Champion"),
 						fieldWithPath("passive")
 								.description("The passive ability of the Champion"),
-						fieldWithPath("image")
-								.description("The image of the Champion"),
 						fieldWithPath("tags")
 								.description("An array of tags of the Champion"))));
 	}
@@ -509,9 +487,7 @@ public class ApiDocumentation {
 						fieldWithPath("[*].mapId")
 								.description("The Id of the Map"),
 						fieldWithPath("[*].mapName")
-								.description("The name of the Map"),
-						fieldWithPath("[*].image")
-								.description("The image of the Map"))));
+								.description("The name of the Map"))));
 	}
 
 	@Test
@@ -525,9 +501,7 @@ public class ApiDocumentation {
 						fieldWithPath("mapId")
 								.description("The Id of the Map"),
 						fieldWithPath("mapName")
-								.description("The name of the Map"),
-						fieldWithPath("image")
-								.description("The image of the Map"))));
+								.description("The name of the Map"))));
 	}
 
 	/*

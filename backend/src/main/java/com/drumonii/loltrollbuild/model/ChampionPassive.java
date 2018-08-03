@@ -1,10 +1,8 @@
 package com.drumonii.loltrollbuild.model;
 
 import com.drumonii.loltrollbuild.model.image.ChampionPassiveImage;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.drumonii.loltrollbuild.rest.view.ApiViews;
+import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -24,15 +22,18 @@ public class ChampionPassive implements Serializable {
 
 	@Column(name = "NAME", nullable = false)
 	@JsonProperty("name")
+	@JsonView({ ApiViews.AllApis.class })
 	private String name;
 
 	@Column(name = "DESCRIPTION", nullable = false)
 	@JsonProperty("description")
+	@JsonView({ ApiViews.AllApis.class })
 	private String description;
 
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "passive")
 	@JsonManagedReference
 	@JsonProperty("image")
+	@JsonView({ ApiViews.RiotApi.class })
 	private ChampionPassiveImage image;
 
 	@OneToOne(fetch = FetchType.LAZY, optional = false)

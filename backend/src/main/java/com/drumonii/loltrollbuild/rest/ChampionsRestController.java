@@ -9,8 +9,10 @@ import com.drumonii.loltrollbuild.repository.MapsRepository;
 import com.drumonii.loltrollbuild.repository.SummonerSpellsRepository;
 import com.drumonii.loltrollbuild.repository.specification.ExampleSpecification;
 import com.drumonii.loltrollbuild.rest.status.ResourceNotFoundException;
+import com.drumonii.loltrollbuild.rest.view.ApiViews;
 import com.drumonii.loltrollbuild.util.ChampionUtil;
 import com.drumonii.loltrollbuild.util.GameMapUtil;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -52,6 +54,7 @@ public class ChampionsRestController {
 	 * @param champion the search {@link Champion} to define as the QBE
 	 * @return the {@link List} of {@link Champion}s
 	 */
+	@JsonView(ApiViews.LtbApi.class)
 	@GetMapping
 	public List<Champion> getChampions(
 			@SortDefault(sort = "name", direction = Direction.ASC) Sort sort, Champion champion) {
@@ -72,6 +75,7 @@ public class ChampionsRestController {
 	 * @param value the value to lookup the {@link Champion}
 	 * @return the {@link Champion}
 	 */
+	@JsonView(ApiViews.LtbApi.class)
 	@GetMapping(path = "/{value}")
 	public Champion getChampion(@PathVariable String value) {
 		Optional<Champion> champion;
@@ -100,6 +104,7 @@ public class ChampionsRestController {
 	 * @param mapId the map ID to generate the troll build
 	 * @return a {@link Map} of build type key with {@link List} of values.
 	 */
+	@JsonView(ApiViews.LtbApi.class)
 	@GetMapping(path = "/{value}/troll-build")
 	public TrollBuild trollBuild(@PathVariable String value,
 			@RequestParam(required = false, defaultValue = SUMMONERS_RIFT_SID) int mapId) {

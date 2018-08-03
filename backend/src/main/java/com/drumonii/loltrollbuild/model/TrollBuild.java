@@ -1,6 +1,8 @@
 package com.drumonii.loltrollbuild.model;
 
+import com.drumonii.loltrollbuild.rest.view.ApiViews;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonView;
 
 import java.util.List;
 
@@ -10,12 +12,15 @@ import java.util.List;
 public class TrollBuild {
 
 	@JsonProperty
+	@JsonView(ApiViews.LtbApi.class)
 	private List<Item> items;
 
 	@JsonProperty
+	@JsonView(ApiViews.LtbApi.class)
 	private List<SummonerSpell> summonerSpells;
 
 	@JsonProperty
+	@JsonView(ApiViews.LtbApi.class)
 	private Item trinket;
 
 	public List<Item> getItems() {

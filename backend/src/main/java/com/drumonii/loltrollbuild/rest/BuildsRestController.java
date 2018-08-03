@@ -4,6 +4,8 @@ import com.drumonii.loltrollbuild.model.Build;
 import com.drumonii.loltrollbuild.repository.*;
 import com.drumonii.loltrollbuild.rest.status.BadRequestException;
 import com.drumonii.loltrollbuild.rest.status.ResourceNotFoundException;
+import com.drumonii.loltrollbuild.rest.view.ApiViews;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Example;
@@ -81,6 +83,7 @@ public class BuildsRestController {
 	 * @param id the ID to lookup the {@link Build}
 	 * @return the {@link Build}
 	 */
+	@JsonView({ ApiViews.LtbApi.class })
 	@GetMapping(path = "/{id}")
 	public Build getBuild(@PathVariable int id) {
 		Optional<Build> optionalBuild = buildsRepository.findById(id);
@@ -114,6 +117,7 @@ public class BuildsRestController {
 	 * @param build the {@link Build} to save, if valid
 	 * @return the {@link Build}
 	 */
+	@JsonView({ ApiViews.LtbApi.class })
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	@ResponseBody

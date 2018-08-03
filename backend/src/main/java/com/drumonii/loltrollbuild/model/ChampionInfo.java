@@ -1,8 +1,10 @@
 package com.drumonii.loltrollbuild.model;
 
+import com.drumonii.loltrollbuild.rest.view.ApiViews;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonView;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -22,18 +24,22 @@ public class ChampionInfo implements Serializable {
 
 	@Column(name = "ATTACK", nullable = false)
 	@JsonProperty("attack")
+	@JsonView({ ApiViews.AllApis.class })
 	private int attack;
 
 	@Column(name = "DEFENSE", nullable = false)
 	@JsonProperty("defense")
+	@JsonView({ ApiViews.AllApis.class })
 	private int defense;
 
 	@Column(name = "MAGIC", nullable = false)
 	@JsonProperty("magic")
+	@JsonView({ ApiViews.AllApis.class })
 	private int magic;
 
 	@Column(name = "DIFFICULTY", nullable = false)
 	@JsonProperty("difficulty")
+	@JsonView({ ApiViews.AllApis.class })
 	private int difficulty;
 
 	@OneToOne(fetch = FetchType.LAZY, optional = false)

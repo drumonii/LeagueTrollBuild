@@ -1,8 +1,10 @@
 package com.drumonii.loltrollbuild.model;
 
+import com.drumonii.loltrollbuild.rest.view.ApiViews;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonView;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,6 +15,7 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "ITEM_GOLD")
+@JsonView({ ApiViews.AllApis.class })
 public class ItemGold implements Serializable {
 
     @Id

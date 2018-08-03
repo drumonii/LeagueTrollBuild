@@ -1,9 +1,11 @@
 package com.drumonii.loltrollbuild.model;
 
 import com.drumonii.loltrollbuild.model.image.ChampionImage;
+import com.drumonii.loltrollbuild.rest.view.ApiViews;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -31,6 +33,7 @@ public class Champion implements Serializable {
 	@Id
 	@Column(name = "ID", unique = true, nullable = false)
 	@JsonProperty("id")
+	@JsonView({ ApiViews.AllApis.class })
 	private int id;
 
 	@Version
@@ -40,34 +43,41 @@ public class Champion implements Serializable {
 
 	@Column(name = "CHAMPION_KEY", nullable = false)
 	@JsonProperty("key")
+	@JsonView({ ApiViews.AllApis.class })
 	private String key;
 
 	@Column(name = "NAME", nullable = false)
 	@JsonProperty("name")
+	@JsonView({ ApiViews.AllApis.class })
 	private String name;
 
 	@Column(name = "TITLE", nullable = false)
 	@JsonProperty("title")
+	@JsonView({ ApiViews.AllApis.class })
 	private String title;
 
 	@Column(name = "PARTYPE", nullable = false)
 	@JsonProperty("partype")
+	@JsonView({ ApiViews.AllApis.class })
 	private String partype;
 
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "champion")
 	@JsonManagedReference
 	@JsonProperty("info")
+	@JsonView({ ApiViews.AllApis.class })
 	private ChampionInfo info;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "champion")
 	@Fetch(FetchMode.SELECT)
 	@JsonManagedReference
 	@JsonProperty("spells")
+	@JsonView({ ApiViews.AllApis.class })
 	private List<ChampionSpell> spells;
 
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "champion")
 	@JsonManagedReference
 	@JsonProperty("passive")
+	@JsonView({ ApiViews.AllApis.class })
 	private ChampionPassive passive;
 
 	@Column(name = "LAST_MODIFIED_DATE", nullable = false)
@@ -78,6 +88,7 @@ public class Champion implements Serializable {
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "champion")
 	@JsonManagedReference
 	@JsonProperty("image")
+	@JsonView({ ApiViews.RiotApi.class })
 	private ChampionImage image;
 
 	@ElementCollection(fetch = FetchType.EAGER)
@@ -85,6 +96,7 @@ public class Champion implements Serializable {
 	@Column(name = "TAG")
 	@OrderBy("TAG ASC")
 	@JsonProperty("tags")
+	@JsonView({ ApiViews.AllApis.class })
 	private SortedSet<String> tags;
 
 	public int getId() {

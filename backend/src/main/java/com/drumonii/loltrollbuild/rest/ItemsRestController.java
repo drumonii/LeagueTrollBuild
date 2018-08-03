@@ -4,6 +4,8 @@ import com.drumonii.loltrollbuild.model.Item;
 import com.drumonii.loltrollbuild.repository.ItemsRepository;
 import com.drumonii.loltrollbuild.repository.specification.ExampleSpecification;
 import com.drumonii.loltrollbuild.rest.status.ResourceNotFoundException;
+import com.drumonii.loltrollbuild.rest.view.ApiViews;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -35,6 +37,7 @@ public class ItemsRestController {
 	 * @param item the search {@link Item} to define as the QBE
 	 * @return the {@link List} of {@link Item}s
 	 */
+	@JsonView(ApiViews.LtbApi.class)
 	@GetMapping
 	public List<Item> getItems(
 			@PageableDefault(sort = "name", direction = Direction.ASC) Sort sort, Item item) {
@@ -55,6 +58,7 @@ public class ItemsRestController {
 	 * @param id the ID to lookup the {@link Item}
 	 * @return the {@link Item}
 	 */
+	@JsonView(ApiViews.LtbApi.class)
 	@GetMapping(path = "/{id}")
 	public Item getItem(@PathVariable int id) {
 		Optional<Item> item = itemsRepository.findById(id);
@@ -68,6 +72,7 @@ public class ItemsRestController {
 	 * @param mapId the map ID to get eligible {@link Item}s
 	 * @return the {@link List} of {@link Item}s
 	 */
+	@JsonView(ApiViews.LtbApi.class)
 	@GetMapping(path = "/boots")
 	public List<Item> getBoots(@RequestParam(required = false, defaultValue = SUMMONERS_RIFT_SID) int mapId) {
 		return itemsRepository.boots(mapId);
@@ -80,6 +85,7 @@ public class ItemsRestController {
 	 * @param mapId the map ID to get eligible trinkets
 	 * @return the {@link List} of {@link Item}s
 	 */
+	@JsonView(ApiViews.LtbApi.class)
 	@GetMapping(path = "/trinkets")
 	public List<Item> getTrinkets(@RequestParam(required = false, defaultValue = SUMMONERS_RIFT_SID) int mapId) {
 		return itemsRepository.trinkets(mapId);
@@ -91,6 +97,7 @@ public class ItemsRestController {
 	 *
 	 * @return the {@link List} of {@link Item}s
 	 */
+	@JsonView(ApiViews.LtbApi.class)
 	@GetMapping(path = "/viktor-only")
 	public List<Item> getViktorOnly() {
 		return itemsRepository.viktorOnly();
@@ -103,6 +110,7 @@ public class ItemsRestController {
 	 * @param mapId the map ID to get eligible {@link Item}s for the troll build
 	 * @return the {@link List} of {@link Item}s
 	 */
+	@JsonView(ApiViews.LtbApi.class)
 	@GetMapping(value = "/for-troll-build")
 	public List<Item> getForTrollBuild(@RequestParam(required = false, defaultValue = SUMMONERS_RIFT_SID) int mapId) {
 		return itemsRepository.forTrollBuild(mapId);

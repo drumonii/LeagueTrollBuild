@@ -4,6 +4,8 @@ import com.drumonii.loltrollbuild.model.GameMap;
 import com.drumonii.loltrollbuild.repository.MapsRepository;
 import com.drumonii.loltrollbuild.repository.specification.ExampleSpecification;
 import com.drumonii.loltrollbuild.rest.status.ResourceNotFoundException;
+import com.drumonii.loltrollbuild.rest.view.ApiViews;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -36,6 +38,7 @@ public class MapsRestController {
 	 * @param gameMap the search {@link GameMap} to define as the QBE
 	 * @return the {@link List} of {@link GameMap}s
 	 */
+	@JsonView(ApiViews.LtbApi.class)
 	@GetMapping
 	public List<GameMap> getGameMaps(
 			@PageableDefault(sort = "mapName", direction = Direction.ASC) Sort sort, GameMap gameMap) {
@@ -54,6 +57,7 @@ public class MapsRestController {
 	 * @param id the ID to lookup the {@link GameMap}
 	 * @return the {@link GameMap}
 	 */
+	@JsonView(ApiViews.LtbApi.class)
 	@GetMapping(path = "/{id}")
 	public GameMap getGameMap(@PathVariable int id) {
 		Optional<GameMap> map = mapsRepository.findById(id);
@@ -66,6 +70,7 @@ public class MapsRestController {
 	 *
 	 * @return the {@link List} of {@link GameMap}s
 	 */
+	@JsonView(ApiViews.LtbApi.class)
 	@GetMapping(path = "/for-troll-build")
 	public List<GameMap> getForTrollBuild() {
 		return mapsRepository.forTrollBuild();

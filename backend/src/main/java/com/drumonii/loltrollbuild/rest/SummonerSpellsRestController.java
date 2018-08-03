@@ -5,6 +5,8 @@ import com.drumonii.loltrollbuild.model.SummonerSpell.GameMode;
 import com.drumonii.loltrollbuild.repository.SummonerSpellsRepository;
 import com.drumonii.loltrollbuild.repository.specification.ExampleSpecification;
 import com.drumonii.loltrollbuild.rest.status.ResourceNotFoundException;
+import com.drumonii.loltrollbuild.rest.view.ApiViews;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -34,6 +36,7 @@ public class SummonerSpellsRestController {
 	 * @param summonerSpell the search {@link SummonerSpell} to define as the QBE
 	 * @return the {@link List} of {@link SummonerSpell}s
 	 */
+	@JsonView(ApiViews.LtbApi.class)
 	@GetMapping
 	public List<SummonerSpell> getSummonerSpells(
 			@SortDefault(sort = "name", direction = Direction.ASC) Sort sort, SummonerSpell summonerSpell) {
@@ -52,6 +55,7 @@ public class SummonerSpellsRestController {
 	 * @param id the ID to lookup the {@link SummonerSpell}
 	 * @return the {@link SummonerSpell}
 	 */
+	@JsonView(ApiViews.LtbApi.class)
 	@GetMapping(path = "/{id}")
 	public SummonerSpell getSummonerSpell(@PathVariable int id) {
 		Optional<SummonerSpell> summonerSpell = summonerSpellsRepository.findById(id);
@@ -65,6 +69,7 @@ public class SummonerSpellsRestController {
 	 * @param mode the {@link GameMode} to get eligible {@link SummonerSpell}s for the troll build
 	 * @return the {@link List} of {@link SummonerSpell}s
 	 */
+	@JsonView(ApiViews.LtbApi.class)
 	@GetMapping(path = "/for-troll-build")
 	public List<SummonerSpell> getForTrollBuild(@RequestParam(required = false, defaultValue = "CLASSIC") GameMode mode) {
 		return summonerSpellsRepository.forTrollBuild(mode);

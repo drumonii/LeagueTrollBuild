@@ -1,9 +1,11 @@
 package com.drumonii.loltrollbuild.model;
 
 import com.drumonii.loltrollbuild.model.image.SummonerSpellImage;
+import com.drumonii.loltrollbuild.rest.view.ApiViews;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -27,6 +29,7 @@ public class SummonerSpell implements Serializable {
 	@Id
 	@Column(name = "ID", unique = true, nullable = false)
 	@JsonProperty("id")
+	@JsonView({ ApiViews.AllApis.class })
 	private int id;
 
 	@Version
@@ -36,10 +39,12 @@ public class SummonerSpell implements Serializable {
 
 	@Column(name = "NAME", nullable = false)
 	@JsonProperty("name")
+	@JsonView({ ApiViews.AllApis.class })
 	private String name;
 
 	@Column(name = "DESCRIPTION", nullable = false)
 	@JsonProperty("description")
+	@JsonView({ ApiViews.AllApis.class })
 	private String description;
 
 	@Column(name = "LAST_MODIFIED_DATE", nullable = false)
@@ -50,6 +55,7 @@ public class SummonerSpell implements Serializable {
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "summonerSpell")
 	@JsonManagedReference
 	@JsonProperty("image")
+	@JsonView({ ApiViews.RiotApi.class })
 	private SummonerSpellImage image;
 
 	@ElementCollection(fetch = FetchType.EAGER)
@@ -57,10 +63,12 @@ public class SummonerSpell implements Serializable {
 	@Column(name = "COOLDOWN")
 	@OrderBy("COOLDOWN ASC")
 	@JsonProperty("cooldown")
+	@JsonView({ ApiViews.AllApis.class })
 	private SortedSet<Integer> cooldown;
 
 	@Column(name = "KEY", nullable = false)
 	@JsonProperty("key")
+	@JsonView({ ApiViews.AllApis.class })
 	private String key;
 
 	@ElementCollection(fetch = FetchType.EAGER)
@@ -69,6 +77,7 @@ public class SummonerSpell implements Serializable {
 	@Column(name = "MODE")
 	@OrderBy("MODE ASC")
 	@JsonProperty("modes")
+	@JsonView({ ApiViews.AllApis.class })
 	private SortedSet<GameMode> modes;
 
 	public int getId() {

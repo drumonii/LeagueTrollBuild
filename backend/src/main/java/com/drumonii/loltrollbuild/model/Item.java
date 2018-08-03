@@ -1,9 +1,11 @@
 package com.drumonii.loltrollbuild.model;
 
 import com.drumonii.loltrollbuild.model.image.ItemImage;
+import com.drumonii.loltrollbuild.rest.view.ApiViews;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -30,7 +32,7 @@ public class Item implements Serializable {
 
 	@Id
 	@Column(name = "ID", unique = true, nullable = false)
-	@JsonProperty("id")
+	@JsonView({ ApiViews.AllApis.class })
 	private int id;
 
 	@Version
@@ -40,18 +42,22 @@ public class Item implements Serializable {
 
 	@Column(name = "NAME")
 	@JsonProperty("name")
+	@JsonView({ ApiViews.AllApis.class })
 	private String name;
 
 	@Column(name = "ITEM_GROUP")
 	@JsonProperty("group")
+	@JsonView({ ApiViews.AllApis.class })
 	private String group;
 
 	@Column(name = "CONSUMED")
 	@JsonProperty("consumed")
+	@JsonView({ ApiViews.AllApis.class })
 	private Boolean consumed;
 
 	@Column(name = "DESCRIPTION")
 	@JsonProperty("description")
+	@JsonView({ ApiViews.AllApis.class })
 	private String description;
 
 	@ElementCollection(fetch = FetchType.EAGER)
@@ -60,6 +66,7 @@ public class Item implements Serializable {
 	@Column(name = "ITEM_FROM")
 	@OrderBy("ITEM_FROM ASC")
 	@JsonProperty("from")
+	@JsonView({ ApiViews.AllApis.class })
 	private List<Integer> from;
 
 	@ElementCollection(fetch = FetchType.EAGER)
@@ -67,14 +74,17 @@ public class Item implements Serializable {
 	@Column(name = "ITEM_INTO")
 	@OrderBy("ITEM_INTO ASC")
 	@JsonProperty("into")
+	@JsonView({ ApiViews.AllApis.class })
 	private SortedSet<Integer> into;
 
 	@Column(name = "REQUIRED_CHAMPION")
 	@JsonProperty("requiredChampion")
+	@JsonView({ ApiViews.AllApis.class })
 	private String requiredChampion;
 
 	@Column(name = "REQUIRED_ALLY")
 	@JsonProperty("requiredAlly")
+	@JsonView({ ApiViews.AllApis.class })
 	private String requiredAlly;
 
 	@Column(name = "LAST_MODIFIED_DATE", nullable = false)
@@ -88,16 +98,19 @@ public class Item implements Serializable {
 	@Column(name = "MAP")
 	@OrderBy("MAPS_KEY ASC")
 	@JsonProperty("maps")
+	@JsonView({ ApiViews.AllApis.class })
 	private SortedMap<Integer, Boolean> maps;
 
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "item")
 	@JsonManagedReference
 	@JsonProperty("image")
+	@JsonView({ ApiViews.RiotApi.class })
 	private ItemImage image;
 
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "item")
 	@JsonManagedReference
 	@JsonProperty("gold")
+	@JsonView({ ApiViews.AllApis.class })
 	private ItemGold gold;
 
 	public int getId() {
