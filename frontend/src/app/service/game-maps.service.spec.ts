@@ -22,17 +22,7 @@ describe('GameMapsService', () => {
     const mockGameMaps: GameMap[] = [
       {
         mapId: 11,
-        mapName: 'Summoner\'s Rift',
-        image: {
-          full: 'map11.png',
-          sprite: 'map0.png',
-          group: 'map',
-          imgSrc: [],
-          x: 96,
-          y: 0,
-          w: 48,
-          h: 48
-        }
+        mapName: 'Summoner\'s Rift'
       }
     ];
 

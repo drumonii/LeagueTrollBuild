@@ -45,17 +45,7 @@ describe('ChampionPage', () => {
           'If a unit is struck, he charges himself with Crystal Energy for {{ e2 }} seconds.<br /><br />While Skarner ' +
           'is charged, Crystal Slash deals <span class=\'colorFF8C00\'>{{ f1 }}</span> <span class=\'color99FF99\'> ' +
           '(+{{ a1 }})</span> bonus magic damage.<br /><br />Basic attacks against non-structures lower Crystal ' +
-          'Slash\'s cooldown by 0.25 seconds (quadrupled against champions).',
-        image: {
-          full: 'SkarnerVirulentSlash.png',
-          sprite: 'spell10.png',
-          group: 'spell',
-          imgSrc: [],
-          x: 288,
-          y: 96,
-          w: 48,
-          h: 48
-        }
+          'Slash\'s cooldown by 0.25 seconds (quadrupled against champions).'
       },
       {
         key: 'SkarnerExoskeleton',
@@ -63,17 +53,7 @@ describe('ChampionPage', () => {
         description: 'Skarner gains a shield and has increased Movement Speed while the shield persists.',
         tooltip: 'Skarner is shielded for <span class=\'colorCC3300\'>{{ f1 }}</span> ({{ e1 }}% of his maximum health) ' +
           '<span class=\'color99FF99\'>(+{{ a1 }})</span> damage for {{ e4 }} seconds. While the shield persists, ' +
-          'Skarner gains movement speed that ramps up to {{ e5 }}% over 3 seconds.',
-        image: {
-          full: 'SkarnerExoskeleton.png',
-          sprite: 'spell10.png',
-          group: 'spell',
-          imgSrc: [],
-          x: 336,
-          y: 96,
-          w: 48,
-          h: 48
-        }
+          'Skarner gains movement speed that ramps up to {{ e5 }}% over 3 seconds.'
       },
       {
         key: 'SkarnerFracture',
@@ -86,17 +66,7 @@ describe('ChampionPage', () => {
           'of crystalline energy, dealing {{ e1 }} <span class=\'color99FF99\'>(+{{ a1 }})</span> magic damage, slowing ' +
           'targets hit by {{ e8 }}% for {{ e7 }} seconds and reducing the blast\'s speed.<br /><br />Enemies hit by ' +
           'Fracture are afflicted with Crystal Venom for {{ e6 }} seconds, causing Skarner\'s next basic attack against ' +
-          'them to deal {{ e2 }} additional physical damage and stun the target for {{ e3 }} second.',
-        image: {
-          full: 'SkarnerFracture.png',
-          sprite: 'spell10.png',
-          group: 'spell',
-          imgSrc: [],
-          x: 384,
-          y: 96,
-          w: 48,
-          h: 48
-        }
+          'them to deal {{ e2 }} additional physical damage and stun the target for {{ e3 }} second.'
       },
       {
         key: 'SkarnerImpale',
@@ -106,43 +76,13 @@ describe('ChampionPage', () => {
         tooltip: 'Skarner suppresses an enemy champion for {{ e1 }} seconds, dealing <span class=\'colorFF8C00\'> ' +
           '{{ a2 }}</span> physical damage plus {{ e2 }} <span class=\'color99FF99\'>(+{{ a1 }})</span> magic damage. ' +
           'Skarner can move freely during this time, and will drag his helpless victim around with him. When the effect ' +
-          'ends, Skarner\'s target will be dealt the same damage again.',
-        image: {
-          full: 'SkarnerImpale.png',
-          sprite: 'spell10.png',
-          group: 'spell',
-          imgSrc: [],
-          x: 432,
-          y: 96,
-          w: 48,
-          h: 48
-        }
+          'ends, Skarner\'s target will be dealt the same damage again.'
       }
     ],
     passive: {
       name: 'Crystal Spires',
       description: 'Skarner\'s presence causes crystals to spawn in set locations around the map. While near crystals ' +
-        'his team owns, Skarner gains tremendous movement speed, attack speed, and mana regeneration.',
-      image: {
-        full: 'Skarner_Passive.png',
-        sprite: 'passive3.png',
-        group: 'passive',
-        imgSrc: [],
-        x: 96,
-        y: 48,
-        w: 48,
-        h: 48
-      }
-    },
-    image: {
-      full: 'Skarner.png',
-      sprite: 'champion3.png',
-      group: 'champion',
-      imgSrc: [],
-      x: 96,
-      y: 48,
-      w: 48,
-      h: 48
+        'his team owns, Skarner gains tremendous movement speed, attack speed, and mana regeneration.'
     },
     tags: [
       'Fighter',
@@ -224,16 +164,6 @@ describe('ChampionPage', () => {
         id: 12,
         name: 'Teleport',
         description: 'After channeling for 4.5 seconds, teleports your champion to target allied structure, minion, or ward.',
-        image: {
-          full: 'SummonerTeleport.png',
-          sprite: 'spell0.png',
-          group: 'spell',
-          imgSrc: [],
-          x: 336,
-          y: 48,
-          w: 48,
-          h: 48
-        },
         cooldown: [
           300
         ],
@@ -247,16 +177,6 @@ describe('ChampionPage', () => {
         id: 4,
         name: 'Flash',
         description: 'Teleports your champion a short distance toward your cursor\'s location.',
-        image: {
-          full: 'SummonerFlash.png',
-          sprite: 'spell0.png',
-          group: 'spell',
-          imgSrc: [],
-          x: 288,
-          y: 0,
-          w: 48,
-          h: 48
-        },
         cooldown: [
           300
         ],
@@ -293,16 +213,6 @@ describe('ChampionPage', () => {
           '18': true,
           '19': true
         },
-        image: {
-          full: '3117.png',
-          sprite: 'item1.png',
-          group: 'item',
-          imgSrc: [],
-          x: 48,
-          y: 240,
-          w: 48,
-          h: 48
-        },
         gold: {
           base: 600,
           total: 900,
@@ -337,16 +247,6 @@ describe('ChampionPage', () => {
           '16': false,
           '18': true,
           '19': true
-        },
-        image: {
-          full: '3222.png',
-          sprite: 'item1.png',
-          group: 'item',
-          imgSrc: [],
-          x: 96,
-          y: 432,
-          w: 48,
-          h: 48
         },
         gold: {
           base: 500,
@@ -385,16 +285,6 @@ describe('ChampionPage', () => {
           '18': true,
           '19': true
         },
-        image: {
-          full: '3050.png',
-          sprite: 'item1.png',
-          group: 'item',
-          imgSrc: [],
-          x: 144,
-          y: 0,
-          w: 48,
-          h: 48
-        },
         gold: {
           base: 250,
           total: 2250,
@@ -430,16 +320,6 @@ describe('ChampionPage', () => {
           '18': true,
           '19': false
         },
-        image: {
-          full: '3003.png',
-          sprite: 'item0.png',
-          group: 'item',
-          imgSrc: [],
-          x: 192,
-          y: 336,
-          w: 48,
-          h: 48
-        },
         gold: {
           base: 915,
           total: 3200,
@@ -470,16 +350,6 @@ describe('ChampionPage', () => {
           '16': false,
           '18': true,
           '19': true
-        },
-        image: {
-          full: '3065.png',
-          sprite: 'item1.png',
-          group: 'item',
-          imgSrc: [],
-          x: 432,
-          y: 0,
-          w: 48,
-          h: 48
         },
         gold: {
           base: 800,
@@ -515,16 +385,6 @@ describe('ChampionPage', () => {
           '18': true,
           '19': true
         },
-        image: {
-          full: '3072.png',
-          sprite: 'item1.png',
-          group: 'item',
-          imgSrc: [],
-          x: 240,
-          y: 48,
-          w: 48,
-          h: 48
-        },
         gold: {
           base: 1150,
           total: 3700,
@@ -557,16 +417,6 @@ describe('ChampionPage', () => {
         '16': false,
         '18': true,
         '19': false
-      },
-      image: {
-        full: '3341.png',
-        sprite: 'item2.png',
-        group: 'item',
-        imgSrc: [],
-        x: 384,
-        y: 0,
-        w: 48,
-        h: 48
       },
       gold: {
         base: 0,

@@ -46,27 +46,7 @@ describe('ChampionsPage', () => {
       passive: {
         name: 'Sap Magic',
         description: 'Maokai\'s basic attack also heal him on a moderate cooldown. Each time Maokai casts a spell ' +
-          'or is struck by an enemy\'s spell, this cooldown is reduced.',
-        image: {
-          full: 'Maokai_Passive.png',
-          sprite: 'passive2.png',
-          group: 'passive',
-          imgSrc: [],
-          x: 432,
-          y: 0,
-          w: 48,
-          h: 48
-        }
-      },
-      image: {
-        full: 'Maokai.png',
-        sprite: 'champion2.png',
-        group: 'champion',
-        imgSrc: [],
-        x: 432,
-        y: 0,
-        w: 48,
-        h: 48
+          'or is struck by an enemy\'s spell, this cooldown is reduced.'
       },
       tags: [
         'Mage',
@@ -91,27 +71,7 @@ describe('ChampionsPage', () => {
         name: 'Glory in Death',
         description: 'After being killed, Sion will reanimate with rapidly decaying Health. His attacks become very ' +
           'rapid, gain 100% Lifesteal and deal bonus damage equal to 10% of his target\'s maximum Health ' +
-          '(max 75 to monsters).<br><br>All his abilities are replaced with Death Surge, which grants a burst of Movement Speed.',
-        image: {
-          full: 'Sion_Passive1.png',
-          sprite: 'passive3.png',
-          group: 'passive',
-          imgSrc: [],
-          x: 0,
-          y: 48,
-          w: 48,
-          h: 48
-        }
-      },
-      image: {
-        full: 'Sion.png',
-        sprite: 'champion3.png',
-        group: 'champion',
-        imgSrc: [],
-        x: 0,
-        y: 48,
-        w: 48,
-        h: 48
+          '(max 75 to monsters).<br><br>All his abilities are replaced with Death Surge, which grants a burst of Movement Speed.'
       },
       tags: [
         'Fighter',

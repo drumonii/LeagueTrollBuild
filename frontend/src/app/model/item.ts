@@ -1,4 +1,3 @@
-import { ItemImage } from './item-image';
 import { ItemGold } from './item-gold';
 
 /**
@@ -15,7 +14,6 @@ export class Item {
   requiredChampion: string;
   requiredAlly: string;
   maps: ItemMap;
-  image: ItemImage;
   gold: ItemGold;
 }
 

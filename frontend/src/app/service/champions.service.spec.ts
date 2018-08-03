@@ -36,27 +36,7 @@ describe('ChampionsService', () => {
         passive: {
           name: 'Night Hunter',
           description: 'Vayne ruthlessly hunts evil-doers, gaining 30 movement speed when moving toward nearby enemy ' +
-            'champions.',
-          image: {
-            full: 'Vayne_NightHunter.png',
-            sprite: 'passive4.png',
-            group: 'passive',
-            imgSrc: [],
-            x: 0,
-            y: 0,
-            w: 48,
-            h: 48
-          }
-        },
-        image: {
-          full: 'Vayne.png',
-          sprite: 'champion4.png',
-          group: 'champion',
-          imgSrc: [],
-          x: 0,
-          y: 0,
-          w: 48,
-          h: 48
+            'champions.'
         },
         tags: [
           'Assassin',

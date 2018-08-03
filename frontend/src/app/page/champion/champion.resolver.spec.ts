@@ -58,27 +58,7 @@ describe('ChampionResolver', () => {
         name: 'Mark of the Storm',
         description: 'Kennen\'s abilities add one stack of Mark of the Storm to their target for 6 seconds. If the ' +
           'target reaches 3 stacks, it is stunned for 1.25 seconds and Kennen gains 25 Energy. <br><br>' +
-          '<font color=\'#99FF99\'>The stun will be a diminished duration of 0.5 seconds if it occurs again within 6 seconds.</font>',
-        image: {
-          full: 'Kennen_Passive.png',
-          sprite: 'passive1.png',
-          group: 'passive',
-          imgSrc: [],
-          x: 240,
-          y: 96,
-          w: 48,
-          h: 48
-        }
-      },
-      image: {
-        full: 'Kennen.png',
-        sprite: 'champion1.png',
-        group: 'champion',
-        imgSrc: [],
-        x: 240,
-        y: 96,
-        w: 48,
-        h: 48
+          '<font color=\'#99FF99\'>The stun will be a diminished duration of 0.5 seconds if it occurs again within 6 seconds.</font>'
       },
       tags: [
         'Mage',

@@ -37,27 +37,7 @@ describe('ChampionService', () => {
         name: 'Dread',
         description: 'Standing still or channeling abilities for 1.5 seconds empowers Fiddlesticks with Dread. ' +
         'Immobilizing crowd control resets this timer.<br><br>Dread grants Movement Speed, but only lasts for 1.5s ' +
-        'after Fiddlesticks starts moving.',
-        image: {
-          full: 'Fiddlesticks_Passive.png',
-          sprite: 'passive0.png',
-          group: 'passive',
-          imgSrc: [],
-          x: 336,
-          y: 96,
-          w: 48,
-          h: 48
-        }
-      },
-      image: {
-        full: 'Fiddlesticks.png',
-        sprite: 'champion0.png',
-        group: 'champion',
-        imgSrc: [],
-        x: 336,
-        y: 96,
-        w: 48,
-        h: 48
+        'after Fiddlesticks starts moving.'
       },
       tags: [
         'Mage',
@@ -100,16 +80,6 @@ describe('ChampionService', () => {
         id: 7,
         name: 'Heal',
         description: '',
-        image: {
-          full: 'SummonerHeal.png',
-          sprite: 'spell0.png',
-          group: 'spell',
-          imgSrc: [],
-          x: 384,
-          y: 0,
-          w: 48,
-          h: 48
-        },
         cooldown: [
           240
         ],
@@ -124,16 +94,6 @@ describe('ChampionService', () => {
         id: 11,
         name: 'Smite',
         description: '',
-        image: {
-          full: 'SummonerSmite.png',
-          sprite: 'spell0.png',
-          group: 'spell',
-          imgSrc: [],
-          x: 192,
-          y: 48,
-          w: 48,
-          h: 48
-        },
         cooldown: [
           15
         ],
@@ -162,16 +122,6 @@ describe('ChampionService', () => {
         maps: {
           '11': true
         },
-        image: {
-          full: '3111.png',
-          sprite: 'item1.png',
-          group: 'item',
-          imgSrc: [],
-          x: 192,
-          y: 192,
-          w: 48,
-          h: 48
-        },
         gold: {
           base: 350,
           total: 1100,
@@ -194,16 +144,6 @@ describe('ChampionService', () => {
         requiredAlly: null,
         maps: {
           '11': true
-        },
-        image: {
-          full: '3401.png',
-          sprite: 'item2.png',
-          group: 'item',
-          imgSrc: [],
-          x: 192,
-          y: 96,
-          w: 48,
-          h: 48
         },
         gold: {
           base: 550,
@@ -229,16 +169,6 @@ describe('ChampionService', () => {
         maps: {
           '11': true
         },
-        image: {
-          full: '3116.png',
-          sprite: 'item1.png',
-          group: 'item',
-          imgSrc: [],
-          x: 432,
-          y: 192,
-          w: 48,
-          h: 48
-        },
         gold: {
           base: 915,
           total: 2600,
@@ -261,16 +191,6 @@ describe('ChampionService', () => {
         requiredAlly: null,
         maps: {
           '11': true
-        },
-        image: {
-          full: '3174.png',
-          sprite: 'item1.png',
-          group: 'item',
-          imgSrc: [],
-          x: 288,
-          y: 336,
-          w: 48,
-          h: 48
         },
         gold: {
           base: 400,
@@ -295,16 +215,6 @@ describe('ChampionService', () => {
         maps: {
           '11': true
         },
-        image: {
-          full: '3156.png',
-          sprite: 'item1.png',
-          group: 'item',
-          imgSrc: [],
-          x: 48,
-          y: 336,
-          w: 48,
-          h: 48
-        },
         gold: {
           base: 850,
           total: 3250,
@@ -328,16 +238,6 @@ describe('ChampionService', () => {
         maps: {
           '11': true
         },
-        image: {
-          full: '3115.png',
-          sprite: 'item1.png',
-          group: 'item',
-          imgSrc: [],
-          x: 384,
-          y: 192,
-          w: 48,
-          h: 48
-        },
         gold: {
           base: 1000,
           total: 3000,
@@ -359,16 +259,6 @@ describe('ChampionService', () => {
       requiredAlly: null,
       maps: {
         '11': true
-      },
-      image: {
-        full: '3363.png',
-        sprite: 'item2.png',
-        group: 'item',
-        imgSrc: [],
-        x: 96,
-        y: 48,
-        w: 48,
-        h: 48
       },
       gold: {
         base: 0,
@@ -399,16 +289,6 @@ describe('ChampionService', () => {
         id: 4,
         name: 'Flash',
         description: '',
-        image: {
-          full: 'SummonerFlash.png',
-          sprite: 'spell0.png',
-          group: 'spell',
-          imgSrc: [],
-          x: 288,
-          y: 0,
-          w: 48,
-          h: 48
-        },
         cooldown: [
           300
         ],
@@ -423,16 +303,6 @@ describe('ChampionService', () => {
         id: 1,
         name: 'Cleanse',
         description: '',
-        image: {
-          full: 'SummonerBoost.png',
-          sprite: 'spell0.png',
-          group: 'spell',
-          imgSrc: [],
-          x: 48,
-          y: 0,
-          w: 48,
-          h: 48
-        },
         cooldown: [
           210
         ],
@@ -463,16 +333,6 @@ describe('ChampionService', () => {
           '11': true,
           '12': true
         },
-        image: {
-          full: '3009.png',
-          sprite: 'item0.png',
-          group: 'item',
-          imgSrc: [],
-          x: 384,
-          y: 336,
-          w: 48,
-          h: 48
-        },
         gold: {
           base: 600,
           total: 900,
@@ -497,16 +357,6 @@ describe('ChampionService', () => {
           '10': true,
           '11': true,
           '12': true
-        },
-        image: {
-          full: '3115.png',
-          sprite: 'item1.png',
-          group: 'item',
-          imgSrc: [],
-          x: 384,
-          y: 192,
-          w: 48,
-          h: 48
         },
         gold: {
           base: 1000,
@@ -535,16 +385,6 @@ describe('ChampionService', () => {
           '11': true,
           '12': true
         },
-        image: {
-          full: '3075.png',
-          sprite: 'item1.png',
-          group: 'item',
-          imgSrc: [],
-          x: 288,
-          y: 48,
-          w: 48,
-          h: 48
-        },
         gold: {
           base: 500,
           total: 2900,
@@ -570,16 +410,6 @@ describe('ChampionService', () => {
           '10': true,
           '11': true,
           '12': true
-        },
-        image: {
-          full: '3053.png',
-          sprite: 'item1.png',
-          group: 'item',
-          imgSrc: [],
-          x: 144,
-          y: 0,
-          w: 48,
-          h: 48
         },
         gold: {
           base: 725,
@@ -607,16 +437,6 @@ describe('ChampionService', () => {
           '11': true,
           '12': true
         },
-        image: {
-          full: '3508.png',
-          sprite: 'item2.png',
-          group: 'item',
-          imgSrc: [],
-          x: 96,
-          y: 144,
-          w: 48,
-          h: 48
-        },
         gold: {
           base: 450,
           total: 3200,
@@ -643,16 +463,6 @@ describe('ChampionService', () => {
           '11': true,
           '12': true
         },
-        image: {
-          full: '3074.png',
-          sprite: 'item1.png',
-          group: 'item',
-          imgSrc: [],
-          x: 240,
-          y: 48,
-          w: 48,
-          h: 48
-        },
         gold: {
           base: 525,
           total: 3500,
@@ -676,16 +486,6 @@ describe('ChampionService', () => {
         '10': false,
         '11': true,
         '12': true
-      },
-      image: {
-        full: '3363.png',
-        sprite: 'item2.png',
-        group: 'item',
-        imgSrc: [],
-        x: 0,
-        y: 48,
-        w: 48,
-        h: 48
       },
       gold: {
         base: 0,

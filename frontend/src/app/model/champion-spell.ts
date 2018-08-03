@@ -1,5 +1,3 @@
-import { ChampionSpellImage } from './champion-spell-image';
-
 /**
  * Champion spell.
  */
@@ -8,5 +6,4 @@ export class ChampionSpell {
   name: string;
   description: string;
   tooltip: string;
-  image: ChampionSpellImage;
 }

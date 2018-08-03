@@ -46,17 +46,7 @@ describe('BuildsResolver', () => {
           description: 'Fires an explosive charge at the target location, dealing physical damage and slowing enemies ' +
             'caught in the explosion.',
           tooltip: 'Urgot fires an explosive charge, dealing {{ e2 }} <span class="colorFF8C00">(+{{ a1 }})</span> ' +
-            'physical damage and slowing enemies hit by {{ e4 }}% for {{ e5 }} second.',
-          image: {
-            full: 'UrgotQ.png',
-            sprite: 'spell12.png',
-            group: 'spell',
-            imgSrc: [],
-            x: 384,
-            y: 48,
-            w: 48,
-            h: 48
-          }
+            'physical damage and slowing enemies hit by {{ e4 }}% for {{ e5 }} second.'
         },
         {
           key: 'UrgotW',
@@ -69,17 +59,7 @@ describe('BuildsResolver', () => {
             '<span class="colorCC3300">(+{{ f2 }})</span> damage.<br /><br />While firing, Urgot loses {{ e5 }} movement ' +
             'speed but has {{ e2 }}% slow resistance and can walk over minions and non-epic monsters.<br /><br />' +
             '<rules><span class="color8c8c8c">Applies on-hits at 33% damage. Cannot critically strike. Minimum of ' +
-            '{{ e0 }} damage to minions.</span></rules>',
-          image: {
-            full: 'UrgotW.png',
-            sprite: 'spell12.png',
-            group: 'spell',
-            imgSrc: [],
-            x: 432,
-            y: 48,
-            w: 48,
-            h: 48
-          }
+            '{{ e0 }} damage to minions.</span></rules>'
         },
         {
           key: 'UrgotE',
@@ -89,17 +69,7 @@ describe('BuildsResolver', () => {
           tooltip: 'Urgot charges forwards. If he catches an enemy champion, he will stop and hurl them behind him, ' +
             'dealing {{ e1 }} <span class="colorFF8C00">(+{{ a1 }})</span> physical damage and stunning them for ' +
             '{{ e6 }} seconds.<br /><br />Non-champions take the same damage but are knocked aside.<br /><br /><rules>' +
-            '<span class="color8c8c8c">Cannot cross terrain.</span></rules>',
-          image: {
-            full: 'UrgotE.png',
-            sprite: 'spell12.png',
-            group: 'spell',
-            imgSrc: [],
-            x: 0,
-            y: 96,
-            w: 48,
-            h: 48
-          }
+            '<span class="color8c8c8c">Cannot cross terrain.</span></rules>'
         },
         {
           key: 'UrgotR',
@@ -111,43 +81,13 @@ describe('BuildsResolver', () => {
             'victim\'s missing health.<br /><br />If the victim falls below {{ e2 }}% health while impaled, Urgot may ' +
             'recast this ability, suppressing the victim and dragging them in for execution. Activates automatically if ' +
             'the target is below {{ e2 }}% at the end of the effect.<br /><br />When Urgot executes a victim, nearby ' +
-            'enemies flee in terror for {{ e0 }} seconds.</span></rules>',
-          image: {
-            full: 'UrgotR.png',
-            sprite: 'spell12.png',
-            group: 'spell',
-            imgSrc: [],
-            x: 48,
-            y: 96,
-            w: 48,
-            h: 48
-          }
+            'enemies flee in terror for {{ e0 }} seconds.</span></rules>'
         }
       ],
       passive: {
         name: 'Echoing Flames',
         description: 'Urgot\'s basic attacks and Purge periodically trigger blasts of flame from his legs, dealing ' +
-          'physical damage.',
-        image: {
-          full: 'Urgot_Passive.png',
-          sprite: 'passive4.png',
-          group: 'passive',
-          imgSrc: [],
-          x: 0,
-          y: 0,
-          w: 48,
-          h: 48
-        }
-      },
-      image: {
-        full: 'Urgot.png',
-        sprite: 'champion4.png',
-        group: 'champion',
-        imgSrc: [],
-        x: 0,
-        y: 0,
-        w: 48,
-        h: 48
+          'physical damage.'
       },
       tags: [
         'Fighter',
@@ -171,16 +111,6 @@ describe('BuildsResolver', () => {
         '10': true,
         '11': true,
         '12': true
-      },
-      image: {
-        full: '3020.png',
-        sprite: 'item0.png',
-        group: 'item',
-        imgSrc: [],
-        x: 0,
-        y: 384,
-        w: 48,
-        h: 48
       },
       gold: {
         base: 800,
@@ -210,16 +140,6 @@ describe('BuildsResolver', () => {
         '10': true,
         '11': true,
         '12': true
-      },
-      image: {
-        full: '3156.png',
-        sprite: 'item1.png',
-        group: 'item',
-        imgSrc: [],
-        x: 0,
-        y: 336,
-        w: 48,
-        h: 48
       },
       gold: {
         base: 850,
@@ -252,16 +172,6 @@ describe('BuildsResolver', () => {
         '11': true,
         '12': true
       },
-      image: {
-        full: '3748.png',
-        sprite: 'item2.png',
-        group: 'item',
-        imgSrc: [],
-        x: 384,
-        y: 288,
-        w: 48,
-        h: 48
-      },
       gold: {
         base: 700,
         total: 3500,
@@ -289,16 +199,6 @@ describe('BuildsResolver', () => {
         '10': true,
         '11': true,
         '12': true
-      },
-      image: {
-        full: '3004.png',
-        sprite: 'item0.png',
-        group: 'item',
-        imgSrc: [],
-        x: 192,
-        y: 336,
-        w: 48,
-        h: 48
       },
       gold: {
         base: 675,
@@ -332,16 +232,6 @@ describe('BuildsResolver', () => {
         '11': true,
         '12': true
       },
-      image: {
-        full: '3124.png',
-        sprite: 'item1.png',
-        group: 'item',
-        imgSrc: [],
-        x: 96,
-        y: 240,
-        w: 48,
-        h: 48
-      },
       gold: {
         base: 990,
         total: 3300,
@@ -372,16 +262,6 @@ describe('BuildsResolver', () => {
         '11': true,
         '12': true
       },
-      image: {
-        full: '3053.png',
-        sprite: 'item1.png',
-        group: 'item',
-        imgSrc: [],
-        x: 144,
-        y: 0,
-        w: 48,
-        h: 48
-      },
       gold: {
         base: 725,
         total: 3200,
@@ -393,16 +273,6 @@ describe('BuildsResolver', () => {
       id: 21,
       name: 'Barrier',
       description: 'Shields your champion from 115-455 damage (depending on champion level) for 2 seconds.',
-      image: {
-        full: 'SummonerBarrier.png',
-        sprite: 'spell0.png',
-        group: 'spell',
-        imgSrc: [],
-        x: 0,
-        y: 0,
-        w: 48,
-        h: 48
-      },
       cooldown: [
         180
       ],
@@ -418,16 +288,6 @@ describe('BuildsResolver', () => {
       name: 'Ghost',
       description: 'Your champion gains increased Movement Speed and can move through units for 10 seconds. Grants a ' +
         'maximum of 28-45% (depending on champion level) Movement Speed after accelerating for 2 seconds.',
-      image: {
-        full: 'SummonerHaste.png',
-        sprite: 'spell0.png',
-        group: 'spell',
-        imgSrc: [],
-        x: 336,
-        y: 0,
-        w: 48,
-        h: 48
-      },
       cooldown: [
         180
       ],
@@ -455,16 +315,6 @@ describe('BuildsResolver', () => {
         '11': true,
         '12': true
       },
-      image: {
-        full: '3364.png',
-        sprite: 'item2.png',
-        group: 'item',
-        imgSrc: [],
-        x: 0,
-        y: 48,
-        w: 48,
-        h: 48
-      },
       gold: {
         base: 0,
         total: 0,
@@ -474,17 +324,7 @@ describe('BuildsResolver', () => {
     },
     map: {
       mapId: 11,
-      mapName: 'Summoner\'s Rift',
-      image: {
-        full: 'map11.png',
-        sprite: 'map0.png',
-        group: 'map',
-        imgSrc: [],
-        x: 48,
-        y: 0,
-        w: 48,
-        h: 48
-      }
+      mapName: 'Summoner\'s Rift'
     }
   };
 

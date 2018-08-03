@@ -53,17 +53,7 @@ describe('BuildsPage', () => {
           '{{ e1 }} <span class="color99FF99">(+{{ a1 }})</span> magic damage and are slowed by {{ e2 }}% for 2 ' +
           'seconds.<br /><br />If Starcall hits a champion Soraka gains <span class="colorDDDDDD">Rejuvenation' +
           '</span> for {{ e5 }} seconds, which restores {{ e3 }} <span class="color99FF99">(+{{ f1 }})</span> ' +
-          'health per second and grants {{ e9 }}% movement speed when not moving toward enemy champions.',
-          image: {
-            full: 'SorakaQ.png',
-            sprite: 'spell10.png',
-            group: 'spell',
-            imgSrc: [],
-            x: 384,
-            y: 144,
-            w: 48,
-            h: 48
-          }
+          'health per second and grants {{ e9 }}% movement speed when not moving toward enemy champions.'
         },
         {
           key: 'SorakaW',
@@ -72,17 +62,7 @@ describe('BuildsPage', () => {
           tooltip: 'Restores {{ e1 }} <span class="color99FF99">(+{{ a1 }})</span> health to another champion ally.' +
           '<br /><br />If cast while affected by <span class="colorDDDDDD">Rejuvenation</span>, Soraka will grant ' +
           'her target its benefits for {{ f1 }} seconds.<br /><br /><span class="color919191"><i>Cannot be cast if ' +
-          'Soraka is below 5% Health.</i></span>',
-          image: {
-            full: 'SorakaW.png',
-            sprite: 'spell10.png',
-            group: 'spell',
-            imgSrc: [],
-            x: 432,
-            y: 144,
-            w: 48,
-            h: 48
-          }
+          'Soraka is below 5% Health.</i></span>'
         },
         {
           key: 'SorakaE',
@@ -93,17 +73,7 @@ describe('BuildsPage', () => {
           '(+{{ a1 }})</span> magic damage to enemy Champions in the cast radius. Enemy Champions standing in the ' +
           'zone are silenced until they leave. <br /><br />When the zone disappears, all enemy Champions still ' +
           'standing in the zone are rooted for {{ e1 }} second(s) and are dealt {{ e2 }} <span class="color99FF99">' +
-          '(+{{ a1 }}) </span>magic damage.',
-          image: {
-            full: 'SorakaE.png',
-            sprite: 'spell11.png',
-            group: 'spell',
-            imgSrc: [],
-            x: 0,
-            y: 0,
-            w: 48,
-            h: 48
-          }
+          '(+{{ a1 }}) </span>magic damage.'
         },
         {
           key: 'SorakaR',
@@ -111,42 +81,12 @@ describe('BuildsPage', () => {
           description: 'Soraka fills her allies with hope, instantly restoring health to herself and all friendly ' +
           'champions.',
           tooltip: 'Calls upon divine powers to restore {{ e1 }} <span class="color99FF99">(+{{ a1 }})</span> Health ' +
-          'to all allied Champions. Wish\'s power is increased by 50% on each Champion below 40% Health.',
-          image: {
-            full: 'SorakaR.png',
-            sprite: 'spell11.png',
-            group: 'spell',
-            imgSrc: [],
-            x: 48,
-            y: 0,
-            w: 48,
-            h: 48
-          }
+          'to all allied Champions. Wish\'s power is increased by 50% on each Champion below 40% Health.'
         }
       ],
       passive: {
         name: 'Salvation',
-        description: 'Soraka runs faster towards nearby low health allies.',
-        image: {
-          full: 'Soraka_Passive.png',
-          sprite: 'passive3.png',
-          group: 'passive',
-          imgSrc: [],
-          x: 240,
-          y: 48,
-          w: 48,
-          h: 48
-        }
-      },
-      image: {
-        full: 'Soraka.png',
-        sprite: 'champion3.png',
-        group: 'champion',
-        imgSrc: [],
-        x: 240,
-        y: 48,
-        w: 48,
-        h: 48
+        description: 'Soraka runs faster towards nearby low health allies.'
       },
       tags: [
         'Mage',
@@ -173,16 +113,6 @@ describe('BuildsPage', () => {
         '10': true,
         '11': true,
         '12': true
-      },
-      image: {
-        full: '3111.png',
-        sprite: 'item1.png',
-        group: 'item',
-        imgSrc: [],
-        x: 192,
-        y: 192,
-        w: 48,
-        h: 48
       },
       gold: {
         base: 350,
@@ -215,16 +145,6 @@ describe('BuildsPage', () => {
         '11': true,
         '12': true
       },
-      image: {
-        full: '3748.png',
-        sprite: 'item2.png',
-        group: 'item',
-        imgSrc: [],
-        x: 384,
-        y: 288,
-        w: 48,
-        h: 48
-      },
       gold: {
         base: 700,
         total: 3500,
@@ -253,16 +173,6 @@ describe('BuildsPage', () => {
         '11': true,
         '12': true
       },
-      image: {
-        full: '3194.png',
-        sprite: 'item1.png',
-        group: 'item',
-        imgSrc: [],
-        x: 192,
-        y: 384,
-        w: 48,
-        h: 48
-      },
       gold: {
         base: 1000,
         total: 2800,
@@ -288,16 +198,6 @@ describe('BuildsPage', () => {
         '10': true,
         '11': true,
         '12': true
-      },
-      image: {
-        full: '3135.png',
-        sprite: 'item1.png',
-        group: 'item',
-        imgSrc: [],
-        x: 288,
-        y: 240,
-        w: 48,
-        h: 48
       },
       gold: {
         base: 1365,
@@ -325,16 +225,6 @@ describe('BuildsPage', () => {
         '10': true,
         '11': true,
         '12': true
-      },
-      image: {
-        full: '3115.png',
-        sprite: 'item1.png',
-        group: 'item',
-        imgSrc: [],
-        x: 384,
-        y: 192,
-        w: 48,
-        h: 48
       },
       gold: {
         base: 1000,
@@ -369,16 +259,6 @@ describe('BuildsPage', () => {
         '11': true,
         '12': false
       },
-      image: {
-        full: '3401.png',
-        sprite: 'item2.png',
-        group: 'item',
-        imgSrc: [],
-        x: 144,
-        y: 96,
-        w: 48,
-        h: 48
-      },
       gold: {
         base: 550,
         total: 1800,
@@ -391,16 +271,6 @@ describe('BuildsPage', () => {
       name: 'Ignite',
       description: 'Ignites target enemy champion, dealing 80-505 true damage (depending on champion level) over 5 ' +
       'seconds, grants you vision of the target, and reduces healing effects on them for the duration.',
-      image: {
-        full: 'SummonerDot.png',
-        sprite: 'spell0.png',
-        group: 'spell',
-        imgSrc: [],
-        x: 192,
-        y: 0,
-        w: 48,
-        h: 48
-      },
       cooldown: [
         210
       ],
@@ -416,16 +286,6 @@ describe('BuildsPage', () => {
       name: 'Smite',
       description: 'Deals 390-1000 true damage (depending on champion level) to target epic, large, or medium ' +
       'monster or enemy minion. Restores Health based on your maximum life when used against monsters.',
-      image: {
-        full: 'SummonerSmite.png',
-        sprite: 'spell0.png',
-        group: 'spell',
-        imgSrc: [],
-        x: 192,
-        y: 48,
-        w: 48,
-        h: 48
-      },
       cooldown: [
         15
       ],
@@ -457,16 +317,6 @@ describe('BuildsPage', () => {
         '11': true,
         '12': true
       },
-      image: {
-        full: '3363.png',
-        sprite: 'item2.png',
-        group: 'item',
-        imgSrc: [],
-        x: 0,
-        y: 48,
-        w: 48,
-        h: 48
-      },
       gold: {
         base: 0,
         total: 0,
@@ -476,17 +326,7 @@ describe('BuildsPage', () => {
     },
     map: {
       mapId: 11,
-      mapName: 'Summoner\'s Rift',
-      image: {
-        full: 'map11.png',
-        sprite: 'map0.png',
-        group: 'map',
-        imgSrc: [],
-        x: 48,
-        y: 0,
-        w: 48,
-        h: 48
-      }
+      mapName: 'Summoner\'s Rift'
     }
   };
 

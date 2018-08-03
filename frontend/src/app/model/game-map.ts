@@ -1,5 +1,3 @@
-import { GameMapImage } from './game-map-image';
-
 /**
  * Game map of LoL.
  */
@@ -11,5 +9,4 @@ export class GameMap {
 
   mapId: number;
   mapName: string;
-  image: GameMapImage;
 }

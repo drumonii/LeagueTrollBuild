@@ -20,27 +20,7 @@ describe('ChampionsNameFilterPipe', () => {
     spells: [], // omitted for brevity
     passive: {
       name: 'Hextech Affinity',
-      description: 'Gain Movement Speed while near allied towers and turrets deployed by Heimerdinger.',
-      image: {
-        full: 'Heimerdinger_Passive.png',
-        sprite: 'passive1.png',
-        group: 'passive',
-        imgSrc: [],
-        x: 336,
-        y: 0,
-        w: 48,
-        h: 48
-      }
-    },
-    image: {
-      full: 'Heimerdinger.png',
-      sprite: 'champion1.png',
-      group: 'champion',
-      imgSrc: [],
-      x: 336,
-      y: 0,
-      w: 48,
-      h: 48
+      description: 'Gain Movement Speed while near allied towers and turrets deployed by Heimerdinger.'
     },
     tags: [
       'Mage',
@@ -63,27 +43,7 @@ describe('ChampionsNameFilterPipe', () => {
     passive: {
       name: 'Granite Shield',
       description: 'Malphite is shielded by a layer of rock which absorbs damage up to 10% of his maximum Health. ' +
-        'If Malphite has not been hit for 10 seconds, this effect recharges.',
-      image: {
-        full: 'Malphite_GraniteShield.png',
-        sprite: 'passive2.png',
-        group: 'passive',
-        imgSrc: [],
-        x: 336,
-        y: 0,
-        w: 48,
-        h: 48
-      }
-    },
-    image: {
-      full: 'Malphite.png',
-      sprite: 'champion2.png',
-      group: 'champion',
-      imgSrc: [],
-      x: 336,
-      y: 0,
-      w: 48,
-      h: 48
+        'If Malphite has not been hit for 10 seconds, this effect recharges.'
     },
     tags: [
       'Fighter',
@@ -106,27 +66,7 @@ describe('ChampionsNameFilterPipe', () => {
     passive: {
       name: 'Void Shift',
       description: 'When he hasn\'t recently taken damage or been crowd controlled, Malzahar gains massive damage ' +
-        'reduction and crowd control immunity, lingering for a short period after taking damage.<br><br>Damage from lane minions is unaffected.',
-      image: {
-        full: 'Malzahar_Passive.png',
-        sprite: 'passive2.png',
-        group: 'passive',
-        imgSrc: [],
-        x: 384,
-        y: 0,
-        w: 48,
-        h: 48
-      }
-    },
-    image: {
-      full: 'Malzahar.png',
-      sprite: 'champion2.png',
-      group: 'champion',
-      imgSrc: [],
-      x: 384,
-      y: 0,
-      w: 48,
-      h: 48
+        'reduction and crowd control immunity, lingering for a short period after taking damage.<br><br>Damage from lane minions is unaffected.'
     },
     tags: [
       'Assassin',

@@ -1,5 +1,4 @@
 import { ChampionInfo } from './champion-info';
-import { ChampionImage } from './champion-image';
 import { ChampionSpell } from './champion-spell';
 import { ChampionPassive } from './champion-passive';
 
@@ -15,6 +14,5 @@ export class Champion {
   info: ChampionInfo;
   spells: ChampionSpell[];
   passive: ChampionPassive;
-  image: ChampionImage;
   tags: string[];
 }
