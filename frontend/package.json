@@ -7,6 +7,7 @@
     "start": "ng serve --proxy-config proxy.conf.json --host 0.0.0.0",
     "build": "ng build --prod",
     "test": "ng test --code-coverage",
+    "test-ci": "ng test --browsers ChromeHeadless",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
