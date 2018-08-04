@@ -20,11 +20,22 @@
 
   <div>
     <h4 id="troll-build-maps-header">Map</h4>
-    <select id="map-select" *ngIf="gameMaps" [(ngModel)]="gameMap" (ngModelChange)="getTrollBuild()">
-      <option class="map-option" *ngFor="let gameMap of gameMaps" [ngValue]="gameMap">
-        {{gameMap.mapName}}
-      </option>
-    </select>
+    <div *ngIf="gameMaps; else loadingMaps">
+      <select id="map-select" [(ngModel)]="gameMap" (ngModelChange)="getTrollBuild()">
+        <option class="map-option" *ngFor="let gameMap of gameMaps" [ngValue]="gameMap">
+          {{gameMap.mapName}}
+        </option>
+      </select>
+    </div>
+    <ng-template #loadingMaps>
+      <div>
+        <select id="map-select-loading">
+          <option class="map-option-loading">
+            Fetching maps...
+          </option>
+        </select>
+      </div>
+    </ng-template>
   </div>
 
   <hr>

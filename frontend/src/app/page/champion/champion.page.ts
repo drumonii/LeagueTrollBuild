@@ -32,11 +32,11 @@ export class ChampionPage implements OnInit {
     this.route.data.subscribe((data: { champion: Champion }) => {
       this.champion = data.champion;
       this.setTitle(data.champion.name);
-      this.getGameMaps().subscribe(gameMaps => {
-        this.gameMap = gameMaps.find(gameMap => gameMap.mapId === GameMap.summonersRiftId);
-        this.gameMaps = gameMaps;
-        this.getTrollBuild();
-      });
+    });
+    this.getGameMaps().subscribe(gameMaps => {
+      this.gameMap = gameMaps.find(gameMap => gameMap.mapId === GameMap.summonersRiftId);
+      this.gameMaps = gameMaps;
+      this.getTrollBuild();
     });
   }
 
@@ -48,7 +48,7 @@ export class ChampionPage implements OnInit {
     }
   }
 
-  private getGameMaps(): Observable<GameMap[]> {
+  getGameMaps(): Observable<GameMap[]> {
     return this.gameMapsService.forTrollBuild();
   }
 

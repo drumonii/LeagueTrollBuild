@@ -671,4 +671,31 @@ describe('ChampionPage', () => {
 
   });
 
+  describe('show Champion by name with loading game maps', () => {
+
+    beforeEach(inject([ChampionService, GameMapsService], (championsService: ChampionService, gameMapsService: GameMapsService) => {
+      spyOn(championsService, 'getChampion').and.returnValue(of(skarner));
+      spyOn(championsService, 'getTrollBuild').and.callThrough();
+      spyOn(gameMapsService, 'forTrollBuild').and.callThrough();
+    }));
+
+    afterEach(inject([ChampionService, GameMapsService], (championsService: ChampionService, gameMapsService: GameMapsService) => {
+      expect(championsService.getChampion).not.toHaveBeenCalledWith('Skarner');
+      expect(championsService.getTrollBuild).not.toHaveBeenCalledWith('Skarner', GameMap.summonersRiftId);
+      expect(gameMapsService.forTrollBuild).toHaveBeenCalled();
+    }));
+
+    it('should should game maps select with single loading option', () => {
+      fixture.detectChanges();
+
+      const mapSelectLoadingDe = fixture.debugElement.query(By.css('#map-select-loading'));
+      expect(mapSelectLoadingDe).toBeTruthy();
+
+      const mapsOptionDe = fixture.debugElement.queryAll(By.css('.map-option-loading'));
+      expect(mapsOptionDe.map(mapOptionDe => mapOptionDe.nativeElement.textContent.trim()))
+        .toEqual(jasmine.arrayContaining(['Fetching maps...']));
+    });
+
+  });
+
 });
