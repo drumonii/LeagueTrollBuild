@@ -24,16 +24,13 @@ import org.springframework.context.annotation.Configuration;
 public class MapsRetrievalJobConfig {
 
 	@Autowired
-	private JobBuilderFactory jobBuilderFactory;
-
-	@Autowired
 	private StepBuilderFactory stepBuilderFactory;
 
 	@Autowired
 	private MapsRepository mapsRepository;
 
 	@Bean
-	public Job mapsRetrievalJob() {
+	public Job mapsRetrievalJob(JobBuilderFactory jobBuilderFactory) {
 		return jobBuilderFactory.get("mapsRetrievalJob")
 				.incrementer(new RunIdIncrementer())
 				.start(mapsRetrievalStep())

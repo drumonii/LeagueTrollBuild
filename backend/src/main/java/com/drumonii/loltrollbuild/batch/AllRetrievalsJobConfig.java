@@ -24,9 +24,6 @@ import static com.drumonii.loltrollbuild.batch.scheduling.RetrievalJobsSchedulin
 public class AllRetrievalsJobConfig {
 
 	@Autowired
-	private JobBuilderFactory jobBuilderFactory;
-
-	@Autowired
 	private StepBuilderFactory stepBuilderFactory;
 
 	@Autowired
@@ -53,7 +50,7 @@ public class AllRetrievalsJobConfig {
 	private Job itemsRetrievalJob;
 
 	@Bean
-	public Job allRetrievalsJob() {
+	public Job allRetrievalsJob(JobBuilderFactory jobBuilderFactory) {
 		return jobBuilderFactory.get("allRetrievalsJob")
 				.incrementer(new AllRetrievalsJobParametersIncrementer())
 				.validator(new AllRetrievalsJobParametersValidator())

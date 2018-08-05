@@ -24,16 +24,13 @@ import javax.sql.DataSource;
 public class VersionsRetrievalJobConfig {
 
 	@Autowired
-	private JobBuilderFactory jobBuilderFactory;
-
-	@Autowired
 	private StepBuilderFactory stepBuilderFactory;
 
 	@Autowired
 	private DataSource dataSource;
 
 	@Bean
-	public Job versionsRetrievalJob() {
+	public Job versionsRetrievalJob(JobBuilderFactory jobBuilderFactory) {
 		return jobBuilderFactory.get("versionsRetrievalJob")
 				.incrementer(new RunIdIncrementer())
 				.start(versionsRetrievalStep())

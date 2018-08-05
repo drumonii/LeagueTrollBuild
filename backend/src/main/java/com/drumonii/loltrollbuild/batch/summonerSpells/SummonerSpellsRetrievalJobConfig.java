@@ -24,16 +24,13 @@ import org.springframework.context.annotation.Configuration;
 public class SummonerSpellsRetrievalJobConfig {
 
 	@Autowired
-	private JobBuilderFactory jobBuilderFactory;
-
-	@Autowired
 	private StepBuilderFactory stepBuilderFactory;
 
 	@Autowired
 	private SummonerSpellsRepository summonerSpellsRepository;
 
 	@Bean
-	public Job summonerSpellsRetrievalJob() {
+	public Job summonerSpellsRetrievalJob(JobBuilderFactory jobBuilderFactory) {
 		return jobBuilderFactory.get("summonerSpellsRetrievalJob")
 				.incrementer(new RunIdIncrementer())
 				.start(summonerSpellsRetrievalStep())
