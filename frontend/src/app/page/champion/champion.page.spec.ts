@@ -544,9 +544,20 @@ describe('ChampionPage', () => {
 
       expect(buildsService.saveBuild).toHaveBeenCalledWith(build);
 
-      const savedBuildDe = fixture.debugElement.query(By.css('#saved-build-link'));
-      expect(savedBuildDe.nativeElement.textContent).toBe('http://localhost/build/1');
+      const savedBuildInputDe = fixture.debugElement.query(By.css('#saved-build-input-link'));
+      expect(savedBuildInputDe.nativeElement.value).toBe('http://localhost/build/1');
+
       expect(newBuildBtnDe.nativeElement.disabled).toBeTruthy('Expected save build button to be disabled');
+
+      spyOn(document, 'execCommand').and.callThrough();
+
+      const savedBuildCopyBtnDe = fixture.debugElement.query(By.css('#copy-build-link-btn'));
+      expect(savedBuildCopyBtnDe).toBeTruthy();
+      savedBuildCopyBtnDe.triggerEventHandler('click', null);
+
+      fixture.detectChanges();
+
+      expect(document.execCommand).toHaveBeenCalledWith('copy');
     }));
 
     function expectChampionAndMapsAndTrollBuild() {

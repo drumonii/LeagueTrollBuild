@@ -64,7 +64,12 @@
       </div>
     </div>
     <button id="save-build-btn" (click)="saveBuild(trollBuild)" [disabled]="build">Save Build</button>
-    <p id="saved-build-link" *ngIf="build">{{build.selfRef}}</p>
+    <div *ngIf="build">
+      <input id="saved-build-input-link" class="input" type="text" readonly [value]="build.selfRef" #savedBuildLink>
+      <button id="copy-build-link-btn" (click)="copyBuildToClipboard(savedBuildLink)">
+        <i class="fa fa-clipboard" aria-hidden="true"></i>
+      </button>
+    </div>
   </div>
 
   <ng-template #loadingTrollBuild>

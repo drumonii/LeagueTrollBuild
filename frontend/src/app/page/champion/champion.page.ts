@@ -71,4 +71,10 @@ export class ChampionPage implements OnInit {
     });
   }
 
+  copyBuildToClipboard(savedBuildLinkInput: HTMLInputElement): void {
+    savedBuildLinkInput.select();
+    document.execCommand('copy');
+    savedBuildLinkInput.setSelectionRange(0, 0);
+  }
+
 }
