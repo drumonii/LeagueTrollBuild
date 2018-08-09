@@ -8,6 +8,7 @@ import { ChampionsNameFilterPipe } from '@pipe/champions-name-filter.pipe';
 import { ChampionsTagsFilterPipe } from '@pipe/champions-tags-filter.pipe';
 
 import { ChampionsPage } from './champions.page';
+import { TitleService } from '@service/title.service';
 import { ChampionsService } from '@service/champions.service';
 import { GameMapsService } from '@service/game-maps.service';
 
@@ -23,6 +24,7 @@ import { GameMapsService } from '@service/game-maps.service';
     ChampionsPage
   ],
   providers: [
+    TitleService,
     ChampionsService,
     GameMapsService
   ]

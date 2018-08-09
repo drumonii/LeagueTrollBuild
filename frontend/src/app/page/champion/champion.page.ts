@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 
 import { Observable } from 'rxjs';
 
+import { TitleService } from '@service/title.service';
 import { BuildsService } from '@service/builds.service';
 import { ChampionService } from '@service/champion.service';
 import { GameMapsService } from '@service/game-maps.service';
@@ -26,7 +26,7 @@ export class ChampionPage implements OnInit {
   build: Build;
 
   constructor(private championService: ChampionService, private gameMapsService: GameMapsService,
-    private buildsService: BuildsService, private title: Title, private route: ActivatedRoute) {}
+    private buildsService: BuildsService, private title: TitleService, private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.route.data.subscribe((data: { champion: Champion }) => {
@@ -40,12 +40,8 @@ export class ChampionPage implements OnInit {
     });
   }
 
-  private setTitle(name: string) {
-    if (this.title.getTitle().indexOf('|') === -1) {
-      this.title.setTitle(`${this.title.getTitle()} | ${name}`);
-    } else {
-      this.title.setTitle(`${this.title.getTitle().substring(0, this.title.getTitle().indexOf('|') - 1)} | ${name}`);
-    }
+  private setTitle(championName: string) {
+    this.title.setTitle(championName);
   }
 
   getGameMaps(): Observable<GameMap[]> {

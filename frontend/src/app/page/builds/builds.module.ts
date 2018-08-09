@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { BuildsRoutingModule } from './builds-routing.module';
 
 import { BuildsPage } from './builds.page';
+import { TitleService } from '@service/title.service';
 import { BuildsService } from '@service/builds.service';
 
 @NgModule({
@@ -17,6 +18,7 @@ import { BuildsService } from '@service/builds.service';
     BuildsPage
   ],
   providers: [
+    TitleService,
     BuildsService
   ]
 })

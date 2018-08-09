@@ -2,12 +2,13 @@ import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing'
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ActivatedRoute, Router } from '@angular/router';
-import { By, Title } from '@angular/platform-browser';
+import { By } from '@angular/platform-browser';
 
 import { of } from 'rxjs';
 
 import { BuildsPage } from './builds.page';
 import { BuildsModule } from './builds.module';
+import { TitleService } from '@service/title.service';
 import { BuildsService } from '@service/builds.service';
 import { Build } from '@model/build';
 import { Item } from '@model/item';
@@ -346,14 +347,13 @@ describe('BuildsPage', () => {
       .compileComponents();
     }));
 
-    beforeEach(inject([BuildsService, Title], (buildsService: BuildsService, title: Title) => {
+    beforeEach(inject([BuildsService, TitleService], (buildsService: BuildsService, title: TitleService) => {
       fixture = TestBed.createComponent(BuildsPage);
       component = fixture.componentInstance;
 
       spyOn(buildsService, 'getBuild').and.callThrough();
       spyOn(buildsService, 'countBuilds').and.callThrough();
 
-      spyOn(title, 'getTitle').and.returnValue('League Troll Build');
       spyOn(title, 'setTitle').and.callThrough();
 
       fixture.detectChanges();
@@ -365,15 +365,15 @@ describe('BuildsPage', () => {
     }));
 
     it('should show a Troll Build with no invalid attributes',
-      inject([BuildsService, Title], (buildsService: BuildsService, title: Title) => {
+      inject([BuildsService, TitleService], (buildsService: BuildsService, title: TitleService) => {
       expectChampionAndMapsAndSavedTrollBuild();
-      expect(title.setTitle).toHaveBeenCalledWith(`League Troll Build | ${build.champion.name} Build | ${build.id}`);
+      expect(title.setTitle).toHaveBeenCalledWith(`${build.champion.name} Build | ${build.id}`);
     }));
 
     it('should redirect to individual Champion page after clicking the new build button',
-      inject([BuildsService, Title, Router], (buildsService: BuildsService, title: Title, router: Router) => {
+      inject([BuildsService, TitleService, Router], (buildsService: BuildsService, title: TitleService, router: Router) => {
       expectChampionAndMapsAndSavedTrollBuild();
-      expect(title.setTitle).toHaveBeenCalledWith(`League Troll Build | ${build.champion.name} Build | ${build.id}`);
+      expect(title.setTitle).toHaveBeenCalledWith(`${build.champion.name} Build | ${build.id}`);
 
       spyOn(router, 'navigate');
 
@@ -402,24 +402,23 @@ describe('BuildsPage', () => {
       .compileComponents();
     }));
 
-    beforeEach(inject([BuildsService, Title], (buildsService: BuildsService, title: Title) => {
+    beforeEach(inject([BuildsService, TitleService], (buildsService: BuildsService, title: TitleService) => {
       fixture = TestBed.createComponent(BuildsPage);
       component = fixture.componentInstance;
 
       spyOn(buildsService, 'countBuilds').and.callThrough();
 
-      spyOn(title, 'getTitle').and.returnValue('League Troll Build');
       spyOn(title, 'setTitle').and.callThrough();
 
       fixture.detectChanges();
     }));
 
     it('should show no Build found alert',
-      inject([BuildsService, Title], (buildsService: BuildsService, title: Title) => {
+      inject([BuildsService, TitleService], (buildsService: BuildsService, title: TitleService) => {
       const buildNotFoundAlertDe = fixture.debugElement.query(By.css('#build-not-found-alert'));
       expect(buildNotFoundAlertDe.nativeElement.textContent).toBe('Couldn\'t find a saved Troll Build with ID 1');
 
-      expect(title.setTitle).toHaveBeenCalledWith(`League Troll Build | Couldn't find Troll Build 1`);
+      expect(title.setTitle).toHaveBeenCalledWith(`Couldn't find Troll Build 1`);
     }));
   });
 
@@ -442,24 +441,23 @@ describe('BuildsPage', () => {
       .compileComponents();
     }));
 
-    beforeEach(inject([BuildsService, Title], (buildsService: BuildsService, title: Title) => {
+    beforeEach(inject([BuildsService, TitleService], (buildsService: BuildsService, title: TitleService) => {
       fixture = TestBed.createComponent(BuildsPage);
       component = fixture.componentInstance;
 
       spyOn(buildsService, 'countBuilds').and.callThrough();
 
-      spyOn(title, 'getTitle').and.returnValue('League Troll Build');
       spyOn(title, 'setTitle').and.callThrough();
 
       fixture.detectChanges();
     }));
 
     it('should show invalid Items alert',
-      inject([BuildsService, Title], (buildsService: BuildsService, title: Title) => {
+      inject([BuildsService, TitleService], (buildsService: BuildsService, title: TitleService) => {
       const buildInvalidAlertDe = fixture.debugElement.query(By.css('#build-invalid-items-alert'));
       expect(buildInvalidAlertDe.nativeElement.textContent).toBe('This Troll Build with ID 1 has become invalid due to outdated Items');
 
-      expect(title.setTitle).toHaveBeenCalledWith(`League Troll Build | Invalid attributes in Troll Build 1`);
+      expect(title.setTitle).toHaveBeenCalledWith(`Invalid attributes in Troll Build 1`);
     }));
   });
 
@@ -482,24 +480,23 @@ describe('BuildsPage', () => {
       .compileComponents();
     }));
 
-    beforeEach(inject([BuildsService, Title], (buildsService: BuildsService, title: Title) => {
+    beforeEach(inject([BuildsService, TitleService], (buildsService: BuildsService, title: TitleService) => {
       fixture = TestBed.createComponent(BuildsPage);
       component = fixture.componentInstance;
 
       spyOn(buildsService, 'countBuilds').and.callThrough();
 
-      spyOn(title, 'getTitle').and.returnValue('League Troll Build');
       spyOn(title, 'setTitle').and.callThrough();
 
       fixture.detectChanges();
     }));
 
     it('should show invalid Summoner Spells alert',
-      inject([BuildsService, Title], (buildsService: BuildsService, title: Title) => {
+      inject([BuildsService, TitleService], (buildsService: BuildsService, title: TitleService) => {
       const buildInvalidAlertDe = fixture.debugElement.query(By.css('#build-invalid-summoner-spells-alert'));
       expect(buildInvalidAlertDe.nativeElement.textContent).toBe('This Troll Build with ID 1 has become invalid due to outdated Summoner Spells');
 
-      expect(title.setTitle).toHaveBeenCalledWith(`League Troll Build | Invalid attributes in Troll Build 1`);
+      expect(title.setTitle).toHaveBeenCalledWith(`Invalid attributes in Troll Build 1`);
     }));
   });
 
@@ -522,24 +519,23 @@ describe('BuildsPage', () => {
       .compileComponents();
     }));
 
-    beforeEach(inject([BuildsService, Title], (buildsService: BuildsService, title: Title) => {
+    beforeEach(inject([BuildsService, TitleService], (buildsService: BuildsService, title: TitleService) => {
       fixture = TestBed.createComponent(BuildsPage);
       component = fixture.componentInstance;
 
       spyOn(buildsService, 'countBuilds').and.callThrough();
 
-      spyOn(title, 'getTitle').and.returnValue('League Troll Build');
       spyOn(title, 'setTitle').and.callThrough();
     }));
 
     it('should show invalid Trinket alert',
-      inject([BuildsService, Title], (buildsService: BuildsService, title: Title) => {
+      inject([BuildsService, TitleService], (buildsService: BuildsService, title: TitleService) => {
       fixture.detectChanges();
 
       const buildInvalidAlertDe = fixture.debugElement.query(By.css('#build-invalid-trinket-alert'));
       expect(buildInvalidAlertDe.nativeElement.textContent).toBe('This Troll Build with ID 1 has become invalid due to an outdated Trinket');
 
-      expect(title.setTitle).toHaveBeenCalledWith(`League Troll Build | Invalid attributes in Troll Build 1`);
+      expect(title.setTitle).toHaveBeenCalledWith(`Invalid attributes in Troll Build 1`);
     }));
   });
 

@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { BuildsResolverData } from './builds.resolver.data';
+import { TitleService } from '@service/title.service';
 import { BuildsService } from '@service/builds.service';
 import { Build, BuildType } from '@model/build';
-import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'ltb-builds',
@@ -17,7 +17,7 @@ export class BuildsPage implements OnInit {
   build: Build;
   buildType: BuildType;
 
-  constructor(private buildsService: BuildsService, private title: Title, private router: Router,
+  constructor(private buildsService: BuildsService, private title: TitleService, private router: Router,
     private route: ActivatedRoute) {}
 
   ngOnInit() {
@@ -25,11 +25,7 @@ export class BuildsPage implements OnInit {
   }
 
   private setTitle() {
-    if (this.title.getTitle().indexOf('|') === -1) {
-      this.title.setTitle(`${this.title.getTitle()} | ${this.getTitle()}`);
-    } else {
-      this.title.setTitle(`${this.title.getTitle().substring(0, this.title.getTitle().indexOf('|') - 1)} | ${this.getTitle()}`);
-    }
+    this.title.setTitle(this.getTitle());
   }
 
   private getTitle(): string {

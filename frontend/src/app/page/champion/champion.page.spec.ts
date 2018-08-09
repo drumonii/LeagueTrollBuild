@@ -4,12 +4,13 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
-import { By, Title } from '@angular/platform-browser';
+import { By } from '@angular/platform-browser';
 
 import { of } from 'rxjs';
 
 import { ChampionPage } from './champion.page';
 import { ChampionModule } from './champion.module';
+import { TitleService } from '@service/title.service';
 import { BuildsService } from '@service/builds.service';
 import { ChampionService } from '@service/champion.service';
 import { GameMapsService } from '@service/game-maps.service';
@@ -446,31 +447,19 @@ describe('ChampionPage', () => {
     }));
 
     afterEach(inject([ChampionService, GameMapsService], (championsService: ChampionService, gameMapsService: GameMapsService) => {
-      expect(championsService.getChampion).not.toHaveBeenCalledWith('Skarner');
-      expect(championsService.getTrollBuild).toHaveBeenCalledWith('Skarner', GameMap.summonersRiftId);
+      expect(championsService.getChampion).not.toHaveBeenCalledWith(skarner.name);
+      expect(championsService.getTrollBuild).toHaveBeenCalledWith(skarner.name, GameMap.summonersRiftId);
       expect(gameMapsService.forTrollBuild).toHaveBeenCalled();
     }));
 
-    it('should append Champion as the content title', inject([Title], (title: Title) => {
-      spyOn(title, 'getTitle').and.returnValue('League Troll Build');
+    it('should set Champion name as the content title', inject([TitleService], (title: TitleService) => {
       spyOn(title, 'setTitle').and.callThrough();
 
       fixture.detectChanges();
 
       expectChampionAndMapsAndTrollBuild();
 
-      expect(title.setTitle).toHaveBeenCalledWith(`League Troll Build | Skarner`);
-    }));
-
-    it('should replace an existing Champion as the content title', inject([Title], (title: Title) => {
-      spyOn(title, 'getTitle').and.returnValue('League Troll Build | Warwick');
-      spyOn(title, 'setTitle').and.callThrough();
-
-      fixture.detectChanges();
-
-      expectChampionAndMapsAndTrollBuild();
-
-      expect(title.setTitle).toHaveBeenCalledWith(`League Troll Build | Skarner`);
+      expect(title.setTitle).toHaveBeenCalledWith(skarner.name);
     }));
 
     it('should generate a new Troll Build after selecting a new map',
@@ -488,7 +477,7 @@ describe('ChampionPage', () => {
 
       fixture.detectChanges();
 
-      expect(championsService.getTrollBuild).toHaveBeenCalledWith('Skarner', notSummonersRift.mapId);
+      expect(championsService.getTrollBuild).toHaveBeenCalledWith(skarner.name, notSummonersRift.mapId);
       expect(component.build).toBeNull();
     }));
 
@@ -507,7 +496,7 @@ describe('ChampionPage', () => {
 
       fixture.detectChanges();
 
-      expect(championsService.getTrollBuild).toHaveBeenCalledWith('Skarner', notSummonersRift.mapId);
+      expect(championsService.getTrollBuild).toHaveBeenCalledWith(skarner.name, notSummonersRift.mapId);
       expect(component.build).toBeNull();
     }));
 
@@ -647,8 +636,8 @@ describe('ChampionPage', () => {
     }));
 
     afterEach(inject([ChampionService, GameMapsService], (championsService: ChampionService, gameMapsService: GameMapsService) => {
-      expect(championsService.getChampion).not.toHaveBeenCalledWith('Skarner');
-      expect(championsService.getTrollBuild).toHaveBeenCalledWith('Skarner', GameMap.summonersRiftId);
+      expect(championsService.getChampion).not.toHaveBeenCalledWith(skarner.name);
+      expect(championsService.getTrollBuild).toHaveBeenCalledWith(skarner.name, GameMap.summonersRiftId);
       expect(gameMapsService.forTrollBuild).toHaveBeenCalled();
     }));
 
@@ -691,8 +680,8 @@ describe('ChampionPage', () => {
     }));
 
     afterEach(inject([ChampionService, GameMapsService], (championsService: ChampionService, gameMapsService: GameMapsService) => {
-      expect(championsService.getChampion).not.toHaveBeenCalledWith('Skarner');
-      expect(championsService.getTrollBuild).not.toHaveBeenCalledWith('Skarner', GameMap.summonersRiftId);
+      expect(championsService.getChampion).not.toHaveBeenCalledWith(skarner.name);
+      expect(championsService.getTrollBuild).not.toHaveBeenCalledWith(skarner.name, GameMap.summonersRiftId);
       expect(gameMapsService.forTrollBuild).toHaveBeenCalled();
     }));
 

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Title } from '@angular/platform-browser';
 
 import { Observable } from 'rxjs';
 
+import { TitleService } from '@service/title.service';
 import { ChampionsService } from '@service/champions.service';
 import { Champion } from '@model/champion';
 
@@ -18,7 +18,7 @@ export class ChampionsPage implements OnInit {
   championsSearchName: string;
   championsFilterTag: string;
 
-  constructor(private championsService: ChampionsService, private title: Title) {}
+  constructor(private championsService: ChampionsService, private title: TitleService) {}
 
   ngOnInit() {
     this.setTitle();
@@ -27,9 +27,7 @@ export class ChampionsPage implements OnInit {
   }
 
   private setTitle(): void {
-    if (this.title.getTitle().indexOf('|') > -1) {
-      this.title.setTitle(this.title.getTitle().substring(0, this.title.getTitle().indexOf('|') - 1));
-    }
+    this.title.resetTitle();
   }
 
   getChampions(): void {

@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { ChampionRoutingModule } from './champion-routing.module';
 
 import { ChampionPage } from './champion.page';
+import { TitleService } from '@service/title.service';
 import { BuildsService } from '@service/builds.service';
 import { ChampionService } from '@service/champion.service';
 import { GameMapsService } from '@service/game-maps.service';
@@ -19,6 +20,7 @@ import { GameMapsService } from '@service/game-maps.service';
     ChampionPage,
   ],
   providers: [
+    TitleService,
     BuildsService,
     ChampionService,
     GameMapsService

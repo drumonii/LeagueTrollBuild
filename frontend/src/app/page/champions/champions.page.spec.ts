@@ -3,13 +3,14 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { RouterLinkWithHref } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { By, Title } from '@angular/platform-browser';
+import { By } from '@angular/platform-browser';
 
 import { of } from 'rxjs';
 
 import { ChampionsPage } from './champions.page';
 import { ChampionsModule } from './champions.module';
 import { Champion } from '@model/champion';
+import { TitleService } from '@service/title.service';
 import { ChampionsService } from '@service/champions.service';
 
 describe('ChampionsPage', () => {
@@ -83,36 +84,24 @@ describe('ChampionsPage', () => {
 
     const tags = ['Assassin', 'Fighter', 'Mage', 'Marksman', 'Support', 'Tank'];
 
-    beforeEach(inject([ChampionsService, Title], (championsService: ChampionsService) => {
+    beforeEach(inject([ChampionsService], (championsService: ChampionsService) => {
       spyOn(championsService, 'getChampions').and.returnValue(of(champions));
       spyOn(championsService, 'getChampionTags').and.returnValue(of(tags));
     }));
 
-    afterEach(inject([ChampionsService, Title], (championsService: ChampionsService) => {
+    afterEach(inject([ChampionsService], (championsService: ChampionsService) => {
       expect(championsService.getChampions).toHaveBeenCalled();
       expect(championsService.getChampionTags).toHaveBeenCalled();
     }));
 
-    it('should leave title as is with no content title', inject([Title], (title: Title) => {
-      spyOn(title, 'getTitle').and.returnValue('League Troll Build');
-      spyOn(title, 'setTitle').and.callThrough();
+    it('should reset the title', inject([TitleService], (title: TitleService) => {
+      spyOn(title, 'resetTitle').and.callThrough();
 
       fixture.detectChanges();
 
       expectChampionAndTags();
 
-      expect(title.setTitle).not.toHaveBeenCalled();
-    }));
-
-    it('should reset title with existing content title', inject([Title], (title: Title) => {
-      spyOn(title, 'getTitle').and.returnValue('League Troll Build | Ryze');
-      spyOn(title, 'setTitle').and.callThrough();
-
-      fixture.detectChanges();
-
-      expectChampionAndTags();
-
-      expect(title.setTitle).toHaveBeenCalledWith('League Troll Build');
+      expect(title.resetTitle).toHaveBeenCalledWith();
     }));
 
     it('should filter Champions with clicking a tag', () => {
