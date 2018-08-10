@@ -13,15 +13,15 @@ import java.util.List;
  */
 public final class TrollBuildBuilder {
 
-	private static final int ITEMS_SIZE = 6;
-	private static final int SPELLS_SIZE = 2;
+	static final int ITEMS_SIZE = 6;
+	static final int SPELLS_SIZE = 2;
 
 	private List<Item> items = new ArrayList<>();
 	private int totalGold;
 	private List<SummonerSpell> summonerSpells = new ArrayList<>();
 	private Item trinket;
 
-	public TrollBuildBuilder withBoots(Item boots) {
+	private TrollBuildBuilder withBoots(Item boots) {
 		if (boots != null) {
 			items.add(0, boots);
 		}
@@ -29,7 +29,7 @@ public final class TrollBuildBuilder {
 	}
 
 	public TrollBuildBuilder withBoots(List<Item> boots) {
-		if (!boots.isEmpty()) {
+		if (boots != null && !boots.isEmpty()) {
 			withBoots(RandomizeUtil.getRandom(boots));
 		}
 		return this;
@@ -52,7 +52,7 @@ public final class TrollBuildBuilder {
 		return this;
 	}
 
-	public TrollBuildBuilder withTrinket(Item trinket) {
+	private TrollBuildBuilder withTrinket(Item trinket) {
 		if (trinket != null) {
 			this.trinket = trinket;
 			this.totalGold += this.trinket.getGold().getTotal();
