@@ -17,6 +17,7 @@ public final class TrollBuildBuilder {
 	private static final int SPELLS_SIZE = 2;
 
 	private List<Item> items = new ArrayList<>();
+	private int totalGold;
 	private List<SummonerSpell> summonerSpells = new ArrayList<>();
 	private Item trinket;
 
@@ -37,6 +38,9 @@ public final class TrollBuildBuilder {
 	public TrollBuildBuilder withItems(List<Item> items) {
 		if (items != null && !items.isEmpty()) {
 			this.items.addAll(RandomizeUtil.getRandoms(items, ITEMS_SIZE - 1)); // (without boots)
+			this.totalGold += this.items.stream()
+					.mapToInt(item -> item.getGold().getTotal())
+					.sum();
 		}
 		return this;
 	}
@@ -51,6 +55,7 @@ public final class TrollBuildBuilder {
 	public TrollBuildBuilder withTrinket(Item trinket) {
 		if (trinket != null) {
 			this.trinket = trinket;
+			this.totalGold += this.trinket.getGold().getTotal();
 		}
 		return this;
 	}
@@ -73,6 +78,7 @@ public final class TrollBuildBuilder {
 	public TrollBuild build() {
 		TrollBuild trollBuild = new TrollBuild();
 		trollBuild.setItems(items);
+		trollBuild.setTotalGold(totalGold);
 		trollBuild.setSummonerSpells(summonerSpells);
 		trollBuild.setTrinket(trinket);
 		return trollBuild;

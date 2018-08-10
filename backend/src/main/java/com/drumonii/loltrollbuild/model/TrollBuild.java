@@ -17,6 +17,10 @@ public class TrollBuild {
 
 	@JsonProperty
 	@JsonView(ApiViews.LtbApi.class)
+	private int totalGold;
+
+	@JsonProperty
+	@JsonView(ApiViews.LtbApi.class)
 	private List<SummonerSpell> summonerSpells;
 
 	@JsonProperty
@@ -29,6 +33,14 @@ public class TrollBuild {
 
 	public void setItems(List<Item> items) {
 		this.items = items;
+	}
+
+	public int getTotalGold() {
+		return totalGold;
+	}
+
+	public void setTotalGold(int totalGold) {
+		this.totalGold = totalGold;
 	}
 
 	public List<SummonerSpell> getSummonerSpells() {

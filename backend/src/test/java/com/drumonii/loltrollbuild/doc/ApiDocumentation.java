@@ -470,7 +470,9 @@ public class ApiDocumentation {
 						fieldWithPath("summonerSpells")
 								.description("The Summoner Spells of the Troll Build"),
 						fieldWithPath("items")
-								.description("The Items of the Troll Build, with the first always a boots Item"))));
+								.description("The Items of the Troll Build, with the first always a boots Item"),
+						fieldWithPath("totalGold")
+								.description("The total gold amount of the Troll Build"))));
 	}
 
 	/*
