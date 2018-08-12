@@ -30,7 +30,7 @@ export class ChampionService {
       .pipe(
         catchError((error: HttpErrorResponse) => {
           console.error(`Caught error while GETing a Troll Build for Champion ${name} and params ${JSON.stringify(params)}: ${JSON.stringify(error)}`);
-          return of(null);
+          return of(new TrollBuild());
         })
       );
   }

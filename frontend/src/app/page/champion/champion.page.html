@@ -40,38 +40,46 @@
 
   <hr>
 
-  <div id="troll-build" *ngIf="(trollBuild$ | async) as trollBuild; else loadingTrollBuild">
-    <button id="new-build-btn" (click)="getTrollBuild()">New Build</button>
-    <div>
-      <h4 id="troll-build-items-header">Items</h4>
-      <div class="troll-build-item" *ngFor="let item of trollBuild.items">
-        <img class="troll-build-item-img" src="/api/img/items/{{item.id}}">
-        {{item.name}}
+  <ng-container *ngIf="(trollBuild$ | async) as trollBuild; else loadingTrollBuild">
+    <ng-container *ngIf="trollBuild.items && trollBuild.summonerSpells && trollBuild.trinket; else noTrollBuild">
+      <button id="new-build-btn" (click)="getTrollBuild()">New Build</button>
+      <div>
+        <h4 id="troll-build-items-header">Items</h4>
+        <div class="troll-build-item" *ngFor="let item of trollBuild.items">
+          <img class="troll-build-item-img" src="/api/img/items/{{item.id}}">
+          {{item.name}}
+        </div>
       </div>
-    </div>
-    <div>
-      <h4 id="troll-build-summoner-spells-header">Summoner Spells</h4>
-      <div class="troll-build-summoner-spell" *ngFor="let summonerSpell of trollBuild.summonerSpells">
-        <img class="troll-build-summoner-spells-img" src="/api/img/summoner-spells/{{summonerSpell.id}}">
-        {{summonerSpell.name}}
+      <div>
+        <h4 id="troll-build-summoner-spells-header">Summoner Spells</h4>
+        <div class="troll-build-summoner-spell" *ngFor="let summonerSpell of trollBuild.summonerSpells">
+          <img class="troll-build-summoner-spells-img" src="/api/img/summoner-spells/{{summonerSpell.id}}">
+          {{summonerSpell.name}}
+        </div>
       </div>
-    </div>
-    <div>
-      <h4 id="troll-build-trinket-header">Trinket</h4>
-      <div class="troll-build-trinket">
-        <img class="troll-build-trinket-img" src="/api/img/items/{{trollBuild.trinket.id}}">
-        {{trollBuild.trinket.name}}
+      <div>
+        <h4 id="troll-build-trinket-header">Trinket</h4>
+        <div class="troll-build-trinket">
+          <img class="troll-build-trinket-img" src="/api/img/items/{{trollBuild.trinket.id}}">
+          {{trollBuild.trinket.name}}
+        </div>
       </div>
-    </div>
-    <button id="save-build-btn" (click)="saveBuild(trollBuild)" [disabled]="build">Save Build</button>
-    <div *ngIf="build">
-      <input id="saved-build-input-link" class="input" type="text" readonly [value]="build.selfRef" #savedBuildLink>
-      <button id="copy-build-link-btn" (click)="copyBuildToClipboard(savedBuildLink)">
-        <i class="fa fa-clipboard" aria-hidden="true"></i>
-      </button>
-    </div>
-  </div>
-
+      <button id="save-build-btn" (click)="saveBuild(trollBuild)" [disabled]="build">Save Build</button>
+      <div *ngIf="build">
+        <input id="saved-build-input-link" class="input" type="text" readonly [value]="build.selfRef" #savedBuildLink>
+        <button id="copy-build-link-btn" (click)="copyBuildToClipboard(savedBuildLink)">
+          <i class="fa fa-clipboard" aria-hidden="true"></i>
+        </button>
+      </div>
+    </ng-container>
+    <ng-template #noTrollBuild>
+      <article id="no-troll-build-alert" class="message is-danger">
+        <div class="message-body">
+          <p id="no-troll-build-alert-msg">An error has occurred while generating a Troll Build. Please try again later.</p>
+        </div>
+      </article>
+    </ng-template>
+  </ng-container>
   <ng-template #loadingTrollBuild>
     <button id="new-build-btn-loading">New Build</button>
     <div id="troll-build-loading">

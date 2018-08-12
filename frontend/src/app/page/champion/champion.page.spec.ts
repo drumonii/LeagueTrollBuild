@@ -671,6 +671,33 @@ describe('ChampionPage', () => {
 
   });
 
+  describe('show Champion by name with a failed to load Troll Build and maps to select', () => {
+
+    beforeEach(inject([ChampionService, GameMapsService], (championsService: ChampionService, gameMapsService: GameMapsService) => {
+      spyOn(championsService, 'getChampion').and.returnValue(of(skarner));
+      spyOn(championsService, 'getTrollBuild').and.returnValue(of(new TrollBuild()));
+      spyOn(gameMapsService, 'forTrollBuild').and.returnValue(of(maps));
+    }));
+
+    afterEach(inject([ChampionService, GameMapsService], (championsService: ChampionService, gameMapsService: GameMapsService) => {
+      expect(championsService.getChampion).not.toHaveBeenCalledWith(skarner.name);
+      expect(championsService.getTrollBuild).toHaveBeenCalledWith(skarner.name, GameMap.summonersRiftId);
+      expect(gameMapsService.forTrollBuild).toHaveBeenCalled();
+    }));
+
+    it('should show unable to generate Troll Build alert', () => {
+      fixture.detectChanges();
+
+      const alertDe = fixture.debugElement.query(By.css('#no-troll-build-alert'));
+      expect(alertDe).toBeTruthy();
+
+      const alertMsgDe = fixture.debugElement.query(By.css('#no-troll-build-alert-msg'));
+      expect(alertMsgDe.nativeElement.textContent)
+        .toBe('An error has occurred while generating a Troll Build. Please try again later.');
+    });
+
+  });
+
   describe('show Champion by name with loading game maps', () => {
 
     beforeEach(inject([ChampionService, GameMapsService], (championsService: ChampionService, gameMapsService: GameMapsService) => {

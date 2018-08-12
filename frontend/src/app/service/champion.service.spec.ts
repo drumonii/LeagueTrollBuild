@@ -511,7 +511,7 @@ describe('ChampionService', () => {
     const gameMapId = 11;
 
     service.getTrollBuild(name, gameMapId).subscribe(trollBuild => {
-      expect(trollBuild).toBeNull();
+      expect(trollBuild).toEqual(new TrollBuild());
     });
 
     const testReq = httpMock.expectOne(`/api/champions/${name}/troll-build?mapId=${gameMapId}`);
@@ -525,7 +525,7 @@ describe('ChampionService', () => {
     const name = 'Bard';
 
     service.getTrollBuild(name).subscribe(trollBuild => {
-      expect(trollBuild).toBeNull();
+      expect(trollBuild).toEqual(new TrollBuild());
     });
 
     const testReq = httpMock.expectOne(`/api/champions/${name}/troll-build`);
