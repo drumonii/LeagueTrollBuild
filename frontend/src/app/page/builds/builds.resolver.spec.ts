@@ -1,14 +1,13 @@
-import { async, fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
+import { async,  inject, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ActivatedRouteSnapshot, convertToParamMap, Router } from '@angular/router';
 
-import { Observable, of } from 'rxjs';
+import { of } from 'rxjs';
 
 import { BuildsResolver } from './builds.resolver';
 import { BuildsModule } from './builds.module';
 import { BuildsService } from '@service/builds.service';
-import { BuildsResolverData } from './builds.resolver.data';
 import { Build } from '@model/build';
 
 describe('BuildsResolver', () => {
@@ -356,15 +355,11 @@ describe('BuildsResolver', () => {
       expect(buildsService.countBuilds).not.toHaveBeenCalled();
     }));
 
-    it('should resolve a Build', fakeAsync(inject([BuildsService, Router, ActivatedRouteSnapshot],
+    it('should resolve a Build', async(inject([BuildsService, Router, ActivatedRouteSnapshot],
       (buildsService: BuildsService, router: Router, route: ActivatedRouteSnapshot) => {
       spyOn(buildsService, 'getBuild').and.returnValue(of(build));
 
-      const buildsResolverDataObservable: Observable<BuildsResolverData> = resolver.resolve(route, null);
-
-      tick();
-
-      buildsResolverDataObservable.subscribe((data) => {
+      resolver.resolve(route, null).subscribe(data => {
         expect(data.id).toBe(1);
         expect(data.savedBuild).toEqual(build);
         expect(router.navigate).not.toHaveBeenCalled();
@@ -400,15 +395,11 @@ describe('BuildsResolver', () => {
       expect(buildsService.countBuilds).toHaveBeenCalled();
     }));
 
-    it('should resolve a random Build', fakeAsync(inject([BuildsService, Router, ActivatedRouteSnapshot],
+    it('should resolve a random Build', async(inject([BuildsService, Router, ActivatedRouteSnapshot],
       (buildsService: BuildsService, router: Router, route: ActivatedRouteSnapshot) => {
       spyOn(buildsService, 'countBuilds').and.returnValue(of(2));
 
-      const buildsResolverDataObservable: Observable<BuildsResolverData> = resolver.resolve(route, null);
-
-      tick();
-
-      buildsResolverDataObservable.subscribe((data) => {
+      resolver.resolve(route, null).subscribe(data => {
         expect(data.id).toBe(1);
         expect(data.savedBuild).toEqual(build);
         expect(router.navigate).toHaveBeenCalled();
@@ -416,15 +407,11 @@ describe('BuildsResolver', () => {
       });
     })));
 
-    it('should resolve the only random Build', fakeAsync(inject([BuildsService, Router, ActivatedRouteSnapshot],
+    it('should resolve the only random Build', async(inject([BuildsService, Router, ActivatedRouteSnapshot],
       (buildsService: BuildsService, router: Router, route: ActivatedRouteSnapshot) => {
       spyOn(buildsService, 'countBuilds').and.returnValue(of(1));
 
-      const buildsResolverDataObservable: Observable<BuildsResolverData> = resolver.resolve(route, null);
-
-      tick();
-
-      buildsResolverDataObservable.subscribe((data) => {
+      resolver.resolve(route, null).subscribe(data => {
         expect(data.id).toBe(1);
         expect(data.savedBuild).toEqual(build);
         expect(router.navigate).toHaveBeenCalled();

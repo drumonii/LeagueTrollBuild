@@ -1,9 +1,9 @@
-import { async, fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
+import { async, inject, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ActivatedRouteSnapshot, convertToParamMap, Router } from '@angular/router';
 
-import { Observable, of } from 'rxjs';
+import { of } from 'rxjs';
 
 import { ChampionResolver } from './champion.resolver';
 import { ChampionModule } from './champion.module';
@@ -39,7 +39,7 @@ describe('ChampionResolver', () => {
   }));
 
   it('should resolve a Champion',
-    fakeAsync(inject([ChampionService, Router, ActivatedRouteSnapshot],
+    async(inject([ChampionService, Router, ActivatedRouteSnapshot],
       (championsService: ChampionService, router: Router, route: ActivatedRouteSnapshot) => {
     const kennen: Champion = {
       id: 85,
@@ -67,26 +67,18 @@ describe('ChampionResolver', () => {
     };
     spyOn(championsService, 'getChampion').and.returnValue(of(kennen));
 
-    const championObservable: Observable<Champion> = resolver.resolve(route, null);
-
-    tick();
-
-    championObservable.subscribe((champion) => {
+    resolver.resolve(route, null).subscribe(champion => {
       expect(champion).toEqual(kennen);
       expect(router.navigate).not.toHaveBeenCalled();
     });
   })));
 
   it('should redirect to /champions when unable to resolve a Champion',
-    fakeAsync(inject([ChampionService, Router, ActivatedRouteSnapshot],
+    async(inject([ChampionService, Router, ActivatedRouteSnapshot],
       (championsService: ChampionService, router: Router, route: ActivatedRouteSnapshot) => {
     spyOn(championsService, 'getChampion').and.returnValue(of(null));
 
-    const championObservable: Observable<Champion> = resolver.resolve(route, null);
-
-    tick();
-
-    championObservable.subscribe((champion) => {
+    resolver.resolve(route, null).subscribe(champion => {
       expect(champion).toBeNull();
       expect(router.navigate).toHaveBeenCalledWith(['/champions']);
     });
