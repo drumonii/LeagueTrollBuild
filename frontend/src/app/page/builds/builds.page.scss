@@ -1,0 +1,124 @@
+@mixin base-img {
+  border-radius: 5px;
+}
+
+.troll-build-item-img, .troll-build-summoner-spells-img, .troll-build-trinket-img {
+  @include base-img;
+  width: 75px;
+}
+
+#champion-img {
+  @include base-img;
+  display: block;
+  width: 80%;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+#champion-name {
+  margin-top: 0.5em;
+  font-size: 1.6em;
+}
+
+#champion-title {
+  margin-bottom: 1em;
+  font-size: 1.1em;
+}
+
+#champion-tags {
+  margin-bottom: 1rem;
+  .champion-tag {
+    margin-right: 0.5rem;
+  }
+}
+
+#champion-img-container {
+  position: relative;
+}
+
+#champion-partype-ribbon {
+  left: calc(.05rem - 1.2em);
+  border-color: black;
+  position: absolute;
+  top: 1rem;
+  background-color: grey;
+  padding-left: 1.6em;
+  padding-right: 1.5em;
+  border-radius: 0 0.2em 0.2em 0;
+  &:after {
+    position: absolute;
+    content: '';
+    top: 100%;
+    left: 0;
+    border-style: solid;
+    border-width: 0 1.2em 1.2em 0;
+    border-color: transparent;
+    border-right-color: inherit;
+  }
+}
+
+#new-build-btn {
+  display: block;
+  width: 80%;
+  font-size: 1.1em;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.troll-build-items-header, .troll-build-summoner-spells-header, .troll-build-trinket-header {
+  font-size: 1.3em;
+  margin-bottom: 0.5em;
+}
+
+.troll-build-objects {
+  list-style: none;
+  .troll-build-object {
+    display: inline-block;
+    margin-left: 1em;
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+}
+
+.with-tooltip {
+  position: relative;
+  cursor: pointer;
+  &:before, &:after {
+    transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out, transform 0.2s cubic-bezier(0.71, 1.7, 0.77, 1.24);
+  }
+  &:before {
+    content: "";
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 99;
+    opacity: 0;
+  }
+  &:after {
+    content: attr(data-tooltip);
+    position: absolute;
+    left: 50%;
+    top: -6px;
+    transform: translateX(-50%) translateY(-100%);
+    background: black;
+    text-align: center;
+    color: white;
+    font-size: 0.9em;
+    min-width: 100px;
+    border-radius: 5px;
+    pointer-events: none;
+    padding: 4px 4px;
+    z-index: 99;
+    opacity: 0;
+  }
+  &:hover {
+    &:after {
+      opacity: 1;
+    }
+    &:before {
+      opacity: 1;
+    }
+  }
+}

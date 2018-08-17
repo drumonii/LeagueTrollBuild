@@ -1,7 +1,7 @@
 import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLinkWithHref } from '@angular/router';
 import { By } from '@angular/platform-browser';
 
 import { of } from 'rxjs';
@@ -416,7 +416,12 @@ describe('BuildsPage', () => {
     it('should show no Build found alert',
       inject([BuildsService, TitleService], (buildsService: BuildsService, title: TitleService) => {
       const buildNotFoundAlertDe = fixture.debugElement.query(By.css('#build-not-found-alert'));
-      expect(buildNotFoundAlertDe.nativeElement.textContent).toBe('Couldn\'t find a saved Troll Build with ID 1');
+      expect(buildNotFoundAlertDe.nativeElement.textContent).toBe('Couldn\'t find a saved Troll Build with ID: 1');
+
+      const randomBuildLinkDe = fixture.debugElement.query(By.css('.try-random-build'));
+      expect(randomBuildLinkDe.nativeElement.textContent.trim()).toBe('Try a random Troll Build');
+      const returnHomeRouterLink = randomBuildLinkDe.injector.get(RouterLinkWithHref);
+      expect(returnHomeRouterLink.href).toBe('/builds');
 
       expect(title.setTitle).toHaveBeenCalledWith(`Couldn't find Troll Build 1`);
     }));
@@ -455,7 +460,12 @@ describe('BuildsPage', () => {
     it('should show invalid Items alert',
       inject([BuildsService, TitleService], (buildsService: BuildsService, title: TitleService) => {
       const buildInvalidAlertDe = fixture.debugElement.query(By.css('#build-invalid-items-alert'));
-      expect(buildInvalidAlertDe.nativeElement.textContent).toBe('This Troll Build with ID 1 has become invalid due to outdated Items');
+      expect(buildInvalidAlertDe.nativeElement.textContent).toBe('This Troll Build with ID: 1 has become invalid due to outdated Items');
+
+      const randomBuildLinkDe = fixture.debugElement.query(By.css('.try-random-build'));
+      expect(randomBuildLinkDe.nativeElement.textContent.trim()).toBe('Try a random Troll Build');
+      const returnHomeRouterLink = randomBuildLinkDe.injector.get(RouterLinkWithHref);
+      expect(returnHomeRouterLink.href).toBe('/builds');
 
       expect(title.setTitle).toHaveBeenCalledWith(`Invalid attributes in Troll Build 1`);
     }));
@@ -494,7 +504,12 @@ describe('BuildsPage', () => {
     it('should show invalid Summoner Spells alert',
       inject([BuildsService, TitleService], (buildsService: BuildsService, title: TitleService) => {
       const buildInvalidAlertDe = fixture.debugElement.query(By.css('#build-invalid-summoner-spells-alert'));
-      expect(buildInvalidAlertDe.nativeElement.textContent).toBe('This Troll Build with ID 1 has become invalid due to outdated Summoner Spells');
+      expect(buildInvalidAlertDe.nativeElement.textContent).toBe('This Troll Build with ID: 1 has become invalid due to outdated Summoner Spells');
+
+      const randomBuildLinkDe = fixture.debugElement.query(By.css('.try-random-build'));
+      expect(randomBuildLinkDe.nativeElement.textContent.trim()).toBe('Try a random Troll Build');
+      const returnHomeRouterLink = randomBuildLinkDe.injector.get(RouterLinkWithHref);
+      expect(returnHomeRouterLink.href).toBe('/builds');
 
       expect(title.setTitle).toHaveBeenCalledWith(`Invalid attributes in Troll Build 1`);
     }));
@@ -533,7 +548,12 @@ describe('BuildsPage', () => {
       fixture.detectChanges();
 
       const buildInvalidAlertDe = fixture.debugElement.query(By.css('#build-invalid-trinket-alert'));
-      expect(buildInvalidAlertDe.nativeElement.textContent).toBe('This Troll Build with ID 1 has become invalid due to an outdated Trinket');
+      expect(buildInvalidAlertDe.nativeElement.textContent).toBe('This Troll Build with ID: 1 has become invalid due to an outdated Trinket');
+
+      const randomBuildLinkDe = fixture.debugElement.query(By.css('.try-random-build'));
+      expect(randomBuildLinkDe.nativeElement.textContent.trim()).toBe('Try a random Troll Build');
+      const returnHomeRouterLink = randomBuildLinkDe.injector.get(RouterLinkWithHref);
+      expect(returnHomeRouterLink.href).toBe('/builds');
 
       expect(title.setTitle).toHaveBeenCalledWith(`Invalid attributes in Troll Build 1`);
     }));
@@ -541,72 +561,53 @@ describe('BuildsPage', () => {
 
   function expectChampionAndMapsAndSavedTrollBuild() {
     // Champion
-    const championsNameAndTitleDe = fixture.debugElement.query(By.css('#champion-name-and-title'));
-    expect(championsNameAndTitleDe.nativeElement.textContent).toBe(`${build.champion.name} - ${build.champion.title}`);
+    const championsNameDe = fixture.debugElement.query(By.css('#champion-name'));
+    expect(championsNameDe.nativeElement.textContent).toBe(build.champion.name);
+
+    const championsTitleDe = fixture.debugElement.query(By.css('#champion-title'));
+    expect(championsTitleDe.nativeElement.textContent).toBe(build.champion.title);
 
     const championImgDe = fixture.debugElement.query(By.css('#champion-img'));
     expect(championImgDe.nativeElement.src).toContain(`/api/img/champions/${build.champion.id}`);
 
     const championPartypeDe = fixture.debugElement.query(By.css('#champion-partype'));
-    expect(championPartypeDe.nativeElement.textContent).toBe(`(${build.champion.partype})`);
+    expect(championPartypeDe.nativeElement.textContent).toBe(`${build.champion.partype}`);
 
     const championTagsDe = fixture.debugElement.queryAll(By.css('.champion-tag'));
     expect(championTagsDe.map(championTagDe => championTagDe.nativeElement.textContent)).toEqual(build.champion.tags);
 
-    const championPassiveImgDe = fixture.debugElement.query(By.css('#champion-passive-img'));
-    expect(championPassiveImgDe.nativeElement.src).toContain(`/api/img/champions/${build.champion.id}/passive`);
-
-    const championsPassiveDe = fixture.debugElement.query(By.css('#champion-passive-name'));
-    expect(championsPassiveDe.nativeElement.textContent).toBe(build.champion.passive.name);
-
-    const championsPassiveDescDe = fixture.debugElement.query(By.css('#champion-passive-description'));
-    expect(championsPassiveDescDe.nativeElement.textContent).toBe(build.champion.passive.description);
-
-    const championSpellsDe = fixture.debugElement.queryAll(By.css('.champion-spell'));
-    expect(championSpellsDe.length).toBe(build.champion.spells.length);
-    for (let i = 0; i < championSpellsDe.length; i++) {
-      const championSpellImgDe = championSpellsDe[i].query(By.css('.champion-spell-img'));
-      expect(championSpellImgDe.nativeElement.src).toContain(`/api/img/champions/${build.champion.id}/spell/${build.champion.spells[i].key}`);
-      const championSpellNameDe = championSpellsDe[i].query(By.css('.champion-spell-name'));
-      expect(championSpellNameDe.nativeElement.textContent).toBe(build.champion.spells[i].name);
-      const championSpellDescDe = championSpellsDe[i].query(By.css('.champion-spell-description'));
-      expect(championSpellDescDe.nativeElement.textContent).toBe(build.champion.spells[i].description);
-    }
-
     // Maps
-    const mapsHeaderDe = fixture.debugElement.query(By.css('#troll-build-maps-header'));
-    expect(mapsHeaderDe.nativeElement.textContent).toBe('Map');
-
     const mapsOptionDe = fixture.debugElement.query(By.css('.map-option'));
     expect(mapsOptionDe.nativeElement.textContent.trim()).toBe(build.map.mapName);
     const newBuildBtnDe = fixture.debugElement.query(By.css('#new-build-btn'));
     expect(newBuildBtnDe.nativeElement.textContent).toBe('New Build');
 
     // Troll Build
-    const trollBuildItemsHeaderDe = fixture.debugElement.query(By.css('#troll-build-items-header'));
+    const trollBuildItemsHeaderDe = fixture.debugElement.query(By.css('.troll-build-items-header'));
     expect(trollBuildItemsHeaderDe.nativeElement.textContent).toBe('Items');
     const trollBuildItemsDe = fixture.debugElement.queryAll(By.css('.troll-build-item'));
     for (let i = 0; i < trollBuildItemsDe.length; i++) {
+      expect(trollBuildItemsDe[i].attributes['data-tooltip']).toBe(getItem(i).name);
       const trollBuildItemImgDe = trollBuildItemsDe[i].query(By.css(`#troll-build-item${i + 1}-img`));
       expect(trollBuildItemImgDe.nativeElement.src).toContain(`/api/img/items/${getItem(i).id}`);
-      expect(trollBuildItemsDe[i].nativeElement.textContent.trim()).toBe(getItem(i).name);
     }
 
-    const trollBuildSummonerSpellsHeaderDe = fixture.debugElement.query(By.css('#troll-build-summoner-spells-header'));
+    const trollBuildSummonerSpellsHeaderDe = fixture.debugElement.query(By.css('.troll-build-summoner-spells-header'));
     expect(trollBuildSummonerSpellsHeaderDe.nativeElement.textContent).toBe('Summoner Spells');
     const trollBuildSummonerSpellsDe = fixture.debugElement.queryAll(By.css('.troll-build-summoner-spell'));
     for (let i = 0; i < trollBuildSummonerSpellsDe.length; i++) {
+      expect(trollBuildSummonerSpellsDe[i].attributes['data-tooltip']).toBe(getSummonerSpell(i).name);
       const trollBuildSummonerSpellsImgDe = trollBuildSummonerSpellsDe[i].query(By.css(`#troll-build-summoner-spell${i + 1}-img`));
       expect(trollBuildSummonerSpellsImgDe.nativeElement.src).toContain(`/api/img/summoner-spells/${getSummonerSpell(i).id}`);
-      expect(trollBuildSummonerSpellsDe[i].nativeElement.textContent.trim()).toBe(getSummonerSpell(i).name);
     }
 
-    const trollBuildTrinketHeaderDe = fixture.debugElement.query(By.css('#troll-build-trinket-header'));
+    const trollBuildTrinketHeaderDe = fixture.debugElement.query(By.css('.troll-build-trinket-header'));
     expect(trollBuildTrinketHeaderDe.nativeElement.textContent).toBe('Trinket');
     const trollBuildTrinketDe = fixture.debugElement.query(By.css('.troll-build-trinket'));
+    expect(trollBuildTrinketDe).toBeTruthy();
+    expect(trollBuildTrinketDe.attributes['data-tooltip']).toBe(build.trinket.name);
     const trollBuildTrinketImgDe = fixture.debugElement.query(By.css('#troll-build-trinket-img'));
     expect(trollBuildTrinketImgDe.nativeElement.src).toContain(`/api/img/items/${build.trinket.id}`);
-    expect(trollBuildTrinketDe.nativeElement.textContent.trim()).toBe(build.trinket.name);
 
     function getItem(index: number): Item {
       switch (index) {
