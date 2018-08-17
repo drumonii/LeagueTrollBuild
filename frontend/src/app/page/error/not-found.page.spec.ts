@@ -28,9 +28,6 @@ describe('NotFoundPage', () => {
     const titleDe = fixture.debugElement.query(By.css('#title'));
     expect(titleDe.nativeElement.textContent.trim()).toBe('Page Not Found');
 
-    const subtitleDe = fixture.debugElement.query(By.css('#subtitle'));
-    expect(subtitleDe.nativeElement.textContent.trim()).toBe('Error code: 404');
-
     const messageDe = fixture.debugElement.query(By.css('#msg'));
     expect(messageDe.nativeElement.textContent.trim())
       .toBe('The page you requested was not found. Please double check the URL and try again.');
