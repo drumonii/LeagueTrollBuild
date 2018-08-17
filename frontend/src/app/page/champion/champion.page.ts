@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 import { TitleService } from '@service/title.service';
 import { BuildsService } from '@service/builds.service';
@@ -23,7 +24,9 @@ export class ChampionPage implements OnInit {
   champion: Champion;
   gameMaps: GameMap[];
   trollBuild$: Observable<TrollBuild>;
+  trollBuildLoading: boolean;
   build: Build;
+  buildSaving: boolean;
 
   constructor(private championService: ChampionService, private gameMapsService: GameMapsService,
     private buildsService: BuildsService, private title: TitleService, private route: ActivatedRoute) {}
@@ -50,7 +53,11 @@ export class ChampionPage implements OnInit {
 
   getTrollBuild(): void {
     this.build = null;
-    this.trollBuild$ = this.championService.getTrollBuild(this.champion.name, this.gameMap.mapId);
+    this.trollBuildLoading = true;
+    this.trollBuild$ = this.championService.getTrollBuild(this.champion.name, this.gameMap.mapId)
+      .pipe(
+        tap(() => this.trollBuildLoading = false)
+      );
   }
 
   saveBuild(trollBuild: TrollBuild): void {
@@ -61,9 +68,11 @@ export class ChampionPage implements OnInit {
       .withTrinket(trollBuild.trinket)
       .withGameMap(this.gameMap)
       .build();
+    this.buildSaving = true;
     this.buildsService.saveBuild(build).subscribe(res => {
       this.build = res.body;
       this.build.selfRef = res.headers.get('Location').replace('/api', '');
+      this.buildSaving = false;
     });
   }
 

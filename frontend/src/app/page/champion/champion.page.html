@@ -1,106 +1,178 @@
 <ng-container *ngIf="champion">
-  <h4 id="champion-name-and-title" class="is-capitalized">{{champion.name}} - {{champion.title}}</h4>
-  <img id="champion-img" src="/api/img/champions/{{champion.id}}">
-  <p id="champion-partype">({{champion.partype}})</p>
-  <ul id="champion-tags">
-    <li class="champion-tag" *ngFor="let tag of champion.tags">{{tag}}</li>
-  </ul>
-  <div>
-    <img id="champion-passive-img" src="/api/img/champions/{{champion.id}}/passive">
-    <p id="champion-passive-name">{{champion.passive.name}}</p>
-    <p id="champion-passive-description">{{champion.passive.description}}</p>
-  </div>
-  <div class="champion-spell" *ngFor="let spell of champion.spells">
-    <img class="champion-spell-img" src="/api/img/champions/{{champion.id}}/spell/{{spell.key}}">
-    <p class="champion-spell-name">{{spell.name}}</p>
-    <p class="champion-spell-description">{{spell.description}}</p>
-  </div>
-
-  <hr>
-
-  <div>
-    <h4 id="troll-build-maps-header">Map</h4>
-    <div *ngIf="gameMaps; else loadingMaps">
-      <select id="map-select" [(ngModel)]="gameMap" (ngModelChange)="getTrollBuild()">
-        <option class="map-option" *ngFor="let gameMap of gameMaps" [ngValue]="gameMap">
-          {{gameMap.mapName}}
-        </option>
-      </select>
+  <section class="section">
+    <div class="container">
+      <div class="columns">
+        <div class="column
+          is-2-widescreen is-offset-4-widescreen
+          is-3-desktop is-offset-2-desktop
+          is-3-tablet is-offset-3-tablet
+          is-10-mobile is-offset-2-mobile">
+          <div id="champion-img-container">
+            <div id="champion-partype-ribbon">
+              <span id="champion-partype">{{champion.partype}}</span>
+            </div>
+            <img id="champion-img" src="/api/img/champions/{{champion.id}}">
+            <button id="new-build-btn" class="button is-primary" [class.is-loading]="trollBuildLoading"
+              (click)="getTrollBuild()">New Build</button>
+          </div>
+        </div>
+        <div class="column has-text-centered-mobile">
+          <p id="champion-name">{{champion.name}}</p>
+          <p id="champion-title" class="is-capitalized">{{champion.title}}</p>
+          <ul id="champion-tags">
+            <li class="tag champion-tag is-dark" *ngFor="let tag of champion.tags">{{tag}}</li>
+          </ul>
+          <div class="select" *ngIf="gameMaps; else loadingMaps">
+            <select id="map-select" [(ngModel)]="gameMap" (ngModelChange)="getTrollBuild()">
+              <option class="map-option" *ngFor="let gameMap of gameMaps" [ngValue]="gameMap">
+                {{gameMap.mapName}}
+              </option>
+            </select>
+          </div>
+          <ng-template #loadingMaps>
+            <div class="select is-loading">
+              <select id="map-select-loading">
+                <option class="map-option-loading">
+                  Fetching maps...
+                </option>
+              </select>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+      <ng-container *ngIf="(trollBuild$ | async) as trollBuild; else loadingTrollBuild">
+        <ng-container *ngIf="trollBuild.items && trollBuild.summonerSpells && trollBuild.trinket; else noTrollBuild">
+          <div class="columns">
+            <div class="column
+              is-8-widescreen is-offset-4-widescreen
+              is-10-desktop is-offset-2-desktop
+              is-9-tablet is-offset-3-tablet
+              is-12-mobile has-text-centered-mobile">
+              <p class="troll-build-items-header">Items</p>
+              <ul class="troll-build-objects">
+                <li class="troll-build-item troll-build-object with-tooltip" *ngFor="let item of trollBuild.items"
+                  [attr.data-tooltip]="item.name">
+                  <img class="troll-build-item-img" src="/api/img/items/{{item.id}}">
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="columns">
+            <div class="column
+              is-3-widescreen is-offset-4-widescreen
+              is-4-desktop is-offset-2-desktop
+              is-4-tablet is-offset-3-tablet
+              is-12-mobile has-text-centered-mobile">
+              <p class="troll-build-summoner-spells-header">Summoner Spells</p>
+              <ul class="troll-build-objects">
+                <li class="troll-build-summoner-spell troll-build-object with-tooltip" *ngFor="let summonerSpell of trollBuild.summonerSpells"
+                  [attr.data-tooltip]="summonerSpell.name">
+                  <img class="troll-build-summoner-spells-img" src="/api/img/summoner-spells/{{summonerSpell.id}}">
+                </li>
+              </ul>
+            </div>
+            <div class="column
+              is-2-widescreen is-offset-1-widescreen
+              is-2-desktop is-offset-1-desktop
+              is-2-tablet is-offset-1-tablet
+              is-12-mobile has-text-centered-mobile">
+              <p class="troll-build-trinket-header">Trinket</p>
+              <ul class="troll-build-objects">
+                <li class="troll-build-trinket troll-build-object with-tooltip"
+                  [attr.data-tooltip]="trollBuild.trinket.name">
+                  <img class="troll-build-trinket-img" src="/api/img/items/{{trollBuild.trinket.id}}">
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="columns">
+            <div class="column
+              is-5-widescreen is-offset-4-widescreen
+              is-4-desktop is-offset-4-desktop
+              is-6-tablet is-offset-3-tablet
+              is-12-mobile">
+              <div class="field" [class.has-addons]="build">
+                <div class="control">
+                  <button id="save-build-btn" class="button is-dark" (click)="saveBuild(trollBuild)"
+                    [class.is-loading]="buildSaving" [disabled]="build">Save Build</button>
+                </div>
+                <ng-container *ngIf="build">
+                  <div class="control is-expanded">
+                    <input id="saved-build-input-link" class="input" type="text" readonly [value]="build.selfRef" #savedBuildLink>
+                  </div>
+                  <div class="control">
+                    <button id="copy-build-link-btn" class="button" (click)="copyBuildToClipboard(savedBuildLink)">
+                      <i class="fa fa-clipboard" aria-hidden="true"></i>
+                    </button>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+        <ng-template #noTrollBuild>
+          <article id="no-troll-build-alert" class="message is-danger">
+            <div class="message-body">
+              <p id="no-troll-build-alert-msg">An error has occurred while generating a Troll Build. Please try again later.</p>
+            </div>
+          </article>
+        </ng-template>
+      </ng-container>
+      <ng-template #loadingTrollBuild>
+        <div class="columns">
+          <div class="column
+              is-8-widescreen is-offset-4-widescreen
+              is-10-desktop is-offset-2-desktop
+              is-9-tablet is-offset-3-tablet
+              is-12-mobile has-text-centered-mobile">
+            <p class="troll-build-items-header">Items</p>
+            <ul class="troll-build-objects">
+              <li class="troll-build-loading-item troll-build-object" *ngFor="let item of [0, 1, 2, 3, 4, 5]">
+                <img class="troll-build-item-img" src="assets/images/dummy.png">
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="columns">
+          <div class="column
+              is-3-widescreen is-offset-4-widescreen
+              is-4-desktop is-offset-2-desktop
+              is-4-tablet is-offset-3-tablet
+              is-12-mobile has-text-centered-mobile">
+            <p class="troll-build-summoner-spells-header">Summoner Spells</p>
+            <ul class="troll-build-objects">
+              <li class="troll-build-loading-summoner-spell troll-build-object" *ngFor="let summonerSpell of [0, 1]">
+                <img class="troll-build-summoner-spells-img" src="assets/images/dummy.png">
+              </li>
+            </ul>
+          </div>
+          <div class="column
+              is-2-widescreen is-offset-1-widescreen
+              is-2-desktop is-offset-1-desktop
+              is-2-tablet is-offset-1-tablet
+              is-12-mobile has-text-centered-mobile">
+            <p class="troll-build-trinket-header">Trinket</p>
+            <ul class="troll-build-objects">
+              <li class="troll-build-loading-trinket troll-build-object" *ngFor="let trinket of [0]">
+                <img class="troll-build-trinket-img" src="assets/images/dummy.png">
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="columns">
+          <div class="column
+              is-5-widescreen is-offset-4-widescreen
+              is-4-desktop is-offset-4-desktop
+              is-6-tablet is-offset-3-tablet
+              is-12-mobile">
+            <div class="field">
+              <div class="control">
+                <button class="button is-invisible"></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
     </div>
-    <ng-template #loadingMaps>
-      <div>
-        <select id="map-select-loading">
-          <option class="map-option-loading">
-            Fetching maps...
-          </option>
-        </select>
-      </div>
-    </ng-template>
-  </div>
-
-  <hr>
-
-  <ng-container *ngIf="(trollBuild$ | async) as trollBuild; else loadingTrollBuild">
-    <ng-container *ngIf="trollBuild.items && trollBuild.summonerSpells && trollBuild.trinket; else noTrollBuild">
-      <button id="new-build-btn" (click)="getTrollBuild()">New Build</button>
-      <div>
-        <h4 id="troll-build-items-header">Items</h4>
-        <div class="troll-build-item" *ngFor="let item of trollBuild.items">
-          <img class="troll-build-item-img" src="/api/img/items/{{item.id}}">
-          {{item.name}}
-        </div>
-      </div>
-      <div>
-        <h4 id="troll-build-summoner-spells-header">Summoner Spells</h4>
-        <div class="troll-build-summoner-spell" *ngFor="let summonerSpell of trollBuild.summonerSpells">
-          <img class="troll-build-summoner-spells-img" src="/api/img/summoner-spells/{{summonerSpell.id}}">
-          {{summonerSpell.name}}
-        </div>
-      </div>
-      <div>
-        <h4 id="troll-build-trinket-header">Trinket</h4>
-        <div class="troll-build-trinket">
-          <img class="troll-build-trinket-img" src="/api/img/items/{{trollBuild.trinket.id}}">
-          {{trollBuild.trinket.name}}
-        </div>
-      </div>
-      <button id="save-build-btn" (click)="saveBuild(trollBuild)" [disabled]="build">Save Build</button>
-      <div *ngIf="build">
-        <input id="saved-build-input-link" class="input" type="text" readonly [value]="build.selfRef" #savedBuildLink>
-        <button id="copy-build-link-btn" (click)="copyBuildToClipboard(savedBuildLink)">
-          <i class="fa fa-clipboard" aria-hidden="true"></i>
-        </button>
-      </div>
-    </ng-container>
-    <ng-template #noTrollBuild>
-      <article id="no-troll-build-alert" class="message is-danger">
-        <div class="message-body">
-          <p id="no-troll-build-alert-msg">An error has occurred while generating a Troll Build. Please try again later.</p>
-        </div>
-      </article>
-    </ng-template>
-  </ng-container>
-  <ng-template #loadingTrollBuild>
-    <button id="new-build-btn-loading">New Build</button>
-    <div id="troll-build-loading">
-      <div>
-        <h4 id="troll-build-loading-items-header">Items</h4>
-        <div class="troll-build-loading-item" *ngFor="let item of [0, 1, 2, 3, 4, 5]">
-          <img src="assets/images/dummy.png">
-        </div>
-      </div>
-      <div>
-        <h4 id="troll-build-loading-summoner-spells-header">Summoner Spells</h4>
-        <div class="troll-build-loading-summoner-spell" *ngFor="let summonerSpell of [0, 1]">
-          <img src="assets/images/dummy.png">
-        </div>
-      </div>
-      <div>
-        <h4 id="troll-build-loading-trinket-header">Trinket</h4>
-        <div class="troll-build-loading-trinket" *ngFor="let trinket of [0]">
-          <img src="assets/images/dummy.png">
-        </div>
-      </div>
-    </div>
-  </ng-template>
+  </section>
 </ng-container>
