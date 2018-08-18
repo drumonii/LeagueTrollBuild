@@ -1,6 +1,6 @@
 {
   "type": "champion",
-  "version": "8.14.1",
+  "version": "8.16.1",
   "data": {
     "Aatrox": {
       "id": "Aatrox",
@@ -208,7 +208,7 @@
       "id": "Akali",
       "key": "84",
       "name": "Akali",
-      "title": "the Fist of Shadow",
+      "title": "the Rogue Assassin",
       "partype": "Energy",
       "info": {
         "attack": 5,
@@ -218,12 +218,12 @@
       },
       "spells": [
         {
-          "id": "AkaliMota",
-          "name": "Mark of the Assassin",
-          "description": "Akali spins her kama at a target enemy to deal Magic Damage and mark the target for 6 seconds. Akali's melee attacks against a marked target will trigger and consume the mark to cause additional damage and restore Energy.",
-          "tooltip": "Akali throws her kama at a target enemy to deal {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage and mark the target for {{ e4 }} seconds.<br /><br />Akali's melee attacks against a marked target will consume the mark to deal {{ e2 }} <span class=\"color99FF99\">(+{{ a2 }})</span> magic damage and restore {{ e3 }} energy.",
+          "id": "AkaliQ",
+          "name": "Five Point Strike",
+          "description": "Akali throws out five kunai, dealing damage based on her bonus Attack Damage and Ability Power and slowing. When cast near full energy, Five Point Strike heals Akali.",
+          "tooltip": "Slings kunai in an arc, dealing <magicDamage>{{ basedamagenamed }} <scaleAD>(+{{ addamage }})</scaleAD> <scaleAP>(+{{ apdamage }})</scaleAP> magic damage</magicDamage>. Enemies at the tip are briefly slowed.<span class=\"size8\"><br /><br /></span>If cast near full energy, Akali also heals for {{ healthrestore }}.<span class=\"size8\"><br /><br /></span>At max rank, deals {{ bonusdamagetominions*100 }}% damage to minions and monsters.",
           "image": {
-            "full": "AkaliMota.png",
+            "full": "AkaliQ.png",
             "sprite": "spell0.png",
             "group": "spell",
             "x": 288,
@@ -233,12 +233,12 @@
           }
         },
         {
-          "id": "AkaliSmokeBomb",
+          "id": "AkaliW",
           "name": "Twilight Shroud",
-          "description": "Akali teleports to a nearby location, leaving a cover of smoke at her previous location. While inside the shroud, Akali becomes Invisible and gains Movement Speed. Attacking or using abilities will briefly reveal her. Enemies inside the smoke have their Movement Speed reduced.",
-          "tooltip": "Akali teleports to a nearby location, leaving a cover of smoke at her previous location that lasts for {{ e2 }} seconds and slows enemies within its area by {{ e3 }}%.<br /><br />While inside the shroud Akali gains <span class=\"color91d7ee\">Invisibility</span> and {{ e6 }}% movement speed. Attacking or using abilities briefly removes <span class=\"color91d7ee\">Invisibility</span>.<br /><br /><u><span class=\"size16 color91d7ee\">Stealth - Invisible</span></u><span class=\"size16 colorb3b3b3\">: Akali can only be revealed by nearby enemy Turrets or <span class=\"size16 coloree91d7\">True Sight</span>.",
+          "description": "Akali drops a cover of smoke. While inside the shroud, Akali becomes invisible and unable to be selected by enemy spells and attacks and gains Movement Speed. Attacking or using abilities will briefly reveal her.",
+          "tooltip": "Drops a smoke bomb, unleashing a spreading cover of smoke lasting {{ baseduration }} seconds.<span class=\"size8\"><br /><br /></span>The smoke <span class=\"colorcd90ee\">obscures</span> Akali from enemy vision and grants her {{ e6 }}% movement speed.<span class=\"size8\"><br /><br /></span>Entering or exiting <span class=\"colorcd90ee\">obscured</span> extends Shroud's duration.",
           "image": {
-            "full": "AkaliSmokeBomb.png",
+            "full": "AkaliW.png",
             "sprite": "spell0.png",
             "group": "spell",
             "x": 336,
@@ -248,12 +248,12 @@
           }
         },
         {
-          "id": "AkaliShadowSwipe",
-          "name": "Crescent Slash",
-          "description": "Akali flourishes her kamas, dealing damage based on her bonus Attack Damage and Ability Power. When Crescent Slash kills a unit, it has a shorter cooldown.",
-          "tooltip": "Akali flourishes her kamas, slicing enemies for {{ e1 }} <span class=\"colorFF8C00\">(+{{ a2 }})</span> <span class=\"color99FF99\">(+{{ a1 }})</span> physical damage.<br /><br />If Crescent Slash kills an enemy, its cooldown is refunded by {{ e3 }}%.",
+          "id": "AkaliE",
+          "name": "Shuriken Flip",
+          "description": "Flip backward and fire a shuriken forward, dealing physical damage. The first enemy or smoke cloud hit is marked. Re-cast to dash to the marked target, dealing the same damage.",
+          "tooltip": "Flip backward and fire a shuriken forward, dealing <physicalDamage>{{ basedamage1 }} <scaleAD>(+{{ addamage }})</scaleAD> physical damage</physicalDamage> and marking the first enemy or smoke cloud hit.<span class=\"size8\"><br /><br /></span><span class=\"colorFF9900\">Re-cast: </span>Dash to the marked target, dealing the same damage.",
           "image": {
-            "full": "AkaliShadowSwipe.png",
+            "full": "AkaliE.png",
             "sprite": "spell0.png",
             "group": "spell",
             "x": 384,
@@ -263,12 +263,12 @@
           }
         },
         {
-          "id": "AkaliShadowDance",
-          "name": "Shadow Dance",
-          "description": "Akali moves through shadows to quickly strike through her target, dealing damage and consuming an Essence of Shadow charge. Akali recharges Essence of Shadow charges periodically, max 3 stacks.",
-          "tooltip": "Akali quickly strikes through her target, dealing {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage.<br /><br />Akali stores an Essence of Shadow on kills and assists as well as every <span class=\"colorFFFFFF\">{{ f1 }}</span> seconds up to {{ e4 }} total.",
+          "id": "AkaliR",
+          "name": "Perfect Execution",
+          "description": "Akali leaps in a direction, stunning and damaging enemies she strikes. Re-cast: Akali dashes in a direction, executing all enemies she strikes.",
+          "tooltip": "Two dashes: The first vaults over enemies, micro-stunning and dealing <physicalDamage>{{ basedamage }} <scaleAD>(+{{ addamage }})</scaleAD> physical damage</physicalDamage>. Akali can dash again after {{ cooldownbetweencasts }} seconds.<span class=\"size8\"><br /><br /></span>The second is a piercing thrust that executes, dealing <magicDamage>{{ basedamage }} <scaleAP>(+{{ apdamagemin }})</scaleAP></magicDamage> to <magicDamage>{{ basedamagemax }} <scaleAP>(+{{ apdamagemax }})</scaleAP> magic damage</magicDamage> based on missing health.<br />",
           "image": {
-            "full": "AkaliShadowDance.png",
+            "full": "AkaliR.png",
             "sprite": "spell0.png",
             "group": "spell",
             "x": 432,
@@ -279,10 +279,10 @@
         }
       ],
       "passive": {
-        "name": "Twin Disciplines",
-        "description": "Akali's first two attacks are empowered. The first strike heals her, and the second strike deals bonus magic damage. Twin Disciplines will recharge itself automatically a short while after being used.",
+        "name": "Assassin's Mark",
+        "description": "Dealing spell damage to a champion creates a ring of energy around them. Exiting that ring empowers Akali's next autoattack with bonus range and damage.",
         "image": {
-          "full": "AkaliTwinDisciplines.png",
+          "full": "Akali_P.AkaliUpdate.png",
           "sprite": "passive0.png",
           "group": "passive",
           "x": 96,
@@ -452,7 +452,7 @@
           "id": "Tantrum",
           "name": "Tantrum",
           "description": "Permanently reduces the physical damage Amumu would take. Amumu can unleash his rage, dealing damage to surrounding enemies. Each time Amumu is hit, the cooldown on Tantrum is reduced by 0.5 seconds.",
-          "tooltip": "<spellPassive>Passive: </spellPassive>Amumu takes {{ e1 }} reduced damage from physical attacks.<br /><br /><spellPassive>Active: </spellPassive>Amumu tantrums, dealing {{ e2 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage to surrounding units.<br /><br /><rules>Basic attacks that hit Amumu reduce the cooldown of Tantrum by 0.5 seconds.</rules>",
+          "tooltip": "<spellPassive>Passive: </spellPassive>Amumu takes {{ e1 }} <span class=\"colorFFFF00\">(+{{ f1 }})</span><span class=\"colorFF00FF\">(+{{ f2 }})</span> reduced physical damage.<br /><br /><spellPassive>Active: </spellPassive>Amumu tantrums, dealing {{ e2 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage to surrounding units. Basic attacks that hit Amumu reduce Tantrum's cooldown by 0.5 seconds.<br /><br /><rules><span class=\"color8c8c8c\">Tantrum's passive effect increases in potency with bonus Armor and Magic Resist.</span></rules>",
           "image": {
             "full": "Tantrum.png",
             "sprite": "spell0.png",
@@ -2233,7 +2233,7 @@
         {
           "id": "InfectedCleaverMissileCast",
           "name": "Infected Cleaver",
-          "description": "Dr. Mundo hurls his cleaver, dealing damage equal to a portion of his target's current Health and slowing them for a short time. Dr. Mundo delights in the suffering of others, so he is returned half of the Health cost when he successfully lands a cleaver (increased to the full Health cost on killing blows).",
+          "description": "Dr. Mundo hurls his cleaver, dealing damage equal to a portion of his target's current Health and slowing them for a short time. Dr. Mundo delights in the suffering of others, so he is returned a portion of the Health cost when he successfully lands a cleaver (doubled on killing blows).",
           "tooltip": "Dr. Mundo hurls his cleaver, dealing {{ e2 }}% of the target's current health as magic damage (no less than {{ e1 }}) and slowing them by {{ e4 }}% for {{ e5 }} seconds.<br /><br />If the cleaver hits, {{ f1 }} health is refunded ({{ f2 }} if the cleaver kills).<br /><br /><rules>Infected Cleaver deals no more than {{ e6 }} damage against monsters.</rules>",
           "image": {
             "full": "InfectedCleaverMissileCast.png",
@@ -2800,7 +2800,7 @@
         "name": "Dread",
         "description": "Standing still or channeling abilities for 1.5 seconds empowers Fiddlesticks with Dread. Immobilizing crowd control resets this timer.<br><br>Dread grants Movement Speed, but only lasts for 1.5s after Fiddlesticks starts moving.",
         "image": {
-          "full": "Fiddlesticks_Passive.png",
+          "full": "FiddleSticks_Passive.png",
           "sprite": "passive0.png",
           "group": "passive",
           "x": 336,
@@ -3949,7 +3949,7 @@
           "id": "IreliaQ",
           "name": "Bladesurge",
           "description": "Irelia dashes forward to strike her target, healing herself. If the target is Marked or dies to Bladesurge, its cooldown refreshes.",
-          "tooltip": "Irelia dashes to an enemy, dealing {{ e1 }} <span class=\"colorFF8C00\">(+{{ a1 }})</span> physical damage, applying on-hit effects and healing for <span class=\"colorFF8C00\">{{ f1 }}</span> health.<br /><br />Bladesurge's cooldown is reset if the target was <span class=\"colorDDDD77\">Marked</span> or dies to Bladesurge.<br /><br /><span class=\"size16 color8C8C8C\">Bladesurge deals {{ e4 }}% bonus damage to minions.</span>",
+          "tooltip": "Irelia dashes to an enemy, dealing {{ championdamage }} physical damage, applying on-hit effects and healing for {{ healamount }} health.<br /><br />Bladesurge's cooldown is reset if the target was <span class=\"colorDDDD77\">Marked</span> or dies to Bladesurge.<br /><br /><span class=\"size16 color8C8C8C\">Bladesurge deals {{ damagebonuspve }}% bonus damage to minions.</span>",
           "image": {
             "full": "IreliaQ.png",
             "sprite": "spell4.png",
@@ -3964,7 +3964,7 @@
           "id": "IreliaW",
           "name": "Defiant Dance",
           "description": "Irelia charges a strike that deals more damage as she charges. She takes reduced damage during the charge.",
-          "tooltip": "<span class=\"colorFF9900\">First Cast:</span> Irelia aligns her blades into a defensive formation, gaining {{ e1 }}% </span><span class=\"color99FF99\">(+{{ f1 }}%)</span> damage reduction and a stack of Ionian Fervor but becoming unable to act.<br /><br /><span class=\"colorFF9900\">Second Cast:</span> Irelia swipes her blades, dealing {{ e3 }} <span class=\"colorFF8C00\">(+{{ a1 }}) </span><span class=\"color99FF99\">(+{{ a2 }})</span> physical damage. Damage increases with charge time, up to {{ f4 }} <span class=\"colorFF8C00\">(+{{ f2 }}) </span><span class=\"color99FF99\">(+{{ f3 }})</span> after {{ e7 }} seconds.<br /><br /><span class=\"size16 color8C8C8C\">Defiant Dance cannot be interrupted.<br />Quick Cast: Hold and release instead of casting twice.</span>",
+          "tooltip": "<span class=\"colorFF9900\">First Cast:</span> Irelia aligns her blades into a defensive formation, gaining {{ finaldr }}% damage reduction and a stack of Ionian Fervor but becoming unable to act.<br /><br /><span class=\"colorFF9900\">Second Cast:</span> Irelia swipes her blades, dealing {{ mindamagecalc }} physical damage. Damage increases with charge time, up to {{ maxdamagecalc }} after {{ chargetimeformax }} seconds.<br /><br /><span class=\"size16 color8C8C8C\">Defiant Dance cannot be interrupted.",
           "image": {
             "full": "IreliaW.png",
             "sprite": "spell4.png",
@@ -3979,7 +3979,7 @@
           "id": "IreliaE",
           "name": "Flawless Duet",
           "description": "Irelia sends out two blades which converge on each other. Enemies caught in between are damaged, stunned and Marked.",
-          "tooltip": "Irelia readies 2 blades that will fly towards each other once placed, dealing {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage and stunning for {{ e2 }} seconds.<br /><br />Champions and large monsters are <span class=\"colorDDDD77\">Marked</span> for {{ e0 }} seconds.<br /><br /><span class=\"size16 color8C8C8C\">Flawless Duet deals {{ e9 }}% damage to monsters.",
+          "tooltip": "Irelia readies 2 blades that will fly towards each other once placed, dealing {{ totaldamage }} magic damage and stunning for {{ stunduration }} seconds.<br /><br />Champions and large monsters are <span class=\"colorDDDD77\">Marked</span> for {{ markduration }} seconds.",
           "image": {
             "full": "IreliaE.png",
             "sprite": "spell4.png",
@@ -3994,7 +3994,7 @@
           "id": "IreliaR",
           "name": "Vanguard's Edge",
           "description": "Irelia fires a massive number of blades that explode outward upon hitting an enemy champion. Enemies hit by the blades are damaged and Marked. Afterwards the blades form a wall that will damage, slow and disarm enemies that walk through it.",
-          "tooltip": "Irelia launches a storm of blades that explode outward upon hitting a champion. The blades deal {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage and <span class=\"colorDDDD77\">Mark</span> champions and large monsters for {{ e4 }} seconds.<br /><br />Irelia then forms the blades into a wall for {{ e2 }} seconds. Passing through the wall deals {{ e3 }} <span class=\"color99FF99\">(+{{ a2 }})</span> magic damage, slows by {{ e5 }}% and disarms for {{ e6 }} seconds.<br /><br /><span class=\"size16 color8C8C8C\">Disarmed enemies cannot basic attack.</span>",
+          "tooltip": "Irelia launches a storm of blades that explode outward upon hitting a champion. The blades deal {{ missiledamage }} magic damage and <span class=\"colorDDDD77\">Mark</span> champions and large monsters for {{ markduration }} seconds.<br /><br />Irelia then forms the blades into a wall for {{ zoneduration }} seconds. Passing through the wall deals {{ zonedamage }} magic damage, slows by {{ slowamount }}% and disarms for {{ ccduration }} seconds.",
           "image": {
             "full": "IreliaR.png",
             "sprite": "spell4.png",
@@ -6165,8 +6165,8 @@
         {
           "id": "BlindMonkQOne",
           "name": "Sonic Wave / Resonating Strike",
-          "description": "Sonic Wave: Lee Sin projects a discordant wave of sound to locate his enemies, dealing physical damage to the first enemy it encounters. If Sonic Wave hits, Lee Sin can cast Resonating Strike for the next 3 seconds.<br>Resonating Strike: Lee Sin dashes to the enemy hit by Sonic Wave, dealing physical damage plus 8% of their missing Health.",
-          "tooltip": "<spellActive>Sonic Wave: </spellActive>Lee Sin projects a discordant wave of sound to locate his enemies, dealing {{ e1 }} <scaleAD>(+{{ a1 }})</scaleAD> physical damage to the first enemy it encounters, granting <keyword>True Sight</keyword> of the target. <specialRules>If Sonic Wave hits, Lee Sin can cast Resonating Strike for the next {{ e7 }} seconds.</specialRules><br /><br /><spellActive>Resonating Strike: </spellActive>Lee Sin dashes to the enemy hit by Sonic Wave, dealing {{ e2 }} <scaleAD>(+{{ a1 }})</scaleAD> physical damage plus {{ e3 }}% of their missing Health (Max: {{ e6 }} Damage vs. Monsters).",
+          "description": "Sonic Wave: Lee Sin projects a discordant wave of sound to locate his enemies, dealing physical damage to the first enemy it encounters. If Sonic Wave hits, Lee Sin can cast Resonating Strike for the next 3 seconds.<br>Resonating Strike: Lee Sin dashes to the enemy hit by Sonic Wave, dealing physical damage based on the target's missing Health.",
+          "tooltip": "<spellActive>Sonic Wave: </spellActive>Lee Sin projects a discordant wave of sound to locate his enemies, dealing {{ e1 }} <scaleAD>(+{{ a1 }})</scaleAD> physical damage to the first enemy it encounters, granting <keyword>True Sight</keyword> of the target. <specialRules>If Sonic Wave hits, Lee Sin can cast Resonating Strike for the next {{ e7 }} seconds.</specialRules><br /><br /><spellActive>Resonating Strike: </spellActive>Lee Sin dashes to the enemy hit by Sonic Wave, dealing {{ e2 }} <scaleAD>(+{{ a1 }})</scaleAD> to {{ e3 }} <scaleAD>(+{{ a2 }})</scaleAD> physical damage based on the target's missing Health.",
           "image": {
             "full": "BlindMonkQOne.png",
             "sprite": "spell6.png",
@@ -9554,7 +9554,7 @@
         "name": "Junkyard Titan",
         "description": "Every spell Rumble casts gives him Heat. When he reaches 50% Heat he reaches Danger Zone, granting all his basic abilities bonus effects. When he reaches 100% Heat, he starts Overheating, granting his basic attacks bonus damage, but making him unable to cast spells for a few seconds. ",
         "image": {
-          "full": "Rumble_Junkyard Titan1.png",
+          "full": "Rumble_JunkyardTitan1.png",
           "sprite": "passive3.png",
           "group": "passive",
           "x": 192,
@@ -9756,7 +9756,7 @@
         "name": "Fury of the North",
         "description": "<mainText>After being out of combat, Sejuani gains Frost Armor which grants Armor and Magic Resist and immunity to slows. Frost Armor persists for a short time after Sejuani takes damage.  Sejuani can damage a stunned enemy to shatter it, dealing massive magic damage.</mainText>",
         "image": {
-          "full": "Sejuani_Passive.png",
+          "full": "Sejuani_passive.png",
           "sprite": "passive3.png",
           "group": "passive",
           "x": 288,
@@ -9995,7 +9995,7 @@
         {
           "id": "ShyvanaDoubleAttack",
           "name": "Twin Bite",
-          "description": "Shyvana strikes twice on her next attack. Basic attacks reduce the cooldown of Twin Bite by 0.5 seconds.<br><br><font color='#FF3300'>Dragon Form: </font>Twin Bite cleaves all units in front Shyvana. ",
+          "description": "Shyvana strikes twice on her next attack. Basic attacks reduce the cooldown of Twin Bite by 0.5 seconds.<br><br><font color='#FF3300'>Dragon Form: </font>Twin Bite cleaves all units in front of Shyvana. ",
           "tooltip": "Shyvana strikes twice on her next attack, dealing <span class=\"colorFF8C00\">{{ f2 }}</span> and <span class=\"colorFF8C00\">{{ f1 }}</span> physical damage on the first and second hits respectively.<br /><br />While Twin Bite is on cooldown, basic attacks reduce the remaining cooldown duration by {{ e3 }} seconds.<br /><br /><span class=\"colorFF3300\">Dragon Form: </span>Twin Bite cleaves all units in front Shyvana.<br /><br /><span class=\"color919191\"><i>Twin Bite's second hit damage is equal to {{ e1 }}% of Shyvana's attack damage.</i></span>",
           "image": {
             "full": "ShyvanaDoubleAttack.png",
@@ -10919,7 +10919,7 @@
           "id": "TahmKenchW",
           "name": "Devour",
           "description": "Tahm Kench devours a target, dealing a percentage of their maximum health as magic damage. He can spit devoured minions and monsters out as a skillshot that deals magic damage in an area upon impact.",
-          "tooltip": "Devour a target for {{ e1 }}s (half that for enemy champions.) Enemies are dealt {{ e3 }}% <span class=\"color99FF99\">(+{{ a1 }}%)</span> of their maximum health as magic damage (maximum of {{ e2 }} against neutral monsters).<br /><br /><span class=\"colorFF9900\">Enemy Champions:</span> Requires 3 stacks of An Acquired Taste to be devoured. While holding an enemy champion, Tahm Kench is slowed by 95%.<br /><br /><span class=\"colorFF9900\">Minions and Monsters:</span> Reactivate to spit them, dealing {{ e7 }} <span class=\"color99FF99\">(+{{ a2 }})</span> magic damage to targets hit.",
+          "tooltip": "Devour a target for {{ e1 }}s (half that for enemy champions.) Enemies are dealt {{ e3 }}% <span class=\"color99FF99\">(+{{ a1 }}%)</span> of their maximum health as magic damage (maximum of {{ e2 }} against neutral monsters).<br /><br /><span class=\"colorFF9900\">Enemy Champions:</span> Requires 3 stacks of An Acquired Taste to be devoured. While holding an enemy champion, Tahm Kench is slowed by 95%.<br /><br /><span class=\"colorFF9900\">Minions and Monsters:</span> Reactivate to spit them, dealing {{ e7 }} <span class=\"color99FF99\">(+{{ a2 }})</span> magic damage to targets hit.<br /><br /><rules><span class=\"color8c8c8c\">When used on an enemy, half of Devour's cooldown is refunded.</span></rules>",
           "image": {
             "full": "TahmKenchW.png",
             "sprite": "spell11.png",
