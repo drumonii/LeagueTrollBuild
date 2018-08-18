@@ -32,7 +32,7 @@ public interface ItemsRepository extends JpaRepository<Item, Integer>, JpaSpecif
 	 */
 	@Query("select distinct i from Item i join i.from f join i.maps m " +
 		   "where i.id <> 1001 and f in ('1001') " +
-		   "and (key(m) <> :mapId and m = true)")
+		   "and (key(m) = :mapId and m = true)")
 	@Cacheable(key = "{#root.methodName, #mapId}")
 	List<Item> boots(@Param("mapId") int mapId);
 
@@ -46,7 +46,7 @@ public interface ItemsRepository extends JpaRepository<Item, Integer>, JpaSpecif
 	@Query("select distinct i from Item i join i.maps m " +
 		   "where (i.name like '%Trinket%' or i.description like '%Trinket%') " +
 		   "and i.gold.total = 0 and i.gold.purchasable = true " +
-	       "and (key(m) <> :mapId and m = true)")
+	       "and (key(m) = :mapId and m = true)")
 	@Cacheable(key = "{#root.methodName, #mapId}")
 	List<Item> trinkets(@Param("mapId") int mapId);
 

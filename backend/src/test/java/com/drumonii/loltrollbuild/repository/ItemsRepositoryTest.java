@@ -56,7 +56,7 @@ public abstract class ItemsRepositoryTest {
 		});
 		assertThat(boots).extracting(Item::getMaps)
 				.extracting((Extractor<SortedMap<Integer, Boolean>, Object>) input -> input.get(SUMMONERS_RIFT_ID))
-				.contains(true);
+				.containsOnly(true);
 	}
 
 	@Test
@@ -70,7 +70,7 @@ public abstract class ItemsRepositoryTest {
 				.containsOnly(true);
 		assertThat(trinkets).extracting(Item::getMaps)
 				.extracting((Extractor<SortedMap<Integer, Boolean>, Object>) input -> input.get(SUMMONERS_RIFT_ID))
-				.contains(true);
+				.containsOnly(true);
 		assertThat(trinkets).extracting(Item::getDescription).allSatisfy((Consumer<String>) description -> {
 			assertThat(description).isNotNull();
 			assertThat(description).contains("Trinket");
