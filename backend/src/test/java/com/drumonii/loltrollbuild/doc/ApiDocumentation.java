@@ -397,12 +397,6 @@ public class ApiDocumentation {
 								.description("The title of the Champion"),
 						fieldWithPath("[*].partype")
 								.description("The ability resource of the Champion"),
-						fieldWithPath("[*].passive")
-								.description("The passive ability of the Champion"),
-						fieldWithPath("[*].info")
-								.description("Statistical information of the Champion"),
-						fieldWithPath("[*].spells")
-								.description("Spell abilities of the Champion"),
 						fieldWithPath("[*].tags")
 								.description("An array of tags of the Champion"))));
 	}
@@ -424,12 +418,6 @@ public class ApiDocumentation {
 								.description("The title of the Champion"),
 						fieldWithPath("partype")
 								.description("The ability resource of the Champion"),
-						fieldWithPath("info")
-								.description("Statistical information of the Champion"),
-						fieldWithPath("spells")
-								.description("Spell abilities of the Champion"),
-						fieldWithPath("passive")
-								.description("The passive ability of the Champion"),
 						fieldWithPath("tags")
 								.description("An array of tags of the Champion"))));
 	}

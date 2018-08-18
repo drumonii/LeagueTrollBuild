@@ -64,20 +64,20 @@ public class Champion implements Serializable {
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "champion")
 	@JsonManagedReference
 	@JsonProperty("info")
-	@JsonView({ ApiViews.AllApis.class })
+	@JsonView({ ApiViews.RiotApi.class })
 	private ChampionInfo info;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "champion")
 	@Fetch(FetchMode.SELECT)
 	@JsonManagedReference
 	@JsonProperty("spells")
-	@JsonView({ ApiViews.AllApis.class })
+	@JsonView({ ApiViews.RiotApi.class })
 	private List<ChampionSpell> spells;
 
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "champion")
 	@JsonManagedReference
 	@JsonProperty("passive")
-	@JsonView({ ApiViews.AllApis.class })
+	@JsonView({ ApiViews.RiotApi.class })
 	private ChampionPassive passive;
 
 	@Column(name = "LAST_MODIFIED_DATE", nullable = false)
