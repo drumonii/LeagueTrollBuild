@@ -17,34 +17,39 @@ describe('GameMapsService', () => {
     httpMock.verify();
   }));
 
-  it('should get a Game maps for Troll Build', inject([GameMapsService, HttpTestingController],
-    (service: GameMapsService, httpMock: HttpTestingController) => {
-    const mockGameMaps: GameMap[] = [
-      {
-        mapId: 11,
-        mapName: 'Summoner\'s Rift'
-      }
-    ];
+  describe('forTrollBuild', () => {
 
-    service.forTrollBuild().subscribe(gameMaps => {
-      expect(gameMaps).toEqual(mockGameMaps);
-    });
+    it('should get a Game maps for Troll Build', inject([GameMapsService, HttpTestingController],
+      (service: GameMapsService, httpMock: HttpTestingController) => {
+      const mockGameMaps: GameMap[] = [
+        {
+          mapId: 11,
+          mapName: 'Summoner\'s Rift'
+        }
+      ];
 
-    const testReq = httpMock.expectOne('/api/maps/for-troll-build');
-    expect(testReq.request.method).toEqual('GET');
+      service.forTrollBuild().subscribe(gameMaps => {
+        expect(gameMaps).toEqual(mockGameMaps);
+      });
 
-    testReq.flush(mockGameMaps);
-  }));
+      const testReq = httpMock.expectOne('/api/maps/for-troll-build');
+      expect(testReq.request.method).toEqual('GET');
 
-  it('should get a Game maps for Troll Build with REST error', inject([GameMapsService, HttpTestingController],
-    (service: GameMapsService, httpMock: HttpTestingController) => {
-    service.forTrollBuild().subscribe(gameMaps => {
-      expect(gameMaps).toEqual([]);
-    });
+      testReq.flush(mockGameMaps);
+    }));
 
-    const testReq = httpMock.expectOne('/api/maps/for-troll-build');
-    expect(testReq.request.method).toEqual('GET');
+    it('should get a Game maps for Troll Build with REST error', inject([GameMapsService, HttpTestingController],
+      (service: GameMapsService, httpMock: HttpTestingController) => {
+      service.forTrollBuild().subscribe(gameMaps => {
+        expect(gameMaps).toEqual([]);
+      });
 
-    testReq.error(new ErrorEvent('An unexpected error occurred'));
-  }));
+      const testReq = httpMock.expectOne('/api/maps/for-troll-build');
+      expect(testReq.request.method).toEqual('GET');
+
+      testReq.error(new ErrorEvent('An unexpected error occurred'));
+    }));
+
+  });
+
 });

@@ -17,29 +17,34 @@ describe('VersionsService', () => {
     httpMock.verify();
   }));
 
-  it('should get the latest saved Version', inject([VersionsService, HttpTestingController],
-    (service: VersionsService, httpMock: HttpTestingController) => {
-    const mockLatestVersion = new Version('8.7.1');
+  describe('getLatestVersion', function () {
 
-    service.getLatestVersion().subscribe(latestVersion => {
-      expect(latestVersion).toEqual(mockLatestVersion);
-    });
+    it('should get the latest saved Version', inject([VersionsService, HttpTestingController],
+      (service: VersionsService, httpMock: HttpTestingController) => {
+      const mockLatestVersion = new Version('8.7.1');
 
-    const testReq = httpMock.expectOne('/api/versions/latest');
-    expect(testReq.request.method).toEqual('GET');
+      service.getLatestVersion().subscribe(latestVersion => {
+        expect(latestVersion).toEqual(mockLatestVersion);
+      });
 
-    testReq.flush(mockLatestVersion);
-  }));
+      const testReq = httpMock.expectOne('/api/versions/latest');
+      expect(testReq.request.method).toEqual('GET');
 
-  it('should get the latest saved Version with REST error', inject([VersionsService, HttpTestingController],
-    (service: VersionsService, httpMock: HttpTestingController) => {
-    service.getLatestVersion().subscribe(latestVersion => {
-      expect(latestVersion).toBeNull();
-    });
+      testReq.flush(mockLatestVersion);
+    }));
 
-    const testReq = httpMock.expectOne('/api/versions/latest');
-    expect(testReq.request.method).toEqual('GET');
+    it('should get the latest saved Version with REST error', inject([VersionsService, HttpTestingController],
+      (service: VersionsService, httpMock: HttpTestingController) => {
+      service.getLatestVersion().subscribe(latestVersion => {
+        expect(latestVersion).toBeNull();
+      });
 
-    testReq.error(new ErrorEvent('An unexpected error occurred'));
-  }));
+      const testReq = httpMock.expectOne('/api/versions/latest');
+      expect(testReq.request.method).toEqual('GET');
+
+      testReq.error(new ErrorEvent('An unexpected error occurred'));
+    }));
+
+  });
+
 });
