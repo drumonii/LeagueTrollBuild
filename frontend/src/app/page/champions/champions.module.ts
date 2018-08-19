@@ -10,7 +10,6 @@ import { ChampionsTagsFilterPipe } from '@pipe/champions-tags-filter.pipe';
 import { ChampionsPage } from './champions.page';
 import { TitleService } from '@service/title.service';
 import { ChampionsService } from '@service/champions.service';
-import { GameMapsService } from '@service/game-maps.service';
 
 @NgModule({
   imports: [
@@ -25,8 +24,7 @@ import { GameMapsService } from '@service/game-maps.service';
   ],
   providers: [
     TitleService,
-    ChampionsService,
-    GameMapsService
+    ChampionsService
   ]
 })
 export class ChampionsModule { }
