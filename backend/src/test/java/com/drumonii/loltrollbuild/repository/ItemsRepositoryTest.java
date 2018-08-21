@@ -6,7 +6,6 @@ import com.drumonii.loltrollbuild.riot.api.ItemsResponse;
 import com.drumonii.loltrollbuild.test.repository.RepositoryTest;
 import com.drumonii.loltrollbuild.util.GameMapUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.assertj.core.api.iterable.Extractor;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,8 +14,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.SortedMap;
-import java.util.function.Consumer;
 
 import static com.drumonii.loltrollbuild.util.GameMapUtil.HOWLING_ABYSS_ID;
 import static com.drumonii.loltrollbuild.util.GameMapUtil.SUMMONERS_RIFT_ID;
@@ -57,12 +54,12 @@ public abstract class ItemsRepositoryTest {
 			assertThat(boots).doesNotContain(bootsOfSpeed);
 			assertThat(boots).flatExtracting(Item::getFrom)
 					.contains(1001);
-			assertThat(boots).extracting(Item::getDescription).allSatisfy((Consumer<String>) description -> {
+			assertThat(boots).extracting(Item::getDescription).allSatisfy(description -> {
 				assertThat(description).isNotNull();
 				assertThat(description).contains("Movement");
 			});
 			assertThat(boots).extracting(Item::getMaps)
-					.extracting((Extractor<SortedMap<Integer, Boolean>, Object>) input -> input.get(map))
+					.extracting(input -> input.get(map))
 					.containsOnly(true);
 		}
 	}
@@ -83,9 +80,9 @@ public abstract class ItemsRepositoryTest {
 				assertThat(trinkets).extracting(Item::getGold).extracting("purchasable", Boolean.class)
 						.containsOnly(true);
 				assertThat(trinkets).extracting(Item::getMaps)
-						.extracting((Extractor<SortedMap<Integer, Boolean>, Object>) input -> input.get(map))
+						.extracting(input -> input.get(map))
 						.containsOnly(true);
-				assertThat(trinkets).extracting(Item::getDescription).allSatisfy((Consumer<String>) description -> {
+				assertThat(trinkets).extracting(Item::getDescription).allSatisfy(description -> {
 					assertThat(description).isNotNull();
 					assertThat(description).contains("Trinket");
 				});
@@ -98,16 +95,16 @@ public abstract class ItemsRepositoryTest {
 		List<Item> viktorOnlyItems = itemsRepository.viktorOnly();
 		assertThat(viktorOnlyItems).isNotEmpty();
 		assertThat(viktorOnlyItems).doesNotHaveDuplicates();
-		assertThat(viktorOnlyItems).extracting(Item::getDescription).allSatisfy((Consumer<String>) description -> {
+		assertThat(viktorOnlyItems).extracting(Item::getDescription).allSatisfy(description -> {
 			assertThat(description).isNotNull();
 			assertThat(description).contains("Viktor");
 		});
-		assertThat(viktorOnlyItems).extracting(Item::getRequiredChampion).allSatisfy((Consumer<String>) description -> {
+		assertThat(viktorOnlyItems).extracting(Item::getRequiredChampion).allSatisfy(description -> {
 			assertThat(description).isNotNull();
 			assertThat(description).contains("Viktor");
 		});
 		assertThat(viktorOnlyItems).extracting(Item::getMaps)
-				.extracting((Extractor<SortedMap<Integer, Boolean>, Object>) input -> input.get(SUMMONERS_RIFT_ID))
+				.extracting(input -> input.get(SUMMONERS_RIFT_ID))
 				.contains(true);
 	}
 
@@ -119,7 +116,7 @@ public abstract class ItemsRepositoryTest {
 					.isNotEmpty();
 			assertThat(forTrollBuild).doesNotHaveDuplicates();
 			assertThat(forTrollBuild).extracting(Item::getMaps)
-					.extracting((Extractor<SortedMap<Integer, Boolean>, Object>) input -> input.get(map))
+					.extracting(input -> input.get(map))
 					.contains(true);
 			assertThat(forTrollBuild).extracting(Item::getGold)
 					.extracting("purchasable", Boolean.class)
@@ -129,19 +126,19 @@ public abstract class ItemsRepositoryTest {
 			assertThat(forTrollBuild).filteredOn(item -> item.getInto() != null).flatExtracting(Item::getInto)
 					.isEmpty();
 			assertThat(forTrollBuild).doesNotContain(itemsResponse.getItems().get("1001"));
-			assertThat(forTrollBuild).extracting(Item::getDescription).allSatisfy((Consumer<String>) description -> {
+			assertThat(forTrollBuild).extracting(Item::getDescription).allSatisfy(description -> {
 				assertThat(description).isNotNull();
 				assertThat(description).doesNotContain("Movement");
 				assertThat(description).doesNotContain("Potion");
 				assertThat(description).doesNotContain("Trinket");
 			});
-			assertThat(forTrollBuild).extracting(Item::getRequiredChampion).allSatisfy((Consumer<String>) requiredChampion -> {
+			assertThat(forTrollBuild).extracting(Item::getRequiredChampion).allSatisfy(requiredChampion -> {
 				assertThat(requiredChampion).isNull();
 			});
-			assertThat(forTrollBuild).extracting(Item::getRequiredAlly).allSatisfy((Consumer<String>) requiredAlly -> {
+			assertThat(forTrollBuild).extracting(Item::getRequiredAlly).allSatisfy(requiredAlly -> {
 				assertThat(requiredAlly).isNull();
 			});
-			assertThat(forTrollBuild).extracting(Item::getName).allSatisfy((Consumer<String>) name -> {
+			assertThat(forTrollBuild).extracting(Item::getName).allSatisfy(name -> {
 				assertThat(name).isNotNull();
 				assertThat(name).doesNotContain("Movement");
 				assertThat(name).doesNotContain("Potion");
@@ -152,8 +149,9 @@ public abstract class ItemsRepositoryTest {
 				assertThat(name).doesNotContain("Doran");
 				assertThat(name).doesNotContain("Quick");
 			});
-			assertThat(forTrollBuild).extracting(Item::getGroup).filteredOn(Objects::nonNull)
-					.allSatisfy((Consumer<String>) group -> {
+			assertThat(forTrollBuild).extracting(Item::getGroup)
+					.filteredOn(Objects::nonNull)
+					.allSatisfy(group -> {
 						assertThat(group).doesNotContain("FlaskGroup");
 						assertThat(group).doesNotContain("RelicBase");
 					});
