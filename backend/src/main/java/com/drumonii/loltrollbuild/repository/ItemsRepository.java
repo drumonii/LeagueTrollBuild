@@ -37,16 +37,21 @@ public interface ItemsRepository extends JpaRepository<Item, Integer>, JpaSpecif
 	List<Item> boots(@Param("mapId") int mapId);
 
 	/**
-	 * Gets a {@link List} of basic Trinket {@link Item}s (non Advanced) found only on the specified {@link GameMap}.
+	 * Gets a {@link List} of Trinket {@link Item}s found only on the specified {@link GameMap}.
+	 * If the map is the Twisted Treeline, the Arcane Sweeper is returned.
+	 * If the map is the Summoner's Rift, then non Snax Trinkets are returned.
+	 * If the map is the Howling Abyss, the Poro Snax Trinket.
 	 *
 	 * @param mapId the {@link GameMap}'s ID
-	 * @return a {@link List} of basic Trinket {@link Item}s
+	 * @return a {@link List} of Trinket {@link Item}s
 	 * @see <a href="http://leagueoflegends.wikia.com/wiki/Trinket">Trinket</a>
 	 */
-	@Query("select distinct i from Item i join i.maps m " +
-		   "where (i.name like '%Trinket%' or i.description like '%Trinket%') " +
-		   "and i.gold.total = 0 and i.gold.purchasable = true " +
-	       "and (key(m) = :mapId and m = true)")
+	@Query("select distinct i from Item i join i.maps m left join i.tags t " +
+		   "where i.gold.total = 0 and i.requiredChampion is null " +
+		   "and key(m) = :mapId and m = true " +
+	       "and (:mapId = 10 and i.gold.purchasable = false and i.name = 'Arcane Sweeper') " +
+	       "or (:mapId = 11 and t in ('Trinket') and i.gold.purchasable = true and i.name not like '%Snax%') " +
+	       "or (:mapId = 12 and i.gold.purchasable = false and i.name = 'Poro-Snax')")
 	@Cacheable(key = "{#root.methodName, #mapId}")
 	List<Item> trinkets(@Param("mapId") int mapId);
 

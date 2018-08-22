@@ -68,17 +68,20 @@ public abstract class ItemsRepositoryTest {
 	public void trinkets() {
 		for (Integer map : MAPS) {
 			List<Item> trinkets = itemsRepository.trinkets(map);
-			if (map == HOWLING_ABYSS_ID) {
-				assertThat(trinkets).as("Trinkets should be empty for map: " + GameMapUtil.getNameFromId(map) + "(" + map + ")")
-						.isEmpty();
+			assertThat(trinkets).isNotEmpty();
+			assertThat(trinkets).doesNotHaveDuplicates();
+			if (map == TWISTED_TREELINE_ID) {
+				assertThat(trinkets).extracting(Item::getName).containsOnly("Arcane Sweeper");
+			} else if (map == HOWLING_ABYSS_ID) {
+				assertThat(trinkets).extracting(Item::getName).containsOnly("Poro-Snax");
 			} else {
-				assertThat(trinkets).as("Trinkets should not be empty for map: " + GameMapUtil.getNameFromId(map) + "(" + map + ")")
-						.isNotEmpty();
-				assertThat(trinkets).doesNotHaveDuplicates();
 				assertThat(trinkets).extracting(Item::getGold).extracting(ItemGold::getTotal)
 						.containsOnly(0);
 				assertThat(trinkets).extracting(Item::getGold).extracting("purchasable", Boolean.class)
 						.containsOnly(true);
+                assertThat(trinkets).extracting(Item::getTags).allSatisfy(tags -> {
+                    assertThat(tags).contains("Trinket");
+                });
 				assertThat(trinkets).extracting(Item::getMaps)
 						.extracting(input -> input.get(map))
 						.containsOnly(true);
