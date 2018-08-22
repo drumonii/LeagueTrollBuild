@@ -93,6 +93,14 @@ public class Item implements Serializable {
 	private LocalDateTime lastModifiedDate;
 
 	@ElementCollection(fetch = FetchType.EAGER)
+	@CollectionTable(name = "ITEM_TAG", joinColumns = @JoinColumn(name = "ITEM_ID"))
+	@Column(name = "TAG")
+	@OrderBy("TAG ASC")
+	@JsonProperty("tags")
+	@JsonView({ ApiViews.RiotApi.class })
+	private SortedSet<String> tags;
+
+	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "ITEM_MAP", joinColumns = @JoinColumn(name = "ITEM_ID"))
 	@MapKeyColumn(name = "MAPS_KEY")
 	@Column(name = "MAP")
@@ -201,6 +209,14 @@ public class Item implements Serializable {
 		this.lastModifiedDate = lastModifiedDate;
 	}
 
+	public SortedSet<String> getTags() {
+		return tags;
+	}
+
+	public void setTags(SortedSet<String> tags) {
+		this.tags = tags;
+	}
+
 	public SortedMap<Integer, Boolean> getMaps() {
 		return maps;
 	}
@@ -241,6 +257,7 @@ public class Item implements Serializable {
 				Objects.equals(description, item.description) &&
 				Objects.equals(requiredChampion, item.requiredChampion) &&
 				Objects.equals(requiredAlly, item.requiredAlly) &&
+				Objects.equals(tags, item.tags) &&
 				Objects.equals(maps, item.maps) &&
 				Objects.equals(image, item.image) &&
 				Objects.equals(gold, item.gold);
@@ -248,7 +265,7 @@ public class Item implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, name, group, consumed, description, requiredChampion, requiredAlly, maps, image, gold);
+		return Objects.hash(id, name, group, consumed, description, requiredChampion, requiredAlly, tags, maps, image, gold);
 	}
 
 	@Override
@@ -265,6 +282,7 @@ public class Item implements Serializable {
 				", requiredChampion='" + requiredChampion + '\'' +
 				", requiredAlly='" + requiredAlly + '\'' +
 				", lastModifiedDate=" + lastModifiedDate +
+				", tags=" + tags +
 				", maps=" + maps +
 				", image=" + image +
 				", gold=" + gold +

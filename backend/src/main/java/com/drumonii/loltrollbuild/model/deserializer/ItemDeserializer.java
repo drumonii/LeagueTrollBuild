@@ -61,6 +61,11 @@ public abstract class ItemDeserializer extends JsonObjectDeserializer<Item> {
 
 		itemBuilder.withRequiredAlly(getRequiredAlly(codec, tree));
 
+		JsonParser tagsParser = tree.get("tags").traverse();
+		tagsParser.setCodec(codec);
+		TreeNode tagsTreeNode = tagsParser.readValueAsTree();
+		itemBuilder.withTags(codec.treeToValue(tagsTreeNode, String[].class));
+
 		JsonParser mapsParser = tree.get("maps").traverse();
 		mapsParser.setCodec(codec);
 		itemBuilder.withMaps(mapsParser.readValueAs(new TypeReference<SortedMap<Integer, Boolean>>(){}));

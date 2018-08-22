@@ -55,6 +55,7 @@ public class ItemDdragonTest {
 				.withDescription("<stats>+380 Health</stats>")
 				.withImage(image)
 				.withGold(gold)
+				.withTags("Health")
 				.withFrom(1028)
 				.withInto(3083, 3084, 3022, 3143, 3742)
 				.withMapEntries(new SimpleEntry<>(8, true), new SimpleEntry<>(10, true), new SimpleEntry<>(11, true),
@@ -73,6 +74,7 @@ public class ItemDdragonTest {
 		assertThat(jsonContent).hasJsonPathStringValue("description");
 		assertThat(jsonContent).hasJsonPathMapValue("$.image");
 		assertThat(jsonContent).hasJsonPathMapValue("$.gold");
+		assertThat(jsonContent).hasJsonPathArrayValue("$.tags");
 		assertThat(jsonContent).hasJsonPathArrayValue("$.from");
 		assertThat(jsonContent).hasJsonPathArrayValue("$.into");
 		assertThat(jsonContent).hasJsonPathMapValue("$.maps");
@@ -150,6 +152,7 @@ public class ItemDdragonTest {
 		assertThat(item.getObject().getMaps())
 				.containsExactly(entry(1, false), entry(8, true), entry(10, true), entry(11, true), entry(12, true),
 						entry(14, false));
+		assertThat(item.getObject().getTags()).containsOnly("Boots");
 		assertThat(item.getObject().getGold()).isNotNull();
 		assertThat(item.getObject().getGold().getId()).isEqualTo(1001);
 		assertThat(item.getObject().getGold().getBase()).isEqualTo(300);
