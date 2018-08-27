@@ -111,11 +111,19 @@
           </div>
         </ng-container>
         <ng-template #noTrollBuild>
-          <article id="no-troll-build-alert" class="message is-danger">
-            <div class="message-body">
-              <p id="no-troll-build-alert-msg">An error has occurred while generating a Troll Build. Please try again later.</p>
+          <div class="columns">
+            <div class="column
+              is-4-widescreen is-offset-4-widescreen
+              is-6-desktop is-offset-2-desktop
+              is-6-tablet is-offset-3-tablet
+              is-12-mobile">
+              <article id="no-troll-build-alert" class="message is-danger">
+                <div class="message-body">
+                  <p id="no-troll-build-alert-msg">An error has occurred while generating a Troll Build. Please try again later.</p>
+                </div>
+              </article>
             </div>
-          </article>
+          </div>
         </ng-template>
       </ng-container>
       <ng-template #loadingTrollBuild>
