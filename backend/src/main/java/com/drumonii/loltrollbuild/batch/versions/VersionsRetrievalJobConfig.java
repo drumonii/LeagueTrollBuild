@@ -10,12 +10,10 @@ import org.springframework.batch.core.configuration.annotation.StepBuilderFactor
 import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.item.ItemWriter;
-import org.springframework.batch.item.database.builder.JdbcBatchItemWriterBuilder;
+import org.springframework.batch.item.data.builder.RepositoryItemWriterBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import javax.sql.DataSource;
 
 /**
  * {@link Job} configuration for retrieving the latest {@link Version} data from Riot's API.
@@ -27,7 +25,7 @@ public class VersionsRetrievalJobConfig {
 	private StepBuilderFactory stepBuilderFactory;
 
 	@Autowired
-	private DataSource dataSource;
+	private VersionsRepository versionsRepository;
 
 	@Bean
 	public Job versionsRetrievalJob(JobBuilderFactory jobBuilderFactory) {
@@ -61,11 +59,9 @@ public class VersionsRetrievalJobConfig {
 
 	@Bean
 	public ItemWriter<Version> versionsRetrievalItemWriter() {
-		return new JdbcBatchItemWriterBuilder<Version>()
-				.dataSource(dataSource)
-				.sql("INSERT INTO VERSION (PATCH, MAJOR, MINOR, REVISION) VALUES (:patch, :major, :minor, :revision)")
-				.beanMapped()
-				.assertUpdates(false)
+		return new RepositoryItemWriterBuilder<Version>()
+				.repository(versionsRepository)
+				.methodName("save")
 				.build();
 	}
 
