@@ -1,5 +1,5 @@
 import { TestBed, inject } from '@angular/core/testing';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpClientTestingModule, HttpTestingController, RequestMatch } from '@angular/common/http/testing';
 
 import { ChampionsService } from './champions.service';
 
@@ -19,40 +19,42 @@ describe('ChampionsService', () => {
 
   describe('getChampions', () => {
 
+    const mockChampions: Champion[] = [
+      {
+        id: 67,
+        key: 'Vayne',
+        name: 'Vayne',
+        title: 'the Night Hunter',
+        partype: 'Mana',
+        info: {
+          attack: 10,
+          defense: 1,
+          magic: 1,
+          difficulty: 8
+        },
+        spells: [], // omitted for brevity
+        passive: {
+          name: 'Night Hunter',
+          description: 'Vayne ruthlessly hunts evil-doers, gaining 30 movement speed when moving toward nearby enemy ' +
+            'champions.'
+        },
+        tags: [
+          'Assassin',
+          'Marksman'
+        ]
+      }
+    ];
+
+    const requestMatch: RequestMatch = { method: 'GET', url: '/api/champions' };
+
     it('should get Champions', inject([ChampionsService, HttpTestingController],
       (service: ChampionsService, httpMock: HttpTestingController) => {
-      const mockChampions: Champion[] = [
-        {
-          id: 67,
-          key: 'Vayne',
-          name: 'Vayne',
-          title: 'the Night Hunter',
-          partype: 'Mana',
-          info: {
-            attack: 10,
-            defense: 1,
-            magic: 1,
-            difficulty: 8
-          },
-          spells: [], // omitted for brevity
-          passive: {
-            name: 'Night Hunter',
-            description: 'Vayne ruthlessly hunts evil-doers, gaining 30 movement speed when moving toward nearby enemy ' +
-              'champions.'
-          },
-          tags: [
-            'Assassin',
-            'Marksman'
-          ]
-        }
-      ];
 
       service.getChampions().subscribe(champions => {
         expect(champions).toEqual(mockChampions);
       });
 
-      const testReq = httpMock.expectOne('/api/champions');
-      expect(testReq.request.method).toEqual('GET');
+      const testReq = httpMock.expectOne(requestMatch);
 
       testReq.flush(mockChampions);
     }));
@@ -63,8 +65,7 @@ describe('ChampionsService', () => {
         expect(champions).toEqual([]);
       });
 
-      const testReq = httpMock.expectOne('/api/champions');
-      expect(testReq.request.method).toEqual('GET');
+      const testReq = httpMock.expectOne(requestMatch);
 
       testReq.error(new ErrorEvent('An unexpected error occurred'));
     }));
@@ -73,16 +74,18 @@ describe('ChampionsService', () => {
 
   describe('getChampionTags', () => {
 
+    const mockTags: string[] = [ 'Assassin', 'Fighter', 'Mage', 'Marksman', 'Support', 'Tank' ];
+
+    const requestMatch: RequestMatch = { method: 'GET', url: '/api/champions/tags' };
+
     it('should get Champion tags', inject([ChampionsService, HttpTestingController],
       (service: ChampionsService, httpMock: HttpTestingController) => {
-      const mockTags: string[] = [ 'Assassin', 'Fighter', 'Mage', 'Marksman', 'Support', 'Tank' ];
 
       service.getChampionTags().subscribe(tags => {
         expect(tags).toEqual(mockTags);
       });
 
-      const testReq = httpMock.expectOne('/api/champions/tags');
-      expect(testReq.request.method).toEqual('GET');
+      const testReq = httpMock.expectOne(requestMatch);
 
       testReq.flush(mockTags);
     }));
@@ -93,8 +96,7 @@ describe('ChampionsService', () => {
         expect(tags).toEqual([]);
       });
 
-      const testReq = httpMock.expectOne('/api/champions/tags', 'GET Champion Tags');
-      expect(testReq.request.method).toEqual('GET');
+      const testReq = httpMock.expectOne(requestMatch);
 
       testReq.error(new ErrorEvent('An unexpected error occurred'));
     }));

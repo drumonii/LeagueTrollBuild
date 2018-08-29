@@ -1,5 +1,5 @@
 import { TestBed, inject } from '@angular/core/testing';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpClientTestingModule, HttpTestingController, RequestMatch } from '@angular/common/http/testing';
 
 import { GameMapsService } from './game-maps.service';
 
@@ -19,21 +19,22 @@ describe('GameMapsService', () => {
 
   describe('forTrollBuild', () => {
 
+    const mockGameMaps: GameMap[] = [
+      {
+        mapId: 11,
+        mapName: 'Summoner\'s Rift'
+      }
+    ];
+
+    const requestMatch: RequestMatch = { method: 'GET', url: '/api/maps/for-troll-build' };
+
     it('should get a Game maps for Troll Build', inject([GameMapsService, HttpTestingController],
       (service: GameMapsService, httpMock: HttpTestingController) => {
-      const mockGameMaps: GameMap[] = [
-        {
-          mapId: 11,
-          mapName: 'Summoner\'s Rift'
-        }
-      ];
-
       service.forTrollBuild().subscribe(gameMaps => {
         expect(gameMaps).toEqual(mockGameMaps);
       });
 
-      const testReq = httpMock.expectOne('/api/maps/for-troll-build');
-      expect(testReq.request.method).toEqual('GET');
+      const testReq = httpMock.expectOne(requestMatch);
 
       testReq.flush(mockGameMaps);
     }));
@@ -44,8 +45,7 @@ describe('GameMapsService', () => {
         expect(gameMaps).toEqual([]);
       });
 
-      const testReq = httpMock.expectOne('/api/maps/for-troll-build');
-      expect(testReq.request.method).toEqual('GET');
+      const testReq = httpMock.expectOne(requestMatch);
 
       testReq.error(new ErrorEvent('An unexpected error occurred'));
     }));

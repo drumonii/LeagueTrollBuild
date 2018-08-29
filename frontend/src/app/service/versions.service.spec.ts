@@ -1,5 +1,5 @@
 import { TestBed, inject } from '@angular/core/testing';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpClientTestingModule, HttpTestingController, RequestMatch } from '@angular/common/http/testing';
 
 import { VersionsService } from './versions.service';
 
@@ -19,6 +19,8 @@ describe('VersionsService', () => {
 
   describe('getLatestVersion', function () {
 
+    const requestMatch: RequestMatch = { method: 'GET', url: '/api/versions/latest' };
+
     it('should get the latest saved Version', inject([VersionsService, HttpTestingController],
       (service: VersionsService, httpMock: HttpTestingController) => {
       const mockLatestVersion = new Version('8.7.1');
@@ -27,8 +29,7 @@ describe('VersionsService', () => {
         expect(latestVersion).toEqual(mockLatestVersion);
       });
 
-      const testReq = httpMock.expectOne('/api/versions/latest');
-      expect(testReq.request.method).toEqual('GET');
+      const testReq = httpMock.expectOne(requestMatch);
 
       testReq.flush(mockLatestVersion);
     }));
@@ -39,8 +40,7 @@ describe('VersionsService', () => {
         expect(latestVersion).toBeNull();
       });
 
-      const testReq = httpMock.expectOne('/api/versions/latest');
-      expect(testReq.request.method).toEqual('GET');
+      const testReq = httpMock.expectOne(requestMatch);
 
       testReq.error(new ErrorEvent('An unexpected error occurred'));
     }));
