@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { finalize } from 'rxjs/operators';
 
 import { TitleService } from '@service/title.service';
 import { BuildsService } from '@service/builds.service';
@@ -56,7 +56,7 @@ export class ChampionPage implements OnInit {
     this.trollBuildLoading = true;
     this.trollBuild$ = this.championService.getTrollBuild(this.champion.name, this.gameMap.mapId)
       .pipe(
-        tap(() => this.trollBuildLoading = false)
+        finalize(() => this.trollBuildLoading = false)
       );
   }
 
