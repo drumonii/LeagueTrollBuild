@@ -1,0 +1,3 @@
+<ng-container *ngIf="(progress$ | async) as progress">
+  <progress id="loading-bar" class="progress is-warning" [value]="progress" max="100"></progress>
+</ng-container>

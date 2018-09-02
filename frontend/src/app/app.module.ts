@@ -11,6 +11,7 @@ import { FooterComponent } from '@layout/footer/footer.component';
 import { HeaderComponent } from '@layout/header/header.component';
 
 import { VersionsService } from '@service/versions.service';
+import { LoadingBarModule } from '@loading-bar/loading-bar.module';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { VersionsService } from '@service/versions.service';
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    HttpClientXsrfModule
+    HttpClientXsrfModule,
+    LoadingBarModule
   ],
   providers: [
     VersionsService

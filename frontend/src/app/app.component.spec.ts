@@ -4,6 +4,7 @@ import { APP_BASE_HREF } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
+import { LoadingBarModule } from '@loading-bar/loading-bar.module';
 
 import { AppComponent } from './app.component';
 
@@ -22,6 +23,7 @@ describe('AppComponent', () => {
       ],
       imports: [
         AppRoutingModule,
+        LoadingBarModule,
         FormsModule,
         HttpClientTestingModule
       ],
