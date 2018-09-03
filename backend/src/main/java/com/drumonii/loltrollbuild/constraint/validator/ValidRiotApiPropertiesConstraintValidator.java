@@ -17,7 +17,15 @@ public class ValidRiotApiPropertiesConstraintValidator implements ConstraintVali
 
 	@Override
 	public boolean isValid(RiotApiProperties properties, ConstraintValidatorContext context) {
-		return validate(properties.getDdragon(), context) && validateImgs(properties.getDdragon(), context);
+		Ddragon ddragon = properties.getDdragon();
+		if (ddragon == null) {
+			context.disableDefaultConstraintViolation();
+			context.buildConstraintViolationWithTemplate("riot.ddragon.* property namespace must " +
+					"not be empty for Data Dragon")
+					.addConstraintViolation();
+			return false;
+		}
+		return validate(ddragon, context) && validateImgs(ddragon, context);
 	}
 
 	/**
@@ -28,13 +36,6 @@ public class ValidRiotApiPropertiesConstraintValidator implements ConstraintVali
 	 * @return {@code true} whether valid, otherwise {@code false}
 	 */
 	private boolean validate(Ddragon ddragon, ConstraintValidatorContext context) {
-		if (ddragon == null) {
-			context.disableDefaultConstraintViolation();
-			context.buildConstraintViolationWithTemplate("riot.ddragon.* property namespace must " +
-					"not be empty for Data Dragon")
-					.addConstraintViolation();
-			return false;
-		}
 		if (StringUtils.isEmpty(ddragon.getBaseUrl())) {
 			context.disableDefaultConstraintViolation();
 			context.buildConstraintViolationWithTemplate("Base URL must not be empty for Data Dragon API")
@@ -88,13 +89,6 @@ public class ValidRiotApiPropertiesConstraintValidator implements ConstraintVali
 	 * @return {@code true} whether valid, otherwise {@code false}
 	 */
 	private boolean validateImgs(Ddragon ddragon, ConstraintValidatorContext context) {
-		if (ddragon == null) {
-			context.disableDefaultConstraintViolation();
-			context.buildConstraintViolationWithTemplate("riot.api.ddragon.* property namespace must " +
-					"not be empty for Data Dragon Images")
-					.addConstraintViolation();
-			return false;
-		}
 		if (StringUtils.isEmpty(ddragon.getChampionsImg())) {
 			context.disableDefaultConstraintViolation();
 			context.buildConstraintViolationWithTemplate("Champions Image URL must not be empty")
