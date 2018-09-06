@@ -5,7 +5,7 @@ import { Observable, EMPTY } from 'rxjs';
 import { mergeMap, map } from 'rxjs/operators';
 
 import { BuildsResolverData } from './builds.resolver.data';
-import { BuildsService } from '@service/builds.service';
+import { BuildsService } from './builds.service';
 
 @Injectable()
 export class BuildsResolver implements Resolve<BuildsResolverData> {

@@ -7,7 +7,7 @@ import { of } from 'rxjs';
 
 import { BuildsResolver } from './builds.resolver';
 import { BuildsModule } from './builds.module';
-import { BuildsService } from '@service/builds.service';
+import { BuildsService } from './builds.service';
 import { Build } from '@model/build';
 
 describe('BuildsResolver', () => {

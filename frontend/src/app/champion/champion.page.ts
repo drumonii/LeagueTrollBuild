@@ -5,9 +5,7 @@ import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 
 import { TitleService } from '@service/title.service';
-import { BuildsService } from '@service/builds.service';
-import { ChampionService } from '@service/champion.service';
-import { GameMapsService } from '@service/game-maps.service';
+import { ChampionService } from './champion.service';
 import { Build, BuildBuilder } from '@model/build';
 import { Champion } from '@model/champion';
 import { GameMap } from '@model/game-map';
@@ -28,8 +26,7 @@ export class ChampionPage implements OnInit {
   build: Build;
   buildSaving: boolean;
 
-  constructor(private championService: ChampionService, private gameMapsService: GameMapsService,
-    private buildsService: BuildsService, private title: TitleService, private route: ActivatedRoute) {}
+  constructor(private championService: ChampionService,  private title: TitleService, private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.route.data.subscribe((data: { champion: Champion }) => {
@@ -48,7 +45,7 @@ export class ChampionPage implements OnInit {
   }
 
   getGameMaps(): Observable<GameMap[]> {
-    return this.gameMapsService.forTrollBuild();
+    return this.championService.mapsForTrollBuild();
   }
 
   getTrollBuild(): void {
@@ -69,7 +66,7 @@ export class ChampionPage implements OnInit {
       .withGameMap(this.gameMap)
       .build();
     this.buildSaving = true;
-    this.buildsService.saveBuild(build).subscribe(res => {
+    this.championService.saveBuild(build).subscribe(res => {
       this.build = res.body;
       this.build.selfRef = res.headers.get('Location').replace('/api', '');
       this.buildSaving = false;

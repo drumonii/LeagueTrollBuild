@@ -9,7 +9,7 @@ import { of } from 'rxjs';
 import { BuildsPage } from './builds.page';
 import { BuildsModule } from './builds.module';
 import { TitleService } from '@service/title.service';
-import { BuildsService } from '@service/builds.service';
+import { BuildsService } from './builds.service';
 import { Build } from '@model/build';
 import { Item } from '@model/item';
 import { SummonerSpell } from '@model/summoner-spell';

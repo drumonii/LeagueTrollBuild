@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { BuildsResolverData } from './builds.resolver.data';
 import { TitleService } from '@service/title.service';
-import { BuildsService } from '@service/builds.service';
+import { BuildsService } from './builds.service';
 import { Build, BuildType } from '@model/build';
 
 @Component({

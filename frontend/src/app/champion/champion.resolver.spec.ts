@@ -7,7 +7,7 @@ import { of } from 'rxjs';
 
 import { ChampionResolver } from './champion.resolver';
 import { ChampionModule } from './champion.module';
-import { ChampionService } from '@service/champion.service';
+import { ChampionService } from './champion.service';
 import { Champion } from '@model/champion';
 
 describe('ChampionResolver', () => {

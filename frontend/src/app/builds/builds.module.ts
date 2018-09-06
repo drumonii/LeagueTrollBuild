@@ -6,7 +6,7 @@ import { BuildsRoutingModule } from './builds-routing.module';
 
 import { BuildsPage } from './builds.page';
 import { TitleService } from '@service/title.service';
-import { BuildsService } from '@service/builds.service';
+import { BuildsService } from './builds.service';
 
 @NgModule({
   imports: [

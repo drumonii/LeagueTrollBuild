@@ -11,7 +11,7 @@ import { ChampionsPage } from './champions.page';
 import { ChampionsModule } from './champions.module';
 import { Champion } from '@model/champion';
 import { TitleService } from '@service/title.service';
-import { ChampionsService } from '@service/champions.service';
+import { ChampionsService } from './champions.service';
 
 describe('ChampionsPage', () => {
   let component: ChampionsPage;

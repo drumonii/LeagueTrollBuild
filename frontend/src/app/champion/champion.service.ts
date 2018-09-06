@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { Champion } from '@model/champion';
 import { TrollBuild } from '@model/troll-build';
+import { GameMap } from '@model/game-map';
+import { Build } from '@model/build';
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +35,32 @@ export class ChampionService {
           return of(new TrollBuild());
         })
       );
+  }
+
+  mapsForTrollBuild(): Observable<GameMap[]> {
+    return this.httpClient.get<GameMap[]>('/api/maps/for-troll-build')
+    .pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error(`Caught error while GETing Game Maps for Troll Build: ${JSON.stringify(error)}`);
+        return of([]);
+      })
+    );
+  }
+
+  saveBuild(build: Build): Observable<HttpResponse<Build>> {
+    return this.httpClient.post<HttpResponse<Build>>('/api/builds', build,
+      {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        }),
+        observe: 'response'
+      })
+    .pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error(`Caught error while POSTing build ${JSON.stringify(build)}: ${JSON.stringify(error)}`);
+        return of(null);
+      })
+    );
   }
 
 }

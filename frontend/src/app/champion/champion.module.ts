@@ -6,9 +6,7 @@ import { ChampionRoutingModule } from './champion-routing.module';
 
 import { ChampionPage } from './champion.page';
 import { TitleService } from '@service/title.service';
-import { BuildsService } from '@service/builds.service';
-import { ChampionService } from '@service/champion.service';
-import { GameMapsService } from '@service/game-maps.service';
+import { ChampionService } from './champion.service';
 
 @NgModule({
   imports: [
@@ -21,9 +19,7 @@ import { GameMapsService } from '@service/game-maps.service';
   ],
   providers: [
     TitleService,
-    BuildsService,
-    ChampionService,
-    GameMapsService
+    ChampionService
   ]
 })
 export class ChampionModule { }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -10,22 +10,6 @@ import { Build } from '@model/build';
 export class BuildsService {
 
   constructor(private httpClient: HttpClient) {}
-
-  saveBuild(build: Build): Observable<HttpResponse<Build>> {
-    return this.httpClient.post<HttpResponse<Build>>('/api/builds', build,
-      {
-        headers: new HttpHeaders({
-          'Content-Type': 'application/json'
-        }),
-        observe: 'response'
-      })
-    .pipe(
-      catchError((error: HttpErrorResponse) => {
-        console.error(`Caught error while POSTing build ${JSON.stringify(build)}: ${JSON.stringify(error)}`);
-        return of(null);
-      })
-    );
-  }
 
   getBuild(buildId: number): Observable<Build> {
     return this.httpClient.get<Build>(`/api/builds/${buildId}`)

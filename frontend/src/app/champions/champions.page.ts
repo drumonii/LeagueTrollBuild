@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { TitleService } from '@service/title.service';
-import { ChampionsService } from '@service/champions.service';
+import { ChampionsService } from './champions.service';
 import { Champion } from '@model/champion';
 
 @Component({

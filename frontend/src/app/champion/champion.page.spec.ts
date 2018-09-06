@@ -11,9 +11,7 @@ import { of } from 'rxjs';
 import { ChampionPage } from './champion.page';
 import { ChampionModule } from './champion.module';
 import { TitleService } from '@service/title.service';
-import { BuildsService } from '@service/builds.service';
-import { ChampionService } from '@service/champion.service';
-import { GameMapsService } from '@service/game-maps.service';
+import { ChampionService } from './champion.service';
 import { Champion } from '@model/champion';
 import { GameMap } from '@model/game-map';
 import { TrollBuild } from '@model/troll-build';
@@ -872,18 +870,18 @@ describe('ChampionPage', () => {
       [howlingAbyss.mapId]: howlingAbyssTrollBuild
     };
 
-    beforeEach(inject([ChampionService, GameMapsService, TitleService],
-      (championService: ChampionService, gameMapsService: GameMapsService, title: TitleService) => {
+    beforeEach(inject([ChampionService, TitleService],
+      (championService: ChampionService, title: TitleService) => {
       spyOn(championService, 'getChampion').and.returnValue(of(skarner));
-      spyOn(gameMapsService, 'forTrollBuild').and.returnValue(of(maps));
+      spyOn(championService, 'mapsForTrollBuild').and.returnValue(of(maps));
 
       spyOn(title, 'setTitle').and.callThrough();
     }));
 
-    afterEach(inject([ChampionService, GameMapsService, TitleService],
-      (championService: ChampionService, gameMapsService: GameMapsService, title: TitleService) => {
+    afterEach(inject([ChampionService, TitleService],
+      (championService: ChampionService, title: TitleService) => {
       expect(championService.getChampion).not.toHaveBeenCalledWith(skarner.name);
-      expect(gameMapsService.forTrollBuild).toHaveBeenCalled();
+      expect(championService.mapsForTrollBuild).toHaveBeenCalled();
 
       expect(title.setTitle).toHaveBeenCalledWith(skarner.name);
     }));
@@ -967,11 +965,11 @@ describe('ChampionPage', () => {
     }));
 
     it('should save a Troll Build with after clicking the save build button and then show its self link',
-      inject([ChampionService, BuildsService], (championService: ChampionService, buildsService: BuildsService) => {
+      inject([ChampionService], (championService: ChampionService) => {
       fixture.detectChanges();
 
       const championServiceSpy = spyOn(championService, 'getTrollBuild');
-      const buildsServiceSpy = spyOn(buildsService, 'saveBuild');
+      const buildsServiceSpy = spyOn(championService, 'saveBuild');
       const execCommandSpy =  spyOn(document, 'execCommand');
 
       const mapSelectDe = fixture.debugElement.query(By.css('#map-select'));
@@ -1027,7 +1025,7 @@ describe('ChampionPage', () => {
 
         fixture.detectChanges();
 
-        expect(buildsService.saveBuild).toHaveBeenCalledWith(build);
+        expect(championService.saveBuild).toHaveBeenCalledWith(build);
 
         const savedBuildInputDe = fixture.debugElement.query(By.css('#saved-build-input-link'));
         expect(savedBuildInputDe.nativeElement.value).toBe(`http://localhost/build/${savedBuild.id}`);
@@ -1108,16 +1106,16 @@ describe('ChampionPage', () => {
 
   describe('show Champion by name with a loading Troll Build and maps to select', () => {
 
-    beforeEach(inject([ChampionService, GameMapsService], (championService: ChampionService, gameMapsService: GameMapsService) => {
+    beforeEach(inject([ChampionService], (championService: ChampionService) => {
       spyOn(championService, 'getChampion').and.returnValue(of(skarner));
       spyOn(championService, 'getTrollBuild').and.callThrough();
-      spyOn(gameMapsService, 'forTrollBuild').and.returnValue(of(maps));
+      spyOn(championService, 'mapsForTrollBuild').and.returnValue(of(maps));
     }));
 
-    afterEach(inject([ChampionService, GameMapsService], (championService: ChampionService, gameMapsService: GameMapsService) => {
+    afterEach(inject([ChampionService], (championService: ChampionService) => {
       expect(championService.getChampion).not.toHaveBeenCalledWith(skarner.name);
       expect(championService.getTrollBuild).toHaveBeenCalledWith(skarner.name, GameMap.summonersRiftId);
-      expect(gameMapsService.forTrollBuild).toHaveBeenCalled();
+      expect(championService.mapsForTrollBuild).toHaveBeenCalled();
     }));
 
     it('should show placeholders indicating a loading Troll Build ', () => {
@@ -1149,16 +1147,16 @@ describe('ChampionPage', () => {
 
   describe('show Champion by name with a failed to load Troll Build and maps to select', () => {
 
-    beforeEach(inject([ChampionService, GameMapsService], (championService: ChampionService, gameMapsService: GameMapsService) => {
+    beforeEach(inject([ChampionService], (championService: ChampionService) => {
       spyOn(championService, 'getChampion').and.returnValue(of(skarner));
       spyOn(championService, 'getTrollBuild').and.returnValue(of(new TrollBuild()));
-      spyOn(gameMapsService, 'forTrollBuild').and.returnValue(of(maps));
+      spyOn(championService, 'mapsForTrollBuild').and.returnValue(of(maps));
     }));
 
-    afterEach(inject([ChampionService, GameMapsService], (championService: ChampionService, gameMapsService: GameMapsService) => {
+    afterEach(inject([ChampionService], (championService: ChampionService) => {
       expect(championService.getChampion).not.toHaveBeenCalledWith(skarner.name);
       expect(championService.getTrollBuild).toHaveBeenCalledWith(skarner.name, GameMap.summonersRiftId);
-      expect(gameMapsService.forTrollBuild).toHaveBeenCalled();
+      expect(championService.mapsForTrollBuild).toHaveBeenCalled();
     }));
 
     it('should show unable to generate Troll Build alert', () => {
@@ -1176,16 +1174,16 @@ describe('ChampionPage', () => {
 
   describe('show Champion by name with loading game maps', () => {
 
-    beforeEach(inject([ChampionService, GameMapsService], (championService: ChampionService, gameMapsService: GameMapsService) => {
+    beforeEach(inject([ChampionService], (championService: ChampionService) => {
       spyOn(championService, 'getChampion').and.returnValue(of(skarner));
       spyOn(championService, 'getTrollBuild').and.callThrough();
-      spyOn(gameMapsService, 'forTrollBuild').and.callThrough();
+      spyOn(championService, 'mapsForTrollBuild').and.callThrough();
     }));
 
-    afterEach(inject([ChampionService, GameMapsService], (championService: ChampionService, gameMapsService: GameMapsService) => {
+    afterEach(inject([ChampionService], (championService: ChampionService) => {
       expect(championService.getChampion).not.toHaveBeenCalledWith(skarner.name);
       expect(championService.getTrollBuild).not.toHaveBeenCalledWith(skarner.name, GameMap.summonersRiftId);
-      expect(gameMapsService.forTrollBuild).toHaveBeenCalled();
+      expect(championService.mapsForTrollBuild).toHaveBeenCalled();
     }));
 
     it('should should game maps select with single loading option', () => {

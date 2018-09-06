@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { Champion } from '@model/champion';
-import { ChampionService } from '@service/champion.service';
+import { ChampionService } from './champion.service';
 
 @Injectable()
 export class ChampionResolver implements Resolve<Champion> {
