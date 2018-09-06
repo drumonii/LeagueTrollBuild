@@ -881,19 +881,19 @@ describe('ChampionPage', () => {
     }));
 
     afterEach(inject([ChampionService, GameMapsService, TitleService],
-      (championsService: ChampionService, gameMapsService: GameMapsService, title: TitleService) => {
-      expect(championsService.getChampion).not.toHaveBeenCalledWith(skarner.name);
+      (championService: ChampionService, gameMapsService: GameMapsService, title: TitleService) => {
+      expect(championService.getChampion).not.toHaveBeenCalledWith(skarner.name);
       expect(gameMapsService.forTrollBuild).toHaveBeenCalled();
 
       expect(title.setTitle).toHaveBeenCalledWith(skarner.name);
     }));
 
-    it('should show Troll Build for Summoner\'s Rift by default', inject([ChampionService], (championsService: ChampionService) => {
-      spyOn(championsService, 'getTrollBuild').and.returnValue(of(summonersRiftTrollBuild));
+    it('should show Troll Build for Summoner\'s Rift by default', inject([ChampionService], (championService: ChampionService) => {
+      spyOn(championService, 'getTrollBuild').and.returnValue(of(summonersRiftTrollBuild));
 
       fixture.detectChanges();
 
-      expect(championsService.getTrollBuild).toHaveBeenCalledWith(skarner.name, GameMap.summonersRiftId);
+      expect(championService.getTrollBuild).toHaveBeenCalledWith(skarner.name, GameMap.summonersRiftId);
     }));
 
     it('should generate a new Troll Build after selecting a new map',
@@ -1108,15 +1108,15 @@ describe('ChampionPage', () => {
 
   describe('show Champion by name with a loading Troll Build and maps to select', () => {
 
-    beforeEach(inject([ChampionService, GameMapsService], (championsService: ChampionService, gameMapsService: GameMapsService) => {
-      spyOn(championsService, 'getChampion').and.returnValue(of(skarner));
-      spyOn(championsService, 'getTrollBuild').and.callThrough();
+    beforeEach(inject([ChampionService, GameMapsService], (championService: ChampionService, gameMapsService: GameMapsService) => {
+      spyOn(championService, 'getChampion').and.returnValue(of(skarner));
+      spyOn(championService, 'getTrollBuild').and.callThrough();
       spyOn(gameMapsService, 'forTrollBuild').and.returnValue(of(maps));
     }));
 
-    afterEach(inject([ChampionService, GameMapsService], (championsService: ChampionService, gameMapsService: GameMapsService) => {
-      expect(championsService.getChampion).not.toHaveBeenCalledWith(skarner.name);
-      expect(championsService.getTrollBuild).toHaveBeenCalledWith(skarner.name, GameMap.summonersRiftId);
+    afterEach(inject([ChampionService, GameMapsService], (championService: ChampionService, gameMapsService: GameMapsService) => {
+      expect(championService.getChampion).not.toHaveBeenCalledWith(skarner.name);
+      expect(championService.getTrollBuild).toHaveBeenCalledWith(skarner.name, GameMap.summonersRiftId);
       expect(gameMapsService.forTrollBuild).toHaveBeenCalled();
     }));
 
@@ -1149,15 +1149,15 @@ describe('ChampionPage', () => {
 
   describe('show Champion by name with a failed to load Troll Build and maps to select', () => {
 
-    beforeEach(inject([ChampionService, GameMapsService], (championsService: ChampionService, gameMapsService: GameMapsService) => {
-      spyOn(championsService, 'getChampion').and.returnValue(of(skarner));
-      spyOn(championsService, 'getTrollBuild').and.returnValue(of(new TrollBuild()));
+    beforeEach(inject([ChampionService, GameMapsService], (championService: ChampionService, gameMapsService: GameMapsService) => {
+      spyOn(championService, 'getChampion').and.returnValue(of(skarner));
+      spyOn(championService, 'getTrollBuild').and.returnValue(of(new TrollBuild()));
       spyOn(gameMapsService, 'forTrollBuild').and.returnValue(of(maps));
     }));
 
-    afterEach(inject([ChampionService, GameMapsService], (championsService: ChampionService, gameMapsService: GameMapsService) => {
-      expect(championsService.getChampion).not.toHaveBeenCalledWith(skarner.name);
-      expect(championsService.getTrollBuild).toHaveBeenCalledWith(skarner.name, GameMap.summonersRiftId);
+    afterEach(inject([ChampionService, GameMapsService], (championService: ChampionService, gameMapsService: GameMapsService) => {
+      expect(championService.getChampion).not.toHaveBeenCalledWith(skarner.name);
+      expect(championService.getTrollBuild).toHaveBeenCalledWith(skarner.name, GameMap.summonersRiftId);
       expect(gameMapsService.forTrollBuild).toHaveBeenCalled();
     }));
 
@@ -1176,15 +1176,15 @@ describe('ChampionPage', () => {
 
   describe('show Champion by name with loading game maps', () => {
 
-    beforeEach(inject([ChampionService, GameMapsService], (championsService: ChampionService, gameMapsService: GameMapsService) => {
-      spyOn(championsService, 'getChampion').and.returnValue(of(skarner));
-      spyOn(championsService, 'getTrollBuild').and.callThrough();
+    beforeEach(inject([ChampionService, GameMapsService], (championService: ChampionService, gameMapsService: GameMapsService) => {
+      spyOn(championService, 'getChampion').and.returnValue(of(skarner));
+      spyOn(championService, 'getTrollBuild').and.callThrough();
       spyOn(gameMapsService, 'forTrollBuild').and.callThrough();
     }));
 
-    afterEach(inject([ChampionService, GameMapsService], (championsService: ChampionService, gameMapsService: GameMapsService) => {
-      expect(championsService.getChampion).not.toHaveBeenCalledWith(skarner.name);
-      expect(championsService.getTrollBuild).not.toHaveBeenCalledWith(skarner.name, GameMap.summonersRiftId);
+    afterEach(inject([ChampionService, GameMapsService], (championService: ChampionService, gameMapsService: GameMapsService) => {
+      expect(championService.getChampion).not.toHaveBeenCalledWith(skarner.name);
+      expect(championService.getTrollBuild).not.toHaveBeenCalledWith(skarner.name, GameMap.summonersRiftId);
       expect(gameMapsService.forTrollBuild).toHaveBeenCalled();
     }));
 
