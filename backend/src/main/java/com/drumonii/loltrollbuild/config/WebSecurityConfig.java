@@ -105,6 +105,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	public static class UserRole {
 
+		private UserRole() {}
+
 		public static final String ADMIN = "ADMIN";
 
 	}
