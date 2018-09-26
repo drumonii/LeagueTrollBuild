@@ -16,18 +16,19 @@ export class BuildsResolver implements Resolve<BuildsResolverData> {
     const buildId = +route.paramMap.get('buildId');
     if (buildId) {
       return this.buildsService.getBuild(buildId)
+        .pipe(
+          map(build => {
+            return { id: buildId, savedBuild: build };
+          })
+        );
+    }
+    return this.getRandomBuildId()
       .pipe(
-        map(build => {
-          return { id: buildId, savedBuild: build };
+        mergeMap(randomBuildId => {
+          this.router.navigate(['/builds', randomBuildId]);
+          return EMPTY;
         })
       );
-    }
-    return this.getRandomBuildId().pipe(
-      mergeMap(randomBuildId => {
-        this.router.navigate(['/builds', randomBuildId]);
-        return EMPTY;
-      })
-    );
   }
 
   private getRandomBuildId(): Observable<number> {
