@@ -34,6 +34,7 @@ import static com.drumonii.loltrollbuild.batch.scheduling.RetrievalJobsSchedulin
 import static com.drumonii.loltrollbuild.batch.scheduling.RetrievalJobsScheduling.LATEST_PATCH_KEY;
 import static com.drumonii.loltrollbuild.config.Profiles.TESTING;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
@@ -63,11 +64,19 @@ public class RetrievalJobsSchedulingTest {
 	@Test
 	public void allRetrievalsCronExpression() {
 		CronTrigger cronTrigger = new CronTrigger(CRON_SCHEDULE);
-		Date triggerDate = Date.from(LocalDateTime.now().withHour(4).withMinute(0).withSecond(0).withNano(0)
-				.atZone(ZoneId.systemDefault()).toInstant());
-		LocalDateTime nextExecutionTime = LocalDateTime.ofInstant(cronTrigger.nextExecutionTime(
-				new SimpleTriggerContext(triggerDate, triggerDate, triggerDate)).toInstant(), ZoneId.systemDefault());
-		assertThat(nextExecutionTime)
+
+		LocalDateTime triggerDateTime = LocalDateTime.now().withHour(4).withMinute(0).withSecond(0).withNano(0);
+		Date triggerDate = Date.from(triggerDateTime.atZone(ZoneId.systemDefault()).toInstant());
+
+		SimpleTriggerContext triggerContext = new SimpleTriggerContext(triggerDate, triggerDate, triggerDate);
+
+		Date nextExecutionDate = cronTrigger.nextExecutionTime(triggerContext);
+		if (nextExecutionDate == null) {
+			fail("Next Execution Time from the CronTrigger was null");
+		}
+		LocalDateTime nextExecutionDateTime = LocalDateTime.ofInstant(nextExecutionDate.toInstant(), ZoneId.systemDefault());
+
+		assertThat(nextExecutionDateTime)
 				.isEqualTo(LocalDateTime.now().plusDays(1).withHour(4).withMinute(0).withSecond(0).withNano(0));
 	}
 
