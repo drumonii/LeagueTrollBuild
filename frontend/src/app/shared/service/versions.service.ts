@@ -6,7 +6,9 @@ import { catchError } from 'rxjs/operators';
 
 import { Version } from '@model/version';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class VersionsService {
 
   constructor(private httpClient: HttpClient) {}

@@ -11,8 +11,6 @@ import { AppComponent } from './app.component';
 import { FooterComponent } from '@layout/footer/footer.component';
 import { HeaderComponent } from '@layout/header/header.component';
 
-import { VersionsService } from '@service/versions.service';
-
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -28,7 +26,6 @@ describe('AppComponent', () => {
         HttpClientTestingModule
       ],
       providers: [
-        VersionsService,
         { provide: APP_BASE_HREF, useValue: '/' }
       ]
     })
