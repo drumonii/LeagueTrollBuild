@@ -5,7 +5,6 @@ import { FormsModule } from '@angular/forms';
 import { ChampionRoutingModule } from './champion-routing.module';
 
 import { ChampionPage } from './champion.page';
-import { TitleService } from '@service/title.service';
 import { ChampionService } from './champion.service';
 
 @NgModule({
@@ -18,7 +17,6 @@ import { ChampionService } from './champion.service';
     ChampionPage,
   ],
   providers: [
-    TitleService,
     ChampionService
   ]
 })

@@ -8,7 +8,6 @@ import { ChampionsNameFilterPipe } from './champions-name-filter.pipe';
 import { ChampionsTagsFilterPipe } from './champions-tags-filter.pipe';
 
 import { ChampionsPage } from './champions.page';
-import { TitleService } from '@service/title.service';
 import { ChampionsService } from './champions.service';
 
 @NgModule({
@@ -23,7 +22,6 @@ import { ChampionsService } from './champions.service';
     ChampionsPage
   ],
   providers: [
-    TitleService,
     ChampionsService
   ]
 })
