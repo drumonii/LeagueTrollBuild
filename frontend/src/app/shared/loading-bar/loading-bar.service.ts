@@ -5,9 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 /**
  * Slim loading bar service heavily inspired by ngx-loading-bar simplified for LTB's needs.
  */
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class LoadingBarService {
 
   private progress$ = new BehaviorSubject<number>(1);
