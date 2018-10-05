@@ -4,18 +4,20 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
+import { Logger } from '@service/logger.service';
 import { Build } from '@model/build';
 
 @Injectable()
 export class BuildsService {
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private logger: Logger, private httpClient: HttpClient) {}
 
   getBuild(buildId: number): Observable<Build> {
+    this.logger.info('GETing build', buildId);
     return this.httpClient.get<Build>(`/api/builds/${buildId}`)
       .pipe(
         catchError((error: HttpErrorResponse) => {
-          console.error(`${JSON.stringify(error)}`);
+          this.logger.warn(`Caught error while GETing build ${buildId}: ${JSON.stringify(error)}`);
           if (error.status === 404) {
             return of(null);
           }
@@ -25,10 +27,11 @@ export class BuildsService {
   }
 
   countBuilds(): Observable<number> {
+    this.logger.info('GETing count of builds');
     return this.httpClient.get<number>('/api/builds/count')
       .pipe(
         catchError((error: HttpErrorResponse) => {
-          console.error(`Caught error while GETing count of builds ${JSON.stringify(error)}`);
+          this.logger.error(`Caught error while GETing count of builds ${JSON.stringify(error)}`);
           return of(0);
         })
      );
