@@ -9,9 +9,7 @@ import { TrollBuild } from '@model/troll-build';
 import { GameMap } from '@model/game-map';
 import { Build } from '@model/build';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ChampionService {
 
   constructor(private httpClient: HttpClient) {}
