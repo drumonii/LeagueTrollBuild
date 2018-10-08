@@ -7,7 +7,6 @@ import com.drumonii.loltrollbuild.rest.status.ResourceNotFoundException;
 import com.drumonii.loltrollbuild.rest.view.ApiViews;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
@@ -18,8 +17,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Validator;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -49,15 +46,6 @@ public class BuildsRestController {
 
 	@Autowired
 	private MapsRepository mapsRepository;
-
-	@Autowired
-	@Qualifier("mvcValidator")
-	private Validator validator;
-
-	@InitBinder
-	public void initBinder(WebDataBinder binder) {
-		binder.setValidator(validator);
-	}
 
 	/**
 	 * Gets a {@link Page} of {@link Build}s from the pagination and search parameters.
