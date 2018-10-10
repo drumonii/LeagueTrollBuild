@@ -1,6 +1,7 @@
 <ng-container *ngIf="champion">
   <section class="section">
     <div class="container">
+      <!-- Champion row -->
       <div class="columns">
         <div class="column
           is-2-widescreen is-offset-4-widescreen
@@ -42,6 +43,7 @@
       </div>
       <ng-container *ngIf="(trollBuild$ | async) as trollBuild; else loadingTrollBuild">
         <ng-container *ngIf="trollBuild.items && trollBuild.summonerSpells && trollBuild.trinket; else noTrollBuild">
+          <!-- Items row -->
           <div class="columns">
             <div class="column
               is-8-widescreen is-offset-4-widescreen
@@ -57,6 +59,7 @@
               </ul>
             </div>
           </div>
+          <!-- Summoner Spells and Trinket row -->
           <div class="columns">
             <div class="column
               is-3-widescreen is-offset-4-widescreen
@@ -85,6 +88,7 @@
               </ul>
             </div>
           </div>
+          <!-- Save build row -->
           <div class="columns">
             <div class="column
               is-5-widescreen is-offset-4-widescreen
@@ -127,6 +131,7 @@
         </ng-template>
       </ng-container>
       <ng-template #loadingTrollBuild>
+        <!-- Items loading row -->
         <div class="columns">
           <div class="column
               is-8-widescreen is-offset-4-widescreen
@@ -141,6 +146,7 @@
             </ul>
           </div>
         </div>
+        <!-- Summoner Spells and Trinket loading row -->
         <div class="columns">
           <div class="column
               is-3-widescreen is-offset-4-widescreen
@@ -167,6 +173,7 @@
             </ul>
           </div>
         </div>
+        <!-- Save build loading row -->
         <div class="columns">
           <div class="column
               is-5-widescreen is-offset-4-widescreen

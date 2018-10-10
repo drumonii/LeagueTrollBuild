@@ -2,12 +2,13 @@
   <section class="section">
     <div class="container">
       <ng-container *ngSwitchCase="'Ok'">
+        <!-- Champion row -->
         <div class="columns">
           <div class="column
           is-2-widescreen is-offset-4-widescreen
           is-3-desktop is-offset-2-desktop
           is-3-tablet is-offset-3-tablet
-          is-10-mobile is-offset-2-mobile">
+          is-9-mobile is-offset-3-mobile">
             <div id="champion-img-container">
               <div id="champion-partype-ribbon">
                 <span id="champion-partype">{{build.champion.partype}}</span>
@@ -31,6 +32,7 @@
             </div>
           </div>
         </div>
+        <!-- Items row -->
         <div class="columns">
           <div class="column
               is-8-widescreen is-offset-4-widescreen
@@ -72,6 +74,7 @@
             </ul>
           </div>
         </div>
+        <!-- Summoner Spells and Trinket row -->
         <div class="columns">
           <div class="column
             is-3-widescreen is-offset-4-widescreen
