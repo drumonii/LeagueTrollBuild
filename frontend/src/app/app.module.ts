@@ -7,16 +7,12 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 
-import { FooterComponent } from '@layout/footer/footer.component';
-import { HeaderComponent } from '@layout/header/header.component';
-
+import { LayoutModule } from '@layout/layout.module';
 import { LoadingBarModule } from '@loading-bar/loading-bar.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    FooterComponent,
-    HeaderComponent
+    AppComponent
   ],
   imports: [
     AppRoutingModule,
@@ -24,6 +20,7 @@ import { LoadingBarModule } from '@loading-bar/loading-bar.module';
     FormsModule,
     HttpClientModule,
     HttpClientXsrfModule,
+    LayoutModule,
     LoadingBarModule
   ],
   providers: [],
