@@ -1059,13 +1059,15 @@ describe('ChampionPage', () => {
       const championTagsDe = fixture.debugElement.queryAll(By.css('.champion-tag'));
       expect(championTagsDe.map(championTagDe => championTagDe.nativeElement.textContent)).toEqual(skarner.tags);
 
+      // New Build
+      const newBuildBtnDe = fixture.debugElement.query(By.css('#new-build-btn'));
+      expect(newBuildBtnDe.classes['is-loading']).toBeFalsy();
+      expect(newBuildBtnDe.nativeElement.textContent).toBe('New Build');
+
       // Maps
       const mapsOptionDe = fixture.debugElement.queryAll(By.css('.map-option'));
       expect(mapsOptionDe.map(mapOptionDe => mapOptionDe.nativeElement.textContent.trim()))
         .toEqual(maps.map(map => map.mapName));
-      const newBuildBtnDe = fixture.debugElement.query(By.css('#new-build-btn'));
-      expect(newBuildBtnDe.classes['is-loading']).toBeFalsy();
-      expect(newBuildBtnDe.nativeElement.textContent).toBe('New Build');
 
       // Troll Build
       const trollBuildItemsHeaderDe = fixture.debugElement.query(By.css('.troll-build-items-header'));

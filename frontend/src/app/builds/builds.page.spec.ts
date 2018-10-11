@@ -576,11 +576,13 @@ describe('BuildsPage', () => {
     const championTagsDe = fixture.debugElement.queryAll(By.css('.champion-tag'));
     expect(championTagsDe.map(championTagDe => championTagDe.nativeElement.textContent)).toEqual(build.champion.tags);
 
+    // New Build
+    const newBuildBtnDe = fixture.debugElement.query(By.css('#new-build-btn'));
+    expect(newBuildBtnDe.nativeElement.textContent).toBe('New Build');
+
     // Maps
     const mapsOptionDe = fixture.debugElement.query(By.css('.map-option'));
     expect(mapsOptionDe.nativeElement.textContent.trim()).toBe(build.map.mapName);
-    const newBuildBtnDe = fixture.debugElement.query(By.css('#new-build-btn'));
-    expect(newBuildBtnDe.nativeElement.textContent).toBe('New Build');
 
     // Troll Build
     const trollBuildItemsHeaderDe = fixture.debugElement.query(By.css('.troll-build-items-header'));
