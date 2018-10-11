@@ -34,7 +34,7 @@ describe('BuildsService', () => {
       mapId: 1
     };
 
-    const requestMatch: RequestMatch = { method: 'GET', url: `/api/builds/${mockBuild.id}` };
+    const requestMatch: RequestMatch = { method: 'GET', url: `/builds/${mockBuild.id}` };
 
     it('should GET a build', inject([BuildsService, HttpTestingController],
       (service: BuildsService, httpMock: HttpTestingController) => {
@@ -74,7 +74,7 @@ describe('BuildsService', () => {
 
   describe('countBuilds', () => {
 
-    const requestMatch: RequestMatch = { method: 'GET', url: '/api/builds/count' };
+    const requestMatch: RequestMatch = { method: 'GET', url: '/builds/count' };
 
     it('should GET count of builds', inject([BuildsService, HttpTestingController],
       (service: BuildsService, httpMock: HttpTestingController) => {

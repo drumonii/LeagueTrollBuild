@@ -16,7 +16,7 @@ export class VersionsService {
 
   getLatestVersion(): Observable<Version> {
     this.logger.info('GETing latest Version');
-    return this.httpClient.get<Version>('/api/versions/latest')
+    return this.httpClient.get<Version>('/versions/latest')
       .pipe(
         catchError((error: HttpErrorResponse) => {
           this.logger.error(`Caught error while GETing latest Version: ${JSON.stringify(error)}`);

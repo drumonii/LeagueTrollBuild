@@ -24,11 +24,11 @@ describe('LoadingBarInterceptor', () => {
 
   it('should start and end progress on http request start and end', inject([HttpClient, HttpTestingController, LoadingBarService],
     (http: HttpClient, httpMock: HttpTestingController, service: LoadingBarService) => {
-    http.get('/api/test').subscribe(() => {
+    http.get('/test').subscribe(() => {
       expect(service.start).toHaveBeenCalled();
     });
 
-    const testReq = httpMock.expectOne('/api/test');
+    const testReq = httpMock.expectOne('/test');
 
     testReq.flush({});
 

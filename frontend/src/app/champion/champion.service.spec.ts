@@ -48,7 +48,7 @@ describe('ChampionService', () => {
       ]
     };
 
-    const requestMatch: RequestMatch = { method: 'GET', url: `/api/champions/${mockChampion.name}` };
+    const requestMatch: RequestMatch = { method: 'GET', url: `/champions/${mockChampion.name}` };
 
     it('should get a Champion', inject([ChampionService, HttpTestingController],
       (service: ChampionService, httpMock: HttpTestingController) => {
@@ -272,8 +272,8 @@ describe('ChampionService', () => {
       }
     };
 
-    const requestMatchWithMapId: RequestMatch = { method: 'GET', url: `/api/champions/${championName}/troll-build?mapId=${gameMapId}` };
-    const requestMatchWithoutMapId: RequestMatch = { method: 'GET', url: `/api/champions/${championName}/troll-build` };
+    const requestMatchWithMapId: RequestMatch = { method: 'GET', url: `/champions/${championName}/troll-build?mapId=${gameMapId}` };
+    const requestMatchWithoutMapId: RequestMatch = { method: 'GET', url: `/champions/${championName}/troll-build` };
 
     it('should get a Troll Build with a Map Id', inject([ChampionService, HttpTestingController],
       (service: ChampionService, httpMock: HttpTestingController) => {
@@ -330,7 +330,7 @@ describe('ChampionService', () => {
       }
     ];
 
-    const requestMatch: RequestMatch = { method: 'GET', url: '/api/maps/for-troll-build' };
+    const requestMatch: RequestMatch = { method: 'GET', url: '/maps/for-troll-build' };
 
     it('should get a Game maps for Troll Build', inject([ChampionService, HttpTestingController],
       (service: ChampionService, httpMock: HttpTestingController) => {
@@ -358,7 +358,7 @@ describe('ChampionService', () => {
 
   describe('saveBuild', () => {
 
-    const requestMatch: RequestMatch = { method: 'POST', url: '/api/builds' };
+    const requestMatch: RequestMatch = { method: 'POST', url: '/builds' };
 
     it('should POST a build', inject([ChampionService, HttpTestingController],
       (service: ChampionService, httpMock: HttpTestingController) => {

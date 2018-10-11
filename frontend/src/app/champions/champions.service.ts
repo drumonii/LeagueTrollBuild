@@ -14,7 +14,7 @@ export class ChampionsService {
 
   getChampions(): Observable<Champion[]> {
     this.logger.info('GETing Champions');
-    return this.httpClient.get<Champion[]>('/api/champions')
+    return this.httpClient.get<Champion[]>('/champions')
       .pipe(
         catchError((error: HttpErrorResponse) => {
           this.logger.error(`Caught error while GETing Champions: ${JSON.stringify(error)}`);
@@ -25,7 +25,7 @@ export class ChampionsService {
 
   getChampionTags(): Observable<string[]> {
     this.logger.info('GETing Champion tags');
-    return this.httpClient.get<string[]>('/api/champions/tags')
+    return this.httpClient.get<string[]>('/champions/tags')
       .pipe(
         catchError((error: HttpErrorResponse) => {
           this.logger.error(`Caught error while GETing Champion tags: ${JSON.stringify(error)}`);

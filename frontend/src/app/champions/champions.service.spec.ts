@@ -45,7 +45,7 @@ describe('ChampionsService', () => {
       }
     ];
 
-    const requestMatch: RequestMatch = { method: 'GET', url: '/api/champions' };
+    const requestMatch: RequestMatch = { method: 'GET', url: '/champions' };
 
     it('should get Champions', inject([ChampionsService, HttpTestingController],
       (service: ChampionsService, httpMock: HttpTestingController) => {
@@ -76,7 +76,7 @@ describe('ChampionsService', () => {
 
     const mockTags: string[] = [ 'Assassin', 'Fighter', 'Mage', 'Marksman', 'Support', 'Tank' ];
 
-    const requestMatch: RequestMatch = { method: 'GET', url: '/api/champions/tags' };
+    const requestMatch: RequestMatch = { method: 'GET', url: '/champions/tags' };
 
     it('should get Champion tags', inject([ChampionsService, HttpTestingController],
       (service: ChampionsService, httpMock: HttpTestingController) => {

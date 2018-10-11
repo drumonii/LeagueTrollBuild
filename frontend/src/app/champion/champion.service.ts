@@ -17,7 +17,7 @@ export class ChampionService {
 
   getChampion(name: string): Observable<Champion> {
     this.logger.info('GETing Champion', name);
-    return this.httpClient.get<Champion>(`/api/champions/${name}`)
+    return this.httpClient.get<Champion>(`/champions/${name}`)
       .pipe(
         catchError((error: HttpErrorResponse) => {
           this.logger.error(`Caught error while GETing Champion ${name}: ${JSON.stringify(error)}`);
@@ -29,7 +29,7 @@ export class ChampionService {
   getTrollBuild(name: string, gameMapId?: number): Observable<TrollBuild> {
     const params = gameMapId ? new HttpParams().set('mapId', gameMapId.toString()) : new HttpParams();
     this.logger.info(`GETing a Troll Build for Champion ${name} and map Id ${params.get('mapId')}`);
-    return this.httpClient.get<TrollBuild>(`/api/champions/${name}/troll-build`, { params: params })
+    return this.httpClient.get<TrollBuild>(`/champions/${name}/troll-build`, { params: params })
       .pipe(
         catchError((error: HttpErrorResponse) => {
           this.logger.error(`Caught error while GETing a Troll Build for Champion ${name} and params ${JSON.stringify(params)}: ${JSON.stringify(error)}`);
@@ -40,7 +40,7 @@ export class ChampionService {
 
   mapsForTrollBuild(): Observable<GameMap[]> {
     this.logger.info('GETing Game Maps for Troll Build');
-    return this.httpClient.get<GameMap[]>('/api/maps/for-troll-build')
+    return this.httpClient.get<GameMap[]>('/maps/for-troll-build')
       .pipe(
         catchError((error: HttpErrorResponse) => {
           this.logger.error(`Caught error while GETing Game Maps for Troll Build: ${JSON.stringify(error)}`);
@@ -51,7 +51,7 @@ export class ChampionService {
 
   saveBuild(build: Build): Observable<HttpResponse<Build>> {
     this.logger.info('POSTing build', JSON.stringify(build));
-    return this.httpClient.post<HttpResponse<Build>>('/api/builds', build,
+    return this.httpClient.post<HttpResponse<Build>>('/builds', build,
       {
         headers: new HttpHeaders({
           'Content-Type': 'application/json'

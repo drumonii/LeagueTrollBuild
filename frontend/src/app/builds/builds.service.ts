@@ -14,7 +14,7 @@ export class BuildsService {
 
   getBuild(buildId: number): Observable<Build> {
     this.logger.info('GETing build', buildId);
-    return this.httpClient.get<Build>(`/api/builds/${buildId}`)
+    return this.httpClient.get<Build>(`/builds/${buildId}`)
       .pipe(
         catchError((error: HttpErrorResponse) => {
           this.logger.warn(`Caught error while GETing build ${buildId}: ${JSON.stringify(error)}`);
@@ -28,7 +28,7 @@ export class BuildsService {
 
   countBuilds(): Observable<number> {
     this.logger.info('GETing count of builds');
-    return this.httpClient.get<number>('/api/builds/count')
+    return this.httpClient.get<number>('/builds/count')
       .pipe(
         catchError((error: HttpErrorResponse) => {
           this.logger.error(`Caught error while GETing count of builds ${JSON.stringify(error)}`);

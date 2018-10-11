@@ -19,7 +19,7 @@ describe('VersionsService', () => {
 
   describe('getLatestVersion', function () {
 
-    const requestMatch: RequestMatch = { method: 'GET', url: '/api/versions/latest' };
+    const requestMatch: RequestMatch = { method: 'GET', url: '/versions/latest' };
 
     it('should get the latest saved Version', inject([VersionsService, HttpTestingController],
       (service: VersionsService, httpMock: HttpTestingController) => {
