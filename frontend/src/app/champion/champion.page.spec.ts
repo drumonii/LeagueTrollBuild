@@ -914,7 +914,7 @@ describe('ChampionPage', () => {
 
         fixture.detectChanges();
 
-        expectChampionAndMapsAndTrollBuild(trollBuild);
+        expectChampionAndMapsAndTrollBuild(trollBuild, mapId);
 
         expect(championService.getTrollBuild).toHaveBeenCalledWith(skarner.name, mapId);
         expect(component.build).toBeNull();
@@ -957,7 +957,7 @@ describe('ChampionPage', () => {
 
         fixture.detectChanges();
 
-        expectChampionAndMapsAndTrollBuild(trollBuild);
+        expectChampionAndMapsAndTrollBuild(trollBuild, mapId);
 
         expect(championService.getTrollBuild).toHaveBeenCalledWith(skarner.name, mapId);
         expect(component.build).toBeNull();
@@ -1018,7 +1018,7 @@ describe('ChampionPage', () => {
 
         fixture.detectChanges();
 
-        expectChampionAndMapsAndTrollBuild(trollBuild);
+        expectChampionAndMapsAndTrollBuild(trollBuild, mapId);
 
         const newBuildBtnDe = fixture.debugElement.query(By.css('#save-build-btn'));
         newBuildBtnDe.triggerEventHandler('click', null);
@@ -1045,7 +1045,7 @@ describe('ChampionPage', () => {
       }
     }));
 
-    function expectChampionAndMapsAndTrollBuild(trollBuild: TrollBuild) {
+    function expectChampionAndMapsAndTrollBuild(trollBuild: TrollBuild, selectedMap: number) {
       // Champion
       const championsNameDe = fixture.debugElement.query(By.css('#champion-name'));
       expect(championsNameDe.nativeElement.textContent).toBe(skarner.name);
@@ -1065,6 +1065,10 @@ describe('ChampionPage', () => {
       expect(newBuildBtnDe.nativeElement.textContent).toBe('New Build');
 
       // Maps
+      const mapsSelectDe = fixture.debugElement.query(By.css('#map-select'));
+      expect(mapsSelectDe.nativeElement.selectedOptions.length).toBe(1);
+      expect(mapsSelectDe.nativeElement.selectedOptions[0].text)
+        .toBe(maps.find(map => map.mapId === selectedMap).mapName);
       const mapsOptionDe = fixture.debugElement.queryAll(By.css('.map-option'));
       expect(mapsOptionDe.map(mapOptionDe => mapOptionDe.nativeElement.textContent.trim()))
         .toEqual(maps.map(map => map.mapName));

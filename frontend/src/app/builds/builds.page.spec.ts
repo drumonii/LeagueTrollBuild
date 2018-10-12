@@ -581,6 +581,9 @@ describe('BuildsPage', () => {
     expect(newBuildBtnDe.nativeElement.textContent).toBe('New Build');
 
     // Maps
+    const mapsSelectDe = fixture.debugElement.query(By.css('#map-select'));
+    expect(mapsSelectDe.nativeElement.selectedOptions.length).toBe(1);
+    expect(mapsSelectDe.nativeElement.selectedOptions[0].text).toBe(build.map.mapName);
     const mapsOptionDe = fixture.debugElement.query(By.css('.map-option'));
     expect(mapsOptionDe.nativeElement.textContent.trim()).toBe(build.map.mapName);
 
