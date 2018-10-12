@@ -33,17 +33,17 @@ describe('FooterComponent', () => {
 
     fixture.detectChanges();
 
-    const latestVersionDe = fixture.debugElement.query(By.css('#latest-saved-version'));
-    expect(latestVersionDe.nativeElement.textContent.trim()).toBe(`Patch ${latestVersion.patch}`);
+    const latestSavedVersion = fixture.debugElement.query(By.css('#latest-saved-version'));
+    expect(latestSavedVersion.nativeElement.textContent.trim()).toBe(`Patch ${latestVersion.patch}`);
 
-    const aboutDe = fixture.debugElement.query(By.css('#about'));
-    expect(aboutDe).toBeTruthy();
+    const about = fixture.debugElement.query(By.css('#about'));
+    expect(about).toBeTruthy();
 
-    const githubLinkDe = fixture.debugElement.query(By.css('#github-link'));
-    expect(githubLinkDe.nativeElement.textContent.trim()).toBe('GitHub');
-    expect(githubLinkDe.nativeElement.href).toBe('https://github.com/drumonii/LeagueTrollBuild');
+    const githubLink = fixture.debugElement.query(By.css('#github-link'));
+    expect(githubLink.nativeElement.textContent.trim()).toBe('GitHub');
+    expect(githubLink.nativeElement.href).toBe('https://github.com/drumonii/LeagueTrollBuild');
 
-    const disclaimerDe = fixture.debugElement.query(By.css('#disclaimer'));
-    expect(disclaimerDe).toBeTruthy();
+    const disclaimer = fixture.debugElement.query(By.css('#disclaimer'));
+    expect(disclaimer).toBeTruthy();
   }));
 });

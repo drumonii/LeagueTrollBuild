@@ -25,9 +25,9 @@ describe('HeaderComponent', () => {
   it('should show header with link to root', () => {
     fixture.detectChanges();
 
-    const headerLinkDe = fixture.debugElement.query(By.css('#header-title-link'));
-    expect(headerLinkDe.nativeElement.textContent).toBe(component.header);
-    const headerRouterLink = headerLinkDe.injector.get(RouterLinkWithHref);
+    const headerLink = fixture.debugElement.query(By.css('#header-title-link'));
+    expect(headerLink.nativeElement.textContent).toBe(component.header);
+    const headerRouterLink = headerLink.injector.get(RouterLinkWithHref);
     expect(headerRouterLink.href).toBe('/');
   });
 
@@ -94,13 +94,13 @@ describe('HeaderComponent', () => {
     });
 
     function expectOutdatedBrowserAlert() {
-      const outdatedBrowserAlertDe = fixture.debugElement.query(By.css('#outdated-browser'));
-      expect(outdatedBrowserAlertDe).toBeTruthy();
+      const outdatedBrowserAlert = fixture.debugElement.query(By.css('#outdated-browser'));
+      expect(outdatedBrowserAlert).toBeTruthy();
     }
 
     function expectNoOutdatedBrowserAlert() {
-      const outdatedBrowserAlertDe = fixture.debugElement.query(By.css('#outdated-browser'));
-      expect(outdatedBrowserAlertDe).toBeFalsy();
+      const outdatedBrowserAlert = fixture.debugElement.query(By.css('#outdated-browser'));
+      expect(outdatedBrowserAlert).toBeFalsy();
     }
 
   });

@@ -25,16 +25,16 @@ describe('NotFoundPage', () => {
   it('should show not found (404) page', () => {
     fixture.detectChanges();
 
-    const titleDe = fixture.debugElement.query(By.css('#title'));
-    expect(titleDe.nativeElement.textContent.trim()).toBe('Page Not Found');
+    const title = fixture.debugElement.query(By.css('#title'));
+    expect(title.nativeElement.textContent.trim()).toBe('Page Not Found');
 
-    const messageDe = fixture.debugElement.query(By.css('#msg'));
-    expect(messageDe.nativeElement.textContent.trim())
+    const message = fixture.debugElement.query(By.css('#msg'));
+    expect(message.nativeElement.textContent.trim())
       .toBe('The page you requested was not found. Please double check the URL and try again.');
 
-    const returnHomeLinkDe = fixture.debugElement.query(By.css('#return-to-home'));
-    expect(returnHomeLinkDe.nativeElement.textContent.trim()).toBe('Return to home');
-    const returnHomeRouterLink = returnHomeLinkDe.injector.get(RouterLinkWithHref);
+    const returnHomeLink = fixture.debugElement.query(By.css('#return-to-home'));
+    expect(returnHomeLink.nativeElement.textContent.trim()).toBe('Return to home');
+    const returnHomeRouterLink = returnHomeLink.injector.get(RouterLinkWithHref);
     expect(returnHomeRouterLink.href).toBe('/');
   });
 });

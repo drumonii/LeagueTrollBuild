@@ -112,15 +112,15 @@ describe('ChampionsPage', () => {
       const tagToFilter = 'Mage';
       const tagToFilterIndex = tags.findIndex(tag => tag === tagToFilter);
 
-      const championTagsDe = fixture.debugElement.queryAll(By.css('.champion-tag-btn'));
-      championTagsDe[tagToFilterIndex].triggerEventHandler('click', null);
+      const championTags = fixture.debugElement.queryAll(By.css('.champion-tag-btn'));
+      championTags[tagToFilterIndex].triggerEventHandler('click', null);
 
       fixture.detectChanges();
 
       expect(component.championsFilterTag).toBe(tagToFilter);
 
-      const championsDe = fixture.debugElement.queryAll(By.css('.champion'));
-      expect(championsDe.length).toBe(1);
+      const championBoxes = fixture.debugElement.queryAll(By.css('.champion'));
+      expect(championBoxes.length).toBe(1);
     });
 
     it('should reset the Champions filter with re-clicking the same tag', () => {
@@ -132,15 +132,15 @@ describe('ChampionsPage', () => {
       const tagToFilterIndex = tags.findIndex(tag => tag === tagToFilter);
       component.championsFilterTag = tagToFilter;
 
-      const championTagsDe = fixture.debugElement.queryAll(By.css('.champion-tag-btn'));
-      championTagsDe[tagToFilterIndex].triggerEventHandler('click', null);
+      const championTags = fixture.debugElement.queryAll(By.css('.champion-tag-btn'));
+      championTags[tagToFilterIndex].triggerEventHandler('click', null);
 
       fixture.detectChanges();
 
       expect(component.championsFilterTag).toBe('');
 
-      const championsDe = fixture.debugElement.queryAll(By.css('.champion'));
-      expect(championsDe.length).toBe(champions.length);
+      const championCards = fixture.debugElement.queryAll(By.css('.champion'));
+      expect(championCards.length).toBe(championCards.length);
     });
 
     it('should filter Champions with search input', () => {
@@ -148,41 +148,41 @@ describe('ChampionsPage', () => {
 
       expectChampionAndTags();
 
-      const championsSearchDe = fixture.debugElement.query(By.css('#champions-search-input'));
-      championsSearchDe.nativeElement.value = 'maokai';
-      championsSearchDe.nativeElement.dispatchEvent(new Event('input'));
+      const championsSearch = fixture.debugElement.query(By.css('#champions-search-input'));
+      championsSearch.nativeElement.value = 'maokai';
+      championsSearch.nativeElement.dispatchEvent(new Event('input'));
 
       fixture.detectChanges();
 
-      const championsDe = fixture.debugElement.queryAll(By.css('.champion'));
-      expect(championsDe.length).toBe(1);
+      const championBoxes = fixture.debugElement.queryAll(By.css('.champion'));
+      expect(championBoxes.length).toBe(1);
     });
 
     function expectChampionAndTags() {
-      const championsSearchDe = fixture.debugElement.query(By.css('#champions-search-input'));
-      expect(championsSearchDe.nativeElement.placeholder).toBe('Search by Champion');
+      const championsSearch = fixture.debugElement.query(By.css('#champions-search-input'));
+      expect(championsSearch.nativeElement.placeholder).toBe('Search by Champion');
 
-      const championTagsDe = fixture.debugElement.queryAll(By.css('.champion-tag-btn'));
-      expect(championTagsDe.map(championTagDe => championTagDe.nativeElement.textContent.trim())).toEqual(tags);
+      const championTags = fixture.debugElement.queryAll(By.css('.champion-tag-btn'));
+      expect(championTags.map(championTag => championTag.nativeElement.textContent.trim())).toEqual(tags);
 
-      const championsDe = fixture.debugElement.queryAll(By.css('.champion'));
-      expect(championsDe.length).toBe(champions.length);
+      const championBoxes = fixture.debugElement.queryAll(By.css('.champion'));
+      expect(championBoxes.length).toBe(championBoxes.length);
 
-      const championLinksDe = fixture.debugElement.queryAll(By.css('.champion-link'));
-      const championNamesDe = fixture.debugElement.queryAll(By.css('.champion-name'));
-      const championImgsDe = fixture.debugElement.queryAll(By.css('.champion-img'));
+      const championLinks = fixture.debugElement.queryAll(By.css('.champion-link'));
+      const championNames = fixture.debugElement.queryAll(By.css('.champion-name'));
+      const championImgs = fixture.debugElement.queryAll(By.css('.champion-img'));
 
-      const maokaiLinkDe = championLinksDe[0];
-      const maokaiRouterLink = maokaiLinkDe.injector.get(RouterLinkWithHref);
+      const maokaiLink = championLinks[0];
+      const maokaiRouterLink = maokaiLink.injector.get(RouterLinkWithHref);
       expect(maokaiRouterLink.href).toBe(`/champions/${maokai.name}`);
-      expect(championNamesDe[0].nativeElement.textContent).toBe(maokai.name);
-      expect(championImgsDe[0].nativeElement.src).toContain(`/api/img/champions/${maokai.id}`);
+      expect(championNames[0].nativeElement.textContent).toBe(maokai.name);
+      expect(championImgs[0].nativeElement.src).toContain(`/api/img/champions/${maokai.id}`);
 
-      const sionLinkDe = championLinksDe[1];
-      const sionRouterLink = sionLinkDe.injector.get(RouterLinkWithHref);
+      const sionLink = championLinks[1];
+      const sionRouterLink = sionLink.injector.get(RouterLinkWithHref);
       expect(sionRouterLink.href).toBe(`/champions/${sion.name}`);
-      expect(championNamesDe[1].nativeElement.textContent).toBe(sion.name);
-      expect(championImgsDe[1].nativeElement.src).toContain(`/api/img/champions/${sion.id}`);
+      expect(championNames[1].nativeElement.textContent).toBe(sion.name);
+      expect(championImgs[1].nativeElement.src).toContain(`/api/img/champions/${sion.id}`);
     }
 
   });
@@ -202,11 +202,11 @@ describe('ChampionsPage', () => {
     it('should show the no Champions alert', () => {
       fixture.detectChanges();
 
-      const alertDe = fixture.debugElement.query(By.css('#no-champions-alert'));
-      expect(alertDe).toBeTruthy();
+      const alert = fixture.debugElement.query(By.css('#no-champions-alert'));
+      expect(alert).toBeTruthy();
 
-      const alertMsgDe = fixture.debugElement.query(By.css('#no-champions-alert-msg'));
-      expect(alertMsgDe.nativeElement.textContent).toBe('No Champions exist in the database!');
+      const alertMsg = fixture.debugElement.query(By.css('#no-champions-alert-msg'));
+      expect(alertMsg.nativeElement.textContent).toBe('No Champions exist in the database!');
     });
 
   });
