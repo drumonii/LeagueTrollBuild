@@ -7,6 +7,15 @@
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "prefix": "ltb",
+          "styleext": "scss"
+        },
+        "@schematics/angular:directive": {
+          "prefix": "ltb"
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -28,6 +37,12 @@
           },
           "configurations": {
             "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -37,10 +52,11 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
-              "fileReplacements": [
+              "budgets": [
                 {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
                 }
               ]
             }
@@ -121,14 +137,5 @@
       }
     }
   },
-  "defaultProject": "league-troll-build",
-  "schematics": {
-    "@schematics/angular:component": {
-      "prefix": "ltb",
-      "styleext": "scss"
-    },
-    "@schematics/angular:directive": {
-      "prefix": "ltb"
-    }
-  }
+  "defaultProject": "league-troll-build"
 }
