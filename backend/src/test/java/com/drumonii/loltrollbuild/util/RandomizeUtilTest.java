@@ -6,6 +6,7 @@ import org.junit.runners.JUnit4;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import static com.drumonii.loltrollbuild.util.RandomizeUtil.getRandom;
 import static com.drumonii.loltrollbuild.util.RandomizeUtil.getRandoms;
@@ -16,11 +17,8 @@ public class RandomizeUtilTest {
 
 	@Test
 	public void getsRandom() {
-		List<String> strings = new ArrayList<>();
-		strings.add("string 1");
-		strings.add("string 2");
-		assertThat(getRandom(strings))
-				.isNotEmpty();
+		List<String> strings = List.of("string 1", "string 2");
+		assertThat(getRandom(strings)).isIn(strings);
 		try {
 			getRandom(null);
 		} catch (Exception e) {
@@ -31,16 +29,23 @@ public class RandomizeUtilTest {
 		} catch (Exception e) {
 			assertThat(e).isInstanceOf(IllegalArgumentException.class);
 		}
+
+		Set<Integer> integers = Set.of(1, 2);
+		assertThat(getRandom(integers)).isIn(integers);
 	}
 
 	@Test
 	public void getsRandoms() {
-		List<String> strings = new ArrayList<>();
-		strings.add("string 1");
-		strings.add("string 2");
-		assertThat(getRandoms(strings, 1))
+		List<String> strings = List.of("string 1", "string 2");
+		assertThat(getRandoms(strings, 1)).containsAnyElementsOf(strings)
 				.hasSize(1);
-		assertThat(getRandoms(strings, strings.size() + 1))
+		assertThat(getRandoms(strings, strings.size() + 1)).containsAnyElementsOf(strings)
+				.hasSize(2);
+
+		Set<Integer> integers = Set.of(1, 2);
+		assertThat(getRandoms(integers, 1)).containsAnyElementsOf(integers)
+				.hasSize(1);
+		assertThat(getRandoms(integers, integers.size() + 1)).containsAnyElementsOf(integers)
 				.hasSize(2);
 	}
 
