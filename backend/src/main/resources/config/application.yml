@@ -43,6 +43,11 @@ spring:
   # JPA
   jpa:
     open-in-view: false
+  # Resources
+  resources:
+    cache:
+      cachecontrol:
+        max-age: 1h # (3600s)
 # Actuator
 management:
   endpoint:
@@ -53,7 +58,6 @@ management:
       base-path: /admin/actuator
       exposure:
         include: env, flyway, health, metrics
-
 # Server
 server:
   error:
