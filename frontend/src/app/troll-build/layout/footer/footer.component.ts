@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { Version } from '@model/version';
-import { VersionsService } from '@service/versions.service';
+import { VersionsService } from './versions.service';
 
 @Component({
   selector: 'ltb-footer',

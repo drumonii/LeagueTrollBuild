@@ -2,12 +2,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HTTP_INTERCEPTORS, HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 
-import { AppRoutingModule } from './app-routing.module';
-
 import { AppComponent } from './app.component';
 
-import { LayoutModule } from '@layout/layout.module';
-import { LoadingBarModule } from '@loading-bar/loading-bar.module';
+import { TrollBuildAppModule } from './troll-build/troll-build-app.module';
+import { AdminAppModule } from './admin/admin-app.module';
+
+import { AppRoutingModule } from './app-routing.module';
 
 import { BasePathHttpInterceptor } from '@interceptor/base-path.http-interceptor';
 
@@ -17,11 +17,11 @@ import { BasePathHttpInterceptor } from '@interceptor/base-path.http-interceptor
   ],
   imports: [
     AppRoutingModule,
+    AdminAppModule,
+    TrollBuildAppModule,
     BrowserModule,
     HttpClientModule,
     HttpClientXsrfModule,
-    LayoutModule,
-    LoadingBarModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: BasePathHttpInterceptor, multi: true }

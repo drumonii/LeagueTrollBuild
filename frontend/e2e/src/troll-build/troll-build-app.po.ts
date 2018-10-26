@@ -1,6 +1,7 @@
 import { browser, by, element } from 'protractor';
 
-export class AppPage {
+export class TrollBuildAppPage {
+
   navigateTo() {
     return browser.get('/');
   }
@@ -8,4 +9,9 @@ export class AppPage {
   getHeaderText() {
     return element(by.css('#header-title')).getText();
   }
+
+  getFooter() {
+    return element(by.css('#footer'));
+  }
+
 }

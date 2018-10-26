@@ -17,8 +17,11 @@
       "dom"
     ],
     "paths": {
-      "@layout/*": [
-        "./app/layout/*"
+      "@admin-layout/*": [
+        "./app/admin/layout/*"
+      ],
+      "@ltb-layout/*": [
+        "./app/troll-build/layout/*"
       ],
       "@interceptor/*": [
         "./app/shared/interceptor/*"
@@ -27,7 +30,7 @@
         "./app/shared/loading-bar/*"
       ],
       "@model/*": [
-        "./app/shared/model/*"
+        "./app/troll-build/model/*"
       ],
       "@service/*": [
         "./app/shared/service/*"

@@ -6,7 +6,7 @@ import { of } from 'rxjs';
 
 import { FooterComponent } from './footer.component';
 import { Version } from '@model/version';
-import { VersionsService } from '@service/versions.service';
+import { VersionsService } from './versions.service';
 
 describe('FooterComponent', () => {
   let component: FooterComponent;
