@@ -12,7 +12,6 @@ import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.data.builder.RepositoryItemWriterBuilder;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,27 +22,21 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class MapsRetrievalJobConfig {
 
-	@Autowired
-	private StepBuilderFactory stepBuilderFactory;
-
-	@Autowired
-	private MapsRepository mapsRepository;
-
 	@Bean
 	public Job mapsRetrievalJob(JobBuilderFactory jobBuilderFactory) {
 		return jobBuilderFactory.get("mapsRetrievalJob")
 				.incrementer(new RunIdIncrementer())
-				.start(mapsRetrievalStep())
+				.start(mapsRetrievalStep(null))
 				.build();
 	}
 
 	@Bean
-	public Step mapsRetrievalStep() {
+	public Step mapsRetrievalStep(StepBuilderFactory stepBuilderFactory) {
 		return stepBuilderFactory.get("mapsRetrievalStep")
 				.<GameMap, GameMap> chunk(25)
 				.reader(mapsRetrievalItemReader(null, null))
 				.processor(mapsRetrievalItemProcessor(null))
-				.writer(mapsRetrievalItemWriter())
+				.writer(mapsRetrievalItemWriter(null))
 				.build();
 	}
 
@@ -62,7 +55,7 @@ public class MapsRetrievalJobConfig {
 	}
 
 	@Bean
-	public ItemWriter<GameMap> mapsRetrievalItemWriter() {
+	public ItemWriter<GameMap> mapsRetrievalItemWriter(MapsRepository mapsRepository) {
 		return new RepositoryItemWriterBuilder<GameMap>()
 				.repository(mapsRepository)
 				.methodName("save")

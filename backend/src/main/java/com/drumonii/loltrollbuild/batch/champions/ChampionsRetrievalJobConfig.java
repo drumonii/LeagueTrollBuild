@@ -12,7 +12,6 @@ import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.data.builder.RepositoryItemWriterBuilder;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,27 +22,21 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ChampionsRetrievalJobConfig {
 
-	@Autowired
-	private StepBuilderFactory stepBuilderFactory;
-
-	@Autowired
-	private ChampionsRepository championsRepository;
-
 	@Bean
 	public Job championsRetrievalJob(JobBuilderFactory jobBuilderFactory) {
 		return jobBuilderFactory.get("championsRetrievalJob")
 				.incrementer(new RunIdIncrementer())
-				.start(championsRetrievalStep())
+				.start(championsRetrievalStep(null))
 				.build();
 	}
 
 	@Bean
-	public Step championsRetrievalStep() {
+	public Step championsRetrievalStep(StepBuilderFactory stepBuilderFactory) {
 		return stepBuilderFactory.get("championsRetrievalStep")
 				.<Champion, Champion> chunk(25)
 				.reader(championsRetrievalItemReader(null, null))
 				.processor(championsRetrievalItemProcessor(null))
-				.writer(championsRetrievalItemWriter())
+				.writer(championsRetrievalItemWriter(null))
 				.build();
 	}
 
@@ -62,7 +55,7 @@ public class ChampionsRetrievalJobConfig {
 	}
 
 	@Bean
-	public ItemWriter<Champion> championsRetrievalItemWriter() {
+	public ItemWriter<Champion> championsRetrievalItemWriter(ChampionsRepository championsRepository) {
 		return new RepositoryItemWriterBuilder<Champion>()
 				.repository(championsRepository)
 				.methodName("save")

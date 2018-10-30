@@ -11,7 +11,6 @@ import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.data.builder.RepositoryItemWriterBuilder;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -21,27 +20,21 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class VersionsRetrievalJobConfig {
 
-	@Autowired
-	private StepBuilderFactory stepBuilderFactory;
-
-	@Autowired
-	private VersionsRepository versionsRepository;
-
 	@Bean
 	public Job versionsRetrievalJob(JobBuilderFactory jobBuilderFactory) {
 		return jobBuilderFactory.get("versionsRetrievalJob")
 				.incrementer(new RunIdIncrementer())
-				.start(versionsRetrievalStep())
+				.start(versionsRetrievalStep(null))
 				.build();
 	}
 
 	@Bean
-	public Step versionsRetrievalStep() {
+	public Step versionsRetrievalStep(StepBuilderFactory stepBuilderFactory) {
 		return stepBuilderFactory.get("versionsRetrievalStep")
 				.<Version, Version> chunk(25)
 				.reader(versionsRetrievalItemReader(null))
 				.processor(versionsRetrievalItemProcessor(null))
-				.writer(versionsRetrievalItemWriter())
+				.writer(versionsRetrievalItemWriter(null))
 				.build();
 	}
 
@@ -58,7 +51,7 @@ public class VersionsRetrievalJobConfig {
 	}
 
 	@Bean
-	public ItemWriter<Version> versionsRetrievalItemWriter() {
+	public ItemWriter<Version> versionsRetrievalItemWriter(VersionsRepository versionsRepository) {
 		return new RepositoryItemWriterBuilder<Version>()
 				.repository(versionsRepository)
 				.methodName("save")

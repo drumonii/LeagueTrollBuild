@@ -29,26 +29,6 @@ public class AllRetrievalsJobConfig {
 	@Autowired
 	private VersionsService versionsService;
 
-	@Autowired
-	@Qualifier("versionsRetrievalJob")
-	private Job versionsRetrievalJob;
-
-	@Autowired
-	@Qualifier("mapsRetrievalJob")
-	private Job mapsRetrievalJob;
-
-	@Autowired
-	@Qualifier("summonerSpellsRetrievalJob")
-	private Job summonerSpellsRetrievalJob;
-
-	@Autowired
-	@Qualifier("championsRetrievalJob")
-	private Job championsRetrievalJob;
-
-	@Autowired
-	@Qualifier("itemsRetrievalJob")
-	private Job itemsRetrievalJob;
-
 	@Bean
 	public Job allRetrievalsJob(JobBuilderFactory jobBuilderFactory) {
 		return jobBuilderFactory.get("allRetrievalsJob")
@@ -71,12 +51,12 @@ public class AllRetrievalsJobConfig {
 	@Bean
 	public Flow versionsRetrievalJobFlow() {
 		return new FlowBuilder<SimpleFlow>("versionsRetrievalJobFlow")
-				.start(versionsRetrievalJobStep())
+				.start(versionsRetrievalJobStep(null))
 				.build();
 	}
 
 	@Bean
-	public Step versionsRetrievalJobStep() {
+	public Step versionsRetrievalJobStep(@Qualifier("versionsRetrievalJob") Job versionsRetrievalJob) {
 		return stepBuilderFactory.get("versionsRetrievalJobStep")
 				.job(versionsRetrievalJob)
 				.build();
@@ -85,12 +65,12 @@ public class AllRetrievalsJobConfig {
 	@Bean
 	public Flow mapsRetrievalJobFlow() {
 		return new FlowBuilder<SimpleFlow>("mapsRetrievalJobFlow")
-				.start(mapsRetrievalJobStep())
+				.start(mapsRetrievalJobStep(null))
 				.build();
 	}
 
 	@Bean
-	public Step mapsRetrievalJobStep() {
+	public Step mapsRetrievalJobStep(@Qualifier("mapsRetrievalJob") Job mapsRetrievalJob) {
 		return stepBuilderFactory.get("mapsRetrievalJobStep")
 				.job(mapsRetrievalJob)
 				.build();
@@ -99,12 +79,12 @@ public class AllRetrievalsJobConfig {
 	@Bean
 	public Flow summonerSpellsRetrievalJobFlow() {
 		return new FlowBuilder<SimpleFlow>("summonerSpellsRetrievalJobFlow")
-				.start(summonerSpellsRetrievalJobStep())
+				.start(summonerSpellsRetrievalJobStep(null))
 				.build();
 	}
 
 	@Bean
-	public Step summonerSpellsRetrievalJobStep() {
+	public Step summonerSpellsRetrievalJobStep(@Qualifier("summonerSpellsRetrievalJob") Job summonerSpellsRetrievalJob) {
 		return stepBuilderFactory.get("summonerSpellsRetrievalJobStep")
 				.job(summonerSpellsRetrievalJob)
 				.build();
@@ -113,12 +93,12 @@ public class AllRetrievalsJobConfig {
 	@Bean
 	public Flow championsRetrievalJobFlow() {
 		return new FlowBuilder<SimpleFlow>("championsRetrievalJobFlow")
-				.start(championsRetrievalJobStep())
+				.start(championsRetrievalJobStep(null))
 				.build();
 	}
 
 	@Bean
-	public Step championsRetrievalJobStep() {
+	public Step championsRetrievalJobStep(@Qualifier("championsRetrievalJob") Job championsRetrievalJob) {
 		return stepBuilderFactory.get("championsRetrievalJobStep")
 				.job(championsRetrievalJob)
 				.build();
@@ -127,12 +107,12 @@ public class AllRetrievalsJobConfig {
 	@Bean
 	public Flow itemsRetrievalJobFlow() {
 		return new FlowBuilder<SimpleFlow>("itemsRetrievalJobFlow")
-				.start(itemsRetrievalJobStep())
+				.start(itemsRetrievalJobStep(null))
 				.build();
 	}
 
 	@Bean
-	public Step itemsRetrievalJobStep() {
+	public Step itemsRetrievalJobStep(@Qualifier("itemsRetrievalJob") Job itemsRetrievalJob) {
 		return stepBuilderFactory.get("itemsRetrievalJobStep")
 				.job(itemsRetrievalJob)
 				.build();

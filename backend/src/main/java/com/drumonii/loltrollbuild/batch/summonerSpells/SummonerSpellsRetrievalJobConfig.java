@@ -12,7 +12,6 @@ import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.data.builder.RepositoryItemWriterBuilder;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,27 +22,21 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class SummonerSpellsRetrievalJobConfig {
 
-	@Autowired
-	private StepBuilderFactory stepBuilderFactory;
-
-	@Autowired
-	private SummonerSpellsRepository summonerSpellsRepository;
-
 	@Bean
 	public Job summonerSpellsRetrievalJob(JobBuilderFactory jobBuilderFactory) {
 		return jobBuilderFactory.get("summonerSpellsRetrievalJob")
 				.incrementer(new RunIdIncrementer())
-				.start(summonerSpellsRetrievalStep())
+				.start(summonerSpellsRetrievalStep(null))
 				.build();
 	}
 
 	@Bean
-	public Step summonerSpellsRetrievalStep() {
+	public Step summonerSpellsRetrievalStep(StepBuilderFactory stepBuilderFactory) {
 		return stepBuilderFactory.get("summonerSpellsRetrievalStep")
 				.<SummonerSpell, SummonerSpell> chunk(25)
 				.reader(summonerSpellsRetrievalItemReader(null, null))
 				.processor(summonerSpellsRetrievalItemProcessor(null))
-				.writer(summonerSpellsRetrievalItemWriter())
+				.writer(summonerSpellsRetrievalItemWriter(null))
 				.build();
 	}
 
@@ -62,7 +55,7 @@ public class SummonerSpellsRetrievalJobConfig {
 	}
 
 	@Bean
-	public ItemWriter<SummonerSpell> summonerSpellsRetrievalItemWriter() {
+	public ItemWriter<SummonerSpell> summonerSpellsRetrievalItemWriter(SummonerSpellsRepository summonerSpellsRepository) {
 		return new RepositoryItemWriterBuilder<SummonerSpell>()
 				.repository(summonerSpellsRepository)
 				.methodName("save")
