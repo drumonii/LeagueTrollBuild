@@ -4,6 +4,9 @@ import com.drumonii.loltrollbuild.config.Profiles.Dev;
 import com.drumonii.loltrollbuild.config.Profiles.Embedded;
 import com.drumonii.loltrollbuild.config.Profiles.External;
 import com.drumonii.loltrollbuild.config.Profiles.Testing;
+import com.drumonii.loltrollbuild.security.login.JsonAuthenticationFailureHandler;
+import com.drumonii.loltrollbuild.security.login.JsonAuthenticationSuccessHandler;
+import com.drumonii.loltrollbuild.security.logout.JsonLogoutSuccessHandler;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
@@ -19,8 +22,10 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
 
@@ -43,16 +48,38 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.and()
 			.formLogin()
 				.loginPage("/admin/login")
-				.defaultSuccessUrl("/admin")
+				.loginProcessingUrl(apiPath + "/admin/login")
+				.successHandler(authenticationSuccessHandler())
+				.failureHandler(authenticationFailureHandler())
 				.permitAll()
 			.and()
 			.logout()
-				.logoutRequestMatcher(new AntPathRequestMatcher("/admin/logout"))
+				.logoutUrl(apiPath + "/admin/logout")
+				.logoutSuccessHandler(logoutSuccessHandler())
 				.permitAll()
 			.and()
 			.csrf()
 				.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
 		// @formatter:on
+	}
+
+	// login
+
+	@Bean
+	public AuthenticationSuccessHandler authenticationSuccessHandler() {
+		return new JsonAuthenticationSuccessHandler();
+	}
+
+	@Bean
+	public AuthenticationFailureHandler authenticationFailureHandler() {
+		return new JsonAuthenticationFailureHandler();
+	}
+
+	// logout
+
+	@Bean
+	public LogoutSuccessHandler logoutSuccessHandler() {
+		return new JsonLogoutSuccessHandler();
 	}
 
 	/**

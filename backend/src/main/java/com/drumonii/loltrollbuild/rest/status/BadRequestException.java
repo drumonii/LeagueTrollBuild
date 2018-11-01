@@ -12,6 +12,10 @@ import java.util.List;
 @ResponseStatus(HttpStatus.BAD_REQUEST)
 public class BadRequestException extends RuntimeException {
 
+	public BadRequestException(String message) {
+		super(message);
+	}
+
 	public BadRequestException(List<FieldError> fieldErrors) {
 		super(getFieldErrors(fieldErrors));
 	}
