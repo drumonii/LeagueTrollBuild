@@ -1,3 +1,62 @@
-<p>
-  admin-login works!
-</p>
+<section class="section">
+  <div class="container">
+    <div class="columns">
+      <div class="column is-half is-offset-one-quarter">
+        <article id="login-bad-credentials-alert" class="message is-warning" *ngIf="badCredentials">
+          <div class="message-body">
+            Invalid username and password.
+          </div>
+        </article>
+        <article id="login-unexpected-error-alert" class="message is-danger" *ngIf="unexpectedError">
+          <div class="message-body">
+            An unexpected error occurred during authentication. Please try again later.
+          </div>
+        </article>
+        <article id="logged-out-alert" class="message is-success" *ngIf="loggedOut">
+          <div class="message-body">
+            You have been successfully logged out.
+          </div>
+        </article>
+        <form id="admin-login-form" [formGroup]="adminLoginForm" (ngSubmit)="onSubmit()">
+          <div class="field">
+            <p class="control has-icons-left">
+              <input id="username-input" class="input"
+                [class.is-danger]="adminLoginForm.get('username').invalid && (adminLoginForm.get('username').dirty || adminLoginForm.get('username').touched)"
+                type="text" placeholder="Username" formControlName="username">
+              <span class="icon is-small is-left">
+                <i class="fa fa-user" aria-hidden="true"></i>
+              </span>
+            </p>
+            <p id="invalid-username-feedback"
+              *ngIf="adminLoginForm.get('username').invalid && (adminLoginForm.get('username').dirty || adminLoginForm.get('username').touched)"
+              class="help is-danger">
+              This field is required
+            </p>
+          </div>
+          <div class="field">
+            <p class="control has-icons-left">
+              <input id="password-input" class="input"
+                [class.is-danger]="adminLoginForm.get('password').invalid && (adminLoginForm.get('password').dirty || adminLoginForm.get('password').touched)"
+                type="password" placeholder="Password" formControlName="password">
+              <span class="icon is-small is-left">
+                <i class="fa fa-lock" aria-hidden="true"></i>
+              </span>
+            </p>
+            <p id="invalid-password-feedback"
+              *ngIf="adminLoginForm.get('password').invalid && (adminLoginForm.get('password').dirty || adminLoginForm.get('password').touched)"
+              class="help is-danger">
+              This field is required
+            </p>
+          </div>
+          <div class="field">
+            <p class="control">
+              <button id="login-btn" class="button is-success" [class.is-loading]="isLoggingIn" type="submit" [disabled]="adminLoginForm.invalid">
+                Login
+              </button>
+            </p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
