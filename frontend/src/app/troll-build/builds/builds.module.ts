@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { BuildsRoutingModule } from './builds-routing.module';
 
 import { BuildsPage } from './builds.page';
+import { SavedTrollBuildComponent } from './saved-troll-build.component';
 import { BuildsService } from './builds.service';
 
 @NgModule({
@@ -14,7 +15,8 @@ import { BuildsService } from './builds.service';
     BuildsRoutingModule
   ],
   declarations: [
-    BuildsPage
+    BuildsPage,
+    SavedTrollBuildComponent
   ],
   providers: [
     BuildsService
