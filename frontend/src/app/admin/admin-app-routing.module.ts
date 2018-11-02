@@ -8,7 +8,7 @@ const routes: Routes = [
     path: 'admin',
     component: AdminAppComponent,
     children: [
-      // { path: '', pathMatch: 'full', loadChildren: './home/admin-home.module#AdminHomeModule' },
+      { path: '', pathMatch: 'full', loadChildren: './home/admin-home.module#AdminHomeModule' },
       { path: 'login', loadChildren: './login/admin-login.module#AdminLoginModule' }
     ]
   }
