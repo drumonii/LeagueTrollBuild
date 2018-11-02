@@ -26,7 +26,7 @@ export class ChampionPage implements OnInit {
   build: Build;
   buildSaving: boolean;
 
-  constructor(private championService: ChampionService,  private title: TitleService, private route: ActivatedRoute) {}
+  constructor(private championService: ChampionService, private title: TitleService, private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.route.data.subscribe((data: { champion: Champion }) => {
@@ -71,12 +71,6 @@ export class ChampionPage implements OnInit {
       this.build.selfRef = res.headers.get('Location').replace('/api', '');
       this.buildSaving = false;
     });
-  }
-
-  copyBuildToClipboard(savedBuildLinkInput: HTMLInputElement): void {
-    savedBuildLinkInput.select();
-    document.execCommand('copy');
-    savedBuildLinkInput.setSelectionRange(0, 0);
   }
 
 }
