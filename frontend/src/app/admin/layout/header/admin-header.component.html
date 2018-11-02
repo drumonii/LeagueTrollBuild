@@ -1,3 +1,42 @@
-<p id="admin-header-title">
-  {{header}}
-</p>
+<nav id="admin-header" class="navbar is-dark">
+  <div class="container">
+    <div class="navbar-brand">
+      <a id="admin-header-title" class="navbar-item" routerLink="/admin">
+        {{header}}
+      </a>
+      <div id="burger-collapse" class="navbar-burger burger" [class.is-active]="isAdminCollapsed" data-target="admin-nav"
+        (click)="toggleAdminCollapse()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+
+    <div id="admin-nav" class="navbar-menu" [class.is-active]="isAdminCollapsed">
+      <div class="navbar-start">
+        <a class="navbar-item">
+          Navbar item
+        </a>
+      </div>
+
+      <div class="navbar-end"> <!-- TODO: *ngIf="(adminUserDetails$ | async) as adminUserDetails" -->
+        <div class="navbar-item has-dropdown is-hoverable">
+          <div class="navbar-link">
+            <i class="fa fa-user-circle" aria-hidden="true"></i>
+          </div>
+          <div class="navbar-dropdown">
+            <div class="navbar-item">
+              <!-- TODO: Use admin user details username-->
+            </div>
+            <hr class="navbar-divider">
+            <div class="navbar-item">
+              <button class="button" (click)="logout()">
+                Logout
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
