@@ -12,25 +12,25 @@
       </div>
     </div>
 
-    <div id="admin-nav" class="navbar-menu" [class.is-active]="isAdminCollapsed">
+    <div id="admin-nav" class="navbar-menu" [class.is-active]="isAdminCollapsed" *ngIf="(adminUserDetails$ | async) as adminUserDetails">
       <div class="navbar-start">
         <a class="navbar-item">
           Navbar item
         </a>
       </div>
 
-      <div class="navbar-end"> <!-- TODO: *ngIf="(adminUserDetails$ | async) as adminUserDetails" -->
+      <div id="authenticated-admin-navbar-end" class="navbar-end">
         <div class="navbar-item has-dropdown is-hoverable">
           <div class="navbar-link">
             <i class="fa fa-user-circle" aria-hidden="true"></i>
           </div>
           <div class="navbar-dropdown">
             <div class="navbar-item">
-              <!-- TODO: Use admin user details username-->
+              {{adminUserDetails.username | uppercase}}
             </div>
             <hr class="navbar-divider">
             <div class="navbar-item">
-              <button class="button" (click)="logout()">
+              <button id="admin-logout-btn" class="button" (click)="logout()">
                 Logout
               </button>
             </div>
