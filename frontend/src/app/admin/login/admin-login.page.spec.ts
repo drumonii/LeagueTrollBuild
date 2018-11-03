@@ -1,4 +1,5 @@
 import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
 import { By } from '@angular/platform-browser';
@@ -15,7 +16,7 @@ describe('AdminLoginPage', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [AdminLoginModule, RouterTestingModule]
+      imports: [AdminLoginModule, HttpClientTestingModule, RouterTestingModule]
     })
     .compileComponents();
   }));
