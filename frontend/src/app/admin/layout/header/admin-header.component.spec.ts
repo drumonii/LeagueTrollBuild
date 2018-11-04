@@ -1,6 +1,7 @@
 import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { RouterLinkWithHref } from '@angular/router';
 import { By } from '@angular/platform-browser';
 
 import { of } from 'rxjs';
@@ -30,6 +31,11 @@ describe('AdminHeaderComponent', () => {
     fixture.detectChanges();
 
     expect(fixture.debugElement.query(By.css('#admin-header'))).toBeTruthy();
+
+    const adminHeaderTitle = fixture.debugElement.query(By.css('#admin-header-title'));
+    expect(adminHeaderTitle.nativeElement.textContent.trim()).toBe(component.header);
+    const adminHeaderTitleLink = adminHeaderTitle.injector.get(RouterLinkWithHref);
+    expect(adminHeaderTitleLink.href).toBe('/admin/login');
   });
 
   describe('with authenticated admin', () => {
