@@ -6,9 +6,7 @@ import { map, take } from 'rxjs/operators';
 
 import { AdminAuthService } from '@security/admin-auth.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AdminAlreadyLoggedInGuard implements CanActivate {
 
   constructor(private authService: AdminAuthService, private router: Router) {}

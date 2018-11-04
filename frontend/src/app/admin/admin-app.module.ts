@@ -9,6 +9,7 @@ import { AdminLayoutModule } from '@admin-layout//admin-layout.module';
 import { LoadingBarModule } from '@loading-bar/loading-bar.module';
 
 import { AdminGuard } from '@guard/admin.guard';
+import { AdminAlreadyLoggedInGuard } from '@guard/admin-already-logged-in.guard';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { AdminGuard } from '@guard/admin.guard';
     AdminLayoutModule
   ],
   providers: [
-    AdminGuard
+    AdminGuard,
+    AdminAlreadyLoggedInGuard
   ]
 })
 export class AdminAppModule { }
