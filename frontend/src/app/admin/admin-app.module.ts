@@ -8,6 +8,8 @@ import { AdminAppRoutingModule } from './admin-app-routing.module';
 import { AdminLayoutModule } from '@admin-layout//admin-layout.module';
 import { LoadingBarModule } from '@loading-bar/loading-bar.module';
 
+import { AdminGuard } from '@guard/admin.guard';
+
 @NgModule({
   declarations: [
     AdminAppComponent
@@ -17,6 +19,9 @@ import { LoadingBarModule } from '@loading-bar/loading-bar.module';
     AdminAppRoutingModule,
     LoadingBarModule,
     AdminLayoutModule
+  ],
+  providers: [
+    AdminGuard
   ]
 })
 export class AdminAppModule { }
