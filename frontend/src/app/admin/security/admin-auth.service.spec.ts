@@ -6,6 +6,16 @@ import { AdminLoginResponse, AdminLoginStatus } from '@security/admin-login-resp
 import { AdminAuthService } from './admin-auth.service';
 
 describe('AdminAuthService', () => {
+
+  const mockAdminUserDetails: AdminUserDetails = {
+    username: 'admin',
+    authorities: [
+      {
+        authority: 'ROLE_ADMIN'
+      }
+    ]
+  };
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
@@ -20,15 +30,6 @@ describe('AdminAuthService', () => {
   describe('getAdminUserDetails', () => {
 
     it('with admin user details in localStorage', inject([AdminAuthService], (authService: AdminAuthService) => {
-      const mockAdminUserDetails: AdminUserDetails = {
-        username: 'admin',
-        authorities: [
-          {
-            authority: 'ROLE_ADMIN'
-          }
-        ]
-      };
-
       localStorage.setItem(AdminAuthService.adminUserDetailsKey, JSON.stringify(mockAdminUserDetails));
 
       authService.adminUserDetails.subscribe(adminUserDetails => {
@@ -53,14 +54,7 @@ describe('AdminAuthService', () => {
       const mockSuccessfulLoginResponse: AdminLoginResponse = {
         status: AdminLoginStatus.SUCCESS,
         message: 'Login successful',
-        userDetails: {
-          username: 'admin',
-          authorities: [
-            {
-              authority: 'ROLE_ADMIN'
-            }
-          ]
-        }
+        userDetails: mockAdminUserDetails
       };
 
       authService.loginAdmin('some_username', 'some_password').subscribe(loginResponse => {
@@ -115,6 +109,38 @@ describe('AdminAuthService', () => {
       expect(testReq.request.body).toEqual('username=some_username&password=some_password');
 
       testReq.error(new ErrorEvent('An unexpected error occurred'));
+    }));
+
+  });
+
+  describe('isAuthenticated', () => {
+
+    const requestMatch: RequestMatch = { method: 'GET', url: '/admin/authentication' };
+
+    it('should return true if authenticated and set adminUserDetails in localStorage',
+      inject([AdminAuthService, HttpTestingController], (authService: AdminAuthService, httpMock: HttpTestingController) => {
+      authService.isAuthenticated().subscribe(isAuthenticated => {
+        expect(isAuthenticated).toBe(true);
+        expect(localStorage.getItem(AdminAuthService.adminUserDetailsKey)).toEqual(JSON.stringify(mockAdminUserDetails));
+      });
+
+      const testReq = httpMock.expectOne(requestMatch);
+
+      testReq.flush(mockAdminUserDetails);
+    }));
+
+    it('should return false if not authenticated and remove adminUserDetails in localStorage',
+      inject([AdminAuthService, HttpTestingController], (authService: AdminAuthService, httpMock: HttpTestingController) => {
+      localStorage.setItem(AdminAuthService.adminUserDetailsKey, JSON.stringify(mockAdminUserDetails));
+
+      authService.isAuthenticated().subscribe(isAuthenticated => {
+        expect(isAuthenticated).toBe(false);
+        expect(localStorage.getItem(AdminAuthService.adminUserDetailsKey)).toBeNull();
+      });
+
+      const testReq = httpMock.expectOne(requestMatch);
+
+      testReq.error(new ErrorEvent('Authentication was not found'));
     }));
 
   });

@@ -50,4 +50,24 @@ export class AdminAuthService {
     this.adminUserDetails$.next(adminUserDetails);
   }
 
+  private removeAdminUserDetails(): void {
+    localStorage.removeItem(AdminAuthService.adminUserDetailsKey);
+    this.adminUserDetails$.next(null);
+  }
+
+  isAuthenticated(): Observable<boolean> {
+    return this.httpClient.get<AdminUserDetails>('/admin/authentication')
+      .pipe(
+        map((adminUserDetails) => {
+          this.addAdminUserDetails(adminUserDetails);
+          return true;
+        }),
+        catchError((error: HttpErrorResponse) => {
+          this.logger.error(`Caught error while GETing /admin/authentication ${JSON.stringify(error)}`);
+          this.removeAdminUserDetails();
+          return of(false);
+        })
+      );
+  }
+
 }
