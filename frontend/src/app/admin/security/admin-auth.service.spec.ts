@@ -4,6 +4,7 @@ import { HttpClientTestingModule, HttpTestingController, RequestMatch } from '@a
 import { AdminUserDetails } from '@security/admin-user-details';
 import { AdminLoginResponse, AdminLoginStatus } from '@security/admin-login-response';
 import { AdminAuthService } from './admin-auth.service';
+import { AdminLogoutResponse, AdminLogoutStatus } from '@security/admin-logout-response';
 
 describe('AdminAuthService', () => {
 
@@ -141,6 +142,61 @@ describe('AdminAuthService', () => {
       const testReq = httpMock.expectOne(requestMatch);
 
       testReq.error(new ErrorEvent('Authentication was not found'));
+    }));
+
+  });
+
+  describe('logoutAdmin', () => {
+
+    const logoutRequestMatch: RequestMatch = { method: 'POST', url: '/admin/logout' };
+    const refreshRequestMatch: RequestMatch = { method: 'GET', url: '/admin/refresh' };
+
+    beforeEach(() => {
+      localStorage.setItem(AdminAuthService.adminUserDetailsKey, JSON.stringify(mockAdminUserDetails));
+    });
+
+    afterEach(inject([AdminAuthService], (authService: AdminAuthService) => {
+      expect(localStorage.getItem(AdminAuthService.adminUserDetailsKey)).toBeNull();
+
+      authService.adminUserDetails.subscribe(adminUserDetails => {
+        expect(adminUserDetails).toBeNull();
+      });
+    }));
+
+    it('should remove adminUserDetails in localStorage',
+      inject([AdminAuthService, HttpTestingController], (authService: AdminAuthService, httpMock: HttpTestingController) => {
+      const mockSuccessfulLogoutResponse: AdminLogoutResponse = {
+        status: AdminLogoutStatus.SUCCESS,
+        message: 'Logout successful',
+        userDetails: mockAdminUserDetails
+      };
+
+      authService.logoutAdmin().subscribe(logoutResponse => {
+        expect(logoutResponse).toEqual(mockSuccessfulLogoutResponse);
+      });
+
+      const logoutTestReq = httpMock.expectOne(logoutRequestMatch);
+      expect(logoutTestReq.request.body).toEqual({});
+
+      logoutTestReq.flush(mockSuccessfulLogoutResponse);
+
+      const refreshTestReq = httpMock.expectOne(refreshRequestMatch);
+      refreshTestReq.error(new ErrorEvent('Not found'));
+    }));
+
+    it('should remove adminUserDetails in localStorage with REST error',
+      inject([AdminAuthService, HttpTestingController], (authService: AdminAuthService, httpMock: HttpTestingController) => {
+        authService.logoutAdmin().subscribe(logoutResponse => {
+          expect(logoutResponse).toBeNull();
+        });
+
+        const logoutTestReq = httpMock.expectOne(logoutRequestMatch);
+        expect(logoutTestReq.request.body).toEqual({});
+
+        logoutTestReq.error(new ErrorEvent('An unexpected error occurred'));
+
+        const refreshTestReq = httpMock.expectOne(refreshRequestMatch);
+        refreshTestReq.error(new ErrorEvent('Not found'));
     }));
 
   });
