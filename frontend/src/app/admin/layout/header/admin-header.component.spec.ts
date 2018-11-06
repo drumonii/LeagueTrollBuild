@@ -1,7 +1,7 @@
 import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { RouterLinkWithHref } from '@angular/router';
+import { Router, RouterLinkWithHref } from '@angular/router';
 import { By } from '@angular/platform-browser';
 
 import { of } from 'rxjs';
@@ -9,6 +9,7 @@ import { of } from 'rxjs';
 import { AdminAuthService } from '@security/admin-auth.service';
 import { AdminUserDetails } from '@security/admin-user-details';
 import { AdminHeaderComponent } from './admin-header.component';
+import { AdminLogoutResponse, AdminLogoutStatus } from '@security/admin-logout-response';
 
 describe('AdminHeaderComponent', () => {
   let component: AdminHeaderComponent;
@@ -65,12 +66,24 @@ describe('AdminHeaderComponent', () => {
       expect(fixture.debugElement.query(By.css('.navbar-dropdown'))).toBeTruthy();
     });
 
-    xit('should logout user on logout button click', () => {
+    it('should logout user on logout button click',
+      inject([AdminAuthService, Router], (authService: AdminAuthService, router: Router) => {
+      const successfulLogoutResponse: AdminLogoutResponse = {
+        status: AdminLogoutStatus.SUCCESS,
+        message: 'Logout successful',
+        userDetails: adminUserDetails
+      };
+      spyOn(authService, 'logoutAdmin').and.returnValue(of(successfulLogoutResponse));
+      spyOn(router, 'navigate');
+
       const adminLogoutBtn = fixture.debugElement.query(By.css('#admin-logout-btn'));
       adminLogoutBtn.triggerEventHandler('click', null);
 
       fixture.detectChanges();
-    });
+
+      expect(authService.logoutAdmin).toHaveBeenCalled();
+      expect(router.navigate).toHaveBeenCalledWith(['/admin/login'], { queryParams: { 'logout': true } });
+    }));
 
     it('should collapse navbar on burger click', () => {
       fixture.detectChanges();

@@ -29,7 +29,8 @@ export class AdminHeaderComponent implements OnInit {
   }
 
   logout(): void {
-    // TODO: Call auth service logout and redirect to /login on successful logout
+    this.authService.logoutAdmin()
+      .subscribe(() => this.router.navigate(['/admin/login'], { queryParams: { 'logout': true } }));
   }
 
 }
