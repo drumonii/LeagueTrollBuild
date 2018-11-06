@@ -21,6 +21,7 @@ describe('AdminFooterComponent', () => {
   });
 
   it('should show footer', () => {
-    expect(fixture.debugElement.query(By.css('#app-version'))).toBeTruthy();
+    const appVersion = fixture.debugElement.query(By.css('#app-version'));
+    expect(appVersion.nativeElement.textContent.trim()).toContain('Version:');
   });
 });
