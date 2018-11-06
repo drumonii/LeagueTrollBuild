@@ -6,6 +6,11 @@
           admin-footer works!
         </p>
       </div>
+      <div class="column">
+        <p id="app-version" *ngIf="(appVersion$ | async) as appVersion">
+          {{appVersion}}
+        </p>
+      </div>
     </div>
   </div>
 </footer>

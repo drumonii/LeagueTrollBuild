@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 
 import { AdminFooterComponent } from './admin-footer.component';
 
@@ -19,7 +20,7 @@ describe('AdminFooterComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should show footer', () => {
+    expect(fixture.debugElement.query(By.css('#app-version'))).toBeTruthy();
   });
 });
