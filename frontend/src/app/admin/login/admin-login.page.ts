@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
-import { finalize } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { finalize, switchMap } from 'rxjs/operators';
 
 import { TitleService } from '@service/title.service';
 import { AdminAuthService } from '@security/admin-auth.service';
@@ -26,14 +27,23 @@ export class AdminLoginPage implements OnInit {
   loggedOut: boolean;
 
   constructor(private authService: AdminAuthService, private fb: FormBuilder, private titleService: TitleService,
-    private router: Router) {}
+    private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
     this.setTitle();
+    this.isLoggedOut();
   }
 
   private setTitle() {
     this.titleService.setTitle('Admin Login');
+  }
+
+  private isLoggedOut() {
+    this.route.queryParamMap
+      .pipe(
+        switchMap((params: ParamMap) => of(!!params.get('logout') || false))
+      )
+      .subscribe(isLoggedOut => this.loggedOut = isLoggedOut);
   }
 
   onSubmit(): void {
@@ -62,6 +72,7 @@ export class AdminLoginPage implements OnInit {
     this.badCredentials = false;
     this.unexpectedError = false;
     this.loggedOut = false;
+    this.router.navigate(['/admin/login']); // rid of query params
   }
 
 }

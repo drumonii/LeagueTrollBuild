@@ -1,7 +1,7 @@
 import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Router } from '@angular/router';
+import { ActivatedRoute, convertToParamMap, Router } from '@angular/router';
 import { By } from '@angular/platform-browser';
 
 import { of } from 'rxjs';
@@ -16,44 +16,60 @@ describe('AdminLoginPage', () => {
   let component: AdminLoginPage;
   let fixture: ComponentFixture<AdminLoginPage>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [AdminLoginModule, HttpClientTestingModule, RouterTestingModule]
-    })
-    .compileComponents();
-  }));
+  describe('admin login form', () => {
 
-  beforeEach(inject([TitleService], (title: TitleService) => {
-    fixture = TestBed.createComponent(AdminLoginPage);
-    component = fixture.componentInstance;
+    beforeEach(async(() => {
+      TestBed.configureTestingModule({
+        imports: [AdminLoginModule, HttpClientTestingModule, RouterTestingModule]
+      })
+      .compileComponents();
+    }));
 
-    spyOn(title, 'setTitle').and.callThrough();
-  }));
+    beforeEach(inject([TitleService], (title: TitleService) => {
+      fixture = TestBed.createComponent(AdminLoginPage);
+      component = fixture.componentInstance;
 
-  afterEach(inject([TitleService], (title: TitleService) => {
-    expect(title.setTitle).toHaveBeenCalledWith('Admin Login');
-  }));
+      spyOn(title, 'setTitle').and.callThrough();
 
-  it('should show login form', () => {
-    fixture.detectChanges();
+      fixture.detectChanges();
+    }));
 
-    expect(fixture.debugElement.query(By.css('#admin-login-form'))).toBeTruthy();
-    expect(component.adminLoginForm.valid).toBe(false);
+    afterEach(inject([TitleService], (title: TitleService) => {
+      expect(title.setTitle).toHaveBeenCalledWith('Admin Login');
+    }));
 
-    const usernameInput = fixture.debugElement.query(By.css('#username-input'));
-    expect(usernameInput.nativeElement.placeholder).toBe('Username');
-    expect(usernameInput.nativeElement.type).toBe('text');
+    it('should show login form', () => {
+      expect(fixture.debugElement.query(By.css('#admin-login-form'))).toBeTruthy();
+      expect(component.adminLoginForm.valid).toBe(false);
 
-    const passwordInput = fixture.debugElement.query(By.css('#password-input'));
-    expect(passwordInput.nativeElement.placeholder).toBe('Password');
-    expect(passwordInput.nativeElement.type).toBe('password');
+      const usernameInput = fixture.debugElement.query(By.css('#username-input'));
+      expect(usernameInput.nativeElement.placeholder).toBe('Username');
+      expect(usernameInput.nativeElement.type).toBe('text');
 
-    const loginBtn = fixture.debugElement.query(By.css('#login-btn'));
-    expect(loginBtn.nativeElement.textContent.trim()).toBe('Login');
-    expect(loginBtn.nativeElement.disabled).toBe(true);
+      const passwordInput = fixture.debugElement.query(By.css('#password-input'));
+      expect(passwordInput.nativeElement.placeholder).toBe('Password');
+      expect(passwordInput.nativeElement.type).toBe('password');
+
+      const loginBtn = fixture.debugElement.query(By.css('#login-btn'));
+      expect(loginBtn.nativeElement.textContent.trim()).toBe('Login');
+      expect(loginBtn.nativeElement.disabled).toBe(true);
+    });
+
   });
 
   describe('with form errors', () => {
+
+    beforeEach(async(() => {
+      TestBed.configureTestingModule({
+        imports: [AdminLoginModule, HttpClientTestingModule, RouterTestingModule]
+      })
+      .compileComponents();
+    }));
+
+    beforeEach(() => {
+      fixture = TestBed.createComponent(AdminLoginPage);
+      component = fixture.componentInstance;
+    });
 
     it('from invalid username', () => {
       const username = component.adminLoginForm.get('username');
@@ -83,6 +99,20 @@ describe('AdminLoginPage', () => {
 
   describe('with valid form', () => {
 
+    beforeEach(async(() => {
+      TestBed.configureTestingModule({
+        imports: [AdminLoginModule, HttpClientTestingModule, RouterTestingModule]
+      })
+      .compileComponents();
+    }));
+
+    beforeEach(inject([Router], (router: Router) => {
+      fixture = TestBed.createComponent(AdminLoginPage);
+      component = fixture.componentInstance;
+
+      spyOn(router, 'navigate');
+    }));
+
     describe('with bad credentials', () => {
 
       it('should show bad credentials alert', inject([AdminAuthService, Router], (authService: AdminAuthService, router: Router) => {
@@ -92,7 +122,6 @@ describe('AdminLoginPage', () => {
         };
 
         spyOn(authService, 'loginAdmin').and.returnValue(of(failedLoginResponse));
-        spyOn(router, 'navigate');
 
         component.unexpectedError = true;
         component.loggedOut = true;
@@ -115,7 +144,8 @@ describe('AdminLoginPage', () => {
         expect(fixture.debugElement.query(By.css('#logged-out-alert'))).toBeFalsy();
 
         expect(authService.loginAdmin).toHaveBeenCalledWith(username.value, password.value);
-        expect(router.navigate).not.toHaveBeenCalled();
+        expect(router.navigate).toHaveBeenCalledWith(['/admin/login']);
+        expect(router.navigate).not.toHaveBeenCalledWith(['/admin']);
       }));
 
     });
@@ -124,7 +154,6 @@ describe('AdminLoginPage', () => {
 
       it('should show unexpected login error alert', inject([AdminAuthService, Router], (authService: AdminAuthService, router: Router) => {
         spyOn(authService, 'loginAdmin').and.returnValue(of(null));
-        spyOn(router, 'navigate');
 
         component.badCredentials = true;
         component.loggedOut = true;
@@ -147,7 +176,8 @@ describe('AdminLoginPage', () => {
         expect(fixture.debugElement.query(By.css('#logged-out-alert'))).toBeFalsy();
 
         expect(authService.loginAdmin).toHaveBeenCalledWith(username.value, password.value);
-        expect(router.navigate).not.toHaveBeenCalled();
+        expect(router.navigate).toHaveBeenCalledWith(['/admin/login']);
+        expect(router.navigate).not.toHaveBeenCalledWith(['/admin']);
       }));
 
     });
@@ -169,7 +199,6 @@ describe('AdminLoginPage', () => {
         };
 
         spyOn(authService, 'loginAdmin').and.returnValue(of(successfulLoginResponse));
-        spyOn(router, 'navigate');
 
         const username = component.adminLoginForm.get('username');
         username.setValue('some_username'); username.markAsTouched();
@@ -185,6 +214,7 @@ describe('AdminLoginPage', () => {
         fixture.detectChanges();
 
         expect(authService.loginAdmin).toHaveBeenCalledWith(username.value, password.value);
+        expect(router.navigate).toHaveBeenCalledWith(['/admin/login']);
         expect(router.navigate).toHaveBeenCalledWith(['/admin']);
       }));
 
@@ -194,9 +224,27 @@ describe('AdminLoginPage', () => {
 
   describe('with logged out', () => {
 
-    it('should show logged out alert', () => {
-      component.loggedOut = true;
+    beforeEach(async(() => {
+      TestBed.configureTestingModule({
+        imports: [AdminLoginModule, HttpClientTestingModule, RouterTestingModule],
+        providers: [
+          {
+            provide: ActivatedRoute,
+            useValue: {
+              queryParamMap: of(convertToParamMap({ logout: true }))
+            }
+          }
+        ]
+      })
+      .compileComponents();
+    }));
 
+    beforeEach(() => {
+      fixture = TestBed.createComponent(AdminLoginPage);
+      component = fixture.componentInstance;
+    });
+
+    it('should show logged out alert', () => {
       fixture.detectChanges();
 
       expect(fixture.debugElement.query(By.css('#logged-out-alert'))).toBeTruthy();
