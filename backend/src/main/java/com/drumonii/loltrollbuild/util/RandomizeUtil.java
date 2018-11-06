@@ -14,7 +14,7 @@ public class RandomizeUtil {
 
 	private RandomizeUtil() {}
 
-	private static final Random random = new Random();
+	private static final Random RANDOM = new Random();
 
 	/**
 	 * Gets a random element {@code E} from the passed {@link Collection}.
@@ -29,7 +29,7 @@ public class RandomizeUtil {
 		}
 		int start = 0;
 		int end = collection.size();
-		return IterableUtils.get(collection, start + random.nextInt(end - start));
+		return IterableUtils.get(collection, start + RANDOM.nextInt(end - start));
 	}
 
 	/**
