@@ -1,7 +1,7 @@
 package com.drumonii.loltrollbuild.model;
 
 import com.drumonii.loltrollbuild.model.id.BatchJobExecutionParamsId;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -28,7 +28,7 @@ public class BatchJobExecutionParams implements Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "JOB_EXECUTION_ID", nullable = false, insertable = false, updatable = false)
-	@JsonBackReference
+	@JsonIgnore
 	private BatchJobExecution jobExecution;
 
 	public BatchJobExecutionParamsId getId() {

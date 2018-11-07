@@ -1,6 +1,6 @@
 package com.drumonii.loltrollbuild.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
@@ -21,7 +21,7 @@ public class BatchJobExecutionContext implements Serializable {
 
 	@OneToOne(fetch = FetchType.LAZY)
 	@PrimaryKeyJoinColumn
-	@JsonBackReference
+	@JsonIgnore
 	private BatchJobExecution jobExecution;
 
 	@Column(name = "SHORT_CONTEXT", nullable = false, length = 2500)

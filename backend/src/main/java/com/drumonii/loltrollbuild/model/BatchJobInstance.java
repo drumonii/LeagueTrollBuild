@@ -1,6 +1,6 @@
 package com.drumonii.loltrollbuild.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
@@ -33,9 +33,8 @@ public class BatchJobInstance implements Serializable {
 	@JsonProperty("key")
 	private String key;
 
-	@OneToOne(mappedBy = "jobInstance")
-	@JsonManagedReference
-	@JsonProperty("jobExecution")
+	@OneToOne(mappedBy = "jobInstance", fetch = FetchType.LAZY)
+	@JsonIgnore
 	private BatchJobExecution jobExecution; // this is a bit cheating as should be a list
 
     public long getId() {

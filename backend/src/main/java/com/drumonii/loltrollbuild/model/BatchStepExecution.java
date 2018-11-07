@@ -1,6 +1,5 @@
 package com.drumonii.loltrollbuild.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -26,7 +25,7 @@ public class BatchStepExecution implements Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "JOB_EXECUTION_ID", nullable = false)
-	@JsonBackReference
+    @JsonIgnore
 	private BatchJobExecution jobExecution;
 
 	@Column(name = "STEP_NAME", nullable = false, length = 100)
