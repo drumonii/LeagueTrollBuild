@@ -1,7 +1,6 @@
 package com.drumonii.loltrollbuild.rest.admin;
 
 import com.drumonii.loltrollbuild.annotation.WithMockAdminUser;
-import com.drumonii.loltrollbuild.riot.service.*;
 import com.drumonii.loltrollbuild.test.rest.WebMvcRestTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,7 +13,6 @@ import org.springframework.batch.support.DatabaseType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.MediaType;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -33,9 +31,7 @@ import static com.drumonii.loltrollbuild.config.Profiles.TESTING;
 import static org.assertj.core.api.Fail.fail;
 import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringRunner.class)
 @WebMvcRestTest(BatchStepExecutionsRestController.class)
@@ -44,21 +40,6 @@ public class BatchStepExecutionsRestControllerTest {
 
 	@Autowired
 	private MockMvc mockMvc;
-
-	@MockBean
-	private ChampionsService championsService;
-
-	@MockBean
-	private ItemsService itemsService;
-
-	@MockBean
-	private SummonerSpellsService summonerSpellsService;
-
-	@MockBean
-	private MapsService mapsService;
-
-	@MockBean
-	private VersionsService versionsService;
 
 	@Autowired
 	private JobInstanceDao jobInstanceDao;
