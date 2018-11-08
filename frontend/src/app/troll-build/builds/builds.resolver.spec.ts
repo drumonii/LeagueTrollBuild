@@ -6,7 +6,6 @@ import { ActivatedRouteSnapshot, convertToParamMap, Router } from '@angular/rout
 import { of } from 'rxjs';
 
 import { BuildsResolver } from './builds.resolver';
-import { BuildsModule } from './builds.module';
 import { BuildsService } from './builds.service';
 import { Build } from '@model/build';
 
@@ -330,8 +329,8 @@ describe('BuildsResolver', () => {
   describe('with build Id link parameter', () => {
     beforeEach(async(() => {
       TestBed.configureTestingModule({
-        imports: [BuildsModule, HttpClientTestingModule, RouterTestingModule],
-        providers: [
+        imports: [HttpClientTestingModule, RouterTestingModule],
+        providers: [BuildsResolver, BuildsService,
           {
             provide: ActivatedRouteSnapshot,
             useValue: {
@@ -370,8 +369,8 @@ describe('BuildsResolver', () => {
   describe('without build Id link parameter', () => {
     beforeEach(async(() => {
       TestBed.configureTestingModule({
-        imports: [BuildsModule, HttpClientTestingModule, RouterTestingModule],
-        providers: [
+        imports: [HttpClientTestingModule, RouterTestingModule],
+        providers: [BuildsResolver, BuildsService,
           {
             provide: ActivatedRouteSnapshot,
             useValue: {
