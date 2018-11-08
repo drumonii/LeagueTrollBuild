@@ -4,6 +4,7 @@ import com.drumonii.loltrollbuild.config.Profiles.Dev;
 import com.drumonii.loltrollbuild.config.Profiles.Embedded;
 import com.drumonii.loltrollbuild.config.Profiles.External;
 import com.drumonii.loltrollbuild.config.Profiles.Testing;
+import com.drumonii.loltrollbuild.security.authentication.Http401AuthenticationEntryPoint;
 import com.drumonii.loltrollbuild.security.login.JsonAuthenticationFailureHandler;
 import com.drumonii.loltrollbuild.security.login.JsonAuthenticationSuccessHandler;
 import com.drumonii.loltrollbuild.security.logout.JsonLogoutSuccessHandler;
@@ -22,6 +23,7 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
@@ -59,7 +61,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.permitAll()
 			.and()
 			.csrf()
-				.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
+				.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+			.and()
+				.exceptionHandling()
+				.authenticationEntryPoint(authenticationEntryPoint());
 		// @formatter:on
 	}
 
@@ -80,6 +85,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Bean
 	public LogoutSuccessHandler logoutSuccessHandler() {
 		return new JsonLogoutSuccessHandler();
+	}
+
+	// exception
+
+	@Bean
+	public AuthenticationEntryPoint authenticationEntryPoint() {
+		return new Http401AuthenticationEntryPoint();
 	}
 
 	/**
