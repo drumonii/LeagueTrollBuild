@@ -78,7 +78,7 @@ export class AdminAuthService {
           return true;
         }),
         catchError((error: HttpErrorResponse) => {
-          this.logger.error(`Caught error while GETing /admin/authentication ${JSON.stringify(error)}`);
+          this.logger.debug(`Caught error while GETing /admin/authentication ${JSON.stringify(error)}`);
           this.removeAdminUserDetails();
           return of(false);
         })
@@ -89,7 +89,7 @@ export class AdminAuthService {
     return this.httpClient.get<any>('/admin/refresh')
       .pipe(
         catchError((error: HttpErrorResponse) => {
-          this.logger.error(`Caught error while GETing admin/refresh ${JSON.stringify(error)}`);
+          this.logger.debug(`Caught error while GETing admin/refresh ${JSON.stringify(error)}`);
           return of(null);
         })
       );
