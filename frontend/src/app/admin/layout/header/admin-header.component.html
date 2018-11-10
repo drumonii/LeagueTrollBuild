@@ -14,8 +14,8 @@
 
     <div id="admin-nav" class="navbar-menu" [class.is-active]="isAdminCollapsed" *ngIf="(adminUserDetails$ | async) as adminUserDetails">
       <div class="navbar-start">
-        <a class="navbar-item">
-          Navbar item
+        <a id="batch-navbar-item" class="navbar-item" routerLink="/admin/batch" routerLinkActive="is-active">
+          Batch
         </a>
       </div>
 

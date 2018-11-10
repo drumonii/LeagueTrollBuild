@@ -12,7 +12,8 @@ const routes: Routes = [
     component: AdminAppComponent,
     children: [
       { path: '', pathMatch: 'full', canActivate: [AdminGuard], loadChildren: './home/admin-home.module#AdminHomeModule' },
-      { path: 'login', canActivate: [AdminAlreadyLoggedInGuard], loadChildren: './login/admin-login.module#AdminLoginModule' }
+      { path: 'login', canActivate: [AdminAlreadyLoggedInGuard], loadChildren: './login/admin-login.module#AdminLoginModule' },
+      { path: 'batch', canActivate: [AdminGuard], loadChildren: './batch/admin-batch.module#AdminBatchModule' },
     ]
   }
 ];

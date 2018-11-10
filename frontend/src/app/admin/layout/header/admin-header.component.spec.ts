@@ -56,6 +56,13 @@ describe('AdminHeaderComponent', () => {
       fixture.detectChanges();
     }));
 
+    it('should show navbar-item items', () => {
+      const batchNavbarItem = fixture.debugElement.query(By.css('#batch-navbar-item'));
+      expect(batchNavbarItem.nativeElement.textContent.trim()).toBe('Batch');
+      const batchNavbarItemLink = batchNavbarItem.injector.get(RouterLinkWithHref);
+      expect(batchNavbarItemLink.href).toBe('/admin/batch');
+    });
+
     it('should show navbar end dropdown with logout', () => {
       const authenticatedAdminNavbarEnd = fixture.debugElement.query(By.css('#authenticated-admin-navbar-end'));
       expect(authenticatedAdminNavbarEnd).toBeTruthy();
