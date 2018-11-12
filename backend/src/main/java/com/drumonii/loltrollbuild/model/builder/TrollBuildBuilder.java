@@ -6,6 +6,7 @@ import com.drumonii.loltrollbuild.model.TrollBuild;
 import com.drumonii.loltrollbuild.util.RandomizeUtil;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -28,14 +29,14 @@ public final class TrollBuildBuilder {
 		return this;
 	}
 
-	public TrollBuildBuilder withBoots(List<Item> boots) {
+	public TrollBuildBuilder withBoots(Collection<Item> boots) {
 		if (boots != null && !boots.isEmpty()) {
 			withBoots(RandomizeUtil.getRandom(boots));
 		}
 		return this;
 	}
 
-	public TrollBuildBuilder withItems(List<Item> items) {
+	public TrollBuildBuilder withItems(Collection<Item> items) {
 		if (items != null && !items.isEmpty()) {
 			this.items.addAll(RandomizeUtil.getRandoms(items, ITEMS_SIZE - 1)); // (without boots)
 			this.totalGold += this.items.stream()

@@ -2,10 +2,7 @@ package com.drumonii.loltrollbuild.util;
 
 import org.apache.commons.collections4.IterableUtils;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 /**
  * Utility methods for randomizing.
@@ -33,22 +30,23 @@ public class RandomizeUtil {
 	}
 
 	/**
-	 * Gets a {@link List} of random elements {@code E} from the passed {@link Collection} to choose from.
+	 * Gets a {@link Collection} of random elements {@code E} from the passed {@link Collection} to choose from.
 	 *
-	 * @param list the {@link Collection} to choose the random elements
-	 * @param size the size of the {@link List} to generate
-	 * @return a {@link List} of random elements from the passed {@link List}
+	 * @param collection the {@link Collection} to choose the random elements
+	 * @param size the size of the {@link Collection} to generate
+	 * @return a {@link Collection} of random elements from the passed {@link Collection}
 	 */
-	public static <E> List<E> getRandoms(Collection<E> list, int size) {
-		List<E> randoms = new ArrayList<>();
-		if (size > list.size()) {
-			size = list.size();
+	public static <E> Collection<E> getRandoms(Collection<E> collection, int size) {
+		Set<E> randoms = new LinkedHashSet<>();
+		if (collection == null) {
+			throw new IllegalArgumentException("Unable to get random elements from an null Collection");
+		}
+		if (size > collection.size()) {
+			size = collection.size();
 		}
 		while (randoms.size() < size) {
-			E randomElement = getRandom(list);
-			if (!randoms.contains(randomElement)) {
-				randoms.add(randomElement);
-			}
+			E randomElement = getRandom(collection);
+			randoms.add(randomElement);
 		}
 		return randoms;
 	}

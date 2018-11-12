@@ -17,6 +17,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
@@ -56,7 +57,7 @@ public class TrollBuildBuilderTest {
 
     @Test
     public void buildsTrollBuild() {
-        List<Item> boots = RandomizeUtil.getRandoms(items, 2); // get some "boots" (don't care they aren't actually boots)
+        Collection<Item> boots = RandomizeUtil.getRandoms(items, 2); // get some "boots" (don't care they aren't actually boots)
         items.removeAll(boots);
 
         TrollBuild trollBuild = new TrollBuildBuilder()
@@ -75,7 +76,7 @@ public class TrollBuildBuilderTest {
                 .filter(item -> "Viktor".equals(item.getRequiredChampion()))
                 .collect(Collectors.toList());
 
-        List<Item> boots = RandomizeUtil.getRandoms(items, 2); // get some "boots" (don't care they aren't actually boots)
+        Collection<Item> boots = RandomizeUtil.getRandoms(items, 2); // get some "boots" (don't care they aren't actually boots)
         items.removeAll(boots);
 
         TrollBuild trollBuild = new TrollBuildBuilder()
@@ -163,9 +164,9 @@ public class TrollBuildBuilderTest {
 
     private class FullTrollBuild implements Consumer<TrollBuild> {
 
-        private List<Item> boots;
+        private Collection<Item> boots;
 
-        FullTrollBuild(List<Item> boots) {
+        FullTrollBuild(Collection<Item> boots) {
             this.boots = boots;
         }
 
@@ -182,9 +183,9 @@ public class TrollBuildBuilderTest {
 
     private class FullViktorTrollBuild extends FullTrollBuild {
 
-        private List<Item> viktorOnlyItems;
+        private Collection<Item> viktorOnlyItems;
 
-        FullViktorTrollBuild(List<Item> boots, List<Item> viktorOnlyItems) {
+        FullViktorTrollBuild(Collection<Item> boots, Collection<Item> viktorOnlyItems) {
             super(boots);
             this.viktorOnlyItems = viktorOnlyItems;
         }
