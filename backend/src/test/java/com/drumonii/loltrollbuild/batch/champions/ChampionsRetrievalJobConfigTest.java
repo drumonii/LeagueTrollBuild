@@ -5,7 +5,7 @@ import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.model.image.Image;
 import com.drumonii.loltrollbuild.repository.ChampionsRepository;
 import com.drumonii.loltrollbuild.riot.api.ChampionsResponse;
-import com.drumonii.loltrollbuild.riot.api.ImageFetcher;
+import com.drumonii.loltrollbuild.riot.ImageFetcher;
 import com.drumonii.loltrollbuild.riot.service.ChampionsService;
 import com.drumonii.loltrollbuild.test.batch.BatchTest;
 import com.drumonii.loltrollbuild.util.RandomizeUtil;

@@ -4,7 +4,7 @@ import com.drumonii.loltrollbuild.model.GameMap;
 import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.model.image.Image;
 import com.drumonii.loltrollbuild.repository.MapsRepository;
-import com.drumonii.loltrollbuild.riot.api.ImageFetcher;
+import com.drumonii.loltrollbuild.riot.ImageFetcher;
 import com.drumonii.loltrollbuild.riot.api.MapsResponse;
 import com.drumonii.loltrollbuild.riot.service.MapsService;
 import com.drumonii.loltrollbuild.test.batch.BatchTest;

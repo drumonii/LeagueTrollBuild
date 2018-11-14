@@ -4,7 +4,7 @@ import com.drumonii.loltrollbuild.model.Item;
 import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.model.image.Image;
 import com.drumonii.loltrollbuild.repository.ItemsRepository;
-import com.drumonii.loltrollbuild.riot.api.ImageFetcher;
+import com.drumonii.loltrollbuild.riot.ImageFetcher;
 import com.drumonii.loltrollbuild.riot.api.ItemsResponse;
 import com.drumonii.loltrollbuild.riot.service.ItemsService;
 import com.drumonii.loltrollbuild.test.batch.BatchTest;

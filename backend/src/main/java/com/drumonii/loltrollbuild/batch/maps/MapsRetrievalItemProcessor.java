@@ -3,7 +3,7 @@ package com.drumonii.loltrollbuild.batch.maps;
 import com.drumonii.loltrollbuild.model.GameMap;
 import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.repository.MapsRepository;
-import com.drumonii.loltrollbuild.riot.api.ImageFetcher;
+import com.drumonii.loltrollbuild.riot.ImageFetcher;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

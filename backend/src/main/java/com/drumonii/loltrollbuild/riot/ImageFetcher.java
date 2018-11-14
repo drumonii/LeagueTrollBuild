@@ -1,4 +1,4 @@
-package com.drumonii.loltrollbuild.riot.api;
+package com.drumonii.loltrollbuild.riot;
 
 import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.model.image.Image;

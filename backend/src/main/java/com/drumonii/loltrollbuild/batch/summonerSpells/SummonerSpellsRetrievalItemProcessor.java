@@ -3,7 +3,7 @@ package com.drumonii.loltrollbuild.batch.summonerSpells;
 import com.drumonii.loltrollbuild.model.SummonerSpell;
 import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.repository.SummonerSpellsRepository;
-import com.drumonii.loltrollbuild.riot.api.ImageFetcher;
+import com.drumonii.loltrollbuild.riot.ImageFetcher;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

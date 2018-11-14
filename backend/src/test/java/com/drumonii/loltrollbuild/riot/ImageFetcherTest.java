@@ -1,7 +1,8 @@
-package com.drumonii.loltrollbuild.riot.api;
+package com.drumonii.loltrollbuild.riot;
 
 import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.model.image.Image;
+import com.drumonii.loltrollbuild.riot.ImageFetcher;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;

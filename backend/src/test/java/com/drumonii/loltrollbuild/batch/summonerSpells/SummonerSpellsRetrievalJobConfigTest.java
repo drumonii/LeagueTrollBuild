@@ -4,7 +4,7 @@ import com.drumonii.loltrollbuild.model.SummonerSpell;
 import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.model.image.Image;
 import com.drumonii.loltrollbuild.repository.SummonerSpellsRepository;
-import com.drumonii.loltrollbuild.riot.api.ImageFetcher;
+import com.drumonii.loltrollbuild.riot.ImageFetcher;
 import com.drumonii.loltrollbuild.riot.api.SummonerSpellsResponse;
 import com.drumonii.loltrollbuild.riot.service.SummonerSpellsService;
 import com.drumonii.loltrollbuild.test.batch.BatchTest;
