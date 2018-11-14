@@ -8,6 +8,7 @@ import { CpuUsageComponent } from './cpu-usage.component';
 import { FailedJobsComponent } from './failed-jobs.component';
 import { MemoryUsageComponent } from './memory-usage.component';
 import { ServletErrorComponent } from './servlet-error.component';
+import { AdminHomeService } from './admin-home.service';
 
 @NgModule({
   imports: [
@@ -21,5 +22,8 @@ import { ServletErrorComponent } from './servlet-error.component';
     MemoryUsageComponent,
     ServletErrorComponent
   ],
+  providers: [
+    AdminHomeService
+  ]
 })
 export class AdminHomeModule { }
