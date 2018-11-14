@@ -55,7 +55,7 @@ management:
       show-details: always
   endpoints:
     web:
-      base-path: /admin/actuator
+      base-path: /api/admin/actuator
       exposure:
         include: env, flyway, health, metrics
 # Server
