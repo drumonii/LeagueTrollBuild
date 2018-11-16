@@ -13,7 +13,7 @@ import { ChampionModule } from './champion.module';
 import { TitleService } from '@service/title.service';
 import { ChampionService } from './champion.service';
 import { Champion } from '@model/champion';
-import { GameMap } from '@model/game-map';
+import { GameMap, SummonersRiftId } from '@model/game-map';
 import { TrollBuild } from '@model/troll-build';
 import { Build, BuildBuilder } from '@model/build';
 
@@ -891,7 +891,7 @@ describe('ChampionPage', () => {
 
       fixture.detectChanges();
 
-      expect(championService.getTrollBuild).toHaveBeenCalledWith(skarner.name, GameMap.summonersRiftId);
+      expect(championService.getTrollBuild).toHaveBeenCalledWith(skarner.name, SummonersRiftId);
     }));
 
     it('should generate a new Troll Build after selecting a new map',
@@ -1120,7 +1120,7 @@ describe('ChampionPage', () => {
 
     afterEach(inject([ChampionService], (championService: ChampionService) => {
       expect(championService.getChampion).not.toHaveBeenCalledWith(skarner.name);
-      expect(championService.getTrollBuild).toHaveBeenCalledWith(skarner.name, GameMap.summonersRiftId);
+      expect(championService.getTrollBuild).toHaveBeenCalledWith(skarner.name, SummonersRiftId);
       expect(championService.mapsForTrollBuild).toHaveBeenCalled();
     }));
 
@@ -1161,7 +1161,7 @@ describe('ChampionPage', () => {
 
     afterEach(inject([ChampionService], (championService: ChampionService) => {
       expect(championService.getChampion).not.toHaveBeenCalledWith(skarner.name);
-      expect(championService.getTrollBuild).toHaveBeenCalledWith(skarner.name, GameMap.summonersRiftId);
+      expect(championService.getTrollBuild).toHaveBeenCalledWith(skarner.name, SummonersRiftId);
       expect(championService.mapsForTrollBuild).toHaveBeenCalled();
     }));
 
@@ -1188,7 +1188,7 @@ describe('ChampionPage', () => {
 
     afterEach(inject([ChampionService], (championService: ChampionService) => {
       expect(championService.getChampion).not.toHaveBeenCalledWith(skarner.name);
-      expect(championService.getTrollBuild).not.toHaveBeenCalledWith(skarner.name, GameMap.summonersRiftId);
+      expect(championService.getTrollBuild).not.toHaveBeenCalledWith(skarner.name, SummonersRiftId);
       expect(championService.mapsForTrollBuild).toHaveBeenCalled();
     }));
 

@@ -2,11 +2,11 @@
  * Game map of LoL.
  */
 export class GameMap {
-  static crystalScarId = 8;
-  static twistedTreelineId = 10;
-  static summonersRiftId = 11;
-  static howlingAbyssId = 12;
-
   mapId: number;
   mapName: string;
 }
+
+export const CrystalScarId = 8;
+export const TwistedTreelineId = 10;
+export const SummonersRiftId = 11;
+export const HowlingAbyssId = 12;

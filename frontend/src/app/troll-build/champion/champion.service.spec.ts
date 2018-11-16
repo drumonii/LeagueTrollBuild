@@ -4,7 +4,7 @@ import { HttpClientTestingModule, HttpTestingController, RequestMatch } from '@a
 import { ChampionService } from './champion.service';
 
 import { Champion } from '@model/champion';
-import { GameMap } from '@model/game-map';
+import { GameMap, SummonersRiftId } from '@model/game-map';
 import { TrollBuild } from '@model/troll-build';
 import { Build } from '@model/build';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
@@ -77,7 +77,6 @@ describe('ChampionService', () => {
   describe('getTrollBuild', () => {
 
     const championName = 'Talon';
-    const gameMapId = GameMap.summonersRiftId;
 
     const mockTrollBuild: TrollBuild = {
       summonerSpells: [
@@ -272,12 +271,12 @@ describe('ChampionService', () => {
       }
     };
 
-    const requestMatchWithMapId: RequestMatch = { method: 'GET', url: `/champions/${championName}/troll-build?mapId=${gameMapId}` };
+    const requestMatchWithMapId: RequestMatch = { method: 'GET', url: `/champions/${championName}/troll-build?mapId=${SummonersRiftId}` };
     const requestMatchWithoutMapId: RequestMatch = { method: 'GET', url: `/champions/${championName}/troll-build` };
 
     it('should get a Troll Build with a Map Id', inject([ChampionService, HttpTestingController],
       (service: ChampionService, httpMock: HttpTestingController) => {
-      service.getTrollBuild(championName, gameMapId).subscribe(trollBuild => {
+      service.getTrollBuild(championName, SummonersRiftId).subscribe(trollBuild => {
         expect(trollBuild).toEqual(mockTrollBuild);
       });
 
@@ -299,7 +298,7 @@ describe('ChampionService', () => {
 
     it('should get a Troll Build with a Map Id and with REST error', inject([ChampionService, HttpTestingController],
       (service: ChampionService, httpMock: HttpTestingController) => {
-      service.getTrollBuild(championName, gameMapId).subscribe(trollBuild => {
+      service.getTrollBuild(championName, SummonersRiftId).subscribe(trollBuild => {
         expect(trollBuild).toEqual(new TrollBuild());
       });
 

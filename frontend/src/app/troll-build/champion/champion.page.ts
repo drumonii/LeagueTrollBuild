@@ -8,7 +8,7 @@ import { TitleService } from '@service/title.service';
 import { ChampionService } from './champion.service';
 import { Build, BuildBuilder } from '@model/build';
 import { Champion } from '@model/champion';
-import { GameMap } from '@model/game-map';
+import { GameMap, SummonersRiftId } from '@model/game-map';
 import { TrollBuild } from '@model/troll-build';
 
 @Component({
@@ -34,7 +34,7 @@ export class ChampionPage implements OnInit {
       this.setTitle(data.champion.name);
     });
     this.getGameMaps().subscribe(gameMaps => {
-      this.gameMap = gameMaps.find(gameMap => gameMap.mapId === GameMap.summonersRiftId);
+      this.gameMap = gameMaps.find(gameMap => gameMap.mapId === SummonersRiftId);
       this.gameMaps = gameMaps;
       this.getTrollBuild();
     });
