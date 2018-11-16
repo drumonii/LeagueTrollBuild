@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { AdminLoginRoutingModule } from './admin-login-routing.module';
-
 import { AdminLoginPage } from './admin-login.page';
 
 @NgModule({

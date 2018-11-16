@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { AdminHomeRoutingModule } from './admin-home-routing.module';
-
 import { AdminHomePage } from './admin-home.page';
 import { CpuUsageComponent } from './cpu-usage.component';
 import { FailedJobsComponent } from './failed-jobs.component';
