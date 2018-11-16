@@ -1,11 +1,9 @@
 package com.drumonii.loltrollbuild.controller;
 
-import com.drumonii.loltrollbuild.config.WebSecurityConfig;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.context.annotation.Import;
 import org.springframework.security.test.context.support.WithAnonymousUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -17,7 +15,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(BuildsController.class)
-@Import(WebSecurityConfig.class)
 @ActiveProfiles({ TESTING })
 public class BuildsControllerTest {
 

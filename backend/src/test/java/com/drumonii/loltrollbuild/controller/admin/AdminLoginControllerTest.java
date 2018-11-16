@@ -1,6 +1,5 @@
 package com.drumonii.loltrollbuild.controller.admin;
 
-import com.drumonii.loltrollbuild.config.WebSecurityConfig;
 import com.drumonii.loltrollbuild.config.WebSecurityConfig.UserRole;
 import com.drumonii.loltrollbuild.security.login.LoginResponse.LoginStatus;
 import org.junit.Test;
@@ -8,7 +7,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithAnonymousUser;
 import org.springframework.test.context.ActiveProfiles;
@@ -27,7 +25,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(AdminLoginController.class)
-@Import(WebSecurityConfig.class)
 @ActiveProfiles({ TESTING })
 public class AdminLoginControllerTest {
 
