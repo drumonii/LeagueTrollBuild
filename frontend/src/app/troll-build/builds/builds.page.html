@@ -13,7 +13,7 @@
               <div id="champion-partype-ribbon">
                 <span id="champion-partype">{{build.champion.partype}}</span>
               </div>
-              <img id="champion-img" src="/api/img/champions/{{build.champion.id}}">
+              <img id="champion-img" src="/api/img/champions/{{build.champion.id}}" [alt]="build.champion.key">
               <button id="new-build-btn" class="button is-primary" (click)="getTrollBuild()">New Build</button>
             </div>
           </div>
