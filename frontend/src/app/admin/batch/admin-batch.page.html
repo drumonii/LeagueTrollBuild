@@ -1,3 +1,33 @@
-<p>
-  admin-batch works!
-</p>
+<section class="section">
+  <div class="container">
+    <h4 class="title is-4">
+      Job Instances
+      <button id="refresh-failed-jobs-btn" class="button is-white"
+        (click)="getBatchJobInstances({ page: page.offset, size: page.limit, sort: getSorts() })">
+        <span class="icon">
+          <i class="fa fa-refresh" [class.fa-spin]="loadingIndicator" aria-hidden="true"></i>
+        </span>
+      </button>
+    </h4>
+    <ngx-datatable
+      id="batch-jobs-datatable"
+      class="material"
+      [rows]="rows"
+      [columns]="columns"
+      [columnMode]="'force'"
+      [headerHeight]="50"
+      [footerHeight]="50"
+      [rowHeight]="'auto'"
+      [sortType]="'multi'"
+      [loadingIndicator]="loadingIndicator"
+      [sorts]="sorts"
+      [count]="page.count"
+      [offset]="page.offset"
+      [limit]="page.limit"
+      [externalPaging]="true"
+      [externalSorting]="true"
+      (page)="setPage($event)"
+      (sort)="setSort($event)">
+    </ngx-datatable>
+  </div>
+</section>
