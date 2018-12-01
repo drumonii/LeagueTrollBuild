@@ -77,7 +77,7 @@ public class QueryByExampleFromSpecificationPredicateBuilder {
 			Optional<Object> optionalValue = transformer
 					.apply(Optional.ofNullable(beanWrapper.getPropertyValue(attribute.getName())));
 
-			if (!optionalValue.isPresent()) {
+			if (optionalValue.isEmpty()) {
 
 				if (exampleAccessor.getNullHandler().equals(NullHandler.INCLUDE)) {
 					predicates.add(cb.isNull(root.get(attribute)));

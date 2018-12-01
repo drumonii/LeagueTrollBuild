@@ -114,7 +114,7 @@ public class ChampionsRestController {
 		} catch (NumberFormatException e) {
 			champion = championsRepository.findByName(value);
 		}
-		if (!champion.isPresent()) {
+		if (champion.isEmpty()) {
 			throw new ResourceNotFoundException("Unable to find a Champion with value: " + value);
 		}
 

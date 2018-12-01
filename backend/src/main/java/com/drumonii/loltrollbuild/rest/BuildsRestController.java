@@ -75,7 +75,7 @@ public class BuildsRestController {
 	@GetMapping(path = "/{id}")
 	public Build getBuild(@PathVariable int id) {
 		Optional<Build> optionalBuild = buildsRepository.findById(id);
-		if (!optionalBuild.isPresent()) {
+		if (optionalBuild.isEmpty()) {
 			throw new ResourceNotFoundException("Unable to find a Build with Id: " + id);
 		}
 		Build build = optionalBuild.get();

@@ -85,7 +85,7 @@ public abstract class ItemsRetrievalJobConfigTest {
 
 		int index = (int) (Math.random() * (items.size() - 1)) + 1;
 		Optional<Item> itemToEdit = itemsRepository.findById(items.get(index).getId());
-		if (!itemToEdit.isPresent()) {
+		if (itemToEdit.isEmpty()) {
 			fail("Unable to get a random Item to edit");
 		}
 		itemToEdit.get().setGroup("New Group");

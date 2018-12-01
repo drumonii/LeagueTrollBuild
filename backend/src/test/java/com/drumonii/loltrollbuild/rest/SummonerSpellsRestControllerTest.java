@@ -17,6 +17,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.stream.Collectors;
 
 import static com.drumonii.loltrollbuild.model.SummonerSpell.GameMode.CLASSIC;
+import static java.util.function.Predicate.not;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -45,7 +46,7 @@ public abstract class SummonerSpellsRestControllerTest {
 	@Test
 	public void getSummonerSpells() throws Exception {
 		SummonerSpell summonerSpell = RandomizeUtil.getRandom(summonerSpellsResponse.getSummonerSpells().values().stream()
-				.filter(spell -> !spell.getModes().isEmpty())
+				.filter(not(spell -> spell.getModes().isEmpty()))
 				.collect(Collectors.toSet()));
 
 		// qbe

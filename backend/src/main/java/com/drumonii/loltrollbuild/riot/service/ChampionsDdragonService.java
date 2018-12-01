@@ -86,7 +86,7 @@ public class ChampionsDdragonService implements ChampionsService {
 		Optional<Champion> champion = response.getChampions().values().stream()
 				.filter(c -> c.getId() == id)
 				.findFirst();
-		return champion.isPresent() ? getChampion(version, champion.get().getKey()) : null;
+		return champion.map(champion1 -> getChampion(version, champion1.getKey())).orElse(null);
 	}
 
 	private Champion getChampion(Version version, String key) {

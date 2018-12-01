@@ -87,7 +87,7 @@ public abstract class ChampionsRetrievalJobConfigTest {
 		int index = (int) (Math.random() * (champions.size() - 1)) + 1;
 		Optional<Champion> championToEdit =
 				championsRepository.findById(champions.get(index).getId());
-		if (!championToEdit.isPresent()) {
+		if (championToEdit.isEmpty()) {
 			fail("Unable to get a random Champion to edit");
 		}
 		championToEdit.get().setTags(new TreeSet<>(Collections.singletonList("NEW_TAG")));

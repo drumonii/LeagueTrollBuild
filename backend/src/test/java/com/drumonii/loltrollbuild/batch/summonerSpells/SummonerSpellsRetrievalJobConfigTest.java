@@ -27,6 +27,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static java.util.function.Predicate.not;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
 import static org.mockito.ArgumentMatchers.any;
@@ -68,7 +69,7 @@ public abstract class SummonerSpellsRetrievalJobConfigTest {
 				.willReturn(new ArrayList<>(summonerSpellsResponse.getSummonerSpells().values()));
 
 		List<SummonerSpell> summonerSpellsWithModes = summonerSpellsResponse.getSummonerSpells().values().stream()
-				.filter(summonerSpell -> !summonerSpell.getModes().isEmpty())
+				.filter(not(summonerSpell -> summonerSpell.getModes().isEmpty()))
 				.collect(Collectors.toList());
 
 		JobExecution jobExecution = jobLauncherTestUtils.launchJob(getJobParameters());
@@ -86,7 +87,7 @@ public abstract class SummonerSpellsRetrievalJobConfigTest {
 				.willReturn(new ArrayList<>(summonerSpellsResponse.getSummonerSpells().values()));
 
 		List<SummonerSpell> summonerSpellsWithModes = summonerSpellsResponse.getSummonerSpells().values().stream()
-				.filter(summonerSpell -> !summonerSpell.getModes().isEmpty())
+				.filter(not(summonerSpell -> summonerSpell.getModes().isEmpty()))
 				.collect(Collectors.toList());
 
 		List<SummonerSpell> summonerSpells = summonerSpellsRepository.saveAll(summonerSpellsWithModes);
@@ -94,7 +95,7 @@ public abstract class SummonerSpellsRetrievalJobConfigTest {
 		int index = (int) (Math.random() * (summonerSpells.size() - 1)) + 1;
 		Optional<SummonerSpell> summonerSpellToEdit =
 				summonerSpellsRepository.findById(summonerSpellsWithModes.get(index).getId());
-		if (!summonerSpellToEdit.isPresent()) {
+		if (summonerSpellToEdit.isEmpty()) {
 			fail("Unable to get a random Summoner Spell to edit");
 		}
 		summonerSpellToEdit.get().setDescription("New Description");

@@ -85,7 +85,7 @@ public abstract class MapsRetrievalJobConfigTest {
 
 		int index = (int) (Math.random() * (maps.size() - 1)) + 1;
 		Optional<GameMap> mapToEdit = mapsRepository.findById(maps.get(index).getMapId());
-		if (!mapToEdit.isPresent()) {
+		if (mapToEdit.isEmpty()) {
 			fail("Unable to get a random Map to edit");
 		}
 		mapToEdit.get().setMapName("New Map Name");

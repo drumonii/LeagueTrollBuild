@@ -123,7 +123,7 @@ public abstract class ImagesRestControllerTest {
 		Champion azir = championsResponse.getChampions().get("Azir");
 		azir = championsRepository.save(azir);
 		Optional<ChampionSpell> spell = azir.getSpells().stream().findAny();
-		if (!spell.isPresent()) {
+		if (spell.isEmpty()) {
 			fail("Unable to get a Champion Spell from the Champion");
 		}
 		String fileExt = getExtension(spell.get().getImage().getFull());
