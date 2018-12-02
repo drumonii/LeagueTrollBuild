@@ -48,6 +48,9 @@ spring:
     cache:
       cachecontrol:
         max-age: 1h # (3600s)
+  # JMX
+  jmx:
+    enabled: false
 # Actuator
 management:
   endpoint:
