@@ -8,6 +8,7 @@ import { BatchJobInstance } from '@admin-model/batch-job-instance';
 import { PageRequest } from '@admin-model/page-request';
 import { DatatableSort, DatatableSorts } from '@admin-model/datatable-sort';
 import { DatatablePage } from '@admin-model/datatable-page';
+import { DatatableCss } from '@admin-model/datatable-css';
 
 @Component({
   selector: 'ltb-admin-batch',
@@ -19,25 +20,6 @@ export class AdminBatchPage implements OnInit {
   loadingIndicator: boolean;
 
   rows: BatchJobInstance[];
-
-  columns = [
-    {
-      name: 'Name',
-      prop: 'name'
-    },
-    {
-      name: 'Status',
-      prop: 'jobExecution.status'
-    },
-    {
-      name: 'Start Time',
-      prop: 'jobExecution.startTime'
-    },
-    {
-      name: 'End Time',
-      prop: 'jobExecution.endTime'
-    }
-  ];
 
   page: DatatablePage = {
     limit: 20,
@@ -94,6 +76,14 @@ export class AdminBatchPage implements OnInit {
       sorts.push(`${sort.prop},${sort.dir}`);
     }
     return sorts;
+  }
+
+  getStatusCss({ row, column, value }): DatatableCss {
+    return {
+      'has-text-success': value === 'COMPLETED',
+      'has-text-danger': value === 'FAILED',
+      'has-text-warning': value === 'STARTED'
+    };
   }
 
 }
