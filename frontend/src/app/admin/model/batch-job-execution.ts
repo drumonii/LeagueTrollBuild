@@ -1,3 +1,5 @@
+import { BatchStepExecution } from '@admin-model/batch-step-execution';
+
 export interface BatchJobExecution {
   id: number;
   version: number;
@@ -9,4 +11,5 @@ export interface BatchJobExecution {
   exitMessage: string;
   lastUpdated: string;
   configurationLocation?: string;
+  stepExecutions?: BatchStepExecution[];
 }

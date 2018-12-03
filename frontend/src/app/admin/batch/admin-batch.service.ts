@@ -7,6 +7,7 @@ import { catchError } from 'rxjs/operators';
 import { Logger } from '@service/logger.service';
 import { Paginated } from '@admin-model/paginated';
 import { BatchJobInstance } from '@admin-model/batch-job-instance';
+import { BatchStepExecution } from '@admin-model/batch-step-execution';
 import { PageRequest } from '@admin-model/page-request';
 
 @Injectable()
@@ -36,6 +37,16 @@ export class AdminBatchService {
         catchError((error: HttpErrorResponse) => {
           this.logger.error(`Caught error while GETing /job-instances: ${JSON.stringify(error)}`);
           return of(null);
+        })
+      );
+  }
+
+  getStepExecutions(jobInstanceId: number): Observable<BatchStepExecution[]> {
+    return this.httpClient.get<BatchStepExecution[]>(`/job-instances/${jobInstanceId}/step-executions`)
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          this.logger.error(`Caught error while GETing /job-instances/${jobInstanceId}/step-executions: ${JSON.stringify(error)}`);
+          return of([]);
         })
       );
   }

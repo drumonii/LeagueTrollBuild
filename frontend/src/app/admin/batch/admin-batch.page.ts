@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
+import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 
 import { AdminBatchService } from './admin-batch.service';
 import { TitleService } from '@service/title.service';
 import { BatchJobInstance } from '@admin-model/batch-job-instance';
+import { BatchStepExecution } from '@admin-model/batch-step-execution';
 import { PageRequest } from '@admin-model/page-request';
 import { DatatableSort, DatatableSorts } from '@admin-model/datatable-sort';
 import { DatatablePage } from '@admin-model/datatable-page';
@@ -17,9 +19,13 @@ import { DatatableCss } from '@admin-model/datatable-css';
 })
 export class AdminBatchPage implements OnInit {
 
+  @ViewChild('batchJobsDatatable') table: any;
+
   loadingIndicator: boolean;
 
   rows: BatchJobInstance[];
+
+  expanded = {};
 
   page: DatatablePage = {
     limit: 20,
@@ -57,6 +63,10 @@ export class AdminBatchPage implements OnInit {
       });
   }
 
+  getStepExecutions(jobInstanceId: number): Observable<BatchStepExecution[]> {
+    return this.batchService.getStepExecutions(jobInstanceId);
+  }
+
   setPage(pageInfo: DatatablePage): void {
     this.getBatchJobInstances({ page: pageInfo.offset, size: pageInfo.limit, sort: this.getSorts() });
   }
@@ -78,12 +88,41 @@ export class AdminBatchPage implements OnInit {
     return sorts;
   }
 
-  getStatusCss({ row, column, value }): DatatableCss {
-    return {
-      'has-text-success': value === 'COMPLETED',
-      'has-text-danger': value === 'FAILED',
-      'has-text-warning': value === 'STARTED'
-    };
+  getStatusCss({ row, column, value }): DatatableCss | string {
+    if (row && column && value) {
+      return {
+        'has-text-success': value === 'COMPLETED',
+        'has-text-danger': value === 'FAILED',
+        'has-text-warning': value === 'STARTED'
+      };
+    }
+    switch (value) {
+      case 'COMPLETED':
+        return 'has-text-success';
+      case 'FAILED':
+        return 'has-text-danger';
+      case 'STARTED':
+        return 'has-text-warning';
+      default:
+        return '';
+    }
+  }
+
+  toggleExpandRow(row): void {
+    if (!row.jobExecution.stepExecutions) {
+      this.getStepExecutions(row.id).subscribe((stepExecutions) => {
+        row.jobExecution.stepExecutions = stepExecutions;
+      });
+    }
+    this.table.rowDetail.toggleExpandRow(row);
+  }
+
+  getCompletionTime(startTime: string, endTime: string): string {
+    const startDate = new Date(startTime);
+    const endDate = new Date(endTime);
+    const diffInMs = Math.abs(endDate.getTime() - startDate.getTime());
+    const diffInMinutes = (diffInMs / 1000) / 60;
+    return `${diffInMinutes.toFixed(2)} min`;
   }
 
 }

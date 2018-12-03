@@ -5,6 +5,7 @@ import { AdminBatchService } from './admin-batch.service';
 import { PageRequest } from '@admin-model/page-request';
 import { Paginated } from '@admin-model/paginated';
 import { BatchJobInstance } from '@admin-model/batch-job-instance';
+import { BatchStepExecution } from '@admin-model/batch-step-execution';
 
 describe('AdminBatchService', () => {
   beforeEach(() => {
@@ -176,6 +177,61 @@ describe('AdminBatchService', () => {
 
       service.getBatchJobInstances(pageRequest).subscribe(paginatedBatchJobInstances => {
         expect(paginatedBatchJobInstances).toBeNull();
+      });
+
+      const testReq = httpMock.expectOne(requestMatch);
+
+      testReq.error(new ErrorEvent('An unexpected error occurred'));
+    }));
+
+  });
+
+  describe('getStepExecutions', () => {
+
+    const jobInstanceId = 1;
+
+    const requestMatch: RequestMatch = {
+      method: 'GET',
+      url: `/job-instances/${jobInstanceId}/step-executions`
+    };
+
+    it('should get batch step executions', inject([AdminBatchService, HttpTestingController],
+      (service: AdminBatchService, httpMock: HttpTestingController) => {
+      const mockStepExecutions: BatchStepExecution[] = [
+        {
+          id: 3,
+          version: 2,
+          name: 'itemsRetrievalJobStep',
+          startTime: '2018-08-20T22:20:47.054',
+          endTime: '2018-08-20T22:22:14.517',
+          status: 'COMPLETED',
+          commitCount: 0,
+          readCount: 0,
+          filterCount: 0,
+          writeCount: 0,
+          readSkipCount: 0,
+          writeSkipCount: 0,
+          processSkipCount: 0,
+          rollbackCount: 0,
+          exitCode: 'COMPLETED',
+          exitMessage: '',
+          lastUpdated: '2018-08-20T22:22:14.518'
+        }
+      ];
+
+      service.getStepExecutions(jobInstanceId).subscribe(batchStepExecutions => {
+        expect(batchStepExecutions).toEqual(mockStepExecutions);
+      });
+
+      const testReq = httpMock.expectOne(requestMatch);
+
+      testReq.flush(mockStepExecutions);
+    }));
+
+    it('should get batch step executions with REST error', inject([AdminBatchService, HttpTestingController],
+      (service: AdminBatchService, httpMock: HttpTestingController) => {
+      service.getStepExecutions(jobInstanceId).subscribe(batchStepExecutions => {
+        expect(batchStepExecutions).toEqual([]);
       });
 
       const testReq = httpMock.expectOne(requestMatch);
