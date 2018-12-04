@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FailedJobsService } from './failed-jobs.service';
+
+import { forkJoin, Observable } from 'rxjs';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'ltb-admin-failed-jobs',
@@ -7,9 +11,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FailedJobsComponent implements OnInit {
 
-  constructor() { }
+  failedJobs$: Observable<any>;
+  gettingFailedJobs: boolean;
+
+  constructor(private service: FailedJobsService) {}
 
   ngOnInit() {
+    this.getFailedJobs();
+  }
+
+  getFailedJobs(): void {
+    this.gettingFailedJobs = true;
+    this.failedJobs$ = forkJoin(this.service.getFailedJobs())
+      .pipe(
+        finalize(() => this.gettingFailedJobs = false)
+      );
+  }
+
+  getFailedJobsClass(failedJobs: number): string {
+    if (failedJobs > 0) {
+      return 'has-text-danger';
+    }
+    return 'has-text-black';
   }
 
 }

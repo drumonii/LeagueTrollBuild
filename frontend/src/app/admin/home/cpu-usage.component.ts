@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
+import { forkJoin, Observable } from 'rxjs';
+import { finalize, map } from 'rxjs/operators';
+
+import { CpuUsage, CpuUsageService } from './cpu-usage.service';
+
 @Component({
   selector: 'ltb-admin-cpu-usage',
   templateUrl: './cpu-usage.component.html',
@@ -7,9 +12,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CpuUsageComponent implements OnInit {
 
-  constructor() { }
+  cpuUsage$: Observable<CpuUsage>;
+  gettingCpuUsage: boolean;
+
+  constructor(private service: CpuUsageService) {}
 
   ngOnInit() {
+    this.getCpuUsage();
+  }
+
+  getCpuUsage(): void {
+    this.gettingCpuUsage = true;
+    this.cpuUsage$ = forkJoin(this.service.getCpuUsagePerc(), this.service.getCpuCount())
+      .pipe(
+        finalize(() => this.gettingCpuUsage = false),
+        map(([cpuUsage, cpuCount]) => ({ percentage: cpuUsage, cpus: cpuCount }))
+      );
+  }
+
+  getCpuUsageClass(cpuUsagePercentage: number): string {
+    if (cpuUsagePercentage >= 50) {
+      return 'has-text-danger';
+    } else if (cpuUsagePercentage >= 25) {
+      return 'has-text-warning';
+    }
+    return 'has-text-black';
   }
 
 }

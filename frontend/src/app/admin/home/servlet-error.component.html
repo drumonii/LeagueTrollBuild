@@ -1,3 +1,39 @@
-<p>
-  servlet-error works!
-</p>
+<div id="servlet-errors-card" class="card">
+  <header class="card-header">
+    <p class="card-header-title">
+      Servlet Errors
+      <button id="refresh-servlet-errors-btn" class="button is-white" (click)="getServletErrors()">
+        <span class="icon">
+          <i class="fa fa-refresh" [class.fa-spin]="gettingServletErrors" aria-hidden="true"></i>
+        </span>
+      </button>
+    </p>
+  </header>
+  <div class="card-content">
+    <div class="content">
+      <ng-container *ngIf="(servletErrors$ | async) as servletErrors; else loadingServletErrors">
+        <ng-container *ngIf="servletErrors.toString(); else noServletErrors">
+          <article class="message">
+            <div class="message-body">
+              <p id="servlet-errors" [class]="getServletErrorsClass(servletErrors)">{{servletErrors}}</p>
+            </div>
+          </article>
+        </ng-container>
+        <ng-template #noServletErrors>
+          <article id="no-servlet-errors-alert" class="message is-danger">
+            <div class="message-body">
+              <p>Unable to get Servlet Errors</p>
+            </div>
+          </article>
+        </ng-template>
+      </ng-container>
+      <ng-template #loadingServletErrors>
+        <article id="loading-servlet-errors-alert" class="message is-info">
+          <div class="message-body">
+            <p>...</p>
+          </div>
+        </article>
+      </ng-template>
+    </div>
+  </div>
+</div>

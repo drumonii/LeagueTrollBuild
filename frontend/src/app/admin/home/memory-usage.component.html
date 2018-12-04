@@ -1,3 +1,39 @@
-<p>
-  memory-usage works!
-</p>
+<div id="memory-usage-card" class="card">
+  <header class="card-header">
+    <p class="card-header-title">
+      Memory Usage
+      <button id="refresh-memory-usage-btn" class="button is-white" (click)="getMemoryUsage()">
+        <span class="icon">
+          <i class="fa fa-refresh" [class.fa-spin]="gettingMemoryUsage" aria-hidden="true"></i>
+        </span>
+      </button>
+    </p>
+  </header>
+  <div class="card-content">
+    <div class="content">
+      <ng-container *ngIf="(memoryUsage$ | async) as memoryUsage; else loadingMemoryUsage">
+        <ng-container *ngIf="memoryUsage > 0; else noMemoryUsage">
+          <article class="message">
+            <div class="message-body">
+              <p id="memory-usage" [class]="getMemoryUsageClass(memoryUsage)">{{memoryUsage}} MB</p>
+            </div>
+          </article>
+        </ng-container>
+        <ng-template #noMemoryUsage>
+          <article id="no-memory-usage-alert" class="message is-danger">
+            <div class="message-body">
+              <p>Unable to get Memory Usage</p>
+            </div>
+          </article>
+        </ng-template>
+      </ng-container>
+      <ng-template #loadingMemoryUsage>
+        <article id="loading-memory-usage-alert" class="message is-info">
+          <div class="message-body">
+            <p>...</p>
+          </div>
+        </article>
+      </ng-template>
+    </div>
+  </div>
+</div>

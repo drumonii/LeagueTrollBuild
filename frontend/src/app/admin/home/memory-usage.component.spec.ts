@@ -1,6 +1,12 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { By } from '@angular/platform-browser';
+
+import { of } from 'rxjs';
 
 import { MemoryUsageComponent } from './memory-usage.component';
+import { MemoryUsageModule } from './memory-usage.module';
+import { MemoryUsageService } from './memory-usage.service';
 
 describe('MemoryUsageComponent', () => {
   let component: MemoryUsageComponent;
@@ -8,7 +14,7 @@ describe('MemoryUsageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MemoryUsageComponent ]
+      imports: [MemoryUsageModule, HttpClientTestingModule]
     })
     .compileComponents();
   }));
@@ -16,10 +22,106 @@ describe('MemoryUsageComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(MemoryUsageComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  describe('loaded memory usage', () => {
+
+    describe('with >= 512MB memory usage', () => {
+
+      const mbInUseUsage = '512';
+
+      beforeEach(inject([MemoryUsageService], (service: MemoryUsageService) => {
+        spyOn(service, 'getMemoryUsage').and.returnValue(of(mbInUseUsage));
+
+        fixture.detectChanges();
+      }));
+
+      it('should show memory usage', () => {
+        const memoryUsage = fixture.debugElement.query(By.css('#memory-usage'));
+        expect(memoryUsage.nativeElement.textContent.trim()).toBe(`${mbInUseUsage} MB`);
+        expect(memoryUsage.nativeElement.classList.contains('has-text-danger')).toBe(true);
+
+        expectNotRefreshing();
+      });
+
+    });
+
+    describe('with >= 400MB memory usage', () => {
+
+      const mbInUseUsage = '400';
+
+      beforeEach(inject([MemoryUsageService], (service: MemoryUsageService) => {
+        spyOn(service, 'getMemoryUsage').and.returnValue(of(mbInUseUsage));
+
+        fixture.detectChanges();
+      }));
+
+      it('should show memory usage', () => {
+        const memoryUsage = fixture.debugElement.query(By.css('#memory-usage'));
+        expect(memoryUsage.nativeElement.textContent.trim()).toBe(`${mbInUseUsage} MB`);
+        expect(memoryUsage.nativeElement.classList.contains('has-text-warning')).toBe(true);
+
+        expectNotRefreshing();
+      });
+
+    });
+
+    describe('with < 400MB memory usage', () => {
+
+      const mbInUseUsage = '325';
+
+      beforeEach(inject([MemoryUsageService], (service: MemoryUsageService) => {
+        spyOn(service, 'getMemoryUsage').and.returnValue(of(mbInUseUsage));
+
+        fixture.detectChanges();
+      }));
+
+      it('should show memory usage', () => {
+        const memoryUsage = fixture.debugElement.query(By.css('#memory-usage'));
+        expect(memoryUsage.nativeElement.textContent.trim()).toBe(`${mbInUseUsage} MB`);
+        expect(memoryUsage.nativeElement.classList.contains('has-text-black')).toBe(true);
+
+        expectNotRefreshing();
+      });
+
+    });
+
+    function expectNotRefreshing() {
+      const refreshMemoryUsageBtn = fixture.debugElement.query(By.css('#refresh-memory-usage-btn'));
+      expect(refreshMemoryUsageBtn.query(By.css('i')).classes['fa-spin']).toBeFalsy();
+    }
+
   });
+
+  describe('loading memory usage', () => {
+
+    beforeEach(inject([MemoryUsageService], (service: MemoryUsageService) => {
+      spyOn(service, 'getMemoryUsage').and.callThrough();
+
+      fixture.detectChanges();
+    }));
+
+    it('should show loading indicator', () => {
+      expect(fixture.debugElement.query(By.css('#loading-memory-usage-alert'))).toBeTruthy();
+
+      const refreshMemoryUsageBtn = fixture.debugElement.query(By.css('#refresh-memory-usage-btn'));
+      expect(refreshMemoryUsageBtn.query(By.css('i')).classes['fa-spin']).toBeTruthy();
+    });
+
+  });
+
+  describe('error loading memory usage', () => {
+
+    beforeEach(inject([MemoryUsageService], (service: MemoryUsageService) => {
+      spyOn(service, 'getMemoryUsage').and.returnValue(of(null));
+
+      fixture.detectChanges();
+    }));
+
+    it('should show error alert', () => {
+      expect(fixture.debugElement.query(By.css('#no-memory-usage-alert'))).toBeTruthy();
+    });
+
+  });
+
 });

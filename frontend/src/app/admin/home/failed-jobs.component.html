@@ -1,3 +1,39 @@
-<p>
-  failed-jobs works!
-</p>
+<div id="failed-jobs-card" class="card">
+  <header class="card-header">
+    <p class="card-header-title">
+      Failed Jobs
+      <button id="refresh-failed-jobs-btn" class="button is-white" (click)="getFailedJobs()">
+        <span class="icon">
+          <i class="fa fa-refresh" [class.fa-spin]="gettingFailedJobs" aria-hidden="true"></i>
+        </span>
+      </button>
+    </p>
+  </header>
+  <div class="card-content">
+    <div class="content">
+      <ng-container *ngIf="(failedJobs$ | async) as failedJobs; else loadingFailedJobs">
+        <ng-container *ngIf="failedJobs.toString(); else noFailedJobs">
+          <article class="message">
+            <div class="message-body">
+              <p id="failed-jobs" [class]="getFailedJobsClass(failedJobs)">{{failedJobs}}</p>
+            </div>
+          </article>
+        </ng-container>
+        <ng-template #noFailedJobs>
+          <article id="no-failed-jobs-alert" class="message is-danger">
+            <div class="message-body">
+              <p>Unable to get Servlet Errors</p>
+            </div>
+          </article>
+        </ng-template>
+      </ng-container>
+      <ng-template #loadingFailedJobs>
+        <article id="loading-failed-jobs-alert" class="message is-info">
+          <div class="message-body">
+            <p>...</p>
+          </div>
+        </article>
+      </ng-template>
+    </div>
+  </div>
+</div>

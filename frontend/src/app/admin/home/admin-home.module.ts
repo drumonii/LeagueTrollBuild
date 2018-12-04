@@ -3,26 +3,22 @@ import { CommonModule } from '@angular/common';
 
 import { AdminHomeRoutingModule } from './admin-home-routing.module';
 import { AdminHomePage } from './admin-home.page';
-import { CpuUsageComponent } from './cpu-usage.component';
-import { FailedJobsComponent } from './failed-jobs.component';
-import { MemoryUsageComponent } from './memory-usage.component';
-import { ServletErrorComponent } from './servlet-error.component';
-import { AdminHomeService } from './admin-home.service';
+import { CpuUsageModule } from './cpu-usage.module';
+import { FailedJobsModule } from './failed-jobs.module';
+import { MemoryUsageModule } from './memory-usage.module';
+import { ServletErrorModule } from './servlet-error.module';
 
 @NgModule({
   imports: [
     CommonModule,
-    AdminHomeRoutingModule
+    AdminHomeRoutingModule,
+    CpuUsageModule,
+    FailedJobsModule,
+    MemoryUsageModule,
+    ServletErrorModule
   ],
   declarations: [
-    AdminHomePage,
-    CpuUsageComponent,
-    FailedJobsComponent,
-    MemoryUsageComponent,
-    ServletErrorComponent
-  ],
-  providers: [
-    AdminHomeService
+    AdminHomePage
   ]
 })
 export class AdminHomeModule { }
