@@ -61,6 +61,11 @@ describe('AdminHeaderComponent', () => {
       expect(batchNavbarItem.nativeElement.textContent.trim()).toBe('Batch');
       const batchNavbarItemLink = batchNavbarItem.injector.get(RouterLinkWithHref);
       expect(batchNavbarItemLink.href).toBe('/admin/batch');
+
+      const flywayNavbarItem = fixture.debugElement.query(By.css('#flyway-navbar-item'));
+      expect(flywayNavbarItem.nativeElement.textContent.trim()).toBe('Flyway');
+      const flywayNavbarItemLink = flywayNavbarItem.injector.get(RouterLinkWithHref);
+      expect(flywayNavbarItemLink.href).toBe('/admin/flyway');
     });
 
     it('should show navbar end dropdown with logout', () => {

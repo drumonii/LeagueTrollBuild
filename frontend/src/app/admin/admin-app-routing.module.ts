@@ -14,6 +14,7 @@ const routes: Routes = [
       { path: '', pathMatch: 'full', canActivate: [AdminGuard], loadChildren: './home/admin-home.module#AdminHomeModule' },
       { path: 'login', canActivate: [AdminAlreadyLoggedInGuard], loadChildren: './login/admin-login.module#AdminLoginModule' },
       { path: 'batch', canActivate: [AdminGuard], loadChildren: './batch/admin-batch.module#AdminBatchModule' },
+      { path: 'flyway', canActivate: [AdminGuard], loadChildren: './flyway/flyway.module#FlywayModule' },
     ]
   }
 ];
