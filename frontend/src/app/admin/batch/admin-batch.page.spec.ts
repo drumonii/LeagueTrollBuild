@@ -49,7 +49,7 @@ describe('AdminBatchPage', () => {
             version: 2,
             createTime: '2018-11-02T20:26:21.475',
             startTime: '2018-11-02T20:26:21.478',
-            endTime: '2018-11-02T20:31:29.558',
+            endTime: null,
             status: 'STARTED',
             exitCode: 'STARTED',
             exitMessage: '',
@@ -263,7 +263,7 @@ describe('AdminBatchPage', () => {
             version: 2,
             name: 'versionsRetrievalJobStep',
             startTime: '2018-08-20T22:20:47.045',
-            endTime: '2018-08-20T22:20:53.718',
+            endTime: null,
             status: 'STARTED',
             commitCount: 0,
             readCount: 0,
@@ -352,7 +352,7 @@ describe('AdminBatchPage', () => {
       const batchJob0StatusColumn = batchJob0Columns[headersIndexes.status];
       expect(batchJob0StatusColumn.nativeElement.classList.contains('has-text-warning')).toBe(true);
       const batchJob0CompletionColumn = batchJob0Columns[headersIndexes.completionTime];
-      expect(batchJob0CompletionColumn.nativeElement.textContent.trim()).toBe('5.13 min');
+      expect(batchJob0CompletionColumn.nativeElement.textContent.trim()).toBe('');
 
       // versionsRetrievalJob - FAILED row
       const batchJobRow1 = getVersionsRetrievalJobRow();

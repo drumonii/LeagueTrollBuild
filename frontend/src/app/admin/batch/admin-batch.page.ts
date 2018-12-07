@@ -118,6 +118,9 @@ export class AdminBatchPage implements OnInit {
   }
 
   getCompletionTime(startTime: string, endTime: string): string {
+    if (!endTime) {
+      return '';
+    }
     const startDate = new Date(startTime);
     const endDate = new Date(endTime);
     const diffInMs = Math.abs(endDate.getTime() - startDate.getTime());
