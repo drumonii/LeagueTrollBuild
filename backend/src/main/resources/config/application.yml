@@ -47,7 +47,7 @@ spring:
   resources:
     cache:
       cachecontrol:
-        max-age: 1h # (3600s)
+        max-age: 31536000s # (1 year)
   # JMX
   jmx:
     enabled: false
