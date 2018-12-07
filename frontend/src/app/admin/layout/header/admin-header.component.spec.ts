@@ -123,6 +123,7 @@ describe('AdminHeaderComponent', () => {
 
       fixture.detectChanges();
 
+      expect(fixture.debugElement.query(By.css('#burger-collapse'))).toBeFalsy();
       expect(fixture.debugElement.query(By.css('#authenticated-admin-navbar-end'))).toBeFalsy();
     }));
 

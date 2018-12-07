@@ -4,8 +4,8 @@
       <a id="admin-header-title" class="navbar-item" routerLink="/admin/login">
         {{header}}
       </a>
-      <div id="burger-collapse" class="navbar-burger burger" [class.is-active]="isAdminCollapsed" data-target="admin-nav"
-        (click)="toggleAdminCollapse()">
+      <div id="burger-collapse" class="navbar-burger burger" [class.is-active]="isAdminCollapsed"
+        *ngIf="(adminUserDetails$ | async)" data-target="admin-nav" (click)="toggleAdminCollapse()">
         <span></span>
         <span></span>
         <span></span>
