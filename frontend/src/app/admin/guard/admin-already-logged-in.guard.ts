@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
@@ -11,22 +11,16 @@ export class AdminAlreadyLoggedInGuard implements CanActivate {
 
   constructor(private authService: AdminAuthService, private router: Router) {}
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> {
     return this.authService.isAuthenticated()
       .pipe(
         take(1),
-        map((isAdminLoggedIn) => {
-          if (isAdminLoggedIn) {
-            this.redirectToAdminHome();
-            return false;
-          }
-          return true;
-        })
+        map((isAdminLoggedIn) => !isAdminLoggedIn || this.redirectToAdminHome())
       );
   }
 
-  private redirectToAdminHome() {
-    this.router.navigate(['/admin']);
+  private redirectToAdminHome(): UrlTree {
+    return this.router.createUrlTree(['/admin']);
   }
 
 }

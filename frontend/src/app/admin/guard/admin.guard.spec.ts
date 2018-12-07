@@ -17,7 +17,7 @@ describe('AdminGuard', () => {
   });
 
   beforeEach(inject([Router], (router: Router) => {
-    spyOn(router, 'navigate');
+    spyOn(router, 'createUrlTree');
   }));
 
   it('should return false and redirect to / if admin is not authenticated',
@@ -25,8 +25,8 @@ describe('AdminGuard', () => {
     spyOn(authService, 'isAuthenticated').and.returnValue(of(false));
 
     guard.canActivate(null, null).subscribe(canActivate => {
-      expect(canActivate).toBe(false);
-      expect(router.navigate).toHaveBeenCalledWith(['/']);
+      expect(canActivate).toBe(router.createUrlTree(['/champions']));
+      expect(router.createUrlTree).toHaveBeenCalledWith(['/champions']);
     });
   }));
 
@@ -36,7 +36,7 @@ describe('AdminGuard', () => {
 
     guard.canActivate(null, null).subscribe(canActivate => {
       expect(canActivate).toBe(true);
-      expect(router.navigate).not.toHaveBeenCalled();
+      expect(router.createUrlTree).not.toHaveBeenCalled();
     });
   }));
 

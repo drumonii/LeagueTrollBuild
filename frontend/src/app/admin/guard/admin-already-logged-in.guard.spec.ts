@@ -17,7 +17,7 @@ describe('AdminAlreadyLoggedInGuard', () => {
   });
 
   beforeEach(inject([Router], (router: Router) => {
-    spyOn(router, 'navigate');
+    spyOn(router, 'createUrlTree');
   }));
 
   it('should return false and redirect to /admin if admin is already logged in',
@@ -25,8 +25,8 @@ describe('AdminAlreadyLoggedInGuard', () => {
     spyOn(authService, 'isAuthenticated').and.returnValue(of(true));
 
     guard.canActivate(null, null).subscribe(canActivate => {
-      expect(canActivate).toBe(false);
-      expect(router.navigate).toHaveBeenCalledWith(['/admin']);
+      expect(canActivate).toBe(router.createUrlTree(['/admin']));
+      expect(router.createUrlTree).toHaveBeenCalledWith(['/admin']);
     });
   }));
 
@@ -36,7 +36,7 @@ describe('AdminAlreadyLoggedInGuard', () => {
 
     guard.canActivate(null, null).subscribe(canActivate => {
       expect(canActivate).toBe(true);
-      expect(router.navigate).not.toHaveBeenCalled();
+      expect(router.createUrlTree).not.toHaveBeenCalled();
     });
   }));
 
