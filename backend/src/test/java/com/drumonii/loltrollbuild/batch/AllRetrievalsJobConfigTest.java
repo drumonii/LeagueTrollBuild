@@ -67,6 +67,7 @@ public class AllRetrievalsJobConfigTest {
 		JobExecution jobExecution = jobLauncherTestUtils.launchJob(jobParameters);
 		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
 		assertThat(jobExecution.getJobParameters().getString(LATEST_PATCH_KEY)).isEqualTo(latestVersion.getPatch());
+		assertThat(jobExecution.getJobParameters().getString("another_param")).isNotNull();
 		assertThat(jobExecution.getStepExecutions()).extracting(StepExecution::getStepName)
 				.containsOnly("versionsRetrievalJobStep", "mapsRetrievalJobStep", "summonerSpellsRetrievalJobStep",
 						"championsRetrievalJobStep", "itemsRetrievalJobStep");
@@ -87,7 +88,9 @@ public class AllRetrievalsJobConfigTest {
 	}
 
 	private JobParameters getJobParameters() {
-		return jobLauncherTestUtils.getJob().getJobParametersIncrementer().getNext(new JobParameters());
+		JobParametersBuilder jobParametersBuilder = new JobParametersBuilder()
+				.addString("another_param", "another_param_value");
+		return jobLauncherTestUtils.getJob().getJobParametersIncrementer().getNext(jobParametersBuilder.toJobParameters());
 	}
 
 	@TestConfiguration

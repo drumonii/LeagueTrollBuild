@@ -123,7 +123,7 @@ public class AllRetrievalsJobConfig {
 		@Override
 		public JobParameters getNext(JobParameters parameters) {
 			Version latestVersion = versionsService.getLatestVersion();
-			JobParametersBuilder jobParametersBuilder = new JobParametersBuilder();
+			JobParametersBuilder jobParametersBuilder = new JobParametersBuilder(parameters);
 			if (latestVersion != null) {
 				jobParametersBuilder.addString(LATEST_PATCH_KEY, latestVersion.getPatch());
 			}
