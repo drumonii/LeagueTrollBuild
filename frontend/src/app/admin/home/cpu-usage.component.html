@@ -16,9 +16,10 @@
           <article class="message">
             <div class="message-body">
               <p id="cpu-usage">
-                <span [class]="getCpuUsageClass(cpuUsage.percentage)">{{cpuUsage.percentage}}%</span>
+                <span id="cpu-usage-perc" [class]="getCpuUsageClass(cpuUsage.percentage)">{{cpuUsage.percentage}}%</span>
                   of {{cpuUsage.cpus}} CPUs
-              </p>            </div>
+              </p>
+            </div>
           </article>
         </ng-container>
         <ng-template #noCpuUsage>

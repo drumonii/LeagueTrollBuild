@@ -27,19 +27,73 @@ describe('CpuUsageComponent', () => {
   describe('loaded cpu usage', () => {
 
     beforeEach(inject([CpuUsageService], (service: CpuUsageService) => {
-      spyOn(service, 'getCpuUsagePerc').and.returnValue(of('46.172'));
       spyOn(service, 'getCpuCount').and.returnValue(of(2.0));
-
-      fixture.detectChanges();
     }));
 
-    it('should show cpu usage', () => {
-      const cpuUsage = fixture.debugElement.query(By.css('#cpu-usage'));
-      expect(cpuUsage.nativeElement.textContent.trim()).toBe('46.172% of 2 CPUs');
+    describe('with high cpu usage', () => {
 
+      beforeEach(inject([CpuUsageService], (service: CpuUsageService) => {
+        spyOn(service, 'getCpuUsagePerc').and.returnValue(of('87.734'));
+
+        fixture.detectChanges();
+      }));
+
+      it('should show cpu usage', () => {
+        const cpuUsage = fixture.debugElement.query(By.css('#cpu-usage'));
+        expect(cpuUsage.nativeElement.textContent.trim()).toBe('87.734% of 2 CPUs');
+
+        const cpuUsagePercentage = fixture.debugElement.query(By.css('#cpu-usage-perc'));
+        expect(cpuUsagePercentage.nativeElement.classList.contains('has-text-danger')).toBe(true);
+
+        expectNotRefreshing();
+      });
+
+    });
+
+    describe('with medium cpu usage', () => {
+
+      beforeEach(inject([CpuUsageService], (service: CpuUsageService) => {
+        spyOn(service, 'getCpuUsagePerc').and.returnValue(of('35.921'));
+
+        fixture.detectChanges();
+      }));
+
+      it('should show cpu usage', () => {
+        const cpuUsage = fixture.debugElement.query(By.css('#cpu-usage'));
+        expect(cpuUsage.nativeElement.textContent.trim()).toBe('35.921% of 2 CPUs');
+
+        const cpuUsagePercentage = fixture.debugElement.query(By.css('#cpu-usage-perc'));
+        expect(cpuUsagePercentage.nativeElement.classList.contains('has-text-warning')).toBe(true);
+
+        expectNotRefreshing();
+      });
+
+    });
+
+    describe('with low cpu usage', () => {
+
+      beforeEach(inject([CpuUsageService], (service: CpuUsageService) => {
+        spyOn(service, 'getCpuUsagePerc').and.returnValue(of('10.012'));
+
+        fixture.detectChanges();
+      }));
+
+      it('should show cpu usage', () => {
+        const cpuUsage = fixture.debugElement.query(By.css('#cpu-usage'));
+        expect(cpuUsage.nativeElement.textContent.trim()).toBe('10.012% of 2 CPUs');
+
+        const cpuUsagePercentage = fixture.debugElement.query(By.css('#cpu-usage-perc'));
+        expect(cpuUsagePercentage.nativeElement.classList.contains('has-text-black')).toBe(true);
+
+        expectNotRefreshing();
+      });
+
+    });
+
+    function expectNotRefreshing() {
       const refreshServletErrorsBtn = fixture.debugElement.query(By.css('#refresh-cpu-usage-btn'));
       expect(refreshServletErrorsBtn.query(By.css('i')).classes['fa-spin']).toBeFalsy();
-    });
+    }
 
   });
 

@@ -30,7 +30,7 @@ export class CpuUsageComponent implements OnInit {
       );
   }
 
-  getCpuUsageClass(cpuUsagePercentage: number): string {
+  getCpuUsageClass(cpuUsagePercentage: any): string {
     if (cpuUsagePercentage >= 50) {
       return 'has-text-danger';
     } else if (cpuUsagePercentage >= 25) {
