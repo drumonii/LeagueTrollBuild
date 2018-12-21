@@ -9,8 +9,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static com.drumonii.loltrollbuild.util.RandomizeUtil.getRandom;
-import static com.drumonii.loltrollbuild.util.RandomizeUtil.getRandoms;
+import static com.drumonii.loltrollbuild.util.RandomizeUtil.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(JUnit4.class)
@@ -74,6 +73,16 @@ public class RandomizeUtilTest {
 		} catch (Exception e) {
 			assertThat(e).isInstanceOf(IllegalArgumentException.class);
 		}
+	}
+
+	@Test
+	public void getsRandomLong() {
+		assertThat(getRandomLong()).isNotZero();
+	}
+
+	@Test
+	public void getsRandomInt() {
+		assertThat(getRandomInt()).isNotZero();
 	}
 
 }

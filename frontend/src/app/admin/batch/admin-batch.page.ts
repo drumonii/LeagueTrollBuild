@@ -39,12 +39,18 @@ export class AdminBatchPage implements OnInit {
     }
   ];
 
+  hasFailedAllRetrievalsJob$: Observable<boolean>;
+  minutesAgo = 5;
+  restartingAllRetrievalsJob: boolean;
+
   constructor(private batchService: AdminBatchService, private titleService: TitleService) {}
 
   ngOnInit() {
     this.setTitle();
 
     this.setPage(this.page);
+
+    this.checkRecentLatestAllRetrievalsJob();
   }
 
   private setTitle() {
@@ -88,24 +94,12 @@ export class AdminBatchPage implements OnInit {
     return sorts;
   }
 
-  getStatusCss({ row, column, value }): DatatableCss | string {
-    if (row && column && value) {
-      return {
-        'has-text-success': value === 'COMPLETED',
-        'has-text-danger': value === 'FAILED',
-        'has-text-warning': value === 'STARTED'
-      };
-    }
-    switch (value) {
-      case 'COMPLETED':
-        return 'has-text-success';
-      case 'FAILED':
-        return 'has-text-danger';
-      case 'STARTED':
-        return 'has-text-warning';
-      default:
-        return '';
-    }
+  getStatusClass({ row, column, value }): DatatableCss {
+    return {
+      'has-text-success': value === 'COMPLETED',
+      'has-text-danger': value === 'FAILED',
+      'has-text-warning': value === 'STARTED'
+    };
   }
 
   toggleExpandRow(row): void {
@@ -126,6 +120,23 @@ export class AdminBatchPage implements OnInit {
     const diffInMs = Math.abs(endDate.getTime() - startDate.getTime());
     const diffInMinutes = (diffInMs / 1000) / 60;
     return `${diffInMinutes.toFixed(2)} min`;
+  }
+
+  checkRecentLatestAllRetrievalsJob(): void {
+    this.hasFailedAllRetrievalsJob$ = this.batchService.hasFailedAllRetrievalsJob(this.minutesAgo);
+  }
+
+  restartAllRetrievalsJob(): void {
+    this.restartingAllRetrievalsJob = true;
+    this.batchService.restartAllRetrievalsJob()
+      .pipe(
+        finalize(() => {
+          this.restartingAllRetrievalsJob = false;
+          this.getBatchJobInstances({ page: this.page.offset, size: this.page.limit, sort: ['jobExecution.startTime,desc'] });
+          this.checkRecentLatestAllRetrievalsJob();
+        })
+      )
+      .subscribe();
   }
 
 }

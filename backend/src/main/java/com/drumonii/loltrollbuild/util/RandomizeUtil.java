@@ -51,4 +51,22 @@ public class RandomizeUtil {
 		return randoms;
 	}
 
+	/**
+	 * Gets a random integer as a long.
+	 *
+	 * @return the random integer as a long
+	 */
+	public static long getRandomLong() {
+		return getRandomInt();
+	}
+
+	/**
+	 * Gets a random integer.
+	 *
+	 * @return the random integer
+	 */
+	public static int getRandomInt() {
+		return RANDOM.nextInt();
+	}
+
 }

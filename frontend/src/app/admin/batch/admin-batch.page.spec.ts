@@ -12,6 +12,7 @@ import { TitleService } from '@service/title.service';
 import { BatchJobInstance } from '@admin-model/batch-job-instance';
 import { Paginated } from '@admin-model/paginated';
 import { BatchStepExecution } from '@admin-model/batch-step-execution';
+import { BatchJobExecution } from '@admin-model/batch-job-execution';
 
 describe('AdminBatchPage', () => {
   let component: AdminBatchPage;
@@ -405,11 +406,80 @@ describe('AdminBatchPage', () => {
       return allRetrievalsJobRow.queryAll(By.css('.datatable-body-cell'));
     }
 
-    function expectInitialCall(batchService: AdminBatchService) {
+  });
+
+  describe('has failed all retrievals job', () => {
+
+    const batchJobInstances: Paginated<BatchJobInstance> = {
+      content: [],
+      pageable: {
+        sort: {
+          sorted: true,
+          unsorted: false,
+          empty: false
+        },
+        offset: 20,
+        pageNumber: 0,
+        pageSize: 20,
+        unpaged: false,
+        paged: true
+      },
+      totalElements: 0,
+      totalPages: 0,
+      last: true,
+      number: 0,
+      size: 20,
+      sort: {
+        sorted: true,
+        unsorted: false,
+        empty: false
+      },
+      numberOfElements: 0,
+      first: true,
+      empty: false
+    };
+
+    const batchJobExecution: BatchJobExecution = {
+      id: 1,
+      version: 1,
+      createTime: '2018-12-19T10:22:35.586',
+      startTime: '2018-12-10:22:35.6',
+      endTime: '2018-12-10:22:08.692',
+      status: 'COMPLETED',
+      exitCode: 'COMPLETED',
+      exitMessage: '',
+      lastUpdated: '2018-12-10:22:08.692'
+    };
+
+    beforeEach(inject([AdminBatchService], (batchService: AdminBatchService) => {
+      spyOn(batchService, 'getBatchJobInstances').and.returnValue(of(batchJobInstances));
+      spyOn(batchService, 'hasFailedAllRetrievalsJob').and.returnValue(of(true));
+      spyOn(batchService, 'restartAllRetrievalsJob').and.returnValue(of(batchJobExecution));
+
+      fixture.detectChanges();
+    }));
+
+    it('should show the recent failed all retrievals job alert', inject([AdminBatchService], (batchService: AdminBatchService) => {
+      expect(fixture.debugElement.query(By.css('#failed-job-alert'))).toBeTruthy();
+
+      const restartJobBtn = fixture.debugElement.query(By.css('#restart-job-btn'));
+      expect(restartJobBtn.nativeElement.textContent.trim()).toBe('Restart');
+      restartJobBtn.triggerEventHandler('click', null);
+
+      fixture.detectChanges();
+
+      expect(batchService.restartAllRetrievalsJob).toHaveBeenCalled();
+      expect(batchService.hasFailedAllRetrievalsJob).toHaveBeenCalledTimes(2);
+      expect(batchService.hasFailedAllRetrievalsJob).toHaveBeenCalledWith(component.minutesAgo);
       expect(batchService.getBatchJobInstances)
         .toHaveBeenCalledWith({ page: component.page.offset, size: component.page.limit, sort: ['jobExecution.startTime,desc'] });
-    }
+    }));
 
   });
+
+  function expectInitialCall(batchService: AdminBatchService) {
+    expect(batchService.getBatchJobInstances)
+      .toHaveBeenCalledWith({ page: component.page.offset, size: component.page.limit, sort: ['jobExecution.startTime,desc'] });
+  }
 
 });

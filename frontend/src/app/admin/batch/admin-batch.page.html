@@ -9,6 +9,16 @@
         </span>
       </button>
     </h4>
+    <article id="failed-job-alert" class="message is-danger" *ngIf="(hasFailedAllRetrievalsJob$ | async)">
+      <div class="message-body">
+        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+        The most recent allRetrievalsJob run failed or has been hanging for more than {{minutesAgo}} minutes ago.
+        Try restarting the allRetrievalsJob manually.
+        <button id="restart-job-btn" class="button" [class.is-loading]="restartingAllRetrievalsJob" (click)="restartAllRetrievalsJob()">
+          Restart
+        </button>
+      </div>
+    </article>
     <ngx-datatable
       #batchJobsDatatable
       id="batch-jobs-datatable"
@@ -52,7 +62,7 @@
                   <td>{{stepExecution.startTime}}</td>
                   <td>{{stepExecution.endTime}}</td>
                   <td>{{getCompletionTime(stepExecution.startTime, stepExecution.endTime)}}</td>
-                  <td [class]="getStatusCss({ value: stepExecution.status })">{{stepExecution.status}}</td>
+                  <td [ngClass]="getStatusClass({ value: stepExecution.status })">{{stepExecution.status}}</td>
                   <td>{{stepExecution.readCount}}</td>
                   <td>{{stepExecution.filterCount}}</td>
                   <td>{{stepExecution.writeCount}}</td>
@@ -83,7 +93,7 @@
       </ngx-datatable-column>
       <ngx-datatable-column name="Id" prop="id" [width]="40"></ngx-datatable-column>
       <ngx-datatable-column name="Name" prop="name"></ngx-datatable-column>
-      <ngx-datatable-column name="Status" prop="jobExecution.status" [cellClass]="getStatusCss"></ngx-datatable-column>
+      <ngx-datatable-column name="Status" prop="jobExecution.status" [cellClass]="getStatusClass"></ngx-datatable-column>
       <ngx-datatable-column name="Start Time" prop="jobExecution.startTime"></ngx-datatable-column>
       <ngx-datatable-column name="End Time" prop="jobExecution.endTime"></ngx-datatable-column>
       <ngx-datatable-column name="Completion Time" [sortable]="false">

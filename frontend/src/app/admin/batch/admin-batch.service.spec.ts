@@ -6,6 +6,7 @@ import { PageRequest } from '@admin-model/page-request';
 import { Paginated } from '@admin-model/paginated';
 import { BatchJobInstance } from '@admin-model/batch-job-instance';
 import { BatchStepExecution } from '@admin-model/batch-step-execution';
+import { BatchJobExecution } from '@admin-model/batch-job-execution';
 
 describe('AdminBatchService', () => {
   beforeEach(() => {
@@ -232,6 +233,80 @@ describe('AdminBatchService', () => {
       (service: AdminBatchService, httpMock: HttpTestingController) => {
       service.getStepExecutions(jobInstanceId).subscribe(batchStepExecutions => {
         expect(batchStepExecutions).toEqual([]);
+      });
+
+      const testReq = httpMock.expectOne(requestMatch);
+
+      testReq.error(new ErrorEvent('An unexpected error occurred'));
+    }));
+
+  });
+
+  describe('hasFailedAllRetrievalsJob', () => {
+
+    const minutesAgo = 10;
+
+    const requestMatch: RequestMatch = { method: 'GET', url: `/job-instances/has-failed-all-retrievals-job?minutes=${minutesAgo}` };
+
+    it('should determine if has failed all retrievals job', inject([AdminBatchService, HttpTestingController],
+      (service: AdminBatchService, httpMock: HttpTestingController) => {
+      const mockHasFailedAllRetrievalsJob = {
+        'hasFailedAllRetrievalsJob': false
+      };
+
+      service.hasFailedAllRetrievalsJob(minutesAgo).subscribe(hasFailedAllRetrievalsJob => {
+        expect(hasFailedAllRetrievalsJob).toBe(false);
+      });
+
+      const testReq = httpMock.expectOne(requestMatch);
+
+      testReq.flush(mockHasFailedAllRetrievalsJob);
+    }));
+
+    it('should determine if has failed all retrievals job with REST error', inject([AdminBatchService, HttpTestingController],
+      (service: AdminBatchService, httpMock: HttpTestingController) => {
+      service.hasFailedAllRetrievalsJob(minutesAgo).subscribe(hasFailedAllRetrievalsJob => {
+        expect(hasFailedAllRetrievalsJob).toBeNull();
+      });
+
+      const testReq = httpMock.expectOne(requestMatch);
+
+      testReq.error(new ErrorEvent('An unexpected error occurred'));
+    }));
+
+  });
+
+  describe('restartAllRetrievalsJob', () => {
+
+    const requestMatch: RequestMatch = { method: 'POST', url: '/job-instances/restart' };
+
+    it('should restart all retrievals job', inject([AdminBatchService, HttpTestingController],
+      (service: AdminBatchService, httpMock: HttpTestingController) => {
+      const mockBatchJobExecution: BatchJobExecution = {
+        id: 163,
+        version: 2,
+        createTime: '2018-12-19T22:35:35.586',
+        startTime: '2018-12-19T22:35:35.6',
+        endTime: '2018-12-19T22:36:08.692',
+        status: 'COMPLETED',
+        exitCode: 'COMPLETED',
+        exitMessage: '',
+        lastUpdated: '2018-12-19T22:36:08.692'
+      };
+
+      service.restartAllRetrievalsJob().subscribe(restartAllRetrievalsJob => {
+        expect(restartAllRetrievalsJob).toEqual(mockBatchJobExecution);
+      });
+
+      const testReq = httpMock.expectOne(requestMatch);
+
+      testReq.flush(mockBatchJobExecution);
+    }));
+
+    it('should restart all retrievals job with REST error', inject([AdminBatchService, HttpTestingController],
+      (service: AdminBatchService, httpMock: HttpTestingController) => {
+      service.restartAllRetrievalsJob().subscribe(restartAllRetrievalsJob => {
+        expect(restartAllRetrievalsJob).toBeNull();
       });
 
       const testReq = httpMock.expectOne(requestMatch);
