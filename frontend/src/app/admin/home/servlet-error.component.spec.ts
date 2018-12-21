@@ -26,6 +26,10 @@ describe('ServletErrorComponent', () => {
 
   describe('loaded servlet errors', () => {
 
+    afterEach(() => {
+      expectNotRefreshing();
+    });
+
     describe('with 0 servlet errors', () => {
 
       const servletErrorsCount = 0;
@@ -39,9 +43,7 @@ describe('ServletErrorComponent', () => {
       it('should show servlet errors', () => {
         const servletErrors = fixture.debugElement.query(By.css('#servlet-errors'));
         expect(servletErrors.nativeElement.textContent.trim()).toBe(`${servletErrorsCount}`);
-        expect(servletErrors.nativeElement.classList.contains('has-text-black')).toBe(true);
-
-        expectNotRefreshing();
+        expect(servletErrors.nativeElement.classList).toContain('has-text-black');
       });
 
     });
@@ -59,7 +61,7 @@ describe('ServletErrorComponent', () => {
       it('should show servlet errors', () => {
         const servletErrors = fixture.debugElement.query(By.css('#servlet-errors'));
         expect(servletErrors.nativeElement.textContent.trim()).toBe(`${servletErrorsCount}`);
-        expect(servletErrors.nativeElement.classList.contains('has-text-danger')).toBe(true);
+        expect(servletErrors.nativeElement.classList).toContain('has-text-danger');
 
         expectNotRefreshing();
       });

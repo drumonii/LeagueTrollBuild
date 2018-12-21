@@ -26,6 +26,10 @@ describe('FailedJobsComponent', () => {
 
   describe('loaded failed jobs', () => {
 
+    afterEach(() => {
+      expectNotRefreshing();
+    });
+
     describe('with 0 failed jobs', () => {
 
       const failedJobsCount = 0;
@@ -39,9 +43,7 @@ describe('FailedJobsComponent', () => {
       it('should show failed jobs', () => {
         const failedJobs = fixture.debugElement.query(By.css('#failed-jobs'));
         expect(failedJobs.nativeElement.textContent.trim()).toBe(`${failedJobsCount}`);
-        expect(failedJobs.nativeElement.classList.contains('has-text-black')).toBe(true);
-
-        expectNotRefreshing();
+        expect(failedJobs.nativeElement.classList).toContain('has-text-black');
       });
 
     });
@@ -59,9 +61,7 @@ describe('FailedJobsComponent', () => {
       it('should show failed jobs', () => {
         const failedJobs = fixture.debugElement.query(By.css('#failed-jobs'));
         expect(failedJobs.nativeElement.textContent.trim()).toBe(`${failedJobsCount}`);
-        expect(failedJobs.nativeElement.classList.contains('has-text-danger')).toBe(true);
-
-        expectNotRefreshing();
+        expect(failedJobs.nativeElement.classList).toContain('has-text-danger');
       });
 
     });

@@ -26,6 +26,10 @@ describe('MemoryUsageComponent', () => {
 
   describe('loaded memory usage', () => {
 
+    afterEach(() => {
+      expectNotRefreshing();
+    });
+
     describe('with >= 512MB memory usage', () => {
 
       const mbInUseUsage = '512';
@@ -39,9 +43,7 @@ describe('MemoryUsageComponent', () => {
       it('should show memory usage', () => {
         const memoryUsage = fixture.debugElement.query(By.css('#memory-usage'));
         expect(memoryUsage.nativeElement.textContent.trim()).toBe(`${mbInUseUsage} MB`);
-        expect(memoryUsage.nativeElement.classList.contains('has-text-danger')).toBe(true);
-
-        expectNotRefreshing();
+        expect(memoryUsage.nativeElement.classList).toContain('has-text-danger');
       });
 
     });
@@ -59,9 +61,7 @@ describe('MemoryUsageComponent', () => {
       it('should show memory usage', () => {
         const memoryUsage = fixture.debugElement.query(By.css('#memory-usage'));
         expect(memoryUsage.nativeElement.textContent.trim()).toBe(`${mbInUseUsage} MB`);
-        expect(memoryUsage.nativeElement.classList.contains('has-text-warning')).toBe(true);
-
-        expectNotRefreshing();
+        expect(memoryUsage.nativeElement.classList).toContain('has-text-warning');
       });
 
     });
@@ -79,9 +79,7 @@ describe('MemoryUsageComponent', () => {
       it('should show memory usage', () => {
         const memoryUsage = fixture.debugElement.query(By.css('#memory-usage'));
         expect(memoryUsage.nativeElement.textContent.trim()).toBe(`${mbInUseUsage} MB`);
-        expect(memoryUsage.nativeElement.classList.contains('has-text-black')).toBe(true);
-
-        expectNotRefreshing();
+        expect(memoryUsage.nativeElement.classList).toContain('has-text-black');
       });
 
     });

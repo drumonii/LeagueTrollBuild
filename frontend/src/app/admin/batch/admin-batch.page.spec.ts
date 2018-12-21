@@ -351,7 +351,7 @@ describe('AdminBatchPage', () => {
       const batchJob0RowDetailColumn = batchJob0Columns[headersIndexes.rowDetail];
       expect(batchJob0RowDetailColumn.query(By.css('button')).nativeElement.disabled).toBeFalsy();
       const batchJob0StatusColumn = batchJob0Columns[headersIndexes.status];
-      expect(batchJob0StatusColumn.nativeElement.classList.contains('has-text-warning')).toBe(true);
+      expect(batchJob0StatusColumn.nativeElement.classList).toContain('has-text-warning');
       const batchJob0CompletionColumn = batchJob0Columns[headersIndexes.completionTime];
       expect(batchJob0CompletionColumn.nativeElement.textContent.trim()).toBe('');
 
@@ -361,7 +361,7 @@ describe('AdminBatchPage', () => {
       const batchJob1RowDetailColumn = batchJob1Columns[headersIndexes.rowDetail];
       expect(batchJob1RowDetailColumn.query(By.css('button')).nativeElement.disabled).toBeFalsy();
       const batchJob1StatusColumn = batchJob1Columns[headersIndexes.status];
-      expect(batchJob1StatusColumn.nativeElement.classList.contains('has-text-danger')).toBe(true);
+      expect(batchJob1StatusColumn.nativeElement.classList).toContain('has-text-danger');
       const batchJob1CompletionColumn = batchJob1Columns[headersIndexes.completionTime];
       expect(batchJob1CompletionColumn.nativeElement.textContent.trim()).toBe('0.11 min');
 
@@ -371,7 +371,7 @@ describe('AdminBatchPage', () => {
       const batchJob2RowDetailColumn = batchJob2Columns[headersIndexes.rowDetail];
       expect(batchJob2RowDetailColumn.query(By.css('button')).nativeElement.disabled).toBeTruthy();
       const batchJob2StatusColumn = batchJob2Columns[headersIndexes.status];
-      expect(batchJob2StatusColumn.nativeElement.classList.contains('has-text-success')).toBe(true);
+      expect(batchJob2StatusColumn.nativeElement.classList).toContain('has-text-success');
       const batchJob2CompletionColumn = batchJob2Columns[headersIndexes.completionTime];
       expect(batchJob2CompletionColumn.nativeElement.textContent.trim()).toBe('4.12 min');
     }

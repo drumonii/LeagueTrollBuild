@@ -30,6 +30,10 @@ describe('CpuUsageComponent', () => {
       spyOn(service, 'getCpuCount').and.returnValue(of(2.0));
     }));
 
+    afterEach(() => {
+      expectNotRefreshing();
+    });
+
     describe('with high cpu usage', () => {
 
       beforeEach(inject([CpuUsageService], (service: CpuUsageService) => {
@@ -43,9 +47,7 @@ describe('CpuUsageComponent', () => {
         expect(cpuUsage.nativeElement.textContent.trim()).toBe('87.734% of 2 CPUs');
 
         const cpuUsagePercentage = fixture.debugElement.query(By.css('#cpu-usage-perc'));
-        expect(cpuUsagePercentage.nativeElement.classList.contains('has-text-danger')).toBe(true);
-
-        expectNotRefreshing();
+        expect(cpuUsagePercentage.nativeElement.classList).toContain('has-text-danger');
       });
 
     });
@@ -63,9 +65,7 @@ describe('CpuUsageComponent', () => {
         expect(cpuUsage.nativeElement.textContent.trim()).toBe('35.921% of 2 CPUs');
 
         const cpuUsagePercentage = fixture.debugElement.query(By.css('#cpu-usage-perc'));
-        expect(cpuUsagePercentage.nativeElement.classList.contains('has-text-warning')).toBe(true);
-
-        expectNotRefreshing();
+        expect(cpuUsagePercentage.nativeElement.classList).toContain('has-text-warning');
       });
 
     });
@@ -83,9 +83,7 @@ describe('CpuUsageComponent', () => {
         expect(cpuUsage.nativeElement.textContent.trim()).toBe('10.012% of 2 CPUs');
 
         const cpuUsagePercentage = fixture.debugElement.query(By.css('#cpu-usage-perc'));
-        expect(cpuUsagePercentage.nativeElement.classList.contains('has-text-black')).toBe(true);
-
-        expectNotRefreshing();
+        expect(cpuUsagePercentage.nativeElement.classList).toContain('has-text-black');
       });
 
     });
