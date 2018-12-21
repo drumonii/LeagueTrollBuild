@@ -1,27 +1,22 @@
 package com.drumonii.loltrollbuild.rest.admin;
 
 import com.drumonii.loltrollbuild.annotation.WithMockAdminUser;
+import com.drumonii.loltrollbuild.test.batch.BatchDaoTestConfiguration;
 import com.drumonii.loltrollbuild.test.rest.WebMvcRestTest;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.batch.core.*;
-import org.springframework.batch.core.repository.dao.*;
-import org.springframework.batch.item.database.support.DataFieldMaxValueIncrementerFactory;
-import org.springframework.batch.item.database.support.DefaultDataFieldMaxValueIncrementerFactory;
-import org.springframework.batch.support.DatabaseType;
+import org.springframework.batch.core.repository.dao.JobExecutionDao;
+import org.springframework.batch.core.repository.dao.JobInstanceDao;
+import org.springframework.batch.core.repository.dao.StepExecutionDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.support.MetaDataAccessException;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-
-import javax.sql.DataSource;
 
 import static com.drumonii.loltrollbuild.config.Profiles.TESTING;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -29,6 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 @WebMvcRestTest(BatchJobInstancesRestController.class)
+@Import(BatchDaoTestConfiguration.class)
 @ActiveProfiles({ TESTING })
 public class BatchJobInstancesRestControllerTest {
 
@@ -97,46 +93,6 @@ public class BatchJobInstancesRestControllerTest {
 
 		mockMvc.perform(get("{apiPath}/job-instances/{jobInstanceId}", apiPath, -1))
 				.andExpect(status().isNotFound());
-	}
-
-	@TestConfiguration
-	static class BatchJobInstancesRestControllerTestConfiguration {
-
-		@Bean
-		public DataFieldMaxValueIncrementerFactory dataFieldMaxValueIncrementerFactory(DataSource dataSource) {
-			return new DefaultDataFieldMaxValueIncrementerFactory(dataSource);
-		}
-
-		@Bean
-		public JobInstanceDao jobInstanceDao(JdbcTemplate jdbcTemplate, DataSource dataSource,
-				DataFieldMaxValueIncrementerFactory dataFieldMaxValueIncrementerFactory) throws MetaDataAccessException {
-			JdbcJobInstanceDao jdbcJobInstanceDao = new JdbcJobInstanceDao();
-			jdbcJobInstanceDao.setJdbcTemplate(jdbcTemplate);
-			jdbcJobInstanceDao.setJobIncrementer(dataFieldMaxValueIncrementerFactory
-					.getIncrementer(DatabaseType.fromMetaData(dataSource).name(), "BATCH_JOB_SEQ"));
-			return jdbcJobInstanceDao;
-		}
-
-		@Bean
-		public JobExecutionDao jobExecutionDao(JdbcTemplate jdbcTemplate, DataSource dataSource,
-				DataFieldMaxValueIncrementerFactory dataFieldMaxValueIncrementerFactory) throws MetaDataAccessException {
-			JdbcJobExecutionDao jdbcJobExecutionDao = new JdbcJobExecutionDao();
-			jdbcJobExecutionDao.setJdbcTemplate(jdbcTemplate);
-			jdbcJobExecutionDao.setJobExecutionIncrementer(dataFieldMaxValueIncrementerFactory
-					.getIncrementer(DatabaseType.fromMetaData(dataSource).name(), "BATCH_JOB_EXECUTION_SEQ"));
-			return jdbcJobExecutionDao;
-		}
-
-		@Bean
-		public StepExecutionDao stepExecutionDao(JdbcTemplate jdbcTemplate, DataSource dataSource,
-				DataFieldMaxValueIncrementerFactory dataFieldMaxValueIncrementerFactory) throws MetaDataAccessException {
-			JdbcStepExecutionDao jdbcStepExecutionDao = new JdbcStepExecutionDao();
-			jdbcStepExecutionDao.setJdbcTemplate(jdbcTemplate);
-			jdbcStepExecutionDao.setStepExecutionIncrementer(dataFieldMaxValueIncrementerFactory
-					.getIncrementer(DatabaseType.fromMetaData(dataSource).name(), "BATCH_STEP_EXECUTION_SEQ"));
-			return jdbcStepExecutionDao;
-		}
-
 	}
 
 }
