@@ -28,4 +28,18 @@ public class AdminControllerTest {
                 .andExpect(forwardedUrl("/index.html"));
     }
 
+    @WithMockAdminUser
+    @Test
+    public void adminBatch() throws Exception {
+        mockMvc.perform(get("/admin/batch"))
+                .andExpect(forwardedUrl("/index.html"));
+    }
+
+    @WithMockAdminUser
+    @Test
+    public void adminFlyway() throws Exception {
+        mockMvc.perform(get("/admin/flyway"))
+                .andExpect(forwardedUrl("/index.html"));
+    }
+
 }
