@@ -12,7 +12,7 @@ import org.springframework.jdbc.support.MetaDataAccessException;
 import javax.sql.DataSource;
 
 @TestConfiguration
-public class BatchDaoTestConfiguration {
+public class BatchDaoTestConfig {
 
     @Bean
     public DataFieldMaxValueIncrementerFactory dataFieldMaxValueIncrementerFactory(DataSource dataSource) {

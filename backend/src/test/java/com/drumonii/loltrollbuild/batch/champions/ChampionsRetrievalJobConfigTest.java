@@ -36,7 +36,7 @@ import static org.mockito.Mockito.verify;
 
 @RunWith(SpringRunner.class)
 @BatchTest(ChampionsRetrievalJobConfig.class)
-@Import(ChampionsRetrievalJobConfigTestConfiguration.class)
+@Import(ChampionsRetrievalJobTestConfig.class)
 public abstract class ChampionsRetrievalJobConfigTest {
 
 	@MockBean

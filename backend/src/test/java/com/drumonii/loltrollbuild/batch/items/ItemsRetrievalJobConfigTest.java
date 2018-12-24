@@ -37,7 +37,7 @@ import static org.mockito.Mockito.verify;
 
 @RunWith(SpringRunner.class)
 @BatchTest(ItemsRetrievalJobConfig.class)
-@Import(ItemsRetrievalJobConfigTestConfiguration.class)
+@Import(ItemsRetrievalJobTestConfig.class)
 public abstract class ItemsRetrievalJobConfigTest {
 
 	@MockBean

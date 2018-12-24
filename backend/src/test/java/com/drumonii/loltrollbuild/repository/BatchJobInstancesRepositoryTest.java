@@ -1,7 +1,7 @@
 package com.drumonii.loltrollbuild.repository;
 
 import com.drumonii.loltrollbuild.model.BatchJobInstance;
-import com.drumonii.loltrollbuild.test.batch.BatchDaoTestConfiguration;
+import com.drumonii.loltrollbuild.test.batch.BatchDaoTestConfig;
 import com.drumonii.loltrollbuild.test.repository.RepositoryTest;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,7 +22,7 @@ import java.util.Date;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
-@Import(BatchDaoTestConfiguration.class)
+@Import(BatchDaoTestConfig.class)
 @RepositoryTest
 public class BatchJobInstancesRepositoryTest {
 

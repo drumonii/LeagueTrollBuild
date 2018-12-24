@@ -27,7 +27,7 @@ import static org.springframework.data.domain.Sort.Direction.DESC;
 
 @RunWith(SpringRunner.class)
 @BatchTest(VersionsRetrievalJobConfig.class)
-@Import(VersionsRetrievalJobConfigTestConfiguration.class)
+@Import(VersionsRetrievalJobTestConfig.class)
 public abstract class VersionsRetrievalJobConfigTest {
 
 	@MockBean

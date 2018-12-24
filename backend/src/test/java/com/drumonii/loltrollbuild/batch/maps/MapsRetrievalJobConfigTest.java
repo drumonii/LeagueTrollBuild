@@ -37,7 +37,7 @@ import static org.mockito.Mockito.verify;
 
 @RunWith(SpringRunner.class)
 @BatchTest(MapsRetrievalJobConfig.class)
-@Import(MapsRetrievalJobConfigTestConfiguration.class)
+@Import(MapsRetrievalJobTestConfig.class)
 public abstract class MapsRetrievalJobConfigTest {
 
 	@MockBean

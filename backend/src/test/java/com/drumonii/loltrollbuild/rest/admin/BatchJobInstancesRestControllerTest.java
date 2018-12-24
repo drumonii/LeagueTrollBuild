@@ -1,7 +1,7 @@
 package com.drumonii.loltrollbuild.rest.admin;
 
 import com.drumonii.loltrollbuild.annotation.WithMockAdminUser;
-import com.drumonii.loltrollbuild.test.batch.BatchDaoTestConfiguration;
+import com.drumonii.loltrollbuild.test.batch.BatchDaoTestConfig;
 import com.drumonii.loltrollbuild.test.rest.WebMvcRestTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -43,7 +43,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 @WebMvcRestTest(BatchJobInstancesRestController.class)
-@Import(BatchDaoTestConfiguration.class)
+@Import(BatchDaoTestConfig.class)
 @ActiveProfiles({ TESTING })
 public class BatchJobInstancesRestControllerTest {
 

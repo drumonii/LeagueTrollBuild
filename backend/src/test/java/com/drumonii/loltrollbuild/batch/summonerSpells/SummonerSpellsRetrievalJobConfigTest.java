@@ -39,7 +39,7 @@ import static org.mockito.Mockito.verify;
 
 @RunWith(SpringRunner.class)
 @BatchTest(SummonerSpellsRetrievalJobConfig.class)
-@Import(SummonerSpellsRetrievalJobConfigTestConfiguration.class)
+@Import(SummonerSpellsRetrievalJobTestConfig.class)
 public abstract class SummonerSpellsRetrievalJobConfigTest {
 
 	@MockBean

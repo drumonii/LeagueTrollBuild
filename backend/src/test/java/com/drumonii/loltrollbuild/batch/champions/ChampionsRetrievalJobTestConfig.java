@@ -5,7 +5,7 @@ import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 
 @TestConfiguration
-public class ChampionsRetrievalJobConfigTestConfiguration {
+public class ChampionsRetrievalJobTestConfig {
 
 	@Bean
 	public JobLauncherTestUtils jobLauncherTestUtils() {
