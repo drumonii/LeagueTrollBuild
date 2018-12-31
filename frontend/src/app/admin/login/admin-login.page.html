@@ -2,21 +2,29 @@
   <div class="container">
     <div class="columns">
       <div class="column is-half is-offset-one-quarter">
-        <article id="login-bad-credentials-alert" class="message is-warning" *ngIf="badCredentials">
-          <div class="message-body">
-            Invalid username and password.
-          </div>
-        </article>
-        <article id="login-unexpected-error-alert" class="message is-danger" *ngIf="unexpectedError">
-          <div class="message-body">
-            An unexpected error occurred during authentication. Please try again later.
-          </div>
-        </article>
-        <article id="logged-out-alert" class="message is-success" *ngIf="loggedOut">
-          <div class="message-body">
-            You have been successfully logged out.
-          </div>
-        </article>
+        <ng-container [ngSwitch]="adminLoginState">
+          <ng-container *ngSwitchCase="'BAD_CREDENTIALS'">
+            <article id="login-bad-credentials-alert" class="message is-warning">
+              <div class="message-body">
+                Invalid username and password.
+              </div>
+            </article>
+          </ng-container>
+          <ng-container *ngSwitchCase="'UNEXPECTED_ERROR'">
+            <article id="login-unexpected-error-alert" class="message is-danger">
+              <div class="message-body">
+                An unexpected error occurred during authentication. Please try again later.
+              </div>
+            </article>
+          </ng-container>
+          <ng-container *ngSwitchCase="'LOGGED_OUT'">
+            <article id="logged-out-alert" class="message is-success">
+              <div class="message-body">
+                You have been successfully logged out.
+              </div>
+            </article>
+          </ng-container>
+        </ng-container>
         <form id="admin-login-form" [formGroup]="adminLoginForm" (ngSubmit)="onSubmit()">
           <div class="field">
             <p class="control has-icons-left">
@@ -50,7 +58,7 @@
           </div>
           <div class="field">
             <p class="control">
-              <button id="login-btn" class="button is-success" [class.is-loading]="isLoggingIn" type="submit" [disabled]="adminLoginForm.invalid">
+              <button id="login-btn" class="button is-success" [class.is-loading]="adminLoginState === 'LOGGING_IN'" type="submit" [disabled]="adminLoginForm.invalid">
                 Login
               </button>
             </p>

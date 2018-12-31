@@ -123,9 +123,6 @@ describe('AdminLoginPage', () => {
 
         spyOn(authService, 'loginAdmin').and.returnValue(of(failedLoginResponse));
 
-        component.unexpectedError = true;
-        component.loggedOut = true;
-
         const username = component.adminLoginForm.get('username');
         username.setValue('some_username'); username.markAsTouched();
 
@@ -154,9 +151,6 @@ describe('AdminLoginPage', () => {
 
       it('should show unexpected login error alert', inject([AdminAuthService, Router], (authService: AdminAuthService, router: Router) => {
         spyOn(authService, 'loginAdmin').and.returnValue(of(null));
-
-        component.badCredentials = true;
-        component.loggedOut = true;
 
         const username = component.adminLoginForm.get('username');
         username.setValue('some_username'); username.markAsTouched();
