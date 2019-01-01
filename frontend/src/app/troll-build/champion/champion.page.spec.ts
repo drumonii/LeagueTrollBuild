@@ -1077,7 +1077,7 @@ describe('ChampionPage', () => {
       const trollBuildItemsHeader = fixture.debugElement.query(By.css('.troll-build-items-header'));
       expect(trollBuildItemsHeader.nativeElement.textContent).toBe('Items');
       const trollBuildItems = fixture.debugElement.queryAll(By.css('.troll-build-item'));
-      expect(trollBuildItems.length).toBe(trollBuildItems.length);
+      expect(trollBuildItems.length).toBe(trollBuild.items.length);
       for (let i = 0; i < trollBuildItems.length; i++) {
         expect(trollBuildItems[i].attributes['data-tooltip']).toBe(trollBuild.items[i].name);
         const trollBuildItemImg = trollBuildItems[i].query(By.css('.troll-build-item-img'));
@@ -1087,7 +1087,7 @@ describe('ChampionPage', () => {
       const trollBuildSummonerSpellsHeader = fixture.debugElement.query(By.css('.troll-build-summoner-spells-header'));
       expect(trollBuildSummonerSpellsHeader.nativeElement.textContent).toBe('Summoner Spells');
       const trollBuildSummonerSpells = fixture.debugElement.queryAll(By.css('.troll-build-summoner-spell'));
-      expect(trollBuildSummonerSpells.length).toBe(trollBuildSummonerSpells.length);
+      expect(trollBuildSummonerSpells.length).toBe(trollBuild.summonerSpells.length);
       for (let i = 0; i < trollBuildSummonerSpells.length; i++) {
         expect(trollBuildSummonerSpells[i].attributes['data-tooltip']).toBe(trollBuild.summonerSpells[i].name);
         const trollBuildSummonerSpellsImg = trollBuildSummonerSpells[i].query(By.css('.troll-build-summoner-spells-img'));
