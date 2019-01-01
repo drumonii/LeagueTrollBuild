@@ -1072,8 +1072,9 @@ describe('ChampionPage', () => {
 
       // Maps
       const mapsSelect = fixture.debugElement.query(By.css('#map-select'));
-      expect(mapsSelect.nativeElement.selectedOptions.length).toBe(1);
-      expect(mapsSelect.nativeElement.selectedOptions[0].text)
+      expect(mapsSelect.nativeElement.selectedIndex)
+        .toBe(maps.findIndex(map => map.mapId === selectedMap));
+      expect(mapsSelect.nativeElement.options[mapsSelect.nativeElement.selectedIndex].text)
         .toBe(maps.find(map => map.mapId === selectedMap).mapName);
       const mapsOption = fixture.debugElement.queryAll(By.css('.map-option'));
       expect(mapsOption.map(mapOption => mapOption.nativeElement.textContent.trim()))

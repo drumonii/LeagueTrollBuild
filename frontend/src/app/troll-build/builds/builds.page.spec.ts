@@ -582,8 +582,7 @@ describe('BuildsPage', () => {
 
     // Maps
     const mapsSelect = fixture.debugElement.query(By.css('#map-select'));
-    expect(mapsSelect.nativeElement.selectedOptions.length).toBe(1);
-    expect(mapsSelect.nativeElement.selectedOptions[0].text).toBe(build.map.mapName);
+    expect(mapsSelect.nativeElement.options[0].text).toBe(build.map.mapName);
     const mapsOption = fixture.debugElement.query(By.css('.map-option'));
     expect(mapsOption.nativeElement.textContent.trim()).toBe(build.map.mapName);
 
