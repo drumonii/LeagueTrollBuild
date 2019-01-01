@@ -150,7 +150,9 @@ describe('ChampionsPage', () => {
 
       const championsSearch = fixture.debugElement.query(By.css('#champions-search-input'));
       championsSearch.nativeElement.value = 'maokai';
-      championsSearch.nativeElement.dispatchEvent(new Event('input'));
+      const inputEvent = document.createEvent('Event');
+      inputEvent.initEvent('input', false, false);
+      championsSearch.nativeElement.dispatchEvent(inputEvent);
 
       fixture.detectChanges();
 

@@ -910,7 +910,9 @@ describe('ChampionPage', () => {
         championServiceSpy.and.returnValue(of(trollBuild));
 
         mapSelect.nativeElement.value = mapSelect.nativeElement.options[i].value;
-        mapSelect.nativeElement.dispatchEvent(new Event('change'));
+        const changeEvent = document.createEvent('Event');
+        changeEvent.initEvent('change', false, false);
+        mapSelect.nativeElement.dispatchEvent(changeEvent);
 
         fixture.detectChanges();
 
@@ -951,7 +953,9 @@ describe('ChampionPage', () => {
         component.build = build;
 
         mapSelect.nativeElement.value = mapSelect.nativeElement.options[i].value;
-        mapSelect.nativeElement.dispatchEvent(new Event('change'));
+        const changeEvent = document.createEvent('Event');
+        changeEvent.initEvent('change', false, false);
+        mapSelect.nativeElement.dispatchEvent(changeEvent);
 
         newBuild.triggerEventHandler('click', null);
 
@@ -1014,7 +1018,9 @@ describe('ChampionPage', () => {
         })));
 
         mapSelect.nativeElement.value = mapSelect.nativeElement.options[i].value;
-        mapSelect.nativeElement.dispatchEvent(new Event('change'));
+        const changeEvent = document.createEvent('Event');
+        changeEvent.initEvent('change', false, false);
+        mapSelect.nativeElement.dispatchEvent(changeEvent);
 
         fixture.detectChanges();
 
