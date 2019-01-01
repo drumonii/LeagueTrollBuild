@@ -50,7 +50,9 @@ describe('MemoryUsageService', () => {
 
       const testReq = httpMock.expectOne(requestMatch);
 
-      testReq.error(new ErrorEvent('An unexpected error occurred'));
+      const errorEvent = document.createEvent('Event');
+      errorEvent.initEvent('ErrorEvent', false, false);
+      testReq.error(errorEvent as ErrorEvent);
     }));
 
   });

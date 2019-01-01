@@ -69,7 +69,9 @@ describe('ChampionService', () => {
 
       const testReq = httpMock.expectOne(requestMatch);
 
-      testReq.error(new ErrorEvent('An unexpected error occurred'));
+      const errorEvent = document.createEvent('Event');
+      errorEvent.initEvent('ErrorEvent', false, false);
+      testReq.error(errorEvent as ErrorEvent);
     }));
 
   });
@@ -304,7 +306,9 @@ describe('ChampionService', () => {
 
       const testReq = httpMock.expectOne(requestMatchWithMapId);
 
-      testReq.error(new ErrorEvent('An unexpected error occurred'));
+      const errorEvent = document.createEvent('Event');
+      errorEvent.initEvent('ErrorEvent', false, false);
+      testReq.error(errorEvent as ErrorEvent);
     }));
 
     it('should get a Troll Build without a Map Id and with REST error', inject([ChampionService, HttpTestingController],
@@ -315,7 +319,9 @@ describe('ChampionService', () => {
 
       const testReq = httpMock.expectOne(requestMatchWithoutMapId);
 
-      testReq.error(new ErrorEvent('An unexpected error occurred'));
+      const errorEvent = document.createEvent('Event');
+      errorEvent.initEvent('ErrorEvent', false, false);
+      testReq.error(errorEvent as ErrorEvent);
     }));
 
   });
@@ -350,7 +356,9 @@ describe('ChampionService', () => {
 
       const testReq = httpMock.expectOne(requestMatch);
 
-      testReq.error(new ErrorEvent('An unexpected error occurred'));
+      const errorEvent = document.createEvent('Event');
+      errorEvent.initEvent('ErrorEvent', false, false);
+      testReq.error(errorEvent as ErrorEvent);
     }));
 
   });
@@ -401,7 +409,9 @@ describe('ChampionService', () => {
       const testReq = httpMock.expectOne(requestMatch);
       expect(testReq.request.detectContentTypeHeader()).toBe('application/json');
 
-      testReq.error(new ErrorEvent('An unexpected error occurred'));
+      const errorEvent = document.createEvent('Event');
+      errorEvent.initEvent('ErrorEvent', false, false);
+      testReq.error(errorEvent as ErrorEvent);
     }));
 
   });

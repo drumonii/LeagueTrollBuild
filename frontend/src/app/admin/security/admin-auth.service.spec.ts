@@ -109,7 +109,9 @@ describe('AdminAuthService', () => {
       expect(testReq.request.headers.get('content-type')).toBe('application/x-www-form-urlencoded');
       expect(testReq.request.body).toEqual('username=some_username&password=some_password');
 
-      testReq.error(new ErrorEvent('An unexpected error occurred'));
+      const errorEvent = document.createEvent('Event');
+      errorEvent.initEvent('ErrorEvent', false, false);
+      testReq.error(errorEvent as ErrorEvent);
     }));
 
   });
@@ -141,7 +143,9 @@ describe('AdminAuthService', () => {
 
       const testReq = httpMock.expectOne(requestMatch);
 
-      testReq.error(new ErrorEvent('Authentication was not found'));
+      const errorEvent = document.createEvent('Event');
+      errorEvent.initEvent('ErrorEvent', false, false);
+      testReq.error(errorEvent as ErrorEvent);
     }));
 
   });
@@ -181,22 +185,27 @@ describe('AdminAuthService', () => {
       logoutTestReq.flush(mockSuccessfulLogoutResponse);
 
       const refreshTestReq = httpMock.expectOne(refreshRequestMatch);
-      refreshTestReq.error(new ErrorEvent('Not found'));
+
+      const errorEvent = document.createEvent('Event');
+      errorEvent.initEvent('ErrorEvent', false, false);
+      refreshTestReq.error(errorEvent as ErrorEvent);
     }));
 
     it('should remove adminUserDetails in localStorage with REST error',
       inject([AdminAuthService, HttpTestingController], (authService: AdminAuthService, httpMock: HttpTestingController) => {
-        authService.logoutAdmin().subscribe(logoutResponse => {
-          expect(logoutResponse).toBeNull();
-        });
+      authService.logoutAdmin().subscribe(logoutResponse => {
+        expect(logoutResponse).toBeNull();
+      });
 
-        const logoutTestReq = httpMock.expectOne(logoutRequestMatch);
-        expect(logoutTestReq.request.body).toEqual({});
+      const logoutTestReq = httpMock.expectOne(logoutRequestMatch);
+      expect(logoutTestReq.request.body).toEqual({});
 
-        logoutTestReq.error(new ErrorEvent('An unexpected error occurred'));
+      const errorEvent = document.createEvent('Event');
+      errorEvent.initEvent('ErrorEvent', false, false);
+      logoutTestReq.error(errorEvent as ErrorEvent);
 
-        const refreshTestReq = httpMock.expectOne(refreshRequestMatch);
-        refreshTestReq.error(new ErrorEvent('Not found'));
+      const refreshTestReq = httpMock.expectOne(refreshRequestMatch);
+      refreshTestReq.error(errorEvent as ErrorEvent);
     }));
 
   });

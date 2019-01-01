@@ -56,7 +56,9 @@ describe('BuildsService', () => {
 
       const testReq = httpMock.expectOne(requestMatch);
 
-      testReq.error(new ErrorEvent(`Unable to find a Build with Id: ${mockBuild.id}`), { status: 404 });
+      const errorEvent = document.createEvent('Event');
+      errorEvent.initEvent('ErrorEvent', false, false);
+      testReq.error(errorEvent as ErrorEvent, { status: 404 });
     }));
 
     it('should GET a build with REST error of 400 status', inject([BuildsService, HttpTestingController],
@@ -67,7 +69,9 @@ describe('BuildsService', () => {
 
       const testReq = httpMock.expectOne(requestMatch);
 
-      testReq.error(new ErrorEvent('champion: null'), { status: 400 });
+      const errorEvent = document.createEvent('Event');
+      errorEvent.initEvent('ErrorEvent', false, false);
+      testReq.error(errorEvent as ErrorEvent, { status: 400 });
     }));
 
   });
@@ -97,7 +101,9 @@ describe('BuildsService', () => {
 
       const testReq = httpMock.expectOne(requestMatch);
 
-      testReq.error(new ErrorEvent('An unexpected error occurred'));
+      const errorEvent = document.createEvent('Event');
+      errorEvent.initEvent('ErrorEvent', false, false);
+      testReq.error(errorEvent as ErrorEvent);
     }));
 
   });
