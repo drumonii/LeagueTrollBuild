@@ -7,8 +7,8 @@ import com.drumonii.loltrollbuild.riot.api.ChampionsResponse;
 import com.drumonii.loltrollbuild.riot.api.ItemsResponse;
 import com.drumonii.loltrollbuild.riot.api.MapsResponse;
 import com.drumonii.loltrollbuild.riot.api.SummonerSpellsResponse;
+import com.drumonii.loltrollbuild.test.json.JsonTestFilesUtil;
 import com.drumonii.loltrollbuild.test.rest.WebMvcRestTest;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,20 +16,16 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.io.IOException;
-import java.util.Collections;
 import java.util.List;
 
 import static com.drumonii.loltrollbuild.config.Profiles.DDRAGON;
 import static com.drumonii.loltrollbuild.config.Profiles.TESTING;
 import static com.drumonii.loltrollbuild.util.GameMapUtil.HOWLING_ABYSS_SID;
 import static com.drumonii.loltrollbuild.util.GameMapUtil.SUMMONERS_RIFT_SID;
-import static org.assertj.core.api.Assertions.fail;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.relaxedResponseFields;
@@ -80,37 +76,13 @@ public class ApiDocumentation {
 
 	@Before
 	public void before() {
-		ClassPathResource championsJsonResource = new ClassPathResource("champions_data_dragon.json");
-		try {
-			championsResponse = objectMapper.readValue(championsJsonResource.getFile(), ChampionsResponse.class);
-		} catch (IOException e) {
-			fail("Unable to unmarshal the Champions response.", e);
-		}
-		ClassPathResource itemsJsonResource = new ClassPathResource("items_data_dragon.json");
-		try {
-			itemsResponse = objectMapper.readValue(itemsJsonResource.getFile(), ItemsResponse.class);
-		} catch (IOException e) {
-			fail("Unable to unmarshal the Items response.", e);
-		}
-		ClassPathResource mapsJsonResource = new ClassPathResource("maps_data_dragon.json");
-		try {
-			mapsResponse = objectMapper.readValue(mapsJsonResource.getFile(), MapsResponse.class);
-		} catch (IOException e) {
-			fail("Unable to unmarshal the Maps response.", e);
-		}
-		ClassPathResource summonerSpellsJson = new ClassPathResource("summoners_data_dragon.json");
-		try {
-			summonerSpellsResponse = objectMapper.readValue(summonerSpellsJson.getFile(), SummonerSpellsResponse.class);
-		} catch (IOException e) {
-			fail("Unable to unmarshal the Summoner Spells response.", e);
-		}
-		ClassPathResource versionsJson = new ClassPathResource("versions_data_dragon.json");
-		try {
-			versions = objectMapper.readValue(versionsJson.getFile(), new TypeReference<List<Version>>() {});
-			versions.sort(Collections.reverseOrder());
-		} catch (IOException e) {
-			fail("Unable to unmarshal the Versions response.", e);
-		}
+		JsonTestFilesUtil jsonTestFilesUtil = new JsonTestFilesUtil(objectMapper);
+
+		championsResponse = jsonTestFilesUtil.getFullChampionsResponse();
+		itemsResponse = jsonTestFilesUtil.getItemsResponse();
+		mapsResponse = jsonTestFilesUtil.getMapsResponse();
+		summonerSpellsResponse = jsonTestFilesUtil.getSummonerSpellsResponse();
+		versions = jsonTestFilesUtil.getVersions();
 	}
 
 	/*

@@ -1,50 +1,25 @@
 package com.drumonii.loltrollbuild.rest;
 
 import com.drumonii.loltrollbuild.model.Build;
-import com.drumonii.loltrollbuild.riot.api.ChampionsResponse;
-import com.drumonii.loltrollbuild.riot.api.ItemsResponse;
-import com.drumonii.loltrollbuild.riot.api.MapsResponse;
-import com.drumonii.loltrollbuild.riot.api.SummonerSpellsResponse;
+import com.drumonii.loltrollbuild.test.json.JsonTestFilesUtil;
 import org.junit.Before;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.test.context.ActiveProfiles;
-
-import java.io.IOException;
 
 import static com.drumonii.loltrollbuild.config.Profiles.DDRAGON;
 import static com.drumonii.loltrollbuild.config.Profiles.TESTING;
 import static com.drumonii.loltrollbuild.util.GameMapUtil.SUMMONERS_RIFT_SID;
-import static org.assertj.core.api.Assertions.fail;
 
 @ActiveProfiles({ TESTING, DDRAGON })
 public class BuildsDdragonRestControllerTest extends BuildsRestControllerTest {
 
 	@Before
 	public void before() {
-		ClassPathResource championsJsonResource = new ClassPathResource("champion_data_dragon.json");
-		try {
-			championsResponse = objectMapper.readValue(championsJsonResource.getFile(), ChampionsResponse.class);
-		} catch (IOException e) {
-			fail("Unable to unmarshal the Champions response.", e);
-		}
-		ClassPathResource itemsJsonResource = new ClassPathResource("items_data_dragon.json");
-		try {
-			itemsResponse = objectMapper.readValue(itemsJsonResource.getFile(), ItemsResponse.class);
-		} catch (IOException e) {
-			fail("Unable to unmarshal the Items response.", e);
-		}
-		ClassPathResource mapsJsonResource = new ClassPathResource("maps_data_dragon.json");
-		try {
-			mapsResponse = objectMapper.readValue(mapsJsonResource.getFile(), MapsResponse.class);
-		} catch (IOException e) {
-			fail("Unable to unmarshal the Maps response.", e);
-		}
-		ClassPathResource summonerSpellsJson = new ClassPathResource("summoners_data_dragon.json");
-		try {
-			summonerSpellsResponse = objectMapper.readValue(summonerSpellsJson.getFile(), SummonerSpellsResponse.class);
-		} catch (IOException e) {
-			fail("Unable to unmarshal the Summoner Spells response.", e);
-		}
+		JsonTestFilesUtil jsonTestFilesUtil = new JsonTestFilesUtil(objectMapper);
+
+		championsResponse = jsonTestFilesUtil.getFullChampionsResponse();
+		itemsResponse = jsonTestFilesUtil.getItemsResponse();
+		mapsResponse = jsonTestFilesUtil.getMapsResponse();
+		summonerSpellsResponse = jsonTestFilesUtil.getSummonerSpellsResponse();
 
 		Build build = new Build();
 		build.setChampionId(championsResponse.getChampions().get("Nasus").getId());

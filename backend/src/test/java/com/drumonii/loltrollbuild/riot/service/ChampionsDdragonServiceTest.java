@@ -5,7 +5,7 @@ import com.drumonii.loltrollbuild.model.Champion;
 import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.riot.api.ChampionsResponse;
 import com.drumonii.loltrollbuild.riot.api.RiotApiProperties;
-import com.fasterxml.jackson.core.type.TypeReference;
+import com.drumonii.loltrollbuild.test.json.JsonTestFilesUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,7 +16,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.test.autoconfigure.web.client.RestClientTest;
 import org.springframework.context.annotation.Import;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
@@ -26,7 +25,6 @@ import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.IOException;
-import java.nio.file.Files;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -79,30 +77,12 @@ public class ChampionsDdragonServiceTest {
 
 	@Before
 	public void before() {
-		ClassPathResource championsJsonResource = new ClassPathResource("champions_data_dragon.json");
-		try {
-			championsJson = new String(Files.readAllBytes(championsJsonResource.getFile().toPath()));
-		} catch (IOException e) {
-			fail("Unable to read the Champions JSON.", e);
-		}
-		ClassPathResource versionsJsonResource = new ClassPathResource("versions_data_dragon.json");
-		try {
-			versionsJson = new String(Files.readAllBytes(versionsJsonResource.getFile().toPath()));
-		} catch (IOException e) {
-			fail("Unable to read the Versions JSON.", e);
-		}
-		ClassPathResource championJsonResource = new ClassPathResource("champion_data_dragon.json");
-		try {
-			championJson = new String(Files.readAllBytes(championJsonResource.getFile().toPath()));
-		} catch (IOException e) {
-			fail("Unable to read the Champion JSON.", e);
-		}
-		try {
-			List<Version> versions = objectMapper.readValue(versionsJson, new TypeReference<List<Version>>() {});
-			latestVersion = versions.get(0);
-		} catch (IOException e) {
-			fail("Unable to unmarshal the Versions response.", e);
-		}
+		JsonTestFilesUtil jsonTestFilesUtil = new JsonTestFilesUtil(objectMapper);
+
+		championsJson = JsonTestFilesUtil.getChampionsJson();
+		versionsJson = JsonTestFilesUtil.getVersionsJson();
+		List<Version> versions = jsonTestFilesUtil.getVersions();
+		latestVersion = versions.get(0);
 	}
 
 	@Test
@@ -129,7 +109,7 @@ public class ChampionsDdragonServiceTest {
 		for (String championKey : championKeys) {
 			mockServer.expect(requestTo(championUri.buildAndExpand(latestVersion.getPatch(), locale, championKey).toString()))
 					.andExpect(method(HttpMethod.GET))
-					.andRespond(withSuccess(championJson, MediaType.APPLICATION_JSON_UTF8));
+					.andRespond(withSuccess(JsonTestFilesUtil.getChampionJson(championKey), MediaType.APPLICATION_JSON_UTF8));
 		}
 
 		List<Champion> champions = championsService.getChampions();

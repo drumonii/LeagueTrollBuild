@@ -3,8 +3,7 @@ package com.drumonii.loltrollbuild.model.builder;
 import com.drumonii.loltrollbuild.model.Item;
 import com.drumonii.loltrollbuild.model.SummonerSpell;
 import com.drumonii.loltrollbuild.model.TrollBuild;
-import com.drumonii.loltrollbuild.riot.api.ItemsResponse;
-import com.drumonii.loltrollbuild.riot.api.SummonerSpellsResponse;
+import com.drumonii.loltrollbuild.test.json.JsonTestFilesUtil;
 import com.drumonii.loltrollbuild.util.RandomizeUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
@@ -12,10 +11,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.json.JsonTest;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -23,7 +20,6 @@ import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.fail;
 
 @RunWith(SpringRunner.class)
 @JsonTest
@@ -37,22 +33,10 @@ public class TrollBuildBuilderTest {
 
     @Before
     public void before() {
-        ClassPathResource itemsJsonResource = new ClassPathResource("items_data_dragon.json");
-        ItemsResponse itemsResponse = null;
-        try {
-            itemsResponse = objectMapper.readValue(itemsJsonResource.getFile(), ItemsResponse.class);
-        } catch (IOException e) {
-            fail("Unable to unmarshal the Items response.", e);
-        }
-        items = new ArrayList<>(itemsResponse.getItems().values());
-        ClassPathResource summonerSpellsJson = new ClassPathResource("summoners_data_dragon.json");
-        SummonerSpellsResponse summonerSpellsResponse = null;
-        try {
-            summonerSpellsResponse = objectMapper.readValue(summonerSpellsJson.getFile(), SummonerSpellsResponse.class);
-        } catch (IOException e) {
-            fail("Unable to unmarshal the Summoner Spells response.", e);
-        }
-        summonerSpells = new ArrayList<>(summonerSpellsResponse.getSummonerSpells().values());
+        JsonTestFilesUtil jsonTestFilesUtil = new JsonTestFilesUtil(objectMapper);
+
+        items = new ArrayList<>(jsonTestFilesUtil.getItemsResponse().getItems().values());
+        summonerSpells = new ArrayList<>(jsonTestFilesUtil.getSummonerSpellsResponse().getSummonerSpells().values());
     }
 
     @Test

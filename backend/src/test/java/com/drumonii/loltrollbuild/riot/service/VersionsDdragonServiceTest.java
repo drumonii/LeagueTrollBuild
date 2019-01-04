@@ -3,7 +3,7 @@ package com.drumonii.loltrollbuild.riot.service;
 import com.drumonii.loltrollbuild.config.RiotApiConfig;
 import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.riot.api.RiotApiProperties;
-import com.fasterxml.jackson.core.type.TypeReference;
+import com.drumonii.loltrollbuild.test.json.JsonTestFilesUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.test.autoconfigure.web.client.RestClientTest;
 import org.springframework.context.annotation.Import;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
@@ -21,13 +20,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.web.util.UriComponents;
 
-import java.io.IOException;
 import java.util.List;
 
 import static com.drumonii.loltrollbuild.config.Profiles.DDRAGON;
 import static com.drumonii.loltrollbuild.config.Profiles.TESTING;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.fail;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withServerError;
@@ -58,12 +55,9 @@ public class VersionsDdragonServiceTest {
 
 	@Before
 	public void before() {
-		ClassPathResource versionsJsonResource = new ClassPathResource("versions_data_dragon.json");
-		try {
-			versions = objectMapper.readValue(versionsJsonResource.getFile(), new TypeReference<List<Version>>() {});
-		} catch (IOException e) {
-			fail("Unable to unmarshal the Versions response.", e);
-		}
+		JsonTestFilesUtil jsonTestFilesUtil = new JsonTestFilesUtil(objectMapper);
+
+		versions = jsonTestFilesUtil.getVersions();
 		lolpatchStyleSize = versions.stream()
 				.filter(version -> version.getRevision() == 0)
 				.count();

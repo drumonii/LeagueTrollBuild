@@ -4,7 +4,7 @@ import com.drumonii.loltrollbuild.config.RiotApiConfig;
 import com.drumonii.loltrollbuild.model.Item;
 import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.riot.api.RiotApiProperties;
-import com.fasterxml.jackson.core.type.TypeReference;
+import com.drumonii.loltrollbuild.test.json.JsonTestFilesUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.test.autoconfigure.web.client.RestClientTest;
 import org.springframework.context.annotation.Import;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
@@ -24,14 +23,11 @@ import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.io.IOException;
-import java.nio.file.Files;
 import java.util.List;
 
 import static com.drumonii.loltrollbuild.config.Profiles.DDRAGON;
 import static com.drumonii.loltrollbuild.config.Profiles.TESTING;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.fail;
 import static org.springframework.test.web.client.ExpectedCount.never;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
@@ -72,24 +68,12 @@ public class ItemsDdragonServiceTest {
 
 	@Before
 	public void before() {
-		ClassPathResource itemsJsonResource = new ClassPathResource("items_data_dragon.json");
-		try {
-			itemsJson = new String(Files.readAllBytes(itemsJsonResource.getFile().toPath()));
-		} catch (IOException e) {
-			fail("Unable to read the Items JSON.", e);
-		}
-		ClassPathResource versionsJsonResource = new ClassPathResource("versions_data_dragon.json");
-		try {
-			versionsJson = new String(Files.readAllBytes(versionsJsonResource.getFile().toPath()));
-		} catch (IOException e) {
-			fail("Unable to read the Versions JSON.", e);
-		}
-		try {
-			List<Version> versions = objectMapper.readValue(versionsJson, new TypeReference<List<Version>>() {});
-			latestVersion = versions.get(0);
-		} catch (IOException e) {
-			fail("Unable to unmarshal the Versions response.", e);
-		}
+		JsonTestFilesUtil jsonTestFilesUtil = new JsonTestFilesUtil(objectMapper);
+
+		itemsJson = JsonTestFilesUtil.getItemsJson();
+		versionsJson = JsonTestFilesUtil.getVersionsJson();
+		List<Version> versions = jsonTestFilesUtil.getVersions();
+		latestVersion = versions.get(0);
 	}
 
 	@Test
