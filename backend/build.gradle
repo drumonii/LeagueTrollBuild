@@ -8,7 +8,7 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 
-version = '2.5.8-SNAPSHOT'
+version = "${buildVersion}"
 
 sourceCompatibility = JavaVersion.VERSION_11
 targetCompatibility = JavaVersion.VERSION_11
@@ -35,7 +35,7 @@ bootJar {
     from ("${asciidoctor.outputDir}/html5") {
         into 'static/docs'
     }
-    from("${project(':frontend').projectDir}/dist") {
+    from ("${project(':frontend').projectDir}/dist") {
         into 'public'
     }
     manifest {
