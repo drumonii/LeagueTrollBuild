@@ -27,12 +27,7 @@ public class ImagesRestController {
 		if (summonerSpell == null) {
 			return ResponseEntity.notFound().build();
 		}
-		return ResponseEntity.ok()
-				.contentLength(summonerSpell.getImage().getImgSrc().length)
-				.contentType(createMediaType(summonerSpell.getImage()))
-				.cacheControl(CacheControl.maxAge(365, TimeUnit.DAYS))
-				.lastModified(getLastModified(summonerSpell.getLastModifiedDate()))
-				.body(summonerSpell.getImage().getImgSrc());
+		return createResponseEntity(summonerSpell.getImage(), summonerSpell.getLastModifiedDate());
 	}
 
 	@GetMapping(path = "/items/{id}")
@@ -40,12 +35,7 @@ public class ImagesRestController {
 		if (item == null) {
 			return ResponseEntity.notFound().build();
 		}
-		return ResponseEntity.ok()
-				.contentLength(item.getImage().getImgSrc().length)
-				.contentType(createMediaType(item.getImage()))
-				.cacheControl(CacheControl.maxAge(365, TimeUnit.DAYS))
-				.lastModified(getLastModified(item.getLastModifiedDate()))
-				.body(item.getImage().getImgSrc());
+		return createResponseEntity(item.getImage(), item.getLastModifiedDate());
 	}
 
 	@GetMapping(path = "/champions/{id}")
@@ -53,12 +43,7 @@ public class ImagesRestController {
 		if (champion == null) {
 			return ResponseEntity.notFound().build();
 		}
-		return ResponseEntity.ok()
-				.contentLength(champion.getImage().getImgSrc().length)
-				.contentType(createMediaType(champion.getImage()))
-				.cacheControl(CacheControl.maxAge(365, TimeUnit.DAYS))
-				.lastModified(getLastModified(champion.getLastModifiedDate()))
-				.body(champion.getImage().getImgSrc());
+		return createResponseEntity(champion.getImage(), champion.getLastModifiedDate());
 	}
 
 	@GetMapping(path = "/champions/{id}/spell/{spellKey}")
@@ -69,12 +54,8 @@ public class ImagesRestController {
 		Optional<ChampionSpell> spell = champion.getSpells().stream()
 				.filter(s -> spellKey.equals(s.getKey()))
 				.findFirst();
-		return spell.map(championSpell -> ResponseEntity.ok()
-				.contentLength(championSpell.getImage().getImgSrc().length)
-				.contentType(createMediaType(championSpell.getImage()))
-				.cacheControl(CacheControl.maxAge(365, TimeUnit.DAYS))
-				.lastModified(getLastModified(champion.getLastModifiedDate()))
-				.body(championSpell.getImage().getImgSrc())).orElseGet(() -> ResponseEntity.notFound().build());
+		return spell.map(championSpell -> createResponseEntity(championSpell.getImage(), champion.getLastModifiedDate()))
+				.orElseGet(() -> ResponseEntity.notFound().build());
 	}
 
 	@GetMapping(path = "/champions/{id}/passive")
@@ -82,12 +63,7 @@ public class ImagesRestController {
 		if (champion == null) {
 			return ResponseEntity.notFound().build();
 		}
-		return ResponseEntity.ok()
-				.contentLength(champion.getPassive().getImage().getImgSrc().length)
-				.contentType(createMediaType(champion.getPassive().getImage()))
-				.cacheControl(CacheControl.maxAge(365, TimeUnit.DAYS))
-				.lastModified(getLastModified(champion.getLastModifiedDate()))
-				.body(champion.getPassive().getImage().getImgSrc());
+		return createResponseEntity(champion.getPassive().getImage(), champion.getLastModifiedDate());
 	}
 
 	@GetMapping(path = "/maps/{mapId}")
@@ -95,12 +71,23 @@ public class ImagesRestController {
 		if (gameMap == null) {
 			return ResponseEntity.notFound().build();
 		}
+		return createResponseEntity(gameMap.getImage(), gameMap.getLastModifiedDate());
+	}
+
+	/**
+	 * Creates the {@link ResponseEntity} of byte array with http status 200 from the {@link Image}.
+	 *
+	 * @param image the {@link Image}
+	 * @param lastModifiedDate the last modified date
+	 * @return the {@link ResponseEntity} of byte array
+	 */
+	private ResponseEntity<byte[]> createResponseEntity(Image image, LocalDateTime lastModifiedDate) {
 		return ResponseEntity.ok()
-				.contentLength(gameMap.getImage().getImgSrc().length)
-				.contentType(createMediaType(gameMap.getImage()))
+				.contentLength(image.getImgSrc().length)
+				.contentType(createMediaType(image))
 				.cacheControl(CacheControl.maxAge(365, TimeUnit.DAYS))
-				.lastModified(getLastModified(gameMap.getLastModifiedDate()))
-				.body(gameMap.getImage().getImgSrc());
+				.lastModified(getLastModified(lastModifiedDate))
+				.body(image.getImgSrc());
 	}
 
 	/**
