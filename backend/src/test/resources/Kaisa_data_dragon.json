@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "8.24.1",
+  "version": "9.1.1",
   "data": {
     "Kaisa": {
       "id": "Kaisa",
@@ -542,7 +542,7 @@
           "id": "KaisaR",
           "name": "Killer Instinct",
           "description": "Kai'Sa dashes near an enemy champion.",
-          "tooltip": "Kai'Sa warps to a location near an enemy champion affected by <span class=\"colorB342F4\">Plasma</span>, gaining a shield that absorbs {{ e1 }} <scaleAD>(+{{ f1 }})</scaleAD> <scaleAP>(+{{ f2 }})</scaleAP> damage for {{ e3 }} seconds.",
+          "tooltip": "Kai'Sa warps to a location near an enemy champion affected by <span class=\"colorB342F4\">Plasma</span>, gaining a shield that absorbs {{ rcalculatedshieldvalue }} damage for {{ rshieldduration }} seconds.",
           "leveltip": {
             "label": [
               "Range",
@@ -551,10 +551,10 @@
               "Attack Damage Scaling"
             ],
             "effect": [
-              "{{ e2 }} -> {{ e2NL }}",
+              "{{ rrange }} -> {{ rrangeNL }}",
               "{{ cooldown }} -> {{ cooldownNL }}",
-              "{{ e1 }} -> {{ e1NL }}",
-              "{{ effect4amount*100.000000 }}% -> {{ effect4amountnl*100.000000 }}%"
+              "{{ rbasevalue }} -> {{ rbasevalueNL }}",
+              "{{ rtotaladratio*100.000000 }}% -> {{ rtotaladrationl*100.000000 }}%"
             ]
           },
           "maxrank": 3,
@@ -574,29 +574,29 @@
           "effect": [
             null,
             [
-              75,
-              100,
-              125
+              0,
+              0,
+              0
             ],
             [
-              1500,
-              2000,
-              2500
+              0,
+              0,
+              0
             ],
             [
-              2,
-              2,
-              2
+              0,
+              0,
+              0
             ],
             [
-              1,
-              1.5,
-              2
+              0,
+              0,
+              0
             ],
             [
-              0.75,
-              0.75,
-              0.75
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -626,11 +626,11 @@
           ],
           "effectBurn": [
             null,
-            "75/100/125",
-            "1500/2000/2500",
-            "2",
-            "1/1.5/2",
-            "0.75",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
             "0",
             "0",
             "0",

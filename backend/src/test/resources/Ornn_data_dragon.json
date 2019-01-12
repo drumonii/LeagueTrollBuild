@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "8.24.1",
+  "version": "9.1.1",
   "data": {
     "Ornn": {
       "id": "Ornn",
@@ -55,22 +55,22 @@
       },
       "stats": {
         "hp": 565.64,
-        "hpperlevel": 90,
+        "hpperlevel": 95,
         "mp": 340.6,
         "mpperlevel": 45,
         "movespeed": 335,
         "armor": 33.04,
-        "armorperlevel": 3,
+        "armorperlevel": 4,
         "spellblock": 32.1,
         "spellblockperlevel": 1.25,
         "attackrange": 175,
-        "hpregen": 7,
-        "hpregenperlevel": 0.8,
+        "hpregen": 9,
+        "hpregenperlevel": 0.9,
         "mpregen": 8.01,
         "mpregenperlevel": 0.6,
         "crit": 0,
         "critperlevel": 0,
-        "attackdamage": 67.72,
+        "attackdamage": 69,
         "attackdamageperlevel": 3.5,
         "attackspeedperlevel": 2,
         "attackspeed": 0.625
@@ -84,12 +84,10 @@
           "leveltip": {
             "label": [
               "Damage",
-              "Slow",
               "Cooldown"
             ],
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
-              "{{ e5 }}% -> {{ e5NL }}%",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
@@ -103,29 +101,29 @@
           ],
           "cooldownBurn": "9/8.5/8/7.5/7",
           "cost": [
-            55,
-            55,
-            55,
-            55,
-            55
+            45,
+            45,
+            45,
+            45,
+            45
           ],
-          "costBurn": "55",
+          "costBurn": "45",
           "datavalues": {},
           "effect": [
             null,
             [
               20,
-              50,
-              80,
-              110,
-              140
+              45,
+              70,
+              95,
+              120
             ],
             [
-              1.125,
-              1.125,
-              1.125,
-              1.125,
-              1.125
+              1,
+              1,
+              1,
+              1,
+              1
             ],
             [
               4,
@@ -143,10 +141,10 @@
             ],
             [
               40,
-              45,
-              50,
-              55,
-              60
+              40,
+              40,
+              40,
+              40
             ],
             [
               2,
@@ -186,11 +184,11 @@
           ],
           "effectBurn": [
             null,
-            "20/50/80/110/140",
-            "1.13",
+            "20/45/70/95/120",
+            "1",
             "4",
             "0",
-            "40/45/50/55/60",
+            "40",
             "2",
             "0",
             "0",
@@ -228,31 +226,29 @@
         {
           "id": "OrnnW",
           "name": "Bellows Breath",
-          "description": "Ornn advances, breathing fire and shielding himself. Enemies hit by the final gout of flame become Brittle.",
-          "tooltip": "Ornn stomps forwards, breathing fire and shielding himself for <span class=\"colorCC3300\">{{ f5 }}</span> (12% max health) for {{ e5 }} seconds. The fire deals up to {{ e0 }}% of the enemy's max health as magic damage (minimum {{ e3 }}).<br /><br />Enemies hit by the final gout of flame become <span class=\"colorFF5733\">Brittle</span> for {{ f9 }} seconds. The next immobilizing effect against a Brittle enemy has its duration increased by 30% and deals <scaleLevel>{{ f8 }}</scaleLevel>% of their max health as magic damage.<br /><br /><rules>Ornn's basic attacks knock back Brittle targets.</rules>",
+          "description": "Ornn advances, breathing fire. Enemies hit by the final gout of flame become Brittle.",
+          "tooltip": "Ornn stomps forwards, breathing fire and becoming unstoppable for {{ e1 }} seconds. The fire deals up to {{ e0 }}% of the enemy's max health as magic damage (minimum {{ e3 }}).<br /><br />Enemies hit by the final gout of flame become <span class=\"colorFF5733\">Brittle</span> for {{ f9 }} seconds. The next immobilizing effect against a Brittle enemy has its duration increased by 30% and deals <scaleLevel>{{ passivedamagecalc }}</scaleLevel> of their max health as magic damage.<br /><br /><rules>Ornn's basic attacks knock back Brittle targets.</rules>",
           "leveltip": {
             "label": [
               "Maximum Damage",
               "Minimum Damage",
-              "Cooldown",
               "@AbilityResourceName@ Cost"
             ],
             "effect": [
               "{{ e0 }}% -> {{ e0NL }}%",
               "{{ e3 }} -> {{ e3NL }}",
-              "{{ cooldown }} -> {{ cooldownNL }}",
               "{{ cost }} -> {{ costNL }}"
             ]
           },
           "maxrank": 5,
           "cooldown": [
-            17,
-            15,
-            13,
-            11,
-            9
+            12,
+            12,
+            12,
+            12,
+            12
           ],
-          "cooldownBurn": "17/15/13/11/9",
+          "cooldownBurn": "12",
           "cost": [
             45,
             50,
@@ -314,18 +310,18 @@
               500
             ],
             [
-              0.5,
-              0.5,
-              0.5,
-              0.5,
-              0.5
+              0.35,
+              0.35,
+              0.35,
+              0.35,
+              0.35
             ],
             [
-              1.5,
-              1.5,
-              1.5,
-              1.5,
-              1.5
+              7,
+              7,
+              7,
+              7,
+              7
             ],
             [
               12,
@@ -344,8 +340,8 @@
             "3.5",
             "175",
             "500",
-            "0.5",
-            "1.5",
+            "0.35",
+            "7",
             "12/13/14/15/16"
           ],
           "vars": [],
@@ -379,12 +375,14 @@
             "label": [
               "Dash Damage",
               "Shockwave Damage",
-              "Cooldown"
+              "Cooldown",
+              "@AbilityResourceName@ Cost"
             ],
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
               "{{ e2 }} -> {{ e2NL }}",
-              "{{ cooldown }} -> {{ cooldownNL }}"
+              "{{ cooldown }} -> {{ cooldownNL }}",
+              "{{ cost }} -> {{ costNL }}"
             ]
           },
           "maxrank": 5,
@@ -397,13 +395,13 @@
           ],
           "cooldownBurn": "16/15/14/13/12",
           "cost": [
+            35,
+            40,
+            45,
             50,
-            50,
-            50,
-            50,
-            50
+            55
           ],
-          "costBurn": "50",
+          "costBurn": "35/40/45/50/55",
           "datavalues": {},
           "effect": [
             null,
@@ -443,11 +441,11 @@
               360
             ],
             [
-              1,
-              1,
-              1,
-              1,
-              1
+              1.25,
+              1.25,
+              1.25,
+              1.25,
+              1.25
             ],
             [
               150,
@@ -485,7 +483,7 @@
             "1600",
             "650",
             "360",
-            "1",
+            "1.25",
             "150",
             "0",
             "0",
@@ -517,7 +515,7 @@
           "id": "OrnnR",
           "name": "Call of the Forge God",
           "description": "Ornn summons a massive elemental at a location which travels toward him with increasing speed. Enemies run over by the elemental take damage, are slowed and are made Brittle. Ornn can recast the ability to charge into the elemental, redirecting it in the direction he hits it, causing the elemental to affect any enemies it runs over to be knocked up, dealing the same damage and re-applying Brittle.",
-          "tooltip": "Ornn summons a massive lava elemental which stampedes toward him. Enemies run over by the elemental take {{ e2 }} <scaleAP>(+{{ f4 }})</scaleAP> magic damage, are slowed by {{ e5 }}% for {{ e6 }} seconds and become <span class=\"colorFF5733\">Brittle</span> for {{ f10 }} seconds.<br /><br />Ornn can recast this ability to smash into the elemental to redirect and empower it. The empowered elemental knocks up enemies for 1.5 seconds, deals {{ e2 }} <scaleAP>(+{{ f4 }})</scaleAP> magic damage and applies <span class=\"colorFF5733\">Brittle</span>.",
+          "tooltip": "Ornn summons a massive lava elemental which stampedes toward him. Enemies run over by the elemental take {{ e2 }} <scaleAP>(+{{ f4 }})</scaleAP> magic damage, are slowed by up to {{ e5 }}% based on distance traveled by the elemental for {{ e6 }} seconds and become <span class=\"colorFF5733\">Brittle</span> for {{ f10 }} seconds.<br /><br />Ornn can recast this ability to smash into the elemental to redirect and empower it. The empowered elemental knocks the first enemy champion hit up for 1.5 seconds (50% duration for subsequent champion hits), deals {{ e2 }} <scaleAP>(+{{ f4 }})</scaleAP> magic damage and applies <span class=\"colorFF5733\">Brittle</span>.",
           "leveltip": {
             "label": [
               "Damage",
@@ -568,8 +566,8 @@
             ],
             [
               40,
-              60,
-              80
+              50,
+              60
             ],
             [
               2,
@@ -603,7 +601,7 @@
             "125/175/225",
             "1200",
             "100",
-            "40/60/80",
+            "40/50/60",
             "2",
             "0",
             "0",
@@ -633,7 +631,7 @@
       ],
       "passive": {
         "name": "Living Forge",
-        "description": "Ornn can spend gold to forge non-consumable items anywhere.<br><br>Additionally, when Ornn reaches level 13 masterwork upgrades for some items become available for Ornn and his team to purchase.<br><br><font color='#8C8C8C' size='16'>Ornn can smith items directly from his forge menu or the shop.</font>",
+        "description": "Ornn gains an additional 10% bonus Armor and Magic Resistance from all sources.<br><br>Ornn can spend gold to forge non-consumable items anywhere.<br><br>Additionally, when Ornn reaches level 13, he will upgrade any eligible items into masterwork items for himself, up to 2 max. For each level after 13, Ornn can upgrade an item for an ally by going near them and clicking on them, max 1 per ally.<br><br><font color='#8C8C8C' size='16'>Ornn can smith items directly from his forge menu or the shop.</font>",
         "image": {
           "full": "OrnnP.png",
           "sprite": "passive2.png",

@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "8.24.1",
+  "version": "9.1.1",
   "data": {
     "Ziggs": {
       "id": "Ziggs",
@@ -413,7 +413,7 @@
         {
           "id": "ZiggsE",
           "name": "Hexplosive Minefield",
-          "description": "Ziggs scatters proximity mines that detonate on enemy contact, dealing magic damage and slowing.",
+          "description": "Ziggs scatters proximity mines that detonate on enemy contact, dealing magic damage and slowing. Successive mine detonations on the same target deal reduced damage.",
           "tooltip": "Ziggs scatters proximity mines that detonate on enemy contact, dealing {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage. Enemies hit are slowed by {{ e2 }}% for {{ e4 }} seconds.<br /><br />Enemies triggering a mine take {{ e5 }}% damage from additional mines. Mines disarm automatically after {{ e3 }} seconds.",
           "leveltip": {
             "label": [
@@ -567,9 +567,11 @@
           "leveltip": {
             "label": [
               "Damage",
+              "Blast Zone Damage",
               "Cooldown"
             ],
             "effect": [
+              "{{ e5 }} -> {{ e5NL }}",
               "{{ e1 }} -> {{ e1NL }}",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]

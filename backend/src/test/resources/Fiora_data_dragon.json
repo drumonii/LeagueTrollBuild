@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "8.24.1",
+  "version": "9.1.1",
   "data": {
     "Fiora": {
       "id": "Fiora",
@@ -544,7 +544,7 @@
           "id": "FioraR",
           "name": "Grand Challenge",
           "description": "Fiora reveals all four Vitals on an enemy champion and gains movement speed while near them. If Fiora hits all 4 Vitals or if the target dies after she has hit at least one, Fiora and her allies in the area are healed over the next few seconds.",
-          "tooltip": "Fiora reveals all four <span class=\"colorD4BD22\">Vitals</span> on target champion, for a potential <scaleLevel>{{ f8 }}%</scaleLevel> max health true damage. In addition, Fiora gains Duelist's Dance's movement speed bonus <scaleLevel>({{ f6 }}%)</scaleLevel> while near the target.<br /><br />If Fiora hits all 4 <span class=\"colorD4BD22\">Vitals</span> in {{ markduration }} seconds or if the target dies after she has hit at least one, Fiora and her allies in the area are healed for {{ healpersecondcalc }} each second for between {{ minhealduration }} to {{ healduration }} seconds, scaling with the amount of Vitals hit.",
+          "tooltip": "Fiora reveals all four <span class=\"colorD4BD22\">Vitals</span> on target champion, for a potential {{ spell.fiorapassive:rdamagetotal }} max health true damage. In addition, Fiora gains Duelist's Dance's movement speed bonus ({{ spell.fiorar:percentms }}%) while near the target.<br /><br />If Fiora hits all 4 <span class=\"colorD4BD22\">Vitals</span> in {{ markduration }} seconds or if the target dies after she has hit at least one, Fiora and her allies in the area are healed for {{ healpersecondcalc }} each second for between {{ minhealduration }} to {{ healduration }} seconds, scaling with the amount of Vitals hit.",
           "leveltip": {
             "label": [
               "Cooldown",

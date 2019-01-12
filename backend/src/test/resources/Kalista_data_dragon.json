@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "8.24.1",
+  "version": "9.1.1",
   "data": {
     "Kalista": {
       "id": "Kalista",
@@ -82,9 +82,9 @@
         "mpregenperlevel": 0.4,
         "crit": 0,
         "critperlevel": 0,
-        "attackdamage": 62,
-        "attackdamageperlevel": 3.6,
-        "attackspeedperlevel": 3.5,
+        "attackdamage": 67,
+        "attackdamageperlevel": 4,
+        "attackspeedperlevel": 4,
         "attackspeed": 0.694
       },
       "spells": [
@@ -124,11 +124,11 @@
           "effect": [
             null,
             [
-              10,
-              70,
-              130,
-              190,
-              250
+              20,
+              85,
+              150,
+              215,
+              280
             ],
             [
               0,
@@ -196,7 +196,7 @@
           ],
           "effectBurn": [
             null,
-            "10/70/130/190/250",
+            "20/85/150/215/280",
             "0",
             "0",
             "0",
@@ -238,16 +238,14 @@
         {
           "id": "KalistaW",
           "name": "Sentinel",
-          "description": "Passively gain Attack Damage when near her Oathsworn ally, and deal bonus damage when striking the same target. <br><br>Activate to send a soul to scout out the path, revealing the area in front of it.",
-          "tooltip": "<spellPassive>Passive: </spellPassive>When Kalista is near her <i>Oathsworn</i>, she gains {{ e8 }} Attack Damage. If they both basic attack the same target, she deals {{ e2 }}% of their max health as magic damage. {{ e7 }} second cooldown per target.<br /><br /><spellPassive>Active: </spellPassive>Send a soul Sentinel to patrol an unseen area. Champions spotted are revealed for 4 seconds. Sentinels last 3 laps.<br /><br />Kalista gains a charge of Sentinel every {{ e4 }} seconds.",
+          "description": "Gain bonus damage when Kalista and her Oathsworn strike the same target. <br><br>Activate to send a soul to scout out the path, revealing the area in front of it.",
+          "tooltip": "<spellPassive>Passive: </spellPassive>When Kalista and her <i>Oathsworn</i> both basic attack the same target, she deals {{ e2 }}% of their max health as magic damage. {{ e7 }} second cooldown per target.<br /><br /><spellPassive>Active: </spellPassive>Send a soul Sentinel to patrol an unseen area. Champions spotted are revealed for 4 seconds. Sentinels last 3 laps.<br /><br />Kalista gains a charge of Sentinel every {{ e4 }} seconds.",
           "leveltip": {
             "label": [
-              "Passive Attack Damage",
               "Damage",
               "Ammo Recharge"
             ],
             "effect": [
-              "{{ e8 }} -> {{ e8NL }}",
               "{{ e2 }}% -> {{ e2NL }}%",
               "{{ e4 }} -> {{ e4NL }}"
             ]
@@ -322,11 +320,11 @@
               10
             ],
             [
-              5,
-              10,
-              15,
-              20,
-              25
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -352,7 +350,7 @@
             "0",
             "75/100/125/150/175",
             "10",
-            "5/10/15/20/25",
+            "0",
             "0",
             "0"
           ],
@@ -382,7 +380,7 @@
           "id": "KalistaExpungeWrapper",
           "name": "Rend",
           "description": "Attacks impale their targets with spears. Activate to rip the spears out, slowing and dealing escalating damage.",
-          "tooltip": "<spellPassive>Passive: </spellPassive>Kalista's spears pierce their target, lingering for 4 seconds.<br /><br /><spellPassive>Active: </spellPassive>Rip the spears from nearby targets, dealing {{ e1 }} <scaleAD>(+{{ a1 }})</scaleAD> physical damage and slowing their Movement Speed by {{ e2 }}% for {{ e6 }} seconds.<br /><br />Each additional spear deals {{ e9 }} <scaleAD>(+{{ f4 }})</scaleAD> physical damage.<br /><br /><scaleArmor>If </scaleArmor><span class=\"colorFFFFFF\"><i>Rend</i></span><span class=\"colorFFFF00\"> kills at least one target, its cooldown is reset and it refunds <scaleMana>{{ e8 }}</scaleMana> mana.</span>",
+          "tooltip": "<spellPassive>Passive: </spellPassive>Kalista's spears pierce their target, lingering for 4 seconds.<br /><br /><spellPassive>Active: </spellPassive>Rip the spears from nearby targets, dealing {{ e1 }} <scaleAD>(+{{ a1 }})</scaleAD> physical damage and slowing their Movement Speed by {{ e2 }}% for {{ e6 }} seconds.<br /><br />Each additional spear deals {{ e9 }} <scaleAD>(+{{ f4 }})</scaleAD> physical damage.<br /><br /><scaleArmor>If </scaleArmor><span class=\"colorFFFFFF\"><i>Rend</i></span><span class=\"colorFFFF00\"> kills at least one target, its cooldown is reset and it refunds <scaleMana>{{ e8 }}</scaleMana> mana.</span><br /><br /><rules>Rend deals {{ epicmonsterdamagemod*100 }}% damage to Epic Monsters.</rules>",
           "leveltip": {
             "label": [
               "Damage",

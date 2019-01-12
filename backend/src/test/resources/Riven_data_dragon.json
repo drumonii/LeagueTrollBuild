@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "8.24.1",
+  "version": "9.1.1",
   "data": {
     "Riven": {
       "id": "Riven",
@@ -586,14 +586,14 @@
           "id": "RivenFengShuiEngine",
           "name": "Blade of the Exile",
           "description": "Riven empowers her keepsake weapon with energy, and gains Attack Damage and Range. During this time, she also gains the ability to use Wind Slash, a powerful ranged attack, once.",
-          "tooltip": "Riven's weapon surges with spiritual energy for {{ e4 }} seconds, granting her {{ e5 }}% extra Attack Damage (<scaleAD>+{{ f3 }}</scaleAD>), increased Range on her damaging spells and attacks, and the ability to use Wind Slash once.<br /><br /><span class=\"colorDDDD77\">Wind Slash:</span> Riven fires a shockwave that deals from {{ e1 }} <scaleAD>(+{{ f1 }})</scaleAD> to {{ e2 }} <scaleAD>(+{{ f2 }})</scaleAD> physical damage to all enemies hit, increasing based on how much Health they are missing.",
+          "tooltip": "Riven's weapon surges with spiritual energy for {{ duration }} seconds, granting her {{ percentbonusad*100 }}% extra Attack Damage ({{ bonusad }}), increased Range on her damaging spells and attacks, and the ability to use Wind Slash once.<br /><br /><span class=\"colorDDDD77\">Wind Slash:</span> Riven fires a shockwave that deals from <physicalDamage>{{ mindamage }}</physicalDamage> to <physicalDamage>{{ maxdamage }} physical damage</physicalDamage> to all enemies hit, increasing based on how much Health they are missing.",
           "leveltip": {
             "label": [
               "Shockwave Damage",
               "Cooldown"
             ],
             "effect": [
-              "{{ e2 }} -> {{ e2NL }}",
+              "{{ maxbase }} -> {{ maxbaseNL }}",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
@@ -677,23 +677,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "bonusattackdamage",
-              "coeff": 0.2,
-              "key": "f3"
-            },
-            {
-              "link": "bonusattackdamage",
-              "coeff": 0.6,
-              "key": "f1"
-            },
-            {
-              "link": "bonusattackdamage",
-              "coeff": 1.8,
-              "key": "f2"
-            }
-          ],
+          "vars": [],
           "costType": "No Cost",
           "maxammo": "-1",
           "range": [

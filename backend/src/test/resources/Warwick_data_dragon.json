@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "8.24.1",
+  "version": "9.1.1",
   "data": {
     "Warwick": {
       "id": "Warwick",
@@ -125,7 +125,7 @@
         "mpregenperlevel": 0.575,
         "crit": 0,
         "critperlevel": 0,
-        "attackdamage": 63,
+        "attackdamage": 65,
         "attackdamageperlevel": 3,
         "attackspeedperlevel": 2.3,
         "attackspeed": 0.638
@@ -573,7 +573,7 @@
           "id": "WarwickR",
           "name": "Infinite Duress",
           "description": "Warwick leaps in a direction (scaling with his bonus movement speed), suppressing the first champion he collides with for 1.5 seconds.",
-          "tooltip": "Warwick leaps 2.5 seconds worth of movement speed in a direction, suppressing the first champion he collides with for {{ e2 }} seconds. Deals {{ e7 }} <scaleAD>(+{{ a1 }})</scaleAD> magic damage and applies on-hit effects 3 times. Warwick heals for 100% of all damage he deals during Infinite Duress.",
+          "tooltip": "Warwick leaps 2.5 seconds worth of movement speed in a direction, suppressing the first champion he collides with for {{ rduration }} seconds. Deals <magicDamage>{{ damagecumulative }}</magicDamage> magic damage and applies on-hit effects 3 times. Warwick heals for 100% of all damage he deals during Infinite Duress.",
           "leveltip": {
             "label": [
               "Damage",
@@ -601,29 +601,9 @@
           "effect": [
             null,
             [
-              150,
-              250,
-              350
-            ],
-            [
-              1.5,
-              1.5,
-              1.5
-            ],
-            [
-              30,
-              30,
-              30
-            ],
-            [
-              5,
-              5,
-              5
-            ],
-            [
-              20,
-              20,
-              20
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -631,9 +611,29 @@
               0
             ],
             [
-              175,
-              350,
-              525
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -653,24 +653,18 @@
           ],
           "effectBurn": [
             null,
-            "150/250/350",
-            "1.5",
-            "30",
-            "5",
-            "20",
             "0",
-            "175/350/525",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
             "0",
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "bonusattackdamage",
-              "coeff": 1.67,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [

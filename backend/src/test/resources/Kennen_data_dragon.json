@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "8.24.1",
+  "version": "9.1.1",
   "data": {
     "Kennen": {
       "id": "Kennen",
@@ -424,6 +424,8 @@
           "tooltip": "Kennen turns into a ball of lightning for up to {{ duration - as ball }} seconds, dealing {{ base damage }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage to enemies he passes through.<br /><br />While a ball of lightning, Kennen gains {{ defenses }} armor and magic resist, and {{ movement speed*100 }}% movement speed. Kennen is refunded {{ energy refund }} energy if he damages at least one enemy in this form.<br /><br />Upon returning to his normal form, Kennen gains {{ attack speed*100 }}% attack speed for {{ duration - after ball }} seconds.<br /><br /><rules>Lightning Rush deals {{ damage to minions*100 }}% damage to minions.<br />Kennen ignores unit collision while he is a ball of lightning.</rules>",
           "leveltip": {
             "label": [
+              "Damage",
+              "Armor and Magic Resist",
               "Cooldown",
               "@AbilityResourceName@ Cost"
             ],

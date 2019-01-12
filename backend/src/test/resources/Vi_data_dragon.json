@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "8.24.1",
+  "version": "9.1.1",
   "data": {
     "Vi": {
       "id": "Vi",
@@ -590,7 +590,7 @@
           "id": "ViR",
           "name": "Assault and Battery",
           "description": "Vi runs down an enemy, knocking aside anyone in the way. When she reaches her target she knocks it into the air, jumps after it, and slams it back into the ground.",
-          "tooltip": "Targets an enemy champion and chases it down, knocking it up for 1.25 seconds, dealing {{ e1 }} <scaleAD>(+{{ a1 }})</scaleAD> physical damage.<br /><br />While charging, Vi cannot be stopped and has <span class=\"coloree91d7\">True Sight</span> of the target. Any enemies in the way are knocked aside and dealt 75% of the damage.",
+          "tooltip": "Targets an enemy champion and chases it down, knocking it up for {{ rstunduration }} seconds, dealing </physicalDamage>{{ damage }}<physicalDamage> physical damage.<br /><br />While charging, Vi cannot be stopped and has <span class=\"coloree91d7\">True Sight</span> of the target. Any enemies in the way are knocked aside and dealt {{ secondarytargetdamagemultiplier*100 }}% of the damage.",
           "leveltip": {
             "label": [
               "Total Damage",
@@ -620,34 +620,34 @@
           "effect": [
             null,
             [
-              150,
-              300,
-              450
+              0,
+              0,
+              0
             ],
             [
-              0.75,
-              0.75,
-              0.75
+              0,
+              0,
+              0
             ],
             [
-              1.25,
-              1.25,
-              1.25
+              0,
+              0,
+              0
             ],
             [
-              4,
-              4,
-              4
+              0,
+              0,
+              0
             ],
             [
-              1,
-              1.5,
-              2
+              0,
+              0,
+              0
             ],
             [
-              800,
-              800,
-              800
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -672,24 +672,18 @@
           ],
           "effectBurn": [
             null,
-            "150/300/450",
-            "0.75",
-            "1.25",
-            "4",
-            "1/1.5/2",
-            "800",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
             "0",
             "0",
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "bonusattackdamage",
-              "coeff": 1.4,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [

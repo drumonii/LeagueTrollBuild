@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "8.24.1",
+  "version": "9.1.1",
   "data": {
     "Ashe": {
       "id": "Ashe",
@@ -275,14 +275,14 @@
           "id": "Volley",
           "name": "Volley",
           "description": "Ashe fires 9 arrows in a cone for increased damage. Also applies Frost Shot.",
-          "tooltip": "Fires arrows in a cone, each dealing {{ e2 }} <scaleAD>(+{{ a1 }})</scaleAD> physical damage. Enemies can block multiple arrows, but only take damage from the first.<br /><br />Champion hits count as Critical Strikes for the purposes of Frost Shot.",
+          "tooltip": "Fires arrows in a cone, each dealing <scaleAD>{{ totaldamage }} physical damage</scaleAD>. Enemies can block multiple arrows, but only take damage from the first.<br /><br />Champion hits count as Critical Strikes for the purposes of Frost Shot.",
           "leveltip": {
             "label": [
               "Damage",
               "Cooldown"
             ],
             "effect": [
-              "{{ e2 }} -> {{ e2NL }}",
+              "{{ basedamage }} -> {{ basedamageNL }}",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
@@ -390,13 +390,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "attackdamage",
-              "coeff": 1,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -422,7 +416,7 @@
           "id": "AsheSpiritOfTheHawk",
           "name": "Hawkshot",
           "description": "Ashe sends her Hawk Spirit on a scouting mission anywhere on the map.",
-          "tooltip": "Reveals terrain as it flies toward target location anywhere on the map. Grants vision for {{ e4 }} seconds. Ashe can store up to 2 charges of Hawkshot.",
+          "tooltip": "Reveals terrain as it flies toward target location anywhere on the map. Grants vision for {{ e4 }} seconds. Ashe can store up to 2 charges of Hawkshot.<br /><br />Hawkshot grants Ashe assists on enemy champions that it reveals - but only if they were otherwise unseen.",
           "leveltip": {
             "label": [
               "Recharge Time"

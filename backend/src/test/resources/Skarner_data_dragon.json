@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "8.24.1",
+  "version": "9.1.1",
   "data": {
     "Skarner": {
       "id": "Skarner",
@@ -556,14 +556,14 @@
           "id": "SkarnerImpale",
           "name": "Impale",
           "description": "Skarner suppresses an enemy champion and deals damage to it. During this time, Skarner can move freely and will drag his helpless victim around with him. When the effect ends, the target will be dealt additional damage.",
-          "tooltip": "Skarner suppresses an enemy champion for {{ e1 }} seconds, dealing <scaleAD>{{ a2 }}</scaleAD> physical damage plus {{ e2 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage. Skarner can move freely during this time, and will drag his helpless victim around with him. When the effect ends, Skarner's target will be dealt the same damage again.",
+          "tooltip": "Skarner suppresses an enemy champion for {{ rduration }} seconds, dealing <physicalDamage>{{ physicaldamage }}</physicalDamage> physical damage plus <magicDamage>{{ magicdamage }}</magicDamage> magic damage. Skarner can move freely during this time, and will drag his helpless victim around with him. When the effect ends, Skarner's target will be dealt the same damage again.",
           "leveltip": {
             "label": [
               "Damage",
               "Cooldown"
             ],
             "effect": [
-              "{{ e2 }} -> {{ e2NL }}",
+              "{{ rbasedamage }} -> {{ rbasedamageNL }}",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
@@ -584,19 +584,19 @@
           "effect": [
             null,
             [
-              1.75,
-              1.75,
-              1.75
+              0,
+              0,
+              0
             ],
             [
-              20,
-              60,
-              100
+              0,
+              0,
+              0
             ],
             [
-              50,
-              75,
-              100
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -636,9 +636,9 @@
           ],
           "effectBurn": [
             null,
-            "1.75",
-            "20/60/100",
-            "50/75/100",
+            "0",
+            "0",
+            "0",
             "0",
             "0",
             "0",
@@ -647,18 +647,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "attackdamage",
-              "coeff": 0.6,
-              "key": "a2"
-            },
-            {
-              "link": "spelldamage",
-              "coeff": 0.5,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [

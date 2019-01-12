@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "8.24.1",
+  "version": "9.1.1",
   "data": {
     "Yasuo": {
       "id": "Yasuo",
@@ -545,15 +545,15 @@
         {
           "id": "YasuoR",
           "name": "Last Breath",
-          "description": "Blinks to an <font color='#6655CC'>Airborne</font> enemy champion, dealing physical damage and holding all <font color='#6655CC'>Airborne</font> enemies in the area in the air. Grants maximum Flow but resets all stacks of Gathering Storm.<br><br>For a moderate time afterwards, Yasuo's critical strikes gain significant Bonus Armor Penetration.",
-          "tooltip": "Blinks to an <span class=\"color6655CC\">Airborne</span> enemy champion, dealing {{ e1 }} <scaleAD>(+{{ a1 }})</scaleAD> physical damage and holding all <span class=\"color6655CC\">Airborne</span> enemies in the area in the air for an additional {{ e4 }} second(s). Grants maximum Flow but resets all stacks of Gathering Storm.<br /><br />For {{ e3 }} second(s), Yasuo's critical strikes gain {{ e2 }}% Bonus Armor Penetration - this affects Armor from items, buffs, and runes.",
+          "description": "Blinks to an <factionIonia1>Airborne</factionIonia1> enemy champion, dealing physical damage and holding all <factionIonia1>Airborne</factionIonia1> enemies in the area in the air. Grants maximum Flow but resets all stacks of Gathering Storm.<br><br>For a moderate time afterwards, Yasuo's critical strikes gain significant Bonus Armor Penetration.",
+          "tooltip": "Blinks to an <factionIonia1>Airborne</factionIonia1> enemy champion, dealing <physicalDamage>{{ damage }}</physicalDamage> physical damage and holding all <factionIonia1>Airborne</factionIonia1> enemies in the area in the air for an additional {{ rknockupduration }} second(s). Grants maximum Flow but resets all stacks of Gathering Storm.<br /><br />For {{ rbuffduration }} second(s), Yasuo's critical strikes gain {{ rpercentarmorpen }}% Bonus Armor Penetration - this affects Armor from items, buffs, and runes.",
           "leveltip": {
             "label": [
               "Damage",
               "Cooldown"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
+              "{{ rbasedamage }} -> {{ rbasedamageNL }}",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
@@ -574,34 +574,34 @@
           "effect": [
             null,
             [
-              200,
-              300,
-              400
+              0,
+              0,
+              0
             ],
             [
-              50,
-              50,
-              50
+              0,
+              0,
+              0
             ],
             [
-              15,
-              15,
-              15
+              0,
+              0,
+              0
             ],
             [
-              1,
-              1,
-              1
+              0,
+              0,
+              0
             ],
             [
-              400,
-              400,
-              400
+              0,
+              0,
+              0
             ],
             [
-              1100,
-              1100,
-              1100
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -626,24 +626,18 @@
           ],
           "effectBurn": [
             null,
-            "200/300/400",
-            "50",
-            "15",
-            "1",
-            "400",
-            "1100",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
             "0",
             "0",
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "bonusattackdamage",
-              "coeff": 1.5,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": "No Cost",
           "maxammo": "-1",
           "range": [

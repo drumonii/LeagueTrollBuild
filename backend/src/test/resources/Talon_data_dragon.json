@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "8.24.1",
+  "version": "9.1.1",
   "data": {
     "Talon": {
       "id": "Talon",
@@ -548,7 +548,7 @@
           "id": "TalonR",
           "name": "Shadow Assault",
           "description": "Talon disperses a ring of blades and becomes Invisible while gaining additional Movement Speed. When Talon emerges from Invisibility, the blades converge on his location. Each time the blades move, Shadow Assault deals physical damage to enemies hit by at least one blade.",
-          "tooltip": "Talon disperses a ring of blades that deal {{ e1 }} <scaleAD>(+{{ a1 }})</scaleAD> physical damage to all units they hit, gains {{ e2 }}% increased movement speed, and becomes <span class=\"color91d7ee\">Invisible</span> for up to {{ e3 }} seconds. When the <span class=\"color91d7ee\">Invisibility</span> ends, the blades converge, dealing the same damage again to enemies they pass through.<br /><br />If Talon cancels <span class=\"color91d7ee\">Invisibility</span> with an attack or Noxian Diplomacy, the blades converge on his target's location instead.<br /><br /><u><span class=\"size16 color91d7ee\">Stealth - Invisible</span></u><span class=\"size16 colorb3b3b3\">: Talon can only be revealed by nearby enemy Turrets or <span class=\"size16 coloree91d7\">True Sight</span>.</span>",
+          "tooltip": "Talon disperses a ring of blades that deal <physicalDamage>{{ damage }} physical damage</physicalDamage> to all units they hit, gains {{ movespeed*100 }}% increased movement speed, and becomes <span class=\"color91d7ee\">Invisible</span> for up to {{ duration }} seconds. When the <span class=\"color91d7ee\">Invisibility</span> ends, the blades converge, dealing the same damage again to enemies they pass through.<br /><br />If Talon cancels <span class=\"color91d7ee\">Invisibility</span> with an attack or Noxian Diplomacy, the blades converge on his target's location instead.<br /><br /><u><span class=\"size16 color91d7ee\">Stealth - Invisible</span></u><span class=\"size16 colorb3b3b3\">: Talon can only be revealed by nearby enemy Turrets or <span class=\"size16 coloree91d7\">True Sight</span>.</span>",
           "leveltip": {
             "label": [
               "Damage",
@@ -556,8 +556,8 @@
               "Cooldown"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
-              "{{ effect2amount*100.000000 }}% -> {{ effect2amountnl*100.000000 }}%",
+              "{{ basedamage }} -> {{ basedamageNL }}",
+              "{{ movespeed*100.000000 }}% -> {{ movespeednl*100.000000 }}%",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
@@ -578,19 +578,19 @@
           "effect": [
             null,
             [
-              90,
-              135,
-              180
+              0,
+              0,
+              0
             ],
             [
-              40,
-              55,
-              70
+              0,
+              0,
+              0
             ],
             [
-              2.5,
-              2.5,
-              2.5
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -630,9 +630,9 @@
           ],
           "effectBurn": [
             null,
-            "90/135/180",
-            "40/55/70",
-            "2.5",
+            "0",
+            "0",
+            "0",
             "0",
             "0",
             "0",
@@ -641,13 +641,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "bonusattackdamage",
-              "coeff": 1,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [

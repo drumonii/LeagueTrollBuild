@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "8.24.1",
+  "version": "9.1.1",
   "data": {
     "Zed": {
       "id": "Zed",
@@ -547,7 +547,7 @@
           "id": "ZedR",
           "name": "Death Mark",
           "description": "Zed becomes untargetable and dashes to an enemy champion, marking them. After 3 seconds the mark triggers, repeating a portion of all the damage Zed dealt to the target while they were marked.",
-          "tooltip": "Zed becomes untargetable and dashes to an enemy champion, marking them. After 3 seconds, the mark triggers, dealing physical damage equal to <scaleAD>{{ a1 }}</scaleAD> + {{ e2 }}% of all damage dealt to the target by Zed while the mark was active.<br /><br />The dash leaves a shadow behind for {{ e4 }} seconds. Reactivating Death Mark causes Zed to switch positions with this shadow.<br /><br /><span class=\"colorFFFFFF\">Reaper of Shadows: </span>Zed reaps the shadow of the strongest foe slain under Death Mark, gaining <scaleAD>{{ f2 }}</scaleAD> attack damage. ({{ e0 }} + {{ e9 }}% of the victim's attack damage.)",
+          "tooltip": "Zed becomes untargetable and dashes to an enemy champion, marking them. After 3 seconds, the mark triggers, dealing physical damage equal to {{ rcalculateddamage }} + {{ rdamageamp*100 }}% of all damage dealt to the target by Zed while the mark was active.<br /><br />The dash leaves a shadow behind for {{ rshadowdurationdisplayed }} seconds. Reactivating Death Mark causes Zed to switch positions with this shadow.<br /><br /><span class=\"colorFFFFFF\">Reaper of Shadows: </span>Zed reaps the shadow of the strongest foe slain under Death Mark, gaining {{ radgained }} attack damage. ({{ rflatadbonusgain }} + {{ rbonusadpercentgain*100 }}% of the victim's attack damage.)",
           "leveltip": {
             "label": [
               "Mark Detonation Damage",
@@ -555,8 +555,8 @@
               "Cooldown"
             ],
             "effect": [
-              "{{ effect2amount*100.000000 }} -> {{ effect2amountnl*100.000000 }}",
-              "{{ effect9amount*100.000000 }} -> {{ effect9amountnl*100.000000 }}",
+              "{{ rdamageamp*100.000000 }} -> {{ rdamageampnl*100.000000 }}",
+              "{{ rbonusadpercentgain*100.000000 }} -> {{ rbonusadpercentgainnl*100.000000 }}",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
@@ -582,9 +582,9 @@
               1
             ],
             [
-              25,
-              40,
-              55
+              0.25,
+              0.4,
+              0.55
             ],
             [
               0.5,
@@ -617,9 +617,9 @@
               4
             ],
             [
-              5,
-              10,
-              15
+              0.05,
+              0.1,
+              0.15
             ],
             [
               5,
@@ -630,23 +630,17 @@
           "effectBurn": [
             null,
             "1",
-            "25/40/55",
+            "0.25/0.4/0.55",
             "0.5",
             "6",
             "6.5",
             "3",
             "7.5",
             "4",
-            "5/10/15",
+            "0.05/0.1/0.15",
             "5"
           ],
-          "vars": [
-            {
-              "link": "attackdamage",
-              "coeff": 1,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": "No Cost",
           "maxammo": "-1",
           "range": [

@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "8.24.1",
+  "version": "9.1.1",
   "data": {
     "Pyke": {
       "id": "Pyke",
@@ -28,6 +28,12 @@
           "id": "555001",
           "num": 1,
           "name": "Sand Wraith Pyke",
+          "chromas": true
+        },
+        {
+          "id": "555009",
+          "num": 9,
+          "name": "Blood Moon Pyke",
           "chromas": true
         }
       ],
@@ -64,7 +70,7 @@
         "armor": 45,
         "armorperlevel": 5,
         "spellblock": 32,
-        "spellblockperlevel": 2,
+        "spellblockperlevel": 1.5,
         "attackrange": 150,
         "hpregen": 7,
         "hpregenperlevel": 0.5,
@@ -82,7 +88,7 @@
           "id": "PykeQ",
           "name": "Bone Skewer",
           "description": "Pyke either stabs enemies in front of him or pulls an enemy towards him.",
-          "tooltip": "<scaleAD>Tap:</scaleAD> Pyke stabs all enemies in front of him dealing {{ f5 }} <scaleAD>(+{{ f6 }})</scaleAD> physical damage.<br /><br /><scaleAD>Hold: </scaleAD>Pyke throws his harpoon, pulling the first enemy struck towards him and dealing {{ e1 }} <scaleAD>(+{{ a1 }})</scaleAD> physical damage.<br /><br />Targets hit by either attack are slowed by {{ e9 }}% for {{ e8 }} second.<br /><br /><rules>Tapping deals 50% reduced damage to minions and monsters beyond the closest.</rules>",
+          "tooltip": "<scaleAD>Tap:</scaleAD> Pyke stabs all enemies in front of him dealing {{ f5 }} <scaleAD>(+{{ f6 }})</scaleAD> physical damage.<br /><br /><scaleAD>Hold: </scaleAD>Pyke throws his harpoon, pulling the first enemy struck towards him and dealing {{ e1 }} <scaleAD>(+{{ a1 }})</scaleAD> physical damage.<br /><br />Targets hit by either attack are slowed by {{ e9 }}% for {{ e8 }} second.<br /><br /><rules>Tapping deals {{ e0 }}% damage to minions and monsters beyond the closest.</rules>",
           "leveltip": {
             "label": [
               "Damage",
@@ -177,11 +183,11 @@
               90
             ],
             [
-              0.5,
-              0.5,
-              0.5,
-              0.5,
-              0.5
+              0.3,
+              0.3,
+              0.3,
+              0.3,
+              0.3
             ]
           ],
           "effectBurn": [
@@ -195,7 +201,7 @@
             "500",
             "1",
             "90",
-            "0.5"
+            "0.3"
           ],
           "vars": [
             {

@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "8.24.1",
+  "version": "9.1.1",
   "data": {
     "Vayne": {
       "id": "Vayne",
@@ -568,7 +568,7 @@
           "id": "VayneInquisition",
           "name": "Final Hour",
           "description": "Readying herself for an epic confrontation, Vayne gains increased Attack Damage, Invisibility during Tumble, and triple the bonus Movement Speed from Night Hunter.",
-          "tooltip": "Vayne gains {{ e1 }} bonus attack damage and improvements to Night Hunter and Tumble for {{ e2 }} seconds. The duration of Final Hour is extended by {{ e5 }} seconds whenever a champion damaged by Vayne dies within {{ e6 }} seconds.<br /><br /><span class=\"colorF0F0F0\">Night Hunter</span>: Vayne instead gains {{ e4 }} movement speed.<br /><span class=\"colorF0F0F0\">Tumble</span>: Vayne will also gain <span class=\"color91d7ee\">Invisibility</span> for {{ e3 }} second when she Tumbles.<br /><br /><rules><span class=\"color91d7ee\">Stealth - Invisible:</span> Vayne can only be revealed by nearby enemy Turrets or <span class=\"coloree91d7\">True Sight</span>.<br />Final Hour's duration can't be increased beyond its original maximum duration.</rules>",
+          "tooltip": "Vayne gains {{ e1 }} bonus attack damage and improvements to Night Hunter and Tumble for {{ e2 }} seconds. The duration of Final Hour is extended by {{ e5 }} seconds whenever a champion damaged by Vayne dies within {{ e6 }} seconds.<br /><br /><span class=\"colorF0F0F0\">Night Hunter</span>: Vayne instead gains {{ e4 }} movement speed.<br /><span class=\"colorF0F0F0\">Tumble</span>: Tumble's cooldown is reduced by {{ e7 }}%, and Vayne gains <span class=\"color91d7ee\">Invisibility</span> for {{ e3 }} second when she Tumbles.<br /><br /><rules><span class=\"color91d7ee\">Stealth - Invisible:</span> Vayne can only be revealed by nearby enemy Turrets or <span class=\"coloree91d7\">True Sight</span>.<br />Final Hour's duration can't be increased beyond its original maximum duration.</rules>",
           "leveltip": {
             "label": [
               "Bonus Attack Damage",
@@ -628,9 +628,9 @@
               3
             ],
             [
-              0,
-              0,
-              0
+              50,
+              50,
+              50
             ],
             [
               0,
@@ -656,7 +656,7 @@
             "90",
             "4",
             "3",
-            "0",
+            "50",
             "0",
             "0",
             "0"

@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "8.24.1",
+  "version": "9.1.1",
   "data": {
     "Sejuani": {
       "id": "Sejuani",
@@ -92,14 +92,14 @@
       },
       "stats": {
         "hp": 560,
-        "hpperlevel": 88,
+        "hpperlevel": 105,
         "mp": 400,
         "mpperlevel": 40,
         "movespeed": 340,
-        "armor": 31,
-        "armorperlevel": 3,
-        "spellblock": 27.1,
-        "spellblockperlevel": 0.75,
+        "armor": 34,
+        "armorperlevel": 4.25,
+        "spellblock": 32.1,
+        "spellblockperlevel": 1.25,
         "attackrange": 150,
         "hpregen": 8.5,
         "hpregenperlevel": 0.85,
@@ -108,7 +108,7 @@
         "crit": 0,
         "critperlevel": 0,
         "attackdamage": 64,
-        "attackdamageperlevel": 3,
+        "attackdamageperlevel": 4,
         "attackspeedperlevel": 3,
         "attackspeed": 0.625
       },
@@ -151,11 +151,11 @@
           "effect": [
             null,
             [
-              60,
-              90,
+              80,
               120,
-              150,
-              180
+              160,
+              200,
+              240
             ],
             [
               625,
@@ -223,7 +223,7 @@
           ],
           "effectBurn": [
             null,
-            "60/90/120/150/180",
+            "80/120/160/200/240",
             "625",
             "1000",
             "0.5",
@@ -315,10 +315,10 @@
             ],
             [
               30,
-              65,
-              100,
-              135,
-              170
+              70,
+              110,
+              150,
+              190
             ],
             [
               0,
@@ -374,7 +374,7 @@
             null,
             "20/25/30/35/40",
             "0.75",
-            "30/65/100/135/170",
+            "30/70/110/150/190",
             "0",
             "75",
             "0.25",
@@ -412,12 +412,10 @@
           "tooltip": "<spellPassive>Passive:</spellPassive> Nearby melee allied champions' basic attacks apply <span class=\"color07F2F1\">Frost</span> to enemy champions, large monsters, medium monsters, and large minions.<br /><br /><spellPassive>Active:</spellPassive> Target enemy with 4 stacks of <span class=\"color07F2F1\">Frost</span> takes {{ e3 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage, is stunned for {{ e1 }} second(s), and is briefly displaced.<br /><br /><rules>Enemy champions stunned by Sejuani cannot gain </rules><span class=\"size16 color07F2F1\">Frost</span><rules> for {{ f2 }} seconds.</rules>",
           "leveltip": {
             "label": [
-              "Damage",
-              "Stun Duration"
+              "Damage"
             ],
             "effect": [
-              "{{ e3 }} -> {{ e3NL }}",
-              "{{ e1 }} -> {{ e1NL }}"
+              "{{ e3 }} -> {{ e3NL }}"
             ]
           },
           "maxrank": 5,
@@ -442,10 +440,10 @@
             null,
             [
               1,
-              1.1,
-              1.2,
-              1.3,
-              1.4
+              1,
+              1,
+              1,
+              1
             ],
             [
               0,
@@ -455,11 +453,11 @@
               0
             ],
             [
-              20,
-              35,
-              50,
-              65,
-              80
+              40,
+              80,
+              120,
+              160,
+              200
             ],
             [
               4,
@@ -513,9 +511,9 @@
           ],
           "effectBurn": [
             null,
-            "1/1.1/1.2/1.3/1.4",
+            "1",
             "0",
-            "20/35/50/65/80",
+            "40/80/120/160/200",
             "4",
             "5",
             "1100",
@@ -534,13 +532,13 @@
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
-            750,
-            750,
-            750,
-            750,
-            750
+            560,
+            560,
+            560,
+            560,
+            560
           ],
-          "rangeBurn": "750",
+          "rangeBurn": "560",
           "image": {
             "full": "SejuaniE.png",
             "sprite": "spell10.png",

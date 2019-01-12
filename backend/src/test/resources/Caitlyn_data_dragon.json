@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "8.24.1",
+  "version": "9.1.1",
   "data": {
     "Caitlyn": {
       "id": "Caitlyn",
@@ -163,18 +163,18 @@
           "effect": [
             null,
             [
-              30,
-              70,
-              110,
-              150,
-              190
+              50,
+              90,
+              130,
+              170,
+              210
             ],
             [
-              33,
-              33,
-              33,
-              33,
-              33
+              40,
+              40,
+              40,
+              40,
+              40
             ],
             [
               50,
@@ -235,8 +235,8 @@
           ],
           "effectBurn": [
             null,
-            "30/70/110/150/190",
-            "33",
+            "50/90/130/170/210",
+            "40",
             "50",
             "1",
             "1.3/1.4/1.5/1.6/1.7",
@@ -570,12 +570,10 @@
           "leveltip": {
             "label": [
               "Damage",
-              "Range",
               "Cooldown"
             ],
             "effect": [
               "{{ rbasedamage }} -> {{ rbasedamageNL }}",
-              "{{ castrange }} -> {{ castrangeNL }}",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
@@ -663,11 +661,11 @@
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
-            2000,
-            2500,
-            3000
+            3500,
+            3500,
+            3500
           ],
-          "rangeBurn": "2000/2500/3000",
+          "rangeBurn": "3500",
           "image": {
             "full": "CaitlynAceintheHole.png",
             "sprite": "spell2.png",

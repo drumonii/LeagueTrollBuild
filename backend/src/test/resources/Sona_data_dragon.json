@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "8.24.1",
+  "version": "9.1.1",
   "data": {
     "Sona": {
       "id": "Sona",
@@ -574,16 +574,12 @@
             "label": [
               "Damage",
               "Cooldown",
-              "Hymn of Valor Cooldown",
-              "Aria of Perseverance Cooldown",
-              "Song of Celerity Cooldown"
+              "Basic Ability Base CDR"
             ],
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
               "{{ cooldown }} -> {{ cooldownNL }}",
-              "{{ f1 }} -> {{ f2 }}",
-              "{{ f3 }} -> {{ f4 }}",
-              "{{ f5 }} -> {{ f6 }}"
+              "{{ baseabilitycdr*-100 }}% -> {{ baseabilitycdrnl*-100 }}%"
             ]
           },
           "maxrank": 3,

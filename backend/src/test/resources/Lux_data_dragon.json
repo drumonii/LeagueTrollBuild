@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "8.24.1",
+  "version": "9.1.1",
   "data": {
     "Lux": {
       "id": "Lux",
@@ -128,7 +128,7 @@
           "id": "LuxLightBinding",
           "name": "Light Binding",
           "description": "Lux releases a sphere of light that binds and deals damage to up to two enemy units.",
-          "tooltip": "Fires a ball of light, rooting up to two enemies for {{ e3 }} seconds and dealing {{ e1 }} <scaleAP'>(+{{ a1 }})</scaleAP> magic damage to each.",
+          "tooltip": "Fires a ball of light, rooting up to two enemies for {{ e3 }} seconds and dealing {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage to each.",
           "leveltip": {
             "label": [
               "Damage",
@@ -275,14 +275,16 @@
           "id": "LuxPrismaticWave",
           "name": "Prismatic Barrier",
           "description": "Lux throws her wand and bends the light around any friendly target it touches, protecting them from enemy damage.",
-          "tooltip": "Throws Lux's wand in target direction protecting her and all allied Champions it touches from {{ e2 }} <scaleAP>(+{{ a1 }})</scaleAP> damage for 3 seconds.<br /><br />Upon reaching its destination it returns to Lux, protecting her and other allied Champions it touches from another {{ e2 }} <scaleAP>(+{{ a1 }})</scaleAP> damage for 3 seconds.<br /><br /><rules>Shielding an ally with the outgoing shield doubles the value of the returning shield.</rules>",
+          "tooltip": "Throws Lux's wand in target direction, shielding her and all allied Champions it touches from {{ e2 }} <scaleAP>(+{{ a1 }})</scaleAP> damage for 3 seconds.<br /><br />Upon reaching its destination, it returns to Lux, shielding her and all allied Champions it touches for an additional {{ effect2amount*2.0 }} <scaleAP>(+{{ charabilitypower2.0 }})</scaleAP> damage for 3 seconds.",
           "leveltip": {
             "label": [
               "Shield Amount",
+              "Returning Shield Amount",
               "Cooldown"
             ],
             "effect": [
               "{{ e2 }} -> {{ e2NL }}",
+              "{{ effect2amount*2.000000 }} -> {{ effect2amountnl*2.000000 }}",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
@@ -391,11 +393,6 @@
             "0"
           ],
           "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.2,
-              "key": "a1"
-            },
             {
               "link": "spelldamage",
               "coeff": 0.2,
