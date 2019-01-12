@@ -140,7 +140,7 @@ describe('ChampionsPage', () => {
       expect(component.championsFilterTag).toBe('');
 
       const championCards = fixture.debugElement.queryAll(By.css('.champion'));
-      expect(championCards.length).toBe(championCards.length);
+      expect(championCards.length).toBe(champions.length);
     });
 
     it('should filter Champions with search input', () => {
@@ -168,7 +168,7 @@ describe('ChampionsPage', () => {
       expect(championTags.map(championTag => championTag.nativeElement.textContent.trim())).toEqual(tags);
 
       const championBoxes = fixture.debugElement.queryAll(By.css('.champion'));
-      expect(championBoxes.length).toBe(championBoxes.length);
+      expect(championBoxes.length).toBe(champions.length);
 
       const championLinks = fixture.debugElement.queryAll(By.css('.champion-link'));
       const championNames = fixture.debugElement.queryAll(By.css('.champion-name'));
