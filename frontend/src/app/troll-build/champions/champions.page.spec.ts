@@ -178,13 +178,15 @@ describe('ChampionsPage', () => {
       const maokaiRouterLink = maokaiLink.injector.get(RouterLinkWithHref);
       expect(maokaiRouterLink.href).toBe(`/champions/${maokai.name}`);
       expect(championNames[0].nativeElement.textContent).toBe(maokai.name);
-      expect(championImgs[0].nativeElement.src).toContain(`/api/img/champions/${maokai.id}`);
+      expect(championImgs[0].attributes['data-src']).toBe(`/api/img/champions/${maokai.id}`);
+      expect(championImgs[0].nativeElement.classList).toContain('lazyload');
 
       const sionLink = championLinks[1];
       const sionRouterLink = sionLink.injector.get(RouterLinkWithHref);
       expect(sionRouterLink.href).toBe(`/champions/${sion.name}`);
       expect(championNames[1].nativeElement.textContent).toBe(sion.name);
-      expect(championImgs[1].nativeElement.src).toContain(`/api/img/champions/${sion.id}`);
+      expect(championImgs[1].attributes['data-src']).toBe(`/api/img/champions/${sion.id}`);
+      expect(championImgs[1].nativeElement.classList).toContain('lazyload');
     }
 
   });

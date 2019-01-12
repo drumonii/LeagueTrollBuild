@@ -26,7 +26,7 @@
             <div class="column champion-column">
               <a class="champion-link" [routerLink]="['/champions', champion.key]">
                 <p class="champion-name">{{champion.name}}</p>
-                <img class="champion-img" src="/api/img/champions/{{champion.id}}" [alt]="champion.key">
+                <img class="champion-img lazyload" [attr.data-src]="'/api/img/champions/' + champion.id" [alt]="champion.key">
               </a>
             </div>
           </div>
