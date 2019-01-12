@@ -140,6 +140,10 @@ spring:
         id.new_generator_mappings: true
         hbm2ddl.auto:
         temp.use_jdbc_metadata_defaults: false
+  data:
+    jpa:
+      repositories:
+        bootstrap-mode: deferred
   # Cache
   cache:
     type: simple
