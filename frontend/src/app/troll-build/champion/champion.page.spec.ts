@@ -1141,16 +1141,28 @@ describe('ChampionPage', () => {
       expect(trollBuildLoadingItemsHeader.nativeElement.textContent).toBe('Items');
       const trollBuildLoadingItems = fixture.debugElement.queryAll(By.css('.troll-build-loading-item'));
       expect(trollBuildLoadingItems.length).toBe(6);
+      const trollBuildLoadingItemsImgs = fixture.debugElement.queryAll(By.css('.troll-build-item-img'));
+      expect(trollBuildLoadingItemsImgs.length).toBe(6);
+      for (let i = 0; i < trollBuildLoadingItemsImgs.length; i++) {
+        expect(trollBuildLoadingItemsImgs[i].nativeElement.src).toContain('assets/images/dummy_item.png');
+      }
 
       const trollBuildLoadingSummonerSpellsHeader = fixture.debugElement.query(By.css('.troll-build-summoner-spells-header'));
       expect(trollBuildLoadingSummonerSpellsHeader.nativeElement.textContent).toBe('Summoner Spells');
       const trollBuildLoadingSummonerSpells = fixture.debugElement.queryAll(By.css('.troll-build-loading-summoner-spell'));
       expect(trollBuildLoadingSummonerSpells.length).toBe(2);
+      const trollBuildLoadingSummonerSpellsImgs = fixture.debugElement.queryAll(By.css('.troll-build-summoner-spells-img'));
+      expect(trollBuildLoadingSummonerSpellsImgs.length).toBe(2);
+      for (let i = 0; i < trollBuildLoadingSummonerSpellsImgs.length; i++) {
+        expect(trollBuildLoadingSummonerSpellsImgs[i].nativeElement.src).toContain('assets/images/dummy_item.png');
+      }
 
       const trollBuildLoadingTrinketHeader = fixture.debugElement.query(By.css('.troll-build-trinket-header'));
       expect(trollBuildLoadingTrinketHeader.nativeElement.textContent).toBe('Trinket');
       const trollBuildLoadingTrinket = fixture.debugElement.query(By.css('.troll-build-loading-trinket'));
       expect(trollBuildLoadingTrinket).toBeTruthy();
+      const trollBuildLoadingTrinketImg = fixture.debugElement.query(By.css('.troll-build-trinket-img'));
+      expect(trollBuildLoadingTrinketImg.nativeElement.src).toContain('assets/images/dummy_item.png');
 
       const saveBuildBtn = fixture.debugElement.query(By.css('#save-build-btn'));
       expect(saveBuildBtn).toBeFalsy();
