@@ -26,7 +26,7 @@ describe('AdminHomePage', () => {
     expect(fixture.debugElement.query(By.css('#cpu-usage-card'))).toBeTruthy();
     expect(fixture.debugElement.query(By.css('#failed-jobs-card'))).toBeTruthy();
     expect(fixture.debugElement.query(By.css('#memory-usage-card'))).toBeTruthy();
-    expect(fixture.debugElement.query(By.css('#servlet-errors-card'))).toBeTruthy();
+    expect(fixture.debugElement.query(By.css('#global-errors-card'))).toBeTruthy();
   });
 
 });

@@ -6,7 +6,7 @@ import { AdminHomePage } from './admin-home.page';
 import { CpuUsageModule } from './cpu-usage.module';
 import { FailedJobsModule } from './failed-jobs.module';
 import { MemoryUsageModule } from './memory-usage.module';
-import { ServletErrorModule } from './servlet-error.module';
+import { GlobalErrorModule } from './global-error.module';
 
 @NgModule({
   imports: [
@@ -15,7 +15,7 @@ import { ServletErrorModule } from './servlet-error.module';
     CpuUsageModule,
     FailedJobsModule,
     MemoryUsageModule,
-    ServletErrorModule
+    GlobalErrorModule
   ],
   declarations: [
     AdminHomePage

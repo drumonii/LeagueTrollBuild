@@ -1,14 +1,14 @@
 import { inject, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController, RequestMatch } from '@angular/common/http/testing';
 
-import { ServletErrorService } from './servlet-error.service';
+import { GlobalErrorService } from './global-error.service';
 import { ActuatorResponse } from '@admin-model/actuator-response';
 
-describe('ServletErrorService', () => {
+describe('GlobalErrorService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [ServletErrorService]
+      providers: [GlobalErrorService]
     });
   });
 
@@ -16,15 +16,15 @@ describe('ServletErrorService', () => {
     httpMock.verify();
   }));
 
-  describe('getServletErrors', () => {
+  describe('getGlobalErrors', () => {
 
-    const requestMatch: RequestMatch = { method: 'GET', url: '/admin/actuator/metrics/tomcat.servlet.error' };
+    const requestMatch: RequestMatch = { method: 'GET', url: '/admin/actuator/metrics/tomcat.global.error' };
 
-    it('should get servlet errors', inject([ServletErrorService, HttpTestingController],
-      (service: ServletErrorService, httpMock: HttpTestingController) => {
+    it('should get global errors', inject([GlobalErrorService, HttpTestingController],
+      (service: GlobalErrorService, httpMock: HttpTestingController) => {
       const mockServletErrors = 1;
       const mockActuatorResponse: ActuatorResponse = {
-        name: 'tomcat.servlet.error',
+        name: 'tomcat.global.error',
         measurements: [
           {
             statistic: 'COUNT',
@@ -33,7 +33,7 @@ describe('ServletErrorService', () => {
         ],
       };
 
-      service.getServletErrors().subscribe(servletErrors => {
+      service.getGlobalErrors().subscribe(servletErrors => {
         expect(servletErrors).toBe(mockServletErrors);
       });
 
@@ -42,9 +42,9 @@ describe('ServletErrorService', () => {
       testReq.flush(mockActuatorResponse);
     }));
 
-    it('should get servlet errors with REST error', inject([ServletErrorService, HttpTestingController],
-      (service: ServletErrorService, httpMock: HttpTestingController) => {
-      service.getServletErrors().subscribe(servletErrors => {
+    it('should get global errors with REST error', inject([GlobalErrorService, HttpTestingController],
+      (service: GlobalErrorService, httpMock: HttpTestingController) => {
+      service.getGlobalErrors().subscribe(servletErrors => {
         expect(servletErrors).toBeNull();
       });
 
