@@ -174,19 +174,25 @@ describe('ChampionsPage', () => {
       const championNames = fixture.debugElement.queryAll(By.css('.champion-name'));
       const championImgs = fixture.debugElement.queryAll(By.css('.champion-img'));
 
-      const maokaiLink = championLinks[0];
-      const maokaiRouterLink = maokaiLink.injector.get(RouterLinkWithHref);
-      expect(maokaiRouterLink.href).toBe(`/champions/${maokai.name}`);
-      expect(championNames[0].nativeElement.textContent).toBe(maokai.name);
-      expect(championImgs[0].attributes['data-src']).toBe(`/api/img/champions/${maokai.id}`);
-      expect(championImgs[0].nativeElement.classList).toContain('lazyload');
+      for (let i = 0; i < champions.length; i++) {
+        const champion = champions[i];
 
-      const sionLink = championLinks[1];
-      const sionRouterLink = sionLink.injector.get(RouterLinkWithHref);
-      expect(sionRouterLink.href).toBe(`/champions/${sion.name}`);
-      expect(championNames[1].nativeElement.textContent).toBe(sion.name);
-      expect(championImgs[1].attributes['data-src']).toBe(`/api/img/champions/${sion.id}`);
-      expect(championImgs[1].nativeElement.classList).toContain('lazyload');
+        const championLink = championLinks[i];
+        const championRouterLink = championLink.injector.get(RouterLinkWithHref);
+        expect(championRouterLink.href).toBe(`/champions/${champion.name}`);
+
+        const championName = championNames[i];
+        expect(championName.nativeElement.textContent).toBe(champion.name);
+
+        const championImg = championImgs[i];
+        expect(championImg.attributes['ltbLazyLoadImg']).toBe('');
+        if ('IntersectionObserver' in window) {
+          expect(championImg.nativeElement.src).toContain('assets/images/dummy_champion.png');
+          expect(championImg.attributes['ng-reflect-data-src']).toBe(`/api/img/champions/${champion.id}`);
+        } else {
+          expect(championImg.nativeElement.src).toContain(`/api/img/champions/${champion.id}`);
+        }
+      }
     }
 
   });

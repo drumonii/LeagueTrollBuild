@@ -8,11 +8,14 @@ import { ChampionsTagsFilterPipe } from './champions-tags-filter.pipe';
 import { ChampionsPage } from './champions.page';
 import { ChampionsService } from './champions.service';
 
+import { LazyLoadImgModule } from '@directive/lazy-load-img.module';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     ChampionsRoutingModule,
+    LazyLoadImgModule
   ],
   declarations: [
     ChampionsNameFilterPipe,

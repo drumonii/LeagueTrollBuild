@@ -26,8 +26,9 @@
             <div class="column champion-column">
               <a class="champion-link" [routerLink]="['/champions', champion.key]">
                 <p class="champion-name">{{champion.name}}</p>
-                <img class="champion-img lazyload" src="assets/images/dummy_champion.png" [alt]="champion.key"
-                     [attr.data-src]="'/api/img/champions/' + champion.id" >
+                <img class="champion-img" [alt]="champion.key" ltbLazyLoadImg
+                     src="assets/images/dummy_champion.png"
+                     [dataSrc]="'/api/img/champions/' + champion.id">
               </a>
             </div>
           </div>
