@@ -10,7 +10,7 @@
       "schematics": {
         "@schematics/angular:component": {
           "prefix": "ltb",
-          "styleext": "scss"
+          "style": "sass"
         },
         "@schematics/angular:directive": {
           "prefix": "ltb"
@@ -33,7 +33,8 @@
               "src/styles.scss",
               "./node_modules/font-awesome/css/font-awesome.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "es5BrowserSupport": true
           },
           "configurations": {
             "production": {
