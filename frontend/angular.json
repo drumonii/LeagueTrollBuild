@@ -66,7 +66,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "league-troll-build:build"
+            "browserTarget": "league-troll-build:build",
+            "proxyConfig": "proxy.config.json"
           },
           "configurations": {
             "production": {
