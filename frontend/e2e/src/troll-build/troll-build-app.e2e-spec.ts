@@ -10,9 +10,13 @@ describe('troll-build-app', () => {
   });
 
   it('should have body styles', () => {
-    const bodyCss = element(by.css('body')).getCssValue('background');
-    expect(bodyCss).toContain('background.jpg');
-    expect(bodyCss).toContain('rgb(0, 0, 0)');
+    const body = element(by.css('body'));
+    const bodyBgImageCss = body.getCssValue('background-image');
+    expect(bodyBgImageCss).toContain('background.jpg');
+    const bodyBgRpeatCss = body.getCssValue('background-repeat');
+    expect(bodyBgRpeatCss).toBe('no-repeat');
+    const bodyBgColorCss = body.getCssValue('background-color');
+    expect(bodyBgColorCss).toBe('rgba(0, 0, 0, 1)');
   });
 
   it('should show the troll build header', () => {
