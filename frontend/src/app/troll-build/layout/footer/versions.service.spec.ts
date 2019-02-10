@@ -17,7 +17,7 @@ describe('VersionsService', () => {
     httpMock.verify();
   }));
 
-  describe('getLatestVersion', function () {
+  describe('getLatestVersion', () => {
 
     const requestMatch: RequestMatch = { method: 'GET', url: '/versions/latest' };
 

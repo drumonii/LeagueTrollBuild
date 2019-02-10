@@ -66,7 +66,8 @@ describe('ChampionsNameFilterPipe', () => {
     passive: {
       name: 'Void Shift',
       description: 'When he hasn\'t recently taken damage or been crowd controlled, Malzahar gains massive damage ' +
-        'reduction and crowd control immunity, lingering for a short period after taking damage.<br><br>Damage from lane minions is unaffected.'
+        'reduction and crowd control immunity, lingering for a short period after taking damage.<br><br>Damage from ' +
+        'lane minions is unaffected.'
     },
     tags: [
       'Assassin',

@@ -111,9 +111,9 @@ describe('BuildsPage', () => {
       requiredChampion: null,
       requiredAlly: null,
       maps: {
-        '10': true,
-        '11': true,
-        '12': true
+        10: true,
+        11: true,
+        12: true
       },
       gold: {
         base: 350,
@@ -142,9 +142,9 @@ describe('BuildsPage', () => {
       requiredChampion: null,
       requiredAlly: null,
       maps: {
-        '10': true,
-        '11': true,
-        '12': true
+        10: true,
+        11: true,
+        12: true
       },
       gold: {
         base: 700,
@@ -170,9 +170,9 @@ describe('BuildsPage', () => {
       requiredChampion: null,
       requiredAlly: null,
       maps: {
-        '10': true,
-        '11': true,
-        '12': true
+        10: true,
+        11: true,
+        12: true
       },
       gold: {
         base: 1000,
@@ -196,9 +196,9 @@ describe('BuildsPage', () => {
       requiredChampion: null,
       requiredAlly: null,
       maps: {
-        '10': true,
-        '11': true,
-        '12': true
+        10: true,
+        11: true,
+        12: true
       },
       gold: {
         base: 1365,
@@ -223,9 +223,9 @@ describe('BuildsPage', () => {
       requiredChampion: null,
       requiredAlly: null,
       maps: {
-        '10': true,
-        '11': true,
-        '12': true
+        10: true,
+        11: true,
+        12: true
       },
       gold: {
         base: 1000,
@@ -256,9 +256,9 @@ describe('BuildsPage', () => {
       requiredChampion: null,
       requiredAlly: null,
       maps: {
-        '10': false,
-        '11': true,
-        '12': false
+        10: false,
+        11: true,
+        12: false
       },
       gold: {
         base: 550,
@@ -314,9 +314,9 @@ describe('BuildsPage', () => {
       requiredChampion: null,
       requiredAlly: null,
       maps: {
-        '10': false,
-        '11': true,
-        '12': true
+        10: false,
+        11: true,
+        12: true
       },
       gold: {
         base: 0,
@@ -339,7 +339,7 @@ describe('BuildsPage', () => {
           {
             provide: ActivatedRoute,
             useValue: {
-              data: of({ build: { 'id': build.id, 'savedBuild': build } })
+              data: of({ build: { id: build.id, savedBuild: build } })
             }
           }
         ]
@@ -394,7 +394,7 @@ describe('BuildsPage', () => {
           {
             provide: ActivatedRoute,
             useValue: {
-              data: of({ build: { 'id': 1, 'savedBuild': null } })
+              data: of({ build: { id: 1, savedBuild: null } })
             }
           }
         ]
@@ -438,7 +438,7 @@ describe('BuildsPage', () => {
           {
             provide: ActivatedRoute,
             useValue: {
-              data: of({ build: { 'id': 1, 'savedBuild': invalidItemsBuild } })
+              data: of({ build: { id: 1, savedBuild: invalidItemsBuild } })
             }
           }
         ]
@@ -482,7 +482,7 @@ describe('BuildsPage', () => {
           {
             provide: ActivatedRoute,
             useValue: {
-              data: of({ build: { 'id': 1, 'savedBuild': invalidSummonerSpellsBuild } })
+              data: of({ build: { id: 1, savedBuild: invalidSummonerSpellsBuild } })
             }
           }
         ]
@@ -504,7 +504,8 @@ describe('BuildsPage', () => {
     it('should show invalid Summoner Spells alert',
       inject([BuildsService, TitleService], (buildsService: BuildsService, title: TitleService) => {
       const buildInvalidAlert = fixture.debugElement.query(By.css('#build-invalid-summoner-spells-alert'));
-      expect(buildInvalidAlert.nativeElement.textContent).toBe('This Troll Build with ID: 1 has become invalid due to outdated Summoner Spells');
+      expect(buildInvalidAlert.nativeElement.textContent)
+        .toBe('This Troll Build with ID: 1 has become invalid due to outdated Summoner Spells');
 
       const randomBuildLink = fixture.debugElement.query(By.css('.try-random-build'));
       expect(randomBuildLink.nativeElement.textContent.trim()).toBe('Try a random Troll Build');
@@ -526,7 +527,7 @@ describe('BuildsPage', () => {
           {
             provide: ActivatedRoute,
             useValue: {
-              data: of({ build: { 'id': 1, 'savedBuild': invalidTrinketBuild } })
+              data: of({ build: { id: 1, savedBuild: invalidTrinketBuild } })
             }
           }
         ]

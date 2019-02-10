@@ -19,7 +19,7 @@ describe('ChampionResolver', () => {
         {
           provide: ActivatedRouteSnapshot,
           useValue: {
-            paramMap: convertToParamMap({ 'name': 'Kennen' })
+            paramMap: convertToParamMap({ name: 'Kennen' })
           }
         }
       ]

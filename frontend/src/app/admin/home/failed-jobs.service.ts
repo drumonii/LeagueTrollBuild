@@ -17,7 +17,7 @@ export class FailedJobsService {
     const params = new HttpParams()
       .set('jobExecution.status', 'FAILED');
     const options = {
-      params: params
+      params
     };
     return this.httpClient.get<Paginated<BatchJobInstance>>('/job-instances', options)
       .pipe(

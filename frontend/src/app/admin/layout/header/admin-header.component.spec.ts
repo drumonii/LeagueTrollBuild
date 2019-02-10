@@ -94,7 +94,7 @@ describe('AdminHeaderComponent', () => {
       fixture.detectChanges();
 
       expect(authService.logoutAdmin).toHaveBeenCalled();
-      expect(router.navigate).toHaveBeenCalledWith(['/admin/login'], { queryParams: { 'logout': true } });
+      expect(router.navigate).toHaveBeenCalledWith(['/admin/login'], { queryParams: { logout: true } });
     }));
 
     it('should collapse navbar on burger click', () => {

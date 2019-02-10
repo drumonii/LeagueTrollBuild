@@ -21,7 +21,8 @@ describe('AdminAlreadyLoggedInGuard', () => {
   }));
 
   it('should return false and redirect to /admin if admin is already logged in',
-    inject([AdminAlreadyLoggedInGuard, AdminAuthService, Router], (guard: AdminAlreadyLoggedInGuard, authService: AdminAuthService, router: Router) => {
+    inject([AdminAlreadyLoggedInGuard, AdminAuthService, Router],
+      (guard: AdminAlreadyLoggedInGuard, authService: AdminAuthService, router: Router) => {
     spyOn(authService, 'isAuthenticated').and.returnValue(of(true));
 
     guard.canActivate(null, null).subscribe(canActivate => {
@@ -31,7 +32,8 @@ describe('AdminAlreadyLoggedInGuard', () => {
   }));
 
   it('should return true if admin is not authenticated',
-    inject([AdminAlreadyLoggedInGuard, AdminAuthService, Router], (guard: AdminAlreadyLoggedInGuard, authService: AdminAuthService, router: Router) => {
+    inject([AdminAlreadyLoggedInGuard, AdminAuthService, Router],
+      (guard: AdminAlreadyLoggedInGuard, authService: AdminAuthService, router: Router) => {
     spyOn(authService, 'isAuthenticated').and.returnValue(of(false));
 
     guard.canActivate(null, null).subscribe(canActivate => {

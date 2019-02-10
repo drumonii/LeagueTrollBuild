@@ -29,10 +29,14 @@ export class ChampionService {
   getTrollBuild(name: string, gameMapId?: number): Observable<TrollBuild> {
     const params = gameMapId ? new HttpParams().set('mapId', gameMapId.toString()) : new HttpParams();
     this.logger.info(`GETing a Troll Build for Champion ${name} and map Id ${params.get('mapId')}`);
-    return this.httpClient.get<TrollBuild>(`/champions/${name}/troll-build`, { params: params })
+    const options = {
+      params
+    };
+    return this.httpClient.get<TrollBuild>(`/champions/${name}/troll-build`, options)
       .pipe(
         catchError((error: HttpErrorResponse) => {
-          this.logger.error(`Caught error while GETing a Troll Build for Champion ${name} and params ${JSON.stringify(params)}: ${JSON.stringify(error)}`);
+          this.logger.error(`Caught error while GETing a Troll Build for Champion ${name} and params
+            ${JSON.stringify(params)}: ${JSON.stringify(error)}`);
           return of(new TrollBuild());
         })
       );

@@ -175,10 +175,10 @@ describe('ChampionPage', () => {
           requiredChampion: null,
           requiredAlly: null,
           maps: {
-            '10': true,
-            '11': true,
-            '12': true,
-            '21': true
+            10: true,
+            11: true,
+            12: true,
+            21: true
           },
           gold: {
             base: 800,
@@ -203,10 +203,10 @@ describe('ChampionPage', () => {
           requiredChampion: null,
           requiredAlly: null,
           maps: {
-            '10': false,
-            '11': true,
-            '12': false,
-            '21': false
+            10: false,
+            11: true,
+            12: false,
+            21: false
           },
           gold: {
             base: 100,
@@ -237,10 +237,10 @@ describe('ChampionPage', () => {
           requiredChampion: null,
           requiredAlly: null,
           maps: {
-            '10': false,
-            '11': true,
-            '12': false,
-            '21': false
+            10: false,
+            11: true,
+            12: false,
+            21: false
           },
           gold: {
             base: 550,
@@ -264,10 +264,10 @@ describe('ChampionPage', () => {
           requiredChampion: null,
           requiredAlly: null,
           maps: {
-            '10': true,
-            '11': true,
-            '12': true,
-            '21': true
+            10: true,
+            11: true,
+            12: true,
+            21: true
           },
           gold: {
             base: 1365,
@@ -293,10 +293,10 @@ describe('ChampionPage', () => {
           requiredChampion: null,
           requiredAlly: null,
           maps: {
-            '10': true,
-            '11': true,
-            '12': true,
-            '21': true
+            10: true,
+            11: true,
+            12: true,
+            21: true
           },
           gold: {
             base: 650,
@@ -324,10 +324,10 @@ describe('ChampionPage', () => {
           requiredChampion: null,
           requiredAlly: null,
           maps: {
-            '10': true,
-            '11': true,
-            '12': true,
-            '21': true
+            10: true,
+            11: true,
+            12: true,
+            21: true
           },
           gold: {
             base: 450,
@@ -350,10 +350,10 @@ describe('ChampionPage', () => {
         requiredChampion: null,
         requiredAlly: null,
         maps: {
-          '10': true,
-          '11': false,
-          '12': false,
-          '21': true
+          10: true,
+          11: false,
+          12: false,
+          21: true
         },
         gold: {
           base: 0,
@@ -409,14 +409,14 @@ describe('ChampionPage', () => {
           requiredChampion: null,
           requiredAlly: null,
           maps: {
-            '8': true,
-            '10': true,
-            '11': true,
-            '12': true,
-            '14': true,
-            '16': false,
-            '18': true,
-            '19': true
+            8: true,
+            10: true,
+            11: true,
+            12: true,
+            14: true,
+            16: false,
+            18: true,
+            19: true
           },
           gold: {
             base: 600,
@@ -444,14 +444,14 @@ describe('ChampionPage', () => {
           requiredChampion: null,
           requiredAlly: null,
           maps: {
-            '8': true,
-            '10': true,
-            '11': true,
-            '12': true,
-            '14': true,
-            '16': false,
-            '18': true,
-            '19': true
+            8: true,
+            10: true,
+            11: true,
+            12: true,
+            14: true,
+            16: false,
+            18: true,
+            19: true
           },
           gold: {
             base: 500,
@@ -481,14 +481,14 @@ describe('ChampionPage', () => {
           requiredChampion: null,
           requiredAlly: null,
           maps: {
-            '8': true,
-            '10': true,
-            '11': true,
-            '12': true,
-            '14': true,
-            '16': false,
-            '18': true,
-            '19': true
+            8: true,
+            10: true,
+            11: true,
+            12: true,
+            14: true,
+            16: false,
+            18: true,
+            19: true
           },
           gold: {
             base: 250,
@@ -516,14 +516,14 @@ describe('ChampionPage', () => {
           requiredChampion: null,
           requiredAlly: null,
           maps: {
-            '8': false,
-            '10': true,
-            '11': true,
-            '12': true,
-            '14': true,
-            '16': false,
-            '18': true,
-            '19': false
+            8: false,
+            10: true,
+            11: true,
+            12: true,
+            14: true,
+            16: false,
+            18: true,
+            19: false
           },
           gold: {
             base: 915,
@@ -547,14 +547,14 @@ describe('ChampionPage', () => {
           requiredChampion: null,
           requiredAlly: null,
           maps: {
-            '8': true,
-            '10': true,
-            '11': true,
-            '12': true,
-            '14': true,
-            '16': false,
-            '18': true,
-            '19': true
+            8: true,
+            10: true,
+            11: true,
+            12: true,
+            14: true,
+            16: false,
+            18: true,
+            19: true
           },
           gold: {
             base: 800,
@@ -581,14 +581,14 @@ describe('ChampionPage', () => {
           requiredChampion: null,
           requiredAlly: null,
           maps: {
-            '8': true,
-            '10': true,
-            '11': true,
-            '12': true,
-            '14': true,
-            '16': false,
-            '18': true,
-            '19': true
+            8: true,
+            10: true,
+            11: true,
+            12: true,
+            14: true,
+            16: false,
+            18: true,
+            19: true
           },
           gold: {
             base: 1150,
@@ -613,14 +613,14 @@ describe('ChampionPage', () => {
         requiredChampion: null,
         requiredAlly: null,
         maps: {
-          '8': false,
-          '10': false,
-          '11': true,
-          '12': true,
-          '14': true,
-          '16': false,
-          '18': true,
-          '19': false
+          8: false,
+          10: false,
+          11: true,
+          12: true,
+          14: true,
+          16: false,
+          18: true,
+          19: false
         },
         gold: {
           base: 0,
@@ -678,10 +678,10 @@ describe('ChampionPage', () => {
           requiredChampion: null,
           requiredAlly: null,
           maps: {
-            '10': true,
-            '11': true,
-            '12': true,
-            '21': true
+            10: true,
+            11: true,
+            12: true,
+            21: true
           },
           gold: {
             base: 600,
@@ -708,10 +708,10 @@ describe('ChampionPage', () => {
           requiredChampion: null,
           requiredAlly: null,
           maps: {
-            '10': true,
-            '11': true,
-            '12': true,
-            '21': true
+            10: true,
+            11: true,
+            12: true,
+            21: true
           },
           gold: {
             base: 725,
@@ -739,10 +739,10 @@ describe('ChampionPage', () => {
           requiredChampion: null,
           requiredAlly: null,
           maps: {
-            '10': true,
-            '11': true,
-            '12': true,
-            '21': true
+            10: true,
+            11: true,
+            12: true,
+            21: true
           },
           gold: {
             base: 450,
@@ -764,10 +764,10 @@ describe('ChampionPage', () => {
           requiredChampion: null,
           requiredAlly: null,
           maps: {
-            '10': false,
-            '11': false,
-            '12': true,
-            '21': false
+            10: false,
+            11: false,
+            12: true,
+            21: false
           },
           gold: {
             base: 0,
@@ -792,10 +792,10 @@ describe('ChampionPage', () => {
           requiredChampion: null,
           requiredAlly: null,
           maps: {
-            '10': true,
-            '11': true,
-            '12': true,
-            '21': true
+            10: true,
+            11: true,
+            12: true,
+            21: true
           },
           gold: {
             base: 1000,
@@ -824,10 +824,10 @@ describe('ChampionPage', () => {
           requiredChampion: null,
           requiredAlly: null,
           maps: {
-            '10': true,
-            '11': true,
-            '12': true,
-            '21': true
+            10: true,
+            11: true,
+            12: true,
+            21: true
           },
           gold: {
             base: 700,
@@ -850,10 +850,10 @@ describe('ChampionPage', () => {
         requiredChampion: null,
         requiredAlly: null,
         maps: {
-          '10': true,
-          '11': true,
-          '12': true,
-          '21': true
+          10: true,
+          11: true,
+          12: true,
+          21: true
         },
         gold: {
           base: 0,
@@ -1012,7 +1012,7 @@ describe('ChampionPage', () => {
         buildsServiceSpy.and.returnValue(of(new HttpResponse<Build>({
           body: savedBuild,
           headers: new HttpHeaders({
-            'Location': selfRef
+            Location: selfRef
           }),
           status: 201
         })));
@@ -1035,7 +1035,7 @@ describe('ChampionPage', () => {
 
         const savedBuildInput = fixture.debugElement.query(By.css('#saved-build-input-link'));
         expect(savedBuildInput.nativeElement.value).toBe(`http://localhost/build/${savedBuild.id}`);
-        expect(savedBuildInput.attributes['readonly']).toBe('');
+        expect(savedBuildInput.nativeElement.readOnly).toBe(true);
 
         expect(newBuildBtn.nativeElement.disabled).toBeTruthy('Expected save build button to be disabled');
 
@@ -1143,8 +1143,8 @@ describe('ChampionPage', () => {
       expect(trollBuildLoadingItems.length).toBe(6);
       const trollBuildLoadingItemsImgs = fixture.debugElement.queryAll(By.css('.troll-build-item-img'));
       expect(trollBuildLoadingItemsImgs.length).toBe(6);
-      for (let i = 0; i < trollBuildLoadingItemsImgs.length; i++) {
-        expect(trollBuildLoadingItemsImgs[i].nativeElement.src).toContain('assets/images/dummy_item.png');
+      for (const trollBuildLoadingItemsImg of trollBuildLoadingItemsImgs) {
+        expect(trollBuildLoadingItemsImg.nativeElement.src).toContain('assets/images/dummy_item.png');
       }
 
       const trollBuildLoadingSummonerSpellsHeader = fixture.debugElement.query(By.css('.troll-build-summoner-spells-header'));
@@ -1153,8 +1153,8 @@ describe('ChampionPage', () => {
       expect(trollBuildLoadingSummonerSpells.length).toBe(2);
       const trollBuildLoadingSummonerSpellsImgs = fixture.debugElement.queryAll(By.css('.troll-build-summoner-spells-img'));
       expect(trollBuildLoadingSummonerSpellsImgs.length).toBe(2);
-      for (let i = 0; i < trollBuildLoadingSummonerSpellsImgs.length; i++) {
-        expect(trollBuildLoadingSummonerSpellsImgs[i].nativeElement.src).toContain('assets/images/dummy_item.png');
+      for (const trollBuildLoadingSummonerSpellsImg of trollBuildLoadingSummonerSpellsImgs) {
+        expect(trollBuildLoadingSummonerSpellsImg.nativeElement.src).toContain('assets/images/dummy_item.png');
       }
 
       const trollBuildLoadingTrinketHeader = fixture.debugElement.query(By.css('.troll-build-trinket-header'));

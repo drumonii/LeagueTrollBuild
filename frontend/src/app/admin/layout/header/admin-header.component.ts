@@ -30,7 +30,7 @@ export class AdminHeaderComponent implements OnInit {
 
   logout(): void {
     this.authService.logoutAdmin()
-      .subscribe(() => this.router.navigate(['/admin/login'], { queryParams: { 'logout': true } }));
+      .subscribe(() => this.router.navigate(['/admin/login'], { queryParams: { logout: true } }));
   }
 
 }

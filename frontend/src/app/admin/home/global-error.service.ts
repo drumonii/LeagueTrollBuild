@@ -12,7 +12,7 @@ export class GlobalErrorService {
 
   constructor(private logger: Logger, private httpClient: HttpClient) {}
 
-  getGlobalErrors(): Observable<Number> {
+  getGlobalErrors(): Observable<number> {
     return this.httpClient.get<ActuatorResponse>('/admin/actuator/metrics/tomcat.global.error')
       .pipe(
         map((response) => response.measurements.find((measurement) => measurement.statistic === 'COUNT').value),

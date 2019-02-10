@@ -7,6 +7,8 @@ import { By } from '@angular/platform-browser';
 
 import { of } from 'rxjs';
 
+import { LazyLoadImgDirective } from '@directive/lazy-load-img.directive';
+
 import { ChampionsPage } from './champions.page';
 import { ChampionsModule } from './champions.module';
 import { Champion } from '@model/champion';
@@ -185,7 +187,8 @@ describe('ChampionsPage', () => {
         expect(championName.nativeElement.textContent).toBe(champion.name);
 
         const championImg = championImgs[i];
-        expect(championImg.attributes['ltbLazyLoadImg']).toBe('');
+        const ltbLazyLoadImg = championImg.injector.get(LazyLoadImgDirective);
+        expect(ltbLazyLoadImg).toBeTruthy();
         if ('IntersectionObserver' in window) {
           expect(championImg.nativeElement.src).toContain('assets/images/dummy_champion.png');
           expect(championImg.attributes['ng-reflect-data-src']).toBe(`/api/img/champions/${champion.id}`);

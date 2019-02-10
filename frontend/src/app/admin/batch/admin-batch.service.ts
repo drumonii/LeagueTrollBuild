@@ -30,7 +30,7 @@ export class AdminBatchService {
       }
     }
     const options = {
-      params: params
+      params
     };
     this.logger.info(`GETing job instances with page request: ${params}`);
     return this.httpClient.get<Paginated<BatchJobInstance>>('/job-instances', options)
@@ -57,12 +57,12 @@ export class AdminBatchService {
     const params = new HttpParams()
       .set('minutes', minutesAgo.toString());
     const options = {
-      params: params
+      params
     };
     this.logger.info('GETing has failed all retrievals job');
     return this.httpClient.get<any>('/job-instances/has-failed-all-retrievals-job', options)
       .pipe(
-        map((response) => response['hasFailedAllRetrievalsJob']),
+        map((response) => response.hasFailedAllRetrievalsJob),
         catchError((error: HttpErrorResponse) => {
           this.logger.error(`Caught error while GETing /job-instances/has-failed-all-retrievals-job: ${JSON.stringify(error)}`);
           return of(null);

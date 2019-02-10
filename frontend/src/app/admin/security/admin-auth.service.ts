@@ -29,7 +29,7 @@ export class AdminAuthService {
     const body = `username=${username}&password=${password}`;
     const headers = new HttpHeaders().set('content-type', 'application/x-www-form-urlencoded');
     const options = {
-      headers: headers
+      headers
     };
     return this.httpClient.post<AdminLoginResponse>('/admin/login', body, options)
       .pipe(

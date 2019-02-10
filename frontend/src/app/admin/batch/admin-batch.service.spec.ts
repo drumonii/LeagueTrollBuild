@@ -255,7 +255,7 @@ describe('AdminBatchService', () => {
     it('should determine if has failed all retrievals job', inject([AdminBatchService, HttpTestingController],
       (service: AdminBatchService, httpMock: HttpTestingController) => {
       const mockHasFailedAllRetrievalsJob = {
-        'hasFailedAllRetrievalsJob': false
+        hasFailedAllRetrievalsJob: false
       };
 
       service.hasFailedAllRetrievalsJob(minutesAgo).subscribe(hasFailedAllRetrievalsJob => {

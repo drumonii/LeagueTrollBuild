@@ -26,7 +26,7 @@ export class AdminLoginPage implements OnInit {
   adminLoginState = AdminLoginState.UNKNOWN;
 
   constructor(private authService: AdminAuthService, private fb: FormBuilder, private titleService: TitleService,
-    private route: ActivatedRoute, private router: Router) {}
+              private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
     this.setTitle();

@@ -125,7 +125,7 @@ describe('ChampionService', () => {
           requiredChampion: null,
           requiredAlly: null,
           maps: {
-            '11': true
+            11: true
           },
           gold: {
             base: 350,
@@ -148,7 +148,7 @@ describe('ChampionService', () => {
           requiredChampion: null,
           requiredAlly: null,
           maps: {
-            '11': true
+            11: true
           },
           gold: {
             base: 550,
@@ -172,7 +172,7 @@ describe('ChampionService', () => {
           requiredChampion: null,
           requiredAlly: null,
           maps: {
-            '11': true
+            11: true
           },
           gold: {
             base: 915,
@@ -195,7 +195,7 @@ describe('ChampionService', () => {
           requiredChampion: null,
           requiredAlly: null,
           maps: {
-            '11': true
+            11: true
           },
           gold: {
             base: 400,
@@ -218,7 +218,7 @@ describe('ChampionService', () => {
           requiredChampion: null,
           requiredAlly: null,
           maps: {
-            '11': true
+            11: true
           },
           gold: {
             base: 850,
@@ -241,7 +241,7 @@ describe('ChampionService', () => {
           requiredChampion: null,
           requiredAlly: null,
           maps: {
-            '11': true
+            11: true
           },
           gold: {
             base: 1000,
@@ -262,7 +262,7 @@ describe('ChampionService', () => {
         requiredChampion: null,
         requiredAlly: null,
         maps: {
-          '11': true
+          11: true
         },
         gold: {
           base: 0,
@@ -394,7 +394,7 @@ describe('ChampionService', () => {
       testReq.flush(new HttpResponse<Build>({
         body: mockBuild,
         headers: new HttpHeaders({
-          'Location': 'http://localhost:8080/api/builds/1'
+          Location: 'http://localhost:8080/api/builds/1'
         }),
         status: 201
       }));

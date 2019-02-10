@@ -18,7 +18,7 @@ export class BuildsPage implements OnInit {
   buildType: BuildType;
 
   constructor(private buildsService: BuildsService, private title: TitleService, private router: Router,
-    private route: ActivatedRoute) {}
+              private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.getBuild();

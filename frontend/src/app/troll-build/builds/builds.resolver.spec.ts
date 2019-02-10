@@ -106,9 +106,9 @@ describe('BuildsResolver', () => {
       requiredChampion: null,
       requiredAlly: null,
       maps: {
-        '10': true,
-        '11': true,
-        '12': true
+        10: true,
+        11: true,
+        12: true
       },
       gold: {
         base: 800,
@@ -135,9 +135,9 @@ describe('BuildsResolver', () => {
       requiredChampion: null,
       requiredAlly: null,
       maps: {
-        '10': true,
-        '11': true,
-        '12': true
+        10: true,
+        11: true,
+        12: true
       },
       gold: {
         base: 850,
@@ -166,9 +166,9 @@ describe('BuildsResolver', () => {
       requiredChampion: null,
       requiredAlly: null,
       maps: {
-        '10': true,
-        '11': true,
-        '12': true
+        10: true,
+        11: true,
+        12: true
       },
       gold: {
         base: 700,
@@ -194,9 +194,9 @@ describe('BuildsResolver', () => {
       requiredChampion: null,
       requiredAlly: null,
       maps: {
-        '10': true,
-        '11': true,
-        '12': true
+        10: true,
+        11: true,
+        12: true
       },
       gold: {
         base: 675,
@@ -226,9 +226,9 @@ describe('BuildsResolver', () => {
       requiredChampion: null,
       requiredAlly: null,
       maps: {
-        '10': true,
-        '11': true,
-        '12': true
+        10: true,
+        11: true,
+        12: true
       },
       gold: {
         base: 990,
@@ -256,9 +256,9 @@ describe('BuildsResolver', () => {
       requiredChampion: null,
       requiredAlly: null,
       maps: {
-        '10': true,
-        '11': true,
-        '12': true
+        10: true,
+        11: true,
+        12: true
       },
       gold: {
         base: 725,
@@ -309,9 +309,9 @@ describe('BuildsResolver', () => {
       requiredChampion: null,
       requiredAlly: null,
       maps: {
-        '10': false,
-        '11': true,
-        '12': true
+        10: false,
+        11: true,
+        12: true
       },
       gold: {
         base: 0,
@@ -334,7 +334,7 @@ describe('BuildsResolver', () => {
           {
             provide: ActivatedRouteSnapshot,
             useValue: {
-              paramMap: convertToParamMap({ 'buildId': '1' })
+              paramMap: convertToParamMap({ buildId: '1' })
             }
           }
         ]
