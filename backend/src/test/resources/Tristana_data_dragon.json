@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.1.1",
+  "version": "9.3.1",
   "data": {
     "Tristana": {
       "id": "Tristana",
@@ -12,7 +12,7 @@
         "full": "Tristana.png",
         "sprite": "champion3.png",
         "group": "champion",
-        "x": 240,
+        "x": 288,
         "y": 96,
         "w": 48,
         "h": 48
@@ -258,7 +258,7 @@
             "full": "TristanaQ.png",
             "sprite": "spell12.png",
             "group": "spell",
-            "x": 48,
+            "x": 240,
             "y": 0,
             "w": 48,
             "h": 48
@@ -407,7 +407,7 @@
             "full": "TristanaW.png",
             "sprite": "spell12.png",
             "group": "spell",
-            "x": 96,
+            "x": 288,
             "y": 0,
             "w": 48,
             "h": 48
@@ -424,13 +424,15 @@
               "Passive Explosion Damage",
               "Base Charge Damage",
               "@AbilityResourceName@ Cost",
-              "Attack Damage"
+              "Attack Damage",
+              "Cooldown"
             ],
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
               "{{ e4 }} -> {{ e4NL }}",
               "{{ cost }} -> {{ costNL }}",
-              "{{ effect5amount*100.000000 }}% -> {{ effect5amountnl*100.000000 }}%"
+              "{{ effect5amount*100.000000 }}% -> {{ effect5amountnl*100.000000 }}%",
+              "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
           "maxrank": 5,
@@ -563,7 +565,7 @@
             "full": "TristanaE.png",
             "sprite": "spell12.png",
             "group": "spell",
-            "x": 144,
+            "x": 336,
             "y": 0,
             "w": 48,
             "h": 48
@@ -686,7 +688,7 @@
             "full": "TristanaR.png",
             "sprite": "spell12.png",
             "group": "spell",
-            "x": 192,
+            "x": 384,
             "y": 0,
             "w": 48,
             "h": 48
@@ -701,7 +703,7 @@
           "full": "Tristana_Passive.png",
           "sprite": "passive3.png",
           "group": "passive",
-          "x": 240,
+          "x": 288,
           "y": 96,
           "w": 48,
           "h": 48
@@ -918,17 +920,17 @@
               ],
               "items": [
                 {
-                  "id": "3087",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
                   "id": "3006",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3095",
+                  "id": "3031",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3046",
                   "count": 1,
                   "hideCount": false
                 }
@@ -961,7 +963,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3031",
+                  "id": "3087",
                   "count": 1,
                   "hideCount": false
                 }
@@ -2158,7 +2160,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "1036",
+                  "id": "1037",
                   "count": 1,
                   "hideCount": false
                 },
@@ -2186,7 +2188,7 @@
               ],
               "items": [
                 {
-                  "id": "3095",
+                  "id": "3031",
                   "count": 1,
                   "hideCount": false
                 },
@@ -2196,7 +2198,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3094",
+                  "id": "3046",
                   "count": 1,
                   "hideCount": false
                 }
@@ -2219,17 +2221,17 @@
               ],
               "items": [
                 {
-                  "id": "3031",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
                   "id": "3036",
                   "count": 1,
                   "hideCount": false
                 },
                 {
                   "id": "3072",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3094",
                   "count": 1,
                   "hideCount": false
                 }
@@ -2262,7 +2264,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3156",
+                  "id": "3087",
                   "count": 1,
                   "hideCount": false
                 }
@@ -2398,7 +2400,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3095",
+                  "id": "3031",
                   "count": 1,
                   "hideCount": false
                 }
@@ -2431,7 +2433,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3031",
+                  "id": "3046",
                   "count": 1,
                   "hideCount": false
                 }

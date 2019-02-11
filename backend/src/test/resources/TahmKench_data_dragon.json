@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.1.1",
+  "version": "9.3.1",
   "data": {
     "TahmKench": {
       "id": "TahmKench",
@@ -12,8 +12,8 @@
         "full": "TahmKench.png",
         "sprite": "champion3.png",
         "group": "champion",
-        "x": 432,
-        "y": 48,
+        "x": 0,
+        "y": 96,
         "w": 48,
         "h": 48
       },
@@ -35,6 +35,12 @@
           "num": 2,
           "name": "Urf Kench",
           "chromas": false
+        },
+        {
+          "id": "223003",
+          "num": 3,
+          "name": "Coin Emperor Tahm Kench",
+          "chromas": true
         }
       ],
       "lore": "Known by many names throughout history, the demon Tahm Kench travels the waterways of Runeterra, feeding his insatiable appetite with the misery of others. Though he may appear singularly charming and proud, he swaggers through the physical realm like a vagabond in search of unsuspecting prey. His lashing tongue can stun even a heavily armored warrior from a dozen paces, and to fall into his rumbling belly is to tumble into an abyss from which there is little hope of return.",
@@ -221,8 +227,8 @@
             "full": "TahmKenchQ.png",
             "sprite": "spell11.png",
             "group": "spell",
-            "x": 336,
-            "y": 48,
+            "x": 48,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -377,8 +383,8 @@
             "full": "TahmKenchW.png",
             "sprite": "spell11.png",
             "group": "spell",
-            "x": 384,
-            "y": 48,
+            "x": 96,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -518,8 +524,8 @@
             "full": "TahmKenchE.png",
             "sprite": "spell11.png",
             "group": "spell",
-            "x": 432,
-            "y": 48,
+            "x": 144,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -529,7 +535,7 @@
           "id": "TahmKenchNewR",
           "name": "Abyssal Voyage",
           "description": "Tahm Kench teleports across the map, and he may bring one ally champion with him.",
-          "tooltip": "Begin to channel for up to 6 seconds. During this time, one ally champion can right click Tahm Kench to join in. Alternatively, reactivate this ability to travel alone. On reactivation or once an ally has opted in, Tahm travels to the target location. Incoming champion damage breaks the channel.<br /><br /><span class=\"colorcccccc\"><i>'Boy, the world's one river, and I'm its king. Ain't no place I ain't been; ain't no place I can't go again.'</i></span>",
+          "tooltip": "Begin to channel for up to 6 seconds. During this time, one ally champion can right click Tahm Kench to join in. Alternatively, reactivate this ability to travel alone. On reactivation or once an ally has opted in, Tahm travels to the target location.<br /><br /><rules>Taking damage from champions cancels the channel.<br />Allies in combat with champions cannot take Abyssal Voyage.</rules>",
           "leveltip": {
             "label": [
               "Cooldown",
@@ -633,7 +639,7 @@
             "full": "TahmKenchNewR.png",
             "sprite": "spell11.png",
             "group": "spell",
-            "x": 0,
+            "x": 192,
             "y": 96,
             "w": 48,
             "h": 48
@@ -648,8 +654,8 @@
           "full": "TahmKench_P.png",
           "sprite": "passive3.png",
           "group": "passive",
-          "x": 432,
-          "y": 48,
+          "x": 0,
+          "y": 96,
           "w": 48,
           "h": 48
         }

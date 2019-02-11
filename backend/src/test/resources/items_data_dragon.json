@@ -1,6 +1,6 @@
 {
   "type": "item",
-  "version": "9.1.1",
+  "version": "9.3.1",
   "basic": {
     "name": "",
     "rune": {
@@ -142,8 +142,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatMovementSpeedMod": 25
@@ -184,8 +183,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {}
     },
@@ -226,8 +224,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {}
     },
@@ -267,13 +264,49 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatHPPoolMod": 380
       },
       "depth": 2
+    },
+    "1018": {
+      "name": "Cloak of Agility",
+      "description": "<stats>+20% Critical Strike Chance</stats>",
+      "colloq": ";",
+      "plaintext": "Increases critical strike chance",
+      "into": [
+        "3031",
+        "3185",
+        "3508"
+      ],
+      "image": {
+        "full": "1018.png",
+        "sprite": "item0.png",
+        "group": "item",
+        "x": 192,
+        "y": 0,
+        "w": 48,
+        "h": 48
+      },
+      "gold": {
+        "base": 800,
+        "purchasable": true,
+        "total": 800,
+        "sell": 560
+      },
+      "tags": [
+        "CriticalStrike"
+      ],
+      "maps": {
+        "10": true,
+        "11": true,
+        "12": true
+      },
+      "stats": {
+        "FlatCritChanceMod": 0.2
+      }
     },
     "1026": {
       "name": "Blasting Wand",
@@ -296,7 +329,7 @@
         "full": "1026.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 192,
+        "x": 240,
         "y": 0,
         "w": 48,
         "h": 48
@@ -313,8 +346,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatMagicDamageMod": 40
@@ -333,7 +365,6 @@
         "3073",
         "1402",
         "1414",
-        "3508",
         "3802",
         "4104"
       ],
@@ -341,7 +372,7 @@
         "full": "1027.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 240,
+        "x": 288,
         "y": 0,
         "w": 48,
         "h": 48
@@ -358,8 +389,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatMPPoolMod": 250
@@ -395,7 +425,7 @@
         "full": "1028.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 288,
+        "x": 336,
         "y": 0,
         "w": 48,
         "h": 48
@@ -412,8 +442,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatHPPoolMod": 150
@@ -438,7 +467,7 @@
         "full": "1029.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 336,
+        "x": 384,
         "y": 0,
         "w": 48,
         "h": 48
@@ -455,8 +484,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatArmorMod": 15
@@ -482,7 +510,7 @@
         "full": "1031.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 384,
+        "x": 432,
         "y": 0,
         "w": 48,
         "h": 48
@@ -499,8 +527,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatArmorMod": 40
@@ -528,8 +555,8 @@
         "full": "1033.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 432,
-        "y": 0,
+        "x": 0,
+        "y": 48,
         "w": 48,
         "h": 48
       },
@@ -545,8 +572,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatSpellBlockMod": 25
@@ -574,13 +600,14 @@
         "3122",
         "3133",
         "3144",
+        "3161",
         "4003"
       ],
       "image": {
         "full": "1036.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 0,
+        "x": 48,
         "y": 48,
         "w": 48,
         "h": 48
@@ -598,8 +625,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatPhysicalDamageMod": 10
@@ -625,13 +651,14 @@
         "3813",
         "3812",
         "3139",
-        "3181"
+        "3181",
+        "3508"
       ],
       "image": {
         "full": "1037.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 48,
+        "x": 96,
         "y": 48,
         "w": 48,
         "h": 48
@@ -648,8 +675,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatPhysicalDamageMod": 25
@@ -668,14 +694,13 @@
         "3031",
         "3072",
         "3161",
-        "3508",
         "4403"
       ],
       "image": {
         "full": "1038.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 96,
+        "x": 144,
         "y": 48,
         "w": 48,
         "h": 48
@@ -692,8 +717,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatPhysicalDamageMod": 40
@@ -712,7 +736,7 @@
         "full": "1039.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 144,
+        "x": 192,
         "y": 48,
         "w": 48,
         "h": 48
@@ -732,8 +756,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {},
       "effect": {
@@ -756,7 +779,7 @@
         "full": "1041.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 192,
+        "x": 240,
         "y": 48,
         "w": 48,
         "h": 48
@@ -775,8 +798,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {},
       "effect": {
@@ -797,7 +819,6 @@
         "3085",
         "2015",
         "3086",
-        "3095",
         "3046",
         "3101",
         "3131"
@@ -806,7 +827,7 @@
         "full": "1042.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 240,
+        "x": 288,
         "y": 48,
         "w": 48,
         "h": 48
@@ -823,8 +844,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "PercentAttackSpeedMod": 0.12
@@ -853,7 +873,7 @@
         "full": "1043.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 288,
+        "x": 336,
         "y": 48,
         "w": 48,
         "h": 48
@@ -871,8 +891,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "PercentAttackSpeedMod": 0.25
@@ -889,13 +908,14 @@
       "plaintext": "Slightly increases Critical Strike Chance",
       "into": [
         "3086",
+        "3046",
         "3122"
       ],
       "image": {
         "full": "1051.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 336,
+        "x": 384,
         "y": 48,
         "w": 48,
         "h": 48
@@ -912,8 +932,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {},
       "effect": {
@@ -943,7 +962,7 @@
         "full": "1052.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 384,
+        "x": 432,
         "y": 48,
         "w": 48,
         "h": 48
@@ -960,8 +979,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatMagicDamageMod": 20
@@ -988,8 +1006,8 @@
         "full": "1053.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 432,
-        "y": 48,
+        "x": 0,
+        "y": 96,
         "w": 48,
         "h": 48
       },
@@ -1006,8 +1024,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatPhysicalDamageMod": 15,
@@ -1024,7 +1041,7 @@
         "full": "1054.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 0,
+        "x": 48,
         "y": 96,
         "w": 48,
         "h": 48
@@ -1043,8 +1060,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": false
+        "12": true
       },
       "stats": {
         "FlatHPPoolMod": 80,
@@ -1066,7 +1082,7 @@
         "full": "1055.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 48,
+        "x": 96,
         "y": 96,
         "w": 48,
         "h": 48
@@ -1086,8 +1102,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": false
+        "12": true
       },
       "stats": {
         "FlatPhysicalDamageMod": 8,
@@ -1107,7 +1122,7 @@
         "full": "1056.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 96,
+        "x": 144,
         "y": 96,
         "w": 48,
         "h": 48
@@ -1127,8 +1142,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": false
+        "12": true
       },
       "stats": {
         "FlatHPPoolMod": 60,
@@ -1159,7 +1173,7 @@
         "full": "1057.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 144,
+        "x": 192,
         "y": 96,
         "w": 48,
         "h": 48
@@ -1176,8 +1190,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatSpellBlockMod": 40
@@ -1200,7 +1213,7 @@
         "full": "1058.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 192,
+        "x": 240,
         "y": 96,
         "w": 48,
         "h": 48
@@ -1217,8 +1230,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatMagicDamageMod": 60
@@ -1243,7 +1255,7 @@
         "full": "1059.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 240,
+        "x": 288,
         "y": 96,
         "w": 48,
         "h": 48
@@ -1261,8 +1273,7 @@
       "maps": {
         "10": false,
         "11": false,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {
         "FlatPhysicalDamageMod": 15,
@@ -1282,7 +1293,7 @@
         "full": "1082.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 288,
+        "x": 336,
         "y": 96,
         "w": 48,
         "h": 48
@@ -1302,8 +1313,7 @@
       "maps": {
         "10": false,
         "11": true,
-        "12": false,
-        "21": true
+        "12": false
       },
       "stats": {
         "FlatMPPoolMod": 100,
@@ -1327,7 +1337,7 @@
         "full": "1083.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 336,
+        "x": 384,
         "y": 96,
         "w": 48,
         "h": 48
@@ -1346,8 +1356,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": false
+        "12": true
       },
       "stats": {
         "FlatPhysicalDamageMod": 7
@@ -1373,7 +1382,7 @@
         "full": "1400.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 384,
+        "x": 432,
         "y": 96,
         "w": 48,
         "h": 48
@@ -1388,8 +1397,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {
         "FlatPhysicalDamageMod": 60
@@ -1420,8 +1428,8 @@
         "full": "1401.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 432,
-        "y": 96,
+        "x": 0,
+        "y": 144,
         "w": 48,
         "h": 48
       },
@@ -1435,8 +1443,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {
         "FlatHPPoolMod": 300
@@ -1468,7 +1475,7 @@
         "full": "1402.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 0,
+        "x": 48,
         "y": 144,
         "w": 48,
         "h": 48
@@ -1483,8 +1490,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {
         "FlatMPPoolMod": 300,
@@ -1516,7 +1522,7 @@
         "full": "1412.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 48,
+        "x": 96,
         "y": 144,
         "w": 48,
         "h": 48
@@ -1531,8 +1537,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {
         "FlatPhysicalDamageMod": 60
@@ -1566,7 +1571,7 @@
         "full": "1413.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 96,
+        "x": 144,
         "y": 144,
         "w": 48,
         "h": 48
@@ -1581,8 +1586,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {
         "FlatHPPoolMod": 300
@@ -1617,7 +1621,7 @@
         "full": "1414.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 144,
+        "x": 192,
         "y": 144,
         "w": 48,
         "h": 48
@@ -1632,8 +1636,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {
         "FlatMPPoolMod": 300,
@@ -1668,7 +1671,7 @@
         "full": "1416.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 192,
+        "x": 240,
         "y": 144,
         "w": 48,
         "h": 48
@@ -1683,8 +1686,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {
         "PercentAttackSpeedMod": 0.5
@@ -1715,7 +1717,7 @@
         "full": "1419.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 240,
+        "x": 288,
         "y": 144,
         "w": 48,
         "h": 48
@@ -1730,8 +1732,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {
         "PercentAttackSpeedMod": 0.5
@@ -1762,7 +1763,7 @@
         "full": "2003.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 288,
+        "x": 336,
         "y": 144,
         "w": 48,
         "h": 48
@@ -1781,8 +1782,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {},
       "effect": {
@@ -1803,7 +1803,7 @@
         "full": "2004.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 336,
+        "x": 384,
         "y": 144,
         "w": 48,
         "h": 48
@@ -1821,8 +1821,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {},
       "effect": {
@@ -1841,7 +1840,7 @@
         "full": "2009.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 384,
+        "x": 432,
         "y": 144,
         "w": 48,
         "h": 48
@@ -1856,8 +1855,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {}
     },
@@ -1874,8 +1872,8 @@
         "full": "2010.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 432,
-        "y": 144,
+        "x": 0,
+        "y": 192,
         "w": 48,
         "h": 48
       },
@@ -1889,8 +1887,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {},
       "effect": {
@@ -1910,7 +1907,7 @@
         "full": "2011.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 0,
+        "x": 48,
         "y": 192,
         "w": 48,
         "h": 48
@@ -1929,8 +1926,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {}
     },
@@ -1947,7 +1943,7 @@
         "full": "2012.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 48,
+        "x": 96,
         "y": 192,
         "w": 48,
         "h": 48
@@ -1962,8 +1958,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {},
       "effect": {
@@ -1983,7 +1978,7 @@
         "full": "2013.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 96,
+        "x": 144,
         "y": 192,
         "w": 48,
         "h": 48
@@ -2002,8 +1997,7 @@
       "maps": {
         "10": false,
         "11": false,
-        "12": true,
-        "21": false
+        "12": true
       },
       "stats": {},
       "effect": {
@@ -2023,22 +2017,23 @@
       ],
       "into": [
         "3094",
+        "3095",
         "3087"
       ],
       "image": {
         "full": "2015.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 144,
+        "x": 192,
         "y": 192,
         "w": 48,
         "h": 48
       },
       "gold": {
-        "base": 500,
+        "base": 300,
         "purchasable": true,
-        "total": 800,
-        "sell": 560
+        "total": 600,
+        "sell": 420
       },
       "tags": [
         "AttackSpeed",
@@ -2047,8 +2042,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "PercentAttackSpeedMod": 0.15
@@ -2071,7 +2065,7 @@
         "full": "2031.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 192,
+        "x": 240,
         "y": 192,
         "w": 48,
         "h": 48
@@ -2092,8 +2086,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {},
       "effect": {
@@ -2115,7 +2108,7 @@
         "full": "2032.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 240,
+        "x": 288,
         "y": 192,
         "w": 48,
         "h": 48
@@ -2136,8 +2129,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": false,
-        "21": true
+        "12": false
       },
       "stats": {},
       "effect": {
@@ -2160,7 +2152,7 @@
         "full": "2033.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 288,
+        "x": 336,
         "y": 192,
         "w": 48,
         "h": 48
@@ -2181,8 +2173,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {},
       "effect": {
@@ -2209,7 +2200,7 @@
         "full": "2047.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 336,
+        "x": 384,
         "y": 192,
         "w": 48,
         "h": 48
@@ -2228,8 +2219,7 @@
       "maps": {
         "10": false,
         "11": false,
-        "12": true,
-        "21": false
+        "12": true
       },
       "stats": {}
     },
@@ -2243,7 +2233,7 @@
         "full": "2050.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 384,
+        "x": 432,
         "y": 192,
         "w": 48,
         "h": 48
@@ -2260,8 +2250,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {}
     },
@@ -2274,8 +2263,8 @@
         "full": "2051.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 432,
-        "y": 192,
+        "x": 0,
+        "y": 240,
         "w": 48,
         "h": 48
       },
@@ -2293,8 +2282,7 @@
       "maps": {
         "10": false,
         "11": false,
-        "12": true,
-        "21": false
+        "12": true
       },
       "stats": {
         "FlatHPPoolMod": 150,
@@ -2317,7 +2305,7 @@
         "full": "2052.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 0,
+        "x": 48,
         "y": 240,
         "w": 48,
         "h": 48
@@ -2332,8 +2320,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {}
     },
@@ -2355,7 +2342,7 @@
         "full": "2053.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 48,
+        "x": 96,
         "y": 240,
         "w": 48,
         "h": 48
@@ -2374,8 +2361,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": false,
-        "21": true
+        "12": false
       },
       "stats": {
         "FlatArmorMod": 30
@@ -2397,7 +2383,7 @@
         "full": "2054.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 96,
+        "x": 144,
         "y": 240,
         "w": 48,
         "h": 48
@@ -2412,8 +2398,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {}
     },
@@ -2428,7 +2413,7 @@
         "full": "2055.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 144,
+        "x": 192,
         "y": 240,
         "w": 48,
         "h": 48
@@ -2448,8 +2433,7 @@
       "maps": {
         "10": false,
         "11": true,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {},
       "effect": {
@@ -2470,7 +2454,7 @@
         "full": "2056.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 192,
+        "x": 240,
         "y": 240,
         "w": 48,
         "h": 48
@@ -2489,8 +2473,7 @@
       "maps": {
         "10": false,
         "11": true,
-        "12": false,
-        "21": true
+        "12": false
       },
       "stats": {},
       "effect": {
@@ -2512,7 +2495,7 @@
         "full": "2057.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 240,
+        "x": 288,
         "y": 240,
         "w": 48,
         "h": 48
@@ -2530,8 +2513,7 @@
       "maps": {
         "10": false,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {},
       "effect": {
@@ -2565,7 +2547,7 @@
         "full": "2058.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 288,
+        "x": 336,
         "y": 240,
         "w": 48,
         "h": 48
@@ -2585,8 +2567,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {},
       "effect": {
@@ -2614,7 +2595,7 @@
         "full": "2059.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 336,
+        "x": 384,
         "y": 240,
         "w": 48,
         "h": 48
@@ -2633,8 +2614,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {},
       "effect": {
@@ -2664,7 +2644,7 @@
         "full": "2060.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 384,
+        "x": 432,
         "y": 240,
         "w": 48,
         "h": 48
@@ -2684,8 +2664,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {},
       "effect": {
@@ -2713,8 +2692,8 @@
         "full": "2061.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 432,
-        "y": 240,
+        "x": 0,
+        "y": 288,
         "w": 48,
         "h": 48
       },
@@ -2732,8 +2711,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {},
       "effect": {
@@ -2754,7 +2732,7 @@
         "full": "2062.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 0,
+        "x": 48,
         "y": 288,
         "w": 48,
         "h": 48
@@ -2773,8 +2751,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {},
       "effect": {
@@ -2797,7 +2774,7 @@
         "full": "2065.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 48,
+        "x": 96,
         "y": 288,
         "w": 48,
         "h": 48
@@ -2819,8 +2796,7 @@
       "maps": {
         "10": false,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatHPPoolMod": 200,
@@ -2847,7 +2823,7 @@
         "full": "2138.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 96,
+        "x": 144,
         "y": 288,
         "w": 48,
         "h": 48
@@ -2867,8 +2843,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {},
       "effect": {
@@ -2893,7 +2868,7 @@
         "full": "2139.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 144,
+        "x": 192,
         "y": 288,
         "w": 48,
         "h": 48
@@ -2912,8 +2887,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {},
       "effect": {
@@ -2938,7 +2912,7 @@
         "full": "2140.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 192,
+        "x": 240,
         "y": 288,
         "w": 48,
         "h": 48
@@ -2958,8 +2932,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {},
       "effect": {
@@ -2986,7 +2959,7 @@
         "full": "2319.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 240,
+        "x": 288,
         "y": 288,
         "w": 48,
         "h": 48
@@ -3004,8 +2977,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {},
       "effect": {
@@ -3026,7 +2998,7 @@
         "full": "2403.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 288,
+        "x": 336,
         "y": 288,
         "w": 48,
         "h": 48
@@ -3041,8 +3013,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {}
     },
@@ -3059,7 +3030,7 @@
         "full": "2419.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 336,
+        "x": 384,
         "y": 288,
         "w": 48,
         "h": 48
@@ -3076,8 +3047,7 @@
       "maps": {
         "10": false,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {}
     },
@@ -3097,7 +3067,7 @@
         "full": "2420.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 384,
+        "x": 432,
         "y": 288,
         "w": 48,
         "h": 48
@@ -3114,8 +3084,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {},
       "effect": {
@@ -3139,8 +3108,8 @@
         "full": "2421.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 432,
-        "y": 288,
+        "x": 0,
+        "y": 336,
         "w": 48,
         "h": 48
       },
@@ -3154,8 +3123,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {},
       "effect": {
@@ -3186,7 +3154,7 @@
         "full": "2422.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 0,
+        "x": 48,
         "y": 336,
         "w": 48,
         "h": 48
@@ -3203,8 +3171,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatMovementSpeedMod": 25
@@ -3226,7 +3193,7 @@
         "full": "2423.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 48,
+        "x": 96,
         "y": 336,
         "w": 48,
         "h": 48
@@ -3243,8 +3210,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {},
       "effect": {
@@ -3269,7 +3235,7 @@
         "full": "2424.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 96,
+        "x": 144,
         "y": 336,
         "w": 48,
         "h": 48
@@ -3284,8 +3250,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {},
       "effect": {
@@ -3312,7 +3277,7 @@
         "full": "3001.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 144,
+        "x": 192,
         "y": 336,
         "w": 48,
         "h": 48
@@ -3336,8 +3301,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatHPPoolMod": 350,
@@ -3368,7 +3332,7 @@
         "full": "3003.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 192,
+        "x": 240,
         "y": 336,
         "w": 48,
         "h": 48
@@ -3388,8 +3352,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": false
+        "12": true
       },
       "stats": {
         "FlatMPPoolMod": 650,
@@ -3422,7 +3385,7 @@
         "full": "3004.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 240,
+        "x": 288,
         "y": 336,
         "w": 48,
         "h": 48
@@ -3442,8 +3405,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": false
+        "12": true
       },
       "stats": {
         "FlatPhysicalDamageMod": 25,
@@ -3476,7 +3438,7 @@
         "full": "3005.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 288,
+        "x": 336,
         "y": 336,
         "w": 48,
         "h": 48
@@ -3495,8 +3457,7 @@
       "maps": {
         "10": false,
         "11": false,
-        "12": false,
-        "21": true
+        "12": false
       },
       "stats": {
         "FlatPhysicalDamageMod": 25,
@@ -3526,7 +3487,7 @@
         "full": "3006.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 336,
+        "x": 384,
         "y": 336,
         "w": 48,
         "h": 48
@@ -3544,8 +3505,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatMovementSpeedMod": 45,
@@ -3566,7 +3526,7 @@
         "full": "3007.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 384,
+        "x": 432,
         "y": 336,
         "w": 48,
         "h": 48
@@ -3586,8 +3546,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatMPPoolMod": 650,
@@ -3620,8 +3579,8 @@
         "full": "3008.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 432,
-        "y": 336,
+        "x": 0,
+        "y": 384,
         "w": 48,
         "h": 48
       },
@@ -3640,8 +3599,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatPhysicalDamageMod": 25,
@@ -3673,7 +3631,7 @@
         "full": "3009.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 0,
+        "x": 48,
         "y": 384,
         "w": 48,
         "h": 48
@@ -3690,8 +3648,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatMovementSpeedMod": 55
@@ -3720,7 +3677,7 @@
         "full": "3010.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 48,
+        "x": 96,
         "y": 384,
         "w": 48,
         "h": 48
@@ -3740,8 +3697,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatHPPoolMod": 225,
@@ -3769,7 +3725,7 @@
         "full": "3020.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 96,
+        "x": 144,
         "y": 384,
         "w": 48,
         "h": 48
@@ -3787,8 +3743,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatMovementSpeedMod": 45
@@ -3811,7 +3766,7 @@
         "full": "3022.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 144,
+        "x": 192,
         "y": 384,
         "w": 48,
         "h": 48
@@ -3831,8 +3786,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatPhysicalDamageMod": 30,
@@ -3865,7 +3819,7 @@
         "full": "3024.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 192,
+        "x": 240,
         "y": 384,
         "w": 48,
         "h": 48
@@ -3884,8 +3838,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatMPPoolMod": 250,
@@ -3912,7 +3865,7 @@
         "full": "3025.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 240,
+        "x": 288,
         "y": 384,
         "w": 48,
         "h": 48
@@ -3932,8 +3885,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatMPPoolMod": 500,
@@ -3962,7 +3914,7 @@
         "full": "3026.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 288,
+        "x": 336,
         "y": 384,
         "w": 48,
         "h": 48
@@ -3980,8 +3932,7 @@
       "maps": {
         "10": false,
         "11": true,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {
         "FlatPhysicalDamageMod": 45,
@@ -4008,7 +3959,7 @@
         "full": "3027.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 336,
+        "x": 384,
         "y": 384,
         "w": 48,
         "h": 48
@@ -4029,8 +3980,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": false
+        "12": true
       },
       "stats": {
         "FlatHPPoolMod": 300,
@@ -4070,7 +4020,7 @@
         "full": "3028.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 384,
+        "x": 432,
         "y": 384,
         "w": 48,
         "h": 48
@@ -4089,8 +4039,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatSpellBlockMod": 30
@@ -4119,8 +4068,8 @@
         "full": "3029.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 432,
-        "y": 384,
+        "x": 0,
+        "y": 432,
         "w": 48,
         "h": 48
       },
@@ -4140,8 +4089,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatHPPoolMod": 300,
@@ -4176,7 +4124,7 @@
         "full": "3030.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 0,
+        "x": 48,
         "y": 432,
         "w": 48,
         "h": 48
@@ -4197,8 +4145,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatMPPoolMod": 600,
@@ -4225,12 +4172,13 @@
     },
     "3031": {
       "name": "Infinity Edge",
-      "description": "<stats>+70 Attack Damage</stats><br><br><unique>UNIQUE Passive:</unique> Doubles your critical strike chance.<br><unique>UNIQUE Passive:</unique> 10% of critical strike damage dealt to champions is converted to True Damage.",
+      "description": "<stats>+80 Attack Damage<br>+25% Critical Strike Chance</stats><br><br><unique>UNIQUE Passive:</unique> Critical strikes deal 225% damage instead of 200%.",
       "colloq": ";ie",
       "plaintext": "Massively enhances critical strikes",
       "from": [
         "1038",
-        "1037"
+        "1037",
+        "1018"
       ],
       "into": [
         "3371"
@@ -4239,13 +4187,13 @@
         "full": "3031.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 48,
+        "x": 96,
         "y": 432,
         "w": 48,
         "h": 48
       },
       "gold": {
-        "base": 1225,
+        "base": 425,
         "purchasable": true,
         "total": 3400,
         "sell": 2380
@@ -4257,20 +4205,20 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
-        "FlatPhysicalDamageMod": 70
+        "FlatPhysicalDamageMod": 80,
+        "FlatCritChanceMod": 0.25
       },
       "effect": {
-        "Effect1Amount": "0.1"
+        "Effect1Amount": "2.25"
       },
       "depth": 2
     },
     "3033": {
       "name": "Mortal Reminder",
-      "description": "<stats>+40 Attack Damage</stats><br><br><unique>UNIQUE Passive - Last Whisper:</unique> +25% <a href='FlatArmorPen'>Armor Penetration</a><br><unique>UNIQUE Passive - Executioner:</unique> Physical damage inflicts <a href='GrievousWounds'>Grievous Wounds</a> on enemy champions for 5 seconds.",
+      "description": "<stats>+45 Attack Damage</stats><br><br><unique>UNIQUE Passive - Last Whisper:</unique> +25% <a href='FlatArmorPen'>Armor Penetration</a><br><unique>UNIQUE Passive - Executioner:</unique> Physical damage inflicts <a href='GrievousWounds'>Grievous Wounds</a> on enemy champions for 5 seconds.",
       "colloq": ";lw;grievous",
       "plaintext": "Overcomes enemies with high Health recovery and Armor",
       "from": [
@@ -4281,13 +4229,13 @@
         "full": "3033.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 96,
+        "x": 144,
         "y": 432,
         "w": 48,
         "h": 48
       },
       "gold": {
-        "base": 700,
+        "base": 550,
         "purchasable": true,
         "total": 2800,
         "sell": 1960
@@ -4299,11 +4247,10 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
-        "FlatPhysicalDamageMod": 40
+        "FlatPhysicalDamageMod": 45
       },
       "effect": {
         "Effect1Amount": "5",
@@ -4313,10 +4260,11 @@
     },
     "3035": {
       "name": "Last Whisper",
-      "description": "<stats>+10 Attack Damage</stats><br><br><unique>UNIQUE Passive - Last Whisper:</unique> +10% <a href='FlatArmorPen'>Armor Penetration</a>",
+      "description": "<stats>+20 Attack Damage</stats><br><br><unique>UNIQUE Passive - Last Whisper:</unique> +20% <a href='FlatArmorPen'>Armor Penetration</a>",
       "colloq": ";lw",
       "plaintext": "Overcomes enemies with high Armor",
       "from": [
+        "1036",
         "1036"
       ],
       "into": [
@@ -4327,16 +4275,16 @@
         "full": "3035.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 144,
+        "x": 192,
         "y": 432,
         "w": 48,
         "h": 48
       },
       "gold": {
-        "base": 950,
+        "base": 750,
         "purchasable": true,
-        "total": 1300,
-        "sell": 910
+        "total": 1450,
+        "sell": 1015
       },
       "tags": [
         "ArmorPenetration",
@@ -4345,22 +4293,21 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
-        "FlatPhysicalDamageMod": 10
+        "FlatPhysicalDamageMod": 20
       },
       "effect": {
         "Effect1Amount": "0.25",
         "Effect2Amount": "0.35",
-        "Effect3Amount": "0.1"
+        "Effect3Amount": "0.2"
       },
       "depth": 2
     },
     "3036": {
       "name": "Lord Dominik's Regards",
-      "description": "<stats>+40 Attack Damage</stats><br><br><unique>UNIQUE Passive - Last Whisper:</unique> +35% <a href='FlatArmorPen'>Armor Penetration</a>",
+      "description": "<stats>+45 Attack Damage</stats><br><br><unique>UNIQUE Passive - Last Whisper:</unique> +35% <a href='FlatArmorPen'>Armor Penetration</a>",
       "colloq": ";lw",
       "plaintext": "Overcomes enemies with high health and armor",
       "from": [
@@ -4371,13 +4318,13 @@
         "full": "3036.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 192,
+        "x": 240,
         "y": 432,
         "w": 48,
         "h": 48
       },
       "gold": {
-        "base": 625,
+        "base": 475,
         "purchasable": true,
         "total": 2800,
         "sell": 1960
@@ -4389,11 +4336,10 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
-        "FlatPhysicalDamageMod": 40
+        "FlatPhysicalDamageMod": 45
       },
       "effect": {
         "Effect1Amount": "0.35"
@@ -4411,7 +4357,7 @@
         "full": "3040.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 240,
+        "x": 288,
         "y": 432,
         "w": 48,
         "h": 48
@@ -4428,8 +4374,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatMPPoolMod": 1400,
@@ -4458,7 +4403,7 @@
         "full": "3041.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 288,
+        "x": 336,
         "y": 432,
         "w": 48,
         "h": 48
@@ -4476,8 +4421,7 @@
       "maps": {
         "10": false,
         "11": true,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {
         "FlatMPPoolMod": 200,
@@ -4506,7 +4450,7 @@
         "full": "3042.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 336,
+        "x": 384,
         "y": 432,
         "w": 48,
         "h": 48
@@ -4523,8 +4467,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatPhysicalDamageMod": 25,
@@ -4545,7 +4488,7 @@
         "full": "3043.png",
         "sprite": "item0.png",
         "group": "item",
-        "x": 384,
+        "x": 432,
         "y": 432,
         "w": 48,
         "h": 48
@@ -4562,8 +4505,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatPhysicalDamageMod": 25,
@@ -4588,10 +4530,10 @@
       ],
       "image": {
         "full": "3044.png",
-        "sprite": "item0.png",
+        "sprite": "item1.png",
         "group": "item",
-        "x": 432,
-        "y": 432,
+        "x": 0,
+        "y": 0,
         "w": 48,
         "h": 48
       },
@@ -4610,8 +4552,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatPhysicalDamageMod": 15,
@@ -4626,28 +4567,28 @@
     },
     "3046": {
       "name": "Phantom Dancer",
-      "description": "<stats>+45% Attack Speed<br>+30% Critical Strike Chance<br>+5% Movement Speed</stats><br><br><unique>UNIQUE Passive - Spectral Waltz:</unique> While within 550 units of an enemy champion you can see, +7% Movement Speed and you can move through units.<br><unique>UNIQUE Passive - Lament:</unique> The last champion hit deals 12% less damage to you (ends after 10 seconds of not hitting).",
+      "description": "<stats>+30% Attack Speed<br>+25% Critical Strike Chance<br>+5% Movement Speed</stats><br><br><unique>UNIQUE Passive - Spectral Waltz:</unique> Basic attacking a champion grants ghosting and 7% Movement Speed for 2 seconds.<br><unique>UNIQUE Passive - Lifeline:</unique> If you would take damage that would reduce your Health below 30%, gain a shield that absorbs up to 240 - 600 damage for 2 seconds. (90 second cooldown)",
       "colloq": ";pd",
-      "plaintext": "Move faster near enemies and reduce incoming damage",
+      "plaintext": "Move faster while attacking enemies and gain a shield when on low health.",
       "from": [
         "1042",
         "3086",
-        "1042"
+        "1051"
       ],
       "image": {
         "full": "3046.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 0,
+        "x": 48,
         "y": 0,
         "w": 48,
         "h": 48
       },
       "gold": {
-        "base": 800,
+        "base": 700,
         "purchasable": true,
-        "total": 2700,
-        "sell": 1890
+        "total": 2600,
+        "sell": 1820
       },
       "tags": [
         "AttackSpeed",
@@ -4657,19 +4598,32 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
-        "FlatCritChanceMod": 0.3,
+        "FlatCritChanceMod": 0.25,
         "PercentMovementSpeedMod": 0.05,
-        "PercentAttackSpeedMod": 0.45
+        "PercentAttackSpeedMod": 0.3
       },
       "effect": {
-        "Effect1Amount": "0.12",
+        "Effect1Amount": "0.24",
         "Effect2Amount": "10",
         "Effect3Amount": "550",
-        "Effect4Amount": "0.07"
+        "Effect4Amount": "0.07",
+        "Effect5Amount": "0.3",
+        "Effect6Amount": "2.5",
+        "Effect7Amount": "90",
+        "Effect8Amount": "240",
+        "Effect9Amount": "600",
+        "Effect10Amount": "40",
+        "Effect11Amount": "5",
+        "Effect12Amount": "0.3",
+        "Effect13Amount": "0.7",
+        "Effect14Amount": "2",
+        "Effect15Amount": "300",
+        "Effect16Amount": "1",
+        "Effect17Amount": "0.4",
+        "Effect18Amount": "9"
       },
       "depth": 3
     },
@@ -4686,7 +4640,7 @@
         "full": "3047.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 48,
+        "x": 96,
         "y": 0,
         "w": 48,
         "h": 48
@@ -4704,8 +4658,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatMovementSpeedMod": 45,
@@ -4727,7 +4680,7 @@
         "full": "3048.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 96,
+        "x": 144,
         "y": 0,
         "w": 48,
         "h": 48
@@ -4744,8 +4697,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatMPPoolMod": 1400,
@@ -4775,7 +4727,7 @@
         "full": "3050.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 144,
+        "x": 192,
         "y": 0,
         "w": 48,
         "h": 48
@@ -4797,8 +4749,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatSpellBlockMod": 30,
@@ -4843,7 +4794,7 @@
         "full": "3052.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 192,
+        "x": 240,
         "y": 0,
         "w": 48,
         "h": 48
@@ -4861,8 +4812,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatPhysicalDamageMod": 15,
@@ -4890,7 +4840,7 @@
         "full": "3053.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 240,
+        "x": 288,
         "y": 0,
         "w": 48,
         "h": 48
@@ -4908,8 +4858,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatHPPoolMod": 450
@@ -4942,7 +4891,7 @@
         "full": "3056.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 288,
+        "x": 336,
         "y": 0,
         "w": 48,
         "h": 48
@@ -4964,8 +4913,7 @@
       "maps": {
         "10": false,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatHPPoolMod": 300,
@@ -4997,7 +4945,7 @@
         "full": "3057.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 336,
+        "x": 384,
         "y": 0,
         "w": 48,
         "h": 48
@@ -5015,8 +4963,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatMPPoolMod": 250
@@ -5040,7 +4987,7 @@
         "full": "3065.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 384,
+        "x": 432,
         "y": 0,
         "w": 48,
         "h": 48
@@ -5060,8 +5007,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatHPPoolMod": 450,
@@ -5100,8 +5046,8 @@
         "full": "3067.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 432,
-        "y": 0,
+        "x": 0,
+        "y": 48,
         "w": 48,
         "h": 48
       },
@@ -5118,8 +5064,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatHPPoolMod": 200
@@ -5146,16 +5091,16 @@
         "full": "3068.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 0,
+        "x": 48,
         "y": 48,
         "w": 48,
         "h": 48
       },
       "gold": {
-        "base": 800,
+        "base": 650,
         "purchasable": true,
-        "total": 2900,
-        "sell": 2030
+        "total": 2750,
+        "sell": 1925
       },
       "tags": [
         "Armor",
@@ -5164,8 +5109,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatHPPoolMod": 425,
@@ -5191,7 +5135,7 @@
         "full": "3069.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 48,
+        "x": 96,
         "y": 48,
         "w": 48,
         "h": 48
@@ -5214,8 +5158,7 @@
       "maps": {
         "10": false,
         "11": true,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {
         "FlatHPPoolMod": 200
@@ -5255,7 +5198,7 @@
         "full": "3070.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 96,
+        "x": 144,
         "y": 48,
         "w": 48,
         "h": 48
@@ -5273,8 +5216,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": false
+        "12": true
       },
       "stats": {
         "FlatMPPoolMod": 250
@@ -5308,7 +5250,7 @@
         "full": "3071.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 144,
+        "x": 192,
         "y": 48,
         "w": 48,
         "h": 48
@@ -5330,8 +5272,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatPhysicalDamageMod": 40,
@@ -5365,7 +5306,7 @@
         "full": "3072.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 192,
+        "x": 240,
         "y": 48,
         "w": 48,
         "h": 48
@@ -5383,8 +5324,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatPhysicalDamageMod": 80
@@ -5414,7 +5354,7 @@
         "full": "3073.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 240,
+        "x": 288,
         "y": 48,
         "w": 48,
         "h": 48
@@ -5432,8 +5372,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatMPPoolMod": 250
@@ -5465,7 +5404,7 @@
         "full": "3074.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 288,
+        "x": 336,
         "y": 48,
         "w": 48,
         "h": 48
@@ -5486,8 +5425,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatPhysicalDamageMod": 80,
@@ -5516,7 +5454,7 @@
         "full": "3075.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 336,
+        "x": 384,
         "y": 48,
         "w": 48,
         "h": 48
@@ -5535,8 +5473,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatHPPoolMod": 250,
@@ -5569,7 +5506,7 @@
         "full": "3076.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 384,
+        "x": 432,
         "y": 48,
         "w": 48,
         "h": 48
@@ -5586,8 +5523,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatArmorMod": 35
@@ -5618,8 +5554,8 @@
         "full": "3077.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 432,
-        "y": 48,
+        "x": 0,
+        "y": 96,
         "w": 48,
         "h": 48
       },
@@ -5637,8 +5573,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatPhysicalDamageMod": 25
@@ -5669,7 +5604,7 @@
         "full": "3078.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 0,
+        "x": 48,
         "y": 96,
         "w": 48,
         "h": 48
@@ -5692,8 +5627,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatPhysicalDamageMod": 25,
@@ -5725,7 +5659,7 @@
         "full": "3080.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 48,
+        "x": 96,
         "y": 96,
         "w": 48,
         "h": 48
@@ -5743,8 +5677,7 @@
       "maps": {
         "10": false,
         "11": false,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {
         "FlatPhysicalDamageMod": 65
@@ -5775,7 +5708,7 @@
         "full": "3082.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 96,
+        "x": 144,
         "y": 96,
         "w": 48,
         "h": 48
@@ -5793,8 +5726,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatArmorMod": 40
@@ -5819,7 +5751,7 @@
         "full": "3083.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 144,
+        "x": 192,
         "y": 96,
         "w": 48,
         "h": 48
@@ -5838,8 +5770,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatHPPoolMod": 800
@@ -5870,7 +5801,7 @@
         "full": "3084.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 192,
+        "x": 240,
         "y": 96,
         "w": 48,
         "h": 48
@@ -5888,8 +5819,7 @@
       "maps": {
         "10": false,
         "11": false,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {
         "FlatHPPoolMod": 800
@@ -5902,7 +5832,7 @@
     },
     "3085": {
       "name": "Runaan's Hurricane",
-      "description": "<stats>+40% Attack Speed<br>+30% Critical Strike Chance<br>+7% Movement Speed</stats><br><br><unique>UNIQUE Passive - Wind's Fury:</unique> When basic attacking, bolts are fired at up to 2 enemies near the target, each dealing (40% of Attack Damage) physical damage. Bolts can critically strike and apply on hit effects.",
+      "description": "<stats>+40% Attack Speed<br>+25% Critical Strike Chance<br>+7% Movement Speed</stats><br><br><unique>UNIQUE Passive - Wind's Fury:</unique> When basic attacking, bolts are fired at up to 2 enemies near the target, each dealing (40% of Attack Damage) physical damage. Bolts can critically strike and apply on hit effects.",
       "colloq": ";",
       "plaintext": "Ranged attacks fire two bolts at nearby enemies",
       "from": [
@@ -5914,16 +5844,16 @@
         "full": "3085.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 240,
+        "x": 288,
         "y": 96,
         "w": 48,
         "h": 48
       },
       "gold": {
-        "base": 900,
+        "base": 800,
         "purchasable": true,
-        "total": 2800,
-        "sell": 1960
+        "total": 2600,
+        "sell": 1820
       },
       "tags": [
         "CriticalStrike",
@@ -5934,11 +5864,10 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
-        "FlatCritChanceMod": 0.3,
+        "FlatCritChanceMod": 0.25,
         "PercentMovementSpeedMod": 0.07,
         "PercentAttackSpeedMod": 0.4
       },
@@ -5972,16 +5901,16 @@
         "full": "3086.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 288,
+        "x": 336,
         "y": 96,
         "w": 48,
         "h": 48
       },
       "gold": {
-        "base": 600,
+        "base": 500,
         "purchasable": true,
-        "total": 1300,
-        "sell": 910
+        "total": 1200,
+        "sell": 840
       },
       "tags": [
         "AttackSpeed",
@@ -5991,8 +5920,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatCritChanceMod": 0.15,
@@ -6005,7 +5933,7 @@
     },
     "3087": {
       "name": "Statikk Shiv",
-      "description": "<stats>+35% Attack Speed<br>+30% Critical Strike Chance<br>+5% Movement Speed</stats><br><br><passive>Passive:</passive> Moving and attacking will make an attack <a href='Energized'>Energized</a>.<br><br><unique>UNIQUE Passive - Shiv Lightning:</unique> Your Energized attacks deal 60~140 bonus magic damage (based on level) to up to 5 targets on hit. This effect can critically strike.",
+      "description": "<stats>+40% Attack Speed<br>+25% Critical Strike Chance<br>+5% Movement Speed</stats><br><br><passive>Passive:</passive> Moving and attacking will make an attack <a href='Energized'>Energized</a>.<br><br><unique>UNIQUE Passive - Shiv Lightning:</unique> Your Energized attacks deal 60~140 bonus magic damage (based on level) to up to 5 targets on hit. This effect can critically strike.",
       "colloq": ";",
       "plaintext": "Movement builds charges that release chain lightning on basic attack",
       "from": [
@@ -6016,16 +5944,16 @@
         "full": "3087.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 336,
+        "x": 384,
         "y": 96,
         "w": 48,
         "h": 48
       },
       "gold": {
-        "base": 700,
+        "base": 800,
         "purchasable": true,
-        "total": 2800,
-        "sell": 1960
+        "total": 2600,
+        "sell": 1820
       },
       "tags": [
         "AttackSpeed",
@@ -6036,13 +5964,12 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
-        "FlatCritChanceMod": 0.3,
+        "FlatCritChanceMod": 0.25,
         "PercentMovementSpeedMod": 0.05,
-        "PercentAttackSpeedMod": 0.35
+        "PercentAttackSpeedMod": 0.4
       },
       "effect": {
         "Effect1Amount": "100",
@@ -6071,7 +5998,7 @@
         "full": "3089.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 384,
+        "x": 432,
         "y": 96,
         "w": 48,
         "h": 48
@@ -6088,8 +6015,7 @@
       "maps": {
         "10": false,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatMagicDamageMod": 120
@@ -6116,8 +6042,8 @@
         "full": "3090.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 432,
-        "y": 96,
+        "x": 0,
+        "y": 144,
         "w": 48,
         "h": 48
       },
@@ -6135,8 +6061,7 @@
       "maps": {
         "10": true,
         "11": false,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {
         "FlatMagicDamageMod": 100,
@@ -6163,7 +6088,7 @@
         "full": "3091.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 0,
+        "x": 48,
         "y": 144,
         "w": 48,
         "h": 48
@@ -6182,8 +6107,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatSpellBlockMod": 40,
@@ -6210,7 +6134,7 @@
         "full": "3092.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 48,
+        "x": 96,
         "y": 144,
         "w": 48,
         "h": 48
@@ -6232,8 +6156,7 @@
       "maps": {
         "10": false,
         "11": true,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {
         "FlatHPPoolMod": 200,
@@ -6265,7 +6188,7 @@
     },
     "3094": {
       "name": "Rapid Firecannon",
-      "description": "<stats>+30% Attack Speed<br>+30% Critical Strike Chance<br>+5% Movement Speed</stats><br><br><passive>Passive:</passive> Moving and attacking will make an attack <a href='Energized'>Energized</a>.<br><br><unique>UNIQUE Passive - Firecannon:</unique> Your Energized attacks gain 35% bonus Range (+150 range maximum) and deal 60~140 bonus magic damage (based on level) on hit.<br><br>Attacks become Energized 25% faster. Energized attacks function on structures.",
+      "description": "<stats>+30% Attack Speed<br>+25% Critical Strike Chance<br>+5% Movement Speed</stats><br><br><passive>Passive:</passive> Moving and attacking will make an attack <a href='Energized'>Energized</a>.<br><br><unique>UNIQUE Passive - Firecannon:</unique> Your Energized attacks gain 35% bonus Range (+150 range maximum) and deal 60~140 bonus magic damage (based on level) on hit.<br><br>Attacks become Energized 25% faster. Energized attacks function on structures.",
       "colloq": ";canon;rapidfire;rfc",
       "plaintext": "Movement builds charges that release a sieging fire attack on release",
       "from": [
@@ -6276,16 +6199,16 @@
         "full": "3094.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 96,
+        "x": 144,
         "y": 144,
         "w": 48,
         "h": 48
       },
       "gold": {
-        "base": 700,
+        "base": 800,
         "purchasable": true,
-        "total": 2800,
-        "sell": 1960
+        "total": 2600,
+        "sell": 1820
       },
       "tags": [
         "AttackSpeed",
@@ -6296,11 +6219,10 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
-        "FlatCritChanceMod": 0.3,
+        "FlatCritChanceMod": 0.25,
         "PercentMovementSpeedMod": 0.05,
         "PercentAttackSpeedMod": 0.3
       },
@@ -6316,57 +6238,52 @@
     },
     "3095": {
       "name": "Stormrazor",
-      "description": "<stats>+60 Attack Damage<br>+35% Attack Speed</stats><br><br><unique>UNIQUE Passive:</unique> If you haven't attacked in the last 3 seconds (scaling down with your attack speed), gain <unlockedPassive>Storm's Edge</unlockedPassive>.<br><br><unlockedPassive>Storm's Edge:</unlockedPassive> Your next basic attack critically strikes for 140% (+1% per 0.5% critical strike chance, max 200%) damage and grants 20% movement speed for 0.75 seconds.",
+      "description": "<stats>+55 Attack Damage<br>+25% Attack Speed</stats><br><br><passive>Passive:</passive> Moving and attacking will make an attack <a href='Energized'>Energized</a>.<br><br><unique>UNIQUE Passive - Storm:</unique> Your Energized attacks deal <magicDamage>50 bonus magic damage</magicDamage> on hit.<br><br>Your Energized effects have all of their respective effects increased by +30% and also slow for 40% movement speed decaying over 1 seconds.",
       "colloq": ";Windblade",
-      "plaintext": "Start fights with a flurry of critical strikes",
+      "plaintext": "Tremendously empower other Energized effects.",
       "from": [
         "1038",
         "1036",
-        "1036",
-        "1042"
+        "2015"
       ],
       "image": {
         "full": "3095.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 144,
+        "x": 192,
         "y": 144,
         "w": 48,
         "h": 48
       },
       "gold": {
-        "base": 500,
+        "base": 850,
         "purchasable": true,
-        "total": 2800,
-        "sell": 1960
+        "total": 3100,
+        "sell": 2170
       },
       "tags": [
         "Damage",
-        "CriticalStrike",
         "AttackSpeed",
-        "OnHit",
-        "NonbootsMovement"
+        "OnHit"
       ],
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
-        "FlatPhysicalDamageMod": 60,
-        "PercentAttackSpeedMod": 0.35
+        "FlatPhysicalDamageMod": 55,
+        "PercentAttackSpeedMod": 0.25
       },
       "effect": {
-        "Effect1Amount": "3",
-        "Effect2Amount": "0.5",
-        "Effect3Amount": "0.2",
-        "Effect4Amount": "0.75",
-        "Effect5Amount": "0",
-        "Effect6Amount": "2",
-        "Effect7Amount": "1.4"
+        "Effect1Amount": "50",
+        "Effect2Amount": "50",
+        "Effect3Amount": "5",
+        "Effect4Amount": "0.3",
+        "Effect5Amount": "0.4",
+        "Effect6Amount": "1"
       },
-      "depth": 2
+      "depth": 3
     },
     "3096": {
       "name": "Nomad's Medallion",
@@ -6384,7 +6301,7 @@
         "full": "3096.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 192,
+        "x": 240,
         "y": 144,
         "w": 48,
         "h": 48
@@ -6406,8 +6323,7 @@
       "maps": {
         "10": false,
         "11": true,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {},
       "effect": {
@@ -6444,7 +6360,7 @@
         "full": "3097.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 240,
+        "x": 288,
         "y": 144,
         "w": 48,
         "h": 48
@@ -6464,8 +6380,7 @@
       "maps": {
         "10": false,
         "11": true,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {
         "FlatHPPoolMod": 125
@@ -6508,7 +6423,7 @@
         "full": "3098.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 288,
+        "x": 336,
         "y": 144,
         "w": 48,
         "h": 48
@@ -6529,8 +6444,7 @@
       "maps": {
         "10": false,
         "11": true,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {
         "FlatMagicDamageMod": 20
@@ -6573,7 +6487,7 @@
         "full": "3100.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 336,
+        "x": 384,
         "y": 144,
         "w": 48,
         "h": 48
@@ -6593,8 +6507,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "PercentMovementSpeedMod": 0.07,
@@ -6626,7 +6539,7 @@
         "full": "3101.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 384,
+        "x": 432,
         "y": 144,
         "w": 48,
         "h": 48
@@ -6644,8 +6557,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "PercentAttackSpeedMod": 0.35
@@ -6669,8 +6581,8 @@
         "full": "3102.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 432,
-        "y": 144,
+        "x": 0,
+        "y": 192,
         "w": 48,
         "h": 48
       },
@@ -6688,8 +6600,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatSpellBlockMod": 60,
@@ -6718,7 +6629,7 @@
         "full": "3104.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 0,
+        "x": 48,
         "y": 192,
         "w": 48,
         "h": 48
@@ -6740,8 +6651,7 @@
       "maps": {
         "10": true,
         "11": false,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {
         "FlatPhysicalDamageMod": 50,
@@ -6773,7 +6683,7 @@
         "full": "3105.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 48,
+        "x": 96,
         "y": 192,
         "w": 48,
         "h": 48
@@ -6791,8 +6701,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatSpellBlockMod": 30,
@@ -6816,7 +6725,7 @@
         "full": "3107.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 96,
+        "x": 144,
         "y": 192,
         "w": 48,
         "h": 48
@@ -6836,8 +6745,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatHPPoolMod": 200
@@ -6880,7 +6788,7 @@
         "full": "3108.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 144,
+        "x": 192,
         "y": 192,
         "w": 48,
         "h": 48
@@ -6898,8 +6806,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatMagicDamageMod": 35
@@ -6922,7 +6829,7 @@
         "full": "3109.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 192,
+        "x": 240,
         "y": 192,
         "w": 48,
         "h": 48
@@ -6943,8 +6850,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatHPPoolMod": 250,
@@ -6974,7 +6880,7 @@
         "full": "3110.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 240,
+        "x": 288,
         "y": 192,
         "w": 48,
         "h": 48
@@ -6994,8 +6900,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatMPPoolMod": 400,
@@ -7020,7 +6925,7 @@
         "full": "3111.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 288,
+        "x": 336,
         "y": 192,
         "w": 48,
         "h": 48
@@ -7039,8 +6944,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatMovementSpeedMod": 45,
@@ -7057,7 +6961,7 @@
         "full": "3112.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 336,
+        "x": 384,
         "y": 192,
         "w": 48,
         "h": 48
@@ -7077,8 +6981,7 @@
       "maps": {
         "10": false,
         "11": false,
-        "12": true,
-        "21": false
+        "12": true
       },
       "stats": {
         "FlatHPPoolMod": 150,
@@ -7105,7 +7008,7 @@
         "full": "3113.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 384,
+        "x": 432,
         "y": 192,
         "w": 48,
         "h": 48
@@ -7123,8 +7026,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatMagicDamageMod": 30
@@ -7138,7 +7040,7 @@
       "name": "Forbidden Idol",
       "description": "<stats><mana>+50% Base Mana Regen </mana></stats><br><br><unique>UNIQUE Passive:</unique> +10% Cooldown Reduction<br><unique>UNIQUE Passive:</unique> +5% Heal and Shield Power",
       "colloq": ";",
-      "plaintext": "Increases Mana Regeneration and Cooldown Reduction",
+      "plaintext": "Increases Heal and Shield Power, Mana Regeneration, and Cooldown Reduction",
       "from": [
         "1004",
         "1004"
@@ -7152,8 +7054,8 @@
         "full": "3114.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 432,
-        "y": 192,
+        "x": 0,
+        "y": 240,
         "w": 48,
         "h": 48
       },
@@ -7170,8 +7072,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {},
       "effect": {
@@ -7193,7 +7094,7 @@
         "full": "3115.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 0,
+        "x": 48,
         "y": 240,
         "w": 48,
         "h": 48
@@ -7213,8 +7114,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatMagicDamageMod": 80,
@@ -7236,7 +7136,7 @@
         "full": "3116.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 48,
+        "x": 96,
         "y": 240,
         "w": 48,
         "h": 48
@@ -7255,8 +7155,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatHPPoolMod": 300,
@@ -7284,7 +7183,7 @@
         "full": "3117.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 96,
+        "x": 144,
         "y": 240,
         "w": 48,
         "h": 48
@@ -7301,8 +7200,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatMovementSpeedMod": 115
@@ -7332,7 +7230,7 @@
         "full": "3118.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 144,
+        "x": 192,
         "y": 240,
         "w": 48,
         "h": 48
@@ -7353,8 +7251,7 @@
       "maps": {
         "10": false,
         "11": false,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {
         "FlatHPPoolMod": 250,
@@ -7381,13 +7278,13 @@
         "1036"
       ],
       "into": [
-        "3104"
+        "3185"
       ],
       "image": {
         "full": "3122.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 192,
+        "x": 240,
         "y": 240,
         "w": 48,
         "h": 48
@@ -7406,8 +7303,7 @@
       "maps": {
         "10": false,
         "11": false,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {
         "FlatPhysicalDamageMod": 20,
@@ -7434,7 +7330,7 @@
         "full": "3123.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 240,
+        "x": 288,
         "y": 240,
         "w": 48,
         "h": 48
@@ -7451,8 +7347,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatPhysicalDamageMod": 15
@@ -7476,7 +7371,7 @@
         "full": "3124.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 288,
+        "x": 336,
         "y": 240,
         "w": 48,
         "h": 48
@@ -7498,8 +7393,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatPhysicalDamageMod": 25,
@@ -7535,7 +7429,7 @@
         "full": "3128.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 336,
+        "x": 384,
         "y": 240,
         "w": 48,
         "h": 48
@@ -7554,8 +7448,7 @@
       "maps": {
         "10": false,
         "11": false,
-        "12": false,
-        "21": true
+        "12": false
       },
       "stats": {
         "FlatMagicDamageMod": 120
@@ -7581,7 +7474,7 @@
         "full": "3131.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 384,
+        "x": 432,
         "y": 240,
         "w": 48,
         "h": 48
@@ -7602,8 +7495,7 @@
       "maps": {
         "10": false,
         "11": false,
-        "12": false,
-        "21": true
+        "12": false
       },
       "stats": {
         "FlatPhysicalDamageMod": 25,
@@ -7648,8 +7540,8 @@
         "full": "3133.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 432,
-        "y": 240,
+        "x": 0,
+        "y": 288,
         "w": 48,
         "h": 48
       },
@@ -7666,8 +7558,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatPhysicalDamageMod": 25
@@ -7698,7 +7589,7 @@
         "full": "3134.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 0,
+        "x": 48,
         "y": 288,
         "w": 48,
         "h": 48
@@ -7716,8 +7607,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatPhysicalDamageMod": 25
@@ -7745,7 +7635,7 @@
         "full": "3135.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 48,
+        "x": 96,
         "y": 288,
         "w": 48,
         "h": 48
@@ -7763,8 +7653,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatMagicDamageMod": 70
@@ -7798,7 +7687,7 @@
         "full": "3136.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 96,
+        "x": 144,
         "y": 288,
         "w": 48,
         "h": 48
@@ -7816,8 +7705,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatHPPoolMod": 200,
@@ -7849,7 +7737,7 @@
         "full": "3137.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 144,
+        "x": 192,
         "y": 288,
         "w": 48,
         "h": 48
@@ -7870,8 +7758,7 @@
       "maps": {
         "10": false,
         "11": false,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {
         "FlatSpellBlockMod": 45,
@@ -7898,7 +7785,7 @@
         "full": "3139.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 192,
+        "x": 240,
         "y": 288,
         "w": 48,
         "h": 48
@@ -7919,8 +7806,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatPhysicalDamageMod": 50,
@@ -7951,7 +7837,7 @@
         "full": "3140.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 240,
+        "x": 288,
         "y": 288,
         "w": 48,
         "h": 48
@@ -7969,8 +7855,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatSpellBlockMod": 30
@@ -7996,7 +7881,7 @@
         "full": "3142.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 288,
+        "x": 336,
         "y": 288,
         "w": 48,
         "h": 48
@@ -8017,8 +7902,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatPhysicalDamageMod": 55
@@ -8046,7 +7930,7 @@
         "full": "3143.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 336,
+        "x": 384,
         "y": 288,
         "w": 48,
         "h": 48
@@ -8066,8 +7950,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatHPPoolMod": 400,
@@ -8101,7 +7984,7 @@
         "full": "3144.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 384,
+        "x": 432,
         "y": 288,
         "w": 48,
         "h": 48
@@ -8121,8 +8004,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatPhysicalDamageMod": 25,
@@ -8155,8 +8037,8 @@
         "full": "3145.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 432,
-        "y": 288,
+        "x": 0,
+        "y": 336,
         "w": 48,
         "h": 48
       },
@@ -8172,8 +8054,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatMagicDamageMod": 40
@@ -8200,7 +8081,7 @@
         "full": "3146.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 0,
+        "x": 48,
         "y": 336,
         "w": 48,
         "h": 48
@@ -8222,8 +8103,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatPhysicalDamageMod": 40,
@@ -8252,7 +8132,7 @@
         "full": "3147.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 48,
+        "x": 96,
         "y": 336,
         "w": 48,
         "h": 48
@@ -8273,8 +8153,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatPhysicalDamageMod": 55
@@ -8309,7 +8188,7 @@
         "full": "3148.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 96,
+        "x": 144,
         "y": 336,
         "w": 48,
         "h": 48
@@ -8331,8 +8210,7 @@
       "maps": {
         "10": false,
         "11": false,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {
         "FlatPhysicalDamageMod": 40,
@@ -8361,7 +8239,7 @@
         "full": "3149.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 144,
+        "x": 192,
         "y": 336,
         "w": 48,
         "h": 48
@@ -8384,8 +8262,7 @@
       "maps": {
         "10": false,
         "11": false,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {
         "FlatPhysicalDamageMod": 40,
@@ -8411,7 +8288,7 @@
         "full": "3151.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 192,
+        "x": 240,
         "y": 336,
         "w": 48,
         "h": 48
@@ -8429,8 +8306,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatHPPoolMod": 300,
@@ -8461,7 +8337,7 @@
         "full": "3152.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 240,
+        "x": 288,
         "y": 336,
         "w": 48,
         "h": 48
@@ -8481,8 +8357,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatHPPoolMod": 300,
@@ -8517,7 +8392,7 @@
         "full": "3153.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 288,
+        "x": 336,
         "y": 336,
         "w": 48,
         "h": 48
@@ -8540,8 +8415,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatPhysicalDamageMod": 40,
@@ -8571,7 +8445,7 @@
         "full": "3155.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 336,
+        "x": 384,
         "y": 336,
         "w": 48,
         "h": 48
@@ -8589,8 +8463,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatPhysicalDamageMod": 20,
@@ -8621,7 +8494,7 @@
         "full": "3156.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 384,
+        "x": 432,
         "y": 336,
         "w": 48,
         "h": 48
@@ -8642,8 +8515,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatPhysicalDamageMod": 50,
@@ -8680,8 +8552,8 @@
         "full": "3157.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 432,
-        "y": 336,
+        "x": 0,
+        "y": 384,
         "w": 48,
         "h": 48
       },
@@ -8700,8 +8572,7 @@
       "maps": {
         "10": false,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatMagicDamageMod": 75,
@@ -8726,7 +8597,7 @@
         "full": "3158.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 0,
+        "x": 48,
         "y": 384,
         "w": 48,
         "h": 48
@@ -8744,8 +8615,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatMovementSpeedMod": 45
@@ -8758,28 +8628,29 @@
     },
     "3161": {
       "name": "Spear of Shojin",
-      "description": "<stats>+60 Attack Damage<br>+200 Health<br>+10% Cooldown Reduction</stats><br><br><unique>UNIQUE Passive:</unique> <a href='FlatDamageReduction'>Reduce damage</a> from champion attacks and abilities by 20 plus 10% of bonus attack damage (maximum 70).<br><unique>UNIQUE Passive:</unique> When near at least 3 enemy champions, land a basic attack to gain <unlockedPassive>Dragon Heart</unlockedPassive> (90s cooldown).<br><br><unlockedPassive>Dragon Heart:</unlockedPassive> Block 200% more damage for 6s, refreshing on takedown.<br><br><rules></rules>",
+      "description": "<stats>+60 Attack Damage<br>+250 Health<br>+20% Cooldown Reduction</stats><br><br><unique>UNIQUE Passive:</unique> After you cast your ultimate, your next basic attack within 10 seconds grants <unlockedPassive>Awakened Dragon</unlockedPassive> for 6 seconds (30 second cooldown).<br><br><unlockedPassive>Awakened Dragon:</unlockedPassive> Gain 50% attack speed, and basic attacks refund 20% of your remaining non-ultimate cooldowns.",
       "colloq": ";",
-      "plaintext": "Reduce damage taken from champions by a flat amount. Attack while near multiple enemy champions to increase this amount for a short time.",
+      "plaintext": "After casting your ultimate, your basic attacks reduces your remaining non-ultimate cooldowns.",
       "stacks": 0,
       "from": [
         "1038",
-        "3067"
+        "3067",
+        "1036"
       ],
       "image": {
         "full": "3161.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 48,
+        "x": 96,
         "y": 384,
         "w": 48,
         "h": 48
       },
       "gold": {
-        "base": 800,
+        "base": 950,
         "purchasable": true,
-        "total": 2900,
-        "sell": 2030
+        "total": 3400,
+        "sell": 2380
       },
       "tags": [
         "Health",
@@ -8787,26 +8658,23 @@
         "CooldownReduction"
       ],
       "maps": {
-        "10": false,
-        "11": false,
-        "12": false,
-        "21": true
+        "10": true,
+        "11": true,
+        "12": true
       },
       "stats": {
         "FlatPhysicalDamageMod": 60,
-        "FlatHPPoolMod": 200
+        "FlatHPPoolMod": 250
       },
       "effect": {
-        "Effect1Amount": "70",
-        "Effect2Amount": "2",
-        "Effect3Amount": "90",
-        "Effect4Amount": "100",
-        "Effect5Amount": "20",
-        "Effect6Amount": "0.5",
-        "Effect7Amount": "0.3",
-        "Effect8Amount": "0.1",
-        "Effect9Amount": "6",
-        "Effect10Amount": "2"
+        "Effect1Amount": "0.01",
+        "Effect2Amount": "0",
+        "Effect3Amount": "0.5",
+        "Effect4Amount": "0.2",
+        "Effect5Amount": "6",
+        "Effect6Amount": "30",
+        "Effect7Amount": "0.2",
+        "Effect8Amount": "10"
       },
       "depth": 3
     },
@@ -8829,7 +8697,7 @@
         "full": "3162.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 96,
+        "x": 144,
         "y": 384,
         "w": 48,
         "h": 48
@@ -8849,8 +8717,7 @@
       "maps": {
         "10": false,
         "11": false,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {
         "FlatPhysicalDamageMod": 25,
@@ -8878,7 +8745,7 @@
         "full": "3163.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 144,
+        "x": 192,
         "y": 384,
         "w": 48,
         "h": 48
@@ -8899,8 +8766,7 @@
       "maps": {
         "10": false,
         "11": false,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {
         "FlatPhysicalDamageMod": 50,
@@ -8922,7 +8788,7 @@
     },
     "3165": {
       "name": "Morellonomicon",
-      "description": "<stats>+80 Ability Power<br>+300 Health</stats><br><br><unique>UNIQUE Passive - Touch of Death:</unique> +15 <a href='FlatMagicPen'>Magic Penetration</a><br><unique>UNIQUE Passive - Cursed Strike:</unique> Magic damage dealt to champions inflicts them with <a href='GrievousWounds'>Grievous Wounds</a> for 3 seconds.",
+      "description": "<stats>+70 Ability Power<br>+300 Health</stats><br><br><unique>UNIQUE Passive - Touch of Death:</unique> +15 <a href='FlatMagicPen'>Magic Penetration</a><br><unique>UNIQUE Passive - Cursed Strike:</unique> Magic damage dealt to champions inflicts them with <a href='GrievousWounds'>Grievous Wounds</a> for 3 seconds.",
       "colloq": ";nmst;grievous",
       "plaintext": "Increases magic damage",
       "from": [
@@ -8933,13 +8799,13 @@
         "full": "3165.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 192,
+        "x": 240,
         "y": 384,
         "w": 48,
         "h": 48
       },
       "gold": {
-        "base": 650,
+        "base": 550,
         "purchasable": true,
         "total": 3000,
         "sell": 2100
@@ -8952,12 +8818,11 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatHPPoolMod": 300,
-        "FlatMagicDamageMod": 80
+        "FlatMagicDamageMod": 70
       },
       "effect": {
         "Effect1Amount": "15",
@@ -8985,7 +8850,7 @@
         "full": "3170.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 240,
+        "x": 288,
         "y": 384,
         "w": 48,
         "h": 48
@@ -9005,8 +8870,7 @@
       "maps": {
         "10": true,
         "11": false,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {
         "FlatSpellBlockMod": 50,
@@ -9029,7 +8893,7 @@
         "full": "3172.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 288,
+        "x": 336,
         "y": 384,
         "w": 48,
         "h": 48
@@ -9049,8 +8913,7 @@
       "maps": {
         "10": false,
         "11": false,
-        "12": false,
-        "21": true
+        "12": false
       },
       "stats": {
         "FlatPhysicalDamageMod": 50,
@@ -9071,7 +8934,7 @@
         "full": "3173.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 336,
+        "x": 384,
         "y": 384,
         "w": 48,
         "h": 48
@@ -9089,8 +8952,7 @@
       "maps": {
         "10": false,
         "11": false,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {
         "FlatMovementSpeedMod": 45
@@ -9114,7 +8976,7 @@
         "full": "3174.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 384,
+        "x": 432,
         "y": 384,
         "w": 48,
         "h": 48
@@ -9135,8 +8997,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatSpellBlockMod": 30,
@@ -9173,8 +9034,8 @@
         "full": "3175.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 432,
-        "y": 384,
+        "x": 0,
+        "y": 432,
         "w": 48,
         "h": 48
       },
@@ -9192,8 +9053,7 @@
       "maps": {
         "10": false,
         "11": true,
-        "12": false,
-        "21": true
+        "12": false
       },
       "stats": {},
       "effect": {
@@ -9217,7 +9077,7 @@
         "full": "3181.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 0,
+        "x": 48,
         "y": 432,
         "w": 48,
         "h": 48
@@ -9235,8 +9095,7 @@
       "maps": {
         "10": false,
         "11": false,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {
         "FlatPhysicalDamageMod": 45,
@@ -9259,7 +9118,7 @@
         "full": "3184.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 48,
+        "x": 96,
         "y": 432,
         "w": 48,
         "h": 48
@@ -9279,14 +9138,64 @@
       "maps": {
         "10": false,
         "11": false,
-        "12": true,
-        "21": false
+        "12": true
       },
       "stats": {
         "FlatPhysicalDamageMod": 20,
         "FlatHPPoolMod": 150,
         "PercentLifeStealMod": 0.1
       }
+    },
+    "3185": {
+      "name": "The Lightbringer",
+      "description": "<stats>+30 Attack Damage<br>+30% Critical Strike Chance</stats><br><br><unique>UNIQUE Passive:</unique> Critical Strikes cause enemies to bleed for an additional 90% of bonus Attack Damage as magic damage over 3 seconds and reveal them for the duration.<br><unique>UNIQUE Passive - Trap Detection:</unique> Nearby stealthed enemy traps are revealed.<br><active>UNIQUE Active - Hunter's Sight:</active> A stealth-detecting mist grants vision in the target area for 5 seconds, revealing enemy champions that enter for 3 seconds (60 second cooldown).",
+      "colloq": ";lb",
+      "plaintext": "Critical Strikes cause your target to bleed and be revealed",
+      "from": [
+        "3122",
+        "1018"
+      ],
+      "image": {
+        "full": "3185.png",
+        "sprite": "item1.png",
+        "group": "item",
+        "x": 144,
+        "y": 432,
+        "w": 48,
+        "h": 48
+      },
+      "gold": {
+        "base": 350,
+        "purchasable": true,
+        "total": 2350,
+        "sell": 1645
+      },
+      "tags": [
+        "Active",
+        "CriticalStrike",
+        "Damage",
+        "OnHit",
+        "Stealth",
+        "Vision"
+      ],
+      "maps": {
+        "10": false,
+        "11": false,
+        "12": false
+      },
+      "stats": {
+        "FlatPhysicalDamageMod": 30,
+        "FlatCritChanceMod": 0.3
+      },
+      "effect": {
+        "Effect1Amount": "0.9",
+        "Effect2Amount": "3",
+        "Effect3Amount": "0",
+        "Effect4Amount": "5",
+        "Effect5Amount": "3",
+        "Effect6Amount": "60"
+      },
+      "depth": 3
     },
     "3187": {
       "name": "Arcane Sweeper",
@@ -9301,7 +9210,7 @@
         "full": "3187.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 96,
+        "x": 192,
         "y": 432,
         "w": 48,
         "h": 48
@@ -9324,8 +9233,7 @@
       "maps": {
         "10": false,
         "11": false,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {
         "FlatHPPoolMod": 225,
@@ -9358,7 +9266,7 @@
         "full": "3190.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 144,
+        "x": 240,
         "y": 432,
         "w": 48,
         "h": 48
@@ -9377,8 +9285,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatSpellBlockMod": 60,
@@ -9414,7 +9321,7 @@
         "full": "3191.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 192,
+        "x": 288,
         "y": 432,
         "w": 48,
         "h": 48
@@ -9432,8 +9339,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatMagicDamageMod": 20,
@@ -9459,7 +9365,7 @@
         "full": "3193.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 240,
+        "x": 336,
         "y": 432,
         "w": 48,
         "h": 48
@@ -9478,8 +9384,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatSpellBlockMod": 40,
@@ -9514,7 +9419,7 @@
         "full": "3194.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 288,
+        "x": 384,
         "y": 432,
         "w": 48,
         "h": 48
@@ -9534,8 +9439,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatHPPoolMod": 350,
@@ -9564,7 +9468,7 @@
         "full": "3196.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 336,
+        "x": 432,
         "y": 432,
         "w": 48,
         "h": 48
@@ -9582,8 +9486,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {},
       "effect": {
@@ -9606,10 +9509,10 @@
       ],
       "image": {
         "full": "3197.png",
-        "sprite": "item1.png",
+        "sprite": "item2.png",
         "group": "item",
-        "x": 384,
-        "y": 432,
+        "x": 0,
+        "y": 0,
         "w": 48,
         "h": 48
       },
@@ -9626,8 +9529,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {},
       "effect": {
@@ -9647,10 +9549,10 @@
       "requiredChampion": "Viktor",
       "image": {
         "full": "3198.png",
-        "sprite": "item1.png",
+        "sprite": "item2.png",
         "group": "item",
-        "x": 432,
-        "y": 432,
+        "x": 48,
+        "y": 0,
         "w": 48,
         "h": 48
       },
@@ -9667,8 +9569,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {},
       "effect": {
@@ -9691,7 +9592,7 @@
         "full": "3200.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 0,
+        "x": 96,
         "y": 0,
         "w": 48,
         "h": 48
@@ -9706,8 +9607,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {},
       "effect": {
@@ -9732,7 +9632,7 @@
         "full": "3211.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 48,
+        "x": 144,
         "y": 0,
         "w": 48,
         "h": 48
@@ -9751,8 +9651,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatHPPoolMod": 250,
@@ -9777,7 +9676,7 @@
         "full": "3222.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 96,
+        "x": 192,
         "y": 0,
         "w": 48,
         "h": 48
@@ -9798,8 +9697,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatSpellBlockMod": 40
@@ -9835,7 +9733,7 @@
         "full": "3230.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 144,
+        "x": 240,
         "y": 0,
         "w": 48,
         "h": 48
@@ -9856,8 +9754,7 @@
       "maps": {
         "10": false,
         "11": false,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {
         "FlatPhysicalDamageMod": 80,
@@ -9886,7 +9783,7 @@
         "full": "3231.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 192,
+        "x": 288,
         "y": 0,
         "w": 48,
         "h": 48
@@ -9907,8 +9804,7 @@
       "maps": {
         "10": false,
         "11": false,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {
         "FlatPhysicalDamageMod": 50,
@@ -9938,7 +9834,7 @@
         "full": "3285.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 240,
+        "x": 336,
         "y": 0,
         "w": 48,
         "h": 48
@@ -9958,8 +9854,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatMPPoolMod": 600,
@@ -9990,7 +9885,7 @@
         "full": "3301.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 288,
+        "x": 384,
         "y": 0,
         "w": 48,
         "h": 48
@@ -10011,8 +9906,7 @@
       "maps": {
         "10": false,
         "11": true,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {},
       "effect": {
@@ -10044,7 +9938,7 @@
         "full": "3302.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 336,
+        "x": 432,
         "y": 0,
         "w": 48,
         "h": 48
@@ -10064,8 +9958,7 @@
       "maps": {
         "10": false,
         "11": true,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {
         "FlatHPPoolMod": 50
@@ -10103,8 +9996,8 @@
         "full": "3303.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 384,
-        "y": 0,
+        "x": 0,
+        "y": 48,
         "w": 48,
         "h": 48
       },
@@ -10123,8 +10016,7 @@
       "maps": {
         "10": false,
         "11": true,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {
         "FlatMagicDamageMod": 10
@@ -10164,8 +10056,8 @@
         "full": "3304.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 432,
-        "y": 0,
+        "x": 48,
+        "y": 48,
         "w": 48,
         "h": 48
       },
@@ -10184,8 +10076,7 @@
       "maps": {
         "10": true,
         "11": false,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {},
       "effect": {
@@ -10221,7 +10112,7 @@
         "full": "3305.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 0,
+        "x": 96,
         "y": 48,
         "w": 48,
         "h": 48
@@ -10242,8 +10133,7 @@
       "maps": {
         "10": true,
         "11": false,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {},
       "effect": {
@@ -10277,7 +10167,7 @@
         "full": "3306.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 48,
+        "x": 144,
         "y": 48,
         "w": 48,
         "h": 48
@@ -10300,8 +10190,7 @@
       "maps": {
         "10": true,
         "11": false,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {
         "FlatArmorMod": 45
@@ -10336,7 +10225,7 @@
         "full": "3307.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 96,
+        "x": 192,
         "y": 48,
         "w": 48,
         "h": 48
@@ -10356,8 +10245,7 @@
       "maps": {
         "10": true,
         "11": false,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {
         "FlatHPPoolMod": 50
@@ -10399,7 +10287,7 @@
         "full": "3308.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 144,
+        "x": 240,
         "y": 48,
         "w": 48,
         "h": 48
@@ -10419,8 +10307,7 @@
       "maps": {
         "10": true,
         "11": false,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {
         "FlatHPPoolMod": 125
@@ -10460,7 +10347,7 @@
         "full": "3309.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 192,
+        "x": 288,
         "y": 48,
         "w": 48,
         "h": 48
@@ -10482,8 +10369,7 @@
       "maps": {
         "10": true,
         "11": false,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {
         "FlatHPPoolMod": 350
@@ -10522,7 +10408,7 @@
         "full": "3310.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 240,
+        "x": 336,
         "y": 48,
         "w": 48,
         "h": 48
@@ -10542,8 +10428,7 @@
       "maps": {
         "10": true,
         "11": false,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {
         "FlatMagicDamageMod": 10
@@ -10587,7 +10472,7 @@
         "full": "3311.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 288,
+        "x": 384,
         "y": 48,
         "w": 48,
         "h": 48
@@ -10608,8 +10493,7 @@
       "maps": {
         "10": true,
         "11": false,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {
         "FlatMagicDamageMod": 20
@@ -10651,7 +10535,7 @@
         "full": "3312.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 336,
+        "x": 432,
         "y": 48,
         "w": 48,
         "h": 48
@@ -10673,8 +10557,7 @@
       "maps": {
         "10": true,
         "11": false,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {
         "FlatMagicDamageMod": 60
@@ -10712,8 +10595,8 @@
         "full": "3340.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 384,
-        "y": 48,
+        "x": 0,
+        "y": 96,
         "w": 48,
         "h": 48
       },
@@ -10733,8 +10616,7 @@
       "maps": {
         "10": false,
         "11": true,
-        "12": false,
-        "21": true
+        "12": false
       },
       "stats": {},
       "effect": {
@@ -10758,8 +10640,8 @@
         "full": "3345.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 432,
-        "y": 48,
+        "x": 48,
+        "y": 96,
         "w": 48,
         "h": 48
       },
@@ -10777,8 +10659,7 @@
       "maps": {
         "10": false,
         "11": false,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {}
     },
@@ -10792,7 +10673,7 @@
         "full": "3348.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 0,
+        "x": 96,
         "y": 96,
         "w": 48,
         "h": 48
@@ -10812,8 +10693,7 @@
       "maps": {
         "10": true,
         "11": false,
-        "12": false,
-        "21": true
+        "12": false
       },
       "stats": {},
       "effect": {
@@ -10835,7 +10715,7 @@
         "full": "3361.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 48,
+        "x": 144,
         "y": 96,
         "w": 48,
         "h": 48
@@ -10854,8 +10734,7 @@
       "maps": {
         "10": false,
         "11": true,
-        "12": false,
-        "21": true
+        "12": false
       },
       "stats": {},
       "effect": {
@@ -10879,7 +10758,7 @@
         "full": "3362.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 96,
+        "x": 192,
         "y": 96,
         "w": 48,
         "h": 48
@@ -10898,8 +10777,7 @@
       "maps": {
         "10": false,
         "11": true,
-        "12": false,
-        "21": true
+        "12": false
       },
       "stats": {},
       "effect": {
@@ -10922,7 +10800,7 @@
         "full": "3363.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 144,
+        "x": 240,
         "y": 96,
         "w": 48,
         "h": 48
@@ -10941,8 +10819,7 @@
       "maps": {
         "10": false,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {},
       "effect": {
@@ -10972,7 +10849,7 @@
         "full": "3364.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 192,
+        "x": 288,
         "y": 96,
         "w": 48,
         "h": 48
@@ -10991,8 +10868,7 @@
       "maps": {
         "10": false,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {},
       "effect": {
@@ -11009,7 +10885,7 @@
     },
     "3371": {
       "name": "Molten Edge",
-      "description": "<stats><font color='#FFFFFF'>+100 Attack Damage</font></stats><br><br><unique>UNIQUE Passive:</unique> Doubles your critical strike chance.<br><unique>UNIQUE Passive:</unique> 10% of critical strike damage is converted to True Damage.",
+      "description": "<stats><font color='#FFFFFF'>+110 Attack Damage</font><br>+25% Critical Strike Chance</stats><br><br><unique>UNIQUE Passive:</unique> Critical strikes deal 225% damage instead of 200%.",
       "colloq": ";ie;Ornn;forge;Masterwork",
       "plaintext": "Massively enhances critical strikes",
       "from": [
@@ -11020,7 +10896,7 @@
         "full": "3371.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 240,
+        "x": 336,
         "y": 96,
         "w": 48,
         "h": 48
@@ -11038,14 +10914,14 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
-        "FlatPhysicalDamageMod": 100
+        "FlatPhysicalDamageMod": 110,
+        "FlatCritChanceMod": 0.25
       },
       "effect": {
-        "Effect1Amount": "0.1"
+        "Effect1Amount": "2.25"
       },
       "depth": 3
     },
@@ -11062,7 +10938,7 @@
         "full": "3373.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 288,
+        "x": 384,
         "y": 96,
         "w": 48,
         "h": 48
@@ -11070,8 +10946,8 @@
       "gold": {
         "base": 0,
         "purchasable": true,
-        "total": 2900,
-        "sell": 2030
+        "total": 2750,
+        "sell": 1925
       },
       "tags": [
         "Health",
@@ -11080,8 +10956,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatHPPoolMod": 625,
@@ -11107,7 +10982,7 @@
         "full": "3374.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 336,
+        "x": 432,
         "y": 96,
         "w": 48,
         "h": 48
@@ -11124,8 +10999,7 @@
       "maps": {
         "10": false,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatMagicDamageMod": 175
@@ -11148,8 +11022,8 @@
         "full": "3379.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 384,
-        "y": 96,
+        "x": 0,
+        "y": 144,
         "w": 48,
         "h": 48
       },
@@ -11172,8 +11046,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatHPPoolMod": 550,
@@ -11203,8 +11076,8 @@
         "full": "3380.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 432,
-        "y": 96,
+        "x": 48,
+        "y": 144,
         "w": 48,
         "h": 48
       },
@@ -11225,8 +11098,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatPhysicalDamageMod": 60,
@@ -11259,7 +11131,7 @@
         "full": "3382.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 0,
+        "x": 96,
         "y": 144,
         "w": 48,
         "h": 48
@@ -11279,8 +11151,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatHPPoolMod": 300
@@ -11313,7 +11184,7 @@
         "full": "3383.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 48,
+        "x": 144,
         "y": 144,
         "w": 48,
         "h": 48
@@ -11332,8 +11203,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatSpellBlockMod": 75,
@@ -11363,7 +11233,7 @@
         "full": "3384.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 96,
+        "x": 192,
         "y": 144,
         "w": 48,
         "h": 48
@@ -11386,8 +11256,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatPhysicalDamageMod": 35,
@@ -11418,7 +11287,7 @@
         "full": "3385.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 144,
+        "x": 240,
         "y": 144,
         "w": 48,
         "h": 48
@@ -11437,8 +11306,7 @@
       "maps": {
         "10": true,
         "11": false,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {
         "FlatMagicDamageMod": 155,
@@ -11464,7 +11332,7 @@
         "full": "3386.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 192,
+        "x": 288,
         "y": 144,
         "w": 48,
         "h": 48
@@ -11484,8 +11352,7 @@
       "maps": {
         "10": false,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatMagicDamageMod": 100,
@@ -11511,7 +11378,7 @@
         "full": "3387.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 240,
+        "x": 336,
         "y": 144,
         "w": 48,
         "h": 48
@@ -11531,8 +11398,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatMPPoolMod": 700,
@@ -11560,7 +11426,7 @@
         "full": "3388.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 288,
+        "x": 384,
         "y": 144,
         "w": 48,
         "h": 48
@@ -11581,8 +11447,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatPhysicalDamageMod": 75
@@ -11610,7 +11475,7 @@
         "full": "3389.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 336,
+        "x": 432,
         "y": 144,
         "w": 48,
         "h": 48
@@ -11633,8 +11498,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatPhysicalDamageMod": 55,
@@ -11659,8 +11523,8 @@
         "full": "3390.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 384,
-        "y": 144,
+        "x": 0,
+        "y": 192,
         "w": 48,
         "h": 48
       },
@@ -11679,8 +11543,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatMPPoolMod": 850,
@@ -11711,8 +11574,8 @@
         "full": "3400.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 432,
-        "y": 144,
+        "x": 48,
+        "y": 192,
         "w": 48,
         "h": 48
       },
@@ -11729,8 +11592,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {}
     },
@@ -11747,7 +11609,7 @@
         "full": "3401.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 0,
+        "x": 96,
         "y": 192,
         "w": 48,
         "h": 48
@@ -11768,8 +11630,7 @@
       "maps": {
         "10": false,
         "11": true,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {
         "FlatHPPoolMod": 350
@@ -11809,7 +11670,7 @@
         "full": "3410.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 48,
+        "x": 144,
         "y": 192,
         "w": 48,
         "h": 48
@@ -11828,8 +11689,7 @@
       "maps": {
         "10": false,
         "11": true,
-        "12": false,
-        "21": true
+        "12": false
       },
       "stats": {},
       "effect": {
@@ -11854,7 +11714,7 @@
         "full": "3416.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 96,
+        "x": 192,
         "y": 192,
         "w": 48,
         "h": 48
@@ -11873,8 +11733,7 @@
       "maps": {
         "10": false,
         "11": true,
-        "12": false,
-        "21": true
+        "12": false
       },
       "stats": {},
       "effect": {
@@ -11900,7 +11759,7 @@
         "full": "3422.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 144,
+        "x": 240,
         "y": 192,
         "w": 48,
         "h": 48
@@ -11919,8 +11778,7 @@
       "maps": {
         "10": true,
         "11": false,
-        "12": true,
-        "21": false
+        "12": true
       },
       "stats": {},
       "effect": {
@@ -11942,7 +11800,7 @@
         "full": "3455.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 192,
+        "x": 288,
         "y": 192,
         "w": 48,
         "h": 48
@@ -11961,8 +11819,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {},
       "effect": {
@@ -11981,7 +11838,7 @@
         "full": "3460.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 240,
+        "x": 336,
         "y": 192,
         "w": 48,
         "h": 48
@@ -11999,8 +11856,7 @@
       "maps": {
         "10": false,
         "11": false,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {}
     },
@@ -12014,7 +11870,7 @@
         "full": "3461.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 288,
+        "x": 384,
         "y": 192,
         "w": 48,
         "h": 48
@@ -12032,8 +11888,7 @@
       "maps": {
         "10": false,
         "11": false,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {}
     },
@@ -12047,7 +11902,7 @@
         "full": "3462.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 336,
+        "x": 432,
         "y": 192,
         "w": 48,
         "h": 48
@@ -12066,8 +11921,7 @@
       "maps": {
         "10": false,
         "11": false,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {},
       "effect": {
@@ -12091,8 +11945,8 @@
         "full": "3504.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 384,
-        "y": 192,
+        "x": 0,
+        "y": 240,
         "w": 48,
         "h": 48
       },
@@ -12111,8 +11965,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatMagicDamageMod": 60
@@ -12130,31 +11983,32 @@
     },
     "3508": {
       "name": "Essence Reaver",
-      "description": "<stats>+75 Attack Damage<br>+20% Cooldown Reduction<br><mana>+300 Mana</mana></stats><br><br><unique>UNIQUE Passive:</unique> Basic attacks refund 1% of your missing mana.<br><unique>UNIQUE Passive:</unique> After you cast your ultimate, your next basic attack within 10 seconds grants you <unlockedPassive>Essence Flare</unlockedPassive> for 6 seconds (30 second cooldown).<br><br><unlockedPassive>Essence Flare:</unlockedPassive> Gain 50% attack speed, and basic attacks refund 20% of your remaining non-ultimate cooldowns.",
+      "description": "<stats>+60 Attack Damage<br>+20% Cooldown Reduction<br>+25% Critical Strike Chance</stats><br><br><unique>UNIQUE Passive:</unique> Basic attacks refund 1.5% of your missing mana.",
       "colloq": ";",
-      "plaintext": "Attack and cast spells faster after your ultimate",
+      "plaintext": "Grants Critical Strike Chance, Cooldown Reduction, Attack Damage and restores mana on hit.",
       "from": [
-        "1038",
+        "1037",
         "3133",
-        "1027"
+        "1018"
       ],
       "image": {
         "full": "3508.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 432,
-        "y": 192,
+        "x": 48,
+        "y": 240,
         "w": 48,
         "h": 48
       },
       "gold": {
-        "base": 250,
+        "base": 425,
         "purchasable": true,
-        "total": 3000,
-        "sell": 2100
+        "total": 3200,
+        "sell": 2240
       },
       "tags": [
         "Damage",
+        "CriticalStrike",
         "AttackSpeed",
         "Mana",
         "ManaRegen",
@@ -12163,15 +12017,14 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
-        "FlatPhysicalDamageMod": 75,
-        "FlatMPPoolMod": 300
+        "FlatPhysicalDamageMod": 60,
+        "FlatCritChanceMod": 0.25
       },
       "effect": {
-        "Effect1Amount": "0.01",
+        "Effect1Amount": "0.015",
         "Effect2Amount": "0",
         "Effect3Amount": "0.5",
         "Effect4Amount": "0.2",
@@ -12195,7 +12048,7 @@
         "full": "3512.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 0,
+        "x": 96,
         "y": 240,
         "w": 48,
         "h": 48
@@ -12216,8 +12069,7 @@
       "maps": {
         "10": false,
         "11": true,
-        "12": false,
-        "21": true
+        "12": false
       },
       "stats": {
         "FlatSpellBlockMod": 55,
@@ -12253,7 +12105,7 @@
         "full": "3513.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 48,
+        "x": 144,
         "y": 240,
         "w": 48,
         "h": 48
@@ -12271,8 +12123,7 @@
       "maps": {
         "10": false,
         "11": false,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {},
       "effect": {
@@ -12292,7 +12143,7 @@
         "full": "3514.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 96,
+        "x": 192,
         "y": 240,
         "w": 48,
         "h": 48
@@ -12310,8 +12161,7 @@
       "maps": {
         "10": false,
         "11": false,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {},
       "effect": {
@@ -12331,7 +12181,7 @@
         "full": "3520.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 144,
+        "x": 240,
         "y": 240,
         "w": 48,
         "h": 48
@@ -12350,8 +12200,7 @@
       "maps": {
         "10": false,
         "11": false,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {},
       "effect": {
@@ -12370,7 +12219,7 @@
         "full": "3599.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 192,
+        "x": 288,
         "y": 240,
         "w": 48,
         "h": 48
@@ -12387,8 +12236,38 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
+      },
+      "stats": {}
+    },
+    "3600": {
+      "name": "The Black Spear",
+      "description": "<stats></stats><br><active>Active:</active> Offer to bind with an ally for the remainder of the game, becoming Oathsworn Allies. Oathsworn empowers you both while near one another.",
+      "colloq": ";spear",
+      "plaintext": "Kalista's spear that binds an Oathsworn Ally.",
+      "requiredChampion": "Sylas",
+      "image": {
+        "full": "3600.png",
+        "sprite": "item2.png",
+        "group": "item",
+        "x": 336,
+        "y": 240,
+        "w": 48,
+        "h": 48
+      },
+      "gold": {
+        "base": 0,
+        "purchasable": true,
+        "total": 0,
+        "sell": 0
+      },
+      "tags": [
+        "Active"
+      ],
+      "maps": {
+        "10": true,
+        "11": true,
+        "12": true
       },
       "stats": {}
     },
@@ -12402,7 +12281,7 @@
         "full": "3630.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 240,
+        "x": 384,
         "y": 240,
         "w": 48,
         "h": 48
@@ -12417,8 +12296,7 @@
       "maps": {
         "10": false,
         "11": false,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {}
     },
@@ -12433,7 +12311,7 @@
         "full": "3631.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 288,
+        "x": 432,
         "y": 240,
         "w": 48,
         "h": 48
@@ -12448,8 +12326,7 @@
       "maps": {
         "10": false,
         "11": true,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {},
       "effect": {
@@ -12474,8 +12351,8 @@
         "full": "3633.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 336,
-        "y": 240,
+        "x": 0,
+        "y": 288,
         "w": 48,
         "h": 48
       },
@@ -12489,8 +12366,7 @@
       "maps": {
         "10": false,
         "11": false,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {}
     },
@@ -12505,8 +12381,8 @@
         "full": "3634.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 384,
-        "y": 240,
+        "x": 48,
+        "y": 288,
         "w": 48,
         "h": 48
       },
@@ -12520,8 +12396,7 @@
       "maps": {
         "10": false,
         "11": true,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {},
       "effect": {
@@ -12548,8 +12423,8 @@
         "full": "3635.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 432,
-        "y": 240,
+        "x": 96,
+        "y": 288,
         "w": 48,
         "h": 48
       },
@@ -12563,8 +12438,7 @@
       "maps": {
         "10": false,
         "11": true,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {},
       "effect": {
@@ -12585,7 +12459,7 @@
         "full": "3636.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 0,
+        "x": 144,
         "y": 288,
         "w": 48,
         "h": 48
@@ -12600,8 +12474,7 @@
       "maps": {
         "10": false,
         "11": true,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {
         "FlatCritChanceMod": 3
@@ -12624,7 +12497,7 @@
         "full": "3637.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 48,
+        "x": 192,
         "y": 288,
         "w": 48,
         "h": 48
@@ -12639,8 +12512,7 @@
       "maps": {
         "10": false,
         "11": false,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {}
     },
@@ -12655,7 +12527,7 @@
         "full": "3640.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 96,
+        "x": 240,
         "y": 288,
         "w": 48,
         "h": 48
@@ -12670,8 +12542,7 @@
       "maps": {
         "10": false,
         "11": true,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {},
       "effect": {
@@ -12689,7 +12560,7 @@
         "full": "3641.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 144,
+        "x": 288,
         "y": 288,
         "w": 48,
         "h": 48
@@ -12704,8 +12575,7 @@
       "maps": {
         "10": false,
         "11": true,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {},
       "effect": {
@@ -12731,7 +12601,7 @@
         "full": "3642.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 192,
+        "x": 336,
         "y": 288,
         "w": 48,
         "h": 48
@@ -12746,8 +12616,7 @@
       "maps": {
         "10": false,
         "11": true,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {},
       "effect": {
@@ -12765,7 +12634,7 @@
         "full": "3643.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 240,
+        "x": 384,
         "y": 288,
         "w": 48,
         "h": 48
@@ -12780,8 +12649,7 @@
       "maps": {
         "10": false,
         "11": true,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {},
       "effect": {
@@ -12800,7 +12668,7 @@
         "full": "3645.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 288,
+        "x": 432,
         "y": 288,
         "w": 48,
         "h": 48
@@ -12819,8 +12687,7 @@
       "maps": {
         "10": false,
         "11": true,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {},
       "effect": {
@@ -12841,8 +12708,8 @@
         "full": "3647.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 336,
-        "y": 288,
+        "x": 0,
+        "y": 336,
         "w": 48,
         "h": 48
       },
@@ -12856,8 +12723,7 @@
       "maps": {
         "10": false,
         "11": true,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {},
       "effect": {
@@ -12882,8 +12748,8 @@
         "full": "3648.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 384,
-        "y": 288,
+        "x": 48,
+        "y": 336,
         "w": 48,
         "h": 48
       },
@@ -12897,8 +12763,7 @@
       "maps": {
         "10": false,
         "11": true,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {}
     },
@@ -12912,8 +12777,8 @@
         "full": "3649.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 432,
-        "y": 288,
+        "x": 96,
+        "y": 336,
         "w": 48,
         "h": 48
       },
@@ -12927,8 +12792,7 @@
       "maps": {
         "10": false,
         "11": true,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {},
       "effect": {
@@ -12948,7 +12812,7 @@
         "full": "3671.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 0,
+        "x": 144,
         "y": 336,
         "w": 48,
         "h": 48
@@ -12963,8 +12827,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatPhysicalDamageMod": 60
@@ -12984,7 +12847,7 @@
         "full": "3672.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 48,
+        "x": 192,
         "y": 336,
         "w": 48,
         "h": 48
@@ -12999,8 +12862,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatHPPoolMod": 325
@@ -13021,7 +12883,7 @@
         "full": "3673.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 96,
+        "x": 240,
         "y": 336,
         "w": 48,
         "h": 48
@@ -13036,8 +12898,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "PercentMovementSpeedMod": 0.07,
@@ -13058,7 +12919,7 @@
         "full": "3675.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 144,
+        "x": 288,
         "y": 336,
         "w": 48,
         "h": 48
@@ -13073,8 +12934,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "PercentAttackSpeedMod": 0.5
@@ -13090,7 +12950,7 @@
         "full": "3680.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 192,
+        "x": 336,
         "y": 336,
         "w": 48,
         "h": 48
@@ -13108,8 +12968,7 @@
       "maps": {
         "10": false,
         "11": false,
-        "12": true,
-        "21": false
+        "12": true
       },
       "stats": {},
       "effect": {
@@ -13133,7 +12992,7 @@
         "full": "3681.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 240,
+        "x": 384,
         "y": 336,
         "w": 48,
         "h": 48
@@ -13151,8 +13010,7 @@
       "maps": {
         "10": false,
         "11": false,
-        "12": true,
-        "21": false
+        "12": true
       },
       "stats": {},
       "effect": {
@@ -13174,7 +13032,7 @@
         "full": "3682.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 288,
+        "x": 432,
         "y": 336,
         "w": 48,
         "h": 48
@@ -13192,8 +13050,7 @@
       "maps": {
         "10": false,
         "11": false,
-        "12": true,
-        "21": false
+        "12": true
       },
       "stats": {},
       "effect": {
@@ -13218,8 +13075,8 @@
         "full": "3683.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 336,
-        "y": 336,
+        "x": 0,
+        "y": 384,
         "w": 48,
         "h": 48
       },
@@ -13236,8 +13093,7 @@
       "maps": {
         "10": false,
         "11": false,
-        "12": true,
-        "21": false
+        "12": true
       },
       "stats": {},
       "effect": {
@@ -13263,93 +13119,6 @@
         "full": "3690.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 384,
-        "y": 336,
-        "w": 48,
-        "h": 48
-      },
-      "gold": {
-        "base": 0,
-        "purchasable": true,
-        "total": 0,
-        "sell": 0
-      },
-      "tags": [],
-      "maps": {
-        "10": false,
-        "11": false,
-        "12": false,
-        "21": false
-      },
-      "stats": {}
-    },
-    "3691": {
-      "name": "Singularity Lantern",
-      "description": "<passive>Passive - Singularity Lantern: </passive>Dark Passage automatically saves disabled allies. However, it no longer provides a shield.<br><br><flavorText>''The stars call to us.''</flavorText>",
-      "colloq": ";",
-      "plaintext": "",
-      "image": {
-        "full": "3691.png",
-        "sprite": "item2.png",
-        "group": "item",
-        "x": 432,
-        "y": 336,
-        "w": 48,
-        "h": 48
-      },
-      "gold": {
-        "base": 0,
-        "purchasable": true,
-        "total": 0,
-        "sell": 0
-      },
-      "tags": [],
-      "maps": {
-        "10": false,
-        "11": false,
-        "12": false,
-        "21": false
-      },
-      "stats": {}
-    },
-    "3692": {
-      "name": "Dark Matter Scythe",
-      "description": "<passive>Passive - Dark Matter Scythe: </passive>Flay's on-hit passive charges damage very quickly. Flay will throw enemies much farther (based on their Missing Health).<br><br><flavorText>''If you want to make a Singularity from scratch, you must first destroy the universe.''</flavorText>",
-      "colloq": ";",
-      "plaintext": "",
-      "image": {
-        "full": "3692.png",
-        "sprite": "item2.png",
-        "group": "item",
-        "x": 0,
-        "y": 384,
-        "w": 48,
-        "h": 48
-      },
-      "gold": {
-        "base": 0,
-        "purchasable": true,
-        "total": 0,
-        "sell": 0
-      },
-      "tags": [],
-      "maps": {
-        "10": false,
-        "11": false,
-        "12": false,
-        "21": false
-      },
-      "stats": {}
-    },
-    "3693": {
-      "name": "Gravity Boots",
-      "description": "<passive>Passive - Mass Conversion: </passive>Thresh's Health represents how far enemy pulls and pushes will send him. At lower Health, he will be thrown farther.<br><br><passive>Passive - Terminus Dwellers: </passive>Abyss Scuttlers emerge periodically, and will scurry towards the Dark Star when attacked. Gravitational disturbances will temporarily attract many of them.",
-      "colloq": ";",
-      "plaintext": "",
-      "image": {
-        "full": "3693.png",
-        "sprite": "item2.png",
-        "group": "item",
         "x": 48,
         "y": 384,
         "w": 48,
@@ -13365,20 +13134,17 @@
       "maps": {
         "10": false,
         "11": false,
-        "12": false,
-        "21": false
+        "12": false
       },
-      "stats": {
-        "FlatMovementSpeedMod": 50
-      }
+      "stats": {}
     },
-    "3694": {
-      "name": "Cloak of Stars",
-      "description": "<passive>Passive - Stellar Spirit: </passive>Upon spawning, Thresh is invulnerable, untargetable, cannot cast, and is able to travel in open space. This is lost when stepping foot on stable ground.<br><br>Being saved by Dark Passage or using Death Sentence on one of the three <font color='#3091ec'>Gravity Anchors</font> will briefly put you into this invulnerable state and break enemy chains on you.",
+    "3691": {
+      "name": "Singularity Lantern",
+      "description": "<passive>Passive - Singularity Lantern: </passive>Dark Passage automatically saves disabled allies. However, it no longer provides a shield.<br><br><flavorText>''The stars call to us.''</flavorText>",
       "colloq": ";",
       "plaintext": "",
       "image": {
-        "full": "3694.png",
+        "full": "3691.png",
         "sprite": "item2.png",
         "group": "item",
         "x": 96,
@@ -13396,20 +13162,17 @@
       "maps": {
         "10": false,
         "11": false,
-        "12": false,
-        "21": false
+        "12": false
       },
-      "stats": {
-        "FlatMovementSpeedMod": 50
-      }
+      "stats": {}
     },
-    "3695": {
-      "name": "Dark Star Sigil",
-      "description": "<passive>Passive - Stellar Fealty: </passive>Thresh cannot kill units directly - their souls, experience, and gold belong to the Dark Star.<br><br>Pulling or pushing an enemy into the Dark Star will destroy them instantly, scoring points for your team (+5, or +1 for Abyss Scuttlers).<br><br>Winning a round requires 100 points, and the final points must be from a champion kill.",
+    "3692": {
+      "name": "Dark Matter Scythe",
+      "description": "<passive>Passive - Dark Matter Scythe: </passive>Flay's on-hit passive charges damage very quickly. Flay will throw enemies much farther (based on their Missing Health).<br><br><flavorText>''If you want to make a Singularity from scratch, you must first destroy the universe.''</flavorText>",
       "colloq": ";",
       "plaintext": "",
       "image": {
-        "full": "3695.png",
+        "full": "3692.png",
         "sprite": "item2.png",
         "group": "item",
         "x": 144,
@@ -13427,8 +13190,95 @@
       "maps": {
         "10": false,
         "11": false,
-        "12": false,
-        "21": false
+        "12": false
+      },
+      "stats": {}
+    },
+    "3693": {
+      "name": "Gravity Boots",
+      "description": "<passive>Passive - Mass Conversion: </passive>Thresh's Health represents how far enemy pulls and pushes will send him. At lower Health, he will be thrown farther.<br><br><passive>Passive - Terminus Dwellers: </passive>Abyss Scuttlers emerge periodically, and will scurry towards the Dark Star when attacked. Gravitational disturbances will temporarily attract many of them.",
+      "colloq": ";",
+      "plaintext": "",
+      "image": {
+        "full": "3693.png",
+        "sprite": "item2.png",
+        "group": "item",
+        "x": 192,
+        "y": 384,
+        "w": 48,
+        "h": 48
+      },
+      "gold": {
+        "base": 0,
+        "purchasable": true,
+        "total": 0,
+        "sell": 0
+      },
+      "tags": [],
+      "maps": {
+        "10": false,
+        "11": false,
+        "12": false
+      },
+      "stats": {
+        "FlatMovementSpeedMod": 50
+      }
+    },
+    "3694": {
+      "name": "Cloak of Stars",
+      "description": "<passive>Passive - Stellar Spirit: </passive>Upon spawning, Thresh is invulnerable, untargetable, cannot cast, and is able to travel in open space. This is lost when stepping foot on stable ground.<br><br>Being saved by Dark Passage or using Death Sentence on one of the three <font color='#3091ec'>Gravity Anchors</font> will briefly put you into this invulnerable state and break enemy chains on you.",
+      "colloq": ";",
+      "plaintext": "",
+      "image": {
+        "full": "3694.png",
+        "sprite": "item2.png",
+        "group": "item",
+        "x": 240,
+        "y": 384,
+        "w": 48,
+        "h": 48
+      },
+      "gold": {
+        "base": 0,
+        "purchasable": true,
+        "total": 0,
+        "sell": 0
+      },
+      "tags": [],
+      "maps": {
+        "10": false,
+        "11": false,
+        "12": false
+      },
+      "stats": {
+        "FlatMovementSpeedMod": 50
+      }
+    },
+    "3695": {
+      "name": "Dark Star Sigil",
+      "description": "<passive>Passive - Stellar Fealty: </passive>Thresh cannot kill units directly - their souls, experience, and gold belong to the Dark Star.<br><br>Pulling or pushing an enemy into the Dark Star will destroy them instantly, scoring points for your team (+5, or +1 for Abyss Scuttlers).<br><br>Winning a round requires 100 points, and the final points must be from a champion kill.",
+      "colloq": ";",
+      "plaintext": "",
+      "image": {
+        "full": "3695.png",
+        "sprite": "item2.png",
+        "group": "item",
+        "x": 288,
+        "y": 384,
+        "w": 48,
+        "h": 48
+      },
+      "gold": {
+        "base": 0,
+        "purchasable": true,
+        "total": 0,
+        "sell": 0
+      },
+      "tags": [],
+      "maps": {
+        "10": false,
+        "11": false,
+        "12": false
       },
       "stats": {
         "FlatMovementSpeedMod": 50
@@ -13453,7 +13303,7 @@
         "full": "3706.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 192,
+        "x": 336,
         "y": 384,
         "w": 48,
         "h": 48
@@ -13475,8 +13325,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {},
       "effect": {
@@ -13493,7 +13342,7 @@
     },
     "3715": {
       "name": "Skirmisher's Sabre",
-      "description": "<groupLimit>Limited to 1 Gold Income or Jungle item.</groupLimit><br><br>+10% Life Steal vs. Monsters<br><br><unique>UNIQUE Passive - Challenging Smite:</unique> Smite can be cast on enemy champions, marking them for 4 seconds. While marked, the target is revealed, your basic attacks deal bonus true damage over 3 seconds, and their damage to you is reduced by 20%.<br>Basic attacks vs. monsters deal 40 bonus damage. Damaging a monster with a spell or attack steals 30 Health over 5 seconds and burns them for 80 magic damage. While in the jungle or river, regenerate up to 8 Mana per second based on your missing Mana. This item grants <font color='#99BBBB'><a href='SpecialJungleExperience'>Monster Hunter</a></font>.",
+      "description": "<groupLimit>Limited to 1 Gold Income or Jungle item.</groupLimit><br><br>+10% Life Steal vs. Monsters<br><br><unique>UNIQUE Passive - Challenging Smite:</unique> Smite can be cast on enemy champions, marking them for 4 seconds. While marked your basic attacks deal bonus true damage over 2.5 seconds, and their damage to you is reduced by 20%.<br>Basic attacks vs. monsters deal 40 bonus damage. Damaging a monster with a spell or attack steals 30 Health over 5 seconds and burns them for 80 magic damage. While in the jungle or river, regenerate up to 8 Mana per second based on your missing Mana. This item grants <font color='#99BBBB'><a href='SpecialJungleExperience'>Monster Hunter</a></font>.",
       "colloq": ";jungle;Jungle",
       "plaintext": "Lets your Smite mark Champions, giving you combat power against them.",
       "from": [
@@ -13510,7 +13359,7 @@
         "full": "3715.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 240,
+        "x": 384,
         "y": 384,
         "w": 48,
         "h": 48
@@ -13530,8 +13379,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {},
       "effect": {
@@ -13541,9 +13389,9 @@
         "Effect4Amount": "8",
         "Effect5Amount": "40",
         "Effect6Amount": "4",
-        "Effect7Amount": "3",
-        "Effect8Amount": "18",
-        "Effect9Amount": "2",
+        "Effect7Amount": "2.5",
+        "Effect8Amount": "14.5",
+        "Effect9Amount": "1.5",
         "Effect10Amount": "0.2",
         "Effect11Amount": "0.1"
       },
@@ -13562,7 +13410,7 @@
         "full": "3742.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 288,
+        "x": 432,
         "y": 384,
         "w": 48,
         "h": 48
@@ -13583,8 +13431,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatHPPoolMod": 425,
@@ -13613,8 +13460,8 @@
         "full": "3748.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 336,
-        "y": 384,
+        "x": 0,
+        "y": 432,
         "w": 48,
         "h": 48
       },
@@ -13634,8 +13481,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatPhysicalDamageMod": 40,
@@ -13674,8 +13520,8 @@
         "full": "3751.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 384,
-        "y": 384,
+        "x": 48,
+        "y": 432,
         "w": 48,
         "h": 48
       },
@@ -13691,8 +13537,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatHPPoolMod": 200
@@ -13718,8 +13563,8 @@
         "full": "3800.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 432,
-        "y": 384,
+        "x": 96,
+        "y": 432,
         "w": 48,
         "h": 48
       },
@@ -13742,8 +13587,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatHPPoolMod": 400,
@@ -13780,7 +13624,7 @@
         "full": "3801.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 0,
+        "x": 144,
         "y": 432,
         "w": 48,
         "h": 48
@@ -13798,8 +13642,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatHPPoolMod": 200
@@ -13826,7 +13669,7 @@
         "full": "3802.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 48,
+        "x": 192,
         "y": 432,
         "w": 48,
         "h": 48
@@ -13846,8 +13689,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatMPPoolMod": 300,
@@ -13880,7 +13722,7 @@
         "full": "3812.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 96,
+        "x": 240,
         "y": 432,
         "w": 48,
         "h": 48
@@ -13899,8 +13741,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatPhysicalDamageMod": 80
@@ -13927,7 +13768,7 @@
         "full": "3813.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 144,
+        "x": 288,
         "y": 432,
         "w": 48,
         "h": 48
@@ -13946,8 +13787,7 @@
       "maps": {
         "10": false,
         "11": false,
-        "12": false,
-        "21": false
+        "12": false
       },
       "stats": {
         "FlatPhysicalDamageMod": 80
@@ -13974,7 +13814,7 @@
         "full": "3814.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 192,
+        "x": 336,
         "y": 432,
         "w": 48,
         "h": 48
@@ -13994,8 +13834,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatPhysicalDamageMod": 55,
@@ -14023,7 +13862,7 @@
         "full": "3901.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 240,
+        "x": 384,
         "y": 432,
         "w": 48,
         "h": 48
@@ -14038,8 +13877,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {}
     },
@@ -14055,7 +13893,7 @@
         "full": "3902.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 288,
+        "x": 432,
         "y": 432,
         "w": 48,
         "h": 48
@@ -14070,8 +13908,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {}
     },
@@ -14085,10 +13922,10 @@
       "requiredChampion": "Gangplank",
       "image": {
         "full": "3903.png",
-        "sprite": "item2.png",
+        "sprite": "item3.png",
         "group": "item",
-        "x": 336,
-        "y": 432,
+        "x": 0,
+        "y": 0,
         "w": 48,
         "h": 48
       },
@@ -14102,8 +13939,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {}
     },
@@ -14118,10 +13954,10 @@
       ],
       "image": {
         "full": "3905.png",
-        "sprite": "item2.png",
+        "sprite": "item3.png",
         "group": "item",
-        "x": 384,
-        "y": 432,
+        "x": 48,
+        "y": 0,
         "w": 48,
         "h": 48
       },
@@ -14141,8 +13977,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "PercentMovementSpeedMod": 0.07,
@@ -14179,10 +14014,10 @@
       ],
       "image": {
         "full": "3907.png",
-        "sprite": "item2.png",
+        "sprite": "item3.png",
         "group": "item",
-        "x": 432,
-        "y": 432,
+        "x": 96,
+        "y": 0,
         "w": 48,
         "h": 48
       },
@@ -14200,8 +14035,7 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "PercentMovementSpeedMod": 0.1,
@@ -14224,7 +14058,7 @@
     },
     "3916": {
       "name": "Oblivion Orb",
-      "description": "<stats>+25 Ability Power<br>+200 Health</stats><br><br><unique>UNIQUE Passive - Touch of Death:</unique> +15 <a href='FlatMagicPen'>Magic Penetration</a>",
+      "description": "<stats>+20 Ability Power<br>+200 Health</stats><br><br><unique>UNIQUE Passive - Touch of Death:</unique> +15 <a href='FlatMagicPen'>Magic Penetration</a>",
       "colloq": "",
       "plaintext": "Increases magic damage",
       "stacks": 0,
@@ -14239,16 +14073,16 @@
         "full": "3916.png",
         "sprite": "item3.png",
         "group": "item",
-        "x": 0,
+        "x": 144,
         "y": 0,
         "w": 48,
         "h": 48
       },
       "gold": {
-        "base": 665,
+        "base": 765,
         "purchasable": true,
-        "total": 1500,
-        "sell": 1050
+        "total": 1600,
+        "sell": 1120
       },
       "tags": [
         "Health",
@@ -14258,12 +14092,11 @@
       "maps": {
         "10": true,
         "11": true,
-        "12": true,
-        "21": true
+        "12": true
       },
       "stats": {
         "FlatHPPoolMod": 200,
-        "FlatMagicDamageMod": 25
+        "FlatMagicDamageMod": 20
       },
       "effect": {
         "Effect1Amount": "15"
@@ -14282,7 +14115,7 @@
         "full": "4001.png",
         "sprite": "item3.png",
         "group": "item",
-        "x": 48,
+        "x": 192,
         "y": 0,
         "w": 48,
         "h": 48
@@ -14299,8 +14132,7 @@
       "maps": {
         "10": false,
         "11": false,
-        "12": false,
-        "21": true
+        "12": false
       },
       "stats": {
         "FlatMovementSpeedMod": 45
@@ -14329,7 +14161,7 @@
         "full": "4003.png",
         "sprite": "item3.png",
         "group": "item",
-        "x": 96,
+        "x": 240,
         "y": 0,
         "w": 48,
         "h": 48
@@ -14348,8 +14180,7 @@
       "maps": {
         "10": false,
         "11": false,
-        "12": false,
-        "21": true
+        "12": false
       },
       "stats": {
         "FlatPhysicalDamageMod": 20
@@ -14374,7 +14205,7 @@
         "full": "4004.png",
         "sprite": "item3.png",
         "group": "item",
-        "x": 144,
+        "x": 288,
         "y": 0,
         "w": 48,
         "h": 48
@@ -14394,8 +14225,7 @@
       "maps": {
         "10": false,
         "11": false,
-        "12": false,
-        "21": true
+        "12": false
       },
       "stats": {
         "FlatPhysicalDamageMod": 70
@@ -14422,7 +14252,7 @@
         "full": "4101.png",
         "sprite": "item3.png",
         "group": "item",
-        "x": 192,
+        "x": 336,
         "y": 0,
         "w": 48,
         "h": 48
@@ -14444,8 +14274,7 @@
       "maps": {
         "10": false,
         "11": false,
-        "12": false,
-        "21": true
+        "12": false
       },
       "stats": {},
       "effect": {
@@ -14473,7 +14302,7 @@
         "full": "4102.png",
         "sprite": "item3.png",
         "group": "item",
-        "x": 240,
+        "x": 384,
         "y": 0,
         "w": 48,
         "h": 48
@@ -14488,8 +14317,7 @@
       "maps": {
         "10": false,
         "11": false,
-        "12": false,
-        "21": true
+        "12": false
       },
       "stats": {
         "FlatPhysicalDamageMod": 65
@@ -14520,7 +14348,7 @@
         "full": "4103.png",
         "sprite": "item3.png",
         "group": "item",
-        "x": 288,
+        "x": 432,
         "y": 0,
         "w": 48,
         "h": 48
@@ -14535,8 +14363,7 @@
       "maps": {
         "10": false,
         "11": false,
-        "12": false,
-        "21": true
+        "12": false
       },
       "stats": {
         "FlatHPPoolMod": 350
@@ -14568,8 +14395,8 @@
         "full": "4104.png",
         "sprite": "item3.png",
         "group": "item",
-        "x": 336,
-        "y": 0,
+        "x": 0,
+        "y": 48,
         "w": 48,
         "h": 48
       },
@@ -14583,8 +14410,7 @@
       "maps": {
         "10": false,
         "11": false,
-        "12": false,
-        "21": true
+        "12": false
       },
       "stats": {
         "FlatMPPoolMod": 300,
@@ -14616,8 +14442,8 @@
         "full": "4105.png",
         "sprite": "item3.png",
         "group": "item",
-        "x": 384,
-        "y": 0,
+        "x": 48,
+        "y": 48,
         "w": 48,
         "h": 48
       },
@@ -14631,8 +14457,7 @@
       "maps": {
         "10": false,
         "11": false,
-        "12": false,
-        "21": true
+        "12": false
       },
       "stats": {
         "PercentAttackSpeedMod": 0.5
@@ -14658,8 +14483,8 @@
         "full": "4201.png",
         "sprite": "item3.png",
         "group": "item",
-        "x": 432,
-        "y": 0,
+        "x": 96,
+        "y": 48,
         "w": 48,
         "h": 48
       },
@@ -14677,8 +14502,7 @@
       "maps": {
         "10": false,
         "11": false,
-        "12": false,
-        "21": true
+        "12": false
       },
       "stats": {
         "FlatHPPoolMod": 100,
@@ -14700,7 +14524,7 @@
         "full": "4202.png",
         "sprite": "item3.png",
         "group": "item",
-        "x": 0,
+        "x": 144,
         "y": 48,
         "w": 48,
         "h": 48
@@ -14720,8 +14544,7 @@
       "maps": {
         "10": false,
         "11": false,
-        "12": false,
-        "21": true
+        "12": false
       },
       "stats": {
         "FlatPhysicalDamageMod": 8,
@@ -14741,7 +14564,7 @@
         "full": "4203.png",
         "sprite": "item3.png",
         "group": "item",
-        "x": 48,
+        "x": 192,
         "y": 48,
         "w": 48,
         "h": 48
@@ -14761,8 +14584,7 @@
       "maps": {
         "10": false,
         "11": false,
-        "12": false,
-        "21": true
+        "12": false
       },
       "stats": {
         "FlatHPPoolMod": 60,
@@ -14782,7 +14604,7 @@
         "full": "4204.png",
         "sprite": "item3.png",
         "group": "item",
-        "x": 96,
+        "x": 240,
         "y": 48,
         "w": 48,
         "h": 48
@@ -14801,8 +14623,7 @@
       "maps": {
         "10": false,
         "11": false,
-        "12": false,
-        "21": true
+        "12": false
       },
       "stats": {
         "FlatMagicDamageMod": 10
@@ -14821,7 +14642,7 @@
         "full": "4301.png",
         "sprite": "item3.png",
         "group": "item",
-        "x": 144,
+        "x": 288,
         "y": 48,
         "w": 48,
         "h": 48
@@ -14842,8 +14663,7 @@
       "maps": {
         "10": false,
         "11": false,
-        "12": false,
-        "21": true
+        "12": false
       },
       "stats": {},
       "effect": {
@@ -14872,7 +14692,7 @@
         "full": "4302.png",
         "sprite": "item3.png",
         "group": "item",
-        "x": 192,
+        "x": 336,
         "y": 48,
         "w": 48,
         "h": 48
@@ -14893,8 +14713,7 @@
       "maps": {
         "10": false,
         "11": false,
-        "12": false,
-        "21": true
+        "12": false
       },
       "stats": {
         "FlatHPPoolMod": 60
@@ -14935,7 +14754,7 @@
         "full": "4401.png",
         "sprite": "item3.png",
         "group": "item",
-        "x": 240,
+        "x": 384,
         "y": 48,
         "w": 48,
         "h": 48
@@ -14954,8 +14773,7 @@
       "maps": {
         "10": false,
         "11": false,
-        "12": false,
-        "21": true
+        "12": false
       },
       "stats": {
         "PercentMovementSpeedMod": 0.08,
@@ -14979,7 +14797,7 @@
         "full": "4402.png",
         "sprite": "item3.png",
         "group": "item",
-        "x": 288,
+        "x": 432,
         "y": 48,
         "w": 48,
         "h": 48
@@ -15001,8 +14819,7 @@
       "maps": {
         "10": false,
         "11": false,
-        "12": false,
-        "21": true
+        "12": false
       },
       "stats": {
         "FlatPhysicalDamageMod": 30,
@@ -15036,16 +14853,16 @@
         "full": "4403.png",
         "sprite": "item3.png",
         "group": "item",
-        "x": 336,
-        "y": 48,
+        "x": 0,
+        "y": 96,
         "w": 48,
         "h": 48
       },
       "gold": {
         "base": 687,
         "purchasable": true,
-        "total": 7337,
-        "sell": 5136
+        "total": 7237,
+        "sell": 5066
       },
       "tags": [
         "Health",
@@ -15065,8 +14882,7 @@
       "maps": {
         "10": false,
         "11": false,
-        "12": false,
-        "21": true
+        "12": false
       },
       "stats": {
         "FlatPhysicalDamageMod": 70,

@@ -1,6 +1,6 @@
 {
   "type": "summoner",
-  "version": "9.1.1",
+  "version": "9.3.1",
   "data": {
     "SummonerBarrier": {
       "id": "SummonerBarrier",
@@ -371,13 +371,13 @@
     "SummonerDot": {
       "id": "SummonerDot",
       "name": "Ignite",
-      "description": "Ignites target enemy champion, dealing 80-505 true damage (depending on champion level) over 5 seconds, grants you vision of the target, and reduces healing effects on them for the duration.",
+      "description": "Ignites target enemy champion, dealing 70-410 true damage (depending on champion level) over 5 seconds, grants you vision of the target, and reduces healing effects on them for the duration.",
       "tooltip": "Ignite deals <span class=\"colorFEFCFF\">{{ f1 }}</span> true damage to target enemy champion over 5 seconds, grants you vision of the target and applies Grievous Wounds for the duration.<br /><br /><rules>(Grievous Wounds reduces healing effects by 40%. This vision does not reveal stealthed enemies.)</rules>",
       "maxrank": 1,
       "cooldown": [
-        210
+        180
       ],
-      "cooldownBurn": "210",
+      "cooldownBurn": "180",
       "cost": [
         0
       ],
@@ -389,10 +389,10 @@
           5
         ],
         [
-          11
+          10
         ],
         [
-          5
+          4
         ],
         [
           100
@@ -419,8 +419,8 @@
       "effectBurn": [
         null,
         "5",
-        "11",
-        "5",
+        "10",
+        "4",
         "100",
         "0",
         "0",
@@ -1994,7 +1994,6 @@
         "CLASSIC",
         "TUTORIAL",
         "ASSASSINATE",
-        "URF",
         "ARSR",
         "DOOMBOTSTEEMO",
         "ONEFORALL",

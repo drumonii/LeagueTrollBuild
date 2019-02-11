@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.1.1",
+  "version": "9.3.1",
   "data": {
     "Irelia": {
       "id": "Irelia",
@@ -86,11 +86,11 @@
       },
       "stats": {
         "hp": 580,
-        "hpperlevel": 85,
+        "hpperlevel": 95,
         "mp": 350,
         "mpperlevel": 30,
         "movespeed": 335,
-        "armor": 34,
+        "armor": 36,
         "armorperlevel": 3,
         "spellblock": 32,
         "spellblockperlevel": 1.25,
@@ -115,13 +115,15 @@
           "leveltip": {
             "label": [
               "Damage",
-              "Heal Ratio",
-              "Cooldown"
+              "Cooldown",
+              "Bonus Damage to Minions",
+              "Heal Ratio"
             ],
             "effect": [
               "{{ basedamage }} -> {{ basedamageNL }}",
-              "{{ healtadcoefficient*100.000000 }}% -> {{ healtadcoefficientnl*100.000000 }}%",
-              "{{ cooldown }} -> {{ cooldownNL }}"
+              "{{ cooldown }} -> {{ cooldownNL }}",
+              "{{ damagebonuspve }} -> {{ damagebonuspveNL }}",
+              "{{ healtadcoefficient }}% -> {{ healtadcoefficientNL }}%"
             ]
           },
           "maxrank": 5,
@@ -253,8 +255,8 @@
         {
           "id": "IreliaW",
           "name": "Defiant Dance",
-          "description": "Irelia charges a strike that deals more damage as she charges. She takes reduced damage during the charge.",
-          "tooltip": "<span class=\"colorFF9900\">First Cast:</span> Irelia aligns her blades into a defensive formation, gaining {{ finaldr }}% damage reduction but becoming unable to act.<br /><br /><span class=\"colorFF9900\">Second Cast:</span> Irelia swipes her blades, dealing {{ mindamagecalc }} physical damage. Damage increases with charge time, up to {{ maxdamagecalc }} after {{ chargetimeformax }} seconds.<br /><br /><span class=\"size16 color8C8C8C\">Defiant Dance cannot be interrupted.",
+          "description": "Irelia charges a strike that deals more damage as she charges. She takes reduced physical damage during the charge.",
+          "tooltip": "<span class=\"colorFF9900\">First Cast:</span> Irelia aligns her blades into a defensive formation, gaining {{ finalphysicaldr }}% physical damage reduction, but she is unable to act while holding her formation.<br /><br /><span class=\"colorFF9900\">Second Cast:</span> Irelia swipes her blades, dealing {{ mindamagecalc }} physical damage. Damage increases with charge time, up to {{ maxdamagecalc }} after {{ chargetimeformax }} seconds.<br /><br /><span class=\"size16 color8C8C8C\">Defiant Dance cannot be interrupted.",
           "leveltip": {
             "label": [
               "Damage",
@@ -537,19 +539,17 @@
         {
           "id": "IreliaR",
           "name": "Vanguard's Edge",
-          "description": "Irelia fires a massive number of blades that explode outward upon hitting an enemy champion. Enemies hit by the blades are damaged and Marked. Afterwards the blades form a wall that will damage, slow and disarm enemies that walk through it.",
-          "tooltip": "Irelia launches a storm of blades that explode outward upon hitting a champion. The blades deal {{ missiledamage }} magic damage and <span class=\"colorDDDD77\">Mark</span> champions and large monsters for {{ markduration }} seconds.<br /><br />Irelia then forms the blades into a wall for {{ zoneduration }} seconds. Passing through the wall deals {{ zonedamage }} magic damage, slows by {{ slowamount }}% and disarms for {{ ccduration }} seconds.",
+          "description": "Irelia fires a massive number of blades that explode outward upon hitting an enemy champion. Enemies hit by the blades are damaged and Marked. Afterwards the blades form a wall that will damage and slow enemies that walk through it.",
+          "tooltip": "Irelia launches a storm of blades that explode outward upon hitting a champion. The blades deal {{ missiledamage }} magic damage and <span class=\"colorDDDD77\">Mark</span> champions and large monsters for {{ markduration }} seconds.<br /><br />Irelia then forms the blades into a wall for {{ zoneduration }} seconds. Passing through the wall deals {{ zonedamage }} magic damage and slows by {{ slowamount }}% for {{ ccduration }} seconds.",
           "leveltip": {
             "label": [
               "Damage",
               "Wall Damage",
-              "Wall Duration",
               "Cooldown"
             ],
             "effect": [
               "{{ basemissiledamage }} -> {{ basemissiledamageNL }}",
               "{{ basezonedamage }} -> {{ basezonedamageNL }}",
-              "{{ zoneduration }} -> {{ zonedurationNL }}",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
@@ -656,7 +656,7 @@
       ],
       "passive": {
         "name": "Ionian Fervor",
-        "description": "When Irelia strikes enemies with spells she gains a stacking bonus damage buff on her basic attacks. At maximum stacks she also gains Attack Speed and deals bonus damage to shields.",
+        "description": "When Irelia strikes enemies with spells she gains stacking bonus Attack Speed. At maximum stacks she also gains bonus damage on hit.",
         "image": {
           "full": "Irelia_Passive.png",
           "sprite": "passive1.png",
@@ -1013,11 +1013,6 @@
                 },
                 {
                   "id": "3156",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3161",
                   "count": 1,
                   "hideCount": false
                 }
@@ -2367,11 +2362,6 @@
                   "id": "3075",
                   "count": 1,
                   "hideCount": false
-                },
-                {
-                  "id": "3161",
-                  "count": 1,
-                  "hideCount": false
                 }
               ]
             },
@@ -2671,11 +2661,6 @@
                 },
                 {
                   "id": "3156",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3161",
                   "count": 1,
                   "hideCount": false
                 }

@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.1.1",
+  "version": "9.3.1",
   "data": {
     "Neeko": {
       "id": "Neeko",
@@ -365,7 +365,7 @@
           "id": "NeekoE",
           "name": "Tangle-Barbs",
           "description": "Neeko slings a tangle that damage and root everything it passes through, rooting the last champion for a longer duration. If the tangle passes through 2 units it becomes larger, faster and roots for longer.",
-          "tooltip": "Neeko slings a tangle that deals {{ basedamage }} magic damage and roots for {{ baserootduration }} seconds. The last champion hit is rooted for {{ minrootduration }} seconds instead.<br /><br />The tangle become empowered after hitting {{ targetsrequiredformaxvalue }} enemies, growing larger, moving faster and rooting the last champion hit for {{ maxrootduration }} seconds.",
+          "tooltip": "Neeko slings a tangle that deals {{ basedamage }} magic damage and roots for {{ baserootduration }} seconds. The last champion hit is rooted for {{ minrootduration }} seconds instead.<br /><br />The tangle becomes empowered after hitting {{ targetsrequiredformaxvalue }} enemies, growing larger, moving faster and rooting the last champion hit for {{ maxrootduration }} seconds.",
           "leveltip": {
             "label": [
               "Damage",
@@ -512,7 +512,7 @@
           "id": "NeekoR",
           "name": "Pop Blossom",
           "description": "After a short preparation, Neeko leaps into the air and gains a shield. Upon landing, nearby enemies are damaged and stunned. The preparation is hidden if Neeko is disguised.",
-          "tooltip": "After {{ delayuntilreveal }} seconds Neeko leaps into the air. She gains a shield that absorbs {{ baseshield }} damage (+{{ shieldperchampion }} for each nearby enemy champion). Nearby enemies are slowed by {{ slowamount }}%.<br /><br />When Neeko lands she deals {{ totaldamage }} magic damage and stuns nearby enemies for {{ ccduration }} seconds.<br /><br />This ability can be prepared in secret if Neeko is disguised.",
+          "tooltip": "After {{ delayuntilreveal }} seconds Neeko leaps into the air. She gains a shield that absorbs {{ baseshield }} damage (+{{ shieldmultiplier }} for each nearby enemy champion).<br /><br />When Neeko lands she deals {{ totaldamage }} magic damage and stuns nearby enemies for {{ ccduration }} seconds.<br /><br />This ability can be prepared in secret if Neeko is disguised.",
           "leveltip": {
             "label": [
               "Damage",

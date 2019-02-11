@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.1.1",
+  "version": "9.3.1",
   "data": {
     "Jinx": {
       "id": "Jinx",
@@ -549,7 +549,7 @@
           "id": "JinxR",
           "name": "Super Mega Death Rocket!",
           "description": "Jinx fires a super rocket across the map that gains damage as it travels. The rocket will explode upon colliding with an enemy champion, dealing damage to it and surrounding enemies based on their missing Health.",
-          "tooltip": "Jinx fires a rocket that gains damage over the first second it travels. It explodes on the first enemy champion hit, dealing {{ e1 }} <scaleAD>(+{{ a1 }})</scaleAD> to {{ e2 }} <scaleAD>(+{{ a2 }})</scaleAD> Physical Damage plus {{ e3 }}% of the target's missing Health. Nearby enemies take 80% Damage.",
+          "tooltip": "Jinx fires a rocket that gains damage over the first second it travels. It explodes on the first enemy champion hit, dealing {{ damagefloor }} to {{ damagemax }} Physical Damage plus {{ percentdamage }}% of the target's missing Health. Nearby enemies take 80% Damage.",
           "leveltip": {
             "label": [
               "Minimum Damage",
@@ -644,18 +644,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "bonusattackdamage",
-              "coeff": 0.15,
-              "key": "a1"
-            },
-            {
-              "link": "bonusattackdamage",
-              "coeff": 1.5,
-              "key": "a2"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -900,7 +889,7 @@
               ],
               "items": [
                 {
-                  "id": "3085",
+                  "id": "3031",
                   "count": 1,
                   "hideCount": false
                 },
@@ -910,7 +899,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3095",
+                  "id": "3046",
                   "count": 1,
                   "hideCount": false
                 }
@@ -938,12 +927,12 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3031",
+                  "id": "3094",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3094",
+                  "id": "3085",
                   "count": 1,
                   "hideCount": false
                 }
@@ -2480,7 +2469,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "1036",
+                  "id": "1037",
                   "count": 1,
                   "hideCount": false
                 },
@@ -2508,7 +2497,7 @@
               ],
               "items": [
                 {
-                  "id": "3095",
+                  "id": "3031",
                   "count": 1,
                   "hideCount": false
                 },
@@ -2518,7 +2507,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3085",
+                  "id": "3046",
                   "count": 1,
                   "hideCount": false
                 }
@@ -2541,12 +2530,7 @@
               ],
               "items": [
                 {
-                  "id": "3031",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3094",
+                  "id": "3085",
                   "count": 1,
                   "hideCount": false
                 },
@@ -2725,7 +2709,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3095",
+                  "id": "3031",
                   "count": 1,
                   "hideCount": false
                 }
@@ -2754,11 +2738,6 @@
                 },
                 {
                   "id": "3046",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3031",
                   "count": 1,
                   "hideCount": false
                 }

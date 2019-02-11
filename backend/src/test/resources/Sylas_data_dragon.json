@@ -3,14 +3,14 @@
   "format": "standAloneComplex",
   "version": "9.3.1",
   "data": {
-    "Corki": {
-      "id": "Corki",
-      "key": "42",
-      "name": "Corki",
-      "title": "the Daring Bombardier",
+    "Sylas": {
+      "id": "Sylas",
+      "key": "517",
+      "name": "Sylas",
+      "title": "the Unshackled",
       "image": {
-        "full": "Corki.png",
-        "sprite": "champion0.png",
+        "full": "Sylas.png",
+        "sprite": "champion3.png",
         "group": "champion",
         "x": 384,
         "y": 48,
@@ -19,152 +19,113 @@
       },
       "skins": [
         {
-          "id": "42000",
+          "id": "517000",
           "num": 0,
           "name": "default",
           "chromas": false
         },
         {
-          "id": "42001",
+          "id": "517001",
           "num": 1,
-          "name": "UFO Corki",
-          "chromas": false
-        },
-        {
-          "id": "42002",
-          "num": 2,
-          "name": "Ice Toboggan Corki",
-          "chromas": false
-        },
-        {
-          "id": "42003",
-          "num": 3,
-          "name": "Red Baron Corki",
-          "chromas": false
-        },
-        {
-          "id": "42004",
-          "num": 4,
-          "name": "Hot Rod Corki",
-          "chromas": false
-        },
-        {
-          "id": "42005",
-          "num": 5,
-          "name": "Urfrider Corki",
-          "chromas": false
-        },
-        {
-          "id": "42006",
-          "num": 6,
-          "name": "Dragonwing Corki",
-          "chromas": true
-        },
-        {
-          "id": "42007",
-          "num": 7,
-          "name": "Fnatic Corki",
-          "chromas": false
-        },
-        {
-          "id": "42008",
-          "num": 8,
-          "name": "Arcade Corki",
+          "name": "Lunar Wraith Sylas",
           "chromas": true
         }
       ],
-      "lore": "The yordle pilot Corki loves two things above all others: flying, and his glamorous mustache... though not necessarily in that order. After leaving Bandle City, he settled in Piltover and fell in love with the wondrous machines he found there. He dedicated himself to the development of flying contraptions, leading an aerial defense force of seasoned veterans known as the Screaming Yipsnakes. Calm under fire, Corki patrols the skies around his adopted home, and has never encountered a problem that a good missile barrage couldn't solve.",
-      "blurb": "The yordle pilot Corki loves two things above all others: flying, and his glamorous mustache... though not necessarily in that order. After leaving Bandle City, he settled in Piltover and fell in love with the wondrous machines he found there. He...",
+      "lore": "Raised in one of Demacia's lesser quarters, Sylas of Dregbourne has come to symbolize the darker side of the Great City. As a boy, his ability to root out hidden sorcery caught the attention of the notorious mageseekers, who eventually imprisoned him for turning those same powers against them. Having now broken free, Sylas lives as a hardened revolutionary, using the magic of those around him to destroy the kingdom he once served… and his band of outcast mage followers seems to grow by the day.",
+      "blurb": "Raised in one of Demacia's lesser quarters, Sylas of Dregbourne has come to symbolize the darker side of the Great City. As a boy, his ability to root out hidden sorcery caught the attention of the notorious mageseekers, who eventually imprisoned him...",
       "allytips": [
-        "Phosphorus Bomb can be used to reveal enemy units that might be hiding in a nearby patch of brush.",
-        "Valkyrie can be used defensively as well, so try using it for a quick escape.",
-        "Corki can continue to attack while using Gatling Gun. Maximizing Gatling Gun is key to mastering Corki."
+        "Wait for you or your enemy to reach low health before using Kingslayer for maximum effect.",
+        "Space out your ability usage to get maximum effect from Petricite Burst.",
+        "Clever use of enemy ultimates can open up new possibilities to approach teamfights."
       ],
       "enemytips": [
-        "Watch out for Corki's Missile Barrage. They deal splash damage, so you can get hit even when hiding behind minions.",
-        "Corki is vulnerable after he uses his Valkyrie or Special Delivery, so try switching focus to him if he uses them to enter a fight."
+        "Sylas's healthbar can be deceptive, watch out for his Kingslayer!",
+        "Try to fight Sylas when he isn't able to take your ultimate."
       ],
       "tags": [
-        "Marksman"
+        "Mage",
+        "Assassin"
       ],
       "partype": "Mana",
       "info": {
-        "attack": 8,
-        "defense": 3,
-        "magic": 6,
-        "difficulty": 6
+        "attack": 3,
+        "defense": 4,
+        "magic": 8,
+        "difficulty": 5
       },
       "stats": {
-        "hp": 518,
-        "hpperlevel": 87,
-        "mp": 350.16,
-        "mpperlevel": 34,
-        "movespeed": 325,
-        "armor": 28,
-        "armorperlevel": 3.5,
-        "spellblock": 30,
-        "spellblockperlevel": 0.5,
-        "attackrange": 550,
-        "hpregen": 5.5,
-        "hpregenperlevel": 0.55,
-        "mpregen": 7.424,
-        "mpregenperlevel": 0.55,
+        "hp": 585,
+        "hpperlevel": 85,
+        "mp": 280,
+        "mpperlevel": 50,
+        "movespeed": 340,
+        "armor": 32,
+        "armorperlevel": 3,
+        "spellblock": 36.1,
+        "spellblockperlevel": 1.25,
+        "attackrange": 175,
+        "hpregen": 9.5,
+        "hpregenperlevel": 1,
+        "mpregen": 7,
+        "mpregenperlevel": 0.8,
         "crit": 0,
         "critperlevel": 0,
-        "attackdamage": 60,
+        "attackdamage": 58,
         "attackdamageperlevel": 3,
-        "attackspeedperlevel": 2.3,
-        "attackspeed": 0.638
+        "attackspeedperlevel": 3.5,
+        "attackspeed": 0.645
       },
       "spells": [
         {
-          "id": "PhosphorusBomb",
-          "name": "Phosphorus Bomb",
-          "description": "Corki fires a flash bomb at a target location, dealing magic damage to enemies in the area. This attack additionally reveals units in the area for a duration.",
-          "tooltip": "Corki lobs a bomb, dealing {{ e1 }} <scaleAD>(+{{ a1 }})</scaleAD> <scaleAP>(+{{ a1 }})</scaleAP> magic damage to enemies in the target area. In addition, the blast reveals the area and champions hit by the blast for {{ e2 }} seconds (does not reveal stealth).",
+          "id": "SylasQ",
+          "name": "Chain Lash",
+          "description": "Sylas lashes his chains out, intersecting at his targeted location dealing damage to and slowing enemies. <br><br>After a delay, magical energy explodes from the intersection point dealing damage and increasing the slow.",
+          "tooltip": "Sylas lashes his chains out in an X-shaped area, intersecting at his targeted location dealing <scaleAP>{{ damage }}</scaleAP> magic damage to and slowing enemies by {{ slowamountcalc }} for 2 seconds. <br /><br />After .5 seconds, magical energy explodes from the intersection point dealing <scaleAP>{{ explosiondamage }}</scaleAP> and increasing the slow by 50%.<br /><br /><rules>The explosion deals {{ minionmodcalc }} damage to minions.</rules>",
           "leveltip": {
             "label": [
               "Damage",
-              "@AbilityResourceName@ Cost"
+              "Cooldown",
+              "Slow"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
-              "{{ cost }} -> {{ costNL }}"
+              "{{ basedamage }} -> {{ basedamageNL }}",
+              "{{ cooldown }} -> {{ cooldownNL }}",
+              "{{ slowamount*100.000000 }}% -> {{ slowamountnl*100.000000 }}%"
             ]
           },
           "maxrank": 5,
           "cooldown": [
+            9,
             8,
-            8,
-            8,
-            8,
-            8
+            7,
+            6,
+            5
           ],
-          "cooldownBurn": "8",
+          "cooldownBurn": "9/8/7/6/5",
           "cost": [
+            50,
+            55,
             60,
-            70,
-            80,
-            90,
-            100
+            65,
+            70
           ],
-          "costBurn": "60/70/80/90/100",
+          "costBurn": "50/55/60/65/70",
           "datavalues": {},
           "effect": [
             null,
             [
-              75,
-              120,
-              165,
-              210,
-              255
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              6,
-              6,
-              6,
-              6,
-              6
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -225,8 +186,8 @@
           ],
           "effectBurn": [
             null,
-            "75/120/165/210/255",
-            "6",
+            "0",
+            "0",
             "0",
             "0",
             "0",
@@ -236,31 +197,20 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "bonusattackdamage",
-              "coeff": 0.5,
-              "key": "a1"
-            },
-            {
-              "link": "spelldamage",
-              "coeff": 0.5,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
-            825,
-            825,
-            825,
-            825,
-            825
+            775,
+            775,
+            775,
+            775,
+            775
           ],
-          "rangeBurn": "825",
+          "rangeBurn": "775",
           "image": {
-            "full": "PhosphorusBomb.png",
-            "sprite": "spell2.png",
+            "full": "SylasQ.png",
+            "sprite": "spell11.png",
             "group": "spell",
             "x": 144,
             "y": 48,
@@ -270,53 +220,48 @@
           "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
-          "id": "CarpetBomb",
-          "name": "Valkyrie",
-          "description": "Corki flies a short distance, dropping bombs that create a trail of fire that damages opponents who remain in it.",
-          "tooltip": "<spellPassive>Active:</spellPassive> Corki flies a short distance, dealing {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage per second to enemies in the fire left along his path.<br /><br /><spellPassive>Special Delivery:</spellPassive> Corki flies a great distance, dropping bombs that knock aside enemies and leave a burning trail for 5 seconds. The trail slows enemies by {{ e2 }}% and burns them for {{ f1 }} <scaleAD>(+{{ f2 }})</scaleAD> <scaleAP>(+{{ a2 }})</scaleAP> magic damage per second.",
+          "id": "SylasW",
+          "name": "Kingslayer",
+          "description": "Sylas lunges at an enemy with magical force dealing execute based damage and healing himself against enemy champions.",
+          "tooltip": "Sylas lunges at an enemy with magical force dealing <scaleAP>{{ mindamage }}</scaleAP> magic damage, increased to <scaleAP>{{ maxdamage }}</scaleAP> if the enemy is below 40% health.<br /><br />Damaging enemy champions heals Sylas for <scaleAP>{{ minhealing }}</scaleAP>, increased to <scaleAP>{{ maxhealing }}</scaleAP> if Sylas is below 40% health.",
           "leveltip": {
             "label": [
               "Damage",
+              "Healing",
               "Cooldown"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
+              "{{ damage }} -> {{ damageNL }}",
+              "{{ healing }} -> {{ healingNL }}",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
           "maxrank": 5,
           "cooldown": [
-            20,
-            19,
-            18,
-            17,
-            16
+            14,
+            13.5,
+            13,
+            12.5,
+            12
           ],
-          "cooldownBurn": "20/19/18/17/16",
+          "cooldownBurn": "14/13.5/13/12.5/12",
           "cost": [
-            100,
-            100,
-            100,
-            100,
-            100
+            50,
+            55,
+            60,
+            65,
+            70
           ],
-          "costBurn": "100",
+          "costBurn": "50/55/60/65/70",
           "datavalues": {},
           "effect": [
             null,
             [
-              60,
-              90,
-              120,
-              150,
-              180
-            ],
-            [
-              90,
-              90,
-              90,
-              90,
-              90
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -326,11 +271,18 @@
               0
             ],
             [
-              4,
-              4,
-              4,
-              4,
-              4
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -377,10 +329,10 @@
           ],
           "effectBurn": [
             null,
-            "60/90/120/150/180",
-            "90",
             "0",
-            "4",
+            "0",
+            "0",
+            "0",
             "0",
             "0",
             "0",
@@ -388,31 +340,20 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.4,
-              "key": "a1"
-            },
-            {
-              "link": "spelldamage",
-              "coeff": 0.2,
-              "key": "a2"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
-            600,
-            600,
-            600,
-            600,
-            600
+            400,
+            400,
+            400,
+            400,
+            400
           ],
-          "rangeBurn": "600",
+          "rangeBurn": "400",
           "image": {
-            "full": "CarpetBomb.png",
-            "sprite": "spell2.png",
+            "full": "SylasW.png",
+            "sprite": "spell11.png",
             "group": "spell",
             "x": 192,
             "y": 48,
@@ -422,95 +363,95 @@
           "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
-          "id": "GGun",
-          "name": "Gatling Gun",
-          "description": "Corki's gatling gun rapidly fires in a cone in front of him, dealing damage and reducing enemy Armor and Magic Resist.",
-          "tooltip": "Corki's gatling gun fires continuously at targets in front of him for {{ e2 }} seconds, dealing up to {{ e1 }} <scaleAD>(+{{ a1 }})</scaleAD> damage and reducing up to {{ e4 }} armor and magic resist.<br /><br /><span class=\"color919191\"><i>Gatling Gun's damage is {{ e7 }}% physical, {{ e8 }}% magic.<br />Defense reductions last for {{ e6 }} seconds after last being damaged by Gatling Gun.</i></span>",
+          "id": "SylasE",
+          "name": "Abscond / Abduct",
+          "description": "Sylas dashes and gains a shield. Sylas can recast the ability to throw his chains out, pulling himself to an enemy he hits.",
+          "tooltip": "Sylas dashes to a location, Shielding himself for <scaleAP>{{ shieldvalue }}</scaleAP> for {{ shieldduration }} seconds.<br /><br /><span class=\"colorFF5733\">Recast:</span> Sylas throws out his chain in a direction, pulling himself to the first enemy hit dealing <scaleAP>{{ damage }}</scaleAP> magic damage and knocking them up for .5 seconds.",
           "leveltip": {
             "label": [
               "Damage",
-              "Defense Reduction"
+              "Shield Amount"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
-              "{{ effect4amount*-1.000000 }} -> {{ effect4amountnl*-1.000000 }}"
+              "{{ pulldamage }} -> {{ pulldamageNL }}",
+              "{{ shieldbase }} -> {{ shieldbaseNL }}"
             ]
           },
           "maxrank": 5,
           "cooldown": [
-            16,
-            16,
-            16,
-            16,
-            16
+            12,
+            11.5,
+            11,
+            10.5,
+            10
           ],
-          "cooldownBurn": "16",
+          "cooldownBurn": "12/11.5/11/10.5/10",
           "cost": [
-            50,
-            50,
-            50,
-            50,
-            50
+            55,
+            60,
+            65,
+            70,
+            75
           ],
-          "costBurn": "50",
+          "costBurn": "55/60/65/70/75",
           "datavalues": {},
           "effect": [
             null,
             [
-              120,
-              170,
-              220,
-              270,
-              320
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              4,
-              4,
-              4,
-              4,
-              4
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              4,
-              4,
-              4,
-              4,
-              4
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              8,
-              11,
-              14,
-              17,
-              20
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              8,
-              8,
-              8,
-              8,
-              8
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              2,
-              2,
-              2,
-              2,
-              2
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              50,
-              50,
-              50,
-              50,
-              50
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              50,
-              50,
-              50,
-              50,
-              50
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -529,37 +470,31 @@
           ],
           "effectBurn": [
             null,
-            "120/170/220/270/320",
-            "4",
-            "4",
-            "8/11/14/17/20",
-            "8",
-            "2",
-            "50",
-            "50",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "bonusattackdamage",
-              "coeff": 1.6,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
-            600,
-            600,
-            600,
-            600,
-            600
+            400,
+            400,
+            400,
+            400,
+            400
           ],
-          "rangeBurn": "600",
+          "rangeBurn": "400",
           "image": {
-            "full": "GGun.png",
-            "sprite": "spell2.png",
+            "full": "SylasE.png",
+            "sprite": "spell11.png",
             "group": "spell",
             "x": 240,
             "y": 48,
@@ -569,35 +504,31 @@
           "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
-          "id": "MissileBarrage",
-          "name": "Missile Barrage",
-          "description": "Corki fires a missile toward his target location that explodes on impact, dealing damage to enemies in an area. Corki stores missiles over time, up to a maximum. Every 3rd missile fired will be a Big One, dealing extra damage.",
-          "tooltip": "<spellPassive>Active:</spellPassive> Corki fires a missile that explodes at the first enemy it hits, dealing {{ rsmallmissiledamage }} magic damage to all nearby enemies.<br /><br />Corki can store up to 7 missiles, and every 3rd missile will be a Big One, dealing {{ rbigonemultiplier*100 }}% damage ({{ rbigmissiledamage }}).",
+          "id": "SylasR",
+          "name": "Hijack",
+          "description": "Sylas steals the enemy's ultimate ability and can cast it freely.",
+          "tooltip": "Sylas hijacks a targeted enemy, allowing him to cast their ultimate ability as they would cast it, based on his Ultimate level and using his stats.<br /><br /><rules>Hijacking an enemy places a cooldown on them for 200% (modified by Sylas' Cooldown Reduction, minimum 20 seconds) of the enemy's ultimate's cooldown, during which time Sylas cannot hijack them again.</rules><br /><br /><rules>Sylas converts non-hybrid AD ratios into AP ratios, granting him .5 AP: 1 Bonus AD and .7 AP: 1 Total AD respectively.</rules>",
           "leveltip": {
             "label": [
-              "Damage",
-              "Attack Damage Scaling",
-              "Missile Recharge Time"
+              "Cooldown"
             ],
             "effect": [
-              "{{ rbasedamage }} -> {{ rbasedamageNL }}",
-              "{{ radratio*100.000000 }}% -> {{ radrationl*100.000000 }}%",
-              "{{ ammorechargetime }} -> {{ ammorechargetimeNL }}"
+              "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
           "maxrank": 3,
           "cooldown": [
-            2,
-            2,
-            2
+            85,
+            50,
+            15
           ],
-          "cooldownBurn": "2",
+          "cooldownBurn": "85/50/15",
           "cost": [
-            20,
-            20,
-            20
+            75,
+            75,
+            75
           ],
-          "costBurn": "20",
+          "costBurn": "75",
           "datavalues": {},
           "effect": [
             null,
@@ -667,16 +598,16 @@
           ],
           "vars": [],
           "costType": " {{ abilityresourcename }}",
-          "maxammo": "7",
+          "maxammo": "-1",
           "range": [
-            1225,
-            1225,
-            1225
+            1050,
+            1050,
+            1050
           ],
-          "rangeBurn": "1225",
+          "rangeBurn": "1050",
           "image": {
-            "full": "MissileBarrage.png",
-            "sprite": "spell2.png",
+            "full": "SylasR.png",
+            "sprite": "spell11.png",
             "group": "spell",
             "x": 288,
             "y": 48,
@@ -687,11 +618,11 @@
         }
       ],
       "passive": {
-        "name": "Hextech Munitions",
-        "description": "Corki's basic attack deals a percentage of their damage as magic instead of physical. Every once in a while, The Package arrives in Corki's base to be picked up, temporarily granting him out of combat Movement Speed and upgrading Valkyrie into Special Delivery.",
+        "name": "Petricite Burst",
+        "description": "After casting a spell, Sylas's next basic attack whirls his energized chains around him dealing bonus magic damage to enemies hit.",
         "image": {
-          "full": "Corki_RapidReload.png",
-          "sprite": "passive0.png",
+          "full": "SylasP.png",
+          "sprite": "passive3.png",
           "group": "passive",
           "x": 384,
           "y": 48,
@@ -701,161 +632,113 @@
       },
       "recommended": [
         {
-          "champion": "Corki",
+          "champion": "Sylas",
           "title": "Beginner",
+          "type": "riot",
           "map": "SR",
           "mode": "INTRO",
-          "type": "riot",
-          "customTag": "",
-          "extensionPage": false,
-          "customPanel": null,
+          "priority": false,
           "blocks": [
             {
-              "type": "beginner_starter",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
+              "type": "beginner_Starter",
               "maxSummonerLevel": 4,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
               "items": [
                 {
-                  "id": "1055",
-                  "count": 1,
-                  "hideCount": false
+                  "id": "1056",
+                  "count": 1
                 }
               ]
             },
             {
-              "type": "beginner_starter",
-              "recMath": false,
-              "recSteps": false,
+              "type": "beginner_Starter",
               "minSummonerLevel": 5,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
               "items": [
                 {
-                  "id": "1055",
-                  "count": 1,
-                  "hideCount": false
+                  "id": "1056",
+                  "count": 1
                 },
                 {
                   "id": "2003",
-                  "count": 1,
-                  "hideCount": false
+                  "count": 1
                 }
               ]
             },
             {
-              "type": "beginner_advanced",
+              "type": "beginner_Advanced",
               "recMath": true,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
               "items": [
                 {
                   "id": "1028",
-                  "count": 1,
-                  "hideCount": false
+                  "count": 1
                 },
                 {
-                  "id": "1036",
-                  "count": 1,
-                  "hideCount": false
+                  "id": "1027",
+                  "count": 1
                 },
                 {
-                  "id": "3044",
-                  "count": 1,
-                  "hideCount": false
+                  "id": "3010",
+                  "count": 1
                 }
               ]
             },
             {
-              "type": "beginner_movementspeed",
+              "type": "beginner_MovementSpeed",
               "recMath": true,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
               "items": [
                 {
                   "id": "1001",
-                  "count": 1,
-                  "hideCount": false
+                  "count": 1
                 },
                 {
                   "id": "3020",
-                  "count": 1,
-                  "hideCount": false
+                  "count": 1
                 }
               ]
             },
             {
-              "type": "beginner_legendaryitem",
+              "type": "beginner_LegendaryItem",
               "recMath": true,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
               "items": [
                 {
-                  "id": "3044",
-                  "count": 1,
-                  "hideCount": false
+                  "id": "3010",
+                  "count": 1
                 },
                 {
-                  "id": "3057",
-                  "count": 1,
-                  "hideCount": false
+                  "id": "1026",
+                  "count": 1
                 },
                 {
-                  "id": "3086",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3078",
-                  "count": 1,
-                  "hideCount": false
+                  "id": "3027",
+                  "count": 1
                 }
               ]
             },
             {
-              "type": "beginner_morelegendaryitems",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
+              "type": "beginner_MoreLegendaryItems",
               "items": [
                 {
-                  "id": "3072",
-                  "count": 1,
-                  "hideCount": false
+                  "id": "3151",
+                  "count": 1
                 },
                 {
-                  "id": "3031",
-                  "count": 1,
-                  "hideCount": false
+                  "id": "3174",
+                  "count": 1
                 },
                 {
-                  "id": "3508",
-                  "count": 1,
-                  "hideCount": false
+                  "id": "3116",
+                  "count": 1
+                },
+                {
+                  "id": "3089",
+                  "count": 1
                 }
               ]
             }
           ]
         },
         {
-          "champion": "Corki",
-          "title": "CorkiARAM",
+          "champion": "Sylas",
+          "title": "SylasARAM",
           "map": "HA",
           "mode": "ARAM",
           "type": "riot",
@@ -871,17 +754,15 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
+              "hideIfSummonerSpell": "",
               "items": [
                 {
-                  "id": "3044",
+                  "id": "3112",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1001",
                   "count": 1,
                   "hideCount": false
                 },
@@ -900,26 +781,19 @@
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
               "items": [
                 {
-                  "id": "3078",
+                  "id": "3165",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3285",
                   "count": 1,
                   "hideCount": false
                 },
                 {
                   "id": "3020",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3031",
                   "count": 1,
                   "hideCount": false
                 }
@@ -933,26 +807,19 @@
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
               "items": [
                 {
-                  "id": "3508",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3094",
+                  "id": "3089",
                   "count": 1,
                   "hideCount": false
                 },
                 {
                   "id": "3135",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3151",
                   "count": 1,
                   "hideCount": false
                 }
@@ -966,59 +833,19 @@
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
               "items": [
                 {
-                  "id": "3072",
+                  "id": "3116",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3139",
+                  "id": "3157",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3156",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offmeta",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3008",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3007",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3124",
+                  "id": "3001",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1032,13 +859,6 @@
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
               "items": [
                 {
                   "id": "2003",
@@ -1046,12 +866,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "2140",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2033",
+                  "id": "2139",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1060,8 +875,8 @@
           ]
         },
         {
-          "champion": "Corki",
-          "title": "CorkiCS",
+          "champion": "Sylas",
+          "title": "SylasCS",
           "map": "CrystalScar",
           "mode": "ODIN",
           "type": "riot",
@@ -1079,13 +894,13 @@
               "hideIfSummonerSpell": "",
               "items": [
                 {
-                  "id": "1055",
+                  "id": "1056",
                   "count": 1,
                   "hideCount": false
                 },
                 {
                   "id": "2003",
-                  "count": 1,
+                  "count": 2,
                   "hideCount": false
                 },
                 {
@@ -1105,17 +920,17 @@
               "hideIfSummonerSpell": "",
               "items": [
                 {
-                  "id": "3057",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3044",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
                   "id": "1001",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3802",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1058",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1131,19 +946,24 @@
               "hideIfSummonerSpell": "",
               "items": [
                 {
-                  "id": "3078",
+                  "id": "3020",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3020",
+                  "id": "3165",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3285",
                   "count": 1,
                   "hideCount": false
                 }
               ]
             },
             {
-              "type": "offensive",
+              "type": "standard",
               "recMath": false,
               "recSteps": false,
               "minSummonerLevel": -1,
@@ -1152,17 +972,17 @@
               "hideIfSummonerSpell": "",
               "items": [
                 {
-                  "id": "3508",
+                  "id": "3116",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3072",
+                  "id": "3001",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3031",
+                  "id": "3135",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1178,17 +998,17 @@
               "hideIfSummonerSpell": "",
               "items": [
                 {
-                  "id": "3026",
+                  "id": "3157",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3102",
+                  "id": "3089",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3135",
+                  "id": "3151",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1214,7 +1034,7 @@
                   "hideCount": true
                 },
                 {
-                  "id": "2140",
+                  "id": "2139",
                   "count": 1,
                   "hideCount": true
                 }
@@ -1223,12 +1043,13 @@
           ]
         },
         {
-          "champion": "Corki",
-          "title": "CorkiFIRSTBLOOD",
+          "champion": "Sylas",
+          "title": "SylasFIRSTBLOOD",
           "map": "HA",
           "mode": "FIRSTBLOOD",
           "type": "riot",
           "customTag": "",
+          "sortrank": 0,
           "extensionPage": false,
           "customPanel": null,
           "blocks": [
@@ -1242,13 +1063,13 @@
               "hideIfSummonerSpell": "",
               "items": [
                 {
-                  "id": "1055",
+                  "id": "1056",
                   "count": 1,
                   "hideCount": false
                 },
                 {
                   "id": "2003",
-                  "count": 1,
+                  "count": 2,
                   "hideCount": false
                 },
                 {
@@ -1268,17 +1089,17 @@
               "hideIfSummonerSpell": "",
               "items": [
                 {
-                  "id": "3057",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3044",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
                   "id": "1001",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3114",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1058",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1294,19 +1115,24 @@
               "hideIfSummonerSpell": "",
               "items": [
                 {
-                  "id": "3078",
+                  "id": "3020",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3020",
+                  "id": "3165",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3285",
                   "count": 1,
                   "hideCount": false
                 }
               ]
             },
             {
-              "type": "offensive",
+              "type": "standard",
               "recMath": false,
               "recSteps": false,
               "minSummonerLevel": -1,
@@ -1315,17 +1141,17 @@
               "hideIfSummonerSpell": "",
               "items": [
                 {
-                  "id": "3508",
+                  "id": "3089",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3072",
+                  "id": "3157",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3031",
+                  "id": "3135",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1341,17 +1167,17 @@
               "hideIfSummonerSpell": "",
               "items": [
                 {
-                  "id": "3026",
+                  "id": "3001",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3102",
+                  "id": "3116",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3135",
+                  "id": "3174",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1372,22 +1198,7 @@
                   "hideCount": true
                 },
                 {
-                  "id": "2031",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2043",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2140",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "3363",
+                  "id": "2139",
                   "count": 1,
                   "hideCount": true
                 }
@@ -1396,8 +1207,8 @@
           ]
         },
         {
-          "champion": "Corki",
-          "title": "CorkiKINGPORO",
+          "champion": "Sylas",
+          "title": "SylasKINGPORO",
           "map": "HA",
           "mode": "KINGPORO",
           "type": "riot",
@@ -1446,7 +1257,7 @@
               "hideIfSummonerSpell": "",
               "items": [
                 {
-                  "id": "3184",
+                  "id": "3112",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1472,17 +1283,17 @@
               "hideIfSummonerSpell": "",
               "items": [
                 {
-                  "id": "3078",
+                  "id": "3165",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3285",
                   "count": 1,
                   "hideCount": false
                 },
                 {
                   "id": "3020",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3031",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1498,17 +1309,17 @@
               "hideIfSummonerSpell": "",
               "items": [
                 {
-                  "id": "3508",
+                  "id": "3089",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3094",
+                  "id": "3135",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3156",
+                  "id": "3151",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1524,17 +1335,17 @@
               "hideIfSummonerSpell": "",
               "items": [
                 {
-                  "id": "3072",
+                  "id": "3116",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3102",
+                  "id": "3157",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3139",
+                  "id": "3001",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1555,12 +1366,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "2140",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2033",
+                  "id": "2139",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1569,12 +1375,13 @@
           ]
         },
         {
-          "champion": "Corki",
-          "title": "CorkiPRJ17",
-          "map": "ProjectSlums",
-          "mode": "PROJECT",
+          "champion": "Sylas",
+          "title": "SylasSG",
+          "map": "CityPark",
+          "mode": "STARGUARDIAN",
           "type": "riot",
           "customTag": "",
+          "requiredPerk": "",
           "sortrank": 0,
           "extensionPage": false,
           "customPanel": null,
@@ -1587,7 +1394,58 @@
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
+              "items": [
+                {
+                  "id": "1056",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "2003",
+                  "count": 2,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "items": [
+                {
+                  "id": "1001",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3802",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1058",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "essential",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
               "items": [
                 {
                   "id": "3020",
@@ -1595,39 +1453,38 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3078",
+                  "id": "3165",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3146",
+                  "id": "3285",
                   "count": 1,
                   "hideCount": false
                 }
               ]
             },
             {
-              "type": "recommended",
+              "type": "standard",
               "recMath": false,
               "recSteps": false,
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
               "items": [
                 {
-                  "id": "3031",
+                  "id": "3116",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3094",
+                  "id": "3135",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3072",
+                  "id": "3102",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1641,30 +1498,55 @@
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
               "items": [
                 {
-                  "id": "3124",
+                  "id": "3157",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3091",
+                  "id": "3089",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3135",
+                  "id": "3151",
                   "count": 1,
                   "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "consumables",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "items": [
+                {
+                  "id": "2003",
+                  "count": 1,
+                  "hideCount": true
+                },
+                {
+                  "id": "2055",
+                  "count": 1,
+                  "hideCount": true
+                },
+                {
+                  "id": "2139",
+                  "count": 1,
+                  "hideCount": true
                 }
               ]
             }
           ]
         },
         {
-          "champion": "Corki",
-          "title": "CorkiSIEGE",
+          "champion": "Sylas",
+          "title": "SylasSIEGE",
           "map": "SR",
           "mode": "SIEGE",
           "type": "riot",
@@ -1754,19 +1636,24 @@
               "hideIfSummonerSpell": "",
               "items": [
                 {
-                  "id": "3078",
+                  "id": "3020",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3020",
+                  "id": "3165",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3285",
                   "count": 1,
                   "hideCount": false
                 }
               ]
             },
             {
-              "type": "offensive",
+              "type": "standard",
               "recMath": false,
               "recSteps": false,
               "minSummonerLevel": -1,
@@ -1775,17 +1662,17 @@
               "hideIfSummonerSpell": "",
               "items": [
                 {
-                  "id": "3508",
+                  "id": "3116",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3072",
+                  "id": "3001",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3031",
+                  "id": "3135",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1801,17 +1688,17 @@
               "hideIfSummonerSpell": "",
               "items": [
                 {
-                  "id": "3026",
+                  "id": "3157",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3102",
+                  "id": "3089",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3135",
+                  "id": "3151",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1820,10 +1707,10 @@
           ]
         },
         {
-          "champion": "Corki",
-          "title": "CorkiSL",
-          "map": "SL",
-          "mode": "GAMEMODEX",
+          "champion": "Sylas",
+          "title": "SylasSR",
+          "map": "SR",
+          "mode": "CLASSIC",
           "type": "riot",
           "customTag": "",
           "sortrank": 0,
@@ -1848,13 +1735,13 @@
               ],
               "items": [
                 {
-                  "id": "4202",
+                  "id": "1056",
                   "count": 1,
                   "hideCount": false
                 },
                 {
                   "id": "2003",
-                  "count": 1,
+                  "count": 2,
                   "hideCount": false
                 },
                 {
@@ -1881,12 +1768,12 @@
               ],
               "items": [
                 {
-                  "id": "4101",
+                  "id": "1039",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "2003",
+                  "id": "2031",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1914,17 +1801,17 @@
               ],
               "items": [
                 {
-                  "id": "3057",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3044",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
                   "id": "1001",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3802",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1026",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1947,12 +1834,22 @@
               ],
               "items": [
                 {
-                  "id": "3133",
+                  "id": "1001",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "1001",
+                  "id": "3706",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3108",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "2032",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1975,17 +1872,17 @@
               ],
               "items": [
                 {
-                  "id": "3078",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
                   "id": "3020",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3094",
+                  "id": "3285",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3165",
                   "count": 1,
                   "hideCount": false
                 }
@@ -2008,17 +1905,50 @@
               ],
               "items": [
                 {
-                  "id": "4102",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3078",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
                   "id": "3020",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1402",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3100",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "standard",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "SummonerSmite",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "3089",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3102",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3135",
                   "count": 1,
                   "hideCount": false
                 }
@@ -2030,7 +1960,7 @@
               "recSteps": false,
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
+              "showIfSummonerSpell": "SummonerSmite",
               "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
@@ -2041,17 +1971,17 @@
               ],
               "items": [
                 {
-                  "id": "3031",
+                  "id": "3165",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3072",
+                  "id": "3089",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3087",
+                  "id": "3135",
                   "count": 1,
                   "hideCount": false
                 }
@@ -2074,17 +2004,17 @@
               ],
               "items": [
                 {
-                  "id": "3156",
+                  "id": "3157",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3135",
+                  "id": "3152",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3139",
+                  "id": "3907",
                   "count": 1,
                   "hideCount": false
                 }
@@ -2112,7 +2042,7 @@
                   "hideCount": true
                 },
                 {
-                  "id": "2140",
+                  "id": "2139",
                   "count": 1,
                   "hideCount": true
                 }
@@ -2121,222 +2051,13 @@
           ]
         },
         {
-          "champion": "Corki",
-          "title": "CorkiSR",
-          "map": "SR",
-          "mode": "CLASSIC",
-          "type": "riot",
-          "customTag": "",
-          "sortrank": 0,
-          "extensionPage": false,
-          "useObviousCheckmark": false,
-          "customPanel": null,
-          "blocks": [
-            {
-              "type": "starting",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "1055",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3340",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "early",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3057",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3044",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "1001",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essential",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3078",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3020",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3046",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3031",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3072",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3508",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3026",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3135",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3139",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2140",
-                  "count": 1,
-                  "hideCount": true
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "champion": "Corki",
-          "title": "CorkiTT",
+          "champion": "Sylas",
+          "title": "SylasTT",
           "map": "TT",
           "mode": "CLASSIC",
           "type": "riot",
           "customTag": "",
-          "sortrank": 0,
           "extensionPage": false,
-          "useObviousCheckmark": false,
           "customPanel": null,
           "blocks": [
             {
@@ -2347,54 +2068,19 @@
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
               "items": [
-                {
-                  "id": "1055",
-                  "count": 1,
-                  "hideCount": false
-                },
                 {
                   "id": "1001",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "2003",
-                  "count": 2,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "early",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "ItemTeleportCancel",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3057",
+                  "id": "1056",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3044",
+                  "id": "2031",
                   "count": 1,
                   "hideCount": false
                 }
@@ -2408,21 +2094,19 @@
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
               "items": [
                 {
-                  "id": "3078",
+                  "id": "3020",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3020",
+                  "id": "3090",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3001",
                   "count": 1,
                   "hideCount": false
                 }
@@ -2436,59 +2120,35 @@
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
               "items": [
-                {
-                  "id": "3508",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3072",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3031",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3156",
-                  "count": 1,
-                  "hideCount": false
-                },
                 {
                   "id": "3135",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3139",
+                  "id": "3165",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "defensive",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "items": [
+                {
+                  "id": "3152",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3116",
                   "count": 1,
                   "hideCount": false
                 }
@@ -2502,13 +2162,6 @@
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
               "items": [
                 {
                   "id": "2003",
@@ -2516,7 +2169,7 @@
                   "hideCount": true
                 },
                 {
-                  "id": "2140",
+                  "id": "2139",
                   "count": 1,
                   "hideCount": true
                 }

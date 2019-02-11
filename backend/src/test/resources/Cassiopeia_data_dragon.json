@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.1.1",
+  "version": "9.3.1",
   "data": {
     "Cassiopeia": {
       "id": "Cassiopeia",
@@ -137,10 +137,10 @@
             null,
             [
               75,
-              120,
-              165,
-              210,
-              255
+              110,
+              145,
+              180,
+              215
             ],
             [
               3,
@@ -208,7 +208,7 @@
           ],
           "effectBurn": [
             null,
-            "75/120/165/210/255",
+            "75/110/145/180/215",
             "3",
             "30/35/40/45/50",
             "3",
@@ -222,7 +222,7 @@
           "vars": [
             {
               "link": "spelldamage",
-              "coeff": 0.8,
+              "coeff": 0.9,
               "key": "a1"
             }
           ],
@@ -256,40 +256,42 @@
             "label": [
               "Damage",
               "Slow",
-              "Cooldown"
+              "Cooldown",
+              "@AbilityResourceName@ Cost"
             ],
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
               "{{ e2 }}% -> {{ e2NL }}%",
-              "{{ cooldown }} -> {{ cooldownNL }}"
+              "{{ cooldown }} -> {{ cooldownNL }}",
+              "{{ cost }} -> {{ costNL }}"
             ]
           },
           "maxrank": 5,
           "cooldown": [
             18,
+            17.5,
             17,
-            16,
-            15,
-            14
+            16.5,
+            16
           ],
-          "cooldownBurn": "18/17/16/15/14",
+          "cooldownBurn": "18/17.5/17/16.5/16",
           "cost": [
             70,
-            70,
-            70,
-            70,
-            70
+            80,
+            90,
+            100,
+            110
           ],
-          "costBurn": "70",
+          "costBurn": "70/80/90/100/110",
           "datavalues": {},
           "effect": [
             null,
             [
               20,
+              25,
+              30,
               35,
-              50,
-              65,
-              80
+              40
             ],
             [
               40,
@@ -357,7 +359,7 @@
           ],
           "effectBurn": [
             null,
-            "20/35/50/65/80",
+            "20/25/30/35/40",
             "40/50/60/70/80",
             "1",
             "5",
@@ -830,6 +832,7 @@
           "customTag": "",
           "sortrank": 0,
           "extensionPage": false,
+          "useObviousCheckmark": false,
           "customPanel": null,
           "blocks": [
             {
@@ -959,39 +962,6 @@
                 },
                 {
                   "id": "3165",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offmeta",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3008",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3285",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3100",
                   "count": 1,
                   "hideCount": false
                 }

@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.1.1",
+  "version": "9.3.1",
   "data": {
     "Sion": {
       "id": "Sion",
@@ -140,11 +140,11 @@
           "effect": [
             null,
             [
-              30,
-              50,
-              70,
-              90,
-              110
+              20,
+              40,
+              60,
+              80,
+              100
             ],
             [
               1.25,
@@ -161,11 +161,11 @@
               0.75
             ],
             [
-              90,
-              150,
-              210,
-              270,
-              330
+              60,
+              120,
+              180,
+              240,
+              300
             ],
             [
               2.5,
@@ -212,10 +212,10 @@
           ],
           "effectBurn": [
             null,
-            "30/50/70/90/110",
+            "20/40/60/80/100",
             "1.25",
             "0.45/0.525/0.6/0.675/0.75",
-            "90/150/210/270/330",
+            "60/120/180/240/300",
             "2.5",
             "1.35/1.575/1.8/2.025/2.25",
             "7.5",
@@ -267,25 +267,27 @@
               "Damage",
               "Maximum Health Damage",
               "Max Health Shield Ratio",
-              "@AbilityResourceName@ Cost"
+              "@AbilityResourceName@ Cost",
+              "Cooldown"
             ],
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
               "{{ e2 }} -> {{ e2NL }}",
               "{{ e4 }}% -> {{ e4NL }}%",
               "{{ e3 }}% -> {{ e3NL }}%",
-              "{{ cost }} -> {{ costNL }}"
+              "{{ cost }} -> {{ costNL }}",
+              "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
           "maxrank": 5,
           "cooldown": [
-            11,
-            11,
-            11,
-            11,
+            15,
+            14,
+            13,
+            12,
             11
           ],
-          "cooldownBurn": "11",
+          "cooldownBurn": "15/14/13/12/11",
           "cost": [
             65,
             70,

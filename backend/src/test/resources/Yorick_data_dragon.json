@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.1.1",
+  "version": "9.3.1",
   "data": {
     "Yorick": {
       "id": "Yorick",
@@ -12,7 +12,7 @@
         "full": "Yorick.png",
         "sprite": "champion4.png",
         "group": "champion",
-        "x": 240,
+        "x": 288,
         "y": 48,
         "w": 48,
         "h": 48
@@ -229,7 +229,7 @@
             "full": "YorickQ.png",
             "sprite": "spell14.png",
             "group": "spell",
-            "x": 48,
+            "x": 240,
             "y": 0,
             "w": 48,
             "h": 48
@@ -370,7 +370,7 @@
             "full": "YorickW.png",
             "sprite": "spell14.png",
             "group": "spell",
-            "x": 96,
+            "x": 288,
             "y": 0,
             "w": 48,
             "h": 48
@@ -436,11 +436,11 @@
               30
             ],
             [
-              1400,
-              1400,
-              1400,
-              1400,
-              1400
+              1500,
+              1500,
+              1500,
+              1500,
+              1500
             ],
             [
               20,
@@ -490,7 +490,7 @@
             "70/105/140/175/210",
             "4",
             "30",
-            "1400",
+            "1500",
             "20",
             "2",
             "15",
@@ -519,7 +519,7 @@
             "full": "YorickE.png",
             "sprite": "spell14.png",
             "group": "spell",
-            "x": 144,
+            "x": 336,
             "y": 0,
             "w": 48,
             "h": 48
@@ -530,7 +530,7 @@
           "id": "YorickR",
           "name": "Eulogy of the Isles",
           "description": "Yorick summons the Maiden of the Mist that causes Yorick's attacks against the Maiden's target to deal bonus damage. The Maiden will also automatically raise Walkers from dead enemies.",
-          "tooltip": "Yorick summons The Maiden of the Mist and {{ rghoulnumbers }} Mist Walkers. The Maiden has {{ rbigghoulbonushp }} <scaleHealth>(+{{ f1 }})</scaleHealth> Health, deals {{ rbigghoulbonusad }} <scaleAD>(+{{ f2 }})</scaleAD> magic damage, and raises Mist Walkers from nearby enemy deaths.<br /><br />When Yorick damages the Maiden's target he will deal {{ rmarkdamagepercent }}% of their max Health as bonus magic damage ({{ rproccd }} second cooldown).<br /><br /><span class=\"colorDDDD77\">If the Maiden is summoned inside a lane, she will start pushing the lane.</span>",
+          "tooltip": "Yorick summons The Maiden of the Mist and {{ rghoulnumbers }} Mist Walkers. The Maiden has {{ yorickbigghoulhealth }} Health, deals {{ yorickbigghouldamage }} magic damage, and raises Mist Walkers from nearby enemy deaths.<br /><br />When Yorick damages the Maiden's target he will deal {{ rmarkdamagepercent }}% of their max Health as bonus magic damage. ({{ rproccd }} sec cooldown)<br /><br />Yorick can free the Maiden reactivating the ability, sending her down the nearest lane.",
           "leveltip": {
             "label": [
               "Health",
@@ -540,10 +540,10 @@
               "Cooldown"
             ],
             "effect": [
-              "{{ e3 }} -> {{ e3NL }}",
-              "{{ e4 }} -> {{ e4NL }}",
-              "{{ e1 }} -> {{ e1NL }}",
-              "{{ e5 }}% -> {{ e5NL }}%",
+              "{{ rbigghoulbonushp }} -> {{ rbigghoulbonushpNL }}",
+              "{{ rbigghoulbonusad }} -> {{ rbigghoulbonusadNL }}",
+              "{{ rghoulnumbers }} -> {{ rghoulnumbersNL }}",
+              "{{ rmarkdamagepercent }}% -> {{ rmarkdamagepercentNL }}%",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
@@ -640,7 +640,7 @@
             "full": "YorickR.png",
             "sprite": "spell14.png",
             "group": "spell",
-            "x": 192,
+            "x": 384,
             "y": 0,
             "w": 48,
             "h": 48
@@ -655,7 +655,7 @@
           "full": "Yorick_P.png",
           "sprite": "passive4.png",
           "group": "passive",
-          "x": 240,
+          "x": 288,
           "y": 48,
           "w": 48,
           "h": 48
@@ -915,7 +915,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3005",
+                  "id": "3161",
                   "count": 1,
                   "hideCount": false
                 }
@@ -2039,7 +2039,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3005",
+                  "id": "3161",
                   "count": 1,
                   "hideCount": false
                 }
@@ -2208,7 +2208,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3005",
+                  "id": "3161",
                   "count": 1,
                   "hideCount": false
                 }
