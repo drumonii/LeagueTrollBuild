@@ -90,7 +90,7 @@ function getSummonerSpells(latestVersion) {
  */
 function writeFile(fileName, rawData) {
   const jsonFileName = `${fileName}.json`;
-  console.log(`writing ${fileName}.json...`);
+  console.log(`writing ${jsonFileName}...`);
   fs.writeFile(`./src/test/resources/${jsonFileName}`, rawData, (err) => {
     if (err) {
       console.error(err.message);
