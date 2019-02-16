@@ -25,8 +25,8 @@ describe('AdminGuard', () => {
     spyOn(authService, 'isAuthenticated').and.returnValue(of(false));
 
     guard.canActivate(null, null).subscribe(canActivate => {
-      expect(canActivate).toBe(router.createUrlTree(['/champions']));
-      expect(router.createUrlTree).toHaveBeenCalledWith(['/champions']);
+      expect(canActivate).toBe(router.createUrlTree(['/']));
+      expect(router.createUrlTree).toHaveBeenCalledWith(['/']);
     });
   }));
 

@@ -20,7 +20,7 @@ export class AdminGuard implements CanActivate {
   }
 
   private redirectToHome(): UrlTree {
-    return this.router.createUrlTree(['/champions']);
+    return this.router.createUrlTree(['/']);
   }
 
 }
