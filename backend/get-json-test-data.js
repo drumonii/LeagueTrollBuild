@@ -9,13 +9,10 @@ const http = require('http');
 function getChampions(latestVersion) {
   console.log('getting champion json test data...');
 
-  function endCallback(rawChampionsData) {
+  getResponse(`http://ddragon.leagueoflegends.com/cdn/${latestVersion}/data/en_US/champion.json`, (rawChampionsData) => {
     writeFile('champions_data_dragon', rawChampionsData);
-
     getChampion(latestVersion, rawChampionsData);
-  }
-
-  getResponse(`http://ddragon.leagueoflegends.com/cdn/${latestVersion}/data/en_US/champion.json`, endCallback);
+  });
 }
 
 /**
@@ -29,11 +26,8 @@ function getChampion(latestVersion, rawChampionData) {
   for (const champion of Object.keys(championResponse.data)) {
     console.log(`getting champion ${champion} json test data...`);
 
-    function endCallback(rawChampionData) {
-      writeFile(`${champion}_data_dragon`, rawChampionData)
-    }
-
-    getResponse(`http://ddragon.leagueoflegends.com/cdn/${latestVersion}/data/en_US/champion/${champion}.json`, endCallback);
+    getResponse(`http://ddragon.leagueoflegends.com/cdn/${latestVersion}/data/en_US/champion/${champion}.json`,
+      (rawChampionData) => writeFile(`${champion}_data_dragon`, rawChampionData));
   }
 }
 
@@ -45,11 +39,8 @@ function getChampion(latestVersion, rawChampionData) {
 function getItems(latestVersion) {
   console.log('getting items json test data...');
 
-  function endCallback(rawItemsData) {
-    writeFile('items_data_dragon', rawItemsData);
-  }
-
-  getResponse(`http://ddragon.leagueoflegends.com/cdn/${latestVersion}/data/en_US/item.json`, endCallback);
+  getResponse(`http://ddragon.leagueoflegends.com/cdn/${latestVersion}/data/en_US/item.json`,
+    (rawItemsData) => writeFile('items_data_dragon', rawItemsData));
 }
 
 /**
@@ -60,11 +51,8 @@ function getItems(latestVersion) {
 function getMaps(latestVersion) {
   console.log('getting maps json test data...');
 
-  function endCallback(rawMapsData) {
-    writeFile('maps_data_dragon', rawMapsData);
-  }
-
-  getResponse(`http://ddragon.leagueoflegends.com/cdn/${latestVersion}/data/en_US/map.json`, endCallback);
+  getResponse(`http://ddragon.leagueoflegends.com/cdn/${latestVersion}/data/en_US/map.json`,
+    (rawMapsData) => writeFile('maps_data_dragon', rawMapsData));
 }
 
 /**
@@ -75,11 +63,8 @@ function getMaps(latestVersion) {
 function getSummonerSpells(latestVersion) {
   console.log('getting summoner spells json test data...');
 
-  function endCallback(rawSummonerSpellsData) {
-    writeFile('summoners_data_dragon', rawSummonerSpellsData);
-  }
-
-  getResponse(`http://ddragon.leagueoflegends.com/cdn/${latestVersion}/data/en_US/summoner.json`, endCallback);
+  getResponse(`http://ddragon.leagueoflegends.com/cdn/${latestVersion}/data/en_US/summoner.json`,
+    (rawSummonerSpellsData) => writeFile('summoners_data_dragon', rawSummonerSpellsData));
 }
 
 /**
@@ -138,7 +123,7 @@ function getTestData() {
 
   console.log('getting versions json test data...');
 
-  function endCallback(rawVersionsData) {
+  getResponse('http://ddragon.leagueoflegends.com/api/versions.json', (rawVersionsData) => {
     const versions = JSON.parse(rawVersionsData);
 
     const latestVersion = versions[0];
@@ -151,9 +136,7 @@ function getTestData() {
     getItems(latestVersion);
     getMaps(latestVersion);
     getSummonerSpells(latestVersion);
-  }
-
-  getResponse('http://ddragon.leagueoflegends.com/api/versions.json', endCallback);
+  });
 }
 
 getTestData();
