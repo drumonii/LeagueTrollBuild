@@ -6,10 +6,10 @@ import { By } from '@angular/platform-browser';
 
 import { of } from 'rxjs';
 
-import { AdminAuthService } from '@security/admin-auth.service';
-import { AdminUserDetails } from '@security/admin-user-details';
+import { AdminAuthService } from '@admin-security/admin-auth.service';
+import { AdminUserDetails } from '@admin-security/admin-user-details';
 import { AdminHeaderComponent } from './admin-header.component';
-import { AdminLogoutResponse, AdminLogoutStatus } from '@security/admin-logout-response';
+import { AdminLogoutResponse, AdminLogoutStatus } from '@admin-security/admin-logout-response';
 
 describe('AdminHeaderComponent', () => {
   let component: AdminHeaderComponent;

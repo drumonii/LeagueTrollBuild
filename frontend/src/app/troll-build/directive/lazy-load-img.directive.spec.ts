@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
-import { LazyLoadImgModule } from '@directive/lazy-load-img.module';
+import { LazyLoadImgModule } from '@ltb-directive/lazy-load-img.module';
 
 @Component({
   template: `<img ltbLazyLoadImg src="defaultSrc.png" [dataSrc]="'dataSrc.png'">`

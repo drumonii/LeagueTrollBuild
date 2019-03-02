@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
-import { TrollBuild } from '@model/troll-build';
-import { Build } from '@model/build';
+import { TrollBuild } from '@ltb-model/troll-build';
+import { Build } from '@ltb-model/build';
 
 @Component({
   selector: 'ltb-troll-build',

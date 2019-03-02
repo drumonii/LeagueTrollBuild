@@ -5,12 +5,12 @@ import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 import { ActuatorResponse } from '@admin-model/actuator-response';
-import { Logger } from '@service/logger.service';
+import { AdminLogger } from '@admin-service/admin-logger.service';
 
 @Injectable()
 export class GlobalErrorService {
 
-  constructor(private logger: Logger, private httpClient: HttpClient) {}
+  constructor(private logger: AdminLogger, private httpClient: HttpClient) {}
 
   getGlobalErrors(): Observable<number> {
     return this.httpClient.get<ActuatorResponse>('/admin/actuator/metrics/tomcat.global.error')

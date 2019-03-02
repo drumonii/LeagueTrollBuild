@@ -4,8 +4,8 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { Logger } from '@service/logger.service';
-import { Champion } from '@model/champion';
+import { Logger } from '@ltb-service/logger.service';
+import { Champion } from '@ltb-model/champion';
 
 @Injectable()
 export class ChampionsService {

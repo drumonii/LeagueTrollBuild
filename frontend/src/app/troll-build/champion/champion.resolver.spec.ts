@@ -7,7 +7,7 @@ import { of } from 'rxjs';
 
 import { ChampionResolver } from './champion.resolver';
 import { ChampionService } from './champion.service';
-import { Champion } from '@model/champion';
+import { Champion } from '@ltb-model/champion';
 
 describe('ChampionResolver', () => {
   let resolver: ChampionResolver;

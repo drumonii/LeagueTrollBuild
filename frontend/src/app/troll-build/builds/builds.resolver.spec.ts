@@ -7,7 +7,7 @@ import { of } from 'rxjs';
 
 import { BuildsResolver } from './builds.resolver';
 import { BuildsService } from './builds.service';
-import { Build } from '@model/build';
+import { Build } from '@ltb-model/build';
 
 describe('BuildsResolver', () => {
   let resolver: BuildsResolver;

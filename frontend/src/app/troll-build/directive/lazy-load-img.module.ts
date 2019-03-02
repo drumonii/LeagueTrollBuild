@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { LazyLoadImgDirective } from '@directive/lazy-load-img.directive';
+import { LazyLoadImgDirective } from '@ltb-directive/lazy-load-img.directive';
 
 @NgModule({
   imports: [

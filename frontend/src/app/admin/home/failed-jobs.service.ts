@@ -6,12 +6,12 @@ import { catchError, map } from 'rxjs/operators';
 
 import { BatchJobInstance } from '@admin-model/batch-job-instance';
 import { Paginated } from '@admin-model/paginated';
-import { Logger } from '@service/logger.service';
+import { AdminLogger } from '@admin-service/admin-logger.service';
 
 @Injectable()
 export class FailedJobsService {
 
-  constructor(private logger: Logger, private httpClient: HttpClient) {}
+  constructor(private logger: AdminLogger, private httpClient: HttpClient) {}
 
   getFailedJobs(): Observable<number> {
     const params = new HttpParams()

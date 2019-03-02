@@ -1,7 +1,7 @@
-import { Champion } from '@model/champion';
-import { GameMap } from '@model/game-map';
-import { Item } from '@model/item';
-import { SummonerSpell } from '@model/summoner-spell';
+import { Champion } from '@ltb-model/champion';
+import { GameMap } from '@ltb-model/game-map';
+import { Item } from '@ltb-model/item';
+import { SummonerSpell } from '@ltb-model/summoner-spell';
 
 /**
  * Saved Troll Build.

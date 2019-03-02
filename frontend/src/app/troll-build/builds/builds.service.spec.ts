@@ -3,7 +3,7 @@ import { HttpClientTestingModule, HttpTestingController, RequestMatch } from '@a
 
 import { BuildsService } from './builds.service';
 
-import { Build } from '@model/build';
+import { Build } from '@ltb-model/build';
 
 describe('BuildsService', () => {
   beforeEach(() => {

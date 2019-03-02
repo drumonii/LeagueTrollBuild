@@ -4,7 +4,7 @@ import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http'
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
-import { Logger } from '@service/logger.service';
+import { AdminLogger } from '@admin-service/admin-logger.service';
 import { Paginated } from '@admin-model/paginated';
 import { BatchJobInstance } from '@admin-model/batch-job-instance';
 import { BatchStepExecution } from '@admin-model/batch-step-execution';
@@ -14,7 +14,7 @@ import { PageRequest } from '@admin-model/page-request';
 @Injectable()
 export class AdminBatchService {
 
-  constructor(private logger: Logger, private httpClient: HttpClient) {}
+  constructor(private logger: AdminLogger, private httpClient: HttpClient) {}
 
   getBatchJobInstances(pageRequest: PageRequest): Observable<Paginated<BatchJobInstance>> {
     let params = new HttpParams();

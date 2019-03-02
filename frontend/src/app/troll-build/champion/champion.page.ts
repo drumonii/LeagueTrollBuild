@@ -4,12 +4,12 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 
-import { TitleService } from '@service/title.service';
+import { TitleService } from '@ltb-service/title.service';
 import { ChampionService } from './champion.service';
-import { Build, BuildBuilder } from '@model/build';
-import { Champion } from '@model/champion';
-import { GameMap, SummonersRiftId } from '@model/game-map';
-import { TrollBuild } from '@model/troll-build';
+import { Build, BuildBuilder } from '@ltb-model/build';
+import { Champion } from '@ltb-model/champion';
+import { GameMap, SummonersRiftId } from '@ltb-model/game-map';
+import { TrollBuild } from '@ltb-model/troll-build';
 
 @Component({
   selector: 'ltb-champion',

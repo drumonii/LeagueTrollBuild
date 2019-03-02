@@ -5,7 +5,7 @@ import { finalize } from 'rxjs/operators';
 
 import { FlywayMigration } from './flyway-response';
 import { FlywayService } from './flyway.service';
-import { TitleService } from '@service/title.service';
+import { AdminTitleService } from '@admin-service/admin-title.service';
 
 @Component({
   selector: 'ltb-flyway',
@@ -18,7 +18,7 @@ export class FlywayPage implements OnInit {
 
   rows$: Observable<FlywayMigration[]>;
 
-  constructor(private service: FlywayService, private titleService: TitleService) {}
+  constructor(private service: FlywayService, private titleService: AdminTitleService) {}
 
   ngOnInit() {
     this.setTitle();

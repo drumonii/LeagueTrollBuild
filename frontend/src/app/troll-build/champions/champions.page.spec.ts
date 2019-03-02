@@ -7,12 +7,12 @@ import { By } from '@angular/platform-browser';
 
 import { of } from 'rxjs';
 
-import { LazyLoadImgDirective } from '@directive/lazy-load-img.directive';
+import { LazyLoadImgDirective } from '@ltb-directive/lazy-load-img.directive';
 
 import { ChampionsPage } from './champions.page';
 import { ChampionsModule } from './champions.module';
-import { Champion } from '@model/champion';
-import { TitleService } from '@service/title.service';
+import { Champion } from '@ltb-model/champion';
+import { TitleService } from '@ltb-service/title.service';
 import { ChampionsService } from './champions.service';
 
 describe('ChampionsPage', () => {

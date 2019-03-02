@@ -5,9 +5,9 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
-import { TitleService } from '@service/title.service';
-import { AdminAuthService } from '@security/admin-auth.service';
-import { AdminLoginStatus } from '@security/admin-login-response';
+import { AdminTitleService } from '@admin-service/admin-title.service';
+import { AdminAuthService } from '@admin-security/admin-auth.service';
+import { AdminLoginStatus } from '@admin-security/admin-login-response';
 
 import { AdminLoginState } from './admin-login-state';
 
@@ -25,7 +25,7 @@ export class AdminLoginPage implements OnInit {
 
   adminLoginState = AdminLoginState.UNKNOWN;
 
-  constructor(private authService: AdminAuthService, private fb: FormBuilder, private titleService: TitleService,
+  constructor(private authService: AdminAuthService, private fb: FormBuilder, private titleService: AdminTitleService,
               private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {

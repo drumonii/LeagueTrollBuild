@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 
 import { of } from 'rxjs';
 
-import { AdminAuthService } from '@security/admin-auth.service';
+import { AdminAuthService } from '@admin-security/admin-auth.service';
 import { AdminGuard } from './admin.guard';
 
 describe('AdminGuard', () => {

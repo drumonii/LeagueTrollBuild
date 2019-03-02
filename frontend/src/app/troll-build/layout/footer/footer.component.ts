@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
-import { Version } from '@model/version';
+import { Version } from '@ltb-model/version';
 import { VersionsService } from './versions.service';
 
 @Component({

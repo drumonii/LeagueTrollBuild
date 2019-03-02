@@ -1,4 +1,4 @@
-import { Build } from '@model/build';
+import { Build } from '@ltb-model/build';
 
 export interface BuildsResolverData {
 

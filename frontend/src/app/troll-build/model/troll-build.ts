@@ -1,5 +1,5 @@
-import { Item } from '@model/item';
-import { SummonerSpell } from '@model/summoner-spell';
+import { Item } from '@ltb-model/item';
+import { SummonerSpell } from '@ltb-model/summoner-spell';
 
 /**
  * Troll Build (random build).

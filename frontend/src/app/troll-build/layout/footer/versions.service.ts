@@ -4,8 +4,8 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { Logger } from '@service/logger.service';
-import { Version } from '@model/version';
+import { Logger } from '@ltb-service/logger.service';
+import { Version } from '@ltb-model/version';
 
 @Injectable({
   providedIn: 'root'

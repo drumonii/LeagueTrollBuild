@@ -8,11 +8,11 @@ import { of } from 'rxjs';
 
 import { BuildsPage } from './builds.page';
 import { BuildsModule } from './builds.module';
-import { TitleService } from '@service/title.service';
+import { TitleService } from '@ltb-service/title.service';
 import { BuildsService } from './builds.service';
-import { Build } from '@model/build';
-import { Item } from '@model/item';
-import { SummonerSpell } from '@model/summoner-spell';
+import { Build } from '@ltb-model/build';
+import { Item } from '@ltb-model/item';
+import { SummonerSpell } from '@ltb-model/summoner-spell';
 
 describe('BuildsPage', () => {
   let component: BuildsPage;

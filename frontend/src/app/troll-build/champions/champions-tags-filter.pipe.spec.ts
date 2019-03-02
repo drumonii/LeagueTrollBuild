@@ -1,6 +1,6 @@
 import { ChampionsTagsFilterPipe } from './champions-tags-filter.pipe';
 
-import { Champion } from '@model/champion';
+import { Champion } from '@ltb-model/champion';
 
 describe('ChampionsTagsFilterPipe', () => {
   const pipe = new ChampionsTagsFilterPipe();

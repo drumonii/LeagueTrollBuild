@@ -6,11 +6,11 @@ import { By } from '@angular/platform-browser';
 
 import { of } from 'rxjs';
 
-import { AdminAuthService } from '@security/admin-auth.service';
-import { TitleService } from '@service/title.service';
+import { AdminAuthService } from '@admin-security/admin-auth.service';
+import { AdminTitleService } from '@admin-service/admin-title.service';
 import { AdminLoginModule } from './admin-login.module';
 import { AdminLoginPage } from './admin-login.page';
-import { AdminLoginResponse, AdminLoginStatus } from '@security/admin-login-response';
+import { AdminLoginResponse, AdminLoginStatus } from '@admin-security/admin-login-response';
 
 describe('AdminLoginPage', () => {
   let component: AdminLoginPage;
@@ -25,7 +25,7 @@ describe('AdminLoginPage', () => {
       .compileComponents();
     }));
 
-    beforeEach(inject([TitleService], (title: TitleService) => {
+    beforeEach(inject([AdminTitleService], (title: AdminTitleService) => {
       fixture = TestBed.createComponent(AdminLoginPage);
       component = fixture.componentInstance;
 
@@ -34,7 +34,7 @@ describe('AdminLoginPage', () => {
       fixture.detectChanges();
     }));
 
-    afterEach(inject([TitleService], (title: TitleService) => {
+    afterEach(inject([AdminTitleService], (title: AdminTitleService) => {
       expect(title.setTitle).toHaveBeenCalledWith('Admin Login');
     }));
 

@@ -3,8 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AdminAppComponent } from './admin-app.component';
 
-import { AdminGuard } from '@guard/admin.guard';
-import { AdminAlreadyLoggedInGuard } from '@guard/admin-already-logged-in.guard';
+import { AdminGuard } from '@admin-guard/admin.guard';
+import { AdminAlreadyLoggedInGuard } from '@admin-guard/admin-already-logged-in.guard';
 
 const routes: Routes = [
   {

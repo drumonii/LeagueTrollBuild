@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 
 import { Observable } from 'rxjs';
 
-import { AdminAuthService } from '@security/admin-auth.service';
-import { AdminUserDetails } from '@security/admin-user-details';
+import { AdminAuthService } from '@admin-security/admin-auth.service';
+import { AdminUserDetails } from '@admin-security/admin-user-details';
 
 @Component({
   selector: 'ltb-admin-header',

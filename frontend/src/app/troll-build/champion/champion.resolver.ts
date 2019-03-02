@@ -4,7 +4,7 @@ import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from '@a
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { Champion } from '@model/champion';
+import { Champion } from '@ltb-model/champion';
 import { ChampionService } from './champion.service';
 
 @Injectable()

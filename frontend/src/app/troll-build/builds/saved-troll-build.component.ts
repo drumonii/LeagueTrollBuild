@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Build } from '@model/build';
+import { Build } from '@ltb-model/build';
 
 @Component({
   selector: 'ltb-saved-troll-build',

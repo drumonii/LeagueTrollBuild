@@ -5,12 +5,12 @@ import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 import { FlywayMigration, FlywayResponse } from './flyway-response';
-import { Logger } from '@service/logger.service';
+import { AdminLogger } from '@admin-service/admin-logger.service';
 
 @Injectable()
 export class FlywayService {
 
-  constructor(private logger: Logger, private httpClient: HttpClient) {}
+  constructor(private logger: AdminLogger, private httpClient: HttpClient) {}
 
   getFlyway(): Observable<FlywayMigration[]> {
     return this.httpClient.get<FlywayResponse>('/admin/actuator/flyway')

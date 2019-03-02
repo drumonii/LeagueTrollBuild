@@ -3,7 +3,7 @@ import { HttpClientTestingModule, HttpTestingController, RequestMatch } from '@a
 
 import { ChampionsService } from './champions.service';
 
-import { Champion } from '@model/champion';
+import { Champion } from '@ltb-model/champion';
 
 describe('ChampionsService', () => {
   beforeEach(() => {

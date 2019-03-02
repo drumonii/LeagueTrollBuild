@@ -4,11 +4,11 @@ import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams, HttpResponse } 
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { Logger } from '@service/logger.service';
-import { Champion } from '@model/champion';
-import { TrollBuild } from '@model/troll-build';
-import { GameMap } from '@model/game-map';
-import { Build } from '@model/build';
+import { Logger } from '@ltb-service/logger.service';
+import { Champion } from '@ltb-model/champion';
+import { TrollBuild } from '@ltb-model/troll-build';
+import { GameMap } from '@ltb-model/game-map';
+import { Build } from '@ltb-model/build';
 
 @Injectable()
 export class ChampionService {

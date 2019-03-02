@@ -3,10 +3,10 @@ import { HttpClientTestingModule, HttpTestingController, RequestMatch } from '@a
 
 import { ChampionService } from './champion.service';
 
-import { Champion } from '@model/champion';
-import { GameMap, SummonersRiftId } from '@model/game-map';
-import { TrollBuild } from '@model/troll-build';
-import { Build } from '@model/build';
+import { Champion } from '@ltb-model/champion';
+import { GameMap, SummonersRiftId } from '@ltb-model/game-map';
+import { TrollBuild } from '@ltb-model/troll-build';
+import { Build } from '@ltb-model/build';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
 
 describe('ChampionService', () => {

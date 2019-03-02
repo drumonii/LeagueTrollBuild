@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 
 import { AdminBatchService } from './admin-batch.service';
-import { TitleService } from '@service/title.service';
+import { AdminTitleService } from '@admin-service/admin-title.service';
 import { BatchJobInstance } from '@admin-model/batch-job-instance';
 import { BatchStepExecution } from '@admin-model/batch-step-execution';
 import { PageRequest } from '@admin-model/page-request';
@@ -43,7 +43,7 @@ export class AdminBatchPage implements OnInit {
   minutesAgo = 5;
   restartingAllRetrievalsJob: boolean;
 
-  constructor(private batchService: AdminBatchService, private titleService: TitleService) {}
+  constructor(private batchService: AdminBatchService, private titleService: AdminTitleService) {}
 
   ngOnInit() {
     this.setTitle();

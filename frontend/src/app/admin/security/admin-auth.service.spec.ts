@@ -1,10 +1,10 @@
 import { inject, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController, RequestMatch } from '@angular/common/http/testing';
 
-import { AdminUserDetails } from '@security/admin-user-details';
-import { AdminLoginResponse, AdminLoginStatus } from '@security/admin-login-response';
+import { AdminUserDetails } from '@admin-security/admin-user-details';
+import { AdminLoginResponse, AdminLoginStatus } from '@admin-security/admin-login-response';
 import { AdminAuthService } from './admin-auth.service';
-import { AdminLogoutResponse, AdminLogoutStatus } from '@security/admin-logout-response';
+import { AdminLogoutResponse, AdminLogoutStatus } from '@admin-security/admin-logout-response';
 
 describe('AdminAuthService', () => {
 

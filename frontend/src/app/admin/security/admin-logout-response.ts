@@ -1,4 +1,4 @@
-import { AdminUserDetails } from '@security/admin-user-details';
+import { AdminUserDetails } from '@admin-security/admin-user-details';
 
 export interface AdminLogoutResponse {
   status: AdminLogoutStatus;

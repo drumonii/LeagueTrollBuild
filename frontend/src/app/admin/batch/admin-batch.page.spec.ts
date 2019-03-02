@@ -8,7 +8,7 @@ import { of } from 'rxjs';
 import { AdminBatchModule } from './admin-batch.module';
 import { AdminBatchPage } from './admin-batch.page';
 import { AdminBatchService } from './admin-batch.service';
-import { TitleService } from '@service/title.service';
+import { AdminTitleService } from '@admin-service/admin-title.service';
 import { BatchJobInstance } from '@admin-model/batch-job-instance';
 import { Paginated } from '@admin-model/paginated';
 import { BatchStepExecution } from '@admin-model/batch-step-execution';
@@ -25,14 +25,14 @@ describe('AdminBatchPage', () => {
     .compileComponents();
   }));
 
-  beforeEach(inject([TitleService], (title: TitleService) => {
+  beforeEach(inject([AdminTitleService], (title: AdminTitleService) => {
     fixture = TestBed.createComponent(AdminBatchPage);
     component = fixture.componentInstance;
 
     spyOn(title, 'setTitle').and.callThrough();
   }));
 
-  afterEach(inject([TitleService], (title: TitleService) => {
+  afterEach(inject([AdminTitleService], (title: AdminTitleService) => {
     expect(title.setTitle).toHaveBeenCalledWith('Batch Jobs');
   }));
 

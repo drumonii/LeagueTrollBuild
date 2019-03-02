@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
-import { TitleService } from '@service/title.service';
+import { TitleService } from '@ltb-service/title.service';
 import { ChampionsService } from './champions.service';
-import { Champion } from '@model/champion';
+import { Champion } from '@ltb-model/champion';
 
 @Component({
   selector: 'ltb-champions',

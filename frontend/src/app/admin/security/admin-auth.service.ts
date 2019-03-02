@@ -4,10 +4,10 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { catchError, finalize, map } from 'rxjs/operators';
 
-import { Logger } from '@service/logger.service';
-import { AdminUserDetails } from '@security/admin-user-details';
-import { AdminLoginResponse, AdminLoginStatus } from '@security/admin-login-response';
-import { AdminLogoutResponse } from '@security/admin-logout-response';
+import { AdminLogger } from '@admin-service/admin-logger.service';
+import { AdminUserDetails } from '@admin-security/admin-user-details';
+import { AdminLoginResponse, AdminLoginStatus } from '@admin-security/admin-login-response';
+import { AdminLogoutResponse } from '@admin-security/admin-logout-response';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +18,7 @@ export class AdminAuthService {
 
   private adminUserDetails$ = new BehaviorSubject<AdminUserDetails>(null);
 
-  constructor(private logger: Logger, private httpClient: HttpClient) {}
+  constructor(private logger: AdminLogger, private httpClient: HttpClient) {}
 
   get adminUserDetails(): Observable<AdminUserDetails> {
     this.adminUserDetails$.next(JSON.parse(localStorage.getItem(AdminAuthService.adminUserDetailsKey)));
@@ -78,7 +78,7 @@ export class AdminAuthService {
           return true;
         }),
         catchError((error: HttpErrorResponse) => {
-          this.logger.debug(`Caught error while GETing /admin/authentication ${JSON.stringify(error)}`);
+          this.logger.warn(`Caught error while GETing /admin/authentication ${JSON.stringify(error)}`);
           this.removeAdminUserDetails();
           return of(false);
         })
@@ -89,7 +89,7 @@ export class AdminAuthService {
     return this.httpClient.get<any>('/admin/refresh')
       .pipe(
         catchError((error: HttpErrorResponse) => {
-          this.logger.debug(`Caught error while GETing admin/refresh ${JSON.stringify(error)}`);
+          this.logger.warn(`Caught error while GETing admin/refresh ${JSON.stringify(error)}`);
           return of(null);
         })
       );

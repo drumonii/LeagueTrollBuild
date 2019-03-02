@@ -5,7 +5,7 @@ import { By } from '@angular/platform-browser';
 import { of } from 'rxjs';
 
 import { FooterComponent } from './footer.component';
-import { Version } from '@model/version';
+import { Version } from '@ltb-model/version';
 import { VersionsService } from './versions.service';
 
 describe('FooterComponent', () => {

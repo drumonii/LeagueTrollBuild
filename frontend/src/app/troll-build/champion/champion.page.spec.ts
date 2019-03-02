@@ -10,12 +10,12 @@ import { of } from 'rxjs';
 
 import { ChampionPage } from './champion.page';
 import { ChampionModule } from './champion.module';
-import { TitleService } from '@service/title.service';
+import { TitleService } from '@ltb-service/title.service';
 import { ChampionService } from './champion.service';
-import { Champion } from '@model/champion';
-import { GameMap, SummonersRiftId } from '@model/game-map';
-import { TrollBuild } from '@model/troll-build';
-import { Build, BuildBuilder } from '@model/build';
+import { Champion } from '@ltb-model/champion';
+import { GameMap, SummonersRiftId } from '@ltb-model/game-map';
+import { TrollBuild } from '@ltb-model/troll-build';
+import { Build, BuildBuilder } from '@ltb-model/build';
 
 describe('ChampionPage', () => {
   let component: ChampionPage;

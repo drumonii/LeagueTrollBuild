@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { Champion } from '@model/champion';
+import { Champion } from '@ltb-model/champion';
 
 @Pipe({
   name: 'championsTagsFilter'

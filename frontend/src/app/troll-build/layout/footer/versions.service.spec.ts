@@ -3,7 +3,7 @@ import { HttpClientTestingModule, HttpTestingController, RequestMatch } from '@a
 
 import { VersionsService } from './versions.service';
 
-import { Version } from '@model/version';
+import { Version } from '@ltb-model/version';
 
 describe('VersionsService', () => {
   beforeEach(() => {

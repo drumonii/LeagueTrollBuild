@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { BuildsResolverData } from './builds.resolver.data';
-import { TitleService } from '@service/title.service';
+import { TitleService } from '@ltb-service/title.service';
 import { BuildsService } from './builds.service';
-import { Build, BuildType } from '@model/build';
+import { Build, BuildType } from '@ltb-model/build';
 
 @Component({
   selector: 'ltb-builds',

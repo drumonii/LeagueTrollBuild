@@ -4,8 +4,8 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { Logger } from '@service/logger.service';
-import { Build } from '@model/build';
+import { Logger } from '@ltb-service/logger.service';
+import { Build } from '@ltb-model/build';
 
 @Injectable()
 export class BuildsService {
