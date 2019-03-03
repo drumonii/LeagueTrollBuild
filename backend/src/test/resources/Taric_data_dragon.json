@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.3.1",
+  "version": "9.4.1",
   "data": {
     "Taric": {
       "id": "Taric",
@@ -539,7 +539,7 @@
           "id": "TaricR",
           "name": "Cosmic Radiance",
           "description": "Pulses cosmic energy onto nearby allied champions after a delay, making them invulnerable for a short duration.",
-          "tooltip": "After a {{ e4 }} second delay, pulses cosmic energy onto nearby allied champions, making them invulnerable for {{ e5 }} seconds.",
+          "tooltip": "After a {{ initialdelay }} second delay, pulses cosmic energy onto nearby allied champions, making them invulnerable for {{ invulnduration }} seconds.",
           "leveltip": {
             "label": [
               "Cooldown"
@@ -565,29 +565,29 @@
           "effect": [
             null,
             [
-              150,
-              275,
-              400
+              0,
+              0,
+              0
             ],
             [
-              25,
-              35,
-              45
+              0,
+              0,
+              0
             ],
             [
-              2.5,
-              2.5,
-              2.5
+              0,
+              0,
+              0
             ],
             [
-              2.5,
-              2.5,
-              2.5
+              0,
+              0,
+              0
             ],
             [
-              2.5,
-              2.5,
-              2.5
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -617,11 +617,11 @@
           ],
           "effectBurn": [
             null,
-            "150/275/400",
-            "25/35/45",
-            "2.5",
-            "2.5",
-            "2.5",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
             "0",
             "0",
             "0",

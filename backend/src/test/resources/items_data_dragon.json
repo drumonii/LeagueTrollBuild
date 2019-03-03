@@ -1,6 +1,6 @@
 {
   "type": "item",
-  "version": "9.3.1",
+  "version": "9.4.1",
   "basic": {
     "name": "",
     "rune": {
@@ -2009,7 +2009,7 @@
     },
     "2015": {
       "name": "Kircheis Shard",
-      "description": "<stats>+15% Attack Speed</stats><br><br><passive>Passive:</passive> Moving and attacking will make an attack <a href='Energized'>Energized</a>.<br><br><unique>UNIQUE Passive - Energized Strike:</unique> Your Energized attacks deal 50 bonus magic damage on hit.",
+      "description": "<stats>+15% Attack Speed</stats><br><br><unique>UNIQUE Passive - Energized:</unique> Moving and attacking will make an attack <a href='Energized'>Energized</a>. Your Energized attacks deal <magicDamage>50 bonus magic damage</magicDamage> (based on level) on hit.",
       "colloq": ";",
       "plaintext": "Attack speed and a chargable magic hit",
       "from": [
@@ -5124,7 +5124,7 @@
     },
     "3069": {
       "name": "Remnant of the Ascended",
-      "description": "<stats>+200 Health<br>+10 Movement Speed<br>+125% Base Health Regen <br>+10% Cooldown Reduction<br>+2 Gold per 10 seconds</stats><br><br><unique>UNIQUE Passive - Favor: </unique>Enemy minions killed by your allies sometimes drop coins that give either <font color='#D4AF37'>45</font> gold or <font color='#44DDFF'>6%</font> missing mana (minimum 10). Cannon minions always drop coins.<hr><passive>QUEST:</passive> Earn 500 gold using this item.<br><passive>REWARD:</passive> Gain <active>UNIQUE Active - Warding:</active> Consumes a charge to place a <font color='#BBFFFF'>Stealth Ward</font> that reveals the surrounding area for 150 seconds.  Holds up to 4 charges which refill upon visiting the shop.<br><br><groupLimit>Limited to 1 Gold Income or Jungle item.</groupLimit><br><br><rules><font color='#447777'>''Praise the sun.'' - Historian Shurelya, 22 September, 25 CLE</font></rules>",
+      "description": "<stats>+200 Health<br>+10 Movement Speed<br>+125% Base Health Regen <br>+10% Cooldown Reduction<br>+2 Gold per 10 seconds</stats><br><br><unique>UNIQUE Passive - Favor:</unique> Enemy minions killed by your allies sometimes drop coins that grant <scaleMana>6%</scaleMana> missing mana (minimum 10). If there is an allied Champion nearby, sometimes the coins grant <gold>50</gold> gold instead. Cannon minions always drop coins.<hr><passive>QUEST:</passive> Earn 500 gold using this item.<br><passive>REWARD:</passive> Gain <active>UNIQUE Active - Warding:</active> Consumes a charge to place a <font color='#BBFFFF'>Stealth Ward</font> that reveals the surrounding area for 150 seconds.  Holds up to 4 charges which refill upon visiting the shop.<br><br><groupLimit>Limited to 1 Gold Income or Jungle item.</groupLimit><br><br><rules><font color='#447777'>''Praise the sun.'' - Historian Shurelya, 22 September, 25 CLE</font></rules>",
       "colloq": ";shurelya;reverie; Eye of Ascension;",
       "plaintext": "Provides Gold, Mana, and Stealth Wards over time",
       "from": [
@@ -5174,7 +5174,7 @@
         "Effect8Amount": "10",
         "Effect9Amount": "2",
         "Effect10Amount": "500",
-        "Effect11Amount": "45",
+        "Effect11Amount": "50",
         "Effect12Amount": "0.06",
         "Effect13Amount": "10",
         "Effect14Amount": "10"
@@ -5933,7 +5933,7 @@
     },
     "3087": {
       "name": "Statikk Shiv",
-      "description": "<stats>+40% Attack Speed<br>+25% Critical Strike Chance<br>+5% Movement Speed</stats><br><br><passive>Passive:</passive> Moving and attacking will make an attack <a href='Energized'>Energized</a>.<br><br><unique>UNIQUE Passive - Shiv Lightning:</unique> Your Energized attacks deal 60~140 bonus magic damage (based on level) to up to 5 targets on hit. This effect can critically strike.",
+      "description": "<stats>+40% Attack Speed<br>+25% Critical Strike Chance<br>+5% Movement Speed</stats><br><br><unique>UNIQUE Passive - Energized:</unique> Moving and attacking will make an attack <a href='Energized'>Energized</a>. Your Energized attacks deal <magicDamage>60~140 bonus magic damage</magicDamage> (based on level) on hit.<br><unique>UNIQUE Passive:</unique> Energized damage bounces to 5 targets and can critically strike.",
       "colloq": ";",
       "plaintext": "Movement builds charges that release chain lightning on basic attack",
       "from": [
@@ -6123,7 +6123,7 @@
     },
     "3092": {
       "name": "Remnant of the Watchers",
-      "description": "<stats>+200 Health<br>+35 Ability Power<br>+10% Cooldown Reduction<br>+2 Gold per 10 seconds<br><mana>+50% Base Mana Regen </mana></stats><br><br><unique>UNIQUE Passive - Tribute:</unique> Damaging spells and attacks against champions or buildings deal 18 additional magic damage and grant 20 Gold per unique spell cast. This can occur up to 3 times every 30 seconds. Before quest completion, killing minions and non-epic monsters slows Tribute and gold generation.<hr><passive>QUEST:</passive> Earn 500 gold using this item.<br><passive>REWARD:</passive> Gain <active>UNIQUE Active - Warding:</active> Consumes a charge to place a <font color='#BBFFFF'>Stealth Ward</font> that reveals the surrounding area for 150 seconds.  Holds up to 4 charges which refill upon visiting the shop.<br><br><groupLimit>Limited to 1 Gold Income or Jungle item.</groupLimit>",
+      "description": "<stats>+200 Health<br>+35 Ability Power<br>+10% Cooldown Reduction<br>+2 Gold per 10 seconds<br><mana>+50% Base Mana Regen </mana></stats><br><br><unique>UNIQUE Passive - Tribute:</unique> Damaging spells and attacks against champions or buildings deal 18 additional magic damage per unique spell cast. If there is a nearby ally Champion, it also grants <gold>22</gold> Gold. This can occur up to 3 times every 30 seconds. Before quest completion, killing minions and non-epic monsters slows Tribute and gold generation.<hr><passive>QUEST:</passive> Earn 500 gold using this item.<br><passive>REWARD:</passive> Gain <active>UNIQUE Active - Warding:</active> Consumes a charge to place a <font color='#BBFFFF'>Stealth Ward</font> that reveals the surrounding area for 150 seconds.  Holds up to 4 charges which refill upon visiting the shop.<br><br><groupLimit>Limited to 1 Gold Income or Jungle item.</groupLimit>",
       "colloq": "Eye of the Watchers;",
       "plaintext": "Provides Ability Power and Stealth Wards over time",
       "from": [
@@ -6164,7 +6164,7 @@
       },
       "effect": {
         "Effect1Amount": "18",
-        "Effect2Amount": "20",
+        "Effect2Amount": "22",
         "Effect3Amount": "0",
         "Effect4Amount": "3",
         "Effect5Amount": "30",
@@ -6188,7 +6188,7 @@
     },
     "3094": {
       "name": "Rapid Firecannon",
-      "description": "<stats>+30% Attack Speed<br>+25% Critical Strike Chance<br>+5% Movement Speed</stats><br><br><passive>Passive:</passive> Moving and attacking will make an attack <a href='Energized'>Energized</a>.<br><br><unique>UNIQUE Passive - Firecannon:</unique> Your Energized attacks gain 35% bonus Range (+150 range maximum) and deal 60~140 bonus magic damage (based on level) on hit.<br><br>Attacks become Energized 25% faster. Energized attacks function on structures.",
+      "description": "<stats>+30% Attack Speed<br>+25% Critical Strike Chance<br>+5% Movement Speed</stats><br><br><unique>UNIQUE Passive - Energized:</unique> Moving and attacking will make an attack <a href='Energized'>Energized</a>. Your Energized attacks deal <magicDamage>60~140 bonus magic damage</magicDamage> (based on level) on hit.<br><unique>UNIQUE Passive:</unique> Energized attacks gain 35% bonus Range (+150 range maximum).<br><br>Attacks become Energized 25% faster. Energized attacks function on structures.",
       "colloq": ";canon;rapidfire;rfc",
       "plaintext": "Movement builds charges that release a sieging fire attack on release",
       "from": [
@@ -6238,7 +6238,7 @@
     },
     "3095": {
       "name": "Stormrazor",
-      "description": "<stats>+55 Attack Damage<br>+25% Attack Speed</stats><br><br><passive>Passive:</passive> Moving and attacking will make an attack <a href='Energized'>Energized</a>.<br><br><unique>UNIQUE Passive - Storm:</unique> Your Energized attacks deal <magicDamage>50 bonus magic damage</magicDamage> on hit.<br><br>Your Energized effects have all of their respective effects increased by +30% and also slow for 40% movement speed decaying over 1 seconds.",
+      "description": "<stats>+55 Attack Damage<br>+25% Attack Speed</stats><br><br><unique>UNIQUE Passive - Energized:</unique> Moving and attacking will make an attack <a href='Energized'>Energized</a>. Your Energized attacks deal <magicDamage>50 bonus magic damage</magicDamage> on hit.<br><unique>UNIQUE Passive:</unique> Energized effects have all of their respective effects increased by +30% and also slow for 40% movement speed decaying over 1 seconds.",
       "colloq": ";Windblade",
       "plaintext": "Tremendously empower other Energized effects.",
       "from": [
@@ -6287,7 +6287,7 @@
     },
     "3096": {
       "name": "Nomad's Medallion",
-      "description": "<stats>+10 Movement Speed<br>+50% Base Health Regen <br>+10% Cooldown Reduction<br>+2 Gold per 10 seconds</stats><br><br><unique>UNIQUE Passive - Favor:</unique> Enemy minions killed by your allies sometimes drop coins that give either <font color='#D4AF37'>45</font> gold or <font color='#44DDFF'>6%</font> missing mana (minimum 10). Cannon minions always drop coins.<hr><passive>QUEST:</passive> Earn 500 gold using this item.<br><passive>REWARD:</passive> Gain <active>UNIQUE Active - Warding:</active> Consumes a charge to place a <font color='#BBFFFF'>Stealth Ward</font> that reveals the surrounding area for 150 seconds.  Holds up to 3 charges which refill upon visiting the shop.<br><br><groupLimit>Limited to 1 Gold Income or Jungle item.</groupLimit><br><br><rules><font color='#447777'>''The medallion shines with the glory of a thousand voices when exposed to the sun.'' - Historian Shurelya, 22 June, 24 CLE</font></rules>",
+      "description": "<stats>+10 Movement Speed<br>+50% Base Health Regen <br>+10% Cooldown Reduction<br>+2 Gold per 10 seconds</stats><br><br><unique>UNIQUE Passive - Favor:</unique> Enemy minions killed by your allies sometimes drop coins that grant <scaleMana>6%</scaleMana> missing mana (minimum 10). If there is an allied Champion nearby, sometimes the coins grant <gold>50</gold> gold instead. Cannon minions always drop coins.<hr><passive>QUEST:</passive> Earn 500 gold using this item.<br><passive>REWARD:</passive> Gain <active>UNIQUE Active - Warding:</active> Consumes a charge to place a <font color='#BBFFFF'>Stealth Ward</font> that reveals the surrounding area for 150 seconds.  Holds up to 3 charges which refill upon visiting the shop.<br><br><groupLimit>Limited to 1 Gold Income or Jungle item.</groupLimit><br><br><rules><font color='#447777'>''The medallion shines with the glory of a thousand voices when exposed to the sun.'' - Historian Shurelya, 22 June, 24 CLE</font></rules>",
       "colloq": "Nomad's Eye;",
       "plaintext": "Grants gold and mana when nearby minions die that you didn't kill",
       "from": [
@@ -6337,7 +6337,7 @@
         "Effect8Amount": "0",
         "Effect9Amount": "0",
         "Effect10Amount": "500",
-        "Effect11Amount": "45",
+        "Effect11Amount": "50",
         "Effect12Amount": "0.06",
         "Effect13Amount": "10",
         "Effect14Amount": "10"
@@ -6409,7 +6409,7 @@
     },
     "3098": {
       "name": "Frostfang",
-      "description": "<stats>+20 Ability Power<br>+2 Gold per 10 seconds<br><mana>+50% Base Mana Regen </mana><br>+10% Cooldown Reduction</stats><br><br><unique>UNIQUE Passive - Tribute:</unique> Damaging spells and attacks against champions or buildings deal 18 additional magic damage and grant 20 Gold per unique spell cast. This can occur up to 3 times every 30 seconds. Before quest completion, killing minions and non-epic monsters slows Tribute and gold generation.<hr><passive>QUEST:</passive> Earn 500 gold using this item.<br><passive>REWARD:</passive> Gain <active>UNIQUE Active - Warding:</active> Consumes a charge to place a <font color='#BBFFFF'>Stealth Ward</font> that reveals the surrounding area for 150 seconds.  Holds up to 3 charges which refill upon visiting the shop.<br><br><groupLimit>Limited to 1 Gold Income or Jungle item.</groupLimit>",
+      "description": "<stats>+20 Ability Power<br>+2 Gold per 10 seconds<br><mana>+50% Base Mana Regen </mana><br>+10% Cooldown Reduction</stats><br><br><unique>UNIQUE Passive - Tribute:</unique> Damaging spells and attacks against champions or buildings deal 18 additional magic damage per unique spell cast. If there is a nearby ally Champion, it also grants <gold>22</gold> Gold. This can occur up to 3 times every 30 seconds. Before quest completion, killing minions and non-epic monsters slows Tribute and gold generation.<hr><passive>QUEST:</passive> Earn 500 gold using this item.<br><passive>REWARD:</passive> Gain <active>UNIQUE Active - Warding:</active> Consumes a charge to place a <font color='#BBFFFF'>Stealth Ward</font> that reveals the surrounding area for 150 seconds.  Holds up to 3 charges which refill upon visiting the shop.<br><br><groupLimit>Limited to 1 Gold Income or Jungle item.</groupLimit>",
       "colloq": "Eye of Frost;",
       "plaintext": "Grants gold when you damage an enemy",
       "from": [
@@ -6451,7 +6451,7 @@
       },
       "effect": {
         "Effect1Amount": "18",
-        "Effect2Amount": "20",
+        "Effect2Amount": "22",
         "Effect3Amount": "6",
         "Effect4Amount": "3",
         "Effect5Amount": "30",
@@ -9875,7 +9875,7 @@
     },
     "3301": {
       "name": "Ancient Coin",
-      "description": "<stats>+5 Movement Speed<br>+5% Cooldown Reduction<br>+2 Gold per 10 seconds</stats><br><br><unique>UNIQUE Passive - Favor:</unique> Enemy minions killed by your allies sometimes drop coins that give either <font color='#D4AF37'>25</font> gold or <font color='#44DDFF'>6%</font> missing mana (minimum 10). Cannon minions always drop coins.<hr><passive>QUEST:</passive> Earn 500 gold using this item and upgrade to <font color='#CFBF84'>Nomad's Medallion</font>.<br><passive>REWARD:</passive> Gain <active>UNIQUE Active - Warding:</active> Consumes a charge to place a <font color='#BBFFFF'>Stealth Ward</font> that reveals the surrounding area for 150 seconds.  Holds up to 3 charges which refill upon visiting the shop.<br><br><groupLimit>Limited to 1 Gold Income or Jungle item.</groupLimit><br><br><i><font color='#447777'>''Gold dust rises from the desert and clings to the coin.'' - Historian Shurelya, 11 November, 23 CLE</font></i>",
+      "description": "<stats>+5 Movement Speed<br>+5% Cooldown Reduction<br>+2 Gold per 10 seconds</stats><br><br><unique>UNIQUE Passive - Favor:</unique> Enemy minions killed by your allies sometimes drop coins that grant <scaleMana>6%</scaleMana> missing mana (minimum 10). If there is an allied Champion nearby, sometimes the coins grant <gold>28</gold> gold instead. Cannon minions always drop coins.<hr><passive>QUEST:</passive> Earn 500 gold using this item and upgrade to <font color='#CFBF84'>Nomad's Medallion</font>.<br><passive>REWARD:</passive> Gain <active>UNIQUE Active - Warding:</active> Consumes a charge to place a <font color='#BBFFFF'>Stealth Ward</font> that reveals the surrounding area for 150 seconds.  Holds up to 3 charges which refill upon visiting the shop.<br><br><groupLimit>Limited to 1 Gold Income or Jungle item.</groupLimit><br><br><i><font color='#447777'>''Gold dust rises from the desert and clings to the coin.'' - Historian Shurelya, 11 November, 23 CLE</font></i>",
       "colloq": ";",
       "plaintext": "Grants gold and mana when nearby minions die that you didn't kill",
       "into": [
@@ -9910,7 +9910,7 @@
       },
       "stats": {},
       "effect": {
-        "Effect1Amount": "25",
+        "Effect1Amount": "28",
         "Effect2Amount": "10",
         "Effect3Amount": "2",
         "Effect4Amount": "5",
@@ -9920,7 +9920,7 @@
         "Effect8Amount": "0",
         "Effect9Amount": "0",
         "Effect10Amount": "500",
-        "Effect11Amount": "45",
+        "Effect11Amount": "50",
         "Effect12Amount": "0.06",
         "Effect13Amount": "10",
         "Effect14Amount": "10"
@@ -9986,7 +9986,7 @@
     },
     "3303": {
       "name": "Spellthief's Edge",
-      "description": "<stats>+10 Ability Power<br>+2 Gold per 10 seconds<br><mana>+25% Base Mana Regen </mana></stats><br><br><unique>UNIQUE Passive - Tribute:</unique> Damaging spells and attacks against champions or buildings deal 13 additional magic damage and grant 10 Gold per unique spell cast. This can occur up to 3 times every 30 seconds. Before quest completion, killing minions and non-epic monsters slows Tribute and gold generation.<hr><passive>QUEST:</passive> Earn 500 gold using this item and upgrade to <font color='#CFBF84'>Frostfang</font>.<br><passive>REWARD:</passive> Gain <active>UNIQUE Active - Warding:</active> Consumes a charge to place a <font color='#BBFFFF'>Stealth Ward</font> that reveals the surrounding area for 150 seconds.  Holds up to 3 charges which refill upon visiting the shop.<br><br><groupLimit>Limited to 1 Gold Income or Jungle item.</groupLimit>",
+      "description": "<stats>+10 Ability Power<br>+2 Gold per 10 seconds<br><mana>+25% Base Mana Regen </mana></stats><br><br><unique>UNIQUE Passive - Tribute:</unique> Damaging spells and attacks against champions or buildings deal 13 additional magic damage per unique spell cast. If there is a nearby ally Champion, it also grants <gold>11</gold> Gold. This can occur up to 3 times every 30 seconds. Before quest completion, killing minions and non-epic monsters slows Tribute and gold generation.<hr><passive>QUEST:</passive> Earn 500 gold using this item and upgrade to <font color='#CFBF84'>Frostfang</font>.<br><passive>REWARD:</passive> Gain <active>UNIQUE Active - Warding:</active> Consumes a charge to place a <font color='#BBFFFF'>Stealth Ward</font> that reveals the surrounding area for 150 seconds.  Holds up to 3 charges which refill upon visiting the shop.<br><br><groupLimit>Limited to 1 Gold Income or Jungle item.</groupLimit>",
       "colloq": ";",
       "plaintext": "Grants gold when you damage enemies",
       "into": [
@@ -10023,7 +10023,7 @@
       },
       "effect": {
         "Effect1Amount": "13",
-        "Effect2Amount": "10",
+        "Effect2Amount": "11",
         "Effect3Amount": "6",
         "Effect4Amount": "3",
         "Effect5Amount": "30",
@@ -10046,7 +10046,7 @@
     },
     "3304": {
       "name": "Timeworn Ancient Coin",
-      "description": "<stats>+5 Movement Speed<br>+5% Cooldown Reduction<br>+2 Gold per 10 seconds</stats><br><br><unique>UNIQUE Passive - Favor:</unique> Enemy minions killed by your allies sometimes drop coins that give either <font color='#D4AF37'>25</font> gold or <font color='#44DDFF'>6%</font> missing mana (minimum 10). Cannon minions always drop coins.<hr><passive>QUEST:</passive> Earn 750 gold using this item and upgrade to <font color='#CFBF84'>Timeworn Nomad's Medallion</font>.<br><passive>REWARD:</passive> <font color='#CFBF84'>Favor</font> is upgraded to <font color='#CFBF84'><a href='coinlinequestreward'>Emperor's Favor</a></font> and allied champions moving toward you gain 8% movement speed.<br><br><groupLimit>Limited to 1 Gold Income or Jungle item.</groupLimit><br><br><i><font color='#447777'>''Gold dust rises from the desert and clings to the coin.'' - Historian Shurelya, 11 November, 23 CLE</font></i>",
+      "description": "<stats>+5 Movement Speed<br>+5% Cooldown Reduction<br>+2 Gold per 10 seconds</stats><br><br><unique>UNIQUE Passive - Favor:</unique> Enemy minions killed by your allies sometimes drop coins that grant <scaleMana>6%</scaleMana> missing mana (minimum 10). If there is an allied Champion nearby, sometimes the coins grant <gold>28</gold> gold instead. Cannon minions always drop coins.<hr><passive>QUEST:</passive> Earn 750 gold using this item and upgrade to <font color='#CFBF84'>Timeworn Nomad's Medallion</font>.<br><passive>REWARD:</passive> <font color='#CFBF84'>Favor</font> is upgraded to <font color='#CFBF84'><a href='coinlinequestreward'>Emperor's Favor</a></font> and allied champions moving toward you gain 8% movement speed.<br><br><groupLimit>Limited to 1 Gold Income or Jungle item.</groupLimit><br><br><i><font color='#447777'>''Gold dust rises from the desert and clings to the coin.'' - Historian Shurelya, 11 November, 23 CLE</font></i>",
       "colloq": ";",
       "plaintext": "Grants gold and mana when nearby minions die that you didn't kill",
       "into": [
@@ -10080,7 +10080,7 @@
       },
       "stats": {},
       "effect": {
-        "Effect1Amount": "25",
+        "Effect1Amount": "28",
         "Effect2Amount": "10",
         "Effect3Amount": "2",
         "Effect4Amount": "0",
@@ -10090,7 +10090,7 @@
         "Effect8Amount": "0",
         "Effect9Amount": "0",
         "Effect10Amount": "750",
-        "Effect11Amount": "40",
+        "Effect11Amount": "50",
         "Effect12Amount": "0.06",
         "Effect13Amount": "10",
         "Effect14Amount": "5"
@@ -10098,7 +10098,7 @@
     },
     "3305": {
       "name": "Timeworn Nomad's Medallion",
-      "description": "<stats>+10 Movement Speed<br>+50% Base Health Regen <br>+10% Cooldown Reduction<br>+2 Gold per 10 seconds</stats><br><br><unique>UNIQUE Passive - Favor:</unique> Enemy minions killed by your allies sometimes drop coins that give either <font color='#D4AF37'>45</font> gold or <font color='#44DDFF'>6%</font> missing mana (minimum 10). Cannon minions always drop coins.<hr><passive>QUEST:</passive> Earn 750 gold using this item.<br><passive>REWARD:</passive> <font color='#CFBF84'>Favor</font> is upgraded to <font color='#CFBF84'><a href='coinlinequestreward'>Emperor's Favor</a></font> and allied champions moving toward you gain 8% movement speed.<br><br><groupLimit>Limited to 1 Gold Income or Jungle item.</groupLimit><br><br><rules><font color='#447777'>''The medallion shines with the glory of a thousand voices when exposed to the sun.'' - Historian Shurelya, 22 June, 24 CLE</font></rules>",
+      "description": "<stats>+10 Movement Speed<br>+50% Base Health Regen <br>+10% Cooldown Reduction<br>+2 Gold per 10 seconds</stats><br><br><unique>UNIQUE Passive - Favor:</unique> Enemy minions killed by your allies sometimes drop coins that grant <scaleMana>6%</scaleMana> missing mana (minimum 10). If there is an allied Champion nearby, sometimes the coins grant <gold>50</gold> gold instead. Cannon minions always drop coins.<hr><passive>QUEST:</passive> Earn 750 gold using this item.<br><passive>REWARD:</passive> <font color='#CFBF84'>Favor</font> is upgraded to <font color='#CFBF84'><a href='coinlinequestreward'>Emperor's Favor</a></font> and allied champions moving toward you gain 8% movement speed.<br><br><groupLimit>Limited to 1 Gold Income or Jungle item.</groupLimit><br><br><rules><font color='#447777'>''The medallion shines with the glory of a thousand voices when exposed to the sun.'' - Historian Shurelya, 22 June, 24 CLE</font></rules>",
       "colloq": ";",
       "plaintext": "Grants gold and mana when nearby minions die that you didn't kill",
       "from": [
@@ -10147,7 +10147,7 @@
         "Effect8Amount": "0",
         "Effect9Amount": "0",
         "Effect10Amount": "750",
-        "Effect11Amount": "45",
+        "Effect11Amount": "50",
         "Effect12Amount": "0.06",
         "Effect13Amount": "10",
         "Effect14Amount": "10"
@@ -10156,7 +10156,7 @@
     },
     "3306": {
       "name": "Timeworn Talisman of Ascension",
-      "description": "<stats>+10 Movement Speed<br>+45 Armor<br>+175% Base Health Regen <br>+10% Cooldown Reduction<br>+2 Gold per 10 seconds</stats><br><br><unique>UNIQUE Passive - Point Runner:</unique> Builds up to +20% Movement Speed over 2 seconds while near turrets, fallen turrets and Void Gates.<br><unique>UNIQUE Passive - Favor: </unique>Enemy minions killed by your allies sometimes drop coins that give either <font color='#D4AF37'>45</font> gold or <font color='#44DDFF'>6%</font> missing mana (minimum 10). Cannon minions always drop coins.<br><active>UNIQUE Active:</active> Grants nearby allies +@Effect5Amount*100@% Movement Speed for @Effect6Amount@ seconds (60 second cooldown).<hr><passive>QUEST:</passive> Earn 750 gold using this item.<br><passive>REWARD:</passive> <font color='#CFBF84'>Favor</font> is upgraded to <font color='#CFBF84'><a href='coinlinequestreward'>Emperor's Favor</a></font> and allied champions moving toward you gain 8% movement speed.<br><br><groupLimit>Limited to 1 Gold Income or Jungle item.</groupLimit><br><br><rules><font color='#447777'>''Praise the sun.'' - Historian Shurelya, 22 September, 25 CLE</font></rules>",
+      "description": "<stats>+10 Movement Speed<br>+45 Armor<br>+175% Base Health Regen <br>+10% Cooldown Reduction<br>+2 Gold per 10 seconds</stats><br><br><unique>UNIQUE Passive - Point Runner:</unique> Builds up to +20% Movement Speed over 2 seconds while near turrets, fallen turrets and Void Gates.<br><unique>UNIQUE Passive - Favor:</unique> Enemy minions killed by your allies sometimes drop coins that grant <scaleMana>6%</scaleMana> missing mana (minimum 10). If there is an allied Champion nearby, sometimes the coins grant <gold>50</gold> gold instead. Cannon minions always drop coins.<br><active>UNIQUE Active:</active> Grants nearby allies +@Effect5Amount*100@% Movement Speed for @Effect6Amount@ seconds (60 second cooldown).<hr><passive>QUEST:</passive> Earn 750 gold using this item.<br><passive>REWARD:</passive> <font color='#CFBF84'>Favor</font> is upgraded to <font color='#CFBF84'><a href='coinlinequestreward'>Emperor's Favor</a></font> and allied champions moving toward you gain 8% movement speed.<br><br><groupLimit>Limited to 1 Gold Income or Jungle item.</groupLimit><br><br><rules><font color='#447777'>''Praise the sun.'' - Historian Shurelya, 22 September, 25 CLE</font></rules>",
       "colloq": ";shurelya;reverie",
       "plaintext": "Increases Health / Mana Regeneration and Cooldown Reduction. Activate to speed up nearby allies.",
       "from": [
@@ -10206,7 +10206,7 @@
         "Effect8Amount": "20",
         "Effect9Amount": "2",
         "Effect10Amount": "750",
-        "Effect11Amount": "45",
+        "Effect11Amount": "50",
         "Effect12Amount": "0.06",
         "Effect13Amount": "10",
         "Effect14Amount": "10"
@@ -10398,7 +10398,7 @@
     },
     "3310": {
       "name": "Timeworn Spellthief's Edge",
-      "description": "<stats>+10 Ability Power<br>+2 Gold per 10 seconds<br><mana>+25% Base Mana Regen </mana></stats><br><br><unique>UNIQUE Passive - Tribute:</unique> Damaging spells and attacks against champions or buildings deal 13 additional magic damage and grant 10 Gold per unique spell cast. This can occur up to 3 times every 30 seconds. Before quest completion, killing minions and non-epic monsters slows Tribute and gold generation.<hr><passive>QUEST:</passive> Earn 750 gold using this item and upgrade to <font color='#CFBF84'>Timeworn Frostfang</font>.<br><passive>REWARD:</passive> <font color='#CFBF84'>Tribute</font> is upgraded into <font color='#CFBF84'><a href='frostqueenslinequestreward'>Queen's Tribute</a></font>.<br><br><groupLimit>Limited to 1 Gold Income or Jungle item.</groupLimit>",
+      "description": "<stats>+10 Ability Power<br>+2 Gold per 10 seconds<br><mana>+25% Base Mana Regen </mana></stats><br><br><unique>UNIQUE Passive - Tribute:</unique> Damaging spells and attacks against champions or buildings deal 13 additional magic damage per unique spell cast. If there is a nearby ally Champion, it also grants <gold>11</gold> Gold. This can occur up to 3 times every 30 seconds. Before quest completion, killing minions and non-epic monsters slows Tribute and gold generation.<hr><passive>QUEST:</passive> Earn 750 gold using this item and upgrade to <font color='#CFBF84'>Timeworn Frostfang</font>.<br><passive>REWARD:</passive> <font color='#CFBF84'>Tribute</font> is upgraded into <font color='#CFBF84'><a href='frostqueenslinequestreward'>Queen's Tribute</a></font>.<br><br><groupLimit>Limited to 1 Gold Income or Jungle item.</groupLimit>",
       "colloq": ";",
       "plaintext": "Grants gold when you damage enemies",
       "into": [
@@ -10435,7 +10435,7 @@
       },
       "effect": {
         "Effect1Amount": "13",
-        "Effect2Amount": "10",
+        "Effect2Amount": "11",
         "Effect3Amount": "6",
         "Effect4Amount": "3",
         "Effect5Amount": "30",
@@ -10458,7 +10458,7 @@
     },
     "3311": {
       "name": "Timeworn Frostfang",
-      "description": "<stats>+20 Ability Power<br>+2 Gold per 10 seconds<br><mana>+50% Base Mana Regen </mana><br>+10% Cooldown Reduction</stats><br><br><unique>UNIQUE Passive - Tribute:</unique> Damaging spells and attacks against champions or buildings deal 18 additional magic damage and grant 20 Gold per unique spell cast. This can occur up to 3 times every 30 seconds. Before quest completion, killing minions and non-epic monsters slows Tribute and gold generation.<hr><passive>QUEST:</passive> Earn 750 gold using this item.<br><passive>REWARD:</passive> <font color='#CFBF84'>Tribute</font> is upgraded into <font color='#CFBF84'><a href='frostqueenslinequestreward'>Queen's Tribute</a></font>.<br><br><groupLimit>Limited to 1 Gold Income or Jungle item.</groupLimit>",
+      "description": "<stats>+20 Ability Power<br>+2 Gold per 10 seconds<br><mana>+50% Base Mana Regen </mana><br>+10% Cooldown Reduction</stats><br><br><unique>UNIQUE Passive - Tribute:</unique> Damaging spells and attacks against champions or buildings deal 18 additional magic damage per unique spell cast. If there is a nearby ally Champion, it also grants <gold>22</gold> Gold. This can occur up to 3 times every 30 seconds. Before quest completion, killing minions and non-epic monsters slows Tribute and gold generation.<hr><passive>QUEST:</passive> Earn 750 gold using this item.<br><passive>REWARD:</passive> <font color='#CFBF84'>Tribute</font> is upgraded into <font color='#CFBF84'><a href='frostqueenslinequestreward'>Queen's Tribute</a></font>.<br><br><groupLimit>Limited to 1 Gold Income or Jungle item.</groupLimit>",
       "colloq": ";",
       "plaintext": "Grants gold when you damage an enemy",
       "from": [
@@ -10500,7 +10500,7 @@
       },
       "effect": {
         "Effect1Amount": "18",
-        "Effect2Amount": "20",
+        "Effect2Amount": "22",
         "Effect3Amount": "6",
         "Effect4Amount": "3",
         "Effect5Amount": "30",
@@ -10524,7 +10524,7 @@
     },
     "3312": {
       "name": "Timeworn Frost Queen's Claim",
-      "description": "<stats>+60 Ability Power<br>+10% Cooldown Reduction<br>+2 Gold per 10 seconds<br><mana>+50% Base Mana Regen </mana></stats><br><br><unique>UNIQUE Passive - Tribute:</unique> Damaging spells and attacks against champions or buildings deal 18 additional magic damage and grant 20 Gold per unique spell cast. This can occur up to 3 times every 30 seconds. Before quest completion, killing minions and non-epic monsters slows Tribute and gold generation.<br><active>UNIQUE Active:</active> Summon 2 icy ghosts for 6 seconds that seek out nearby enemy champions. Ghosts reveal enemies on contact and slow them by 40% for between 2 and 5 seconds based on how far the ghosts have traveled (90 second cooldown).<hr><passive>QUEST:</passive> Earn 750 gold using this item.<br><passive>REWARD:</passive> <font color='#CFBF84'>Tribute</font> is upgraded into <font color='#CFBF84'><a href='frostqueenslinequestreward'>Queen's Tribute</a></font>.<br><br><groupLimit>Limited to 1 Gold Income or Jungle item.</groupLimit>",
+      "description": "<stats>+60 Ability Power<br>+10% Cooldown Reduction<br>+2 Gold per 10 seconds<br><mana>+50% Base Mana Regen </mana></stats><br><br><unique>UNIQUE Passive - Tribute:</unique> Damaging spells and attacks against champions or buildings deal 18 additional magic damage per unique spell cast. If there is a nearby ally Champion, it also grants <gold>22</gold> Gold. This can occur up to 3 times every 30 seconds. Before quest completion, killing minions and non-epic monsters slows Tribute and gold generation.<br><active>UNIQUE Active:</active> Summon 2 icy ghosts for 6 seconds that seek out nearby enemy champions. Ghosts reveal enemies on contact and slow them by 40% for between 2 and 5 seconds based on how far the ghosts have traveled (90 second cooldown).<hr><passive>QUEST:</passive> Earn 750 gold using this item.<br><passive>REWARD:</passive> <font color='#CFBF84'>Tribute</font> is upgraded into <font color='#CFBF84'><a href='frostqueenslinequestreward'>Queen's Tribute</a></font>.<br><br><groupLimit>Limited to 1 Gold Income or Jungle item.</groupLimit>",
       "colloq": "spooky ghosts;",
       "plaintext": "Sends out seeking wraiths that track hidden enemies and slow them",
       "from": [
@@ -10564,7 +10564,7 @@
       },
       "effect": {
         "Effect1Amount": "18",
-        "Effect2Amount": "20",
+        "Effect2Amount": "22",
         "Effect3Amount": "0",
         "Effect4Amount": "3",
         "Effect5Amount": "30",
@@ -11983,7 +11983,7 @@
     },
     "3508": {
       "name": "Essence Reaver",
-      "description": "<stats>+60 Attack Damage<br>+20% Cooldown Reduction<br>+25% Critical Strike Chance</stats><br><br><unique>UNIQUE Passive:</unique> Basic attacks refund 1.5% of your missing mana.",
+      "description": "<stats>+65 Attack Damage<br>+25% Critical Strike Chance</stats><br><br><unique>UNIQUE Passive:</unique> +20% Cooldown Reduction<br><unique>UNIQUE Passive:</unique> Basic attacks refund 1.5% of your missing mana.",
       "colloq": ";",
       "plaintext": "Grants Critical Strike Chance, Cooldown Reduction, Attack Damage and restores mana on hit.",
       "from": [
@@ -12009,7 +12009,6 @@
       "tags": [
         "Damage",
         "CriticalStrike",
-        "AttackSpeed",
         "Mana",
         "ManaRegen",
         "CooldownReduction"
@@ -12020,12 +12019,12 @@
         "12": true
       },
       "stats": {
-        "FlatPhysicalDamageMod": 60,
+        "FlatPhysicalDamageMod": 65,
         "FlatCritChanceMod": 0.25
       },
       "effect": {
         "Effect1Amount": "0.015",
-        "Effect2Amount": "0",
+        "Effect2Amount": "0.2",
         "Effect3Amount": "0.5",
         "Effect4Amount": "0.2",
         "Effect5Amount": "6",
@@ -14635,7 +14634,7 @@
     },
     "4301": {
       "name": "Philosopher's Medallion",
-      "description": "<stats>+10% Cooldown Reduction<br>+50% Base Health Regen <br>+5 Gold per 10 seconds</stats><br><br><unique>UNIQUE Passive - Favor:</unique> Enemy minions killed by your allies sometimes drop coins that give either <font color='#D4AF37'>40</font> gold or <font color='#44DDFF'>10%</font> missing mana (minimum 20). Cannon minions always drop coins.<br><br><groupLimit>Limited to 1 Starter item.</groupLimit>",
+      "description": "<stats>+10% Cooldown Reduction<br>+50% Base Health Regen <br>+5 Gold per 10 seconds</stats><br><br><unique>UNIQUE Passive - Favor:</unique> Enemy minions killed by your allies sometimes drop coins that grant <scaleMana>10%</scaleMana> missing mana (minimum 20). If there is an allied Champion nearby, sometimes the coins grant <gold>50</gold> gold instead. Cannon minions always drop coins.<br><br><groupLimit>Limited to 1 Starter item.</groupLimit>",
       "colloq": ";Ancient Coin;Nomad's Medallion;Support",
       "plaintext": "Grants gold and mana when nearby minions die that you didn't kill",
       "image": {
@@ -14667,7 +14666,7 @@
       },
       "stats": {},
       "effect": {
-        "Effect1Amount": "40",
+        "Effect1Amount": "50",
         "Effect2Amount": "10",
         "Effect3Amount": "5",
         "Effect4Amount": "0",

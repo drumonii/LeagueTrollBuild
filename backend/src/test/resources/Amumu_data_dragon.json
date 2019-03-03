@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.3.1",
+  "version": "9.4.1",
   "data": {
     "Amumu": {
       "id": "Amumu",
@@ -574,7 +574,7 @@
           "id": "CurseoftheSadMummy",
           "name": "Curse of the Sad Mummy",
           "description": "Amumu entangles surrounding enemy units in bandages, applying his <font color='#9b0f5f'>Curse</font>, damaging them and rendering them unable to attack or move.",
-          "tooltip": "Amumu entangles nearby enemy units, dealing {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage and applying <span class=\"color9b0f5f\">Curse</span>. Entangled enemies are unable to attack or move for 2 seconds.",
+          "tooltip": "Amumu entangles nearby enemy units, dealing {{ rcalculateddamage }} magic damage and applying <span class=\"color9b0f5f\">Curse</span>. Entangled enemies are unable to attack or move for {{ rduration }} seconds.",
           "leveltip": {
             "label": [
               "Damage",
@@ -582,7 +582,7 @@
               "Cooldown"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
+              "{{ rdamage }} -> {{ rdamageNL }}",
               "{{ cost }} -> {{ costNL }}",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
@@ -604,14 +604,14 @@
           "effect": [
             null,
             [
-              150,
-              250,
-              350
+              0,
+              0,
+              0
             ],
             [
-              2,
-              2,
-              2
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -656,8 +656,8 @@
           ],
           "effectBurn": [
             null,
-            "150/250/350",
-            "2",
+            "0",
+            "0",
             "0",
             "0",
             "0",
@@ -667,13 +667,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.8,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [

@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.3.1",
+  "version": "9.4.1",
   "data": {
     "Ahri": {
       "id": "Ahri",
@@ -574,14 +574,14 @@
           "id": "AhriTumble",
           "name": "Spirit Rush",
           "description": "Ahri dashes forward and fires essence bolts, damaging nearby enemies. Spirit Rush can be cast up to three times before going on cooldown.",
-          "tooltip": "Nimbly dashes forward firing {{ e2 }} essence bolts at nearby enemies (prioritizing champions) dealing {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage.<br /><br />Can be cast up to {{ e3 }} times within {{ e6 }} seconds before going on cooldown.",
+          "tooltip": "Nimbly dashes forward firing {{ rmaxtargetspercast }} essence bolts at nearby enemies (prioritizing champions) dealing {{ rcalculateddamage }} magic damage.<br /><br />Can be cast up to {{ rmaxcasts }} times within {{ rrecastwindow }} seconds before going on cooldown.",
           "leveltip": {
             "label": [
               "Damage",
               "Cooldown"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
+              "{{ rbasedamage }} -> {{ rbasedamageNL }}",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
@@ -602,39 +602,39 @@
           "effect": [
             null,
             [
-              60,
-              90,
-              120
+              0,
+              0,
+              0
             ],
             [
-              3,
-              3,
-              3
+              0,
+              0,
+              0
             ],
             [
-              3,
-              3,
-              3
+              0,
+              0,
+              0
             ],
             [
-              500,
-              500,
-              500
+              0,
+              0,
+              0
             ],
             [
-              1200,
-              1200,
-              1200
+              0,
+              0,
+              0
             ],
             [
-              10,
-              10,
-              10
+              0,
+              0,
+              0
             ],
             [
-              600,
-              600,
-              600
+              0,
+              0,
+              0
             ],
             [
               1,
@@ -654,24 +654,18 @@
           ],
           "effectBurn": [
             null,
-            "60/90/120",
-            "3",
-            "3",
-            "500",
-            "1200",
-            "10",
-            "600",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
             "1",
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.35,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [

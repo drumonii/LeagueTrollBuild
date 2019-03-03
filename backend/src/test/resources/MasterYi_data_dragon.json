@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.3.1",
+  "version": "9.4.1",
   "data": {
     "MasterYi": {
       "id": "MasterYi",
@@ -585,15 +585,15 @@
           "id": "Highlander",
           "name": "Highlander",
           "description": "Master Yi moves with unparalleled agility, temporarily increasing his Movement and Attack Speeds as well as making him immune to all slowing effects. While active, Champion kills or assists extend Highlander's duration. Passively reduces cooldown for his other abilities on a kill or assist.",
-          "tooltip": "<span class=\"colorFF9900\">Passive:</span> Champion kills and assists reduce the remaining cooldown of Master Yi's basic abilities by {{ e5 }}%.<br /><br /><span class=\"colorFF9900\">Active:</span> Increases Movement Speed by {{ e3 }}%, Attack Speed by {{ e2 }}%, and grants immunity to slows for {{ e1 }} seconds. While active, champion kills and assists extend the duration of Highlander by {{ e4 }} seconds.",
+          "tooltip": "<span class=\"colorFF9900\">Passive:</span> Champion kills and assists reduce the remaining cooldown of Master Yi's basic abilities by {{ rcooldownrefund*100 }}%.<br /><br /><span class=\"colorFF9900\">Active:</span> Increases Movement Speed by {{ rmsbonus }}%, Attack Speed by {{ rasbonus }}%, and grants immunity to slows for {{ rduration }} seconds. While active, champion kills and assists extend the duration of Highlander by {{ rkillassistextension }} seconds.",
           "leveltip": {
             "label": [
               "Attack Speed",
               "Movement Speed"
             ],
             "effect": [
-              "{{ e2 }} -> {{ e2NL }}",
-              "{{ e3 }} -> {{ e3NL }}"
+              "{{ rasbonus }} -> {{ rasbonusNL }}",
+              "{{ rmsbonus }} -> {{ rmsbonusNL }}"
             ]
           },
           "maxrank": 3,
@@ -613,29 +613,29 @@
           "effect": [
             null,
             [
-              7,
-              7,
-              7
+              0,
+              0,
+              0
             ],
             [
-              30,
-              55,
-              80
+              0,
+              0,
+              0
             ],
             [
-              25,
-              35,
-              45
+              0,
+              0,
+              0
             ],
             [
-              7,
-              7,
-              7
+              0,
+              0,
+              0
             ],
             [
-              70,
-              70,
-              70
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -665,11 +665,11 @@
           ],
           "effectBurn": [
             null,
-            "7",
-            "30/55/80",
-            "25/35/45",
-            "7",
-            "70",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
             "0",
             "0",
             "0",

@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.3.1",
+  "version": "9.4.1",
   "data": {
     "Zed": {
       "id": "Zed",
@@ -97,7 +97,7 @@
         "critperlevel": 0,
         "attackdamage": 63,
         "attackdamageperlevel": 3.4,
-        "attackspeedperlevel": 2.1,
+        "attackspeedperlevel": 3.3,
         "attackspeed": 0.651
       },
       "spells": [
@@ -105,14 +105,14 @@
           "id": "ZedQ",
           "name": "Razor Shuriken",
           "description": "Zed and his shadows throw their shurikens.<br><br>Each shuriken deals damage to every enemy hit.",
-          "tooltip": "Zed and his shadows throw their shurikens, each dealing {{ e1 }} <scaleAD>(+{{ a1 }})</scaleAD> physical damage to the first enemy they pass through, and {{ e3 }} <scaleAD>(+{{ a2 }})</scaleAD> physical damage to each additional enemy.",
+          "tooltip": "Zed and his shadows throw their shurikens, each dealing <physicalDamage>{{ totaldamage }} physical damage</physicalDamage> to the first enemy they pass through, and <physicalDamage>{{ passthroughdamage }} physical damage</physicalDamage> to each additional enemy.",
           "leveltip": {
             "label": [
               "Damage",
               "@AbilityResourceName@ Cost"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
+              "{{ basedamage }} -> {{ basedamageNL }}",
               "{{ cost }} -> {{ costNL }}"
             ]
           },
@@ -137,39 +137,39 @@
           "effect": [
             null,
             [
-              80,
-              115,
-              150,
-              185,
-              220
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              0.6,
-              0.6,
-              0.6,
-              0.6,
-              0.6
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              48,
-              69,
-              90,
-              110,
-              132
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              1,
-              1,
-              1,
-              1,
-              1
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              925,
-              925,
-              925,
-              925,
-              925
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -209,29 +209,18 @@
           ],
           "effectBurn": [
             null,
-            "80/115/150/185/220",
-            "0.6",
-            "48/69/90/110/132",
-            "1",
-            "925",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
             "0",
             "0",
             "0",
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "bonusattackdamage",
-              "coeff": 0.9,
-              "key": "a1"
-            },
-            {
-              "link": "bonusattackdamage",
-              "coeff": 0.54,
-              "key": "a2"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -272,13 +261,13 @@
           },
           "maxrank": 5,
           "cooldown": [
-            22,
             20,
-            18,
-            16,
+            18.5,
+            17,
+            15.5,
             14
           ],
-          "cooldownBurn": "22/20/18/16/14",
+          "cooldownBurn": "20/18.5/17/15.5/14",
           "cost": [
             40,
             35,
@@ -400,14 +389,14 @@
           "id": "ZedE",
           "name": "Shadow Slash",
           "description": "Zed and his shadows slash, dealing damage to nearby enemies.",
-          "tooltip": "Zed and his shadows slash, dealing {{ e1 }} <scaleAD>(+{{ a1 }})</scaleAD> physical damage to nearby enemies.<br /><br />Each enemy champion hit by Zed's slash reduces Living Shadow's cooldown by {{ e4 }} seconds.<br /><br />Enemies hit by a Shadow's slash are slowed by {{ e2 }}% for 1.5 seconds. Enemies hit by multiple slashes take no additional damage but are slowed by {{ e3 }}% instead.",
+          "tooltip": "Zed and his shadows slash, dealing <physicalDamage>{{ totaldamage }} physical damage</physicalDamage> to nearby enemies.<br /><br />Each enemy champion hit by Zed's slash reduces Living Shadow's cooldown by {{ shadowhitcdr }} seconds.<br /><br />Enemies hit by a Shadow's slash are slowed by {{ movespeedmod*-100 }}% for {{ slowduration }} seconds. Enemies hit by multiple slashes take no additional damage but are slowed by {{ movespeedmodbonus*-100 }}% instead.",
           "leveltip": {
             "label": [
               "Damage",
               "Cooldown"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
+              "{{ basedamage }} -> {{ basedamageNL }}",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
@@ -432,53 +421,53 @@
           "effect": [
             null,
             [
-              70,
-              95,
-              120,
-              145,
-              170
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              20,
-              25,
-              30,
-              35,
-              40
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              30,
-              37.5,
-              45,
-              52.5,
-              60
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              2,
-              2,
-              2,
-              2,
-              2
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              1.5,
-              1.5,
-              1.5,
-              1.5,
-              1.5
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              315,
-              315,
-              315,
-              315,
-              315
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              290,
-              290,
-              290,
-              290,
-              290
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -504,24 +493,18 @@
           ],
           "effectBurn": [
             null,
-            "70/95/120/145/170",
-            "20/25/30/35/40",
-            "30/37.5/45/52.5/60",
-            "2",
-            "1.5",
-            "315",
-            "290",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
             "0",
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "bonusattackdamage",
-              "coeff": 0.8,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -547,16 +530,14 @@
           "id": "ZedR",
           "name": "Death Mark",
           "description": "Zed becomes untargetable and dashes to an enemy champion, marking them. After 3 seconds the mark triggers, repeating a portion of all the damage Zed dealt to the target while they were marked.",
-          "tooltip": "Zed becomes untargetable and dashes to an enemy champion, marking them. After 3 seconds, the mark triggers, dealing physical damage equal to {{ rcalculateddamage }} + {{ rdamageamp*100 }}% of all damage dealt to the target by Zed while the mark was active.<br /><br />The dash leaves a shadow behind for {{ rshadowdurationdisplayed }} seconds. Reactivating Death Mark causes Zed to switch positions with this shadow.<br /><br /><span class=\"colorFFFFFF\">Reaper of Shadows: </span>Zed reaps the shadow of the strongest foe slain under Death Mark, gaining {{ radgained }} attack damage. ({{ rflatadbonusgain }} + {{ rbonusadpercentgain*100 }}% of the victim's attack damage.)",
+          "tooltip": "Zed becomes untargetable and dashes to an enemy champion, marking them. After {{ rdeathmarkduration }} seconds, the mark triggers, dealing physical damage equal to <physicalDamage>{{ rcalculateddamage }}</physicalDamage> + {{ rdamageamp*100 }}% of all damage dealt to the target by Zed while the mark was active.<br /><br />The dash leaves a shadow behind for {{ rshadowdurationdisplayed }} seconds. Reactivating Death Mark causes Zed to switch positions with this shadow.",
           "leveltip": {
             "label": [
               "Mark Detonation Damage",
-              "Percent Attack Damage Stolen",
               "Cooldown"
             ],
             "effect": [
-              "{{ rdamageamp*100.000000 }} -> {{ rdamageampnl*100.000000 }}",
-              "{{ rbonusadpercentgain*100.000000 }} -> {{ rbonusadpercentgainnl*100.000000 }}",
+              "{{ rdamageamp*100.000000 }}% -> {{ rdamageampnl*100.000000 }}%",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
@@ -577,68 +558,68 @@
           "effect": [
             null,
             [
-              1,
-              1,
-              1
+              0,
+              0,
+              0
             ],
             [
-              0.25,
-              0.4,
-              0.55
+              0,
+              0,
+              0
             ],
             [
-              0.5,
-              0.5,
-              0.5
+              0,
+              0,
+              0
             ],
             [
-              6,
-              6,
-              6
+              0,
+              0,
+              0
             ],
             [
-              6.5,
-              6.5,
-              6.5
+              0,
+              0,
+              0
             ],
             [
-              3,
-              3,
-              3
+              0,
+              0,
+              0
             ],
             [
-              7.5,
-              7.5,
-              7.5
+              0,
+              0,
+              0
             ],
             [
-              4,
-              4,
-              4
+              0,
+              0,
+              0
             ],
             [
-              0.05,
-              0.1,
-              0.15
+              0,
+              0,
+              0
             ],
             [
-              5,
-              5,
-              5
+              0,
+              0,
+              0
             ]
           ],
           "effectBurn": [
             null,
-            "1",
-            "0.25/0.4/0.55",
-            "0.5",
-            "6",
-            "6.5",
-            "3",
-            "7.5",
-            "4",
-            "0.05/0.1/0.15",
-            "5"
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
           ],
           "vars": [],
           "costType": "No Cost",

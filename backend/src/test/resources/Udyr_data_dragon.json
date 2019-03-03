@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.3.1",
+  "version": "9.4.1",
   "data": {
     "Udyr": {
       "id": "Udyr",
@@ -531,15 +531,15 @@
           "id": "UdyrPhoenixStance",
           "name": "Phoenix Stance",
           "description": "Phoenix Stance: Activation - Udyr unleashes pulsing waves of fire, dealing damage to nearby enemies. Persistent Effect - Udyr's first attack and every third attack after engulfs enemies in front of him with flames.",
-          "tooltip": "<spellPassive>Persistent Effect: </spellPassive>Udyr's first attack and every third attack after burns enemies in front of him, dealing {{ e2 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage.<br /><br /><spellPassive>Activation: </spellPassive>Unleashes pulsing waves of fire, dealing {{ e1 }} <scaleAP>(+{{ a2 }})</scaleAP> magic damage each second to nearby enemies for {{ e5 }} seconds.<br /><br /><rules><span class=\"color8c8c8c\">Udyr's stance mana costs decrease by 1 each time he levels up.</span></rules>",
+          "tooltip": "<spellPassive>Persistent Effect: </spellPassive>Udyr's first attack and every third attack after burns enemies in front of him, dealing {{ totalconedamage }} magic damage.<br /><br /><spellPassive>Activation: </spellPassive>Unleashes pulsing waves of fire, dealing {{ totalaoedamagepertick }} magic damage each second to nearby enemies for {{ phoenixaoeduration }} seconds.<br /><br /><rules><span class=\"color8c8c8c\">Udyr's stance mana costs decrease by 1 each time he levels up.</span></rules>",
           "leveltip": {
             "label": [
               "Pulse Damage",
               "Flame Damage"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
-              "{{ e2 }} -> {{ e2NL }}"
+              "{{ aoedamagepertick }} -> {{ aoedamagepertickNL }}",
+              "{{ conedamage }} -> {{ conedamageNL }}"
             ]
           },
           "maxrank": 5,
@@ -563,60 +563,60 @@
           "effect": [
             null,
             [
-              10,
-              20,
-              30,
-              40,
-              50
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              40,
-              80,
-              120,
-              160,
-              200
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              16,
-              24,
-              32,
-              40,
-              48
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              1,
-              1,
-              1,
-              1,
-              1
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              4,
-              4,
-              4,
-              4,
-              4
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              325,
-              325,
-              325,
-              325,
-              325
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              400,
-              400,
-              400,
-              400,
-              400
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              3,
-              3,
-              3,
-              3,
-              3
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -635,29 +635,18 @@
           ],
           "effectBurn": [
             null,
-            "10/20/30/40/50",
-            "40/80/120/160/200",
-            "16/24/32/40/48",
-            "1",
-            "4",
-            "325",
-            "400",
-            "3",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.6,
-              "key": "a1"
-            },
-            {
-              "link": "spelldamage",
-              "coeff": 0.25,
-              "key": "a2"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [

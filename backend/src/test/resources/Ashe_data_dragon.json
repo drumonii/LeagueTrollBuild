@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.3.1",
+  "version": "9.4.1",
   "data": {
     "Ashe": {
       "id": "Ashe",
@@ -555,14 +555,14 @@
           "id": "EnchantedCrystalArrow",
           "name": "Enchanted Crystal Arrow",
           "description": "Ashe fires a missile of ice in a straight line. If the arrow collides with an enemy Champion, it deals damage and stuns the Champion, stunning for longer the farther arrow has traveled. In addition, surrounding enemy units take damage and are slowed.",
-          "tooltip": "Launches a crystal arrow of ice that stuns the first enemy Champion hit, dealing {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage. The farther the arrow flies, the longer the stun, up to {{ e2 }} seconds. Surrounding enemies take half damage.",
+          "tooltip": "Launches a crystal arrow of ice that stuns the first enemy Champion hit, dealing {{ rmaindamage }} magic damage. The farther the arrow flies, the longer the stun, up to {{ maxstunduration }} seconds. Surrounding enemies take half damage.",
           "leveltip": {
             "label": [
               "Damage",
               "Cooldown"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
+              "{{ rbasedamage }} -> {{ rbasedamageNL }}",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
@@ -583,49 +583,49 @@
           "effect": [
             null,
             [
-              200,
-              400,
-              600
+              0,
+              0,
+              0
             ],
             [
-              3.5,
-              3.5,
-              3.5
+              0,
+              0,
+              0
             ],
             [
-              50,
-              50,
-              50
+              0,
+              0,
+              0
             ],
             [
-              3,
-              3,
-              3
+              0,
+              0,
+              0
             ],
             [
-              5,
-              5,
-              5
+              0,
+              0,
+              0
             ],
             [
-              1100,
-              1200,
-              1300
+              0,
+              0,
+              0
             ],
             [
-              1,
-              1,
-              1
+              0,
+              0,
+              0
             ],
             [
-              400,
-              400,
-              400
+              0,
+              0,
+              0
             ],
             [
-              0.5,
-              0.5,
-              0.5
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -635,24 +635,18 @@
           ],
           "effectBurn": [
             null,
-            "200/400/600",
-            "3.5",
-            "50",
-            "3",
-            "5",
-            "1100/1200/1300",
-            "1",
-            "400",
-            "0.5",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 1,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -2155,7 +2149,7 @@
               "recSteps": false,
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "ItemTeleportCancel",
+              "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [

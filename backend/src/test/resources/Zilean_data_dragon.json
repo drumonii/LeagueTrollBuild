@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.3.1",
+  "version": "9.4.1",
   "data": {
     "Zilean": {
       "id": "Zilean",
@@ -533,7 +533,7 @@
           "id": "ChronoShift",
           "name": "Chronoshift",
           "description": "Zilean places a protective time rune on an allied champion, teleporting the champion back in time if they take lethal damage.",
-          "tooltip": "Zilean marks himself or an allied champion with a protective time rune for {{ e2 }} seconds. If the target would take lethal damage, they are instead transported back in time, arriving with {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> Health.",
+          "tooltip": "Zilean marks himself or an allied champion with a protective time rune for {{ rduration }} seconds. If the target would take lethal damage, they are instead transported back in time, arriving with {{ rtotalheal }} Health.",
           "leveltip": {
             "label": [
               "Healing",
@@ -541,7 +541,7 @@
               "@AbilityResourceName@ Cost"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
+              "{{ rbaseheal }} -> {{ rbasehealNL }}",
               "{{ cooldown }} -> {{ cooldownNL }}",
               "{{ cost }} -> {{ costNL }}"
             ]
@@ -563,14 +563,14 @@
           "effect": [
             null,
             [
-              600,
-              850,
-              1100
+              0,
+              0,
+              0
             ],
             [
-              5,
-              5,
-              5
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -615,8 +615,8 @@
           ],
           "effectBurn": [
             null,
-            "600/850/1100",
-            "5",
+            "0",
+            "0",
             "0",
             "0",
             "0",
@@ -626,13 +626,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 2,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [

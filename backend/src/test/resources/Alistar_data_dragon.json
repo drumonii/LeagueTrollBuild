@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.3.1",
+  "version": "9.4.1",
   "data": {
     "Alistar": {
       "id": "Alistar",
@@ -582,14 +582,14 @@
           "id": "FerociousHowl",
           "name": "Unbreakable Will",
           "description": "Alistar lets out a wild roar, removing all crowd control effects on himself, and reducing incoming physical and magical damage for the duration.",
-          "tooltip": "Removes all disables from Alistar. For {{ e1 }} seconds Alistar takes {{ e2 }}% reduced physical and magical damage.",
+          "tooltip": "Removes all disables from Alistar. For {{ rduration }} seconds Alistar takes {{ rdamagereduction }}% reduced physical and magical damage.",
           "leveltip": {
             "label": [
               "Damage Reduction",
               "Cooldown"
             ],
             "effect": [
-              "{{ e2 }}% -> {{ e2NL }}%",
+              "{{ rdamagereduction }}% -> {{ rdamagereductionNL }}%",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
@@ -610,14 +610,14 @@
           "effect": [
             null,
             [
-              7,
-              7,
-              7
+              0,
+              0,
+              0
             ],
             [
-              55,
-              65,
-              75
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -662,8 +662,8 @@
           ],
           "effectBurn": [
             null,
-            "7",
-            "55/65/75",
+            "0",
+            "0",
             "0",
             "0",
             "0",
