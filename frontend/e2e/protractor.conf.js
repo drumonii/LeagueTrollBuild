@@ -8,10 +8,12 @@ exports.config = {
   specs: [
     './src/**/*.e2e-spec.ts'
   ],
-  capabilities: {
-    'browserName': 'chrome'
-  },
-  directConnect: true,
+  multiCapabilities: [
+    { 'browserName': 'firefox' },
+    { 'browserName': 'chrome' },
+    { 'browserName': 'internet explorer' }
+  ],
+  seleniumAddress: 'http://localhost:4444/wd/hub',
   baseUrl: 'http://localhost:4200/',
   framework: 'jasmine',
   jasmineNodeOpts: {
