@@ -16,6 +16,12 @@ export class AdminHeaderComponent implements OnInit {
   header = 'League Troll Build Admin';
   isAdminCollapsed: boolean;
 
+  navbarItems = {
+    logout: {
+      isActive: false
+    }
+  };
+
   adminUserDetails$: Observable<AdminUserDetails>;
 
   constructor(private authService: AdminAuthService, private router: Router) {}
@@ -26,6 +32,14 @@ export class AdminHeaderComponent implements OnInit {
 
   toggleAdminCollapse(): void {
     this.isAdminCollapsed = !this.isAdminCollapsed;
+  }
+
+  toggleNavbarItem(name: string): void {
+    this.navbarItems[name].isActive = !this.navbarItems[name].isActive;
+  }
+
+  isNavbarItemActive(name: string): boolean {
+    return this.navbarItems[name].isActive;
   }
 
   logout(): void {

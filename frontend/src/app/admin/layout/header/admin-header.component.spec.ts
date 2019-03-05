@@ -78,6 +78,17 @@ describe('AdminHeaderComponent', () => {
       expect(fixture.debugElement.query(By.css('.navbar-dropdown'))).toBeTruthy();
     });
 
+    it('should toggle logout navbar item on click', () => {
+      const logoutNavbarItem = fixture.debugElement.query(By.css('#admin-logout-navbar-item'));
+      expect(logoutNavbarItem.classes['is-active']).toBeFalsy();
+
+      logoutNavbarItem.triggerEventHandler('click', null);
+
+      fixture.detectChanges();
+
+      expect(logoutNavbarItem.classes['is-active']).toBeTruthy();
+    });
+
     it('should logout user on logout button click',
       inject([AdminAuthService, Router], (authService: AdminAuthService, router: Router) => {
       const successfulLogoutResponse: AdminLogoutResponse = {

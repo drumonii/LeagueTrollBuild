@@ -23,7 +23,8 @@
       </div>
 
       <div id="authenticated-admin-navbar-end" class="navbar-end">
-        <div class="navbar-item has-dropdown is-hoverable">
+        <div id="admin-logout-navbar-item" class="navbar-item has-dropdown"
+          [class.is-active]="isNavbarItemActive('logout')" (click)="toggleNavbarItem('logout')">
           <div class="navbar-link">
             <i class="fa fa-user-circle" aria-hidden="true"></i>
           </div>
