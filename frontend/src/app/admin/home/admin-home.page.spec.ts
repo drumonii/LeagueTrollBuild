@@ -1,7 +1,8 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import { By } from '@angular/platform-browser';
 
+import { AdminTitleService } from '@admin-service/admin-title.service';
 import { AdminHomeModule } from './admin-home.module';
 import { AdminHomePage } from './admin-home.page';
 
@@ -16,11 +17,18 @@ describe('AdminHomePage', () => {
     .compileComponents();
   }));
 
-  beforeEach(() => {
+  beforeEach(inject([AdminTitleService], (title: AdminTitleService) => {
     fixture = TestBed.createComponent(AdminHomePage);
     component = fixture.componentInstance;
+
+    spyOn(title, 'resetTitle').and.callThrough();
+
     fixture.detectChanges();
-  });
+  }));
+
+  afterEach(inject([AdminTitleService], (title: AdminTitleService) => {
+    expect(title.resetTitle).toHaveBeenCalled();
+  }));
 
   it('should create', () => {
     expect(fixture.debugElement.query(By.css('#cpu-usage-card'))).toBeTruthy();
