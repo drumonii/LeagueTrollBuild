@@ -14,3 +14,7 @@ node {
 task npmBuild(type: NpmTask, dependsOn: 'npmInstall') {
   args = ['run', 'build']
 }
+
+task karmaTests(type: NpmTask, dependsOn: 'npmInstall') {
+  args = ['run', 'test-ci']
+}

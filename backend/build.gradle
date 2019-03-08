@@ -18,6 +18,7 @@ ext {
 }
 
 test {
+    dependsOn ':frontend:karmaTests'
     outputs.dir snippetsDir
 }
 
