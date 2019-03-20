@@ -1,6 +1,8 @@
 import { browser, by, element } from 'protractor';
 
-export class AdminAppPage {
+import { BaseAdminPage } from './base-admin.po';
+
+export class AdminAppPage extends BaseAdminPage {
 
   navigateTo() {
     return browser.get('/admin/login');

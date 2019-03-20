@@ -20,6 +20,19 @@ Run `ng test` to execute the unit tests via https://karma-runner.github.io[Karma
 
 == Running end-to-end tests
 
+First start the `webdriver-manager` using `webdriver-manager-start` script: `npm run webdriver-manager-start`.
+
+You'll see `ECONNREFUSED` if the `webdriver-manager` is not started:
+```
+Error: ECONNREFUSED connect ECONNREFUSED 127.0.0.1:4444
+```
+
+Next start the backend: `./gradlew bootRun`. You can also start the backend in your IDE.
+
+NOTE: e2e tests assume the backend already has data from Riot in the database.
+
+Otherwise you'll see `Error occurred while trying to proxy request` and most tests will fail.
+
 Run `ng e2e` to execute the end-to-end tests via http://www.protractortest.org/[Protractor].
 
 == Further help

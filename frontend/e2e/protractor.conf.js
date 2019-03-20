@@ -9,8 +9,8 @@ exports.config = {
     './src/**/*.e2e-spec.ts'
   ],
   multiCapabilities: [
-    { 'browserName': 'firefox' },
     { 'browserName': 'chrome' },
+    { 'browserName': 'firefox' },
     { 'browserName': 'internet explorer' }
   ],
   seleniumAddress: 'http://localhost:4444/wd/hub',

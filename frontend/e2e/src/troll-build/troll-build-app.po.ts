@@ -1,6 +1,8 @@
 import { browser, by, element } from 'protractor';
 
-export class TrollBuildAppPage {
+import { BaseTrollBuildPage } from './base-troll-build.po';
+
+export class TrollBuildAppPage extends BaseTrollBuildPage {
 
   navigateTo() {
     return browser.get('/');

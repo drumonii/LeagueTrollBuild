@@ -3,12 +3,12 @@ import { AdminAppPage } from './admin-app.po';
 describe('admin-app', () => {
   const page = new AdminAppPage();
 
-  beforeEach(() => {
-    page.navigateTo();
+  beforeEach(async () => {
+    await page.navigateTo();
   });
 
   it('show show the admin header', () => {
-    expect(page.getHeaderText()).toEqual('League Troll Build Admin');
+    expect(page.getHeaderText()).toBe('League Troll Build Admin');
   });
 
   it('show show the admin footer', () => {
