@@ -345,7 +345,7 @@ describe('BuildsResolver', () => {
     beforeEach(inject([BuildsService, Router], (buildsService: BuildsService, router: Router) => {
       resolver = TestBed.get(BuildsResolver);
 
-      spyOn(router, 'navigate').and.returnValue(true);
+      spyOn(router, 'navigate');
       spyOn(buildsService, 'countBuilds').and.callThrough();
     }));
 
@@ -385,7 +385,7 @@ describe('BuildsResolver', () => {
     beforeEach(inject([BuildsService, Router], (buildsService: BuildsService, router: Router) => {
       resolver = TestBed.get(BuildsResolver);
 
-      spyOn(router, 'navigate').and.returnValue(true);
+      spyOn(router, 'navigate');
       spyOn(buildsService, 'getBuild').and.callThrough();
     }));
 
