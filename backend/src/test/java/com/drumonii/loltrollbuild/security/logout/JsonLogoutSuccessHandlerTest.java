@@ -37,7 +37,7 @@ public class JsonLogoutSuccessHandlerTest {
                 new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
 
         String json =
-                "{+" +
+                "{" +
                 "  \"status\": \"SUCCESS\"," +
                 "  \"message\": \"Logout success\"," +
                 "  \"userDetails\": { " +
@@ -67,7 +67,7 @@ public class JsonLogoutSuccessHandlerTest {
 
 
         String json =
-                "{ " +
+                "{" +
                 "  \"status\": \"FAILED\"," +
                 "  \"message\": \"Logout failed\"" +
                 "}";
