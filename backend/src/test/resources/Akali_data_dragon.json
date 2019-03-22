@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.4.1",
+  "version": "9.6.1",
   "data": {
     "Akali": {
       "id": "Akali",
@@ -418,16 +418,18 @@
         {
           "id": "AkaliE",
           "name": "Shuriken Flip",
-          "description": "Flip backward and fire a shuriken forward, dealing physical damage. The first enemy or smoke cloud hit is marked. Re-cast to dash to the marked target, dealing the same damage.",
-          "tooltip": "Flip backward and fire a shuriken forward, dealing <physicalDamage>{{ damage }} physical damage</physicalDamage> and marking the first enemy or smoke cloud hit.<span class=\"size8\"><br /><br /></span><spellActive>Re-cast:</spellActive> Dash to the marked target, dealing the same damage.",
+          "description": "Flip backward and fire a shuriken forward, dealing physical damage. The first enemy or smoke cloud hit is marked. Re-cast to dash to the marked target, dealing additional damage.",
+          "tooltip": "Flip backward and fire a shuriken forward, dealing <physicalDamage>{{ damage }} physical damage</physicalDamage> and marking the first enemy or smoke cloud hit.<span class=\"size8\"><br /><br /></span><spellActive>Re-cast:</spellActive> Dash to the marked target, dealing <physicalDamage>{{ e2damagecalc }} physical damage</physicalDamage>.",
           "leveltip": {
             "label": [
               "Damage",
-              "Cooldown"
+              "Cooldown",
+              "Secondary Damage"
             ],
             "effect": [
               "{{ basedamage }} -> {{ basedamageNL }}",
-              "{{ cooldown }} -> {{ cooldownNL }}"
+              "{{ cooldown }} -> {{ cooldownNL }}",
+              "{{ e2damage }} -> {{ e2damageNL }}"
             ]
           },
           "maxrank": 5,
@@ -575,11 +577,11 @@
           },
           "maxrank": 3,
           "cooldown": [
-            120,
             100,
-            80
+            85,
+            70
           ],
-          "cooldownBurn": "120/100/80",
+          "cooldownBurn": "100/85/70",
           "cost": [
             0,
             0,

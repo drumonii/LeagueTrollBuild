@@ -1,6 +1,6 @@
 {
   "type": "item",
-  "version": "9.4.1",
+  "version": "9.6.1",
   "basic": {
     "name": "",
     "rune": {
@@ -903,7 +903,7 @@
     },
     "1051": {
       "name": "Brawler's Gloves",
-      "description": "<unique>UNIQUE Passive:</unique> +10% Critical Strike Chance",
+      "description": "<stats>+10% Critical Strike Chance</stats>",
       "colloq": ";",
       "plaintext": "Slightly increases Critical Strike Chance",
       "into": [
@@ -6238,7 +6238,7 @@
     },
     "3095": {
       "name": "Stormrazor",
-      "description": "<stats>+55 Attack Damage<br>+25% Attack Speed</stats><br><br><unique>UNIQUE Passive - Energized:</unique> Moving and attacking will make an attack <a href='Energized'>Energized</a>. Your Energized attacks deal <magicDamage>50 bonus magic damage</magicDamage> on hit.<br><unique>UNIQUE Passive:</unique> Energized effects have all of their respective effects increased by +30% and also slow for 40% movement speed decaying over 1 seconds.",
+      "description": "<stats>+60 Attack Damage<br>+30% Attack Speed</stats><br><br><unique>UNIQUE Passive - Energized:</unique> Moving and attacking will make an attack <a href='Energized'>Energized</a>. Your Energized attacks deal <magicDamage>50 bonus magic damage</magicDamage> on hit.<br><unique>UNIQUE Passive:</unique> Energized effects have all of their respective effects increased by +30% and also slow for 40% movement speed decaying over 1 seconds.",
       "colloq": ";Windblade",
       "plaintext": "Tremendously empower other Energized effects.",
       "from": [
@@ -6272,8 +6272,8 @@
         "12": true
       },
       "stats": {
-        "FlatPhysicalDamageMod": 55,
-        "PercentAttackSpeedMod": 0.25
+        "FlatPhysicalDamageMod": 60,
+        "PercentAttackSpeedMod": 0.3
       },
       "effect": {
         "Effect1Amount": "50",
@@ -6346,7 +6346,7 @@
     },
     "3097": {
       "name": "Targon's Brace",
-      "description": "<stats>+125 Health<br>+50% Base Health Regen <br>+1 Gold per 10 seconds </stats><br><br><unique>UNIQUE Passive - Spoils of War:</unique> Melee basic attacks execute minions below 200 (+15 per level) Health. Killing a minion heals the owner and the nearest allied champion for 40 Health (+2% missing health) and grants them kill Gold. 50% healing if the owner is ranged. These effects require a nearby ally. Recharges every 30 seconds. Max 3 charges.<hr><passive>QUEST:</passive> Earn 500 gold using this item.<br><passive>REWARD:</passive> Gain <active>UNIQUE Active - Warding:</active> Consumes a charge to place a <font color='#BBFFFF'>Stealth Ward</font> that reveals the surrounding area for 150 seconds.  Holds up to 3 charges which refill upon visiting the shop.<br><br><groupLimit>Limited to 1 Gold Income or Jungle item.</groupLimit>",
+      "description": "<stats>+125 Health<br>+50% Base Health Regen <br>+1 Gold per 10 seconds </stats><br><br><unique>UNIQUE Passive - Spoils of War:</unique> Melee basic attacks execute minions below 200 (+15 per level) Health. Killing a minion heals the owner and the nearest allied champion for 10 to 60 (based on missing health) and grants them kill Gold. 50% healing if the owner is ranged. These effects require a nearby ally. Recharges every 30 seconds. Max 3 charges.<hr><passive>QUEST:</passive> Earn 500 gold using this item.<br><passive>REWARD:</passive> Gain <active>UNIQUE Active - Warding:</active> Consumes a charge to place a <font color='#BBFFFF'>Stealth Ward</font> that reveals the surrounding area for 150 seconds.  Holds up to 3 charges which refill upon visiting the shop.<br><br><groupLimit>Limited to 1 Gold Income or Jungle item.</groupLimit>",
       "colloq": "Celestial Eye;",
       "plaintext": "Periodically kill enemy minions to heal and grant gold to a nearby ally",
       "from": [
@@ -6387,7 +6387,7 @@
       },
       "effect": {
         "Effect1Amount": "200",
-        "Effect2Amount": "40",
+        "Effect2Amount": "10",
         "Effect3Amount": "1",
         "Effect4Amount": "0",
         "Effect5Amount": "0",
@@ -6401,7 +6401,7 @@
         "Effect13Amount": "3",
         "Effect14Amount": "0",
         "Effect15Amount": "15",
-        "Effect16Amount": "0.02",
+        "Effect16Amount": "60",
         "Effect17Amount": "0.5",
         "Effect18Amount": "10"
       },
@@ -9928,7 +9928,7 @@
     },
     "3302": {
       "name": "Relic Shield",
-      "description": "<stats>+50 Health<br>+1 Gold per 10 seconds </stats><br><br><unique>UNIQUE Passive - Spoils of War:</unique> Melee basic attacks execute minions below 195 (+5 per level) Health. Killing a minion heals the owner and the nearest allied champion for 15 Health (+2% missing health) and grants them kill Gold. 50% healing if the owner is ranged. These effects require a nearby ally. Recharges every 40 seconds. Max 2 charges.<hr><passive>QUEST:</passive> Earn 500 gold using this item and upgrade to <font color='#CFBF84'>Targon's Brace</font>.<br><passive>REWARD:</passive> Gain <active>UNIQUE Active - Warding:</active> Consumes a charge to place a <font color='#BBFFFF'>Stealth Ward</font> that reveals the surrounding area for 150 seconds.  Holds up to 3 charges which refill upon visiting the shop.<br><br><groupLimit>Limited to 1 Gold Income or Jungle item.</groupLimit>",
+      "description": "<stats>+50 Health<br>+1 Gold per 10 seconds </stats><br><br><unique>UNIQUE Passive - Spoils of War:</unique> Melee basic attacks execute minions below 195 (+5 per level) Health. Killing a minion heals the owner and the nearest allied champion for 5 to 30 (based on missing health) and grants them kill Gold. 50% healing if the owner is ranged. These effects require a nearby ally. Recharges every 40 seconds. Max 2 charges.<hr><passive>QUEST:</passive> Earn 500 gold using this item and upgrade to <font color='#CFBF84'>Targon's Brace</font>.<br><passive>REWARD:</passive> Gain <active>UNIQUE Active - Warding:</active> Consumes a charge to place a <font color='#BBFFFF'>Stealth Ward</font> that reveals the surrounding area for 150 seconds.  Holds up to 3 charges which refill upon visiting the shop.<br><br><groupLimit>Limited to 1 Gold Income or Jungle item.</groupLimit>",
       "colloq": ";",
       "plaintext": "Kill minions periodically to heal and grant gold to a nearby ally",
       "into": [
@@ -9965,7 +9965,7 @@
       },
       "effect": {
         "Effect1Amount": "195",
-        "Effect2Amount": "15",
+        "Effect2Amount": "5",
         "Effect3Amount": "1",
         "Effect4Amount": "0",
         "Effect5Amount": "0",
@@ -9979,7 +9979,7 @@
         "Effect13Amount": "2",
         "Effect14Amount": "0",
         "Effect15Amount": "5",
-        "Effect16Amount": "0.02",
+        "Effect16Amount": "30",
         "Effect17Amount": "0.5",
         "Effect18Amount": "10"
       }
@@ -10215,7 +10215,7 @@
     },
     "3307": {
       "name": "Timeworn Relic Shield",
-      "description": "<stats>+50 Health<br>+2 Gold per 10 seconds </stats><br><br><unique>UNIQUE Passive - Spoils of War:</unique> Melee basic attacks execute minions below 195 (+5 per level) Health. Killing a minion heals the owner and the nearest allied champion for 15 Health (+2% missing health) and grants them kill Gold. Healing is halved if the owner is ranged. These effects require a nearby ally. Recharges every 40 seconds. Max 2 charges.<hr><passive>QUEST:</passive> Earn 750 gold using this item and upgrade to <font color='#CFBF84'>Timeworn Targon's Brace</font>.<br><passive>REWARD:</passive> <font color='#CFBF84'>Shield Battery</font>, a permanent shield that regenerates slowly outside of combat.<br><br><groupLimit>Limited to 1 Gold Income or Jungle item.</groupLimit>",
+      "description": "<stats>+50 Health<br>+2 Gold per 10 seconds </stats><br><br><unique>UNIQUE Passive - Spoils of War:</unique> Melee basic attacks execute minions below 195 (+5 per level) Health. Killing a minion heals the owner and the nearest allied champion for 5 to 30 (based on missing health) and grants them kill Gold. Healing is halved if the owner is ranged. These effects require a nearby ally. Recharges every 40 seconds. Max 2 charges.<hr><passive>QUEST:</passive> Earn 750 gold using this item and upgrade to <font color='#CFBF84'>Timeworn Targon's Brace</font>.<br><passive>REWARD:</passive> <font color='#CFBF84'>Shield Battery</font>, a permanent shield that regenerates slowly outside of combat.<br><br><groupLimit>Limited to 1 Gold Income or Jungle item.</groupLimit>",
       "colloq": ";",
       "plaintext": "Kill minions periodically to heal and grant gold to a nearby ally",
       "into": [
@@ -10252,7 +10252,7 @@
       },
       "effect": {
         "Effect1Amount": "195",
-        "Effect2Amount": "15",
+        "Effect2Amount": "5",
         "Effect3Amount": "2",
         "Effect4Amount": "0",
         "Effect5Amount": "0",
@@ -10266,14 +10266,14 @@
         "Effect13Amount": "2",
         "Effect14Amount": "0",
         "Effect15Amount": "5",
-        "Effect16Amount": "0.02",
+        "Effect16Amount": "30",
         "Effect17Amount": "0.5",
         "Effect18Amount": "10"
       }
     },
     "3308": {
       "name": "Timeworn Targon's Brace",
-      "description": "<stats>+125 Health<br>+50% Base Health Regen <br>+4 Gold per 10 seconds </stats><br><br><unique>UNIQUE Passive - Spoils of War:</unique> Melee basic attacks execute minions below 200 (+10 per level) Health. Killing a minion heals the owner and the nearest allied champion for 40 Health (+2% missing health) and grants them kill Gold. Healing is halved if the owner is ranged. These effects require a nearby ally. Recharges every 30 seconds. Max 3 charges.<hr><passive>QUEST:</passive> Earn 750 gold using this item.<br><passive>REWARD:</passive> <font color='#CFBF84'>Shield Battery</font>, a permanent shield that regenerates slowly outside of combat.<br><br><groupLimit>Limited to 1 Gold Income or Jungle item.</groupLimit>",
+      "description": "<stats>+125 Health<br>+50% Base Health Regen <br>+4 Gold per 10 seconds </stats><br><br><unique>UNIQUE Passive - Spoils of War:</unique> Melee basic attacks execute minions below 200 (+10 per level) Health. Killing a minion heals the owner and the nearest allied champion for 10 to 60 (based on missing health) and grants them kill Gold. Healing is halved if the owner is ranged. These effects require a nearby ally. Recharges every 30 seconds. Max 3 charges.<hr><passive>QUEST:</passive> Earn 750 gold using this item.<br><passive>REWARD:</passive> <font color='#CFBF84'>Shield Battery</font>, a permanent shield that regenerates slowly outside of combat.<br><br><groupLimit>Limited to 1 Gold Income or Jungle item.</groupLimit>",
       "colloq": ";",
       "plaintext": "Periodically kill enemy minions to heal and grant gold to a nearby ally",
       "from": [
@@ -10314,7 +10314,7 @@
       },
       "effect": {
         "Effect1Amount": "200",
-        "Effect2Amount": "40",
+        "Effect2Amount": "10",
         "Effect3Amount": "2",
         "Effect4Amount": "0",
         "Effect5Amount": "0",
@@ -10328,7 +10328,7 @@
         "Effect13Amount": "3",
         "Effect14Amount": "0",
         "Effect15Amount": "10",
-        "Effect16Amount": "0.02",
+        "Effect16Amount": "60",
         "Effect17Amount": "0.5",
         "Effect18Amount": "10"
       },
@@ -10336,7 +10336,7 @@
     },
     "3309": {
       "name": "Timeworn Face of the Mountain",
-      "description": "<stats>+350 Health<br>+100% Base Health Regen <br>+10% Cooldown Reduction<br>+4 Gold per 10 seconds </stats><br><br><unique>UNIQUE Passive - Spoils of War:</unique> Melee basic attacks execute minions below 320 (+20 per level) Health. Killing a minion heals the owner and the nearest allied champion for 50 Health (+2% missing health) and grants them kill Gold. Healing is halved if the owner is ranged. These effects require a nearby ally. Recharges every 20 seconds. Max 4 charges.<br><unique>UNIQUE Active:</unique> Grant a shield to you and an ally equal to 10% of your maximum Health for 4 seconds. After 4 seconds, the shields explode to slow nearby enemies by 40% for 2 seconds (60 second cooldown).  Automatically targets the most wounded ally if cast upon self.<hr><passive>QUEST:</passive> Earn 750 gold using this item.<br><passive>REWARD:</passive> <font color='#CFBF84'>Shield Battery</font>, a permanent shield that regenerates slowly outside of combat.<br><br><groupLimit>Limited to 1 Gold Income or Jungle item.</groupLimit>",
+      "description": "<stats>+350 Health<br>+100% Base Health Regen <br>+10% Cooldown Reduction<br>+4 Gold per 10 seconds </stats><br><br><unique>UNIQUE Passive - Spoils of War:</unique> Melee basic attacks execute minions below 320 (+20 per level) Health. Killing a minion heals the owner and the nearest allied champion for 15 to 90 (based on missing health) and grants them kill Gold. Healing is halved if the owner is ranged. These effects require a nearby ally. Recharges every 20 seconds. Max 4 charges.<br><unique>UNIQUE Active:</unique> Grant a shield to you and an ally equal to 10% of your maximum Health for 4 seconds. After 4 seconds, the shields explode to slow nearby enemies by 40% for 2 seconds (60 second cooldown).  Automatically targets the most wounded ally if cast upon self.<hr><passive>QUEST:</passive> Earn 750 gold using this item.<br><passive>REWARD:</passive> <font color='#CFBF84'>Shield Battery</font>, a permanent shield that regenerates slowly outside of combat.<br><br><groupLimit>Limited to 1 Gold Income or Jungle item.</groupLimit>",
       "colloq": ";",
       "plaintext": "Shield an ally from damage based on your Health",
       "from": [
@@ -10376,7 +10376,7 @@
       },
       "effect": {
         "Effect1Amount": "320",
-        "Effect2Amount": "50",
+        "Effect2Amount": "15",
         "Effect3Amount": "0.1",
         "Effect4Amount": "4",
         "Effect5Amount": "-0.4",
@@ -10390,7 +10390,7 @@
         "Effect13Amount": "4",
         "Effect14Amount": "0",
         "Effect15Amount": "20",
-        "Effect16Amount": "0.02",
+        "Effect16Amount": "90",
         "Effect17Amount": "0.5",
         "Effect18Amount": "10"
       },
@@ -11598,7 +11598,7 @@
     },
     "3401": {
       "name": "Remnant of the Aspect",
-      "description": "<stats>+350 Health<br>+200% Base Health Regen <br>+10% Cooldown Reduction<br>+1 Gold per 10 seconds </stats><br><br><unique>UNIQUE Passive - Spoils of War:</unique> Melee basic attacks execute minions below 320 (+30 per level) Health. Killing a minion heals the owner and the nearest allied champion for 50 Health (+2% missing health) and grants them kill Gold. 50% healing if the owner is ranged. These effects require a nearby ally. Recharges every 20 seconds. Max 4 charges.<hr><passive>QUEST:</passive> Earn 500 gold using this item.<br><passive>REWARD:</passive> Gain <active>UNIQUE Active - Warding:</active> Consumes a charge to place a <font color='#BBFFFF'>Stealth Ward</font> that reveals the surrounding area for 150 seconds.  Holds up to 4 charges which refill upon visiting the shop.<br><br><groupLimit>Limited to 1 Gold Income or Jungle item.</groupLimit>",
+      "description": "<stats>+350 Health<br>+200% Base Health Regen <br>+10% Cooldown Reduction<br>+1 Gold per 10 seconds </stats><br><br><unique>UNIQUE Passive - Spoils of War:</unique> Melee basic attacks execute minions below 320 (+30 per level) Health. Killing a minion heals the owner and the nearest allied champion for 15 to 90 (based on missing health) and grants them kill Gold. 50% healing if the owner is ranged. These effects require a nearby ally. Recharges every 20 seconds. Max 4 charges.<hr><passive>QUEST:</passive> Earn 500 gold using this item.<br><passive>REWARD:</passive> Gain <active>UNIQUE Active - Warding:</active> Consumes a charge to place a <font color='#BBFFFF'>Stealth Ward</font> that reveals the surrounding area for 150 seconds.  Holds up to 4 charges which refill upon visiting the shop.<br><br><groupLimit>Limited to 1 Gold Income or Jungle item.</groupLimit>",
       "colloq": "Eye of the Aspect;",
       "plaintext": "Provides Health and Stealth Wards over time",
       "from": [
@@ -11637,7 +11637,7 @@
       },
       "effect": {
         "Effect1Amount": "320",
-        "Effect2Amount": "50",
+        "Effect2Amount": "15",
         "Effect3Amount": "0.1",
         "Effect4Amount": "4",
         "Effect5Amount": "-0.4",
@@ -11651,7 +11651,7 @@
         "Effect13Amount": "4",
         "Effect14Amount": "0",
         "Effect15Amount": "30",
-        "Effect16Amount": "0.02",
+        "Effect16Amount": "90",
         "Effect17Amount": "0.5",
         "Effect18Amount": "10"
       },
@@ -14684,7 +14684,7 @@
     },
     "4302": {
       "name": "Heart of Targon",
-      "description": "<stats>+60 Health<br>+50% Base Health Regen <br>+5 Gold per 10 seconds </stats><br><br><unique>UNIQUE Passive - Spoils of War:</unique> Melee basic attacks execute minions below 200 (+40 per level) Health. Killing a minion heals the owner and the nearest allied champion for 25 Health (+2% missing health) and grants them kill Gold. 50% healing if the owner is ranged. These effects require a nearby ally. Recharges every 20 seconds. Max 3 charges.<br><br><groupLimit>Limited to 1 Starter item.</groupLimit>",
+      "description": "<stats>+60 Health<br>+50% Base Health Regen <br>+5 Gold per 10 seconds </stats><br><br><unique>UNIQUE Passive - Spoils of War:</unique> Melee basic attacks execute minions below 200 (+40 per level) Health. Killing a minion heals the owner and the nearest allied champion for 10 to 60 (based on missing health) and grants them kill Gold. 50% healing if the owner is ranged. These effects require a nearby ally. Recharges every 20 seconds. Max 3 charges.<br><br><groupLimit>Limited to 1 Starter item.</groupLimit>",
       "colloq": ";Targon's Brace;Relic Shield;Support",
       "plaintext": "Kill minions periodically to heal and grant gold to a nearby ally",
       "image": {
@@ -14719,7 +14719,7 @@
       },
       "effect": {
         "Effect1Amount": "200",
-        "Effect2Amount": "25",
+        "Effect2Amount": "10",
         "Effect3Amount": "5",
         "Effect4Amount": "0",
         "Effect5Amount": "0",
@@ -14733,7 +14733,7 @@
         "Effect13Amount": "3",
         "Effect14Amount": "0",
         "Effect15Amount": "40",
-        "Effect16Amount": "0.02",
+        "Effect16Amount": "60",
         "Effect17Amount": "0.5",
         "Effect18Amount": "10"
       }
@@ -15082,6 +15082,10 @@
     {
       "id": "StopwatchGroup",
       "MaxGroupOwnable": "-1"
+    },
+    {
+      "id": "TearItems",
+      "MaxGroupOwnable": "1"
     },
     {
       "id": "TheBlackSpear",

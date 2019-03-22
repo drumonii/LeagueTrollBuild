@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.4.1",
+  "version": "9.6.1",
   "data": {
     "Ekko": {
       "id": "Ekko",
@@ -566,16 +566,16 @@
           "id": "EkkoR",
           "name": "Chronobreak",
           "description": "Ekko shatters his timeline, becoming untargetable and rewinding to a more favorable point in time. He returns to whenever he was a few seconds ago, and heals for a percentage of the damage received in that duration. Enemies near his arrival zone take massive damage.",
-          "tooltip": "Ekko turns back time, going briefly untargetable and invulnerable. He teleports to where he was 4 seconds ago and deals {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage to nearby enemies on arrival. Additionally, Ekko heals for {{ e3 }} <scaleAP>(+{{ a2 }})</scaleAP>, increased by {{ e5 }}% for each 1% of his health lost over the last 4 seconds.",
+          "tooltip": "Ekko turns back time, going briefly untargetable and invulnerable. He teleports to where he was 4 seconds ago and deals <magicDamage>{{ totaldamage }} magic damage</magicDamage> to nearby enemies on arrival. Additionally, Ekko heals for <healing>{{ totalbaseheal }}</healing>, increased by {{ percenthealampperpercentmissinghealth }}% for each 1% of his health lost over the last 4 seconds.",
           "leveltip": {
             "label": [
               "Damage",
-              "Flat Heal",
+              "Healing",
               "Cooldown"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
-              "{{ e3 }} -> {{ e3NL }}",
+              "{{ damage }} -> {{ damageNL }}",
+              "{{ flatheal }} -> {{ flathealNL }}",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
@@ -596,29 +596,29 @@
           "effect": [
             null,
             [
-              150,
-              300,
-              450
+              0,
+              0,
+              0
             ],
             [
-              20,
-              20,
-              20
+              0,
+              0,
+              0
             ],
             [
-              100,
-              150,
-              200
+              0,
+              0,
+              0
             ],
             [
-              375,
-              375,
-              375
+              0,
+              0,
+              0
             ],
             [
-              3,
-              3,
-              3
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -648,29 +648,18 @@
           ],
           "effectBurn": [
             null,
-            "150/300/450",
-            "20",
-            "100/150/200",
-            "375",
-            "3",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
             "0",
             "0",
             "0",
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 1.5,
-              "key": "a1"
-            },
-            {
-              "link": "spelldamage",
-              "coeff": 0.6,
-              "key": "a2"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [

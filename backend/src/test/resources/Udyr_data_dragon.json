@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.4.1",
+  "version": "9.6.1",
   "data": {
     "Udyr": {
       "id": "Udyr",
@@ -100,8 +100,16 @@
           "description": "Tiger Stance: Activation - Udyr's Attack Speed is increased for a few seconds. Persistent Effect - Udyr's first attack and every third attack after will deal a high amount of damage over 2 seconds.",
           "tooltip": "<spellPassive>Persistent Effect: </spellPassive>Udyr's first attack and every third attack after will perform a Tiger Strike, dealing bonus {{ e1 }} <scaleAD>(+{{ f2 }})</scaleAD> physical damage over {{ e5 }} seconds. <br /><br />If a target is affected by Tiger Strike, a new application of Tiger Strike will deal the remaining damage instantly.<br /><br /><spellPassive>Activation:</spellPassive> Increases Attack Speed by {{ e2 }}% for {{ e6 }} seconds.<br /><br /><rules><span class=\"color8c8c8c\">Udyr's stance mana costs decrease by 1 each time he levels up.</span></rules>",
           "leveltip": {
-            "label": [],
-            "effect": []
+            "label": [
+              "Base Damage",
+              "Total AD Ratio",
+              "Attack Speed %"
+            ],
+            "effect": [
+              "{{ e1 }} -> {{ e1NL }}",
+              "{{ e4 }}% -> {{ e4NL }}%",
+              "{{ e2 }}% -> {{ e2NL }}%"
+            ]
           },
           "maxrank": 5,
           "cooldown": [

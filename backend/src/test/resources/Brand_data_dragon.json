@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.4.1",
+  "version": "9.6.1",
   "data": {
     "Brand": {
       "id": "Brand",
@@ -59,6 +59,12 @@
           "num": 6,
           "name": "Battle Boss Brand",
           "chromas": false
+        },
+        {
+          "id": "63007",
+          "num": 7,
+          "name": "Arclight Brand",
+          "chromas": true
         }
       ],
       "lore": "Once a tribesman of the icy Freljord named Kegan Rodhe, the creature known as Brand is a lesson in the temptation of greater power. Seeking one of the legendary World Runes, Kegan betrayed his companions and seized it for himself—and, in an instant, the man was no more. His soul burned away, his body a vessel of living flame, Brand now roams Valoran in search of other Runes, swearing revenge for wrongs he could never possibly have suffered in a dozen mortal lifetimes.",
@@ -555,7 +561,7 @@
           "id": "BrandR",
           "name": "Pyroclasm",
           "description": "Brand unleashes a devastating torrent of fire, dealing magic damage each time it bounces, up to 5 bounces. Bounces prioritize stacking Blaze to max on Champions. If a target is ablaze, Pyroclasm will briefly slow them.",
-          "tooltip": "Brand unleashes a devastating torrent of fire, dealing {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage each time it bounces up to 5 bounces. Bounces prioritize stacking Blaze to max on Champions.<br /><br /><span class=\"colorDDDD77\">Blaze:</span> If the target is ablaze, Pyroclasm will briefly slow the target by {{ e4 }}%.",
+          "tooltip": "Brand unleashes a devastating torrent of fire, dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage> each time it bounces up to 5 bounces. Bounces prioritize stacking Blaze to max on Champions.<br /><br /><span class=\"colorDDDD77\">Blaze:</span> If the target is ablaze, Pyroclasm will briefly slow the target by {{ slowamount }}%.",
           "leveltip": {
             "label": [
               "Damage per Bounce",
@@ -563,8 +569,8 @@
               "Cooldown"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
-              "{{ e4 }}% -> {{ e4NL }}%",
+              "{{ basedamage }} -> {{ basedamageNL }}",
+              "{{ slowamount }}% -> {{ slowamountNL }}%",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
@@ -585,29 +591,29 @@
           "effect": [
             null,
             [
-              100,
-              200,
-              300
+              0,
+              0,
+              0
             ],
             [
-              5,
-              7,
-              9
+              0,
+              0,
+              0
             ],
             [
-              150,
-              225,
-              300
+              0,
+              0,
+              0
             ],
             [
-              30,
-              45,
-              60
+              0,
+              0,
+              0
             ],
             [
-              0.25,
-              0.25,
-              0.25
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -637,24 +643,18 @@
           ],
           "effectBurn": [
             null,
-            "100/200/300",
-            "5/7/9",
-            "150/225/300",
-            "30/45/60",
-            "0.25",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
             "0",
             "0",
             "0",
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.25,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [

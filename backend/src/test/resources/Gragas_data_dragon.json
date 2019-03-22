@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.4.1",
+  "version": "9.6.1",
   "data": {
     "Gragas": {
       "id": "Gragas",
@@ -579,14 +579,14 @@
           "id": "GragasR",
           "name": "Explosive Cask",
           "description": "Gragas hurls his cask to a location, dealing damage and knocking back enemies caught in the blast radius.",
-          "tooltip": "Gragas hurls his cask, causing it to explode when it lands. Enemies hit take {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage and are knocked away from the explosion.",
+          "tooltip": "Gragas hurls his cask, causing it to explode when it lands. Enemies hit take {{ basedamage }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage and are knocked away from the explosion.",
           "leveltip": {
             "label": [
               "Damage",
               "Cooldown"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
+              "{{ basedamage }} -> {{ basedamageNL }}",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },

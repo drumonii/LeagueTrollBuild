@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.4.1",
+  "version": "9.6.1",
   "data": {
     "Karthus": {
       "id": "Karthus",
@@ -543,14 +543,14 @@
           "id": "KarthusFallenOne",
           "name": "Requiem",
           "description": "After channeling for 3 seconds, Karthus deals damage to all enemy champions.",
-          "tooltip": "After channeling for 3 seconds, Karthus deals {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage to all enemy champions (regardless of distance). ",
+          "tooltip": "After channeling for 3 seconds, Karthus deals <magicDamage>{{ totaldamage }} magic damage</magicDamage> to all enemy champions (regardless of distance). ",
           "leveltip": {
             "label": [
               "Damage",
               "Cooldown"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
+              "{{ basedamage }} -> {{ basedamageNL }}",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
@@ -571,14 +571,14 @@
           "effect": [
             null,
             [
-              250,
-              400,
-              550
+              0,
+              0,
+              0
             ],
             [
-              200,
-              300,
-              400
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -623,8 +623,8 @@
           ],
           "effectBurn": [
             null,
-            "250/400/550",
-            "200/300/400",
+            "0",
+            "0",
             "0",
             "0",
             "0",
@@ -634,13 +634,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.75,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [

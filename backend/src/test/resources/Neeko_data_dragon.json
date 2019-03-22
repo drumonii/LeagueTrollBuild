@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.4.1",
+  "version": "9.6.1",
   "data": {
     "Neeko": {
       "id": "Neeko",
@@ -70,8 +70,8 @@
         "crit": 0,
         "critperlevel": 0,
         "attackdamage": 52,
-        "attackdamageperlevel": 3,
-        "attackspeedperlevel": 3.5,
+        "attackdamageperlevel": 2,
+        "attackspeedperlevel": 2.5,
         "attackspeed": 0.645
       },
       "spells": [
@@ -364,12 +364,12 @@
         {
           "id": "NeekoE",
           "name": "Tangle-Barbs",
-          "description": "Neeko slings a tangle that damage and root everything it passes through, rooting the last champion for a longer duration. If the tangle passes through 2 units it becomes larger, faster and roots for longer.",
-          "tooltip": "Neeko slings a tangle that deals {{ basedamage }} magic damage and roots for {{ baserootduration }} seconds. The last champion hit is rooted for {{ minrootduration }} seconds instead.<br /><br />The tangle becomes empowered after hitting {{ targetsrequiredformaxvalue }} enemies, growing larger, moving faster and rooting the last champion hit for {{ maxrootduration }} seconds.",
+          "description": "Neeko slings a tangle that damage and root everything it passes through. If the tangle kills an enemy or passes through a champion, it becomes larger, faster, and roots for longer.",
+          "tooltip": "Neeko slings a tangle that deals {{ basedamage }} magic damage and roots for {{ minrootduration }} seconds.<br /><br />The tangle becomes empowered after hitting an enemy, growing larger, moving faster, and rooting for {{ maxrootduration }} seconds.",
           "leveltip": {
             "label": [
               "Damage",
-              "Last Champion Root Duration",
+              "Minimum Root Duration",
               "Empowered Root Duration",
               "Cooldown",
               "@AbilityResourceName@ Cost"

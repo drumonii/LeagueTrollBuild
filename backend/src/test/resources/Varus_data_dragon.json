@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.4.1",
+  "version": "9.6.1",
   "data": {
     "Varus": {
       "id": "Varus",
@@ -117,17 +117,17 @@
           "id": "VarusQ",
           "name": "Piercing Arrow",
           "description": "Varus readies and then fires a powerful shot that gains extra range and damage the longer he spends preparing to fire.",
-          "tooltip": "<span class=\"colorFF9900\">First Cast:</span> Varus starts drawing back his next shot, gradually increasing its range and damage. While preparing to shoot Varus' Movement Speed is slowed by {{ e7 }}%. After {{ e5 }} seconds, Piercing Arrow fails but refunds {{ e4 }}% of its Mana cost.<br /><br /><span class=\"colorFF9900\">Second Cast:</span> Varus fires, dealing {{ e1 }}<span class=\"colorFF8C00\"> (+{{ a1 }})</span> to {{ e2 }}<span class=\"colorFF8C00\"> (+{{ a2 }})</span> physical damage, reduced by {{ e3 }}% per enemy hit (minimum {{ e9 }}%).<br /><br />Piercing Arrow's cooldown is reduced by {{ f1 }} seconds if the arrow detonates <span class=\"colorB829FF\">Blight</span> stacks on at least one enemy champion.",
+          "tooltip": "<span class=\"colorFF9900\">First Cast:</span> Varus starts drawing back his next shot, gradually increasing its range and damage. While preparing to shoot Varus' Movement Speed is slowed by {{ e7 }}%. After {{ e5 }} seconds, Piercing Arrow fails but refunds {{ e4 }}% of its Mana cost.<br /><br /><span class=\"colorFF9900\">Second Cast:</span> Varus fires, dealing <physicalDamage>{{ totaldamagemintooltip }}</physicalDamage> to <physicalDamage>{{ totaldamagemax }} physical damage</physicalDamage>, reduced by {{ e3 }}% per enemy hit (minimum {{ e9 }}%).<br /><br />Piercing Arrow's cooldown is reduced by {{ f1 }} seconds if the arrow detonates <span class=\"colorB829FF\">Blight</span> stacks on at least one enemy champion.",
           "leveltip": {
             "label": [
-              "Max Damage",
+              "Maximum Damage",
               "Cooldown",
               "Mana Cost"
             ],
             "effect": [
-              "{{ e2 }} -> {{ e2NL }}",
+              "{{ basedamagemax }} -> {{ basedamagemaxNL }}",
               "{{ cooldown }} -> {{ cooldownNL }}",
-              "{{ cost }} -> {{ costNL }}"
+              "{{ basecost }} -> {{ basecostNL }}"
             ]
           },
           "maxrank": 5,
@@ -151,18 +151,18 @@
           "effect": [
             null,
             [
-              10,
-              46,
-              83,
-              120,
-              156
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              15,
-              70,
-              125,
-              180,
-              235
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               15,
@@ -223,8 +223,8 @@
           ],
           "effectBurn": [
             null,
-            "10/46/83/120/156",
-            "15/70/125/180/235",
+            "0",
+            "0",
             "15",
             "50",
             "4",
@@ -237,21 +237,11 @@
           "vars": [
             {
               "link": "attackdamage",
-              "coeff": 1.1,
-              "key": "a1"
-            },
-            {
-              "link": "attackdamage",
-              "coeff": 1.65,
-              "key": "a2"
-            },
-            {
-              "link": "attackdamage",
               "coeff": 1,
               "key": "f1"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             925,
@@ -270,7 +260,7 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "VarusW",

@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.4.1",
+  "version": "9.6.1",
   "data": {
     "Braum": {
       "id": "Braum",
@@ -551,7 +551,7 @@
           "id": "BraumRWrapper",
           "name": "Glacial Fissure",
           "description": "Braum slams the ground, knocking up enemies nearby and in a line in front of him. A fissure is left along the line that slows enemies.",
-          "tooltip": "Braum slams the ground, knocking up enemies nearby and in a line in front of him. A fissure is left along the line for {{ e3 }} seconds, slowing enemies above it by {{ e4 }}%.<br /><br />Enemies hit take {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage. The first champion hit is knocked up for {{ e5 }} seconds, subsequent enemies are knocked up briefly.",
+          "tooltip": "Braum slams the ground, knocking up enemies nearby and in a line in front of him. A fissure is left along the line for {{ slowzoneduration }} seconds, slowing enemies above it by {{ movespeedmod }}%.<br /><br />Enemies hit take <magicDamage>{{ totaldamage }} magic damage</magicDamage>. The first champion hit is knocked up for {{ slowdebuffduration }} seconds, subsequent enemies are knocked up briefly.",
           "leveltip": {
             "label": [
               "Damage",
@@ -560,9 +560,9 @@
               "Cooldown"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
-              "{{ e5 }} -> {{ e5NL }}",
-              "{{ e4 }}% -> {{ e4NL }}%",
+              "{{ basedamage }} -> {{ basedamageNL }}",
+              "{{ knockupduration }} -> {{ knockupdurationNL }}",
+              "{{ movespeedmod }}% -> {{ movespeedmodNL }}%",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
@@ -583,34 +583,34 @@
           "effect": [
             null,
             [
-              150,
-              250,
-              350
+              0,
+              0,
+              0
             ],
             [
-              0.3,
-              0.3,
-              0.3
+              0,
+              0,
+              0
             ],
             [
-              4,
-              4,
-              4
+              0,
+              0,
+              0
             ],
             [
-              40,
-              50,
-              60
+              0,
+              0,
+              0
             ],
             [
-              1,
-              1.25,
-              1.5
+              0,
+              0,
+              0
             ],
             [
-              0.25,
-              0.25,
-              0.25
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -635,24 +635,18 @@
           ],
           "effectBurn": [
             null,
-            "150/250/350",
-            "0.3",
-            "4",
-            "40/50/60",
-            "1/1.25/1.5",
-            "0.25",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
             "0",
             "0",
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.6,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [

@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.4.1",
+  "version": "9.6.1",
   "data": {
     "Lux": {
       "id": "Lux",
@@ -573,7 +573,7 @@
           "id": "LuxMaliceCannon",
           "name": "Final Spark",
           "description": "After gathering energy, Lux fires a beam of light that deals damage to all targets in the area. If Final Spark helps take down a champion, part of its cooldown is refunded. In addition, triggers Lux's passive ability and refreshes the Illumination debuff duration.",
-          "tooltip": "Fires a dazzling ray of light dealing {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage to all enemies in a line. Enemy champions that die within {{ e4 }} seconds of being hit by Final Spark refund {{ e3 }}% of its cooldown.<br /><br />Final Spark ignites and refreshes the Illumination debuff.",
+          "tooltip": "Fires a dazzling ray of light dealing <magicDamage>{{ totaldamage }}</magicDamage> magic damage to all enemies in a line. Enemy champions that die within {{ resetassistwindow }} seconds of being hit by Final Spark refund {{ resetpercent*100 }}% of its cooldown.<br /><br />Final Spark ignites and refreshes the Illumination debuff.",
           "leveltip": {
             "label": [
               "Damage",
@@ -581,8 +581,8 @@
               "Cooldown"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
-              "{{ effect3amount*100.000000 }} -> {{ effect3amountnl*100.000000 }}",
+              "{{ damage }} -> {{ damageNL }}",
+              "{{ resetpercent*100.000000 }} -> {{ resetpercentnl*100.000000 }}",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
@@ -603,24 +603,24 @@
           "effect": [
             null,
             [
-              300,
-              400,
-              500
+              0,
+              0,
+              0
             ],
             [
-              1,
-              1,
-              1
+              0,
+              0,
+              0
             ],
             [
-              30,
-              40,
-              50
+              0,
+              0,
+              0
             ],
             [
-              1.75,
-              1.75,
-              1.75
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -655,10 +655,10 @@
           ],
           "effectBurn": [
             null,
-            "300/400/500",
-            "1",
-            "30/40/50",
-            "1.75",
+            "0",
+            "0",
+            "0",
+            "0",
             "0",
             "0",
             "0",
@@ -666,13 +666,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.75,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [

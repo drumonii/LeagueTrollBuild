@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.4.1",
+  "version": "9.6.1",
   "data": {
     "Sylas": {
       "id": "Sylas",
@@ -85,12 +85,14 @@
             "label": [
               "Damage",
               "Cooldown",
-              "Slow"
+              "Slow",
+              "Secondary Damage"
             ],
             "effect": [
               "{{ basedamage }} -> {{ basedamageNL }}",
               "{{ cooldown }} -> {{ cooldownNL }}",
-              "{{ slowamount*100.000000 }}% -> {{ slowamountnl*100.000000 }}%"
+              "{{ slowamount*100.000000 }}% -> {{ slowamountnl*100.000000 }}%",
+              "{{ explosionbasedamage }} -> {{ explosionbasedamageNL }}"
             ]
           },
           "maxrank": 5,
@@ -1882,7 +1884,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3165",
+                  "id": "3100",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1928,7 +1930,7 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
+              "hideIfSummonerSpell": "SummonerSiegeChampSelect1",
               "appendAfterSection": "",
               "visibleWithAllOf": [
                 ""
@@ -1971,17 +1973,17 @@
               ],
               "items": [
                 {
-                  "id": "3165",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
                   "id": "3089",
                   "count": 1,
                   "hideCount": false
                 },
                 {
                   "id": "3135",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3907",
                   "count": 1,
                   "hideCount": false
                 }
@@ -2014,7 +2016,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3907",
+                  "id": "3165",
                   "count": 1,
                   "hideCount": false
                 }

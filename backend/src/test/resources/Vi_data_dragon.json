@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.4.1",
+  "version": "9.6.1",
   "data": {
     "Vi": {
       "id": "Vi",
@@ -107,9 +107,9 @@
         "mpregenperlevel": 0.65,
         "crit": 0,
         "critperlevel": 0,
-        "attackdamage": 64,
+        "attackdamage": 63,
         "attackdamageperlevel": 3.5,
-        "attackspeedperlevel": 2.5,
+        "attackspeedperlevel": 2,
         "attackspeed": 0.644
       },
       "spells": [
@@ -117,7 +117,7 @@
           "id": "ViQ",
           "name": "Vault Breaker",
           "description": "Vi charges her gauntlets and unleashes a vault shattering punch, carrying her forward. Enemies she hits are knocked back and receive a stack of Denting Blows.",
-          "tooltip": "Charges a powerful punch that carries Vi forward.<br /><br /><spellPassive>First Cast:</spellPassive> Slows Movement Speed by {{ e4 }}% while increasing damage and dash range over 1.25 seconds.<br /><br /><spellPassive>Second Cast:</spellPassive> Dashes forward dealing {{ e1 }} <scaleAD>(+{{ a1 }})</scaleAD> to {{ f2 }} <scaleAD>(+{{ f1 }})</scaleAD> physical damage and applying Denting Blows to all enemies hit (deals {{ e3 }}% damage to minions and monsters). Stops upon colliding with an enemy champion, knocking it back.",
+          "tooltip": "Charges a powerful punch that carries Vi forward.<br /><br /><spellPassive>First Cast:</spellPassive> Slows Movement Speed by {{ e4 }}% while increasing damage and dash range over 1.25 seconds.<br /><br /><spellPassive>Second Cast:</spellPassive> Dashes forward dealing {{ e1 }} <scaleAD>(+{{ f3 }})</scaleAD> to {{ f2 }} <scaleAD>(+{{ f1 }})</scaleAD> physical damage and applying Denting Blows to all enemies hit. Stops upon colliding with an enemy champion, knocking it back.",
           "leveltip": {
             "label": [
               "Minimum Damage",
@@ -167,11 +167,11 @@
               2
             ],
             [
-              75,
-              75,
-              75,
-              75,
-              75
+              1,
+              1,
+              1,
+              1,
+              1
             ],
             [
               15,
@@ -227,7 +227,7 @@
             null,
             "55/80/105/130/155",
             "2",
-            "75",
+            "1",
             "15",
             "6",
             "5",
@@ -237,11 +237,6 @@
             "0"
           ],
           "vars": [
-            {
-              "link": "bonusattackdamage",
-              "coeff": 0.8,
-              "key": "a1"
-            },
             {
               "link": "bonusattackdamage",
               "coeff": 1.4,
@@ -273,7 +268,7 @@
           "id": "ViW",
           "name": "Denting Blows",
           "description": "Vi's punches break her opponent's Armor, dealing bonus damage and granting her Attack Speed.",
-          "tooltip": "Every 3rd attack on the same target deals an additional {{ e1 }}% <span class=\"colorFF8C00\">(+{{ f1 }}%)</span> of the target's maximum Health as physical damage, reduces its Armor by {{ e3 }}% and grants Vi {{ e2 }}% Attack Speed for {{ e4 }} seconds (max {{ e5 }} damage vs. monsters).",
+          "tooltip": "Every 3rd attack on the same target deals an additional {{ e1 }}% <span class=\"colorFF8C00\">(+{{ f1 }}%)</span> of the target's maximum Health as physical damage, reduces its Armor by {{ e3 }}% and grants Vi {{ e2 }}% Attack Speed for {{ e4 }} seconds (max {{ e5 }} damage vs. monsters).<br /><br />Triggering Denting Blows reduces the cooldown of Blast Shield by 3 seconds.",
           "leveltip": {
             "label": [
               "Max Health Damage",
@@ -313,10 +308,10 @@
             ],
             [
               30,
-              35,
-              40,
+              37.5,
               45,
-              50
+              52.5,
+              60
             ],
             [
               20,
@@ -378,7 +373,7 @@
           "effectBurn": [
             null,
             "4/5.5/7/8.5/10",
-            "30/35/40/45/50",
+            "30/37.5/45/52.5/60",
             "20",
             "4",
             "300",
@@ -461,11 +456,11 @@
               90
             ],
             [
-              1.15,
-              1.15,
-              1.15,
-              1.15,
-              1.15
+              1.1,
+              1.1,
+              1.1,
+              1.1,
+              1.1
             ],
             [
               50,
@@ -527,7 +522,7 @@
           "effectBurn": [
             null,
             "10/30/50/70/90",
-            "1.15",
+            "1.1",
             "50",
             "1.5",
             "6",
@@ -545,7 +540,7 @@
             },
             {
               "link": "spelldamage",
-              "coeff": 0.7,
+              "coeff": 0.9,
               "key": "a1"
             },
             {
@@ -596,26 +591,26 @@
           "id": "ViR",
           "name": "Assault and Battery",
           "description": "Vi runs down an enemy, knocking aside anyone in the way. When she reaches her target she knocks it into the air, jumps after it, and slams it back into the ground.",
-          "tooltip": "Targets an enemy champion and chases it down, knocking it up for {{ rstunduration }} seconds, dealing </physicalDamage>{{ damage }}<physicalDamage> physical damage.<br /><br />While charging, Vi cannot be stopped and has <span class=\"coloree91d7\">True Sight</span> of the target. Any enemies in the way are knocked aside and dealt {{ secondarytargetdamagemultiplier*100 }}% of the damage.",
+          "tooltip": "Targets an enemy champion and chases it down, knocking it up for {{ rstunduration }} seconds. Deals <physicalDamage>{{ damage }}</physicalDamage> physical damage.<br /><br />While charging, Vi cannot be stopped and has <span class=\"coloree91d7\">True Sight</span> of the target. Any enemies in the way are dealt damage, knocked aside, and stunned for {{ secondarytargetstunduration }} seconds.",
           "leveltip": {
             "label": [
-              "Total Damage",
+              "Base Damage",
               "Cooldown",
               "@AbilityResourceName@ Cost"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
+              "{{ rbasedamage }} -> {{ rbasedamageNL }}",
               "{{ cooldown }} -> {{ cooldownNL }}",
               "{{ cost }} -> {{ costNL }}"
             ]
           },
           "maxrank": 3,
           "cooldown": [
-            110,
-            85,
-            60
+            120,
+            100,
+            80
           ],
-          "cooldownBurn": "110/85/60",
+          "cooldownBurn": "120/100/80",
           "cost": [
             100,
             125,

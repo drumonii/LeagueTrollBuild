@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.4.1",
+  "version": "9.6.1",
   "data": {
     "Rakan": {
       "id": "Rakan",
@@ -244,17 +244,17 @@
           "id": "RakanW",
           "name": "Grand Entrance",
           "description": "Dashes to a location, knocking up nearby enemies on arrival.",
-          "tooltip": "Dashes to a location. Upon arrival Rakan spirals into the air, dealing {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage and knocking up enemies for {{ e3 }} second.",
+          "tooltip": "Dashes to a location. Upon arrival Rakan spirals into the air, dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage> and knocking up enemies for {{ knockupduration }} second.",
           "leveltip": {
             "label": [
               "Damage",
               "Cooldown",
-              "Cost"
+              "Mana Cost"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
+              "{{ basedamage }} -> {{ basedamageNL }}",
               "{{ cooldown }} -> {{ cooldownNL }}",
-              "{{ cost }} -> {{ costNL }}"
+              "{{ basecost }} -> {{ basecostNL }}"
             ]
           },
           "maxrank": 5,
@@ -285,11 +285,11 @@
               250
             ],
             [
-              1400,
-              1400,
-              1400,
-              1400,
-              1400
+              1500,
+              1500,
+              1500,
+              1500,
+              1500
             ],
             [
               1,
@@ -351,7 +351,7 @@
           "effectBurn": [
             null,
             "70/115/160/205/250",
-            "1400",
+            "1500",
             "1",
             "0",
             "0",
@@ -361,14 +361,8 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.7,
-              "key": "a1"
-            }
-          ],
-          "costType": " Mana",
+          "vars": [],
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             600,
@@ -387,7 +381,7 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "RakanE",

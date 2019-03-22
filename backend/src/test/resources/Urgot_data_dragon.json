@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.4.1",
+  "version": "9.6.1",
   "data": {
     "Urgot": {
       "id": "Urgot",
@@ -75,7 +75,7 @@
       "stats": {
         "hp": 585,
         "hpperlevel": 88,
-        "mp": 300,
+        "mp": 340,
         "mpperlevel": 45,
         "movespeed": 330,
         "armor": 36,
@@ -86,7 +86,7 @@
         "hpregen": 7.5,
         "hpregenperlevel": 0.7,
         "mpregen": 7.25,
-        "mpregenperlevel": 0.6,
+        "mpregenperlevel": 0.8,
         "crit": 0,
         "critperlevel": 0,
         "attackdamage": 63,
@@ -247,37 +247,37 @@
         {
           "id": "UrgotW",
           "name": "Purge",
-          "description": "Urgot shields himself, slowing himself while he unloads his weapon on nearby enemies. Prioritizes enemy champions Urgot has recently struck with other abilities and triggers Echoing Flames.",
-          "tooltip": "For {{ e3 }} seconds, Urgot shoots at a nearby enemy {{ e8 }} times a second, dealing {{ e9 }} <scaleAD>(+{{ f3 }})</scaleAD> physical damage per shot, <span class=\"colorFFEB7F\">locking onto</span> champions recently damaged by his other abilities. He also shields himself, absorbing {{ e1 }} <span class=\"colorCC3300\">(+{{ f2 }})</span> damage.<br /><br />While firing, Urgot loses {{ e5 }} movement speed but has {{ e2 }}% slow resistance and can walk over minions and non-epic monsters.<br /><br /><rules><span class=\"color8c8c8c\">Applies on-hits at 33% damage. Cannot critically strike. Minimum of {{ e0 }} damage to minions.</span></rules>",
+          "description": "Urgot slows himself while he unloads his weapon on nearby enemies. Prioritizes enemy champions Urgot has recently struck with other abilities and triggers Echoing Flames.",
+          "tooltip": "For {{ e3 }} seconds, Urgot shoots at a nearby enemy {{ e8 }} times a second, dealing {{ e9 }} <scaleAD>(+{{ f3 }})</scaleAD> physical damage per shot, <span class=\"colorFFEB7F\">locking onto</span> champions recently damaged by his other abilities.<br /><br />While firing, Urgot loses {{ e5 }} movement speed but has {{ e2 }}% slow resistance and can walk over minions and non-epic monsters.<br /><br /><rules><span class=\"color8c8c8c\">At max rank, Purge lasts for an infinite duration and has no cooldown.<br /><br />Applies on-hits at {{ onhitdamagereduction*100 }}% damage. Cannot critically strike. Minimum of {{ e0 }} damage to minions.</span></rules>",
           "leveltip": {
             "label": [
-              "Shield Amount",
+              "Cooldown",
               "Attack Damage Per Shot",
-              "Cooldown"
+              "@AbilityResourceName@ Cost"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
+              "{{ cooldown }} -> {{ cooldownNL }}",
               "{{ e7 }}% -> {{ e7NL }}%",
-              "{{ cooldown }} -> {{ cooldownNL }}"
+              "{{ cost }} -> {{ costNL }}"
             ]
           },
           "maxrank": 5,
           "cooldown": [
-            17,
-            15,
-            13,
-            11,
-            9
+            12,
+            9,
+            6,
+            3,
+            0
           ],
-          "cooldownBurn": "17/15/13/11/9",
+          "cooldownBurn": "12/9/6/3/0",
           "cost": [
-            65,
-            65,
-            65,
-            65,
-            65
+            40,
+            30,
+            20,
+            10,
+            0
           ],
-          "costBurn": "65",
+          "costBurn": "40/30/20/10/0",
           "datavalues": {},
           "effect": [
             null,
@@ -300,7 +300,7 @@
               4,
               4,
               4,
-              4
+              25000
             ],
             [
               450,
@@ -356,7 +356,7 @@
             null,
             "30/60/90/120/150",
             "40",
-            "4",
+            "4/4/4/4/25000",
             "450",
             "125",
             "0.5",
@@ -390,44 +390,46 @@
         {
           "id": "UrgotE",
           "name": "Disdain",
-          "description": "Urgot charges in a direction, trampling non-champion enemies. If he catches an enemy champion, he will stop and hurl them out of his way.",
-          "tooltip": "Urgot charges forwards. If he catches an enemy champion, he will stop and hurl them behind him, dealing {{ e1 }} <scaleAD>(+{{ a1 }})</scaleAD> physical damage and stunning them for {{ e6 }} seconds.<br /><br />Non-champions take the same damage but are knocked aside.<br /><br /><rules><span class=\"color8c8c8c\">Cannot cross terrain.</span></rules>",
+          "description": "Urgot charges in a direction, shielding himself and trampling non-champion enemies. If he catches an enemy champion, he will stop and hurl them out of his way.",
+          "tooltip": "Urgot charges forwards, shielding himself for {{ etotalshieldhealth }} for {{ eshieldduration }} seconds. If he catches an enemy champion, he will stop and hurl them behind him, dealing {{ edamage }} physical damage and stunning them for {{ e6 }} seconds.<br /><br />Non-champions take the same damage but are knocked aside.<br /><br /><rules><span class=\"color8c8c8c\">Cannot cross terrain.</span></rules>",
           "leveltip": {
             "label": [
               "Damage",
-              "Cooldown"
+              "Shield Amount",
+              "@AbilityResourceName@ Cost"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
-              "{{ cooldown }} -> {{ cooldownNL }}"
+              "{{ ebasedamage }} -> {{ ebasedamageNL }}",
+              "{{ eshieldbasehealth }} -> {{ eshieldbasehealthNL }}",
+              "{{ cost }} -> {{ costNL }}"
             ]
           },
           "maxrank": 5,
           "cooldown": [
-            16,
-            15,
             14,
-            13,
-            12
+            14,
+            14,
+            14,
+            14
           ],
-          "cooldownBurn": "16/15/14/13/12",
+          "cooldownBurn": "14",
           "cost": [
             50,
-            50,
-            50,
-            50,
-            50
+            60,
+            70,
+            80,
+            90
           ],
-          "costBurn": "50",
+          "costBurn": "50/60/70/80/90",
           "datavalues": {},
           "effect": [
             null,
             [
-              60,
-              100,
-              140,
-              180,
-              220
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               450,
@@ -495,7 +497,7 @@
           ],
           "effectBurn": [
             null,
-            "60/100/140/180/220",
+            "0",
             "450",
             "1200",
             "100",
@@ -506,13 +508,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "attackdamage",
-              "coeff": 0.5,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -633,11 +629,11 @@
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
-            1600,
-            1600,
-            1600
+            2500,
+            2500,
+            2500
           ],
-          "rangeBurn": "1600",
+          "rangeBurn": "2500",
           "image": {
             "full": "UrgotR.png",
             "sprite": "spell12.png",
@@ -1880,7 +1876,7 @@
               ],
               "items": [
                 {
-                  "id": "3044",
+                  "id": "3067",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1890,7 +1886,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3067",
+                  "id": "3044",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1951,12 +1947,12 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3033",
+                  "id": "3156",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3005",
+                  "id": "3033",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1984,12 +1980,12 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3075",
+                  "id": "3026",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3065",
+                  "id": "3194",
                   "count": 1,
                   "hideCount": false
                 }
