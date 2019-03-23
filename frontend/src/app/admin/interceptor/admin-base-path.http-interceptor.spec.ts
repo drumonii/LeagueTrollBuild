@@ -1,4 +1,4 @@
-import { inject, TestBed } from '@angular/core/testing';
+import { async, inject, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController, RequestMatch } from '@angular/common/http/testing';
 import { HTTP_INTERCEPTORS, HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -7,16 +7,18 @@ import { ADMIN_INTERCEPT_HEADER, ADMIN_INTERCEPT_HEADER_VAL } from '@admin-inter
 
 describe('AdminBasePathHttpInterceptor', () => {
 
-  beforeEach(() => {
+  beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [{
-        provide: HTTP_INTERCEPTORS,
-        useClass: AdminBasePathHttpInterceptor,
-        multi: true
-      }]
+      providers: [
+        {
+          provide: HTTP_INTERCEPTORS,
+          useClass: AdminBasePathHttpInterceptor,
+          multi: true
+        }
+      ]
     });
-  });
+  }));
 
   afterEach(inject([HttpTestingController], (httpMock: HttpTestingController) => {
     httpMock.verify();
