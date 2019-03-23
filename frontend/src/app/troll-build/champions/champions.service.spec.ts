@@ -67,9 +67,7 @@ describe('ChampionsService', () => {
 
       const testReq = httpMock.expectOne(requestMatch);
 
-      const errorEvent = document.createEvent('Event');
-      errorEvent.initEvent('ErrorEvent', false, false);
-      testReq.error(errorEvent as ErrorEvent);
+      testReq.error(new ErrorEvent('An unexpected error occurred'));
     }));
 
   });
@@ -100,9 +98,7 @@ describe('ChampionsService', () => {
 
       const testReq = httpMock.expectOne(requestMatch);
 
-      const errorEvent = document.createEvent('Event');
-      errorEvent.initEvent('ErrorEvent', false, false);
-      testReq.error(errorEvent as ErrorEvent);
+      testReq.error(new ErrorEvent('An unexpected error occurred'));
     }));
 
   });

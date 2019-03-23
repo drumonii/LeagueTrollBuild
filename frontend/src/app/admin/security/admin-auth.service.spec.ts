@@ -111,9 +111,7 @@ describe('AdminAuthService', () => {
       expect(testReq.request.headers.get('content-type')).toBe('application/x-www-form-urlencoded');
       expect(testReq.request.body).toEqual('username=some_username&password=some_password');
 
-      const errorEvent = document.createEvent('Event');
-      errorEvent.initEvent('ErrorEvent', false, false);
-      testReq.error(errorEvent as ErrorEvent);
+      testReq.error(new ErrorEvent('An unexpected error occurred'));
     }));
 
   });
@@ -147,9 +145,7 @@ describe('AdminAuthService', () => {
       const testReq = httpMock.expectOne(requestMatch);
       expect(testReq.request.headers.has(ADMIN_INTERCEPT_HEADER)).toBe(true);
 
-      const errorEvent = document.createEvent('Event');
-      errorEvent.initEvent('ErrorEvent', false, false);
-      testReq.error(errorEvent as ErrorEvent);
+      testReq.error(new ErrorEvent('An unexpected error occurred'));
     }));
 
   });
@@ -192,9 +188,7 @@ describe('AdminAuthService', () => {
       const refreshTestReq = httpMock.expectOne(refreshRequestMatch);
       expect(refreshTestReq.request.headers.has(ADMIN_INTERCEPT_HEADER)).toBe(true);
 
-      const errorEvent = document.createEvent('Event');
-      errorEvent.initEvent('ErrorEvent', false, false);
-      refreshTestReq.error(errorEvent as ErrorEvent);
+      refreshTestReq.error(new ErrorEvent('An unexpected error occurred'));
     }));
 
     it('should remove adminUserDetails in localStorage with REST error',
@@ -207,12 +201,10 @@ describe('AdminAuthService', () => {
       expect(logoutTestReq.request.headers.has(ADMIN_INTERCEPT_HEADER)).toBe(true);
       expect(logoutTestReq.request.body).toEqual({});
 
-      const errorEvent = document.createEvent('Event');
-      errorEvent.initEvent('ErrorEvent', false, false);
-      logoutTestReq.error(errorEvent as ErrorEvent);
+      logoutTestReq.error(new ErrorEvent('An unexpected error occurred'));
 
       const refreshTestReq = httpMock.expectOne(refreshRequestMatch);
-      refreshTestReq.error(errorEvent as ErrorEvent);
+      refreshTestReq.error(new ErrorEvent('An unexpected error occurred'));
     }));
 
   });

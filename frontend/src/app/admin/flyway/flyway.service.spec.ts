@@ -67,9 +67,7 @@ describe('FlywayService', () => {
       const testReq = httpMock.expectOne(requestMatch);
       expect(testReq.request.headers.has(ADMIN_INTERCEPT_HEADER)).toBe(true);
 
-      const errorEvent = document.createEvent('Event');
-      errorEvent.initEvent('ErrorEvent', false, false);
-      testReq.error(errorEvent as ErrorEvent);
+      testReq.error(new ErrorEvent('An unexpected error occurred'));
     }));
 
   });
