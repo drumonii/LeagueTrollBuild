@@ -3,6 +3,7 @@ import { HttpClientTestingModule, HttpTestingController, RequestMatch } from '@a
 
 import { CpuUsageService } from './cpu-usage.service';
 import { ActuatorResponse } from '@admin-model/actuator-response';
+import { ADMIN_INTERCEPT_HEADER } from '@admin-interceptor/admin-http-interceptor-headers';
 
 describe('CpuUsageService', () => {
   beforeEach(() => {
@@ -18,7 +19,7 @@ describe('CpuUsageService', () => {
 
   describe('getCpuUsagePerc', () => {
 
-    const requestMatch: RequestMatch = { method: 'GET', url: '/admin/actuator/metrics/system.cpu.usage' };
+    const requestMatch: RequestMatch = { method: 'GET', url: '/actuator/metrics/system.cpu.usage' };
 
     it('should get cpu usage', inject([CpuUsageService, HttpTestingController],
       (service: CpuUsageService, httpMock: HttpTestingController) => {
@@ -38,6 +39,7 @@ describe('CpuUsageService', () => {
       });
 
       const testReq = httpMock.expectOne(requestMatch);
+      expect(testReq.request.headers.has(ADMIN_INTERCEPT_HEADER)).toBe(true);
 
       testReq.flush(mockActuatorResponse);
     }));
@@ -49,6 +51,7 @@ describe('CpuUsageService', () => {
       });
 
       const testReq = httpMock.expectOne(requestMatch);
+      expect(testReq.request.headers.has(ADMIN_INTERCEPT_HEADER)).toBe(true);
 
       const errorEvent = document.createEvent('Event');
       errorEvent.initEvent('ErrorEvent', false, false);
@@ -59,7 +62,7 @@ describe('CpuUsageService', () => {
 
   describe('getCpuCount', () => {
 
-    const requestMatch: RequestMatch = { method: 'GET', url: '/admin/actuator/metrics/system.cpu.count' };
+    const requestMatch: RequestMatch = { method: 'GET', url: '/actuator/metrics/system.cpu.count' };
 
     it('should get cpu count', inject([CpuUsageService, HttpTestingController],
       (service: CpuUsageService, httpMock: HttpTestingController) => {
@@ -79,6 +82,7 @@ describe('CpuUsageService', () => {
       });
 
       const testReq = httpMock.expectOne(requestMatch);
+      expect(testReq.request.headers.has(ADMIN_INTERCEPT_HEADER)).toBe(true);
 
       testReq.flush(mockActuatorResponse);
     }));
@@ -90,6 +94,7 @@ describe('CpuUsageService', () => {
       });
 
       const testReq = httpMock.expectOne(requestMatch);
+      expect(testReq.request.headers.has(ADMIN_INTERCEPT_HEADER)).toBe(true);
 
       const errorEvent = document.createEvent('Event');
       errorEvent.initEvent('ErrorEvent', false, false);

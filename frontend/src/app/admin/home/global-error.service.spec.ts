@@ -3,6 +3,7 @@ import { HttpClientTestingModule, HttpTestingController, RequestMatch } from '@a
 
 import { GlobalErrorService } from './global-error.service';
 import { ActuatorResponse } from '@admin-model/actuator-response';
+import { ADMIN_INTERCEPT_HEADER } from '@admin-interceptor/admin-http-interceptor-headers';
 
 describe('GlobalErrorService', () => {
   beforeEach(() => {
@@ -18,7 +19,7 @@ describe('GlobalErrorService', () => {
 
   describe('getGlobalErrors', () => {
 
-    const requestMatch: RequestMatch = { method: 'GET', url: '/admin/actuator/metrics/tomcat.global.error' };
+    const requestMatch: RequestMatch = { method: 'GET', url: '/actuator/metrics/tomcat.global.error' };
 
     it('should get global errors', inject([GlobalErrorService, HttpTestingController],
       (service: GlobalErrorService, httpMock: HttpTestingController) => {
@@ -38,6 +39,7 @@ describe('GlobalErrorService', () => {
       });
 
       const testReq = httpMock.expectOne(requestMatch);
+      expect(testReq.request.headers.has(ADMIN_INTERCEPT_HEADER)).toBe(true);
 
       testReq.flush(mockActuatorResponse);
     }));
@@ -49,6 +51,7 @@ describe('GlobalErrorService', () => {
       });
 
       const testReq = httpMock.expectOne(requestMatch);
+      expect(testReq.request.headers.has(ADMIN_INTERCEPT_HEADER)).toBe(true);
 
       const errorEvent = document.createEvent('Event');
       errorEvent.initEvent('ErrorEvent', false, false);

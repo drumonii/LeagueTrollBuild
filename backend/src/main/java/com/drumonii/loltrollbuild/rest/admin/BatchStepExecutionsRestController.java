@@ -18,7 +18,7 @@ import java.util.Optional;
  * Repository REST controller for {@link BatchStepExecution}s.
  */
 @RestController
-@RequestMapping("${api.base-path}/job-instances/{jobInstanceId}/step-executions")
+@RequestMapping("${api.base-path}/admin/job-instances/{jobInstanceId}/step-executions")
 @PreAuthorize("hasRole('ADMIN')")
 public class BatchStepExecutionsRestController {
 

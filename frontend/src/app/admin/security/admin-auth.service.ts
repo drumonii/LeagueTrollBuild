@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { catchError, finalize, map } from 'rxjs/operators';
@@ -8,17 +8,20 @@ import { AdminLogger } from '@admin-service/admin-logger.service';
 import { AdminUserDetails } from '@admin-security/admin-user-details';
 import { AdminLoginResponse, AdminLoginStatus } from '@admin-security/admin-login-response';
 import { AdminLogoutResponse } from '@admin-security/admin-logout-response';
+import { AdminService } from '@admin-service/admin-service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AdminAuthService {
+export class AdminAuthService extends AdminService {
 
   static adminUserDetailsKey = 'adminUserDetails';
 
   private adminUserDetails$ = new BehaviorSubject<AdminUserDetails>(null);
 
-  constructor(private logger: AdminLogger, private httpClient: HttpClient) {}
+  constructor(private logger: AdminLogger, private httpClient: HttpClient) {
+    super();
+  }
 
   get adminUserDetails(): Observable<AdminUserDetails> {
     this.adminUserDetails$.next(JSON.parse(localStorage.getItem(AdminAuthService.adminUserDetailsKey)));
@@ -27,11 +30,12 @@ export class AdminAuthService {
 
   loginAdmin(username: string, password: string): Observable<AdminLoginResponse> {
     const body = `username=${username}&password=${password}`;
-    const headers = new HttpHeaders().set('content-type', 'application/x-www-form-urlencoded');
+    const headers = this.getBaseHttpHeaders()
+      .set('content-type', 'application/x-www-form-urlencoded');
     const options = {
       headers
     };
-    return this.httpClient.post<AdminLoginResponse>('/admin/login', body, options)
+    return this.httpClient.post<AdminLoginResponse>('/login', body, options)
       .pipe(
         map((loginResponse) => {
           if (loginResponse && loginResponse.status === AdminLoginStatus.SUCCESS) {
@@ -40,21 +44,25 @@ export class AdminAuthService {
           return loginResponse;
         }),
         catchError((error: HttpErrorResponse) => {
-          this.logger.error(`Caught error while POSTing /admin/login ${JSON.stringify(error)}`);
+          this.logger.error(`Caught error while POSTing admin login ${JSON.stringify(error)}`);
           return of(null);
         })
       );
   }
 
   logoutAdmin(): Observable<AdminLogoutResponse> {
-    return this.httpClient.post<AdminLoginResponse>('/admin/logout', {})
+    const headers = this.getBaseHttpHeaders();
+    const options = {
+      headers
+    };
+    return this.httpClient.post<AdminLoginResponse>('/logout', {}, options)
       .pipe(
         finalize(() => {
           this.removeAdminUserDetails();
           this.adminRefresh().subscribe(); // trigger new csrf token for login page
         }),
         catchError((error: HttpErrorResponse) => {
-          this.logger.error(`Caught error while POSTing /admin/logout ${JSON.stringify(error)}`);
+          this.logger.error(`Caught error while POSTing admin logout ${JSON.stringify(error)}`);
           return of(null);
         })
       );
@@ -71,14 +79,18 @@ export class AdminAuthService {
   }
 
   isAuthenticated(): Observable<boolean> {
-    return this.httpClient.get<AdminUserDetails>('/admin/authentication')
+    const headers = this.getBaseHttpHeaders();
+    const options = {
+      headers
+    };
+    return this.httpClient.get<AdminUserDetails>('/authentication', options)
       .pipe(
         map((adminUserDetails) => {
           this.addAdminUserDetails(adminUserDetails);
           return true;
         }),
         catchError((error: HttpErrorResponse) => {
-          this.logger.warn(`Caught error while GETing /admin/authentication ${JSON.stringify(error)}`);
+          this.logger.warn(`Caught error while GETing admin authentication ${JSON.stringify(error)}`);
           this.removeAdminUserDetails();
           return of(false);
         })
@@ -86,10 +98,14 @@ export class AdminAuthService {
   }
 
   private adminRefresh(): Observable<any> {
-    return this.httpClient.get<any>('/admin/refresh')
+    const headers = this.getBaseHttpHeaders();
+    const options = {
+      headers
+    };
+    return this.httpClient.get<any>('/refresh', options)
       .pipe(
         catchError((error: HttpErrorResponse) => {
-          this.logger.warn(`Caught error while GETing admin/refresh ${JSON.stringify(error)}`);
+          this.logger.warn(`Caught error while GETing admin refresh ${JSON.stringify(error)}`);
           return of(null);
         })
       );

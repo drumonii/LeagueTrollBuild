@@ -7,6 +7,7 @@ import { Paginated } from '@admin-model/paginated';
 import { BatchJobInstance } from '@admin-model/batch-job-instance';
 import { BatchStepExecution } from '@admin-model/batch-step-execution';
 import { BatchJobExecution } from '@admin-model/batch-job-execution';
+import { ADMIN_INTERCEPT_HEADER } from '@admin-interceptor/admin-http-interceptor-headers';
 
 describe('AdminBatchService', () => {
   beforeEach(() => {
@@ -100,6 +101,7 @@ describe('AdminBatchService', () => {
       });
 
       const testReq = httpMock.expectOne(requestMatch);
+      expect(testReq.request.headers.has(ADMIN_INTERCEPT_HEADER)).toBe(true);
 
       testReq.flush(mockPaginatedJobInstances);
     }));
@@ -120,6 +122,7 @@ describe('AdminBatchService', () => {
       });
 
       const testReq = httpMock.expectOne(requestMatch);
+      expect(testReq.request.headers.has(ADMIN_INTERCEPT_HEADER)).toBe(true);
 
       testReq.flush(mockPaginatedJobInstances);
     }));
@@ -141,6 +144,7 @@ describe('AdminBatchService', () => {
       });
 
       const testReq = httpMock.expectOne(requestMatch);
+      expect(testReq.request.headers.has(ADMIN_INTERCEPT_HEADER)).toBe(true);
 
       testReq.flush(mockPaginatedJobInstances);
     }));
@@ -163,6 +167,7 @@ describe('AdminBatchService', () => {
       });
 
       const testReq = httpMock.expectOne(requestMatch);
+      expect(testReq.request.headers.has(ADMIN_INTERCEPT_HEADER)).toBe(true);
 
       testReq.flush(mockPaginatedJobInstances);
     }));
@@ -181,6 +186,7 @@ describe('AdminBatchService', () => {
       });
 
       const testReq = httpMock.expectOne(requestMatch);
+      expect(testReq.request.headers.has(ADMIN_INTERCEPT_HEADER)).toBe(true);
 
       const errorEvent = document.createEvent('Event');
       errorEvent.initEvent('ErrorEvent', false, false);
@@ -238,6 +244,7 @@ describe('AdminBatchService', () => {
       });
 
       const testReq = httpMock.expectOne(requestMatch);
+      expect(testReq.request.headers.has(ADMIN_INTERCEPT_HEADER)).toBe(true);
 
       const errorEvent = document.createEvent('Event');
       errorEvent.initEvent('ErrorEvent', false, false);
@@ -263,6 +270,7 @@ describe('AdminBatchService', () => {
       });
 
       const testReq = httpMock.expectOne(requestMatch);
+      expect(testReq.request.headers.has(ADMIN_INTERCEPT_HEADER)).toBe(true);
 
       testReq.flush(mockHasFailedAllRetrievalsJob);
     }));
@@ -274,6 +282,7 @@ describe('AdminBatchService', () => {
       });
 
       const testReq = httpMock.expectOne(requestMatch);
+      expect(testReq.request.headers.has(ADMIN_INTERCEPT_HEADER)).toBe(true);
 
       const errorEvent = document.createEvent('Event');
       errorEvent.initEvent('ErrorEvent', false, false);
@@ -305,6 +314,7 @@ describe('AdminBatchService', () => {
       });
 
       const testReq = httpMock.expectOne(requestMatch);
+      expect(testReq.request.headers.has(ADMIN_INTERCEPT_HEADER)).toBe(true);
 
       testReq.flush(mockBatchJobExecution);
     }));
@@ -316,6 +326,7 @@ describe('AdminBatchService', () => {
       });
 
       const testReq = httpMock.expectOne(requestMatch);
+      expect(testReq.request.headers.has(ADMIN_INTERCEPT_HEADER)).toBe(true);
 
       const errorEvent = document.createEvent('Event');
       errorEvent.initEvent('ErrorEvent', false, false);

@@ -41,12 +41,12 @@ public class ErrorRestControllerTest {
 
     @Test
     public void getsErrorForSecureRequest() {
-        RequestEntity<Void> requestEntity = RequestEntity.get(URI.create(createUrl("/api/job-instances")))
+        RequestEntity<Void> requestEntity = RequestEntity.get(URI.create(createUrl("/api/admin/job-instances")))
                 .build();
 
         ResponseEntity<String> responseEntity = new TestRestTemplate().exchange(requestEntity, String.class);
 
-        assertThat(responseEntity.getBody()).satisfies(new ErrorUnauthorizedJson("/api/job-instances"));
+        assertThat(responseEntity.getBody()).satisfies(new ErrorUnauthorizedJson("/api/admin/job-instances"));
     }
 
     private String createUrl(String path) {

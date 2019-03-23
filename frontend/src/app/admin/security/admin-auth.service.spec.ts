@@ -5,6 +5,7 @@ import { AdminUserDetails } from '@admin-security/admin-user-details';
 import { AdminLoginResponse, AdminLoginStatus } from '@admin-security/admin-login-response';
 import { AdminAuthService } from './admin-auth.service';
 import { AdminLogoutResponse, AdminLogoutStatus } from '@admin-security/admin-logout-response';
+import { ADMIN_INTERCEPT_HEADER } from '@admin-interceptor/admin-http-interceptor-headers';
 
 describe('AdminAuthService', () => {
 
@@ -48,7 +49,7 @@ describe('AdminAuthService', () => {
 
   describe('loginAdmin', () => {
 
-    const requestMatch: RequestMatch = { method: 'POST', url: '/admin/login' };
+    const requestMatch: RequestMatch = { method: 'POST', url: '/login' };
 
     it('should set adminUserDetails in localStorage with successful login',
       inject([AdminAuthService, HttpTestingController], (authService: AdminAuthService, httpMock: HttpTestingController) => {
@@ -68,6 +69,7 @@ describe('AdminAuthService', () => {
 
       const testReq = httpMock.expectOne(requestMatch);
       expect(testReq.request.headers.get('content-type')).toBe('application/x-www-form-urlencoded');
+      expect(testReq.request.headers.has(ADMIN_INTERCEPT_HEADER)).toBe(true);
       expect(testReq.request.body).toEqual('username=some_username&password=some_password');
 
       testReq.flush(mockSuccessfulLoginResponse);
@@ -118,7 +120,7 @@ describe('AdminAuthService', () => {
 
   describe('isAuthenticated', () => {
 
-    const requestMatch: RequestMatch = { method: 'GET', url: '/admin/authentication' };
+    const requestMatch: RequestMatch = { method: 'GET', url: '/authentication' };
 
     it('should return true if authenticated and set adminUserDetails in localStorage',
       inject([AdminAuthService, HttpTestingController], (authService: AdminAuthService, httpMock: HttpTestingController) => {
@@ -128,6 +130,7 @@ describe('AdminAuthService', () => {
       });
 
       const testReq = httpMock.expectOne(requestMatch);
+      expect(testReq.request.headers.has(ADMIN_INTERCEPT_HEADER)).toBe(true);
 
       testReq.flush(mockAdminUserDetails);
     }));
@@ -142,6 +145,7 @@ describe('AdminAuthService', () => {
       });
 
       const testReq = httpMock.expectOne(requestMatch);
+      expect(testReq.request.headers.has(ADMIN_INTERCEPT_HEADER)).toBe(true);
 
       const errorEvent = document.createEvent('Event');
       errorEvent.initEvent('ErrorEvent', false, false);
@@ -152,8 +156,8 @@ describe('AdminAuthService', () => {
 
   describe('logoutAdmin', () => {
 
-    const logoutRequestMatch: RequestMatch = { method: 'POST', url: '/admin/logout' };
-    const refreshRequestMatch: RequestMatch = { method: 'GET', url: '/admin/refresh' };
+    const logoutRequestMatch: RequestMatch = { method: 'POST', url: '/logout' };
+    const refreshRequestMatch: RequestMatch = { method: 'GET', url: '/refresh' };
 
     beforeEach(() => {
       localStorage.setItem(AdminAuthService.adminUserDetailsKey, JSON.stringify(mockAdminUserDetails));
@@ -180,11 +184,13 @@ describe('AdminAuthService', () => {
       });
 
       const logoutTestReq = httpMock.expectOne(logoutRequestMatch);
+      expect(logoutTestReq.request.headers.has(ADMIN_INTERCEPT_HEADER)).toBe(true);
       expect(logoutTestReq.request.body).toEqual({});
 
       logoutTestReq.flush(mockSuccessfulLogoutResponse);
 
       const refreshTestReq = httpMock.expectOne(refreshRequestMatch);
+      expect(refreshTestReq.request.headers.has(ADMIN_INTERCEPT_HEADER)).toBe(true);
 
       const errorEvent = document.createEvent('Event');
       errorEvent.initEvent('ErrorEvent', false, false);
@@ -198,6 +204,7 @@ describe('AdminAuthService', () => {
       });
 
       const logoutTestReq = httpMock.expectOne(logoutRequestMatch);
+      expect(logoutTestReq.request.headers.has(ADMIN_INTERCEPT_HEADER)).toBe(true);
       expect(logoutTestReq.request.body).toEqual({});
 
       const errorEvent = document.createEvent('Event');

@@ -7,17 +7,22 @@ import { catchError, map } from 'rxjs/operators';
 import { BatchJobInstance } from '@admin-model/batch-job-instance';
 import { Paginated } from '@admin-model/paginated';
 import { AdminLogger } from '@admin-service/admin-logger.service';
+import { AdminService } from '@admin-service/admin-service';
 
 @Injectable()
-export class FailedJobsService {
+export class FailedJobsService extends AdminService {
 
-  constructor(private logger: AdminLogger, private httpClient: HttpClient) {}
+  constructor(private logger: AdminLogger, private httpClient: HttpClient) {
+    super();
+  }
 
   getFailedJobs(): Observable<number> {
     const params = new HttpParams()
       .set('jobExecution.status', 'FAILED');
+    const headers = this.getBaseHttpHeaders();
     const options = {
-      params
+      params,
+      headers
     };
     return this.httpClient.get<Paginated<BatchJobInstance>>('/job-instances', options)
       .pipe(

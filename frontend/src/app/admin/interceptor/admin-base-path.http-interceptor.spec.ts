@@ -1,8 +1,9 @@
 import { inject, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController, RequestMatch } from '@angular/common/http/testing';
-import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { AdminBasePathHttpInterceptor } from './admin-base-path.http-interceptor';
+import { ADMIN_INTERCEPT_HEADER, ADMIN_INTERCEPT_HEADER_VAL } from '@admin-interceptor/admin-http-interceptor-headers';
 
 describe('AdminBasePathHttpInterceptor', () => {
 
@@ -21,16 +22,41 @@ describe('AdminBasePathHttpInterceptor', () => {
     httpMock.verify();
   }));
 
-  it('should prepend the admin base path', inject([HttpClient, HttpTestingController],
-    (http: HttpClient, httpMock: HttpTestingController) => {
-    http.get('/some-url').subscribe(res => {
-      expect(res).toBeTruthy();
-    });
+  describe('admin request', () => {
 
-    const requestMatch: RequestMatch = { method: 'GET', url: '/admin/some-url' };
+    it('should prepend the admin base path', inject([HttpClient, HttpTestingController],
+      (http: HttpClient, httpMock: HttpTestingController) => {
+      const headers = new HttpHeaders()
+        .set(ADMIN_INTERCEPT_HEADER, ADMIN_INTERCEPT_HEADER_VAL);
+      const options = {
+        headers
+      };
+      http.get('/some-url', options).subscribe(res => {
+        expect(res).toBeTruthy();
+      });
 
-    const testReq = httpMock.expectOne(requestMatch);
-    testReq.flush({});
-  }));
+      const requestMatch: RequestMatch = { method: 'GET', url: '/admin/some-url' };
+
+      const testReq = httpMock.expectOne(requestMatch);
+      testReq.flush({});
+    }));
+
+  });
+
+  describe('troll build request', () => {
+
+    it('should ignore the request', inject([HttpClient, HttpTestingController],
+      (http: HttpClient, httpMock: HttpTestingController) => {
+      http.get('/some-url').subscribe(res => {
+        expect(res).toBeTruthy();
+      });
+
+      const requestMatch: RequestMatch = { method: 'GET', url: '/some-url' };
+
+      const testReq = httpMock.expectOne(requestMatch);
+      testReq.flush({});
+    }));
+
+  });
 
 });

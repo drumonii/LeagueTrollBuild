@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HTTP_INTERCEPTORS, } from '@angular/common/http';
 
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 
@@ -25,7 +26,7 @@ import { AdminBasePathHttpInterceptor } from '@admin-interceptor/admin-base-path
   providers: [
     AdminGuard,
     AdminAlreadyLoggedInGuard,
-    AdminBasePathHttpInterceptor
+    { provide: HTTP_INTERCEPTORS, useClass: AdminBasePathHttpInterceptor, multi: true }
   ]
 })
 export class AdminAppModule { }

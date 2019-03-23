@@ -4,6 +4,7 @@ import { HttpClientTestingModule, HttpTestingController, RequestMatch } from '@a
 import { FailedJobsService } from './failed-jobs.service';
 import { Paginated } from '@admin-model/paginated';
 import { BatchJobInstance } from '@admin-model/batch-job-instance';
+import { ADMIN_INTERCEPT_HEADER } from '@admin-interceptor/admin-http-interceptor-headers';
 
 describe('FailedJobsService', () => {
   beforeEach(() => {
@@ -56,6 +57,7 @@ describe('FailedJobsService', () => {
       });
 
       const testReq = httpMock.expectOne(requestMatch);
+      expect(testReq.request.headers.has(ADMIN_INTERCEPT_HEADER)).toBe(true);
 
       testReq.flush(mockFailedJobInstances);
     }));
@@ -67,6 +69,7 @@ describe('FailedJobsService', () => {
       });
 
       const testReq = httpMock.expectOne(requestMatch);
+      expect(testReq.request.headers.has(ADMIN_INTERCEPT_HEADER)).toBe(true);
 
       const errorEvent = document.createEvent('Event');
       errorEvent.initEvent('ErrorEvent', false, false);

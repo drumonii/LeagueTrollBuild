@@ -3,6 +3,7 @@ import { HttpClientTestingModule, HttpTestingController, RequestMatch } from '@a
 
 import { MemoryUsageService } from './memory-usage.service';
 import { ActuatorResponse } from '@admin-model/actuator-response';
+import { ADMIN_INTERCEPT_HEADER } from '@admin-interceptor/admin-http-interceptor-headers';
 
 describe('MemoryUsageService', () => {
   beforeEach(() => {
@@ -18,7 +19,7 @@ describe('MemoryUsageService', () => {
 
   describe('getMemoryUsage', () => {
 
-    const requestMatch: RequestMatch = { method: 'GET', url: '/admin/actuator/metrics/jvm.memory.used' };
+    const requestMatch: RequestMatch = { method: 'GET', url: '/actuator/metrics/jvm.memory.used' };
 
     it('should get memory usage', inject([MemoryUsageService, HttpTestingController],
       (service: MemoryUsageService, httpMock: HttpTestingController) => {
@@ -38,6 +39,7 @@ describe('MemoryUsageService', () => {
       });
 
       const testReq = httpMock.expectOne(requestMatch);
+      expect(testReq.request.headers.has(ADMIN_INTERCEPT_HEADER)).toBe(true);
 
       testReq.flush(mockActuatorResponse);
     }));
@@ -49,6 +51,7 @@ describe('MemoryUsageService', () => {
       });
 
       const testReq = httpMock.expectOne(requestMatch);
+      expect(testReq.request.headers.has(ADMIN_INTERCEPT_HEADER)).toBe(true);
 
       const errorEvent = document.createEvent('Event');
       errorEvent.initEvent('ErrorEvent', false, false);

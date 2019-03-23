@@ -79,25 +79,25 @@ public class BatchStepExecutionsRestControllerTest {
 	@WithMockAdminUser
 	@Test
 	public void getBatchStepExecutions() throws Exception {
-		mockMvc.perform(get("{apiPath}/job-instances/{jobInstanceId}/step-executions", apiPath, jobInstance.getId()))
+		mockMvc.perform(get("{apiPath}/admin/job-instances/{jobInstanceId}/step-executions", apiPath, jobInstance.getId()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
 				.andExpect(jsonPath("$.[*]", hasSize(1)));
 
-		mockMvc.perform(get("{apiPath}//job-instances/{jobInstanceId}/step-executions", apiPath, -1))
+		mockMvc.perform(get("{apiPath}/admin/job-instances/{jobInstanceId}/step-executions", apiPath, -1))
 				.andExpect(status().isNotFound());
 	}
 
 	@WithMockAdminUser
 	@Test
 	public void getBatchStepExecution() throws Exception {
-		mockMvc.perform(get("{apiPath}/job-instances/{jobInstanceId}/step-executions/{stepExecutionId}", apiPath,
+		mockMvc.perform(get("{apiPath}/admin/job-instances/{jobInstanceId}/step-executions/{stepExecutionId}", apiPath,
 				jobInstance.getId(), stepExecution.getId()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
 				.andExpect(jsonPath("$..*").isNotEmpty());
 
-		mockMvc.perform(get("{apiPath}/job-instances/{jobInstanceId}/step-executions/{stepExecutionId}", apiPath, -1, -1))
+		mockMvc.perform(get("{apiPath}/admin/job-instances/{jobInstanceId}/step-executions/{stepExecutionId}", apiPath, -1, -1))
 				.andExpect(status().isNotFound());
 	}
 

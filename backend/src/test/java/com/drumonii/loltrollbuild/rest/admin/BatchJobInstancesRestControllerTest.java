@@ -89,20 +89,20 @@ public class BatchJobInstancesRestControllerTest {
 	@Test
 	public void getBatchJobInstances() throws Exception {
 		// qbe
-		mockMvc.perform(get("{apiPath}/job-instances", apiPath))
+		mockMvc.perform(get("{apiPath}/admin/job-instances", apiPath))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
 				.andExpect(jsonPath("$.[*]").isNotEmpty());
 
 		// qbe with name
-		mockMvc.perform(get("{apiPath}/job-instances", apiPath)
+		mockMvc.perform(get("{apiPath}/admin/job-instances", apiPath)
 				.param("name", jobInstance.getJobName().toLowerCase()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
 				.andExpect(jsonPath("$.[*]").isNotEmpty());
 
 		// qbe with no results
-		mockMvc.perform(get("{apiPath}/job-instances", apiPath)
+		mockMvc.perform(get("{apiPath}/admin/job-instances", apiPath)
 				.param("name", "abcd1234"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
@@ -112,12 +112,12 @@ public class BatchJobInstancesRestControllerTest {
 	@WithMockAdminUser
 	@Test
 	public void getBatchJobInstance() throws Exception {
-		mockMvc.perform(get("{apiPath}/job-instances/{jobInstanceId}", apiPath, jobInstance.getId()))
+		mockMvc.perform(get("{apiPath}/admin/job-instances/{jobInstanceId}", apiPath, jobInstance.getId()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
 				.andExpect(jsonPath("$.jobExecution").exists());
 
-		mockMvc.perform(get("{apiPath}/job-instances/{jobInstanceId}", apiPath, -1))
+		mockMvc.perform(get("{apiPath}/admin/job-instances/{jobInstanceId}", apiPath, -1))
 				.andExpect(status().isNotFound());
 	}
 
@@ -153,7 +153,7 @@ public class BatchJobInstancesRestControllerTest {
 
 		given(this.allRetrievalsJob.getJobParametersIncrementer()).willReturn(new RunIdIncrementer());
 
-		mockMvc.perform(post("{apiPath}/job-instances/restart", apiPath).with(csrf()))
+		mockMvc.perform(post("{apiPath}/admin/job-instances/restart", apiPath).with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
 				.andExpect(jsonPath("$.id").exists())
@@ -173,7 +173,7 @@ public class BatchJobInstancesRestControllerTest {
 		given(jobLauncher.run(eq(this.allRetrievalsJob), any(JobParameters.class)))
 				.willThrow(new NullPointerException());
 
-		mockMvc.perform(post("{apiPath}/job-instances/restart", apiPath).with(csrf()))
+		mockMvc.perform(post("{apiPath}/admin/job-instances/restart", apiPath).with(csrf()))
 				.andExpect(status().isInternalServerError());
 	}
 
@@ -236,7 +236,7 @@ public class BatchJobInstancesRestControllerTest {
 		hangingAllRetrievalsJobExecution.setStatus(BatchStatus.STARTING);
 		jobExecutionDao.saveJobExecution(hangingAllRetrievalsJobExecution);
 
-		mockMvc.perform(get("{apiPath}/job-instances/has-failed-all-retrievals-job", apiPath, jobInstance.getId())
+		mockMvc.perform(get("{apiPath}/admin/job-instances/has-failed-all-retrievals-job", apiPath, jobInstance.getId())
 				.param("minutes", "1"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
@@ -284,7 +284,7 @@ public class BatchJobInstancesRestControllerTest {
 		failedAllRetrievalsJobExecution.setStatus(BatchStatus.FAILED);
 		jobExecutionDao.saveJobExecution(failedAllRetrievalsJobExecution);
 
-		mockMvc.perform(get("{apiPath}/job-instances/has-failed-all-retrievals-job", apiPath, jobInstance.getId())
+		mockMvc.perform(get("{apiPath}/admin/job-instances/has-failed-all-retrievals-job", apiPath, jobInstance.getId())
 				.param("minutes", "1"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
@@ -313,7 +313,7 @@ public class BatchJobInstancesRestControllerTest {
 		completedAllRetrievalsJobExecution.setStatus(BatchStatus.COMPLETED);
 		jobExecutionDao.saveJobExecution(completedAllRetrievalsJobExecution);
 
-		mockMvc.perform(get("{apiPath}/job-instances/has-failed-all-retrievals-job", apiPath, jobInstance.getId()))
+		mockMvc.perform(get("{apiPath}/admin/job-instances/has-failed-all-retrievals-job", apiPath, jobInstance.getId()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
 				.andExpect(jsonPath("hasFailedAllRetrievalsJob", is(false)));
