@@ -12,6 +12,7 @@ import { AdminLayoutModule } from '@admin-layout//admin-layout.module';
 import { AdminGuard } from '@admin-guard/admin.guard';
 import { AdminAlreadyLoggedInGuard } from '@admin-guard/admin-already-logged-in.guard';
 import { AdminBasePathHttpInterceptor } from '@admin-interceptor/admin-base-path.http-interceptor';
+import { AdminErrorHttpInterceptor } from '@admin-interceptor/admin-error.http-interceptor';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { AdminBasePathHttpInterceptor } from '@admin-interceptor/admin-base-path
   providers: [
     AdminGuard,
     AdminAlreadyLoggedInGuard,
-    { provide: HTTP_INTERCEPTORS, useClass: AdminBasePathHttpInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AdminBasePathHttpInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AdminErrorHttpInterceptor, multi: true }
   ]
 })
 export class AdminAppModule { }
