@@ -8,7 +8,7 @@ import org.springframework.batch.item.ItemProcessor;
  */
 public class VersionsRetrievalItemProcessor implements ItemProcessor<Version, Version> {
 
-	private Version latestVersion;
+	private final Version latestVersion;
 
 	public VersionsRetrievalItemProcessor(Version latestVersion) {
 		this.latestVersion = latestVersion;
