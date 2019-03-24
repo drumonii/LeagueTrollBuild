@@ -126,7 +126,7 @@ function updateFiles(version) {
 /**
  * Prompts for the next release version, which is optional.
  *
- * @param defaultNextVersion the next version to be used if one is not specified
+ * @param {string} defaultNextVersion the next version to be used if one is not specified
  */
 function promptForNextVersion(defaultNextVersion) {
   rl.prompt();
