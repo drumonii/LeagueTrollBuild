@@ -193,11 +193,13 @@ function makeRelease(snapshotVersion) {
 function nextSnapshot(currentVersion) {
   const defaultNextVersion = incrementVersion(currentVersion);
 
+  const snapshotVersion = `${defaultNextVersion}-SNAPSHOT`;
+
   console.log('Preparing for next version...');
   console.log(`Current version: '${currentVersion}'`);
-  console.log(`Optionally enter next version. Will use: '${defaultNextVersion}' (${defaultNextVersion}-SNAPSHOT) if not specified`);
+  console.log(`Optionally enter next version. Will use: '${defaultNextVersion}' (${snapshotVersion}) if not specified`);
 
-  promptForNextVersion(defaultNextVersion + '-SNAPSHOT');
+  promptForNextVersion(snapshotVersion);
 }
 
 prepareNextRelease();
