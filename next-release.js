@@ -149,7 +149,7 @@ function promptForNextVersion(defaultNextVersion) {
  * @returns {boolean} true if SNAPSHOT version, otherwise false
  */
 function isSnapshotVersion(buildVersion) {
-  return buildVersion.indexOf('SNAPSHOT') > 0;
+  return buildVersion.includes('SNAPSHOT');
 }
 
 /**
