@@ -30,13 +30,9 @@ function getCurrentVersion() {
  * @returns {string} the next version revision
  */
 function incrementVersion(version) {
-  const versioning = version.split('.');
+  const [major, minor, revision] = version.split('.');
 
-  const major = parseInt(versioning[0], 10);
-  const minor = parseInt(versioning[1], 10);
-  const revision = parseInt(versioning[2], 10);
-
-  const newRevision = revision + 1;
+  const newRevision = parseInt(revision, 10) + 1;
 
   return `${major}.${minor}.${newRevision}`;
 }
