@@ -70,9 +70,7 @@ function updateGradleProperties(version) {
 
   for (const property of gradleProperties) {
     if (property) {
-      const propertyParts = property.split('=');
-      const key = propertyParts[0];
-      const value = propertyParts[1];
+      const [key, value] = property.split('=');
       if (key === 'buildVersion') {
         newGradleProperties += `${key}=${version}`;
       } else {
