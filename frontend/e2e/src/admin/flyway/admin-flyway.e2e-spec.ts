@@ -5,31 +5,31 @@ describe('admin flyway page', () => {
 
   describe('unauthenticated user', () => {
 
-    beforeEach(() => {
-      page.navigateTo();
+    beforeEach(async () => {
+      await page.navigateTo();
     });
 
-    it('should redirect', () => {
-      expect(page.getCurrentUrl()).toBe(page.getRedirectedUrl());
+    it('should redirect', async () => {
+      expect(await page.getCurrentUrl()).toBe(page.getRedirectedUrl());
     });
 
   });
 
   describe('authenticated admin', () => {
 
-    beforeEach(() => {
-      page.loginAdmin();
-      page.navigateTo();
+    beforeEach(async () => {
+      await page.loginAdmin();
+      await page.navigateTo();
 
-      expect(page.getTitleContent()).toBe('Flyway Migrations');
+      expect(await page.getTitleContent()).toBe('Flyway Migrations');
     });
 
-    afterEach(() => {
-      page.logoutAdmin();
+    afterEach(async () => {
+      await page.logoutAdmin();
     });
 
-    it('should show the Flyway datatable', () => {
-      expect(page.getFlywayDatatable().isPresent()).toBe(true);
+    it('should show the Flyway datatable', async () => {
+      expect(await page.getFlywayDatatable().isPresent()).toBe(true);
     });
 
   });

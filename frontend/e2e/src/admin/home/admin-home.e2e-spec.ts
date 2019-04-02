@@ -5,54 +5,52 @@ describe('admin home page', () => {
 
   describe('unauthenticated user', () => {
 
-    beforeEach(() => {
-      page.navigateTo();
+    beforeEach(async () => {
+      await page.navigateTo();
     });
 
-    it('should redirect', () => {
-      expect(page.getCurrentUrl()).toBe(page.getRedirectedUrl());
+    it('should redirect', async () => {
+      expect(await page.getCurrentUrl()).toBe(page.getRedirectedUrl());
     });
 
   });
 
   describe('authenticated admin', () => {
 
-    beforeEach(() => {
-      page.loginAdmin();
-      page.navigateTo();
+    beforeEach(async () => {
+      await page.loginAdmin();
+      await page.navigateTo();
 
-      expect(page.getTitle()).toBe('League Troll Build Admin');
+      expect(await page.getTitle()).toBe('League Troll Build Admin');
     });
 
-    afterEach(() => {
-      page.logoutAdmin();
+    afterEach(async () => {
+      await page.logoutAdmin();
     });
 
-    it('should show home components', () => {
-      expectFailedJobsComponent();
-      expectCpuUsageComponent();
-      expectMemoryUsageComponent();
-      expectGlobalErrorsComponent();
+    it('should show home components', async (done) => {
+      Promise.all([expectFailedJobsComponent, expectCpuUsageComponent, expectMemoryUsageComponent, expectGlobalErrorsComponent])
+        .then(() => done());
     });
 
-    function expectFailedJobsComponent() {
-      expect(page.getFailedJobsComponent().isPresent()).toBe(true);
-      expect(page.getFailedToLoadFailedJobsAlert().isPresent()).toBe(false);
+    async function expectFailedJobsComponent() {
+      expect(await page.getFailedJobsComponent().isPresent()).toBe(true, 'FailedJobsComponent to be present');
+      expect(await page.getFailedToLoadFailedJobsAlert().isPresent()).toBe(false, 'FailedToLoadFailedJobsAlert to not be present');
     }
 
-    function expectCpuUsageComponent() {
-      expect(page.getCpuUsageComponent().isPresent()).toBe(true);
-      expect(page.getFailedToLoadCpuUsageAlert().isPresent()).toBe(false);
+    async function expectCpuUsageComponent() {
+      expect(await page.getCpuUsageComponent().isPresent()).toBe(true, 'CpuUsageComponent to be present');
+      expect(await page.getFailedToLoadCpuUsageAlert().isPresent()).toBe(false, 'FailedToLoadCpuUsageAlert to not be present');
     }
 
-    function expectMemoryUsageComponent() {
-      expect(page.getMemoryUsageComponent().isPresent()).toBe(true);
-      expect(page.getFailedToLoadMemoryUsageAlert().isPresent()).toBe(false);
+    async function expectMemoryUsageComponent() {
+      expect(await page.getMemoryUsageComponent().isPresent()).toBe(true, 'MemoryUsageComponent to be present');
+      expect(await page.getFailedToLoadMemoryUsageAlert().isPresent()).toBe(false, 'FailedToLoadMemoryUsageAlert to not be present');
     }
 
-    function expectGlobalErrorsComponent() {
-      expect(page.getGlobalErrorsComponent().isPresent()).toBe(true);
-      expect(page.getFailedToLoadGlobalErrorsAlert().isPresent()).toBe(false);
+    async function expectGlobalErrorsComponent() {
+      expect(await page.getGlobalErrorsComponent().isPresent()).toBe(true, 'GlobalErrorsComponent to be present');
+      expect(await page.getFailedToLoadGlobalErrorsAlert().isPresent()).toBe(false, 'FailedToLoadGlobalErrorsAlert to not be present');
     }
 
   });

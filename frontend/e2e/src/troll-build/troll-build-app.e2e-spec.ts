@@ -9,18 +9,18 @@ describe('troll-build-app', () => {
     await page.navigateTo();
   });
 
-  afterEach(() => {
-    expect(page.getTitle()).toBe('League Troll Build');
+  afterEach(async () => {
+    expect(await page.getTitle()).toBe('League Troll Build');
 
     // root should redirect to /champions
-    expect(page.getCurrentUrl()).toBe('/champions');
+    expect(await page.getCurrentUrl()).toBe('/champions');
   });
 
   it('should have body styles', async () => {
     const body = element(by.css('body'));
-    const bodyBgImageCss = body.getCssValue('background-image');
+    const bodyBgImageCss = await body.getCssValue('background-image');
     expect(bodyBgImageCss).toContain('background.jpg');
-    const bodyBgRpeatCss = body.getCssValue('background-repeat');
+    const bodyBgRpeatCss = await body.getCssValue('background-repeat');
     expect(bodyBgRpeatCss).toBe('no-repeat');
 
     const bodyBgColorCss = await element(by.css('body')).getCssValue('background-color');
@@ -31,12 +31,12 @@ describe('troll-build-app', () => {
     }
   });
 
-  it('should show the troll build header', () => {
-    expect(page.getHeaderText()).toBe('League Troll Build');
+  it('should show the troll build header', async () => {
+    expect(await page.getHeaderText()).toBe('League Troll Build');
   });
 
-  it('should show the troll build footer', () => {
-    expect(page.getFooter().isPresent()).toBe(true);
+  it('should show the troll build footer', async () => {
+    expect(await page.getFooter().isPresent()).toBe(true);
   });
 
 });

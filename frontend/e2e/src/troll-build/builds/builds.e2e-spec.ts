@@ -7,12 +7,12 @@ describe('builds page', () => {
 
   describe('random build', () => {
 
-    beforeEach(() => {
-      page.navigateTo();
+    beforeEach(async () => {
+      await page.navigateTo();
     });
 
-    it('should redirect to a random build', () => {
-      expect(page.getTitle()).toContain('Build');
+    it('should redirect to a random build', async () => {
+      expect(await page.getTitle()).toContain('Build');
     });
 
   });

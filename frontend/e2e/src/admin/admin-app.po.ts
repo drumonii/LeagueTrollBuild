@@ -1,18 +1,18 @@
-import { browser, by, element } from 'protractor';
+import { browser, by, element, ElementFinder } from 'protractor';
 
 import { BaseAdminPage } from './base-admin.po';
 
 export class AdminAppPage extends BaseAdminPage {
 
-  navigateTo() {
-    return browser.get('/admin/login');
+  async navigateTo(): Promise<void> {
+    await browser.get('/admin/login');
   }
 
-  getHeaderText() {
+  async getHeaderText(): Promise<string> {
     return element(by.css('#admin-header-title')).getText();
   }
 
-  getFooter() {
+  getFooter(): ElementFinder {
     return element(by.css('#admin-footer'));
   }
 

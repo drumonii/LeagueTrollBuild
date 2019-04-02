@@ -1,64 +1,62 @@
-import { browser, by, element, ExpectedConditions } from 'protractor';
+import { browser, by, element, ElementFinder, ExpectedConditions } from 'protractor';
 
 import { BasePage } from '../base.po';
 
 export abstract class BaseAdminPage extends BasePage {
 
-  getCurrentUrl() {
-    return super.getCurrentUrl().then((adminUrl) => this.parseAdminUrl(adminUrl));
+  async getCurrentUrl(): Promise<string> {
+    const adminUrl = await super.getCurrentUrl();
+    return this.parseAdminUrl(adminUrl);
   }
 
-  getHrefLink(link) {
-    return super.getHrefLink(link).then((adminUrl) => this.parseAdminUrl(adminUrl));
+  getHrefLink(link): string  {
+    const adminUrl = super.getHrefLink(link);
+    return this.parseAdminUrl(adminUrl);
   }
 
-  getRedirectedUrl() {
+  getRedirectedUrl(): string {
     return '/champions';
   }
 
-  getUsername() {
+  getUsername(): string {
     return 'admin';
   }
 
-  getPassword() {
+  getPassword(): string {
     return 'password'; // see USERS.sql
   }
 
-  getUsernameInput() {
+  getUsernameInput(): ElementFinder {
     return element(by.css('#username-input'));
   }
 
-  getPasswordInput() {
+  getPasswordInput(): ElementFinder {
     return element(by.css('#password-input'));
   }
 
-  loginAdmin() {
-    browser.get('/admin/login');
+  async loginAdmin(): Promise<void> {
+    await browser.get('/admin/login');
 
     const usernameInput = this.getUsernameInput();
-    usernameInput.sendKeys(this.getUsername());
+    await usernameInput.sendKeys(this.getUsername());
     const passwordInput = this.getPasswordInput();
-    passwordInput.sendKeys(this.getPassword());
+    await passwordInput.sendKeys(this.getPassword());
 
-    const loginBtn = element(by.css('#login-btn'));
-    loginBtn.click();
+    await element(by.css('#login-btn')).click();
 
     const adminNav = element(by.css('#admin-nav'));
-    browser.wait(ExpectedConditions.presenceOf(adminNav));
+    await browser.wait(ExpectedConditions.presenceOf(adminNav));
   }
 
-  logoutAdmin() {
-    const logoutNavbarItem = element(by.css('#admin-logout-navbar-item'));
-    logoutNavbarItem.click();
-
-    const logoutBtn = element(by.css('#admin-logout-btn'));
-    logoutBtn.click();
+  async logoutAdmin(): Promise<void> {
+    await element(by.css('#admin-logout-navbar-item')).click();
+    await element(by.css('#admin-logout-btn')).click();
 
     const loggedOutAlert = element(by.css('#logged-out-alert'));
-    browser.wait(ExpectedConditions.presenceOf(loggedOutAlert));
+    await browser.wait(ExpectedConditions.presenceOf(loggedOutAlert));
   }
 
-  private parseAdminUrl(adminUrl) {
+  private parseAdminUrl(adminUrl): string {
     const newAdminUrl = adminUrl.substring(adminUrl.lastIndexOf('/'));
     if (newAdminUrl === '/admin') {
       return '/';

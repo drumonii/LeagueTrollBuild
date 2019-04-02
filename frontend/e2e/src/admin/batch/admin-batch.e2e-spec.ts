@@ -5,31 +5,31 @@ describe('admin batch page', () => {
 
   describe('unauthenticated user', () => {
 
-    beforeEach(() => {
-      page.navigateTo();
+    beforeEach(async () => {
+      await page.navigateTo();
     });
 
-    it('should redirect', () => {
-      expect(page.getCurrentUrl()).toBe(page.getRedirectedUrl());
+    it('should redirect', async () => {
+      expect(await page.getCurrentUrl()).toBe(page.getRedirectedUrl());
     });
 
   });
 
   describe('authenticated admin', () => {
 
-    beforeEach(() => {
-      page.loginAdmin();
-      page.navigateTo();
+    beforeEach(async () => {
+      await page.loginAdmin();
+      await page.navigateTo();
 
-      expect(page.getTitleContent()).toBe('Batch Jobs');
+      expect(await page.getTitleContent()).toBe('Batch Jobs');
     });
 
-    afterEach(() => {
-      page.logoutAdmin();
+    afterEach(async () => {
+      await page.logoutAdmin();
     });
 
-    it('should show the Flyway datatable', () => {
-      expect(page.getBatchJobsDatatable().isPresent()).toBe(true);
+    it('should show the Flyway datatable', async () => {
+      expect(await page.getBatchJobsDatatable().isPresent()).toBe(true);
     });
 
   });

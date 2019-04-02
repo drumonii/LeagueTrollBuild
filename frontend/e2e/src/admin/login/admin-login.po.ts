@@ -1,27 +1,26 @@
-import { browser, by, element } from 'protractor';
+import { browser, by, element, ElementFinder } from 'protractor';
 
 import { BaseAdminPage } from '../base-admin.po';
 
 export class AdminLoginPage extends BaseAdminPage {
 
-  navigateTo() {
-    return browser.get('/admin/login');
+  async navigateTo(): Promise<void> {
+    await browser.get('/admin/login');
   }
 
-  getLoginBtn() {
+  getLoginBtn(): ElementFinder {
     return element(by.css('#login-btn'));
   }
 
-  attemptLoginAdmin() {
-    const loginBtn = this.getLoginBtn();
-    return loginBtn.click();
+  async attemptLoginAdmin(): Promise<void> {
+    await this.getLoginBtn().click();
   }
 
-  getInvalidCredentialsAlert() {
+  getInvalidCredentialsAlert(): ElementFinder {
     return element(by.css('#login-bad-credentials-alert'));
   }
 
-  getLoggedOutAlert() {
+  getLoggedOutAlert(): ElementFinder {
     return element(by.css('#logged-out-alert'));
   }
 

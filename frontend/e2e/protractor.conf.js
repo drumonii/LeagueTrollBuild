@@ -14,6 +14,7 @@ exports.config = {
     { 'browserName': 'internet explorer' }
   ],
   seleniumAddress: 'http://localhost:4444/wd/hub',
+  SELENIUM_PROMISE_MANAGER: false,
   baseUrl: 'http://localhost:4200/',
   framework: 'jasmine',
   jasmineNodeOpts: {

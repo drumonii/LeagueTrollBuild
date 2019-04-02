@@ -1,30 +1,30 @@
-import { browser, by, element, ElementFinder } from 'protractor';
+import { browser, by, element, ElementArrayFinder, ElementFinder } from 'protractor';
 
 import { BaseTrollBuildPage } from '../base-troll-build.po';
 
 export class ChampionsPage extends BaseTrollBuildPage {
 
-  navigateTo() {
-    return browser.get('/champions');
+  async navigateTo(): Promise<void> {
+    await browser.get('/champions');
   }
 
-  getChampions() {
+  getChampions(): ElementArrayFinder {
     return element.all(by.css('.champion'));
   }
 
-  getFirstChampion() {
+  getFirstChampion(): ElementFinder {
     return this.getChampions().first();
   }
 
-  championName(champion: ElementFinder) {
+  async championName(champion: ElementFinder): Promise<string> {
     return champion.element(by.css('.champion-name')).getText();
   }
 
-  getChampionTagFilters() {
+  getChampionTagFilters(): ElementArrayFinder {
     return element.all(by.css('.champion-tag-btn'));
   }
 
-  getChampionNameFilter() {
+  getChampionNameFilter(): ElementFinder {
     return element(by.css('#champions-search-input'));
   }
 

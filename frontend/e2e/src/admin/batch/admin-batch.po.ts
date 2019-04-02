@@ -1,14 +1,14 @@
-import { browser, by, element } from 'protractor';
+import { browser, by, element, ElementFinder } from 'protractor';
 
 import { BaseAdminPage } from '../base-admin.po';
 
 export class AdminBatchPage extends BaseAdminPage {
 
-  navigateTo() {
-    return browser.get('/admin/batch');
+  async navigateTo(): Promise<void> {
+    await browser.get('/admin/batch');
   }
 
-  getBatchJobsDatatable() {
+  getBatchJobsDatatable(): ElementFinder {
     return element(by.css('#batch-jobs-datatable'));
   }
 

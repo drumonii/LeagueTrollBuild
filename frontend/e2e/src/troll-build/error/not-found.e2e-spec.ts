@@ -3,23 +3,23 @@ import { NotFoundPage } from './not-found.po';
 describe('not found page', () => {
   const page = new NotFoundPage();
 
-  beforeEach(() => {
-    page.navigateTo();
+  beforeEach(async () => {
+    await page.navigateTo();
 
-    expect(page.getTitle()).toBe('League Troll Build');
+    expect(await page.getTitle()).toBe('League Troll Build');
   });
 
-  it('should show not found (404) page', () => {
-    expect(page.getMsgHeader().getText()).toBe('Page Not Found');
+  it('should show not found (404) page', async () => {
+    expect(await page.getMsgHeader().getText()).toBe('Page Not Found');
 
-    expect(page.getMsgBody().getText())
+    expect(await page.getMsgBody().getText())
       .toBe('The page you requested was not found. Please double check the URL and try again.');
 
     const returnToHomeLink = page.getReturnToHomeLink();
-    expect(returnToHomeLink.getText()).toBe('Return to home');
-    returnToHomeLink.getAttribute('href').then((link) => {
-      expect(page.getHrefLink(link)).toBe('/');
-    });
+    expect(await returnToHomeLink.getText()).toBe('Return to home');
+
+    const returnToHomeHref = await returnToHomeLink.getAttribute('href');
+    expect(page.getHrefLink(returnToHomeHref)).toBe('/');
   });
 
 });

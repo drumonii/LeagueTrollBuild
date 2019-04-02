@@ -1,42 +1,42 @@
-import { browser, by, element } from 'protractor';
+import { browser, by, element, ElementFinder } from 'protractor';
 
 import { BaseAdminPage } from '../base-admin.po';
 
 export class AdminHomePage extends BaseAdminPage {
 
-  navigateTo() {
-    return browser.get('/admin');
+  async navigateTo(): Promise<void> {
+    await browser.get('/admin');
   }
 
-  getFailedJobsComponent() {
+  getFailedJobsComponent(): ElementFinder {
     return element(by.css('#failed-jobs-card'));
   }
 
-  getFailedToLoadFailedJobsAlert() {
+  getFailedToLoadFailedJobsAlert(): ElementFinder {
     return element(by.css('#no-failed-jobs-alert'));
   }
 
-  getCpuUsageComponent() {
+  getCpuUsageComponent(): ElementFinder {
     return element(by.css('#cpu-usage-card'));
   }
 
-  getFailedToLoadCpuUsageAlert() {
+  getFailedToLoadCpuUsageAlert(): ElementFinder {
     return element(by.css('#no-cpu-usage-alert'));
   }
 
-  getMemoryUsageComponent() {
+  getMemoryUsageComponent(): ElementFinder {
     return element(by.css('#memory-usage-card'));
   }
 
-  getFailedToLoadMemoryUsageAlert() {
+  getFailedToLoadMemoryUsageAlert(): ElementFinder {
     return element(by.css('#no-memory-usage-alert'));
   }
 
-  getGlobalErrorsComponent() {
+  getGlobalErrorsComponent(): ElementFinder {
     return element(by.css('#global-errors-card'));
   }
 
-  getFailedToLoadGlobalErrorsAlert() {
+  getFailedToLoadGlobalErrorsAlert(): ElementFinder {
     return element(by.css('#no-global-errors-alert'));
   }
 

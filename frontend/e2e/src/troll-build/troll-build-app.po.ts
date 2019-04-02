@@ -1,18 +1,18 @@
-import { browser, by, element } from 'protractor';
+import { browser, by, element, ElementFinder } from 'protractor';
 
 import { BaseTrollBuildPage } from './base-troll-build.po';
 
 export class TrollBuildAppPage extends BaseTrollBuildPage {
 
-  navigateTo() {
-    return browser.get('/');
+  async navigateTo(): Promise<void> {
+    await browser.get('/');
   }
 
-  getHeaderText() {
+  async getHeaderText(): Promise<string> {
     return element(by.css('#header-title')).getText();
   }
 
-  getFooter() {
+  getFooter(): ElementFinder {
     return element(by.css('#footer'));
   }
 

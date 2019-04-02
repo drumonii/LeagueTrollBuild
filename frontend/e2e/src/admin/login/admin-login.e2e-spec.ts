@@ -6,10 +6,10 @@ describe('admin login page', () => {
   let usernameInput;
   let passwordInput;
 
-  beforeEach(() => {
-    page.navigateTo();
+  beforeEach(async () => {
+    await page.navigateTo();
 
-    expect(page.getTitleContent()).toBe('Admin Login');
+    expect(await page.getTitleContent()).toBe('Admin Login');
 
     usernameInput = page.getUsernameInput();
     passwordInput = page.getPasswordInput();
@@ -17,35 +17,35 @@ describe('admin login page', () => {
 
   describe('with empty username and password', () => {
 
-    it('should not allow logins', () => {
-      expect(page.getLoginBtn().isEnabled()).toBe(false);
+    it('should not allow logins', async () => {
+      expect(await page.getLoginBtn().isEnabled()).toBe(false);
     });
 
   });
 
   describe('with invalid credentials', () => {
 
-    it('should not login the admin user', () => {
-      usernameInput.sendKeys(page.getUsername());
-      passwordInput.sendKeys('invalid password!');
+    it('should not login the admin user', async () => {
+      await usernameInput.sendKeys(page.getUsername());
+      await passwordInput.sendKeys('invalid password!');
 
-      page.attemptLoginAdmin();
-      expect(page.getInvalidCredentialsAlert().isPresent()).toBe(true);
+      await page.attemptLoginAdmin();
+      expect(await page.getInvalidCredentialsAlert().isPresent()).toBe(true);
     });
 
   });
 
   describe('with valid credentials', () => {
 
-    it('should login and logout the admin user', () => {
-      usernameInput.sendKeys(page.getUsername());
-      passwordInput.sendKeys(page.getPassword());
+    it('should login and logout the admin user', async () => {
+      await usernameInput.sendKeys(page.getUsername());
+      await passwordInput.sendKeys(page.getPassword());
 
-      page.attemptLoginAdmin();
-      expect(page.getCurrentUrl()).toBe('/');
+      await page.attemptLoginAdmin();
+      expect(await page.getCurrentUrl()).toBe('/');
 
-      page.logoutAdmin();
-      expect(page.getLoggedOutAlert().isPresent()).toBe(true);
+      await page.logoutAdmin();
+      expect(await page.getLoggedOutAlert().isPresent()).toBe(true);
     });
 
   });

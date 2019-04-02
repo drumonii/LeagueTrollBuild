@@ -1,30 +1,30 @@
-import { browser, by, element, ExpectedConditions } from 'protractor';
+import { browser, by, element, ElementArrayFinder, ElementFinder, ExpectedConditions } from 'protractor';
 
 import { BaseTrollBuildPage } from '../base-troll-build.po';
 
 export class ChampionPage extends BaseTrollBuildPage {
 
-  navigateTo() {
-    return browser.get(`/champions/${this.getChampionName()}`);
+  async navigateTo(): Promise<void> {
+    await browser.get(`/champions/${this.getChampionName()}`);
   }
 
-  navigateToBuild(build: string) {
-    return browser.get(`${build}`);
+  async navigateToBuild(build: string): Promise<void> {
+    await browser.get(`${build}`);
   }
 
-  getChampionName() {
+  getChampionName(): string {
     return 'Skarner';
   }
 
-  getChampion() {
+  getChampion(): ElementFinder {
     return element(by.css('#champion-name'));
   }
 
-  private getMaps() {
+  private getMaps(): ElementFinder {
     return element(by.css('#map-select'));
   }
 
-  getDefaultSelectedMap() {
+  getDefaultSelectedMap(): ElementFinder {
     return this.getMaps().element(by.css('option:checked'));
   }
 
@@ -36,25 +36,25 @@ export class ChampionPage extends BaseTrollBuildPage {
     };
   }
 
-  private getTrollBuildItems() {
+  private getTrollBuildItems(): ElementArrayFinder {
     return element.all(by.css('.troll-build-item'));
   }
 
-  private getTrollBuildSummonerSpells() {
+  private getTrollBuildSummonerSpells(): ElementArrayFinder {
     return element.all(by.css('.troll-build-summoner-spell'));
   }
 
-  private getTrollBuildTrinket() {
+  private getTrollBuildTrinket(): ElementArrayFinder {
     return element.all(by.css('.troll-build-trinket'));
   }
 
-  saveTrollBuild() {
-    element(by.css('#save-build-btn')).click();
-    const saveBuildInput = element(by.css('#saved-build-input-link'));
-    browser.wait(ExpectedConditions.presenceOf(saveBuildInput));
+  async saveTrollBuild(): Promise<void> {
+    await element(by.css('#save-build-btn')).click();
+    const saveBuildInput = await element(by.css('#saved-build-input-link'));
+    await browser.wait(ExpectedConditions.presenceOf(saveBuildInput));
   }
 
-  getSavedBuild() {
+  async getSavedBuild(): Promise<string> {
     return element(by.css('#saved-build-input-link')).getText();
   }
 
