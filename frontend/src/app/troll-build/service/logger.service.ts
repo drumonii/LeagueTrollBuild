@@ -23,6 +23,7 @@ export class Logger {
    */
   debug(message: any, ...optionalParams: any[]): void {
     if (this.isDev) {
+      // tslint:disable-next-line
       console.debug(message, ...optionalParams);
     }
   }
@@ -35,6 +36,7 @@ export class Logger {
    */
   info(message: any, ...optionalParams: any[]): void {
     if (this.isDev) {
+      // tslint:disable-next-line
       console.log(message, ...optionalParams);
     }
   }
@@ -47,6 +49,7 @@ export class Logger {
    */
   warn(message: any, ...optionalParams: any[]): void {
     if (this.isDev) {
+      // tslint:disable-next-line
       console.warn(message, ...optionalParams);
     }
   }
@@ -58,6 +61,7 @@ export class Logger {
    * @param optionalParams the optional params
    */
   error(message: any, ...optionalParams: any[]): void {
+    // tslint:disable-next-line
     console.error(message, ...optionalParams);
   }
 
