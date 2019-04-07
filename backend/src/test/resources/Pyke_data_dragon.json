@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.6.1",
+  "version": "9.7.1",
   "data": {
     "Pyke": {
       "id": "Pyke",
@@ -101,13 +101,13 @@
           },
           "maxrank": 5,
           "cooldown": [
-            16,
             14,
-            12,
-            10,
+            12.5,
+            11,
+            9.5,
             8
           ],
-          "cooldownBurn": "16/14/12/10/8",
+          "cooldownBurn": "14/12.5/11/9.5/8",
           "cost": [
             70,
             70,
@@ -224,8 +224,8 @@
             "full": "PykeQ.png",
             "sprite": "spell9.png",
             "group": "spell",
-            "x": 432,
-            "y": 0,
+            "x": 0,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -363,7 +363,7 @@
             "full": "PykeW.png",
             "sprite": "spell9.png",
             "group": "spell",
-            "x": 0,
+            "x": 48,
             "y": 48,
             "w": 48,
             "h": 48
@@ -411,11 +411,11 @@
               215
             ],
             [
-              1.1,
-              1.1,
-              1.1,
-              1.1,
-              1.1
+              1.25,
+              1.25,
+              1.25,
+              1.25,
+              1.25
             ],
             [
               550,
@@ -477,7 +477,7 @@
           "effectBurn": [
             null,
             "95/125/155/185/215",
-            "1.1",
+            "1.25",
             "550",
             "1",
             "0",
@@ -508,7 +508,7 @@
             "full": "PykeE.png",
             "sprite": "spell9.png",
             "group": "spell",
-            "x": 48,
+            "x": 96,
             "y": 48,
             "w": 48,
             "h": 48
@@ -621,7 +621,7 @@
             "full": "PykeR.png",
             "sprite": "spell9.png",
             "group": "spell",
-            "x": 96,
+            "x": 144,
             "y": 48,
             "w": 48,
             "h": 48

@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.6.1",
+  "version": "9.7.1",
   "data": {
     "Rammus": {
       "id": "Rammus",
@@ -260,7 +260,7 @@
             "full": "PowerBall.png",
             "sprite": "spell9.png",
             "group": "spell",
-            "x": 48,
+            "x": 96,
             "y": 96,
             "w": 48,
             "h": 48
@@ -407,7 +407,7 @@
             "full": "DefensiveBallCurl.png",
             "sprite": "spell9.png",
             "group": "spell",
-            "x": 96,
+            "x": 144,
             "y": 96,
             "w": 48,
             "h": 48
@@ -548,7 +548,7 @@
             "full": "PuncturingTaunt.png",
             "sprite": "spell9.png",
             "group": "spell",
-            "x": 144,
+            "x": 192,
             "y": 96,
             "w": 48,
             "h": 48
@@ -559,7 +559,7 @@
           "id": "Tremors2",
           "name": "Tremors",
           "description": "Rammus creates waves of destruction pulsing through the ground, causing damage to nearby enemies and slowing them. Turrets take double damage from Tremors.",
-          "tooltip": "Shake the earth for {{ e2 }} seconds, dealing {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage to nearby enemies and slowing them by {{ e4 }}% for {{ e3 }} seconds, stacking up to {{ e6 }} times.<br /><br />Tremors deals {{ e5 }}% damage to turrets.",
+          "tooltip": "Shake the earth for {{ duration }} seconds, dealing {{ damagecalc }} magic damage to nearby enemies and slowing them by {{ slowperstack*100 }}% for {{ slowduration }} seconds, stacking up to {{ numberofpulses }} times.<br /><br />Tremors deals {{ turretdamagemodifier*100 }}% damage to turrets.",
           "leveltip": {
             "label": [
               "Damage per Tremor",
@@ -567,8 +567,8 @@
               "Cooldown"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
-              "{{ e4 }}% -> {{ e4NL }}%",
+              "{{ damageperpulse }} -> {{ damageperpulseNL }}",
+              "{{ slowperstack*100.000000 }}% -> {{ slowperstacknl*100.000000 }}%",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
@@ -589,34 +589,34 @@
           "effect": [
             null,
             [
-              40,
-              80,
-              120
+              0,
+              0,
+              0
             ],
             [
-              7,
-              7,
-              7
+              0,
+              0,
+              0
             ],
             [
-              1.5,
-              1.5,
-              1.5
+              0,
+              0,
+              0
             ],
             [
-              8,
-              10,
-              12
+              0,
+              0,
+              0
             ],
             [
-              200,
-              200,
-              200
+              0,
+              0,
+              0
             ],
             [
-              8,
-              8,
-              8
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -641,24 +641,18 @@
           ],
           "effectBurn": [
             null,
-            "40/80/120",
-            "7",
-            "1.5",
-            "8/10/12",
-            "200",
-            "8",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
             "0",
             "0",
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.2,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -671,7 +665,7 @@
             "full": "Tremors2.png",
             "sprite": "spell9.png",
             "group": "spell",
-            "x": 192,
+            "x": 240,
             "y": 96,
             "w": 48,
             "h": 48

@@ -1,6 +1,6 @@
 {
   "type": "item",
-  "version": "9.6.1",
+  "version": "9.7.1",
   "basic": {
     "name": "",
     "rune": {
@@ -504,7 +504,8 @@
         "3109",
         "3026",
         "3193",
-        "3742"
+        "3742",
+        "4026"
       ],
       "image": {
         "full": "1031.png",
@@ -694,6 +695,7 @@
         "3031",
         "3072",
         "3161",
+        "4026",
         "4403"
       ],
       "image": {
@@ -1283,7 +1285,7 @@
     },
     "1082": {
       "name": "The Dark Seal",
-      "description": "<stats>+15 Ability Power<br>+25% Increased Healing from Potions<br><mana>+100 Mana</mana></stats><br><br><unique>UNIQUE Passive - Dread:</unique> Grants +3 Ability Power per Glory.  <br><unique>UNIQUE Passive - Do or Die:</unique> Grants 2 Glory for a champion kill or 1 Glory for an assist, up to 10 Glory total. Lose 4 Glory on death.",
+      "description": "<stats>+10 Ability Power<br>+25% Increased Healing from Potions<br><mana>+100 Mana</mana></stats><br><br><unique>UNIQUE Passive - Dread:</unique> Grants +3 Ability Power per Glory.  <br><unique>UNIQUE Passive - Do or Die:</unique> Grants 2 Glory for a champion kill or 1 Glory for an assist, up to 10 Glory total. Lose 4 Glory on death.",
       "colloq": ";Noxian",
       "plaintext": "Provides Ability Power and Mana.  Increases in power as you kill enemies.",
       "into": [
@@ -1302,7 +1304,7 @@
         "base": 350,
         "purchasable": true,
         "total": 350,
-        "sell": 245
+        "sell": 140
       },
       "tags": [
         "HealthRegen",
@@ -1317,7 +1319,7 @@
       },
       "stats": {
         "FlatMPPoolMod": 100,
-        "FlatMagicDamageMod": 15
+        "FlatMagicDamageMod": 10
       },
       "effect": {
         "Effect1Amount": "0.25",
@@ -1416,7 +1418,7 @@
     },
     "1401": {
       "name": "Enchantment: Cinderhulk",
-      "description": "<stats>+300 Health<br>+15% Bonus Health</stats><br><br><unique>UNIQUE Passive - Immolate:</unique> Deals 11 (+1 per champion level) magic damage a second to nearby enemies while in combat. Deals 200% bonus damage to minions and monsters.<br><br><groupLimit>Limited to 1 Gold Income or Jungle item.</groupLimit>",
+      "description": "<stats>+300 Health<br>+15% Bonus Health</stats><br><br><unique>UNIQUE Passive - Immolate:</unique> Deals 11 (+1 per champion level) magic damage a second to nearby enemies while in combat. Deals 300% bonus damage to minions and monsters.<br><br><groupLimit>Limited to 1 Gold Income or Jungle item.</groupLimit>",
       "colloq": "",
       "plaintext": "Grants Health and Immolate Aura",
       "from": [
@@ -1559,7 +1561,7 @@
     },
     "1413": {
       "name": "Enchantment: Cinderhulk",
-      "description": "<stats>+300 Health<br>+15% Bonus Health</stats><br><br><unique>UNIQUE Passive - Immolate:</unique> Deals 11 (+1 per champion level) magic damage a second to nearby enemies while in combat. Deals 200% bonus damage to minions and monsters.<br><br><groupLimit>Limited to 1 Gold Income or Jungle item.</groupLimit>",
+      "description": "<stats>+300 Health<br>+15% Bonus Health</stats><br><br><unique>UNIQUE Passive - Immolate:</unique> Deals 11 (+1 per champion level) magic damage a second to nearby enemies while in combat. Deals 300% bonus damage to minions and monsters.<br><br><groupLimit>Limited to 1 Gold Income or Jungle item.</groupLimit>",
       "colloq": "",
       "plaintext": "Grants Health and Immolate Aura",
       "from": [
@@ -3061,7 +3063,8 @@
         "3026",
         "3193",
         "3090",
-        "4003"
+        "4003",
+        "4026"
       ],
       "image": {
         "full": "2420.png",
@@ -6076,9 +6079,9 @@
     },
     "3091": {
       "name": "Wit's End",
-      "description": "<stats>+40% Attack Speed<br>+40 Magic Resist</stats><br><br><unique>UNIQUE Passive:</unique> Basic attacks deal 42 bonus magic damage on hit.<br><unique>UNIQUE Passive:</unique> Basic attacks steal 3 Magic Resist from the target on hit (6 if the attacker is melee), up to a maximum of 30 Magic Resist.",
+      "description": "<stats>+50% Attack Speed<br>+50 Magic Resist<br>+5% Movement Speed</stats><br><br><unique>UNIQUE Passive - At Wit's End:</unique> Deal <scaleLevel>[15 - 80]</scaleLevel> magic damage on hit. While below half health, heal for 33% of this effect's damage dealt - increased to 100% for Melee Champions.",
       "colloq": ";",
-      "plaintext": "Deals bonus magic damage on basic attacks",
+      "plaintext": "Resist magic damage and claw your way back to life.",
       "from": [
         "1043",
         "1057",
@@ -6094,15 +6097,16 @@
         "h": 48
       },
       "gold": {
-        "base": 380,
+        "base": 880,
         "purchasable": true,
-        "total": 2400,
-        "sell": 1680
+        "total": 2900,
+        "sell": 2030
       },
       "tags": [
+        "SpellBlock",
         "AttackSpeed",
-        "OnHit",
-        "SpellBlock"
+        "LifeSteal",
+        "NonbootsMovement"
       ],
       "maps": {
         "10": true,
@@ -6110,14 +6114,18 @@
         "12": true
       },
       "stats": {
-        "FlatSpellBlockMod": 40,
-        "PercentAttackSpeedMod": 0.4
+        "PercentMovementSpeedMod": 0.05,
+        "FlatSpellBlockMod": 50,
+        "PercentAttackSpeedMod": 0.5
       },
       "effect": {
-        "Effect1Amount": "42",
-        "Effect2Amount": "6",
-        "Effect3Amount": "30",
-        "Effect4Amount": "3"
+        "Effect1Amount": "15",
+        "Effect2Amount": "80",
+        "Effect3Amount": "0.5",
+        "Effect4Amount": "0.33",
+        "Effect5Amount": "1",
+        "Effect6Amount": "10",
+        "Effect7Amount": "-8.75"
       },
       "depth": 3
     },
@@ -14104,7 +14112,7 @@
     },
     "4001": {
       "name": "Ghostwalkers (Melee Only)",
-      "description": "<groupLimit>Limited to 1 pair of boots.</groupLimit><br><br><unique>UNIQUE Active:</unique> Become Ghostly for 6 seconds, ignoring terrain collision. While inside terrain, gain 125 movement speed and become untargetable, stealthed, and silenced (60 second cooldown).<br><unique>UNIQUE Passive - Enhanced Movement:</unique> +45 Movement Speed<br><br><rules>(Ghostwalkers are unaffected by the Predator Rune.)</rules>",
+      "description": "<groupLimit>Limited to 1 pair of boots.</groupLimit><br><br><unique>UNIQUE Active:</unique> Become Ghostly for 6 seconds, ignoring terrain collision. While inside terrain, gain 250 movement speed and become untargetable, stealthed, and silenced. Cannot be used within 3 seconds of taking damage. (80 second cooldown)<br><unique>UNIQUE Passive - Enhanced Movement:</unique> +45 Movement Speed<br><br><rules>(Ghostwalkers are unaffected by the Predator Rune.)</rules>",
       "colloq": ";",
       "plaintext": "Enhances Movement Speed and grants temporary wall walking.",
       "from": [
@@ -14131,7 +14139,7 @@
       "maps": {
         "10": false,
         "11": false,
-        "12": false
+        "12": true
       },
       "stats": {
         "FlatMovementSpeedMod": 45
@@ -14139,8 +14147,9 @@
       "effect": {
         "Effect1Amount": "6",
         "Effect2Amount": "125",
-        "Effect3Amount": "125",
-        "Effect4Amount": "60"
+        "Effect3Amount": "250",
+        "Effect4Amount": "80",
+        "Effect5Amount": "3"
       },
       "depth": 2
     },
@@ -14236,6 +14245,51 @@
       },
       "depth": 3
     },
+    "4026": {
+      "name": "Mariner's Vengeance",
+      "description": "<stats>+45 Attack Damage<br>+40 Armor</stats><br><br><unique>UNIQUE Passive:</unique> Upon taking lethal damage, immediately Cleanse all crowd control effects, refresh basic ability cooldowns, and become immune to death for 4 seconds. At the end of that period, you die. (210 second cooldown).",
+      "colloq": ";ga",
+      "plaintext": "Allows champion to linger a few seconds after death.",
+      "from": [
+        "1038",
+        "1031",
+        "2420"
+      ],
+      "image": {
+        "full": "4026.png",
+        "sprite": "item3.png",
+        "group": "item",
+        "x": 336,
+        "y": 0,
+        "w": 48,
+        "h": 48
+      },
+      "gold": {
+        "base": 100,
+        "purchasable": true,
+        "total": 2800,
+        "sell": 1120
+      },
+      "tags": [
+        "Armor",
+        "Damage"
+      ],
+      "maps": {
+        "10": false,
+        "11": false,
+        "12": true
+      },
+      "stats": {
+        "FlatPhysicalDamageMod": 45,
+        "FlatArmorMod": 40
+      },
+      "effect": {
+        "Effect1Amount": "5",
+        "Effect2Amount": "4",
+        "Effect3Amount": "210"
+      },
+      "depth": 3
+    },
     "4101": {
       "name": "Pridestalker's Blade",
       "description": "<unique>UNIQUE Passive - Tooth / Nail:</unique> Basic attacks vs. monsters deal 40 bonus damage.  Damaging a monster with a spell or attack steals 30 Health over 5 seconds and burns them for 80 magic damage.<mana> While in the jungle or river, regenerate up to 8 Mana per second based on your missing Mana.</mana><br><br><groupLimit>Limited to 1 Starter item.</groupLimit>",
@@ -14251,7 +14305,7 @@
         "full": "4101.png",
         "sprite": "item3.png",
         "group": "item",
-        "x": 336,
+        "x": 384,
         "y": 0,
         "w": 48,
         "h": 48
@@ -14301,7 +14355,7 @@
         "full": "4102.png",
         "sprite": "item3.png",
         "group": "item",
-        "x": 384,
+        "x": 432,
         "y": 0,
         "w": 48,
         "h": 48
@@ -14347,8 +14401,8 @@
         "full": "4103.png",
         "sprite": "item3.png",
         "group": "item",
-        "x": 432,
-        "y": 0,
+        "x": 0,
+        "y": 48,
         "w": 48,
         "h": 48
       },
@@ -14394,7 +14448,7 @@
         "full": "4104.png",
         "sprite": "item3.png",
         "group": "item",
-        "x": 0,
+        "x": 48,
         "y": 48,
         "w": 48,
         "h": 48
@@ -14441,7 +14495,7 @@
         "full": "4105.png",
         "sprite": "item3.png",
         "group": "item",
-        "x": 48,
+        "x": 96,
         "y": 48,
         "w": 48,
         "h": 48
@@ -14482,7 +14536,7 @@
         "full": "4201.png",
         "sprite": "item3.png",
         "group": "item",
-        "x": 96,
+        "x": 144,
         "y": 48,
         "w": 48,
         "h": 48
@@ -14523,7 +14577,7 @@
         "full": "4202.png",
         "sprite": "item3.png",
         "group": "item",
-        "x": 144,
+        "x": 192,
         "y": 48,
         "w": 48,
         "h": 48
@@ -14563,7 +14617,7 @@
         "full": "4203.png",
         "sprite": "item3.png",
         "group": "item",
-        "x": 192,
+        "x": 240,
         "y": 48,
         "w": 48,
         "h": 48
@@ -14603,7 +14657,7 @@
         "full": "4204.png",
         "sprite": "item3.png",
         "group": "item",
-        "x": 240,
+        "x": 288,
         "y": 48,
         "w": 48,
         "h": 48
@@ -14641,7 +14695,7 @@
         "full": "4301.png",
         "sprite": "item3.png",
         "group": "item",
-        "x": 288,
+        "x": 336,
         "y": 48,
         "w": 48,
         "h": 48
@@ -14691,7 +14745,7 @@
         "full": "4302.png",
         "sprite": "item3.png",
         "group": "item",
-        "x": 336,
+        "x": 384,
         "y": 48,
         "w": 48,
         "h": 48
@@ -14753,7 +14807,7 @@
         "full": "4401.png",
         "sprite": "item3.png",
         "group": "item",
-        "x": 384,
+        "x": 432,
         "y": 48,
         "w": 48,
         "h": 48
@@ -14796,8 +14850,8 @@
         "full": "4402.png",
         "sprite": "item3.png",
         "group": "item",
-        "x": 432,
-        "y": 48,
+        "x": 0,
+        "y": 96,
         "w": 48,
         "h": 48
       },
@@ -14852,7 +14906,7 @@
         "full": "4403.png",
         "sprite": "item3.png",
         "group": "item",
-        "x": 0,
+        "x": 48,
         "y": 96,
         "w": 48,
         "h": 48

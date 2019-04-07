@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.6.1",
+  "version": "9.7.1",
   "data": {
     "Shen": {
       "id": "Shen",
@@ -252,7 +252,7 @@
             "full": "ShenQ.png",
             "sprite": "spell10.png",
             "group": "spell",
-            "x": 336,
+            "x": 384,
             "y": 48,
             "w": 48,
             "h": 48
@@ -391,7 +391,7 @@
             "full": "ShenW.png",
             "sprite": "spell10.png",
             "group": "spell",
-            "x": 384,
+            "x": 432,
             "y": 48,
             "w": 48,
             "h": 48
@@ -532,8 +532,8 @@
             "full": "ShenE.png",
             "sprite": "spell10.png",
             "group": "spell",
-            "x": 432,
-            "y": 48,
+            "x": 0,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -543,7 +543,7 @@
           "id": "ShenR",
           "name": "Stand United",
           "description": "Shen shields target allied champion from incoming damage, and soon after teleports to their location.",
-          "tooltip": "Shen grants a shield to a target allied champion that lasts {{ e2 }} seconds and absorbs up to {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> to {{ e8 }} <scaleAP>(+{{ f2 }})</scaleAP> damage based on their missing health. After channeling for {{ f1 }} seconds, Shen and his <span class=\"colorBB77FF\">spirit blade</span> teleport to the ally's location.",
+          "tooltip": "Shen grants a shield to a target allied champion that lasts {{ shieldduration }} seconds and absorbs up to {{ shield }} to {{ maxshield }} damage based on their missing health. After channeling for {{ channelduration }} seconds, Shen and his <span class=\"colorBB77FF\">spirit blade</span> teleport to the ally's location.",
           "leveltip": {
             "label": [
               "Minimum Shield Health",
@@ -551,8 +551,8 @@
               "Cooldown"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
-              "{{ e8 }} -> {{ e8NL }}",
+              "{{ baseshieldamount }} -> {{ baseshieldamountNL }}",
+              "{{ baseshieldmax_tooltip }} -> {{ baseshieldmax_tooltipNL }}",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
@@ -573,44 +573,44 @@
           "effect": [
             null,
             [
-              175,
-              350,
-              525
+              0,
+              0,
+              0
             ],
             [
-              5,
-              5,
-              5
+              0,
+              0,
+              0
             ],
             [
-              175,
-              175,
-              175
+              0,
+              0,
+              0
             ],
             [
-              2000,
-              2000,
-              2000
+              0,
+              0,
+              0
             ],
             [
-              600,
-              600,
-              600
+              0,
+              0,
+              0
             ],
             [
-              0.4,
-              0.4,
-              0.4
+              0,
+              0,
+              0
             ],
             [
-              1.6,
-              1.6,
-              1.6
+              0,
+              0,
+              0
             ],
             [
-              280,
-              560,
-              840
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -625,24 +625,18 @@
           ],
           "effectBurn": [
             null,
-            "175/350/525",
-            "5",
-            "175",
-            "2000",
-            "600",
-            "0.4",
-            "1.6",
-            "280/560/840",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 1.35,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": "No Cost",
           "maxammo": "-1",
           "range": [
@@ -655,7 +649,7 @@
             "full": "ShenR.png",
             "sprite": "spell10.png",
             "group": "spell",
-            "x": 0,
+            "x": 48,
             "y": 96,
             "w": 48,
             "h": 48

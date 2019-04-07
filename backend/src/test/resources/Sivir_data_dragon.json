@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.6.1",
+  "version": "9.7.1",
   "data": {
     "Sivir": {
       "id": "Sivir",
@@ -272,7 +272,7 @@
             "full": "SivirQ.png",
             "sprite": "spell10.png",
             "group": "spell",
-            "x": 144,
+            "x": 192,
             "y": 144,
             "w": 48,
             "h": 48
@@ -413,7 +413,7 @@
             "full": "SivirW.png",
             "sprite": "spell10.png",
             "group": "spell",
-            "x": 192,
+            "x": 240,
             "y": 144,
             "w": 48,
             "h": 48
@@ -554,7 +554,7 @@
             "full": "SivirE.png",
             "sprite": "spell10.png",
             "group": "spell",
-            "x": 240,
+            "x": 288,
             "y": 144,
             "w": 48,
             "h": 48
@@ -565,7 +565,7 @@
           "id": "SivirR",
           "name": "On The Hunt",
           "description": "Sivir leads her allies in battle, granting them a surge Movement Speed for a period of time. Additionally passively grants Sivir bonus Attack Speed while Ricochet is active.",
-          "tooltip": "<spellPassive>Passive: </spellPassive>Sivir gains {{ ricochetattackspeed*100 }}% Attack Speed while Ricochet is active.<br /><br /><spellPassive>Active: </spellPassive>Sivir rallies her allies for {{ e3 }} seconds, granting all nearby allies an initial {{ e4 }}% Movement Speed bonus that reduces to {{ e2 }}% after the first {{ e5 }} seconds of On The Hunt elapse.",
+          "tooltip": "<spellPassive>Passive: </spellPassive>Sivir gains {{ ricochetattackspeed*100 }}% Attack Speed while Ricochet is active.<br /><br /><spellPassive>Active: </spellPassive>Sivir rallies her allies for {{ ultduration }} seconds, granting all nearby allies an initial {{ maxms }}% Movement Speed bonus that reduces to {{ minms }}% after the first {{ maxmsduration }} seconds of On The Hunt elapse.",
           "leveltip": {
             "label": [
               "Attack Speed",
@@ -575,8 +575,8 @@
             ],
             "effect": [
               "{{ ricochetattackspeed*100.000000 }}% -> {{ ricochetattackspeednl*100.000000 }}%",
-              "{{ e4 }}% -> {{ e4NL }}%",
-              "{{ e5 }} -> {{ e5NL }}",
+              "{{ maxms }}% -> {{ maxmsNL }}%",
+              "{{ maxmsduration }} -> {{ maxmsdurationNL }}",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
@@ -597,34 +597,34 @@
           "effect": [
             null,
             [
-              0.3,
-              0.45,
-              0.6
+              0,
+              0,
+              0
             ],
             [
-              20,
-              20,
-              20
+              0,
+              0,
+              0
             ],
             [
-              8,
-              8,
-              8
+              0,
+              0,
+              0
             ],
             [
-              40,
-              50,
-              60
+              0,
+              0,
+              0
             ],
             [
-              2,
-              3,
-              4
+              0,
+              0,
+              0
             ],
             [
-              1000,
-              1000,
-              1000
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -649,12 +649,12 @@
           ],
           "effectBurn": [
             null,
-            "0.3/0.45/0.6",
-            "20",
-            "8",
-            "40/50/60",
-            "2/3/4",
-            "1000",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
             "0",
             "0",
             "0",
@@ -673,7 +673,7 @@
             "full": "SivirR.png",
             "sprite": "spell10.png",
             "group": "spell",
-            "x": 288,
+            "x": 336,
             "y": 144,
             "w": 48,
             "h": 48

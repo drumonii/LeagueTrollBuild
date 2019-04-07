@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.6.1",
+  "version": "9.7.1",
   "data": {
     "Swain": {
       "id": "Swain",
@@ -240,8 +240,8 @@
             "full": "SwainQ.png",
             "sprite": "spell11.png",
             "group": "spell",
-            "x": 432,
-            "y": 0,
+            "x": 0,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -393,7 +393,7 @@
             "full": "SwainW.png",
             "sprite": "spell11.png",
             "group": "spell",
-            "x": 0,
+            "x": 48,
             "y": 48,
             "w": 48,
             "h": 48
@@ -549,7 +549,7 @@
             "full": "SwainE.png",
             "sprite": "spell11.png",
             "group": "spell",
-            "x": 48,
+            "x": 96,
             "y": 48,
             "w": 48,
             "h": 48
@@ -560,7 +560,7 @@
           "id": "SwainR",
           "name": "Demonic Ascension",
           "description": "Swain transforms into a demon and drains health from the 3 closest enemy champions. After draining enough health, Swain can cast Demonflare to end his transformation and decimate nearby enemies with a nova of soulfire.",
-          "tooltip": "Swain frees the demon within for {{ e3 }} seconds, gaining {{ e6 }} health. Every second, he drains the 3 closest enemy champions for {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage, healing him for {{ e4 }} <scaleAP>(+{{ a2 }})</scaleAP> health. After draining <scaleLevel>{{ f7 }}</scaleLevel> health, Swain gains the ability to cast Demonflare.<br /><br /><span class=\"colorDDDD77\">Demonflare:</span> Swain unleashes a nova of soulfire dealing magic damage and ending his transformation. Damage per <span class=\"size18 colorFF3F3F\">Soul Fragment</span>: {{ e0 }} <scaleAP>(+{{ f1 }})</scaleAP>.<br /><br />Current Damage: {{ f3 }}<br />Max Damage: {{ f2 }}<br /><br /><rules>Swain can drain non-champions to heal for {{ e7 }}% of the normal amount.</rules>",
+          "tooltip": "Swain frees the demon within for {{ demonformduration }} seconds, gaining {{ basehealthgain }} health. Every second, he drains the 3 closest enemy champions for {{ damagecalc }} magic damage, healing him for {{ healingcalc }} health. After draining <scaleLevel>{{ f7 }}</scaleLevel> health, Swain gains the ability to cast Demonflare.<br /><br /><span class=\"colorDDDD77\">Demonflare:</span> Swain unleashes a nova of soulfire dealing magic damage and ending his transformation. Damage per <span class=\"size18 colorFF3F3F\">Soul Fragment</span>: {{ damagepersoulcalc }}.<br /><br />Current Damage: {{ f3 }}<br />Max Damage: {{ f2 }}<br /><br /><rules>Swain can drain non-champions to heal for {{ minionmonsterhealreduction*100 }}% of the normal amount.</rules>",
           "leveltip": {
             "label": [
               "Healing",
@@ -569,10 +569,10 @@
               "Damage Per Soul"
             ],
             "effect": [
-              "{{ e6 }} -> {{ e6NL }}",
-              "{{ e1 }} -> {{ e1NL }}",
-              "{{ e4 }} -> {{ e4NL }}",
-              "{{ e0 }} -> {{ e0NL }}"
+              "{{ basehealthgain }} -> {{ basehealthgainNL }}",
+              "{{ damagepersecond }} -> {{ damagepersecondNL }}",
+              "{{ healpersecond }} -> {{ healpersecondNL }}",
+              "{{ flaredamagepersoul }} -> {{ flaredamagepersoulNL }}"
             ]
           },
           "maxrank": 3,
@@ -592,44 +592,9 @@
           "effect": [
             null,
             [
-              35,
-              50,
-              65
-            ],
-            [
-              1,
-              1,
-              1
-            ],
-            [
-              12,
-              12,
-              12
-            ],
-            [
-              20,
-              35,
-              50
-            ],
-            [
-              0.04,
-              0.06,
-              0.08
-            ],
-            [
-              150,
-              275,
-              400
-            ],
-            [
-              20,
-              20,
-              20
-            ],
-            [
-              0.21,
-              0.21,
-              0.21
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -637,36 +602,60 @@
               0
             ],
             [
-              45,
-              60,
-              75
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
             ]
           ],
           "effectBurn": [
             null,
-            "35/50/65",
-            "1",
-            "12",
-            "20/35/50",
-            "0.04/0.06/0.08",
-            "150/275/400",
-            "20",
-            "0.21",
             "0",
-            "45/60/75"
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.14,
-              "key": "a1"
-            },
-            {
-              "link": "spelldamage",
-              "coeff": 0.16,
-              "key": "a2"
-            }
-          ],
+          "vars": [],
           "costType": "All Soul Fragments",
           "maxammo": "-1",
           "range": [
@@ -679,7 +668,7 @@
             "full": "SwainR.png",
             "sprite": "spell11.png",
             "group": "spell",
-            "x": 96,
+            "x": 144,
             "y": 48,
             "w": 48,
             "h": 48

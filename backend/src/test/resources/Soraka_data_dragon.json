@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.6.1",
+  "version": "9.7.1",
   "data": {
     "Soraka": {
       "id": "Soraka",
@@ -269,7 +269,7 @@
             "full": "SorakaQ.png",
             "sprite": "spell11.png",
             "group": "spell",
-            "x": 240,
+            "x": 288,
             "y": 0,
             "w": 48,
             "h": 48
@@ -418,7 +418,7 @@
             "full": "SorakaW.png",
             "sprite": "spell11.png",
             "group": "spell",
-            "x": 288,
+            "x": 336,
             "y": 0,
             "w": 48,
             "h": 48
@@ -572,7 +572,7 @@
             "full": "SorakaE.png",
             "sprite": "spell11.png",
             "group": "spell",
-            "x": 336,
+            "x": 384,
             "y": 0,
             "w": 48,
             "h": 48
@@ -583,14 +583,14 @@
           "id": "SorakaR",
           "name": "Wish",
           "description": "Soraka fills her allies with hope, instantly restoring health to herself and all friendly champions.",
-          "tooltip": "Calls upon divine powers to restore {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> Health to all allied Champions. Wish's power is increased by 50% on each Champion below 40% Health.",
+          "tooltip": "Calls upon divine powers to restore {{ healingcalc }} Health to all allied Champions. Wish's power is increased by {{ healingampforlowhealthallies*100 }}% on each Champion below 40% Health.",
           "leveltip": {
             "label": [
               "Healing",
               "Cooldown"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
+              "{{ baseheal }} -> {{ basehealNL }}",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
@@ -611,24 +611,24 @@
           "effect": [
             null,
             [
-              150,
-              250,
-              350
+              0,
+              0,
+              0
             ],
             [
-              120,
-              90,
-              60
+              0,
+              0,
+              0
             ],
             [
-              250,
-              350,
-              450
+              0,
+              0,
+              0
             ],
             [
-              1.5,
-              1.5,
-              1.5
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -663,10 +663,10 @@
           ],
           "effectBurn": [
             null,
-            "150/250/350",
-            "120/90/60",
-            "250/350/450",
-            "1.5",
+            "0",
+            "0",
+            "0",
+            "0",
             "0",
             "0",
             "0",
@@ -674,13 +674,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.55,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -693,7 +687,7 @@
             "full": "SorakaR.png",
             "sprite": "spell11.png",
             "group": "spell",
-            "x": 384,
+            "x": 432,
             "y": 0,
             "w": 48,
             "h": 48

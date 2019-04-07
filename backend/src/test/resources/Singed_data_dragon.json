@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.6.1",
+  "version": "9.7.1",
   "data": {
     "Singed": {
       "id": "Singed",
@@ -257,7 +257,7 @@
             "full": "PoisonTrail.png",
             "sprite": "spell10.png",
             "group": "spell",
-            "x": 240,
+            "x": 288,
             "y": 96,
             "w": 48,
             "h": 48
@@ -398,7 +398,7 @@
             "full": "MegaAdhesive.png",
             "sprite": "spell10.png",
             "group": "spell",
-            "x": 288,
+            "x": 336,
             "y": 96,
             "w": 48,
             "h": 48
@@ -549,7 +549,7 @@
             "full": "Fling.png",
             "sprite": "spell10.png",
             "group": "spell",
-            "x": 336,
+            "x": 384,
             "y": 96,
             "w": 48,
             "h": 48
@@ -560,14 +560,14 @@
           "id": "InsanityPotion",
           "name": "Insanity Potion",
           "description": "Singed drinks a potent brew of chemicals, granting him increased combat stats.",
-          "tooltip": "Singed drinks a potent brew of chemicals, granting him {{ e1 }} Ability Power, Armor, Magic Resist, Movement Speed, Health Regen, and Mana Regen for {{ e2 }} seconds.",
+          "tooltip": "Singed drinks a potent brew of chemicals, granting him {{ statamount }} Ability Power, Armor, Magic Resist, Movement Speed, Health Regen, and Mana Regen for {{ duration }} seconds.",
           "leveltip": {
             "label": [
               "Bonus Stats",
               "Cooldown"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
+              "{{ statamount }} -> {{ statamountNL }}",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
@@ -588,14 +588,14 @@
           "effect": [
             null,
             [
-              30,
-              55,
-              80
+              0,
+              0,
+              0
             ],
             [
-              25,
-              25,
-              25
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -640,8 +640,8 @@
           ],
           "effectBurn": [
             null,
-            "30/55/80",
-            "25",
+            "0",
+            "0",
             "0",
             "0",
             "0",
@@ -664,7 +664,7 @@
             "full": "InsanityPotion.png",
             "sprite": "spell10.png",
             "group": "spell",
-            "x": 384,
+            "x": 432,
             "y": 96,
             "w": 48,
             "h": 48

@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.6.1",
+  "version": "9.7.1",
   "data": {
     "Rumble": {
       "id": "Rumble",
@@ -237,7 +237,7 @@
             "full": "RumbleFlameThrower.png",
             "sprite": "spell10.png",
             "group": "spell",
-            "x": 48,
+            "x": 96,
             "y": 0,
             "w": 48,
             "h": 48
@@ -287,11 +287,11 @@
               220
             ],
             [
-              10,
-              15,
               20,
               25,
-              30
+              30,
+              35,
+              40
             ],
             [
               20,
@@ -353,7 +353,7 @@
           "effectBurn": [
             null,
             "100/130/160/190/220",
-            "10/15/20/25/30",
+            "20/25/30/35/40",
             "20",
             "0",
             "1.5",
@@ -384,7 +384,7 @@
             "full": "RumbleShield.png",
             "sprite": "spell10.png",
             "group": "spell",
-            "x": 96,
+            "x": 144,
             "y": 0,
             "w": 48,
             "h": 48
@@ -531,7 +531,7 @@
             "full": "RumbleGrenade.png",
             "sprite": "spell10.png",
             "group": "spell",
-            "x": 144,
+            "x": 192,
             "y": 0,
             "w": 48,
             "h": 48
@@ -542,24 +542,24 @@
           "id": "RumbleCarpetBomb",
           "name": "The Equalizer",
           "description": "Rumble fires off a group of rockets, creating a wall of flames that damages and slows enemies.",
-          "tooltip": "Rumble launches a line of rockets that creates a burning trail for {{ e5 }} seconds. Enemies in the area have their Movement Speed slowed by {{ e3 }}% and take {{ e1 }}<scaleAP> (+{{ a2 }})</scaleAP> magic damage each second.<br /><br /><specialRules>You can control the placement of this attack by clicking and dragging your mouse in a line.</specialRules>",
+          "tooltip": "Rumble launches a line of rockets that creates a burning trail for {{ trailduration }} seconds. Enemies in the area have their Movement Speed slowed by {{ slowamount }}% and take <magicDamage>{{ damagepersecond }} magic damage</magicDamage> each second.<br /><br /><specialRules>You can control the placement of this attack by clicking and dragging your mouse in a line.</specialRules>",
           "leveltip": {
             "label": [
               "Damage Per Second",
               "Cooldown"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
+              "{{ basedamagepersecond }} -> {{ basedamagepersecondNL }}",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
           "maxrank": 3,
           "cooldown": [
-            110,
             100,
-            90
+            85,
+            70
           ],
-          "cooldownBurn": "110/100/90",
+          "cooldownBurn": "100/85/70",
           "cost": [
             0,
             0,
@@ -570,9 +570,9 @@
           "effect": [
             null,
             [
-              140,
-              210,
-              280
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -580,19 +580,19 @@
               0
             ],
             [
-              35,
-              35,
-              35
+              0,
+              0,
+              0
             ],
             [
-              0.5,
-              0.5,
-              0.5
+              0,
+              0,
+              0
             ],
             [
-              5,
-              5,
-              5
+              0,
+              0,
+              0
             ],
             [
               6,
@@ -622,24 +622,18 @@
           ],
           "effectBurn": [
             null,
-            "140/210/280",
             "0",
-            "35",
-            "0.5",
-            "5",
+            "0",
+            "0",
+            "0",
+            "0",
             "6",
             "0",
             "0",
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.35,
-              "key": "a2"
-            }
-          ],
+          "vars": [],
           "costType": "No Cost",
           "maxammo": "-1",
           "range": [
@@ -652,7 +646,7 @@
             "full": "RumbleCarpetBomb.png",
             "sprite": "spell10.png",
             "group": "spell",
-            "x": 192,
+            "x": 240,
             "y": 0,
             "w": 48,
             "h": 48
