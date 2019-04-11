@@ -1,12 +1,12 @@
 package com.drumonii.loltrollbuild.batch.items;
 
 import com.drumonii.loltrollbuild.model.Item;
-import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.model.image.Image;
 import com.drumonii.loltrollbuild.repository.ItemsRepository;
 import com.drumonii.loltrollbuild.riot.ImageFetcher;
 import com.drumonii.loltrollbuild.riot.api.ItemsResponse;
 import com.drumonii.loltrollbuild.riot.service.ItemsService;
+import com.drumonii.loltrollbuild.test.batch.AbstractBatchTests;
 import com.drumonii.loltrollbuild.test.batch.BatchTest;
 import com.drumonii.loltrollbuild.util.RandomizeUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -14,8 +14,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.batch.core.BatchStatus;
 import org.springframework.batch.core.JobExecution;
-import org.springframework.batch.core.JobParameters;
-import org.springframework.batch.core.JobParametersBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
@@ -31,14 +29,12 @@ import static org.assertj.core.api.Assertions.fail;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 @RunWith(SpringRunner.class)
 @BatchTest(ItemsRetrievalJobConfig.class)
 @Import(ItemsRetrievalJobTestConfig.class)
-public abstract class ItemsRetrievalJobConfigTest {
+public abstract class ItemsRetrievalJobConfigTest extends AbstractBatchTests {
 
 	@MockBean
 	private ItemsService itemsService;
@@ -56,10 +52,6 @@ public abstract class ItemsRetrievalJobConfigTest {
 	private ItemsRetrievalJobLauncherTestUtils jobLauncherTestUtils;
 
 	protected ItemsResponse itemsResponse;
-
-	protected Version latestVersion;
-
-	public abstract void before();
 
 	@Test
 	public void savesNewItems() throws Exception {
@@ -136,13 +128,6 @@ public abstract class ItemsRetrievalJobConfigTest {
 
 		assertThat(itemsRepository.findAll())
 				.containsOnlyElementsOf(items);
-	}
-
-	private JobParameters getJobParameters() {
-		return new JobParametersBuilder()
-				.addString("latestRiotPatch", latestVersion.getPatch())
-				.addDouble("random", Math.random())
-				.toJobParameters();
 	}
 
 }

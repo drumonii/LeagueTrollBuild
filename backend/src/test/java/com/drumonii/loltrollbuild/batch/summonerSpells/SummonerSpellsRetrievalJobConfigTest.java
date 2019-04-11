@@ -1,12 +1,12 @@
 package com.drumonii.loltrollbuild.batch.summonerSpells;
 
 import com.drumonii.loltrollbuild.model.SummonerSpell;
-import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.model.image.Image;
 import com.drumonii.loltrollbuild.repository.SummonerSpellsRepository;
 import com.drumonii.loltrollbuild.riot.ImageFetcher;
 import com.drumonii.loltrollbuild.riot.api.SummonerSpellsResponse;
 import com.drumonii.loltrollbuild.riot.service.SummonerSpellsService;
+import com.drumonii.loltrollbuild.test.batch.AbstractBatchTests;
 import com.drumonii.loltrollbuild.test.batch.BatchTest;
 import com.drumonii.loltrollbuild.util.RandomizeUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -14,8 +14,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.batch.core.BatchStatus;
 import org.springframework.batch.core.JobExecution;
-import org.springframework.batch.core.JobParameters;
-import org.springframework.batch.core.JobParametersBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
@@ -33,14 +31,12 @@ import static org.assertj.core.api.Assertions.fail;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 @RunWith(SpringRunner.class)
 @BatchTest(SummonerSpellsRetrievalJobConfig.class)
 @Import(SummonerSpellsRetrievalJobTestConfig.class)
-public abstract class SummonerSpellsRetrievalJobConfigTest {
+public abstract class SummonerSpellsRetrievalJobConfigTest extends AbstractBatchTests {
 
 	@MockBean
 	private SummonerSpellsService summonerSpellsService;
@@ -58,10 +54,6 @@ public abstract class SummonerSpellsRetrievalJobConfigTest {
 	private SummonerSpellsRetrievalJobLauncherTestUtils jobLauncherTestUtils;
 
 	protected SummonerSpellsResponse summonerSpellsResponse;
-
-	protected Version latestVersion;
-
-	public abstract void before();
 
 	@Test
 	public void savesNewSummonerSpells() throws Exception {
@@ -146,13 +138,6 @@ public abstract class SummonerSpellsRetrievalJobConfigTest {
 				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 
 		assertThat(summonerSpellsRepository.findAll()).containsOnlyElementsOf(summonerSpells);
-	}
-
-	private JobParameters getJobParameters() {
-		return new JobParametersBuilder()
-				.addString("latestRiotPatch", latestVersion.getPatch())
-				.addDouble("random", Math.random())
-				.toJobParameters();
 	}
 
 }

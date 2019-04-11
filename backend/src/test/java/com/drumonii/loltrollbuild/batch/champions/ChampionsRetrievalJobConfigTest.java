@@ -1,20 +1,18 @@
 package com.drumonii.loltrollbuild.batch.champions;
 
 import com.drumonii.loltrollbuild.model.Champion;
-import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.model.image.Image;
 import com.drumonii.loltrollbuild.repository.ChampionsRepository;
 import com.drumonii.loltrollbuild.riot.ImageFetcher;
 import com.drumonii.loltrollbuild.riot.api.ChampionsResponse;
 import com.drumonii.loltrollbuild.riot.service.ChampionsService;
+import com.drumonii.loltrollbuild.test.batch.AbstractBatchTests;
 import com.drumonii.loltrollbuild.test.batch.BatchTest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.batch.core.BatchStatus;
 import org.springframework.batch.core.JobExecution;
-import org.springframework.batch.core.JobParameters;
-import org.springframework.batch.core.JobParametersBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
@@ -33,7 +31,7 @@ import static org.mockito.Mockito.verify;
 @RunWith(SpringRunner.class)
 @BatchTest(ChampionsRetrievalJobConfig.class)
 @Import(ChampionsRetrievalJobTestConfig.class)
-public abstract class ChampionsRetrievalJobConfigTest {
+public abstract class ChampionsRetrievalJobConfigTest extends AbstractBatchTests {
 
 	@MockBean
 	private ChampionsService championsService;
@@ -51,10 +49,6 @@ public abstract class ChampionsRetrievalJobConfigTest {
 	private ChampionsRetrievalJobLauncherTestUtils jobLauncherTestUtils;
 
 	protected ChampionsResponse championsResponse;
-
-	protected Version latestVersion;
-
-	public abstract void before();
 
 	@Test
 	public void savesNewChampions() throws Exception {
@@ -98,13 +92,6 @@ public abstract class ChampionsRetrievalJobConfigTest {
 				.setImgsSrcs(anyList(), any(UriComponentsBuilder.class), eq(latestVersion));
 
 		assertThat(championsRepository.findAll()).containsOnlyElementsOf(championsResponse.getChampions().values());
-	}
-
-	private JobParameters getJobParameters() {
-		return new JobParametersBuilder()
-				.addString("latestRiotPatch", latestVersion.getPatch())
-				.addDouble("random", Math.random())
-				.toJobParameters();
 	}
 
 }
