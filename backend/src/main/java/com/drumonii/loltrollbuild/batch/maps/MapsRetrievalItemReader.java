@@ -35,8 +35,10 @@ public class MapsRetrievalItemReader extends AbstractItemStreamItemReader<GameMa
 
 	@Override
 	public void open(ExecutionContext executionContext) throws ItemStreamException {
-		List<GameMap> deletedMaps = ListUtils.subtract(mapsRepository.findAll(), maps);
-		mapsRepository.deleteAll(deletedMaps);
+		if (!maps.isEmpty()) {
+			List<GameMap> deletedMaps = ListUtils.subtract(mapsRepository.findAll(), maps);
+			mapsRepository.deleteAll(deletedMaps);
+		}
 	}
 
 }

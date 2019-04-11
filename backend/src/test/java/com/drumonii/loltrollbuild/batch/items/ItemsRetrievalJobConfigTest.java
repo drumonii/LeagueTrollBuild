@@ -121,6 +121,23 @@ public abstract class ItemsRetrievalJobConfigTest {
 				.containsOnlyElementsOf(itemsResponse.getItems().values());
 	}
 
+	@Test
+	public void noItemsFromRiotIsNoop() throws Exception {
+		List<Item> items = itemsRepository.saveAll(itemsResponse.getItems().values());
+
+		given(itemsService.getItems(eq(latestVersion)))
+				.willReturn(new ArrayList<>());
+
+		JobExecution jobExecution = jobLauncherTestUtils.launchJob(getJobParameters());
+		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
+
+		verify(imageFetcher, never())
+				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
+
+		assertThat(itemsRepository.findAll())
+				.containsOnlyElementsOf(items);
+	}
+
 	private JobParameters getJobParameters() {
 		return new JobParametersBuilder()
 				.addString("latestRiotPatch", latestVersion.getPatch())

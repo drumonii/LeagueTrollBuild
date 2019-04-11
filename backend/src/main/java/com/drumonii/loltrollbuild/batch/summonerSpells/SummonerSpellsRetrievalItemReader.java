@@ -35,9 +35,11 @@ public class SummonerSpellsRetrievalItemReader extends AbstractItemStreamItemRea
 
 	@Override
 	public void open(ExecutionContext executionContext) throws ItemStreamException {
-		List<SummonerSpell> deletedSummonerSpells = ListUtils.subtract(summonerSpellsRepository.findAll(),
-				summonerSpells);
-		summonerSpellsRepository.deleteAll(deletedSummonerSpells);
+		if (!summonerSpells.isEmpty()) {
+			List<SummonerSpell> deletedSummonerSpells = ListUtils.subtract(summonerSpellsRepository.findAll(),
+					summonerSpells);
+			summonerSpellsRepository.deleteAll(deletedSummonerSpells);
+		}
 	}
 
 }

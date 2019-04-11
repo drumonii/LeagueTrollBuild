@@ -121,6 +121,23 @@ public abstract class MapsRetrievalJobConfigTest {
 				.containsOnlyElementsOf(mapsResponse.getMaps().values());
 	}
 
+	@Test
+	public void noMapsFromRiotIsNoop() throws Exception {
+		List<GameMap> maps = mapsRepository.saveAll(mapsResponse.getMaps().values());
+
+		given(mapsService.getMaps(eq(latestVersion)))
+				.willReturn(new ArrayList<>());
+
+		JobExecution jobExecution = jobLauncherTestUtils.launchJob(getJobParameters());
+		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
+
+		verify(imageFetcher, never())
+				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
+
+		assertThat(mapsRepository.findAll())
+				.containsOnlyElementsOf(maps);
+	}
+
 	private JobParameters getJobParameters() {
 		return new JobParametersBuilder()
 				.addString("latestRiotPatch", latestVersion.getPatch())

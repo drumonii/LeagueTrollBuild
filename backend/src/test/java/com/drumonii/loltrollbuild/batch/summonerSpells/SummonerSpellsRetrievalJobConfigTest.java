@@ -131,6 +131,23 @@ public abstract class SummonerSpellsRetrievalJobConfigTest {
 				.getSummonerSpells().values());
 	}
 
+	@Test
+	public void noSummonerSpellsFromRiotIsNoop() throws Exception {
+		List<SummonerSpell> summonerSpells = summonerSpellsRepository.saveAll(summonerSpellsResponse
+				.getSummonerSpells().values());
+
+		given(summonerSpellsService.getSummonerSpells(eq(latestVersion)))
+				.willReturn(new ArrayList<>());
+
+		JobExecution jobExecution = jobLauncherTestUtils.launchJob(getJobParameters());
+		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
+
+		verify(imageFetcher, never())
+				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
+
+		assertThat(summonerSpellsRepository.findAll()).containsOnlyElementsOf(summonerSpells);
+	}
+
 	private JobParameters getJobParameters() {
 		return new JobParametersBuilder()
 				.addString("latestRiotPatch", latestVersion.getPatch())

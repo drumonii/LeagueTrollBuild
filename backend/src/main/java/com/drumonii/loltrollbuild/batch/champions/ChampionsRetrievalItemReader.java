@@ -35,8 +35,10 @@ public class ChampionsRetrievalItemReader extends AbstractItemStreamItemReader<C
 
 	@Override
 	public void open(ExecutionContext executionContext) throws ItemStreamException {
-		List<Champion> deletedChampions = ListUtils.subtract(championsRepository.findAll(), champions);
-		championsRepository.deleteAll(deletedChampions);
+		if (!champions.isEmpty()) {
+			List<Champion> deletedChampions = ListUtils.subtract(championsRepository.findAll(), champions);
+			championsRepository.deleteAll(deletedChampions);
+		}
 	}
 
 }
