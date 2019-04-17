@@ -19,17 +19,19 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 Run `ng test` to execute the unit tests via https://karma-runner.github.io[Karma].
 
 == Running end-to-end tests
+First run the `webdriver-manager-update` script: `npm run webdriver-manager-update` to download the necessary Selenium bindings.
+Next start the `webdriver-manager` using `webdriver-manager-start` script: `npm run webdriver-manager-start`.
 
-First start the `webdriver-manager` using `webdriver-manager-start` script: `npm run webdriver-manager-start`.
-
-You'll see `ECONNREFUSED` if the `webdriver-manager` is not started:
+Otherwise you'll see `ECONNREFUSED` if the `webdriver-manager` is not started:
 ```
 Error: ECONNREFUSED connect ECONNREFUSED 127.0.0.1:4444
 ```
 
-Next start the backend: `./gradlew bootRun`. You can also start the backend in your IDE.
+NOTE: You may need to download the IE bindings manually by running `./node_modules/.bin/webdriver-manager.cmd update --ie32`
 
-NOTE: e2e tests assume the backend already has data from Riot in the database.
+Ensure PostgreSQL is running then start the backend either with Gradle: `./gradlew bootRun` or in your IDE.
+
+NOTE: e2e tests assume the backend already has data from Riot in the database. If missing data, run the All Retrievals job.
 
 Otherwise you'll see `Error occurred while trying to proxy request` and most tests will fail.
 
