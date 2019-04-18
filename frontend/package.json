@@ -7,6 +7,7 @@
     "start": "ng serve --host 0.0.0.0",
     "build": "ng build --prod",
     "build-with-stats": "ng build --prod --stats-json",
+    "analyze-stats": "webpack-bundle-analyzer dist/stats.json",
     "test": "ng test --code-coverage",
     "test-ci": "ng test --browsers ChromeHeadless --code-coverage --watch=false",
     "webdriver-manager-start": "./node_modules/.bin/webdriver-manager start",
@@ -54,6 +55,7 @@
     "protractor": "~5.4.2",
     "ts-node": "~8.0.3",
     "tslint": "~5.15.0",
-    "typescript": "3.2.4"
+    "typescript": "3.2.4",
+    "webpack-bundle-analyzer": "^3.3.2"
   }
 }
