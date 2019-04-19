@@ -11,6 +11,7 @@ import com.drumonii.loltrollbuild.test.json.JsonTestFilesUtil;
 import com.drumonii.loltrollbuild.test.rest.WebMvcRestTest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -508,6 +509,7 @@ public class ApiDocumentation {
 	 * Builds doc
 	 */
 
+	@Ignore
 	@Test
 	public void getBuilds() throws Exception {
 		Build build = new Build();
@@ -555,6 +557,7 @@ public class ApiDocumentation {
 								.description("The Map Id of the Build"))));
 	}
 
+	@Ignore
 	@Test
 	public void getBuild() throws Exception {
 		Champion pantheon = championsRepository.save(championsResponse.getChampions().get("Pantheon"));

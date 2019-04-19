@@ -3,6 +3,7 @@ package com.drumonii.loltrollbuild.rest;
 import com.drumonii.loltrollbuild.model.Build;
 import com.drumonii.loltrollbuild.test.json.JsonTestFilesUtil;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.springframework.test.context.ActiveProfiles;
 
 import static com.drumonii.loltrollbuild.config.Profiles.DDRAGON;
@@ -10,6 +11,7 @@ import static com.drumonii.loltrollbuild.config.Profiles.TESTING;
 import static com.drumonii.loltrollbuild.util.GameMapUtil.SUMMONERS_RIFT_SID;
 
 @ActiveProfiles({ TESTING, DDRAGON })
+@Ignore
 public class BuildsDdragonRestControllerTest extends BuildsRestControllerTest {
 
 	@Before

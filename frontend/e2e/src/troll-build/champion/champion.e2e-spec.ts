@@ -19,7 +19,7 @@ describe('champion page', () => {
     expect(await trollBuild.trinket().count()).toBe(1);
   });
 
-  it('should save the troll build', async () => {
+  xit('should save the troll build', async () => {
     await page.saveTrollBuild();
 
     const savedBuildLink = await page.getSavedBuild();

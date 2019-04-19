@@ -1,5 +1,6 @@
 package com.drumonii.loltrollbuild.rest;
 
+import com.drumonii.loltrollbuild.config.Profiles.Disabled;
 import com.drumonii.loltrollbuild.model.Build;
 import com.drumonii.loltrollbuild.repository.*;
 import com.drumonii.loltrollbuild.rest.status.BadRequestException;
@@ -28,6 +29,7 @@ import java.util.Optional;
  */
 @RestController
 @RequestMapping("${api.base-path}/builds")
+@Disabled
 public class BuildsRestController {
 
 	static final int PAGE_SIZE = 20;

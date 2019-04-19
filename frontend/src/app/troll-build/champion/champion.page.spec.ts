@@ -923,7 +923,7 @@ describe('ChampionPage', () => {
       }
     }));
 
-    it('should reset the saved Build and generate a new Troll Build after clicking the new build button',
+    xit('should reset the saved Build and generate a new Troll Build after clicking the new build button',
       inject([ChampionService], (championService: ChampionService) => {
       fixture.detectChanges();
 
@@ -968,7 +968,7 @@ describe('ChampionPage', () => {
       }
     }));
 
-    it('should save a Troll Build with after clicking the save build button and then show its self link',
+    xit('should save a Troll Build with after clicking the save build button and then show its self link',
       inject([ChampionService], (championService: ChampionService) => {
       fixture.detectChanges();
 
@@ -1110,9 +1110,9 @@ describe('ChampionPage', () => {
       expect(trollBuildTrinketImg.nativeElement.src).toContain(`/api/img/items/${trollBuild.trinket.id}`);
 
       // Save Troll Build
-      const saveBuildBtn = fixture.debugElement.query(By.css('#save-build-btn'));
-      expect(saveBuildBtn.nativeElement.textContent).toBe('Save Build');
-      expect(newBuildBtn.nativeElement.disabled).toBeFalsy('Expected save build button to be enabled');
+      // const saveBuildBtn = fixture.debugElement.query(By.css('#save-build-btn'));
+      // expect(saveBuildBtn.nativeElement.textContent).toBe('Save Build');
+      // expect(newBuildBtn.nativeElement.disabled).toBeFalsy('Expected save build button to be enabled');
     }
 
   });

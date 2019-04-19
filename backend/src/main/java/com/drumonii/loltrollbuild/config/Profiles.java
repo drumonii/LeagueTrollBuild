@@ -46,6 +46,11 @@ public class Profiles {
 	public static final String TESTING = "testing";
 
 	/**
+	 * Profile for disabling components.
+	 */
+	public static final String DISABLED = "disabled";
+
+	/**
 	 * Indicates a local dev profile.
 	 */
 	@Target(ElementType.TYPE)
@@ -61,6 +66,15 @@ public class Profiles {
 	@Retention(RetentionPolicy.RUNTIME)
 	@Profile(value = TESTING)
 	public @interface Testing {
+	}
+
+	/**
+	 * Indicates a disabled profile.
+	 */
+	@Target(ElementType.TYPE)
+	@Retention(RetentionPolicy.RUNTIME)
+	@Profile(value = DISABLED)
+	public @interface Disabled {
 	}
 
 	/*

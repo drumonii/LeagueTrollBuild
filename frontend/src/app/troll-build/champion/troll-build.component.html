@@ -65,36 +65,36 @@
   </div>
 </div>
 <!-- Save build row -->
-<div class="columns">
-  <div class="column
-    is-5-widescreen is-offset-4-widescreen
-    is-6-desktop is-offset-2-desktop
-    is-6-tablet is-offset-3-tablet
-    is-12-mobile">
-    <ng-container *ngIf="trollBuild; else loadingTrollBuild">
-      <div class="field" [class.has-addons]="build">
-        <div class="control">
-          <button id="save-build-btn" class="button is-dark" (click)="saveBuild()"
-            [class.is-loading]="buildSaving" [disabled]="build">Save Build</button>
-        </div>
-        <ng-container *ngIf="build">
-          <div class="control is-expanded">
-            <input id="saved-build-input-link" class="input" type="text" readonly [value]="build.selfRef" #savedBuildLink>
-          </div>
-          <div class="control">
-            <button id="copy-build-link-btn" class="button" (click)="copyBuildToClipboard(savedBuildLink)">
-              <i class="fa fa-clipboard" aria-hidden="true"></i>
-            </button>
-          </div>
-        </ng-container>
-      </div>
-    </ng-container>
-    <ng-template #loadingTrollBuild>
-      <div class="field">
-        <div class="control">
-          <button id="save-build-btn-loading" class="button is-dark is-loading">Save Build</button>
-        </div>
-      </div>
-    </ng-template>
-  </div>
-</div>
+<!--<div class="columns">-->
+<!--  <div class="column-->
+<!--    is-5-widescreen is-offset-4-widescreen-->
+<!--    is-6-desktop is-offset-2-desktop-->
+<!--    is-6-tablet is-offset-3-tablet-->
+<!--    is-12-mobile">-->
+<!--    <ng-container *ngIf="trollBuild; else loadingTrollBuild">-->
+<!--      <div class="field" [class.has-addons]="build">-->
+<!--        <div class="control">-->
+<!--          <button id="save-build-btn" class="button is-dark" (click)="saveBuild()"-->
+<!--            [class.is-loading]="buildSaving" [disabled]="build">Save Build</button>-->
+<!--        </div>-->
+<!--        <ng-container *ngIf="build">-->
+<!--          <div class="control is-expanded">-->
+<!--            <input id="saved-build-input-link" class="input" type="text" readonly [value]="build.selfRef" #savedBuildLink>-->
+<!--          </div>-->
+<!--          <div class="control">-->
+<!--            <button id="copy-build-link-btn" class="button" (click)="copyBuildToClipboard(savedBuildLink)">-->
+<!--              <i class="fa fa-clipboard" aria-hidden="true"></i>-->
+<!--            </button>-->
+<!--          </div>-->
+<!--        </ng-container>-->
+<!--      </div>-->
+<!--    </ng-container>-->
+<!--    <ng-template #loadingTrollBuild>-->
+<!--      <div class="field">-->
+<!--        <div class="control">-->
+<!--          <button id="save-build-btn-loading" class="button is-dark is-loading">Save Build</button>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </ng-template>-->
+<!--  </div>-->
+<!--</div>-->
