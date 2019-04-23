@@ -3,6 +3,7 @@ package com.drumonii.loltrollbuild.rest;
 import org.hamcrest.Matcher;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -29,12 +30,15 @@ public class ErrorRestControllerTest {
     @LocalServerPort
     private int port;
 
+    @Autowired
+    private TestRestTemplate testRestTemplate;
+
     @Test
     public void getsErrorForPermitAllRequest() {
         RequestEntity<Void> requestEntity = RequestEntity.get(URI.create(createUrl("/api/not-found")))
                 .build();
 
-        ResponseEntity<String> responseEntity = new TestRestTemplate().exchange(requestEntity, String.class);
+        ResponseEntity<String> responseEntity = testRestTemplate.exchange(requestEntity, String.class);
 
         assertThat(responseEntity.getBody()).satisfies(new ErrorJson());
     }
@@ -44,7 +48,7 @@ public class ErrorRestControllerTest {
         RequestEntity<Void> requestEntity = RequestEntity.get(URI.create(createUrl("/api/admin/job-instances")))
                 .build();
 
-        ResponseEntity<String> responseEntity = new TestRestTemplate().exchange(requestEntity, String.class);
+        ResponseEntity<String> responseEntity = testRestTemplate.exchange(requestEntity, String.class);
 
         assertThat(responseEntity.getBody()).satisfies(new ErrorUnauthorizedJson("/api/admin/job-instances"));
     }
