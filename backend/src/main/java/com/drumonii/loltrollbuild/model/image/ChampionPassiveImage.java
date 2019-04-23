@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * Specific {@link Image} of a {@link Champion}'s {@link ChampionPassive} which maps a {@link OneToOne} relationship.
@@ -39,6 +40,26 @@ public class ChampionPassiveImage extends Image implements Serializable {
 
 	public void setPassive(ChampionPassive passive) {
 		this.passive = passive;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		if (!super.equals(o)) {
+			return false;
+		}
+		ChampionPassiveImage that = (ChampionPassiveImage) o;
+		return id == that.id;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(super.hashCode(), id);
 	}
 
 }

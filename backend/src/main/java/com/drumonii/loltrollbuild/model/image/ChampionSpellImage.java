@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * Specific {@link Image} of a {@link Champion}'s {@link ChampionSpell} which maps a {@link OneToOne} relationship.
@@ -39,6 +40,26 @@ public class ChampionSpellImage extends Image implements Serializable {
 
 	public void setSpell(ChampionSpell spell) {
 		this.spell = spell;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		if (!super.equals(o)) {
+			return false;
+		}
+		ChampionSpellImage that = (ChampionSpellImage) o;
+		return key.equals(that.key);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(super.hashCode(), key);
 	}
 
 }
