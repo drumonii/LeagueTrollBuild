@@ -2,10 +2,19 @@ const execSync = require('child_process').execSync;
 const fs = require('fs');
 const os = require('os');
 const readline = require('readline');
+const path = require('path');
 
-const packageJsonFile = './frontend/package.json';
-const packageJsonLockFile = './frontend/package-lock.json';
-const gradlePropertiesFile = './backend/gradle.properties';
+const config = {
+  packageJson: {
+    file: path.join(__dirname, 'frontend/package.json')
+  },
+  packageJsonLock: {
+    file: path.join(__dirname, 'frontend/package-lock.json')
+  },
+  gradleProperties: {
+    file: path.join(__dirname, 'backend/gradle.properties')
+  }
+};
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -18,7 +27,7 @@ const rl = readline.createInterface({
  * @returns {string} the version in x.y.z or x.y.z-SNAPSHOT format
  */
 function getCurrentVersion() {
-  const packageJsonContent = fs.readFileSync(packageJsonFile, 'utf8');
+  const packageJsonContent = fs.readFileSync(config.packageJson.file, 'utf8');
   const packageJson = JSON.parse(packageJsonContent);
   return packageJson.version;
 }
@@ -44,16 +53,16 @@ function incrementVersion(version) {
  */
 function updatePackageJson(version) {
   console.log('updating package.json...');
-  const packageJsonContent = fs.readFileSync(packageJsonFile, 'utf8');
+  const packageJsonContent = fs.readFileSync(config.packageJson.file, 'utf8');
   const packageJson = JSON.parse(packageJsonContent);
   packageJson.version = version;
-  fs.writeFileSync(packageJsonFile, JSON.stringify(packageJson, null, 2));
+  fs.writeFileSync(config.packageJson.file, JSON.stringify(packageJson, null, 2));
 
   console.log('updating package-lock.json...');
-  const packageJsonLockContent = fs.readFileSync(packageJsonLockFile, 'utf8');
+  const packageJsonLockContent = fs.readFileSync(config.packageJsonLock.file, 'utf8');
   const packageJsonLock = JSON.parse(packageJsonLockContent);
   packageJsonLock.version = version;
-  fs.writeFileSync(packageJsonLockFile, JSON.stringify(packageJsonLock, null, 2));
+  fs.writeFileSync(config.packageJsonLock.file, JSON.stringify(packageJsonLock, null, 2));
 }
 
 /**
@@ -63,7 +72,7 @@ function updatePackageJson(version) {
  */
 function updateGradleProperties(version) {
   console.log('updating gradle.properties...');
-  const gradlePropertiesContent = fs.readFileSync(gradlePropertiesFile, 'utf8');
+  const gradlePropertiesContent = fs.readFileSync(config.gradleProperties.file, 'utf8');
 
   const gradleProperties = gradlePropertiesContent.split(os.EOL);
   let newGradleProperties = '';
@@ -80,7 +89,7 @@ function updateGradleProperties(version) {
     }
   }
 
-  fs.writeFileSync(gradlePropertiesFile, newGradleProperties);
+  fs.writeFileSync(config.gradleProperties.file, newGradleProperties);
 }
 
 /**
@@ -101,7 +110,7 @@ function gitCommit(version) {
   }
   console.log(`committing changes with message: '${commitMsg}'`);
 
-  execSync(`git add ${packageJsonFile} ${packageJsonLockFile} ${gradlePropertiesFile}`);
+  execSync(`git add ${config.packageJson.file} ${config.packageJsonLock.file} ${config.gradleProperties.file}`);
   execSync(`git commit -m "${commitMsg}"`);
 }
 
