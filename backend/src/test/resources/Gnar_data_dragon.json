@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.7.1",
+  "version": "9.8.1",
   "data": {
     "Gnar": {
       "id": "Gnar",
@@ -267,7 +267,7 @@
           "id": "GnarW",
           "name": "Hyper / Wallop",
           "description": "Gnar's attacks and spells hype him up, dealing bonus damage and granting him Movement Speed.<br><br>Mega Gnar is too enraged to be hyper and instead can rear up on his hind legs and smash down on the area in front of him, stunning enemies in an area.",
-          "tooltip": "<span class=\"color33FF33\">Mini Gnar: </span><spellPassive>Passive:</spellPassive> Every 3rd attack or spell on the same target deals an additional {{ e1 }} <scaleAP>(+{{ a1 }}) </scaleAP>+ {{ e2 }}% of the target's max Health as magic damage and grants Gnar {{ f1 }}% Movement Speed that decays over 3 seconds (max {{ e4 }} damage vs. monsters). <br /><br /><scaleHealth>Mega Gnar: </scaleHealth>Stuns enemies in an area for {{ e5 }} seconds, dealing {{ e3 }}<scaleAD> (+{{ a2 }})</scaleAD> physical damage.<br /><br />Gnar gains Hyper's Movement Speed bonus when he leaves Mega form.",
+          "tooltip": "<span class=\"color33FF33\">Mini Gnar: </span><spellPassive>Passive:</spellPassive> Every 3rd attack or spell on the same target deals an additional <magicDamage> {{ minitotaldamage }}</magicDamage> + {{ minipercenthpdamage*100 }}% of the target's max Health as magic damage and grants Gnar {{ f1 }}% Movement Speed that decays over 3 seconds (max {{ minimonstercap }} damage vs. monsters). <br /><br /><scaleHealth>Mega Gnar: </scaleHealth>Stuns enemies in an area for {{ megastunduration }} seconds, dealing <physicalDamage>{{ megatotaldamage }} physical damage</physicalDamage>.<br /><br />Gnar gains Hyper's Movement Speed bonus when he leaves Mega form.",
           "leveltip": {
             "label": [
               "Hyper Damage",
@@ -276,10 +276,10 @@
               "Wallop Damage"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
-              "{{ e2 }}% -> {{ e2NL }}%",
-              "{{ e4 }} -> {{ e4NL }}",
-              "{{ e3 }} -> {{ e3NL }}"
+              "{{ minibasedamage }} -> {{ minibasedamageNL }}",
+              "{{ minipercenthpdamage }}% -> {{ minipercenthpdamageNL }}%",
+              "{{ minimonstercap }} -> {{ minimonstercapNL }}",
+              "{{ megabasedamage }} -> {{ megabasedamageNL }}"
             ]
           },
           "maxrank": 5,
@@ -303,67 +303,67 @@
           "effect": [
             null,
             [
-              10,
-              20,
-              30,
-              40,
-              50
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              6,
-              8,
-              10,
-              12,
-              14
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              25,
-              45,
-              65,
-              85,
-              105
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              100,
-              150,
-              200,
-              250,
-              300
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              1.25,
-              1.25,
-              1.25,
-              1.25,
-              1.25
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              3.5,
-              3.5,
-              3.5,
-              3.5,
-              3.5
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              3,
-              3,
-              3,
-              3,
-              3
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              550,
-              550,
-              550,
-              550,
-              550
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              200,
-              200,
-              200,
-              200,
-              200
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -375,29 +375,18 @@
           ],
           "effectBurn": [
             null,
-            "10/20/30/40/50",
-            "6/8/10/12/14",
-            "25/45/65/85/105",
-            "100/150/200/250/300",
-            "1.25",
-            "3.5",
-            "3",
-            "550",
-            "200",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 1,
-              "key": "a1"
-            },
-            {
-              "link": "attackdamage",
-              "coeff": 1,
-              "key": "a2"
-            }
-          ],
+          "vars": [],
           "costType": "No Cost",
           "maxammo": "-1",
           "range": [
@@ -583,11 +572,11 @@
           },
           "maxrank": 3,
           "cooldown": [
-            120,
-            100,
-            80
+            90,
+            60,
+            30
           ],
-          "cooldownBurn": "120/100/80",
+          "cooldownBurn": "90/60/30",
           "cost": [
             0,
             0,

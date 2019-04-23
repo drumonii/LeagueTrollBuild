@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.7.1",
+  "version": "9.8.1",
   "data": {
     "Fiora": {
       "id": "Fiora",
@@ -65,6 +65,12 @@
           "num": 23,
           "name": "Heartpiercer Fiora",
           "chromas": true
+        },
+        {
+          "id": "114031",
+          "num": 31,
+          "name": "Invictus Gaming Fiora",
+          "chromas": false
         }
       ],
       "lore": "The most feared duelist in all Valoran, Fiora is as renowned for her brusque manner and cunning mind as she is for the speed of her bluesteel rapier. Born to House Laurent in the kingdom of Demacia, Fiora took control of the family from her father in the wake of a scandal that nearly destroyed them. House Laurent's reputation was sundered, but Fiora bends her every effort to restore her family's honor and return them to their rightful place among the great and good of Demacia.",
@@ -298,11 +304,11 @@
           "effect": [
             null,
             [
-              90,
-              130,
-              170,
-              210,
-              250
+              110,
+              150,
+              190,
+              230,
+              270
             ],
             [
               0.75,
@@ -312,11 +318,11 @@
               0.75
             ],
             [
-              1.5,
-              1.5,
-              1.5,
-              1.5,
-              1.5
+              2,
+              2,
+              2,
+              2,
+              2
             ],
             [
               50,
@@ -370,9 +376,9 @@
           ],
           "effectBurn": [
             null,
-            "90/130/170/210/250",
+            "110/150/190/230/270",
             "0.75",
-            "1.5",
+            "2",
             "50",
             "0.03",
             "0.15/0.15/0.15/0.15/0.25",
@@ -411,13 +417,11 @@
           "leveltip": {
             "label": [
               "Critical Strike Damage",
-              "Cooldown",
-              "@AbilityResourceName@ Cost"
+              "Cooldown"
             ],
             "effect": [
               "{{ e6 }}% -> {{ e6NL }}%",
-              "{{ cooldown }} -> {{ cooldownNL }}",
-              "{{ cost }} -> {{ costNL }}"
+              "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
           "maxrank": 5,
@@ -431,12 +435,12 @@
           "cooldownBurn": "13/11/9/7/5",
           "cost": [
             40,
-            45,
-            50,
-            55,
-            60
+            40,
+            40,
+            40,
+            40
           ],
-          "costBurn": "40/45/50/55/60",
+          "costBurn": "40",
           "datavalues": {},
           "effect": [
             null,

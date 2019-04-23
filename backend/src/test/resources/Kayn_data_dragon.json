@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.7.1",
+  "version": "9.8.1",
   "data": {
     "Kayn": {
       "id": "Kayn",
@@ -382,17 +382,17 @@
           "id": "KaynE",
           "name": "Shadow Step",
           "description": "Kayn can walk through terrain.",
-          "tooltip": "Kayn gains {{ e1 }}% movement speed and the ability to walk through terrain for {{ e2 }} seconds. When he first enters terrain, he is healed for {{ e7 }} <span class=\"colorFF8C00\">(+{{ a1 }})</span>.<br /><hr><span class=\"color8484fb\">Shadow Assassin:</span> Gain more movement speed and slow immunity.</hr><br /><br /><rules>Maximum duration in combat with enemy champions: {{ e6 }} seconds.<br />Immobilizing effects and spending more than {{ e3 }} consecutive seconds outside of terrain end Shadow Step immediately.</rules>",
+          "tooltip": "Kayn gains {{ e1 }}% movement speed and the ability to walk through terrain for {{ e2 }} seconds. When he first enters terrain, he is healed for {{ e7 }} <span class=\"colorFF8C00\">(+{{ a1 }})</span>.<br /><hr><span class=\"color8484fb\">Shadow Assassin:</span> Cooldown is set to {{ assassincdreduction }} seconds, gain more movement speed, and slow immunity.</hr><br /><br /><rules>Maximum duration in combat with enemy champions: {{ e6 }} seconds.<br />Immobilizing effects and spending more than {{ e3 }} consecutive seconds outside of terrain end Shadow Step immediately.</rules>",
           "leveltip": {
             "label": [
+              "Cooldown",
               "Duration",
-              "Healing",
-              "Cooldown"
+              "Healing"
             ],
             "effect": [
+              "{{ f15 }} -> {{ f16 }}",
               "{{ e2 }} -> {{ e2NL }}",
-              "{{ e7 }} -> {{ e7NL }}",
-              "{{ cooldown }} -> {{ cooldownNL }}"
+              "{{ e7 }} -> {{ e7NL }}"
             ]
           },
           "maxrank": 5,
