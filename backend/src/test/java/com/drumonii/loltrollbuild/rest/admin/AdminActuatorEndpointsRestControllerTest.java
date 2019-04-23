@@ -1,35 +1,15 @@
 package com.drumonii.loltrollbuild.rest.admin;
 
 import com.drumonii.loltrollbuild.annotation.WithMockAdminUser;
+import com.drumonii.loltrollbuild.test.rest.AbstractRestTests;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
 
-import static com.drumonii.loltrollbuild.config.Profiles.DDRAGON;
-import static com.drumonii.loltrollbuild.config.Profiles.TESTING;
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-@AutoConfigureMockMvc
-@ActiveProfiles({ TESTING, DDRAGON })
-public class AdminActuatorEndpointsRestControllerTest {
-
-    @Autowired
-    private MockMvc mockMvc;
-
-    @Value("${api.base-path}")
-    private String apiPath;
+public class AdminActuatorEndpointsRestControllerTest extends AbstractRestTests {
 
     @WithMockAdminUser
     @Test
