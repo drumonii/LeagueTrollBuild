@@ -3,7 +3,6 @@ package com.drumonii.loltrollbuild.batch.champions;
 import com.drumonii.loltrollbuild.model.Champion;
 import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.repository.ChampionsRepository;
-import com.drumonii.loltrollbuild.riot.service.ChampionsService;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
@@ -15,6 +14,7 @@ import org.springframework.batch.item.data.builder.RepositoryItemWriterBuilder;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.retry.backoff.UniformRandomBackOffPolicy;
 
 /**
  * {@link Job} configuration for retrieving the latest {@link Champion} data from Riot's API.
@@ -34,17 +34,21 @@ public class ChampionsRetrievalJobConfig {
 	public Step championsRetrievalStep(StepBuilderFactory stepBuilderFactory) {
 		return stepBuilderFactory.get("championsRetrievalStep")
 				.<Champion, Champion> chunk(25)
-				.reader(championsRetrievalItemReader(null, null))
+				.reader(championsRetrievalItemReader(null))
 				.processor(championsRetrievalItemProcessor(null))
 				.writer(championsRetrievalItemWriter(null))
+				.faultTolerant()
+				.backOffPolicy(new UniformRandomBackOffPolicy())
+				.skip(ChampionsRetrievalException.class)
+				.skipLimit(5)
 				.build();
 	}
 
 	@StepScope
 	@Bean
-	public ChampionsRetrievalItemReader championsRetrievalItemReader(ChampionsService championsService,
+	public ChampionsRetrievalItemReader championsRetrievalItemReader(
 			@Value("#{jobParameters['latestRiotPatch']}") Version latestRiotPatch) {
-		return new ChampionsRetrievalItemReader(championsService.getChampions(latestRiotPatch));
+		return new ChampionsRetrievalItemReader(latestRiotPatch);
 	}
 
 	@StepScope

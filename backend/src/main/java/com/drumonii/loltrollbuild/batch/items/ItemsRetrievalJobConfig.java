@@ -3,7 +3,6 @@ package com.drumonii.loltrollbuild.batch.items;
 import com.drumonii.loltrollbuild.model.Item;
 import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.repository.ItemsRepository;
-import com.drumonii.loltrollbuild.riot.service.ItemsService;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
@@ -15,6 +14,7 @@ import org.springframework.batch.item.data.builder.RepositoryItemWriterBuilder;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.retry.backoff.UniformRandomBackOffPolicy;
 
 /**
  * {@link Job} configuration for retrieving the latest {@link Item} data from Riot's API.
@@ -34,17 +34,21 @@ public class ItemsRetrievalJobConfig {
 	public Step itemsRetrievalStep(StepBuilderFactory stepBuilderFactory) {
 		return stepBuilderFactory.get("itemsRetrievalStep")
 				.<Item, Item> chunk(25)
-				.reader(itemsRetrievalItemReader(null, null))
+				.reader(itemsRetrievalItemReader(null))
 				.processor(itemsRetrievalItemProcessor(null))
 				.writer(itemsRetrievalItemWriter(null))
+				.faultTolerant()
+				.backOffPolicy(new UniformRandomBackOffPolicy())
+				.skip(ItemsRetrievalException.class)
+				.skipLimit(5)
 				.build();
 	}
 
 	@StepScope
 	@Bean
-	public ItemsRetrievalItemReader itemsRetrievalItemReader(ItemsService itemsService,
+	public ItemsRetrievalItemReader itemsRetrievalItemReader(
 			@Value("#{jobParameters['latestRiotPatch']}") Version latestRiotPatch) {
-		return new ItemsRetrievalItemReader(itemsService.getItems(latestRiotPatch));
+		return new ItemsRetrievalItemReader(latestRiotPatch);
 	}
 
 	@StepScope

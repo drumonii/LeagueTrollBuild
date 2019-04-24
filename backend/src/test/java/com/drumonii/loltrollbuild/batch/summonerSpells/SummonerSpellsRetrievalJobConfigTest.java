@@ -67,6 +67,8 @@ public abstract class SummonerSpellsRetrievalJobConfigTest extends AbstractBatch
 		JobExecution jobExecution = jobLauncherTestUtils.launchJob(getJobParameters());
 		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
 
+		verify(summonerSpellsService, times(1)).getSummonerSpells(eq(latestVersion));
+
 		verify(imageFetcher, times(summonerSpellsWithModes.size()))
 				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 
@@ -96,6 +98,8 @@ public abstract class SummonerSpellsRetrievalJobConfigTest extends AbstractBatch
 		JobExecution jobExecution = jobLauncherTestUtils.launchJob(getJobParameters());
 		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
 
+		verify(summonerSpellsService, times(1)).getSummonerSpells(eq(latestVersion));
+
 		verify(imageFetcher, times(1))
 				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 
@@ -116,6 +120,8 @@ public abstract class SummonerSpellsRetrievalJobConfigTest extends AbstractBatch
 		JobExecution jobExecution = jobLauncherTestUtils.launchJob(getJobParameters());
 		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
 
+		verify(summonerSpellsService, times(1)).getSummonerSpells(eq(latestVersion));
+
 		verify(imageFetcher, never())
 				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 
@@ -132,12 +138,30 @@ public abstract class SummonerSpellsRetrievalJobConfigTest extends AbstractBatch
 				.willReturn(new ArrayList<>());
 
 		JobExecution jobExecution = jobLauncherTestUtils.launchJob(getJobParameters());
-		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
+		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.FAILED);
+
+		verify(summonerSpellsService, times(6)).getSummonerSpells(eq(latestVersion));
 
 		verify(imageFetcher, never())
 				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 
 		assertThat(summonerSpellsRepository.findAll()).containsOnlyElementsOf(summonerSpells);
+	}
+
+	@Test
+	public void emptySummonerSpellsResponseRetries() throws Exception {
+		given(summonerSpellsService.getSummonerSpells(eq(latestVersion)))
+				.willReturn(new ArrayList<>());
+
+		JobExecution jobExecution = jobLauncherTestUtils.launchJob(getJobParameters());
+		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.FAILED);
+
+		verify(summonerSpellsService, times(6)).getSummonerSpells(eq(latestVersion));
+
+		verify(imageFetcher, never())
+				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
+
+		assertThat(summonerSpellsRepository.findAll()).isEmpty();
 	}
 
 }

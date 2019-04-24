@@ -3,7 +3,6 @@ package com.drumonii.loltrollbuild.batch.summonerSpells;
 import com.drumonii.loltrollbuild.model.SummonerSpell;
 import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.repository.SummonerSpellsRepository;
-import com.drumonii.loltrollbuild.riot.service.SummonerSpellsService;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
@@ -15,6 +14,7 @@ import org.springframework.batch.item.data.builder.RepositoryItemWriterBuilder;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.retry.backoff.UniformRandomBackOffPolicy;
 
 /**
  * {@link Job} configuration for retrieving the latest {@link SummonerSpell} data from Riot's API.
@@ -34,17 +34,21 @@ public class SummonerSpellsRetrievalJobConfig {
 	public Step summonerSpellsRetrievalStep(StepBuilderFactory stepBuilderFactory) {
 		return stepBuilderFactory.get("summonerSpellsRetrievalStep")
 				.<SummonerSpell, SummonerSpell> chunk(25)
-				.reader(summonerSpellsRetrievalItemReader(null, null))
+				.reader(summonerSpellsRetrievalItemReader(null))
 				.processor(summonerSpellsRetrievalItemProcessor(null))
 				.writer(summonerSpellsRetrievalItemWriter(null))
+				.faultTolerant()
+				.backOffPolicy(new UniformRandomBackOffPolicy())
+				.skip(SummonerSpellsRetrievalException.class)
+				.skipLimit(5)
 				.build();
 	}
 
 	@StepScope
 	@Bean
-	public SummonerSpellsRetrievalItemReader summonerSpellsRetrievalItemReader(SummonerSpellsService summonerSpellsService,
+	public SummonerSpellsRetrievalItemReader summonerSpellsRetrievalItemReader(
 			@Value("#{jobParameters['latestRiotPatch']}") Version latestRiotPatch) {
-		return new SummonerSpellsRetrievalItemReader(summonerSpellsService.getSummonerSpells(latestRiotPatch));
+		return new SummonerSpellsRetrievalItemReader(latestRiotPatch);
 	}
 
 	@StepScope

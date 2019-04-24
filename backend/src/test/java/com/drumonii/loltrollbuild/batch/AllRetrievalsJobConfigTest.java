@@ -23,6 +23,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.ArrayList;
 
 import static com.drumonii.loltrollbuild.batch.scheduling.RetrievalJobsScheduling.LATEST_PATCH_KEY;
+import static com.drumonii.loltrollbuild.config.Profiles.DDRAGON;
 import static com.drumonii.loltrollbuild.config.Profiles.TESTING;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
@@ -31,7 +32,7 @@ import static org.mockito.BDDMockito.given;
 @RunWith(SpringRunner.class)
 @BatchTest({ AllRetrievalsJobConfig.class, ChampionsRetrievalJobConfig.class, ItemsRetrievalJobConfig.class,
 		MapsRetrievalJobConfig.class, SummonerSpellsRetrievalJobConfig.class, VersionsRetrievalJobConfig.class })
-@ActiveProfiles({ TESTING })
+@ActiveProfiles({ TESTING, DDRAGON })
 public class AllRetrievalsJobConfigTest {
 
 	@MockBean
@@ -65,7 +66,8 @@ public class AllRetrievalsJobConfigTest {
 		assertThat(jobParameters.getParameters()).containsKey(LATEST_PATCH_KEY);
 
 		JobExecution jobExecution = jobLauncherTestUtils.launchJob(jobParameters);
-		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
+		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.FAILED);
+
 		assertThat(jobExecution.getJobParameters().getString(LATEST_PATCH_KEY)).isEqualTo(latestVersion.getPatch());
 		assertThat(jobExecution.getJobParameters().getString("another_param")).isNotNull();
 		assertThat(jobExecution.getStepExecutions()).extracting(StepExecution::getStepName)

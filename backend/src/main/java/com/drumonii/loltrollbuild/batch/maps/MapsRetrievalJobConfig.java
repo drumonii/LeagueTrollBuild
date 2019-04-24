@@ -3,7 +3,6 @@ package com.drumonii.loltrollbuild.batch.maps;
 import com.drumonii.loltrollbuild.model.GameMap;
 import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.repository.MapsRepository;
-import com.drumonii.loltrollbuild.riot.service.MapsService;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
@@ -15,6 +14,7 @@ import org.springframework.batch.item.data.builder.RepositoryItemWriterBuilder;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.retry.backoff.UniformRandomBackOffPolicy;
 
 /**
  * {@link Job} configuration for retrieving the latest {@link GameMap} data from Riot's API.
@@ -34,17 +34,21 @@ public class MapsRetrievalJobConfig {
 	public Step mapsRetrievalStep(StepBuilderFactory stepBuilderFactory) {
 		return stepBuilderFactory.get("mapsRetrievalStep")
 				.<GameMap, GameMap> chunk(25)
-				.reader(mapsRetrievalItemReader(null, null))
+				.reader(mapsRetrievalItemReader(null))
 				.processor(mapsRetrievalItemProcessor(null))
 				.writer(mapsRetrievalItemWriter(null))
+				.faultTolerant()
+				.backOffPolicy(new UniformRandomBackOffPolicy())
+				.skip(MapsItemRetrievalException.class)
+				.skipLimit(5)
 				.build();
 	}
 
 	@StepScope
 	@Bean
-	public MapsRetrievalItemReader mapsRetrievalItemReader(MapsService mapsService,
+	public MapsRetrievalItemReader mapsRetrievalItemReader(
 			@Value("#{jobParameters['latestRiotPatch']}") Version latestRiotPatch) {
-		return new MapsRetrievalItemReader(mapsService.getMaps(latestRiotPatch));
+		return new MapsRetrievalItemReader(latestRiotPatch);
 	}
 
 	@StepScope

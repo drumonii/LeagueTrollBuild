@@ -61,6 +61,8 @@ public abstract class ItemsRetrievalJobConfigTest extends AbstractBatchTests {
 		JobExecution jobExecution = jobLauncherTestUtils.launchJob(getJobParameters());
 		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
 
+		verify(itemsService, times(1)).getItems(eq(latestVersion));
+
 		verify(imageFetcher, times(itemsResponse.getItems().values().size()))
 				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 
@@ -86,6 +88,8 @@ public abstract class ItemsRetrievalJobConfigTest extends AbstractBatchTests {
 		JobExecution jobExecution = jobLauncherTestUtils.launchJob(getJobParameters());
 		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
 
+		verify(itemsService, times(1)).getItems(eq(latestVersion));
+
 		verify(imageFetcher, times(1))
 				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 
@@ -106,6 +110,8 @@ public abstract class ItemsRetrievalJobConfigTest extends AbstractBatchTests {
 		JobExecution jobExecution = jobLauncherTestUtils.launchJob(getJobParameters());
 		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
 
+		verify(itemsService, times(1)).getItems(eq(latestVersion));
+
 		verify(imageFetcher, never())
 				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 
@@ -121,13 +127,31 @@ public abstract class ItemsRetrievalJobConfigTest extends AbstractBatchTests {
 				.willReturn(new ArrayList<>());
 
 		JobExecution jobExecution = jobLauncherTestUtils.launchJob(getJobParameters());
-		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
+		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.FAILED);
+
+		verify(itemsService, times(6)).getItems(eq(latestVersion));
 
 		verify(imageFetcher, never())
 				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 
 		assertThat(itemsRepository.findAll())
 				.containsOnlyElementsOf(items);
+	}
+
+	@Test
+	public void emptyItemsResponseRetries() throws Exception {
+		given(itemsService.getItems(eq(latestVersion)))
+				.willReturn(new ArrayList<>());
+
+		JobExecution jobExecution = jobLauncherTestUtils.launchJob(getJobParameters());
+		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.FAILED);
+
+		verify(itemsService, times(6)).getItems(eq(latestVersion));
+
+		verify(imageFetcher, never())
+				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
+
+		assertThat(itemsRepository.findAll()).isEmpty();
 	}
 
 }

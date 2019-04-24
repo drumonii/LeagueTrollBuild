@@ -25,8 +25,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 @RunWith(SpringRunner.class)
 @BatchTest(ChampionsRetrievalJobConfig.class)
@@ -58,6 +57,8 @@ public abstract class ChampionsRetrievalJobConfigTest extends AbstractBatchTests
 		JobExecution jobExecution = jobLauncherTestUtils.launchJob(getJobParameters());
 		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
 
+		verify(championsService, times(1)).getChampions(eq(latestVersion));
+
 		verify(imageFetcher, times(championsResponse.getChampions().values().size() * 2))
 				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 		verify(imageFetcher, times(championsResponse.getChampions().values().size()))
@@ -86,12 +87,32 @@ public abstract class ChampionsRetrievalJobConfigTest extends AbstractBatchTests
 		JobExecution jobExecution = jobLauncherTestUtils.launchJob(getJobParameters());
 		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
 
+		verify(championsService, times(1)).getChampions(eq(latestVersion));
+
 		verify(imageFetcher, times(2))
 				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 		verify(imageFetcher, times(1))
 				.setImgsSrcs(anyList(), any(UriComponentsBuilder.class), eq(latestVersion));
 
 		assertThat(championsRepository.findAll()).containsOnlyElementsOf(championsResponse.getChampions().values());
+	}
+
+	@Test
+	public void emptyChampionsResponseRetries() throws Exception {
+		given(championsService.getChampions(eq(latestVersion)))
+				.willReturn(new ArrayList<>());
+
+		JobExecution jobExecution = jobLauncherTestUtils.launchJob(getJobParameters());
+		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.FAILED);
+
+		verify(championsService, times(6)).getChampions(eq(latestVersion));
+
+		verify(imageFetcher, never())
+				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
+		verify(imageFetcher, never())
+				.setImgsSrcs(anyList(), any(UriComponentsBuilder.class), eq(latestVersion));
+
+		assertThat(championsRepository.findAll()).isEmpty();
 	}
 
 }

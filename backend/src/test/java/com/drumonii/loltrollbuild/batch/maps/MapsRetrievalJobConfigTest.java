@@ -61,6 +61,8 @@ public abstract class MapsRetrievalJobConfigTest extends AbstractBatchTests {
 		JobExecution jobExecution = jobLauncherTestUtils.launchJob(getJobParameters());
 		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
 
+		verify(mapsService, times(1)).getMaps(eq(latestVersion));
+
 		verify(imageFetcher, times(mapsResponse.getMaps().values().size()))
 				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 
@@ -86,6 +88,8 @@ public abstract class MapsRetrievalJobConfigTest extends AbstractBatchTests {
 		JobExecution jobExecution = jobLauncherTestUtils.launchJob(getJobParameters());
 		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
 
+		verify(mapsService, times(1)).getMaps(eq(latestVersion));
+
 		verify(imageFetcher, times(1))
 				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 
@@ -106,6 +110,8 @@ public abstract class MapsRetrievalJobConfigTest extends AbstractBatchTests {
 		JobExecution jobExecution = jobLauncherTestUtils.launchJob(getJobParameters());
 		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
 
+		verify(mapsService, times(1)).getMaps(eq(latestVersion));
+
 		verify(imageFetcher, never())
 				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 
@@ -121,13 +127,31 @@ public abstract class MapsRetrievalJobConfigTest extends AbstractBatchTests {
 				.willReturn(new ArrayList<>());
 
 		JobExecution jobExecution = jobLauncherTestUtils.launchJob(getJobParameters());
-		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
+		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.FAILED);
+
+		verify(mapsService, times(6)).getMaps(eq(latestVersion));
 
 		verify(imageFetcher, never())
 				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 
 		assertThat(mapsRepository.findAll())
 				.containsOnlyElementsOf(maps);
+	}
+
+	@Test
+	public void emptyMapsResponseRetries() throws Exception {
+		given(mapsService.getMaps(eq(latestVersion)))
+				.willReturn(new ArrayList<>());
+
+		JobExecution jobExecution = jobLauncherTestUtils.launchJob(getJobParameters());
+		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.FAILED);
+
+		verify(mapsService, times(6)).getMaps(eq(latestVersion));
+
+		verify(imageFetcher, never())
+				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
+
+		assertThat(mapsRepository.findAll()).isEmpty();
 	}
 
 }
