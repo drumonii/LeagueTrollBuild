@@ -23,7 +23,7 @@ export class FailedJobsComponent implements OnInit {
 
   getFailedJobs(): void {
     this.gettingFailedJobs = true;
-    this.failedJobs$ = forkJoin(this.service.getFailedJobs())
+    this.failedJobs$ = forkJoin([this.service.getFailedJobs()])
       .pipe(
         finalize(() => this.gettingFailedJobs = false)
       );

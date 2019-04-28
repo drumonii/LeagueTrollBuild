@@ -24,7 +24,7 @@ export class MemoryUsageComponent implements OnInit {
 
   getMemoryUsage(): void {
     this.gettingMemoryUsage = true;
-    this.memoryUsage$ = forkJoin(this.service.getMemoryUsage())
+    this.memoryUsage$ = forkJoin([this.service.getMemoryUsage()])
       .pipe(
         finalize(() => this.gettingMemoryUsage = false)
       );

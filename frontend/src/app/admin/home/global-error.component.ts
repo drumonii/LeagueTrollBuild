@@ -24,7 +24,7 @@ export class GlobalErrorComponent implements OnInit {
 
   getGlobalErrors(): void {
     this.gettingGlobalErrors = true;
-    this.globalErrors$ = forkJoin(this.service.getGlobalErrors())
+    this.globalErrors$ = forkJoin([this.service.getGlobalErrors()])
       .pipe(
         finalize(() => this.gettingGlobalErrors = false)
       );
