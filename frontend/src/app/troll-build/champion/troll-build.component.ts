@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { TrollBuild } from '@ltb-model/troll-build';
 import { Build } from '@ltb-model/build';
@@ -6,7 +6,8 @@ import { Build } from '@ltb-model/build';
 @Component({
   selector: 'ltb-troll-build',
   templateUrl: './troll-build.component.html',
-  styleUrls: ['./troll-build.component.scss']
+  styleUrls: ['./troll-build.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TrollBuildComponent implements OnInit {
 
