@@ -22,7 +22,8 @@
         </div>
 
         <div class="columns is-mobile is-gapless is-multiline is-centered">
-          <div class="champion" *ngFor="let champion of (champions | championsNameFilter : championsSearchName | championsTagsFilter : championsFilterTag)">
+          <div class="champion" *ngFor="let champion of (champions | championsNameFilter : championsSearchName | championsTagsFilter : championsFilterTag);
+            trackBy: trackByChampions">
             <div class="column champion-column">
               <a class="champion-link" [routerLink]="['/champions', champion.key]">
                 <p class="champion-name">{{champion.name}}</p>

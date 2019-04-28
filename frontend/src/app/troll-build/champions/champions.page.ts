@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
+import { Champion } from '@ltb-model/champion';
 import { TitleService } from '@ltb-service/title.service';
 import { ChampionsService } from './champions.service';
-import { Champion } from '@ltb-model/champion';
 
 @Component({
   selector: 'ltb-champions',
@@ -44,6 +44,10 @@ export class ChampionsPage implements OnInit {
     } else {
       this.championsFilterTag = selectedFilterTag;
     }
+  }
+
+  trackByChampions(index: number, champion: Champion): number {
+    return champion.id;
   }
 
 }
