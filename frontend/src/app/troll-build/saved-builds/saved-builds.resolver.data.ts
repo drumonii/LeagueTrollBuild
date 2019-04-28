@@ -1,6 +1,6 @@
 import { Build } from '@ltb-model/build';
 
-export interface BuildsResolverData {
+export interface SavedBuildsResolverData {
 
   /**
    * The Build Id.

@@ -8,7 +8,7 @@ import { Logger } from '@ltb-service/logger.service';
 import { Build } from '@ltb-model/build';
 
 @Injectable()
-export class BuildsService {
+export class SavedBuildsService {
 
   constructor(private logger: Logger, private httpClient: HttpClient) {}
 

@@ -6,17 +6,17 @@ import { By } from '@angular/platform-browser';
 
 import { of } from 'rxjs';
 
-import { BuildsPage } from './builds.page';
-import { BuildsModule } from './builds.module';
+import { SavedBuildsPage } from './saved-builds.page';
+import { SavedBuildsModule } from './saved-builds.module';
 import { TitleService } from '@ltb-service/title.service';
-import { BuildsService } from './builds.service';
+import { SavedBuildsService } from './saved-builds.service';
 import { Build } from '@ltb-model/build';
 import { Item } from '@ltb-model/item';
 import { SummonerSpell } from '@ltb-model/summoner-spell';
 
-describe('BuildsPage', () => {
-  let component: BuildsPage;
-  let fixture: ComponentFixture<BuildsPage>;
+describe('SavedBuildsPage', () => {
+  let component: SavedBuildsPage;
+  let fixture: ComponentFixture<SavedBuildsPage>;
 
   const build: Build = {
     id: 3,
@@ -334,7 +334,7 @@ describe('BuildsPage', () => {
   describe('with valid Build', () => {
     beforeEach(async(() => {
       TestBed.configureTestingModule({
-        imports: [BuildsModule, HttpClientTestingModule, RouterTestingModule],
+        imports: [SavedBuildsModule, HttpClientTestingModule, RouterTestingModule],
         providers: [
           {
             provide: ActivatedRoute,
@@ -347,8 +347,8 @@ describe('BuildsPage', () => {
       .compileComponents();
     }));
 
-    beforeEach(inject([BuildsService, TitleService], (buildsService: BuildsService, title: TitleService) => {
-      fixture = TestBed.createComponent(BuildsPage);
+    beforeEach(inject([SavedBuildsService, TitleService], (buildsService: SavedBuildsService, title: TitleService) => {
+      fixture = TestBed.createComponent(SavedBuildsPage);
       component = fixture.componentInstance;
 
       spyOn(buildsService, 'getBuild').and.callThrough();
@@ -359,19 +359,19 @@ describe('BuildsPage', () => {
       fixture.detectChanges();
     }));
 
-    afterEach(inject([BuildsService], (buildsService: BuildsService) => {
+    afterEach(inject([SavedBuildsService], (buildsService: SavedBuildsService) => {
       expect(buildsService.countBuilds).not.toHaveBeenCalled();
       expect(buildsService.getBuild).not.toHaveBeenCalledWith(build.id);
     }));
 
     it('should show a Troll Build with no invalid attributes',
-      inject([BuildsService, TitleService], (buildsService: BuildsService, title: TitleService) => {
+      inject([SavedBuildsService, TitleService], (buildsService: SavedBuildsService, title: TitleService) => {
       expectChampionAndMapsAndSavedTrollBuild();
       expect(title.setTitle).toHaveBeenCalledWith(`${build.champion.name} Build | ${build.id}`);
     }));
 
     it('should redirect to individual Champion page after clicking the new build button',
-      inject([BuildsService, TitleService, Router], (buildsService: BuildsService, title: TitleService, router: Router) => {
+      inject([SavedBuildsService, TitleService, Router], (buildsService: SavedBuildsService, title: TitleService, router: Router) => {
       expectChampionAndMapsAndSavedTrollBuild();
       expect(title.setTitle).toHaveBeenCalledWith(`${build.champion.name} Build | ${build.id}`);
 
@@ -389,7 +389,7 @@ describe('BuildsPage', () => {
   describe('with not found 404 Build', () => {
     beforeEach(async(() => {
       TestBed.configureTestingModule({
-        imports: [BuildsModule, HttpClientTestingModule, RouterTestingModule],
+        imports: [SavedBuildsModule, HttpClientTestingModule, RouterTestingModule],
         providers: [
           {
             provide: ActivatedRoute,
@@ -402,8 +402,8 @@ describe('BuildsPage', () => {
       .compileComponents();
     }));
 
-    beforeEach(inject([BuildsService, TitleService], (buildsService: BuildsService, title: TitleService) => {
-      fixture = TestBed.createComponent(BuildsPage);
+    beforeEach(inject([SavedBuildsService, TitleService], (buildsService: SavedBuildsService, title: TitleService) => {
+      fixture = TestBed.createComponent(SavedBuildsPage);
       component = fixture.componentInstance;
 
       spyOn(buildsService, 'countBuilds').and.callThrough();
@@ -414,7 +414,7 @@ describe('BuildsPage', () => {
     }));
 
     it('should show no Build found alert',
-      inject([BuildsService, TitleService], (buildsService: BuildsService, title: TitleService) => {
+      inject([SavedBuildsService, TitleService], (buildsService: SavedBuildsService, title: TitleService) => {
       const buildNotFoundAlert = fixture.debugElement.query(By.css('#build-not-found-alert'));
       expect(buildNotFoundAlert.nativeElement.textContent).toBe('Couldn\'t find a saved Troll Build with ID: 1');
 
@@ -433,7 +433,7 @@ describe('BuildsPage', () => {
 
     beforeEach(async(() => {
       TestBed.configureTestingModule({
-        imports: [BuildsModule, HttpClientTestingModule, RouterTestingModule],
+        imports: [SavedBuildsModule, HttpClientTestingModule, RouterTestingModule],
         providers: [
           {
             provide: ActivatedRoute,
@@ -446,8 +446,8 @@ describe('BuildsPage', () => {
       .compileComponents();
     }));
 
-    beforeEach(inject([BuildsService, TitleService], (buildsService: BuildsService, title: TitleService) => {
-      fixture = TestBed.createComponent(BuildsPage);
+    beforeEach(inject([SavedBuildsService, TitleService], (buildsService: SavedBuildsService, title: TitleService) => {
+      fixture = TestBed.createComponent(SavedBuildsPage);
       component = fixture.componentInstance;
 
       spyOn(buildsService, 'countBuilds').and.callThrough();
@@ -458,7 +458,7 @@ describe('BuildsPage', () => {
     }));
 
     it('should show invalid Items alert',
-      inject([BuildsService, TitleService], (buildsService: BuildsService, title: TitleService) => {
+      inject([SavedBuildsService, TitleService], (buildsService: SavedBuildsService, title: TitleService) => {
       const buildInvalidAlert = fixture.debugElement.query(By.css('#build-invalid-items-alert'));
       expect(buildInvalidAlert.nativeElement.textContent).toBe('This Troll Build with ID: 1 has become invalid due to outdated Items');
 
@@ -477,7 +477,7 @@ describe('BuildsPage', () => {
 
     beforeEach(async(() => {
       TestBed.configureTestingModule({
-        imports: [BuildsModule, HttpClientTestingModule, RouterTestingModule],
+        imports: [SavedBuildsModule, HttpClientTestingModule, RouterTestingModule],
         providers: [
           {
             provide: ActivatedRoute,
@@ -490,8 +490,8 @@ describe('BuildsPage', () => {
       .compileComponents();
     }));
 
-    beforeEach(inject([BuildsService, TitleService], (buildsService: BuildsService, title: TitleService) => {
-      fixture = TestBed.createComponent(BuildsPage);
+    beforeEach(inject([SavedBuildsService, TitleService], (buildsService: SavedBuildsService, title: TitleService) => {
+      fixture = TestBed.createComponent(SavedBuildsPage);
       component = fixture.componentInstance;
 
       spyOn(buildsService, 'countBuilds').and.callThrough();
@@ -502,7 +502,7 @@ describe('BuildsPage', () => {
     }));
 
     it('should show invalid Summoner Spells alert',
-      inject([BuildsService, TitleService], (buildsService: BuildsService, title: TitleService) => {
+      inject([SavedBuildsService, TitleService], (buildsService: SavedBuildsService, title: TitleService) => {
       const buildInvalidAlert = fixture.debugElement.query(By.css('#build-invalid-summoner-spells-alert'));
       expect(buildInvalidAlert.nativeElement.textContent)
         .toBe('This Troll Build with ID: 1 has become invalid due to outdated Summoner Spells');
@@ -522,7 +522,7 @@ describe('BuildsPage', () => {
 
     beforeEach(async(() => {
       TestBed.configureTestingModule({
-        imports: [BuildsModule, HttpClientTestingModule, RouterTestingModule],
+        imports: [SavedBuildsModule, HttpClientTestingModule, RouterTestingModule],
         providers: [
           {
             provide: ActivatedRoute,
@@ -535,8 +535,8 @@ describe('BuildsPage', () => {
       .compileComponents();
     }));
 
-    beforeEach(inject([BuildsService, TitleService], (buildsService: BuildsService, title: TitleService) => {
-      fixture = TestBed.createComponent(BuildsPage);
+    beforeEach(inject([SavedBuildsService, TitleService], (buildsService: SavedBuildsService, title: TitleService) => {
+      fixture = TestBed.createComponent(SavedBuildsPage);
       component = fixture.componentInstance;
 
       spyOn(buildsService, 'countBuilds').and.callThrough();
@@ -545,7 +545,7 @@ describe('BuildsPage', () => {
     }));
 
     it('should show invalid Trinket alert',
-      inject([BuildsService, TitleService], (buildsService: BuildsService, title: TitleService) => {
+      inject([SavedBuildsService, TitleService], (buildsService: SavedBuildsService, title: TitleService) => {
       fixture.detectChanges();
 
       const buildInvalidAlert = fixture.debugElement.query(By.css('#build-invalid-trinket-alert'));

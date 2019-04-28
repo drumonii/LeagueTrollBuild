@@ -2,23 +2,23 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { BuildsRoutingModule } from './builds-routing.module';
-import { BuildsPage } from './builds.page';
+import { SavedBuildsRoutingModule } from './saved-builds-routing.module';
+import { SavedBuildsPage } from './saved-builds.page';
 import { SavedTrollBuildComponent } from './saved-troll-build.component';
-import { BuildsService } from './builds.service';
+import { SavedBuildsService } from './saved-builds.service';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    BuildsRoutingModule
+    SavedBuildsRoutingModule
   ],
   declarations: [
-    BuildsPage,
+    SavedBuildsPage,
     SavedTrollBuildComponent
   ],
   providers: [
-    BuildsService
+    SavedBuildsService
   ]
 })
-export class BuildsModule { }
+export class SavedBuildsModule { }

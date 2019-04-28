@@ -5,12 +5,12 @@ import { ActivatedRouteSnapshot, convertToParamMap, Router } from '@angular/rout
 
 import { of } from 'rxjs';
 
-import { BuildsResolver } from './builds.resolver';
-import { BuildsService } from './builds.service';
+import { SavedBuildsResolver } from './saved-builds.resolver';
+import { SavedBuildsService } from './saved-builds.service';
 import { Build } from '@ltb-model/build';
 
-describe('BuildsResolver', () => {
-  let resolver: BuildsResolver;
+describe('SavedBuildsResolver', () => {
+  let resolver: SavedBuildsResolver;
 
   const build: Build = {
     id: 9,
@@ -330,7 +330,7 @@ describe('BuildsResolver', () => {
     beforeEach(async(() => {
       TestBed.configureTestingModule({
         imports: [HttpClientTestingModule, RouterTestingModule],
-        providers: [BuildsResolver, BuildsService,
+        providers: [SavedBuildsResolver, SavedBuildsService,
           {
             provide: ActivatedRouteSnapshot,
             useValue: {
@@ -342,20 +342,20 @@ describe('BuildsResolver', () => {
       .compileComponents();
     }));
 
-    beforeEach(inject([BuildsService, Router], (buildsService: BuildsService, router: Router) => {
-      resolver = TestBed.get(BuildsResolver);
+    beforeEach(inject([SavedBuildsService, Router], (buildsService: SavedBuildsService, router: Router) => {
+      resolver = TestBed.get(SavedBuildsResolver);
 
       spyOn(router, 'navigate');
       spyOn(buildsService, 'countBuilds').and.callThrough();
     }));
 
-    afterEach(inject([BuildsService], (buildsService: BuildsService) => {
+    afterEach(inject([SavedBuildsService], (buildsService: SavedBuildsService) => {
       expect(buildsService.getBuild).toHaveBeenCalledWith(1);
       expect(buildsService.countBuilds).not.toHaveBeenCalled();
     }));
 
-    it('should resolve a Build', async(inject([BuildsService, Router, ActivatedRouteSnapshot],
-      (buildsService: BuildsService, router: Router, route: ActivatedRouteSnapshot) => {
+    it('should resolve a Build', async(inject([SavedBuildsService, Router, ActivatedRouteSnapshot],
+      (buildsService: SavedBuildsService, router: Router, route: ActivatedRouteSnapshot) => {
       spyOn(buildsService, 'getBuild').and.returnValue(of(build));
 
       resolver.resolve(route, null).subscribe(data => {
@@ -370,7 +370,7 @@ describe('BuildsResolver', () => {
     beforeEach(async(() => {
       TestBed.configureTestingModule({
         imports: [HttpClientTestingModule, RouterTestingModule],
-        providers: [BuildsResolver, BuildsService,
+        providers: [SavedBuildsResolver, SavedBuildsService,
           {
             provide: ActivatedRouteSnapshot,
             useValue: {
@@ -382,20 +382,20 @@ describe('BuildsResolver', () => {
       .compileComponents();
     }));
 
-    beforeEach(inject([BuildsService, Router], (buildsService: BuildsService, router: Router) => {
-      resolver = TestBed.get(BuildsResolver);
+    beforeEach(inject([SavedBuildsService, Router], (buildsService: SavedBuildsService, router: Router) => {
+      resolver = TestBed.get(SavedBuildsResolver);
 
       spyOn(router, 'navigate');
       spyOn(buildsService, 'getBuild').and.callThrough();
     }));
 
-    afterEach(inject([BuildsService], (buildsService: BuildsService) => {
+    afterEach(inject([SavedBuildsService], (buildsService: SavedBuildsService) => {
       expect(buildsService.getBuild).not.toHaveBeenCalled();
       expect(buildsService.countBuilds).toHaveBeenCalled();
     }));
 
-    it('should resolve a random Build', async(inject([BuildsService, Router, ActivatedRouteSnapshot],
-      (buildsService: BuildsService, router: Router, route: ActivatedRouteSnapshot) => {
+    it('should resolve a random Build', async(inject([SavedBuildsService, Router, ActivatedRouteSnapshot],
+      (buildsService: SavedBuildsService, router: Router, route: ActivatedRouteSnapshot) => {
       spyOn(buildsService, 'countBuilds').and.returnValue(of(2));
 
       resolver.resolve(route, null).subscribe(data => {
@@ -406,8 +406,8 @@ describe('BuildsResolver', () => {
       });
     })));
 
-    it('should resolve the only random Build', async(inject([BuildsService, Router, ActivatedRouteSnapshot],
-      (buildsService: BuildsService, router: Router, route: ActivatedRouteSnapshot) => {
+    it('should resolve the only random Build', async(inject([SavedBuildsService, Router, ActivatedRouteSnapshot],
+      (buildsService: SavedBuildsService, router: Router, route: ActivatedRouteSnapshot) => {
       spyOn(buildsService, 'countBuilds').and.returnValue(of(1));
 
       resolver.resolve(route, null).subscribe(data => {

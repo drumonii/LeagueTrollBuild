@@ -1,7 +1,7 @@
 import { TestBed, inject } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController, RequestMatch } from '@angular/common/http/testing';
 
-import { BuildsService } from './builds.service';
+import { SavedBuildsService } from './saved-builds.service';
 
 import { Build } from '@ltb-model/build';
 
@@ -9,7 +9,7 @@ describe('BuildsService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [BuildsService]
+      providers: [SavedBuildsService]
     });
   });
 
@@ -36,8 +36,8 @@ describe('BuildsService', () => {
 
     const requestMatch: RequestMatch = { method: 'GET', url: `/builds/${mockBuild.id}` };
 
-    it('should GET a build', inject([BuildsService, HttpTestingController],
-      (service: BuildsService, httpMock: HttpTestingController) => {
+    it('should GET a build', inject([SavedBuildsService, HttpTestingController],
+      (service: SavedBuildsService, httpMock: HttpTestingController) => {
 
       service.getBuild(mockBuild.id).subscribe(build => {
         expect(build).toEqual(mockBuild);
@@ -48,8 +48,8 @@ describe('BuildsService', () => {
       testReq.flush(mockBuild);
     }));
 
-    it('should GET a build with REST error of 404 status', inject([BuildsService, HttpTestingController],
-      (service: BuildsService, httpMock: HttpTestingController) => {
+    it('should GET a build with REST error of 404 status', inject([SavedBuildsService, HttpTestingController],
+      (service: SavedBuildsService, httpMock: HttpTestingController) => {
       service.getBuild(mockBuild.id).subscribe(build => {
         expect(build).toBeNull();
       });
@@ -59,8 +59,8 @@ describe('BuildsService', () => {
       testReq.error(new ErrorEvent('An unexpected error occurred'), { status: 404 });
     }));
 
-    it('should GET a build with REST error of 400 status', inject([BuildsService, HttpTestingController],
-      (service: BuildsService, httpMock: HttpTestingController) => {
+    it('should GET a build with REST error of 400 status', inject([SavedBuildsService, HttpTestingController],
+      (service: SavedBuildsService, httpMock: HttpTestingController) => {
       service.getBuild(mockBuild.id).subscribe(build => {
         expect(build).toEqual(new Build());
       });
@@ -76,8 +76,8 @@ describe('BuildsService', () => {
 
     const requestMatch: RequestMatch = { method: 'GET', url: '/builds/count' };
 
-    it('should GET count of builds', inject([BuildsService, HttpTestingController],
-      (service: BuildsService, httpMock: HttpTestingController) => {
+    it('should GET count of builds', inject([SavedBuildsService, HttpTestingController],
+      (service: SavedBuildsService, httpMock: HttpTestingController) => {
       const numberOfBuilds = 1;
 
       service.countBuilds().subscribe(count => {
@@ -89,8 +89,8 @@ describe('BuildsService', () => {
       testReq.flush(numberOfBuilds);
     }));
 
-    it('should GET count of builds with REST error', inject([BuildsService, HttpTestingController],
-      (service: BuildsService, httpMock: HttpTestingController) => {
+    it('should GET count of builds with REST error', inject([SavedBuildsService, HttpTestingController],
+      (service: SavedBuildsService, httpMock: HttpTestingController) => {
       service.countBuilds().subscribe(count => {
         expect(count).toBe(0);
       });

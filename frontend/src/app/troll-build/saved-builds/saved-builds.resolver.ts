@@ -4,15 +4,15 @@ import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from '@a
 import { Observable, EMPTY } from 'rxjs';
 import { mergeMap, map } from 'rxjs/operators';
 
-import { BuildsResolverData } from './builds.resolver.data';
-import { BuildsService } from './builds.service';
+import { SavedBuildsResolverData } from './saved-builds.resolver.data';
+import { SavedBuildsService } from './saved-builds.service';
 
 @Injectable()
-export class BuildsResolver implements Resolve<BuildsResolverData> {
+export class SavedBuildsResolver implements Resolve<SavedBuildsResolverData> {
 
-  constructor(private buildsService: BuildsService, private router: Router) {}
+  constructor(private buildsService: SavedBuildsService, private router: Router) {}
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<BuildsResolverData> {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<SavedBuildsResolverData> {
     const buildId = +route.paramMap.get('buildId');
     if (buildId) {
       return this.buildsService.getBuild(buildId)

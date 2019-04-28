@@ -1,23 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { BuildsResolverData } from './builds.resolver.data';
+import { SavedBuildsResolverData } from './saved-builds.resolver.data';
 import { TitleService } from '@ltb-service/title.service';
-import { BuildsService } from './builds.service';
+import { SavedBuildsService } from './saved-builds.service';
 import { Build, BuildType } from '@ltb-model/build';
 
 @Component({
-  selector: 'ltb-builds',
-  templateUrl: './builds.page.html',
-  styleUrls: ['./builds.page.scss']
+  selector: 'ltb-saved-builds',
+  templateUrl: './saved-builds.page.html',
+  styleUrls: ['./saved-builds.page.scss']
 })
-export class BuildsPage implements OnInit {
+export class SavedBuildsPage implements OnInit {
 
   buildId: number;
   build: Build;
   buildType: BuildType;
 
-  constructor(private buildsService: BuildsService, private title: TitleService, private router: Router,
+  constructor(private buildsService: SavedBuildsService, private title: TitleService, private router: Router,
               private route: ActivatedRoute) {}
 
   ngOnInit() {
@@ -40,7 +40,7 @@ export class BuildsPage implements OnInit {
   }
 
   private getBuild(): void {
-    this.route.data.subscribe((data: { build: BuildsResolverData }) => {
+    this.route.data.subscribe((data: { build: SavedBuildsResolverData }) => {
       this.buildId = data.build.id;
       this.build = data.build.savedBuild;
       this.buildType = this.getBuildType(data.build.savedBuild);
