@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 import { forkJoin, Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
@@ -8,7 +8,8 @@ import { GlobalErrorService } from './global-error.service';
 @Component({
   selector: 'ltb-admin-global-error',
   templateUrl: './global-error.component.html',
-  styleUrls: ['./global-error.component.scss']
+  styleUrls: ['./global-error.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GlobalErrorComponent implements OnInit {
 

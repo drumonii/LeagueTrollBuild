@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 import { forkJoin, Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
@@ -8,7 +8,8 @@ import { MemoryUsageService } from './memory-usage.service';
 @Component({
   selector: 'ltb-admin-memory-usage',
   templateUrl: './memory-usage.component.html',
-  styleUrls: ['./memory-usage.component.scss']
+  styleUrls: ['./memory-usage.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MemoryUsageComponent implements OnInit {
 

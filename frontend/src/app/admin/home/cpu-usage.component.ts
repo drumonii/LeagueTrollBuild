@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 import { forkJoin, Observable } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
@@ -8,7 +8,8 @@ import { CpuUsage, CpuUsageService } from './cpu-usage.service';
 @Component({
   selector: 'ltb-admin-cpu-usage',
   templateUrl: './cpu-usage.component.html',
-  styleUrls: ['./cpu-usage.component.scss']
+  styleUrls: ['./cpu-usage.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CpuUsageComponent implements OnInit {
 
