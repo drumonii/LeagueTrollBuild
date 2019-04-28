@@ -31,7 +31,7 @@ public final class TrollBuildBuilder {
 
 	public TrollBuildBuilder withBoots(Collection<Item> boots) {
 		if (boots != null && !boots.isEmpty()) {
-			withBoots(RandomizeUtil.getRandom(boots));
+			return withBoots(RandomizeUtil.getRandom(boots));
 		}
 		return this;
 	}
@@ -63,7 +63,7 @@ public final class TrollBuildBuilder {
 
 	public TrollBuildBuilder withTrinket(List<Item> trinkets) {
 		if (trinkets != null && !trinkets.isEmpty()) {
-			withTrinket(RandomizeUtil.getRandom(trinkets));
+			return withTrinket(RandomizeUtil.getRandom(trinkets));
 		}
 		return this;
 	}
