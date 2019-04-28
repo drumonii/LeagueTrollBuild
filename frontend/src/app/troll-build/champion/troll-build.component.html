@@ -8,7 +8,8 @@
     <p class="troll-build-items-header">Items</p>
     <ul class="troll-build-objects">
       <ng-container *ngIf="trollBuild; else loadingTrollBuildItems">
-        <li class="troll-build-item troll-build-object with-tooltip" *ngFor="let item of trollBuild.items"
+        <li class="troll-build-item troll-build-object with-tooltip"
+            *ngFor="let item of trollBuild.items; trackBy: trackByItems"
           [attr.data-tooltip]="item.name">
           <img class="troll-build-item-img" src="/api/img/items/{{item.id}}" [alt]="item.name">
         </li>
@@ -31,13 +32,15 @@
     <p class="troll-build-summoner-spells-header">Summoner Spells</p>
     <ul class="troll-build-objects">
       <ng-container *ngIf="trollBuild; else loadingTrollBuildSummonerSpells">
-        <li class="troll-build-summoner-spell troll-build-object with-tooltip" *ngFor="let summonerSpell of trollBuild.summonerSpells"
+        <li class="troll-build-summoner-spell troll-build-object with-tooltip"
+            *ngFor="let summonerSpell of trollBuild.summonerSpells; trackBy: trackBySummonerSpells"
           [attr.data-tooltip]="summonerSpell.name">
           <img class="troll-build-summoner-spells-img" src="/api/img/summoner-spells/{{summonerSpell.id}}" [alt]="summonerSpell.name">
         </li>
       </ng-container>
       <ng-template #loadingTrollBuildSummonerSpells>
-        <li class="troll-build-loading-summoner-spell troll-build-object" *ngFor="let summonerSpell of [0, 1]">
+        <li class="troll-build-loading-summoner-spell troll-build-object"
+            *ngFor="let summonerSpell of [0, 1]">
           <img class="troll-build-summoner-spells-img" src="assets/images/dummy_item.png" alt="summoner spell loading">
         </li>
       </ng-template>
