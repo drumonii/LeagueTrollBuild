@@ -7,6 +7,7 @@ import { ChampionsNameFilterPipe } from './champions-name-filter.pipe';
 import { ChampionsTagsFilterPipe } from './champions-tags-filter.pipe';
 import { ChampionsPage } from './champions.page';
 import { ChampionsService } from './champions.service';
+import { ChampionComponent } from './champion.component';
 
 import { LazyLoadImgModule } from '@ltb-directive/lazy-load-img.module';
 
@@ -20,7 +21,8 @@ import { LazyLoadImgModule } from '@ltb-directive/lazy-load-img.module';
   declarations: [
     ChampionsNameFilterPipe,
     ChampionsTagsFilterPipe,
-    ChampionsPage
+    ChampionsPage,
+    ChampionComponent
   ],
   providers: [
     ChampionsService

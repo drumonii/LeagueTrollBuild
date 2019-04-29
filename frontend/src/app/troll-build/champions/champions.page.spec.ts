@@ -1,16 +1,13 @@
 import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { RouterLinkWithHref } from '@angular/router';
-import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
 import { of } from 'rxjs';
 
-import { LazyLoadImgDirective } from '@ltb-directive/lazy-load-img.directive';
-
 import { ChampionsPage } from './champions.page';
 import { ChampionsModule } from './champions.module';
+import { ChampionComponent } from './champion.component';
 import { Champion } from '@ltb-model/champion';
 import { TitleService } from '@ltb-service/title.service';
 import { ChampionsService } from './champions.service';
@@ -21,7 +18,7 @@ describe('ChampionsPage', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ChampionsModule, FormsModule, HttpClientTestingModule, RouterTestingModule],
+      imports: [ChampionsModule, HttpClientTestingModule, RouterTestingModule],
     })
     .compileComponents();
   }));
@@ -172,30 +169,8 @@ describe('ChampionsPage', () => {
       const championBoxes = fixture.debugElement.queryAll(By.css('.champion'));
       expect(championBoxes.length).toBe(champions.length);
 
-      const championLinks = fixture.debugElement.queryAll(By.css('.champion-link'));
-      const championNames = fixture.debugElement.queryAll(By.css('.champion-name'));
-      const championImgs = fixture.debugElement.queryAll(By.css('.champion-img'));
+      expect(fixture.debugElement.queryAll(By.directive(ChampionComponent)).length).toBe(champions.length);
 
-      for (let i = 0; i < champions.length; i++) {
-        const champion = champions[i];
-
-        const championLink = championLinks[i];
-        const championRouterLink = championLink.injector.get(RouterLinkWithHref);
-        expect(championRouterLink.href).toBe(`/champions/${champion.name}`);
-
-        const championName = championNames[i];
-        expect(championName.nativeElement.textContent).toBe(champion.name);
-
-        const championImg = championImgs[i];
-        const ltbLazyLoadImg = championImg.injector.get(LazyLoadImgDirective);
-        expect(ltbLazyLoadImg).toBeTruthy();
-        if ('IntersectionObserver' in window) {
-          expect(championImg.nativeElement.src).toContain('assets/images/dummy_champion.png');
-          expect(championImg.attributes['ng-reflect-data-src']).toBe(`/api/img/champions/${champion.id}`);
-        } else {
-          expect(championImg.nativeElement.src).toContain(`/api/img/champions/${champion.id}`);
-        }
-      }
     }
 
   });
