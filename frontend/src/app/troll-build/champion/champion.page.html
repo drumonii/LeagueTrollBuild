@@ -23,13 +23,15 @@
           <ul id="champion-tags">
             <li class="tag champion-tag is-dark" *ngFor="let tag of champion.tags">{{tag}}</li>
           </ul>
-          <div class="select" *ngIf="gameMaps; else loadingMaps">
-            <select id="map-select" [(ngModel)]="gameMap" (ngModelChange)="getTrollBuild()">
-              <option class="map-option" *ngFor="let gameMap of gameMaps" [ngValue]="gameMap">
-                {{gameMap.mapName}}
-              </option>
-            </select>
-          </div>
+          <ng-container *ngIf="(gameMaps$ | async) as gameMaps; else loadingMaps">
+            <div class="select">
+              <select id="map-select" [(ngModel)]="gameMap" (ngModelChange)="getTrollBuild()">
+                <option class="map-option" *ngFor="let gameMap of gameMaps" [ngValue]="gameMap">
+                  {{gameMap.mapName}}
+                </option>
+              </select>
+            </div>
+          </ng-container>
           <ng-template #loadingMaps>
             <div class="select is-loading">
               <select id="map-select-loading">

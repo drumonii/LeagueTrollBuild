@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Observable } from 'rxjs';
-import { finalize } from 'rxjs/operators';
+import { finalize, tap } from 'rxjs/operators';
 
 import { TitleService } from '@ltb-service/title.service';
 import { ChampionService } from './champion.service';
@@ -20,7 +20,7 @@ export class ChampionPage implements OnInit {
 
   gameMap: GameMap;
   champion: Champion;
-  gameMaps: GameMap[];
+  gameMaps$: Observable<GameMap[]>;
   trollBuild$: Observable<TrollBuild>;
   trollBuildLoading: boolean;
   build: Build;
@@ -33,11 +33,15 @@ export class ChampionPage implements OnInit {
       this.champion = data.champion;
       this.setTitle(data.champion.name);
     });
-    this.getGameMaps().subscribe(gameMaps => {
-      this.gameMap = gameMaps.find(gameMap => gameMap.mapId === SummonersRiftId);
-      this.gameMaps = gameMaps;
-      this.getTrollBuild();
-    });
+
+    this.gameMaps$ = this.getGameMaps()
+      .pipe(
+        tap(gameMaps => {
+          this.gameMap = gameMaps.find(gameMap => gameMap.mapId === SummonersRiftId);
+          return gameMaps;
+        }),
+        finalize(() => this.getTrollBuild())
+      );
   }
 
   private setTitle(championName: string) {
