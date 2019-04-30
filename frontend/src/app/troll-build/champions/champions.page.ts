@@ -39,11 +39,7 @@ export class ChampionsPage implements OnInit {
   }
 
   setChampionsFilterTag(selectedFilterTag: string): void {
-    if (this.championsFilterTag === selectedFilterTag) {
-      this.championsFilterTag = '';
-    } else {
-      this.championsFilterTag = selectedFilterTag;
-    }
+    this.championsFilterTag = this.championsFilterTag === selectedFilterTag ? '' : selectedFilterTag;
   }
 
   trackByChampions(index: number, champion: Champion): number {
