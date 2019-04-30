@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Optional;
+
 /**
  * REST controller for administration authentication.
  */
@@ -23,10 +25,9 @@ public class AdminAuthenticationRestController {
      */
     @GetMapping(path = "/authentication")
     public AdminUserDetails getAuthentication(@AuthenticationPrincipal User userDetails) {
-        if (userDetails == null) {
-            throw new BadRequestException("Authentication was not found");
-        }
-        return new AdminUserDetails(userDetails);
+        User user = Optional.ofNullable(userDetails)
+                .orElseThrow(() -> new BadRequestException("Authentication was not found"));
+        return new AdminUserDetails(user);
     }
 
 }

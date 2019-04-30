@@ -62,11 +62,8 @@ public class VersionsRestController {
 	 */
 	@GetMapping(path = "/latest")
 	public Version getLatestVersion() {
-		Version version = versionsRepository.latestVersion();
-		if (version == null) {
-			throw new ResourceNotFoundException("Unable to get the latest Version with no saved Versions");
-		}
-		return version;
+		return Optional.ofNullable(versionsRepository.latestVersion())
+				.orElseThrow(() -> new ResourceNotFoundException("Unable to get the latest Version with no saved Versions"));
 	}
 
 }
