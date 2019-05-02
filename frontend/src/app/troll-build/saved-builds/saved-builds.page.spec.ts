@@ -615,29 +615,13 @@ describe('SavedBuildsPage', () => {
     expect(trollBuildTrinketImg.nativeElement.src).toContain(`/api/img/items/${build.trinket.id}`);
 
     function getItem(index: number): Item {
-      switch (index) {
-        case 0:
-          return build.item1;
-        case 1:
-          return build.item2;
-        case 2:
-          return build.item3;
-        case 3:
-          return build.item4;
-        case 4:
-          return build.item5;
-        case 5:
-          return build.item6;
-      }
+      const items = { 0: build.item1, 1: build.item2, 2: build.item3, 3: build.item4, 4: build.item5, 5: build.item6 };
+      return items[index];
     }
 
     function getSummonerSpell(index: number): SummonerSpell {
-      switch (index) {
-        case 0:
-          return build.summonerSpell1;
-        case 1:
-          return build.summonerSpell2;
-      }
+      const summonerSpells = { 0: build.summonerSpell1, 1: build.summonerSpell2 };
+      return summonerSpells[index];
     }
   }
 
