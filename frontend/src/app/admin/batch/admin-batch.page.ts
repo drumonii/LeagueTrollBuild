@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 
 import { AdminBatchService } from './admin-batch.service';
@@ -17,7 +17,7 @@ import { DatatableCss } from '@admin-model/datatable-css';
   templateUrl: './admin-batch.page.html',
   styleUrls: ['./admin-batch.page.scss']
 })
-export class AdminBatchPage implements OnInit {
+export class AdminBatchPage implements OnInit, OnDestroy {
 
   @ViewChild('batchJobsDatatable') table: any;
 
@@ -43,6 +43,8 @@ export class AdminBatchPage implements OnInit {
   minutesAgo = 5;
   restartingAllRetrievalsJob: boolean;
 
+  private subscriptions = new Subscription();
+
   constructor(private batchService: AdminBatchService, private titleService: AdminTitleService) {}
 
   ngOnInit() {
@@ -59,14 +61,14 @@ export class AdminBatchPage implements OnInit {
 
   getBatchJobInstances(pageRequest: PageRequest): void {
     this.loadingIndicator = true;
-    this.batchService.getBatchJobInstances(pageRequest)
+    this.subscriptions.add(this.batchService.getBatchJobInstances(pageRequest)
       .pipe(
         finalize(() => this.loadingIndicator = false)
       )
       .subscribe((paginatedBatchJobInstances) => {
         this.rows = paginatedBatchJobInstances.content;
         this.page.count = paginatedBatchJobInstances.totalElements;
-      });
+      }));
   }
 
   getStepExecutions(jobInstanceId: number): Observable<BatchStepExecution[]> {
@@ -104,9 +106,9 @@ export class AdminBatchPage implements OnInit {
 
   toggleExpandRow(row): void {
     if (!row.jobExecution.stepExecutions) {
-      this.getStepExecutions(row.id).subscribe((stepExecutions) => {
+      this.subscriptions.add(this.getStepExecutions(row.id).subscribe((stepExecutions) => {
         row.jobExecution.stepExecutions = stepExecutions;
-      });
+      }));
     }
     this.table.rowDetail.toggleExpandRow(row);
   }
@@ -128,7 +130,7 @@ export class AdminBatchPage implements OnInit {
 
   restartAllRetrievalsJob(): void {
     this.restartingAllRetrievalsJob = true;
-    this.batchService.restartAllRetrievalsJob()
+    this.subscriptions.add(this.batchService.restartAllRetrievalsJob()
       .pipe(
         finalize(() => {
           this.restartingAllRetrievalsJob = false;
@@ -136,7 +138,11 @@ export class AdminBatchPage implements OnInit {
           this.checkRecentLatestAllRetrievalsJob();
         })
       )
-      .subscribe();
+      .subscribe());
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 
 }

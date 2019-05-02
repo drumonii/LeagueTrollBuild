@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { finalize, tap } from 'rxjs/operators';
 
 import { TitleService } from '@ltb-service/title.service';
@@ -16,15 +16,20 @@ import { TrollBuild } from '@ltb-model/troll-build';
   templateUrl: './champion.page.html',
   styleUrls: ['./champion.page.scss']
 })
-export class ChampionPage implements OnInit {
+export class ChampionPage implements OnInit, OnDestroy {
 
   gameMap: GameMap;
-  champion: Champion;
   gameMaps$: Observable<GameMap[]>;
+
+  champion: Champion;
+
   trollBuild$: Observable<TrollBuild>;
   trollBuildLoading: boolean;
+
   build: Build;
   buildSaving: boolean;
+
+  private subscriptions = new Subscription();
 
   constructor(private championService: ChampionService, private title: TitleService, private route: ActivatedRoute) {}
 
@@ -70,11 +75,15 @@ export class ChampionPage implements OnInit {
       .withGameMap(this.gameMap)
       .build();
     this.buildSaving = true;
-    this.championService.saveBuild(build).subscribe(res => {
+    this.subscriptions.add(this.championService.saveBuild(build).subscribe(res => {
       this.build = res.body;
       this.build.selfRef = res.headers.get('Location').replace('/api', '');
       this.buildSaving = false;
-    });
+    }));
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 
 }

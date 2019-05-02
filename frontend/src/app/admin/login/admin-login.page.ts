@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
-import { of } from 'rxjs';
+import { of, Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
 import { AdminTitleService } from '@admin-service/admin-title.service';
@@ -16,7 +16,7 @@ import { AdminLoginState } from './admin-login-state';
   templateUrl: './admin-login.page.html',
   styleUrls: ['./admin-login.page.scss']
 })
-export class AdminLoginPage implements OnInit {
+export class AdminLoginPage implements OnInit, OnDestroy {
 
   adminLoginForm = this.fb.group({
     username: ['', Validators.required],
@@ -24,6 +24,8 @@ export class AdminLoginPage implements OnInit {
   });
 
   adminLoginState = AdminLoginState.UNKNOWN;
+
+  private subscriptions = new Subscription();
 
   constructor(private authService: AdminAuthService, private fb: FormBuilder, private titleService: AdminTitleService,
               private route: ActivatedRoute, private router: Router) {}
@@ -52,7 +54,8 @@ export class AdminLoginPage implements OnInit {
   onSubmit(): void {
     if (this.adminLoginForm.valid) {
       this.beforeLogIn();
-      this.authService.loginAdmin(this.adminLoginForm.get('username').value, this.adminLoginForm.get('password').value)
+      this.subscriptions.add(
+        this.authService.loginAdmin(this.adminLoginForm.get('username').value, this.adminLoginForm.get('password').value)
         .subscribe((loginResponse) => {
           if (loginResponse) {
             if (loginResponse.status === AdminLoginStatus.SUCCESS) {
@@ -63,13 +66,17 @@ export class AdminLoginPage implements OnInit {
           } else {
             this.adminLoginState = AdminLoginState.UNEXPECTED_ERROR;
           }
-        });
+        }));
     }
   }
 
   private beforeLogIn(): void {
     this.adminLoginState = AdminLoginState.LOGGING_IN;
     this.router.navigate(['/admin/login']); // rid of query params
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 
 }

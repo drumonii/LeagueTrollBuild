@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 import { AdminAuthService } from '@admin-security/admin-auth.service';
 import { AdminUserDetails } from '@admin-security/admin-user-details';
@@ -11,7 +11,7 @@ import { AdminUserDetails } from '@admin-security/admin-user-details';
   templateUrl: './admin-header.component.html',
   styleUrls: ['./admin-header.component.scss']
 })
-export class AdminHeaderComponent implements OnInit {
+export class AdminHeaderComponent implements OnInit, OnDestroy {
 
   header = 'League Troll Build Admin';
   isAdminCollapsed: boolean;
@@ -23,6 +23,8 @@ export class AdminHeaderComponent implements OnInit {
   };
 
   adminUserDetails$: Observable<AdminUserDetails>;
+
+  private subscriptions = new Subscription();
 
   constructor(private authService: AdminAuthService, private router: Router) {}
 
@@ -43,8 +45,12 @@ export class AdminHeaderComponent implements OnInit {
   }
 
   logout(): void {
-    this.authService.logoutAdmin()
-      .subscribe(() => this.router.navigate(['/admin/login'], { queryParams: { logout: true } }));
+    this.subscriptions.add(this.authService.logoutAdmin()
+      .subscribe(() => this.router.navigate(['/admin/login'], { queryParams: { logout: true } })));
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 
 }
