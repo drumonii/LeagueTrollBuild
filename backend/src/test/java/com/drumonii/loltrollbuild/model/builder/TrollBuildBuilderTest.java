@@ -156,7 +156,7 @@ public class TrollBuildBuilderTest {
 
         @Override
         public void accept(TrollBuild trollBuild) {
-            assertThat(trollBuild.getItems().get(0)).isIn(boots);
+            assertThat(trollBuild.getItems()).element(0).isIn(boots);
             assertThat(trollBuild.getItems()).hasSize(TrollBuildBuilder.ITEMS_SIZE);
             assertThat(trollBuild.getTotalGold()).isNotZero();
             assertThat(trollBuild.getSummonerSpells()).hasSize(TrollBuildBuilder.SPELLS_SIZE);

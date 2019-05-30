@@ -36,7 +36,7 @@ public abstract class VersionsRepositoryTest {
 	@Test
 	public void latestPatch() {
 		String latestVersion = versionsRepository.latestVersion().getPatch();
-		assertThat(latestVersion).isEqualTo(versions.get(0).getPatch());
+		assertThat(versions).element(0).extracting(Version::getPatch).isEqualTo(latestVersion);
 	}
 
 }
