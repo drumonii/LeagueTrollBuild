@@ -51,6 +51,14 @@ spring:
   # JMX
   jmx:
     enabled: false
+  # MVC
+  mvc:
+    formcontent:
+      filter:
+        enabled: false
+    hiddenmethod:
+      filter:
+        enabled: false
 # Actuator
 management:
   endpoint:
