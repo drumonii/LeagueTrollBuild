@@ -54,9 +54,7 @@ public class RiotApiConfig {
 		@Bean
 		@Qualifier("summonerSpells")
 		public UriComponentsBuilder summonerSpellsUri() {
-			return UriComponentsBuilder.newInstance()
-					.scheme("https")
-					.host(riotProperties.getDdragon().getBaseUrl())
+			return UriComponentsBuilder.fromHttpUrl(riotProperties.getDdragon().getBaseUrl())
 					.path(riotProperties.getDdragon().getSummonerSpells());
 		}
 
@@ -67,9 +65,7 @@ public class RiotApiConfig {
 		@Bean
 		@Qualifier("items")
 		public UriComponentsBuilder itemsUri() {
-			return UriComponentsBuilder.newInstance()
-					.scheme("https")
-					.host(riotProperties.getDdragon().getBaseUrl())
+			return UriComponentsBuilder.fromHttpUrl(riotProperties.getDdragon().getBaseUrl())
 					.path(riotProperties.getDdragon().getItems());
 		}
 
@@ -80,9 +76,7 @@ public class RiotApiConfig {
 		@Bean
 		@Qualifier("champions")
 		public UriComponentsBuilder championsUri() {
-			return UriComponentsBuilder.newInstance()
-					.scheme("https")
-					.host(riotProperties.getDdragon().getBaseUrl())
+			return UriComponentsBuilder.fromHttpUrl(riotProperties.getDdragon().getBaseUrl())
 					.path(riotProperties.getDdragon().getChampions());
 		}
 
@@ -93,9 +87,7 @@ public class RiotApiConfig {
 		@Bean
 		@Qualifier("champion")
 		public UriComponentsBuilder championUri() {
-			return UriComponentsBuilder.newInstance()
-					.scheme("https")
-					.host(riotProperties.getDdragon().getBaseUrl())
+			return UriComponentsBuilder.fromHttpUrl(riotProperties.getDdragon().getBaseUrl())
 					.path(riotProperties.getDdragon().getChampion());
 		}
 
@@ -106,9 +98,7 @@ public class RiotApiConfig {
 		@Bean
 		@Qualifier("maps")
 		public UriComponentsBuilder mapsUri() {
-			return UriComponentsBuilder.newInstance()
-					.scheme("https")
-					.host(riotProperties.getDdragon().getBaseUrl())
+			return UriComponentsBuilder.fromHttpUrl(riotProperties.getDdragon().getBaseUrl())
 					.path(riotProperties.getDdragon().getMaps());
 		}
 
@@ -119,9 +109,7 @@ public class RiotApiConfig {
 		@Bean
 		@Qualifier("versions")
 		public UriComponents versionsUri() {
-			return UriComponentsBuilder.newInstance()
-					.scheme("https")
-					.host(riotProperties.getDdragon().getBaseUrl())
+			return UriComponentsBuilder.fromHttpUrl(riotProperties.getDdragon().getBaseUrl())
 					.path(riotProperties.getDdragon().getVersions())
 					.buildAndExpand();
 		}
@@ -147,9 +135,7 @@ public class RiotApiConfig {
 		@Bean
 		@Qualifier("summonerSpellsImg")
 		public UriComponentsBuilder summonerSpellImgUri() {
-			return UriComponentsBuilder.newInstance()
-					.scheme("https")
-					.host(riotProperties.getDdragon().getBaseUrl())
+			return UriComponentsBuilder.fromHttpUrl(riotProperties.getDdragon().getBaseUrl())
 					.path(riotProperties.getDdragon().getSummonerSpellsImg());
 		}
 
@@ -160,9 +146,7 @@ public class RiotApiConfig {
 		@Bean
 		@Qualifier("itemsImg")
 		public UriComponentsBuilder itemsImgUri() {
-			return UriComponentsBuilder.newInstance()
-					.scheme("https")
-					.host(riotProperties.getDdragon().getBaseUrl())
+			return UriComponentsBuilder.fromHttpUrl(riotProperties.getDdragon().getBaseUrl())
 					.path(riotProperties.getDdragon().getItemsImg());
 		}
 
@@ -173,27 +157,21 @@ public class RiotApiConfig {
 		@Bean
 		@Qualifier("championsImg")
 		public UriComponentsBuilder championsImgUri() {
-			return UriComponentsBuilder.newInstance()
-					.scheme("https")
-					.host(riotProperties.getDdragon().getBaseUrl())
+			return UriComponentsBuilder.fromHttpUrl(riotProperties.getDdragon().getBaseUrl())
 					.path(riotProperties.getDdragon().getChampionsImg());
 		}
 
 		@Bean
 		@Qualifier("championsSpellImg")
 		public UriComponentsBuilder championsSpellImgUri() {
-			return UriComponentsBuilder.newInstance()
-					.scheme("https")
-					.host(riotProperties.getDdragon().getBaseUrl())
+			return UriComponentsBuilder.fromHttpUrl(riotProperties.getDdragon().getBaseUrl())
 					.path(riotProperties.getDdragon().getChampionsSpellImg());
 		}
 
 		@Bean
 		@Qualifier("championsPassiveImg")
 		public UriComponentsBuilder championsPassiveImgUri() {
-			return UriComponentsBuilder.newInstance()
-					.scheme("https")
-					.host(riotProperties.getDdragon().getBaseUrl())
+			return UriComponentsBuilder.fromHttpUrl(riotProperties.getDdragon().getBaseUrl())
 					.path(riotProperties.getDdragon().getChampionsPassiveImg());
 		}
 
@@ -204,9 +182,7 @@ public class RiotApiConfig {
 		@Bean
 		@Qualifier("mapsImg")
 		public UriComponentsBuilder mapsImgUri() {
-			return UriComponentsBuilder.newInstance()
-					.scheme("https")
-					.host(riotProperties.getDdragon().getBaseUrl())
+			return UriComponentsBuilder.fromHttpUrl(riotProperties.getDdragon().getBaseUrl())
 					.path(riotProperties.getDdragon().getMapsImg());
 		}
 

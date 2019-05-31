@@ -45,14 +45,12 @@ public class RiotApiPropertiesDdragonConfigTest {
 
 	private Ddragon ddragon;
 
-	private String host;
 	private String patch;
 	private String locale;
 
 	@Before
 	public void before() {
 		ddragon = riotProperties.getDdragon();
-		host = ddragon.getBaseUrl();
 		patch = "7.17.2";
 		locale = ddragon.getLocale();
 	}
@@ -84,10 +82,8 @@ public class RiotApiPropertiesDdragonConfigTest {
 	@Test
 	public void summonerSpellsUri() {
 		UriComponents summonerSpellsUri = summonerSpellsUriBuilder.buildAndExpand(patch, locale);
-		assertThat(summonerSpellsUri.getScheme()).isEqualTo("https");
-		assertThat(summonerSpellsUri.getHost()).isEqualTo(host);
-		assertThat(summonerSpellsUri.getPath()).isEqualTo(ddragon.getSummonerSpells().replace("{version}", patch)
-				.replace("{locale}", locale));
+		assertThat(summonerSpellsUri.toString()).as("Summoner Spells URI")
+				.isEqualTo(ddragon.getBaseUrl() + ddragon.getSummonerSpells().replace("{version}", patch).replace("{locale}", locale));
 	}
 
 	@Autowired
@@ -98,10 +94,9 @@ public class RiotApiPropertiesDdragonConfigTest {
 	public void summonerSpellImgUri() {
 		String imgFull = "SummonerBoost.png";
 		UriComponents summonerSpellImgUri = summonerSpellImgBuilder.buildAndExpand(patch, imgFull);
-		assertThat(summonerSpellImgUri.getHost()).isEqualTo(ddragon.getBaseUrl());
-		assertThat(summonerSpellImgUri.getPath()).isEqualTo(ddragon.getSummonerSpellsImg().replace("{version}", patch)
-				.replace("{summonerSpellImgFull}", imgFull));
-		assertThat(summonerSpellImgUri.getScheme()).isEqualTo("https");
+		assertThat(summonerSpellImgUri.toString()).as("Summoner Spells Image URI")
+				.isEqualTo(ddragon.getBaseUrl() + ddragon.getSummonerSpellsImg().replace("{version}", patch)
+						.replace("{summonerSpellImgFull}", imgFull));
 	}
 
 	/*
@@ -115,10 +110,8 @@ public class RiotApiPropertiesDdragonConfigTest {
 	@Test
 	public void itemsUri() {
 		UriComponents itemsUri = itemsUriBuilder.buildAndExpand(patch, locale);
-		assertThat(itemsUri.getScheme()).isEqualTo("https");
-		assertThat(itemsUri.getHost()).isEqualTo(host);
-		assertThat(itemsUri.getPath()).isEqualTo(ddragon.getItems().replace("{version}", patch)
-				.replace("{locale}", locale));
+		assertThat(itemsUri.toString()).as("Items URI")
+				.isEqualTo(ddragon.getBaseUrl() + ddragon.getItems().replace("{version}", patch).replace("{locale}", locale));
 	}
 
 	@Autowired
@@ -129,10 +122,8 @@ public class RiotApiPropertiesDdragonConfigTest {
 	public void itemsImgUri() {
 		String imgFull = "1.png";
 		UriComponents itemsImgUri = itemsImgBuilder.buildAndExpand(patch, imgFull);
-		assertThat(itemsImgUri.getHost()).isEqualTo(ddragon.getBaseUrl());
-		assertThat(itemsImgUri.getPath()).isEqualTo(ddragon.getItemsImg().replace("{version}", patch)
-				.replace("{itemImgFull}", imgFull));
-		assertThat(itemsImgUri.getScheme()).isEqualTo("https");
+		assertThat(itemsImgUri.toString()).as("Items Image URI")
+				.isEqualTo(ddragon.getBaseUrl() + ddragon.getItemsImg().replace("{version}", patch).replace("{itemImgFull}", imgFull));
 	}
 
 	/*
@@ -146,10 +137,8 @@ public class RiotApiPropertiesDdragonConfigTest {
 	@Test
 	public void championsUri() {
 		UriComponents championsUri = championsUriBuilder.buildAndExpand(patch, locale);
-		assertThat(championsUri.getHost()).isEqualTo(ddragon.getBaseUrl());
-		assertThat(championsUri.getPath()).isEqualTo(ddragon.getChampions().replace("{version}", patch)
-				.replace("{locale}", locale));
-		assertThat(championsUri.getScheme()).isEqualTo("https");
+		assertThat(championsUri.toString()).as("Champions URI")
+				.isEqualTo(ddragon.getBaseUrl() + ddragon.getChampions().replace("{version}", patch).replace("{locale}", locale));
 	}
 
 	@Autowired
@@ -160,10 +149,9 @@ public class RiotApiPropertiesDdragonConfigTest {
 	public void championUri() {
 		int id = 1;
 		UriComponents championUri = championUriBuilder.buildAndExpand(patch, locale, id);
-		assertThat(championUri.getHost()).isEqualTo(ddragon.getBaseUrl());
-		assertThat(championUri.getPath()).isEqualTo(ddragon.getChampion().replace("{version}", patch)
-				.replace("{locale}", locale).replace("{id}", String.valueOf(id)));
-		assertThat(championUri.getScheme()).isEqualTo("https");
+		assertThat(championUri.toString()).as("Champion URI")
+				.isEqualTo(ddragon.getBaseUrl() + ddragon.getChampion().replace("{version}", patch)
+						.replace("{locale}", locale).replace("{id}", String.valueOf(id)));
 	}
 
 	@Autowired
@@ -174,10 +162,8 @@ public class RiotApiPropertiesDdragonConfigTest {
 	public void championsImgUri() {
 		String imgFull = "Champion.png";
 		UriComponents championsImgUri = championsImgBuilder.buildAndExpand(patch, imgFull);
-		assertThat(championsImgUri.getHost()).isEqualTo(ddragon.getBaseUrl());
-		assertThat(championsImgUri.getPath()).isEqualTo(ddragon.getChampionsImg().replace("{version}", patch)
-				.replace("{championImgFull}", imgFull));
-		assertThat(championsImgUri.getScheme()).isEqualTo("https");
+		assertThat(championsImgUri.toString()).as("Champions Image URI")
+				.isEqualTo(ddragon.getBaseUrl() + ddragon.getChampionsImg().replace("{version}", patch).replace("{championImgFull}", imgFull));
 	}
 
 	@Autowired
@@ -187,11 +173,10 @@ public class RiotApiPropertiesDdragonConfigTest {
 	@Test
 	public void championsSpellImgUri() {
 		String spellImgFull = "ChampionSpell.png";
-		UriComponents championsImgUri = championsSpellImgBuilder.buildAndExpand(patch, spellImgFull);
-		assertThat(championsImgUri.getHost()).isEqualTo(ddragon.getBaseUrl());
-		assertThat(championsImgUri.getPath()).isEqualTo(ddragon.getChampionsSpellImg().replace("{version}", patch)
-				.replace("{championSpellImgFull}", spellImgFull));
-		assertThat(championsImgUri.getScheme()).isEqualTo("https");
+		UriComponents championsSpellImgUri = championsSpellImgBuilder.buildAndExpand(patch, spellImgFull);
+		assertThat(championsSpellImgUri.toString()).as("Champion Spell Image URI")
+				.isEqualTo(ddragon.getBaseUrl() + ddragon.getChampionsSpellImg().replace("{version}", patch)
+						.replace("{championSpellImgFull}", spellImgFull));
 	}
 
 	@Autowired
@@ -201,11 +186,10 @@ public class RiotApiPropertiesDdragonConfigTest {
 	@Test
 	public void championsPassiveImgUri() {
 		String spellImgFull = "ChampionPassive.png";
-		UriComponents championsImgUri = championsPassiveImgBuilder.buildAndExpand(patch, spellImgFull);
-		assertThat(championsImgUri.getHost()).isEqualTo(ddragon.getBaseUrl());
-		assertThat(championsImgUri.getPath()).isEqualTo(ddragon.getChampionsPassiveImg().replace("{version}", patch)
-				.replace("{championPassiveImgFull}", spellImgFull));
-		assertThat(championsImgUri.getScheme()).isEqualTo("https");
+		UriComponents championsPassiveImgUri = championsPassiveImgBuilder.buildAndExpand(patch, spellImgFull);
+		assertThat(championsPassiveImgUri.toString()).as("Champion Passive Image URI")
+				.isEqualTo(ddragon.getBaseUrl() + ddragon.getChampionsPassiveImg().replace("{version}", patch)
+						.replace("{championPassiveImgFull}", spellImgFull));
 	}
 
 	/*
@@ -219,10 +203,8 @@ public class RiotApiPropertiesDdragonConfigTest {
 	@Test
 	public void mapsUri() {
 		UriComponents mapsUri = mapsUriBuilder.buildAndExpand(patch, locale);
-		assertThat(mapsUri.getScheme()).isEqualTo("https");
-		assertThat(mapsUri.getHost()).isEqualTo(host);
-		assertThat(mapsUri.getPath()).isEqualTo(ddragon.getMaps().replace("{version}", patch)
-				.replace("{locale}", locale));
+		assertThat(mapsUri.toString()).as("Maps URI")
+				.isEqualTo(ddragon.getBaseUrl() + ddragon.getMaps().replace("{version}", patch).replace("{locale}", locale));
 	}
 
 	@Autowired
@@ -233,10 +215,8 @@ public class RiotApiPropertiesDdragonConfigTest {
 	public void mapsImgUri() {
 		String imgFull = "Map.png";
 		UriComponents mapsImgUri = mapsImgBuilder.buildAndExpand(patch, imgFull);
-		assertThat(mapsImgUri.getHost()).isEqualTo(ddragon.getBaseUrl());
-		assertThat(mapsImgUri.getPath()).isEqualTo(ddragon.getMapsImg().replace("{version}", patch)
-				.replace("{mapImgFull}", imgFull));
-		assertThat(mapsImgUri.getScheme()).isEqualTo("https");
+		assertThat(mapsImgUri.toString()).as("Maps Image URI")
+				.isEqualTo(ddragon.getBaseUrl() + ddragon.getMapsImg().replace("{version}", patch).replace("{mapImgFull}", imgFull));
 	}
 
 	/*
@@ -249,9 +229,7 @@ public class RiotApiPropertiesDdragonConfigTest {
 
 	@Test
 	public void versionsUri() {
-		assertThat(versionsUri.getScheme()).isEqualTo("https");
-		assertThat(versionsUri.getHost()).isEqualTo(ddragon.getBaseUrl());
-		assertThat(versionsUri.getPath()).isEqualTo(ddragon.getVersions());
+		assertThat(versionsUri.toString()).as("Versions URI").isEqualTo(ddragon.getBaseUrl() + ddragon.getVersions());
 	}
 
 }
