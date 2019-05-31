@@ -5,10 +5,10 @@ import com.drumonii.loltrollbuild.model.image.Image;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.util.FastByteArrayOutputStream;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -65,8 +65,8 @@ public class ImageFetcher {
 			LOGGER.error("Unable to create the URL with {}", uriComponents.toString(), e);
 		}
 		if (url != null) {
-			try {
-				image.setImgSrc(toByteArray(url.openStream()));
+			try (FastByteArrayOutputStream output = new FastByteArrayOutputStream()) {
+				image.setImgSrc(getBytes(output, url.openStream()));
 				count++;
 			} catch (IOException e) {
 				LOGGER.warn("Unable to retrieve the image from URL: {} because: ", url, e);
@@ -78,12 +78,12 @@ public class ImageFetcher {
 	/**
 	 * Gets the contents of the {@link InputStream} as an array of {@code byte}s.
 	 *
+	 * @param output the {@link FastByteArrayOutputStream} to output
 	 * @param input the {@link InputStream} to read
 	 * @return the array of {@code byte}s.
 	 * @throws IOException if an I/O error occurs
 	 */
-	private byte[] toByteArray(InputStream input) throws IOException {
-		ByteArrayOutputStream output = new ByteArrayOutputStream();
+	private byte[] getBytes(FastByteArrayOutputStream output, InputStream input) throws IOException {
 		int bytes;
 		byte[] buffer = new byte[DEFAULT_BUFFER_SIZE];
 		while (EOF != (bytes = input.read(buffer))) {
