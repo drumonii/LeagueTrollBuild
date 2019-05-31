@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.8.1",
+  "version": "9.11.1",
   "data": {
     "Soraka": {
       "id": "Soraka",
@@ -128,31 +128,33 @@
         {
           "id": "SorakaQ",
           "name": "Starcall",
-          "description": "A star falls from the sky at the target location dealing magic damage and slowing enemies. If an enemy champion is hit by Starcall, Soraka recovers health and gains movement speed when moving away from enemy champions.",
-          "tooltip": "Calls down a star from Soraka to a target location. Enemies standing in the explosion radius take {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage and are slowed by {{ e2 }}% for 2 seconds.<br /><br />If Starcall hits a champion Soraka gains <span class=\"colorDDDDDD\">Rejuvenation</span> for {{ e5 }} seconds, which restores {{ e3 }} <scaleAP>(+{{ f1 }})</scaleAP> health per second and grants {{ e9 }}% movement speed when not moving toward enemy champions.",
+          "description": "A star falls from the sky at the target location dealing magic damage and slowing enemies. If an enemy champion is hit by Starcall, Soraka recovers health.",
+          "tooltip": "Calls down a star from Soraka to a target location. Enemies standing in the explosion radius take <magicDamage>{{ totaldamage }} magic damage</magicDamage> and are slowed by {{ movespeedslow*100 }}% for {{ slowduration }} seconds.<br /><br />If Starcall hits a champion Soraka gains <keywordMajor>Rejuvenation</keywordMajor> for {{ hotduration }} seconds, which restores <scaleAP>{{ totalhot }}</scaleAP> health over that duration and grants {{ movespeedhaste*100 }}% movement speed decaying over the first {{ movespeedduration }} second(s).",
           "leveltip": {
             "label": [
               "Damage",
               "Health Restore (Rejuvenation)",
-              "Rejuvenation Duration (for allies)",
+              "Movement Speed",
+              "Cooldown",
               "@AbilityResourceName@ Cost"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
-              "{{ e3 }} -> {{ e3NL }}",
-              "{{ e6 }} -> {{ e6NL }}",
+              "{{ basedamage }} -> {{ basedamageNL }}",
+              "{{ basehot }} -> {{ basehotNL }}",
+              "{{ movespeedhaste*100.000000 }}% -> {{ movespeedhastenl*100.000000 }}%",
+              "{{ cooldown }} -> {{ cooldownNL }}",
               "{{ cost }} -> {{ costNL }}"
             ]
           },
           "maxrank": 5,
           "cooldown": [
+            8,
+            7,
+            6,
             5,
-            5,
-            5,
-            5,
-            5
+            4
           ],
-          "cooldownBurn": "5",
+          "cooldownBurn": "8/7/6/5/4",
           "cost": [
             40,
             45,
@@ -165,67 +167,67 @@
           "effect": [
             null,
             [
-              70,
-              110,
-              150,
-              190,
-              230
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              30,
-              30,
-              30,
-              30,
-              30
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              14,
-              16,
-              18,
-              20,
-              22
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              7,
-              9,
-              11,
-              13,
-              15
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              4,
-              4,
-              4,
-              4,
-              4
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              3,
-              3.5,
-              4,
-              4.5,
-              5
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              0.1,
-              0.1,
-              0.1,
-              0.1,
-              0.1
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              0.05,
-              0.05,
-              0.05,
-              0.05,
-              0.05
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              10,
-              10,
-              10,
-              10,
-              10
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -237,24 +239,18 @@
           ],
           "effectBurn": [
             null,
-            "70/110/150/190/230",
-            "30",
-            "14/16/18/20/22",
-            "7/9/11/13/15",
-            "4",
-            "3/3.5/4/4.5/5",
-            "0.1",
-            "0.05",
-            "10",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.35,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -269,7 +265,7 @@
             "full": "SorakaQ.png",
             "sprite": "spell11.png",
             "group": "spell",
-            "x": 288,
+            "x": 0,
             "y": 0,
             "w": 48,
             "h": 48
@@ -280,7 +276,7 @@
           "id": "SorakaW",
           "name": "Astral Infusion",
           "description": "Soraka sacrifices a portion of her own health to heal another friendly champion.",
-          "tooltip": "Restores {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> health to another champion ally.<br /><br />If cast while affected by <span class=\"colorDDDDDD\">Rejuvenation</span>, Soraka will grant her target its benefits for {{ f1 }} seconds.<br /><br /><span class=\"color919191\"><i>Cannot be cast if Soraka is below 5% Health.</i></span>",
+          "tooltip": "Restores <scaleAP>{{ totalheal }}</scaleAP> health to another champion ally.<br /><br />If cast while affected by <keywordMajor>Rejuvenation</keywordMajor>, Soraka will also grant her target <keywordMajor>Rejuvenation</keywordMajor>, healing them for <scaleAP>{{ spell.sorakaq:totalhot }}</scaleAP> grant them {{ spell.sorakaq:movespeedhaste*100 }}% movement speed decaying over {{ spell.sorakaq:hotduration }} seconds.<br /><br /><span class=\"color919191\"><i>Cannot be cast if Soraka is below <scaleHealth>{{ minimumhealth }} Health</scaleHealth> (5% of her max health).</i></span>",
           "leveltip": {
             "label": [
               "Healing",
@@ -288,7 +284,7 @@
               "@AbilityResourceName@ Cost"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
+              "{{ baseheal }} -> {{ basehealNL }}",
               "{{ cooldown }} -> {{ cooldownNL }}",
               "{{ cost }} -> {{ costNL }}"
             ]
@@ -314,18 +310,18 @@
           "effect": [
             null,
             [
-              80,
-              110,
-              140,
-              170,
-              200
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              0.1,
-              0.1,
-              0.1,
-              0.1,
-              0.1
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -386,8 +382,8 @@
           ],
           "effectBurn": [
             null,
-            "80/110/140/170/200",
-            "0.1",
+            "0",
+            "0",
             "0",
             "0",
             "0",
@@ -397,14 +393,8 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.6,
-              "key": "a1"
-            }
-          ],
-          "costType": " Mana",
+          "vars": [],
+          "costType": "% Max Health, {{ cost }} Mana",
           "maxammo": "-1",
           "range": [
             550,
@@ -418,105 +408,107 @@
             "full": "SorakaW.png",
             "sprite": "spell11.png",
             "group": "spell",
-            "x": 336,
+            "x": 48,
             "y": 0,
             "w": 48,
             "h": 48
           },
-          "resource": "10% Max Health, {{ cost }} Mana"
+          "resource": "{{ percenthealthcost*100 }}% Max Health, {{ cost }} Mana"
         },
         {
           "id": "SorakaE",
           "name": "Equinox",
           "description": "Creates a zone at a location that silences all enemies inside. When the zone expires, all enemies still inside are rooted.",
-          "tooltip": "Creates a zone at target location for 1.5 seconds, dealing {{ e2 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage to enemy Champions in the cast radius. Enemy Champions standing in the zone are silenced until they leave. <br /><br />When the zone disappears, all enemy Champions still standing in the zone are rooted for {{ e1 }} second(s) and are dealt {{ e2 }} <scaleAP>(+{{ a1 }}) </scaleAP>magic damage.",
+          "tooltip": "Creates a zone at target location for {{ rootdelay }} seconds, dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage> to enemy Champions in the cast radius. Enemy Champions standing in the zone are silenced until they leave. <br /><br />When the zone disappears, all enemy Champions still standing in the zone are rooted for {{ rootduration }} second(s) and take an additional <magicDamage>{{ totaldamage }} magic damage</magicDamage>.",
           "leveltip": {
             "label": [
               "Damage",
               "Cooldown",
-              "Root Duration"
+              "Root Duration",
+              "@AbilityResourceName@ Cost"
             ],
             "effect": [
-              "{{ e2 }} -> {{ e2NL }}",
+              "{{ basedamage }} -> {{ basedamageNL }}",
               "{{ cooldown }} -> {{ cooldownNL }}",
-              "{{ e1 }} -> {{ e1NL }}"
+              "{{ rootduration }} -> {{ rootdurationNL }}",
+              "{{ cost }} -> {{ costNL }}"
             ]
           },
           "maxrank": 5,
           "cooldown": [
-            24,
-            22,
             20,
+            19,
             18,
+            17,
             16
           ],
-          "cooldownBurn": "24/22/20/18/16",
+          "cooldownBurn": "20/19/18/17/16",
           "cost": [
             70,
-            70,
-            70,
-            70,
-            70
+            75,
+            80,
+            85,
+            90
           ],
-          "costBurn": "70",
+          "costBurn": "70/75/80/85/90",
           "datavalues": {},
           "effect": [
             null,
             [
-              1,
-              1.25,
-              1.5,
-              1.75,
-              2
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              70,
-              110,
-              150,
-              190,
-              230
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              40,
-              70,
-              100,
-              130,
-              160
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              5,
-              5,
-              5,
-              5,
-              5
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              20,
-              40,
-              60,
-              80,
-              100
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              60,
-              90,
-              120,
-              150,
-              180
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              1.5,
-              1.5,
-              1.5,
-              1.5,
-              1.5
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              260,
-              260,
-              260,
-              260,
-              260
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -535,29 +527,18 @@
           ],
           "effectBurn": [
             null,
-            "1/1.25/1.5/1.75/2",
-            "70/110/150/190/230",
-            "40/70/100/130/160",
-            "5",
-            "20/40/60/80/100",
-            "60/90/120/150/180",
-            "1.5",
-            "260",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.4,
-              "key": "a1"
-            },
-            {
-              "link": "spelldamage",
-              "coeff": 0.4,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -572,7 +553,7 @@
             "full": "SorakaE.png",
             "sprite": "spell11.png",
             "group": "spell",
-            "x": 384,
+            "x": 96,
             "y": 0,
             "w": 48,
             "h": 48
@@ -583,7 +564,7 @@
           "id": "SorakaR",
           "name": "Wish",
           "description": "Soraka fills her allies with hope, instantly restoring health to herself and all friendly champions.",
-          "tooltip": "Calls upon divine powers to restore {{ healingcalc }} Health to all allied Champions. Wish's power is increased by {{ healingampforlowhealthallies*100 }}% on each Champion below 40% Health.",
+          "tooltip": "Calls upon divine powers to restore <scaleAP>{{ healingcalc }}</scaleAP> Health to all allied Champions. Wish's power is increased by {{ healingampforlowhealthallies*100 }}% on each Champion below 40% Health (<scaleAP>{{ ampedhealing }}</scaleAP>).",
           "leveltip": {
             "label": [
               "Healing",
@@ -687,7 +668,7 @@
             "full": "SorakaR.png",
             "sprite": "spell11.png",
             "group": "spell",
-            "x": 432,
+            "x": 144,
             "y": 0,
             "w": 48,
             "h": 48

@@ -1,6 +1,6 @@
 {
   "type": "summoner",
-  "version": "9.8.1",
+  "version": "9.11.1",
   "data": {
     "SummonerBarrier": {
       "id": "SummonerBarrier",
@@ -200,172 +200,6 @@
       },
       "resource": "No Cost"
     },
-    "SummonerDarkStarChampSelect1": {
-      "id": "SummonerDarkStarChampSelect1",
-      "name": "Disabled Summoner Spells",
-      "description": "Summoner spells are disabled in this mode.",
-      "tooltip": "",
-      "maxrank": 1,
-      "cooldown": [
-        0
-      ],
-      "cooldownBurn": "0",
-      "cost": [
-        0
-      ],
-      "costBurn": "0",
-      "datavalues": {},
-      "effect": [
-        null,
-        [
-          0
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ]
-      ],
-      "effectBurn": [
-        null,
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0"
-      ],
-      "vars": [],
-      "key": "35",
-      "summonerLevel": 1,
-      "modes": [
-        "DARKSTAR"
-      ],
-      "costType": "",
-      "maxammo": "-1",
-      "range": [
-        2500
-      ],
-      "rangeBurn": "2500",
-      "image": {
-        "full": "SummonerDarkStarChampSelect1.png",
-        "sprite": "spell0.png",
-        "group": "spell",
-        "x": 96,
-        "y": 0,
-        "w": 48,
-        "h": 48
-      }
-    },
-    "SummonerDarkStarChampSelect2": {
-      "id": "SummonerDarkStarChampSelect2",
-      "name": "Disabled Summoner Spells",
-      "description": "Summoner spells are disabled in this mode.",
-      "tooltip": "",
-      "maxrank": 1,
-      "cooldown": [
-        0
-      ],
-      "cooldownBurn": "0",
-      "cost": [
-        0
-      ],
-      "costBurn": "0",
-      "datavalues": {},
-      "effect": [
-        null,
-        [
-          0
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ]
-      ],
-      "effectBurn": [
-        null,
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0"
-      ],
-      "vars": [],
-      "key": "36",
-      "summonerLevel": 1,
-      "modes": [
-        "DARKSTAR"
-      ],
-      "costType": "",
-      "maxammo": "-1",
-      "range": [
-        2500
-      ],
-      "rangeBurn": "2500",
-      "image": {
-        "full": "SummonerDarkStarChampSelect2.png",
-        "sprite": "spell0.png",
-        "group": "spell",
-        "x": 144,
-        "y": 0,
-        "w": 48,
-        "h": 48
-      }
-    },
     "SummonerDot": {
       "id": "SummonerDot",
       "name": "Ignite",
@@ -480,7 +314,7 @@
         "full": "SummonerDot.png",
         "sprite": "spell0.png",
         "group": "spell",
-        "x": 192,
+        "x": 96,
         "y": 0,
         "w": 48,
         "h": 48
@@ -575,7 +409,7 @@
         "full": "SummonerExhaust.png",
         "sprite": "spell0.png",
         "group": "spell",
-        "x": 240,
+        "x": 144,
         "y": 0,
         "w": 48,
         "h": 48
@@ -674,7 +508,7 @@
         "full": "SummonerFlash.png",
         "sprite": "spell0.png",
         "group": "spell",
-        "x": 288,
+        "x": 192,
         "y": 0,
         "w": 48,
         "h": 48
@@ -780,7 +614,7 @@
         "full": "SummonerHaste.png",
         "sprite": "spell0.png",
         "group": "spell",
-        "x": 336,
+        "x": 240,
         "y": 0,
         "w": 48,
         "h": 48
@@ -905,7 +739,7 @@
         "full": "SummonerHeal.png",
         "sprite": "spell0.png",
         "group": "spell",
-        "x": 384,
+        "x": 288,
         "y": 0,
         "w": 48,
         "h": 48
@@ -1041,7 +875,7 @@
         "full": "SummonerMana.png",
         "sprite": "spell0.png",
         "group": "spell",
-        "x": 432,
+        "x": 336,
         "y": 0,
         "w": 48,
         "h": 48
@@ -1125,90 +959,8 @@
         "full": "SummonerOdysseyFlash.png",
         "sprite": "spell0.png",
         "group": "spell",
-        "x": 0,
-        "y": 48,
-        "w": 48,
-        "h": 48
-      },
-      "resource": "No Cost"
-    },
-    "SummonerOdysseyGhost": {
-      "id": "SummonerOdysseyGhost",
-      "name": "Ghost",
-      "description": "Your champion gains increased Movement Speed and can move through units for 10 seconds. Grants a maximum of 28-45% (depending on champion level) Movement Speed after accelerating for 2 seconds.",
-      "tooltip": "Your champion gains increased Movement Speed and can move through units for 10 seconds. Grants a maximum of {{ f1 }}% Movement Speed after accelerating for 2 seconds.",
-      "maxrank": 1,
-      "cooldown": [
-        120
-      ],
-      "cooldownBurn": "120",
-      "cost": [
-        0
-      ],
-      "costBurn": "0",
-      "datavalues": {},
-      "effect": [
-        null,
-        [
-          40
-        ],
-        [
-          0
-        ],
-        [
-          2
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ]
-      ],
-      "effectBurn": [
-        null,
-        "40",
-        "0",
-        "2",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0"
-      ],
-      "vars": [],
-      "key": "51",
-      "summonerLevel": 1,
-      "modes": [],
-      "costType": "No Cost",
-      "maxammo": "-1",
-      "range": [
-        200
-      ],
-      "rangeBurn": "200",
-      "image": {
-        "full": "SummonerOdysseyGhost.png",
-        "sprite": "spell0.png",
-        "group": "spell",
-        "x": 48,
-        "y": 48,
+        "x": 384,
+        "y": 0,
         "w": 48,
         "h": 48
       },
@@ -1291,8 +1043,8 @@
         "full": "SummonerOdysseyRevive.png",
         "sprite": "spell0.png",
         "group": "spell",
-        "x": 96,
-        "y": 48,
+        "x": 432,
+        "y": 0,
         "w": 48,
         "h": 48
       },
@@ -1375,7 +1127,7 @@
         "full": "SummonerPoroRecall.png",
         "sprite": "spell0.png",
         "group": "spell",
-        "x": 144,
+        "x": 0,
         "y": 48,
         "w": 48,
         "h": 48
@@ -1459,260 +1211,12 @@
         "full": "SummonerPoroThrow.png",
         "sprite": "spell0.png",
         "group": "spell",
-        "x": 192,
+        "x": 48,
         "y": 48,
         "w": 48,
         "h": 48
       },
       "resource": "No Cost"
-    },
-    "SummonerReturn": {
-      "id": "SummonerReturn",
-      "name": "Backtrack",
-      "description": "Temporarily shields 75-330 (depending on champion level) damage from your champion. After 2.5 seconds the shield expires and your champion is teleported to safety. Melee champions travel extra distance.",
-      "tooltip": "Temporarily shields {{ f1 }} damage from your champion. After 2.5 seconds the shield expires and your champion is teleported to safety. Melee champions travel extra distance.",
-      "maxrank": 1,
-      "cooldown": [
-        180
-      ],
-      "cooldownBurn": "180",
-      "cost": [
-        0
-      ],
-      "costBurn": "0",
-      "datavalues": {},
-      "effect": [
-        null,
-        [
-          60
-        ],
-        [
-          15
-        ],
-        [
-          2.5
-        ],
-        [
-          1000
-        ],
-        [
-          425
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ]
-      ],
-      "effectBurn": [
-        null,
-        "60",
-        "15",
-        "2.5",
-        "1000",
-        "425",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0"
-      ],
-      "vars": [],
-      "key": "5",
-      "summonerLevel": 4,
-      "modes": [],
-      "costType": "No Cost",
-      "maxammo": "-1",
-      "range": [
-        1200
-      ],
-      "rangeBurn": "1200",
-      "image": {
-        "full": "SummonerReturn.png",
-        "sprite": "spell0.png",
-        "group": "spell",
-        "x": 240,
-        "y": 48,
-        "w": 48,
-        "h": 48
-      },
-      "resource": "No Cost"
-    },
-    "SummonerSiegeChampSelect1": {
-      "id": "SummonerSiegeChampSelect1",
-      "name": "Nexus Siege: Siege Weapon Slot",
-      "description": "In Nexus Siege, Summoner Spells are replaced with Siege Weapon Slots. Spend Crystal Shards to buy single-use Siege Weapons from the item shop, then use your Summoner Spell keys to activate them!",
-      "tooltip": "",
-      "maxrank": 1,
-      "cooldown": [
-        0
-      ],
-      "cooldownBurn": "0",
-      "cost": [
-        0
-      ],
-      "costBurn": "0",
-      "datavalues": {},
-      "effect": [
-        null,
-        [
-          0
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ]
-      ],
-      "effectBurn": [
-        null,
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0"
-      ],
-      "vars": [],
-      "key": "33",
-      "summonerLevel": 1,
-      "modes": [
-        "SIEGE"
-      ],
-      "costType": "",
-      "maxammo": "-1",
-      "range": [
-        2500
-      ],
-      "rangeBurn": "2500",
-      "image": {
-        "full": "SummonerSiegeChampSelect1.png",
-        "sprite": "spell0.png",
-        "group": "spell",
-        "x": 288,
-        "y": 48,
-        "w": 48,
-        "h": 48
-      }
-    },
-    "SummonerSiegeChampSelect2": {
-      "id": "SummonerSiegeChampSelect2",
-      "name": "Nexus Siege: Siege Weapon Slot",
-      "description": "In Nexus Siege, Summoner Spells are replaced with Siege Weapon Slots. Spend Crystal Shards to buy single-use Siege Weapons from the item shop, then use your Summoner Spell keys to activate them!",
-      "tooltip": "",
-      "maxrank": 1,
-      "cooldown": [
-        0
-      ],
-      "cooldownBurn": "0",
-      "cost": [
-        0
-      ],
-      "costBurn": "0",
-      "datavalues": {},
-      "effect": [
-        null,
-        [
-          0
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ]
-      ],
-      "effectBurn": [
-        null,
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0"
-      ],
-      "vars": [],
-      "key": "34",
-      "summonerLevel": 1,
-      "modes": [
-        "SIEGE"
-      ],
-      "costType": "",
-      "maxammo": "-1",
-      "range": [
-        2500
-      ],
-      "rangeBurn": "2500",
-      "image": {
-        "full": "SummonerSiegeChampSelect2.png",
-        "sprite": "spell0.png",
-        "group": "spell",
-        "x": 336,
-        "y": 48,
-        "w": 48,
-        "h": 48
-      }
     },
     "SummonerSmite": {
       "id": "SummonerSmite",
@@ -1824,7 +1328,7 @@
         "full": "SummonerSmite.png",
         "sprite": "spell0.png",
         "group": "spell",
-        "x": 384,
+        "x": 96,
         "y": 48,
         "w": 48,
         "h": 48
@@ -1908,7 +1412,7 @@
         "full": "SummonerSnowURFSnowball_Mark.png",
         "sprite": "spell0.png",
         "group": "spell",
-        "x": 432,
+        "x": 144,
         "y": 48,
         "w": 48,
         "h": 48
@@ -1993,8 +1497,8 @@
         "full": "SummonerSnowball.png",
         "sprite": "spell0.png",
         "group": "spell",
-        "x": 0,
-        "y": 96,
+        "x": 192,
+        "y": 48,
         "w": 48,
         "h": 48
       },
@@ -2090,8 +1594,8 @@
         "full": "SummonerTeleport.png",
         "sprite": "spell0.png",
         "group": "spell",
-        "x": 48,
-        "y": 96,
+        "x": 240,
+        "y": 48,
         "w": 48,
         "h": 48
       },

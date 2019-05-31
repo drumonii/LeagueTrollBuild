@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.8.1",
+  "version": "9.11.1",
   "data": {
     "Janna": {
       "id": "Janna",
@@ -129,7 +129,7 @@
           "id": "HowlingGale",
           "name": "Howling Gale",
           "description": "By creating a localized change in pressure and temperature, Janna is able to create a small storm that grows in size with time. She can activate the spell again to release the storm. On release this storm will fly towards the direction it was cast in, dealing damage and knocking away any enemies in its path.",
-          "tooltip": "Summons a whirlwind, which deals {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage to enemies in its path and knocks them into the air for {{ e4 }} seconds.<br /><br />The whirlwind can be charged up to {{ e6 }} seconds. For each second charged, it:<br /><li>Deals {{ e2 }} <span class=\"color99FF99\">(+{{ a2 }})</span> bonus damage<br />Knocks up for an additional {{ e5 }} seconds<br />Travels {{ e3 }}% further</li><br />Howling Gale always reaches its destination in {{ e8 }} seconds.<br /><br /><rules><span class=\"color8c8c8c\">Activate again to release the whirlwind early.</span></rules>",
+          "tooltip": "Summons a whirlwind, which deals {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage to enemies in its path and knocks them into the air for {{ e4 }} seconds.<br /><br />The whirlwind can be charged up to {{ e6 }} seconds. For each second charged, it:<ul><li>Deals {{ e2 }} <span class=\"color99FF99\">(+{{ a2 }})</span> bonus damage</li><li>Knocks up for an additional {{ e5 }} seconds</li><li>Travels {{ e3 }}% further</li></ul>Howling Gale always reaches its destination in {{ e8 }} seconds.<br /><br /><rules><span class=\"color8c8c8c\">Activate again to release the whirlwind early.</span></rules>",
           "leveltip": {
             "label": [
               "Base Damage",
@@ -272,7 +272,7 @@
             "full": "HowlingGale.png",
             "sprite": "spell4.png",
             "group": "spell",
-            "x": 288,
+            "x": 0,
             "y": 96,
             "w": 48,
             "h": 48
@@ -289,24 +289,26 @@
               "Passive Movement Speed",
               "Damage",
               "Slow Amount",
-              "Mana Cost"
+              "Mana Cost",
+              "Cooldown"
             ],
             "effect": [
               "{{ e1 }}% -> {{ e1NL }}%",
               "{{ e2 }} -> {{ e2NL }} ",
               "{{ e3 }}% -> {{ e3NL }}%",
-              "{{ cost }} -> {{ costNL }}"
+              "{{ cost }} -> {{ costNL }}",
+              "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
           "maxrank": 5,
           "cooldown": [
             8,
-            8,
-            8,
-            8,
-            8
+            7.5,
+            7,
+            6.5,
+            6
           ],
-          "cooldownBurn": "8",
+          "cooldownBurn": "8/7.5/7/6.5/6",
           "cost": [
             50,
             60,
@@ -327,10 +329,10 @@
             ],
             [
               55,
-              100,
-              145,
-              190,
-              235
+              90,
+              125,
+              160,
+              195
             ],
             [
               24,
@@ -392,7 +394,7 @@
           "effectBurn": [
             null,
             "6/7/8/9/10",
-            "55/100/145/190/235",
+            "55/90/125/160/195",
             "24/28/32/36/40",
             "2",
             "0",
@@ -433,7 +435,7 @@
             "full": "SowTheWind.png",
             "sprite": "spell4.png",
             "group": "spell",
-            "x": 336,
+            "x": 48,
             "y": 96,
             "w": 48,
             "h": 48
@@ -444,7 +446,7 @@
           "id": "EyeOfTheStorm",
           "name": "Eye Of The Storm",
           "description": "Janna conjures a defensive gale that shields an ally champion or turret from incoming damage and increases their Attack Damage.",
-          "tooltip": "Grants an allied champion or turret a shield that decays over {{ e3 }} seconds. The shield absorbs up to {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> damage and grants {{ e2 }} <span class=\"color99FF99\">(+{{ a2 }})</span> attack damage until it is fully depleted.",
+          "tooltip": "Grants an allied champion or turret a shield that decays over {{ e3 }} seconds. The shield absorbs up to {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> damage and grants {{ e2 }} <span class=\"color99FF99\">(+{{ a2 }})</span> attack damage until it is fully depleted.<br /><br /><rules>Each Janna ability that slows or knocks an enemy champion airborne will reduce Eye of the Storm's cooldown by {{ ecdrefundforcc*100 }}%.",
           "leveltip": {
             "label": [
               "Shield Health",
@@ -453,7 +455,7 @@
               "Mana Cost"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }} ",
+              "{{ e1 }} -> {{ e1NL }}",
               "{{ e2 }} -> {{ e2NL }}",
               "{{ cooldown }} -> {{ cooldownNL }}",
               "{{ cost }} -> {{ costNL }}"
@@ -461,13 +463,13 @@
           },
           "maxrank": 5,
           "cooldown": [
-            18,
             16,
+            15,
             14,
-            12,
-            10
+            13,
+            12
           ],
-          "cooldownBurn": "18/16/14/12/10",
+          "cooldownBurn": "16/15/14/13/12",
           "cost": [
             70,
             80,
@@ -480,11 +482,11 @@
           "effect": [
             null,
             [
-              70,
-              105,
-              140,
-              175,
-              210
+              80,
+              115,
+              150,
+              185,
+              220
             ],
             [
               10,
@@ -552,7 +554,7 @@
           ],
           "effectBurn": [
             null,
-            "70/105/140/175/210",
+            "80/115/150/185/220",
             "10/17.5/25/32.5/40",
             "5",
             "0.75",
@@ -589,7 +591,7 @@
             "full": "EyeOfTheStorm.png",
             "sprite": "spell4.png",
             "group": "spell",
-            "x": 384,
+            "x": 96,
             "y": 96,
             "w": 48,
             "h": 48
@@ -710,7 +712,7 @@
             "full": "ReapTheWhirlwind.png",
             "sprite": "spell4.png",
             "group": "spell",
-            "x": 432,
+            "x": 144,
             "y": 96,
             "w": 48,
             "h": 48

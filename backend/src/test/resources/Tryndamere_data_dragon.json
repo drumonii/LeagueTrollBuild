@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.8.1",
+  "version": "9.11.1",
   "data": {
     "Tryndamere": {
       "id": "Tryndamere",
@@ -269,8 +269,8 @@
             "full": "TryndamereQ.png",
             "sprite": "spell12.png",
             "group": "spell",
-            "x": 192,
-            "y": 48,
+            "x": 384,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -410,8 +410,8 @@
             "full": "TryndamereW.png",
             "sprite": "spell12.png",
             "group": "spell",
-            "x": 240,
-            "y": 48,
+            "x": 432,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -434,13 +434,13 @@
           },
           "maxrank": 5,
           "cooldown": [
-            13,
             12,
             11,
             10,
-            9
+            9,
+            8
           ],
-          "cooldownBurn": "13/12/11/10/9",
+          "cooldownBurn": "12/11/10/9/8",
           "cost": [
             0,
             0,
@@ -544,7 +544,7 @@
             },
             {
               "link": "spelldamage",
-              "coeff": 1,
+              "coeff": 0.8,
               "key": "a1"
             }
           ],
@@ -562,7 +562,7 @@
             "full": "TryndamereE.png",
             "sprite": "spell12.png",
             "group": "spell",
-            "x": 288,
+            "x": 0,
             "y": 48,
             "w": 48,
             "h": 48
@@ -679,7 +679,7 @@
             "full": "UndyingRage.png",
             "sprite": "spell12.png",
             "group": "spell",
-            "x": 336,
+            "x": 48,
             "y": 48,
             "w": 48,
             "h": 48

@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.8.1",
+  "version": "9.11.1",
   "data": {
     "Riven": {
       "id": "Riven",
@@ -132,22 +132,24 @@
           "leveltip": {
             "label": [
               "Damage",
-              "Attack Damage Scaling"
+              "Attack Damage Scaling",
+              "Cooldown"
             ],
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
-              "{{ e5 }}% -> {{ e5NL }}%"
+              "{{ e5 }}% -> {{ e5NL }}%",
+              "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
           "maxrank": 5,
           "cooldown": [
-            13,
-            13,
-            13,
-            13,
-            13
+            12,
+            11.5,
+            11,
+            10.5,
+            10
           ],
-          "cooldownBurn": "13",
+          "cooldownBurn": "12/11.5/11/10.5/10",
           "cost": [
             0,
             0,
@@ -281,7 +283,7 @@
             "full": "RivenTriCleave.png",
             "sprite": "spell9.png",
             "group": "spell",
-            "x": 384,
+            "x": 96,
             "y": 144,
             "w": 48,
             "h": 48
@@ -428,7 +430,7 @@
             "full": "RivenMartyr.png",
             "sprite": "spell9.png",
             "group": "spell",
-            "x": 432,
+            "x": 144,
             "y": 144,
             "w": 48,
             "h": 48
@@ -452,13 +454,13 @@
           },
           "maxrank": 5,
           "cooldown": [
-            10,
-            9,
-            8,
-            7,
-            6
+            14,
+            13,
+            12,
+            11,
+            10
           ],
-          "cooldownBurn": "10/9/8/7/6",
+          "cooldownBurn": "14/13/12/11/10",
           "cost": [
             0,
             0,
@@ -573,10 +575,10 @@
           "rangeBurn": "250",
           "image": {
             "full": "RivenFeint.png",
-            "sprite": "spell10.png",
+            "sprite": "spell9.png",
             "group": "spell",
-            "x": 0,
-            "y": 0,
+            "x": 192,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -688,10 +690,10 @@
           "rangeBurn": "200",
           "image": {
             "full": "RivenFengShuiEngine.png",
-            "sprite": "spell10.png",
+            "sprite": "spell9.png",
             "group": "spell",
-            "x": 48,
-            "y": 0,
+            "x": 240,
+            "y": 144,
             "w": 48,
             "h": 48
           },

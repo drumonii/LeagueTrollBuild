@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.8.1",
+  "version": "9.11.1",
   "data": {
     "Bard": {
       "id": "Bard",
@@ -233,8 +233,8 @@
             "full": "BardQ.png",
             "sprite": "spell1.png",
             "group": "spell",
-            "x": 96,
-            "y": 96,
+            "x": 288,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -244,7 +244,7 @@
           "id": "BardW",
           "name": "Caretaker's Shrine",
           "description": "Reveals a healing shrine which powers up over a short time, disappearing after healing the first ally that touches it.",
-          "tooltip": "Bard raises a health shrine that immediately offers {{ e5 }} <scaleAP>(+{{ a1 }})</scaleAP> health, but restores up to {{ e6 }} <scaleAP>(+{{ a2 }})</scaleAP> health as it gathers power for 10 seconds. The shrine's effect also grants {{ e1 }}% decaying movement speed for {{ e2 }} seconds. <br /><br />Bard can have up to {{ e3 }} shrines active at once, which remain until visited by an ally champion or crushed by an enemy champion.<br /><br /><span class=\"colorFFCC00\">Active Shrines: </span><scaleLevel>{{ f1 }}</scaleLevel> / <span class=\"colorFFCC00\">{{ f2 }}</span></mainText><br />",
+          "tooltip": "Bard raises a health shrine that immediately offers {{ e5 }} <scaleAP>(+{{ a1 }})</scaleAP> health, but restores up to {{ e6 }} <scaleAP>(+{{ a2 }})</scaleAP> health as it gathers power for 10 seconds. The shrine's effect also grants {{ e1 }}% decaying movement speed for {{ e2 }} seconds. <br /><br />Bard can have up to {{ e3 }} shrines active at once, which remain until visited by an ally champion or crushed by an enemy champion.<br /><br /><span class=\"colorFFCC00\">Active Shrines: </span><scaleLevel>{{ f1 }}</scaleLevel> / <span class=\"colorFFCC00\">{{ f2 }}</span><br />",
           "leveltip": {
             "label": [
               "Base Heal",
@@ -385,8 +385,8 @@
             "full": "BardW.png",
             "sprite": "spell1.png",
             "group": "spell",
-            "x": 144,
-            "y": 96,
+            "x": 336,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -526,8 +526,8 @@
             "full": "BardE.png",
             "sprite": "spell1.png",
             "group": "spell",
-            "x": 192,
-            "y": 96,
+            "x": 384,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -537,7 +537,7 @@
           "id": "BardR",
           "name": "Tempered Fate",
           "description": "Bard sends spirit energy arcing to a location, putting all champions, minions, monsters, and turrets hit into stasis for a brief time.",
-          "tooltip": "Bard sends magical energy arcing to a target location. On impact, all champions, minions, monsters, and turrets in the target area are put in stasis, becoming invincible, untargetable, and unable to act for {{ e1 }} seconds.<br /><br />Epic monsters are also put into stasis, despite normally being immune to disables.",
+          "tooltip": "Bard sends magical energy arcing to a target location. On impact, all champions, minions, monsters, and turrets in the target area are put in stasis, becoming invincible, untargetable, and unable to act for {{ rstasisduration }} seconds.<br /><br />Epic monsters are also put into stasis, despite normally being immune to disables.",
           "leveltip": {
             "label": [
               "Cooldown"
@@ -563,9 +563,9 @@
           "effect": [
             null,
             [
-              2.5,
-              2.5,
-              2.5
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -615,7 +615,7 @@
           ],
           "effectBurn": [
             null,
-            "2.5",
+            "0",
             "0",
             "0",
             "0",
@@ -639,8 +639,8 @@
             "full": "BardR.png",
             "sprite": "spell1.png",
             "group": "spell",
-            "x": 240,
-            "y": 96,
+            "x": 432,
+            "y": 48,
             "w": 48,
             "h": 48
           },

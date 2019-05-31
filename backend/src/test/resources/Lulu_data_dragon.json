@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.8.1",
+  "version": "9.11.1",
   "data": {
     "Lulu": {
       "id": "Lulu",
@@ -255,10 +255,10 @@
           "rangeBurn": "925",
           "image": {
             "full": "LuluQ.png",
-            "sprite": "spell7.png",
+            "sprite": "spell6.png",
             "group": "spell",
-            "x": 96,
-            "y": 0,
+            "x": 288,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -406,10 +406,10 @@
           "rangeBurn": "650",
           "image": {
             "full": "LuluW.png",
-            "sprite": "spell7.png",
+            "sprite": "spell6.png",
             "group": "spell",
-            "x": 144,
-            "y": 0,
+            "x": 336,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -560,10 +560,10 @@
           "rangeBurn": "650",
           "image": {
             "full": "LuluE.png",
-            "sprite": "spell7.png",
+            "sprite": "spell6.png",
             "group": "spell",
-            "x": 192,
-            "y": 0,
+            "x": 384,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -573,7 +573,7 @@
           "id": "LuluR",
           "name": "Wild Growth",
           "description": "Lulu enlarges an ally, knocking nearby enemies into the air and granting the ally a large amount of bonus health. For the next few seconds, that ally gains an aura that slows nearby enemies.",
-          "tooltip": "Lulu enlarges her ally, knocking nearby enemies into the air. For {{ e4 }} seconds, her ally gains {{ e1 }}<scaleAP> (+{{ a1 }})</scaleAP> bonus health and slows nearby enemies by {{ e2 }}%.",
+          "tooltip": "Lulu enlarges her ally, knocking nearby enemies into the air. For {{ buffduration }} seconds, her ally gains <healing>{{ totalbonushealth }} bonus health</healing> and slows nearby enemies by {{ slowpercent }}%.",
           "leveltip": {
             "label": [
               "Bonus Health",
@@ -581,8 +581,8 @@
               "Cooldown"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
-              "{{ e2 }}% -> {{ e2NL }}%",
+              "{{ bonushealth }} -> {{ bonushealthNL }}",
+              "{{ slowpercent }}% -> {{ slowpercentNL }}%",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
@@ -603,29 +603,29 @@
           "effect": [
             null,
             [
-              300,
-              450,
-              600
+              0,
+              0,
+              0
             ],
             [
-              30,
-              45,
-              60
+              0,
+              0,
+              0
             ],
             [
-              1,
-              1,
-              1
+              0,
+              0,
+              0
             ],
             [
-              7,
-              7,
-              7
+              0,
+              0,
+              0
             ],
             [
-              50,
-              50,
-              50
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -655,24 +655,18 @@
           ],
           "effectBurn": [
             null,
-            "300/450/600",
-            "30/45/60",
-            "1",
-            "7",
-            "50",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
             "0",
             "0",
             "0",
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.5,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -683,10 +677,10 @@
           "rangeBurn": "900",
           "image": {
             "full": "LuluR.png",
-            "sprite": "spell7.png",
+            "sprite": "spell6.png",
             "group": "spell",
-            "x": 240,
-            "y": 0,
+            "x": 432,
+            "y": 144,
             "w": 48,
             "h": 48
           },

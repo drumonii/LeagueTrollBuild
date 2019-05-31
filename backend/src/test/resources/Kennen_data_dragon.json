@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.8.1",
+  "version": "9.11.1",
   "data": {
     "Kennen": {
       "id": "Kennen",
@@ -252,10 +252,10 @@
           "rangeBurn": "950",
           "image": {
             "full": "KennenShurikenHurlMissile1.png",
-            "sprite": "spell6.png",
+            "sprite": "spell5.png",
             "group": "spell",
-            "x": 96,
-            "y": 0,
+            "x": 288,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -408,10 +408,10 @@
           "rangeBurn": "725",
           "image": {
             "full": "KennenBringTheLight.png",
-            "sprite": "spell6.png",
+            "sprite": "spell5.png",
             "group": "spell",
-            "x": 144,
-            "y": 0,
+            "x": 336,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -420,18 +420,16 @@
         {
           "id": "KennenLightningRush",
           "name": "Lightning Rush",
-          "description": "Kennen morphs into a lightning form, enabling him to pass through units and apply a Mark of the Storm. Kennen gains defense and movement speed when entering this form, and attack speed when leaving it.",
-          "tooltip": "Kennen turns into a ball of lightning for up to {{ duration - as ball }} seconds, dealing {{ base damage }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage to enemies he passes through.<br /><br />While a ball of lightning, Kennen gains {{ defenses }} armor and magic resist, and {{ movement speed*100 }}% movement speed. Kennen is refunded {{ energy refund }} energy if he damages at least one enemy in this form.<br /><br />Upon returning to his normal form, Kennen gains {{ attack speed*100 }}% attack speed for {{ duration - after ball }} seconds.<br /><br /><rules>Lightning Rush deals {{ damage to minions*100 }}% damage to minions.<br />Kennen ignores unit collision while he is a ball of lightning.</rules>",
+          "description": "Kennen morphs into a lightning form, enabling him to pass through units and apply a Mark of the Storm. Kennen gains movement speed when entering this form, and attack speed when leaving it.",
+          "tooltip": "Kennen turns into a ball of lightning for up to {{ duration - as ball }} seconds, dealing {{ base damage }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage to enemies he passes through.<br /><br />While a ball of lightning, Kennen gains {{ movement speed*100 }}% movement speed. Kennen is refunded {{ energy refund }} energy if he damages at least one enemy in this form.<br /><br />Upon returning to his normal form, Kennen gains {{ attack speed*100 }}% attack speed for {{ duration - after ball }} seconds.<br /><br /><rules>Lightning Rush deals {{ damage to minions*100 }}% damage to minions.<br />Kennen ignores unit collision while he is a ball of lightning.</rules>",
           "leveltip": {
             "label": [
               "Damage",
-              "Armor and Magic Resist",
               "Cooldown",
               "@AbilityResourceName@ Cost"
             ],
             "effect": [
               "{{ base damage }} -> {{ base damageNL }}",
-              "{{ defenses }} -> {{ defensesNL }}",
               "{{ cooldown }} -> {{ cooldownNL }}",
               "{{ cost }} -> {{ costNL }}"
             ]
@@ -559,10 +557,10 @@
           "rangeBurn": "200",
           "image": {
             "full": "KennenLightningRush.png",
-            "sprite": "spell6.png",
+            "sprite": "spell5.png",
             "group": "spell",
-            "x": 192,
-            "y": 0,
+            "x": 384,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -572,13 +570,17 @@
           "id": "KennenShurikenStorm",
           "name": "Slicing Maelstrom",
           "description": "Kennen summons a storm that strikes at nearby enemy champions for magical damage.",
-          "tooltip": "Summons a magical storm for {{ e3 }} seconds that deals {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage to all enemies near Kennen every {{ e2 }} seconds. Each maelstrom hit applies Mark of the Storm, up to a maximum of 3.<br /><br />Successive maelstrom hits against the same enemy deal an additional {{ e4 }}% damage for each hit they've already suffered from this storm.",
+          "tooltip": "Summons a magical storm for {{ kennenrduration }} seconds that grants him {{ kennenrdefenses }} Armor and Magic Resist and deals {{ pertickdamagecalculated }} magic damage to all enemies near Kennen every {{ kennenrtickrate }} seconds. Each maelstrom hit applies Mark of the Storm, up to a maximum of 3.<br /><br />Successive maelstrom hits against the same enemy deal an additional {{ damageamp*100 }}% damage for each hit they've already suffered from this storm.",
           "leveltip": {
             "label": [
-              "Damage"
+              "Damage",
+              "Armor Bonus",
+              "Magic Resist Bonus"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}"
+              "{{ basedamage }} -> {{ basedamageNL }}",
+              "{{ kennenrdefenses }} -> {{ kennenrdefensesNL }}",
+              "{{ kennenrdefenses }} -> {{ kennenrdefensesNL }}"
             ]
           },
           "maxrank": 3,
@@ -598,24 +600,24 @@
           "effect": [
             null,
             [
-              40,
-              75,
-              110
+              0,
+              0,
+              0
             ],
             [
-              0.5,
-              0.5,
-              0.5
+              0,
+              0,
+              0
             ],
             [
-              3,
-              3,
-              3
+              0,
+              0,
+              0
             ],
             [
-              10,
-              10,
-              10
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -650,10 +652,10 @@
           ],
           "effectBurn": [
             null,
-            "40/75/110",
-            "0.5",
-            "3",
-            "10",
+            "0",
+            "0",
+            "0",
+            "0",
             "0",
             "0",
             "0",
@@ -661,13 +663,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.2,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -678,10 +674,10 @@
           "rangeBurn": "550",
           "image": {
             "full": "KennenShurikenStorm.png",
-            "sprite": "spell6.png",
+            "sprite": "spell5.png",
             "group": "spell",
-            "x": 240,
-            "y": 0,
+            "x": 432,
+            "y": 144,
             "w": 48,
             "h": 48
           },

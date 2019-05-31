@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.8.1",
+  "version": "9.11.1",
   "data": {
     "TahmKench": {
       "id": "TahmKench",
@@ -65,11 +65,11 @@
         "difficulty": 5
       },
       "stats": {
-        "hp": 540,
-        "hpperlevel": 102,
+        "hp": 600,
+        "hpperlevel": 100,
         "mp": 325,
         "mpperlevel": 40,
-        "movespeed": 335,
+        "movespeed": 345,
         "armor": 47,
         "armorperlevel": 3.5,
         "spellblock": 32.1,
@@ -95,22 +95,24 @@
           "leveltip": {
             "label": [
               "Base Damage",
-              "Slow"
+              "Slow",
+              "Cooldown"
             ],
             "effect": [
               "{{ e3 }} -> {{ e3NL }}",
-              "{{ effect4amount*-100.000000 }}% -> {{ effect4amountnl*-100.000000 }}%"
+              "{{ effect4amount*-100.000000 }}% -> {{ effect4amountnl*-100.000000 }}%",
+              "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
           "maxrank": 5,
           "cooldown": [
+            8,
+            7,
+            6,
             5,
-            5,
-            5,
-            5,
-            5
+            4
           ],
-          "cooldownBurn": "5",
+          "cooldownBurn": "8/7/6/5/4",
           "cost": [
             50,
             50,
@@ -123,11 +125,11 @@
           "effect": [
             null,
             [
-              875,
-              875,
-              875,
-              875,
-              875
+              925,
+              925,
+              925,
+              925,
+              925
             ],
             [
               1000,
@@ -144,18 +146,18 @@
               280
             ],
             [
-              30,
-              40,
               50,
+              55,
               60,
+              65,
               70
             ],
             [
-              1.5,
-              1.5,
-              1.5,
-              1.5,
-              1.5
+              2,
+              2,
+              2,
+              2,
+              2
             ],
             [
               1.5,
@@ -195,11 +197,11 @@
           ],
           "effectBurn": [
             null,
-            "875",
+            "925",
             "1000",
             "80/130/180/230/280",
-            "30/40/50/60/70",
-            "1.5",
+            "50/55/60/65/70",
+            "2",
             "1.5",
             "0",
             "0",
@@ -216,19 +218,19 @@
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
-            800,
-            800,
-            800,
-            800,
-            800
+            900,
+            900,
+            900,
+            900,
+            900
           ],
-          "rangeBurn": "800",
+          "rangeBurn": "900",
           "image": {
             "full": "TahmKenchQ.png",
             "sprite": "spell11.png",
             "group": "spell",
-            "x": 96,
-            "y": 96,
+            "x": 288,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -238,38 +240,38 @@
           "id": "TahmKenchW",
           "name": "Devour",
           "description": "Tahm Kench devours a target, dealing a percentage of their maximum health as magic damage. He can spit devoured minions and monsters out as a skillshot that deals magic damage in an area upon impact.",
-          "tooltip": "Devour a target for {{ e1 }}s (half that for enemy champions.) Enemies are dealt {{ e3 }}% <scaleAP>(+{{ a1 }}%)</scaleAP> of their maximum health as magic damage (maximum of {{ e2 }} against neutral monsters).<br /><br /><spellPassive>Enemy Champions:</spellPassive> Requires 3 stacks of An Acquired Taste to be devoured. While holding an enemy champion, Tahm Kench is slowed by 95%.<br /><br /><spellPassive>Minions and Monsters:</spellPassive> Reactivate to spit them, dealing {{ e7 }} <scaleAP>(+{{ a2 }})</scaleAP> magic damage to targets hit.<br /><br /><rules><span class=\"color8c8c8c\">When used on an enemy, half of Devour's cooldown is refunded.</span></rules>",
+          "tooltip": "Devour a target for {{ e1 }}s (half that for enemy champions.) Enemies are dealt {{ e7 }} (+{{ e3 }}%) <scaleAP>(+{{ a1 }}%)</scaleAP> of their maximum health as magic damage (maximum of {{ e2 }} against neutral monsters).<br /><br /><spellPassive>Enemy Champions:</spellPassive> Requires 3 stacks of An Acquired Taste to be devoured. While holding any champion, Tahm Kench is slowed by 95% and grounded.<br /><br /><spellPassive>Minions and Monsters:</spellPassive> Reactivate to spit them, dealing {{ e7 }} <scaleAP>(+{{ a2 }})</scaleAP> magic damage to targets hit.<br /><br /><rules><span class=\"color8c8c8c\">When used on an enemy, half of Devour's cooldown and mana cost are refunded.</span></rules>",
           "leveltip": {
             "label": [
+              "Base Damage",
               "Maximum Health Damage",
               "Monster Damage Cap",
-              "Minion Spit Damage",
-              "Cooldown"
+              "Minion Spit Damage"
             ],
             "effect": [
+              "{{ e7 }} -> {{ e7NL }}",
               "{{ e3 }}% -> {{ e3NL }}%",
               "{{ e2 }} -> {{ e2NL }}",
-              "{{ e7 }} -> {{ e7NL }}",
-              "{{ cooldown }} -> {{ cooldownNL }}"
+              "{{ e7 }} -> {{ e7NL }}"
             ]
           },
           "maxrank": 5,
           "cooldown": [
-            28,
-            25,
-            22,
-            19,
-            16
+            20,
+            20,
+            20,
+            20,
+            20
           ],
-          "cooldownBurn": "28/25/22/19/16",
+          "cooldownBurn": "20",
           "cost": [
-            60,
-            60,
-            60,
-            60,
-            60
+            100,
+            100,
+            100,
+            100,
+            100
           ],
-          "costBurn": "60",
+          "costBurn": "100",
           "datavalues": {},
           "effect": [
             null,
@@ -288,11 +290,11 @@
               600
             ],
             [
-              20,
-              23,
-              26,
-              29,
-              32
+              5,
+              7,
+              9,
+              11,
+              13
             ],
             [
               0.3,
@@ -317,10 +319,10 @@
             ],
             [
               100,
-              150,
-              200,
-              250,
-              300
+              135,
+              170,
+              205,
+              240
             ],
             [
               0,
@@ -348,11 +350,11 @@
             null,
             "4",
             "400/450/500/550/600",
-            "20/23/26/29/32",
+            "5/7/9/11/13",
             "0.3/0.35/0.4/0.45/0.5",
             "0",
             "0",
-            "100/150/200/250/300",
+            "100/135/170/205/240",
             "0",
             "0",
             "0"
@@ -383,8 +385,8 @@
             "full": "TahmKenchW.png",
             "sprite": "spell11.png",
             "group": "spell",
-            "x": 144,
-            "y": 96,
+            "x": 336,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -415,13 +417,13 @@
           ],
           "cooldownBurn": "6",
           "cost": [
-            50,
-            50,
-            50,
-            50,
-            50
+            0,
+            0,
+            0,
+            0,
+            0
           ],
-          "costBurn": "50",
+          "costBurn": "0",
           "datavalues": {},
           "effect": [
             null,
@@ -433,18 +435,18 @@
               3
             ],
             [
-              15,
               20,
               25,
               30,
-              35
+              35,
+              40
             ],
             [
-              70,
-              75,
               80,
               85,
-              90
+              90,
+              95,
+              100
             ],
             [
               0,
@@ -499,8 +501,8 @@
           "effectBurn": [
             null,
             "3",
-            "15/20/25/30/35",
-            "70/75/80/85/90",
+            "20/25/30/35/40",
+            "80/85/90/95/100",
             "0",
             "0",
             "0",
@@ -524,8 +526,8 @@
             "full": "TahmKenchE.png",
             "sprite": "spell11.png",
             "group": "spell",
-            "x": 192,
-            "y": 96,
+            "x": 384,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -548,11 +550,11 @@
           },
           "maxrank": 3,
           "cooldown": [
-            120,
-            110,
-            100
+            140,
+            130,
+            120
           ],
-          "cooldownBurn": "120/110/100",
+          "cooldownBurn": "140/130/120",
           "cost": [
             100,
             100,
@@ -563,9 +565,9 @@
           "effect": [
             null,
             [
-              4500,
+              2500,
               5500,
-              6500
+              8500
             ],
             [
               0.02,
@@ -615,7 +617,7 @@
           ],
           "effectBurn": [
             null,
-            "4500/5500/6500",
+            "2500/5500/8500",
             "0.02/0.04/0.06",
             "20",
             "0",
@@ -630,17 +632,17 @@
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
-            4500,
+            2500,
             5500,
-            6500
+            8500
           ],
-          "rangeBurn": "4500/5500/6500",
+          "rangeBurn": "2500/5500/8500",
           "image": {
             "full": "TahmKenchNewR.png",
             "sprite": "spell11.png",
             "group": "spell",
-            "x": 240,
-            "y": 96,
+            "x": 432,
+            "y": 48,
             "w": 48,
             "h": 48
           },

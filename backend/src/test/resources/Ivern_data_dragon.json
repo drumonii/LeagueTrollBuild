@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.8.1",
+  "version": "9.11.1",
   "data": {
     "Ivern": {
       "id": "Ivern",
@@ -219,8 +219,8 @@
             "full": "IvernQ.png",
             "sprite": "spell4.png",
             "group": "spell",
-            "x": 96,
-            "y": 96,
+            "x": 288,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -360,8 +360,8 @@
             "full": "IvernW.png",
             "sprite": "spell4.png",
             "group": "spell",
-            "x": 144,
-            "y": 96,
+            "x": 336,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -505,8 +505,8 @@
             "full": "IvernE.png",
             "sprite": "spell4.png",
             "group": "spell",
-            "x": 192,
-            "y": 96,
+            "x": 384,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -516,7 +516,7 @@
           "id": "IvernR",
           "name": "Daisy!",
           "description": "Ivern summons his Sentinel friend Daisy to fight with him. Daisy will send out a shockwave if she attacks the same champion three times in a row.",
-          "tooltip": "Ivern summons his sentinel friend Daisy for {{ f6 }} seconds. If Daisy attacks the same champion three times in a row, she will create a shockwave knocking enemies up for 1 second (3s cooldown). Daisy has:<ul><li>Health: {{ e1 }} <scaleAP>(+{{ f1 }})</scaleAP></li><li>Armor and Magic Resist: {{ e2 }} <scaleAP>(+{{ f2 }})</scaleAP></li><li>Attack Damage: {{ f4 }} <scaleAP>(+{{ f3 }})</scaleAP></li></ul><br /><rules><scaleArmor>Recast to manually issue orders to Daisy.</scaleArmor></rules>",
+          "tooltip": "Ivern summons his sentinel friend Daisy for {{ f6 }} seconds. If Daisy attacks the same champion three times in a row, she will create a shockwave knocking enemies up for 1 second (3s cooldown). Daisy has:<ul><li>Health: {{ totaldaisyhp }}</li><li>Armor and Magic Resist: {{ totalbonusresists }}</li><li>Attack Damage: {{ totaldaisyad }}</li></ul><br /><rules><scaleArmor>Recast to manually issue orders to Daisy.</scaleArmor></rules>",
           "leveltip": {
             "label": [
               "Cooldown",
@@ -624,8 +624,8 @@
             "full": "IvernR.png",
             "sprite": "spell4.png",
             "group": "spell",
-            "x": 240,
-            "y": 96,
+            "x": 432,
+            "y": 48,
             "w": 48,
             "h": 48
           },

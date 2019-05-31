@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.8.1",
+  "version": "9.11.1",
   "data": {
     "Cassiopeia": {
       "id": "Cassiopeia",
@@ -240,7 +240,7 @@
             "full": "CassiopeiaQ.png",
             "sprite": "spell2.png",
             "group": "spell",
-            "x": 288,
+            "x": 0,
             "y": 0,
             "w": 48,
             "h": 48
@@ -391,7 +391,7 @@
             "full": "CassiopeiaW.png",
             "sprite": "spell2.png",
             "group": "spell",
-            "x": 336,
+            "x": 48,
             "y": 0,
             "w": 48,
             "h": 48
@@ -548,7 +548,7 @@
             "full": "CassiopeiaE.png",
             "sprite": "spell2.png",
             "group": "spell",
-            "x": 384,
+            "x": 96,
             "y": 0,
             "w": 48,
             "h": 48
@@ -559,14 +559,14 @@
           "id": "CassiopeiaR",
           "name": "Petrifying Gaze",
           "description": "Cassiopeia releases a swirl of magical energy from her eyes, stunning any enemies in front of her that are facing her and slowing any others with their back turned.",
-          "tooltip": "Cassiopeia deals {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage to all enemies in front of her. Enemies facing her turn to stone and are stunned for {{ e3 }} seconds while enemies facing away are slowed by {{ e2 }}%.",
+          "tooltip": "Cassiopeia deals {{ rdamage }} magic damage to all enemies in front of her. Enemies facing her turn to stone and are stunned for {{ rccduration }} seconds while enemies facing away are slowed by {{ rslowpercent }}%.",
           "leveltip": {
             "label": [
               "Damage",
               "Cooldown"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
+              "{{ rbasedamage }} -> {{ rbasedamageNL }}",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
@@ -587,19 +587,19 @@
           "effect": [
             null,
             [
-              150,
-              250,
-              350
+              0,
+              0,
+              0
             ],
             [
-              40,
-              40,
-              40
+              0,
+              0,
+              0
             ],
             [
-              2,
-              2,
-              2
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -639,9 +639,9 @@
           ],
           "effectBurn": [
             null,
-            "150/250/350",
-            "40",
-            "2",
+            "0",
+            "0",
+            "0",
             "0",
             "0",
             "0",
@@ -650,13 +650,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.5,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -669,7 +663,7 @@
             "full": "CassiopeiaR.png",
             "sprite": "spell2.png",
             "group": "spell",
-            "x": 432,
+            "x": 144,
             "y": 0,
             "w": 48,
             "h": 48

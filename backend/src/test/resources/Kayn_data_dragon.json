@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.8.1",
+  "version": "9.11.1",
   "data": {
     "Kayn": {
       "id": "Kayn",
@@ -86,7 +86,7 @@
           "id": "KaynQ",
           "name": "Reaping Slash",
           "description": "Kayn dashes, then slashes. Both deal damage.",
-          "tooltip": "Kayn dashes forward to strike nearby enemies. Both dash and strike deal {{ e1 }} <span class=\"colorFF8C00\">(+{{ a1 }})</span> physical damage.<br /><hr><span class=\"colorfe5c50\">Darkin:</span> Deal a percentage of the target's maximum health instead.</hr><br /><br /><rules>Deals {{ e6 }} bonus physical damage to monsters.</rules>",
+          "tooltip": "Kayn dashes forward to strike nearby enemies. Both dash and strike deal {{ e1 }} <span class=\"colorFF8C00\">(+{{ a1 }})</span> physical damage.<br /><hr><span class=\"colorfe5c50\">Darkin:</span> Deal a percentage of the target's maximum health instead.<br /><br /><rules>Deals {{ e6 }} bonus physical damage to monsters.</rules>",
           "leveltip": {
             "label": [
               "Damage",
@@ -222,7 +222,7 @@
             "full": "KaynQ.png",
             "sprite": "spell5.png",
             "group": "spell",
-            "x": 384,
+            "x": 96,
             "y": 144,
             "w": 48,
             "h": 48
@@ -371,7 +371,7 @@
             "full": "KaynW.png",
             "sprite": "spell5.png",
             "group": "spell",
-            "x": 432,
+            "x": 144,
             "y": 144,
             "w": 48,
             "h": 48
@@ -382,7 +382,7 @@
           "id": "KaynE",
           "name": "Shadow Step",
           "description": "Kayn can walk through terrain.",
-          "tooltip": "Kayn gains {{ e1 }}% movement speed and the ability to walk through terrain for {{ e2 }} seconds. When he first enters terrain, he is healed for {{ e7 }} <span class=\"colorFF8C00\">(+{{ a1 }})</span>.<br /><hr><span class=\"color8484fb\">Shadow Assassin:</span> Cooldown is set to {{ assassincdreduction }} seconds, gain more movement speed, and slow immunity.</hr><br /><br /><rules>Maximum duration in combat with enemy champions: {{ e6 }} seconds.<br />Immobilizing effects and spending more than {{ e3 }} consecutive seconds outside of terrain end Shadow Step immediately.</rules>",
+          "tooltip": "Kayn gains {{ e1 }}% movement speed and the ability to walk through terrain for {{ e2 }} seconds. When he first enters terrain, he is healed for {{ e7 }} <span class=\"colorFF8C00\">(+{{ a1 }})</span>.<br /><hr><span class=\"color8484fb\">Shadow Assassin:</span> Cooldown is set to {{ assassincdreduction }} seconds, gain more movement speed, and slow immunity.<br /><br /><rules>Maximum duration in combat with enemy champions: {{ e6 }} seconds.<br />Immobilizing effects and spending more than {{ e3 }} consecutive seconds outside of terrain end Shadow Step immediately.</rules>",
           "leveltip": {
             "label": [
               "Cooldown",
@@ -518,10 +518,10 @@
           "rangeBurn": "400",
           "image": {
             "full": "KaynE.png",
-            "sprite": "spell6.png",
+            "sprite": "spell5.png",
             "group": "spell",
-            "x": 0,
-            "y": 0,
+            "x": 192,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -633,10 +633,10 @@
           "rangeBurn": "550",
           "image": {
             "full": "KaynR.png",
-            "sprite": "spell6.png",
+            "sprite": "spell5.png",
             "group": "spell",
-            "x": 48,
-            "y": 0,
+            "x": 240,
+            "y": 144,
             "w": 48,
             "h": 48
           },

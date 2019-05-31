@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.8.1",
+  "version": "9.11.1",
   "data": {
     "Anivia": {
       "id": "Anivia",
@@ -266,10 +266,10 @@
           "rangeBurn": "1075",
           "image": {
             "full": "FlashFrost.png",
-            "sprite": "spell1.png",
+            "sprite": "spell0.png",
             "group": "spell",
-            "x": 96,
-            "y": 0,
+            "x": 288,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -405,10 +405,10 @@
           "rangeBurn": "1000",
           "image": {
             "full": "Crystallize.png",
-            "sprite": "spell1.png",
+            "sprite": "spell0.png",
             "group": "spell",
-            "x": 144,
-            "y": 0,
+            "x": 336,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -552,10 +552,10 @@
           "rangeBurn": "650",
           "image": {
             "full": "Frostbite.png",
-            "sprite": "spell1.png",
+            "sprite": "spell0.png",
             "group": "spell",
-            "x": 192,
-            "y": 0,
+            "x": 384,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -565,7 +565,7 @@
           "id": "GlacialStorm",
           "name": "Glacial Storm",
           "description": "Anivia summons a driving rain of ice and hail to damage her enemies and slow their advance.",
-          "tooltip": "<spellPassive>Activate: </spellPassive>Drains {{ e2 }} Mana per second. <br /><br />Anivia calls forth a driving rain of ice and hail that increases in size over {{ e7 }} seconds, dealing {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage per second to targets and slowing their Movement Speed by {{ e4 }}%. <br /><br />When the Glacial Storm is fully formed, it slows targets' Movement Speed by {{ f1 }}% and does {{ e3 }}% damage instead.",
+          "tooltip": "<spellPassive>Activate: </spellPassive>Drains <mana>{{ manacostpersecond }} Mana</mana> per second. <br /><br />Anivia calls forth a driving rain of ice and hail that increases in size over {{ growthtime }} seconds, dealing <magicDamage>{{ totaldamagepersecond }} magic damage</magicDamage> per second to targets and slowing their Movement Speed by {{ slowamount }}%. <br /><br />When the Glacial Storm is fully formed, it slows targets' Movement Speed by {{ enhancedslow }}% and does {{ bonusmultiplier }}% damage instead.",
           "leveltip": {
             "label": [
               "Damage Per Second",
@@ -573,9 +573,9 @@
               "Mana Cost Per Second"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
-              "{{ e4 }}% -> {{ e4NL }}%",
-              "{{ e2 }} -> {{ e2NL }}"
+              "{{ damagepersecond }} -> {{ damagepersecondNL }}",
+              "{{ slowamount }}% -> {{ slowamountNL }}%",
+              "{{ manacostpersecond }} -> {{ manacostpersecondNL }}"
             ]
           },
           "maxrank": 3,
@@ -595,24 +595,9 @@
           "effect": [
             null,
             [
-              40,
-              60,
-              80
-            ],
-            [
-              40,
-              50,
-              60
-            ],
-            [
-              300,
-              300,
-              300
-            ],
-            [
-              20,
-              30,
-              40
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -620,51 +605,60 @@
               0
             ],
             [
-              1,
-              1,
-              1
+              0,
+              0,
+              0
             ],
             [
-              1.5,
-              1.5,
-              1.5
+              0,
+              0,
+              0
             ],
             [
-              50,
-              50,
-              50
+              0,
+              0,
+              0
             ],
             [
-              800,
-              800,
-              800
+              0,
+              0,
+              0
             ],
             [
-              1000,
-              1000,
-              1000
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
             ]
           ],
           "effectBurn": [
             null,
-            "40/60/80",
-            "40/50/60",
-            "300",
-            "20/30/40",
             "0",
-            "1",
-            "1.5",
-            "50",
-            "800",
-            "1000"
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.125,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -675,10 +669,10 @@
           "rangeBurn": "750",
           "image": {
             "full": "GlacialStorm.png",
-            "sprite": "spell1.png",
+            "sprite": "spell0.png",
             "group": "spell",
-            "x": 240,
-            "y": 0,
+            "x": 432,
+            "y": 144,
             "w": 48,
             "h": 48
           },
