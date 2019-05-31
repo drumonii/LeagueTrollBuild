@@ -2,6 +2,7 @@ package com.drumonii.loltrollbuild.config;
 
 import com.drumonii.loltrollbuild.config.Profiles.Ddragon;
 import com.drumonii.loltrollbuild.riot.api.RiotApiProperties;
+import com.drumonii.loltrollbuild.riot.api.RiotClientHttpRequestInterceptor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -42,6 +43,7 @@ public class RiotApiConfig {
 					.setSupportedMediaTypes(Collections.singletonList(MediaType.parseMediaType("text/json;charset=UTF-8")));
 			return builder
 					.additionalMessageConverters(textJsonMappingJackson2HttpMessageConverter)
+					.additionalInterceptors(new RiotClientHttpRequestInterceptor())
 					.build();
 		}
 
