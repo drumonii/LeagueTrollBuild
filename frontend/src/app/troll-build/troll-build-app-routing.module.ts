@@ -9,11 +9,28 @@ const routes: Routes = [
     path: '',
     component: TrollBuildAppComponent,
     children: [
-      { path: '', redirectTo: '/champions', pathMatch: 'full' },
-      { path: 'builds', loadChildren: './saved-builds/saved-builds.module#SavedBuildsModule', canLoad: [DisabledGuard] },
-      { path: 'champions', loadChildren: './champions/champions.module#ChampionsModule' },
-      { path: 'champions/:name', loadChildren: './champion/champion.module#ChampionModule' },
-      { path: '**', loadChildren: './error/not-found.module#NotFoundModule' }
+      {
+        path: '',
+        redirectTo: '/champions',
+        pathMatch: 'full'
+      },
+      {
+        path: 'builds',
+        loadChildren: () => import('./saved-builds/saved-builds.module').then(m => m.SavedBuildsModule),
+        canLoad: [DisabledGuard]
+      },
+      {
+        path: 'champions',
+        loadChildren: () => import('./champions/champions.module').then(m => m.ChampionsModule)
+      },
+      {
+        path: 'champions/:name',
+        loadChildren: () => import('./champion/champion.module').then(m => m.ChampionModule)
+      },
+      {
+        path: '**',
+        loadChildren: () => import('./error/not-found.module').then(m => m.NotFoundModule)
+      }
     ]
   },
 ];

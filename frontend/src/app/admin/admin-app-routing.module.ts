@@ -11,10 +11,27 @@ const routes: Routes = [
     path: 'admin',
     component: AdminAppComponent,
     children: [
-      { path: '', pathMatch: 'full', canActivate: [AdminGuard], loadChildren: './home/admin-home.module#AdminHomeModule' },
-      { path: 'login', canActivate: [AdminAlreadyLoggedInGuard], loadChildren: './login/admin-login.module#AdminLoginModule' },
-      { path: 'batch', canActivate: [AdminGuard], loadChildren: './batch/admin-batch.module#AdminBatchModule' },
-      { path: 'flyway', canActivate: [AdminGuard], loadChildren: './flyway/flyway.module#FlywayModule' },
+      {
+        path: '',
+        pathMatch: 'full',
+        canActivate: [AdminGuard],
+        loadChildren: () => import('./home/admin-home.module').then(m => m.AdminHomeModule)
+      },
+      {
+        path: 'login',
+        canActivate: [AdminAlreadyLoggedInGuard],
+        loadChildren: () => import('./login/admin-login.module').then(m => m.AdminLoginModule)
+      },
+      {
+        path: 'batch',
+        canActivate: [AdminGuard],
+        loadChildren: () => import('./batch/admin-batch.module').then(m => m.AdminBatchModule)
+      },
+      {
+        path: 'flyway',
+        canActivate: [AdminGuard],
+        loadChildren: () => import('./flyway/flyway.module').then(m => m.FlywayModule)
+      }
     ]
   }
 ];

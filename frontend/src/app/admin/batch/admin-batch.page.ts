@@ -19,7 +19,7 @@ import { DatatableCss } from '@admin-model/datatable-css';
 })
 export class AdminBatchPage implements OnInit, OnDestroy {
 
-  @ViewChild('batchJobsDatatable') table: any;
+  @ViewChild('batchJobsDatatable', { static: true }) table: any;
 
   loadingIndicator: boolean;
 
