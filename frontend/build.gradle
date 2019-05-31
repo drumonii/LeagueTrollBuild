@@ -1,10 +1,10 @@
 plugins {
-  id 'com.moowork.node' version '1.2.0'
+  id 'com.moowork.node' version '1.3.1'
 }
 
 node {
-  version = '10.15.3'
-  npmVersion = '6.8.0'
+  version = '12.3.1'
+  npmVersion = '6.9.0'
   download = true
   workDir = file("${project.buildDir}/node")
   npmWorkDir = file("${project.buildDir}/npm")
