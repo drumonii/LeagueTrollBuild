@@ -97,7 +97,7 @@ public class ImagesRestController {
 	 * @return the {@link MediaType}
 	 */
 	private MediaType createMediaType(Image image) {
-		return MediaType.parseMediaType("image/" + getFileExtension(image.getFull()));
+		return new MediaType("image", getFileExtension(image.getFull()));
 	}
 
 	/**
