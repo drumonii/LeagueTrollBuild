@@ -7,7 +7,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * Response class of a retrieval of LoL {@link GameMap}s from Riot's {@code Data Dragon} API.
+ * Response class of a retrieval of LoL {@link GameMap}s from Riot's Data Dragon API.
  * Response example:
  *
  * <pre>
@@ -31,6 +31,8 @@ import java.util.Map;
  *      }
  *  }
  * </pre>
+ *
+ * <b>Note</b>: Not all attributes retrieved from Riot are used.
  */
 public class MapsResponse extends BaseResponse {
 

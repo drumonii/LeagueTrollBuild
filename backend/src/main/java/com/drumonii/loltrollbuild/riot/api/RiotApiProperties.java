@@ -25,7 +25,7 @@ public class RiotApiProperties {
 	}
 
 	/**
-	 * Configuration for Riot's {@code Data Dragon}, a web service that is meant to centralize League of Legends game
+	 * Configuration for Riot's Data Dragon, a web service that is meant to centralize League of Legends game
 	 * data.
 	 */
 	public static class Ddragon {
