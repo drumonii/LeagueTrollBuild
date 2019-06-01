@@ -10,8 +10,7 @@ exports.config = {
   ],
   multiCapabilities: [
     { 'browserName': 'chrome' },
-    { 'browserName': 'firefox' },
-    { 'browserName': 'internet explorer' }
+    { 'browserName': 'firefox' }
   ],
   seleniumAddress: 'http://localhost:4444/wd/hub',
   SELENIUM_PROMISE_MANAGER: false,

@@ -27,8 +27,6 @@ Otherwise you'll see `ECONNREFUSED` if the `webdriver-manager` is not started:
 Error: ECONNREFUSED connect ECONNREFUSED 127.0.0.1:4444
 ```
 
-NOTE: You may need to download the IE bindings manually by running `./node_modules/.bin/webdriver-manager.cmd update --ie32`
-
 Ensure PostgreSQL is running then start the backend either with Gradle: `./gradlew bootRun` or in your IDE.
 
 NOTE: e2e tests assume the backend already has data from Riot in the database. If missing data, run the All Retrievals job.
