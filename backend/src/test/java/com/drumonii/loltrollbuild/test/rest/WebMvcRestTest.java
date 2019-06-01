@@ -37,7 +37,7 @@ import java.lang.annotation.*;
 @AutoConfigureDataJpa
 @AutoConfigureWebMvc
 @AutoConfigureWebClient
-@AutoConfigureMockMvc(secure = false)
+@AutoConfigureMockMvc
 @ImportAutoConfiguration({ SpringDataWebAutoConfiguration.class })
 @Import({ CacheConfig.class, JpaConfig.class, RiotApiConfig.class, WebSecurityConfig.class })
 public @interface WebMvcRestTest {
