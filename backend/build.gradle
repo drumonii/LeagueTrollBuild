@@ -29,6 +29,7 @@ asciidoctor {
 
 bootJar {
     archiveFileName = "${rootProject.name}-${version}.jar"
+    destinationDirectory = file("${rootProject.rootDir}/build")
     dependsOn asciidoctor
     dependsOn ':frontend:npmBuild'
     from ("${asciidoctor.outputDir}/html5") {
