@@ -5,7 +5,7 @@ plugins {
 node {
   version = '12.3.1'
   download = true
-  workDir = file("${project.buildDir}/node")
+  workDir = file("${project.projectDir}/node")
   nodeModulesDir = file("${project.projectDir}")
 }
 
