@@ -85,7 +85,6 @@ spring:
   jpa:
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.H2Dialect
         show_sql: false
         format_sql: false
         generate_statistics: false
@@ -105,7 +104,6 @@ spring:
   jpa:
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.PostgreSQL9Dialect
         show_sql: false
         format_sql: false
         generate_statistics: false
@@ -125,7 +123,6 @@ spring:
   jpa:
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.PostgreSQL9Dialect
         show_sql: true
         format_sql: false
         generate_statistics: false
@@ -141,7 +138,6 @@ spring:
   jpa:
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.H2Dialect
         show_sql: true
         format_sql: false
         generate_statistics: false
