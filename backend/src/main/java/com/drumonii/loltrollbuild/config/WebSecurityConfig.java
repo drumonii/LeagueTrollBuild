@@ -10,7 +10,6 @@ import com.drumonii.loltrollbuild.security.login.JsonAuthenticationSuccessHandle
 import com.drumonii.loltrollbuild.security.logout.JsonLogoutSuccessHandler;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
-import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -46,7 +45,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 			.authorizeRequests()
 				.requestMatchers(EndpointRequest.toAnyEndpoint()).hasRole(UserRole.ADMIN)
-				.requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
 			.and()
 			.formLogin()
 				.loginPage("/admin/login")
