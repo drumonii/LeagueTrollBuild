@@ -43,6 +43,9 @@ spring:
   # JPA
   jpa:
     open-in-view: false
+    properties:
+      hibernate:
+        jdbc.lob.non_contextual_creation: true
   # Resources
   resources:
     cache:
@@ -82,15 +85,6 @@ server:
 # Production profile with an embedded H2 database
 spring:
   profiles: embedded
-  jpa:
-    properties:
-      hibernate:
-        show_sql: false
-        format_sql: false
-        generate_statistics: false
-        id.new_generator_mappings: true
-        hbm2ddl.auto:
-        temp.use_jdbc_metadata_defaults: false
 
 ---
 
@@ -101,15 +95,6 @@ spring:
     url: ${LTB_DB_URL}
     username: ${LTB_DB_USERNAME}
     password: ${LTB_DB_PASSWORD}
-  jpa:
-    properties:
-      hibernate:
-        show_sql: false
-        format_sql: false
-        generate_statistics: false
-        id.new_generator_mappings: true
-        hbm2ddl.auto:
-        temp.use_jdbc_metadata_defaults: false
 
 ---
 
@@ -121,14 +106,7 @@ spring:
     username: postgres
     password: postgres
   jpa:
-    properties:
-      hibernate:
-        show_sql: true
-        format_sql: false
-        generate_statistics: false
-        id.new_generator_mappings: true
-        hbm2ddl.auto:
-        temp.use_jdbc_metadata_defaults: false
+    show-sql: true
 
 ---
 
@@ -136,14 +114,7 @@ spring:
 spring:
   profiles: testing
   jpa:
-    properties:
-      hibernate:
-        show_sql: true
-        format_sql: false
-        generate_statistics: false
-        id.new_generator_mappings: true
-        hbm2ddl.auto:
-        temp.use_jdbc_metadata_defaults: false
+    show-sql: true
   data:
     jpa:
       repositories:
