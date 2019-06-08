@@ -31,7 +31,7 @@ bootJar {
     archiveFileName = "${rootProject.name}-${version}.jar"
     destinationDirectory = file("${rootProject.rootDir}/build")
     dependsOn asciidoctor
-    dependsOn ':frontend:npmBuild'
+    dependsOn ':frontend:npmBuild', ':frontend:moveAssets'
     from ("${asciidoctor.outputDir}/html5") {
         into 'static/docs'
     }

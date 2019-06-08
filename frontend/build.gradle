@@ -10,9 +10,17 @@ node {
 }
 
 task npmBuild(type: NpmTask, dependsOn: 'npmInstall') {
-  args = ['run', 'build']
+  args = ['run', 'build-all']
 }
 
 task karmaTests(type: NpmTask, dependsOn: 'npmInstall') {
-  args = ['run', 'test-ci']
+  args = ['run', 'test-all-ci']
+}
+
+// Since Angular does not modify the deployUrl of html (like src), assets must be moved to the root of /dist to avoid 404's
+task moveAssets() {
+  dependsOn 'npmBuild'
+  doLast {
+    ant.move file: "${projectDir}/dist/troll-build/assets", todir: "${projectDir}/dist"
+  }
 }

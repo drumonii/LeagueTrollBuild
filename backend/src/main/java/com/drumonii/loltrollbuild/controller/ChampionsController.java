@@ -15,12 +15,12 @@ public class ChampionsController {
 
 	@GetMapping
 	public String champions() {
-		return "forward:/index.html";
+		return "forward:/troll-build/index.html";
 	}
 
 	@GetMapping(path = "/{value}")
 	public String champion(@PathVariable String value) {
-		return "forward:/index.html";
+		return "forward:/troll-build/index.html";
 	}
 
 }

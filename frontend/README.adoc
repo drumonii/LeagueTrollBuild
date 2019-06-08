@@ -4,36 +4,36 @@ This project was generated with https://github.com/angular/angular-cli[Angular C
 
 == Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `npm run start` for a dev server running the troll build project. Navigate to `http://localhost:4200/`.
+
+Run `npm run start-admin` for a dev server running the troll build admin project. Navigate to `http://localhost:4201/`
+
+The apps will automatically reload if you change any of the source files.
 
 == Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Run `ng generate <project> component component-name` to generate a new component.
+You can also use `ng generate <project> directive|pipe|service|class|guard|interface|enum|module`.
 
 == Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Run `npm run build-all` to build the troll build and admin projects. The build artifacts will be stored in the `dist/`
+directory. They will use the `--prod` flag for a production build.
 
 == Running unit tests
 
-Run `ng test` to execute the unit tests via https://karma-runner.github.io[Karma].
+Run `ng test-all` to execute the unit tests via https://karma-runner.github.io[Karma].
 
 == Running end-to-end tests
-First run the `webdriver-manager-update` script: `npm run webdriver-manager-update` to download the necessary Selenium bindings.
-Next start the `webdriver-manager` using `webdriver-manager-start` script: `npm run webdriver-manager-start`.
+First ensure PostgreSQL is running.
 
-Otherwise you'll see `ECONNREFUSED` if the `webdriver-manager` is not started:
-```
-Error: ECONNREFUSED connect ECONNREFUSED 127.0.0.1:4444
-```
+Then start the backend either with Gradle: `./gradlew bootRun` or in your IDE.
 
-Ensure PostgreSQL is running then start the backend either with Gradle: `./gradlew bootRun` or in your IDE.
-
-NOTE: e2e tests assume the backend already has data from Riot in the database. If missing data, run the All Retrievals job.
+NOTE: e2e tests assume the backend already has data from Riot in the database. If missing data, run the All Retrievals job prior.
 
 Otherwise you'll see `Error occurred while trying to proxy request` and most tests will fail.
 
-Run `ng e2e` to execute the end-to-end tests via http://www.protractortest.org/[Protractor].
+Run `ng e2e-all` to execute the end-to-end tests via http://www.protractortest.org/[Protractor].
 
 == Further help
 

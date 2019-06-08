@@ -15,12 +15,12 @@ public class BuildsController {
 
 	@GetMapping
 	public String builds() {
-		return "forward:/index.html";
+		return "forward:/troll-build/index.html";
 	}
 
 	@GetMapping(path = "/{id}")
 	public String build(@PathVariable int id) {
-		return "forward:/index.html";
+		return "forward:/troll-build/index.html";
 	}
 
 }

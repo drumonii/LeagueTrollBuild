@@ -13,17 +13,17 @@ public class AdminController {
 
     @GetMapping
     public String admin() {
-        return "forward:/index.html";
+        return "forward:/admin/index.html";
     }
 
     @GetMapping(path = "/batch")
     public String batch() {
-        return "forward:/index.html";
+        return "forward:/admin/index.html";
     }
 
     @GetMapping(path = "/flyway")
     public String flyway() {
-        return "forward:/index.html";
+        return "forward:/admin/index.html";
     }
 
 }

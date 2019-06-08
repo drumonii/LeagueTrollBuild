@@ -13,7 +13,7 @@ public class AdminLoginController {
 
     @GetMapping
     public String adminLogin() {
-        return "forward:/index.html";
+        return "forward:/admin/index.html";
     }
 
 }

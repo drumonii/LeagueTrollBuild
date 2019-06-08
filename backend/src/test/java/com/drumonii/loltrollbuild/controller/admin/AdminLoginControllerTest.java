@@ -42,7 +42,7 @@ public class AdminLoginControllerTest {
     @Test
     public void adminLogin() throws Exception {
         mockMvc.perform(get("/admin/login"))
-                .andExpect(forwardedUrl("/index.html"));
+                .andExpect(forwardedUrl("/admin/index.html"));
     }
 
     @Test

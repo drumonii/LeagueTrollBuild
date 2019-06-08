@@ -25,14 +25,14 @@ public class BuildsControllerTest {
 	@Test
 	public void builds() throws Exception {
 		mockMvc.perform(get("/builds"))
-				.andExpect(forwardedUrl("/index.html"));
+				.andExpect(forwardedUrl("/troll-build/index.html"));
 	}
 
 	@WithAnonymousUser
 	@Test
 	public void build() throws Exception {
 		mockMvc.perform(get("/builds/{id}", 1))
-				.andExpect(forwardedUrl("/index.html"));
+				.andExpect(forwardedUrl("/troll-build/index.html"));
 	}
 
 }

@@ -25,21 +25,21 @@ public class AdminControllerTest {
     @Test
     public void adminLogin() throws Exception {
         mockMvc.perform(get("/admin"))
-                .andExpect(forwardedUrl("/index.html"));
+                .andExpect(forwardedUrl("/admin/index.html"));
     }
 
     @WithMockAdminUser
     @Test
     public void adminBatch() throws Exception {
         mockMvc.perform(get("/admin/batch"))
-                .andExpect(forwardedUrl("/index.html"));
+                .andExpect(forwardedUrl("/admin/index.html"));
     }
 
     @WithMockAdminUser
     @Test
     public void adminFlyway() throws Exception {
         mockMvc.perform(get("/admin/flyway"))
-                .andExpect(forwardedUrl("/index.html"));
+                .andExpect(forwardedUrl("/admin/index.html"));
     }
 
 }

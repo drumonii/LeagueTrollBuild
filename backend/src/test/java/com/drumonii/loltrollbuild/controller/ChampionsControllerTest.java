@@ -25,21 +25,21 @@ public class ChampionsControllerTest {
 	@Test
 	public void champions() throws Exception {
 		mockMvc.perform(get("/champions"))
-				.andExpect(forwardedUrl("/index.html"));
+				.andExpect(forwardedUrl("/troll-build/index.html"));
 	}
 
 	@WithAnonymousUser
 	@Test
 	public void championById() throws Exception {
 		mockMvc.perform(get("/champions/{id}", 1))
-				.andExpect(forwardedUrl("/index.html"));
+				.andExpect(forwardedUrl("/troll-build/index.html"));
 	}
 
 	@WithAnonymousUser
 	@Test
 	public void championByName() throws Exception {
 		mockMvc.perform(get("/champions/{name}", "name"))
-				.andExpect(forwardedUrl("/index.html"));
+				.andExpect(forwardedUrl("/troll-build/index.html"));
 	}
 
 }
