@@ -24,14 +24,12 @@ import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.drumonii.loltrollbuild.config.Profiles.DDRAGON;
 import static com.drumonii.loltrollbuild.config.Profiles.TESTING;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.fail;
 import static org.springframework.test.web.client.ExpectedCount.never;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
@@ -71,7 +69,8 @@ public class ChampionsDdragonServiceTest {
 
 	private String championsJson;
 	private String versionsJson;
-	private String championJson;
+
+	private ChampionsResponse championsResponse;
 
 	private Version latestVersion;
 
@@ -81,6 +80,9 @@ public class ChampionsDdragonServiceTest {
 
 		championsJson = JsonTestFilesUtil.getChampionsJson();
 		versionsJson = JsonTestFilesUtil.getVersionsJson();
+
+		championsResponse = jsonTestFilesUtil.getChampionsResponse();
+
 		List<Version> versions = jsonTestFilesUtil.getVersions();
 		latestVersion = versions.get(0);
 	}
@@ -95,14 +97,7 @@ public class ChampionsDdragonServiceTest {
 				.andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(championsJson, MediaType.APPLICATION_JSON_UTF8));
 
-		ChampionsResponse response = null;
-		try {
-			response = objectMapper.readValue(championsJson, ChampionsResponse.class);
-		} catch (IOException e) {
-			fail("Unable to unmarshal the Champions response.", e);
-		}
-
-		List<String> championKeys = response.getChampions().values().stream()
+		List<String> championKeys = championsResponse.getChampions().values().stream()
 				.map(Champion::getKey)
 				.collect(Collectors.toList());
 
@@ -116,6 +111,10 @@ public class ChampionsDdragonServiceTest {
 		mockServer.verify();
 
 		assertThat(champions).isNotEmpty();
+		for (Champion champion : champions) {
+			assertThat(champion.getPassive()).isNotNull();
+			assertThat(champion.getSpells()).isNotEmpty();
+		}
 	}
 
 	@Test
