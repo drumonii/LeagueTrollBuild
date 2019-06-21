@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.11.1",
+  "version": "9.12.1",
   "data": {
     "Sylas": {
       "id": "Sylas",
@@ -367,27 +367,29 @@
         {
           "id": "SylasE",
           "name": "Abscond / Abduct",
-          "description": "Sylas dashes and gains a shield. Sylas can recast the ability to throw his chains out, pulling himself to an enemy he hits.",
-          "tooltip": "Sylas dashes to a location, Shielding himself for <scaleAP>{{ shieldvalue }}</scaleAP> for {{ shieldduration }} seconds.<br /><br /><span class=\"colorFF5733\">Recast:</span> Sylas throws out his chain in a direction, pulling himself to the first enemy hit dealing <scaleAP>{{ damage }}</scaleAP> magic damage and knocking them up for .5 seconds.",
+          "description": "Sylas dashes to a location. Sylas can recast the ability to throw his chains out, pulling himself to an enemy he hits. If he hits an enemy champion or monster, he gains a shield.",
+          "tooltip": "Sylas dashes to a location.<br /><br /><span class=\"colorFF5733\">Recast:</span> Sylas throws out his chain in a direction, pulling himself to the first enemy hit dealing <scaleAP>{{ damage }}</scaleAP> magic damage and knocking them up for .5 seconds. If he hits an enemy champion or monster, he shields himself for <scaleAP>{{ shieldvalue }}</scaleAP> for {{ shieldduration }} seconds.",
           "leveltip": {
             "label": [
               "Damage",
-              "Shield Amount"
+              "Shield Amount",
+              "Cooldown"
             ],
             "effect": [
               "{{ pulldamage }} -> {{ pulldamageNL }}",
-              "{{ shieldbase }} -> {{ shieldbaseNL }}"
+              "{{ shieldbase }} -> {{ shieldbaseNL }}",
+              "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
           "maxrank": 5,
           "cooldown": [
             18,
+            17,
             16,
-            14,
-            12,
-            10
+            15,
+            14
           ],
-          "cooldownBurn": "18/16/14/12/10",
+          "cooldownBurn": "18/17/16/15/14",
           "cost": [
             55,
             60,

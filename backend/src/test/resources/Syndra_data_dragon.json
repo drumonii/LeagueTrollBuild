@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.11.1",
+  "version": "9.12.1",
   "data": {
     "Syndra": {
       "id": "Syndra",
@@ -561,14 +561,14 @@
           "id": "SyndraR",
           "name": "Unleashed Power",
           "description": "Syndra bombards an enemy Champion with all of her Dark Spheres.",
-          "tooltip": "Draws upon Syndra's full cataclysmic power, harnessing Dark Spheres to deal magic damage to target enemy Champion. Unleashed Power manipulates the three Dark Spheres orbiting Syndra, in addition to up to 4 Dark Spheres previously created.<br /><br />Damage per sphere: {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP>.<br />Minimum total damage: {{ e2 }} <scaleAP>(+{{ a2 }})</scaleAP>.",
+          "tooltip": "Draws upon Syndra's full cataclysmic power, harnessing Dark Spheres to deal magic damage to target enemy Champion. Unleashed Power manipulates the three Dark Spheres orbiting Syndra, in addition to up to 4 Dark Spheres previously created.<br /><br />Damage per sphere: {{ damagecalc }}.<br />Minimum total damage: {{ mindamagecalc }}.",
           "leveltip": {
             "label": [
               "Damage",
               "Cooldown"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
+              "{{ damagepersphere }} -> {{ damagepersphereNL }}",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
@@ -589,19 +589,19 @@
           "effect": [
             null,
             [
-              90,
-              135,
-              180
+              0,
+              0,
+              0
             ],
             [
-              270,
-              405,
-              540
+              0,
+              0,
+              0
             ],
             [
-              7,
-              7,
-              7
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -641,9 +641,9 @@
           ],
           "effectBurn": [
             null,
-            "90/135/180",
-            "270/405/540",
-            "7",
+            "0",
+            "0",
+            "0",
             "0",
             "0",
             "0",
@@ -652,18 +652,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.2,
-              "key": "a1"
-            },
-            {
-              "link": "spelldamage",
-              "coeff": 0.6,
-              "key": "a2"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [

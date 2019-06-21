@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.11.1",
+  "version": "9.12.1",
   "data": {
     "Zac": {
       "id": "Zac",
@@ -244,16 +244,16 @@
         {
           "id": "ZacW",
           "name": "Unstable Matter",
-          "description": "Zac's body erupts, damaging nearby enemies.",
-          "tooltip": "Zac's body erupts, dealing {{ e1 }} magic damage +{{ e3 }}% of the enemy's max health as magic damage to nearby enemies.<br /><br />Absorbing <span class=\"color3ca126\">Goo</span> reduces Unstable Matter's cooldown by {{ e4 }} second.<br /><br /><span class=\"size16 color8C8C8C\">Max health damage is capped at {{ e5 }} versus minions and monsters.</span>",
+          "description": "Zac explodes outward towards nearby enemies, dealing a percentage of their maximum health as magic damage.",
+          "tooltip": "Zac's body erupts, dealing {{ basedamage }} + ({{ basemaxhealthdamage*100 }}+{{ displaypercentdamage }}) of the enemy's max health as magic damage to nearby enemies.<br /><br />Absorbing <span class=\"color3ca126\">Goo</span> reduces Unstable Matter's cooldown by 1 second.<br /><br /><rules>Max health damage is capped at 200 versus minions and monsters</rules>",
           "leveltip": {
             "label": [
               "Flat Damage",
-              "Percent Max Health Damage"
+              "Percent Max Health"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
-              "{{ e3 }}% -> {{ e3NL }}%"
+              "{{ basedamage }} -> {{ basedamageNL }}",
+              "{{ basemaxhealthdamage*100.000000 }}% -> {{ basemaxhealthdamagenl*100.000000 }}%"
             ]
           },
           "maxrank": 5,
@@ -277,25 +277,25 @@
           "effect": [
             null,
             [
-              15,
-              30,
-              45,
-              60,
-              75
+              25,
+              40,
+              55,
+              70,
+              85
             ],
             [
-              4,
-              4,
-              4,
-              4,
-              4
+              0.04,
+              0.04,
+              0.04,
+              0.04,
+              0.04
             ],
             [
-              4,
-              5,
-              6,
-              7,
-              8
+              0.04,
+              0.05,
+              0.06,
+              0.07,
+              0.08
             ],
             [
               1,
@@ -349,9 +349,9 @@
           ],
           "effectBurn": [
             null,
-            "15/30/45/60/75",
-            "4",
-            "4/5/6/7/8",
+            "25/40/55/70/85",
+            "0.04",
+            "0.04/0.05/0.06/0.07/0.08",
             "1",
             "200",
             "0",
@@ -361,7 +361,7 @@
             "0"
           ],
           "vars": [],
-          "costType": "% of current Health",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             350,
@@ -380,7 +380,7 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ e2 }}% of current Health"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "ZacE",

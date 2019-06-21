@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.11.1",
+  "version": "9.12.1",
   "data": {
     "Nautilus": {
       "id": "Nautilus",
@@ -135,10 +135,10 @@
           "effect": [
             null,
             [
-              100,
-              145,
-              190,
-              235,
+              80,
+              130,
+              180,
+              230,
               280
             ],
             [
@@ -207,7 +207,7 @@
           ],
           "effectBurn": [
             null,
-            "100/145/190/235/280",
+            "80/130/180/230/280",
             "0",
             "50",
             "50",
@@ -560,7 +560,7 @@
           "id": "NautilusGrandLine",
           "name": "Depth Charge",
           "description": "Nautilus fires a shockwave into the earth that chases an opponent. This shockwave rips up the earth above it, knocking enemies into the air. When it reaches the opponent, the shockwave erupts, knocking his target into the air and stunning them.",
-          "tooltip": "Nautilus fires a shockwave that chases an enemy champion, dealing {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage to other enemies it passes through, knocking them into the air, and stunning them for {{ e5 }} seconds.<br /><br />The shockwave explodes upon hitting its target dealing {{ e2 }} <scaleAP>(+{{ a2 }})</scaleAP> magic damage, launching them into the air and stunning them for {{ e5 }} seconds. ",
+          "tooltip": "Nautilus fires a shockwave that chases an enemy champion, dealing {{ secondarytargetdamage }} magic damage to other enemies it passes through, knocking them into the air, and stunning them for {{ stunduration }} seconds.<br /><br />The shockwave explodes upon hitting its target dealing {{ primarytargetdamage }} magic damage, launching them into the air and stunning them for {{ stunduration }} seconds. ",
           "leveltip": {
             "label": [
               "Pass Through Damage",
@@ -569,9 +569,9 @@
               "Cooldown"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
-              "{{ e2 }} -> {{ e2NL }}",
-              "{{ e5 }} -> {{ e5NL }}",
+              "{{ primarydamage }} -> {{ primarydamageNL }}",
+              "{{ secondarydamage }} -> {{ secondarydamageNL }}",
+              "{{ stunduration }} -> {{ stundurationNL }}",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
@@ -592,14 +592,14 @@
           "effect": [
             null,
             [
-              125,
-              175,
-              225
+              0,
+              0,
+              0
             ],
             [
-              200,
-              325,
-              450
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -612,9 +612,9 @@
               0
             ],
             [
-              1,
-              1.5,
-              2
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -644,29 +644,18 @@
           ],
           "effectBurn": [
             null,
-            "125/175/225",
-            "200/325/450",
             "0",
             "0",
-            "1/1.5/2",
+            "0",
+            "0",
+            "0",
             "0",
             "0",
             "0",
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.4,
-              "key": "a1"
-            },
-            {
-              "link": "spelldamage",
-              "coeff": 0.8,
-              "key": "a2"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
