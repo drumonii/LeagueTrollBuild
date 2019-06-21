@@ -19,16 +19,16 @@ function getChampions(latestVersion) {
  * Gets individual the `champion/{championId}.json` files for the given version and raw champion data.
  *
  * @param {string} latestVersion the latest Riot patch version
- * @param {string} rawChampionData the raw champions data (champion.json)
+ * @param {string} rawChampionsData the raw champions data (champion.json)
  */
-function getChampion(latestVersion, rawChampionData) {
-  const championResponse = JSON.parse(rawChampionData);
-  for (const champion of Object.keys(championResponse.data)) {
+function getChampion(latestVersion, rawChampionsData) {
+  const championResponse = JSON.parse(rawChampionsData);
+  Object.keys(championResponse.data).forEach(champion => {
     console.log(`getting champion ${champion} json test data...`);
 
     getResponse(`http://ddragon.leagueoflegends.com/cdn/${latestVersion}/data/en_US/champion/${champion}.json`,
       (rawChampionData) => writeFile(`${champion}_data_dragon`, rawChampionData));
-  }
+  });
 }
 
 /**
