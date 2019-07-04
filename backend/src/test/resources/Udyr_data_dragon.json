@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.12.1",
+  "version": "9.13.1",
   "data": {
     "Udyr": {
       "id": "Udyr",
@@ -12,7 +12,7 @@
         "full": "Udyr.png",
         "sprite": "champion4.png",
         "group": "champion",
-        "x": 48,
+        "x": 96,
         "y": 0,
         "w": 48,
         "h": 48
@@ -98,7 +98,7 @@
           "id": "UdyrTigerStance",
           "name": "Tiger Stance",
           "description": "Tiger Stance: Activation - Udyr's Attack Speed is increased for a few seconds. Persistent Effect - Udyr's first attack and every third attack after will deal a high amount of damage over 2 seconds.",
-          "tooltip": "<spellPassive>Persistent Effect: </spellPassive>Udyr's first attack and every third attack after will perform a Tiger Strike, dealing bonus {{ e1 }} <scaleAD>(+{{ f2 }})</scaleAD> physical damage over {{ e5 }} seconds. <br /><br />If a target is affected by Tiger Strike, a new application of Tiger Strike will deal the remaining damage instantly.<br /><br /><spellPassive>Activation:</spellPassive> Increases Attack Speed by {{ e2 }}% for {{ e6 }} seconds.<br /><br /><rules><span class=\"color8c8c8c\">Udyr's stance mana costs decrease by 1 each time he levels up.</span></rules>",
+          "tooltip": "<spellPassive>Persistent Effect: </spellPassive>Udyr's first attack and every third attack after will perform a Tiger Strike, dealing bonus {{ e1 }} <scaleAD>(+{{ f2 }})</scaleAD> physical damage over {{ e5 }} seconds. <br /><br />If a target is affected by Tiger Strike, a new application of Tiger Strike will deal the remaining damage instantly.<br /><br /><spellPassive>Activation:</spellPassive> Increases Attack Speed by {{ e2 }}% for {{ e6 }} seconds.<br />",
           "leveltip": {
             "label": [
               "Base Damage",
@@ -111,8 +111,9 @@
               "{{ e2 }}% -> {{ e2NL }}%"
             ]
           },
-          "maxrank": 5,
+          "maxrank": 6,
           "cooldown": [
+            6,
             6,
             6,
             6,
@@ -121,6 +122,7 @@
           ],
           "cooldownBurn": "6",
           "cost": [
+            45,
             45,
             45,
             45,
@@ -136,16 +138,19 @@
               60,
               90,
               120,
-              150
+              150,
+              180
             ],
             [
               30,
               40,
               50,
               60,
-              70
+              70,
+              80
             ],
             [
+              0.15,
               0.15,
               0.15,
               0.15,
@@ -153,13 +158,15 @@
               0.15
             ],
             [
-              120,
-              135,
-              150,
-              165,
-              180
+              110,
+              125,
+              140,
+              155,
+              170,
+              185
             ],
             [
+              2,
               2,
               2,
               2,
@@ -171,9 +178,11 @@
               5,
               5,
               5,
+              5,
               5
             ],
             [
+              0.5,
               0.5,
               0.5,
               0.5,
@@ -185,6 +194,7 @@
               0.25,
               0.25,
               0.25,
+              0.25,
               0.25
             ],
             [
@@ -192,9 +202,11 @@
               0,
               0,
               0,
+              0,
               0
             ],
             [
+              0,
               0,
               0,
               0,
@@ -204,10 +216,10 @@
           ],
           "effectBurn": [
             null,
-            "30/60/90/120/150",
-            "30/40/50/60/70",
+            "30/60/90/120/150/180",
+            "30/40/50/60/70/80",
             "0.15",
-            "120/135/150/165/180",
+            "110/125/140/155/170/185",
             "2",
             "5",
             "0.5",
@@ -235,6 +247,7 @@
             600,
             600,
             600,
+            600,
             600
           ],
           "rangeBurn": "600",
@@ -242,7 +255,7 @@
             "full": "UdyrTigerStance.png",
             "sprite": "spell12.png",
             "group": "spell",
-            "x": 0,
+            "x": 192,
             "y": 96,
             "w": 48,
             "h": 48
@@ -253,7 +266,7 @@
           "id": "UdyrTurtleStance",
           "name": "Turtle Stance",
           "description": "Turtle Stance: Activation - Udyr gains a temporary shield that absorbs damage. Persistent Effect - Udyr's first attack and every third attack after heals him for 2.5% of his maximum health.",
-          "tooltip": "<spellPassive>Persistent Effect: </spellPassive>Udyr's first attack and every third attack after heals him for <scaleHealth>(+{{ f1 }})</scaleHealth> ({{ e3 }}% of his maximum health), increasing by 1% for every percent of Udyr's missing health.<br /><br /><spellPassive>Activation: </spellPassive>Gains a shield that absorbs {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> damage for {{ e2 }} seconds.<br /><br /><rules><span class=\"color8c8c8c\">Udyr's stance mana costs decrease by 1 each time he levels up.</span></rules>",
+          "tooltip": "<spellPassive>Persistent Effect: </spellPassive>Udyr's first attack and every third attack after heals him for <scaleHealth>(+{{ f1 }})</scaleHealth> ({{ e3 }}% of his maximum health), increasing by 1% for every percent of Udyr's missing health.<br /><br /><spellPassive>Activation: </spellPassive>Gains a shield that absorbs {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> damage for {{ e2 }} seconds.",
           "leveltip": {
             "label": [
               "Shield Amount"
@@ -262,8 +275,9 @@
               "{{ e1 }} -> {{ e1NL }}"
             ]
           },
-          "maxrank": 5,
+          "maxrank": 6,
           "cooldown": [
+            6,
             6,
             6,
             6,
@@ -272,6 +286,7 @@
           ],
           "cooldownBurn": "6",
           "cost": [
+            45,
             45,
             45,
             45,
@@ -287,9 +302,11 @@
               95,
               130,
               165,
-              200
+              200,
+              235
             ],
             [
+              5,
               5,
               5,
               5,
@@ -301,9 +318,11 @@
               2.5,
               2.5,
               2.5,
+              2.5,
               2.5
             ],
             [
+              0.05,
               0.05,
               0.05,
               0.05,
@@ -315,23 +334,11 @@
               0,
               0,
               0,
-              0
-            ],
-            [
-              0,
-              0,
-              0,
               0,
               0
             ],
             [
               0,
-              0,
-              0,
-              0,
-              0
-            ],
-            [
               0,
               0,
               0,
@@ -343,9 +350,27 @@
               0,
               0,
               0,
+              0,
               0
             ],
             [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
               0,
               0,
               0,
@@ -355,7 +380,7 @@
           ],
           "effectBurn": [
             null,
-            "60/95/130/165/200",
+            "60/95/130/165/200/235",
             "5",
             "2.5",
             "0.05",
@@ -380,6 +405,7 @@
             600,
             600,
             600,
+            600,
             600
           ],
           "rangeBurn": "600",
@@ -387,7 +413,7 @@
             "full": "UdyrTurtleStance.png",
             "sprite": "spell12.png",
             "group": "spell",
-            "x": 48,
+            "x": 240,
             "y": 96,
             "w": 48,
             "h": 48
@@ -398,7 +424,7 @@
           "id": "UdyrBearStance",
           "name": "Bear Stance",
           "description": "Bear Stance: Activation - Udyr increases Movement Speed for a short duration. Persistent Effect - Udyr's basic attacks stun his target for 1 second. This effect cannot occur on the same target for several seconds.",
-          "tooltip": "<spellPassive>Persistent Effect: </spellPassive>Basic attacks stun the target for {{ e3 }} second. This effect cannot occur on the same target again for {{ e4 }} seconds.<br /><br /><spellPassive>Activation: </spellPassive>Increases Movement Speed by {{ e1 }}% and ignores unit collision for {{ e2 }} seconds.<br /><br /><rules><span class=\"color8c8c8c\">Udyr's stance mana costs decrease by 1 each time he levels up.</span></rules>",
+          "tooltip": "<spellPassive>Persistent Effect: </spellPassive>Basic attacks stun the target for {{ e3 }} second. This effect cannot occur on the same target again for {{ e4 }} seconds.<br /><br /><spellPassive>Activation: </spellPassive>Increases Movement Speed by {{ e1 }}% and ignores unit collision for {{ e2 }} seconds.",
           "leveltip": {
             "label": [
               "Movement Speed",
@@ -409,8 +435,9 @@
               "{{ e2 }} -> {{ e2NL }}"
             ]
           },
-          "maxrank": 5,
+          "maxrank": 6,
           "cooldown": [
+            6,
             6,
             6,
             6,
@@ -419,6 +446,7 @@
           ],
           "cooldownBurn": "6",
           "cost": [
+            45,
             45,
             45,
             45,
@@ -434,16 +462,19 @@
               20,
               25,
               30,
-              35
+              35,
+              40
             ],
             [
               2,
               2.25,
               2.5,
               2.75,
-              3
+              3,
+              3.25
             ],
             [
+              1,
               1,
               1,
               1,
@@ -455,6 +486,7 @@
               5,
               5,
               5,
+              5,
               5
             ],
             [
@@ -462,23 +494,11 @@
               0,
               0,
               0,
-              0
-            ],
-            [
-              0,
-              0,
-              0,
               0,
               0
             ],
             [
               0,
-              0,
-              0,
-              0,
-              0
-            ],
-            [
               0,
               0,
               0,
@@ -490,9 +510,27 @@
               0,
               0,
               0,
+              0,
               0
             ],
             [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
               0,
               0,
               0,
@@ -502,8 +540,8 @@
           ],
           "effectBurn": [
             null,
-            "15/20/25/30/35",
-            "2/2.25/2.5/2.75/3",
+            "15/20/25/30/35/40",
+            "2/2.25/2.5/2.75/3/3.25",
             "1",
             "5",
             "0",
@@ -521,6 +559,7 @@
             600,
             600,
             600,
+            600,
             600
           ],
           "rangeBurn": "600",
@@ -528,7 +567,7 @@
             "full": "UdyrBearStance.png",
             "sprite": "spell12.png",
             "group": "spell",
-            "x": 96,
+            "x": 288,
             "y": 96,
             "w": 48,
             "h": 48
@@ -539,7 +578,7 @@
           "id": "UdyrPhoenixStance",
           "name": "Phoenix Stance",
           "description": "Phoenix Stance: Activation - Udyr unleashes pulsing waves of fire, dealing damage to nearby enemies. Persistent Effect - Udyr's first attack and every third attack after engulfs enemies in front of him with flames.",
-          "tooltip": "<spellPassive>Persistent Effect: </spellPassive>Udyr's first attack and every third attack after burns enemies in front of him, dealing {{ totalconedamage }} magic damage.<br /><br /><spellPassive>Activation: </spellPassive>Unleashes pulsing waves of fire, dealing {{ totalaoedamagepertick }} magic damage each second to nearby enemies for {{ phoenixaoeduration }} seconds.<br /><br /><rules><span class=\"color8c8c8c\">Udyr's stance mana costs decrease by 1 each time he levels up.</span></rules>",
+          "tooltip": "<spellPassive>Persistent Effect: </spellPassive>Udyr's first attack and every third attack after burns enemies in front of him, dealing {{ totalconedamage }} magic damage.<br /><br /><spellPassive>Activation: </spellPassive>Unleashes pulsing waves of fire, dealing {{ totalaoedamagepertick }} magic damage each second to nearby enemies for {{ phoenixaoeduration }} seconds.",
           "leveltip": {
             "label": [
               "Pulse Damage",
@@ -550,8 +589,9 @@
               "{{ conedamage }} -> {{ conedamageNL }}"
             ]
           },
-          "maxrank": 5,
+          "maxrank": 6,
           "cooldown": [
+            6,
             6,
             6,
             6,
@@ -560,6 +600,7 @@
           ],
           "cooldownBurn": "6",
           "cost": [
+            45,
             45,
             45,
             45,
@@ -575,23 +616,11 @@
               0,
               0,
               0,
-              0
-            ],
-            [
-              0,
-              0,
-              0,
               0,
               0
             ],
             [
               0,
-              0,
-              0,
-              0,
-              0
-            ],
-            [
               0,
               0,
               0,
@@ -603,23 +632,11 @@
               0,
               0,
               0,
-              0
-            ],
-            [
-              0,
-              0,
-              0,
               0,
               0
             ],
             [
               0,
-              0,
-              0,
-              0,
-              0
-            ],
-            [
               0,
               0,
               0,
@@ -631,9 +648,43 @@
               0,
               0,
               0,
+              0,
               0
             ],
             [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
               0,
               0,
               0,
@@ -662,6 +713,7 @@
             325,
             325,
             325,
+            325,
             325
           ],
           "rangeBurn": "325",
@@ -669,7 +721,7 @@
             "full": "UdyrPhoenixStance.png",
             "sprite": "spell12.png",
             "group": "spell",
-            "x": 144,
+            "x": 336,
             "y": 96,
             "w": 48,
             "h": 48
@@ -684,7 +736,7 @@
           "full": "Udyr_MonkeysAgility.png",
           "sprite": "passive4.png",
           "group": "passive",
-          "x": 48,
+          "x": 96,
           "y": 0,
           "w": 48,
           "h": 48

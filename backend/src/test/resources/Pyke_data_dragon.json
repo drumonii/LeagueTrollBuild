@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.12.1",
+  "version": "9.13.1",
   "data": {
     "Pyke": {
       "id": "Pyke",
@@ -88,7 +88,7 @@
           "id": "PykeQ",
           "name": "Bone Skewer",
           "description": "Pyke either stabs enemies in front of him or pulls an enemy towards him.",
-          "tooltip": "<scaleAD>Tap:</scaleAD> Pyke stabs all enemies in front of him dealing {{ f5 }} <scaleAD>(+{{ f6 }})</scaleAD> physical damage.<br /><br /><scaleAD>Hold: </scaleAD>Pyke throws his harpoon, pulling the first enemy struck towards him and dealing {{ e1 }} <scaleAD>(+{{ a1 }})</scaleAD> physical damage.<br /><br />Targets hit by either attack are slowed by {{ e9 }}% for {{ e8 }} second.<br /><br /><rules>Tapping deals {{ e0 }}% damage to minions and monsters beyond the closest.</rules>",
+          "tooltip": "<scaleAD>Tap:</scaleAD> Pyke stabs in a direction, damaging the nearest enemy (preferring champions).<br /><br /><scaleAD>Hold: </scaleAD>Pyke throws his harpoon, pulling the first enemy struck towards him.<br /><br />Deals {{ e1 }} <scaleAD>(+{{ a1 }})</scaleAD> physical damage and slows by {{ e9 }}% for {{ e8 }} second.",
           "leveltip": {
             "label": [
               "Damage",
@@ -101,13 +101,13 @@
           },
           "maxrank": 5,
           "cooldown": [
-            14,
-            12.5,
+            12,
             11,
-            9.5,
+            10,
+            9,
             8
           ],
-          "cooldownBurn": "14/12.5/11/9.5/8",
+          "cooldownBurn": "12/11/10/9/8",
           "cost": [
             70,
             70,
@@ -127,11 +127,11 @@
               275
             ],
             [
-              1.15,
-              1.15,
-              1.15,
-              1.15,
-              1.15
+              1,
+              1,
+              1,
+              1,
+              1
             ],
             [
               -0.2,
@@ -193,7 +193,7 @@
           "effectBurn": [
             null,
             "75/125/175/225/275",
-            "1.15",
+            "1",
             "-0.2",
             "3",
             "500",
@@ -238,9 +238,11 @@
           "tooltip": "Pyke gains <keywordStealth>Camouflage</keywordStealth> and {{ e1 }}% <scaleLethality>(+{{ f7 }}%)</scaleLethality> decaying movement speed for {{ e0 }} seconds.<br /><br /><rules><keywordStealth><u>Stealth - Camouflage:</u></keywordStealth> Pyke is hidden from view while enemy champions remain outside his detection radius. Attacking or casting spells ends Camouflage.</rules>",
           "leveltip": {
             "label": [
+              "Movement Speed",
               "Cooldown"
             ],
             "effect": [
+              "{{ e1 }}% -> {{ e1NL }}%",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
@@ -266,10 +268,10 @@
             null,
             [
               40,
-              40,
-              40,
-              40,
-              40
+              45,
+              50,
+              55,
+              60
             ],
             [
               0,
@@ -337,7 +339,7 @@
           ],
           "effectBurn": [
             null,
-            "40",
+            "40/45/50/55/60",
             "0",
             "0.3",
             "0.03",
@@ -374,7 +376,7 @@
           "id": "PykeE",
           "name": "Phantom Undertow",
           "description": "Pyke dashes and leaves behind a phantom that will return to him, stunning enemies along its path.",
-          "tooltip": "Pyke dashes, leaving a drowned phantom behind him. After a short delay the phantom returns to Pyke, striking all enemies along its path dealing {{ e1 }} <scaleAD>(+{{ a1 }})</scaleAD> physical damage and stunning for {{ e2 }} <scaleLethality>(+{{ f10.01 }})</scaleLethality> seconds.",
+          "tooltip": "Pyke dashes, leaving a drowned phantom behind him. After a short delay the phantom returns to Pyke, striking enemy champions along its path. Enemies hit take {{ e1 }} <scaleAD>(+{{ a1 }})</scaleAD> physical damage and are stunned for {{ e2 }} <scaleLethality>(+{{ f10.01 }})</scaleLethality> seconds.",
           "leveltip": {
             "label": [
               "Damage"

@@ -3,114 +3,104 @@
   "format": "standAloneComplex",
   "version": "9.13.1",
   "data": {
-    "Yuumi": {
-      "id": "Yuumi",
-      "key": "350",
-      "name": "Yuumi",
-      "title": "the Magical Cat",
+    "Qiyana": {
+      "id": "Qiyana",
+      "key": "246",
+      "name": "Qiyana",
+      "title": "Empress of the Elements",
       "image": {
-        "full": "Yuumi.png",
-        "sprite": "champion4.png",
+        "full": "Qiyana.png",
+        "sprite": "champion2.png",
         "group": "champion",
         "x": 384,
-        "y": 48,
+        "y": 96,
         "w": 48,
         "h": 48
       },
       "skins": [
         {
-          "id": "350000",
+          "id": "246000",
           "num": 0,
           "name": "default",
           "chromas": false
         },
         {
-          "id": "350001",
+          "id": "246001",
           "num": 1,
-          "name": "Battle Principal Yuumi",
+          "name": "Battle Boss Qiyana",
           "chromas": true
         }
       ],
-      "lore": "A magical cat from Bandle City, Yuumi was once the familiar of a yordle enchantress, Norra. When her master mysteriously disappeared, Yuumi became the Keeper of Norra's sentient Book of Thresholds, traveling through portals in its pages to search for her. Yearning for affection, Yuumi seeks friendly companions to partner with on her journey, protecting them with luminous shields and fierce resolve. While Book strives to keep her on task, Yuumi is often drawn to worldly comforts, such as naps and fish. In the end, however, she always returns to her quest to find her friend.",
-      "blurb": "A magical cat from Bandle City, Yuumi was once the familiar of a yordle enchantress, Norra. When her master mysteriously disappeared, Yuumi became the Keeper of Norra's sentient Book of Thresholds, traveling through portals in its pages to search for...",
+      "lore": "In the jungle city of Ixaocan, Qiyana plots her own ruthless path to the high seat of the Yun Tal. Last in line to succeed her parents, she faces those who stand in her way with brash confidence and unprecedented mastery over elemental magic. With the land itself obeying her every command, Qiyana sees herself as the greatest elementalist in the history of Ixaocan—and by that right, deserving of not only a city, but an empire.",
+      "blurb": "In the jungle city of Ixaocan, Qiyana plots her own ruthless path to the high seat of the Yun Tal. Last in line to succeed her parents, she faces those who stand in her way with brash confidence and unprecedented mastery over elemental magic. With the...",
       "allytips": [],
       "enemytips": [],
       "tags": [
-        "Support",
-        "Mage"
+        "Assassin",
+        "Fighter"
       ],
       "partype": "Mana",
       "info": {
-        "attack": 5,
-        "defense": 1,
-        "magic": 8,
-        "difficulty": 2
+        "attack": 0,
+        "defense": 2,
+        "magic": 4,
+        "difficulty": 8
       },
       "stats": {
-        "hp": 480,
-        "hpperlevel": 70,
-        "mp": 400,
-        "mpperlevel": 45,
-        "movespeed": 330,
-        "armor": 25,
-        "armorperlevel": 3,
-        "spellblock": 25,
-        "spellblockperlevel": 0.3,
-        "attackrange": 500,
-        "hpregen": 7,
-        "hpregenperlevel": 0.55,
-        "mpregen": 10,
-        "mpregenperlevel": 0.4,
+        "hp": 590,
+        "hpperlevel": 90,
+        "mp": 320,
+        "mpperlevel": 50,
+        "movespeed": 335,
+        "armor": 28,
+        "armorperlevel": 3.5,
+        "spellblock": 32.1,
+        "spellblockperlevel": 1.25,
+        "attackrange": 150,
+        "hpregen": 8.5,
+        "hpregenperlevel": 0.65,
+        "mpregen": 8,
+        "mpregenperlevel": 0.7,
         "crit": 0,
         "critperlevel": 0,
-        "attackdamage": 55,
+        "attackdamage": 64,
         "attackdamageperlevel": 3.1,
-        "attackspeedperlevel": 1,
+        "attackspeedperlevel": 2.1,
         "attackspeed": 0.625
       },
       "spells": [
         {
-          "id": "YuumiQ",
-          "name": "Prowling Projectile",
-          "description": "Yuumi fires a missile, dealing damge to the first target hit. It deals bonus damage and slows if it takes at least 1 second to get to its target.<br><br>While Attached, the missile can be controlled with your cursor.",
-          "tooltip": "Yuumi summons an errant missile that deals <magicDamage><scaleAP>{{ totalmissiledamage }}</scaleAP> magic damage </magicDamage>to the first enemy hit. If the missile travels for {{ afterburnertimetooltip }} second before impacting, it deals <magicDamage><scaleAP>{{ empoweredmissiledamage }}</scaleAP> magic damage</magicDamage> instead and slows champions for {{ slowamount }}% decaying over {{ slowduration }} seconds.<br /><br />If cast while <span class=\"colorac6de0\">Attached</span>, Yuumi can control the missile using her mouse.",
+          "id": "QiyanaQ",
+          "name": "Elemental Wrath / Edge of Ixtal",
+          "description": "Qiyana swings her weapon, dealing damage with a bonus effect based on her element.",
+          "tooltip": "<spellActive>Elemental Wrath:</spellActive> Blast your weapon's enchantment in the target direction, consuming it. This projectile detonates to deal <physicalDamage>{{ enchanteddamage }} physical damage</physicalDamage> and:<br /><li><scaleMana>Ice Enchantment</scaleMana>: Briefly root enemies hit, then slow them by {{ slowpotency*-100 }}% for {{ slowduration }}s.<li><span class=\"colorba7221\">Rock Enchantment</span>: <physicalDamage>{{ tremordamage }}</physicalDamage> bonus damage to units below {{ critthreshold*100 }}% health.<li><scaleAP>Wild Enchantment</scaleAP>: Leaves a canopy trail that stealths you and grants {{ haste*100 }}% movement speed. Canopy fades after attacking from it, exiting it, or after {{ stealthduration }}s.<br /><br /><spellActive>Edge Of Ixtal:</spellActive> If you do not have an enchantment, slash in the target direction, dealing <physicalDamage>{{ vanilladamage }} physical damage</physicalDamage> to enemies in a small area.<br /><br /><rules>Both abilities deal {{ falloffdamage }} damage to targets beyond the first.</rules>",
           "leveltip": {
             "label": [
-              "Base Damage",
-              "Empowered Missile Base Damage",
-              "Slow",
-              "Slow Duration",
-              "Cooldown",
+              "Damage",
               "Mana Cost"
             ],
             "effect": [
-              "{{ missiledamage }} -> {{ missiledamageNL }}",
-              "{{ empoweredmissilebasedamage }} -> {{ empoweredmissilebasedamageNL }}",
-              "{{ slowamount }}% -> {{ slowamountNL }}%",
-              "{{ slowduration }} -> {{ slowdurationNL }}",
-              "{{ cooldown }} -> {{ cooldownNL }}",
+              "{{ vanillabase }} -> {{ vanillabaseNL }}",
               "{{ cost }} -> {{ costNL }}"
             ]
           },
-          "maxrank": 6,
+          "maxrank": 5,
           "cooldown": [
-            11,
-            10,
-            9,
-            8,
             7,
-            6
+            7,
+            7,
+            7,
+            7
           ],
-          "cooldownBurn": "11/10/9/8/7/6",
+          "cooldownBurn": "7",
           "cost": [
-            60,
-            65,
-            70,
-            75,
-            80,
-            85
+            35,
+            35,
+            35,
+            35,
+            35
           ],
-          "costBurn": "60/65/70/75/80/85",
+          "costBurn": "35",
           "datavalues": {},
           "effect": [
             null,
@@ -119,19 +109,9 @@
               0,
               0,
               0,
-              0,
               0
             ],
             [
-              0,
-              0,
-              0,
-              0,
-              0,
-              0
-            ],
-            [
-              0,
               0,
               0,
               0,
@@ -143,19 +123,9 @@
               0,
               0,
               0,
-              0,
               0
             ],
             [
-              0,
-              0,
-              0,
-              0,
-              0,
-              0
-            ],
-            [
-              0,
               0,
               0,
               0,
@@ -167,6 +137,12 @@
               0,
               0,
               0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
               0,
               0
             ],
@@ -175,6 +151,12 @@
               0,
               0,
               0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
               0,
               0
             ],
@@ -183,11 +165,9 @@
               0,
               0,
               0,
-              0,
               0
             ],
             [
-              0,
               0,
               0,
               0,
@@ -210,19 +190,18 @@
           ],
           "vars": [],
           "costType": " {{ abilityresourcename }}",
-          "maxammo": "-1",
+          "maxammo": "0",
           "range": [
-            1150,
-            1150,
-            1150,
-            1150,
-            1150,
-            1150
+            650,
+            650,
+            650,
+            650,
+            650
           ],
-          "rangeBurn": "1150",
+          "rangeBurn": "650",
           "image": {
-            "full": "YuumiQ.png",
-            "sprite": "spell14.png",
+            "full": "QiyanaQ.png",
+            "sprite": "spell9.png",
             "group": "spell",
             "x": 384,
             "y": 0,
@@ -232,37 +211,37 @@
           "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
-          "id": "YuumiW",
-          "name": "You and Me!",
-          "description": "Passively, Yuumi and her attached ally share some of each other's Adaptive Force. Actively, Yuumi dashes to a target ally, becoming untargetable from everything except turrets.",
-          "tooltip": "<spellPassive>Passive:</spellPassive> Yuumi and the ally she's <span class=\"colorac6de0\">Attached</span> to gain {{ flatadaptivestats }} + {{ adaptivestatsharing*100 }}% of each other's Attack Damage or Ability Power, converted to Adaptive Force.<br /><br /><spellActive>Active:</spellActive> Yuumi dashes to an ally champion and <span class=\"colorac6de0\">Attaches</span> to them. While Yuumi is <span class=\"colorac6de0\">Attached</span>, she follows her partner's movement and is untargetable except from towers.<br /><br /><rules><keywordName>You and Me!</keywordName> has a <scaleLevel>{{ attachcooldown }}s</scaleLevel> cooldown, but Yuumi can cast it anytime she is already <span class=\"colorac6de0\">Attached</span> to switch between friends or <span class=\"colorac6de0\">Unattach</span>.</rules>",
+          "id": "QiyanaW",
+          "name": "Terrashape",
+          "description": "Qiyana dashes to a location and enchants her weapon with an element. Her attacks and abilities deal bonus damage while her weapon is enchanted. ",
+          "tooltip": "<spellActive>Active:</spellActive> Target <scaleMana>River</scaleMana>, <span class=\"colorba7221\">Wall</span>, or <scaleAP>Brush</scaleAP>. Conjur elemental power from the environment and dash towards it to enchant your weapon with it and reset <b><active>Elemental Wrath [{{ spell.qiyanaq:hotkey }}]'s</active></b> cooldown.<br /><br /><spellActive>Passive:</spellActive> While your weapon is enchanted, you gain {{ attackspeed*100 }}% Attack Speed and your attacks and basic abilities deal {{ onhitdamage }} <magicDamage>bonus magic damage</magicDamage>. Additionally, you gain {{ passivems*100 }}% movement speed while out of combat and near the corresponding terrain type.",
           "leveltip": {
             "label": [
-              "Adaptive Force Shared",
-              "Adaptive Force Shared"
+              "On-Hit Damage",
+              "Movement Speed"
             ],
             "effect": [
-              "{{ flatadaptivestats }} -> {{ flatadaptivestatsNL }}",
-              "{{ adaptivestatsharing*100.000000 }}% -> {{ adaptivestatsharingnl*100.000000 }}%"
+              "{{ basedamage }} -> {{ basedamageNL }}",
+              "{{ passivems*100.000000 }}% -> {{ passivemsnl*100.000000 }}%"
             ]
           },
           "maxrank": 5,
           "cooldown": [
-            0,
-            0,
-            0,
-            0,
-            0
+            7,
+            7,
+            7,
+            7,
+            7
           ],
-          "cooldownBurn": "0",
+          "cooldownBurn": "7",
           "cost": [
-            0,
-            0,
-            0,
-            0,
-            0
+            25,
+            30,
+            35,
+            40,
+            45
           ],
-          "costBurn": "0",
+          "costBurn": "25/30/35/40/45",
           "datavalues": {},
           "effect": [
             null,
@@ -352,18 +331,18 @@
           ],
           "vars": [],
           "costType": " {{ abilityresourcename }}",
-          "maxammo": "-1",
+          "maxammo": "0",
           "range": [
-            25000,
-            25000,
-            25000,
-            25000,
-            25000
+            1100,
+            1100,
+            1100,
+            1100,
+            1100
           ],
-          "rangeBurn": "25000",
+          "rangeBurn": "1100",
           "image": {
-            "full": "YuumiW.png",
-            "sprite": "spell14.png",
+            "full": "QiyanaW.png",
+            "sprite": "spell9.png",
             "group": "spell",
             "x": 432,
             "y": 0,
@@ -373,41 +352,39 @@
           "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
-          "id": "YuumiE",
-          "name": "Zoomies",
-          "description": "Heals Yuumi and gives a Movement Speed boost. If she's attached, she passes it to her ally instead.<br>",
-          "tooltip": "Yuumi heals herself for <healing>{{ minamounttoheal }}</healing> to <healing>{{ maxamounttoheal }}</healing>, increasing based on missing health, and gains {{ finalmovespeed }}% movement speed decaying over {{ msduration }} seconds. If Yuumi is <span class=\"colorac6de0\">Attached</span>, this spell affects that ally instead.<br /><br />This spell has two charges. Yuumi gains a charge every {{ ammorechargetime }} seconds.",
+          "id": "QiyanaE",
+          "name": "Audacity",
+          "description": "Qiyana dashes to an enemy, damaging them.",
+          "tooltip": "Dash through target enemy and deal <physicalDamage>{{ damage }} physical damage</physicalDamage> to them.<br /><br /><rules>If <b>Elemental Wrath / Edge of Ixtal [{{ spell.qiyanaq:hotkey }}]</b> is cast during this ability, Qiyana will aim it at the target of her dash.</rules>",
           "leveltip": {
             "label": [
-              "Minimum Base Healing",
-              "Maximum Base Healing",
-              "Mana Cost",
-              "Ammo Recharge Time"
+              "Base Damage",
+              "Cooldown",
+              "Mana Cost"
             ],
             "effect": [
-              "{{ healamountmin }} -> {{ healamountminNL }}",
-              "{{ healamountmin*2.000000 }} -> {{ healamountminnl*2.000000 }}",
-              "{{ cost }} -> {{ costNL }}",
-              "{{ ammorechargetime }} -> {{ ammorechargetimeNL }}"
+              "{{ basedamage }} -> {{ basedamageNL }}",
+              "{{ cooldown }} -> {{ cooldownNL }}",
+              "{{ basecost }} -> {{ basecostNL }}"
             ]
           },
           "maxrank": 5,
           "cooldown": [
-            0.5,
-            0.5,
-            0.5,
-            0.5,
-            0.5
+            12,
+            11,
+            10,
+            9,
+            8
           ],
-          "cooldownBurn": "0.5",
+          "cooldownBurn": "12/11/10/9/8",
           "cost": [
-            60,
-            65,
-            70,
-            75,
-            80
+            40,
+            45,
+            50,
+            55,
+            60
           ],
-          "costBurn": "60/65/70/75/80",
+          "costBurn": "40/45/50/55/60",
           "datavalues": {},
           "effect": [
             null,
@@ -497,18 +474,18 @@
           ],
           "vars": [],
           "costType": " {{ abilityresourcename }}",
-          "maxammo": "2",
+          "maxammo": "0",
           "range": [
-            25000,
-            25000,
-            25000,
-            25000,
-            25000
+            650,
+            650,
+            650,
+            650,
+            650
           ],
-          "rangeBurn": "25000",
+          "rangeBurn": "650",
           "image": {
-            "full": "YuumiE.png",
-            "sprite": "spell14.png",
+            "full": "QiyanaE.png",
+            "sprite": "spell9.png",
             "group": "spell",
             "x": 0,
             "y": 48,
@@ -518,27 +495,27 @@
           "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
-          "id": "YuumiR",
-          "name": "Final Chapter",
-          "description": "Yuumi channels seven waves of damage, rooting anyone hit by three or more. Yuumi can move, attach, and cast Zoomies! while channeling.",
-          "tooltip": "Yuumi channels for {{ ultduration }} seconds, launching {{ numberofwaves }} waves dealing <magicDamage><scaleAP>{{ totalmissiledamage }}</scaleAP> magic damage</magicDamage> (extra missiles deal {{ multimissilereduction*100 }}% damage). Champions hit by {{ wavestoroot }} or more waves are rooted for {{ ccduration }} seconds.<br /><br />Yuumi can move and cast <spellActive>You and Me!</spellActive> and <spellActive>Zoomies</spellActive> while channeling.<br />",
+          "id": "QiyanaR",
+          "name": "Supreme Display of Talent",
+          "description": "Qiyana sends out a shockwave that detonates whatever elements she hits with it, stunning and damaging nearby enemies.",
+          "tooltip": "Launch a shockwave that knocks back enemies and detonates when it hits a <span class=\"colorba7221\">Wall</span>. The entire <span class=\"colorba7221\">Wall</span> then explodes to stun nearby enemies for up to {{ stunduration }}s and deal them <physicalDamage>physical damage</physicalDamage> equal to <physicalDamage>{{ damage }} + {{ missinghealthdamagerock }}</physicalDamage> <scaleHealth>of their max health</scaleHealth>.<br /><br />Any <scaleMana>River</scaleMana> or <scaleAP>Brush</scaleAP> the shockwave passes through also explode after a delay for the same damage and stun.",
           "leveltip": {
             "label": [
-              "Base Damage Per Missile:",
-              "Cooldown: "
+              "Initial Damage",
+              "Percent Health Damaged"
             ],
             "effect": [
-              "{{ basemissiledamage }} -> {{ basemissiledamageNL }}",
-              "{{ cooldown }} -> {{ cooldownNL }}"
+              "{{ basedamage }} -> {{ basedamageNL }}",
+              "{{ percenthpdamagebaserock*100.000000 }}% -> {{ percenthpdamagebaserocknl*100.000000 }}%"
             ]
           },
           "maxrank": 3,
           "cooldown": [
-            130,
-            110,
-            90
+            100,
+            100,
+            100
           ],
-          "cooldownBurn": "130/110/90",
+          "cooldownBurn": "100",
           "cost": [
             100,
             100,
@@ -614,16 +591,16 @@
           ],
           "vars": [],
           "costType": " {{ abilityresourcename }}",
-          "maxammo": "-1",
+          "maxammo": "0",
           "range": [
-            1100,
-            1100,
-            1100
+            950,
+            950,
+            950
           ],
-          "rangeBurn": "1100",
+          "rangeBurn": "950",
           "image": {
-            "full": "YuumiR.png",
-            "sprite": "spell14.png",
+            "full": "QiyanaR.png",
+            "sprite": "spell9.png",
             "group": "spell",
             "x": 48,
             "y": 48,
@@ -634,219 +611,22 @@
         }
       ],
       "passive": {
-        "name": "Bop 'n' Block",
-        "description": "Periodically, when Yuumi attacks a champion, she restores mana and gains a shield that follows her, protecting her and the ally she's attached to.",
+        "name": "Royal Privilege",
+        "description": "Qiyana's first basic attack or ability against each enemy deals bonus damage.",
         "image": {
-          "full": "YuumiP.png",
-          "sprite": "passive4.png",
+          "full": "Qiyana_Passive.png",
+          "sprite": "passive2.png",
           "group": "passive",
           "x": 384,
-          "y": 48,
+          "y": 96,
           "w": 48,
           "h": 48
         }
       },
       "recommended": [
         {
-          "champion": "Yuumi",
-          "title": "Beginner",
-          "map": "SR",
-          "mode": "INTRO",
-          "type": "riot",
-          "customTag": "",
-          "sortrank": 0,
-          "extensionPage": false,
-          "useObviousCheckmark": false,
-          "customPanel": null,
-          "blocks": [
-            {
-              "type": "beginner_starter",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": 4,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "1056",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "beginner_starter",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": 5,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "1056",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "beginner_advanced",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "1004",
-                  "count": 2,
-                  "hideCount": false
-                },
-                {
-                  "id": "1033",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3028",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "beginner_movespeed",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "ItemSmiteAoE",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "1001",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3158",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "beginner_legendaryitem",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3028",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3108",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3174",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "beginner_morelegendaryitems",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3504",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3116",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3089",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3107",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "champion": "Yuumi",
-          "title": "YuumiARAM",
+          "champion": "Qiyana",
+          "title": "QiyanaARAM",
           "map": "HA",
           "mode": "ARAM",
           "type": "riot",
@@ -873,191 +653,7 @@
               ],
               "items": [
                 {
-                  "id": "2003",
-                  "count": 3,
-                  "hideCount": false
-                },
-                {
-                  "id": "3028",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "1052",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essential",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3174",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3158",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3504",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "protective",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3107",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3109",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3116",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "aggressive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3285",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3151",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3089",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "champion": "Yuumi",
-          "title": "YuumiSR",
-          "map": "SR",
-          "mode": "CLASSIC",
-          "type": "riot",
-          "customTag": "",
-          "sortrank": 0,
-          "extensionPage": false,
-          "useObviousCheckmark": false,
-          "customPanel": null,
-          "blocks": [
-            {
-              "type": "starting",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3303",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2003",
-                  "count": 2,
-                  "hideCount": false
-                },
-                {
-                  "id": "3340",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "early",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3098",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3108",
+                  "id": "3133",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1085,19 +681,24 @@
               ],
               "items": [
                 {
-                  "id": "3174",
+                  "id": "3111",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3158",
+                  "id": "3147",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3071",
                   "count": 1,
                   "hideCount": false
                 }
               ]
             },
             {
-              "type": "protective",
+              "type": "offensive",
               "recMath": false,
               "recSteps": false,
               "minSummonerLevel": -1,
@@ -1113,24 +714,24 @@
               ],
               "items": [
                 {
-                  "id": "3504",
+                  "id": "3142",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3107",
+                  "id": "3814",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3905",
+                  "id": "3036",
                   "count": 1,
                   "hideCount": false
                 }
               ]
             },
             {
-              "type": "aggressive",
+              "type": "defensive",
               "recMath": false,
               "recSteps": false,
               "minSummonerLevel": -1,
@@ -1146,17 +747,17 @@
               ],
               "items": [
                 {
-                  "id": "3285",
+                  "id": "3053",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3089",
+                  "id": "3812",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3041",
+                  "id": "3156",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1179,12 +780,12 @@
               ],
               "items": [
                 {
-                  "id": "2031",
+                  "id": "2003",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "2139",
+                  "id": "2140",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1193,10 +794,10 @@
           ]
         },
         {
-          "champion": "Yuumi",
-          "title": "YuumiTT",
-          "map": "TT",
-          "mode": "CLASSIC",
+          "champion": "Qiyana",
+          "title": "QiyanaBeginner",
+          "map": "SR",
+          "mode": "INTRO",
           "type": "riot",
           "customTag": "",
           "sortrank": 0,
@@ -1205,8 +806,97 @@
           "customPanel": null,
           "blocks": [
             {
-              "type": "starting",
+              "type": "beginner_starter",
               "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": 4,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "1054",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "2003",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "beginner_starter",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": 5,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "1054",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "2003",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "beginner_advanced",
+              "recMath": true,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "1036",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3133",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3147",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "beginner_movementspeed",
+              "recMath": true,
               "recSteps": false,
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
@@ -1226,12 +916,181 @@
                   "hideCount": false
                 },
                 {
-                  "id": "2003",
-                  "count": 3,
+                  "id": "1033",
+                  "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "1056",
+                  "id": "3111",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "beginner_legendaryitem",
+              "recMath": true,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "3071",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3053",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "beginner_morelegendaryitems",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "3036",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3026",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3142",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "champion": "Qiyana",
+          "title": "QiyanaSR",
+          "map": "SR",
+          "mode": "CLASSIC",
+          "type": "riot",
+          "customTag": "",
+          "sortrank": 0,
+          "extensionPage": false,
+          "useObviousCheckmark": false,
+          "customPanel": null,
+          "blocks": [
+            {
+              "type": "starting",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "SummonerSmite",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "1054",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "2003",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "startingjungle",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "SummonerSmite",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "1039",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "2031",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "earlyjungle",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "SummonerSmite",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "1001",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1412",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3147",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1244,7 +1103,7 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
+              "hideIfSummonerSpell": "SummonerSmite",
               "appendAfterSection": "",
               "visibleWithAllOf": [
                 ""
@@ -1254,24 +1113,24 @@
               ],
               "items": [
                 {
-                  "id": "3174",
+                  "id": "1001",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3158",
+                  "id": "3147",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3504",
+                  "id": "3071",
                   "count": 1,
                   "hideCount": false
                 }
               ]
             },
             {
-              "type": "protective",
+              "type": "essential",
               "recMath": false,
               "recSteps": false,
               "minSummonerLevel": -1,
@@ -1287,24 +1146,24 @@
               ],
               "items": [
                 {
-                  "id": "3107",
+                  "id": "3142",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3109",
+                  "id": "3026",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3116",
+                  "id": "3053",
                   "count": 1,
                   "hideCount": false
                 }
               ]
             },
             {
-              "type": "aggressive",
+              "type": "selective",
               "recMath": false,
               "recSteps": false,
               "minSummonerLevel": -1,
@@ -1320,17 +1179,318 @@
               ],
               "items": [
                 {
-                  "id": "3905",
+                  "id": "3156",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3151",
+                  "id": "3036",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3090",
+                  "id": "3814",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "consumables",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "2003",
+                  "count": 1,
+                  "hideCount": true
+                },
+                {
+                  "id": "2140",
+                  "count": 1,
+                  "hideCount": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "champion": "Qiyana",
+          "title": "QiyanaTT",
+          "map": "TT",
+          "mode": "CLASSIC",
+          "type": "riot",
+          "customTag": "",
+          "sortrank": 0,
+          "extensionPage": false,
+          "useObviousCheckmark": false,
+          "customPanel": null,
+          "blocks": [
+            {
+              "type": "startingjungle",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "SummonerSmite",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "1041",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1039",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "2031",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "starting",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "SummonerSmite",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "1036",
+                  "count": 2,
+                  "hideCount": false
+                },
+                {
+                  "id": "2031",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "earlyjungle",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "SummonerSmite",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "1001",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1412",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3134",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "SummonerSmite",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "1001",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3134",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3133",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "essential",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "3047",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3147",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3142",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "offensive",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "3071",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3036",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3814",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "selective",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "3053",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3812",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3156",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "consumables",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "2003",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "2140",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "2047",
                   "count": 1,
                   "hideCount": false
                 }
