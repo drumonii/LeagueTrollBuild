@@ -4,8 +4,8 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
-import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 import { AdminErrorHttpInterceptor } from './admin-error.http-interceptor';
 

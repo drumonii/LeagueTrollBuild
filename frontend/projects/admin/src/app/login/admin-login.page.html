@@ -1,70 +1,56 @@
-<section class="section">
-  <div class="container">
-    <div class="columns">
-      <div class="column is-half is-offset-one-quarter">
+<div id="admin-login-wrapper">
+  <div class="login-wrapper">
+    <form id="admin-login-form" class="login" [formGroup]="adminLoginForm" (ngSubmit)="onSubmit()">
+      <section class="title">
+        <h3 id="admin-login-title" class="welcome">Admin Login</h3>
+      </section>
+      <div class="login-group">
+        <clr-input-container>
+          <input id="username-input" type="text" name="username" clrInput placeholder="Username" formControlName="username"/>
+          <clr-control-error>
+            This field is required
+          </clr-control-error>
+        </clr-input-container>
+        <clr-password-container>
+          <input id="password-input" type="password" name="password" clrPassword placeholder="Password" formControlName="password"/>
+          <clr-control-error>
+            This field is required
+          </clr-control-error>
+        </clr-password-container>
         <ng-container [ngSwitch]="adminLoginState">
           <ng-container *ngSwitchCase="'BAD_CREDENTIALS'">
-            <article id="login-bad-credentials-alert" class="message is-warning">
-              <div class="message-body">
+            <clr-alert [clrAlertType]="'danger'">
+              <clr-alert-item>
+              <span id="login-bad-credentials-alert" class="alert-text">
                 Invalid username and password.
-              </div>
-            </article>
+              </span>
+              </clr-alert-item>
+            </clr-alert>
           </ng-container>
           <ng-container *ngSwitchCase="'UNEXPECTED_ERROR'">
-            <article id="login-unexpected-error-alert" class="message is-danger">
-              <div class="message-body">
-                An unexpected error occurred during authentication. Please try again later.
-              </div>
-            </article>
+            <clr-alert [clrAlertType]="'danger'">
+              <clr-alert-item>
+                <span id="login-unexpected-error-alert" class="alert-text">
+                  An unexpected error occurred during authentication. Please try again later.
+                </span>
+              </clr-alert-item>
+            </clr-alert>
           </ng-container>
           <ng-container *ngSwitchCase="'LOGGED_OUT'">
-            <article id="logged-out-alert" class="message is-success">
-              <div class="message-body">
-                You have been successfully logged out.
-              </div>
-            </article>
+            <clr-alert [clrAlertType]="'success'">
+              <clr-alert-item>
+                <span id="logged-out-alert" class="alert-text">
+                  You have been successfully logged out.
+                </span>
+              </clr-alert-item>
+            </clr-alert>
           </ng-container>
         </ng-container>
-        <form id="admin-login-form" [formGroup]="adminLoginForm" (ngSubmit)="onSubmit()">
-          <div class="field">
-            <p class="control has-icons-left">
-              <input id="username-input" class="input"
-                [class.is-danger]="adminLoginForm.get('username').invalid && (adminLoginForm.get('username').dirty || adminLoginForm.get('username').touched)"
-                type="text" placeholder="Username" formControlName="username">
-              <span class="icon is-small is-left">
-                <i class="fa fa-user" aria-hidden="true"></i>
-              </span>
-            </p>
-            <p id="invalid-username-feedback"
-              *ngIf="adminLoginForm.get('username').invalid && (adminLoginForm.get('username').dirty || adminLoginForm.get('username').touched)"
-              class="help is-danger">
-              This field is required
-            </p>
-          </div>
-          <div class="field">
-            <p class="control has-icons-left">
-              <input id="password-input" class="input"
-                [class.is-danger]="adminLoginForm.get('password').invalid && (adminLoginForm.get('password').dirty || adminLoginForm.get('password').touched)"
-                type="password" placeholder="Password" formControlName="password">
-              <span class="icon is-small is-left">
-                <i class="fa fa-lock" aria-hidden="true"></i>
-              </span>
-            </p>
-            <p id="invalid-password-feedback"
-              *ngIf="adminLoginForm.get('password').invalid && (adminLoginForm.get('password').dirty || adminLoginForm.get('password').touched)"
-              class="help is-danger">
-              This field is required
-            </p>
-          </div>
-          <div class="field">
-            <p class="control">
-              <button id="login-btn" class="button is-success" [class.is-loading]="adminLoginState === 'LOGGING_IN'" type="submit" [disabled]="adminLoginForm.invalid">
-                Login
-              </button>
-            </p>
-          </div>
-        </form>
+        <button id="login-btn" class="btn btn-primary" [clrLoading]="adminLoginState === 'LOGGING_IN' ? 1 : 0"
+          type="submit" [disabled]="adminLoginForm.invalid">
+          Login
+        </button>
       </div>
-    </div>
+    </form>
   </div>
-</section>
+</div>

@@ -1,5 +1,6 @@
 import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { By } from '@angular/platform-browser';
 
 import { of } from 'rxjs';
@@ -16,7 +17,7 @@ describe('FlywayPage', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [FlywayModule, HttpClientTestingModule]
+      imports: [HttpClientTestingModule, NoopAnimationsModule, FlywayModule]
     })
     .compileComponents();
   }));
@@ -49,7 +50,13 @@ describe('FlywayPage', () => {
       }
     ];
 
-    const headersIndexes = { description: 0, script: 1, state: 2, installedOn: 3, executionTime: 4 };
+    const tableHeaders = [
+      { title: 'Description' },
+      { title: 'Script' },
+      { title: 'State' },
+      { title: 'Installed On' },
+      { title: 'Execution Time' }
+    ];
 
     beforeEach(inject([FlywayService], (flywayService: FlywayService) => {
       spyOn(flywayService, 'getFlyway').and.returnValue(of(flywayMigrations));
@@ -76,30 +83,16 @@ describe('FlywayPage', () => {
 
     function expectFlywayDatatable() {
       expect(fixture.debugElement.query(By.css('#flyway-datatable'))).toBeTruthy();
-      const headers = fixture.debugElement.queryAll(By.css('.datatable-header-cell'));
-      expect(headers.length).toBe(Object.keys(headersIndexes).length);
+      const dataTableHeaders = fixture.debugElement.queryAll(By.css('clr-dg-column'));
+      expect(dataTableHeaders.length).toBe(tableHeaders.length);
 
-      const descriptionHeader = headers[headersIndexes.description];
-      const descriptionHeaderLabel = descriptionHeader.query(By.css('.datatable-header-cell-label'));
-      expect(descriptionHeaderLabel.nativeElement.textContent.trim()).toBe('Description');
+      for (let i = 0; i < dataTableHeaders.length; i++) {
+        const header = dataTableHeaders[i];
+        const headerLabel = header.query(By.css('button.datagrid-column-title'));
+        expect(headerLabel.nativeElement.textContent.trim()).toBe(tableHeaders[i].title);
+      }
 
-      const scriptHeader = headers[headersIndexes.script];
-      const scriptLabel = scriptHeader.query(By.css('.datatable-header-cell-label'));
-      expect(scriptLabel.nativeElement.textContent.trim()).toBe('Script');
-
-      const stateHeader = headers[headersIndexes.state];
-      const stateLabel = stateHeader.query(By.css('.datatable-header-cell-label'));
-      expect(stateLabel.nativeElement.textContent.trim()).toBe('State');
-
-      const installedOnHeader = headers[headersIndexes.installedOn];
-      const installedOnLabel = installedOnHeader.query(By.css('.datatable-header-cell-label'));
-      expect(installedOnLabel.nativeElement.textContent.trim()).toBe('Installed On');
-
-      const executionTimeHeader = headers[headersIndexes.executionTime];
-      const executionTimeLabel = executionTimeHeader.query(By.css('.datatable-header-cell-label'));
-      expect(executionTimeLabel.nativeElement.textContent.trim()).toBe('Execution Time');
-
-      const rows = fixture.debugElement.queryAll(By.css('.datatable-body-row'));
+      const rows = fixture.debugElement.queryAll(By.css('clr-dg-row'));
       expect(rows.length).toBe(flywayMigrations.length);
     }
 

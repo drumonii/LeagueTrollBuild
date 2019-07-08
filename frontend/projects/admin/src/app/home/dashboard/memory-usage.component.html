@@ -1,0 +1,34 @@
+<div id="memory-usage-card" class="card">
+  <div class="card-header">
+    Memory Usage
+    <button id="refresh-memory-usage-btn" [disabled]="gettingMemoryUsage" class="btn btn-link" (click)="getMemoryUsage()">
+      <clr-icon shape="refresh"></clr-icon>
+    </button>
+  </div>
+  <div class="card-block">
+    <div class="progress top loop" *ngIf="gettingMemoryUsage">
+      <progress></progress>
+    </div>
+    <div class="card-text">
+      <ng-container *ngIf="(memoryUsage$ | async) as memoryUsage; else loadingMemoryUsage">
+        <ng-container *ngIf="memoryUsage > 0; else noMemoryUsage">
+          <div class="stat">
+            <p id="memory-usage" class="label" [ngClass]="getMemoryUsageClass(memoryUsage)">{{memoryUsage}} MB</p>
+          </div>
+        </ng-container>
+        <ng-template #noMemoryUsage>
+          <clr-alert id="no-memory-usage-alert" [clrAlertType]="'danger'" [clrAlertClosable]="false">
+            <clr-alert-item>
+              <span class="alert-text">Unable to get Memory Usage</span>
+            </clr-alert-item>
+          </clr-alert>
+        </ng-template>
+      </ng-container>
+      <ng-template #loadingMemoryUsage>
+        <div id="loading-memory-usage-alert" class="stat">
+          <p>...</p>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

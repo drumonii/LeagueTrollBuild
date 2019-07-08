@@ -14,13 +14,6 @@ import { AdminUserDetails } from '@admin-security/admin-user-details';
 export class AdminHeaderComponent implements OnInit, OnDestroy {
 
   header = 'League Troll Build Admin';
-  isAdminCollapsed: boolean;
-
-  navbarItems = {
-    logout: {
-      isActive: false
-    }
-  };
 
   adminUserDetails$: Observable<AdminUserDetails>;
 
@@ -30,18 +23,6 @@ export class AdminHeaderComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.adminUserDetails$ = this.authService.adminUserDetails;
-  }
-
-  toggleAdminCollapse(): void {
-    this.isAdminCollapsed = !this.isAdminCollapsed;
-  }
-
-  toggleNavbarItem(name: string): void {
-    this.navbarItems[name].isActive = !this.navbarItems[name].isActive;
-  }
-
-  isNavbarItemActive(name: string): boolean {
-    return this.navbarItems[name].isActive;
   }
 
   logout(): void {

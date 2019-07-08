@@ -1,34 +1,22 @@
-<section class="section">
-  <div class="container">
-    <h4 class="title is-4">
-      Flyway Migrations
-      <button id="refresh-failed-jobs-btn" class="button is-white" (click)="getFlyway()">
-        <span class="icon">
-          <i class="fa fa-refresh" [class.fa-spin]="loadingIndicator" aria-hidden="true"></i>
-        </span>
-      </button>
-    </h4>
-    <ngx-datatable
-      id="flyway-datatable"
-      class="material"
-      [trackByProp]="'checksum'"
-      [rows]="rows$ | async"
-      [columnMode]="'force'"
-      [headerHeight]="50"
-      [footerHeight]="50"
-      [rowHeight]="'auto'"
-      [sortType]="'multi'"
-      [loadingIndicator]="loadingIndicator"
-      [sorts]="[{ prop: 'script', dir: 'asc' }]">
-      <ngx-datatable-column name="Description" prop="description" [width]="150"></ngx-datatable-column>
-      <ngx-datatable-column name="Script" prop="script" [width]="250"></ngx-datatable-column>
-      <ngx-datatable-column name="State" prop="state" [width]="50"></ngx-datatable-column>
-      <ngx-datatable-column name="Installed On" prop="installedOn" [width]="100"></ngx-datatable-column>
-      <ngx-datatable-column name="Execution Time" [width]="50">
-        <ng-template let-row="row" ngx-datatable-cell-template>
-          {{row.executionTime}} ms
-        </ng-template>
-      </ngx-datatable-column>
-    </ngx-datatable>
-  </div>
-</section>
+<h3>
+  Flyway Migrations
+  <button id="refresh-failed-jobs-btn" [disabled]="loading" class="btn btn-link" (click)="getFlyway()">
+    <clr-icon shape="refresh"></clr-icon>
+  </button>
+</h3>
+<clr-datagrid id="flyway-datatable" [clrDgLoading]="loading">
+  <clr-dg-column [clrDgField]="'description'">Description</clr-dg-column>
+  <clr-dg-column [clrDgField]="'script'">Script</clr-dg-column>
+  <clr-dg-column [clrDgField]="'state'">State</clr-dg-column>
+  <clr-dg-column [clrDgField]="'installedOn'">Installed On</clr-dg-column>
+  <clr-dg-column [clrDgField]="'executionTime'" [clrDgColType]="'number'">Execution Time</clr-dg-column>
+
+  <clr-dg-row *clrDgItems="let migration of flyway$ | async; trackBy: trackByFlyway">
+    <clr-dg-cell>{{migration.description}}</clr-dg-cell>
+    <clr-dg-cell>{{migration.script}}</clr-dg-cell>
+    <clr-dg-cell>{{migration.state}}</clr-dg-cell>
+    <clr-dg-cell>{{migration.installedOn}}</clr-dg-cell>
+    <clr-dg-cell>{{migration.executionTime}} ms</clr-dg-cell>
+  </clr-dg-row>
+
+</clr-datagrid>

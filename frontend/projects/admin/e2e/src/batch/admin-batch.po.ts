@@ -12,4 +12,8 @@ export class AdminBatchPage extends BaseAdminPage {
     return element(by.css('#batch-jobs-datatable'));
   }
 
+  getStepExecutionsDetail(): ElementFinder {
+    return element(by.css('.step-executions-table'));
+  }
+
 }

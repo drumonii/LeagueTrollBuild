@@ -1,0 +1,34 @@
+<div id="failed-jobs-card" class="card">
+  <div class="card-header">
+    Failed Jobs
+    <button id="refresh-failed-jobs-btn" [disabled]="gettingFailedJobs" class="btn btn-link" (click)="getFailedJobs()">
+      <clr-icon shape="refresh"></clr-icon>
+    </button>
+  </div>
+  <div class="card-block">
+    <div class="progress top loop" *ngIf="gettingFailedJobs">
+      <progress></progress>
+    </div>
+    <div class="card-text">
+      <ng-container *ngIf="(failedJobs$ | async) as failedJobs; else loadingFailedJobs">
+        <ng-container *ngIf="failedJobs.toString(); else noFailedJobs">
+          <div class="stat">
+            <p id="failed-jobs" class="label" [ngClass]="getFailedJobsClass(failedJobs)">{{failedJobs}}</p>
+          </div>
+        </ng-container>
+        <ng-template #noFailedJobs>
+          <clr-alert id="no-failed-jobs-alert" [clrAlertType]="'danger'" [clrAlertClosable]="false">
+            <clr-alert-item>
+              <span class="alert-text">Unable to get Failed Jobs</span>
+            </clr-alert-item>
+          </clr-alert>
+        </ng-template>
+      </ng-container>
+      <ng-template #loadingFailedJobs>
+        <div id="loading-failed-jobs-alert" class="stat">
+          <p>...</p>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

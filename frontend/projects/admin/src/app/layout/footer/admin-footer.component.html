@@ -1,11 +1,14 @@
-<footer id="admin-footer" class="footer">
-  <div class="container">
-    <div class="columns">
-      <div class="column">
-        <p id="app-version" *ngIf="(appVersion$ | async) as appVersion">
-          Version: {{appVersion}}
-        </p>
-      </div>
+<footer id="admin-footer">
+  <div class="clr-row">
+    <div class="clr-col">
+      <a id="troll-build-home-link" href="https://www.loltrollbuild.com/">
+        Troll Build Home
+      </a>
+    </div>
+    <div class="clr-col">
+      <span id="app-version" *ngIf="(appVersion$ | async) as appVersion">
+        Version: {{appVersion}}
+      </span>
     </div>
   </div>
 </footer>

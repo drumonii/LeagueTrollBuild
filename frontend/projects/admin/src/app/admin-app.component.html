@@ -1,4 +1,10 @@
 <ngx-loading-bar [color]="'#fff'" [includeSpinner]="false"></ngx-loading-bar>
-<ltb-admin-header></ltb-admin-header>
-<router-outlet></router-outlet>
-<ltb-admin-footer></ltb-admin-footer>
+<clr-main-container>
+  <ltb-admin-header></ltb-admin-header>
+  <div class="content-container">
+    <div class="content-area">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  <ltb-admin-footer></ltb-admin-footer>
+</clr-main-container>

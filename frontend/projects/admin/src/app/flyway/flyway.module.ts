@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { ClrDatagridModule, ClrIconModule } from '@clr/angular';
 
 import { FlywayRoutingModule } from './flyway-routing.module';
 import { FlywayPage } from './flyway.page';
@@ -10,7 +10,8 @@ import { FlywayService } from './flyway.service';
 @NgModule({
   imports: [
     CommonModule,
-    NgxDatatableModule,
+    ClrDatagridModule,
+    ClrIconModule,
     FlywayRoutingModule
   ],
   declarations: [

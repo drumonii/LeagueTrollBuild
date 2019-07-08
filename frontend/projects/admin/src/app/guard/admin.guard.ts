@@ -22,6 +22,7 @@ export class AdminGuard implements CanActivate {
   }
 
   private redirectToHome(): UrlTree {
+    // note, the route won't be properly handled if troll-build app isn't running. and we do not want to route to /login
     return this.router.createUrlTree(['/']);
   }
 

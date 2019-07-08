@@ -1,7 +1,9 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS, HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 
+import { ClrLayoutModule } from '@clr/angular';
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 
 import { AdminAppComponent } from './admin-app.component';
@@ -16,8 +18,10 @@ import { AdminLayoutModule } from './layout/admin-layout.module';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     HttpClientXsrfModule,
+    ClrLayoutModule,
     LoadingBarHttpClientModule,
     AdminAppRoutingModule,
     AdminLayoutModule

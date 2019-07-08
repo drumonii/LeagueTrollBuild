@@ -3,10 +3,10 @@ import { CommonModule } from '@angular/common';
 
 import { AdminHomeRoutingModule } from './admin-home-routing.module';
 import { AdminHomePage } from './admin-home.page';
-import { CpuUsageModule } from './cpu-usage.module';
-import { FailedJobsModule } from './failed-jobs.module';
-import { MemoryUsageModule } from './memory-usage.module';
-import { GlobalErrorModule } from './global-error.module';
+import { CpuUsageModule } from './dashboard/cpu-usage.module';
+import { FailedJobsModule } from './dashboard/failed-jobs.module';
+import { MemoryUsageModule } from './dashboard/memory-usage.module';
+import { GlobalErrorModule } from './dashboard/global-error.module';
 
 @NgModule({
   imports: [

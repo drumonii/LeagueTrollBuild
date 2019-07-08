@@ -48,13 +48,16 @@ export abstract class BaseAdminPage {
 
     await element(by.css('#login-btn')).click();
 
-    const adminNav = element(by.css('#admin-nav'));
+    const adminNav = element(by.css('.header-nav'));
     await browser.wait(ExpectedConditions.presenceOf(adminNav));
+
+    const adminActions = element(by.css('.header-actions'));
+    await browser.wait(ExpectedConditions.presenceOf(adminActions));
   }
 
   async logoutAdmin(): Promise<void> {
-    await element(by.css('#admin-logout-navbar-item')).click();
-    await element(by.css('#admin-logout-btn')).click();
+    await element(by.css('clr-dropdown button.dropdown-toggle')).click();
+    await element(by.css('clr-dropdown-menu button.dropdown-item')).click();
 
     const loggedOutAlert = element(by.css('#logged-out-alert'));
     await browser.wait(ExpectedConditions.presenceOf(loggedOutAlert));

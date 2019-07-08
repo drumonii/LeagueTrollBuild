@@ -2,13 +2,14 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
+import { ClrLoadingState } from '@clr/angular';
+
 import { of, Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
 import { AdminTitleService } from '@admin-service/admin-title.service';
 import { AdminAuthService } from '@admin-security/admin-auth.service';
 import { AdminLoginStatus } from '@admin-security/admin-login-response';
-
 import { AdminLoginState } from './admin-login-state';
 
 @Component({
@@ -35,12 +36,12 @@ export class AdminLoginPage implements OnInit, OnDestroy {
     this.isLoggedOut();
   }
 
-  private setTitle() {
+  private setTitle(): void {
     this.titleService.setTitle('Admin Login');
   }
 
-  private isLoggedOut() {
-    this.route.queryParamMap
+  private isLoggedOut(): void {
+    this.subscriptions.add(this.route.queryParamMap
       .pipe(
         switchMap((params: ParamMap) => of(!!params.get('logout') || false))
       )
@@ -48,14 +49,15 @@ export class AdminLoginPage implements OnInit, OnDestroy {
         if (isLoggedOut) {
           this.adminLoginState = AdminLoginState.LOGGED_OUT;
         }
-      });
+      }));
   }
 
   onSubmit(): void {
     if (this.adminLoginForm.valid) {
       this.beforeLogIn();
-      this.subscriptions.add(
-        this.authService.loginAdmin(this.adminLoginForm.get('username').value, this.adminLoginForm.get('password').value)
+      const username = this.adminLoginForm.get('username').value;
+      const password = this.adminLoginForm.get('password').value;
+      this.subscriptions.add(this.authService.loginAdmin(username, password)
         .subscribe((loginResponse) => {
           if (loginResponse) {
             if (loginResponse.status === AdminLoginStatus.SUCCESS) {

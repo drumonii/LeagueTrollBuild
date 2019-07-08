@@ -1,0 +1,40 @@
+<div [clrLoading]="loading">
+  <table class="table table-noborder step-executions-table">
+    <thead>
+      <tr>
+        <th>Step Id</th>
+        <th>Name</th>
+        <th>Start Time</th>
+        <th>End Time</th>
+        <th>Completion Time</th>
+        <th>Status</th>
+        <th>Read Count</th>
+        <th>Filter Count</th>
+        <th>Write Count</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let stepExecution of (stepExecutions$ | async); trackBy: trackByStepExecution">
+        <td>{{stepExecution.id}}</td>
+        <td>{{stepExecution.name}}</td>
+        <td>{{stepExecution.startTime | date: 'M/d/yy@h:mm:ss.SSS a'}}</td>
+        <td>{{stepExecution.endTime | date: 'M/d/yy@h:mm:ss.SSS a'}}</td>
+        <td>{{stepExecution | stepExecutionCompletionTime}}</td>
+        <td>
+          {{stepExecution.status}}
+          <ng-container [ngSwitch]="stepExecution.status">
+            <ng-container *ngSwitchCase="'COMPLETED'">
+              <clr-icon shape="check" class="is-success"></clr-icon>
+            </ng-container>
+            <ng-container *ngSwitchCase="'FAILED'">
+              <clr-icon shape="times" class="is-error"></clr-icon>
+            </ng-container>
+          </ng-container>
+        </td>
+        <td>{{stepExecution.readCount}}</td>
+        <td>{{stepExecution.filterCount}}</td>
+        <td>{{stepExecution.writeCount}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

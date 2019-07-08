@@ -1,22 +1,12 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
 
-import { AdminFooterComponent } from '@admin-layout/footer/admin-footer.component';
-import { AdminHeaderComponent } from '@admin-layout/header/admin-header.component';
+import { AdminFooterModule } from '@admin-layout/footer/admin-footer.module';
+import { AdminHeaderModule } from '@admin-layout/header/admin-header.module';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule
-  ],
-  declarations: [
-    AdminFooterComponent,
-    AdminHeaderComponent
-  ],
   exports: [
-    AdminFooterComponent,
-    AdminHeaderComponent
+    AdminFooterModule,
+    AdminHeaderModule
   ]
 })
 export class AdminLayoutModule { }

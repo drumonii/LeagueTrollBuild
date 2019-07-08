@@ -4,12 +4,15 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { Router, RouterLinkWithHref } from '@angular/router';
 import { By } from '@angular/platform-browser';
 
+import { MainContainerWillyWonka } from '@clr/angular';
+
 import { of } from 'rxjs';
 
+import { AdminHeaderModule } from './admin-header.module';
 import { AdminHeaderComponent } from './admin-header.component';
-import { AdminAuthService } from '../../security/admin-auth.service';
-import { AdminUserDetails } from '../../security/admin-user-details';
-import { AdminLogoutResponse, AdminLogoutStatus } from '../../security/admin-logout-response';
+import { AdminAuthService } from '@admin-security/admin-auth.service';
+import { AdminUserDetails } from '@admin-security/admin-user-details';
+import { AdminLogoutResponse, AdminLogoutStatus } from '@admin-security/admin-logout-response';
 
 describe('AdminHeaderComponent', () => {
   let component: AdminHeaderComponent;
@@ -17,8 +20,8 @@ describe('AdminHeaderComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, RouterTestingModule],
-      declarations: [AdminHeaderComponent]
+      imports: [HttpClientTestingModule, RouterTestingModule, AdminHeaderModule],
+      providers: [MainContainerWillyWonka] // to prevent - Error: clr-header should only be used inside of a clr-main-container
     })
     .compileComponents();
   }));
@@ -69,24 +72,18 @@ describe('AdminHeaderComponent', () => {
     });
 
     it('should show navbar end dropdown with logout', () => {
-      const authenticatedAdminNavbarEnd = fixture.debugElement.query(By.css('#authenticated-admin-navbar-end'));
-      expect(authenticatedAdminNavbarEnd).toBeTruthy();
+      const userDropdown = fixture.debugElement.query(By.css('clr-dropdown'));
+      expect(userDropdown).toBeTruthy();
 
-      const navbarItems = authenticatedAdminNavbarEnd.queryAll(By.css('.navbar-item'));
-      expect(navbarItems.length).toBe(3);
-
-      expect(fixture.debugElement.query(By.css('.navbar-dropdown'))).toBeTruthy();
-    });
-
-    it('should toggle logout navbar item on click', () => {
-      const logoutNavbarItem = fixture.debugElement.query(By.css('#admin-logout-navbar-item'));
-      expect(logoutNavbarItem.classes['is-active']).toBeFalsy();
-
-      logoutNavbarItem.triggerEventHandler('click', null);
+      const userDropdownToggle = userDropdown.query(By.css('button.dropdown-toggle'));
+      userDropdownToggle.triggerEventHandler('click', null);
 
       fixture.detectChanges();
 
-      expect(logoutNavbarItem.classes['is-active']).toBeTruthy();
+      const username = userDropdown.query(By.css('span.dropdown-item'));
+      expect(username.nativeElement.textContent.trim()).toBe(adminUserDetails.username.toUpperCase());
+
+      expect(userDropdown.query(By.css('button.dropdown-item'))).toBeTruthy();
     });
 
     it('should logout user on logout button click',
@@ -99,7 +96,14 @@ describe('AdminHeaderComponent', () => {
       spyOn(authService, 'logoutAdmin').and.returnValue(of(successfulLogoutResponse));
       spyOn(router, 'navigate');
 
-      const adminLogoutBtn = fixture.debugElement.query(By.css('#admin-logout-btn'));
+      const userDropdown = fixture.debugElement.query(By.css('clr-dropdown'));
+
+      const userDropdownToggle = userDropdown.query(By.css('button.dropdown-toggle'));
+      userDropdownToggle.triggerEventHandler('click', null);
+
+      fixture.detectChanges();
+
+      const adminLogoutBtn = userDropdown.query(By.css('button.dropdown-item'));
       adminLogoutBtn.triggerEventHandler('click', null);
 
       fixture.detectChanges();
@@ -107,23 +111,6 @@ describe('AdminHeaderComponent', () => {
       expect(authService.logoutAdmin).toHaveBeenCalled();
       expect(router.navigate).toHaveBeenCalledWith(['/admin/login'], { queryParams: { logout: true } });
     }));
-
-    it('should collapse navbar on burger click', () => {
-      fixture.detectChanges();
-
-      const adminNav = fixture.debugElement.query(By.css('#admin-nav'));
-      expect(adminNav.classes['is-active']).toBeFalsy();
-
-      const burgerCollapse = fixture.debugElement.query(By.css('#burger-collapse'));
-      expect(burgerCollapse.classes['is-active']).toBeFalsy();
-
-      burgerCollapse.triggerEventHandler('click', null);
-
-      fixture.detectChanges();
-
-      expect(adminNav.classes['is-active']).toBeTruthy();
-      expect(burgerCollapse.classes['is-active']).toBeTruthy();
-    });
 
   });
 

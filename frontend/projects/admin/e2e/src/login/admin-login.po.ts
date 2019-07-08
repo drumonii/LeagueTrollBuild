@@ -17,11 +17,11 @@ export class AdminLoginPage extends BaseAdminPage {
   }
 
   getInvalidCredentialsAlert(): ElementFinder {
-    return element(by.css('#login-bad-credentials-alert'));
+    return element(by.css('clr-alert .alert.alert-danger'));
   }
 
   getLoggedOutAlert(): ElementFinder {
-    return element(by.css('#logged-out-alert'));
+    return element(by.css('clr-alert .alert.alert-success'));
   }
 
 }

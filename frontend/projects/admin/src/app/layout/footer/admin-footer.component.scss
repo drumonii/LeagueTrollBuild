@@ -1,3 +1,29 @@
+$text-color: #fafafa;
+
+:host {
+  border-top: 2px solid #485969;
+  background-color: #002538;
+}
+
+#admin-footer {
+  max-width: 1248px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 3em 0;
+}
+
+#troll-build-home-link {
+  color: $text-color;
+}
+
 #app-version {
   float: right;
+  color: $text-color;
+}
+
+@media (max-width: 1291px) {
+  #admin-footer {
+    padding-left: 2em;
+    padding-right: 2em;
+  }
 }

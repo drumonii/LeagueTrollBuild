@@ -1,5 +1,6 @@
 import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ActivatedRoute, convertToParamMap, Router } from '@angular/router';
 import { By } from '@angular/platform-browser';
@@ -20,16 +21,17 @@ describe('AdminLoginPage', () => {
 
     beforeEach(async(() => {
       TestBed.configureTestingModule({
-        imports: [AdminLoginModule, HttpClientTestingModule, RouterTestingModule]
+        imports: [HttpClientTestingModule, NoopAnimationsModule, RouterTestingModule, AdminLoginModule]
       })
       .compileComponents();
     }));
 
-    beforeEach(inject([AdminTitleService], (title: AdminTitleService) => {
+    beforeEach(inject([AdminTitleService, Router], (title: AdminTitleService, router: Router) => {
       fixture = TestBed.createComponent(AdminLoginPage);
       component = fixture.componentInstance;
 
       spyOn(title, 'setTitle').and.callThrough();
+      spyOn(router, 'navigate');
 
       fixture.detectChanges();
     }));
@@ -55,162 +57,135 @@ describe('AdminLoginPage', () => {
       expect(loginBtn.nativeElement.disabled).toBe(true);
     });
 
-  });
+    describe('with form errors', () => {
 
-  describe('with form errors', () => {
-
-    beforeEach(async(() => {
-      TestBed.configureTestingModule({
-        imports: [AdminLoginModule, HttpClientTestingModule, RouterTestingModule]
-      })
-      .compileComponents();
-    }));
-
-    beforeEach(() => {
-      fixture = TestBed.createComponent(AdminLoginPage);
-      component = fixture.componentInstance;
-    });
-
-    it('from invalid username', () => {
-      const username = component.adminLoginForm.get('username');
-      username.setValue(''); username.markAsTouched();
-
-      fixture.detectChanges();
-
-      expect(fixture.debugElement.query(By.css('#invalid-username-feedback'))).toBeTruthy();
-
-      const usernameInput = fixture.debugElement.query(By.css('#username-input'));
-      expect(usernameInput.classes['is-danger']).toBeTruthy();
-    });
-
-    it('from invalid password', () => {
-      const password = component.adminLoginForm.get('password');
-      password.setValue(''); password.markAsTouched();
-
-      fixture.detectChanges();
-
-      expect(fixture.debugElement.query(By.css('#invalid-password-feedback'))).toBeTruthy();
-
-      const passwordInput = fixture.debugElement.query(By.css('#password-input'));
-      expect(passwordInput.classes['is-danger']).toBeTruthy();
-    });
-
-  });
-
-  describe('with valid form', () => {
-
-    beforeEach(async(() => {
-      TestBed.configureTestingModule({
-        imports: [AdminLoginModule, HttpClientTestingModule, RouterTestingModule]
-      })
-      .compileComponents();
-    }));
-
-    beforeEach(inject([Router], (router: Router) => {
-      fixture = TestBed.createComponent(AdminLoginPage);
-      component = fixture.componentInstance;
-
-      spyOn(router, 'navigate');
-    }));
-
-    describe('with bad credentials', () => {
-
-      it('should show bad credentials alert', inject([AdminAuthService, Router], (authService: AdminAuthService, router: Router) => {
-        const failedLoginResponse: AdminLoginResponse = {
-          status: AdminLoginStatus.FAILED,
-          message: 'Bad credentials',
-        };
-
-        spyOn(authService, 'loginAdmin').and.returnValue(of(failedLoginResponse));
-
+      it('from invalid username', () => {
         const username = component.adminLoginForm.get('username');
-        username.setValue('some_username'); username.markAsTouched();
+        username.setValue(''); username.markAsTouched();
+        const usernameInput = fixture.debugElement.query(By.css('#username-input'));
+        usernameInput.triggerEventHandler('blur', null);
 
+        fixture.detectChanges();
+
+        expect(fixture.debugElement.query(By.css('#username-input-error'))).toBeTruthy();
+      });
+
+      it('from invalid password', () => {
         const password = component.adminLoginForm.get('password');
-        password.setValue('some_password'); password.markAsTouched();
+        password.setValue(''); password.markAsTouched();
+        const passwordInput = fixture.debugElement.query(By.css('#password-input'));
+        passwordInput.triggerEventHandler('blur', null);
 
         fixture.detectChanges();
 
-        const loginBtn = fixture.debugElement.query(By.css('#login-btn'));
-        loginBtn.nativeElement.click();
-
-        fixture.detectChanges();
-
-        expect(fixture.debugElement.query(By.css('#login-bad-credentials-alert'))).toBeTruthy();
-        expect(fixture.debugElement.query(By.css('#login-unexpected-error-alert'))).toBeFalsy();
-        expect(fixture.debugElement.query(By.css('#logged-out-alert'))).toBeFalsy();
-
-        expect(authService.loginAdmin).toHaveBeenCalledWith(username.value, password.value);
-        expect(router.navigate).toHaveBeenCalledWith(['/admin/login']);
-        expect(router.navigate).not.toHaveBeenCalledWith(['/admin']);
-      }));
+        expect(fixture.debugElement.query(By.css('#password-input-error'))).toBeTruthy();
+      });
 
     });
 
-    describe('with unexpected login error', () => {
+    describe('with valid form', () => {
 
-      it('should show unexpected login error alert', inject([AdminAuthService, Router], (authService: AdminAuthService, router: Router) => {
-        spyOn(authService, 'loginAdmin').and.returnValue(of(null));
+      describe('with bad credentials', () => {
 
-        const username = component.adminLoginForm.get('username');
-        username.setValue('some_username'); username.markAsTouched();
+        it('should show bad credentials alert', inject([AdminAuthService, Router], (authService: AdminAuthService, router: Router) => {
+          const failedLoginResponse: AdminLoginResponse = {
+            status: AdminLoginStatus.FAILED,
+            message: 'Bad credentials',
+          };
 
-        const password = component.adminLoginForm.get('password');
-        password.setValue('some_password'); password.markAsTouched();
+          spyOn(authService, 'loginAdmin').and.returnValue(of(failedLoginResponse));
 
-        fixture.detectChanges();
+          const username = component.adminLoginForm.get('username');
+          username.setValue('some_username'); username.markAsTouched();
 
-        const loginBtn = fixture.debugElement.query(By.css('#login-btn'));
-        loginBtn.nativeElement.click();
+          const password = component.adminLoginForm.get('password');
+          password.setValue('some_password'); password.markAsTouched();
 
-        fixture.detectChanges();
+          fixture.detectChanges();
 
-        expect(fixture.debugElement.query(By.css('#login-bad-credentials-alert'))).toBeFalsy();
-        expect(fixture.debugElement.query(By.css('#login-unexpected-error-alert'))).toBeTruthy();
-        expect(fixture.debugElement.query(By.css('#logged-out-alert'))).toBeFalsy();
+          const loginBtn = fixture.debugElement.query(By.css('#login-btn'));
+          loginBtn.nativeElement.click();
 
-        expect(authService.loginAdmin).toHaveBeenCalledWith(username.value, password.value);
-        expect(router.navigate).toHaveBeenCalledWith(['/admin/login']);
-        expect(router.navigate).not.toHaveBeenCalledWith(['/admin']);
-      }));
+          fixture.detectChanges();
 
-    });
+          expect(fixture.debugElement.query(By.css('#login-bad-credentials-alert'))).toBeTruthy();
+          expect(fixture.debugElement.query(By.css('#login-unexpected-error-alert'))).toBeFalsy();
+          expect(fixture.debugElement.query(By.css('#logged-out-alert'))).toBeFalsy();
 
-    describe('with correct credentials', () => {
+          expect(authService.loginAdmin).toHaveBeenCalledWith(username.value, password.value);
+          expect(router.navigate).toHaveBeenCalledWith(['/admin/login']);
+          expect(router.navigate).not.toHaveBeenCalledWith(['/admin']);
+        }));
 
-      it('should redirect to admin home', inject([AdminAuthService, Router], (authService: AdminAuthService, router: Router) => {
-        const successfulLoginResponse: AdminLoginResponse = {
-          status: AdminLoginStatus.SUCCESS,
-          message: 'Login successful',
-          userDetails: {
-            username: 'admin',
-            authorities: [
-              {
-                authority: 'ROLE_ADMIN'
-              }
-            ]
-          }
-        };
+      });
 
-        spyOn(authService, 'loginAdmin').and.returnValue(of(successfulLoginResponse));
+      describe('with unexpected login error', () => {
 
-        const username = component.adminLoginForm.get('username');
-        username.setValue('some_username'); username.markAsTouched();
+        it('should show unexpected login error alert',
+          inject([AdminAuthService, Router], (authService: AdminAuthService, router: Router) => {
+          spyOn(authService, 'loginAdmin').and.returnValue(of(null));
 
-        const password = component.adminLoginForm.get('password');
-        password.setValue('some_password'); password.markAsTouched();
+          const username = component.adminLoginForm.get('username');
+          username.setValue('some_username'); username.markAsTouched();
 
-        fixture.detectChanges();
+          const password = component.adminLoginForm.get('password');
+          password.setValue('some_password'); password.markAsTouched();
 
-        const loginBtn = fixture.debugElement.query(By.css('#login-btn'));
-        loginBtn.nativeElement.click();
+          fixture.detectChanges();
 
-        fixture.detectChanges();
+          const loginBtn = fixture.debugElement.query(By.css('#login-btn'));
+          loginBtn.nativeElement.click();
 
-        expect(authService.loginAdmin).toHaveBeenCalledWith(username.value, password.value);
-        expect(router.navigate).toHaveBeenCalledWith(['/admin/login']);
-        expect(router.navigate).toHaveBeenCalledWith(['/admin']);
-      }));
+          fixture.detectChanges();
+
+          expect(fixture.debugElement.query(By.css('#login-bad-credentials-alert'))).toBeFalsy();
+          expect(fixture.debugElement.query(By.css('#login-unexpected-error-alert'))).toBeTruthy();
+          expect(fixture.debugElement.query(By.css('#logged-out-alert'))).toBeFalsy();
+
+          expect(authService.loginAdmin).toHaveBeenCalledWith(username.value, password.value);
+          expect(router.navigate).toHaveBeenCalledWith(['/admin/login']);
+          expect(router.navigate).not.toHaveBeenCalledWith(['/admin']);
+        }));
+
+      });
+
+      describe('with correct credentials', () => {
+
+        it('should redirect to admin home', inject([AdminAuthService, Router], (authService: AdminAuthService, router: Router) => {
+          const successfulLoginResponse: AdminLoginResponse = {
+            status: AdminLoginStatus.SUCCESS,
+            message: 'Login successful',
+            userDetails: {
+              username: 'admin',
+              authorities: [
+                {
+                  authority: 'ROLE_ADMIN'
+                }
+              ]
+            }
+          };
+
+          spyOn(authService, 'loginAdmin').and.returnValue(of(successfulLoginResponse));
+
+          const username = component.adminLoginForm.get('username');
+          username.setValue('some_username'); username.markAsTouched();
+
+          const password = component.adminLoginForm.get('password');
+          password.setValue('some_password'); password.markAsTouched();
+
+          fixture.detectChanges();
+
+          const loginBtn = fixture.debugElement.query(By.css('#login-btn'));
+          loginBtn.nativeElement.click();
+
+          fixture.detectChanges();
+
+          expect(authService.loginAdmin).toHaveBeenCalledWith(username.value, password.value);
+          expect(router.navigate).toHaveBeenCalledWith(['/admin/login']);
+          expect(router.navigate).toHaveBeenCalledWith(['/admin']);
+        }));
+
+      });
 
     });
 
@@ -220,7 +195,7 @@ describe('AdminLoginPage', () => {
 
     beforeEach(async(() => {
       TestBed.configureTestingModule({
-        imports: [AdminLoginModule, HttpClientTestingModule, RouterTestingModule],
+        imports: [HttpClientTestingModule, NoopAnimationsModule, RouterTestingModule, AdminLoginModule],
         providers: [
           {
             provide: ActivatedRoute,

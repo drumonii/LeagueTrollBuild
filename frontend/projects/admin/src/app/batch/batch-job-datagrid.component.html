@@ -1,0 +1,63 @@
+<h3>
+  Job Instances
+  <button id="refresh-failed-jobs-btn" [disabled]="loading" class="btn btn-link"
+    (click)="getBatchJobInstances({
+      page: 0,
+      size: 10,
+      filters: [{ property: 'name', value: 'allRetrievalsJob' }],
+      sort: ['jobExecution.startTime,desc']
+    })">
+    <clr-icon shape="refresh"></clr-icon>
+  </button>
+</h3>
+<clr-alert id="failed-job-alert" [clrAlertType]="'danger'" *ngIf="(hasFailedAllRetrievalsJob$ | async)">
+  <clr-alert-item>
+    <span class="alert-text">
+      The most recent allRetrievalsJob run failed or has been hanging for more than {{minutesAgo}} minutes ago.
+      Try restarting the allRetrievalsJob manually.
+      <br/>
+      <button id="restart-job-btn" class="btn btn-primary" [clrLoading]="restartingAllRetrievalsJob" (click)="restartAllRetrievalsJob()">
+        Restart
+      </button>
+    </span>
+  </clr-alert-item>
+</clr-alert>
+<clr-datagrid id="batch-jobs-datatable" (clrDgRefresh)="refresh($event)" [clrDgLoading]="loading">
+  <clr-dg-column [clrDgField]="'id'" [clrDgColType]="'number'">Job Id</clr-dg-column>
+  <clr-dg-column [clrDgField]="'name'" [style.min-width.px]="200">Name</clr-dg-column>
+  <clr-dg-column [clrDgField]="'jobExecution.status'">Status</clr-dg-column>
+  <clr-dg-column [clrDgField]="'jobExecution.startTime'" [clrDgSortOrder]="-1" [style.min-width.px]="200">Start Time</clr-dg-column>
+  <clr-dg-column [clrDgField]="'jobExecution.endTime'" [style.min-width.px]="200">End Time</clr-dg-column>
+  <clr-dg-column [clrDgSorted]="false">Completion Time</clr-dg-column>
+
+  <clr-dg-placeholder>No Job Instances found!</clr-dg-placeholder>
+
+  <clr-dg-row *ngFor="let jobInstance of (jobInstances$ | async); trackBy: trackByJobInstance" [clrDgItem]="jobInstance">
+    <clr-dg-cell>{{jobInstance.id}}</clr-dg-cell>
+    <clr-dg-cell>{{jobInstance.name}}</clr-dg-cell>
+    <clr-dg-cell>
+      {{jobInstance.jobExecution.status}}
+      <ng-container [ngSwitch]="jobInstance.jobExecution.status">
+        <ng-container *ngSwitchCase="'COMPLETED'">
+          <clr-icon shape="check" class="is-success"></clr-icon>
+        </ng-container>
+        <ng-container *ngSwitchCase="'FAILED'">
+          <clr-icon shape="times" class="is-error"></clr-icon>
+        </ng-container>
+      </ng-container>
+    </clr-dg-cell>
+    <clr-dg-cell>{{jobInstance.jobExecution.startTime | date: 'M/d/yy@h:mm:ss.SSS a'}}</clr-dg-cell>
+    <clr-dg-cell>{{jobInstance.jobExecution.endTime | date: 'M/d/yy@h:mm:ss.SSS a'}}</clr-dg-cell>
+    <clr-dg-cell>{{jobInstance.jobExecution | jobExecutionCompletionTime}}</clr-dg-cell>
+
+    <ltb-admin-step-executions-detail *clrIfExpanded [jobExecutionId]="jobInstance.jobExecution.id" ngProjectAs="clr-dg-row-detail">
+    </ltb-admin-step-executions-detail>
+  </clr-dg-row>
+
+  <clr-dg-footer>
+    <clr-dg-pagination #pagination [clrDgPageSize]="10" [clrDgTotalItems]="total">
+      <clr-dg-page-size [clrPageSizeOptions]="[10, 20, 50]">Users per page</clr-dg-page-size>
+      {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{total}} users
+    </clr-dg-pagination>
+  </clr-dg-footer>
+</clr-datagrid>

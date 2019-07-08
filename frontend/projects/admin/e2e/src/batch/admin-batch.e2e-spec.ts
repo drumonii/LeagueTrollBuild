@@ -1,4 +1,5 @@
 import { AdminBatchPage } from './admin-batch.po';
+import { browser, by, element, ExpectedConditions } from 'protractor';
 
 describe('admin batch page', () => {
   const page = new AdminBatchPage();
@@ -28,8 +29,13 @@ describe('admin batch page', () => {
       await page.logoutAdmin();
     });
 
-    it('should show the Flyway datatable', async () => {
+    it('should show the batch jobs datatable', async () => {
       expect(await page.getBatchJobsDatatable().isPresent()).toBe(true);
+
+      await element(by.css('#clr-dg-row1 .datagrid-expandable-caret button.datagrid-expandable-caret-button')).click();
+
+      const stepExecutionsTable = await page.getStepExecutionsDetail();
+      await browser.wait(ExpectedConditions.presenceOf(stepExecutionsTable));
     });
 
   });

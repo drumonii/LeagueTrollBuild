@@ -1,46 +1,33 @@
-<nav id="admin-header" class="navbar is-dark">
-  <div class="container">
-    <div class="navbar-brand">
-      <a id="admin-header-title" class="navbar-item" routerLink="/admin/login">
-        {{header}}
-      </a>
-      <div id="burger-collapse" class="navbar-burger burger" [class.is-active]="isAdminCollapsed"
-        *ngIf="(adminUserDetails$ | async)" data-target="admin-nav" (click)="toggleAdminCollapse()">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </div>
-
-    <div id="admin-nav" class="navbar-menu" [class.is-active]="isAdminCollapsed" *ngIf="(adminUserDetails$ | async) as adminUserDetails">
-      <div class="navbar-start">
-        <a id="batch-navbar-item" class="navbar-item" routerLink="/admin/batch" routerLinkActive="is-active">
-          Batch
-        </a>
-        <a id="flyway-navbar-item" class="navbar-item" routerLink="/admin/flyway" routerLinkActive="is-active">
-          Flyway
-        </a>
-      </div>
-
-      <div id="authenticated-admin-navbar-end" class="navbar-end">
-        <div id="admin-logout-navbar-item" class="navbar-item has-dropdown"
-          [class.is-active]="isNavbarItemActive('logout')" (click)="toggleNavbarItem('logout')">
-          <div class="navbar-link">
-            <i class="fa fa-user-circle" aria-hidden="true"></i>
-          </div>
-          <div class="navbar-dropdown">
-            <div class="navbar-item">
-              {{adminUserDetails.username | uppercase}}
-            </div>
-            <hr class="navbar-divider">
-            <div class="navbar-item">
-              <button id="admin-logout-btn" class="button" (click)="logout()">
-                Logout
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+<clr-header id="admin-header" class="header-7">
+  <div class="branding">
+    <a id="admin-header-title" class="nav-link" routerLink="/admin/login">
+      <span class="title">{{header}}</span>
+    </a>
   </div>
-</nav>
+  <ng-container *ngIf="(adminUserDetails$ | async) as adminUserDetails">
+    <div class="header-nav">
+      <a id="batch-navbar-item" class="nav-link" routerLink="/admin/batch" routerLinkActive="active">
+        <span class="nav-text">Batch</span>
+      </a>
+      <a id="flyway-navbar-item" class="nav-link" routerLink="/admin/flyway" routerLinkActive="active">
+        <span class="nav-text">Flyway</span>
+      </a>
+    </div>
+    <div class="header-actions">
+      <clr-dropdown>
+        <button class="nav-text" clrDropdownTrigger>
+          <clr-icon shape="user"></clr-icon>
+          <clr-icon shape="caret down"></clr-icon>
+        </button>
+        <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
+          <span clrDropdownItem>
+            {{adminUserDetails.username | uppercase}}
+          </span>
+          <button class="button" clrDropdownItem (click)="logout()">
+            Logout
+          </button>
+        </clr-dropdown-menu>
+      </clr-dropdown>
+    </div>
+  </ng-container>
+</clr-header>

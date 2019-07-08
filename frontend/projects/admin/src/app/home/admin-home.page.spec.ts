@@ -1,5 +1,6 @@
 import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
-import {HttpClientTestingModule} from '@angular/common/http/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { By } from '@angular/platform-browser';
 
 import { AdminHomeModule } from './admin-home.module';
@@ -12,7 +13,7 @@ describe('AdminHomePage', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [AdminHomeModule, HttpClientTestingModule]
+      imports: [HttpClientTestingModule, NoopAnimationsModule, AdminHomeModule]
     })
     .compileComponents();
   }));
