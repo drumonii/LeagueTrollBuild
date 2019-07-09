@@ -27,8 +27,10 @@ api:
 # ======================
 
 spring:
-  # Spring active profile
-  profiles.active: external, ddragon
+  # Spring profiles
+  profiles:
+    active: external
+    include: ddragon
   # Internalization
   messages.basename: i18n/messages
   # Batch
