@@ -28,7 +28,7 @@ asciidoctor {
 }
 
 bootJar {
-    archiveFileName = "${rootProject.name}-${version}.jar"
+    archiveFileName = "${rootProject.name}.jar"
     destinationDirectory = file("${rootProject.rootDir}/build")
     dependsOn asciidoctor
     dependsOn ':frontend:npmBuild', ':frontend:moveAssets'
