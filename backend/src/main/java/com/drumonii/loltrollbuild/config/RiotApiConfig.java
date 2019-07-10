@@ -14,7 +14,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.Collections;
+import java.util.Arrays;
 
 /**
  * Configuration for using a {@link RestTemplate} to retrieve models from Riot's API.
@@ -39,8 +39,9 @@ public class RiotApiConfig {
 		public RestTemplate restTemplate(RestTemplateBuilder builder, ObjectMapper objectMapper) {
 			MappingJackson2HttpMessageConverter textJsonMappingJackson2HttpMessageConverter =
 					new MappingJackson2HttpMessageConverter(objectMapper);
-			textJsonMappingJackson2HttpMessageConverter
-					.setSupportedMediaTypes(Collections.singletonList(MediaType.parseMediaType("text/json;charset=UTF-8")));
+			textJsonMappingJackson2HttpMessageConverter.setSupportedMediaTypes(Arrays.asList(
+					MediaType.APPLICATION_JSON, MediaType.APPLICATION_OCTET_STREAM,
+					MediaType.parseMediaType("binary/octet-stream"), MediaType.parseMediaType("text/json;charset=UTF-8")));
 			return builder
 					.additionalMessageConverters(textJsonMappingJackson2HttpMessageConverter)
 					.additionalInterceptors(new RiotClientHttpRequestInterceptor())

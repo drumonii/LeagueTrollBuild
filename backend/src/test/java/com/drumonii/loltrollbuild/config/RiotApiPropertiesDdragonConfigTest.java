@@ -65,7 +65,8 @@ public class RiotApiPropertiesDdragonConfigTest {
 			RestTemplate restTemplate = applicationContext.getBean("restTemplate", RestTemplate.class);
 			assertThat(restTemplate.getInterceptors()).hasSize(1);
 			assertThat(restTemplate.getMessageConverters()).flatExtracting(HttpMessageConverter::getSupportedMediaTypes)
-					.contains(MediaType.parseMediaType("text/json;charset=UTF-8"));
+					.contains(MediaType.APPLICATION_JSON, MediaType.APPLICATION_OCTET_STREAM,
+							MediaType.parseMediaType("binary/octet-stream"), MediaType.parseMediaType("text/json;charset=UTF-8"));
 		} catch (BeansException e) {
 			fail("Caught BeansException", e);
 		}
