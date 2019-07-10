@@ -35,6 +35,9 @@ public class VersionsRetrievalJobConfig {
 				.reader(versionsRetrievalItemReader(null))
 				.processor(versionsRetrievalItemProcessor(null))
 				.writer(versionsRetrievalItemWriter(null))
+				.listener(new VersionsRetrievalItemReadListener())
+				.listener(new VersionsRetrievalItemProcessListener())
+				.listener(new VersionsRetrievalItemWriteListener())
 				.build();
 	}
 
