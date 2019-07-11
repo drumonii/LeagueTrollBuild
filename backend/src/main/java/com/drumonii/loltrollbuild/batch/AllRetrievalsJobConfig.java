@@ -1,5 +1,6 @@
 package com.drumonii.loltrollbuild.batch;
 
+import com.drumonii.loltrollbuild.batch.listener.LoggingJobDurationListener;
 import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.riot.service.VersionsService;
 import org.springframework.batch.core.*;
@@ -32,6 +33,7 @@ public class AllRetrievalsJobConfig {
 	@Bean
 	public Job allRetrievalsJob(JobBuilderFactory jobBuilderFactory) {
 		return jobBuilderFactory.get("allRetrievalsJob")
+				.listener(new LoggingJobDurationListener(getClass()))
 				.incrementer(new AllRetrievalsJobParametersIncrementer())
 				.validator(new AllRetrievalsJobParametersValidator())
 				.start(allRetrievalsJobFlow())

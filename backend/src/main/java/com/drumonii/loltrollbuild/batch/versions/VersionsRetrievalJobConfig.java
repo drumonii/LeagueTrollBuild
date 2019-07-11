@@ -9,10 +9,18 @@ import org.springframework.batch.core.configuration.annotation.JobBuilderFactory
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
+import org.springframework.batch.integration.async.AsyncItemProcessor;
+import org.springframework.batch.integration.async.AsyncItemWriter;
+import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.data.builder.RepositoryItemWriterBuilder;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.task.TaskExecutor;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+
+import java.util.concurrent.Future;
 
 /**
  * {@link Job} configuration for retrieving the latest {@link Version} data from Riot's API.
@@ -31,10 +39,10 @@ public class VersionsRetrievalJobConfig {
 	@Bean
 	public Step versionsRetrievalStep(StepBuilderFactory stepBuilderFactory) {
 		return stepBuilderFactory.get("versionsRetrievalStep")
-				.<Version, Version> chunk(25)
+				.<Version, Future<Version>> chunk(25)
 				.reader(versionsRetrievalItemReader(null))
-				.processor(versionsRetrievalItemProcessor(null))
-				.writer(versionsRetrievalItemWriter(null))
+				.processor(versionsRetrievalAsyncItemProcessor(null, null))
+				.writer(versionsRetrievalAsyncItemWriter(null))
 				.listener(new VersionsRetrievalItemReadListener())
 				.listener(new VersionsRetrievalItemProcessListener())
 				.listener(new VersionsRetrievalItemWriteListener())
@@ -54,11 +62,40 @@ public class VersionsRetrievalJobConfig {
 	}
 
 	@Bean
+	public ItemProcessor<Version, Future<Version>> versionsRetrievalAsyncItemProcessor(
+			VersionsRetrievalItemProcessor versionsRetrievalItemProcessor,
+			TaskExecutor versionsRetrievalTaskExecutor) {
+		AsyncItemProcessor<Version, Version> asyncItemProcessor = new AsyncItemProcessor<>();
+		asyncItemProcessor.setDelegate(versionsRetrievalItemProcessor);
+		asyncItemProcessor.setTaskExecutor(versionsRetrievalTaskExecutor);
+		return asyncItemProcessor;
+	}
+
+	@Bean
 	public ItemWriter<Version> versionsRetrievalItemWriter(VersionsRepository versionsRepository) {
 		return new RepositoryItemWriterBuilder<Version>()
 				.repository(versionsRepository)
 				.methodName("save")
 				.build();
+	}
+
+	@Bean
+	public ItemWriter<Future<Version>> versionsRetrievalAsyncItemWriter(
+			ItemWriter<Version> versionsRetrievalItemWriter){
+		AsyncItemWriter<Version> asyncItemWriter = new AsyncItemWriter<>();
+		asyncItemWriter.setDelegate(versionsRetrievalItemWriter);
+		return asyncItemWriter;
+	}
+
+	@Bean
+	public TaskExecutor versionsRetrievalTaskExecutor(
+			@Value("${batch.task-executor.core-pool-size}") int corePoolSize,
+			@Value("${batch.task-executor.max-pool-size}") int maxPoolSize) {
+		ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
+		taskExecutor.setCorePoolSize(corePoolSize);
+		taskExecutor.setMaxPoolSize(maxPoolSize);
+		taskExecutor.setThreadNamePrefix("VersionsRetrievalTaskExecutor-");
+		return taskExecutor;
 	}
 
 }

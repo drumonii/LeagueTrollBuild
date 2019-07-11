@@ -9,12 +9,19 @@ import org.springframework.batch.core.configuration.annotation.JobBuilderFactory
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
+import org.springframework.batch.integration.async.AsyncItemProcessor;
+import org.springframework.batch.integration.async.AsyncItemWriter;
+import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.data.builder.RepositoryItemWriterBuilder;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.task.TaskExecutor;
 import org.springframework.retry.backoff.UniformRandomBackOffPolicy;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+
+import java.util.concurrent.Future;
 
 /**
  * {@link Job} configuration for retrieving the latest {@link GameMap} data from Riot's API.
@@ -33,10 +40,10 @@ public class MapsRetrievalJobConfig {
 	@Bean
 	public Step mapsRetrievalStep(StepBuilderFactory stepBuilderFactory) {
 		return stepBuilderFactory.get("mapsRetrievalStep")
-				.<GameMap, GameMap> chunk(25)
+				.<GameMap, Future<GameMap>> chunk(25)
 				.reader(mapsRetrievalItemReader(null))
-				.processor(mapsRetrievalItemProcessor(null))
-				.writer(mapsRetrievalItemWriter(null))
+				.processor(mapsRetrievalAsyncItemProcessor(null, null))
+				.writer(mapsRetrievalAsyncItemWriter(null))
 				.listener(new MapsRetrievalItemReadListener())
 				.listener(new MapsRetrievalItemProcessListener())
 				.listener(new MapsRetrievalItemWriteListener())
@@ -62,11 +69,40 @@ public class MapsRetrievalJobConfig {
 	}
 
 	@Bean
+	public ItemProcessor<GameMap, Future<GameMap>> mapsRetrievalAsyncItemProcessor(
+			MapsRetrievalItemProcessor mapsRetrievalItemProcessor,
+			TaskExecutor mapsRetrievalTaskExecutor) {
+		AsyncItemProcessor<GameMap, GameMap> asyncItemProcessor = new AsyncItemProcessor<>();
+		asyncItemProcessor.setDelegate(mapsRetrievalItemProcessor);
+		asyncItemProcessor.setTaskExecutor(mapsRetrievalTaskExecutor);
+		return asyncItemProcessor;
+	}
+
+	@Bean
 	public ItemWriter<GameMap> mapsRetrievalItemWriter(MapsRepository mapsRepository) {
 		return new RepositoryItemWriterBuilder<GameMap>()
 				.repository(mapsRepository)
 				.methodName("save")
 				.build();
+	}
+
+	@Bean
+	public ItemWriter<Future<GameMap>> mapsRetrievalAsyncItemWriter(
+			ItemWriter<GameMap> mapsRetrievalItemWriter){
+		AsyncItemWriter<GameMap> asyncItemWriter = new AsyncItemWriter<>();
+		asyncItemWriter.setDelegate(mapsRetrievalItemWriter);
+		return asyncItemWriter;
+	}
+
+	@Bean
+	public TaskExecutor mapsRetrievalTaskExecutor(
+			@Value("${batch.task-executor.core-pool-size}") int corePoolSize,
+			@Value("${batch.task-executor.max-pool-size}") int maxPoolSize) {
+		ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
+		taskExecutor.setCorePoolSize(corePoolSize);
+		taskExecutor.setMaxPoolSize(maxPoolSize);
+		taskExecutor.setThreadNamePrefix("MapsRetrievalTaskExecutor-");
+		return taskExecutor;
 	}
 
 }

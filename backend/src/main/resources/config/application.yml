@@ -22,6 +22,11 @@ riot:
 api:
   base-path: /api
 
+batch:
+  task-executor:
+    core-pool-size: 5
+    max-pool-size: 10
+
 # ======================
 # Spring Boot Properties
 # ======================
