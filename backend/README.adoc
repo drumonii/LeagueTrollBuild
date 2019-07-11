@@ -35,8 +35,8 @@ Once the backend starts, view http://localhost:8080/api[localhost:8080/api] on y
 
 === All Retrievals from Riot
 Optionally, run with the following argument properties to trigger on startup the retrieval of the latest data (Items,
- Maps, Champions, Summoner Spells) from Riot's https://developer.riotgames.com/static-data.html[Data Dragon API] in
- order to perform a troll build of a Champion.
+Maps, Champions, Summoner Spells) from Riot's https://developer.riotgames.com/static-data.html[Data Dragon API] in
+order to perform a troll build of a Champion.
 
   -Dspring.batch.job.enabled=true -Dspring.batch.job.names=allRetrievalsJob
 

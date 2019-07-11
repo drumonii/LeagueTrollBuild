@@ -49,5 +49,18 @@ Optionally, you can provide a profile override with:
 
 Once the app starts, view http://localhost:8080[localhost:8080] on your browser.
 
+== Docker
+Instead of building and running the project manually, you can use Docker to do that. This assumes you have Docker already installed.
+
+From the root of the project, first build the image:
+
+  docker build -t league-troll-build:latest .
+
+Next run the container:
+
+  docker run --name league-troll-build --publish 8080:8080 --detach league-troll-build:latest
+
+The app and retrieve of the latest data from Riot. Once completed, view http://localhost:8080[localhost:8080] on your browser.
+
 == License
 `LeagueTrollBuild` is licensed under the MIT License (MIT).
