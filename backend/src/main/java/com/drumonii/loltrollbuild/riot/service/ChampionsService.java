@@ -19,13 +19,6 @@ public interface ChampionsService {
 	List<Champion> getChampions(Version version);
 
 	/**
-	 * Returns the {@link List} of {@link Champion} from Riot using the latest patch {@link Version} from Riot.
-	 *
-	 * @return the {@link List} of {@link Champion}
-	 */
-	List<Champion> getChampions();
-
-	/**
 	 * Returns a {@link Champion} from Riot by its ID.
 	 *
 	 * @param id the ID to lookup the {@link Champion} from Riot

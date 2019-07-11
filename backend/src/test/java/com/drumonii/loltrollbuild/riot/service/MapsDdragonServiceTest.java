@@ -103,53 +103,6 @@ public class MapsDdragonServiceTest {
 	}
 
 	@Test
-	public void getMaps() {
-		mockServer.expect(requestTo(versionsUri.toString()))
-				.andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(versionsJson, MediaType.parseMediaType("text/json;charset=UTF-8")));
-
-		mockServer.expect(requestTo(mapsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
-				.andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(mapsJson, MediaType.APPLICATION_JSON_UTF8));
-
-		List<GameMap> maps = mapsService.getMaps();
-		mockServer.verify();
-
-		assertThat(maps).isNotEmpty();
-	}
-
-	@Test
-	public void getMapsWithRestClientException() {
-		mockServer.expect(requestTo(versionsUri.toString()))
-				.andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(versionsJson, MediaType.parseMediaType("text/json;charset=UTF-8")));
-
-		mockServer.expect(requestTo(mapsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
-				.andExpect(method(HttpMethod.GET))
-				.andRespond(withServerError());
-
-		List<GameMap> maps = mapsService.getMaps();
-		mockServer.verify();
-
-		assertThat(maps).isEmpty();
-	}
-
-	@Test
-	public void getMapsWithRestClientExceptionFromVersions() {
-		mockServer.expect(requestTo(versionsUri.toString()))
-				.andExpect(method(HttpMethod.GET))
-				.andRespond(withServerError());
-
-		mockServer.expect(never(), requestTo(mapsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
-				.andExpect(method(HttpMethod.GET));
-
-		List<GameMap> maps = mapsService.getMaps();
-		mockServer.verify();
-
-		assertThat(maps).isEmpty();
-	}
-
-	@Test
 	public void getMap() {
 		mockServer.expect(requestTo(versionsUri.toString()))
 				.andExpect(method(HttpMethod.GET))

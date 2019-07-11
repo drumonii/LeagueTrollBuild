@@ -50,8 +50,7 @@ public class ItemsDdragonService implements ItemsService {
 		return new ArrayList<>(response.getItems().values());
 	}
 
-	@Override
-	public List<Item> getItems() {
+	private List<Item> getItems() {
 		Version version = versionsService.getLatestVersion();
 		if (version == null) {
 			return new ArrayList<>();

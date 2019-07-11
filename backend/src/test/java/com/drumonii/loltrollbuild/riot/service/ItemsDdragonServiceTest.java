@@ -101,53 +101,6 @@ public class ItemsDdragonServiceTest {
 	}
 
 	@Test
-	public void getItems() {
-		mockServer.expect(requestTo(versionsUri.toString()))
-				.andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(versionsJson, MediaType.parseMediaType("text/json;charset=UTF-8")));
-
-		mockServer.expect(requestTo(itemsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
-				.andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(itemsJson, MediaType.APPLICATION_JSON_UTF8));
-
-		List<Item> items = itemsService.getItems();
-		mockServer.verify();
-
-		assertThat(items).isNotEmpty();
-	}
-
-	@Test
-	public void getItemsWithRestClientException() {
-		mockServer.expect(requestTo(versionsUri.toString()))
-				.andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(versionsJson, MediaType.parseMediaType("text/json;charset=UTF-8")));
-
-		mockServer.expect(requestTo(itemsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
-				.andExpect(method(HttpMethod.GET))
-				.andRespond(withServerError());
-
-		List<Item> items = itemsService.getItems();
-		mockServer.verify();
-
-		assertThat(items).isEmpty();
-	}
-
-	@Test
-	public void getItemsWithRestClientExceptionFromVersions() {
-		mockServer.expect(requestTo(versionsUri.toString()))
-				.andExpect(method(HttpMethod.GET))
-				.andRespond(withServerError());
-
-		mockServer.expect(never(), requestTo(itemsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
-				.andExpect(method(HttpMethod.GET));
-
-		List<Item> items = itemsService.getItems();
-		mockServer.verify();
-
-		assertThat(items).isEmpty();
-	}
-
-	@Test
 	public void getItem() {
 		int bilgewaterCutlassId = 3144;
 

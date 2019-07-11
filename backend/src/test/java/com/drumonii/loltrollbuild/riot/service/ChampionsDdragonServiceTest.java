@@ -88,11 +88,7 @@ public class ChampionsDdragonServiceTest {
 	}
 
 	@Test
-	public void getChampions() {
-		mockServer.expect(requestTo(versionsUri.toString()))
-				.andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(versionsJson, MediaType.parseMediaType("text/json;charset=UTF-8")));
-
+	public void getChampionsFromVersion() {
 		mockServer.expect(requestTo(championsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
 				.andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(championsJson, MediaType.APPLICATION_JSON_UTF8));
@@ -107,7 +103,7 @@ public class ChampionsDdragonServiceTest {
 					.andRespond(withSuccess(JsonTestFilesUtil.getChampionJson(championKey), MediaType.APPLICATION_JSON_UTF8));
 		}
 
-		List<Champion> champions = championsService.getChampions();
+		List<Champion> champions = championsService.getChampions(latestVersion);
 		mockServer.verify();
 
 		assertThat(champions).isNotEmpty();
@@ -118,31 +114,12 @@ public class ChampionsDdragonServiceTest {
 	}
 
 	@Test
-	public void getChampionsWithRestClientException() {
-		mockServer.expect(requestTo(versionsUri.toString()))
-				.andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(versionsJson, MediaType.parseMediaType("text/json;charset=UTF-8")));
-
+	public void getChampionsFromVersionWithRestClientException() {
 		mockServer.expect(requestTo(championsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
 				.andExpect(method(HttpMethod.GET))
 				.andRespond(withServerError());
 
-		List<Champion> champions = championsService.getChampions();
-		mockServer.verify();
-
-		assertThat(champions).isEmpty();
-	}
-
-	@Test
-	public void getChampionsWithRestClientExceptionFromVersions() {
-		mockServer.expect(requestTo(versionsUri.toString()))
-				.andExpect(method(HttpMethod.GET))
-				.andRespond(withServerError());
-
-		mockServer.expect(never(), requestTo(championsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
-				.andExpect(method(HttpMethod.GET));
-
-		List<Champion> champions = championsService.getChampions();
+		List<Champion> champions = championsService.getChampions(latestVersion);
 		mockServer.verify();
 
 		assertThat(champions).isEmpty();

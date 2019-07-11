@@ -50,8 +50,7 @@ public class SummonerSpellsDdragonService implements SummonerSpellsService {
 		return new ArrayList<>(response.getSummonerSpells().values());
 	}
 
-	@Override
-	public List<SummonerSpell> getSummonerSpells() {
+	private List<SummonerSpell> getSummonerSpells() {
 		Version version = versionsService.getLatestVersion();
 		if (version == null) {
 			return new ArrayList<>();

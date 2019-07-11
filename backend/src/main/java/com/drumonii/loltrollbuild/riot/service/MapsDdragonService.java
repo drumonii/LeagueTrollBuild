@@ -50,8 +50,7 @@ public class MapsDdragonService implements MapsService {
 		return new ArrayList<>(response.getMaps().values());
 	}
 
-	@Override
-	public List<GameMap> getMaps() {
+	private List<GameMap> getMaps() {
 		Version version = versionsService.getLatestVersion();
 		if (version == null) {
 			return new ArrayList<>();

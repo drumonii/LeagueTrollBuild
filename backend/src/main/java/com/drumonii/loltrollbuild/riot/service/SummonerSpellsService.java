@@ -19,13 +19,6 @@ public interface SummonerSpellsService {
 	List<SummonerSpell> getSummonerSpells(Version version);
 
 	/**
-	 * Returns the {@link List} of {@link SummonerSpell} from Riot.
-	 *
-	 * @return the {@link List} of {@link SummonerSpell} from Riot
-	 */
-	List<SummonerSpell> getSummonerSpells();
-
-	/**
 	 * Returns a {@link SummonerSpell} from Riot by its ID.
 	 *
 	 * @param id the ID to lookup the {@link SummonerSpell} from Riot

@@ -19,13 +19,6 @@ public interface ItemsService {
 	List<Item> getItems(Version version);
 
 	/**
-	 * Returns the {@link List} of {@link Item} from Riot.
-	 *
-	 * @return the {@link List} of {@link Item} from Riot
-	 */
-	List<Item> getItems();
-
-	/**
 	 * Returns a {@link Item} from Riot by its ID.
 	 *
 	 * @param id the ID to lookup the {@link Item} from Riot

@@ -27,6 +27,7 @@ import static com.drumonii.loltrollbuild.config.Profiles.DDRAGON;
 import static com.drumonii.loltrollbuild.config.Profiles.TESTING;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
 
 @RunWith(SpringRunner.class)
@@ -57,10 +58,10 @@ public class AllRetrievalsJobConfigTest {
 	public void runsAllRetrievalJob() throws Exception {
 		Version latestVersion = new Version("8.1.1");
 		given(versionsService.getLatestVersion()).willReturn(latestVersion);
-		given(mapsService.getMaps()).willReturn(new ArrayList<>());
-		given(summonerSpellsService.getSummonerSpells()).willReturn(new ArrayList<>());
-		given(championsService.getChampions()).willReturn(new ArrayList<>());
-		given(itemsService.getItems()).willReturn(new ArrayList<>());
+		given(mapsService.getMaps(eq(latestVersion))).willReturn(new ArrayList<>());
+		given(summonerSpellsService.getSummonerSpells(eq(latestVersion))).willReturn(new ArrayList<>());
+		given(championsService.getChampions(eq(latestVersion))).willReturn(new ArrayList<>());
+		given(itemsService.getItems(eq(latestVersion))).willReturn(new ArrayList<>());
 
 		JobParameters jobParameters = getJobParameters();
 		assertThat(jobParameters.getParameters()).containsKey(LATEST_PATCH_KEY);

@@ -54,15 +54,6 @@ public class ChampionsDdragonService implements ChampionsService {
 				.collect(Collectors.toMap(Entry::getKey, entry -> getChampion(version, entry.getKey()))).values());
 	}
 
-	@Override
-	public List<Champion> getChampions() {
-		Version version = versionsService.getLatestVersion();
-		if (version == null) {
-			return new ArrayList<>();
-		}
-		return getChampions(version);
-	}
-
 	private ChampionsResponse getChampionsResponse(Version version) {
 		try {
 			return restTemplate.getForObject(championsUri.buildAndExpand(version.getPatch(), locale).toString(),

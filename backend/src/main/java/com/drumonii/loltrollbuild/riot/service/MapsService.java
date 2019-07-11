@@ -19,13 +19,6 @@ public interface MapsService {
 	List<GameMap> getMaps(Version version);
 
 	/**
-	 * Returns the {@link List} of {@link GameMap} from Riot.
-	 *
-	 * @return the {@link List} of {@link GameMap} from Riot
-	 */
-	List<GameMap> getMaps();
-
-	/**
 	 * Returns a {@link GameMap} from Riot by its ID.
 	 *
 	 * @param id the ID to lookup the {@link GameMap} from Riot
