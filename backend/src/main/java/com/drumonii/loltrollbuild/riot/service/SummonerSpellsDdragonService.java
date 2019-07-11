@@ -39,6 +39,7 @@ public class SummonerSpellsDdragonService implements SummonerSpellsService {
 
 	@Override
 	public List<SummonerSpell> getSummonerSpells(Version version) {
+		LOGGER.info("Getting Summoner Spells from Riot");
 		SummonerSpellsResponse response;
 		try {
 			response = restTemplate.getForObject(summonerSpellsUri.buildAndExpand(version.getPatch(), locale).toString(),
@@ -60,6 +61,7 @@ public class SummonerSpellsDdragonService implements SummonerSpellsService {
 
 	@Override
 	public SummonerSpell getSummonerSpell(int id) {
+		LOGGER.info("Getting Summoner Spell with id: {} from Riot", id);
 		Optional<SummonerSpell> summonerSpell = getSummonerSpells().stream()
 				.filter(s -> s.getId() == id)
 				.findFirst();

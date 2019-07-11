@@ -46,6 +46,7 @@ public class ChampionsDdragonService implements ChampionsService {
 
 	@Override
 	public List<Champion> getChampions(Version version) {
+		LOGGER.info("Getting Champions from Riot");
 		ChampionsResponse response = getChampionsResponse(version);
 		if (response == null) {
 			return new ArrayList<>();
@@ -66,6 +67,7 @@ public class ChampionsDdragonService implements ChampionsService {
 
 	@Override
 	public Champion getChampion(int id) {
+		LOGGER.info("Getting Champion with id: {} from Riot", id);
 		Version version = versionsService.getLatestVersion();
 		if (version == null) {
 			return null;
@@ -81,6 +83,7 @@ public class ChampionsDdragonService implements ChampionsService {
 	}
 
 	private Champion getChampion(Version version, String key) {
+		LOGGER.info("Getting Champion with key: {} from Riot", key);
 		UriComponents uriComponents = championUri.buildAndExpand(version.getPatch(), locale, key);
 		try {
 			ChampionsResponse response = restTemplate.getForObject(uriComponents.toString(), ChampionsResponse.class);

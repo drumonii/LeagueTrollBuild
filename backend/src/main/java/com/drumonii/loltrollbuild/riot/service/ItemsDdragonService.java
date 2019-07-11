@@ -39,6 +39,7 @@ public class ItemsDdragonService implements ItemsService {
 
 	@Override
 	public List<Item> getItems(Version version) {
+		LOGGER.info("Getting Items from Riot");
 		ItemsResponse response;
 		try {
 			response = restTemplate.getForObject(itemsUri.buildAndExpand(version.getPatch(), locale).toString(),
@@ -60,6 +61,7 @@ public class ItemsDdragonService implements ItemsService {
 
 	@Override
 	public Item getItem(int id) {
+		LOGGER.info("Getting Item with id: {} from Riot", id);
 		Optional<Item> item = getItems().stream()
 				.filter(i -> i.getId() == id)
 				.findFirst();

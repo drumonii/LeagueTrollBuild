@@ -39,6 +39,7 @@ public class MapsDdragonService implements MapsService {
 
 	@Override
 	public List<GameMap> getMaps(Version version) {
+		LOGGER.info("Getting Maps from Riot");
 		MapsResponse response;
 		try {
 			response = restTemplate.getForObject(mapsUri.buildAndExpand(version.getPatch(), locale).toString(),
@@ -60,6 +61,7 @@ public class MapsDdragonService implements MapsService {
 
 	@Override
 	public GameMap getMap(int id) {
+		LOGGER.info("Getting Map with id: {} from Riot", id);
 		Optional<GameMap> map = getMaps().stream()
 				.filter(m -> m.getMapId() == id)
 				.findFirst();

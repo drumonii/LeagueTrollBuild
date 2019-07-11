@@ -33,6 +33,7 @@ public class VersionsDdragonService implements VersionsService {
 
 	@Override
 	public List<Version> getVersions() {
+		LOGGER.info("Getting Versions from Riot");
 		List<Version> versions;
 		try {
 			versions = restTemplate.exchange(versionsUri.toString(), HttpMethod.GET, null,
