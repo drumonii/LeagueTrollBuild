@@ -76,10 +76,10 @@ public class ChampionsDdragonService implements ChampionsService {
 		if (response == null) {
 			return null;
 		}
-		Optional<Champion> champion = response.getChampions().values().stream()
+		Optional<Champion> optionalChampion = response.getChampions().values().stream()
 				.filter(c -> c.getId() == id)
 				.findFirst();
-		return champion.map(champion1 -> getChampion(version, champion1.getKey())).orElse(null);
+		return optionalChampion.map(champion -> getChampion(version, champion.getKey())).orElse(null);
 	}
 
 	private Champion getChampion(Version version, String key) {
