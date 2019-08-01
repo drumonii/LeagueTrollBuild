@@ -96,7 +96,7 @@ export class AdminBatchPage implements OnInit, OnDestroy {
     return sorts;
   }
 
-  getStatusClass({ row, column, value }): DatatableCss {
+  getStatusClass({ value }): DatatableCss {
     return {
       'has-text-success': value === 'COMPLETED',
       'has-text-danger': value === 'FAILED',
