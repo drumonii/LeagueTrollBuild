@@ -22,5 +22,6 @@ task moveAssets() {
   dependsOn 'npmBuild'
   doLast {
     ant.move file: "${projectDir}/dist/troll-build/assets", todir: "${projectDir}/dist"
+    ant.move file: "${projectDir}/dist/admin/assets", todir: "${projectDir}/dist"
   }
 }
