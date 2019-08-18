@@ -16,7 +16,7 @@ Development profile that also uses PostgreSQL with the url: `jdbc:postgresql://l
 test::
 Testing profile for https://github.com/junit-team/junit[JUnit 4] tests using H2.
 
-In addition, there is one Riot API profile:
+In addition, there is one included Riot API profile:
 
 ddragon::
 Data Dragon
@@ -40,15 +40,15 @@ order to perform a troll build of a Champion.
 
   -Dspring.batch.job.enabled=true -Dspring.batch.job.names=allRetrievalsJob
 
-This is useful to avoid manual saving of data through the admin area. If data already exists in the database, a new
+If the database is new, it's recommended to run the `allRetrievalsJob`. But if data already exists in the database, a new
 patch is out, and the retrievals job is run, then new data will be saved and absent data will be deleted.
 
 === API Documentation
 To view the generated API guide, visit http://localhost:8080/docs/api-guide.html[localhost:8080/docs/api-guide.html].
 
-To generate the API Documentation locally, run the asciidoctor Gradle task with the single test `ApiDocumentation`:
+To generate the API Documentation locally, run the `asciidoctor` Gradle task:
 
-  asciidoctor -Dtest.single=ApiDocumentation
+  ./gradlew backend:asciidoctor -x frontend:karmaTests
 
 Then navigate to `/build/asciidoc/html5/api-guide.html` to view the generated API guide.
 
