@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.13.1",
+  "version": "9.16.1",
   "data": {
     "Swain": {
       "id": "Swain",
@@ -75,7 +75,7 @@
       },
       "stats": {
         "hp": 525,
-        "hpperlevel": 90,
+        "hpperlevel": 85,
         "mp": 468,
         "mpperlevel": 28.5,
         "movespeed": 335,
@@ -83,7 +83,7 @@
         "armorperlevel": 4,
         "spellblock": 30,
         "spellblockperlevel": 0.5,
-        "attackrange": 550,
+        "attackrange": 525,
         "hpregen": 7,
         "hpregenperlevel": 0.65,
         "mpregen": 8,
@@ -99,8 +99,8 @@
         {
           "id": "SwainQ",
           "name": "Death's Hand",
-          "description": "Swain unleashes several bolts of eldritch power that pierce through targets killed. Enemies hit take more damage for each bolt they are struck by.",
-          "tooltip": "Swain unleashes {{ e5 }} bolts of eldritch power that strike the first enemy they hit and pierce through enemies they kill. Enemies hit take {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage, plus {{ e2 }}% per additional bolt. Max Damage: {{ f2 }}.<br /><br />Each unit killed by Death's Hand restores <scaleMana>{{ f1 }}</scaleMana> Mana ({{ e4 }}% max mana).",
+          "description": "Swain unleashes several bolts of eldritch power that pierce through enemies hit and stop on impact with enemy champions. Enemies hit take more damage for each bolt they are struck by.",
+          "tooltip": "Swain unleashes {{ e5 }} bolts of eldritch power that pierce through all enemies in the area and stop on impact with enemy champions. Enemies hit take {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage, plus {{ e2 }}% per additional bolt. Max Damage: {{ f2 }}.<br />",
           "leveltip": {
             "label": [
               "Bolt Damage",
@@ -117,13 +117,13 @@
           },
           "maxrank": 5,
           "cooldown": [
-            7.5,
-            6.25,
-            5,
-            3.75,
-            2.5
+            10,
+            8.5,
+            7,
+            5.5,
+            4
           ],
-          "cooldownBurn": "7.5/6.25/5/3.75/2.5",
+          "cooldownBurn": "10/8.5/7/5.5/4",
           "cost": [
             65,
             70,
@@ -157,11 +157,11 @@
               3
             ],
             [
-              3,
-              3,
-              3,
-              3,
-              3
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               5,
@@ -178,11 +178,11 @@
               0.4
             ],
             [
-              700,
-              700,
-              700,
-              700,
-              700
+              725,
+              725,
+              725,
+              725,
+              725
             ],
             [
               15,
@@ -211,10 +211,10 @@
             "55/75/95/115/135",
             "15/20/25/30/35",
             "3",
-            "3",
+            "0",
             "5",
             "0.4",
-            "700",
+            "725",
             "15/17.5/20/22.5/25",
             "0.75",
             "-0.4"
@@ -229,13 +229,13 @@
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
-            725,
-            725,
-            725,
-            725,
-            725
+            750,
+            750,
+            750,
+            750,
+            750
           ],
-          "rangeBurn": "725",
+          "rangeBurn": "750",
           "image": {
             "full": "SwainQ.png",
             "sprite": "spell11.png",
@@ -559,20 +559,22 @@
         {
           "id": "SwainR",
           "name": "Demonic Ascension",
-          "description": "Swain transforms into a demon and drains health from the 3 closest enemy champions. After draining enough health, Swain can cast Demonflare to end his transformation and decimate nearby enemies with a nova of soulfire.",
-          "tooltip": "Swain frees the demon within for {{ demonformduration }} seconds, gaining {{ basehealthgain }} health. Every second, he drains the 3 closest enemy champions for {{ damagecalc }} magic damage, healing him for {{ healingcalc }} health. After draining <scaleLevel>{{ f7 }}</scaleLevel> health, Swain gains the ability to cast Demonflare.<br /><br /><span class=\"colorDDDD77\">Demonflare:</span> Swain unleashes a nova of soulfire dealing magic damage and ending his transformation. Damage per <span class=\"size18 colorFF3F3F\">Soul Fragment</span>: {{ damagepersoulcalc }}.<br /><br />Current Damage: {{ f3 }}<br />Max Damage: {{ f2 }}<br /><br /><rules>Swain can drain non-champions to heal for {{ minionmonsterhealreduction*100 }}% of the normal amount.</rules>",
+          "description": "Swain transforms into a demon and drains health from nearby enemy champions, minions, and neutral monsters. Swain can cast Demonflare to deal damage equal to the amount of health he drained, ending his transformation to decimate nearby enemies with a nova of soulfire.",
+          "tooltip": "Swain frees the demon within for {{ demonformduration }} seconds, gaining {{ basehealthgain }} health and doubling the bonus health that he has collected from Soul Fragments. Every second, he drains all nearby enemy champions, minions, and neutral monsters for {{ damagecalc }} magic damage, healing him for {{ healingcalc }} health. After a brief delay, and upon draining any amount of health, Swain can cast Demonflare.<br /><br /><span class=\"colorDDDD77\">Demonflare:</span> Swain unleashes a nova of soulfire dealing magic damage equal to {{ minimumdemonflaredamagetotal }} plus  {{ healtodamagepercent*100 }}% of the damage he healed (up to a total of  {{ demonflaredamagetotal }}) and ends his transformation.<br /><br /><br /><rules>Swain can drain non-champions to heal for {{ minionmonsterhealreduction*100 }}% of the normal amount.</rules>",
           "leveltip": {
             "label": [
               "Healing",
               "Drain Damage",
               "Drain Heal",
-              "Damage Per Soul"
+              "Maximum Damage",
+              "Minimum Damage"
             ],
             "effect": [
               "{{ basehealthgain }} -> {{ basehealthgainNL }}",
               "{{ damagepersecond }} -> {{ damagepersecondNL }}",
               "{{ healpersecond }} -> {{ healpersecondNL }}",
-              "{{ flaredamagepersoul }} -> {{ flaredamagepersoulNL }}"
+              "{{ demonflaretotaldamage }} -> {{ demonflaretotaldamageNL }}",
+              "{{ minimumdemonflaredamage }} -> {{ minimumdemonflaredamageNL }}"
             ]
           },
           "maxrank": 3,
@@ -583,11 +585,11 @@
           ],
           "cooldownBurn": "120",
           "cost": [
-            0,
-            0,
-            0
+            100,
+            100,
+            100
           ],
-          "costBurn": "0",
+          "costBurn": "100",
           "datavalues": {},
           "effect": [
             null,
@@ -656,7 +658,7 @@
             "0"
           ],
           "vars": [],
-          "costType": "All Soul Fragments",
+          "costType": "",
           "maxammo": "-1",
           "range": [
             650,
@@ -672,13 +674,12 @@
             "y": 48,
             "w": 48,
             "h": 48
-          },
-          "resource": "All Soul Fragments"
+          }
         }
       ],
       "passive": {
         "name": "Ravenous Flock",
-        "description": "Swain's ravens collect <i>Soul Fragments</i> that heal him. Swain can right-click an immobilized enemy champions to pull them closer to him, dealing damage and ripping out a <i>Soul Fragment</i>.",
+        "description": "Swain's ravens collect <i>Soul Fragments</i> that heal him and restore his mana. Swain can right-click an immobilized enemy champions to pull them closer to him, dealing damage and ripping out a <i>Soul Fragment</i>.",
         "image": {
           "full": "Swain_P.png",
           "sprite": "passive3.png",

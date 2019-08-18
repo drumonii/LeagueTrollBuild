@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.13.1",
+  "version": "9.16.1",
   "data": {
     "Cassiopeia": {
       "id": "Cassiopeia",
@@ -76,12 +76,12 @@
         "difficulty": 10
       },
       "stats": {
-        "hp": 537,
-        "hpperlevel": 87,
-        "mp": 418,
-        "mpperlevel": 31.5,
+        "hp": 575,
+        "hpperlevel": 90,
+        "mp": 350,
+        "mpperlevel": 40,
         "movespeed": 328,
-        "armor": 25,
+        "armor": 20,
         "armorperlevel": 3.5,
         "spellblock": 30,
         "spellblockperlevel": 0.5,
@@ -251,7 +251,7 @@
           "id": "CassiopeiaW",
           "name": "Miasma",
           "description": "Cassiopeia releases several clouds of poison, slowing, grounding, and lightly damaging enemies that pass through them. Grounded enemies cannot use Movement abilities.",
-          "tooltip": "Cassiopeia spews venom in an arc, leaving toxic clouds for {{ e4 }} seconds.<br /><br />Enemies in the clouds are continually afflicted with <span class=\"color32CD32\">Debilitating Poison</span>, inflicting a decaying {{ e2 }}% slow and grounding them, prohibiting the use of Movement abilities. They also take {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage per second.<br /><br />Miasma has a minimum cast range.",
+          "tooltip": "Cassiopeia spews venom in an arc, leaving toxic clouds for {{ e4 }} seconds.<br /><br />Enemies in the clouds are continually afflicted with <span class=\"color32CD32\">Debilitating Poison</span>, inflicting a decaying {{ e2 }}% slow and grounding them, prohibiting the use of Movement abilities. They also take {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage per second.",
           "leveltip": {
             "label": [
               "Damage",
@@ -268,13 +268,13 @@
           },
           "maxrank": 5,
           "cooldown": [
+            24,
+            22,
+            20,
             18,
-            17.5,
-            17,
-            16.5,
             16
           ],
-          "cooldownBurn": "18/17.5/17/16.5/16",
+          "cooldownBurn": "24/22/20/18/16",
           "cost": [
             70,
             80,
@@ -380,13 +380,13 @@
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
-            800,
-            800,
-            800,
-            800,
-            800
+            700,
+            700,
+            700,
+            700,
+            700
           ],
-          "rangeBurn": "800",
+          "rangeBurn": "700",
           "image": {
             "full": "CassiopeiaW.png",
             "sprite": "spell2.png",
@@ -402,15 +402,15 @@
           "id": "CassiopeiaE",
           "name": "Twin Fang",
           "description": "Cassiopeia lets loose an attack that deals increased damage to Poisoned targets and heals her for a percentage of the damage dealt. If the target dies from this attack, Cassiopeia regains Mana.",
-          "tooltip": "Deal <scaleLevel>{{ f1 }}</scaleLevel> <scaleAP>(+{{ a1 }})</scaleAP> magic damage to a target. If the target is killed by Twin Fang, or is killed during its flight, Cassiopeia gains {{ cost }} Mana.<br /><br />If the victim is <span class=\"color32CD32\">Poisoned</span> when Twin Fang hits, it takes {{ e1 }} <scaleAP>(+{{ a2 }})</scaleAP> additional magic damage and Cassiopeia heals for <scaleLevel>{{ f4 }}</scaleLevel> <scaleAP>(+{{ f2 }})</scaleAP>.",
+          "tooltip": "Deal <scaleLevel>{{ f1 }}</scaleLevel> <scaleAP>(+{{ a1 }})</scaleAP> magic damage to a target. If the target is killed by Twin Fang, or is killed during its flight, Cassiopeia gains {{ cost }} Mana.<br /><br />If the victim is <span class=\"color32CD32\">Poisoned</span> when Twin Fang hits, it takes {{ e1 }} <scaleAP>(+{{ a2 }})</scaleAP> additional magic damage and Cassiopeia heals for {{ healcalc }} ({{ healratio*100 }}% of her Ability Power, with {{ minionreductionmodifier*100 }}% effectiveness against minions and small monsters).",
           "leveltip": {
             "label": [
               "Bonus Poison Damage",
-              "@AbilityResourceName@ Cost"
+              "Healing from Ability Power"
             ],
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
-              "{{ cost }} -> {{ costNL }}"
+              "{{ healratio*100.000000 }}% -> {{ healrationl*100.000000 }}%"
             ]
           },
           "maxrank": 5,
@@ -423,13 +423,13 @@
           ],
           "cooldownBurn": "0.75",
           "cost": [
-            40,
-            45,
             50,
-            55,
-            60
+            50,
+            50,
+            50,
+            50
           ],
-          "costBurn": "40/45/50/55/60",
+          "costBurn": "50",
           "datavalues": {},
           "effect": [
             null,

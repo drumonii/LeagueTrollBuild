@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.13.1",
+  "version": "9.16.1",
   "data": {
     "Shaco": {
       "id": "Shaco",
@@ -121,7 +121,7 @@
           "id": "Deceive",
           "name": "Deceive",
           "description": "Shaco becomes Invisible and teleports to target location.<br><br>His first attack while Invisible is empowered, dealing bonus damage and reducing Deceive's cooldown",
-          "tooltip": "Shaco teleports nearby and becomes <span class=\"color91d7ee\">Invisible</span> for {{ e3 }} seconds. Shaco remains <span class=\"color91d7ee\">Invisible</span> even if he uses Jack in the Box or Hallucinate. <br /><br />His next basic attack during <span class=\"color91d7ee\">Invisibility</span> deals {{ e1 }} <scaleAD>(+{{ a1 }})</scaleAD> <scaleAP>(+{{ a2 }})</scaleAP> bonus physical damage and reduces Deceive's cooldown by {{ f3 }} seconds. <br /><br /><u><span class=\"size16 color91d7ee\">Stealth - Invisible</span></u><span class=\"size16 colorb3b3b3\">: Shaco can only be revealed by nearby enemy Turrets or <span class=\"size16 coloree91d7\">True Sight</span>.</span>",
+          "tooltip": "Shaco teleports nearby and becomes <span class=\"color91d7ee\">Invisible</span> for {{ stealthduration }} seconds. Shaco remains <span class=\"color91d7ee\">Invisible</span> even if he uses Jack in the Box or Hallucinate. <br /><br />His next basic attack during <span class=\"color91d7ee\">Invisibility</span> deals <physicalDamage>{{ totaldamage }}</physicalDamage> bonus physical damage and reduces Deceive's cooldown by {{ cdrefund }} seconds. <br /><br /><u><span class=\"size16 color91d7ee\">Stealth - Invisible</span></u><span class=\"size16 colorb3b3b3\">: Shaco can only be revealed by nearby enemy Turrets or <span class=\"size16 coloree91d7\">True Sight</span>.</span>",
           "leveltip": {
             "label": [
               "Damage",
@@ -129,8 +129,8 @@
               "Cooldown"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
-              "{{ e3 }} -> {{ e3NL }}",
+              "{{ basedamage }} -> {{ basedamageNL }}",
+              "{{ stealthduration }} -> {{ stealthdurationNL }}",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
@@ -155,46 +155,11 @@
           "effect": [
             null,
             [
-              10,
-              20,
-              30,
-              40,
-              50
-            ],
-            [
-              200,
-              200,
-              200,
-              200,
-              200
-            ],
-            [
-              1.5,
-              2.25,
-              3,
-              3.75,
-              4.5
-            ],
-            [
-              6,
-              6,
-              6,
-              6,
-              6
-            ],
-            [
-              400,
-              400,
-              400,
-              400,
-              400
-            ],
-            [
-              2.5,
-              2.5,
-              2.5,
-              2.5,
-              2.5
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -204,11 +169,46 @@
               0
             ],
             [
-              0.25,
-              0.25,
-              0.25,
-              0.25,
-              0.25
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -227,29 +227,18 @@
           ],
           "effectBurn": [
             null,
-            "10/20/30/40/50",
-            "200",
-            "1.5/2.25/3/3.75/4.5",
-            "6",
-            "400",
-            "2.5",
             "0",
-            "0.25",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "bonusattackdamage",
-              "coeff": 0.4,
-              "key": "a1"
-            },
-            {
-              "link": "spelldamage",
-              "coeff": 0.3,
-              "key": "a2"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -713,8 +702,8 @@
         }
       ],
       "passive": {
-        "name": "Backstab",
-        "description": "Shaco's basic attack critically strikes for extra damage when striking a unit from behind. Units can't be Backstabbed more than once every few seconds, modified by Shaco's cooldown reduction.",
+        "name": "",
+        "description": "",
         "image": {
           "full": "Jester_CarefulStrikes.png",
           "sprite": "passive3.png",

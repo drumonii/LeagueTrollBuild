@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.13.1",
+  "version": "9.16.1",
   "data": {
     "Xerath": {
       "id": "Xerath",
@@ -376,13 +376,13 @@
           "costType": " Mana",
           "maxammo": "1",
           "range": [
-            1100,
-            1100,
-            1100,
-            1100,
-            1100
+            1000,
+            1000,
+            1000,
+            1000,
+            1000
           ],
-          "rangeBurn": "1100",
+          "rangeBurn": "1000",
           "image": {
             "full": "XerathArcaneBarrage2.png",
             "sprite": "spell13.png",
@@ -552,13 +552,11 @@
             "label": [
               "Damage",
               "Number of Shots",
-              "Range",
               "Cooldown"
             ],
             "effect": [
               "{{ e3 }} -> {{ e3NL }}",
               "{{ e2 }} -> {{ e2NL }}",
-              "{{ e5 }} -> {{ e5NL }}",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
@@ -599,9 +597,9 @@
               200
             ],
             [
-              3200,
-              4400,
-              5600
+              5000,
+              5000,
+              5000
             ],
             [
               0.8,
@@ -635,7 +633,7 @@
             "3/4/5",
             "200/240/280",
             "200",
-            "3200/4400/5600",
+            "5000",
             "0.8",
             "50",
             "0",
@@ -652,11 +650,11 @@
           "costType": " Mana",
           "maxammo": "-1",
           "range": [
-            3200,
-            4400,
-            5600
+            5000,
+            5000,
+            5000
           ],
-          "rangeBurn": "3200/4400/5600",
+          "rangeBurn": "5000",
           "image": {
             "full": "XerathLocusOfPower2.png",
             "sprite": "spell13.png",

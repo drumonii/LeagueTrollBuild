@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.13.1",
+  "version": "9.16.1",
   "data": {
     "Ziggs": {
       "id": "Ziggs",
@@ -280,13 +280,13 @@
           },
           "maxrank": 5,
           "cooldown": [
-            24,
-            21,
+            20,
             18,
-            15,
+            16,
+            14,
             12
           ],
-          "cooldownBurn": "24/21/18/15/12",
+          "cooldownBurn": "20/18/16/14/12",
           "cost": [
             65,
             65,
@@ -385,7 +385,7 @@
           "vars": [
             {
               "link": "spelldamage",
-              "coeff": 0.35,
+              "coeff": 0.5,
               "key": "a1"
             }
           ],
@@ -579,10 +579,10 @@
           "maxrank": 3,
           "cooldown": [
             120,
-            105,
-            90
+            95,
+            70
           ],
-          "cooldownBurn": "120/105/90",
+          "cooldownBurn": "120/95/70",
           "cost": [
             100,
             100,
@@ -690,7 +690,7 @@
       ],
       "passive": {
         "name": "Short Fuse",
-        "description": "Every 12 seconds, Ziggs' next basic attack deals bonus magic damage. This cooldown is reduced whenever Ziggs uses an ability.",
+        "description": "Periodically, Ziggs' next basic attack deals bonus magic damage. This cooldown is reduced whenever Ziggs uses an ability.",
         "image": {
           "full": "ZiggsPassiveReady.png",
           "sprite": "passive4.png",

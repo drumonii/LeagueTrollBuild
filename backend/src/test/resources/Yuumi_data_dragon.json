@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.13.1",
+  "version": "9.16.1",
   "data": {
     "Yuumi": {
       "id": "Yuumi",
@@ -72,14 +72,13 @@
         {
           "id": "YuumiQ",
           "name": "Prowling Projectile",
-          "description": "Yuumi fires a missile, dealing damge to the first target hit. It deals bonus damage and slows if it takes at least 1 second to get to its target.<br><br>While Attached, the missile can be controlled with your cursor.",
-          "tooltip": "Yuumi summons an errant missile that deals <magicDamage><scaleAP>{{ totalmissiledamage }}</scaleAP> magic damage </magicDamage>to the first enemy hit. If the missile travels for {{ afterburnertimetooltip }} second before impacting, it deals <magicDamage><scaleAP>{{ empoweredmissiledamage }}</scaleAP> magic damage</magicDamage> instead and slows champions for {{ slowamount }}% decaying over {{ slowduration }} seconds.<br /><br />If cast while <span class=\"colorac6de0\">Attached</span>, Yuumi can control the missile using her mouse.",
+          "description": "Yuumi fires a missile, dealing damage to the first target hit. It deals bonus damage and slows if it takes at least 1 second to get to its target.<br><br>While Attached, the missile can be controlled with your cursor.",
+          "tooltip": "Yuumi summons an errant missile that deals <magicDamage><scaleAP>{{ totalmissiledamage }}</scaleAP> magic damage </magicDamage>to the first enemy hit. If the missile travels for {{ afterburnertimetooltip }} second before impacting, it deals <magicdamage><scaleAP>{{ empoweredmissiledamage }}</scaleAP> magic damage</magicdamage> instead and slows champions for {{ slowamount }}% decaying over {{ slowduration }} seconds.<br /><br />If cast while <span class=\"colorac6de0\">Attached</span>, Yuumi can control the missile using her mouse.",
           "leveltip": {
             "label": [
               "Base Damage",
               "Empowered Missile Base Damage",
               "Slow",
-              "Slow Duration",
               "Cooldown",
               "Mana Cost"
             ],
@@ -87,30 +86,29 @@
               "{{ missiledamage }} -> {{ missiledamageNL }}",
               "{{ empoweredmissilebasedamage }} -> {{ empoweredmissilebasedamageNL }}",
               "{{ slowamount }}% -> {{ slowamountNL }}%",
-              "{{ slowduration }} -> {{ slowdurationNL }}",
               "{{ cooldown }} -> {{ cooldownNL }}",
               "{{ cost }} -> {{ costNL }}"
             ]
           },
           "maxrank": 6,
           "cooldown": [
-            11,
-            10,
+            13.5,
+            12,
+            10.5,
             9,
-            8,
-            7,
+            7.5,
             6
           ],
-          "cooldownBurn": "11/10/9/8/7/6",
+          "cooldownBurn": "13.5/12/10.5/9/7.5/6",
           "cost": [
-            60,
-            65,
-            70,
             75,
             80,
-            85
+            85,
+            90,
+            95,
+            100
           ],
-          "costBurn": "60/65/70/75/80/85",
+          "costBurn": "75/80/85/90/95/100",
           "datavalues": {},
           "effect": [
             null,
@@ -386,7 +384,7 @@
             ],
             "effect": [
               "{{ healamountmin }} -> {{ healamountminNL }}",
-              "{{ healamountmin*2.000000 }} -> {{ healamountminnl*2.000000 }}",
+              "{{ healamountmin*2.300000 }} -> {{ healamountminnl*2.300000 }}",
               "{{ cost }} -> {{ costNL }}",
               "{{ ammorechargetime }} -> {{ ammorechargetimeNL }}"
             ]
@@ -401,13 +399,13 @@
           ],
           "cooldownBurn": "0.5",
           "cost": [
+            30,
+            40,
+            50,
             60,
-            65,
-            70,
-            75,
-            80
+            70
           ],
-          "costBurn": "60/65/70/75/80",
+          "costBurn": "30/40/50/60/70",
           "datavalues": {},
           "effect": [
             null,
@@ -635,7 +633,7 @@
       ],
       "passive": {
         "name": "Bop 'n' Block",
-        "description": "Periodically, when Yuumi attacks a champion, she restores mana and gains a shield that follows her, protecting her and the ally she's attached to.",
+        "description": "Periodically, when Yuumi attacks a champion, she gains a shield that follows her, protecting her and the ally she's attached to.",
         "image": {
           "full": "YuumiP.png",
           "sprite": "passive4.png",

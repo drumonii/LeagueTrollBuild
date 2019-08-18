@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.13.1",
+  "version": "9.16.1",
   "data": {
     "DrMundo": {
       "id": "DrMundo",
@@ -283,12 +283,10 @@
           "leveltip": {
             "label": [
               "Damage",
-              "Disable Reduction",
               "Cost"
             ],
             "effect": [
               " {{ e1 }} -> {{ e1NL }}",
-              "{{ e5 }}% -> {{ e5NL }}%",
               "{{ e2 }} -> {{ e2NL }}"
             ]
           },
@@ -341,10 +339,10 @@
               325
             ],
             [
-              10,
-              15,
-              20,
-              25,
+              30,
+              30,
+              30,
+              30,
               30
             ],
             [
@@ -389,7 +387,7 @@
             "10/15/20/25/30",
             "2",
             "325",
-            "10/15/20/25/30",
+            "30",
             "0",
             "0",
             "0",
@@ -435,25 +433,27 @@
               "Headbutt Cost",
               "Attack Damage Maximum",
               "Attack Damage Minimum",
-              "Magic Resist Maximum"
+              "Magic Resist Maximum",
+              "Cooldown"
             ],
             "effect": [
               "{{ e1 }}% -> {{ e1NL }}%",
               "{{ e2 }} -> {{ e2NL }}",
               "{{ e4 }} -> {{ e4NL }}",
               "{{ e5 }} -> {{ e5NL }}",
-              "{{ f3*100 }}% -> {{ f4*100 }}%"
+              "{{ f3*100 }}% -> {{ f4*100 }}%",
+              "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
           "maxrank": 5,
           "cooldown": [
             6,
-            6,
-            6,
-            6,
-            6
+            5.5,
+            5,
+            4.5,
+            4
           ],
-          "cooldownBurn": "6",
+          "cooldownBurn": "6/5.5/5/4.5/4",
           "cost": [
             0,
             0,

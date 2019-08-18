@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.13.1",
+  "version": "9.16.1",
   "data": {
     "Lux": {
       "id": "Lux",
@@ -144,30 +144,30 @@
           "leveltip": {
             "label": [
               "Damage",
-              "@AbilityResourceName@ Cost"
+              "Cooldown"
             ],
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
-              "{{ cost }} -> {{ costNL }}"
+              "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
           "maxrank": 5,
           "cooldown": [
+            13,
+            12,
+            11,
             10,
-            10,
-            10,
-            10,
-            10
+            9
           ],
-          "cooldownBurn": "10",
+          "cooldownBurn": "13/12/11/10/9",
           "cost": [
-            40,
-            45,
             50,
-            55,
-            60
+            50,
+            50,
+            50,
+            50
           ],
-          "costBurn": "40/45/50/55/60",
+          "costBurn": "50",
           "datavalues": {},
           "effect": [
             null,
@@ -287,16 +287,14 @@
           "id": "LuxPrismaticWave",
           "name": "Prismatic Barrier",
           "description": "Lux throws her wand and bends the light around any friendly target it touches, protecting them from enemy damage.",
-          "tooltip": "Throws Lux's wand in target direction, shielding her and all allied Champions it touches from {{ e2 }} <scaleAP>(+{{ a1 }})</scaleAP> damage for 3 seconds.<br /><br />Upon reaching its destination, it returns to Lux, shielding her and all allied Champions it touches for an additional {{ effect2amount*2.0 }} <scaleAP>(+{{ charabilitypower2.0 }})</scaleAP> damage for 3 seconds.",
+          "tooltip": "Throws Lux's wand in target direction, shielding allied champions it touches from {{ e2 }} <scaleAP>(+{{ a1 }})</scaleAP> damage for {{ e3 }} seconds. Upon reaching its destination it returns, stacking the effect.",
           "leveltip": {
             "label": [
               "Shield Amount",
-              "Returning Shield Amount",
               "Cooldown"
             ],
             "effect": [
               "{{ e2 }} -> {{ e2NL }}",
-              "{{ effect2amount*2.000000 }} -> {{ effect2amountnl*2.000000 }}",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
@@ -329,17 +327,17 @@
             ],
             [
               50,
-              65,
-              80,
-              95,
-              110
+              75,
+              100,
+              125,
+              150
             ],
             [
-              3,
-              3,
-              3,
-              3,
-              3
+              2.5,
+              2.5,
+              2.5,
+              2.5,
+              2.5
             ],
             [
               100,
@@ -394,8 +392,8 @@
           "effectBurn": [
             null,
             "2/4/6/8/10",
-            "50/65/80/95/110",
-            "3",
+            "50/75/100/125/150",
+            "2.5",
             "100",
             "0",
             "0",
@@ -407,7 +405,7 @@
           "vars": [
             {
               "link": "spelldamage",
-              "coeff": 0.2,
+              "coeff": 0.3,
               "key": "a1"
             }
           ],
@@ -584,27 +582,25 @@
         {
           "id": "LuxMaliceCannon",
           "name": "Final Spark",
-          "description": "After gathering energy, Lux fires a beam of light that deals damage to all targets in the area. If Final Spark helps take down a champion, part of its cooldown is refunded. In addition, triggers Lux's passive ability and refreshes the Illumination debuff duration.",
-          "tooltip": "Fires a dazzling ray of light dealing <magicDamage>{{ totaldamage }}</magicDamage> magic damage to all enemies in a line. Enemy champions that die within {{ resetassistwindow }} seconds of being hit by Final Spark refund {{ resetpercent*100 }}% of its cooldown.<br /><br />Final Spark ignites and refreshes the Illumination debuff.",
+          "description": "After gathering energy, Lux fires a beam of light that deals damage to all targets in the area. In addition, triggers Lux's passive ability and refreshes the Illumination debuff duration.",
+          "tooltip": "Fires a dazzling ray of light dealing <magicDamage>{{ totaldamage }}</magicDamage> magic damage to all enemies in a line.<br /><br />Final Spark ignites and refreshes the Illumination debuff.",
           "leveltip": {
             "label": [
               "Damage",
-              "Percent Cooldown Refund",
               "Cooldown"
             ],
             "effect": [
               "{{ damage }} -> {{ damageNL }}",
-              "{{ resetpercent*100.000000 }} -> {{ resetpercentnl*100.000000 }}",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
           "maxrank": 3,
           "cooldown": [
             80,
-            65,
-            50
+            60,
+            40
           ],
-          "cooldownBurn": "80/65/50",
+          "cooldownBurn": "80/60/40",
           "cost": [
             100,
             100,

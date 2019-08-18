@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.13.1",
+  "version": "9.16.1",
   "data": {
     "Qiyana": {
       "id": "Qiyana",
@@ -76,12 +76,10 @@
           "tooltip": "<spellActive>Elemental Wrath:</spellActive> Blast your weapon's enchantment in the target direction, consuming it. This projectile detonates to deal <physicalDamage>{{ enchanteddamage }} physical damage</physicalDamage> and:<br /><li><scaleMana>Ice Enchantment</scaleMana>: Briefly root enemies hit, then slow them by {{ slowpotency*-100 }}% for {{ slowduration }}s.<li><span class=\"colorba7221\">Rock Enchantment</span>: <physicalDamage>{{ tremordamage }}</physicalDamage> bonus damage to units below {{ critthreshold*100 }}% health.<li><scaleAP>Wild Enchantment</scaleAP>: Leaves a canopy trail that stealths you and grants {{ haste*100 }}% movement speed. Canopy fades after attacking from it, exiting it, or after {{ stealthduration }}s.<br /><br /><spellActive>Edge Of Ixtal:</spellActive> If you do not have an enchantment, slash in the target direction, dealing <physicalDamage>{{ vanilladamage }} physical damage</physicalDamage> to enemies in a small area.<br /><br /><rules>Both abilities deal {{ falloffdamage }} damage to targets beyond the first.</rules>",
           "leveltip": {
             "label": [
-              "Damage",
-              "Mana Cost"
+              "Damage"
             ],
             "effect": [
-              "{{ vanillabase }} -> {{ vanillabaseNL }}",
-              "{{ cost }} -> {{ costNL }}"
+              "{{ vanillabase }} -> {{ vanillabaseNL }}"
             ]
           },
           "maxrank": 5,
@@ -355,7 +353,7 @@
           "id": "QiyanaE",
           "name": "Audacity",
           "description": "Qiyana dashes to an enemy, damaging them.",
-          "tooltip": "Dash through target enemy and deal <physicalDamage>{{ damage }} physical damage</physicalDamage> to them.<br /><br /><rules>If <b>Elemental Wrath / Edge of Ixtal [{{ spell.qiyanaq:hotkey }}]</b> is cast during this ability, Qiyana will aim it at the target of her dash.</rules>",
+          "tooltip": "Dash through target enemy and deal <physicalDamage>{{ damage }} physical damage</physicalDamage> to them.<br /><br /><rules>If <b>Elemental Wrath / Edge of Ixtal [{{ spell.qiyanaq:hotkey }}]</b> is cast while this ability is targeting a champion, Qiyana will automatically aim it at her target.</rules>",
           "leveltip": {
             "label": [
               "Base Damage",
@@ -502,20 +500,20 @@
           "leveltip": {
             "label": [
               "Initial Damage",
-              "Percent Health Damaged"
+              "Cooldown"
             ],
             "effect": [
               "{{ basedamage }} -> {{ basedamageNL }}",
-              "{{ percenthpdamagebaserock*100.000000 }}% -> {{ percenthpdamagebaserocknl*100.000000 }}%"
+              "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
           "maxrank": 3,
           "cooldown": [
+            120,
             100,
-            100,
-            100
+            80
           ],
-          "cooldownBurn": "100",
+          "cooldownBurn": "120/100/80",
           "cost": [
             100,
             100,

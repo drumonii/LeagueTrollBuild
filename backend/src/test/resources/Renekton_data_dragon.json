@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.13.1",
+  "version": "9.16.1",
   "data": {
     "Renekton": {
       "id": "Renekton",
@@ -297,14 +297,16 @@
         {
           "id": "RenektonPreExecute",
           "name": "Ruthless Predator",
-          "description": "Renekton slashes his target twice, dealing moderate physical damage and stuns them for 0.75 seconds. If Renekton has more than 50 Fury, he slashes his target three times, dealing high physical damage and stuns them for 1.5 seconds.",
-          "tooltip": "Renekton's next attack strikes twice, stunning his target for {{ e3 }} seconds and dealing {{ e1 }} <scaleAD>(+{{ f1 }})</scaleAD> physical damage per hit ({{ e5 }} <scaleAD>(+{{ f2 }})</scaleAD> total).<br /><br />Each strike applies on-hit effects and generates <span class=\"colorFF6633\">Fury</span>. Hitting a champion generates an additional <span class=\"colorFF6633\">{{ e7 }} Fury</span>.<br /><br /><span class=\"colorFF6633\">50 Fury Bonus:</span> Renekton attacks three times, stunning his target for {{ e4 }} seconds and dealing a total of {{ e6 }} <scaleAD>(+{{ f3 }})</scaleAD> damage.  No longer generates <span class=\"colorFF6633\">Fury</span>.",
+          "description": "Renekton slashes his target twice, dealing moderate physical damage and stuns them for 0.75 seconds. If Renekton has more than 50 Fury, he slashes his target three times, destroying damage shields on the target, dealing high physical damage, and stunning them for 1.5 seconds.",
+          "tooltip": "Renekton's next attack strikes twice, stunning his target for {{ e3 }} seconds and dealing {{ e1 }} <scaleAD>(+{{ f1 }})</scaleAD> physical damage per hit ({{ e5 }} <scaleAD>(+{{ f2 }})</scaleAD> total).<br /><br />Each strike applies on-hit effects and generates <span class=\"colorFF6633\">Fury</span>. Hitting a champion generates an additional <span class=\"colorFF6633\">{{ e7 }} Fury</span>.<br /><br /><span class=\"colorFF6633\">50 Fury Bonus:</span> Renekton attacks three times, instantly destroying damage shields on the target before dealing a total of {{ e6 }} <scaleAD>(+{{ f3 }})</scaleAD> damage and stunning his target for {{ e4 }} seconds. No longer generates <span class=\"colorFF6633\">Fury</span>.",
           "leveltip": {
             "label": [
+              "Damage",
               "Bonus Damage",
               "Cooldown"
             ],
             "effect": [
+              "{{ e5 }} -> {{ e5NL }}",
               "{{ e6 }} -> {{ e6NL }}",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]

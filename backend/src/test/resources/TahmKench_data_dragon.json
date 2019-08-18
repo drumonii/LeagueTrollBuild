@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.13.1",
+  "version": "9.16.1",
   "data": {
     "TahmKench": {
       "id": "TahmKench",
@@ -69,7 +69,7 @@
         "hpperlevel": 100,
         "mp": 325,
         "mpperlevel": 40,
-        "movespeed": 345,
+        "movespeed": 335,
         "armor": 47,
         "armorperlevel": 3.5,
         "spellblock": 32.1,
@@ -91,28 +91,26 @@
           "id": "TahmKenchQ",
           "name": "Tongue Lash",
           "description": "Tahm Kench lashes out with his tongue, damaging and slowing the first unit hit. This ability gains a stun after three stacks of An Acquired Taste.",
-          "tooltip": "Damage the first enemy hit for {{ e3 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage and slow them by {{ e4 }}% for {{ e5 }}s. Champions with 3 stacks of An Acquired Taste will additionally be stunned for {{ e6 }}s.<br /><br />Activate <span class=\"color0bf7de\">Devour</span> while your tongue is in midair to devour monsters/minions from a distance.",
+          "tooltip": "Damage the first enemy hit for {{ e3 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage and slow them by {{ e4 }}% for {{ e5 }}s. Champions with 3 stacks of An Acquired Taste will also be stunned for {{ e6 }} seconds.<br /><br />Activate <span class=\"color0bf7de\">Devour</span> while your tongue is in midair to devour monsters/minions from a distance.",
           "leveltip": {
             "label": [
               "Base Damage",
-              "Slow",
-              "Cooldown"
+              "Slow"
             ],
             "effect": [
               "{{ e3 }} -> {{ e3NL }}",
-              "{{ effect4amount*-100.000000 }}% -> {{ effect4amountnl*-100.000000 }}%",
-              "{{ cooldown }} -> {{ cooldownNL }}"
+              "{{ effect4amount*-100.000000 }}% -> {{ effect4amountnl*-100.000000 }}%"
             ]
           },
           "maxrank": 5,
           "cooldown": [
-            8,
-            7,
-            6,
             5,
-            4
+            5,
+            5,
+            5,
+            5
           ],
-          "cooldownBurn": "8/7/6/5/4",
+          "cooldownBurn": "5",
           "cost": [
             50,
             50,
@@ -146,11 +144,18 @@
               280
             ],
             [
+              30,
+              40,
               50,
-              55,
               60,
-              65,
               70
+            ],
+            [
+              3,
+              3,
+              3,
+              3,
+              3
             ],
             [
               2,
@@ -158,13 +163,6 @@
               2,
               2,
               2
-            ],
-            [
-              1.5,
-              1.5,
-              1.5,
-              1.5,
-              1.5
             ],
             [
               0,
@@ -200,9 +198,9 @@
             "925",
             "1000",
             "80/130/180/230/280",
-            "50/55/60/65/70",
+            "30/40/50/60/70",
+            "3",
             "2",
-            "1.5",
             "0",
             "0",
             "0",
@@ -244,14 +242,10 @@
           "leveltip": {
             "label": [
               "Base Damage",
-              "Maximum Health Damage",
-              "Monster Damage Cap",
               "Minion Spit Damage"
             ],
             "effect": [
               "{{ e7 }} -> {{ e7NL }}",
-              "{{ e3 }}% -> {{ e3NL }}%",
-              "{{ e2 }} -> {{ e2NL }}",
               "{{ e7 }} -> {{ e7NL }}"
             ]
           },
@@ -283,18 +277,18 @@
               4
             ],
             [
-              400,
-              450,
               500,
-              550,
-              600
+              500,
+              500,
+              500,
+              500
             ],
             [
-              9,
-              10,
               11,
-              12,
-              13
+              11,
+              11,
+              11,
+              11
             ],
             [
               0.3,
@@ -349,8 +343,8 @@
           "effectBurn": [
             null,
             "4",
-            "400/450/500/550/600",
-            "9/10/11/12/13",
+            "500",
+            "11",
             "0.3/0.35/0.4/0.45/0.5",
             "80/120/160/200/240",
             "0",
@@ -396,26 +390,24 @@
           "id": "TahmKenchE",
           "name": "Thick Skin",
           "description": "Tahm Kench turns incoming damage into gray health. As gray health decays, Tahm Kench is healed for a percentage of the gray health amount. When activated, this ability turns all gray health into a shield.",
-          "tooltip": "<spellPassive>Passive:</spellPassive> {{ e3 }}% of the Damage taken while this ability is not cooling down is converted to gray health. If allowed to decay, {{ e2 }}% of gray health will turn back into health.<br /><br /><spellPassive>Active:</spellPassive> Convert all of your gray health into a shield that lasts {{ e1 }} seconds.",
+          "tooltip": "<spellPassive>Passive:</spellPassive> {{ e3 }}% of the Damage taken while this ability is inactive is converted to gray health. If allowed to decay, it is regenerated as health.<br /><br /><spellPassive>Active:</spellPassive> Convert all of your gray health into a shield that lasts {{ e1 }} seconds.",
           "leveltip": {
             "label": [
-              "Damage to Gray Health Conversion",
-              "Gray Health to Healing Conversion"
+              "Damage to Gray Health Conversion"
             ],
             "effect": [
-              "{{ effect3amount*100.000000 }}% -> {{ effect3amountnl*100.000000 }}%",
-              "{{ effect2amount*100.000000 }}% -> {{ effect2amountnl*100.000000 }}%"
+              "{{ effect3amount*100.000000 }}% -> {{ effect3amountnl*100.000000 }}%"
             ]
           },
           "maxrank": 5,
           "cooldown": [
-            6,
-            6,
-            6,
-            6,
-            6
+            3,
+            3,
+            3,
+            3,
+            3
           ],
-          "cooldownBurn": "6",
+          "cooldownBurn": "3",
           "cost": [
             0,
             0,
@@ -428,25 +420,25 @@
           "effect": [
             null,
             [
-              3,
-              3,
-              3,
-              3,
-              3
+              2,
+              2,
+              2,
+              2,
+              2
             ],
             [
-              20,
-              25,
-              30,
-              35,
-              40
+              0.75,
+              0.75,
+              0.75,
+              0.75,
+              0.75
             ],
             [
-              80,
-              85,
-              90,
-              95,
-              100
+              45,
+              50,
+              55,
+              60,
+              65
             ],
             [
               0,
@@ -500,9 +492,9 @@
           ],
           "effectBurn": [
             null,
-            "3",
-            "20/25/30/35/40",
-            "80/85/90/95/100",
+            "2",
+            "0.75",
+            "45/50/55/60/65",
             "0",
             "0",
             "0",

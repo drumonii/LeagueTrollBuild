@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.13.1",
+  "version": "9.16.1",
   "data": {
     "Fiora": {
       "id": "Fiora",
@@ -46,7 +46,7 @@
           "id": "114004",
           "num": 4,
           "name": "PROJECT: Fiora",
-          "chromas": false
+          "chromas": true
         },
         {
           "id": "114005",
@@ -417,22 +417,24 @@
           "leveltip": {
             "label": [
               "Critical Strike Damage",
-              "Cooldown"
+              "Cooldown",
+              "Attack Speed %"
             ],
             "effect": [
               "{{ e6 }}% -> {{ e6NL }}%",
-              "{{ cooldown }} -> {{ cooldownNL }}"
+              "{{ cooldown }} -> {{ cooldownNL }}",
+              "{{ e4 }} -> {{ e4NL }}"
             ]
           },
           "maxrank": 5,
           "cooldown": [
-            13,
             11,
-            9,
-            7,
+            9.5,
+            8,
+            6.5,
             5
           ],
-          "cooldownBurn": "13/11/9/7/5",
+          "cooldownBurn": "11/9.5/8/6.5/5",
           "cost": [
             40,
             40,
@@ -467,10 +469,10 @@
             ],
             [
               50,
-              50,
-              50,
-              50,
-              50
+              60,
+              70,
+              80,
+              90
             ],
             [
               100,
@@ -520,7 +522,7 @@
             "3",
             "1",
             "30",
-            "50",
+            "50/60/70/80/90",
             "100",
             "160/170/180/190/200",
             "5/10/15/20/25",

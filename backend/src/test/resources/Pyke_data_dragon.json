@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.13.1",
+  "version": "9.16.1",
   "data": {
     "Pyke": {
       "id": "Pyke",
@@ -34,6 +34,12 @@
           "id": "555009",
           "num": 9,
           "name": "Blood Moon Pyke",
+          "chromas": true
+        },
+        {
+          "id": "555016",
+          "num": 16,
+          "name": "PROJECT: Pyke",
           "chromas": true
         }
       ],
@@ -87,7 +93,7 @@
         {
           "id": "PykeQ",
           "name": "Bone Skewer",
-          "description": "Pyke either stabs enemies in front of him or pulls an enemy towards him.",
+          "description": "Pyke either stabs an enemy in front of him or pulls an enemy towards him.",
           "tooltip": "<scaleAD>Tap:</scaleAD> Pyke stabs in a direction, damaging the nearest enemy (preferring champions).<br /><br /><scaleAD>Hold: </scaleAD>Pyke throws his harpoon, pulling the first enemy struck towards him.<br /><br />Deals {{ e1 }} <scaleAD>(+{{ a1 }})</scaleAD> physical damage and slows by {{ e9 }}% for {{ e8 }} second.",
           "leveltip": {
             "label": [
@@ -375,8 +381,8 @@
         {
           "id": "PykeE",
           "name": "Phantom Undertow",
-          "description": "Pyke dashes and leaves behind a phantom that will return to him, stunning enemies along its path.",
-          "tooltip": "Pyke dashes, leaving a drowned phantom behind him. After a short delay the phantom returns to Pyke, striking enemy champions along its path. Enemies hit take {{ e1 }} <scaleAD>(+{{ a1 }})</scaleAD> physical damage and are stunned for {{ e2 }} <scaleLethality>(+{{ f10.01 }})</scaleLethality> seconds.",
+          "description": "Pyke dashes and leaves behind a phantom that will return to him, stunning enemy champions along its path.",
+          "tooltip": "Pyke dashes, leaving a drowned phantom behind him. After a short delay the phantom returns to Pyke, striking enemies champions along its path, stunning them for {{ e2 }} <scaleLethality>(+{{ f10.01 }})</scaleLethality> seconds. Champions hit also take {{ e1 }} <scaleAD>(+{{ a1 }})</scaleAD> physical damage.",
           "leveltip": {
             "label": [
               "Damage"
@@ -521,7 +527,7 @@
           "id": "PykeR",
           "name": "Death From Below",
           "description": "Pyke blinks to and executes low health enemies, allowing him to cast this spell again and granting additional gold to an ally who assists.",
-          "tooltip": "Pyke strikes all enemy champions in an X, blinking to and executing targets below <trueDamage>{{ rdamage }}</trueDamage> health. Enemies not executed instead take physical damage equal to the threshold.<br /><br />When an enemy champion dies in the X from any source, an assisting ally also gains <gold>full kill gold</gold> and Pyke may re-cast Death From Below again within {{ rrecastduration }} seconds.<br /><br /><rules>Total gold granted: <gold>{{ f9 }}</gold></rules>",
+          "tooltip": "Pyke strikes all enemy champions in an X, blinking to and executing targets below {{ rbasedamage }} <scaleAD>(+{{ raddamage }})</scaleAD> <scaleLethality>(+{{ rlethalitydamage }})</scaleLethality> health. Enemies not executed instead take physical damage equal to {{ reduceddamage*100 }}% of the threshold.<br /><br />When an enemy champion dies in the X from any source, Pyke and an assisting ally both receive an additional <gold>Cut</gold> equal to full kill gold, and Pyke may re-cast Death From Below again within {{ rrecastduration }} seconds.<br /><br /><rules>Total gold shared with allies: <gold>{{ f9 }}</gold><br />Total gold kept for self: <gold>{{ f10 }}</gold></rules>",
           "leveltip": {
             "label": [
               "Cooldown"

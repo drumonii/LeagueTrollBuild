@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.13.1",
+  "version": "9.16.1",
   "data": {
     "Katarina": {
       "id": "Katarina",
@@ -580,7 +580,7 @@
           "id": "KatarinaR",
           "name": "Death Lotus",
           "description": "Katarina becomes a flurry of blades, dealing massive magic damage while she channels to the 3 nearest enemy champions.",
-          "tooltip": "Katarina becomes a flurry of blades, rapidly throwing knives at the three nearest enemy champions, dealing <magicDamage>{{ damagecalc }} magic damage</magicDamage> per knife. Total over {{ duration }} seconds to each enemy: <magicDamage>{{ totaldamagecalc }} magic damage</magicDamage>.<br /><br />Applies Grievous Wounds to all enemies struck, reducing their healing and regeneration by 40%.",
+          "tooltip": "Katarina becomes a flurry of blades, rapidly throwing knives at the three nearest enemy champions, dealing <magicDamage>{{ damagecalc }} magic damage</magicDamage> per knife. Total over {{ duration }} seconds to each enemy: <magicDamage>{{ totaldamagecalc }} magic damage</magicDamage>.<br /><br />Applies Grievous Wounds to all enemies struck, reducing their healing and regeneration by {{ grievousamount*-100 }}% for {{ grievousduration }} seconds.",
           "leveltip": {
             "label": [
               "Damage Per Knife",
@@ -694,7 +694,7 @@
       ],
       "passive": {
         "name": "Voracity",
-        "description": "Whenever an enemy champion dies that Katarina has damaged in the last 3 seconds, her ability cooldowns are reduced by 15 seconds.<br><br>If Katarina picks up a <font color='#FFF673'>Dagger</font>, she uses it to slash through all nearby enemies, dealing magic damage.",
+        "description": "Whenever an enemy champion dies that Katarina has damaged in the last @ResetWindow@ seconds, her ability cooldowns are reduced by @ResetCDR@ seconds.<br><br>If Katarina picks up a <font color='#FFF673'>Dagger</font>, she uses it to slash through all nearby enemies, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
         "image": {
           "full": "Katarina_Passive.png",
           "sprite": "passive1.png",

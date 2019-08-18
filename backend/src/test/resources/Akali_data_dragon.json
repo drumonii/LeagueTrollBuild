@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.13.1",
+  "version": "9.16.1",
   "data": {
     "Akali": {
       "id": "Akali",
@@ -83,6 +83,12 @@
           "num": 13,
           "name": "K/DA Akali Prestige Edition",
           "chromas": false
+        },
+        {
+          "id": "84014",
+          "num": 14,
+          "name": "PROJECT: Akali",
+          "chromas": true
         }
       ],
       "lore": "Abandoning the Kinkou Order and her title of the Fist of Shadow, Akali now strikes alone, ready to be the deadly weapon her people need. Though she holds onto all she learned from her master Shen, she has pledged to defend Ionia from its enemies, one kill at a time. Akali may strike in silence, but her message will be heard loud and clear: fear the assassin with no master.",
@@ -107,17 +113,17 @@
         "difficulty": 7
       },
       "stats": {
-        "hp": 550,
-        "hpperlevel": 85,
+        "hp": 575,
+        "hpperlevel": 95,
         "mp": 200,
         "mpperlevel": 0,
         "movespeed": 345,
         "armor": 23,
         "armorperlevel": 3.5,
-        "spellblock": 32.1,
+        "spellblock": 37,
         "spellblockperlevel": 1.25,
         "attackrange": 125,
-        "hpregen": 6,
+        "hpregen": 8,
         "hpregenperlevel": 0.5,
         "mpregen": 50,
         "mpregenperlevel": 0,
@@ -274,30 +280,26 @@
           "id": "AkaliW",
           "name": "Twilight Shroud",
           "description": "Akali drops a cover of smoke. While inside the shroud, Akali becomes invisible and unable to be selected by enemy spells and attacks and gains Movement Speed. Attacking or using abilities will briefly reveal her.",
-          "tooltip": "Drops a smoke bomb, unleashing a spreading cover of smoke lasting {{ baseduration }} seconds.<span class=\"size8\"><br /><br /></span>The smoke <keywordStealth>obscures</keywordStealth> Akali from enemy vision and grants her {{ e6 }}% movement speed.<span class=\"size8\"><br /><br /></span>Entering or exiting <keywordStealth>obscured</keywordStealth> extends Shroud's duration.",
+          "tooltip": "Drops a smoke bomb, unleashing a spreading cover of smoke lasting {{ baseduration }} seconds.<br /><br />The smoke grants Akali <keywordStealth>invisibility</keywordStealth> and {{ e6 }}% movement speed.<br /><br /><u><keywordStealth>Stealth - Invisible</keywordStealth></u>: Akali can only be revealed by nearby enemy Turrets or <span class=\"size16 coloree91d7\">True Sight</span>.",
           "leveltip": {
             "label": [
-              "Energy Restore",
               "Movement Speed",
-              "Base Duration",
-              "Cooldown"
+              "Duration"
             ],
             "effect": [
-              "{{ energyrestore }} -> {{ energyrestoreNL }}",
               "{{ movementspeed }}% -> {{ movementspeedNL }}%",
-              "{{ baseduration }} -> {{ basedurationNL }}",
-              "{{ cooldown }} -> {{ cooldownNL }}"
+              "{{ baseduration }} -> {{ basedurationNL }}"
             ]
           },
           "maxrank": 5,
           "cooldown": [
-            25,
-            22,
-            19,
-            16,
-            13
+            20,
+            20,
+            20,
+            20,
+            20
           ],
-          "cooldownBurn": "25/22/19/16/13",
+          "cooldownBurn": "20",
           "cost": [
             0,
             0,
@@ -373,11 +375,11 @@
               7
             ],
             [
-              3,
-              3,
-              3,
-              3,
-              3
+              0,
+              0,
+              0,
+              0,
+              0
             ]
           ],
           "effectBurn": [
@@ -391,7 +393,7 @@
             "1",
             "0",
             "5/5.5/6/6.5/7",
-            "3"
+            "0"
           ],
           "vars": [],
           "costType": " Energy",
@@ -577,11 +579,11 @@
           },
           "maxrank": 3,
           "cooldown": [
-            100,
-            85,
-            70
+            120,
+            110,
+            100
           ],
-          "cooldownBurn": "100/85/70",
+          "cooldownBurn": "120/110/100",
           "cost": [
             0,
             0,

@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.13.1",
+  "version": "9.16.1",
   "data": {
     "Galio": {
       "id": "Galio",
@@ -88,7 +88,7 @@
         "hp": 562,
         "hpperlevel": 112,
         "mp": 500,
-        "mpperlevel": 20,
+        "mpperlevel": 40,
         "movespeed": 335,
         "armor": 24,
         "armorperlevel": 3.5,
@@ -126,21 +126,21 @@
           },
           "maxrank": 5,
           "cooldown": [
-            10,
-            9.5,
-            9,
-            8.5,
-            8
+            14,
+            13,
+            12,
+            11,
+            10
           ],
-          "cooldownBurn": "10/9.5/9/8.5/8",
+          "cooldownBurn": "14/13/12/11/10",
           "cost": [
+            70,
+            75,
             80,
-            90,
-            100,
-            110,
-            120
+            85,
+            90
           ],
-          "costBurn": "80/90/100/110/120",
+          "costBurn": "70/75/80/85/90",
           "datavalues": {},
           "effect": [
             null,
@@ -254,7 +254,7 @@
           "id": "GalioW",
           "name": "Shield of Durand",
           "description": "Galio charges a defensive stance, moving slowly. Upon releasing the charge, Galio will taunt and damage nearby enemies.",
-          "tooltip": "<span class=\"colorFF9900\">Passive:</span> After not taking damage for {{ e6 }} seconds Galio gains a shield that absorbs <span class=\"colorFF0000\">{{ f3 }}</span> magic damage.<br /><br /><span class=\"colorFF9900\">First Cast:</span> Galio starts to charge, gaining {{ e1 }} <span class=\"colorFF00FF\">(+{{ f2 }})</span><span class=\"color99FF99\">(+{{ f4 }})</span>% Damage Reduction from Magic Damage and {{ f5 }}% of that amount as Damage Reduction from Physical Damage. While charging, Galio slows himself by {{ e3 }}%.<br /><br /><span class=\"colorFF9900\">Second Cast:</span> Galio taunts nearby enemy champions for {{ e4 }} to {{ e7 }} seconds, deals {{ f8 }} <span class=\"color99FF99\">(+{{ f9 }})</span> to {{ f10 }} <span class=\"color99FF99\">(+{{ f11 }})</span> damage, and refreshes the Damage Reduction for {{ e8 }} seconds. Taunt duration, damage, and radius increase with charge time.<br /><br /><span class=\"colorDDDD77\">Shield of Durand's charge cannot be interrupted by crowd control.</span>",
+          "tooltip": "<span class=\"colorFF9900\">Passive:</span> After not taking damage for {{ e6 }} seconds Galio gains a shield that absorbs <span class=\"colorFF0000\">{{ f3 }}</span> magic damage.<br /><br /><span class=\"colorFF9900\">First Cast:</span> Galio starts to charge, gaining {{ e1 }} <span class=\"colorFF00FF\">(+{{ f2 }})</span><span class=\"color99FF99\">(+{{ f4 }})</span>% Damage Reduction from Magic Damage and {{ f5 }}% of that amount as Damage Reduction from Physical Damage. While charging, Galio slows himself by {{ e3 }}%.<br /><br /><span class=\"colorFF9900\">Second Cast:</span> Galio taunts nearby enemy champions for {{ e4 }} to {{ e7 }} seconds, deals {{ f8 }} <span class=\"color99FF99\">(+{{ f9 }})</span> to {{ f10 }} <span class=\"color99FF99\">(+{{ f11 }})</span> damage, and refreshes the Damage Reduction for {{ e8 }} seconds. Taunt duration, damage, and radius increase with charge time.<br />",
           "leveltip": {
             "label": [
               "Shield Health Ratio",
@@ -306,11 +306,11 @@
               2
             ],
             [
-              30,
-              30,
-              30,
-              30,
-              30
+              15,
+              15,
+              15,
+              15,
+              15
             ],
             [
               0.5,
@@ -366,7 +366,7 @@
             null,
             "20/25/30/35/40",
             "2",
-            "30",
+            "15",
             "0.5",
             "8/11/14/17/20",
             "12",
@@ -658,7 +658,7 @@
       ],
       "passive": {
         "name": "Colossal Smash",
-        "description": "Every few seconds, Galio's next basic attack deals bonus magic damage in an area. Colossal Smash's cooldown is reduced when Galio hits champions with his spells.",
+        "description": "Every few seconds, Galio's next basic attack deals bonus magic damage in an area.",
         "image": {
           "full": "Galio_Passive.png",
           "sprite": "passive1.png",
@@ -1964,6 +1964,7 @@
           "customTag": "",
           "sortrank": 0,
           "extensionPage": false,
+          "useObviousCheckmark": false,
           "customPanel": null,
           "blocks": [
             {
@@ -2021,12 +2022,12 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3010",
+                  "id": "3145",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "1026",
+                  "id": "3067",
                   "count": 1,
                   "hideCount": false
                 }
@@ -2054,14 +2055,9 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3027",
+                  "id": "3152",
                   "count": 1,
                   "hideCount": false
-                },
-                {
-                  "id": "3029",
-                  "count": 1,
-                  "hidecount": false
                 },
                 {
                   "id": "3102",
@@ -2092,7 +2088,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3157",
+                  "id": "3194",
                   "count": 1,
                   "hideCount": false
                 },
@@ -2125,7 +2121,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3194",
+                  "id": "3285",
                   "count": 1,
                   "hideCount": false
                 },
@@ -2136,11 +2132,6 @@
                 },
                 {
                   "id": "3193",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3907",
                   "count": 1,
                   "hideCount": false
                 }

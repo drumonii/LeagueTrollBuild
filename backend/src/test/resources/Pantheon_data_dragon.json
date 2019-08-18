@@ -1,13 +1,13 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.13.1",
+  "version": "9.16.1",
   "data": {
     "Pantheon": {
       "id": "Pantheon",
       "key": "80",
       "name": "Pantheon",
-      "title": "the Artisan of War",
+      "title": "the Unbreakable Spear",
       "image": {
         "full": "Pantheon.png",
         "sprite": "champion2.png",
@@ -63,7 +63,7 @@
         {
           "id": "80007",
           "num": 7,
-          "name": "Slayer Pantheon",
+          "name": "Zombie Slayer Pantheon",
           "chromas": false
         },
         {
@@ -73,17 +73,17 @@
           "chromas": false
         }
       ],
-      "lore": "The peerless warrior known as Pantheon is a nigh-unstoppable paragon of battle. He was born among the Rakkor, a warlike people living on the flanks of Mount Targon, and after climbing the mountain's treacherous peak and being deemed worthy, he was chosen to become the earthly incarnation of the celestial Aspect of War. Imbued with inhuman power, he relentlessly seeks the enemies of Targon, leaving only corpses in his wake.",
-      "blurb": "The peerless warrior known as Pantheon is a nigh-unstoppable paragon of battle. He was born among the Rakkor, a warlike people living on the flanks of Mount Targon, and after climbing the mountain's treacherous peak and being deemed worthy, he was...",
+      "lore": "Once an unwilling host to the Aspect of War, Atreus survived when the celestial power within him was slain, refusing to succumb to a blow that tore stars from the heavens. In time, he learned to embrace the power of his own mortality, and the stubborn resilience that goes along with it. Atreus now opposes the divine as Pantheon reborn, his unbreakable will fueling the fallen Aspect's weapons on the field of battle.",
+      "blurb": "Once an unwilling host to the Aspect of War, Atreus survived when the celestial power within him was slain, refusing to succumb to a blow that tore stars from the heavens. In time, he learned to embrace the power of his own mortality, and the stubborn...",
       "allytips": [
-        "Using Aegis of Zeonia quickly followed by Heartseeker Strike can devastate your enemies.",
-        "Using Spear Shot frequently in a battle, along with Attack Speed items, can help defensively by charging Aegis Protection.",
-        "Using Grand Skyfall to assist your allies across the map can quickly turn the tides of battle, putting your allies at an advantage."
+        "Mortal Will activates after 5 spells or basic attacks - plan your way through fights to allow you to activate it more than once.",
+        "Whittle the enemy down with Comet Spears before you jump in.",
+        "If an enemy is going to get out of range of your Aegis Assault, you can recast the spell to immediately fire the shield slam."
       ],
       "enemytips": [
-        "Keeping yourself hidden in brush can make it harder for Pantheon to target you with Grand Skyfall.",
-        "Watch out for when Pantheon has a stunning or snaring partner in lane with him (example: Morgana, Sion) as he can cause devastating damage with his Heartseeker Strike.",
-        "Pantheon's Aegis Protection shield will block a single champion basic attack or turret shot, but he's vulnerable until he brings it back up again by attacking or using abilities."
+        "Pantheon's Aegis Assault makes him invulnerable from the front. Get behind him or wait it out.",
+        "Be careful near Pantheon if your health is low - a thrown Comet Spear executes low health enemies.",
+        "Grand Starfall gives several seconds of warning before Pantheon arrives. Use this time to get out of the way or to form a plan to deal with him."
       ],
       "tags": [
         "Fighter",
@@ -97,74 +97,78 @@
         "difficulty": 4
       },
       "stats": {
-        "hp": 579.16,
-        "hpperlevel": 87,
+        "hp": 580,
+        "hpperlevel": 95,
         "mp": 317.12,
         "mpperlevel": 31,
         "movespeed": 355,
-        "armor": 37,
-        "armorperlevel": 3.9,
+        "armor": 40,
+        "armorperlevel": 3.75,
         "spellblock": 32.1,
         "spellblockperlevel": 1.25,
-        "attackrange": 150,
-        "hpregen": 8,
+        "attackrange": 175,
+        "hpregen": 10,
         "hpregenperlevel": 0.65,
         "mpregen": 7.356,
         "mpregenperlevel": 0.45,
         "crit": 0,
         "critperlevel": 0,
         "attackdamage": 64,
-        "attackdamageperlevel": 2.9,
+        "attackdamageperlevel": 3.3,
         "attackspeedperlevel": 2.95,
-        "attackspeed": 0.696
+        "attackspeed": 0.644
       },
       "spells": [
         {
           "id": "PantheonQ",
-          "name": "Spear Shot",
-          "description": "Pantheon hurls his spear at an opponent, dealing damage.",
-          "tooltip": "Pantheon hurls his spear at an opponent, dealing {{ e2 }} <scaleAD>(+{{ f1 }})</scaleAD> physical damage. ",
+          "name": "Comet Spear",
+          "description": "Pantheon either thrusts his spear or throws his spear in the chosen direction.",
+          "tooltip": "<span class=\"colorFF8C00\">Tap:</span> Pantheon thrusts his spear, dealing <physicalDamage>{{ tapdamagecalc }} physical damage</physicalDamage> to enemies hit. Refunds {{ tapcooldownrefund*100 }}% of Comet Spear's cooldown.<br /><br /><span class=\"colorFF8C00\">Hold:</span> Pantheon hurls his spear, dealing <physicalDamage>{{ holddamagecalc }} physical damage</physicalDamage> to the first enemy hit and {{ damagefalloff*100 }}% less to further targets. Deals <physicalDamage>{{ executedamagecalcmodified }} physical damage</physicalDamage> to targets below {{ crithealththreshold*100 }}% health instead.<br /><br /><span class=\"colorEDDA74\">Mortal Will Bonus:</span> Deals an additional <physicalDamage>{{ empowereddamagecalc }} physical damage</physicalDamage> and slow the target by {{ slowamount*100 }}% for {{ slowduration }} seconds.",
           "leveltip": {
             "label": [
-              "Damage"
+              "Base Damage",
+              "Execute Base Damage",
+              "Cooldown"
             ],
             "effect": [
-              "{{ e2 }} -> {{ e2NL }}"
+              "{{ tapdamage }} -> {{ tapdamageNL }}",
+              "{{ executebasedamage }} -> {{ executebasedamageNL }}",
+              "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
           "maxrank": 5,
           "cooldown": [
-            4,
-            4,
-            4,
-            4,
-            4
+            10,
+            9.5,
+            9,
+            8.5,
+            8
           ],
-          "cooldownBurn": "4",
+          "cooldownBurn": "10/9.5/9/8.5/8",
           "cost": [
-            45,
-            45,
-            45,
-            45,
-            45
+            40,
+            40,
+            40,
+            40,
+            40
           ],
-          "costBurn": "45",
+          "costBurn": "40",
           "datavalues": {},
           "effect": [
             null,
             [
-              100,
-              115,
-              130,
-              145,
-              160
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              75,
-              110,
-              155,
-              195,
-              235
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -225,8 +229,8 @@
           ],
           "effectBurn": [
             null,
-            "100/115/130/145/160",
-            "75/110/155/195/235",
+            "0",
+            "0",
             "0",
             "0",
             "0",
@@ -236,23 +240,17 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "bonusattackdamage",
-              "coeff": 1.4,
-              "key": "f1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
-            600,
-            600,
-            600,
-            600,
-            600
+            575,
+            575,
+            575,
+            575,
+            575
           ],
-          "rangeBurn": "600",
+          "rangeBurn": "575",
           "image": {
             "full": "PantheonQ.png",
             "sprite": "spell8.png",
@@ -266,16 +264,16 @@
         },
         {
           "id": "PantheonW",
-          "name": "Aegis of Zeonia",
-          "description": "Pantheon leaps at an enemy and bashes them with his shield, stunning them. After finishing the attack, Pantheon readies himself to block the next attack.",
-          "tooltip": "Pantheon leaps at target enemy, dealing {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage and stunning them for {{ e2 }} second. Pantheon also instantly refreshes his Aegis Protection.",
+          "name": "Shield Vault",
+          "description": "Pantheon dashes to a target, damaging and stunning them.",
+          "tooltip": "Pantheon dashes to an enemy, dealing <physicalDamage>{{ damagecalc }} physical damage</physicalDamage> and stunning them for {{ stunduration }} second.<br /><br /><span class=\"colorEDDA74\">Mortal Will Bonus:</span> Pantheon's next attack strikes {{ empowerednumhits }} times, dealing a total of <physicalDamage>{{ empowereddamagemultcalcmodified }} physical damage</physicalDamage>.",
           "leveltip": {
             "label": [
               "Damage",
               "Cooldown"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
+              "{{ basedamage }} -> {{ basedamageNL }}",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
@@ -300,25 +298,25 @@
           "effect": [
             null,
             [
-              60,
-              85,
-              110,
-              135,
-              160
+              50,
+              75,
+              100,
+              125,
+              150
             ],
             [
-              1,
-              1,
-              1,
-              1,
-              1
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              0.5
             ],
             [
-              0,
-              0,
-              0,
-              0,
-              0
+              5,
+              5,
+              5,
+              5,
+              5
             ],
             [
               0,
@@ -372,9 +370,9 @@
           ],
           "effectBurn": [
             null,
-            "60/85/110/135/160",
-            "1",
-            "0",
+            "50/75/100/125/150",
+            "0.5",
+            "5",
             "0",
             "0",
             "0",
@@ -383,13 +381,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 1,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -413,68 +405,66 @@
         },
         {
           "id": "PantheonE",
-          "name": "Heartseeker Strike",
-          "description": "Pantheon focuses and unleashes 3 swift strikes to the area in front of him dealing damage to all enemies. Pantheon also becomes more aware of his enemy's vital spots, allowing him to always crit enemies below 15% Health.",
-          "tooltip": "<spellPassive>Passive: </spellPassive>Pantheon's basic attacks and Spear Shot gain 100% critical strike chance against targets below {{ e3 }}% Health.<br /><br /><spellActive>Active: </spellActive>Pantheon focuses and delivers {{ e4 }} swift strikes in front of him for a total of {{ e1 }} <scaleAD>(+{{ a1 }})</scaleAD> physical damage (deals {{ e2 }}% damage to minions and monsters).<br /><br />Damage per Strike: <totalValue>{{ f1 }}</totalValue>",
+          "name": "Aegis Assault",
+          "description": "Pantheon sets his shield, becoming invulnerable to damage from the front and striking repeatedly with his spear.",
+          "tooltip": "Pantheon braces his shield and engages enemies in a chosen direction for {{ shieldduration }} seconds, becoming immune to damage from that direction and dealing <physicalDamage>{{ damagecalc }} physical damage</physicalDamage> over the duration.<br /><br />The last hit slams with Pantheon's shield, dealing <physicalDamage>{{ shielddamagecalc }} physical damage</physicalDamage>. <br /><br /><span class=\"colorEDDA74\">Mortal Will Bonus:</span> Duration is increased to {{ empoweredshieldduration }} seconds (dealing <physicalDamage>{{ empowereddamagecalc }} physical damage</physicalDamage> over the duration).",
           "leveltip": {
             "label": [
-              "Damage",
               "Cooldown",
-              "@AbilityResourceName@ Cost"
+              "Shield Slam Damage"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
               "{{ cooldown }} -> {{ cooldownNL }}",
-              "{{ cost }} -> {{ costNL }}"
+              "{{ shieldbasedamage }} -> {{ shieldbasedamageNL }}"
             ]
           },
           "maxrank": 5,
           "cooldown": [
-            10,
-            9,
-            8,
-            7,
-            6
+            22,
+            20.5,
+            19,
+            17.5,
+            16
           ],
-          "cooldownBurn": "10/9/8/7/6",
+          "cooldownBurn": "22/20.5/19/17.5/16",
           "cost": [
-            45,
-            50,
-            55,
-            60,
-            65
+            80,
+            80,
+            80,
+            80,
+            80
           ],
-          "costBurn": "45/50/55/60/65",
+          "costBurn": "80",
           "datavalues": {},
           "effect": [
             null,
             [
-              100,
-              150,
-              200,
-              250,
-              300
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              60,
-              60,
-              60,
-              60,
-              60
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              15,
-              15,
-              15,
-              15,
-              15
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              3,
-              3,
-              3,
-              3,
-              3
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -521,10 +511,10 @@
           ],
           "effectBurn": [
             null,
-            "100/150/200/250/300",
-            "60",
-            "15",
-            "3",
+            "0",
+            "0",
+            "0",
+            "0",
             "0",
             "0",
             "0",
@@ -532,18 +522,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "bonusattackdamage",
-              "coeff": 3,
-              "key": "a1"
-            },
-            {
-              "link": "bonusattackdamage",
-              "coeff": 0.6,
-              "key": "f1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -566,10 +545,10 @@
           "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
-          "id": "PantheonRJump",
-          "name": "Grand Skyfall",
-          "description": "Pantheon composes himself then leaps into the air to a target, striking all enemy units in an area. Enemies closer to the impact point take more damage.",
-          "tooltip": "Pantheon gathers his strength and then leaps high into the air, crashing down at target area a few seconds later. Deals up to <magicDamage>{{ damage }}</magicDamage> magic damage to enemies at the center (down to {{ edgedamageratio*100 }}% at the edge) and slows their Movement Speed by {{ slowamount*-100 }}% for 1 second.<br /><br />If Pantheon cancels this channel, Grand Skyfall is put on a {{ cancelcd }} second cooldown.",
+          "id": "PantheonR",
+          "name": "Grand Starfall",
+          "description": "Pantheon composes himself and then leaps into the air, landing at a chosen location as a comet.",
+          "tooltip": "Pantheon gathers his strength to leap high into the air, then crashes down as a meteor at the target area a few seconds later. Deals up to {{ damagecalc }} magic damage to enemies in a line (decreased by up to {{ edgedamagereduction*100 }}% at the edges of the area).<br /><br />Grand Starfall instantly readies Mortal Will.",
           "leveltip": {
             "label": [
               "Damage",
@@ -582,11 +561,11 @@
           },
           "maxrank": 3,
           "cooldown": [
-            150,
-            135,
-            120
+            180,
+            165,
+            150
           ],
-          "cooldownBurn": "150/135/120",
+          "cooldownBurn": "180/165/150",
           "cost": [
             100,
             100,
@@ -597,9 +576,14 @@
           "effect": [
             null,
             [
-              400,
-              700,
-              1000
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -612,19 +596,14 @@
               0
             ],
             [
-              0.35,
-              0.35,
-              0.35
+              0,
+              0,
+              0
             ],
             [
-              30,
-              30,
-              30
-            ],
-            [
-              0.5,
-              0.5,
-              0.5
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -649,12 +628,12 @@
           ],
           "effectBurn": [
             null,
-            "400/700/1000",
             "0",
             "0",
-            "0.35",
-            "30",
-            "0.5",
+            "0",
+            "0",
+            "0",
+            "0",
             "0",
             "0",
             "0",
@@ -670,7 +649,7 @@
           ],
           "rangeBurn": "5500",
           "image": {
-            "full": "PantheonRJump.png",
+            "full": "PantheonR.png",
             "sprite": "spell8.png",
             "group": "spell",
             "x": 432,
@@ -682,10 +661,10 @@
         }
       ],
       "passive": {
-        "name": "Aegis Protection",
-        "description": "After attacking or casting spells 4 times, Pantheon will block the next incoming basic attack or turret attack.",
+        "name": "",
+        "description": "",
         "image": {
-          "full": "Pantheon_AOZ.png",
+          "full": "Pantheon_Passive.PantheonVGU.png",
           "sprite": "passive2.png",
           "group": "passive",
           "x": 240,
@@ -2417,6 +2396,11 @@
                   "id": "3812",
                   "count": 1,
                   "hideCount": false
+                },
+                {
+                  "id": "3147",
+                  "count": 1,
+                  "hideCount": false
                 }
               ]
             },
@@ -2779,6 +2763,11 @@
                   "id": "3147",
                   "count": 1,
                   "hideCount": false
+                },
+                {
+                  "id": "3812",
+                  "count": 1,
+                  "hideCount": false
                 }
               ]
             },
@@ -2804,12 +2793,12 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3143",
+                  "id": "3026",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3814",
+                  "id": "3742",
                   "count": 1,
                   "hideCount": false
                 }

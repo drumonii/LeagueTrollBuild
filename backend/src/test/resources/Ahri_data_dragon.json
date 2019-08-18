@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.13.1",
+  "version": "9.16.1",
   "data": {
     "Ahri": {
       "id": "Ahri",
@@ -432,8 +432,8 @@
         {
           "id": "AhriSeduce",
           "name": "Charm",
-          "description": "Ahri blows a kiss that damages and charms an enemy it encounters, causing them to walk harmlessly towards her and take more damage from her abilities.",
-          "tooltip": "Blows a kiss dealing {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage and charms an enemy causing them to walk harmlessly towards Ahri for {{ e2 }} second(s).<br /><br />Enemies hit by Charm become vulnerable for {{ e5 }} seconds, taking {{ e4 }}% more damage from Ahri's abilities.",
+          "description": "Ahri blows a kiss that damages and charms an enemy it encounters, instantly stopping movement abilities and causing them to walk harmlessly towards her. The target temporarily takes increased damage from Ahri.",
+          "tooltip": "Blows a kiss that deals {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage and charms the first enemy hit, causing them to walk harmlessly towards Ahri for {{ e2 }} second(s) and immediately stopping any in-progress movement abilities.<br /><br />Enemies hit by Charm become vulnerable for {{ e5 }} seconds, taking {{ e4 }}% more damage from Ahri's abilities.",
           "leveltip": {
             "label": [
               "Damage",
@@ -493,11 +493,11 @@
               20
             ],
             [
-              5,
-              5,
-              5,
-              5,
-              5
+              3,
+              3,
+              3,
+              3,
+              3
             ],
             [
               0,
@@ -541,7 +541,7 @@
             "1.4/1.55/1.7/1.85/2",
             "-0.65",
             "20",
-            "5",
+            "3",
             "0",
             "0",
             "0",

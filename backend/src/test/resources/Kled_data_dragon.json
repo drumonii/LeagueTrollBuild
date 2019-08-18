@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.13.1",
+  "version": "9.16.1",
   "data": {
     "Kled": {
       "id": "Kled",
@@ -87,7 +87,7 @@
           "id": "KledQ",
           "name": "Bear Trap on a Rope",
           "description": "Kled throws a bear trap that damages and hooks an enemy champion. If shackled for a short duration, the target takes additional physical damage and is yanked toward Kled.<br><br>When dismounted, this ability is replaced by Pocket Pistol, a ranged gun blast that knocks back Kled and restores courage.",
-          "tooltip": "Kled throws a bear trap that deals {{ e1 }} <scaleAD>(+{{ a1 }}) </scaleAD>physical damage and hooks onto the first enemy champion or large monster hit, granting <span class=\"coloree91d7\">True Sight</span>. Deals 150% damage to minions passed through.<br /><br />If Kled stays near a hooked enemy for {{ e3 }} seconds, he deals {{ e1 }}<scaleAD> (+{{ charbonusphysical*2 }})</scaleAD> physical damage, yanks the enemy toward him, and slows the enemy by {{ e5 }}% for 1.5 seconds.<br /><br /><scaleAD>Dismounted:</scaleAD> Becomes Pocket Pistol, a ranged ability that restores <span class=\"coloreae57e\">courage</span>.",
+          "tooltip": "Kled throws a bear trap that deals {{ e1 }} <scaleAD>(+{{ a1 }}) </scaleAD>physical damage and hooks onto the first enemy champion or large monster hit, granting <span class=\"coloree91d7\">True Sight</span>. Deals 150% damage to minions passed through.<br /><br />If Kled stays near a hooked enemy for {{ e3 }} seconds, yanks the enemy toward him, dealing {{ e1 }}<scaleAD> (+{{ charbonusphysical*2 }})</scaleAD> physical damage, slowing them by {{ slowamount*-100 }}% for {{ slowduration }} seconds, and reducing incoming healing on them by {{ grievousamount*-100 }}% for {{ grievousduration }} seconds.<br /><br /><scaleAD>Dismounted:</scaleAD> Becomes Pocket Pistol, a ranged ability that restores <span class=\"coloreae57e\">courage</span>.",
           "leveltip": {
             "label": [
               "Throw Damage",

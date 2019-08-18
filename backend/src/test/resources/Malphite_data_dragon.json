@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.13.1",
+  "version": "9.16.1",
   "data": {
     "Malphite": {
       "id": "Malphite",
@@ -120,8 +120,8 @@
         {
           "id": "SeismicShard",
           "name": "Seismic Shard",
-          "description": "Using his primal elemental magic, Malphite sends a shard of the earth through the ground at his foe, dealing damage upon impact and stealing Movement Speed for 4 seconds.",
-          "tooltip": "Deals {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage and steals {{ e2 }}% Movement Speed from the target for {{ e3 }} seconds.",
+          "description": "Using his primal elemental magic, Malphite sends a shard of the earth through the ground at his foe, dealing damage upon impact and stealing Movement Speed for 3 seconds.",
+          "tooltip": "Deals {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage and steals {{ e2 }}% of the target's movement speed for 3 seconds.",
           "leveltip": {
             "label": [
               "Damage",
@@ -162,18 +162,18 @@
               270
             ],
             [
-              14,
-              17,
               20,
-              23,
-              26
+              25,
+              30,
+              35,
+              40
             ],
             [
-              4,
-              4,
-              4,
-              4,
-              4
+              3,
+              3,
+              3,
+              3,
+              3
             ],
             [
               0,
@@ -228,8 +228,8 @@
           "effectBurn": [
             null,
             "70/120/170/220/270",
-            "14/17/20/23/26",
-            "4",
+            "20/25/30/35/40",
+            "3",
             "0",
             "0",
             "0",
@@ -268,17 +268,21 @@
         },
         {
           "id": "Obduracy",
-          "name": "Brutal Strikes",
-          "description": "Malphite starts to hit with such force that his attacks deal damage to all units in front of him. Passively increases his Armor (this amount is tripled while Granite Shield is active).",
-          "tooltip": "<spellPassive>Passive: </spellPassive>Malphite's armor is increased by {{ e1 }}% (<scaleArmor>{{ f1 }}</scaleArmor>). While Granite Shield is active, this bonus is tripled to {{ f4.0 }}% (<scaleArmor>{{ f3 }}</scaleArmor>).<br /><br /><spellPassive>Active: </spellPassive>Basic attacks deal an additional {{ e2 }} <scaleArmor>(+{{ f2 }})</scaleArmor> <scaleAP>(+{{ a1 }})</scaleAP> physical damage to the target and nearby enemies. Lasts {{ e3 }} seconds.",
+          "name": "Thunderclap",
+          "description": "Malphite attacks with such force that it creates a sonic boom. For the next few seconds, his attacks create aftershocks in front of him.",
+          "tooltip": "<spellPassive>Passive: </spellPassive>Malphite's armor is increased by {{ e1 }}% (<scaleArmor>{{ f1 }}</scaleArmor>). This effect is tripled while Granite Shield is active.<br /><br /><spellPassive>Active: </spellPassive>Malphite's basic attacks create aftershocks for the next 5 seconds, dealing {{ thunderclapsplash }} physical damage in a cone.  His first attack after activating Thunderclap deals {{ totalbonusdamage }} bonus physical damage to his target.",
           "leveltip": {
             "label": [
               "Armor",
-              "Damage"
+              "Damage",
+              "Aftershock Splash Damage",
+              "@AbilityResourceName@ Cost"
             ],
             "effect": [
               "{{ effect1amount*100.000000 }}% -> {{ effect1amountnl*100.000000 }}%",
-              "{{ e2 }} -> {{ e2NL }}"
+              "{{ thunderclapbasedamage }} -> {{ thunderclapbasedamageNL }}",
+              "{{ thunderclapsplashdamage }} -> {{ thunderclapsplashdamageNL }}",
+              "{{ cost }} -> {{ costNL }}"
             ]
           },
           "maxrank": 5,
@@ -291,13 +295,13 @@
           ],
           "cooldownBurn": "12",
           "cost": [
-            25,
-            25,
-            25,
-            25,
-            25
+            30,
+            35,
+            40,
+            45,
+            50
           ],
-          "costBurn": "25",
+          "costBurn": "30/35/40/45/50",
           "datavalues": {},
           "effect": [
             null,
@@ -309,25 +313,25 @@
               30
             ],
             [
-              15,
-              30,
-              45,
+              20,
+              40,
               60,
-              75
+              80,
+              100
             ],
             [
-              6,
-              6,
-              6,
-              6,
-              6
+              5,
+              5,
+              5,
+              5,
+              5
             ],
             [
-              225,
-              225,
-              225,
-              225,
-              225
+              400,
+              400,
+              400,
+              400,
+              400
             ],
             [
               3,
@@ -375,9 +379,9 @@
           "effectBurn": [
             null,
             "10/15/20/25/30",
-            "15/30/45/60/75",
-            "6",
-            "225",
+            "20/40/60/80/100",
+            "5",
+            "400",
             "3",
             "0",
             "0",
@@ -385,13 +389,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.1,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [

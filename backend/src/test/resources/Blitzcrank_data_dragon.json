@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.13.1",
+  "version": "9.16.1",
   "data": {
     "Blitzcrank": {
       "id": "Blitzcrank",
@@ -559,8 +559,8 @@
         {
           "id": "StaticField",
           "name": "Static Field",
-          "description": "Enemies attacked by Blitzcrank are marked and take lightning damage after 3 seconds. Additionally, Blitzcrank can activate this ability to damage nearby enemies and silence them for 0.5 seconds.",
-          "tooltip": "<spellPassive>Passive: </spellPassive>While this spell is available, lightning charges Blitzcrank's fists, marking enemies. After 1 second, they are shocked for <magicDamage>{{ passivedamage }}</magicDamage> magic damage. This stacks up to two times.<br /><br /><spellPassive>Active: </spellPassive>Deals <magicDamage>{{ activedamage }} magic damage</magicDamage> and silences surrounding enemy units for 0.5 seconds.",
+          "description": "Enemies attacked by Blitzcrank are marked and take lightning damage after 1 second. Additionally, Blitzcrank can activate this ability to remove nearby enemies' shields, damage them, and silence them briefly.",
+          "tooltip": "<spellPassive>Passive: </spellPassive>While this spell is available, lightning charges Blitzcrank's fists, marking enemies. After 1 second, they are shocked for <magicDamage>{{ passivedamage }}</magicDamage> magic damage. This stacks up to two times.<br /><br /><spellPassive>Active: </spellPassive>Destroys damage shields on nearby enemies, deals <magicDamage>{{ activedamage }} magic damage</magicDamage>, and silences for 0.75 seconds.",
           "leveltip": {
             "label": [
               "Passive Base Damage",
@@ -590,9 +590,9 @@
           "effect": [
             null,
             [
+              50,
               100,
-              150,
-              200
+              150
             ],
             [
               150,
@@ -642,7 +642,7 @@
           ],
           "effectBurn": [
             null,
-            "100/150/200",
+            "50/100/150",
             "150/275/400",
             "0.25",
             "0.08",

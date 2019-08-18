@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.13.1",
+  "version": "9.16.1",
   "data": {
     "Ekko": {
       "id": "Ekko",
@@ -262,7 +262,7 @@
         {
           "id": "EkkoW",
           "name": "Parallel Convergence",
-          "description": "Ekko splits the timeline, creating an anomaly after a few seconds that slows enemies caught inside. If Ekko enters the anomaly, he gains shielding and triggers a detonation, stunning enemies by suspending them in time.",
+          "description": "Ekko's basic attacks deal bonus magic damage to low health enemies. He can cast Parallel Convergence to split the timeline, creating an anomaly after a few seconds that slows enemies caught inside. If Ekko enters the anomaly, he gains shielding and stuns enemies by suspending them in time.",
           "tooltip": "<spellPassive>Passive:</spellPassive> Ekko's basic attacks deal bonus magic damage to enemies under 30% health equal to {{ e3 }}% <scaleAP>(+{{ a2 }}%)</scaleAP> of their missing health. Deals a minimum of {{ e6 }} damage, and a maximum of {{ e5 }} damage vs. minions and monsters.<br /><br /><spellPassive>Active:</spellPassive> After a 3 second delay, Ekko creates a short-lived chronosphere at the target location that slows enemies who enter by {{ e0 }}%. If Ekko enters the sphere, he will detonate it, gaining a shield that absorbs up to {{ e4 }} <scaleAP>(+{{ a1 }})</scaleAP> damage for 2 seconds. Enemies caught inside are stunned for {{ e2 }} seconds.",
           "leveltip": {
             "label": [
@@ -451,11 +451,11 @@
           "effect": [
             null,
             [
-              40,
-              65,
-              90,
-              115,
-              140
+              50,
+              75,
+              100,
+              125,
+              150
             ],
             [
               350,
@@ -523,7 +523,7 @@
           ],
           "effectBurn": [
             null,
-            "40/65/90/115/140",
+            "50/75/100/125/150",
             "350",
             "3",
             "300",
@@ -582,10 +582,10 @@
           "maxrank": 3,
           "cooldown": [
             110,
-            90,
-            70
+            80,
+            50
           ],
-          "cooldownBurn": "110/90/70",
+          "cooldownBurn": "110/80/50",
           "cost": [
             100,
             100,
