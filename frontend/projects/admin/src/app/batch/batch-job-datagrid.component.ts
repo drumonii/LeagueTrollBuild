@@ -93,7 +93,7 @@ export class BatchJobDatagridComponent implements OnInit, OnDestroy {
     let page = 0;
     let size = 10;
     if (state.page) {
-      page = this.pagination.page.current - 1;
+      page = state.page.current - 1;
       size = state.page.size;
     }
     const pageRequest: PageRequest = { page, size, sort, filters };
