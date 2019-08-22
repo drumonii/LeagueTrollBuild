@@ -190,7 +190,7 @@ describe('BatchJobDatagridComponent', () => {
 
         expect(batchService.getBatchJobInstances).toHaveBeenCalledWith({
           page: 0,
-          size: 10,
+          size: 20,
           filters: [{
             property: 'name',
             value: 'allRetrievalsJob'
@@ -208,7 +208,7 @@ describe('BatchJobDatagridComponent', () => {
 
         expect(batchService.getBatchJobInstances).toHaveBeenCalledWith({
           page: 0,
-          size: 10,
+          size: 20,
           filters: [{
             property: 'name',
             value: 'allRetrievalsJob'
@@ -226,7 +226,7 @@ describe('BatchJobDatagridComponent', () => {
 
         expect(batchService.getBatchJobInstances).toHaveBeenCalledWith({
           page: 0,
-          size: 10,
+          size: 20,
           filters: [{
             property: 'name',
             value: 'allRetrievalsJob'
@@ -244,7 +244,7 @@ describe('BatchJobDatagridComponent', () => {
 
         expect(batchService.getBatchJobInstances).toHaveBeenCalledWith({
           page: 0,
-          size: 10,
+          size: 20,
           filters: [{
             property: 'name',
             value: 'allRetrievalsJob'
@@ -262,7 +262,7 @@ describe('BatchJobDatagridComponent', () => {
 
         expect(batchService.getBatchJobInstances).toHaveBeenCalledWith({
           page: 0,
-          size: 10,
+          size: 20,
           filters: [{
             property: 'name',
             value: 'allRetrievalsJob'
@@ -292,7 +292,7 @@ describe('BatchJobDatagridComponent', () => {
 
         expect(batchService.getBatchJobInstances).toHaveBeenCalledWith({
           page: 0,
-          size: 10,
+          size: 20,
           filters: [{
             property: 'name',
             value: 'allRetrievalsJob'
@@ -454,7 +454,7 @@ describe('BatchJobDatagridComponent', () => {
       expect(batchService.hasFailedAllRetrievalsJob).toHaveBeenCalledWith(component.minutesAgo);
       expect(batchService.getBatchJobInstances).toHaveBeenCalledWith({
         page: 0,
-        size: 10,
+        size: 20,
         filters: [{
           property: 'name',
           value: 'allRetrievalsJob'
@@ -468,7 +468,7 @@ describe('BatchJobDatagridComponent', () => {
   function expectInitialCall(batchService: BatchJobDatagridService) {
     expect(batchService.getBatchJobInstances).toHaveBeenCalledWith({
       page: 0,
-      size: 10,
+      size: 20,
       filters: [{
         property: 'name',
         value: 'allRetrievalsJob'

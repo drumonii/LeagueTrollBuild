@@ -55,7 +55,7 @@
   </clr-dg-row>
 
   <clr-dg-footer>
-    <clr-dg-pagination #pagination [clrDgPageSize]="10" [clrDgTotalItems]="total">
+    <clr-dg-pagination #pagination [clrDgPageSize]="20" [clrDgTotalItems]="total">
       <clr-dg-page-size [clrPageSizeOptions]="[10, 20, 50]">Users per page</clr-dg-page-size>
       {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{total}} users
     </clr-dg-pagination>
