@@ -61,7 +61,19 @@ describe('BuildsService', () => {
     it('should GET a build with REST error of 400 status', inject([SavedBuildsService, HttpTestingController],
       (service: SavedBuildsService, httpMock: HttpTestingController) => {
       service.getBuild(mockBuild.id).subscribe(build => {
-        expect(build).toEqual(new Build());
+        expect(build).toEqual({
+          championId: null,
+          item1Id: null,
+          item2Id: null,
+          item3Id: null,
+          item4Id: null,
+          item5Id: null,
+          item6Id: null,
+          summonerSpell1Id: null,
+          summonerSpell2Id: null,
+          trinketId: null,
+          mapId: null
+        });
       });
 
       const testReq = httpMock.expectOne(requestMatch);

@@ -1,7 +1,7 @@
 /**
  * Game map of LoL.
  */
-export class GameMap {
+export interface GameMap {
   mapId: number;
   mapName: string;
 }

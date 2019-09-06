@@ -5,7 +5,7 @@ import { ChampionPassive } from './champion-passive';
 /**
  * Champion of LoL.
  */
-export class Champion {
+export interface Champion {
   id: number;
   key: string;
   name: string;

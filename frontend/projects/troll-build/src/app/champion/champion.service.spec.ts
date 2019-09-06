@@ -298,7 +298,11 @@ describe('ChampionService', () => {
     it('should get a Troll Build with a Map Id and with REST error', inject([ChampionService, HttpTestingController],
       (service: ChampionService, httpMock: HttpTestingController) => {
       service.getTrollBuild(championName, SummonersRiftId).subscribe(trollBuild => {
-        expect(trollBuild).toEqual(new TrollBuild());
+        expect(trollBuild).toEqual({
+          items: null,
+          summonerSpells: null,
+          trinket: null
+        });
       });
 
       const testReq = httpMock.expectOne(requestMatchWithMapId);
@@ -309,7 +313,11 @@ describe('ChampionService', () => {
     it('should get a Troll Build without a Map Id and with REST error', inject([ChampionService, HttpTestingController],
       (service: ChampionService, httpMock: HttpTestingController) => {
       service.getTrollBuild(championName).subscribe(trollBuild => {
-        expect(trollBuild).toEqual(new TrollBuild());
+        expect(trollBuild).toEqual({
+          items: null,
+          summonerSpells: null,
+          trinket: null
+        });
       });
 
       const testReq = httpMock.expectOne(requestMatchWithoutMapId);
@@ -393,7 +401,20 @@ describe('ChampionService', () => {
 
     it('should POST a build with REST error', inject([ChampionService, HttpTestingController],
       (service: ChampionService, httpMock: HttpTestingController) => {
-      service.saveBuild(new Build()).subscribe(res => {
+      const mockBuild: Build = {
+        championId: 1,
+        item1Id: 1,
+        item2Id: 2,
+        item3Id: 3,
+        item4Id: 4,
+        item5Id: 5,
+        item6Id: 6,
+        summonerSpell1Id: 1,
+        summonerSpell2Id: 2,
+        trinketId: 1,
+        mapId: 1
+      };
+      service.saveBuild(mockBuild).subscribe(res => {
         expect(res).toBeNull();
       });
 

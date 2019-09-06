@@ -23,7 +23,12 @@ describe('VersionsService', () => {
 
     it('should get the latest saved Version', inject([VersionsService, HttpTestingController],
       (service: VersionsService, httpMock: HttpTestingController) => {
-      const mockLatestVersion = new Version('8.7.1');
+      const mockLatestVersion: Version = {
+        patch: '8.7.1',
+        major: 8,
+        minor: 7,
+        revision: 1
+      };
 
       service.getLatestVersion().subscribe(latestVersion => {
         expect(latestVersion).toEqual(mockLatestVersion);

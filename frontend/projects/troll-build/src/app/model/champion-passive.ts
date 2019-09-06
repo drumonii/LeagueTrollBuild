@@ -1,7 +1,7 @@
 /**
  * Champion passive.
  */
-export class ChampionPassive {
+export interface ChampionPassive {
   name: string;
   description: string;
 }

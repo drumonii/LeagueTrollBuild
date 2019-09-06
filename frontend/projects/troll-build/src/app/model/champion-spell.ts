@@ -1,7 +1,7 @@
 /**
  * Champion spell.
  */
-export class ChampionSpell {
+export interface ChampionSpell {
   key: string;
   name: string;
   description: string;

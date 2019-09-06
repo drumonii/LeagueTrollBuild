@@ -6,7 +6,7 @@ import { SummonerSpell } from '@ltb-model/summoner-spell';
 /**
  * Saved Troll Build.
  */
-export class Build {
+export interface Build {
   id?: number;
   championId: number;
   item1Id: number; // boots
@@ -106,19 +106,19 @@ export class BuildBuilder {
   }
 
   build(): Build {
-    const build = new Build();
-    build.championId = this.championId;
-    build.item1Id = this.item1Id;
-    build.item2Id = this.item2Id;
-    build.item3Id = this.item3Id;
-    build.item4Id = this.item4Id;
-    build.item5Id = this.item5Id;
-    build.item6Id = this.item6Id;
-    build.summonerSpell1Id = this.summonerSpell1Id;
-    build.summonerSpell2Id = this.summonerSpell2Id;
-    build.trinketId = this.trinketId;
-    build.mapId = this.mapId;
-    return build;
+    return {
+      championId: this.championId,
+      item1Id: this.item1Id,
+      item2Id: this.item2Id,
+      item3Id: this.item3Id,
+      item4Id: this.item4Id,
+      item5Id: this.item5Id,
+      item6Id: this.item6Id,
+      mapId: this.mapId,
+      summonerSpell1Id: this.summonerSpell1Id,
+      summonerSpell2Id: this.summonerSpell2Id,
+      trinketId: this.trinketId
+    };
   }
 
 }

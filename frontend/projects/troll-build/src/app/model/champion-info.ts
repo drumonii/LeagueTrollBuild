@@ -1,7 +1,7 @@
 /**
  * Champion info stats.
  */
-export class ChampionInfo {
+export interface ChampionInfo {
   attack: number;
   defense: number;
   magic: number;

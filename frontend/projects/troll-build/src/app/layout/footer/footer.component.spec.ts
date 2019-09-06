@@ -27,7 +27,12 @@ describe('FooterComponent', () => {
   });
 
   it('should show latest saved Version in footer', inject([VersionsService], (versionsService: VersionsService) => {
-    const latestVersion = new Version('8.2.1');
+    const latestVersion: Version = {
+      patch: '8.2.1',
+      major: 8,
+      minor: 2,
+      revision: 1
+    };
 
     spyOn(versionsService, 'getLatestVersion').and.returnValue(of(latestVersion));
 

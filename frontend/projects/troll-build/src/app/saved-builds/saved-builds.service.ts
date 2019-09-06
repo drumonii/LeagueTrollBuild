@@ -21,7 +21,19 @@ export class SavedBuildsService {
           if (error.status === 404) {
             return of(null);
           }
-          return of(new Build());
+          return of({
+            championId: null,
+            item1Id: null,
+            item2Id: null,
+            item3Id: null,
+            item4Id: null,
+            item5Id: null,
+            item6Id: null,
+            summonerSpell1Id: null,
+            summonerSpell2Id: null,
+            trinketId: null,
+            mapId: null
+          });
         })
       );
   }

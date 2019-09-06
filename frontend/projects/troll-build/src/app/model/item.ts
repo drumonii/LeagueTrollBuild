@@ -3,7 +3,7 @@ import { ItemGold } from './item-gold';
 /**
  * Item of LoL.
  */
-export class Item {
+export interface Item {
   id: number;
   name: string;
   group: string;

@@ -1,7 +1,7 @@
 /**
  * Summoner Spell of LoL.
  */
-export class SummonerSpell {
+export interface SummonerSpell {
   id: number;
   name: string;
   description: string;

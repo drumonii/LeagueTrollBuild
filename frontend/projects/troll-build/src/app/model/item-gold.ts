@@ -1,7 +1,7 @@
 /**
  * Item gold.
  */
-export class ItemGold {
+export interface ItemGold {
   base: number;
   total: number;
   sell: number;

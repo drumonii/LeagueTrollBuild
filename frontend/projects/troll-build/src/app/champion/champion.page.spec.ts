@@ -994,19 +994,21 @@ describe('ChampionPage', () => {
           .withGameMap(map)
           .build();
 
-        const savedBuild = new Build();
-        savedBuild.id = Math.floor((Math.random() * 1000) + 1);
-        savedBuild.championId = build.championId;
-        savedBuild.item1Id = build.item1Id;
-        savedBuild.item2Id = build.item2Id;
-        savedBuild.item3Id = build.item3Id;
-        savedBuild.item4Id = build.item4Id;
-        savedBuild.item5Id = build.item5Id;
-        savedBuild.item6Id = build.item6Id;
-        savedBuild.summonerSpell1Id = build.summonerSpell1Id;
-        savedBuild.summonerSpell2Id = build.summonerSpell2Id;
-        savedBuild.trinketId = build.trinketId;
-        savedBuild.mapId = build.mapId;
+        const savedBuild: Build = {
+          id: Math.floor((Math.random() * 1000) + 1),
+          championId: build.championId,
+          item1Id: build.item1Id,
+          item2Id: build.item2Id,
+          item3Id: build.item3Id,
+          item4Id: build.item4Id,
+          item5Id: build.item5Id,
+          item6Id: build.item6Id,
+          summonerSpell1Id: build.summonerSpell1Id,
+          summonerSpell2Id: build.summonerSpell2Id,
+          trinketId: build.trinketId,
+          mapId: build.mapId
+        };
+
         const selfRef = `http://localhost/api/build/${savedBuild.id}`;
 
         buildsServiceSpy.and.returnValue(of(new HttpResponse<Build>({
@@ -1174,7 +1176,11 @@ describe('ChampionPage', () => {
 
     beforeEach(inject([ChampionService], (championService: ChampionService) => {
       spyOn(championService, 'getChampion').and.returnValue(of(skarner));
-      spyOn(championService, 'getTrollBuild').and.returnValue(of(new TrollBuild()));
+      spyOn(championService, 'getTrollBuild').and.returnValue(of({
+        items: null,
+        summonerSpells: null,
+        trinket: null
+      }));
       spyOn(championService, 'mapsForTrollBuild').and.returnValue(of(maps));
     }));
 
