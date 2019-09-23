@@ -29,6 +29,8 @@ import static org.springframework.data.domain.Sort.Direction.DESC;
 @Import(VersionsRetrievalJobTestConfig.class)
 public abstract class VersionsRetrievalJobConfigTest extends AbstractBatchTests {
 
+	private static final Sort SORT = Sort.by(DESC, "major", "minor", "revision");
+
 	@MockBean
 	protected VersionsService versionsService;
 
@@ -50,7 +52,7 @@ public abstract class VersionsRetrievalJobConfigTest extends AbstractBatchTests 
 		JobExecution jobExecution = jobLauncherTestUtils.launchJob(getJobParameters());
 		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
 
-		assertThat(versionsRepository.findAll(new Sort(DESC, "major", "minor", "revision")))
+		assertThat(versionsRepository.findAll(SORT))
 				.containsExactlyElementsOf(versions);
 	}
 
@@ -72,7 +74,7 @@ public abstract class VersionsRetrievalJobConfigTest extends AbstractBatchTests 
 		JobExecution jobExecution = jobLauncherTestUtils.launchJob(getJobParameters());
 		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
 
-		assertThat(versionsRepository.findAll(new Sort(DESC, "major", "minor", "revision")))
+		assertThat(versionsRepository.findAll(SORT))
 				.containsExactlyElementsOf(versions);
 	}
 
@@ -85,7 +87,7 @@ public abstract class VersionsRetrievalJobConfigTest extends AbstractBatchTests 
 		JobExecution jobExecution = jobLauncherTestUtils.launchJob(getJobParameters());
 		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
 
-		assertThat(versionsRepository.findAll(new Sort(DESC, "major", "minor", "revision")))
+		assertThat(versionsRepository.findAll(SORT))
 				.containsExactlyElementsOf(versions);
 	}
 
