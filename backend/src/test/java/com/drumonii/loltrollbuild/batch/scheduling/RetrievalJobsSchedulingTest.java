@@ -82,7 +82,7 @@ public class RetrievalJobsSchedulingTest {
 
 	@Test
 	public void runsAllRetrievalsJob() throws Exception {
-		given(versionsService.getLatestVersion()).willReturn(new Version("8.7.1"));
+		given(versionsService.getLatestVersion()).willReturn(Version.patch("8.7.1"));
 
 		retrievalJobsScheduling.runAllRetrievalsJob();
 
@@ -109,7 +109,7 @@ public class RetrievalJobsSchedulingTest {
 
 	@Test
 	public void runsAllRetrievalJobWithExceptionThrown() throws Exception {
-		given(versionsService.getLatestVersion()).willReturn(new Version("8.7.1"));
+		given(versionsService.getLatestVersion()).willReturn(Version.patch("8.7.1"));
 
 		given(jobLauncher.run(eq(allRetrievalsJob), any(JobParameters.class)))
 				.willThrow(new NullPointerException());

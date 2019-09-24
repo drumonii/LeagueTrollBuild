@@ -60,10 +60,10 @@ public abstract class VersionsRetrievalJobConfigTest extends AbstractBatchTests 
 	public void savesNewerVersion() throws Exception {
 		List<Version> versions = versionsRepository.saveAll(this.versions);
 
-		Version newerVersion = new Version();
-		newerVersion.setMajor(latestVersion.getMajor() + 1);
-		newerVersion.setMinor(latestVersion.getMinor() + 1);
-		newerVersion.setRevision(latestVersion.getRevision() + 1);
+		Version newerVersion = Version.patch(latestVersion.getPatch());
+		newerVersion.setMajor(newerVersion.getMajor() + 1);
+		newerVersion.setMinor(newerVersion.getMinor() + 1);
+		newerVersion.setRevision(newerVersion.getRevision() + 1);
 		newerVersion.setPatch(newerVersion.getMajor() + "." + newerVersion.getMinor() + "." + newerVersion.getRevision());
 
 		versions.add(newerVersion);

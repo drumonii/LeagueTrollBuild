@@ -15,8 +15,8 @@ public class VersionTest {
 
 	@Test
 	public void comparable() {
-		Version version1 = new Version("5.13.1");
-		Version version2 = new Version("6.2.1");
+		Version version1 = Version.patch("5.13.1");
+		Version version2 = Version.patch("6.2.1");
 		assertThat(version1.compareTo(version2)).isEqualTo(-1); // less than
 		assertThat(version1.compareTo(version1)).isZero(); // equal
 		assertThat(version2.compareTo(version1)).isOne(); // greater than

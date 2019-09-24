@@ -26,7 +26,7 @@ public class VersionDdragonTest {
 
 	@Test
 	public void lolPatchStyle() {
-		Version version = new Version("lolpatch_7.20");
+		Version version = Version.patch("lolpatch_7.20");
 
 		assertThat(version.getPatch()).isEqualTo("7.20.0");
 		assertThat(version.getMajor()).isEqualTo(7);
@@ -36,7 +36,7 @@ public class VersionDdragonTest {
 
 	@Test
 	public void serializesIntoJson() {
-		Version version = new Version("lolpatch_6.24");
+		Version version = Version.patch("lolpatch_6.24");
 
 		JsonContent<Version> jsonContent = null;
 		try {

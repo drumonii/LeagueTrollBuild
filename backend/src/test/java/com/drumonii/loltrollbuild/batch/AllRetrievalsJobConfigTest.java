@@ -56,7 +56,7 @@ public class AllRetrievalsJobConfigTest {
 
 	@Test
 	public void runsAllRetrievalJob() throws Exception {
-		Version latestVersion = new Version("8.1.1");
+		Version latestVersion = Version.patch("8.1.1");
 		given(versionsService.getLatestVersion()).willReturn(latestVersion);
 		given(mapsService.getMaps(eq(latestVersion))).willReturn(new ArrayList<>());
 		given(summonerSpellsService.getSummonerSpells(eq(latestVersion))).willReturn(new ArrayList<>());

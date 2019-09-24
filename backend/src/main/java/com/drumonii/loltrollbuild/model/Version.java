@@ -36,6 +36,10 @@ public class Version implements Serializable, Comparable<Version> {
 		}
 	}
 
+	public static Version patch(String patch) {
+		return new Version(patch);
+	}
+
 	@Id
 	@Column(name = "PATCH", nullable = false)
 	@JsonProperty("patch")

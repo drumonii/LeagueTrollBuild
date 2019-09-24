@@ -24,7 +24,7 @@ public class ImageFetcherTest {
 		UriComponentsBuilder builder = UriComponentsBuilder
 				.fromPath("/cdn/{latestVersion}/img/champion/{champion}");
 
-		Version latestVersion = new Version("6.24.1");
+		Version latestVersion = Version.patch("6.24.1");
 
 		assertThat(imageFetcher.setImgsSrcs(Arrays.asList(image1, image2), builder, latestVersion)).isEqualTo(0);
 	}
@@ -37,7 +37,7 @@ public class ImageFetcherTest {
 		UriComponentsBuilder builder = UriComponentsBuilder
 				.fromHttpUrl("http://ddragon.leagueoflegends.com/cdn/{latestVersion}/img/champion/{champion}");
 
-		Version latestVersion = new Version("6.24.1");
+		Version latestVersion = Version.patch("6.24.1");
 
 		assertThat(imageFetcher.setImgsSrcs(Arrays.asList(image1, image2), builder, latestVersion)).isEqualTo(2);
 	}
@@ -60,7 +60,7 @@ public class ImageFetcherTest {
 		UriComponentsBuilder builder = UriComponentsBuilder
 				.fromPath("/cdn/{latestVersion}/img/champion/{champion}");
 
-		Version latestVersion = new Version("6.24.1");
+		Version latestVersion = Version.patch("6.24.1");
 
 		assertThat(imageFetcher.setImgSrc(image, builder, latestVersion)).isEqualTo(0);
 	}
@@ -72,7 +72,7 @@ public class ImageFetcherTest {
 		UriComponentsBuilder builder = UriComponentsBuilder
 				.fromHttpUrl("http://ddragon.leagueoflegends.com/cdn/{latestVersion}/img/champion/{champion}");
 
-		Version latestVersion = new Version("6.24.1");
+		Version latestVersion = Version.patch("6.24.1");
 
 		assertThat(imageFetcher.setImgSrc(image, builder, latestVersion)).isOne();
 	}
