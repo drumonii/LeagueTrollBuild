@@ -9,8 +9,6 @@ import { Champion } from '@ltb-model/champion';
 import { TrollBuild } from '@ltb-model/troll-build';
 import { GameMap } from '@ltb-model/game-map';
 import { Build } from '@ltb-model/build';
-import { Item } from '@ltb-model/item';
-import { SummonerSpell } from '@ltb-model/summoner-spell';
 
 @Injectable()
 export class ChampionService {

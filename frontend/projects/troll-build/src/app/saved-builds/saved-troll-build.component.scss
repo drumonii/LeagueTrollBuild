@@ -1,62 +1,24 @@
-.troll-build-item-img, .troll-build-summoner-spells-img, .troll-build-trinket-img {
+@import '~@nebular/theme/styles/global/breakpoints';
+
+.troll-build-object-img {
   border-radius: 5px;
+  margin: 0.25em;
   width: 75px;
+  height: 75px;
 }
 
-.troll-build-items-header, .troll-build-summoner-spells-header, .troll-build-trinket-header {
+.troll-build-objects-header {
   font-size: 1.3em;
   margin-bottom: 0.5em;
 }
 
-.troll-build-objects {
-  list-style: none;
-  .troll-build-object {
-    display: inline-block;
-    margin-left: 1em;
-    &:first-child {
-      margin-left: 0;
-    }
-  }
-}
+@include media-breakpoint-down(sm) {
 
-.with-tooltip {
-  position: relative;
-  cursor: pointer;
-  &:before, &:after {
-    transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out, transform 0.2s cubic-bezier(0.71, 1.7, 0.77, 1.24);
+  $img-size: 55px;
+
+  .troll-build-object-img {
+    width: $img-size;
+    height: $img-size;
   }
-  &:before {
-    content: "";
-    position: absolute;
-    top: -6px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 99;
-    opacity: 0;
-  }
-  &:after {
-    content: attr(data-tooltip);
-    position: absolute;
-    left: 50%;
-    top: -6px;
-    transform: translateX(-50%) translateY(-100%);
-    background: black;
-    text-align: center;
-    color: white;
-    font-size: 0.9em;
-    min-width: 100px;
-    border-radius: 5px;
-    pointer-events: none;
-    padding: 4px 4px;
-    z-index: 99;
-    opacity: 0;
-  }
-  &:hover {
-    &:after {
-      opacity: 1;
-    }
-    &:before {
-      opacity: 1;
-    }
-  }
+
 }

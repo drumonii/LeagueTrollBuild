@@ -1,0 +1,38 @@
+@import 'theme';
+
+$button-background-color: #2a2a2a;
+$button-hover-background-color: #414141;
+$button-border-color: #c79a3c;
+
+$button-disabled-background-color: #cdd1d7;
+$button-disabled-color: #5b5e69;
+$button-disabled-border-color: $button-disabled-background-color;
+
+@mixin ltb-buttons() {
+  .ltb-btn {
+    border: 2px solid $button-border-color !important;
+    background-color: $button-background-color !important;
+    font-weight: normal !important;
+    text-transform: none !important;
+
+    &:focus, &:active {
+      box-shadow: none !important;
+    }
+
+    &:hover {
+      color: nb-theme(color-primary-300) !important;
+      background-color: $button-hover-background-color !important;
+    }
+
+    &.ltb-btn-active {
+      color: nb-theme(color-primary-300) !important;
+      background-color: $button-hover-background-color !important;
+    }
+
+    &[disabled] {
+      color: $button-disabled-color !important;
+      background-color: $button-disabled-background-color !important;
+      border: 2px solid $button-disabled-border-color !important;
+    }
+  }
+}

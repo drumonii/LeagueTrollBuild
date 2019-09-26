@@ -9,11 +9,11 @@ export class TrollBuildAppPage extends BaseTrollBuildPage {
   }
 
   async getHeaderText(): Promise<string> {
-    return element(by.css('#header-title')).getText();
+    return element(by.css('.header-title')).getText();
   }
 
   getFooter(): ElementFinder {
-    return element(by.css('#footer'));
+    return element(by.css('footer'));
   }
 
 }

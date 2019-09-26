@@ -1,87 +1,87 @@
 <ng-container *ngIf="buildType" [ngSwitch]="buildType">
-  <section class="section">
-    <div class="container">
-      <ng-container *ngSwitchCase="'Ok'">
-        <!-- Champion row -->
-        <div class="columns">
-          <div class="column
-            is-2-widescreen is-offset-4-widescreen
-            is-3-desktop is-offset-2-desktop
-            is-3-tablet is-offset-3-tablet
-            is-9-mobile is-offset-3-mobile">
-            <div id="champion-img-container">
-              <div id="champion-partype-ribbon">
-                <span id="champion-partype">{{build.champion.partype}}</span>
+  <ng-container *ngSwitchCase="'Ok'">
+    <div class="ltb-faux-grid centered-desktop">
+      <!-- champion info row -->
+      <div class="ltb-column">
+        <div class="ltb-faux-grid">
+          <!-- champion img column -->
+          <div class="ltb-column">
+            <div class="ltb-has-ribbon">
+              <div class="ltb-ribbon">
+                <span data-e2e="champion-partype">{{build.champion.partype}}</span>
               </div>
               <img id="champion-img" src="/api/img/champions/{{build.champion.id}}" [alt]="build.champion.key">
-              <button id="new-build-btn" class="button is-primary" (click)="getTrollBuild()">New Build</button>
+              <button id="new-build-btn" class="ltb-btn" nbButton (click)="getTrollBuild()">
+                New Build
+              </button>
             </div>
           </div>
-          <div class="column has-text-centered-mobile">
-            <p id="champion-name">{{build.champion.name}}</p>
-            <p id="champion-title" class="is-capitalized">{{build.champion.title}}</p>
-            <ul id="champion-tags">
-              <li class="tag champion-tag is-dark" *ngFor="let tag of build.champion.tags">{{tag}}</li>
-            </ul>
-            <div class="select">
-              <select id="map-select">
-                <option class="map-option">
-                  {{build.map.mapName}}
-                </option>
-              </select>
+          <!-- champion info column -->
+          <div class="ltb-column">
+            <div id="champion-info" class="ltb-flex column-direction space-between">
+              <div>
+                <p id="champion-name">{{build.champion.name}}</p>
+                <p id="champion-title">{{build.champion.title}}</p>
+                <ul id="champion-tags">
+                  <li class="ltb-tag" *ngFor="let tag of build.champion.tags">{{tag}}</li>
+                </ul>
+              </div>
+              <div>
+                <nb-select class="ltb-select" [(selected)]="build.map.mapId" data-e2e="map-select">
+                  <nb-option class="ltb-option" [value]="build.mapId">
+                    {{build.map.mapName}}
+                  </nb-option>
+                </nb-select>
+              </div>
             </div>
           </div>
         </div>
-        <ltb-saved-troll-build [build]="build"></ltb-saved-troll-build>
-      </ng-container>
-
-      <ng-container *ngSwitchCase="'NotFound'">
-        <article class="message is-danger">
-          <div class="message-body">
-            <p id="build-not-found-alert">Couldn't find a saved Troll Build with ID: {{buildId}}</p>
-            <br>
-            <a class="button try-random-build" routerLink="/builds">
-              Try a random Troll Build
-            </a>
-          </div>
-        </article>
-      </ng-container>
-
-      <ng-container *ngSwitchCase="'InvalidItems'">
-        <article class="message is-danger">
-          <div class="message-body">
-            <p id="build-invalid-items-alert">This Troll Build with ID: {{buildId}} has become invalid due to outdated Items</p>
-            <br>
-            <a class="button try-random-build" routerLink="/builds">
-              Try a random Troll Build
-            </a>
-          </div>
-        </article>
-      </ng-container>
-
-      <ng-container *ngSwitchCase="'InvalidSummonerSpells'">
-        <article class="message is-danger">
-          <div class="message-body">
-            <p id="build-invalid-summoner-spells-alert">This Troll Build with ID: {{buildId}} has become invalid due to outdated Summoner Spells</p>
-            <br>
-            <a class="button try-random-build" routerLink="/builds">
-              Try a random Troll Build
-            </a>
-          </div>
-        </article>
-      </ng-container>
-
-      <ng-container *ngSwitchCase="'InvalidTrinket'">
-        <article class="message is-danger">
-          <div class="message-body">
-            <p id="build-invalid-trinket-alert">This Troll Build with ID: {{buildId}} has become invalid due to an outdated Trinket</p>
-            <br>
-            <a class="button try-random-build" routerLink="/builds">
-              Try a random Troll Build
-            </a>
-          </div>
-        </article>
-      </ng-container>
+      </div>
     </div>
-  </section>
+    <!-- troll build row -->
+    <div class="ltb-faux-grid centered-desktop">
+      <div class="ltb-column">
+        <ltb-saved-troll-build [build]="build"></ltb-saved-troll-build>
+      </div>
+    </div>
+  </ng-container>
+  <ng-container *ngSwitchCase="'NotFound'">
+    <nb-alert outline="warning" [class]="'ltb-alert'">
+      <p data-e2e="build-not-found-alert">Couldn't find a saved Troll Build with ID: {{buildId}}</p>
+      <br>
+      <a class="button" routerLink="/builds" data-e2e="try-random-build">
+        Try a random Troll Build
+      </a>
+    </nb-alert>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'InvalidItems'">
+    <nb-alert outline="danger" [class]="'ltb-alert'">
+      <p data-e2e="build-invalid-items-alert">This Troll Build with ID: {{buildId}} has become invalid due to outdated Items</p>
+      <br>
+      <a class="ltb-btn" routerLink="/builds" data-e2e="try-random-build">
+        Try a random Troll Build
+      </a>
+    </nb-alert>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'InvalidSummonerSpells'">
+    <nb-alert outline="danger" [class]="'ltb-alert'">
+      <p data-e2e="build-invalid-summoner-spells-alert">This Troll Build with ID: {{buildId}} has become invalid due to outdated Summoner Spells</p>
+      <br>
+      <a class="ltb-btn" routerLink="/builds" data-e2e="try-random-build">
+        Try a random Troll Build
+      </a>
+    </nb-alert>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'InvalidTrinket'">
+    <nb-alert outline="danger" [class]="'ltb-alert'">
+      <p data-e2e="build-invalid-trinket-alert">This Troll Build with ID: {{buildId}} has become invalid due to an outdated Trinket</p>
+      <br>
+      <a class="ltb-btn" routerLink="/builds" data-e2e="try-random-build">
+        Try a random Troll Build
+      </a>
+    </nb-alert>
+  </ng-container>
 </ng-container>

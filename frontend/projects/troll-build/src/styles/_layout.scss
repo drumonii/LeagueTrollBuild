@@ -1,0 +1,45 @@
+// import flex-layout's media query break points
+@import '~@nebular/theme/styles/global/breakpoints';
+
+@mixin ltb-layout() {
+  nb-layout .layout {
+    background-repeat: no-repeat;
+    background-position: center 85px;
+    background-image: url('assets/images/background.jpg');
+    background-color: #000000;
+    min-height: 100vh;
+  }
+
+  .content-container, .footer-container {
+    margin: 0 auto;
+    padding-top: 1rem;
+  }
+
+  .ltb-flex {
+    display: flex;
+
+    &.centered {
+      justify-content: center;
+    }
+
+    &.space-between {
+      justify-content: space-between;
+    }
+
+    &.column-direction {
+      flex-direction: column;
+    }
+  }
+
+  @each $breakpoint, $container-max-width in $container-max-widths {
+    @include media-breakpoint-up($breakpoint, $grid-breakpoints) {
+      @if $breakpoint == xxxl {
+        @content;
+      } @else {
+        .content-container, .footer-container {
+          max-width: $container-max-width;
+        }
+      }
+    }
+  }
+}

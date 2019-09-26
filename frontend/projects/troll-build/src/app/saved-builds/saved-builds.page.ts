@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { SavedBuildsResolverData } from './saved-builds.resolver.data';
 import { TitleService } from '@ltb-service/title.service';
@@ -9,7 +9,8 @@ import { Build, BuildType } from '@ltb-model/build';
 @Component({
   selector: 'ltb-saved-builds',
   templateUrl: './saved-builds.page.html',
-  styleUrls: ['./saved-builds.page.scss']
+  styleUrls: ['./saved-builds.page.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SavedBuildsPage implements OnInit {
 

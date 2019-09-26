@@ -1,0 +1,5 @@
+<a class="champion-link" [routerLink]="['/champions', champion.key]" data-e2e="champion-link">
+  <p class="champion-name" data-e2e="champion-name">{{champion.name}}</p>
+  <img class="champion-img" [alt]="champion.key" ltbLazyLoadImg src="assets/images/dummy_champion.png"
+    [imgSrc]="'/api/img/champions/' + champion.id" data-e2e="champion-img">
+</a>

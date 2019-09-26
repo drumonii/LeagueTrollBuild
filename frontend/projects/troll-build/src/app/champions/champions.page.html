@@ -1,43 +1,35 @@
 <ng-container *ngIf="(champions$ | async) as champions; else championsLoading">
-  <section class="section">
-    <div class="container">
-      <ng-container *ngIf="champions.length; else noChampions">
-        <div class="columns is-mobile is-centered">
-          <div class="column is-one-quarter-desktop is-two-fifths-tablet is-two-thirds-mobile">
-            <p class="control has-icons-right">
-              <input id="champions-search-input" class="input is-rounded" type="text" placeholder="Search by Champion"
-                  [(ngModel)]="championsSearchName"/>
-              <span class="icon is-small is-right">
-                <i class="fa fa-search" aria-hidden="true"></i>
-              </span>
-            </p>
-          </div>
-        </div>
-
-        <div class="buttons has-addons is-centered">
-          <span class="champion-tag-btn button is-dark" *ngFor="let tag of championTags$ | async"
-              [class.is-active]="tag === championsFilterTag" (click)="setChampionsFilterTag(tag)">
-            {{tag}}
-          </span>
-        </div>
-
-        <div class="columns is-mobile is-gapless is-multiline is-centered">
-          <div class="champion" *ngFor="let champion of (champions | championsNameFilter : championsSearchName | championsTagsFilter : championsFilterTag);
-            trackBy: trackByChampions">
-            <ltb-champion [champion]="champion"></ltb-champion>
-          </div>
-        </div>
-      </ng-container>
-
-      <ng-template #noChampions>
-        <article id="no-champions-alert" class="message is-warning">
-          <div class="message-body">
-            <p id="no-champions-alert-msg">No Champions exist in the database!</p>
-          </div>
-        </article>
-      </ng-template>
+  <ng-container *ngIf="champions.length; else noChampions">
+    <div id="search-container" class="ltb-flex centered">
+      <div class="ltb-input-inner-addon">
+        <input class="ltb-input" nbInput type="text" placeholder="Search by Champion" data-e2e="champions-search-input"
+          [(ngModel)]="championsSearchName"/>
+        <nb-icon icon="search-outline"></nb-icon>
+      </div>
     </div>
-  </section>
+    <div id="filter-container" class="ltb-flex centered">
+      <div class="ltb-btn-group">
+        <button class="ltb-btn" nbButton *ngFor="let tag of championTags$ | async" data-e2e="champion-tag-filter-btn"
+          [class.ltb-btn-active]="tag === championsFilterTag" (click)="setChampionsFilterTag(tag)">
+          {{tag}}
+        </button>
+      </div>
+    </div>
+
+    <div id="champions-container" class="ltb-flex">
+      <ltb-champion-img *ngFor="let champion of (champions | championsNameFilter : championsSearchName | championsTagsFilter : championsFilterTag);
+        trackBy: trackByChampions" [champion]="champion">
+      </ltb-champion-img>
+    </div>
+  </ng-container>
+
+  <ng-template #noChampions>
+    <nb-alert [attr.data-e2e]="'no-champions-alert'" outline="warning" [class]="'ltb-alert'">
+      <span>
+        No Champions exist in the database! This may be an application issue, which if it is, the administrator is likely working to fix it.
+      </span>
+    </nb-alert>
+  </ng-template>
 </ng-container>
 
 <ng-template #championsLoading>

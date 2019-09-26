@@ -1,16 +1,12 @@
-<section class="section">
-  <div class="container">
-    <article class="message is-dark">
-      <div class="message-header">
-        <p id="title">Page Not Found</p>
-      </div>
-      <div class="message-body">
-        <p id="msg">The page you requested was not found. Please double check the URL and try again.</p>
-        <br>
-        <a id="return-to-home" class="button" routerLink="/">
-          <i class="fa fa-home" aria-hidden="true"></i> Return to home
-        </a>
-      </div>
-    </article>
+<div class="ltb-message">
+  <div class="ltb-message-header">
+    <header data-e2e="title">Page Not Found</header>
   </div>
-</section>
+  <div class="ltb-message-body">
+    <p data-e2e="msg">The page you requested was not found. Please double check the URL and try again.</p>
+    <hr>
+    <a class="button" routerLink="/" data-e2e="return-to-home">
+      <nb-icon icon="home-outline"></nb-icon> Return to home
+    </a>
+  </div>
+</div>

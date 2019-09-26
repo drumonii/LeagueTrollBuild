@@ -1,7 +1,10 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
+import { NbLayoutModule, NbThemeModule } from '@nebular/theme';
+import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 
 import { TrollBuildAppComponent } from './troll-build-app.component';
@@ -16,6 +19,10 @@ import { LayoutModule } from '@ltb-layout/layout.module';
   imports: [
     BrowserModule,
     HttpClientModule,
+    BrowserAnimationsModule,
+    NbThemeModule.forRoot({ name: 'league-troll-build' }),
+    NbLayoutModule,
+    NbEvaIconsModule,
     LoadingBarHttpClientModule,
     TrollBuildAppRoutingModule,
     LayoutModule

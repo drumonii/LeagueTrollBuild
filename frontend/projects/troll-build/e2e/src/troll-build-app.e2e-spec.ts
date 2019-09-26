@@ -17,18 +17,14 @@ describe('troll-build-app', () => {
   });
 
   it('should have body styles', async () => {
-    const body = element(by.css('body'));
+    const body = element(by.css('nb-layout .layout'));
     const bodyBgImageCss = await body.getCssValue('background-image');
     expect(bodyBgImageCss).toContain('background.jpg');
     const bodyBgRpeatCss = await body.getCssValue('background-repeat');
     expect(bodyBgRpeatCss).toBe('no-repeat');
 
     const bodyBgColorCss = await element(by.css('body')).getCssValue('background-color');
-    if (bodyBgColorCss.indexOf('rgba') === -1) {
-      expect(bodyBgColorCss).toBe('rgb(0, 0, 0)');
-    } else { // if IE
-      expect(bodyBgColorCss).toBe('rgba(0, 0, 0, 1)');
-    }
+    expect(bodyBgColorCss).toBe('rgba(0, 0, 0, 0)');
   });
 
   it('should show the troll build header', async () => {

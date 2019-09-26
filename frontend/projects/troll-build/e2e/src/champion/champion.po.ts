@@ -21,11 +21,11 @@ export class ChampionPage extends BaseTrollBuildPage {
   }
 
   private getMaps(): ElementFinder {
-    return element(by.css('#map-select'));
+    return element(by.css('[data-e2e="map-select"]'));
   }
 
   getDefaultSelectedMap(): ElementFinder {
-    return this.getMaps().element(by.css('option:checked'));
+    return this.getMaps().element(by.css('.select-button'));
   }
 
   getTrollBuild() {
@@ -37,25 +37,28 @@ export class ChampionPage extends BaseTrollBuildPage {
   }
 
   private getTrollBuildItems(): ElementArrayFinder {
-    return element.all(by.css('.troll-build-item'));
+    return element.all(by.css('[data-e2e="items-row"] > .ltb-list > .ltb-list-item'));
   }
 
   private getTrollBuildSummonerSpells(): ElementArrayFinder {
-    return element.all(by.css('.troll-build-summoner-spell'));
+    return element.all(by.css('[data-e2e="summoner-spells-row"] > .ltb-list > .ltb-list-item'));
   }
 
   private getTrollBuildTrinket(): ElementArrayFinder {
-    return element.all(by.css('.troll-build-trinket'));
+    return element.all(by.css('[data-e2e="trinket-row"] > .ltb-list > .ltb-list-item'));
   }
 
   async saveTrollBuild(): Promise<void> {
-    await element(by.css('#save-build-btn')).click();
-    const saveBuildInput = await element(by.css('#saved-build-input-link'));
-    await browser.wait(ExpectedConditions.presenceOf(saveBuildInput));
+    await this.getSaveBuildBtn().click();
+    await browser.wait(ExpectedConditions.presenceOf(this.getSavedBuildInputLink()));
   }
 
-  async getSavedBuild(): Promise<string> {
-    return element(by.css('#saved-build-input-link')).getText();
+  getSaveBuildBtn(): ElementFinder {
+    return element(by.css('[data-e2e="save-build-btn"]'));
+  }
+
+  getSavedBuildInputLink(): ElementFinder {
+    return element(by.css('[data-e2e="saved-build-input-link"]'));
   }
 
 }

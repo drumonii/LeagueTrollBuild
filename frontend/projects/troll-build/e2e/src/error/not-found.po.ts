@@ -9,15 +9,15 @@ export class NotFoundPage extends BaseTrollBuildPage {
   }
 
   getMsgHeader(): ElementFinder {
-    return element(by.css('#title'));
+    return element(by.css('[data-e2e="title"]'));
   }
 
   getMsgBody(): ElementFinder {
-    return element(by.css('#msg'));
+    return element(by.css('[data-e2e="msg"]'));
   }
 
   getReturnToHomeLink(): ElementFinder {
-    return element(by.css('#return-to-home'));
+    return element(by.css('[data-e2e="return-to-home"]'));
   }
 
 }

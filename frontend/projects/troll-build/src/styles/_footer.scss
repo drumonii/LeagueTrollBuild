@@ -1,0 +1,23 @@
+@import 'theme';
+
+@mixin ltb-footer() {
+  nb-layout-footer {
+    box-shadow: none !important;
+
+    nav {
+      background-color: #000000 !important;
+      border-top: none !important;
+    }
+  }
+
+  footer {
+    a {
+      color: nb-theme(color-primary-400);
+      text-decoration: none;
+
+      &:hover {
+        color: nb-theme(color-primary-300) !important;
+      }
+    }
+  }
+}

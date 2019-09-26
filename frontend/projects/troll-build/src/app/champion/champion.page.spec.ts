@@ -1,4 +1,4 @@
-import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { FormsModule } from '@angular/forms';
@@ -6,7 +6,11 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { By } from '@angular/platform-browser';
 
+import { NbSelectComponent, NbThemeModule } from '@nebular/theme';
+import { NbEvaIconsModule } from '@nebular/eva-icons';
+
 import { of } from 'rxjs';
+import { delay } from 'rxjs/operators';
 
 import { ChampionPage } from './champion.page';
 import { ChampionModule } from './champion.module';
@@ -108,7 +112,7 @@ describe('ChampionPage', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ChampionModule, FormsModule, HttpClientTestingModule, RouterTestingModule],
+      imports: [FormsModule, HttpClientTestingModule, RouterTestingModule, NbThemeModule.forRoot(), NbEvaIconsModule, ChampionModule],
       providers: [
         {
           provide: ActivatedRoute,
@@ -864,83 +868,57 @@ describe('ChampionPage', () => {
       }
     };
 
-    const trollBuilds: { [mapId: number]: TrollBuild; } = {
+    const trollBuilds = {
       [twistedTreeline.mapId]: twistedTreelineTrollBuild,
       [summonersRift.mapId]: summonersRiftTrollBuild,
       [howlingAbyss.mapId]: howlingAbyssTrollBuild
     };
 
-    beforeEach(inject([ChampionService, TitleService],
-      (championService: ChampionService, title: TitleService) => {
-      spyOn(championService, 'getChampion').and.returnValue(of(skarner));
+    beforeEach(inject([ChampionService, TitleService], (championService: ChampionService, title: TitleService) => {
       spyOn(championService, 'mapsForTrollBuild').and.returnValue(of(maps));
+      const championServiceSpy = spyOn(championService, 'getTrollBuild');
+      for (const map of maps) {
+        championServiceSpy.withArgs(skarner.name, map.mapId).and.returnValue(of(trollBuilds[map.mapId]));
+      }
 
       spyOn(title, 'setTitle').and.callThrough();
+
+      fixture.detectChanges();
     }));
 
-    afterEach(inject([ChampionService, TitleService],
-      (championService: ChampionService, title: TitleService) => {
-      expect(championService.getChampion).not.toHaveBeenCalledWith(skarner.name);
+    afterEach(inject([ChampionService, TitleService], (championService: ChampionService, title: TitleService) => {
       expect(championService.mapsForTrollBuild).toHaveBeenCalled();
 
       expect(title.setTitle).toHaveBeenCalledWith(skarner.name);
     }));
 
     it('should show Troll Build for Summoner\'s Rift by default', inject([ChampionService], (championService: ChampionService) => {
-      spyOn(championService, 'getTrollBuild').and.returnValue(of(summonersRiftTrollBuild));
-
-      fixture.detectChanges();
-
       expect(championService.getTrollBuild).toHaveBeenCalledWith(skarner.name, SummonersRiftId);
     }));
 
     it('should generate a new Troll Build after selecting a new map',
       inject([ChampionService], (championService: ChampionService) => {
-      fixture.detectChanges();
-
-      const mapSelect = fixture.debugElement.query(By.css('#map-select'));
-      expect(mapSelect).toBeTruthy();
-
-      const championServiceSpy = spyOn(championService, 'getTrollBuild');
-
-      for (let i = 0; i < maps.length; i++) {
-        const mapId = maps[i].mapId;
+      for (const map of maps) {
+        const mapId = map.mapId;
         const trollBuild = trollBuilds[mapId];
 
-        championServiceSpy.and.returnValue(of(trollBuild));
-
-        mapSelect.nativeElement.value = mapSelect.nativeElement.options[i].value;
-        const changeEvent = document.createEvent('Event');
-        changeEvent.initEvent('change', false, false);
-        mapSelect.nativeElement.dispatchEvent(changeEvent);
-
+        selectMap(map);
         fixture.detectChanges();
 
         expectChampionAndMapsAndTrollBuild(trollBuild, mapId);
 
         expect(championService.getTrollBuild).toHaveBeenCalledWith(skarner.name, mapId);
-        expect(component.build).toBeNull();
       }
     }));
 
     xit('should reset the saved Build and generate a new Troll Build after clicking the new build button',
       inject([ChampionService], (championService: ChampionService) => {
-      fixture.detectChanges();
-
-      const championServiceSpy = spyOn(championService, 'getTrollBuild');
-
-      const mapSelect = fixture.debugElement.query(By.css('#map-select'));
-      expect(mapSelect).toBeTruthy();
-
       const newBuild = fixture.debugElement.query(By.css('#new-build-btn'));
       expect(newBuild).toBeTruthy();
 
-      for (let i = 0; i < maps.length; i++) {
-        const map = maps[i];
+      for (const map of maps) {
         const mapId = map.mapId;
         const trollBuild = trollBuilds[mapId];
-
-        championServiceSpy.and.returnValue(of(trollBuild));
 
         const build = new BuildBuilder()
           .withChampion(skarner)
@@ -950,41 +928,31 @@ describe('ChampionPage', () => {
           .withGameMap(map)
           .build();
 
-        component.build = build;
+        component.build$ = of(build);
 
-        mapSelect.nativeElement.value = mapSelect.nativeElement.options[i].value;
-        const changeEvent = document.createEvent('Event');
-        changeEvent.initEvent('change', false, false);
-        mapSelect.nativeElement.dispatchEvent(changeEvent);
+        selectMap(map);
+        fixture.detectChanges();
 
         newBuild.triggerEventHandler('click', null);
-
         fixture.detectChanges();
 
         expectChampionAndMapsAndTrollBuild(trollBuild, mapId);
 
         expect(championService.getTrollBuild).toHaveBeenCalledWith(skarner.name, mapId);
-        expect(component.build).toBeNull();
+        component.build$.subscribe(componentBuild => {
+          expect(componentBuild).toBeNull();
+        });
       }
     }));
 
-    xit('should save a Troll Build with after clicking the save build button and then show its self link',
+    xit('should save a Troll Build after clicking the save build button and then show its self link',
       inject([ChampionService], (championService: ChampionService) => {
-      fixture.detectChanges();
-
-      const championServiceSpy = spyOn(championService, 'getTrollBuild');
       const buildsServiceSpy = spyOn(championService, 'saveBuild');
-      const execCommandSpy =  spyOn(document, 'execCommand');
+      const execCommandSpy =  spyOn(document, 'execCommand').and.callThrough();
 
-      const mapSelect = fixture.debugElement.query(By.css('#map-select'));
-      expect(mapSelect).toBeTruthy();
-
-      for (let i = 0; i < maps.length; i++) {
-        const map = maps[i];
+      for (const map of maps) {
         const mapId = map.mapId;
         const trollBuild = trollBuilds[mapId];
-
-        championServiceSpy.and.returnValue(of(trollBuild));
 
         const build = new BuildBuilder()
           .withChampion(skarner)
@@ -1019,39 +987,37 @@ describe('ChampionPage', () => {
           status: 201
         })));
 
-        mapSelect.nativeElement.value = mapSelect.nativeElement.options[i].value;
-        const changeEvent = document.createEvent('Event');
-        changeEvent.initEvent('change', false, false);
-        mapSelect.nativeElement.dispatchEvent(changeEvent);
-
+        selectMap(map);
         fixture.detectChanges();
 
         expectChampionAndMapsAndTrollBuild(trollBuild, mapId);
 
-        const newBuildBtn = fixture.debugElement.query(By.css('#save-build-btn'));
-        newBuildBtn.triggerEventHandler('click', null);
-
+        const saveBuildBtn = fixture.debugElement.query(By.css('[data-e2e="save-build-btn"]'));
+        saveBuildBtn.triggerEventHandler('click', null);
         fixture.detectChanges();
 
         expect(championService.saveBuild).toHaveBeenCalledWith(build);
 
-        const savedBuildInput = fixture.debugElement.query(By.css('#saved-build-input-link'));
+        const savedBuildInput = fixture.debugElement.query(By.css('[data-e2e="saved-build-input-link"]'));
         expect(savedBuildInput.nativeElement.value).toBe(`http://localhost/build/${savedBuild.id}`);
         expect(savedBuildInput.nativeElement.readOnly).toBe(true);
 
-        expect(newBuildBtn.nativeElement.disabled).toBeTruthy('Expected save build button to be disabled');
+        expect(fixture.debugElement.query(By.css('[data-e2e="save-build-btn"]'))).toBeFalsy();
 
-        execCommandSpy.and.callThrough();
-
-        const savedBuildCopyBtn = fixture.debugElement.query(By.css('#copy-build-link-btn'));
-        expect(savedBuildCopyBtn).toBeTruthy();
+        const savedBuildCopyBtn = fixture.debugElement.query(By.css('[data-e2e="copy-build-link-btn"]'));
         savedBuildCopyBtn.triggerEventHandler('click', null);
 
         fixture.detectChanges();
 
-        expect(document.execCommand).toHaveBeenCalledWith('copy');
+        expect(execCommandSpy).toHaveBeenCalledWith('copy');
       }
     }));
+
+    function selectMap(map: GameMap) {
+      const cdkMapSelect = fixture.debugElement.query(By.directive(NbSelectComponent)).componentInstance;
+      const cdkMapOption = cdkMapSelect.options._results.find(option => option.value.mapId === map.mapId);
+      cdkMapSelect.selectOption(cdkMapOption);
+    }
 
     function expectChampionAndMapsAndTrollBuild(trollBuild: TrollBuild, selectedMap: number) {
       // Champion
@@ -1061,59 +1027,30 @@ describe('ChampionPage', () => {
       const championsTitle = fixture.debugElement.query(By.css('#champion-title'));
       expect(championsTitle.nativeElement.textContent).toBe(skarner.title);
 
-      const championPartype = fixture.debugElement.query(By.css('#champion-partype'));
+      const championPartype = fixture.debugElement.query(By.css('[data-e2e="champion-partype"]'));
       expect(championPartype.nativeElement.textContent).toBe(`${skarner.partype}`);
 
-      const championTags = fixture.debugElement.queryAll(By.css('.champion-tag'));
+      const championTags = fixture.debugElement.queryAll(By.css('#champion-tags .ltb-tag'));
       expect(championTags.map(championTag => championTag.nativeElement.textContent)).toEqual(skarner.tags);
 
       // New Build
       const newBuildBtn = fixture.debugElement.query(By.css('#new-build-btn'));
-      expect(newBuildBtn.classes['is-loading']).toBeFalsy();
-      expect(newBuildBtn.nativeElement.textContent).toBe('New Build');
+      // expect(newBuildBtn.attributes['ng-reflect-nb-spinner']).toBe('false');
+      expect(newBuildBtn.nativeElement.textContent.trim()).toBe('New Build');
 
       // Maps
-      const mapsSelect = fixture.debugElement.query(By.css('#map-select'));
-      expect(mapsSelect.nativeElement.selectedIndex)
-        .toBe(maps.findIndex(map => map.mapId === selectedMap));
-      expect(mapsSelect.nativeElement.options[mapsSelect.nativeElement.selectedIndex].text)
-        .toBe(maps.find(map => map.mapId === selectedMap).mapName);
-      const mapsOption = fixture.debugElement.queryAll(By.css('.map-option'));
-      expect(mapsOption.map(mapOption => mapOption.nativeElement.textContent.trim()))
-        .toEqual(maps.map(map => map.mapName));
+      const mapsSelect = fixture.debugElement.query(By.css('[data-e2e="map-select"]'));
+      const mapsOption = mapsSelect.query(By.css('.select-button'));
+      expect(mapsOption.nativeElement.textContent.trim()).toBe(maps.find(map => map.mapId === selectedMap).mapName);
+      const cdkMapSelect = fixture.debugElement.query(By.directive(NbSelectComponent));
+      expect(cdkMapSelect.componentInstance.options.length).toBe(3);
 
       // Troll Build
-      const trollBuildItemsHeader = fixture.debugElement.query(By.css('.troll-build-items-header'));
-      expect(trollBuildItemsHeader.nativeElement.textContent).toBe('Items');
-      const trollBuildItems = fixture.debugElement.queryAll(By.css('.troll-build-item'));
-      expect(trollBuildItems.length).toBe(trollBuild.items.length);
-      for (let i = 0; i < trollBuildItems.length; i++) {
-        expect(trollBuildItems[i].attributes['data-tooltip']).toBe(trollBuild.items[i].name);
-        const trollBuildItemImg = trollBuildItems[i].query(By.css('.troll-build-item-img'));
-        expect(trollBuildItemImg.nativeElement.src).toContain(`/api/img/items/${trollBuild.items[i].id}`);
-      }
-
-      const trollBuildSummonerSpellsHeader = fixture.debugElement.query(By.css('.troll-build-summoner-spells-header'));
-      expect(trollBuildSummonerSpellsHeader.nativeElement.textContent).toBe('Summoner Spells');
-      const trollBuildSummonerSpells = fixture.debugElement.queryAll(By.css('.troll-build-summoner-spell'));
-      expect(trollBuildSummonerSpells.length).toBe(trollBuild.summonerSpells.length);
-      for (let i = 0; i < trollBuildSummonerSpells.length; i++) {
-        expect(trollBuildSummonerSpells[i].attributes['data-tooltip']).toBe(trollBuild.summonerSpells[i].name);
-        const trollBuildSummonerSpellsImg = trollBuildSummonerSpells[i].query(By.css('.troll-build-summoner-spells-img'));
-        expect(trollBuildSummonerSpellsImg.nativeElement.src).toContain(`/api/img/summoner-spells/${trollBuild.summonerSpells[i].id}`);
-      }
-
-      const trollBuildTrinketHeader = fixture.debugElement.query(By.css('.troll-build-trinket-header'));
-      expect(trollBuildTrinketHeader.nativeElement.textContent).toBe('Trinket');
-      const trollBuildTrinket = fixture.debugElement.query(By.css('.troll-build-trinket'));
-      expect(trollBuildTrinket).toBeTruthy();
-      expect(trollBuildTrinket.attributes['data-tooltip']).toBe(trollBuild.trinket.name);
-      const trollBuildTrinketImg = fixture.debugElement.query(By.css('.troll-build-trinket-img'));
-      expect(trollBuildTrinketImg.nativeElement.src).toContain(`/api/img/items/${trollBuild.trinket.id}`);
+      expectTrollBuildNotToBeLoading(trollBuild);
 
       // Save Troll Build
-      // const saveBuildBtn = fixture.debugElement.query(By.css('#save-build-btn'));
-      // expect(saveBuildBtn.nativeElement.textContent).toBe('Save Build');
+      // const saveBuildBtn = fixture.debugElement.query(By.css('[data-e2e="save-build-btn"]'));
+      // expect(saveBuildBtn.nativeElement.textContent.trim()).toBe('Save Build');
       // expect(newBuildBtn.nativeElement.disabled).toBeFalsy('Expected save build button to be enabled');
     }
 
@@ -1121,61 +1058,38 @@ describe('ChampionPage', () => {
 
   describe('show Champion by name with a loading Troll Build and maps to select', () => {
 
+    const networkDelay = 1500;
+
     beforeEach(inject([ChampionService], (championService: ChampionService) => {
-      spyOn(championService, 'getChampion').and.returnValue(of(skarner));
-      spyOn(championService, 'getTrollBuild').and.callThrough();
+      spyOn(championService, 'getTrollBuild').and.returnValue(of(null).pipe(delay(networkDelay)));
       spyOn(championService, 'mapsForTrollBuild').and.returnValue(of(maps));
     }));
 
     afterEach(inject([ChampionService], (championService: ChampionService) => {
-      expect(championService.getChampion).not.toHaveBeenCalledWith(skarner.name);
       expect(championService.getTrollBuild).toHaveBeenCalledWith(skarner.name, SummonersRiftId);
       expect(championService.mapsForTrollBuild).toHaveBeenCalled();
     }));
 
-    it('should show placeholders indicating a loading Troll Build ', () => {
+    it('should show placeholders indicating a loading Troll Build ', fakeAsync(() => {
       fixture.detectChanges();
 
       const newBuildBtnLoading = fixture.debugElement.query(By.css('#new-build-btn'));
-      expect(newBuildBtnLoading.classes['is-loading']).toBeTruthy();
+      expect(newBuildBtnLoading.attributes['ng-reflect-nb-spinner']).toBe('true');
 
-      const trollBuildLoadingItemsHeader = fixture.debugElement.query(By.css('.troll-build-items-header'));
-      expect(trollBuildLoadingItemsHeader.nativeElement.textContent).toBe('Items');
-      const trollBuildLoadingItems = fixture.debugElement.queryAll(By.css('.troll-build-loading-item'));
-      expect(trollBuildLoadingItems.length).toBe(6);
-      const trollBuildLoadingItemsImgs = fixture.debugElement.queryAll(By.css('.troll-build-item-img'));
-      expect(trollBuildLoadingItemsImgs.length).toBe(6);
-      for (const trollBuildLoadingItemsImg of trollBuildLoadingItemsImgs) {
-        expect(trollBuildLoadingItemsImg.nativeElement.src).toContain('assets/images/dummy_item.png');
-      }
+      // Troll Build
+      expectTrollBuildToBeLoading();
 
-      const trollBuildLoadingSummonerSpellsHeader = fixture.debugElement.query(By.css('.troll-build-summoner-spells-header'));
-      expect(trollBuildLoadingSummonerSpellsHeader.nativeElement.textContent).toBe('Summoner Spells');
-      const trollBuildLoadingSummonerSpells = fixture.debugElement.queryAll(By.css('.troll-build-loading-summoner-spell'));
-      expect(trollBuildLoadingSummonerSpells.length).toBe(2);
-      const trollBuildLoadingSummonerSpellsImgs = fixture.debugElement.queryAll(By.css('.troll-build-summoner-spells-img'));
-      expect(trollBuildLoadingSummonerSpellsImgs.length).toBe(2);
-      for (const trollBuildLoadingSummonerSpellsImg of trollBuildLoadingSummonerSpellsImgs) {
-        expect(trollBuildLoadingSummonerSpellsImg.nativeElement.src).toContain('assets/images/dummy_item.png');
-      }
+      // Save Troll Build
+      expect(fixture.debugElement.query(By.css('[data-e2e="save-build-btn"]'))).toBeFalsy();
 
-      const trollBuildLoadingTrinketHeader = fixture.debugElement.query(By.css('.troll-build-trinket-header'));
-      expect(trollBuildLoadingTrinketHeader.nativeElement.textContent).toBe('Trinket');
-      const trollBuildLoadingTrinket = fixture.debugElement.query(By.css('.troll-build-loading-trinket'));
-      expect(trollBuildLoadingTrinket).toBeTruthy();
-      const trollBuildLoadingTrinketImg = fixture.debugElement.query(By.css('.troll-build-trinket-img'));
-      expect(trollBuildLoadingTrinketImg.nativeElement.src).toContain('assets/images/dummy_item.png');
-
-      const saveBuildBtn = fixture.debugElement.query(By.css('#save-build-btn'));
-      expect(saveBuildBtn).toBeFalsy();
-    });
+      tick(networkDelay);
+    }));
 
   });
 
   describe('show Champion by name with a failed to load Troll Build and maps to select', () => {
 
     beforeEach(inject([ChampionService], (championService: ChampionService) => {
-      spyOn(championService, 'getChampion').and.returnValue(of(skarner));
       spyOn(championService, 'getTrollBuild').and.returnValue(of({
         items: null,
         summonerSpells: null,
@@ -1185,7 +1099,6 @@ describe('ChampionPage', () => {
     }));
 
     afterEach(inject([ChampionService], (championService: ChampionService) => {
-      expect(championService.getChampion).not.toHaveBeenCalledWith(skarner.name);
       expect(championService.getTrollBuild).toHaveBeenCalledWith(skarner.name, SummonersRiftId);
       expect(championService.mapsForTrollBuild).toHaveBeenCalled();
     }));
@@ -1193,11 +1106,8 @@ describe('ChampionPage', () => {
     it('should show unable to generate Troll Build alert', () => {
       fixture.detectChanges();
 
-      const alert = fixture.debugElement.query(By.css('#no-troll-build-alert'));
-      expect(alert).toBeTruthy();
-
-      const alertMsg = fixture.debugElement.query(By.css('#no-troll-build-alert-msg'));
-      expect(alertMsg.nativeElement.textContent)
+      const alert = fixture.debugElement.query(By.css('[data-e2e="no-troll-build-alert"]'));
+      expect(alert.nativeElement.textContent.trim())
         .toBe('An error has occurred while generating a Troll Build. Please try again later.');
     });
 
@@ -1205,29 +1115,123 @@ describe('ChampionPage', () => {
 
   describe('show Champion by name with loading game maps', () => {
 
+    const networkDelay = 1500;
+
     beforeEach(inject([ChampionService], (championService: ChampionService) => {
-      spyOn(championService, 'getChampion').and.returnValue(of(skarner));
-      spyOn(championService, 'getTrollBuild').and.callThrough();
-      spyOn(championService, 'mapsForTrollBuild').and.callThrough();
+      spyOn(championService, 'getTrollBuild').and.returnValue(of(null));
+      spyOn(championService, 'mapsForTrollBuild').and.returnValue(of(maps).pipe(delay(networkDelay)));
     }));
 
     afterEach(inject([ChampionService], (championService: ChampionService) => {
-      expect(championService.getChampion).not.toHaveBeenCalledWith(skarner.name);
-      expect(championService.getTrollBuild).not.toHaveBeenCalledWith(skarner.name, SummonersRiftId);
+      expect(championService.getTrollBuild).toHaveBeenCalledWith(skarner.name, SummonersRiftId);
       expect(championService.mapsForTrollBuild).toHaveBeenCalled();
     }));
 
-    it('should should game maps select with single loading option', () => {
+    it('should show game maps select as loading', fakeAsync(() => {
       fixture.detectChanges();
 
-      const mapSelectLoading = fixture.debugElement.query(By.css('#map-select-loading'));
-      expect(mapSelectLoading).toBeTruthy();
+      expect(fixture.debugElement.query(By.css('[data-e2e="map-select-loading"]'))).toBeTruthy();
 
-      const mapsOption = fixture.debugElement.queryAll(By.css('.map-option-loading'));
-      expect(mapsOption.map(mapOption => mapOption.nativeElement.textContent.trim()))
-        .toEqual(jasmine.arrayContaining(['Fetching maps...']));
-    });
+      tick(1500);
+    }));
 
   });
+
+  function expectTrollBuildNotToBeLoading(trollBuild: TrollBuild) {
+    expectItemsRowNotToBeLoading(trollBuild);
+    expectSummonerSpellsRowNotToBeLoading(trollBuild);
+    expectTrinketRowNotToBeLoading(trollBuild);
+  }
+
+  function expectTrollBuildToBeLoading() {
+    expectItemsRowToBeLoading();
+    expectSummonerSpellsRowToBeLoading();
+    expectTrinketRowToBeLoading();
+  }
+
+  function expectItemsRowNotToBeLoading(trollBuild: TrollBuild) {
+    expectItemsRow(trollBuild);
+  }
+
+  function expectItemsRowToBeLoading() {
+    expectItemsRow();
+  }
+
+  function expectItemsRow(trollBuild?: TrollBuild) {
+    const trollBuildItemsRow = fixture.debugElement.query(By.css('[data-e2e="items-row"]'));
+    const trollBuildItemsHeader = trollBuildItemsRow.query(By.css('.troll-build-objects-header'));
+    expect(trollBuildItemsHeader.nativeElement.textContent).toBe('Items');
+
+    const trollBuildItems = trollBuildItemsRow.queryAll(By.css('.ltb-list > .ltb-list-item'));
+    expect(trollBuildItems.length).toBe(6);
+
+    const trollBuildItemsImgs = trollBuildItemsRow.queryAll(By.css('.troll-build-object-img'));
+    expect(trollBuildItemsImgs.length).toBe(6);
+
+    for (let i = 0; i < trollBuildItemsImgs.length; i++) {
+      const trollBuildItemImg = trollBuildItemsImgs[i];
+      if (trollBuild) {
+        expect(trollBuildItemImg.nativeElement.src).toContain(`/api/img/items/${trollBuild.items[i].id}`);
+      } else {
+        expect(trollBuildItemImg.nativeElement.src).toContain('assets/images/dummy_item.png');
+      }
+    }
+  }
+
+  function expectSummonerSpellsRowNotToBeLoading(trollBuild: TrollBuild) {
+    expectSummonerSpellsRow(trollBuild);
+  }
+
+  function expectSummonerSpellsRowToBeLoading() {
+    expectSummonerSpellsRow();
+  }
+
+  function expectSummonerSpellsRow(trollBuild?: TrollBuild) {
+    const trollBuildSummonerSpellsRow = fixture.debugElement.query(By.css('[data-e2e="summoner-spells-row"]'));
+    const trollBuildSummonerSpellsHeader = trollBuildSummonerSpellsRow.query(By.css('.troll-build-objects-header'));
+    expect(trollBuildSummonerSpellsHeader.nativeElement.textContent).toBe('Summoner Spells');
+
+    const trollBuildSummonerSpells = trollBuildSummonerSpellsRow.queryAll(By.css('.ltb-list > .ltb-list-item'));
+    expect(trollBuildSummonerSpells.length).toBe(2);
+
+    const trollBuildSummonerSpellsImgs = trollBuildSummonerSpellsRow.queryAll(By.css('.troll-build-object-img'));
+    expect(trollBuildSummonerSpellsImgs.length).toBe(2);
+
+    for (let i = 0; i < trollBuildSummonerSpellsImgs.length; i++) {
+      const trollBuildSummonerSpellImg = trollBuildSummonerSpellsImgs[i];
+      if (trollBuild) {
+        expect(trollBuildSummonerSpellImg.nativeElement.src).toContain(`/api/img/summoner-spells/${trollBuild.summonerSpells[i].id}`);
+      } else {
+        expect(trollBuildSummonerSpellImg.nativeElement.src).toContain('assets/images/dummy_item.png');
+      }
+    }
+  }
+
+  function expectTrinketRowNotToBeLoading(trollBuild: TrollBuild) {
+    expectTrinketRow(trollBuild);
+  }
+
+  function expectTrinketRowToBeLoading() {
+    expectTrinketRow();
+  }
+
+  function expectTrinketRow(trollBuild?: TrollBuild) {
+    const trollBuildTrinketRow = fixture.debugElement.query(By.css('[data-e2e="trinket-row"]'));
+    const trollBuildTrinketHeader = trollBuildTrinketRow.query(By.css('.troll-build-objects-header'));
+    expect(trollBuildTrinketHeader.nativeElement.textContent).toBe('Trinket');
+
+    const trollBuildTrinkets = trollBuildTrinketRow.queryAll(By.css('.ltb-list > .ltb-list-item'));
+    expect(trollBuildTrinkets.length).toBe(1);
+
+    const trollBuildTrinketImgs = trollBuildTrinketRow.queryAll(By.css('.troll-build-object-img'));
+    expect(trollBuildTrinketImgs.length).toBe(1);
+
+    const trollBuildTrinketImg = trollBuildTrinketImgs[0];
+    if (trollBuild) {
+      expect(trollBuildTrinketImg.nativeElement.src).toContain(`/api/img/items/${trollBuild.trinket.id}`);
+    } else {
+      expect(trollBuildTrinketImg.nativeElement.src).toContain('assets/images/dummy_item.png');
+    }
+  }
 
 });

@@ -1,0 +1,41 @@
+@import '~@nebular/theme/styles/global/breakpoints';
+@import 'theme';
+
+$header-background-color: #171717;
+$header-border-bottom-color: #262626;
+
+@mixin ltb-header() {
+  nb-layout-header {
+    background-color: $header-background-color;
+    border-bottom: 2px solid $header-border-bottom-color;
+
+    nav {
+      justify-content: center !important;
+      height: 4.25rem;
+      box-shadow: none !important;
+    }
+  }
+
+  .header-title {
+    font-size: 2.5rem;
+
+    a {
+      color: nb-theme(color-primary-400);
+      text-decoration: none;
+
+      &:hover {
+        color: nb-theme(color-primary-300);
+      }
+
+      &:active, &:focus {
+        color: nb-theme(color-primary-400);
+      }
+    }
+  }
+
+  @include media-breakpoint-down(xs) {
+    .header-title {
+      font-size: 2rem;
+    }
+  }
+}

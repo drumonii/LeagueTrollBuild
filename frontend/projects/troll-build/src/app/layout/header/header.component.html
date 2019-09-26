@@ -1,22 +1,15 @@
 <div id="outdated-browser" *ngIf="isBrowserOutdated">
-  <div class="container">
-    <h5 class="title is-5"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> <strong>Your Internet Explorer is outdated</strong></h5>
-    <p class="subtitle">
-      For the best site experience, upgrade to the latest
-      <a href="https://www.microsoft.com/en-us/windows/microsoft-edge">Microsoft Edge</a>,
-      <a href="https://chrome.google.com">Google Chrome</a>, or
-      <a href="https://mozilla.org/firefox/">Firefox</a>.
-    </p>
-  </div>
+  <h5>
+    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+    <strong>Your Internet Explorer is outdated</strong>
+  </h5>
+  <p>
+    For the best site experience, upgrade to the latest
+    <a href="https://www.microsoft.com/en-us/windows/microsoft-edge">Microsoft Edge</a>,
+    <a href="https://chrome.google.com">Google Chrome</a>, or
+    <a href="https://mozilla.org/firefox/">Firefox</a>.
+  </p>
 </div>
-<nav id="header">
-  <div class="container">
-    <div class="columns">
-      <div class="column">
-        <h1 id="header-title">
-          <a id="header-title-link" routerLink="/">{{header}}</a>
-        </h1>
-      </div>
-    </div>
-  </div>
-</nav>
+<h1 class="header-title">
+  <a routerLink="/">{{header}}</a>
+</h1>

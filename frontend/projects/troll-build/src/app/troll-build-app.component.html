@@ -1,4 +1,14 @@
 <ngx-loading-bar [color]="'#ffdd57'" [includeSpinner]="false"></ngx-loading-bar>
-<ltb-header></ltb-header>
-<router-outlet></router-outlet>
-<ltb-footer></ltb-footer>
+<nb-layout>
+  <nb-layout-header>
+    <ltb-header></ltb-header>
+  </nb-layout-header>
+  <nb-layout-column>
+    <div class="content-container">
+      <router-outlet></router-outlet>
+    </div>
+  </nb-layout-column>
+  <nb-layout-footer>
+    <ltb-footer></ltb-footer>
+  </nb-layout-footer>
+</nb-layout>

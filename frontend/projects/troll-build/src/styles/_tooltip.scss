@@ -1,0 +1,18 @@
+@mixin ltb-tooltip() {
+  $tooltip-background-color: #2a2a2a;
+  $tooltip-border-bottom-color: #252525;
+  $tooltip-color: #ffffff;
+
+  nb-tooltip {
+    background: $tooltip-background-color;
+    box-shadow: none;
+
+    .content {
+      color: $tooltip-color;
+    }
+
+    .arrow {
+      border-bottom-color: $tooltip-border-bottom-color;
+    }
+  }
+}

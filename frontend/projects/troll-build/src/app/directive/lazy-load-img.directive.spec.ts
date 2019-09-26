@@ -5,7 +5,7 @@ import { By } from '@angular/platform-browser';
 import { LazyLoadImgModule } from './lazy-load-img.module';
 
 @Component({
-  template: `<img ltbLazyLoadImg src="defaultSrc.png" [dataSrc]="'dataSrc.png'">`
+  template: `<img ltbLazyLoadImg src="defaultSrc.png" [imgSrc]="'imgSrc.png'">`
 })
 class TestLazyLoadImgComponent {
 }
@@ -43,7 +43,7 @@ describe('LazyLoadImgDirective', () => {
     if (supportsIntersectionObserver) {
       expect(IntersectionObserver.prototype.observe).toHaveBeenCalled();
     } else {
-      expect(img.nativeElement.src).toContain('dataSrc.png');
+      expect(img.nativeElement.src).toContain('imgSrc.png');
     }
   });
 

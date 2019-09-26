@@ -1,8 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { Observable, Subscription } from 'rxjs';
-import { finalize, tap } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { finalize, map, tap } from 'rxjs/operators';
 
 import { TitleService } from '@ltb-service/title.service';
 import { ChampionService } from './champion.service';
@@ -14,9 +14,10 @@ import { TrollBuild } from '@ltb-model/troll-build';
 @Component({
   selector: 'ltb-champion',
   templateUrl: './champion.page.html',
-  styleUrls: ['./champion.page.scss']
+  styleUrls: ['./champion.page.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush // to avoid ExpressionChangedAfterItHasBeenCheckedError in tests
 })
-export class ChampionPage implements OnInit, OnDestroy {
+export class ChampionPage implements OnInit {
 
   gameMap: GameMap;
   gameMaps$: Observable<GameMap[]>;
@@ -24,12 +25,10 @@ export class ChampionPage implements OnInit, OnDestroy {
   champion: Champion;
 
   trollBuild$: Observable<TrollBuild>;
-  trollBuildLoading: boolean;
+  trollBuildLoading = true;
 
-  build: Build;
-  buildSaving: boolean;
-
-  private subscriptions = new Subscription();
+  build$: Observable<Build>;
+  buildSaving = false;
 
   constructor(private championService: ChampionService, private title: TitleService, private route: ActivatedRoute) {}
 
@@ -58,7 +57,7 @@ export class ChampionPage implements OnInit, OnDestroy {
   }
 
   getTrollBuild(): void {
-    this.build = null;
+    this.build$ = of(null);
     this.trollBuildLoading = true;
     this.trollBuild$ = this.championService.getTrollBuild(this.champion.name, this.gameMap.mapId)
       .pipe(
@@ -74,16 +73,17 @@ export class ChampionPage implements OnInit, OnDestroy {
       .withTrinket(trollBuild.trinket)
       .withGameMap(this.gameMap)
       .build();
-    this.buildSaving = true;
-    this.subscriptions.add(this.championService.saveBuild(build).subscribe(res => {
-      this.build = res.body;
-      this.build.selfRef = res.headers.get('Location').replace('/api', '');
-      this.buildSaving = false;
-    }));
-  }
 
-  ngOnDestroy(): void {
-    this.subscriptions.unsubscribe();
+    this.buildSaving = true;
+    this.build$ = this.championService.saveBuild(build)
+      .pipe(
+        map((res) => {
+          const savedBuild = res.body;
+          savedBuild.selfRef = res.headers.get('Location').replace('/api', '');
+          return savedBuild;
+        }),
+        finalize(() => this.buildSaving = false)
+      );
   }
 
 }

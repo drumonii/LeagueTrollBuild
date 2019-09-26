@@ -5,7 +5,7 @@ import { AfterViewInit, Directive, ElementRef, Input } from '@angular/core';
 })
 export class LazyLoadImgDirective implements AfterViewInit {
 
-  @Input() dataSrc: string;
+  @Input() imgSrc: string;
 
   constructor(private elementRef: ElementRef) {}
 
@@ -32,7 +32,7 @@ export class LazyLoadImgDirective implements AfterViewInit {
   }
 
   private loadImage() {
-    this.elementRef.nativeElement.src = this.dataSrc;
+    this.elementRef.nativeElement.src = this.imgSrc;
   }
 
 }

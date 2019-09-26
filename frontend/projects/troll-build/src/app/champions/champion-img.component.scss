@@ -1,10 +1,17 @@
-.champion-column {
+:host {
   padding: 0.5rem;
-  text-align: center;
+  &:hover {
+    transform: translateY(-3px);
+  }
 }
 
 .champion-name {
-  color: white;
+  margin: 0;
+  text-align: center;
+}
+
+.champion-link {
+  text-decoration: none;
 }
 
 .champion-img {

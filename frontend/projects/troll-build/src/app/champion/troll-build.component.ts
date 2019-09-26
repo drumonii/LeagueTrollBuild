@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
+import { Observable } from 'rxjs';
+
 import { TrollBuild } from '@ltb-model/troll-build';
 import { Item } from '@ltb-model/item';
 import { Build } from '@ltb-model/build';
@@ -16,7 +18,7 @@ export class TrollBuildComponent implements OnInit {
   @Input()
   trollBuild: TrollBuild;
   @Input()
-  build: Build;
+  build$: Observable<Build>;
   @Input()
   buildSaving: boolean;
 

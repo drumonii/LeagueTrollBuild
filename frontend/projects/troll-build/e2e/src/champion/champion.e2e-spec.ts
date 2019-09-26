@@ -22,7 +22,8 @@ describe('champion page', () => {
   xit('should save the troll build', async () => {
     await page.saveTrollBuild();
 
-    const savedBuildLink = await page.getSavedBuild();
+    const savedBuildLink = await page.getSavedBuildInputLink().getText();
+    expect(await page.getSaveBuildBtn().isPresent()).toBe(false);
     await page.navigateToBuild(savedBuildLink);
     expect(await page.getTitle()).toContain('Build');
   });

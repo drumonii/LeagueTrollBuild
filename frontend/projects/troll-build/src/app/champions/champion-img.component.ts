@@ -3,12 +3,12 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
 import { Champion } from '@ltb-model/champion';
 
 @Component({
-  selector: 'ltb-champion',
-  templateUrl: './champion.component.html',
-  styleUrls: ['./champion.component.scss'],
+  selector: 'ltb-champion-img',
+  templateUrl: './champion-img.component.html',
+  styleUrls: ['./champion-img.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ChampionComponent implements OnInit {
+export class ChampionImgComponent implements OnInit {
 
   @Input()
   champion: Champion;

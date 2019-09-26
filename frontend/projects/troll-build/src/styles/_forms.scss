@@ -1,0 +1,80 @@
+@import 'theme';
+
+$input-placeholder-color: #cdcdcd;
+$input-background-color: #373737;
+$input-border-color: #0f0f0f;
+
+$select-background-color: $input-background-color;
+$select-border-color: $input-border-color;
+
+@mixin ltb-forms() {
+  .ltb-input {
+    border-radius: 4px;
+    border: 1px solid $input-border-color;
+    background-color: $input-background-color;
+    font-weight: normal !important;
+
+    &::placeholder {
+      color: $input-placeholder-color;
+    }
+
+    &:focus {
+      box-shadow: none !important;
+    }
+  }
+
+  .ltb-input-appended-addon {
+    display: flex;
+
+    > .ltb-input {
+      flex: 1;
+      border-top-right-radius: 0 !important;
+      border-bottom-right-radius: 0 !important;
+    }
+
+    .ltb-addon {
+      border-top-left-radius: 0 !important;
+      border-bottom-left-radius: 0 !important;
+    }
+  }
+
+  .ltb-input-inner-addon {
+    position: relative;
+
+    > .ltb-input {
+      padding-right: 2.25em;
+    }
+
+    > nb-icon {
+      right: 0;
+      position: absolute;
+      top: 0.5em;
+      width: 3.5em;
+      height: 1.5em;
+      z-index: 4;
+      font-size: inherit;
+      color: $input-placeholder-color;
+    }
+  }
+
+  .ltb-select {
+    > button, > nb-spinner  {
+      background-color: $select-background-color !important;
+      border: 1px solid $input-border-color !important;
+      font-weight: normal !important;
+
+      &:focus {
+        box-shadow: none !important;
+      }
+    }
+  }
+
+  .ltb-option {
+    background-color: $select-background-color !important;
+    font-weight: normal !important;
+
+    &.selected {
+      color: nb-theme(color-primary-500) !important; // overridden because the color only gets set after a click on it
+    }
+  }
+}

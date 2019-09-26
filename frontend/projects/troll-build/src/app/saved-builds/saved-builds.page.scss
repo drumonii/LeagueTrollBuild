@@ -1,7 +1,11 @@
 #champion-img {
+  width: 100%;
   display: block;
-  width: 80%;
   border-radius: 5px 5px 0 0;
+}
+
+#champion-info {
+  height: 160px;
 }
 
 #champion-name {
@@ -12,50 +16,16 @@
 #champion-title {
   margin-bottom: 1em;
   font-size: 1.1em;
+  text-transform: capitalize;
 }
 
 #champion-tags {
   margin-bottom: 1rem;
-  .champion-tag {
-    margin-right: 0.5rem;
-  }
-}
-
-#champion-img-container {
-  position: relative;
-}
-
-#champion-partype-ribbon {
-  left: calc(.05rem - 1.2em);
-  border-color: black;
-  position: absolute;
-  top: 1rem;
-  background-color: grey;
-  padding-left: 1.6em;
-  padding-right: 1.5em;
-  border-radius: 0 0.2em 0.2em 0;
-  &:after {
-    position: absolute;
-    content: '';
-    top: 100%;
-    left: 0;
-    border-style: solid;
-    border-width: 0 1.2em 1.2em 0;
-    border-color: transparent;
-    border-right-color: inherit;
-  }
 }
 
 #new-build-btn {
-  display: block;
-  width: 80%;
-  font-size: 1.1em;
+  width: 100%;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
-}
-
-@media screen and (max-width: 768px) {
-  #champion-img, #new-build-btn {
-    width: 65%;
-  }
+  border-top: none;
 }

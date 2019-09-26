@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css?family=Muli');
+
+// registered nebular theme
+@import 'theme';
+
+// framework component styles
+@import '~@nebular/theme/styles/globals';
+
+// browser styles reset (seems the normalize nebular uses internally misses a few styles)
+@import 'reset';
+
+// custom theme styles
+@import 'alert';
+@import 'button-group';
+@import 'buttons';
+@import 'footer';
+@import 'forms';
+@import 'grid';
+@import 'header';
+@import 'layout';
+@import 'lists';
+@import 'message';
+@import 'ribbon';
+@import 'tags';
+@import 'tooltip';
+
+// install the framework styles and custom global styles
+@include nb-install() {
+  @include nb-theme-global();
+
+  @include ltb-reset();
+
+  @include ltb-alert();
+  @include ltb-button-group();
+  @include ltb-buttons();
+  @include ltb-footer();
+  @include ltb-forms();
+  @include ltb-grid();
+  @include ltb-header();
+  @include ltb-layout();
+  @include ltb-lists();
+  @include ltb-message();
+  @include ltb-ribbon();
+  @include ltb-tags();
+  @include ltb-tooltip;
+}

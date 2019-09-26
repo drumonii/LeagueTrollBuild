@@ -1,0 +1,23 @@
+@mixin ltb-button-group() {
+  .ltb-btn-group {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+
+    .ltb-btn {
+      margin-bottom: .5rem;
+
+      &:not(:first-child) {
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0;
+      }
+
+      &:not(:last-child) {
+        border-bottom-right-radius: 0;
+        border-top-right-radius: 0;
+        margin-right: -1px
+      }
+    }
+  }
+}

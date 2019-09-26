@@ -1,0 +1,53 @@
+@import '~@nebular/theme/styles/global/breakpoints';
+
+@mixin ltb-grid() {
+  .ltb-grid {
+    display: flex;
+
+    .ltb-column {
+      flex: 1;
+
+      &:not(:last-child) {
+        padding-right: 15px;
+      }
+    }
+  }
+
+  @include media-breakpoint-down(sm) {
+    .ltb-grid {
+      .ltb-column {
+        display: block;
+      }
+    }
+  }
+
+  // faux grid row - not responsive - will not break into columns
+  .ltb-faux-grid {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 0.75em;
+
+    .spaced-apart {
+      justify-content: space-between;
+    }
+
+    .ltb-column {
+      &:not(:last-child) {
+        padding-right: 15px;
+      }
+    }
+
+    .ltb-block-column {
+      flex: none;
+    }
+  }
+
+  @include media-breakpoint-up(sm) {
+    .ltb-faux-grid {
+      &.centered-desktop {
+        justify-content: center;
+      }
+    }
+  }
+}

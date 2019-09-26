@@ -7,9 +7,7 @@ import { catchError } from 'rxjs/operators';
 import { Logger } from '@ltb-service/logger.service';
 import { Version } from '@ltb-model/version';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class VersionsService {
 
   constructor(private logger: Logger, private httpClient: HttpClient) {}

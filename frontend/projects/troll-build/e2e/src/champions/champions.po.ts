@@ -9,7 +9,7 @@ export class ChampionsPage extends BaseTrollBuildPage {
   }
 
   getChampions(): ElementArrayFinder {
-    return element.all(by.css('.champion'));
+    return element.all(by.css('ltb-champion-img'));
   }
 
   getFirstChampion(): ElementFinder {
@@ -17,15 +17,15 @@ export class ChampionsPage extends BaseTrollBuildPage {
   }
 
   async championName(champion: ElementFinder): Promise<string> {
-    return champion.element(by.css('.champion-name')).getText();
+    return champion.element(by.css('[data-e2e="champion-name"]')).getText();
   }
 
   getChampionTagFilters(): ElementArrayFinder {
-    return element.all(by.css('.champion-tag-btn'));
+    return element.all(by.css('[data-e2e="champion-tag-filter-btn"]'));
   }
 
   getChampionNameFilter(): ElementFinder {
-    return element(by.css('#champions-search-input'));
+    return element(by.css('[data-e2e="champions-search-input"]'));
   }
 
 }

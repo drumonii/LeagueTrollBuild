@@ -3,13 +3,14 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { RouterLinkWithHref } from '@angular/router';
 import { By } from '@angular/platform-browser';
 
-import { ChampionComponent } from './champion.component';
+import { ChampionImgModule } from './champion-img.module';
+import { ChampionImgComponent } from './champion-img.component';
 import { Champion } from '@ltb-model/champion';
 import { LazyLoadImgDirective } from '@ltb-directive/lazy-load-img.directive';
 
-describe('ChampionComponent', () => {
-  let component: ChampionComponent;
-  let fixture: ComponentFixture<ChampionComponent>;
+describe('ChampionImgComponent', () => {
+  let component: ChampionImgComponent;
+  let fixture: ComponentFixture<ChampionImgComponent>;
 
   const alistar: Champion =  {
     id: 12,
@@ -37,14 +38,13 @@ describe('ChampionComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
-      declarations: [ChampionComponent, LazyLoadImgDirective]
+      imports: [RouterTestingModule, ChampionImgModule]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ChampionComponent);
+    fixture = TestBed.createComponent(ChampionImgComponent);
     component = fixture.componentInstance;
 
     component.champion = alistar;
@@ -53,16 +53,16 @@ describe('ChampionComponent', () => {
   });
 
   it('should show the Champion', () => {
-    const championLink = fixture.debugElement.query(By.css('.champion-link'));
+    const championLink = fixture.debugElement.query(By.css('[data-e2e="champion-link"]'));
     const championRouterLink = championLink.injector.get(RouterLinkWithHref);
     expect(championRouterLink.href).toBe(`/champions/${alistar.key}`);
 
-    const championName = fixture.debugElement.query(By.css('.champion-name'));
+    const championName = fixture.debugElement.query(By.css('[data-e2e="champion-name"]'));
     expect(championName.nativeElement.textContent).toBe(alistar.name);
 
-    const championImg = fixture.debugElement.query(By.css('.champion-img'));
+    const championImg = fixture.debugElement.query(By.css('[data-e2e="champion-img"]'));
     expect(championImg.injector.get(LazyLoadImgDirective)).toBeTruthy();
     expect(championImg.nativeElement.src).toContain('assets/images/dummy_champion.png');
-    expect(championImg.attributes['ng-reflect-data-src']).toBe(`/api/img/champions/${alistar.id}`);
+    expect(championImg.attributes['ng-reflect-img-src']).toBe(`/api/img/champions/${alistar.id}`);
   });
 });
