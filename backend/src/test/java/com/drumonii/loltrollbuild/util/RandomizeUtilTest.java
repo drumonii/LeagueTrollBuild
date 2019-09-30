@@ -3,6 +3,7 @@ package com.drumonii.loltrollbuild.util;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
+import org.springframework.test.annotation.Repeat;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -15,16 +16,19 @@ import static org.assertj.core.api.Assertions.*;
 @RunWith(JUnit4.class)
 public class RandomizeUtilTest {
 
+	private static final List<String> LIST = List.of("string 1", "string 2", "string 3", "string 4", "string 5");
+	private static final Set<Integer> SET = Set.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+
+	@Repeat(100)
 	@Test
 	public void getsRandomFromList() {
-		List<String> strings = List.of("string 1", "string 2");
-		assertThat(getRandom(strings)).isIn(strings);
+		assertThat(getRandom(LIST)).isIn(LIST);
 	}
 
+	@Repeat(100)
 	@Test
 	public void getsRandomFromSet() {
-		Set<Integer> integers = Set.of(1, 2);
-		assertThat(getRandom(integers)).isIn(integers);
+		assertThat(getRandom(SET)).isIn(SET);
 	}
 
 	@Test
@@ -45,22 +49,22 @@ public class RandomizeUtilTest {
 				.withMessage("Unable to get a random element from an empty Collection");
 	}
 
+	@Repeat(100)
 	@Test
 	public void getsRandomsFromList() {
-		List<String> strings = List.of("string 1", "string 2");
-		assertThat(getRandoms(strings, 1)).containsAnyElementsOf(strings)
+		assertThat(getRandoms(LIST, 1)).containsAnyElementsOf(LIST)
 				.hasSize(1);
-		assertThat(getRandoms(strings, strings.size() + 1)).containsAnyElementsOf(strings)
-				.hasSize(2);
+		assertThat(getRandoms(LIST, LIST.size() + 1)).containsAnyElementsOf(LIST)
+				.hasSize(LIST.size());
 	}
 
+	@Repeat(100)
 	@Test
 	public void getsRandomsFromSet() {
-		Set<Integer> integers = Set.of(1, 2);
-		assertThat(getRandoms(integers, 1)).containsAnyElementsOf(integers)
+		assertThat(getRandoms(SET, 1)).containsAnyElementsOf(SET)
 				.hasSize(1);
-		assertThat(getRandoms(integers, integers.size() + 1)).containsAnyElementsOf(integers)
-				.hasSize(2);
+		assertThat(getRandoms(SET, SET.size() + 1)).containsAnyElementsOf(SET)
+				.hasSize(SET.size());
 	}
 
 	@Test
@@ -70,11 +74,13 @@ public class RandomizeUtilTest {
 				.withMessage("Unable to get random elements from an null Collection");
 	}
 
+	@Repeat(100)
 	@Test
 	public void getsRandomLong() {
 		assertThat(getRandomLong()).isNotZero();
 	}
 
+	@Repeat(100)
 	@Test
 	public void getsRandomInt() {
 		assertThat(getRandomInt()).isNotZero();
