@@ -1,6 +1,7 @@
 package com.drumonii.loltrollbuild.repository;
 
 import com.drumonii.loltrollbuild.model.BatchJobExecution;
+import com.drumonii.loltrollbuild.model.BatchJobExecutionParams;
 import com.drumonii.loltrollbuild.model.BatchJobInstance;
 import com.drumonii.loltrollbuild.model.BatchStepExecution;
 import com.drumonii.loltrollbuild.test.repository.RepositoryTest;
@@ -38,6 +39,14 @@ public class BatchStepExecutionsRepositoryTest {
 		jobExecution.setCreateTime(LocalDateTime.now());
 		jobExecution.setJobInstance(jobInstance);
 		jobExecution = testEntityManager.persistAndFlush(jobExecution);
+
+		BatchJobExecutionParams params = new BatchJobExecutionParams();
+		params.setId(jobExecution.getId());
+		params.setKeyName("keyName");
+		params.setStringVal("stringValue");
+		params.setTypeCd("typeCd");
+		params.setIdentifying(true);
+		testEntityManager.persistAndFlush(params);
 
 		BatchStepExecution stepExecution = new BatchStepExecution();
 		stepExecution.setVersion(1L);
