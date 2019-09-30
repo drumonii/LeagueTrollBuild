@@ -2,7 +2,10 @@ package com.drumonii.loltrollbuild.util;
 
 import org.apache.commons.collections4.IterableUtils;
 
-import java.util.*;
+import java.security.SecureRandom;
+import java.util.Collection;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 /**
  * Utility methods for randomizing.
@@ -11,7 +14,7 @@ public class RandomizeUtil {
 
 	private RandomizeUtil() {}
 
-	private static final Random RANDOM = new Random();
+	private static final SecureRandom RANDOM = new SecureRandom();
 
 	/**
 	 * Gets a random element {@code E} from the passed {@link Collection}.
