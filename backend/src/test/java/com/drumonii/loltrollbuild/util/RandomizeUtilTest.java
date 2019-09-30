@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Set;
 
 import static com.drumonii.loltrollbuild.util.RandomizeUtil.*;
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.*;
 
 @RunWith(JUnit4.class)
 public class RandomizeUtilTest {
@@ -19,33 +19,30 @@ public class RandomizeUtilTest {
 	public void getsRandomFromList() {
 		List<String> strings = List.of("string 1", "string 2");
 		assertThat(getRandom(strings)).isIn(strings);
-
-		try {
-			getRandom(new ArrayList<>());
-		} catch (Exception e) {
-			assertThat(e).isInstanceOf(IllegalArgumentException.class);
-		}
 	}
 
 	@Test
 	public void getsRandomFromSet() {
 		Set<Integer> integers = Set.of(1, 2);
 		assertThat(getRandom(integers)).isIn(integers);
+	}
 
-		try {
-			getRandom(new HashSet<>());
-		} catch (Exception e) {
-			assertThat(e).isInstanceOf(IllegalArgumentException.class);
-		}
+	@Test
+	public void getsRandomFromEmptyCollection() {
+		assertThatExceptionOfType(IllegalArgumentException.class)
+				.isThrownBy(() -> getRandom(new ArrayList<>()))
+				.withMessage("Unable to get a random element from an empty Collection");
+
+		assertThatExceptionOfType(IllegalArgumentException.class)
+				.isThrownBy(() -> getRandom(new HashSet<>()))
+				.withMessage("Unable to get a random element from an empty Collection");
 	}
 
 	@Test
 	public void getsRandomFromNull() {
-		try {
-			getRandom(null);
-		} catch (Exception e) {
-			assertThat(e).isInstanceOf(IllegalArgumentException.class);
-		}
+		assertThatExceptionOfType(IllegalArgumentException.class)
+				.isThrownBy(() -> getRandom(null))
+				.withMessage("Unable to get a random element from an empty Collection");
 	}
 
 	@Test
@@ -68,11 +65,9 @@ public class RandomizeUtilTest {
 
 	@Test
 	public void getsRandomsFromNull() {
-		try {
-			getRandoms(null, 1);
-		} catch (Exception e) {
-			assertThat(e).isInstanceOf(IllegalArgumentException.class);
-		}
+		assertThatExceptionOfType(IllegalArgumentException.class)
+				.isThrownBy(() -> getRandoms(null, 1))
+				.withMessage("Unable to get random elements from an null Collection");
 	}
 
 	@Test
