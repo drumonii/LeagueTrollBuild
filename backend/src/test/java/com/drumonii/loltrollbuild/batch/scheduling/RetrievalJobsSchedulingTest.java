@@ -33,8 +33,7 @@ import java.util.Date;
 import static com.drumonii.loltrollbuild.batch.scheduling.RetrievalJobsScheduling.CRON_SCHEDULE;
 import static com.drumonii.loltrollbuild.batch.scheduling.RetrievalJobsScheduling.LATEST_PATCH_KEY;
 import static com.drumonii.loltrollbuild.config.Profiles.TESTING;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.fail;
+import static org.assertj.core.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
@@ -84,7 +83,8 @@ public class RetrievalJobsSchedulingTest {
 	public void runsAllRetrievalsJob() throws Exception {
 		given(versionsService.getLatestVersion()).willReturn(Version.patch("8.7.1"));
 
-		retrievalJobsScheduling.runAllRetrievalsJob();
+		assertThatCode(() -> retrievalJobsScheduling.runAllRetrievalsJob())
+				.doesNotThrowAnyException();
 
 		verify(jobLauncher, times(1)).run(eq(allRetrievalsJob), any(JobParameters.class));
 	}
@@ -96,7 +96,8 @@ public class RetrievalJobsSchedulingTest {
 		given(jobLauncher.run(eq(allRetrievalsJob), any(JobParameters.class)))
 				.willThrow(new JobParametersInvalidException("The JobParameters do not contain required keys: " + LATEST_PATCH_KEY));
 
-		retrievalJobsScheduling.runAllRetrievalsJob();
+		assertThatCode(() -> retrievalJobsScheduling.runAllRetrievalsJob())
+				.doesNotThrowAnyException();
 	}
 
 	@Test
@@ -104,7 +105,8 @@ public class RetrievalJobsSchedulingTest {
 		given(jobLauncher.run(eq(allRetrievalsJob), any(JobParameters.class)))
 				.willThrow(new JobExecutionAlreadyRunningException("A job execution for this job is already running"));
 
-		retrievalJobsScheduling.runAllRetrievalsJob();
+		assertThatCode(() -> retrievalJobsScheduling.runAllRetrievalsJob())
+				.doesNotThrowAnyException();
 	}
 
 	@Test
@@ -114,7 +116,8 @@ public class RetrievalJobsSchedulingTest {
 		given(jobLauncher.run(eq(allRetrievalsJob), any(JobParameters.class)))
 				.willThrow(new NullPointerException());
 
-		retrievalJobsScheduling.runAllRetrievalsJob();
+		assertThatCode(() -> retrievalJobsScheduling.runAllRetrievalsJob())
+				.doesNotThrowAnyException();
 	}
 
 }
