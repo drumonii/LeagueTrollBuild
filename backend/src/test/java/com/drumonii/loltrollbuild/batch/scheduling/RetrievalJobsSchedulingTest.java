@@ -70,13 +70,14 @@ public class RetrievalJobsSchedulingTest {
 		SimpleTriggerContext triggerContext = new SimpleTriggerContext(triggerDate, triggerDate, triggerDate);
 
 		Date nextExecutionDate = cronTrigger.nextExecutionTime(triggerContext);
-		if (nextExecutionDate == null) {
-			fail("Next Execution Time from the CronTrigger was null");
-		}
-		LocalDateTime nextExecutionDateTime = LocalDateTime.ofInstant(nextExecutionDate.toInstant(), ZoneId.systemDefault());
 
-		assertThat(nextExecutionDateTime)
-				.isEqualTo(LocalDateTime.now().plusDays(1).withHour(4).withMinute(0).withSecond(0).withNano(0));
+		assertThat(nextExecutionDate)
+				.hasYear(triggerDateTime.getYear())
+				.hasDayOfMonth(triggerDateTime.plusDays(1L).getDayOfMonth())
+				.hasHourOfDay(triggerDateTime.getHour())
+				.hasMinute(0)
+				.hasSecond(0)
+				.hasMillisecond(0);
 	}
 
 	@Test
