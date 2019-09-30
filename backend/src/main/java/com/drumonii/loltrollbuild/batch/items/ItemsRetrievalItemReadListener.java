@@ -11,7 +11,7 @@ public class ItemsRetrievalItemReadListener implements ItemReadListener<Item> {
 
     @Override
     public void beforeRead() {
-
+        // nothing to do before read
     }
 
     @Override
@@ -21,7 +21,7 @@ public class ItemsRetrievalItemReadListener implements ItemReadListener<Item> {
 
     @Override
     public void onReadError(Exception ex) {
-
+        // nothing to do on read error
     }
 
 }

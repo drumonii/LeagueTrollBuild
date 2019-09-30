@@ -11,7 +11,7 @@ public class SummonerSpellsRetrievalItemReadListener implements ItemReadListener
 
     @Override
     public void beforeRead() {
-
+        // nothing to do before read
     }
 
     @Override
@@ -21,7 +21,7 @@ public class SummonerSpellsRetrievalItemReadListener implements ItemReadListener
 
     @Override
     public void onReadError(Exception ex) {
-
+        // nothing to do on read error
     }
 
 }

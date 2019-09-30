@@ -23,7 +23,7 @@ public class VersionsRetrievalItemWriteListener implements ItemWriteListener<Ver
 
     @Override
     public void onWriteError(Exception exception, List<? extends Version> versions) {
-
+        // nothing to do on write error
     }
 
 }

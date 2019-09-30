@@ -11,7 +11,7 @@ public class MapsRetrievalItemReadListener implements ItemReadListener<GameMap> 
 
     @Override
     public void beforeRead() {
-
+        // nothing to do before read
     }
 
     @Override
@@ -21,7 +21,7 @@ public class MapsRetrievalItemReadListener implements ItemReadListener<GameMap> 
 
     @Override
     public void onReadError(Exception ex) {
-
+        // nothing to do on read error
     }
 
 }

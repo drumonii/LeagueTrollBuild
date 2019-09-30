@@ -23,7 +23,7 @@ public class VersionsRetrievalItemProcessListener implements ItemProcessListener
 
     @Override
     public void onProcessError(Version version, Exception e) {
-
+        // nothing to do on process error
     }
 
 }

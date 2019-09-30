@@ -23,7 +23,7 @@ public class SummonerSpellsRetrievalItemProcessListener implements ItemProcessLi
 
     @Override
     public void onProcessError(SummonerSpell summonerSpell, Exception e) {
-
+        // nothing to do on process error
     }
 
 }

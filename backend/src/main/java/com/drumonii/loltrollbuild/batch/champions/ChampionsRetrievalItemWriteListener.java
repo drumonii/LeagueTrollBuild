@@ -23,7 +23,7 @@ public class ChampionsRetrievalItemWriteListener implements ItemWriteListener<Ch
 
     @Override
     public void onWriteError(Exception exception, List<? extends Champion> items) {
-
+        // nothing to do on write error
     }
 
 }

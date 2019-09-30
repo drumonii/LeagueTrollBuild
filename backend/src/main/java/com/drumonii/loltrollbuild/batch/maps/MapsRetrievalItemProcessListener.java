@@ -23,7 +23,7 @@ public class MapsRetrievalItemProcessListener implements ItemProcessListener<Gam
 
     @Override
     public void onProcessError(GameMap gameMap, Exception e) {
-
+        // nothing to do on process error
     }
 
 }

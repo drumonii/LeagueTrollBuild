@@ -23,7 +23,7 @@ public class MapsRetrievalItemWriteListener implements ItemWriteListener<GameMap
 
     @Override
     public void onWriteError(Exception exception, List<? extends GameMap> gameMaps) {
-
+        // nothing to do on write error
     }
 
 }

@@ -23,7 +23,7 @@ public class ChampionsRetrievalItemProcessListener implements ItemProcessListene
 
     @Override
     public void onProcessError(Champion champion, Exception e) {
-
+        // nothing to do on process error
     }
 
 }

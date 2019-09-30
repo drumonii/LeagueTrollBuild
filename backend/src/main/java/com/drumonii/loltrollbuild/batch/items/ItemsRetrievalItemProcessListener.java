@@ -23,7 +23,7 @@ public class ItemsRetrievalItemProcessListener implements ItemProcessListener<It
 
     @Override
     public void onProcessError(Item item, Exception e) {
-
+        // nothing to do on process error
     }
 
 }

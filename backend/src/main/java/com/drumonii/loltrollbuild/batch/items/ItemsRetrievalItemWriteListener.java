@@ -23,7 +23,7 @@ public class ItemsRetrievalItemWriteListener implements ItemWriteListener<Item> 
 
     @Override
     public void onWriteError(Exception exception, List<? extends Item> items) {
-
+        // nothing to do on write error
     }
 
 }

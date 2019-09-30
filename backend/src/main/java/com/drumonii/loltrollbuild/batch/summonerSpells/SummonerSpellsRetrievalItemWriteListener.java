@@ -23,7 +23,7 @@ public class SummonerSpellsRetrievalItemWriteListener implements ItemWriteListen
 
     @Override
     public void onWriteError(Exception exception, List<? extends SummonerSpell> summonerSpells) {
-
+        // nothing to do on write error
     }
 
 }
