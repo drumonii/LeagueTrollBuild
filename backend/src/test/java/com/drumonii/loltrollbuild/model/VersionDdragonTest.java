@@ -75,6 +75,22 @@ public class VersionDdragonTest {
 		assertThat(version.getObject().getMajor()).isEqualTo(5);
 		assertThat(version.getObject().getMinor()).isEqualTo(24);
 		assertThat(version.getObject().getRevision()).isEqualTo(2);
+
+		json =
+				"\"5.24.2\"";
+
+		try {
+			version = jacksonTester.parse(json);
+		} catch (IOException e) {
+			fail("Unable to deserialize Version from JSON", e);
+		}
+
+		assertThat(version).isNotNull();
+		assertThat(version.getObject()).isNotNull();
+		assertThat(version.getObject().getPatch()).isEqualTo("5.24.2");
+		assertThat(version.getObject().getMajor()).isEqualTo(5);
+		assertThat(version.getObject().getMinor()).isEqualTo(24);
+		assertThat(version.getObject().getRevision()).isEqualTo(2);
 	}
 
 }
