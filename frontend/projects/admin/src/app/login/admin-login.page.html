@@ -1,18 +1,18 @@
 <div id="admin-login-wrapper">
   <div class="login-wrapper">
-    <form id="admin-login-form" class="login" [formGroup]="adminLoginForm" (ngSubmit)="onSubmit()">
+    <form class="login" [formGroup]="adminLoginForm" (ngSubmit)="onSubmit()" data-e2e="admin-login-form">
       <section class="title">
         <h3 id="admin-login-title" class="welcome">Admin Login</h3>
       </section>
       <div class="login-group">
-        <clr-input-container>
-          <input id="username-input" type="text" name="username" clrInput placeholder="Username" formControlName="username"/>
+        <clr-input-container [attr.data-e2e]="'username-input-container'">
+          <input type="text" name="username" clrInput placeholder="Username" formControlName="username" data-e2e="username-input"/>
           <clr-control-error>
             This field is required
           </clr-control-error>
         </clr-input-container>
-        <clr-password-container>
-          <input id="password-input" type="password" name="password" clrPassword placeholder="Password" formControlName="password"/>
+        <clr-password-container [attr.data-e2e]="'password-input-container'">
+          <input type="password" name="password" clrPassword placeholder="Password" formControlName="password" data-e2e="password-input"/>
           <clr-control-error>
             This field is required
           </clr-control-error>
@@ -21,16 +21,16 @@
           <ng-container *ngSwitchCase="'BAD_CREDENTIALS'">
             <clr-alert [clrAlertType]="'danger'">
               <clr-alert-item>
-              <span id="login-bad-credentials-alert" class="alert-text">
-                Invalid username and password.
-              </span>
+                <span class="alert-text" data-e2e="login-bad-credentials-alert">
+                  Invalid username and password.
+                </span>
               </clr-alert-item>
             </clr-alert>
           </ng-container>
           <ng-container *ngSwitchCase="'UNEXPECTED_ERROR'">
             <clr-alert [clrAlertType]="'danger'">
               <clr-alert-item>
-                <span id="login-unexpected-error-alert" class="alert-text">
+                <span class="alert-text" data-e2e="login-unexpected-error-alert">
                   An unexpected error occurred during authentication. Please try again later.
                 </span>
               </clr-alert-item>
@@ -39,15 +39,15 @@
           <ng-container *ngSwitchCase="'LOGGED_OUT'">
             <clr-alert [clrAlertType]="'success'">
               <clr-alert-item>
-                <span id="logged-out-alert" class="alert-text">
+                <span class="alert-text" data-e2e="logged-out-alert">
                   You have been successfully logged out.
                 </span>
               </clr-alert-item>
             </clr-alert>
           </ng-container>
         </ng-container>
-        <button id="login-btn" class="btn btn-primary" [clrLoading]="adminLoginState === 'LOGGING_IN' ? 1 : 0"
-          type="submit" [disabled]="adminLoginForm.invalid">
+        <button class="btn btn-primary" [clrLoading]="adminLoginState === 'LOGGING_IN' ? 1 : 0"
+          type="submit" [disabled]="adminLoginForm.invalid" data-e2e="login-btn">
           Login
         </button>
       </div>

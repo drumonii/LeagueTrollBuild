@@ -1,10 +1,10 @@
 <h3>
   Flyway Migrations
-  <button id="refresh-failed-jobs-btn" [disabled]="loading" class="btn btn-link" (click)="getFlyway()">
+  <button [disabled]="loading" class="btn btn-link" (click)="getFlyway()" data-e2e="refresh-flyway-btn">
     <clr-icon shape="refresh"></clr-icon>
   </button>
 </h3>
-<clr-datagrid id="flyway-datatable" [clrDgLoading]="loading">
+<clr-datagrid [attr.data-e2e]="'flyway-datatable'" [clrDgLoading]="loading">
   <clr-dg-column [clrDgField]="'description'">Description</clr-dg-column>
   <clr-dg-column [clrDgField]="'script'">Script</clr-dg-column>
   <clr-dg-column [clrDgField]="'state'">State</clr-dg-column>

@@ -9,7 +9,7 @@ export class AdminLoginPage extends BaseAdminPage {
   }
 
   getLoginBtn(): ElementFinder {
-    return element(by.css('#login-btn'));
+    return element(by.css('[data-e2e="login-btn"]'));
   }
 
   async attemptLoginAdmin(): Promise<void> {

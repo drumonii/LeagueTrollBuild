@@ -9,7 +9,7 @@ export class AdminFlywayPage extends BaseAdminPage {
   }
 
   getFlywayDatatable(): ElementFinder {
-    return element(by.css('#flyway-datatable'));
+    return element(by.css('[data-e2e="flyway-datatable"]'));
   }
 
 }

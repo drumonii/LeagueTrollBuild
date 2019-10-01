@@ -9,11 +9,11 @@ export class AdminBatchPage extends BaseAdminPage {
   }
 
   getBatchJobsDatatable(): ElementFinder {
-    return element(by.css('#batch-jobs-datatable'));
+    return element(by.css('[data-e2e="batch-jobs-datatable"]'));
   }
 
   getStepExecutionsDetail(): ElementFinder {
-    return element(by.css('.step-executions-table'));
+    return element(by.css('[data-e2e="step-executions-table"]'));
   }
 
 }

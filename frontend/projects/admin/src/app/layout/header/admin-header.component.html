@@ -6,10 +6,10 @@
   </div>
   <ng-container *ngIf="(adminUserDetails$ | async) as adminUserDetails">
     <div class="header-nav">
-      <a id="batch-navbar-item" class="nav-link" routerLink="/admin/batch" routerLinkActive="active">
+      <a data-e2e="batch-navbar-item" class="nav-link" routerLink="/admin/batch" routerLinkActive="active">
         <span class="nav-text">Batch</span>
       </a>
-      <a id="flyway-navbar-item" class="nav-link" routerLink="/admin/flyway" routerLinkActive="active">
+      <a data-e2e="flyway-navbar-item" class="nav-link" routerLink="/admin/flyway" routerLinkActive="active">
         <span class="nav-text">Flyway</span>
       </a>
     </div>

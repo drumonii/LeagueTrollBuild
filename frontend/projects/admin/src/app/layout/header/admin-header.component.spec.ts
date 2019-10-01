@@ -60,12 +60,12 @@ describe('AdminHeaderComponent', () => {
     }));
 
     it('should show navbar-item items', () => {
-      const batchNavbarItem = fixture.debugElement.query(By.css('#batch-navbar-item'));
+      const batchNavbarItem = fixture.debugElement.query(By.css('[data-e2e="batch-navbar-item"]'));
       expect(batchNavbarItem.nativeElement.textContent.trim()).toBe('Batch');
       const batchNavbarItemLink = batchNavbarItem.injector.get(RouterLinkWithHref);
       expect(batchNavbarItemLink.href).toBe('/admin/batch');
 
-      const flywayNavbarItem = fixture.debugElement.query(By.css('#flyway-navbar-item'));
+      const flywayNavbarItem = fixture.debugElement.query(By.css('[data-e2e="flyway-navbar-item"]'));
       expect(flywayNavbarItem.nativeElement.textContent.trim()).toBe('Flyway');
       const flywayNavbarItemLink = flywayNavbarItem.injector.get(RouterLinkWithHref);
       expect(flywayNavbarItemLink.href).toBe('/admin/flyway');
@@ -121,8 +121,8 @@ describe('AdminHeaderComponent', () => {
 
       fixture.detectChanges();
 
-      expect(fixture.debugElement.query(By.css('#burger-collapse'))).toBeFalsy();
-      expect(fixture.debugElement.query(By.css('#authenticated-admin-navbar-end'))).toBeFalsy();
+      expect(fixture.debugElement.query(By.css('.header-nav'))).toBeFalsy();
+      expect(fixture.debugElement.query(By.css('.header-actions'))).toBeFalsy();
     }));
 
   });

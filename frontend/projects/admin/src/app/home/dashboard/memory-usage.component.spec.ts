@@ -41,7 +41,7 @@ describe('MemoryUsageComponent', () => {
       }));
 
       it('should show memory usage', () => {
-        const memoryUsage = fixture.debugElement.query(By.css('#memory-usage'));
+        const memoryUsage = fixture.debugElement.query(By.css('[data-e2e="memory-usage"]'));
         expect(memoryUsage.nativeElement.textContent.trim()).toBe(`${mbInUseUsage} MB`);
         expect(memoryUsage.nativeElement.classList).toContain('label-danger');
       });
@@ -59,7 +59,7 @@ describe('MemoryUsageComponent', () => {
       }));
 
       it('should show memory usage', () => {
-        const memoryUsage = fixture.debugElement.query(By.css('#memory-usage'));
+        const memoryUsage = fixture.debugElement.query(By.css('[data-e2e="memory-usage"]'));
         expect(memoryUsage.nativeElement.textContent.trim()).toBe(`${mbInUseUsage} MB`);
         expect(memoryUsage.nativeElement.classList).toContain('label-warning');
       });
@@ -77,7 +77,7 @@ describe('MemoryUsageComponent', () => {
       }));
 
       it('should show memory usage', () => {
-        const memoryUsage = fixture.debugElement.query(By.css('#memory-usage'));
+        const memoryUsage = fixture.debugElement.query(By.css('[data-e2e="memory-usage"]'));
         expect(memoryUsage.nativeElement.textContent.trim()).toBe(`${mbInUseUsage} MB`);
         expect(memoryUsage.nativeElement.classList).toContain('label');
       });
@@ -85,7 +85,7 @@ describe('MemoryUsageComponent', () => {
     });
 
     function expectNotRefreshing() {
-      const refreshMemoryUsageBtn = fixture.debugElement.query(By.css('#refresh-memory-usage-btn'));
+      const refreshMemoryUsageBtn = fixture.debugElement.query(By.css('[data-e2e="refresh-memory-usage-btn"]'));
       expect(refreshMemoryUsageBtn.nativeElement.disabled).toBe(false);
     }
 
@@ -100,9 +100,9 @@ describe('MemoryUsageComponent', () => {
     }));
 
     it('should show loading indicator', () => {
-      expect(fixture.debugElement.query(By.css('#loading-memory-usage-alert'))).toBeTruthy();
+      expect(fixture.debugElement.query(By.css('[data-e2e="loading-memory-usage-alert"]'))).toBeTruthy();
 
-      const refreshMemoryUsageBtn = fixture.debugElement.query(By.css('#refresh-memory-usage-btn'));
+      const refreshMemoryUsageBtn = fixture.debugElement.query(By.css('[data-e2e="refresh-memory-usage-btn"]'));
       expect(refreshMemoryUsageBtn.nativeElement.disabled).toBe(true);
     });
 
@@ -117,7 +117,7 @@ describe('MemoryUsageComponent', () => {
     }));
 
     it('should show error alert', () => {
-      expect(fixture.debugElement.query(By.css('#no-memory-usage-alert'))).toBeTruthy();
+      expect(fixture.debugElement.query(By.css('[data-e2e="no-memory-usage-alert"]'))).toBeTruthy();
     });
 
   });

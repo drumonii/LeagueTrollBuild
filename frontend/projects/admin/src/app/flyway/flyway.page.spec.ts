@@ -73,7 +73,7 @@ describe('FlywayPage', () => {
     it('should refresh flyway migrations', inject([FlywayService], (flywayService: FlywayService) => {
       expectFlywayDatatable();
 
-      const refreshDatatableBtn = fixture.debugElement.query(By.css('#refresh-failed-jobs-btn'));
+      const refreshDatatableBtn = fixture.debugElement.query(By.css('[data-e2e="refresh-flyway-btn"]'));
       refreshDatatableBtn.triggerEventHandler('click', null);
 
       fixture.detectChanges();
@@ -82,7 +82,7 @@ describe('FlywayPage', () => {
     }));
 
     function expectFlywayDatatable() {
-      expect(fixture.debugElement.query(By.css('#flyway-datatable'))).toBeTruthy();
+      expect(fixture.debugElement.query(By.css('[data-e2e="flyway-datatable"]'))).toBeTruthy();
       const dataTableHeaders = fixture.debugElement.queryAll(By.css('clr-dg-column'));
       expect(dataTableHeaders.length).toBe(tableHeaders.length);
 

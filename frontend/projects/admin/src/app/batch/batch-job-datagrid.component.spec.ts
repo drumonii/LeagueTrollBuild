@@ -129,7 +129,7 @@ describe('BatchJobDatagridComponent', () => {
       completionTime: 5
     };
 
-    it('should load batch jobs server side', inject([BatchJobDatagridService], (batchService: BatchJobDatagridService) => {
+    it('should load batch jobs server side', () => {
       // workaround for async pipe not subscribing in the clr-dg-row
       component.jobInstances$ = of(batchJobInstances.content);
       component.total = batchJobInstances.totalElements;
@@ -137,8 +137,7 @@ describe('BatchJobDatagridComponent', () => {
       fixture.detectChanges();
 
       expectBatchJobsDatatable();
-    }));
-
+    });
 
     describe('pagination', () => {
 
@@ -285,7 +284,7 @@ describe('BatchJobDatagridComponent', () => {
       it('should refresh batch jobs server side', inject([BatchJobDatagridService], (batchService: BatchJobDatagridService) => {
         expectInitialCall(batchService);
 
-        const refreshDatatableBtn = fixture.debugElement.query(By.css('#refresh-failed-jobs-btn'));
+        const refreshDatatableBtn = fixture.debugElement.query(By.css('[data-e2e="refresh-failed-jobs-btn"]'));
         refreshDatatableBtn.triggerEventHandler('click', null);
 
         fixture.detectChanges();
@@ -315,7 +314,7 @@ describe('BatchJobDatagridComponent', () => {
     });
 
     function expectBatchJobsDatatable() {
-      expect(fixture.debugElement.query(By.css('#batch-jobs-datatable'))).toBeTruthy();
+      expect(fixture.debugElement.query(By.css('[data-e2e="batch-jobs-datatable"]'))).toBeTruthy();
       const dataTableHeaders = fixture.debugElement.queryAll(By.css('clr-dg-column'));
       expect(dataTableHeaders.length).toBe(tableHeaders.length);
       for (let i = 1; i < dataTableHeaders.length; i++) { // skip the expand column
@@ -441,9 +440,9 @@ describe('BatchJobDatagridComponent', () => {
 
     it('should show the recent failed all retrievals job alert',
       inject([BatchJobDatagridService], (batchService: BatchJobDatagridService) => {
-      expect(fixture.debugElement.query(By.css('#failed-job-alert'))).toBeTruthy();
+      expect(fixture.debugElement.query(By.css('[data-e2e="failed-job-alert"]'))).toBeTruthy();
 
-      const restartJobBtn = fixture.debugElement.query(By.css('#restart-job-btn'));
+      const restartJobBtn = fixture.debugElement.query(By.css('[data-e2e="restart-job-btn"]'));
       expect(restartJobBtn.nativeElement.textContent.trim()).toBe('Restart');
       restartJobBtn.triggerEventHandler('click', null);
 

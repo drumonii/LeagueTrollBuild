@@ -41,7 +41,7 @@ describe('FailedJobsComponent', () => {
       }));
 
       it('should show failed jobs', () => {
-        const failedJobs = fixture.debugElement.query(By.css('#failed-jobs'));
+        const failedJobs = fixture.debugElement.query(By.css('[data-e2e="failed-jobs"]'));
         expect(failedJobs.nativeElement.textContent.trim()).toBe(`${failedJobsCount}`);
         expect(failedJobs.nativeElement.classList).toContain('label');
       });
@@ -59,7 +59,7 @@ describe('FailedJobsComponent', () => {
       }));
 
       it('should show failed jobs', () => {
-        const failedJobs = fixture.debugElement.query(By.css('#failed-jobs'));
+        const failedJobs = fixture.debugElement.query(By.css('[data-e2e="failed-jobs"]'));
         expect(failedJobs.nativeElement.textContent.trim()).toBe(`${failedJobsCount}`);
         expect(failedJobs.nativeElement.classList).toContain('label-danger');
       });
@@ -67,7 +67,7 @@ describe('FailedJobsComponent', () => {
     });
 
     function expectNotRefreshing() {
-      const refreshFailedJobsBtn = fixture.debugElement.query(By.css('#refresh-failed-jobs-btn'));
+      const refreshFailedJobsBtn = fixture.debugElement.query(By.css('[data-e2e="refresh-failed-jobs-btn"]'));
       expect(refreshFailedJobsBtn.nativeElement.disabled).toBe(false);
     }
 
@@ -82,9 +82,9 @@ describe('FailedJobsComponent', () => {
     }));
 
     it('should show loading indicator', () => {
-      expect(fixture.debugElement.query(By.css('#loading-failed-jobs-alert'))).toBeTruthy();
+      expect(fixture.debugElement.query(By.css('[data-e2e="loading-failed-jobs-alert"]'))).toBeTruthy();
 
-      const refreshFailedJobsBtn = fixture.debugElement.query(By.css('#refresh-failed-jobs-btn'));
+      const refreshFailedJobsBtn = fixture.debugElement.query(By.css('[data-e2e="refresh-failed-jobs-btn"]'));
       expect(refreshFailedJobsBtn.nativeElement.disabled).toBe(true);
     });
 
@@ -99,7 +99,7 @@ describe('FailedJobsComponent', () => {
     }));
 
     it('should show error alert', () => {
-      expect(fixture.debugElement.query(By.css('#no-failed-jobs-alert'))).toBeTruthy();
+      expect(fixture.debugElement.query(By.css('[data-e2e="no-failed-jobs-alert"]'))).toBeTruthy();
     });
 
   });

@@ -43,11 +43,11 @@ describe('CpuUsageComponent', () => {
       }));
 
       it('should show cpu usage', () => {
-        const cpuUsage = fixture.debugElement.query(By.css('#cpu-usage'));
+        const cpuUsage = fixture.debugElement.query(By.css('[data-e2e="cpu-usage"]'));
         expect(cpuUsage.nativeElement.textContent.trim()).toBe('87.734% of 2 CPUs');
         expect(cpuUsage.nativeElement.classList).toContain('label-danger');
 
-        const cpuUsagePercentage = fixture.debugElement.query(By.css('#cpu-usage-perc'));
+        const cpuUsagePercentage = fixture.debugElement.query(By.css('[data-e2e="cpu-usage-perc"]'));
         expect(cpuUsagePercentage.nativeElement.classList).toContain('badge');
       });
 
@@ -62,11 +62,11 @@ describe('CpuUsageComponent', () => {
       }));
 
       it('should show cpu usage', () => {
-        const cpuUsage = fixture.debugElement.query(By.css('#cpu-usage'));
+        const cpuUsage = fixture.debugElement.query(By.css('[data-e2e="cpu-usage"]'));
         expect(cpuUsage.nativeElement.textContent.trim()).toBe('35.921% of 2 CPUs');
         expect(cpuUsage.nativeElement.classList).toContain('label-warning');
 
-        const cpuUsagePercentage = fixture.debugElement.query(By.css('#cpu-usage-perc'));
+        const cpuUsagePercentage = fixture.debugElement.query(By.css('[data-e2e="cpu-usage-perc"]'));
         expect(cpuUsagePercentage.nativeElement.classList).toContain('badge');
       });
 
@@ -81,18 +81,18 @@ describe('CpuUsageComponent', () => {
       }));
 
       it('should show cpu usage', () => {
-        const cpuUsage = fixture.debugElement.query(By.css('#cpu-usage'));
+        const cpuUsage = fixture.debugElement.query(By.css('[data-e2e="cpu-usage"]'));
         expect(cpuUsage.nativeElement.textContent.trim()).toBe('10.012% of 2 CPUs');
         expect(cpuUsage.nativeElement.classList).toContain('label');
 
-        const cpuUsagePercentage = fixture.debugElement.query(By.css('#cpu-usage-perc'));
+        const cpuUsagePercentage = fixture.debugElement.query(By.css('[data-e2e="cpu-usage-perc"]'));
         expect(cpuUsagePercentage.nativeElement.classList).toContain('badge');
       });
 
     });
 
     function expectNotRefreshing() {
-      const refreshServletErrorsBtn = fixture.debugElement.query(By.css('#refresh-cpu-usage-btn'));
+      const refreshServletErrorsBtn = fixture.debugElement.query(By.css('[data-e2e="refresh-cpu-usage-btn"]'));
       expect(refreshServletErrorsBtn.nativeElement.disabled).toBe(false);
     }
 
@@ -108,9 +108,9 @@ describe('CpuUsageComponent', () => {
     }));
 
     it('should show loading indicator', () => {
-      expect(fixture.debugElement.query(By.css('#loading-cpu-usage'))).toBeTruthy();
+      expect(fixture.debugElement.query(By.css('[data-e2e="loading-cpu-usage"]'))).toBeTruthy();
 
-      const refreshCpuUsageBtn = fixture.debugElement.query(By.css('#refresh-cpu-usage-btn'));
+      const refreshCpuUsageBtn = fixture.debugElement.query(By.css('[data-e2e="refresh-cpu-usage-btn"]'));
       expect(refreshCpuUsageBtn.nativeElement.disabled).toBe(true);
     });
 
@@ -128,7 +128,7 @@ describe('CpuUsageComponent', () => {
       }));
 
       it('should show error alert', () => {
-        expect(fixture.debugElement.query(By.css('#no-cpu-usage-alert'))).toBeTruthy();
+        expect(fixture.debugElement.query(By.css('[data-e2e="no-cpu-usage-alert"]'))).toBeTruthy();
       });
 
     });
@@ -143,7 +143,7 @@ describe('CpuUsageComponent', () => {
       }));
 
       it('should show error alert', () => {
-        expect(fixture.debugElement.query(By.css('#no-cpu-usage-alert'))).toBeTruthy();
+        expect(fixture.debugElement.query(By.css('[data-e2e="no-cpu-usage-alert"]'))).toBeTruthy();
       });
 
     });

@@ -41,18 +41,18 @@ describe('AdminLoginPage', () => {
     }));
 
     it('should show login form', () => {
-      expect(fixture.debugElement.query(By.css('#admin-login-form'))).toBeTruthy();
+      expect(fixture.debugElement.query(By.css('[data-e2e="admin-login-form"]'))).toBeTruthy();
       expect(component.adminLoginForm.valid).toBe(false);
 
-      const usernameInput = fixture.debugElement.query(By.css('#username-input'));
+      const usernameInput = getUsernameInput();
       expect(usernameInput.nativeElement.placeholder).toBe('Username');
       expect(usernameInput.nativeElement.type).toBe('text');
 
-      const passwordInput = fixture.debugElement.query(By.css('#password-input'));
+      const passwordInput = getPasswordInput();
       expect(passwordInput.nativeElement.placeholder).toBe('Password');
       expect(passwordInput.nativeElement.type).toBe('password');
 
-      const loginBtn = fixture.debugElement.query(By.css('#login-btn'));
+      const loginBtn = getLoginBtn();
       expect(loginBtn.nativeElement.textContent.trim()).toBe('Login');
       expect(loginBtn.nativeElement.disabled).toBe(true);
     });
@@ -62,23 +62,23 @@ describe('AdminLoginPage', () => {
       it('from invalid username', () => {
         const username = component.adminLoginForm.get('username');
         username.setValue(''); username.markAsTouched();
-        const usernameInput = fixture.debugElement.query(By.css('#username-input'));
+        const usernameInput = getUsernameInput();
         usernameInput.triggerEventHandler('blur', null);
 
         fixture.detectChanges();
 
-        expect(fixture.debugElement.query(By.css('#username-input-error'))).toBeTruthy();
+        expect(fixture.debugElement.query(By.css('[data-e2e="username-input-container"] clr-control-error'))).toBeTruthy();
       });
 
       it('from invalid password', () => {
         const password = component.adminLoginForm.get('password');
         password.setValue(''); password.markAsTouched();
-        const passwordInput = fixture.debugElement.query(By.css('#password-input'));
+        const passwordInput = getPasswordInput();
         passwordInput.triggerEventHandler('blur', null);
 
         fixture.detectChanges();
 
-        expect(fixture.debugElement.query(By.css('#password-input-error'))).toBeTruthy();
+        expect(fixture.debugElement.query(By.css('[data-e2e="password-input-container"] clr-control-error'))).toBeTruthy();
       });
 
     });
@@ -103,14 +103,14 @@ describe('AdminLoginPage', () => {
 
           fixture.detectChanges();
 
-          const loginBtn = fixture.debugElement.query(By.css('#login-btn'));
+          const loginBtn = getLoginBtn();
           loginBtn.nativeElement.click();
 
           fixture.detectChanges();
 
-          expect(fixture.debugElement.query(By.css('#login-bad-credentials-alert'))).toBeTruthy();
-          expect(fixture.debugElement.query(By.css('#login-unexpected-error-alert'))).toBeFalsy();
-          expect(fixture.debugElement.query(By.css('#logged-out-alert'))).toBeFalsy();
+          expect(getBadCredentialsAlert()).toBeTruthy();
+          expect(getUnexpectedErrorAlert()).toBeFalsy();
+          expect(getLoggedOutAlert()).toBeFalsy();
 
           expect(authService.loginAdmin).toHaveBeenCalledWith(username.value, password.value);
           expect(router.navigate).toHaveBeenCalledWith(['/admin/login']);
@@ -133,14 +133,14 @@ describe('AdminLoginPage', () => {
 
           fixture.detectChanges();
 
-          const loginBtn = fixture.debugElement.query(By.css('#login-btn'));
+          const loginBtn = getLoginBtn();
           loginBtn.nativeElement.click();
 
           fixture.detectChanges();
 
-          expect(fixture.debugElement.query(By.css('#login-bad-credentials-alert'))).toBeFalsy();
-          expect(fixture.debugElement.query(By.css('#login-unexpected-error-alert'))).toBeTruthy();
-          expect(fixture.debugElement.query(By.css('#logged-out-alert'))).toBeFalsy();
+          expect(getBadCredentialsAlert()).toBeFalsy();
+          expect(getUnexpectedErrorAlert()).toBeTruthy();
+          expect(getLoggedOutAlert()).toBeFalsy();
 
           expect(authService.loginAdmin).toHaveBeenCalledWith(username.value, password.value);
           expect(router.navigate).toHaveBeenCalledWith(['/admin/login']);
@@ -175,7 +175,7 @@ describe('AdminLoginPage', () => {
 
           fixture.detectChanges();
 
-          const loginBtn = fixture.debugElement.query(By.css('#login-btn'));
+          const loginBtn = getLoginBtn();
           loginBtn.nativeElement.click();
 
           fixture.detectChanges();
@@ -188,6 +188,30 @@ describe('AdminLoginPage', () => {
       });
 
     });
+
+    function getUsernameInput() {
+      return fixture.debugElement.query(By.css('[data-e2e="username-input"]'));
+    }
+
+    function getPasswordInput() {
+      return fixture.debugElement.query(By.css('[data-e2e="password-input"]'));
+    }
+
+    function getLoginBtn() {
+      return fixture.debugElement.query(By.css('[data-e2e="login-btn"]'));
+    }
+
+    function getBadCredentialsAlert() {
+      return fixture.debugElement.query(By.css('[data-e2e="login-bad-credentials-alert"]'));
+    }
+
+    function getUnexpectedErrorAlert() {
+      return fixture.debugElement.query(By.css('[data-e2e="login-unexpected-error-alert"]'));
+    }
+
+    function getLoggedOutAlert() {
+      return fixture.debugElement.query(By.css('[data-e2e="logged-out-alert"]'));
+    }
 
   });
 
@@ -216,7 +240,7 @@ describe('AdminLoginPage', () => {
     it('should show logged out alert', () => {
       fixture.detectChanges();
 
-      expect(fixture.debugElement.query(By.css('#logged-out-alert'))).toBeTruthy();
+      expect(fixture.debugElement.query(By.css('[data-e2e="logged-out-alert"]'))).toBeTruthy();
     });
 
   });

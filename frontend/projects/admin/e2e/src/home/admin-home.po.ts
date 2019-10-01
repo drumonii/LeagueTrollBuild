@@ -9,35 +9,35 @@ export class AdminHomePage extends BaseAdminPage {
   }
 
   getFailedJobsComponent(): ElementFinder {
-    return element(by.css('#failed-jobs-card'));
+    return element(by.css('[data-e2e="failed-jobs-card"]'));
   }
 
   getFailedToLoadFailedJobsAlert(): ElementFinder {
-    return element(by.css('#no-failed-jobs-alert'));
+    return element(by.css('[data-e2e="no-failed-jobs-alert"]'));
   }
 
   getCpuUsageComponent(): ElementFinder {
-    return element(by.css('#cpu-usage-card'));
+    return element(by.css('[data-e2e="cpu-usage-card"]'));
   }
 
   getFailedToLoadCpuUsageAlert(): ElementFinder {
-    return element(by.css('#no-cpu-usage-alert'));
+    return element(by.css('[data-e2e="no-cpu-usage-alert"]'));
   }
 
   getMemoryUsageComponent(): ElementFinder {
-    return element(by.css('#memory-usage-card'));
+    return element(by.css('[data-e2e="memory-usage-card"]'));
   }
 
   getFailedToLoadMemoryUsageAlert(): ElementFinder {
-    return element(by.css('#no-memory-usage-alert'));
+    return element(by.css('[data-e2e="no-memory-usage-alert"]'));
   }
 
   getGlobalErrorsComponent(): ElementFinder {
-    return element(by.css('#global-errors-card'));
+    return element(by.css('[data-e2e="global-errors-card"]'));
   }
 
   getFailedToLoadGlobalErrorsAlert(): ElementFinder {
-    return element(by.css('#no-global-errors-alert'));
+    return element(by.css('[data-e2e="no-global-errors-alert"]'));
   }
 
 }

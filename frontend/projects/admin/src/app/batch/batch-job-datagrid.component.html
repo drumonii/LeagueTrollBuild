@@ -1,6 +1,6 @@
 <h3>
   Job Instances
-  <button id="refresh-failed-jobs-btn" [disabled]="loading" class="btn btn-link"
+  <button [disabled]="loading" class="btn btn-link" data-e2e="refresh-failed-jobs-btn"
     (click)="getBatchJobInstances({
       page: 0,
       size: 10,
@@ -10,19 +10,19 @@
     <clr-icon shape="refresh"></clr-icon>
   </button>
 </h3>
-<clr-alert id="failed-job-alert" [clrAlertType]="'danger'" *ngIf="(hasFailedAllRetrievalsJob$ | async)">
+<clr-alert [attr.data-e2e]="'failed-job-alert'" [clrAlertType]="'danger'" *ngIf="(hasFailedAllRetrievalsJob$ | async)">
   <clr-alert-item>
     <span class="alert-text">
       The most recent allRetrievalsJob run failed or has been hanging for more than {{minutesAgo}} minutes ago.
       Try restarting the allRetrievalsJob manually.
       <br/>
-      <button id="restart-job-btn" class="btn btn-primary" [clrLoading]="restartingAllRetrievalsJob" (click)="restartAllRetrievalsJob()">
+      <button class="btn btn-primary" [clrLoading]="restartingAllRetrievalsJob" (click)="restartAllRetrievalsJob()" data-e2e="restart-job-btn">
         Restart
       </button>
     </span>
   </clr-alert-item>
 </clr-alert>
-<clr-datagrid id="batch-jobs-datatable" (clrDgRefresh)="refresh($event)" [clrDgLoading]="loading">
+<clr-datagrid [attr.data-e2e]="'batch-jobs-datatable'" (clrDgRefresh)="refresh($event)" [clrDgLoading]="loading">
   <clr-dg-column [clrDgField]="'id'" [clrDgColType]="'number'">Job Id</clr-dg-column>
   <clr-dg-column [clrDgField]="'name'" [style.min-width.px]="200">Name</clr-dg-column>
   <clr-dg-column [clrDgField]="'jobExecution.status'">Status</clr-dg-column>

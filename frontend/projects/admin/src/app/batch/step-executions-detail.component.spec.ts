@@ -144,6 +144,6 @@ describe('StepExecutionsDetailComponent', () => {
   }));
 
   it('should get step executions for the job execution id', () => {
-    expect(fixture.debugElement.query(By.css('.step-executions-table'))).toBeTruthy();
+    expect(fixture.debugElement.query(By.css('[data-e2e="step-executions-table"]'))).toBeTruthy();
   });
 });

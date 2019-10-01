@@ -1,7 +1,7 @@
-<div id="global-errors-card" class="card">
+<div class="card" data-e2e="global-errors-card">
   <div class="card-header">
     Global Errors
-    <button id="refresh-global-errors-btn" [disabled]="gettingGlobalErrors" class="btn btn-link" (click)="getGlobalErrors()">
+    <button [disabled]="gettingGlobalErrors" class="btn btn-link" (click)="getGlobalErrors()" data-e2e="refresh-global-errors-btn">
       <clr-icon shape="refresh"></clr-icon>
     </button>
   </div>
@@ -13,11 +13,11 @@
       <ng-container *ngIf="(globalErrors$ | async) as servletErrors; else loadingServletErrors">
         <ng-container *ngIf="servletErrors.toString(); else noServletErrors">
           <div class="stat">
-            <p id="global-errors" class="label" [ngClass]="getGlobalErrorsClass(servletErrors)">{{servletErrors}}</p>
+            <p class="label" [ngClass]="getGlobalErrorsClass(servletErrors)" data-e2e="global-errors">{{servletErrors}}</p>
           </div>
         </ng-container>
         <ng-template #noServletErrors>
-          <clr-alert id="no-global-errors-alert" [clrAlertType]="'danger'" [clrAlertClosable]="false">
+          <clr-alert [attr.data-e2e]="'no-global-errors-alert'" [clrAlertType]="'danger'" [clrAlertClosable]="false">
             <clr-alert-item>
               <span class="alert-text">Unable to get Global Errors</span>
             </clr-alert-item>
@@ -25,7 +25,7 @@
         </ng-template>
       </ng-container>
       <ng-template #loadingServletErrors>
-        <div id="loading-global-errors-alert" class="stat">
+        <div class="stat" data-e2e="loading-global-errors-alert">
           <p>...</p>
         </div>
       </ng-template>

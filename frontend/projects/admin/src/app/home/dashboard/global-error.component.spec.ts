@@ -41,7 +41,7 @@ describe('GlobalErrorComponent', () => {
       }));
 
       it('should show global errors', () => {
-        const servletErrors = fixture.debugElement.query(By.css('#global-errors'));
+        const servletErrors = fixture.debugElement.query(By.css('[data-e2e="global-errors"]'));
         expect(servletErrors.nativeElement.textContent.trim()).toBe(`${servletErrorsCount}`);
         expect(servletErrors.nativeElement.classList).toContain('label');
       });
@@ -59,7 +59,7 @@ describe('GlobalErrorComponent', () => {
       }));
 
       it('should show global errors', () => {
-        const servletErrors = fixture.debugElement.query(By.css('#global-errors'));
+        const servletErrors = fixture.debugElement.query(By.css('[data-e2e="global-errors"]'));
         expect(servletErrors.nativeElement.textContent.trim()).toBe(`${servletErrorsCount}`);
         expect(servletErrors.nativeElement.classList).toContain('label-danger');
 
@@ -69,7 +69,7 @@ describe('GlobalErrorComponent', () => {
     });
 
     function expectNotRefreshing() {
-      const refreshServletErrorsBtn = fixture.debugElement.query(By.css('#refresh-global-errors-btn'));
+      const refreshServletErrorsBtn = fixture.debugElement.query(By.css('[data-e2e="refresh-global-errors-btn"]'));
       expect(refreshServletErrorsBtn.nativeElement.disabled).toBe(false);
     }
 
@@ -84,9 +84,9 @@ describe('GlobalErrorComponent', () => {
     }));
 
     it('should show loading indicator', () => {
-      expect(fixture.debugElement.query(By.css('#loading-global-errors-alert'))).toBeTruthy();
+      expect(fixture.debugElement.query(By.css('[data-e2e="loading-global-errors-alert"]'))).toBeTruthy();
 
-      const refreshServletErrorsBtn = fixture.debugElement.query(By.css('#refresh-global-errors-btn'));
+      const refreshServletErrorsBtn = fixture.debugElement.query(By.css('[data-e2e="refresh-global-errors-btn"]'));
       expect(refreshServletErrorsBtn.nativeElement.disabled).toBe(true);
     });
 
@@ -101,7 +101,7 @@ describe('GlobalErrorComponent', () => {
     }));
 
     it('should show error alert', () => {
-      expect(fixture.debugElement.query(By.css('#no-global-errors-alert'))).toBeTruthy();
+      expect(fixture.debugElement.query(By.css('[data-e2e="no-global-errors-alert"]'))).toBeTruthy();
     });
 
   });

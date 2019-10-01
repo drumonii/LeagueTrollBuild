@@ -1,7 +1,7 @@
- <div id="cpu-usage-card" class="card">
+ <div class="card" data-e2e="cpu-usage-card">
   <div class="card-header">
     CPU Usage
-    <button id="refresh-cpu-usage-btn" [disabled]="gettingCpuUsage" class="btn btn-link" (click)="getCpuUsage()">
+    <button [disabled]="gettingCpuUsage" class="btn btn-link" (click)="getCpuUsage()" data-e2e="refresh-cpu-usage-btn">
       <clr-icon shape="refresh"></clr-icon>
     </button>
   </div>
@@ -13,14 +13,14 @@
       <ng-container *ngIf="(cpuUsage$ | async) as cpuUsage; else loadingCpuUsage">
         <ng-container *ngIf="cpuUsage.percentage && cpuUsage.cpus; else noCpuUsage">
           <div class="stat">
-            <p id="cpu-usage" class="label" [ngClass]="getCpuUsageClass(cpuUsage.percentage)">
-              <span id="cpu-usage-perc" class="badge">{{cpuUsage.percentage}}%</span>
+            <p class="label" [ngClass]="getCpuUsageClass(cpuUsage.percentage)" data-e2e="cpu-usage">
+              <span class="badge" data-e2e="cpu-usage-perc">{{cpuUsage.percentage}}%</span>
                 of {{cpuUsage.cpus}} CPUs
             </p>
           </div>
         </ng-container>
         <ng-template #noCpuUsage>
-          <clr-alert id="no-cpu-usage-alert" [clrAlertType]="'danger'" [clrAlertClosable]="false">
+          <clr-alert [attr.data-e2e]="'no-cpu-usage-alert'" [clrAlertType]="'danger'" [clrAlertClosable]="false">
             <clr-alert-item>
               <span class="alert-text">Unable to get CPU Usage</span>
             </clr-alert-item>
@@ -28,7 +28,7 @@
         </ng-template>
       </ng-container>
       <ng-template #loadingCpuUsage>
-        <div id="loading-cpu-usage" class="stat">
+        <div class="stat" data-e2e="loading-cpu-usage">
           <p>...</p>
         </div>
       </ng-template>
