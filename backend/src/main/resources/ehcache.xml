@@ -6,66 +6,66 @@
     <diskStore path="java.io.tmpdir"/>
 
     <cache name="summonerSpells"
-           maxElementsInMemory="25"
+           maxEntriesLocalHeap="25"
            eternal="false"
            timeToIdleSeconds="0"
            timeToLiveSeconds="0"
-           maxElementsOnDisk="35"
+           maxEntriesLocalDisk="35"
            diskExpiryThreadIntervalSeconds="120"
            memoryStoreEvictionPolicy="LRU">
         <persistence strategy="localTempSwap"/>
     </cache>
 
     <cache name="items"
-           maxElementsInMemory="300"
+           maxEntriesLocalHeap="300"
            eternal="false"
            timeToIdleSeconds="0"
            timeToLiveSeconds="0"
-           maxElementsOnDisk="450"
+           maxEntriesLocalDisk="450"
            diskExpiryThreadIntervalSeconds="120"
            memoryStoreEvictionPolicy="LRU">
         <persistence strategy="localTempSwap"/>
     </cache>
 
     <cache name="champions"
-           maxElementsInMemory="150"
+           maxEntriesLocalHeap="150"
            eternal="false"
            timeToIdleSeconds="0"
            timeToLiveSeconds="0"
-           maxElementsOnDisk="300"
+           maxEntriesLocalDisk="300"
            diskExpiryThreadIntervalSeconds="120"
            memoryStoreEvictionPolicy="LRU">
         <persistence strategy="localTempSwap"/>
     </cache>
 
     <cache name="maps"
-           maxElementsInMemory="10"
+           maxEntriesLocalHeap="10"
            eternal="false"
            timeToIdleSeconds="0"
            timeToLiveSeconds="0"
-           maxElementsOnDisk="20"
+           maxEntriesLocalDisk="20"
            diskExpiryThreadIntervalSeconds="3600"
            memoryStoreEvictionPolicy="LRU">
         <persistence strategy="localTempSwap"/>
     </cache>
 
     <cache name="versions"
-           maxElementsInMemory="50"
+           maxEntriesLocalHeap="50"
            eternal="false"
            timeToIdleSeconds="0"
            timeToLiveSeconds="0"
-           maxElementsOnDisk="150"
+           maxEntriesLocalDisk="150"
            diskExpiryThreadIntervalSeconds="3600"
            memoryStoreEvictionPolicy="LRU">
         <persistence strategy="localTempSwap"/>
     </cache>
 
     <cache name="builds"
-           maxElementsInMemory="50"
+           maxEntriesLocalHeap="50"
            eternal="false"
            timeToIdleSeconds="0"
            timeToLiveSeconds="0"
-           maxElementsOnDisk="150"
+           maxEntriesLocalDisk="150"
            diskExpiryThreadIntervalSeconds="120"
            memoryStoreEvictionPolicy="LRU">
         <persistence strategy="localTempSwap"/>
