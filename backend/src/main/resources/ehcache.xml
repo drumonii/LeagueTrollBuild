@@ -10,7 +10,7 @@
            eternal="false"
            timeToIdleSeconds="0"
            timeToLiveSeconds="0"
-           maxEntriesLocalDisk="35"
+           maxEntriesLocalDisk="0"
            diskExpiryThreadIntervalSeconds="120"
            memoryStoreEvictionPolicy="LRU">
         <persistence strategy="localTempSwap"/>
@@ -43,7 +43,7 @@
            eternal="false"
            timeToIdleSeconds="0"
            timeToLiveSeconds="0"
-           maxEntriesLocalDisk="20"
+           maxEntriesLocalDisk="0"
            diskExpiryThreadIntervalSeconds="3600"
            memoryStoreEvictionPolicy="LRU">
         <persistence strategy="localTempSwap"/>
