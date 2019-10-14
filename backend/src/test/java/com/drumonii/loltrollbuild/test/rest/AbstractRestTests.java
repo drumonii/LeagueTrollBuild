@@ -7,7 +7,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -27,14 +26,7 @@ public abstract class AbstractRestTests {
     @Value("${api.base-path}")
     protected String apiPath;
 
-    @LocalServerPort
-    private int port;
-
     @Autowired
     protected TestRestTemplate testRestTemplate;
-
-    protected String createUrl(String path) {
-        return "http://localhost:" + port + apiPath + path;
-    }
 
 }

@@ -3,11 +3,10 @@ package com.drumonii.loltrollbuild.rest;
 import com.drumonii.loltrollbuild.test.rest.AbstractRestTests;
 import org.hamcrest.Matcher;
 import org.junit.Test;
-import org.springframework.http.RequestEntity;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.test.util.JsonPathExpectationsHelper;
 
-import java.net.URI;
+import java.util.Collections;
 import java.util.function.Consumer;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -17,20 +16,24 @@ public class ErrorRestControllerTest extends AbstractRestTests {
 
     @Test
     public void getsErrorForPermitAllRequest() {
-        RequestEntity<Void> requestEntity = RequestEntity.get(URI.create(createUrl("/not-found")))
-                .build();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        HttpEntity<String> httpEntity = new HttpEntity<>(headers);
 
-        ResponseEntity<String> responseEntity = testRestTemplate.exchange(requestEntity, String.class);
+        ResponseEntity<String> responseEntity = testRestTemplate.exchange(apiPath + "/not-found", HttpMethod.GET,
+                httpEntity, String.class);
 
         assertThat(responseEntity.getBody()).satisfies(new ErrorNotFoundJson("/api/not-found"));
     }
 
     @Test
     public void getsErrorForSecureRequest() {
-        RequestEntity<Void> requestEntity = RequestEntity.get(URI.create(createUrl("/admin/job-instances")))
-                .build();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        HttpEntity<String> httpEntity = new HttpEntity<>(headers);
 
-        ResponseEntity<String> responseEntity = testRestTemplate.exchange(requestEntity, String.class);
+        ResponseEntity<String> responseEntity = testRestTemplate.exchange(apiPath + "/admin/job-instances", HttpMethod.GET,
+                httpEntity, String.class);
 
         assertThat(responseEntity.getBody()).satisfies(new ErrorUnauthorizedJson("/api/admin/job-instances"));
     }
@@ -50,7 +53,7 @@ public class ErrorRestControllerTest extends AbstractRestTests {
             new JsonPathExpectationsHelper(expression).hasJsonPath(json);
         }
 
-        protected <T> void pathHasValue(String expression, String json, Matcher<T> matcher) {
+        <T> void pathHasValue(String expression, String json, Matcher<T> matcher) {
             new JsonPathExpectationsHelper(expression).assertValue(json, matcher);
         }
 
