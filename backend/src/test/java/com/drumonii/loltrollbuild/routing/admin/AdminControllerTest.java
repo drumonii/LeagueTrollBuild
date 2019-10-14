@@ -1,4 +1,4 @@
-package com.drumonii.loltrollbuild.controller.admin;
+package com.drumonii.loltrollbuild.routing.admin;
 
 import com.drumonii.loltrollbuild.annotation.WithMockAdminUser;
 import org.junit.Test;

@@ -1,4 +1,4 @@
-package com.drumonii.loltrollbuild.controller;
+package com.drumonii.loltrollbuild.routing;
 
 import com.drumonii.loltrollbuild.model.Champion;
 import org.springframework.stereotype.Controller;

@@ -1,4 +1,4 @@
-package com.drumonii.loltrollbuild.controller;
+package com.drumonii.loltrollbuild.routing;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

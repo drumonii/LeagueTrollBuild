@@ -1,4 +1,4 @@
-package com.drumonii.loltrollbuild.controller;
+package com.drumonii.loltrollbuild.routing;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,18 +14,25 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(RootController.class)
+@WebMvcTest(BuildsController.class)
 @ActiveProfiles({ TESTING })
-public class RootControllerTest {
+public class BuildsControllerTest {
 
-    @Autowired
-    private MockMvc mockMvc;
+	@Autowired
+	private MockMvc mockMvc;
 
-    @WithAnonymousUser
-    @Test
-    public void root() throws Exception {
-        mockMvc.perform(get("/"))
-                .andExpect(forwardedUrl("/troll-build/index.html"));
-    }
+	@WithAnonymousUser
+	@Test
+	public void builds() throws Exception {
+		mockMvc.perform(get("/builds"))
+				.andExpect(forwardedUrl("/troll-build/index.html"));
+	}
+
+	@WithAnonymousUser
+	@Test
+	public void build() throws Exception {
+		mockMvc.perform(get("/builds/{id}", 1))
+				.andExpect(forwardedUrl("/troll-build/index.html"));
+	}
 
 }

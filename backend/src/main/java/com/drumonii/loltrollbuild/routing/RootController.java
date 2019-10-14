@@ -1,4 +1,4 @@
-package com.drumonii.loltrollbuild.controller;
+package com.drumonii.loltrollbuild.routing;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

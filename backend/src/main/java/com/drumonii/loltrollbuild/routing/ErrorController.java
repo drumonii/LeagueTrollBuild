@@ -1,4 +1,4 @@
-package com.drumonii.loltrollbuild.controller;
+package com.drumonii.loltrollbuild.routing;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.web.servlet.error.AbstractErrorController;
