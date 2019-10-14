@@ -1,7 +1,7 @@
 package com.drumonii.loltrollbuild.model;
 
 import com.drumonii.loltrollbuild.model.image.ChampionPassiveImage;
-import com.drumonii.loltrollbuild.rest.view.ApiViews;
+import com.drumonii.loltrollbuild.api.view.ApiViews;
 import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;

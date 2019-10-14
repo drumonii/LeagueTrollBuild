@@ -1,7 +1,7 @@
 package com.drumonii.loltrollbuild.model;
 
 import com.drumonii.loltrollbuild.model.image.ChampionSpellImage;
-import com.drumonii.loltrollbuild.rest.view.ApiViews;
+import com.drumonii.loltrollbuild.api.view.ApiViews;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;

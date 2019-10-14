@@ -2,13 +2,13 @@ package com.drumonii.loltrollbuild.doc;
 
 import com.drumonii.loltrollbuild.model.*;
 import com.drumonii.loltrollbuild.repository.*;
-import com.drumonii.loltrollbuild.rest.*;
+import com.drumonii.loltrollbuild.api.*;
 import com.drumonii.loltrollbuild.riot.api.ChampionsResponse;
 import com.drumonii.loltrollbuild.riot.api.ItemsResponse;
 import com.drumonii.loltrollbuild.riot.api.MapsResponse;
 import com.drumonii.loltrollbuild.riot.api.SummonerSpellsResponse;
 import com.drumonii.loltrollbuild.test.json.JsonTestFilesUtil;
-import com.drumonii.loltrollbuild.test.rest.WebMvcRestTest;
+import com.drumonii.loltrollbuild.test.api.WebMvcRestTest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Ignore;

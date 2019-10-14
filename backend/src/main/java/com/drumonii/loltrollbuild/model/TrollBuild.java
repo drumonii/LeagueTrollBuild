@@ -1,6 +1,6 @@
 package com.drumonii.loltrollbuild.model;
 
-import com.drumonii.loltrollbuild.rest.view.ApiViews;
+import com.drumonii.loltrollbuild.api.view.ApiViews;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
 
