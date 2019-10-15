@@ -21,7 +21,7 @@ export class AdminAuthService {
   constructor(private logger: AdminLogger, private httpClient: HttpClient) {}
 
   get adminUserDetails(): Observable<AdminUserDetails> {
-    this.adminUserDetails$.next(JSON.parse(localStorage.getItem(AdminAuthService.adminUserDetailsKey)));
+    this.adminUserDetails$.next(JSON.parse(sessionStorage.getItem(AdminAuthService.adminUserDetailsKey)));
     return this.adminUserDetails$.asObservable();
   }
 
@@ -62,12 +62,12 @@ export class AdminAuthService {
   }
 
   private addAdminUserDetails(adminUserDetails: AdminUserDetails): void {
-    localStorage.setItem(AdminAuthService.adminUserDetailsKey, JSON.stringify(adminUserDetails));
+    sessionStorage.setItem(AdminAuthService.adminUserDetailsKey, JSON.stringify(adminUserDetails));
     this.adminUserDetails$.next(adminUserDetails);
   }
 
   private removeAdminUserDetails(): void {
-    localStorage.removeItem(AdminAuthService.adminUserDetailsKey);
+    sessionStorage.removeItem(AdminAuthService.adminUserDetailsKey);
     this.adminUserDetails$.next(null);
   }
 

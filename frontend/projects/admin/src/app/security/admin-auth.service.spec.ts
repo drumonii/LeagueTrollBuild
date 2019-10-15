@@ -25,20 +25,20 @@ describe('AdminAuthService', () => {
   });
 
   afterEach(() => {
-    localStorage.clear();
+    sessionStorage.clear();
   });
 
   describe('getAdminUserDetails', () => {
 
-    it('with admin user details in localStorage', inject([AdminAuthService], (authService: AdminAuthService) => {
-      localStorage.setItem(AdminAuthService.adminUserDetailsKey, JSON.stringify(mockAdminUserDetails));
+    it('with admin user details in sessionStorage', inject([AdminAuthService], (authService: AdminAuthService) => {
+      sessionStorage.setItem(AdminAuthService.adminUserDetailsKey, JSON.stringify(mockAdminUserDetails));
 
       authService.adminUserDetails.subscribe(adminUserDetails => {
         expect(adminUserDetails).toEqual(mockAdminUserDetails);
       });
     }));
 
-    it('without admin user details in localStorage', inject([AdminAuthService], (authService: AdminAuthService) => {
+    it('without admin user details in sessionStorage', inject([AdminAuthService], (authService: AdminAuthService) => {
       authService.adminUserDetails.subscribe(adminUserDetails => {
         expect(adminUserDetails).toBeNull();
       });
@@ -50,7 +50,7 @@ describe('AdminAuthService', () => {
 
     const requestMatch: RequestMatch = { method: 'POST', url: '/login' };
 
-    it('should set adminUserDetails in localStorage with successful login',
+    it('should set adminUserDetails in sessionStorage with successful login',
       inject([AdminAuthService, HttpTestingController], (authService: AdminAuthService, httpMock: HttpTestingController) => {
       const mockSuccessfulLoginResponse: AdminLoginResponse = {
         status: AdminLoginStatus.SUCCESS,
@@ -60,7 +60,8 @@ describe('AdminAuthService', () => {
 
       authService.loginAdmin('some_username', 'some_password').subscribe(loginResponse => {
         expect(loginResponse).toEqual(mockSuccessfulLoginResponse);
-        expect(localStorage.getItem(AdminAuthService.adminUserDetailsKey)).toEqual(JSON.stringify(mockSuccessfulLoginResponse.userDetails));
+        expect(sessionStorage.getItem(AdminAuthService.adminUserDetailsKey))
+          .toEqual(JSON.stringify(mockSuccessfulLoginResponse.userDetails));
         authService.adminUserDetails.subscribe(adminUserDetails => {
           expect(adminUserDetails).toEqual(adminUserDetails);
         });
@@ -73,7 +74,7 @@ describe('AdminAuthService', () => {
       testReq.flush(mockSuccessfulLoginResponse);
     }));
 
-    it('should not set adminUserDetails in localStorage with failed login',
+    it('should not set adminUserDetails in sessionStorage with failed login',
       inject([AdminAuthService, HttpTestingController], (authService: AdminAuthService, httpMock: HttpTestingController) => {
       const mockFailedLoginResponse: AdminLoginResponse = {
         status: AdminLoginStatus.FAILED,
@@ -82,7 +83,7 @@ describe('AdminAuthService', () => {
 
       authService.loginAdmin('some_username', 'some_password').subscribe(loginResponse => {
         expect(loginResponse).toEqual(mockFailedLoginResponse);
-        expect(localStorage.getItem(AdminAuthService.adminUserDetailsKey)).toBeNull();
+        expect(sessionStorage.getItem(AdminAuthService.adminUserDetailsKey)).toBeNull();
         authService.adminUserDetails.subscribe(adminUserDetails => {
           expect(adminUserDetails).toBeNull();
         });
@@ -95,11 +96,11 @@ describe('AdminAuthService', () => {
       testReq.flush(mockFailedLoginResponse);
     }));
 
-    it('should not set adminUserDetails in localStorage with REST error',
+    it('should not set adminUserDetails in sessionStorage with REST error',
       inject([AdminAuthService, HttpTestingController], (authService: AdminAuthService, httpMock: HttpTestingController) => {
       authService.loginAdmin('some_username', 'some_password').subscribe(loginResponse => {
         expect(loginResponse).toBeNull();
-        expect(localStorage.getItem(AdminAuthService.adminUserDetailsKey)).toBeNull();
+        expect(sessionStorage.getItem(AdminAuthService.adminUserDetailsKey)).toBeNull();
         authService.adminUserDetails.subscribe(adminUserDetails => {
           expect(adminUserDetails).toBeNull();
         });
@@ -118,11 +119,11 @@ describe('AdminAuthService', () => {
 
     const requestMatch: RequestMatch = { method: 'GET', url: '/authentication' };
 
-    it('should return true if authenticated and set adminUserDetails in localStorage',
+    it('should return true if authenticated and set adminUserDetails in sessionStorage',
       inject([AdminAuthService, HttpTestingController], (authService: AdminAuthService, httpMock: HttpTestingController) => {
       authService.isAuthenticated().subscribe(isAuthenticated => {
         expect(isAuthenticated).toBe(true);
-        expect(localStorage.getItem(AdminAuthService.adminUserDetailsKey)).toEqual(JSON.stringify(mockAdminUserDetails));
+        expect(sessionStorage.getItem(AdminAuthService.adminUserDetailsKey)).toEqual(JSON.stringify(mockAdminUserDetails));
       });
 
       const testReq = httpMock.expectOne(requestMatch);
@@ -130,13 +131,13 @@ describe('AdminAuthService', () => {
       testReq.flush(mockAdminUserDetails);
     }));
 
-    it('should return false if not authenticated and remove adminUserDetails in localStorage',
+    it('should return false if not authenticated and remove adminUserDetails in sessionStorage',
       inject([AdminAuthService, HttpTestingController], (authService: AdminAuthService, httpMock: HttpTestingController) => {
-      localStorage.setItem(AdminAuthService.adminUserDetailsKey, JSON.stringify(mockAdminUserDetails));
+      sessionStorage.setItem(AdminAuthService.adminUserDetailsKey, JSON.stringify(mockAdminUserDetails));
 
       authService.isAuthenticated().subscribe(isAuthenticated => {
         expect(isAuthenticated).toBe(false);
-        expect(localStorage.getItem(AdminAuthService.adminUserDetailsKey)).toBeNull();
+        expect(sessionStorage.getItem(AdminAuthService.adminUserDetailsKey)).toBeNull();
       });
 
       const testReq = httpMock.expectOne(requestMatch);
@@ -152,18 +153,18 @@ describe('AdminAuthService', () => {
     const refreshRequestMatch: RequestMatch = { method: 'GET', url: '/refresh' };
 
     beforeEach(() => {
-      localStorage.setItem(AdminAuthService.adminUserDetailsKey, JSON.stringify(mockAdminUserDetails));
+      sessionStorage.setItem(AdminAuthService.adminUserDetailsKey, JSON.stringify(mockAdminUserDetails));
     });
 
     afterEach(inject([AdminAuthService], (authService: AdminAuthService) => {
-      expect(localStorage.getItem(AdminAuthService.adminUserDetailsKey)).toBeNull();
+      expect(sessionStorage.getItem(AdminAuthService.adminUserDetailsKey)).toBeNull();
 
       authService.adminUserDetails.subscribe(adminUserDetails => {
         expect(adminUserDetails).toBeNull();
       });
     }));
 
-    it('should remove adminUserDetails in localStorage',
+    it('should remove adminUserDetails in sessionStorage',
       inject([AdminAuthService, HttpTestingController], (authService: AdminAuthService, httpMock: HttpTestingController) => {
       const mockSuccessfulLogoutResponse: AdminLogoutResponse = {
         status: AdminLogoutStatus.SUCCESS,
@@ -185,7 +186,7 @@ describe('AdminAuthService', () => {
       refreshTestReq.error(new ErrorEvent('An unexpected error occurred'));
     }));
 
-    it('should remove adminUserDetails in localStorage with REST error',
+    it('should remove adminUserDetails in sessionStorage with REST error',
       inject([AdminAuthService, HttpTestingController], (authService: AdminAuthService, httpMock: HttpTestingController) => {
       authService.logoutAdmin().subscribe(logoutResponse => {
         expect(logoutResponse).toBeNull();
