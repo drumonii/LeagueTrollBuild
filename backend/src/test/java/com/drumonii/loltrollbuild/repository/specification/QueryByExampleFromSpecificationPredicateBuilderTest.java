@@ -2,8 +2,8 @@ package com.drumonii.loltrollbuild.repository.specification;
 
 import org.hibernate.mapping.PersistentClass;
 import org.hibernate.mapping.Property;
-import org.hibernate.metamodel.internal.BasicTypeImpl;
-import org.hibernate.metamodel.internal.EntityTypeImpl;
+import org.hibernate.metamodel.model.domain.internal.BasicTypeImpl;
+import org.hibernate.metamodel.model.domain.internal.EntityTypeImpl;
 import org.hibernate.query.criteria.internal.CriteriaBuilderImpl;
 import org.hibernate.query.criteria.internal.PathImplementor;
 import org.hibernate.query.criteria.internal.path.AbstractPathImpl;
@@ -440,7 +440,7 @@ public class QueryByExampleFromSpecificationPredicateBuilderTest {
 
 		@Override
 		public ManagedType<X> getDeclaringType() {
-			return new EntityTypeImpl<>(ownerType, null, persistentClass);
+			return new EntityTypeImpl<>(ownerType, null, persistentClass, null);
 		}
 
 		@Override
