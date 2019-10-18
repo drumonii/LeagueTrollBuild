@@ -66,7 +66,7 @@ public abstract class BuildsRestControllerTest {
 		// qbe
 		mockMvc.perform(get("{apiPath}/builds", apiPath))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$.content").exists())
 				.andExpect(jsonPath("$.pageable").exists())
 				.andExpect(jsonPath("$.totalPages").exists())
@@ -130,7 +130,7 @@ public abstract class BuildsRestControllerTest {
 		// find with existing build Id with attributes
 		mockMvc.perform(get("{apiPath}/builds/{id}", apiPath, build.getId()))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$.champion").exists())
 				.andExpect(jsonPath("$.championId", is(build.getChampionId())))
 				.andExpect(jsonPath("$.item1").exists())
@@ -161,7 +161,7 @@ public abstract class BuildsRestControllerTest {
 
 		// Save with missing attributes
 		mockMvc.perform(post("{apiPath}/builds", apiPath).with(csrf())
-				.contentType(MediaType.APPLICATION_JSON_UTF8)
+				.contentType(MediaType.APPLICATION_JSON)
 				.content(objectMapper.writeValueAsString(build)))
 				.andExpect(status().isBadRequest());
 
@@ -191,11 +191,11 @@ public abstract class BuildsRestControllerTest {
 
 		// Save full build
 		mockMvc.perform(post("{apiPath}/builds", apiPath).with(csrf())
-				.contentType(MediaType.APPLICATION_JSON_UTF8)
+				.contentType(MediaType.APPLICATION_JSON)
 				.content(objectMapper.writeValueAsString(build)))
 				.andExpect(status().isCreated())
 				.andExpect(header().exists("Location"))
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$.championId", is(build.getChampionId())))
 				.andExpect(jsonPath("$.item1Id", is(build.getItem1Id())))
 				.andExpect(jsonPath("$.item2Id", is(build.getItem2Id())))
@@ -229,7 +229,7 @@ public abstract class BuildsRestControllerTest {
 
 		mockMvc.perform(get("{apiPath}/builds/count", apiPath))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(content().json(count + ""));
 	}
 

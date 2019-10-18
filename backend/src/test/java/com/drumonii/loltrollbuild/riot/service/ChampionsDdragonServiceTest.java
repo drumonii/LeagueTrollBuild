@@ -91,7 +91,7 @@ public class ChampionsDdragonServiceTest {
 	public void getChampionsFromVersion() {
 		mockServer.expect(requestTo(championsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
 				.andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(championsJson, MediaType.APPLICATION_JSON_UTF8));
+				.andRespond(withSuccess(championsJson, MediaType.APPLICATION_JSON));
 
 		List<String> championKeys = championsResponse.getChampions().values().stream()
 				.map(Champion::getKey)
@@ -100,7 +100,7 @@ public class ChampionsDdragonServiceTest {
 		for (String championKey : championKeys) {
 			mockServer.expect(requestTo(championUri.buildAndExpand(latestVersion.getPatch(), locale, championKey).toString()))
 					.andExpect(method(HttpMethod.GET))
-					.andRespond(withSuccess(JsonTestFilesUtil.getChampionJson(championKey), MediaType.APPLICATION_JSON_UTF8));
+					.andRespond(withSuccess(JsonTestFilesUtil.getChampionJson(championKey), MediaType.APPLICATION_JSON));
 		}
 
 		List<Champion> champions = championsService.getChampions(latestVersion);
@@ -184,11 +184,11 @@ public class ChampionsDdragonServiceTest {
 
 		mockServer.expect(requestTo(championsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
 				.andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(championsJson, MediaType.APPLICATION_JSON_UTF8));
+				.andRespond(withSuccess(championsJson, MediaType.APPLICATION_JSON));
 
 		mockServer.expect(requestTo(championUri.buildAndExpand(latestVersion.getPatch(), locale, trundle).toString()))
 				.andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(trundleJson, MediaType.APPLICATION_JSON_UTF8));
+				.andRespond(withSuccess(trundleJson, MediaType.APPLICATION_JSON));
 
 		Champion champion = championsService.getChampion(trundleId);
 		mockServer.verify();
@@ -204,7 +204,7 @@ public class ChampionsDdragonServiceTest {
 
 		mockServer.expect(requestTo(championsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
 				.andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(championsJson, MediaType.APPLICATION_JSON_UTF8));
+				.andRespond(withSuccess(championsJson, MediaType.APPLICATION_JSON));
 
 		mockServer.expect(never(), requestTo(championUri.buildAndExpand(latestVersion.getPatch(), locale, 0).toString()))
 				.andExpect(method(HttpMethod.GET));
@@ -226,7 +226,7 @@ public class ChampionsDdragonServiceTest {
 
 		mockServer.expect(requestTo(championsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
 				.andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(championsJson, MediaType.APPLICATION_JSON_UTF8));
+				.andRespond(withSuccess(championsJson, MediaType.APPLICATION_JSON));
 
 		mockServer.expect(requestTo(championUri.buildAndExpand(latestVersion.getPatch(), locale, akali).toString()))
 				.andExpect(method(HttpMethod.GET))

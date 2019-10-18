@@ -91,21 +91,21 @@ public class BatchJobInstancesRestControllerTest {
 		// qbe
 		mockMvc.perform(get("{apiPath}/admin/job-instances", apiPath))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$.[*]").isNotEmpty());
 
 		// qbe with name
 		mockMvc.perform(get("{apiPath}/admin/job-instances", apiPath)
 				.param("name", jobInstance.getJobName().toLowerCase()))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$.[*]").isNotEmpty());
 
 		// qbe with no results
 		mockMvc.perform(get("{apiPath}/admin/job-instances", apiPath)
 				.param("name", "abcd1234"))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$.[*]").isNotEmpty());
 	}
 
@@ -114,7 +114,7 @@ public class BatchJobInstancesRestControllerTest {
 	public void getBatchJobInstance() throws Exception {
 		mockMvc.perform(get("{apiPath}/admin/job-instances/{jobInstanceId}", apiPath, jobInstance.getId()))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$.jobExecution").exists());
 
 		mockMvc.perform(get("{apiPath}/admin/job-instances/{jobInstanceId}", apiPath, -1))
@@ -155,7 +155,7 @@ public class BatchJobInstancesRestControllerTest {
 
 		mockMvc.perform(post("{apiPath}/admin/job-instances/restart", apiPath).with(csrf()))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$.id").exists())
 				.andExpect(jsonPath("$.version").exists())
 				.andExpect(jsonPath("$.createTime").exists())
@@ -239,7 +239,7 @@ public class BatchJobInstancesRestControllerTest {
 		mockMvc.perform(get("{apiPath}/admin/job-instances/has-failed-all-retrievals-job", apiPath, jobInstance.getId())
 				.param("minutes", "1"))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("hasFailedAllRetrievalsJob", is(true)));
 	}
 
@@ -287,7 +287,7 @@ public class BatchJobInstancesRestControllerTest {
 		mockMvc.perform(get("{apiPath}/admin/job-instances/has-failed-all-retrievals-job", apiPath, jobInstance.getId())
 				.param("minutes", "1"))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("hasFailedAllRetrievalsJob", is(true)));
 	}
 
@@ -315,7 +315,7 @@ public class BatchJobInstancesRestControllerTest {
 
 		mockMvc.perform(get("{apiPath}/admin/job-instances/has-failed-all-retrievals-job", apiPath, jobInstance.getId()))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("hasFailedAllRetrievalsJob", is(false)));
 	}
 

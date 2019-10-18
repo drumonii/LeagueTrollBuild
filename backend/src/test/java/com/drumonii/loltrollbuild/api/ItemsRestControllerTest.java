@@ -56,35 +56,35 @@ public abstract class ItemsRestControllerTest {
 		// qbe
 		mockMvc.perform(get("{apiPath}/items", apiPath))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$.[*]").isNotEmpty());
 
 		// qbe with name
 		mockMvc.perform(get("{apiPath}/items", apiPath)
 				.param("name", item.getName().toLowerCase()))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$.[*]").isNotEmpty());
 
 		// qbe with required champion
 		mockMvc.perform(get("{apiPath}/items", apiPath)
 				.param("requiredChampion", item.getRequiredChampion().toLowerCase()))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$.[*]").isNotEmpty());
 
 		// qbe with maps
 		mockMvc.perform(get("{apiPath}/items", apiPath)
 				.param("maps[12]", Boolean.TRUE.toString()))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$.[*]").isNotEmpty());
 
 		// qbe with no results
 		mockMvc.perform(get("{apiPath}/items", apiPath)
 				.param("name", "abcd1234"))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(content().json("[]"));
 	}
 
@@ -99,7 +99,7 @@ public abstract class ItemsRestControllerTest {
 		// find with existing item Id
 		mockMvc.perform(get("{apiPath}/items/{id}", apiPath, sunfireCape.getId()))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE));
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE));
 	}
 
 	@Test
@@ -112,7 +112,7 @@ public abstract class ItemsRestControllerTest {
 		mockMvc.perform(get("{apiPath}/items/boots", apiPath)
 				.param("mapId", SUMMONERS_RIFT_SID))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$.[*].group").exists())
 				.andExpect(jsonPath("$.[*].from").isNotEmpty())
 				.andExpect(jsonPath("$.[*].into").exists())
@@ -131,7 +131,7 @@ public abstract class ItemsRestControllerTest {
 		mockMvc.perform(get("{apiPath}/items/trinkets", apiPath)
 				.param("mapId", SUMMONERS_RIFT_SID))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$.[*].group").exists())
 				.andExpect(jsonPath("$.[*].from").isNotEmpty())
 				.andExpect(jsonPath("$.[*].into").isNotEmpty())
@@ -149,7 +149,7 @@ public abstract class ItemsRestControllerTest {
 
 		mockMvc.perform(get("{apiPath}/items/viktor-only", apiPath))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$.[*].from").isNotEmpty())
 				.andExpect(jsonPath("$.[*].into").isNotEmpty())
 				.andExpect(jsonPath("$.[*].requiredChampion", hasItem("Viktor")))
@@ -163,7 +163,7 @@ public abstract class ItemsRestControllerTest {
 		mockMvc.perform(get("{apiPath}/items/for-troll-build", apiPath)
 				.param("mapId", SUMMONERS_RIFT_SID))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$.[*].from").isNotEmpty())
 				.andExpect(jsonPath("$.[*].into").isNotEmpty())
 				.andExpect(jsonPath("$.[*].maps", hasItem(hasEntry(SUMMONERS_RIFT_SID, true))))

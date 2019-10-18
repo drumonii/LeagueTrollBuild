@@ -46,21 +46,21 @@ public abstract class MapsRestControllerTest {
 		// qbe
 		mockMvc.perform(get("{apiPath}/maps", apiPath))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$.[*]").isNotEmpty());
 
 		// qbe with name
 		mockMvc.perform(get("{apiPath}/maps", apiPath)
 				.param("mapName", map.getMapName().toLowerCase()))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$.[*]").isNotEmpty());
 
 		// qbe with no results
 		mockMvc.perform(get("{apiPath}/maps", apiPath)
 				.param("mapName", "abcd1234"))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(content().json("[]"));
 	}
 
@@ -75,7 +75,7 @@ public abstract class MapsRestControllerTest {
 		// find with existing map Id
 		mockMvc.perform(get("{apiPath}/maps/{id}", apiPath, howlingAbyss.getMapId()))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$.[*]").isNotEmpty());
 	}
 
@@ -83,7 +83,7 @@ public abstract class MapsRestControllerTest {
 	public void getForTrollBuild() throws Exception {
 		mockMvc.perform(get("{apiPath}/maps/for-troll-build", apiPath))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$.[*]").isNotEmpty());
 	}
 

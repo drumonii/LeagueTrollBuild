@@ -54,7 +54,7 @@ public class AdminLoginControllerTest {
                         .withAuthenticationName("admin")
                         .withRoles(UserRole.ADMIN))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.status", is(LoginStatus.SUCCESS.name())))
                 .andExpect(jsonPath("$.message").exists())
                 .andExpect(jsonPath("$.userDetails").exists())
@@ -75,7 +75,7 @@ public class AdminLoginControllerTest {
                 .password("bad_password"))
                 .andExpect(unauthenticated())
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.status", is(LoginStatus.FAILED.name())))
                 .andExpect(jsonPath("$.message").exists());
     }
@@ -87,7 +87,7 @@ public class AdminLoginControllerTest {
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(unauthenticated())
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.status", is(LogoutStatus.SUCCESS.name())))
                 .andExpect(jsonPath("$.message").exists())
                 .andExpect(jsonPath("$.userDetails").exists())

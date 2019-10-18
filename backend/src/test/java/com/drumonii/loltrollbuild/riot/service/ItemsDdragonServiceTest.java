@@ -80,7 +80,7 @@ public class ItemsDdragonServiceTest {
 	public void getItemsFromVersion() {
 		mockServer.expect(requestTo(itemsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
 				.andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(itemsJson, MediaType.APPLICATION_JSON_UTF8));
+				.andRespond(withSuccess(itemsJson, MediaType.APPLICATION_JSON));
 
 		List<Item> items = itemsService.getItems(latestVersion);
 		mockServer.verify();
@@ -110,7 +110,7 @@ public class ItemsDdragonServiceTest {
 
 		mockServer.expect(requestTo(itemsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
 				.andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(itemsJson, MediaType.APPLICATION_JSON_UTF8));
+				.andRespond(withSuccess(itemsJson, MediaType.APPLICATION_JSON));
 
 		Item item = itemsService.getItem(bilgewaterCutlassId);
 		mockServer.verify();

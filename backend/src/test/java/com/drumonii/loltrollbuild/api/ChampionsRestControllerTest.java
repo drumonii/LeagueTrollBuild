@@ -55,42 +55,42 @@ public abstract class ChampionsRestControllerTest {
 		// qbe
 		mockMvc.perform(get("{apiPath}/champions", apiPath))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$.[*]").isNotEmpty());
 
 		// qbe with name
 		mockMvc.perform(get("{apiPath}/champions", apiPath)
 				.param("name", champion.getName().toLowerCase()))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$.[*]").isNotEmpty());
 
 		// qbe with title
 		mockMvc.perform(get("{apiPath}/champions", apiPath)
 				.param("title", champion.getTitle().toLowerCase()))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$.[*]").isNotEmpty());
 
 		// qbe with partype
 		mockMvc.perform(get("{apiPath}/champions", apiPath)
 				.param("partype", champion.getPartype().toLowerCase()))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$.[*]").isNotEmpty());
 
 		// qbe with tags
 		mockMvc.perform(get("/api/champions")
 				.param("tags", champion.getTags().iterator().next()))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$.[*]").isNotEmpty());
 
 		// qbe with no results
 		mockMvc.perform(get("{apiPath}/champions", apiPath)
 				.param("name", "abcd1234"))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(content().json("[]"));
 	}
 
@@ -105,13 +105,13 @@ public abstract class ChampionsRestControllerTest {
 		// find with existing champion Id
 		mockMvc.perform(get("{apiPath}/champions/{id}", apiPath, poppy.getId()))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$.[*]").isNotEmpty());
 
 		// find with existing champion name
 		mockMvc.perform(get("/api/champions/{id}", poppy.getName()))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$.[*]").isNotEmpty());
 	}
 
@@ -119,7 +119,7 @@ public abstract class ChampionsRestControllerTest {
 	public void getTags() throws Exception {
 		mockMvc.perform(get("{apiPath}/champions/tags", apiPath))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8));
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON));
 	}
 
 	@Test
@@ -136,7 +136,7 @@ public abstract class ChampionsRestControllerTest {
 		mockMvc.perform(get("{apiPath}/champions/{id}/troll-build", apiPath, azir.getId())
 				.param("mapId", String.valueOf(HOWLING_ABYSS_ID)))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
 				.andExpect(jsonPath("$.items").exists())
 				.andExpect(jsonPath("$.totalGold").exists())
 				.andExpect(jsonPath("$.items.length()", is(6)))
@@ -148,7 +148,7 @@ public abstract class ChampionsRestControllerTest {
 		mockMvc.perform(get("/api/champions/{id}/troll-build", azir.getName())
 				.param("mapId", String.valueOf(HOWLING_ABYSS_ID)))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
 				.andExpect(jsonPath("$.items").exists())
 				.andExpect(jsonPath("$.totalGold").exists())
 				.andExpect(jsonPath("$.items.length()", is(6)))
@@ -159,7 +159,7 @@ public abstract class ChampionsRestControllerTest {
 		// get with champion Id and no map specified
 		mockMvc.perform(get("{apiPath}/champions/{id}/troll-build", apiPath, azir.getId()))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
 				.andExpect(jsonPath("$.items").exists())
 				.andExpect(jsonPath("$.items.length()", is(6)))
 				.andExpect(jsonPath("$.summonerSpells").exists())
@@ -169,7 +169,7 @@ public abstract class ChampionsRestControllerTest {
 		// get with champion name and no map specified
 		mockMvc.perform(get("/api/champions/{id}/troll-build", azir.getName()))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
 				.andExpect(jsonPath("$.items").exists())
 				.andExpect(jsonPath("$.totalGold").exists())
 				.andExpect(jsonPath("$.items.length()", is(6)))
@@ -186,7 +186,7 @@ public abstract class ChampionsRestControllerTest {
 		mockMvc.perform(get("{apiPath}/champions/{id}/troll-build", apiPath, viktor.getId())
 				.param("mapId", String.valueOf(HOWLING_ABYSS_ID)))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
 				.andExpect(jsonPath("$.items").exists())
 				.andExpect(jsonPath("$.totalGold").exists())
 				.andExpect(jsonPath("$.items.length()", is(6)))
@@ -198,7 +198,7 @@ public abstract class ChampionsRestControllerTest {
 		mockMvc.perform(get("{apiPath}/champions/{id}/troll-build", apiPath, viktor.getName())
 				.param("mapId", String.valueOf(HOWLING_ABYSS_ID)))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
 				.andExpect(jsonPath("$.items").exists())
 				.andExpect(jsonPath("$.totalGold").exists())
 				.andExpect(jsonPath("$.items.length()", is(6)))
@@ -209,7 +209,7 @@ public abstract class ChampionsRestControllerTest {
 		// get with Viktor Id and no map specified
 		mockMvc.perform(get("{apiPath}/champions/{id}/troll-build", apiPath, viktor.getId()))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
 				.andExpect(jsonPath("$.items").exists())
 				.andExpect(jsonPath("$.totalGold").exists())
 				.andExpect(jsonPath("$.items.length()", is(6)))
@@ -220,7 +220,7 @@ public abstract class ChampionsRestControllerTest {
 		// get with Viktor name and no map specified
 		mockMvc.perform(get("{apiPath}/champions/{id}/troll-build", apiPath, viktor.getName()))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
 				.andExpect(jsonPath("$.items").exists())
 				.andExpect(jsonPath("$.totalGold").exists())
 				.andExpect(jsonPath("$.items.length()", is(6)))
@@ -240,7 +240,7 @@ public abstract class ChampionsRestControllerTest {
 		mockMvc.perform(get("{apiPath}/champions/{id}/troll-build", apiPath, orianna.getId())
 				.param("mapId", String.valueOf(HOWLING_ABYSS_ID)))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
 				.andExpect(jsonPath("$.items").exists())
 				.andExpect(jsonPath("$.totalGold").exists())
 				.andExpect(jsonPath("$.items.length()", is(0)))
@@ -252,7 +252,7 @@ public abstract class ChampionsRestControllerTest {
 		mockMvc.perform(get("/api/champions/{id}/troll-build", orianna.getName())
 				.param("mapId", String.valueOf(HOWLING_ABYSS_ID)))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
 				.andExpect(jsonPath("$.items").exists())
 				.andExpect(jsonPath("$.totalGold").exists())
 				.andExpect(jsonPath("$.items.length()", is(0)))
@@ -263,7 +263,7 @@ public abstract class ChampionsRestControllerTest {
 		// get with champion Id and no map specified
 		mockMvc.perform(get("{apiPath}/champions/{id}/troll-build", apiPath, orianna.getId()))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
 				.andExpect(jsonPath("$.items").exists())
 				.andExpect(jsonPath("$.totalGold").exists())
 				.andExpect(jsonPath("$.items.length()", is(0)))
@@ -274,7 +274,7 @@ public abstract class ChampionsRestControllerTest {
 		// get with champion name and no map specified
 		mockMvc.perform(get("/api/champions/{id}/troll-build", orianna.getName()))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
 				.andExpect(jsonPath("$.items").exists())
 				.andExpect(jsonPath("$.totalGold").exists())
 				.andExpect(jsonPath("$.items.length()", is(0)))

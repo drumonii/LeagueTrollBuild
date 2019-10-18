@@ -81,7 +81,7 @@ public class SummonerSpellsDdragonServiceTest {
 	public void getSummonerSpellsFromVersion() {
 		mockServer.expect(requestTo(summonerSpellsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
 				.andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(summonerSpellsJson, MediaType.APPLICATION_JSON_UTF8));
+				.andRespond(withSuccess(summonerSpellsJson, MediaType.APPLICATION_JSON));
 
 		List<SummonerSpell> summonerSpells = summonerSpellsService.getSummonerSpells(latestVersion);
 		mockServer.verify();
@@ -111,7 +111,7 @@ public class SummonerSpellsDdragonServiceTest {
 
 		mockServer.expect(requestTo(summonerSpellsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
 				.andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(summonerSpellsJson, MediaType.APPLICATION_JSON_UTF8));
+				.andRespond(withSuccess(summonerSpellsJson, MediaType.APPLICATION_JSON));
 
 		SummonerSpell summonerSpell = summonerSpellsService.getSummonerSpell(smiteId);
 		mockServer.verify();

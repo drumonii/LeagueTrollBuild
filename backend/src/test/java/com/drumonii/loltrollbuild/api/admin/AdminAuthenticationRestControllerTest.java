@@ -31,7 +31,7 @@ public class AdminAuthenticationRestControllerTest {
     public void getsAdminUserDetailsFromAuthentication() throws Exception {
         mockMvc.perform(get("{apiPath}/admin/authentication", apiPath))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.username").exists())
                 .andExpect(jsonPath("$.authorities").isNotEmpty())
                 .andExpect(jsonPath("$.password").doesNotExist())

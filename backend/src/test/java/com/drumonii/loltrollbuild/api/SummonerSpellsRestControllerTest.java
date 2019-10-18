@@ -52,28 +52,28 @@ public abstract class SummonerSpellsRestControllerTest {
 		// qbe
 		mockMvc.perform(get("{apiPath}/summoner-spells", apiPath))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$.[*]").isNotEmpty());
 
 		// qbe with name
 		mockMvc.perform(get("{apiPath}/summoner-spells", apiPath)
 				.param("name", summonerSpell.getName().toLowerCase()))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$.[*]").isNotEmpty());
 
 		// qbe with modes
 		mockMvc.perform(get("{apiPath}/summoner-spells", apiPath)
 				.param("modes", summonerSpell.getModes().iterator().next().name()))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$.[*]").isNotEmpty());
 
 		// qbe with no results
 		mockMvc.perform(get("{apiPath}/summoner-spells", apiPath)
 				.param("name", "abcd1234"))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(content().json("[]"));
 	}
 
@@ -88,7 +88,7 @@ public abstract class SummonerSpellsRestControllerTest {
 		// find with existing summoner spell Id
 		mockMvc.perform(get("{apiPath}/summoner-spells/{id}", apiPath, snowball.getId()))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$.[*]").isNotEmpty());
 	}
 
@@ -97,7 +97,7 @@ public abstract class SummonerSpellsRestControllerTest {
 		mockMvc.perform(get("{apiPath}/summoner-spells/for-troll-build", apiPath)
 				.param("mode", CLASSIC.name()))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$.[*]").isNotEmpty());
 	}
 

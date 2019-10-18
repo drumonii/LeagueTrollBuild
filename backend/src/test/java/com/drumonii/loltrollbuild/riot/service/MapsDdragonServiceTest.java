@@ -82,7 +82,7 @@ public class MapsDdragonServiceTest {
 	public void getMapsFromVersion() {
 		mockServer.expect(requestTo(mapsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
 				.andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(mapsJson, MediaType.APPLICATION_JSON_UTF8));
+				.andRespond(withSuccess(mapsJson, MediaType.APPLICATION_JSON));
 
 		List<GameMap> maps = mapsService.getMaps(latestVersion);
 		mockServer.verify();
@@ -110,7 +110,7 @@ public class MapsDdragonServiceTest {
 
 		mockServer.expect(requestTo(mapsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
 				.andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(mapsJson, MediaType.APPLICATION_JSON_UTF8));
+				.andRespond(withSuccess(mapsJson, MediaType.APPLICATION_JSON));
 
 		GameMap map = mapsService.getMap(GameMapUtil.SUMMONERS_RIFT_ID);
 		mockServer.verify();

@@ -45,7 +45,7 @@ public abstract class VersionsRestControllerTest {
 		// qbe
 		mockMvc.perform(get("{apiPath}/versions", apiPath))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$.[0].major", is(versions.get(0).getMajor())))
 				.andExpect(jsonPath("$.[0].minor", is(versions.get(0).getMinor())))
 				.andExpect(jsonPath("$.[0].revision", is(versions.get(0).getRevision())));
@@ -54,7 +54,7 @@ public abstract class VersionsRestControllerTest {
 		mockMvc.perform(get("{apiPath}/versions", apiPath)
 				.param("patch", "1234"))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(content().json("[]"));
 	}
 
@@ -67,7 +67,7 @@ public abstract class VersionsRestControllerTest {
 		// find with existing version
 		mockMvc.perform(get("{apiPath}/versions/{patch}", apiPath, versions.get(0).getPatch()))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$.[*]").isNotEmpty());
 	}
 
@@ -76,7 +76,7 @@ public abstract class VersionsRestControllerTest {
 		// get latest version with saved versions
 		mockMvc.perform(get("{apiPath}/versions/latest", apiPath))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$.major", is(versions.get(0).getMajor())))
 				.andExpect(jsonPath("$.minor", is(versions.get(0).getMinor())))
 				.andExpect(jsonPath("$.revision", is(versions.get(0).getRevision())));

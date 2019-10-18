@@ -81,7 +81,7 @@ public class BatchStepExecutionsRestControllerTest {
 	public void getBatchStepExecutions() throws Exception {
 		mockMvc.perform(get("{apiPath}/admin/job-instances/{jobInstanceId}/step-executions", apiPath, jobInstance.getId()))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$.[*]", hasSize(1)));
 
 		mockMvc.perform(get("{apiPath}/admin/job-instances/{jobInstanceId}/step-executions", apiPath, -1))
@@ -94,7 +94,7 @@ public class BatchStepExecutionsRestControllerTest {
 		mockMvc.perform(get("{apiPath}/admin/job-instances/{jobInstanceId}/step-executions/{stepExecutionId}", apiPath,
 				jobInstance.getId(), stepExecution.getId()))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$..*").isNotEmpty());
 
 		mockMvc.perform(get("{apiPath}/admin/job-instances/{jobInstanceId}/step-executions/{stepExecutionId}", apiPath, -1, -1))
