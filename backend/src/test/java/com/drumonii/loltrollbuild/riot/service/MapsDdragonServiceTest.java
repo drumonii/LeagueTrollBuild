@@ -7,9 +7,8 @@ import com.drumonii.loltrollbuild.riot.api.RiotApiProperties;
 import com.drumonii.loltrollbuild.test.json.JsonTestFilesUtil;
 import com.drumonii.loltrollbuild.util.GameMapUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,7 +18,6 @@ import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -35,12 +33,11 @@ import static org.springframework.test.web.client.match.MockRestRequestMatchers.
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withServerError;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 
-@RunWith(SpringRunner.class)
 @RestClientTest({ MapsService.class, VersionsService.class })
 @Import(RiotApiConfig.class)
 @EnableConfigurationProperties(RiotApiProperties.class)
 @ActiveProfiles({ TESTING, DDRAGON })
-public class MapsDdragonServiceTest {
+class MapsDdragonServiceTest {
 
 	@Autowired
 	private MapsService mapsService;
@@ -67,8 +64,8 @@ public class MapsDdragonServiceTest {
 
 	private Version latestVersion;
 
-	@Before
-	public void before() {
+	@BeforeEach
+	void beforeEach() {
 		JsonTestFilesUtil jsonTestFilesUtil = new JsonTestFilesUtil(objectMapper);
 
 		mapsJson = JsonTestFilesUtil.getMapsJson();
@@ -79,7 +76,7 @@ public class MapsDdragonServiceTest {
 	}
 
 	@Test
-	public void getMapsFromVersion() {
+	void getMapsFromVersion() {
 		mockServer.expect(requestTo(mapsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
 				.andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(mapsJson, MediaType.APPLICATION_JSON));
@@ -91,7 +88,7 @@ public class MapsDdragonServiceTest {
 	}
 
 	@Test
-	public void getMapsFromVersionWithRestClientException() {
+	void getMapsFromVersionWithRestClientException() {
 		mockServer.expect(requestTo(mapsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
 				.andExpect(method(HttpMethod.GET))
 				.andRespond(withServerError());
@@ -103,7 +100,7 @@ public class MapsDdragonServiceTest {
 	}
 
 	@Test
-	public void getMap() {
+	void getMap() {
 		mockServer.expect(requestTo(versionsUri.toString()))
 				.andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(versionsJson, MediaType.parseMediaType("text/json;charset=UTF-8")));
@@ -119,7 +116,7 @@ public class MapsDdragonServiceTest {
 	}
 
 	@Test
-	public void getMapWithRestClientException() {
+	void getMapWithRestClientException() {
 		mockServer.expect(requestTo(versionsUri.toString()))
 				.andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(versionsJson, MediaType.parseMediaType("text/json;charset=UTF-8")));
@@ -135,7 +132,7 @@ public class MapsDdragonServiceTest {
 	}
 
 	@Test
-	public void getMapWithRestClientExceptionFromVersions() {
+	void getMapWithRestClientExceptionFromVersions() {
 		mockServer.expect(requestTo(versionsUri.toString()))
 				.andExpect(method(HttpMethod.GET))
 				.andRespond(withServerError());

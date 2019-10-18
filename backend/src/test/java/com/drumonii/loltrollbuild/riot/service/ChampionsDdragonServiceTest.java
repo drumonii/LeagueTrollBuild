@@ -7,9 +7,8 @@ import com.drumonii.loltrollbuild.riot.api.ChampionsResponse;
 import com.drumonii.loltrollbuild.riot.api.RiotApiProperties;
 import com.drumonii.loltrollbuild.test.json.JsonTestFilesUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,7 +18,6 @@ import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -36,12 +34,11 @@ import static org.springframework.test.web.client.match.MockRestRequestMatchers.
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withServerError;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 
-@RunWith(SpringRunner.class)
 @RestClientTest({ ChampionsService.class, VersionsService.class })
 @Import(RiotApiConfig.class)
 @EnableConfigurationProperties(RiotApiProperties.class)
 @ActiveProfiles({ TESTING, DDRAGON })
-public class ChampionsDdragonServiceTest {
+class ChampionsDdragonServiceTest {
 
 	@Autowired
 	private ChampionsService championsService;
@@ -74,8 +71,8 @@ public class ChampionsDdragonServiceTest {
 
 	private Version latestVersion;
 
-	@Before
-	public void before() {
+	@BeforeEach
+	void beforeEach() {
 		JsonTestFilesUtil jsonTestFilesUtil = new JsonTestFilesUtil(objectMapper);
 
 		championsJson = JsonTestFilesUtil.getChampionsJson();
@@ -88,7 +85,7 @@ public class ChampionsDdragonServiceTest {
 	}
 
 	@Test
-	public void getChampionsFromVersion() {
+	void getChampionsFromVersion() {
 		mockServer.expect(requestTo(championsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
 				.andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(championsJson, MediaType.APPLICATION_JSON));
@@ -114,7 +111,7 @@ public class ChampionsDdragonServiceTest {
 	}
 
 	@Test
-	public void getChampionsFromVersionWithRestClientException() {
+	void getChampionsFromVersionWithRestClientException() {
 		mockServer.expect(requestTo(championsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
 				.andExpect(method(HttpMethod.GET))
 				.andRespond(withServerError());
@@ -126,7 +123,7 @@ public class ChampionsDdragonServiceTest {
 	}
 
 	@Test
-	public void getChampion() {
+	void getChampion() {
 		String trundle = "Trundle";
 		int trundleId = 48;
 		String trundleJson =
@@ -197,7 +194,7 @@ public class ChampionsDdragonServiceTest {
 	}
 
 	@Test
-	public void getChampionWithNotExistingId() {
+	void getChampionWithNotExistingId() {
 		mockServer.expect(requestTo(versionsUri.toString()))
 				.andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(versionsJson, MediaType.parseMediaType("text/json;charset=UTF-8")));
@@ -216,7 +213,7 @@ public class ChampionsDdragonServiceTest {
 	}
 
 	@Test
-	public void getChampionWithRestClientException() {
+	void getChampionWithRestClientException() {
 		String akali = "Akali";
 		int akaliId = 84;
 
@@ -239,7 +236,7 @@ public class ChampionsDdragonServiceTest {
 	}
 
 	@Test
-	public void getChampionWithRestClientExceptionFromChampions() {
+	void getChampionWithRestClientExceptionFromChampions() {
 		String akali = "Akali";
 		int akaliId = 84;
 
@@ -261,7 +258,7 @@ public class ChampionsDdragonServiceTest {
 	}
 
 	@Test
-	public void getChampionWithRestClientExceptionFromVersions() {
+	void getChampionWithRestClientExceptionFromVersions() {
 		String akali = "Akali";
 		int akaliId = 84;
 

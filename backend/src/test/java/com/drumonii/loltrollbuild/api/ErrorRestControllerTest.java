@@ -2,7 +2,7 @@ package com.drumonii.loltrollbuild.api;
 
 import com.drumonii.loltrollbuild.test.api.AbstractRestControllerTests;
 import org.hamcrest.Matcher;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.http.*;
 import org.springframework.test.util.JsonPathExpectationsHelper;
 
@@ -12,10 +12,10 @@ import java.util.function.Consumer;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.is;
 
-public class ErrorRestControllerTest extends AbstractRestControllerTests {
+class ErrorRestControllerTest extends AbstractRestControllerTests {
 
     @Test
-    public void getsErrorForPermitAllRequest() {
+    void getsErrorForPermitAllRequest() {
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
         HttpEntity<String> httpEntity = new HttpEntity<>(headers);
@@ -27,7 +27,7 @@ public class ErrorRestControllerTest extends AbstractRestControllerTests {
     }
 
     @Test
-    public void getsErrorForSecureRequest() {
+    void getsErrorForSecureRequest() {
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
         HttpEntity<String> httpEntity = new HttpEntity<>(headers);

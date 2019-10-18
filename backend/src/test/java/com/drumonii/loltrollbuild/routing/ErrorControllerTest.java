@@ -1,7 +1,6 @@
 package com.drumonii.loltrollbuild.routing;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -9,7 +8,6 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
@@ -23,17 +21,16 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
 @ActiveProfiles({ TESTING, DDRAGON })
-public class ErrorControllerTest {
+class ErrorControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Test
-    public void forwardsToAdminIndexHtml() throws Exception {
+    void forwardsToAdminIndexHtml() throws Exception {
         String path = "/admin/not-found";
 
         MvcResult result = mockMvc.perform(get(path).accept(MediaType.TEXT_HTML))
@@ -45,7 +42,7 @@ public class ErrorControllerTest {
     }
 
     @Test
-    public void forwardsToTrollBuildIndexHtml() throws Exception {
+    void forwardsToTrollBuildIndexHtml() throws Exception {
         String path = "/not-found";
 
         MvcResult result = mockMvc.perform(get(path).accept(MediaType.TEXT_HTML))

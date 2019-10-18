@@ -4,15 +4,13 @@ import com.drumonii.loltrollbuild.annotation.WithMockAdminUser;
 import com.drumonii.loltrollbuild.config.WebSecurityConfig.UserRole;
 import com.drumonii.loltrollbuild.security.login.LoginResponse.LoginStatus;
 import com.drumonii.loltrollbuild.security.logout.LogoutResponse.LogoutStatus;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithAnonymousUser;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static com.drumonii.loltrollbuild.config.Profiles.TESTING;
@@ -27,10 +25,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@RunWith(SpringRunner.class)
 @WebMvcTest(AdminLoginController.class)
 @ActiveProfiles({ TESTING })
-public class AdminLoginControllerTest {
+class AdminLoginControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -40,13 +37,13 @@ public class AdminLoginControllerTest {
 
     @WithAnonymousUser
     @Test
-    public void adminLogin() throws Exception {
+    void adminLogin() throws Exception {
         mockMvc.perform(get("/admin/login"))
                 .andExpect(forwardedUrl("/admin/index.html"));
     }
 
     @Test
-    public void adminLoginWithValidCredentials() throws Exception {
+    void adminLoginWithValidCredentials() throws Exception {
         mockMvc.perform(formLogin(apiPath + "/admin/login")
                 .user(IN_MEM_USERNAME)
                 .password(IN_MEM_PASSWORD))
@@ -69,7 +66,7 @@ public class AdminLoginControllerTest {
     }
 
     @Test
-    public void adminLoginWithInvalidCredentials() throws Exception {
+    void adminLoginWithInvalidCredentials() throws Exception {
         mockMvc.perform(formLogin(apiPath + "/admin/login")
                 .user("bad_username")
                 .password("bad_password"))
@@ -82,7 +79,7 @@ public class AdminLoginControllerTest {
 
     @WithMockAdminUser
     @Test
-    public void adminLogout() throws Exception {
+    void adminLogout() throws Exception {
         mockMvc.perform(post("{baseUrl}/admin/logout", apiPath).with(csrf())
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(unauthenticated())

@@ -9,8 +9,7 @@ import com.drumonii.loltrollbuild.batch.versions.VersionsRetrievalJobConfig;
 import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.riot.service.VersionsService;
 import com.drumonii.loltrollbuild.test.batch.BatchTest;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.JobParametersInvalidException;
@@ -24,7 +23,6 @@ import org.springframework.context.annotation.FilterType;
 import org.springframework.scheduling.support.CronTrigger;
 import org.springframework.scheduling.support.SimpleTriggerContext;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -33,19 +31,19 @@ import java.util.Date;
 import static com.drumonii.loltrollbuild.batch.scheduling.RetrievalJobsScheduling.CRON_SCHEDULE;
 import static com.drumonii.loltrollbuild.batch.scheduling.RetrievalJobsScheduling.LATEST_PATCH_KEY;
 import static com.drumonii.loltrollbuild.config.Profiles.TESTING;
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-@RunWith(SpringRunner.class)
 @BatchTest(includeFilters = @Filter(type = FilterType.ASSIGNABLE_TYPE, classes = RetrievalJobsScheduling.class),
 		jobs = { AllRetrievalsJobConfig.class, ChampionsRetrievalJobConfig.class, ItemsRetrievalJobConfig.class,
 				MapsRetrievalJobConfig.class, SummonerSpellsRetrievalJobConfig.class, VersionsRetrievalJobConfig.class })
 @ActiveProfiles({ TESTING })
-public class RetrievalJobsSchedulingTest {
+class RetrievalJobsSchedulingTest {
 
 	@Autowired
 	private RetrievalJobsScheduling retrievalJobsScheduling;
@@ -61,7 +59,7 @@ public class RetrievalJobsSchedulingTest {
 	private Job allRetrievalsJob;
 
 	@Test
-	public void allRetrievalsCronExpression() {
+	void allRetrievalsCronExpression() {
 		CronTrigger cronTrigger = new CronTrigger(CRON_SCHEDULE);
 
 		LocalDateTime triggerDateTime = LocalDateTime.now().withHour(4).withMinute(0).withSecond(0).withNano(0);
@@ -81,7 +79,7 @@ public class RetrievalJobsSchedulingTest {
 	}
 
 	@Test
-	public void runsAllRetrievalsJob() throws Exception {
+	void runsAllRetrievalsJob() throws Exception {
 		given(versionsService.getLatestVersion()).willReturn(Version.patch("8.7.1"));
 
 		assertThatCode(() -> retrievalJobsScheduling.runAllRetrievalsJob())
@@ -91,7 +89,7 @@ public class RetrievalJobsSchedulingTest {
 	}
 
 	@Test
-	public void skipsAllRetrievalsJobRunWithNoLatestPatch() throws Exception {
+	void skipsAllRetrievalsJobRunWithNoLatestPatch() throws Exception {
 		given(versionsService.getLatestVersion()).willReturn(null);
 
 		given(jobLauncher.run(eq(allRetrievalsJob), any(JobParameters.class)))
@@ -102,7 +100,7 @@ public class RetrievalJobsSchedulingTest {
 	}
 
 	@Test
-	public void runsAllRetrievalJobWithInstanceOfJobExecutionExceptionThrown() throws Exception {
+	void runsAllRetrievalJobWithInstanceOfJobExecutionExceptionThrown() throws Exception {
 		given(jobLauncher.run(eq(allRetrievalsJob), any(JobParameters.class)))
 				.willThrow(new JobExecutionAlreadyRunningException("A job execution for this job is already running"));
 
@@ -111,7 +109,7 @@ public class RetrievalJobsSchedulingTest {
 	}
 
 	@Test
-	public void runsAllRetrievalJobWithExceptionThrown() throws Exception {
+	void runsAllRetrievalJobWithExceptionThrown() throws Exception {
 		given(versionsService.getLatestVersion()).willReturn(Version.patch("8.7.1"));
 
 		given(jobLauncher.run(eq(allRetrievalsJob), any(JobParameters.class)))

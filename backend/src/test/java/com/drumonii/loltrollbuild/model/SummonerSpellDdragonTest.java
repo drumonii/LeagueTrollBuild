@@ -4,15 +4,13 @@ import com.drumonii.loltrollbuild.model.SummonerSpell.GameMode;
 import com.drumonii.loltrollbuild.model.builder.SummonerSpellBuilder;
 import com.drumonii.loltrollbuild.model.builder.SummonerSpellImageBuilder;
 import com.drumonii.loltrollbuild.model.image.SummonerSpellImage;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.json.JsonTest;
 import org.springframework.boot.test.json.JacksonTester;
 import org.springframework.boot.test.json.JsonContent;
 import org.springframework.boot.test.json.ObjectContent;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.IOException;
 
@@ -20,16 +18,15 @@ import static com.drumonii.loltrollbuild.config.Profiles.DDRAGON;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Fail.fail;
 
-@RunWith(SpringRunner.class)
 @JsonTest
 @ActiveProfiles({ DDRAGON })
-public class SummonerSpellDdragonTest {
+class SummonerSpellDdragonTest {
 
 	@Autowired
 	private JacksonTester<SummonerSpell> jacksonTester;
 
 	@Test
-	public void serializesIntoJson() {
+	void serializesIntoJson() {
 		SummonerSpellImage image = new SummonerSpellImageBuilder()
 				.withFull("SummonerBoost.png")
 				.withSprite("spell0.png")
@@ -67,7 +64,7 @@ public class SummonerSpellDdragonTest {
 	}
 
 	@Test
-	public void deserializesFromJson() {
+	void deserializesFromJson() {
 		String json =
 				"{" +
 				"  \"id\": \"SummonerBarrier\"," +

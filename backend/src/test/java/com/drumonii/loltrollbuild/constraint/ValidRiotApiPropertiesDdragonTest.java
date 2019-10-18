@@ -2,46 +2,44 @@ package com.drumonii.loltrollbuild.constraint;
 
 import com.drumonii.loltrollbuild.riot.api.RiotApiProperties;
 import com.drumonii.loltrollbuild.riot.api.RiotApiProperties.Ddragon;
-import org.hibernate.validator.HibernateValidator;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
-import org.springframework.mock.env.MockEnvironment;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
+import org.springframework.boot.autoconfigure.validation.ValidationAutoConfiguration;
+import org.springframework.boot.test.autoconfigure.OverrideAutoConfiguration;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
-import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 
 import javax.validation.ConstraintViolation;
 import java.util.Set;
 
 import static com.drumonii.loltrollbuild.config.Profiles.DDRAGON;
+import static com.drumonii.loltrollbuild.config.Profiles.TESTING;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(JUnit4.class)
-public class ValidRiotApiPropertiesDdragonTest {
+@ExtendWith(SpringExtension.class)
+@OverrideAutoConfiguration(enabled = false)
+@ImportAutoConfiguration({ ValidationAutoConfiguration.class })
+@ActiveProfiles({ TESTING, DDRAGON })
+class ValidRiotApiPropertiesDdragonTest {
 
-	private LocalValidatorFactoryBean validator = new LocalValidatorFactoryBean();
+	@Autowired
+	private LocalValidatorFactoryBean validator;
 
 	private RiotApiProperties properties = new RiotApiProperties();
 
 	private Ddragon ddragon = new Ddragon();
 
-	@Before
-	public void before() {
-		AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
-		context.setEnvironment(new MockEnvironment()
-				.withProperty("spring.profiles.active", DDRAGON));
-		context.refresh();
-
-		validator.setApplicationContext(context);
-		validator.setProviderClass(HibernateValidator.class);
-		validator.afterPropertiesSet();
-
+	@BeforeEach
+	void beforeEach() {
 		properties.setDdragon(ddragon);
 	}
 
 	@Test
-	public void nullDdragon() {
+	void nullDdragon() {
 		properties.setDdragon(null);
 
 		Set<ConstraintViolation<RiotApiProperties>> result = validator.validate(properties);
@@ -51,7 +49,7 @@ public class ValidRiotApiPropertiesDdragonTest {
 	}
 
 	@Test
-	public void invalidBaseUrl() {
+	void invalidBaseUrl() {
 		Set<ConstraintViolation<RiotApiProperties>> result = validator.validate(properties);
 		assertThat(result).hasSize(1);
 		assertThat(result).extracting(ConstraintViolation::getMessage).containsOnly("Base URL must not be empty for Data Dragon API");
@@ -64,7 +62,7 @@ public class ValidRiotApiPropertiesDdragonTest {
 	}
 
 	@Test
-	public void invalidLocale() {
+	void invalidLocale() {
 		ddragon.setBaseUrl("base_url");
 
 		Set<ConstraintViolation<RiotApiProperties>> result = validator.validate(properties);
@@ -79,7 +77,7 @@ public class ValidRiotApiPropertiesDdragonTest {
 	}
 
 	@Test
-	public void invalidChampionsUrl() {
+	void invalidChampionsUrl() {
 		ddragon.setBaseUrl("base_url");
 		ddragon.setLocale("locale");
 
@@ -95,7 +93,7 @@ public class ValidRiotApiPropertiesDdragonTest {
 	}
 
 	@Test
-	public void invalidChampionUrl() {
+	void invalidChampionUrl() {
 		ddragon.setBaseUrl("base_url");
 		ddragon.setLocale("locale");
 		ddragon.setChampions("champions_url");
@@ -112,7 +110,7 @@ public class ValidRiotApiPropertiesDdragonTest {
 	}
 
 	@Test
-	public void invalidItemsUrl() {
+	void invalidItemsUrl() {
 		ddragon.setBaseUrl("base_url");
 		ddragon.setLocale("locale");
 		ddragon.setChampions("champions_url");
@@ -130,7 +128,7 @@ public class ValidRiotApiPropertiesDdragonTest {
 	}
 
 	@Test
-	public void invalidMapsUrl() {
+	void invalidMapsUrl() {
 		ddragon.setBaseUrl("base_url");
 		ddragon.setLocale("locale");
 		ddragon.setChampions("champions_url");
@@ -149,7 +147,7 @@ public class ValidRiotApiPropertiesDdragonTest {
 	}
 
 	@Test
-	public void invalidSummonerSpellsUrl() {
+	void invalidSummonerSpellsUrl() {
 		ddragon.setBaseUrl("base_url");
 		ddragon.setLocale("locale");
 		ddragon.setChampions("champions_url");
@@ -169,7 +167,7 @@ public class ValidRiotApiPropertiesDdragonTest {
 	}
 
 	@Test
-	public void invalidChampionsImg() {
+	void invalidChampionsImg() {
 		ddragon.setBaseUrl("base_url");
 		ddragon.setLocale("locale");
 		ddragon.setChampions("champions_url");
@@ -190,7 +188,7 @@ public class ValidRiotApiPropertiesDdragonTest {
 	}
 
 	@Test
-	public void invalidChampionsSpellImg() {
+	void invalidChampionsSpellImg() {
 		ddragon.setBaseUrl("base_url");
 		ddragon.setLocale("locale");
 		ddragon.setChampions("champions_url");
@@ -212,7 +210,7 @@ public class ValidRiotApiPropertiesDdragonTest {
 	}
 
 	@Test
-	public void invalidChampionsPassiveImg() {
+	void invalidChampionsPassiveImg() {
 		ddragon.setBaseUrl("base_url");
 		ddragon.setLocale("locale");
 		ddragon.setChampions("champions_url");
@@ -235,7 +233,7 @@ public class ValidRiotApiPropertiesDdragonTest {
 	}
 
 	@Test
-	public void invalidItemsImg() {
+	void invalidItemsImg() {
 		ddragon.setBaseUrl("base_url");
 		ddragon.setLocale("locale");
 		ddragon.setChampions("champions_url");
@@ -259,7 +257,7 @@ public class ValidRiotApiPropertiesDdragonTest {
 	}
 
 	@Test
-	public void invalidMapsImg() {
+	void invalidMapsImg() {
 		ddragon.setBaseUrl("base_url");
 		ddragon.setLocale("locale");
 		ddragon.setChampions("champions_url");
@@ -284,7 +282,7 @@ public class ValidRiotApiPropertiesDdragonTest {
 	}
 
 	@Test
-	public void invalidSummonerSpellsImg() {
+	void invalidSummonerSpellsImg() {
 		ddragon.setBaseUrl("base_url");
 		ddragon.setLocale("locale");
 		ddragon.setChampions("champions_url");
@@ -310,7 +308,7 @@ public class ValidRiotApiPropertiesDdragonTest {
 	}
 
 	@Test
-	public void validDdragon() {
+	void validDdragon() {
 		ddragon.setBaseUrl("base_url");
 		ddragon.setLocale("locale");
 		ddragon.setChampions("champions_url");

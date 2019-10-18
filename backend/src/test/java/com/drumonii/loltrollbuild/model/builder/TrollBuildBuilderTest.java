@@ -6,12 +6,10 @@ import com.drumonii.loltrollbuild.model.TrollBuild;
 import com.drumonii.loltrollbuild.test.json.JsonTestFilesUtil;
 import com.drumonii.loltrollbuild.util.RandomizeUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.json.JsonTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -21,9 +19,8 @@ import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(SpringRunner.class)
 @JsonTest
-public class TrollBuildBuilderTest {
+class TrollBuildBuilderTest {
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -31,8 +28,8 @@ public class TrollBuildBuilderTest {
     private List<Item> items;
     private List<SummonerSpell> summonerSpells;
 
-    @Before
-    public void before() {
+    @BeforeEach
+    void beforeEach() {
         JsonTestFilesUtil jsonTestFilesUtil = new JsonTestFilesUtil(objectMapper);
 
         items = new ArrayList<>(jsonTestFilesUtil.getItemsResponse().getItems().values());
@@ -40,7 +37,7 @@ public class TrollBuildBuilderTest {
     }
 
     @Test
-    public void buildsTrollBuild() {
+    void buildsTrollBuild() {
         Collection<Item> boots = RandomizeUtil.getRandoms(items, 2); // get some "boots" (don't care they aren't actually boots)
         items.removeAll(boots);
 
@@ -55,7 +52,7 @@ public class TrollBuildBuilderTest {
     }
 
     @Test
-    public void buildsTrollBuildWithViktor() {
+    void buildsTrollBuildWithViktor() {
         List<Item> viktorOnlyItems = items.stream()
                 .filter(item -> "Viktor".equals(item.getRequiredChampion()))
                 .collect(Collectors.toList());
@@ -75,7 +72,7 @@ public class TrollBuildBuilderTest {
     }
 
     @Test
-    public void buildsTrollBuildWithoutBoots() {
+    void buildsTrollBuildWithoutBoots() {
         TrollBuild trollBuild = new TrollBuildBuilder()
                 .withBoots(null)
                 .build();
@@ -90,7 +87,7 @@ public class TrollBuildBuilderTest {
     }
 
     @Test
-    public void buildsTrollBuildWithoutItems() {
+    void buildsTrollBuildWithoutItems() {
         TrollBuild trollBuild = new TrollBuildBuilder()
                 .withItems(null)
                 .build();
@@ -105,7 +102,7 @@ public class TrollBuildBuilderTest {
     }
 
     @Test
-    public void buildsTrollBuildWithoutSummonerSpells() {
+    void buildsTrollBuildWithoutSummonerSpells() {
         TrollBuild trollBuild = new TrollBuildBuilder()
                 .withSummonerSpells(null)
                 .build();
@@ -120,7 +117,7 @@ public class TrollBuildBuilderTest {
     }
 
     @Test
-    public void buildsTrollBuildWithoutTrinket() {
+    void buildsTrollBuildWithoutTrinket() {
         TrollBuild trollBuild = new TrollBuildBuilder()
                 .withTrinket(null)
                 .build();

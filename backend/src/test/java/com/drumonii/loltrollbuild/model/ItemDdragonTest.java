@@ -4,15 +4,13 @@ import com.drumonii.loltrollbuild.model.builder.ItemBuilder;
 import com.drumonii.loltrollbuild.model.builder.ItemGoldBuilder;
 import com.drumonii.loltrollbuild.model.builder.ItemImageBuilder;
 import com.drumonii.loltrollbuild.model.image.ItemImage;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.json.JsonTest;
 import org.springframework.boot.test.json.JacksonTester;
 import org.springframework.boot.test.json.JsonContent;
 import org.springframework.boot.test.json.ObjectContent;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.IOException;
 import java.util.AbstractMap.SimpleEntry;
@@ -22,16 +20,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.entry;
 import static org.assertj.core.api.Fail.fail;
 
-@RunWith(SpringRunner.class)
 @JsonTest
 @ActiveProfiles({ DDRAGON })
-public class ItemDdragonTest {
+class ItemDdragonTest {
 
 	@Autowired
 	private JacksonTester<Item> jacksonTester;
 
 	@Test
-	public void serializesIntoJson() {
+	void serializesIntoJson() {
 		ItemImage image = new ItemImageBuilder()
 				.withFull("1011.png")
 				.withSprite("item0.png")
@@ -81,7 +78,7 @@ public class ItemDdragonTest {
 	}
 
 	@Test
-	public void deserializesFromJson() {
+	void deserializesFromJson() {
 		String json =
 				"{" +
 				"  \"name\": \"Boots of Speed\"," +

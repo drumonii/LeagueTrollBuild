@@ -12,13 +12,11 @@ import com.drumonii.loltrollbuild.riot.api.SummonerSpellsResponse;
 import com.drumonii.loltrollbuild.riot.service.ImageService;
 import com.drumonii.loltrollbuild.test.api.WebMvcRestTest;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.FilterType;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Optional;
@@ -30,10 +28,9 @@ import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@RunWith(SpringRunner.class)
 @WebMvcRestTest(value = ImagesRestController.class,
 		includeFilters = @Filter(type = FilterType.ASSIGNABLE_TYPE, classes = { ImageService.class }))
-public abstract class ImagesRestControllerTest {
+abstract class ImagesRestControllerTest {
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -61,10 +58,10 @@ public abstract class ImagesRestControllerTest {
 	protected MapsResponse mapsResponse;
 	protected SummonerSpellsResponse summonerSpellsResponse;
 
-	public abstract void before();
+	protected abstract void beforeEach();
 
 	@Test
-	public void summonerSpellImg() throws Exception {
+	void summonerSpellImg() throws Exception {
 		mockMvc.perform(get("{apiPath}/img/summoner-spells/{img}", apiPath, 0))
 				.andExpect(status().isNotFound());
 
@@ -80,7 +77,7 @@ public abstract class ImagesRestControllerTest {
 	}
 
 	@Test
-	public void itemImg() throws Exception {
+	void itemImg() throws Exception {
 		mockMvc.perform(get("{apiPath}/img/items/{img}", apiPath, 0))
 				.andExpect(status().isNotFound());
 
@@ -96,7 +93,7 @@ public abstract class ImagesRestControllerTest {
 	}
 
 	@Test
-	public void championImg() throws Exception {
+	void championImg() throws Exception {
 		mockMvc.perform(get("{apiPath}/img/champions/{img}", apiPath, 0))
 				.andExpect(status().isNotFound());
 
@@ -112,7 +109,7 @@ public abstract class ImagesRestControllerTest {
 	}
 
 	@Test
-	public void championSpellImg() throws Exception {
+	void championSpellImg() throws Exception {
 		mockMvc.perform(get("{apiPath}/img/champions/{id}/spell/{img}", apiPath, 0, "key"))
 				.andExpect(status().isNotFound());
 
@@ -134,7 +131,7 @@ public abstract class ImagesRestControllerTest {
 	}
 
 	@Test
-	public void championPassiveImg() throws Exception {
+	void championPassiveImg() throws Exception {
 		mockMvc.perform(get("{apiPath}/img/champions/{id}/passive", apiPath, 0))
 				.andExpect(status().isNotFound());
 
@@ -150,7 +147,7 @@ public abstract class ImagesRestControllerTest {
 	}
 
 	@Test
-	public void mapImg() throws Exception {
+	void mapImg() throws Exception {
 		mockMvc.perform(get("{apiPath}/img/maps/{mapId}", apiPath, 0))
 				.andExpect(status().isNotFound());
 

@@ -13,15 +13,13 @@ import com.drumonii.loltrollbuild.riot.api.MapsResponse;
 import com.drumonii.loltrollbuild.riot.api.SummonerSpellsResponse;
 import com.drumonii.loltrollbuild.test.json.JsonTestFilesUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureDataJpa;
 import org.springframework.boot.test.autoconfigure.web.client.RestClientTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
@@ -32,13 +30,12 @@ import static com.drumonii.loltrollbuild.config.Profiles.TESTING;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
 
-@RunWith(SpringRunner.class)
 @RestClientTest(ImageService.class)
 @Transactional
 @AutoConfigureDataJpa
 @Import(JpaConfig.class)
 @ActiveProfiles({ TESTING, DDRAGON })
-public class ImageServiceTest {
+class ImageServiceTest {
 
     @Autowired
     private ImageService imageService;
@@ -60,13 +57,13 @@ public class ImageServiceTest {
 
     private JsonTestFilesUtil jsonTestFilesUtil;
 
-    @Before
-    public void before() {
+    @BeforeEach
+    void beforeEach() {
         jsonTestFilesUtil = new JsonTestFilesUtil(objectMapper);
     }
 
     @Test
-    public void getsItemImage() {
+    void getsItemImage() {
         ItemsResponse itemsResponse = jsonTestFilesUtil.getItemsResponse();
         Item bladeOfTheRuinedKing = itemsResponse.getItems().get("3153");
         itemsRepository.saveAndFlush(bladeOfTheRuinedKing);
@@ -76,13 +73,13 @@ public class ImageServiceTest {
     }
 
     @Test
-    public void doesNotGetItemImage() {
+    void doesNotGetItemImage() {
         Image itemImage = imageService.getItemImage(0);
         assertThat(itemImage).isNull();
     }
 
     @Test
-    public void getsChampionImage() {
+    void getsChampionImage() {
         ChampionsResponse championsResponse = jsonTestFilesUtil.getChampionsResponse();
         Champion nidalee = championsResponse.getChampions().get("Nidalee");
         championsRepository.saveAndFlush(nidalee);
@@ -92,13 +89,13 @@ public class ImageServiceTest {
     }
 
     @Test
-    public void doesNotGetChampionImage() {
+    void doesNotGetChampionImage() {
         Image championImage = imageService.getChampionImage(0);
         assertThat(championImage).isNull();
     }
 
     @Test
-    public void getsChampionPassiveImage() {
+    void getsChampionPassiveImage() {
         ChampionsResponse championsResponse = jsonTestFilesUtil.getFullChampionsResponse();
         Champion lux = championsResponse.getChampions().get("Lux");
         championsRepository.saveAndFlush(lux);
@@ -108,13 +105,13 @@ public class ImageServiceTest {
     }
 
     @Test
-    public void doesNotGetChampionPassiveImage() {
+    void doesNotGetChampionPassiveImage() {
         Image championPassiveImage = imageService.getChampionPassiveImage(0);
         assertThat(championPassiveImage).isNull();
     }
 
     @Test
-    public void getsChampionSpellImage() {
+    void getsChampionSpellImage() {
         ChampionsResponse championsResponse = jsonTestFilesUtil.getFullChampionsResponse();
         Champion bard = championsResponse.getChampions().get("Bard");
         championsRepository.saveAndFlush(bard);
@@ -130,7 +127,7 @@ public class ImageServiceTest {
     }
 
     @Test
-    public void doesNotGetChampionSpellImage() {
+    void doesNotGetChampionSpellImage() {
         Image championSpellImage = imageService.getChampionSpellImage(0, "");
         assertThat(championSpellImage).isNull();
 
@@ -143,7 +140,7 @@ public class ImageServiceTest {
     }
 
     @Test
-    public void getsSummonerSpellImage() {
+    void getsSummonerSpellImage() {
         SummonerSpellsResponse summonerSpellsResponse = jsonTestFilesUtil.getSummonerSpellsResponse();
         SummonerSpell exhaust = summonerSpellsResponse.getSummonerSpells().get("SummonerExhaust");
         summonerSpellsRepository.saveAndFlush(exhaust);
@@ -153,13 +150,13 @@ public class ImageServiceTest {
     }
 
     @Test
-    public void doesNotGetSummonerSpellImage() {
+    void doesNotGetSummonerSpellImage() {
         Image summonerSpellImage = imageService.getSummonerSpellImage(0);
         assertThat(summonerSpellImage).isNull();
     }
 
     @Test
-    public void getsMapImage() {
+    void getsMapImage() {
         MapsResponse mapsResponse = jsonTestFilesUtil.getMapsResponse();
         GameMap twistedTreeline = mapsResponse.getMaps().get("10");
         mapsRepository.saveAndFlush(twistedTreeline);
@@ -169,7 +166,7 @@ public class ImageServiceTest {
     }
 
     @Test
-    public void doesNotGetMapImage() {
+    void doesNotGetMapImage() {
         Image mapImage = imageService.getMapImage(0);
         assertThat(mapImage).isNull();
     }

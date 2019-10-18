@@ -10,7 +10,7 @@ import static com.drumonii.loltrollbuild.config.Profiles.DDRAGON;
 import static com.drumonii.loltrollbuild.config.Profiles.TESTING;
 
 @ActiveProfiles({ TESTING, DDRAGON })
-public class VersionsRepositoryDdragonTest extends VersionsRepositoryTest {
+class VersionsRepositoryDdragonTest extends VersionsRepositoryTest {
 
 	@Override protected List<Version> getVersions() {
 		JsonTestFilesUtil jsonTestFilesUtil = new JsonTestFilesUtil(objectMapper);

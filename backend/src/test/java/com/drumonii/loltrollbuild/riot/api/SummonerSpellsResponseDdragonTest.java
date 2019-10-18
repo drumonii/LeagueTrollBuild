@@ -1,14 +1,12 @@
 package com.drumonii.loltrollbuild.riot.api;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.json.JsonTest;
 import org.springframework.boot.test.json.JacksonTester;
 import org.springframework.boot.test.json.JsonContent;
 import org.springframework.boot.test.json.ObjectContent;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.IOException;
 import java.util.LinkedHashMap;
@@ -17,16 +15,15 @@ import static com.drumonii.loltrollbuild.config.Profiles.DDRAGON;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Fail.fail;
 
-@RunWith(SpringRunner.class)
 @JsonTest
 @ActiveProfiles({ DDRAGON })
-public class SummonerSpellsResponseDdragonTest {
+class SummonerSpellsResponseDdragonTest {
 
     @Autowired
     private JacksonTester<SummonerSpellsResponse> jacksonTester;
 
     @Test
-    public void serializesIntoJson() {
+    void serializesIntoJson() {
         SummonerSpellsResponse response = new SummonerSpellsResponse();
         response.setSummonerSpells(new LinkedHashMap<>());
         response.setType("summoner");
@@ -45,7 +42,7 @@ public class SummonerSpellsResponseDdragonTest {
     }
 
     @Test
-    public void deserializesFromJson() {
+    void deserializesFromJson() {
         String json =
                 "{" +
                 "  \"type\": \"summoner\"," +

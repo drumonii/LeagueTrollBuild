@@ -3,9 +3,8 @@ package com.drumonii.loltrollbuild.api.admin;
 import com.drumonii.loltrollbuild.annotation.WithMockAdminUser;
 import com.drumonii.loltrollbuild.test.batch.BatchDaoTestConfig;
 import com.drumonii.loltrollbuild.test.api.WebMvcRestTest;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.springframework.batch.core.*;
 import org.springframework.batch.core.launch.JobLauncher;
@@ -20,7 +19,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDateTime;
@@ -41,11 +39,10 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@RunWith(SpringRunner.class)
 @WebMvcRestTest(BatchJobInstancesRestController.class)
 @Import(BatchDaoTestConfig.class)
 @ActiveProfiles({ TESTING })
-public class BatchJobInstancesRestControllerTest {
+class BatchJobInstancesRestControllerTest {
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -71,8 +68,8 @@ public class BatchJobInstancesRestControllerTest {
 
 	private JobInstance jobInstance;
 
-	@Before
-	public void before() {
+	@BeforeEach
+	void beforeEach() {
 		JobParameters jobParameters = new JobParametersBuilder()
 				.addString("someJobParameter", "someJobParameterValue")
 				.toJobParameters();
@@ -87,7 +84,7 @@ public class BatchJobInstancesRestControllerTest {
 
 	@WithMockAdminUser
 	@Test
-	public void getBatchJobInstances() throws Exception {
+	void getBatchJobInstances() throws Exception {
 		// qbe
 		mockMvc.perform(get("{apiPath}/admin/job-instances", apiPath))
 				.andExpect(status().isOk())
@@ -111,7 +108,7 @@ public class BatchJobInstancesRestControllerTest {
 
 	@WithMockAdminUser
 	@Test
-	public void getBatchJobInstance() throws Exception {
+	void getBatchJobInstance() throws Exception {
 		mockMvc.perform(get("{apiPath}/admin/job-instances/{jobInstanceId}", apiPath, jobInstance.getId()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
@@ -123,7 +120,7 @@ public class BatchJobInstancesRestControllerTest {
 
 	@WithMockAdminUser
 	@Test
-	public void restartAllRetrievalsJob() throws Exception {
+	void restartAllRetrievalsJob() throws Exception {
 		JobParameters jobParameters = new JobParametersBuilder()
 				.addString("someJobParameter", "someJobParameterValue")
 				.toJobParameters();
@@ -179,7 +176,7 @@ public class BatchJobInstancesRestControllerTest {
 
 	@WithMockAdminUser
 	@Test
-	public void hasRecentFailedAllRetrievalsJobDueToHangingJob() throws Exception {
+	void hasRecentFailedAllRetrievalsJobDueToHangingJob() throws Exception {
 		// Save a FAILED allRetrievalsJob as least recent
 
 		JobParameters failedJobParameters = new JobParametersBuilder()
@@ -245,7 +242,7 @@ public class BatchJobInstancesRestControllerTest {
 
 	@WithMockAdminUser
 	@Test
-	public void hasRecentFailedAllRetrievalsJobDueToFailedJob() throws Exception {
+	void hasRecentFailedAllRetrievalsJobDueToFailedJob() throws Exception {
 		// Save a COMPLETED allRetrievalsJob as least recent
 
 		JobParameters completedJobParameters = new JobParametersBuilder()
@@ -293,7 +290,7 @@ public class BatchJobInstancesRestControllerTest {
 
 	@WithMockAdminUser
 	@Test
-	public void hasNoRecentFailedAllRetrievalsJobDueToCompletedJob() throws Exception {
+	void hasNoRecentFailedAllRetrievalsJobDueToCompletedJob() throws Exception {
 		// Save a COMPLETED allRetrievalsJob as most recent
 
 		JobParameters completedJobParameters = new JobParametersBuilder()

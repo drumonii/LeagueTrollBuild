@@ -1,13 +1,11 @@
 package com.drumonii.loltrollbuild.model;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.json.JsonTest;
 import org.springframework.boot.test.json.JacksonTester;
 import org.springframework.boot.test.json.JsonContent;
 import org.springframework.boot.test.json.ObjectContent;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -15,15 +13,14 @@ import java.time.LocalDateTime;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Fail.fail;
 
-@RunWith(SpringRunner.class)
 @JsonTest
-public class BuildTest {
+class BuildTest {
 
 	@Autowired
 	private JacksonTester<Build> jacksonTester;
 
 	@Test
-	public void serializesIntoJson() {
+	void serializesIntoJson() {
 		Build build = new Build();
 		build.setId(1);
 		build.setCreatedDate(LocalDateTime.now());
@@ -60,7 +57,7 @@ public class BuildTest {
 	}
 
 	@Test
-	public void deserializesFromJson() {
+	void deserializesFromJson() {
 		String json =
 				"{ " +
 				"  \"createdDate\": \"2017-09-14T22:55:26.47\", " +
@@ -102,7 +99,7 @@ public class BuildTest {
 	}
 
 	@Test
-	public void equals() {
+	void equals() {
 		Build build1 = new Build();
 		build1.setChampionId(1);
 		build1.setItem1Id(1);

@@ -9,11 +9,13 @@ import org.hibernate.query.criteria.internal.PathImplementor;
 import org.hibernate.query.criteria.internal.path.AbstractPathImpl;
 import org.hibernate.query.criteria.internal.path.MapAttributeJoin;
 import org.hibernate.query.criteria.internal.path.SingularAttributePath;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.junit.jupiter.MockitoSettings;
+import org.mockito.quality.Strictness;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.ExampleMatcher.GenericPropertyMatcher;
@@ -28,16 +30,13 @@ import java.util.*;
 import java.util.Map.Entry;
 
 import static java.util.Map.entry;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.ArgumentMatchers.isNull;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.Silent.class)
-public class QueryByExampleFromSpecificationPredicateBuilderTest {
+@ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
+class QueryByExampleFromSpecificationPredicateBuilderTest {
 
 	@Mock
 	private CriteriaBuilderImpl cb;
@@ -48,8 +47,8 @@ public class QueryByExampleFromSpecificationPredicateBuilderTest {
 	@Mock
 	private EntityType<Person> personEntityType;
 
-	@Before
-	public void before() {
+	@BeforeEach
+	void beforeEach() {
 		given(root.getModel()).willReturn(personEntityType);
 
 		SingularAttribute<Person, Integer> personIdAttribute =
@@ -81,7 +80,7 @@ public class QueryByExampleFromSpecificationPredicateBuilderTest {
 	}
 
 	@Test
-	public void matchingAllShouldCreateTruePredicate() {
+	void matchingAllShouldCreateTruePredicate() {
 		Person person = new Person();
 		Example<Person> example = Example.of(person);
 
@@ -91,7 +90,7 @@ public class QueryByExampleFromSpecificationPredicateBuilderTest {
 	}
 
 	@Test
-	public void ignoringAllShouldCreateTruePredicate() {
+	void ignoringAllShouldCreateTruePredicate() {
 		Person person = new Person();
 		person.setId(1);
 		person.setName("Joe");
@@ -106,7 +105,7 @@ public class QueryByExampleFromSpecificationPredicateBuilderTest {
 	}
 
 	@Test
-	public void includeNullShouldCreateIsNullPredicate() {
+	void includeNullShouldCreateIsNullPredicate() {
 		Person person = new Person();
 		ExampleMatcher exampleMatcher = ExampleMatcher.matching()
 				.withIncludeNullValues();
@@ -119,7 +118,7 @@ public class QueryByExampleFromSpecificationPredicateBuilderTest {
 	}
 
 	@Test
-	public void nonStringShouldCreateEqualPredicate() {
+	void nonStringShouldCreateEqualPredicate() {
 		Person person = new Person();
 		person.setId(1);
 		Example<Person> example = Example.of(person);
@@ -131,7 +130,7 @@ public class QueryByExampleFromSpecificationPredicateBuilderTest {
 	}
 
 	@Test
-	public void matchingIgnoreCaseWithStringShouldCreateEqualPredicate() {
+	void matchingIgnoreCaseWithStringShouldCreateEqualPredicate() {
 		Person person = new Person();
 		person.setName("Joe");
 		ExampleMatcher exampleMatcher = ExampleMatcher.matching()
@@ -146,7 +145,7 @@ public class QueryByExampleFromSpecificationPredicateBuilderTest {
 	}
 
 	@Test
-	public void matchingExactWithStringShouldCreateEqualPredicate() {
+	void matchingExactWithStringShouldCreateEqualPredicate() {
 		Person person = new Person();
 		person.setName("Joe");
 		ExampleMatcher exampleMatcher = ExampleMatcher.matching()
@@ -160,7 +159,7 @@ public class QueryByExampleFromSpecificationPredicateBuilderTest {
 	}
 
 	@Test
-	public void matchingContainingWithStringShouldCreateLikePredicate() {
+	void matchingContainingWithStringShouldCreateLikePredicate() {
 		Person person = new Person();
 		person.setName("Joe");
 		ExampleMatcher exampleMatcher = ExampleMatcher.matching()
@@ -174,7 +173,7 @@ public class QueryByExampleFromSpecificationPredicateBuilderTest {
 	}
 
 	@Test
-	public void matchingStartingWithStringShouldCreateLikePredicate() {
+	void matchingStartingWithStringShouldCreateLikePredicate() {
 		Person person = new Person();
 		person.setName("Joe");
 		ExampleMatcher exampleMatcher = ExampleMatcher.matching()
@@ -188,7 +187,7 @@ public class QueryByExampleFromSpecificationPredicateBuilderTest {
 	}
 
 	@Test
-	public void matchingEndingWithStringShouldCreateLikePredicate() {
+	void matchingEndingWithStringShouldCreateLikePredicate() {
 		Person person = new Person();
 		person.setName("Joe");
 		ExampleMatcher exampleMatcher = ExampleMatcher.matching()
@@ -202,7 +201,7 @@ public class QueryByExampleFromSpecificationPredicateBuilderTest {
 	}
 
 	@Test
-	public void elementCollectionOfTypeCollectionShouldCreateIsMemberPredicate() {
+	void elementCollectionOfTypeCollectionShouldCreateIsMemberPredicate() {
 		Person person = new Person();
 		person.setTags(new HashSet<>(Collections.singletonList("Friendly")));
 		Example<Person> example = Example.of(person);
@@ -216,7 +215,7 @@ public class QueryByExampleFromSpecificationPredicateBuilderTest {
 	}
 
 	@Test
-	public void elementCollectionOfTypeMapShouldCreateEqualPredicateFromMapJoin() {
+	void elementCollectionOfTypeMapShouldCreateEqualPredicateFromMapJoin() {
 		Person person = new Person();
 		person.setSkills(Map.ofEntries(entry("drawing", 8)));
 		Example<Person> example = Example.of(person);

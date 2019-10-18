@@ -4,25 +4,20 @@ import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.repository.VersionsRepository;
 import com.drumonii.loltrollbuild.test.api.WebMvcRestTest;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
 
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@RunWith(SpringRunner.class)
 @WebMvcRestTest(VersionsRestController.class)
-public abstract class VersionsRestControllerTest {
+abstract class VersionsRestControllerTest {
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -38,10 +33,10 @@ public abstract class VersionsRestControllerTest {
 
 	protected List<Version> versions;
 
-	public abstract void before();
+	protected abstract void beforeEach();
 
 	@Test
-	public void getVersions() throws Exception {
+	void getVersions() throws Exception {
 		// qbe
 		mockMvc.perform(get("{apiPath}/versions", apiPath))
 				.andExpect(status().isOk())
@@ -59,7 +54,7 @@ public abstract class VersionsRestControllerTest {
 	}
 
 	@Test
-	public void getVersion() throws Exception {
+	void getVersion() throws Exception {
 		// find with non existing version
 		mockMvc.perform(get("{apiPath}/versions/{patch}", apiPath, "1234"))
 				.andExpect(status().isNotFound());
@@ -72,7 +67,7 @@ public abstract class VersionsRestControllerTest {
 	}
 
 	@Test
-	public void getLatestVersion() throws Exception {
+	void getLatestVersion() throws Exception {
 		// get latest version with saved versions
 		mockMvc.perform(get("{apiPath}/versions/latest", apiPath))
 				.andExpect(status().isOk())

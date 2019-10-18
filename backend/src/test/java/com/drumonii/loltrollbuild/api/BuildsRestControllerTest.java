@@ -8,13 +8,11 @@ import com.drumonii.loltrollbuild.riot.api.MapsResponse;
 import com.drumonii.loltrollbuild.riot.api.SummonerSpellsResponse;
 import com.drumonii.loltrollbuild.test.api.WebMvcRestTest;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static com.drumonii.loltrollbuild.util.GameMapUtil.SUMMONERS_RIFT_SID;
@@ -25,10 +23,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@RunWith(SpringRunner.class)
 @WebMvcRestTest(BuildsRestController.class)
-@Ignore
-public abstract class BuildsRestControllerTest {
+@Disabled
+abstract class BuildsRestControllerTest {
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -59,10 +56,10 @@ public abstract class BuildsRestControllerTest {
 	protected MapsResponse mapsResponse;
 	protected SummonerSpellsResponse summonerSpellsResponse;
 
-	public abstract void before();
+	protected abstract void beforeEach();
 
 	@Test
-	public void getBuilds() throws Exception {
+	void getBuilds() throws Exception {
 		// qbe
 		mockMvc.perform(get("{apiPath}/builds", apiPath))
 				.andExpect(status().isOk())
@@ -80,7 +77,7 @@ public abstract class BuildsRestControllerTest {
 	}
 
 	@Test
-	public void getBuild() throws Exception {
+	void getBuild() throws Exception {
 		// find with non existing build Id
 		mockMvc.perform(get("{apiPath}/builds/{id}", apiPath, 0))
 				.andExpect(status().isNotFound());
@@ -156,7 +153,7 @@ public abstract class BuildsRestControllerTest {
 	}
 
 	@Test
-	public void saveBuild() throws Exception {
+	void saveBuild() throws Exception {
 		Build build = new Build();
 
 		// Save with missing attributes
@@ -224,7 +221,7 @@ public abstract class BuildsRestControllerTest {
 	}
 
 	@Test
-	public void countBuild() throws Exception {
+	void countBuild() throws Exception {
 		long count = buildsRepository.count();
 
 		mockMvc.perform(get("{apiPath}/builds/count", apiPath))

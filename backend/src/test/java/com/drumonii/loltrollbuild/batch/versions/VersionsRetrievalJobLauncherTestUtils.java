@@ -5,7 +5,7 @@ import org.springframework.batch.test.JobLauncherTestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-public class VersionsRetrievalJobLauncherTestUtils extends JobLauncherTestUtils {
+class VersionsRetrievalJobLauncherTestUtils extends JobLauncherTestUtils {
 
 	@Autowired
 	@Override

@@ -1,24 +1,21 @@
 package com.drumonii.loltrollbuild.api.admin;
 
 import com.drumonii.loltrollbuild.annotation.WithMockAdminUser;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static com.drumonii.loltrollbuild.config.Profiles.TESTING;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@RunWith(SpringRunner.class)
 @WebMvcTest(AdminAuthenticationRestController.class)
 @ActiveProfiles({ TESTING })
-public class AdminAuthenticationRestControllerTest {
+class AdminAuthenticationRestControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -28,7 +25,7 @@ public class AdminAuthenticationRestControllerTest {
 
     @WithMockAdminUser
     @Test
-    public void getsAdminUserDetailsFromAuthentication() throws Exception {
+    void getsAdminUserDetailsFromAuthentication() throws Exception {
         mockMvc.perform(get("{apiPath}/admin/authentication", apiPath))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -42,7 +39,7 @@ public class AdminAuthenticationRestControllerTest {
     }
 
     @Test
-    public void getsNoAdminUserDetailsFromNoAuthentication() throws Exception {
+    void getsNoAdminUserDetailsFromNoAuthentication() throws Exception {
         mockMvc.perform(get("{apiPath}/admin/authentication", apiPath))
                 .andExpect(status().isBadRequest());
     }

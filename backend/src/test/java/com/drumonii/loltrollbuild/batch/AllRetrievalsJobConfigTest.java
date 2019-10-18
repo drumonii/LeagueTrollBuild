@@ -8,8 +8,7 @@ import com.drumonii.loltrollbuild.batch.versions.VersionsRetrievalJobConfig;
 import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.riot.service.*;
 import com.drumonii.loltrollbuild.test.batch.BatchTest;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.batch.core.*;
 import org.springframework.batch.test.JobLauncherTestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +17,6 @@ import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 
@@ -30,11 +28,10 @@ import static org.assertj.core.api.Assertions.fail;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
 
-@RunWith(SpringRunner.class)
 @BatchTest({ AllRetrievalsJobConfig.class, ChampionsRetrievalJobConfig.class, ItemsRetrievalJobConfig.class,
 		MapsRetrievalJobConfig.class, SummonerSpellsRetrievalJobConfig.class, VersionsRetrievalJobConfig.class })
 @ActiveProfiles({ TESTING, DDRAGON })
-public class AllRetrievalsJobConfigTest {
+class AllRetrievalsJobConfigTest {
 
 	@MockBean
 	private VersionsService versionsService;
@@ -55,7 +52,7 @@ public class AllRetrievalsJobConfigTest {
 	private JobLauncherTestUtils jobLauncherTestUtils;
 
 	@Test
-	public void runsAllRetrievalJob() throws Exception {
+	void runsAllRetrievalJob() throws Exception {
 		Version latestVersion = Version.patch("8.1.1");
 		given(versionsService.getLatestVersion()).willReturn(latestVersion);
 		given(mapsService.getMaps(eq(latestVersion))).willReturn(new ArrayList<>());
@@ -77,7 +74,7 @@ public class AllRetrievalsJobConfigTest {
 	}
 
 	@Test
-	public void doesNotRunsAllRetrievalJobWithNoLatestPatch() {
+	void doesNotRunsAllRetrievalJobWithNoLatestPatch() {
 		given(versionsService.getLatestVersion()).willReturn(null);
 
 		JobParameters jobParameters = getJobParameters();

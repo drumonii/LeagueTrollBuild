@@ -1,17 +1,17 @@
 package com.drumonii.loltrollbuild.api;
 
 import com.drumonii.loltrollbuild.test.json.JsonTestFilesUtil;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.springframework.test.context.ActiveProfiles;
 
 import static com.drumonii.loltrollbuild.config.Profiles.DDRAGON;
 import static com.drumonii.loltrollbuild.config.Profiles.TESTING;
 
 @ActiveProfiles({ TESTING, DDRAGON })
-public class MapsDdragonRestControllerTest extends MapsRestControllerTest {
+class MapsDdragonRestControllerTest extends MapsRestControllerTest {
 
-	@Before
-	public void before() {
+	@BeforeEach
+	protected void beforeEach() {
 		JsonTestFilesUtil jsonTestFilesUtil = new JsonTestFilesUtil(objectMapper);
 
 		mapsResponse = jsonTestFilesUtil.getMapsResponse();

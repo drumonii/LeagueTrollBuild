@@ -5,9 +5,8 @@ import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.riot.api.RiotApiProperties;
 import com.drumonii.loltrollbuild.test.json.JsonTestFilesUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -16,7 +15,6 @@ import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.web.util.UriComponents;
 
@@ -30,12 +28,11 @@ import static org.springframework.test.web.client.match.MockRestRequestMatchers.
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withServerError;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 
-@RunWith(SpringRunner.class)
 @RestClientTest(VersionsService.class)
 @Import(RiotApiConfig.class)
 @EnableConfigurationProperties(RiotApiProperties.class)
 @ActiveProfiles({ TESTING, DDRAGON })
-public class VersionsDdragonServiceTest {
+class VersionsDdragonServiceTest {
 
 	@Autowired
 	private VersionsService versionsService;
@@ -53,8 +50,8 @@ public class VersionsDdragonServiceTest {
 	private List<Version> versions;
 	private long lolpatchStyleSize;
 
-	@Before
-	public void before() {
+	@BeforeEach
+	void beforeEach() {
 		JsonTestFilesUtil jsonTestFilesUtil = new JsonTestFilesUtil(objectMapper);
 
 		versions = jsonTestFilesUtil.getVersions();
@@ -64,7 +61,7 @@ public class VersionsDdragonServiceTest {
 	}
 
 	@Test
-	public void getsVersions() throws Exception {
+	void getsVersions() throws Exception {
 		mockServer.expect(requestTo(versionsUri.toString()))
 				.andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(objectMapper.writeValueAsString(versions), MediaType.parseMediaType("text/json;charset=UTF-8")));
@@ -77,7 +74,7 @@ public class VersionsDdragonServiceTest {
 	}
 
 	@Test
-	public void getsVersionsWithRestClientException() {
+	void getsVersionsWithRestClientException() {
 		mockServer.expect(requestTo(versionsUri.toString()))
 				.andRespond(withServerError());
 
@@ -88,7 +85,7 @@ public class VersionsDdragonServiceTest {
 	}
 
 	@Test
-	public void getsLatestVersion() throws Exception {
+	void getsLatestVersion() throws Exception {
 		mockServer.expect(requestTo(versionsUri.toString()))
 				.andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(objectMapper.writeValueAsString(versions), MediaType.parseMediaType("text/json;charset=UTF-8")));
@@ -101,7 +98,7 @@ public class VersionsDdragonServiceTest {
 	}
 
 	@Test
-	public void getsLatestVersionWithRestClientException() {
+	void getsLatestVersionWithRestClientException() {
 		mockServer.expect(requestTo(versionsUri.toString()))
 				.andRespond(withServerError());
 

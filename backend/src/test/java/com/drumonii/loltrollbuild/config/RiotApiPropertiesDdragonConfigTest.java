@@ -2,9 +2,9 @@ package com.drumonii.loltrollbuild.config;
 
 import com.drumonii.loltrollbuild.riot.api.RiotApiProperties;
 import com.drumonii.loltrollbuild.riot.api.RiotApiProperties.Ddragon;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -19,7 +19,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -29,13 +29,13 @@ import static com.drumonii.loltrollbuild.config.Profiles.TESTING;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
 
-@RunWith(SpringRunner.class)
+@ExtendWith({SpringExtension.class})
 @Import(RiotApiConfig.class)
 @ContextConfiguration(initializers = ConfigFileApplicationContextInitializer.class)
 @EnableConfigurationProperties(RiotApiProperties.class)
 @ImportAutoConfiguration({ RestTemplateAutoConfiguration.class, JacksonAutoConfiguration.class })
 @ActiveProfiles({ TESTING, DDRAGON })
-public class RiotApiPropertiesDdragonConfigTest {
+class RiotApiPropertiesDdragonConfigTest {
 
 	@Autowired
 	private RiotApiProperties riotProperties;
@@ -48,8 +48,8 @@ public class RiotApiPropertiesDdragonConfigTest {
 	private String patch;
 	private String locale;
 
-	@Before
-	public void before() {
+	@BeforeEach
+	void beforeEach() {
 		ddragon = riotProperties.getDdragon();
 		patch = "7.17.2";
 		locale = ddragon.getLocale();
@@ -60,7 +60,7 @@ public class RiotApiPropertiesDdragonConfigTest {
 	 */
 
 	@Test
-	public void restTemplate() {
+	void restTemplate() {
 		try {
 			RestTemplate restTemplate = applicationContext.getBean("restTemplate", RestTemplate.class);
 			assertThat(restTemplate.getInterceptors()).hasSize(1);
@@ -81,7 +81,7 @@ public class RiotApiPropertiesDdragonConfigTest {
 	private UriComponentsBuilder summonerSpellsUriBuilder;
 
 	@Test
-	public void summonerSpellsUri() {
+	void summonerSpellsUri() {
 		UriComponents summonerSpellsUri = summonerSpellsUriBuilder.buildAndExpand(patch, locale);
 		assertThat(summonerSpellsUri.toString()).as("Summoner Spells URI")
 				.isEqualTo(ddragon.getBaseUrl() + ddragon.getSummonerSpells().replace("{version}", patch).replace("{locale}", locale));
@@ -92,7 +92,7 @@ public class RiotApiPropertiesDdragonConfigTest {
 	private UriComponentsBuilder summonerSpellImgBuilder;
 
 	@Test
-	public void summonerSpellImgUri() {
+	void summonerSpellImgUri() {
 		String imgFull = "SummonerBoost.png";
 		UriComponents summonerSpellImgUri = summonerSpellImgBuilder.buildAndExpand(patch, imgFull);
 		assertThat(summonerSpellImgUri.toString()).as("Summoner Spells Image URI")
@@ -109,7 +109,7 @@ public class RiotApiPropertiesDdragonConfigTest {
 	private UriComponentsBuilder itemsUriBuilder;
 
 	@Test
-	public void itemsUri() {
+	void itemsUri() {
 		UriComponents itemsUri = itemsUriBuilder.buildAndExpand(patch, locale);
 		assertThat(itemsUri.toString()).as("Items URI")
 				.isEqualTo(ddragon.getBaseUrl() + ddragon.getItems().replace("{version}", patch).replace("{locale}", locale));
@@ -120,7 +120,7 @@ public class RiotApiPropertiesDdragonConfigTest {
 	private UriComponentsBuilder itemsImgBuilder;
 
 	@Test
-	public void itemsImgUri() {
+	void itemsImgUri() {
 		String imgFull = "1.png";
 		UriComponents itemsImgUri = itemsImgBuilder.buildAndExpand(patch, imgFull);
 		assertThat(itemsImgUri.toString()).as("Items Image URI")
@@ -136,7 +136,7 @@ public class RiotApiPropertiesDdragonConfigTest {
 	private UriComponentsBuilder championsUriBuilder;
 
 	@Test
-	public void championsUri() {
+	void championsUri() {
 		UriComponents championsUri = championsUriBuilder.buildAndExpand(patch, locale);
 		assertThat(championsUri.toString()).as("Champions URI")
 				.isEqualTo(ddragon.getBaseUrl() + ddragon.getChampions().replace("{version}", patch).replace("{locale}", locale));
@@ -147,7 +147,7 @@ public class RiotApiPropertiesDdragonConfigTest {
 	private UriComponentsBuilder championUriBuilder;
 
 	@Test
-	public void championUri() {
+	void championUri() {
 		int id = 1;
 		UriComponents championUri = championUriBuilder.buildAndExpand(patch, locale, id);
 		assertThat(championUri.toString()).as("Champion URI")
@@ -160,7 +160,7 @@ public class RiotApiPropertiesDdragonConfigTest {
 	private UriComponentsBuilder championsImgBuilder;
 
 	@Test
-	public void championsImgUri() {
+	void championsImgUri() {
 		String imgFull = "Champion.png";
 		UriComponents championsImgUri = championsImgBuilder.buildAndExpand(patch, imgFull);
 		assertThat(championsImgUri.toString()).as("Champions Image URI")
@@ -172,7 +172,7 @@ public class RiotApiPropertiesDdragonConfigTest {
 	private UriComponentsBuilder championsSpellImgBuilder;
 
 	@Test
-	public void championsSpellImgUri() {
+	void championsSpellImgUri() {
 		String spellImgFull = "ChampionSpell.png";
 		UriComponents championsSpellImgUri = championsSpellImgBuilder.buildAndExpand(patch, spellImgFull);
 		assertThat(championsSpellImgUri.toString()).as("Champion Spell Image URI")
@@ -185,7 +185,7 @@ public class RiotApiPropertiesDdragonConfigTest {
 	private UriComponentsBuilder championsPassiveImgBuilder;
 
 	@Test
-	public void championsPassiveImgUri() {
+	void championsPassiveImgUri() {
 		String spellImgFull = "ChampionPassive.png";
 		UriComponents championsPassiveImgUri = championsPassiveImgBuilder.buildAndExpand(patch, spellImgFull);
 		assertThat(championsPassiveImgUri.toString()).as("Champion Passive Image URI")
@@ -202,7 +202,7 @@ public class RiotApiPropertiesDdragonConfigTest {
 	private UriComponentsBuilder mapsUriBuilder;
 
 	@Test
-	public void mapsUri() {
+	void mapsUri() {
 		UriComponents mapsUri = mapsUriBuilder.buildAndExpand(patch, locale);
 		assertThat(mapsUri.toString()).as("Maps URI")
 				.isEqualTo(ddragon.getBaseUrl() + ddragon.getMaps().replace("{version}", patch).replace("{locale}", locale));
@@ -213,7 +213,7 @@ public class RiotApiPropertiesDdragonConfigTest {
 	private UriComponentsBuilder mapsImgBuilder;
 
 	@Test
-	public void mapsImgUri() {
+	void mapsImgUri() {
 		String imgFull = "Map.png";
 		UriComponents mapsImgUri = mapsImgBuilder.buildAndExpand(patch, imgFull);
 		assertThat(mapsImgUri.toString()).as("Maps Image URI")
@@ -229,7 +229,7 @@ public class RiotApiPropertiesDdragonConfigTest {
 	private UriComponents versionsUri;
 
 	@Test
-	public void versionsUri() {
+	void versionsUri() {
 		assertThat(versionsUri.toString()).as("Versions URI").isEqualTo(ddragon.getBaseUrl() + ddragon.getVersions());
 	}
 

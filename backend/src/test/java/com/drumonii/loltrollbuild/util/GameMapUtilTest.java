@@ -2,20 +2,17 @@ package com.drumonii.loltrollbuild.util;
 
 import com.drumonii.loltrollbuild.model.GameMap;
 import com.drumonii.loltrollbuild.model.builder.GameMapBuilder;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.Test;
 
 import static com.drumonii.loltrollbuild.model.SummonerSpell.GameMode.ARAM;
 import static com.drumonii.loltrollbuild.model.SummonerSpell.GameMode.CLASSIC;
 import static com.drumonii.loltrollbuild.util.GameMapUtil.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(JUnit4.class)
-public class GameMapUtilTest {
+class GameMapUtilTest {
 
 	@Test
-	public void getsModeFromMap() {
+	void getsModeFromMap() {
 		GameMap crystalScar = new GameMapBuilder()
 				.withMapId(8)
 				.withMapName("The Crystal Scar")
@@ -38,7 +35,7 @@ public class GameMapUtilTest {
 	}
 
 	@Test
-	public void getsNameFromId() {
+	void getsNameFromId() {
 		assertThat(getNameFromId(CRYSTAL_SCAR_ID)).isEqualTo(CRYSTAL_SCAR);
 		assertThat(getNameFromId(TWISTED_TREELINE_ID)).isEqualTo(TWISTED_TREELINE);
 		assertThat(getNameFromId(SUMMONERS_RIFT_ID)).isEqualTo(SUMMONERS_RIFT);

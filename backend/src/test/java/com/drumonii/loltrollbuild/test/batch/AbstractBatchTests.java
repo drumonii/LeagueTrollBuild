@@ -10,7 +10,7 @@ public abstract class AbstractBatchTests {
 
     protected Version latestVersion;
 
-    public abstract void before();
+    public abstract void beforeEach();
 
     protected JobParameters getJobParameters() {
         if (latestVersion == null) {

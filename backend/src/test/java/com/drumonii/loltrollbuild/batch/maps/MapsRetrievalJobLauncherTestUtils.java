@@ -5,7 +5,7 @@ import org.springframework.batch.test.JobLauncherTestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-public class MapsRetrievalJobLauncherTestUtils extends JobLauncherTestUtils {
+class MapsRetrievalJobLauncherTestUtils extends JobLauncherTestUtils {
 
 	@Autowired
 	@Override

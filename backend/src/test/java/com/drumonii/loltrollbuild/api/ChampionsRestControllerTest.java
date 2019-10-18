@@ -8,12 +8,10 @@ import com.drumonii.loltrollbuild.riot.api.ChampionsResponse;
 import com.drumonii.loltrollbuild.test.api.WebMvcRestTest;
 import com.drumonii.loltrollbuild.util.RandomizeUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static com.drumonii.loltrollbuild.util.GameMapUtil.HOWLING_ABYSS_ID;
@@ -22,9 +20,8 @@ import static org.hamcrest.core.IsNull.nullValue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@RunWith(SpringRunner.class)
 @WebMvcRestTest(ChampionsRestController.class)
-public abstract class ChampionsRestControllerTest {
+abstract class ChampionsRestControllerTest {
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -46,10 +43,10 @@ public abstract class ChampionsRestControllerTest {
 
 	protected ChampionsResponse championsResponse;
 
-	public abstract void before();
+	protected abstract void beforeEach();
 
 	@Test
-	public void getChampions() throws Exception {
+	void getChampions() throws Exception {
 		Champion champion = RandomizeUtil.getRandom(championsResponse.getChampions().values());
 
 		// qbe
@@ -95,7 +92,7 @@ public abstract class ChampionsRestControllerTest {
 	}
 
 	@Test
-	public void getChampion() throws Exception {
+	void getChampion() throws Exception {
 		// find with non existing champion Id
 		mockMvc.perform(get("{apiPath}/champions/{id}", apiPath, 0))
 				.andExpect(status().isNotFound());
@@ -116,20 +113,20 @@ public abstract class ChampionsRestControllerTest {
 	}
 
 	@Test
-	public void getTags() throws Exception {
+	void getTags() throws Exception {
 		mockMvc.perform(get("{apiPath}/champions/tags", apiPath))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON));
 	}
 
 	@Test
-	public void trollBuildWithChampionThatDoesNotExist() throws Exception {
+	void trollBuildWithChampionThatDoesNotExist() throws Exception {
 		mockMvc.perform(get("{apiPath}/champions/{id}/troll-build", apiPath, 0))
 				.andExpect(status().isNotFound());
 	}
 
 	@Test
-	public void trollBuild() throws Exception {
+	void trollBuild() throws Exception {
 		Champion azir = championsResponse.getChampions().get("Azir");
 
 		// get with champion Id and map specified
@@ -179,7 +176,7 @@ public abstract class ChampionsRestControllerTest {
 	}
 
 	@Test
-	public void trollBuildForViktor() throws Exception {
+	void trollBuildForViktor() throws Exception {
 		Champion viktor = championsResponse.getChampions().get("Viktor");
 
 		// get with Viktor Id and map specified
@@ -230,7 +227,7 @@ public abstract class ChampionsRestControllerTest {
 	}
 
 	@Test
-	public void trollBuildWithNoItems() throws Exception {
+	void trollBuildWithNoItems() throws Exception {
 		itemsRepository.deleteAll();
 		summonerSpellsRepository.deleteAll();
 

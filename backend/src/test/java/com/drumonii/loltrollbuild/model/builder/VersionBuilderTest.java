@@ -1,9 +1,7 @@
 package com.drumonii.loltrollbuild.model.builder;
 
 import com.drumonii.loltrollbuild.model.Version;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
@@ -11,11 +9,10 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
-@RunWith(JUnit4.class)
-public class VersionBuilderTest {
+class VersionBuilderTest {
 
     @Test
-    public void buildsFromNormalPatch() {
+    void buildsFromNormalPatch() {
         String patch = "7.10.1";
 
         Version version = new VersionBuilder()
@@ -28,7 +25,7 @@ public class VersionBuilderTest {
     }
 
     @Test
-    public void buildsFromlolpatchPatch() {
+    void buildsFromlolpatchPatch() {
         String patch = "lolpatch_7.17";
 
         Version version = new VersionBuilder()
@@ -41,7 +38,7 @@ public class VersionBuilderTest {
     }
 
     @Test
-    public void throwsIllegalArgumentExceptionFromBuildingWithInvalidPatches() {
+    void throwsIllegalArgumentExceptionFromBuildingWithInvalidPatches() {
         List<String> patches = Arrays.asList("a.b.c", "", null);
 
         for (String patch : patches) {

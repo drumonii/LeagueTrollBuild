@@ -4,6 +4,7 @@ import com.drumonii.loltrollbuild.config.CacheConfig;
 import com.drumonii.loltrollbuild.config.JpaConfig;
 import com.drumonii.loltrollbuild.config.RiotApiConfig;
 import com.drumonii.loltrollbuild.config.WebSecurityConfig;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
 import org.springframework.boot.autoconfigure.data.web.SpringDataWebAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.OverrideAutoConfiguration;
@@ -17,6 +18,7 @@ import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.annotation.AliasFor;
 import org.springframework.test.context.BootstrapWith;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.annotation.*;
@@ -30,6 +32,7 @@ import java.lang.annotation.*;
 @Documented
 @Inherited
 @BootstrapWith(WebMvcRestTestContextBootstrapper.class)
+@ExtendWith(SpringExtension.class)
 @OverrideAutoConfiguration(enabled = false)
 @TypeExcludeFilters(WebMvcRestTypeExcludeFilter.class)
 @Transactional

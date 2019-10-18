@@ -6,9 +6,8 @@ import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.riot.api.RiotApiProperties;
 import com.drumonii.loltrollbuild.test.json.JsonTestFilesUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,7 +17,6 @@ import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -34,12 +32,11 @@ import static org.springframework.test.web.client.match.MockRestRequestMatchers.
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withServerError;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 
-@RunWith(SpringRunner.class)
 @RestClientTest({ ItemsService.class, VersionsService.class })
 @Import(RiotApiConfig.class)
 @EnableConfigurationProperties(RiotApiProperties.class)
 @ActiveProfiles({ TESTING, DDRAGON })
-public class ItemsDdragonServiceTest {
+class ItemsDdragonServiceTest {
 
 	@Autowired
 	private ItemsService itemsService;
@@ -66,8 +63,8 @@ public class ItemsDdragonServiceTest {
 
 	private Version latestVersion;
 
-	@Before
-	public void before() {
+	@BeforeEach
+	void beforeEach() {
 		JsonTestFilesUtil jsonTestFilesUtil = new JsonTestFilesUtil(objectMapper);
 
 		itemsJson = JsonTestFilesUtil.getItemsJson();
@@ -77,7 +74,7 @@ public class ItemsDdragonServiceTest {
 	}
 
 	@Test
-	public void getItemsFromVersion() {
+	void getItemsFromVersion() {
 		mockServer.expect(requestTo(itemsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
 				.andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(itemsJson, MediaType.APPLICATION_JSON));
@@ -89,7 +86,7 @@ public class ItemsDdragonServiceTest {
 	}
 
 	@Test
-	public void getItemsFromVersionWithRestClientException() {
+	void getItemsFromVersionWithRestClientException() {
 		mockServer.expect(requestTo(itemsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
 				.andExpect(method(HttpMethod.GET))
 				.andRespond(withServerError());
@@ -101,7 +98,7 @@ public class ItemsDdragonServiceTest {
 	}
 
 	@Test
-	public void getItem() {
+	void getItem() {
 		int bilgewaterCutlassId = 3144;
 
 		mockServer.expect(requestTo(versionsUri.toString()))
@@ -119,7 +116,7 @@ public class ItemsDdragonServiceTest {
 	}
 
 	@Test
-	public void getItemWithRestClientException() {
+	void getItemWithRestClientException() {
 		int bilgewaterCutlassId = 3144;
 
 		mockServer.expect(requestTo(versionsUri.toString()))
@@ -137,7 +134,7 @@ public class ItemsDdragonServiceTest {
 	}
 
 	@Test
-	public void getItemWithRestClientExceptionFromVersions() {
+	void getItemWithRestClientExceptionFromVersions() {
 		int bilgewaterCutlassId = 3144;
 
 		mockServer.expect(requestTo(versionsUri.toString()))

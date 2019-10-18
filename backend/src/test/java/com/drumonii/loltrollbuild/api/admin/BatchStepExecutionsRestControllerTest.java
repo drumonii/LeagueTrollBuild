@@ -4,9 +4,8 @@ import com.drumonii.loltrollbuild.annotation.WithMockAdminUser;
 import com.drumonii.loltrollbuild.test.batch.BatchDaoTestConfig;
 import com.drumonii.loltrollbuild.test.batch.StepExecutionRowMapper;
 import com.drumonii.loltrollbuild.test.api.WebMvcRestTest;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.batch.core.*;
 import org.springframework.batch.core.repository.dao.JobExecutionDao;
 import org.springframework.batch.core.repository.dao.JobInstanceDao;
@@ -17,7 +16,6 @@ import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
@@ -28,11 +26,10 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@RunWith(SpringRunner.class)
 @WebMvcRestTest(BatchStepExecutionsRestController.class)
 @Import(BatchDaoTestConfig.class)
 @ActiveProfiles({ TESTING })
-public class BatchStepExecutionsRestControllerTest {
+class BatchStepExecutionsRestControllerTest {
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -55,8 +52,8 @@ public class BatchStepExecutionsRestControllerTest {
 	private JobInstance jobInstance;
 	private StepExecution stepExecution;
 
-	@Before
-	public void before() {
+	@BeforeEach
+	void beforeEach() {
 		JobParameters jobParameters = new JobParametersBuilder()
 				.addString("someJobParameter", "someJobParameterValue")
 				.toJobParameters();
@@ -78,7 +75,7 @@ public class BatchStepExecutionsRestControllerTest {
 
 	@WithMockAdminUser
 	@Test
-	public void getBatchStepExecutions() throws Exception {
+	void getBatchStepExecutions() throws Exception {
 		mockMvc.perform(get("{apiPath}/admin/job-instances/{jobInstanceId}/step-executions", apiPath, jobInstance.getId()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
@@ -90,7 +87,7 @@ public class BatchStepExecutionsRestControllerTest {
 
 	@WithMockAdminUser
 	@Test
-	public void getBatchStepExecution() throws Exception {
+	void getBatchStepExecution() throws Exception {
 		mockMvc.perform(get("{apiPath}/admin/job-instances/{jobInstanceId}/step-executions/{stepExecutionId}", apiPath,
 				jobInstance.getId(), stepExecution.getId()))
 				.andExpect(status().isOk())

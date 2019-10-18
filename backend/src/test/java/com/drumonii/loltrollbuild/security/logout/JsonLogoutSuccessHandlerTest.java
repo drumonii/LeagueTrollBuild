@@ -1,11 +1,11 @@
 package com.drumonii.loltrollbuild.security.logout;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -18,8 +18,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 
-@RunWith(MockitoJUnitRunner.class)
-public class JsonLogoutSuccessHandlerTest {
+@ExtendWith(MockitoExtension.class)
+class JsonLogoutSuccessHandlerTest {
 
     @Mock
     private ObjectMapper objectMapper;
@@ -28,7 +28,7 @@ public class JsonLogoutSuccessHandlerTest {
     private JsonLogoutSuccessHandler logoutSuccessHandler;
 
     @Test
-    public void onLogoutSuccessWithAuthentication() throws IOException {
+    void onLogoutSuccessWithAuthentication() throws IOException {
         MockHttpServletRequest request = new MockHttpServletRequest();
         MockHttpServletResponse response = new MockHttpServletResponse();
 
@@ -61,7 +61,7 @@ public class JsonLogoutSuccessHandlerTest {
     }
 
     @Test
-    public void onLogoutSuccessWithoutAuthentication() throws IOException {
+    void onLogoutSuccessWithoutAuthentication() throws IOException {
         MockHttpServletRequest request = new MockHttpServletRequest();
         MockHttpServletResponse response = new MockHttpServletResponse();
 

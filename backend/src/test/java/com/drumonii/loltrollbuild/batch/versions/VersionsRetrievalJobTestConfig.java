@@ -5,10 +5,10 @@ import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 
 @TestConfiguration
-public class VersionsRetrievalJobTestConfig {
+class VersionsRetrievalJobTestConfig {
 
 	@Bean
-	public JobLauncherTestUtils jobLauncherTestUtils() {
+	JobLauncherTestUtils jobLauncherTestUtils() {
 		return new VersionsRetrievalJobLauncherTestUtils();
 	}
 

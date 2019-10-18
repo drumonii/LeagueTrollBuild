@@ -1,8 +1,8 @@
 package com.drumonii.loltrollbuild.doc;
 
+import com.drumonii.loltrollbuild.api.*;
 import com.drumonii.loltrollbuild.model.*;
 import com.drumonii.loltrollbuild.repository.*;
-import com.drumonii.loltrollbuild.api.*;
 import com.drumonii.loltrollbuild.riot.api.ChampionsResponse;
 import com.drumonii.loltrollbuild.riot.api.ItemsResponse;
 import com.drumonii.loltrollbuild.riot.api.MapsResponse;
@@ -10,15 +10,13 @@ import com.drumonii.loltrollbuild.riot.api.SummonerSpellsResponse;
 import com.drumonii.loltrollbuild.test.json.JsonTestFilesUtil;
 import com.drumonii.loltrollbuild.test.api.WebMvcRestTest;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
@@ -35,12 +33,11 @@ import static org.springframework.restdocs.request.RequestDocumentation.requestP
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@RunWith(SpringRunner.class)
 @WebMvcRestTest({ BuildsRestController.class, ChampionsRestController.class, ItemsRestController.class,
 		MapsRestController.class, SummonerSpellsRestController.class, VersionsRestController.class })
 @AutoConfigureRestDocs(uriScheme = "https", uriHost = "loltrollbuild.com", uriPort = 443)
 @ActiveProfiles({ TESTING, DDRAGON })
-public class ApiDocumentation {
+class ApiDocumentation {
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -75,8 +72,8 @@ public class ApiDocumentation {
 	private SummonerSpellsResponse summonerSpellsResponse;
 	private List<Version> versions;
 
-	@Before
-	public void before() {
+	@BeforeEach
+	void beforeEach() {
 		JsonTestFilesUtil jsonTestFilesUtil = new JsonTestFilesUtil(objectMapper);
 
 		championsResponse = jsonTestFilesUtil.getFullChampionsResponse();
@@ -91,7 +88,7 @@ public class ApiDocumentation {
 	 */
 
 	@Test
-	public void getSummonerSpells() throws Exception {
+	void getSummonerSpells() throws Exception {
 		summonerSpellsRepository.save(summonerSpellsResponse.getSummonerSpells().get("SummonerExhaust"));
 
 		mockMvc.perform(get("{apiPath}/summoner-spells", apiPath))
@@ -112,7 +109,7 @@ public class ApiDocumentation {
 	}
 
 	@Test
-	public void getSummonerSpell() throws Exception {
+	void getSummonerSpell() throws Exception {
 		SummonerSpell teleport = summonerSpellsRepository.save(summonerSpellsResponse.getSummonerSpells()
 				.get("SummonerTeleport"));
 
@@ -134,7 +131,7 @@ public class ApiDocumentation {
 	}
 
 	@Test
-	public void summonerSpellsForTrollBuild() throws Exception {
+	void summonerSpellsForTrollBuild() throws Exception {
 		summonerSpellsRepository.save(summonerSpellsResponse.getSummonerSpells().get("SummonerSmite"));
 
 		mockMvc.perform(get("{apiPath}/summoner-spells/for-troll-build", apiPath)
@@ -160,7 +157,7 @@ public class ApiDocumentation {
 	 */
 
 	@Test
-	public void getItems() throws Exception {
+	void getItems() throws Exception {
 		itemsRepository.save(itemsResponse.getItems().get("3512"));
 
 		mockMvc.perform(get("{apiPath}/items", apiPath))
@@ -191,7 +188,7 @@ public class ApiDocumentation {
 	}
 
 	@Test
-	public void getItem() throws Exception {
+	void getItem() throws Exception {
 		Item warmogs = itemsRepository.save(itemsResponse.getItems().get("3083"));
 
 		mockMvc.perform(get("{apiPath}/items/{id}", apiPath, warmogs.getId()))
@@ -223,7 +220,7 @@ public class ApiDocumentation {
 	}
 
 	@Test
-	public void bootsItems() throws Exception {
+	void bootsItems() throws Exception {
 		itemsRepository.save(itemsResponse.getItems().get("3158"));
 
 		mockMvc.perform(get("{apiPath}/items/boots", apiPath)
@@ -255,7 +252,7 @@ public class ApiDocumentation {
 	}
 
 	@Test
-	public void trinketItems() throws Exception {
+	void trinketItems() throws Exception {
 		itemsRepository.save(itemsResponse.getItems().get("3364"));
 
 		mockMvc.perform(get("{apiPath}/items/trinkets", apiPath)
@@ -287,7 +284,7 @@ public class ApiDocumentation {
 	}
 
 	@Test
-	public void viktorOnlyItems() throws Exception {
+	void viktorOnlyItems() throws Exception {
 		itemsRepository.save(itemsResponse.getItems().get("3200"));
 
 		mockMvc.perform(get("{apiPath}/items/viktor-only", apiPath))
@@ -318,7 +315,7 @@ public class ApiDocumentation {
 	}
 
 	@Test
-	public void itemsForTrollBuild() throws Exception {
+	void itemsForTrollBuild() throws Exception {
 		itemsRepository.save(itemsResponse.getItems().get("3065"));
 
 		mockMvc.perform(get("{apiPath}/items/for-troll-build", apiPath)
@@ -354,7 +351,7 @@ public class ApiDocumentation {
 	 */
 
 	@Test
-	public void getChampions() throws Exception {
+	void getChampions() throws Exception {
 		championsRepository.save(championsResponse.getChampions().get("Warwick"));
 
 		mockMvc.perform(get("{apiPath}/champions", apiPath))
@@ -375,7 +372,7 @@ public class ApiDocumentation {
 	}
 
 	@Test
-	public void getChampion() throws Exception {
+	void getChampion() throws Exception {
 		Champion talon = championsRepository.save(championsResponse.getChampions().get("Talon"));
 
 		mockMvc.perform(get("{apiPath}/champions/{id}", apiPath, talon.getId()))
@@ -396,7 +393,7 @@ public class ApiDocumentation {
 	}
 
 	@Test
-	public void getTags() throws Exception {
+	void getTags() throws Exception {
 		championsRepository.save(championsResponse.getChampions().get("Nocturne"));
 
 		mockMvc.perform(get("{apiPath}/champions/tags", apiPath))
@@ -405,7 +402,7 @@ public class ApiDocumentation {
 	}
 
 	@Test
-	public void getTrollBuildForChampion() throws Exception {
+	void getTrollBuildForChampion() throws Exception {
 		Champion jayce = championsRepository.save(championsResponse.getChampions().get("Jayce"));
 
 		itemsRepository.save(itemsResponse.getItems().get("3340")); // Warding Totem (Trinket)
@@ -441,7 +438,7 @@ public class ApiDocumentation {
 	 */
 
 	@Test
-	public void getMaps() throws Exception {
+	void getMaps() throws Exception {
 		mapsRepository.save(mapsResponse.getMaps().get(SUMMONERS_RIFT_SID));
 
 		mockMvc.perform(get("{apiPath}/maps", apiPath))
@@ -454,7 +451,7 @@ public class ApiDocumentation {
 	}
 
 	@Test
-	public void getMap() throws Exception {
+	void getMap() throws Exception {
 		GameMap summonersRift = mapsResponse.getMaps().get(HOWLING_ABYSS_SID);
 		mapsRepository.save(summonersRift);
 
@@ -472,7 +469,7 @@ public class ApiDocumentation {
 	 */
 
 	@Test
-	public void getVersions() throws Exception {
+	void getVersions() throws Exception {
 		versionsRepository.save(versions.get(0));
 
 		mockMvc.perform(get("{apiPath}/versions", apiPath))
@@ -489,7 +486,7 @@ public class ApiDocumentation {
 	}
 
 	@Test
-	public void getVersion() throws Exception {
+	void getVersion() throws Exception {
 		Version version = versionsRepository.save(versions.get(0));
 
 		mockMvc.perform(get("{apiPath}/versions/{version}/", apiPath, version.getPatch()))
@@ -509,9 +506,9 @@ public class ApiDocumentation {
 	 * Builds doc
 	 */
 
-	@Ignore
+	@Disabled
 	@Test
-	public void getBuilds() throws Exception {
+	void getBuilds() throws Exception {
 		Build build = new Build();
 		build.setChampionId(championsResponse.getChampions().get("Karthus").getId());
 		build.setItem1Id(itemsResponse.getItems().get("3117").getId());
@@ -557,9 +554,9 @@ public class ApiDocumentation {
 								.description("The Map Id of the Build"))));
 	}
 
-	@Ignore
+	@Disabled
 	@Test
-	public void getBuild() throws Exception {
+	void getBuild() throws Exception {
 		Champion pantheon = championsRepository.save(championsResponse.getChampions().get("Pantheon"));
 		Item item1 = itemsRepository.save(itemsResponse.getItems().get("3091"));
 		Item item2 = itemsRepository.save(itemsResponse.getItems().get("3009"));

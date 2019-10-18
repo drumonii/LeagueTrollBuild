@@ -10,14 +10,12 @@ import com.drumonii.loltrollbuild.test.batch.AbstractBatchTests;
 import com.drumonii.loltrollbuild.test.batch.BatchTest;
 import com.drumonii.loltrollbuild.util.RandomizeUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.batch.core.BatchStatus;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.ArrayList;
@@ -31,10 +29,9 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 
-@RunWith(SpringRunner.class)
 @BatchTest(ItemsRetrievalJobConfig.class)
 @Import(ItemsRetrievalJobTestConfig.class)
-public abstract class ItemsRetrievalJobConfigTest extends AbstractBatchTests {
+abstract class ItemsRetrievalJobConfigTest extends AbstractBatchTests {
 
 	@MockBean
 	private ItemsService itemsService;
@@ -54,7 +51,7 @@ public abstract class ItemsRetrievalJobConfigTest extends AbstractBatchTests {
 	protected ItemsResponse itemsResponse;
 
 	@Test
-	public void savesNewItems() throws Exception {
+	void savesNewItems() throws Exception {
 		given(itemsService.getItems(eq(latestVersion)))
 				.willReturn(new ArrayList<>(itemsResponse.getItems().values()));
 
@@ -71,7 +68,7 @@ public abstract class ItemsRetrievalJobConfigTest extends AbstractBatchTests {
 	}
 
 	@Test
-	public void savesItemsDifference() throws Exception {
+	void savesItemsDifference() throws Exception {
 		given(itemsService.getItems(eq(latestVersion)))
 				.willReturn(new ArrayList<>(itemsResponse.getItems().values()));
 
@@ -98,7 +95,7 @@ public abstract class ItemsRetrievalJobConfigTest extends AbstractBatchTests {
 	}
 
 	@Test
-	public void deletesItemsDifference() throws Exception {
+	void deletesItemsDifference() throws Exception {
 		List<Item> items = itemsRepository.saveAll(itemsResponse.getItems().values());
 
 		Item itemToDelete = RandomizeUtil.getRandom(items);
@@ -120,7 +117,7 @@ public abstract class ItemsRetrievalJobConfigTest extends AbstractBatchTests {
 	}
 
 	@Test
-	public void noItemsFromRiotIsNoop() throws Exception {
+	void noItemsFromRiotIsNoop() throws Exception {
 		List<Item> items = itemsRepository.saveAll(itemsResponse.getItems().values());
 
 		given(itemsService.getItems(eq(latestVersion)))
@@ -139,7 +136,7 @@ public abstract class ItemsRetrievalJobConfigTest extends AbstractBatchTests {
 	}
 
 	@Test
-	public void emptyItemsResponseRetries() throws Exception {
+	void emptyItemsResponseRetries() throws Exception {
 		given(itemsService.getItems(eq(latestVersion)))
 				.willReturn(new ArrayList<>());
 

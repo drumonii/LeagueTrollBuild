@@ -5,22 +5,19 @@ import com.drumonii.loltrollbuild.model.BatchJobExecutionParams;
 import com.drumonii.loltrollbuild.model.BatchJobInstance;
 import com.drumonii.loltrollbuild.model.BatchStepExecution;
 import com.drumonii.loltrollbuild.test.repository.RepositoryTest;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDateTime;
 
 import static com.drumonii.loltrollbuild.config.Profiles.TESTING;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(SpringRunner.class)
 @RepositoryTest
 @ActiveProfiles({ TESTING })
-public class BatchStepExecutionsRepositoryTest {
+class BatchStepExecutionsRepositoryTest {
 
 	@Autowired
 	private BatchStepExecutionsRepository batchStepExecutionsRepository;
@@ -29,7 +26,7 @@ public class BatchStepExecutionsRepositoryTest {
 	private TestEntityManager testEntityManager;
 
 	@Test
-	public void findByJobInstanceId() {
+	void findByJobInstanceId() {
 		BatchJobInstance jobInstance = new BatchJobInstance();
 		jobInstance.setName("jobInstanceName");
 		jobInstance.setKey("jobInstanceKey");

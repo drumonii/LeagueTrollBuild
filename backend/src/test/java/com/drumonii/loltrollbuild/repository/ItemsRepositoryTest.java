@@ -6,23 +6,18 @@ import com.drumonii.loltrollbuild.riot.api.ItemsResponse;
 import com.drumonii.loltrollbuild.test.repository.RepositoryTest;
 import com.drumonii.loltrollbuild.util.GameMapUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 import java.util.Objects;
 
-import static com.drumonii.loltrollbuild.util.GameMapUtil.HOWLING_ABYSS_ID;
-import static com.drumonii.loltrollbuild.util.GameMapUtil.SUMMONERS_RIFT_ID;
-import static com.drumonii.loltrollbuild.util.GameMapUtil.TWISTED_TREELINE_ID;
+import static com.drumonii.loltrollbuild.util.GameMapUtil.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(SpringRunner.class)
 @RepositoryTest
-public abstract class ItemsRepositoryTest {
+abstract class ItemsRepositoryTest {
 
 	@Autowired
 	private ItemsRepository itemsRepository;
@@ -36,14 +31,14 @@ public abstract class ItemsRepositoryTest {
 
 	protected abstract ItemsResponse getItemsResponse();
 
-	@Before
-	public void before() {
+	@BeforeEach
+	void beforeEach() {
 		itemsResponse = getItemsResponse();
 		itemsRepository.saveAll(itemsResponse.getItems().values());
 	}
 
 	@Test
-	public void boots() {
+	void boots() {
 		Item bootsOfSpeed = itemsResponse.getItems().get("1001");
 
 		for (Integer map : MAPS) {
@@ -65,7 +60,7 @@ public abstract class ItemsRepositoryTest {
 	}
 
 	@Test
-	public void trinkets() {
+	void trinkets() {
 		for (Integer map : MAPS) {
 			List<Item> trinkets = itemsRepository.trinkets(map);
 			assertThat(trinkets).isNotEmpty();
@@ -94,7 +89,7 @@ public abstract class ItemsRepositoryTest {
 	}
 
 	@Test
-	public void viktorOnly() {
+	void viktorOnly() {
 		List<Item> viktorOnlyItems = itemsRepository.viktorOnly();
 		assertThat(viktorOnlyItems).isNotEmpty();
 		assertThat(viktorOnlyItems).doesNotHaveDuplicates();
@@ -112,7 +107,7 @@ public abstract class ItemsRepositoryTest {
 	}
 
 	@Test
-	public void forTrollBuild() {
+	void forTrollBuild() {
 		for (Integer map : MAPS) {
 			List<Item> forTrollBuild = itemsRepository.forTrollBuild(map);
 			assertThat(forTrollBuild).as("Items for Troll Build should not be empty for map: " + GameMapUtil.getNameFromId(map) + "(" + map + ")")

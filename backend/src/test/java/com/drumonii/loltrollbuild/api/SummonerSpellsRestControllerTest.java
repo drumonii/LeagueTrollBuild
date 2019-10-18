@@ -6,12 +6,10 @@ import com.drumonii.loltrollbuild.riot.api.SummonerSpellsResponse;
 import com.drumonii.loltrollbuild.test.api.WebMvcRestTest;
 import com.drumonii.loltrollbuild.util.RandomizeUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.stream.Collectors;
@@ -19,13 +17,10 @@ import java.util.stream.Collectors;
 import static com.drumonii.loltrollbuild.model.SummonerSpell.GameMode.CLASSIC;
 import static java.util.function.Predicate.not;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@RunWith(SpringRunner.class)
 @WebMvcRestTest(SummonerSpellsRestController.class)
-public abstract class SummonerSpellsRestControllerTest {
+abstract class SummonerSpellsRestControllerTest {
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -41,10 +36,10 @@ public abstract class SummonerSpellsRestControllerTest {
 
 	protected SummonerSpellsResponse summonerSpellsResponse;
 
-	public abstract void before();
+	protected abstract void beforeEach();
 
 	@Test
-	public void getSummonerSpells() throws Exception {
+	void getSummonerSpells() throws Exception {
 		SummonerSpell summonerSpell = RandomizeUtil.getRandom(summonerSpellsResponse.getSummonerSpells().values().stream()
 				.filter(not(spell -> spell.getModes().isEmpty()))
 				.collect(Collectors.toSet()));
@@ -78,7 +73,7 @@ public abstract class SummonerSpellsRestControllerTest {
 	}
 
 	@Test
-	public void getSummonerSpell() throws Exception {
+	void getSummonerSpell() throws Exception {
 		// find with non existing summoner spell Id
 		mockMvc.perform(get("{apiPath}/summoner-spells/{id}", apiPath, 0))
 				.andExpect(status().isNotFound());
@@ -93,7 +88,7 @@ public abstract class SummonerSpellsRestControllerTest {
 	}
 
 	@Test
-	public void getForTrollBuild() throws Exception {
+	void getForTrollBuild() throws Exception {
 		mockMvc.perform(get("{apiPath}/summoner-spells/for-troll-build", apiPath)
 				.param("mode", CLASSIC.name()))
 				.andExpect(status().isOk())

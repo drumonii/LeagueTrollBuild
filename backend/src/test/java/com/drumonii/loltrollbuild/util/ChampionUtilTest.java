@@ -2,17 +2,14 @@ package com.drumonii.loltrollbuild.util;
 
 import com.drumonii.loltrollbuild.model.Champion;
 import com.drumonii.loltrollbuild.model.builder.ChampionBuilder;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(JUnit4.class)
-public class ChampionUtilTest {
+class ChampionUtilTest {
 
 	@Test
-	public void determinesIfChampionIsViktor() {
+	void determinesIfChampionIsViktor() {
 		Champion viktor = new ChampionBuilder()
 				.build();
 		assertThat(ChampionUtil.isViktor(viktor)).isFalse();

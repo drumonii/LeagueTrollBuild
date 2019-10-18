@@ -17,6 +17,7 @@ ext {
 }
 
 test {
+    useJUnitPlatform()
     dependsOn ':frontend:karmaTests'
     outputs.dir snippetsDir
 }
@@ -81,9 +82,13 @@ dependencies {
     implementation 'org.apache.commons:commons-collections4:4.4'
 
     // Testing
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
     testImplementation 'org.springframework.security:spring-security-test'
-    testImplementation 'org.springframework.batch:spring-batch-test'
+    testImplementation('org.springframework.batch:spring-batch-test') {
+        exclude group: 'junit', module: 'junit'
+    }
     testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
 }
 

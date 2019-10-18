@@ -8,7 +8,7 @@ import static com.drumonii.loltrollbuild.config.Profiles.DDRAGON;
 import static com.drumonii.loltrollbuild.config.Profiles.TESTING;
 
 @ActiveProfiles({ TESTING, DDRAGON })
-public class MapsRepositoryDdragonTest extends MapsRepositoryTest {
+class MapsRepositoryDdragonTest extends MapsRepositoryTest {
 
 	@Override
 	protected MapsResponse getMapsResponse() {

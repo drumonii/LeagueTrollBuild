@@ -2,22 +2,19 @@ package com.drumonii.loltrollbuild.riot;
 
 import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.model.image.Image;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.Test;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(JUnit4.class)
-public class ImageFetcherTest {
+class ImageFetcherTest {
 
 	private ImageFetcher imageFetcher = new ImageFetcher();
 
 	@Test
-	public void setsImagesSourcesWithInvalidUrl() {
+	void setsImagesSourcesWithInvalidUrl() {
 		Image image1 = new Image("Aatrox.png", "champion0.png", "champion", new byte[0], 0, 0, 48, 48);
 		Image image2 = new Image("Akali.png", "champion0.png", "champion", new byte[0], 96, 0, 48, 48);
 
@@ -30,7 +27,7 @@ public class ImageFetcherTest {
 	}
 
 	@Test
-	public void setsImagesSourcesWithValidUrl() {
+	void setsImagesSourcesWithValidUrl() {
 		Image image1 = new Image("Aatrox.png", "champion0.png", "champion", new byte[0], 0, 0, 48, 48);
 		Image image2 = new Image("Akali.png", "champion0.png", "champion", new byte[0], 96, 0, 48, 48);
 
@@ -43,7 +40,7 @@ public class ImageFetcherTest {
 	}
 
 	@Test
-	public void setImagesSourcesWithNullVersion() {
+	void setImagesSourcesWithNullVersion() {
 		Image image1 = new Image("Aatrox.png", "champion0.png", "champion", new byte[0], 0, 0, 48, 48);
 		Image image2 = new Image("Akali.png", "champion0.png", "champion", new byte[0], 96, 0, 48, 48);
 
@@ -54,7 +51,7 @@ public class ImageFetcherTest {
 	}
 
 	@Test
-	public void setsImageSourceWithInvalidUrl() {
+	void setsImageSourceWithInvalidUrl() {
 		Image image = new Image("Alistar.png", "champion0.png", "champion", new byte[0], 144, 0, 48, 48);
 
 		UriComponentsBuilder builder = UriComponentsBuilder
@@ -66,7 +63,7 @@ public class ImageFetcherTest {
 	}
 
 	@Test
-	public void setsImageSourceWithValidUrl() {
+	void setsImageSourceWithValidUrl() {
 		Image image = new Image("Alistar.png", "champion0.png", "champion", new byte[0], 144, 0, 48, 48);
 
 		UriComponentsBuilder builder = UriComponentsBuilder
@@ -78,7 +75,7 @@ public class ImageFetcherTest {
 	}
 
 	@Test
-	public void setImageSourceWithNullVersion() {
+	void setImageSourceWithNullVersion() {
 		UriComponentsBuilder builder = UriComponentsBuilder
 				.fromHttpUrl("http://ddragon.leagueoflegends.com/cdn/{latestVersion}/img/champion/{champion}");
 

@@ -1,11 +1,11 @@
 package com.drumonii.loltrollbuild.security.login;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -16,8 +16,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 
-@RunWith(MockitoJUnitRunner.class)
-public class JsonAuthenticationFailureHandlerTest {
+@ExtendWith(MockitoExtension.class)
+class JsonAuthenticationFailureHandlerTest {
 
     @Mock
     private ObjectMapper objectMapper;
@@ -26,7 +26,7 @@ public class JsonAuthenticationFailureHandlerTest {
     private JsonAuthenticationFailureHandler failureHandler;
 
     @Test
-    public void onAuthenticationFailure() throws IOException {
+    void onAuthenticationFailure() throws IOException {
         MockHttpServletRequest request = new MockHttpServletRequest();
         MockHttpServletResponse response = new MockHttpServletResponse();
         BadCredentialsException authenticationException = new BadCredentialsException("Bad Credentials");

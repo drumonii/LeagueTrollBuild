@@ -2,18 +2,18 @@ package com.drumonii.loltrollbuild.api.admin;
 
 import com.drumonii.loltrollbuild.annotation.WithMockAdminUser;
 import com.drumonii.loltrollbuild.test.api.AbstractRestControllerTests;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class AdminActuatorEndpointsRestControllerTest extends AbstractRestControllerTests {
+class AdminActuatorEndpointsRestControllerTest extends AbstractRestControllerTests {
 
     @WithMockAdminUser
     @Test
-    public void systemCpuUsageEndpoint() throws Exception {
+    void systemCpuUsageEndpoint() throws Exception {
         mockMvc.perform(get("{apiPath}/admin/actuator/metrics/system.cpu.usage", apiPath))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.measurements.length()", is(1)))
@@ -23,7 +23,7 @@ public class AdminActuatorEndpointsRestControllerTest extends AbstractRestContro
 
     @WithMockAdminUser
     @Test
-    public void systemCpuCountEndpoint() throws Exception {
+    void systemCpuCountEndpoint() throws Exception {
         mockMvc.perform(get("{apiPath}/admin/actuator/metrics/system.cpu.count", apiPath))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.measurements.length()", is(1)))
@@ -33,7 +33,7 @@ public class AdminActuatorEndpointsRestControllerTest extends AbstractRestContro
 
     @WithMockAdminUser
     @Test
-    public void tomcatGlobalErrorEndpoint() throws Exception {
+    void tomcatGlobalErrorEndpoint() throws Exception {
         mockMvc.perform(get("{apiPath}/admin/actuator/metrics/tomcat.global.error", apiPath))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.measurements.length()", is(1)))
@@ -43,7 +43,7 @@ public class AdminActuatorEndpointsRestControllerTest extends AbstractRestContro
 
     @WithMockAdminUser
     @Test
-    public void jvmMemoryUsedEndpoint() throws Exception {
+    void jvmMemoryUsedEndpoint() throws Exception {
         mockMvc.perform(get("{apiPath}/admin/actuator/metrics/jvm.memory.used", apiPath))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.measurements.length()", is(1)))

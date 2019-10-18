@@ -8,7 +8,7 @@ import static com.drumonii.loltrollbuild.config.Profiles.DDRAGON;
 import static com.drumonii.loltrollbuild.config.Profiles.TESTING;
 
 @ActiveProfiles({ TESTING, DDRAGON })
-public class SummonerSpellsRepositoryDdragonTest extends SummonerSpellsRepositoryTest {
+class SummonerSpellsRepositoryDdragonTest extends SummonerSpellsRepositoryTest {
 
 	@Override
 	protected SummonerSpellsResponse getSummonerSpellsResponse() {

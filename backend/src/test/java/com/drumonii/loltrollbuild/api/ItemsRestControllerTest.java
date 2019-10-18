@@ -6,12 +6,10 @@ import com.drumonii.loltrollbuild.riot.api.ItemsResponse;
 import com.drumonii.loltrollbuild.test.api.WebMvcRestTest;
 import com.drumonii.loltrollbuild.util.RandomizeUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.stream.Collectors;
@@ -20,13 +18,10 @@ import static com.drumonii.loltrollbuild.util.GameMapUtil.SUMMONERS_RIFT_SID;
 import static org.hamcrest.Matchers.hasEntry;
 import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@RunWith(SpringRunner.class)
 @WebMvcRestTest(ItemsRestController.class)
-public abstract class ItemsRestControllerTest {
+abstract class ItemsRestControllerTest {
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -42,10 +37,10 @@ public abstract class ItemsRestControllerTest {
 
 	protected ItemsResponse itemsResponse;
 
-	public abstract void before();
+	protected abstract void beforeEach();
 
 	@Test
-	public void getItems() throws Exception {
+	void getItems() throws Exception {
 		itemsResponse.setItems(itemsResponse.getItems().values().stream()
 				.filter(item -> item.getRequiredChampion() != null)
 				.collect(Collectors.toMap(item -> String.valueOf(item.getId()), item -> item)));
@@ -89,7 +84,7 @@ public abstract class ItemsRestControllerTest {
 	}
 
 	@Test
-	public void getItem() throws Exception {
+	void getItem() throws Exception {
 		// find with non existing item Id
 		mockMvc.perform(get("{apiPath}/items/{id}", apiPath, 0))
 				.andExpect(status().isNotFound());
@@ -103,7 +98,7 @@ public abstract class ItemsRestControllerTest {
 	}
 
 	@Test
-	public void getBoots() throws Exception {
+	void getBoots() throws Exception {
 		itemsResponse.setItems(itemsResponse.getItems().values().stream()
 				.filter(item -> item.getFrom() != null && item.getFrom().contains(1001))
 				.collect(Collectors.toMap(item -> String.valueOf(item.getId()), item -> item)));
@@ -121,7 +116,7 @@ public abstract class ItemsRestControllerTest {
 	}
 
 	@Test
-	public void getTrinkets() throws Exception {
+	void getTrinkets() throws Exception {
 		itemsResponse.setItems(itemsResponse.getItems().values().stream()
 				.filter(item -> item.getName() != null && item.getName().contains("Trinket") ||
 						item.getDescription() != null && item.getDescription().contains("Trinket"))
@@ -140,7 +135,7 @@ public abstract class ItemsRestControllerTest {
 	}
 
 	@Test
-	public void getViktorOnly() throws Exception {
+	void getViktorOnly() throws Exception {
 		itemsResponse.setItems(itemsResponse.getItems().values().stream()
 				.filter(item -> item.getRequiredChampion() != null &&
 						item.getRequiredChampion().equals("Viktor"))
@@ -157,7 +152,7 @@ public abstract class ItemsRestControllerTest {
 	}
 
 	@Test
-	public void getForTrollBuild() throws Exception {
+	void getForTrollBuild() throws Exception {
 		itemsRepository.saveAll(itemsResponse.getItems().values());
 
 		mockMvc.perform(get("{apiPath}/items/for-troll-build", apiPath)

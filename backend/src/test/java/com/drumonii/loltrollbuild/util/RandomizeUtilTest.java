@@ -1,8 +1,6 @@
 package com.drumonii.loltrollbuild.util;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.Test;
 import org.springframework.test.annotation.Repeat;
 
 import java.util.ArrayList;
@@ -11,28 +9,28 @@ import java.util.List;
 import java.util.Set;
 
 import static com.drumonii.loltrollbuild.util.RandomizeUtil.*;
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
-@RunWith(JUnit4.class)
-public class RandomizeUtilTest {
+class RandomizeUtilTest {
 
 	private static final List<String> LIST = List.of("string 1", "string 2", "string 3", "string 4", "string 5");
 	private static final Set<Integer> SET = Set.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 
 	@Repeat(100)
 	@Test
-	public void getsRandomFromList() {
+	void getsRandomFromList() {
 		assertThat(getRandom(LIST)).isIn(LIST);
 	}
 
 	@Repeat(100)
 	@Test
-	public void getsRandomFromSet() {
+	void getsRandomFromSet() {
 		assertThat(getRandom(SET)).isIn(SET);
 	}
 
 	@Test
-	public void getsRandomFromEmptyCollection() {
+	void getsRandomFromEmptyCollection() {
 		assertThatExceptionOfType(IllegalArgumentException.class)
 				.isThrownBy(() -> getRandom(new ArrayList<>()))
 				.withMessage("Unable to get a random element from an empty Collection");
@@ -43,7 +41,7 @@ public class RandomizeUtilTest {
 	}
 
 	@Test
-	public void getsRandomFromNull() {
+	void getsRandomFromNull() {
 		assertThatExceptionOfType(IllegalArgumentException.class)
 				.isThrownBy(() -> getRandom(null))
 				.withMessage("Unable to get a random element from an empty Collection");
@@ -51,7 +49,7 @@ public class RandomizeUtilTest {
 
 	@Repeat(100)
 	@Test
-	public void getsRandomsFromList() {
+	void getsRandomsFromList() {
 		assertThat(getRandoms(LIST, 1)).containsAnyElementsOf(LIST)
 				.hasSize(1);
 		assertThat(getRandoms(LIST, LIST.size() + 1)).containsAnyElementsOf(LIST)
@@ -60,7 +58,7 @@ public class RandomizeUtilTest {
 
 	@Repeat(100)
 	@Test
-	public void getsRandomsFromSet() {
+	void getsRandomsFromSet() {
 		assertThat(getRandoms(SET, 1)).containsAnyElementsOf(SET)
 				.hasSize(1);
 		assertThat(getRandoms(SET, SET.size() + 1)).containsAnyElementsOf(SET)
@@ -68,7 +66,7 @@ public class RandomizeUtilTest {
 	}
 
 	@Test
-	public void getsRandomsFromNull() {
+	void getsRandomsFromNull() {
 		assertThatExceptionOfType(IllegalArgumentException.class)
 				.isThrownBy(() -> getRandoms(null, 1))
 				.withMessage("Unable to get random elements from an null Collection");
@@ -76,13 +74,13 @@ public class RandomizeUtilTest {
 
 	@Repeat(100)
 	@Test
-	public void getsRandomLong() {
+	void getsRandomLong() {
 		assertThat(getRandomLong()).isNotZero();
 	}
 
 	@Repeat(100)
 	@Test
-	public void getsRandomInt() {
+	void getsRandomInt() {
 		assertThat(getRandomInt()).isNotZero();
 	}
 

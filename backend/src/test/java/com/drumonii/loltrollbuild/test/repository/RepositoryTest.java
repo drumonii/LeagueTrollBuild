@@ -11,8 +11,8 @@ import org.springframework.context.annotation.Import;
 import java.lang.annotation.*;
 
 /**
- * Annotation that can be used in combination with {@code @RunWith(SpringRunner.class)} for a typical JPA repository test.
- * Can be used when a test focuses <strong>only</strong> on JPA repositories.
+ * Annotation that can be used when a test focuses <strong>only</strong> on JPA repositories.
+ * Using this annotation will disable full auto-configuration and instead apply only configuration relevant to JPA tests.
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)

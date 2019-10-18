@@ -2,15 +2,13 @@ package com.drumonii.loltrollbuild.model;
 
 import com.drumonii.loltrollbuild.model.builder.*;
 import com.drumonii.loltrollbuild.model.image.ChampionImage;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.json.JsonTest;
 import org.springframework.boot.test.json.JacksonTester;
 import org.springframework.boot.test.json.JsonContent;
 import org.springframework.boot.test.json.ObjectContent;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.IOException;
 
@@ -18,16 +16,15 @@ import static com.drumonii.loltrollbuild.config.Profiles.DDRAGON;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Fail.fail;
 
-@RunWith(SpringRunner.class)
 @JsonTest
 @ActiveProfiles({ DDRAGON })
-public class ChampionDdragonTest {
+class ChampionDdragonTest {
 
 	@Autowired
 	private JacksonTester<Champion> jacksonTester;
 
 	@Test
-	public void serializesIntoJson() {
+	void serializesIntoJson() {
 		ChampionInfo info = new ChampionInfoBuilder()
 				.withAttack(5)
 				.withDefense(2)
@@ -109,7 +106,7 @@ public class ChampionDdragonTest {
 	}
 
 	@Test
-	public void deserializesFromJson() {
+	void deserializesFromJson() {
 		String json =
 				"{" +
 				"  \"id\": \"Jax\"," +

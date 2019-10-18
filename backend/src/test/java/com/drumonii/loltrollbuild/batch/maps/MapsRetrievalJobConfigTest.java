@@ -10,14 +10,12 @@ import com.drumonii.loltrollbuild.test.batch.AbstractBatchTests;
 import com.drumonii.loltrollbuild.test.batch.BatchTest;
 import com.drumonii.loltrollbuild.util.RandomizeUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.batch.core.BatchStatus;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.ArrayList;
@@ -31,10 +29,9 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 
-@RunWith(SpringRunner.class)
 @BatchTest(MapsRetrievalJobConfig.class)
 @Import(MapsRetrievalJobTestConfig.class)
-public abstract class MapsRetrievalJobConfigTest extends AbstractBatchTests {
+abstract class MapsRetrievalJobConfigTest extends AbstractBatchTests {
 
 	@MockBean
 	private MapsService mapsService;
@@ -54,7 +51,7 @@ public abstract class MapsRetrievalJobConfigTest extends AbstractBatchTests {
 	protected MapsResponse mapsResponse;
 
 	@Test
-	public void savesNewMaps() throws Exception {
+	void savesNewMaps() throws Exception {
 		given(mapsService.getMaps(eq(latestVersion)))
 				.willReturn(new ArrayList<>(mapsResponse.getMaps().values()));
 
@@ -71,7 +68,7 @@ public abstract class MapsRetrievalJobConfigTest extends AbstractBatchTests {
 	}
 
 	@Test
-	public void savesMapsDifference() throws Exception {
+	void savesMapsDifference() throws Exception {
 		given(mapsService.getMaps(eq(latestVersion)))
 				.willReturn(new ArrayList<>(mapsResponse.getMaps().values()));
 
@@ -98,7 +95,7 @@ public abstract class MapsRetrievalJobConfigTest extends AbstractBatchTests {
 	}
 
 	@Test
-	public void deletesMapsDifference() throws Exception {
+	void deletesMapsDifference() throws Exception {
 		List<GameMap> maps = mapsRepository.saveAll(mapsResponse.getMaps().values());
 
 		GameMap mapToDelete = RandomizeUtil.getRandom(maps);
@@ -120,7 +117,7 @@ public abstract class MapsRetrievalJobConfigTest extends AbstractBatchTests {
 	}
 
 	@Test
-	public void noMapsFromRiotIsNoop() throws Exception {
+	void noMapsFromRiotIsNoop() throws Exception {
 		List<GameMap> maps = mapsRepository.saveAll(mapsResponse.getMaps().values());
 
 		given(mapsService.getMaps(eq(latestVersion)))
@@ -139,7 +136,7 @@ public abstract class MapsRetrievalJobConfigTest extends AbstractBatchTests {
 	}
 
 	@Test
-	public void emptyMapsResponseRetries() throws Exception {
+	void emptyMapsResponseRetries() throws Exception {
 		given(mapsService.getMaps(eq(latestVersion)))
 				.willReturn(new ArrayList<>());
 

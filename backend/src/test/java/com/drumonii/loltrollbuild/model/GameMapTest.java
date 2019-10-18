@@ -2,20 +2,17 @@ package com.drumonii.loltrollbuild.model;
 
 import com.drumonii.loltrollbuild.model.builder.GameMapBuilder;
 import org.apache.commons.collections4.ListUtils;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(JUnit4.class)
-public class GameMapTest {
+class GameMapTest {
 
 	@Test
-	public void cardinality() {
+	void cardinality() {
 		GameMap summonersRiftFromRiot = new GameMapBuilder()
 				.withMapId(11)
 				.withMapName("Summoner's Rift New")

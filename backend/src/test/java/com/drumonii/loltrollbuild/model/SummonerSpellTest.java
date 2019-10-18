@@ -3,20 +3,17 @@ package com.drumonii.loltrollbuild.model;
 import com.drumonii.loltrollbuild.model.SummonerSpell.GameMode;
 import com.drumonii.loltrollbuild.model.builder.SummonerSpellBuilder;
 import org.apache.commons.collections4.ListUtils;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(JUnit4.class)
-public class SummonerSpellTest {
+class SummonerSpellTest {
 
 	@Test
-	public void cardinality() {
+	void cardinality() {
 		SummonerSpell clarityFromRiot = new SummonerSpellBuilder()
 				.withId(13)
 				.withKey("SummonerMana")

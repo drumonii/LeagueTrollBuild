@@ -4,6 +4,7 @@ import com.drumonii.loltrollbuild.config.BatchConfig;
 import com.drumonii.loltrollbuild.config.CacheConfig;
 import com.drumonii.loltrollbuild.config.JpaConfig;
 import com.drumonii.loltrollbuild.config.RiotApiConfig;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
 import org.springframework.boot.autoconfigure.batch.BatchAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.OverrideAutoConfiguration;
@@ -18,18 +19,20 @@ import org.springframework.core.annotation.AliasFor;
 import org.springframework.test.context.BootstrapWith;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.lang.annotation.*;
 
 /**
- * Annotation that can be used in combination with {@code @RunWith(SpringRunner.class)} for a typical batch job
- * test. Can be used when a test focuses <strong>only</strong> on Spring Batch jobs.
+ * Annotation that can be used when a test focuses <strong>only</strong> on Spring Batch jobs.
+ * Using this annotation will disable full auto-configuration and instead apply only configuration relevant to batch tests.
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Inherited
 @BootstrapWith(SpringBootTestContextBootstrapper.class)
+@ExtendWith(SpringExtension.class)
 @OverrideAutoConfiguration(enabled = false)
 @TypeExcludeFilters(BatchTypeExcludeFilter.class)
 @AutoConfigureCache

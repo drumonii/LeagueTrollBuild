@@ -1,8 +1,6 @@
 package com.drumonii.loltrollbuild.model;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -10,11 +8,10 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(JUnit4.class)
-public class VersionTest {
+class VersionTest {
 
 	@Test
-	public void comparable() {
+	void comparable() {
 		Version version1 = Version.patch("5.13.1");
 		Version version2 = Version.patch("6.2.1");
 		assertThat(version1.compareTo(version2)).isEqualTo(-1); // less than

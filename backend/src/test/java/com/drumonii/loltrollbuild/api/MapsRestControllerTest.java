@@ -6,22 +6,17 @@ import com.drumonii.loltrollbuild.riot.api.MapsResponse;
 import com.drumonii.loltrollbuild.test.api.WebMvcRestTest;
 import com.drumonii.loltrollbuild.util.RandomizeUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@RunWith(SpringRunner.class)
 @WebMvcRestTest(MapsRestController.class)
-public abstract class MapsRestControllerTest {
+abstract class MapsRestControllerTest {
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -37,10 +32,10 @@ public abstract class MapsRestControllerTest {
 
 	protected MapsResponse mapsResponse;
 
-	public abstract void before();
+	protected abstract void beforeEach();
 
 	@Test
-	public void getGameMaps() throws Exception {
+	void getGameMaps() throws Exception {
 		GameMap map = RandomizeUtil.getRandom(mapsResponse.getMaps().values());
 
 		// qbe
@@ -65,7 +60,7 @@ public abstract class MapsRestControllerTest {
 	}
 
 	@Test
-	public void getGameMap() throws Exception {
+	void getGameMap() throws Exception {
 		// find with non existing map Id
 		mockMvc.perform(get("{apiPath}/maps/{id}", apiPath, 0))
 				.andExpect(status().isNotFound());
@@ -80,7 +75,7 @@ public abstract class MapsRestControllerTest {
 	}
 
 	@Test
-	public void getForTrollBuild() throws Exception {
+	void getForTrollBuild() throws Exception {
 		mockMvc.perform(get("{apiPath}/maps/for-troll-build", apiPath))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))

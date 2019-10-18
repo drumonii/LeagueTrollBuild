@@ -3,8 +3,7 @@ package com.drumonii.loltrollbuild.repository;
 import com.drumonii.loltrollbuild.model.BatchJobInstance;
 import com.drumonii.loltrollbuild.test.batch.BatchDaoTestConfig;
 import com.drumonii.loltrollbuild.test.repository.RepositoryTest;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.batch.core.*;
 import org.springframework.batch.core.repository.dao.JobExecutionDao;
 import org.springframework.batch.core.repository.dao.JobInstanceDao;
@@ -13,7 +12,6 @@ import org.springframework.context.annotation.Import;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Order;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -21,10 +19,9 @@ import java.util.Date;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(SpringRunner.class)
 @Import(BatchDaoTestConfig.class)
 @RepositoryTest
-public class BatchJobInstancesRepositoryTest {
+class BatchJobInstancesRepositoryTest {
 
     @Autowired
     private BatchJobInstancesRepository batchJobInstancesRepository;
@@ -36,7 +33,7 @@ public class BatchJobInstancesRepositoryTest {
     private JobExecutionDao jobExecutionDao;
 
     @Test
-    public void getsMostRecentAllRetrievalsJob() {
+    void getsMostRecentAllRetrievalsJob() {
         PageRequest pageRequest = PageRequest.of(0, 1, Sort.by(Order.desc("jobExecution.startTime")));
 
         // Save a FAILED allRetrievalsJob as least recent

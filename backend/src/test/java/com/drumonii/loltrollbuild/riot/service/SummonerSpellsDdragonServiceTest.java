@@ -6,9 +6,8 @@ import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.riot.api.RiotApiProperties;
 import com.drumonii.loltrollbuild.test.json.JsonTestFilesUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,7 +17,6 @@ import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -34,12 +32,11 @@ import static org.springframework.test.web.client.match.MockRestRequestMatchers.
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withServerError;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 
-@RunWith(SpringRunner.class)
 @RestClientTest({ SummonerSpellsService.class, VersionsService.class })
 @Import(RiotApiConfig.class)
 @EnableConfigurationProperties(RiotApiProperties.class)
 @ActiveProfiles({ TESTING, DDRAGON })
-public class SummonerSpellsDdragonServiceTest {
+class SummonerSpellsDdragonServiceTest {
 
 	@Autowired
 	private SummonerSpellsService summonerSpellsService;
@@ -66,8 +63,8 @@ public class SummonerSpellsDdragonServiceTest {
 
 	private Version latestVersion;
 
-	@Before
-	public void before() {
+	@BeforeEach
+	void beforeEach() {
 		JsonTestFilesUtil jsonTestFilesUtil = new JsonTestFilesUtil(objectMapper);
 
 		summonerSpellsJson = JsonTestFilesUtil.getSummonerSpellsJson();
@@ -78,7 +75,7 @@ public class SummonerSpellsDdragonServiceTest {
 	}
 
 	@Test
-	public void getSummonerSpellsFromVersion() {
+	void getSummonerSpellsFromVersion() {
 		mockServer.expect(requestTo(summonerSpellsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
 				.andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(summonerSpellsJson, MediaType.APPLICATION_JSON));
@@ -90,7 +87,7 @@ public class SummonerSpellsDdragonServiceTest {
 	}
 
 	@Test
-	public void getSummonerSpellsFromVersionWithRestClientException() {
+	void getSummonerSpellsFromVersionWithRestClientException() {
 		mockServer.expect(requestTo(summonerSpellsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
 				.andExpect(method(HttpMethod.GET))
 				.andRespond(withServerError());
@@ -102,7 +99,7 @@ public class SummonerSpellsDdragonServiceTest {
 	}
 
 	@Test
-	public void getSummonerSpell() {
+	void getSummonerSpell() {
 		int smiteId = 11;
 
 		mockServer.expect(requestTo(versionsUri.toString()))
@@ -120,7 +117,7 @@ public class SummonerSpellsDdragonServiceTest {
 	}
 
 	@Test
-	public void getSummonerSpellWithRestClientException() {
+	void getSummonerSpellWithRestClientException() {
 		int smiteId = 11;
 
 		mockServer.expect(requestTo(versionsUri.toString()))
@@ -138,7 +135,7 @@ public class SummonerSpellsDdragonServiceTest {
 	}
 
 	@Test
-	public void getSummonerSpellWithRestClientExceptionFromVersions() {
+	void getSummonerSpellWithRestClientExceptionFromVersions() {
 		int smiteId = 11;
 
 		mockServer.expect(requestTo(versionsUri.toString()))

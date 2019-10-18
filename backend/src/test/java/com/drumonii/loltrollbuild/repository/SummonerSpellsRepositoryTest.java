@@ -4,20 +4,17 @@ import com.drumonii.loltrollbuild.model.SummonerSpell;
 import com.drumonii.loltrollbuild.riot.api.SummonerSpellsResponse;
 import com.drumonii.loltrollbuild.test.repository.RepositoryTest;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
 import static com.drumonii.loltrollbuild.model.SummonerSpell.GameMode.CLASSIC;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(SpringRunner.class)
 @RepositoryTest
-public abstract class SummonerSpellsRepositoryTest {
+abstract class SummonerSpellsRepositoryTest {
 
 	@Autowired
 	private SummonerSpellsRepository summonerSpellsRepository;
@@ -29,14 +26,14 @@ public abstract class SummonerSpellsRepositoryTest {
 
 	protected abstract SummonerSpellsResponse getSummonerSpellsResponse();
 
-	@Before
-	public void before() {
+	@BeforeEach
+	void beforeEach() {
 		summonerSpellsResponse = getSummonerSpellsResponse();
 		summonerSpellsRepository.saveAll(summonerSpellsResponse.getSummonerSpells().values());
 	}
 
 	@Test
-	public void forTrollBuild() {
+	void forTrollBuild() {
 		SummonerSpell cleanse = summonerSpellsResponse.getSummonerSpells().get("SummonerBoost");
 		SummonerSpell exhaust = summonerSpellsResponse.getSummonerSpells().get("SummonerExhaust");
 		SummonerSpell flash = summonerSpellsResponse.getSummonerSpells().get("SummonerFlash");

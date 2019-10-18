@@ -8,7 +8,7 @@ import static com.drumonii.loltrollbuild.config.Profiles.DDRAGON;
 import static com.drumonii.loltrollbuild.config.Profiles.TESTING;
 
 @ActiveProfiles({ TESTING, DDRAGON })
-public class ChampionsRepositoryDdragonTest extends ChampionsRepositoryTest {
+class ChampionsRepositoryDdragonTest extends ChampionsRepositoryTest {
 
 	@Override
 	protected ChampionsResponse getChampionsResponse() {

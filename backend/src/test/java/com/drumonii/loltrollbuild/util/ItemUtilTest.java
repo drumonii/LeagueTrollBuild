@@ -1,16 +1,13 @@
 package com.drumonii.loltrollbuild.util;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(JUnit4.class)
-public class ItemUtilTest {
+class ItemUtilTest {
 
 	@Test
-	public void determinesIfRequiresAllyOrnn() {
+	void determinesIfRequiresAllyOrnn() {
 		assertThat(ItemUtil.requiresAllyOrnn(null)).isFalse();
 
 		String colloq = "ie;Ornn;forge;Masterwork";
