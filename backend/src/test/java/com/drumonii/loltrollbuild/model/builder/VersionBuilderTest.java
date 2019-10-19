@@ -2,6 +2,9 @@ package com.drumonii.loltrollbuild.model.builder;
 
 import com.drumonii.loltrollbuild.model.Version;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.List;
@@ -37,17 +40,15 @@ class VersionBuilderTest {
         assertThat(version.getRevision()).as("Revision").isEqualTo(0);
     }
 
-    @Test
-    void throwsIllegalArgumentExceptionFromBuildingWithInvalidPatches() {
-        List<String> patches = Arrays.asList("a.b.c", "", null);
-
-        for (String patch : patches) {
-            assertThatExceptionOfType(IllegalArgumentException.class)
-                    .isThrownBy(() -> new VersionBuilder()
-                            .fromPatch(patch)
-                            .build())
-                    .withMessage("Failed to build the Version from the provided patch: '%s'", patch);
-        }
+    @ParameterizedTest(name = "patch=''{0}''")
+    @NullAndEmptySource
+    @ValueSource(strings = { "a.b.c" })
+    void throwsIllegalArgumentExceptionFromBuildingWithInvalidPatches(String patch) {
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> new VersionBuilder()
+                        .fromPatch(patch)
+                        .build())
+                .withMessage("Failed to build the Version from the provided patch: '%s'", patch);
     }
 
 }
