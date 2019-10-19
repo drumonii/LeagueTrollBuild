@@ -5,8 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.json.JsonTest;
 import org.springframework.boot.test.json.JacksonTester;
 import org.springframework.boot.test.json.JsonContent;
-import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.IOException;
 
@@ -21,8 +21,12 @@ class AdminUserDetailsTest {
 
     @Test
     void serializesIntoJson() {
-        User user = new User("username", "password", AuthorityUtils.createAuthorityList("ROLE_ADMIN"));
-        AdminUserDetails adminUserDetails = new AdminUserDetails(user);
+        UserDetails user = User.builder()
+                .username("username")
+                .password("password")
+                .roles("ADMIN")
+                .build();
+        AdminUserDetails adminUserDetails = AdminUserDetails.from(user);
 
         JsonContent<AdminUserDetails> jsonContent = null;
         try {

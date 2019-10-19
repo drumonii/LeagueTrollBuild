@@ -89,7 +89,7 @@ public class LogoutResponse {
 
         public SuccessfulLogoutResponseBuilder fromAuthentication(Authentication authentication) {
             User user = (User) authentication.getPrincipal();
-            adminUserDetails = new AdminUserDetails(user);
+            adminUserDetails = AdminUserDetails.from(user);
             return this;
         }
 

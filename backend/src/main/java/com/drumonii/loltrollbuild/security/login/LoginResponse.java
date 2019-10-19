@@ -92,7 +92,7 @@ public class LoginResponse {
 
         public SuccessfulLoginResponseBuilder fromAuthentication(Authentication authentication) {
             User user = (User) authentication.getPrincipal();
-            adminUserDetails = new AdminUserDetails(user);
+            adminUserDetails = AdminUserDetails.from(user);
             return this;
         }
 

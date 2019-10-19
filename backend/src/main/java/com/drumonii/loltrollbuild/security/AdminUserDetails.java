@@ -12,12 +12,16 @@ import java.util.Collection;
  */
 public class AdminUserDetails extends User {
 
-    public AdminUserDetails(String username, String password, Collection<? extends GrantedAuthority> authorities) {
+    private AdminUserDetails(String username, String password, Collection<? extends GrantedAuthority> authorities) {
         super(username, password, authorities);
     }
 
-    public AdminUserDetails(User user) {
+    private AdminUserDetails(UserDetails user) {
         this(user.getUsername(), user.getUsername(), user.getAuthorities());
+    }
+
+    public static AdminUserDetails from(UserDetails user) {
+        return new AdminUserDetails(user);
     }
 
     @JsonIgnore

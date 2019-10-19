@@ -27,7 +27,7 @@ public class AdminAuthenticationRestController {
     public AdminUserDetails getAuthentication(@AuthenticationPrincipal User userDetails) {
         User user = Optional.ofNullable(userDetails)
                 .orElseThrow(() -> new BadRequestException("Authentication was not found"));
-        return new AdminUserDetails(user);
+        return AdminUserDetails.from(user);
     }
 
 }
