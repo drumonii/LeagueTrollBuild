@@ -7,8 +7,7 @@ import com.drumonii.loltrollbuild.riot.api.ChampionsResponse;
 import com.drumonii.loltrollbuild.riot.api.RiotApiProperties;
 import com.drumonii.loltrollbuild.test.json.JsonTestFilesUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -84,197 +83,214 @@ class ChampionsDdragonServiceTest {
 		latestVersion = versions.get(0);
 	}
 
-	@Test
-	void getChampionsFromVersion() {
-		mockServer.expect(requestTo(championsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
-				.andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(championsJson, MediaType.APPLICATION_JSON));
+	@AfterEach
+	void afterEach() {
+		mockServer.reset();
+	}
 
-		List<String> championKeys = championsResponse.getChampions().values().stream()
-				.map(Champion::getKey)
-				.collect(Collectors.toList());
+	@Nested
+	@DisplayName("getChampions")
+	class GetChampions {
 
-		for (String championKey : championKeys) {
-			mockServer.expect(requestTo(championUri.buildAndExpand(latestVersion.getPatch(), locale, championKey).toString()))
+		@Test
+		void fromVersion() {
+			mockServer.expect(requestTo(championsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
 					.andExpect(method(HttpMethod.GET))
-					.andRespond(withSuccess(JsonTestFilesUtil.getChampionJson(championKey), MediaType.APPLICATION_JSON));
+					.andRespond(withSuccess(championsJson, MediaType.APPLICATION_JSON));
+
+			List<String> championKeys = championsResponse.getChampions().values().stream()
+					.map(Champion::getKey)
+					.collect(Collectors.toList());
+
+			for (String championKey : championKeys) {
+				mockServer.expect(requestTo(championUri.buildAndExpand(latestVersion.getPatch(), locale, championKey).toString()))
+						.andExpect(method(HttpMethod.GET))
+						.andRespond(withSuccess(JsonTestFilesUtil.getChampionJson(championKey), MediaType.APPLICATION_JSON));
+			}
+
+			List<Champion> champions = championsService.getChampions(latestVersion);
+			mockServer.verify();
+
+			assertThat(champions).isNotEmpty();
+			for (Champion champion : champions) {
+				assertThat(champion.getPassive()).isNotNull();
+				assertThat(champion.getSpells()).isNotEmpty();
+			}
 		}
 
-		List<Champion> champions = championsService.getChampions(latestVersion);
-		mockServer.verify();
+		@Test
+		void fromVersionWithRestClientException() {
+			mockServer.expect(requestTo(championsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
+					.andExpect(method(HttpMethod.GET))
+					.andRespond(withServerError());
 
-		assertThat(champions).isNotEmpty();
-		for (Champion champion : champions) {
-			assertThat(champion.getPassive()).isNotNull();
-			assertThat(champion.getSpells()).isNotEmpty();
+			List<Champion> champions = championsService.getChampions(latestVersion);
+			mockServer.verify();
+
+			assertThat(champions).isEmpty();
 		}
+
 	}
 
-	@Test
-	void getChampionsFromVersionWithRestClientException() {
-		mockServer.expect(requestTo(championsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
-				.andExpect(method(HttpMethod.GET))
-				.andRespond(withServerError());
+	@Nested
+	@DisplayName("getChampion")
+	class GetChampion {
 
-		List<Champion> champions = championsService.getChampions(latestVersion);
-		mockServer.verify();
+		@Test
+		void fromChampionId() {
+			String trundle = "Trundle";
+			int trundleId = 48;
+			String trundleJson =
+					"{" + // simplified JSON for brevity
+					"  \"type\": \"champion\"," +
+					"  \"format\": \"standAloneComplex\"," +
+					"  \"version\": \""+ latestVersion.getPatch() + "\"," +
+					"  \"data\": {" +
+					"    \"Trundle\": {" +
+					"      \"id\": \"Trundle\"," +
+					"      \"key\": \"48\"," +
+					"      \"name\": \"Trundle\"," +
+					"      \"title\": \"the Troll King\"," +
+					"      \"partype\": \"Mana\"," +
+					"      \"info\": {" +
+					"        \"attack\": 7," +
+					"        \"defense\": 6," +
+					"        \"magic\": 2," +
+					"        \"difficulty\": 5" +
+					"      }," +
+					"      \"spells\": []," +
+					"      \"passive\": {" +
+					"        \"name\": \"King's Tribute\"," +
+					"        \"description\": \"When an enemy unit dies near Trundle, he heals for a percent of its maximum Health.\"," +
+					"        \"image\": {" +
+					"          \"full\": \"Trundle_Passive.png\"," +
+					"          \"sprite\": \"passive3.png\"," +
+					"          \"group\": \"passive\"," +
+					"          \"x\": 144," +
+					"          \"y\": 96," +
+					"          \"w\": 48," +
+					"          \"h\": 48" +
+					"        }" +
+					"      }," +
+					"      \"image\": {" +
+					"        \"full\": \"Trundle.png\"," +
+					"        \"sprite\": \"champion3.png\"," +
+					"        \"group\": \"champion\"," +
+					"        \"x\": 144," +
+					"        \"y\": 96," +
+					"        \"w\": 48," +
+					"        \"h\": 48" +
+					"      }," +
+					"      \"tags\": [" +
+					"        \"Fighter\"," +
+					"        \"Tank\"" +
+					"      ]" +
+					"    }" +
+					"  }" +
+					"}";
 
-		assertThat(champions).isEmpty();
-	}
+			mockServer.expect(requestTo(versionsUri.toString()))
+					.andExpect(method(HttpMethod.GET))
+					.andRespond(withSuccess(versionsJson, MediaType.parseMediaType("text/json;charset=UTF-8")));
 
-	@Test
-	void getChampion() {
-		String trundle = "Trundle";
-		int trundleId = 48;
-		String trundleJson =
-				"{" + // simplified JSON for brevity
-				"  \"type\": \"champion\"," +
-				"  \"format\": \"standAloneComplex\"," +
-				"  \"version\": \""+ latestVersion.getPatch() + "\"," +
-				"  \"data\": {" +
-				"    \"Trundle\": {" +
-				"      \"id\": \"Trundle\"," +
-				"      \"key\": \"48\"," +
-				"      \"name\": \"Trundle\"," +
-				"      \"title\": \"the Troll King\"," +
-				"      \"partype\": \"Mana\"," +
-				"      \"info\": {" +
-				"        \"attack\": 7," +
-				"        \"defense\": 6," +
-				"        \"magic\": 2," +
-				"        \"difficulty\": 5" +
-				"      }," +
-				"      \"spells\": []," +
-				"      \"passive\": {" +
-				"        \"name\": \"King's Tribute\"," +
-				"        \"description\": \"When an enemy unit dies near Trundle, he heals for a percent of its maximum Health.\"," +
-				"        \"image\": {" +
-				"          \"full\": \"Trundle_Passive.png\"," +
-				"          \"sprite\": \"passive3.png\"," +
-				"          \"group\": \"passive\"," +
-				"          \"x\": 144," +
-				"          \"y\": 96," +
-				"          \"w\": 48," +
-				"          \"h\": 48" +
-				"        }" +
-				"      }," +
-				"      \"image\": {" +
-				"        \"full\": \"Trundle.png\"," +
-				"        \"sprite\": \"champion3.png\"," +
-				"        \"group\": \"champion\"," +
-				"        \"x\": 144," +
-				"        \"y\": 96," +
-				"        \"w\": 48," +
-				"        \"h\": 48" +
-				"      }," +
-				"      \"tags\": [" +
-				"        \"Fighter\"," +
-				"        \"Tank\"" +
-				"      ]" +
-				"    }" +
-				"  }" +
-				"}";
+			mockServer.expect(requestTo(championsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
+					.andExpect(method(HttpMethod.GET))
+					.andRespond(withSuccess(championsJson, MediaType.APPLICATION_JSON));
 
-		mockServer.expect(requestTo(versionsUri.toString()))
-				.andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(versionsJson, MediaType.parseMediaType("text/json;charset=UTF-8")));
+			mockServer.expect(requestTo(championUri.buildAndExpand(latestVersion.getPatch(), locale, trundle).toString()))
+					.andExpect(method(HttpMethod.GET))
+					.andRespond(withSuccess(trundleJson, MediaType.APPLICATION_JSON));
 
-		mockServer.expect(requestTo(championsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
-				.andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(championsJson, MediaType.APPLICATION_JSON));
+			Champion champion = championsService.getChampion(trundleId);
+			mockServer.verify();
 
-		mockServer.expect(requestTo(championUri.buildAndExpand(latestVersion.getPatch(), locale, trundle).toString()))
-				.andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(trundleJson, MediaType.APPLICATION_JSON));
+			assertThat(champion).isNotNull();
+		}
 
-		Champion champion = championsService.getChampion(trundleId);
-		mockServer.verify();
+		@Test
+		void fromChampionIdWithNotExistingId() {
+			mockServer.expect(requestTo(versionsUri.toString()))
+					.andExpect(method(HttpMethod.GET))
+					.andRespond(withSuccess(versionsJson, MediaType.parseMediaType("text/json;charset=UTF-8")));
 
-		assertThat(champion).isNotNull();
-	}
+			mockServer.expect(requestTo(championsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
+					.andExpect(method(HttpMethod.GET))
+					.andRespond(withSuccess(championsJson, MediaType.APPLICATION_JSON));
 
-	@Test
-	void getChampionWithNotExistingId() {
-		mockServer.expect(requestTo(versionsUri.toString()))
-				.andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(versionsJson, MediaType.parseMediaType("text/json;charset=UTF-8")));
+			mockServer.expect(never(), requestTo(championUri.buildAndExpand(latestVersion.getPatch(), locale, 0).toString()))
+					.andExpect(method(HttpMethod.GET));
 
-		mockServer.expect(requestTo(championsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
-				.andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(championsJson, MediaType.APPLICATION_JSON));
+			Champion champion = championsService.getChampion(0);
+			mockServer.verify();
 
-		mockServer.expect(never(), requestTo(championUri.buildAndExpand(latestVersion.getPatch(), locale, 0).toString()))
-				.andExpect(method(HttpMethod.GET));
+			assertThat(champion).isNull();
+		}
 
-		Champion champion = championsService.getChampion(0);
-		mockServer.verify();
+		@Test
+		void fromChampionIdnWithRestClientException() {
+			String akali = "Akali";
+			int akaliId = 84;
 
-		assertThat(champion).isNull();
-	}
+			mockServer.expect(requestTo(versionsUri.toString()))
+					.andExpect(method(HttpMethod.GET))
+					.andRespond(withSuccess(versionsJson, MediaType.parseMediaType("text/json;charset=UTF-8")));
 
-	@Test
-	void getChampionWithRestClientException() {
-		String akali = "Akali";
-		int akaliId = 84;
+			mockServer.expect(requestTo(championsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
+					.andExpect(method(HttpMethod.GET))
+					.andRespond(withSuccess(championsJson, MediaType.APPLICATION_JSON));
 
-		mockServer.expect(requestTo(versionsUri.toString()))
-				.andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(versionsJson, MediaType.parseMediaType("text/json;charset=UTF-8")));
+			mockServer.expect(requestTo(championUri.buildAndExpand(latestVersion.getPatch(), locale, akali).toString()))
+					.andExpect(method(HttpMethod.GET))
+					.andRespond(withServerError());
 
-		mockServer.expect(requestTo(championsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
-				.andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(championsJson, MediaType.APPLICATION_JSON));
+			Champion champion = championsService.getChampion(akaliId);
+			mockServer.verify();
 
-		mockServer.expect(requestTo(championUri.buildAndExpand(latestVersion.getPatch(), locale, akali).toString()))
-				.andExpect(method(HttpMethod.GET))
-				.andRespond(withServerError());
+			assertThat(champion).isNull();
+		}
 
-		Champion champion = championsService.getChampion(akaliId);
-		mockServer.verify();
+		@Test
+		void fromChampionIdWithRestClientExceptionFromChampions() {
+			String akali = "Akali";
+			int akaliId = 84;
 
-		assertThat(champion).isNull();
-	}
+			mockServer.expect(requestTo(versionsUri.toString()))
+					.andExpect(method(HttpMethod.GET))
+					.andRespond(withSuccess(versionsJson, MediaType.parseMediaType("text/json;charset=UTF-8")));
 
-	@Test
-	void getChampionWithRestClientExceptionFromChampions() {
-		String akali = "Akali";
-		int akaliId = 84;
+			mockServer.expect(requestTo(championsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
+					.andExpect(method(HttpMethod.GET))
+					.andRespond(withServerError());
 
-		mockServer.expect(requestTo(versionsUri.toString()))
-				.andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(versionsJson, MediaType.parseMediaType("text/json;charset=UTF-8")));
+			mockServer.expect(never(), requestTo(championUri.buildAndExpand(latestVersion.getPatch(), locale, akali).toString()))
+					.andExpect(method(HttpMethod.GET));
 
-		mockServer.expect(requestTo(championsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
-				.andExpect(method(HttpMethod.GET))
-				.andRespond(withServerError());
+			Champion champion = championsService.getChampion(akaliId);
+			mockServer.verify();
 
-		mockServer.expect(never(), requestTo(championUri.buildAndExpand(latestVersion.getPatch(), locale, akali).toString()))
-				.andExpect(method(HttpMethod.GET));
+			assertThat(champion).isNull();
+		}
 
-		Champion champion = championsService.getChampion(akaliId);
-		mockServer.verify();
+		@Test
+		void fromChampionIdWithRestClientExceptionFromVersions() {
+			String akali = "Akali";
+			int akaliId = 84;
 
-		assertThat(champion).isNull();
-	}
+			mockServer.expect(requestTo(versionsUri.toString())).andExpect(method(HttpMethod.GET))
+					.andRespond(withServerError());
 
-	@Test
-	void getChampionWithRestClientExceptionFromVersions() {
-		String akali = "Akali";
-		int akaliId = 84;
+			mockServer.expect(never(), requestTo(championsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
+					.andExpect(method(HttpMethod.GET));
 
-		mockServer.expect(requestTo(versionsUri.toString())).andExpect(method(HttpMethod.GET))
-				.andRespond(withServerError());
+			mockServer.expect(never(), requestTo(championUri.buildAndExpand(latestVersion.getPatch(), locale, akali).toString()))
+					.andExpect(method(HttpMethod.GET));
 
-		mockServer.expect(never(), requestTo(championsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
-				.andExpect(method(HttpMethod.GET));
+			Champion champion = championsService.getChampion(akaliId);
+			mockServer.verify();
 
-		mockServer.expect(never(), requestTo(championUri.buildAndExpand(latestVersion.getPatch(), locale, akali).toString()))
-				.andExpect(method(HttpMethod.GET));
+			assertThat(champion).isNull();
+		}
 
-		Champion champion = championsService.getChampion(akaliId);
-		mockServer.verify();
-
-		assertThat(champion).isNull();
 	}
 
 }

@@ -5,8 +5,7 @@ import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.riot.api.RiotApiProperties;
 import com.drumonii.loltrollbuild.test.json.JsonTestFilesUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -60,52 +59,69 @@ class VersionsDdragonServiceTest {
 				.count();
 	}
 
-	@Test
-	void getsVersions() throws Exception {
-		mockServer.expect(requestTo(versionsUri.toString()))
-				.andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(objectMapper.writeValueAsString(versions), MediaType.parseMediaType("text/json;charset=UTF-8")));
-
-		List<Version> versions = versionsService.getVersions();
-		mockServer.verify();
-
-		assertThat(versions).isNotEmpty();
-		assertThat(versions).hasSize(this.versions.size() - (int) lolpatchStyleSize); // see if lolpatch_7.17 style was filtered out
+	@AfterEach
+	void afterEach() {
+		mockServer.reset();
 	}
 
-	@Test
-	void getsVersionsWithRestClientException() {
-		mockServer.expect(requestTo(versionsUri.toString()))
-				.andRespond(withServerError());
+	@Nested
+	@DisplayName("getVersions")
+	class GetVersions {
 
-		List<Version> versions = versionsService.getVersions();
-		mockServer.verify();
+		@Test
+		void getsAll() throws Exception {
+			mockServer.expect(requestTo(versionsUri.toString()))
+					.andExpect(method(HttpMethod.GET))
+					.andRespond(withSuccess(objectMapper.writeValueAsString(versions), MediaType.parseMediaType("text/json;charset=UTF-8")));
 
-		assertThat(versions).isEmpty();
+			List<Version> allVersions = versionsService.getVersions();
+			mockServer.verify();
+
+			assertThat(allVersions).isNotEmpty();
+			assertThat(allVersions).hasSize(versions.size() - (int) lolpatchStyleSize); // see if lolpatch_7.17 style was filtered out
+		}
+
+		@Test
+		void withRestClientException() {
+			mockServer.expect(requestTo(versionsUri.toString()))
+					.andRespond(withServerError());
+
+			List<Version> versions = versionsService.getVersions();
+			mockServer.verify();
+
+			assertThat(versions).isEmpty();
+		}
+
 	}
 
-	@Test
-	void getsLatestVersion() throws Exception {
-		mockServer.expect(requestTo(versionsUri.toString()))
-				.andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(objectMapper.writeValueAsString(versions), MediaType.parseMediaType("text/json;charset=UTF-8")));
+	@Nested
+	@DisplayName("getLatestVersion")
+	class GetsVersions {
 
-		Version version = versionsService.getLatestVersion();
-		mockServer.verify();
+		@Test
+		void getsLatest() throws Exception {
+			mockServer.expect(requestTo(versionsUri.toString()))
+					.andExpect(method(HttpMethod.GET))
+					.andRespond(withSuccess(objectMapper.writeValueAsString(versions), MediaType.parseMediaType("text/json;charset=UTF-8")));
 
-		assertThat(version).isNotNull();
-		assertThat(version).isEqualTo(versions.get(0));
-	}
+			Version version = versionsService.getLatestVersion();
+			mockServer.verify();
 
-	@Test
-	void getsLatestVersionWithRestClientException() {
-		mockServer.expect(requestTo(versionsUri.toString()))
-				.andRespond(withServerError());
+			assertThat(version).isNotNull();
+			assertThat(version).isEqualTo(versions.get(0));
+		}
 
-		Version version = versionsService.getLatestVersion();
-		mockServer.verify();
+		@Test
+		void withRestClientException() {
+			mockServer.expect(requestTo(versionsUri.toString()))
+					.andRespond(withServerError());
 
-		assertThat(version).isNull();
+			Version version = versionsService.getLatestVersion();
+			mockServer.verify();
+
+			assertThat(version).isNull();
+		}
+
 	}
 
 }

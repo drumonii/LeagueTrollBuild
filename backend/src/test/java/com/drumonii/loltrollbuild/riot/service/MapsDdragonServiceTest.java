@@ -7,8 +7,7 @@ import com.drumonii.loltrollbuild.riot.api.RiotApiProperties;
 import com.drumonii.loltrollbuild.test.json.JsonTestFilesUtil;
 import com.drumonii.loltrollbuild.util.GameMapUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -75,75 +74,92 @@ class MapsDdragonServiceTest {
 		latestVersion = versions.get(0);
 	}
 
-	@Test
-	void getMapsFromVersion() {
-		mockServer.expect(requestTo(mapsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
-				.andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(mapsJson, MediaType.APPLICATION_JSON));
-
-		List<GameMap> maps = mapsService.getMaps(latestVersion);
-		mockServer.verify();
-
-		assertThat(maps).isNotEmpty();
+	@AfterEach
+	void afterEach() {
+		mockServer.reset();
 	}
 
-	@Test
-	void getMapsFromVersionWithRestClientException() {
-		mockServer.expect(requestTo(mapsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
-				.andExpect(method(HttpMethod.GET))
-				.andRespond(withServerError());
+	@Nested
+	@DisplayName("getMaps")
+	class GetsVersions {
 
-		List<GameMap> maps = mapsService.getMaps(latestVersion);
-		mockServer.verify();
+		@Test
+		void fromVersion() {
+			mockServer.expect(requestTo(mapsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
+					.andExpect(method(HttpMethod.GET))
+					.andRespond(withSuccess(mapsJson, MediaType.APPLICATION_JSON));
 
-		assertThat(maps).isEmpty();
+			List<GameMap> maps = mapsService.getMaps(latestVersion);
+			mockServer.verify();
+
+			assertThat(maps).isNotEmpty();
+		}
+
+		@Test
+		void fromVersionWithRestClientException() {
+			mockServer.expect(requestTo(mapsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
+					.andExpect(method(HttpMethod.GET))
+					.andRespond(withServerError());
+
+			List<GameMap> maps = mapsService.getMaps(latestVersion);
+			mockServer.verify();
+
+			assertThat(maps).isEmpty();
+		}
+
 	}
 
-	@Test
-	void getMap() {
-		mockServer.expect(requestTo(versionsUri.toString()))
-				.andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(versionsJson, MediaType.parseMediaType("text/json;charset=UTF-8")));
+	@Nested
+	@DisplayName("getMap")
+	class GetMap {
 
-		mockServer.expect(requestTo(mapsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
-				.andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(mapsJson, MediaType.APPLICATION_JSON));
+		@Test
+		void fromMapId() {
+			mockServer.expect(requestTo(versionsUri.toString()))
+					.andExpect(method(HttpMethod.GET))
+					.andRespond(withSuccess(versionsJson, MediaType.parseMediaType("text/json;charset=UTF-8")));
 
-		GameMap map = mapsService.getMap(GameMapUtil.SUMMONERS_RIFT_ID);
-		mockServer.verify();
+			mockServer.expect(requestTo(mapsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
+					.andExpect(method(HttpMethod.GET))
+					.andRespond(withSuccess(mapsJson, MediaType.APPLICATION_JSON));
 
-		assertThat(map).isNotNull();
-	}
+			GameMap map = mapsService.getMap(GameMapUtil.SUMMONERS_RIFT_ID);
+			mockServer.verify();
 
-	@Test
-	void getMapWithRestClientException() {
-		mockServer.expect(requestTo(versionsUri.toString()))
-				.andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(versionsJson, MediaType.parseMediaType("text/json;charset=UTF-8")));
+			assertThat(map).isNotNull();
+		}
 
-		mockServer.expect(requestTo(mapsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
-				.andExpect(method(HttpMethod.GET))
-				.andRespond(withServerError());
+		@Test
+		void fromMapIdWithRestClientException() {
+			mockServer.expect(requestTo(versionsUri.toString()))
+					.andExpect(method(HttpMethod.GET))
+					.andRespond(withSuccess(versionsJson, MediaType.parseMediaType("text/json;charset=UTF-8")));
 
-		GameMap map = mapsService.getMap(GameMapUtil.SUMMONERS_RIFT_ID);
-		mockServer.verify();
+			mockServer.expect(requestTo(mapsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
+					.andExpect(method(HttpMethod.GET))
+					.andRespond(withServerError());
 
-		assertThat(map).isNull();
-	}
+			GameMap map = mapsService.getMap(GameMapUtil.SUMMONERS_RIFT_ID);
+			mockServer.verify();
 
-	@Test
-	void getMapWithRestClientExceptionFromVersions() {
-		mockServer.expect(requestTo(versionsUri.toString()))
-				.andExpect(method(HttpMethod.GET))
-				.andRespond(withServerError());
+			assertThat(map).isNull();
+		}
 
-		mockServer.expect(never(), requestTo(mapsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
-				.andExpect(method(HttpMethod.GET));
+		@Test
+		void fromMapIdWithRestClientExceptionFromVersions() {
+			mockServer.expect(requestTo(versionsUri.toString()))
+					.andExpect(method(HttpMethod.GET))
+					.andRespond(withServerError());
 
-		GameMap map = mapsService.getMap(GameMapUtil.SUMMONERS_RIFT_ID);
-		mockServer.verify();
+			mockServer.expect(never(), requestTo(mapsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
+					.andExpect(method(HttpMethod.GET));
 
-		assertThat(map).isNull();
+			GameMap map = mapsService.getMap(GameMapUtil.SUMMONERS_RIFT_ID);
+			mockServer.verify();
+
+			assertThat(map).isNull();
+		}
+
 	}
 
 }

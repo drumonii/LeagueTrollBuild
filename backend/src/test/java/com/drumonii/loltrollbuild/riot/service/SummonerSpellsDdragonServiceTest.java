@@ -6,8 +6,7 @@ import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.riot.api.RiotApiProperties;
 import com.drumonii.loltrollbuild.test.json.JsonTestFilesUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -74,81 +73,98 @@ class SummonerSpellsDdragonServiceTest {
 		latestVersion = versions.get(0);
 	}
 
-	@Test
-	void getSummonerSpellsFromVersion() {
-		mockServer.expect(requestTo(summonerSpellsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
-				.andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(summonerSpellsJson, MediaType.APPLICATION_JSON));
-
-		List<SummonerSpell> summonerSpells = summonerSpellsService.getSummonerSpells(latestVersion);
-		mockServer.verify();
-
-		assertThat(summonerSpells).isNotEmpty();
+	@AfterEach
+	void afterEach() {
+		mockServer.reset();
 	}
 
-	@Test
-	void getSummonerSpellsFromVersionWithRestClientException() {
-		mockServer.expect(requestTo(summonerSpellsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
-				.andExpect(method(HttpMethod.GET))
-				.andRespond(withServerError());
+	@Nested
+	@DisplayName("getSummonerSpells")
+	class GetSummonerSpells {
 
-		List<SummonerSpell> summonerSpells = summonerSpellsService.getSummonerSpells(latestVersion);
-		mockServer.verify();
+		@Test
+		void fromVersion() {
+			mockServer.expect(requestTo(summonerSpellsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
+					.andExpect(method(HttpMethod.GET))
+					.andRespond(withSuccess(summonerSpellsJson, MediaType.APPLICATION_JSON));
 
-		assertThat(summonerSpells).isEmpty();
+			List<SummonerSpell> summonerSpells = summonerSpellsService.getSummonerSpells(latestVersion);
+			mockServer.verify();
+
+			assertThat(summonerSpells).isNotEmpty();
+		}
+
+		@Test
+		void fromVersionWithRestClientException() {
+			mockServer.expect(requestTo(summonerSpellsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
+					.andExpect(method(HttpMethod.GET))
+					.andRespond(withServerError());
+
+			List<SummonerSpell> summonerSpells = summonerSpellsService.getSummonerSpells(latestVersion);
+			mockServer.verify();
+
+			assertThat(summonerSpells).isEmpty();
+		}
+
 	}
 
-	@Test
-	void getSummonerSpell() {
-		int smiteId = 11;
+	@Nested
+	@DisplayName("getSummonerSpell")
+	class GetSummonerSpell {
 
-		mockServer.expect(requestTo(versionsUri.toString()))
-				.andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(versionsJson, MediaType.parseMediaType("text/json;charset=UTF-8")));
+		@Test
+		void fromSummonerSpellId() {
+			int smiteId = 11;
 
-		mockServer.expect(requestTo(summonerSpellsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
-				.andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(summonerSpellsJson, MediaType.APPLICATION_JSON));
+			mockServer.expect(requestTo(versionsUri.toString()))
+					.andExpect(method(HttpMethod.GET))
+					.andRespond(withSuccess(versionsJson, MediaType.parseMediaType("text/json;charset=UTF-8")));
 
-		SummonerSpell summonerSpell = summonerSpellsService.getSummonerSpell(smiteId);
-		mockServer.verify();
+			mockServer.expect(requestTo(summonerSpellsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
+					.andExpect(method(HttpMethod.GET))
+					.andRespond(withSuccess(summonerSpellsJson, MediaType.APPLICATION_JSON));
 
-		assertThat(summonerSpell).isNotNull();
-	}
+			SummonerSpell summonerSpell = summonerSpellsService.getSummonerSpell(smiteId);
+			mockServer.verify();
 
-	@Test
-	void getSummonerSpellWithRestClientException() {
-		int smiteId = 11;
+			assertThat(summonerSpell).isNotNull();
+		}
 
-		mockServer.expect(requestTo(versionsUri.toString()))
-				.andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(versionsJson, MediaType.parseMediaType("text/json;charset=UTF-8")));
+		@Test
+		void fromSummonerSpellIdWithRestClientException() {
+			int smiteId = 11;
 
-		mockServer.expect(requestTo(summonerSpellsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
-				.andExpect(method(HttpMethod.GET))
-				.andRespond(withServerError());
+			mockServer.expect(requestTo(versionsUri.toString()))
+					.andExpect(method(HttpMethod.GET))
+					.andRespond(withSuccess(versionsJson, MediaType.parseMediaType("text/json;charset=UTF-8")));
 
-		SummonerSpell summonerSpell = summonerSpellsService.getSummonerSpell(smiteId);
-		mockServer.verify();
+			mockServer.expect(requestTo(summonerSpellsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
+					.andExpect(method(HttpMethod.GET))
+					.andRespond(withServerError());
 
-		assertThat(summonerSpell).isNull();
-	}
+			SummonerSpell summonerSpell = summonerSpellsService.getSummonerSpell(smiteId);
+			mockServer.verify();
 
-	@Test
-	void getSummonerSpellWithRestClientExceptionFromVersions() {
-		int smiteId = 11;
+			assertThat(summonerSpell).isNull();
+		}
 
-		mockServer.expect(requestTo(versionsUri.toString()))
-				.andExpect(method(HttpMethod.GET))
-				.andRespond(withServerError());
+		@Test
+		void fromSummonerSpellIdWithRestClientExceptionFromVersions() {
+			int smiteId = 11;
 
-		mockServer.expect(never(), requestTo(summonerSpellsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
-				.andExpect(method(HttpMethod.GET));
+			mockServer.expect(requestTo(versionsUri.toString()))
+					.andExpect(method(HttpMethod.GET))
+					.andRespond(withServerError());
 
-		SummonerSpell summonerSpell = summonerSpellsService.getSummonerSpell(smiteId);
-		mockServer.verify();
+			mockServer.expect(never(), requestTo(summonerSpellsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
+					.andExpect(method(HttpMethod.GET));
 
-		assertThat(summonerSpell).isNull();
+			SummonerSpell summonerSpell = summonerSpellsService.getSummonerSpell(smiteId);
+			mockServer.verify();
+
+			assertThat(summonerSpell).isNull();
+		}
+
 	}
 
 }

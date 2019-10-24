@@ -6,8 +6,7 @@ import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.riot.api.RiotApiProperties;
 import com.drumonii.loltrollbuild.test.json.JsonTestFilesUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -73,81 +72,98 @@ class ItemsDdragonServiceTest {
 		latestVersion = versions.get(0);
 	}
 
-	@Test
-	void getItemsFromVersion() {
-		mockServer.expect(requestTo(itemsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
-				.andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(itemsJson, MediaType.APPLICATION_JSON));
-
-		List<Item> items = itemsService.getItems(latestVersion);
-		mockServer.verify();
-
-		assertThat(items).isNotEmpty();
+	@AfterEach
+	void afterEach() {
+		mockServer.reset();
 	}
 
-	@Test
-	void getItemsFromVersionWithRestClientException() {
-		mockServer.expect(requestTo(itemsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
-				.andExpect(method(HttpMethod.GET))
-				.andRespond(withServerError());
+	@Nested
+	@DisplayName("getItems")
+	class GetItems {
 
-		List<Item> items = itemsService.getItems(latestVersion);
-		mockServer.verify();
+		@Test
+		void fromVersion() {
+			mockServer.expect(requestTo(itemsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
+					.andExpect(method(HttpMethod.GET))
+					.andRespond(withSuccess(itemsJson, MediaType.APPLICATION_JSON));
 
-		assertThat(items).isEmpty();
+			List<Item> items = itemsService.getItems(latestVersion);
+			mockServer.verify();
+
+			assertThat(items).isNotEmpty();
+		}
+
+		@Test
+		void fromVersionWithRestClientException() {
+			mockServer.expect(requestTo(itemsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
+					.andExpect(method(HttpMethod.GET))
+					.andRespond(withServerError());
+
+			List<Item> items = itemsService.getItems(latestVersion);
+			mockServer.verify();
+
+			assertThat(items).isEmpty();
+		}
+
 	}
 
-	@Test
-	void getItem() {
-		int bilgewaterCutlassId = 3144;
+	@Nested
+	@DisplayName("getItem")
+	class GetItem {
 
-		mockServer.expect(requestTo(versionsUri.toString()))
-				.andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(versionsJson, MediaType.parseMediaType("text/json;charset=UTF-8")));
+		@Test
+		void fromItemId() {
+			int bilgewaterCutlassId = 3144;
 
-		mockServer.expect(requestTo(itemsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
-				.andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(itemsJson, MediaType.APPLICATION_JSON));
+			mockServer.expect(requestTo(versionsUri.toString()))
+					.andExpect(method(HttpMethod.GET))
+					.andRespond(withSuccess(versionsJson, MediaType.parseMediaType("text/json;charset=UTF-8")));
 
-		Item item = itemsService.getItem(bilgewaterCutlassId);
-		mockServer.verify();
+			mockServer.expect(requestTo(itemsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
+					.andExpect(method(HttpMethod.GET))
+					.andRespond(withSuccess(itemsJson, MediaType.APPLICATION_JSON));
 
-		assertThat(item).isNotNull();
-	}
+			Item item = itemsService.getItem(bilgewaterCutlassId);
+			mockServer.verify();
 
-	@Test
-	void getItemWithRestClientException() {
-		int bilgewaterCutlassId = 3144;
+			assertThat(item).isNotNull();
+		}
 
-		mockServer.expect(requestTo(versionsUri.toString()))
-				.andExpect(method(HttpMethod.GET))
-				.andRespond(withSuccess(versionsJson, MediaType.parseMediaType("text/json;charset=UTF-8")));
+		@Test
+		void fromItemIdWithRestClientException() {
+			int bilgewaterCutlassId = 3144;
 
-		mockServer.expect(requestTo(itemsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
-				.andExpect(method(HttpMethod.GET))
-				.andRespond(withServerError());
+			mockServer.expect(requestTo(versionsUri.toString()))
+					.andExpect(method(HttpMethod.GET))
+					.andRespond(withSuccess(versionsJson, MediaType.parseMediaType("text/json;charset=UTF-8")));
 
-		Item item = itemsService.getItem(bilgewaterCutlassId);
-		mockServer.verify();
+			mockServer.expect(requestTo(itemsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
+					.andExpect(method(HttpMethod.GET))
+					.andRespond(withServerError());
 
-		assertThat(item).isNull();
-	}
+			Item item = itemsService.getItem(bilgewaterCutlassId);
+			mockServer.verify();
 
-	@Test
-	void getItemWithRestClientExceptionFromVersions() {
-		int bilgewaterCutlassId = 3144;
+			assertThat(item).isNull();
+		}
 
-		mockServer.expect(requestTo(versionsUri.toString()))
-				.andExpect(method(HttpMethod.GET))
-				.andRespond(withServerError());
+		@Test
+		void fromItemIdWithRestClientExceptionFromVersions() {
+			int bilgewaterCutlassId = 3144;
 
-		mockServer.expect(never(), requestTo(itemsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
-				.andExpect(method(HttpMethod.GET));
+			mockServer.expect(requestTo(versionsUri.toString()))
+					.andExpect(method(HttpMethod.GET))
+					.andRespond(withServerError());
 
-		Item item = itemsService.getItem(bilgewaterCutlassId);
-		mockServer.verify();
+			mockServer.expect(never(), requestTo(itemsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
+					.andExpect(method(HttpMethod.GET));
 
-		assertThat(item).isNull();
+			Item item = itemsService.getItem(bilgewaterCutlassId);
+			mockServer.verify();
+
+			assertThat(item).isNull();
+		}
+
 	}
 
 }
