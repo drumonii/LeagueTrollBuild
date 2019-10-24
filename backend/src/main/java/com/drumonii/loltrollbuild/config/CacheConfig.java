@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * Configuration for cache components.
  */
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @EnableCaching
 public class CacheConfig {
 }

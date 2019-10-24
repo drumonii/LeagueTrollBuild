@@ -7,7 +7,7 @@ import org.springframework.web.filter.ShallowEtagHeaderFilter;
 /**
  * Configuration for web mvc related beans.
  */
-@Configuration
+@Configuration(proxyBeanMethods = false)
 public class WebMvcConfig {
 
     @Bean

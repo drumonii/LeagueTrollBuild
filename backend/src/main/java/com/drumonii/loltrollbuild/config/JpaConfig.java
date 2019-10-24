@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 /**
  * Configuration for Data JPA components.
  */
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @EnableJpaAuditing
 public class JpaConfig {
 }

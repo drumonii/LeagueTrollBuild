@@ -6,7 +6,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 /**
  * Configuration for scheduling components.
  */
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @EnableScheduling
 public class SchedulingConfig {
 }

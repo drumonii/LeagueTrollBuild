@@ -19,7 +19,7 @@ import java.util.Arrays;
 /**
  * Configuration for using a {@link RestTemplate} to retrieve models from Riot's API.
  */
-@Configuration
+@Configuration(proxyBeanMethods = false)
 public class RiotApiConfig {
 
 	/**

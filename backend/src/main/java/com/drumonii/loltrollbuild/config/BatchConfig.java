@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * Configuration for batch components.
  */
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @EnableBatchProcessing
 public class BatchConfig {
 }
