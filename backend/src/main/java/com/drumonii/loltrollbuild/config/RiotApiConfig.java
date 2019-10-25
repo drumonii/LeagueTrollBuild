@@ -5,6 +5,7 @@ import com.drumonii.loltrollbuild.riot.api.RiotApiProperties;
 import com.drumonii.loltrollbuild.riot.api.RiotClientHttpRequestInterceptor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,6 +21,7 @@ import java.util.Arrays;
  * Configuration for using a {@link RestTemplate} to retrieve models from Riot's API.
  */
 @Configuration(proxyBeanMethods = false)
+@EnableConfigurationProperties(RiotApiProperties.class)
 public class RiotApiConfig {
 
 	/**
