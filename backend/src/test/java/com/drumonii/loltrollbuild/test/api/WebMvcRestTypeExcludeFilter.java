@@ -9,6 +9,7 @@ import org.springframework.boot.web.servlet.error.ErrorAttributes;
 import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.core.annotation.AnnotatedElementUtils;
 import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.stereotype.Service;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -27,6 +28,7 @@ public class WebMvcRestTypeExcludeFilter extends AnnotationCustomizableTypeExclu
 	static {
 		Set<Class<?>> includes = new LinkedHashSet<>();
 		includes.add(JsonComponent.class);
+		includes.add(Service.class);
 		// Not sure all this is needed but have it here anyway like WebMvcTypeExcludeFilter's
 		includes.add(WebMvcConfigurer.class);
 		includes.add(javax.servlet.Filter.class);

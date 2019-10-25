@@ -1,10 +1,11 @@
 package com.drumonii.loltrollbuild.api;
 
+import com.drumonii.loltrollbuild.api.service.ItemsApiService;
+import com.drumonii.loltrollbuild.api.status.ResourceNotFoundException;
+import com.drumonii.loltrollbuild.api.view.ApiViews;
 import com.drumonii.loltrollbuild.model.Item;
 import com.drumonii.loltrollbuild.repository.ItemsRepository;
 import com.drumonii.loltrollbuild.repository.specification.ExampleSpecification;
-import com.drumonii.loltrollbuild.api.status.ResourceNotFoundException;
-import com.drumonii.loltrollbuild.api.view.ApiViews;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -16,7 +17,6 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 import static com.drumonii.loltrollbuild.util.GameMapUtil.SUMMONERS_RIFT_SID;
 
@@ -28,7 +28,7 @@ import static com.drumonii.loltrollbuild.util.GameMapUtil.SUMMONERS_RIFT_SID;
 public class ItemsRestController {
 
 	@Autowired
-	private ItemsRepository itemsRepository;
+	private ItemsApiService itemsApiService;
 
 	/**
 	 * Gets a {@link List} of {@link Item}s from the sort and search parameters.
@@ -49,7 +49,7 @@ public class ItemsRestController {
 				.withIgnorePaths("id", "version")
 				.withIgnoreNullValues();
 		Example<Item> example = Example.of(item, exampleMatcher);
-		return itemsRepository.findAll(new ExampleSpecification<>(example), sort);
+		return itemsApiService.qbe(new ExampleSpecification<>(example), sort);
 	}
 
 	/**
@@ -61,8 +61,8 @@ public class ItemsRestController {
 	@JsonView(ApiViews.LtbApi.class)
 	@GetMapping(path = "/{id}")
 	public Item getItem(@PathVariable int id) {
-		Optional<Item> item = itemsRepository.findById(id);
-		return item.orElseThrow(() -> new ResourceNotFoundException("Unable to find an Item with Id: " + id));
+		return itemsApiService.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Unable to find an Item with Id: " + id));
 	}
 
 	/**
@@ -75,7 +75,7 @@ public class ItemsRestController {
 	@JsonView(ApiViews.LtbApi.class)
 	@GetMapping(path = "/boots")
 	public List<Item> getBoots(@RequestParam(required = false, defaultValue = SUMMONERS_RIFT_SID) int mapId) {
-		return itemsRepository.boots(mapId);
+		return itemsApiService.boots(mapId);
 	}
 
 	/**
@@ -88,7 +88,7 @@ public class ItemsRestController {
 	@JsonView(ApiViews.LtbApi.class)
 	@GetMapping(path = "/trinkets")
 	public List<Item> getTrinkets(@RequestParam(required = false, defaultValue = SUMMONERS_RIFT_SID) int mapId) {
-		return itemsRepository.trinkets(mapId);
+		return itemsApiService.trinkets(mapId);
 	}
 
 	/**
@@ -100,7 +100,7 @@ public class ItemsRestController {
 	@JsonView(ApiViews.LtbApi.class)
 	@GetMapping(path = "/viktor-only")
 	public List<Item> getViktorOnly() {
-		return itemsRepository.viktorOnly();
+		return itemsApiService.viktorOnly();
 	}
 
 	/**
@@ -113,7 +113,7 @@ public class ItemsRestController {
 	@JsonView(ApiViews.LtbApi.class)
 	@GetMapping(value = "/for-troll-build")
 	public List<Item> getForTrollBuild(@RequestParam(required = false, defaultValue = SUMMONERS_RIFT_SID) int mapId) {
-		return itemsRepository.forTrollBuild(mapId);
+		return itemsApiService.forTrollBuild(mapId);
 	}
 
 }

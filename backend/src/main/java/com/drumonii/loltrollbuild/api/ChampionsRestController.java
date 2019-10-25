@@ -1,15 +1,15 @@
 package com.drumonii.loltrollbuild.api;
 
+import com.drumonii.loltrollbuild.api.service.ChampionsApiService;
+import com.drumonii.loltrollbuild.api.service.ItemsApiService;
+import com.drumonii.loltrollbuild.api.service.MapsApiService;
+import com.drumonii.loltrollbuild.api.service.SummonerSpellsApiService;
+import com.drumonii.loltrollbuild.api.status.ResourceNotFoundException;
+import com.drumonii.loltrollbuild.api.view.ApiViews;
 import com.drumonii.loltrollbuild.model.Champion;
 import com.drumonii.loltrollbuild.model.TrollBuild;
 import com.drumonii.loltrollbuild.model.builder.TrollBuildBuilder;
-import com.drumonii.loltrollbuild.repository.ChampionsRepository;
-import com.drumonii.loltrollbuild.repository.ItemsRepository;
-import com.drumonii.loltrollbuild.repository.MapsRepository;
-import com.drumonii.loltrollbuild.repository.SummonerSpellsRepository;
 import com.drumonii.loltrollbuild.repository.specification.ExampleSpecification;
-import com.drumonii.loltrollbuild.api.status.ResourceNotFoundException;
-import com.drumonii.loltrollbuild.api.view.ApiViews;
 import com.drumonii.loltrollbuild.util.ChampionUtil;
 import com.drumonii.loltrollbuild.util.GameMapUtil;
 import com.fasterxml.jackson.annotation.JsonView;
@@ -24,7 +24,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import static com.drumonii.loltrollbuild.util.GameMapUtil.SUMMONERS_RIFT_SID;
 
@@ -36,16 +35,16 @@ import static com.drumonii.loltrollbuild.util.GameMapUtil.SUMMONERS_RIFT_SID;
 public class ChampionsRestController {
 
 	@Autowired
-	private ChampionsRepository championsRepository;
+	private ChampionsApiService championsApiService;
 
 	@Autowired
-	private ItemsRepository itemsRepository;
+	private ItemsApiService itemsApiService;
 
 	@Autowired
-	private SummonerSpellsRepository summonerSpellsRepository;
+	private SummonerSpellsApiService summonerSpellsApiService;
 
 	@Autowired
-	private MapsRepository mapsRepository;
+	private MapsApiService mapsApiService;
 
 	/**
 	 * Gets a {@link List} of {@link Champion}s from the sort and search parameters.
@@ -66,7 +65,7 @@ public class ChampionsRestController {
 				.withIgnorePaths("id", "version")
 				.withIgnoreNullValues();
 		Example<Champion> example = Example.of(champion, exampleMatcher);
-		return championsRepository.findAll(new ExampleSpecification<>(example), sort);
+		return championsApiService.qbe(new ExampleSpecification<>(example), sort);
 	}
 
 	/**
@@ -78,13 +77,8 @@ public class ChampionsRestController {
 	@JsonView(ApiViews.LtbApi.class)
 	@GetMapping(path = "/{value}")
 	public Champion getChampion(@PathVariable String value) {
-		Optional<Champion> champion;
-		try {
-			champion = championsRepository.findById(Integer.valueOf(value));
-		} catch (NumberFormatException e) {
-			champion = championsRepository.findByName(value);
-		}
-		return champion.orElseThrow(() -> new ResourceNotFoundException("Unable to find a Champion with value: " + value));
+		return championsApiService.find(value)
+				.orElseThrow(() -> new ResourceNotFoundException("Unable to find a Champion with value: " + value));
 	}
 
 	/**
@@ -94,7 +88,7 @@ public class ChampionsRestController {
 	 */
 	@GetMapping(path = "/tags")
 	public List<String> getTags() {
-		return championsRepository.getTags();
+		return championsApiService.getTags();
 	}
 
 	/**
@@ -108,23 +102,16 @@ public class ChampionsRestController {
 	@GetMapping(path = "/{value}/troll-build")
 	public TrollBuild trollBuild(@PathVariable String value,
 			@RequestParam(required = false, defaultValue = SUMMONERS_RIFT_SID) int mapId) {
-		Optional<Champion> champion;
-		try {
-			champion = championsRepository.findById(Integer.valueOf(value));
-		} catch (NumberFormatException e) {
-			champion = championsRepository.findByName(value);
-		}
-		if (champion.isEmpty()) {
-			throw new ResourceNotFoundException("Unable to find a Champion with value: " + value);
-		}
+		Champion champion = championsApiService.find(value)
+				.orElseThrow(() -> new ResourceNotFoundException("Unable to find a Champion with value: " + value));
 
 		return new TrollBuildBuilder()
-				.withBoots(itemsRepository.boots(mapId))
-				.withItems(itemsRepository.forTrollBuild(mapId))
-				.withSummonerSpells(summonerSpellsRepository.forTrollBuild(GameMapUtil
-						.getModeFromMap(mapsRepository.findById(mapId).orElse(null))))
-				.withTrinket(itemsRepository.trinkets(mapId))
-				.withViktor(ChampionUtil.isViktor(champion.get()) ? itemsRepository.viktorOnly() : null)
+				.withBoots(itemsApiService.boots(mapId))
+				.withItems(itemsApiService.forTrollBuild(mapId))
+				.withSummonerSpells(summonerSpellsApiService.forTrollBuild(GameMapUtil
+						.getModeFromMap(mapsApiService.findById(mapId).orElse(null))))
+				.withTrinket(itemsApiService.trinkets(mapId))
+				.withViktor(ChampionUtil.isViktor(champion) ? itemsApiService.viktorOnly() : null)
 				.build();
 	}
 

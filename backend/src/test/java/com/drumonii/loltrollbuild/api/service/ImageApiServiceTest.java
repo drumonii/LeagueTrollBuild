@@ -1,4 +1,4 @@
-package com.drumonii.loltrollbuild.riot.service;
+package com.drumonii.loltrollbuild.api.service;
 
 import com.drumonii.loltrollbuild.config.JpaConfig;
 import com.drumonii.loltrollbuild.model.*;
@@ -30,15 +30,15 @@ import static com.drumonii.loltrollbuild.config.Profiles.TESTING;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
 
-@RestClientTest(ImageService.class)
+@RestClientTest(ImageApiService.class)
 @Transactional
 @AutoConfigureDataJpa
 @Import(JpaConfig.class)
 @ActiveProfiles({ TESTING, DDRAGON })
-class ImageServiceTest {
+class ImageApiServiceTest {
 
     @Autowired
-    private ImageService imageService;
+    private ImageApiService imageApiService;
 
     @Autowired
     private ChampionsRepository championsRepository;
@@ -68,13 +68,13 @@ class ImageServiceTest {
         Item bladeOfTheRuinedKing = itemsResponse.getItems().get("3153");
         itemsRepository.saveAndFlush(bladeOfTheRuinedKing);
 
-        Image itemImage = imageService.getItemImage(bladeOfTheRuinedKing.getId());
+        Image itemImage = imageApiService.getItemImage(bladeOfTheRuinedKing.getId());
         assertThat(itemImage).satisfies(new FetchedImage(bladeOfTheRuinedKing.getImage()));
     }
 
     @Test
     void doesNotGetItemImage() {
-        Image itemImage = imageService.getItemImage(0);
+        Image itemImage = imageApiService.getItemImage(0);
         assertThat(itemImage).isNull();
     }
 
@@ -84,13 +84,13 @@ class ImageServiceTest {
         Champion nidalee = championsResponse.getChampions().get("Nidalee");
         championsRepository.saveAndFlush(nidalee);
 
-        Image championImage = imageService.getChampionImage(nidalee.getId());
+        Image championImage = imageApiService.getChampionImage(nidalee.getId());
         assertThat(championImage).satisfies(new FetchedImage(nidalee.getImage()));
     }
 
     @Test
     void doesNotGetChampionImage() {
-        Image championImage = imageService.getChampionImage(0);
+        Image championImage = imageApiService.getChampionImage(0);
         assertThat(championImage).isNull();
     }
 
@@ -100,13 +100,13 @@ class ImageServiceTest {
         Champion lux = championsResponse.getChampions().get("Lux");
         championsRepository.saveAndFlush(lux);
 
-        Image championPassiveImage = imageService.getChampionPassiveImage(lux.getId());
+        Image championPassiveImage = imageApiService.getChampionPassiveImage(lux.getId());
         assertThat(championPassiveImage).satisfies(new FetchedImage(lux.getPassive().getImage()));
     }
 
     @Test
     void doesNotGetChampionPassiveImage() {
-        Image championPassiveImage = imageService.getChampionPassiveImage(0);
+        Image championPassiveImage = imageApiService.getChampionPassiveImage(0);
         assertThat(championPassiveImage).isNull();
     }
 
@@ -116,7 +116,7 @@ class ImageServiceTest {
         Champion bard = championsResponse.getChampions().get("Bard");
         championsRepository.saveAndFlush(bard);
 
-        Image championSpellImage = imageService.getChampionSpellImage(bard.getId(), "BardQ");
+        Image championSpellImage = imageApiService.getChampionSpellImage(bard.getId(), "BardQ");
         Optional<ChampionSpell> bardQ = bard.getSpells().stream()
                 .filter(bardSpells -> bardSpells.getKey().equals("BardQ"))
                 .findFirst();
@@ -128,14 +128,14 @@ class ImageServiceTest {
 
     @Test
     void doesNotGetChampionSpellImage() {
-        Image championSpellImage = imageService.getChampionSpellImage(0, "");
+        Image championSpellImage = imageApiService.getChampionSpellImage(0, "");
         assertThat(championSpellImage).isNull();
 
         ChampionsResponse championsResponse = jsonTestFilesUtil.getChampionsResponse();
         Champion shaco = championsResponse.getChampions().get("Shaco");
         championsRepository.saveAndFlush(shaco);
 
-        championSpellImage = imageService.getChampionSpellImage(shaco.getId(), "");
+        championSpellImage = imageApiService.getChampionSpellImage(shaco.getId(), "");
         assertThat(championSpellImage).isNull();
     }
 
@@ -145,13 +145,13 @@ class ImageServiceTest {
         SummonerSpell exhaust = summonerSpellsResponse.getSummonerSpells().get("SummonerExhaust");
         summonerSpellsRepository.saveAndFlush(exhaust);
 
-        Image summonerSpellImage = imageService.getSummonerSpellImage(exhaust.getId());
+        Image summonerSpellImage = imageApiService.getSummonerSpellImage(exhaust.getId());
         assertThat(summonerSpellImage).satisfies(new FetchedImage(exhaust.getImage()));
     }
 
     @Test
     void doesNotGetSummonerSpellImage() {
-        Image summonerSpellImage = imageService.getSummonerSpellImage(0);
+        Image summonerSpellImage = imageApiService.getSummonerSpellImage(0);
         assertThat(summonerSpellImage).isNull();
     }
 
@@ -161,13 +161,13 @@ class ImageServiceTest {
         GameMap twistedTreeline = mapsResponse.getMaps().get("10");
         mapsRepository.saveAndFlush(twistedTreeline);
 
-        Image mapImage = imageService.getMapImage(twistedTreeline.getMapId());
+        Image mapImage = imageApiService.getMapImage(twistedTreeline.getMapId());
         assertThat(mapImage).satisfies(new FetchedImage(twistedTreeline.getImage()));
     }
 
     @Test
     void doesNotGetMapImage() {
-        Image mapImage = imageService.getMapImage(0);
+        Image mapImage = imageApiService.getMapImage(0);
         assertThat(mapImage).isNull();
     }
 

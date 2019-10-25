@@ -1,8 +1,8 @@
 package com.drumonii.loltrollbuild.api;
 
-import com.drumonii.loltrollbuild.model.Version;
-import com.drumonii.loltrollbuild.repository.VersionsRepository;
+import com.drumonii.loltrollbuild.api.service.VersionsApiService;
 import com.drumonii.loltrollbuild.api.status.ResourceNotFoundException;
+import com.drumonii.loltrollbuild.model.Version;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -25,7 +25,7 @@ import java.util.Optional;
 public class VersionsRestController {
 
 	@Autowired
-	private VersionsRepository versionsRepository;
+	private VersionsApiService versionsApiService;
 
 	/**
 	 * Gets a {@link List} of {@link Version}s from the sort and search parameters.
@@ -40,7 +40,7 @@ public class VersionsRestController {
 		ExampleMatcher exampleMatcher = ExampleMatcher.matching()
 				.withIgnorePaths("major", "minor", "revision");
 		Example<Version> example = Example.of(version, exampleMatcher);
-		return versionsRepository.findAll(example, sort);
+		return versionsApiService.qbe(example, sort);
 	}
 
 	/**
@@ -51,8 +51,8 @@ public class VersionsRestController {
 	 */
 	@GetMapping(path = "/{patch}")
 	public Version getVersion(@PathVariable String patch) {
-		Optional<Version> version = versionsRepository.findById(patch);
-		return version.orElseThrow(() -> new ResourceNotFoundException("Unable to find a Version with patch: " + patch));
+		return versionsApiService.findById(patch)
+				.orElseThrow(() -> new ResourceNotFoundException("Unable to find a Version with patch: " + patch));
 	}
 
 	/**
@@ -62,7 +62,7 @@ public class VersionsRestController {
 	 */
 	@GetMapping(path = "/latest")
 	public Version getLatestVersion() {
-		return Optional.ofNullable(versionsRepository.latestVersion())
+		return Optional.ofNullable(versionsApiService.latestVersion())
 				.orElseThrow(() -> new ResourceNotFoundException("Unable to get the latest Version with no saved Versions"));
 	}
 

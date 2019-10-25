@@ -1,11 +1,11 @@
-package com.drumonii.loltrollbuild.riot.service;
+package com.drumonii.loltrollbuild.api.service;
 
 import com.drumonii.loltrollbuild.model.image.Image;
 
 /**
- * {@code @Service} for {@link Image}s.
+ * API {@code @Service} for {@link Image}s.
  */
-public interface ImageService {
+public interface ImageApiService {
 
     /**
      * Gets the item's {@link Image} by the item's id.

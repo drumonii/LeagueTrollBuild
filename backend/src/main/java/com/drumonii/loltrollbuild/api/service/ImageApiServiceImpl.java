@@ -1,4 +1,4 @@
-package com.drumonii.loltrollbuild.riot.service;
+package com.drumonii.loltrollbuild.api.service;
 
 import com.drumonii.loltrollbuild.model.image.Image;
 import org.slf4j.Logger;
@@ -15,9 +15,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 @Service
-public class ImageDdragonService implements ImageService {
+public class ImageApiServiceImpl implements ImageApiService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ImageDdragonService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ImageApiServiceImpl.class);
 
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;

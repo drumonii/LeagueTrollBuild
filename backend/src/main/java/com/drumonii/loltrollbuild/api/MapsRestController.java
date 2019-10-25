@@ -1,10 +1,11 @@
 package com.drumonii.loltrollbuild.api;
 
+import com.drumonii.loltrollbuild.api.service.MapsApiService;
+import com.drumonii.loltrollbuild.api.status.ResourceNotFoundException;
+import com.drumonii.loltrollbuild.api.view.ApiViews;
 import com.drumonii.loltrollbuild.model.GameMap;
 import com.drumonii.loltrollbuild.repository.MapsRepository;
 import com.drumonii.loltrollbuild.repository.specification.ExampleSpecification;
-import com.drumonii.loltrollbuild.api.status.ResourceNotFoundException;
-import com.drumonii.loltrollbuild.api.view.ApiViews;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -19,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Repository REST controller for {@link GameMap}s.
@@ -29,7 +29,7 @@ import java.util.Optional;
 public class MapsRestController {
 
 	@Autowired
-	private MapsRepository mapsRepository;
+	private MapsApiService mapsApiService;
 
 	/**
 	 * Gets a {@link List} of {@link GameMap}s from the sort and search parameters.
@@ -48,7 +48,7 @@ public class MapsRestController {
 				.withIgnorePaths("mapId", "version")
 				.withIgnoreNullValues();
 		Example<GameMap> example = Example.of(gameMap, exampleMatcher);
-		return mapsRepository.findAll(new ExampleSpecification<>(example), sort);
+		return mapsApiService.qbe(new ExampleSpecification<>(example), sort);
 	}
 
 	/**
@@ -60,8 +60,8 @@ public class MapsRestController {
 	@JsonView(ApiViews.LtbApi.class)
 	@GetMapping(path = "/{id}")
 	public GameMap getGameMap(@PathVariable int id) {
-		Optional<GameMap> map = mapsRepository.findById(id);
-		return map.orElseThrow(() -> new ResourceNotFoundException("Unable to find a Map with Id: " + id));
+		return mapsApiService.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Unable to find a Map with Id: " + id));
 	}
 
 	/**
@@ -73,7 +73,7 @@ public class MapsRestController {
 	@JsonView(ApiViews.LtbApi.class)
 	@GetMapping(path = "/for-troll-build")
 	public List<GameMap> getForTrollBuild() {
-		return mapsRepository.forTrollBuild();
+		return mapsApiService.forTrollBuild();
 	}
 
 }

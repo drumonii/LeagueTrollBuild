@@ -9,7 +9,7 @@ import com.drumonii.loltrollbuild.riot.api.ChampionsResponse;
 import com.drumonii.loltrollbuild.riot.api.ItemsResponse;
 import com.drumonii.loltrollbuild.riot.api.MapsResponse;
 import com.drumonii.loltrollbuild.riot.api.SummonerSpellsResponse;
-import com.drumonii.loltrollbuild.riot.service.ImageService;
+import com.drumonii.loltrollbuild.api.service.ImageApiService;
 import com.drumonii.loltrollbuild.test.api.WebMvcRestTest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -29,7 +29,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcRestTest(value = ImagesRestController.class,
-		includeFilters = @Filter(type = FilterType.ASSIGNABLE_TYPE, classes = { ImageService.class }))
+		includeFilters = @Filter(type = FilterType.ASSIGNABLE_TYPE, classes = { ImageApiService.class }))
 abstract class ImagesRestControllerTest {
 
 	@Autowired

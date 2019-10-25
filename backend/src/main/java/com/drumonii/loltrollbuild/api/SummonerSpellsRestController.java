@@ -1,11 +1,12 @@
 package com.drumonii.loltrollbuild.api;
 
+import com.drumonii.loltrollbuild.api.service.SummonerSpellsApiService;
+import com.drumonii.loltrollbuild.api.status.ResourceNotFoundException;
+import com.drumonii.loltrollbuild.api.view.ApiViews;
 import com.drumonii.loltrollbuild.model.SummonerSpell;
 import com.drumonii.loltrollbuild.model.SummonerSpell.GameMode;
 import com.drumonii.loltrollbuild.repository.SummonerSpellsRepository;
 import com.drumonii.loltrollbuild.repository.specification.ExampleSpecification;
-import com.drumonii.loltrollbuild.api.status.ResourceNotFoundException;
-import com.drumonii.loltrollbuild.api.view.ApiViews;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -17,7 +18,6 @@ import org.springframework.data.web.SortDefault;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Repository REST controller for {@link SummonerSpell}s.
@@ -27,7 +27,7 @@ import java.util.Optional;
 public class SummonerSpellsRestController {
 
 	@Autowired
-	private SummonerSpellsRepository summonerSpellsRepository;
+	private SummonerSpellsApiService summonerSpellsApiService;
 
 	/**
 	 * Gets a {@link List} of {@link SummonerSpell}s from the sort and search parameters.
@@ -46,7 +46,7 @@ public class SummonerSpellsRestController {
 				.withIgnorePaths("id", "version")
 				.withIgnoreNullValues();
 		Example<SummonerSpell> example = Example.of(summonerSpell, exampleMatcher);
-		return summonerSpellsRepository.findAll(new ExampleSpecification<>(example), sort);
+		return summonerSpellsApiService.qbe(new ExampleSpecification<>(example), sort);
 	}
 
 	/**
@@ -58,8 +58,8 @@ public class SummonerSpellsRestController {
 	@JsonView(ApiViews.LtbApi.class)
 	@GetMapping(path = "/{id}")
 	public SummonerSpell getSummonerSpell(@PathVariable int id) {
-		Optional<SummonerSpell> summonerSpell = summonerSpellsRepository.findById(id);
-		return summonerSpell.orElseThrow(() -> new ResourceNotFoundException("Unable to find a Summoner Spell with Id: " + id));
+		return summonerSpellsApiService.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Unable to find a Summoner Spell with Id: " + id));
 	}
 
 	/**
@@ -72,7 +72,7 @@ public class SummonerSpellsRestController {
 	@JsonView(ApiViews.LtbApi.class)
 	@GetMapping(path = "/for-troll-build")
 	public List<SummonerSpell> getForTrollBuild(@RequestParam(required = false, defaultValue = "CLASSIC") GameMode mode) {
-		return summonerSpellsRepository.forTrollBuild(mode);
+		return summonerSpellsApiService.forTrollBuild(mode);
 	}
 
 }

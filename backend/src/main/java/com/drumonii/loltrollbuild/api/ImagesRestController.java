@@ -1,7 +1,7 @@
 package com.drumonii.loltrollbuild.api;
 
+import com.drumonii.loltrollbuild.api.service.ImageApiService;
 import com.drumonii.loltrollbuild.model.image.Image;
-import com.drumonii.loltrollbuild.riot.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.CacheControl;
 import org.springframework.http.MediaType;
@@ -21,36 +21,36 @@ import java.util.concurrent.TimeUnit;
 public class ImagesRestController {
 
 	@Autowired
-	private ImageService imageService;
+	private ImageApiService imageApiService;
 
 	@GetMapping(path = "/summoner-spells/{id}")
 	public ResponseEntity<byte[]> summonerSpellImg(@PathVariable("id") int summonerSpellId) {
-        return createResponseEntity(imageService.getSummonerSpellImage(summonerSpellId));
+        return createResponseEntity(imageApiService.getSummonerSpellImage(summonerSpellId));
 	}
 
 	@GetMapping(path = "/items/{id}")
 	public ResponseEntity<byte[]> itemImg(@PathVariable("id") int itemId) {
-        return createResponseEntity(imageService.getItemImage(itemId));
+        return createResponseEntity(imageApiService.getItemImage(itemId));
 	}
 
 	@GetMapping(path = "/champions/{id}")
 	public ResponseEntity<byte[]> championImg(@PathVariable("id") int championId) {
-		return createResponseEntity(imageService.getChampionImage(championId));
+		return createResponseEntity(imageApiService.getChampionImage(championId));
 	}
 
 	@GetMapping(path = "/champions/{id}/spell/{spellKey}")
 	public ResponseEntity<byte[]> championSpellImg(@PathVariable("id") int championId, @PathVariable String spellKey) {
-        return createResponseEntity(imageService.getChampionSpellImage(championId, spellKey));
+        return createResponseEntity(imageApiService.getChampionSpellImage(championId, spellKey));
     }
 
 	@GetMapping(path = "/champions/{id}/passive")
 	public ResponseEntity<byte[]> championPassiveImg(@PathVariable("id") int championId) {
-        return createResponseEntity(imageService.getChampionPassiveImage(championId));
+        return createResponseEntity(imageApiService.getChampionPassiveImage(championId));
 	}
 
 	@GetMapping(path = "/maps/{mapId}")
 	public ResponseEntity<byte[]> mapImg(@PathVariable int mapId) {
-        return createResponseEntity(imageService.getMapImage(mapId));
+        return createResponseEntity(imageApiService.getMapImage(mapId));
 	}
 
     /**
