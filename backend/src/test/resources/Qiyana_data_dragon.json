@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.16.1",
+  "version": "9.21.1",
   "data": {
     "Qiyana": {
       "id": "Qiyana",
@@ -499,21 +499,19 @@
           "tooltip": "Launch a shockwave that knocks back enemies and detonates when it hits a <span class=\"colorba7221\">Wall</span>. The entire <span class=\"colorba7221\">Wall</span> then explodes to stun nearby enemies for up to {{ stunduration }}s and deal them <physicalDamage>physical damage</physicalDamage> equal to <physicalDamage>{{ damage }} + {{ missinghealthdamagerock }}</physicalDamage> <scaleHealth>of their max health</scaleHealth>.<br /><br />Any <scaleMana>River</scaleMana> or <scaleAP>Brush</scaleAP> the shockwave passes through also explode after a delay for the same damage and stun.",
           "leveltip": {
             "label": [
-              "Initial Damage",
-              "Cooldown"
+              "Initial Damage"
             ],
             "effect": [
-              "{{ basedamage }} -> {{ basedamageNL }}",
-              "{{ cooldown }} -> {{ cooldownNL }}"
+              "{{ basedamage }} -> {{ basedamageNL }}"
             ]
           },
           "maxrank": 3,
           "cooldown": [
             120,
-            100,
-            80
+            120,
+            120
           ],
-          "cooldownBurn": "120/100/80",
+          "cooldownBurn": "120",
           "cost": [
             100,
             100,

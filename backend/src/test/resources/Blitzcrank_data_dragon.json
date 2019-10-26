@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.16.1",
+  "version": "9.21.1",
   "data": {
     "Blitzcrank": {
       "id": "Blitzcrank",
@@ -83,6 +83,12 @@
           "num": 21,
           "name": "Lancer Paragon Blitzcrank",
           "chromas": false
+        },
+        {
+          "id": "53022",
+          "num": 22,
+          "name": "Witch's Brew Blitzcrank",
+          "chromas": true
         }
       ],
       "lore": "Blitzcrank is an enormous, near-indestructible automaton from Zaun, originally built to dispose of hazardous waste. However, he found this primary purpose too restricting, and modified his own form to better serve the fragile people of the Sump. Blitzcrank selflessly uses his strength and durability to protect others, extending a helpful metal fist or burst of energy to subdue any troublemakers.",
@@ -112,8 +118,8 @@
         "mp": 267.2,
         "mpperlevel": 40,
         "movespeed": 325,
-        "armor": 44,
-        "armorperlevel": 4,
+        "armor": 40,
+        "armorperlevel": 3.5,
         "spellblock": 32.1,
         "spellblockperlevel": 1.25,
         "attackrange": 125,
@@ -133,14 +139,14 @@
           "id": "RocketGrab",
           "name": "Rocket Grab",
           "description": "Blitzcrank fires his right hand to grab an opponent on its path, dealing damage and dragging it back to him.",
-          "tooltip": "Blitzcrank fires his right hand. If it encounters an enemy unit it will stun them and deal {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage while he pulls them to himself.",
+          "tooltip": "Blitzcrank fires his right hand. If it encounters an enemy unit it will stun them and deal <magicDamage>{{ totaldamage }} magic damage</magicDamage> while he pulls them to himself.",
           "leveltip": {
             "label": [
               "Damage",
               "Cooldown"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
+              "{{ basedamage }} -> {{ basedamageNL }}",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
@@ -248,23 +254,17 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 1,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
-            925,
-            925,
-            925,
-            925,
-            925
+            1079,
+            1079,
+            1079,
+            1079,
+            1079
           ],
-          "rangeBurn": "925",
+          "rangeBurn": "1079",
           "image": {
             "full": "RocketGrab.png",
             "sprite": "spell1.png",
@@ -560,7 +560,7 @@
           "id": "StaticField",
           "name": "Static Field",
           "description": "Enemies attacked by Blitzcrank are marked and take lightning damage after 1 second. Additionally, Blitzcrank can activate this ability to remove nearby enemies' shields, damage them, and silence them briefly.",
-          "tooltip": "<spellPassive>Passive: </spellPassive>While this spell is available, lightning charges Blitzcrank's fists, marking enemies. After 1 second, they are shocked for <magicDamage>{{ passivedamage }}</magicDamage> magic damage. This stacks up to two times.<br /><br /><spellPassive>Active: </spellPassive>Destroys damage shields on nearby enemies, deals <magicDamage>{{ activedamage }} magic damage</magicDamage>, and silences for 0.75 seconds.",
+          "tooltip": "<spellPassive>Passive: </spellPassive>While this spell is available, lightning charges Blitzcrank's fists, marking enemies. After 1 second, they are shocked for <magicDamage>{{ passivedamage }}</magicDamage> magic damage. This stacks up to {{ maxstacks }} times.<br /><br /><spellPassive>Active: </spellPassive>Destroys damage shields on nearby enemies, deals <magicDamage>{{ activedamage }} magic damage</magicDamage>, and silences for 0.75 seconds.",
           "leveltip": {
             "label": [
               "Passive Base Damage",

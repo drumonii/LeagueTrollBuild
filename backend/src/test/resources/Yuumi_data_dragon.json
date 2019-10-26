@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.16.1",
+  "version": "9.21.1",
   "data": {
     "Yuumi": {
       "id": "Yuumi",
@@ -73,19 +73,17 @@
           "id": "YuumiQ",
           "name": "Prowling Projectile",
           "description": "Yuumi fires a missile, dealing damage to the first target hit. It deals bonus damage and slows if it takes at least 1 second to get to its target.<br><br>While Attached, the missile can be controlled with your cursor.",
-          "tooltip": "Yuumi summons an errant missile that deals <magicDamage><scaleAP>{{ totalmissiledamage }}</scaleAP> magic damage </magicDamage>to the first enemy hit. If the missile travels for {{ afterburnertimetooltip }} second before impacting, it deals <magicdamage><scaleAP>{{ empoweredmissiledamage }}</scaleAP> magic damage</magicdamage> instead and slows champions for {{ slowamount }}% decaying over {{ slowduration }} seconds.<br /><br />If cast while <span class=\"colorac6de0\">Attached</span>, Yuumi can control the missile using her mouse.",
+          "tooltip": "Yuumi summons an errant missile that deals <magicDamage><scaleAP>{{ totalmissiledamage }}</scaleAP> magic damage </magicDamage>to the first enemy hit. If the missile travels for {{ afterburnertimetooltip }} second before impacting, it deals <magicdamage><scaleAP>{{ empoweredmissiledamage }}</scaleAP> magic damage</magicdamage> instead and slows champions by {{ slowamount }}% for {{ slowduration }} second.<br /><br />If cast while <span class=\"colorac6de0\">Attached</span>, Yuumi can control the missile using her mouse.",
           "leveltip": {
             "label": [
               "Base Damage",
               "Empowered Missile Base Damage",
-              "Slow",
               "Cooldown",
               "Mana Cost"
             ],
             "effect": [
               "{{ missiledamage }} -> {{ missiledamageNL }}",
               "{{ empoweredmissilebasedamage }} -> {{ empoweredmissilebasedamageNL }}",
-              "{{ slowamount }}% -> {{ slowamountNL }}%",
               "{{ cooldown }} -> {{ cooldownNL }}",
               "{{ cost }} -> {{ costNL }}"
             ]
@@ -1058,11 +1056,6 @@
                   "id": "3108",
                   "count": 1,
                   "hideCount": false
-                },
-                {
-                  "id": "1001",
-                  "count": 1,
-                  "hideCount": false
                 }
               ]
             },
@@ -1084,11 +1077,6 @@
               "items": [
                 {
                   "id": "3174",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3158",
                   "count": 1,
                   "hideCount": false
                 }

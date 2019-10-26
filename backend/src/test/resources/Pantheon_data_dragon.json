@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.16.1",
+  "version": "9.21.1",
   "data": {
     "Pantheon": {
       "id": "Pantheon",
@@ -104,7 +104,7 @@
         "movespeed": 355,
         "armor": 40,
         "armorperlevel": 3.75,
-        "spellblock": 32.1,
+        "spellblock": 28,
         "spellblockperlevel": 1.25,
         "attackrange": 175,
         "hpregen": 10,
@@ -123,7 +123,7 @@
           "id": "PantheonQ",
           "name": "Comet Spear",
           "description": "Pantheon either thrusts his spear or throws his spear in the chosen direction.",
-          "tooltip": "<span class=\"colorFF8C00\">Tap:</span> Pantheon thrusts his spear, dealing <physicalDamage>{{ tapdamagecalc }} physical damage</physicalDamage> to enemies hit. Refunds {{ tapcooldownrefund*100 }}% of Comet Spear's cooldown.<br /><br /><span class=\"colorFF8C00\">Hold:</span> Pantheon hurls his spear, dealing <physicalDamage>{{ holddamagecalc }} physical damage</physicalDamage> to the first enemy hit and {{ damagefalloff*100 }}% less to further targets. Deals <physicalDamage>{{ executedamagecalcmodified }} physical damage</physicalDamage> to targets below {{ crithealththreshold*100 }}% health instead.<br /><br /><span class=\"colorEDDA74\">Mortal Will Bonus:</span> Deals an additional <physicalDamage>{{ empowereddamagecalc }} physical damage</physicalDamage> and slow the target by {{ slowamount*100 }}% for {{ slowduration }} seconds.",
+          "tooltip": "<span class=\"colorFF8C00\">Tap:</span> Pantheon thrusts his spear, dealing <physicalDamage>{{ tapdamagecalc }} physical damage</physicalDamage> to enemies hit. Refunds {{ tapcooldownrefund*100 }}% of Comet Spear's cooldown.<br /><br /><span class=\"colorFF8C00\">Hold:</span> Pantheon hurls his spear, dealing <physicalDamage>{{ holddamagecalc }} physical damage</physicalDamage> to the first enemy hit and {{ damagefalloff*100 }}% less to further targets. <br /><br />Comet Spear critically strikes enemies below {{ crithealththreshold*100 }}% health for <physicalDamage>{{ executedamagecalcmodified }} physical damage</physicalDamage> instead.<br /><br /><span class=\"colorEDDA74\">Mortal Will Bonus:</span> Deals an additional <physicalDamage>{{ empowereddamagecalc }} physical damage</physicalDamage> and slow the target by {{ slowamount*100 }}% for {{ slowduration }} seconds.",
           "leveltip": {
             "label": [
               "Base Damage",
@@ -661,8 +661,8 @@
         }
       ],
       "passive": {
-        "name": "",
-        "description": "",
+        "name": "Mortal Will",
+        "description": "Every few spells or attacks, Pantheon's next spell is empowered.",
         "image": {
           "full": "Pantheon_Passive.PantheonVGU.png",
           "sprite": "passive2.png",

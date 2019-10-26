@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.16.1",
+  "version": "9.21.1",
   "data": {
     "Akali": {
       "id": "Akali",
@@ -563,8 +563,8 @@
         {
           "id": "AkaliR",
           "name": "Perfect Execution",
-          "description": "Akali leaps in a direction, stunning and damaging enemies she strikes. Re-cast: Akali dashes in a direction, executing all enemies she strikes.",
-          "tooltip": "Two dashes: The first vaults over enemies, micro-stunning and dealing <physicalDamage>{{ cast1damage }} physical damage</physicalDamage>. Akali can dash again after {{ cooldownbetweencasts }} seconds.<span class=\"size8\"><br /><br /></span>The second is a piercing thrust that executes, dealing <magicDamage>{{ cast2damagemin }}</magicDamage> to <magicDamage>{{ cast2damagemax }} magic damage</magicDamage> based on missing health.",
+          "description": "Akali leaps in a direction, damaging enemies she strikes. Re-cast: Akali dashes in a direction, executing all enemies she strikes.",
+          "tooltip": "Two dashes: The first vaults over enemies, dealing <physicalDamage>{{ cast1damage }} physical damage</physicalDamage>. Akali can dash again after {{ cooldownbetweencasts }} seconds.<span class=\"size8\"><br /><br /></span>The second is a piercing thrust that executes, dealing <magicDamage>{{ cast2damagemin }}</magicDamage> to <magicDamage>{{ cast2damagemax }} magic damage</magicDamage> based on missing health.",
           "leveltip": {
             "label": [
               "Base Damage",
@@ -573,17 +573,17 @@
             ],
             "effect": [
               "{{ basedamage }} -> {{ basedamageNL }}",
-              "{{ basedamage*3.000000 }} -> {{ basedamagenl*3.000000 }}",
+              "{{ r2basedamage*3.000000 }} -> {{ r2basedamagenl*3.000000 }}",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
           "maxrank": 3,
           "cooldown": [
-            120,
-            110,
+            160,
+            130,
             100
           ],
-          "cooldownBurn": "120/110/100",
+          "cooldownBurn": "160/130/100",
           "cost": [
             0,
             0,

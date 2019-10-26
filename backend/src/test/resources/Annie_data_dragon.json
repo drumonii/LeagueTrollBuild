@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.16.1",
+  "version": "9.21.1",
   "data": {
     "Annie": {
       "id": "Annie",
@@ -88,6 +88,12 @@
           "id": "1011",
           "num": 11,
           "name": "Super Galaxy Annie",
+          "chromas": false
+        },
+        {
+          "id": "1012",
+          "num": 12,
+          "name": "Annie-Versary",
           "chromas": false
         }
       ],
@@ -433,27 +439,29 @@
         {
           "id": "AnnieE",
           "name": "Molten Shield",
-          "description": "Grants Annie and Tibbers increased percentage Damage Resist and damages enemies who attack with basic attacks.",
-          "tooltip": "Annie grants herself and Tibbers {{ damagereduction }}% damage reduction for {{ shieldduration }} seconds.<br /><br />While the shield is active, enemies who basic attack it take {{ damagereflection }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage.",
+          "description": "Grants Annie increased percentage Damage Reduction, a burst of movement speed, and damages enemies who attack her with basic attacks.",
+          "tooltip": "Annie grants herself {{ damagereduction }}% damage reduction for {{ shieldduration }} seconds and {{ movespeedcalc }} movement speed that decays over {{ movementspeedduration }} seconds.<br /><br />While the shield is active, enemies who basic attack it take {{ damagereflection }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage.",
           "leveltip": {
             "label": [
               "Damage Reduction",
-              "Damage Return"
+              "Damage Reflection",
+              "Cooldown"
             ],
             "effect": [
               "{{ damagereduction }}% -> {{ damagereductionNL }}%",
-              "{{ damagereflection }} -> {{ damagereflectionNL }}"
+              "{{ damagereflection }} -> {{ damagereflectionNL }}",
+              "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
           "maxrank": 5,
           "cooldown": [
-            10,
-            10,
-            10,
-            10,
+            14,
+            13,
+            12,
+            11,
             10
           ],
-          "cooldownBurn": "10",
+          "cooldownBurn": "14/13/12/11/10",
           "cost": [
             20,
             20,
@@ -556,7 +564,7 @@
               "key": "a1"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             400,
@@ -575,29 +583,29 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "AnnieR",
           "name": "Summon: Tibbers",
           "description": "Annie wills her bear Tibbers to life, dealing damage to units in the area. Tibbers can attack and also burns enemies that stand near him.",
-          "tooltip": "Summons Tibbers, dealing {{ initialdamage }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage to enemies in the target area. For the next 45 seconds, Tibbers burns nearby enemies for {{ auradamage }} <span class=\"color99FF99\">(+{{ a2 }})</span> per second and attacks for {{ tibbersattackdamage }} <span class=\"color99FF99\">(+{{ tibbersattackratio }})</span> as magic damage. Annie can control Tibbers by reactivating this ability.<br /><br />Tibbers <span class=\"colorFFEB7F\">Enrages</span> when: summoned; Annie uses Pyromania on an enemy Champion; and when Annie dies.<br /><br /><span class=\"colorFFEB7F\">Enrages</span>: Tibbers gains 275% Attack Speed and 100% Movement Speed, decaying over 3 seconds.",
+          "tooltip": "Summons Tibbers, dealing {{ initialdamage }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage to enemies in the target area. For the next 45 seconds, Tibbers burns nearby enemies for {{ auradamage }} <scaleAP>(+{{ a2 }})</scaleAP> per second and attacks for {{ tibbersattackdamage }} <scaleAP>(+{{ tibbersattackratio }})</scaleAP> as magic damage. Annie can control Tibbers by reactivating this ability.<br /><br />When Annie dies, Tibbers <span class=\"colorFFEB7F\">Enrages</span>, gaining 275% Attack Speed and 100% Movement Speed, decaying over 3 seconds.",
           "leveltip": {
             "label": [
-              "Damage",
-              "Tibbers Health",
-              "Tibbers Armor and Magic Resist",
+              "Cooldown",
+              "Initial Damage",
+              "Aura Damage",
               "Tibbers Attack Damage",
-              "Tibbers Burn Damage",
-              "Cooldown"
+              "Bonus Resistances",
+              "Bonus Health"
             ],
             "effect": [
+              "{{ cooldown }} -> {{ cooldownNL }}",
               "{{ initialdamage }} -> {{ initialdamageNL }}",
-              "{{ totalhealth }} -> {{ totalhealthNL }}",
-              "{{ bonusresistances }} -> {{ bonusresistancesNL }}",
-              "{{ tibbersattackdamage }} -> {{ tibbersattackdamageNL }}",
               "{{ auradamage }} -> {{ auradamageNL }}",
-              "{{ cooldown }} -> {{ cooldownNL }}"
+              "{{ tibbersattackdamage }} -> {{ tibbersattackdamageNL }}",
+              "{{ bonusresistances }} -> {{ bonusresistancesNL }}",
+              "{{ bonushealth }} -> {{ bonushealthNL }}"
             ]
           },
           "maxrank": 3,
@@ -692,7 +700,7 @@
               "key": "a2"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             600,
@@ -709,7 +717,7 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         }
       ],
       "passive": {

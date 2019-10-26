@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.16.1",
+  "version": "9.21.1",
   "data": {
     "Kayle": {
       "id": "Kayle",
@@ -129,7 +129,7 @@
           "id": "KayleQ",
           "name": "Radiant Blast",
           "description": "Kayle conjures a portal, summoning a celestial sword that pierces through enemies, slowing, damaging, and reducing the resistances of all hit.",
-          "tooltip": "Kayle summons a celestial sword that stops on the first enemy hit. <br /><br />The sword deals <magicDamage>{{ totaldamage }} magic damage</magicDamage> to the target and enemies behind it, slows by {{ slowpercent }}% for {{ slowduration }} seconds, and shreds Armor and Magic Resistance by {{ shredpercent }}% for {{ shredduration }} seconds.",
+          "tooltip": "Kayle summons a celestial sword that stops on the first enemy hit. <br /><br />The sword deals <magicDamage>{{ totaldamage }} magic damage</magicDamage> to the target and enemies behind it, slows by {{ slowpercent }}% for {{ slowduration }} seconds, and shreds Armor and Magic Resistance by {{ shredpercent }}% for {{ shredduration }} seconds. Radiant Blast refunds {{ manarefundpercent*100 }}% of its mana cost for each champion hit.",
           "leveltip": {
             "label": [
               "Damage",
@@ -252,13 +252,13 @@
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
-            850,
-            850,
-            850,
-            850,
-            850
+            900,
+            900,
+            900,
+            900,
+            900
           ],
-          "rangeBurn": "850",
+          "rangeBurn": "900",
           "image": {
             "full": "KayleQ.png",
             "sprite": "spell5.png",
@@ -417,7 +417,7 @@
           "id": "KayleE",
           "name": "Starfire Spellblade",
           "description": "Passive: Kayle's celestial sword, Virtue, deals bonus magic damage to enemies she attacks.<br><br>Active: Kayle's next attack smites her target with celestial fire, dealing bonus damage proportionate to their missing health.",
-          "tooltip": "<spellPassive>Passive:</spellPassive> Attacks deal <magicDamage>{{ epassivetotaldamage }} bonus magic damage</magicDamage>.<br /><br /><spellActive>Active:</spellActive> Kayle's next attack becomes ranged and deals <magicDamage>{{ activetotalexecutedamage }}</magicDamage> of the target's missing health as bonus <magicDamage>magic damage</magicDamage>. This attack upgrades when Kayle reaches <scaleLevel>Level {{ spell.kaylepassive:levelforpassiverank1 }}</scaleLevel>, causing it to explode when it hits the target, dealing damage to nearby enemies.",
+          "tooltip": "<spellPassive>Passive:</spellPassive> Attacks deal <magicDamage>{{ epassivetotaldamage }} bonus magic damage</magicDamage>.<br /><br /><spellActive>Active:</spellActive> Kayle's next attack becomes ranged and deals <magicDamage>{{ activetotalexecutedamage }}</magicDamage> of the target's missing health as bonus <magicDamage>magic damage</magicDamage>. This attack upgrades when Kayle reaches <scaleLevel>Level {{ spell.kaylepassive:levelforpassiverank2 }}</scaleLevel>, causing it to explode when it hits the target, dealing damage to nearby enemies.",
           "leveltip": {
             "label": [
               "Passive Damage",
@@ -565,12 +565,14 @@
             "label": [
               "Damage",
               "Immunity Duration",
-              "Cooldown"
+              "Cooldown",
+              "@AbilityResourceName@ Cost"
             ],
             "effect": [
               "{{ damage }} -> {{ damageNL }}",
               "{{ invulnduration }} -> {{ invulndurationNL }}",
-              "{{ cooldown }} -> {{ cooldownNL }}"
+              "{{ cooldown }} -> {{ cooldownNL }}",
+              "{{ cost }} -> {{ costNL }}"
             ]
           },
           "maxrank": 3,
@@ -582,10 +584,10 @@
           "cooldownBurn": "160/120/80",
           "cost": [
             100,
-            100,
-            100
+            50,
+            0
           ],
-          "costBurn": "100",
+          "costBurn": "100/50/0",
           "datavalues": {},
           "effect": [
             null,
@@ -676,7 +678,7 @@
       ],
       "passive": {
         "name": "Divine Ascent",
-        "description": "Kayle's attacks are empowered by the heavens as she levels up and spends skill points. Her wings are lit aflame as she progressively gains Attack Speed, Movement Speed towards enemies, waves of fire on her attacks, Attack Range, and True Damage.",
+        "description": "Kayle's attacks are empowered by the heavens as she levels up and spends skill points. Her wings are lit aflame as she progressively gains Attack Speed, Movement Speed, Attack Range, and waves of fire on her attacks.",
         "image": {
           "full": "Kayle_P.png",
           "sprite": "passive1.png",
@@ -957,7 +959,7 @@
               ],
               "items": [
                 {
-                  "id": "3285",
+                  "id": "3146",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1000,7 +1002,12 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3146",
+                  "id": "3100",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3135",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1023,17 +1030,22 @@
               ],
               "items": [
                 {
-                  "id": "3116",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
                   "id": "3091",
                   "count": 1,
                   "hideCount": false
                 },
                 {
                   "id": "3046",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3102",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3157",
                   "count": 1,
                   "hideCount": false
                 }
@@ -2086,8 +2098,13 @@
               ],
               "items": [
                 {
-                  "id": "2033",
+                  "id": "1056",
                   "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "2003",
+                  "count": 2,
                   "hideCount": false
                 },
                 {
@@ -2114,13 +2131,13 @@
               ],
               "items": [
                 {
-                  "id": "1039",
+                  "id": "1041",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "2003",
-                  "count": 3,
+                  "id": "2031",
+                  "count": 1,
                   "hideCount": false
                 },
                 {
@@ -2147,7 +2164,7 @@
               ],
               "items": [
                 {
-                  "id": "1082",
+                  "id": "3144",
                   "count": 1,
                   "hideCount": false
                 },
@@ -2157,7 +2174,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3144",
+                  "id": "3145",
                   "count": 1,
                   "hideCount": false
                 }
@@ -2289,12 +2306,12 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3085",
+                  "id": "3100",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3285",
+                  "id": "3135",
                   "count": 1,
                   "hideCount": false
                 }
@@ -2322,12 +2339,17 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3146",
+                  "id": "3089",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3089",
+                  "id": "3135",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3146",
                   "count": 1,
                   "hideCount": false
                 }
@@ -2350,7 +2372,7 @@
               ],
               "items": [
                 {
-                  "id": "3046",
+                  "id": "3157",
                   "count": 1,
                   "hideCount": false
                 },
@@ -2360,12 +2382,12 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3116",
+                  "id": "3102",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3153",
+                  "id": "3046",
                   "count": 1,
                   "hideCount": false
                 }

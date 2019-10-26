@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.16.1",
+  "version": "9.21.1",
   "data": {
     "AurelionSol": {
       "id": "AurelionSol",
@@ -61,7 +61,7 @@
         "difficulty": 7
       },
       "stats": {
-        "hp": 510,
+        "hp": 575,
         "hpperlevel": 92,
         "mp": 350,
         "mpperlevel": 50,
@@ -92,23 +92,25 @@
             "label": [
               "Damage",
               "Stun Duration",
-              "@AbilityResourceName@ Cost"
+              "@AbilityResourceName@ Cost",
+              "Cooldown"
             ],
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
               "{{ e4 }} -> {{ e4NL }}",
-              "{{ cost }} -> {{ costNL }}"
+              "{{ cost }} -> {{ costNL }}",
+              "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
           "maxrank": 5,
           "cooldown": [
+            11,
             10,
-            10,
-            10,
-            10,
-            10
+            9,
+            8,
+            7
           ],
-          "cooldownBurn": "10",
+          "cooldownBurn": "11/10/9/8/7",
           "cost": [
             60,
             70,
@@ -128,11 +130,11 @@
               230
             ],
             [
-              10,
-              10,
-              10,
-              10,
-              10
+              20,
+              20,
+              20,
+              20,
+              20
             ],
             [
               20,
@@ -194,7 +196,7 @@
           "effectBurn": [
             null,
             "70/110/150/190/230",
-            "10",
+            "20",
             "20",
             "2.2/2.4/2.6/2.8/3",
             "0",
@@ -235,37 +237,37 @@
         {
           "id": "AurelionSolW",
           "name": "Celestial Expansion",
-          "description": "Aurelion Sol pushes his stars farther out, magnifying their damage.",
-          "tooltip": "<spellPassive>Passive: </spellPassive>Increases Star base damage by {{ starbasedamageincrease }}.<br /><br /><spellPassive>Toggle: </spellPassive>Aurelion Sol's Stars orbit at his <span class=\"color308BDB\">Outer Limit</span> and deal {{ damagemultiplier*100 }}% damage, for a total of {{ f1 }} <scaleAP>(+{{ f2 }})</scaleAP> magic damage.<br />",
+          "description": "Aurelion Sol pushes his stars farther out, increasing their damage and speed.",
+          "tooltip": "<spellPassive>Passive: </spellPassive>Increases Star base damage by {{ starbasedamageincrease }}.<br /><br /><spellPassive>Active: </spellPassive>Aurelion Sol's Stars expand their orbit to his <span class=\"color308BDB\">Outer Limit</span>, rotating more quickly and dealing {{ damagemultiplier*100 }}% damage for a total of {{ f1 }} <scaleAP>(+{{ f2 }})</scaleAP> magic damage. Upon reactivation or after 3 seconds, the Stars retract and Aurelion Sol gains 40% movement speed, decaying over 1.5 seconds.<br />",
           "leveltip": {
             "label": [
               "Passive Damage Bonus",
-              "Mana Cost Per Second",
-              "Cooldown"
+              "Cooldown",
+              "Mana Cost"
             ],
             "effect": [
               "{{ starbasedamageincrease }} -> {{ starbasedamageincreaseNL }}",
-              "{{ e3 }} -> {{ e3NL }}",
-              "{{ cooldown }} -> {{ cooldownNL }}"
+              "{{ cooldown }} -> {{ cooldownNL }}",
+              "{{ basecost }} -> {{ basecostNL }}"
             ]
           },
           "maxrank": 5,
           "cooldown": [
-            6,
-            5.5,
+            8,
+            6.5,
             5,
-            4.5,
-            4
+            3.5,
+            2
           ],
-          "cooldownBurn": "6/5.5/5/4.5/4",
+          "cooldownBurn": "8/6.5/5/3.5/2",
           "cost": [
-            40,
-            40,
-            40,
-            40,
-            40
+            70,
+            80,
+            90,
+            100,
+            110
           ],
-          "costBurn": "40",
+          "costBurn": "70/80/90/100/110",
           "datavalues": {},
           "effect": [
             null,
@@ -354,7 +356,7 @@
             "0"
           ],
           "vars": [],
-          "costType": " Mana plus {{ e3 }} Mana Per Second",
+          "costType": " Mana",
           "maxammo": "-1",
           "range": [
             600,
@@ -373,32 +375,34 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana plus {{ e3 }} Mana Per Second"
+          "resource": "{{ cost }} Mana"
         },
         {
           "id": "AurelionSolE",
           "name": "Comet of Legend",
-          "description": "Aurelion Sol gains speed while moving in one continuous direction, and can take off flying for a long distance.",
-          "tooltip": "<spellPassive>Passive: </spellPassive>Continuously moving in one direction grants increasing Movement Speed up to {{ passivemovespeed }}%.<br /><br /><spellPassive>Active: </spellPassive>Fly for {{ e3 }} units in the chosen direction. Only castable outside of combat. Aurelion Sol can see and be seen over walls while flying.<br /><br />Taking champion or turret damage will force a landing and reset the passive movement speed.<br />",
+          "description": "Aurelion Sol takes off flying for a long distance.",
+          "tooltip": "Fly for {{ e3 }} units in the chosen direction. Only castable outside of combat. Aurelion Sol can see and be seen over walls while flying.<br /><br />Taking champion or turret damage will force a landing.<br />",
           "leveltip": {
             "label": [
               "Flight Range",
+              "Flight Speed",
               "Cooldown"
             ],
             "effect": [
               "{{ e3 }} -> {{ e3NL }}",
+              "{{ e4 }} -> {{ e4NL }}",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
           "maxrank": 5,
           "cooldown": [
-            60,
-            55,
-            50,
-            45,
-            40
+            80,
+            75,
+            70,
+            65,
+            60
           ],
-          "cooldownBurn": "60/55/50/45/40",
+          "cooldownBurn": "80/75/70/65/60",
           "cost": [
             60,
             60,
@@ -425,18 +429,18 @@
               0
             ],
             [
-              3000,
-              4000,
-              5000,
+              5500,
               6000,
-              7000
+              6500,
+              7000,
+              7500
             ],
             [
               600,
-              600,
-              600,
-              600,
-              600
+              650,
+              700,
+              750,
+              800
             ],
             [
               0,
@@ -485,8 +489,8 @@
             null,
             "5/6/7/8/9",
             "0",
-            "3000/4000/5000/6000/7000",
-            "600",
+            "5500/6000/6500/7000/7500",
+            "600/650/700/750/800",
             "0",
             "0",
             "0",
@@ -498,13 +502,13 @@
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
-            3000,
-            4000,
-            5000,
+            5500,
             6000,
-            7000
+            6500,
+            7000,
+            7500
           ],
-          "rangeBurn": "3000/4000/5000/6000/7000",
+          "rangeBurn": "5500/6000/6500/7000/7500",
           "image": {
             "full": "AurelionSolE.png",
             "sprite": "spell1.png",
@@ -641,8 +645,8 @@
         }
       ],
       "passive": {
-        "name": "",
-        "description": "",
+        "name": "Center of the Universe",
+        "description": "Stars orbit Aurelion Sol, dealing magic damage when they hit an enemy.",
         "image": {
           "full": "AurelionSol_Passive.png",
           "sprite": "passive0.png",

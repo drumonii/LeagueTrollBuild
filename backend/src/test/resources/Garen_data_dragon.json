@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.16.1",
+  "version": "9.21.1",
   "data": {
     "Garen": {
       "id": "Garen",
@@ -110,8 +110,8 @@
         "difficulty": 5
       },
       "stats": {
-        "hp": 616.28,
-        "hpperlevel": 84.25,
+        "hp": 620,
+        "hpperlevel": 84,
         "mp": 0,
         "mpperlevel": 0,
         "movespeed": 340,
@@ -128,7 +128,7 @@
         "critperlevel": 0,
         "attackdamage": 66,
         "attackdamageperlevel": 4.5,
-        "attackspeedperlevel": 2.9,
+        "attackspeedperlevel": 3.65,
         "attackspeed": 0.625
       },
       "spells": [
@@ -136,15 +136,15 @@
           "id": "GarenQ",
           "name": "Decisive Strike",
           "description": "Garen gains a burst of movement speed, breaking free of all slows affecting him. His next attack strikes a vital area of his foe, dealing bonus damage and silencing them.",
-          "tooltip": "Garen breaks free from all slows affecting him, and gains {{ e2 }}% movement speed for {{ e4 }} seconds.<br /><br />His next basic attack within {{ e5 }} seconds deals {{ e1 }} <span class=\"colorFF8C00\">(+{{ a1 }})</span> physical damage and silences his target for {{ e3 }} seconds.",
+          "tooltip": "Garen breaks free from all slows affecting him, and gains {{ movementspeedamount*100 }}% movement speed for {{ movementspeedduration }} seconds.<br /><br />His next basic attack within {{ attackwindow }} seconds deals <physicalDamage>{{ totaldamage }} physical damage</physicalDamage> and silences his target for {{ silenceduration }} seconds.",
           "leveltip": {
             "label": [
-              "Bonus Damage",
+              "Damage",
               "Movement Speed Duration"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
-              "{{ e4 }} -> {{ e4NL }}"
+              "{{ basedamage }} -> {{ basedamageNL }}",
+              "{{ movementspeedduration }} -> {{ movementspeeddurationNL }}"
             ]
           },
           "maxrank": 5,
@@ -168,39 +168,39 @@
           "effect": [
             null,
             [
-              30,
-              60,
-              90,
-              120,
-              150
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              30,
-              30,
-              30,
-              30,
-              30
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              1.5,
-              1.5,
-              1.5,
-              1.5,
-              1.5
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              1.5,
-              2,
-              2.5,
-              3,
-              3.5
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              4.5,
-              4.5,
-              4.5,
-              4.5,
-              4.5
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -240,24 +240,18 @@
           ],
           "effectBurn": [
             null,
-            "30/60/90/120/150",
-            "30",
-            "1.5",
-            "1.5/2/2.5/3/3.5",
-            "4.5",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
             "0",
             "0",
             "0",
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "attackdamage",
-              "coeff": 1.4,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": "No Cost",
           "maxammo": "-1",
           "range": [
@@ -282,15 +276,15 @@
         {
           "id": "GarenW",
           "name": "Courage",
-          "description": "Garen passively increases his armor and magic resist by killing enemies. He may also activate this ability to give him a huge burst of Tenacity and damage reduction for a brief moment followed by a lesser amount of damage reduction for a longer duration.",
-          "tooltip": "<span class=\"colorFF9900\">Passive:</span> Killing units permanently grants {{ f2 }} armor and magic resist, up to a maximum of {{ e2 }}. Current Bonus: <span class=\"colorFFFFFF\">{{ f1 }}</span><br /><br /><span class=\"colorFF9900\">Active: </span>Garen steels his courage for {{ e4 }} seconds. For the first {{ e7 }} seconds, he takes {{ e6 }}% less damage and gains {{ e5 }}% Tenacity. For the remaining duration, he takes {{ e3 }}% less damage.",
+          "description": "Garen passively increases his armor and magic resist by killing enemies. He may also activate this ability to give him a shield and tenacity for a brief moment followed by a lesser amount of damage reduction for a longer duration.",
+          "tooltip": "<span class=\"colorFF9900\">Passive:</span> Killing units permanently grants {{ resistgainonkill }} armor and magic resist, up to a maximum of {{ resistmax }}. Current Bonus: <span class=\"colorFFFFFF\">{{ f1 }}</span><br /><br /><span class=\"colorFF9900\">Active: </span>Garen steels his courage for {{ drduration }} seconds, reducing all incoming damage by {{ drpercent*100 }}%. For the first {{ upfrontduration }} seconds, he also gains a shield that blocks {{ totalshield }} damage and {{ upfronttenacity*100 }}% Tenacity.",
           "leveltip": {
             "label": [
-              "Total Duration",
+              "Duration",
               "Cooldown"
             ],
             "effect": [
-              "{{ e4 }} -> {{ e4NL }}",
+              "{{ drduration }} -> {{ drdurationNL }}",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
@@ -315,53 +309,53 @@
           "effect": [
             null,
             [
-              0.333,
-              0.333,
-              0.333,
-              0.333,
-              0.333
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              50,
-              50,
-              50,
-              50,
-              50
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              30,
-              30,
-              30,
-              30,
-              30
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              2,
-              2.75,
-              3.5,
-              4.25,
-              5
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              60,
-              60,
-              60,
-              60,
-              60
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              60,
-              60,
-              60,
-              60,
-              60
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              0.75,
-              0.75,
-              0.75,
-              0.75,
-              0.75
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -387,13 +381,13 @@
           ],
           "effectBurn": [
             null,
-            "0.33",
-            "50",
-            "30",
-            "2/2.75/3.5/4.25/5",
-            "60",
-            "60",
-            "0.75",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
             "0",
             "0",
             "0"
@@ -402,13 +396,13 @@
           "costType": "No Cost",
           "maxammo": "-1",
           "range": [
-            20,
-            20,
-            20,
-            20,
-            20
+            0,
+            0,
+            0,
+            0,
+            0
           ],
-          "rangeBurn": "20",
+          "rangeBurn": "0",
           "image": {
             "full": "GarenW.png",
             "sprite": "spell3.png",
@@ -423,16 +417,16 @@
         {
           "id": "GarenE",
           "name": "Judgment",
-          "description": "Garen performs a dance of death with his sword, dealing damage around him for the duration and shredding the armor of enemy champions hit.",
-          "tooltip": "Garen rapidly spins his sword around his body for {{ e2 }} seconds, dealing {{ f3 }} physical damage to nearby enemies -- {{ e1 }} plus {{ e3 }}% of his attack damage <span class=\"colorFF8C00\">(+{{ f1 }})</span>, <span class=\"colorFFFFFF\">{{ f2 }}</span> times (increased by 1 every 3 champion levels) -- over the duration.<br /><br />Enemy champions hit by {{ e6 }} spins lose {{ e5 }}% of their armor for {{ e7 }} seconds.<br /><br /><span class=\"color99FF99\">Judgment deals {{ e4 }}% increased damage when striking only one enemy.<br />Cancelling Judgment returns cooldown equal to the remaining duration.<br />Judgment can critically strike for bonus damage.</span>",
+          "description": "Garen rapidly spins his sword around his body, dealing physical damage to nearby enemies.",
+          "tooltip": "Garen rapidly spins his sword around his body for {{ duration }} seconds, dealing <physicalDamage>{{ totaldamage }} physical damage</physicalDamage> {{ f1 }} times, increased to <physicalDamage>{{ totaldamagenearest }}</physicalDamage> to the nearest enemy. (Attack speed from items and levels increases the number of strikes)<br /><br />Enemy champions hit by {{ stackstoshred }} spins lose {{ shredamount*100 }}% of their armor for {{ shredduration }} seconds.",
           "leveltip": {
             "label": [
-              "Base Damage per hit",
-              "Total Attack Damage Ratio per hit"
+              "Damage Per Spin",
+              "Attack Damage Scaling Per Spin"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
-              "{{ e3 }}% -> {{ e3NL }}%"
+              "{{ basedamagepertick }} -> {{ basedamagepertickNL }}",
+              "{{ adratiopertick*100.000000 }}% -> {{ adratioperticknl*100.000000 }}%"
             ]
           },
           "maxrank": 5,
@@ -456,53 +450,53 @@
           "effect": [
             null,
             [
-              14,
-              18,
-              22,
-              26,
-              30
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              3,
-              3,
-              3,
-              3,
-              3
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              36,
-              37,
-              38,
-              39,
-              40
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              33,
-              33,
-              33,
-              33,
-              33
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              25,
-              25,
-              25,
-              25,
-              25
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              4,
-              4,
-              4,
-              4,
-              4
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              6,
-              6,
-              6,
-              6,
-              6
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -528,13 +522,13 @@
           ],
           "effectBurn": [
             null,
-            "14/18/22/26/30",
-            "3",
-            "36/37/38/39/40",
-            "33",
-            "25",
-            "4",
-            "6",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
             "0",
             "0",
             "0"
@@ -564,18 +558,18 @@
         {
           "id": "GarenR",
           "name": "Demacian Justice",
-          "description": "The enemy champion with the most recent kills is the Villain. Garen's attacks deal additional true damage to that champion.<br><br>Garen can call upon the might of Demacia to deal a finishing blow to an enemy champion that deals damage based upon how much health his target has missing. This damage is true damage against the Villain.",
-          "tooltip": "<span class=\"colorFF9900\">Passive:</span> The enemy champion with the most recent kills is the <span class=\"colorFFF673\">Villain</span>. Judgment and basic attacks against it deal an additional {{ e3 }}% of its maximum health as true damage.<br /><br /><span class=\"colorFF9900\">Active:</span> Garen calls upon the might of Demacia to attempt to execute an enemy champion, dealing magic damage equal to {{ e1 }} plus {{ e2 }}% of the target's missing health. Deals true damage to the <span class=\"colorFFF673\">Villain</span>.",
+          "description": "Garen calls upon the might of Demacia to attempt to execute an enemy champion.",
+          "tooltip": "Garen calls upon the might of Demacia to attempt to execute an enemy champion, dealing true damage equal to {{ basedamage }} plus {{ executedamage*100 }}% of the target's missing health.",
           "leveltip": {
             "label": [
+              "Cooldown",
               "Damage",
-              "Missing Health Damage",
-              "Cooldown"
+              "Percent Missing Health Damage"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
-              "{{ e2 }}% -> {{ e2NL }}%",
-              "{{ cooldown }} -> {{ cooldownNL }}"
+              "{{ cooldown }} -> {{ cooldownNL }}",
+              "{{ basedamage }} -> {{ basedamageNL }}",
+              "{{ executedamage*100.000000 }}% -> {{ executedamagenl*100.000000 }}%"
             ]
           },
           "maxrank": 3,
@@ -595,19 +589,19 @@
           "effect": [
             null,
             [
-              175,
-              350,
-              525
+              0,
+              0,
+              0
             ],
             [
-              28,
-              33,
-              40
+              0,
+              0,
+              0
             ],
             [
-              1,
-              1,
-              1
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -647,9 +641,9 @@
           ],
           "effectBurn": [
             null,
-            "175/350/525",
-            "28/33/40",
-            "1",
+            "0",
+            "0",
+            "0",
             "0",
             "0",
             "0",
@@ -681,7 +675,7 @@
       ],
       "passive": {
         "name": "Perseverance",
-        "description": "If Garen has not recently been struck by damage or enemy abilities, he regenerates a percentage of his total health each second. Minion damage does not stop Perseverance.",
+        "description": "If Garen has not recently been struck by damage or enemy abilities, he regenerates a percentage of his total health each second.",
         "image": {
           "full": "Garen_Passive.png",
           "sprite": "passive1.png",
@@ -1024,6 +1018,11 @@
               ],
               "items": [
                 {
+                  "id": "3046",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
                   "id": "3031",
                   "count": 1,
                   "hideCount": false
@@ -1034,7 +1033,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3142",
+                  "id": "3095",
                   "count": 1,
                   "hideCount": false
                 }
@@ -2393,7 +2392,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3005",
+                  "id": "3742",
                   "count": 1,
                   "hideCount": false
                 }
@@ -2449,17 +2448,17 @@
               ],
               "items": [
                 {
-                  "id": "3053",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3742",
+                  "id": "3142",
                   "count": 1,
                   "hideCount": false
                 },
                 {
                   "id": "3812",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3053",
                   "count": 1,
                   "hideCount": false
                 }
@@ -2493,6 +2492,44 @@
                 },
                 {
                   "id": "3143",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "offmeta",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "3078",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3046",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3508",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3095",
                   "count": 1,
                   "hideCount": false
                 }

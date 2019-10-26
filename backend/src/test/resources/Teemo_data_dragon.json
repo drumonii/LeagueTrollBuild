@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.16.1",
+  "version": "9.21.1",
   "data": {
     "Teemo": {
       "id": "Teemo",
@@ -133,7 +133,7 @@
           "id": "BlindingDart",
           "name": "Blinding Dart",
           "description": "Obscures an enemy's vision with a powerful venom, dealing damage to the target unit and blinding it for the duration.",
-          "tooltip": "Deals {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage and blinds the target for {{ e2 }} seconds. ",
+          "tooltip": "Deals {{ calculateddamage }} magic damage and blinds the target for {{ blindduration }} seconds. ",
           "leveltip": {
             "label": [
               "Damage",
@@ -141,8 +141,8 @@
               "@AbilityResourceName@ Cost"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
-              "{{ e2 }} -> {{ e2NL }}",
+              "{{ basedamage }} -> {{ basedamageNL }}",
+              "{{ blindduration }} -> {{ blinddurationNL }}",
               "{{ cost }} -> {{ costNL }}"
             ]
           },
@@ -167,25 +167,25 @@
           "effect": [
             null,
             [
-              80,
-              125,
-              170,
-              215,
-              260
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              1.5,
-              1.75,
-              2,
-              2.25,
-              2.5
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              1,
-              1,
-              1,
-              1,
-              1
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -239,9 +239,9 @@
           ],
           "effectBurn": [
             null,
-            "80/125/170/215/260",
-            "1.5/1.75/2/2.25/2.5",
-            "1",
+            "0",
+            "0",
+            "0",
             "0",
             "0",
             "0",
@@ -250,13 +250,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.8,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -282,13 +276,13 @@
           "id": "MoveQuick",
           "name": "Move Quick",
           "description": "Teemo scampers around, passively increasing his Movement Speed until he is struck by an enemy champion or turret. Teemo can sprint to gain bonus Movement Speed that isn't stopped by being struck for a short time.",
-          "tooltip": "<spellPassive>Passive: </spellPassive>Teemo's Movement Speed is increased by {{ e1 }}% unless he has been damaged by an enemy champion or turret in the last 5 seconds.<br /><br /><spellPassive>Active: </spellPassive>Teemo sprints, gaining twice his normal bonus for {{ e2 }} seconds. This bonus is not lost when struck.",
+          "tooltip": "<spellPassive>Passive: </spellPassive>Teemo's Movement Speed is increased by {{ passivemsbonus*100 }}% unless he has been damaged by an enemy champion or turret in the last 5 seconds.<br /><br /><spellPassive>Active: </spellPassive>Teemo sprints, gaining twice his normal bonus for {{ msbuffduration }} seconds. This bonus is not lost when struck.",
           "leveltip": {
             "label": [
               "Movement Speed"
             ],
             "effect": [
-              "{{ effect1amount*100.000000 }}% -> {{ effect1amountnl*100.000000 }}%"
+              "{{ passivemsbonus*100.000000 }}% -> {{ passivemsbonusnl*100.000000 }}%"
             ]
           },
           "maxrank": 5,
@@ -312,32 +306,32 @@
           "effect": [
             null,
             [
-              10,
-              14,
-              18,
-              22,
-              26
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              3,
-              3,
-              3,
-              3,
-              3
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              0.2,
-              0.28,
-              0.36,
-              0.44,
-              0.52
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              5,
-              5,
-              5,
-              5,
-              5
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -384,10 +378,10 @@
           ],
           "effectBurn": [
             null,
-            "10/14/18/22/26",
-            "3",
-            "0.2/0.28/0.36/0.44/0.52",
-            "5",
+            "0",
+            "0",
+            "0",
+            "0",
             "0",
             "0",
             "0",
@@ -421,15 +415,15 @@
           "id": "ToxicShot",
           "name": "Toxic Shot",
           "description": "Each of Teemo's attacks will poison the target, dealing damage on impact and each second after for 4 seconds.",
-          "tooltip": "Teemo's basic attacks poison their target, dealing {{ e2 }} <scaleAP>(+{{ a1 }})</scaleAP> magical damage upon impact and {{ e1 }} <scaleAP>(+{{ a2 }})</scaleAP> magical damage each second for {{ e3 }} seconds.",
+          "tooltip": "Teemo's basic attacks poison their target, dealing {{ impactcalculateddamage }} magical damage upon impact and {{ tickcalculateddamage }} magical damage each second for {{ poisonduration }} seconds.",
           "leveltip": {
             "label": [
               "Impact Damage",
               "Damage Per Second"
             ],
             "effect": [
-              "{{ e2 }} -> {{ e2NL }}",
-              "{{ e1 }} -> {{ e1NL }}"
+              "{{ impactbasedamage }} -> {{ impactbasedamageNL }}",
+              "{{ tickbasedamage }} -> {{ tickbasedamageNL }}"
             ]
           },
           "maxrank": 5,
@@ -453,39 +447,39 @@
           "effect": [
             null,
             [
-              6,
-              12,
-              18,
-              24,
-              30
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              10,
-              20,
-              30,
-              40,
-              50
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              4,
-              4,
-              4,
-              4,
-              4
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              4.5,
-              4.5,
-              4.5,
-              4.5,
-              4.5
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              1,
-              1,
-              1,
-              1,
-              1
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -525,29 +519,18 @@
           ],
           "effectBurn": [
             null,
-            "6/12/18/24/30",
-            "10/20/30/40/50",
-            "4",
-            "4.5",
-            "1",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
             "0",
             "0",
             "0",
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.3,
-              "key": "a1"
-            },
-            {
-              "link": "spelldamage",
-              "coeff": 0.1,
-              "key": "a2"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -573,17 +556,21 @@
           "id": "TeemoRCast",
           "name": "Noxious Trap",
           "description": "Teemo throws an explosive poisonous trap using one of the mushrooms stored in his pack. If an enemy steps on the trap, it will release a poisonous cloud, slowing enemies and damaging them over time. If Teemo throws a mushroom onto another mushroom it will bounce, gaining additional range.",
-          "tooltip": "Tosses a stored mushroom as a trap that detonates if an enemy steps on it, spreading poison to nearby enemies that slows Movement Speed by {{ e2 }}%, reveals them and deals {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage over {{ e9 }} seconds. <br /><br />Traps last {{ e5 }} minutes and take {{ e4 }} second to arm and stealth. If a thrown trap lands on another trap, it will bounce up to <span class=\"colorFFFF99\">{{ e6 }}</span> Teemos further before planting.<br /><br />Teemo forages for a mushroom every <scaleLevel>{{ f1 }}</scaleLevel> seconds, but he is only big enough to carry 3 at once.",
+          "tooltip": "Tosses a stored mushroom as a trap that detonates if an enemy steps on it, spreading poison to nearby enemies that slows Movement Speed by {{ slowamount }}%, reveals them and deals {{ totaldamage }} magic damage over {{ debuffduration }} seconds. <br /><br />Traps last {{ mushroomduration }} minutes and take {{ armtime }} second to arm and stealth. Up to {{ maxammo }} Traps can be held at once. If a thrown trap lands on another trap, it will bounce up to <span class=\"colorFFFF99\">{{ bouncedistance }}</span> Teemos further before planting.",
           "leveltip": {
             "label": [
               "Damage",
               "Slow",
-              "Range"
+              "Range",
+              "Bounce Distance",
+              "Maximum Traps"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
-              "{{ e2 }}% -> {{ e2NL }}%",
-              "{{ e8 }} -> {{ e8NL }}"
+              "{{ basedamage }} -> {{ basedamageNL }}",
+              "{{ slowamount }}% -> {{ slowamountNL }}%",
+              "{{ castrange }} -> {{ castrangeNL }}",
+              "{{ bouncedistance }} -> {{ bouncedistanceNL }}",
+              "{{ maxammo }} -> {{ maxammoNL }}"
             ]
           },
           "maxrank": 3,
@@ -603,76 +590,70 @@
           "effect": [
             null,
             [
-              200,
-              325,
-              450
+              0,
+              0,
+              0
             ],
             [
-              30,
-              40,
-              50
+              0,
+              0,
+              0
             ],
             [
-              75,
-              75,
-              75
+              0,
+              0,
+              0
             ],
             [
-              1,
-              1,
-              1
+              0,
+              0,
+              0
             ],
             [
-              5,
-              5,
-              5
+              0,
+              0,
+              0
             ],
             [
-              3,
-              4,
-              5
+              0,
+              0,
+              0
             ],
             [
-              30,
-              25,
-              20
+              0,
+              0,
+              0
             ],
             [
-              400,
-              650,
-              900
+              0,
+              0,
+              0
             ],
             [
-              4,
-              4,
-              4
+              0,
+              0,
+              0
             ],
             [
-              450,
-              450,
-              450
+              0,
+              0,
+              0
             ]
           ],
           "effectBurn": [
             null,
-            "200/325/450",
-            "30/40/50",
-            "75",
-            "1",
-            "5",
-            "3/4/5",
-            "30/25/20",
-            "400/650/900",
-            "4",
-            "450"
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.5,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "3",
           "range": [

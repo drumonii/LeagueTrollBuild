@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.16.1",
+  "version": "9.21.1",
   "data": {
     "Viktor": {
       "id": "Viktor",
@@ -70,12 +70,12 @@
         "difficulty": 9
       },
       "stats": {
-        "hp": 528.04,
+        "hp": 530,
         "hpperlevel": 90,
         "mp": 405,
         "mpperlevel": 25,
         "movespeed": 335,
-        "armor": 22.72,
+        "armor": 23,
         "armorperlevel": 4,
         "spellblock": 30,
         "spellblockperlevel": 0.5,
@@ -86,7 +86,7 @@
         "mpregenperlevel": 0.8,
         "crit": 0,
         "critperlevel": 0,
-        "attackdamage": 52.04,
+        "attackdamage": 53,
         "attackdamageperlevel": 3,
         "attackspeedperlevel": 2.11,
         "attackspeed": 0.658
@@ -96,19 +96,19 @@
           "id": "ViktorPowerTransfer",
           "name": "Siphon Power",
           "description": "Viktor blasts an enemy unit dealing magic damage, gaining a shield and empowering his next basic attack.<br><br>Augment: Siphon Power's shield is increased by 60% and Viktor gains bonus Movement Speed after casting.",
-          "tooltip": "Viktor blasts an enemy unit, dealing {{ e1 }}<span class=\"color99FF99\"> (+{{ a1 }})</span> magic damage while granting Viktor a shield that absorbs up to <span class=\"color44DDFF\">{{ f1 }}</span> <span class=\"color99FF99\">(+{{ f2 }})</span> damage over the next {{ e2 }} seconds.<br /><br />Viktor's next basic attack deals {{ e5 }}<span class=\"color99FF99\"> (+{{ a2 }})</span> bonus magic damage.<br /><br /><span class=\"colorFFCC00\">Augment - Turbocharge:</span> Siphon Power's shield is increased by 60% and Viktor gains {{ e3 }}% Movement Speed for {{ e2 }} seconds.",
+          "tooltip": "Viktor blasts an enemy unit, dealing {{ missiledamage }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage while granting Viktor a shield that absorbs up to <span class=\"colorFFFFFF\">{{ f1 }}</span> damage over the next {{ buffduration }} seconds.<br /><br />Viktor's next basic attack deals {{ aabonusdamage }}<scaleAP>(+{{ a2 }})</scaleAP> bonus magic damage.<br /><br /><span class=\"colorFFCC00\">Augment - Turbocharge:</span> Siphon Power's shield is increased by {{ augmentshieldbonus*100 }}% and Viktor gains {{ augmentmovespeedbonus }}% Movement Speed for {{ buffduration }} seconds.",
           "leveltip": {
             "label": [
-              "Damage (missile)",
-              "Damage (attack)",
               "Cooldown",
-              "Mana Cost"
+              "@AbilityResourceName@ Cost",
+              "Damage (Missile)",
+              "Damage (Attack)"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
-              "{{ e5 }} -> {{ e5NL }}",
               "{{ cooldown }} -> {{ cooldownNL }}",
-              "{{ cost }} -> {{ costNL }}"
+              "{{ cost }} -> {{ costNL }}",
+              "{{ missiledamage }} -> {{ missiledamageNL }}",
+              "{{ aabonusdamage }} -> {{ aabonusdamageNL }}"
             ]
           },
           "maxrank": 5,
@@ -132,11 +132,11 @@
           "effect": [
             null,
             [
-              50,
-              65,
-              80,
-              95,
-              110
+              60,
+              75,
+              90,
+              105,
+              120
             ],
             [
               2.5,
@@ -204,7 +204,7 @@
           ],
           "effectBurn": [
             null,
-            "50/65/80/95/110",
+            "60/75/90/105/120",
             "2.5",
             "30",
             "0",
@@ -227,7 +227,7 @@
               "key": "a2"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             600,
@@ -246,21 +246,21 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "ViktorGravitonField",
           "name": "Gravity Field",
           "description": "Viktor conjures a heavy gravitational field that slows enemies in its radius. Enemies who stay within the device for too long are stunned.<br><br>Augment: Enemies stunned by Gravity Field are dragged to the center.",
-          "tooltip": "Viktor deploys a gravitational imprisonment device for {{ e3 }} seconds, slowing enemy units by {{ e1 }}% and adding a stack every {{ e4 }} seconds. At {{ e5 }} stacks the target is stunned for {{ e2 }} seconds.<br /><br /><span class=\"colorFFCC00\">Augment - Implosion:</span> Enemies stunned by Gravity Field are dragged to the center.",
+          "tooltip": "Viktor deploys a gravitational imprisonment device for {{ fieldduration }} seconds, slowing enemy units by {{ slowpotency*-1 }}% and adding a stack every {{ stackcadence }} seconds. At {{ stacksforstun }} stacks the target is stunned for {{ stunduration }} seconds.<br /><br /><span class=\"colorFFCC00\">Augment - Magnetize:</span> Viktor's non-periodic spells apply a {{ augmentslow }}% slow to enemies for 1 second.<br /><br />",
           "leveltip": {
             "label": [
-              "Slow",
-              "Cooldown"
+              "Cooldown",
+              "Movement Slow"
             ],
             "effect": [
-              "{{ e1 }}% -> {{ e1NL }}%",
-              "{{ cooldown }} -> {{ cooldownNL }}"
+              "{{ cooldown }} -> {{ cooldownNL }}",
+              "{{ slowpotency*-1.000000 }}% -> {{ slowpotencynl*-1.000000 }}%"
             ]
           },
           "maxrank": 5,
@@ -284,11 +284,11 @@
           "effect": [
             null,
             [
-              28,
-              32,
-              36,
-              40,
-              44
+              -0.28,
+              -0.32,
+              -0.36,
+              -0.4,
+              -0.44
             ],
             [
               1.5,
@@ -356,7 +356,7 @@
           ],
           "effectBurn": [
             null,
-            "28/32/36/40/44",
+            "-0.28/-0.32/-0.36/-0.4/-0.44",
             "1.5",
             "4",
             "0.5",
@@ -368,7 +368,7 @@
             "0"
           ],
           "vars": [],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             800,
@@ -387,7 +387,7 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "ViktorDeathRay",
@@ -548,18 +548,18 @@
         {
           "id": "ViktorChaosStorm",
           "name": "Chaos Storm",
-          "description": "Viktor conjures a singularity on the field which deals magic damage and interrupts enemy channels. The singularity then periodically does magic damage to all nearby enemies. Viktor can redirect the singularity.<br><br>Augment: The Chaos Storm moves faster.",
-          "tooltip": "Viktor conjures a singularity at target location, dealing {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage and interrupting enemy channels.<br /><br />Viktor can redirect the singularity for {{ e3 }} seconds, which will discharge {{ e2 }} <span class=\"color99FF99\">(+{{ a2 }})</span> magic damage every {{ e4 }} seconds to nearby enemies. The singularity will move slower as it attempts to move farther away from Viktor.<br /><br /><span class=\"colorFFCC00\">Augment - Velocity:</span> Chaos Storm moves {{ e0 }}% faster.",
+          "description": "Viktor conjures a singularity on the field which deals magic damage and interrupts enemy channels. The singularity then periodically does magic damage to all nearby enemies. Viktor can redirect the singularity.<br><br>Augment: The Chaos Storm moves 25% faster.",
+          "tooltip": "Viktor conjures a singularity at target location, dealing {{ initialburstbasedamage }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage and interrupting enemy channels.<br /><br />Viktor can redirect the singularity for {{ stormduration }} seconds, which will discharge {{ subsequentburstbasedamage }} <scaleAP>(+{{ a2 }})</scaleAP> magic damage every {{ tickcadence }} second to nearby enemies. The singularity will move slower as it attempts to move farther away from Viktor.<br /><br /><span class=\"colorFFCC00\">Augment - Perfect Storm:</span> Chaos Storm moves {{ augmentboost*100 }}% Faster.",
           "leveltip": {
             "label": [
-              "Damage (impact)",
-              "Damage (discharge)",
-              "Cooldown"
+              "Cooldown",
+              "Damage (Initial Burst)",
+              "Damage (Periodic Ticks)"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
-              "{{ e2 }} -> {{ e2NL }}",
-              "{{ cooldown }} -> {{ cooldownNL }}"
+              "{{ cooldown }} -> {{ cooldownNL }}",
+              "{{ initialburstbasedamage }} -> {{ initialburstbasedamageNL }}",
+              "{{ subsequentburstbasedamage }} -> {{ subsequentburstbasedamageNL }}"
             ]
           },
           "maxrank": 3,
@@ -650,11 +650,11 @@
             },
             {
               "link": "spelldamage",
-              "coeff": 0.85,
+              "coeff": 0.45,
               "key": "a2"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             700,
@@ -671,7 +671,7 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         }
       ],
       "passive": {
@@ -1890,6 +1890,7 @@
           "customTag": "",
           "sortrank": 0,
           "extensionPage": false,
+          "useObviousCheckmark": false,
           "customPanel": null,
           "blocks": [
             {
@@ -1947,12 +1948,12 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3116",
+                  "id": "3020",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3020",
+                  "id": "3151",
                   "count": 1,
                   "hideCount": false
                 }
@@ -2014,11 +2015,6 @@
                 },
                 {
                   "id": "3102",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3151",
                   "count": 1,
                   "hideCount": false
                 }

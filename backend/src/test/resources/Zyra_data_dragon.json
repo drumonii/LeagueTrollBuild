@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.16.1",
+  "version": "9.21.1",
   "data": {
     "Zyra": {
       "id": "Zyra",
@@ -545,33 +545,31 @@
         {
           "id": "ZyraR",
           "name": "Stranglethorns",
-          "description": "Zyra summons a twisted thicket at her target location, dealing damage to enemies as it expands and knocking them airborne as it contracts.",
+          "description": "Zyra summons a twisted thicket at her target location, dealing damage to enemies as it expands and knocking them airborne as it contracts. Plants within the thicket are enraged.",
           "tooltip": "Summons the fury of nature, growing a twisted thicket at target location which deals {{ e3 }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage to all enemies in the area as it expands. After 2 seconds, the vines snap upward knocking enemies into the air for {{ e1 }} second.<br /><br /><span class=\"colorDDDD77\">Garden of Thorns: </span>Plants within the thicket are enraged, resetting their duration, gaining {{ e2 }}% Health and attacking in a flurry for {{ e7 }}% total damage.",
           "leveltip": {
             "label": [
               "Damage",
-              "Cooldown",
-              "Mana Cost"
+              "Cooldown"
             ],
             "effect": [
               "{{ e3 }} -> {{ e3NL }}",
-              "{{ cooldown }} -> {{ cooldownNL }}",
-              "{{ cost }} -> {{ costNL }}"
+              "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
           "maxrank": 3,
           "cooldown": [
-            130,
-            120,
-            110
+            110,
+            100,
+            90
           ],
-          "cooldownBurn": "130/120/110",
+          "cooldownBurn": "110/100/90",
           "cost": [
             100,
-            120,
-            140
+            100,
+            100
           ],
-          "costBurn": "100/120/140",
+          "costBurn": "100",
           "datavalues": {},
           "effect": [
             null,

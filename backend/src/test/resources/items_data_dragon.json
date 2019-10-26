@@ -1,6 +1,6 @@
 {
   "type": "item",
-  "version": "9.16.1",
+  "version": "9.21.1",
   "basic": {
     "name": "",
     "rune": {
@@ -1308,7 +1308,7 @@
       "depth": 2
     },
     "1082": {
-      "name": "The Dark Seal",
+      "name": "Dark Seal",
       "description": "<stats>+10 Ability Power<br>+25% Increased Healing from Potions<br><mana>+100 Mana</mana></stats><br><br><unique>UNIQUE Passive - Dread:</unique> Grants +3 Ability Power per Glory.  <br><unique>UNIQUE Passive - Do or Die:</unique> Grants 2 Glory for a champion kill or 1 Glory for an assist, up to 10 Glory total. Lose 4 Glory on death.",
       "colloq": ";Noxian",
       "plaintext": "Provides Ability Power and Mana.  Increases in power as you kill enemies.",
@@ -1900,7 +1900,7 @@
     },
     "2010": {
       "name": "Total Biscuit of Everlasting Will",
-      "description": "<consumable>Click to Consume:</consumable> Restores 15% of missing Health and Mana over 15 seconds.",
+      "description": "<consumable>Click to Consume:</consumable> Restores 10% of missing Health and Mana over 5 seconds.",
       "colloq": ";",
       "plaintext": "",
       "stacks": 10,
@@ -1931,7 +1931,7 @@
       },
       "stats": {},
       "effect": {
-        "Effect1Amount": "15"
+        "Effect1Amount": "10"
       }
     },
     "2011": {
@@ -5301,7 +5301,7 @@
       "depth": 2
     },
     "3071": {
-      "name": "The Black Cleaver",
+      "name": "Black Cleaver",
       "description": "<stats>+400 Health<br>+40 Attack Damage<br>+20% Cooldown Reduction</stats><br><br><unique>UNIQUE Passive:</unique> Dealing physical damage to an enemy champion Cleaves them, reducing their Armor by 4% for 6 seconds (stacks up to 6 times, up to 24%).<br><unique>UNIQUE Passive - Rage:</unique> Dealing physical damage grants 20 movement speed for 2 seconds. Assists on Cleaved enemy champions or kills on any unit grant 60 movement speed for 2 seconds instead. This Movement Speed is halved for ranged champions.",
       "colloq": ";bc",
       "plaintext": "Dealing physical damage to enemy champions reduces their Armor",
@@ -5360,7 +5360,7 @@
       "depth": 3
     },
     "3072": {
-      "name": "The Bloodthirster",
+      "name": "Bloodthirster",
       "description": "<stats>+80 Attack Damage</stats><br><br><unique>UNIQUE Passive:</unique> +20% Life Steal<br><unique>UNIQUE Passive:</unique> Your basic attacks can now overheal you. Excess life is stored as a shield that can block 50-350 damage, based on champion level.<br><br>This shield decays slowly if you haven't dealt or taken damage in the last 25 seconds.",
       "colloq": ";bt",
       "plaintext": "Grants Attack Damage, Life Steal and Life Steal now overheals",
@@ -9298,7 +9298,7 @@
       }
     },
     "3185": {
-      "name": "The Lightbringer",
+      "name": "Lightbringer",
       "description": "<stats>+30 Attack Damage<br>+30% Critical Strike Chance</stats><br><br><unique>UNIQUE Passive:</unique> Critical Strikes cause enemies to bleed for an additional 90% of bonus Attack Damage as magic damage over 3 seconds and reveal them for the duration.<br><unique>UNIQUE Passive - Trap Detection:</unique> Nearby stealthed enemy traps are revealed.<br><active>UNIQUE Active - Hunter's Sight:</active> A stealth-detecting mist grants vision in the target area for 5 seconds, revealing enemy champions that enter for 3 seconds (60 second cooldown).",
       "colloq": ";lb",
       "plaintext": "Critical Strikes cause your target to bleed and be revealed",
@@ -9405,7 +9405,7 @@
     },
     "3190": {
       "name": "Locket of the Iron Solari",
-      "description": "<stats>+30 Armor<br>+60 Magic Resist</stats><br><br><active>UNIQUE Active:</active> Grants a decaying shield to nearby allied champions for 2.5 seconds that absorbs up to 30 (+15 per level) <scaleHealth>(+20% of your bonus health)</scaleHealth> damage (120 second cooldown).<br><br><rules>Shield per level uses the higher of your level or the target's level.<br>Shield ratio scales with your level.<br>Shield amount is reduced to 25% if the target has been affected by another Locket of the Iron Solari in the last 20 seconds.</rules>",
+      "description": "<stats>+30 Armor<br>+60 Magic Resist</stats><br><br><active>UNIQUE Active:</active> Grants a decaying shield to nearby allied champions for 2.5 seconds that absorbs up to 120 (+10 per level) <scaleHealth>(+20% of your bonus health)</scaleHealth> damage (120 second cooldown).<br><br><rules>Shield per level uses the higher of your level or the target's level.<br>Shield ratio scales with your level.<br>Shield amount is reduced to 25% if the target has been affected by another Locket of the Iron Solari in the last 20 seconds.</rules>",
       "colloq": ";",
       "plaintext": "Activate to shield nearby allies from damage",
       "from": [
@@ -9446,8 +9446,8 @@
         "FlatArmorMod": 30
       },
       "effect": {
-        "Effect1Amount": "30",
-        "Effect2Amount": "15",
+        "Effect1Amount": "120",
+        "Effect2Amount": "10",
         "Effect3Amount": "2.5",
         "Effect4Amount": "0.25",
         "Effect5Amount": "20",
@@ -9610,7 +9610,7 @@
       "depth": 3
     },
     "3196": {
-      "name": "The Hex Core mk-1",
+      "name": "Hex Core mk-1",
       "description": "<stats>+3 Ability Power per level<br>+15 Mana per level</stats><br><br><unique>UNIQUE Passive - Progress:</unique> Viktor can upgrade one of his basic spells.",
       "colloq": ";viktor",
       "plaintext": "Allows Viktor to improve an ability of his choice",
@@ -9654,7 +9654,7 @@
       "depth": 2
     },
     "3197": {
-      "name": "The Hex Core mk-2",
+      "name": "Hex Core mk-2",
       "description": "<stats>+6 Ability Power per level<br>+20 Mana per level</stats><br><br><unique>UNIQUE Passive - Progress:</unique> Viktor can upgrade one of his basic spells.",
       "colloq": ";viktor",
       "plaintext": "Allows Viktor to improve an ability of his choice",
@@ -11253,7 +11253,7 @@
       "depth": 4
     },
     "3380": {
-      "name": "The Obsidian Cleaver",
+      "name": "Obsidian Cleaver",
       "description": "<stats><font color='#FFFFFF'>+550 Health</font><br><font color='#FFFFFF'>+60 Attack Damage</font><br>+20% Cooldown Reduction</stats><br><br><unique>UNIQUE Passive:</unique> Dealing physical damage to an enemy champion Cleaves them, reducing their Armor by 4% for 6 seconds (stacks up to 6 times, up to 24%).<br><unique>UNIQUE Passive - Rage:</unique> Dealing physical damage grants 20 movement speed for 2 seconds. Assists on Cleaved enemy champions or kills on any unit grant 60 movement speed for 2 seconds instead. This Movement Speed is halved for ranged champions.",
       "colloq": ";bc;Ornn;forge;Masterwork",
       "plaintext": "Dealing physical damage to enemy champions reduces their Armor",
@@ -11364,7 +11364,7 @@
     },
     "3383": {
       "name": "Circlet of the Iron Solari",
-      "description": "<stats><font color='#FFFFFF'>+45 Armor</font><br><font color='#FFFFFF'>+75 Magic Resist</font></stats><br><br><active>UNIQUE Active:</active> Grants a decaying shield to nearby allied champions for 2.5 seconds that absorbs up to 30 (+15 per level) <scaleHealth>(+20% of your bonus health)</scaleHealth> damage (120 second cooldown).<br><br><rules>Shield per level uses the higher of your level or the target's level.<br>Shield ratio scales with your level.<br>Shield amount is reduced to 25% if the target has been affected by another Locket of the Iron Solari in the last 20 seconds.</rules>",
+      "description": "<stats><font color='#FFFFFF'>+45 Armor</font><br><font color='#FFFFFF'>+75 Magic Resist</font></stats><br><br><active>UNIQUE Active:</active> Grants a decaying shield to nearby allied champions for 2.5 seconds that absorbs up to 120 (+10 per level) <scaleHealth>(+20% of your bonus health)</scaleHealth> damage (120 second cooldown).<br><br><rules>Shield per level uses the higher of your level or the target's level.<br>Shield ratio scales with your level.<br>Shield amount is reduced to 25% if the target has been affected by another Locket of the Iron Solari in the last 20 seconds.</rules>",
       "colloq": ";Ornn;forge;Masterwork",
       "plaintext": "Activate to shield nearby allies from damage",
       "from": [
@@ -11402,8 +11402,8 @@
         "FlatArmorMod": 45
       },
       "effect": {
-        "Effect1Amount": "30",
-        "Effect2Amount": "15",
+        "Effect1Amount": "120",
+        "Effect2Amount": "10",
         "Effect3Amount": "2.5",
         "Effect4Amount": "0.25",
         "Effect5Amount": "20",
@@ -12423,7 +12423,7 @@
       }
     },
     "3599": {
-      "name": "The Black Spear",
+      "name": "Black Spear",
       "description": "<stats></stats><br><active>Active:</active> Offer to bind with an ally for the remainder of the game, becoming Oathsworn Allies. Oathsworn empowers you both while near one another.",
       "colloq": ";spear",
       "plaintext": "Kalista's spear that binds an Oathsworn Ally.",
@@ -12455,7 +12455,7 @@
       "stats": {}
     },
     "3600": {
-      "name": "The Black Spear",
+      "name": "Black Spear",
       "description": "<stats></stats><br><active>Active:</active> Offer to bind with an ally for the remainder of the game, becoming Oathsworn Allies. Oathsworn empowers you both while near one another.",
       "colloq": ";spear",
       "plaintext": "Kalista's spear that binds an Oathsworn Ally.",

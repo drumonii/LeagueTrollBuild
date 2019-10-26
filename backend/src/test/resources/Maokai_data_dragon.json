@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.16.1",
+  "version": "9.21.1",
   "data": {
     "Maokai": {
       "id": "Maokai",
@@ -290,21 +290,21 @@
           "cooldownBurn": "13/12/11/10/9",
           "cost": [
             60,
-            65,
-            70,
-            75,
-            80
+            60,
+            60,
+            60,
+            60
           ],
-          "costBurn": "60/65/70/75/80",
+          "costBurn": "60",
           "datavalues": {},
           "effect": [
             null,
             [
-              50,
-              75,
-              100,
-              125,
-              150
+              70,
+              95,
+              120,
+              145,
+              170
             ],
             [
               1,
@@ -372,7 +372,7 @@
           ],
           "effectBurn": [
             null,
-            "50/75/100/125/150",
+            "70/95/120/145/170",
             "1/1.1/1.2/1.3/1.4",
             "0",
             "0",
@@ -564,7 +564,7 @@
           "id": "MaokaiR",
           "name": "Nature's Grasp",
           "description": "Maokai summons a colossal wall of brambles and thorns that slowly advances forwards, damaging and rooting any enemies in the path.",
-          "tooltip": "Maokai summons a colossal wall of brambles and thorns that slowly advances forwards, dealing {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage and rooting any enemies struck for ({{ e2 }} to {{ e2 }}) seconds, increasing with distance travelled.",
+          "tooltip": "Maokai summons a colossal wall of brambles and thorns that slowly advances forwards, dealing {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage and rooting any enemies struck for ({{ minrootduration }} to {{ maxrootduration }}) seconds, increasing with distance travelled.",
           "leveltip": {
             "label": [
               "Damage",
@@ -597,9 +597,9 @@
               300
             ],
             [
-              2.4,
-              2.4,
-              2.4
+              0.6,
+              0.6,
+              0.6
             ],
             [
               0,
@@ -645,7 +645,7 @@
           "effectBurn": [
             null,
             "150/225/300",
-            "2.4",
+            "0.6",
             "0",
             "0",
             "0",

@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.16.1",
+  "version": "9.21.1",
   "data": {
     "TahmKench": {
       "id": "TahmKench",
@@ -390,7 +390,7 @@
           "id": "TahmKenchE",
           "name": "Thick Skin",
           "description": "Tahm Kench turns incoming damage into gray health. As gray health decays, Tahm Kench is healed for a percentage of the gray health amount. When activated, this ability turns all gray health into a shield.",
-          "tooltip": "<spellPassive>Passive:</spellPassive> {{ e3 }}% of the Damage taken while this ability is inactive is converted to gray health. If allowed to decay, it is regenerated as health.<br /><br /><spellPassive>Active:</spellPassive> Convert all of your gray health into a shield that lasts {{ e1 }} seconds.",
+          "tooltip": "<spellPassive>Passive:</spellPassive> {{ e3 }}% of the Damage taken while this ability is inactive is converted to gray health. If allowed to decay, {{ healthratio }} of it is regenerated as health.<br /><br /><spellPassive>Active:</spellPassive> Convert all of your gray health into a shield that lasts {{ e1 }} seconds.",
           "leveltip": {
             "label": [
               "Damage to Gray Health Conversion"
@@ -427,11 +427,11 @@
               2
             ],
             [
-              0.75,
-              0.75,
-              0.75,
-              0.75,
-              0.75
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               45,
@@ -493,7 +493,7 @@
           "effectBurn": [
             null,
             "2",
-            "0.75",
+            "0",
             "45/50/55/60/65",
             "0",
             "0",

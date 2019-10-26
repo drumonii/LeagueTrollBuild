@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.16.1",
+  "version": "9.21.1",
   "data": {
     "Caitlyn": {
       "id": "Caitlyn",
@@ -129,7 +129,7 @@
         "mpregenperlevel": 0.55,
         "crit": 0,
         "critperlevel": 0,
-        "attackdamage": 60,
+        "attackdamage": 62,
         "attackdamageperlevel": 2.88,
         "attackspeedperlevel": 4,
         "attackspeed": 0.625
@@ -283,7 +283,7 @@
         {
           "id": "CaitlynYordleTrap",
           "name": "Yordle Snap Trap",
-          "description": "Caitlyn sets a trap to find sneaky yordles. When sprung, the trap reveals and immobilizes the enemy champion for 1.5 seconds.",
+          "description": "Caitlyn sets a trap to find sneaky yordles. When sprung, the trap reveals and immobilizes the enemy champion for 1.5 seconds, granting Caitlyn an empowered Headshot.",
           "tooltip": "Sets traps that an enemy Champion can spring, immobilizing them for {{ e6 }} seconds and granting <span class=\"coloree91d7\">True Sight</span> for a short duration.<br /><br />Traps last for {{ e3 }} seconds. {{ e5 }} traps may be active at once.<br /><br />Trapped enemies take an additional {{ e2 }} <scaleAD>(+{{ f1 }})</scaleAD> increased damage from Headshot.",
           "leveltip": {
             "label": [
@@ -691,8 +691,8 @@
         }
       ],
       "passive": {
-        "name": "",
-        "description": "",
+        "name": "Headshot",
+        "description": "Every few basic attacks, or against a target she has trapped or netted, Caitlyn will fire a headshot dealing bonus damage that scales with her critical strike chance. On trapped or netted targets, Caitlyn's Headshot attack range is doubled.",
         "image": {
           "full": "Caitlyn_Headshot.png",
           "sprite": "passive0.png",

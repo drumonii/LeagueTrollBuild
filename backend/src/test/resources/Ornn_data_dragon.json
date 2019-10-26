@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.16.1",
+  "version": "9.21.1",
   "data": {
     "Ornn": {
       "id": "Ornn",
@@ -513,7 +513,7 @@
           "id": "OrnnR",
           "name": "Call of the Forge God",
           "description": "Ornn summons a massive elemental at a location which travels toward him with increasing speed. Enemies run over by the elemental take damage, are slowed and are made Brittle. Ornn can recast the ability to charge into the elemental, redirecting it in the direction he hits it, causing the elemental to affect any enemies it runs over to be knocked up, dealing the same damage and re-applying Brittle.",
-          "tooltip": "Ornn summons a massive lava elemental which stampedes toward him. Enemies run over by the elemental take {{ rdamagecalc }} magic damage, are slowed by up to {{ rslowpercentbasepremath }}% based on distance traveled by the elemental for {{ rslowduration }} seconds and become <span class=\"colorFF5733\">Brittle</span> for {{ brittledurationtooltiponly }} seconds.<br /><br />Ornn can recast this ability to smash into the elemental to redirect and empower it. The empowered elemental knocks the first enemy champion hit up for 1.5 seconds (50% duration for subsequent champion hits), deals {{ rdamagecalc }} magic damage and applies <span class=\"colorFF5733\">Brittle</span>.",
+          "tooltip": "Ornn summons a massive lava elemental which stampedes toward him. Enemies run over by the elemental take {{ rdamagecalc }} magic damage, are slowed by up to {{ rslowpercentbasepremath }}% based on distance traveled by the elemental for {{ rslowduration }} seconds and become <span class=\"colorFF5733\">Brittle</span> for {{ brittledurationtooltiponly }} seconds.<br /><br />Ornn can recast this ability to smash into the elemental to redirect and empower it. The empowered elemental knocks the first enemy champion hit up for {{ rstunduration }} second ({{ rstunreduction*100 }}% duration for subsequent champion hits), deals {{ rdamagecalc }} magic damage and applies <span class=\"colorFF5733\">Brittle</span>.",
           "leveltip": {
             "label": [
               "Damage",
@@ -629,7 +629,7 @@
       ],
       "passive": {
         "name": "Living Forge",
-        "description": "Ornn gains an additional 10% bonus Armor and Magic Resistance from all sources.<br><br>Ornn can spend gold to forge non-consumable items anywhere.<br><br>Additionally, when Ornn reaches level 13, he will upgrade any eligible items into masterwork items for himself, up to 2 max. For each level after 13, Ornn can upgrade an item for an ally by going near them and clicking on them, max 1 per ally.<br><br><font color='#8C8C8C' size='16'>Ornn can smith items directly from his forge menu or the shop.</font>",
+        "description": "Ornn gains an additional 10% bonus Armor and Magic Resistance from all sources.<br><br>Ornn can spend gold to forge non-consumable items anywhere.<br><br>Additionally, when Ornn reaches level 12, he will upgrade any eligible items into masterwork items for himself, up to 2 max. For each level after 12, Ornn can upgrade an item for an ally by going near them and clicking on them, max 1 per ally.<br><br><font color='#8C8C8C' size='16'>Ornn can smith items directly from his forge menu or the shop.</font>",
         "image": {
           "full": "OrnnP.png",
           "sprite": "passive2.png",

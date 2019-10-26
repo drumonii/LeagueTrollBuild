@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.16.1",
+  "version": "9.21.1",
   "data": {
     "Zac": {
       "id": "Zac",
@@ -535,13 +535,15 @@
           "id": "ZacR",
           "name": "Let's Bounce!",
           "description": "Zac bounces four times, knocking up enemies hit and slowing them.",
-          "tooltip": "Zac bounces {{ bounces }} times, knocking back enemies for {{ knockupduration }} second and dealing {{ damageperbounce }} magic damage. Enemies hit with multiple bounces take {{ damagereductionbounce*100 }}% less damage and are not knocked up. <br /><br />Enemies hit by Let's Bounce! are slowed by {{ slowamount*100 }}% for {{ slowduration }} second.<br /><br />Zac gains movement speed over the duration and can cast <spellActive>Unstable Matter</spellActive> while bouncing.",
+          "tooltip": "<spellPassive>Passive:</spellPassive> Healing from Cell Division <span class=\"color3ca126\">Goo</span> chunks increased to {{ f8 }}% of your maximum health.<br /><br /><spellPassive>Active:</spellPassive> Zac bounces {{ bounces }} times, knocking back enemies for {{ knockupduration }} second and dealing {{ damageperbounce }} magic damage. Enemies hit with multiple bounces take {{ damagereductionbounce*100 }}% less damage and are not knocked up. <br /><br />Enemies hit by Let's Bounce! are slowed by {{ slowamount*100 }}% for {{ slowduration }} second.<br /><br />Zac gains movement speed over the duration and can cast <spellActive>Unstable Matter</spellActive> while bouncing.",
           "leveltip": {
             "label": [
-              "Base Bounce Damage"
+              "Base Bounce Damage",
+              "Additional Chunk Healing"
             ],
             "effect": [
-              "{{ basedamagebounce }} -> {{ basedamagebounceNL }}"
+              "{{ basedamagebounce }} -> {{ basedamagebounceNL }}",
+              "{{ additionalchunkhealing }}% -> {{ additionalchunkhealingNL }}%"
             ]
           },
           "maxrank": 3,

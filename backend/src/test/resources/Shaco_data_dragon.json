@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.16.1",
+  "version": "9.21.1",
   "data": {
     "Shaco": {
       "id": "Shaco",
@@ -111,8 +111,8 @@
         "mpregenperlevel": 0.45,
         "crit": 0,
         "critperlevel": 0,
-        "attackdamage": 66,
-        "attackdamageperlevel": 3.5,
+        "attackdamage": 63,
+        "attackdamageperlevel": 3,
         "attackspeedperlevel": 3,
         "attackspeed": 0.694
       },
@@ -120,8 +120,8 @@
         {
           "id": "Deceive",
           "name": "Deceive",
-          "description": "Shaco becomes Invisible and teleports to target location.<br><br>His first attack while Invisible is empowered, dealing bonus damage and reducing Deceive's cooldown",
-          "tooltip": "Shaco teleports nearby and becomes <span class=\"color91d7ee\">Invisible</span> for {{ stealthduration }} seconds. Shaco remains <span class=\"color91d7ee\">Invisible</span> even if he uses Jack in the Box or Hallucinate. <br /><br />His next basic attack during <span class=\"color91d7ee\">Invisibility</span> deals <physicalDamage>{{ totaldamage }}</physicalDamage> bonus physical damage and reduces Deceive's cooldown by {{ cdrefund }} seconds. <br /><br /><u><span class=\"size16 color91d7ee\">Stealth - Invisible</span></u><span class=\"size16 colorb3b3b3\">: Shaco can only be revealed by nearby enemy Turrets or <span class=\"size16 coloree91d7\">True Sight</span>.</span>",
+          "description": "Shaco becomes Invisible and teleports to target location.<br><br>His first attack while Invisible is empowered, dealing bonus damage and critically striking if he attacks from behind.",
+          "tooltip": "Shaco teleports nearby and becomes <span class=\"color91d7ee\">Invisible</span> for {{ stealthduration }} seconds. Shaco remains <span class=\"color91d7ee\">Invisible</span> even if he uses Jack in the Box or Hallucinate. <br /><br />His next basic attack during <span class=\"color91d7ee\">Invisibility</span> deals <physicalDamage>{{ totaldamage }}</physicalDamage> bonus physical damage (this damage can crit). If attacking from behind, this attack also critically strikes for {{ f1 }}% damage.<br /><br /><u><span class=\"size16 color91d7ee\">Stealth - Invisible</span></u><span class=\"size16 colorb3b3b3\">: Shaco can only be revealed by nearby enemy Turrets or <span class=\"size16 coloree91d7\">True Sight</span>.</span>",
           "leveltip": {
             "label": [
               "Damage",
@@ -136,13 +136,13 @@
           },
           "maxrank": 5,
           "cooldown": [
-            16,
-            15.5,
-            15,
-            14.5,
-            14
+            12,
+            11.5,
+            11,
+            10.5,
+            10
           ],
-          "cooldownBurn": "16/15.5/15/14.5/14",
+          "cooldownBurn": "12/11.5/11/10.5/10",
           "cost": [
             60,
             60,
@@ -264,7 +264,7 @@
           "id": "JackInTheBox",
           "name": "Jack In The Box",
           "description": "Shaco creates a hidden animated Jack-in-the-Box. When triggered, it will fear and attack nearby enemies.",
-          "tooltip": "Shaco creates a Jack in the Box that hides from view after {{ e5 }} seconds. It pops out when an enemy comes near or when uncovered by a ward or trinket, making nearby enemies flee very slowly for {{ e3 }} seconds.<br /><br />Its attacks deal {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage. It lasts for {{ e4 }} <scaleAP>(+{{ a2 }})</scaleAP> seconds while hidden or 5 seconds while firing. ",
+          "tooltip": "Shaco creates a Jack in the Box that hides from view after {{ e5 }} seconds. It pops out when an enemy comes near or when uncovered by a ward or trinket, making nearby enemies flee very slowly for {{ e3 }} seconds ({{ minionfearduration }} seconds for minions and monsters).<br /><br />It attacks all nearby enemies for {{ aoedamage }} magic damage, increased to {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> if it is attacking only one enemy. It lasts for {{ e4 }} <scaleAP>(+{{ a2 }})</scaleAP> seconds while hidden or 5 seconds while firing. ",
           "leveltip": {
             "label": [
               "Damage",
@@ -319,11 +319,11 @@
               1.5
             ],
             [
-              60,
-              60,
-              60,
-              60,
-              60
+              40,
+              40,
+              40,
+              40,
+              40
             ],
             [
               2,
@@ -373,7 +373,7 @@
             "35/50/65/80/95",
             "200/300/400/500/600",
             "0.5/0.75/1/1.25/1.5",
-            "60",
+            "40",
             "2",
             "0",
             "0",
@@ -417,19 +417,17 @@
         {
           "id": "TwoShivPoison",
           "name": "Two-Shiv Poison",
-          "description": "Shaco's Shivs passively poison targets on hit, slowing their movement speed. He can throw his Shivs to deal damage and poison the target. The thrown Shiv deals bonus damage based on the target's missing Health.",
-          "tooltip": "<spellPassive>Passive:</spellPassive> While Two-Shiv Poison is ready to cast, Shaco's basic attacks reduce the target's movement speed by {{ e4 }}% for {{ e5 }} seconds.<br /><br /><spellActive>Active:</spellActive> Shaco throws a shiv that deals {{ e1 }} <scaleAD>(+{{ f1 }})</scaleAD> <scaleAP>(+{{ a1 }})</scaleAP> physical damage and reduces the target's movement speed by {{ e4 }}% for {{ e6 }} seconds. The shiv's damage is increased by up to {{ e3 }}% based on the target's missing health.",
+          "description": "Shaco's Shivs passively poison targets on hit, slowing their movement speed. He can throw his Shivs to deal damage and poison the target. The thrown Shiv deals bonus damage if the target is below 30% health.",
+          "tooltip": "<spellPassive>Passive:</spellPassive> While Two-Shiv Poison is ready to cast, Shaco's basic attacks reduce the target's movement speed by {{ slowamount*-100 }}% for {{ slowdurationpassive }} seconds.<br /><br /><spellActive>Active:</spellActive> Shaco throws a shiv that deals {{ totaldamage }} magic damage and reduces the target's movement speed by {{ slowamount*-100 }}% for {{ slowdurationactive }} seconds. If the target has less than {{ executehealththreshold*100 }}% health, the shiv deals {{ executedamagepercent*100 }}% damage ({{ totalexecutedamage }} total).",
           "leveltip": {
             "label": [
               "Damage",
-              "Bonus AD Ratio",
               "Slow",
               "@AbilityResourceName@ Cost"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
-              "{{ effect2amount*100.000000 }}% -> {{ effect2amountnl*100.000000 }}%",
-              "{{ effect4amount*-100.000000 }}% -> {{ effect4amountnl*-100.000000 }}%",
+              "{{ basedamage }} -> {{ basedamageNL }}",
+              "{{ slowamount*-100.000000 }}% -> {{ slowamountnl*-100.000000 }}%",
               "{{ cost }} -> {{ costNL }}"
             ]
           },
@@ -454,46 +452,46 @@
           "effect": [
             null,
             [
-              55,
-              80,
-              105,
-              130,
-              155
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              0.6,
-              0.75,
-              0.9,
-              1.05,
-              1.2
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              50,
-              50,
-              50,
-              50,
-              50
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              20,
-              22.5,
-              25,
-              27.5,
-              30
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              2,
-              2,
-              2,
-              2,
-              2
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              3,
-              3,
-              3,
-              3,
-              3
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -526,29 +524,18 @@
           ],
           "effectBurn": [
             null,
-            "55/80/105/130/155",
-            "0.6/0.75/0.9/1.05/1.2",
-            "50",
-            "20/22.5/25/27.5/30",
-            "2",
-            "3",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
             "0",
             "0",
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "bonusattackdamage",
-              "coeff": 1,
-              "key": "f1"
-            },
-            {
-              "link": "spelldamage",
-              "coeff": 0.75,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -574,18 +561,16 @@
           "id": "HallucinateFull",
           "name": "Hallucinate",
           "description": "Shaco creates an illusion of himself near him, which can attack nearby enemies (Deals reduced damage to turrets).  Upon death, it explodes, spawning three mini Jack in the Boxes and dealing damage to nearby enemies.",
-          "tooltip": "Shaco vanishes briefly and reappears with a clone. The clone lasts up to 18 seconds and detonates when it dies, dealing {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage to nearby enemies and spawning three mini Jack in the Boxes. <br /><br /><ul><li>Mini boxes deal {{ e6 }} <scaleAP>(+{{ a2 }})</scaleAP> damage, make enemies flee for {{ e7 }} second(s), and trigger together.</li><li>Clone deals {{ e8 }}% of Shaco's damage and receives {{ e2 }}% increased damage.</li></ul><br /><scaleAP>The clone can be controlled by holding the alt key and using the right mouse button or by reactivating this ability.</scaleAP>",
+          "tooltip": "Shaco vanishes briefly and reappears with a clone. The clone lasts up to 18 seconds and detonates when it dies, dealing {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage to nearby enemies and spawning three mini Jack in the Boxes that trigger immediately. <br /><br /><ul><li>Mini boxes deal {{ aoedamage }} damage ({{ stdamage }} if attacking only one enemy) and make enemies flee for {{ e7 }} second(s).</li><li>Clone deals {{ e8 }}% of Shaco's damage and receives {{ e2 }}% increased damage.</li></ul><br /><scaleAP>The clone can be controlled by holding the alt key and using the right mouse button or by reactivating this ability.</scaleAP>",
           "leveltip": {
             "label": [
               "On Death Damage",
               "Mini Box Damage",
-              "Mini Box Flee Duration",
               "Cooldown"
             ],
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
               "{{ e6 }} -> {{ e6NL }}",
-              "{{ e7 }} -> {{ e7NL }}",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
@@ -606,9 +591,9 @@
           "effect": [
             null,
             [
-              200,
-              300,
-              400
+              150,
+              225,
+              300
             ],
             [
               50,
@@ -636,9 +621,9 @@
               75
             ],
             [
-              0.75,
               1,
-              1.25
+              1,
+              1
             ],
             [
               75,
@@ -658,13 +643,13 @@
           ],
           "effectBurn": [
             null,
-            "200/300/400",
+            "150/225/300",
             "50",
             "15",
             "2",
             "6",
             "25/50/75",
-            "0.75/1/1.25",
+            "1",
             "75",
             "0",
             "0"
@@ -672,13 +657,8 @@
           "vars": [
             {
               "link": "spelldamage",
-              "coeff": 1,
+              "coeff": 0.7,
               "key": "a1"
-            },
-            {
-              "link": "spelldamage",
-              "coeff": 0.15,
-              "key": "a2"
             }
           ],
           "costType": " {{ abilityresourcename }}",
@@ -702,8 +682,8 @@
         }
       ],
       "passive": {
-        "name": "",
-        "description": "",
+        "name": "Backstab",
+        "description": "Shaco's basic attacks and Two-Shiv Poison deal additional damage when striking from behind.",
         "image": {
           "full": "Jester_CarefulStrikes.png",
           "sprite": "passive3.png",
@@ -2270,12 +2250,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3134",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3133",
+                  "id": "3077",
                   "count": 1,
                   "hideCount": false
                 }
@@ -2287,7 +2262,7 @@
               "recSteps": false,
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
+              "showIfSummonerSpell": "ItemTeleportCancel",
               "hideIfSummonerSpell": "SummonerSmite",
               "appendAfterSection": "",
               "visibleWithAllOf": [
@@ -2303,12 +2278,12 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3142",
+                  "id": "3087",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3147",
+                  "id": "3031",
                   "count": 1,
                   "hideCount": false
                 }
@@ -2331,17 +2306,17 @@
               ],
               "items": [
                 {
-                  "id": "3031",
+                  "id": "3074",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3095",
                   "count": 1,
                   "hideCount": false
                 },
                 {
                   "id": "3071",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3036",
                   "count": 1,
                   "hideCount": false
                 }
@@ -2364,17 +2339,17 @@
               ],
               "items": [
                 {
-                  "id": "3814",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3139",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
                   "id": "3026",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3812",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3036",
                   "count": 1,
                   "hideCount": false
                 }
@@ -2473,7 +2448,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3147",
+                  "id": "3087",
                   "count": 1,
                   "hideCount": false
                 }
@@ -2496,12 +2471,12 @@
               ],
               "items": [
                 {
-                  "id": "3142",
+                  "id": "3031",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3031",
+                  "id": "3071",
                   "count": 1,
                   "hideCount": false
                 },
@@ -2529,17 +2504,17 @@
               ],
               "items": [
                 {
-                  "id": "3036",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3814",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
                   "id": "3026",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3812",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3036",
                   "count": 1,
                   "hideCount": false
                 }

@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.16.1",
+  "version": "9.21.1",
   "data": {
     "Evelynn": {
       "id": "Evelynn",
@@ -597,7 +597,7 @@
             ],
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
-              "{{ e1 }} -> {{ e1NL }}",
+              "{{ effect1amount*2.4 }} -> {{ effect1amountnl*2.4 }}",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
@@ -618,14 +618,14 @@
           "effect": [
             null,
             [
+              125,
               250,
-              500,
-              750
+              375
             ],
             [
-              1,
-              1,
-              1
+              1.4,
+              1.4,
+              1.4
             ],
             [
               2.5,
@@ -670,8 +670,8 @@
           ],
           "effectBurn": [
             null,
-            "250/500/750",
-            "1",
+            "125/250/375",
+            "1.4",
             "2.5",
             "150/225/300",
             "3",

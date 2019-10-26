@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.16.1",
+  "version": "9.21.1",
   "data": {
     "Sylas": {
       "id": "Sylas",
@@ -80,7 +80,7 @@
           "id": "SylasQ",
           "name": "Chain Lash",
           "description": "Sylas lashes his chains out, intersecting at his targeted location dealing damage to and slowing enemies. <br><br>After a delay, magical energy explodes from the intersection point dealing damage and increasing the slow.",
-          "tooltip": "Sylas lashes his chains out in an X-shaped area, intersecting at his targeted location dealing <scaleAP>{{ damage }}</scaleAP> magic damage to and slowing enemies by {{ slowamountcalc }} for 2 seconds. <br /><br />After .5 seconds, magical energy explodes from the intersection point dealing <scaleAP>{{ explosiondamage }}</scaleAP> and increasing the slow by 50%.<br /><br /><rules>The explosion deals {{ minionmodcalc }} damage to minions and monsters.</rules>",
+          "tooltip": "Sylas lashes his chains out in an X-shaped area, intersecting at his targeted location dealing <scaleAP>{{ damage }}</scaleAP> magic damage to and slowing enemies by {{ slowamountcalc }} for 2 seconds. <br /><br />After {{ detonationdelay }} seconds, magical energy explodes from the intersection point dealing <scaleAP>{{ explosiondamage }}</scaleAP> and increasing the slow by 50%.<br /><br /><rules>The explosion deals {{ minionmonstermod*100 }}% damage to minions and monsters.</rules>",
           "leveltip": {
             "label": [
               "Damage",
@@ -367,17 +367,15 @@
         {
           "id": "SylasE",
           "name": "Abscond / Abduct",
-          "description": "Sylas dashes to a location. Sylas can recast the ability to throw his chains out, pulling himself to an enemy he hits. If he hits an enemy champion or monster, he gains a shield.",
-          "tooltip": "Sylas dashes to a location, gaining a magic damage absorbing shield for <scaleAP>{{ shieldvalue }}</scaleAP> for {{ shieldduration }} seconds.<br /><br /><span class=\"colorFF5733\">Recast:</span> Sylas throws out his chain in a direction, pulling himself to the first enemy hit dealing <scaleAP>{{ damage }}</scaleAP> magic damage and knocking them up for .35 seconds.",
+          "description": "Sylas dashes to a location, gaining a magic damage shield. Sylas can recast the ability to throw his chains out, pulling himself to an enemy he hits.",
+          "tooltip": "Sylas dashes to a location, gaining a magic damage absorbing shield for <scaleAP>{{ shieldvalue }}</scaleAP> for {{ shieldduration }} seconds.<br /><br /><span class=\"colorFF5733\">Recast:</span> Sylas throws out his chain in a direction, pulling himself to the first enemy hit dealing <scaleAP>{{ damage }}</scaleAP> magic damage and knocking them up for {{ knockupduration }} seconds.",
           "leveltip": {
             "label": [
               "Damage",
-              "@AbilityResourceName@ Cost",
               "Shield Amount"
             ],
             "effect": [
               "{{ pulldamage }} -> {{ pulldamageNL }}",
-              "{{ basecost }} -> {{ basecostNL }}",
               "{{ shieldbase }} -> {{ shieldbaseNL }}"
             ]
           },
@@ -623,7 +621,7 @@
       ],
       "passive": {
         "name": "Petricite Burst",
-        "description": "After casting a spell, Sylas's next basic attack whirls his energized chains around him dealing bonus magic damage to enemies hit.",
+        "description": "After casting a spell, Sylas stores a charge of Petricite Burst.  Sylas's basic attacks will expend a charge and whirl his energized chains around him dealing bonus magic damage to enemies hit.",
         "image": {
           "full": "SylasP.png",
           "sprite": "passive3.png",
@@ -749,6 +747,7 @@
           "customTag": "",
           "sortrank": 0,
           "extensionPage": false,
+          "useObviousCheckmark": false,
           "customPanel": null,
           "blocks": [
             {
@@ -759,6 +758,13 @@
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
               "items": [
                 {
                   "id": "3112",
@@ -785,9 +791,16 @@
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
               "items": [
                 {
-                  "id": "3165",
+                  "id": "3152",
                   "count": 1,
                   "hideCount": false
                 },
@@ -811,7 +824,19 @@
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
               "items": [
+                {
+                  "id": "3165",
+                  "count": 1,
+                  "hideCount": false
+                },
                 {
                   "id": "3089",
                   "count": 1,
@@ -819,11 +844,6 @@
                 },
                 {
                   "id": "3135",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3151",
                   "count": 1,
                   "hideCount": false
                 }
@@ -837,19 +857,26 @@
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
               "items": [
-                {
-                  "id": "3116",
-                  "count": 1,
-                  "hideCount": false
-                },
                 {
                   "id": "3157",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3001",
+                  "id": "3151",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3065",
                   "count": 1,
                   "hideCount": false
                 }
@@ -863,6 +890,13 @@
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
               "items": [
                 {
                   "id": "2003",
@@ -1739,13 +1773,8 @@
               ],
               "items": [
                 {
-                  "id": "1056",
+                  "id": "2033",
                   "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2003",
-                  "count": 2,
                   "hideCount": false
                 },
                 {
@@ -1851,11 +1880,6 @@
                   "id": "3108",
                   "count": 1,
                   "hideCount": false
-                },
-                {
-                  "id": "2032",
-                  "count": 1,
-                  "hideCount": false
                 }
               ]
             },
@@ -1886,7 +1910,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3100",
+                  "id": "3152",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1919,7 +1943,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3100",
+                  "id": "3152",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1932,39 +1956,6 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSiegeChampSelect1",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3089",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3102",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3135",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
               "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
@@ -1975,17 +1966,17 @@
               ],
               "items": [
                 {
-                  "id": "3089",
+                  "id": "3157",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3135",
+                  "id": "3100",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3907",
+                  "id": "3165",
                   "count": 1,
                   "hideCount": false
                 }
@@ -2008,17 +1999,17 @@
               ],
               "items": [
                 {
-                  "id": "3157",
+                  "id": "3089",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3152",
+                  "id": "3135",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3165",
+                  "id": "3065",
                   "count": 1,
                   "hideCount": false
                 }

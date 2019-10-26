@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.16.1",
+  "version": "9.21.1",
   "data": {
     "Velkoz": {
       "id": "Velkoz",
@@ -92,16 +92,16 @@
           "id": "VelkozQ",
           "name": "Plasma Fission",
           "description": "Vel'Koz shoots a bolt of plasma that splits in two on reactivation or upon hitting an enemy. The bolt slows and damages on hit.",
-          "tooltip": "Vel'Koz shoots a plasma bolt that deals {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> Magic Damage and applies a slow of {{ e5 }}% that decays over {{ e4 }} second(s).<br /><br />Upon reactivation or upon hitting an enemy, the bolt splits at a 90 degree angle.<br /><br />Killing a unit with this refunds {{ e2 }}% of the <span class=\"color44DDFF\">Mana Cost</span>.",
+          "tooltip": "Vel'Koz shoots a plasma bolt that deals <magicDamage>{{ totaldamage }} magic damage</magicDamage> and slows enemies by {{ slowamount*100 }}% decaying over {{ slowduration }} second(s).<br /><br />Upon reactivation or upon hitting an enemy, the bolt splits at a 90 degree angle.<br /><br />Killing a unit with this refunds {{ manarefund*100 }}% of the <span class=\"color44DDFF\">Mana Cost</span>.",
           "leveltip": {
             "label": [
-              "Damage",
+              "Total Damage",
               "Slow Duration",
-              "Mana Cost"
+              "@AbilityResourceName@ Cost"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
-              "{{ e4 }} -> {{ e4NL }}",
+              "{{ basedamage }} -> {{ basedamageNL }}",
+              "{{ slowduration }} -> {{ slowdurationNL }}",
               "{{ cost }} -> {{ costNL }}"
             ]
           },
@@ -126,39 +126,39 @@
           "effect": [
             null,
             [
-              80,
-              120,
-              160,
-              200,
-              240
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              50,
-              50,
-              50,
-              50,
-              50
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              0.25,
-              0.25,
-              0.25,
-              0.25,
-              0.25
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              1,
-              1.4,
-              1.8,
-              2.2,
-              2.6
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              70,
-              70,
-              70,
-              70,
-              70
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -198,25 +198,19 @@
           ],
           "effectBurn": [
             null,
-            "80/120/160/200/240",
-            "50",
-            "0.25",
-            "1/1.4/1.8/2.2/2.6",
-            "70",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
             "0",
             "0",
             "0",
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.8,
-              "key": "a1"
-            }
-          ],
-          "costType": " Mana",
+          "vars": [],
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             1050,
@@ -235,7 +229,7 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "VelkozW",
