@@ -43,26 +43,32 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		// @formatter:off
 		http
-			.authorizeRequests()
-				.requestMatchers(EndpointRequest.toAnyEndpoint()).hasRole(UserRole.ADMIN)
-			.and()
-			.formLogin()
-				.loginPage("/admin/login")
-				.loginProcessingUrl(apiPath + "/admin/login")
-				.successHandler(authenticationSuccessHandler())
-				.failureHandler(authenticationFailureHandler())
-				.permitAll()
-			.and()
-			.logout()
-				.logoutUrl(apiPath + "/admin/logout")
-				.logoutSuccessHandler(logoutSuccessHandler())
-				.permitAll()
-			.and()
-			.csrf()
-				.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-			.and()
-				.exceptionHandling()
-				.authenticationEntryPoint(authenticationEntryPoint());
+			.authorizeRequests(authorizeRequests ->
+				authorizeRequests
+						.requestMatchers(EndpointRequest.toAnyEndpoint()).hasRole(UserRole.ADMIN)
+			)
+			.formLogin(formLogin ->
+				formLogin
+						.loginPage("/admin/login")
+						.loginProcessingUrl(apiPath + "/admin/login")
+						.successHandler(authenticationSuccessHandler())
+						.failureHandler(authenticationFailureHandler())
+						.permitAll()
+			)
+			.logout(logout ->
+				logout
+						.logoutUrl(apiPath + "/admin/logout")
+						.logoutSuccessHandler(logoutSuccessHandler())
+						.permitAll()
+			)
+			.csrf(csrf ->
+				csrf
+						.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+			)
+			.exceptionHandling(exceptionHandling ->
+				exceptionHandling
+						.authenticationEntryPoint(authenticationEntryPoint())
+			);
 		// @formatter:on
 	}
 
