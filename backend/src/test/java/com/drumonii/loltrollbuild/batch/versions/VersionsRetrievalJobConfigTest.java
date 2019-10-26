@@ -9,9 +9,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.batch.core.BatchStatus;
 import org.springframework.batch.core.JobExecution;
+import org.springframework.batch.test.JobLauncherTestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Import;
 import org.springframework.data.domain.Sort;
 
 import java.util.ArrayList;
@@ -23,7 +23,6 @@ import static org.mockito.BDDMockito.given;
 import static org.springframework.data.domain.Sort.Direction.DESC;
 
 @BatchTest(VersionsRetrievalJobConfig.class)
-@Import(VersionsRetrievalJobTestConfig.class)
 abstract class VersionsRetrievalJobConfigTest extends AbstractBatchTests {
 
 	private static final Sort SORT = Sort.by(DESC, "major", "minor", "revision");
@@ -38,7 +37,7 @@ abstract class VersionsRetrievalJobConfigTest extends AbstractBatchTests {
 	protected ObjectMapper objectMapper;
 
 	@Autowired
-	private VersionsRetrievalJobLauncherTestUtils jobLauncherTestUtils;
+	private JobLauncherTestUtils jobLauncherTestUtils;
 
 	protected List<Version> versions;
 

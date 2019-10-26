@@ -39,7 +39,7 @@ import java.lang.annotation.*;
 @AutoConfigureDataJpa
 @AutoConfigureWebClient
 @ImportAutoConfiguration({ BatchAutoConfiguration.class })
-@Import({ BatchConfig.class, CacheConfig.class, JpaConfig.class, RiotApiConfig.class })
+@Import({ BatchConfig.class, CacheConfig.class, JobLauncherTestUtilsConfig.class, JpaConfig.class, RiotApiConfig.class })
 @Sql("/CLEAN_TABLES.sql") // have to use because Spring Batch complains about @Transactional
 @TestPropertySource(properties = "spring.datasource.generate-unique-name=true")
 public @interface BatchTest {

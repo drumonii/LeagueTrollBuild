@@ -13,9 +13,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.batch.core.BatchStatus;
 import org.springframework.batch.core.JobExecution;
+import org.springframework.batch.test.JobLauncherTestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Import;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.ArrayList;
@@ -30,7 +30,6 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 
 @BatchTest(ItemsRetrievalJobConfig.class)
-@Import(ItemsRetrievalJobTestConfig.class)
 abstract class ItemsRetrievalJobConfigTest extends AbstractBatchTests {
 
 	@MockBean
@@ -46,7 +45,7 @@ abstract class ItemsRetrievalJobConfigTest extends AbstractBatchTests {
 	protected ImageFetcher imageFetcher;
 
 	@Autowired
-	private ItemsRetrievalJobLauncherTestUtils jobLauncherTestUtils;
+	private JobLauncherTestUtils jobLauncherTestUtils;
 
 	protected ItemsResponse itemsResponse;
 

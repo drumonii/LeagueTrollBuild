@@ -49,6 +49,7 @@ class AllRetrievalsJobConfigTest {
 	private ItemsService itemsService;
 
 	@Autowired
+	@Qualifier("allRetrievalsJobLauncherTestUtils")
 	private JobLauncherTestUtils jobLauncherTestUtils;
 
 	@Test
