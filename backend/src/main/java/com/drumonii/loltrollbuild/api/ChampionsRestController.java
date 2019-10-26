@@ -75,7 +75,7 @@ public class ChampionsRestController {
 	 * @return the {@link Champion}
 	 */
 	@JsonView(ApiViews.LtbApi.class)
-	@GetMapping(path = "/{value}")
+	@GetMapping("/{value}")
 	public Champion getChampion(@PathVariable String value) {
 		return championsApiService.find(value)
 				.orElseThrow(() -> new ResourceNotFoundException("Unable to find a Champion with value: " + value));
@@ -86,7 +86,7 @@ public class ChampionsRestController {
 	 *
 	 * @return the {@link List} of tags
 	 */
-	@GetMapping(path = "/tags")
+	@GetMapping("/tags")
 	public List<String> getTags() {
 		return championsApiService.getTags();
 	}
@@ -99,7 +99,7 @@ public class ChampionsRestController {
 	 * @return a {@link Map} of build type key with {@link List} of values.
 	 */
 	@JsonView(ApiViews.LtbApi.class)
-	@GetMapping(path = "/{value}/troll-build")
+	@GetMapping("/{value}/troll-build")
 	public TrollBuild trollBuild(@PathVariable String value,
 			@RequestParam(required = false, defaultValue = SUMMONERS_RIFT_SID) int mapId) {
 		Champion champion = championsApiService.find(value)

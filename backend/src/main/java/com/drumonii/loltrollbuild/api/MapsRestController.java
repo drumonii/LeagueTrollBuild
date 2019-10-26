@@ -58,7 +58,7 @@ public class MapsRestController {
 	 * @return the {@link GameMap}
 	 */
 	@JsonView(ApiViews.LtbApi.class)
-	@GetMapping(path = "/{id}")
+	@GetMapping("/{id}")
 	public GameMap getGameMap(@PathVariable int id) {
 		return mapsApiService.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Unable to find a Map with Id: " + id));
@@ -71,7 +71,7 @@ public class MapsRestController {
 	 * @return the {@link List} of {@link GameMap}s
 	 */
 	@JsonView(ApiViews.LtbApi.class)
-	@GetMapping(path = "/for-troll-build")
+	@GetMapping("/for-troll-build")
 	public List<GameMap> getForTrollBuild() {
 		return mapsApiService.forTrollBuild();
 	}

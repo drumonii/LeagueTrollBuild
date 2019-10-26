@@ -23,7 +23,7 @@ public class AdminAuthenticationRestController {
      * @param userDetails the {@link User}
      * @return the {@link AdminUserDetails} if authenticated, otherwise {@code null}
      */
-    @GetMapping(path = "/authentication")
+    @GetMapping("/authentication")
     public AdminUserDetails getAuthentication(@AuthenticationPrincipal User userDetails) {
         User user = Optional.ofNullable(userDetails)
                 .orElseThrow(() -> new BadRequestException("Authentication was not found"));

@@ -47,7 +47,7 @@ public class BatchStepExecutionsRestController {
 	 * @param stepExecutionId the step execution Id to lookup
 	 * @return the {@link BatchStepExecution}
 	 */
-	@GetMapping(path = "/{stepExecutionId}")
+	@GetMapping("/{stepExecutionId}")
 	public BatchStepExecution getBatchStepExecution(@PathVariable long jobInstanceId,
 			@PathVariable long stepExecutionId) {
 		Optional<BatchStepExecution> stepExecution = batchStepExecutionsRepository.findById(stepExecutionId);

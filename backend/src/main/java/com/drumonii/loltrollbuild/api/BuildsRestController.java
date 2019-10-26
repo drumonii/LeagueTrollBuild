@@ -74,7 +74,7 @@ public class BuildsRestController {
 	 * @return the {@link Build}
 	 */
 	@JsonView({ ApiViews.LtbApi.class })
-	@GetMapping(path = "/{id}")
+	@GetMapping("/{id}")
 	public Build getBuild(@PathVariable int id) {
 		Optional<Build> optionalBuild = buildsRepository.findById(id);
 		if (optionalBuild.isEmpty()) {
@@ -128,7 +128,7 @@ public class BuildsRestController {
 	 *
 	 * @return the count of saved {@link Build}s
 	 */
-	@GetMapping(path = "/count")
+	@GetMapping("/count")
 	public long countBuilds() {
 		return buildsRepository.count();
 	}

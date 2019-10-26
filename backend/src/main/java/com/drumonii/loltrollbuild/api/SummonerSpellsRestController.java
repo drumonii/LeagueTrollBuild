@@ -56,7 +56,7 @@ public class SummonerSpellsRestController {
 	 * @return the {@link SummonerSpell}
 	 */
 	@JsonView(ApiViews.LtbApi.class)
-	@GetMapping(path = "/{id}")
+	@GetMapping("/{id}")
 	public SummonerSpell getSummonerSpell(@PathVariable int id) {
 		return summonerSpellsApiService.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Unable to find a Summoner Spell with Id: " + id));
@@ -70,7 +70,7 @@ public class SummonerSpellsRestController {
 	 * @return the {@link List} of {@link SummonerSpell}s
 	 */
 	@JsonView(ApiViews.LtbApi.class)
-	@GetMapping(path = "/for-troll-build")
+	@GetMapping("/for-troll-build")
 	public List<SummonerSpell> getForTrollBuild(@RequestParam(required = false, defaultValue = "CLASSIC") GameMode mode) {
 		return summonerSpellsApiService.forTrollBuild(mode);
 	}

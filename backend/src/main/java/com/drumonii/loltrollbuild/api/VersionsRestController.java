@@ -49,7 +49,7 @@ public class VersionsRestController {
 	 * @param patch the patch to lookup the {@link Version}
 	 * @return the {@link Version}
 	 */
-	@GetMapping(path = "/{patch}")
+	@GetMapping("/{patch}")
 	public Version getVersion(@PathVariable String patch) {
 		return versionsApiService.findById(patch)
 				.orElseThrow(() -> new ResourceNotFoundException("Unable to find a Version with patch: " + patch));
@@ -60,7 +60,7 @@ public class VersionsRestController {
 	 *
 	 * @return the {@link Version}
 	 */
-	@GetMapping(path = "/latest")
+	@GetMapping("/latest")
 	public Version getLatestVersion() {
 		return Optional.ofNullable(versionsApiService.latestVersion())
 				.orElseThrow(() -> new ResourceNotFoundException("Unable to get the latest Version with no saved Versions"));

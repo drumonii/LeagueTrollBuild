@@ -16,12 +16,12 @@ public class AdminController {
         return "forward:/admin/index.html";
     }
 
-    @GetMapping(path = "/batch")
+    @GetMapping("/batch")
     public String batch() {
         return "forward:/admin/index.html";
     }
 
-    @GetMapping(path = "/flyway")
+    @GetMapping("/flyway")
     public String flyway() {
         return "forward:/admin/index.html";
     }

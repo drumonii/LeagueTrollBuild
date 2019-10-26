@@ -75,7 +75,7 @@ public class BatchJobInstancesRestController {
 	 *
 	 * @return the {@link ResponseEntity} of {@link BatchJobExecution} if successfully ran, otherwise a 500.
 	 */
-	@PostMapping(path = "/restart")
+	@PostMapping("/restart")
 	public ResponseEntity<BatchJobExecution> restartAllRetrievalsJob() {
 		JobParameters jobParameters = new JobParametersBuilder()
 				.addLong("forced", RandomizeUtil.getRandomLong())
@@ -97,7 +97,7 @@ public class BatchJobInstancesRestController {
 	 *
 	 * @return the {@link Map} of "hasFailedAllRetrievalsJob" key and boolean value.
 	 */
-	@GetMapping(path = "/has-failed-all-retrievals-job")
+	@GetMapping("/has-failed-all-retrievals-job")
 	public Map<String, Boolean> hasFailedAllRetrievalsJob(@RequestParam(required = false, defaultValue = "5") long minutes) {
 		LocalDateTime lastStartTime = LocalDateTime.now().minusMinutes(minutes);
 
@@ -125,7 +125,7 @@ public class BatchJobInstancesRestController {
 	 * @param jobInstanceId the job instance Id to lookup
 	 * @return the {@link BatchJobInstance}
 	 */
-	@GetMapping(path = "/{jobInstanceId}")
+	@GetMapping("/{jobInstanceId}")
 	public BatchJobInstance getBatchJobInstance(@PathVariable long jobInstanceId) {
 		Optional<BatchJobInstance> jobInstance = batchJobInstancesRepository.findById(jobInstanceId);
 		return jobInstance.orElseThrow(() -> new ResourceNotFoundException("Unable to find Batch Job Instance with Id: " + jobInstanceId));

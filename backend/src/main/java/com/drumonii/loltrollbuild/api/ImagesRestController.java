@@ -23,32 +23,32 @@ public class ImagesRestController {
 	@Autowired
 	private ImageApiService imageApiService;
 
-	@GetMapping(path = "/summoner-spells/{id}")
+	@GetMapping("/summoner-spells/{id}")
 	public ResponseEntity<byte[]> summonerSpellImg(@PathVariable("id") int summonerSpellId) {
         return createResponseEntity(imageApiService.getSummonerSpellImage(summonerSpellId));
 	}
 
-	@GetMapping(path = "/items/{id}")
+	@GetMapping("/items/{id}")
 	public ResponseEntity<byte[]> itemImg(@PathVariable("id") int itemId) {
         return createResponseEntity(imageApiService.getItemImage(itemId));
 	}
 
-	@GetMapping(path = "/champions/{id}")
+	@GetMapping("/champions/{id}")
 	public ResponseEntity<byte[]> championImg(@PathVariable("id") int championId) {
 		return createResponseEntity(imageApiService.getChampionImage(championId));
 	}
 
-	@GetMapping(path = "/champions/{id}/spell/{spellKey}")
+	@GetMapping("/champions/{id}/spell/{spellKey}")
 	public ResponseEntity<byte[]> championSpellImg(@PathVariable("id") int championId, @PathVariable String spellKey) {
         return createResponseEntity(imageApiService.getChampionSpellImage(championId, spellKey));
     }
 
-	@GetMapping(path = "/champions/{id}/passive")
+	@GetMapping("/champions/{id}/passive")
 	public ResponseEntity<byte[]> championPassiveImg(@PathVariable("id") int championId) {
         return createResponseEntity(imageApiService.getChampionPassiveImage(championId));
 	}
 
-	@GetMapping(path = "/maps/{mapId}")
+	@GetMapping("/maps/{mapId}")
 	public ResponseEntity<byte[]> mapImg(@PathVariable int mapId) {
         return createResponseEntity(imageApiService.getMapImage(mapId));
 	}

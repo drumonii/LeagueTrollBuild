@@ -59,7 +59,7 @@ public class ItemsRestController {
 	 * @return the {@link Item}
 	 */
 	@JsonView(ApiViews.LtbApi.class)
-	@GetMapping(path = "/{id}")
+	@GetMapping("/{id}")
 	public Item getItem(@PathVariable int id) {
 		return itemsApiService.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Unable to find an Item with Id: " + id));
@@ -73,7 +73,7 @@ public class ItemsRestController {
 	 * @return the {@link List} of {@link Item}s
 	 */
 	@JsonView(ApiViews.LtbApi.class)
-	@GetMapping(path = "/boots")
+	@GetMapping("/boots")
 	public List<Item> getBoots(@RequestParam(required = false, defaultValue = SUMMONERS_RIFT_SID) int mapId) {
 		return itemsApiService.boots(mapId);
 	}
@@ -86,7 +86,7 @@ public class ItemsRestController {
 	 * @return the {@link List} of {@link Item}s
 	 */
 	@JsonView(ApiViews.LtbApi.class)
-	@GetMapping(path = "/trinkets")
+	@GetMapping("/trinkets")
 	public List<Item> getTrinkets(@RequestParam(required = false, defaultValue = SUMMONERS_RIFT_SID) int mapId) {
 		return itemsApiService.trinkets(mapId);
 	}
@@ -98,7 +98,7 @@ public class ItemsRestController {
 	 * @return the {@link List} of {@link Item}s
 	 */
 	@JsonView(ApiViews.LtbApi.class)
-	@GetMapping(path = "/viktor-only")
+	@GetMapping("/viktor-only")
 	public List<Item> getViktorOnly() {
 		return itemsApiService.viktorOnly();
 	}
