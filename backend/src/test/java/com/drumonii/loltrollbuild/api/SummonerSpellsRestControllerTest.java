@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 
 import static com.drumonii.loltrollbuild.model.SummonerSpell.GameMode.CLASSIC;
 import static java.util.function.Predicate.not;
+import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -55,14 +56,14 @@ abstract class SummonerSpellsRestControllerTest {
 				.param("name", summonerSpell.getName().toLowerCase()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-				.andExpect(jsonPath("$.[*]").isNotEmpty());
+				.andExpect(jsonPath("$..name", everyItem(is(summonerSpell.getName()))));
 
 		// qbe with modes
 		mockMvc.perform(get("{apiPath}/summoner-spells", apiPath)
 				.param("modes", summonerSpell.getModes().iterator().next().name()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-				.andExpect(jsonPath("$.[*]").isNotEmpty());
+				.andExpect(jsonPath("$..modes", everyItem(hasItem(summonerSpell.getModes().iterator().next().name()))));
 
 		// qbe with no results
 		mockMvc.perform(get("{apiPath}/summoner-spells", apiPath)

@@ -15,8 +15,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.stream.Collectors;
 
 import static com.drumonii.loltrollbuild.util.GameMapUtil.SUMMONERS_RIFT_SID;
-import static org.hamcrest.Matchers.hasEntry;
-import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -59,21 +58,21 @@ abstract class ItemsRestControllerTest {
 				.param("name", item.getName().toLowerCase()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-				.andExpect(jsonPath("$.[*]").isNotEmpty());
+				.andExpect(jsonPath("$..name", everyItem(is(item.getName()))));
 
 		// qbe with required champion
 		mockMvc.perform(get("{apiPath}/items", apiPath)
 				.param("requiredChampion", item.getRequiredChampion().toLowerCase()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-				.andExpect(jsonPath("$.[*]").isNotEmpty());
+				.andExpect(jsonPath("$..requiredChampion", everyItem(is(item.getRequiredChampion()))));
 
 		// qbe with maps
 		mockMvc.perform(get("{apiPath}/items", apiPath)
 				.param("maps[12]", Boolean.TRUE.toString()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-				.andExpect(jsonPath("$.[*]").isNotEmpty());
+				.andExpect(jsonPath("$..maps[\"12\"]", everyItem(is(true))));
 
 		// qbe with no results
 		mockMvc.perform(get("{apiPath}/items", apiPath)

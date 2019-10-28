@@ -15,7 +15,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static com.drumonii.loltrollbuild.util.GameMapUtil.HOWLING_ABYSS_ID;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 import static org.hamcrest.core.IsNull.nullValue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -60,28 +60,28 @@ abstract class ChampionsRestControllerTest {
 				.param("name", champion.getName().toLowerCase()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-				.andExpect(jsonPath("$.[*]").isNotEmpty());
+				.andExpect(jsonPath("$..name", contains(champion.getName())));
 
 		// qbe with title
 		mockMvc.perform(get("{apiPath}/champions", apiPath)
 				.param("title", champion.getTitle().toLowerCase()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-				.andExpect(jsonPath("$.[*]").isNotEmpty());
+				.andExpect(jsonPath("$..title", contains(champion.getTitle())));
 
 		// qbe with partype
 		mockMvc.perform(get("{apiPath}/champions", apiPath)
 				.param("partype", champion.getPartype().toLowerCase()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-				.andExpect(jsonPath("$.[*]").isNotEmpty());
+				.andExpect(jsonPath("$..partype", everyItem(is(champion.getPartype()))));
 
 		// qbe with tags
 		mockMvc.perform(get("/api/champions")
 				.param("tags", champion.getTags().iterator().next()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-				.andExpect(jsonPath("$.[*]").isNotEmpty());
+				.andExpect(jsonPath("$..tags", everyItem(hasItem(champion.getTags().iterator().next()))));
 
 		// qbe with no results
 		mockMvc.perform(get("{apiPath}/champions", apiPath)
