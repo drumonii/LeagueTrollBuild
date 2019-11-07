@@ -6,6 +6,7 @@ import com.drumonii.loltrollbuild.config.RiotApiConfig;
 import com.drumonii.loltrollbuild.config.WebSecurityConfig;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.data.web.SpringDataWebAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.OverrideAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.core.AutoConfigureCache;
@@ -14,6 +15,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureDataJpa;
 import org.springframework.boot.test.autoconfigure.web.client.AutoConfigureWebClient;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureWebMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTypeExcludeFilter;
 import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.annotation.AliasFor;
@@ -34,7 +36,7 @@ import java.lang.annotation.*;
 @BootstrapWith(WebMvcRestTestContextBootstrapper.class)
 @ExtendWith(SpringExtension.class)
 @OverrideAutoConfiguration(enabled = false)
-@TypeExcludeFilters(WebMvcRestTypeExcludeFilter.class)
+@TypeExcludeFilters({ WebMvcTypeExcludeFilter.class,  WebMvcRestTypeExcludeFilter.class })
 @Transactional
 @AutoConfigureCache
 @AutoConfigureDataJpa
@@ -63,6 +65,15 @@ public @interface WebMvcRestTest {
 	 */
 	@AliasFor("value")
 	Class<?>[] controllers() default {};
+
+	/**
+	 * Determines if default filtering should be used with {@link SpringBootApplication @SpringBootApplication}.
+	 *
+	 * @see #includeFilters()
+	 * @see #excludeFilters()
+	 * @return if default filters should be used
+	 */
+	boolean useDefaultFilters() default true;
 
 	/**
 	 * A set of include filters which can be used to add otherwise filtered beans to the application context.

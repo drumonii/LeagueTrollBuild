@@ -6,6 +6,7 @@ import com.drumonii.loltrollbuild.config.JpaConfig;
 import com.drumonii.loltrollbuild.config.RiotApiConfig;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.batch.BatchAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.OverrideAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.core.AutoConfigureCache;
@@ -62,6 +63,15 @@ public @interface BatchTest {
 	 */
 	@AliasFor("value")
 	Class<?>[] jobs() default {};
+
+	/**
+	 * Determines if default filtering should be used with {@link SpringBootApplication @SpringBootApplication}.
+	 *
+	 * @see #includeFilters()
+	 * @see #excludeFilters()
+	 * @return if default filters should be used
+	 */
+	boolean useDefaultFilters() default true;
 
 	/**
 	 * A set of include filters which can be used to add otherwise filtered beans to the application context.

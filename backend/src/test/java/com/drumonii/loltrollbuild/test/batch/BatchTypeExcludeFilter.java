@@ -2,9 +2,7 @@ package com.drumonii.loltrollbuild.test.batch;
 
 import org.springframework.boot.context.TypeExcludeFilter;
 import org.springframework.boot.jackson.JsonComponent;
-import org.springframework.boot.test.autoconfigure.filter.AnnotationCustomizableTypeExcludeFilter;
-import org.springframework.context.annotation.ComponentScan.Filter;
-import org.springframework.core.annotation.AnnotatedElementUtils;
+import org.springframework.boot.test.autoconfigure.filter.StandardAnnotationCustomizableTypeExcludeFilter;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -14,7 +12,7 @@ import java.util.Set;
 /**
  * {@link TypeExcludeFilter} for {@link BatchTest @BatchTest}.
  */
-public class BatchTypeExcludeFilter extends AnnotationCustomizableTypeExcludeFilter {
+public class BatchTypeExcludeFilter extends StandardAnnotationCustomizableTypeExcludeFilter<BatchTest> {
 
 	private static final Set<Class<?>> DEFAULT_INCLUDES;
 
@@ -24,31 +22,8 @@ public class BatchTypeExcludeFilter extends AnnotationCustomizableTypeExcludeFil
 		DEFAULT_INCLUDES = Collections.unmodifiableSet(includes);
 	}
 
-	private final BatchTest annotation;
-
 	BatchTypeExcludeFilter(Class<?> testClass) {
-		annotation = AnnotatedElementUtils.getMergedAnnotation(testClass, BatchTest.class);
-	}
-
-	@Override
-	protected boolean hasAnnotation() {
-		return annotation != null;
-	}
-
-	@Override
-	protected Filter[] getFilters(FilterType type) {
-		switch (type) {
-		case INCLUDE:
-			return annotation.includeFilters();
-		case EXCLUDE:
-			return annotation.excludeFilters();
-		}
-		throw new IllegalStateException("Unsupported type " + type);
-	}
-
-	@Override
-	protected boolean isUseDefaultFilters() {
-		return true;
+		super(testClass);
 	}
 
 	@Override
@@ -58,7 +33,7 @@ public class BatchTypeExcludeFilter extends AnnotationCustomizableTypeExcludeFil
 
 	@Override
 	protected Set<Class<?>> getComponentIncludes() {
-		return new LinkedHashSet<>(Arrays.asList(annotation.jobs()));
+		return new LinkedHashSet<>(Arrays.asList(getAnnotation().synthesize().jobs()));
 	}
 
 }
