@@ -46,7 +46,7 @@
             </clr-alert>
           </ng-container>
         </ng-container>
-        <button class="btn btn-primary" [clrLoading]="adminLoginState === 'LOGGING_IN' ? 1 : 0"
+        <button class="btn btn-primary" [clrLoading]="adminLoginState === 'LOGGING_IN'"
           type="submit" [disabled]="adminLoginForm.invalid" data-e2e="login-btn">
           Login
         </button>
