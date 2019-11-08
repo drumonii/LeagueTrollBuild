@@ -59,6 +59,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				logout
 						.logoutUrl(apiPath + "/admin/logout")
 						.logoutSuccessHandler(logoutSuccessHandler())
+						.deleteCookies("XSRF-TOKEN")
 						.permitAll()
 			)
 			.csrf(csrf ->

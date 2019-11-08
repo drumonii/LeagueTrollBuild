@@ -150,7 +150,6 @@ describe('AdminAuthService', () => {
   describe('logoutAdmin', () => {
 
     const logoutRequestMatch: RequestMatch = { method: 'POST', url: '/logout' };
-    const refreshRequestMatch: RequestMatch = { method: 'GET', url: '/refresh' };
 
     beforeEach(() => {
       sessionStorage.setItem(AdminAuthService.adminUserDetailsKey, JSON.stringify(mockAdminUserDetails));
@@ -180,10 +179,6 @@ describe('AdminAuthService', () => {
       expect(logoutTestReq.request.body).toEqual({});
 
       logoutTestReq.flush(mockSuccessfulLogoutResponse);
-
-      const refreshTestReq = httpMock.expectOne(refreshRequestMatch);
-
-      refreshTestReq.error(new ErrorEvent('An unexpected error occurred'));
     }));
 
     it('should remove adminUserDetails in sessionStorage with REST error',
@@ -196,9 +191,6 @@ describe('AdminAuthService', () => {
       expect(logoutTestReq.request.body).toEqual({});
 
       logoutTestReq.error(new ErrorEvent('An unexpected error occurred'));
-
-      const refreshTestReq = httpMock.expectOne(refreshRequestMatch);
-      refreshTestReq.error(new ErrorEvent('An unexpected error occurred'));
     }));
 
   });

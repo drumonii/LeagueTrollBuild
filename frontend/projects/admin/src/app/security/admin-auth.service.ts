@@ -52,7 +52,6 @@ export class AdminAuthService {
       .pipe(
         finalize(() => {
           this.removeAdminUserDetails();
-          this.adminRefresh().subscribe(); // trigger new csrf token for login page
         }),
         catchError((error: HttpErrorResponse) => {
           this.logger.error(`Caught error while POSTing admin logout ${JSON.stringify(error)}`);
@@ -82,16 +81,6 @@ export class AdminAuthService {
           this.logger.warn(`Caught error while GETing admin authentication ${JSON.stringify(error)}`);
           this.removeAdminUserDetails();
           return of(false);
-        })
-      );
-  }
-
-  private adminRefresh(): Observable<any> {
-    return this.httpClient.get<any>('/refresh')
-      .pipe(
-        catchError((error: HttpErrorResponse) => {
-          this.logger.warn(`Caught error while GETing admin refresh ${JSON.stringify(error)}`);
-          return of(null);
         })
       );
   }
