@@ -15,7 +15,7 @@ import javax.persistence.criteria.Root;
  */
 public class ExampleSpecification<T> implements Specification<T> {
 
-	public Example<T> example; // must be public for Cacheable key
+	private final Example<T> example;
 
 	public ExampleSpecification(Example<T> example) {
 		this.example = example;
@@ -24,6 +24,10 @@ public class ExampleSpecification<T> implements Specification<T> {
 	@Override
 	public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
 		return QueryByExampleFromSpecificationPredicateBuilder.getPredicate(root, cb, example);
+	}
+
+	public Example<T> getExample() {
+		return example;
 	}
 
 }
