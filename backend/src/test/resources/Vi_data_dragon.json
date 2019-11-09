@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.21.1",
+  "version": "9.22.1",
   "data": {
     "Vi": {
       "id": "Vi",
@@ -12,7 +12,7 @@
         "full": "Vi.png",
         "sprite": "champion4.png",
         "group": "champion",
-        "x": 384,
+        "x": 432,
         "y": 0,
         "w": 48,
         "h": 48
@@ -257,8 +257,8 @@
             "full": "ViQ.png",
             "sprite": "spell13.png",
             "group": "spell",
-            "x": 384,
-            "y": 0,
+            "x": 96,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -268,10 +268,10 @@
           "id": "ViW",
           "name": "Denting Blows",
           "description": "Vi's punches break her opponent's Armor, dealing bonus damage and granting her Attack Speed.",
-          "tooltip": "Every 3rd attack on the same target deals an additional {{ e1 }}% <span class=\"colorFF8C00\">(+{{ f1 }}%)</span> of the target's maximum Health as physical damage, reduces its Armor by {{ e3 }}% and grants Vi {{ e2 }}% Attack Speed for {{ e4 }} seconds (max {{ e5 }} damage vs. monsters).<br /><br />Triggering Denting Blows reduces the cooldown of Blast Shield by 3 seconds.",
+          "tooltip": "Every 3rd attack on the same target deals an additional {{ e1 }}% <scaleAD>(+{{ f1 }}%)</scaleAD> of the target's maximum Health as physical damage, reduces its Armor by {{ e3 }}% and grants Vi {{ e2 }}% Attack Speed for {{ e4 }} seconds (max {{ e5 }} damage vs. monsters).<br /><br />Triggering Denting Blows reduces the cooldown of Blast Shield by 3 seconds.",
           "leveltip": {
             "label": [
-              "Max Health Damage",
+              "Maximum Health Damage",
               "Attack Speed"
             ],
             "effect": [
@@ -404,8 +404,8 @@
             "full": "ViW.png",
             "sprite": "spell13.png",
             "group": "spell",
-            "x": 432,
-            "y": 0,
+            "x": 144,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -415,16 +415,16 @@
           "id": "ViE",
           "name": "Excessive Force",
           "description": "Vi's next attack blasts through her target, dealing damage to enemies behind it.",
-          "tooltip": "Causes next basic attack to deal {{ e1 }} <span class=\"colorFF8C00\">(+{{ f3 }})</span> <span class=\"color99FF99\">(+{{ a1 }})</span> physical damage to the target and enemies behind it.<br /><br />Vi charges a new punch every <span class=\"colorFFFFFF\">{{ f1 }}</span> seconds and can hold 2 charges at once.",
+          "tooltip": "Causes next basic attack to deal {{ e1 }} <scaleAD>(+{{ f3 }})</scaleAD> <scaleAP>(+{{ a1 }})</scaleAP> physical damage to the target and enemies behind it.<br /><br />Vi charges a new punch every <scaleLevel>{{ f1 }}</scaleLevel> seconds and can hold 2 charges at once.",
           "leveltip": {
             "label": [
               "Damage",
               "Charge Time",
-              "Mana Cost"
+              "@AbilityResourceName@ Cost"
             ],
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
-              "{{ f1 }} -> {{ f2 }}",
+              "{{ ammorechargetime }} -> {{ ammorechargetimeNL }}",
               "{{ cost }} -> {{ costNL }}"
             ]
           },
@@ -553,20 +553,9 @@
                 8
               ],
               "key": "f1"
-            },
-            {
-              "link": "@text",
-              "coeff": [
-                14,
-                12.5,
-                11,
-                9.5,
-                8
-              ],
-              "key": "f1"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "2",
           "range": [
             400,
@@ -580,12 +569,12 @@
             "full": "ViE.png",
             "sprite": "spell13.png",
             "group": "spell",
-            "x": 0,
+            "x": 192,
             "y": 48,
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "ViR",
@@ -697,7 +686,7 @@
             "full": "ViR.png",
             "sprite": "spell13.png",
             "group": "spell",
-            "x": 48,
+            "x": 240,
             "y": 48,
             "w": 48,
             "h": 48
@@ -712,7 +701,7 @@
           "full": "ViPassive.png",
           "sprite": "passive4.png",
           "group": "passive",
-          "x": 384,
+          "x": 432,
           "y": 0,
           "w": 48,
           "h": 48

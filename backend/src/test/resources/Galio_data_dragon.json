@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.21.1",
+  "version": "9.22.1",
   "data": {
     "Galio": {
       "id": "Galio",
@@ -260,21 +260,21 @@
           "id": "GalioW",
           "name": "Shield of Durand",
           "description": "Galio charges a defensive stance, moving slowly. Upon releasing the charge, Galio will taunt and damage nearby enemies.",
-          "tooltip": "<span class=\"colorFF9900\">Passive:</span> After not taking damage for {{ e6 }} seconds Galio gains a shield that absorbs <span class=\"colorFF0000\">{{ f3 }}</span> magic damage.<br /><br /><span class=\"colorFF9900\">First Cast:</span> Galio starts to charge, gaining {{ e1 }} <span class=\"colorFF00FF\">(+{{ f2 }})</span><span class=\"color99FF99\">(+{{ f4 }})</span>% Damage Reduction from Magic Damage and {{ f5 }}% of that amount as Damage Reduction from Physical Damage. While charging, Galio slows himself by {{ e3 }}%.<br /><br /><span class=\"colorFF9900\">Second Cast:</span> Galio taunts nearby enemy champions for {{ e4 }} to {{ e7 }} seconds, deals {{ f8 }} <span class=\"color99FF99\">(+{{ f9 }})</span> to {{ f10 }} <span class=\"color99FF99\">(+{{ f11 }})</span> damage, and refreshes the Damage Reduction for {{ e8 }} seconds. Taunt duration, damage, and radius increase with charge time.<br />",
+          "tooltip": "<span class=\"colorFF9900\">Passive:</span> After not taking damage for {{ e6 }} seconds Galio gains a shield that absorbs <span class=\"colorFF0000\">{{ f3 }}</span> magic damage.<br /><br /><span class=\"colorFF9900\">First Cast:</span> Galio starts to charge, gaining {{ e1 }} <span class=\"colorFF00FF\">(+{{ f2 }})</span><span class=\"color99FF99\">(+{{ f4 }})</span>% Damage Reduction from Magic Damage and {{ f5 }}% of that amount as Damage Reduction from Physical Damage. While charging, Galio slows himself by {{ e3 }}%.<br /><br /><span class=\"colorFF9900\">Second Cast:</span> Galio taunts nearby enemy champions for {{ e4 }} to {{ e7 }} seconds, deals {{ minimumwbasedamage }} <span class=\"color99FF99\">(+{{ f9 }})</span> to {{ maximumwbasedamage }} <span class=\"color99FF99\">(+{{ f11 }})</span> damage, and refreshes the Damage Reduction for {{ e8 }} seconds. Taunt duration, damage, and radius increase with charge time.",
           "leveltip": {
             "label": [
               "Shield Health Ratio",
               "Magic Damage Reduction",
               "Physical Damage Reduction",
               "Cooldown",
-              "Max Damage"
+              "Maximum Damage"
             ],
             "effect": [
               "{{ e5 }}% -> {{ e5NL }}%",
               "{{ e1 }}% -> {{ e1NL }}%",
-              "{{ f6 }}% -> {{ f7 }}%",
+              "{{ effect1amount*0.500000 }}% -> {{ effect1amountnl*0.500000 }}%",
               "{{ cooldown }} -> {{ cooldownNL }}",
-              "{{ f10 }} -> {{ f12 }}"
+              "{{ maximumwbasedamage }} -> {{ maximumwbasedamageNL }}"
             ]
           },
           "maxrank": 5,
@@ -382,7 +382,7 @@
             "5"
           ],
           "vars": [],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             275,
@@ -401,7 +401,7 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "GalioE",

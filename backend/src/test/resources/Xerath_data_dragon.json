@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.21.1",
+  "version": "9.22.1",
   "data": {
     "Xerath": {
       "id": "Xerath",
@@ -12,7 +12,7 @@
         "full": "Xerath.png",
         "sprite": "champion4.png",
         "group": "champion",
-        "x": 192,
+        "x": 240,
         "y": 48,
         "w": 48,
         "h": 48
@@ -98,12 +98,12 @@
           "id": "XerathArcanopulseChargeUp",
           "name": "Arcanopulse",
           "description": "Fires a long-range beam of energy, dealing magic damage to all targets hit.",
-          "tooltip": "<span class=\"colorFF9900\">First cast:</span> Xerath charges Arcanopulse, gradually decreasing his Movement Speed while increasing the spell's range.<br /><br /><span class=\"colorFF9900\">Second cast:</span> Xerath fires Arcanopulse, dealing {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage to all enemies in a line.<br /><br />While charging Arcanopulse, Xerath cannot attack or cast other spells. If Xerath does not fire the spell, half the Mana cost is refunded.",
+          "tooltip": "<spellPassive>First cast:</spellPassive> Xerath charges Arcanopulse, gradually decreasing his Movement Speed while increasing the spell's range.<br /><br /><spellPassive>Second cast:</spellPassive> Xerath fires Arcanopulse, dealing {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage to all enemies in a line.<br /><br />While charging Arcanopulse, Xerath cannot attack or cast other spells. If Xerath does not fire the spell, half the Mana cost is refunded.",
           "leveltip": {
             "label": [
               "Damage",
               "Cooldown",
-              "Mana Cost"
+              "@AbilityResourceName@ Cost"
             ],
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
@@ -222,7 +222,7 @@
               "key": "a1"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "1",
           "range": [
             750,
@@ -236,24 +236,24 @@
             "full": "XerathArcanopulseChargeUp.png",
             "sprite": "spell13.png",
             "group": "spell",
-            "x": 96,
+            "x": 288,
             "y": 144,
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "XerathArcaneBarrage2",
           "name": "Eye of Destruction",
           "description": "Calls down a barrage of arcane energy, slowing and dealing magic damage to all enemies in an area. Targets in the middle receive additional damage and a stronger slow.",
-          "tooltip": "Xerath calls down a blast of arcane energy, dealing {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage to all enemies within the target area, slowing them by {{ e8 }}% for {{ e4 }} seconds. Enemies in the center of the blast take {{ f1 }} <span class=\"color99FF99\">(+{{ f2 }})</span> magic damage and are slowed by {{ e3 }}%. This slow decays rapidly.",
+          "tooltip": "Xerath calls down a blast of arcane energy, dealing {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage to all enemies within the target area, slowing them by {{ e8 }}% for {{ e4 }} seconds. Enemies in the center of the blast take {{ f1 }} <scaleAP>(+{{ f2 }})</scaleAP> magic damage and are slowed by {{ e3 }}%. This slow decays rapidly.",
           "leveltip": {
             "label": [
               "Damage",
               "Cooldown",
-              "Slow Amount",
-              "Mana Cost"
+              "Slow",
+              "@AbilityResourceName@ Cost"
             ],
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
@@ -373,7 +373,7 @@
               "key": "a1"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "1",
           "range": [
             1000,
@@ -387,23 +387,23 @@
             "full": "XerathArcaneBarrage2.png",
             "sprite": "spell13.png",
             "group": "spell",
-            "x": 144,
+            "x": 336,
             "y": 144,
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "XerathMageSpear",
           "name": "Shocking Orb",
           "description": "Deals magic damage to an enemy and stuns them.",
-          "tooltip": "Xerath fires an orb of raw magic. The first enemy hit takes {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage and is stunned for between {{ e8 }} and {{ e2 }} seconds. The stun duration lengthens based on how far the orb travels.",
+          "tooltip": "Xerath fires an orb of raw magic. The first enemy hit takes {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage and is stunned for between {{ e8 }} and {{ e2 }} seconds. The stun duration lengthens based on how far the orb travels.",
           "leveltip": {
             "label": [
               "Damage",
               "Cooldown",
-              "Mana Cost"
+              "@AbilityResourceName@ Cost"
             ],
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
@@ -522,7 +522,7 @@
               "key": "a1"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "1",
           "range": [
             1050,
@@ -536,18 +536,18 @@
             "full": "XerathMageSpear.png",
             "sprite": "spell13.png",
             "group": "spell",
-            "x": 192,
+            "x": 384,
             "y": 144,
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "XerathLocusOfPower2",
           "name": "Rite of the Arcane",
           "description": "Xerath immobilizes himself and gains numerous long-range barrages.",
-          "tooltip": "Xerath ascends to his true form, becoming rooted in place and gaining {{ e2 }} Arcane Barrages. This magic artillery deals {{ e3 }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage to all enemies hit.<br /><br />The root ends after {{ e1 }} seconds, when all shots have been fired or when manually deactivated by issuing a move command. If no barrages are fired, {{ e7 }}% of the cooldown is refunded.",
+          "tooltip": "Xerath ascends to his true form, becoming rooted in place and gaining {{ e2 }} Arcane Barrages. This magic artillery deals {{ e3 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage to all enemies hit.<br /><br />The root ends after {{ e1 }} seconds, when all shots have been fired or when manually deactivated by issuing a move command. If no barrages are fired, {{ e7 }}% of the cooldown is refunded.",
           "leveltip": {
             "label": [
               "Damage",
@@ -647,7 +647,7 @@
               "key": "a1"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             5000,
@@ -659,12 +659,12 @@
             "full": "XerathLocusOfPower2.png",
             "sprite": "spell13.png",
             "group": "spell",
-            "x": 240,
+            "x": 432,
             "y": 144,
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         }
       ],
       "passive": {
@@ -674,7 +674,7 @@
           "full": "Xerath_Passive1.png",
           "sprite": "passive4.png",
           "group": "passive",
-          "x": 192,
+          "x": 240,
           "y": 48,
           "w": 48,
           "h": 48

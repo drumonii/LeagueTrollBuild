@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.21.1",
+  "version": "9.22.1",
   "data": {
     "Zyra": {
       "id": "Zyra",
@@ -12,7 +12,7 @@
         "full": "Zyra.png",
         "sprite": "champion4.png",
         "group": "champion",
-        "x": 192,
+        "x": 240,
         "y": 96,
         "w": 48,
         "h": 48
@@ -101,7 +101,7 @@
           "id": "ZyraQ",
           "name": "Deadly Spines",
           "description": "Thick vines spread through the ground and explode into spines, dealing magic damage to enemies within the area. If cast near a seed, Deadly Spines grows a Thorn Spitter plant, which fires at enemies from afar.",
-          "tooltip": "Thick vines spread through the ground and explode into spines, dealing {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage to enemies within the area. <br /><br /><span class=\"colorDDDD77\">Garden of Thorns: </span>If Deadly Spines is cast near a seed, a Thorn Spitter grows, dealing {{ f1 }} <span class=\"color99FF99\">(+{{ a2 }})</span> magic damage. A Thorn Spitter has 575 range and lasts {{ f2 }} seconds.",
+          "tooltip": "Thick vines spread through the ground and explode into spines, dealing {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage to enemies within the area. <br /><br /><span class=\"colorDDDD77\">Garden of Thorns: </span>If Deadly Spines is cast near a seed, a Thorn Spitter grows, dealing {{ f1 }} <scaleAP>(+{{ a2 }})</scaleAP> magic damage. A Thorn Spitter has 575 range and lasts {{ f2 }} seconds.",
           "leveltip": {
             "label": [
               "Damage",
@@ -228,7 +228,7 @@
               "key": "a2"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             800,
@@ -242,18 +242,18 @@
             "full": "ZyraQ.png",
             "sprite": "spell14.png",
             "group": "spell",
-            "x": 96,
+            "x": 288,
             "y": 144,
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "ZyraW",
           "name": "Rampant Growth",
           "description": "Zyra plants a seed, lasting up to 60 seconds. Deadly Spines and Grasping Roots cast near seeds will turn them into plants who fight for Zyra. Zyra can store multiple seeds at once, and killing enemies reduces Rampant Growth's recharge time.",
-          "tooltip": "Plants a seed, lasting {{ e6 }} seconds. If an enemy Champion steps on a seed, it dies. Seeds spawned by Rampant Growth grant vision in a small area, and if stepped on they grant <span class=\"coloree91d7\">True Sight</span> of the enemy champion for {{ e3 }} seconds.<br /><br />Zyra stores a seed every <span class=\"colorFFFFFF\">{{ ammorechargetime }}</span> seconds (Max: 8 seeds planted). Each time she kills an enemy, Rampant Growth's recharge time is reduced by {{ e1 }}% ({{ e2 }}% for champion takedowns, large minion kills, and large monster kills).",
+          "tooltip": "Plants a seed, lasting {{ e6 }} seconds. If an enemy Champion steps on a seed, it dies. Seeds spawned by Rampant Growth grant vision in a small area, and if stepped on they grant <span class=\"coloree91d7\">True Sight</span> of the enemy champion for {{ e3 }} seconds.<br /><br />Zyra stores a seed every <scaleLevel>{{ ammorechargetime }}</scaleLevel> seconds (Max: 8 seeds planted). Each time she kills an enemy, Rampant Growth's recharge time is reduced by {{ e1 }}% ({{ e2 }}% for champion takedowns, large minion kills, and large monster kills).",
           "leveltip": {
             "label": [
               "Seed Recharge Rate"
@@ -381,7 +381,7 @@
             "full": "ZyraW.png",
             "sprite": "spell14.png",
             "group": "spell",
-            "x": 144,
+            "x": 336,
             "y": 144,
             "w": 48,
             "h": 48
@@ -392,12 +392,12 @@
           "id": "ZyraE",
           "name": "Grasping Roots",
           "description": "Zyra sends forth vines through the ground to ensnare her target, dealing damage and rooting enemies they come across. If cast near a seed, Grasping Roots grows a Vine Lasher, whose short range attacks reduce enemy Movement Speed.",
-          "tooltip": "Sends forward vines dealing {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage and rooting enemies for {{ e5 }} second(s).<br /><br /><span class=\"colorDDDD77\">Garden of Thorns: </span>If Grasping Roots passes near a seed, a Vine Lasher grows dealing {{ f1 }} <span class=\"color99FF99\">(+{{ a2 }})</span> magic damage and slowing enemies by {{ e2 }}% for {{ e3 }} seconds. A Vine Lasher has 400 range and lasts {{ f2 }} seconds.",
+          "tooltip": "Sends forward vines dealing {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage and rooting enemies for {{ e5 }} second(s).<br /><br /><span class=\"colorDDDD77\">Garden of Thorns: </span>If Grasping Roots passes near a seed, a Vine Lasher grows dealing {{ f1 }} <scaleAP>(+{{ a2 }})</scaleAP> magic damage and slowing enemies by {{ e2 }}% for {{ e3 }} seconds. A Vine Lasher has 400 range and lasts {{ f2 }} seconds.",
           "leveltip": {
             "label": [
               "Damage",
               "Root Duration",
-              "Mana Cost"
+              "@AbilityResourceName@ Cost"
             ],
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
@@ -521,7 +521,7 @@
               "key": "a2"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             1100,
@@ -535,18 +535,18 @@
             "full": "ZyraE.png",
             "sprite": "spell14.png",
             "group": "spell",
-            "x": 192,
+            "x": 384,
             "y": 144,
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "ZyraR",
           "name": "Stranglethorns",
           "description": "Zyra summons a twisted thicket at her target location, dealing damage to enemies as it expands and knocking them airborne as it contracts. Plants within the thicket are enraged.",
-          "tooltip": "Summons the fury of nature, growing a twisted thicket at target location which deals {{ e3 }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage to all enemies in the area as it expands. After 2 seconds, the vines snap upward knocking enemies into the air for {{ e1 }} second.<br /><br /><span class=\"colorDDDD77\">Garden of Thorns: </span>Plants within the thicket are enraged, resetting their duration, gaining {{ e2 }}% Health and attacking in a flurry for {{ e7 }}% total damage.",
+          "tooltip": "Summons the fury of nature, growing a twisted thicket at target location which deals {{ e3 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage to all enemies in the area as it expands. After 2 seconds, the vines snap upward knocking enemies into the air for {{ e1 }} second.<br /><br /><span class=\"colorDDDD77\">Garden of Thorns: </span>Plants within the thicket are enraged, resetting their duration, gaining {{ e2 }}% Health and attacking in a flurry for {{ e7 }}% total damage.",
           "leveltip": {
             "label": [
               "Damage",
@@ -644,7 +644,7 @@
               "key": "a1"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             700,
@@ -656,12 +656,12 @@
             "full": "ZyraR.png",
             "sprite": "spell14.png",
             "group": "spell",
-            "x": 240,
+            "x": 432,
             "y": 144,
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         }
       ],
       "passive": {
@@ -671,7 +671,7 @@
           "full": "ZyraP.png",
           "sprite": "passive4.png",
           "group": "passive",
-          "x": 192,
+          "x": 240,
           "y": 96,
           "w": 48,
           "h": 48

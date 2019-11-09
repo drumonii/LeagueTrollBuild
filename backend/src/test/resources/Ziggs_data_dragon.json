@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.21.1",
+  "version": "9.22.1",
   "data": {
     "Ziggs": {
       "id": "Ziggs",
@@ -12,7 +12,7 @@
         "full": "Ziggs.png",
         "sprite": "champion4.png",
         "group": "champion",
-        "x": 48,
+        "x": 96,
         "y": 96,
         "w": 48,
         "h": 48
@@ -116,12 +116,12 @@
           "id": "ZiggsQ",
           "name": "Bouncing Bomb",
           "description": "Ziggs throws a bouncing bomb that deals magic damage.",
-          "tooltip": "Ziggs throws a bouncing bomb that deals {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage.",
+          "tooltip": "Ziggs throws a bouncing bomb that deals {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage.",
           "leveltip": {
             "label": [
               "Damage",
               "Cooldown",
-              "Mana Cost"
+              "@AbilityResourceName@ Cost"
             ],
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
@@ -240,7 +240,7 @@
               "key": "a1"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             850,
@@ -254,18 +254,18 @@
             "full": "ZiggsQ.png",
             "sprite": "spell14.png",
             "group": "spell",
-            "x": 0,
+            "x": 192,
             "y": 96,
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "ZiggsW",
           "name": "Satchel Charge",
           "description": "Ziggs flings an explosive charge that detonates after 4 seconds, or when this ability is activated again. The explosion deals magic damage to enemies, knocking them away. Ziggs is also knocked away, but takes no damage. Ziggs can use the Satchel to hexplode vulnerable enemy turrets.",
-          "tooltip": "Ziggs flings an explosive charge that detonates after {{ e2 }} seconds, or when this ability is activated again. The explosion deals {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage to enemies, knocking them away. Ziggs is also knocked away, but takes no damage.<br /><br />Satchel Charge will <span class=\"colorD41919\">hexplode</span> structurally unsound towers below {{ f1*100 }}% of their Health.",
+          "tooltip": "Ziggs flings an explosive charge that detonates after {{ e2 }} seconds, or when this ability is activated again. The explosion deals {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage to enemies, knocking them away. Ziggs is also knocked away, but takes no damage.<br /><br />Satchel Charge will <span class=\"colorD41919\">hexplode</span> structurally unsound towers below {{ f1*100 }}% of their Health.",
           "leveltip": {
             "label": [
               "Damage",
@@ -275,7 +275,7 @@
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
               "{{ cooldown }} -> {{ cooldownNL }}",
-              "{{ f1*100 }}% -> {{ f2*100 }}%"
+              "{{ effect3amount*100.000000 }}% -> {{ effect3amountnl*100.000000 }}%"
             ]
           },
           "maxrank": 5,
@@ -389,7 +389,7 @@
               "key": "a1"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             1000,
@@ -403,27 +403,27 @@
             "full": "ZiggsW.png",
             "sprite": "spell14.png",
             "group": "spell",
-            "x": 48,
+            "x": 240,
             "y": 96,
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "ZiggsE",
           "name": "Hexplosive Minefield",
           "description": "Ziggs scatters proximity mines that detonate on enemy contact, dealing magic damage and slowing. Successive mine detonations on the same target deal reduced damage.",
-          "tooltip": "Ziggs scatters proximity mines that detonate on enemy contact, dealing {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage. Enemies hit are slowed by {{ e2 }}% for {{ e4 }} seconds.<br /><br />Enemies triggering a mine take {{ e5 }}% damage from additional mines. Mines disarm automatically after {{ e3 }} seconds.",
+          "tooltip": "Ziggs scatters proximity mines that detonate on enemy contact, dealing {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage. Enemies hit are slowed by {{ e2 }}% for {{ e4 }} seconds.<br /><br />Enemies triggering a mine take {{ e5 }}% damage from additional mines. Mines disarm automatically after {{ e3 }} seconds.",
           "leveltip": {
             "label": [
               "Mine Damage",
               "Slow",
-              "Mana Cost"
+              "@AbilityResourceName@ Cost"
             ],
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
-              "{{ e2 }}% -> {{ e2NL }}%",
+              "{{ effect2amount*-100.000000 }}% -> {{ effect2amountnl*-100.000000 }}%",
               "{{ cost }} -> {{ costNL }}"
             ]
           },
@@ -538,7 +538,7 @@
               "key": "a1"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             900,
@@ -552,18 +552,18 @@
             "full": "ZiggsE.png",
             "sprite": "spell14.png",
             "group": "spell",
-            "x": 96,
+            "x": 288,
             "y": 96,
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "ZiggsR",
           "name": "Mega Inferno Bomb",
-          "description": "Ziggs deploys his ultimate creation, the Mega Inferno Bomb, hurling it an enormous distance. Enemies in the primary blast zone take more damage than those farther away. ",
-          "tooltip": "Ziggs deploys his ultimate creation, the Mega Inferno Bomb, hurling it an enormous distance. Enemies in the primary blast zone take {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage. Enemies farther away take {{ e5 }} <span class=\"color99FF99\">(+{{ a2 }})</span> magic damage.",
+          "description": "Ziggs deploys his ultimate creation, the Mega Inferno Bomb, hurling it an enormous distance. Enemies in the primary blast zone take more damage than those farther away.",
+          "tooltip": "Ziggs deploys his ultimate creation, the Mega Inferno Bomb, hurling it an enormous distance. Enemies in the primary blast zone take {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage. Enemies farther away take {{ e5 }} <scaleAP>(+{{ a2 }})</scaleAP> magic damage.",
           "leveltip": {
             "label": [
               "Damage",
@@ -668,7 +668,7 @@
               "key": "a2"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             5000,
@@ -680,12 +680,12 @@
             "full": "ZiggsR.png",
             "sprite": "spell14.png",
             "group": "spell",
-            "x": 144,
+            "x": 336,
             "y": 96,
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         }
       ],
       "passive": {
@@ -695,7 +695,7 @@
           "full": "ZiggsPassiveReady.png",
           "sprite": "passive4.png",
           "group": "passive",
-          "x": 48,
+          "x": 96,
           "y": 96,
           "w": 48,
           "h": 48

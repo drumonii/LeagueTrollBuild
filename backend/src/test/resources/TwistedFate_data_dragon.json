@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.21.1",
+  "version": "9.22.1",
   "data": {
     "TwistedFate": {
       "id": "TwistedFate",
@@ -12,7 +12,7 @@
         "full": "TwistedFate.png",
         "sprite": "champion4.png",
         "group": "champion",
-        "x": 0,
+        "x": 48,
         "y": 0,
         "w": 48,
         "h": 48
@@ -143,7 +143,7 @@
           "leveltip": {
             "label": [
               "Damage",
-              "Mana Cost"
+              "@AbilityResourceName@ Cost"
             ],
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
@@ -261,7 +261,7 @@
               "key": "a1"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             10000,
@@ -275,16 +275,16 @@
             "full": "WildCards.png",
             "sprite": "spell12.png",
             "group": "spell",
-            "x": 288,
-            "y": 48,
+            "x": 0,
+            "y": 96,
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "PickACard",
-          "name": "Pick A Card",
+          "name": "Pick a Card",
           "description": "Twisted Fate chooses a magic card from his deck, and uses that for his next attack, causing bonus effects.",
           "tooltip": "Cast once to shuffle the deck and again to choose your card, enhancing your next attack.<br /><br /><span class=\"color4455FF\">Blue Card</span> deals {{ e1 }} <scaleAD>(+{{ a2 }})</scaleAD> <scaleAP>(+{{ a1 }})</scaleAP> Magic Damage and restores {{ e6 }} Mana.<br /><br /><span class=\"colorFF2222\">Red Card</span> deals {{ e4 }} <scaleAD>(+{{ a2 }})</scaleAD> <scaleAP>(+{{ a1 }})</scaleAP> Magic Damage to units around the target and slows their Movement Speed by {{ e2 }}% for 2.5 seconds.<br /><br /><span class=\"colorFFD700\">Gold Card</span> deals {{ e5 }}<scaleAD> (+{{ a2 }})</scaleAD> <scaleAP>(+{{ a1 }})</scaleAP> Magic Damage and stuns for {{ e3 }} seconds.",
           "leveltip": {
@@ -295,10 +295,10 @@
               "Red Card Slow %",
               "Gold Card Damage",
               "Gold Card Stun Duration",
-              "Mana Cost"
+              "@AbilityResourceName@ Cost"
             ],
             "effect": [
-              " {{ e1 }} -> {{ e1NL }}",
+              "{{ e1 }} -> {{ e1NL }}",
               "{{ e6 }} -> {{ e6NL }}",
               "{{ e4 }} -> {{ e4NL }}",
               "{{ e2 }}% -> {{ e2NL }}%",
@@ -443,7 +443,7 @@
               "key": "a1"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             200,
@@ -457,12 +457,12 @@
             "full": "PickACard.png",
             "sprite": "spell12.png",
             "group": "spell",
-            "x": 336,
-            "y": 48,
+            "x": 48,
+            "y": 96,
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "CardmasterStack",
@@ -472,10 +472,10 @@
           "leveltip": {
             "label": [
               "Bonus Damage",
-              "Attack Speed Increase"
+              "Attack Speed"
             ],
             "effect": [
-              " {{ e1 }} -> {{ e1NL }}",
+              "{{ e1 }} -> {{ e1NL }}",
               "{{ e3 }}% -> {{ e3NL }}%"
             ]
           },
@@ -590,7 +590,7 @@
               "key": "a1"
             }
           ],
-          "costType": "",
+          "costType": "&nbsp;",
           "maxammo": "-1",
           "range": [
             0,
@@ -604,11 +604,12 @@
             "full": "CardmasterStack.png",
             "sprite": "spell12.png",
             "group": "spell",
-            "x": 384,
-            "y": 48,
+            "x": 96,
+            "y": 96,
             "w": 48,
             "h": 48
-          }
+          },
+          "resource": "&nbsp;"
         },
         {
           "id": "Destiny",
@@ -619,7 +620,7 @@
             "label": [
               "Duration",
               "Cooldown",
-              "Mana Cost"
+              "@AbilityResourceName@ Cost"
             ],
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
@@ -708,7 +709,7 @@
             "0"
           ],
           "vars": [],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             5500,
@@ -720,12 +721,12 @@
             "full": "Destiny.png",
             "sprite": "spell12.png",
             "group": "spell",
-            "x": 432,
-            "y": 48,
+            "x": 144,
+            "y": 96,
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         }
       ],
       "passive": {
@@ -735,7 +736,7 @@
           "full": "Cardmaster_SealFate.png",
           "sprite": "passive4.png",
           "group": "passive",
-          "x": 0,
+          "x": 48,
           "y": 0,
           "w": 48,
           "h": 48

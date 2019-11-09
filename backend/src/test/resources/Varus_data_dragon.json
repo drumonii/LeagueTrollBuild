@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.21.1",
+  "version": "9.22.1",
   "data": {
     "Varus": {
       "id": "Varus",
@@ -12,7 +12,7 @@
         "full": "Varus.png",
         "sprite": "champion4.png",
         "group": "champion",
-        "x": 192,
+        "x": 240,
         "y": 0,
         "w": 48,
         "h": 48
@@ -261,7 +261,7 @@
             "full": "VarusQ.png",
             "sprite": "spell12.png",
             "group": "spell",
-            "x": 96,
+            "x": 288,
             "y": 144,
             "w": 48,
             "h": 48
@@ -272,7 +272,7 @@
           "id": "VarusW",
           "name": "Blighted Quiver",
           "description": "Passive: Varus' basic attacks deal bonus magic damage and apply Blight. Varus' other abilities detonate Blight, dealing magic damage based on the target's maximum Health. Active: Varus empowers his next Piercing Arrow.",
-          "tooltip": " <span class=\"colorFF9900\">Passive: </span>Varus' basic attacks deal {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> bonus magic damage and apply <span class=\"colorB829FF\">Blight</span> for {{ e3 }} seconds (stacks {{ e4 }} times).<br /><br />Varus' other abilities detonate <span class=\"colorB829FF\">Blight</span>, dealing magic damage equal to {{ e2 }}% <span class=\"color99FF99\">(+{{ a2 }}%)</span> of the target's maximum Health per stack.<br /><br /><span class=\"colorFF9900\">Active: </span>Varus' next Piercing Arrow deals bonus magic damage equal to <span class=\"coloreeeeee\">{{ f2*100 }}%</span> to <span class=\"coloreeeeee\">{{ f1*100 }}%</span> of the target's missing health (scales with Piercing Arrow charge).<br /><br /><rules>Blighted Quiver is capped at {{ e5 }} damage against monsters.</rules>",
+          "tooltip": " <spellPassive>Passive: </spellPassive>Varus' basic attacks deal {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> bonus magic damage and apply <span class=\"colorB829FF\">Blight</span> for {{ e3 }} seconds (stacks {{ e4 }} times).<br /><br />Varus' other abilities detonate <span class=\"colorB829FF\">Blight</span>, dealing magic damage equal to {{ e2 }}% <scaleAP>(+{{ a2 }}%)</scaleAP> of the target's maximum Health per stack.<br /><br /><spellPassive>Active: </spellPassive>Varus' next Piercing Arrow deals bonus magic damage equal to <span class=\"coloreeeeee\">{{ f2*100 }}%</span> to <span class=\"coloreeeeee\">{{ f1*100 }}%</span> of the target's missing health (scales with Piercing Arrow charge).<br /><br /><rules>Blighted Quiver is capped at {{ e5 }} damage against monsters.</rules>",
           "leveltip": {
             "label": [
               "Damage on Attack",
@@ -280,7 +280,7 @@
             ],
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
-              "{{ e2 }}% -> {{ e2NL }}%"
+              "{{ effect2amount*100.000000 }}% -> {{ effect2amountnl*100.000000 }}%"
             ]
           },
           "maxrank": 5,
@@ -413,7 +413,7 @@
             "full": "VarusW.png",
             "sprite": "spell12.png",
             "group": "spell",
-            "x": 144,
+            "x": 336,
             "y": 144,
             "w": 48,
             "h": 48
@@ -423,8 +423,8 @@
         {
           "id": "VarusE",
           "name": "Hail of Arrows",
-          "description": "Varus fires a hail of arrows that deal physical damage and desecrate the ground. Desecrated ground slows enemies' Movement Speed and reduces their self healing and regeneration. ",
-          "tooltip": "Varus fires a hail of arrows that deals {{ e1 }} <span class=\"colorFF8C00\">(+{{ a1 }})</span> physical damage and desecrates the ground for {{ e3 }} seconds.<br /><br />Desecrated Ground slows enemy Movement Speed by {{ e2 }}% and reduces healing effects by {{ e4 }}%.",
+          "description": "Varus fires a hail of arrows that deal physical damage and desecrate the ground. Desecrated ground slows enemies' Movement Speed and reduces their self healing and regeneration.",
+          "tooltip": "Varus fires a hail of arrows that deals {{ e1 }} <scaleAD>(+{{ a1 }})</scaleAD> physical damage and desecrates the ground for {{ e3 }} seconds.<br /><br />Desecrated Ground slows enemy Movement Speed by {{ e2 }}% and reduces healing effects by {{ e4 }}%.",
           "leveltip": {
             "label": [
               "Damage",
@@ -433,7 +433,7 @@
             ],
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
-              "{{ e2 }}% -> {{ e2NL }}%",
+              "{{ effect2amount*-100.000000 }}% -> {{ effect2amountnl*-100.000000 }}%",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
@@ -548,7 +548,7 @@
               "key": "a1"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             925,
@@ -562,21 +562,21 @@
             "full": "VarusE.png",
             "sprite": "spell12.png",
             "group": "spell",
-            "x": 192,
+            "x": 384,
             "y": 144,
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "VarusR",
           "name": "Chain of Corruption",
-          "description": "Varus flings out a damaging tendril of corruption that immobilizes the first enemy champion hit and then spreads towards nearby uninfected champions, immobilizing them too on contact. ",
-          "tooltip": "Varus flings out a tendril of corruption that deals {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage and immobilizes the first enemy champion hit for {{ e2 }} seconds.<br /><br />The corruption then spreads towards nearby uninfected enemy champions. If it reaches them, they take the same damage and are also immobilized. Immobilized units gain {{ e4 }} <span class=\"colorB829FF\">Blight</span> stacks over the duration.",
+          "description": "Varus flings out a damaging tendril of corruption that immobilizes the first enemy champion hit and then spreads towards nearby uninfected champions, immobilizing them too on contact.",
+          "tooltip": "Varus flings out a tendril of corruption that deals {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage and immobilizes the first enemy champion hit for {{ e2 }} seconds.<br /><br />The corruption then spreads towards nearby uninfected enemy champions. If it reaches them, they take the same damage and are also immobilized. Immobilized units gain {{ e4 }} <span class=\"colorB829FF\">Blight</span> stacks over the duration.",
           "leveltip": {
             "label": [
-              "Damage ",
+              "Damage",
               "Cooldown"
             ],
             "effect": [
@@ -671,7 +671,7 @@
               "key": "a1"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             1200,
@@ -683,12 +683,12 @@
             "full": "VarusR.png",
             "sprite": "spell12.png",
             "group": "spell",
-            "x": 240,
+            "x": 432,
             "y": 144,
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         }
       ],
       "passive": {
@@ -698,7 +698,7 @@
           "full": "VarusPassive.png",
           "sprite": "passive4.png",
           "group": "passive",
-          "x": 192,
+          "x": 240,
           "y": 0,
           "w": 48,
           "h": 48

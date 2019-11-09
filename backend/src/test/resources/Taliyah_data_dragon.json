@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.21.1",
+  "version": "9.22.1",
   "data": {
     "Taliyah": {
       "id": "Taliyah",
@@ -12,7 +12,7 @@
         "full": "Taliyah.png",
         "sprite": "champion3.png",
         "group": "champion",
-        "x": 96,
+        "x": 144,
         "y": 96,
         "w": 48,
         "h": 48
@@ -86,17 +86,17 @@
           "id": "TaliyahQ",
           "name": "Threaded Volley",
           "description": "Taliyah throws a volley of missiles in a target direction, moving freely as she does. This works the ground below her. If Taliyah casts Threaded Volley on worked ground, she only throws one missile.",
-          "tooltip": "Hurls 5 rocks in a direction, each dealing {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage. Subsequent hits on the same enemy deal {{ e2 }}% reduced damage. Creates <span class=\"colora56705\">Worked Ground</span> for {{ e6 }} seconds.<br /><br />Casting Threaded Volley on <span class=\"colora56705\">Worked Ground</span> only hurls one rock but its cost is reduced to {{ e7 }} mana.",
+          "tooltip": "Hurls 5 rocks in a direction, each dealing {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage. Subsequent hits on the same enemy deal {{ e2 }}% reduced damage. Creates <span class=\"colora56705\">Worked Ground</span> for {{ e6 }} seconds.<br /><br />Casting Threaded Volley on <span class=\"colora56705\">Worked Ground</span> only hurls one rock but its cost is reduced to {{ e7 }} mana.",
           "leveltip": {
             "label": [
               "Damage",
               "Cooldown",
-              "Mana Cost"
+              "@AbilityResourceName@ Cost"
             ],
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
-              "{{ cooldown }}s -> {{ cooldownNL }}s",
-              "{{ basecost }} -> {{ basecostNL }}"
+              "{{ cooldown }} -> {{ cooldownNL }}",
+              "{{ cost }} -> {{ costNL }}"
             ]
           },
           "maxrank": 5,
@@ -210,7 +210,7 @@
               "key": "a1"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             1000,
@@ -224,27 +224,27 @@
             "full": "TaliyahQ.png",
             "sprite": "spell11.png",
             "group": "spell",
-            "x": 192,
+            "x": 384,
             "y": 96,
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "TaliyahWVC",
           "name": "Seismic Shove",
           "description": "Taliyah causes an area of ground to erupt and throws enemies within in a direction of her choosing.",
-          "tooltip": "Taliyah targets an area. After a short delay, enemies caught within the area will be <span class=\"colorffffff\">pushed</span> and dealt {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage.<br /><br />You can control the direction enemies will be <span class=\"colorffffff\">pushed</span> by clicking and dragging your mouse in a line.",
+          "tooltip": "Taliyah targets an area. After a short delay, enemies caught within the area will be <scaleLevel>pushed</scaleLevel> and dealt {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage.<br /><br />You can control the direction enemies will be <scaleLevel>pushed</scaleLevel> by clicking and dragging your mouse in a line.",
           "leveltip": {
             "label": [
               "Damage",
               "Cooldown",
-              "Mana Cost"
+              "@AbilityResourceName@ Cost"
             ],
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
-              "{{ cooldown }}s -> {{ cooldownNL }}s",
+              "{{ cooldown }} -> {{ cooldownNL }}",
               "{{ cost }} -> {{ costNL }}"
             ]
           },
@@ -359,7 +359,7 @@
               "key": "a1"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             900,
@@ -373,27 +373,27 @@
             "full": "TaliyahWVC.png",
             "sprite": "spell11.png",
             "group": "spell",
-            "x": 240,
+            "x": 432,
             "y": 96,
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "TaliyahE",
           "name": "Unraveled Earth",
           "description": "Taliyah creates a slowing minefield that explodes if enemies dash through it or are pushed/pulled through it.",
-          "tooltip": "Places a field of dash-sensitive traps that deal {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage and slow enemies in the area by <span class=\"color99FF99\">{{ f2 }}%</span>. After {{ e3 }} seconds, the traps explode, dealing damage again.<br /><br />Enemies <span class=\"colorFFFFFF\">dashing</span>, being <span class=\"colorFFFFFF\">pushed</span>, or being <span class=\"colorFFFFFF\">pulled</span> through Unraveled Earth will trigger traps, taking {{ f3 }} <span class=\"color99FF99\">(+{{ f1 }})</span> magic damage from each trap (maximum 4, each hit after the first deals {{ f4 }}% less damage).",
+          "tooltip": "Places a field of dash-sensitive traps that deal {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage and slow enemies in the area by <scaleAP>{{ f2 }}%</scaleAP>. After {{ e3 }} seconds, the traps explode, dealing damage again.<br /><br />Enemies <scaleLevel>dashing</scaleLevel>, being <scaleLevel>pushed</scaleLevel>, or being <scaleLevel>pulled</scaleLevel> through Unraveled Earth will trigger traps, taking {{ f3 }} <scaleAP>(+{{ f1 }})</scaleAP> magic damage from each trap (maximum 4, each hit after the first deals {{ f4 }}% less damage).",
           "leveltip": {
             "label": [
               "Damage",
               "Cooldown",
-              "Mana Cost"
+              "@AbilityResourceName@ Cost"
             ],
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
-              "{{ cooldown }}s -> {{ cooldownNL }}s",
+              "{{ cooldown }} -> {{ cooldownNL }}",
               "{{ cost }} -> {{ costNL }}"
             ]
           },
@@ -508,7 +508,7 @@
               "key": "a1"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             800,
@@ -522,12 +522,12 @@
             "full": "TaliyahE.png",
             "sprite": "spell11.png",
             "group": "spell",
-            "x": 288,
-            "y": 96,
+            "x": 0,
+            "y": 144,
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "TaliyahR",
@@ -541,7 +541,7 @@
             ],
             "effect": [
               "{{ e2 }} -> {{ e2NL }}",
-              "{{ cooldown }}s -> {{ cooldownNL }}s"
+              "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
           "maxrank": 3,
@@ -625,7 +625,7 @@
             "0"
           ],
           "vars": [],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             3000,
@@ -637,12 +637,12 @@
             "full": "TaliyahR.png",
             "sprite": "spell11.png",
             "group": "spell",
-            "x": 336,
-            "y": 96,
+            "x": 48,
+            "y": 144,
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         }
       ],
       "passive": {
@@ -652,7 +652,7 @@
           "full": "Taliyah_Passive.png",
           "sprite": "passive3.png",
           "group": "passive",
-          "x": 96,
+          "x": 144,
           "y": 96,
           "w": 48,
           "h": 48

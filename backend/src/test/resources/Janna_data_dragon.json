@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.21.1",
+  "version": "9.22.1",
   "data": {
     "Janna": {
       "id": "Janna",
@@ -129,16 +129,16 @@
           "id": "HowlingGale",
           "name": "Howling Gale",
           "description": "By creating a localized change in pressure and temperature, Janna is able to create a small storm that grows in size with time. She can activate the spell again to release the storm. On release this storm will fly towards the direction it was cast in, dealing damage and knocking away any enemies in its path.",
-          "tooltip": "Summons a whirlwind, which deals {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage to enemies in its path and knocks them into the air for {{ e4 }} seconds.<br /><br />The whirlwind can be charged up to {{ e6 }} seconds. For each second charged, it:<ul><li>Deals {{ e2 }} <span class=\"color99FF99\">(+{{ a2 }})</span> bonus damage</li><li>Knocks up for an additional {{ e5 }} seconds</li><li>Travels {{ e3 }}% further</li></ul>Howling Gale always reaches its destination in {{ e8 }} seconds.<br /><br /><rules><span class=\"color8c8c8c\">Activate again to release the whirlwind early.</span></rules>",
+          "tooltip": "Summons a whirlwind, which deals {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage to enemies in its path and knocks them into the air for {{ e4 }} seconds.<br /><br />The whirlwind can be charged up to {{ e6 }} seconds. For each second charged, it:<ul><li>Deals {{ e2 }} <scaleAP>(+{{ a2 }})</scaleAP> bonus damage</li><li>Knocks up for an additional {{ e5 }} seconds</li><li>Travels {{ e3 }}% further</li></ul>Howling Gale always reaches its destination in {{ e8 }} seconds.<br /><br /><rules><span class=\"color8c8c8c\">Activate again to release the whirlwind early.</span></rules>",
           "leveltip": {
             "label": [
-              "Base Damage",
+              "Damage",
               "Damage Per Second Charged",
-              "Mana Cost"
+              "@AbilityResourceName@ Cost"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }} ",
-              "{{ e2 }} -> {{ e2NL }} ",
+              "{{ e1 }} -> {{ e1NL }}",
+              "{{ e2 }} -> {{ e2NL }}",
               "{{ cost }} -> {{ costNL }}"
             ]
           },
@@ -258,7 +258,7 @@
               "key": "a2"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             1700,
@@ -277,24 +277,24 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "SowTheWind",
           "name": "Zephyr",
           "description": "Janna summons an air elemental that passively increases her Movement Speed and enables her to pass through units. She may also activate this ability to deal damage and slow an enemy's Movement Speed. The passive is lost while this ability is on cooldown.",
-          "tooltip": "<span class=\"colorFF9900\">Passive:</span> While Zephyr is not on cooldown, Janna gains {{ e1 }}% <span class=\"color99FF99\">(+{{ f1 }}%)</span> Movement Speed and can move through units.<br /><br /><span class=\"colorFF9900\">Active: </span>Deals {{ e2 }} <span class=\"color99FF99\">(+{{ a1 }})</span> <span class=\"colorFFF673\">(+{{ f3 }})</span> magic damage to an enemy and slows their Movement Speed by {{ e3 }}% <span class=\"color99FF99\">(+{{ f2 }}%)</span> for {{ e4 }} seconds.",
+          "tooltip": "<spellPassive>Passive:</spellPassive> While Zephyr is not on cooldown, Janna gains {{ e1 }}% <scaleAP>(+{{ f1 }}%)</scaleAP> Movement Speed and can move through units.<br /><br /><spellPassive>Active: </spellPassive>Deals {{ e2 }} <scaleAP>(+{{ a1 }})</scaleAP> <keywordMajor>(+{{ f3 }})</keywordMajor> magic damage to an enemy and slows their Movement Speed by {{ e3 }}% <scaleAP>(+{{ f2 }}%)</scaleAP> for {{ e4 }} seconds.",
           "leveltip": {
             "label": [
               "Passive Movement Speed",
               "Damage",
-              "Slow Amount",
-              "Mana Cost",
+              "Slow",
+              "@AbilityResourceName@ Cost",
               "Cooldown"
             ],
             "effect": [
               "{{ e1 }}% -> {{ e1NL }}%",
-              "{{ e2 }} -> {{ e2NL }} ",
+              "{{ e2 }} -> {{ e2NL }}",
               "{{ e3 }}% -> {{ e3NL }}%",
               "{{ cost }} -> {{ costNL }}",
               "{{ cooldown }} -> {{ cooldownNL }}"
@@ -421,7 +421,7 @@
               "key": "f2"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             550,
@@ -440,19 +440,19 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "EyeOfTheStorm",
           "name": "Eye Of The Storm",
           "description": "Janna conjures a defensive gale that shields an ally champion or turret from incoming damage and increases their Attack Damage.",
-          "tooltip": "Grants an allied champion or turret a shield that decays over {{ e3 }} seconds. The shield absorbs up to {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> damage and grants {{ e2 }} <span class=\"color99FF99\">(+{{ a2 }})</span> attack damage until it is fully depleted.<br /><br /><rules>Each Janna ability that slows or knocks an enemy champion airborne will reduce Eye of the Storm's cooldown by {{ ecdrefundforcc*100 }}%.</rules>",
+          "tooltip": "Grants an allied champion or turret a shield that decays over {{ e3 }} seconds. The shield absorbs up to {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> damage and grants {{ e2 }} <scaleAP>(+{{ a2 }})</scaleAP> attack damage until it is fully depleted.<br /><br /><rules>Each Janna ability that slows or knocks an enemy champion airborne will reduce Eye of the Storm's cooldown by {{ ecdrefundforcc*100 }}%.</rules>",
           "leveltip": {
             "label": [
               "Shield Health",
-              "Attack Damage Bonus",
+              "Attack Damage",
               "Cooldown",
-              "Mana Cost"
+              "@AbilityResourceName@ Cost"
             ],
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
@@ -577,7 +577,7 @@
               "key": "a2"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             800,
@@ -596,13 +596,13 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "ReapTheWhirlwind",
           "name": "Monsoon",
           "description": "Janna surrounds herself in a magical storm, throwing enemies back. After the storm has settled, soothing winds heal nearby allies while the ability is active.",
-          "tooltip": "Summons forth the might of the wind to knock surrounding enemies back and restores {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> Health to nearby allies each second for {{ e3 }} seconds.",
+          "tooltip": "Summons forth the might of the wind to knock surrounding enemies back and restores {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> Health to nearby allies each second for {{ e3 }} seconds.",
           "leveltip": {
             "label": [
               "Heal Per Second",
@@ -700,7 +700,7 @@
               "key": "a1"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             725,
@@ -717,7 +717,7 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         }
       ],
       "passive": {

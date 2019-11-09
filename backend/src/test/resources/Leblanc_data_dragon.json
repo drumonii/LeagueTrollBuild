@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.21.1",
+  "version": "9.22.1",
   "data": {
     "Leblanc": {
       "id": "Leblanc",
@@ -118,12 +118,12 @@
           "id": "LeblancQ",
           "name": "Sigil of Malice",
           "description": "LeBlanc projects a sigil, dealing damage and marking the target for 3.5 seconds. Damaging the marked target with an ability detonates the sigil, dealing additional damage.",
-          "tooltip": "LeBlanc projects a sigil, dealing {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage and marking the target for {{ e3 }} seconds.<br /><br />Damaging the marked target with an ability detonates the sigil, dealing {{ e2 }} <span class=\"color99FF99\">(+{{ a2 }})</span> magic damage.",
+          "tooltip": "LeBlanc projects a sigil, dealing {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage and marking the target for {{ e3 }} seconds.<br /><br />Damaging the marked target with an ability detonates the sigil, dealing {{ e2 }} <scaleAP>(+{{ a2 }})</scaleAP> magic damage.",
           "leveltip": {
             "label": [
               "Sigil Damage",
               "Detonation Damage",
-              "Mana Cost"
+              "@AbilityResourceName@ Cost"
             ],
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
@@ -247,7 +247,7 @@
               "key": "a2"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             700,
@@ -266,18 +266,18 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "LeblancW",
           "name": "Distortion",
           "description": "LeBlanc dashes to a location, dealing damage to enemies near her destination. For the next 4 seconds, activate Distortion again to return LeBlanc to her starting location.",
-          "tooltip": "LeBlanc dashes to a location, dealing {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage to enemies near her destination.<br /><br />For the next {{ e3 }} seconds, activate Distortion again to return LeBlanc to her starting location.",
+          "tooltip": "LeBlanc dashes to a location, dealing {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage to enemies near her destination.<br /><br />For the next {{ e3 }} seconds, activate Distortion again to return LeBlanc to her starting location.",
           "leveltip": {
             "label": [
               "Damage",
               "Cooldown",
-              "Mana Cost"
+              "@AbilityResourceName@ Cost"
             ],
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
@@ -396,7 +396,7 @@
               "key": "a1"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             600,
@@ -415,13 +415,13 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "LeblancE",
           "name": "Ethereal Chains",
           "description": "LeBlanc launches a chain that shackles the first enemy hit. If the target remains shackled for 1.5 seconds, LeBlanc roots them and deals additional damage.",
-          "tooltip": "LeBlanc launches a chain that shackles the first enemy hit, dealing {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage and granting <span class=\"coloree91d7\">True Sight</span> of the target.<br /><br />If the target remains shackled for {{ e3 }} seconds, LeBlanc roots them for {{ e4 }} seconds and deals an additional {{ e2 }} <span class=\"color99FF99\">(+{{ a2 }})</span> magic damage. ",
+          "tooltip": "LeBlanc launches a chain that shackles the first enemy hit, dealing {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage and granting <span class=\"coloree91d7\">True Sight</span> of the target.<br /><br />If the target remains shackled for {{ e3 }} seconds, LeBlanc roots them for {{ e4 }} seconds and deals an additional {{ e2 }} <scaleAP>(+{{ a2 }})</scaleAP> magic damage. ",
           "leveltip": {
             "label": [
               "Chain Damage",
@@ -550,7 +550,7 @@
               "key": "a2"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             925,
@@ -569,7 +569,7 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "LeblancR",
@@ -581,7 +581,7 @@
               "Mimicked Sigil of Malice / Ethereal Chains Damage",
               "Mimicked Mark / Root Damage",
               "Mimicked Distortion Damage",
-              "Mimic Cooldown"
+              "Cooldown"
             ],
             "effect": [
               "{{ rq1base }} -> {{ rq1baseNL }}",

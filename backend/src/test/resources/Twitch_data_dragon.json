@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.21.1",
+  "version": "9.22.1",
   "data": {
     "Twitch": {
       "id": "Twitch",
@@ -12,7 +12,7 @@
         "full": "Twitch.png",
         "sprite": "champion4.png",
         "group": "champion",
-        "x": 48,
+        "x": 96,
         "y": 0,
         "w": 48,
         "h": 48
@@ -245,7 +245,7 @@
             "30"
           ],
           "vars": [],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             20,
@@ -259,12 +259,12 @@
             "full": "TwitchHideInShadows.png",
             "sprite": "spell12.png",
             "group": "spell",
-            "x": 0,
+            "x": 192,
             "y": 96,
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "TwitchVenomCask",
@@ -273,7 +273,7 @@
           "tooltip": "Twitch hurls a cask that adds a stack of <span class=\"color3ca126\">Deadly Venom</span> to all enemies struck and leaves behind a toxic cloud that persists for {{ e3 }} seconds.<br /><br />Enemies that remain within the cloud have {{ e2 }}% reduced Movement Speed and receive an additional stack of <span class=\"color3ca126\">Deadly Venom</span> each second.",
           "leveltip": {
             "label": [
-              "Slow Amount",
+              "Slow",
               "Cooldown"
             ],
             "effect": [
@@ -386,7 +386,7 @@
             "0"
           ],
           "vars": [],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             950,
@@ -400,23 +400,23 @@
             "full": "TwitchVenomCask.png",
             "sprite": "spell12.png",
             "group": "spell",
-            "x": 48,
+            "x": 240,
             "y": 96,
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "TwitchExpunge",
           "name": "Contaminate",
           "description": "Twitch wreaks further havoc on poisoned enemies with a blast of his vile diseases.",
-          "tooltip": "Deals {{ e2 }} physical damage plus {{ e1 }}<span class=\"color99FF99\"> (+{{ a1 }})</span> <span class=\"colorFF8C00\">(+{{ f1 }})</span> per stack of <span class=\"color3ca126\">Deadly Venom</span> to all nearby enemies affected by <span class=\"color3ca126\">Deadly Venom.</span> <span class=\"colora3554e\">(Max Stack Damage: {{ f2 }})</span>",
+          "tooltip": "Deals {{ e2 }} physical damage plus {{ e1 }}<scaleAP> (+{{ a1 }})</scaleAP> <scaleAD>(+{{ f1 }})</scaleAD> per stack of <span class=\"color3ca126\">Deadly Venom</span> to all nearby enemies affected by <span class=\"color3ca126\">Deadly Venom.</span> <span class=\"colora3554e\">(Max Stack Damage: {{ f2 }})</span>",
           "leveltip": {
             "label": [
-              "Base Damage",
+              "Damage",
               "Damage per Stack",
-              "Mana Cost",
+              "@AbilityResourceName@ Cost",
               "Cooldown"
             ],
             "effect": [
@@ -537,7 +537,7 @@
               "key": "a1"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             1200,
@@ -551,12 +551,12 @@
             "full": "TwitchExpunge.png",
             "sprite": "spell12.png",
             "group": "spell",
-            "x": 96,
+            "x": 288,
             "y": 96,
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "TwitchFullAutomatic",
@@ -565,7 +565,7 @@
           "tooltip": "For {{ e2 }} seconds Twitch gains {{ e5 }} Attack Range and {{ e1 }} Bonus Attack Damage.<br /><br />For the duration, his basic attacks become piercing bolts that deal {{ e3 }}% less damage to subsequent targets, down to a minimum of {{ e4 }}% damage.<br /><br /><font color='#cd90ee'size='16'><u>Stealth - Camouflage:</u></span> <font color='#8C8C8C'size='16'>Activating Spray and Pray does not end Camouflage.</span>",
           "leveltip": {
             "label": [
-              "Attack Damage Bonus"
+              "Attack Damage"
             ],
             "effect": [
               "{{ e1 }} -> {{ e1NL }}"
@@ -652,7 +652,7 @@
             "0"
           ],
           "vars": [],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             1200,
@@ -664,12 +664,12 @@
             "full": "TwitchFullAutomatic.png",
             "sprite": "spell12.png",
             "group": "spell",
-            "x": 144,
+            "x": 336,
             "y": 96,
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         }
       ],
       "passive": {
@@ -679,7 +679,7 @@
           "full": "Twitch_Passive.png",
           "sprite": "passive4.png",
           "group": "passive",
-          "x": 48,
+          "x": 96,
           "y": 0,
           "w": 48,
           "h": 48

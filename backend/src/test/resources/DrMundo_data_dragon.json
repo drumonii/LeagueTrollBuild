@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.21.1",
+  "version": "9.22.1",
   "data": {
     "DrMundo": {
       "id": "DrMundo",
@@ -137,13 +137,13 @@
           "tooltip": "Dr. Mundo hurls his cleaver, dealing {{ e2 }}% of the target's current health as magic damage (no less than {{ e1 }}) and slowing them by {{ e4 }}% for {{ e5 }} seconds.<br /><br />If the cleaver hits, {{ f1 }} health is refunded ({{ f2 }} if the cleaver kills).<br /><br /><rules>Infected Cleaver deals no more than {{ e6 }} damage against monsters.</rules>",
           "leveltip": {
             "label": [
-              "Cleaver Damage",
-              "Damage Minimum",
-              "Damage Maximum (vs monsters)",
+              "Damage",
+              "Minimum Damage",
+              "Monster Damage Cap",
               "Cost"
             ],
             "effect": [
-              "{{ e2 }}% -> {{ e2NL }}%",
+              "{{ effect2amount*100.000000 }}% -> {{ effect2amountnl*100.000000 }}%",
               "{{ e1 }} -> {{ e1NL }}",
               "{{ e6 }} -> {{ e6NL }}",
               "{{ e3 }} -> {{ e3NL }}"
@@ -286,7 +286,7 @@
               "Cost"
             ],
             "effect": [
-              " {{ e1 }} -> {{ e1NL }}",
+              "{{ e1 }} -> {{ e1NL }}",
               "{{ e2 }} -> {{ e2NL }}"
             ]
           },
@@ -426,7 +426,7 @@
           "id": "Masochism",
           "name": "Masochism",
           "description": "Dr. Mundo gains bonus attack damage based on his missing health, and his next basic attack headbutts his target for additional damage. Passively increases magic resist whenever Dr. Mundo is dealt magic damage or pays a health cost.",
-          "tooltip": "<spellPassive>Passive:</spellPassive> When Dr. Mundo suffers magic damage or pays a health cost, his magic resist is increased by {{ e8 }}% for {{ e0 }} seconds, up to a maximum of {{ f3*100 }}%.<br /><br /><spellActive>Active:</spellActive> Dr. Mundo's next basic attack will headbutt the enemy, dealing an additional <scaleHealth>{{ f1 }}</scaleHealth> physical damage ({{ e1 }}% of maximum health) at the cost of {{ e2 }} health.<br /><br />Upon activation, Dr. Mundo gains up to {{ e4 }} attack damage (no less than {{ e5 }}) for {{ e6 }} seconds based on his missing health.<br /><br /><rules>Masochism grants {{ f2 }} attack damage above the minimum for every 1% of missing health (<scaleHealth>{{ f5 }}</scaleHealth>)</rules>.",
+          "tooltip": "<spellPassive>Passive:</spellPassive> When Dr. Mundo suffers magic damage or pays a health cost, his magic resist is increased by {{ e8 }}% for {{ e0 }} seconds, up to a maximum of {{ e9 }}%.<br /><br /><spellActive>Active:</spellActive> Dr. Mundo's next basic attack will headbutt the enemy, dealing an additional <scaleHealth>{{ f1 }}</scaleHealth> physical damage ({{ e1 }}% of maximum health) at the cost of {{ e2 }} health.<br /><br />Upon activation, Dr. Mundo gains up to {{ e4 }} attack damage (no less than {{ e5 }}) for {{ e6 }} seconds based on his missing health.<br /><br /><rules>Masochism grants {{ f2 }} attack damage above the minimum for every 1% of missing health (<scaleHealth>{{ f5 }}</scaleHealth>)</rules>.",
           "leveltip": {
             "label": [
               "Headbutt Damage",
@@ -437,11 +437,11 @@
               "Cooldown"
             ],
             "effect": [
-              "{{ e1 }}% -> {{ e1NL }}%",
+              "{{ effect1amount*100.000000 }}% -> {{ effect1amountnl*100.000000 }}%",
               "{{ e2 }} -> {{ e2NL }}",
               "{{ e4 }} -> {{ e4NL }}",
               "{{ e5 }} -> {{ e5NL }}",
-              "{{ f3*100 }}% -> {{ f4*100 }}%",
+              "{{ effect9amount*100.000000 }}% -> {{ effect9amountnl*100.000000 }}%",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
@@ -522,11 +522,11 @@
               3
             ],
             [
-              2,
-              5,
-              8,
-              11,
-              14
+              6,
+              15,
+              24,
+              33,
+              42
             ],
             [
               2,
@@ -546,7 +546,7 @@
             "5",
             "0",
             "3",
-            "2/5/8/11/14",
+            "6/15/24/33/42",
             "2"
           ],
           "vars": [],

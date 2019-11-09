@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.21.1",
+  "version": "9.22.1",
   "data": {
     "Gangplank": {
       "id": "Gangplank",
@@ -127,13 +127,13 @@
           "id": "GangplankQWrapper",
           "name": "Parrrley",
           "description": "Shoots target, plundering Gold for each enemy unit killed.",
-          "tooltip": "Fires a bullet that deals {{ e1 }} (<span class=\"colorFF8C00\">+{{ a1 }}</span>) physical damage (can crit and applies on-hit effects).<br /><br />If Parrrley kills the target, Gangplank plunders <span class=\"colorFFDD00\">{{ e2 }}</span> bonus Gold and <span class=\"colorFFDD00\">{{ e5 }}</span> <span class=\"colorffd700\">Silver Serpents</span>. (Trade <span class=\"colorffd700\">Silver Serpents</span> at the shop to upgrade Cannon Barrage).<br /><br />",
+          "tooltip": "Fires a bullet that deals {{ e1 }} (<scaleAD>+{{ a1 }}</scaleAD>) physical damage (can crit and applies on-hit effects).<br /><br />If Parrrley kills the target, Gangplank plunders <span class=\"colorFFDD00\">{{ e2 }}</span> bonus Gold and <span class=\"colorFFDD00\">{{ e5 }}</span> <span class=\"colorffd700\">Silver Serpents</span>. (Trade <span class=\"colorffd700\">Silver Serpents</span> at the shop to upgrade Cannon Barrage).<br /><br />",
           "leveltip": {
             "label": [
               "Damage",
               "Plunder Gold",
               "Plunder Silver Serpents",
-              "Mana Cost"
+              "@AbilityResourceName@ Cost"
             ],
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
@@ -253,7 +253,7 @@
               "key": "a1"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             625,
@@ -272,18 +272,18 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "GangplankW",
           "name": "Remove Scurvy",
           "description": "Eats citrus to cure crowd control effects and restore Health.",
-          "tooltip": "Gangplank consumes a large quantity of citrus fruit, curing all disabling effects and healing him for {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> + <span class=\"colorCC3300\">{{ e2 }}% of his missing Health</span>.",
+          "tooltip": "Gangplank consumes a large quantity of citrus fruit, curing all disabling effects and healing him for {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> + <span class=\"colorCC3300\">{{ e2 }}% of his missing Health</span>.",
           "leveltip": {
             "label": [
               "Healing",
               "Cooldown",
-              "Mana Cost"
+              "@AbilityResourceName@ Cost"
             ],
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
@@ -402,7 +402,7 @@
               "key": "a1"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             400,
@@ -421,21 +421,21 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "GangplankE",
           "name": "Powder Keg",
           "description": "Gangplank uncovers a powder keg at target location. If he attacks it, it explodes, spreading the attack's damage to enemies in the area, slowing them.",
-          "tooltip": "Places a powder keg that can be attacked by Gangplank or his enemies at a location for {{ e5 }} seconds.<br /><br />If Gangplank destroys a keg, it explodes dealing <span class=\"colorFF8C00\">the attack's damage</span> as physical damage (ignores {{ e0 }}% Armor) to enemies and slowing them by {{ e4 }}% for {{ e2 }} seconds. Champions take {{ e3 }} bonus physical damage from the explosion.<br /><br />When a keg explodes, other kegs with overlapping blast zones chain explode (damage does not stack).<br /><br />Kegs health decays every {{ f5 }} seconds. (Decay rate increases at level 7 and 13)<br /><br /><span class=\"colorffd700\">Keg explosions apply Parrrley's plunder effect.</span>",
+          "tooltip": "Places a powder keg that can be attacked by Gangplank or his enemies at a location for {{ e5 }} seconds.<br /><br />If Gangplank destroys a keg, it explodes dealing <scaleAD>the attack's damage</scaleAD> as physical damage (ignores {{ e0 }}% Armor) to enemies and slowing them by {{ e4 }}% for {{ e2 }} seconds. Champions take {{ e3 }} bonus physical damage from the explosion.<br /><br />When a keg explodes, other kegs with overlapping blast zones chain explode (damage does not stack).<br /><br />Kegs health decays every {{ f5 }} seconds. (Decay rate increases at level 7 and 13)<br /><br /><span class=\"colorffd700\">Keg explosions apply Parrrley's plunder effect.</span>",
           "leveltip": {
             "label": [
-              "Barrel Ammo Charge",
+              "Recharge Time",
               "Slow",
               "Bonus Damage Against Champions"
             ],
             "effect": [
-              "{{ f2 }} -> {{ f3 }}",
+              "{{ ammorechargetime }} -> {{ ammorechargetimeNL }}",
               "{{ e4 }}% -> {{ e4NL }}%",
               "{{ e3 }} -> {{ e3NL }}"
             ]
@@ -570,7 +570,7 @@
           "id": "GangplankR",
           "name": "Cannon Barrage",
           "description": "Gangplank signals his ship to bombard an area, slowing and damaging enemies.",
-          "tooltip": "Signals Gangplank's ship to fire {{ f3 }} waves of cannonballs at an area over {{ e3 }} seconds. Each wave deals {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage and slows enemies by {{ e2 }}% for {{ e6 }} seconds.<br /><br /><span class=\"colorffd700\">Collect Silver Serpents with Parrrley to upgrade in the shop.</span>",
+          "tooltip": "Signals Gangplank's ship to fire {{ f3 }} waves of cannonballs at an area over {{ e3 }} seconds. Each wave deals {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage and slows enemies by {{ e2 }}% for {{ e6 }} seconds.<br /><br /><span class=\"colorffd700\">Collect Silver Serpents with Parrrley to upgrade in the shop.</span>",
           "leveltip": {
             "label": [
               "Damage Per Wave",
@@ -668,7 +668,7 @@
               "key": "a1"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             30000,
@@ -685,7 +685,7 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         }
       ],
       "passive": {

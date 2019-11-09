@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.21.1",
+  "version": "9.22.1",
   "data": {
     "Nami": {
       "id": "Nami",
@@ -117,14 +117,14 @@
           "id": "NamiQ",
           "name": "Aqua Prison",
           "description": "Sends a bubble to a target area, dealing damage and stunning all enemies on impact.",
-          "tooltip": "Sends a bubble to target area, dealing {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage to enemies, and stunning them for {{ e2 }} seconds.",
+          "tooltip": "Sends a bubble to target area, dealing {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage to enemies, and stunning them for {{ e2 }} seconds.",
           "leveltip": {
             "label": [
               "Damage",
               "Cooldown"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }} ",
+              "{{ e1 }} -> {{ e1NL }}",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
@@ -239,7 +239,7 @@
               "key": "a1"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             875,
@@ -258,18 +258,18 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "NamiW",
           "name": "Ebb and Flow",
           "description": "Unleashes a stream of water that bounces back and forth between allied and enemy champions, healing allies and damaging enemies.",
-          "tooltip": "Unleashes a stream of water that bounces back and forth between allied and visible enemy champions.<br /><br /><span class=\"colorCCFF99\">On Ally Hit: </span>Heals {{ e3 }} <span class=\"color99FF99\">(+{{ a2 }})</span> Health and will bounce to a nearby visible enemy champion.<br /><br /><span class=\"colorFF9999\">On Enemy Hit: </span>Deals {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage and bounces to a nearby allied champion.<br /><br />Bounces to each target only once, and hits up to {{ e2 }} targets. The damage and healing value is modified by <span class=\"color99FF99\">({{ f1 }}%)</span> each bounce. ",
+          "tooltip": "Unleashes a stream of water that bounces back and forth between allied and visible enemy champions.<br /><br /><span class=\"colorCCFF99\">On Ally Hit: </span>Heals {{ e3 }} <scaleAP>(+{{ a2 }})</scaleAP> Health and will bounce to a nearby visible enemy champion.<br /><br /><span class=\"colorFF9999\">On Enemy Hit: </span>Deals {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage and bounces to a nearby allied champion.<br /><br />Bounces to each target only once, and hits up to {{ e2 }} targets. The damage and healing value is modified by <scaleAP>({{ f1 }}%)</scaleAP> each bounce. ",
           "leveltip": {
             "label": [
-              "Heal",
+              "Healing",
               "Damage",
-              "Mana Cost"
+              "@AbilityResourceName@ Cost"
             ],
             "effect": [
               "{{ e3 }} -> {{ e3NL }}",
@@ -393,7 +393,7 @@
               "key": "a1"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             725,
@@ -412,18 +412,18 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "NamiE",
           "name": "Tidecaller's Blessing",
           "description": "Empowers an allied champion for a short duration. The ally's basic attacks deal bonus magic damage and slow the target.",
-          "tooltip": "Empowers an allied champion's next {{ e4 }} basic attacks, causing them to slow the target by {{ e2 }}% <span class=\"color99FF99\">(+{{ a2 }}%)</span> for {{ e3 }} second and deal {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> bonus magic damage. Lasts for {{ e5 }} seconds.",
+          "tooltip": "Empowers an allied champion's next {{ e4 }} basic attacks, causing them to slow the target by {{ e2 }}% <scaleAP>(+{{ a2 }}%)</scaleAP> for {{ e3 }} second and deal {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> bonus magic damage. Lasts for {{ e5 }} seconds.",
           "leveltip": {
             "label": [
               "Damage",
               "Slow",
-              "Mana Cost"
+              "@AbilityResourceName@ Cost"
             ],
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
@@ -547,7 +547,7 @@
               "key": "a1"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             800,
@@ -566,13 +566,13 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "NamiR",
           "name": "Tidal Wave",
           "description": "Summons a massive Tidal Wave that knocks up, slows, and damages enemies. Allies hit gain double the effect of Surging Tides.",
-          "tooltip": "Summons a Tidal Wave from Nami's position. The wave knocks up enemies and slows them by {{ e4 }}%, dealing {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage. The duration of the slow increases based on how far the Tidal Wave has traveled, with a minimum duration of {{ e3 }} seconds and a maximum of {{ e5 }} seconds.<br /><br />Allies hit by the wave gain double the effect of Surging Tides.",
+          "tooltip": "Summons a Tidal Wave from Nami's position. The wave knocks up enemies and slows them by {{ e4 }}%, dealing {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage. The duration of the slow increases based on how far the Tidal Wave has traveled, with a minimum duration of {{ e3 }} seconds and a maximum of {{ e5 }} seconds.<br /><br />Allies hit by the wave gain double the effect of Surging Tides.",
           "leveltip": {
             "label": [
               "Damage",
@@ -580,8 +580,7 @@
               "Slow"
             ],
             "effect": [
-              " ",
-              " {{ e1 }} -> {{ e1NL }}",
+              "{{ e1 }} -> {{ e1NL }}",
               "{{ cooldown }} -> {{ cooldownNL }}",
               "{{ e4 }}% -> {{ e4NL }}%"
             ]
@@ -673,7 +672,7 @@
               "key": "a1"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             2550,
@@ -690,7 +689,7 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         }
       ],
       "passive": {

@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.21.1",
+  "version": "9.22.1",
   "data": {
     "Annie": {
       "id": "Annie",
@@ -146,15 +146,15 @@
           "id": "AnnieQ",
           "name": "Disintegrate",
           "description": "Annie hurls a Mana infused fireball, dealing damage and refunding the Mana cost if it destroys the target.",
-          "tooltip": "Deals {{ basedamage }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage. Mana cost and half the cooldown are refunded if Disintegrate kills the target.",
+          "tooltip": "Deals {{ basedamage }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage. Mana cost and half the cooldown are refunded if Disintegrate kills the target.",
           "leveltip": {
             "label": [
               "Damage",
-              "Mana Cost"
+              "@AbilityResourceName@ Cost"
             ],
             "effect": [
               "{{ basedamage }} -> {{ basedamageNL }}",
-              " {{ cost }} -> {{ costNL }}"
+              "{{ cost }} -> {{ costNL }}"
             ]
           },
           "maxrank": 5,
@@ -268,7 +268,7 @@
               "key": "a1"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             625,
@@ -287,21 +287,21 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "AnnieW",
           "name": "Incinerate",
           "description": "Annie casts a blazing cone of fire, dealing damage to all enemies in the area.",
-          "tooltip": "Casts a cone of fire dealing {{ basedamage }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage to all enemies in the area.",
+          "tooltip": "Casts a cone of fire dealing {{ basedamage }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage to all enemies in the area.",
           "leveltip": {
             "label": [
               "Damage",
-              "Mana Cost"
+              "@AbilityResourceName@ Cost"
             ],
             "effect": [
               "{{ basedamage }} -> {{ basedamageNL }}",
-              " {{ cost }} -> {{ costNL }}"
+              "{{ cost }} -> {{ costNL }}"
             ]
           },
           "maxrank": 5,
@@ -415,7 +415,7 @@
               "key": "a1"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             600,
@@ -434,7 +434,7 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "AnnieE",

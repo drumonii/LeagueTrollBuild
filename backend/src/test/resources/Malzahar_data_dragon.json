@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.21.1",
+  "version": "9.22.1",
   "data": {
     "Malzahar": {
       "id": "Malzahar",
@@ -239,7 +239,7 @@
               "key": "a1"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             900,
@@ -258,18 +258,18 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "MalzaharW",
           "name": "Void Swarm",
           "description": "Malzahar summons Voidlings to attack nearby enemies.",
-          "tooltip": "<span class=\"colorFF8C00\">Passive:</span> Casting Malzahar's other spells gives him Gathering Swarm, increasing the number of Voidlings summoned by Void Swarm (max {{ e6 }}).<br /><br /><span class=\"colorFF8C00\">Active:</span> Summons one or more Voidlings. Voidlings last {{ e1 }} seconds and deal an additional {{ e2 }} <scaleAP>(+{{ a1 }})</scaleAP> <scaleAD>(+{{ a2 }})</scaleAD> magic damage each hit.<br /><br /><span class=\"color919191\"><i>Voidlings deal {{ e3 }}% damage to lane minions affected by Malefic Visions.<br />Voidlings deal {{ e4 }}% damage to epic monsters.</i></span>",
+          "tooltip": "<scaleAD>Passive:</scaleAD> Casting Malzahar's other spells gives him Gathering Swarm, increasing the number of Voidlings summoned by Void Swarm (max {{ e6 }}).<br /><br /><scaleAD>Active:</scaleAD> Summons one or more Voidlings. Voidlings last {{ e1 }} seconds and deal an additional {{ e2 }} <scaleAP>(+{{ a1 }})</scaleAP> <scaleAD>(+{{ a2 }})</scaleAD> magic damage each hit.<br /><br /><span class=\"color919191\"><i>Voidlings deal {{ e3 }}% damage to lane minions affected by Malefic Visions.<br />Voidlings deal {{ e4 }}% damage to epic monsters.</i></span>",
           "leveltip": {
             "label": [
               "Voidling Bonus Damage",
               "Voidling Duration",
-              "Cost"
+              "@AbilityResourceName@ Cost"
             ],
             "effect": [
               "{{ e2 }} -> {{ e2NL }}",
@@ -393,7 +393,7 @@
               "key": "a2"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "0",
           "range": [
             150,
@@ -412,7 +412,7 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "MalzaharE",
@@ -421,9 +421,9 @@
           "tooltip": "Deal {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage to an enemy target over {{ e3 }} seconds. Applying Call of the Void or Nether Grasp to the victim during this time refreshes the visions.<br /><br />If the victim is killed, Malzahar gains <scaleMana>{{ f1 }}</scaleMana> Mana ({{ e5 }}% of max mana) and the visions spread to the nearest enemy.",
           "leveltip": {
             "label": [
-              "Base Damage",
+              "Damage",
               "Cooldown",
-              "Cost"
+              "@AbilityResourceName@ Cost"
             ],
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
@@ -542,7 +542,7 @@
               "key": "a1"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             650,
@@ -561,7 +561,7 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "MalzaharR",
@@ -672,7 +672,7 @@
               "key": "a1"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             700,
@@ -689,7 +689,7 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         }
       ],
       "passive": {

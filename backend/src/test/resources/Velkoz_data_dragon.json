@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.21.1",
+  "version": "9.22.1",
   "data": {
     "Velkoz": {
       "id": "Velkoz",
@@ -12,7 +12,7 @@
         "full": "Velkoz.png",
         "sprite": "champion4.png",
         "group": "champion",
-        "x": 336,
+        "x": 384,
         "y": 0,
         "w": 48,
         "h": 48
@@ -224,7 +224,7 @@
             "full": "VelkozQ.png",
             "sprite": "spell13.png",
             "group": "spell",
-            "x": 192,
+            "x": 384,
             "y": 0,
             "w": 48,
             "h": 48
@@ -235,13 +235,13 @@
           "id": "VelkozW",
           "name": "Void Rift",
           "description": "Vel'Koz opens a rift to the void that deals an initial burst of damage, then explodes for a second burst of damage after a delay.",
-          "tooltip": "Vel'Koz opens a rift to the void that deals {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> Magic Damage. After a delay, it deals an additional {{ e2 }} <span class=\"color99FF99\">(+{{ a2 }})</span> Magic Damage.<br /><br />Void Rift has a 2 second cooldown between casts.",
+          "tooltip": "Vel'Koz opens a rift to the void that deals {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> Magic Damage. After a delay, it deals an additional {{ e2 }} <scaleAP>(+{{ a2 }})</scaleAP> Magic Damage.<br /><br />Void Rift has a 2 second cooldown between casts.",
           "leveltip": {
             "label": [
               "Initial Damage",
               "Secondary Damage",
-              "Ammo Recharge Time",
-              "Mana Cost"
+              "Recharge Time",
+              "@AbilityResourceName@ Cost"
             ],
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
@@ -366,7 +366,7 @@
               "key": "a2"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "2",
           "range": [
             1050,
@@ -380,23 +380,23 @@
             "full": "VelkozW.png",
             "sprite": "spell13.png",
             "group": "spell",
-            "x": 240,
+            "x": 432,
             "y": 0,
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "VelkozE",
           "name": "Tectonic Disruption",
           "description": "Vel'Koz causes an area to explode, knocking up enemies, and knocking close enemies slightly away.",
-          "tooltip": "Vel'Koz disrupts a nearby area which, after a delay, deals {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> Magic Damage and knocks up enemies hit for {{ e2 }} seconds.<br /><br />Any enemies hit that are close to Vel'Koz will be pushed slightly in the direction the ability was cast.",
+          "tooltip": "Vel'Koz disrupts a nearby area which, after a delay, deals {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> Magic Damage and knocks up enemies hit for {{ e2 }} seconds.<br /><br />Any enemies hit that are close to Vel'Koz will be pushed slightly in the direction the ability was cast.",
           "leveltip": {
             "label": [
               "Damage",
               "Cooldown",
-              "Mana Cost"
+              "@AbilityResourceName@ Cost"
             ],
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
@@ -515,7 +515,7 @@
               "key": "a1"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             810,
@@ -529,18 +529,18 @@
             "full": "VelkozE.png",
             "sprite": "spell13.png",
             "group": "spell",
-            "x": 288,
-            "y": 0,
+            "x": 0,
+            "y": 48,
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "VelkozR",
           "name": "Life Form Disintegration Ray",
           "description": "Vel'Koz unleashes a channelled beam that follows the cursor for 2.5 seconds that deals magic damage. Organic Deconstruction Researches enemy champions causing them to take true damage instead.",
-          "tooltip": "<span class=\"colorFF9900\">Passive: </span>Deconstructing enemy Champions <span class=\"colorFFFFFF\">Researches</span> them for {{ e2 }} seconds. Basic attacks and all abilities refresh Research.<br /><br /><span class=\"colorFF9900\">Active: </span>Vel'Koz channels a ray of energy that follows the cursor for 2.5 seconds, dealing Magic Damage up to a total of {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> and slowing units hit by {{ e3 }}%.<br /><br />Enemies that stay in the beam will periodically gain <span class=\"colorFFFFFF\">Organic Deconstruction</span> stacks. Deals True Damage instead of Magic against <span class=\"colorFFFFFF\">Researched</span> units.",
+          "tooltip": "<spellPassive>Passive: </spellPassive>Deconstructing enemy Champions <scaleLevel>Researches</scaleLevel> them for {{ e2 }} seconds. Basic attacks and all abilities refresh Research.<br /><br /><spellPassive>Active: </spellPassive>Vel'Koz channels a ray of energy that follows the cursor for 2.5 seconds, dealing Magic Damage up to a total of {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> and slowing units hit by {{ e3 }}%.<br /><br />Enemies that stay in the beam will periodically gain <scaleLevel>Organic Deconstruction</scaleLevel> stacks. Deals True Damage instead of Magic against <scaleLevel>Researched</scaleLevel> units.",
           "leveltip": {
             "label": [
               "Total Damage",
@@ -638,7 +638,7 @@
               "key": "a1"
             }
           ],
-          "costType": "Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             1575,
@@ -650,12 +650,12 @@
             "full": "VelkozR.png",
             "sprite": "spell13.png",
             "group": "spell",
-            "x": 336,
-            "y": 0,
+            "x": 48,
+            "y": 48,
             "w": 48,
             "h": 48
           },
-          "resource": "Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         }
       ],
       "passive": {
@@ -665,7 +665,7 @@
           "full": "VelKoz_Passive.png",
           "sprite": "passive4.png",
           "group": "passive",
-          "x": 336,
+          "x": 384,
           "y": 0,
           "w": 48,
           "h": 48

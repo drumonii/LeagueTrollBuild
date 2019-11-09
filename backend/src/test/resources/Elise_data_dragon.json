@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.21.1",
+  "version": "9.22.1",
   "data": {
     "Elise": {
       "id": "Elise",
@@ -105,13 +105,13 @@
           "id": "EliseHumanQ",
           "name": "Neurotoxin / Venomous Bite",
           "description": "Human Form: Deals damage based upon how high the target's Health is.<br><br>Spider Form: Lunges at an enemy and deals damage based upon how low their Health is.",
-          "tooltip": "Deals magic damage equal to {{ e1 }} plus {{ e6 }}% <span class=\"color99FF99\">(+{{ a1 }}%)</span> of the target's current health. Maximum bonus against monsters: {{ e2 }}.",
+          "tooltip": "Deals magic damage equal to {{ e1 }} plus {{ e6 }}% <scaleAP>(+{{ a1 }}%)</scaleAP> of the target's current health. Maximum bonus against monsters: {{ e2 }}.",
           "leveltip": {
             "label": [
               "Neurotoxin Damage",
               "Venomous Bite Damage",
-              "Max Damage to Monsters",
-              "Mana Cost"
+              "Monster Damage Cap",
+              "@AbilityResourceName@ Cost"
             ],
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
@@ -231,7 +231,7 @@
               "key": "a1"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             625,
@@ -250,17 +250,17 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "EliseHumanW",
           "name": "Volatile Spiderling / Skittering Frenzy",
           "description": "Human Form: Releases a venom-gorged Spiderling that explodes when it nears a target.<br><br>Spider Form: Elise and her Spiderlings gain Attack Speed.",
-          "tooltip": "Summons a venom-gorged Spiderling that moves to target location and explodes, dealing {{ e3 }} <span class=\"color99FF99\">(+{{ a1 }})</span> Magic Damage when it nears an enemy or after 3 seconds.",
+          "tooltip": "Summons a venom-gorged Spiderling that moves to target location and explodes, dealing {{ e3 }} <scaleAP>(+{{ a1 }})</scaleAP> Magic Damage when it nears an enemy or after 3 seconds.",
           "leveltip": {
             "label": [
               "Damage",
-              "Mana Cost"
+              "@AbilityResourceName@ Cost"
             ],
             "effect": [
               "{{ e3 }} -> {{ e3NL }}",
@@ -378,7 +378,7 @@
               "key": "a1"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             950,
@@ -397,7 +397,7 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "EliseHumanE",
@@ -519,7 +519,7 @@
             "0"
           ],
           "vars": [],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             1075,
@@ -538,13 +538,13 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "EliseR",
           "name": "Spider Form",
           "description": "Transforms into a menacing spider, reducing her attack range in exchange for movement speed, new abilities, and a Spiderling swarm that will attack her foes.",
-          "tooltip": "Elise transforms into a menacing spider, sacrificing 425 attack range in exchange for {{ e3 }} movement speed and access to arachnid abilities. All dormant Spiderlings are awakened and will attack nearby foes.<br /><br /><span class=\"colorFF3300\">Spiderlings: </span>Spiderlings deal {{ e1 }} <span class=\"color99FF99\">(+{{ a2 }})</span> damage and take {{ e4 }}% reduced damage from multi-target abilities.",
+          "tooltip": "Elise transforms into a menacing spider, sacrificing 425 attack range in exchange for {{ e3 }} movement speed and access to arachnid abilities. All dormant Spiderlings are awakened and will attack nearby foes.<br /><br /><span class=\"colorFF3300\">Spiderlings: </span>Spiderlings deal {{ e1 }} <scaleAP>(+{{ a2 }})</scaleAP> damage and take {{ e4 }}% reduced damage from multi-target abilities.",
           "leveltip": {
             "label": [
               "Spider Form Bite Damage",

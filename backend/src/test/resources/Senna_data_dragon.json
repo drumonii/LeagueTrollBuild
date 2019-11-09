@@ -3,181 +3,122 @@
   "format": "standAloneComplex",
   "version": "9.22.1",
   "data": {
-    "Tristana": {
-      "id": "Tristana",
-      "key": "18",
-      "name": "Tristana",
-      "title": "the Yordle Gunner",
+    "Senna": {
+      "id": "Senna",
+      "key": "235",
+      "name": "Senna",
+      "title": "the Redeemer",
       "image": {
-        "full": "Tristana.png",
+        "full": "Senna.png",
         "sprite": "champion3.png",
         "group": "champion",
-        "x": 384,
-        "y": 96,
+        "x": 432,
+        "y": 0,
         "w": 48,
         "h": 48
       },
       "skins": [
         {
-          "id": "18000",
+          "id": "235000",
           "num": 0,
           "name": "default",
           "chromas": false
         },
         {
-          "id": "18001",
+          "id": "235001",
           "num": 1,
-          "name": "Riot Girl Tristana",
-          "chromas": false
-        },
-        {
-          "id": "18002",
-          "num": 2,
-          "name": "Earnest Elf Tristana",
-          "chromas": false
-        },
-        {
-          "id": "18003",
-          "num": 3,
-          "name": "Firefighter Tristana",
-          "chromas": false
-        },
-        {
-          "id": "18004",
-          "num": 4,
-          "name": "Guerilla Tristana",
-          "chromas": false
-        },
-        {
-          "id": "18005",
-          "num": 5,
-          "name": "Buccaneer Tristana",
-          "chromas": false
-        },
-        {
-          "id": "18006",
-          "num": 6,
-          "name": "Rocket Girl Tristana",
-          "chromas": true
-        },
-        {
-          "id": "18010",
-          "num": 10,
-          "name": "Dragon Trainer Tristana",
-          "chromas": true
-        },
-        {
-          "id": "18011",
-          "num": 11,
-          "name": "Bewitching Tristana",
-          "chromas": false
-        },
-        {
-          "id": "18012",
-          "num": 12,
-          "name": "Omega Squad Tristana",
-          "chromas": true
-        },
-        {
-          "id": "18024",
-          "num": 24,
-          "name": "Little Demon Tristana",
+          "name": "True Damage Senna",
           "chromas": true
         }
       ],
-      "lore": "While many other yordles channel their energy into discovery, invention, or just plain mischief-making, Tristana was always inspired by the adventures of great warriors. She had heard much about Runeterra, its factions, and its wars, and believed her kind could become worthy of legend too. Setting foot in the world for the first time, she took up her trusty cannon Boomer, and now leaps into battle with steadfast courage and optimism.",
-      "blurb": "While many other yordles channel their energy into discovery, invention, or just plain mischief-making, Tristana was always inspired by the adventures of great warriors. She had heard much about Runeterra, its factions, and its wars, and believed her...",
-      "allytips": [
-        "Her massive gun allows Tristana to fire on targets at a great distance. Utilize this to prevent your enemies from ever laying a hand on you.",
-        "Use Rocket Jump after you have stacked up your Explosive Charge on an enemy to finish them off with a burst of damage.",
-        "Use Rapid Fire to help stack up your Explosive Charge on enemy champions."
-      ],
-      "enemytips": [
-        "If you see Tristana activate Rapid Fire in a fight, stun her and try to back off until the spell dissipates.",
-        "Stand away from your creeps in a lane to take less collateral damage from Explosive Charge."
-      ],
+      "lore": "Cursed from childhood to be haunted by the supernatural Black Mist, Senna joined a sacred order known as the Sentinels of Light, and fiercely fought back—only to be killed, her soul imprisoned in a lantern by the cruel wraith Thresh. But refusing to lose hope, within the lantern Senna learned to use the Mist, and reemerged to new life, forever changed. Now wielding darkness along with light, Senna seeks to end the Black Mist by turning it against itself—with every blast of her relic weapon, redeeming the souls lost within.",
+      "blurb": "Cursed from childhood to be haunted by the supernatural Black Mist, Senna joined a sacred order known as the Sentinels of Light, and fiercely fought back—only to be killed, her soul imprisoned in a lantern by the cruel wraith Thresh. But refusing to...",
+      "allytips": [],
+      "enemytips": [],
       "tags": [
         "Marksman",
-        "Assassin"
+        "Mage"
       ],
       "partype": "Mana",
       "info": {
-        "attack": 9,
-        "defense": 3,
-        "magic": 5,
-        "difficulty": 4
+        "attack": 7,
+        "defense": 2,
+        "magic": 6,
+        "difficulty": 7
       },
       "stats": {
-        "hp": 559,
-        "hpperlevel": 88,
-        "mp": 250,
-        "mpperlevel": 32,
-        "movespeed": 325,
-        "armor": 26,
-        "armorperlevel": 3,
+        "hp": 520,
+        "hpperlevel": 85,
+        "mp": 350,
+        "mpperlevel": 45,
+        "movespeed": 330,
+        "armor": 28,
+        "armorperlevel": 3.5,
         "spellblock": 30,
         "spellblockperlevel": 0.5,
-        "attackrange": 525,
-        "hpregen": 3.75,
-        "hpregenperlevel": 0.65,
-        "mpregen": 7.2,
-        "mpregenperlevel": 0.45,
+        "attackrange": 600,
+        "hpregen": 3.5,
+        "hpregenperlevel": 0.55,
+        "mpregen": 11.5,
+        "mpregenperlevel": 0.4,
         "crit": 0,
         "critperlevel": 0,
-        "attackdamage": 61,
-        "attackdamageperlevel": 3.3,
-        "attackspeedperlevel": 1.5,
-        "attackspeed": 0.656
+        "attackdamage": 50,
+        "attackdamageperlevel": 0,
+        "attackspeedperlevel": 4,
+        "attackspeed": 0.625
       },
       "spells": [
         {
-          "id": "TristanaQ",
-          "name": "Rapid Fire",
-          "description": "Tristana fires her weapon rapidly, increasing her Attack Speed for a short time.",
-          "tooltip": "<spellPassive>Active: </spellPassive>Increases Tristana's Attack Speed by {{ e1 }}% for {{ e2 }} seconds.",
+          "id": "SennaQ",
+          "name": "Piercing Darkness",
+          "description": "From the twin barrels of her Relic Cannon, Senna fires a unified beam of light and shadow through a target, healing allies and damaging enemies.",
+          "tooltip": "Senna shoots a bolt of piercing shadow through an ally or enemy. Enemies hit take <physicalDamage>{{ totaldamage }} physical damage</physicalDamage>. Allied champions hit are healed for <healing>{{ totalheal }}</healing> health. <br /><br /><rules>Basic attacks reduce Piercing Darkness's cooldown by {{ cdreductiononhit }} seconds.</rules>",
           "leveltip": {
             "label": [
-              "Attack Speed %",
-              "Cooldown"
+              "Damage",
+              "Healing",
+              "@AbilityResourceName@ Cost"
             ],
             "effect": [
-              "{{ effect1amount*100.000000 }}% -> {{ effect1amountnl*100.000000 }}%",
-              "{{ cooldown }} -> {{ cooldownNL }}"
+              "{{ basedamage }} -> {{ basedamageNL }}",
+              "{{ baseheal }} -> {{ basehealNL }}",
+              "{{ cost }} -> {{ costNL }}"
             ]
           },
           "maxrank": 5,
           "cooldown": [
-            20,
-            19,
-            18,
-            17,
-            16
+            15,
+            15,
+            15,
+            15,
+            15
           ],
-          "cooldownBurn": "20/19/18/17/16",
+          "cooldownBurn": "15",
           "cost": [
-            0,
-            0,
-            0,
-            0,
-            0
+            70,
+            80,
+            90,
+            100,
+            110
           ],
-          "costBurn": "0",
+          "costBurn": "70/80/90/100/110",
           "datavalues": {},
           "effect": [
             null,
             [
-              50,
-              65,
-              80,
-              95,
-              110
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              7,
-              7,
-              7,
-              7,
-              7
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -238,8 +179,8 @@
           ],
           "effectBurn": [
             null,
-            "50/65/80/95/110",
-            "7",
+            "0",
+            "0",
             "0",
             "0",
             "0",
@@ -250,206 +191,53 @@
             "0"
           ],
           "vars": [],
-          "costType": "No Cost",
-          "maxammo": "-1",
-          "range": [
-            20,
-            20,
-            20,
-            20,
-            20
-          ],
-          "rangeBurn": "20",
-          "image": {
-            "full": "TristanaQ.png",
-            "sprite": "spell12.png",
-            "group": "spell",
-            "x": 384,
-            "y": 0,
-            "w": 48,
-            "h": 48
-          },
-          "resource": "No Cost"
-        },
-        {
-          "id": "TristanaW",
-          "name": "Rocket Jump",
-          "description": "Tristana fires at the ground to propel her to a distant location, dealing damage and slowing surrounding units for a brief period where she lands.",
-          "tooltip": "Tristana launches herself to target location, dealing {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> Magic Damage and slowing surrounding enemies by {{ e3 }}% for {{ e2 }} seconds.<br /><br />Kills, Assists, and max stack Explosive Charge detonations on Champions reset Rocket Jump's cooldown.",
-          "leveltip": {
-            "label": [
-              "Damage",
-              "Slow Duration",
-              "Cooldown"
-            ],
-            "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
-              "{{ e2 }} -> {{ e2NL }}",
-              "{{ cooldown }} -> {{ cooldownNL }}"
-            ]
-          },
-          "maxrank": 5,
-          "cooldown": [
-            22,
-            20,
-            18,
-            16,
-            14
-          ],
-          "cooldownBurn": "22/20/18/16/14",
-          "cost": [
-            60,
-            60,
-            60,
-            60,
-            60
-          ],
-          "costBurn": "60",
-          "datavalues": {},
-          "effect": [
-            null,
-            [
-              95,
-              145,
-              195,
-              245,
-              295
-            ],
-            [
-              1,
-              1.5,
-              2,
-              2.5,
-              3
-            ],
-            [
-              60,
-              60,
-              60,
-              60,
-              60
-            ],
-            [
-              350,
-              350,
-              350,
-              350,
-              350
-            ],
-            [
-              0,
-              0,
-              0,
-              0,
-              0
-            ],
-            [
-              0,
-              0,
-              0,
-              0,
-              0
-            ],
-            [
-              0,
-              0,
-              0,
-              0,
-              0
-            ],
-            [
-              0,
-              0,
-              0,
-              0,
-              0
-            ],
-            [
-              0,
-              0,
-              0,
-              0,
-              0
-            ],
-            [
-              0,
-              0,
-              0,
-              0,
-              0
-            ]
-          ],
-          "effectBurn": [
-            null,
-            "95/145/195/245/295",
-            "1/1.5/2/2.5/3",
-            "60",
-            "350",
-            "0",
-            "0",
-            "0",
-            "0",
-            "0",
-            "0"
-          ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.5,
-              "key": "a1"
-            }
-          ],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
-            900,
-            900,
-            900,
-            900,
-            900
+            600,
+            600,
+            600,
+            600,
+            600
           ],
-          "rangeBurn": "900",
+          "rangeBurn": "600",
           "image": {
-            "full": "TristanaW.png",
-            "sprite": "spell12.png",
+            "full": "SennaQ.png",
+            "sprite": "spell10.png",
             "group": "spell",
-            "x": 432,
-            "y": 0,
+            "x": 96,
+            "y": 48,
             "w": 48,
             "h": 48
           },
           "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
-          "id": "TristanaE",
-          "name": "Explosive Charge",
-          "description": "When Tristana kills a unit, her cannonballs burst into shrapnel, dealing damage to surrounding enemies. Can be activated to place a bomb on a target enemy that explodes after a short duration dealing damage to surrounding units.",
-          "tooltip": "<spellPassive>Passive: </spellPassive>Enemies explode when slain by Tristana's basic attacks, dealing <magicDamage>{{ passivedamage }} Magic Damage</magicDamage> to nearby enemies.<br /><br /><spellPassive>Active: </spellPassive>Places a bomb on an enemy or turret that explodes after {{ activeduration }} seconds, dealing <physicalDamage>{{ activedamage }} Physical Damage</physicalDamage>. Each attack and ability charges the bomb's damage by +{{ activeperstackamp*100 }}%, up to a maximum of <physicalDamage>{{ activemaxdamage }}</physicalDamage>.<br /><br />At {{ activemaxstacks }} charges, the bomb explodes immediately. The detonation radius is twice as large if used on a turret.",
+          "id": "SennaW",
+          "name": "Last Embrace",
+          "description": "Senna sends forth a wave of Black Mist. If it hits an enemy it latches onto them hungrily, rooting them and everything nearby after a brief delay.",
+          "tooltip": "Senna sends forth the black mist, dealing <physicalDamage>{{ damage }} physical damage</physicalDamage> to the first enemy hit. After a {{ delaytime }} second delay the target and other nearby enemies are rooted for {{ rootduration }} seconds.",
           "leveltip": {
             "label": [
-              "Passive Explosion Damage",
-              "Base Charge Damage",
-              "@AbilityResourceName@ Cost",
-              "Attack Damage",
-              "Cooldown"
+              "Damage",
+              "Root Duration",
+              "@AbilityResourceName@ Cost"
             ],
             "effect": [
-              "{{ passivebasedamage }} -> {{ passivebasedamageNL }}",
-              "{{ activebasedamage }} -> {{ activebasedamageNL }}",
-              "{{ cost }} -> {{ costNL }}",
-              "{{ activebadratio*100.000000 }}% -> {{ activebadrationl*100.000000 }}%",
-              "{{ cooldown }} -> {{ cooldownNL }}"
+              "{{ basedamage }} -> {{ basedamageNL }}",
+              "{{ rootduration }} -> {{ rootdurationNL }}",
+              "{{ cost }} -> {{ costNL }}"
             ]
           },
           "maxrank": 5,
           "cooldown": [
-            16,
-            15.5,
-            15,
-            14.5,
-            14
+            11,
+            11,
+            11,
+            11,
+            11
           ],
-          "cooldownBurn": "16/15.5/15/14.5/14",
+          "cooldownBurn": "11",
           "cost": [
             50,
             55,
@@ -549,18 +337,18 @@
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
-            550,
-            550,
-            550,
-            550,
-            550
+            1150,
+            1150,
+            1150,
+            1150,
+            1150
           ],
-          "rangeBurn": "550",
+          "rangeBurn": "1150",
           "image": {
-            "full": "TristanaE.png",
-            "sprite": "spell12.png",
+            "full": "SennaW.png",
+            "sprite": "spell10.png",
             "group": "spell",
-            "x": 0,
+            "x": 144,
             "y": 48,
             "w": 48,
             "h": 48
@@ -568,29 +356,170 @@
           "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
-          "id": "TristanaR",
-          "name": "Buster Shot",
-          "description": "Tristana loads a massive cannonball into her weapon and fires it at an enemy unit. This deals Magic Damage and knocks the target back. If the target is carrying the Explosive Charge bomb, the bomb detonation radius is doubled.",
-          "tooltip": "Tristana fires a massive cannonball at an enemy unit. This deals {{ damagecalc }} Magic Damage and knocks surrounding units back {{ knockbackdistance }} distance.",
+          "id": "SennaE",
+          "name": "Curse of the Black Mist",
+          "description": "Senna draws the Mist she has stored in her weapon into a storm around her, embracing darkness and becoming a wraith within. Allies who enter the area are camouflaged and also appear as wraiths as the Mist shrouds them. Wraiths gain increased movement speed, are unselectable, and hide their identities.",
+          "tooltip": "Senna dissolves into a cloud of mist for {{ buffduration }} seconds, becoming a <span class=\"color90b2ee\">wraith</span>. Allied champions who enter the mist are <span class=\"colorcd90ee\">Camouflaged</span> and become <span class=\"color90b2ee\">wraiths</span> when they leave. <span class=\"color90b2ee\">Wraiths</span> gain {{ totalms }} Movement Speed. They are unselectable and hide their identities as long as no enemy champions are nearby. ",
           "leveltip": {
             "label": [
-              "Damage",
-              "Knockback Distance",
+              "Duration",
               "Cooldown"
             ],
             "effect": [
-              "{{ basedamage }} -> {{ basedamageNL }}",
-              "{{ knockbackdistance }} -> {{ knockbackdistanceNL }}",
+              "{{ buffduration }} -> {{ buffdurationNL }}",
+              "{{ cooldown }} -> {{ cooldownNL }}"
+            ]
+          },
+          "maxrank": 5,
+          "cooldown": [
+            26,
+            24.5,
+            23,
+            21.5,
+            20
+          ],
+          "cooldownBurn": "26/24.5/23/21.5/20",
+          "cost": [
+            70,
+            70,
+            70,
+            70,
+            70
+          ],
+          "costBurn": "70",
+          "datavalues": {},
+          "effect": [
+            null,
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "effectBurn": [
+            null,
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "vars": [],
+          "costType": " {{ abilityresourcename }}",
+          "maxammo": "-1",
+          "range": [
+            450,
+            450,
+            450,
+            450,
+            450
+          ],
+          "rangeBurn": "450",
+          "image": {
+            "full": "SennaE.png",
+            "sprite": "spell10.png",
+            "group": "spell",
+            "x": 192,
+            "y": 48,
+            "w": 48,
+            "h": 48
+          },
+          "resource": "{{ cost }} {{ abilityresourcename }}"
+        },
+        {
+          "id": "SennaR",
+          "name": "Dawning Shadow",
+          "description": "Senna calls upon the relic stones of fallen Sentinels, splitting her relic cannon into a holy array of shadow and light. She then fires a global beam that shields allies from harm, while damaging enemies caught in the center.",
+          "tooltip": "Senna fires a blast of light with global range. Enemy champions hit take <physicalDamage>{{ totaldamage }} physical damage</physicalDamage>. Allied champions hit in a wider area receive a shield for {{ shieldduration }} seconds that absorbs {{ totalshield }} damage. The shield's power scales with the amount of <span class=\"color0bf7de\">mist</span> Senna has collected.",
+          "leveltip": {
+            "label": [
+              "Damage",
+              "Shield Amount",
+              "Cooldown"
+            ],
+            "effect": [
+              "{{ damage }} -> {{ damageNL }}",
+              "{{ shield }} -> {{ shieldNL }}",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
           "maxrank": 3,
           "cooldown": [
-            120,
-            110,
-            100
+            160,
+            140,
+            120
           ],
-          "cooldownBurn": "120/110/100",
+          "cooldownBurn": "160/140/120",
           "cost": [
             100,
             100,
@@ -668,16 +597,16 @@
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
-            550,
-            550,
-            550
+            25000,
+            25000,
+            25000
           ],
-          "rangeBurn": "550",
+          "rangeBurn": "25000",
           "image": {
-            "full": "TristanaR.png",
-            "sprite": "spell12.png",
+            "full": "SennaR.png",
+            "sprite": "spell10.png",
             "group": "spell",
-            "x": 48,
+            "x": 240,
             "y": 48,
             "w": 48,
             "h": 48
@@ -686,27 +615,29 @@
         }
       ],
       "passive": {
-        "name": "Draw a Bead",
-        "description": "Increases Tristana's Attack Range as she levels.",
+        "name": "Absolution",
+        "description": "When units die near Senna, their souls are periodically trapped by the Black Mist. Senna can attack these souls to free them, absorbing the Mist that held them in death. Mist fuels her Relic Cannon's power with increased Attack Damage, Attack Range, and Critical Strike Chance. <br><br>Attacks from Senna's Relic Cannon take longer to fire, deals bonus damage , and briefly grant her a portion of her target's Movement Speed.",
         "image": {
-          "full": "Tristana_Passive.png",
+          "full": "Senna_Passive.Senna.png",
           "sprite": "passive3.png",
           "group": "passive",
-          "x": 384,
-          "y": 96,
+          "x": 432,
+          "y": 0,
           "w": 48,
           "h": 48
         }
       },
       "recommended": [
         {
-          "champion": "Tristana",
+          "champion": "Senna",
           "title": "Beginner",
           "map": "SR",
           "mode": "INTRO",
           "type": "riot",
           "customTag": "",
+          "sortrank": 0,
           "extensionPage": false,
+          "useObviousCheckmark": false,
           "customPanel": null,
           "blocks": [
             {
@@ -717,9 +648,21 @@
               "maxSummonerLevel": 4,
               "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
               "items": [
                 {
                   "id": "1055",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "2003",
                   "count": 1,
                   "hideCount": false
                 }
@@ -733,6 +676,13 @@
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
               "items": [
                 {
                   "id": "1055",
@@ -754,6 +704,13 @@
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
               "items": [
                 {
                   "id": "1036",
@@ -775,14 +732,16 @@
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
               "items": [
                 {
                   "id": "1001",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "1042",
                   "count": 1,
                   "hideCount": false
                 },
@@ -801,6 +760,13 @@
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
               "items": [
                 {
                   "id": "1053",
@@ -809,6 +775,11 @@
                 },
                 {
                   "id": "1038",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1036",
                   "count": 1,
                   "hideCount": false
                 },
@@ -827,24 +798,26 @@
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
               "items": [
-                {
-                  "id": "3087",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3022",
-                  "count": 1,
-                  "hideCount": false
-                },
                 {
                   "id": "3031",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3026",
+                  "id": "3036",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3508",
                   "count": 1,
                   "hideCount": false
                 }
@@ -853,8 +826,8 @@
           ]
         },
         {
-          "champion": "Tristana",
-          "title": "TristanaARAM",
+          "champion": "Senna",
+          "title": "SennaARAM",
           "map": "HA",
           "mode": "ARAM",
           "type": "riot",
@@ -881,13 +854,13 @@
               ],
               "items": [
                 {
-                  "id": "2003",
-                  "count": 2,
+                  "id": "1038",
+                  "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "1038",
-                  "count": 1,
+                  "id": "2003",
+                  "count": 2,
                   "hideCount": false
                 }
               ]
@@ -909,17 +882,17 @@
               ],
               "items": [
                 {
-                  "id": "3006",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
                   "id": "3031",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3046",
+                  "id": "3009",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3033",
                   "count": 1,
                   "hideCount": false
                 }
@@ -942,17 +915,799 @@
               ],
               "items": [
                 {
-                  "id": "3094",
+                  "id": "3812",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3036",
+                  "id": "3508",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3087",
+                  "id": "3085",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "support",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "3174",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3504",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3107",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "consumables",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "2003",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "2033",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "2140",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "champion": "Senna",
+          "title": "SennaKINGPORO",
+          "map": "HA",
+          "mode": "KINGPORO",
+          "type": "riot",
+          "customTag": "",
+          "sortrank": 0,
+          "extensionPage": false,
+          "useObviousCheckmark": false,
+          "customPanel": null,
+          "blocks": [
+            {
+              "type": "starting",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "1038",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "2003",
+                  "count": 2,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "essential",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "3031",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3009",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3033",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "offensive",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "3812",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3508",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3085",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "support",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "3174",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3504",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3107",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "consumables",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "2003",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "2033",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "2140",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "champion": "Senna",
+          "title": "SennaSR",
+          "map": "SR",
+          "mode": "CLASSIC",
+          "type": "riot-support",
+          "customTag": "",
+          "sortrank": 5,
+          "extensionPage": false,
+          "useObviousCheckmark": false,
+          "customPanel": null,
+          "blocks": [
+            {
+              "type": "starting",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "3303",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "2003",
+                  "count": 2,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "3098",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1001",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3134",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "essential",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "3147",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3009",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3142",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "support",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "3174",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3504",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3107",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "offensive",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "3033",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3031",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3812",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3085",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3156",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3026",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "consumables",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "2003",
+                  "count": 1,
+                  "hideCount": true
+                },
+                {
+                  "id": "2140",
+                  "count": 1,
+                  "hideCount": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "champion": "Senna",
+          "title": "SennaSRBottom",
+          "map": "SR",
+          "mode": "CLASSIC",
+          "type": "riot",
+          "customTag": "",
+          "sortrank": 0,
+          "extensionPage": false,
+          "useObviousCheckmark": false,
+          "customPanel": null,
+          "blocks": [
+            {
+              "type": "starting",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "1055",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "2003",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "1038",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1001",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1037",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "essential",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "3031",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3009",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3033",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "offensive",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "3508",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3812",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3085",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "defensive",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "3026",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3156",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3139",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "consumables",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "2003",
+                  "count": 1,
+                  "hideCount": true
+                },
+                {
+                  "id": "2140",
+                  "count": 1,
+                  "hideCount": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "champion": "Senna",
+          "title": "SennaTT",
+          "map": "TT",
+          "mode": "CLASSIC",
+          "type": "riot",
+          "customTag": "",
+          "sortrank": 0,
+          "extensionPage": false,
+          "useObviousCheckmark": false,
+          "customPanel": null,
+          "blocks": [
+            {
+              "type": "starting",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "1055",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1001",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "2003",
+                  "count": 2,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "essential",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "3031",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3009",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3033",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "offensive",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "3508",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3174",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3085",
                   "count": 1,
                   "hideCount": false
                 }
@@ -980,1472 +1735,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3139",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3072",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2033",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2140",
-                  "count": 1,
-                  "hideCount": true
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "champion": "Tristana",
-          "title": "TristanaCS",
-          "map": "CrystalScar",
-          "mode": "ODIN",
-          "type": "riot",
-          "customTag": "",
-          "extensionPage": false,
-          "customPanel": null,
-          "blocks": [
-            {
-              "type": "starting",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "1055",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3340",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "early",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "1038",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3086",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "1001",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essential",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3031",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3006",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3094",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3153",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3072",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3139",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3036",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3026",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2055",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2140",
-                  "count": 1,
-                  "hideCount": true
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "champion": "Tristana",
-          "title": "TristanaFIRSTBLOOD",
-          "map": "HA",
-          "mode": "FIRSTBLOOD",
-          "type": "riot",
-          "customTag": "",
-          "extensionPage": false,
-          "customPanel": null,
-          "blocks": [
-            {
-              "type": "starting",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "1055",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3340",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "early",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "1038",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3086",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "1001",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essential",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3031",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3006",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3087",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3094",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3072",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3139",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3036",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3026",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2031",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2043",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2140",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "3363",
-                  "count": 1,
-                  "hideCount": true
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "champion": "Tristana",
-          "title": "TristanaKINGPORO",
-          "map": "HA",
-          "mode": "KINGPORO",
-          "type": "riot",
-          "customTag": "",
-          "extensionPage": false,
-          "customPanel": null,
-          "blocks": [
-            {
-              "type": "KingPoroSnax",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3680",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3681",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3682",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3683",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "starting",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3184",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "1001",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2031",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essential",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3087",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3006",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3031",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3072",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3036",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3046",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3139",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
                   "id": "3156",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3102",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "2033",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2140",
-                  "count": 1,
-                  "hideCount": true
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "champion": "Tristana",
-          "title": "TristanaPRJ17",
-          "map": "ProjectSlums",
-          "mode": "PROJECT",
-          "type": "riot",
-          "customTag": "",
-          "sortrank": 0,
-          "extensionPage": false,
-          "customPanel": null,
-          "blocks": [
-            {
-              "type": "starting",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "items": [
-                {
-                  "id": "3006",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3031",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3046",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "recommended",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "items": [
-                {
-                  "id": "3508",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3094",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3072",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "items": [
-                {
-                  "id": "3139",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3814",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3153",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "champion": "Tristana",
-          "title": "TristanaSIEGE",
-          "map": "SR",
-          "mode": "SIEGE",
-          "type": "riot",
-          "customTag": "",
-          "extensionPage": false,
-          "customPanel": null,
-          "blocks": [
-            {
-              "type": "siegeOffense",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3631",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3641",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3647",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3635",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3642",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "siegeDefense",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3634",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3640",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3643",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3636",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3642",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essential",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3031",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3006",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3094",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3153",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3072",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3139",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3036",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3026",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "champion": "Tristana",
-          "title": "TristanaSL",
-          "map": "SL",
-          "mode": "GAMEMODEX",
-          "type": "riot",
-          "customTag": "",
-          "sortrank": 0,
-          "extensionPage": false,
-          "useObviousCheckmark": false,
-          "customPanel": null,
-          "blocks": [
-            {
-              "type": "starting",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "4202",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3340",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "startingjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "4101",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3340",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "early",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "1038",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "1001",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "1037",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "earlyjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "1043",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "1001",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essential",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3095",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3006",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3094",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essentialjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "4105",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3006",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3094",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3031",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3036",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3072",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3139",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3156",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3087",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2140",
-                  "count": 1,
-                  "hideCount": true
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "champion": "Tristana",
-          "title": "TristanaSR",
-          "map": "SR",
-          "mode": "CLASSIC",
-          "type": "riot",
-          "customTag": "",
-          "sortrank": 0,
-          "extensionPage": false,
-          "useObviousCheckmark": false,
-          "customPanel": null,
-          "blocks": [
-            {
-              "type": "starting",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "1054",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3340",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "early",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "1038",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "1037",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "1001",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essential",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3031",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3006",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3046",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3036",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3072",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3094",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3139",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3026",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3087",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2140",
-                  "count": 1,
-                  "hideCount": true
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "champion": "Tristana",
-          "title": "TristanaTT",
-          "map": "TT",
-          "mode": "CLASSIC",
-          "type": "riot",
-          "customTag": "",
-          "sortrank": 0,
-          "extensionPage": false,
-          "useObviousCheckmark": false,
-          "customPanel": null,
-          "blocks": [
-            {
-              "type": "starting",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "1001",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "1055",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2003",
-                  "count": 2,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "early",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "1038",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3086",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essential",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3006",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3094",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3031",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3072",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3087",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3046",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3036",
                   "count": 1,
                   "hideCount": false
                 },

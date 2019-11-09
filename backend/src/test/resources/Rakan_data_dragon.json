@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.21.1",
+  "version": "9.22.1",
   "data": {
     "Rakan": {
       "id": "Rakan",
@@ -104,7 +104,7 @@
           "id": "RakanQ",
           "name": "Gleaming Quill",
           "description": "Flings a magical feather that deals magic damage. Striking a champion or epic monster enables Rakan to heal his allies.",
-          "tooltip": "Flings a magical feather that deals {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage to the first enemy hit.<br /><br />If the feather hits a champion or epic monster, Rakan restores <span class=\"colorFFFFFF\">{{ f1 }}</span> <span class=\"color99FF99\">(+{{ a2 }})</span> health to himself and nearby allies after {{ e4 }} seconds or when he touches an ally.",
+          "tooltip": "Flings a magical feather that deals {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage to the first enemy hit.<br /><br />If the feather hits a champion or epic monster, Rakan restores <scaleLevel>{{ f1 }}</scaleLevel> <scaleAP>(+{{ a2 }})</scaleAP> health to himself and nearby allies after {{ e4 }} seconds or when he touches an ally.",
           "leveltip": {
             "label": [
               "Damage",
@@ -112,7 +112,7 @@
             ],
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
-              "{{ f3 }} -> {{ f2 }}"
+              "{{ e5 }} -> {{ e5NL }}"
             ]
           },
           "maxrank": 5,
@@ -231,7 +231,7 @@
               "key": "a2"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             850,
@@ -250,7 +250,7 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "RakanW",
@@ -399,16 +399,16 @@
           "id": "RakanE",
           "name": "Battle Dance",
           "description": "Flies to an allied champion granting them a shield. Can be re-cast for free for a short duration.",
-          "tooltip": "Flies to an allied champion, granting them a {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> health shield for {{ e3 }} seconds.<br /><br />Can be re-cast at no cost once within {{ e2 }} seconds.<br /><br /><span class=\"colore5c100\">Battle Dance's cast range is increased when cast on Xayah.</span>",
+          "tooltip": "Flies to an allied champion, granting them a {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> health shield for {{ e3 }} seconds.<br /><br />Can be re-cast at no cost once within {{ e2 }} seconds.<br /><br /><span class=\"colore5c100\">Battle Dance's cast range is increased when cast on Xayah.</span>",
           "leveltip": {
             "label": [
               "Shield Health",
               "Cooldown",
-              "Cost"
+              "@AbilityResourceName@ Cost"
             ],
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
-              "{{ f2 }} -> {{ f6 }}",
+              "{{ e4 }} -> {{ e4NL }}",
               "{{ e5 }} -> {{ e5NL }}"
             ]
           },
@@ -523,7 +523,7 @@
               "key": "a1"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             650,
@@ -542,13 +542,13 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "RakanR",
           "name": "The Quickness",
           "description": "Gains movement speed, charming and dealing magic damage to enemies touched.",
-          "tooltip": "Gain {{ e5 }}% movement speed for {{ e2 }} seconds.<br /><br />Touching enemies deals {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage and charms them for {{ e3 }} second(s) the first time they're hit. The first champion charmed grants Rakan {{ e6 }}% decaying movement speed.",
+          "tooltip": "Gain {{ e5 }}% movement speed for {{ e2 }} seconds.<br /><br />Touching enemies deals {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage and charms them for {{ e3 }} second(s) the first time they're hit. The first champion charmed grants Rakan {{ e6 }}% decaying movement speed.",
           "leveltip": {
             "label": [
               "Charm Duration",
@@ -648,7 +648,7 @@
               "key": "a1"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             150,
@@ -665,7 +665,7 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         }
       ],
       "passive": {

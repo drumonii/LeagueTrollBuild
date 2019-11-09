@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.21.1",
+  "version": "9.22.1",
   "data": {
     "Kassadin": {
       "id": "Kassadin",
@@ -111,12 +111,12 @@
           "id": "NullLance",
           "name": "Null Sphere",
           "description": "Kassadin fires an orb of void energy at a target, dealing damage and interrupting channels. The excess energy forms around himself, granting a temporary shield that absorbs magic damage.",
-          "tooltip": "Kassadin fires an orb of void energy that deals {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage and interrupts channels.<br /><br />The excess energy forms around himself, granting a shield that absorbs {{ e3 }} <span class=\"color99FF99\">(+{{ a2 }})</span> magic damage for {{ e4 }} seconds.",
+          "tooltip": "Kassadin fires an orb of void energy that deals {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage and interrupts channels.<br /><br />The excess energy forms around himself, granting a shield that absorbs {{ e3 }} <scaleAP>(+{{ a2 }})</scaleAP> magic damage for {{ e4 }} seconds.",
           "leveltip": {
             "label": [
               "Damage",
-              "Shield",
-              "Mana Cost"
+              "Shield Amount",
+              "@AbilityResourceName@ Cost"
             ],
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
@@ -240,7 +240,7 @@
               "key": "a2"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             650,
@@ -259,13 +259,13 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "NetherBlade",
           "name": "Nether Blade",
           "description": "Passive: Kassadin's basic attacks deal bonus magic damage. Active: Kassadin's next basic attack deals significant bonus magic damage and restores Mana.",
-          "tooltip": "<span class=\"colorFF9900\">Passive: </span>Kassadin's basic attacks draw energy from the void, dealing {{ e2 }} <span class=\"color99FF99\">(+{{ a1 }})</span> bonus magic damage.<br /><br /><span class=\"colorFF9900\">Active: </span>Kassadin charges his Nether Blade, causing his next basic attack to deal {{ e3 }} <span class=\"color99FF99\">(+{{ a2 }})</span> bonus magic damage and restore <span class=\"color44DDFF\">{{ e1 }}% of his missing Mana</span> (increases to <span class=\"color44DDFF\">{{ e4 }}%</span> against champions).",
+          "tooltip": "<spellPassive>Passive: </spellPassive>Kassadin's basic attacks draw energy from the void, dealing {{ e2 }} <scaleAP>(+{{ a1 }})</scaleAP> bonus magic damage.<br /><br /><spellPassive>Active: </spellPassive>Kassadin charges his Nether Blade, causing his next basic attack to deal {{ e3 }} <scaleAP>(+{{ a2 }})</scaleAP> bonus magic damage and restore <scaleMana>{{ e1 }}% of his missing Mana</scaleMana> (increases to <scaleMana>{{ e4 }}%</scaleMana> against champions).",
           "leveltip": {
             "label": [
               "Active Damage",
@@ -394,7 +394,7 @@
               "key": "a2"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             1,
@@ -413,18 +413,18 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "ForcePulse",
           "name": "Force Pulse",
           "description": "Kassadin draws energy from spells cast in his vicinity. Upon charging up, Kassadin can use Force Pulse to damage and slow enemies in a cone in front of him.",
-          "tooltip": "Kassadin draws energy from spells cast in his vicinity, gaining a charge whenever a spell is cast near him.<br /><br />Upon reaching 6 charges, Kassadin can use Force Pulse to deal {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage and slow enemies by {{ e2 }}% for {{ e3 }} second in a cone in front of him.",
+          "tooltip": "Kassadin draws energy from spells cast in his vicinity, gaining a charge whenever a spell is cast near him.<br /><br />Upon reaching 6 charges, Kassadin can use Force Pulse to deal {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage and slow enemies by {{ e2 }}% for {{ e3 }} second in a cone in front of him.",
           "leveltip": {
             "label": [
               "Damage",
-              "Slow %",
-              "Mana Cost"
+              "Slow",
+              "@AbilityResourceName@ Cost"
             ],
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
@@ -543,7 +543,7 @@
               "key": "a1"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             400,
@@ -562,16 +562,16 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "RiftWalk",
           "name": "Riftwalk",
           "description": "Kassadin teleports to a nearby location dealing damage to nearby enemy units. Multiple Riftwalks in a short period of time cost additional Mana but also deal additional damage.",
-          "tooltip": "Kassadin teleports to a nearby location dealing {{ e1 }} <span class=\"color44DDFF\">(+{{ f2 }})</span> <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage to surrounding enemy units.<br /><br />Each subsequent Riftwalk within the next {{ e2 }} seconds doubles the Mana cost and deals an additional {{ e3 }} <span class=\"color44DDFF\">(+{{ f1 }})</span> <span class=\"color99FF99\">(+{{ f3 }})</span> magic damage per stack, stacking up to {{ e6 }} times.",
+          "tooltip": "Kassadin teleports to a nearby location dealing {{ e1 }} <scaleMana>(+{{ f2 }})</scaleMana> <scaleAP>(+{{ a1 }})</scaleAP> magic damage to surrounding enemy units.<br /><br />Each subsequent Riftwalk within the next {{ e2 }} seconds doubles the Mana cost and deals an additional {{ e3 }} <scaleMana>(+{{ f1 }})</scaleMana> <scaleAP>(+{{ f3 }})</scaleAP> magic damage per stack, stacking up to {{ e6 }} times.",
           "leveltip": {
             "label": [
-              "Base Damage",
+              "Damage",
               "Damage Per Stack",
               "Cooldown"
             ],
@@ -668,7 +668,7 @@
               "key": "a1"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             500,
@@ -685,7 +685,7 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         }
       ],
       "passive": {
