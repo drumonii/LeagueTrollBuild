@@ -22,8 +22,14 @@ test {
     outputs.dir snippetsDir
 }
 
+task apiDocTest(type: Test) {
+    useJUnitPlatform {
+        includeTags 'api-doc'
+    }
+}
+
 asciidoctor {
-    dependsOn test
+    dependsOn apiDocTest
     sourceDir 'src/main/doc'
     attributes 'snippets': snippetsDir, 'version': version
     inputs.dir snippetsDir
