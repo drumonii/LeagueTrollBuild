@@ -25,7 +25,7 @@ class RiotClientHttpRequestInterceptorTest {
     @Test
     void interceptorShouldAddAcceptHeaders() throws Exception {
         SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
-        ClientHttpRequest request = requestFactory.createRequest(new URI("https://ddragon.leagueoflegends.com/api/"), HttpMethod.GET);
+        ClientHttpRequest request = requestFactory.createRequest(URI.create("https://ddragon.leagueoflegends.com/api/"), HttpMethod.GET);
         byte[] body = new byte[] {};
 
         interceptor.intercept(request, body, execution);
