@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -61,14 +62,13 @@ public class ImagesRestController {
      * @return the {@link ResponseEntity} of byte array
      */
     private ResponseEntity<byte[]> createResponseEntity(Image image) {
-        if (image == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok()
-                .contentLength(image.getImgSrc().length)
-                .contentType(createMediaType(image))
-                .cacheControl(CacheControl.maxAge(365, TimeUnit.DAYS))
-                .body(image.getImgSrc());
+    	return Optional.ofNullable(image)
+				.map(img -> ResponseEntity.ok()
+						.contentLength(image.getImgSrc().length)
+						.contentType(createMediaType(image))
+						.cacheControl(CacheControl.maxAge(365, TimeUnit.DAYS))
+						.body(image.getImgSrc()))
+				.orElseGet(() -> ResponseEntity.notFound().build());
     }
 
 	/**
