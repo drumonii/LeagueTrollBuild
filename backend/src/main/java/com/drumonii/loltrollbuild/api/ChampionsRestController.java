@@ -65,7 +65,7 @@ public class ChampionsRestController {
 				.withIgnorePaths("id", "version")
 				.withIgnoreNullValues();
 		Example<Champion> example = Example.of(champion, exampleMatcher);
-		return championsApiService.qbe(new ExampleSpecification<>(example), sort);
+		return championsApiService.qbe(ExampleSpecification.of(example), sort);
 	}
 
 	/**

@@ -17,8 +17,12 @@ public class ExampleSpecification<T> implements Specification<T> {
 
 	private final Example<T> example;
 
-	public ExampleSpecification(Example<T> example) {
+	private ExampleSpecification(Example<T> example) {
 		this.example = example;
+	}
+
+	public static <T> ExampleSpecification<T> of(Example<T> example) {
+		return new ExampleSpecification<>(example);
 	}
 
 	@Override

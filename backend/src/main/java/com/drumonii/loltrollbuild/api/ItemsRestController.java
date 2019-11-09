@@ -49,7 +49,7 @@ public class ItemsRestController {
 				.withIgnorePaths("id", "version")
 				.withIgnoreNullValues();
 		Example<Item> example = Example.of(item, exampleMatcher);
-		return itemsApiService.qbe(new ExampleSpecification<>(example), sort);
+		return itemsApiService.qbe(ExampleSpecification.of(example), sort);
 	}
 
 	/**

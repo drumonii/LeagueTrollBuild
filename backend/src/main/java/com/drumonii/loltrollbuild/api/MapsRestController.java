@@ -48,7 +48,7 @@ public class MapsRestController {
 				.withIgnorePaths("mapId", "version")
 				.withIgnoreNullValues();
 		Example<GameMap> example = Example.of(gameMap, exampleMatcher);
-		return mapsApiService.qbe(new ExampleSpecification<>(example), sort);
+		return mapsApiService.qbe(ExampleSpecification.of(example), sort);
 	}
 
 	/**

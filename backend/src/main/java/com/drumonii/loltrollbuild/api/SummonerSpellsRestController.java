@@ -46,7 +46,7 @@ public class SummonerSpellsRestController {
 				.withIgnorePaths("id", "version")
 				.withIgnoreNullValues();
 		Example<SummonerSpell> example = Example.of(summonerSpell, exampleMatcher);
-		return summonerSpellsApiService.qbe(new ExampleSpecification<>(example), sort);
+		return summonerSpellsApiService.qbe(ExampleSpecification.of(example), sort);
 	}
 
 	/**
