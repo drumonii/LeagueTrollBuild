@@ -35,6 +35,15 @@ Otherwise you'll see `Error occurred while trying to proxy request` and most tes
 
 Run `ng e2e-all` to execute the end-to-end tests via http://www.protractortest.org/[Protractor].
 
+== Analyzing bundle stats
+
+NOTE: Bundle statistics are only available for the troll build project.
+
+Run `npm run build-with-stats` to build the project with statistics of the es2015 bundle.
+Then use the webpack-bundle-analyzer to analyze the stats json.
+
+  npx webpack-bundle-analyzer dist/troll-build/stats-es2015.json
+
 == Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the https://github.com/angular/angular-cli/blob/master/README.md[Angular CLI README].

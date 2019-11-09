@@ -10,7 +10,6 @@
     "build-admin": "ng build admin --prod",
     "build-all": "concurrently \"npm run build\" \"npm run build-admin\"",
     "build-with-stats": "ng build troll-build --prod --statsJson=true",
-    "analyze-stats": "webpack-bundle-analyzer dist/troll-build/stats-es2015.json",
     "test": "ng test troll-build --code-coverage",
     "test-admin": "ng test admin --code-coverage",
     "test-all": "concurrently \"npm run test\" \"npm run test-admin\"",
@@ -67,7 +66,6 @@
     "protractor": "~5.4.2",
     "ts-node": "~8.3.0",
     "tslint": "~5.8.0",
-    "typescript": "3.5.3",
-    "webpack-bundle-analyzer": "^3.4.1"
+    "typescript": "3.5.3"
   }
 }
