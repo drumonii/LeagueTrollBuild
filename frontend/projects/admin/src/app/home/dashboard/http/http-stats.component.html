@@ -1,0 +1,108 @@
+<div class="card" data-e2e="http-stats-card">
+  <div class="card-header">
+    HTTP Stats
+    <button [disabled]="gettingHttpStats" class="btn btn-link" (click)="getHttpStats()" data-e2e="refresh-http-stats-btn">
+      <clr-icon shape="refresh"></clr-icon>
+    </button>
+  </div>
+  <div class="card-block">
+    <ng-container *ngIf="(httpStats$ | async) as httpStats; else loadingHttpStats">
+      <ng-container *ngIf="httpStats.measurements && httpStats.exceptions && httpStats.uris && httpStats.statuses; else errorGettingHttpStats">
+        <div class="card-title">
+          Total Requests
+        </div>
+        <div class="card-text">
+          <p data-e2e="http-requests-count">
+            {{httpStats.measurements.count}}
+          </p>
+        </div>
+        <div class="card-title">
+          Max Time
+        </div>
+        <div class="card-text">
+          <p data-e2e="http-requests-max-seconds">
+            {{httpStats.measurements.max}} seconds
+          </p>
+        </div>
+        <div class="card-title">
+          Exceptions
+        </div>
+        <div class="card-text">
+          <ul class="list-unstyled" data-e2e="http-exceptions">
+            <li *ngFor="let exception of httpStats.exceptions">{{exception}}</li>
+          </ul>
+        </div>
+        <div class="card-title">
+          URIs
+        </div>
+        <div class="card-text">
+          <ul class="list-unstyled" data-e2e="http-uris">
+            <li *ngFor="let uri of httpStats.uris">{{uri}}</li>
+          </ul>
+        </div>
+        <div class="card-title">
+          HTTP Statuses
+        </div>
+        <div class="card-text">
+          <ul class="list-unstyled" data-e2e="http-statuses">
+            <li *ngFor="let status of httpStats.statuses">{{status}}</li>
+          </ul>
+          <ng-container *ngIf="httpStats.statuses.includes('500')">
+            <clr-alert [attr.data-e2e]="'http-statuses-has-500-alert'" [clrAlertType]="'danger'" [clrAlertClosable]="false">
+              <clr-alert-item>
+                <span class="alert-text">HTTP statuses contains an Internal Server Error code 500.</span>
+              </clr-alert-item>
+            </clr-alert>
+          </ng-container>
+        </div>
+      </ng-container>
+      <ng-template #errorGettingHttpStats>
+        <clr-alert [attr.data-e2e]="'error-http-stats-alert'" [clrAlertType]="'danger'" [clrAlertClosable]="false">
+          <clr-alert-item>
+            <span class="alert-text">Unable to get the HTTP statistics. Please try again.</span>
+            <div class="alert-actions">
+              <button class="btn btn-link" (click)="getHttpStats()" data-e2e="refresh-env-btn">
+                <clr-icon shape="refresh"></clr-icon>
+              </button>
+            </div>
+          </clr-alert-item>
+        </clr-alert>
+      </ng-template>
+    </ng-container>
+    <ng-template #loadingHttpStats>
+      <div class="progress top loop">
+        <progress></progress>
+      </div>
+      <div class="card-title">
+        Total Requests
+      </div>
+      <div class="card-text">
+        <p>...</p>
+      </div>
+      <div class="card-title">
+        Total Time
+      </div>
+      <div class="card-text">
+        <p>...</p>
+      </div>
+      <div class="card-title">
+        Exceptions
+      </div>
+      <div class="card-text">
+        <p>...</p>
+      </div>
+      <div class="card-title">
+        URIs
+      </div>
+      <div class="card-text">
+        <p>...</p>
+      </div>
+      <div class="card-title">
+        HTTP Statuses
+      </div>
+      <div class="card-text">
+        <p>...</p>
+      </div>
+    </ng-template>
+  </div>
+</div>

@@ -3,19 +3,19 @@ import { CommonModule } from '@angular/common';
 
 import { AdminHomeRoutingModule } from './admin-home-routing.module';
 import { AdminHomePage } from './admin-home.page';
-import { CpuUsageModule } from './dashboard/cpu-usage.module';
-import { FailedJobsModule } from './dashboard/failed-jobs.module';
-import { MemoryUsageModule } from './dashboard/memory-usage.module';
-import { GlobalErrorModule } from './dashboard/global-error.module';
+import { AppHealthModule } from './dashboard/app/app-health.module';
+import { EnvModule } from './dashboard/env/env.module';
+import { HttpStatsModule } from './dashboard/http/http-stats.module';
+import { ResourcesModule } from './dashboard/resources/resources.module';
 
 @NgModule({
   imports: [
     CommonModule,
     AdminHomeRoutingModule,
-    CpuUsageModule,
-    FailedJobsModule,
-    MemoryUsageModule,
-    GlobalErrorModule
+    AppHealthModule,
+    EnvModule,
+    HttpStatsModule,
+    ResourcesModule
   ],
   declarations: [
     AdminHomePage

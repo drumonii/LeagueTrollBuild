@@ -1,0 +1,22 @@
+.card {
+
+  .card-title {
+    &.centered {
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  .card-text {
+    p {
+      margin-top: 0.25rem;
+      &.emphasized {
+        font-size: 1.25em;
+      }
+    }
+    &.centered {
+      display: flex;
+      justify-content: center;
+    }
+  }
+}

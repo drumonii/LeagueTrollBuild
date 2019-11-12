@@ -6,10 +6,10 @@ import { By } from '@angular/platform-browser';
 import { AdminHomeModule } from './admin-home.module';
 import { AdminHomePage } from './admin-home.page';
 import { AdminTitleService } from '@admin-service/admin-title.service';
-import { CpuUsageComponent } from './dashboard/cpu-usage.component';
-import { FailedJobsComponent } from './dashboard/failed-jobs.component';
-import { MemoryUsageComponent } from './dashboard/memory-usage.component';
-import { GlobalErrorComponent } from './dashboard/global-error.component';
+import { AppHealthComponent } from './dashboard/app/app-health.component';
+import { EnvComponent } from './dashboard/env/env.component';
+import { ResourcesComponent } from './dashboard/resources/resources.component';
+import { HttpStatsComponent } from './dashboard/http/http-stats.component';
 
 describe('AdminHomePage', () => {
   let component: AdminHomePage;
@@ -36,10 +36,10 @@ describe('AdminHomePage', () => {
   }));
 
   it('should create', () => {
-    expect(fixture.debugElement.query(By.directive(CpuUsageComponent))).toBeTruthy();
-    expect(fixture.debugElement.query(By.directive(FailedJobsComponent))).toBeTruthy();
-    expect(fixture.debugElement.query(By.directive(MemoryUsageComponent))).toBeTruthy();
-    expect(fixture.debugElement.query(By.directive(GlobalErrorComponent))).toBeTruthy();
+    expect(fixture.debugElement.query(By.directive(AppHealthComponent))).toBeTruthy();
+    expect(fixture.debugElement.query(By.directive(EnvComponent))).toBeTruthy();
+    expect(fixture.debugElement.query(By.directive(ResourcesComponent))).toBeTruthy();
+    expect(fixture.debugElement.query(By.directive(HttpStatsComponent))).toBeTruthy();
   });
 
 });

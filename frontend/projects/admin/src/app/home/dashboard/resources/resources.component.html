@@ -1,0 +1,89 @@
+<div class="card" data-e2e="resources-card">
+  <div class="card-header">
+    System Resources Consumption
+    <button [disabled]="gettingResourceConsumption" class="btn btn-link" (click)="getResourceConsumption()" data-e2e="refresh-resources-btn">
+      <clr-icon shape="refresh"></clr-icon>
+    </button>
+  </div>
+  <div class="card-block">
+    <ng-container *ngIf="(resourceConsumption$ | async) as resourceConsumption; else loadingResourceConsumption">
+      <ng-container *ngIf="resourceConsumption.cpuUsage && resourceConsumption.memoryUsage && resourceConsumption.diskUsage; else errorGettingResources">
+        <div class="clr-row">
+          <div class="clr-col-xl-4">
+            <div class="card-title centered">
+              CPU Usage
+            </div>
+            <div class="card-text centered">
+              <p class="emphasized" data-e2e="cpu-usage">
+                {{resourceConsumption.cpuUsage.percentage | percentage}} of {{resourceConsumption.cpuUsage.cpus}} CPUs
+              </p>
+            </div>
+          </div>
+          <div class="clr-col-xl-4">
+            <div class="card-title centered">
+              Memory Usage
+            </div>
+            <div class="card-text centered">
+              <p class="emphasized" data-e2e="memory-usage">
+                {{resourceConsumption.memoryUsage.used | dataSize: 'mb'}} MB of {{resourceConsumption.memoryUsage.max | dataSize: 'mb'}} MB
+              </p>
+            </div>
+          </div>
+          <div class="clr-col-xl-4">
+            <div class="card-title centered">
+              Disk Usage
+            </div>
+            <div class="card-text centered">
+              <p class="emphasized" data-e2e="disk-usage">
+                {{resourceConsumption.diskUsage.used | dataSize: 'gb'}} GB of {{resourceConsumption.diskUsage.max | dataSize: 'gb'}} GB
+              </p>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <ng-template #errorGettingResources>
+        <clr-alert [attr.data-e2e]="'error-resources-alert'" [clrAlertType]="'danger'" [clrAlertClosable]="false">
+          <clr-alert-item>
+            <span class="alert-text">Unable to get the system resources consumption. Please try again.</span>
+            <div class="alert-actions">
+              <button class="btn btn-link" (click)="getResourceConsumption()" data-e2e="refresh-env-btn">
+                <clr-icon shape="refresh"></clr-icon>
+              </button>
+            </div>
+          </clr-alert-item>
+        </clr-alert>
+      </ng-template>
+    </ng-container>
+    <ng-template #loadingResourceConsumption>
+      <div class="progress top loop">
+        <progress></progress>
+      </div>
+      <div class="clr-row">
+        <div class="clr-col-xl-4">
+          <div class="card-title centered">
+            CPU Usage
+          </div>
+          <div class="card-text centered">
+            <p>...</p>
+          </div>
+        </div>
+        <div class="clr-col-xl-4">
+          <div class="card-title centered">
+            Mem Usage
+          </div>
+          <div class="card-text centered">
+            <p>...</p>
+          </div>
+        </div>
+        <div class="clr-col-xl-4">
+          <div class="card-title centered">
+            Disk Usage
+          </div>
+          <div class="card-text centered">
+            <p>...</p>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</div>

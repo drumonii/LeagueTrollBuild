@@ -8,36 +8,36 @@ export class AdminHomePage extends BaseAdminPage {
     await browser.get('/admin');
   }
 
-  getFailedJobsComponent(): ElementFinder {
-    return element(by.css('[data-e2e="failed-jobs-card"]'));
+  getAppHealthComponent(): ElementFinder {
+    return element(by.css('[data-e2e="app-health-card"]'));
   }
 
-  getFailedToLoadFailedJobsAlert(): ElementFinder {
-    return element(by.css('[data-e2e="no-failed-jobs-alert"]'));
+  getAppHealthErrorAlert(): ElementFinder {
+    return element(by.css('[data-e2e="error-app-health-alert"]'));
   }
 
-  getCpuUsageComponent(): ElementFinder {
-    return element(by.css('[data-e2e="cpu-usage-card"]'));
+  getEnvComponent(): ElementFinder {
+    return element(by.css('[data-e2e="env-card"]'));
   }
 
-  getFailedToLoadCpuUsageAlert(): ElementFinder {
-    return element(by.css('[data-e2e="no-cpu-usage-alert"]'));
+  getEnvErrorAlert(): ElementFinder {
+    return element(by.css('[data-e2e="error-env-alert"]'));
   }
 
-  getMemoryUsageComponent(): ElementFinder {
-    return element(by.css('[data-e2e="memory-usage-card"]'));
+  getResourcesComponent(): ElementFinder {
+    return element(by.css('[data-e2e="resources-card"]'));
   }
 
-  getFailedToLoadMemoryUsageAlert(): ElementFinder {
-    return element(by.css('[data-e2e="no-memory-usage-alert"]'));
+  getResourcesErrorAlert(): ElementFinder {
+    return element(by.css('[data-e2e="error-resources-alert"]'));
   }
 
-  getGlobalErrorsComponent(): ElementFinder {
-    return element(by.css('[data-e2e="global-errors-card"]'));
+  getHttpStatsComponent(): ElementFinder {
+    return element(by.css('[data-e2e="http-stats-card"]'));
   }
 
-  getFailedToLoadGlobalErrorsAlert(): ElementFinder {
-    return element(by.css('[data-e2e="no-global-errors-alert"]'));
+  getHttpStatsErrorAlert(): ElementFinder {
+    return element(by.css('[data-e2e="error-http-stats-alert"]'));
   }
 
 }

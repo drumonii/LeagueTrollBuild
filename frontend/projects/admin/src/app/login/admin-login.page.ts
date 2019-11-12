@@ -2,8 +2,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
-import { ClrLoadingState } from '@clr/angular';
-
 import { of, Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 

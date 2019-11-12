@@ -72,7 +72,7 @@ management:
     web:
       base-path: /api/admin/actuator
       exposure:
-        include: flyway, metrics
+        include: env, flyway, health, metrics, scheduledtasks
 # Server
 server:
   error:

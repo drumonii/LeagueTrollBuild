@@ -29,28 +29,36 @@ describe('admin home page', () => {
     });
 
     it('should show home components', async (done) => {
-      Promise.all([expectFailedJobsComponent, expectCpuUsageComponent, expectMemoryUsageComponent, expectGlobalErrorsComponent])
+      Promise.all([expectAppHealthComponent, expectEnvironmentComponent, expectSystemResourcesComponent, expectHttpStatsComponent])
         .then(() => done());
     });
 
-    async function expectFailedJobsComponent() {
-      expect(await page.getFailedJobsComponent().isPresent()).toBe(true, 'FailedJobsComponent to be present');
-      expect(await page.getFailedToLoadFailedJobsAlert().isPresent()).toBe(false, 'FailedToLoadFailedJobsAlert to not be present');
+    async function expectAppHealthComponent() {
+      expect(await page.getAppHealthComponent().isPresent())
+        .toBe(true, 'App health card to be present');
+      expect(await page.getAppHealthErrorAlert().isPresent())
+        .toBe(false, 'Failed to load app health error alert to not be present');
     }
 
-    async function expectCpuUsageComponent() {
-      expect(await page.getCpuUsageComponent().isPresent()).toBe(true, 'CpuUsageComponent to be present');
-      expect(await page.getFailedToLoadCpuUsageAlert().isPresent()).toBe(false, 'FailedToLoadCpuUsageAlert to not be present');
+    async function expectEnvironmentComponent() {
+      expect(await page.getEnvComponent().isPresent())
+        .toBe(true, 'Env card to be present');
+      expect(await page.getEnvErrorAlert().isPresent())
+        .toBe(false, 'Failed to load env error alert to not be present');
     }
 
-    async function expectMemoryUsageComponent() {
-      expect(await page.getMemoryUsageComponent().isPresent()).toBe(true, 'MemoryUsageComponent to be present');
-      expect(await page.getFailedToLoadMemoryUsageAlert().isPresent()).toBe(false, 'FailedToLoadMemoryUsageAlert to not be present');
+    async function expectSystemResourcesComponent() {
+      expect(await page.getResourcesComponent().isPresent())
+        .toBe(true, 'Resources card to be present');
+      expect(await page.getResourcesErrorAlert().isPresent())
+        .toBe(false, 'Failed to load resources error alert to not be present');
     }
 
-    async function expectGlobalErrorsComponent() {
-      expect(await page.getGlobalErrorsComponent().isPresent()).toBe(true, 'GlobalErrorsComponent to be present');
-      expect(await page.getFailedToLoadGlobalErrorsAlert().isPresent()).toBe(false, 'FailedToLoadGlobalErrorsAlert to not be present');
+    async function expectHttpStatsComponent() {
+      expect(await page.getHttpStatsComponent().isPresent())
+        .toBe(true, 'Http stats card to be present');
+      expect(await page.getHttpStatsErrorAlert().isPresent())
+        .toBe(false, 'Failed to load http stats error alert to not be present');
     }
 
   });

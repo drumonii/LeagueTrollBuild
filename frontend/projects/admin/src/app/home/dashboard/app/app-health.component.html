@@ -1,0 +1,84 @@
+<div class="card" data-e2e="app-health-card">
+  <div class="card-header">
+    Application Health
+    <button [disabled]="gettingAppHealth" class="btn btn-link" (click)="getAppHealth()" data-e2e="refresh-app-health-btn">
+      <clr-icon shape="refresh"></clr-icon>
+    </button>
+  </div>
+  <div class="card-block">
+    <ng-container *ngIf="(appHealth$ | async) as appHealth; else loadingAppHealth">
+      <ng-container *ngIf="appHealth.failedJobs && appHealth.nextScheduledAllRetrievalsJob && appHealth.uptime; else failedToGetAppHealth">
+        <div class="card-title">
+          Failed Jobs
+        </div>
+        <div class="card-text">
+          <ng-container *ngIf="appHealth.failedJobs.count > 0; else noFailedJobs">
+            <clr-alert [attr.data-e2e]="'failed-jobs-alert'" [clrAlertType]="'danger'" [clrAlertClosable]="false">
+              <clr-alert-item>
+                <span class="alert-text">The All Retrievals Job has recently failed. Check the logs for more information.</span>
+              </clr-alert-item>
+            </clr-alert>
+            <p data-e2e="failed-jobs-count">
+              {{appHealth.failedJobs.count}}
+            </p>
+          </ng-container>
+          <ng-template #noFailedJobs>
+            <p data-e2e="failed-jobs-count">
+              {{appHealth.failedJobs.count}}
+            </p>
+          </ng-template>
+        </div>
+        <div class="card-title">
+          Next Scheduled All Retrievals Job Run
+        </div>
+        <div class="card-text">
+          <p data-e2e="next-scheduled-all-retrievals-job">
+            {{appHealth.nextScheduledAllRetrievalsJob | nextScheduledFromNow}}
+          </p>
+        </div>
+        <div class="card-title">
+          Up time
+        </div>
+        <div class="card-text">
+          <p data-e2e="uptime-total">{{appHealth.uptime.total}}</p>
+        </div>
+      </ng-container>
+      <ng-template #failedToGetAppHealth>
+        <clr-alert [attr.data-e2e]="'error-app-health-alert'" [clrAlertType]="'danger'" [clrAlertClosable]="false">
+          <clr-alert-item>
+            <span class="alert-text">Unable to get the application health. Please try again.</span>
+          </clr-alert-item>
+        </clr-alert>
+      </ng-template>
+    </ng-container>
+    <ng-template #loadingAppHealth>
+      <div class="progress top loop">
+        <progress></progress>
+      </div>
+      <div class="card-title">
+        Failed Jobs
+      </div>
+      <div class="card-text">
+        <p>
+          ...
+        </p>
+      </div>
+      <div class="card-title">
+        Next Scheduled All Retrievals Job Run
+      </div>
+      <div class="card-text">
+        <p>
+          ...
+        </p>
+      </div>
+      <div class="card-title">
+        Up time
+      </div>
+      <div class="card-text">
+        <p>
+          ...
+        </p>
+      </div>
+    </ng-template>
+  </div>
+</div>
