@@ -16,7 +16,7 @@ export class AdminErrorHttpInterceptor implements HttpInterceptor {
     return next.handle(req)
       .pipe(
         catchError((error: HttpErrorResponse) => {
-          if (this.errorCodes.indexOf(error.status) !== -1) {
+          if (this.errorCodes.includes(error.status)) {
             this.router.navigate(['/admin/login']);
             return EMPTY;
           }
