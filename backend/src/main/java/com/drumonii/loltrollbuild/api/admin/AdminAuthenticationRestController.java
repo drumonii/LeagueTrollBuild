@@ -25,9 +25,9 @@ public class AdminAuthenticationRestController {
      */
     @GetMapping("/authentication")
     public AdminUserDetails getAuthentication(@AuthenticationPrincipal User userDetails) {
-        User user = Optional.ofNullable(userDetails)
+        return Optional.ofNullable(userDetails)
+                .map(AdminUserDetails::from)
                 .orElseThrow(() -> new BadRequestException("Authentication was not found"));
-        return AdminUserDetails.from(user);
     }
 
 }
