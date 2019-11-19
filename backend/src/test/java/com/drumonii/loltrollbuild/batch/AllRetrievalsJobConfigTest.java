@@ -24,7 +24,7 @@ import static com.drumonii.loltrollbuild.batch.scheduling.RetrievalJobsSchedulin
 import static com.drumonii.loltrollbuild.config.Profiles.DDRAGON;
 import static com.drumonii.loltrollbuild.config.Profiles.TESTING;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.fail;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
 
@@ -80,12 +80,8 @@ class AllRetrievalsJobConfigTest {
 
 		JobParameters jobParameters = getJobParameters();
 
-		try {
-			jobLauncherTestUtils.launchJob(jobParameters);
-			fail("Expected JobParametersInvalidException to be thrown");
-		} catch (Exception e) {
-			assertThat(e).isInstanceOf(JobParametersInvalidException.class);
-		}
+		assertThatExceptionOfType(JobParametersInvalidException.class)
+				.isThrownBy(() -> jobLauncherTestUtils.launchJob(jobParameters));
 	}
 
 	private JobParameters getJobParameters() {
