@@ -5,7 +5,6 @@ import com.drumonii.loltrollbuild.riot.api.RiotApiProperties.Ddragon;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
@@ -27,7 +26,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import static com.drumonii.loltrollbuild.config.Profiles.DDRAGON;
 import static com.drumonii.loltrollbuild.config.Profiles.TESTING;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.fail;
+import static org.assertj.core.api.Assertions.assertThatCode;
 
 @ExtendWith({SpringExtension.class})
 @Import(RiotApiConfig.class)
@@ -61,15 +60,13 @@ class RiotApiPropertiesDdragonConfigTest {
 
 	@Test
 	void restTemplate() {
-		try {
+		assertThatCode(() -> {
 			RestTemplate restTemplate = applicationContext.getBean("restTemplate", RestTemplate.class);
 			assertThat(restTemplate.getInterceptors()).hasSize(1);
 			assertThat(restTemplate.getMessageConverters()).flatExtracting(HttpMessageConverter::getSupportedMediaTypes)
 					.contains(MediaType.APPLICATION_JSON, MediaType.APPLICATION_OCTET_STREAM,
 							MediaType.parseMediaType("binary/octet-stream"), MediaType.parseMediaType("text/json;charset=UTF-8"));
-		} catch (BeansException e) {
-			fail("Caught BeansException", e);
-		}
+		}).doesNotThrowAnyException();
 	}
 
 	/*
