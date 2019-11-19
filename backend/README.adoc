@@ -31,6 +31,13 @@ and `ddragon` profiles will be active.
 == Running the Backend locally
 Create a run config that uses the `LeagueTrollBuildApplication` main class
 
+Optionally, pull the PostreSQL version 11.5 Docker image, and run a PostreSQL container from the image to use as the app database:
+
+  docker pull postgres:11.5
+  docker run --name league-troll-build-pg -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=loltrollbuild -e POSTGRES_USER=postgres -d postgres:11.5
+
+Add then `LTB_DB_USERNAME=postgres`, `LTB_DB_PASSWORD=postgres`, `LTB_DB_URL=jdbc:postgresql://localhost/loltrollbuild` environment variables for the run config.
+
 Once the backend starts, view http://localhost:8080/api[localhost:8080/api] on your browser.
 
 === All Retrievals from Riot
@@ -39,6 +46,11 @@ Maps, Champions, Summoner Spells) from Riot's https://developer.riotgames.com/st
 order to perform a troll build of a Champion.
 
   -Dspring.batch.job.enabled=true -Dspring.batch.job.names=allRetrievalsJob
+
+Or using environment variables:
+
+  SPRING_BATCH_JOB_ENABLED=true
+  SPRING_BATCH_JOB_NAMES=allRetrievalsJob
 
 If the database is new, it's recommended to run the `allRetrievalsJob`. But if data already exists in the database, a new
 patch is out, and the retrievals job is run, then new data will be saved and absent data will be deleted.
