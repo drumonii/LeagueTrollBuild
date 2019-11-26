@@ -14,6 +14,22 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class AdminActuatorEndpointsRestControllerTest extends AbstractRestControllerTests {
 
     @Nested
+    @DisplayName("/scheduledtasks")
+    class ScheduledTasks {
+
+        @WithMockAdminUser
+        @Test
+        void scheduledTasksEndpoint() throws Exception {
+            mockMvc.perform(get("{apiPath}/admin/actuator/scheduledtasks", apiPath))
+                    .andExpect(status().isOk())
+                    .andExpect(jsonPath("$.cron.length()", is(1)))
+                    .andExpect(jsonPath("$.cron[0].runnable.target").exists())
+                    .andExpect(jsonPath("$.cron[0].expression").exists());
+        }
+
+    }
+
+    @Nested
     @DisplayName("/env")
     class Env {
 
@@ -23,8 +39,11 @@ class AdminActuatorEndpointsRestControllerTest extends AbstractRestControllerTes
             mockMvc.perform(get("{apiPath}/admin/actuator/env", apiPath))
                     .andExpect(status().isOk())
                     .andExpect(jsonPath("$.propertySources[?(@.name == 'systemProperties')].properties").exists())
-                    .andExpect(jsonPath("$.propertySources[?(@.name == 'systemProperties')].properties['java.vm.name'].value").exists())
-                    .andExpect(jsonPath("$.propertySources[?(@.name == 'systemProperties')].properties['java.version'].value").exists());
+                    .andExpect(jsonPath("$.propertySources[?(@.name == 'systemProperties')].properties['java.runtime.name'].value").exists())
+                    .andExpect(jsonPath("$.propertySources[?(@.name == 'systemProperties')].properties['java.version'].value").exists())
+                    .andExpect(jsonPath("$.propertySources[?(@.name == 'systemProperties')].properties['os.name'].value").exists())
+                    .andExpect(jsonPath("$.propertySources[?(@.name == 'systemProperties')].properties['os.arch'].value").exists())
+                    .andExpect(jsonPath("$.propertySources[?(@.name == 'systemProperties')].properties['user.timezone'].value").exists());
         }
 
     }
@@ -101,6 +120,34 @@ class AdminActuatorEndpointsRestControllerTest extends AbstractRestControllerTes
                     .andExpect(jsonPath("$.measurements.length()", is(1)))
                     .andExpect(jsonPath("$.measurements[0].statistic", is("VALUE")))
                     .andExpect(jsonPath("$.measurements[0].value").isNumber());
+        }
+
+        @WithMockAdminUser
+        @Test
+        void processUptimeEndpoint() throws Exception {
+            mockMvc.perform(get("{apiPath}/admin/actuator/metrics/process.uptime", apiPath))
+                    .andExpect(status().isOk())
+                    .andExpect(jsonPath("$.measurements.length()", is(1)))
+                    .andExpect(jsonPath("$.measurements[0].statistic", is("VALUE")))
+                    .andExpect(jsonPath("$.measurements[0].value").isNumber());
+        }
+
+        @WithMockAdminUser
+        @Test
+        void httpServerRequestsEndpoint() throws Exception {
+            mockMvc.perform(get("{apiPath}/admin/actuator/metrics/http.server.requests", apiPath))
+                    .andExpect(status().isOk())
+                    .andExpect(jsonPath("$.measurements.length()", is(3)))
+                    .andExpect(jsonPath("$.measurements[0].statistic", is("COUNT")))
+                    .andExpect(jsonPath("$.measurements[0].value").isNumber())
+                    .andExpect(jsonPath("$.measurements[1].statistic", is("TOTAL_TIME")))
+                    .andExpect(jsonPath("$.measurements[1].value").isNumber())
+                    .andExpect(jsonPath("$.measurements[2].statistic", is("MAX")))
+                    .andExpect(jsonPath("$.measurements[2].value").isNumber())
+                    .andExpect(jsonPath("$.availableTags").isArray())
+                    .andExpect(jsonPath("$.availableTags[?(@.tag == 'exception')].values").isArray())
+                    .andExpect(jsonPath("$.availableTags[?(@.tag == 'uri')].values").isArray())
+                    .andExpect(jsonPath("$.availableTags[?(@.tag == 'status')].values").isArray());
         }
 
     }
