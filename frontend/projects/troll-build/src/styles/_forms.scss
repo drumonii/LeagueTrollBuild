@@ -1,8 +1,8 @@
 @import 'theme';
 
 $input-placeholder-color: #cdcdcd;
-$input-background-color: #373737;
-$input-border-color: #0f0f0f;
+$input-background-color: #2a2a2a;
+$input-border-color: #c79a3c;
 
 $select-background-color: $input-background-color;
 $select-border-color: $input-border-color;
@@ -10,8 +10,8 @@ $select-border-color: $input-border-color;
 @mixin ltb-forms() {
   .ltb-input {
     border-radius: 4px;
-    border: 1px solid $input-border-color;
-    background-color: $input-background-color;
+    border: 1px solid $input-border-color !important;
+    background-color: $input-background-color !important;
     font-weight: normal !important;
 
     &::placeholder {
@@ -60,7 +60,7 @@ $select-border-color: $input-border-color;
   .ltb-select {
     > button, > nb-spinner  {
       background-color: $select-background-color !important;
-      border: 1px solid $input-border-color !important;
+      border: 1px solid $select-border-color !important;
       font-weight: normal !important;
 
       &:focus {
