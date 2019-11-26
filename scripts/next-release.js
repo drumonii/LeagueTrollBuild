@@ -6,13 +6,13 @@ const path = require('path');
 
 const config = {
   packageJson: {
-    file: path.join(__dirname, 'frontend/package.json')
+    file: path.join(__dirname, '../frontend/package.json')
   },
   packageJsonLock: {
-    file: path.join(__dirname, 'frontend/package-lock.json')
+    file: path.join(__dirname, '../frontend/package-lock.json')
   },
   gradleProperties: {
-    file: path.join(__dirname, 'backend/gradle.properties')
+    file: path.join(__dirname, '../backend/gradle.properties')
   }
 };
 

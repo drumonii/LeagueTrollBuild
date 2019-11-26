@@ -1,5 +1,6 @@
 const fs = require('fs');
 const http = require('http');
+const path = require('path');
 
 /**
  * Gets the `champion.json` file for the given version.
@@ -75,8 +76,9 @@ function getSummonerSpells(latestVersion) {
  */
 function writeFile(fileName, rawData) {
   const jsonFileName = `${fileName}.json`;
-  console.log(`writing ${jsonFileName}...`);
-  fs.writeFile(`./src/test/resources/${jsonFileName}`, rawData, (err) => {
+  const resolvedJsonFilePath = path.resolve(__dirname, `../src/test/resources/${jsonFileName}`);
+  console.log(`writing ${jsonFileName} to ${resolvedJsonFilePath}...`);
+  fs.writeFile(resolvedJsonFilePath, rawData, (err) => {
     if (err) {
       console.error(err.message);
     }

@@ -65,8 +65,8 @@ To generate the API Documentation locally, run the `asciidoctor` Gradle task:
 Then navigate to `/build/asciidoc/html5/api-guide.html` to view the generated API guide.
 
 == Test Data
-Run the `get-json-test-data.js` using node to get the latest static data from Riot for the integration tests to use.
+Run the `get-json-test-data.js` in the `scripts` folder using node.js to get the latest static data from Riot for the integration tests to use.
 
-  node get-json-test-data.js
+  node scripts/get-json-test-data.js
 
 This will overwrite existing `json` files in the `src/test/resources` folder. Format them using the IDE or an online service.
