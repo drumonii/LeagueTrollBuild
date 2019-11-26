@@ -22,6 +22,7 @@
 @import 'message';
 @import 'ribbon';
 @import 'tags';
+@import 'title';
 @import 'tooltip';
 
 // install the framework styles and custom global styles
@@ -42,5 +43,6 @@
   @include ltb-message();
   @include ltb-ribbon();
   @include ltb-tags();
+  @include ltb-title();
   @include ltb-tooltip;
 }

@@ -1159,7 +1159,7 @@ describe('ChampionPage', () => {
 
   function expectItemsRow(trollBuild?: TrollBuild) {
     const trollBuildItemsRow = fixture.debugElement.query(By.css('[data-e2e="items-row"]'));
-    const trollBuildItemsHeader = trollBuildItemsRow.query(By.css('.troll-build-objects-header'));
+    const trollBuildItemsHeader = trollBuildItemsRow.query(By.css('.ltb-title'));
     expect(trollBuildItemsHeader.nativeElement.textContent).toBe('Items');
 
     const trollBuildItems = trollBuildItemsRow.queryAll(By.css('.ltb-list > .ltb-list-item'));
@@ -1188,7 +1188,7 @@ describe('ChampionPage', () => {
 
   function expectSummonerSpellsRow(trollBuild?: TrollBuild) {
     const trollBuildSummonerSpellsRow = fixture.debugElement.query(By.css('[data-e2e="summoner-spells-row"]'));
-    const trollBuildSummonerSpellsHeader = trollBuildSummonerSpellsRow.query(By.css('.troll-build-objects-header'));
+    const trollBuildSummonerSpellsHeader = trollBuildSummonerSpellsRow.query(By.css('.ltb-title'));
     expect(trollBuildSummonerSpellsHeader.nativeElement.textContent).toBe('Summoner Spells');
 
     const trollBuildSummonerSpells = trollBuildSummonerSpellsRow.queryAll(By.css('.ltb-list > .ltb-list-item'));
@@ -1217,7 +1217,7 @@ describe('ChampionPage', () => {
 
   function expectTrinketRow(trollBuild?: TrollBuild) {
     const trollBuildTrinketRow = fixture.debugElement.query(By.css('[data-e2e="trinket-row"]'));
-    const trollBuildTrinketHeader = trollBuildTrinketRow.query(By.css('.troll-build-objects-header'));
+    const trollBuildTrinketHeader = trollBuildTrinketRow.query(By.css('.ltb-title'));
     expect(trollBuildTrinketHeader.nativeElement.textContent).toBe('Trinket');
 
     const trollBuildTrinkets = trollBuildTrinketRow.queryAll(By.css('.ltb-list > .ltb-list-item'));
