@@ -1,5 +1,5 @@
 <ng-container *ngIf="champion">
-  <div class="ltb-faux-grid centered-desktop">
+  <div class="ltb-faux-grid centered">
     <!-- champion info row -->
     <div class="ltb-column">
       <div class="ltb-faux-grid">
@@ -47,7 +47,7 @@
     </div>
   </div>
   <!-- troll build row -->
-  <div class="ltb-faux-grid centered-desktop">
+  <div class="ltb-faux-grid centered">
     <div class="ltb-column">
       <ng-container *ngIf="(trollBuild$ | async) as trollBuild; else loadingTrollBuild">
         <ng-container *ngIf="trollBuild.items && trollBuild.summonerSpells && trollBuild.trinket; else noTrollBuild">

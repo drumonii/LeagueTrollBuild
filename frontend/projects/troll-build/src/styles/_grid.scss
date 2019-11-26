@@ -28,6 +28,10 @@
     flex-wrap: wrap;
     margin-bottom: 0.75em;
 
+    &.centered {
+      justify-content: center;
+    }
+
     .spaced-apart {
       justify-content: space-between;
     }
@@ -40,14 +44,6 @@
 
     .ltb-block-column {
       flex: none;
-    }
-  }
-
-  @include media-breakpoint-up(sm) {
-    .ltb-faux-grid {
-      &.centered-desktop {
-        justify-content: center;
-      }
     }
   }
 }

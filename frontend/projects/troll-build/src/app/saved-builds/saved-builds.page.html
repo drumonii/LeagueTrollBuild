@@ -1,6 +1,6 @@
 <ng-container *ngIf="buildType" [ngSwitch]="buildType">
   <ng-container *ngSwitchCase="'Ok'">
-    <div class="ltb-faux-grid centered-desktop">
+    <div class="ltb-faux-grid centered">
       <!-- champion info row -->
       <div class="ltb-column">
         <div class="ltb-faux-grid">
@@ -39,7 +39,7 @@
       </div>
     </div>
     <!-- troll build row -->
-    <div class="ltb-faux-grid centered-desktop">
+    <div class="ltb-faux-grid centered">
       <div class="ltb-column">
         <ltb-saved-troll-build [build]="build"></ltb-saved-troll-build>
       </div>
