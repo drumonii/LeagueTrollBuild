@@ -102,7 +102,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	/**
 	 * In memory authentication configuration for {@link Dev} and {@link Testing} profiles.
 	 */
-	@Configuration
+	@Configuration(proxyBeanMethods = false)
 	@Dev @Testing
 	public static class WebDevTestingSecurityConfig {
 
@@ -129,7 +129,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	/**
 	 * JDBC authentication configuration for {@link Embedded} and {@link External} profiles.
 	 */
-	@Configuration
+	@Configuration(proxyBeanMethods = false)
 	@Embedded @External
 	public static class WebEmbeddedExternalSecurityConfig {
 
