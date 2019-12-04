@@ -417,7 +417,7 @@ class ApiDocumentation {
 		itemsRepository.save(itemsResponse.getItems().get("3742")); // Dead Man's Plate
 		itemsRepository.save(itemsResponse.getItems().get("3074")); // Ravenous Hydra
 		itemsRepository.save(itemsResponse.getItems().get("3116")); // Rylai's Crystal Scepter
-		itemsRepository.save(itemsResponse.getItems().get("3401")); // Face of the Mountain
+		itemsRepository.save(itemsResponse.getItems().get("3046")); // Phantom Dancer
 
 		mockMvc.perform(get("{apiPath}/champions/{id}/troll-build", apiPath, jayce.getId()))
 				.andExpect(status().isOk())
