@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.22.1",
+  "version": "9.23.1",
   "data": {
     "Zoe": {
       "id": "Zoe",
@@ -93,16 +93,16 @@
           "id": "ZoeQ",
           "name": "Paddle Star!",
           "description": "Zoe fires a missile that she can redirect in flight. Deals more damage the longer it flies in a straight line.",
-          "tooltip": "Fire a missile that deals increasing damage the further it travels -- <span class=\"colorFFFFFF\">{{ f1 }}</span> <span class=\"color99FF99\">(+{{ a1 }})</span> to <span class=\"colorFFFFFF\">{{ f2 }}</span> <span class=\"color99FF99\">(+{{ a2 }})</span> magic damage. Enemies near the first target hit take {{ e4 }}% damage.<span class=\"size5\"><br /><br /><br /></span>Recast to redirect the missile to a new position near Zoe.<br /><br /><rules>Paddle Star! deals damage based on a combination of Paddle Star's rank and Zoe's level. </rules>",
+          "tooltip": "Fire a missile that deals increasing damage the further it travels -- <scaleLevel>{{ f1 }}</scaleLevel> <scaleAP>(+{{ a1 }})</scaleAP> to <scaleLevel>{{ f2 }}</scaleLevel> <scaleAP>(+{{ a2 }})</scaleAP> magic damage. Enemies near the first target hit take {{ e4 }}% damage.<span class=\"size5\"><br /><br /><br /></span>Recast to redirect the missile to a new position near Zoe.<br /><br /><rules>Paddle Star! deals damage based on a combination of Paddle Star's rank and Zoe's level. </rules>",
           "leveltip": {
             "label": [
-              "Damage",
+              "Base Damage",
               "Cooldown",
-              "Mana Cost"
+              "@AbilityResourceName@ Cost"
             ],
             "effect": [
-              "{{ f1 }} -> {{ f3 }}",
-              "{{ cooldown }}s -> {{ cooldownNL }}s",
+              "{{ e1 }} -> {{ e1NL }}",
+              "{{ cooldown }} -> {{ cooldownNL }}",
               "{{ cost }} -> {{ costNL }}"
             ]
           },
@@ -222,7 +222,7 @@
               "key": "a2"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             800,
@@ -241,13 +241,13 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "ZoeW",
           "name": "Spell Thief",
           "description": "Zoe can pick up the remnants of enemy summoner spell and active item casts and cast them once herself. Whenever she casts a summoner spell, she gains 3 missiles that fire at the nearest target.",
-          "tooltip": "Enemy Summoner Spell and Active Item casts drop spell shards lasting 40 seconds. Some minions also drop a spell shard when Zoe kills them.<br /><br /><span class=\"colorFF9900\">Active: </span>Collecting a spell shard grants one cast of that spell.<br />                 ____________________________________________ <span class=\"size8\"><br /><br /></span><span class=\"colorFF9900\">Passive: </span>When Zoe casts a Summoner Spell or Spell Thief, she gains {{ e9 }}% movement speed for {{ e0 }} seconds and tosses up to 3 missiles at her attack target, dealing {{ e8 }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage total. Each missile can apply More Sparkles!<br /><br /><rules>Movement speed bonus and missile damage improve with spell rank.</rules>",
+          "tooltip": "Enemy Summoner Spell and Active Item casts drop spell shards lasting 40 seconds. Some minions also drop a spell shard when Zoe kills them.<br /><br /><spellPassive>Active: </spellPassive>Collecting a spell shard grants one cast of that spell.<br />                 ____________________________________________ <span class=\"size8\"><br /><br /></span><spellPassive>Passive: </spellPassive>When Zoe casts a Summoner Spell or Spell Thief, she gains {{ e9 }}% movement speed for {{ e0 }} seconds and tosses up to 3 missiles at her attack target, dealing {{ e8 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage total. Each missile can apply More Sparkles!<br /><br /><rules>Movement speed bonus and missile damage improve with spell rank.</rules>",
           "leveltip": {
             "label": [
               "Damage",
@@ -256,7 +256,7 @@
             ],
             "effect": [
               "{{ e8 }} -> {{ e8NL }}",
-              "{{ e9 }}% -> {{ e9NL }}%",
+              "{{ effect9amount*100.000000 }}% -> {{ effect9amountnl*100.000000 }}%",
               "{{ e0 }} -> {{ e0NL }}"
             ]
           },
@@ -371,7 +371,7 @@
               "key": "a1"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             3000,
@@ -390,13 +390,13 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "ZoeE",
           "name": "Sleepy Trouble Bubble",
           "description": "Causes the target to become drowsy, then fall asleep. The first source of damage that breaks the sleep is doubled, up to a cap.",
-          "tooltip": "Dropkick a bubble that deals {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage, lingering as a trap if it hits nothing. The bubble's range is extended when flying over a wall.<br /><br />After a delay, the victim falls asleep for 2 seconds. Attacks and spell hits break sleep but deal double damage, up to {{ e6 }} <span class=\"color99FF99\">(+{{ a2 }})</span> bonus true damage.",
+          "tooltip": "Dropkick a bubble that deals {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage, lingering as a trap if it hits nothing. The bubble's range is extended when flying over a wall.<br /><br />After a delay, the victim falls asleep for 2 seconds. Attacks and spell hits break sleep but deal double damage, up to {{ e6 }} <scaleAP>(+{{ a2 }})</scaleAP> bonus true damage.",
           "leveltip": {
             "label": [
               "Damage",
@@ -406,7 +406,7 @@
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
               "{{ e6 }} -> {{ e6NL }}",
-              "{{ cooldown }}s -> {{ cooldownNL }}s"
+              "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
           "maxrank": 5,
@@ -525,7 +525,7 @@
               "key": "a2"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             800,
@@ -544,7 +544,7 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "ZoeR",
@@ -556,7 +556,7 @@
               "Cooldown"
             ],
             "effect": [
-              "{{ cooldown }}s -> {{ cooldownNL }}s"
+              "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
           "maxrank": 3,
@@ -640,7 +640,7 @@
             "0"
           ],
           "vars": [],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             575,
@@ -657,7 +657,7 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         }
       ],
       "passive": {

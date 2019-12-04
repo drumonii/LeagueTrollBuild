@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.22.1",
+  "version": "9.23.1",
   "data": {
     "Zac": {
       "id": "Zac",
@@ -93,14 +93,14 @@
           "id": "ZacQ",
           "name": "Stretching Strikes",
           "description": "Zac stretches an arm, grabbing an enemy. Attacking a different enemy will cause him to throw both targets towards each other.",
-          "tooltip": "Zac's arm stretches and grabs the first enemy it hits, dealing {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> <span class=\"colorCC3300\">(+{{ f2 }})</span> magic damage and briefly slowing them. Zac's next basic attack is replaced with a long range smack that repeats the initial magic damage and slow effect.<br /><br />If Zac grabs a different enemy with each attack he'll throw them towards each other, dealing {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> <span class=\"colorCC3300\">(+{{ f2 }})</span> magic damage in an area if they collide.",
+          "tooltip": "Zac's arm stretches and grabs the first enemy it hits, dealing {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> <span class=\"colorCC3300\">(+{{ f2 }})</span> magic damage and briefly slowing them. Zac's next basic attack is replaced with a long range smack that repeats the initial magic damage and slow effect.<br /><br />If Zac grabs a different enemy with each attack he'll throw them towards each other, dealing {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> <span class=\"colorCC3300\">(+{{ f2 }})</span> magic damage in an area if they collide.",
           "leveltip": {
             "label": [
               "Damage",
               "Cooldown"
             ],
             "effect": [
-              "{{ e1 }}-> {{ e1NL }}",
+              "{{ e1 }} -> {{ e1NL }}",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
@@ -284,11 +284,11 @@
               85
             ],
             [
-              0.04,
-              0.04,
-              0.04,
-              0.04,
-              0.04
+              4,
+              4,
+              4,
+              4,
+              4
             ],
             [
               0.04,
@@ -350,7 +350,7 @@
           "effectBurn": [
             null,
             "25/40/55/70/85",
-            "0.04",
+            "4",
             "0.04/0.05/0.06/0.07/0.08",
             "1",
             "200",
@@ -361,7 +361,7 @@
             "0"
           ],
           "vars": [],
-          "costType": " {{ abilityresourcename }}",
+          "costType": "% of current Health",
           "maxammo": "-1",
           "range": [
             350,
@@ -380,13 +380,13 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} {{ abilityresourcename }}"
+          "resource": "{{ e2 }}% of current Health"
         },
         {
           "id": "ZacE",
           "name": "Elastic Slingshot",
           "description": "Zac attaches his arms to the ground and stretches back, launching himself forward.",
-          "tooltip": "<span class=\"colorFF9900\">First cast:</span> Zac faces the cursor and charges up over {{ e4 }} seconds.<br /><br /><span class=\"colorFF9900\">Second cast:</span> Launches Zac towards a location, knocking up nearby enemies for {{ f2 }} to {{ f3 }} seconds (based on charge time) and dealing {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage. Zac spawns extra chunks of <span class=\"color3ca126\">Goo</span> for each enemy champion hit.<br /><br /><span class=\"size16 color8C8C8C\">Can be cancelled by moving, refunding half of the ability's cooldown and cost.</span>",
+          "tooltip": "<spellPassive>First cast:</spellPassive> Zac faces the cursor and charges up over {{ e4 }} seconds.<br /><br /><spellPassive>Second cast:</spellPassive> Launches Zac towards a location, knocking up nearby enemies for {{ f2 }} to {{ f3 }} seconds (based on charge time) and dealing {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage. Zac spawns extra chunks of <span class=\"color3ca126\">Goo</span> for each enemy champion hit.<br /><br /><rules>Can be cancelled by moving, refunding half of the ability's cooldown and cost.</rules>",
           "leveltip": {
             "label": [
               "Damage",

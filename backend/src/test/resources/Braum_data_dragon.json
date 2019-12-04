@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.22.1",
+  "version": "9.23.1",
   "data": {
     "Braum": {
       "id": "Braum",
@@ -669,7 +669,7 @@
       ],
       "passive": {
         "name": "Concussive Blows",
-        "description": "Braum adds stacks of Concussive Blows to enemies with basic attacks or Winter's Bite. He and his allies continue to add stacks with basic attacks, at 4 stacks their target will be stunned.",
+        "description": "Braum's basic attacks apply Concussive Blows. Once the first stack is applied, <font color='#FFF673'>ally</font> basic attacks also stack Concussive Blows. <br><br>Upon reaching 4 stacks, the target is stunned and takes magic damage. For the next few seconds they cannot receive new stacks, but take bonus magic damage from Braum's attacks.",
         "image": {
           "full": "Braum_Passive.png",
           "sprite": "passive0.png",
@@ -1962,7 +1962,7 @@
               ],
               "items": [
                 {
-                  "id": "3302",
+                  "id": "3854",
                   "count": 1,
                   "hideCount": false
                 },
@@ -2000,7 +2000,12 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3097",
+                  "id": "1028",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3024",
                   "count": 1,
                   "hideCount": false
                 }
@@ -2028,7 +2033,12 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3401",
+                  "id": "3050",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3109",
                   "count": 1,
                   "hideCount": false
                 }
@@ -2041,7 +2051,7 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
+              "hideIfSummonerSpell": "ItemTeleportCancel",
               "appendAfterSection": "",
               "visibleWithAllOf": [
                 ""
@@ -2051,17 +2061,17 @@
               ],
               "items": [
                 {
-                  "id": "3109",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3050",
+                  "id": "3800",
                   "count": 1,
                   "hideCount": false
                 },
                 {
                   "id": "3143",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3107",
                   "count": 1,
                   "hideCount": false
                 }
@@ -2074,7 +2084,7 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
+              "hideIfSummonerSpell": "S5_SummonerSmiteDuel",
               "appendAfterSection": "",
               "visibleWithAllOf": [
                 ""
@@ -2094,7 +2104,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3107",
+                  "id": "3194",
                   "count": 1,
                   "hideCount": false
                 }

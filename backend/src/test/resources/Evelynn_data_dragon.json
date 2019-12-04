@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.22.1",
+  "version": "9.23.1",
   "data": {
     "Evelynn": {
       "id": "Evelynn",
@@ -122,7 +122,7 @@
             "label": [
               "Lasher and Spike Damage",
               "Bonus Damage",
-              "Mana Cost"
+              "@AbilityResourceName@ Cost"
             ],
             "effect": [
               "{{ e5 }} -> {{ e5NL }}",
@@ -251,7 +251,7 @@
               "key": "a2"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             800,
@@ -270,27 +270,27 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "EvelynnW",
           "name": "Allure",
           "description": "Evelynn curses her target, causing her next attack or spell after a delay to charm her target and reduce their magic resist.",
-          "tooltip": "Curses target champion or monster for 5 seconds. If Evelynn hits the target with a basic attack or ability, she will expunge the Curse, refund its mana cost, and briefly slow the target by {{ e3 }}%.<br /><br />If the Curse lasts at least 2.5 seconds, expunging it Charms the target for {{ e2 }} second(s) and:<ul><li>Against champions: shreds Magic Resist by {{ e9 }}% for {{ e0 }} seconds.</li><li>Against monsters: deals {{ e7 }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage. Charm duration increased by {{ e1 }} seconds.</li></ul><rules><span class=\"color8c8c8c\">Casting Allure does not remove Evelynn from Demon Shade.</span></rules>",
+          "tooltip": "Curses target champion or monster for 5 seconds. If Evelynn hits the target with a basic attack or ability, she will expunge the Curse, refund its mana cost, and briefly slow the target by {{ e3 }}%.<br /><br />If the Curse lasts at least 2.5 seconds, expunging it Charms the target for {{ e2 }} second(s) and:<ul><li>Against champions: shreds Magic Resist by {{ e9 }}% for {{ e0 }} seconds.</li><li>Against monsters: deals {{ e7 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage. Charm duration increased by {{ e1 }} seconds.</li></ul><rules><span class=\"color8c8c8c\">Casting Allure does not remove Evelynn from Demon Shade.</span></rules>",
           "leveltip": {
             "label": [
               "Charm Duration",
               "Magic Resist Shred",
               "Monster Damage",
               "Cooldown",
-              "Cast Range"
+              "Range"
             ],
             "effect": [
               "{{ e2 }} -> {{ e2NL }}",
-              "{{ e9 }}% -> {{ e9NL }}%",
+              "{{ effect9amount*100.000000 }}% -> {{ effect9amountnl*100.000000 }}%",
               "{{ e7 }} -> {{ e7NL }}",
-              "{{ f8 }} -> {{ f9 }}",
-              "{{ castrange }} -> {{ castrangeNL }}\t"
+              "{{ e4 }} -> {{ e4NL }}",
+              "{{ castrange }} -> {{ castrangeNL }}"
             ]
           },
           "maxrank": 5,
@@ -404,7 +404,7 @@
               "key": "a1"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             1200,
@@ -423,7 +423,7 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "EvelynnE",
@@ -432,9 +432,9 @@
           "tooltip": "Whip target with Lashers, applying on hit effects and dealing magic damage equal to {{ f1 }} plus {{ e5 }}% <span class=\"color99FF99\">(+{{ a1 }}%)</span> of their max health. Then, gain {{ e3 }}% movement speed for {{ e4 }} seconds.<br /><br />Entering <span class=\"color9542f4\">Demon Shade</span> resets <span class=\"colorFFFFFF\"><i>Whiplash's</i></span> cooldown and empowers it. When empowered, <span class=\"colorFFFFFF\"><i>Whiplash</i></span> pulls Evelynn to her target, dealing magic damage to them and enemies in the way equal to {{ f2 }} plus {{ e6 }}% <span class=\"color99FF99\">(+{{ a2 }}%)</span> of their max health.",
           "leveltip": {
             "label": [
-              "Base Damage",
+              "Damage",
               "Empowered Damage",
-              "Mana Cost"
+              "@AbilityResourceName@ Cost"
             ],
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
@@ -563,7 +563,7 @@
               "key": "a2"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             210,
@@ -582,13 +582,13 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "EvelynnR",
           "name": "Last Caress",
           "description": "Evelynn briefly goes untargetable and decimates the area in front of her before warping backwards a long distance.",
-          "tooltip": "Evelynn unleashes her demonic energy, becoming untargetable and decimating enemies in front of her. She then warps backwards. Deals {{ e1 }}<span class=\"color99FF99\"> (+{{ a1 }})</span> magic damage, increased to {{ f1 }}<span class=\"color99FF99\"> (+{{ f2 }})</span> to enemies below {{ e7 }}% health.",
+          "tooltip": "Evelynn unleashes her demonic energy, becoming untargetable and decimating enemies in front of her. She then warps backwards. Deals {{ e1 }}<scaleAP> (+{{ a1 }})</scaleAP> magic damage, increased to {{ f1 }}<scaleAP> (+{{ f2 }})</scaleAP> to enemies below {{ e7 }}% health.",
           "leveltip": {
             "label": [
               "Damage",
@@ -597,7 +597,7 @@
             ],
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
-              "{{ effect1amount*2.4 }} -> {{ effect1amountnl*2.4 }}",
+              "{{ effect1amount*2.400000 }} -> {{ effect1amountnl*2.400000 }}",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
@@ -688,7 +688,7 @@
               "key": "a1"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             25000,
@@ -705,7 +705,7 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         }
       ],
       "passive": {

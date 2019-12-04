@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.22.1",
+  "version": "9.23.1",
   "data": {
     "Talon": {
       "id": "Talon",
@@ -110,7 +110,7 @@
           "id": "TalonQ",
           "name": "Noxian Diplomacy",
           "description": "Talon stabs the target unit. If they are within melee range, this attack deals critical damage. If they are outside melee range, Talon will leap at his target before stabbing them. Talon refunds some health and cooldown if this ability kills the target.",
-          "tooltip": "Talon leaps to target and deals {{ e1 }} <span class=\"colorFF8C00\">(+{{ a1 }})</span> physical damage. If cast from melee range, Talon does not leap but instead critically strikes, dealing {{ f2 }}% damage <span class=\"colorFF8C00\">({{ f3 }})</span>.<br /><br />When Noxian Diplomacy kills a unit, Talon regains <span class=\"colorFFFFFF\">{{ f4 }}</span> health and refunds {{ e5 }}% of its cooldown.",
+          "tooltip": "Talon leaps to target and deals {{ e1 }} <scaleAD>(+{{ a1 }})</scaleAD> physical damage. If cast from melee range, Talon does not leap but instead critically strikes, dealing {{ f2 }}% damage <scaleAD>({{ f3 }})</scaleAD>.<br /><br />When Noxian Diplomacy kills a unit, Talon regains <scaleLevel>{{ f4 }}</scaleLevel> health and refunds {{ e5 }}% of its cooldown.",
           "leveltip": {
             "label": [
               "Damage",
@@ -118,7 +118,7 @@
             ],
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
-              "{{ f5 }} -> {{ f6 }}"
+              "{{ e6 }} -> {{ e6NL }}"
             ]
           },
           "maxrank": 5,
@@ -232,7 +232,7 @@
               "key": "a1"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             575,
@@ -251,7 +251,7 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "TalonW",
@@ -408,13 +408,13 @@
           "id": "TalonE",
           "name": "Assassin's Path",
           "description": "Talon vaults over any terrain or structure, up to a max distance. This ability has a low cooldown, but puts the used terrain on a long cooldown.",
-          "tooltip": "Talon vaults up to {{ f2 }} units over the nearest structure or terrain in the target direction. The vault's speed is affected by Talon's movement speed.<br /><br />Talon cannot dash over the same section of terrain more than once every <span class=\"colorFFFFFF\">{{ f3 }}</span> seconds.",
+          "tooltip": "Talon vaults up to {{ f2 }} units over the nearest structure or terrain in the target direction. The vault's speed is affected by Talon's movement speed.<br /><br />Talon cannot dash over the same section of terrain more than once every <scaleLevel>{{ f3 }}</scaleLevel> seconds.",
           "leveltip": {
             "label": [
               "Terrain Cooldown"
             ],
             "effect": [
-              "{{ f3 }} -> {{ f4 }}"
+              "{{ e6 }} -> {{ e6NL }}"
             ]
           },
           "maxrank": 5,
@@ -522,7 +522,7 @@
             "0"
           ],
           "vars": [],
-          "costType": "No cost",
+          "costType": "No Cost",
           "maxammo": "-1",
           "range": [
             725,
@@ -541,7 +541,7 @@
             "w": 48,
             "h": 48
           },
-          "resource": "No cost"
+          "resource": "No Cost"
         },
         {
           "id": "TalonR",
@@ -2046,12 +2046,22 @@
                   "hideCount": false
                 },
                 {
+                  "id": "3179",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
                   "id": "3074",
                   "count": 1,
                   "hideCount": false
                 },
                 {
                   "id": "3812",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3181",
                   "count": 1,
                   "hideCount": false
                 }
@@ -2080,6 +2090,11 @@
                 },
                 {
                   "id": "3026",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3814",
                   "count": 1,
                   "hideCount": false
                 }

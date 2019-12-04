@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.22.1",
+  "version": "9.23.1",
   "data": {
     "Viktor": {
       "id": "Viktor",
@@ -393,13 +393,13 @@
           "id": "ViktorDeathRay",
           "name": "Death Ray",
           "description": "Viktor uses his robotic arm to fire a chaos beam that cuts across the field in a line, dealing damage to all enemies in its path.<br><br>Augment: An explosion follows the Death Ray's wake, dealing magic damage.",
-          "tooltip": "Viktor uses his robotic arm to fire a chaos beam that cuts across the field in a line, dealing {{ e1 }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage to every enemy in its path.<br /><br /><span class=\"colorFFCC00\">Augment - Aftershock:</span> An explosion follows the Death Ray's wake, dealing {{ e2 }} <span class=\"color99FF99\">(+{{ a2 }})</span> magic damage.",
+          "tooltip": "Viktor uses his robotic arm to fire a chaos beam that cuts across the field in a line, dealing {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage to every enemy in its path.<br /><br /><span class=\"colorFFCC00\">Augment - Aftershock:</span> An explosion follows the Death Ray's wake, dealing {{ e2 }} <scaleAP>(+{{ a2 }})</scaleAP> magic damage.",
           "leveltip": {
             "label": [
               "Damage (Death Ray)",
               "Damage (Aftershock)",
               "Cooldown",
-              "Mana Cost"
+              "@AbilityResourceName@ Cost"
             ],
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
@@ -524,7 +524,7 @@
               "key": "a2"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             525,
@@ -543,7 +543,7 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "ViktorChaosStorm",

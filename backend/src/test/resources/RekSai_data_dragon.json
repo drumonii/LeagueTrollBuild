@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.22.1",
+  "version": "9.23.1",
   "data": {
     "RekSai": {
       "id": "RekSai",
@@ -86,7 +86,7 @@
           "id": "RekSaiQ",
           "name": "Queen's Wrath / Prey Seeker",
           "description": "Rek'Sai's next 3 basic attacks deal bonus Physical Damage to nearby enemies.<br><br>While Burrowed, Rek'Sai launches a burst of void-charged earth that deals Physical Damage and reveals enemies hit.",
-          "tooltip": "<span class=\"colorFF8C00\">Un-Burrowed:</span> Rek'Sai's next 3 basic attacks within 5 seconds deal {{ e1 }} <span class=\"colorFF8C00\">(+{{ a1 }})</span> bonus Physical Damage to nearby enemies.<br /><br /><span class=\"colorFF8C00\">Burrowed:</span> Rek'Sai launches a burst of void-charged earth that explodes on first enemy hit, dealing {{ e4 }} <span class=\"color99FF99\">(+{{ a2 }})</span> <span class=\"colorFF8C00\">(+{{ a1 }})</span> Physical Damage and revealing non-stealthed enemies for {{ e6 }} seconds. If it hits a Champion, it also generates <keywordMajor>25 Fury</keywordMajor>.",
+          "tooltip": "<scaleAD>Un-Burrowed:</scaleAD> Rek'Sai's next 3 basic attacks within 5 seconds deal {{ e1 }} <scaleAD>(+{{ a1 }})</scaleAD> bonus Physical Damage to nearby enemies.<br /><br /><scaleAD>Burrowed:</scaleAD> Rek'Sai launches a burst of void-charged earth that explodes on first enemy hit, dealing {{ e4 }} <scaleAP>(+{{ a2 }})</scaleAP> <scaleAD>(+{{ a1 }})</scaleAD> Physical Damage and revealing non-stealthed enemies for {{ e6 }} seconds. If it hits a Champion, it also generates <keywordMajor>25 Fury</keywordMajor>.",
           "leveltip": {
             "label": [
               "Queen's Wrath Damage",
@@ -245,7 +245,7 @@
           "id": "RekSaiW",
           "name": "Burrow / Un-burrow",
           "description": "Rek'Sai burrows into the ground, gaining new abilities and increased Movement Speed. Her vision range is reduced and she cannot use basic attacks.<br><br>While Burrowed, Rek'Sai may cast Un-burrow to knock up and damage nearby enemies.",
-          "tooltip": "<span class=\"colorFF8C00\">Un-Burrowed:</span> Burrow into the ground. <br /><br /><span class=\"colorFF8C00\">Burrowed:</span> Un-burrow, dealing {{ e2 }} <span class=\"colorFF8C00\">(+{{ a1 }})</span> Physical Damage and knocking up the closest enemy for {{ e5 }} second. All other nearby enemies will be knocked back. An enemy who has been knocked up will be immune from further Un-burrow effects for {{ e6 }} seconds.<br /><br /><span class=\"colorFF8C00\">Burrowed Effects:</span> New abilities, <span class=\"colorFFFFFF\">+{{ f1 }}</span> Movement Speed, reduced vision range, disabled basic attacks, and gains <span class=\"color993299\">Tremor Sense:</span> Nearby enemies that move in Fog of War have their position revealed to Rek'Sai and her allies.",
+          "tooltip": "<scaleAD>Un-Burrowed:</scaleAD> Burrow into the ground. <br /><br /><scaleAD>Burrowed:</scaleAD> Un-burrow, dealing {{ e2 }} <scaleAD>(+{{ a1 }})</scaleAD> Physical Damage and knocking up the closest enemy for {{ e5 }} second. All other nearby enemies will be knocked back. An enemy who has been knocked up will be immune from further Un-burrow effects for {{ e6 }} seconds.<br /><br /><scaleAD>Burrowed Effects:</scaleAD> New abilities, <scaleLevel>+{{ f1 }}</scaleLevel> Movement Speed, reduced vision range, disabled basic attacks, and gains <span class=\"color993299\">Tremor Sense:</span> Nearby enemies that move in Fog of War have their position revealed to Rek'Sai and her allies.",
           "leveltip": {
             "label": [
               "Un-burrow Damage"
@@ -390,7 +390,7 @@
           "id": "RekSaiE",
           "name": "Furious Bite / Tunnel",
           "description": "Rek'Sai bites her target, dealing double and True Damage if she has max Fury.<br><br>While Burrowed, Rek'Sai creates a re-usable, long lasting tunnel. Enemies can destroy it by standing on top of either entrance.",
-          "tooltip": "<span class=\"colorFF8C00\">Un-Burrowed:</span> Rek'Sai bites a target dealing {{ e1 }} <span class=\"colorFF8C00\">(+{{ a1 }})</span> Physical Damage. At max Fury, the bite does 100% more and deals True Damage.<br /><br />Maximum Damage: <span class=\"colorFFFFFF\">{{ f2 }}</span><br /><br /><span class=\"colorFF8C00\">Burrowed:</span> Rek'Sai tunnels forward leaving two connected <span class=\"color993299\">Tunnel Entrances</span>. Clicking a <span class=\"color993299\">Tunnel Entrance</span> will make Rek'Sai dive to the other entrance.<br /><br /><span class=\"color993299\">Tunnel Entrances</span> last for {{ e5 }} minutes and can be destroyed by enemies. Rek'Sai may have {{ e6 }} tunnels at one time. Tunnels have a {{ e8 }} second cooldown on use.",
+          "tooltip": "<scaleAD>Un-Burrowed:</scaleAD> Rek'Sai bites a target dealing {{ e1 }} <scaleAD>(+{{ a1 }})</scaleAD> Physical Damage. At max Fury, the bite does 100% more and deals True Damage.<br /><br />Maximum Damage: <scaleLevel>{{ f2 }}</scaleLevel><br /><br /><scaleAD>Burrowed:</scaleAD> Rek'Sai tunnels forward leaving two connected <span class=\"color993299\">Tunnel Entrances</span>. Clicking a <span class=\"color993299\">Tunnel Entrance</span> will make Rek'Sai dive to the other entrance.<br /><br /><span class=\"color993299\">Tunnel Entrances</span> last for {{ e5 }} minutes and can be destroyed by enemies. Rek'Sai may have {{ e6 }} tunnels at one time. Tunnels have a {{ e8 }} second cooldown on use.",
           "leveltip": {
             "label": [
               "Furious Bite Damage",
@@ -2296,7 +2296,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3161",
+                  "id": "3026",
                   "count": 1,
                   "hideCount": false
                 }
@@ -2457,6 +2457,11 @@
                 },
                 {
                   "id": "3053",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3026",
                   "count": 1,
                   "hideCount": false
                 }

@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.22.1",
+  "version": "9.23.1",
   "data": {
     "Volibear": {
       "id": "Volibear",
@@ -225,7 +225,7 @@
             "0"
           ],
           "vars": [],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             300,
@@ -244,16 +244,16 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "VolibearW",
           "name": "Frenzy",
           "description": "Volibear's repeated attacks grant him additional Attack Speed. Once Volibear has repeatedly attacked three times, he can perform a vicious bite on his target which deals increased damage based on the target's missing Health.",
-          "tooltip": "<span class=\"colorFF9900\">Passive: </span>Volibear gains {{ e1 }}% Attack Speed with each attack. Stacks up to {{ e2 }} times.<br /><br /><span class=\"colorFF9900\">Active: </span>When Volibear has {{ e2 }} stacks of Frenzy, he can bite an enemy to deal {{ e3 }} <span class=\"colorCC3300\">(+{{ f1 }} [{{ e4 }}% of bonus Health])</span> physical damage, increased by {{ e5 }}% for each {{ e7 }}% Health the target is missing. If Volibear bites a minion or monster, Frenzy's cooldown is reduced by {{ e6 }}%.",
+          "tooltip": "<spellPassive>Passive: </spellPassive>Volibear gains {{ e1 }}% Attack Speed with each attack. Stacks up to {{ e2 }} times.<br /><br /><spellPassive>Active: </spellPassive>When Volibear has {{ e2 }} stacks of Frenzy, he can bite an enemy to deal {{ e3 }} <span class=\"colorCC3300\">(+{{ f1 }} [{{ e4 }}% of bonus Health])</span> physical damage, increased by {{ e5 }}% for each {{ e7 }}% Health the target is missing. If Volibear bites a minion or monster, Frenzy's cooldown is reduced by {{ e6 }}%.",
           "leveltip": {
             "label": [
-              "Attack Speed Bonus",
+              "Attack Speed",
               "Bite Damage"
             ],
             "effect": [
@@ -372,7 +372,7 @@
               "key": "f1"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             350,
@@ -391,7 +391,7 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "VolibearE",
@@ -401,12 +401,12 @@
           "leveltip": {
             "label": [
               "Damage",
-              "Slow Amount ",
-              "Mana Cost "
+              "Slow",
+              "@AbilityResourceName@ Cost"
             ],
             "effect": [
               "{{ basedamage }} -> {{ basedamageNL }}",
-              "{{ movespeedmod*100 }}% -> {{ movespeedmodnl*100 }}%",
+              "{{ movespeedmod*100.000000 }}% -> {{ movespeedmodnl*100.000000 }}%",
               "{{ cost }} -> {{ costNL }}"
             ]
           },
@@ -515,7 +515,7 @@
             "0"
           ],
           "vars": [],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             425,
@@ -534,7 +534,7 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "VolibearR",
@@ -643,7 +643,7 @@
               "key": "a1"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             500,
@@ -660,7 +660,7 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         }
       ],
       "passive": {

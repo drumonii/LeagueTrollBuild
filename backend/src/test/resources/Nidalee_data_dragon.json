@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.22.1",
+  "version": "9.23.1",
   "data": {
     "Nidalee": {
       "id": "Nidalee",
@@ -129,7 +129,7 @@
           "id": "JavelinToss",
           "name": "Javelin Toss / Takedown",
           "description": "In human form, Nidalee throws a spiked javelin at her target that gains damage as it flies.  As a cougar, her next attack will attempt to fatally wound her target, dealing more damage the less life they have.",
-          "tooltip": "<span class=\"size18 colorFF9900\">Human: </span>Nidalee throws her javelin, dealing {{ e1 }} <span class=\"color99FF99\">(+{{ a2 }})</span> magic damage. If it exceeds her basic attack range, it gains damage based on distance flown, up to a potential {{ e2 }} <span class=\"color99FF99\">(+{{ a1 }})</span> total damage.<br /><br /><span class=\"size18 colorFF9900\">Cougar: </span>Nidalee's next attack deals additional damage, greatly increased on low health targets.",
+          "tooltip": "<span class=\"size18 colorFF9900\">Human: </span>Nidalee throws her javelin, dealing {{ e1 }} <scaleAP>(+{{ a2 }})</scaleAP> magic damage. If it exceeds her basic attack range, it gains damage based on distance flown, up to a potential {{ e2 }} <scaleAP>(+{{ a1 }})</scaleAP> total damage.<br /><br /><span class=\"size18 colorFF9900\">Cougar: </span>Nidalee's next attack deals additional damage, greatly increased on low health targets.",
           "leveltip": {
             "label": [
               "Javelin Minimum Damage",
@@ -258,7 +258,7 @@
               "key": "a1"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             1500,
@@ -277,13 +277,13 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "Bushwhack",
           "name": "Bushwhack / Pounce",
           "description": "In human form, Nidalee lays a trap for unwary opponents that, when sprung, damages and reveals its target. As a cougar, she jumps in a direction, dealing damage in an area where she lands.",
-          "tooltip": "<span class=\"size18 colorFF9900\">Human: </span>Nidalee places an invisible trap that lasts for 2 minutes. The trap triggers when an enemy walks over it, revealing the victim and bleeding them for {{ e7 }} <span class=\"color99FF99\">(+{{ a2 }})</span> magic damage over 4 seconds.<br /><br /><span class=\"colorFFFFFF\">{{ f4 }}</span> traps may be active at once. (Maximum traps increases at level 6, 11 and 16)<br /><br /><span class=\"size18 colorFF9900\">Cougar: </span>Nidalee lunges in target direction, dealing damage to nearby enemies.",
+          "tooltip": "<span class=\"size18 colorFF9900\">Human: </span>Nidalee places an invisible trap that lasts for 2 minutes. The trap triggers when an enemy walks over it, revealing the victim and bleeding them for {{ e7 }} <scaleAP>(+{{ a2 }})</scaleAP> magic damage over 4 seconds.<br /><br /><scaleLevel>{{ f4 }}</scaleLevel> traps may be active at once. (Maximum traps increases at level 6, 11 and 16)<br /><br /><span class=\"size18 colorFF9900\">Cougar: </span>Nidalee lunges in target direction, dealing damage to nearby enemies.",
           "leveltip": {
             "label": [
               "Trap Damage",
@@ -407,7 +407,7 @@
               "key": "a2"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "0",
           "range": [
             900,
@@ -426,13 +426,13 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "PrimalSurge",
           "name": "Primal Surge / Swipe",
           "description": "In human form, Nidalee channels the spirit of the cougar to heal her allies and imbue them with Attack Speed for a short duration. As a cougar, she claws in a direction, dealing damage to enemies in front of her.",
-          "tooltip": "<span class=\"size18 colorFF9900\">Human: </span>Nidalee heals target ally champion for {{ e1 }} <span class=\"color99FF99\">(+{{ a2 }})</span> to {{ e2 }} <span class=\"color99FF99\">(+{{ f3 }})</span> based on their missing health and grants them {{ e4 }}% Attack Speed for 7 seconds.<br /><br /><span class=\"size18 colorFF9900\">Cougar: </span>Nidalee claws at enemies in target direction.",
+          "tooltip": "<span class=\"size18 colorFF9900\">Human: </span>Nidalee heals target ally champion for {{ e1 }} <scaleAP>(+{{ a2 }})</scaleAP> to {{ e2 }} <scaleAP>(+{{ f3 }})</scaleAP> based on their missing health and grants them {{ e4 }}% Attack Speed for 7 seconds.<br /><br /><span class=\"size18 colorFF9900\">Cougar: </span>Nidalee claws at enemies in target direction.",
           "leveltip": {
             "label": [
               "Primal Surge Heal",
@@ -556,7 +556,7 @@
               "key": "a2"
             }
           ],
-          "costType": " Mana",
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             600,
@@ -575,13 +575,13 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} Mana"
+          "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
           "id": "AspectOfTheCougar",
           "name": "Aspect Of The Cougar",
           "description": "Nidalee transforms into a cougar, gaining new abilities.",
-          "tooltip": "<span class=\"size18 colorFF9900\">Human: </span>Nidalee transforms into a vicious cougar with the basic abilities Takedown, Pounce, and Swipe.<br /><br /><span class=\"size18 colorFF9900\">Cougar: </span>Nidalee transforms back into human form. While in human form, triggering a <span class=\"colorFFF673\">Hunt</span> resets the cooldown of Aspect of the Cougar.",
+          "tooltip": "<span class=\"size18 colorFF9900\">Human: </span>Nidalee transforms into a vicious cougar with the basic abilities Takedown, Pounce, and Swipe.<br /><br /><span class=\"size18 colorFF9900\">Cougar: </span>Nidalee transforms back into human form. While in human form, triggering a <keywordMajor>Hunt</keywordMajor> resets the cooldown of Aspect of the Cougar.",
           "leveltip": {
             "label": [
               "Takedown Damage",
@@ -591,11 +591,11 @@
               "Enhanced Pounce Cooldown"
             ],
             "effect": [
-              "{{ f1 }} -> {{ f6 }}",
-              "{{ f4 }}% -> {{ f5 }}%",
-              "{{ f7 }} -> {{ f8 }}",
-              "{{ f9 }} -> {{ f10 }}",
-              "{{ f2 }} -> {{ f3 }}"
+              "{{ takedownbasedamage }} -> {{ takedownbasedamageNL }}",
+              "{{ takedowndamageamp }}% -> {{ takedowndamageampNL }}%",
+              "{{ pouncedamage }} -> {{ pouncedamageNL }}",
+              "{{ swipedamage }} -> {{ swipedamageNL }}",
+              "{{ pouncecooldown }} -> {{ pouncecooldownNL }}"
             ]
           },
           "maxrank": 4,
