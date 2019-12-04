@@ -50,7 +50,7 @@ public interface ItemsRepository extends JpaRepository<Item, Integer>, JpaSpecif
 		   "where i.gold.total = 0 and i.requiredChampion is null " +
 		   "and key(m) = :mapId and m = true " +
 	       "and (:mapId = 10 and i.gold.purchasable = false and i.name = 'Arcane Sweeper') " +
-	       "or (:mapId = 11 and t in ('Trinket') and i.gold.purchasable = true and i.name not like '%Snax%') " +
+	       "or (:mapId = 11 and t in ('Trinket') and i.gold.purchasable = true and i.gold.sell = 0 and i.name not like '%Snax%') " +
 	       "or (:mapId = 12 and i.gold.purchasable = false and i.name = 'Poro-Snax')")
 	@Cacheable(key = "{#root.methodName, #mapId}")
 	List<Item> trinkets(@Param("mapId") int mapId);

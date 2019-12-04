@@ -73,10 +73,10 @@ abstract class ItemsRepositoryTest {
 			assertThat(trinkets).extracting(Item::getName).containsOnly("Arcane Sweeper");
 		} else if (map == HOWLING_ABYSS_ID) {
 			assertThat(trinkets).extracting(Item::getName).containsOnly("Poro-Snax");
-		} else {
-			assertThat(trinkets).extracting(Item::getGold).extracting(ItemGold::getTotal)
+		} else { // summoners rift
+			assertThat(trinkets).extracting(Item::getGold).extracting(ItemGold::getSell)
 					.containsOnly(0);
-			assertThat(trinkets).extracting(Item::getGold).extracting("purchasable", Boolean.class)
+			assertThat(trinkets).extracting(Item::getGold).extracting(ItemGold::isPurchasable)
 					.containsOnly(true);
 			assertThat(trinkets).extracting(Item::getTags).allSatisfy(tags -> {
 				assertThat(tags).contains("Trinket");
