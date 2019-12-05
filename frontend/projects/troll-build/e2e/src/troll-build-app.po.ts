@@ -16,4 +16,8 @@ export class TrollBuildAppPage extends BaseTrollBuildPage {
     return element(by.css('footer'));
   }
 
+  getLatestSavedVersion(): ElementFinder {
+    return element(by.css('[data-e2e="latest-saved-version"]'));
+  }
+
 }

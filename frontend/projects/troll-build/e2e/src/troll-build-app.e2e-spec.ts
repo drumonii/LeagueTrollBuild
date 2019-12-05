@@ -33,6 +33,7 @@ describe('troll-build-app', () => {
 
   it('should show the troll build footer', async () => {
     expect(await page.getFooter().isPresent()).toBe(true);
+    expect(await page.getLatestSavedVersion().getText()).toContain('.');
   });
 
 });
