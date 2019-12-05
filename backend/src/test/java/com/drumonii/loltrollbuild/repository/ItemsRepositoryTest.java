@@ -4,7 +4,6 @@ import com.drumonii.loltrollbuild.model.Item;
 import com.drumonii.loltrollbuild.model.ItemGold;
 import com.drumonii.loltrollbuild.riot.api.ItemsResponse;
 import com.drumonii.loltrollbuild.test.repository.RepositoryTest;
-import com.drumonii.loltrollbuild.util.GameMapUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -48,8 +47,7 @@ abstract class ItemsRepositoryTest {
 		Item bootsOfSpeed = itemsResponse.getItems().get("1001");
 
 		List<Item> boots = itemsRepository.boots(map);
-		assertThat(boots).as("Boots should be empty for map: " + GameMapUtil.getNameFromId(map) + "(" + map + ")")
-				.isNotEmpty();
+		assertThat(boots).isNotEmpty();
 		assertThat(boots).doesNotHaveDuplicates();
 		assertThat(boots).doesNotContain(bootsOfSpeed);
 		assertThat(boots).flatExtracting(Item::getFrom)
@@ -113,18 +111,17 @@ abstract class ItemsRepositoryTest {
 	@MethodSource("maps")
 	void forTrollBuild(Integer map) {
 		List<Item> forTrollBuild = itemsRepository.forTrollBuild(map);
-		assertThat(forTrollBuild).as("Items for Troll Build should not be empty for map: " + GameMapUtil.getNameFromId(map) + "(" + map + ")")
-				.isNotEmpty();
+		assertThat(forTrollBuild).isNotEmpty();
 		assertThat(forTrollBuild).doesNotHaveDuplicates();
 		assertThat(forTrollBuild).extracting(Item::getMaps)
 				.extracting(input -> input.get(map))
 				.contains(true);
 		assertThat(forTrollBuild).extracting(Item::getGold)
-				.extracting("purchasable", Boolean.class)
+				.extracting(ItemGold::isPurchasable)
 				.containsOnly(true);
 		assertThat(forTrollBuild).extracting(Item::getConsumed)
 				.containsNull();
-		assertThat(forTrollBuild).filteredOn(item -> item.getInto() != null).flatExtracting(Item::getInto)
+		assertThat(forTrollBuild).flatExtracting(Item::getInto)
 				.isEmpty();
 		assertThat(forTrollBuild).doesNotContain(itemsResponse.getItems().get("1001"));
 		assertThat(forTrollBuild).extracting(Item::getDescription).allSatisfy(description -> {
