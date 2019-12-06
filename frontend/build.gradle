@@ -1,5 +1,5 @@
 plugins {
-  id 'com.moowork.node' version '1.3.1'
+  id 'com.github.node-gradle.node' version '2.2.0'
 }
 
 node {
@@ -9,17 +9,20 @@ node {
   nodeModulesDir = file("${project.projectDir}")
 }
 
-task npmBuild(type: NpmTask, dependsOn: 'npmInstall') {
+task npmBuild(type: NpmTask) {
+  dependsOn npmInstall
+  description = "Runs 'npm run build-all'"
   args = ['run', 'build-all']
 }
 
-task karmaTests(type: NpmTask, dependsOn: 'npmInstall') {
+task karmaTests(type: NpmTask) {
+  dependsOn npmInstall
   args = ['run', 'test-all-ci']
 }
 
 // Since Angular does not modify the deployUrl of html (like src), assets must be moved to the root of /dist to avoid 404's
 task moveAssets() {
-  dependsOn 'npmBuild'
+  dependsOn npmBuild
   doLast {
     ant.move file: "${projectDir}/dist/troll-build/assets", todir: "${projectDir}/dist"
     ant.move file: "${projectDir}/dist/admin/assets", todir: "${projectDir}/dist"
