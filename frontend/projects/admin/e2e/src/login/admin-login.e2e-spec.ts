@@ -44,6 +44,10 @@ describe('admin login page', () => {
       await page.attemptLoginAdmin();
       expect(await page.getCurrentUrl()).toBe('/');
 
+      // ensure login page is not accessible when already logged in
+      await page.navigateTo();
+      expect(await page.getCurrentUrl()).toBe('/');
+
       await page.logoutAdmin();
       expect(await page.getLoggedOutAlert().isPresent()).toBeTruthy();
     });
