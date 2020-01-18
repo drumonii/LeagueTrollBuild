@@ -1,4 +1,5 @@
 import { ChampionsPage } from './champions.po';
+import { Key } from 'protractor';
 
 describe('champions page', () => {
   const page = new ChampionsPage();
@@ -37,17 +38,7 @@ describe('champions page', () => {
 
   });
 
-  describe('filter by name', () => {
-
-    it('should only show filtered', async () => {
-      await page.getChampionNameFilter().sendKeys('maokai');
-
-      expect(await page.getChampions().count()).toBe(1);
-    });
-
-  });
-
-  describe('filter by tag', () => {
+  describe('filters', () => {
 
     let championsCount = 0;
 
@@ -55,16 +46,40 @@ describe('champions page', () => {
       championsCount = await page.getChampions().count();
     });
 
-    it('should only show filtered', async () => {
-      const firstChampionTagFilter = await page.getChampionTagFilters().first();
-      await firstChampionTagFilter.click();
+    describe('filter by name', () => {
 
-      expect(await page.getChampions().count()).toBeLessThan(championsCount);
+      it('should only show filtered', async () => {
+        const championToSearch = 'maokai';
+        await page.getChampionNameFilter().sendKeys(championToSearch);
 
-      // reset tag filter
-      await firstChampionTagFilter.click();
+        expect(await page.getChampions().count()).toBe(1);
 
-      expect(await page.getChampions().count()).toBe(championsCount);
+        // reset name filter (clear() nor sendKeys('') does not work)
+        let spacesToGoBack = championToSearch.length;
+        do {
+          await page.getChampionNameFilter().sendKeys(Key.BACK_SPACE);
+          spacesToGoBack--;
+        } while (spacesToGoBack > 0);
+
+        expect(await page.getChampions().count()).toBe(championsCount);
+      });
+
+    });
+
+    describe('filter by tag', () => {
+
+      it('should only show filtered', async () => {
+        const firstChampionTagFilter = await page.getChampionTagFilters().first();
+        await firstChampionTagFilter.click();
+
+        expect(await page.getChampions().count()).toBeLessThan(championsCount);
+
+        // reset tag filter
+        await firstChampionTagFilter.click();
+
+        expect(await page.getChampions().count()).toBe(championsCount);
+      });
+
     });
 
   });
