@@ -225,7 +225,7 @@ describe('BatchJobDatagridService', () => {
       };
 
       service.hasFailedAllRetrievalsJob(minutesAgo).subscribe(hasFailedAllRetrievalsJob => {
-        expect(hasFailedAllRetrievalsJob).toBe(false);
+        expect(hasFailedAllRetrievalsJob).toBeFalse();
       });
 
       const testReq = httpMock.expectOne(requestMatch);

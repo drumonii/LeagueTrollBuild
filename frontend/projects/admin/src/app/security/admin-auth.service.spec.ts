@@ -122,7 +122,7 @@ describe('AdminAuthService', () => {
     it('should return true if authenticated and set adminUserDetails in sessionStorage',
       inject([AdminAuthService, HttpTestingController], (authService: AdminAuthService, httpMock: HttpTestingController) => {
       authService.isAuthenticated().subscribe(isAuthenticated => {
-        expect(isAuthenticated).toBe(true);
+        expect(isAuthenticated).toBeTrue();
         expect(sessionStorage.getItem(AdminAuthService.adminUserDetailsKey)).toEqual(JSON.stringify(mockAdminUserDetails));
       });
 
@@ -136,7 +136,7 @@ describe('AdminAuthService', () => {
       sessionStorage.setItem(AdminAuthService.adminUserDetailsKey, JSON.stringify(mockAdminUserDetails));
 
       authService.isAuthenticated().subscribe(isAuthenticated => {
-        expect(isAuthenticated).toBe(false);
+        expect(isAuthenticated).toBeFalse();
         expect(sessionStorage.getItem(AdminAuthService.adminUserDetailsKey)).toBeNull();
       });
 

@@ -37,7 +37,7 @@ describe('AdminAlreadyLoggedInGuard', () => {
     spyOn(authService, 'isAuthenticated').and.returnValue(of(false));
 
     guard.canActivate(null, null).subscribe(canActivate => {
-      expect(canActivate).toBe(true);
+      expect(canActivate).toBeTrue();
       expect(router.createUrlTree).not.toHaveBeenCalled();
     });
   }));

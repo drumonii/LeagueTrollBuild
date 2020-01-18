@@ -42,7 +42,7 @@ describe('AdminLoginPage', () => {
 
     it('should show login form', () => {
       expect(fixture.debugElement.query(By.css('[data-e2e="admin-login-form"]'))).toBeTruthy();
-      expect(component.adminLoginForm.valid).toBe(false);
+      expect(component.adminLoginForm.valid).toBeFalse();
 
       const usernameInput = getUsernameInput();
       expect(usernameInput.nativeElement.placeholder).toBe('Username');
@@ -54,7 +54,7 @@ describe('AdminLoginPage', () => {
 
       const loginBtn = getLoginBtn();
       expect(loginBtn.nativeElement.textContent.trim()).toBe('Login');
-      expect(loginBtn.nativeElement.disabled).toBe(true);
+      expect(loginBtn.nativeElement.disabled).toBeTrue();
     });
 
     describe('with form errors', () => {

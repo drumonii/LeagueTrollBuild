@@ -12,6 +12,6 @@ describe('DisabledGuard', () => {
   });
 
   it('should return false', inject([DisabledGuard], (guard: DisabledGuard) => {
-    expect(guard.canLoad(null, null)).toBe(false);
+    expect(guard.canLoad(null, null)).toBeFalse();
   }));
 });

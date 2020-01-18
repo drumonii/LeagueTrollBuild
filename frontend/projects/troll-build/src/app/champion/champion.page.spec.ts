@@ -1000,7 +1000,7 @@ describe('ChampionPage', () => {
 
         const savedBuildInput = fixture.debugElement.query(By.css('[data-e2e="saved-build-input-link"]'));
         expect(savedBuildInput.nativeElement.value).toBe(`http://localhost/build/${savedBuild.id}`);
-        expect(savedBuildInput.nativeElement.readOnly).toBe(true);
+        expect(savedBuildInput.nativeElement.readOnly).toBeTrue();
 
         expect(fixture.debugElement.query(By.css('[data-e2e="save-build-btn"]'))).toBeFalsy();
 
