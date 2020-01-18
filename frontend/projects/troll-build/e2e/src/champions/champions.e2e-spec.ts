@@ -17,11 +17,11 @@ describe('champions page', () => {
     });
 
     it('should show the name filter', async () => {
-      expect(await page.getChampionNameFilter().isPresent()).toBe(true);
+      expect(await page.getChampionNameFilter().isPresent()).toBeTruthy();
     });
 
     it('should show the tag filters', async () => {
-      expect(await page.getChampionTagFilters().isPresent()).toBe(true);
+      expect(await page.getChampionTagFilters().isPresent()).toBeTruthy();
     });
 
   });

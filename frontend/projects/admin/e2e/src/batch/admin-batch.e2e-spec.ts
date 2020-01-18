@@ -30,7 +30,7 @@ describe('admin batch page', () => {
     });
 
     it('should show the batch jobs datatable', async () => {
-      expect(await page.getBatchJobsDatatable().isPresent()).toBe(true);
+      expect(await page.getBatchJobsDatatable().isPresent()).toBeTruthy();
 
       await element(by.css('#clr-dg-row1 .datagrid-expandable-caret button.datagrid-expandable-caret-button')).click();
 

@@ -29,7 +29,7 @@ describe('admin flyway page', () => {
     });
 
     it('should show the Flyway datatable', async () => {
-      expect(await page.getFlywayDatatable().isPresent()).toBe(true);
+      expect(await page.getFlywayDatatable().isPresent()).toBeTruthy();
     });
 
   });

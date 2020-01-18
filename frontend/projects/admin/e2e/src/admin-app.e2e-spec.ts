@@ -12,7 +12,7 @@ describe('admin-app', () => {
   });
 
   it('show show the admin footer', async () => {
-    expect(await page.getFooter().isPresent()).toBe(true);
+    expect(await page.getFooter().isPresent()).toBeTruthy();
   });
 
 });

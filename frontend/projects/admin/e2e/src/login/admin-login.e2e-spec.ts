@@ -18,7 +18,7 @@ describe('admin login page', () => {
   describe('with empty username and password', () => {
 
     it('should not allow logins', async () => {
-      expect(await page.getLoginBtn().isEnabled()).toBe(false);
+      expect(await page.getLoginBtn().isEnabled()).toBeFalsy();
     });
 
   });
@@ -30,7 +30,7 @@ describe('admin login page', () => {
       await passwordInput.sendKeys('invalid password!');
 
       await page.attemptLoginAdmin();
-      expect(await page.getInvalidCredentialsAlert().isPresent()).toBe(true);
+      expect(await page.getInvalidCredentialsAlert().isPresent()).toBeTruthy();
     });
 
   });
@@ -45,7 +45,7 @@ describe('admin login page', () => {
       expect(await page.getCurrentUrl()).toBe('/');
 
       await page.logoutAdmin();
-      expect(await page.getLoggedOutAlert().isPresent()).toBe(true);
+      expect(await page.getLoggedOutAlert().isPresent()).toBeTruthy();
     });
 
   });
