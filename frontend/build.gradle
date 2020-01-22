@@ -14,6 +14,16 @@ node {
 task npmBuild(type: NpmTask) {
   dependsOn npmInstall
   description = "Runs 'npm run build-all'"
+
+  inputs.files(fileTree('node_modules'))
+  inputs.files(fileTree('projects/admin/src'))
+  inputs.files(fileTree('projects/troll-build/src'))
+  inputs.file('package.json')
+  inputs.file('package-lock.json')
+  inputs.file('tsconfig.json')
+
+  outputs.dir('dist')
+
   args = ['run', 'build-all']
 }
 
