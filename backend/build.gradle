@@ -49,7 +49,7 @@ bootJar {
         into 'public'
     }
     manifest {
-        attributes('Implementation-Version': version, 'Build-Date': new Date(), 'Created-By': "Gradle ${gradle.gradleVersion}")
+        attributes('Implementation-Version': archiveVersion, 'Build-Date': new Date(), 'Created-By': "Gradle ${gradle.gradleVersion}")
     }
 }
 
