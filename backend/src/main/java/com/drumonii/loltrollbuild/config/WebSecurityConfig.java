@@ -43,6 +43,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		// @formatter:off
 		http
+			.antMatcher(apiPath + "/admin/**")
 			.authorizeRequests(authorizeRequests ->
 				authorizeRequests
 						.requestMatchers(EndpointRequest.toAnyEndpoint()).hasRole(UserRole.ADMIN)
