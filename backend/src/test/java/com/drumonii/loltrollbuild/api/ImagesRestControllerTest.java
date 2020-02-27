@@ -73,7 +73,8 @@ abstract class ImagesRestControllerTest {
 		mockMvc.perform(get("{apiPath}/img/summoner-spells/{img}", apiPath, smite.getId()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(getContentType(fileExt)))
-				.andExpect(header().string("Cache-Control", is("max-age=" + getCacheControlMaxAge())));
+				.andExpect(header().string("Cache-Control", is("max-age=" + getCacheControlMaxAge())))
+				.andExpect(header().exists("Etag"));
 	}
 
 	@Test
@@ -89,7 +90,8 @@ abstract class ImagesRestControllerTest {
 		mockMvc.perform(get("{apiPath}/img/items/{img}", apiPath, thornmail.getId()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(getContentType(fileExt)))
-				.andExpect(header().string("Cache-Control", is("max-age=" + getCacheControlMaxAge())));
+				.andExpect(header().string("Cache-Control", is("max-age=" + getCacheControlMaxAge())))
+				.andExpect(header().exists("Etag"));
 	}
 
 	@Test
@@ -105,7 +107,8 @@ abstract class ImagesRestControllerTest {
 		mockMvc.perform(get("{apiPath}/img/champions/{img}", apiPath, shen.getId()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(getContentType(fileExt)))
-				.andExpect(header().string("Cache-Control", is("max-age=" + getCacheControlMaxAge())));
+				.andExpect(header().string("Cache-Control", is("max-age=" + getCacheControlMaxAge())))
+				.andExpect(header().exists("Etag"));
 	}
 
 	@Test
@@ -143,7 +146,8 @@ abstract class ImagesRestControllerTest {
 		mockMvc.perform(get("{apiPath}/img//champions/{id}/passive", apiPath, ekko.getId()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(getContentType(fileExt)))
-				.andExpect(header().string("Cache-Control", is("max-age=" + getCacheControlMaxAge())));
+				.andExpect(header().string("Cache-Control", is("max-age=" + getCacheControlMaxAge())))
+				.andExpect(header().exists("Etag"));
 	}
 
 	@Test
@@ -159,7 +163,8 @@ abstract class ImagesRestControllerTest {
 		mockMvc.perform(get("{apiPath}/img/maps/{mapId}", apiPath, summonersRift.getMapId()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(getContentType(fileExt)))
-				.andExpect(header().string("Cache-Control", is("max-age=" + getCacheControlMaxAge())));
+				.andExpect(header().string("Cache-Control", is("max-age=" + getCacheControlMaxAge())))
+				.andExpect(header().exists("Etag"));
 	}
 
 	/**
