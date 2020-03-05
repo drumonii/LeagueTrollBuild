@@ -8,7 +8,6 @@ import com.drumonii.loltrollbuild.util.RandomizeUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -31,9 +30,6 @@ abstract class ItemsRestControllerTest {
 	@Autowired
 	protected ObjectMapper objectMapper;
 
-	@Value("${api.base-path}")
-	private String apiPath;
-
 	protected ItemsResponse itemsResponse;
 
 	protected abstract void beforeEach();
@@ -48,34 +44,34 @@ abstract class ItemsRestControllerTest {
 		Item item = RandomizeUtil.getRandom(itemsResponse.getItems().values());
 
 		// qbe
-		mockMvc.perform(get("{apiPath}/items", apiPath))
+		mockMvc.perform(get("/api/items"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$.[*]").isNotEmpty());
 
 		// qbe with name
-		mockMvc.perform(get("{apiPath}/items", apiPath)
+		mockMvc.perform(get("/api/items")
 				.param("name", item.getName().toLowerCase()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$..name", everyItem(is(item.getName()))));
 
 		// qbe with required champion
-		mockMvc.perform(get("{apiPath}/items", apiPath)
+		mockMvc.perform(get("/api/items")
 				.param("requiredChampion", item.getRequiredChampion().toLowerCase()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$..requiredChampion", everyItem(is(item.getRequiredChampion()))));
 
 		// qbe with maps
-		mockMvc.perform(get("{apiPath}/items", apiPath)
+		mockMvc.perform(get("/api/items")
 				.param("maps[12]", Boolean.TRUE.toString()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$..maps[\"12\"]", everyItem(is(true))));
 
 		// qbe with no results
-		mockMvc.perform(get("{apiPath}/items", apiPath)
+		mockMvc.perform(get("/api/items")
 				.param("name", "abcd1234"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
@@ -85,13 +81,13 @@ abstract class ItemsRestControllerTest {
 	@Test
 	void getItem() throws Exception {
 		// find with non existing item Id
-		mockMvc.perform(get("{apiPath}/items/{id}", apiPath, 0))
+		mockMvc.perform(get("/api/items/{id}", 0))
 				.andExpect(status().isNotFound());
 
 		Item sunfireCape = itemsRepository.save(itemsResponse.getItems().get("3068"));
 
 		// find with existing item Id
-		mockMvc.perform(get("{apiPath}/items/{id}", apiPath, sunfireCape.getId()))
+		mockMvc.perform(get("/api/items/{id}", sunfireCape.getId()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE));
 	}
@@ -103,7 +99,7 @@ abstract class ItemsRestControllerTest {
 				.collect(Collectors.toMap(item -> String.valueOf(item.getId()), item -> item)));
 		itemsRepository.saveAll(itemsResponse.getItems().values());
 
-		mockMvc.perform(get("{apiPath}/items/boots", apiPath)
+		mockMvc.perform(get("/api/items/boots")
 				.param("mapId", SUMMONERS_RIFT_SID))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
@@ -122,7 +118,7 @@ abstract class ItemsRestControllerTest {
 				.collect(Collectors.toMap(item -> String.valueOf(item.getId()), item -> item)));
 		itemsRepository.saveAll(itemsResponse.getItems().values());
 
-		mockMvc.perform(get("{apiPath}/items/trinkets", apiPath)
+		mockMvc.perform(get("/api/items/trinkets")
 				.param("mapId", SUMMONERS_RIFT_SID))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
@@ -141,7 +137,7 @@ abstract class ItemsRestControllerTest {
 				.collect(Collectors.toMap(item -> String.valueOf(item.getId()), item -> item)));
 		itemsRepository.saveAll(itemsResponse.getItems().values());
 
-		mockMvc.perform(get("{apiPath}/items/viktor-only", apiPath))
+		mockMvc.perform(get("/api/items/viktor-only"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$.[*].from").isNotEmpty())
@@ -154,7 +150,7 @@ abstract class ItemsRestControllerTest {
 	void getForTrollBuild() throws Exception {
 		itemsRepository.saveAll(itemsResponse.getItems().values());
 
-		mockMvc.perform(get("{apiPath}/items/for-troll-build", apiPath)
+		mockMvc.perform(get("/api/items/for-troll-build")
 				.param("mapId", SUMMONERS_RIFT_SID))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))

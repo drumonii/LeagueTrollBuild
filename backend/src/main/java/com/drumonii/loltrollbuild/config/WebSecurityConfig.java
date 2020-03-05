@@ -8,7 +8,6 @@ import com.drumonii.loltrollbuild.security.authentication.Http401AuthenticationE
 import com.drumonii.loltrollbuild.security.login.JsonAuthenticationFailureHandler;
 import com.drumonii.loltrollbuild.security.login.JsonAuthenticationSuccessHandler;
 import com.drumonii.loltrollbuild.security.logout.JsonLogoutSuccessHandler;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -36,14 +35,11 @@ import javax.sql.DataSource;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-	@Value("${api.base-path}/**")
-	private String apiPath;
-
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		// @formatter:off
 		http
-			.antMatcher(apiPath + "/admin/**")
+			.antMatcher("/api/admin/**")
 			.authorizeRequests(authorizeRequests ->
 				authorizeRequests
 						.requestMatchers(EndpointRequest.toAnyEndpoint()).hasRole(UserRole.ADMIN)
@@ -51,14 +47,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.formLogin(formLogin ->
 				formLogin
 						.loginPage("/admin/login")
-						.loginProcessingUrl(apiPath + "/admin/login")
+						.loginProcessingUrl("/api/admin/login")
 						.successHandler(authenticationSuccessHandler())
 						.failureHandler(authenticationFailureHandler())
 						.permitAll()
 			)
 			.logout(logout ->
 				logout
-						.logoutUrl(apiPath + "/admin/logout")
+						.logoutUrl("/api/admin/logout")
 						.logoutSuccessHandler(logoutSuccessHandler())
 						.deleteCookies("XSRF-TOKEN")
 						.permitAll()

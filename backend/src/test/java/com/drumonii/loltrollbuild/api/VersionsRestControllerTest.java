@@ -6,7 +6,6 @@ import com.drumonii.loltrollbuild.test.api.WebMvcRestTest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -28,9 +27,6 @@ abstract class VersionsRestControllerTest {
 	@Autowired
 	protected ObjectMapper objectMapper;
 
-	@Value("${api.base-path}")
-	private String apiPath;
-
 	protected List<Version> versions;
 
 	protected abstract void beforeEach();
@@ -38,7 +34,7 @@ abstract class VersionsRestControllerTest {
 	@Test
 	void getVersions() throws Exception {
 		// qbe
-		mockMvc.perform(get("{apiPath}/versions", apiPath))
+		mockMvc.perform(get("/api/versions"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$.[0].major", is(versions.get(0).getMajor())))
@@ -46,7 +42,7 @@ abstract class VersionsRestControllerTest {
 				.andExpect(jsonPath("$.[0].revision", is(versions.get(0).getRevision())));
 
 		// qbe with no results
-		mockMvc.perform(get("{apiPath}/versions", apiPath)
+		mockMvc.perform(get("/api/versions")
 				.param("patch", "1234"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
@@ -56,11 +52,11 @@ abstract class VersionsRestControllerTest {
 	@Test
 	void getVersion() throws Exception {
 		// find with non existing version
-		mockMvc.perform(get("{apiPath}/versions/{patch}", apiPath, "1234"))
+		mockMvc.perform(get("/api/versions/{patch}", "1234"))
 				.andExpect(status().isNotFound());
 
 		// find with existing version
-		mockMvc.perform(get("{apiPath}/versions/{patch}", apiPath, versions.get(0).getPatch()))
+		mockMvc.perform(get("/api/versions/{patch}", versions.get(0).getPatch()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$.[*]").isNotEmpty());
@@ -69,7 +65,7 @@ abstract class VersionsRestControllerTest {
 	@Test
 	void getLatestVersion() throws Exception {
 		// get latest version with saved versions
-		mockMvc.perform(get("{apiPath}/versions/latest", apiPath))
+		mockMvc.perform(get("/api/versions/latest"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$.major", is(versions.get(0).getMajor())))
@@ -79,7 +75,7 @@ abstract class VersionsRestControllerTest {
 		versionsRepository.deleteAll();
 
 		// get latest version with no saved versions
-		mockMvc.perform(get("{apiPath}/versions/latest", apiPath))
+		mockMvc.perform(get("/api/versions/latest"))
 				.andExpect(status().isNotFound());
 	}
 

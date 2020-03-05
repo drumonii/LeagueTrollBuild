@@ -25,7 +25,7 @@ import java.util.List;
  * Repository REST controller for {@link GameMap}s.
  */
 @RestController
-@RequestMapping("${api.base-path}/maps")
+@RequestMapping("/maps")
 public class MapsRestController {
 
 	@Autowired

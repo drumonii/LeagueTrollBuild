@@ -31,7 +31,7 @@ import java.util.Optional;
  * Repository REST controller for {@link BatchJobInstance}s.
  */
 @RestController
-@RequestMapping("${api.base-path}/admin/job-instances")
+@RequestMapping("/admin/job-instances")
 @PreAuthorize("hasRole('ADMIN')")
 public class BatchJobInstancesRestController {
 

@@ -23,7 +23,7 @@ import java.util.List;
  * Repository REST controller for {@link SummonerSpell}s.
  */
 @RestController
-@RequestMapping("${api.base-path}/summoner-spells")
+@RequestMapping("/summoner-spells")
 public class SummonerSpellsRestController {
 
 	@Autowired

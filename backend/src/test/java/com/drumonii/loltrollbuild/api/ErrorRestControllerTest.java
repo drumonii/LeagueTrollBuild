@@ -20,7 +20,7 @@ class ErrorRestControllerTest extends AbstractRestControllerTests {
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
         HttpEntity<String> httpEntity = new HttpEntity<>(headers);
 
-        ResponseEntity<String> responseEntity = testRestTemplate.exchange(apiPath + "/not-found", HttpMethod.GET,
+        ResponseEntity<String> responseEntity = testRestTemplate.exchange("/api/not-found", HttpMethod.GET,
                 httpEntity, String.class);
 
         assertThat(responseEntity.getBody()).satisfies(new ErrorNotFoundJson("/api/not-found"));
@@ -32,7 +32,7 @@ class ErrorRestControllerTest extends AbstractRestControllerTests {
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
         HttpEntity<String> httpEntity = new HttpEntity<>(headers);
 
-        ResponseEntity<String> responseEntity = testRestTemplate.exchange(apiPath + "/admin/job-instances", HttpMethod.GET,
+        ResponseEntity<String> responseEntity = testRestTemplate.exchange("/api/admin/job-instances", HttpMethod.GET,
                 httpEntity, String.class);
 
         assertThat(responseEntity.getBody()).satisfies(new ErrorUnauthorizedJson("/api/admin/job-instances"));

@@ -11,7 +11,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -48,9 +47,6 @@ abstract class BuildsRestControllerTest {
 	@Autowired
 	protected ObjectMapper objectMapper;
 
-	@Value("${api.base-path}")
-	private String apiPath;
-
 	protected ChampionsResponse championsResponse;
 	protected ItemsResponse itemsResponse;
 	protected MapsResponse mapsResponse;
@@ -61,7 +57,7 @@ abstract class BuildsRestControllerTest {
 	@Test
 	void getBuilds() throws Exception {
 		// qbe
-		mockMvc.perform(get("{apiPath}/builds", apiPath))
+		mockMvc.perform(get("/api/builds"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$.content").exists())
@@ -79,7 +75,7 @@ abstract class BuildsRestControllerTest {
 	@Test
 	void getBuild() throws Exception {
 		// find with non existing build Id
-		mockMvc.perform(get("{apiPath}/builds/{id}", apiPath, 0))
+		mockMvc.perform(get("/api/builds/{id}", 0))
 				.andExpect(status().isNotFound());
 
 		Champion zed = championsResponse.getChampions().get("Zed");
@@ -109,7 +105,7 @@ abstract class BuildsRestControllerTest {
 		build = buildsRepository.save(build);
 
 		// find with missing build attributes
-		mockMvc.perform(get("{apiPath}/builds/{id}", apiPath, build.getId()))
+		mockMvc.perform(get("/api/builds/{id}", build.getId()))
 				.andExpect(status().isBadRequest());
 
 		championsRepository.save(zed);
@@ -125,7 +121,7 @@ abstract class BuildsRestControllerTest {
 		mapsRepository.save(map);
 
 		// find with existing build Id with attributes
-		mockMvc.perform(get("{apiPath}/builds/{id}", apiPath, build.getId()))
+		mockMvc.perform(get("/api/builds/{id}", build.getId()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$.champion").exists())
@@ -157,7 +153,7 @@ abstract class BuildsRestControllerTest {
 		Build build = new Build();
 
 		// Save with missing attributes
-		mockMvc.perform(post("{apiPath}/builds", apiPath).with(csrf())
+		mockMvc.perform(post("/api/builds").with(csrf())
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(objectMapper.writeValueAsString(build)))
 				.andExpect(status().isBadRequest());
@@ -187,7 +183,7 @@ abstract class BuildsRestControllerTest {
 		build.setMapId(map.getMapId());
 
 		// Save full build
-		mockMvc.perform(post("{apiPath}/builds", apiPath).with(csrf())
+		mockMvc.perform(post("/api/builds").with(csrf())
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(objectMapper.writeValueAsString(build)))
 				.andExpect(status().isCreated())
@@ -224,7 +220,7 @@ abstract class BuildsRestControllerTest {
 	void countBuild() throws Exception {
 		long count = buildsRepository.count();
 
-		mockMvc.perform(get("{apiPath}/builds/count", apiPath))
+		mockMvc.perform(get("/api/builds/count"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(content().json(count + ""));

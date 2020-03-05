@@ -1,9 +1,6 @@
 package com.drumonii.loltrollbuild.test.api;
 
-import com.drumonii.loltrollbuild.config.CacheConfig;
-import com.drumonii.loltrollbuild.config.JpaConfig;
-import com.drumonii.loltrollbuild.config.RiotApiConfig;
-import com.drumonii.loltrollbuild.config.WebSecurityConfig;
+import com.drumonii.loltrollbuild.config.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -44,7 +41,7 @@ import java.lang.annotation.*;
 @AutoConfigureWebClient
 @AutoConfigureMockMvc
 @ImportAutoConfiguration({ SpringDataWebAutoConfiguration.class })
-@Import({ CacheConfig.class, JpaConfig.class, RiotApiConfig.class, WebSecurityConfig.class })
+@Import({ CacheConfig.class, JpaConfig.class, RiotApiConfig.class, WebMvcConfig.class, WebSecurityConfig.class })
 public @interface WebMvcRestTest {
 
 	/**

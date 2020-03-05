@@ -10,7 +10,6 @@ import com.drumonii.loltrollbuild.util.RandomizeUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -38,9 +37,6 @@ abstract class ChampionsRestControllerTest {
 	@Autowired
 	protected ObjectMapper objectMapper;
 
-	@Value("${api.base-path}")
-	private String apiPath;
-
 	protected ChampionsResponse championsResponse;
 
 	protected abstract void beforeEach();
@@ -50,27 +46,27 @@ abstract class ChampionsRestControllerTest {
 		Champion champion = RandomizeUtil.getRandom(championsResponse.getChampions().values());
 
 		// qbe
-		mockMvc.perform(get("{apiPath}/champions", apiPath))
+		mockMvc.perform(get("/api/champions"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$.[*]").isNotEmpty());
 
 		// qbe with name
-		mockMvc.perform(get("{apiPath}/champions", apiPath)
+		mockMvc.perform(get("/api/champions")
 				.param("name", champion.getName().toLowerCase()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$..name", contains(champion.getName())));
 
 		// qbe with title
-		mockMvc.perform(get("{apiPath}/champions", apiPath)
+		mockMvc.perform(get("/api/champions")
 				.param("title", champion.getTitle().toLowerCase()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$..title", contains(champion.getTitle())));
 
 		// qbe with partype
-		mockMvc.perform(get("{apiPath}/champions", apiPath)
+		mockMvc.perform(get("/api/champions")
 				.param("partype", champion.getPartype().toLowerCase()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
@@ -84,7 +80,7 @@ abstract class ChampionsRestControllerTest {
 				.andExpect(jsonPath("$..tags", everyItem(hasItem(champion.getTags().iterator().next()))));
 
 		// qbe with no results
-		mockMvc.perform(get("{apiPath}/champions", apiPath)
+		mockMvc.perform(get("/api/champions")
 				.param("name", "abcd1234"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
@@ -94,13 +90,13 @@ abstract class ChampionsRestControllerTest {
 	@Test
 	void getChampion() throws Exception {
 		// find with non existing champion Id
-		mockMvc.perform(get("{apiPath}/champions/{id}", apiPath, 0))
+		mockMvc.perform(get("/api/champions/{id}", 0))
 				.andExpect(status().isNotFound());
 
 		Champion poppy = championsResponse.getChampions().get("Poppy");
 
 		// find with existing champion Id
-		mockMvc.perform(get("{apiPath}/champions/{id}", apiPath, poppy.getId()))
+		mockMvc.perform(get("/api/champions/{id}", poppy.getId()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$.[*]").isNotEmpty());
@@ -114,14 +110,14 @@ abstract class ChampionsRestControllerTest {
 
 	@Test
 	void getTags() throws Exception {
-		mockMvc.perform(get("{apiPath}/champions/tags", apiPath))
+		mockMvc.perform(get("/api/champions/tags"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON));
 	}
 
 	@Test
 	void trollBuildWithChampionThatDoesNotExist() throws Exception {
-		mockMvc.perform(get("{apiPath}/champions/{id}/troll-build", apiPath, 0))
+		mockMvc.perform(get("/api/champions/{id}/troll-build", 0))
 				.andExpect(status().isNotFound());
 	}
 
@@ -130,7 +126,7 @@ abstract class ChampionsRestControllerTest {
 		Champion azir = championsResponse.getChampions().get("Azir");
 
 		// get with champion Id and map specified
-		mockMvc.perform(get("{apiPath}/champions/{id}/troll-build", apiPath, azir.getId())
+		mockMvc.perform(get("/api/champions/{id}/troll-build", azir.getId())
 				.param("mapId", String.valueOf(HOWLING_ABYSS_ID)))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -154,7 +150,7 @@ abstract class ChampionsRestControllerTest {
 				.andExpect(jsonPath("$.trinket").exists());
 
 		// get with champion Id and no map specified
-		mockMvc.perform(get("{apiPath}/champions/{id}/troll-build", apiPath, azir.getId()))
+		mockMvc.perform(get("/api/champions/{id}/troll-build", azir.getId()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
 				.andExpect(jsonPath("$.items").exists())
@@ -180,7 +176,7 @@ abstract class ChampionsRestControllerTest {
 		Champion viktor = championsResponse.getChampions().get("Viktor");
 
 		// get with Viktor Id and map specified
-		mockMvc.perform(get("{apiPath}/champions/{id}/troll-build", apiPath, viktor.getId())
+		mockMvc.perform(get("/api/champions/{id}/troll-build", viktor.getId())
 				.param("mapId", String.valueOf(HOWLING_ABYSS_ID)))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -192,7 +188,7 @@ abstract class ChampionsRestControllerTest {
 				.andExpect(jsonPath("$.trinket").exists());
 
 		// get with Viktor name and map specified
-		mockMvc.perform(get("{apiPath}/champions/{id}/troll-build", apiPath, viktor.getName())
+		mockMvc.perform(get("/api/champions/{id}/troll-build", viktor.getName())
 				.param("mapId", String.valueOf(HOWLING_ABYSS_ID)))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -204,7 +200,7 @@ abstract class ChampionsRestControllerTest {
 				.andExpect(jsonPath("$.trinket").exists());
 
 		// get with Viktor Id and no map specified
-		mockMvc.perform(get("{apiPath}/champions/{id}/troll-build", apiPath, viktor.getId()))
+		mockMvc.perform(get("/api/champions/{id}/troll-build", viktor.getId()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
 				.andExpect(jsonPath("$.items").exists())
@@ -215,7 +211,7 @@ abstract class ChampionsRestControllerTest {
 				.andExpect(jsonPath("$.trinket").exists());
 
 		// get with Viktor name and no map specified
-		mockMvc.perform(get("{apiPath}/champions/{id}/troll-build", apiPath, viktor.getName()))
+		mockMvc.perform(get("/api/champions/{id}/troll-build", viktor.getName()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
 				.andExpect(jsonPath("$.items").exists())
@@ -234,7 +230,7 @@ abstract class ChampionsRestControllerTest {
 		Champion orianna = championsResponse.getChampions().get("Orianna");
 
 		// get with champion Id and map specified
-		mockMvc.perform(get("{apiPath}/champions/{id}/troll-build", apiPath, orianna.getId())
+		mockMvc.perform(get("/api/champions/{id}/troll-build", orianna.getId())
 				.param("mapId", String.valueOf(HOWLING_ABYSS_ID)))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -258,7 +254,7 @@ abstract class ChampionsRestControllerTest {
 				.andExpect(jsonPath("$.trinket", nullValue()));
 
 		// get with champion Id and no map specified
-		mockMvc.perform(get("{apiPath}/champions/{id}/troll-build", apiPath, orianna.getId()))
+		mockMvc.perform(get("/api/champions/{id}/troll-build", orianna.getId()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
 				.andExpect(jsonPath("$.items").exists())

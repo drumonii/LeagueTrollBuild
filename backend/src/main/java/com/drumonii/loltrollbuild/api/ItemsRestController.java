@@ -24,7 +24,7 @@ import static com.drumonii.loltrollbuild.util.GameMapUtil.SUMMONERS_RIFT_SID;
  * Repository REST controller for {@link Item}s.
  */
 @RestController
-@RequestMapping("${api.base-path}/items")
+@RequestMapping("/items")
 public class ItemsRestController {
 
 	@Autowired

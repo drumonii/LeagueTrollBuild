@@ -1,9 +1,9 @@
 package com.drumonii.loltrollbuild.api.admin;
 
 import com.drumonii.loltrollbuild.annotation.WithMockAdminUser;
+import com.drumonii.loltrollbuild.test.api.WebMvcRestTest;
 import com.drumonii.loltrollbuild.test.batch.BatchDaoTestConfig;
 import com.drumonii.loltrollbuild.test.batch.StepExecutionRowMapper;
-import com.drumonii.loltrollbuild.test.api.WebMvcRestTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.batch.core.*;
@@ -11,7 +11,6 @@ import org.springframework.batch.core.repository.dao.JobExecutionDao;
 import org.springframework.batch.core.repository.dao.JobInstanceDao;
 import org.springframework.batch.core.repository.dao.StepExecutionDao;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -46,9 +45,6 @@ class BatchStepExecutionsRestControllerTest {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
-	@Value("${api.base-path}")
-	private String apiPath;
-
 	private JobInstance jobInstance;
 	private StepExecution stepExecution;
 
@@ -76,25 +72,25 @@ class BatchStepExecutionsRestControllerTest {
 	@WithMockAdminUser
 	@Test
 	void getBatchStepExecutions() throws Exception {
-		mockMvc.perform(get("{apiPath}/admin/job-instances/{jobInstanceId}/step-executions", apiPath, jobInstance.getId()))
+		mockMvc.perform(get("/api/admin/job-instances/{jobInstanceId}/step-executions", jobInstance.getId()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$.[*]", hasSize(1)));
 
-		mockMvc.perform(get("{apiPath}/admin/job-instances/{jobInstanceId}/step-executions", apiPath, -1))
+		mockMvc.perform(get("/api/admin/job-instances/{jobInstanceId}/step-executions", -1))
 				.andExpect(status().isNotFound());
 	}
 
 	@WithMockAdminUser
 	@Test
 	void getBatchStepExecution() throws Exception {
-		mockMvc.perform(get("{apiPath}/admin/job-instances/{jobInstanceId}/step-executions/{stepExecutionId}", apiPath,
+		mockMvc.perform(get("/api/admin/job-instances/{jobInstanceId}/step-executions/{stepExecutionId}",
 				jobInstance.getId(), stepExecution.getId()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$..*").isNotEmpty());
 
-		mockMvc.perform(get("{apiPath}/admin/job-instances/{jobInstanceId}/step-executions/{stepExecutionId}", apiPath, -1, -1))
+		mockMvc.perform(get("/api/admin/job-instances/{jobInstanceId}/step-executions/{stepExecutionId}", -1, -1))
 				.andExpect(status().isNotFound());
 	}
 

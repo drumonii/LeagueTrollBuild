@@ -1,7 +1,6 @@
 package com.drumonii.loltrollbuild.test.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
@@ -19,9 +18,6 @@ public abstract class AbstractRestControllerTests {
 
     @Autowired
     protected MockMvc mockMvc;
-
-    @Value("${api.base-path}")
-    protected String apiPath;
 
     @Autowired
     protected TestRestTemplate testRestTemplate;

@@ -31,7 +31,7 @@ import static com.drumonii.loltrollbuild.util.GameMapUtil.SUMMONERS_RIFT_SID;
  * Repository REST controller for {@link Champion}s.
  */
 @RestController
-@RequestMapping("${api.base-path}/champions")
+@RequestMapping("/champions")
 public class ChampionsRestController {
 
 	@Autowired

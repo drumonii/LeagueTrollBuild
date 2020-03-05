@@ -20,7 +20,7 @@ class AdminActuatorEndpointsRestControllerTest extends AbstractRestControllerTes
         @WithMockAdminUser
         @Test
         void scheduledTasksEndpoint() throws Exception {
-            mockMvc.perform(get("{apiPath}/admin/actuator/scheduledtasks", apiPath))
+            mockMvc.perform(get("/api/admin/actuator/scheduledtasks"))
                     .andExpect(status().isOk())
                     .andExpect(jsonPath("$.cron.length()", is(1)))
                     .andExpect(jsonPath("$.cron[0].runnable.target").exists())
@@ -36,7 +36,7 @@ class AdminActuatorEndpointsRestControllerTest extends AbstractRestControllerTes
         @WithMockAdminUser
         @Test
         void systemPropertiesEndpoint() throws Exception {
-            mockMvc.perform(get("{apiPath}/admin/actuator/env", apiPath))
+            mockMvc.perform(get("/api/admin/actuator/env"))
                     .andExpect(status().isOk())
                     .andExpect(jsonPath("$.propertySources[?(@.name == 'systemProperties')].properties").exists())
                     .andExpect(jsonPath("$.propertySources[?(@.name == 'systemProperties')].properties['java.runtime.name'].value").exists())
@@ -55,7 +55,7 @@ class AdminActuatorEndpointsRestControllerTest extends AbstractRestControllerTes
         @WithMockAdminUser
         @Test
         void flywayEndpoint() throws Exception {
-            mockMvc.perform(get("{apiPath}/admin/actuator/flyway", apiPath))
+            mockMvc.perform(get("/api/admin/actuator/flyway"))
                     .andExpect(status().isOk())
                     .andExpect(jsonPath("$.contexts.application.flywayBeans.flyway.migrations").isArray());
         }
@@ -69,7 +69,7 @@ class AdminActuatorEndpointsRestControllerTest extends AbstractRestControllerTes
         @WithMockAdminUser
         @Test
         void diskSpaceDetailsEndpoint() throws Exception {
-            mockMvc.perform(get("{apiPath}/admin/actuator/health", apiPath))
+            mockMvc.perform(get("/api/admin/actuator/health"))
                     .andExpect(status().isOk())
                     .andExpect(jsonPath("$.components.diskSpace.details").exists())
                     .andExpect(jsonPath("$.components.diskSpace.details.total").isNumber())
@@ -85,7 +85,7 @@ class AdminActuatorEndpointsRestControllerTest extends AbstractRestControllerTes
         @WithMockAdminUser
         @Test
         void systemCpuUsageEndpoint() throws Exception {
-            mockMvc.perform(get("{apiPath}/admin/actuator/metrics/system.cpu.usage", apiPath))
+            mockMvc.perform(get("/api/admin/actuator/metrics/system.cpu.usage"))
                     .andExpect(status().isOk())
                     .andExpect(jsonPath("$.measurements.length()", is(1)))
                     .andExpect(jsonPath("$.measurements[0].statistic", is("VALUE")))
@@ -95,7 +95,7 @@ class AdminActuatorEndpointsRestControllerTest extends AbstractRestControllerTes
         @WithMockAdminUser
         @Test
         void systemCpuCountEndpoint() throws Exception {
-            mockMvc.perform(get("{apiPath}/admin/actuator/metrics/system.cpu.count", apiPath))
+            mockMvc.perform(get("/api/admin/actuator/metrics/system.cpu.count"))
                     .andExpect(status().isOk())
                     .andExpect(jsonPath("$.measurements.length()", is(1)))
                     .andExpect(jsonPath("$.measurements[0].statistic", is("VALUE")))
@@ -105,7 +105,7 @@ class AdminActuatorEndpointsRestControllerTest extends AbstractRestControllerTes
         @WithMockAdminUser
         @Test
         void jvmMemoryUsedEndpoint() throws Exception {
-            mockMvc.perform(get("{apiPath}/admin/actuator/metrics/jvm.memory.used", apiPath))
+            mockMvc.perform(get("/api/admin/actuator/metrics/jvm.memory.used"))
                     .andExpect(status().isOk())
                     .andExpect(jsonPath("$.measurements.length()", is(1)))
                     .andExpect(jsonPath("$.measurements[0].statistic", is("VALUE")))
@@ -115,7 +115,7 @@ class AdminActuatorEndpointsRestControllerTest extends AbstractRestControllerTes
         @WithMockAdminUser
         @Test
         void jvmMemoryMaxEndpoint() throws Exception {
-            mockMvc.perform(get("{apiPath}/admin/actuator/metrics/jvm.memory.max", apiPath))
+            mockMvc.perform(get("/api/admin/actuator/metrics/jvm.memory.max"))
                     .andExpect(status().isOk())
                     .andExpect(jsonPath("$.measurements.length()", is(1)))
                     .andExpect(jsonPath("$.measurements[0].statistic", is("VALUE")))
@@ -125,7 +125,7 @@ class AdminActuatorEndpointsRestControllerTest extends AbstractRestControllerTes
         @WithMockAdminUser
         @Test
         void processUptimeEndpoint() throws Exception {
-            mockMvc.perform(get("{apiPath}/admin/actuator/metrics/process.uptime", apiPath))
+            mockMvc.perform(get("/api/admin/actuator/metrics/process.uptime"))
                     .andExpect(status().isOk())
                     .andExpect(jsonPath("$.measurements.length()", is(1)))
                     .andExpect(jsonPath("$.measurements[0].statistic", is("VALUE")))
@@ -135,7 +135,7 @@ class AdminActuatorEndpointsRestControllerTest extends AbstractRestControllerTes
         @WithMockAdminUser
         @Test
         void httpServerRequestsEndpoint() throws Exception {
-            mockMvc.perform(get("{apiPath}/admin/actuator/metrics/http.server.requests", apiPath))
+            mockMvc.perform(get("/api/admin/actuator/metrics/http.server.requests"))
                     .andExpect(status().isOk())
                     .andExpect(jsonPath("$.measurements.length()", is(3)))
                     .andExpect(jsonPath("$.measurements[0].statistic", is("COUNT")))

@@ -1,8 +1,8 @@
 package com.drumonii.loltrollbuild.api.admin;
 
 import com.drumonii.loltrollbuild.annotation.WithMockAdminUser;
-import com.drumonii.loltrollbuild.test.batch.BatchDaoTestConfig;
 import com.drumonii.loltrollbuild.test.api.WebMvcRestTest;
+import com.drumonii.loltrollbuild.test.batch.BatchDaoTestConfig;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
@@ -14,7 +14,6 @@ import org.springframework.batch.core.repository.dao.JobInstanceDao;
 import org.springframework.batch.core.repository.dao.StepExecutionDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
@@ -63,9 +62,6 @@ class BatchJobInstancesRestControllerTest {
 	@Qualifier("allRetrievalsJob")
 	private Job allRetrievalsJob;
 
-	@Value("${api.base-path}")
-	private String apiPath;
-
 	private JobInstance jobInstance;
 
 	@BeforeEach
@@ -86,20 +82,20 @@ class BatchJobInstancesRestControllerTest {
 	@Test
 	void getBatchJobInstances() throws Exception {
 		// qbe
-		mockMvc.perform(get("{apiPath}/admin/job-instances", apiPath))
+		mockMvc.perform(get("/api/admin/job-instances"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$.[*]").isNotEmpty());
 
 		// qbe with name
-		mockMvc.perform(get("{apiPath}/admin/job-instances", apiPath)
+		mockMvc.perform(get("/api/admin/job-instances")
 				.param("name", jobInstance.getJobName().toLowerCase()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$.[*]").isNotEmpty());
 
 		// qbe with no results
-		mockMvc.perform(get("{apiPath}/admin/job-instances", apiPath)
+		mockMvc.perform(get("/api/admin/job-instances")
 				.param("name", "abcd1234"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
@@ -109,12 +105,12 @@ class BatchJobInstancesRestControllerTest {
 	@WithMockAdminUser
 	@Test
 	void getBatchJobInstance() throws Exception {
-		mockMvc.perform(get("{apiPath}/admin/job-instances/{jobInstanceId}", apiPath, jobInstance.getId()))
+		mockMvc.perform(get("/api/admin/job-instances/{jobInstanceId}", jobInstance.getId()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$.jobExecution").exists());
 
-		mockMvc.perform(get("{apiPath}/admin/job-instances/{jobInstanceId}", apiPath, -1))
+		mockMvc.perform(get("/api/admin/job-instances/{jobInstanceId}", -1))
 				.andExpect(status().isNotFound());
 	}
 
@@ -150,7 +146,7 @@ class BatchJobInstancesRestControllerTest {
 
 		given(this.allRetrievalsJob.getJobParametersIncrementer()).willReturn(new RunIdIncrementer());
 
-		mockMvc.perform(post("{apiPath}/admin/job-instances/restart", apiPath).with(csrf()))
+		mockMvc.perform(post("/api/admin/job-instances/restart").with(csrf()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$.id").exists())
@@ -170,7 +166,7 @@ class BatchJobInstancesRestControllerTest {
 		given(jobLauncher.run(eq(this.allRetrievalsJob), any(JobParameters.class)))
 				.willThrow(new NullPointerException());
 
-		mockMvc.perform(post("{apiPath}/admin/job-instances/restart", apiPath).with(csrf()))
+		mockMvc.perform(post("/api/admin/job-instances/restart").with(csrf()))
 				.andExpect(status().isInternalServerError());
 	}
 
@@ -233,7 +229,7 @@ class BatchJobInstancesRestControllerTest {
 		hangingAllRetrievalsJobExecution.setStatus(BatchStatus.STARTING);
 		jobExecutionDao.saveJobExecution(hangingAllRetrievalsJobExecution);
 
-		mockMvc.perform(get("{apiPath}/admin/job-instances/has-failed-all-retrievals-job", apiPath, jobInstance.getId())
+		mockMvc.perform(get("/api/admin/job-instances/has-failed-all-retrievals-job", jobInstance.getId())
 				.param("minutes", "1"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
@@ -281,7 +277,7 @@ class BatchJobInstancesRestControllerTest {
 		failedAllRetrievalsJobExecution.setStatus(BatchStatus.FAILED);
 		jobExecutionDao.saveJobExecution(failedAllRetrievalsJobExecution);
 
-		mockMvc.perform(get("{apiPath}/admin/job-instances/has-failed-all-retrievals-job", apiPath, jobInstance.getId())
+		mockMvc.perform(get("/api/admin/job-instances/has-failed-all-retrievals-job", jobInstance.getId())
 				.param("minutes", "1"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
@@ -310,7 +306,7 @@ class BatchJobInstancesRestControllerTest {
 		completedAllRetrievalsJobExecution.setStatus(BatchStatus.COMPLETED);
 		jobExecutionDao.saveJobExecution(completedAllRetrievalsJobExecution);
 
-		mockMvc.perform(get("{apiPath}/admin/job-instances/has-failed-all-retrievals-job", apiPath, jobInstance.getId()))
+		mockMvc.perform(get("/api/admin/job-instances/has-failed-all-retrievals-job", jobInstance.getId()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("hasFailedAllRetrievalsJob", is(false)));

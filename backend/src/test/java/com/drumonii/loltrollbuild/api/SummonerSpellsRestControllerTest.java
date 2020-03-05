@@ -8,7 +8,6 @@ import com.drumonii.loltrollbuild.util.RandomizeUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -32,9 +31,6 @@ abstract class SummonerSpellsRestControllerTest {
 	@Autowired
 	protected ObjectMapper objectMapper;
 
-	@Value("${api.base-path}")
-	private String apiPath;
-
 	protected SummonerSpellsResponse summonerSpellsResponse;
 
 	protected abstract void beforeEach();
@@ -46,27 +42,27 @@ abstract class SummonerSpellsRestControllerTest {
 				.collect(Collectors.toSet()));
 
 		// qbe
-		mockMvc.perform(get("{apiPath}/summoner-spells", apiPath))
+		mockMvc.perform(get("/api/summoner-spells"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$.[*]").isNotEmpty());
 
 		// qbe with name
-		mockMvc.perform(get("{apiPath}/summoner-spells", apiPath)
+		mockMvc.perform(get("/api/summoner-spells")
 				.param("name", summonerSpell.getName().toLowerCase()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-				.andExpect(jsonPath("$..name", everyItem(is(summonerSpell.getName()))));
+				.andExpect(jsonPath("$..name", everyItem(containsString(summonerSpell.getName()))));
 
 		// qbe with modes
-		mockMvc.perform(get("{apiPath}/summoner-spells", apiPath)
+		mockMvc.perform(get("/api/summoner-spells")
 				.param("modes", summonerSpell.getModes().iterator().next().name()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$..modes", everyItem(hasItem(summonerSpell.getModes().iterator().next().name()))));
 
 		// qbe with no results
-		mockMvc.perform(get("{apiPath}/summoner-spells", apiPath)
+		mockMvc.perform(get("/api/summoner-spells")
 				.param("name", "abcd1234"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
@@ -76,13 +72,13 @@ abstract class SummonerSpellsRestControllerTest {
 	@Test
 	void getSummonerSpell() throws Exception {
 		// find with non existing summoner spell Id
-		mockMvc.perform(get("{apiPath}/summoner-spells/{id}", apiPath, 0))
+		mockMvc.perform(get("/api/summoner-spells/{id}", 0))
 				.andExpect(status().isNotFound());
 
 		SummonerSpell snowball = summonerSpellsResponse.getSummonerSpells().get("SummonerSnowball");
 
 		// find with existing summoner spell Id
-		mockMvc.perform(get("{apiPath}/summoner-spells/{id}", apiPath, snowball.getId()))
+		mockMvc.perform(get("/api/summoner-spells/{id}", snowball.getId()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$.[*]").isNotEmpty());
@@ -90,7 +86,7 @@ abstract class SummonerSpellsRestControllerTest {
 
 	@Test
 	void getForTrollBuild() throws Exception {
-		mockMvc.perform(get("{apiPath}/summoner-spells/for-troll-build", apiPath)
+		mockMvc.perform(get("/api/summoner-spells/for-troll-build")
 				.param("mode", CLASSIC.name()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))

@@ -3,7 +3,6 @@ package com.drumonii.loltrollbuild.api.admin;
 import com.drumonii.loltrollbuild.annotation.WithMockAdminUser;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
@@ -20,13 +19,10 @@ class AdminAuthenticationRestControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @Value("${api.base-path}")
-    private String apiPath;
-
     @WithMockAdminUser
     @Test
     void getsAdminUserDetailsFromAuthentication() throws Exception {
-        mockMvc.perform(get("{apiPath}/admin/authentication", apiPath))
+        mockMvc.perform(get("/api/admin/authentication"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.username").exists())
@@ -40,7 +36,7 @@ class AdminAuthenticationRestControllerTest {
 
     @Test
     void getsNoAdminUserDetailsFromNoAuthentication() throws Exception {
-        mockMvc.perform(get("{apiPath}/admin/authentication", apiPath))
+        mockMvc.perform(get("/api/admin/authentication"))
                 .andExpect(status().isBadRequest());
     }
 

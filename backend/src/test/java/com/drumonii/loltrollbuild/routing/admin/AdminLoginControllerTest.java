@@ -6,7 +6,6 @@ import com.drumonii.loltrollbuild.security.login.LoginResponse.LoginStatus;
 import com.drumonii.loltrollbuild.security.logout.LogoutResponse.LogoutStatus;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithAnonymousUser;
@@ -32,9 +31,6 @@ class AdminLoginControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @Value("${api.base-path}")
-    private String apiPath;
-
     @WithAnonymousUser
     @Test
     void adminLogin() throws Exception {
@@ -44,7 +40,7 @@ class AdminLoginControllerTest {
 
     @Test
     void adminLoginWithValidCredentials() throws Exception {
-        mockMvc.perform(formLogin(apiPath + "/admin/login")
+        mockMvc.perform(formLogin("/api/admin/login")
                 .user(IN_MEM_USERNAME)
                 .password(IN_MEM_PASSWORD))
                 .andExpect(authenticated()
@@ -67,7 +63,7 @@ class AdminLoginControllerTest {
 
     @Test
     void adminLoginWithInvalidCredentials() throws Exception {
-        mockMvc.perform(formLogin(apiPath + "/admin/login")
+        mockMvc.perform(formLogin("/api/admin/login")
                 .user("bad_username")
                 .password("bad_password"))
                 .andExpect(unauthenticated())
@@ -80,7 +76,7 @@ class AdminLoginControllerTest {
     @WithMockAdminUser
     @Test
     void adminLogout() throws Exception {
-        mockMvc.perform(post("{baseUrl}/admin/logout", apiPath).with(csrf())
+        mockMvc.perform(post("/api/admin/logout").with(csrf())
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(unauthenticated())
                 .andExpect(status().isOk())

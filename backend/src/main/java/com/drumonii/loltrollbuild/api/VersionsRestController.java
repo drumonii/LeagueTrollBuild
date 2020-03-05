@@ -21,7 +21,7 @@ import java.util.Optional;
  * Repository REST controller for {@link Version}s.
  */
 @RestController
-@RequestMapping("${api.base-path}/versions")
+@RequestMapping("/versions")
 public class VersionsRestController {
 
 	@Autowired

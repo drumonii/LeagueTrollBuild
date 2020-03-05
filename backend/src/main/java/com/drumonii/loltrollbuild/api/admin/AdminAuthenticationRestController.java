@@ -14,7 +14,7 @@ import java.util.Optional;
  * REST controller for administration authentication.
  */
 @RestController
-@RequestMapping("${api.base-path}/admin")
+@RequestMapping("/admin")
 public class AdminAuthenticationRestController {
 
     /**

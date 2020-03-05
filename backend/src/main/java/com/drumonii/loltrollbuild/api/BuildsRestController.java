@@ -28,7 +28,7 @@ import java.util.Optional;
  * Repository REST controller for {@link Build}s.
  */
 @RestController
-@RequestMapping("${api.base-path}/builds")
+@RequestMapping("/builds")
 @Disabled
 public class BuildsRestController {
 

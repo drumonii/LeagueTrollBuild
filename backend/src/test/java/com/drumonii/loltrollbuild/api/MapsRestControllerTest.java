@@ -8,7 +8,6 @@ import com.drumonii.loltrollbuild.util.RandomizeUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -27,9 +26,6 @@ abstract class MapsRestControllerTest {
 	@Autowired
 	protected ObjectMapper objectMapper;
 
-	@Value("${api.base-path}")
-	private String apiPath;
-
 	protected MapsResponse mapsResponse;
 
 	protected abstract void beforeEach();
@@ -39,20 +35,20 @@ abstract class MapsRestControllerTest {
 		GameMap map = RandomizeUtil.getRandom(mapsResponse.getMaps().values());
 
 		// qbe
-		mockMvc.perform(get("{apiPath}/maps", apiPath))
+		mockMvc.perform(get("/api/maps"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$.[*]").isNotEmpty());
 
 		// qbe with name
-		mockMvc.perform(get("{apiPath}/maps", apiPath)
+		mockMvc.perform(get("/api/maps")
 				.param("mapName", map.getMapName().toLowerCase()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$.[*]").isNotEmpty());
 
 		// qbe with no results
-		mockMvc.perform(get("{apiPath}/maps", apiPath)
+		mockMvc.perform(get("/api/maps")
 				.param("mapName", "abcd1234"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
@@ -62,13 +58,13 @@ abstract class MapsRestControllerTest {
 	@Test
 	void getGameMap() throws Exception {
 		// find with non existing map Id
-		mockMvc.perform(get("{apiPath}/maps/{id}", apiPath, 0))
+		mockMvc.perform(get("/api/maps/{id}", 0))
 				.andExpect(status().isNotFound());
 
 		GameMap howlingAbyss = mapsResponse.getMaps().get("12");
 
 		// find with existing map Id
-		mockMvc.perform(get("{apiPath}/maps/{id}", apiPath, howlingAbyss.getMapId()))
+		mockMvc.perform(get("/api/maps/{id}", howlingAbyss.getMapId()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$.[*]").isNotEmpty());
@@ -76,7 +72,7 @@ abstract class MapsRestControllerTest {
 
 	@Test
 	void getForTrollBuild() throws Exception {
-		mockMvc.perform(get("{apiPath}/maps/for-troll-build", apiPath))
+		mockMvc.perform(get("/api/maps/for-troll-build"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$.[*]").isNotEmpty());
