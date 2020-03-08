@@ -29,6 +29,10 @@ First ensure PostgreSQL is running.
 
 Then start the backend either with Gradle: `./gradlew bootRun` or in your IDE.
 
+Next, use webdriver-manager to download the latest ChromeDriver and Selenium standalone server by running:
+
+  node_modules/.bin/webdriver-manager update
+
 NOTE: e2e tests assume the backend already has data from Riot in the database. If missing data, run the All Retrievals job prior.
 
 Otherwise you'll see `Error occurred while trying to proxy request` and most tests will fail.
