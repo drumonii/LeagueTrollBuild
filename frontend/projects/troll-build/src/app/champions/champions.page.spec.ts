@@ -3,6 +3,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { By } from '@angular/platform-browser';
 
+import { NbA11yModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 
 import { of } from 'rxjs';
@@ -20,7 +21,7 @@ describe('ChampionsPage', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, RouterTestingModule, NbEvaIconsModule, ChampionsModule],
+      imports: [HttpClientTestingModule, RouterTestingModule, NbA11yModule.forRoot(), NbEvaIconsModule, ChampionsModule],
     })
     .compileComponents();
   }));
