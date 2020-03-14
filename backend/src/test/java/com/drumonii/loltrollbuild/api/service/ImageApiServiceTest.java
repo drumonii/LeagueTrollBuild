@@ -12,6 +12,7 @@ import com.drumonii.loltrollbuild.riot.api.ItemsResponse;
 import com.drumonii.loltrollbuild.riot.api.MapsResponse;
 import com.drumonii.loltrollbuild.riot.api.SummonerSpellsResponse;
 import com.drumonii.loltrollbuild.test.json.JsonTestFilesUtil;
+import com.drumonii.loltrollbuild.util.GameMapUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -158,11 +159,11 @@ class ImageApiServiceTest {
     @Test
     void getsMapImage() {
         MapsResponse mapsResponse = jsonTestFilesUtil.getMapsResponse();
-        GameMap twistedTreeline = mapsResponse.getMaps().get("10");
-        mapsRepository.saveAndFlush(twistedTreeline);
+        GameMap summonersRift = mapsResponse.getMaps().get(GameMapUtil.SUMMONERS_RIFT_SID);
+        mapsRepository.saveAndFlush(summonersRift);
 
-        Image mapImage = imageApiService.getMapImage(twistedTreeline.getMapId());
-        assertThat(mapImage).satisfies(new FetchedImage(twistedTreeline.getImage()));
+        Image mapImage = imageApiService.getMapImage(summonersRift.getMapId());
+        assertThat(mapImage).satisfies(new FetchedImage(summonersRift.getImage()));
     }
 
     @Test

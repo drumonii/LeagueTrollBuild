@@ -32,7 +32,7 @@ abstract class ItemsRepositoryTest {
 	protected abstract ItemsResponse getItemsResponse();
 
 	static Stream<Integer> maps() {
-		return Stream.of(TWISTED_TREELINE_ID, SUMMONERS_RIFT_ID, HOWLING_ABYSS_ID);
+		return Stream.of(SUMMONERS_RIFT_ID, HOWLING_ABYSS_ID);
 	}
 
 	@BeforeEach
@@ -67,9 +67,7 @@ abstract class ItemsRepositoryTest {
 		List<Item> trinkets = itemsRepository.trinkets(map);
 		assertThat(trinkets).isNotEmpty();
 		assertThat(trinkets).doesNotHaveDuplicates();
-		if (map == TWISTED_TREELINE_ID) {
-			assertThat(trinkets).extracting(Item::getName).containsOnly("Arcane Sweeper");
-		} else if (map == HOWLING_ABYSS_ID) {
+		if (map == HOWLING_ABYSS_ID) {
 			assertThat(trinkets).extracting(Item::getName).containsOnly("Poro-Snax");
 		} else { // summoners rift
 			assertThat(trinkets).extracting(Item::getGold).extracting(ItemGold::getSell)

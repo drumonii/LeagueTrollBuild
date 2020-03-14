@@ -156,7 +156,7 @@ class ApiDocumentation {
 
 	@Test
 	void getItems() throws Exception {
-		itemsRepository.save(itemsResponse.getItems().get("3512"));
+		itemsRepository.save(itemsResponse.getItems().get("3140"));
 
 		mockMvc.perform(get("/api/items"))
 				.andExpect(status().isOk())

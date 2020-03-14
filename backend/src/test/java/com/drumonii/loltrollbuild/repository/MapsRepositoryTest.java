@@ -36,13 +36,12 @@ abstract class MapsRepositoryTest {
 	void forTrollBuild() {
 		GameMap provingGrounds = mapsResponse.getMaps().get(GameMapUtil.HOWLING_ABYSS_SID);
 		GameMap summonersRift = mapsResponse.getMaps().get(GameMapUtil.SUMMONERS_RIFT_SID);
-		GameMap twistedTreeline = mapsResponse.getMaps().get(GameMapUtil.TWISTED_TREELINE_SID);
 
 		List<GameMap> forTrollBuild = mapsRepository.forTrollBuild();
 
 		assertThat(forTrollBuild).doesNotHaveDuplicates();
 		assertThat(forTrollBuild)
-				.containsExactly(provingGrounds, summonersRift, twistedTreeline);
+				.containsExactly(provingGrounds, summonersRift);
 	}
 
 }
