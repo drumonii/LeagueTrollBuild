@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.23.1",
+  "version": "10.5.1",
   "data": {
     "Velkoz": {
       "id": "Velkoz",
@@ -12,8 +12,8 @@
         "full": "Velkoz.png",
         "sprite": "champion4.png",
         "group": "champion",
-        "x": 384,
-        "y": 0,
+        "x": 0,
+        "y": 48,
         "w": 48,
         "h": 48
       },
@@ -224,8 +224,8 @@
             "full": "VelkozQ.png",
             "sprite": "spell13.png",
             "group": "spell",
-            "x": 384,
-            "y": 0,
+            "x": 192,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -380,8 +380,8 @@
             "full": "VelkozW.png",
             "sprite": "spell13.png",
             "group": "spell",
-            "x": 432,
-            "y": 0,
+            "x": 240,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -529,7 +529,7 @@
             "full": "VelkozE.png",
             "sprite": "spell13.png",
             "group": "spell",
-            "x": 0,
+            "x": 288,
             "y": 48,
             "w": 48,
             "h": 48
@@ -650,7 +650,7 @@
             "full": "VelkozR.png",
             "sprite": "spell13.png",
             "group": "spell",
-            "x": 48,
+            "x": 336,
             "y": 48,
             "w": 48,
             "h": 48
@@ -665,8 +665,8 @@
           "full": "VelKoz_Passive.png",
           "sprite": "passive4.png",
           "group": "passive",
-          "x": 384,
-          "y": 0,
+          "x": 0,
+          "y": 48,
           "w": 48,
           "h": 48
         }
@@ -1000,143 +1000,6 @@
         },
         {
           "champion": "Velkoz",
-          "title": "VelkozCS",
-          "map": "CrystalScar",
-          "mode": "ODIN",
-          "type": "riot",
-          "customTag": "",
-          "extensionPage": false,
-          "customPanel": null,
-          "blocks": [
-            {
-              "type": "starting",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "1056",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2003",
-                  "count": 2,
-                  "hideCount": false
-                },
-                {
-                  "id": "3340",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "early",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "1001",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3165",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essential",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3158",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3285",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3089",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3116",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3157",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3029",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2055",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2139",
-                  "count": 1,
-                  "hideCount": true
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "champion": "Velkoz",
           "title": "VelkozFIRSTBLOOD",
           "map": "HA",
           "mode": "FIRSTBLOOD",
@@ -1305,11 +1168,12 @@
         },
         {
           "champion": "Velkoz",
-          "title": "VelkozKINGPORO",
+          "title": "VelkozARAM",
           "map": "HA",
           "mode": "KINGPORO",
           "type": "riot",
           "customTag": "",
+          "sortrank": 0,
           "extensionPage": false,
           "customPanel": null,
           "blocks": [
@@ -1341,6 +1205,16 @@
                   "id": "3683",
                   "count": 1,
                   "hideCount": false
+                },
+                {
+                  "id": "3684",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3685",
+                  "count": 1,
+                  "hideCount": false
                 }
               ]
             },
@@ -1352,14 +1226,16 @@
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
               "items": [
                 {
-                  "id": "3112",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3303",
+                  "id": "3802",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1378,14 +1254,26 @@
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
               "items": [
                 {
-                  "id": "3165",
+                  "id": "3285",
                   "count": 1,
                   "hideCount": false
                 },
                 {
                   "id": "3020",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3089",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1399,14 +1287,21 @@
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
               "items": [
                 {
-                  "id": "3285",
+                  "id": "3165",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3089",
+                  "id": "3151",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1425,19 +1320,26 @@
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
               "items": [
+                {
+                  "id": "3029",
+                  "count": 1,
+                  "hideCount": false
+                },
                 {
                   "id": "3157",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3116",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3151",
+                  "id": "3102",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1451,6 +1353,13 @@
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
               "items": [
                 {
                   "id": "2003",
@@ -1473,145 +1382,9 @@
         },
         {
           "champion": "Velkoz",
-          "title": "VelkozSIEGE",
-          "map": "SR",
-          "mode": "SIEGE",
-          "type": "riot",
-          "customTag": "",
-          "extensionPage": false,
-          "customPanel": null,
-          "blocks": [
-            {
-              "type": "siegeOffense",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3631",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3641",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3647",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3635",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3642",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "siegeDefense",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3634",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3640",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3643",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3636",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3642",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essential",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3158",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3285",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3089",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3116",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3157",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3029",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "champion": "Velkoz",
           "title": "VelKozSL",
-          "map": "SL",
-          "mode": "GAMEMODEX",
+          "map": "NB",
+          "mode": "NEXUSBLITZ",
           "type": "riot",
           "customTag": "",
           "sortrank": 0,
@@ -1947,12 +1720,12 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3070",
+                  "id": "3802",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3802",
+                  "id": "1026",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1975,12 +1748,45 @@
               ],
               "items": [
                 {
-                  "id": "3003",
+                  "id": "3285",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3158",
+                  "id": "3020",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3165",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "standard",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "3151",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3135",
                   "count": 1,
                   "hideCount": false
                 },
@@ -2013,12 +1819,12 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3102",
+                  "id": "3157",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3165",
+                  "id": "3102",
                   "count": 1,
                   "hideCount": false
                 }
@@ -2039,139 +1845,6 @@
               "hiddenWithAnyOf": [
                 ""
               ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2139",
-                  "count": 1,
-                  "hideCount": true
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "champion": "Velkoz",
-          "title": "VelkozTT",
-          "map": "TT",
-          "mode": "CLASSIC",
-          "type": "riot",
-          "customTag": "",
-          "sortrank": 0,
-          "extensionPage": false,
-          "customPanel": null,
-          "blocks": [
-            {
-              "type": "starting",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "1056",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2003",
-                  "count": 3,
-                  "hideCount": false
-                },
-                {
-                  "id": "1001",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essential",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3158",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3165",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3090",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3285",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3135",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3116",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3170",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3030",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
               "items": [
                 {
                   "id": "2003",

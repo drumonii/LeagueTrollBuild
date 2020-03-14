@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.23.1",
+  "version": "10.5.1",
   "data": {
     "Nami": {
       "id": "Nami",
@@ -12,7 +12,7 @@
         "full": "Nami.png",
         "sprite": "champion2.png",
         "group": "champion",
-        "x": 240,
+        "x": 288,
         "y": 48,
         "w": 48,
         "h": 48
@@ -253,7 +253,7 @@
             "full": "NamiQ.png",
             "sprite": "spell7.png",
             "group": "spell",
-            "x": 288,
+            "x": 384,
             "y": 144,
             "w": 48,
             "h": 48
@@ -407,7 +407,7 @@
             "full": "NamiW.png",
             "sprite": "spell7.png",
             "group": "spell",
-            "x": 336,
+            "x": 432,
             "y": 144,
             "w": 48,
             "h": 48
@@ -417,8 +417,8 @@
         {
           "id": "NamiE",
           "name": "Tidecaller's Blessing",
-          "description": "Empowers an allied champion for a short duration. The ally's basic attacks deal bonus magic damage and slow the target.",
-          "tooltip": "Empowers an allied champion's next {{ e4 }} basic attacks, causing them to slow the target by {{ e2 }}% <scaleAP>(+{{ a2 }}%)</scaleAP> for {{ e3 }} second and deal {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> bonus magic damage. Lasts for {{ e5 }} seconds.",
+          "description": "Empowers an allied champion for a short duration. The ally's basic attacks and spells deal bonus magic damage and slow the target.",
+          "tooltip": "Empowers an allied champion's next {{ e4 }} basic attacks and spells, causing them to slow the target by {{ e2 }}% <scaleAP>(+{{ a2 }}%)</scaleAP> for {{ e3 }} second and deal {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> bonus magic damage. Lasts for {{ e5 }} seconds.<br /><br /><rules><br />Deal {{ aoemod }} damage to non-champions when empowering Area of Effect spells.<br /></rules>",
           "leveltip": {
             "label": [
               "Damage",
@@ -559,10 +559,10 @@
           "rangeBurn": "800",
           "image": {
             "full": "NamiE.png",
-            "sprite": "spell7.png",
+            "sprite": "spell8.png",
             "group": "spell",
-            "x": 384,
-            "y": 144,
+            "x": 0,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -682,10 +682,10 @@
           "rangeBurn": "2550",
           "image": {
             "full": "NamiR.png",
-            "sprite": "spell7.png",
+            "sprite": "spell8.png",
             "group": "spell",
-            "x": 432,
-            "y": 144,
+            "x": 48,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -699,7 +699,7 @@
           "full": "NamiPassive.png",
           "sprite": "passive2.png",
           "group": "passive",
-          "x": 240,
+          "x": 288,
           "y": 48,
           "w": 48,
           "h": 48
@@ -986,174 +986,6 @@
         },
         {
           "champion": "Nami",
-          "title": "NamiCS",
-          "map": "CrystalScar",
-          "mode": "ODIN",
-          "type": "riot",
-          "customTag": "",
-          "extensionPage": false,
-          "customPanel": null,
-          "blocks": [
-            {
-              "type": "starting",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3303",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2003",
-                  "count": 3,
-                  "hideCount": false
-                },
-                {
-                  "id": "3340",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "early",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "2049",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3098",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "1001",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essential",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3117",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3092",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3107",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "aggressive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3050",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3165",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3116",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "protective",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3222",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3190",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3110",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2055",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2139",
-                  "count": 1,
-                  "hideCount": true
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "champion": "Nami",
           "title": "namiFIRSTBLOOD",
           "map": "HA",
           "mode": "FIRSTBLOOD",
@@ -1327,11 +1159,12 @@
         },
         {
           "champion": "Nami",
-          "title": "NamiKINGPORO",
+          "title": "NamiARAM",
           "map": "HA",
           "mode": "KINGPORO",
           "type": "riot",
           "customTag": "",
+          "sortrank": 0,
           "extensionPage": false,
           "customPanel": null,
           "blocks": [
@@ -1363,6 +1196,16 @@
                   "id": "3683",
                   "count": 1,
                   "hideCount": false
+                },
+                {
+                  "id": "3684",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3685",
+                  "count": 1,
+                  "hideCount": false
                 }
               ]
             },
@@ -1374,9 +1217,16 @@
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
               "items": [
                 {
-                  "id": "3096",
+                  "id": "3073",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1386,8 +1236,8 @@
                   "hideCount": false
                 },
                 {
-                  "id": "2031",
-                  "count": 1,
+                  "id": "2003",
+                  "count": 5,
                   "hideCount": false
                 }
               ]
@@ -1400,14 +1250,26 @@
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
               "items": [
                 {
-                  "id": "3028",
+                  "id": "3007",
                   "count": 1,
                   "hideCount": false
                 },
                 {
                   "id": "3158",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3504",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1421,6 +1283,13 @@
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
               "items": [
                 {
                   "id": "3174",
@@ -1433,7 +1302,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3060",
+                  "id": "3151",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1447,19 +1316,26 @@
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
               "items": [
                 {
-                  "id": "3222",
+                  "id": "3107",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3190",
+                  "id": "3174",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3069",
+                  "id": "3029",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1473,6 +1349,13 @@
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
               "items": [
                 {
                   "id": "2033",
@@ -1482,169 +1365,7 @@
                 {
                   "id": "2139",
                   "count": 1,
-                  "hideCount": false
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "champion": "Nami",
-          "title": "NamiSIEGE",
-          "map": "SR",
-          "mode": "SIEGE",
-          "type": "riot",
-          "customTag": "",
-          "extensionPage": false,
-          "customPanel": null,
-          "blocks": [
-            {
-              "type": "siegeOffense",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3631",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3641",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3647",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3635",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3642",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "siegeDefense",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3634",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3640",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3643",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3636",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3642",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essential",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3117",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3092",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3107",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "aggressive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3050",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3165",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3116",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "protective",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3222",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3190",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3110",
-                  "count": 1,
-                  "hideCount": false
+                  "hideCount": true
                 }
               ]
             }
@@ -1653,8 +1374,8 @@
         {
           "champion": "Nami",
           "title": "NamiSL",
-          "map": "SL",
-          "mode": "GAMEMODEX",
+          "map": "NB",
+          "mode": "NEXUSBLITZ",
           "type": "riot",
           "customTag": "",
           "sortrank": 0,
@@ -2056,12 +1777,12 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3801",
+                  "id": "3114",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3114",
+                  "id": "3028",
                   "count": 1,
                   "hideCount": false
                 }
@@ -2089,12 +1810,12 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3107",
+                  "id": "3174",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3174",
+                  "id": "3504",
                   "count": 1,
                   "hideCount": false
                 }
@@ -2107,7 +1828,7 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "ItemSmiteAoE",
+              "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
                 ""
@@ -2117,12 +1838,12 @@
               ],
               "items": [
                 {
-                  "id": "3905",
+                  "id": "3107",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3504",
+                  "id": "3905",
                   "count": 1,
                   "hideCount": false
                 },
@@ -2139,8 +1860,8 @@
               "recSteps": false,
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "ItemSmiteAoE",
-              "hideIfSummonerSpell": "ItemTeleportCancel",
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
                 ""
@@ -2161,179 +1882,6 @@
                 },
                 {
                   "id": "3116",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "ItemSmiteAoE",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2139",
-                  "count": 1,
-                  "hideCount": true
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "champion": "Nami",
-          "title": "namiTT",
-          "map": "TT",
-          "mode": "CLASSIC",
-          "type": "riot",
-          "customTag": "",
-          "sortrank": 0,
-          "extensionPage": false,
-          "customPanel": null,
-          "blocks": [
-            {
-              "type": "starting",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "1056",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "1001",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2003",
-                  "count": 3,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essential",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3158",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3028",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3090",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3174",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3285",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3151",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3222",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3110",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3102",
                   "count": 1,
                   "hideCount": false
                 }

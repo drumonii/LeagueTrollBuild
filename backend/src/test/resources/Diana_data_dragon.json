@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.23.1",
+  "version": "10.5.1",
   "data": {
     "Diana": {
       "id": "Diana",
@@ -12,7 +12,7 @@
         "full": "Diana.png",
         "sprite": "champion0.png",
         "group": "champion",
-        "x": 0,
+        "x": 48,
         "y": 96,
         "w": 48,
         "h": 48
@@ -53,6 +53,12 @@
           "num": 12,
           "name": "Dark Waters Diana",
           "chromas": true
+        },
+        {
+          "id": "131018",
+          "num": 18,
+          "name": "Dragonslayer Diana",
+          "chromas": true
         }
       ],
       "lore": "Bearing her crescent moonblade, Diana fights as a warrior of the Lunari—a faith all but quashed in the lands around Mount Targon. Clad in shimmering armor the color of winter snow at night, she is a living embodiment of the silver moon's power. Imbued with the essence of an Aspect from beyond Targon's towering summit, Diana is no longer wholly human, and struggles to understand her power and purpose in this world.",
@@ -81,8 +87,8 @@
       "stats": {
         "hp": 594,
         "hpperlevel": 95,
-        "mp": 372,
-        "mpperlevel": 20,
+        "mp": 375,
+        "mpperlevel": 25,
         "movespeed": 345,
         "armor": 31,
         "armorperlevel": 3.6,
@@ -95,7 +101,7 @@
         "mpregenperlevel": 0.8,
         "crit": 0,
         "critperlevel": 0,
-        "attackdamage": 53.04,
+        "attackdamage": 57.04,
         "attackdamageperlevel": 3,
         "attackspeedperlevel": 2.25,
         "attackspeed": 0.625
@@ -105,7 +111,7 @@
           "id": "DianaQ",
           "name": "Crescent Strike",
           "description": "Unleashes a bolt of lunar energy in an arc dealing magic damage.<br><br>Afflicts enemies struck with Moonlight, revealing them if they are not stealthed for 3 seconds.",
-          "tooltip": "Unleashes a bolt of lunar energy in an arc dealing {{ totaldamage }} magic damage.<br /><br />Afflicts enemies struck with Moonlight, revealing them if they are not stealthed for {{ moonlightduration }} seconds.",
+          "tooltip": "Unleashes a bolt of lunar energy in an arc dealing {{ totaldamage }} magic damage.<br /><br />Afflicts enemies struck with <keywordMajor>Moonlight</keywordMajor>, revealing them if they are not stealthed for {{ moonlightduration }} seconds.",
           "leveltip": {
             "label": [
               "Damage",
@@ -126,13 +132,13 @@
           ],
           "cooldownBurn": "8/7.5/7/6.5/6",
           "cost": [
-            55,
-            55,
-            55,
-            55,
-            55
+            50,
+            50,
+            50,
+            50,
+            50
           ],
-          "costBurn": "55",
+          "costBurn": "50",
           "datavalues": {},
           "effect": [
             null,
@@ -235,7 +241,7 @@
             "full": "DianaQ.png",
             "sprite": "spell2.png",
             "group": "spell",
-            "x": 288,
+            "x": 384,
             "y": 48,
             "w": 48,
             "h": 48
@@ -246,36 +252,38 @@
           "id": "DianaOrbs",
           "name": "Pale Cascade",
           "description": "Diana creates three orbiting spheres that detonate on contact with enemies to deal damage in an area. She also gains a temporary shield that absorbs damage. If her third sphere detonates, the shield gains additional strength.",
-          "tooltip": "Creates three orbiting spheres that explode on contact with enemies dealing {{ e2 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage. Lasts {{ e1 }} seconds.<br /><br />Grants a temporary shield that absorbs {{ e3 }} <scaleAP>(+{{ a2 }})</scaleAP> damage. If the third sphere detonates, the shield increases by {{ e3 }} <scaleAP>(+{{ a2 }})</scaleAP>.",
+          "tooltip": "Creates three orbiting spheres that explode on contact with enemies, each dealing {{ totaldamage }} magic damage ({{ totalmaxdamage }} Maximum Damage). Lasts {{ shieldduration }} seconds.<br /><br />Grants a temporary shield that absorbs {{ shieldvalue }} damage. If the third sphere detonates, the shield increases by {{ shieldvalue }}.",
           "leveltip": {
             "label": [
               "Damage",
-              "Shield",
-              "Mana Cost"
+              "Shield Amount",
+              "@AbilityResourceName@ Cost",
+              "Cooldown"
             ],
             "effect": [
               "{{ e2 }} -> {{ e2NL }}",
-              "{{ e3 }} -> {{ e3NL }}",
-              "{{ cost }} -> {{ costNL }}"
+              "{{ shieldbase }} -> {{ shieldbaseNL }}",
+              "{{ cost }} -> {{ costNL }}",
+              "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
           "maxrank": 5,
           "cooldown": [
-            10,
-            10,
-            10,
-            10,
-            10
+            15,
+            13.5,
+            12,
+            10.5,
+            9
           ],
-          "cooldownBurn": "10",
+          "cooldownBurn": "15/13.5/12/10.5/9",
           "cost": [
             40,
+            45,
+            50,
             55,
-            70,
-            85,
-            100
+            60
           ],
-          "costBurn": "40/55/70/85/100",
+          "costBurn": "40/45/50/55/60",
           "datavalues": {},
           "effect": [
             null,
@@ -287,11 +295,11 @@
               5
             ],
             [
-              22,
-              34,
-              46,
-              58,
-              70
+              18,
+              30,
+              42,
+              54,
+              66
             ],
             [
               40,
@@ -353,7 +361,7 @@
           "effectBurn": [
             null,
             "5",
-            "22/34/46/58/70",
+            "18/30/42/54/66",
             "40/55/70/85/100",
             "1",
             "4",
@@ -363,24 +371,8 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.2,
-              "key": "a1"
-            },
-            {
-              "link": "spelldamage",
-              "coeff": 0.3,
-              "key": "a2"
-            },
-            {
-              "link": "spelldamage",
-              "coeff": 0.3,
-              "key": "a2"
-            }
-          ],
-          "costType": " Mana",
+          "vars": [],
+          "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
             800,
@@ -394,150 +386,7 @@
             "full": "DianaOrbs.png",
             "sprite": "spell2.png",
             "group": "spell",
-            "x": 336,
-            "y": 48,
-            "w": 48,
-            "h": 48
-          },
-          "resource": "{{ cost }} Mana"
-        },
-        {
-          "id": "DianaVortex",
-          "name": "Moonfall",
-          "description": "<spellPassive>Passive:</spellPassive> Increases the attack speed gained from Moonsilver Blade<br><br><spellActive>Active:</spellActive> Reveals and draws in all nearby enemies and then slows them for 2 seconds.",
-          "tooltip": "<spellPassive>Passive:</spellPassive> Increases the attack speed gained from Moonsilver Blade to {{ attackspeednewvalue*100 }}%<br /><br /><spellActive>Active:</spellActive> Reveals and draws in all nearby enemies and then slows them by {{ e1 }}% for {{ e2 }} seconds.",
-          "leveltip": {
-            "label": [
-              "Cooldown",
-              "Attack Speed",
-              "Movement Slow"
-            ],
-            "effect": [
-              "{{ cooldown }} -> {{ cooldownNL }}",
-              "{{ attackspeedtooltip }}% -> {{ attackspeedtooltipNL }}%",
-              "{{ slowtooltip }}% -> {{ slowtooltipNL }}%"
-            ]
-          },
-          "maxrank": 5,
-          "cooldown": [
-            26,
-            24,
-            22,
-            20,
-            18
-          ],
-          "cooldownBurn": "26/24/22/20/18",
-          "cost": [
-            70,
-            70,
-            70,
-            70,
-            70
-          ],
-          "costBurn": "70",
-          "datavalues": {},
-          "effect": [
-            null,
-            [
-              35,
-              40,
-              45,
-              50,
-              55
-            ],
-            [
-              2,
-              2,
-              2,
-              2,
-              2
-            ],
-            [
-              0.3,
-              0.4,
-              0.5,
-              0.6,
-              0.7
-            ],
-            [
-              3,
-              3,
-              3,
-              3,
-              3
-            ],
-            [
-              4,
-              4,
-              4,
-              4,
-              4
-            ],
-            [
-              0,
-              0,
-              0,
-              0,
-              0
-            ],
-            [
-              0,
-              0,
-              0,
-              0,
-              0
-            ],
-            [
-              0,
-              0,
-              0,
-              0,
-              0
-            ],
-            [
-              0,
-              0,
-              0,
-              0,
-              0
-            ],
-            [
-              0,
-              0,
-              0,
-              0,
-              0
-            ]
-          ],
-          "effectBurn": [
-            null,
-            "35/40/45/50/55",
-            "2",
-            "0.3/0.4/0.5/0.6/0.7",
-            "3",
-            "4",
-            "0",
-            "0",
-            "0",
-            "0",
-            "0"
-          ],
-          "vars": [],
-          "costType": " {{ abilityresourcename }}",
-          "maxammo": "-1",
-          "range": [
-            450,
-            450,
-            450,
-            450,
-            450
-          ],
-          "rangeBurn": "450",
-          "image": {
-            "full": "DianaVortex.png",
-            "sprite": "spell2.png",
-            "group": "spell",
-            "x": 384,
+            "x": 432,
             "y": 48,
             "w": 48,
             "h": 48
@@ -548,7 +397,7 @@
           "id": "DianaTeleport",
           "name": "Lunar Rush",
           "description": "Becomes the living embodiment of the vengeful moon, dashing to an enemy and dealing magic damage.<br><br>Lunar Rush has no cooldown when used to dash to an enemy afflicted with Moonlight. All other enemies will have the Moonlight debuff removed regardless of whether they were the target of Lunar Rush.",
-          "tooltip": "Becomes the living embodiment of the vengeful moon, dashing to an enemy and dealing {{ totaldamage }} magic damage.<br /><br />Lunar Rush has no cooldown when used to dash to an enemy afflicted with Moonlight. All other enemies will have the Moonlight debuff removed regardless of whether they were the target of Lunar Rush.",
+          "tooltip": "Becomes the living embodiment of the vengeful moon, dashing to an enemy and dealing {{ totaldamage }} magic damage, resetting its cooldown if the enemy is affected by <keywordMajor>Moonlight</keywordMajor>.",
           "leveltip": {
             "label": [
               "Damage",
@@ -561,38 +410,50 @@
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
-          "maxrank": 3,
+          "maxrank": 5,
           "cooldown": [
-            25,
+            22,
             20,
-            15
+            18,
+            16,
+            14
           ],
-          "cooldownBurn": "25/20/15",
+          "cooldownBurn": "22/20/18/16/14",
           "cost": [
+            40,
+            45,
             50,
-            65,
-            80
+            55,
+            60
           ],
-          "costBurn": "50/65/80",
+          "costBurn": "40/45/50/55/60",
           "datavalues": {},
           "effect": [
             null,
             [
               4,
               4,
-              4
+              4,
+              0,
+              0
             ],
             [
+              40,
+              60,
+              80,
               100,
-              160,
-              220
+              120
             ],
             [
               50,
               75,
-              100
+              100,
+              0,
+              0
             ],
             [
+              0,
+              0,
               0,
               0,
               0
@@ -600,7 +461,138 @@
             [
               0,
               0,
+              0,
+              0,
               0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "effectBurn": [
+            null,
+            "4/4/4/0/0",
+            "40/60/80/100/120",
+            "50/75/100/0/0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "vars": [],
+          "costType": " {{ abilityresourcename }}",
+          "maxammo": "-1",
+          "range": [
+            825,
+            825,
+            825,
+            825,
+            825
+          ],
+          "rangeBurn": "825",
+          "image": {
+            "full": "DianaTeleport.png",
+            "sprite": "spell2.png",
+            "group": "spell",
+            "x": 0,
+            "y": 96,
+            "w": 48,
+            "h": 48
+          },
+          "resource": "{{ cost }} {{ abilityresourcename }}"
+        },
+        {
+          "id": "DianaR",
+          "name": "Moonfall",
+          "description": "Diana reveals and draws in all nearby enemies and slows them.<br><br>If Diana pulls in one or more enemy champions, the moonlight crashes down onto her after a short delay, dealing magic damage in an area around her, increased for each target beyond the first pulled.",
+          "tooltip": "Reveals and draws in all nearby enemies and slows them by {{ slowtooltip }}% for {{ slowduration }} seconds.<br /><br />If Diana pulls in one or more enemy champions, the moonlight crashes down onto her after {{ delay }} second, dealing {{ rexplosiondamage }} magic damage in an area around her, increased by {{ rmultihitamplification }} for each target beyond the first pulled.",
+          "leveltip": {
+            "label": [
+              "Cooldown",
+              "Damage",
+              "Slow"
+            ],
+            "effect": [
+              "{{ cooldown }} -> {{ cooldownNL }}",
+              "{{ damage }} -> {{ damageNL }}",
+              "{{ slowtooltip }}% -> {{ slowtooltipNL }}%"
+            ]
+          },
+          "maxrank": 3,
+          "cooldown": [
+            100,
+            90,
+            80
+          ],
+          "cooldownBurn": "100/90/80",
+          "cost": [
+            100,
+            100,
+            100
+          ],
+          "costBurn": "100",
+          "datavalues": {},
+          "effect": [
+            null,
+            [
+              -0.35,
+              -0.4,
+              -0.45
+            ],
+            [
+              2,
+              2,
+              2
+            ],
+            [
+              0.5,
+              0.5,
+              0.5
+            ],
+            [
+              3,
+              3,
+              3
+            ],
+            [
+              4,
+              4,
+              4
             ],
             [
               0,
@@ -630,11 +622,11 @@
           ],
           "effectBurn": [
             null,
+            "-0.35/-0.4/-0.45",
+            "2",
+            "0.5",
+            "3",
             "4",
-            "100/160/220",
-            "50/75/100",
-            "0",
-            "0",
             "0",
             "0",
             "0",
@@ -645,17 +637,17 @@
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
-            825,
-            825,
-            825
+            475,
+            475,
+            475
           ],
-          "rangeBurn": "825",
+          "rangeBurn": "475",
           "image": {
-            "full": "DianaTeleport.png",
+            "full": "DianaR.png",
             "sprite": "spell2.png",
             "group": "spell",
-            "x": 432,
-            "y": 48,
+            "x": 48,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -664,12 +656,12 @@
       ],
       "passive": {
         "name": "Moonsilver Blade",
-        "description": "Every third strike restores mana and cleaves nearby enemies for an additional magic damage. After casting a spell, Diana gains  attack speed for her next 3 attacks.",
+        "description": "Every third strike cleaves nearby enemies for an additional magic damage. After casting a spell, Diana gains attack speed for her next 3 attacks.",
         "image": {
           "full": "Diana_Passive_LunarBlade.png",
           "sprite": "passive0.png",
           "group": "passive",
-          "x": 0,
+          "x": 48,
           "y": 96,
           "w": 48,
           "h": 48
@@ -949,174 +941,6 @@
                   "id": "2033",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "champion": "Diana",
-          "title": "DianaCS",
-          "map": "CrystalScar",
-          "mode": "ODIN",
-          "type": "riot",
-          "customTag": "",
-          "extensionPage": false,
-          "customPanel": null,
-          "blocks": [
-            {
-              "type": "starting",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "1056",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2003",
-                  "count": 2,
-                  "hideCount": false
-                },
-                {
-                  "id": "3340",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "early",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3108",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3101",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "1001",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essential",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3157",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3115",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3020",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "standard",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3135",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3001",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3089",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3100",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3116",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3026",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "2055",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2033",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2139",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }
@@ -1406,11 +1230,12 @@
         },
         {
           "champion": "Diana",
-          "title": "DianaKINGPORO",
+          "title": "DianaARAM",
           "map": "HA",
           "mode": "KINGPORO",
           "type": "riot",
           "customTag": "",
+          "sortrank": 0,
           "extensionPage": false,
           "customPanel": null,
           "blocks": [
@@ -1442,6 +1267,16 @@
                   "id": "3683",
                   "count": 1,
                   "hideCount": false
+                },
+                {
+                  "id": "3684",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3685",
+                  "count": 1,
+                  "hideCount": false
                 }
               ]
             },
@@ -1453,19 +1288,21 @@
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
               "items": [
                 {
-                  "id": "3112",
+                  "id": "3010",
                   "count": 1,
                   "hideCount": false
                 },
                 {
                   "id": "1001",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2031",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1479,14 +1316,21 @@
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
               "items": [
                 {
-                  "id": "3001",
+                  "id": "3029",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3157",
+                  "id": "3100",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1505,6 +1349,13 @@
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
               "items": [
                 {
                   "id": "3089",
@@ -1517,7 +1368,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3115",
+                  "id": "3907",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1531,19 +1382,26 @@
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
               "items": [
                 {
-                  "id": "3116",
+                  "id": "3001",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3102",
+                  "id": "3165",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3152",
+                  "id": "3157",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1557,6 +1415,13 @@
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
               "items": [
                 {
                   "id": "2003",
@@ -1579,171 +1444,9 @@
         },
         {
           "champion": "Diana",
-          "title": "DianaSIEGE",
-          "map": "SR",
-          "mode": "SIEGE",
-          "type": "riot",
-          "customTag": "",
-          "extensionPage": false,
-          "customPanel": null,
-          "blocks": [
-            {
-              "type": "siegeOffense",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3631",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3641",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3647",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3635",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3642",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "siegeDefense",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3634",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3640",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3643",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3636",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3642",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essential",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3157",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3115",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3020",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "standard",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3135",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3001",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3089",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3100",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3116",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3026",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "champion": "Diana",
           "title": "DianaSL",
-          "map": "SL",
-          "mode": "GAMEMODEX",
+          "map": "NB",
+          "mode": "NEXUSBLITZ",
           "type": "riot",
           "customTag": "",
           "sortrank": 0,
@@ -2173,12 +1876,12 @@
               ],
               "items": [
                 {
-                  "id": "3108",
+                  "id": "3802",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3101",
+                  "id": "1026",
                   "count": 1,
                   "hideCount": false
                 },
@@ -2206,12 +1909,12 @@
               ],
               "items": [
                 {
-                  "id": "3157",
+                  "id": "3285",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3115",
+                  "id": "3157",
                   "count": 1,
                   "hideCount": false
                 },
@@ -2249,7 +1952,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3907",
+                  "id": "3115",
                   "count": 1,
                   "hideCount": false
                 }
@@ -2272,7 +1975,7 @@
               ],
               "items": [
                 {
-                  "id": "3102",
+                  "id": "3027",
                   "count": 1,
                   "hideCount": false
                 },
@@ -2310,7 +2013,7 @@
               ],
               "items": [
                 {
-                  "id": "1041",
+                  "id": "1039",
                   "count": 1,
                   "hideCount": false
                 },
@@ -2409,7 +2112,7 @@
               ],
               "items": [
                 {
-                  "id": "3115",
+                  "id": "3089",
                   "count": 1,
                   "hideCount": false
                 },
@@ -2419,12 +2122,12 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3100",
+                  "id": "3115",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3907",
+                  "id": "3152",
                   "count": 1,
                   "hideCount": false
                 }
@@ -2447,17 +2150,17 @@
               ],
               "items": [
                 {
-                  "id": "3089",
+                  "id": "3151",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3116",
+                  "id": "3100",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3102",
+                  "id": "3165",
                   "count": 1,
                   "hideCount": false
                 }
@@ -2483,296 +2186,6 @@
                   "id": "2033",
                   "count": 1,
                   "hideCount": false
-                },
-                {
-                  "id": "2139",
-                  "count": 1,
-                  "hideCount": true
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "champion": "Diana",
-          "title": "DianaTT",
-          "map": "TT",
-          "mode": "CLASSIC",
-          "type": "riot",
-          "customTag": "",
-          "sortrank": 0,
-          "extensionPage": false,
-          "customPanel": null,
-          "blocks": [
-            {
-              "type": "starting",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "1056",
-                  "count": 2,
-                  "hideCount": false
-                },
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essential",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3020",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3115",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3090",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "standard",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3100",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3135",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3907",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3116",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3001",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "startingjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "1039",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "1041",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2003",
-                  "count": 3,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essentialjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3020",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "1402",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3090",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "standard",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3115",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3100",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3135",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3116",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3001",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
                 },
                 {
                   "id": "2139",

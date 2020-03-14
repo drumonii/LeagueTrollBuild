@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.23.1",
+  "version": "10.5.1",
   "data": {
     "Senna": {
       "id": "Senna",
@@ -12,8 +12,8 @@
         "full": "Senna.png",
         "sprite": "champion3.png",
         "group": "champion",
-        "x": 432,
-        "y": 0,
+        "x": 0,
+        "y": 48,
         "w": 48,
         "h": 48
       },
@@ -29,6 +29,12 @@
           "num": 1,
           "name": "True Damage Senna",
           "chromas": true
+        },
+        {
+          "id": "235009",
+          "num": 9,
+          "name": "True Damage Senna Prestige Edition",
+          "chromas": false
         }
       ],
       "lore": "Cursed from childhood to be haunted by the supernatural Black Mist, Senna joined a sacred order known as the Sentinels of Light, and fiercely fought back—only to be killed, her soul imprisoned in a lantern by the cruel wraith Thresh. But refusing to lose hope, within the lantern Senna learned to use the Mist, and reemerged to new life, forever changed. Now wielding darkness along with light, Senna seeks to end the Black Mist by turning it against itself—with every blast of her relic weapon, redeeming the souls lost within.",
@@ -48,7 +54,7 @@
       },
       "stats": {
         "hp": 520,
-        "hpperlevel": 85,
+        "hpperlevel": 75,
         "mp": 350,
         "mpperlevel": 45,
         "movespeed": 330,
@@ -205,7 +211,7 @@
             "full": "SennaQ.png",
             "sprite": "spell10.png",
             "group": "spell",
-            "x": 96,
+            "x": 192,
             "y": 48,
             "w": 48,
             "h": 48
@@ -216,7 +222,7 @@
           "id": "SennaW",
           "name": "Last Embrace",
           "description": "Senna sends forth a wave of Black Mist. If it hits an enemy it latches onto them hungrily, rooting them and everything nearby after a brief delay.",
-          "tooltip": "Senna sends forth the black mist, dealing <physicalDamage>{{ damage }} physical damage</physicalDamage> to the first enemy hit. After a {{ delaytime }} second delay the target and other nearby enemies are rooted for {{ rootduration }} seconds.",
+          "tooltip": "Senna sends forth the Black Mist, dealing <physicalDamage>{{ damage }} physical damage</physicalDamage> to the first enemy hit. After a {{ delaytime }} second delay the target and other nearby enemies are rooted for {{ rootduration }} seconds.",
           "leveltip": {
             "label": [
               "Damage",
@@ -337,18 +343,18 @@
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
-            1150,
-            1150,
-            1150,
-            1150,
-            1150
+            1250,
+            1250,
+            1250,
+            1250,
+            1250
           ],
-          "rangeBurn": "1150",
+          "rangeBurn": "1250",
           "image": {
             "full": "SennaW.png",
             "sprite": "spell10.png",
             "group": "spell",
-            "x": 144,
+            "x": 240,
             "y": 48,
             "w": 48,
             "h": 48
@@ -359,7 +365,7 @@
           "id": "SennaE",
           "name": "Curse of the Black Mist",
           "description": "Senna draws the Mist she has stored in her weapon into a storm around her, embracing darkness and becoming a wraith within. Allies who enter the area are camouflaged and also appear as wraiths as the Mist shrouds them. Wraiths gain increased movement speed, are unselectable, and hide their identities.",
-          "tooltip": "Senna dissolves into a cloud of mist for {{ buffduration }} seconds, becoming a <span class=\"color90b2ee\">wraith</span>. Allied champions who enter the mist are <span class=\"colorcd90ee\">Camouflaged</span> and become <span class=\"color90b2ee\">wraiths</span> when they leave. <span class=\"color90b2ee\">Wraiths</span> gain {{ totalms }} Movement Speed. They are unselectable and hide their identities as long as no enemy champions are nearby. ",
+          "tooltip": "Senna dissolves into a cloud of Mist for {{ buffduration }} seconds, becoming a <span class=\"color90b2ee\">wraith</span>. Allied champions who enter the Mist are <span class=\"colorcd90ee\">Camouflaged</span> and become <span class=\"color90b2ee\">wraiths</span> when they leave. <span class=\"color90b2ee\">Wraiths</span> gain {{ totalms }} Movement Speed. They are unselectable and hide their identities as long as no enemy champions are nearby. ",
           "leveltip": {
             "label": [
               "Duration",
@@ -489,7 +495,7 @@
             "full": "SennaE.png",
             "sprite": "spell10.png",
             "group": "spell",
-            "x": 192,
+            "x": 288,
             "y": 48,
             "w": 48,
             "h": 48
@@ -500,7 +506,7 @@
           "id": "SennaR",
           "name": "Dawning Shadow",
           "description": "Senna calls upon the relic stones of fallen Sentinels, splitting her relic cannon into a holy array of shadow and light. She then fires a global beam that shields allies from harm, while damaging enemies caught in the center.",
-          "tooltip": "Senna fires a blast of light with global range. Enemy champions hit take <physicalDamage>{{ totaldamage }} physical damage</physicalDamage>. Allied champions hit in a wider area receive a shield for {{ shieldduration }} seconds that absorbs {{ totalshield }} damage. The shield's power scales with the amount of <span class=\"color0bf7de\">mist</span> Senna has collected.",
+          "tooltip": "Senna fires a blast of light with global range. Enemy champions hit take <physicalDamage>{{ totaldamage }} physical damage</physicalDamage>. Allied champions hit in a wider area receive a shield for {{ shieldduration }} seconds that absorbs {{ totalshield }} damage. The shield's power scales with the amount of <span class=\"color0bf7de\">Mist</span> Senna has collected.",
           "leveltip": {
             "label": [
               "Damage",
@@ -606,7 +612,7 @@
             "full": "SennaR.png",
             "sprite": "spell10.png",
             "group": "spell",
-            "x": 240,
+            "x": 336,
             "y": 48,
             "w": 48,
             "h": 48
@@ -621,8 +627,8 @@
           "full": "Senna_Passive.Senna.png",
           "sprite": "passive3.png",
           "group": "passive",
-          "x": 432,
-          "y": 0,
+          "x": 0,
+          "y": 48,
           "w": 48,
           "h": 48
         }
@@ -1001,7 +1007,7 @@
         },
         {
           "champion": "Senna",
-          "title": "SennaKINGPORO",
+          "title": "SennaARAM",
           "map": "HA",
           "mode": "KINGPORO",
           "type": "riot",
@@ -1011,6 +1017,47 @@
           "useObviousCheckmark": false,
           "customPanel": null,
           "blocks": [
+            {
+              "type": "KingPoroSnax",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "items": [
+                {
+                  "id": "3680",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3681",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3682",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3683",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3684",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3685",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
             {
               "type": "starting",
               "recMath": false,
@@ -1235,17 +1282,17 @@
               ],
               "items": [
                 {
+                  "id": "3028",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
                   "id": "1001",
                   "count": 1,
                   "hideCount": false
                 },
                 {
                   "id": "3134",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3133",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1268,7 +1315,7 @@
               ],
               "items": [
                 {
-                  "id": "3147",
+                  "id": "3179",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1278,7 +1325,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3179",
+                  "id": "3174",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1301,17 +1348,17 @@
               ],
               "items": [
                 {
-                  "id": "3174",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
                   "id": "3504",
                   "count": 1,
                   "hideCount": false
                 },
                 {
                   "id": "3107",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3071",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1334,6 +1381,11 @@
               ],
               "items": [
                 {
+                  "id": "3147",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
                   "id": "3142",
                   "count": 1,
                   "hideCount": false
@@ -1342,16 +1394,11 @@
                   "id": "3031",
                   "count": 1,
                   "hideCount": false
-                },
-                {
-                  "id": "3033",
-                  "count": 1,
-                  "hideCount": false
                 }
               ]
             },
             {
-              "type": "defensive",
+              "type": "selective",
               "recMath": false,
               "recSteps": false,
               "minSummonerLevel": -1,
@@ -1367,17 +1414,17 @@
               ],
               "items": [
                 {
-                  "id": "3814",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
                   "id": "3026",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3156",
+                  "id": "3814",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3033",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1475,7 +1522,7 @@
               ],
               "items": [
                 {
-                  "id": "1038",
+                  "id": "1037",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1485,7 +1532,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "1037",
+                  "id": "3070",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1508,17 +1555,17 @@
               ],
               "items": [
                 {
-                  "id": "3031",
+                  "id": "3004",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3009",
+                  "id": "3158",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3095",
+                  "id": "3147",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1541,7 +1588,7 @@
               ],
               "items": [
                 {
-                  "id": "3147",
+                  "id": "3031",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1551,14 +1598,14 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3036",
+                  "id": "3814",
                   "count": 1,
                   "hideCount": false
                 }
               ]
             },
             {
-              "type": "defensive",
+              "type": "selective",
               "recMath": false,
               "recSteps": false,
               "minSummonerLevel": -1,
@@ -1574,7 +1621,7 @@
               ],
               "items": [
                 {
-                  "id": "3072",
+                  "id": "3036",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1584,181 +1631,12 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3156",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2140",
-                  "count": 1,
-                  "hideCount": true
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "champion": "Senna",
-          "title": "SennaTT",
-          "map": "TT",
-          "mode": "CLASSIC",
-          "type": "riot",
-          "customTag": "",
-          "sortrank": 0,
-          "extensionPage": false,
-          "useObviousCheckmark": false,
-          "customPanel": null,
-          "blocks": [
-            {
-              "type": "starting",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "1055",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "1001",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2003",
-                  "count": 2,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essential",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3031",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3009",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3033",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3508",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3174",
+                  "id": "3072",
                   "count": 1,
                   "hideCount": false
                 },
                 {
                   "id": "3085",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3812",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3156",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3139",
                   "count": 1,
                   "hideCount": false
                 }

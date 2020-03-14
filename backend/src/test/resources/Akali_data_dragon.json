@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.23.1",
+  "version": "10.5.1",
   "data": {
     "Akali": {
       "id": "Akali",
@@ -166,13 +166,13 @@
           ],
           "cooldownBurn": "1.5",
           "cost": [
-            100,
-            95,
-            90,
-            85,
-            80
+            120,
+            115,
+            110,
+            105,
+            100
           ],
-          "costBurn": "100/95/90/85/80",
+          "costBurn": "120/115/110/105/100",
           "datavalues": {},
           "effect": [
             null,
@@ -275,7 +275,7 @@
             "full": "AkaliQ.png",
             "sprite": "spell0.png",
             "group": "spell",
-            "x": 192,
+            "x": 96,
             "y": 96,
             "w": 48,
             "h": 48
@@ -285,8 +285,8 @@
         {
           "id": "AkaliW",
           "name": "Twilight Shroud",
-          "description": "Akali drops a cover of smoke. While inside the shroud, Akali becomes invisible and unable to be selected by enemy spells and attacks and gains Movement Speed. Attacking or using abilities will briefly reveal her.",
-          "tooltip": "Drops a smoke bomb, unleashing a spreading cover of smoke lasting {{ baseduration }} seconds.<br /><br />The smoke grants Akali <keywordStealth>invisibility</keywordStealth> and {{ e6 }}% movement speed.<br /><br /><u><keywordStealth>Stealth - Invisible</keywordStealth></u>: Akali can only be revealed by nearby enemy Turrets or <span class=\"size16 coloree91d7\">True Sight</span>.",
+          "description": "Akali drops a cover of smoke and briefly gains Movement Speed. While inside the shroud, Akali becomes invisible and unable to be selected by enemy spells and attacks. Attacking or using abilities will briefly reveal her.  ",
+          "tooltip": "Drops a smoke bomb, unleashing a spreading cover of smoke lasting {{ baseduration }} seconds.<br /><br />Akali gains {{ e6 }}% decaying movement speed for {{ movementspeedduration }} seconds.<br /><br />The smoke grants Akali <keywordStealth>invisibility</keywordStealth> while she is in it.  <br /><br /><u><keywordStealth>Stealth - Invisible</keywordStealth></u>: Akali can only be revealed by nearby enemy Turrets or <span class=\"size16 coloree91d7\">True Sight</span>.",
           "leveltip": {
             "label": [
               "Movement Speed",
@@ -353,11 +353,11 @@
               80
             ],
             [
-              20,
-              25,
               30,
               35,
-              40
+              40,
+              45,
+              50
             ],
             [
               1,
@@ -395,7 +395,7 @@
             "0",
             "250",
             "60/65/70/75/80",
-            "20/25/30/35/40",
+            "30/35/40/45/50",
             "1",
             "0",
             "5/5.5/6/6.5/7",
@@ -416,7 +416,7 @@
             "full": "AkaliW.png",
             "sprite": "spell0.png",
             "group": "spell",
-            "x": 240,
+            "x": 144,
             "y": 96,
             "w": 48,
             "h": 48
@@ -559,7 +559,7 @@
             "full": "AkaliE.png",
             "sprite": "spell0.png",
             "group": "spell",
-            "x": 288,
+            "x": 192,
             "y": 96,
             "w": 48,
             "h": 48
@@ -570,7 +570,7 @@
           "id": "AkaliR",
           "name": "Perfect Execution",
           "description": "Akali leaps in a direction, damaging enemies she strikes. Re-cast: Akali dashes in a direction, executing all enemies she strikes.",
-          "tooltip": "Two dashes: The first vaults over enemies, dealing <physicalDamage>{{ cast1damage }} physical damage</physicalDamage>. Akali can dash again after {{ cooldownbetweencasts }} seconds.<span class=\"size8\"><br /><br /></span>The second is a piercing thrust that executes, dealing <magicDamage>{{ cast2damagemin }}</magicDamage> to <magicDamage>{{ cast2damagemax }} magic damage</magicDamage> based on missing health.",
+          "tooltip": "Two dashes: The first vaults over target enemy, dealing <physicalDamage>{{ cast1damage }} physical damage</physicalDamage> to all enemies Akali dashes over. Akali can dash again after {{ cooldownbetweencasts }} seconds.<span class=\"size8\"><br /><br /></span>The second is an untargeted piercing thrust that executes, dealing <magicDamage>{{ cast2damagemin }}</magicDamage> to <magicDamage>{{ cast2damagemax }} magic damage</magicDamage> based on missing health.",
           "leveltip": {
             "label": [
               "Base Damage",
@@ -585,11 +585,11 @@
           },
           "maxrank": 3,
           "cooldown": [
-            160,
-            130,
-            100
+            120,
+            90,
+            60
           ],
-          "cooldownBurn": "160/130/100",
+          "cooldownBurn": "120/90/60",
           "cost": [
             0,
             0,
@@ -667,16 +667,16 @@
           "costType": "No Cost",
           "maxammo": "-1",
           "range": [
-            575,
-            575,
-            575
+            675,
+            675,
+            675
           ],
-          "rangeBurn": "575",
+          "rangeBurn": "675",
           "image": {
             "full": "AkaliR.png",
             "sprite": "spell0.png",
             "group": "spell",
-            "x": 336,
+            "x": 240,
             "y": 96,
             "w": 48,
             "h": 48
@@ -832,174 +832,6 @@
                   "id": "2139",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "champion": "Akali",
-          "title": "AkaliCS",
-          "map": "CrystalScar",
-          "mode": "ODIN",
-          "type": "riot",
-          "customTag": "",
-          "extensionPage": false,
-          "customPanel": null,
-          "blocks": [
-            {
-              "type": "starting",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "1029",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2003",
-                  "count": 4,
-                  "hideCount": false
-                },
-                {
-                  "id": "3340",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "early",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "1001",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3145",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3144",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essential",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3020",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3146",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3001",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3100",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3135",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3089",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3026",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3157",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3116",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2055",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2139",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }
@@ -1171,11 +1003,13 @@
         },
         {
           "champion": "Akali",
-          "title": "AkaliKINGPORO",
+          "title": "AkaliARAM",
           "map": "HA",
           "mode": "KINGPORO",
           "type": "riot",
           "customTag": "",
+          "requiredPerk": "",
+          "sortrank": 0,
           "extensionPage": false,
           "customPanel": null,
           "blocks": [
@@ -1207,6 +1041,16 @@
                   "id": "3683",
                   "count": 1,
                   "hideCount": false
+                },
+                {
+                  "id": "3684",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3685",
+                  "count": 1,
+                  "hideCount": false
                 }
               ]
             },
@@ -1230,8 +1074,8 @@
                   "hideCount": false
                 },
                 {
-                  "id": "2031",
-                  "count": 1,
+                  "id": "2003",
+                  "count": 3,
                   "hideCount": false
                 }
               ]
@@ -1298,17 +1142,17 @@
               "hideIfSummonerSpell": "",
               "items": [
                 {
-                  "id": "3001",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
                   "id": "3116",
                   "count": 1,
                   "hideCount": false
                 },
                 {
                   "id": "3068",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3102",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1339,171 +1183,9 @@
         },
         {
           "champion": "Akali",
-          "title": "AkaliSIEGE",
-          "map": "SR",
-          "mode": "SIEGE",
-          "type": "riot",
-          "customTag": "",
-          "extensionPage": false,
-          "customPanel": null,
-          "blocks": [
-            {
-              "type": "siegeOffense",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3631",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3641",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3647",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3635",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3642",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "siegeDefense",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3634",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3640",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3643",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3636",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3642",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essential",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3020",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3146",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3001",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3100",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3135",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3089",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3026",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3157",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3116",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "champion": "Akali",
           "title": "AkaliSL",
-          "map": "SL",
-          "mode": "GAMEMODEX",
+          "map": "NB",
+          "mode": "NEXUSBLITZ",
           "type": "riot",
           "customTag": "",
           "sortrank": 0,
@@ -1928,7 +1610,7 @@
               ],
               "items": [
                 {
-                  "id": "3100",
+                  "id": "3151",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1961,7 +1643,7 @@
               ],
               "items": [
                 {
-                  "id": "3116",
+                  "id": "3165",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1992,144 +1674,6 @@
               "hiddenWithAnyOf": [
                 ""
               ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2139",
-                  "count": 1,
-                  "hideCount": true
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "champion": "Akali",
-          "title": "AkaliTT",
-          "map": "TT",
-          "mode": "CLASSIC",
-          "type": "riot",
-          "customTag": "",
-          "sortrank": 0,
-          "extensionPage": false,
-          "customPanel": null,
-          "blocks": [
-            {
-              "type": "starting",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "1001",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "1052",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2003",
-                  "count": 2,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essential",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3020",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3116",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3145",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3100",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3146",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3090",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3001",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3143",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3102",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
               "items": [
                 {
                   "id": "2003",

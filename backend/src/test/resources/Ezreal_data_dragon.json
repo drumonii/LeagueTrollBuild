@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.23.1",
+  "version": "10.5.1",
   "data": {
     "Ezreal": {
       "id": "Ezreal",
@@ -12,7 +12,7 @@
         "full": "Ezreal.png",
         "sprite": "champion0.png",
         "group": "champion",
-        "x": 288,
+        "x": 336,
         "y": 96,
         "w": 48,
         "h": 48
@@ -127,10 +127,10 @@
         "difficulty": 7
       },
       "stats": {
-        "hp": 491,
+        "hp": 500,
         "hpperlevel": 86,
-        "mp": 360.6,
-        "mpperlevel": 42,
+        "mp": 375,
+        "mpperlevel": 50,
         "movespeed": 325,
         "armor": 22,
         "armorperlevel": 3.5,
@@ -139,13 +139,13 @@
         "attackrange": 550,
         "hpregen": 4,
         "hpregenperlevel": 0.55,
-        "mpregen": 8.092,
+        "mpregen": 8.5,
         "mpregenperlevel": 0.65,
         "crit": 0,
         "critperlevel": 0,
         "attackdamage": 60,
         "attackdamageperlevel": 2.5,
-        "attackspeedperlevel": 1.5,
+        "attackspeedperlevel": 2.5,
         "attackspeed": 0.625
       },
       "spells": [
@@ -285,7 +285,7 @@
             "full": "EzrealQ.png",
             "sprite": "spell3.png",
             "group": "spell",
-            "x": 0,
+            "x": 96,
             "y": 0,
             "w": 48,
             "h": 48
@@ -426,7 +426,7 @@
             "full": "EzrealW.png",
             "sprite": "spell3.png",
             "group": "spell",
-            "x": 48,
+            "x": 144,
             "y": 0,
             "w": 48,
             "h": 48
@@ -567,7 +567,7 @@
             "full": "EzrealE.png",
             "sprite": "spell3.png",
             "group": "spell",
-            "x": 96,
+            "x": 192,
             "y": 0,
             "w": 48,
             "h": 48
@@ -680,7 +680,7 @@
             "full": "EzrealR.png",
             "sprite": "spell3.png",
             "group": "spell",
-            "x": 144,
+            "x": 240,
             "y": 0,
             "w": 48,
             "h": 48
@@ -695,7 +695,7 @@
           "full": "Ezreal_RisingSpellForce.png",
           "sprite": "passive0.png",
           "group": "passive",
-          "x": 288,
+          "x": 336,
           "y": 96,
           "w": 48,
           "h": 48
@@ -1068,174 +1068,6 @@
         },
         {
           "champion": "Ezreal",
-          "title": "EzrealCS",
-          "map": "CrystalScar",
-          "mode": "ODIN",
-          "type": "riot",
-          "customTag": "",
-          "extensionPage": false,
-          "customPanel": null,
-          "blocks": [
-            {
-              "type": "starting",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "1055",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3340",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "early",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3073",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3057",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "1001",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essential",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3008",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3078",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3158",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3036",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3072",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3031",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3025",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3153",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3139",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2055",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2140",
-                  "count": 1,
-                  "hideCount": true
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "champion": "Ezreal",
           "title": "EzrealFIRSTBLOOD",
           "map": "HA",
           "mode": "FIRSTBLOOD",
@@ -1409,11 +1241,12 @@
         },
         {
           "champion": "Ezreal",
-          "title": "EzrealKINGPORO",
+          "title": "EzrealARAM",
           "map": "HA",
           "mode": "KINGPORO",
           "type": "riot",
           "customTag": "",
+          "sortrank": 0,
           "extensionPage": false,
           "customPanel": null,
           "blocks": [
@@ -1445,6 +1278,16 @@
                   "id": "3683",
                   "count": 1,
                   "hideCount": false
+                },
+                {
+                  "id": "3684",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3685",
+                  "count": 1,
+                  "hideCount": false
                 }
               ]
             },
@@ -1456,20 +1299,27 @@
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
               "items": [
                 {
-                  "id": "3070",
+                  "id": "3073",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "1001",
+                  "id": "1036",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "2031",
-                  "count": 1,
+                  "id": "2003",
+                  "count": 4,
                   "hideCount": false
                 }
               ]
@@ -1482,19 +1332,26 @@
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
               "items": [
                 {
-                  "id": "3025",
+                  "id": "3008",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3147",
                   "count": 1,
                   "hideCount": false
                 },
                 {
                   "id": "3158",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3004",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1508,19 +1365,26 @@
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
               "items": [
                 {
+                  "id": "3078",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3142",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
                   "id": "3153",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3036",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3072",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1534,6 +1398,13 @@
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
               "items": [
                 {
                   "id": "3139",
@@ -1541,12 +1412,45 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3102",
+                  "id": "3156",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3156",
+                  "id": "3025",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "offmeta",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "3007",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3100",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3089",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1560,6 +1464,13 @@
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
               "items": [
                 {
                   "id": "2003",
@@ -1582,434 +1493,9 @@
         },
         {
           "champion": "Ezreal",
-          "title": "EzrealPRJ17",
-          "map": "ProjectSlums",
-          "mode": "PROJECT",
-          "type": "riot",
-          "customTag": "",
-          "sortrank": 0,
-          "extensionPage": false,
-          "customPanel": null,
-          "blocks": [
-            {
-              "type": "starting",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "items": [
-                {
-                  "id": "3006",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3078",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3153",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "recommended",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "items": [
-                {
-                  "id": "3072",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3031",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3094",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "items": [
-                {
-                  "id": "3147",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3812",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3146",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "champion": "Ezreal",
-          "title": "EzrealSG",
-          "map": "CityPark",
-          "mode": "STARGUARDIAN",
-          "type": "riot",
-          "customTag": "",
-          "sortrank": 0,
-          "extensionPage": false,
-          "customPanel": null,
-          "blocks": [
-            {
-              "type": "starting",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "1055",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3340",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "early",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3070",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3057",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "1001",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essential",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3004",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3078",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3158",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3036",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3072",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3031",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3025",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3153",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3139",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2055",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2140",
-                  "count": 1,
-                  "hideCount": true
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "champion": "Ezreal",
-          "title": "EzrealSIEGE",
-          "map": "SR",
-          "mode": "SIEGE",
-          "type": "riot",
-          "customTag": "",
-          "extensionPage": false,
-          "customPanel": null,
-          "blocks": [
-            {
-              "type": "siegeOffense",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3631",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3641",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3647",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3635",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3642",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "siegeDefense",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3634",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3640",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3643",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3636",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3642",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essential",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3008",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3078",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3158",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3036",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3072",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3031",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3025",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3153",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3139",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "champion": "Ezreal",
           "title": "EzrealSL",
-          "map": "SL",
-          "mode": "GAMEMODEX",
+          "map": "NB",
+          "mode": "NEXUSBLITZ",
           "type": "riot",
           "customTag": "",
           "sortrank": 0,
@@ -2308,6 +1794,269 @@
         },
         {
           "champion": "Ezreal",
+          "title": "EzrealPRJ17",
+          "map": "ProjectSlums",
+          "mode": "PROJECT",
+          "type": "riot",
+          "customTag": "",
+          "sortrank": 0,
+          "extensionPage": false,
+          "customPanel": null,
+          "blocks": [
+            {
+              "type": "starting",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "items": [
+                {
+                  "id": "3006",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3078",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3153",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "recommended",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "items": [
+                {
+                  "id": "3072",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3031",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3094",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "situational",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "items": [
+                {
+                  "id": "3147",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3812",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3146",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "champion": "Ezreal",
+          "title": "EzrealSG",
+          "map": "CityPark",
+          "mode": "STARGUARDIAN",
+          "type": "riot",
+          "customTag": "",
+          "sortrank": 0,
+          "extensionPage": false,
+          "customPanel": null,
+          "blocks": [
+            {
+              "type": "starting",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "items": [
+                {
+                  "id": "1055",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "2003",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "items": [
+                {
+                  "id": "3070",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3057",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1001",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "essential",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "items": [
+                {
+                  "id": "3004",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3078",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3158",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "offensive",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "items": [
+                {
+                  "id": "3036",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3072",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3031",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "situational",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "items": [
+                {
+                  "id": "3025",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3153",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3139",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "consumables",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "items": [
+                {
+                  "id": "2003",
+                  "count": 1,
+                  "hideCount": true
+                },
+                {
+                  "id": "2055",
+                  "count": 1,
+                  "hideCount": true
+                },
+                {
+                  "id": "2140",
+                  "count": 1,
+                  "hideCount": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "champion": "Ezreal",
           "title": "EzrealSR",
           "map": "SR",
           "mode": "CLASSIC",
@@ -2378,11 +2127,6 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3073",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
                   "id": "3057",
                   "count": 1,
                   "hideCount": false
@@ -2416,17 +2160,12 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3008",
+                  "id": "3158",
                   "count": 1,
                   "hideCount": false
                 },
                 {
                   "id": "3078",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3158",
                   "count": 1,
                   "hideCount": false
                 }
@@ -2449,7 +2188,7 @@
               ],
               "items": [
                 {
-                  "id": "3036",
+                  "id": "3153",
                   "count": 1,
                   "hideCount": false
                 },
@@ -2459,7 +2198,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3153",
+                  "id": "3033",
                   "count": 1,
                   "hideCount": false
                 }
@@ -2499,7 +2238,7 @@
               ]
             },
             {
-              "type": "consumables",
+              "type": "ability_scaling",
               "recMath": false,
               "recSteps": false,
               "minSummonerLevel": -1,
@@ -2515,148 +2254,17 @@
               ],
               "items": [
                 {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2140",
-                  "count": 1,
-                  "hideCount": true
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "champion": "Ezreal",
-          "title": "EzrealTT",
-          "map": "TT",
-          "mode": "CLASSIC",
-          "type": "riot",
-          "customTag": "",
-          "sortrank": 0,
-          "extensionPage": false,
-          "useObviousCheckmark": false,
-          "customPanel": null,
-          "blocks": [
-            {
-              "type": "starting",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "1055",
+                  "id": "3285",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "1036",
+                  "id": "3146",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essential",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3158",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3078",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3031",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3153",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3072",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3004",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3025",
+                  "id": "3089",
                   "count": 1,
                   "hideCount": false
                 }

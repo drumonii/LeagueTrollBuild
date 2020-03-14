@@ -1,6 +1,6 @@
 {
   "type": "summoner",
-  "version": "9.23.1",
+  "version": "10.5.1",
   "data": {
     "SummonerBarrier": {
       "id": "SummonerBarrier",
@@ -81,7 +81,7 @@
         "PRACTICETOOL",
         "URF"
       ],
-      "costType": "No Cost",
+      "costType": "s %i:cooldown%",
       "maxammo": "-1",
       "range": [
         1200
@@ -96,7 +96,7 @@
         "w": 48,
         "h": 48
       },
-      "resource": "No Cost"
+      "resource": "{{ cooldown }}s %i:cooldown%"
     },
     "SummonerBoost": {
       "id": "SummonerBoost",
@@ -183,7 +183,7 @@
         "GAMEMODEX",
         "PRACTICETOOL"
       ],
-      "costType": "No Cost",
+      "costType": "s %i:cooldown%",
       "maxammo": "-1",
       "range": [
         200
@@ -198,7 +198,7 @@
         "w": 48,
         "h": 48
       },
-      "resource": "No Cost"
+      "resource": "{{ cooldown }}s %i:cooldown%"
     },
     "SummonerDot": {
       "id": "SummonerDot",
@@ -304,7 +304,7 @@
         "GAMEMODEX",
         "PRACTICETOOL"
       ],
-      "costType": "No Cost",
+      "costType": "s %i:cooldown%",
       "maxammo": "-1",
       "range": [
         600
@@ -319,13 +319,13 @@
         "w": 48,
         "h": 48
       },
-      "resource": "No Cost"
+      "resource": "{{ cooldown }}s %i:cooldown%"
     },
     "SummonerExhaust": {
       "id": "SummonerExhaust",
       "name": "Exhaust",
-      "description": "Exhausts target enemy champion, reducing their Movement Speed by 30%, and their damage dealt by 40% for 2.5 seconds.",
-      "tooltip": "Exhausts target enemy champion, reducing their Movement Speed by {{ f3 }}%, and their damage dealt by {{ f2 }}% for 2.5 seconds.",
+      "description": "Exhausts target enemy champion, reducing their Movement Speed by 30%, and their damage dealt by 40% for 3 seconds.",
+      "tooltip": "Exhausts target enemy champion, reducing their Movement Speed by {{ f3 }}%, and their damage dealt by {{ f2 }}% for 3 seconds.",
       "maxrank": 1,
       "cooldown": [
         210
@@ -339,7 +339,7 @@
       "effect": [
         null,
         [
-          2.5
+          3
         ],
         [
           40
@@ -371,7 +371,7 @@
       ],
       "effectBurn": [
         null,
-        "2.5",
+        "3",
         "40",
         "0",
         "0",
@@ -396,7 +396,7 @@
         "ONEFORALL",
         "PRACTICETOOL"
       ],
-      "costType": "No Cost",
+      "costType": "s %i:cooldown%",
       "maxammo": "-1",
       "range": [
         650
@@ -411,7 +411,7 @@
         "w": 48,
         "h": 48
       },
-      "resource": "No Cost"
+      "resource": "{{ cooldown }}s %i:cooldown%"
     },
     "SummonerFlash": {
       "id": "SummonerFlash",
@@ -495,7 +495,7 @@
         "GAMEMODEX",
         "PRACTICETOOL"
       ],
-      "costType": "No Cost",
+      "costType": "s %i:cooldown%",
       "maxammo": "-1",
       "range": [
         425
@@ -510,7 +510,7 @@
         "w": 48,
         "h": 48
       },
-      "resource": "No Cost"
+      "resource": "{{ cooldown }}s %i:cooldown%"
     },
     "SummonerHaste": {
       "id": "SummonerHaste",
@@ -601,7 +601,7 @@
         "GAMEMODEX",
         "PRACTICETOOL"
       ],
-      "costType": "No Cost",
+      "costType": "s %i:cooldown%",
       "maxammo": "-1",
       "range": [
         200
@@ -616,7 +616,7 @@
         "w": 48,
         "h": 48
       },
-      "resource": "No Cost"
+      "resource": "{{ cooldown }}s %i:cooldown%"
     },
     "SummonerHeal": {
       "id": "SummonerHeal",
@@ -723,7 +723,7 @@
         "TUTORIAL_MODULE_1",
         "PROJECT"
       ],
-      "costType": "No Cost",
+      "costType": "s %i:cooldown%",
       "maxammo": "-1",
       "range": [
         850
@@ -738,7 +738,7 @@
         "w": 48,
         "h": 48
       },
-      "resource": "No Cost"
+      "resource": "{{ cooldown }}s %i:cooldown%"
     },
     "SummonerMana": {
       "id": "SummonerMana",
@@ -859,7 +859,7 @@
         "ASCENSION",
         "FIRSTBLOOD"
       ],
-      "costType": "No Cost",
+      "costType": "s %i:cooldown%",
       "maxammo": "-1",
       "range": [
         600
@@ -874,181 +874,13 @@
         "w": 48,
         "h": 48
       },
-      "resource": "No Cost"
-    },
-    "SummonerOdysseyFlash": {
-      "id": "SummonerOdysseyFlash",
-      "name": "Warp",
-      "description": "Dash through spacetime, becoming briefly untargetable and invulnerable as you rapidly move towards a location.",
-      "tooltip": "Turn briefly <attention>untargetable</attention> and <attention>invulnerable</attention> as you dash towards a location.<br /><br /><rules>Keep your arms and legs inside the wormhole.</rules>",
-      "maxrank": 1,
-      "cooldown": [
-        0.5
-      ],
-      "cooldownBurn": "0.5",
-      "cost": [
-        0
-      ],
-      "costBurn": "0",
-      "datavalues": {},
-      "effect": [
-        null,
-        [
-          1000
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ]
-      ],
-      "effectBurn": [
-        null,
-        "1000",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0"
-      ],
-      "vars": [],
-      "key": "52",
-      "summonerLevel": 1,
-      "modes": [
-        "ODYSSEY"
-      ],
-      "costType": "No Cost",
-      "maxammo": "3",
-      "range": [
-        825
-      ],
-      "rangeBurn": "825",
-      "image": {
-        "full": "SummonerOdysseyFlash.png",
-        "sprite": "spell0.png",
-        "group": "spell",
-        "x": 384,
-        "y": 0,
-        "w": 48,
-        "h": 48
-      },
-      "resource": "No Cost"
-    },
-    "SummonerOdysseyRevive": {
-      "id": "SummonerOdysseyRevive",
-      "name": "Resuscitate",
-      "description": "Revive a fallen friend by remaining next to them for 2 seconds. Exiting the area early does not consume your cooldown. ",
-      "tooltip": "<keywordWard>Revive</keywordWard> a fallen crewmember by remaining next to them for <attention>2</attention> seconds. <br /><br /><rules>Exiting the area early does not consume your cooldown. </rules>",
-      "maxrank": 1,
-      "cooldown": [
-        100
-      ],
-      "cooldownBurn": "100",
-      "cost": [
-        0
-      ],
-      "costBurn": "0",
-      "datavalues": {},
-      "effect": [
-        null,
-        [
-          1
-        ],
-        [
-          2
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ],
-        [
-          0
-        ]
-      ],
-      "effectBurn": [
-        null,
-        "1",
-        "2",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0"
-      ],
-      "vars": [],
-      "key": "50",
-      "summonerLevel": 1,
-      "modes": [
-        "ODYSSEY"
-      ],
-      "costType": "No Cost",
-      "maxammo": "-1",
-      "range": [
-        350
-      ],
-      "rangeBurn": "350",
-      "image": {
-        "full": "SummonerOdysseyRevive.png",
-        "sprite": "spell0.png",
-        "group": "spell",
-        "x": 432,
-        "y": 0,
-        "w": 48,
-        "h": 48
-      },
-      "resource": "No Cost"
+      "resource": "{{ cooldown }}s %i:cooldown%"
     },
     "SummonerPoroRecall": {
       "id": "SummonerPoroRecall",
       "name": "To the King!",
       "description": "Quickly travel to the Poro King's side.",
-      "tooltip": "<span class=\"colorFFE076\">Passive:</span> Hitting an enemy champion with a Poro gives your team a Poro Mark. Upon reaching 10 Poro Marks, your team summons the Poro King to fight alongside them. While the Poro King is active, no Poro Marks can be scored by either team.<br /><br /><span class=\"colorFFE076\">Active:</span> Quickly dash to King Poro's side. Can only be cast while the Poro King is summoned for your team. <br /><br /><i><span class=\"colorFDD017\">''Poros tug the heartstrings. The rest of you just comes along for the ride.''</span></i>",
+      "tooltip": "<span class=\"colorFFE076\">Passive:</span> Hitting an enemy champion with a Poro gives your team a Poro Mark. Upon reaching 10 Poro Marks, your team summons the Poro King to fight alongside them. While the Poro King is active, no Poro Marks can be scored by either team.<br /><br /><span class=\"colorFFE076\">Active:</span> Quickly dash to King Poro's side. Can only be cast while the Poro King is summoned for your team. <br /><br /><i><span class=\"colorFDD017\">''Poros tug the heartstrings. The rest of you just comes along for the ride.''</span></i></mainText>",
       "maxrank": 1,
       "cooldown": [
         10
@@ -1111,7 +943,7 @@
       "modes": [
         "KINGPORO"
       ],
-      "costType": "No Cost",
+      "costType": "s %i:cooldown%",
       "maxammo": "-1",
       "range": [
         200
@@ -1121,18 +953,18 @@
         "full": "SummonerPoroRecall.png",
         "sprite": "spell0.png",
         "group": "spell",
-        "x": 0,
-        "y": 48,
+        "x": 384,
+        "y": 0,
         "w": 48,
         "h": 48
       },
-      "resource": "No Cost"
+      "resource": "{{ cooldown }}s %i:cooldown%"
     },
     "SummonerPoroThrow": {
       "id": "SummonerPoroThrow",
       "name": "Poro Toss",
       "description": "Toss a Poro at your enemies. If it hits, you can quickly travel to your target as a follow up.",
-      "tooltip": "Toss a Poro a long distance, dealing {{ f2 }} true damage to the first enemy unit hit, granting <span class=\"coloree91d7\">True Sight</span> of the target.<br /><br />This ability can be recast for 3 seconds if it hits an enemy to dash to the target hit, dealing {{ f2 }} more true damage and reducing the cooldown of the next Poro Toss by {{ e4 }} seconds.<br /><br />Poros are not blocked by spell shields or wind walls because they are animals, not spells!<br /><br /><i><span class=\"colorFDD017\">''Poros are a model for Runeterran aerodynamics.''</span></i>",
+      "tooltip": "Toss a Poro a long distance, dealing {{ f2 }} true damage to the first enemy unit hit, granting <span class=\"coloree91d7\">True Sight</span> of the target.<br /><br />This ability can be recast for 3 seconds if it hits an enemy to dash to the target hit, dealing {{ f2 }} more true damage and reducing the cooldown of the next Poro Toss by {{ e4 }} seconds.<br /><br />Poros are not blocked by spell shields or wind walls because they are animals, not spells!<br /><br /><i><span class=\"colorFDD017\">''Poros are a model for Runeterran aerodynamics.''</span></i></mainText>",
       "maxrank": 1,
       "cooldown": [
         20
@@ -1195,7 +1027,7 @@
       "modes": [
         "KINGPORO"
       ],
-      "costType": "No Cost",
+      "costType": "s %i:cooldown%",
       "maxammo": "-1",
       "range": [
         2500
@@ -1205,12 +1037,12 @@
         "full": "SummonerPoroThrow.png",
         "sprite": "spell0.png",
         "group": "spell",
-        "x": 48,
-        "y": 48,
+        "x": 432,
+        "y": 0,
         "w": 48,
         "h": 48
       },
-      "resource": "No Cost"
+      "resource": "{{ cooldown }}s %i:cooldown%"
     },
     "SummonerSmite": {
       "id": "SummonerSmite",
@@ -1311,7 +1143,7 @@
         "TUTORIAL",
         "GAMEMODEX"
       ],
-      "costType": "No Cost",
+      "costType": "s %i:cooldown%",
       "maxammo": "2",
       "range": [
         500
@@ -1321,18 +1153,18 @@
         "full": "SummonerSmite.png",
         "sprite": "spell0.png",
         "group": "spell",
-        "x": 96,
+        "x": 0,
         "y": 48,
         "w": 48,
         "h": 48
       },
-      "resource": "No Cost"
+      "resource": "{{ cooldown }}s %i:cooldown%"
     },
     "SummonerSnowURFSnowball_Mark": {
       "id": "SummonerSnowURFSnowball_Mark",
-      "name": "Ultra (Rapidly Flung) Mark",
-      "description": "It's a snowball! It's a Poro! It's...uh...one of those.",
-      "tooltip": "Throw a snowball approximately 1 Really Far units away, dealing {{ f1 }} true damage to the first enemy unit hit and granting <span class=\"coloree91d7\">True Sight</span> of the target.<br /><br />If your Ultra Mark hits an enemy, this ability can be recast for {{ e3 }} seconds to Dash to the tagged unit, dealing an additional {{ f1 }} true damage and increasing your swagger by like a million percent.<br /><br />If you have Poros following you, you throw a Poro instead of a Snowball, because we're terrible people.",
+      "name": "Mark",
+      "description": "Throw a snowball in a straight line at your enemies. If it hits an enemy, they become marked, granting True Sight, and your champion can quickly travel to the marked target as a follow up.",
+      "tooltip": "Throw a snowball a long distance, dealing {{ f1 }} true damage to the first enemy unit hit and granting <span class=\"coloree91d7\">True Sight</span> of the target. If it hits an enemy, this ability can be recast for {{ e3 }} seconds to Dash to the tagged unit, dealing an additional {{ f1 }} true damage. Dashing to the target will reduce the cooldown of Mark by {{ e4 }}%.<br /><br /><span class=\"colorFFFF00\">Mark projectiles are not stopped by spell shields or projectile mitigation.</span>",
       "maxrank": 1,
       "cooldown": [
         80
@@ -1355,7 +1187,7 @@
           3
         ],
         [
-          0.25
+          25
         ],
         [
           0
@@ -1381,7 +1213,7 @@
         "10",
         "5",
         "3",
-        "0.25",
+        "25",
         "0",
         "0",
         "0",
@@ -1395,7 +1227,7 @@
       "modes": [
         "SNOWURF"
       ],
-      "costType": "No Cost",
+      "costType": "s %i:cooldown%",
       "maxammo": "-1",
       "range": [
         8000
@@ -1405,12 +1237,12 @@
         "full": "SummonerSnowURFSnowball_Mark.png",
         "sprite": "spell0.png",
         "group": "spell",
-        "x": 144,
+        "x": 48,
         "y": 48,
         "w": 48,
         "h": 48
       },
-      "resource": "No Cost"
+      "resource": "{{ cooldown }}s %i:cooldown%"
     },
     "SummonerSnowball": {
       "id": "SummonerSnowball",
@@ -1480,7 +1312,7 @@
         "ARAM",
         "FIRSTBLOOD"
       ],
-      "costType": "No Cost",
+      "costType": "s %i:cooldown%",
       "maxammo": "-1",
       "range": [
         1600
@@ -1490,12 +1322,12 @@
         "full": "SummonerSnowball.png",
         "sprite": "spell0.png",
         "group": "spell",
-        "x": 192,
+        "x": 96,
         "y": 48,
         "w": 48,
         "h": 48
       },
-      "resource": "No Cost"
+      "resource": "{{ cooldown }}s %i:cooldown%"
     },
     "SummonerTeleport": {
       "id": "SummonerTeleport",
@@ -1577,7 +1409,7 @@
         "PRACTICETOOL",
         "GAMEMODEX"
       ],
-      "costType": "No Cost",
+      "costType": "s %i:cooldown%",
       "maxammo": "-1",
       "range": [
         25000
@@ -1587,12 +1419,12 @@
         "full": "SummonerTeleport.png",
         "sprite": "spell0.png",
         "group": "spell",
-        "x": 240,
+        "x": 144,
         "y": 48,
         "w": 48,
         "h": 48
       },
-      "resource": "No Cost"
+      "resource": "{{ cooldown }}s %i:cooldown%"
     }
   }
 }

@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.23.1",
+  "version": "10.5.1",
   "data": {
     "Braum": {
       "id": "Braum",
@@ -12,7 +12,7 @@
         "full": "Braum.png",
         "sprite": "champion0.png",
         "group": "champion",
-        "x": 144,
+        "x": 192,
         "y": 48,
         "w": 48,
         "h": 48
@@ -53,6 +53,12 @@
           "num": 11,
           "name": "Mafia Braum",
           "chromas": true
+        },
+        {
+          "id": "201024",
+          "num": 24,
+          "name": "Sugar Rush Braum",
+          "chromas": true
         }
       ],
       "lore": "Blessed with massive biceps and an even bigger heart, Braum is a beloved hero of the Freljord. Every mead hall north of Frostheld toasts his legendary strength, said to have felled a forest of oaks in a single night, and punched an entire mountain into rubble. Bearing an enchanted vault door as his shield, Braum roams the frozen north sporting a mustachioed smile as big as his muscles—a true friend to all those in need.",
@@ -80,7 +86,7 @@
       },
       "stats": {
         "hp": 540,
-        "hpperlevel": 87,
+        "hpperlevel": 98,
         "mp": 310.6,
         "mpperlevel": 45,
         "movespeed": 335,
@@ -89,7 +95,7 @@
         "spellblock": 32.1,
         "spellblockperlevel": 1.25,
         "attackrange": 125,
-        "hpregen": 8,
+        "hpregen": 8.5,
         "hpregenperlevel": 1,
         "mpregen": 6,
         "mpregenperlevel": 0.8,
@@ -140,10 +146,10 @@
             null,
             [
               60,
-              105,
-              150,
-              195,
-              240
+              110,
+              160,
+              210,
+              260
             ],
             [
               70,
@@ -211,7 +217,7 @@
           ],
           "effectBurn": [
             null,
-            "60/105/150/195/240",
+            "60/110/160/210/260",
             "70",
             "30",
             "0.02",
@@ -237,8 +243,8 @@
             "full": "BraumQ.png",
             "sprite": "spell1.png",
             "group": "spell",
-            "x": 384,
-            "y": 96,
+            "x": 0,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -248,40 +254,34 @@
           "id": "BraumW",
           "name": "Stand Behind Me",
           "description": "Braum leaps to a target allied champion or minion. On arrival, Braum and the ally gain Armor and Magic Resist for a few seconds.",
-          "tooltip": "Braum leaps to target allied champion or minion.<br /><br />On arrival, Braum and the ally gain <scaleArmor>{{ f3 }}</scaleArmor> Armor and <span class=\"colorFF00FF\">{{ f4 }}</span> Magic Resist ({{ e4 }} plus {{ e3 }}% of Braum's bonus Armor/Magic Resist) for {{ e1 }} seconds.",
+          "tooltip": "Braum leaps to target allied champion or minion.<br /><br />On arrival, Braum grants the target <scaleArmor>{{ grantedallyarmor }}</scaleArmor> Armor and <span class=\"colorFF00FF\">{{ grantedallymr }}</span> Magic Resist for {{ e1 }} seconds. Braum grants himself <scaleArmor>{{ grantedbraumarmor }}</scaleArmor> Armor and  <span class=\"colorFF00FF\">{{ grantedbraummr }}</span> Magic Resist for the same duration.",
           "leveltip": {
             "label": [
-              "Base Armor",
-              "Base Magic Resist",
-              "Defensive Scaling",
-              "Cooldown",
-              "@AbilityResourceName@ Cost"
+              "Base Resists",
+              "Cooldown"
             ],
             "effect": [
-              "{{ e4 }} -> {{ e4NL }}",
-              "{{ e5 }} -> {{ e5NL }}",
-              "{{ e3 }}% -> {{ e3NL }}%",
-              "{{ cooldown }} -> {{ cooldownNL }}",
-              "{{ cost }} -> {{ costNL }}"
+              "{{ baseresists }} -> {{ baseresistsNL }}",
+              "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
           "maxrank": 5,
           "cooldown": [
-            14,
-            13,
             12,
             11,
-            10
+            10,
+            9,
+            8
           ],
-          "cooldownBurn": "14/13/12/11/10",
+          "cooldownBurn": "12/11/10/9/8",
           "cost": [
-            50,
-            55,
-            60,
-            65,
-            70
+            40,
+            40,
+            40,
+            40,
+            40
           ],
-          "costBurn": "50/55/60/65/70",
+          "costBurn": "40",
           "datavalues": {},
           "effect": [
             null,
@@ -300,25 +300,11 @@
               750
             ],
             [
-              10,
-              11.5,
-              13,
-              14.5,
-              16
-            ],
-            [
-              10,
-              14,
-              18,
-              22,
-              26
-            ],
-            [
-              10,
-              14,
-              18,
-              22,
-              26
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -326,6 +312,20 @@
               0,
               0,
               0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              40,
+              40,
+              40,
+              40,
+              40
             ],
             [
               0,
@@ -360,27 +360,16 @@
             null,
             "3",
             "750",
-            "10/11.5/13/14.5/16",
-            "10/14/18/22/26",
-            "10/14/18/22/26",
             "0",
+            "0",
+            "0",
+            "40",
             "0",
             "0",
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "@special.BraumWArmor",
-              "coeff": 0,
-              "key": "f3"
-            },
-            {
-              "link": "@special.BraumWMR",
-              "coeff": 0,
-              "key": "f4"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -395,8 +384,8 @@
             "full": "BraumW.png",
             "sprite": "spell1.png",
             "group": "spell",
-            "x": 432,
-            "y": 96,
+            "x": 48,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -540,7 +529,7 @@
             "full": "BraumE.png",
             "sprite": "spell1.png",
             "group": "spell",
-            "x": 0,
+            "x": 96,
             "y": 144,
             "w": 48,
             "h": 48
@@ -551,7 +540,7 @@
           "id": "BraumRWrapper",
           "name": "Glacial Fissure",
           "description": "Braum slams the ground, knocking up enemies nearby and in a line in front of him. A fissure is left along the line that slows enemies.",
-          "tooltip": "Braum slams the ground, knocking up enemies nearby and in a line in front of him. A fissure is left along the line for {{ slowzoneduration }} seconds, slowing enemies above it by {{ movespeedmod }}%.<br /><br />Enemies hit take <magicDamage>{{ totaldamage }} magic damage</magicDamage>. The first champion hit is knocked up for {{ firstknockupduration }} seconds, subsequent enemies are knocked up briefly.",
+          "tooltip": "Braum slams the ground, knocking up enemies nearby and in a line in front of him. A fissure is left along the line for {{ slowzoneduration }} seconds, slowing enemies above it by {{ movespeedmod }}%.<br /><br />Enemies hit take <magicDamage>{{ totaldamage }} magic damage</magicDamage>. The first target is knocked up for between {{ minknockup }} and {{ maxknockup }} seconds, depending on distance from Braum. All others hit are knocked up for {{ minknockup }} seconds.",
           "leveltip": {
             "label": [
               "Damage",
@@ -659,7 +648,7 @@
             "full": "BraumRWrapper.png",
             "sprite": "spell1.png",
             "group": "spell",
-            "x": 48,
+            "x": 144,
             "y": 144,
             "w": 48,
             "h": 48
@@ -674,7 +663,7 @@
           "full": "Braum_Passive.png",
           "sprite": "passive0.png",
           "group": "passive",
-          "x": 144,
+          "x": 192,
           "y": 48,
           "w": 48,
           "h": 48
@@ -1004,174 +993,6 @@
         },
         {
           "champion": "Braum",
-          "title": "BraumCS",
-          "map": "CrystalScar",
-          "mode": "ODIN",
-          "type": "riot",
-          "customTag": "",
-          "extensionPage": false,
-          "customPanel": null,
-          "blocks": [
-            {
-              "type": "starting",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3302",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2003",
-                  "count": 3,
-                  "hideCount": false
-                },
-                {
-                  "id": "3340",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "early",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "2049",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "1001",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3097",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essential",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "2045",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3117",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3401",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3800",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3742",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3143",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3190",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3110",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3109",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2055",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2138",
-                  "count": 1,
-                  "hideCount": true
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "champion": "Braum",
           "title": "BraumFIRSTBLOOD",
           "map": "HA",
           "mode": "FIRSTBLOOD",
@@ -1314,11 +1135,12 @@
         },
         {
           "champion": "Braum",
-          "title": "BraumKINGPORO",
+          "title": "BraumARAM",
           "map": "HA",
           "mode": "KINGPORO",
           "type": "riot",
           "customTag": "",
+          "sortrank": 0,
           "extensionPage": false,
           "customPanel": null,
           "blocks": [
@@ -1350,6 +1172,16 @@
                   "id": "3683",
                   "count": 1,
                   "hideCount": false
+                },
+                {
+                  "id": "3684",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3685",
+                  "count": 1,
+                  "hideCount": false
                 }
               ]
             },
@@ -1361,6 +1193,13 @@
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
               "items": [
                 {
                   "id": "2051",
@@ -1368,13 +1207,13 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3302",
+                  "id": "1001",
                   "count": 1,
                   "hideCount": false
                 },
                 {
                   "id": "2003",
-                  "count": 2,
+                  "count": 3,
                   "hideCount": false
                 }
               ]
@@ -1387,19 +1226,26 @@
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
               "items": [
-                {
-                  "id": "3190",
-                  "count": 1,
-                  "hideCount": false
-                },
                 {
                   "id": "3047",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3110",
+                  "id": "3109",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3025",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1413,6 +1259,13 @@
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
               "items": [
                 {
                   "id": "3143",
@@ -1420,12 +1273,12 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3083",
+                  "id": "3001",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3102",
+                  "id": "3068",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1439,19 +1292,26 @@
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
               "items": [
                 {
-                  "id": "3075",
+                  "id": "3060",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3800",
+                  "id": "3107",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3401",
+                  "id": "3190",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1465,6 +1325,13 @@
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
               "items": [
                 {
                   "id": "2003",
@@ -1482,171 +1349,9 @@
         },
         {
           "champion": "Braum",
-          "title": "BraumSIEGE",
-          "map": "SR",
-          "mode": "SIEGE",
-          "type": "riot",
-          "customTag": "",
-          "extensionPage": false,
-          "customPanel": null,
-          "blocks": [
-            {
-              "type": "siegeOffense",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3631",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3641",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3647",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3635",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3642",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "siegeDefense",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3634",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3640",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3643",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3636",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3642",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essential",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "2045",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3117",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3401",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3800",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3742",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3143",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3190",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3110",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3109",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "champion": "Braum",
           "title": "BraumSL",
-          "map": "SL",
-          "mode": "GAMEMODEX",
+          "map": "NB",
+          "mode": "NEXUSBLITZ",
           "type": "riot",
           "customTag": "",
           "sortrank": 0,
@@ -2000,7 +1705,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "1028",
+                  "id": "3067",
                   "count": 1,
                   "hideCount": false
                 },
@@ -2051,7 +1756,7 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "ItemTeleportCancel",
+              "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
                 ""
@@ -2084,7 +1789,7 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "S5_SummonerSmiteDuel",
+              "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
                 ""
@@ -2125,144 +1830,6 @@
               "hiddenWithAnyOf": [
                 ""
               ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2138",
-                  "count": 1,
-                  "hideCount": true
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "champion": "Braum",
-          "title": "BraumTT",
-          "map": "TT",
-          "mode": "CLASSIC",
-          "type": "riot",
-          "customTag": "",
-          "sortrank": 0,
-          "extensionPage": false,
-          "customPanel": null,
-          "blocks": [
-            {
-              "type": "starting",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "1054",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "1001",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essential",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3047",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "1011",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3068",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3024",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3025",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3742",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3143",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3110",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3190",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
               "items": [
                 {
                   "id": "2003",

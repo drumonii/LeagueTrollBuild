@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.23.1",
+  "version": "10.5.1",
   "data": {
     "Rumble": {
       "id": "Rumble",
@@ -12,7 +12,7 @@
         "full": "Rumble.png",
         "sprite": "champion3.png",
         "group": "champion",
-        "x": 288,
+        "x": 336,
         "y": 0,
         "w": 48,
         "h": 48
@@ -78,7 +78,7 @@
         "mp": 100,
         "mpperlevel": 0,
         "movespeed": 345,
-        "armor": 30.88,
+        "armor": 31,
         "armorperlevel": 3.5,
         "spellblock": 32.1,
         "spellblockperlevel": 1.25,
@@ -89,7 +89,7 @@
         "mpregenperlevel": 0,
         "crit": 0,
         "critperlevel": 0,
-        "attackdamage": 61.036,
+        "attackdamage": 61,
         "attackdamageperlevel": 3.2,
         "attackspeedperlevel": 1.85,
         "attackspeed": 0.644
@@ -237,7 +237,7 @@
             "full": "RumbleFlameThrower.png",
             "sprite": "spell10.png",
             "group": "spell",
-            "x": 0,
+            "x": 96,
             "y": 0,
             "w": 48,
             "h": 48
@@ -280,18 +280,18 @@
           "effect": [
             null,
             [
-              80,
-              110,
-              140,
-              170,
+              60,
+              95,
+              130,
+              165,
               200
             ],
             [
+              15,
               20,
               25,
               30,
-              35,
-              40
+              35
             ],
             [
               20,
@@ -352,8 +352,8 @@
           ],
           "effectBurn": [
             null,
-            "80/110/140/170/200",
-            "20/25/30/35/40",
+            "60/95/130/165/200",
+            "15/20/25/30/35",
             "20",
             "0",
             "1.5",
@@ -384,7 +384,7 @@
             "full": "RumbleShield.png",
             "sprite": "spell10.png",
             "group": "spell",
-            "x": 48,
+            "x": 144,
             "y": 0,
             "w": 48,
             "h": 48
@@ -395,7 +395,7 @@
           "id": "RumbleGrenade",
           "name": "Electro Harpoon",
           "description": "Rumble launches a harpoon, electrocuting his target with magic damage and slowing their Movement Speed. Rumble can carry 2 harpoons at a time. While in Danger Zone the damage and slow percentage is increased.",
-          "tooltip": "Rumble launches an electrified harpoon, dealing {{ e1 }}<scaleAP> (+{{ a1 }})</scaleAP> magic damage and applying a stacking slow of {{ e2 }}% for {{ e7 }} seconds. Rumble can store up to two harpoons at a time, which recharge once every 6 seconds (modified by cooldown reduction).<br /><br /><keywordCaution>Danger Zone Bonus:</keywordCaution> Damage and slow percentage increased by 50%.",
+          "tooltip": "Rumble launches an electrified harpoon, dealing {{ e1 }}<scaleAP> (+{{ a1 }})</scaleAP> magic damage and applying a stacking slow of {{ e2 }}% for {{ e7 }} seconds. Rumble can store up to two harpoons at a time, which recharge once every {{ ammorechargetime }} seconds (modified by cooldown reduction).<br /><br /><keywordCaution>Danger Zone Bonus:</keywordCaution> Damage and slow percentage increased by 50%.",
           "leveltip": {
             "label": [
               "Damage",
@@ -531,7 +531,7 @@
             "full": "RumbleGrenade.png",
             "sprite": "spell10.png",
             "group": "spell",
-            "x": 96,
+            "x": 192,
             "y": 0,
             "w": 48,
             "h": 48
@@ -646,7 +646,7 @@
             "full": "RumbleCarpetBomb.png",
             "sprite": "spell10.png",
             "group": "spell",
-            "x": 144,
+            "x": 240,
             "y": 0,
             "w": 48,
             "h": 48
@@ -661,7 +661,7 @@
           "full": "Rumble_JunkyardTitan1.png",
           "sprite": "passive3.png",
           "group": "passive",
-          "x": 288,
+          "x": 336,
           "y": 0,
           "w": 48,
           "h": 48
@@ -1034,174 +1034,6 @@
         },
         {
           "champion": "Rumble",
-          "title": "RumbleCS",
-          "map": "CrystalScar",
-          "mode": "ODIN",
-          "type": "riot",
-          "customTag": "",
-          "extensionPage": false,
-          "customPanel": null,
-          "blocks": [
-            {
-              "type": "starting",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "1054",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3340",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "early",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "1001",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3136",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "1026",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essential",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3020",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3116",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3151",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "standard",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3157",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3135",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3089",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3001",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3152",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3026",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2055",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2139",
-                  "count": 1,
-                  "hideCount": true
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "champion": "Rumble",
           "title": "RumbleFIRSTBLOOD",
           "map": "HA",
           "mode": "FIRSTBLOOD",
@@ -1366,11 +1198,12 @@
         },
         {
           "champion": "Rumble",
-          "title": "RumbleKINGPORO",
+          "title": "RumbleARAM",
           "map": "HA",
           "mode": "KINGPORO",
           "type": "riot",
           "customTag": "",
+          "sortrank": 0,
           "extensionPage": false,
           "customPanel": null,
           "blocks": [
@@ -1402,6 +1235,16 @@
                   "id": "3683",
                   "count": 1,
                   "hideCount": false
+                },
+                {
+                  "id": "3684",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3685",
+                  "count": 1,
+                  "hideCount": false
                 }
               ]
             },
@@ -1413,20 +1256,27 @@
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
               "items": [
+                {
+                  "id": "1026",
+                  "count": 1,
+                  "hideCount": false
+                },
                 {
                   "id": "1001",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "2051",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2031",
-                  "count": 1,
+                  "id": "2003",
+                  "count": 5,
                   "hideCount": false
                 }
               ]
@@ -1439,19 +1289,26 @@
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
               "items": [
-                {
-                  "id": "3020",
-                  "count": 1,
-                  "hideCount": false
-                },
                 {
                   "id": "3151",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3116",
+                  "id": "3020",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3165",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1465,6 +1322,13 @@
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
               "items": [
                 {
                   "id": "3089",
@@ -1491,9 +1355,16 @@
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
               "items": [
                 {
-                  "id": "3001",
+                  "id": "2065",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1517,6 +1388,13 @@
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
               "items": [
                 {
                   "id": "2003",
@@ -1527,173 +1405,6 @@
                   "id": "2139",
                   "count": 1,
                   "hideCount": true
-                },
-                {
-                  "id": "2033",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "champion": "Rumble",
-          "title": "RumbleSIEGE",
-          "map": "SR",
-          "mode": "SIEGE",
-          "type": "riot",
-          "customTag": "",
-          "extensionPage": false,
-          "customPanel": null,
-          "blocks": [
-            {
-              "type": "siegeOffense",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3631",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3641",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3647",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3635",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3642",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "siegeDefense",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3634",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3640",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3643",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3636",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3642",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essential",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3020",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3116",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3151",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "standard",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3157",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3135",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3089",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3001",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3152",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3026",
-                  "count": 1,
-                  "hideCount": false
                 }
               ]
             }
@@ -1702,8 +1413,8 @@
         {
           "champion": "Rumble",
           "title": "RumbleSL",
-          "map": "SL",
-          "mode": "GAMEMODEX",
+          "map": "NB",
+          "mode": "NEXUSBLITZ",
           "type": "riot",
           "customTag": "",
           "sortrank": 0,
@@ -2161,11 +1872,6 @@
               ],
               "items": [
                 {
-                  "id": "2055",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
                   "id": "1001",
                   "count": 1,
                   "hideCount": false
@@ -2237,12 +1943,12 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3116",
+                  "id": "3151",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3151",
+                  "id": "3165",
                   "count": 1,
                   "hideCount": false
                 }
@@ -2275,7 +1981,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3116",
+                  "id": "3151",
                   "count": 1,
                   "hideCount": false
                 }
@@ -2298,12 +2004,12 @@
               ],
               "items": [
                 {
-                  "id": "3151",
+                  "id": "3157",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3157",
+                  "id": "3116",
                   "count": 1,
                   "hideCount": false
                 },
@@ -2364,17 +2070,17 @@
               ],
               "items": [
                 {
-                  "id": "3165",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
                   "id": "3152",
                   "count": 1,
                   "hideCount": false
                 },
                 {
                   "id": "3102",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3116",
                   "count": 1,
                   "hideCount": false
                 }
@@ -2408,179 +2114,6 @@
                 },
                 {
                   "id": "3102",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2139",
-                  "count": 1,
-                  "hideCount": true
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "champion": "Rumble",
-          "title": "RumbleTT",
-          "map": "TT",
-          "mode": "CLASSIC",
-          "type": "riot",
-          "customTag": "",
-          "sortrank": 0,
-          "extensionPage": false,
-          "customPanel": null,
-          "blocks": [
-            {
-              "type": "starting",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "1001",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "1054",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2003",
-                  "count": 2,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essential",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3151",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3020",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3090",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3135",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3165",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3907",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3152",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3102",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3170",
                   "count": 1,
                   "hideCount": false
                 }

@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.23.1",
+  "version": "10.5.1",
   "data": {
     "Gnar": {
       "id": "Gnar",
@@ -12,7 +12,7 @@
         "full": "Gnar.png",
         "sprite": "champion1.png",
         "group": "champion",
-        "x": 144,
+        "x": 192,
         "y": 0,
         "w": 48,
         "h": 48
@@ -89,7 +89,7 @@
         "hpperlevel": 65,
         "mp": 100,
         "mpperlevel": 0,
-        "movespeed": 325,
+        "movespeed": 335,
         "armor": 32,
         "armorperlevel": 2.5,
         "spellblock": 30,
@@ -245,8 +245,8 @@
             "full": "GnarQ.png",
             "sprite": "spell3.png",
             "group": "spell",
-            "x": 384,
-            "y": 96,
+            "x": 0,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -261,13 +261,11 @@
             "label": [
               "Hyper Damage",
               "Hyper % Health Damage",
-              "Hyper Max Damage to monsters",
               "Wallop Damage"
             ],
             "effect": [
               "{{ minibasedamage }} -> {{ minibasedamageNL }}",
               "{{ minipercenthpdamage*100.000000 }}% -> {{ minipercenthpdamagenl*100.000000 }}%",
-              "{{ minimonstercap }} -> {{ minimonstercapNL }}",
               "{{ megabasedamage }} -> {{ megabasedamageNL }}"
             ]
           },
@@ -390,8 +388,8 @@
             "full": "GnarW.png",
             "sprite": "spell3.png",
             "group": "spell",
-            "x": 432,
-            "y": 96,
+            "x": 48,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -401,7 +399,7 @@
           "id": "GnarE",
           "name": "Hop / Crunch",
           "description": "Gnar leaps to a location and bounces off the head of any unit he lands on, traveling further.<br><br>Mega Gnar is too large to bounce and instead lands with earth-shattering force, dealing damage in an area around him.",
-          "tooltip": "<span class=\"color33FF33\">Mini Gnar: </span>Leaps to a location, gaining {{ minibas*100 }}% attack speed for {{ miniasduration }} seconds. If Gnar lands on a unit he will bounce off it, traveling further. Deals <physicalDamage>{{ minitotaldamage }} physical damage</physicalDamage> and slows briefly if the unit landed on was an enemy.<br /><br /><scaleHealth>Mega Gnar: </scaleHealth>Leaps to a location and deals <physicalDamage>{{ megatotaldamage }} physical damage</physicalDamage> to nearby enemies on landing. Enemies Gnar lands directly on top of are slowed briefly.<br /><br />If Crunch is used to transform, Gnar will still be able to bounce.",
+          "tooltip": "<span class=\"color33FF33\">Mini Gnar: </span>Leaps to a location, gaining {{ minibas*100 }}% Attack Speed for {{ miniasduration }} seconds. If Gnar lands on a unit he will bounce off it, traveling further. Deals <physicalDamage>{{ minitotaldamage }} physical damage</physicalDamage> and slows briefly if the unit landed on was an enemy.<br /><br /><scaleHealth>Mega Gnar: </scaleHealth>Leaps to a location and deals <physicalDamage>{{ megatotaldamage }} physical damage</physicalDamage> to nearby enemies on landing. Enemies Gnar lands directly on top of are slowed briefly.<br /><br />If Crunch is used to transform, Gnar will still be able to bounce.",
           "leveltip": {
             "label": [
               "Damage",
@@ -533,7 +531,7 @@
             "full": "GnarE.png",
             "sprite": "spell3.png",
             "group": "spell",
-            "x": 0,
+            "x": 96,
             "y": 144,
             "w": 48,
             "h": 48
@@ -652,7 +650,7 @@
             "full": "GnarR.png",
             "sprite": "spell3.png",
             "group": "spell",
-            "x": 48,
+            "x": 144,
             "y": 144,
             "w": 48,
             "h": 48
@@ -667,7 +665,7 @@
           "full": "Gnar_Passive.png",
           "sprite": "passive1.png",
           "group": "passive",
-          "x": 144,
+          "x": 192,
           "y": 0,
           "w": 48,
           "h": 48
@@ -1000,169 +998,6 @@
         },
         {
           "champion": "Gnar",
-          "title": "GnarCS",
-          "map": "CrystalScar",
-          "mode": "ODIN",
-          "type": "riot",
-          "customTag": "",
-          "extensionPage": false,
-          "customPanel": null,
-          "blocks": [
-            {
-              "type": "starting",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "1055",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3340",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "early",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3044",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "1001",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3067",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essential",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3071",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3143",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3156",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3022",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3814",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3068",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3102",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3075",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2055",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2138",
-                  "count": 1,
-                  "hideCount": true
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "champion": "Gnar",
           "title": "GnarFIRSTBLOOD",
           "map": "HA",
           "mode": "FIRSTBLOOD",
@@ -1333,12 +1168,14 @@
         },
         {
           "champion": "Gnar",
-          "title": "GnarKINGPORO",
+          "title": "GnarARAM",
           "map": "HA",
           "mode": "KINGPORO",
           "type": "riot",
           "customTag": "",
+          "sortrank": 0,
           "extensionPage": false,
+          "useObviousCheckmark": false,
           "customPanel": null,
           "blocks": [
             {
@@ -1369,6 +1206,16 @@
                   "id": "3683",
                   "count": 1,
                   "hideCount": false
+                },
+                {
+                  "id": "3684",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3685",
+                  "count": 1,
+                  "hideCount": false
                 }
               ]
             },
@@ -1380,20 +1227,22 @@
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
               "items": [
                 {
-                  "id": "2051",
+                  "id": "3044",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "1001",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2031",
-                  "count": 1,
+                  "id": "2003",
+                  "count": 3,
                   "hideCount": false
                 }
               ]
@@ -1406,6 +1255,13 @@
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
               "items": [
                 {
                   "id": "3071",
@@ -1413,12 +1269,12 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3742",
+                  "id": "3047",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3047",
+                  "id": "3022",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1432,9 +1288,16 @@
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
               "items": [
                 {
-                  "id": "3814",
+                  "id": "3091",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1444,7 +1307,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3812",
+                  "id": "3005",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1458,6 +1321,13 @@
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
               "items": [
                 {
                   "id": "3065",
@@ -1470,7 +1340,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3102",
+                  "id": "3190",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1484,6 +1354,13 @@
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
               "items": [
                 {
                   "id": "2003",
@@ -1501,171 +1378,9 @@
         },
         {
           "champion": "Gnar",
-          "title": "GnarSIEGE",
-          "map": "SR",
-          "mode": "SIEGE",
-          "type": "riot",
-          "customTag": "",
-          "extensionPage": false,
-          "customPanel": null,
-          "blocks": [
-            {
-              "type": "siegeOffense",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3631",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3641",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3647",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3635",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3642",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "siegeDefense",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3634",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3640",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3643",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3636",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3642",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essential",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "1001",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3071",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3143",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3156",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3022",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3814",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3068",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3102",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3075",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "champion": "Gnar",
           "title": "GnarSL",
-          "map": "SL",
-          "mode": "GAMEMODEX",
+          "map": "NB",
+          "mode": "NEXUSBLITZ",
           "type": "riot",
           "customTag": "",
           "sortrank": 0,
@@ -2067,7 +1782,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3742",
+                  "id": "3047",
                   "count": 1,
                   "hideCount": false
                 },
@@ -2095,17 +1810,17 @@
               ],
               "items": [
                 {
+                  "id": "3026",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3742",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
                   "id": "3156",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3005",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3143",
                   "count": 1,
                   "hideCount": false
                 }
@@ -2133,12 +1848,45 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3065",
+                  "id": "3143",
                   "count": 1,
                   "hideCount": false
                 },
                 {
                   "id": "3193",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "situational",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "3153",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3091",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3194",
                   "count": 1,
                   "hideCount": false
                 }
@@ -2167,203 +1915,6 @@
                 },
                 {
                   "id": "2138",
-                  "count": 1,
-                  "hideCount": true
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "champion": "Gnar",
-          "title": "GnarTT",
-          "map": "TT",
-          "mode": "CLASSIC",
-          "type": "riot",
-          "customTag": "",
-          "sortrank": 0,
-          "extensionPage": false,
-          "useObviousCheckmark": false,
-          "customPanel": null,
-          "blocks": [
-            {
-              "type": "starting",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "1055",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "1001",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2003",
-                  "count": 2,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "early",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3044",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3067",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essential",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3071",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3111",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3143",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3065",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3083",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3022",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3156",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3005",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2140",
                   "count": 1,
                   "hideCount": true
                 }

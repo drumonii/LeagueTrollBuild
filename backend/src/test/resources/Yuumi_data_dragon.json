@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "9.23.1",
+  "version": "10.5.1",
   "data": {
     "Yuumi": {
       "id": "Yuumi",
@@ -12,8 +12,8 @@
         "full": "Yuumi.png",
         "sprite": "champion4.png",
         "group": "champion",
-        "x": 432,
-        "y": 48,
+        "x": 48,
+        "y": 96,
         "w": 48,
         "h": 48
       },
@@ -28,6 +28,12 @@
           "id": "350001",
           "num": 1,
           "name": "Battle Principal Yuumi",
+          "chromas": true
+        },
+        {
+          "id": "350011",
+          "num": 11,
+          "name": "Heartseeker Yuumi",
           "chromas": true
         }
       ],
@@ -73,19 +79,19 @@
           "id": "YuumiQ",
           "name": "Prowling Projectile",
           "description": "Yuumi fires a missile, dealing damage to the first target hit. It deals bonus damage and slows if it takes at least 1 second to get to its target.<br><br>While Attached, the missile can be controlled with your cursor.",
-          "tooltip": "Yuumi summons an errant missile that deals <magicDamage><scaleAP>{{ totalmissiledamage }}</scaleAP> magic damage </magicDamage>to the first enemy hit. If the missile travels for {{ afterburnertimetooltip }} second before impacting, it deals <magicdamage><scaleAP>{{ empoweredmissiledamage }}</scaleAP> magic damage</magicdamage> instead and slows champions by {{ slowamount }}% for {{ slowduration }} second.<br /><br />If cast while <span class=\"colorac6de0\">Attached</span>, Yuumi can control the missile using her mouse.",
+          "tooltip": "Yuumi summons an errant missile that deals <magicDamage><scaleAP>{{ totalmissiledamage }}</scaleAP> magic damage</magicDamage> to the first enemy hit. <br /><br />If the missile travels for {{ afterburnertimetooltip }} second before impacting, it deals <magicdamage><scaleAP>{{ empoweredmissiledamage }}</scaleAP> (+{{ currenthealthdamage*100 }}% of the target's current health) magic damage</magicdamage> instead and slows champions by {{ slowamount }}% for {{ slowduration }} second.<br /><br />If cast while <span class=\"colorac6de0\">Attached</span>, Yuumi can control the missile using her mouse.",
           "leveltip": {
             "label": [
               "Base Damage",
               "Empowered Missile Base Damage",
-              "Cooldown",
-              "Mana Cost"
+              "Current Health %",
+              "Cooldown"
             ],
             "effect": [
               "{{ missiledamage }} -> {{ missiledamageNL }}",
               "{{ empoweredmissilebasedamage }} -> {{ empoweredmissilebasedamageNL }}",
-              "{{ cooldown }} -> {{ cooldownNL }}",
-              "{{ cost }} -> {{ costNL }}"
+              "{{ currenthealthdamage*100.000000 }}% -> {{ currenthealthdamagenl*100.000000 }}%",
+              "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
           "maxrank": 6,
@@ -99,14 +105,14 @@
           ],
           "cooldownBurn": "13.5/12/10.5/9/7.5/6",
           "cost": [
-            75,
-            80,
-            85,
             90,
-            95,
-            100
+            90,
+            90,
+            90,
+            90,
+            90
           ],
-          "costBurn": "75/80/85/90/95/100",
+          "costBurn": "90",
           "datavalues": {},
           "effect": [
             null,
@@ -220,7 +226,7 @@
             "full": "YuumiQ.png",
             "sprite": "spell14.png",
             "group": "spell",
-            "x": 96,
+            "x": 384,
             "y": 48,
             "w": 48,
             "h": 48
@@ -230,12 +236,12 @@
         {
           "id": "YuumiW",
           "name": "You and Me!",
-          "description": "Passively, Yuumi and her attached ally share some of each other's Adaptive Force. Actively, Yuumi dashes to a target ally, becoming untargetable from everything except turrets.",
-          "tooltip": "<spellPassive>Passive:</spellPassive> Yuumi and the ally she's <span class=\"colorac6de0\">Attached</span> to gain {{ flatadaptivestats }} + {{ adaptivestatsharing*100 }}% of each other's Attack Damage or Ability Power, converted to Adaptive Force.<br /><br /><spellActive>Active:</spellActive> Yuumi dashes to an ally champion and <span class=\"colorac6de0\">Attaches</span> to them. While Yuumi is <span class=\"colorac6de0\">Attached</span>, she follows her partner's movement and is untargetable except from towers.<br /><br /><rules><keywordName>You and Me!</keywordName> has a <scaleLevel>{{ attachcooldown }}s</scaleLevel> cooldown, but Yuumi can cast it anytime she is already <span class=\"colorac6de0\">Attached</span> to switch between friends or <span class=\"colorac6de0\">Unattach</span>.</rules>",
+          "description": "Passively, Yuumi increases her ally's Adaptive Force and her own. Actively, Yuumi dashes to a target ally, becoming untargetable from everything except turrets.",
+          "tooltip": "<spellPassive>Passive:</spellPassive> Yuumi increases her <span class=\"colorac6de0\">Attached</span> ally's Adaptive Force by {{ flatadaptivestats }} + {{ adaptivestatsharing*100 }}%, and grants herself the same amount.<br /><br /><spellActive>Active:</spellActive> Yuumi dashes to an ally champion and <span class=\"colorac6de0\">Attaches</span> to them. While Yuumi is <span class=\"colorac6de0\">Attached</span>, she follows her partner's movement and is untargetable except from towers.<br /><br /><rules><keywordName>You and Me!</keywordName> has a <scaleLevel>{{ attachcooldown }}</scaleLevel> second cooldown, but Yuumi can cast it anytime she is already <span class=\"colorac6de0\">Attached</span> to switch between friends or <span class=\"colorac6de0\">Unattach</span>.<br /><br />Immobilizing effects on Yuumi place <keywordName>You and Me!</keywordName> on a {{ ccattachlockout }} second cooldown.</rules>",
           "leveltip": {
             "label": [
-              "Adaptive Force Shared",
-              "Adaptive Force Shared"
+              "Flat Adaptive Force",
+              "Percent Adaptive Force"
             ],
             "effect": [
               "{{ flatadaptivestats }} -> {{ flatadaptivestatsNL }}",
@@ -361,7 +367,7 @@
             "full": "YuumiW.png",
             "sprite": "spell14.png",
             "group": "spell",
-            "x": 144,
+            "x": 432,
             "y": 48,
             "w": 48,
             "h": 48
@@ -371,39 +377,39 @@
         {
           "id": "YuumiE",
           "name": "Zoomies",
-          "description": "Heals Yuumi and gives a Movement Speed boost. If she's attached, she passes it to her ally instead.<br>",
-          "tooltip": "Yuumi heals herself for <healing>{{ minamounttoheal }}</healing> to <healing>{{ maxamounttoheal }}</healing>, increasing based on missing health, and gains {{ finalmovespeed }}% movement speed decaying over {{ msduration }} seconds. If Yuumi is <span class=\"colorac6de0\">Attached</span>, this spell affects that ally instead.<br /><br />This spell has two charges. Yuumi gains a charge every {{ ammorechargetime }} seconds.",
+          "description": "Heals Yuumi and boosts Movement Speed and Attack Speed. If she's attached, she passes it to her ally instead.<br>",
+          "tooltip": "Yuumi heals herself for <healing>{{ totalhealing }}</healing> and gains {{ finalmovespeed }}% movement speed and {{ attackspeedamount*100 }}% Attack Speed for {{ msduration }} seconds. If Yuumi is <span class=\"colorac6de0\">Attached</span>, this spell affects that ally instead.",
           "leveltip": {
             "label": [
-              "Minimum Base Healing",
-              "Maximum Base Healing",
-              "Mana Cost",
-              "Ammo Recharge Time"
+              "Healing",
+              "Attack Speed",
+              "Cooldown",
+              "Mana Cost"
             ],
             "effect": [
-              "{{ healamountmin }} -> {{ healamountminNL }}",
-              "{{ healamountmin*2.300000 }} -> {{ healamountminnl*2.300000 }}",
-              "{{ cost }} -> {{ costNL }}",
-              "{{ ammorechargetime }} -> {{ ammorechargetimeNL }}"
+              "{{ basehealing }} -> {{ basehealingNL }}",
+              "{{ attackspeedamount*100.000000 }}% -> {{ attackspeedamountnl*100.000000 }}%",
+              "{{ cooldown }} -> {{ cooldownNL }}",
+              "{{ basecost }} -> {{ basecostNL }}"
             ]
           },
           "maxrank": 5,
           "cooldown": [
-            0.5,
-            0.5,
-            0.5,
-            0.5,
-            0.5
+            12,
+            11,
+            10,
+            9,
+            8
           ],
-          "cooldownBurn": "0.5",
+          "cooldownBurn": "12/11/10/9/8",
           "cost": [
-            30,
-            40,
-            50,
-            60,
-            70
+            100,
+            115,
+            130,
+            145,
+            160
           ],
-          "costBurn": "30/40/50/60/70",
+          "costBurn": "100/115/130/145/160",
           "datavalues": {},
           "effect": [
             null,
@@ -493,7 +499,7 @@
           ],
           "vars": [],
           "costType": " {{ abilityresourcename }}",
-          "maxammo": "2",
+          "maxammo": "0",
           "range": [
             25000,
             25000,
@@ -506,8 +512,8 @@
             "full": "YuumiE.png",
             "sprite": "spell14.png",
             "group": "spell",
-            "x": 192,
-            "y": 48,
+            "x": 0,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -621,8 +627,8 @@
             "full": "YuumiR.png",
             "sprite": "spell14.png",
             "group": "spell",
-            "x": 240,
-            "y": 48,
+            "x": 48,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -631,13 +637,13 @@
       ],
       "passive": {
         "name": "Bop 'n' Block",
-        "description": "Periodically, when Yuumi attacks a champion, she gains a shield that follows her, protecting her and the ally she's attached to.",
+        "description": "Periodically, when Yuumi attacks a champion, she restores mana and gains a shield that follows her, protecting her and the ally she's attached to.",
         "image": {
           "full": "YuumiP.png",
           "sprite": "passive4.png",
           "group": "passive",
-          "x": 432,
-          "y": 48,
+          "x": 48,
+          "y": 96,
           "w": 48,
           "h": 48
         }
@@ -988,6 +994,193 @@
         },
         {
           "champion": "Yuumi",
+          "title": "YuumiARAM",
+          "map": "HA",
+          "mode": "KINGPORO",
+          "type": "riot",
+          "customTag": "",
+          "sortrank": 0,
+          "extensionPage": false,
+          "useObviousCheckmark": false,
+          "customPanel": null,
+          "blocks": [
+            {
+              "type": "KingPoroSnax",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "items": [
+                {
+                  "id": "3680",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3681",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3682",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3683",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3684",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3685",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "starting",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "SummonerSmite",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "2003",
+                  "count": 3,
+                  "hideCount": false
+                },
+                {
+                  "id": "3028",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1052",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "essential",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "3174",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3158",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3504",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "protective",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "3107",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3109",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3116",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "aggressive",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "3285",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3151",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3089",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "champion": "Yuumi",
           "title": "YuumiSR",
           "map": "SR",
           "mode": "CLASSIC",
@@ -1104,7 +1297,7 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "ItemSmiteAoE",
+              "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
                 ""
@@ -1113,6 +1306,11 @@
                 ""
               ],
               "items": [
+                {
+                  "id": "3222",
+                  "count": 1,
+                  "hideCount": false
+                },
                 {
                   "id": "3905",
                   "count": 1,
@@ -1131,7 +1329,7 @@
               "recSteps": false,
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "ItemSmiteAoE",
+              "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
@@ -1165,7 +1363,7 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "ItemSmiteAoE",
+              "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
                 ""
@@ -1181,152 +1379,6 @@
                 },
                 {
                   "id": "2139",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "champion": "Yuumi",
-          "title": "YuumiTT",
-          "map": "TT",
-          "mode": "CLASSIC",
-          "type": "riot",
-          "customTag": "",
-          "sortrank": 0,
-          "extensionPage": false,
-          "useObviousCheckmark": false,
-          "customPanel": null,
-          "blocks": [
-            {
-              "type": "starting",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "1001",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2003",
-                  "count": 3,
-                  "hideCount": false
-                },
-                {
-                  "id": "1056",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "early",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3174",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3158",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3504",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "protective",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3107",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3109",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3116",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "aggressive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3905",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3151",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3090",
                   "count": 1,
                   "hideCount": false
                 }
