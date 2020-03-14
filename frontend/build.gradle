@@ -11,20 +11,47 @@ node {
   nodeModulesDir = file("${project.projectDir}")
 }
 
-task npmBuild(type: NpmTask) {
+task ngBuild {
+  dependsOn 'ngBuildTrollBuild'
+  dependsOn 'ngBuildAdmin'
+}
+
+task ngBuildTrollBuild(type: NpmTask) {
   dependsOn npmInstall
-  description = "Runs 'npm run build-all'"
+  description = "Runs 'npm run build'"
 
   inputs.files(fileTree('node_modules'))
-  inputs.files(fileTree('projects/admin/src'))
   inputs.files(fileTree('projects/troll-build/src'))
+  inputs.file('projects/troll-build/tsconfig.app.json')
+  inputs.file('projects/troll-build/tsconfig.json')
   inputs.file('package.json')
   inputs.file('package-lock.json')
   inputs.file('tsconfig.json')
 
-  outputs.dir('dist')
+  outputs.dir('dist/troll-build')
 
-  args = ['run', 'build-all']
+  outputs.cacheIf { true }
+
+  args = ['run', 'build']
+}
+
+task ngBuildAdmin(type: NpmTask) {
+  dependsOn npmInstall
+  description = "Runs 'npm run build-admin'"
+
+  inputs.files(fileTree('node_modules'))
+  inputs.files(fileTree('projects/admin/src'))
+  inputs.file('projects/admin/tsconfig.app.json')
+  inputs.file('projects/admin/tsconfig.json')
+  inputs.file('package.json')
+  inputs.file('package-lock.json')
+  inputs.file('tsconfig.json')
+
+  outputs.dir('dist/admin')
+
+  outputs.cacheIf { true }
+
+  args = ['run', 'build-admin']
 }
 
 task karmaTests(type: NpmTask) {
@@ -34,7 +61,7 @@ task karmaTests(type: NpmTask) {
 
 // Since Angular does not modify the deployUrl of html (like src), assets must be moved to the root of /dist to avoid 404's
 task moveAssets() {
-  dependsOn npmBuild
+  dependsOn 'ngBuild'
   doLast {
     ant.move file: "${projectDir}/dist/troll-build/assets", todir: "${projectDir}/dist"
     ant.move file: "${projectDir}/dist/admin/assets", todir: "${projectDir}/dist"

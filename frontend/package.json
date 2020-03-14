@@ -8,7 +8,6 @@
     "start-admin": "ng serve admin",
     "build": "ng build troll-build --prod",
     "build-admin": "ng build admin --prod",
-    "build-all": "concurrently \"npm run build\" \"npm run build-admin\"",
     "build-with-stats": "ng build troll-build --prod --statsJson=true",
     "test": "ng test troll-build --code-coverage",
     "test-admin": "ng test admin --code-coverage",
