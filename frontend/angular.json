@@ -26,7 +26,7 @@
             "main": "projects/admin/src/main.ts",
             "polyfills": "projects/admin/src/polyfills.ts",
             "tsConfig": "projects/admin/tsconfig.app.json",
-            "aot": false,
+            "aot": true,
             "assets": [
               "projects/admin/src/favicon.ico",
               "projects/admin/src/assets"
@@ -54,7 +54,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -165,7 +164,7 @@
             "main": "projects/troll-build/src/main.ts",
             "polyfills": "projects/troll-build/src/polyfills.ts",
             "tsConfig": "projects/troll-build/tsconfig.app.json",
-            "aot": false,
+            "aot": true,
             "assets": [
               "projects/troll-build/src/favicon.ico",
               "projects/troll-build/src/assets"
@@ -189,7 +188,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
