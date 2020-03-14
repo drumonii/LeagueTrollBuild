@@ -26,10 +26,10 @@ public interface MapsRepository extends JpaRepository<GameMap, Integer>, JpaSpec
 	 * @return only the eligible {@link List} of {@link GameMap}s
 	 */
 	@Query("select m from GameMap m where m.mapId in ('10', '11', '12') order by m.mapName")
-	@Cacheable(key = "#root.methodName")
+	@Cacheable(key = "#root.methodName", unless = "#result.isEmpty()")
 	List<GameMap> forTrollBuild();
 
-	@Cacheable
+	@Cacheable(unless = "#result.isEmpty()")
 	@Override
 	List<GameMap> findAll();
 
@@ -41,7 +41,7 @@ public interface MapsRepository extends JpaRepository<GameMap, Integer>, JpaSpec
 	@Override
 	<S extends GameMap> S save(S entity);
 
-	@Cacheable
+	@Cacheable(unless = "#result == null")
 	@Override
 	Optional<GameMap> findById(Integer integer);
 
@@ -57,7 +57,7 @@ public interface MapsRepository extends JpaRepository<GameMap, Integer>, JpaSpec
 	@Override
 	void deleteAll();
 
-	@Cacheable(key = "{#spec.example.probe, #sort}")
+	@Cacheable(key = "{#spec.example.probe, #sort}", unless = "#result.isEmpty()")
 	@Override
 	List<GameMap> findAll(Specification<GameMap> example, Sort sort);
 

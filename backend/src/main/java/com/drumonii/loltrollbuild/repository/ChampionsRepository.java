@@ -27,7 +27,7 @@ public interface ChampionsRepository extends JpaRepository<Champion, Integer>, J
 	 * @return a {@link Champion} from its name
 	 */
 	@Query("select c from Champion c where lower(c.name) = lower(:name) or lower(c.key) = lower(:name)")
-	@Cacheable
+	@Cacheable(unless = "#result == null")
 	Optional<Champion> findByName(@Param("name") String name);
 
 	/**
@@ -36,14 +36,14 @@ public interface ChampionsRepository extends JpaRepository<Champion, Integer>, J
 	 * @return the {@link List} of string tags
 	 */
 	@Query(value = "select distinct c.tag from champion_tag c order by c.tag", nativeQuery = true)
-	@Cacheable(key = "#root.methodName")
+	@Cacheable(key = "#root.methodName", unless = "#result.isEmpty()")
 	List<String> getTags();
 
-	@Cacheable
+	@Cacheable(unless = "#result.isEmpty()")
 	@Override
 	List<Champion> findAll();
 
-	@Cacheable
+	@Cacheable(unless = "#result.isEmpty()")
 	@Override
 	List<Champion> findAll(Sort sort);
 
@@ -55,7 +55,7 @@ public interface ChampionsRepository extends JpaRepository<Champion, Integer>, J
 	@Override
 	<S extends Champion> S save(S entity);
 
-	@Cacheable
+	@Cacheable(unless = "#result == null")
 	@Override
 	Optional<Champion> findById(Integer integer);
 
@@ -71,7 +71,7 @@ public interface ChampionsRepository extends JpaRepository<Champion, Integer>, J
 	@Override
 	void deleteAll();
 
-	@Cacheable(key = "{#spec.example.probe, #sort}")
+	@Cacheable(key = "{#spec.example.probe, #sort}", unless = "#result.isEmpty()")
 	@Override
 	List<Champion> findAll(Specification<Champion> spec, Sort sort);
 

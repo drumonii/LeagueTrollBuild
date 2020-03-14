@@ -33,7 +33,7 @@ public interface ItemsRepository extends JpaRepository<Item, Integer>, JpaSpecif
 	@Query("select distinct i from Item i join i.from f join i.maps m " +
 		   "where i.id <> 1001 and f in ('1001') " +
 		   "and (key(m) = :mapId and m = true)")
-	@Cacheable(key = "{#root.methodName, #mapId}")
+	@Cacheable(key = "{#root.methodName, #mapId}", unless = "#result.isEmpty()")
 	List<Item> boots(@Param("mapId") int mapId);
 
 	/**
@@ -52,7 +52,7 @@ public interface ItemsRepository extends JpaRepository<Item, Integer>, JpaSpecif
 	       "and (:mapId = 10 and i.gold.purchasable = false and i.name = 'Arcane Sweeper') " +
 	       "or (:mapId = 11 and t in ('Trinket') and i.gold.purchasable = true and i.gold.sell = 0 and i.name not like '%Snax%') " +
 	       "or (:mapId = 12 and i.gold.purchasable = false and i.name = 'Poro-Snax')")
-	@Cacheable(key = "{#root.methodName, #mapId}")
+	@Cacheable(key = "{#root.methodName, #mapId}", unless = "#result.isEmpty()")
 	List<Item> trinkets(@Param("mapId") int mapId);
 
 	/**
@@ -62,7 +62,7 @@ public interface ItemsRepository extends JpaRepository<Item, Integer>, JpaSpecif
 	 * @see <a href="http://leagueoflegends.wikia.com/wiki/Viktor">Viktor</a>
 	 */
 	@Query("select i from Item i where i.requiredChampion = 'Viktor'")
-	@Cacheable(key = "#root.methodName")
+	@Cacheable(key = "#root.methodName", unless = "#result.isEmpty()")
 	List<Item> viktorOnly();
 
 	/**
@@ -84,10 +84,10 @@ public interface ItemsRepository extends JpaRepository<Item, Integer>, JpaSpecif
 		   "and i.requiredAlly is null " +
 		   "and i.requiredChampion is null " +
 		   "and i.name not like 'Enchantment%' and i.name not like 'Doran%' and i.name not like '%(Quick Charge)'")
-	@Cacheable(key = "{#root.methodName, #mapId}")
+	@Cacheable(key = "{#root.methodName, #mapId}", unless = "#result.isEmpty()")
 	List<Item> forTrollBuild(@Param("mapId") int mapId);
 
-	@Cacheable
+	@Cacheable(unless = "#result.isEmpty()")
 	@Override
 	List<Item> findAll();
 
@@ -99,7 +99,7 @@ public interface ItemsRepository extends JpaRepository<Item, Integer>, JpaSpecif
 	@Override
 	<S extends Item> S save(S entity);
 
-	@Cacheable
+	@Cacheable(unless = "#result == null")
 	@Override
 	Optional<Item> findById(Integer integer);
 
@@ -115,7 +115,7 @@ public interface ItemsRepository extends JpaRepository<Item, Integer>, JpaSpecif
 	@Override
 	void deleteAll();
 
-	@Cacheable(key = "{#spec.example.probe, #sort}")
+	@Cacheable(key = "{#spec.example.probe, #sort}", unless = "#result.isEmpty()")
 	@Override
 	List<Item> findAll(Specification<Item> spec, Sort sort);
 

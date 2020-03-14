@@ -18,7 +18,7 @@ import java.util.Optional;
 @CacheConfig(cacheNames = "builds")
 public interface BuildsRepository extends JpaRepository<Build, Integer> {
 
-	@Cacheable
+	@Cacheable(unless = "#result.isEmpty()")
 	@Override
 	List<Build> findAll();
 
@@ -30,7 +30,7 @@ public interface BuildsRepository extends JpaRepository<Build, Integer> {
 	@Override
 	<S extends Build> S save(S entity);
 
-	@Cacheable
+	@Cacheable(unless = "#result == null")
 	@Override
 	Optional<Build> findById(Integer integer);
 
@@ -46,7 +46,7 @@ public interface BuildsRepository extends JpaRepository<Build, Integer> {
 	@Override
 	void deleteAll();
 
-	@Cacheable(key = "{#example.probe, #pageable}")
+	@Cacheable(key = "{#example.probe, #pageable}", unless = "#result.isEmpty()")
 	@Override
 	<S extends Build> Page<S> findAll(Example<S> example, Pageable pageable);
 

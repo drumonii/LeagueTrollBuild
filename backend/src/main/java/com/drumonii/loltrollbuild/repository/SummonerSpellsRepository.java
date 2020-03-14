@@ -30,10 +30,10 @@ public interface SummonerSpellsRepository extends JpaRepository<SummonerSpell, I
 	 */
 	@Query("select s from SummonerSpell s join s.modes m " +
 		   "where m in (:mode)")
-	@Cacheable(key = "{#root.methodName, #mode}")
+	@Cacheable(key = "{#root.methodName, #mode}", unless = "#result.isEmpty()")
 	List<SummonerSpell> forTrollBuild(@Param("mode") GameMode mode);
 
-	@Cacheable
+	@Cacheable(unless = "#result.isEmpty()")
 	@Override
 	List<SummonerSpell> findAll();
 
@@ -45,7 +45,7 @@ public interface SummonerSpellsRepository extends JpaRepository<SummonerSpell, I
 	@Override
 	<S extends SummonerSpell> S save(S entity);
 
-	@Cacheable
+	@Cacheable(unless = "#result == null")
 	@Override
 	Optional<SummonerSpell> findById(Integer integer);
 
@@ -61,7 +61,7 @@ public interface SummonerSpellsRepository extends JpaRepository<SummonerSpell, I
 	@Override
 	void deleteAll();
 
-	@Cacheable(key = "{#spec.example.probe, #sort}")
+	@Cacheable(key = "{#spec.example.probe, #sort}", unless = "#result.isEmpty()")
 	@Override
 	List<SummonerSpell> findAll(Specification<SummonerSpell> spec, Sort sort);
 

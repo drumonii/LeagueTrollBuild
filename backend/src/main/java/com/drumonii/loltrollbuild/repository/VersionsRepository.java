@@ -26,14 +26,14 @@ public interface VersionsRepository extends JpaRepository<Version, String> {
 			"select v.patch, v.major, v.minor, v.revision from Version v " +
 			"order by v.major desc, v.minor desc, v.revision desc limit 1",
 			nativeQuery = true)
-	@Cacheable
+	@Cacheable(unless = "#result == null")
 	Version latestVersion();
 
-	@Cacheable
+	@Cacheable(unless = "#result.isEmpty()")
 	@Override
 	List<Version> findAll();
 
-	@Cacheable
+	@Cacheable(unless = "#result.isEmpty()")
 	@Override
 	List<Version> findAll(Sort sort);
 
