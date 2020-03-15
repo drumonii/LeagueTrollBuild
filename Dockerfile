@@ -1,4 +1,4 @@
-FROM gradle:5.2.1-jre11-slim AS builder
+FROM gradle:5.6.4-jdk11 AS builder
 COPY --chown=gradle:gradle . /home/gradle/src
 WORKDIR /home/gradle/src
 RUN gradle build -x test -x asciidoctor --stacktrace
