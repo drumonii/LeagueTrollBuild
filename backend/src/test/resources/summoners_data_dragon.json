@@ -1,6 +1,6 @@
 {
   "type": "summoner",
-  "version": "10.5.1",
+  "version": "10.6.1",
   "data": {
     "SummonerBarrier": {
       "id": "SummonerBarrier",
@@ -1332,8 +1332,8 @@
     "SummonerTeleport": {
       "id": "SummonerTeleport",
       "name": "Teleport",
-      "description": "After channeling for 4 seconds, teleports your champion to target allied structure, minion, or ward.",
-      "tooltip": "After channeling for {{ f1 }} seconds, your champion teleports to target allied structure, minion, or ward.",
+      "description": "After channeling for 4 seconds, teleports your champion to target allied structure, minion, or ward and grants a Movement Speed boost.",
+      "tooltip": "After channeling for {{ f1 }} seconds, your champion teleports to target allied structure, minion, or ward and grants a {{ movespeedbuff }} Movement Speed boost for {{ msduration }} seconds.",
       "maxrank": 1,
       "cooldown": [
         360
@@ -1409,7 +1409,7 @@
         "PRACTICETOOL",
         "GAMEMODEX"
       ],
-      "costType": "s %i:cooldown%",
+      "costType": "s",
       "maxammo": "-1",
       "range": [
         25000
@@ -1424,7 +1424,7 @@
         "w": 48,
         "h": 48
       },
-      "resource": "{{ cooldown }}s %i:cooldown%"
+      "resource": "%i:cooldown% {{ modifiedcooldown }}s"
     }
   }
 }

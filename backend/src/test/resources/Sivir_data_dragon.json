@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.5.1",
+  "version": "10.6.1",
   "data": {
     "Sivir": {
       "id": "Sivir",
@@ -144,7 +144,7 @@
           "leveltip": {
             "label": [
               "Damage",
-              "Attack Damage Scaling",
+              "Attack Speed",
               "@AbilityResourceName@ Cost"
             ],
             "effect": [
@@ -569,13 +569,15 @@
           "leveltip": {
             "label": [
               "Attack Speed",
-              "Movement Speed",
+              "Max Movement Speed",
+              "Minimum Movement Speed",
               "Movement Speed Duration",
               "Cooldown"
             ],
             "effect": [
               "{{ ricochetattackspeed*100.000000 }}% -> {{ ricochetattackspeednl*100.000000 }}%",
               "{{ maxms }}% -> {{ maxmsNL }}%",
+              "{{ minms }}% -> {{ minmsNL }}%",
               "{{ maxmsduration }} -> {{ maxmsdurationNL }}",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]

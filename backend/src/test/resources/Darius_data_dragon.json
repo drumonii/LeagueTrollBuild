@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.5.1",
+  "version": "10.6.1",
   "data": {
     "Darius": {
       "id": "Darius",
@@ -294,13 +294,13 @@
           ],
           "cooldownBurn": "7/6.5/6/5.5/5",
           "cost": [
-            30,
-            30,
-            30,
-            30,
-            30
+            40,
+            40,
+            40,
+            40,
+            40
           ],
-          "costBurn": "30",
+          "costBurn": "40",
           "datavalues": {},
           "effect": [
             null,
@@ -326,11 +326,11 @@
               50
             ],
             [
+              1.4,
+              1.45,
               1.5,
               1.55,
-              1.6,
-              1.65,
-              1.7
+              1.6
             ],
             [
               1,
@@ -380,7 +380,7 @@
             "0",
             "90",
             "50",
-            "1.5/1.55/1.6/1.65/1.7",
+            "1.4/1.45/1.5/1.55/1.6",
             "1",
             "0",
             "0",
@@ -418,10 +418,12 @@
           "leveltip": {
             "label": [
               "Percent Armor Penetration",
+              "@AbilityResourceName@ Cost",
               "Cooldown"
             ],
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
+              "{{ cost }} -> {{ costNL }}",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
@@ -435,13 +437,13 @@
           ],
           "cooldownBurn": "24/21/18/15/12",
           "cost": [
-            45,
-            45,
-            45,
-            45,
-            45
+            70,
+            60,
+            50,
+            40,
+            30
           ],
-          "costBurn": "45",
+          "costBurn": "70/60/50/40/30",
           "datavalues": {},
           "effect": [
             null,

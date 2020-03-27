@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.5.1",
+  "version": "10.6.1",
   "data": {
     "TwistedFate": {
       "id": "TwistedFate",
@@ -286,7 +286,7 @@
           "id": "PickACard",
           "name": "Pick a Card",
           "description": "Twisted Fate chooses a magic card from his deck, and uses that for his next attack, causing bonus effects.",
-          "tooltip": "Cast once to shuffle the deck and again to choose your card, enhancing your next attack.<br /><br /><span class=\"color4455FF\">Blue Card</span> deals {{ e1 }} <scaleAD>(+{{ a2 }})</scaleAD> <scaleAP>(+{{ a1 }})</scaleAP> Magic Damage and restores {{ e6 }} Mana.<br /><br /><span class=\"colorFF2222\">Red Card</span> deals {{ e4 }} <scaleAD>(+{{ a2 }})</scaleAD> <scaleAP>(+{{ a1 }})</scaleAP> Magic Damage to units around the target and slows their Movement Speed by {{ e2 }}% for 2.5 seconds.<br /><br /><span class=\"colorFFD700\">Gold Card</span> deals {{ e5 }}<scaleAD> (+{{ a2 }})</scaleAD> <scaleAP>(+{{ a1 }})</scaleAP> Magic Damage and stuns for {{ e3 }} seconds.",
+          "tooltip": "Cast once to shuffle the deck and again to choose your card, enhancing your next attack.<br /><br /><span class=\"color4455FF\">Blue Card</span> deals {{ bluedamage }} Magic Damage and restores {{ e6 }} Mana.<br /><br /><span class=\"colorFF2222\">Red Card</span> deals {{ reddamage }} Magic Damage to units around the target and slows their Movement Speed by {{ e2 }}% for 2.5 seconds.<br /><br /><span class=\"colorFFD700\">Gold Card</span> deals {{ golddamage }} Magic Damage and stuns for {{ e3 }} seconds.",
           "leveltip": {
             "label": [
               "Blue Card Damage",
@@ -411,38 +411,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "attackdamage",
-              "coeff": 1,
-              "key": "a2"
-            },
-            {
-              "link": "spelldamage",
-              "coeff": 0.5,
-              "key": "a1"
-            },
-            {
-              "link": "attackdamage",
-              "coeff": 1,
-              "key": "a2"
-            },
-            {
-              "link": "spelldamage",
-              "coeff": 0.5,
-              "key": "a1"
-            },
-            {
-              "link": "attackdamage",
-              "coeff": 1,
-              "key": "a2"
-            },
-            {
-              "link": "spelldamage",
-              "coeff": 0.5,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [

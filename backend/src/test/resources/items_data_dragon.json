@@ -1,6 +1,6 @@
 {
   "type": "item",
-  "version": "10.5.1",
+  "version": "10.6.1",
   "basic": {
     "name": "",
     "rune": {
@@ -623,7 +623,6 @@
         "3053",
         "3074",
         "3814",
-        "3812",
         "3139"
       ],
       "image": {
@@ -5395,7 +5394,8 @@
       ],
       "into": [
         "3190",
-        "3050"
+        "3050",
+        "3812"
       ],
       "image": {
         "full": "3105.png",
@@ -8701,7 +8701,7 @@
     },
     "3389": {
       "name": "Might of the Ruined King",
-      "description": "<stats><font color='#FFFFFF'>+55 Attack Damage</font><br><font color='#FFFFFF'>+40% Attack Speed</font><br>+12% Life Steal</stats><br><br><unique>UNIQUE Passive:</unique> Basic attacks deal 8% of the target's current Health as bonus physical damage on hit.<br><active>UNIQUE Active:</active> Deals 100 magic damage to target champion and steals 25% of their Movement Speed for 3 seconds (90 second cooldown).<br><br><rules>Minimum bonus physical damage dealt is 15.<br>Maximum bonus physical damage dealt to monsters and minions is 60.<br>User's Life Steal is applied to bonus physical damage dealt.</rules>",
+      "description": "<stats><font color='#FFFFFF'>+55 Attack Damage</font><br><font color='#FFFFFF'>+40% Attack Speed</font><br>+12% Life Steal</stats><br><br><unique>UNIQUE Passive:</unique> Basic attacks deal 8% of the target's current Health as bonus physical damage on hit (Melee users deal 12%).<br><active>UNIQUE Active:</active> Deals 100 magic damage to target champion and steals 25% of their Movement Speed for 3 seconds (90 second cooldown).<br><br><rules>Minimum bonus physical damage dealt is 15.<br>Maximum bonus physical damage dealt to monsters and minions is 60.<br>User's Life Steal is applied to bonus physical damage dealt.</rules>",
       "colloq": ";brk;bork;bork;bork;botrk;Ornn",
       "plaintext": "Deals damage based on target's Health, can steal Movement Speed",
       "from": [
@@ -10280,13 +10280,13 @@
     },
     "3812": {
       "name": "Death's Dance",
-      "description": "<stats>+80 Attack Damage<br>+10% Cooldown Reduction</stats><br><br><unique>UNIQUE Passive:</unique> Heal for 15% of damage dealt. This is 33% as effective for Area of Effect damage.<br><unique>UNIQUE Passive:</unique> 30% of damage taken is dealt as a Bleed effect over 3 seconds instead.",
+      "description": "<stats>+50 Attack Damage<br>+30 Armor<br>+30 Magic Resist<br>+10% Cooldown Reduction</stats><br><br><unique>UNIQUE Passive:</unique> Heal for 15% of damage dealt. This is 33% as effective for Area of Effect damage.<br><unique>UNIQUE Passive:</unique> <specialRules>[Melee Users: 30% || Ranged Users: 20%]</specialRules> of damage taken is dealt as a Bleed effect over 3 seconds instead.",
       "colloq": ";Bloodbag",
       "plaintext": "Trades incoming damage now for incoming damage later",
       "stacks": 0,
       "from": [
+        "3105",
         "1053",
-        "1037",
         "3133"
       ],
       "image": {
@@ -10299,12 +10299,14 @@
         "h": 48
       },
       "gold": {
-        "base": 625,
+        "base": 500,
         "purchasable": true,
-        "total": 3500,
-        "sell": 2450
+        "total": 3600,
+        "sell": 2520
       },
       "tags": [
+        "SpellBlock",
+        "Armor",
         "Damage",
         "LifeSteal",
         "CooldownReduction"
@@ -10315,12 +10317,15 @@
         "22": false
       },
       "stats": {
-        "FlatPhysicalDamageMod": 80
+        "FlatPhysicalDamageMod": 50,
+        "FlatSpellBlockMod": 30,
+        "FlatArmorMod": 30
       },
       "effect": {
         "Effect1Amount": "0.15",
         "Effect2Amount": "0.3",
-        "Effect3Amount": "3"
+        "Effect3Amount": "3",
+        "Effect4Amount": "0.2"
       },
       "depth": 3
     },
