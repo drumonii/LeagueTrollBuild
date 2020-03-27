@@ -118,6 +118,28 @@ function getResponse(httpUrl, endCallback) {
 }
 
 /**
+ * Determines if the latest version from Riot is the same as the latest saved version in the test json file.
+ * If that's the case, the script will terminate. Only if the `--force` flag is set, then the script continues.
+ *
+ * @param latestVersion the latest Riot patch version
+ */
+function checkIsNewVersion(latestVersion) {
+  const versionsJsonFile = path.resolve(__dirname, '../src/test/resources/versions_data_dragon.json');
+
+  const savedVersions = fs.readFileSync(versionsJsonFile, 'utf8');
+  const savedVersion = JSON.parse(savedVersions)[0];
+
+  if (latestVersion === savedVersion) {
+    const arg = process.argv[2] || '';
+    if (arg !== '--force') {
+      console.log('the latest version from Riot is the same as the latest saved version in the test json file. ' +
+        'No writing of test json files will be done. Use --force to ignore');
+      process.exit(0);
+    }
+  }
+}
+
+/**
  * Fetches all test data from Riot's ddragon API.
  */
 function getTestData() {
@@ -129,7 +151,9 @@ function getTestData() {
     const versions = JSON.parse(rawVersionsData);
 
     const latestVersion = versions[0];
-    console.log(`found latest version to be '${latestVersion}'`);
+    console.log(`found the latest version to be '${latestVersion}'`);
+
+    checkIsNewVersion(latestVersion);
 
     writeFile('versions_data_dragon', rawVersionsData);
 
