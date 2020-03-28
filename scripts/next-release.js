@@ -56,13 +56,13 @@ function updatePackageJson(version) {
   const packageJsonContent = fs.readFileSync(config.packageJson.file, 'utf8');
   const packageJson = JSON.parse(packageJsonContent);
   packageJson.version = version;
-  fs.writeFileSync(config.packageJson.file, JSON.stringify(packageJson, null, 2));
+  fs.writeFileSync(config.packageJson.file, JSON.stringify(packageJson, null, 2).concat(os.EOL));
 
   console.log('updating package-lock.json...');
   const packageJsonLockContent = fs.readFileSync(config.packageJsonLock.file, 'utf8');
   const packageJsonLock = JSON.parse(packageJsonLockContent);
   packageJsonLock.version = version;
-  fs.writeFileSync(config.packageJsonLock.file, JSON.stringify(packageJsonLock, null, 2));
+  fs.writeFileSync(config.packageJsonLock.file, JSON.stringify(packageJsonLock, null, 2).concat(os.EOL));
 }
 
 /**
