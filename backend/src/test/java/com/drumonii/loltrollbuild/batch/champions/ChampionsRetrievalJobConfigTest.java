@@ -61,7 +61,7 @@ abstract class ChampionsRetrievalJobConfigTest extends AbstractBatchTests {
 				.setImgsSrcs(anyList(), any(UriComponentsBuilder.class), eq(latestVersion));
 
 		assertThat(championsRepository.findAll())
-				.containsOnlyElementsOf(championsResponse.getChampions().values());
+				.containsExactlyInAnyOrderElementsOf(championsResponse.getChampions().values());
 	}
 
 	@Test
@@ -90,7 +90,7 @@ abstract class ChampionsRetrievalJobConfigTest extends AbstractBatchTests {
 		verify(imageFetcher, times(1))
 				.setImgsSrcs(anyList(), any(UriComponentsBuilder.class), eq(latestVersion));
 
-		assertThat(championsRepository.findAll()).containsOnlyElementsOf(championsResponse.getChampions().values());
+		assertThat(championsRepository.findAll()).containsExactlyInAnyOrderElementsOf(championsResponse.getChampions().values());
 	}
 
 	@Test

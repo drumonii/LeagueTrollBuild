@@ -63,7 +63,7 @@ abstract class ItemsRetrievalJobConfigTest extends AbstractBatchTests {
 				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 
 		assertThat(itemsRepository.findAll())
-				.containsOnlyElementsOf(itemsResponse.getItems().values());
+				.containsExactlyInAnyOrderElementsOf(itemsResponse.getItems().values());
 	}
 
 	@Test
@@ -90,7 +90,7 @@ abstract class ItemsRetrievalJobConfigTest extends AbstractBatchTests {
 				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 
 		assertThat(itemsRepository.findAll())
-				.containsOnlyElementsOf(itemsResponse.getItems().values());
+				.containsExactlyInAnyOrderElementsOf(itemsResponse.getItems().values());
 	}
 
 	@Test
@@ -112,7 +112,7 @@ abstract class ItemsRetrievalJobConfigTest extends AbstractBatchTests {
 				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 
 		assertThat(itemsRepository.findAll())
-				.containsOnlyElementsOf(itemsResponse.getItems().values());
+				.containsExactlyInAnyOrderElementsOf(itemsResponse.getItems().values());
 	}
 
 	@Test
@@ -131,7 +131,7 @@ abstract class ItemsRetrievalJobConfigTest extends AbstractBatchTests {
 				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 
 		assertThat(itemsRepository.findAll())
-				.containsOnlyElementsOf(items);
+				.containsExactlyInAnyOrderElementsOf(items);
 	}
 
 	@Test

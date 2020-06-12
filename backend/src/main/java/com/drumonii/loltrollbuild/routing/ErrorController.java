@@ -1,15 +1,13 @@
 package com.drumonii.loltrollbuild.routing;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.web.servlet.error.AbstractErrorController;
+import org.springframework.boot.web.error.ErrorAttributeOptions;
 import org.springframework.boot.web.servlet.error.ErrorAttributes;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.context.request.WebRequest;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 /**
@@ -19,9 +17,6 @@ import java.util.Map;
 @RequestMapping("${error.path:/error}")
 public class ErrorController extends AbstractErrorController {
 
-    @Value("${error.path:/error}")
-    private String path;
-
     private final ErrorAttributes errorAttributes;
 
     public ErrorController(ErrorAttributes errorAttributes) {
@@ -30,10 +25,9 @@ public class ErrorController extends AbstractErrorController {
     }
 
     @RequestMapping(produces = MediaType.TEXT_HTML_VALUE)
-    public String errorHtml(HttpServletRequest request) {
-        WebRequest webRequest = new ServletWebRequest(request);
+    public String errorHtml(WebRequest webRequest) {
 
-        Map<String, Object> errorAttrs = this.errorAttributes.getErrorAttributes(webRequest, false);
+        Map<String, Object> errorAttrs = this.errorAttributes.getErrorAttributes(webRequest, ErrorAttributeOptions.defaults());
         String requestPath = (String) errorAttrs.get("path");
 
         if (requestPath.startsWith("/admin")) {
@@ -45,7 +39,7 @@ public class ErrorController extends AbstractErrorController {
 
     @Override
     public String getErrorPath() {
-        return path;
+        return null;
     }
 
 }

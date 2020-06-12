@@ -68,7 +68,7 @@ abstract class SummonerSpellsRetrievalJobConfigTest extends AbstractBatchTests {
 		verify(imageFetcher, times(summonerSpellsWithModes.size()))
 				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 
-		assertThat(summonerSpellsRepository.findAll()).containsOnlyElementsOf(summonerSpellsWithModes);
+		assertThat(summonerSpellsRepository.findAll()).containsExactlyInAnyOrderElementsOf(summonerSpellsWithModes);
 	}
 
 	@Test
@@ -99,7 +99,7 @@ abstract class SummonerSpellsRetrievalJobConfigTest extends AbstractBatchTests {
 		verify(imageFetcher, times(1))
 				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 
-		assertThat(summonerSpellsRepository.findAll()).containsOnlyElementsOf(summonerSpellsWithModes);
+		assertThat(summonerSpellsRepository.findAll()).containsExactlyInAnyOrderElementsOf(summonerSpellsWithModes);
 	}
 
 	@Test
@@ -121,7 +121,7 @@ abstract class SummonerSpellsRetrievalJobConfigTest extends AbstractBatchTests {
 		verify(imageFetcher, never())
 				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 
-		assertThat(summonerSpellsRepository.findAll()).containsOnlyElementsOf(summonerSpellsResponse
+		assertThat(summonerSpellsRepository.findAll()).containsExactlyInAnyOrderElementsOf(summonerSpellsResponse
 				.getSummonerSpells().values());
 	}
 
@@ -141,7 +141,7 @@ abstract class SummonerSpellsRetrievalJobConfigTest extends AbstractBatchTests {
 		verify(imageFetcher, never())
 				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 
-		assertThat(summonerSpellsRepository.findAll()).containsOnlyElementsOf(summonerSpells);
+		assertThat(summonerSpellsRepository.findAll()).containsExactlyInAnyOrderElementsOf(summonerSpells);
 	}
 
 	@Test

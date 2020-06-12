@@ -63,7 +63,7 @@ abstract class MapsRetrievalJobConfigTest extends AbstractBatchTests {
 				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 
 		assertThat(mapsRepository.findAll())
-				.containsOnlyElementsOf(mapsResponse.getMaps().values());
+				.containsExactlyInAnyOrderElementsOf(mapsResponse.getMaps().values());
 	}
 
 	@Test
@@ -90,7 +90,7 @@ abstract class MapsRetrievalJobConfigTest extends AbstractBatchTests {
 				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 
 		assertThat(mapsRepository.findAll())
-				.containsOnlyElementsOf(mapsResponse.getMaps().values());
+				.containsExactlyInAnyOrderElementsOf(mapsResponse.getMaps().values());
 	}
 
 	@Test
@@ -112,7 +112,7 @@ abstract class MapsRetrievalJobConfigTest extends AbstractBatchTests {
 				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 
 		assertThat(mapsRepository.findAll())
-				.containsOnlyElementsOf(mapsResponse.getMaps().values());
+				.containsExactlyInAnyOrderElementsOf(mapsResponse.getMaps().values());
 	}
 
 	@Test
@@ -131,7 +131,7 @@ abstract class MapsRetrievalJobConfigTest extends AbstractBatchTests {
 				.setImgSrc(any(Image.class), any(UriComponentsBuilder.class), eq(latestVersion));
 
 		assertThat(mapsRepository.findAll())
-				.containsOnlyElementsOf(maps);
+				.containsExactlyInAnyOrderElementsOf(maps);
 	}
 
 	@Test
