@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.6.1",
+  "version": "10.12.1",
   "data": {
     "Urgot": {
       "id": "Urgot",
@@ -46,6 +46,12 @@
           "id": "6009",
           "num": 9,
           "name": "High Noon Urgot",
+          "chromas": true
+        },
+        {
+          "id": "6015",
+          "num": 15,
+          "name": "Pajama Guardian Cosplay Urgot",
           "chromas": true
         }
       ],
@@ -99,7 +105,7 @@
           "id": "UrgotQ",
           "name": "Corrosive Charge",
           "description": "Fires an explosive charge at the target location, dealing physical damage and slowing enemies caught in the explosion.",
-          "tooltip": "Urgot fires an explosive charge, dealing {{ e2 }} <scaleAD>(+{{ a1 }})</scaleAD> physical damage and slowing enemies hit by {{ e4 }}% for {{ e5 }} second.",
+          "tooltip": "Urgot fires an explosive charge, dealing <physicalDamage>{{ totaldamage }} physical damage</physicalDamage> and slowing enemies hit by {{ slowamount*100 }}% for {{ slowduration }} seconds.",
           "leveltip": {
             "label": [
               "Damage",
@@ -107,8 +113,8 @@
               "Cooldown"
             ],
             "effect": [
-              "{{ e2 }} -> {{ e2NL }}",
-              "{{ e4 }}% -> {{ e4NL }}%",
+              "{{ basedamage }} -> {{ basedamageNL }}",
+              "{{ slowamount*100.000000 }}% -> {{ slowamountnl*100.000000 }}%",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
@@ -133,46 +139,46 @@
           "effect": [
             null,
             [
-              0.1,
-              0.1,
-              0.1,
-              0.1,
-              0.1
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              25,
-              70,
-              115,
-              160,
-              205
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              0.3,
-              0.3,
-              0.3,
-              0.3,
-              0.3
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              45,
-              50,
-              55,
-              60,
-              65
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              1.25,
-              1.25,
-              1.25,
-              1.25,
-              1.25
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              0.3,
-              0.3,
-              0.3,
-              0.3,
-              0.3
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -205,24 +211,18 @@
           ],
           "effectBurn": [
             null,
-            "0.1",
-            "25/70/115/160/205",
-            "0.3",
-            "45/50/55/60/65",
-            "1.25",
-            "0.3",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
             "0",
             "0",
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "attackdamage",
-              "coeff": 0.7,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -391,7 +391,7 @@
           "id": "UrgotE",
           "name": "Disdain",
           "description": "Urgot charges in a direction, shielding himself and trampling non-champion enemies. If he catches an enemy champion, he will stop and hurl them out of his way.",
-          "tooltip": "Urgot charges forwards, shielding himself for {{ etotalshieldhealth }} for {{ eshieldduration }} seconds. If he catches an enemy champion, he will stop and hurl them behind him, dealing {{ edamage }} physical damage and stunning them for {{ e6 }} seconds.<br /><br />Non-champions take the same damage but are knocked aside.<br /><br /><rules><span class=\"color8c8c8c\">Cannot cross terrain.</span></rules>",
+          "tooltip": "Urgot charges forwards, shielding himself for {{ etotalshieldhealth }} for {{ eshieldduration }} seconds. If he catches an enemy champion, he will stop and hurl them behind him, dealing {{ edamage }} physical damage and stunning them for {{ stunduration }} seconds.<br /><br />Non-champions take the same damage but are knocked aside.<br /><br /><rules><span class=\"color8c8c8c\">Cannot cross terrain.</span></rules>",
           "leveltip": {
             "label": [
               "Damage",
@@ -434,46 +434,46 @@
               0
             ],
             [
-              450,
-              450,
-              450,
-              450,
-              450
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              1200,
-              1200,
-              1200,
-              1200,
-              1200
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              100,
-              100,
-              100,
-              100,
-              100
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              1.25,
-              1.25,
-              1.25,
-              1.25,
-              1.25
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              1,
-              1,
-              1,
-              1,
-              1
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              1.5,
-              1.5,
-              1.5,
-              1.5,
-              1.5
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -500,12 +500,12 @@
           "effectBurn": [
             null,
             "0",
-            "450",
-            "1200",
-            "100",
-            "1.25",
-            "1",
-            "1.5",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
             "0",
             "0",
             "0"
@@ -549,11 +549,11 @@
           },
           "maxrank": 3,
           "cooldown": [
-            120,
-            95,
+            100,
+            85,
             70
           ],
-          "cooldownBurn": "120/95/70",
+          "cooldownBurn": "100/85/70",
           "cost": [
             100,
             100,
@@ -1772,7 +1772,7 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
+              "hideIfSummonerSpell": "SummonerDemonBrand",
               "appendAfterSection": "",
               "visibleWithAllOf": [
                 ""
@@ -1792,7 +1792,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3022",
+                  "id": "3812",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1805,7 +1805,7 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
+              "hideIfSummonerSpell": "SummonerBoost",
               "appendAfterSection": "",
               "visibleWithAllOf": [
                 ""
@@ -1815,7 +1815,7 @@
               ],
               "items": [
                 {
-                  "id": "3812",
+                  "id": "3033",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1825,7 +1825,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3033",
+                  "id": "3022",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1848,12 +1848,12 @@
               ],
               "items": [
                 {
-                  "id": "3800",
+                  "id": "3026",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3026",
+                  "id": "3800",
                   "count": 1,
                   "hideCount": false
                 },

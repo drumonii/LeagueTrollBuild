@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.6.1",
+  "version": "10.12.1",
   "data": {
     "Caitlyn": {
       "id": "Caitlyn",
@@ -70,7 +70,7 @@
           "id": "51011",
           "num": 11,
           "name": "Pulsefire Caitlyn",
-          "chromas": false
+          "chromas": true
         },
         {
           "id": "51013",
@@ -113,8 +113,8 @@
         "difficulty": 6
       },
       "stats": {
-        "hp": 481,
-        "hpperlevel": 91,
+        "hp": 510,
+        "hpperlevel": 93,
         "mp": 313.7,
         "mpperlevel": 35,
         "movespeed": 325,
@@ -139,7 +139,7 @@
           "id": "CaitlynPiltoverPeacemaker",
           "name": "Piltover Peacemaker",
           "description": "Caitlyn revs up her rifle for 1 second to unleash a penetrating shot that deals physical damage (deals less damage to subsequent targets).",
-          "tooltip": "Revs the rifle for {{ e4 }} second to fire a narrow piercing shot dealing {{ e1 }} <scaleAD>(+{{ f1 }})</scaleAD> physical damage. After hitting any target, it opens into a wider shot that deals {{ e2 }}% less damage. <br /><br />Always deals full damage to trap revealed targets.",
+          "tooltip": "Revs the rifle for {{ e4 }} second to fire a narrow piercing shot dealing <physicalDamage>{{ e1 }} <scaleAD>(+{{ f1 }})</scaleAD> physical damage</physicalDamage>. After hitting any target, it opens into a wider shot that deals {{ e2 }}% less damage. <br /><br />Always deals full damage to trap revealed targets.",
           "leveltip": {
             "label": [
               "Damage",
@@ -431,7 +431,7 @@
           "id": "CaitlynEntrapment",
           "name": "90 Caliber Net",
           "description": "Caitlyn fires a heavy net to slow her target. The recoil knocks Caitlyn back.",
-          "tooltip": "Fires a net, knocking Caitlyn backwards. The net deals {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage and slows the first enemy hit by {{ e3 }}% for {{ e2 }} second.",
+          "tooltip": "Fires a net, knocking Caitlyn backwards. The net deals <magicDamage>{{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage</magicDamage> and slows the first enemy hit by {{ e3 }}% for {{ e2 }} second.",
           "leveltip": {
             "label": [
               "Damage",
@@ -578,7 +578,7 @@
           "id": "CaitlynAceintheHole",
           "name": "Ace in the Hole",
           "description": "Caitlyn takes time to line up the perfect shot, dealing massive damage to a single target at a huge range. Enemy champions can intercept the bullet for their ally.",
-          "tooltip": "Takes a second to line up the perfect shot on an enemy Champion at up to {{ castrange }} range. The shot deals {{ rtotaldamage }} physical damage, but other enemy Champions can intercept it.<br /><br />Grants <span class=\"coloree91d7\">True Sight</span> of the target during the channel.",
+          "tooltip": "Takes a second to line up the perfect shot on an enemy Champion at up to {{ castrange }} range. The shot deals <physicalDamage>{{ rtotaldamage }} physical damage</physicalDamage>, but other enemy Champions can intercept it.<br /><br />Grants <span class=\"coloree91d7\">True Sight</span> of the target during the channel.",
           "leveltip": {
             "label": [
               "Damage",

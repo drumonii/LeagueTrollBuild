@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.6.1",
+  "version": "10.12.1",
   "data": {
     "Hecarim": {
       "id": "Hecarim",
@@ -120,7 +120,7 @@
         {
           "id": "HecarimRapidSlash",
           "name": "Rampage",
-          "description": "Hecarim cleaves nearby enemies dealing physical damage.",
+          "description": "Hecarim cleaves nearby enemies dealing physical damage. If Hecarim damages at least one enemy, he increases the damage and lowers the cooldown of subsequent Rampages.",
           "tooltip": "Hecarim cleaves nearby enemies for {{ basedamage }} <scaleAD>(+{{ f1 }})</scaleAD> physical damage. ({{ miniondamageratio*100 }}% damage to minions)<br /><br />If Hecarim damages at least one enemy with this attack he gains a stack of Rampage, reducing the base cooldown of this skill by {{ rampagecooldownreduction }} second and increasing its damage by {{ rampagebonusratio*100 }}% for a short duration. This effect can stack up to {{ maxstacks }} times.",
           "leveltip": {
             "label": [
@@ -153,11 +153,11 @@
           "effect": [
             null,
             [
-              55,
-              95,
-              135,
-              175,
-              215
+              60,
+              102,
+              144,
+              186,
+              228
             ],
             [
               2,
@@ -181,11 +181,11 @@
               3
             ],
             [
-              66,
-              66,
-              66,
-              66,
-              66
+              60,
+              60,
+              60,
+              60,
+              60
             ],
             [
               6,
@@ -225,11 +225,11 @@
           ],
           "effectBurn": [
             null,
-            "55/95/135/175/215",
+            "60/102/144/186/228",
             "2",
             "1",
             "3",
-            "66",
+            "60",
             "6",
             "0",
             "0",

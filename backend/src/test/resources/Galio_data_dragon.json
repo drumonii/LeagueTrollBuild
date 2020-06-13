@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.6.1",
+  "version": "10.12.1",
   "data": {
     "Galio": {
       "id": "Galio",
@@ -117,7 +117,7 @@
           "id": "GalioQ",
           "name": "Winds of War",
           "description": "Galio fires two windblasts that converge into a large tornado that deals damage over time.",
-          "tooltip": "Galio fires two windblasts that deal {{ qmissiledamage }} magic damage.<br /><br />When the windblasts meet, they combine into a giant tornado that deals {{ percentsuperqdamagett }}% of enemies' maximum Health (max {{ superqmonstermaxdamagetotal }} vs. monsters) as magic damage over {{ superqduration }} seconds.",
+          "tooltip": "Galio fires two windblasts that deal <magicDamage>{{ qmissiledamage }} magic damage</magicDamage>.<br /><br />When the windblasts meet, they combine into a giant tornado that deals {{ percentsuperqdamagett }}% of enemies' maximum Health (max {{ superqmonstermaxdamagetotal }} vs. monsters) as <magicDamage>magic damage</magicDamage> over {{ superqduration }} seconds.",
           "leveltip": {
             "label": [
               "Windblast Damage",
@@ -260,7 +260,7 @@
           "id": "GalioW",
           "name": "Shield of Durand",
           "description": "Galio charges a defensive stance, moving slowly. Upon releasing the charge, Galio will taunt and damage nearby enemies.",
-          "tooltip": "<span class=\"colorFF9900\">Passive:</span> After not taking damage for {{ e6 }} seconds Galio gains a shield that absorbs <span class=\"colorFF0000\">{{ f3 }}</span> magic damage.<br /><br /><span class=\"colorFF9900\">First Cast:</span> Galio starts to charge, gaining {{ e1 }} <span class=\"colorFF00FF\">(+{{ f2 }})</span><span class=\"color99FF99\">(+{{ f4 }})</span>% Damage Reduction from Magic Damage and {{ f5 }}% of that amount as Damage Reduction from Physical Damage. While charging, Galio slows himself by {{ e3 }}%.<br /><br /><span class=\"colorFF9900\">Second Cast:</span> Galio taunts nearby enemy champions for {{ e4 }} to {{ e7 }} seconds, deals {{ minimumwbasedamage }} <span class=\"color99FF99\">(+{{ f9 }})</span> to {{ maximumwbasedamage }} <span class=\"color99FF99\">(+{{ f11 }})</span> damage, and refreshes the Damage Reduction for {{ e8 }} seconds. Taunt duration, damage, and radius increase with charge time.",
+          "tooltip": "<span class=\"colorFF9900\">Passive:</span> After not taking damage for {{ passiveshieldooctimer }} seconds Galio gains a shield that absorbs {{ totalpassiveshield }} magic damage.<br /><br /><span class=\"colorFF9900\">First Cast:</span> Galio starts to charge, gaining {{ e1 }} <scaleMR>(+{{ f2 }})</scaleMR><scaleAP>(+{{ f4 }})</scaleAP>% damage reduction from magic damage and {{ f5 }}% of that amount as damage reduction from physical damage. While charging, Galio slows himself by {{ e3 }}%.<br /><br /><span class=\"colorFF9900\">Second Cast:</span> Galio taunts nearby enemy champions for {{ e4 }} to {{ e7 }} seconds, deals <magicDamage>{{ minimumwbasedamage }} <scaleAP>(+{{ f9 }})</scaleAP> to {{ maximumwbasedamage }} <scaleAP>(+{{ f11 }})</scaleAP> magic damage</magicDamage>, and refreshes the damage reduction for {{ e8 }} seconds. Taunt duration, damage, and radius increase with charge time.",
           "leveltip": {
             "label": [
               "Shield Health Ratio",
@@ -270,7 +270,7 @@
               "Maximum Damage"
             ],
             "effect": [
-              "{{ e5 }}% -> {{ e5NL }}%",
+              "{{ passiveshieldhealthratio*100.000000 }}% -> {{ passiveshieldhealthrationl*100.000000 }}%",
               "{{ e1 }}% -> {{ e1NL }}%",
               "{{ effect1amount*0.500000 }}% -> {{ effect1amountnl*0.500000 }}%",
               "{{ cooldown }} -> {{ cooldownNL }}",
@@ -326,18 +326,18 @@
               0.5
             ],
             [
-              8,
-              11,
-              14,
-              17,
-              20
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              12,
-              12,
-              12,
-              12,
-              12
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               1.5,
@@ -374,8 +374,8 @@
             "2",
             "15",
             "0.5",
-            "8/11/14/17/20",
-            "12",
+            "0",
+            "0",
             "1.5",
             "2",
             "1.25",
@@ -407,7 +407,7 @@
           "id": "GalioE",
           "name": "Justice Punch",
           "description": "Galio will briefly step back and charge, knocking up the first enemy champion he encounters.",
-          "tooltip": "Galio lunges forward with a mighty blow, dealing {{ totaldamage }} magic damage to the first champion and knocking him into the air for {{ knockupduration }} seconds. Enemies in the way take {{ pvedamage }} magic damage.<br /><br />Galio will stop upon hitting terrain with Justice Punch.",
+          "tooltip": "Galio lunges forward with a mighty blow, dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage> to the first champion and knocking him into the air for {{ knockupduration }} seconds. Enemies in the way take <magicDamage>{{ pvedamage }} magic damage</magicDamage>.<br /><br />Galio will stop upon hitting terrain with Justice Punch.",
           "leveltip": {
             "label": [
               "Damage",
@@ -547,8 +547,8 @@
         {
           "id": "GalioR",
           "name": "Hero's Entrance",
-          "description": "Galio designates an ally's position as his landing spot. After a delay Galio smashes down location, knocking up nearby enemies.",
-          "tooltip": "Galio designates an allied champion's current position as his landing spot.<br /><br />When Galio lands, enemies in the area take {{ totaldamage }} magic damage and are knocked into the air for {{ stundurationouter }} seconds.",
+          "description": "Galio designates an ally's position as his landing spot, granting all allies in the area a magic shield. After a delay Galio smashes down location, knocking up nearby enemies.",
+          "tooltip": "Galio designates an allied champion's current position as his landing spot, granting all allied champions in the area <spellName>Shield of Durand's</spellName> magic damage shield for {{ temporarywshieldduration }} seconds.<br /><br />When Galio lands, enemies in the area take <magicDamage>{{ totaldamage }} magic damage</magicDamage> and are knocked into the air for {{ stundurationouter }} seconds.",
           "leveltip": {
             "label": [
               "Damage",
@@ -578,29 +578,14 @@
           "effect": [
             null,
             [
-              150,
-              250,
-              350
+              0,
+              0,
+              0
             ],
             [
-              1.25,
-              1.25,
-              1.25
-            ],
-            [
-              0.75,
-              0.75,
-              0.75
-            ],
-            [
-              2.5,
-              2.5,
-              2.5
-            ],
-            [
-              20,
-              25,
-              30
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -613,9 +598,24 @@
               0
             ],
             [
-              4000,
-              4750,
-              5500
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -630,14 +630,14 @@
           ],
           "effectBurn": [
             null,
-            "150/250/350",
-            "1.25",
-            "0.75",
-            "2.5",
-            "20/25/30",
             "0",
             "0",
-            "4000/4750/5500",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
             "0",
             "0"
           ],

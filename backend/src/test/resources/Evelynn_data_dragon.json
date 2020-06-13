@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.6.1",
+  "version": "10.12.1",
   "data": {
     "Evelynn": {
       "id": "Evelynn",
@@ -123,7 +123,7 @@
           "id": "EvelynnQ",
           "name": "Hate Spike",
           "description": "Evelynn strikes out with her Lasher, dealing damage to the first unit hit. Then, Evelynn can shoot a line of spikes at nearby foes up to 3 times.",
-          "tooltip": "Evelynn's Lasher strikes in the target direction, dealing {{ e5 }} <span class=\"color99FF99\">(+{{ a2 }})</span> magic damage to the first unit hit and causing Evelynn's next 3 spells or attacks on that unit deal {{ e4 }}<span class=\"color99FF99\"> (+{{ a1 }})</span> bonus magic damage. Then, Evelynn can recast this ability up to 3 times.<br /><br /><span class=\"colorFF9900\">Recast:</span> Fires spikes through the nearest enemy, dealing {{ e5 }} <span class=\"color99FF99\">(+{{ a2 }})</span> magic damage to all units hit.<br /><br /><rules><span class=\"color8c8c8c\">Refunds {{ e1 }}% of Hate Spike's cooldown if the Lasher hits a monster. Hate Spike prioritizes the target Evelynn is attacking.</span></rules>",
+          "tooltip": "Evelynn's Lasher strikes in the target direction, dealing <magicDamage>{{ e5 }} <scaleAP>(+{{ a2 }})</scaleAP> magic damage</magicDamage> to the first unit hit and causing Evelynn's next 3 spells or attacks on that unit deal <magicDamage>{{ e4 }}<scaleAP> (+{{ a1 }})</scaleAP> bonus magic damage</magicDamage>. Then, Evelynn can recast this ability up to 3 times.<br /><br /><span class=\"colorFF9900\">Recast:</span> Fires spikes through the nearest enemy, <magicDamage>dealing {{ e5 }} <scaleAP>(+{{ a2 }})</scaleAP> magic damage</magicDamage> to all units hit.<br /><br /><rules>Refunds {{ e1 }}% of <spellName>Hate Spike</spellName>'s cooldown if the Lasher hits a monster. <spellName>Hate Spike</spellName> prioritizes the target Evelynn is attacking.</rules>",
           "leveltip": {
             "label": [
               "Lasher and Spike Damage",
@@ -185,11 +185,11 @@
               50
             ],
             [
-              25,
               30,
               35,
               40,
-              45
+              45,
+              50
             ],
             [
               6,
@@ -233,7 +233,7 @@
             "30",
             "60",
             "10/20/30/40/50",
-            "25/30/35/40/45",
+            "30/35/40/45/50",
             "6",
             "30",
             "50",
@@ -282,7 +282,7 @@
           "id": "EvelynnW",
           "name": "Allure",
           "description": "Evelynn curses her target, causing her next attack or spell after a delay to charm her target and reduce their magic resist.",
-          "tooltip": "Curses target champion or monster for 5 seconds. If Evelynn hits the target with a basic attack or ability, she will expunge the Curse, refund its mana cost, and briefly slow the target by {{ e3 }}%.<br /><br />If the Curse lasts at least 2.5 seconds, expunging it Charms the target for {{ e2 }} second(s) and:<ul><li>Against champions: shreds Magic Resist by {{ e9 }}% for {{ e0 }} seconds.</li><li>Against monsters: deals {{ e7 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage. Charm duration increased by {{ e1 }} seconds.</li></ul><rules><span class=\"color8c8c8c\">Casting Allure does not remove Evelynn from Demon Shade.</span></rules>",
+          "tooltip": "<keywordMajor>Curses</keywordMajor> target champion or monster for 5 seconds. If Evelynn hits the target with a basic attack or ability, she will expunge the <keywordMajor>Curse</keywordMajor>, refund its mana cost, and briefly slow the target by {{ e3 }}%.<br /><br />If the <keywordMajor>Curse</keywordMajor> lasts at least 2.5 seconds, expunging it <keywordMajor>Charms</keywordMajor> the target for {{ e2 }} second(s) and:<ul><li>Against champions: shreds Magic Resist by {{ e9 }}% for {{ e0 }} seconds.</li><li>Against monsters: deals <magicDamage>{{ e7 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage</magicDamage>. <keywordMajor>Charm</keywordMajor> duration increased by {{ e1 }} seconds.</li></ul><rules>Casting <spellName>Allure</spellName> does not remove Evelynn from <span class=\"color9542f4\">Demon Shade</span>.</rules>",
           "leveltip": {
             "label": [
               "Charm Duration",
@@ -435,7 +435,7 @@
           "id": "EvelynnE",
           "name": "Whiplash",
           "description": "Evelynn whips her target with her Lasher, dealing damage. She then gains movement speed for a short duration.",
-          "tooltip": "Whip target with Lashers, applying on hit effects and dealing magic damage equal to {{ f1 }} plus {{ e5 }}% <span class=\"color99FF99\">(+{{ a1 }}%)</span> of their max health. Then, gain {{ e3 }}% movement speed for {{ e4 }} seconds.<br /><br />Entering <span class=\"color9542f4\">Demon Shade</span> resets <span class=\"colorFFFFFF\"><i>Whiplash's</i></span> cooldown and empowers it. When empowered, <span class=\"colorFFFFFF\"><i>Whiplash</i></span> pulls Evelynn to her target, dealing magic damage to them and enemies in the way equal to {{ f2 }} plus {{ e6 }}% <span class=\"color99FF99\">(+{{ a2 }}%)</span> of their max health.",
+          "tooltip": "Whip target with Lashers, applying on hit effects and dealing <magicDamage>magic damage</magicDamage> equal to <magicDamage>{{ f1 }}</magicDamage> plus {{ e5 }}% <scaleAP>(+{{ a1 }}%)</scaleAP> of their max health. Then, gain {{ e3 }}% movement speed for {{ e4 }} seconds.<br /><br />Entering <span class=\"color9542f4\">Demon Shade</span> resets <spellName>Whiplash's</spellName> cooldown and empowers it. When empowered, <spellName>Whiplash</spellName> pulls Evelynn to her target, dealing <magicDamage>magic damage</magicDamage> to them and enemies in the way equal to <magicDamage>{{ f2 }}</magicDamage> plus {{ e6 }}% <scaleAP>(+{{ a2 }}%)</scaleAP> of their max health.",
           "leveltip": {
             "label": [
               "Damage",
@@ -594,7 +594,7 @@
           "id": "EvelynnR",
           "name": "Last Caress",
           "description": "Evelynn briefly goes untargetable and decimates the area in front of her before warping backwards a long distance.",
-          "tooltip": "Evelynn unleashes her demonic energy, becoming untargetable and decimating enemies in front of her. She then warps backwards. Deals {{ e1 }}<scaleAP> (+{{ a1 }})</scaleAP> magic damage, increased to {{ f1 }}<scaleAP> (+{{ f2 }})</scaleAP> to enemies below {{ e7 }}% health.",
+          "tooltip": "Evelynn unleashes her demonic energy, becoming untargetable and decimating enemies in front of her. She then warps backwards. Deals <magicDamage>{{ e1 }}<scaleAP> (+{{ a1 }})</scaleAP> magic damage</magicDamage>, increased to <magicDamage>{{ f1 }}<scaleAP> (+{{ f2 }})</scaleAP></magicDamage> to enemies below {{ e7 }}% health.",
           "leveltip": {
             "label": [
               "Damage",

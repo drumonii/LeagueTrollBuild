@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.6.1",
+  "version": "10.12.1",
   "data": {
     "Annie": {
       "id": "Annie",
@@ -146,7 +146,7 @@
           "id": "AnnieQ",
           "name": "Disintegrate",
           "description": "Annie hurls a Mana infused fireball, dealing damage and refunding the Mana cost if it destroys the target.",
-          "tooltip": "Deals {{ basedamage }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage. Mana cost and half the cooldown are refunded if Disintegrate kills the target.",
+          "tooltip": "Deals <magicDamage>{{ basedamage }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage</magicDamage>. Mana cost and half the cooldown are refunded if Disintegrate kills the target.",
           "leveltip": {
             "label": [
               "Damage",
@@ -293,7 +293,7 @@
           "id": "AnnieW",
           "name": "Incinerate",
           "description": "Annie casts a blazing cone of fire, dealing damage to all enemies in the area.",
-          "tooltip": "Casts a cone of fire dealing {{ basedamage }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage to all enemies in the area.",
+          "tooltip": "Casts a cone of fire dealing <magicDamage>{{ basedamage }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage</magicDamage> to all enemies in the area.",
           "leveltip": {
             "label": [
               "Damage",
@@ -440,7 +440,7 @@
           "id": "AnnieE",
           "name": "Molten Shield",
           "description": "Grants Annie increased percentage Damage Reduction, a burst of movement speed, and damages enemies who attack her with basic attacks.",
-          "tooltip": "Annie grants herself {{ damagereduction }}% damage reduction for {{ shieldduration }} seconds and {{ movespeedcalc }} movement speed that decays over {{ movementspeedduration }} seconds.<br /><br />While the shield is active, enemies who basic attack it take {{ damagereflection }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage.",
+          "tooltip": "Annie grants herself {{ damagereduction }}% damage reduction for {{ shieldduration }} seconds and {{ movespeedcalc }} movement speed that decays over {{ movementspeedduration }} seconds.<br /><br />While the shield is active, enemies who basic attack it take <magicDamage>{{ damagereflection }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage</magicDamage>.",
           "leveltip": {
             "label": [
               "Damage Reduction",
@@ -589,7 +589,7 @@
           "id": "AnnieR",
           "name": "Summon: Tibbers",
           "description": "Annie wills her bear Tibbers to life, dealing damage to units in the area. Tibbers can attack and also burns enemies that stand near him.",
-          "tooltip": "Summons Tibbers, dealing {{ initialdamage }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage to enemies in the target area. For the next 45 seconds, Tibbers burns nearby enemies for {{ auradamage }} <scaleAP>(+{{ a2 }})</scaleAP> per second and attacks for {{ tibbersattackdamage }} <scaleAP>(+{{ tibbersattackratio }})</scaleAP> as magic damage. Annie can control Tibbers by reactivating this ability.<br /><br />When Annie dies, Tibbers <span class=\"colorFFEB7F\">Enrages</span>, gaining 275% Attack Speed and 100% Movement Speed, decaying over 3 seconds.",
+          "tooltip": "Summons Tibbers, dealing <magicDamage>{{ initialburstdamage }} magic damage</magicDamage> to enemies in the target area. For the next {{ tibberslifetime }} seconds, Tibbers burns nearby enemies for <magicDamage>{{ tibbersauradamage }} magic damage</magicDamage> per second and attacks for <magicDamage>{{ tibbersaadamage }} magic damage</magicDamage>. Annie can control Tibbers by reactivating this ability.<br /><br />When Annie dies, Tibbers <span class=\"colorFFEB7F\">Enrages</span>, gaining 275% Attack Speed and 100% Movement Speed, decaying over 3 seconds.",
           "leveltip": {
             "label": [
               "Cooldown",
@@ -688,18 +688,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.65,
-              "key": "a1"
-            },
-            {
-              "link": "spelldamage",
-              "coeff": 0.1,
-              "key": "a2"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -722,7 +711,7 @@
       ],
       "passive": {
         "name": "Pyromania",
-        "description": "After casting 4 spells, Annie's next offensive spell will stun the target for a short duration.",
+        "description": "After casting 4 spells, Annie's next offensive spell will stun the target.",
         "image": {
           "full": "Annie_Passive.png",
           "sprite": "passive0.png",

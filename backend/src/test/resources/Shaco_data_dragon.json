@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.6.1",
+  "version": "10.12.1",
   "data": {
     "Shaco": {
       "id": "Shaco",
@@ -418,7 +418,7 @@
           "id": "TwoShivPoison",
           "name": "Two-Shiv Poison",
           "description": "Shaco's Shivs passively poison targets on hit, slowing their movement speed. He can throw his Shivs to deal damage and poison the target. The thrown Shiv deals bonus damage if the target is below 30% health.",
-          "tooltip": "<spellPassive>Passive:</spellPassive> While Two-Shiv Poison is ready to cast, Shaco's basic attacks reduce the target's movement speed by {{ slowamount*-100 }}% for {{ slowdurationpassive }} seconds.<br /><br /><spellActive>Active:</spellActive> Shaco throws a shiv that deals {{ totaldamage }} magic damage and reduces the target's movement speed by {{ slowamount*-100 }}% for {{ slowdurationactive }} seconds. If the target has less than {{ executehealththreshold*100 }}% health, the shiv deals {{ executedamagepercent*100 }}% damage ({{ totalexecutedamage }} total).",
+          "tooltip": "<spellPassive>Passive:</spellPassive> While Two-Shiv Poison is ready to cast, Shaco's basic attacks reduce the target's Movement Speed by {{ slowamount*-100 }}% for {{ slowdurationpassive }} seconds.<br /><br /><spellActive>Active:</spellActive> Shaco throws a shiv that deals {{ totaldamage }} magic damage and reduces the target's Movement Speed by {{ slowamount*-100 }}% for {{ slowdurationactive }} seconds. If the target has less than {{ executehealththreshold*100 }}% health, the shiv deals {{ executedamagepercent*100 }}% damage ({{ totalexecutedamage }} total).",
           "leveltip": {
             "label": [
               "Damage",
@@ -559,7 +559,7 @@
           "id": "HallucinateFull",
           "name": "Hallucinate",
           "description": "Shaco creates an illusion of himself near him, which can attack nearby enemies (Deals reduced damage to turrets).  Upon death, it explodes, spawning three mini Jack in the Boxes and dealing damage to nearby enemies.",
-          "tooltip": "Shaco vanishes briefly and reappears with a clone. The clone lasts up to 18 seconds and detonates when it dies, dealing {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage to nearby enemies and spawning three mini Jack in the Boxes that trigger immediately. <br /><br /><ul><li>Mini boxes deal {{ aoedamage }} damage ({{ stdamage }} if attacking only one enemy) and make enemies flee for {{ e7 }} second(s).</li><li>Clone deals {{ e8 }}% of Shaco's damage and receives {{ e2 }}% increased damage.</li></ul><br /><scaleAP>The clone can be controlled by holding the alt key and using the right mouse button or by reactivating this ability.</scaleAP>",
+          "tooltip": "Shaco vanishes briefly and reappears with a clone. The clone lasts up to {{ clonelifetime }} seconds and detonates when it dies, dealing <magicDamage>{{ explosiontotaldamage }} magic damage</magicDamage> to nearby enemies and spawning three mini Jack in the Boxes that trigger immediately. <br /><br /><ul><li>Mini boxes deal {{ aoedamage }} damage ({{ stdamage }} if attacking only one enemy) and make enemies flee for {{ boxfearduration }} second(s).</li><li>Clone deals {{ cloneaadamagepercent*100 }}% of Shaco's damage and receives {{ cloneincomingdamagepercent*100 }}% increased damage.</li></ul><br /><scaleAP>The clone can be controlled by holding the Alt key and using the Right Mouse button or by reactivating this ability.</scaleAP>",
           "leveltip": {
             "label": [
               "On Death Damage",
@@ -567,8 +567,8 @@
               "Cooldown"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
-              "{{ e6 }} -> {{ e6NL }}",
+              "{{ explosionbasedamage }} -> {{ explosionbasedamageNL }}",
+              "{{ stbasedamage }} -> {{ stbasedamageNL }}",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
@@ -589,24 +589,24 @@
           "effect": [
             null,
             [
-              150,
-              225,
-              300
+              0,
+              0,
+              0
             ],
             [
-              50,
-              50,
-              50
+              0,
+              0,
+              0
             ],
             [
-              15,
-              15,
-              15
+              0,
+              0,
+              0
             ],
             [
-              2,
-              2,
-              2
+              0,
+              0,
+              0
             ],
             [
               6,
@@ -614,19 +614,19 @@
               6
             ],
             [
-              25,
-              50,
-              75
+              0,
+              0,
+              0
             ],
             [
-              1,
-              1,
-              1
+              0,
+              0,
+              0
             ],
             [
-              60,
-              60,
-              60
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -641,24 +641,18 @@
           ],
           "effectBurn": [
             null,
-            "150/225/300",
-            "50",
-            "15",
-            "2",
+            "0",
+            "0",
+            "0",
+            "0",
             "6",
-            "25/50/75",
-            "1",
-            "60",
+            "0",
+            "0",
+            "0",
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.7,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [

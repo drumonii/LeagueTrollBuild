@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.6.1",
+  "version": "10.12.1",
   "data": {
     "Cassiopeia": {
       "id": "Cassiopeia",
@@ -76,14 +76,14 @@
         "difficulty": 10
       },
       "stats": {
-        "hp": 575,
+        "hp": 560,
         "hpperlevel": 90,
         "mp": 350,
         "mpperlevel": 40,
         "movespeed": 328,
-        "armor": 20,
+        "armor": 18,
         "armorperlevel": 3.5,
-        "spellblock": 30,
+        "spellblock": 34,
         "spellblockperlevel": 0.5,
         "attackrange": 550,
         "hpregen": 5.5,
@@ -102,7 +102,7 @@
           "id": "CassiopeiaQ",
           "name": "Noxious Blast",
           "description": "Cassiopeia blasts an area with Poison after a brief delay, granting her increased Movement Speed if she hits an enemy champion.",
-          "tooltip": "Blasts enemies in an area with <span class=\"color32CD32\">Noxious Poison</span>. If a champion is hit, Cassiopeia gains {{ e3 }}% Movement Speed decaying over {{ e4 }} seconds.<br /><br /><span class=\"color32CD32\">Noxious Poison</span> deals {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage over {{ e2 }} seconds.",
+          "tooltip": "Blasts enemies in an area with <span class=\"color32CD32\">Noxious Poison</span>. If a champion is hit, Cassiopeia gains {{ e3 }}% Movement Speed decaying over {{ e4 }} seconds.<br /><br /><span class=\"color32CD32\">Noxious Poison</span> deals <magicDamage>{{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage</magicDamage> over {{ e2 }} seconds.",
           "leveltip": {
             "label": [
               "Damage",
@@ -251,7 +251,7 @@
           "id": "CassiopeiaW",
           "name": "Miasma",
           "description": "Cassiopeia releases several clouds of poison, slowing, grounding, and lightly damaging enemies that pass through them. Grounded enemies cannot use Movement abilities.",
-          "tooltip": "Cassiopeia spews venom in an arc, leaving toxic clouds for {{ e4 }} seconds.<br /><br />Enemies in the clouds are continually afflicted with <span class=\"color32CD32\">Debilitating Poison</span>, inflicting a decaying {{ e2 }}% slow and grounding them, prohibiting the use of Movement abilities. They also take {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage per second.",
+          "tooltip": "Cassiopeia spews venom in an arc, leaving toxic clouds for {{ e4 }} seconds.<br /><br />Enemies in the clouds are continually afflicted with <span class=\"color32CD32\">Debilitating Poison</span>, inflicting a decaying {{ e2 }}% slow and grounding them, prohibiting the use of Movement abilities. They also take <magicDamage>{{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage</magicDamage> per second.",
           "leveltip": {
             "label": [
               "Damage",
@@ -402,7 +402,7 @@
           "id": "CassiopeiaE",
           "name": "Twin Fang",
           "description": "Cassiopeia lets loose an attack that deals increased damage to Poisoned targets and heals her for a percentage of the damage dealt. If the target dies from this attack, Cassiopeia regains Mana.",
-          "tooltip": "Deal <scaleLevel>{{ f1 }}</scaleLevel> <scaleAP>(+{{ a1 }})</scaleAP> magic damage to a target. If the target is killed by Twin Fang, or is killed during its flight, Cassiopeia gains {{ cost }} Mana.<br /><br />If the victim is <span class=\"color32CD32\">Poisoned</span> when Twin Fang hits, it takes {{ e1 }} <scaleAP>(+{{ a2 }})</scaleAP> additional magic damage and Cassiopeia heals for {{ healcalc }} ({{ healratio*100 }}% of her Ability Power, with {{ minionreductionmodifier*100 }}% effectiveness against minions and small monsters).",
+          "tooltip": "Deal <magicDamage><scaleLevel>{{ f1 }}</scaleLevel> <scaleAP>(+{{ a1 }})</scaleAP> magic damage</magicDamage> to a target. If the target is killed by Twin Fang, or is killed during its flight, Cassiopeia gains {{ cost }} Mana.<br /><br />If the victim is <span class=\"color32CD32\">Poisoned</span> when Twin Fang hits, it takes <magicDamage>{{ e1 }} <scaleAP>(+{{ a2 }})</scaleAP> additional magic damage</magicDamage> and Cassiopeia heals for {{ healcalc }} ({{ healratio*100 }}% of her Ability Power, with {{ minionreductionmodifier*100 }}% effectiveness against minions and small monsters).",
           "leveltip": {
             "label": [
               "Bonus Poison Damage",

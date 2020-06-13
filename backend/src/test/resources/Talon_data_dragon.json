@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.6.1",
+  "version": "10.12.1",
   "data": {
     "Talon": {
       "id": "Talon",
@@ -137,13 +137,13 @@
           ],
           "cooldownBurn": "0",
           "cost": [
-            30,
-            30,
-            30,
-            30,
-            30
+            40,
+            40,
+            40,
+            40,
+            40
           ],
-          "costBurn": "30",
+          "costBurn": "40",
           "datavalues": {},
           "effect": [
             null,
@@ -263,7 +263,7 @@
           "id": "TalonW",
           "name": "Rake",
           "description": "Talon sends out a volley of daggers that then return back to him, dealing physical damage every time it passes through an enemy. The returning blades deal bonus damage and slow units hit.",
-          "tooltip": "Talon tosses a volley of blades, dealing {{ e1 }} <scaleAD>(+{{ f1 }})</scaleAD> physical damage to units hit and returning to him after a delay.<br /><br />On their way back to Talon, the blades deal {{ e5 }} <scaleAD>(+{{ a2 }})</scaleAD> additional damage and slow the enemy by {{ e2 }}% for 1 second.",
+          "tooltip": "Talon tosses a volley of blades, dealing <physicalDamage>{{ totalinitialdamage }} physical damage</physicalDamage> to units hit and returning to him after a delay.<br /><br />On their way back to Talon, the blades deal <physicalDamage>{{ totalreturndamage }} additional physical damage</physicalDamage> and slow the enemy by {{ movespeedslow*100 }}% for {{ slowduration }} second.",
           "leveltip": {
             "label": [
               "Initial Damage",
@@ -272,9 +272,9 @@
               "@AbilityResourceName@ Cost"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
-              "{{ e5 }} -> {{ e5NL }}",
-              "{{ e2 }}% -> {{ e2NL }}%",
+              "{{ initialbasedamage }} -> {{ initialbasedamageNL }}",
+              "{{ returnbasedamage }} -> {{ returnbasedamageNL }}",
+              "{{ movespeedslow*100.000000 }}% -> {{ movespeedslownl*100.000000 }}%",
               "{{ cost }} -> {{ costNL }}"
             ]
           },
@@ -299,46 +299,46 @@
           "effect": [
             null,
             [
-              50,
-              65,
-              80,
-              95,
-              110
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              40,
-              45,
-              50,
-              55,
-              60
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              14,
-              13,
-              12,
-              11,
-              10
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              2,
-              2,
-              2,
-              2,
-              2
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              70,
-              85,
-              100,
-              115,
-              130
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              1,
-              1,
-              1,
-              1,
-              1
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -371,24 +371,18 @@
           ],
           "effectBurn": [
             null,
-            "50/65/80/95/110",
-            "40/45/50/55/60",
-            "14/13/12/11/10",
-            "2",
-            "70/85/100/115/130",
-            "1",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
             "0",
             "0",
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "bonusattackdamage",
-              "coeff": 0.6,
-              "key": "a2"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [

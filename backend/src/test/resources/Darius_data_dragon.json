@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.6.1",
+  "version": "10.12.1",
   "data": {
     "Darius": {
       "id": "Darius",
@@ -122,7 +122,7 @@
           "id": "DariusCleave",
           "name": "Decimate",
           "description": "Darius winds up and swings his axe in a wide circle. Enemies struck by the blade take more damage than those struck by the handle. Darius heals based on enemy champions and large monsters hit by the blade.",
-          "tooltip": "After a short delay, Darius swings his axe around himself, striking enemies in its path. Enemies hit by the axe's blade take {{ e2 }} <scaleAD>(+{{ f1 }})</scaleAD> physical damage. Enemies hit by the handle take {{ e6 }}% damage (does not apply Hemorrhage).<br /><br />Darius heals for <scaleHP>{{ e5 }}% of his missing Health</scaleHP> per enemy champion and large monster hit by the blade (max: {{ e7 }}%).",
+          "tooltip": "After a short delay, Darius swings his axe around himself, striking enemies in its path. Enemies hit by the axe's blade take <physicalDamage>{{ e2 }} <scaleAD>(+{{ f1 }})</scaleAD> physical damage</physicalDamage>. Enemies hit by the handle take {{ e6 }}% damage (does not apply <keywordMajor>Hemorrhage</keywordMajor>).<br /><br />Darius heals for <scaleHP>{{ e5 }}% of his missing Health</scaleHP> per enemy champion and large monster hit by the blade (max: {{ e7 }}%).",
           "leveltip": {
             "label": [
               "Damage",
@@ -273,7 +273,7 @@
           "id": "DariusNoxianTacticsONH",
           "name": "Crippling Strike",
           "description": "Darius's next attack strikes an enemy's crucial artery. As they bleed out, their Movement Speed is slowed.",
-          "tooltip": "Darius's next basic attack deals <scaleAD>{{ f1 }}</scaleAD> physical damage and slows the target by {{ e2 }}% for {{ e5 }} second(s).<br /><br />Crippling Strike refunds its Mana cost and {{ e3 }}% of its cooldown if it kills the target.",
+          "tooltip": "Darius's next basic attack deals <physicalDamage><scaleAD>{{ f1 }}</scaleAD> physical damage</physicalDamage> and slows the target by {{ e2 }}% for {{ e5 }} second(s).<br /><br />Crippling Strike refunds its Mana cost and {{ e3 }}% of its cooldown if it kills the target.",
           "leveltip": {
             "label": [
               "Total AD Ratio",
@@ -557,7 +557,7 @@
           "id": "DariusExecute",
           "name": "Noxian Guillotine",
           "description": "Darius leaps to an enemy champion and strikes a lethal blow, dealing true damage. This damage is increased for each stack of Hemorrhage on the target. If Noxian Guillotine is a killing blow, its cooldown is refreshed for a brief duration.",
-          "tooltip": "Leaps to target enemy champion and strikes a lethal blow, dealing <trueDamage>{{ damage }}</trueDamage> true damage. For each stack of Hemorrhage on the target, Noxian Guillotine deals an additional {{ rdamagepercentperhemostack*100 }}% damage.<span class=\"size8 colorFF9900\"><br /><br /></span><span class=\"colorF50F00\">Maximum Damage: {{ f1 }}</span><span class=\"size8\"><br /><br /></span>If Noxian Guillotine kills the target, it may be re-cast at no cost within {{ rrecastduration }} seconds.<span class=\"size8\"><br /><br /></span>At rank 3, Noxian Guillotine <span class=\"colorFFFF66\"><i>unlocks</i></span> - its cooldown resets entirely on kills and it no longer has a Mana cost.",
+          "tooltip": "Leaps to target enemy champion and strikes a lethal blow, dealing <trueDamage>{{ damage }} true damage</trueDamage>. For each stack of <keywordMajor>Hemorrhage</keywordMajor> on the target, <spellName>Noxian Guillotine</spellName> deals an additional {{ rdamagepercentperhemostack*100 }}% damage.<span class=\"size8 colorFF9900\"><br /><br /></span><span class=\"colorF50F00\">Maximum Damage: {{ f1 }}</span><span class=\"size8\"><br /><br /></span>If <spellName>Noxian Guillotine</spellName> kills the target, it may be re-cast at no cost within {{ rrecastduration }} seconds.<span class=\"size8\"><br /><br /></span>At rank 3, <spellName>Noxian Guillotine</spellName> <span class=\"colorFFFF66\"><i>unlocks</i></span> - its cooldown resets entirely on kills and it no longer has a Mana cost.",
           "leveltip": {
             "label": [
               "Damage",

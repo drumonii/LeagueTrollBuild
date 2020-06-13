@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.6.1",
+  "version": "10.12.1",
   "data": {
     "Xerath": {
       "id": "Xerath",
@@ -45,7 +45,7 @@
         {
           "id": "101004",
           "num": 4,
-          "name": "",
+          "name": "Guardian of the Sands Xerath",
           "chromas": false
         },
         {
@@ -253,30 +253,30 @@
           "id": "XerathArcaneBarrage2",
           "name": "Eye of Destruction",
           "description": "Calls down a barrage of arcane energy, slowing and dealing magic damage to all enemies in an area. Targets in the middle receive additional damage and a stronger slow.",
-          "tooltip": "Xerath calls down a blast of arcane energy, dealing {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage to all enemies within the target area, slowing them by {{ e8 }}% for {{ e4 }} seconds. Enemies in the center of the blast take {{ f1 }} <scaleAP>(+{{ f2 }})</scaleAP> magic damage and are slowed by {{ e3 }}%. This slow decays rapidly.",
+          "tooltip": "Xerath calls down a blast of arcane energy, dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage> to all enemies within the target area, slowing them by {{ slowamount*100 }}% for {{ slowduration }} seconds. Enemies in the center of the blast take <magicDamage>{{ sweetspottotaldamage }} magic damage</magicDamage> and are slowed by {{ sweetspotslowamount*100 }}%, decaying down to {{ slowamount*100 }}%.",
           "leveltip": {
             "label": [
               "Damage",
+              "Max Slow",
               "Cooldown",
-              "Slow",
               "@AbilityResourceName@ Cost"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
-              "{{ ammorechargetime }} -> {{ ammorechargetimeNL }}",
-              "{{ e3 }}% -> {{ e3NL }}%",
+              "{{ basedamage }} -> {{ basedamageNL }}",
+              "{{ sweetspotslowamount*100.000000 }}% -> {{ sweetspotslowamountnl*100.000000 }}%",
+              "{{ cooldown }} -> {{ cooldownNL }}",
               "{{ cost }} -> {{ costNL }}"
             ]
           },
           "maxrank": 5,
           "cooldown": [
-            1,
-            1,
-            1,
-            1,
-            1
+            14,
+            13,
+            12,
+            11,
+            10
           ],
-          "cooldownBurn": "1",
+          "cooldownBurn": "14/13/12/11/10",
           "cost": [
             70,
             80,
@@ -289,96 +289,90 @@
           "effect": [
             null,
             [
-              60,
-              90,
-              120,
-              150,
-              180
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              2,
-              2,
-              2,
-              2,
-              2
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              60,
-              65,
-              70,
-              75,
-              80
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              2.5,
-              2.5,
-              2.5,
-              2.5,
-              2.5
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              0.5,
-              0.5,
-              0.5,
-              0.5,
-              0.5
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              50,
-              50,
-              50,
-              50,
-              50
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              66.7,
-              66.7,
-              66.7,
-              66.7,
-              66.7
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              25,
-              25,
-              25,
-              25,
-              25
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              0.8,
-              0.8,
-              0.8,
-              0.8,
-              0.8
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              -0.25,
-              -0.25,
-              -0.25,
-              -0.25,
-              -0.25
+              0,
+              0,
+              0,
+              0,
+              0
             ]
           ],
           "effectBurn": [
             null,
-            "60/90/120/150/180",
-            "2",
-            "60/65/70/75/80",
-            "2.5",
-            "0.5",
-            "50",
-            "66.7",
-            "25",
-            "0.8",
-            "-0.25"
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.6,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "1",
           "range": [

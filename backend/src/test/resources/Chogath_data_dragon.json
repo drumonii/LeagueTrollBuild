@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.6.1",
+  "version": "10.12.1",
   "data": {
     "Chogath": {
       "id": "Chogath",
@@ -117,7 +117,7 @@
           "id": "Rupture",
           "name": "Rupture",
           "description": "Ruptures the ground at target location, popping enemy units into the air, dealing damage and slowing them.",
-          "tooltip": "Ruptures the ground at target location. Enemies caught in the rupture are launched into the air for {{ e5 }} second, take {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage, and are slowed by {{ e2 }}% for {{ e3 }} seconds.",
+          "tooltip": "Ruptures the ground at target location. Enemies caught in the rupture are launched into the air for {{ e5 }} second, take <magicDamage>{{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage</magicDamage>, and are slowed by {{ e2 }}% for {{ e3 }} seconds.",
           "leveltip": {
             "label": [
               "Damage"
@@ -262,7 +262,7 @@
           "id": "FeralScream",
           "name": "Feral Scream",
           "description": "Cho'Gath unleashes a terrible scream at enemies in a cone, dealing magic damage and Silencing enemies for a few seconds.",
-          "tooltip": "Silences enemies in a cone for {{ e2 }} seconds and deals {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage.",
+          "tooltip": "Silences enemies in a cone for {{ e2 }} seconds and deals <magicDamage>{{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage</magicDamage>.",
           "leveltip": {
             "label": [
               "Damage",
@@ -413,7 +413,7 @@
           "id": "VorpalSpikes",
           "name": "Vorpal Spikes",
           "description": "Cho'Gath's attacks release deadly spikes, dealing damage and slowing all enemy units in front of him.",
-          "tooltip": "Cho'Gath's next 3 basic attacks launch spikes that deal {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> plus {{ f1 }}% of enemies' maximum Health as magic damage and slow by {{ e2 }}% for {{ e3 }} seconds, decaying over the duration.<br /><br /><rules>Spikes grow wider as Cho'Gath gains Feast stacks.<br />Spikes deal an additional 0.5% of enemies' maximum Health per Feast stack.<br />Percent Health damage against minions and monsters is capped at {{ e8 }}.</rules>",
+          "tooltip": "Cho'Gath's next 3 basic attacks launch spikes that deal <magicDamage>{{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP></magicDamage> plus {{ f1 }}% of enemies' maximum Health as <magicDamage>magic damage</magicDamage> and slow by {{ e2 }}% for {{ e3 }} seconds, decaying over the duration.<br /><br /><rules>Spikes grow wider as Cho'Gath gains Feast stacks.<br />Spikes deal an additional 0.5% of enemies' maximum Health per Feast stack.<br />Percent Health damage against minions and monsters is capped at {{ e8 }}.</rules>",
           "leveltip": {
             "label": [
               "Damage",
@@ -448,10 +448,10 @@
             null,
             [
               22,
-              34,
-              46,
-              58,
-              70
+              37,
+              52,
+              67,
+              82
             ],
             [
               30,
@@ -519,7 +519,7 @@
           ],
           "effectBurn": [
             null,
-            "22/34/46/58/70",
+            "22/37/52/67/82",
             "30/35/40/45/50",
             "1.5",
             "6",
@@ -562,7 +562,7 @@
           "id": "Feast",
           "name": "Feast",
           "description": "Devours an enemy unit, dealing a high amount of true damage. If the target is killed, Cho'Gath grows, gaining maximum Health.",
-          "tooltip": "Ravenously feed on an enemy, dealing {{ rdamage }} true damage to champions or {{ rmonsterdamage }} to minions and monsters. If the target is killed, Cho'Gath gains a stack of Feast, which causes him to grow in size and gain {{ rhealthperstack }} maximum health.<br /><br /><rules>Only {{ rminionmaxstacks }} total stacks can be gained from minions and non-epic monsters. <keywordMajor>(Current: {{ f3 }}/{{ rminionmaxstacks }})</keywordMajor></rules>",
+          "tooltip": "Ravenously feed on an enemy, dealing <trueDamage>{{ rdamage }} true damage</trueDamage> to champions or {{ rmonsterdamage }} to minions and monsters. If the target is killed, Cho'Gath gains a stack of Feast, which causes him to grow in size and gain {{ rhealthperstack }} maximum health.<br /><br /><rules>Only {{ rminionmaxstacks }} total stacks can be gained from minions and non-epic monsters. <keywordMajor>(Current: {{ f3 }}/{{ rminionmaxstacks }})</keywordMajor></rules>",
           "leveltip": {
             "label": [
               "Champion Damage",

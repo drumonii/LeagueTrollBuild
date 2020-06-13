@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.6.1",
+  "version": "10.12.1",
   "data": {
     "MonkeyKing": {
       "id": "MonkeyKing",
@@ -88,12 +88,12 @@
         "mp": 300,
         "mpperlevel": 45,
         "movespeed": 345,
-        "armor": 34,
+        "armor": 31,
         "armorperlevel": 3.5,
         "spellblock": 28,
         "spellblockperlevel": 1.25,
         "attackrange": 175,
-        "hpregen": 5,
+        "hpregen": 4,
         "hpregenperlevel": 0.65,
         "mpregen": 8,
         "mpregenperlevel": 0.65,
@@ -258,11 +258,13 @@
           "leveltip": {
             "label": [
               "Damage Percent",
-              "Cooldown"
+              "Cooldown",
+              "@AbilityResourceName@ Cost"
             ],
             "effect": [
               "{{ clonedamagemod*100.000000 }}% -> {{ clonedamagemodnl*100.000000 }}%",
-              "{{ cooldown }} -> {{ cooldownNL }}"
+              "{{ cooldown }} -> {{ cooldownNL }}",
+              "{{ cost }} -> {{ costNL }}"
             ]
           },
           "maxrank": 5,
@@ -275,13 +277,13 @@
           ],
           "cooldownBurn": "20/19/18/17/16",
           "cost": [
+            80,
+            70,
             60,
-            60,
-            60,
-            60,
-            60
+            50,
+            40
           ],
-          "costBurn": "60",
+          "costBurn": "80/70/60/50/40",
           "datavalues": {},
           "effect": [
             null,
@@ -540,7 +542,7 @@
           "id": "MonkeyKingSpinToWin",
           "name": "Cyclone",
           "description": "Wukong's extends his staff and spins it around repeatedly, gaining Movement Speed.<br><br>Enemies struck take damage and are knocked up.",
-          "tooltip": "Wukong spins his staff around for {{ spinduration }} seconds, gaining {{ movespeed*100 }}% Movement Speed. While spining, he deals <physicalDamage>{{ damagepersecondtotal }} (+{{ percentmaxhpdmgpersec }} of the target's maximum health) physical damage</physicalDamage> per second to nearby enemies and knocks them up for {{ knockupduration }} seconds the first time they get hit.<br /><br />Cyclone can be cast a second time within {{ recastwindow }} seconds before going on cooldown.",
+          "tooltip": "Wukong spins his staff around for {{ spinduration }} seconds, gaining {{ movespeed*100 }}% Movement Speed. While spinning, he deals <physicalDamage>{{ damagepersecondtotal }} (+{{ percentmaxhpdmgpersec }} of the target's maximum health) physical damage</physicalDamage> per second to nearby enemies and knocks them up for {{ knockupduration }} seconds.<br /><br />Cyclone can be cast a second time within {{ recastwindow }} seconds before going on cooldown.",
           "leveltip": {
             "label": [
               "Maximum Health Damage",

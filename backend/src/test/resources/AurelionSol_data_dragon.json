@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.6.1",
+  "version": "10.12.1",
   "data": {
     "AurelionSol": {
       "id": "AurelionSol",
@@ -87,7 +87,7 @@
           "id": "AurelionSolQ",
           "name": "Starsurge",
           "description": "Aurelion Sol creates an expanding disk, which explodes to stun and damage enemies when it moves too far away from him.",
-          "tooltip": "<spellPassive>First Press: </spellPassive>Aurelion Sol creates a new stellar core, which grows over time and grants him {{ e2 }}% Movement Speed.<br /><br />The core will detonate when it reaches his <span class=\"color308BDB\">Outer Limit</span>, applying {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage and stunning enemies for {{ effect4amount*.25 }} to {{ e4 }} second(s) based on size.<br /><br /><spellPassive>Second Press: </spellPassive>Detonate the core early.<br />",
+          "tooltip": "<spellPassive>First Press: </spellPassive>Aurelion Sol creates a new stellar core, which grows over time and grants him {{ e2 }}% Movement Speed.<br /><br />The core will detonate when it reaches his <span class=\"color308BDB\">Outer Limit</span>, applying {{ e1 }} <magicDamage><scaleAP>(+{{ a1 }})</scaleAP> magic damage</magicDamage> and stunning enemies for {{ effect4amount*.25 }} to {{ e4 }} second(s) based on size.<br /><br /><spellPassive>Second Press: </spellPassive>Detonate the core early.<br />",
           "leveltip": {
             "label": [
               "Damage",
@@ -238,7 +238,7 @@
           "id": "AurelionSolW",
           "name": "Celestial Expansion",
           "description": "Aurelion Sol pushes his stars farther out, increasing their damage and speed.",
-          "tooltip": "<spellPassive>Passive: </spellPassive>Increases Star base damage by {{ starbasedamageincrease }}.<br /><br /><spellPassive>Active: </spellPassive>Aurelion Sol's Stars expand their orbit to his <span class=\"color308BDB\">Outer Limit</span>, rotating more quickly and dealing {{ damagemultiplier*100 }}% damage for a total of {{ f1 }} <scaleAP>(+{{ f2 }})</scaleAP> magic damage. Upon reactivation or after 3 seconds, the Stars retract and Aurelion Sol gains 40% movement speed, decaying over 1.5 seconds.<br />",
+          "tooltip": "<spellPassive>Passive: </spellPassive>Increases Star base damage by {{ starbasedamageincrease }}.<br /><br /><spellPassive>Active: </spellPassive>Aurelion Sol's Stars expand their orbit to his <span class=\"color308BDB\">Outer Limit</span>, rotating more quickly and dealing {{ damagemultiplier*100 }}% damage for a total of <magicDamage>{{ f1 }} <scaleAP>(+{{ f2 }})</scaleAP> magic damage</magicDamage>. Upon reactivation or after 3 seconds, the Stars retract and Aurelion Sol gains 40% movement speed, decaying over 1.5 seconds.<br />",
           "leveltip": {
             "label": [
               "Passive Damage Bonus",
@@ -524,7 +524,7 @@
           "id": "AurelionSolR",
           "name": "Voice of Light",
           "description": "Aurelion Sol projects a blast of pure starfire, damaging and slowing all enemies caught in it and knocking nearby enemies back to a safer distance.",
-          "tooltip": "Breathes out a blast of pure starfire, dealing {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage and slowing by {{ e2 }}% for {{ e3 }} seconds. <br /><br />The blast will also knock nearby enemies back to Aurelion Sol's <span class=\"color308BDB\">Outer Limit</span>.<br />",
+          "tooltip": "Breathes out a blast of pure starfire, dealing <magicDamage>{{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage</magicDamage> and slowing by {{ e2 }}% for {{ e3 }} seconds. <br /><br />The blast will also knock nearby enemies back to Aurelion Sol's <span class=\"color308BDB\">Outer Limit</span>.<br />",
           "leveltip": {
             "label": [
               "Damage",

@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.6.1",
+  "version": "10.12.1",
   "data": {
     "Corki": {
       "id": "Corki",
@@ -127,7 +127,7 @@
           "id": "PhosphorusBomb",
           "name": "Phosphorus Bomb",
           "description": "Corki fires a flash bomb at a target location, dealing magic damage to enemies in the area. This attack additionally reveals units in the area for a duration.",
-          "tooltip": "Corki lobs a bomb, dealing {{ e1 }} <scaleAD>(+{{ a1 }})</scaleAD> <scaleAP>(+{{ a1 }})</scaleAP> magic damage to enemies in the target area. In addition, the blast reveals the area and champions hit by the blast for {{ e2 }} seconds (does not reveal stealth).",
+          "tooltip": "Corki lobs a bomb, dealing <magicDamage>{{ e1 }} <scaleAD>(+{{ a1 }})</scaleAD> <scaleAP>(+{{ a1 }})</scaleAP> magic damage</magicDamage> to enemies in the target area. In addition, the blast reveals the area and champions hit by the blast for {{ e2 }} seconds (does not reveal stealth).",
           "leveltip": {
             "label": [
               "Damage",
@@ -420,7 +420,7 @@
           "id": "GGun",
           "name": "Gatling Gun",
           "description": "Corki's gatling gun rapidly fires in a cone in front of him, dealing damage and reducing enemy Armor and Magic Resist.",
-          "tooltip": "Corki's gatling gun fires continuously at targets in front of him for {{ e2 }} seconds, dealing up to {{ e1 }} <scaleAD>(+{{ a1 }})</scaleAD> damage and reducing up to {{ e4 }} armor and magic resist.<br /><br /><span class=\"color919191\"><i>Gatling Gun's damage is {{ e7 }}% physical, {{ e8 }}% magic.<br />Defense reductions last for {{ e6 }} seconds after last being damaged by Gatling Gun.</i></span>",
+          "tooltip": "Corki's gatling gun fires continuously at targets in front of him for {{ e2 }} seconds, dealing up to {{ e1 }} <scaleAD>(+{{ a1 }})</scaleAD> damage and reducing up to {{ e4 }} armor and magic resist.<br /><br /><rules>Gatling Gun's damage is <physicalDamage>{{ e7 }}% physical</physicalDamage>, <magicDamage>{{ e8 }}% magic</magicDamage>.<br />Defense reductions last for {{ e6 }} seconds after last being damaged by Gatling Gun.</rules>",
           "leveltip": {
             "label": [
               "Damage",
@@ -567,11 +567,11 @@
           "id": "MissileBarrage",
           "name": "Missile Barrage",
           "description": "Corki fires a missile toward his target location that explodes on impact, dealing damage to enemies in an area. Corki stores missiles over time, up to a maximum. Every 3rd missile fired will be a Big One, dealing extra damage.",
-          "tooltip": "<spellPassive>Active:</spellPassive> Corki fires a missile that explodes at the first enemy it hits, dealing {{ rsmallmissiledamage }} magic damage to all nearby enemies.<br /><br />Corki can store up to 7 missiles, and every 3rd missile will be a Big One, dealing {{ rbigonemultiplier*100 }}% damage ({{ rbigmissiledamage }}).",
+          "tooltip": "<spellPassive>Active:</spellPassive> Corki fires a missile that explodes at the first enemy it hits, dealing <magicDamage>{{ rsmallmissiledamage }} magic damage</magicDamage> to all nearby enemies.<br /><br />Corki can store up to 7 missiles, and every 3rd missile will be a Big One, dealing {{ rbigonemultiplier*100 }}% damage ({{ rbigmissiledamage }}).",
           "leveltip": {
             "label": [
               "Damage",
-              "Attack Speed",
+              "Attack Damage Ratio",
               "Missile Recharge Time"
             ],
             "effect": [

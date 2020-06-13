@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.6.1",
+  "version": "10.12.1",
   "data": {
     "Ahri": {
       "id": "Ahri",
@@ -140,7 +140,7 @@
           "id": "AhriOrbofDeception",
           "name": "Orb of Deception",
           "description": "Ahri sends out and pulls back her orb, dealing magic damage on the way out and true damage on the way back. After earning several spell hits, Ahri's next orb hits will restore her health.",
-          "tooltip": "Deals {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage on the way out, and {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> true damage on the way back.<br /><br />Ahri's abilities generate Essence Theft stacks when they hit enemies (max {{ f4.0 }} per cast). At {{ f3.0 }} stacks, Ahri's next Orb of Deception that lands a hit will restore <scaleLevel>{{ f1.0 }}</scaleLevel> <scaleAP>(+{{ f2.-1 }})</scaleAP> health for each enemy hit.",
+          "tooltip": "Deals <magicDamage>{{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage</magicDamage> on the way out, and {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> true damage on the way back.<br /><br />Ahri's abilities generate Essence Theft stacks when they hit enemies (max {{ f4.0 }} per cast). At {{ f3.0 }} stacks, Ahri's next Orb of Deception that lands a hit will restore <scaleLevel>{{ f1.0 }}</scaleLevel> <scaleAP>(+{{ f2.-1 }})</scaleAP> health for each enemy hit.",
           "leveltip": {
             "label": [
               "Damage",
@@ -292,7 +292,7 @@
           "id": "AhriFoxFire",
           "name": "Fox-Fire",
           "description": "Ahri releases three fox-fires, that lock onto and attack nearby enemies.",
-          "tooltip": "Releases fox-fires that seek nearby enemies and deal {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage.<br /><br />Enemies hit with multiple fox-fires take {{ e2 }}% damage from each additional fox-fire beyond the first, for a maximum of <scaleAP>{{ f1 }}</scaleAP> damage to a single enemy.<br /><br /><rules>Fox-fire prioritizes champions recently hit by Charm, then enemies Ahri recently attacked.<br />If Fox-fire cannot find a priority target, it targets champions over the nearest enemy if possible.</rules>",
+          "tooltip": "Releases fox-fires that seek nearby enemies and deal <magicDamage>{{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage</magicDamage>.<br /><br />Enemies hit with multiple fox-fires take {{ e2 }}% damage from each additional fox-fire beyond the first, for a maximum of <scaleAP>{{ f1 }}</scaleAP> damage to a single enemy.<br /><br /><rules>Fox-fire prioritizes champions recently hit by Charm, then enemies Ahri recently attacked.<br />If Fox-fire cannot find a priority target, it targets champions over the nearest enemy if possible.</rules>",
           "leveltip": {
             "label": [
               "Damage",
@@ -439,7 +439,7 @@
           "id": "AhriSeduce",
           "name": "Charm",
           "description": "Ahri blows a kiss that damages and charms an enemy it encounters, instantly stopping movement abilities and causing them to walk harmlessly towards her. The target temporarily takes increased damage from Ahri.",
-          "tooltip": "Blows a kiss that deals {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage and charms the first enemy hit, causing them to walk harmlessly towards Ahri for {{ e2 }} second(s) and immediately stopping any in-progress movement abilities.<br /><br />Enemies hit by Charm become vulnerable for {{ e5 }} seconds, taking {{ e4 }}% more damage from Ahri's abilities.",
+          "tooltip": "Blows a kiss that deals <magicDamage>{{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage</magicDamage> and charms the first enemy hit, causing them to walk harmlessly towards Ahri for {{ e2 }} second(s) and immediately stopping any in-progress movement abilities.<br /><br />Enemies hit by Charm become vulnerable for {{ e5 }} seconds, taking {{ e4 }}% more damage from Ahri's abilities.",
           "leveltip": {
             "label": [
               "Damage",
@@ -586,7 +586,7 @@
           "id": "AhriTumble",
           "name": "Spirit Rush",
           "description": "Ahri dashes forward and fires essence bolts, damaging nearby enemies. Spirit Rush can be cast up to three times before going on cooldown.",
-          "tooltip": "Nimbly dashes forward firing {{ rmaxtargetspercast }} essence bolts at nearby enemies (prioritizing champions) dealing {{ rcalculateddamage }} magic damage.<br /><br />Can be cast up to {{ rmaxcasts }} times within {{ rrecastwindow }} seconds before going on cooldown.",
+          "tooltip": "Nimbly dashes forward firing {{ rmaxtargetspercast }} essence bolts at nearby enemies (prioritizing champions) dealing <magicDamage>{{ rcalculateddamage }} magic damage</magicDamage>.<br /><br />Can be cast up to {{ rmaxcasts }} times within {{ rrecastwindow }} seconds before going on cooldown.",
           "leveltip": {
             "label": [
               "Damage",

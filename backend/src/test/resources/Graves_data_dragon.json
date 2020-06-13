@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.6.1",
+  "version": "10.12.1",
   "data": {
     "Graves": {
       "id": "Graves",
@@ -277,7 +277,7 @@
           "id": "GravesSmokeGrenade",
           "name": "Smoke Screen",
           "description": "Graves fires a smoke canister at the target area creating a cloud of smoke that reduces sight range. Enemies caught in the initial impact are dealt magic damage and have their movement speed reduced briefly.",
-          "tooltip": "Creates a cloud of Black Smoke lasting 4 seconds. Enemies inside Black Smoke cannot see out.<br /><br />Enemies caught in the initial impact are dealt {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage and have their movement speed reduced by {{ e2 }}% for {{ e5 }} seconds.",
+          "tooltip": "Creates a cloud of Black Smoke lasting 4 seconds. Enemies inside Black Smoke cannot see out.<br /><br />Enemies caught in the initial impact are dealt <magicDamage>{{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage</magicDamage> and have their movement speed reduced by {{ e2 }}% for {{ e5 }} seconds.",
           "leveltip": {
             "label": [
               "Damage",
@@ -426,7 +426,7 @@
           "id": "GravesMove",
           "name": "Quickdraw",
           "description": "Graves dashes forward gaining an Armor boost for several seconds. If Graves dashes towards an enemy champion, gain two stacks of True Grit instead. Hitting enemies with basic attacks lowers the cooldown of this skill and refreshes the resistance boost.",
-          "tooltip": "Dashes in a direction, reloading one shell. Graves gains <keywordMajor>True Grit</keywordMajor> for 4 seconds. If Graves dashes towards an enemy champion, gain two stacks of <keywordMajor>True Grit</keywordMajor> instead. <br /><br />Basic attack hits lower the cooldown of Quickdraw by {{ e4 }} seconds. Damage against non-minions also refreshes <keywordMajor>True Grit</keywordMajor>.<br /><br /><keywordMajor>True Grit</keywordMajor> grants {{ e5 }} Armor (stacks up to {{ e0 }} times).",
+          "tooltip": "Dashes in a direction, reloading one shell. Graves gains <keywordMajor>True Grit</keywordMajor> for 4 seconds. If Graves dashes towards an enemy champion, gain two stacks of <keywordMajor>True Grit</keywordMajor> instead. <br /><br />Basic attack hits lower the cooldown of <spellName>Quickdraw</spellName> by {{ e4 }} seconds. Damage against non-minions also refreshes <keywordMajor>True Grit</keywordMajor>.<br /><br /><keywordMajor>True Grit</keywordMajor> grants {{ e5 }} Armor (stacks up to {{ e0 }} times).",
           "leveltip": {
             "label": [
               "True Grit Armor",
@@ -567,7 +567,7 @@
           "id": "GravesChargeShot",
           "name": "Collateral Damage",
           "description": "Graves fires an explosive shell dealing heavy damage to the first champion it hits. After hitting a champion or reaching the end of its range, the shell explodes dealing damage in a cone.",
-          "tooltip": "Fires an explosive shell with such force that it knocks Graves back. The shell deals <physicalDamage>{{ damage }}</physicalDamage> physical damage to the first enemy hit. After hitting an enemy Champion or reaching the end of its range, the shell explodes, dealing <physicalDamage>{{ falloffdamage }}</physicalDamage> physical damage in a cone.",
+          "tooltip": "Fires an explosive shell with such force that it knocks Graves back. The shell deals <physicalDamage>{{ damage }} physical damage</physicalDamage> to the first enemy hit. After hitting an enemy Champion or reaching the end of its range, the shell explodes, dealing <physicalDamage>{{ falloffdamage }} physical damage</physicalDamage> in a cone.",
           "leveltip": {
             "label": [
               "Primary Damage",

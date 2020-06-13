@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.6.1",
+  "version": "10.12.1",
   "data": {
     "Kalista": {
       "id": "Kalista",
@@ -71,7 +71,7 @@
         "mp": 250,
         "mpperlevel": 45,
         "movespeed": 325,
-        "armor": 23,
+        "armor": 21,
         "armorperlevel": 4,
         "spellblock": 30,
         "spellblockperlevel": 0.5,
@@ -260,13 +260,13 @@
           ],
           "cooldownBurn": "30",
           "cost": [
-            20,
-            20,
-            20,
-            20,
-            20
+            0,
+            0,
+            0,
+            0,
+            0
           ],
-          "costBurn": "20",
+          "costBurn": "0",
           "datavalues": {},
           "effect": [
             null,
@@ -278,10 +278,10 @@
               80
             ],
             [
-              10,
-              12,
               14,
+              15,
               16,
+              17,
               18
             ],
             [
@@ -344,7 +344,7 @@
           "effectBurn": [
             null,
             "80",
-            "10/12/14/16/18",
+            "14/15/16/17/18",
             "125/150/175/200/225",
             "90/80/70/60/50",
             "0",
@@ -355,7 +355,7 @@
             "0"
           ],
           "vars": [],
-          "costType": " {{ abilityresourcename }}",
+          "costType": "No Cost",
           "maxammo": "2",
           "range": [
             5000,
@@ -374,7 +374,7 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} {{ abilityresourcename }}"
+          "resource": "No Cost"
         },
         {
           "id": "KalistaExpungeWrapper",
@@ -423,11 +423,11 @@
               60
             ],
             [
-              25,
-              30,
-              35,
-              40,
-              45
+              10,
+              18,
+              26,
+              34,
+              42
             ],
             [
               0,
@@ -489,7 +489,7 @@
           "effectBurn": [
             null,
             "20/30/40/50/60",
-            "25/30/35/40/45",
+            "10/18/26/34/42",
             "0",
             "33/39.58/45.83/52.08/58.33",
             "14/12.5/11/9.5/8",

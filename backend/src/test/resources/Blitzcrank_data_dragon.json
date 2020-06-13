@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.6.1",
+  "version": "10.12.1",
   "data": {
     "Blitzcrank": {
       "id": "Blitzcrank",
@@ -560,7 +560,7 @@
           "id": "StaticField",
           "name": "Static Field",
           "description": "Enemies attacked by Blitzcrank are marked and take lightning damage after 1 second. Additionally, Blitzcrank can activate this ability to remove nearby enemies' shields, damage them, and silence them briefly.",
-          "tooltip": "<spellPassive>Passive: </spellPassive>While this spell is available, lightning charges Blitzcrank's fists, marking enemies. After 1 second, they are shocked for <magicDamage>{{ passivedamage }}</magicDamage> magic damage. This stacks up to {{ maxstacks }} times.<br /><br /><spellPassive>Active: </spellPassive>Destroys damage shields on nearby enemies, deals <magicDamage>{{ activedamage }} magic damage</magicDamage>, and silences for 0.75 seconds.",
+          "tooltip": "<spellPassive>Passive: </spellPassive>While this spell is available, lightning charges Blitzcrank's fists, marking enemies. After 1 second, they are shocked for <magicDamage>{{ passivedamage }} magic damage</magicDamage>. This stacks up to {{ maxstacks }} times.<br /><br /><spellPassive>Active: </spellPassive>Destroys damage shields on nearby enemies, deals <magicDamage>{{ activedamage }} magic damage</magicDamage>, and silences for 0.75 seconds.",
           "leveltip": {
             "label": [
               "Passive Base Damage",
@@ -675,8 +675,8 @@
         }
       ],
       "passive": {
-        "name": "",
-        "description": "When Blitzcrank's life is brought below 20% health, he activates Mana Barrier. This creates a mana shield equal to 30% of his mana for 10 seconds. Mana Barrier can only occur once every 90 seconds.",
+        "name": "Mana Barrier",
+        "description": "Blitzcrank gains a shield based on his mana when dropping to low health.",
         "image": {
           "full": "Blitzcrank_ManaBarrier.png",
           "sprite": "passive0.png",

@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.6.1",
+  "version": "10.12.1",
   "data": {
     "Braum": {
       "id": "Braum",
@@ -111,7 +111,7 @@
           "id": "BraumQ",
           "name": "Winter's Bite",
           "description": "Braum propels freezing ice from his shield, slowing and dealing magic damage.<br><br>Applies a stack of <font color='#FFF673'>Concussive Blows</font>.",
-          "tooltip": "Braum propels freezing ice from his shield dealing {{ e1 }} <span class=\"colorCC3300\">(+{{ f1 }}) [2.5% of Braum's Max Health]</span> magic damage to the first enemy hit and slowing them by {{ e2 }}%, decaying over the next {{ e5 }} seconds.<br /><br />Applies a stack of <keywordMajor>Concussive Blows</keywordMajor>. ",
+          "tooltip": "Braum propels freezing ice from his shield dealing <magicDamage>{{ e1 }} <scaleHealth>(+{{ f1 }}) [2.5% of Braum's Max Health]</scaleHealth> magic damage</magicDamage> to the first enemy hit and slowing them by {{ e2 }}%, decaying over the next {{ e5 }} seconds.<br /><br />Applies a stack of <keywordMajor>Concussive Blows</keywordMajor>. ",
           "leveltip": {
             "label": [
               "Damage",
@@ -254,7 +254,7 @@
           "id": "BraumW",
           "name": "Stand Behind Me",
           "description": "Braum leaps to a target allied champion or minion. On arrival, Braum and the ally gain Armor and Magic Resist for a few seconds.",
-          "tooltip": "Braum leaps to target allied champion or minion.<br /><br />On arrival, Braum grants the target <scaleArmor>{{ grantedallyarmor }}</scaleArmor> Armor and <span class=\"colorFF00FF\">{{ grantedallymr }}</span> Magic Resist for {{ e1 }} seconds. Braum grants himself <scaleArmor>{{ grantedbraumarmor }}</scaleArmor> Armor and  <span class=\"colorFF00FF\">{{ grantedbraummr }}</span> Magic Resist for the same duration.",
+          "tooltip": "Braum leaps to target allied champion or minion.<br /><br />On arrival, Braum grants the target <scaleArmor>{{ grantedallyarmor }}</scaleArmor> Armor and <scaleMR>{{ grantedallymr }}</scaleMR> Magic Resist for {{ e1 }} seconds. Braum grants himself <scaleArmor>{{ grantedbraumarmor }}</scaleArmor> Armor and  <scaleMR>{{ grantedbraummr }}</scaleMR> Magic Resist for the same duration.",
           "leveltip": {
             "label": [
               "Base Resists",
@@ -827,6 +827,7 @@
           "customTag": "",
           "sortrank": 0,
           "extensionPage": false,
+          "useObviousCheckmark": false,
           "customPanel": null,
           "blocks": [
             {
@@ -889,7 +890,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3025",
+                  "id": "3190",
                   "count": 1,
                   "hideCount": false
                 }
@@ -917,12 +918,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3001",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3068",
+                  "id": "3083",
                   "count": 1,
                   "hideCount": false
                 }
@@ -945,7 +941,7 @@
               ],
               "items": [
                 {
-                  "id": "3060",
+                  "id": "3050",
                   "count": 1,
                   "hideCount": false
                 },
@@ -955,7 +951,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3190",
+                  "id": "3068",
                   "count": 1,
                   "hideCount": false
                 }

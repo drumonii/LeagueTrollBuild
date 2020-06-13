@@ -1,6 +1,6 @@
 {
   "type": "summoner",
-  "version": "10.6.1",
+  "version": "10.12.1",
   "data": {
     "SummonerBarrier": {
       "id": "SummonerBarrier",
@@ -515,13 +515,13 @@
     "SummonerHaste": {
       "id": "SummonerHaste",
       "name": "Ghost",
-      "description": "Your champion gains increased Movement Speed and can move through units for 10 seconds. Grants a maximum of 28-45% (depending on champion level) Movement Speed after accelerating for 2 seconds.",
-      "tooltip": "Your champion gains increased Movement Speed and can move through units for 10 seconds. Grants a maximum of {{ f1 }}% Movement Speed after accelerating for 2 seconds.",
+      "description": "Your champion gains 20 - 40% Movement Speed (depending on champion level) and can move through units for 10 seconds.<br><br>Ghost extends it's duration on takedown.",
+      "tooltip": "Your champion gains {{ movespeedmod }} Movement Speed and can move through units for {{ duration }} seconds.<br /><br />Ghost extends it's duration by {{ takedownextension }} seconds on takedown.",
       "maxrank": 1,
       "cooldown": [
-        180
+        210
       ],
-      "cooldownBurn": "180",
+      "cooldownBurn": "210",
       "cost": [
         0
       ],
@@ -530,13 +530,13 @@
       "effect": [
         null,
         [
-          27
+          0
         ],
         [
           0
         ],
         [
-          2
+          0
         ],
         [
           0
@@ -562,9 +562,9 @@
       ],
       "effectBurn": [
         null,
-        "27",
         "0",
-        "2",
+        "0",
+        "0",
         "0",
         "0",
         "0",
@@ -573,13 +573,7 @@
         "0",
         "0"
       ],
-      "vars": [
-        {
-          "link": "@text",
-          "coeff": 27,
-          "key": "f1"
-        }
-      ],
+      "vars": [],
       "key": "6",
       "summonerLevel": 1,
       "modes": [
@@ -1332,13 +1326,13 @@
     "SummonerTeleport": {
       "id": "SummonerTeleport",
       "name": "Teleport",
-      "description": "After channeling for 4 seconds, teleports your champion to target allied structure, minion, or ward and grants a Movement Speed boost.",
-      "tooltip": "After channeling for {{ f1 }} seconds, your champion teleports to target allied structure, minion, or ward and grants a {{ movespeedbuff }} Movement Speed boost for {{ msduration }} seconds.",
+      "description": "After channeling for 4 seconds, teleports your champion to target allied structure, minion, or ward and grants a Movement Speed boost. The cooldown of Teleport scales from 420-240 seconds depending on champion level.",
+      "tooltip": "After channeling for {{ channelduration }} seconds, your champion teleports to target allied structure, minion, or ward and grants a {{ movespeedbuff }} Movement Speed boost for {{ msduration }} seconds.",
       "maxrank": 1,
       "cooldown": [
-        360
+        0
       ],
-      "cooldownBurn": "360",
+      "cooldownBurn": "0",
       "cost": [
         0
       ],
@@ -1347,10 +1341,10 @@
       "effect": [
         null,
         [
-          4
+          0
         ],
         [
-          240
+          0
         ],
         [
           0
@@ -1379,8 +1373,8 @@
       ],
       "effectBurn": [
         null,
-        "4",
-        "240",
+        "0",
+        "0",
         "0",
         "0",
         "0",
@@ -1390,13 +1384,7 @@
         "0",
         "0"
       ],
-      "vars": [
-        {
-          "link": "@text",
-          "coeff": 4,
-          "key": "f1"
-        }
-      ],
+      "vars": [],
       "key": "12",
       "summonerLevel": 7,
       "modes": [

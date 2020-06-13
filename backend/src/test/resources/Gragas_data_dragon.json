@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.6.1",
+  "version": "10.12.1",
   "data": {
     "Gragas": {
       "id": "Gragas",
@@ -134,7 +134,7 @@
           "id": "GragasQ",
           "name": "Barrel Roll",
           "description": "Gragas rolls his cask to a location, which can be activated to explode or will explode on its own after 4 seconds. Enemies struck by the blast have their Movement Speed slowed.",
-          "tooltip": "Gragas rolls his cask to a location. When reactivated, or after {{ e4 }} seconds, the cask will explode, dealing {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage to nearby enemies and slowing their movement speed by {{ e2 }}% for {{ e3 }} seconds.<br /><br />The damage and slow amount increase as the cask ferments, up to {{ e6 }}% after {{ e5 }} seconds. Deals {{ e7 }}% damage to minions.",
+          "tooltip": "Gragas rolls his cask to a location. When reactivated, or after {{ e4 }} seconds, the cask will explode, dealing <magicDamage>{{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage</magicDamage> to nearby enemies and slowing their movement speed by {{ e2 }}% for {{ e3 }} seconds.<br /><br />The damage and slow amount increase as the cask ferments, up to {{ e6 }}% after {{ e5 }} seconds. Deals {{ e7 }}% damage to minions.",
           "leveltip": {
             "label": [
               "Damage",
@@ -285,7 +285,7 @@
           "id": "GragasW",
           "name": "Drunken Rage",
           "description": "Gragas guzzles down brew from his cask for 1 second. After finishing, he becomes drunkenly empowered, dealing magic damage to all nearby enemies on his next basic attack and reducing damage received.",
-          "tooltip": "Gragas guzzles down his brew, taking {{ e1 }}% <scaleAP>(+{{ charabilitypower2*100 }}%)</scaleAP> reduced damage for {{ e5 }} seconds.<br /><br />After finishing his drink, his next basic attack deals magic damage to nearby enemies equal to {{ e3 }} <scaleAP>(+{{ a1 }})</scaleAP> plus {{ e2 }}% of their max Health (max {{ e4 }} vs monsters).",
+          "tooltip": "Gragas guzzles down his brew, taking {{ e1 }}% <scaleAP>(+{{ charabilitypower2*100 }}%)</scaleAP> reduced damage for {{ e5 }} seconds.<br /><br />After finishing his drink, his next basic attack deals <magicDamage>magic damage</magicDamage> to nearby enemies equal to <magicDamage>{{ e3 }} <scaleAP>(+{{ a1 }})</scaleAP></magicDamage> plus {{ e2 }}% of their max Health (max {{ e4 }} vs monsters).",
           "leveltip": {
             "label": [
               "Damage Reduction",
@@ -432,7 +432,7 @@
           "id": "GragasE",
           "name": "Body Slam",
           "description": "Gragas charges to a location and collides with the first enemy unit he comes across, dealing damage to all nearby enemy units and stunning them.",
-          "tooltip": "Gragas charges forward, colliding with the first enemy unit. He deals {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage to enemies in the area and bumps them back, stunning them for {{ e2 }} second.<br /><br />Body Slam's Cooldown is reduced by {{ f1 }} seconds if Gragas collides with a unit.",
+          "tooltip": "Gragas charges forward, colliding with the first enemy unit. He deals <magicDamage>{{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage</magicDamage> to enemies in the area and bumps them back, stunning them for {{ e2 }} second.<br /><br />Body Slam's Cooldown is reduced by {{ f1 }} seconds if Gragas collides with a unit.",
           "leveltip": {
             "label": [
               "Damage",
@@ -579,7 +579,7 @@
           "id": "GragasR",
           "name": "Explosive Cask",
           "description": "Gragas hurls his cask to a location, dealing damage and knocking back enemies caught in the blast radius.",
-          "tooltip": "Gragas hurls his cask, causing it to explode when it lands. Enemies hit take {{ basedamage }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage and are knocked away from the explosion.",
+          "tooltip": "Gragas hurls his cask, causing it to explode when it lands. Enemies hit take <magicDamage>{{ basedamage }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage</magicDamage> and are knocked away from the explosion.",
           "leveltip": {
             "label": [
               "Damage",

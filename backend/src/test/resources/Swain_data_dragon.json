@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.6.1",
+  "version": "10.12.1",
   "data": {
     "Swain": {
       "id": "Swain",
@@ -565,7 +565,7 @@
         {
           "id": "SwainR",
           "name": "Demonic Ascension",
-          "description": "Swain transforms into a demon and drains health from nearby enemy champions, minions, and neutral monsters. Swain can cast Demonflare to deal damage equal to the amount of health he drained, ending his transformation to decimate nearby enemies with a nova of soulfire.",
+          "description": "Swain transforms into a demon and drains health from nearby enemy champions, minions, and neutral monsters. Swain can cast Demonflare to decimate nearby enemies with a nova of soulfire, dealing damage equal to a portion of the health he drained and ending his transformation.",
           "tooltip": "Swain frees the demon within for {{ demonformduration }} seconds, gaining {{ basehealthgain }} health and doubling the bonus health that he has collected from Soul Fragments. Every second, he drains all nearby enemy champions, minions, and neutral monsters for {{ damagecalc }} magic damage, healing him for {{ healingcalc }} health. After a brief delay, and upon draining any amount of health, Swain can cast Demonflare.<br /><br /><span class=\"colorDDDD77\">Demonflare:</span> Swain unleashes a nova of soulfire dealing magic damage equal to {{ minimumdemonflaredamagetotal }} plus  {{ healtodamagepercent*100 }}% of the damage he healed (up to a total of  {{ demonflaredamagetotal }}) and ends his transformation.<br /><br /><br /><rules>Swain can drain non-champions to heal for {{ minionmonsterhealreduction*100 }}% of the normal amount.</rules>",
           "leveltip": {
             "label": [

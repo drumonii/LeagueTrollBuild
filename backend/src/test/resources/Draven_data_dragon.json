@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.6.1",
+  "version": "10.12.1",
   "data": {
     "Draven": {
       "id": "Draven",
@@ -94,8 +94,8 @@
         "difficulty": 8
       },
       "stats": {
-        "hp": 574,
-        "hpperlevel": 88,
+        "hp": 605,
+        "hpperlevel": 90,
         "mp": 360.56,
         "mpperlevel": 39,
         "movespeed": 330,
@@ -120,7 +120,7 @@
           "id": "DravenSpinning",
           "name": "Spinning Axe",
           "description": "Draven's next attack will deal bonus physical damage. This axe will ricochet off the target high up into the air. If Draven catches it, he automatically readies another Spinning Axe. Draven can have two Spinning Axes at once.",
-          "tooltip": "Draven's next attack will deal <scaleAD>{{ f1 }}</scaleAD> bonus physical damage. The bonus is equal to {{ e5 }} plus {{ e2 }}% of his bonus Attack Damage.<br /><br />This axe will ricochet off the target high up into the air. If Draven catches it, he automatically readies another Spinning Axe.<br /><br /><span class=\"colorDDDD77\">Draven can have two Spinning Axes at once.</span>",
+          "tooltip": "Draven's next attack will deal <physicalDamage><scaleAD>{{ f1 }}</scaleAD> bonus physical damage</physicalDamage>. The bonus is equal to {{ e5 }} plus {{ e2 }}% of his bonus Attack Damage.<br /><br />This axe will ricochet off the target high up into the air. If Draven catches it, he automatically readies another <spellName>Spinning Axe</spellName>.<br /><br /><span class=\"colorDDDD77\">Draven can have two Spinning Axes at once.</span>",
           "leveltip": {
             "label": [
               "Damage",
@@ -275,7 +275,7 @@
           "id": "DravenFury",
           "name": "Blood Rush",
           "description": "Draven gains increased Movement Speed and Attack Speed. The Movement Speed bonus decreases rapidly over its duration. Catching a Spinning Axe will refresh the cooldown of Blood Rush.",
-          "tooltip": "Draven gains {{ e2 }}% increased Movement Speed for {{ e3 }} seconds and {{ e4 }}% increased Attack Speed for {{ e5 }} seconds. The Movement Speed bonus decreases rapidly over its duration.<br /><br />Catching a Spinning Axe will refresh the cooldown of Blood Rush.",
+          "tooltip": "Draven gains {{ e2 }}% increased Movement Speed for {{ e3 }} seconds and {{ e4 }}% increased Attack Speed for {{ e5 }} seconds. The Movement Speed bonus decreases rapidly over its duration.<br /><br />Catching a <spellName>Spinning Axe</spellName> will refresh the cooldown of <spellName>Blood Rush</spellName>.",
           "leveltip": {
             "label": [
               "Attack Speed",
@@ -418,7 +418,7 @@
           "id": "DravenDoubleShot",
           "name": "Stand Aside",
           "description": "Draven throws his axes, dealing physical damage to targets hit and knocking them aside. Targets hit are slowed.",
-          "tooltip": "Draven throws his axes, dealing {{ e1 }} <scaleAD>(+{{ f1 }})</scaleAD> physical damage to targets hit and knocking them aside. Targets hit are slowed by {{ e2 }}% for {{ e3 }} seconds.",
+          "tooltip": "Draven throws his axes, dealing <physicalDamage>{{ e1 }} <scaleAD>(+{{ f1 }})</scaleAD> physical damage</physicalDamage> to targets hit and knocking them aside. Targets hit are slowed by {{ e2 }}% for {{ e3 }} seconds.",
           "leveltip": {
             "label": [
               "Damage",
@@ -567,7 +567,7 @@
           "id": "DravenRCast",
           "name": "Whirling Death",
           "description": "Draven hurls two massive axes to deal physical damage to each unit struck. Whirling Death slowly reverses direction and returns to Draven after striking an enemy champion. Draven may also activate this ability while the axes are in flight to cause it to return early. Deals less damage for each unit hit and resets when the axes reverse direction.",
-          "tooltip": "Draven hurls two massive axes to deal {{ rcalculateddamage }} physical damage to each unit struck.<br /><br />Whirling Death slowly reverses direction and returns to Draven after striking an enemy champion. Draven may also activate this ability while the axes are in flight to cause it to return early. Deals {{ rdamagereductionperhit*100 }}% less damage for each unit hit (Minimum {{ rmindamagepercent }}%) and resets when the axes reverse direction.",
+          "tooltip": "Draven hurls two massive axes to deal <physicalDamage>{{ rcalculateddamage }} physical damage</physicalDamage> to each unit struck.<br /><br />Whirling Death slowly reverses direction and returns to Draven after striking an enemy champion. Draven may also activate this ability while the axes are in flight to cause it to return early. Deals {{ rdamagereductionperhit*100 }}% less damage for each unit hit (Minimum {{ rmindamagepercent }}%) and resets when the axes reverse direction.",
           "leveltip": {
             "label": [
               "Damage",

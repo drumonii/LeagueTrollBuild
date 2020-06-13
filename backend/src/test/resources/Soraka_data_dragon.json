@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.6.1",
+  "version": "10.12.1",
   "data": {
     "Soraka": {
       "id": "Soraka",
@@ -117,7 +117,7 @@
       "stats": {
         "hp": 535,
         "hpperlevel": 74,
-        "mp": 375,
+        "mp": 425,
         "mpperlevel": 40,
         "movespeed": 325,
         "armor": 32,
@@ -140,8 +140,8 @@
         {
           "id": "SorakaQ",
           "name": "Starcall",
-          "description": "A star falls from the sky at the target location dealing magic damage and slowing enemies. If an enemy champion is hit by Starcall, Soraka recovers health.",
-          "tooltip": "Calls down a star from Soraka to a target location. Enemies standing in the explosion radius take <magicDamage>{{ totaldamage }} magic damage</magicDamage> and are slowed by {{ movespeedslow*100 }}% for {{ slowduration }} seconds.<br /><br />If Starcall hits a champion Soraka gains <keywordMajor>Rejuvenation</keywordMajor> for {{ hotduration }} seconds, which restores <scaleAP>{{ totalhot }}</scaleAP> health over that duration and grants {{ movespeedhaste*100 }}% decaying Movement Speed. ",
+          "description": "A star falls from the sky at the target location dealing magic damage and slowing enemies. If an enemy champion is hit by Starcall, Soraka recovers Health.",
+          "tooltip": "Calls down a star from Soraka to a target location. Enemies standing in the explosion radius take <magicDamage>{{ totaldamage }} magic damage</magicDamage> and are slowed by {{ movespeedslow*100 }}% for {{ slowduration }} seconds.<br /><br />If Starcall hits a champion Soraka gains <keywordMajor>Rejuvenation</keywordMajor> for {{ hotduration }} seconds, which restores <scaleAP>{{ totalhot }}</scaleAP> Health over that duration and grants {{ movespeedhaste*100 }}% decaying Movement Speed. ",
           "leveltip": {
             "label": [
               "Damage",
@@ -168,13 +168,13 @@
           ],
           "cooldownBurn": "8/7/6/5/4",
           "cost": [
+            45,
+            50,
+            55,
             60,
-            65,
-            70,
-            75,
-            80
+            65
           ],
-          "costBurn": "60/65/70/75/80",
+          "costBurn": "45/50/55/60/65",
           "datavalues": {},
           "effect": [
             null,
@@ -288,7 +288,7 @@
           "id": "SorakaW",
           "name": "Astral Infusion",
           "description": "Soraka sacrifices a portion of her own health to heal another friendly champion.",
-          "tooltip": "Restores <scaleAP>{{ totalheal }}</scaleAP> health to another champion ally.<br /><br />If cast while affected by <keywordMajor>Rejuvenation</keywordMajor>, the Max Health cost will be reduced by {{ percenthealthcostrefund*100 }}% and also grant her target <keywordMajor>Rejuvenation</keywordMajor>, healing them for <scaleAP>{{ spell.sorakaq:totalhot }}</scaleAP> and granting them {{ spell.sorakaq:movespeedhaste*100 }}% movement speed decaying over {{ spell.sorakaq:hotduration }} seconds.<br /><br /><span class=\"color919191\"><i>Cannot be cast if Soraka is below <scaleHealth>{{ minimumhealth }}Health</scaleHealth> (5% of her max health).</i></span>",
+          "tooltip": "Restores <scaleAP>{{ totalheal }}</scaleAP> Health to another champion ally.<br /><br />If cast while affected by <keywordMajor>Rejuvenation</keywordMajor>, the Max Health cost will be reduced by {{ percenthealthcostrefund*100 }}% and also grant her target <keywordMajor>Rejuvenation</keywordMajor>, healing them for <scaleAP>{{ spell.sorakaq:totalhot }}</scaleAP> and granting them {{ spell.sorakaq:movespeedhaste*100 }}% Movement Speed decaying over {{ spell.sorakaq:hotduration }} seconds.<br /><br /><span class=\"color919191\"><i>Cannot be cast if Soraka is below <scaleHealth>{{ minimumhealth }}Health</scaleHealth> (5% of her Max Health).</i></span>",
           "leveltip": {
             "label": [
               "Healing",

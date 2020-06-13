@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.6.1",
+  "version": "10.12.1",
   "data": {
     "Lux": {
       "id": "Lux",
@@ -446,17 +446,19 @@
           "id": "LuxLightStrikeKugel",
           "name": "Lucent Singularity",
           "description": "Fires an anomaly of twisted light to an area, which slows nearby enemies. Lux can detonate it to damage enemies in the area of effect.",
-          "tooltip": "Creates a zone that slows enemies by {{ e1 }}% and illuminates the area. After {{ e3 }} seconds the zone detonates dealing {{ e2 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage.<br /><br />Activate again to detonate early.",
+          "tooltip": "Creates a zone that slows enemies by {{ e1 }}% and illuminates the area. After {{ e3 }} seconds the zone detonates dealing {{ e2 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage, slowing enemies hit for an additional {{ slowlingerduration }} second.<br /><br />Activate again to detonate early.",
           "leveltip": {
             "label": [
               "Damage",
               "Movement Slow",
-              "@AbilityResourceName@ Cost"
+              "@AbilityResourceName@ Cost",
+              "Cooldown"
             ],
             "effect": [
               "{{ e2 }} -> {{ e2NL }}",
               "{{ e1 }} -> {{ e1NL }}",
-              "{{ cost }} -> {{ costNL }}"
+              "{{ cost }} -> {{ costNL }}",
+              "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
           "maxrank": 5,

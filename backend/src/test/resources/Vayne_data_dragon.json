@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.6.1",
+  "version": "10.12.1",
   "data": {
     "Vayne": {
       "id": "Vayne",
@@ -82,6 +82,12 @@
           "id": "67013",
           "num": 13,
           "name": "Firecracker Vayne Prestige Edition",
+          "chromas": false
+        },
+        {
+          "id": "67015",
+          "num": 15,
+          "name": "FPX Vayne",
           "chromas": false
         }
       ],
@@ -416,7 +422,7 @@
           "id": "VayneCondemn",
           "name": "Condemn",
           "description": "Vayne draws a heavy crossbow from her back, and fires a huge bolt at her target, knocking them back and dealing damage. If they collide with terrain, they are impaled, dealing bonus damage and stunning them.",
-          "tooltip": "Fires a bolt that knocks back a target and deals {{ totaldamage }} damage. If the target collides with terrain, the damage is increased by {{ stundamage*100 }}% and the target is stunned for {{ stunduration }} seconds. ",
+          "tooltip": "Fires a bolt that knocks back a target and deals <scaleAD>{{ totaldamage }}</scaleAD> damage. If the target collides with terrain, the damage is increased by {{ stundamage*100 }}% and the target is stunned for {{ stunduration }} seconds. ",
           "leveltip": {
             "label": [
               "Cooldown",

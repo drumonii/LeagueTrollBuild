@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.6.1",
+  "version": "10.12.1",
   "data": {
     "Gnar": {
       "id": "Gnar",
@@ -59,6 +59,12 @@
           "num": 14,
           "name": "SSG Gnar",
           "chromas": false
+        },
+        {
+          "id": "150015",
+          "num": 15,
+          "name": "Astronaut Gnar",
+          "chromas": true
         }
       ],
       "lore": "Gnar is a primeval yordle whose playful antics can erupt into a toddler's outrage in an instant, transforming him into a massive beast bent on destruction. Frozen in True Ice for millennia, the curious creature broke free and now hops about a changed world he sees as exotic and wondrous. Delighted by danger, Gnar flings whatever he can at his enemies, be it his bonetooth boomerang, or a nearby building.",
@@ -256,7 +262,7 @@
           "id": "GnarW",
           "name": "Hyper / Wallop",
           "description": "Gnar's attacks and spells hype him up, dealing bonus damage and granting him Movement Speed.<br><br>Mega Gnar is too enraged to be hyper and instead can rear up on his hind legs and smash down on the area in front of him, stunning enemies in an area.",
-          "tooltip": "<span class=\"color33FF33\">Mini Gnar: </span><spellPassive>Passive:</spellPassive> Every 3rd attack or spell on the same target deals an additional <magicDamage>{{ minitotaldamage }}</magicDamage> +{{ minipercenthpdamage*100 }}% of the target's max Health as magic damage and grants Gnar {{ f1 }}% Movement Speed that decays over 3 seconds (max {{ minimonstercap }} damage vs. monsters). <br /><br /><scaleHealth>Mega Gnar: </scaleHealth>Stuns enemies in an area for {{ megastunduration }} seconds, dealing <physicalDamage>{{ megatotaldamage }} physical damage</physicalDamage>.<br /><br />Gnar gains Hyper's Movement Speed bonus when he leaves Mega form.",
+          "tooltip": "<span class=\"color33FF33\">Mini Gnar: </span><spellPassive>Passive:</spellPassive> Every 3rd attack or spell on the same target deals an additional <magicDamage>{{ minitotaldamage }}</magicDamage> +{{ minipercenthpdamage*100 }}% of the target's max Health as <magicDamage>magic damage</magicDamage> and grants Gnar {{ f1 }}% Movement Speed that decays over 3 seconds (max {{ minimonstercap }} damage vs. monsters). <br /><br /><scaleHealth>Mega Gnar: </scaleHealth>Stuns enemies in an area for {{ megastunduration }} seconds, dealing <physicalDamage>{{ megatotaldamage }} physical damage</physicalDamage>.<br /><br />Gnar gains Hyper's Movement Speed bonus when he leaves Mega form.",
           "leveltip": {
             "label": [
               "Hyper Damage",
@@ -402,12 +408,14 @@
           "tooltip": "<span class=\"color33FF33\">Mini Gnar: </span>Leaps to a location, gaining {{ minibas*100 }}% Attack Speed for {{ miniasduration }} seconds. If Gnar lands on a unit he will bounce off it, traveling further. Deals <physicalDamage>{{ minitotaldamage }} physical damage</physicalDamage> and slows briefly if the unit landed on was an enemy.<br /><br /><scaleHealth>Mega Gnar: </scaleHealth>Leaps to a location and deals <physicalDamage>{{ megatotaldamage }} physical damage</physicalDamage> to nearby enemies on landing. Enemies Gnar lands directly on top of are slowed briefly.<br /><br />If Crunch is used to transform, Gnar will still be able to bounce.",
           "leveltip": {
             "label": [
-              "Damage",
+              "Hop Damage",
+              "Crunch Damage",
               "Bonus Attack Speed",
               "Cooldown"
             ],
             "effect": [
               "{{ minidamage }} -> {{ minidamageNL }}",
+              "{{ megadamage }} -> {{ megadamageNL }}",
               "{{ minibas*100.000000 }}% -> {{ minibasnl*100.000000 }}%",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
@@ -542,7 +550,7 @@
           "id": "GnarR",
           "name": "GNAR!",
           "description": "Mega Gnar throws everything around him in a chosen direction, dealing damage and slowing them.  Any enemy that hits a wall is stunned and takes bonus damage.",
-          "tooltip": "<span class=\"color33FF33\">Mini Gnar: </span><spellPassive>Passive:</spellPassive> Increases Hyper's Movement Speed bonus to {{ rhypermovementspeedpercent }}%.<br /><br /><scaleHealth>Mega Gnar: </scaleHealth>Knocks nearby enemies in the specified direction, dealing <physicalDamage>{{ damage }}</physicalDamage> physical damage and slowing them by {{ rslowpercent }}% for {{ rccduration }} seconds. Enemies that hit a wall take {{ rwallhitdamagemultiplier }}% damage and are stunned instead of slowed.",
+          "tooltip": "<span class=\"color33FF33\">Mini Gnar: </span><spellPassive>Passive:</spellPassive> Increases <spellName>Hyper's</spellName> Movement Speed bonus to {{ rhypermovementspeedpercent }}%.<br /><br /><span class=\"colorFF3300\">Mega Gnar: </span>Knocks nearby enemies in the specified direction, dealing <physicalDamage>{{ damage }} physical damage</physicalDamage> and slowing them by {{ rslowpercent }}% for {{ rccduration }} seconds. Enemies that hit a wall take {{ rwallhitdamagemultiplier }}% damage and are stunned instead of slowed.",
           "leveltip": {
             "label": [
               "Damage",

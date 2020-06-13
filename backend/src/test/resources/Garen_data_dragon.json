@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.6.1",
+  "version": "10.12.1",
   "data": {
     "Garen": {
       "id": "Garen",
@@ -148,7 +148,7 @@
           "id": "GarenQ",
           "name": "Decisive Strike",
           "description": "Garen gains a burst of movement speed, breaking free of all slows affecting him. His next attack strikes a vital area of his foe, dealing bonus damage and silencing them.",
-          "tooltip": "Garen breaks free from all slows affecting him, and gains {{ movementspeedamount*100 }}% movement speed for {{ movementspeedduration }} seconds.<br /><br />His next basic attack within {{ attackwindow }} seconds deals <physicalDamage>{{ totaldamage }} physical damage</physicalDamage> and silences his target for {{ silenceduration }} seconds.",
+          "tooltip": "Garen breaks free from all slows affecting him, and gains {{ movementspeedamount*100 }}% movement speed for {{ movementspeedduration }} second(s).<br /><br />His next basic attack within {{ attackwindow }} seconds deals <physicalDamage>{{ totaldamage }} physical damage</physicalDamage> and silences his target for {{ silenceduration }} seconds.",
           "leveltip": {
             "label": [
               "Damage",
@@ -573,7 +573,7 @@
           "id": "GarenR",
           "name": "Demacian Justice",
           "description": "Garen calls upon the might of Demacia to attempt to execute an enemy champion.",
-          "tooltip": "Garen calls upon the might of Demacia to attempt to execute an enemy champion, dealing true damage equal to {{ basedamage }} plus {{ executedamage*100 }}% of the target's missing health.",
+          "tooltip": "Garen calls upon the might of Demacia to attempt to execute an enemy champion, dealing <trueDamage>true damage</trueDamage> equal to <trueDamage>{{ basedamage }}</trueDamage> plus {{ executedamage*100 }}% of the target's missing health.",
           "leveltip": {
             "label": [
               "Cooldown",

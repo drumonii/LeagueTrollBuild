@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.6.1",
+  "version": "10.12.1",
   "data": {
     "Poppy": {
       "id": "Poppy",
@@ -77,6 +77,12 @@
           "num": 15,
           "name": "Hextech Poppy",
           "chromas": false
+        },
+        {
+          "id": "78016",
+          "num": 16,
+          "name": "Astronaut Poppy",
+          "chromas": true
         }
       ],
       "lore": "Runeterra has no shortage of valiant champions, but few are as tenacious as Poppy. Bearing the legendary hammer of Orlon, a weapon twice her size, this determined yordle has spent untold years searching in secret for the fabled “Hero of Demacia,” said to be its rightful wielder. Until then, she dutifully charges into battle, pushing back the kingdom's enemies with every whirling strike.",
@@ -134,13 +140,15 @@
               "Damage",
               "Slow",
               "Cooldown",
-              "@AbilityResourceName@ Cost"
+              "@AbilityResourceName@ Cost",
+              "Monster Cap"
             ],
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
               "{{ e3 }}% -> {{ e3NL }}%",
               "{{ cooldown }} -> {{ cooldownNL }}",
-              "{{ cost }} -> {{ costNL }}"
+              "{{ cost }} -> {{ costNL }}",
+              "{{ e6 }} -> {{ e6NL }}"
             ]
           },
           "maxrank": 5,

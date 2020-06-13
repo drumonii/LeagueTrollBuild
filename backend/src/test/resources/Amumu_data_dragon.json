@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.6.1",
+  "version": "10.12.1",
   "data": {
     "Amumu": {
       "id": "Amumu",
@@ -135,7 +135,7 @@
           "id": "BandageToss",
           "name": "Bandage Toss",
           "description": "Amumu tosses a sticky bandage at a target, stunning and damaging the target while he pulls himself to them.",
-          "tooltip": "Launches a bandage in a direction. If it hits an enemy unit, Amumu pulls himself to them, dealing {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage and stunning for {{ e2 }} second. ",
+          "tooltip": "Launches a bandage in a direction. If it hits an enemy unit, Amumu pulls himself to them, dealing <magicDamage>{{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage</magicDamage> and stunning for {{ e2 }} second. ",
           "leveltip": {
             "label": [
               "Damage",
@@ -284,10 +284,10 @@
           "id": "AuraofDespair",
           "name": "Despair",
           "description": "Overcome by anguish, nearby enemies lose a percentage of their maximum Health each second and have their <font color='#9b0f5f'>Curses</font> refreshed.",
-          "tooltip": "<spellPassive>Toggle: </spellPassive>Amumu cries, refreshing <span class=\"color9b0f5f\">Curses</span> on nearby enemies and dealing magic damage equal to {{ e2 }} plus {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP>% of their maximum health each second.",
+          "tooltip": "<spellPassive>Toggle: </spellPassive>Amumu cries, refreshing <span class=\"color9b0f5f\">Curses</span> on nearby enemies and dealing <magicDamage>magic damage</magicDamage> equal to {{ e2 }} plus {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP>% of their maximum health each second.",
           "leveltip": {
             "label": [
-              "Percent Health Damaged",
+              "Percent Health Damage",
               "Base Damage"
             ],
             "effect": [
@@ -431,7 +431,7 @@
           "id": "Tantrum",
           "name": "Tantrum",
           "description": "Permanently reduces the physical damage Amumu would take. Amumu can unleash his rage, dealing damage to surrounding enemies. Each time Amumu is hit, the cooldown on Tantrum is reduced by 0.5 seconds.",
-          "tooltip": "<spellPassive>Passive: </spellPassive>Amumu takes {{ e1 }} <span class=\"colorFFFF00\">(+{{ f1 }})</span><span class=\"colorFF00FF\">(+{{ f2 }})</span> reduced physical damage.<br /><br /><spellPassive>Active: </spellPassive>Amumu tantrums, dealing {{ e2 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage to surrounding units. Basic attacks that hit Amumu reduce Tantrum's cooldown by 0.5 seconds.<br /><br /><rules><span class=\"color8c8c8c\">Tantrum's passive effect increases in potency with bonus Armor and Magic Resist.</span></rules>",
+          "tooltip": "<spellPassive>Passive: </spellPassive>Amumu takes {{ e1 }} <scaleArmor>(+{{ f1 }})</scaleArmor><scaleMR>(+{{ f2 }})</scaleMR> reduced physical damage.<br /><br /><spellPassive>Active: </spellPassive>Amumu tantrums, dealing <magicDamage>{{ e2 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage</magicDamage> to surrounding units. Basic attacks that hit Amumu reduce Tantrum's cooldown by 0.5 seconds.<br /><br /><rules><span class=\"color8c8c8c\">Tantrum's passive effect increases in potency with bonus Armor and Magic Resist.</span></rules>",
           "leveltip": {
             "label": [
               "Damage Reduced",
@@ -580,7 +580,7 @@
           "id": "CurseoftheSadMummy",
           "name": "Curse of the Sad Mummy",
           "description": "Amumu entangles surrounding enemy units in bandages, applying his <font color='#9b0f5f'>Curse</font>, damaging them and rendering them unable to attack or move.",
-          "tooltip": "Amumu entangles nearby enemy units, dealing {{ rcalculateddamage }} magic damage and applying <span class=\"color9b0f5f\">Curse</span>. Entangled enemies are unable to attack or move for {{ rduration }} seconds.",
+          "tooltip": "Amumu entangles nearby enemy units, dealing <magicDamage>{{ rcalculateddamage }} magic damage</magicDamage> and applying <span class=\"color9b0f5f\">Curse</span>. Entangled enemies are unable to attack or move for {{ rduration }} seconds.",
           "leveltip": {
             "label": [
               "Damage",

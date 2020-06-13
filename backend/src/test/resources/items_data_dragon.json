@@ -1,6 +1,6 @@
 {
   "type": "item",
-  "version": "10.6.1",
+  "version": "10.12.1",
   "basic": {
     "name": "",
     "rune": {
@@ -694,7 +694,7 @@
     },
     "1039": {
       "name": "Hunter's Talisman",
-      "description": "<br><unique>UNIQUE Passive - Tooth:</unique> Damaging a monster with a spell or attack  steals 30 Health over 5 seconds and burns them for 60 magic damage. <mana>While in the jungle or river, regenerate up to 8 Mana per second based on your missing Mana.</mana> This item grants <font color='#99BBBB'><a href='SpecialJungleExperience'>Monster Hunter</a></font>.<br><br><groupLimit>Limited to 1 Gold Income or Jungle item.</groupLimit>",
+      "description": "<br><unique>UNIQUE Passive - Tooth:</unique> Damaging a monster with a spell or attack  steals 30 Health over 5 seconds and burns them for 60 magic damage. <mana>While in the jungle or river, regenerate up to 8 Mana per second based on your missing Mana.</mana> This item grants <font color='#99BBBB'><a href='SpecialJungleExperience'>Monster Hunter</a></font>. This item's healing will be increased by 50% when under 30% Health.<br><br><groupLimit>Limited to 1 Gold Income or Jungle item.</groupLimit>",
       "colloq": ";jungle;Jungle",
       "plaintext": "Provides damage against Monsters and Mana Regen in the Jungle",
       "into": [
@@ -732,12 +732,14 @@
         "Effect1Amount": "60",
         "Effect2Amount": "30",
         "Effect3Amount": "5",
-        "Effect4Amount": "8"
+        "Effect4Amount": "8",
+        "Effect5Amount": "0.3",
+        "Effect6Amount": "0.5"
       }
     },
     "1041": {
       "name": "Hunter's Machete",
-      "description": "<stats>+10% Life Steal vs. Monsters</stats><br><br><unique>UNIQUE Passive - Nail:</unique> Basic attacks vs. Monsters deal 35 bonus damage on hit. This item grants <font color='#99BBBB'><a href='SpecialJungleExperience'>Monster Hunter</a></font>.<br><br><groupLimit>Limited to 1 Gold Income or Jungle item.</groupLimit>",
+      "description": "<stats>+10% Life Steal vs. Monsters</stats><br><br><unique>UNIQUE Passive - Nail:</unique> Basic attacks vs. Monsters deal 35 bonus damage on hit. This item grants <font color='#99BBBB'><a href='SpecialJungleExperience'>Monster Hunter</a></font>. This item's healing will be increased by 50% when under 30% Health.<br><br><groupLimit>Limited to 1 Gold Income or Jungle item.</groupLimit>",
       "colloq": ";jungle;Jungle",
       "plaintext": "Provides damage and life steal versus Monsters",
       "into": [
@@ -772,7 +774,9 @@
       "stats": {},
       "effect": {
         "Effect1Amount": "35",
-        "Effect2Amount": "0.1"
+        "Effect2Amount": "0.1",
+        "Effect3Amount": "0.3",
+        "Effect4Amount": "0.5"
       }
     },
     "1042": {
@@ -1284,7 +1288,12 @@
         "Effect5Amount": "40",
         "Effect6Amount": "0.1",
         "Effect7Amount": "2",
-        "Effect8Amount": "-0.2"
+        "Effect8Amount": "-0.2",
+        "Effect9Amount": "0",
+        "Effect10Amount": "0",
+        "Effect11Amount": "0",
+        "Effect12Amount": "0.3",
+        "Effect13Amount": "0.5"
       },
       "depth": 3
     },
@@ -1330,7 +1339,12 @@
         "Effect5Amount": "40",
         "Effect6Amount": "0.1",
         "Effect7Amount": "2",
-        "Effect8Amount": "-0.2"
+        "Effect8Amount": "-0.2",
+        "Effect9Amount": "0",
+        "Effect10Amount": "0",
+        "Effect11Amount": "0",
+        "Effect12Amount": "0.3",
+        "Effect13Amount": "0.5"
       },
       "depth": 3
     },
@@ -1378,7 +1392,12 @@
         "Effect5Amount": "40",
         "Effect6Amount": "0.1",
         "Effect7Amount": "2",
-        "Effect8Amount": "-0.2"
+        "Effect8Amount": "-0.2",
+        "Effect9Amount": "0",
+        "Effect10Amount": "0",
+        "Effect11Amount": "0",
+        "Effect12Amount": "0.3",
+        "Effect13Amount": "0.5"
       },
       "depth": 3
     },
@@ -1427,7 +1446,9 @@
         "Effect8Amount": "18",
         "Effect9Amount": "2",
         "Effect10Amount": "0.2",
-        "Effect11Amount": "0.1"
+        "Effect11Amount": "0.1",
+        "Effect12Amount": "0.3",
+        "Effect13Amount": "0.5"
       },
       "depth": 3
     },
@@ -1476,7 +1497,9 @@
         "Effect8Amount": "18",
         "Effect9Amount": "2",
         "Effect10Amount": "0.2",
-        "Effect11Amount": "0.1"
+        "Effect11Amount": "0.1",
+        "Effect12Amount": "0.3",
+        "Effect13Amount": "0.4"
       },
       "depth": 3
     },
@@ -1527,7 +1550,9 @@
         "Effect8Amount": "18",
         "Effect9Amount": "2",
         "Effect10Amount": "0.2",
-        "Effect11Amount": "0.1"
+        "Effect11Amount": "0.1",
+        "Effect12Amount": "0.3",
+        "Effect13Amount": "0.5"
       },
       "depth": 3
     },
@@ -1573,7 +1598,12 @@
         "Effect5Amount": "40",
         "Effect6Amount": "0.1",
         "Effect7Amount": "2",
-        "Effect8Amount": "-0.2"
+        "Effect8Amount": "-0.2",
+        "Effect9Amount": "0",
+        "Effect10Amount": "0",
+        "Effect11Amount": "0",
+        "Effect12Amount": "0.3",
+        "Effect13Amount": "0.5"
       },
       "depth": 3
     },
@@ -1621,8 +1651,10 @@
         "Effect7Amount": "3",
         "Effect8Amount": "18",
         "Effect9Amount": "2",
-        "Effect10Amount": "0.2",
-        "Effect11Amount": "0.1"
+        "Effect10Amount": "0",
+        "Effect11Amount": "0.1",
+        "Effect12Amount": "0.3",
+        "Effect13Amount": "0.5"
       },
       "depth": 3
     },
@@ -3788,7 +3820,7 @@
     },
     "3046": {
       "name": "Phantom Dancer",
-      "description": "<stats>+30% Attack Speed<br>+25% Critical Strike Chance<br>+5% Movement Speed</stats><br><br><unique>UNIQUE Passive - Spectral Waltz:</unique> Basic attacking a champion grants ghosting and 7% Movement Speed for 2 seconds.<br><unique>UNIQUE Passive - Lifeline:</unique> If you would take damage that would reduce your Health below 30%, gain a shield that absorbs up to 240 - 600 damage for 2 seconds. (90 second cooldown)",
+      "description": "<stats>+30% Attack Speed<br>+25% Critical Strike Chance<br>+7% Movement Speed</stats><br><br><unique>UNIQUE Passive - Spectral Waltz:</unique> Basic attacking a champion grants ghosting and 7% Movement Speed for 2 seconds.<br><unique>UNIQUE Passive - Lifeline:</unique> If you would take damage that would reduce your Health below 30%, gain a shield that absorbs up to 240 - 600 damage for 2 seconds. (90 second cooldown)",
       "colloq": ";pd",
       "plaintext": "Move faster while attacking enemies and gain a shield when on low health.",
       "from": [
@@ -3822,7 +3854,7 @@
       },
       "stats": {
         "FlatCritChanceMod": 0.25,
-        "PercentMovementSpeedMod": 0.05,
+        "PercentMovementSpeedMod": 0.07,
         "PercentAttackSpeedMod": 0.3
       },
       "effect": {
@@ -4895,7 +4927,7 @@
     },
     "3085": {
       "name": "Runaan's Hurricane",
-      "description": "<stats>+40% Attack Speed<br>+25% Critical Strike Chance<br>+7% Movement Speed</stats><br><br><unique>UNIQUE Passive - Wind's Fury:</unique> When basic attacking, bolts are fired at up to 2 enemies near the target, each dealing (40% of Attack Damage) physical damage. Bolts can critically strike and apply on hit effects.",
+      "description": "<stats>+40% Attack Speed<br>+25% Critical Strike Chance<br>+9% Movement Speed</stats><br><br><unique>UNIQUE Passive - Wind's Fury:</unique> When basic attacking, bolts are fired at up to 2 enemies near the target, each dealing (40% of Attack Damage) physical damage. Bolts can critically strike and apply on hit effects.",
       "colloq": ";",
       "plaintext": "Ranged attacks fire two bolts at nearby enemies",
       "from": [
@@ -4931,7 +4963,7 @@
       },
       "stats": {
         "FlatCritChanceMod": 0.25,
-        "PercentMovementSpeedMod": 0.07,
+        "PercentMovementSpeedMod": 0.09,
         "PercentAttackSpeedMod": 0.4
       },
       "effect": {
@@ -4946,7 +4978,7 @@
     },
     "3086": {
       "name": "Zeal",
-      "description": "<stats>+12% Attack Speed<br>+25% Critical Strike Chance</stats><br><br><unique>UNIQUE Passive:</unique> +5% Movement Speed",
+      "description": "<stats>+12% Attack Speed<br>+25% Critical Strike Chance</stats><br><br><unique>UNIQUE Passive:</unique> +7% Movement Speed",
       "colloq": ";",
       "plaintext": "Slight bonuses to Critical Strike Chance, Movement Speed and Attack Speed",
       "from": [
@@ -4989,13 +5021,13 @@
         "PercentAttackSpeedMod": 0.12
       },
       "effect": {
-        "Effect1Amount": "0.05"
+        "Effect1Amount": "0.07"
       },
       "depth": 2
     },
     "3087": {
       "name": "Statikk Shiv",
-      "description": "<stats>+40% Attack Speed<br>+25% Critical Strike Chance<br>+5% Movement Speed</stats><br><br><unique>UNIQUE Passive - Energized:</unique> Moving and attacking will make an attack <a href='Energized'>Energized</a>. <br><unique>UNIQUE Passive - Electroshock:</unique> Energized attacks gain <magicDamage>120 bonus magic damage</magicDamage>. Energized effects chain to 7 targets.",
+      "description": "<stats>+40% Attack Speed<br>+25% Critical Strike Chance<br>+7% Movement Speed</stats><br><br><unique>UNIQUE Passive - Energized:</unique> Moving and attacking will make an attack <a href='Energized'>Energized</a>. <br><unique>UNIQUE Passive - Electroshock:</unique> Energized attacks gain <magicDamage>120 bonus magic damage</magicDamage>. Energized effects chain to 7 targets.",
       "colloq": ";",
       "plaintext": "Movement builds charges that release chain lightning on basic attack",
       "from": [
@@ -5030,7 +5062,7 @@
       },
       "stats": {
         "FlatCritChanceMod": 0.25,
-        "PercentMovementSpeedMod": 0.05,
+        "PercentMovementSpeedMod": 0.07,
         "PercentAttackSpeedMod": 0.4
       },
       "effect": {
@@ -5141,7 +5173,7 @@
     },
     "3094": {
       "name": "Rapid Firecannon",
-      "description": "<stats>+30% Attack Speed<br>+25% Critical Strike Chance<br>+5% Movement Speed</stats><br><br><unique>UNIQUE Passive - Energized:</unique> Moving and attacking will make an attack <a href='Energized'>Energized</a>. <br><unique>UNIQUE Passive - Sharpshooter:</unique> Your Energized attacks gain <magicDamage>120 bonus magic damage</magicDamage>. Energized attacks gain 35% bonus range (+150 range maximum).",
+      "description": "<stats>+30% Attack Speed<br>+25% Critical Strike Chance<br>+7% Movement Speed</stats><br><br><unique>UNIQUE Passive - Energized:</unique> Moving and attacking will make an attack <a href='Energized'>Energized</a>. <br><unique>UNIQUE Passive - Sharpshooter:</unique> Your Energized attacks gain <magicDamage>120 bonus magic damage</magicDamage>. Energized attacks gain 35% bonus range (+150 range maximum).",
       "colloq": ";canon;rapidfire;rfc",
       "plaintext": "Movement builds charges that release a sieging fire attack on release",
       "from": [
@@ -5176,7 +5208,7 @@
       },
       "stats": {
         "FlatCritChanceMod": 0.25,
-        "PercentMovementSpeedMod": 0.05,
+        "PercentMovementSpeedMod": 0.07,
         "PercentAttackSpeedMod": 0.3
       },
       "effect": {
@@ -7292,7 +7324,7 @@
     },
     "3181": {
       "name": "Sanguine Blade",
-      "description": "<stats>+50 Attack Damage<br>+15% Life Steal</stats><br><br><unique>UNIQUE Passive:</unique> +10 <a href='Lethality'>Lethality</a><br><unique>UNIQUE Passive - Blood Pursuit:</unique> While near one or fewer visible enemy champions gain 8 <a href='Lethality'>Lethality</a> and 20%-80% Attack Speed (based on level), decaying over 3 seconds if other enemy champions get too close.",
+      "description": "<stats>+55 Attack Damage<br>+15% Life Steal</stats><br><br><unique>UNIQUE Passive:</unique> +10 <a href='Lethality'>Lethality</a><br><unique>UNIQUE Passive - Blood Pursuit:</unique> While near one or fewer visible enemy champions gain 8 <a href='Lethality'>Lethality</a> and 20%-80% Attack Speed (based on level), decaying over 3 seconds if other enemy champions get too close.",
       "colloq": ";lethality",
       "plaintext": "When hunting lone enemy champions gain Attack Speed and Lethality",
       "from": [
@@ -7309,10 +7341,10 @@
         "h": 48
       },
       "gold": {
-        "base": 1100,
+        "base": 1000,
         "purchasable": true,
-        "total": 3100,
-        "sell": 2170
+        "total": 3000,
+        "sell": 2100
       },
       "tags": [
         "Damage",
@@ -7326,7 +7358,7 @@
         "22": false
       },
       "stats": {
-        "FlatPhysicalDamageMod": 50,
+        "FlatPhysicalDamageMod": 55,
         "PercentLifeStealMod": 0.15
       },
       "effect": {
@@ -7899,6 +7931,51 @@
       },
       "depth": 3
     },
+    "3330": {
+      "name": "Scarecrow Effigy (Trinket)",
+      "description": "<groupLimit>Limited to 1 Trinket.</groupLimit><br><br><active>Active:</active> Consume a charge to place an <font color='#FFFFFF'>Effigy</font> which reveals the surrounding area. <br><br><font color='#FFFFFF'>Effigies</font> recharge more quickly and live longer based on Fiddlesticks' character level.",
+      "colloq": "yellow; totem; trinket",
+      "plaintext": "Periodically place a Stealth Ward",
+      "requiredChampion": "FiddleSticks",
+      "image": {
+        "full": "3330.png",
+        "sprite": "item1.png",
+        "group": "item",
+        "x": 384,
+        "y": 288,
+        "w": 48,
+        "h": 48
+      },
+      "gold": {
+        "base": 0,
+        "purchasable": true,
+        "total": 0,
+        "sell": 0
+      },
+      "tags": [
+        "Active",
+        "Jungle",
+        "Lane",
+        "Trinket",
+        "Vision"
+      ],
+      "maps": {
+        "11": true,
+        "12": true,
+        "22": false
+      },
+      "stats": {},
+      "effect": {
+        "Effect1Amount": "90",
+        "Effect2Amount": "240",
+        "Effect3Amount": "120",
+        "Effect4Amount": "120",
+        "Effect5Amount": "2",
+        "Effect6Amount": "9",
+        "Effect7Amount": "30",
+        "Effect8Amount": "120"
+      }
+    },
     "3340": {
       "name": "Warding Totem (Trinket)",
       "description": "<groupLimit>Limited to 1 Trinket.</groupLimit><br><br><active>Active:</active> Consume a charge to place an invisible <font color='#BBFFFF'>Stealth Ward</font> which reveals the surrounding area for <scaleLevel>90 - 120</scaleLevel> seconds. <br><br>Stores one charge every <scaleLevel>240 - 120</scaleLevel> seconds, up to 2 maximum charges.<br><br>Ward duration and recharge time gradually improve with level.<br><br><rules>(Limit 3 <font color='#BBFFFF'>Stealth Wards</font> on the map per player.)</rules>",
@@ -7908,7 +7985,7 @@
         "full": "3340.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 384,
+        "x": 432,
         "y": 288,
         "w": 48,
         "h": 48
@@ -7953,8 +8030,8 @@
         "full": "3348.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 432,
-        "y": 288,
+        "x": 0,
+        "y": 336,
         "w": 48,
         "h": 48
       },
@@ -7995,7 +8072,7 @@
         "full": "3361.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 0,
+        "x": 48,
         "y": 336,
         "w": 48,
         "h": 48
@@ -8038,7 +8115,7 @@
         "full": "3362.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 48,
+        "x": 96,
         "y": 336,
         "w": 48,
         "h": 48
@@ -8080,7 +8157,7 @@
         "full": "3363.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 96,
+        "x": 144,
         "y": 336,
         "w": 48,
         "h": 48
@@ -8129,7 +8206,7 @@
         "full": "3364.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 144,
+        "x": 192,
         "y": 336,
         "w": 48,
         "h": 48
@@ -8176,7 +8253,7 @@
         "full": "3371.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 192,
+        "x": 240,
         "y": 336,
         "w": 48,
         "h": 48
@@ -8218,7 +8295,7 @@
         "full": "3373.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 240,
+        "x": 288,
         "y": 336,
         "w": 48,
         "h": 48
@@ -8264,7 +8341,7 @@
         "full": "3374.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 288,
+        "x": 336,
         "y": 336,
         "w": 48,
         "h": 48
@@ -8304,7 +8381,7 @@
         "full": "3379.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 336,
+        "x": 384,
         "y": 336,
         "w": 48,
         "h": 48
@@ -8358,7 +8435,7 @@
         "full": "3380.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 384,
+        "x": 432,
         "y": 336,
         "w": 48,
         "h": 48
@@ -8413,8 +8490,8 @@
         "full": "3382.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 432,
-        "y": 336,
+        "x": 0,
+        "y": 384,
         "w": 48,
         "h": 48
       },
@@ -8466,7 +8543,7 @@
         "full": "3383.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 0,
+        "x": 48,
         "y": 384,
         "w": 48,
         "h": 48
@@ -8515,7 +8592,7 @@
         "full": "3384.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 48,
+        "x": 96,
         "y": 384,
         "w": 48,
         "h": 48
@@ -8569,7 +8646,7 @@
         "full": "3386.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 96,
+        "x": 144,
         "y": 384,
         "w": 48,
         "h": 48
@@ -8615,7 +8692,7 @@
         "full": "3387.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 144,
+        "x": 192,
         "y": 384,
         "w": 48,
         "h": 48
@@ -8652,7 +8729,7 @@
     },
     "3388": {
       "name": "Youmuu's Wraithblade",
-      "description": "<stats><font color='#FFFFFF'>+75 Attack Damage</font><br>+10% Cooldown Reduction</stats><br><br><unique>UNIQUE Passive:</unique> <font color='#FFFFFF'>+25 <a href='Lethality'>Lethality</a></font><br><unique>UNIQUE Passive:</unique> +40 Movement Speed out of Combat<br><active>UNIQUE Active:</active> Grants +20% Movement Speed for 6 seconds (45 second cooldown).",
+      "description": "<stats><font color='#FFFFFF'>+75 Attack Damage</font><br>+10% Cooldown Reduction</stats><br><br><unique>UNIQUE Passive:</unique> <font color='#FFFFFF'>+25 <a href='Lethality'>Lethality</a></font><br><unique>UNIQUE Passive:</unique> +40 Movement Speed out of Combat<br><active>UNIQUE Active:</active> Grants +20% Movement Speed and the ability to move through units for 6 seconds (45 second cooldown).",
       "colloq": ";lethality;Ornn",
       "plaintext": "Activate to greatly increase Movement Speed",
       "from": [
@@ -8663,7 +8740,7 @@
         "full": "3388.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 192,
+        "x": 240,
         "y": 384,
         "w": 48,
         "h": 48
@@ -8712,7 +8789,7 @@
         "full": "3389.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 240,
+        "x": 288,
         "y": 384,
         "w": 48,
         "h": 48
@@ -8763,7 +8840,7 @@
         "full": "3390.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 288,
+        "x": 336,
         "y": 384,
         "w": 48,
         "h": 48
@@ -8814,7 +8891,7 @@
         "full": "3400.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 336,
+        "x": 384,
         "y": 384,
         "w": 48,
         "h": 48
@@ -8849,7 +8926,7 @@
         "full": "3410.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 384,
+        "x": 432,
         "y": 384,
         "w": 48,
         "h": 48
@@ -8893,8 +8970,8 @@
         "full": "3416.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 432,
-        "y": 384,
+        "x": 0,
+        "y": 432,
         "w": 48,
         "h": 48
       },
@@ -8938,7 +9015,7 @@
         "full": "3422.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 0,
+        "x": 48,
         "y": 432,
         "w": 48,
         "h": 48
@@ -8979,7 +9056,7 @@
         "full": "3455.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 48,
+        "x": 96,
         "y": 432,
         "w": 48,
         "h": 48
@@ -9020,7 +9097,7 @@
         "full": "3504.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 96,
+        "x": 144,
         "y": 432,
         "w": 48,
         "h": 48
@@ -9070,7 +9147,7 @@
         "full": "3508.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 144,
+        "x": 192,
         "y": 432,
         "w": 48,
         "h": 48
@@ -9120,7 +9197,7 @@
         "full": "3513.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 192,
+        "x": 240,
         "y": 432,
         "w": 48,
         "h": 48
@@ -9158,7 +9235,7 @@
         "full": "3514.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 240,
+        "x": 288,
         "y": 432,
         "w": 48,
         "h": 48
@@ -9196,7 +9273,7 @@
         "full": "3520.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 288,
+        "x": 336,
         "y": 432,
         "w": 48,
         "h": 48
@@ -9234,7 +9311,7 @@
         "full": "3599.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 336,
+        "x": 384,
         "y": 432,
         "w": 48,
         "h": 48
@@ -9265,7 +9342,7 @@
         "full": "3600.png",
         "sprite": "item1.png",
         "group": "item",
-        "x": 384,
+        "x": 432,
         "y": 432,
         "w": 48,
         "h": 48
@@ -9297,10 +9374,10 @@
       "hideFromAll": true,
       "image": {
         "full": "3671.png",
-        "sprite": "item1.png",
+        "sprite": "item2.png",
         "group": "item",
-        "x": 432,
-        "y": 432,
+        "x": 0,
+        "y": 0,
         "w": 48,
         "h": 48
       },
@@ -9334,7 +9411,7 @@
         "full": "3672.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 0,
+        "x": 48,
         "y": 0,
         "w": 48,
         "h": 48
@@ -9370,7 +9447,7 @@
         "full": "3673.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 48,
+        "x": 96,
         "y": 0,
         "w": 48,
         "h": 48
@@ -9406,7 +9483,7 @@
         "full": "3675.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 96,
+        "x": 144,
         "y": 0,
         "w": 48,
         "h": 48
@@ -9437,7 +9514,7 @@
         "full": "3680.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 144,
+        "x": 192,
         "y": 0,
         "w": 48,
         "h": 48
@@ -9479,7 +9556,7 @@
         "full": "3681.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 192,
+        "x": 240,
         "y": 0,
         "w": 48,
         "h": 48
@@ -9519,7 +9596,7 @@
         "full": "3682.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 240,
+        "x": 288,
         "y": 0,
         "w": 48,
         "h": 48
@@ -9562,7 +9639,7 @@
         "full": "3683.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 288,
+        "x": 336,
         "y": 0,
         "w": 48,
         "h": 48
@@ -9606,7 +9683,7 @@
         "full": "3684.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 336,
+        "x": 384,
         "y": 0,
         "w": 48,
         "h": 48
@@ -9645,7 +9722,7 @@
         "full": "3685.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 384,
+        "x": 432,
         "y": 0,
         "w": 48,
         "h": 48
@@ -9687,8 +9764,8 @@
         "full": "3690.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 432,
-        "y": 0,
+        "x": 0,
+        "y": 48,
         "w": 48,
         "h": 48
       },
@@ -9715,7 +9792,7 @@
         "full": "3691.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 0,
+        "x": 48,
         "y": 48,
         "w": 48,
         "h": 48
@@ -9743,7 +9820,7 @@
         "full": "3692.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 48,
+        "x": 96,
         "y": 48,
         "w": 48,
         "h": 48
@@ -9771,7 +9848,7 @@
         "full": "3693.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 96,
+        "x": 144,
         "y": 48,
         "w": 48,
         "h": 48
@@ -9801,7 +9878,7 @@
         "full": "3694.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 144,
+        "x": 192,
         "y": 48,
         "w": 48,
         "h": 48
@@ -9831,7 +9908,7 @@
         "full": "3695.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 192,
+        "x": 240,
         "y": 48,
         "w": 48,
         "h": 48
@@ -9854,7 +9931,7 @@
     },
     "3706": {
       "name": "Stalker's Blade",
-      "description": "<groupLimit>Limited to 1 Gold Income or Jungle item.</groupLimit><br><br>+10% Life Steal vs. Monsters<br><br><unique>UNIQUE Passive - Chilling Smite:</unique> Smite can be cast on enemy champions, dealing reduced true damage and stealing 20% Movement Speed for 2 seconds.<br><unique>UNIQUE Passive - Tooth / Nail:</unique> Basic attacks vs. monsters deal 40 bonus damage.  Damaging a monster with a spell or attack steals 30 Health over 5 seconds and burns them for 80 magic damage.<mana> While in the jungle or river, regenerate up to 8 Mana per second based on your missing Mana.</mana> This item grants <font color='#99BBBB'><a href='SpecialJungleExperience'>Monster Hunter</a></font>.",
+      "description": "<groupLimit>Limited to 1 Gold Income or Jungle item.</groupLimit><br><br>+10% Life Steal vs. Monsters<br><br><unique>UNIQUE Passive - Chilling Smite:</unique> Smite can be cast on enemy champions, dealing reduced true damage and stealing 20% Movement Speed for 2 seconds.<br><unique>UNIQUE Passive - Tooth / Nail:</unique> Basic attacks vs. monsters deal 40 bonus damage.  Damaging a monster with a spell or attack steals 30 Health over 5 seconds and burns them for 80 magic damage.<mana> While in the jungle or river, regenerate up to 8 Mana per second based on your missing Mana.</mana> This item grants <font color='#99BBBB'><a href='SpecialJungleExperience'>Monster Hunter</a></font>. This item's healing will be increased by 50% when under 30% Health.",
       "colloq": ";jungle;Jungle;jangle",
       "plaintext": "Lets your Smite slow Champions",
       "from": [
@@ -9871,7 +9948,7 @@
         "full": "3706.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 240,
+        "x": 288,
         "y": 48,
         "w": 48,
         "h": 48
@@ -9904,13 +9981,18 @@
         "Effect5Amount": "40",
         "Effect6Amount": "0.1",
         "Effect7Amount": "2",
-        "Effect8Amount": "-0.2"
+        "Effect8Amount": "-0.2",
+        "Effect9Amount": "0",
+        "Effect10Amount": "0",
+        "Effect11Amount": "0",
+        "Effect12Amount": "0.3",
+        "Effect13Amount": "0.5"
       },
       "depth": 2
     },
     "3715": {
       "name": "Skirmisher's Sabre",
-      "description": "<groupLimit>Limited to 1 Gold Income or Jungle item.</groupLimit><br><br>+10% Life Steal vs. Monsters<br><br><unique>UNIQUE Passive - Challenging Smite:</unique> Smite can be cast on enemy champions, marking them for 4 seconds. While marked your basic attacks deal bonus true damage over 2.5 seconds, and their damage to you is reduced by 20%.<br>Basic attacks vs. monsters deal 40 bonus damage. Damaging a monster with a spell or attack steals 30 Health over 5 seconds and burns them for 80 magic damage. While in the jungle or river, regenerate up to 8 Mana per second based on your missing Mana. This item grants <font color='#99BBBB'><a href='SpecialJungleExperience'>Monster Hunter</a></font>.",
+      "description": "<groupLimit>Limited to 1 Gold Income or Jungle item.</groupLimit><br><br>+10% Life Steal vs. Monsters<br><br><unique>UNIQUE Passive - Challenging Smite:</unique> Smite can be cast on enemy champions, marking them for 4 seconds. While marked your basic attacks deal bonus true damage over 2.5 seconds, and their damage to you is reduced by 20%.<br><unique>UNIQUE Passive - Tooth / Nail:</unique>Basic attacks vs. monsters deal 40 bonus damage. Damaging a monster with a spell or attack steals 30 Health over 5 seconds and burns them for 80 magic damage. While in the jungle or river, regenerate up to 8 Mana per second based on your missing Mana. This item grants <font color='#99BBBB'><a href='SpecialJungleExperience'>Monster Hunter</a></font>. This item's healing will be increased by 50% when under 30% Health.",
       "colloq": ";jungle;Jungle",
       "plaintext": "Lets your Smite mark Champions, giving you combat power against them.",
       "from": [
@@ -9927,7 +10009,7 @@
         "full": "3715.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 288,
+        "x": 336,
         "y": 48,
         "w": 48,
         "h": 48
@@ -9961,7 +10043,9 @@
         "Effect8Amount": "14.5",
         "Effect9Amount": "1.5",
         "Effect10Amount": "0.2",
-        "Effect11Amount": "0.1"
+        "Effect11Amount": "0.1",
+        "Effect12Amount": "0.3",
+        "Effect13Amount": "0.5"
       },
       "depth": 2
     },
@@ -9978,7 +10062,7 @@
         "full": "3742.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 336,
+        "x": 384,
         "y": 48,
         "w": 48,
         "h": 48
@@ -10028,7 +10112,7 @@
         "full": "3748.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 384,
+        "x": 432,
         "y": 48,
         "w": 48,
         "h": 48
@@ -10087,8 +10171,8 @@
         "full": "3751.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 432,
-        "y": 48,
+        "x": 0,
+        "y": 96,
         "w": 48,
         "h": 48
       },
@@ -10133,7 +10217,7 @@
         "full": "3800.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 0,
+        "x": 48,
         "y": 96,
         "w": 48,
         "h": 48
@@ -10195,7 +10279,7 @@
         "full": "3801.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 48,
+        "x": 96,
         "y": 96,
         "w": 48,
         "h": 48
@@ -10240,7 +10324,7 @@
         "full": "3802.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 96,
+        "x": 144,
         "y": 96,
         "w": 48,
         "h": 48
@@ -10293,7 +10377,7 @@
         "full": "3812.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 144,
+        "x": 192,
         "y": 96,
         "w": 48,
         "h": 48
@@ -10344,7 +10428,7 @@
         "full": "3814.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 192,
+        "x": 240,
         "y": 96,
         "w": 48,
         "h": 48
@@ -10386,7 +10470,7 @@
         "full": "3850.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 240,
+        "x": 288,
         "y": 96,
         "w": 48,
         "h": 48
@@ -10435,7 +10519,7 @@
         "full": "3851.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 288,
+        "x": 336,
         "y": 96,
         "w": 48,
         "h": 48
@@ -10482,7 +10566,7 @@
         "full": "3853.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 336,
+        "x": 384,
         "y": 96,
         "w": 48,
         "h": 48
@@ -10521,7 +10605,7 @@
         "full": "3854.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 384,
+        "x": 432,
         "y": 96,
         "w": 48,
         "h": 48
@@ -10569,8 +10653,8 @@
         "full": "3855.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 432,
-        "y": 96,
+        "x": 0,
+        "y": 144,
         "w": 48,
         "h": 48
       },
@@ -10615,7 +10699,7 @@
         "full": "3857.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 0,
+        "x": 48,
         "y": 144,
         "w": 48,
         "h": 48
@@ -10654,7 +10738,7 @@
         "full": "3858.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 48,
+        "x": 96,
         "y": 144,
         "w": 48,
         "h": 48
@@ -10702,7 +10786,7 @@
         "full": "3859.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 96,
+        "x": 144,
         "y": 144,
         "w": 48,
         "h": 48
@@ -10748,7 +10832,7 @@
         "full": "3860.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 144,
+        "x": 192,
         "y": 144,
         "w": 48,
         "h": 48
@@ -10787,7 +10871,7 @@
         "full": "3862.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 192,
+        "x": 240,
         "y": 144,
         "w": 48,
         "h": 48
@@ -10836,7 +10920,7 @@
         "full": "3863.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 240,
+        "x": 288,
         "y": 144,
         "w": 48,
         "h": 48
@@ -10883,7 +10967,7 @@
         "full": "3864.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 288,
+        "x": 336,
         "y": 144,
         "w": 48,
         "h": 48
@@ -10925,7 +11009,7 @@
         "full": "3901.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 336,
+        "x": 384,
         "y": 144,
         "w": 48,
         "h": 48
@@ -10956,7 +11040,7 @@
         "full": "3902.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 384,
+        "x": 432,
         "y": 144,
         "w": 48,
         "h": 48
@@ -10987,8 +11071,8 @@
         "full": "3903.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 432,
-        "y": 144,
+        "x": 0,
+        "y": 192,
         "w": 48,
         "h": 48
       },
@@ -11019,7 +11103,7 @@
         "full": "3905.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 0,
+        "x": 48,
         "y": 192,
         "w": 48,
         "h": 48
@@ -11079,7 +11163,7 @@
         "full": "3907.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 48,
+        "x": 96,
         "y": 192,
         "w": 48,
         "h": 48
@@ -11136,7 +11220,7 @@
         "full": "3916.png",
         "sprite": "item2.png",
         "group": "item",
-        "x": 96,
+        "x": 144,
         "y": 192,
         "w": 48,
         "h": 48

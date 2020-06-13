@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.6.1",
+  "version": "10.12.1",
   "data": {
     "DrMundo": {
       "id": "DrMundo",
@@ -134,7 +134,7 @@
           "id": "InfectedCleaverMissileCast",
           "name": "Infected Cleaver",
           "description": "Dr. Mundo hurls his cleaver, dealing damage equal to a portion of his target's current Health and slowing them for a short time. Dr. Mundo delights in the suffering of others, so he is returned a portion of the Health cost when he successfully lands a cleaver (doubled on killing blows).",
-          "tooltip": "Dr. Mundo hurls his cleaver, dealing {{ e2 }}% of the target's current health as magic damage (no less than {{ e1 }}) and slowing them by {{ e4 }}% for {{ e5 }} seconds.<br /><br />If the cleaver hits, {{ f1 }} health is refunded ({{ f2 }} if the cleaver kills).<br /><br /><rules>Infected Cleaver deals no more than {{ e6 }} damage against monsters.</rules>",
+          "tooltip": "Dr. Mundo hurls his cleaver, dealing {{ e2 }}% of the target's current health as <magicDamage>magic damage</magicDamage> (no less than {{ e1 }}) and slowing them by {{ e4 }}% for {{ e5 }} seconds.<br /><br />If the cleaver hits, {{ f1 }} health is refunded ({{ f2 }} if the cleaver kills).<br /><br /><rules>Infected Cleaver deals no more than {{ e6 }} damage against monsters.</rules>",
           "leveltip": {
             "label": [
               "Damage",
@@ -279,7 +279,7 @@
           "id": "BurningAgony",
           "name": "Burning Agony",
           "description": "Dr. Mundo drains his Health to reduce the duration of disables and deal continual damage to nearby enemies.",
-          "tooltip": "<spellActive>Toggle:</spellActive> Dr. Mundo sets himself on fire, dealing {{ damagepersecond }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage to nearby enemies every second.<br /><br />While on fire, the duration of disables against Dr. Mundo are reduced by {{ e5 }}%.",
+          "tooltip": "<spellActive>Toggle:</spellActive> Dr. Mundo sets himself on fire, dealing <magicDamage>{{ damagepersecond }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage</magicDamage> to nearby enemies every second.<br /><br />While on fire, the duration of disables against Dr. Mundo are reduced by {{ e5 }}%.",
           "leveltip": {
             "label": [
               "Damage",
@@ -426,7 +426,7 @@
           "id": "Masochism",
           "name": "Masochism",
           "description": "Dr. Mundo gains bonus attack damage based on his missing health, and his next basic attack headbutts his target for additional damage. Passively increases magic resist whenever Dr. Mundo is dealt magic damage or pays a health cost.",
-          "tooltip": "<spellPassive>Passive:</spellPassive> When Dr. Mundo suffers magic damage or pays a health cost, his magic resist is increased by {{ e8 }}% for {{ e0 }} seconds, up to a maximum of {{ e9 }}%.<br /><br /><spellActive>Active:</spellActive> Dr. Mundo's next basic attack will headbutt the enemy, dealing an additional <scaleHealth>{{ f1 }}</scaleHealth> physical damage ({{ e1 }}% of maximum health) at the cost of {{ e2 }} health.<br /><br />Upon activation, Dr. Mundo gains up to {{ e4 }} attack damage (no less than {{ e5 }}) for {{ e6 }} seconds based on his missing health.<br /><br /><rules>Masochism grants {{ f2 }} attack damage above the minimum for every 1% of missing health (<scaleHealth>{{ f5 }}</scaleHealth>)</rules>.",
+          "tooltip": "<spellPassive>Passive:</spellPassive> When Dr. Mundo suffers magic damage or pays a health cost, his magic resist is increased by {{ e8 }}% for {{ e0 }} seconds, up to a maximum of {{ e9 }}%.<br /><br /><spellActive>Active:</spellActive> Dr. Mundo's next basic attack will headbutt the enemy, dealing an additional <physicalDamage><scaleHealth>{{ f1 }}</scaleHealth> physical damage</physicalDamage> ({{ e1 }}% of maximum health) at the cost of {{ e2 }} health.<br /><br />Upon activation, Dr. Mundo gains up to {{ e4 }} attack damage (no less than {{ e5 }}) for {{ e6 }} seconds based on his missing health.<br /><br /><rules>Masochism grants {{ f2 }} attack damage above the minimum for every 1% of missing health (<scaleHealth>{{ f5 }}</scaleHealth>)</rules>.",
           "leveltip": {
             "label": [
               "Headbutt Damage",

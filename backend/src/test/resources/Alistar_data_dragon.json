@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.6.1",
+  "version": "10.12.1",
   "data": {
     "Alistar": {
       "id": "Alistar",
@@ -153,7 +153,7 @@
           "id": "Pulverize",
           "name": "Pulverize",
           "description": "Alistar smashes the ground, dealing damage to nearby enemies and tossing them into the air.",
-          "tooltip": "Alistar smashes the ground, dealing {{ e2 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage and tossing nearby enemy units into the air for {{ e3 }} second.",
+          "tooltip": "Alistar smashes the ground, dealing <magicDamage>{{ e2 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage</magicDamage> and tossing nearby enemy units into the air for {{ e3 }} second.",
           "leveltip": {
             "label": [
               "Damage",
@@ -302,7 +302,7 @@
           "id": "Headbutt",
           "name": "Headbutt",
           "description": "Alistar rams a target with his head, dealing damage and knocking the target back.",
-          "tooltip": "Alistar rams into an enemy, dealing {{ e2 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage and knocking them back.",
+          "tooltip": "Alistar rams into an enemy, dealing <magicDamage>{{ e2 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage</magicDamage> and knocking them back.",
           "leveltip": {
             "label": [
               "Damage",
@@ -451,7 +451,7 @@
           "id": "AlistarE",
           "name": "Trample",
           "description": "Alistar tramples nearby enemy units, ignoring unit collision and gaining stacks if he damages an enemy champion. At full stacks Alistar's next basic attack against an enemy champion deals additional magic damage and stuns them.",
-          "tooltip": "Alistar tramples the ground, ignoring unit collision and dealing {{ f1 }} <scaleAP>(+{{ f2 }})</scaleAP> magic damage over {{ e3 }} seconds to nearby enemies. Each pulse that damages at least one enemy champion grants Alistar a <span class=\"colorFF6E1C\">Trample</span> stack.<br /><br />At {{ e5 }} <span class=\"colorFF6E1C\">Trample</span> stacks Alistar empowers his next basic attack against an enemy champion to deal an additional <scaleLevel>{{ f3 }}</scaleLevel> magic damage and stun for {{ e6 }} second.",
+          "tooltip": "Alistar tramples the ground, ignoring unit collision and dealing <magicDamage>{{ f1 }} <scaleAP>(+{{ f2 }})</scaleAP> magic damage</magicDamage> over {{ e3 }} seconds to nearby enemies. Each pulse that damages at least one enemy champion grants Alistar a <span class=\"colorFF6E1C\">Trample</span> stack.<br /><br />At {{ e5 }} <span class=\"colorFF6E1C\">Trample</span> stacks Alistar empowers his next basic attack against an enemy champion to deal an additional <magicDamage><scaleLevel>{{ f3 }}</scaleLevel> magic damage</magicDamage> and stun for {{ e6 }} second.",
           "leveltip": {
             "label": [
               "Cooldown",
@@ -708,7 +708,7 @@
       ],
       "passive": {
         "name": "Triumphant Roar",
-        "description": "Alistar charges his roar by stunning or displacing enemy champions or when nearby enemies die. When fully charged he heals himself and all nearby allied champions.",
+        "description": "Alistar charges his roar by stunning or displacing enemy champions or when nearby enemies die. When fully charged he heals himself all nearby allied champions.",
         "image": {
           "full": "Alistar_E.png",
           "sprite": "passive0.png",
