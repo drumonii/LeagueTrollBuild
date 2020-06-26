@@ -83,13 +83,13 @@ public class ChampionsDdragonService implements ChampionsService {
 	}
 
 	private Champion getChampion(Version version, String key) {
-		LOGGER.info("Getting Champion with key: {} from Riot", key);
+		LOGGER.info("Getting Champion {} from Riot", key);
 		UriComponents uriComponents = championUri.buildAndExpand(version.getPatch(), locale, key);
 		try {
 			ChampionsResponse response = restTemplate.getForObject(uriComponents.toString(), ChampionsResponse.class);
 			return response.getChampions().get(key);
 		} catch (RestClientException e) {
-			LOGGER.warn("Unable to retrieve the Champion with Key: {} from Data Dragon due to:", key, e);
+			LOGGER.warn("Unable to retrieve the Champion {} from Data Dragon due to:", key, e);
 			return null;
 		}
 	}
