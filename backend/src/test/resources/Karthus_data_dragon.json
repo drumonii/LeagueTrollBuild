@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.12.1",
+  "version": "10.16.1",
   "data": {
     "Karthus": {
       "id": "Karthus",
@@ -59,6 +59,12 @@
           "num": 9,
           "name": "Karthus Lightsbane",
           "chromas": false
+        },
+        {
+          "id": "30010",
+          "num": 10,
+          "name": "Infernal Karthus",
+          "chromas": true
         }
       ],
       "lore": "The harbinger of oblivion, Karthus is an undying spirit whose haunting songs are a prelude to the horror of his nightmarish appearance. The living fear the eternity of undeath, but Karthus sees only beauty and purity in its embrace, a perfect union of life and death. When Karthus emerges from the Shadow Isles, it is to bring the joy of death to mortals, an apostle of the unliving.",
@@ -82,11 +88,11 @@
         "difficulty": 7
       },
       "stats": {
-        "hp": 528,
+        "hp": 550,
         "hpperlevel": 87,
         "mp": 467,
         "mpperlevel": 30.5,
-        "movespeed": 325,
+        "movespeed": 335,
         "armor": 20.88,
         "armorperlevel": 3.5,
         "spellblock": 30,
@@ -107,8 +113,8 @@
         {
           "id": "KarthusLayWasteA1",
           "name": "Lay Waste",
-          "description": "Karthus unleashes a delayed blast at a location, dealing damage to nearby enemies.",
-          "tooltip": "Creates a delayed blast at Karthus' cursor position dealing {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage to each nearby enemy.<br /><br />If the blast hits only a single unit it deals double damage.",
+          "description": "Karthus unleashes a delayed blast at a location, dealing damage to nearby enemies. Deals increased damage to isolated enemies. ",
+          "tooltip": "Creates a delayed blast at Karthus' cursor position dealing <magicDamage>{{ qdamage }} magic damage</magicDamage> to each nearby enemy.<br /><br />If the blast hits only a single unit it deals double damage.",
           "leveltip": {
             "label": [
               "Damage",
@@ -140,11 +146,11 @@
           "effect": [
             null,
             [
-              45,
-              65,
-              85,
-              105,
-              125
+              50,
+              70,
+              90,
+              110,
+              130
             ],
             [
               0,
@@ -212,7 +218,7 @@
           ],
           "effectBurn": [
             null,
-            "45/65/85/105/125",
+            "50/70/90/110/130",
             "0",
             "0",
             "0",
@@ -223,13 +229,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.3,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "2",
           "range": [
@@ -396,15 +396,17 @@
           "id": "KarthusDefile",
           "name": "Defile",
           "description": "Karthus passively steals energy from his victims, gaining Mana on each kill. Alternatively, Karthus can surround himself in the souls of his prey, dealing damage to nearby enemies, but quickly draining his own Mana.",
-          "tooltip": "<spellPassive>Toggle Off: </spellPassive>When Karthus kills a unit, he restores {{ e2 }} Mana.<br /><br /><spellPassive>Toggle On: </spellPassive>Drains {{ cost }} Mana to deal {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage to nearby enemies each second. ",
+          "tooltip": "<spellPassive>Passive: </spellPassive>When Karthus kills a unit, he restores {{ e2 }} Mana.<br /><br /><spellPassive>Active: </spellPassive>Drains {{ cost }} Mana to deal <magicDamage>{{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage</magicDamage> to nearby enemies each second. ",
           "leveltip": {
             "label": [
               "Damage Per Second",
-              "Mana Restore"
+              "Mana Restore",
+              "@AbilityResourceName@ Cost"
             ],
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
-              "{{ e2 }} -> {{ e2NL }}"
+              "{{ e2 }} -> {{ e2NL }}",
+              "{{ cost }} -> {{ costNL }}"
             ]
           },
           "maxrank": 5,

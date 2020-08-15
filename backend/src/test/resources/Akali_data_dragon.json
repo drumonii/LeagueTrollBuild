@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.12.1",
+  "version": "10.16.1",
   "data": {
     "Akali": {
       "id": "Akali",
@@ -46,7 +46,7 @@
           "id": "84004",
           "num": 4,
           "name": "Nurse Akali",
-          "chromas": false
+          "chromas": true
         },
         {
           "id": "84005",
@@ -426,8 +426,8 @@
         {
           "id": "AkaliE",
           "name": "Shuriken Flip",
-          "description": "Flip backward and fire a shuriken forward, dealing physical damage. The first enemy or smoke cloud hit is marked. Re-cast to dash to the marked target, dealing additional damage.",
-          "tooltip": "Flip backward and fire a shuriken forward, dealing <physicalDamage>{{ damage }} physical damage</physicalDamage> and marking the first enemy or smoke cloud hit.<span class=\"size8\"><br /><br /></span><spellActive>Re-cast:</spellActive> Dash to the marked target, dealing <physicalDamage>{{ e2damagecalc }} physical damage</physicalDamage>.",
+          "description": "Flip backward and fire a shuriken forward, dealing magic damage. The first enemy or smoke cloud hit is marked. Re-cast to dash to the marked target, dealing additional damage.",
+          "tooltip": "Flip backward and fire a shuriken forward, dealing <magicDamage>{{ damage }} magic damage</magicDamage> and marking the first enemy or smoke cloud hit.<span class=\"size8\"><br /><br /></span><spellActive>Re-cast:</spellActive> Dash to the marked target, dealing <magicDamage>{{ e2damagecalc }} magic damage</magicDamage>.",
           "leveltip": {
             "label": [
               "Damage",

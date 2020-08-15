@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.12.1",
+  "version": "10.16.1",
   "data": {
     "Qiyana": {
       "id": "Qiyana",
@@ -10,10 +10,10 @@
       "title": "Empress of the Elements",
       "image": {
         "full": "Qiyana.png",
-        "sprite": "champion2.png",
+        "sprite": "champion3.png",
         "group": "champion",
-        "x": 432,
-        "y": 96,
+        "x": 0,
+        "y": 0,
         "w": 48,
         "h": 48
       },
@@ -213,7 +213,7 @@
             "full": "QiyanaQ.png",
             "sprite": "spell9.png",
             "group": "spell",
-            "x": 0,
+            "x": 192,
             "y": 48,
             "w": 48,
             "h": 48
@@ -358,7 +358,7 @@
             "full": "QiyanaW.png",
             "sprite": "spell9.png",
             "group": "spell",
-            "x": 48,
+            "x": 240,
             "y": 48,
             "w": 48,
             "h": 48
@@ -501,7 +501,7 @@
             "full": "QiyanaE.png",
             "sprite": "spell9.png",
             "group": "spell",
-            "x": 96,
+            "x": 288,
             "y": 48,
             "w": 48,
             "h": 48
@@ -614,7 +614,7 @@
             "full": "QiyanaR.png",
             "sprite": "spell9.png",
             "group": "spell",
-            "x": 144,
+            "x": 336,
             "y": 48,
             "w": 48,
             "h": 48
@@ -627,10 +627,10 @@
         "description": "Qiyana's first basic attack or ability against each enemy deals bonus damage.",
         "image": {
           "full": "Qiyana_Passive.png",
-          "sprite": "passive2.png",
+          "sprite": "passive3.png",
           "group": "passive",
-          "x": 432,
-          "y": 96,
+          "x": 0,
+          "y": 0,
           "w": 48,
           "h": 48
         }
@@ -1207,6 +1207,241 @@
                   "id": "2140",
                   "count": 1,
                   "hideCount": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "champion": "Qiyana",
+          "title": "QiyanaNB",
+          "map": "NB",
+          "mode": "NEXUSBLITZ",
+          "type": "riot",
+          "customTag": "",
+          "sortrank": 0,
+          "extensionPage": false,
+          "useObviousCheckmark": false,
+          "customPanel": null,
+          "blocks": [
+            {
+              "type": "starting",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "SummonerSmite",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "4201",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "2003",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "startingjungle",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "SummonerSmite",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "4101",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "2031",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "earlyjungle",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "SummonerSmite",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "1001",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1412",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3147",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "SummonerSmite",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "1001",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3147",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3179",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "offensive",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "3142",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3026",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3814",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "selective",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "3053",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3156",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3036",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "consumables",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "2003",
+                  "count": 1,
+                  "hideCount": true
+                },
+                {
+                  "id": "2140",
+                  "count": 1,
+                  "hideCount": true
                 }
               ]
             }

@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.12.1",
+  "version": "10.16.1",
   "data": {
     "Ivern": {
       "id": "Ivern",
@@ -87,7 +87,7 @@
           "id": "IvernQ",
           "name": "Rootcaller",
           "description": "Ivern conjures a vine, dealing damage and rooting enemy targets hit. Ivern's allies can dash to the rooted target.",
-          "tooltip": "Ivern conjures a vine dealing {{ e5 }} <scaleAP>(+{{ f1 }})</scaleAP> magic damage and rooting the first enemy hit for {{ e1 }} second(s). Allies can click on rooted enemies to dash into attack range.",
+          "tooltip": "Ivern conjures a vine dealing {{ e5 }} <magicDamage><scaleAP>(+{{ f1 }})</scaleAP> magic damage</magicDamage> and rooting the first enemy hit for {{ e1 }} second(s). Allies can click on rooted enemies to dash into attack range.",
           "leveltip": {
             "label": [
               "Root Duration",
@@ -230,7 +230,7 @@
           "id": "IvernW",
           "name": "Brushmaker",
           "description": "In brush, Ivern's attacks deal bonus magic damage. Ivern can activate this ability to create a patch of brush.",
-          "tooltip": "<spellPassive>Passive:</spellPassive> In brush, Ivern's attacks deal {{ e5 }} <scaleAP>(+{{ f2 }})</scaleAP> bonus magic damage.<br /><br /><spellPassive>Active:</spellPassive> Ivern grows a patch of brush for {{ e1 }} seconds. For 3 seconds the area in and around the brush is revealed.",
+          "tooltip": "<spellPassive>Passive:</spellPassive> In brush, Ivern's attacks deal <magicDamage>{{ e5 }} <scaleAP>(+{{ f2 }})</scaleAP> bonus magic damage</magicDamage>.<br /><br /><spellPassive>Active:</spellPassive> Ivern grows a patch of brush for {{ e1 }} seconds. For 3 seconds the area in and around the brush is revealed.",
           "leveltip": {
             "label": [
               "Bonus Magic Damage",
@@ -371,7 +371,7 @@
           "id": "IvernE",
           "name": "Triggerseed",
           "description": "Ivern places a shield on an ally which explodes after a short duration slowing and damaging enemies.",
-          "tooltip": "Ivern shields an ally, absorbing up to {{ e1 }} <scaleAP>(+{{ f3 }})</scaleAP> damage. After 2 seconds, the shield bursts dealing {{ e2 }} <scaleAP>(+{{ f4 }})</scaleAP> magic damage and slowing enemies by {{ e3 }}% for {{ e4 }} seconds.<br /><br /><rules><scaleArmor>Can also be cast on Daisy.</scaleArmor></rules>",
+          "tooltip": "Ivern shields an ally, absorbing up to {{ e1 }} <scaleAP>(+{{ f3 }})</scaleAP> damage. After 2 seconds, the shield bursts dealing <magicDamage>{{ e2 }} <scaleAP>(+{{ f4 }})</scaleAP> magic damage</magicDamage> and slowing enemies by {{ e3 }}% for {{ e4 }} seconds.<br /><br /><rules><scaleArmor>Can also be cast on Daisy.</scaleArmor></rules>",
           "leveltip": {
             "label": [
               "Shield Amount",

@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.12.1",
+  "version": "10.16.1",
   "data": {
     "Syndra": {
       "id": "Syndra",
@@ -12,7 +12,7 @@
         "full": "Syndra.png",
         "sprite": "champion3.png",
         "group": "champion",
-        "x": 144,
+        "x": 192,
         "y": 96,
         "w": 48,
         "h": 48
@@ -59,6 +59,12 @@
           "num": 6,
           "name": "Star Guardian Syndra",
           "chromas": false
+        },
+        {
+          "id": "134007",
+          "num": 7,
+          "name": "Pool Party Syndra",
+          "chromas": true
         }
       ],
       "lore": "Syndra is a fearsome Ionian mage with incredible power at her command. As a child, she disturbed the village elders with her reckless and wild magic. She was sent away to be taught greater control, but eventually discovered her supposed mentor was restraining her abilities. Forming her feelings of betrayal and hurt into dark spheres of energy, Syndra has sworn to destroy all who would try to control her.",
@@ -132,22 +138,22 @@
           ],
           "cooldownBurn": "4",
           "cost": [
-            40,
-            50,
             60,
+            65,
             70,
+            75,
             80
           ],
-          "costBurn": "40/50/60/70/80",
+          "costBurn": "60/65/70/75/80",
           "datavalues": {},
           "effect": [
             null,
             [
               70,
-              110,
-              150,
-              190,
-              230
+              105,
+              140,
+              175,
+              210
             ],
             [
               6,
@@ -215,7 +221,7 @@
           ],
           "effectBurn": [
             null,
-            "70/110/150/190/230",
+            "70/105/140/175/210",
             "6",
             "2/2.2/2.4/2.6/2.8",
             "6",
@@ -247,8 +253,8 @@
             "full": "SyndraQ.png",
             "sprite": "spell11.png",
             "group": "spell",
-            "x": 288,
-            "y": 96,
+            "x": 0,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -403,8 +409,8 @@
             "full": "SyndraW.png",
             "sprite": "spell11.png",
             "group": "spell",
-            "x": 336,
-            "y": 96,
+            "x": 48,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -550,8 +556,8 @@
             "full": "SyndraE.png",
             "sprite": "spell11.png",
             "group": "spell",
-            "x": 384,
-            "y": 96,
+            "x": 96,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -665,8 +671,8 @@
             "full": "SyndraR.png",
             "sprite": "spell11.png",
             "group": "spell",
-            "x": 432,
-            "y": 96,
+            "x": 144,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -680,7 +686,7 @@
           "full": "SyndraPassive.png",
           "sprite": "passive3.png",
           "group": "passive",
-          "x": 144,
+          "x": 192,
           "y": 96,
           "w": 48,
           "h": 48
@@ -1632,176 +1638,6 @@
               "items": [
                 {
                   "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2139",
-                  "count": 1,
-                  "hideCount": true
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "champion": "Syndra",
-          "title": "SyndraSG",
-          "map": "CityPark",
-          "mode": "STARGUARDIAN",
-          "type": "riot",
-          "customTag": "",
-          "requiredPerk": "",
-          "sortrank": 0,
-          "extensionPage": false,
-          "customPanel": null,
-          "blocks": [
-            {
-              "type": "starting",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "1056",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2003",
-                  "count": 2,
-                  "hideCount": false
-                },
-                {
-                  "id": "3340",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "early",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "1001",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3802",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "1058",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essential",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3020",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3089",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3165",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "standard",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3285",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3157",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3135",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3151",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3116",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3102",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2055",
                   "count": 1,
                   "hideCount": true
                 },

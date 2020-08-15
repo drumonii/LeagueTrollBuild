@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.12.1",
+  "version": "10.16.1",
   "data": {
     "Katarina": {
       "id": "Katarina",
@@ -146,7 +146,7 @@
           "id": "KatarinaQ",
           "name": "Bouncing Blade",
           "description": "Katarina throws a <font color='#FFF673'>Dagger</font> at the target that then bounces to nearby enemies before ricocheting onto the ground.",
-          "tooltip": "Katarina throws a <keywordMajor>Dagger</keywordMajor>, dealing {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage to the target and {{ e4 }} nearby enemies. The dagger then ricochets onto the ground behind the primary target.<br /><br /><rules>The dagger always lands 350 units on the opposite side from where it struck the first target, getting there in the same amount of time regardless of how many times it bounces.</rules>",
+          "tooltip": "Katarina throws a <keywordMajor>Dagger</keywordMajor>, dealing <magicDamage>{{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage</magicDamage> to the target and {{ e4 }} nearby enemies. The dagger then ricochets onto the ground behind the primary target.<br /><br /><rules>The dagger always lands 350 units on the opposite side from where it struck the first target, getting there in the same amount of time regardless of how many times it bounces.</rules>",
           "leveltip": {
             "label": [
               "Initial Damage",
@@ -434,7 +434,7 @@
           "id": "KatarinaEWrapper",
           "name": "Shunpo",
           "description": "Katarina blinks to the target, striking it if its an enemy, or striking the nearest enemy otherwise.",
-          "tooltip": "Katarina dashes in the blink of an eye to the target ally, enemy, or <keywordMajor>Dagger</keywordMajor>. If it is an enemy, Katarina strikes for {{ e1 }} <scaleAD>(+{{ a1 }})</scaleAD> <scaleAP>(+{{ a2 }})</scaleAP> magic damage - otherwise she strikes the nearest enemy in range.<br /><br />Picking up a <keywordMajor>Dagger</keywordMajor> will reduce Shunpo's cooldown by <scaleLevel>{{ f1 }}</scaleLevel> seconds (<scaleLevel>{{ f3*100 }}%</scaleLevel>).<br /><br /><rules>Katarina can blink to any location near the target.</rules>",
+          "tooltip": "Katarina dashes in the blink of an eye to the target ally, enemy, or <keywordMajor>Dagger</keywordMajor>. If it is an enemy, Katarina strikes for <magicDamage>{{ e1 }} <scaleAD>(+{{ a1 }})</scaleAD> <scaleAP>(+{{ a2 }})</scaleAP> magic damage</magicDamage> - otherwise she strikes the nearest enemy in range.<br /><br />Picking up a <keywordMajor>Dagger</keywordMajor> will reduce Shunpo's cooldown by <scaleLevel>{{ f1 }}</scaleLevel> seconds (<scaleLevel>{{ f3*100 }}%</scaleLevel>).<br /><br /><rules>Katarina can blink to any location near the target.</rules>",
           "leveltip": {
             "label": [
               "Damage",

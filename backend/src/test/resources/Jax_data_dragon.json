@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.12.1",
+  "version": "10.16.1",
   "data": {
     "Jax": {
       "id": "Jax",
@@ -139,7 +139,7 @@
           "id": "JaxLeapStrike",
           "name": "Leap Strike",
           "description": "Jax leaps toward a unit. If they are an enemy, he strikes them with his weapon.",
-          "tooltip": "Jax leaps to target unit, dealing {{ e1 }} <scaleAD>(+{{ f1 }})</scaleAD> <scaleAP>(+{{ a1 }})</scaleAP> physical damage if it is an enemy.",
+          "tooltip": "Jax leaps to target unit, dealing <physicalDamage>{{ e1 }} <scaleAD>(+{{ f1 }})</scaleAD> <scaleAP>(+{{ a1 }})</scaleAP></physicalDamage> physical damage if it is an enemy.",
           "leveltip": {
             "label": [
               "Damage",
@@ -291,7 +291,7 @@
           "id": "JaxEmpowerTwo",
           "name": "Empower",
           "description": "Jax charges his weapon with energy, causing his next attack to deal additional damage.",
-          "tooltip": "Jax charges his weapon with energy, causing his next basic attack or Leap Strike to deal an additional {{ e1 }} <scaleAP>(+{{ a1 }}) </scaleAP>Magic Damage.",
+          "tooltip": "Jax charges his weapon with energy, causing his next basic attack or Leap Strike to deal an additional <magicDamage>{{ e1 }} <scaleAP>(+{{ a1 }}) </scaleAP>magic damage</magicDamage>.",
           "leveltip": {
             "label": [
               "Damage",
@@ -438,7 +438,7 @@
           "id": "JaxCounterStrike",
           "name": "Counter Strike",
           "description": "Jax's combat prowess allows him to dodge all incoming attacks for a short duration and then quickly counterattack, stunning all surrounding enemies.",
-          "tooltip": "Jax enters a defensive stance for up to {{ e6 }} seconds, dodging all incoming basic attacks and taking {{ e3 }}% less damage from area of effect abilities.<br /><br />After 2 seconds or if activated again, Jax stuns surrounding enemies for {{ e2 }} second and deals {{ e1 }} <scaleAD>(+{{ f2 }})</scaleAD> physical damage to them.<br /><br /><scaleAP>Counter Strike deals {{ e5 }}% more damage for each attack Jax dodged (max: {{ e4 }}% increased damage).</scaleAP>",
+          "tooltip": "Jax enters a defensive stance for up to {{ e6 }} seconds, dodging all incoming basic attacks and taking {{ e3 }}% less damage from area of effect abilities.<br /><br />After 2 seconds or if activated again, Jax stuns surrounding enemies for {{ e2 }} second and deals <physicalDamage>{{ e1 }} <scaleAD>(+{{ f2 }})</scaleAD> physical damage</physicalDamage> to them.<br /><br /><scaleAP>Counter Strike deals {{ e5 }}% more damage for each attack Jax dodged (max: {{ e4 }}% increased damage).</scaleAP>",
           "leveltip": {
             "label": [
               "Cooldown",
@@ -453,13 +453,13 @@
           },
           "maxrank": 5,
           "cooldown": [
-            16,
             14,
-            12,
-            10,
+            12.5,
+            11,
+            9.5,
             8
           ],
-          "cooldownBurn": "16/14/12/10/8",
+          "cooldownBurn": "14/12.5/11/9.5/8",
           "cost": [
             50,
             60,

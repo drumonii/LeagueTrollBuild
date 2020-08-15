@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.12.1",
+  "version": "10.16.1",
   "data": {
     "Evelynn": {
       "id": "Evelynn",
@@ -123,7 +123,7 @@
           "id": "EvelynnQ",
           "name": "Hate Spike",
           "description": "Evelynn strikes out with her Lasher, dealing damage to the first unit hit. Then, Evelynn can shoot a line of spikes at nearby foes up to 3 times.",
-          "tooltip": "Evelynn's Lasher strikes in the target direction, dealing <magicDamage>{{ e5 }} <scaleAP>(+{{ a2 }})</scaleAP> magic damage</magicDamage> to the first unit hit and causing Evelynn's next 3 spells or attacks on that unit deal <magicDamage>{{ e4 }}<scaleAP> (+{{ a1 }})</scaleAP> bonus magic damage</magicDamage>. Then, Evelynn can recast this ability up to 3 times.<br /><br /><span class=\"colorFF9900\">Recast:</span> Fires spikes through the nearest enemy, <magicDamage>dealing {{ e5 }} <scaleAP>(+{{ a2 }})</scaleAP> magic damage</magicDamage> to all units hit.<br /><br /><rules>Refunds {{ e1 }}% of <spellName>Hate Spike</spellName>'s cooldown if the Lasher hits a monster. <spellName>Hate Spike</spellName> prioritizes the target Evelynn is attacking.</rules>",
+          "tooltip": "Evelynn's Lasher strikes in the target direction, dealing <magicDamage>{{ e5 }} <scaleAP>(+{{ a2 }})</scaleAP> magic damage</magicDamage> to the first unit hit and causing Evelynn's next 3 spells or attacks on that unit deal <magicDamage>{{ e4 }}<scaleAP> (+{{ a1 }})</scaleAP> bonus magic damage</magicDamage>. Then, Evelynn can recast this ability up to 3 times.<br /><br /><span class=\"colorFF9900\">Recast:</span> Fires spikes through the nearest enemy, <magicDamage>dealing {{ e5 }} <scaleAP>(+{{ a2 }})</scaleAP> magic damage</magicDamage> to all units hit.<br /><br /><rules>Hate Spike prioritizes the target Evelynn is attacking.</rules>",
           "leveltip": {
             "label": [
               "Lasher and Spike Damage",
@@ -157,11 +157,11 @@
           "effect": [
             null,
             [
-              50,
-              50,
-              50,
-              50,
-              50
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               30,
@@ -213,11 +213,11 @@
               50
             ],
             [
-              8,
-              8,
-              8,
-              8,
-              8
+              4,
+              4,
+              4,
+              4,
+              4
             ],
             [
               -0.25,
@@ -229,7 +229,7 @@
           ],
           "effectBurn": [
             null,
-            "50",
+            "0",
             "30",
             "60",
             "10/20/30/40/50",
@@ -237,7 +237,7 @@
             "6",
             "30",
             "50",
-            "8",
+            "4",
             "-0.25"
           ],
           "vars": [
@@ -2180,12 +2180,12 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3136",
+                  "id": "3020",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3020",
+                  "id": "3113",
                   "count": 1,
                   "hideCount": false
                 }
@@ -2213,7 +2213,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3151",
+                  "id": "3089",
                   "count": 1,
                   "hideCount": false
                 },
@@ -2251,7 +2251,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3152",
+                  "id": "3165",
                   "count": 1,
                   "hideCount": false
                 }

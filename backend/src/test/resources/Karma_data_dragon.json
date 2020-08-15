@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.12.1",
+  "version": "10.16.1",
   "data": {
     "Karma": {
       "id": "Karma",
@@ -129,36 +129,34 @@
           "id": "KarmaQ",
           "name": "Inner Flame",
           "description": "Karma sends forth a ball of spirit energy that explodes and deals damage upon hitting an enemy unit.<br><br>Mantra Bonus: In addition to the explosion, Mantra increases the destructive power of her Inner Flame, creating a cataclysm which deals damage after a short delay.",
-          "tooltip": "Fires a blast of energy that explodes upon enemy contact, dealing {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage and slowing Movement Speed by {{ e2 }}% for {{ e3 }} seconds. <br /><br /><span class=\"colorFF9900\">Mantra Bonus - Soulflare:</span> Deals {{ f1 }} <scaleAP>(+{{ a2 }})</scaleAP> additional magic damage and leaves a circle of flame that slows enemies by {{ f3 }}%. After 1.5 seconds the circle erupts, dealing {{ f2 }} <scaleAP>(+{{ charabilitypower*1.5 }})</scaleAP> magic damage to enemies in the area.",
+          "tooltip": "Fires a blast of energy that explodes upon enemy contact, dealing <magicDamage>{{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage</magicDamage> and slowing Movement Speed by {{ e2 }}% for {{ e3 }} seconds. <br /><br /><span class=\"colorFF9900\">Mantra Bonus - Soulflare:</span> Deals <magicDamage>{{ f1 }} <scaleAP>(+{{ a2 }})</scaleAP> additional magic damage</magicDamage> and leaves a circle of flame that slows enemies by {{ f3 }}%. After 1.5 seconds the circle erupts, dealing {{ f2 }} <scaleAP>(+{{ charabilitypower*1.5 }})</scaleAP> magic damage to enemies in the area.",
           "leveltip": {
             "label": [
               "Damage",
-              "Cooldown",
-              "@AbilityResourceName@ Cost"
+              "Cooldown"
             ],
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
-              "{{ cooldown }} -> {{ cooldownNL }}",
-              "{{ cost }} -> {{ costNL }}"
+              "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
           "maxrank": 5,
           "cooldown": [
-            7,
-            6.5,
-            6,
-            5.5,
-            5
+            9,
+            8.5,
+            8,
+            7.5,
+            7
           ],
-          "cooldownBurn": "7/6.5/6/5.5/5",
+          "cooldownBurn": "9/8.5/8/7.5/7",
           "cost": [
-            50,
-            55,
-            60,
             65,
-            70
+            65,
+            65,
+            65,
+            65
           ],
-          "costBurn": "50/55/60/65/70",
+          "costBurn": "65",
           "datavalues": {},
           "effect": [
             null,
@@ -303,7 +301,7 @@
           "id": "KarmaSpiritBind",
           "name": "Focused Resolve",
           "description": "Karma creates a tether between herself and a targeted enemy, dealing damage and revealing them. If the tether is not broken, the enemy will be rooted and damaged again.<br><br>Mantra Bonus: Karma strengthens the link, healing herself and extending the root duration.",
-          "tooltip": "Links Karma to an enemy champion or monster, granting <span class=\"coloree91d7\">True Sight</span> and dealing {{ effect1amount*0.5 }} <scaleAP>(+{{ f4 }}) </scaleAP>magic damage. If the link is unbroken for {{ e3 }} seconds, the target is rooted for {{ e2 }} second(s) and takes an additional {{ effect1amount*0.5 }} <scaleAP>(+{{ f4 }}) </scaleAP>magic damage.<br /><br /><span class=\"colorFF9900\">Mantra Bonus - Renewal:</span> Karma is healed for {{ f1 }}% <scaleAP>(+{{ f3 }}%)</scaleAP> of her missing health. If the link is not broken or the target dies, the root duration is increased by {{ f2 }} second(s) and Karma is healed for {{ f1 }}% <scaleAP>(+{{ f3 }}%)</scaleAP> of her missing health.",
+          "tooltip": "Links Karma to an enemy champion or monster, granting <span class=\"coloree91d7\">True Sight</span> and dealing <magicDamage>{{ effect1amount*0.5 }} <scaleAP>(+{{ f4 }}) </scaleAP>magic damage</magicDamage>. If the link is unbroken for {{ e3 }} seconds, the target is rooted for {{ e2 }} second(s) and takes an additional <magicDamage>{{ effect1amount*0.5 }} <scaleAP>(+{{ f4 }}) </scaleAP>magic damage</magicDamage>.<br /><br /><span class=\"colorFF9900\">Mantra Bonus - Renewal:</span> Karma is healed for {{ f1 }}% <scaleAP>(+{{ f3 }}%)</scaleAP> of her missing health. If the link is not broken or the target dies, the root duration is increased by {{ f2 }} second(s) and Karma is healed for {{ f1 }}% <scaleAP>(+{{ f3 }}%)</scaleAP> of her missing health.",
           "leveltip": {
             "label": [
               "Damage",

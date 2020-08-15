@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.12.1",
+  "version": "10.16.1",
   "data": {
     "Fiddlesticks": {
       "id": "Fiddlesticks",
@@ -412,12 +412,14 @@
             "label": [
               "Damage",
               "Slow",
-              "Cooldown"
+              "Cooldown",
+              "@AbilityResourceName@ Cost"
             ],
             "effect": [
               "{{ basedamage }} -> {{ basedamageNL }}",
               "{{ slowamount*-100.000000 }}% -> {{ slowamountnl*-100.000000 }}%",
-              "{{ cooldown }} -> {{ cooldownNL }}"
+              "{{ cooldown }} -> {{ cooldownNL }}",
+              "{{ cost }} -> {{ costNL }}"
             ]
           },
           "maxrank": 5,

@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.12.1",
+  "version": "10.16.1",
   "data": {
     "Kennen": {
       "id": "Kennen",
@@ -46,7 +46,7 @@
           "id": "85004",
           "num": 4,
           "name": "Kennen M.D.",
-          "chromas": false
+          "chromas": true
         },
         {
           "id": "85005",
@@ -65,6 +65,12 @@
           "num": 7,
           "name": "Super Kennen",
           "chromas": false
+        },
+        {
+          "id": "85008",
+          "num": 8,
+          "name": "Infernal Kennen",
+          "chromas": true
         }
       ],
       "lore": "More than just the lightning-quick enforcer of Ionian balance, Kennen is the only yordle member of the Kinkou. Despite his small, furry stature, he is eager to take on any threat with a whirling storm of shuriken and boundless enthusiasm. Alongside his master Shen, Kennen patrols the spirit realm, employing devastating electrical energy to strike down his enemies.",
@@ -116,7 +122,7 @@
           "id": "KennenShurikenHurlMissile1",
           "name": "Thundering Shuriken",
           "description": "Kennen throws a fast moving shuriken towards a location, causing damage and adding a Mark of the Storm to any opponent that it hits.",
-          "tooltip": "Throws a shuriken that deals {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage to the first enemy it hits.",
+          "tooltip": "Throws a shuriken that deals {{ e1 }} <magicDamage><scaleAP>(+{{ a1 }})</scaleAP> magic damage</magicDamage> to the first enemy it hits.",
           "leveltip": {
             "label": [
               "Damage",
@@ -265,7 +271,7 @@
           "id": "KennenBringTheLight",
           "name": "Electrical Surge",
           "description": "Kennen passively deals extra damage and adds a Mark of the Storm to his target every few attacks, and he can activate this ability to damage and add another Mark of the Storm to targets who are already marked.",
-          "tooltip": "<spellPassive>Passive:</spellPassive> Every 5 attacks, Kennen deals bonus magic damage equal to {{ e2 }} <scaleAD>(+{{ f1 }})</scaleAD> <scaleAP>(+{{ a2 }})</scaleAP> and adds a Mark of the Storm to his target.<br /><br /><spellPassive>Active:</spellPassive> Sends a surge of electricity through all nearby enemies affected by Mark of the Storm or Slicing Maelstrom, dealing {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage.",
+          "tooltip": "<spellPassive>Passive:</spellPassive> Every 5 attacks, Kennen deals bonus <magicDamage>magic damage</magicDamage> equal to <magicDamage>{{ e2 }} <scaleAD>(+{{ f1 }})</scaleAD> <scaleAP>(+{{ a2 }})</scaleAP></magicDamage> and adds a Mark of the Storm to his target.<br /><br /><spellPassive>Active:</spellPassive> Sends a surge of electricity through all nearby enemies affected by Mark of the Storm or Slicing Maelstrom, dealing <magicDamage>{{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage</magicDamage>.",
           "leveltip": {
             "label": [
               "Damage (passive)",
@@ -421,7 +427,7 @@
           "id": "KennenLightningRush",
           "name": "Lightning Rush",
           "description": "Kennen morphs into a lightning form, enabling him to pass through units and apply a Mark of the Storm. Kennen gains movement speed when entering this form, and attack speed when leaving it.",
-          "tooltip": "Kennen turns into a ball of lightning for up to {{ duration - as ball }} seconds, dealing {{ base damage }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage to enemies he passes through.<br /><br />While a ball of lightning, Kennen gains {{ movement speed*100 }}% movement speed. Kennen is refunded {{ energy refund }} energy if he damages at least one enemy in this form.<br /><br />Upon returning to his normal form, Kennen gains {{ attack speed*100 }}% attack speed for {{ duration - after ball }} seconds.<br /><br /><rules>Lightning Rush deals {{ damage to minions*100 }}% damage to minions.<br />Kennen ignores unit collision while he is a ball of lightning.</rules>",
+          "tooltip": "Kennen turns into a ball of lightning for up to {{ duration - as ball }} seconds, dealing <magicDamage>{{ base damage }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage</magicDamage> to enemies he passes through.<br /><br />While a ball of lightning, Kennen gains {{ movement speed*100 }}% movement speed. Kennen is refunded {{ energy refund }} energy if he damages at least one enemy in this form.<br /><br />Upon returning to his normal form, Kennen gains {{ attack speed*100 }}% attack speed for {{ duration - after ball }} seconds.<br /><br /><rules>Lightning Rush deals {{ damage to minions*100 }}% damage to minions.<br />Kennen ignores unit collision while he is a ball of lightning.</rules>",
           "leveltip": {
             "label": [
               "Damage",
@@ -572,7 +578,7 @@
           "id": "KennenShurikenStorm",
           "name": "Slicing Maelstrom",
           "description": "Kennen summons a storm that strikes at nearby enemy champions for magical damage.",
-          "tooltip": "Summons a magical storm for {{ kennenrduration }} seconds that grants him {{ kennenrdefenses }} Armor and Magic Resist and deals {{ pertickdamagecalculated }} magic damage to all enemies near Kennen every {{ kennenrtickrate }} seconds. Each maelstrom hit applies Mark of the Storm, up to a maximum of 3.<br /><br />Successive maelstrom hits against the same enemy deal an additional {{ damageamp*100 }}% damage for each hit they've already suffered from this storm.",
+          "tooltip": "Summons a magical storm for {{ kennenrduration }} seconds that grants him {{ kennenrdefenses }} Armor and Magic Resist and deals <magicDamage>{{ pertickdamagecalculated }} magic damage</magicDamage> to all enemies near Kennen every {{ kennenrtickrate }} seconds. Each maelstrom hit applies Mark of the Storm, up to a maximum of 3.<br /><br />Successive maelstrom hits against the same enemy deal an additional {{ damageamp*100 }}% damage for each hit they've already suffered from this storm.",
           "leveltip": {
             "label": [
               "Damage",
@@ -688,7 +694,7 @@
       ],
       "passive": {
         "name": "Mark of the Storm",
-        "description": "Kennen's abilities add one stack of Mark of the Storm to their target for 6 seconds. If the target reaches 3 stacks, it is stunned for 1.25 seconds and Kennen gains 25 Energy. <br><br><font color='#99FF99'>The stun will be a diminished duration of 0.5 seconds if it occurs again within 6 seconds.</font>",
+        "description": "Kennen stuns enemies he hits 3 times with his abilities.",
         "image": {
           "full": "Kennen_Passive.png",
           "sprite": "passive1.png",

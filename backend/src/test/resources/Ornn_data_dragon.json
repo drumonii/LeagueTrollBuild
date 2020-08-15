@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.12.1",
+  "version": "10.16.1",
   "data": {
     "Ornn": {
       "id": "Ornn",
@@ -12,7 +12,7 @@
         "full": "Ornn.png",
         "sprite": "champion2.png",
         "group": "champion",
-        "x": 240,
+        "x": 288,
         "y": 96,
         "w": 48,
         "h": 48
@@ -59,7 +59,7 @@
         "mp": 340.6,
         "mpperlevel": 45,
         "movespeed": 335,
-        "armor": 36,
+        "armor": 33,
         "armorperlevel": 4,
         "spellblock": 32.1,
         "spellblockperlevel": 1.25,
@@ -216,7 +216,7 @@
             "full": "OrnnQ.png",
             "sprite": "spell8.png",
             "group": "spell",
-            "x": 192,
+            "x": 384,
             "y": 144,
             "w": 48,
             "h": 48
@@ -230,7 +230,7 @@
           "tooltip": "Ornn stomps forwards, breathing fire and becoming unstoppable for {{ breathduration }} seconds. The fire deals up to <magicDamage>{{ maxpercenthpperticktooltip }}% target Max Health as magic damage</magicDamage>.<br /><br />Enemies hit by the final gout of flame become <span class=\"colorFF5733\">Brittle</span> for {{ brittleduration }} seconds. The next immobilizing effect against a Brittle enemy has its duration increased by 30% and deals <magicDamage><scaleLevel>{{ brittlepercentmaxhpcalc }}</scaleLevel> of their max health as magic damage</magicDamage>.<br /><br /><rules>Ornn's basic attacks knock back Brittle targets.<br />Minimum of {{ totalminimumdamage }} against Champions and Minions, and maximum of {{ totalmonsterdamagecap }} against monsters.<br /></rules>",
           "leveltip": {
             "label": [
-              "Percent Health Damage",
+              "% Health as Damage",
               "@AbilityResourceName@ Cost",
               "Cooldown"
             ],
@@ -359,7 +359,7 @@
             "full": "OrnnW.png",
             "sprite": "spell8.png",
             "group": "spell",
-            "x": 240,
+            "x": 432,
             "y": 144,
             "w": 48,
             "h": 48
@@ -500,10 +500,10 @@
           "rangeBurn": "450",
           "image": {
             "full": "OrnnE.png",
-            "sprite": "spell8.png",
+            "sprite": "spell9.png",
             "group": "spell",
-            "x": 288,
-            "y": 144,
+            "x": 0,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -617,10 +617,10 @@
           "rangeBurn": "2500",
           "image": {
             "full": "OrnnR.png",
-            "sprite": "spell8.png",
+            "sprite": "spell9.png",
             "group": "spell",
-            "x": 336,
-            "y": 144,
+            "x": 48,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -634,7 +634,7 @@
           "full": "OrnnP.png",
           "sprite": "passive2.png",
           "group": "passive",
-          "x": 240,
+          "x": 288,
           "y": 96,
           "w": 48,
           "h": 48

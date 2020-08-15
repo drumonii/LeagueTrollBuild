@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.12.1",
+  "version": "10.16.1",
   "data": {
     "Illaoi": {
       "id": "Illaoi",
@@ -232,7 +232,7 @@
           "id": "IllaoiW",
           "name": "Harsh Lesson",
           "description": "Illaoi leaps to her target, dealing physical damage and causing nearby Tentacles to also swing at the target.",
-          "tooltip": "Illaoi leaps at her target on her next basic attack, dealing bonus physical damage equal to <scaleAD>{{ f1*100 }}%</scaleAD> of their maximum health [{{ e1 }}% + {{ f2*100 }}% per 100 attack damage].<br /><br />When she strikes, nearby Tentacles will <span class=\"color85FFAD\">Slam</span> at the target.<br /><br /><span class=\"color919191\"><i>Harsh Lesson's bonus damage does a minimum of {{ wmindamage }} damage. Against monsters the damage is capped at {{ e3 }}.</i></span>",
+          "tooltip": "Illaoi leaps at her target on her next basic attack, dealing bonus <physicalDamage>physical damage</physicalDamage> equal to <scaleAD>{{ f1*100 }}%</scaleAD> of their maximum health [{{ e1 }}% + {{ f2*100 }}% per 100 attack damage].<br /><br />When she strikes, nearby Tentacles will <span class=\"color85FFAD\">Slam</span> at the target.<br /><br /><span class=\"color919191\"><i>Harsh Lesson's bonus damage does a minimum of {{ wmindamage }} damage. Against monsters the damage is capped at {{ e3 }}.</i></span>",
           "leveltip": {
             "label": [
               "Damage",
@@ -516,7 +516,7 @@
           "id": "IllaoiR",
           "name": "Leap of Faith",
           "description": "Illaoi smashes her idol into the ground, dealing physical damage to nearby enemies. A Tentacle spawns for each enemy champion hit.",
-          "tooltip": "Illaoi smashes her idol into the ground, dealing {{ damagecalc }} physical damage to nearby enemies and spawning a Tentacle for each enemy champion hit.<br /><br />For the next {{ duration }} seconds Tentacles are untargetable and will <span class=\"color85FFAD\">Slam</span> 50% faster, and Harsh Lesson has a 2 second cooldown.<br /><br /><span class=\"colorcccccc\"><i>'There are kind and gentle gods. Mine isn't one of those.'</i></span>",
+          "tooltip": "Illaoi smashes her idol into the ground, dealing <physicalDamage>{{ damagecalc }} physical damage</physicalDamage> to nearby enemies and spawning a Tentacle for each enemy champion hit.<br /><br />For the next {{ duration }} seconds Tentacles are untargetable and will <span class=\"color85FFAD\">Slam</span> 50% faster, and Harsh Lesson has a 2 second cooldown.<br /><br /><span class=\"colorcccccc\"><i>'There are kind and gentle gods. Mine isn't one of those.'</i></span>",
           "leveltip": {
             "label": [
               "Damage",

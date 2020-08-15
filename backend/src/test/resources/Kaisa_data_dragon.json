@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.12.1",
+  "version": "10.16.1",
   "data": {
     "Kaisa": {
       "id": "Kaisa",
@@ -104,7 +104,7 @@
           "id": "KaisaQ",
           "name": "Icathian Rain",
           "description": "Kai'Sa shoots a swarm of missiles that seek out nearby targets.<br><br>Living Weapon: Icathian Rain is upgraded to shoot more missiles.",
-          "tooltip": "Kai'Sa launches {{ e2 }} missiles that split among nearby enemies, each dealing {{ e1 }} <scaleAD>(+{{ f1 }})</scaleAD> <scaleAP>(+{{ f7 }})</scaleAP> physical damage. Additional hits on a champion or monster deal {{ e3 }}% damage (max: {{ f3 }} <scaleAD>(+{{ f2 }})</scaleAD> <scaleAP>(+{{ f8 }})</scaleAP>).<br /><br /><span class=\"size16 color8C8C8C\"><kaisaLWActive{{ f6 }}>Living Weapon -</kaisaLWActive{{ f6 }}> <scaleAD>{{ e6 }} Bonus Attack Damage</scaleAD> (<kaisaLWActive{{ f6 }}>current:</kaisaLWActive{{ f6 }}> <scaleAD>{{ f5 }}</scaleAD>) - Icathian Rain fires {{ e7 }} missiles.</span><br /><br /><rules>Minions below {{ e5 }}% health take {{ e4 }}% damage.</rules>",
+          "tooltip": "Kai'Sa launches {{ e2 }} missiles that split among nearby enemies, each dealing <physicalDamage>{{ e1 }} <scaleAD>(+{{ f1 }})</scaleAD> <scaleAP>(+{{ f7 }})</scaleAP> physical damage</physicalDamage>. Additional hits on a champion or monster deal {{ e3 }}% damage (max: {{ f3 }} <scaleAD>(+{{ f2 }})</scaleAD> <scaleAP>(+{{ f8 }})</scaleAP>).<br /><br /><span class=\"size16 color8C8C8C\"><kaisaLWActive{{ f6 }}>Living Weapon -</kaisaLWActive{{ f6 }}> <scaleAD>{{ e6 }} Bonus Attack Damage</scaleAD> (<kaisaLWActive{{ f6 }}>current:</kaisaLWActive{{ f6 }}> <scaleAD>{{ f5 }}</scaleAD>) - Icathian Rain fires {{ e7 }} missiles.</span><br /><br /><rules>Minions below {{ e5 }}% health take {{ e4 }}% damage.</rules>",
           "leveltip": {
             "label": [
               "Cooldown",
@@ -259,7 +259,7 @@
           "id": "KaisaW",
           "name": "Void Seeker",
           "description": "Kai'Sa shoots a long range missile, marking enemies with her passive.<br><br>Living Weapon: Void Seeker is upgraded to apply more passive marks and reduce cooldown on champion hit.",
-          "tooltip": "Kai'Sa fires a Void blast that grants <span class=\"coloree91d7\">True Sight</span> on the first enemy hit, and triggers {{ e4 }} stacks of <span class=\"colorB342F4\">Plasma</span>, dealing magic damage based on the target's stacks.<br /><br />Min Damage: {{ e1 }} (<scaleLevel>+{{ f5 }}</scaleLevel>) <scaleAD>(+{{ f1 }})</scaleAD> <scaleAP>(+{{ f6 }})</scaleAP><br />Max Damage: {{ e1 }} (<scaleLevel>+{{ f7 }}</scaleLevel>) <scaleAD>(+{{ f1 }})</scaleAD> <scaleAP>(+{{ f8 }})</scaleAP><br /><br /><span class=\"size16 color8C8C8C\"><kaisaLWActive{{ f4 }}>Living Weapon -</kaisaLWActive{{ f4 }}></span> <scaleAP>{{ e2 }} Ability Power</scaleAP> (<kaisaLWActive{{ f4 }}>current:</kaisaLWActive{{ f4 }}> <scaleAP>{{ f3 }}</scaleAP>) - Void Seeker triggers {{ e5 }} stacks of <span class=\"colorB342F4\">Plasma</span> and refunds {{ e3 }}% cooldown on champion hit.",
+          "tooltip": "Kai'Sa fires a Void blast that grants <span class=\"coloree91d7\">True Sight</span> on the first enemy hit, and triggers {{ e4 }} stacks of <span class=\"colorB342F4\">Plasma</span>, dealing <magicDamage>magic damage</magicDamage> based on the target's stacks.<br /><br />Min Damage: <magicDamage>{{ e1 }} (<scaleLevel>+{{ f5 }}</scaleLevel>) <scaleAD>(+{{ f1 }})</scaleAD> <scaleAP>(+{{ f6 }})</scaleAP></magicDamage><br />Max Damage: <magicDamage>{{ e1 }} (<scaleLevel>+{{ f7 }}</scaleLevel>) <scaleAD>(+{{ f1 }})</scaleAD> <scaleAP>(+{{ f8 }})</scaleAP></magicDamage><br /><br /><span class=\"size16 color8C8C8C\"><kaisaLWActive{{ f4 }}>Living Weapon -</kaisaLWActive{{ f4 }}></span> <scaleAP>{{ e2 }} Ability Power</scaleAP> (<kaisaLWActive{{ f4 }}>current:</kaisaLWActive{{ f4 }}> <scaleAP>{{ f3 }}</scaleAP>) - Void Seeker triggers {{ e5 }} stacks of <span class=\"colorB342F4\">Plasma</span> and refunds {{ e3 }}% cooldown on champion hit.",
           "leveltip": {
             "label": [
               "Cooldown",
@@ -411,7 +411,7 @@
           "id": "KaisaE",
           "name": "Supercharge",
           "description": "Kai'Sa briefly increases her movement speed, then increases her attack speed.<br><br>Living Weapon: Supercharge is upgraded to briefly grant Invisibility.",
-          "tooltip": "Kai'Sa spends <span class=\"colorFF0000\">{{ f1 }}</span> seconds Supercharging her Void Energy. She gains <span class=\"colorFF0000\">{{ f4 }}%</span> Movement Speed during the charge, and {{ e5 }}% Attack Speed for {{ e2 }} seconds when charged.<br /><br /><span class=\"size16 color8C8C8C\"><kaisaLWActive{{ f3 }}>Living Weapon </kaisaLWActive{{ f3 }}></span>- <span class=\"colorFF0000\">{{ e6 }}% Attack Speed</span> (<kaisaLWActive{{ f3 }}>current:</kaisaLWActive{{ f3 }}> <span class=\"colorFF0000\">{{ f2 }}%</span>) - Supercharge grants <span class=\"color91d7ee\">Invisibility</span> for {{ e7 }} seconds.<br /><br /><rules>Basic attacks reduce Supercharge's cooldown by {{ e4 }} seconds. Supercharge's cast time and Movement Speed improve with Attack Speed.</rules>",
+          "tooltip": "Kai'Sa spends <span class=\"colorFF0000\">{{ f1 }}</span> seconds Supercharging her Void Energy. She gains <span class=\"colorFF0000\">{{ f4 }}%</span> Movement Speed during the charge, and {{ e5 }}% Attack Speed for {{ e2 }} seconds when charged.<br /><br /><span class=\"size16 color8C8C8C\"><kaisaLWActive{{ f3 }}>Living Weapon </kaisaLWActive{{ f3 }}></span>- <scaleAS>{{ e6 }}% Attack Speed</scaleAS> (<kaisaLWActive{{ f3 }}>current:</kaisaLWActive{{ f3 }}> <scaleAS>{{ f2 }}%</scaleAS>) - Supercharge grants <span class=\"color91d7ee\">Invisibility</span> for {{ e7 }} seconds.<br /><br /><rules>Basic attacks reduce Supercharge's cooldown by {{ e4 }} seconds. Supercharge's cast time and Movement Speed improve with Attack Speed.</rules>",
           "leveltip": {
             "label": [
               "Cooldown",

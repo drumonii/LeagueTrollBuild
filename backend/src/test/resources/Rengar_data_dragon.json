@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.12.1",
+  "version": "10.16.1",
   "data": {
     "Rengar": {
       "id": "Rengar",
@@ -12,7 +12,7 @@
         "full": "Rengar.png",
         "sprite": "champion3.png",
         "group": "champion",
-        "x": 240,
+        "x": 288,
         "y": 0,
         "w": 48,
         "h": 48
@@ -249,7 +249,7 @@
             "full": "RengarQ.png",
             "sprite": "spell9.png",
             "group": "spell",
-            "x": 192,
+            "x": 384,
             "y": 144,
             "w": 48,
             "h": 48
@@ -401,7 +401,7 @@
             "full": "RengarW.png",
             "sprite": "spell9.png",
             "group": "spell",
-            "x": 240,
+            "x": 432,
             "y": 144,
             "w": 48,
             "h": 48
@@ -551,10 +551,10 @@
           "rangeBurn": "1000",
           "image": {
             "full": "RengarE.png",
-            "sprite": "spell9.png",
+            "sprite": "spell10.png",
             "group": "spell",
-            "x": 288,
-            "y": 144,
+            "x": 0,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -567,7 +567,7 @@
           "tooltip": "Rengar gains {{ stealthms }}% Movement Speed and <span class=\"coloree91d7\">True Sight</span> of the nearest enemy champion within {{ selfvisionrange }} range for {{ stealthduration }} seconds.<br /><br />After the first {{ fadetime }} seconds, Rengar becomes <span class=\"colorcd90ee\">Camouflaged</span> and can leap to an enemy without being in brush. Leaping to the nearest champion deals <physicalDamage>{{ bonusdamage }} physical damage</physicalDamage> and reduces their Armor by {{ armorshred }} for {{ armorshredduration }} seconds.<br /><br /><rules><span class=\"color8c8c8c\">Enemy champions within {{ enemydetectionrange }} range and their nearby allies can sense Rengar during Thrill of the Hunt.<br />Enemies revealed by Thrill of the Hunt stay revealed while they remain in tracking range.<br />Attacking or casting most spells ends Thrill of the Hunt.</span><br /><span class=\"colorcd90ee\"><u>Stealth - Camouflaged:</u></span><span class=\"color8c8c8c\"> This character is hidden from view. It is revealed by nearby enemy champions and turrets.</span></rules>",
           "leveltip": {
             "label": [
-              "Cooldown",
+              "Armor Reduction",
               "Duration",
               "Movement Speed",
               "Tracking Range",
@@ -672,10 +672,10 @@
           "rangeBurn": "2500/3000/3500",
           "image": {
             "full": "RengarR.png",
-            "sprite": "spell9.png",
+            "sprite": "spell10.png",
             "group": "spell",
-            "x": 336,
-            "y": 144,
+            "x": 48,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -689,7 +689,7 @@
           "full": "Rengar_P.png",
           "sprite": "passive3.png",
           "group": "passive",
-          "x": 240,
+          "x": 288,
           "y": 0,
           "w": 48,
           "h": 48

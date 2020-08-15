@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.12.1",
+  "version": "10.16.1",
   "data": {
     "Janna": {
       "id": "Janna",
@@ -135,7 +135,7 @@
           "id": "HowlingGale",
           "name": "Howling Gale",
           "description": "By creating a localized change in pressure and temperature, Janna is able to create a small storm that grows in size with time. She can activate the spell again to release the storm. On release this storm will fly towards the direction it was cast in, dealing damage and knocking away any enemies in its path.",
-          "tooltip": "Summons a whirlwind, which deals {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage to enemies in its path and knocks them into the air for {{ e4 }} seconds.<br /><br />The whirlwind can be charged up to {{ e6 }} seconds. For each second charged, it:<ul><li>Deals {{ e2 }} <scaleAP>(+{{ a2 }})</scaleAP> bonus damage</li><li>Knocks up for an additional {{ e5 }} seconds</li><li>Travels {{ e3 }}% further</li></ul>Howling Gale always reaches its destination in {{ e8 }} seconds.<br /><br /><rules><span class=\"color8c8c8c\">Activate again to release the whirlwind early.</span></rules>",
+          "tooltip": "Summons a whirlwind, which deals <magicDamage>{{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage</magicDamage> to enemies in its path and knocks them into the air for {{ e4 }} seconds.<br /><br />The whirlwind can be charged up to {{ e6 }} seconds. For each second charged, it:<ul><li>Deals <magicDamage>{{ e2 }} <scaleAP>(+{{ a2 }})</scaleAP> bonus damage</magicDamage></li><li>Knocks up for an additional {{ e5 }} seconds</li><li>Travels {{ e3 }}% further</li></ul>Howling Gale always reaches its destination in {{ e8 }} seconds.<br /><br /><rules><span class=\"color8c8c8c\">Activate again to release the whirlwind early.</span></rules>",
           "leveltip": {
             "label": [
               "Damage",
@@ -289,7 +289,7 @@
           "id": "SowTheWind",
           "name": "Zephyr",
           "description": "Janna summons an air elemental that passively increases her Movement Speed and enables her to pass through units. She may also activate this ability to deal damage and slow an enemy's Movement Speed. The passive is lost while this ability is on cooldown.",
-          "tooltip": "<spellPassive>Passive:</spellPassive> While Zephyr is not on cooldown, Janna gains {{ e1 }}% <scaleAP>(+{{ f1 }}%)</scaleAP> Movement Speed and can move through units.<br /><br /><spellPassive>Active: </spellPassive>Deals {{ e2 }} <scaleAP>(+{{ a1 }})</scaleAP> <keywordMajor>(+{{ f3 }})</keywordMajor> magic damage to an enemy and slows their Movement Speed by {{ e3 }}% <scaleAP>(+{{ f2 }}%)</scaleAP> for {{ e4 }} seconds.",
+          "tooltip": "<spellPassive>Passive:</spellPassive> While Zephyr is not on cooldown, Janna gains {{ e1 }}% <scaleAP>(+{{ f1 }}%)</scaleAP> Movement Speed and can move through units.<br /><br /><spellPassive>Active: </spellPassive>Deals <magicDamage>{{ e2 }} <scaleAP>(+{{ a1 }})</scaleAP> <keywordMajor>(+{{ f3 }})</keywordMajor> magic damage to</magicDamage> an enemy and slows their Movement Speed by {{ e3 }}% <scaleAP>(+{{ f2 }}%)</scaleAP> for {{ e4 }} seconds.",
           "leveltip": {
             "label": [
               "Passive Movement Speed",
@@ -728,7 +728,7 @@
       ],
       "passive": {
         "name": "Tailwind",
-        "description": "Janna passively gains 8% Movement Speed, and nearby allied champions gain this bonus when moving toward her.<br><br>Additionally, Janna's basic attacks cause additional magic damage based on her bonus Movement Speed.",
+        "description": "Janna passively gains bonus Movement Speed, and nearby allied champions gain this bonus when moving toward her.<br><br>Additionally, Janna's basic attacks cause additional magic damage based on her bonus Movement Speed.",
         "image": {
           "full": "Janna_Tailwind.png",
           "sprite": "passive1.png",
@@ -1478,7 +1478,7 @@
         },
         {
           "champion": "Janna",
-          "title": "JannaSL",
+          "title": "JannaNB",
           "map": "NB",
           "mode": "NEXUSBLITZ",
           "type": "riot",
@@ -1505,13 +1505,13 @@
               ],
               "items": [
                 {
-                  "id": "4301",
+                  "id": "4204",
                   "count": 1,
                   "hideCount": false
                 },
                 {
                   "id": "2003",
-                  "count": 1,
+                  "count": 2,
                   "hideCount": false
                 },
                 {
@@ -1765,176 +1765,6 @@
               "items": [
                 {
                   "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2139",
-                  "count": 1,
-                  "hideCount": true
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "champion": "Janna",
-          "title": "JannaSG",
-          "map": "CityPark",
-          "mode": "STARGUARDIAN",
-          "type": "riot",
-          "customTag": "",
-          "requiredPerk": "",
-          "sortrank": 0,
-          "extensionPage": false,
-          "customPanel": null,
-          "blocks": [
-            {
-              "type": "starting",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3301",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2003",
-                  "count": 3,
-                  "hideCount": false
-                },
-                {
-                  "id": "3340",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "early",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "2049",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3096",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "1001",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essential",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3117",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3107",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3504",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "aggressive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3069",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3174",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3089",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "protective",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3222",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3110",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3102",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2055",
                   "count": 1,
                   "hideCount": true
                 },

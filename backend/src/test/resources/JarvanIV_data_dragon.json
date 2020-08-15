@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.12.1",
+  "version": "10.16.1",
   "data": {
     "JarvanIV": {
       "id": "JarvanIV",
@@ -77,6 +77,12 @@
           "num": 9,
           "name": "Hextech Jarvan IV",
           "chromas": false
+        },
+        {
+          "id": "59011",
+          "num": 11,
+          "name": "Pool Party Jarvan IV",
+          "chromas": true
         }
       ],
       "lore": "Prince Jarvan, scion of the Lightshield dynasty, is heir apparent to the throne of Demacia. Raised to be a paragon of his nation's greatest virtues, he is forced to balance the heavy expectations placed upon him with his own desire to fight on the front lines. Jarvan inspires his troops with his fearsome courage and selfless determination, raising his family's colors high and revealing his true strength as a future leader of his people.",
@@ -128,11 +134,11 @@
           "id": "JarvanIVDragonStrike",
           "name": "Dragon Strike",
           "description": "Jarvan IV extends his lance, dealing physical damage and lowering the Armor of enemies in its path. Additionally, this will pull Jarvan to his Demacian Standard, knocking up enemies in his path.",
-          "tooltip": "Extends Jarvan IV's lance dealing {{ e1 }} <scaleAD>(+{{ a1 }})</scaleAD> physical damage and lowering the Armor of enemies hit by {{ e2 }}% for {{ e3 }} seconds.<br /><br />If the lance contacts Demacian Standard it will pull Jarvan IV to its location, knocking up enemies in his path. This effect can be triggered even while immobilized.",
+          "tooltip": "Extends Jarvan IV's lance dealing <physicalDamage>{{ e1 }} <scaleAD>(+{{ a1 }})</scaleAD> physical damage</physicalDamage> and lowering the Armor of enemies hit by {{ e2 }}% for {{ e3 }} seconds.<br /><br />If the lance contacts Demacian Standard it will pull Jarvan IV to its location, knocking up enemies in his path. This effect can be triggered even while immobilized.",
           "leveltip": {
             "label": [
               "Damage",
-              "Cooldown",
+              "Armor Reduction",
               "Cooldown",
               "@AbilityResourceName@ Cost"
             ],
@@ -420,7 +426,7 @@
           "id": "JarvanIVDemacianStandard",
           "name": "Demacian Standard",
           "description": "Jarvan IV carries the pride of Demacia, passively granting him bonus Attack Speed. Activating Demacian Standard allows Jarvan IV to place a Demacian flag that deals magic damage on impact and grants Attack Speed to nearby allied champions.",
-          "tooltip": "<spellPassive>Passive:</spellPassive> Gains {{ e3 }}% Attack Speed.<br /><br /><spellPassive>Active:</spellPassive> Throws a Demacian Standard to a nearby area dealing {{ e2 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage to enemies. The Standard lasts for {{ e4 }} seconds and grants surrounding allied champions {{ e3 }}% Attack Speed.",
+          "tooltip": "<spellPassive>Passive:</spellPassive> Gains {{ e3 }}% Attack Speed.<br /><br /><spellPassive>Active:</spellPassive> Throws a Demacian Standard to a nearby area dealing <magicDamage>{{ e2 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage</magicDamage> to enemies. The Standard lasts for {{ e4 }} seconds and grants surrounding allied champions {{ e3 }}% Attack Speed.",
           "leveltip": {
             "label": [
               "Damage",
@@ -569,7 +575,7 @@
           "id": "JarvanIVCataclysm",
           "name": "Cataclysm",
           "description": "Jarvan IV heroically leaps into battle at a target with such force that he terraforms the surrounding area to create an arena around them. Nearby enemies are damaged at the moment of impact.",
-          "tooltip": "Heroically leaps to an enemy Champion dealing {{ damagecalc }} physical damage to nearby enemies and creating an arena of impassable terrain around them for {{ wallduration }} seconds.<br /><br />Activate again to collapse the terrain.",
+          "tooltip": "Heroically leaps to an enemy Champion dealing <physicalDamage>{{ damagecalc }} physical damage</physicalDamage> to nearby enemies and creating an arena of impassable terrain around them for {{ wallduration }} seconds.<br /><br />Activate again to collapse the terrain.",
           "leveltip": {
             "label": [
               "Damage",

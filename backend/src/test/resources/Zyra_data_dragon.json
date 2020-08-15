@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.12.1",
+  "version": "10.16.1",
   "data": {
     "Zyra": {
       "id": "Zyra",
@@ -12,7 +12,7 @@
         "full": "Zyra.png",
         "sprite": "champion4.png",
         "group": "champion",
-        "x": 336,
+        "x": 432,
         "y": 96,
         "w": 48,
         "h": 48
@@ -254,8 +254,8 @@
             "full": "ZyraQ.png",
             "sprite": "spell15.png",
             "group": "spell",
-            "x": 96,
-            "y": 0,
+            "x": 0,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -393,8 +393,8 @@
             "full": "ZyraW.png",
             "sprite": "spell15.png",
             "group": "spell",
-            "x": 144,
-            "y": 0,
+            "x": 48,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -547,8 +547,8 @@
             "full": "ZyraE.png",
             "sprite": "spell15.png",
             "group": "spell",
-            "x": 192,
-            "y": 0,
+            "x": 96,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -668,8 +668,8 @@
             "full": "ZyraR.png",
             "sprite": "spell15.png",
             "group": "spell",
-            "x": 240,
-            "y": 0,
+            "x": 144,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -683,7 +683,7 @@
           "full": "ZyraP.png",
           "sprite": "passive4.png",
           "group": "passive",
-          "x": 336,
+          "x": 432,
           "y": 96,
           "w": 48,
           "h": 48
@@ -1352,7 +1352,7 @@
         },
         {
           "champion": "Zyra",
-          "title": "ZyraSL",
+          "title": "ZyraNB",
           "map": "NB",
           "mode": "NEXUSBLITZ",
           "type": "riot-support",
@@ -1379,13 +1379,13 @@
               ],
               "items": [
                 {
-                  "id": "4301",
+                  "id": "4203",
                   "count": 1,
                   "hideCount": false
                 },
                 {
                   "id": "2003",
-                  "count": 1,
+                  "count": 2,
                   "hideCount": false
                 },
                 {
@@ -1961,7 +1961,7 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
+              "hideIfSummonerSpell": "SummonerSmite",
               "appendAfterSection": "",
               "visibleWithAllOf": [
                 ""
@@ -1978,6 +1978,39 @@
                 {
                   "id": "2003",
                   "count": 2,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "startingjungle",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "SummonerSmite",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "1039",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "2031",
+                  "count": 1,
                   "hideCount": false
                 },
                 {

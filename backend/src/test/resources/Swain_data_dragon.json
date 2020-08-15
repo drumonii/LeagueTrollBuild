@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.12.1",
+  "version": "10.16.1",
   "data": {
     "Swain": {
       "id": "Swain",
@@ -12,7 +12,7 @@
         "full": "Swain.png",
         "sprite": "champion3.png",
         "group": "champion",
-        "x": 48,
+        "x": 96,
         "y": 96,
         "w": 48,
         "h": 48
@@ -84,7 +84,7 @@
         "hpperlevel": 85,
         "mp": 468,
         "mpperlevel": 28.5,
-        "movespeed": 335,
+        "movespeed": 325,
         "armor": 22.72,
         "armorperlevel": 4,
         "spellblock": 30,
@@ -105,8 +105,8 @@
         {
           "id": "SwainQ",
           "name": "Death's Hand",
-          "description": "Swain unleashes several bolts of eldritch power that pierce through enemies hit and stop on impact with enemy champions. Enemies hit take more damage for each bolt they are struck by.",
-          "tooltip": "Swain unleashes {{ e5 }} bolts of eldritch power that pierce through all enemies in the area and stop on impact with enemy champions. Enemies hit take {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage, plus {{ e2 }}% per additional bolt. Max Damage: {{ f2 }}.<br />",
+          "description": "Swain unleashes several bolts of eldritch power that pierce through enemies. Enemies hit take more damage for each bolt they are struck by.",
+          "tooltip": "Swain unleashes {{ e5 }} bolts of eldritch power that pierce through enemies. Enemies hit take {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage, plus {{ e2 }}% per additional bolt. Max Damage: {{ f2 }}.<br />",
           "leveltip": {
             "label": [
               "Bolt Damage",
@@ -123,13 +123,13 @@
           },
           "maxrank": 5,
           "cooldown": [
-            10,
-            8.5,
-            7,
-            5.5,
-            4
+            9,
+            7.5,
+            6,
+            4.5,
+            3
           ],
-          "cooldownBurn": "10/8.5/7/5.5/4",
+          "cooldownBurn": "9/7.5/6/4.5/3",
           "cost": [
             65,
             70,
@@ -246,8 +246,8 @@
             "full": "SwainQ.png",
             "sprite": "spell11.png",
             "group": "spell",
-            "x": 384,
-            "y": 48,
+            "x": 96,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -261,6 +261,7 @@
           "leveltip": {
             "label": [
               "Damage",
+              "Range",
               "Slow",
               "Reveal Duration",
               "Cooldown",
@@ -268,6 +269,7 @@
             ],
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
+              "{{ castrange }} -> {{ castrangeNL }}",
               "{{ effect4amount*-100.000000 }}% -> {{ effect4amountnl*-100.000000 }}%",
               "{{ e9 }} -> {{ e9NL }}",
               "{{ cooldown }} -> {{ cooldownNL }}",
@@ -285,21 +287,21 @@
           "cooldownBurn": "22/21/20/19/18",
           "cost": [
             70,
-            85,
+            80,
+            90,
             100,
-            115,
-            130
+            110
           ],
-          "costBurn": "70/85/100/115/130",
+          "costBurn": "70/80/90/100/110",
           "datavalues": {},
           "effect": [
             null,
             [
-              100,
-              150,
+              80,
+              120,
+              160,
               200,
-              250,
-              300
+              240
             ],
             [
               0.05,
@@ -367,7 +369,7 @@
           ],
           "effectBurn": [
             null,
-            "100/150/200/250/300",
+            "80/120/160/200/240",
             "0.05",
             "325",
             "25/35/45/55/65",
@@ -388,19 +390,19 @@
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
-            3500,
-            3500,
-            3500,
-            3500,
-            3500
+            5500,
+            6000,
+            6500,
+            7000,
+            7500
           ],
-          "rangeBurn": "3500",
+          "rangeBurn": "5500/6000/6500/7000/7500",
           "image": {
             "full": "SwainW.png",
             "sprite": "spell11.png",
             "group": "spell",
-            "x": 432,
-            "y": 48,
+            "x": 144,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -414,34 +416,30 @@
           "leveltip": {
             "label": [
               "Pass-through Damage",
-              "Detonation Damage",
-              "Cooldown",
-              "@AbilityResourceName@ Cost"
+              "Detonation Damage"
             ],
             "effect": [
               "{{ e2 }} -> {{ e2NL }}",
-              "{{ e1 }} -> {{ e1NL }}",
-              "{{ cooldown }} -> {{ cooldownNL }}",
-              "{{ cost }} -> {{ costNL }}"
+              "{{ e1 }} -> {{ e1NL }}"
             ]
           },
           "maxrank": 5,
           "cooldown": [
-            13,
-            12,
-            11,
             10,
-            9
+            10,
+            10,
+            10,
+            10
           ],
-          "cooldownBurn": "13/12/11/10/9",
+          "cooldownBurn": "10",
           "cost": [
-            60,
-            65,
-            70,
-            75,
-            80
+            50,
+            50,
+            50,
+            50,
+            50
           ],
-          "costBurn": "60/65/70/75/80",
+          "costBurn": "50",
           "datavalues": {},
           "effect": [
             null,
@@ -555,7 +553,7 @@
             "full": "SwainE.png",
             "sprite": "spell11.png",
             "group": "spell",
-            "x": 0,
+            "x": 192,
             "y": 96,
             "w": 48,
             "h": 48
@@ -676,7 +674,7 @@
             "full": "SwainR.png",
             "sprite": "spell11.png",
             "group": "spell",
-            "x": 48,
+            "x": 240,
             "y": 96,
             "w": 48,
             "h": 48
@@ -685,12 +683,12 @@
       ],
       "passive": {
         "name": "Ravenous Flock",
-        "description": "Swain's ravens collect <i>Soul Fragments</i> that heal him and restore his mana. Swain can right-click an immobilized enemy champions to pull them closer to him, dealing damage and ripping out a <i>Soul Fragment</i>.",
+        "description": "Swain's ravens collect <i>Soul Fragments</i> that heal him and permanently increase his maximum health. Swain can right-click an immobilized enemy champions to pull them closer to him, dealing damage and ripping out a <i>Soul Fragment</i>.",
         "image": {
           "full": "Swain_P.png",
           "sprite": "passive3.png",
           "group": "passive",
-          "x": 48,
+          "x": 96,
           "y": 96,
           "w": 48,
           "h": 48

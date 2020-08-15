@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.12.1",
+  "version": "10.16.1",
   "data": {
     "Varus": {
       "id": "Varus",
@@ -12,7 +12,7 @@
         "full": "Varus.png",
         "sprite": "champion4.png",
         "group": "champion",
-        "x": 336,
+        "x": 384,
         "y": 0,
         "w": 48,
         "h": 48
@@ -128,12 +128,14 @@
             "label": [
               "Maximum Damage",
               "Cooldown",
-              "Mana Cost"
+              "Mana Cost",
+              "Total AD Ratio"
             ],
             "effect": [
               "{{ basedamagemax }} -> {{ basedamagemaxNL }}",
               "{{ cooldown }} -> {{ cooldownNL }}",
-              "{{ basecost }} -> {{ basecostNL }}"
+              "{{ basecost }} -> {{ basecostNL }}",
+              "{{ tadratiomax }} -> {{ tadratiomaxNL }}"
             ]
           },
           "maxrank": 5,
@@ -261,7 +263,7 @@
             "full": "VarusQ.png",
             "sprite": "spell13.png",
             "group": "spell",
-            "x": 96,
+            "x": 288,
             "y": 0,
             "w": 48,
             "h": 48
@@ -413,7 +415,7 @@
             "full": "VarusW.png",
             "sprite": "spell13.png",
             "group": "spell",
-            "x": 144,
+            "x": 336,
             "y": 0,
             "w": 48,
             "h": 48
@@ -458,10 +460,10 @@
           "effect": [
             null,
             [
-              70,
-              105,
-              140,
-              175,
+              50,
+              90,
+              130,
+              170,
               210
             ],
             [
@@ -530,7 +532,7 @@
           ],
           "effectBurn": [
             null,
-            "70/105/140/175/210",
+            "50/90/130/170/210",
             "25/30/35/40/45",
             "4",
             "40",
@@ -562,7 +564,7 @@
             "full": "VarusE.png",
             "sprite": "spell13.png",
             "group": "spell",
-            "x": 192,
+            "x": 384,
             "y": 0,
             "w": 48,
             "h": 48
@@ -683,7 +685,7 @@
             "full": "VarusR.png",
             "sprite": "spell13.png",
             "group": "spell",
-            "x": 240,
+            "x": 432,
             "y": 0,
             "w": 48,
             "h": 48
@@ -698,7 +700,7 @@
           "full": "VarusPassive.png",
           "sprite": "passive4.png",
           "group": "passive",
-          "x": 336,
+          "x": 384,
           "y": 0,
           "w": 48,
           "h": 48
@@ -1742,100 +1744,6 @@
                   "id": "2140",
                   "count": 1,
                   "hideCount": true
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "champion": "Varus",
-          "title": "VarusPRJ17",
-          "map": "ProjectSlums",
-          "mode": "PROJECT",
-          "type": "riot",
-          "customTag": "",
-          "sortrank": 0,
-          "extensionPage": false,
-          "customPanel": null,
-          "blocks": [
-            {
-              "type": "starting",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "items": [
-                {
-                  "id": "3006",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3508",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3094",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "recommended",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "items": [
-                {
-                  "id": "3142",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3147",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3153",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "items": [
-                {
-                  "id": "3814",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3124",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3072",
-                  "count": 1,
-                  "hideCount": false
                 }
               ]
             }
