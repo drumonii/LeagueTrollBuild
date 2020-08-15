@@ -1,7 +1,7 @@
 plugins {
     id 'org.springframework.boot' version '2.3.3.RELEASE'
     id 'io.spring.dependency-management' version '1.0.9.RELEASE'
-    id 'org.asciidoctor.convert' version '1.5.8'
+    id 'org.asciidoctor.convert' version '1.5.10'
     id 'java'
 }
 
@@ -19,13 +19,13 @@ ext {
 test {
     useJUnitPlatform()
     dependsOn ':frontend:karmaTests'
-    outputs.dir snippetsDir
 }
 
 task apiDocTest(type: Test) {
     useJUnitPlatform {
         includeTags 'api-doc'
     }
+    outputs.dir snippetsDir
 }
 
 asciidoctor {
