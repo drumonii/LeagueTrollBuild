@@ -10,7 +10,7 @@ describe('AdminLogger', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    logger = TestBed.get(AdminLogger);
+    logger = TestBed.inject(AdminLogger);
 
     logSpy = spyOn(console, 'log');
     warnSpy = spyOn(console, 'warn');

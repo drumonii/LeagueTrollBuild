@@ -11,7 +11,7 @@ describe('Logger', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    logger = TestBed.get(Logger);
+    logger = TestBed.inject(Logger);
 
     debugSpy = spyOn(console, 'debug');
     logSpy = spyOn(console, 'log');

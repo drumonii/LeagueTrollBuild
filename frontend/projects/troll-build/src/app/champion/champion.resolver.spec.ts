@@ -28,7 +28,7 @@ describe('ChampionResolver', () => {
   }));
 
   beforeEach(inject([Router], (router: Router) => {
-    resolver = TestBed.get(ChampionResolver);
+    resolver = TestBed.inject(ChampionResolver);
 
     spyOn(router, 'navigate');
   }));

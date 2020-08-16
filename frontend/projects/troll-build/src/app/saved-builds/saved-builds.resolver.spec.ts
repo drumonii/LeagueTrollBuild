@@ -343,7 +343,7 @@ describe('SavedBuildsResolver', () => {
     }));
 
     beforeEach(inject([SavedBuildsService, Router], (buildsService: SavedBuildsService, router: Router) => {
-      resolver = TestBed.get(SavedBuildsResolver);
+      resolver = TestBed.inject(SavedBuildsResolver);
 
       spyOn(router, 'navigate');
       spyOn(buildsService, 'countBuilds').and.callThrough();
@@ -383,7 +383,7 @@ describe('SavedBuildsResolver', () => {
     }));
 
     beforeEach(inject([SavedBuildsService, Router], (buildsService: SavedBuildsService, router: Router) => {
-      resolver = TestBed.get(SavedBuildsResolver);
+      resolver = TestBed.inject(SavedBuildsResolver);
 
       spyOn(router, 'navigate');
       spyOn(buildsService, 'getBuild').and.callThrough();
