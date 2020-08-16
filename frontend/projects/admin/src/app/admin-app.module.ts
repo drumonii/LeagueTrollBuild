@@ -5,6 +5,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule, HttpClientXsrfModule } from '@angu
 
 import { ClrLayoutModule } from '@clr/angular';
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
+import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 
 import { AdminAppComponent } from './admin-app.component';
 import { AdminBasePathHttpInterceptor } from './interceptor/admin-base-path.http-interceptor';
@@ -23,6 +24,7 @@ import { AdminLayoutModule } from './layout/admin-layout.module';
     HttpClientXsrfModule,
     ClrLayoutModule,
     LoadingBarHttpClientModule,
+    LoadingBarRouterModule,
     AdminAppRoutingModule,
     AdminLayoutModule
   ],

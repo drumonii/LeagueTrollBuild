@@ -6,6 +6,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NbLayoutModule, NbThemeModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
+import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 
 import { TrollBuildAppComponent } from './troll-build-app.component';
 import { TrollBuildAppRoutingModule } from './troll-build-app-routing.module';
@@ -24,6 +25,7 @@ import { LayoutModule } from '@ltb-layout/layout.module';
     NbLayoutModule,
     NbEvaIconsModule,
     LoadingBarHttpClientModule,
+    LoadingBarRouterModule,
     TrollBuildAppRoutingModule,
     LayoutModule
   ],
