@@ -76,7 +76,7 @@ describe('AdminHeaderComponent', () => {
       expect(userDropdown).toBeTruthy();
 
       const userDropdownToggle = userDropdown.query(By.css('button.dropdown-toggle'));
-      userDropdownToggle.triggerEventHandler('click', null);
+      userDropdownToggle.nativeElement.click();
 
       fixture.detectChanges();
 
@@ -99,7 +99,7 @@ describe('AdminHeaderComponent', () => {
       const userDropdown = fixture.debugElement.query(By.css('clr-dropdown'));
 
       const userDropdownToggle = userDropdown.query(By.css('button.dropdown-toggle'));
-      userDropdownToggle.triggerEventHandler('click', null);
+      userDropdownToggle.nativeElement.click();
 
       fixture.detectChanges();
 
