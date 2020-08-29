@@ -23,7 +23,12 @@ class ErrorRestControllerTest extends AbstractRestControllerTests {
         ResponseEntity<String> responseEntity = testRestTemplate.exchange("/api/not-found", HttpMethod.GET,
                 httpEntity, String.class);
 
-        assertThat(responseEntity.getBody()).satisfies(new ErrorNotFoundJson("/api/not-found"));
+        assertThat(responseEntity)
+                .extracting(re -> re.getHeaders().getContentType())
+                .isEqualTo(MediaType.APPLICATION_JSON);
+        assertThat(responseEntity)
+                .extracting(ResponseEntity::getBody)
+                .satisfies(new ErrorNotFoundJson("/api/not-found"));
     }
 
     @Test
@@ -35,7 +40,12 @@ class ErrorRestControllerTest extends AbstractRestControllerTests {
         ResponseEntity<String> responseEntity = testRestTemplate.exchange("/api/admin/job-instances", HttpMethod.GET,
                 httpEntity, String.class);
 
-        assertThat(responseEntity.getBody()).satisfies(new ErrorUnauthorizedJson("/api/admin/job-instances"));
+        assertThat(responseEntity)
+                .extracting(re -> re.getHeaders().getContentType())
+                .isEqualTo(MediaType.APPLICATION_JSON);
+        assertThat(responseEntity)
+                .extracting(ResponseEntity::getBody)
+                .satisfies(new ErrorUnauthorizedJson("/api/admin/job-instances"));
     }
 
     private class ErrorJson implements Consumer<String> {

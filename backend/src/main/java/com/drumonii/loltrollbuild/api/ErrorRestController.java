@@ -26,7 +26,7 @@ public class ErrorRestController extends AbstractErrorController {
     }
 
     @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Map<String, Object>> error(HttpServletRequest request) {
+    public ResponseEntity<Map<String, Object>> errorJson(HttpServletRequest request) {
         Map<String, Object> body = getErrorAttributes(request, ErrorAttributeOptions.of(Include.MESSAGE));
         HttpStatus status = getStatus(request);
         return new ResponseEntity<>(body, status);
