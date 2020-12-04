@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.charset.StandardCharsets;
 
 /**
  * An {@link AuthenticationSuccessHandler} that sends a JSON response of the authenticated principal as a 200 OK.
@@ -27,7 +26,6 @@ public class JsonAuthenticationSuccessHandler implements AuthenticationSuccessHa
             Authentication authentication) throws IOException {
         response.setStatus(HttpStatus.OK.value());
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-        response.setCharacterEncoding(StandardCharsets.UTF_8.name());
 
         LoginResponse successfulLoginResponse = new SuccessfulLoginResponseBuilder()
                 .fromAuthentication(authentication)

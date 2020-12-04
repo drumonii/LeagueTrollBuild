@@ -82,7 +82,6 @@ public class SummonerSpellsRetrievalJobConfig {
 	public ItemWriter<SummonerSpell> summonerSpellsRetrievalItemWriter(SummonerSpellsRepository summonerSpellsRepository) {
 		return new RepositoryItemWriterBuilder<SummonerSpell>()
 				.repository(summonerSpellsRepository)
-				.methodName("save")
 				.build();
 	}
 

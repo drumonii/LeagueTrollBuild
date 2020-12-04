@@ -82,7 +82,6 @@ public class MapsRetrievalJobConfig {
 	public ItemWriter<GameMap> mapsRetrievalItemWriter(MapsRepository mapsRepository) {
 		return new RepositoryItemWriterBuilder<GameMap>()
 				.repository(mapsRepository)
-				.methodName("save")
 				.build();
 	}
 

@@ -55,7 +55,6 @@ class JsonAuthenticationSuccessHandlerTest {
         successHandler.onAuthenticationSuccess(request, response, authenticationToken);
 
         assertThat(response.getStatus()).isEqualTo(200);
-        assertThat(response.getCharacterEncoding()).isEqualTo("UTF-8");
         assertThat(response.getContentType()).isEqualTo("application/json");
         assertThat(response.getContentAsString()).isEqualTo(json);
     }

@@ -75,7 +75,6 @@ public class VersionsRetrievalJobConfig {
 	public ItemWriter<Version> versionsRetrievalItemWriter(VersionsRepository versionsRepository) {
 		return new RepositoryItemWriterBuilder<Version>()
 				.repository(versionsRepository)
-				.methodName("save")
 				.build();
 	}
 
