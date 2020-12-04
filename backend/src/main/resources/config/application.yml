@@ -53,11 +53,12 @@ spring:
     properties:
       hibernate:
         jdbc.lob.non_contextual_creation: true
-  # Resources
-  resources:
-    cache:
-      cachecontrol:
-        max-age: 31536000s # (1 year)
+  # Web
+  web:
+    # Resources
+    resources:
+      cache:
+        period: 365d
   # MVC
   mvc:
     formcontent:
@@ -85,13 +86,13 @@ server:
 
 # Production profile with an embedded H2 database
 spring:
-  profiles: embedded
+  config.activate.on-profile: embedded
 
 ---
 
 # Production profile with an external PostgreSQL database
 spring:
-  profiles: external
+  config.activate.on-profile: external
   datasource:
     url: ${LTB_DB_URL}
     username: ${LTB_DB_USERNAME}
@@ -101,7 +102,7 @@ spring:
 
 # Development profile with a local PostgreSQL database
 spring:
-  profiles: dev
+  config.activate.on-profile: dev
   datasource:
     url: jdbc:postgresql://localhost/loltrollbuild
     username: postgres
@@ -109,11 +110,12 @@ spring:
   jpa:
     show-sql: true
 
+
 ---
 
 # Unit testing profile with an embedded H2 database
 spring:
-  profiles: testing
+  config.activate.on-profile: testing
   jpa:
     show-sql: true
   data:

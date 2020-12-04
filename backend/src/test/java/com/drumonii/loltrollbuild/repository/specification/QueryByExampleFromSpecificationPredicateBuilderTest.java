@@ -75,7 +75,7 @@ class QueryByExampleFromSpecificationPredicateBuilderTest {
 		given(root.get(eq(personSkillsAttribute))).willReturn(new DummyPluralAttributePath<>(cb, personSkillsAttribute));
 		given(root.joinMap(eq("skills"))).willReturn(mock(MapAttributeJoin.class));
 
-		given(personEntityType.getPluralAttributes())
+		given(personEntityType.getDeclaredPluralAttributes())
 				.willReturn(Set.of(personTagsAttribute, personSkillsAttribute));
 	}
 

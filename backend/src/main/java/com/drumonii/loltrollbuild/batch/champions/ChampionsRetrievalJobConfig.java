@@ -82,7 +82,6 @@ public class ChampionsRetrievalJobConfig {
 	public ItemWriter<Champion> championsRetrievalItemWriter(ChampionsRepository championsRepository) {
 		return new RepositoryItemWriterBuilder<Champion>()
 				.repository(championsRepository)
-				.methodName("save")
 				.build();
 	}
 

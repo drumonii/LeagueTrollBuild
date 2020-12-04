@@ -62,6 +62,7 @@ public class QueryByExampleFromSpecificationPredicateBuilder {
 	 * @param <T> the type of the example
 	 * @return the {@link List} of {@link Predicate}s.
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	static <T> List<Predicate> getSingleAttributePredicates(CriteriaBuilder cb, Root<T> root, EntityType<T> model,
 			BeanWrapper beanWrapper, ExampleMatcherAccessor exampleAccessor) {
 		List<Predicate> predicates = new ArrayList<>();
@@ -136,7 +137,7 @@ public class QueryByExampleFromSpecificationPredicateBuilder {
 			BeanWrapper beanWrapper, ExampleMatcherAccessor exampleAccessor) {
 		List<Predicate> predicates = new ArrayList<>();
 
-		for (PluralAttribute attribute : model.getPluralAttributes()) {
+		for (PluralAttribute attribute : model.getDeclaredPluralAttributes()) {
 			String currentPath = attribute.getName();
 
 			if (exampleAccessor.isIgnoredPath(currentPath)) {

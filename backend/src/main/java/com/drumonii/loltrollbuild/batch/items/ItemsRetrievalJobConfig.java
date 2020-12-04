@@ -82,7 +82,6 @@ public class ItemsRetrievalJobConfig {
 	public ItemWriter<Item> itemsRetrievalItemWriter(ItemsRepository itemsRepository) {
 		return new RepositoryItemWriterBuilder<Item>()
 				.repository(itemsRepository)
-				.methodName("save")
 				.build();
 	}
 
