@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "Annie": {
       "id": "Annie",
@@ -146,7 +146,7 @@
           "id": "AnnieQ",
           "name": "Disintegrate",
           "description": "Annie hurls a Mana infused fireball, dealing damage and refunding the Mana cost if it destroys the target.",
-          "tooltip": "Deals <magicDamage>{{ basedamage }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage</magicDamage>. Mana cost and half the cooldown are refunded if Disintegrate kills the target.",
+          "tooltip": "Annie hurls a fireball, dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage>. If the target dies, Annie refunds the Mana cost and reduces the cooldown by 50%.",
           "leveltip": {
             "label": [
               "Damage",
@@ -261,13 +261,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.8,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -293,7 +287,7 @@
           "id": "AnnieW",
           "name": "Incinerate",
           "description": "Annie casts a blazing cone of fire, dealing damage to all enemies in the area.",
-          "tooltip": "Casts a cone of fire dealing <magicDamage>{{ basedamage }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage</magicDamage> to all enemies in the area.",
+          "tooltip": "Annie projects a wave of fire, dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage>.",
           "leveltip": {
             "label": [
               "Damage",
@@ -408,13 +402,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.85,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -439,18 +427,18 @@
         {
           "id": "AnnieE",
           "name": "Molten Shield",
-          "description": "Grants Annie increased percentage Damage Reduction, a burst of Movement Speed, and damages enemies who attack her with basic attacks.",
-          "tooltip": "Annie grants herself {{ damagereduction }}% damage reduction for {{ shieldduration }} seconds and {{ movespeedcalc }} Movement Speed that decays over {{ movementspeedduration }} seconds.<br /><br />While the shield is active, enemies who basic attack it take <magicDamage>{{ damagereflection }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage</magicDamage>.",
+          "description": "Grants Annie or an ally a shield, a burst of Movement Speed, and damages enemies who attack her with basic attacks.",
+          "tooltip": "Annie grants herself or an ally <shield>{{ shieldblocktotal }} Shield</shield> for {{ shieldduration }} seconds and <speed>{{ movespeedcalc }} Move Speed</speed> decaying over {{ movementspeedduration }} seconds. While the shield holds, enemies who Attack it take <magicDamage>{{ damagereturn }} magic damage</magicDamage>.",
           "leveltip": {
             "label": [
-              "Damage Reduction",
-              "Damage Reflection",
-              "Cooldown"
+              "Shield Health",
+              "Cooldown",
+              "Damage Reflection"
             ],
             "effect": [
-              "{{ damagereduction }}% -> {{ damagereductionNL }}%",
-              "{{ damagereflection }} -> {{ damagereflectionNL }}",
-              "{{ cooldown }} -> {{ cooldownNL }}"
+              "{{ shieldamount }} -> {{ shieldamountNL }}",
+              "{{ cooldown }} -> {{ cooldownNL }}",
+              "{{ damagereflection }} -> {{ damagereflectionNL }}"
             ]
           },
           "maxrank": 5,
@@ -463,13 +451,13 @@
           ],
           "cooldownBurn": "14/13/12/11/10",
           "cost": [
-            20,
-            20,
-            20,
-            20,
-            20
+            40,
+            40,
+            40,
+            40,
+            40
           ],
-          "costBurn": "20",
+          "costBurn": "40",
           "datavalues": {},
           "effect": [
             null,
@@ -557,23 +545,17 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.2,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
-            400,
-            400,
-            400,
-            400,
-            400
+            800,
+            800,
+            800,
+            800,
+            800
           ],
-          "rangeBurn": "400",
+          "rangeBurn": "800",
           "image": {
             "full": "AnnieE.png",
             "sprite": "spell1.png",
@@ -589,7 +571,7 @@
           "id": "AnnieR",
           "name": "Summon: Tibbers",
           "description": "Annie wills her bear Tibbers to life, dealing damage to units in the area. Tibbers can attack and also burns enemies that stand near him.",
-          "tooltip": "Summons Tibbers, dealing <magicDamage>{{ initialburstdamage }} magic damage</magicDamage> to enemies in the target area. For the next {{ tibberslifetime }} seconds, Tibbers burns nearby enemies for <magicDamage>{{ tibbersauradamage }} magic damage</magicDamage> per second and attacks for <magicDamage>{{ tibbersaadamage }} magic damage</magicDamage>. Annie can control Tibbers by reactivating this ability.<br /><br />When Annie dies, Tibbers <span class=\"colorFFEB7F\">Enrages</span>, gaining 275% Attack Speed and 100% Movement Speed, decaying over 3 seconds.",
+          "tooltip": "Annie summons her bear Tibbers, dealing <magicDamage>{{ initialburstdamage }} magic damage</magicDamage>. For the next {{ tibberslifetime }} seconds, Tibbers burns nearby enemies for <magicDamage>{{ tibbersauradamage }} magic damage per second</magicDamage> and his Attacks deal <magicDamage>{{ tibbersaadamage }} magic damage</magicDamage>. Annie can <recast>Recast</recast> this ability to direct Tibbers.<br /><br />If Annie dies, Tibbers becomes enraged, gaining <attackSpeed>275% Attack Speed</attackSpeed> and <speed>100% Movement Speed</speed> decaying over 3 seconds.",
           "leveltip": {
             "label": [
               "Cooldown",
@@ -751,18 +733,51 @@
               ],
               "items": [
                 {
-                  "id": "3073",
+                  "id": "1056",
                   "count": 1,
                   "hideCount": false
                 },
+                {
+                  "id": "2003",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
                 {
                   "id": "1001",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "2003",
-                  "count": 5,
+                  "id": "4635",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1026",
+                  "count": 1,
                   "hideCount": false
                 }
               ]
@@ -784,38 +799,20 @@
               ],
               "items": [
                 {
-                  "id": "3007",
+                  "id": "4633",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3020",
+                  "id": "4637",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3029",
+                  "id": "3102",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
+                },
                 {
                   "id": "3089",
                   "count": 1,
@@ -827,73 +824,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3165",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3157",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3116",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3102",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2139",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2033",
+                  "id": "4629",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1619,7 +1550,7 @@
                 },
                 {
                   "id": "2003",
-                  "count": 2,
+                  "count": 1,
                   "hideCount": false
                 },
                 {
@@ -1651,7 +1582,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3802",
+                  "id": "4635",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1679,40 +1610,17 @@
               ],
               "items": [
                 {
-                  "id": "3285",
+                  "id": "4633",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3020",
+                  "id": "4637",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3165",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "standard",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3157",
+                  "id": "3102",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1725,67 +1633,11 @@
                   "id": "3135",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3907",
-                  "count": 1,
-                  "hideCount": false
                 },
                 {
-                  "id": "3102",
+                  "id": "4629",
                   "count": 1,
                   "hideCount": false
-                },
-                {
-                  "id": "3151",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2139",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }

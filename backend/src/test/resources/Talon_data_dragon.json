@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "Talon": {
       "id": "Talon",
@@ -10,10 +10,10 @@
       "title": "the Blade's Shadow",
       "image": {
         "full": "Talon.png",
-        "sprite": "champion3.png",
+        "sprite": "champion4.png",
         "group": "champion",
-        "x": 336,
-        "y": 96,
+        "x": 0,
+        "y": 0,
         "w": 48,
         "h": 48
       },
@@ -116,7 +116,7 @@
           "id": "TalonQ",
           "name": "Noxian Diplomacy",
           "description": "Talon stabs the target unit. If they are within melee range, this attack deals critical damage. If they are outside melee range, Talon will leap at his target before stabbing them. Talon refunds some health and cooldown if this ability kills the target.",
-          "tooltip": "Talon leaps to target and deals {{ e1 }} <scaleAD>(+{{ a1 }})</scaleAD> physical damage. If cast from melee range, Talon does not leap but instead critically strikes, dealing {{ f2 }}% damage <scaleAD>({{ f3 }})</scaleAD>.<br /><br />When Noxian Diplomacy kills a unit, Talon regains <scaleLevel>{{ f4 }}</scaleLevel> health and refunds {{ e5 }}% of its cooldown.",
+          "tooltip": "Talon leaps to a target and deals <physicalDamage>{{ leapdamage }} physical damage</physicalDamage>. If used in melee range, this Ability instead critically strikes for <physicalDamage>{{ criticaldamage }} physical damage</physicalDamage>.<br /><br />If this Ability kills the target, Talon restores <healing>{{ totalhealing }} Health</healing> and refunds {{ e5 }}% of its cooldown.",
           "leveltip": {
             "label": [
               "Damage",
@@ -231,13 +231,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "bonusattackdamage",
-              "coeff": 1.1,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -252,8 +246,8 @@
             "full": "TalonQ.png",
             "sprite": "spell12.png",
             "group": "spell",
-            "x": 96,
-            "y": 0,
+            "x": 192,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -263,19 +257,19 @@
           "id": "TalonW",
           "name": "Rake",
           "description": "Talon sends out a volley of daggers that then return back to him, dealing physical damage every time it passes through an enemy. The returning blades deal bonus damage and slow units hit.",
-          "tooltip": "Talon tosses a volley of blades, dealing <physicalDamage>{{ totalinitialdamage }} physical damage</physicalDamage> to units hit and returning to him after a delay.<br /><br />On their way back to Talon, the blades deal <physicalDamage>{{ totalreturndamage }} additional physical damage</physicalDamage> and slow the enemy by {{ movespeedslow*100 }}% for {{ slowduration }} second.",
+          "tooltip": "Talon tosses a volley of blades, dealing <physicalDamage>{{ totalinitialdamage }} physical damage</physicalDamage>. The blades then return to him, dealing <physicalDamage>{{ totalreturndamage }} physical damage</physicalDamage> and <status>Slowing</status> by {{ movespeedslow*100 }}% for {{ slowduration }} second.",
           "leveltip": {
             "label": [
+              "@AbilityResourceName@ Cost",
               "Initial Damage",
               "Return Damage",
-              "Slow",
-              "@AbilityResourceName@ Cost"
+              "Slow"
             ],
             "effect": [
+              "{{ cost }} -> {{ costNL }}",
               "{{ initialbasedamage }} -> {{ initialbasedamageNL }}",
               "{{ returnbasedamage }} -> {{ returnbasedamageNL }}",
-              "{{ movespeedslow*100.000000 }}% -> {{ movespeedslownl*100.000000 }}%",
-              "{{ cost }} -> {{ costNL }}"
+              "{{ movespeedslow*100.000000 }}% -> {{ movespeedslownl*100.000000 }}%"
             ]
           },
           "maxrank": 5,
@@ -397,8 +391,8 @@
             "full": "TalonW.png",
             "sprite": "spell12.png",
             "group": "spell",
-            "x": 144,
-            "y": 0,
+            "x": 240,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -408,7 +402,7 @@
           "id": "TalonE",
           "name": "Assassin's Path",
           "description": "Talon vaults over any terrain or structure, up to a max distance. This ability has a low cooldown, but puts the used terrain on a long cooldown.",
-          "tooltip": "Talon vaults up to {{ f2 }} units over the nearest structure or terrain in the target direction. The vault's speed is affected by Talon's movement speed.<br /><br />Talon cannot dash over the same section of terrain more than once every <scaleLevel>{{ f3 }}</scaleLevel> seconds.",
+          "tooltip": "Talon vaults over the nearest terrain or structure. Talon cannot dash over the same terrain more than once every {{ e6 }} seconds.",
           "leveltip": {
             "label": [
               "Terrain Cooldown"
@@ -536,8 +530,8 @@
             "full": "TalonE.png",
             "sprite": "spell12.png",
             "group": "spell",
-            "x": 192,
-            "y": 0,
+            "x": 288,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -547,7 +541,7 @@
           "id": "TalonR",
           "name": "Shadow Assault",
           "description": "Talon disperses a ring of blades and becomes Invisible while gaining additional Movement Speed. When Talon emerges from Invisibility, the blades converge on his location. Each time the blades move, Shadow Assault deals physical damage to enemies hit by at least one blade.",
-          "tooltip": "Talon disperses a ring of blades that deal <physicalDamage>{{ damage }} physical damage</physicalDamage> to all units they hit, gains {{ movespeed*100 }}% increased movement speed, and becomes <span class=\"color91d7ee\">Invisible</span> for up to {{ duration }} seconds. When the <span class=\"color91d7ee\">Invisibility</span> ends, the blades converge, dealing the same damage again to enemies they pass through.<br /><br />If Talon cancels <span class=\"color91d7ee\">Invisibility</span> with an attack or Noxian Diplomacy, the blades converge on his target's location instead.<br /><br /><u><span class=\"size16 color91d7ee\">Stealth - Invisible</span></u><span class=\"size16 colorb3b3b3\">: Talon can only be revealed by nearby enemy Turrets or <span class=\"size16 coloree91d7\">True Sight</span>.</span>",
+          "tooltip": "Talon disperses a ring of blades that deal <physicalDamage>{{ damage }} physical damage</physicalDamage>, gains <speed>{{ movespeed*100 }}% Move Speed</speed>, and becomes <keywordStealth>Invisible</keywordStealth> for {{ duration }} seconds. When the <keywordStealth>Invisibility</keywordStealth> ends, the blades return to Talon, dealing <physicalDamage>{{ damage }} physical damage</physicalDamage> again.<br /><br />If Talon cancels the <keywordStealth>Invisibility</keywordStealth> with an Attack or with <spellName>Noxian Diplomacy</spellName>, the blades return to the target instead.",
           "leveltip": {
             "label": [
               "Damage",
@@ -653,8 +647,8 @@
             "full": "TalonR.png",
             "sprite": "spell12.png",
             "group": "spell",
-            "x": 240,
-            "y": 0,
+            "x": 336,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -666,10 +660,10 @@
         "description": "Talon's spells Wound champions and large monsters, stacking up to 3 times. When Talon attacks a champion with 3 stacks of Wound, they bleed for heavy damage over time.",
         "image": {
           "full": "TalonP.png",
-          "sprite": "passive3.png",
+          "sprite": "passive4.png",
           "group": "passive",
-          "x": 336,
-          "y": 96,
+          "x": 0,
+          "y": 0,
           "w": 48,
           "h": 48
         }

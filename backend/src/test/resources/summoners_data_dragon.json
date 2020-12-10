@@ -1,6 +1,6 @@
 {
   "type": "summoner",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "SummonerBarrier": {
       "id": "SummonerBarrier",
@@ -81,7 +81,7 @@
         "URF",
         "NEXUSBLITZ"
       ],
-      "costType": "s %i:cooldown%",
+      "costType": "No Cost",
       "maxammo": "-1",
       "range": [
         1200
@@ -96,7 +96,7 @@
         "w": 48,
         "h": 48
       },
-      "resource": "{{ cooldown }}s %i:cooldown%"
+      "resource": "No Cost"
     },
     "SummonerBoost": {
       "id": "SummonerBoost",
@@ -181,7 +181,7 @@
         "URF",
         "NEXUSBLITZ"
       ],
-      "costType": "s %i:cooldown%",
+      "costType": "No Cost",
       "maxammo": "-1",
       "range": [
         200
@@ -196,13 +196,13 @@
         "w": 48,
         "h": 48
       },
-      "resource": "{{ cooldown }}s %i:cooldown%"
+      "resource": "No Cost"
     },
     "SummonerDot": {
       "id": "SummonerDot",
       "name": "Ignite",
       "description": "Ignites target enemy champion, dealing 70-410 true damage (depending on champion level) over 5 seconds, grants you vision of the target, and reduces healing effects on them for the duration.",
-      "tooltip": "Ignite deals <span class=\"colorFEFCFF\">{{ f1 }}</span> true damage to target enemy champion over 5 seconds, grants you vision of the target and applies Grievous Wounds for the duration.<br /><br /><rules>(Grievous Wounds reduces healing effects by 40%. This vision does not reveal stealthed enemies.)</rules>",
+      "tooltip": "Ignite deals <span class=\"colorFEFCFF\">{{ f1 }}</span> true damage to target enemy champion over 5 seconds, grants you vision of the target and applies {{ grievousamount*100 }}% Grievous Wounds for the duration.<br /><br /><rules>(Grievous Wounds reduces healing and regeneration by a percentage equal to the highest value applied. This vision does not reveal stealthed enemies.)</rules>",
       "maxrank": 1,
       "cooldown": [
         180
@@ -300,7 +300,7 @@
         "URF",
         "NEXUSBLITZ"
       ],
-      "costType": "s %i:cooldown%",
+      "costType": "No Cost",
       "maxammo": "-1",
       "range": [
         600
@@ -315,7 +315,7 @@
         "w": 48,
         "h": 48
       },
-      "resource": "{{ cooldown }}s %i:cooldown%"
+      "resource": "No Cost"
     },
     "SummonerExhaust": {
       "id": "SummonerExhaust",
@@ -392,7 +392,7 @@
         "URF",
         "NEXUSBLITZ"
       ],
-      "costType": "s %i:cooldown%",
+      "costType": "No Cost",
       "maxammo": "-1",
       "range": [
         650
@@ -407,7 +407,7 @@
         "w": 48,
         "h": 48
       },
-      "resource": "{{ cooldown }}s %i:cooldown%"
+      "resource": "No Cost"
     },
     "SummonerFlash": {
       "id": "SummonerFlash",
@@ -489,7 +489,7 @@
         "URF",
         "NEXUSBLITZ"
       ],
-      "costType": "s %i:cooldown%",
+      "costType": "No Cost",
       "maxammo": "-1",
       "range": [
         425
@@ -504,7 +504,7 @@
         "w": 48,
         "h": 48
       },
-      "resource": "{{ cooldown }}s %i:cooldown%"
+      "resource": "No Cost"
     },
     "SummonerHaste": {
       "id": "SummonerHaste",
@@ -587,7 +587,7 @@
         "URF",
         "NEXUSBLITZ"
       ],
-      "costType": "s %i:cooldown%",
+      "costType": "No Cost",
       "maxammo": "-1",
       "range": [
         200
@@ -602,7 +602,7 @@
         "w": 48,
         "h": 48
       },
-      "resource": "{{ cooldown }}s %i:cooldown%"
+      "resource": "No Cost"
     },
     "SummonerHeal": {
       "id": "SummonerHeal",
@@ -709,7 +709,7 @@
         "URF",
         "NEXUSBLITZ"
       ],
-      "costType": "s %i:cooldown%",
+      "costType": "No Cost",
       "maxammo": "-1",
       "range": [
         850
@@ -724,7 +724,7 @@
         "w": 48,
         "h": 48
       },
-      "resource": "{{ cooldown }}s %i:cooldown%"
+      "resource": "No Cost"
     },
     "SummonerMana": {
       "id": "SummonerMana",
@@ -845,7 +845,7 @@
         "ASCENSION",
         "FIRSTBLOOD"
       ],
-      "costType": "s %i:cooldown%",
+      "costType": "No Cost",
       "maxammo": "-1",
       "range": [
         600
@@ -860,7 +860,7 @@
         "w": 48,
         "h": 48
       },
-      "resource": "{{ cooldown }}s %i:cooldown%"
+      "resource": "No Cost"
     },
     "SummonerPoroRecall": {
       "id": "SummonerPoroRecall",
@@ -929,7 +929,7 @@
       "modes": [
         "KINGPORO"
       ],
-      "costType": "s %i:cooldown%",
+      "costType": "No Cost",
       "maxammo": "-1",
       "range": [
         200
@@ -944,7 +944,7 @@
         "w": 48,
         "h": 48
       },
-      "resource": "{{ cooldown }}s %i:cooldown%"
+      "resource": "No Cost"
     },
     "SummonerPoroThrow": {
       "id": "SummonerPoroThrow",
@@ -1013,7 +1013,7 @@
       "modes": [
         "KINGPORO"
       ],
-      "costType": "s %i:cooldown%",
+      "costType": "No Cost",
       "maxammo": "-1",
       "range": [
         2500
@@ -1028,7 +1028,7 @@
         "w": 48,
         "h": 48
       },
-      "resource": "{{ cooldown }}s %i:cooldown%"
+      "resource": "No Cost"
     },
     "SummonerSmite": {
       "id": "SummonerSmite",
@@ -1129,7 +1129,7 @@
         "URF",
         "NEXUSBLITZ"
       ],
-      "costType": "s %i:cooldown%",
+      "costType": "No Cost",
       "maxammo": "2",
       "range": [
         500
@@ -1144,7 +1144,7 @@
         "w": 48,
         "h": 48
       },
-      "resource": "{{ cooldown }}s %i:cooldown%"
+      "resource": "No Cost"
     },
     "SummonerSnowURFSnowball_Mark": {
       "id": "SummonerSnowURFSnowball_Mark",
@@ -1213,7 +1213,7 @@
       "modes": [
         "SNOWURF"
       ],
-      "costType": "s %i:cooldown%",
+      "costType": "No Cost",
       "maxammo": "-1",
       "range": [
         8000
@@ -1228,7 +1228,7 @@
         "w": 48,
         "h": 48
       },
-      "resource": "{{ cooldown }}s %i:cooldown%"
+      "resource": "No Cost"
     },
     "SummonerSnowball": {
       "id": "SummonerSnowball",
@@ -1298,7 +1298,7 @@
         "ARAM",
         "FIRSTBLOOD"
       ],
-      "costType": "s %i:cooldown%",
+      "costType": "No Cost",
       "maxammo": "-1",
       "range": [
         1600
@@ -1313,7 +1313,7 @@
         "w": 48,
         "h": 48
       },
-      "resource": "{{ cooldown }}s %i:cooldown%"
+      "resource": "No Cost"
     },
     "SummonerTeleport": {
       "id": "SummonerTeleport",
@@ -1389,7 +1389,7 @@
         "PRACTICETOOL",
         "GAMEMODEX"
       ],
-      "costType": "s",
+      "costType": "No Cost",
       "maxammo": "-1",
       "range": [
         25000
@@ -1404,7 +1404,7 @@
         "w": 48,
         "h": 48
       },
-      "resource": "%i:cooldown% {{ modifiedcooldown }}s"
+      "resource": "No Cost"
     }
   }
 }

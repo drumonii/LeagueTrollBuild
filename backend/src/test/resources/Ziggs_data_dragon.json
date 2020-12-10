@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "Ziggs": {
       "id": "Ziggs",
@@ -12,7 +12,7 @@
         "full": "Ziggs.png",
         "sprite": "champion4.png",
         "group": "champion",
-        "x": 288,
+        "x": 432,
         "y": 96,
         "w": 48,
         "h": 48
@@ -71,6 +71,12 @@
           "num": 14,
           "name": "Sugar Rush Ziggs",
           "chromas": true
+        },
+        {
+          "id": "115023",
+          "num": 23,
+          "name": "Hextech Ziggs",
+          "chromas": false
         }
       ],
       "lore": "With a love of big bombs and short fuses, the yordle Ziggs is an explosive force of nature. As an inventor's assistant in Piltover, he was bored by his predictable life and befriended a mad, blue-haired bomber named Jinx. After a wild night on the town, Ziggs took her advice and moved to Zaun, where he now explores his fascinations more freely, terrorizing the chem-barons and regular citizens alike in his never ending quest to blow stuff up.",
@@ -122,7 +128,7 @@
           "id": "ZiggsQ",
           "name": "Bouncing Bomb",
           "description": "Ziggs throws a bouncing bomb that deals magic damage.",
-          "tooltip": "Ziggs throws a bouncing bomb that deals {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage.",
+          "tooltip": "Ziggs throws a bouncing bomb that deals <magicDamage>{{ totaldamage }} magic damage</magicDamage>.",
           "leveltip": {
             "label": [
               "Damage",
@@ -239,13 +245,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.65,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -258,10 +258,10 @@
           "rangeBurn": "850",
           "image": {
             "full": "ZiggsQ.png",
-            "sprite": "spell14.png",
+            "sprite": "spell15.png",
             "group": "spell",
-            "x": 384,
-            "y": 144,
+            "x": 0,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -271,7 +271,7 @@
           "id": "ZiggsW",
           "name": "Satchel Charge",
           "description": "Ziggs flings an explosive charge that detonates after 4 seconds, or when this ability is activated again. The explosion deals magic damage to enemies, knocking them away. Ziggs is also knocked away, but takes no damage. Ziggs can use the Satchel to hexplode vulnerable enemy turrets.",
-          "tooltip": "Ziggs flings an explosive charge that detonates after {{ e2 }} seconds, or when this ability is activated again. The explosion deals {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage to enemies, knocking them away. Ziggs is also knocked away, but takes no damage.<br /><br />Satchel Charge will <span class=\"colorD41919\">hexplode</span> structurally unsound towers below {{ f1*100 }}% of their Health.",
+          "tooltip": "Ziggs flings an explosive charge that detonates after {{ e2 }} seconds, or when this ability is <recast>Recast</recast>. It deals <magicDamage>{{ totaldamage }} magic damage</magicDamage> to enemies and <status>Knocks</status> them <status>Back</status>. Ziggs is also knocked away, but takes no damage.<br /><br />Satchel Charge will automatically destroy towers below {{ f1*100 }}% of their Health.",
           "leveltip": {
             "label": [
               "Damage",
@@ -388,13 +388,7 @@
             "400",
             "6"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.5,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -407,10 +401,10 @@
           "rangeBurn": "1000",
           "image": {
             "full": "ZiggsW.png",
-            "sprite": "spell14.png",
+            "sprite": "spell15.png",
             "group": "spell",
-            "x": 432,
-            "y": 144,
+            "x": 48,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -420,7 +414,7 @@
           "id": "ZiggsE",
           "name": "Hexplosive Minefield",
           "description": "Ziggs scatters proximity mines that detonate on enemy contact, dealing magic damage and slowing. Successive mine detonations on the same target deal reduced damage.",
-          "tooltip": "Ziggs scatters proximity mines that detonate on enemy contact, dealing {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage. Enemies hit are slowed by {{ e2 }}% for {{ e4 }} seconds.<br /><br />Enemies triggering a mine take {{ e5 }}% damage from additional mines. Mines disarm automatically after {{ e3 }} seconds.",
+          "tooltip": "Ziggs scatters proximity mines that detonate on enemy contact, dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage> and <status>Slows</status> by {{ e2 }}% for {{ e4 }} seconds. Mines last {{ e3 }} seconds.",
           "leveltip": {
             "label": [
               "Mine Damage",
@@ -482,11 +476,11 @@
               1.5
             ],
             [
-              40,
-              40,
-              40,
-              40,
-              40
+              0.4,
+              0.4,
+              0.4,
+              0.4,
+              0.4
             ],
             [
               -0.2,
@@ -530,20 +524,14 @@
             "30/35/40/45/50",
             "10",
             "1.5",
-            "40",
+            "0.4",
             "-0.2/-0.25/-0.3/-0.35/-0.4",
             "135",
             "150",
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.3,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -558,8 +546,8 @@
             "full": "ZiggsE.png",
             "sprite": "spell15.png",
             "group": "spell",
-            "x": 0,
-            "y": 0,
+            "x": 96,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -569,7 +557,7 @@
           "id": "ZiggsR",
           "name": "Mega Inferno Bomb",
           "description": "Ziggs deploys his ultimate creation, the Mega Inferno Bomb, hurling it an enormous distance. Enemies in the primary blast zone take more damage than those farther away.",
-          "tooltip": "Ziggs deploys his ultimate creation, the Mega Inferno Bomb, hurling it an enormous distance. Enemies in the primary blast zone take {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage. Enemies farther away take {{ e5 }} <scaleAP>(+{{ a2 }})</scaleAP> magic damage.",
+          "tooltip": "Ziggs hurls his ultimate creation, dealing <magicDamage>{{ empowereddamage }} magic damage</magicDamage> in the center of the blast radius, or <magicDamage>{{ blastdamage }} magic damage</magicDamage> at the edge.",
           "leveltip": {
             "label": [
               "Damage",
@@ -662,18 +650,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 1.1,
-              "key": "a1"
-            },
-            {
-              "link": "spelldamage",
-              "coeff": 0.7333,
-              "key": "a2"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -686,8 +663,8 @@
             "full": "ZiggsR.png",
             "sprite": "spell15.png",
             "group": "spell",
-            "x": 48,
-            "y": 0,
+            "x": 144,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -701,7 +678,7 @@
           "full": "ZiggsPassiveReady.png",
           "sprite": "passive4.png",
           "group": "passive",
-          "x": 288,
+          "x": 432,
           "y": 96,
           "w": 48,
           "h": 48
@@ -884,18 +861,51 @@
               ],
               "items": [
                 {
-                  "id": "3073",
+                  "id": "1056",
                   "count": 1,
                   "hideCount": false
                 },
+                {
+                  "id": "2003",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
                 {
                   "id": "1001",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "2003",
-                  "count": 5,
+                  "id": "3802",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1026",
+                  "count": 1,
                   "hideCount": false
                 }
               ]
@@ -917,7 +927,7 @@
               ],
               "items": [
                 {
-                  "id": "3007",
+                  "id": "6655",
                   "count": 1,
                   "hideCount": false
                 },
@@ -927,106 +937,22 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3165",
+                  "id": "4637",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
+                },
+                {
+                  "id": "3102",
+                  "count": 1,
+                  "hideCount": false
+                },
                 {
                   "id": "3089",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3100",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
                   "id": "3135",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3029",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3157",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3116",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2139",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2033",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1927,7 +1853,7 @@
                 },
                 {
                   "id": "2003",
-                  "count": 2,
+                  "count": 1,
                   "hideCount": false
                 },
                 {
@@ -1987,78 +1913,17 @@
               ],
               "items": [
                 {
+                  "id": "6655",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
                   "id": "3020",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3285",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3100",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "standard",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3165",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3135",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3089",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3157",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3151",
+                  "id": "4637",
                   "count": 1,
                   "hideCount": false
                 },
@@ -2066,34 +1931,16 @@
                   "id": "3102",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
                 },
                 {
-                  "id": "2139",
+                  "id": "3089",
                   "count": 1,
-                  "hideCount": true
+                  "hideCount": false
+                },
+                {
+                  "id": "3135",
+                  "count": 1,
+                  "hideCount": false
                 }
               ]
             }

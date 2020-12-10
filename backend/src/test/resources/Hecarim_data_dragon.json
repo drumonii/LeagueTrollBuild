@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "Hecarim": {
       "id": "Hecarim",
@@ -71,6 +71,12 @@
           "num": 8,
           "name": "High Noon Hecarim",
           "chromas": true
+        },
+        {
+          "id": "120014",
+          "num": 14,
+          "name": "Cosmic Charger Hecarim",
+          "chromas": true
         }
       ],
       "lore": "Hecarim is a spectral fusion of man and beast, cursed to ride down the souls of the living for all eternity. When the Blessed Isles fell into shadow, this proud knight was obliterated by the destructive energies of the Ruination, along with all his cavalry and their mounts. Now, whenever the Black Mist reaches out across Runeterra, he leads their devastating charge, reveling in the slaughter and crushing the foe beneath his armored hooves.",
@@ -98,7 +104,7 @@
         "hp": 580,
         "hpperlevel": 90,
         "mp": 277.2,
-        "mpperlevel": 40,
+        "mpperlevel": 60,
         "movespeed": 345,
         "armor": 36,
         "armorperlevel": 4,
@@ -121,7 +127,7 @@
           "id": "HecarimRapidSlash",
           "name": "Rampage",
           "description": "Hecarim cleaves nearby enemies dealing physical damage. If Hecarim damages at least one enemy, he increases the damage and lowers the cooldown of subsequent Rampages.",
-          "tooltip": "Hecarim cleaves nearby enemies for <physicalDamage>{{ basedamage }} <scaleAD>(+{{ f1 }})</scaleAD> physical damage</physicalDamage>. ({{ miniondamageratio*100 }}% damage to minions)<br /><br />If Hecarim damages at least one enemy with this attack he gains a stack of Rampage, reducing the base cooldown of this skill by {{ rampagecooldownreduction }} second and increasing its damage by {{ rampagebonusratio*100 }}% for a short duration. This effect can stack up to {{ maxstacks }} times.",
+          "tooltip": "Hecarim cleaves nearby enemies for <physicalDamage>{{ damage }} physical damage</physicalDamage>. If this Ability hits, he gains a stack that decreases its cooldown by {{ rampagecooldownreduction }} second and increasing its damage by {{ rampagebonusratio*100 }}% for 8 seconds. Stacks up to {{ maxstacks }} times.",
           "leveltip": {
             "label": [
               "Damage",
@@ -236,13 +242,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "bonusattackdamage",
-              "coeff": 0.6,
-              "key": "f1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -268,7 +268,7 @@
           "id": "HecarimW",
           "name": "Spirit of Dread",
           "description": "Hecarim deals magic damage to nearby enemies for a short duration. Hecarim gains Health equal to a percentage of any damage those enemies suffer.",
-          "tooltip": "Hecarim deals {{ e2 }} <magicDamage><scaleAP>(+{{ a1 }})</scaleAP> magic damage</magicDamage> over {{ e3 }} seconds to all nearby enemies. Hecarim is healed for {{ e1 }}% of the damage these enemies take from any source.<br /><br />Hecarim cannot heal more than {{ e4 }} Health from minions or monsters.",
+          "tooltip": "Hecarim deals <magicDamage>{{ totaldamage }} magic damge</magicDamage> over {{ e3 }} seconds to nearby enemies, and heals for <healing>{{ e1 }}% of damage</healing> these enemies take from any source.",
           "leveltip": {
             "label": [
               "Damage",
@@ -387,13 +387,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.8,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -419,7 +413,7 @@
           "id": "HecarimRamp",
           "name": "Devastating Charge",
           "description": "Hecarim gains increasing Movement Speed and can move through units for a short duration. His next attack knocks the target back and deals additional physical damage based on the distance he has traveled since activating the ability.",
-          "tooltip": "Hecarim gains increasing Movement Speed and can move through units for {{ e5 }} seconds. His next attack knocks the target back dealing <physicalDamage>{{ e4 }} <scaleAD>(+{{ a1 }})</scaleAD> to {{ e3 }}<scaleAD> (+{{ a2 }})</scaleAD> physical damage</physicalDamage> based on how far Hecarim has traveled during Devastating Charge (knockback distance also scales).<br /><br /><rules>Devastating Charge's remaining duration pauses during Onslaught of Shadows.</rules>",
+          "tooltip": "Hecarim becomes Ghosted and gains <speed>{{ minmovespeed*100 }}% Move Speed</speed> increasing to <speed>{{ maxmovespeed*100 }}%</speed> over {{ e5 }} seconds. His next Attack <status>Knocks Back</status> and deals between <physicalDamage>{{ mindamage }}</physicalDamage> and <physicalDamage>{{ maxdamage }} physical damage</physicalDamage>. <status>Knock Back</status> distance and damage scales with distance travelled during this Ability.",
           "leveltip": {
             "label": [
               "Minimum Damage",
@@ -467,18 +461,18 @@
               450
             ],
             [
-              90,
-              150,
-              210,
-              270,
-              330
+              70,
+              130,
+              190,
+              250,
+              310
             ],
             [
-              45,
-              75,
-              105,
-              135,
-              165
+              35,
+              65,
+              95,
+              125,
+              155
             ],
             [
               4,
@@ -488,11 +482,11 @@
               4
             ],
             [
-              1,
-              1,
-              1,
-              1,
-              1
+              0.75,
+              0.75,
+              0.75,
+              0.75,
+              0.75
             ],
             [
               1200,
@@ -527,27 +521,16 @@
             null,
             "250",
             "450",
-            "90/150/210/270/330",
-            "45/75/105/135/165",
+            "70/130/190/250/310",
+            "35/65/95/125/155",
             "4",
-            "1",
+            "0.75",
             "1200",
             "0.25",
             "2.5",
             "0"
           ],
-          "vars": [
-            {
-              "link": "bonusattackdamage",
-              "coeff": 0.5,
-              "key": "a1"
-            },
-            {
-              "link": "bonusattackdamage",
-              "coeff": 1,
-              "key": "a2"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -573,7 +556,7 @@
           "id": "HecarimUlt",
           "name": "Onslaught of Shadows",
           "description": "Hecarim summons spectral riders and charges forward, dealing magic damage in a line. Hecarim creates a shockwave when he finishes his charge, causing nearby enemies to flee in terror.",
-          "tooltip": "Hecarim summons spectral riders and charges forward, dealing <magicDamage>{{ basedamage }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage</magicDamage> to enemies hit. <br /><br />Hecarim releases a shockwave at the end of his charge, causing nearby enemies to flee from him for {{ feardurationmin }} to {{ feardurationmax }} seconds (increases by charge distance).<br /><br /><rules>Hecarim himself will only move to the targeted location. The riders will always move the full distance.</rules>",
+          "tooltip": "Hecarim summons spectral riders and charges forward, dealing <magicDamage>{{ damagedone }} magic damage</magicDamage>. Hecarim unleashes a shockwave at the end of the charge that <status>Fears</status> for between {{ feardurationmin }} to {{ feardurationmax }} seconds, increased by charge distance.",
           "leveltip": {
             "label": [
               "Damage",
@@ -664,13 +647,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 1,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -843,18 +820,51 @@
               ],
               "items": [
                 {
-                  "id": "2051",
+                  "id": "1055",
                   "count": 1,
                   "hideCount": false
                 },
+                {
+                  "id": "2003",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
                 {
                   "id": "1001",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "2003",
-                  "count": 3,
+                  "id": "3067",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3057",
+                  "count": 1,
                   "hideCount": false
                 }
               ]
@@ -881,108 +891,29 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3111",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3142",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
                   "id": "3053",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3156",
+                  "id": "3153",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3005",
+                  "id": "3026",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
+                },
+                {
+                  "id": "3071",
+                  "count": 1,
+                  "hideCount": false
+                },
                 {
                   "id": "3742",
                   "count": 1,
                   "hideCount": false
-                },
-                {
-                  "id": "3065",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3075",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2140",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }
@@ -1882,7 +1813,7 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
+              "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
                 ""
@@ -1892,7 +1823,7 @@
               ],
               "items": [
                 {
-                  "id": "1054",
+                  "id": "1055",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1915,7 +1846,7 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
+              "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
                 ""
@@ -1925,17 +1856,17 @@
               ],
               "items": [
                 {
-                  "id": "3057",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3044",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
                   "id": "1001",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3067",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3057",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1948,7 +1879,7 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
+              "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
                 ""
@@ -1957,206 +1888,18 @@
                 ""
               ],
               "items": [
-                {
-                  "id": "3047",
-                  "count": 1,
-                  "hideCount": false
-                },
                 {
                   "id": "3078",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3110",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
                   "id": "3053",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3142",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3156",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3065",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3742",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3075",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "startingjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "1039",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2031",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3340",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "earlyjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3706",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "1001",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3044",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essentialjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "1401",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3047",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3078",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3053",
+                  "id": "3153",
                   "count": 1,
                   "hideCount": false
                 },
@@ -2166,30 +1909,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3800",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSiegeChampSelect2",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3065",
+                  "id": "3071",
                   "count": 1,
                   "hideCount": false
                 },
@@ -2197,39 +1917,6 @@
                   "id": "3742",
                   "count": 1,
                   "hideCount": false
-                },
-                {
-                  "id": "3110",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2140",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }

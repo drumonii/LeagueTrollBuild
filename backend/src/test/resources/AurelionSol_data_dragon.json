@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "AurelionSol": {
       "id": "AurelionSol",
@@ -35,6 +35,12 @@
           "num": 2,
           "name": "Mecha Aurelion Sol",
           "chromas": true
+        },
+        {
+          "id": "136011",
+          "num": 11,
+          "name": "Storm Dragon Aurelion Sol",
+          "chromas": false
         }
       ],
       "lore": "Aurelion Sol once graced the vast emptiness of the cosmos with celestial wonders of his own devising. Now, he is forced to wield his awesome power at the behest of a space-faring empire that tricked him into servitude. Desiring a return to his star-forging ways, Aurelion Sol will drag the very stars from the sky, if he must, in order to regain his freedom.",
@@ -87,7 +93,7 @@
           "id": "AurelionSolQ",
           "name": "Starsurge",
           "description": "Aurelion Sol creates an expanding disk, which explodes to stun and damage enemies when it moves too far away from him.",
-          "tooltip": "<spellPassive>First Press: </spellPassive>Aurelion Sol creates a new stellar core, which grows over time and grants him {{ e2 }}% Movement Speed.<br /><br />The core will detonate when it reaches his <span class=\"color308BDB\">Outer Limit</span>, applying {{ e1 }} <magicDamage><scaleAP>(+{{ a1 }})</scaleAP> magic damage</magicDamage> and stunning enemies for {{ effect4amount*.25 }} to {{ e4 }} second(s) based on size.<br /><br /><spellPassive>Second Press: </spellPassive>Detonate the core early.<br />",
+          "tooltip": "Aurelion Sol creates a small star that grows and grants him <speed>{{ e2 }}% Movement Speed</speed>. Upon exiting Aurelion Sol's <keywordMajor>Outer Limit</keywordMajor> or after <recast>Recasting</recast>, the star explodes, dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage> and <status>Stunning</status> for between {{ minstun }} and {{ e4 }} seconds, based on travel time.",
           "leveltip": {
             "label": [
               "Damage",
@@ -206,13 +212,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.65,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -238,7 +238,7 @@
           "id": "AurelionSolW",
           "name": "Celestial Expansion",
           "description": "Aurelion Sol pushes his stars farther out, increasing their damage and speed.",
-          "tooltip": "<spellPassive>Passive: </spellPassive>Increases Star base damage by {{ starbasedamageincrease }}.<br /><br /><spellPassive>Active: </spellPassive>Aurelion Sol's Stars expand their orbit to his <span class=\"color308BDB\">Outer Limit</span>, rotating more quickly and dealing {{ damagemultiplier*100 }}% damage for a total of <magicDamage>{{ f1 }} <scaleAP>(+{{ f2 }})</scaleAP> magic damage</magicDamage>. Upon reactivation or after 3 seconds, the Stars retract and Aurelion Sol gains 40% Movement Speed, decaying over 1.5 seconds.<br />",
+          "tooltip": "<spellPassive>Passive:</spellPassive> Increases <spellName>Center of the Universe's</spellName> damage by {{ starbasedamageincrease }}.<br /><br /><spellActive>Active:</spellActive> Aurelion Sol's Stars expand to his <keywordMajor>Outer Limit</keywordMajor>, increase in speed, and deal {{ damagemultiplier*100 }}% damage. After 3 seconds, <recast>Recasting</recast>, or using <spellName>Comet of Legend</spellName> they retract and Aurelion Sol gains <speed>40% Movement Speed</speed>, decaying over 1.5 seconds.<br />",
           "leveltip": {
             "label": [
               "Passive Damage Bonus",
@@ -381,7 +381,7 @@
           "id": "AurelionSolE",
           "name": "Comet of Legend",
           "description": "Aurelion Sol takes off flying for a long distance.",
-          "tooltip": "Fly for {{ e3 }} units in the chosen direction. Only castable outside of combat. Aurelion Sol can see and be seen over walls while flying.<br /><br />Taking champion or turret damage will force a landing.<br />",
+          "tooltip": "Aurelion Sol starts flying along a path at <speed>{{ e4 }} Movement Speed</speed>. Taking damage from champions or structures ends the flight. While flying he can see and be seen over walls.<br /><br />This ability can only be used outside of combat.",
           "leveltip": {
             "label": [
               "Flight Range",
@@ -524,7 +524,7 @@
           "id": "AurelionSolR",
           "name": "Voice of Light",
           "description": "Aurelion Sol projects a blast of pure starfire, damaging and slowing all enemies caught in it and knocking nearby enemies back to a safer distance.",
-          "tooltip": "Breathes out a blast of pure starfire, dealing <magicDamage>{{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage</magicDamage> and slowing by {{ e2 }}% for {{ e3 }} seconds. <br /><br />The blast will also knock nearby enemies back to Aurelion Sol's <span class=\"color308BDB\">Outer Limit</span>.<br />",
+          "tooltip": "Aurelion Sol breathes out a blast of starfire, dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage>, <status>Slowing</status> by {{ e2 }}% for {{ e3 }} seconds, and <status>Knocking Back</status> enemies to his <keywordMajor>Outer Limit</keywordMajor>.",
           "leveltip": {
             "label": [
               "Damage",
@@ -617,13 +617,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.7,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -686,12 +680,50 @@
               ],
               "items": [
                 {
-                  "id": "3010",
+                  "id": "1056",
                   "count": 1,
                   "hideCount": false
                 },
                 {
+                  "id": "2003",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
                   "id": "1001",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3802",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1026",
                   "count": 1,
                   "hideCount": false
                 }
@@ -714,73 +746,17 @@
               ],
               "items": [
                 {
-                  "id": "3009",
+                  "id": "6655",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3029",
+                  "id": "3020",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3116",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3151",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3135",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3089",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3157",
+                  "id": "4637",
                   "count": 1,
                   "hideCount": false
                 },
@@ -790,35 +766,12 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3165",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
+                  "id": "3089",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "2139",
+                  "id": "3135",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1570,12 +1523,50 @@
               ],
               "items": [
                 {
-                  "id": "2033",
+                  "id": "1056",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "2003",
                   "count": 1,
                   "hideCount": false
                 },
                 {
                   "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "1001",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3802",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1026",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1598,40 +1589,17 @@
               ],
               "items": [
                 {
-                  "id": "3027",
+                  "id": "6655",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3009",
+                  "id": "3020",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3116",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3157",
+                  "id": "4637",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1641,35 +1609,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3165",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3030",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3151",
+                  "id": "3089",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1677,34 +1617,6 @@
                   "id": "3135",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2139",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }

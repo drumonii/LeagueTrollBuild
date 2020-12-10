@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "Urgot": {
       "id": "Urgot",
@@ -12,8 +12,8 @@
         "full": "Urgot.png",
         "sprite": "champion4.png",
         "group": "champion",
-        "x": 336,
-        "y": 0,
+        "x": 0,
+        "y": 48,
         "w": 48,
         "h": 48
       },
@@ -105,17 +105,17 @@
           "id": "UrgotQ",
           "name": "Corrosive Charge",
           "description": "Fires an explosive charge at the target location, dealing physical damage and slowing enemies caught in the explosion.",
-          "tooltip": "Urgot fires an explosive charge, dealing <physicalDamage>{{ totaldamage }} physical damage</physicalDamage> and slowing enemies hit by {{ slowamount*100 }}% for {{ slowduration }} seconds.",
+          "tooltip": "Urgot fires an explosive charge, dealing <physicalDamage>{{ totaldamage }} physical damage</physicalDamage> and <status>Slowing</status> by {{ slowamount*100 }}% for {{ slowduration }} seconds.",
           "leveltip": {
             "label": [
+              "Cooldown",
               "Damage",
-              "Slow",
-              "Cooldown"
+              "Slow"
             ],
             "effect": [
+              "{{ cooldown }} -> {{ cooldownNL }}",
               "{{ basedamage }} -> {{ basedamageNL }}",
-              "{{ slowamount*100.000000 }}% -> {{ slowamountnl*100.000000 }}%",
-              "{{ cooldown }} -> {{ cooldownNL }}"
+              "{{ slowamount*100.000000 }}% -> {{ slowamountnl*100.000000 }}%"
             ]
           },
           "maxrank": 5,
@@ -237,8 +237,8 @@
             "full": "UrgotQ.png",
             "sprite": "spell13.png",
             "group": "spell",
-            "x": 96,
-            "y": 0,
+            "x": 192,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -248,7 +248,7 @@
           "id": "UrgotW",
           "name": "Purge",
           "description": "Urgot slows himself while he unloads his weapon on nearby enemies. Prioritizes enemy champions Urgot has recently struck with other abilities and triggers Echoing Flames.",
-          "tooltip": "For {{ e3 }} seconds, Urgot shoots at a nearby enemy {{ e8 }} times a second, dealing {{ e9 }} <scaleAD>(+{{ f3 }})</scaleAD> physical damage per shot, <span class=\"colorFFEB7F\">locking onto</span> champions recently damaged by his other abilities.<br /><br />While firing, Urgot loses {{ e5 }} movement speed but has {{ e2 }}% slow resistance and can walk over minions and non-epic monsters.<br /><br /><rules><span class=\"color8c8c8c\">At max rank, Purge lasts for an infinite duration and has no cooldown.<br /><br />Applies on-hits at {{ onhitdamagereduction*100 }}% damage. Cannot critically strike. Minimum of {{ e0 }} damage to minions.</span></rules>",
+          "tooltip": "<spellPassive>Passive:</spellPassive> Urgot's other Abilities mark the last champion hit for 5 seconds.<br /><br /><spellActive>Active:</spellActive> Urgot begins firing his chain gun at the closest enemy, prioritizing marked enemies. He Attacks them {{ e8 }} times a second dealing <physicalDamage>{{ damagepershot }} physical damage</physicalDamage> per shot. Urgot can move while firing and has {{ e2 }}% <status>Slow</status> resistance, but loses <speed>{{ e5 }} Move Speed</speed>.<br /><br />At max rank, this Ability lasts indefinitely and can be <toggle>Toggled</toggle> on and off.",
           "leveltip": {
             "label": [
               "Cooldown",
@@ -380,8 +380,8 @@
             "full": "UrgotW.png",
             "sprite": "spell13.png",
             "group": "spell",
-            "x": 144,
-            "y": 0,
+            "x": 240,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -391,7 +391,7 @@
           "id": "UrgotE",
           "name": "Disdain",
           "description": "Urgot charges in a direction, shielding himself and trampling non-champion enemies. If he catches an enemy champion, he will stop and hurl them out of his way.",
-          "tooltip": "Urgot charges forwards, shielding himself for {{ etotalshieldhealth }} for {{ eshieldduration }} seconds. If he catches an enemy champion, he will stop and hurl them behind him, dealing {{ edamage }} physical damage and stunning them for {{ stunduration }} seconds.<br /><br />Non-champions take the same damage but are knocked aside.<br /><br /><rules><span class=\"color8c8c8c\">Cannot cross terrain.</span></rules>",
+          "tooltip": "Urgot charges forward, gaining <shield>{{ etotalshieldhealth }} Shield</shield> for {{ eshieldduration }} seconds. The first champion hit is <status>Stunned</status> and thrown behind Urgot. All enemies Urgot collides with take <physicalDamage>{{ edamage }} physical damage</physicalDamage>.",
           "leveltip": {
             "label": [
               "Damage",
@@ -525,8 +525,8 @@
             "full": "UrgotE.png",
             "sprite": "spell13.png",
             "group": "spell",
-            "x": 192,
-            "y": 0,
+            "x": 288,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -536,7 +536,7 @@
           "id": "UrgotR",
           "name": "Fear Beyond Death",
           "description": "Urgot fires a chem-drill that impales the first enemy champion hit. If that champion falls below a health threshold, Urgot judges them weak and can execute them.",
-          "tooltip": "Urgot fires a chem-drill, impaling the first enemy champion hit. Deals {{ rcalculateddamage }} physical damage and slows for {{ rslowduration }} seconds by up to {{ rmovespeedmod }}% based on the victim's missing health.<br /><br />If the victim falls below {{ rhealththreshold }}% health while impaled, Urgot may recast this ability, suppressing the victim and dragging them in for execution. Activates automatically if the target is below {{ rhealththreshold }}% at the end of the effect.<br /><br />When Urgot executes a victim, nearby enemies flee in terror for {{ rfearduration }} seconds.",
+          "tooltip": "Urgot fires a chem-drill, impaling the first champion hit, dealing <physicalDamage>{{ rcalculateddamage }} physical damage</physicalDamage> and <status>Slowing</status> for {{ rslowduration }} seconds by 1% per 1% missing Health, up to {{ rmovespeedmod }}%.<br /><br />If the impaled victim falls below {{ rhealththreshold }}% Health, Urgot can <recast>Recast</recast> this Ability, <status>Suppressing</status> the victim and dragging them to himself. On reaching Urgot, they are killed and nearby enemies are <status>Feared</status> for {{ rfearduration }} seconds.",
           "leveltip": {
             "label": [
               "Damage",
@@ -640,8 +640,8 @@
             "full": "UrgotR.png",
             "sprite": "spell13.png",
             "group": "spell",
-            "x": 240,
-            "y": 0,
+            "x": 336,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -655,8 +655,8 @@
           "full": "Urgot_Passive.png",
           "sprite": "passive4.png",
           "group": "passive",
-          "x": 336,
-          "y": 0,
+          "x": 0,
+          "y": 48,
           "w": 48,
           "h": 48
         }
@@ -851,12 +851,50 @@
               ],
               "items": [
                 {
-                  "id": "3044",
+                  "id": "1055",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "2031",
+                  "id": "2003",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "1001",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3067",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3057",
                   "count": 1,
                   "hideCount": false
                 }
@@ -879,116 +917,32 @@
               ],
               "items": [
                 {
+                  "id": "3078",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3053",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3153",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3026",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
                   "id": "3071",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3047",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3022",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3812",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3156",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3005",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3075",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3065",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3800",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2033",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2140",
+                  "id": "3742",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1749,17 +1703,17 @@
               ],
               "items": [
                 {
-                  "id": "3067",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
                   "id": "1001",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3044",
+                  "id": "3067",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3057",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1772,72 +1726,6 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerDemonBrand",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3071",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3047",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3812",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerBoost",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3033",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3156",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3022",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
@@ -1847,51 +1735,33 @@
                 ""
               ],
               "items": [
+                {
+                  "id": "3078",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3053",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3153",
+                  "count": 1,
+                  "hideCount": false
+                },
                 {
                   "id": "3026",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3800",
+                  "id": "3071",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3194",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2031",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2140",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "3364",
+                  "id": "3742",
                   "count": 1,
                   "hideCount": false
                 }

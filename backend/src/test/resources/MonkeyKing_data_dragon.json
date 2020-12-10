@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "MonkeyKing": {
       "id": "MonkeyKing",
@@ -86,7 +86,7 @@
         "hp": 540,
         "hpperlevel": 85,
         "mp": 300,
-        "mpperlevel": 45,
+        "mpperlevel": 65,
         "movespeed": 345,
         "armor": 31,
         "armorperlevel": 3.5,
@@ -109,7 +109,7 @@
           "id": "MonkeyKingDoubleAttack",
           "name": "Crushing Blow",
           "description": "Wukong's next attack gains attack range, deals bonus damage, and reduces the target's armor for a few seconds.",
-          "tooltip": "Wukong and his clone's next attack gains {{ attackrangebonus }} extra range, deals <physicalDamage>{{ totaldamage }} bonus physical damage</physicalDamage>, and reduces the target's armor by {{ armorshredpercent*100 }}% for {{ shredduration }} seconds.<br /><br />Crushing Blow's cooldown is reduced by {{ cooldowndecrease }} seconds every time Wukong or his clone hits an enemy with an attack or spell.",
+          "tooltip": "Wukong and his <keywordMajor>Clone's</keywordMajor> next Attack gains {{ attackrangebonus }} range, deals an additional <physicalDamage>{{ bonusdamagett }} physical damage</physicalDamage>, and removes <scaleArmor>{{ armorshredpercent*100 }}% Armor</scaleArmor> for {{ shredduration }} seconds.<br /><br />This Ability's cooldown is reduced by {{ cooldowndecrease }} seconds every time Wukong or his <keywordMajor>Clone</keywordMajor> hit an enemy with an Attack or Ability.",
           "leveltip": {
             "label": [
               "Damage",
@@ -254,7 +254,7 @@
           "id": "MonkeyKingDecoy",
           "name": "Warrior Trickster",
           "description": "Wukong becomes <font color='#91d7ee'>Invisible</font> and dashes in a direction, leaving behind a clone that will attack nearby enemies.",
-          "tooltip": "Wukong dashes and becomes <span class=\"color91d7ee\">Invisible</span> for {{ stealthduration }} second, leaving behind a stationary clone for {{ cloneduration }} seconds.<br /><br />The clone attacks nearby enemies Wukong has recently damaged and will mimic his ultimate, dealing {{ clonedamagemod*100 }}% of normal damage.",
+          "tooltip": "Wukong dashes and becomes <keywordStealth>Invisible</keywordStealth> for {{ stealthduration }} second, leaving behind a stationary <keywordMajor>Clone</keywordMajor> for {{ cloneduration }} seconds.<br /><br />The <keywordMajor>Clone</keywordMajor> Attacks nearby enemies Wukong has recently damaged and will mimic his ultimate, each dealing {{ clonedamagemod*100 }}% of normal damage.",
           "leveltip": {
             "label": [
               "Damage Percent",
@@ -397,7 +397,7 @@
           "id": "MonkeyKingNimbus",
           "name": "Nimbus Strike",
           "description": "Wukong dashes to a targeted enemy and sends out images to attack enemies near his target, dealing damage to each enemy struck.",
-          "tooltip": "Wukong dashes to an enemy, sending out clones that mimic the dash to up to {{ extratargets }} additional enemies nearby. Each enemy struck takes <magicDamage>{{ totaldamage }} magic damage</magicDamage>. He and his clone then gain {{ attackspeed*100 }}% Attack Speed for {{ attackspeedduration }} seconds.<br />",
+          "tooltip": "Wukong dashes to an enemy, sending out <keywordMajor>Clones</keywordMajor> that mimic the dash to up to {{ extratargets }} additional enemies nearby. Each enemy struck takes <magicDamage>{{ totaldamage }} magic damage</magicDamage>. He and his <keywordMajor>Clone</keywordMajor> gain <attackSpeed>{{ attackspeed*100 }}% Attack Speed</attackSpeed> for {{ attackspeedduration }} seconds.<br /><br /><rules><span class=\"color8c8c8c\">Deals {{ totaldamagemonsters }} damage to monsters.</span></rules>",
           "leveltip": {
             "label": [
               "Damage",
@@ -542,7 +542,7 @@
           "id": "MonkeyKingSpinToWin",
           "name": "Cyclone",
           "description": "Wukong's extends his staff and spins it around repeatedly, gaining Movement Speed.<br><br>Enemies struck take damage and are knocked up.",
-          "tooltip": "Wukong spins his staff around for {{ spinduration }} seconds, gaining {{ movespeed*100 }}% Movement Speed. While spinning, he deals <physicalDamage>{{ damagepersecondtotal }} (+{{ percentmaxhpdmgpersec }} of the target's maximum health) physical damage</physicalDamage> per second to nearby enemies and knocks them up for {{ knockupduration }} seconds.<br /><br />Cyclone can be cast a second time within {{ recastwindow }} seconds before going on cooldown.",
+          "tooltip": "Wukong gains <speed>{{ movespeed*100 }}% Move Speed</speed> and spins his staff, <status>Knocking Up</status> nearby enemies for {{ knockupduration }} seconds and take <physicalDamage>{{ totaldamagett }} plus {{ percenthpdamagett }} max Health physical damage</physicalDamage> over {{ spinduration }} seconds.<br /><br />This Ability can be cast a second time within {{ recastwindow }} seconds before going on cooldown.",
           "leveltip": {
             "label": [
               "Maximum Health Damage",

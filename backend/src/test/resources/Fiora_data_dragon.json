@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "Fiora": {
       "id": "Fiora",
@@ -104,7 +104,7 @@
         "hp": 550,
         "hpperlevel": 85,
         "mp": 300,
-        "mpperlevel": 40,
+        "mpperlevel": 60,
         "movespeed": 345,
         "armor": 33,
         "armorperlevel": 3.5,
@@ -127,7 +127,7 @@
           "id": "FioraQ",
           "name": "Lunge",
           "description": "Fiora lunges in a direction and stabs a nearby enemy, dealing physical damage and applying on-hit effects.",
-          "tooltip": "Fiora lunges in a direction and stabs a nearby enemy, dealing <physicalDamage>{{ e1 }} <scaleAD>(+{{ f1 }})</scaleAD> physical damage</physicalDamage> and applying on-hit effects. This attack prioritizes <span class=\"colorD4BD22\">Vitals</span> and enemies it will kill.<br /><br />If this ability hits an enemy, {{ e4 }}% of its cooldown is refunded. ",
+          "tooltip": "Fiora lunges in a direction and stabs the closest enemy, ward, or structure, dealing <physicalDamage>{{ totaldamage }} physical damage</physicalDamage>. The strike will prioritize <keywordMajor>Vitals</keywordMajor> and enemies it will kill.<br /><br />If Fiora strikes an enemy, this Ability's cooldown is reduced by {{ e4 }}%.",
           "leveltip": {
             "label": [
               "Damage",
@@ -246,13 +246,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "bonusattackdamage",
-              "coeff": 0.6,
-              "key": "f1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -278,7 +272,7 @@
           "id": "FioraW",
           "name": "Riposte",
           "description": "Fiora parries all incoming damage and disables for a short time, then stabs in a direction. This stab slows the first enemy champion hit, or stuns them if Fiora blocked an immobilizing effect with this ability.",
-          "tooltip": "Fiora parries all incoming damage, debuffs, and disables for the next {{ e2 }} seconds and then stabs in the target direction.<br /><br />The stab deals <magicDamage>{{ e1 }} <scaleAP>(+{{ f1 }})</scaleAP> magic damage</magicDamage> to the first enemy champion hit and slows their movement and attack speed by {{ e4 }}% for {{ e3 }} seconds. <br /><br />If Fiora parries an immobilizing effect, Riposte stuns instead of slowing.",
+          "tooltip": "Fiora parries all incoming damage, disables, and negative effects for {{ e2 }} seconds, then stabs. The stab deals <magicDamage>{{ stabdamage }} magic damage</magicDamage> to the first champion hit and <status>Slows</status> both Move Speed and Attack Speed by {{ e4 }}% for {{ e3 }} seconds. If Fiora parries an <status>Immobilizing</status> effect, the stabbed enemy is <status>Stunned</status> rather than <status>Slowed</status>.",
           "leveltip": {
             "label": [
               "Damage",
@@ -419,17 +413,17 @@
           "id": "FioraE",
           "name": "Bladework",
           "description": "Fiora has increased attack speed for the next two attacks. The first attack slows the target, and the second attack will critically strike.",
-          "tooltip": "Fiora gains {{ e4 }}% attack speed for her next two attacks. The first attack cannot critically strike, but will apply a {{ e3 }}% slow for {{ e2 }} second. The second attack is guaranteed to critically strike for {{ f4 }}% damage <scaleAD>({{ f3 }})</scaleAD>.",
+          "tooltip": "Fiora gains <attackSpeed>{{ e4 }}% Attack Speed</attackSpeed> for her next two Attacks. The first Attack <status>Slows</status> by {{ e3 }}% for {{ e2 }} second. The second Attack always critically strike for <physicalDamage>{{ f4 }}% damage</physicalDamage>.",
           "leveltip": {
             "label": [
               "Critical Strike Damage",
               "Cooldown",
-              "Attack Speed %"
+              "Attack Speed"
             ],
             "effect": [
               "{{ e6 }}% -> {{ e6NL }}%",
               "{{ cooldown }} -> {{ cooldownNL }}",
-              "{{ e4 }} -> {{ e4NL }}"
+              "{{ e4 }}% -> {{ e4NL }}%"
             ]
           },
           "maxrank": 5,
@@ -562,7 +556,7 @@
           "id": "FioraR",
           "name": "Grand Challenge",
           "description": "Fiora reveals all four Vitals on an enemy champion and gains movement speed while near them. If Fiora hits all 4 Vitals or if the target dies after she has hit at least one, Fiora and her allies in the area are healed over the next few seconds.",
-          "tooltip": "Fiora reveals all four <span class=\"colorD4BD22\">Vitals</span> on target champion, for a potential <trueDamage>{{ spell.fiorapassive:rdamagetotal }} max health true damage</trueDamage>. In addition, Fiora gains <spellName>Duelist's Dance's</spellName> movement speed bonus ({{ spell.fiorar:percentms }}%) while near the target.<br /><br />If Fiora hits all 4 <span class=\"colorD4BD22\">Vitals</span> in {{ markduration }} seconds or if the target dies after she has hit at least one, Fiora and her allies in the area are healed for {{ healpersecondcalc }} each second for between {{ minhealduration }} to {{ healduration }} seconds, scaling with the amount of Vitals hit.",
+          "tooltip": "<spellPassive>Passive:</spellPassive> <spellName>Duelist's Dance</spellName> <speed>Move Speed</speed> bonus is increased to {{ percentms }}%.<br /><br /><spellActive>Active:</spellActive> Fiora reveals all 4 <keywordMajor>Vitals</keywordMajor> on a champion for a max of <trueDamage>{{ spell.fiorapassive:rdamagetotal }} max Health true damage</trueDamage> and gains <spellName>Duelist's Dance</spellName>'s Move Speed bonus while near the target.<br /><br />If Fiora strikes all 4 <keywordMajor>Vitals</keywordMajor> within {{ markduration }} seconds of if the target dies after she has hit at least one, Fiora restores <healing>{{ healpersecondcalc }} Health per second</healing> to surrounding allied champions for between {{ minhealduration }} to {{ healduration }} seconds, scaling with the number of <keywordMajor>Vitals</keywordMajor> hit.",
           "leveltip": {
             "label": [
               "Cooldown",
@@ -872,13 +866,51 @@
               ],
               "items": [
                 {
-                  "id": "3077",
+                  "id": "1055",
                   "count": 1,
                   "hideCount": false
                 },
                 {
                   "id": "2003",
-                  "count": 4,
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "1001",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3067",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3057",
+                  "count": 1,
                   "hideCount": false
                 }
               ]
@@ -900,12 +932,22 @@
               ],
               "items": [
                 {
-                  "id": "3074",
+                  "id": "3078",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3047",
+                  "id": "3053",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3153",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3026",
                   "count": 1,
                   "hideCount": false
                 },
@@ -913,103 +955,9 @@
                   "id": "3071",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3812",
-                  "count": 1,
-                  "hideCount": false
                 },
                 {
-                  "id": "3156",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3072",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3053",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3161",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3065",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2140",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2033",
+                  "id": "3742",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1763,12 +1711,12 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3077",
+                  "id": "3067",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3044",
+                  "id": "3057",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1791,78 +1739,7 @@
               ],
               "items": [
                 {
-                  "id": "3111",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3074",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
                   "id": "3078",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3812",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3072",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3156",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3026",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3139",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1870,34 +1747,26 @@
                   "id": "3053",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
+                },
                 {
-                  "id": "2033",
+                  "id": "3153",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "2140",
+                  "id": "3026",
                   "count": 1,
-                  "hideCount": true
+                  "hideCount": false
+                },
+                {
+                  "id": "3071",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3742",
+                  "count": 1,
+                  "hideCount": false
                 }
               ]
             }

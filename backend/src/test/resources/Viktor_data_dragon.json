@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "Viktor": {
       "id": "Viktor",
@@ -12,7 +12,7 @@
         "full": "Viktor.png",
         "sprite": "champion4.png",
         "group": "champion",
-        "x": 144,
+        "x": 288,
         "y": 48,
         "w": 48,
         "h": 48
@@ -47,6 +47,12 @@
           "num": 4,
           "name": "Death Sworn Viktor",
           "chromas": false
+        },
+        {
+          "id": "112005",
+          "num": 5,
+          "name": "PsyOps Viktor",
+          "chromas": true
         }
       ],
       "lore": "The herald of a new age of technology, Viktor has devoted his life to the advancement of humankind. An idealist who seeks to lift the people of Zaun to a new level of understanding, he believes that only by embracing a glorious evolution of technology can humanity's full potential be realized. With a body augmented by steel and science, Viktor is zealous in his pursuit of this bright future.",
@@ -73,7 +79,7 @@
         "hp": 530,
         "hpperlevel": 90,
         "mp": 405,
-        "mpperlevel": 25,
+        "mpperlevel": 45,
         "movespeed": 335,
         "armor": 23,
         "armorperlevel": 4,
@@ -223,7 +229,7 @@
             },
             {
               "link": "spelldamage",
-              "coeff": 0.55,
+              "coeff": 0.6,
               "key": "a2"
             }
           ],
@@ -241,8 +247,8 @@
             "full": "ViktorPowerTransfer.png",
             "sprite": "spell13.png",
             "group": "spell",
-            "x": 288,
-            "y": 96,
+            "x": 384,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -251,7 +257,7 @@
         {
           "id": "ViktorGravitonField",
           "name": "Gravity Field",
-          "description": "Viktor conjures a heavy gravitational field that slows enemies in its radius. Enemies who stay within the device for too long are stunned.<br><br>Augment: Enemies stunned by Gravity Field are dragged to the center.",
+          "description": "Viktor conjures a heavy gravitational field that slows enemies in its radius. Enemies who stay within the device for too long are stunned.<br><br>Augment: Viktor's non-periodic spells apply a slow to enemies.",
           "tooltip": "Viktor deploys a gravitational imprisonment device for {{ fieldduration }} seconds, slowing enemy units by {{ slowpotency*-1 }}% and adding a stack every {{ stackcadence }} seconds. At {{ stacksforstun }} stacks the target is stunned for {{ stunduration }} seconds.<br /><br /><span class=\"colorFFCC00\">Augment - Magnetize:</span> Viktor's non-periodic spells apply a {{ augmentslow }}% slow to enemies for 1 second.<br /><br />",
           "leveltip": {
             "label": [
@@ -382,8 +388,8 @@
             "full": "ViktorGravitonField.png",
             "sprite": "spell13.png",
             "group": "spell",
-            "x": 336,
-            "y": 96,
+            "x": 432,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -393,7 +399,7 @@
           "id": "ViktorDeathRay",
           "name": "Death Ray",
           "description": "Viktor uses his robotic arm to fire a chaos beam that cuts across the field in a line, dealing damage to all enemies in its path.<br><br>Augment: An explosion follows the Death Ray's wake, dealing magic damage.",
-          "tooltip": "Viktor uses his robotic arm to fire a chaos beam that cuts across the field in a line, dealing {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage to every enemy in its path.<br /><br /><span class=\"colorFFCC00\">Augment - Aftershock:</span> An explosion follows the Death Ray's wake, dealing {{ e2 }} <scaleAP>(+{{ a2 }})</scaleAP> magic damage.",
+          "tooltip": "Viktor uses his robotic arm to fire a chaos beam that cuts across the field in a line, dealing {{ laserdamage }} magic damage to every enemy in its path.<br /><br /><span class=\"colorFFCC00\">Augment - Aftershock:</span> An explosion follows the Death Ray's wake, dealing {{ aftershockdamage }} magic damage.",
           "leveltip": {
             "label": [
               "Damage (Death Ray)",
@@ -402,8 +408,8 @@
               "@AbilityResourceName@ Cost"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
-              "{{ e2 }} -> {{ e2NL }}",
+              "{{ basedamagelaser }} -> {{ basedamagelaserNL }}",
+              "{{ basedamageaftershock }} -> {{ basedamageaftershockNL }}",
               "{{ cooldown }} -> {{ cooldownNL }}",
               "{{ cost }} -> {{ costNL }}"
             ]
@@ -512,18 +518,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.6,
-              "key": "a1"
-            },
-            {
-              "link": "spelldamage",
-              "coeff": 0.7,
-              "key": "a2"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -536,10 +531,10 @@
           "rangeBurn": "525",
           "image": {
             "full": "ViktorDeathRay.png",
-            "sprite": "spell13.png",
+            "sprite": "spell14.png",
             "group": "spell",
-            "x": 384,
-            "y": 96,
+            "x": 0,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -664,10 +659,10 @@
           "rangeBurn": "700",
           "image": {
             "full": "ViktorChaosStorm.png",
-            "sprite": "spell13.png",
+            "sprite": "spell14.png",
             "group": "spell",
-            "x": 432,
-            "y": 96,
+            "x": 48,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -676,12 +671,12 @@
       ],
       "passive": {
         "name": "Glorious Evolution",
-        "description": "Viktor starts with the Prototype Hex Core that can be upgraded three times in the store to augment his abilities.",
+        "description": "Viktor can augment his basic abilities when he gets kills on enemies.",
         "image": {
           "full": "Viktor_Passive.png",
           "sprite": "passive4.png",
           "group": "passive",
-          "x": 144,
+          "x": 288,
           "y": 48,
           "w": 48,
           "h": 48
@@ -821,13 +816,51 @@
               ],
               "items": [
                 {
-                  "id": "3196",
+                  "id": "1056",
                   "count": 1,
                   "hideCount": false
                 },
                 {
                   "id": "2003",
-                  "count": 3,
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "1001",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3802",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1026",
+                  "count": 1,
                   "hideCount": false
                 }
               ]
@@ -849,7 +882,7 @@
               ],
               "items": [
                 {
-                  "id": "3198",
+                  "id": "6655",
                   "count": 1,
                   "hideCount": false
                 },
@@ -859,30 +892,12 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3007",
+                  "id": "4637",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
+                },
                 {
-                  "id": "3100",
+                  "id": "3102",
                   "count": 1,
                   "hideCount": false
                 },
@@ -895,72 +910,6 @@
                   "id": "3135",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3157",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3116",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3001",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2033",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2139",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }
@@ -1663,11 +1612,44 @@
                 },
                 {
                   "id": "2003",
-                  "count": 2,
+                  "count": 1,
                   "hideCount": false
                 },
                 {
                   "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "1001",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3802",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1026",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1690,7 +1672,7 @@
               ],
               "items": [
                 {
-                  "id": "3198",
+                  "id": "6655",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1700,63 +1682,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3151",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "standard",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3100",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3135",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3165",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3157",
+                  "id": "4637",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1769,34 +1695,11 @@
                   "id": "3089",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
                 },
                 {
-                  "id": "2139",
+                  "id": "3135",
                   "count": 1,
-                  "hideCount": true
+                  "hideCount": false
                 }
               ]
             }

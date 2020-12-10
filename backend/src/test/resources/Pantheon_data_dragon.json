@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "Pantheon": {
       "id": "Pantheon",
@@ -107,7 +107,7 @@
         "hpperlevel": 95,
         "mp": 317.12,
         "mpperlevel": 31,
-        "movespeed": 355,
+        "movespeed": 345,
         "armor": 40,
         "armorperlevel": 3.75,
         "spellblock": 28,
@@ -129,7 +129,7 @@
           "id": "PantheonQ",
           "name": "Comet Spear",
           "description": "Pantheon either thrusts his spear or throws his spear in the chosen direction.",
-          "tooltip": "<span class=\"colorFF8C00\">Tap:</span> Pantheon thrusts his spear, dealing <physicalDamage>{{ tapdamagecalc }} physical damage</physicalDamage> to enemies hit. Refunds {{ tapcooldownrefund*100 }}% of Comet Spear's cooldown.<br /><br /><span class=\"colorFF8C00\">Hold:</span> Pantheon hurls his spear, dealing <physicalDamage>{{ holddamagecalc }} physical damage</physicalDamage> to the first enemy hit and {{ damagefalloff*100 }}% less to further targets. <br /><br />Comet Spear critically strikes enemies below {{ crithealththreshold*100 }}% health for <physicalDamage>{{ executedamagecalcmodified }} physical damage</physicalDamage> instead.<br /><br /><span class=\"colorEDDA74\">Mortal Will Bonus:</span> Deals an additional <physicalDamage>{{ empowereddamagecalc }} physical damage</physicalDamage> and slow the target by {{ slowamount*100 }}% for {{ slowduration }} seconds.",
+          "tooltip": "<span class=\"colorFF8C00\">Tap:</span> Pantheon thrusts his spear, dealing <physicalDamage>{{ tapdamagecalc }} physical damage</physicalDamage> to enemies hit. Refunds {{ tapcooldownrefund*100 }}% of Comet Spear's cooldown.<br /><br /><span class=\"colorFF8C00\">Hold:</span> Pantheon hurls his spear, dealing <physicalDamage>{{ holddamagecalc }} physical damage</physicalDamage> to the first enemy hit and {{ damagefalloff*100 }}% less to further targets. <br /><br />Comet Spear critically strikes enemies below {{ crithealththreshold*100 }}% health for <physicalDamage>{{ executedamagecalcmodified }} physical damage</physicalDamage> instead.<br /><br /><span class=\"colorEDDA74\">Mortal Will Bonus:</span> Deals an additional <physicalDamage>{{ empowereddamagecalc }} physical damage</physicalDamage>.",
           "leveltip": {
             "label": [
               "Base Damage",
@@ -152,13 +152,13 @@
           ],
           "cooldownBurn": "10/9.5/9/8.5/8",
           "cost": [
-            40,
-            40,
-            40,
-            40,
-            40
+            30,
+            30,
+            30,
+            30,
+            30
           ],
-          "costBurn": "40",
+          "costBurn": "30",
           "datavalues": {},
           "effect": [
             null,
@@ -304,25 +304,25 @@
           "effect": [
             null,
             [
-              50,
-              75,
-              100,
-              125,
-              150
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              0.5,
-              0.5,
-              0.5,
-              0.5,
-              0.5
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              5,
-              5,
-              5,
-              5,
-              5
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -376,9 +376,9 @@
           ],
           "effectBurn": [
             null,
-            "50/75/100/125/150",
-            "0.5",
-            "5",
+            "0",
+            "0",
+            "0",
             "0",
             "0",
             "0",
@@ -413,7 +413,7 @@
           "id": "PantheonE",
           "name": "Aegis Assault",
           "description": "Pantheon sets his shield, becoming invulnerable to damage from the front and striking repeatedly with his spear.",
-          "tooltip": "Pantheon braces his shield and engages enemies in a chosen direction for {{ shieldduration }} seconds, becoming immune to damage from that direction and dealing <physicalDamage>{{ damagecalc }} physical damage</physicalDamage> over the duration.<br /><br />The last hit slams with Pantheon's shield, dealing <physicalDamage>{{ shielddamagecalc }} physical damage</physicalDamage>. <br /><br /><span class=\"colorEDDA74\">Mortal Will Bonus:</span> Duration is increased to {{ empoweredshieldduration }} seconds (dealing <physicalDamage>{{ empowereddamagecalc }} physical damage</physicalDamage> over the duration).",
+          "tooltip": "Pantheon braces his shield and engages enemies in a chosen direction for {{ shieldduration }} seconds, becoming immune to non-tower damage from that direction and dealing <physicalDamage>{{ damagecalc }} physical damage</physicalDamage> over the duration. After channeling Pantheon slams with his shield, dealing <physicalDamage>{{ shielddamagecalc }} physical damage</physicalDamage>.<br /><br /><span class=\"colorEDDA74\">Mortal Will Bonus:</span> When Pantheon slams his shield he gains {{ speedamount*100 }}% MoveSpeed for {{ speedduration }} seconds. <br />",
           "leveltip": {
             "label": [
               "Cooldown",
@@ -554,15 +554,17 @@
           "id": "PantheonR",
           "name": "Grand Starfall",
           "description": "Pantheon composes himself and then leaps into the air, landing at a chosen location as a comet.",
-          "tooltip": "Pantheon gathers his strength to leap high into the air, then crashes down as a meteor at the target area a few seconds later. Deals up to {{ damagecalc }} magic damage to enemies in a line (decreased by up to {{ edgedamagereduction*100 }}% at the edges of the area).<br /><br />Grand Starfall instantly readies Mortal Will.",
+          "tooltip": "<spellPassive>Passive:</spellPassive> Pantheon gains {{ armorpenetration*100 }}% Armor Penetration.<br /><br /><spellActive>Active:</spellActive> Pantheon gathers his strength to leap high into the air. He throws his spear from above which in a small area deals {{ spell.pantheonq:tapdamagecalc }} physical damage and slows by {{ spearslow*100 }}% for {{ spearslowduration }} seconds. <br /><br />Pantheon then crashes down as a meteor at the target area. Deals up to {{ damagecalc }} magic damage to enemies in a line (decreased by up to {{ edgedamagereduction*100 }}% at the edges of the area).<br /><br />Grand Starfall instantly readies Mortal Will.",
           "leveltip": {
             "label": [
               "Damage",
-              "Cooldown"
+              "Cooldown",
+              "Armor Penetration"
             ],
             "effect": [
               "{{ basedamage }} -> {{ basedamageNL }}",
-              "{{ cooldown }} -> {{ cooldownNL }}"
+              "{{ cooldown }} -> {{ cooldownNL }}",
+              "{{ armorpenetration*100.000000 }}% -> {{ armorpenetrationnl*100.000000 }}%"
             ]
           },
           "maxrank": 3,

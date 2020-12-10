@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "Velkoz": {
       "id": "Velkoz",
@@ -12,7 +12,7 @@
         "full": "Velkoz.png",
         "sprite": "champion4.png",
         "group": "champion",
-        "x": 48,
+        "x": 192,
         "y": 48,
         "w": 48,
         "h": 48
@@ -98,7 +98,7 @@
           "id": "VelkozQ",
           "name": "Plasma Fission",
           "description": "Vel'Koz shoots a bolt of plasma that splits in two on reactivation or upon hitting an enemy. The bolt slows and damages on hit.",
-          "tooltip": "Vel'Koz shoots a plasma bolt that deals <magicDamage>{{ totaldamage }} magic damage</magicDamage> and slows enemies by {{ slowamount*100 }}% decaying over {{ slowduration }} second(s).<br /><br />Upon reactivation or upon hitting an enemy, the bolt splits at a 90 degree angle.<br /><br />Killing a unit with this refunds {{ manarefund*100 }}% of the <span class=\"color44DDFF\">Mana Cost</span>.",
+          "tooltip": "Vel'Koz shoots a plasma bolt that deals <magicDamage>{{ totaldamage }} magic damage</magicDamage> and <status>Slows</status> by {{ slowamount*100 }}% decaying over {{ slowduration }} second(s). At the end of it's range, on hitting a target, or on <recast>Recasting</recast>, the bolt splits and fires two new bolts at a 90 degree angle.<br /><br />Killing a unit with this refunds {{ manarefund*100 }}% of the <scaleMana>Mana</scaleMana> cost.",
           "leveltip": {
             "label": [
               "Total Damage",
@@ -230,8 +230,8 @@
             "full": "VelkozQ.png",
             "sprite": "spell13.png",
             "group": "spell",
-            "x": 384,
-            "y": 48,
+            "x": 0,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -241,7 +241,7 @@
           "id": "VelkozW",
           "name": "Void Rift",
           "description": "Vel'Koz opens a rift to the void that deals an initial burst of damage, then explodes for a second burst of damage after a delay.",
-          "tooltip": "Vel'Koz opens a rift to the void that deals {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> Magic Damage. After a delay, it deals an additional {{ e2 }} <scaleAP>(+{{ a2 }})</scaleAP> Magic Damage.<br /><br />Void Rift has a 2 second cooldown between casts.",
+          "tooltip": "Vel'Koz opens a rift to the void, dealing <magicDamage>{{ initialdamage }} magic damage</magicDamage>. The rift then erupts, dealing <magicDamage>{{ secondarydamage }} magic damage</magicDamage>.<br /><br />This Ability has 2 charges ({{ ammorechargetime }} second refresh).",
           "leveltip": {
             "label": [
               "Initial Damage",
@@ -360,18 +360,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.15,
-              "key": "a1"
-            },
-            {
-              "link": "spelldamage",
-              "coeff": 0.25,
-              "key": "a2"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "2",
           "range": [
@@ -386,8 +375,8 @@
             "full": "VelkozW.png",
             "sprite": "spell13.png",
             "group": "spell",
-            "x": 432,
-            "y": 48,
+            "x": 48,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -397,7 +386,7 @@
           "id": "VelkozE",
           "name": "Tectonic Disruption",
           "description": "Vel'Koz causes an area to explode, knocking up enemies, and knocking close enemies slightly away.",
-          "tooltip": "Vel'Koz disrupts a nearby area which, after a delay, deals {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> Magic Damage and knocks up enemies hit for {{ e2 }} seconds.<br /><br />Any enemies hit that are close to Vel'Koz will be pushed slightly in the direction the ability was cast.",
+          "tooltip": "Vel'Koz disrupts a nearby area, causing it to explode, <status>Knocking Up</status> for {{ e2 }} seconds and dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage>. Enemies close to Vel'koz will be <status>Knocked Back</status> instead of <status>Knocked Up</status>.",
           "leveltip": {
             "label": [
               "Damage",
@@ -514,13 +503,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.3,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -535,8 +518,8 @@
             "full": "VelkozE.png",
             "sprite": "spell13.png",
             "group": "spell",
-            "x": 0,
-            "y": 96,
+            "x": 96,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -546,7 +529,7 @@
           "id": "VelkozR",
           "name": "Life Form Disintegration Ray",
           "description": "Vel'Koz unleashes a channelled beam that follows the cursor for 2.5 seconds that deals magic damage. Organic Deconstruction Researches enemy champions causing them to take true damage instead.",
-          "tooltip": "<spellPassive>Passive: </spellPassive>Deconstructing enemy Champions <scaleLevel>Researches</scaleLevel> them for {{ e2 }} seconds. Basic attacks and all abilities refresh Research.<br /><br /><spellPassive>Active: </spellPassive>Vel'Koz channels a ray of energy that follows the cursor for 2.5 seconds, dealing Magic Damage up to a total of {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> and slowing units hit by {{ e3 }}%.<br /><br />Enemies that stay in the beam will periodically gain <scaleLevel>Organic Deconstruction</scaleLevel> stacks. Deals True Damage instead of Magic against <scaleLevel>Researched</scaleLevel> units.",
+          "tooltip": "Vel'Koz channels a ray of energy that follows the cursor, dealing a total of <magicDamage>{{ totaldamage }} magic damage</magicDamage> over 2.5 seconds and <status>Slowing</status> by {{ e3 }}%. Deals <trueDamage>true damage</trueDamage> instead to enemies recently damaged by <spellName>Organic Deconstruction</spellName>.<br /><br />Enemies gain stacks of <keywordMajor>Deconstruction</keywordMajor> periodically while in the beam.",
           "leveltip": {
             "label": [
               "Total Damage",
@@ -637,13 +620,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 1.25,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -656,8 +633,8 @@
             "full": "VelkozR.png",
             "sprite": "spell13.png",
             "group": "spell",
-            "x": 48,
-            "y": 96,
+            "x": 144,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -671,7 +648,7 @@
           "full": "VelKoz_Passive.png",
           "sprite": "passive4.png",
           "group": "passive",
-          "x": 48,
+          "x": 192,
           "y": 48,
           "w": 48,
           "h": 48
@@ -859,13 +836,51 @@
               ],
               "items": [
                 {
-                  "id": "3802",
+                  "id": "1056",
                   "count": 1,
                   "hideCount": false
                 },
                 {
                   "id": "2003",
-                  "count": 2,
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "1001",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3802",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1026",
+                  "count": 1,
                   "hideCount": false
                 }
               ]
@@ -887,7 +902,7 @@
               ],
               "items": [
                 {
-                  "id": "3285",
+                  "id": "6655",
                   "count": 1,
                   "hideCount": false
                 },
@@ -897,68 +912,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3089",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3165",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3151",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3135",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3029",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3157",
+                  "id": "4637",
                   "count": 1,
                   "hideCount": false
                 },
@@ -966,39 +920,16 @@
                   "id": "3102",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
                 },
                 {
-                  "id": "2033",
+                  "id": "3089",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "2139",
+                  "id": "3135",
                   "count": 1,
-                  "hideCount": true
+                  "hideCount": false
                 }
               ]
             }
@@ -1694,7 +1625,7 @@
                 },
                 {
                   "id": "2003",
-                  "count": 2,
+                  "count": 1,
                   "hideCount": false
                 },
                 {
@@ -1754,7 +1685,7 @@
               ],
               "items": [
                 {
-                  "id": "3285",
+                  "id": "6655",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1764,68 +1695,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3165",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "standard",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3151",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3135",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3089",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3116",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3157",
+                  "id": "4637",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1833,34 +1703,16 @@
                   "id": "3102",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
                 },
                 {
-                  "id": "2139",
+                  "id": "3089",
                   "count": 1,
-                  "hideCount": true
+                  "hideCount": false
+                },
+                {
+                  "id": "3135",
+                  "count": 1,
+                  "hideCount": false
                 }
               ]
             }

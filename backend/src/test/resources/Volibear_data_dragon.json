@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "Volibear": {
       "id": "Volibear",
@@ -12,7 +12,7 @@
         "full": "Volibear.png",
         "sprite": "champion4.png",
         "group": "champion",
-        "x": 240,
+        "x": 384,
         "y": 48,
         "w": 48,
         "h": 48
@@ -80,7 +80,7 @@
         "hp": 580,
         "hpperlevel": 90,
         "mp": 350,
-        "mpperlevel": 50,
+        "mpperlevel": 70,
         "movespeed": 340,
         "armor": 31,
         "armorperlevel": 4,
@@ -102,8 +102,8 @@
         {
           "id": "VolibearQ",
           "name": "Thundering Smash",
-          "description": "Volibear gains speed towards enemies, stunning and damaging the first one he attacks.",
-          "tooltip": "Volibear gains {{ minspeed }}% movement speed for 4 seconds (or {{ maxspeed }}% towards enemy champions) and the ability to move through units. While active, Volibear's next basic attack deals {{ basedamage }} (+<scaleAD>{{ adratiotooltip }}</scaleAD>) bonus damage and stuns the target for {{ stunduration }} second.<br /><br />Volibear becomes enraged if an enemy immobilizes him before he stuns a target, resetting this ability and its cooldown.",
+          "description": "Volibear gains speed towards enemies, <status>Stunning</status> and damaging the first one he Attacks.",
+          "tooltip": "Volibear gains <speed>{{ minspeedcalc }} Move Speed</speed>, doubled to <speed>{{ maxspeedcalc }}</speed> towards enemy champions for the next {{ duration }} seconds. While active, Volibear's next Attack deals <physicalDamage>{{ calculateddamage }} physical damage</physicalDamage> and <status>Stuns</status> the target for {{ stunduration }} second.<br /><br />Volibear becomes enraged if an enemy <status>Immobilizes</status> him before he <status>Stuns</status> a target, ending the Ability early but refreshing its cooldown.",
           "leveltip": {
             "label": [
               "Damage",
@@ -112,7 +112,7 @@
             ],
             "effect": [
               "{{ basedamage }} -> {{ basedamageNL }}",
-              "{{ minspeed }}% -> {{ minspeedNL }}%",
+              "{{ minspeed*100.000000 }}% -> {{ minspeednl*100.000000 }}%",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
@@ -233,10 +233,10 @@
           "rangeBurn": "300",
           "image": {
             "full": "VolibearQ.png",
-            "sprite": "spell13.png",
+            "sprite": "spell14.png",
             "group": "spell",
-            "x": 192,
-            "y": 144,
+            "x": 288,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -245,8 +245,8 @@
         {
           "id": "VolibearW",
           "name": "Frenzied Maul",
-          "description": "Volibear damages an enemy, applying on-hit effects and marking them.  Casting this spell again on the same target deals bonus damage and heals Volibear.",
-          "tooltip": "Volibear mauls an enemy, dealing {{ basedamage }} (+<scaleAD>{{ adratio }}</scaleAD>) (+<scaleHealth>{{ bonushealth }}</scaleHealth>) physical damage, applying on-hit effects, and <danger><span class=\"colorff6633\">wounding</span></danger> the target for 8 seconds.<br /><br />If Frenzied Maul is used on a <danger><span class=\"colorff6633\">wounded</span></danger> target, its damage is increased by 50% and Volibear restores {{ baseheal }} health +{{ healpercent*100 }}% of his missing health ({{ minionandmonstermod*100 }}% effective against minions and monsters).",
+          "description": "Volibear damages an enemy, applying on-hit effects and marking them.  Casting this ability again on the same target deals bonus damage and Heals Volibear.",
+          "tooltip": "Volibear mauls an enemy, dealing <physicalDamage>{{ totaldamagetooltip }} physical damage</physicalDamage> and marking them for {{ markduration }} seconds.<br /><br />If this Ability is used on a marked target, its damage is increased to <physicalDamage>{{ empowereddamagetooltip }}</physicalDamage> and Volibear restores <healing>{{ baseheal }} plus {{ healpercent*100 }}% missing Health</healing>.",
           "leveltip": {
             "label": [
               "Damage",
@@ -378,10 +378,10 @@
           "rangeBurn": "325",
           "image": {
             "full": "VolibearW.png",
-            "sprite": "spell13.png",
+            "sprite": "spell14.png",
             "group": "spell",
-            "x": 240,
-            "y": 144,
+            "x": 336,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -390,16 +390,20 @@
         {
           "id": "VolibearE",
           "name": "Sky Splitter",
-          "description": "Volibear summons a lightning bolt at a location, dealing damage and slowing enemies while granting Volibear a shield if he's inside the blast radius.",
-          "tooltip": "After a delay, Volibear summons a lightning bolt at a target location.  This deals {{ basedamage }} (+<magicDamage>{{ apratiotooltip }}</magicDamage>)  (+{{ percentdamage*100 }}% of the target's maximum health) magic damage and slows enemies by {{ slowamount*100 }}% for 2 seconds.  Damage against non-champions is capped at {{ monsterdamagecap }}.<br /><br />If Volibear is inside the blast zone, he gains a shield equal to {{ shieldamount*100 }}% of his maximum health (+<magicDamage>{{ shieldapratiotooltip }}</magicDamage>) for 3 seconds.",
+          "description": "Volibear summons a lightning bolt at a location, dealing damage and Slowing enemies while granting Volibear a Shield if he's inside the blast radius.",
+          "tooltip": "Volibear summons a thundercloud that fires a lightning bolt, dealing <magicDamage>{{ totaldamagetooltip }} plus {{ percentdamage*100 }}% max Health magic damage</magicDamage> and <status>Slowing</status> by {{ slowamount*100 }}% for {{ slowduration }} seconds.<br /><br />If Volibear is inside the blast zone, he gains a <shield>{{ shieldapratiotooltip }} plus {{ shieldamount*100 }}% max Health Shield</shield> for {{ shieldduration }} seconds.",
           "leveltip": {
             "label": [
+              "Cooldown",
               "Damage",
-              "Maximum Health Damage"
+              "Percentage Damage",
+              "Monster Damage"
             ],
             "effect": [
+              "{{ cooldown }} -> {{ cooldownNL }}",
               "{{ basedamage }} -> {{ basedamageNL }}",
-              "{{ percentdamage*100.000000 }}% -> {{ percentdamagenl*100.000000 }}%"
+              "{{ percentdamage*100.000000 }}% -> {{ percentdamagenl*100.000000 }}%",
+              "{{ monsterdamagecap }} -> {{ monsterdamagecapNL }}"
             ]
           },
           "maxrank": 5,
@@ -519,10 +523,10 @@
           "rangeBurn": "1200",
           "image": {
             "full": "VolibearE.png",
-            "sprite": "spell13.png",
+            "sprite": "spell14.png",
             "group": "spell",
-            "x": 288,
-            "y": 144,
+            "x": 384,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -531,8 +535,8 @@
         {
           "id": "VolibearR",
           "name": "Stormbringer",
-          "description": "Volibear leaps to a target location, slowing and damaging enemies beneath him while gaining bonus health.  Enemy towers near his landing location become temporarily disabled.",
-          "tooltip": "Volibear transforms and leaps toward a target location, gaining {{ healthamount }} health, {{ bonusattackrange }} attack range, and the ability to move through units for the next {{ transformduration }} seconds.<br /><br />Upon landing, nearby enemy towers are disabled for {{ towerdisableduration }} seconds and suffer {{ sweetspotdamage }} (+<scaleAD>{{ adratio }}</scaleAD>) (+<magicDamage>{{ apratiotooltip }}</magicDamage>) physical damage. Nearby enemies are slowed by {{ slowamount*100 }}%, decaying over 1 second. Enemies directly underneath Volibear suffer {{ sweetspotdamage }} (+<scaleAD>{{ adratio }}</scaleAD>) (+<magicDamage>{{ apratiotooltip }}</magicDamage>) physical damage.",
+          "description": "Volibear leaps to a target location, Slowing and damaging enemies beneath him while gaining bonus Health.  Enemy towers near his landing location become temporarily disabled.",
+          "tooltip": "Volibear transforms and leaps, gaining <healing>{{ healthamount }} Health</healing> and {{ bonusattackrange }} Attack Range for the next {{ transformduration }} seconds.<br /><br />Upon landing, Volibear cracks the earth, <status>Disabling</status> nearby towers for {{ towerdisableduration }} seconds and dealing <physicalDamage>{{ towerdamagetooltip }} physical damage to them</physicalDamage>. Nearby enemies are <status>Slowed</status> by {{ slowamount*100 }}%, decaying over 1 second. Enemies directly underneath Volibear suffer <physicalDamage>{{ sweetspotdamagetooltip }} physical damage</physicalDamage>.",
           "leveltip": {
             "label": [
               "Damage",
@@ -638,10 +642,10 @@
           "rangeBurn": "550",
           "image": {
             "full": "VolibearR.png",
-            "sprite": "spell13.png",
+            "sprite": "spell14.png",
             "group": "spell",
-            "x": 336,
-            "y": 144,
+            "x": 432,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -650,12 +654,12 @@
       ],
       "passive": {
         "name": "The Relentless Storm",
-        "description": "Volibear's attacks and abilities grant attack speed, and eventually cause his basic attacks to deal bonus magic damage to nearby enemies.",
+        "description": "Volibear's Attacks and abilities grant Attack Speed, and eventually cause his Attacks to deal bonus magic damage to nearby enemies.",
         "image": {
           "full": "Volibear_Icon_P.png",
           "sprite": "passive4.png",
           "group": "passive",
-          "x": 240,
+          "x": 384,
           "y": 48,
           "w": 48,
           "h": 48
@@ -859,18 +863,51 @@
               ],
               "items": [
                 {
-                  "id": "2051",
+                  "id": "1055",
                   "count": 1,
                   "hideCount": false
                 },
+                {
+                  "id": "2003",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
                 {
                   "id": "1001",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "2003",
-                  "count": 3,
+                  "id": "3067",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3057",
+                  "count": 1,
                   "hideCount": false
                 }
               ]
@@ -892,45 +929,7 @@
               ],
               "items": [
                 {
-                  "id": "3065",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3111",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3742",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
                   "id": "3078",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3091",
                   "count": 1,
                   "hideCount": false
                 },
@@ -938,27 +937,19 @@
                   "id": "3053",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
+                },
                 {
-                  "id": "3068",
+                  "id": "3153",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3026",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3071",
                   "count": 1,
                   "hideCount": false
                 },
@@ -966,77 +957,6 @@
                   "id": "3742",
                   "count": 1,
                   "hideCount": false
-                },
-                {
-                  "id": "3001",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offmeta",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3115",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3124",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3100",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2033",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2138",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }
@@ -1904,7 +1824,7 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
+              "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
                 ""
@@ -1914,7 +1834,7 @@
               ],
               "items": [
                 {
-                  "id": "1054",
+                  "id": "1055",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1937,7 +1857,7 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
+              "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
                 ""
@@ -1952,12 +1872,12 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3751",
+                  "id": "3067",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3067",
+                  "id": "3057",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1970,40 +1890,7 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3111",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3068",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3065",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
+              "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
                 ""
@@ -2018,167 +1905,22 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3091",
+                  "id": "3053",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3748",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3800",
+                  "id": "3153",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3083",
+                  "id": "3026",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3075",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "startingjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "1041",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2031",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3340",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "earlyjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3706",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3751",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "1001",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essentialjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "1401",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3009",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3800",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3065",
+                  "id": "3071",
                   "count": 1,
                   "hideCount": false
                 },
@@ -2186,72 +1928,6 @@
                   "id": "3742",
                   "count": 1,
                   "hideCount": false
-                },
-                {
-                  "id": "3083",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3078",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3091",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3748",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2138",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }

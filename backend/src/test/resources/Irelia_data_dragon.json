@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "Irelia": {
       "id": "Irelia",
@@ -112,7 +112,7 @@
         "hp": 580,
         "hpperlevel": 95,
         "mp": 350,
-        "mpperlevel": 30,
+        "mpperlevel": 50,
         "movespeed": 335,
         "armor": 36,
         "armorperlevel": 3,
@@ -125,7 +125,7 @@
         "mpregenperlevel": 0.8,
         "crit": 0,
         "critperlevel": 0,
-        "attackdamage": 63,
+        "attackdamage": 65,
         "attackdamageperlevel": 4,
         "attackspeedperlevel": 2.5,
         "attackspeed": 0.656
@@ -135,7 +135,7 @@
           "id": "IreliaQ",
           "name": "Bladesurge",
           "description": "Irelia dashes forward to strike her target, healing herself. If the target is Marked or dies to Bladesurge, its cooldown refreshes.",
-          "tooltip": "Irelia dashes to an enemy, dealing <physicalDamage>{{ championdamage }} physical damage</physicalDamage>, applying on-hit effects and healing for {{ healamount }} health.<br /><br />Bladesurge's cooldown is reset if the target was <span class=\"colorDDDD77\">Marked</span> or dies to Bladesurge.<br /><br /><span class=\"size16 color8C8C8C\">Bladesurge deals {{ miniondamage }} damage to minions.</span>",
+          "tooltip": "Irelia dashes to an enemy, dealing <physicalDamage>{{ championdamage }} physical damage</physicalDamage> and restoring <healing>{{ healamount }} Health</healing> to herself. If the enemy dies or was <keywordMajor>Unsteady</keywordMajor>, the Cooldown is refreshed.",
           "leveltip": {
             "label": [
               "Damage",
@@ -152,13 +152,13 @@
           },
           "maxrank": 5,
           "cooldown": [
-            12,
             11,
             10,
             9,
-            8
+            8,
+            7
           ],
-          "cooldownBurn": "12/11/10/9/8",
+          "cooldownBurn": "11/10/9/8/7",
           "cost": [
             20,
             20,
@@ -280,7 +280,7 @@
           "id": "IreliaW",
           "name": "Defiant Dance",
           "description": "Irelia charges a strike that deals more damage as she charges. She takes reduced physical damage during the charge.",
-          "tooltip": "<span class=\"colorFF9900\">First Cast:</span> Irelia aligns her blades into a defensive formation, gaining {{ finalphysicaldr }}% physical damage reduction, but she is unable to act while holding her formation.<br /><br /><span class=\"colorFF9900\">Second Cast:</span> Irelia swipes her blades, dealing <physicalDamage>{{ mindamagecalc }} physical damage</physicalDamage>. Damage increases with charge time, up to {{ maxdamagecalc }} after {{ chargetimeformax }} seconds.<br /><br /><span class=\"size16 color8C8C8C\">Defiant Dance cannot be interrupted.</span>",
+          "tooltip": "<charge>Begin Charging:</charge> Irelia enters a defensive stance for up to {{ maxduration }} seconds, becoming unable to act but reducing physical damage taken by {{ finalphysicaldr }}%.<br /><br /><release>Release:</release> Irelia lashes out with her blades, dealing <physicalDamage>{{ mindamagecalc }} physical damage</physicalDamage>, increased up to <physicalDamage>{{ maxdamagecalc }}</physicalDamage> based on charge time.",
           "leveltip": {
             "label": [
               "Damage",
@@ -423,7 +423,7 @@
           "id": "IreliaE",
           "name": "Flawless Duet",
           "description": "Irelia sends out two blades which converge on each other. Enemies caught in between are damaged, stunned and Marked.",
-          "tooltip": "Irelia readies 2 blades that will fly towards each other once placed, dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage> and stunning for {{ stunduration }} second(s).<br /><br />Champions and large monsters are <span class=\"colorDDDD77\">Marked</span> for {{ markduration }} seconds.",
+          "tooltip": "Irelia throws a blade into the ground and can <recast>Recast</recast> for up to {{ buffduration }} seconds. <br /><br /><recast>Recast:</recast> Irelia throws a second blade, then they fly towards each other <status>Stunning</status> for {{ stunduration }} seconds and dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage>. Champions and large jungle monsters become <keywordMajor>Unsteady</keywordMajor> for {{ markduration }} seconds.",
           "leveltip": {
             "label": [
               "Damage",
@@ -564,7 +564,7 @@
           "id": "IreliaR",
           "name": "Vanguard's Edge",
           "description": "Irelia fires a massive number of blades that explode outward upon hitting an enemy champion. Enemies hit by the blades are damaged and Marked. Afterwards the blades form a wall that will damage and slow enemies that walk through it.",
-          "tooltip": "Irelia launches a storm of blades that explode outward upon hitting a champion. The blades deal <magicDamage>{{ missiledamage }} magic damage</magicDamage> and <span class=\"colorDDDD77\">Mark</span> champions and large monsters for {{ markduration }} seconds.<br /><br />Irelia then forms the blades into a wall for {{ zoneduration }} seconds. Passing through the wall deals <magicDamage>{{ zonedamage }} magic damage</magicDamage> and slows by {{ slowamount }}% for {{ ccduration }} seconds.",
+          "tooltip": "Irelia launches a barrage of blades, dealing <magicDamage>{{ missiledamage }} magic damage</magicDamage> and making champions and large jungle monsters <keywordMajor>Unsteady</keywordMajor> for {{ markduration }} seconds. The barrage explodes into a cage around the first champion hit for {{ zoneduration }} seconds. The cage deals <magicDamage>{{ zonedamage }} magic damage</magicDamage> and <status>Slows</status> by {{ slowamount }}% for {{ ccduration }} seconds.",
           "leveltip": {
             "label": [
               "Damage",
@@ -932,18 +932,51 @@
               ],
               "items": [
                 {
-                  "id": "2051",
+                  "id": "1055",
                   "count": 1,
                   "hideCount": false
                 },
+                {
+                  "id": "2003",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
                 {
                   "id": "1001",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "2003",
-                  "count": 3,
+                  "id": "3067",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3057",
+                  "count": 1,
                   "hideCount": false
                 }
               ]
@@ -975,103 +1008,24 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3111",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3748",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3812",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
                   "id": "3153",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
+                },
                 {
-                  "id": "3065",
+                  "id": "3026",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3091",
+                  "id": "3071",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3143",
+                  "id": "3742",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2138",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }
@@ -1787,112 +1741,13 @@
           "customPanel": null,
           "blocks": [
             {
-              "type": "startingjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "1041",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2003",
-                  "count": 3,
-                  "hideCount": false
-                },
-                {
-                  "id": "3340",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "earlyjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3715",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "1001",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3044",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essentialjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "1419",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3047",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3078",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
               "type": "starting",
               "recMath": false,
               "recSteps": false,
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
+              "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
                 ""
@@ -1902,7 +1757,12 @@
               ],
               "items": [
                 {
-                  "id": "2033",
+                  "id": "1055",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "2003",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1920,7 +1780,7 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
+              "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
                 ""
@@ -1930,17 +1790,17 @@
               ],
               "items": [
                 {
-                  "id": "3057",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3044",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
                   "id": "1001",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3067",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3057",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1953,7 +1813,7 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
+              "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
                 ""
@@ -1968,35 +1828,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3111",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
                   "id": "3053",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3748",
                   "count": 1,
                   "hideCount": false
                 },
@@ -2009,95 +1841,16 @@
                   "id": "3026",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
+                },
                 {
-                  "id": "3143",
+                  "id": "3071",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3091",
+                  "id": "3742",
                   "count": 1,
                   "hideCount": false
-                },
-                {
-                  "id": "3065",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "ItemTeleportCancel",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3156",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3075",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2140",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }

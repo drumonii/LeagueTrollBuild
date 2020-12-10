@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "Mordekaiser": {
       "id": "Mordekaiser",
@@ -110,7 +110,7 @@
           "id": "MordekaiserQ",
           "name": "Obliterate",
           "description": "Mordekaiser smashes the ground with his mace dealing damage to each enemy struck. Damage is increased when hitting a single enemy.",
-          "tooltip": "Mordekaiser smashes the ground with Nightfall dealing <magicDamage>{{ qdamage }} magic damage</magicDamage> to all enemies in the area, increased by {{ isolationtooltip*100 }}% if it hits only a single enemy.",
+          "tooltip": "Mordekaiser smashes the ground with Nightfall dealing <magicDamage>{{ qdamage }} magic damage</magicDamage>, increased to <magicDamage>{{ empowereddamagetooltip }}</magicDamage> if it hits only a single enemy.",
           "leveltip": {
             "label": [
               "Isolation Damage",
@@ -253,7 +253,7 @@
           "id": "MordekaiserW",
           "name": "Indestructible",
           "description": "Mordekaiser stores damage he deals and takes to create a shield. He may consume the shield to heal.",
-          "tooltip": "Mordekaiser stores (<span class=\"color00BFFF\">{{ damageconversion*100 }}%</span>/<span class=\"colorB30000\">{{ damagetakenconversion*100 }}%</span>) of all damage he (<span class=\"color00BFFF\">deals</span>/<span class=\"colorB30000\">takes</span>) as a potential shield.<br /><br /><scaleLevel>Indestructible</scaleLevel> grants him the shield and may be cast a second time to consume it, healing for {{ healingpercent*100 }}% of the remaining value.",
+          "tooltip": "<passive>Passive:</passive> Mordekaiser stores {{ damageconversion*100 }}% of the damage he deals and {{ damagetakenconversion*100 }}% of the damage he takes.<br /><br /><active>Active:</active> Mordekaiser gains the stored damage as <shield>Shield</shield>. He may <recast>Recast</recast> this Ability to restore <healing>{{ healingpercent*100 }}% of the remaining Shield as Health</healing>.<br /><br />Minimum Shield: <shield>{{ minhealthtooltip }}</shield><br />Maximum Shield: <shield>{{ maxhealthtooltip }}</shield>",
           "leveltip": {
             "label": [
               "Healing Percent",
@@ -394,7 +394,7 @@
           "id": "MordekaiserE",
           "name": "Death's Grasp",
           "description": "Mordekaiser pulls all enemies in an area.",
-          "tooltip": "<spellPassive>Passive:</spellPassive> Mordekaiser gains {{ magicpen*100 }}% Magic Penetration.<br /><br /><spellActive>Active:</spellActive> Mordekaiser pulls enemies in the chosen area dealing <magicDamage>{{ totaldamage }} magic damage.</magicDamage>",
+          "tooltip": "<spellPassive>Passive:</spellPassive> Mordekaiser gains {{ magicpen*100 }}% Magic Penetration.<br /><br /><spellActive>Active:</spellActive> Mordekaiser pulls enemies in his direction, dealing <magicDamage>{{ totaldamage }} magic damage.</magicDamage>",
           "leveltip": {
             "label": [
               "Percent Magic Penetration",
@@ -537,7 +537,7 @@
           "id": "MordekaiserR",
           "name": "Realm of Death",
           "description": "Mordekaiser drags his victim to a different dimension with him and steals a portion of their stats. If he kills them, he keeps the stats until the victim respawns.",
-          "tooltip": "Mordekaiser banishes a target to the <keywordMajor>Death Realm</keywordMajor> with him for {{ spiritrealmduration }}s, stealing {{ statstealpercentscalar*100 }}% of their core stats for the duration.<br /><br />If Mordekaiser kills his target in the <keywordMajor>Death Realm</keywordMajor> he consumes their soul, keeping the stats he stole until the target respawns.",
+          "tooltip": "Mordekaiser banishes a champion to the Death Realm with him for {{ spiritrealmduration }}s, stealing {{ statstealpercentscalar*100 }}% of their core stats for the duration.<br /><br />If Mordekaiser kills that enemy in the Death Realm he consumes their soul, keeping the stats he stole until the target respawns.",
           "leveltip": {
             "label": [
               "Cooldown"
@@ -838,18 +838,51 @@
               ],
               "items": [
                 {
-                  "id": "2051",
+                  "id": "1056",
                   "count": 1,
                   "hideCount": false
                 },
+                {
+                  "id": "2003",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
                 {
                   "id": "1001",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "2003",
-                  "count": 3,
+                  "id": "4635",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1026",
+                  "count": 1,
                   "hideCount": false
                 }
               ]
@@ -871,38 +904,20 @@
               ],
               "items": [
                 {
-                  "id": "3116",
+                  "id": "4633",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3020",
+                  "id": "4637",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3151",
+                  "id": "3102",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
+                },
                 {
                   "id": "3089",
                   "count": 1,
@@ -914,70 +929,9 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3165",
+                  "id": "4629",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3157",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3065",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3742",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2033",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2139",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }
@@ -1698,7 +1652,7 @@
               ],
               "items": [
                 {
-                  "id": "1054",
+                  "id": "1056",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1736,12 +1690,12 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3067",
+                  "id": "4635",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3145",
+                  "id": "1026",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1764,113 +1718,34 @@
               ],
               "items": [
                 {
-                  "id": "3111",
+                  "id": "4633",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3152",
+                  "id": "4637",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3151",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "standard",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3157",
+                  "id": "3102",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3165",
+                  "id": "3089",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3115",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3065",
+                  "id": "3135",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3075",
+                  "id": "4629",
                   "count": 1,
                   "hideCount": false
-                },
-                {
-                  "id": "3116",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2138",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2139",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }

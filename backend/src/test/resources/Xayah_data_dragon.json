@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "Xayah": {
       "id": "Xayah",
@@ -12,8 +12,8 @@
         "full": "Xayah.png",
         "sprite": "champion4.png",
         "group": "champion",
-        "x": 336,
-        "y": 48,
+        "x": 0,
+        "y": 96,
         "w": 48,
         "h": 48
       },
@@ -46,6 +46,12 @@
           "id": "498004",
           "num": 4,
           "name": "Star Guardian Xayah",
+          "chromas": true
+        },
+        {
+          "id": "498008",
+          "num": 8,
+          "name": "Elderwood Xayah",
           "chromas": true
         }
       ],
@@ -88,8 +94,8 @@
         "crit": 0,
         "critperlevel": 0,
         "attackdamage": 60,
-        "attackdamageperlevel": 2.9,
-        "attackspeedperlevel": 3.3,
+        "attackdamageperlevel": 3.5,
+        "attackspeedperlevel": 3.9,
         "attackspeed": 0.625
       },
       "spells": [
@@ -97,7 +103,7 @@
           "id": "XayahQ",
           "name": "Double Daggers",
           "description": "Xayah throws two damaging daggers that also drop Feathers she can recall.",
-          "tooltip": "Xayah throws two knives dealing <physicalDamage>{{ totaldamage }} physical damage</physicalDamage> each and leaving two <span class=\"colorC200E1\">Feathers</span>. Targets hit after the first take {{ multihitratio*100 }}% damage.",
+          "tooltip": "Xayah throws two daggers, dealing <physicalDamage>{{ totaldamage }} physical damage</physicalDamage> each and leaving two <keywordMajor>Feathers</keywordMajor>. Targets hit after the first take <physicalDamage>{{ multihitdamage }} damage</physicalDamage> from each dagger.",
           "leveltip": {
             "label": [
               "Damage",
@@ -227,8 +233,8 @@
             "full": "XayahQ.png",
             "sprite": "spell14.png",
             "group": "spell",
-            "x": 96,
-            "y": 0,
+            "x": 192,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -238,7 +244,7 @@
           "id": "XayahW",
           "name": "Deadly Plumage",
           "description": "Xayah creates a storm of blades that increase her basic attack speed and damage while granting her movement speed if she attacks a champion.",
-          "tooltip": "Xayah creates a storm of blades for {{ e2 }} seconds that grant her {{ e1 }}% attack speed and cause her basic attacks to strike an additional time for {{ e5 }}% damage. <br /><br />If Deadly Plumage strikes an enemy champion, allies under the effects of Deadly Plumage gain {{ e3 }}% movement speed for {{ e4 }} seconds.<br /><br /><span class=\"colore5c100\">If Rakan is nearby he will also gain the effects of Deadly Plumage.</span>",
+          "tooltip": "Xayah creates a storm of blades for {{ e2 }} seconds that grants her <attackSpeed>{{ e1 }}% Attack Speed</attackSpeed> and cause her Attacks to fire a secondary blade that deals {{ e5 }}% damage.<br /><br />When the secondary blade hits a champion, she grants herself <speed>{{ e3 }}% Move Speed</speed> for {{ e4 }} seconds.<br /><br />If Rakan is nearby he will also gain the effects of this Ability, except he gains <speed>Move Speed</speed> when <i>Xayah</i> strikes a target.",
           "leveltip": {
             "label": [
               "Attack Speed",
@@ -370,8 +376,8 @@
             "full": "XayahW.png",
             "sprite": "spell14.png",
             "group": "spell",
-            "x": 144,
-            "y": 0,
+            "x": 240,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -381,7 +387,7 @@
           "id": "XayahE",
           "name": "Bladecaller",
           "description": "Xayah calls back all her dropped Feathers dealing damage and rooting enemies.",
-          "tooltip": "Xayah calls all <span class=\"colorC200E1\">Feathers</span> back to her, dealing <physicalDamage>{{ featherdamage }} physical damage</physicalDamage> to enemies they pass through.<br /><br />Hitting an enemy with {{ featherthreshold }} <span class=\"colorC200E1\">Feathers</span> roots them for {{ rootduration }} second(s).<br /><br />Minions take {{ minionmultiplier*100 }}% damage from Bladecaller.<br /><br /><rules><span class=\"colorFF5802\">Critical Strike Chance</span> multiplies feather damage.</rules>",
+          "tooltip": "Xayah calls all <keywordMajor>Feathers</keywordMajor> back to her, dealing <physicalDamage>{{ featherdamage }} physical damage</physicalDamage> each, increased by {{ critpercentincrease }}. If {{ featherthreshold }} or more <keywordMajor>Feathers</keywordMajor> hit an enemy, they are <status>Rooted</status> for {{ rootduration }} seconds.",
           "leveltip": {
             "label": [
               "Damage",
@@ -511,8 +517,8 @@
             "full": "XayahE.png",
             "sprite": "spell14.png",
             "group": "spell",
-            "x": 192,
-            "y": 0,
+            "x": 288,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -522,7 +528,7 @@
           "id": "XayahR",
           "name": "Featherstorm",
           "description": "Xayah leaps into the air becoming untargetable and throwing out a fan of daggers, dropping Feathers she can recall.",
-          "tooltip": "Xayah leaps into the air becoming untargetable. She then rains down daggers which deal <physicalDamage>{{ damage }}</physicalDamage> physical damage and leave behind a line of <span class=\"colorC200E1\">Feathers</span>.<br /><br />Xayah can move while in the air.",
+          "tooltip": "Xayah leaps into the air becoming Untargetable and Ghosted for 1.5 seconds before raining down daggers that deal <physicalDamage>{{ damage }} physical damage</physicalDamage> and leave behind a line of <keywordMajor>Feathers</keywordMajor>.",
           "leveltip": {
             "label": [
               "Damage",
@@ -626,8 +632,8 @@
             "full": "XayahR.png",
             "sprite": "spell14.png",
             "group": "spell",
-            "x": 240,
-            "y": 0,
+            "x": 336,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -641,8 +647,8 @@
           "full": "XayahPassive.png",
           "sprite": "passive4.png",
           "group": "passive",
-          "x": 336,
-          "y": 48,
+          "x": 0,
+          "y": 96,
           "w": 48,
           "h": 48
         }
@@ -815,18 +821,51 @@
               ],
               "items": [
                 {
-                  "id": "1053",
+                  "id": "1055",
                   "count": 1,
                   "hideCount": false
                 },
+                {
+                  "id": "2003",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
                 {
                   "id": "1001",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "2003",
-                  "count": 4,
+                  "id": "6670",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1037",
+                  "count": 1,
                   "hideCount": false
                 }
               ]
@@ -853,35 +892,12 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3046",
+                  "id": "6672",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3031",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3508",
+                  "id": "3046",
                   "count": 1,
                   "hideCount": false
                 },
@@ -894,67 +910,11 @@
                   "id": "3072",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3814",
-                  "count": 1,
-                  "hideCount": false
                 },
                 {
-                  "id": "3139",
+                  "id": "3026",
                   "count": 1,
                   "hideCount": false
-                },
-                {
-                  "id": "3156",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2140",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }
@@ -1685,17 +1645,17 @@
               ],
               "items": [
                 {
-                  "id": "1038",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3133",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
                   "id": "1001",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "6670",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1037",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1718,40 +1678,12 @@
               ],
               "items": [
                 {
-                  "id": "3508",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
                   "id": "3006",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3094",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3031",
+                  "id": "6672",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1761,37 +1693,19 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3139",
+                  "id": "3094",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
                 },
                 {
-                  "id": "2140",
+                  "id": "3072",
                   "count": 1,
-                  "hideCount": true
+                  "hideCount": false
+                },
+                {
+                  "id": "3026",
+                  "count": 1,
+                  "hideCount": false
                 }
               ]
             }

@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "Swain": {
       "id": "Swain",
@@ -12,7 +12,7 @@
         "full": "Swain.png",
         "sprite": "champion3.png",
         "group": "champion",
-        "x": 96,
+        "x": 240,
         "y": 96,
         "w": 48,
         "h": 48
@@ -106,7 +106,7 @@
           "id": "SwainQ",
           "name": "Death's Hand",
           "description": "Swain unleashes several bolts of eldritch power that pierce through enemies. Enemies hit take more damage for each bolt they are struck by.",
-          "tooltip": "Swain unleashes {{ e5 }} bolts of eldritch power that pierce through enemies. Enemies hit take {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage, plus {{ e2 }}% per additional bolt. Max Damage: {{ f2 }}.<br />",
+          "tooltip": "Swain unleashes eldritch bolts, dealing <magicDamage>{{ initialdamage }} magic damage</magicDamage> plus <magicDamage>{{ extraboltdamage }} damage</magicDamage> per bolt past the first (max <magicDamage>{{ maxdamage }} damage</magicDamage>).",
           "leveltip": {
             "label": [
               "Bolt Damage",
@@ -149,11 +149,11 @@
               135
             ],
             [
-              15,
-              20,
-              25,
-              30,
-              35
+              0.15,
+              0.2,
+              0.25,
+              0.3,
+              0.35
             ],
             [
               3,
@@ -215,7 +215,7 @@
           "effectBurn": [
             null,
             "55/75/95/115/135",
-            "15/20/25/30/35",
+            "0.15/0.2/0.25/0.3/0.35",
             "3",
             "0",
             "5",
@@ -225,13 +225,7 @@
             "0.75",
             "-0.4"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.4,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -246,8 +240,8 @@
             "full": "SwainQ.png",
             "sprite": "spell11.png",
             "group": "spell",
-            "x": 96,
-            "y": 96,
+            "x": 192,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -257,7 +251,7 @@
           "id": "SwainW",
           "name": "Vision of Empire",
           "description": "Swain opens a demon eye that deals damage and slows enemies. Champions hit are revealed and also grant Swain a Soul Fragment.",
-          "tooltip": "Swain opens a demon eye up to {{ castrange }} range away that deals {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage and slows for {{ e4 }}% for {{ e7 }} seconds.<br /><br />Champions hit grant Swain a <span class=\"size18 colorFF3F3F\">Soul Fragment</span> and are revealed for {{ e9 }} seconds.<br /><br /><rules>Damage is reduced by {{ e6 }}% against minions.</rules>",
+          "tooltip": "Swain opens a demon eye, revealing a location for 1.5 seconds, then deals <magicDamage>{{ totaldamage }} magic damage</magicDamage> and <status>Slows</status> by {{ e4 }}% for {{ e7 }} seconds. Champions hit grant Swain a <keywordMajor>Soul Fragment</keywordMajor> and are revealed for {{ e9 }} seconds.",
           "leveltip": {
             "label": [
               "Damage",
@@ -332,11 +326,11 @@
               0.5
             ],
             [
-              50,
-              50,
-              50,
-              50,
-              50
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              0.5
             ],
             [
               2.5,
@@ -374,19 +368,13 @@
             "325",
             "25/35/45/55/65",
             "0.5",
-            "50",
+            "0.5",
             "2.5",
             "420",
             "4/5/6/7/8",
             "4/5/6/7/8"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.7,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -401,8 +389,8 @@
             "full": "SwainW.png",
             "sprite": "spell11.png",
             "group": "spell",
-            "x": 144,
-            "y": 96,
+            "x": 240,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -412,7 +400,7 @@
           "id": "SwainE",
           "name": "Nevermove",
           "description": "Swain launches a wave of demonic power forward. It then returns to Swain and roots enemies it hits.",
-          "tooltip": "Swain launches a wave of demonic power, dealing {{ e2 }} <scaleAP>(+{{ a2 }})</scaleAP> magic damage to enemies it passes through.<br /><br />Swain then commands the wave to return, detonating it on the first enemy hit. Enemies hit take {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage and are rooted for {{ e3 }} seconds.",
+          "tooltip": "Swain launches a wave of demonic power, dealing <magicDamage>{{ initialdamage }} magic damage</magicDamage>. The wave then returns, detonating on the first enemy hit dealing <magicDamage>{{ secondarydamage }} damage</magicDamage> and <status>Rooting</status> enemies in an area for {{ e3 }} seconds.",
           "leveltip": {
             "label": [
               "Pass-through Damage",
@@ -527,18 +515,7 @@
             "15",
             "400"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.25,
-              "key": "a2"
-            },
-            {
-              "link": "spelldamage",
-              "coeff": 0.25,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -553,8 +530,8 @@
             "full": "SwainE.png",
             "sprite": "spell11.png",
             "group": "spell",
-            "x": 192,
-            "y": 96,
+            "x": 288,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -564,7 +541,7 @@
           "id": "SwainR",
           "name": "Demonic Ascension",
           "description": "Swain transforms into a demon and drains health from nearby enemy champions, minions, and neutral monsters. Swain can cast Demonflare to decimate nearby enemies with a nova of soulfire, dealing damage equal to a portion of the health he drained and ending his transformation.",
-          "tooltip": "Swain frees the demon within for {{ demonformduration }} seconds, gaining {{ basehealthgain }} health and doubling the bonus health that he has collected from Soul Fragments. Every second, he drains all nearby enemy champions, minions, and neutral monsters for {{ damagecalc }} magic damage, healing him for {{ healingcalc }} health. After a brief delay, and upon draining any amount of health, Swain can cast Demonflare.<br /><br /><span class=\"colorDDDD77\">Demonflare:</span> Swain unleashes a nova of soulfire dealing magic damage equal to {{ minimumdemonflaredamagetotal }} plus  {{ healtodamagepercent*100 }}% of the damage he healed (up to a total of  {{ demonflaredamagetotal }}) and ends his transformation.<br /><br /><br /><rules>Swain can drain non-champions to heal for {{ minionmonsterhealreduction*100 }}% of the normal amount.</rules>",
+          "tooltip": "Swain frees the demon within for {{ demonformduration }} seconds, gaining <healing>{{ basehealthgain }} max Health</healing> and doubling the Health collected with <keywordMajor>Soul Fragments</keywordMajor>. Swain deals <magicDamage>{{ damagecalc }} magic damage</magicDamage> each second and restores <healing>{{ healingcalc }} Health</healing> per target damaged, reduced to <healing>{{ minionmonsterheal }}</healing> against non-champions. Swain then prepares a <recast>Recast</recast>.<br /><br /><recast>Recast</recast>: Swain unleashes a demonflare, ending the transformation and dealing <magicDamage>{{ minimumdemonflaredamagetotal }} plus {{ healtodamagepercent*100 }}% of healing from this Ability as magic damage</magicDamage> (max <magicDamage>{{ demonflaredamagetotal }} damage</magicDamage>).",
           "leveltip": {
             "label": [
               "Healing",
@@ -674,8 +651,8 @@
             "full": "SwainR.png",
             "sprite": "spell11.png",
             "group": "spell",
-            "x": 240,
-            "y": 96,
+            "x": 336,
+            "y": 144,
             "w": 48,
             "h": 48
           }
@@ -688,7 +665,7 @@
           "full": "Swain_P.png",
           "sprite": "passive3.png",
           "group": "passive",
-          "x": 96,
+          "x": 240,
           "y": 96,
           "w": 48,
           "h": 48
@@ -828,18 +805,51 @@
               ],
               "items": [
                 {
-                  "id": "3073",
+                  "id": "1056",
                   "count": 1,
                   "hideCount": false
                 },
+                {
+                  "id": "2003",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
                 {
                   "id": "1001",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "2003",
-                  "count": 5,
+                  "id": "4635",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1026",
+                  "count": 1,
                   "hideCount": false
                 }
               ]
@@ -861,40 +871,17 @@
               ],
               "items": [
                 {
-                  "id": "3007",
+                  "id": "4633",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3020",
+                  "id": "4637",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3029",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3151",
+                  "id": "3102",
                   "count": 1,
                   "hideCount": false
                 },
@@ -909,75 +896,9 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3165",
+                  "id": "4629",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3157",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3116",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3001",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3065",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2139",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }
@@ -1716,7 +1637,7 @@
                 },
                 {
                   "id": "2003",
-                  "count": 2,
+                  "count": 1,
                   "hideCount": false
                 },
                 {
@@ -1743,12 +1664,12 @@
               ],
               "items": [
                 {
-                  "id": "3010",
+                  "id": "1001",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "1001",
+                  "id": "4635",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1776,40 +1697,22 @@
               ],
               "items": [
                 {
-                  "id": "3020",
+                  "id": "4633",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3027",
+                  "id": "4637",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3151",
+                  "id": "3102",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "standard",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
+                },
                 {
-                  "id": "3157",
+                  "id": "3089",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1819,70 +1722,9 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3089",
+                  "id": "4629",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3285",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3165",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3102",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2139",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }
@@ -1917,13 +1759,13 @@
               ],
               "items": [
                 {
-                  "id": "3850",
+                  "id": "1056",
                   "count": 1,
                   "hideCount": false
                 },
                 {
                   "id": "2003",
-                  "count": 2,
+                  "count": 1,
                   "hideCount": false
                 },
                 {
@@ -1955,7 +1797,12 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3136",
+                  "id": "4635",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1026",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1978,40 +1825,22 @@
               ],
               "items": [
                 {
-                  "id": "3020",
+                  "id": "4633",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3151",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "aggressive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3157",
+                  "id": "4637",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3165",
+                  "id": "3102",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3089",
                   "count": 1,
                   "hideCount": false
                 },
@@ -2019,67 +1848,11 @@
                   "id": "3135",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "protective",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3116",
-                  "count": 1,
-                  "hideCount": false
                 },
                 {
-                  "id": "3905",
+                  "id": "4629",
                   "count": 1,
                   "hideCount": false
-                },
-                {
-                  "id": "3107",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2139",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }

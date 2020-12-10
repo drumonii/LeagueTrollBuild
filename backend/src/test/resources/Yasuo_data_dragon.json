@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "Yasuo": {
       "id": "Yasuo",
@@ -12,7 +12,7 @@
         "full": "Yasuo.png",
         "sprite": "champion4.png",
         "group": "champion",
-        "x": 0,
+        "x": 144,
         "y": 96,
         "w": 48,
         "h": 48
@@ -67,10 +67,16 @@
           "chromas": true
         },
         {
+          "id": "157035",
+          "num": 35,
+          "name": "True Damage Yasuo Prestige Edition",
+          "chromas": false
+        },
+        {
           "id": "157036",
           "num": 36,
           "name": "Spirit Blossom Yasuo",
-          "chromas": false
+          "chromas": true
         }
       ],
       "lore": "An Ionian of deep resolve, Yasuo is an agile swordsman who wields the air itself against his enemies. As a proud young man, he was falsely accused of murdering his master—unable to prove his innocence, he was forced to slay his own brother in self defense. Even after his master's true killer was revealed, Yasuo still could not forgive himself for all he had done, and now wanders his homeland with only the wind to guide his blade.",
@@ -116,7 +122,7 @@
         "critperlevel": 0,
         "attackdamage": 60,
         "attackdamageperlevel": 3.2,
-        "attackspeedperlevel": 2.5,
+        "attackspeedperlevel": 3.5,
         "attackspeed": 0.697
       },
       "spells": [
@@ -258,8 +264,8 @@
             "full": "YasuoQ1Wrapper.png",
             "sprite": "spell14.png",
             "group": "spell",
-            "x": 192,
-            "y": 48,
+            "x": 288,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -399,8 +405,8 @@
             "full": "YasuoW.png",
             "sprite": "spell14.png",
             "group": "spell",
-            "x": 240,
-            "y": 48,
+            "x": 336,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -553,8 +559,8 @@
             "full": "YasuoE.png",
             "sprite": "spell14.png",
             "group": "spell",
-            "x": 288,
-            "y": 48,
+            "x": 384,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -668,8 +674,8 @@
             "full": "YasuoR.png",
             "sprite": "spell14.png",
             "group": "spell",
-            "x": 336,
-            "y": 48,
+            "x": 432,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -678,12 +684,12 @@
       ],
       "passive": {
         "name": "Way of the Wanderer",
-        "description": "Yasuo's Critical Strike Chance is doubled. Additionally, Yasuo builds toward a shield whenever he is moving. The shield triggers when he takes damage from a champion or monster.",
+        "description": "Yasuo's Critical Strike Chance is increased. Additionally, Yasuo builds toward a shield whenever he is moving. The shield triggers when he takes damage from a champion or monster.",
         "image": {
           "full": "Yasuo_Passive.png",
           "sprite": "passive4.png",
           "group": "passive",
-          "x": 0,
+          "x": 144,
           "y": 96,
           "w": 48,
           "h": 48
@@ -877,18 +883,51 @@
               ],
               "items": [
                 {
-                  "id": "3184",
+                  "id": "1055",
                   "count": 1,
                   "hideCount": false
                 },
+                {
+                  "id": "2003",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
                 {
                   "id": "1001",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "2003",
-                  "count": 3,
+                  "id": "6670",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1037",
+                  "count": 1,
                   "hideCount": false
                 }
               ]
@@ -915,103 +954,29 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3087",
+                  "id": "6672",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3031",
+                  "id": "3046",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
+                },
+                {
+                  "id": "3094",
+                  "count": 1,
+                  "hideCount": false
+                },
                 {
                   "id": "3072",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3153",
+                  "id": "3026",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3053",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3139",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3022",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2140",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }
@@ -1924,17 +1889,17 @@
               ],
               "items": [
                 {
-                  "id": "1038",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3086",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
                   "id": "1001",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "6670",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1037",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1957,45 +1922,27 @@
               ],
               "items": [
                 {
+                  "id": "3006",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "6672",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
                   "id": "3046",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3031",
+                  "id": "3094",
                   "count": 1,
                   "hideCount": false
                 },
-                {
-                  "id": "3006",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "standard",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
                 {
                   "id": "3072",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3033",
                   "count": 1,
                   "hideCount": false
                 },
@@ -2003,67 +1950,6 @@
                   "id": "3026",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3091",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3139",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3087",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2140",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }

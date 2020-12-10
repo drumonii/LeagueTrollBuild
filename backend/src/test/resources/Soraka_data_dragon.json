@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "Soraka": {
       "id": "Soraka",
@@ -12,7 +12,7 @@
         "full": "Soraka.png",
         "sprite": "champion3.png",
         "group": "champion",
-        "x": 48,
+        "x": 192,
         "y": 96,
         "w": 48,
         "h": 48
@@ -89,6 +89,12 @@
           "num": 16,
           "name": "Nightbringer Soraka",
           "chromas": false
+        },
+        {
+          "id": "16017",
+          "num": 17,
+          "name": "Star Guardian Soraka Prestige Edition",
+          "chromas": false
         }
       ],
       "lore": "A wanderer from the celestial dimensions beyond Mount Targon, Soraka gave up her immortality to protect the mortal races from their own more violent instincts. She endeavors to spread the virtues of compassion and mercy to everyone she meets—even healing those who would wish harm upon her. And, for all Soraka has seen of this world's struggles, she still believes the people of Runeterra have yet to reach their full potential.",
@@ -141,7 +147,7 @@
           "id": "SorakaQ",
           "name": "Starcall",
           "description": "A star falls from the sky at the target location dealing magic damage and slowing enemies. If an enemy champion is hit by Starcall, Soraka recovers Health.",
-          "tooltip": "Calls down a star from Soraka to a target location. Enemies standing in the explosion radius take <magicDamage>{{ totaldamage }} magic damage</magicDamage> and are slowed by {{ movespeedslow*100 }}% for {{ slowduration }} seconds.<br /><br />If Starcall hits a champion Soraka gains <keywordMajor>Rejuvenation</keywordMajor> for {{ hotduration }} seconds, which restores <scaleAP>{{ totalhot }}</scaleAP> Health over that duration and grants {{ movespeedhaste*100 }}% decaying Movement Speed. ",
+          "tooltip": "Soraka calls down a star, dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage> and <status>Slowing</status> by {{ movespeedslow*100 }}% for {{ slowduration }} seconds. <br /><br />Hitting an enemy champion grants Soraka <keywordMajor>Rejuvenation</keywordMajor>, which restores <healing>{{ totalhot }} Health</healing> over {{ hotduration }} seconds and grants <speed>{{ movespeedhaste*100 }}% Move Speed</speed> decaying over the same duration.",
           "leveltip": {
             "label": [
               "Damage",
@@ -277,8 +283,8 @@
             "full": "SorakaQ.png",
             "sprite": "spell11.png",
             "group": "spell",
-            "x": 384,
-            "y": 48,
+            "x": 0,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -288,7 +294,7 @@
           "id": "SorakaW",
           "name": "Astral Infusion",
           "description": "Soraka sacrifices a portion of her own health to heal another friendly champion.",
-          "tooltip": "Restores <scaleAP>{{ totalheal }}</scaleAP> Health to another champion ally.<br /><br />If cast while affected by <keywordMajor>Rejuvenation</keywordMajor>, the Max Health cost will be reduced by {{ percenthealthcostrefund*100 }}% and also grant her target <keywordMajor>Rejuvenation</keywordMajor>, healing them for <scaleAP>{{ spell.sorakaq:totalhot }}</scaleAP> and granting them {{ spell.sorakaq:movespeedhaste*100 }}% Movement Speed decaying over {{ spell.sorakaq:hotduration }} seconds.<br /><br /><span class=\"color919191\"><i>Cannot be cast if Soraka is below <scaleHealth>{{ minimumhealth }}Health</scaleHealth> (5% of her Max Health).</i></span>",
+          "tooltip": "Soraka restores <healing>{{ totalheal }} Health</healing> to another allied champion.<br /><br />If Soraka is affected by <keywordMajor>Rejuvenation</keywordMajor>, the Health cost will be reduced by {{ percenthealthcostrefund*100 }}%, and the target will gain <keywordMajor>Rejuvenation</keywordMajor> for {{ spell.sorakaq:hotduration }} seconds.",
           "leveltip": {
             "label": [
               "Healing",
@@ -422,8 +428,8 @@
             "full": "SorakaW.png",
             "sprite": "spell11.png",
             "group": "spell",
-            "x": 432,
-            "y": 48,
+            "x": 48,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -433,7 +439,7 @@
           "id": "SorakaE",
           "name": "Equinox",
           "description": "Creates a zone at a location that silences all enemies inside. When the zone expires, all enemies still inside are rooted.",
-          "tooltip": "Creates a zone at target location for {{ rootdelay }} seconds, dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage> to enemy Champions in the cast radius. Enemy Champions standing in the zone are silenced until they leave. <br /><br />When the zone disappears, all enemy Champions still standing in the zone are rooted for {{ rootduration }} second(s) and take an additional <magicDamage>{{ totaldamage }} magic damage</magicDamage>.",
+          "tooltip": "Soraka creates a starfield that deals <magicDamage>{{ totaldamage }} magic damage</magicDamage>. The field lingers for {{ rootdelay }} seconds, <status>Silencing</status> enemies inside. When the zone disappears, enemies inside the zone are <status>Rooted</status> for {{ rootduration }} second(s) and take <magicDamage>{{ totaldamage }} magic damage</magicDamage>.",
           "leveltip": {
             "label": [
               "Damage",
@@ -567,8 +573,8 @@
             "full": "SorakaE.png",
             "sprite": "spell11.png",
             "group": "spell",
-            "x": 0,
-            "y": 96,
+            "x": 96,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -578,7 +584,7 @@
           "id": "SorakaR",
           "name": "Wish",
           "description": "Soraka fills her allies with hope, instantly restoring health to herself and all friendly champions.",
-          "tooltip": "Calls upon divine powers to restore <scaleAP>{{ healingcalc }}</scaleAP> Health to all allied Champions. Wish's power is increased by {{ healingampforlowhealthallies*100 }}% on each Champion below 40% Health (<scaleAP>{{ ampedhealing }}</scaleAP>).",
+          "tooltip": "Soraka calls upon divine powers to restore <healing>{{ healingcalc }} Health</healing> to all allied Champions, regardless of distance. Healing is increased to <healing>{{ ampedhealing }}</healing> on targets below 40% Health.",
           "leveltip": {
             "label": [
               "Healing",
@@ -682,8 +688,8 @@
             "full": "SorakaR.png",
             "sprite": "spell11.png",
             "group": "spell",
-            "x": 48,
-            "y": 96,
+            "x": 144,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -697,7 +703,7 @@
           "full": "Soraka_Passive.png",
           "sprite": "passive3.png",
           "group": "passive",
-          "x": 48,
+          "x": 192,
           "y": 96,
           "w": 48,
           "h": 48
@@ -885,13 +891,51 @@
               ],
               "items": [
                 {
-                  "id": "3802",
+                  "id": "3303",
                   "count": 1,
                   "hideCount": false
                 },
                 {
                   "id": "2003",
-                  "count": 2,
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "1001",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3067",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "4642",
+                  "count": 1,
                   "hideCount": false
                 }
               ]
@@ -913,12 +957,12 @@
               ],
               "items": [
                 {
-                  "id": "3285",
+                  "id": "6617",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3158",
+                  "id": "3009",
                   "count": 1,
                   "hideCount": false
                 },
@@ -926,100 +970,21 @@
                   "id": "3504",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2065",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3174",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3089",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3102",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3157",
-                  "count": 1,
-                  "hideCount": false
                 },
                 {
                   "id": "3107",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
                 },
                 {
-                  "id": "2139",
+                  "id": "6616",
                   "count": 1,
-                  "hideCount": true
+                  "hideCount": false
+                },
+                {
+                  "id": "3222",
+                  "count": 1,
+                  "hideCount": false
                 }
               ]
             }
@@ -1728,13 +1693,13 @@
               ],
               "items": [
                 {
-                  "id": "3850",
+                  "id": "3303",
                   "count": 1,
                   "hideCount": false
                 },
                 {
                   "id": "2003",
-                  "count": 2,
+                  "count": 1,
                   "hideCount": false
                 },
                 {
@@ -1766,12 +1731,12 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3114",
+                  "id": "3067",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3028",
+                  "id": "4642",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1794,12 +1759,12 @@
               ],
               "items": [
                 {
-                  "id": "3117",
+                  "id": "6617",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3174",
+                  "id": "3009",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1807,100 +1772,21 @@
                   "id": "3504",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "aggressive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
+                },
                 {
                   "id": "3107",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3905",
+                  "id": "6616",
                   "count": 1,
                   "hideCount": false
                 },
-                {
-                  "id": "2065",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "protective",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
                 {
                   "id": "3222",
                   "count": 1,
                   "hideCount": false
-                },
-                {
-                  "id": "3190",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3109",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2139",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }

@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "Vayne": {
       "id": "Vayne",
@@ -12,8 +12,8 @@
         "full": "Vayne.png",
         "sprite": "champion4.png",
         "group": "champion",
-        "x": 432,
-        "y": 0,
+        "x": 96,
+        "y": 48,
         "w": 48,
         "h": 48
       },
@@ -146,7 +146,7 @@
           "id": "VayneTumble",
           "name": "Tumble",
           "description": "Vayne tumbles, maneuvering to carefully place her next shot. Her next attack deals bonus damage.",
-          "tooltip": "Vayne rolls a short distance, and deals <scaleAD>{{ adratiobonus }}</scaleAD> bonus physical damage on her next basic attack within {{ duration }} seconds. <br /><br /><rules>Tumble's bonus damage is equal to {{ totaladratio*100 }}% of her Attack Damage</rules>",
+          "tooltip": "Vayne rolls a short distance, and deals an additional <physicalDamage>{{ adratiobonus }} physical damage</physicalDamage> on her next Attack.",
           "leveltip": {
             "label": [
               "Cooldown",
@@ -276,8 +276,8 @@
             "full": "VayneTumble.png",
             "sprite": "spell13.png",
             "group": "spell",
-            "x": 0,
-            "y": 48,
+            "x": 96,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -287,7 +287,7 @@
           "id": "VayneSilveredBolts",
           "name": "Silver Bolts",
           "description": "Vayne tips her bolts with a rare metal, toxic to evil things. The third consecutive attack or ability against the same target deals a percentage of the target's max health as bonus true damage.",
-          "tooltip": "Every third consecutive attack or ability against an enemy deals an additional {{ maxhealthratio*100 }}% of the enemy's maximum health as true damage (no less than {{ damagefloor }})<br /><br /><rules>Silver Bolts deals no more than {{ damagemaxvsmonsters }} damage against monsters. </rules>",
+          "tooltip": "<spellPassive>Passive</spellPassive>: Every third consecutive Attack or Ability against an enemy deals an additional <trueDamage>{{ maxhealthratio*100 }}% max Health true damage</trueDamage>.",
           "leveltip": {
             "label": [
               "True Damage %",
@@ -417,8 +417,8 @@
             "full": "VayneSilveredBolts.png",
             "sprite": "spell13.png",
             "group": "spell",
-            "x": 48,
-            "y": 48,
+            "x": 144,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -428,7 +428,7 @@
           "id": "VayneCondemn",
           "name": "Condemn",
           "description": "Vayne draws a heavy crossbow from her back, and fires a huge bolt at her target, knocking them back and dealing damage. If they collide with terrain, they are impaled, dealing bonus damage and stunning them.",
-          "tooltip": "Fires a bolt that knocks back a target and deals <scaleAD>{{ totaldamage }}</scaleAD> damage. If the target collides with terrain, the damage is increased by {{ stundamage*100 }}% and the target is stunned for {{ stunduration }} seconds. ",
+          "tooltip": "Vayne fires a bolt that <status>Knocks Back</status> and deals <physicalDamage>{{ totaldamage }} physical damage</physicalDamage>. If the target collides with terrain, the damage is increased to <physicalDamage>{{ empowereddamagett }}</physicalDamage> and they are <status>Stunned</status> for {{ stunduration }} seconds. ",
           "leveltip": {
             "label": [
               "Cooldown",
@@ -558,8 +558,8 @@
             "full": "VayneCondemn.png",
             "sprite": "spell13.png",
             "group": "spell",
-            "x": 96,
-            "y": 48,
+            "x": 192,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -569,7 +569,7 @@
           "id": "VayneInquisition",
           "name": "Final Hour",
           "description": "Readying herself for an epic confrontation, Vayne gains increased Attack Damage, Invisibility during Tumble, reduced Tumble cooldown, and more bonus Movement Speed from Night Hunter",
-          "tooltip": "Vayne gains {{ bonusattackdamage }} bonus attack damage and improvements to Night Hunter and Tumble for {{ baseduration }} seconds. The Duration of Final Hour is extended by {{ durationtoadd }} seconds whenever a champion damaged by Vayne dies within {{ damagedmarkerduration }} seconds. <br /><br /><span class=\"colorF0F0F0\">Night Hunter</span>: Vayne instead gains {{ movementspeed }} movement speed<br /><span class=\"colorF0F0F0\">Tumble</span>: Tumble's cooldown is reduced by {{ tumblecdreduction }}%, and Vayne gains <keywordStealth>Invisibility</keywordStealth> for {{ tumblestealthduration }} second when she Tumbles.<br /><br /><rules><keywordStealth>Stealth - Invisible:</keywordStealth> Vayne can only be revealed by nearby enemy turrets or <keywordStealth>True Sight</keywordStealth>.<br />Final Hour's duration can't be increased beyond its original maximum duration</rules>",
+          "tooltip": "Vayne gains <physicalDamage>{{ bonusattackdamage }} Attack Damage</physicalDamage> for {{ baseduration }} seconds, extended by {{ durationtoadd }} seconds whenever a champion damaged by Vayne dies within {{ damagedmarkerduration }} seconds. Additionally, during the duration:<li><spellName>Night Hunter</spellName> instead grants <speed>{{ movementspeed }} Move Speed</speed>.<li>The cooldown of <spellName>Tumble</spellName> is reduced by {{ tumblecdreduction }}%, and grants <keywordStealth>Invisibility</keywordStealth> for {{ tumblestealthduration }} second.",
           "leveltip": {
             "label": [
               "Cooldown",
@@ -677,8 +677,8 @@
             "full": "VayneInquisition.png",
             "sprite": "spell13.png",
             "group": "spell",
-            "x": 144,
-            "y": 48,
+            "x": 240,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -687,13 +687,13 @@
       ],
       "passive": {
         "name": "Night Hunter",
-        "description": "Vayne ruthlessly hunts evil-doers, gaining 30 movement speed when moving toward nearby enemy champions.",
+        "description": "Vayne ruthlessly hunts evil-doers, gaining <speed>30 Move Speed</speed> when moving toward nearby enemy champions.",
         "image": {
           "full": "Vayne_NightHunter.png",
           "sprite": "passive4.png",
           "group": "passive",
-          "x": 432,
-          "y": 0,
+          "x": 96,
+          "y": 48,
           "w": 48,
           "h": 48
         }
@@ -833,18 +833,51 @@
               ],
               "items": [
                 {
-                  "id": "1053",
+                  "id": "1055",
                   "count": 1,
                   "hideCount": false
                 },
+                {
+                  "id": "2003",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
                 {
                   "id": "1001",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "2003",
-                  "count": 4,
+                  "id": "6670",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1037",
+                  "count": 1,
                   "hideCount": false
                 }
               ]
@@ -866,40 +899,17 @@
               ],
               "items": [
                 {
-                  "id": "3087",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
                   "id": "3006",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3031",
+                  "id": "6672",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
+                },
                 {
-                  "id": "3072",
+                  "id": "3046",
                   "count": 1,
                   "hideCount": false
                 },
@@ -909,70 +919,14 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3124",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3812",
+                  "id": "3072",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3139",
+                  "id": "3026",
                   "count": 1,
                   "hideCount": false
-                },
-                {
-                  "id": "3156",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2140",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }
@@ -1673,7 +1627,7 @@
               ],
               "items": [
                 {
-                  "id": "1054",
+                  "id": "1055",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1706,17 +1660,17 @@
               ],
               "items": [
                 {
-                  "id": "3144",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "1043",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
                   "id": "1001",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "6670",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1037",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1739,45 +1693,22 @@
               ],
               "items": [
                 {
-                  "id": "3153",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
                   "id": "3006",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3124",
+                  "id": "6672",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
+                },
                 {
                   "id": "3046",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3031",
+                  "id": "3094",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1785,67 +1716,11 @@
                   "id": "3072",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3139",
-                  "count": 1,
-                  "hideCount": false
                 },
                 {
-                  "id": "3156",
+                  "id": "3026",
                   "count": 1,
                   "hideCount": false
-                },
-                {
-                  "id": "3022",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2140",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }

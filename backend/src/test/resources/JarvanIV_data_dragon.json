@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "JarvanIV": {
       "id": "JarvanIV",
@@ -134,7 +134,7 @@
           "id": "JarvanIVDragonStrike",
           "name": "Dragon Strike",
           "description": "Jarvan IV extends his lance, dealing physical damage and lowering the Armor of enemies in its path. Additionally, this will pull Jarvan to his Demacian Standard, knocking up enemies in his path.",
-          "tooltip": "Extends Jarvan IV's lance dealing <physicalDamage>{{ e1 }} <scaleAD>(+{{ a1 }})</scaleAD> physical damage</physicalDamage> and lowering the Armor of enemies hit by {{ e2 }}% for {{ e3 }} seconds.<br /><br />If the lance contacts Demacian Standard it will pull Jarvan IV to its location, knocking up enemies in his path. This effect can be triggered even while immobilized.",
+          "tooltip": "Jarvan extends his lance, dealing <physicalDamage>{{ totaldamage }} physical damage</physicalDamage> and removing <scaleArmor>{{ e2 }}% Armor</scaleArmor> for {{ e3 }} seconds.<br /><br />If the lance connects with <spellName>Demacian Standard</spellName>, Jarvan will pull himself to it, <status>Knocking Up</status> those in his path for 0.75 seconds.",
           "leveltip": {
             "label": [
               "Damage",
@@ -170,11 +170,11 @@
           "effect": [
             null,
             [
-              80,
-              120,
-              160,
-              200,
-              240
+              90,
+              130,
+              170,
+              210,
+              250
             ],
             [
               10,
@@ -242,7 +242,7 @@
           ],
           "effectBurn": [
             null,
-            "80/120/160/200/240",
+            "90/130/170/210/250",
             "10/14/18/22/26",
             "3",
             "0",
@@ -253,13 +253,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "bonusattackdamage",
-              "coeff": 1.2,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -285,7 +279,7 @@
           "id": "JarvanIVGoldenAegis",
           "name": "Golden Aegis",
           "description": "Jarvan IV calls upon the ancient kings of Demacia to shield him from harm and slow surrounding enemies.",
-          "tooltip": "Grants a shield that absorbs {{ e1 }} (<span class=\"colorCC3300\">+{{ f1 }}</span> [{{ e6 }}% max Health] for each nearby enemy champion) damage for {{ e4 }} seconds, and slows surrounding enemies by {{ e2 }}% for {{ e5 }} seconds.",
+          "tooltip": "Jarvan summons an aegis, <status>Slowing</status> nearby enemies by {{ e2 }}% for {{ e5 }} seconds and granting him <shield>{{ totalshield }} Shield</shield> for each enemy champion hit.",
           "leveltip": {
             "label": [
               "Shield Amount",
@@ -352,11 +346,11 @@
               2
             ],
             [
-              1.5,
-              1.5,
-              1.5,
-              1.5,
-              1.5
+              0.015,
+              0.015,
+              0.015,
+              0.015,
+              0.015
             ],
             [
               0,
@@ -394,7 +388,7 @@
             "10/20/30/40/50",
             "5",
             "2",
-            "1.5",
+            "0.01",
             "0",
             "0",
             "0",
@@ -426,7 +420,7 @@
           "id": "JarvanIVDemacianStandard",
           "name": "Demacian Standard",
           "description": "Jarvan IV carries the pride of Demacia, passively granting him bonus Attack Speed. Activating Demacian Standard allows Jarvan IV to place a Demacian flag that deals magic damage on impact and grants Attack Speed to nearby allied champions.",
-          "tooltip": "<spellPassive>Passive:</spellPassive> Gains {{ e3 }}% Attack Speed.<br /><br /><spellPassive>Active:</spellPassive> Throws a Demacian Standard to a nearby area dealing <magicDamage>{{ e2 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage</magicDamage> to enemies. The Standard lasts for {{ e4 }} seconds and grants surrounding allied champions {{ e3 }}% Attack Speed.",
+          "tooltip": "<spellPassive>Passive:</spellPassive> Jarvan gains <attackSpeed>{{ permanentattackspeed*100 }}% Attack Speed</attackSpeed>.<br /><br /><spellActive>Active:</spellActive> Jarvan throws a standard into the ground, dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage> and granting allies near the standard <attackSpeed>{{ e3 }}% Attack Speed</attackSpeed> for {{ e4 }} seconds.",
           "leveltip": {
             "label": [
               "Damage",
@@ -435,7 +429,7 @@
             ],
             "effect": [
               "{{ e2 }} -> {{ e2NL }}",
-              "{{ effect3amount*100.000000 }}% -> {{ effect3amountnl*100.000000 }}%",
+              "{{ permanentattackspeed*100.000000 }}% -> {{ permanentattackspeednl*100.000000 }}%",
               "{{ effect3amount*100.000000 }}% -> {{ effect3amountnl*100.000000 }}%"
             ]
           },
@@ -488,11 +482,11 @@
               8
             ],
             [
-              0.2,
-              0.025,
-              0.025,
-              0.025,
-              0.025
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -536,20 +530,14 @@
             "80/120/160/200/240",
             "20/22.5/25/27.5/30",
             "8",
-            "0.2/0.025/0.025/0.025/0.025",
+            "0",
             "0",
             "0",
             "0",
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.8,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -575,7 +563,7 @@
           "id": "JarvanIVCataclysm",
           "name": "Cataclysm",
           "description": "Jarvan IV heroically leaps into battle at a target with such force that he terraforms the surrounding area to create an arena around them. Nearby enemies are damaged at the moment of impact.",
-          "tooltip": "Heroically leaps to an enemy Champion dealing <physicalDamage>{{ damagecalc }} physical damage</physicalDamage> to nearby enemies and creating an arena of impassable terrain around them for {{ wallduration }} seconds.<br /><br />Activate again to collapse the terrain.",
+          "tooltip": "Jarvan heroically leaps to an enemy Champion, dealing <physicalDamage>{{ damagecalc }} physical damage</physicalDamage> to them and surrounding enemies and creating an arena of impassable terrain around them for {{ wallduration }} seconds.<br /><br />Jarvan can <recast>Recast</recast> to collapse the terrain.",
           "leveltip": {
             "label": [
               "Damage",
@@ -843,13 +831,51 @@
               ],
               "items": [
                 {
-                  "id": "3044",
+                  "id": "1055",
                   "count": 1,
                   "hideCount": false
                 },
                 {
                   "id": "2003",
-                  "count": 3,
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "1001",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3067",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3057",
+                  "count": 1,
                   "hideCount": false
                 }
               ]
@@ -871,7 +897,22 @@
               ],
               "items": [
                 {
-                  "id": "3111",
+                  "id": "3078",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3053",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3153",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3026",
                   "count": 1,
                   "hideCount": false
                 },
@@ -881,98 +922,9 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3748",
+                  "id": "3742",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3156",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3147",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3053",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3143",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3065",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2140",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }
@@ -1862,7 +1814,7 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
+              "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
                 ""
@@ -1872,7 +1824,12 @@
               ],
               "items": [
                 {
-                  "id": "2033",
+                  "id": "1055",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "2003",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1890,7 +1847,7 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
+              "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
                 ""
@@ -1905,12 +1862,12 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3077",
+                  "id": "3067",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "1011",
+                  "id": "3057",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1923,7 +1880,7 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
+              "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
                 ""
@@ -1933,7 +1890,22 @@
               ],
               "items": [
                 {
-                  "id": "3111",
+                  "id": "3078",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3053",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3153",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3026",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1946,275 +1918,6 @@
                   "id": "3742",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3147",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3142",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3074",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3083",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3026",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3190",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3143",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "startingjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "1041",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2031",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3340",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "earlyjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3706",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3133",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "1001",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essentialjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "1400",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3111",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3071",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3748",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3026",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3179",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3181",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3083",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3742",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3065",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2140",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }

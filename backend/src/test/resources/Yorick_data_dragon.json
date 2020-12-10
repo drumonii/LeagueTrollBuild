@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "Yorick": {
       "id": "Yorick",
@@ -12,7 +12,7 @@
         "full": "Yorick.png",
         "sprite": "champion4.png",
         "group": "champion",
-        "x": 96,
+        "x": 240,
         "y": 96,
         "w": 48,
         "h": 48
@@ -47,6 +47,12 @@
           "num": 4,
           "name": "Meowrick",
           "chromas": true
+        },
+        {
+          "id": "83012",
+          "num": 12,
+          "name": "Resistance Yorick",
+          "chromas": true
         }
       ],
       "lore": "The last survivor of a long-forgotten religious order, Yorick is both blessed and cursed with power over the dead. Trapped on the Shadow Isles, his only companions are the rotting corpses and shrieking spirits that he gathers to him. Yorick's monstrous actions belie his noble purpose: to free his home from the curse of the Ruination.",
@@ -76,7 +82,7 @@
         "hp": 580,
         "hpperlevel": 100,
         "mp": 300,
-        "mpperlevel": 40,
+        "mpperlevel": 60,
         "movespeed": 340,
         "armor": 39,
         "armorperlevel": 4,
@@ -99,15 +105,15 @@
           "id": "YorickQ",
           "name": "Last Rites",
           "description": "Yorick deals bonus damage on his next attack and heals himself. If the target dies a grave will be dug.",
-          "tooltip": "Yorick's next basic attack deals {{ e1 }} <scaleAD>(+{{ a1 }})</scaleAD> physical damage and restores {{ f1 }} Health (doubled when below half Health). Last Rites will leave a grave if it kills the target.<br /><br />When there are three or more graves nearby and Last Rites has been used, Yorick can cast Awakening to raise Mist Walkers from graves.",
+          "tooltip": "Yorick's next Attack deals an additional <physicalDamage>{{ totaldamage }} physical damage</physicalDamage> and restores <healing>{{ qheal }} Health</healing>, or <healing>{{ empoweredqheal }} Health</healing> if Yorick is below 50% Health. If this Attack kills the target, it leaves a grave.<br /><br />When there are 3 or more graves nearby, if Last Rites has already been used, Yorick can <recast>Recast</recast> this Ability to raise <keywordMajor>Mist Walkers</keywordMajor> from all nearby graves.",
           "leveltip": {
             "label": [
-              "Damage",
-              "Cooldown"
+              "Cooldown",
+              "Damage"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
-              "{{ cooldown }} -> {{ cooldownNL }}"
+              "{{ cooldown }} -> {{ cooldownNL }}",
+              "{{ e1 }} -> {{ e1NL }}"
             ]
           },
           "maxrank": 5,
@@ -214,13 +220,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "attackdamage",
-              "coeff": 1.4,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -235,8 +235,8 @@
             "full": "YorickQ.png",
             "sprite": "spell14.png",
             "group": "spell",
-            "x": 96,
-            "y": 96,
+            "x": 192,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -246,15 +246,15 @@
           "id": "YorickW",
           "name": "Dark Procession",
           "description": "Yorick summons a destructible wall at target location that will block enemy movement.",
-          "tooltip": "Yorick summons a destructible wall of spirits with {{ e5 }} Health around target area for {{ e1 }} seconds. Allies can walk through the wall freely.",
+          "tooltip": "Yorick summons a wall of spirits blocking enemies' path, but not allies'. The wall can be Attacked, and disappears after {{ e5 }} hits.",
           "leveltip": {
             "label": [
-              "Health",
-              "Cooldown"
+              "Cooldown",
+              "Health"
             ],
             "effect": [
-              "{{ e5 }} -> {{ e5NL }}",
-              "{{ cooldown }} -> {{ cooldownNL }}"
+              "{{ cooldown }} -> {{ cooldownNL }}",
+              "{{ e5 }} -> {{ e5NL }}"
             ]
           },
           "maxrank": 5,
@@ -376,8 +376,8 @@
             "full": "YorickW.png",
             "sprite": "spell14.png",
             "group": "spell",
-            "x": 144,
-            "y": 96,
+            "x": 240,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -387,7 +387,7 @@
           "id": "YorickE",
           "name": "Mourning Mist",
           "description": "Yorick throws a globule of Black Mist that damages, slows and marks enemies.",
-          "tooltip": "Yorick throws a globule of Black Mist that deals {{ e7 }}% of enemy's current Health as magic damage (minimum {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP>), slows by {{ e3 }}% for {{ e6 }} seconds, and marks champions and monsters for {{ e2 }} seconds.<br /><br />Yorick and his minions are hasted by {{ e5 }}% while moving toward the mark.",
+          "tooltip": "Yorick throws a globule of Black Mist that deals <magicDamage>{{ e7 }}% current Health magic damage</magicDamage>, <status>Slows</status> by {{ e3 }}% for {{ e6 }} seconds, and marks champions and jungle monsters for {{ e2 }} seconds. <br /><br />Yorick and his summoned units gain <speed>{{ e5 }}% Move Speed</speed> toward the mark.",
           "leveltip": {
             "label": [
               "Minimum Damage",
@@ -504,13 +504,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.7,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -525,8 +519,8 @@
             "full": "YorickE.png",
             "sprite": "spell14.png",
             "group": "spell",
-            "x": 192,
-            "y": 96,
+            "x": 288,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -536,21 +530,21 @@
           "id": "YorickR",
           "name": "Eulogy of the Isles",
           "description": "Yorick summons the Maiden of the Mist that causes Yorick's attacks against the Maiden's target to deal bonus damage. The Maiden will also automatically raise Walkers from dead enemies.",
-          "tooltip": "Yorick summons The Maiden of the Mist and {{ rghoulnumbers }} Mist Walkers. The Maiden has {{ yorickbigghoulhealth }} Health, deals {{ yorickbigghouldamage }} magic damage, and raises Mist Walkers from nearby enemy deaths.<br /><br />When Yorick damages the Maiden's target he will deal {{ rmarkdamagepercent }}% of their max Health as bonus magic damage. ({{ rproccd }} sec cooldown)<br /><br />Yorick can free the Maiden reactivating the ability, sending her down the nearest lane.",
+          "tooltip": "Yorick summons the Maiden of the Mist and {{ rghoulnumbers }} <keywordMajor>Mist Walkers</keywordMajor>. The Maiden has <healing>{{ yorickbigghoulhealth }} Health</healing>, deals <magicDamage>{{ yorickbigghouldamage }} magic damage</magicDamage>, and raises <keywordMajor>Mist Walkers</keywordMajor> from nearby enemy deaths.<br /><br />When Yorick damages the Maiden's target, he will deal <magicDamage>{{ rmarkdamagepercent }}% max Health magic damage</magicDamage>. This effect has a {{ rproccd }} second cooldown.<br /><br />After 10 seconds, Yorick can <recast>Recast</recast> this Ability to free the Maiden, sending her down the nearest lane.",
           "leveltip": {
             "label": [
+              "Cooldown",
               "Health",
               "Damage",
               "Mist Walkers",
-              "Mark Damage",
-              "Cooldown"
+              "Mark Damage"
             ],
             "effect": [
+              "{{ cooldown }} -> {{ cooldownNL }}",
               "{{ rbigghoulbonushp }} -> {{ rbigghoulbonushpNL }}",
               "{{ rbigghoulbonusad }} -> {{ rbigghoulbonusadNL }}",
               "{{ rghoulnumbers }} -> {{ rghoulnumbersNL }}",
-              "{{ rmarkdamagepercent }}% -> {{ rmarkdamagepercentNL }}%",
-              "{{ cooldown }} -> {{ cooldownNL }}"
+              "{{ rmarkdamagepercent }}% -> {{ rmarkdamagepercentNL }}%"
             ]
           },
           "maxrank": 3,
@@ -646,8 +640,8 @@
             "full": "YorickR.png",
             "sprite": "spell14.png",
             "group": "spell",
-            "x": 240,
-            "y": 96,
+            "x": 336,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -661,7 +655,7 @@
           "full": "Yorick_P.png",
           "sprite": "passive4.png",
           "group": "passive",
-          "x": 96,
+          "x": 240,
           "y": 96,
           "w": 48,
           "h": 48
@@ -845,18 +839,51 @@
               ],
               "items": [
                 {
-                  "id": "2051",
+                  "id": "1055",
                   "count": 1,
                   "hideCount": false
                 },
+                {
+                  "id": "2003",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
                 {
                   "id": "1001",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "2003",
-                  "count": 3,
+                  "id": "3067",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3057",
+                  "count": 1,
                   "hideCount": false
                 }
               ]
@@ -883,68 +910,22 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3111",
+                  "id": "3053",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3065",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3748",
+                  "id": "3153",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3812",
+                  "id": "3026",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3161",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3110",
+                  "id": "3071",
                   "count": 1,
                   "hideCount": false
                 },
@@ -952,39 +933,6 @@
                   "id": "3742",
                   "count": 1,
                   "hideCount": false
-                },
-                {
-                  "id": "3053",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2138",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }
@@ -1648,34 +1596,6 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2033",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3340",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "startingjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
               "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
@@ -1686,12 +1606,12 @@
               ],
               "items": [
                 {
-                  "id": "1041",
+                  "id": "1055",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "2031",
+                  "id": "2003",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1709,39 +1629,6 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3057",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3044",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "1001",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "earlyjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
               "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
@@ -1757,12 +1644,12 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3706",
+                  "id": "3067",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3133",
+                  "id": "3057",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1775,7 +1662,7 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
+              "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
                 ""
@@ -1795,136 +1682,24 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3111",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essentialjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "1400",
+                  "id": "3153",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3078",
+                  "id": "3026",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3111",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3748",
+                  "id": "3071",
                   "count": 1,
                   "hideCount": false
                 },
-                {
-                  "id": "3025",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3812",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
                 {
                   "id": "3742",
                   "count": 1,
                   "hideCount": false
-                },
-                {
-                  "id": "3065",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3143",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2138",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }

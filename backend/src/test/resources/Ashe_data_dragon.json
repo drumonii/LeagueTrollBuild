@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "Ashe": {
       "id": "Ashe",
@@ -89,6 +89,12 @@
           "num": 17,
           "name": "High Noon Ashe",
           "chromas": true
+        },
+        {
+          "id": "22023",
+          "num": 23,
+          "name": "Fae Dragon Ashe",
+          "chromas": true
         }
       ],
       "lore": "Iceborn warmother of the Avarosan tribe, Ashe commands the most populous horde in the north. Stoic, intelligent, and idealistic, yet uncomfortable with her role as leader, she taps into the ancestral magics of her lineage to wield a bow of True Ice. With her people's belief that she is the mythological hero Avarosa reincarnated, Ashe hopes to unify the Freljord once more by retaking their ancient, tribal lands.",
@@ -130,7 +136,7 @@
         "mpregenperlevel": 0.4,
         "crit": 0,
         "critperlevel": 0,
-        "attackdamage": 61,
+        "attackdamage": 59,
         "attackdamageperlevel": 2.96,
         "attackspeedperlevel": 3.33,
         "attackspeed": 0.658
@@ -140,7 +146,7 @@
           "id": "AsheQ",
           "name": "Ranger's Focus",
           "description": "Ashe builds up Focus by attacking. At maximum Focus, Ashe can cast Ranger's Focus to consume all stacks of Focus, temporarily increasing her Attack Speed and transforming her basic attack into a powerful flurry attack for the duration.",
-          "tooltip": "<spellPassive>Passive: </spellPassive>Basic attacks grant Focus for {{ e1 }} seconds, stacking up to {{ e2 }} times. Stacks fall off one at a time, and at {{ e2 }} stacks, Ranger's Focus can be cast, consuming all Focus.<br /><br /><spellPassive>Active:</spellPassive> For {{ e3 }} seconds, Ashe gains {{ e4 }}% Attack Speed, and her basic attacks fire a flurry of arrows dealing <physicalDamage><scaleAD>{{ f1 }}</scaleAD> physical damage</physicalDamage>. During this time, she does not stack Focus. Ranger's Focus applies Frost Shot.",
+          "tooltip": "<spellPassive>Passive: </spellPassive>Ashe's Attacks grant a stack for {{ e1 }} seconds. At {{ e2 }} stacks, she may activate this ability.<br /><br /><spellPassive>Active:</spellPassive> Ashe gains <attackSpeed>{{ e4 }}% Attack Speed</attackSpeed> and her Attacks deal <physicalDamage>{{ empowereddamage }} damage</physicalDamage> instead for {{ e3 }} seconds.",
           "leveltip": {
             "label": [
               "Attack Speed",
@@ -280,14 +286,16 @@
         {
           "id": "Volley",
           "name": "Volley",
-          "description": "Ashe fires 9 arrows in a cone for increased damage. Also applies Frost Shot.",
-          "tooltip": "Fires arrows in a cone, each dealing <scaleAD>{{ totaldamage }} physical damage</scaleAD>. Enemies can block multiple arrows, but only take damage from the first.<br /><br />Champion hits count as Critical Strikes for the purposes of Frost Shot.",
+          "description": "Ashe fires arrows in a cone for increased damage. Also applies Frost Shot.",
+          "tooltip": "Ashe fires a volley of {{ numberofarrowstooltip }} arrows, each dealing <physicalDamage>{{ totaldamage }} physical damage</physicalDamage>. Enemies can be hit by multiple arrows, but only take damage from the first.",
           "leveltip": {
             "label": [
+              "Arrows Fired",
               "Damage",
               "Cooldown"
             ],
             "effect": [
+              "{{ numberofarrowstooltip }} -> {{ numberofarrowstooltipNL }}",
               "{{ basedamage }} -> {{ basedamageNL }}",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
@@ -422,7 +430,7 @@
           "id": "AsheSpiritOfTheHawk",
           "name": "Hawkshot",
           "description": "Ashe sends her Hawk Spirit on a scouting mission anywhere on the map.",
-          "tooltip": "Reveals terrain as it flies toward target location anywhere on the map. Grants vision for {{ e4 }} seconds. Ashe can store up to 2 charges of Hawkshot.<br /><br />Hawkshot grants Ashe assists on enemy champions that it reveals - but only if they were otherwise unseen.",
+          "tooltip": "Ashe sends forth a hawk to grant vision for 5 seconds anywhere on the map. It also reveals the area around it as it flies.<br /><br />This ability has 2 charges ({{ chargecooldown }} second recharge).",
           "leveltip": {
             "label": [
               "Recharge Time"
@@ -536,7 +544,7 @@
             "0"
           ],
           "vars": [],
-          "costType": " {{ abilityresourcename }}",
+          "costType": "No Cost",
           "maxammo": "2",
           "range": [
             25000,
@@ -555,13 +563,13 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} {{ abilityresourcename }}"
+          "resource": "No Cost"
         },
         {
           "id": "EnchantedCrystalArrow",
           "name": "Enchanted Crystal Arrow",
           "description": "Ashe fires a missile of ice in a straight line. If the arrow collides with an enemy Champion, it deals damage and stuns the Champion, stunning for longer the farther arrow has traveled. In addition, surrounding enemy units take damage and are slowed.",
-          "tooltip": "Launches a crystal arrow of ice that stuns the first enemy Champion hit, dealing <magicDamage>{{ rmaindamage }} magic damage</magicDamage>. The farther the arrow flies, the longer the stun, up to {{ maxstunduration }} seconds. Surrounding enemies take half damage.",
+          "tooltip": "Ashe launches a crystal arrow of ice that <status>Stuns</status> the first champion hit and deals <magicDamage>{{ rmaindamage }} magic damage</magicDamage>. The <status>Stun</status> duration increases with distance travelled, up to {{ maxstunduration }} seconds. Surrounding enemies take half damage.",
           "leveltip": {
             "label": [
               "Damage",
@@ -706,7 +714,7 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
+              "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
                 ""
@@ -716,13 +724,51 @@
               ],
               "items": [
                 {
-                  "id": "1038",
+                  "id": "1055",
                   "count": 1,
                   "hideCount": false
                 },
                 {
                   "id": "2003",
-                  "count": 2,
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "1001",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "6670",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1037",
+                  "count": 1,
                   "hideCount": false
                 }
               ]
@@ -749,7 +795,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3153",
+                  "id": "6672",
                   "count": 1,
                   "hideCount": false
                 },
@@ -757,103 +803,19 @@
                   "id": "3046",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
+                },
                 {
-                  "id": "3031",
+                  "id": "3094",
                   "count": 1,
                   "hideCount": false
                 },
-                {
-                  "id": "3508",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3085",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
                 {
                   "id": "3072",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3139",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3812",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2140",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2033",
+                  "id": "3026",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1718,17 +1680,17 @@
               ],
               "items": [
                 {
-                  "id": "1038",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
                   "id": "1001",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3133",
+                  "id": "6670",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1037",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1751,73 +1713,27 @@
               ],
               "items": [
                 {
-                  "id": "3508",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
                   "id": "3006",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3085",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3031",
+                  "id": "6672",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3153",
+                  "id": "3046",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3033",
+                  "id": "3094",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
+                },
                 {
-                  "id": "3139",
+                  "id": "3072",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1825,39 +1741,6 @@
                   "id": "3026",
                   "count": 1,
                   "hideCount": false
-                },
-                {
-                  "id": "3075",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2140",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }

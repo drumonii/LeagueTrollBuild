@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "DrMundo": {
       "id": "DrMundo",
@@ -134,7 +134,7 @@
           "id": "InfectedCleaverMissileCast",
           "name": "Infected Cleaver",
           "description": "Dr. Mundo hurls his cleaver, dealing damage equal to a portion of his target's current Health and slowing them for a short time. Dr. Mundo delights in the suffering of others, so he is returned a portion of the Health cost when he successfully lands a cleaver (doubled on killing blows).",
-          "tooltip": "Dr. Mundo hurls his cleaver, dealing {{ e2 }}% of the target's current health as <magicDamage>magic damage</magicDamage> (no less than {{ e1 }}) and slowing them by {{ e4 }}% for {{ e5 }} seconds.<br /><br />If the cleaver hits, {{ f1 }} health is refunded ({{ f2 }} if the cleaver kills).<br /><br /><rules>Infected Cleaver deals no more than {{ e6 }} damage against monsters.</rules>",
+          "tooltip": "Dr. Mundo hurls his cleaver, dealing <magicDamage>{{ e2 }}% current Health magic damage</magicDamage> (minimum {{ e1 }}) and <status>Slowing</status> by {{ e4 }}% for {{ e5 }} seconds.<br /><br />If the cleaver hits, restore <healing>{{ f1 }} Health</healing>. If it kills, restore <healing>{{ f2 }} Health</healing>.",
           "leveltip": {
             "label": [
               "Damage",
@@ -279,7 +279,7 @@
           "id": "BurningAgony",
           "name": "Burning Agony",
           "description": "Dr. Mundo drains his Health to reduce the duration of disables and deal continual damage to nearby enemies.",
-          "tooltip": "<spellActive>Toggle:</spellActive> Dr. Mundo sets himself on fire, dealing <magicDamage>{{ damagepersecond }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage</magicDamage> to nearby enemies every second.<br /><br />While on fire, the duration of disables against Dr. Mundo are reduced by {{ e5 }}%.",
+          "tooltip": "<toggle>Toggle:</toggle> Dr. Mundo sets himself on fire, dealing <magicDamage>{{ totaldamagepersecond }} magic damage</magicDamage> to nearby enemies each second.<br /><br />While active, Dr. Mundo gains {{ e5 }}% Tenacity.",
           "leveltip": {
             "label": [
               "Damage",
@@ -394,13 +394,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.2,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " Health Every Second",
           "maxammo": "-1",
           "range": [
@@ -426,7 +420,7 @@
           "id": "Masochism",
           "name": "Masochism",
           "description": "Dr. Mundo gains bonus attack damage based on his missing health, and his next basic attack headbutts his target for additional damage. Passively increases magic resist whenever Dr. Mundo is dealt magic damage or pays a health cost.",
-          "tooltip": "<spellPassive>Passive:</spellPassive> When Dr. Mundo suffers magic damage or pays a health cost, his magic resist is increased by {{ e8 }}% for {{ e0 }} seconds, up to a maximum of {{ e9 }}%.<br /><br /><spellActive>Active:</spellActive> Dr. Mundo's next basic attack will headbutt the enemy, dealing an additional <physicalDamage><scaleHealth>{{ f1 }}</scaleHealth> physical damage</physicalDamage> ({{ e1 }}% of maximum health) at the cost of {{ e2 }} health.<br /><br />Upon activation, Dr. Mundo gains up to {{ e4 }} attack damage (no less than {{ e5 }}) for {{ e6 }} seconds based on his missing health.<br /><br /><rules>Masochism grants {{ f2 }} attack damage above the minimum for every 1% of missing health (<scaleHealth>{{ f5 }}</scaleHealth>)</rules>.",
+          "tooltip": "<spellPassive>Passive:</spellPassive> Taking magic damage or paying a Health cost grants Dr. Mundo a stack for 2 seconds. Dr. Mundo increases his <scaleMR>Magic Resist</scaleMR> by {{ e8 }}% per stack (max {{ e9 }}%).<br /><br /><spellActive>Active:</spellActive> Dr. Mundo gains between <physicalDamage>{{ e5 }}</physicalDamage> and <physicalDamage>{{ e4 }} Attack Damage</physicalDamage> for {{ e6 }} seconds based on missing Health and his next Attack deals an additional <physicalDamage>{{ totaldamage }} physical damage</physicalDamage> at the cost of <healing>{{ e2 }} Health</healing>.",
           "leveltip": {
             "label": [
               "Headbutt Damage",
@@ -466,11 +460,11 @@
           "effect": [
             null,
             [
-              3,
-              3.5,
-              4,
-              4.5,
-              5
+              0.03,
+              0.035,
+              0.04,
+              0.045,
+              0.05
             ],
             [
               25,
@@ -538,7 +532,7 @@
           ],
           "effectBurn": [
             null,
-            "3/3.5/4/4.5/5",
+            "0.03/0.035/0.04/0.045/0.05",
             "25/35/45/55/65",
             "25",
             "60/90/120/150/180",
@@ -575,7 +569,7 @@
           "id": "Sadism",
           "name": "Sadism",
           "description": "Dr. Mundo sacrifices a portion of his Health for increased Movement Speed and drastically increased Health Regeneration.",
-          "tooltip": "Dr. Mundo regenerates <scaleHealth>{{ f1 }}</scaleHealth> Health ({{ e1 }}% of max health) over {{ e2 }} seconds, and gains {{ e3 }}% movement speed for the duration.",
+          "tooltip": "Dr. Mundo restores <healing>{{ e1 }}% max Health</healing> over {{ e2 }} seconds and gains <speed>{{ e3 }}% Movement Speed</speed> for the duration.",
           "leveltip": {
             "label": [
               "Regeneration",
@@ -732,18 +726,51 @@
               ],
               "items": [
                 {
-                  "id": "2051",
+                  "id": "1055",
                   "count": 1,
                   "hideCount": false
                 },
+                {
+                  "id": "2003",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
                 {
                   "id": "1001",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "2003",
-                  "count": 3,
+                  "id": "3067",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3057",
+                  "count": 1,
                   "hideCount": false
                 }
               ]
@@ -765,111 +792,32 @@
               ],
               "items": [
                 {
-                  "id": "3009",
+                  "id": "3078",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3065",
+                  "id": "3053",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3068",
+                  "id": "3153",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
+                },
                 {
-                  "id": "3748",
+                  "id": "3026",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3071",
                   "count": 1,
                   "hideCount": false
                 },
                 {
                   "id": "3742",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3005",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3143",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3109",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3075",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2138",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1611,39 +1559,6 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "1054",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3340",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "startingjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
               "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
@@ -1654,12 +1569,12 @@
               ],
               "items": [
                 {
-                  "id": "1041",
+                  "id": "1055",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "2031",
+                  "id": "2003",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1677,39 +1592,6 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "1001",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3211",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3751",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "earlyjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
               "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
@@ -1725,12 +1607,12 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3715",
+                  "id": "3067",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3751",
+                  "id": "3057",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1743,39 +1625,6 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3009",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3065",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3068",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essentialjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
               "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
@@ -1786,108 +1635,34 @@
               ],
               "items": [
                 {
-                  "id": "3009",
+                  "id": "3078",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "1413",
+                  "id": "3053",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3065",
+                  "id": "3153",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
+                },
+                {
+                  "id": "3026",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3071",
+                  "count": 1,
+                  "hideCount": false
+                },
                 {
                   "id": "3742",
                   "count": 1,
                   "hideCount": false
-                },
-                {
-                  "id": "3075",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3143",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3083",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3193",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2138",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }

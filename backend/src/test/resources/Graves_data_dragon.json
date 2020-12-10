@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "Graves": {
       "id": "Graves",
@@ -132,7 +132,7 @@
           "id": "GravesQLineSpell",
           "name": "End of the Line",
           "description": "Graves fires an explosive shell that detonates after 2 seconds, or 0.2 seconds if it strikes terrain.",
-          "tooltip": "Fires a powder round that deals <physicalDamage>{{ totaldamage }} physical damage</physicalDamage> to enemies in a line.<br /><br />After 2 seconds or {{ terraincollisiondelay }} seconds on collision with terrain, the round detonates, dealing <physicalDamage>{{ totaldetonationdamage }} physical damage</physicalDamage> to all nearby enemies.",
+          "tooltip": "Graves fires a powder round dealing <physicalDamage>{{ totaldamage }} physical damage</physicalDamage>. After 2 seconds or after colliding with terrain, it detonates, dealing <physicalDamage>{{ totaldetonationdamage }} physical damage</physicalDamage> along the travel path again and to enemies near the blast.",
           "leveltip": {
             "label": [
               "Damage",
@@ -277,7 +277,7 @@
           "id": "GravesSmokeGrenade",
           "name": "Smoke Screen",
           "description": "Graves fires a smoke canister at the target area creating a cloud of smoke that reduces sight range. Enemies caught in the initial impact are dealt magic damage and have their movement speed reduced briefly.",
-          "tooltip": "Creates a cloud of Black Smoke lasting 4 seconds. Enemies inside Black Smoke cannot see out.<br /><br />Enemies caught in the initial impact are dealt <magicDamage>{{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage</magicDamage> and have their movement speed reduced by {{ e2 }}% for {{ e5 }} seconds.",
+          "tooltip": "Graves creates a cloud of black smoke for 4 seconds, <status>Slowing</status> enemies inside by {{ e2 }}% and blocking their vision outside the area. The initial impact deals <magicDamage>{{ impactdamage }} magic damage</magicDamage>.",
           "leveltip": {
             "label": [
               "Damage",
@@ -394,13 +394,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.6,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -426,10 +420,10 @@
           "id": "GravesMove",
           "name": "Quickdraw",
           "description": "Graves dashes forward gaining an Armor boost for several seconds. If Graves dashes towards an enemy champion, gain two stacks of True Grit instead. Hitting enemies with basic attacks lowers the cooldown of this skill and refreshes the resistance boost.",
-          "tooltip": "Dashes in a direction, reloading one shell. Graves gains <keywordMajor>True Grit</keywordMajor> for 4 seconds. If Graves dashes towards an enemy champion, gain two stacks of <keywordMajor>True Grit</keywordMajor> instead. <br /><br />Basic attack hits lower the cooldown of <spellName>Quickdraw</spellName> by {{ e4 }} seconds. Damage against non-minions also refreshes <keywordMajor>True Grit</keywordMajor>.<br /><br /><keywordMajor>True Grit</keywordMajor> grants {{ e5 }} Armor (stacks up to {{ e0 }} times).",
+          "tooltip": "Graves dashes and reloads one <keywordMajor>Shell</keywordMajor> into his shotgun. He also gains a stack for 4 seconds (max {{ e0 }} stacks) or two stacks if he dashes towards an enemy champion. Stacks grant him <scaleArmor>{{ e5 }} Armor</scaleArmor>. Stacks are refreshed when damaging a non-minion.<br /><br />Each bullet hit from Graves' Attacks reduces this Ability's cooldown by {{ e4 }} seconds.<br />",
           "leveltip": {
             "label": [
-              "True Grit Armor",
+              "Armor",
               "Cooldown"
             ],
             "effect": [
@@ -486,11 +480,11 @@
               0.5
             ],
             [
-              8,
-              11,
-              14,
-              17,
-              20
+              6,
+              9,
+              12,
+              15,
+              18
             ],
             [
               750,
@@ -534,7 +528,7 @@
             "4",
             "20/25/30/35/40",
             "0.5",
-            "8/11/14/17/20",
+            "6/9/12/15/18",
             "750",
             "375",
             "275",
@@ -567,7 +561,7 @@
           "id": "GravesChargeShot",
           "name": "Collateral Damage",
           "description": "Graves fires an explosive shell dealing heavy damage to the first champion it hits. After hitting a champion or reaching the end of its range, the shell explodes dealing damage in a cone.",
-          "tooltip": "Fires an explosive shell with such force that it knocks Graves back. The shell deals <physicalDamage>{{ damage }} physical damage</physicalDamage> to the first enemy hit. After hitting an enemy Champion or reaching the end of its range, the shell explodes, dealing <physicalDamage>{{ falloffdamage }} physical damage</physicalDamage> in a cone.",
+          "tooltip": "Graves fires an explosive cartridge, blasting himself backwards. The cartridge deals <physicalDamage>{{ damage }} physical damage</physicalDamage> to the first enemy hit. After hitting an enemy champion or reaching the end of its range, the cartridge explodes outward, dealing <physicalDamage>{{ falloffdamage }} physical damage</physicalDamage>.",
           "leveltip": {
             "label": [
               "Primary Damage",
@@ -683,7 +677,7 @@
       ],
       "passive": {
         "name": "New Destiny",
-        "description": "Graves's shotgun holds two shells. After firing them he must reload. Each attack fires several bullets in a cone. Hitting an enemy with multiple bullets does bonus damage. These bullets cannot pass through units.",
+        "description": "Graves' shotgun has some unique properties. He must reload when he runs out of ammo. Attacks fire 4 bullets, which cannot pass through units. Non-champions struck by multiple bullets are knocked back.",
         "image": {
           "full": "GravesTrueGrit.png",
           "sprite": "passive1.png",
@@ -829,18 +823,51 @@
               ],
               "items": [
                 {
-                  "id": "1053",
+                  "id": "1055",
                   "count": 1,
                   "hideCount": false
                 },
+                {
+                  "id": "2003",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
                 {
                   "id": "1001",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "2003",
-                  "count": 4,
+                  "id": "6670",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1037",
+                  "count": 1,
                   "hideCount": false
                 }
               ]
@@ -867,106 +894,27 @@
                   "hideCount": false
                 },
                 {
+                  "id": "6672",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
                   "id": "3046",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3031",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3031",
+                  "id": "3094",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3036",
+                  "id": "3072",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3142",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3156",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3071",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3812",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2140",
+                  "id": "3026",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1743,7 +1691,7 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
+              "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
                 ""
@@ -1776,7 +1724,7 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
+              "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
                 ""
@@ -1786,17 +1734,17 @@
               ],
               "items": [
                 {
-                  "id": "1038",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3086",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
                   "id": "1001",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "6670",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1037",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1809,7 +1757,7 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
+              "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
                 ""
@@ -1819,12 +1767,12 @@
               ],
               "items": [
                 {
-                  "id": "3031",
+                  "id": "3006",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3006",
+                  "id": "6672",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1832,60 +1780,14 @@
                   "id": "3046",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
+                },
                 {
                   "id": "3094",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3036",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3139",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3156",
+                  "id": "3072",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1893,199 +1795,6 @@
                   "id": "3026",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "startingjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "1041",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2031",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3340",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "earlyjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3715",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3133",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "1001",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essentialjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "1412",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3006",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3179",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3142",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3147",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3812",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3026",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3156",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3814",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2140",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }

@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "Nautilus": {
       "id": "Nautilus",
@@ -108,16 +108,16 @@
         {
           "id": "NautilusAnchorDrag",
           "name": "Dredge Line",
-          "description": "Nautilus hurls his anchor forward. If it hits a champion, he drags both himself and the opponent close together. If it hits terrain, Nautilus instead pulls himself to the anchor, the cooldown of Dredge Line is reduced by half, and half the Mana cost is refunded.",
-          "tooltip": "Nautilus hurls his anchor forward. If it hits an enemy unit, Nautilus drags himself and the target together dealing {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage and stunning them briefly.<br /><br />If the anchor hits terrain, Nautilus will drag himself forward, the cooldown is reduced by {{ e3 }}% (<totalValue>{{ f1 }}</totalValue>), and {{ e4 }}% of the Mana cost is refunded.",
+          "description": "Nautilus hurls his anchor forward.  Colliding with an enemy pulls them and Nautilus together, dealing magic damage.  Colliding with terrain pulls Nautilus towards it.",
+          "tooltip": "Nautilus hurls his anchor forward. If it hits an enemy, Nautilus drags himself and the target together, dealing <magicDamage>{{ qdamagecalc }} magic damage</magicDamage> and <status>Stunning</status> them briefly. If the anchor hits terrain, Nautilus will drag himself towards it.",
           "leveltip": {
             "label": [
-              "Damage",
-              "Cooldown"
+              "Cooldown",
+              "Damage"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
-              "{{ cooldown }} -> {{ cooldownNL }}"
+              "{{ cooldown }} -> {{ cooldownNL }}",
+              "{{ basedamage }} -> {{ basedamageNL }}"
             ]
           },
           "maxrank": 5,
@@ -155,18 +155,18 @@
               0
             ],
             [
-              50,
-              50,
-              50,
-              50,
-              50
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              0.5
             ],
             [
-              50,
-              50,
-              50,
-              50,
-              50
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              0.5
             ],
             [
               0,
@@ -215,8 +215,8 @@
             null,
             "70/115/160/205/250",
             "0",
-            "50",
-            "50",
+            "0.5",
+            "0.5",
             "0",
             "0",
             "0",
@@ -224,18 +224,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.9,
-              "key": "a1"
-            },
-            {
-              "link": "@special.nautilusq",
-              "coeff": 0.5,
-              "key": "f1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -260,8 +249,8 @@
         {
           "id": "NautilusPiercingGaze",
           "name": "Titan's Wrath",
-          "description": "Nautilus surrounds himself with dark energies, gaining a shield that blocks incoming damage. While the shield persists, his attacks apply a damage over time effect to enemies around his target.",
-          "tooltip": "Nautilus surrounds himself with dark energies for {{ e3 }} seconds, shielding him from the next {{ e1 }} <scaleHealth>(+{{ f1 }})</scaleHealth> ({{ e2 }}% of his max Health) damage.<br /><br />While the shield persists, Nautilus' basic attacks deal {{ e4 }} <scaleAP>(+{{ a1 }})</scaleAP> bonus magic damage over 2 seconds to all enemies around his target.",
+          "description": "Nautilus gains a temporary Shield.  While it persists, his Attacks deal damage over time to his target and surrounding enemies.",
+          "tooltip": "Nautilus gains a <shield>{{ wshieldcalc }} Shield</shield> for {{ shieldduration }} seconds. While the <shield>Shield</shield> persists, Nautilus' Attacks deal an additional <magicDamage>{{ wdamagecalc }} magic damage</magicDamage> over 2 seconds to his target and all surrounding enemies.",
           "leveltip": {
             "label": [
               "Shield Amount",
@@ -269,9 +258,9 @@
               "% Max Health"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
-              "{{ e4 }} -> {{ e4NL }}",
-              "{{ effect2amount*100.000000 }}% -> {{ effect2amountnl*100.000000 }}%"
+              "{{ baseshield }} -> {{ baseshieldNL }}",
+              "{{ dotdamage }} -> {{ dotdamageNL }}",
+              "{{ healthpercent*100.000000 }}% -> {{ healthpercentnl*100.000000 }}%"
             ]
           },
           "maxrank": 5,
@@ -302,11 +291,11 @@
               85
             ],
             [
-              9,
-              10,
-              11,
-              12,
-              13
+              0.09,
+              0.1,
+              0.11,
+              0.12,
+              0.13
             ],
             [
               6,
@@ -368,7 +357,7 @@
           "effectBurn": [
             null,
             "45/55/65/75/85",
-            "9/10/11/12/13",
+            "0.09/0.1/0.11/0.12/0.13",
             "6",
             "30/40/50/60/70",
             "0",
@@ -378,18 +367,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "bonushealth",
-              "coeff": 0.1,
-              "key": "f1"
-            },
-            {
-              "link": "spelldamage",
-              "coeff": 0.4,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -414,20 +392,20 @@
         {
           "id": "NautilusSplashZone",
           "name": "Riptide",
-          "description": "Nautilus slams the ground, causing the earth to explode around him in a set of three explosions. Each explosion damages and slows enemies.",
-          "tooltip": "Nautilus slams the ground, causing the earth to explode around him. Each explosion deals {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage to enemies in the area and slows them by {{ e2 }}% for {{ e4 }} seconds. This slow diminishes over time.<br /><br />A unit can be hit by more than one explosion, but they take {{ e3 }}% less damage from additional explosions.",
+          "description": "Nautilus creates three exploding waves around himself. Each explosion damages and slows enemies.",
+          "tooltip": "Nautilus creates three exploding waves around himself, each dealing <magicDamage>{{ edamagecalc }} magic damage</magicDamage> to enemies in the area and <status>Slows</status> them by {{ slowpercent*100 }}% decaying over {{ slowduration }} seconds.",
           "leveltip": {
             "label": [
-              "Damage",
-              "Slow",
               "Cooldown",
-              "@AbilityResourceName@ Cost"
+              "@AbilityResourceName@ Cost",
+              "Damage",
+              "Slow"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
-              "{{ effect2amount*100.000000 }}% -> {{ effect2amountnl*100.000000 }}%",
               "{{ cooldown }} -> {{ cooldownNL }}",
-              "{{ cost }} -> {{ costNL }}"
+              "{{ cost }} -> {{ costNL }}",
+              "{{ basedamage }} -> {{ basedamageNL }}",
+              "{{ slowpercent*100.000000 }}% -> {{ slowpercentnl*100.000000 }}%"
             ]
           },
           "maxrank": 5,
@@ -458,18 +436,18 @@
               175
             ],
             [
-              30,
-              35,
-              40,
-              45,
-              50
+              0.3,
+              0.35,
+              0.4,
+              0.45,
+              0.5
             ],
             [
-              50,
-              50,
-              50,
-              50,
-              50
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              0.5
             ],
             [
               1.25,
@@ -524,8 +502,8 @@
           "effectBurn": [
             null,
             "55/85/115/145/175",
-            "30/35/40/45/50",
-            "50",
+            "0.3/0.35/0.4/0.45/0.5",
+            "0.5",
             "1.25",
             "0",
             "0",
@@ -534,13 +512,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.3,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -566,19 +538,19 @@
           "id": "NautilusGrandLine",
           "name": "Depth Charge",
           "description": "Nautilus fires a shockwave into the earth that chases an opponent. This shockwave rips up the earth above it, knocking enemies into the air. When it reaches the opponent, the shockwave erupts, knocking his target into the air and stunning them.",
-          "tooltip": "Nautilus fires a shockwave that chases an enemy champion, dealing {{ secondarytargetdamage }} magic damage to other enemies it passes through, knocking them into the air, and stunning them for {{ stunduration }} seconds.<br /><br />The shockwave explodes upon hitting its target dealing {{ primarytargetdamage }} magic damage, launching them into the air and stunning them for {{ stunduration }} seconds. ",
+          "tooltip": "Nautilus fires a shockwave that chases an enemy champion, dealing <magicDamage>{{ primarytargetdamage }} magic damage</magicDamage>, <status>Knocking</status> them <status>Up</status> and <status>Stunning</status> them for {{ stunduration }} seconds. Other enemies hit by the shockwave are also <magicDamage>Knocked Up</magicDamage> and <magicDamage>Stunned</magicDamage> and take <magicDamage>{{ secondarytargetdamage }} magic damage</magicDamage>.",
           "leveltip": {
             "label": [
+              "Cooldown",
               "Pass Through Damage",
-              "Secondary Damage",
               "Stun Duration",
-              "Cooldown"
+              "Secondary Damage"
             ],
             "effect": [
+              "{{ cooldown }} -> {{ cooldownNL }}",
               "{{ primarydamage }} -> {{ primarydamageNL }}",
-              "{{ secondarydamage }} -> {{ secondarydamageNL }}",
               "{{ stunduration }} -> {{ stundurationNL }}",
-              "{{ cooldown }} -> {{ cooldownNL }}"
+              "{{ secondarydamage }} -> {{ secondarydamageNL }}"
             ]
           },
           "maxrank": 3,
@@ -684,7 +656,7 @@
       ],
       "passive": {
         "name": "Staggering Blow",
-        "description": "Nautilus' basic attacks deal increased physical damage and roots his target briefly. Staggering blow cannot trigger more than once every few seconds on the same target.",
+        "description": "Nautilus' first Attack against a target deals increased physical damage and roots them briefly.",
         "image": {
           "full": "Nautilus_StaggeringBlow.png",
           "sprite": "passive2.png",
@@ -882,12 +854,50 @@
               ],
               "items": [
                 {
-                  "id": "3010",
+                  "id": "3858",
                   "count": 1,
                   "hideCount": false
                 },
                 {
+                  "id": "2003",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
                   "id": "1001",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3067",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3105",
                   "count": 1,
                   "hideCount": false
                 }
@@ -910,45 +920,12 @@
               ],
               "items": [
                 {
-                  "id": "3029",
+                  "id": "3190",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3111",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3109",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3068",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3800",
+                  "id": "3009",
                   "count": 1,
                   "hideCount": false
                 },
@@ -956,27 +933,9 @@
                   "id": "3050",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
+                },
                 {
-                  "id": "3001",
+                  "id": "3109",
                   "count": 1,
                   "hideCount": false
                 },
@@ -986,37 +945,9 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3075",
+                  "id": "3001",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2033",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2138",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }
@@ -1766,34 +1697,6 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2033",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3340",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "startingjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
               "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
@@ -1804,13 +1707,13 @@
               ],
               "items": [
                 {
-                  "id": "1039",
+                  "id": "3858",
                   "count": 1,
                   "hideCount": false
                 },
                 {
                   "id": "2003",
-                  "count": 3,
+                  "count": 1,
                   "hideCount": false
                 },
                 {
@@ -1827,39 +1730,6 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "1001",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3751",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3211",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "earlyjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
               "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
@@ -1870,17 +1740,17 @@
               ],
               "items": [
                 {
-                  "id": "3715",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3751",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
                   "id": "1001",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3067",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3105",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1893,39 +1763,6 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3047",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3068",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3194",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essentialjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
               "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
@@ -1936,7 +1773,22 @@
               ],
               "items": [
                 {
-                  "id": "1413",
+                  "id": "3190",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3009",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3050",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3109",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1946,103 +1798,9 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3117",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3800",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
                   "id": "3001",
                   "count": 1,
                   "hideCount": false
-                },
-                {
-                  "id": "3742",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3193",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3075",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3083",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2138",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }
@@ -2083,7 +1841,7 @@
                 },
                 {
                   "id": "2003",
-                  "count": 2,
+                  "count": 1,
                   "hideCount": false
                 },
                 {
@@ -2115,12 +1873,12 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3024",
+                  "id": "3067",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3067",
+                  "id": "3105",
                   "count": 1,
                   "hideCount": false
                 }
@@ -2143,7 +1901,12 @@
               ],
               "items": [
                 {
-                  "id": "3047",
+                  "id": "3190",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3009",
                   "count": 1,
                   "hideCount": false
                 },
@@ -2156,98 +1919,14 @@
                   "id": "3109",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
+                },
                 {
-                  "id": "3742",
+                  "id": "3110",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3068",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3800",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3083",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3193",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3194",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2138",
+                  "id": "3001",
                   "count": 1,
                   "hideCount": false
                 }

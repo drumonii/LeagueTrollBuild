@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "Udyr": {
       "id": "Udyr",
@@ -12,7 +12,7 @@
         "full": "Udyr.png",
         "sprite": "champion4.png",
         "group": "champion",
-        "x": 288,
+        "x": 432,
         "y": 0,
         "w": 48,
         "h": 48
@@ -81,7 +81,7 @@
         "hp": 594,
         "hpperlevel": 99,
         "mp": 271,
-        "mpperlevel": 30,
+        "mpperlevel": 50,
         "movespeed": 350,
         "armor": 34,
         "armorperlevel": 4,
@@ -104,7 +104,7 @@
           "id": "UdyrTigerStance",
           "name": "Tiger Stance",
           "description": "Tiger Stance: Activation - Udyr's Attack Speed is increased for a few seconds. Persistent Effect - Udyr's first attack and every third attack after will deal a high amount of damage over 2 seconds.",
-          "tooltip": "<spellPassive>Persistent Effect: </spellPassive>Udyr's first attack and every third attack after will perform a Tiger Strike, dealing bonus {{ e1 }} <scaleAD>(+{{ f2 }})</scaleAD> physical damage over {{ e5 }} seconds. <br /><br />If a target is affected by Tiger Strike, a new application of Tiger Strike will deal the remaining damage instantly.<br /><br /><spellPassive>Activation:</spellPassive> Increases Attack Speed by {{ e2 }}% for {{ e6 }} seconds.<br />",
+          "tooltip": "<keywordMajor>Stance:</keywordMajor> Udyr's next Attack and every third Attack after is a Tiger Strike, dealing an additional <physicalDamage>{{ totaldamagetooltip }} physical damage</physicalDamage> over {{ e5 }} seconds. Subsequent Tiger Strikes on that target refresh this effect and deal any remaining damage instantly.<br /><br /><spellActive>Active:</spellActive> Udyr gains <attackSpeed>{{ e2 }}% Attack Speed</attackSpeed> for {{ e6 }} seconds.<br />",
           "leveltip": {
             "label": [
               "Base Damage",
@@ -233,19 +233,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "attackdamage",
-              "coeff": [
-                1.2,
-                1.3,
-                1.4,
-                1.5,
-                1.6
-              ],
-              "key": "f2"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -259,10 +247,10 @@
           "rangeBurn": "600",
           "image": {
             "full": "UdyrTigerStance.png",
-            "sprite": "spell12.png",
+            "sprite": "spell13.png",
             "group": "spell",
-            "x": 384,
-            "y": 144,
+            "x": 0,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -272,7 +260,7 @@
           "id": "UdyrTurtleStance",
           "name": "Turtle Stance",
           "description": "Turtle Stance: Activation - Udyr gains a temporary shield that absorbs damage. Persistent Effect - Udyr's first attack and every third attack after heals him for 2.5% of his maximum health.",
-          "tooltip": "<spellPassive>Persistent Effect: </spellPassive>Udyr's first attack and every third attack after heals him for <scaleHealth>(+{{ f1 }})</scaleHealth> ({{ e3 }}% of his maximum health), increasing by 1% for every percent of Udyr's missing health.<br /><br /><spellPassive>Activation: </spellPassive>Gains a shield that absorbs {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> damage for {{ e2 }} seconds.",
+          "tooltip": "<keywordMajor>Stance:</keywordMajor> Udyr's first Attack and every third Attack after restores <healing>{{ totalhealtooltip }} Health</healing>, increased up to <healing>{{ empoweredhealtooltip }}</healing> based on Udyr's missing health.<br /><br /><spellPassive>Active:</spellPassive> Udyr gains <shield>{{ totalshieldtooltip }} Shield</shield> for {{ e2 }} seconds.",
           "leveltip": {
             "label": [
               "Shield Amount"
@@ -320,12 +308,12 @@
               5
             ],
             [
-              2.5,
-              2.5,
-              2.5,
-              2.5,
-              2.5,
-              2.5
+              0.025,
+              0.025,
+              0.025,
+              0.025,
+              0.025,
+              0.025
             ],
             [
               0.05,
@@ -388,7 +376,7 @@
             null,
             "60/95/130/165/200/235",
             "5",
-            "2.5",
+            "0.03",
             "0.05",
             "0",
             "0",
@@ -397,13 +385,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.5,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -417,10 +399,10 @@
           "rangeBurn": "600",
           "image": {
             "full": "UdyrTurtleStance.png",
-            "sprite": "spell12.png",
+            "sprite": "spell13.png",
             "group": "spell",
-            "x": 432,
-            "y": 144,
+            "x": 48,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -430,7 +412,7 @@
           "id": "UdyrBearStance",
           "name": "Bear Stance",
           "description": "Bear Stance: Activation - Udyr increases Movement Speed for a short duration. Persistent Effect - Udyr's basic attacks stun his target for 1 second. This effect cannot occur on the same target for several seconds.",
-          "tooltip": "<spellPassive>Persistent Effect: </spellPassive>Basic attacks stun the target for {{ e3 }} second. This effect cannot occur on the same target again for {{ e4 }} seconds.<br /><br /><spellPassive>Activation: </spellPassive>Increases Movement Speed by {{ e1 }}% and ignores unit collision for {{ e2 }} seconds.",
+          "tooltip": "<keywordMajor>Stance:</keywordMajor> Udyr's Attacks <status>Stun</status> for {{ e3 }} second. This effect cannot occur on the same target again for {{ e4 }} seconds.<br /><br /><spellActive>Active:</spellActive> Udyr gains <speed>{{ e1 }}% Move Speed</speed> and ignores unit collision for {{ e2 }} seconds.",
           "leveltip": {
             "label": [
               "Movement Speed",
@@ -573,8 +555,8 @@
             "full": "UdyrBearStance.png",
             "sprite": "spell13.png",
             "group": "spell",
-            "x": 0,
-            "y": 0,
+            "x": 96,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -584,14 +566,14 @@
           "id": "UdyrPhoenixStance",
           "name": "Phoenix Stance",
           "description": "Phoenix Stance: Activation - Udyr unleashes pulsing waves of fire, dealing damage to nearby enemies. Persistent Effect - Udyr's first attack and every third attack after engulfs enemies in front of him with flames.",
-          "tooltip": "<spellPassive>Persistent Effect: </spellPassive>Udyr's first attack and every third attack after burns enemies in front of him, dealing {{ totalconedamage }} magic damage.<br /><br /><spellPassive>Activation: </spellPassive>Unleashes pulsing waves of fire, dealing {{ totalaoedamagepertick }} magic damage each second to nearby enemies for {{ phoenixaoeduration }} seconds.",
+          "tooltip": "<keywordMajor>Stance:</keywordMajor> Udyr's first Attack and every third Attack after unleashes a blast of fire towards his target, dealing <magicDamage>{{ totalconedamage }} magic damage</magicDamage>.<br /><br /><spellActive>Active:</spellActive> Udyr unleashes pulsing waves of fire, dealing <magicDamage>{{ totalaoedamagetooltip }} magic damage</magicDamage> to nearby enemies over {{ phoenixaoeduration }} seconds.",
           "leveltip": {
             "label": [
               "Pulse Damage",
               "Flame Damage"
             ],
             "effect": [
-              "{{ aoedamagepertick }} -> {{ aoedamagepertickNL }}",
+              "{{ pulsedamagelevelup }} -> {{ pulsedamagelevelupNL }}",
               "{{ conedamage }} -> {{ conedamageNL }}"
             ]
           },
@@ -727,8 +709,8 @@
             "full": "UdyrPhoenixStance.png",
             "sprite": "spell13.png",
             "group": "spell",
-            "x": 48,
-            "y": 0,
+            "x": 144,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -737,12 +719,12 @@
       ],
       "passive": {
         "name": "Monkey's Agility",
-        "description": "Entering a stance grants Udyr bonus Attack Speed and Movement Speed for a short duration. This effect can stack multiple times.",
+        "description": "Udyr gains stacking Move Speed andAttack Speed after using an Ability. Udyr has four basic Abilities that he may use to swap between Stances. Changing Stances immediately ends both the passive and the on-hit portion of the previous Stance.",
         "image": {
           "full": "Udyr_MonkeysAgility.png",
           "sprite": "passive4.png",
           "group": "passive",
-          "x": 288,
+          "x": 432,
           "y": 0,
           "w": 48,
           "h": 48
@@ -941,18 +923,51 @@
               ],
               "items": [
                 {
-                  "id": "2051",
+                  "id": "1055",
                   "count": 1,
                   "hideCount": false
                 },
+                {
+                  "id": "2003",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
                 {
                   "id": "1001",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "2003",
-                  "count": 3,
+                  "id": "3067",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3057",
+                  "count": 1,
                   "hideCount": false
                 }
               ]
@@ -979,113 +994,29 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3111",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
                   "id": "3053",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
+                },
                 {
-                  "id": "3748",
+                  "id": "3153",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3022",
+                  "id": "3026",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3091",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3110",
+                  "id": "3071",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3065",
+                  "id": "3742",
                   "count": 1,
                   "hideCount": false
-                },
-                {
-                  "id": "3001",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2033",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2138",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }
@@ -1995,7 +1926,7 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
+              "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
                 ""
@@ -2005,7 +1936,7 @@
               ],
               "items": [
                 {
-                  "id": "1054",
+                  "id": "1055",
                   "count": 1,
                   "hideCount": false
                 },
@@ -2028,7 +1959,7 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
+              "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
                 ""
@@ -2038,17 +1969,17 @@
               ],
               "items": [
                 {
-                  "id": "3057",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3044",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
                   "id": "1001",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3067",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3057",
                   "count": 1,
                   "hideCount": false
                 }
@@ -2061,194 +1992,6 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3078",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3047",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3742",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3153",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3091",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3748",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3068",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3110",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3065",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "startingjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "1041",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2031",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3340",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "earlyjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3706",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "1001",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essentialjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "1400",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3111",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
               "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
@@ -2264,7 +2007,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3091",
+                  "id": "3053",
                   "count": 1,
                   "hideCount": false
                 },
@@ -2272,67 +2015,21 @@
                   "id": "3153",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
+                },
+                {
+                  "id": "3026",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3071",
+                  "count": 1,
+                  "hideCount": false
+                },
                 {
                   "id": "3742",
                   "count": 1,
                   "hideCount": false
-                },
-                {
-                  "id": "3065",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3075",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2138",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }

@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "Jinx": {
       "id": "Jinx",
@@ -122,7 +122,7 @@
           "id": "JinxQ",
           "name": "Switcheroo!",
           "description": "Jinx modifies her basic attacks by swapping between Pow-Pow, her minigun and Fishbones, her rocket launcher. Attacks with Pow-Pow grant Attack Speed, while attacks with Fishbones deal area of effect damage, gain increased range, and drain Mana.",
-          "tooltip": "Jinx swaps weapons.<br /><br /><spellPassive>Fishbones, the Rocket Launcher:</spellPassive> Basic attacks deal 110% Damage to the target and nearby enemies, gain {{ e3 }} range, drain Mana, and scale {{ e5 }}% less with bonus Attack Speed.<br /><br /><spellPassive>Pow-Pow, the Minigun:</spellPassive> Basic attacks grant bonus Attack Speed for 2.5 seconds. This effect stacks up to 3 times for a total bonus of {{ e1 }}%.<br /><br /><rules>Stacks fall off one at a time and only benefit Jinx's first attack after switching to Rocket Launcher.</rules>",
+          "tooltip": "Jinx swaps weapons between Fishbones the rocket launcher and Pow-Pow the minigun.<br /><br />While using the rocket launcher, Jinx's Attacks deal <physicalDamage>{{ rocketdamage }} physical damage</physicalDamage> to the target and nearby enemies, gain {{ e3 }} range, cost Mana, and scale {{ e5 }}% less with bonus Attack Speed.<br /><br />While using the minigun, Jinx' Attacks grant <attackSpeed>Attack Speed</attackSpeed> for 2.5 seconds, stacking up to 3 times (<attackSpeed>{{ e1 }}</attackSpeed>% Attack Speed max).",
           "leveltip": {
             "label": [
               "Rocket Bonus Range",
@@ -135,13 +135,13 @@
           },
           "maxrank": 5,
           "cooldown": [
-            1,
-            1,
-            1,
-            1,
-            1
+            0.9,
+            0.9,
+            0.9,
+            0.9,
+            0.9
           ],
-          "cooldownBurn": "1",
+          "cooldownBurn": "0.9",
           "cost": [
             20,
             20,
@@ -263,7 +263,7 @@
           "id": "JinxW",
           "name": "Zap!",
           "description": "Jinx uses Zapper, her shock pistol, to fire a blast that deals damage to the first enemy hit, slowing and revealing it.",
-          "tooltip": "Jinx fires a shock blast that deals {{ e1 }} <physicalDamage><scaleAD>(+{{ a1 }})</scaleAD> physical damage</physicalDamage> to the first enemy hit, revealing it and slowing it by {{ e2 }}% for 2 seconds.<br /><br /><rules>Zap!'s cast time decreases as Jinx gains Attack Speed.</rules>",
+          "tooltip": "Jinx fires a shock blast that deals <physicalDamage>{{ totaldamage }} physical damage</physicalDamage> to the first enemy hit, <status>Slows</status> them by {{ slowpercent }}%, and reveals them for {{ slowduration }} seconds.",
           "leveltip": {
             "label": [
               "Damage",
@@ -272,8 +272,8 @@
               "@AbilityResourceName@ Cost"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
-              "{{ e2 }}% -> {{ e2NL }}%",
+              "{{ damage }} -> {{ damageNL }}",
+              "{{ slowpercent }}% -> {{ slowpercentNL }}%",
               "{{ cooldown }} -> {{ cooldownNL }}",
               "{{ cost }} -> {{ costNL }}"
             ]
@@ -299,18 +299,18 @@
           "effect": [
             null,
             [
-              10,
-              60,
-              110,
-              160,
-              210
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              30,
-              40,
-              50,
-              60,
-              70
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -371,8 +371,8 @@
           ],
           "effectBurn": [
             null,
-            "10/60/110/160/210",
-            "30/40/50/60/70",
+            "0",
+            "0",
             "0",
             "0",
             "0",
@@ -382,13 +382,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "attackdamage",
-              "coeff": 1.6,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -414,14 +408,14 @@
           "id": "JinxE",
           "name": "Flame Chompers!",
           "description": "Jinx throws out a line of snare grenades that explode after 5 seconds, lighting enemies on fire. Flame Chompers will bite enemy champions who walk over them, rooting them in place.",
-          "tooltip": "Jinx tosses out 3 chompers that, once armed, explode on contact with enemy champions, rooting the target for 1.5 seconds and stopping in-progress movement abilities on the spot before dealing {{ e1 }} <magicDamage><scaleAP>(+{{ a1 }})</scaleAP> magic damage</magicDamage> over 1.5 seconds to nearby enemies. Chompers last for 5 seconds.",
+          "tooltip": "Jinx tosses out 3 chompers that last for {{ grenadeduration }} seconds. They explode on contact with enemy champions, <status>Rooting</status> them for {{ rootduration }} seconds and dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage> to nearby enemies.",
           "leveltip": {
             "label": [
               "Damage",
               "Cooldown"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
+              "{{ damage }} -> {{ damageNL }}",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
@@ -446,11 +440,11 @@
           "effect": [
             null,
             [
-              70,
-              120,
-              170,
-              220,
-              270
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               100,
@@ -518,7 +512,7 @@
           ],
           "effectBurn": [
             null,
-            "70/120/170/220/270",
+            "0",
             "100/140/180/220/260",
             "30/35/40/45/50",
             "35/50/65/80/95",
@@ -529,13 +523,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 1,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -561,7 +549,7 @@
           "id": "JinxR",
           "name": "Super Mega Death Rocket!",
           "description": "Jinx fires a super rocket across the map that gains damage as it travels. The rocket will explode upon colliding with an enemy champion, dealing damage to it and surrounding enemies based on their missing Health.",
-          "tooltip": "Jinx fires a rocket that gains damage over the first second it travels. It explodes on the first enemy champion hit, dealing <physicalDamage>{{ damagefloor }} to {{ damagemax }} physical damage</physicalDamage> plus {{ percentdamage }}% of the target's missing Health. Nearby enemies take 80% Damage.",
+          "tooltip": "Jinx fires a rocket that explodes on the first enemy champion hit, dealing <physicalDamage>{{ damagefloor }} to {{ damagemax }} + {{ percentdamage }}% missing Health physical damage</physicalDamage>, gaining damage over the first second of travel time. Nearby enemies take {{ aoedamagemult*100 }}% Damage.",
           "leveltip": {
             "label": [
               "Minimum Damage",
@@ -570,9 +558,9 @@
               "Cooldown"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
-              "{{ e2 }} -> {{ e2NL }}",
-              "{{ e3 }}% -> {{ e3NL }}%",
+              "{{ basedamage }} -> {{ basedamageNL }}",
+              "{{ maxdamage }} -> {{ maxdamageNL }}",
+              "{{ percentdamage }}% -> {{ percentdamageNL }}%",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
@@ -593,19 +581,19 @@
           "effect": [
             null,
             [
-              25,
-              35,
-              45
+              0,
+              0,
+              0
             ],
             [
-              250,
-              350,
-              450
+              0,
+              0,
+              0
             ],
             [
-              25,
-              30,
-              35
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -645,9 +633,9 @@
           ],
           "effectBurn": [
             null,
-            "25/35/45",
-            "250/350/450",
-            "25/30/35",
+            "0",
+            "0",
+            "0",
             "0",
             "0",
             "0",
@@ -679,7 +667,7 @@
       ],
       "passive": {
         "name": "Get Excited!",
-        "description": "Jinx receives massively increased Movement Speed and Attack Speed whenever she damages an enemy champion, epic monster, or structure that is then killed or destroyed within 3 seconds.",
+        "description": "Jinx receives massively increased Movement Speed and Attack Speed whenever she helps kill or destroy an enemy champions epic jungle monster, or structure.",
         "image": {
           "full": "Jinx_Passive.png",
           "sprite": "passive1.png",
@@ -863,7 +851,7 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
+              "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
                 ""
@@ -873,13 +861,51 @@
               ],
               "items": [
                 {
-                  "id": "1038",
+                  "id": "1055",
                   "count": 1,
                   "hideCount": false
                 },
                 {
                   "id": "2003",
-                  "count": 2,
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "1001",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "6670",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1037",
+                  "count": 1,
                   "hideCount": false
                 }
               ]
@@ -901,83 +927,22 @@
               ],
               "items": [
                 {
-                  "id": "3031",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
                   "id": "3006",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3085",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3094",
+                  "id": "6672",
                   "count": 1,
                   "hideCount": false
                 },
-                {
-                  "id": "3508",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3095",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
                 {
                   "id": "3046",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3139",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3036",
+                  "id": "3094",
                   "count": 1,
                   "hideCount": false
                 },
@@ -985,34 +950,11 @@
                   "id": "3072",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "ItemSmiteAoE",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
                 },
                 {
-                  "id": "2140",
+                  "id": "3026",
                   "count": 1,
-                  "hideCount": true
+                  "hideCount": false
                 }
               ]
             }
@@ -1955,17 +1897,17 @@
               ],
               "items": [
                 {
-                  "id": "1038",
+                  "id": "1001",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "6670",
                   "count": 1,
                   "hideCount": false
                 },
                 {
                   "id": "1037",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "1001",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1988,50 +1930,22 @@
               ],
               "items": [
                 {
-                  "id": "3031",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
                   "id": "3006",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3085",
+                  "id": "6672",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
+                },
+                {
+                  "id": "3046",
+                  "count": 1,
+                  "hideCount": false
+                },
                 {
                   "id": "3094",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3508",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3095",
                   "count": 1,
                   "hideCount": false
                 },
@@ -2039,72 +1953,11 @@
                   "id": "3072",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3046",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3036",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3139",
-                  "count": 1,
-                  "hideCount": false
                 },
                 {
                   "id": "3026",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2140",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }

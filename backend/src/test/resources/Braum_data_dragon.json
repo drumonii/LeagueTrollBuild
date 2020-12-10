@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "Braum": {
       "id": "Braum",
@@ -111,7 +111,7 @@
           "id": "BraumQ",
           "name": "Winter's Bite",
           "description": "Braum propels freezing ice from his shield, slowing and dealing magic damage.<br><br>Applies a stack of <font color='#FFF673'>Concussive Blows</font>.",
-          "tooltip": "Braum propels freezing ice from his shield dealing <magicDamage>{{ e1 }} <scaleHealth>(+{{ f1 }}) [2.5% of Braum's Max Health]</scaleHealth> magic damage</magicDamage> to the first enemy hit and slowing them by {{ e2 }}%, decaying over the next {{ e5 }} seconds.<br /><br />Applies a stack of <keywordMajor>Concussive Blows</keywordMajor>. ",
+          "tooltip": "Braum propels freezing ice from his shield, dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage> to the first enemy hit and <status>Slowing</status> them by {{ e2 }}% decaying over {{ e5 }} seconds.<br /><br />Applies a stack of <keywordMajor>Concussive Blows</keywordMajor>. ",
           "leveltip": {
             "label": [
               "Damage",
@@ -134,22 +134,22 @@
           ],
           "cooldownBurn": "10/9/8/7/6",
           "cost": [
+            45,
+            50,
             55,
             60,
-            65,
-            70,
-            75
+            65
           ],
-          "costBurn": "55/60/65/70/75",
+          "costBurn": "45/50/55/60/65",
           "datavalues": {},
           "effect": [
             null,
             [
-              60,
-              110,
-              160,
-              210,
-              260
+              75,
+              125,
+              175,
+              225,
+              275
             ],
             [
               70,
@@ -217,7 +217,7 @@
           ],
           "effectBurn": [
             null,
-            "60/110/160/210/260",
+            "75/125/175/225/275",
             "70",
             "30",
             "0.02",
@@ -254,7 +254,7 @@
           "id": "BraumW",
           "name": "Stand Behind Me",
           "description": "Braum leaps to a target allied champion or minion. On arrival, Braum and the ally gain Armor and Magic Resist for a few seconds.",
-          "tooltip": "Braum leaps to target allied champion or minion.<br /><br />On arrival, Braum grants the target <scaleArmor>{{ grantedallyarmor }}</scaleArmor> Armor and <scaleMR>{{ grantedallymr }}</scaleMR> Magic Resist for {{ e1 }} seconds. Braum grants himself <scaleArmor>{{ grantedbraumarmor }}</scaleArmor> Armor and  <scaleMR>{{ grantedbraummr }}</scaleMR> Magic Resist for the same duration.",
+          "tooltip": "Braum leaps to an allied champion or minion. On arrival, Braum grants the target <scaleArmor>{{ grantedallyarmor }} Armor</scaleArmor> and <scaleMR>{{ grantedallymr }} Magic Resist</scaleMR> for {{ e1 }} seconds. Braum grants himself <scaleArmor>{{ grantedbraumarmor }}</scaleArmor> Armor and  <scaleMR>{{ grantedbraummr }}</scaleMR> Magic Resist for the same duration.",
           "leveltip": {
             "label": [
               "Base Resists",
@@ -395,7 +395,7 @@
           "id": "BraumE",
           "name": "Unbreakable",
           "description": "Braum raises his shield in a direction for several seconds, intercepting all projectiles causing them to hit him and be destroyed. He negates the damage of the first attack completely and reduces the damage of all subsequent attacks from this direction.",
-          "tooltip": "<scaleLevel>Braum reduces incoming damage and blocks for allies behind him.</scaleLevel><br />Braum raises his shield in a direction for {{ e2 }} seconds negating the damage of the next attack from that direction. Subsequent attacks deal {{ e3 }}% reduced damage.<br /><br />Braum <keywordMajor>intercepts</keywordMajor> projectiles, causing them to hit him and be destroyed.<br /><br />Braum gains {{ e4 }}% Movement Speed for the duration.",
+          "tooltip": "Braum raises his shield for {{ e2 }} seconds, intercepting enemy missiles from the chosen direction, causing them to hit Braum and then be destroyed. The first missile Braum blocks deals no damage, and subsequent projectiles deal {{ e3 }}% reduced damage.<br /><br />Braum gains <speed>{{ e4 }}% Move Speed</speed> while his shield is raised.",
           "leveltip": {
             "label": [
               "Duration",
@@ -540,7 +540,7 @@
           "id": "BraumRWrapper",
           "name": "Glacial Fissure",
           "description": "Braum slams the ground, knocking up enemies nearby and in a line in front of him. A fissure is left along the line that slows enemies.",
-          "tooltip": "Braum slams the ground, knocking up enemies nearby and in a line in front of him. A fissure is left along the line for {{ slowzoneduration }} seconds, slowing enemies above it by {{ movespeedmod }}%.<br /><br />Enemies hit take <magicDamage>{{ totaldamage }} magic damage</magicDamage>. The first target is knocked up for between {{ minknockup }} and {{ maxknockup }} seconds, depending on distance from Braum. All others hit are knocked up for {{ minknockup }} seconds.",
+          "tooltip": "Braum slams the ground sending forth a fissure that <status>Knocks Up</status> enemies in its path and nearby Braum, and deals <magicDamage>{{ totaldamage }} magic damage</magicDamage>. The first target hit is <status>Knocked Up</status> for between {{ minknockup }} and {{ maxknockup }} seconds, increasing with distance from Braum. All others hit are <status>Knocked Up</status> for {{ minknockup }} seconds.<br /><br />The fissure also creates a zone for {{ slowzoneduration }} seconds, that <status>Slows</status> by {{ movespeedmod }}%.<br />",
           "leveltip": {
             "label": [
               "Damage",
@@ -847,18 +847,51 @@
               ],
               "items": [
                 {
-                  "id": "2051",
+                  "id": "3858",
                   "count": 1,
                   "hideCount": false
                 },
+                {
+                  "id": "2003",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
                 {
                   "id": "1001",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "2003",
-                  "count": 3,
+                  "id": "3067",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3105",
+                  "count": 1,
                   "hideCount": false
                 }
               ]
@@ -880,7 +913,17 @@
               ],
               "items": [
                 {
-                  "id": "3047",
+                  "id": "3190",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3009",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3050",
                   "count": 1,
                   "hideCount": false
                 },
@@ -890,98 +933,14 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3190",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3143",
+                  "id": "3110",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3083",
+                  "id": "3001",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3050",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3107",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3068",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2138",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }
@@ -1663,13 +1622,13 @@
               ],
               "items": [
                 {
-                  "id": "3854",
+                  "id": "3858",
                   "count": 1,
                   "hideCount": false
                 },
                 {
                   "id": "2003",
-                  "count": 2,
+                  "count": 1,
                   "hideCount": false
                 },
                 {
@@ -1706,7 +1665,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3024",
+                  "id": "3105",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1729,7 +1688,12 @@
               ],
               "items": [
                 {
-                  "id": "3117",
+                  "id": "3190",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3009",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1742,100 +1706,16 @@
                   "id": "3109",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
+                },
                 {
-                  "id": "3800",
+                  "id": "3110",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3143",
+                  "id": "3001",
                   "count": 1,
                   "hideCount": false
-                },
-                {
-                  "id": "3107",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3190",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3193",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3194",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2138",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }

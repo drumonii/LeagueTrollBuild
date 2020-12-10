@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "Vladimir": {
       "id": "Vladimir",
@@ -12,7 +12,7 @@
         "full": "Vladimir.png",
         "sprite": "champion4.png",
         "group": "champion",
-        "x": 192,
+        "x": 336,
         "y": 48,
         "w": 48,
         "h": 48
@@ -77,6 +77,12 @@
           "num": 14,
           "name": "Nightbringer Vladimir",
           "chromas": true
+        },
+        {
+          "id": "8021",
+          "num": 21,
+          "name": "Cosmic Devourer Vladimir",
+          "chromas": true
         }
       ],
       "lore": "A fiend with a thirst for mortal blood, Vladimir has influenced the affairs of Noxus since the empire's earliest days. In addition to unnaturally extending his life, his mastery of hemomancy allows him to control the minds and bodies of others as easily as his own. In the flamboyant salons of the Noxian aristocracy, this has enabled him to build a fanatical cult of personality around himself—while in the lowest back alleys, it allows him to bleed his enemies dry.",
@@ -128,7 +134,7 @@
           "id": "VladimirQ",
           "name": "Transfusion",
           "description": "Vladimir steals life from the target enemy. When Vladimir's resource is full, Transfusion will benefit from massively increased damage and healing for a brief time.",
-          "tooltip": "Vladimir drains the lifeforce of his target, dealing {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage and healing himself for {{ e2 }}<scaleAP> (+{{ a2 }})</scaleAP> health. After casting Transfusion twice, Vladimir gains <span class=\"colorFFB3B3\">Crimson Rush</span> the next time it becomes available to cast.<br /><br /><span class=\"colorFFB3B3\">Crimson Rush:</span> Vladimir is briefly hasted and for the next {{ e8 }} seconds Transfusion deals {{ e7 }}% increased damage and heals for an additional <scaleLevel>{{ f7 }}</scaleLevel> plus {{ e5 }}% <scaleAP>(+{{ f6 }}%)</scaleAP> of his missing health (empowered heal has {{ e9 }}% effectiveness against minions). ",
+          "tooltip": "Vladimir drains his target's lifeforce, dealing <magicDamage>{{ basedamagetooltip }} magic damage</magicDamage> and restoring <healing>{{ basehealtooltip }} Health</healing>. After using this Ability twice, Vladimir gains <speed>10% Move Speed</speed> for 0.5 seconds and empowers the next use of this Ability for {{ e8 }} seconds.<br /><br />The empowered version of this Ability deals <magicDamage>{{ empowereddamagetooltip }} magic damage</magicDamage> instead and restores an additional <healing>{{ empoweredhealtooltip }} plus {{ empoweredhealpercenttooltip }} missing Health</healing>.",
           "leveltip": {
             "label": [
               "Damage",
@@ -245,18 +251,7 @@
             "35",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.6,
-              "key": "a1"
-            },
-            {
-              "link": "spelldamage",
-              "coeff": 0.35,
-              "key": "a2"
-            }
-          ],
+          "vars": [],
           "costType": "No Cost",
           "maxammo": "-1",
           "range": [
@@ -269,10 +264,10 @@
           "rangeBurn": "600",
           "image": {
             "full": "VladimirQ.png",
-            "sprite": "spell13.png",
+            "sprite": "spell14.png",
             "group": "spell",
-            "x": 0,
-            "y": 144,
+            "x": 96,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -282,7 +277,7 @@
           "id": "VladimirSanguinePool",
           "name": "Sanguine Pool",
           "description": "Vladimir sinks into a pool of blood, becoming untargetable for 2 seconds. Additionally, enemies on the pool are slowed and Vladimir siphons life from them.",
-          "tooltip": "Vladimir sinks into a pool of blood for 2 seconds, gaining a brief haste and becoming untargetable while slowing enemies above him by {{ e3 }}%.<br /><br />Vladimir deals {{ e1 }} <span class=\"colorCC3300\">(+{{ f1 }}) [{{ e4 }}% of bonus Health]</span> magic damage over the duration and heals himself for {{ e5 }}% of that amount.<br /><br />Sanguine Pool can be cast while charging Tides of Blood.",
+          "tooltip": "Vladimir sinks into a pool of blood for 2 seconds, gaining <speed>37.5% decaying Move Speed</speed> for 1 second and becoming Untargetable and Ghosted while <status>Slowing</status> enemies in the pool by {{ e3 }}%.<br /><br />Vladimir deals <magicDamage>{{ totaldamagetooltip }} magic damage</magicDamage> over the duration and restores <healing>Health equal to {{ e5 }}% of the damage dealt</healing>.",
           "leveltip": {
             "label": [
               "Damage",
@@ -397,13 +392,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "bonushealth",
-              "coeff": 0.15,
-              "key": "f1"
-            }
-          ],
+          "vars": [],
           "costType": "% of current Health",
           "maxammo": "-1",
           "range": [
@@ -416,10 +405,10 @@
           "rangeBurn": "350",
           "image": {
             "full": "VladimirSanguinePool.png",
-            "sprite": "spell13.png",
+            "sprite": "spell14.png",
             "group": "spell",
-            "x": 48,
-            "y": 144,
+            "x": 144,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -429,7 +418,7 @@
           "id": "VladimirE",
           "name": "Tides of Blood",
           "description": "Vladimir pays his own health to charge up a reservoir of blood which, when released, deals damage in the area around him but can be blocked by enemy units.",
-          "tooltip": "<spellPassive>First Cast: </spellPassive>Vladimir charges up a reservoir of blood, spending up to <span class=\"colorCC3300\">{{ e2 }}% of his max Health ({{ f3 }})</span> to increase this spell's damage. While at full charge, Vladimir is slowed.<br /><br /><spellPassive>Second Cast: </spellPassive>Vladimir unleashes a nova of blood at surrounding enemies which deals between {{ e3 }}<span class=\"colorCC3300\"> (+{{ f2 }})</span><scaleAP> (+{{ a1 }})</scaleAP> and {{ e0 }}<span class=\"colorCC3300\"> (+{{ f4 }})</span><scaleAP> (+{{ a2 }})</scaleAP> magic damage and, at full charge, briefly slows by {{ e9 }}%. Targets hit block a portion of the nova.<br /><br />Tides of Blood will release automatically if held for more than {{ e7 }} seconds.",
+          "tooltip": "<charge>Begin Charging: </charge>Vladimir charges up a reservoir of blood, spending up to {{ chargehealthtooltip }} Health. While at full charge, Vladimir is <status>Slowed</status> by 20%.<br /><br /><release>Release: </release>Vladimir unleashes a torrent of blood missiles at surrounding enemies, dealing between <magicDamage>{{ mindamagetooltip }}</magicDamage> and <magicDamage>{{ maxdamagetooltip }} magic damage</magicDamage> based on charge time. If this Ability was charged for at least 1 second, it also <status>Slows</status> targets by {{ e9 }}% for 0.5 seconds.",
           "leveltip": {
             "label": [
               "Minimum Damage",
@@ -548,18 +537,7 @@
             "40/45/50/55/60",
             "60/90/120/150/180"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.35,
-              "key": "a1"
-            },
-            {
-              "link": "spelldamage",
-              "coeff": 0.8,
-              "key": "a2"
-            }
-          ],
+          "vars": [],
           "costType": "% of max Health",
           "maxammo": "-1",
           "range": [
@@ -572,10 +550,10 @@
           "rangeBurn": "600",
           "image": {
             "full": "VladimirE.png",
-            "sprite": "spell13.png",
+            "sprite": "spell14.png",
             "group": "spell",
-            "x": 96,
-            "y": 144,
+            "x": 192,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -585,7 +563,7 @@
           "id": "VladimirHemoplague",
           "name": "Hemoplague",
           "description": "Vladimir infects an area with a virulent plague. Affected enemies take increased damage for the duration. After a few seconds, Hemoplague deals magic damage to infected enemies and heals Vladimir for each enemy Champion hit.",
-          "tooltip": "Vladimir infects enemies in a target area with a virulent plague, causing them to take {{ e2 }}% increased damage from all sources for {{ e4 }} seconds.<br /><br />After {{ e4 }} seconds, Vladimir deals {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage to all infected targets. If Hemoplague damages an enemy Champion, Vladimir heals himself for {{ f4 }} <scaleAP>(+{{ f3 }})</scaleAP>, plus {{ e5 }}% for each Champion beyond the first.",
+          "tooltip": "Vladimir creates a virulent plague, causing its victims to take {{ e2 }}% increased damage from all sources for {{ e4 }} seconds. After it expires, Vladimir deals <magicDamage>{{ damage }} magic damage</magicDamage> to all infected targets. Vladimir restores <healing>{{ damage }} Health</healing> if he hits a champion, and restores an additional <healing>{{ secondaryhealingtooltip }} Health</healing> for each champion beyond the first.",
           "leveltip": {
             "label": [
               "Damage",
@@ -676,13 +654,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.7,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": "No Cost",
           "maxammo": "-1",
           "range": [
@@ -693,10 +665,10 @@
           "rangeBurn": "625",
           "image": {
             "full": "VladimirHemoplague.png",
-            "sprite": "spell13.png",
+            "sprite": "spell14.png",
             "group": "spell",
-            "x": 144,
-            "y": 144,
+            "x": 240,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -710,7 +682,7 @@
           "full": "VladimirP.png",
           "sprite": "passive4.png",
           "group": "passive",
-          "x": 192,
+          "x": 336,
           "y": 48,
           "w": 48,
           "h": 48
@@ -894,13 +866,51 @@
               ],
               "items": [
                 {
-                  "id": "3211",
+                  "id": "1056",
                   "count": 1,
                   "hideCount": false
                 },
                 {
                   "id": "2003",
-                  "count": 4,
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "1001",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "4635",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1026",
+                  "count": 1,
                   "hideCount": false
                 }
               ]
@@ -922,45 +932,22 @@
               ],
               "items": [
                 {
-                  "id": "3065",
+                  "id": "4633",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3020",
+                  "id": "4637",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3152",
+                  "id": "3102",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
+                },
                 {
                   "id": "3089",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3151",
                   "count": 1,
                   "hideCount": false
                 },
@@ -968,72 +955,11 @@
                   "id": "3135",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3165",
-                  "count": 1,
-                  "hideCount": false
                 },
                 {
-                  "id": "3157",
+                  "id": "4629",
                   "count": 1,
                   "hideCount": false
-                },
-                {
-                  "id": "3116",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2033",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2139",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }
@@ -1751,7 +1677,7 @@
               ],
               "items": [
                 {
-                  "id": "1054",
+                  "id": "1056",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1789,12 +1715,12 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3108",
+                  "id": "4635",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3067",
+                  "id": "1026",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1817,40 +1743,17 @@
               ],
               "items": [
                 {
-                  "id": "3158",
+                  "id": "4633",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3152",
+                  "id": "4637",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3157",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "standard",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3135",
+                  "id": "3102",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1860,70 +1763,14 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3907",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3165",
+                  "id": "3135",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3151",
+                  "id": "4629",
                   "count": 1,
                   "hideCount": false
-                },
-                {
-                  "id": "3116",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2139",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }

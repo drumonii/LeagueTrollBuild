@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "Rengar": {
       "id": "Rengar",
@@ -12,7 +12,7 @@
         "full": "Rengar.png",
         "sprite": "champion3.png",
         "group": "champion",
-        "x": 288,
+        "x": 336,
         "y": 0,
         "w": 48,
         "h": 48
@@ -111,7 +111,7 @@
           "id": "RengarQ",
           "name": "Savagery",
           "description": "Rengar's next attack brutally stabs his target for bonus damage.<br><br>Ferocity effect: deals increased damage and grants Attack Speed.",
-          "tooltip": "Rengar gains {{ e5 }}% Attack Speed for his next 2 attacks. The first attack deals {{ e1 }} <span class=\"colorF88017\">(+{{ f2 }})</span> physical damage.<br /><br /><span class=\"colorEDDA74\">Ferocity effect:</span><br />Savagery's damage is increased to <scaleLevel>{{ f3 }}</scaleLevel> <scaleAD>(+{{ a2 }})</scaleAD> and grants Rengar <scaleLevel>{{ f4 }}</scaleLevel>% Attack Speed for {{ e3 }} seconds.",
+          "tooltip": "Rengar gains {{ e5 }}% Attack Speed for his next 2 attacks. The first attack deals {{ e1 }} <span class=\"colorF88017\">(+{{ f2 }})</span> physical damage.<br /><br /><span class=\"colorEDDA74\">Ferocity effect:</span><br />Savagery's damage is increased to <physicalDamage>{{ empoweredqdamage }}</physicalDamage> and grants Rengar <scaleLevel>{{ empoweredqas }}</scaleLevel>% Attack Speed for {{ e3 }} seconds.",
           "leveltip": {
             "label": [
               "Damage",
@@ -228,13 +228,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "attackdamage",
-              "coeff": 1.4,
-              "key": "a2"
-            }
-          ],
+          "vars": [],
           "costType": "Generates 1 Ferocity",
           "maxammo": "1",
           "range": [
@@ -247,10 +241,10 @@
           "rangeBurn": "450",
           "image": {
             "full": "RengarQ.png",
-            "sprite": "spell9.png",
+            "sprite": "spell10.png",
             "group": "spell",
-            "x": 384,
-            "y": 144,
+            "x": 96,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -260,14 +254,14 @@
           "id": "RengarW",
           "name": "Battle Roar",
           "description": "Rengar lets out a battle roar, damaging enemies and healing for some of the recent damage he has taken.<br><br>Ferocity effect: additionally breaks crowd control effects.",
-          "tooltip": "Deals {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage to nearby enemies and heals Rengar for {{ e2 }}% of the damage he took in the last {{ e3 }} seconds.<br /><br /><span class=\"colorEDDA74\">Ferocity effect: </span><br />Deals <scaleLevel>{{ f1 }}</scaleLevel> <scaleAP>(+{{ a1 }})</scaleAP> magic damage and removes existing crowd control effects, in addition to its normal effect.<br /><br /><rules><span class=\"color8c8c8c\">Damage healed from monster attacks is increased by {{ e5 }}%.</span></rules>",
+          "tooltip": "Deals <magicDamage>{{ totaldamage }} magic damage</magicDamage> to nearby enemies and heals Rengar for {{ e2 }}% of the damage he took in the last {{ e3 }} seconds.<br /><br /><span class=\"colorEDDA74\">Ferocity effect: </span><br />Deals <magicDamage>{{ totaldamageempowered }} magic damage</magicDamage> and removes existing crowd control effects, in addition to its normal effect.<br /><br /><rules><span class=\"color8c8c8c\">Deals {{ bonusmonsterdamage }} extra damage to monsters, and healing from monster attacks is increased by +{{ e5 }}%.</span></rules>",
           "leveltip": {
             "label": [
               "Damage",
               "Cooldown"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
+              "{{ basedamage }} -> {{ basedamageNL }}",
               "{{ ammorechargetime }} -> {{ ammorechargetimeNL }}"
             ]
           },
@@ -292,11 +286,11 @@
           "effect": [
             null,
             [
-              50,
-              80,
-              110,
-              140,
-              170
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               50,
@@ -320,11 +314,11 @@
               1.5
             ],
             [
-              50,
-              50,
-              50,
-              50,
-              50
+              100,
+              100,
+              100,
+              100,
+              100
             ],
             [
               0,
@@ -364,29 +358,18 @@
           ],
           "effectBurn": [
             null,
-            "50/80/110/140/170",
+            "0",
             "50",
             "1.5",
             "1.5",
-            "50",
+            "100",
             "0",
             "0",
             "0",
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.8,
-              "key": "a1"
-            },
-            {
-              "link": "spelldamage",
-              "coeff": 0.8,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": "Generates 1 Ferocity",
           "maxammo": "1",
           "range": [
@@ -399,10 +382,10 @@
           "rangeBurn": "450",
           "image": {
             "full": "RengarW.png",
-            "sprite": "spell9.png",
+            "sprite": "spell10.png",
             "group": "spell",
-            "x": 432,
-            "y": 144,
+            "x": 144,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -553,7 +536,7 @@
             "full": "RengarE.png",
             "sprite": "spell10.png",
             "group": "spell",
-            "x": 0,
+            "x": 192,
             "y": 0,
             "w": 48,
             "h": 48
@@ -674,7 +657,7 @@
             "full": "RengarR.png",
             "sprite": "spell10.png",
             "group": "spell",
-            "x": 48,
+            "x": 240,
             "y": 0,
             "w": 48,
             "h": 48
@@ -689,7 +672,7 @@
           "full": "Rengar_P.png",
           "sprite": "passive3.png",
           "group": "passive",
-          "x": 288,
+          "x": 336,
           "y": 0,
           "w": 48,
           "h": 48

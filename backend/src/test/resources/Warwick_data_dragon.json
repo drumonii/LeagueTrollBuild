@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "Warwick": {
       "id": "Warwick",
@@ -12,7 +12,7 @@
         "full": "Warwick.png",
         "sprite": "champion4.png",
         "group": "champion",
-        "x": 288,
+        "x": 432,
         "y": 48,
         "w": 48,
         "h": 48
@@ -127,7 +127,7 @@
         "attackrange": 125,
         "hpregen": 4,
         "hpregenperlevel": 0.75,
-        "mpregen": 7.466,
+        "mpregen": 7.465,
         "mpregenperlevel": 0.575,
         "crit": 0,
         "critperlevel": 0,
@@ -141,7 +141,7 @@
           "id": "WarwickQ",
           "name": "Jaws of the Beast",
           "description": "Warwick lunges forward and bites his target, dealing damage based on their maximum health and healing for damage dealt.",
-          "tooltip": "Warwick lunges forward and bites his target. While the key is held down, he will <span class=\"colorFFEB7F\">attach</span> to the target then leap behind them.<br /><br />On release, deals <scaleAD>{{ a1 }}</scaleAD><scaleAP>+{{ a2 }}</scaleAP> plus {{ e1 }}% of your target's maximum health as magic damage (applies On Hit effects). Heal {{ e3 }}% of damage dealt.<br /><br /><span class=\"size16 color8C8C8C\">While <span class=\"size16 colorFFEB7F\">attached</span>, Warwick follows any movements they make and cannot be displaced.</span>",
+          "tooltip": "<tap>Tap:</tap> Warwick lunges forward and bites, dealing <magicDamage>{{ basebitedamage }} plus {{ e1 }}% max Health magic damage</magicDamage> and restoring <healing>{{ e3 }}% of damage dealt as Health</healing>.<br /><br /><hold>Hold:</hold> Warwick lunges and clamps his jaws on the target, leaping behind them. While clamped, Warwick follows all movement of the target. After releasing his hold, he does the same damage and healing.",
           "leveltip": {
             "label": [
               "Healing",
@@ -258,18 +258,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "attackdamage",
-              "coeff": 1.2,
-              "key": "a1"
-            },
-            {
-              "link": "spelldamage",
-              "coeff": 1,
-              "key": "a2"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -282,10 +271,10 @@
           "rangeBurn": "350",
           "image": {
             "full": "WarwickQ.png",
-            "sprite": "spell13.png",
+            "sprite": "spell14.png",
             "group": "spell",
-            "x": 384,
-            "y": 144,
+            "x": 0,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -295,7 +284,7 @@
           "id": "WarwickW",
           "name": "Blood Hunt",
           "description": "Warwick senses enemies below 50% health, gaining movement speed toward and attack speed against them. When they fall below 20% health, he frenzies and these bonuses triple.",
-          "tooltip": "<span class=\"colorFF9900\"></span><spellPassive>Passive: </spellPassive>Warwick gains {{ e2 }}% attack speed against enemies below 50% health. He also senses low health champions globally, moving {{ e1 }}% faster toward them when out of combat. These bonuses are tripled against enemies below 20% health.<br /><br /><spellPassive>Active: </spellPassive>Warwick briefly senses all enemies. The nearest sensed champion is Blood Hunted for 8 seconds. Cast only while not in combat with a champion.<br /><br />While no enemies are being hunted, Blood Hunt cools down twice as fast.",
+          "tooltip": "<spellPassive>Passive:</spellPassive> Warwick can sense champions below 50% Health, gaining <speed>{{ e1 }}% Move Speed</speed> towards them and gaining <attackSpeed>{{ e2 }}% Attack Speed</attackSpeed> against them. These bonuses are tripled against enemies below 20% Health.<br /><br /><spellActive>Active:</spellActive> Warwick can briefly sense all enemies, and gains this Ability's passive effect against the closest champion for 8 seconds, regardless of Health. Warwick cannot use this Ability while in combat with champions.",
           "leveltip": {
             "label": [
               "Movement Speed",
@@ -425,10 +414,10 @@
           "rangeBurn": "4000",
           "image": {
             "full": "WarwickW.png",
-            "sprite": "spell13.png",
+            "sprite": "spell14.png",
             "group": "spell",
-            "x": 432,
-            "y": 144,
+            "x": 48,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -438,7 +427,7 @@
           "id": "WarwickE",
           "name": "Primal Howl",
           "description": "Warwick gains damage reduction for 2.5 seconds. At the end, or if re-activated, he howls, causing nearby enemies to flee for 1 second.",
-          "tooltip": "Warwick gains {{ e1 }}% damage reduction for 2.5 seconds. At the end of the duration, or if activated again, Warwick howls, causing all nearby enemies to flee for {{ e3 }} second.",
+          "tooltip": "Warwick gains {{ e1 }}% damage reduction for 2.5 seconds. After it ends, Warwick howls, <status>Fearing</status> nearby enemies for {{ e3 }} second. Warwick can <recast>Recast</recast> to end the Ability early.",
           "leveltip": {
             "label": [
               "Damage Reduction",
@@ -568,8 +557,8 @@
             "full": "WarwickE.png",
             "sprite": "spell14.png",
             "group": "spell",
-            "x": 0,
-            "y": 0,
+            "x": 96,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -579,7 +568,7 @@
           "id": "WarwickR",
           "name": "Infinite Duress",
           "description": "Warwick leaps in a direction (scaling with his bonus movement speed), suppressing the first champion he collides with for 1.5 seconds.",
-          "tooltip": "Warwick leaps 2.5 seconds worth of movement speed in a direction, suppressing the first champion he collides with for {{ rduration }} seconds. Deals <magicDamage>{{ damagecumulative }}</magicDamage> magic damage and applies on-hit effects 3 times. Warwick heals for 100% of all damage he deals during Infinite Duress.",
+          "tooltip": "Warwick leaps a huge distance that scales with his <speed>Move Speed</speed>, <status>Suppressing</status> the first champion he collides with while he channels for {{ rduration }} seconds. He deals <magicDamage>{{ damagecumulative }} magic damage</magicDamage> over the duration and applies On-Hit effects 3 times. Warwick restores <healing>100% of all damage dealt</healing> during the channel as Health.",
           "leveltip": {
             "label": [
               "Damage",
@@ -683,8 +672,8 @@
             "full": "WarwickR.png",
             "sprite": "spell14.png",
             "group": "spell",
-            "x": 48,
-            "y": 0,
+            "x": 144,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -698,7 +687,7 @@
           "full": "WarwickP.png",
           "sprite": "passive4.png",
           "group": "passive",
-          "x": 288,
+          "x": 432,
           "y": 48,
           "w": 48,
           "h": 48
@@ -893,18 +882,51 @@
               ],
               "items": [
                 {
-                  "id": "2051",
+                  "id": "1055",
                   "count": 1,
                   "hideCount": false
                 },
+                {
+                  "id": "2003",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
                 {
                   "id": "1001",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "2003",
-                  "count": 3,
+                  "id": "3067",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3057",
+                  "count": 1,
                   "hideCount": false
                 }
               ]
@@ -926,45 +948,7 @@
               ],
               "items": [
                 {
-                  "id": "3065",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3047",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3748",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
                   "id": "3078",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3091",
                   "count": 1,
                   "hideCount": false
                 },
@@ -972,27 +956,19 @@
                   "id": "3053",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
+                },
                 {
-                  "id": "3068",
+                  "id": "3153",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3026",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3071",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1000,39 +976,6 @@
                   "id": "3742",
                   "count": 1,
                   "hideCount": false
-                },
-                {
-                  "id": "3143",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2138",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }
@@ -1768,39 +1711,6 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "1054",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3340",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "startingjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
               "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
@@ -1811,12 +1721,12 @@
               ],
               "items": [
                 {
-                  "id": "1041",
+                  "id": "1055",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "1006",
+                  "id": "2003",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1834,39 +1744,6 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "1001",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3077",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3057",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "early",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
               "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
@@ -1877,17 +1754,17 @@
               ],
               "items": [
                 {
-                  "id": "3077",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
                   "id": "1001",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3706",
+                  "id": "3067",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3057",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1900,39 +1777,6 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3047",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3748",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3065",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essentialjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
               "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
@@ -1943,78 +1787,17 @@
               ],
               "items": [
                 {
-                  "id": "1401",
+                  "id": "3078",
                   "count": 1,
                   "hideCount": false
                 },
-                {
-                  "id": "3047",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3748",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3065",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3742",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3025",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3075",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
                 {
                   "id": "3053",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3153",
                   "count": 1,
                   "hideCount": false
                 },
@@ -2024,35 +1807,12 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3143",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
+                  "id": "3071",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "2138",
+                  "id": "3742",
                   "count": 1,
                   "hideCount": false
                 }

@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "Zilean": {
       "id": "Zilean",
@@ -10,10 +10,10 @@
       "title": "the Chronokeeper",
       "image": {
         "full": "Zilean.png",
-        "sprite": "champion4.png",
+        "sprite": "champion5.png",
         "group": "champion",
-        "x": 336,
-        "y": 96,
+        "x": 0,
+        "y": 0,
         "w": 48,
         "h": 48
       },
@@ -87,7 +87,7 @@
         "hp": 504,
         "hpperlevel": 82,
         "mp": 452,
-        "mpperlevel": 30,
+        "mpperlevel": 50,
         "movespeed": 335,
         "armor": 24,
         "armorperlevel": 3.8,
@@ -110,19 +110,19 @@
           "id": "ZileanQ",
           "name": "Time Bomb",
           "description": "Tosses a bomb to target area that sticks to units that come near it (prioritizes Champions). It detonates after 3 seconds, dealing area of effect damage. If a Time Bomb is detonated early by another Time Bomb, it also stuns enemies.",
-          "tooltip": "Zilean tosses a time-delayed bomb to a location. The bomb sticks to the first unit which comes within a small area around it (prioritizes Champions). After {{ e2 }} seconds it detonates, dealing {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage to all surrounding enemies. <br /><br />Placing two bombs on a unit detonates the first bomb early, stunning all enemies in the blast for {{ e4 }} seconds.",
+          "tooltip": "Zilean tosses a time-delayed bomb that sticks to the first unit which comes within a small area around it. After {{ e2 }} seconds it detonates, dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage>.<br /><br />Placing a second bomb on a unit that already has one detonates the first bomb immediately and <status>Stuns</status> enemies in the blast for {{ e4 }} seconds.",
           "leveltip": {
             "label": [
-              "Damage",
-              "Stun Duration",
               "Cooldown",
-              "@AbilityResourceName@ Cost"
+              "@AbilityResourceName@ Cost",
+              "Damage",
+              "Stun Duration"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
-              "{{ e4 }} -> {{ e4NL }}",
               "{{ cooldown }} -> {{ cooldownNL }}",
-              "{{ cost }} -> {{ costNL }}"
+              "{{ cost }} -> {{ costNL }}",
+              "{{ e1 }} -> {{ e1NL }}",
+              "{{ e4 }} -> {{ e4NL }}"
             ]
           },
           "maxrank": 5,
@@ -229,13 +229,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.9,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -250,8 +244,8 @@
             "full": "ZileanQ.png",
             "sprite": "spell15.png",
             "group": "spell",
-            "x": 96,
-            "y": 0,
+            "x": 192,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -261,7 +255,7 @@
           "id": "ZileanW",
           "name": "Rewind",
           "description": "Zilean can prepare himself for future confrontations, reducing the cooldowns of his other basic abilities.",
-          "tooltip": "Reduces Zilean's other basic spell cooldowns by {{ e2 }} seconds.",
+          "tooltip": "Zilean turns time, reducing his other basic Ability cooldowns by {{ e2 }} seconds.",
           "leveltip": {
             "label": [
               "Cooldown"
@@ -389,8 +383,8 @@
             "full": "ZileanW.png",
             "sprite": "spell15.png",
             "group": "spell",
-            "x": 144,
-            "y": 0,
+            "x": 240,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -400,12 +394,14 @@
           "id": "TimeWarp",
           "name": "Time Warp",
           "description": "Zilean bends time around any unit, decreasing an enemy's Movement Speed or increasing an ally's Movement Speed for a short time.",
-          "tooltip": "Zilean increases an allied champion's Movement Speed, or slows an enemy champion, by {{ e2 }}% for {{ e1 }} seconds.",
+          "tooltip": "Zilean <status>Slows</status> an enemy champion by {{ e2 }}% or grants an allied champion <speed>{{ e2 }}% Move Speed</speed> for {{ e1 }} seconds.",
           "leveltip": {
             "label": [
+              "Slow",
               "Movement Speed"
             ],
             "effect": [
+              "{{ e2 }}% -> {{ e2NL }}%",
               "{{ e2 }}% -> {{ e2NL }}%"
             ]
           },
@@ -528,8 +524,8 @@
             "full": "TimeWarp.png",
             "sprite": "spell15.png",
             "group": "spell",
-            "x": 192,
-            "y": 0,
+            "x": 288,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -539,17 +535,17 @@
           "id": "ChronoShift",
           "name": "Chronoshift",
           "description": "Zilean places a protective time rune on an allied champion, teleporting the champion back in time if they take lethal damage.",
-          "tooltip": "Zilean marks himself or an allied champion with a protective time rune for {{ rduration }} seconds. If the target would take lethal damage, they are instead transported back in time, arriving with {{ rtotalheal }} Health.",
+          "tooltip": "Zilean grants a protective time rune to an allied champion for {{ rduration }} seconds. If the target would die, the rune rewinds their timeline, putting them into Stasis for {{ revivestateduration }} seconds, then reviving them and restoring <healing>{{ rtotalheal }} Health</healing>.",
           "leveltip": {
             "label": [
-              "Healing",
               "Cooldown",
-              "@AbilityResourceName@ Cost"
+              "@AbilityResourceName@ Cost",
+              "Healing"
             ],
             "effect": [
-              "{{ rbaseheal }} -> {{ rbasehealNL }}",
               "{{ cooldown }} -> {{ cooldownNL }}",
-              "{{ cost }} -> {{ costNL }}"
+              "{{ cost }} -> {{ costNL }}",
+              "{{ rbaseheal }} -> {{ rbasehealNL }}"
             ]
           },
           "maxrank": 3,
@@ -645,8 +641,8 @@
             "full": "ChronoShift.png",
             "sprite": "spell15.png",
             "group": "spell",
-            "x": 240,
-            "y": 0,
+            "x": 336,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -655,13 +651,13 @@
       ],
       "passive": {
         "name": "Time In A Bottle",
-        "description": "Zilean stores time as <font color='#BB55EE'>Experience</font>. <br><br>When he has enough <font color='#BB55EE'>Experience</font> to finish an ally's level, he can right-click them to impart it. Zilean receives as much <font color='#BB55EE'>Experience</font> as he gives. Cannot be used in combat.",
+        "description": "Zilean stores time as Experience and can grant it to his allies. When he has enough Experience to finish an ally's level up, he can right-click them to impart it. Zilean receives as much Experience as he gives.",
         "image": {
           "full": "Zilean_Passive.png",
-          "sprite": "passive4.png",
+          "sprite": "passive5.png",
           "group": "passive",
-          "x": 336,
-          "y": 96,
+          "x": 0,
+          "y": 0,
           "w": 48,
           "h": 48
         }
@@ -853,18 +849,51 @@
               ],
               "items": [
                 {
-                  "id": "3073",
+                  "id": "1056",
                   "count": 1,
                   "hideCount": false
                 },
+                {
+                  "id": "2003",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
                 {
                   "id": "1001",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "2003",
-                  "count": 5,
+                  "id": "3802",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1026",
+                  "count": 1,
                   "hideCount": false
                 }
               ]
@@ -886,7 +915,7 @@
               ],
               "items": [
                 {
-                  "id": "3007",
+                  "id": "6655",
                   "count": 1,
                   "hideCount": false
                 },
@@ -896,68 +925,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3089",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3285",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3165",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3135",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3157",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3116",
+                  "id": "4637",
                   "count": 1,
                   "hideCount": false
                 },
@@ -965,70 +933,14 @@
                   "id": "3102",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offmeta",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
+                },
                 {
-                  "id": "3107",
+                  "id": "3089",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3174",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3905",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2139",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2033",
+                  "id": "3135",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1802,7 +1714,7 @@
                 },
                 {
                   "id": "2003",
-                  "count": 2,
+                  "count": 1,
                   "hideCount": false
                 },
                 {
@@ -1862,73 +1774,17 @@
               ],
               "items": [
                 {
+                  "id": "6655",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
                   "id": "3020",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3285",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3916",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "aggressive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3165",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3135",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3089",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3157",
+                  "id": "4637",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1938,37 +1794,14 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3151",
+                  "id": "3089",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
                 },
                 {
-                  "id": "2139",
+                  "id": "3135",
                   "count": 1,
-                  "hideCount": true
+                  "hideCount": false
                 }
               ]
             }
@@ -2003,13 +1836,13 @@
               ],
               "items": [
                 {
-                  "id": "3850",
+                  "id": "1056",
                   "count": 1,
                   "hideCount": false
                 },
                 {
                   "id": "2003",
-                  "count": 2,
+                  "count": 1,
                   "hideCount": false
                 },
                 {
@@ -2046,7 +1879,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3145",
+                  "id": "1026",
                   "count": 1,
                   "hideCount": false
                 }
@@ -2069,78 +1902,22 @@
               ],
               "items": [
                 {
-                  "id": "3158",
+                  "id": "6655",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3030",
+                  "id": "3020",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3905",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2065",
+                  "id": "4637",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3107",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3190",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3165",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3135",
+                  "id": "3102",
                   "count": 1,
                   "hideCount": false
                 },
@@ -2148,32 +1925,9 @@
                   "id": "3089",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": false
                 },
                 {
-                  "id": "2139",
+                  "id": "3135",
                   "count": 1,
                   "hideCount": false
                 }

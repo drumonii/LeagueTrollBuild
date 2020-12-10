@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "Kayn": {
       "id": "Kayn",
@@ -34,7 +34,7 @@
           "id": "141002",
           "num": 2,
           "name": "Odyssey Kayn",
-          "chromas": false
+          "chromas": true
         }
       ],
       "lore": "A peerless practitioner of lethal shadow magic, Shieda Kayn battles to achieve his true destiny—to one day lead the Order of Shadow into a new era of Ionian supremacy. He wields the sentient darkin weapon Rhaast, undeterred by its creeping corruption of his body and mind. There are only two possible outcomes: either Kayn bends the weapon to his will... or the malevolent blade consumes him completely, paving the way for the destruction of all Runeterra.",
@@ -65,7 +65,7 @@
         "mp": 410,
         "mpperlevel": 50,
         "movespeed": 340,
-        "armor": 38,
+        "armor": 35,
         "armorperlevel": 3.3,
         "spellblock": 32.1,
         "spellblockperlevel": 1.25,
@@ -99,13 +99,13 @@
           },
           "maxrank": 5,
           "cooldown": [
+            7,
+            6.5,
             6,
             5.5,
-            5,
-            4.5,
-            4
+            5
           ],
-          "cooldownBurn": "6/5.5/5/4.5/4",
+          "cooldownBurn": "7/6.5/6/5.5/5",
           "cost": [
             50,
             50,
@@ -118,11 +118,11 @@
           "effect": [
             null,
             [
-              75,
-              95,
-              115,
-              135,
-              155
+              65,
+              85,
+              105,
+              125,
+              145
             ],
             [
               0.55,
@@ -190,7 +190,7 @@
           ],
           "effectBurn": [
             null,
-            "75/95/115/135/155",
+            "65/85/105/125/145",
             "0.55",
             "5",
             "4",

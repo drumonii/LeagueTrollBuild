@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "Shen": {
       "id": "Shen",
@@ -12,7 +12,7 @@
         "full": "Shen.png",
         "sprite": "champion3.png",
         "group": "champion",
-        "x": 192,
+        "x": 336,
         "y": 48,
         "w": 48,
         "h": 48
@@ -70,6 +70,12 @@
           "id": "98016",
           "num": 16,
           "name": "Infernal Shen",
+          "chromas": true
+        },
+        {
+          "id": "98022",
+          "num": 22,
+          "name": "PsyOps Shen",
           "chromas": true
         }
       ],
@@ -256,10 +262,10 @@
           "rangeBurn": "400",
           "image": {
             "full": "ShenQ.png",
-            "sprite": "spell10.png",
+            "sprite": "spell11.png",
             "group": "spell",
-            "x": 0,
-            "y": 144,
+            "x": 96,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -395,10 +401,10 @@
           "rangeBurn": "400",
           "image": {
             "full": "ShenW.png",
-            "sprite": "spell10.png",
+            "sprite": "spell11.png",
             "group": "spell",
-            "x": 48,
-            "y": 144,
+            "x": 144,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -408,14 +414,14 @@
           "id": "ShenE",
           "name": "Shadow Dash",
           "description": "Shen dashes in a direction, taunting enemies in his path.",
-          "tooltip": "<spellPassive>Passive:</spellPassive> Dealing damage with Shadow Dash or Twilight Assault recovers <scaleLevel>{{ f1 }}</scaleLevel> Energy.<br /><br /><spellPassive>Active:</spellPassive> Shen dashes in a direction, dealing {{ e2 }} <span class=\"colorCC3300\">[+{{ f2 }}]</span> physical damage to enemy champions and neutral monsters in his path and taunting them for {{ e1 }} seconds.",
+          "tooltip": "<spellPassive>Passive:</spellPassive> Dealing damage with Shadow Dash or Twilight Assault recovers <scaleLevel>{{ energyrefund }}</scaleLevel> Energy.<br /><br /><spellPassive>Active:</spellPassive> Shen dashes in a direction, dealing <physicalDamage>{{ tauntdamage }} physical damage</physicalDamage> to enemy champions and neutral monsters in his path and taunting them for {{ ccduration }} seconds.",
           "leveltip": {
             "label": [
               "Damage",
               "Cooldown"
             ],
             "effect": [
-              "{{ e2 }} -> {{ e2NL }}",
+              "{{ basedamage }} -> {{ basedamageNL }}",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
@@ -440,53 +446,53 @@
           "effect": [
             null,
             [
-              1.5,
-              1.5,
-              1.5,
-              1.5,
-              1.5
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              60,
-              85,
-              110,
-              135,
-              160
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              25,
-              25,
-              25,
-              25,
-              25
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              300,
-              300,
-              300,
-              300,
-              300
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              125,
-              125,
-              125,
-              125,
-              125
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              150,
-              150,
-              150,
-              150,
-              150
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              800,
-              800,
-              800,
-              800,
-              800
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -512,13 +518,13 @@
           ],
           "effectBurn": [
             null,
-            "1.5",
-            "60/85/110/135/160",
-            "25",
-            "300",
-            "125",
-            "150",
-            "800",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
             "0",
             "0",
             "0"
@@ -536,10 +542,10 @@
           "rangeBurn": "600",
           "image": {
             "full": "ShenE.png",
-            "sprite": "spell10.png",
+            "sprite": "spell11.png",
             "group": "spell",
-            "x": 96,
-            "y": 144,
+            "x": 192,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -653,10 +659,10 @@
           "rangeBurn": "35000",
           "image": {
             "full": "ShenR.png",
-            "sprite": "spell10.png",
+            "sprite": "spell11.png",
             "group": "spell",
-            "x": 144,
-            "y": 144,
+            "x": 240,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -670,7 +676,7 @@
           "full": "Shen_Passive.png",
           "sprite": "passive3.png",
           "group": "passive",
-          "x": 192,
+          "x": 336,
           "y": 48,
           "w": 48,
           "h": 48
@@ -819,18 +825,51 @@
               ],
               "items": [
                 {
-                  "id": "2051",
+                  "id": "1054",
                   "count": 1,
                   "hideCount": false
                 },
+                {
+                  "id": "2003",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
                 {
                   "id": "1001",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "2003",
-                  "count": 3,
+                  "id": "6660",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3105",
+                  "count": 1,
                   "hideCount": false
                 }
               ]
@@ -852,7 +891,7 @@
               ],
               "items": [
                 {
-                  "id": "3748",
+                  "id": "3068",
                   "count": 1,
                   "hideCount": false
                 },
@@ -862,103 +901,24 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3068",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3022",
+                  "id": "3143",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3091",
+                  "id": "3211",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3005",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3109",
+                  "id": "3083",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3742",
+                  "id": "3193",
                   "count": 1,
                   "hideCount": false
-                },
-                {
-                  "id": "3190",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2138",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }
@@ -1689,7 +1649,7 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
+              "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
                 ""
@@ -1716,78 +1676,12 @@
               ]
             },
             {
-              "type": "startingjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "1041",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2003",
-                  "count": 3,
-                  "hideCount": false
-                },
-                {
-                  "id": "3340",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
               "type": "early",
               "recMath": false,
               "recSteps": false,
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "1001",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3751",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "1031",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "earlyjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
               "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
@@ -1803,12 +1697,12 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3751",
+                  "id": "6660",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3715",
+                  "id": "3105",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1821,7 +1715,7 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
+              "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
                 ""
@@ -1830,74 +1724,23 @@
                 ""
               ],
               "items": [
-                {
-                  "id": "3111",
-                  "count": 1,
-                  "hideCount": false
-                },
                 {
                   "id": "3068",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3748",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essentialjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
                   "id": "3111",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "1413",
+                  "id": "3143",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3748",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3742",
+                  "id": "3211",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1907,70 +1750,9 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3065",
+                  "id": "3193",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3143",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3194",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3005",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2138",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }

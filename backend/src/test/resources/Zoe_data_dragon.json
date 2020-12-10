@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "Zoe": {
       "id": "Zoe",
@@ -10,10 +10,10 @@
       "title": "the Aspect of Twilight",
       "image": {
         "full": "Zoe.png",
-        "sprite": "champion4.png",
+        "sprite": "champion5.png",
         "group": "champion",
-        "x": 384,
-        "y": 96,
+        "x": 48,
+        "y": 0,
         "w": 48,
         "h": 48
       },
@@ -105,7 +105,7 @@
           "id": "ZoeQ",
           "name": "Paddle Star!",
           "description": "Zoe fires a missile that she can redirect in flight. Deals more damage the longer it flies in a straight line.",
-          "tooltip": "Fire a missile that deals increasing damage the further it travels -- <scaleLevel>{{ f1 }}</scaleLevel> <scaleAP>(+{{ a1 }})</scaleAP> to <scaleLevel>{{ f2 }}</scaleLevel> <scaleAP>(+{{ a2 }})</scaleAP> magic damage. Enemies near the first target hit take {{ e4 }}% damage.<span class=\"size5\"><br /><br /><br /></span>Recast to redirect the missile to a new position near Zoe.<br /><br /><rules>Paddle Star! deals damage based on a combination of Paddle Star's rank and Zoe's level. </rules>",
+          "tooltip": "Zoe fires a star that deals increasing damage the further it travels to the first enemy hit -- between <magicDamage>{{ totaldamagetooltip }} to {{ maxdamagetooltip }} magic damage</magicDamage>. Enemies surrounding the target take {{ e4 }}% damage.<br /><br />Zoe can <recast>Recast</recast> this Ability to redirect the missile to a new position near Zoe.",
           "leveltip": {
             "label": [
               "Base Damage",
@@ -222,18 +222,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.6,
-              "key": "a1"
-            },
-            {
-              "link": "spelldamage",
-              "coeff": 1.5,
-              "key": "a2"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -248,8 +237,8 @@
             "full": "ZoeQ.png",
             "sprite": "spell15.png",
             "group": "spell",
-            "x": 288,
-            "y": 0,
+            "x": 384,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -259,7 +248,7 @@
           "id": "ZoeW",
           "name": "Spell Thief",
           "description": "Zoe can pick up the remnants of enemy summoner spell and active item casts and cast them once herself. Whenever she casts a summoner spell, she gains 3 missiles that fire at the nearest target.",
-          "tooltip": "Enemy Summoner Spell and Active Item casts drop spell shards lasting 40 seconds. Some minions also drop a spell shard when Zoe kills them.<br /><br /><spellPassive>Active: </spellPassive>Collecting a spell shard grants one cast of that spell.<br />                 ____________________________________________ <span class=\"size8\"><br /><br /></span><spellPassive>Passive: </spellPassive>When Zoe casts a Summoner Spell or Spell Thief, she gains {{ e9 }}% movement speed for {{ e0 }} seconds and tosses up to 3 missiles at her attack target, dealing {{ e8 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage total. Each missile can apply More Sparkles!<br /><br /><rules>Movement speed bonus and missile damage improve with spell rank.</rules>",
+          "tooltip": "<spellPassive>Passive:</spellPassive> Enemies drop spell shards when casting a Summoner Spell or using an Active Item. Specific minions also drop a spell shard when Zoe kills them. Zoe can pick up this shard to cast that ability once.<br /><br /><spellPassive>Passive:</spellPassive> When Zoe casts this Ability or any Summoner Spell, she gains <speed>{{ e9 }}% Move Speed</speed> for {{ e0 }} seconds and tosses 3 missiles at the target she Attacked most recently. These missiles deal <magicDamage>{{ missiledamagetooltip }} magic damage</magicDamage> each.<br /><br /><spellActive>Active:</spellActive> Cast the Ability from a spell shard Zoe has picked up.",
           "leveltip": {
             "label": [
               "Damage",
@@ -376,14 +365,8 @@
             "30/40/50/60/70",
             "2/2.25/2.5/2.75/3"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.4,
-              "key": "a1"
-            }
-          ],
-          "costType": " {{ abilityresourcename }}",
+          "vars": [],
+          "costType": "No Cost",
           "maxammo": "-1",
           "range": [
             3000,
@@ -397,18 +380,18 @@
             "full": "ZoeW.png",
             "sprite": "spell15.png",
             "group": "spell",
-            "x": 336,
-            "y": 0,
+            "x": 432,
+            "y": 48,
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} {{ abilityresourcename }}"
+          "resource": "No Cost"
         },
         {
           "id": "ZoeE",
           "name": "Sleepy Trouble Bubble",
           "description": "Causes the target to become drowsy, then fall asleep. The first source of damage that breaks the sleep is doubled, up to a cap.",
-          "tooltip": "Dropkick a bubble that deals {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage, lingering as a trap if it hits nothing. The bubble's range is extended when flying over a wall.<br /><br />After a delay, the victim falls asleep for 2 seconds. Attacks and spell hits break sleep but deal double damage, up to {{ e6 }} <scaleAP>(+{{ a2 }})</scaleAP> bonus true damage.",
+          "tooltip": "Zoe dropkicks a bubble that deals <magicDamage>{{ totaldamagetooltip }} magic damage</magicDamage>, lingering as a trap if it hits nothing. The bubble's range is extended when flying over terrain.<br /><br />After a delay, the victim falls <status>Asleep</status> for 2 seconds. Attacks and Ability hits wake them up but deal double damage, up to <trueDamage>{{ breakdamagetooltip }} true damage</trueDamage>.",
           "leveltip": {
             "label": [
               "Damage",
@@ -525,18 +508,7 @@
             "2.25",
             "1"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.4,
-              "key": "a1"
-            },
-            {
-              "link": "spelldamage",
-              "coeff": 0.4,
-              "key": "a2"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -551,8 +523,8 @@
             "full": "ZoeE.png",
             "sprite": "spell15.png",
             "group": "spell",
-            "x": 384,
-            "y": 0,
+            "x": 0,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -562,7 +534,7 @@
           "id": "ZoeR",
           "name": "Portal Jump",
           "description": "Blink to a nearby position for 1 second. Then blink back.",
-          "tooltip": "Blink to a nearby position for 1 second. Then blink back.<br /><br /><rules>Zoe may cast and attack, but not move, during this time. She can also see over walls.</rules>",
+          "tooltip": "Zoe teleports to a nearby position for 1 second. Afterwards, she teleports back. Zoe can use Abilities and Attack, but can't move during this time.",
           "leveltip": {
             "label": [
               "Cooldown"
@@ -664,8 +636,8 @@
             "full": "ZoeR.png",
             "sprite": "spell15.png",
             "group": "spell",
-            "x": 432,
-            "y": 0,
+            "x": 48,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -677,10 +649,10 @@
         "description": "Zoe's next basic attack after casting a spell deals bonus magic damage.",
         "image": {
           "full": "Zoe_P.png",
-          "sprite": "passive4.png",
+          "sprite": "passive5.png",
           "group": "passive",
-          "x": 384,
-          "y": 96,
+          "x": 48,
+          "y": 0,
           "w": 48,
           "h": 48
         }
@@ -874,13 +846,51 @@
               ],
               "items": [
                 {
-                  "id": "3802",
+                  "id": "1056",
                   "count": 1,
                   "hideCount": false
                 },
                 {
                   "id": "2003",
-                  "count": 2,
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "1001",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3802",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1026",
+                  "count": 1,
                   "hideCount": false
                 }
               ]
@@ -902,7 +912,7 @@
               ],
               "items": [
                 {
-                  "id": "3285",
+                  "id": "6655",
                   "count": 1,
                   "hideCount": false
                 },
@@ -912,30 +922,12 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3100",
+                  "id": "4637",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
+                },
                 {
-                  "id": "3151",
+                  "id": "3102",
                   "count": 1,
                   "hideCount": false
                 },
@@ -946,67 +938,6 @@
                 },
                 {
                   "id": "3135",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3157",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3102",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3116",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2139",
                   "count": 1,
                   "hideCount": false
                 }
@@ -2091,7 +2022,7 @@
                 },
                 {
                   "id": "2003",
-                  "count": 2,
+                  "count": 1,
                   "hideCount": false
                 },
                 {
@@ -2151,73 +2082,17 @@
               ],
               "items": [
                 {
+                  "id": "6655",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
                   "id": "3020",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3285",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3916",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "standard",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3135",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3165",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3089",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3157",
+                  "id": "4637",
                   "count": 1,
                   "hideCount": false
                 },
@@ -2227,35 +2102,12 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3100",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
+                  "id": "3089",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "2139",
+                  "id": "3135",
                   "count": 1,
                   "hideCount": false
                 }
