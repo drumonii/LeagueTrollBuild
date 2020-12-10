@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "Draven": {
       "id": "Draven",
@@ -120,7 +120,7 @@
           "id": "DravenSpinning",
           "name": "Spinning Axe",
           "description": "Draven's next attack will deal bonus physical damage. This axe will ricochet off the target high up into the air. If Draven catches it, he automatically readies another Spinning Axe. Draven can have two Spinning Axes at once.",
-          "tooltip": "Draven's next attack will deal <physicalDamage><scaleAD>{{ f1 }}</scaleAD> bonus physical damage</physicalDamage>. The bonus is equal to {{ e5 }} plus {{ e2 }}% of his bonus Attack Damage.<br /><br />This axe will ricochet off the target high up into the air. If Draven catches it, he automatically readies another <spellName>Spinning Axe</spellName>.<br /><br /><span class=\"colorDDDD77\">Draven can have two Spinning Axes at once.</span>",
+          "tooltip": "Draven readies a <keywordMajor>Spinning Axe</keywordMajor>, causing his next Attack to deal an additional <physicalDamage>{{ totaldamage }} physical damage</physicalDamage> and ricochet into the air. If Draven catches it, he readies another <keywordMajor>Spinning Axe</keywordMajor>.<br /><br />Draven can hold two <keywordMajor>Spinning Axes</keywordMajor> at once.",
           "leveltip": {
             "label": [
               "Damage",
@@ -237,19 +237,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "attackdamage",
-              "coeff": [
-                0.45,
-                0.55,
-                0.65,
-                0.75,
-                0.85
-              ],
-              "key": "f1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -275,7 +263,7 @@
           "id": "DravenFury",
           "name": "Blood Rush",
           "description": "Draven gains increased Movement Speed and Attack Speed. The Movement Speed bonus decreases rapidly over its duration. Catching a Spinning Axe will refresh the cooldown of Blood Rush.",
-          "tooltip": "Draven gains {{ e2 }}% increased Movement Speed for {{ e3 }} seconds and {{ e4 }}% increased Attack Speed for {{ e5 }} seconds. The Movement Speed bonus decreases rapidly over its duration.<br /><br />Catching a <spellName>Spinning Axe</spellName> will refresh the cooldown of <spellName>Blood Rush</spellName>.",
+          "tooltip": "Draven becomes Ghosted, gains <speed>{{ e2 }}% Move Speed</speed> decaying over {{ e3 }} seconds and <attackSpeed>{{ e4 }}% Attack Speed</attackSpeed> for {{ e5 }} seconds.<br /><br />When Draven catches a <keywordMajor>Spinning Axe</keywordMajor>, this Ability's cooldown is refreshed.",
           "leveltip": {
             "label": [
               "Attack Speed",
@@ -418,7 +406,7 @@
           "id": "DravenDoubleShot",
           "name": "Stand Aside",
           "description": "Draven throws his axes, dealing physical damage to targets hit and knocking them aside. Targets hit are slowed.",
-          "tooltip": "Draven throws his axes, dealing <physicalDamage>{{ e1 }} <scaleAD>(+{{ f1 }})</scaleAD> physical damage</physicalDamage> to targets hit and knocking them aside. Targets hit are slowed by {{ e2 }}% for {{ e3 }} seconds.",
+          "tooltip": "Draven chucks a sideways axe that deals <physicalDamage>{{ totaldamage }} physical damage</physicalDamage>, <status>Knocks Back</status>, and <status>Slows</status> by {{ e2 }}% for {{ e3 }} seconds.",
           "leveltip": {
             "label": [
               "Damage",
@@ -535,13 +523,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "bonusattackdamage",
-              "coeff": 0.5,
-              "key": "f1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -567,7 +549,7 @@
           "id": "DravenRCast",
           "name": "Whirling Death",
           "description": "Draven hurls two massive axes to deal physical damage to each unit struck. Whirling Death slowly reverses direction and returns to Draven after striking an enemy champion. Draven may also activate this ability while the axes are in flight to cause it to return early. Deals less damage for each unit hit and resets when the axes reverse direction.",
-          "tooltip": "Draven hurls two massive axes to deal <physicalDamage>{{ rcalculateddamage }} physical damage</physicalDamage> to each unit struck.<br /><br />Whirling Death slowly reverses direction and returns to Draven after striking an enemy champion. Draven may also activate this ability while the axes are in flight to cause it to return early. Deals {{ rdamagereductionperhit*100 }}% less damage for each unit hit (Minimum {{ rmindamagepercent }}%) and resets when the axes reverse direction.",
+          "tooltip": "Draven hurls two massive axes that deal <physicalDamage>{{ rcalculateddamage }} physical damage</physicalDamage>. Upon hitting a champion or <recast>Recasting</recast>, they reverse direction and return to Draven. The axes deal {{ rdamagereductionperhit*100 }}% less damage for each enemy hit, down to a minimum of {{ rmindamagepercent }}%.",
           "leveltip": {
             "label": [
               "Damage",
@@ -829,13 +811,51 @@
               ],
               "items": [
                 {
-                  "id": "1038",
+                  "id": "1055",
                   "count": 1,
                   "hideCount": false
                 },
                 {
                   "id": "2003",
-                  "count": 2,
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "1001",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "6670",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1037",
+                  "count": 1,
                   "hideCount": false
                 }
               ]
@@ -862,68 +882,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3031",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3094",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3072",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3087",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3508",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3139",
+                  "id": "6672",
                   "count": 1,
                   "hideCount": false
                 },
@@ -933,37 +892,19 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3812",
+                  "id": "3094",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
                 },
                 {
-                  "id": "2140",
+                  "id": "3072",
                   "count": 1,
-                  "hideCount": true
+                  "hideCount": false
+                },
+                {
+                  "id": "3026",
+                  "count": 1,
+                  "hideCount": false
                 }
               ]
             }
@@ -1720,12 +1661,12 @@
                   "hideCount": false
                 },
                 {
-                  "id": "1038",
+                  "id": "6670",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "1053",
+                  "id": "1037",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1748,40 +1689,12 @@
               ],
               "items": [
                 {
-                  "id": "3072",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3031",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
                   "id": "3006",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
+                },
                 {
-                  "id": "3094",
+                  "id": "6672",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1791,35 +1704,12 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3095",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3036",
+                  "id": "3094",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3139",
+                  "id": "3072",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1827,34 +1717,6 @@
                   "id": "3026",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2140",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }

@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "Azir": {
       "id": "Azir",
@@ -47,6 +47,12 @@
           "num": 4,
           "name": "Warring Kingdoms Azir",
           "chromas": false
+        },
+        {
+          "id": "268005",
+          "num": 5,
+          "name": "Elderwood Azir",
+          "chromas": true
         }
       ],
       "lore": "Azir was a mortal emperor of Shurima in a far distant age, a proud man who stood at the cusp of immortality. His hubris saw him betrayed and murdered at the moment of his greatest triumph, but now, millennia later, he has been reborn as an Ascended being of immense power. With his buried city risen from the sand, Azir seeks to restore Shurima to its former glory.",
@@ -247,7 +253,7 @@
           "id": "AzirW",
           "name": "Arise!",
           "description": "Azir summons a Sand Soldier to attack nearby targets for him, replacing his basic attack against targets within the soldier's range. Their attacks deal magic damage to enemies in a line. Arise! also passively grants attack speed to Azir and his Sand Soldiers.",
-          "tooltip": "<spellPassive>Passive:</spellPassive> Azir gains {{ e3 }}% attack speed. When Azir has {{ e6 }} or more <span class=\"colorEED6AF\">Sand Soldiers</span>, he gains {{ e7 }}% additional attack speed for {{ e8 }} seconds.<br /><br /><spellPassive>Active:</spellPassive> Azir summons a <span class=\"colorEED6AF\">Sand Soldier</span> for {{ e1 }} seconds. When Azir attacks an enemy in a soldier's range, the soldier attacks in his stead, stabbing the target for <magicDamage><scaleLevel>{{ f2 }}</scaleLevel> <scaleAP>(+{{ a1 }})</scaleAP> magic damage</magicDamage>. Other enemies caught in the soldier's attack take <scaleLevel>{{ f7 }}%</scaleLevel> of the stab's damage.<br /><br />Azir stores up to {{ maxammo }} <span class=\"colorEED6AF\">Sand Soldiers</span> and prepares a new one every <scaleLevel>{{ ammorechargetime }}</scaleLevel> seconds.<br /><br /><span class=\"color919191\"><i>Sand Soldiers that strike the same targets deal {{ e9 }}% damage after the first.<br />Sand Soldiers can attack targets outside of Azir's basic attack range.<br />Sand Soldiers expire twice as fast when near an enemy turret.</i></span>",
+          "tooltip": "<spellPassive>Passive:</spellPassive> Azir gains {{ e3 }}% Attack Speed. When Azir has {{ e6 }} or more <span class=\"colorEED6AF\">Sand Soldiers</span>, he gains {{ e7 }}% additional Attack Speed for {{ e8 }} seconds.<br /><br /><spellPassive>Active:</spellPassive> Azir summons a <span class=\"colorEED6AF\">Sand Soldier</span> for {{ e1 }} seconds. When Azir attacks an enemy in a soldier's range, the soldier attacks in his stead, stabbing the target for <magicDamage><scaleLevel>{{ f2 }}</scaleLevel> <scaleAP>(+{{ a1 }})</scaleAP> magic damage</magicDamage>. Other enemies caught in the soldier's attack take <scaleLevel>{{ f7 }}%</scaleLevel> of the stab's damage.<br /><br />Azir stores up to {{ maxammo }} <span class=\"colorEED6AF\">Sand Soldiers</span> and prepares a new one every <scaleLevel>{{ ammorechargetime }}</scaleLevel> seconds.<br /><br /><span class=\"color919191\"><i>Sand Soldiers that strike the same targets deal {{ e9 }}% damage after the first.<br />Sand Soldiers can attack targets outside of Azir's basic attack range.<br />Sand Soldiers expire twice as fast when near an enemy turret.</i></span>",
           "leveltip": {
             "label": [
               "Recharge Time",
@@ -295,11 +301,11 @@
               0
             ],
             [
-              20,
-              30,
-              40,
-              50,
-              60
+              15,
+              25,
+              35,
+              45,
+              55
             ],
             [
               0,
@@ -323,11 +329,11 @@
               3
             ],
             [
-              20,
-              30,
-              40,
-              50,
-              60
+              15,
+              25,
+              35,
+              45,
+              55
             ],
             [
               5,
@@ -355,11 +361,11 @@
             null,
             "10",
             "0",
-            "20/30/40/50/60",
+            "15/25/35/45/55",
             "0",
             "0",
             "3",
-            "20/30/40/50/60",
+            "15/25/35/45/55",
             "5",
             "25",
             "0.5"
@@ -849,18 +855,51 @@
               ],
               "items": [
                 {
-                  "id": "1001",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3108",
+                  "id": "1056",
                   "count": 1,
                   "hideCount": false
                 },
                 {
                   "id": "2003",
-                  "count": 4,
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "1001",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3802",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1026",
+                  "count": 1,
                   "hideCount": false
                 }
               ]
@@ -882,12 +921,7 @@
               ],
               "items": [
                 {
-                  "id": "3115",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3116",
+                  "id": "6655",
                   "count": 1,
                   "hideCount": false
                 },
@@ -895,27 +929,14 @@
                   "id": "3020",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
+                },
                 {
-                  "id": "3165",
+                  "id": "4637",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3102",
                   "count": 1,
                   "hideCount": false
                 },
@@ -926,72 +947,6 @@
                 },
                 {
                   "id": "3135",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3151",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3157",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3102",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2139",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2033",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1699,7 +1654,7 @@
                 },
                 {
                   "id": "2003",
-                  "count": 2,
+                  "count": 1,
                   "hideCount": false
                 },
                 {
@@ -1759,38 +1714,25 @@
               ],
               "items": [
                 {
+                  "id": "6655",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
                   "id": "3020",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3285",
+                  "id": "4637",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3115",
+                  "id": "3102",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "standard",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
+                },
                 {
                   "id": "3089",
                   "count": 1,
@@ -1800,72 +1742,6 @@
                   "id": "3135",
                   "count": 1,
                   "hideCount": false
-                },
-                {
-                  "id": "3165",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3116",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3157",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3102",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2139",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }

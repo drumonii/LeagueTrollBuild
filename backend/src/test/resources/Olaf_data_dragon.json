@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "Olaf": {
       "id": "Olaf",
@@ -108,7 +108,7 @@
         "attackrange": 125,
         "hpregen": 8.5,
         "hpregenperlevel": 0.9,
-        "mpregen": 7.466,
+        "mpregen": 7.465,
         "mpregenperlevel": 0.575,
         "crit": 0,
         "critperlevel": 0,
@@ -122,7 +122,7 @@
           "id": "OlafAxeThrowCast",
           "name": "Undertow",
           "description": "Olaf throws an axe into the ground at a target location, dealing damage to enemies it passes through and slowing their Movement Speed. If Olaf picks up the axe, the ability's cooldown is reduced by 4.5 seconds.",
-          "tooltip": "Olaf throws an axe to target location, dealing {{ e1 }} <scaleAD>(+{{ a1 }})</scaleAD> physical damage to units it passes through and slowing them by {{ e2 }}% for up to {{ e3 }} seconds. The further the Axe flies, the longer the slow lasts, but it is never less than {{ e4 }} seconds.<br /><br />If Olaf picks up the axe, the ability's cooldown is reduced by 4.5 seconds.",
+          "tooltip": "Olaf throws an axe, dealing <physicalDamage>{{ totaldamage }} physical damage</physicalDamage> and <status>Slowing</status> by {{ e2 }}% for between {{ e4 }} and {{ e3 }} seconds, based on distance travelled.<br /><br />If Olaf picks up the axe, this Ability's Cooldown is reduced by 4.5 seconds.",
           "leveltip": {
             "label": [
               "Damage",
@@ -237,13 +237,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "bonusattackdamage",
-              "coeff": 1,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -269,7 +263,7 @@
           "id": "OlafFrenziedStrikes",
           "name": "Vicious Strikes",
           "description": "Olaf's Attack Speed is increased, he gains Life Steal and has increased healing from all sources based on how much Health he is missing.",
-          "tooltip": "For {{ e4 }} seconds, Olaf gains {{ e2 }}% Life Steal and his Attack Speed is increased by {{ e1 }}%.<br /><br />During this time, Olaf also receives 1% increased healing from all sources for every {{ e3 }}% of Health he is missing.",
+          "tooltip": "Olaf gains {{ e2 }}% Life Steal, <attackSpeed>{{ e1 }}% Attack Speed</attackSpeed>, and increases healing received by up to <healing>50%, based on missing Health</healing> for {{ e4 }} seconds.",
           "leveltip": {
             "label": [
               "Attack Speed",
@@ -410,7 +404,7 @@
           "id": "OlafRecklessStrike",
           "name": "Reckless Swing",
           "description": "Olaf attacks with such force that it deals true damage to his target and himself, refunding the Health cost if he destroys the target.",
-          "tooltip": "Olaf ferociously swings his axes, dealing {{ e1 }} <scaleAD>(+{{ a1 }})</scaleAD> true damage to his target. This ability's cost is equal to {{ e2 }}% of the total damage dealt, but the cost is refunded if it kills the target.<br /><br />Basic attacks lower the cooldown of Reckless Swing by 1 second.",
+          "tooltip": "Olaf ferociously swings his axes, dealing <trueDamage>{{ totaldamage }} true damage</trueDamage>. If the enemy dies, the cost is refunded.<br /><br />Attacks lower the Cooldown of this Ability by 1 second.",
           "leveltip": {
             "label": [
               "Damage",
@@ -525,13 +519,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "attackdamage",
-              "coeff": 0.5,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": "Health",
           "maxammo": "-1",
           "range": [
@@ -557,7 +545,7 @@
           "id": "OlafRagnarok",
           "name": "Ragnarok",
           "description": "Olaf temporarily becomes immune to disables.",
-          "tooltip": "<spellPassive>Passive: </spellPassive>Olaf gains {{ resists }} Armor and {{ resists }} Magic Resist.<br /><br /><spellPassive>Active: </spellPassive>Olaf removes all disables from himself and becomes immune to them for the next {{ duration }} seconds. Olaf also receives a {{ haste*100 }}% Movement Speed bonus towards enemy champions for {{ hasteduration }} second. During this time, Olaf loses the passive portion of Ragnarok and gains {{ ad }} Attack Damage.",
+          "tooltip": "<spellPassive>Passive: </spellPassive>Olaf gains <scaleArmor>{{ resists }} Armor</scaleArmor> and <scaleMR>{{ resists }} Magic Resist</scaleMR>.<br /><br /><spellActive>Active: </spellActive>Olaf ends all <status>Immobilizing</status> and <status>Disabling</status> effects on himself and can't be effected by them for the next {{ duration }} seconds. While active, Olaf loses this Ability's <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> and instead gains <attackDamage>{{ ad }} Attack Damage</attackDamage>. Olaf also gains <speed>{{ haste*100 }}% Movement Speed</speed> towards enemy champions for {{ hasteduration }} second.",
           "leveltip": {
             "label": [
               "Armor and Magic Resist",
@@ -879,18 +867,51 @@
               ],
               "items": [
                 {
-                  "id": "2051",
+                  "id": "1055",
                   "count": 1,
                   "hideCount": false
                 },
+                {
+                  "id": "2003",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
                 {
                   "id": "1001",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "2003",
-                  "count": 3,
+                  "id": "3067",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3057",
+                  "count": 1,
                   "hideCount": false
                 }
               ]
@@ -912,12 +933,7 @@
               ],
               "items": [
                 {
-                  "id": "3071",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3111",
+                  "id": "3078",
                   "count": 1,
                   "hideCount": false
                 },
@@ -925,100 +941,26 @@
                   "id": "3053",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
+                },
                 {
-                  "id": "3078",
+                  "id": "3153",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3074",
+                  "id": "3026",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3005",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3065",
+                  "id": "3071",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3143",
+                  "id": "3742",
                   "count": 1,
                   "hideCount": false
-                },
-                {
-                  "id": "3800",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2033",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2138",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }
@@ -1749,34 +1691,6 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2033",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3340",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "startingjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
               "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
@@ -1787,12 +1701,12 @@
               ],
               "items": [
                 {
-                  "id": "1039",
+                  "id": "1055",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "2031",
+                  "id": "2003",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1810,39 +1724,6 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "1001",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3044",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3067",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "early",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
               "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
@@ -1853,17 +1734,17 @@
               ],
               "items": [
                 {
-                  "id": "3706",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
                   "id": "1001",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3133",
+                  "id": "3067",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3057",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1876,34 +1757,6 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3047",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3071",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essentialjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
               "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
@@ -1914,40 +1767,17 @@
               ],
               "items": [
                 {
-                  "id": "1400",
+                  "id": "3078",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3047",
+                  "id": "3053",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3071",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3065",
+                  "id": "3153",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1957,30 +1787,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3053",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3800",
+                  "id": "3071",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1988,39 +1795,6 @@
                   "id": "3742",
                   "count": 1,
                   "hideCount": false
-                },
-                {
-                  "id": "3110",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2138",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }

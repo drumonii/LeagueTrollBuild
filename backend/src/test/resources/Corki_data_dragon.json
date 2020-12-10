@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "Corki": {
       "id": "Corki",
@@ -103,8 +103,8 @@
       "stats": {
         "hp": 518,
         "hpperlevel": 87,
-        "mp": 350.16,
-        "mpperlevel": 34,
+        "mp": 350,
+        "mpperlevel": 54,
         "movespeed": 325,
         "armor": 28,
         "armorperlevel": 3.5,
@@ -127,7 +127,7 @@
           "id": "PhosphorusBomb",
           "name": "Phosphorus Bomb",
           "description": "Corki fires a flash bomb at a target location, dealing magic damage to enemies in the area. This attack additionally reveals units in the area for a duration.",
-          "tooltip": "Corki lobs a bomb, dealing <magicDamage>{{ e1 }} <scaleAD>(+{{ a1 }})</scaleAD> <scaleAP>(+{{ a1 }})</scaleAP> magic damage</magicDamage> to enemies in the target area. In addition, the blast reveals the area and champions hit by the blast for {{ e2 }} seconds (does not reveal stealth).",
+          "tooltip": "Corki lobs a bomb, dealing <magicDamage>{{ e1 }} <scaleAD>(+{{ qbonusad }})</scaleAD> <scaleAP>(+{{ qbonusap }})</scaleAP> magic damage</magicDamage> to enemies in the target area. In addition, the blast reveals the area and champions hit by the blast for {{ e2 }} seconds (does not reveal stealth).",
           "leveltip": {
             "label": [
               "Damage",
@@ -242,18 +242,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "bonusattackdamage",
-              "coeff": 0.5,
-              "key": "a1"
-            },
-            {
-              "link": "spelldamage",
-              "coeff": 0.5,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -683,7 +672,7 @@
       ],
       "passive": {
         "name": "Hextech Munitions",
-        "description": "Corki's basic attack deals a percentage of their damage as magic instead of physical. Every once in a while, The Package arrives in Corki's base to be picked up, temporarily granting him out of combat Movement Speed and upgrading Valkyrie into Special Delivery.",
+        "description": "A percentage of Corki's basic attack damage is converted into <magicDamage>magic damage</magicDamage>.<br><br>Corki can occasionally retrieve The Package inside his base, granting him movement speed and an empowered cast of Valkyrie.",
         "image": {
           "full": "Corki_RapidReload.png",
           "sprite": "passive0.png",
@@ -866,7 +855,7 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
+              "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
                 ""
@@ -876,13 +865,51 @@
               ],
               "items": [
                 {
-                  "id": "3044",
+                  "id": "1055",
                   "count": 1,
                   "hideCount": false
                 },
                 {
                   "id": "2003",
-                  "count": 3,
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "1001",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "6670",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1037",
+                  "count": 1,
                   "hideCount": false
                 }
               ]
@@ -904,40 +931,17 @@
               ],
               "items": [
                 {
-                  "id": "3078",
+                  "id": "3006",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3020",
+                  "id": "6672",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3031",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3508",
+                  "id": "3046",
                   "count": 1,
                   "hideCount": false
                 },
@@ -947,106 +951,12 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3135",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
                   "id": "3072",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3139",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3156",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offmeta",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3008",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3007",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3124",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2140",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2033",
+                  "id": "3026",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1837,17 +1747,17 @@
               ],
               "items": [
                 {
-                  "id": "3057",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3044",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
                   "id": "1001",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "6670",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1037",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1870,12 +1780,12 @@
               ],
               "items": [
                 {
-                  "id": "3078",
+                  "id": "3006",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3020",
+                  "id": "6672",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1883,27 +1793,9 @@
                   "id": "3046",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
+                },
                 {
-                  "id": "3031",
+                  "id": "3094",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1913,70 +1805,9 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3508",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
                   "id": "3026",
                   "count": 1,
                   "hideCount": false
-                },
-                {
-                  "id": "3135",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3139",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2140",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }

@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "Illaoi": {
       "id": "Illaoi",
@@ -34,6 +34,12 @@
           "id": "420002",
           "num": 2,
           "name": "Resistance Illaoi",
+          "chromas": true
+        },
+        {
+          "id": "420010",
+          "num": 10,
+          "name": "Cosmic Invoker Illaoi",
           "chromas": true
         }
       ],
@@ -89,7 +95,7 @@
           "id": "IllaoiQ",
           "name": "Tentacle Smash",
           "description": "Increases the damage dealt by Tentacles. When activated, Illaoi smashes down a Tentacle that deals physical damage.",
-          "tooltip": "<scaleAD>Passive:</scaleAD> <span class=\"color85FFAD\">Slam</span> damage is increased by {{ e6 }}% (<scaleAD>{{ f1 }}</scaleAD>).<br /><br /><scaleAD>Active:</scaleAD> Illaoi swings her idol, causing a Tentacle to <span class=\"color85FFAD\">Slam</span> forward.",
+          "tooltip": "<passive>Passive:</passive> <keywordMajor>Slam</keywordMajor> damage is increased by <physicalDamage>{{ tentacledamageamp*100 }}%</physicalDamage> (currently <physicalDamage>{{ f1 }} physical damage</physicalDamage>).<br /><br /><active>Active:</active> Illaoi swings her idol, causing a Tentacle to <keywordMajor>Slam</keywordMajor> forward.",
           "leveltip": {
             "label": [
               "Slam Bonus",
@@ -158,11 +164,11 @@
               5
             ],
             [
-              10,
-              15,
-              20,
-              25,
-              30
+              0.1,
+              0.15,
+              0.2,
+              0.25,
+              0.3
             ],
             [
               1.2,
@@ -200,7 +206,7 @@
             "800",
             "10/8/6/4/2",
             "5",
-            "10/15/20/25/30",
+            "0.1/0.15/0.2/0.25/0.3",
             "1.2",
             "-0.3/-0.35/-0.4/-0.45/-0.5",
             "1.5",
@@ -232,7 +238,7 @@
           "id": "IllaoiW",
           "name": "Harsh Lesson",
           "description": "Illaoi leaps to her target, dealing physical damage and causing nearby Tentacles to also swing at the target.",
-          "tooltip": "Illaoi leaps at her target on her next basic attack, dealing bonus <physicalDamage>physical damage</physicalDamage> equal to <scaleAD>{{ f1*100 }}%</scaleAD> of their maximum health [{{ e1 }}% + {{ f2*100 }}% per 100 attack damage].<br /><br />When she strikes, nearby Tentacles will <span class=\"color85FFAD\">Slam</span> at the target.<br /><br /><span class=\"color919191\"><i>Harsh Lesson's bonus damage does a minimum of {{ wmindamage }} damage. Against monsters the damage is capped at {{ e3 }}.</i></span>",
+          "tooltip": "Illaoi's next Attack causes her to leap at the target, dealing an additional <physicalDamage>{{ healthpercenttotaltooltip }} max Health physical damage</physicalDamage>. When she strikes, nearby Tentacles will <keywordMajor>Slam</keywordMajor> at the target.",
           "leveltip": {
             "label": [
               "Damage",
@@ -264,11 +270,11 @@
           "effect": [
             null,
             [
-              3,
-              3.5,
-              4,
-              4.5,
-              5
+              0.03,
+              0.035,
+              0.04,
+              0.045,
+              0.05
             ],
             [
               2,
@@ -336,7 +342,7 @@
           ],
           "effectBurn": [
             null,
-            "3/3.5/4/4.5/5",
+            "0.03/0.035/0.04/0.045/0.05",
             "2",
             "300",
             "6",
@@ -373,7 +379,7 @@
           "id": "IllaoiE",
           "name": "Test of Spirit",
           "description": "Illaoi rips the spirit from a foe's body, forcing it to stand before her. Spirits echo a percentage of the damage they take to the original target. If killed, or if the target gets too far from the spirit, the target will become a <font color='#669900'>Vessel</font> and begin spawning Tentacles.",
-          "tooltip": "Illaoi pulls the spirit from an enemy champion for {{ e3 }} seconds. The spirit can be attacked, with {{ e1 }}% <scaleAD>(+{{ f5 }}%)</scaleAD> of the damage taken echoing to its owner.<br /><br />If the spirit dies or the target leaves its range, the target becomes a <span class=\"color669900\">Vessel</span> for {{ e2 }} seconds and is slowed by {{ e8 }}% for {{ e5 }} seconds. <span class=\"color669900\">Vessels</span> spawn Tentacles every <scaleLevel>{{ f1 }}</scaleLevel> seconds if no other Tentacles are nearby.<br /><br />Tentacles will automatically <span class=\"color85FFAD\">Slam</span> at spirits and <span class=\"color669900\">Vessels</span> once every {{ timebetweenvesseltentacleslams }} seconds.",
+          "tooltip": "Illaoi pulls the spirit from an enemy champion for {{ spiritduration }} seconds. The spirit can be damaged like a champion, with {{ echopercenttooltiponly }} of that damage echoing to its owner.<br /><br />If the spirit dies or the target leaves its range, the target becomes marked for {{ vesselduration }} seconds and is <status>Slowed</status> by {{ slowamount*100 }}% for {{ slowduration }} seconds. Marked enemies spawn Tentacles every <scaleLevel>{{ f1 }}</scaleLevel> seconds.<br /><br />Tentacles will automatically <keywordMajor>Slam</keywordMajor> at spirits and marked enemies once every {{ timebetweenvesseltentacleslams }} seconds.",
           "leveltip": {
             "label": [
               "Damage Echo",
@@ -516,7 +522,7 @@
           "id": "IllaoiR",
           "name": "Leap of Faith",
           "description": "Illaoi smashes her idol into the ground, dealing physical damage to nearby enemies. A Tentacle spawns for each enemy champion hit.",
-          "tooltip": "Illaoi smashes her idol into the ground, dealing <physicalDamage>{{ damagecalc }} physical damage</physicalDamage> to nearby enemies and spawning a Tentacle for each enemy champion hit.<br /><br />For the next {{ duration }} seconds Tentacles are untargetable and will <span class=\"color85FFAD\">Slam</span> 50% faster, and Harsh Lesson has a 2 second cooldown.<br /><br /><span class=\"colorcccccc\"><i>'There are kind and gentle gods. Mine isn't one of those.'</i></span>",
+          "tooltip": "Illaoi smashes her idol into the ground, dealing <physicalDamage>{{ damagecalc }} physical damage</physicalDamage> to nearby enemies and spawning a Tentacle for each enemy champion hit.<br /><br />For the next {{ duration }} seconds, Tentacles are untargetable and <keywordMajor>Slam</keywordMajor> 50% faster, and <spellName>Harsh Lesson</spellName> has a 2 second cooldown.",
           "leveltip": {
             "label": [
               "Damage",
@@ -671,18 +677,51 @@
               ],
               "items": [
                 {
-                  "id": "2051",
+                  "id": "1055",
                   "count": 1,
                   "hideCount": false
                 },
+                {
+                  "id": "2003",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
                 {
                   "id": "1001",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "2003",
-                  "count": 3,
+                  "id": "3067",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3057",
+                  "count": 1,
                   "hideCount": false
                 }
               ]
@@ -704,12 +743,7 @@
               ],
               "items": [
                 {
-                  "id": "3071",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3111",
+                  "id": "3078",
                   "count": 1,
                   "hideCount": false
                 },
@@ -717,60 +751,19 @@
                   "id": "3053",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
+                },
                 {
-                  "id": "3812",
+                  "id": "3153",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3748",
+                  "id": "3026",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3156",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3065",
+                  "id": "3071",
                   "count": 1,
                   "hideCount": false
                 },
@@ -778,39 +771,6 @@
                   "id": "3742",
                   "count": 1,
                   "hideCount": false
-                },
-                {
-                  "id": "3161",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2138",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }
@@ -1484,7 +1444,7 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
+              "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
                 ""
@@ -1511,12 +1471,12 @@
               ]
             },
             {
-              "type": "startingjungle",
+              "type": "early",
               "recMath": false,
               "recSteps": false,
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
+              "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
@@ -1527,17 +1487,17 @@
               ],
               "items": [
                 {
-                  "id": "1041",
+                  "id": "1001",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "2031",
+                  "id": "3067",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3340",
+                  "id": "3057",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1550,34 +1510,6 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3111",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3071",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essentialjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
               "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
@@ -1588,78 +1520,17 @@
               ],
               "items": [
                 {
-                  "id": "1401",
+                  "id": "3078",
                   "count": 1,
                   "hideCount": false
                 },
-                {
-                  "id": "3111",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3071",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
                 {
                   "id": "3053",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3812",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3078",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3742",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3065",
+                  "id": "3153",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1667,34 +1538,16 @@
                   "id": "3026",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
+                },
                 {
-                  "id": "2033",
+                  "id": "3071",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "2138",
+                  "id": "3742",
                   "count": 1,
-                  "hideCount": true
+                  "hideCount": false
                 }
               ]
             }

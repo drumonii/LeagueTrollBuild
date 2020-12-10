@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "Vi": {
       "id": "Vi",
@@ -12,7 +12,7 @@
         "full": "Vi.png",
         "sprite": "champion4.png",
         "group": "champion",
-        "x": 96,
+        "x": 240,
         "y": 48,
         "w": 48,
         "h": 48
@@ -65,6 +65,12 @@
           "num": 12,
           "name": "Heartbreaker Vi",
           "chromas": true
+        },
+        {
+          "id": "254020",
+          "num": 20,
+          "name": "PsyOps Vi",
+          "chromas": true
         }
       ],
       "lore": "Once a criminal from the mean streets of Zaun, Vi is a hotheaded, impulsive, and fearsome woman with only a very loose respect for authority figures. Growing up all but alone, Vi developed finely honed survival instincts as well as a wickedly abrasive sense of humor. Now working with the Wardens of Piltover to keep the peace, she wields mighty hextech gauntlets that can punch through walls and suspects with equal ease.",
@@ -94,7 +100,7 @@
         "hp": 585,
         "hpperlevel": 85,
         "mp": 295,
-        "mpperlevel": 45,
+        "mpperlevel": 65,
         "movespeed": 340,
         "armor": 30,
         "armorperlevel": 4,
@@ -117,7 +123,7 @@
           "id": "ViQ",
           "name": "Vault Breaker",
           "description": "Vi charges her gauntlets and unleashes a vault shattering punch, carrying her forward. Enemies she hits are knocked back and receive a stack of Denting Blows.",
-          "tooltip": "Charges a powerful punch that carries Vi forward.<br /><br /><spellPassive>First Cast:</spellPassive> Slows Movement Speed by {{ e4 }}% while increasing damage and dash range over 1.25 seconds.<br /><br /><spellPassive>Second Cast:</spellPassive> Dashes forward dealing {{ e1 }} <scaleAD>(+{{ f3 }})</scaleAD> to {{ f2 }} <scaleAD>(+{{ f1 }})</scaleAD> physical damage and applying Denting Blows to all enemies hit. Stops upon colliding with an enemy champion, knocking it back.",
+          "tooltip": "<charge>Begin Charging:</charge> Vi begins charging a powerful punch, <status>Slowing</status> herself by {{ e4 }}%.<br /><br /><release>Release:</release> Vi dashes forward dealing between <physicalDamage>{{ totaldamagetooltip }} and {{ maxdamagetooltip }} physical damage</physicalDamage> based on charge time and applying <spellName>Denting Blows</spellName> to all enemies hit. Vi stops upon colliding with an enemy champion, and <status>Knocks</status> them <status>Back</status>.",
           "leveltip": {
             "label": [
               "Minimum Damage",
@@ -236,13 +242,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "bonusattackdamage",
-              "coeff": 1.4,
-              "key": "f1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -257,8 +257,8 @@
             "full": "ViQ.png",
             "sprite": "spell13.png",
             "group": "spell",
-            "x": 96,
-            "y": 96,
+            "x": 192,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -268,7 +268,7 @@
           "id": "ViW",
           "name": "Denting Blows",
           "description": "Vi's punches break her opponent's Armor, dealing bonus damage and granting her Attack Speed.",
-          "tooltip": "Every 3rd attack on the same target deals an additional {{ e1 }}% <scaleAD>(+{{ f1 }}%)</scaleAD> of the target's maximum Health as physical damage, reduces its Armor by {{ e3 }}% and grants Vi {{ e2 }}% Attack Speed for {{ e4 }} seconds (max {{ e5 }} damage vs. monsters).<br /><br />Triggering Denting Blows reduces the cooldown of Blast Shield by 3 seconds.",
+          "tooltip": "<spellPassive>Passive:</spellPassive> Every 3rd Attack on the same target deals an additional <physicalDamage>{{ totaldamagetooltip }} max Health physical damage</physicalDamage>, removes <scaleArmor>{{ e3 }}% Armor</scaleArmor> and grants Vi <attackSpeed>{{ e2 }}% Attack Speed</attackSpeed> for {{ e4 }} seconds. It also reduces the remaining cooldown of <spellName>Blast Shield</spellName> by 3 seconds.",
           "leveltip": {
             "label": [
               "Maximum Health Damage",
@@ -383,13 +383,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "@special.viw",
-              "coeff": 35,
-              "key": "f1"
-            }
-          ],
+          "vars": [],
           "costType": "Passive",
           "maxammo": "-1",
           "range": [
@@ -404,8 +398,8 @@
             "full": "ViW.png",
             "sprite": "spell13.png",
             "group": "spell",
-            "x": 144,
-            "y": 96,
+            "x": 240,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -415,7 +409,7 @@
           "id": "ViE",
           "name": "Excessive Force",
           "description": "Vi's next attack blasts through her target, dealing damage to enemies behind it.",
-          "tooltip": "Causes next basic attack to deal {{ e1 }} <scaleAD>(+{{ f3 }})</scaleAD> <scaleAP>(+{{ a1 }})</scaleAP> physical damage to the target and enemies behind it.<br /><br />Vi charges a new punch every <scaleLevel>{{ ammorechargetime }}</scaleLevel> seconds and can hold 2 charges at once.",
+          "tooltip": "Vi's next Attack deals <physicalDamage>{{ totaldamagetooltip }} physical damage</physicalDamage> to the target and enemies behind them.<br /><br />This Ability has 2 charges ({{ ammorechargetime }} second refresh).",
           "leveltip": {
             "label": [
               "Damage",
@@ -532,18 +526,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "attackdamage",
-              "coeff": 1.15,
-              "key": "f3"
-            },
-            {
-              "link": "spelldamage",
-              "coeff": 0.9,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "2",
           "range": [
@@ -558,8 +541,8 @@
             "full": "ViE.png",
             "sprite": "spell13.png",
             "group": "spell",
-            "x": 192,
-            "y": 96,
+            "x": 288,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -569,7 +552,7 @@
           "id": "ViR",
           "name": "Assault and Battery",
           "description": "Vi runs down an enemy, knocking aside anyone in the way. When she reaches her target she knocks it into the air, jumps after it, and slams it back into the ground.",
-          "tooltip": "Targets an enemy champion and chases it down, knocking it up for {{ rstunduration }} seconds. Deals <physicalDamage>{{ damage }}</physicalDamage> physical damage.<br /><br />While charging, Vi cannot be stopped and has <span class=\"coloree91d7\">True Sight</span> of the target. Any enemies in the way are dealt damage, knocked aside, and stunned for {{ secondarytargetstunduration }} seconds.",
+          "tooltip": "Vi singles out an enemy champion, revealing them and dashing unstoppably towards them. Upon reaching them, Vi <status>Knocks</status> them <status>Up</status> for {{ rstunduration }} seconds and deals <physicalDamage>{{ damage }} physical damage</physicalDamage>.<br /><br />Any other enemies Vi collides with are dealt damage, knocked aside, and <status>Stunned</status> for {{ secondarytargetstunduration }} seconds.",
           "leveltip": {
             "label": [
               "Base Damage",
@@ -675,8 +658,8 @@
             "full": "ViR.png",
             "sprite": "spell13.png",
             "group": "spell",
-            "x": 240,
-            "y": 96,
+            "x": 336,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -690,7 +673,7 @@
           "full": "ViPassive.png",
           "sprite": "passive4.png",
           "group": "passive",
-          "x": 96,
+          "x": 240,
           "y": 48,
           "w": 48,
           "h": 48
@@ -839,13 +822,51 @@
               ],
               "items": [
                 {
-                  "id": "3044",
+                  "id": "1055",
                   "count": 1,
                   "hideCount": false
                 },
                 {
                   "id": "2003",
-                  "count": 3,
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "1001",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3067",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3057",
+                  "count": 1,
                   "hideCount": false
                 }
               ]
@@ -872,68 +893,22 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3111",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
                   "id": "3053",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
+                },
                 {
-                  "id": "3748",
+                  "id": "3153",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3142",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3156",
+                  "id": "3026",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3143",
+                  "id": "3071",
                   "count": 1,
                   "hideCount": false
                 },
@@ -941,34 +916,6 @@
                   "id": "3742",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2140",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }
@@ -1853,7 +1800,7 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
+              "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
                 ""
@@ -1863,7 +1810,7 @@
               ],
               "items": [
                 {
-                  "id": "1054",
+                  "id": "1055",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1886,7 +1833,7 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
+              "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
                 ""
@@ -1896,17 +1843,17 @@
               ],
               "items": [
                 {
-                  "id": "3057",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3044",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
                   "id": "1001",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3067",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3057",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1919,7 +1866,7 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
+              "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
                 ""
@@ -1928,11 +1875,6 @@
                 ""
               ],
               "items": [
-                {
-                  "id": "3047",
-                  "count": 1,
-                  "hideCount": false
-                },
                 {
                   "id": "3078",
                   "count": 1,
@@ -1942,197 +1884,9 @@
                   "id": "3053",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3142",
-                  "count": 1,
-                  "hideCount": false
                 },
                 {
-                  "id": "3147",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3179",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3181",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3143",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3742",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3065",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "startingjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "1041",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2031",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3340",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "earlyjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3706",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3133",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "1001",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essentialjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "1400",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3047",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3078",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3053",
+                  "id": "3153",
                   "count": 1,
                   "hideCount": false
                 },
@@ -2142,70 +1896,14 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3812",
+                  "id": "3071",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
+                },
                 {
                   "id": "3742",
                   "count": 1,
                   "hideCount": false
-                },
-                {
-                  "id": "3083",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3194",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2140",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }

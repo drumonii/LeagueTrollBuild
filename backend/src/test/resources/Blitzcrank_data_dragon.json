@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "Blitzcrank": {
       "id": "Blitzcrank",
@@ -139,7 +139,7 @@
           "id": "RocketGrab",
           "name": "Rocket Grab",
           "description": "Blitzcrank fires his right hand to grab an opponent on its path, dealing damage and dragging it back to him.",
-          "tooltip": "Blitzcrank fires his right hand. If it encounters an enemy unit it will stun them and deal <magicDamage>{{ totaldamage }} magic damage</magicDamage> while he pulls them to himself.",
+          "tooltip": "Blitzcrank fires his right hand, <status>Pulling</status> the first enemy hit towards him and dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage>.",
           "leveltip": {
             "label": [
               "Damage",
@@ -280,7 +280,7 @@
           "id": "Overdrive",
           "name": "Overdrive",
           "description": "Blitzcrank super charges himself to get dramatically increased Movement and Attack Speed. He is temporarily slowed after the effect ends.",
-          "tooltip": "Blitzcrank supercharges himself, gaining {{ initialms }}% Movement Speed and {{ e2 }}% Attack Speed for {{ e4 }} seconds. The Movement Speed bonus decays over the duration.<br /><br />When Overdrive ends, Blitzcrank's Movement Speed is slowed by {{ e3 }}% for {{ e5 }} seconds.",
+          "tooltip": "Blitzcrank supercharges himself, gaining <speed>{{ initialms }}% decaying Move Speed</speed> and <attackSpeed>{{ e2 }}% Attack Speed</attackSpeed> for {{ e4 }} seconds. Afterwards, Blitzcrank is <status>Slowed</status> by {{ e3 }}% for {{ e5 }} seconds.",
           "leveltip": {
             "label": [
               "Movement Speed",
@@ -421,7 +421,7 @@
           "id": "PowerFist",
           "name": "Power Fist",
           "description": "Blitzcrank charges up his fist to make his next attack deal double damage and pop his target up in the air.",
-          "tooltip": "Blitzcrank charges up his fist to make his next attack deal double his total attack damage as physical damage and pop his target up in the air.",
+          "tooltip": "Blitzcrank charges up his fist, causing his next Attack to <status>Knock Up</status> and deal <physicalDamage>{{ attackdamagett }} physical damage</physicalDamage>.",
           "leveltip": {
             "label": [
               "Cooldown"
@@ -560,7 +560,7 @@
           "id": "StaticField",
           "name": "Static Field",
           "description": "Enemies attacked by Blitzcrank are marked and take lightning damage after 1 second. Additionally, Blitzcrank can activate this ability to remove nearby enemies' shields, damage them, and silence them briefly.",
-          "tooltip": "<spellPassive>Passive: </spellPassive>While this spell is available, lightning charges Blitzcrank's fists, marking enemies. After 1 second, they are shocked for <magicDamage>{{ passivedamage }} magic damage</magicDamage>. This stacks up to {{ maxstacks }} times.<br /><br /><spellPassive>Active: </spellPassive>Destroys damage shields on nearby enemies, deals <magicDamage>{{ activedamage }} magic damage</magicDamage>, and silences for 0.75 seconds.",
+          "tooltip": "<spellPassive>Passive: </spellPassive>While this ability is available, lightning charges Blitzcrank's fists, marking those he Attacks. After 1 second, they are shocked for <magicDamage>{{ passivedamage }} magic damage</magicDamage>.<br /><br /><spellActive>Active: </spellActive>Blitzcrank overcharges, dealing <magicDamage>{{ activedamage }} magic damage</magicDamage> and <status>Silencing</status> nearby enemies for 0.75 seconds. Their shields are also destroyed.",
           "leveltip": {
             "label": [
               "Passive Base Damage",
@@ -853,12 +853,50 @@
               ],
               "items": [
                 {
-                  "id": "3010",
+                  "id": "3858",
                   "count": 1,
                   "hideCount": false
                 },
                 {
+                  "id": "2003",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
                   "id": "1001",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3067",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3105",
                   "count": 1,
                   "hideCount": false
                 }
@@ -881,111 +919,32 @@
               ],
               "items": [
                 {
-                  "id": "3029",
+                  "id": "3190",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3001",
+                  "id": "3009",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3158",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3089",
+                  "id": "3050",
                   "count": 1,
                   "hideCount": false
                 },
-                {
-                  "id": "3135",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3100",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
                 {
                   "id": "3109",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "2065",
+                  "id": "3110",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3025",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2139",
+                  "id": "3001",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1664,13 +1623,13 @@
               ],
               "items": [
                 {
-                  "id": "3854",
+                  "id": "3858",
                   "count": 1,
                   "hideCount": false
                 },
                 {
                   "id": "2003",
-                  "count": 2,
+                  "count": 1,
                   "hideCount": false
                 },
                 {
@@ -1702,12 +1661,12 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3024",
+                  "id": "3067",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3067",
+                  "id": "3105",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1730,7 +1689,12 @@
               ],
               "items": [
                 {
-                  "id": "3117",
+                  "id": "3190",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3009",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1743,65 +1707,9 @@
                   "id": "3109",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3190",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3193",
-                  "count": 1,
-                  "hideCount": false
                 },
                 {
                   "id": "3110",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3800",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3025",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1809,34 +1717,6 @@
                   "id": "3001",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2138",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }

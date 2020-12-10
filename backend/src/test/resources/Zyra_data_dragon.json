@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "Zyra": {
       "id": "Zyra",
@@ -10,10 +10,10 @@
       "title": "Rise of the Thorns",
       "image": {
         "full": "Zyra.png",
-        "sprite": "champion4.png",
+        "sprite": "champion5.png",
         "group": "champion",
-        "x": 432,
-        "y": 96,
+        "x": 96,
+        "y": 0,
         "w": 48,
         "h": 48
       },
@@ -113,15 +113,15 @@
           "id": "ZyraQ",
           "name": "Deadly Spines",
           "description": "Thick vines spread through the ground and explode into spines, dealing magic damage to enemies within the area. If cast near a seed, Deadly Spines grows a Thorn Spitter plant, which fires at enemies from afar.",
-          "tooltip": "Thick vines spread through the ground and explode into spines, dealing {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage to enemies within the area. <br /><br /><span class=\"colorDDDD77\">Garden of Thorns: </span>If Deadly Spines is cast near a seed, a Thorn Spitter grows, dealing {{ f1 }} <scaleAP>(+{{ a2 }})</scaleAP> magic damage. A Thorn Spitter has 575 range and lasts {{ f2 }} seconds.",
+          "tooltip": "Zyra causes thick vines to spread and explode into spines, dealing <magicDamage>{{ initialdamage }} magic damage</magicDamage>.<br /><br />If this Ability is cast near a <keywordMajor>Seed</keywordMajor>, the <keywordMajor>Seed</keywordMajor> grows into a Thorn Spitter that deals <magicDamage>{{ spell.zyrap:plantdamage }} magic damage</magicDamage> and lasts {{ f2 }} seconds. Thorn Spitters have 575 range.",
           "leveltip": {
             "label": [
-              "Damage",
-              "Cooldown"
+              "Cooldown",
+              "Damage"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
-              "{{ cooldown }} -> {{ cooldownNL }}"
+              "{{ cooldown }} -> {{ cooldownNL }}",
+              "{{ e1 }} -> {{ e1NL }}"
             ]
           },
           "maxrank": 5,
@@ -228,18 +228,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.6,
-              "key": "a1"
-            },
-            {
-              "link": "spelldamage",
-              "coeff": 0.15,
-              "key": "a2"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -254,8 +243,8 @@
             "full": "ZyraQ.png",
             "sprite": "spell15.png",
             "group": "spell",
-            "x": 0,
-            "y": 48,
+            "x": 96,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -265,7 +254,7 @@
           "id": "ZyraW",
           "name": "Rampant Growth",
           "description": "Zyra plants a seed, lasting up to 60 seconds. Deadly Spines and Grasping Roots cast near seeds will turn them into plants who fight for Zyra. Zyra can store multiple seeds at once, and killing enemies reduces Rampant Growth's recharge time.",
-          "tooltip": "Plants a seed, lasting {{ e6 }} seconds. If an enemy Champion steps on a seed, it dies. Seeds spawned by Rampant Growth grant vision in a small area, and if stepped on they grant <span class=\"coloree91d7\">True Sight</span> of the enemy champion for {{ e3 }} seconds.<br /><br />Zyra stores a seed every <scaleLevel>{{ ammorechargetime }}</scaleLevel> seconds (Max: 8 seeds planted). Each time she kills an enemy, Rampant Growth's recharge time is reduced by {{ e1 }}% ({{ e2 }}% for champion takedowns, large minion kills, and large monster kills).",
+          "tooltip": "Zyra plants a <keywordMajor>Seed</keywordMajor> that lasts {{ e6 }} seconds. These <keywordMajor>Seeds</keywordMajor> grant <keywordStealth>True Sight</keywordStealth> of enemy champions that step on them for {{ e3 }} seconds, but are still destroyed.<br /><br />This Ability has 2 charges with a {{ ammorechargetime }} second recharge time. Killing an enemy reduces the recharge time by {{ e1 }}%. Champion takedowns, large jungle monster kills, and large minion kills reduce the recharge time by {{ e2 }}% instead.",
           "leveltip": {
             "label": [
               "Seed Recharge Rate"
@@ -393,8 +382,8 @@
             "full": "ZyraW.png",
             "sprite": "spell15.png",
             "group": "spell",
-            "x": 48,
-            "y": 48,
+            "x": 144,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -404,17 +393,17 @@
           "id": "ZyraE",
           "name": "Grasping Roots",
           "description": "Zyra sends forth vines through the ground to ensnare her target, dealing damage and rooting enemies they come across. If cast near a seed, Grasping Roots grows a Vine Lasher, whose short range attacks reduce enemy Movement Speed.",
-          "tooltip": "Sends forward vines dealing {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage and rooting enemies for {{ e5 }} second(s).<br /><br /><span class=\"colorDDDD77\">Garden of Thorns: </span>If Grasping Roots passes near a seed, a Vine Lasher grows dealing {{ f1 }} <scaleAP>(+{{ a2 }})</scaleAP> magic damage and slowing enemies by {{ e2 }}% for {{ e3 }} seconds. Slows from multiple Vine Lashers stack up to {{ maxslowstacks }} times. A Vine Lasher has 400 range and lasts {{ f2 }} seconds.",
+          "tooltip": "Zyra sends vines forward, <status>Rooting</status> for {{ e5 }} second(s) and dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage>. <br /><br />If this Ability passes near a <keywordMajor>Seed</keywordMajor>, the <keywordMajor>Seed</keywordMajor> grows into a Vine Lasher that deals <magicDamage>{{ spell.zyrap:plantdamage }} magic damage</magicDamage> and lasts {{ f2 }} seconds. Vine Lashers have 400 range, and their Attacks <status>Slow</status> by {{ e2 }}% for {{ e3 }} seconds. The <status>Slow</status> from multiple Vine Lashers stacks up to {{ maxslowstacks }} times.",
           "leveltip": {
             "label": [
-              "Damage",
+              "@AbilityResourceName@ Cost",
               "Root Duration",
-              "@AbilityResourceName@ Cost"
+              "Damage"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
+              "{{ cost }} -> {{ costNL }}",
               "{{ e5 }} -> {{ e5NL }}",
-              "{{ cost }} -> {{ costNL }}"
+              "{{ e1 }} -> {{ e1NL }}"
             ]
           },
           "maxrank": 5,
@@ -521,18 +510,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.5,
-              "key": "a1"
-            },
-            {
-              "link": "spelldamage",
-              "coeff": 0.15,
-              "key": "a2"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -547,8 +525,8 @@
             "full": "ZyraE.png",
             "sprite": "spell15.png",
             "group": "spell",
-            "x": 96,
-            "y": 48,
+            "x": 192,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -558,15 +536,15 @@
           "id": "ZyraR",
           "name": "Stranglethorns",
           "description": "Zyra summons a twisted thicket at her target location, dealing damage to enemies as it expands and knocking them airborne as it contracts. Plants within the thicket are enraged.",
-          "tooltip": "Summons the fury of nature, growing a twisted thicket at target location which deals {{ e3 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage to all enemies in the area as it expands. After 2 seconds, the vines snap upward knocking enemies into the air for {{ e1 }} second.<br /><br /><span class=\"colorDDDD77\">Garden of Thorns: </span>Plants within the thicket are enraged, resetting their duration, gaining {{ e2 }}% Health and attacking in a flurry for {{ e7 }}% total damage.",
+          "tooltip": "Zyra summons the fury of nature, growing a twisted thicket that deals <magicDamage>{{ totaldamage }} magic damage</magicDamage>. After 2 seconds, the vines snap upwards, <status>Knocking Up</status> for {{ e1 }} second.<br /><br />Zyra's plants within the ticket become enraged, resetting their duration, gaining <healing>{{ e2 }}% Health</healing> and Attacking for {{ plantdamagebonus }}% bonus damage.",
           "leveltip": {
             "label": [
-              "Damage",
-              "Cooldown"
+              "Cooldown",
+              "Damage"
             ],
             "effect": [
-              "{{ e3 }} -> {{ e3NL }}",
-              "{{ cooldown }} -> {{ cooldownNL }}"
+              "{{ cooldown }} -> {{ cooldownNL }}",
+              "{{ e3 }} -> {{ e3NL }}"
             ]
           },
           "maxrank": 3,
@@ -649,13 +627,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.7,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -668,8 +640,8 @@
             "full": "ZyraR.png",
             "sprite": "spell15.png",
             "group": "spell",
-            "x": 144,
-            "y": 48,
+            "x": 240,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -681,10 +653,10 @@
         "description": "Seeds spawn around Zyra periodically, becoming faster with level. Zyra can cast Deadly Spines or Grasping Roots near seeds to grow plants, who fight for Zyra.",
         "image": {
           "full": "ZyraP.png",
-          "sprite": "passive4.png",
+          "sprite": "passive5.png",
           "group": "passive",
-          "x": 432,
-          "y": 96,
+          "x": 96,
+          "y": 0,
           "w": 48,
           "h": 48
         }
@@ -823,13 +795,51 @@
               ],
               "items": [
                 {
-                  "id": "3802",
+                  "id": "1056",
                   "count": 1,
                   "hideCount": false
                 },
                 {
                   "id": "2003",
-                  "count": 2,
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "1001",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3802",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1026",
+                  "count": 1,
                   "hideCount": false
                 }
               ]
@@ -851,7 +861,7 @@
               ],
               "items": [
                 {
-                  "id": "3285",
+                  "id": "6655",
                   "count": 1,
                   "hideCount": false
                 },
@@ -861,30 +871,12 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3151",
+                  "id": "4637",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
+                },
                 {
-                  "id": "3165",
+                  "id": "3102",
                   "count": 1,
                   "hideCount": false
                 },
@@ -897,72 +889,6 @@
                   "id": "3135",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3116",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3157",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3001",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2033",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2139",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }
@@ -1660,308 +1586,7 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3850",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2003",
-                  "count": 2,
-                  "hideCount": false
-                },
-                {
-                  "id": "3340",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "startingjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
               "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "1039",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2003",
-                  "count": 3,
-                  "hideCount": false
-                },
-                {
-                  "id": "3340",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "early",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "1001",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3916",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3136",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "early",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerReturn",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "1001",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3706",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3108",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essential",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3117",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3151",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essential",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3020",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "1402",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3151",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "aggressive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3165",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3135",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3116",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "protective",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3157",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3102",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3190",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2139",
-                  "count": 1,
-                  "hideCount": true
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "champion": "Zyra",
-          "title": "ZyraSRMid",
-          "map": "SR",
-          "mode": "CLASSIC",
-          "type": "riot-mid",
-          "customTag": "",
-          "sortrank": 0,
-          "extensionPage": false,
-          "useObviousCheckmark": false,
-          "customPanel": null,
-          "blocks": [
-            {
-              "type": "starting",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
               "appendAfterSection": "",
               "visibleWithAllOf": [
                 ""
@@ -1977,39 +1602,6 @@
                 },
                 {
                   "id": "2003",
-                  "count": 2,
-                  "hideCount": false
-                },
-                {
-                  "id": "3340",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "startingjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "1039",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2031",
                   "count": 1,
                   "hideCount": false
                 },
@@ -2047,7 +1639,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3145",
+                  "id": "1026",
                   "count": 1,
                   "hideCount": false
                 }
@@ -2070,68 +1662,17 @@
               ],
               "items": [
                 {
+                  "id": "6655",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
                   "id": "3020",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3030",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3151",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "standard",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3135",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3116",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3157",
+                  "id": "4637",
                   "count": 1,
                   "hideCount": false
                 },
@@ -2144,11 +1685,30 @@
                   "id": "3089",
                   "count": 1,
                   "hideCount": false
+                },
+                {
+                  "id": "3135",
+                  "count": 1,
+                  "hideCount": false
                 }
               ]
-            },
+            }
+          ]
+        },
+        {
+          "champion": "Zyra",
+          "title": "ZyraSRMid",
+          "map": "SR",
+          "mode": "CLASSIC",
+          "type": "riot-mid",
+          "customTag": "",
+          "sortrank": 0,
+          "extensionPage": false,
+          "useObviousCheckmark": false,
+          "customPanel": null,
+          "blocks": [
             {
-              "type": "consumables",
+              "type": "starting",
               "recMath": false,
               "recSteps": false,
               "minSummonerLevel": -1,
@@ -2164,14 +1724,100 @@
               ],
               "items": [
                 {
-                  "id": "2003",
+                  "id": "1056",
                   "count": 1,
-                  "hideCount": true
+                  "hideCount": false
                 },
                 {
-                  "id": "2139",
+                  "id": "2003",
                   "count": 1,
-                  "hideCount": true
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "1001",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3802",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1026",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "essential",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "6655",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3020",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "4637",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3102",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3089",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3135",
+                  "count": 1,
+                  "hideCount": false
                 }
               ]
             }

@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "Camille": {
       "id": "Camille",
@@ -68,7 +68,7 @@
         "hp": 575.6,
         "hpperlevel": 85,
         "mp": 338.8,
-        "mpperlevel": 32,
+        "mpperlevel": 52,
         "movespeed": 340,
         "armor": 35,
         "armorperlevel": 3.8,
@@ -91,7 +91,7 @@
           "id": "CamilleQ",
           "name": "Precision Protocol",
           "description": "Camille's next attack deals bonus damage and grants bonus movement speed. This spell can be recast for a short period of time, doing significantly increased bonus damage if Camille delays a period of time between the two attacks.",
-          "tooltip": "Camille's next basic attack deals <physicalDamage>{{ bonusdamage }} bonus physical damage</physicalDamage> and increases her movement speed by {{ msbonus*100 }}% for {{ msduration }} second. This ability can be recast in the next {{ qtotalrecasttime }} seconds at no cost.<br /><br />If the second Precision Protocol attack hits at least {{ qrampuptime }} seconds after the first, the bonus damage is increased by {{ qempoweredamp*50 }}% to {{ empoweredbonusdamage }} and {{ damageconversionpercentage }} of the attack is converted into <trueDamage>true damage</trueDamage>.<br /><br /><span class=\"size16 colorFFEB7F\">Precision Protocol</span> <rules>cannot critically strike.</rules>",
+          "tooltip": "Camille's next Attack deals an additional <physicalDamage>{{ bonusdamage }} physical damage</physicalDamage> and grants her <speed>{{ msbonus*100 }}% Move Speed</speed> for {{ msduration }} second. This ability can be <recast>Recast</recast> in the next {{ qtotalrecasttime }} seconds.<br /><br />If the <recast>Recast</recast> Attack hits at least {{ qrampuptime }} seconds after the first, the bonus damage is increased to <physicalDamage>{{ empoweredbonusdamage }}</physicalDamage> and {{ damageconversionpercentage }} of the Attack's damage is converted into <trueDamage>true damage</trueDamage>.",
           "leveltip": {
             "label": [
               "Total AD Ratio",
@@ -234,7 +234,7 @@
           "id": "CamilleW",
           "name": "Tactical Sweep",
           "description": "Camille blasts in a cone after a delay, dealing damage. Enemies in the outer half are slowed and take extra damage, while also healing Camille.",
-          "tooltip": "Camille winds up and then slices in a direction, dealing <physicalDamage>{{ basedamagetotal }} physical damage</physicalDamage> to enemies hit.<br /><br />Enemies hit by the outer half are slowed by {{ slowpercentage }}%, decaying over {{ slowduration }} seconds. They take extra <physicalDamage>physical damage</physicalDamage> equal to {{ outeredgetooltip }} of their maximum health, and Camille heals for {{ outerconehealingratio }}% of the bonus damage dealt to champions.<br /><br /><span class=\"size16 colorFFEB7F\">Tactical Sweep</span> <rules>does {{ monsterdamagereduction }}% less damage to non-epic monsters.</rules>",
+          "tooltip": "Camille winds up and slices, dealing <physicalDamage>{{ basedamagetotal }} physical damage</physicalDamage>.<br /><br />Enemies hit by the outer half are <status>Slowed</status> by {{ slowpercentage }}% decaying over {{ slowduration }} seconds, and they take an additional <physicalDamage>{{ outeredgetooltip }} max Health physical damage</physicalDamage>. Camille restores <healing>{{ outerconehealingratio }}% of the bonus damage dealt to champions as Health</healing>.",
           "leveltip": {
             "label": [
               "@AbilityResourceName@ Cost",
@@ -379,7 +379,7 @@
           "id": "CamilleE",
           "name": "Hookshot",
           "description": "Camille pulls herself to a wall, leaping off and knocking up enemy champions upon landing.",
-          "tooltip": "<scaleAD>First Cast:</scaleAD> Fire a hookshot that attaches to terrain, pulling Camille to it and allowing Hookshot to be recast for 1 second.<br /><br /><scaleAD>Second Cast:</scaleAD> Camille leaps from the wall, colliding with the first enemy champion hit. Upon landing, she deals <physicalDamage>{{ totaldamage }} physical damage</physicalDamage> to enemies and stuns nearby enemy champions for {{ knockupduration }} seconds. Dashes towards enemy champions travel twice as far and grant {{ asbuff*100 }}% attack speed for {{ asduration }} seconds on impact.",
+          "tooltip": "Camille fires a hookshot that attaches to terrain, pulling her to it for 1 second and allowing this Ability to be <recast>Recast</recast>.<br /><br /><recast>Recast:</recast> Camille dashes from the wall, colliding with the first enemy champion hit. Upon landing, she deals <physicalDamage>{{ totaldamage }} physical damage</physicalDamage> to nearby enemies and <status>Stuns</status> enemy champions for {{ knockupduration }} seconds. Dashes towards enemy champions travel twice as far and grant <attackSpeed>{{ asbuff*100 }}% Attack Speed</attackSpeed> for {{ asduration }} seconds on impact.",
           "leveltip": {
             "label": [
               "Cooldown",
@@ -522,7 +522,7 @@
           "id": "CamilleR",
           "name": "The Hextech Ultimatum",
           "description": "Camille dashes to target champion, anchoring them to the area. She also deals bonus magic damage to the target with her basic attacks.",
-          "tooltip": "Camille briefly becomes untargetable and leaps onto an enemy champion, interrupting channels and locking them into an area they cannot escape by any means for {{ rduration }} seconds. Other nearby enemies are knocked away. Her basic attacks against the trapped enemy deal <magicDamage>bonus magic damage</magicDamage> equal to <magicDamage>{{ ronhitdamage }} plus {{ rpercentcurrenthpdamage }}%</magicDamage> of their current health.<br /><br /><span class=\"size16 colorFFEB7F\">The Hextech Ultimatum</span> <span class=\"size16 color8C8C8C\">ends if Camille leaves the area.</span>",
+          "tooltip": "Camille briefly becomes Untargetable and leaps onto an enemy champion, interrupting channels and locking them into an area they cannot escape by any means for {{ rduration }} seconds. Other nearby enemies are <status>Knocked Away</status>. Her Attacks against the trapped enemy deal an additional <magicDamage>{{ ronhitdamage }} plus {{ rpercentcurrenthpdamage }}% current Health magic damage</magicDamage>.",
           "leveltip": {
             "label": [
               "Duration",
@@ -640,7 +640,7 @@
       ],
       "passive": {
         "name": "Adaptive Defenses",
-        "description": "Basic attacks on champions grant a shield equal to 20% of Camille's maximum health against their damage type (Physical or Magic) for a brief duration.",
+        "description": "Basic attacks on champions grant a shield equal to a percentage of Camille's maximum health against their damage type (Physical or Magic) for a brief duration.",
         "image": {
           "full": "Camille_Passive.png",
           "sprite": "passive0.png",
@@ -834,18 +834,51 @@
               ],
               "items": [
                 {
-                  "id": "2051",
+                  "id": "1055",
                   "count": 1,
                   "hideCount": false
                 },
+                {
+                  "id": "2003",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
                 {
                   "id": "1001",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "2003",
-                  "count": 3,
+                  "id": "3067",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3057",
+                  "count": 1,
                   "hideCount": false
                 }
               ]
@@ -872,108 +905,29 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3748",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3111",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3156",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
                   "id": "3053",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3161",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "OdinTrinketRevive",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3065",
+                  "id": "3153",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3143",
+                  "id": "3026",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3075",
+                  "id": "3071",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
                 },
                 {
-                  "id": "2138",
+                  "id": "3742",
                   "count": 1,
-                  "hideCount": true
+                  "hideCount": false
                 }
               ]
             }
@@ -1695,7 +1649,7 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
+              "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
                 ""
@@ -1728,7 +1682,7 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
+              "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
                 ""
@@ -1743,12 +1697,12 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3077",
+                  "id": "3067",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3044",
+                  "id": "3057",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1761,7 +1715,7 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
+              "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
                 ""
@@ -1770,211 +1724,28 @@
                 ""
               ],
               "items": [
-                {
-                  "id": "3111",
-                  "count": 1,
-                  "hideCount": false
-                },
                 {
                   "id": "3078",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3074",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "startingjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "1041",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2003",
-                  "count": 3,
-                  "hideCount": false
-                },
-                {
-                  "id": "3340",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "earlyjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3715",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "1001",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3077",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essentialjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3047",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "1412",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3078",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
                   "id": "3053",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3074",
+                  "id": "3153",
                   "count": 1,
                   "hideCount": false
                 },
-                {
-                  "id": "3072",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3053",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3072",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3812",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
                 {
                   "id": "3026",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3139",
+                  "id": "3071",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1982,67 +1753,6 @@
                   "id": "3742",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3143",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3065",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3748",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2140",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }

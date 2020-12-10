@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "Jax": {
       "id": "Jax",
@@ -116,7 +116,7 @@
         "hp": 592.8,
         "hpperlevel": 85,
         "mp": 338.8,
-        "mpperlevel": 32,
+        "mpperlevel": 52,
         "movespeed": 350,
         "armor": 36,
         "armorperlevel": 3,
@@ -139,7 +139,7 @@
           "id": "JaxLeapStrike",
           "name": "Leap Strike",
           "description": "Jax leaps toward a unit. If they are an enemy, he strikes them with his weapon.",
-          "tooltip": "Jax leaps to target unit, dealing <physicalDamage>{{ e1 }} <scaleAD>(+{{ f1 }})</scaleAD> <scaleAP>(+{{ a1 }})</scaleAP></physicalDamage> physical damage if it is an enemy.",
+          "tooltip": "Jax leaps to a friendly or enemy unit or ward, dealing <physicalDamage>{{ totaldamage }} physical damage</physicalDamage> if it is an enemy.",
           "leveltip": {
             "label": [
               "Damage",
@@ -254,18 +254,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "bonusattackdamage",
-              "coeff": 1,
-              "key": "f1"
-            },
-            {
-              "link": "spelldamage",
-              "coeff": 0.6,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -291,7 +280,7 @@
           "id": "JaxEmpowerTwo",
           "name": "Empower",
           "description": "Jax charges his weapon with energy, causing his next attack to deal additional damage.",
-          "tooltip": "Jax charges his weapon with energy, causing his next basic attack or Leap Strike to deal an additional <magicDamage>{{ e1 }} <scaleAP>(+{{ a1 }}) </scaleAP>magic damage</magicDamage>.",
+          "tooltip": "Jax charges his weapon with energy, causing his next Attack or <spellName>Leap Strike</spellName> to deal an additional <magicDamage>{{ totaldamage }} magic damage</magicDamage>.",
           "leveltip": {
             "label": [
               "Damage",
@@ -406,13 +395,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.6,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -438,7 +421,7 @@
           "id": "JaxCounterStrike",
           "name": "Counter Strike",
           "description": "Jax's combat prowess allows him to dodge all incoming attacks for a short duration and then quickly counterattack, stunning all surrounding enemies.",
-          "tooltip": "Jax enters a defensive stance for up to {{ e6 }} seconds, dodging all incoming basic attacks and taking {{ e3 }}% less damage from area of effect abilities.<br /><br />After 2 seconds or if activated again, Jax stuns surrounding enemies for {{ e2 }} second and deals <physicalDamage>{{ e1 }} <scaleAD>(+{{ f2 }})</scaleAD> physical damage</physicalDamage> to them.<br /><br /><scaleAP>Counter Strike deals {{ e5 }}% more damage for each attack Jax dodged (max: {{ e4 }}% increased damage).</scaleAP>",
+          "tooltip": "Jax enters a defensive stance for up to {{ e6 }} seconds, dodging incoming Attacks and taking {{ e3 }}% less damage from area of effect Abilities.<br /><br />After {{ e6 }} seconds or <recast>Recasting</recast>, Jax deals <physicalDamage>{{ totaldamage }} physical damage</physicalDamage> and <status>Stuns</status> nearby enemies for {{ e2 }} second. Deals {{ e5 }}% increased damage for each Attack Jax dodged (max: {{ e4 }}%).",
           "leveltip": {
             "label": [
               "Cooldown",
@@ -555,13 +538,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "bonusattackdamage",
-              "coeff": 0.5,
-              "key": "f2"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -587,7 +564,7 @@
           "id": "JaxRelentlessAssault",
           "name": "Grandmaster's Might",
           "description": "Every third consecutive attack deals additional Magic Damage. Additionally, Jax can activate this ability to strengthen his resolve, increasing his Armor and Magic Resist for a short duration.",
-          "tooltip": "<spellPassive>Passive:</spellPassive> Every third consecutive strike Jax deals <magicDamage>{{ damagecalc }} additional magic damage</magicDamage>.<br /><br /><spellPassive>Active:</spellPassive> Jax strengthens his resolve, granting him {{ armorcalc }} Armor and {{ mrcalc }} Magic Resist for {{ activeduration }} seconds.",
+          "tooltip": "<spellPassive>Passive:</spellPassive> Every third Attack deals an additional <magicDamage>{{ damagecalc }} magic damage</magicDamage>.<br /><br /><spellActive>Active:</spellActive> Jax strengthens his resolve, granting him <scaleArmor>{{ armorcalc }} Armor</scaleArmor> and <scaleMR>{{ mrcalc }} Magic Resist</scaleMR> for {{ activeduration }} seconds.",
           "leveltip": {
             "label": [
               "Passive Damage",
@@ -857,13 +834,51 @@
               ],
               "items": [
                 {
-                  "id": "3044",
+                  "id": "1055",
                   "count": 1,
                   "hideCount": false
                 },
                 {
                   "id": "2003",
-                  "count": 3,
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "1001",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3067",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3057",
+                  "count": 1,
                   "hideCount": false
                 }
               ]
@@ -885,40 +900,12 @@
               ],
               "items": [
                 {
-                  "id": "3111",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
                   "id": "3078",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3748",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3124",
+                  "id": "3053",
                   "count": 1,
                   "hideCount": false
                 },
@@ -928,75 +915,19 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3146",
+                  "id": "3026",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3161",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3053",
+                  "id": "3071",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3075",
+                  "id": "3742",
                   "count": 1,
                   "hideCount": false
-                },
-                {
-                  "id": "3091",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2140",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }
@@ -1764,34 +1695,6 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2033",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3340",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "startingjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
               "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
@@ -1802,12 +1705,12 @@
               ],
               "items": [
                 {
-                  "id": "1041",
+                  "id": "1055",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "2031",
+                  "id": "2003",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1825,39 +1728,6 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3144",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "1001",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3057",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "earlyjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
               "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
@@ -1868,12 +1738,17 @@
               ],
               "items": [
                 {
-                  "id": "3706",
+                  "id": "1001",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "1001",
+                  "id": "3067",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3057",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1886,34 +1761,6 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3111",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3078",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essentialjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "TeleportCancel",
               "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
@@ -1924,45 +1771,7 @@
               ],
               "items": [
                 {
-                  "id": "1416",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3111",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3146",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3124",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3146",
+                  "id": "3078",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1970,60 +1779,9 @@
                   "id": "3053",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3078",
-                  "count": 1,
-                  "hideCount": false
                 },
                 {
-                  "id": "3124",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3748",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3143",
+                  "id": "3153",
                   "count": 1,
                   "hideCount": false
                 },
@@ -2033,37 +1791,14 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3091",
+                  "id": "3071",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
                 },
                 {
-                  "id": "2140",
+                  "id": "3742",
                   "count": 1,
-                  "hideCount": true
+                  "hideCount": false
                 }
               ]
             }

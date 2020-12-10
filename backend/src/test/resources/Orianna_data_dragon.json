@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "Orianna": {
       "id": "Orianna",
@@ -128,7 +128,7 @@
           "id": "OrianaIzunaCommand",
           "name": "Command: Attack",
           "description": "Orianna commands her Ball to fire toward a target location, dealing magic damage to targets along the way (deals less damage to subsequent targets). Her Ball remains at the target location after.",
-          "tooltip": "Orianna commands her Ball to shoot toward a target location, dealing {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage to targets along the way. However, it deals {{ e2 }}% less damage for each unit it hits (Minimum {{ e3 }}%).<br /><br />Her Ball remains behind at the target location afterwards.",
+          "tooltip": "Orianna commands her <keywordMajor>Ball</keywordMajor> to move to an area, dealing <magicDamage>{{ totaldamagetooltip }} magic damage</magicDamage> to surrounding enemies and to enemies it passes through. Deals {{ e2 }}% less damage per enemy hit.",
           "leveltip": {
             "label": [
               "Damage",
@@ -245,13 +245,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.5,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -276,8 +270,8 @@
         {
           "id": "OrianaDissonanceCommand",
           "name": "Command: Dissonance",
-          "description": "Orianna commands the Ball to release a pulse of energy, dealing magic damage around it. This leaves a field behind that speeds up allies and slows enemies.",
-          "tooltip": "Orianna commands her Ball to release an electric pulse, dealing {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage to nearby enemies.<br /><br />The pulse leaves behind an energy field for {{ e4 }} seconds, lowering enemy Movement Speed by {{ e2 }}% and increasing ally Movement Speed by {{ e3 }}% for {{ e5 }} seconds. This effect diminishes over time.",
+          "description": "Orianna commands her Ball to release a pulse of energy, dealing magic damage around it. This leaves a field behind that speeds up allies and slows enemies.",
+          "tooltip": "Orianna commands her <keywordMajor>Ball</keywordMajor> to release an electric pulse, dealing <magicDamage>{{ totaldamagetooltip }} magic damage</magicDamage> to surrounding enemies.<br /><br />The pulse leaves behind an energy field for {{ e4 }} seconds, <status>Slowing</status> enemies by {{ e2 }}% and granting allies <speed>{{ e3 }}% Move Speed</speed>, decaying over {{ e5 }} seconds.",
           "leveltip": {
             "label": [
               "Damage",
@@ -396,13 +390,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.7,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -427,8 +415,8 @@
         {
           "id": "OrianaRedactCommand",
           "name": "Command: Protect",
-          "description": "Orianna commands her Ball to attach to an allied champion, shielding them and dealing magic damage to any enemies it passes through on the way. Additionally, the Ball grants additional Armor and Magic Resist to the champion it is attached to.",
-          "tooltip": "<spellPassive>Passive: </spellPassive>The Ball adds {{ e2 }} Armor and Magic Resist to the allied champion it is attached to.<br /><br /><spellPassive>Active: </spellPassive>Orianna commands her Ball to travel to and attach onto an allied champion, shielding them for {{ e5 }} seconds from the next {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> damage. Enemies the Ball passes through along the way are damaged for {{ e3 }} <scaleAP>(+{{ a2 }})</scaleAP> magic damage.",
+          "description": "Orianna commands her Ball to attach to an allied champion, Shielding them and dealing magic damage to any enemies it passes through on the way. Additionally, the Ball grants additional Armor and Magic Resist to the champion it is attached to.",
+          "tooltip": "<spellPassive>Passive: </spellPassive>The <keywordMajor>Ball</keywordMajor> adds <scaleArmor>{{ e2 }} Armor</scaleArmor> and <scaleMR>{{ e2 }} Magic Resist</scaleMR> to the allied champion it is attached to.<br /><br /><spellActive>Active: </spellActive>Orianna commands her <keywordMajor>Ball</keywordMajor> to attach to an allied champion, granting them <shield>{{ totalshieldtooltip }} Shield</shield> for {{ e5 }} seconds. Enemies the <keywordMajor>Ball</keywordMajor> passes through take <magicDamage>{{ totaldamagetooltip }} magic damage</magicDamage>.",
           "leveltip": {
             "label": [
               "Damage",
@@ -547,18 +535,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.5,
-              "key": "a1"
-            },
-            {
-              "link": "spelldamage",
-              "coeff": 0.3,
-              "key": "a2"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -584,7 +561,7 @@
           "id": "OrianaDetonateCommand",
           "name": "Command: Shockwave",
           "description": "Orianna commands her Ball to unleash a shockwave, dealing magic damage and launching nearby enemies towards the Ball after a short delay.",
-          "tooltip": "Orianna commands her Ball to unleash a shockwave after a brief delay, dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage> to nearby enemies and flinging them into the air a set distance in the direction of the Ball.",
+          "tooltip": "Orianna commands her <keywordMajor>Ball</keywordMajor> to unleash a shockwave, dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage> to nearby enemies and <status>Knocking</status> them in the direction of the <keywordMajor>Ball</keywordMajor>.",
           "leveltip": {
             "label": [
               "Damage",
@@ -698,7 +675,7 @@
       ],
       "passive": {
         "name": "Clockwork Windup",
-        "description": "Orianna's autoattack deals additional magic damage. This damage increases the more Orianna attacks the same target.",
+        "description": "Orianna's Attacks deal additional magic damage. This damage increases the more Orianna Attacks the same target.",
         "image": {
           "full": "OriannaPassive.png",
           "sprite": "passive2.png",
@@ -902,18 +879,51 @@
               ],
               "items": [
                 {
-                  "id": "3073",
+                  "id": "1056",
                   "count": 1,
                   "hideCount": false
                 },
+                {
+                  "id": "2003",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
                 {
                   "id": "1001",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "2003",
-                  "count": 5,
+                  "id": "3802",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1026",
+                  "count": 1,
                   "hideCount": false
                 }
               ]
@@ -935,7 +945,7 @@
               ],
               "items": [
                 {
-                  "id": "3007",
+                  "id": "6655",
                   "count": 1,
                   "hideCount": false
                 },
@@ -945,30 +955,12 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3029",
+                  "id": "4637",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
+                },
                 {
-                  "id": "3165",
+                  "id": "3102",
                   "count": 1,
                   "hideCount": false
                 },
@@ -981,100 +973,6 @@
                   "id": "3135",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3157",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3151",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3174",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offmeta",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3115",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3124",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3100",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2033",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2139",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }
@@ -1806,7 +1704,7 @@
                 },
                 {
                   "id": "2003",
-                  "count": 2,
+                  "count": 1,
                   "hideCount": false
                 },
                 {
@@ -1866,78 +1764,17 @@
               ],
               "items": [
                 {
+                  "id": "6655",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
                   "id": "3020",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3285",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3165",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "standard",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3157",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3135",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3089",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3174",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3030",
+                  "id": "4637",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1945,34 +1782,16 @@
                   "id": "3102",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
+                },
                 {
-                  "id": "2031",
+                  "id": "3089",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "2139",
+                  "id": "3135",
                   "count": 1,
-                  "hideCount": true
+                  "hideCount": false
                 }
               ]
             }

@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "Cassiopeia": {
       "id": "Cassiopeia",
@@ -85,7 +85,7 @@
         "hp": 560,
         "hpperlevel": 90,
         "mp": 350,
-        "mpperlevel": 40,
+        "mpperlevel": 60,
         "movespeed": 328,
         "armor": 18,
         "armorperlevel": 3.5,
@@ -108,7 +108,7 @@
           "id": "CassiopeiaQ",
           "name": "Noxious Blast",
           "description": "Cassiopeia blasts an area with Poison after a brief delay, granting her increased Movement Speed if she hits an enemy champion.",
-          "tooltip": "Blasts enemies in an area with <span class=\"color32CD32\">Noxious Poison</span>. If a champion is hit, Cassiopeia gains {{ e3 }}% Movement Speed decaying over {{ e4 }} seconds.<br /><br /><span class=\"color32CD32\">Noxious Poison</span> deals <magicDamage>{{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage</magicDamage> over {{ e2 }} seconds.",
+          "tooltip": "Cassiopeia blasts noxious gas, <keywordMajor>Poisoning</keywordMajor> enemies and dealing <magicDamage>{{ damagepersecond }} magic damage</magicDamage> per second for {{ e2 }} seconds. Hiiting a champion grants Cassiopeia <speed>{{ e3 }}% Movement Speed</speed> decaying over {{ e4 }} seconds.",
           "leveltip": {
             "label": [
               "Damage",
@@ -225,13 +225,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.9,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -257,7 +251,7 @@
           "id": "CassiopeiaW",
           "name": "Miasma",
           "description": "Cassiopeia releases several clouds of poison, slowing, grounding, and lightly damaging enemies that pass through them. Grounded enemies cannot use Movement abilities.",
-          "tooltip": "Cassiopeia spews venom in an arc, leaving toxic clouds for {{ e4 }} seconds.<br /><br />Enemies in the clouds are continually afflicted with <span class=\"color32CD32\">Debilitating Poison</span>, inflicting a decaying {{ e2 }}% slow and grounding them, prohibiting the use of Movement abilities. They also take <magicDamage>{{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage</magicDamage> per second.",
+          "tooltip": "Cassiopeia spews venom, leaving toxic clouds for {{ e4 }} seconds. Enemies in the clouds take <magicDamage>{{ damagepersecond }} magic damage</magicDamage> per second, are <keywordMajor>Poisoned</keywordMajor>, <status>Grounded</status>, and <status>Slowed</status> by {{ e2 }}%.",
           "leveltip": {
             "label": [
               "Damage",
@@ -376,13 +370,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.15,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -408,7 +396,7 @@
           "id": "CassiopeiaE",
           "name": "Twin Fang",
           "description": "Cassiopeia lets loose an attack that deals increased damage to Poisoned targets and heals her for a percentage of the damage dealt. If the target dies from this attack, Cassiopeia regains Mana.",
-          "tooltip": "Deal <magicDamage><scaleLevel>{{ f1 }}</scaleLevel> <scaleAP>(+{{ a1 }})</scaleAP> magic damage</magicDamage> to a target. If the target is killed by Twin Fang, or is killed during its flight, Cassiopeia gains {{ cost }} Mana.<br /><br />If the victim is <span class=\"color32CD32\">Poisoned</span> when Twin Fang hits, it takes <magicDamage>{{ e1 }} <scaleAP>(+{{ a2 }})</scaleAP> additional magic damage</magicDamage> and Cassiopeia heals for {{ healcalc }} ({{ healratio*100 }}% of her Ability Power, with {{ minionreductionmodifier*100 }}% effectiveness against minions and small monsters).",
+          "tooltip": "Cassiopeia launches deadly barbs, dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage>. If the enemy is <keywordMajor>Poisoned</keywordMajor>, they take an additional <magicDamage>{{ bouspoisoneddamage }} magic damage</magicDamage> and Cassiopeia restores <healing>{{ healcalc }} Health</healing>.<br /><br />If this kills the target, Cassiopeia restores <scaleMana>{{ cost }} Mana</scaleMana>.<br /><br />",
           "leveltip": {
             "label": [
               "Bonus Poison Damage",
@@ -523,23 +511,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.55,
-              "key": "f1"
-            },
-            {
-              "link": "spelldamage",
-              "coeff": 0.1,
-              "key": "a1"
-            },
-            {
-              "link": "spelldamage",
-              "coeff": 0.6,
-              "key": "a2"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -565,7 +537,7 @@
           "id": "CassiopeiaR",
           "name": "Petrifying Gaze",
           "description": "Cassiopeia releases a swirl of magical energy from her eyes, stunning any enemies in front of her that are facing her and slowing any others with their back turned.",
-          "tooltip": "Cassiopeia deals {{ rdamage }} magic damage to all enemies in front of her. Enemies facing her turn to stone and are stunned for {{ rccduration }} seconds while enemies facing away are slowed by {{ rslowpercent }}%.",
+          "tooltip": "Cassiopeia unleashes a petriying gaze, dealing <magicDamage>{{ rdamage }} magic damage</magicDamage> and <status>Stunned</status> enemies facing her for {{ rccduration }} seconds. Enemies facing away are <status>Slowed</status> by {{ rslowpercent }}% decaying over the same duration instead.",
           "leveltip": {
             "label": [
               "Damage",
@@ -852,18 +824,51 @@
               ],
               "items": [
                 {
-                  "id": "3073",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "1027",
+                  "id": "1056",
                   "count": 1,
                   "hideCount": false
                 },
                 {
                   "id": "2003",
-                  "count": 4,
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "1001",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3802",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1026",
+                  "count": 1,
                   "hideCount": false
                 }
               ]
@@ -885,12 +890,22 @@
               ],
               "items": [
                 {
-                  "id": "3007",
+                  "id": "6655",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3029",
+                  "id": "3020",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "4637",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3102",
                   "count": 1,
                   "hideCount": false
                 },
@@ -898,98 +913,9 @@
                   "id": "3089",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
+                },
                 {
                   "id": "3135",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3151",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3907",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3116",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3157",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3165",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2139",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1701,7 +1627,7 @@
                 },
                 {
                   "id": "2003",
-                  "count": 2,
+                  "count": 1,
                   "hideCount": false
                 },
                 {
@@ -1728,7 +1654,7 @@
               ],
               "items": [
                 {
-                  "id": "3070",
+                  "id": "1001",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1761,73 +1687,17 @@
               ],
               "items": [
                 {
-                  "id": "3003",
+                  "id": "6655",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3151",
+                  "id": "3020",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3116",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "standard",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3135",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3089",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3165",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3157",
+                  "id": "4637",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1837,37 +1707,14 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3907",
+                  "id": "3089",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
                 },
                 {
-                  "id": "2139",
+                  "id": "3135",
                   "count": 1,
-                  "hideCount": true
+                  "hideCount": false
                 }
               ]
             }

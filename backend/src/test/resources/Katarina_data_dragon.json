@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "Katarina": {
       "id": "Katarina",
@@ -95,6 +95,12 @@
           "num": 21,
           "name": "Blood Moon Katarina",
           "chromas": true
+        },
+        {
+          "id": "55029",
+          "num": 29,
+          "name": "Battle Queen Katarina",
+          "chromas": true
         }
       ],
       "lore": "Decisive in judgment and lethal in combat, Katarina is a Noxian assassin of the highest caliber. Eldest daughter to the legendary General Du Couteau, she made her talents known with swift kills against unsuspecting enemies. Her fiery ambition has driven her to pursue heavily-guarded targets, even at the risk of endangering her allies—but no matter the mission, Katarina will not hesitate to execute her duty amid a whirlwind of serrated daggers.",
@@ -146,7 +152,7 @@
           "id": "KatarinaQ",
           "name": "Bouncing Blade",
           "description": "Katarina throws a <font color='#FFF673'>Dagger</font> at the target that then bounces to nearby enemies before ricocheting onto the ground.",
-          "tooltip": "Katarina throws a <keywordMajor>Dagger</keywordMajor>, dealing <magicDamage>{{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage</magicDamage> to the target and {{ e4 }} nearby enemies. The dagger then ricochets onto the ground behind the primary target.<br /><br /><rules>The dagger always lands 350 units on the opposite side from where it struck the first target, getting there in the same amount of time regardless of how many times it bounces.</rules>",
+          "tooltip": "Katarina throws a <keywordMajor>Dagger</keywordMajor>, dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage> to the target and {{ e4 }} nearby enemies. The <keywordMajor>Dagger</keywordMajor> then ricochets onto the ground behind the primary target.",
           "leveltip": {
             "label": [
               "Initial Damage",
@@ -261,13 +267,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.3,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": "No Cost",
           "maxammo": "-1",
           "range": [
@@ -293,7 +293,7 @@
           "id": "KatarinaW",
           "name": "Preparation",
           "description": "Katarina gains a burst of movement speed, tossing a <font color='#FFF673'>Dagger</font> into the air directly above herself.",
-          "tooltip": "Katarina tosses a <keywordMajor>Dagger</keywordMajor> into the air and gains {{ e4 }}% decaying movement speed over {{ e2 }} seconds.",
+          "tooltip": "Katarina tosses a <keywordMajor>Dagger</keywordMajor> into the air and gains <speed>{{ e4 }}% Move Speed</speed> decaying over {{ e2 }} seconds.",
           "leveltip": {
             "label": [
               "Movement Speed",
@@ -434,7 +434,7 @@
           "id": "KatarinaEWrapper",
           "name": "Shunpo",
           "description": "Katarina blinks to the target, striking it if its an enemy, or striking the nearest enemy otherwise.",
-          "tooltip": "Katarina dashes in the blink of an eye to the target ally, enemy, or <keywordMajor>Dagger</keywordMajor>. If it is an enemy, Katarina strikes for <magicDamage>{{ e1 }} <scaleAD>(+{{ a1 }})</scaleAD> <scaleAP>(+{{ a2 }})</scaleAP> magic damage</magicDamage> - otherwise she strikes the nearest enemy in range.<br /><br />Picking up a <keywordMajor>Dagger</keywordMajor> will reduce Shunpo's cooldown by <scaleLevel>{{ f1 }}</scaleLevel> seconds (<scaleLevel>{{ f3*100 }}%</scaleLevel>).<br /><br /><rules>Katarina can blink to any location near the target.</rules>",
+          "tooltip": "Katarina dashes in the blink of an eye to the target ally, enemy, or <keywordMajor>Dagger</keywordMajor>. If it is an enemy, Katarina strikes for <magicDamage>{{ e1 }} <scaleAD>(+{{ a1 }})</scaleAD> <scaleAP>(+{{ a2 }})</scaleAP> magic damage</magicDamage> - otherwise she strikes the nearest enemy in range. Applies %i:OnHit% <OnHit>On-Hit</OnHit> effects.<br /><br />Picking up a <keywordMajor>Dagger</keywordMajor> will reduce Shunpo's cooldown by <scaleLevel>{{ f1 }}</scaleLevel> seconds (<scaleLevel>{{ f3*100 }}%</scaleLevel>).<br /><br /><rules>Katarina can blink to any location near the target.</rules>",
           "leveltip": {
             "label": [
               "Damage",
@@ -586,7 +586,7 @@
           "id": "KatarinaR",
           "name": "Death Lotus",
           "description": "Katarina becomes a flurry of blades, dealing massive magic damage while she channels to the 3 nearest enemy champions.",
-          "tooltip": "Katarina becomes a flurry of blades, rapidly throwing knives at the three nearest enemy champions, dealing <magicDamage>{{ damagecalc }} magic damage</magicDamage> per knife. Total over {{ duration }} seconds to each enemy: <magicDamage>{{ totaldamagecalc }} magic damage</magicDamage>.<br /><br />Applies Grievous Wounds to all enemies struck, reducing their healing and regeneration by {{ grievousamount*-100 }}% for {{ grievousduration }} seconds.",
+          "tooltip": "Katarina becomes a flurry of blades, rapidly throwing knives at the three nearest enemy champions. Each knife deals <magicDamage>{{ damagecalc }} magic damage</magicDamage> and <physicalDamage>{{ addamagecalc }} physical damage</physicalDamage>, applies %i:OnHit% <OnHit>On-Hit</OnHit> effects at {{ onhitratio*100 }}% damage, and applies {{ grievousamount*100 }}% Grievous Wound for {{ grievousduration }} seconds.<br /><br />Total over {{ duration }} seconds to each enemy: <magicDamage>{{ totaldamagecalc }} magic damage</magicDamage> and <physicalDamage>{{ totaladdamagecalc }} physical damage</physicalDamage>.",
           "leveltip": {
             "label": [
               "Damage Per Knife",
@@ -908,17 +908,50 @@
               ],
               "items": [
                 {
-                  "id": "3145",
+                  "id": "1056",
                   "count": 1,
                   "hideCount": false
                 },
+                {
+                  "id": "2003",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
                 {
                   "id": "1001",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "2003",
+                  "id": "4635",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1026",
                   "count": 1,
                   "hideCount": false
                 }
@@ -941,38 +974,20 @@
               ],
               "items": [
                 {
-                  "id": "3146",
+                  "id": "4633",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3116",
+                  "id": "4637",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3020",
+                  "id": "3102",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
+                },
                 {
                   "id": "3089",
                   "count": 1,
@@ -984,70 +999,9 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3165",
+                  "id": "4629",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3151",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3065",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3001",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2139",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }
@@ -1729,7 +1683,7 @@
               ],
               "items": [
                 {
-                  "id": "1054",
+                  "id": "1056",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1762,17 +1716,17 @@
               ],
               "items": [
                 {
-                  "id": "3145",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
                   "id": "1001",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3144",
+                  "id": "4635",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1026",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1795,73 +1749,12 @@
               ],
               "items": [
                 {
-                  "id": "3020",
+                  "id": "4633",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3146",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3157",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3165",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3135",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3089",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3151",
+                  "id": "4637",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1871,37 +1764,19 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3026",
+                  "id": "3089",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
                 },
                 {
-                  "id": "2139",
+                  "id": "3135",
                   "count": 1,
-                  "hideCount": true
+                  "hideCount": false
+                },
+                {
+                  "id": "4629",
+                  "count": 1,
+                  "hideCount": false
                 }
               ]
             }

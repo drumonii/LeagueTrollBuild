@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "Leona": {
       "id": "Leona",
@@ -128,7 +128,7 @@
           "id": "LeonaShieldOfDaybreak",
           "name": "Shield of Daybreak",
           "description": "Leona uses her shield to perform her next basic attack, dealing bonus magic damage and stunning the target.",
-          "tooltip": "Next basic attack deals {{ e2 }} <scaleAP>(+{{ a1 }})</scaleAP> bonus magic damage and stuns for {{ e1 }} seconds.",
+          "tooltip": "Leona's next Attack <status>Stuns</status> for {{ e1 }} seconds and deals an additional <magicDamage>{{ totaldamagetooltip }}</magicDamage> magic damage.",
           "leveltip": {
             "label": [
               "Damage",
@@ -243,13 +243,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.3,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -275,7 +269,7 @@
           "id": "LeonaSolarBarrier",
           "name": "Eclipse",
           "description": "Leona raises her shield to gain Damage Reduction, Armor, and Magic Resist. When the duration first ends, if there are nearby enemies, she will deal magic damage to them and prolong the duration of the effect.",
-          "tooltip": "For {{ e3 }} seconds, Leona reduces incoming damage by {{ flatdamagereduction }} and gains {{ e4 }} <scaleArmor>(+{{ f1 }})</scaleArmor> Armor and {{ e2 }} <span class=\"colorFF00FF\">(+{{ f2 }})</span> Magic Resist. When the effect ends, nearby enemies struck take {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage and Leona retains her defensive bonuses for {{ e3 }} seconds.<br /><br /><rules>Damage reduction effect will not exceed {{ flatdamagereductionmax*100 }}% of incoming damage.</rules>",
+          "tooltip": "Leona raises her shield, reducing incoming damage by {{ flatdamagereduction }} and gaining <scaleArmor>{{ bonusarmortooltip }} Armor</scaleArmor>  and <scaleMR>{{ bonusmrtooltip }} Magic Resist</scaleMR> for {{ e3 }} seconds. Afterwards, her shield detonates, dealing <magicDamage>{{ totaldamagetooltip }} magic damage</magicDamage> to nearby enemies. If she hits at least one, she retains the  <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> bonuses for an additional {{ e3 }} seconds.<br />",
           "leveltip": {
             "label": [
               "Damage",
@@ -394,23 +388,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "bonusarmor",
-              "coeff": 0.2,
-              "key": "f1"
-            },
-            {
-              "link": "bonusspellblock",
-              "coeff": 0.2,
-              "key": "f2"
-            },
-            {
-              "link": "spelldamage",
-              "coeff": 0.4,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -436,7 +414,7 @@
           "id": "LeonaZenithBlade",
           "name": "Zenith Blade",
           "description": "Leona projects a solar image of her sword, dealing magic damage to all enemies in a line. When the image fades, the last enemy champion struck will be briefly immobilized and Leona will dash to them.",
-          "tooltip": "Strikes all enemies in a line dealing {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage. The last enemy Champion struck will be rooted for {{ e2 }} seconds and Leona will dash to them.",
+          "tooltip": "Leona thrusts with a sword of light, dealing <magicDamage>{{ totaldamagetooltip }} magic damage</magicDamage>. The last champion struck will be <status>Rooted</status> for {{ e2 }} seconds and Leona will dash to them.",
           "leveltip": {
             "label": [
               "Damage",
@@ -551,13 +529,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.4,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -583,7 +555,7 @@
           "id": "LeonaSolarFlare",
           "name": "Solar Flare",
           "description": "Leona calls down a beam of solar energy, dealing damage to enemies in an area. Enemies in the center of the area are stunned, while enemies on the outside are slowed.",
-          "tooltip": "Calls down a radiant beam of solar energy dealing {{ explosioncalculateddamage }} magic damage and slowing enemies by {{ slowpercent }}% for {{ ccduration }} seconds. Enemies in the center of the flare are stunned instead of slowed.",
+          "tooltip": "Leona calls down a radiant beam of solar energy dealing <magicDamage>{{ explosioncalculateddamage }} magic damage</magicDamage> and <status>Slowing</status> by {{ slowpercent }}% for {{ ccduration }} seconds. Enemies in the center of the flare are <status>Stunned</status> instead of <status>Slowed</status>.",
           "leveltip": {
             "label": [
               "Damage",
@@ -895,18 +867,51 @@
               ],
               "items": [
                 {
-                  "id": "2051",
+                  "id": "3858",
                   "count": 1,
                   "hideCount": false
                 },
+                {
+                  "id": "2003",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
                 {
                   "id": "1001",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "2003",
-                  "count": 3,
+                  "id": "3067",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3105",
+                  "count": 1,
                   "hideCount": false
                 }
               ]
@@ -928,12 +933,12 @@
               ],
               "items": [
                 {
-                  "id": "3109",
+                  "id": "3190",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3047",
+                  "id": "3009",
                   "count": 1,
                   "hideCount": false
                 },
@@ -941,65 +946,9 @@
                   "id": "3050",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3800",
-                  "count": 1,
-                  "hideCount": false
                 },
                 {
-                  "id": "3748",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3053",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3001",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3107",
+                  "id": "3109",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1007,34 +956,11 @@
                   "id": "3110",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
                 },
                 {
-                  "id": "2138",
+                  "id": "3001",
                   "count": 1,
-                  "hideCount": true
+                  "hideCount": false
                 }
               ]
             }
@@ -1725,7 +1651,7 @@
                 },
                 {
                   "id": "2003",
-                  "count": 2,
+                  "count": 1,
                   "hideCount": false
                 },
                 {
@@ -1757,12 +1683,12 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3024",
+                  "id": "3067",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3067",
+                  "id": "3105",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1785,7 +1711,12 @@
               ],
               "items": [
                 {
-                  "id": "3117",
+                  "id": "3190",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3009",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1798,100 +1729,16 @@
                   "id": "3109",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "aggressive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
+                },
                 {
-                  "id": "3190",
+                  "id": "3110",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3800",
+                  "id": "3001",
                   "count": 1,
                   "hideCount": false
-                },
-                {
-                  "id": "3025",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "protective",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3193",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3143",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3107",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2138",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }

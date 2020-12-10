@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "Nami": {
       "id": "Nami",
@@ -65,6 +65,12 @@
           "num": 15,
           "name": "Splendid Staff Nami",
           "chromas": true
+        },
+        {
+          "id": "267024",
+          "num": 24,
+          "name": "Cosmic Destiny Nami",
+          "chromas": true
         }
       ],
       "lore": "A headstrong young vastaya of the seas, Nami was the first of the Marai tribe to leave the waves and venture onto dry land, when their ancient accord with the Targonians was broken. With no other option, she took it upon herself to complete the sacred ritual that would ensure the safety of her people. Amidst the chaos of this new age, Nami faces an uncertain future with grit and determination, using her Tidecaller staff to summon the strength of the oceans themselves.",
@@ -117,7 +123,7 @@
           "id": "NamiQ",
           "name": "Aqua Prison",
           "description": "Sends a bubble to a target area, dealing damage and stunning all enemies on impact.",
-          "tooltip": "Sends a bubble to target area, dealing {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage to enemies, and stunning them for {{ e2 }} seconds.",
+          "tooltip": "Nami hurls a bubble, <status>Stunning</status> for {{ e2 }} seconds and dealing <magicDamage>{{ totaldamagett }} magic damage</magicDamage>.",
           "leveltip": {
             "label": [
               "Damage",
@@ -232,13 +238,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.5,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -264,7 +264,7 @@
           "id": "NamiW",
           "name": "Ebb and Flow",
           "description": "Unleashes a stream of water that bounces back and forth between allied and enemy champions, healing allies and damaging enemies.",
-          "tooltip": "Unleashes a stream of water that bounces back and forth between allied and visible enemy champions.<br /><br /><span class=\"colorCCFF99\">On Ally Hit: </span>Heals {{ e3 }} <scaleAP>(+{{ a2 }})</scaleAP> Health and will bounce to a nearby visible enemy champion.<br /><br /><span class=\"colorFF9999\">On Enemy Hit: </span>Deals {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage and bounces to a nearby allied champion.<br /><br />Bounces to each target only once, and hits up to {{ e2 }} targets. The damage and healing value is modified by <scaleAP>({{ f1 }}%)</scaleAP> each bounce. ",
+          "tooltip": "Nami unleashes a stream of water that bounces between allied and enemy champions. Each champion can only be hit once, and it hits up to {{ e2 }} targets.<li>Restores <healing>{{ totalhealtooltip }} Health</healing> to allies and will bounce to a nearby enemy champion. <li>Deals <magicDamage>{{ totaldamagetooltip }} magic damage</magicDamage> to enemies and will bounce to a nearby allied champion.<br />The damage and healing value is modified by {{ bouncescalingtooltip }} each bounce. ",
           "leveltip": {
             "label": [
               "Healing",
@@ -381,18 +381,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.3,
-              "key": "a2"
-            },
-            {
-              "link": "spelldamage",
-              "coeff": 0.5,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -418,7 +407,7 @@
           "id": "NamiE",
           "name": "Tidecaller's Blessing",
           "description": "Empowers an allied champion for a short duration. The ally's basic attacks and spells deal bonus magic damage and slow the target.",
-          "tooltip": "Empowers an allied champion's next {{ e4 }} basic attacks and spells, causing them to slow the target by {{ e2 }}% <scaleAP>(+{{ a2 }}%)</scaleAP> for {{ e3 }} second and deal {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> bonus magic damage. Lasts for {{ e5 }} seconds.<br /><br /><rules><br />Deal {{ aoemod }} damage to non-champions when empowering Area of Effect spells.<br /></rules>",
+          "tooltip": "Nami empowers an allied champion's next {{ e4 }} Attacks and Abilities for {{ e5 }} seconds, causing them to <status>Slow</status> their targets by {{ totalslowtooltip }} for {{ e3 }} second and deal an additional <magicDamage>{{ totaldamagetooltip }} magic damage</magicDamage>. ",
           "leveltip": {
             "label": [
               "Damage",
@@ -535,18 +524,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.05,
-              "key": "a2"
-            },
-            {
-              "link": "spelldamage",
-              "coeff": 0.2,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -572,7 +550,7 @@
           "id": "NamiR",
           "name": "Tidal Wave",
           "description": "Summons a massive Tidal Wave that knocks up, slows, and damages enemies. Allies hit gain double the effect of Surging Tides.",
-          "tooltip": "Summons a Tidal Wave from Nami's position. The wave knocks up enemies and slows them by {{ e4 }}%, dealing {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage. The duration of the slow increases based on how far the Tidal Wave has traveled, with a minimum duration of {{ e3 }} seconds and a maximum of {{ e5 }} seconds.<br /><br />Allies hit by the wave gain double the effect of Surging Tides.",
+          "tooltip": "Nami summons a tidal wave, <status>Knocking Up</status> for 0.5 seconds, <status>Slowing</status> by {{ e4 }}%, and dealing <magicDamage>{{ totaldamagetooltip }} magic damage</magicDamage>. The duration of the <status>Slow</status> increases based on distance the wave traveled, up to {{ e5 }} seconds.<br /><br />Allies hit by the wave gain double the effect of <spellName>Surging Tides</spellName>.",
           "leveltip": {
             "label": [
               "Damage",
@@ -665,13 +643,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.6,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -694,7 +666,7 @@
       ],
       "passive": {
         "name": "Surging Tides",
-        "description": "When Nami's abilities hit allied champions they gain Movement Speed for a short duration.",
+        "description": "When Nami's Abilities hit allied champions they gain Movement Speed for a short duration.",
         "image": {
           "full": "NamiPassive.png",
           "sprite": "passive2.png",
@@ -839,18 +811,51 @@
               ],
               "items": [
                 {
-                  "id": "3073",
+                  "id": "3303",
                   "count": 1,
                   "hideCount": false
                 },
+                {
+                  "id": "2003",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
                 {
                   "id": "1001",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "2003",
-                  "count": 5,
+                  "id": "3067",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "4642",
+                  "count": 1,
                   "hideCount": false
                 }
               ]
@@ -872,12 +877,12 @@
               ],
               "items": [
                 {
-                  "id": "3007",
+                  "id": "6617",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3158",
+                  "id": "3009",
                   "count": 1,
                   "hideCount": false
                 },
@@ -885,100 +890,21 @@
                   "id": "3504",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3174",
-                  "count": 1,
-                  "hideCount": false
                 },
-                {
-                  "id": "3089",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3151",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
                 {
                   "id": "3107",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3174",
+                  "id": "6616",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3029",
+                  "id": "3222",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2033",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2139",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }
@@ -1739,13 +1665,13 @@
               ],
               "items": [
                 {
-                  "id": "3850",
+                  "id": "3303",
                   "count": 1,
                   "hideCount": false
                 },
                 {
                   "id": "2003",
-                  "count": 2,
+                  "count": 1,
                   "hideCount": false
                 },
                 {
@@ -1777,12 +1703,12 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3114",
+                  "id": "3067",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3028",
+                  "id": "4642",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1805,12 +1731,12 @@
               ],
               "items": [
                 {
-                  "id": "3117",
+                  "id": "6617",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3174",
+                  "id": "3009",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1818,100 +1744,21 @@
                   "id": "3504",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "aggressive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
+                },
                 {
                   "id": "3107",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3905",
+                  "id": "6616",
                   "count": 1,
                   "hideCount": false
                 },
-                {
-                  "id": "2065",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "protective",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
                 {
                   "id": "3222",
                   "count": 1,
                   "hideCount": false
-                },
-                {
-                  "id": "3190",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3116",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2139",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }

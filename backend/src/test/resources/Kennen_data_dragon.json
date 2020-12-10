@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "Kennen": {
       "id": "Kennen",
@@ -122,17 +122,17 @@
           "id": "KennenShurikenHurlMissile1",
           "name": "Thundering Shuriken",
           "description": "Kennen throws a fast moving shuriken towards a location, causing damage and adding a Mark of the Storm to any opponent that it hits.",
-          "tooltip": "Throws a shuriken that deals {{ e1 }} <magicDamage><scaleAP>(+{{ a1 }})</scaleAP> magic damage</magicDamage> to the first enemy it hits.",
+          "tooltip": "Kennen throws a shuriken, dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage> to the first enemy hit.",
           "leveltip": {
             "label": [
-              "Damage",
+              "Cooldown",
               "@AbilityResourceName@ Cost",
-              "Cooldown"
+              "Damage"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
+              "{{ cooldown }} -> {{ cooldownNL }}",
               "{{ cost }} -> {{ costNL }}",
-              "{{ cooldown }} -> {{ cooldownNL }}"
+              "{{ e1 }} -> {{ e1NL }}"
             ]
           },
           "maxrank": 5,
@@ -239,13 +239,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.75,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -271,19 +265,19 @@
           "id": "KennenBringTheLight",
           "name": "Electrical Surge",
           "description": "Kennen passively deals extra damage and adds a Mark of the Storm to his target every few attacks, and he can activate this ability to damage and add another Mark of the Storm to targets who are already marked.",
-          "tooltip": "<spellPassive>Passive:</spellPassive> Every 5 attacks, Kennen deals bonus <magicDamage>magic damage</magicDamage> equal to <magicDamage>{{ e2 }} <scaleAD>(+{{ f1 }})</scaleAD> <scaleAP>(+{{ a2 }})</scaleAP></magicDamage> and adds a Mark of the Storm to his target.<br /><br /><spellPassive>Active:</spellPassive> Sends a surge of electricity through all nearby enemies affected by Mark of the Storm or Slicing Maelstrom, dealing <magicDamage>{{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage</magicDamage>.",
+          "tooltip": "<spellPassive>Passive:</spellPassive> Every 5th Attack deals an additional <magicDamage>{{ totaldamagepassive }} magic damage</magicDamage>.<br /><br /><spellActive>Active:</spellActive> Kennen sends out a blast of electricity, dealing <magicDamage>{{ totaldamageactive }} magic damage</magicDamage> to nearby enemies affected by <spellName>Mark of the Storm</spellName>.<br />",
           "leveltip": {
             "label": [
-              "Damage (passive)",
-              "Damage (active)",
+              "Cooldown",
               "Bonus AD Ratio",
-              "Cooldown"
+              "Damage (passive)",
+              "Damage (active)"
             ],
             "effect": [
-              "{{ e2 }} -> {{ e2NL }}",
-              "{{ e1 }} -> {{ e1NL }}",
+              "{{ cooldown }} -> {{ cooldownNL }}",
               "{{ effect3amount*100.000000 }}% -> {{ effect3amountnl*100.000000 }}%",
-              "{{ cooldown }} -> {{ cooldownNL }}"
+              "{{ e2 }} -> {{ e2NL }}",
+              "{{ e1 }} -> {{ e1NL }}"
             ]
           },
           "maxrank": 5,
@@ -390,18 +384,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.2,
-              "key": "a2"
-            },
-            {
-              "link": "spelldamage",
-              "coeff": 0.8,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -427,18 +410,18 @@
           "id": "KennenLightningRush",
           "name": "Lightning Rush",
           "description": "Kennen morphs into a lightning form, enabling him to pass through units and apply a Mark of the Storm. Kennen gains movement speed when entering this form, and attack speed when leaving it.",
-          "tooltip": "Kennen turns into a ball of lightning for up to {{ duration - as ball }} seconds, dealing <magicDamage>{{ base damage }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage</magicDamage> to enemies he passes through.<br /><br />While a ball of lightning, Kennen gains {{ movement speed*100 }}% movement speed. Kennen is refunded {{ energy refund }} energy if he damages at least one enemy in this form.<br /><br />Upon returning to his normal form, Kennen gains {{ attack speed*100 }}% attack speed for {{ duration - after ball }} seconds.<br /><br /><rules>Lightning Rush deals {{ damage to minions*100 }}% damage to minions.<br />Kennen ignores unit collision while he is a ball of lightning.</rules>",
+          "tooltip": "Kennen turns into a ball of lightning, gaining <speed>{{ movement speed*100 }}% Move Speed</speed>, dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage> to enemies he passes through, and becoming Ghosted for {{ duration - as ball }} seconds. If Kennen damages at least one enemy, he gains {{ energy refund }} Energy. <br /><br />After this ability ends, Kennen gains <attackSpeed>{{ attack speed*100 }}% Attack Speed</attackSpeed> for {{ duration - after ball }} seconds. Kennen can <recast>Recast</recast> to end this Ability early.",
           "leveltip": {
             "label": [
-              "Damage",
               "Cooldown",
               "@AbilityResourceName@ Cost",
-              "Attack Speed %"
+              "Damage",
+              "Attack Speed"
             ],
             "effect": [
-              "{{ base damage }} -> {{ base damageNL }}",
               "{{ cooldown }} -> {{ cooldownNL }}",
               "{{ cost }} -> {{ costNL }}",
+              "{{ base damage }} -> {{ base damageNL }}",
               "{{ attack speed*100.000000 }}% -> {{ attack speednl*100.000000 }}%"
             ]
           },
@@ -546,13 +529,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.8,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -578,7 +555,7 @@
           "id": "KennenShurikenStorm",
           "name": "Slicing Maelstrom",
           "description": "Kennen summons a storm that strikes at nearby enemy champions for magical damage.",
-          "tooltip": "Summons a magical storm for {{ kennenrduration }} seconds that grants him {{ kennenrdefenses }} Armor and Magic Resist and deals <magicDamage>{{ pertickdamagecalculated }} magic damage</magicDamage> to all enemies near Kennen every {{ kennenrtickrate }} seconds. Each maelstrom hit applies Mark of the Storm, up to a maximum of 3.<br /><br />Successive maelstrom hits against the same enemy deal an additional {{ damageamp*100 }}% damage for each hit they've already suffered from this storm.",
+          "tooltip": "Kennen unleashes a magical storm, dealing <magicDamage>{{ pertickdamagecalculated }} magic damage</magicDamage> to all nearby enemies every {{ kennenrtickrate }} seconds, and gaining <scaleArmor>{{ kennenrdefenses }} Armor</scaleArmor> and <scaleMR>{{ kennenrdefenses }} Magic Resist</scaleMR> for {{ kennenrduration }} seconds. Successive hits deal {{ damageamp*100 }}% increased damage for each hit the enemy has already suffered.",
           "leveltip": {
             "label": [
               "Damage",
@@ -672,7 +649,7 @@
             "0"
           ],
           "vars": [],
-          "costType": " {{ abilityresourcename }}",
+          "costType": "No Cost",
           "maxammo": "-1",
           "range": [
             550,
@@ -689,7 +666,7 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} {{ abilityresourcename }}"
+          "resource": "No Cost"
         }
       ],
       "passive": {
@@ -877,12 +854,50 @@
               ],
               "items": [
                 {
-                  "id": "3191",
+                  "id": "1056",
                   "count": 1,
                   "hideCount": false
                 },
                 {
+                  "id": "2003",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
                   "id": "1001",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "4635",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1026",
                   "count": 1,
                   "hideCount": false
                 }
@@ -905,73 +920,12 @@
               ],
               "items": [
                 {
-                  "id": "3157",
+                  "id": "4633",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3020",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3116",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3151",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3089",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3152",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3116",
+                  "id": "4637",
                   "count": 1,
                   "hideCount": false
                 },
@@ -981,70 +935,19 @@
                   "hideCount": false
                 },
                 {
+                  "id": "3089",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
                   "id": "3135",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offmeta",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3031",
-                  "count": 1,
-                  "hideCount": false
                 },
                 {
-                  "id": "3085",
+                  "id": "4629",
                   "count": 1,
                   "hideCount": false
-                },
-                {
-                  "id": "3091",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2139",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }
@@ -1785,7 +1688,7 @@
               ],
               "items": [
                 {
-                  "id": "1055",
+                  "id": "1056",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1818,17 +1721,17 @@
               ],
               "items": [
                 {
-                  "id": "3145",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
                   "id": "1001",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3067",
+                  "id": "4635",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1026",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1851,40 +1754,22 @@
               ],
               "items": [
                 {
-                  "id": "3152",
+                  "id": "4633",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3157",
+                  "id": "4637",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3020",
+                  "id": "3102",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "standard",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
+                },
                 {
-                  "id": "3165",
+                  "id": "3089",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1894,70 +1779,9 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3089",
+                  "id": "4629",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3146",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3907",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3102",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2139",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }

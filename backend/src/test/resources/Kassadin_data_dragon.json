@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "Kassadin": {
       "id": "Kassadin",
@@ -59,6 +59,12 @@
           "num": 6,
           "name": "Count Kassadin",
           "chromas": true
+        },
+        {
+          "id": "38014",
+          "num": 14,
+          "name": "Hextech Kassadin",
+          "chromas": false
         }
       ],
       "lore": "Cutting a burning swath through the darkest places of the world, Kassadin knows his days are numbered. A widely traveled Shuriman guide and adventurer, he had chosen to raise a family among the peaceful southern tribes—until the day his village was consumed by the Void. He vowed vengeance, combining a number of arcane artifacts and forbidden technologies for the struggle ahead. Finally, Kassadin set out for the wastelands of Icathia, ready to face any monstrous Void-construct in his search for their self-proclaimed prophet, Malzahar.",
@@ -86,9 +92,9 @@
       },
       "stats": {
         "hp": 576,
-        "hpperlevel": 90,
-        "mp": 397.6,
-        "mpperlevel": 67,
+        "hpperlevel": 105,
+        "mp": 400,
+        "mpperlevel": 87,
         "movespeed": 335,
         "armor": 19,
         "armorperlevel": 2.8,
@@ -111,7 +117,7 @@
           "id": "NullLance",
           "name": "Null Sphere",
           "description": "Kassadin fires an orb of void energy at a target, dealing damage and interrupting channels. The excess energy forms around himself, granting a temporary shield that absorbs magic damage.",
-          "tooltip": "Kassadin fires an orb of void energy that deals <magicDamage>{{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage</magicDamage> and interrupts channels.<br /><br />The excess energy forms around himself, granting a shield that absorbs {{ e3 }} <scaleAP>(+{{ a2 }})</scaleAP> magic damage for {{ e4 }} seconds.",
+          "tooltip": "Kassadin fires an orb of void energy, dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage> and interrupting channels. Kassadin also gains <shield>{{ totalshield }} Magic Shield</shield> for 1.5 seconds.",
           "leveltip": {
             "label": [
               "Damage",
@@ -161,10 +167,10 @@
               0
             ],
             [
-              60,
-              85,
-              110,
-              135,
+              40,
+              70,
+              100,
+              130,
               160
             ],
             [
@@ -221,7 +227,7 @@
             null,
             "65/95/125/155/185",
             "0",
-            "60/85/110/135/160",
+            "40/70/100/130/160",
             "1.5",
             "0",
             "0",
@@ -230,18 +236,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.7,
-              "key": "a1"
-            },
-            {
-              "link": "spelldamage",
-              "coeff": 0.3,
-              "key": "a2"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -267,7 +262,7 @@
           "id": "NetherBlade",
           "name": "Nether Blade",
           "description": "Passive: Kassadin's basic attacks deal bonus magic damage. Active: Kassadin's next basic attack deals significant bonus magic damage and restores Mana.",
-          "tooltip": "<spellPassive>Passive: </spellPassive>Kassadin's basic attacks draw energy from the void, dealing {{ e2 }} <magicDamage><scaleAP>(+{{ a1 }})</scaleAP> bonus magic damage</magicDamage>.<br /><br /><spellPassive>Active: </spellPassive>Kassadin charges his Nether Blade, causing his next basic attack to deal {{ e3 }} <magicDamage><scaleAP>(+{{ a2 }})</scaleAP> bonus magic damage</magicDamage> and restore <scaleMana>{{ e1 }}% of his missing Mana</scaleMana> (increases to <scaleMana>{{ e4 }}%</scaleMana> against champions).",
+          "tooltip": "<spellPassive>Passive:</spellPassive> Kassadin's Attacks deal an additional <magicDamage>{{ onhitdamage }} magic damage</magicDamage>.<br /><br /><spellActive>Active:</spellActive> Kassadin charges his blade, causing his next Attack to deal <magicDamage>{{ activedamage }} magic damage</magicDamage> and restore <scaleMana>{{ e1 }}% missing Mana</scaleMana>, increased to <scaleMana>{{ e4 }}%</scaleMana> against champions.",
           "leveltip": {
             "label": [
               "Active Damage",
@@ -384,18 +379,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.1,
-              "key": "a1"
-            },
-            {
-              "link": "spelldamage",
-              "coeff": 0.8,
-              "key": "a2"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -421,7 +405,7 @@
           "id": "ForcePulse",
           "name": "Force Pulse",
           "description": "Kassadin draws energy from spells cast in his vicinity. Upon charging up, Kassadin can use Force Pulse to damage and slow enemies in a cone in front of him.",
-          "tooltip": "Kassadin draws energy from spells cast in his vicinity, gaining a charge whenever a spell is cast near him.<br /><br />Upon reaching 6 charges, Kassadin can use Force Pulse to deal <magicDamage>{{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage</magicDamage> and slow enemies by {{ e2 }}% for {{ e3 }} second in a cone in front of him.",
+          "tooltip": "<spellPassive>Passive:</spellPassive>: Kassadin gains a charge whenever any Ability is used near him. At 6 charges, Kassadin can activate this Ability.<br /><br /><spellActive>Active:</spellActive> Kassadin unleashes a void pulse, dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage> and <status>Slowing</status> by {{ e2 }}% for {{ e3 }} second.",
           "leveltip": {
             "label": [
               "Damage",
@@ -538,13 +522,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.8,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -570,7 +548,7 @@
           "id": "RiftWalk",
           "name": "Riftwalk",
           "description": "Kassadin teleports to a nearby location dealing damage to nearby enemy units. Multiple Riftwalks in a short period of time cost additional Mana but also deal additional damage.",
-          "tooltip": "Kassadin teleports to a nearby location dealing <magicDamage>{{ e1 }} <scaleMana>(+{{ f2 }})</scaleMana> <scaleAP>(+{{ a1 }})</scaleAP> magic damage</magicDamage> to surrounding enemy units.<br /><br />Each subsequent Riftwalk within the next {{ e2 }} seconds doubles the Mana cost and deals an additional <magicDamage>{{ e3 }} <scaleMana>(+{{ f1 }})</scaleMana> <scaleAP>(+{{ f3 }})</scaleAP> magic damage</magicDamage> per stack, stacking up to {{ e6 }} times.",
+          "tooltip": "Kassadin teleports to a nearby location, dealing <magicDamage>{{ basedamage }} magic damage</magicDamage>.<br /><br />Each subsequent use of this Ability within the next {{ e2 }} seconds doubles the Mana cost and deals an additional <magicDamage>{{ bonusdamage }} magic damage</magicDamage>. The cost and damage increases can stack up to {{ e6 }} times.",
           "leveltip": {
             "label": [
               "Damage",
@@ -591,11 +569,11 @@
           ],
           "cooldownBurn": "5/3.5/2",
           "cost": [
-            50,
-            50,
-            50
+            40,
+            40,
+            40
           ],
-          "costBurn": "50",
+          "costBurn": "40",
           "datavalues": {},
           "effect": [
             null,
@@ -663,13 +641,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.4,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -692,7 +664,7 @@
       ],
       "passive": {
         "name": "Void Stone",
-        "description": "Kassadin takes 15% reduced magic damage and ignores unit collision.",
+        "description": "Kassadin takes reduced magic damage and ignores unit collision.",
         "image": {
           "full": "Kassadin_Passive.png",
           "sprite": "passive1.png",
@@ -880,18 +852,51 @@
               ],
               "items": [
                 {
-                  "id": "3073",
+                  "id": "1056",
                   "count": 1,
                   "hideCount": false
                 },
+                {
+                  "id": "2003",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
                 {
                   "id": "1001",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "2003",
-                  "count": 5,
+                  "id": "3802",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1026",
+                  "count": 1,
                   "hideCount": false
                 }
               ]
@@ -913,40 +918,22 @@
               ],
               "items": [
                 {
-                  "id": "3029",
+                  "id": "6655",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3007",
+                  "id": "3020",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3158",
+                  "id": "4637",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
+                },
                 {
-                  "id": "3100",
+                  "id": "3102",
                   "count": 1,
                   "hideCount": false
                 },
@@ -959,67 +946,6 @@
                   "id": "3135",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3157",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3102",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3001",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2139",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }
@@ -1757,7 +1683,7 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
+              "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
                 ""
@@ -1767,7 +1693,12 @@
               ],
               "items": [
                 {
-                  "id": "2033",
+                  "id": "1056",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "2003",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1800,12 +1731,12 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3070",
+                  "id": "3802",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3010",
+                  "id": "1026",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1828,7 +1759,7 @@
               ],
               "items": [
                 {
-                  "id": "3027",
+                  "id": "6655",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1838,30 +1769,12 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3003",
+                  "id": "4637",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
+                },
                 {
-                  "id": "3100",
+                  "id": "3102",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1874,67 +1787,6 @@
                   "id": "3135",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3157",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3165",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3102",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2139",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }

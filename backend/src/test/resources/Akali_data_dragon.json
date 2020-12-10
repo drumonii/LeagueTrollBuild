@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "Akali": {
       "id": "Akali",
@@ -95,6 +95,12 @@
           "num": 15,
           "name": "True Damage Akali",
           "chromas": true
+        },
+        {
+          "id": "84032",
+          "num": 32,
+          "name": "K/DA ALL OUT Akali",
+          "chromas": true
         }
       ],
       "lore": "Abandoning the Kinkou Order and her title of the Fist of Shadow, Akali now strikes alone, ready to be the deadly weapon her people need. Though she holds onto all she learned from her master Shen, she has pledged to defend Ionia from its enemies, one kill at a time. Akali may strike in silence, but her message will be heard loud and clear: fear the assassin with no master.",
@@ -145,15 +151,15 @@
           "id": "AkaliQ",
           "name": "Five Point Strike",
           "description": "Akali throws out five kunai, dealing damage based on her bonus Attack Damage and Ability Power and slowing.",
-          "tooltip": "Slings kunai in an arc, dealing <magicDamage>{{ damage }} magic damage</magicDamage>. Enemies at the tip are briefly slowed.<span class=\"size8\"><br /><br /></span>At max rank, deals {{ miniondamage }} damage to minions and monsters.",
+          "tooltip": "Akali slings kunai in an arc, dealing <magicDamage>{{ damage }} magic damage</magicDamage> and <status>Slowing</status> enemies at the tip by {{ slowpercentage*100 }}% for {{ slowduration }} seconds.<br /><br />At max rank, this Ability deals <magicDamage>{{ miniondamage }} magic damage</magicDamage> to minions and jungle monsters.",
           "leveltip": {
             "label": [
-              "Damage",
-              "@AbilityResourceName@ Cost"
+              "@AbilityResourceName@ Cost",
+              "Damage"
             ],
             "effect": [
-              "{{ basedamagenamed }} -> {{ basedamagenamedNL }}",
-              "{{ cost }} -> {{ costNL }}"
+              "{{ cost }} -> {{ costNL }}",
+              "{{ basedamagenamed }} -> {{ basedamagenamedNL }}"
             ]
           },
           "maxrank": 5,
@@ -167,12 +173,12 @@
           "cooldownBurn": "1.5",
           "cost": [
             120,
-            115,
             110,
-            105,
-            100
+            100,
+            90,
+            80
           ],
-          "costBurn": "120/115/110/105/100",
+          "costBurn": "120/110/100/90/80",
           "datavalues": {},
           "effect": [
             null,
@@ -286,7 +292,7 @@
           "id": "AkaliW",
           "name": "Twilight Shroud",
           "description": "Akali drops a cover of smoke and briefly gains Movement Speed. While inside the shroud, Akali becomes invisible and unable to be selected by enemy spells and attacks. Attacking or using abilities will briefly reveal her.  ",
-          "tooltip": "Drops a smoke bomb, unleashing a spreading cover of smoke lasting {{ baseduration }} seconds.<br /><br />Akali gains {{ e6 }}% decaying movement speed for {{ movementspeedduration }} seconds.<br /><br />The smoke grants Akali <keywordStealth>invisibility</keywordStealth> while she is in it.  <br /><br /><u><keywordStealth>Stealth - Invisible</keywordStealth></u>: Akali can only be revealed by nearby enemy Turrets or <span class=\"size16 coloree91d7\">True Sight</span>.",
+          "tooltip": "Akali drops a smoke bomb, unleashing a spreading cover of smoke lasting {{ baseduration }} seconds and granting herself <speed>{{ e6 }}% Move Speed</speed> decaying over {{ movementspeedduration }} seconds.<br /><br />While inside the smoke, Akali is <keywordStealth>Invisible</keywordStealth>.",
           "leveltip": {
             "label": [
               "Movement Speed",
@@ -427,16 +433,16 @@
           "id": "AkaliE",
           "name": "Shuriken Flip",
           "description": "Flip backward and fire a shuriken forward, dealing magic damage. The first enemy or smoke cloud hit is marked. Re-cast to dash to the marked target, dealing additional damage.",
-          "tooltip": "Flip backward and fire a shuriken forward, dealing <magicDamage>{{ damage }} magic damage</magicDamage> and marking the first enemy or smoke cloud hit.<span class=\"size8\"><br /><br /></span><spellActive>Re-cast:</spellActive> Dash to the marked target, dealing <magicDamage>{{ e2damagecalc }} magic damage</magicDamage>.",
+          "tooltip": "Akali flips backwards as she throws a shuriken, dealing <magicDamage>{{ damage }} magic damage</magicDamage> and marking the first enemy or smoke cloud hit. Akali can <recast>Recast</recast> this once to dash to the marked target, dealing <magicDamage>{{ e2damagecalc }} magic damage</magicDamage>.",
           "leveltip": {
             "label": [
-              "Damage",
               "Cooldown",
+              "Damage",
               "Secondary Damage"
             ],
             "effect": [
-              "{{ basedamage }} -> {{ basedamageNL }}",
               "{{ cooldown }} -> {{ cooldownNL }}",
+              "{{ basedamage }} -> {{ basedamageNL }}",
               "{{ e2damage }} -> {{ e2damageNL }}"
             ]
           },
@@ -570,17 +576,17 @@
           "id": "AkaliR",
           "name": "Perfect Execution",
           "description": "Akali leaps in a direction, damaging enemies she strikes. Re-cast: Akali dashes in a direction, executing all enemies she strikes.",
-          "tooltip": "Two dashes: The first vaults over target enemy champion, dealing <physicalDamage>{{ cast1damage }} physical damage</physicalDamage> to all enemies Akali dashes over. Akali can dash again after {{ cooldownbetweencasts }} seconds.<span class=\"size8\"><br /><br /></span>The second is an untargeted piercing thrust that executes, dealing <magicDamage>{{ cast2damagemin }}</magicDamage> to <magicDamage>{{ cast2damagemax }} magic damage</magicDamage> based on missing health.",
+          "tooltip": "Akali vaults over an enemy champion, dealing <physicalDamage>{{ cast1damage }} physical damage</physicalDamage> to all enemies in her path. <br /><br />Akali can <recast>Recast</recast> after {{ cooldownbetweencasts }} seconds to execute a piercing thrust, dashing and dealing <magicDamage>{{ cast2damagemin }}</magicDamage> to <magicDamage>{{ cast2damagemax }} magic damage</magicDamage> based on missing health.",
           "leveltip": {
             "label": [
+              "Cooldown",
               "Base Damage",
-              "Max Damage",
-              "Cooldown"
+              "Max Damage"
             ],
             "effect": [
+              "{{ cooldown }} -> {{ cooldownNL }}",
               "{{ basedamage }} -> {{ basedamageNL }}",
-              "{{ r2basedamage*3.000000 }} -> {{ r2basedamagenl*3.000000 }}",
-              "{{ cooldown }} -> {{ cooldownNL }}"
+              "{{ r2basedamage*3.000000 }} -> {{ r2basedamagenl*3.000000 }}"
             ]
           },
           "maxrank": 3,
@@ -718,20 +724,60 @@
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
               "items": [
                 {
-                  "id": "2051",
+                  "id": "1056",
                   "count": 1,
                   "hideCount": false
                 },
+                {
+                  "id": "2003",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
                 {
                   "id": "1001",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "2003",
-                  "count": 3,
+                  "id": "4635",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1026",
+                  "count": 1,
                   "hideCount": false
                 }
               ]
@@ -744,35 +790,26 @@
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
               "items": [
                 {
-                  "id": "3146",
+                  "id": "4633",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3157",
+                  "id": "4637",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3020",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3100",
+                  "id": "3102",
                   "count": 1,
                   "hideCount": false
                 },
@@ -785,51 +822,9 @@
                   "id": "3135",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3116",
-                  "count": 1,
-                  "hideCount": false
                 },
                 {
-                  "id": "3068",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3102",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2139",
+                  "id": "4629",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1511,7 +1506,7 @@
               ],
               "items": [
                 {
-                  "id": "1054",
+                  "id": "1056",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1544,17 +1539,17 @@
               ],
               "items": [
                 {
-                  "id": "3145",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
                   "id": "1001",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3144",
+                  "id": "4635",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1026",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1577,73 +1572,12 @@
               ],
               "items": [
                 {
-                  "id": "3146",
+                  "id": "4633",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3020",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3157",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3151",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3135",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3089",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3165",
+                  "id": "4637",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1653,37 +1587,19 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3026",
+                  "id": "3089",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
                 },
                 {
-                  "id": "2139",
+                  "id": "3135",
                   "count": 1,
-                  "hideCount": true
+                  "hideCount": false
+                },
+                {
+                  "id": "4629",
+                  "count": 1,
+                  "hideCount": false
                 }
               ]
             }

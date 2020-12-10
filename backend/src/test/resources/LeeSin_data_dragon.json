@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "LeeSin": {
       "id": "LeeSin",
@@ -95,6 +95,12 @@
           "num": 29,
           "name": "FPX Lee Sin",
           "chromas": false
+        },
+        {
+          "id": "64031",
+          "num": 31,
+          "name": "Storm Dragon Lee Sin",
+          "chromas": false
         }
       ],
       "lore": "A master of Ionia's ancient martial arts, Lee Sin is a principled fighter who channels the essence of the dragon spirit to face any challenge. Though he lost his sight many years ago, the warrior-monk has devoted his life to protecting his homeland against any who would dare upset its sacred balance. Enemies who underestimate his meditative demeanor will endure his fabled burning fists and blazing roundhouse kicks.",
@@ -126,7 +132,7 @@
         "mp": 200,
         "mpperlevel": 0,
         "movespeed": 345,
-        "armor": 33,
+        "armor": 36,
         "armorperlevel": 3.7,
         "spellblock": 32.1,
         "spellblockperlevel": 1.25,
@@ -138,7 +144,7 @@
         "crit": 0,
         "critperlevel": 0,
         "attackdamage": 70,
-        "attackdamageperlevel": 3.2,
+        "attackdamageperlevel": 3.7,
         "attackspeedperlevel": 3,
         "attackspeed": 0.651
       },
@@ -147,7 +153,7 @@
           "id": "BlindMonkQOne",
           "name": "Sonic Wave / Resonating Strike",
           "description": "Sonic Wave: Lee Sin projects a discordant wave of sound to locate his enemies, dealing physical damage to the first enemy it encounters. If Sonic Wave hits, Lee Sin can cast Resonating Strike for the next 3 seconds.<br>Resonating Strike: Lee Sin dashes to the enemy hit by Sonic Wave, dealing physical damage based on the target's missing Health.",
-          "tooltip": "<spellActive>Sonic Wave: </spellActive>Lee Sin projects a discordant wave of sound to locate his enemies, dealing {{ e1 }} <scaleAD>(+{{ a1 }})</scaleAD> physical damage to the first enemy it encounters, granting <keywordMajor>True Sight</keywordMajor> of the target. <specialRules>If Sonic Wave hits, Lee Sin can cast Resonating Strike for the next {{ e7 }} seconds.</specialRules><br /><br /><spellActive>Resonating Strike: </spellActive>Lee Sin dashes to the enemy hit by Sonic Wave, dealing {{ e2 }} <scaleAD>(+{{ a1 }})</scaleAD> to {{ e3 }} <scaleAD>(+{{ a2 }})</scaleAD> physical damage based on the target's missing Health.",
+          "tooltip": "Lee Sin projects a discordant wave of sound, dealing <physicalDamage>{{ initialdamage }} physical damage</physicalDamage> to the first enemy hit, granting True Sight of them, and allows Lee Sin to <recast>Recast</recast> for the next {{ e7 }} seconds.<br /><br /><recast>Recast:</recast> Lee Sin dashes to the enemy hit by the sound wave, dealing between <physicalDamage>{{ recastdamage }} to {{ empowereddamage }} physical damage</physicalDamage> scaling with the target's missing Health. ",
           "leveltip": {
             "label": [
               "Sonic Wave Damage",
@@ -266,23 +272,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "bonusattackdamage",
-              "coeff": 1,
-              "key": "a1"
-            },
-            {
-              "link": "bonusattackdamage",
-              "coeff": 1,
-              "key": "a1"
-            },
-            {
-              "link": "bonusattackdamage",
-              "coeff": 2,
-              "key": "a2"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -308,7 +298,7 @@
           "id": "BlindMonkWOne",
           "name": "Safeguard / Iron Will",
           "description": "Safeguard: Lee Sin rushes to target ally, shielding himself from damage. If the ally is a champion, they are also shielded. After using Safeguard, Lee Sin can cast Iron Will for the next 3 seconds.<br>Iron Will: Lee Sin's intense training allows him to thrive in battle. For 4 seconds, Lee Sin gains Life Steal and Spell Vamp.",
-          "tooltip": "<spellActive>Safeguard: </spellActive>Lee Sin rushes to target ally. If the ally is a champion, Lee Sin shields the ally and himself for {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> damage for {{ e3 }} seconds and Safeguard's cooldown is reduced by {{ e6 }}%. <specialRules>After using Safeguard, Lee Sin can cast Iron Will for the next {{ e9 }} seconds.</specialRules><br /><br /><spellActive>Iron Will: </spellActive>Lee Sin gains {{ e2 }}% Life Steal and Spell Vamp for {{ e8 }} seconds.",
+          "tooltip": "Lee Sin dashes to an ally or ward. If the target is a champion, Lee Sin grants them and himself <shield>{{ shieldamount }} Shield</shield> for {{ e3 }} seconds and reduces this Ability's cooldown by {{ e6 }}%. Lee Sin may <recast>Recast</recast> for the next {{ e9 }} seconds.<br /><br /><recast>Recast:</recast> Lee Sin gains {{ e2 }}% Life Steal and Spell Vamp for {{ e8 }} seconds.",
           "leveltip": {
             "label": [
               "Safeguard Shield Absorption",
@@ -321,13 +311,13 @@
           },
           "maxrank": 5,
           "cooldown": [
-            14,
-            14,
-            14,
-            14,
-            14
+            12,
+            12,
+            12,
+            12,
+            12
           ],
-          "cooldownBurn": "14",
+          "cooldownBurn": "12",
           "cost": [
             50,
             50,
@@ -423,13 +413,7 @@
             "3",
             "1350"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.8,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -455,7 +439,7 @@
           "id": "BlindMonkEOne",
           "name": "Tempest / Cripple",
           "description": "Tempest: Lee Sin smashes the ground, sending out a shockwave that deals magic damage and reveals enemy units hit. If Tempest hits an enemy, Lee Sin can cast cripple for the next 3 seconds.<br>Cripple: Lee Sin cripples nearby enemies damaged by Tempest, reducing their Movement Speed for 4 seconds. Movement Speed recovers gradually over the duration.",
-          "tooltip": "<spellActive>Tempest: </spellActive>Lee Sin smashes the ground, sending out a shockwave that deals {{ e1 }} <scaleAD>(+{{ a1 }})</scaleAD> magic damage. <specialRules>If Tempest hits an enemy, Lee Sin can cast Cripple for the next {{ e6 }} seconds.</specialRules><br /><br /><spellActive>Cripple: </spellActive>Lee Sin cripples nearby enemies struck by Tempest for {{ e5 }} seconds, slowing their Movement Speed by {{ e2 }}%. Movement Speed recovers gradually over the duration.",
+          "tooltip": "Lee Sin smashes the ground, sending out a shockwave that deals <magicDamage>{{ initialdamage }} magic damage</magicDamage> and reveals them for 4 seconds. If this hits an enemy, Lee Sin can <recast>Recast</recast> for the next {{ e6 }} seconds.<br /><br /><recast>Recast:</recast> Lee Sin <status>Slows</status> nearby enemies struck by the shockwave by {{ e2 }}% decaying over {{ e5 }} seconds.",
           "leveltip": {
             "label": [
               "Tempest Damage",
@@ -487,11 +471,11 @@
           "effect": [
             null,
             [
-              80,
-              120,
-              160,
-              200,
-              240
+              100,
+              140,
+              180,
+              220,
+              260
             ],
             [
               20,
@@ -559,7 +543,7 @@
           ],
           "effectBurn": [
             null,
-            "80/120/160/200/240",
+            "100/140/180/220/260",
             "20/30/40/50/60",
             "60/95/130/165/200",
             "30",
@@ -570,13 +554,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "bonusattackdamage",
-              "coeff": 1,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -602,7 +580,7 @@
           "id": "BlindMonkRKick",
           "name": "Dragon's Rage",
           "description": "Lee Sin performs a powerful roundhouse kick launching his target back, dealing physical damage to the target and any enemies they collide with. Enemies the target collides with are knocked into the air for a short duration. This technique was taught to him by Jesse Perring, although Lee Sin does not kick players off the map.",
-          "tooltip": "Lee Sin performs a powerful roundhouse kick knocking an enemy champion back and dealing <physicalDamage>{{ damage }}</physicalDamage> physical damage.<br /><br />Enemies the target collides with are knocked into the air briefly and take physical damage equal to <physicalDamage>{{ damage }}</physicalDamage> plus {{ percenthpcarrythrough }}% of the initial target's bonus health.",
+          "tooltip": "Lee Sin performs a powerful roundhouse kick <status>Knocking Back</status> an enemy champion and dealing <physicalDamage>{{ damage }} physical damage</physicalDamage>.<br /><br />Enemies the target collides with are briefly <status>Knocked Up</status> and take <physicalDamage>{{ damage }} plus {{ percenthpcarrythrough }}% of the kicked enemy's bonus Health as physical damage</physicalDamage>.",
           "leveltip": {
             "label": [
               "Damage",
@@ -696,7 +674,7 @@
             "0"
           ],
           "vars": [],
-          "costType": "",
+          "costType": "No Cost",
           "maxammo": "-1",
           "range": [
             375,
@@ -712,7 +690,8 @@
             "y": 96,
             "w": 48,
             "h": 48
-          }
+          },
+          "resource": "No Cost"
         }
       ],
       "passive": {
@@ -890,13 +869,51 @@
               ],
               "items": [
                 {
-                  "id": "3044",
+                  "id": "1055",
                   "count": 1,
                   "hideCount": false
                 },
                 {
                   "id": "2003",
-                  "count": 4,
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "1001",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3067",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3057",
+                  "count": 1,
                   "hideCount": false
                 }
               ]
@@ -918,12 +935,7 @@
               ],
               "items": [
                 {
-                  "id": "3071",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3111",
+                  "id": "3078",
                   "count": 1,
                   "hideCount": false
                 },
@@ -931,95 +943,26 @@
                   "id": "3053",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
+                },
                 {
-                  "id": "3074",
+                  "id": "3153",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3812",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3156",
+                  "id": "3026",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3143",
+                  "id": "3071",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3190",
+                  "id": "3742",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2140",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }
@@ -1810,7 +1753,7 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
+              "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
                 ""
@@ -1843,7 +1786,7 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
+              "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
                 ""
@@ -1853,17 +1796,17 @@
               ],
               "items": [
                 {
-                  "id": "3133",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3077",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
                   "id": "1001",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3067",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3057",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1876,115 +1819,6 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3111",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3071",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3742",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3074",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3156",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3814",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3083",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3068",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3742",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3143",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3022",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "startingjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
               "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
@@ -1995,106 +1829,7 @@
               ],
               "items": [
                 {
-                  "id": "1041",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2031",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3340",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "earlyjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3133",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "1001",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3706",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essentialjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "1400",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3047",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3071",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3026",
+                  "id": "3078",
                   "count": 1,
                   "hideCount": false
                 },
@@ -2104,30 +1839,17 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3179",
+                  "id": "3153",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
+                },
                 {
-                  "id": "3065",
+                  "id": "3026",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3071",
                   "count": 1,
                   "hideCount": false
                 },
@@ -2135,39 +1857,6 @@
                   "id": "3742",
                   "count": 1,
                   "hideCount": false
-                },
-                {
-                  "id": "3156",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2140",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }

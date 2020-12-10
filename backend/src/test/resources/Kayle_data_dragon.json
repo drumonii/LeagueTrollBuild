@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "Kayle": {
       "id": "Kayle",
@@ -77,6 +77,12 @@
           "num": 9,
           "name": "Pentakill Kayle",
           "chromas": false
+        },
+        {
+          "id": "10015",
+          "num": 15,
+          "name": "PsyOps Kayle",
+          "chromas": true
         }
       ],
       "lore": "Born to a Targonian Aspect at the height of the Rune Wars, Kayle honored her mother's legacy by fighting for justice on wings of divine flame. She and her twin sister Morgana were the protectors of Demacia for many years—until Kayle became disillusioned with the repeated failings of mortals, and abandoned this realm altogether. Still, legends are told of her punishing the unjust with her fiery swords, and many hope that she will one day return…",
@@ -110,7 +116,7 @@
         "movespeed": 335,
         "armor": 26,
         "armorperlevel": 3,
-        "spellblock": 34,
+        "spellblock": 30,
         "spellblockperlevel": 0.5,
         "attackrange": 175,
         "hpregen": 5,
@@ -129,7 +135,7 @@
           "id": "KayleQ",
           "name": "Radiant Blast",
           "description": "Kayle conjures a portal, summoning a celestial sword that pierces through enemies, slowing, damaging, and reducing the resistances of all hit.",
-          "tooltip": "Kayle summons a celestial sword that stops on the first enemy hit. <br /><br />The sword deals <magicDamage>{{ totaldamage }} magic damage</magicDamage> to the target and enemies behind it, slows by {{ slowpercent }}% for {{ slowduration }} seconds, and shreds Armor and Magic Resistance by {{ shredpercent }}% for {{ shredduration }} seconds. Radiant Blast refunds {{ manarefundpercent*100 }}% of its mana cost for each champion hit.",
+          "tooltip": "Kayle fires a celestial sword that stops on the first enemy hit, dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage>, <status>Slowing</status> by {{ slowpercent }}% for {{ slowduration }} seconds, and removing <scaleArmor>{{ shredpercent }}% Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> for {{ shredduration }} seconds from the target and enemies behind them.",
           "leveltip": {
             "label": [
               "Damage",
@@ -274,7 +280,7 @@
           "id": "KayleW",
           "name": "Celestial Blessing",
           "description": "Blessed by the divine, Kayle heals and grants movement speed to herself and the nearest ally.",
-          "tooltip": "Kayle and target allied champion are healed for <healing>{{ totalheal }} health</healing> and gain {{ totalhaste }} Movement Speed for {{ hasteduration }} seconds.",
+          "tooltip": "Kayle infuses herself and an allied champion with light, restoring <healing>{{ totalheal }} Health</healing> and granting <speed>{{ totalhaste }} Move Speed</speed> for {{ hasteduration }} seconds.",
           "leveltip": {
             "label": [
               "Healing",
@@ -297,13 +303,13 @@
           ],
           "cooldownBurn": "15",
           "cost": [
-            70,
-            80,
             90,
             100,
-            110
+            110,
+            120,
+            130
           ],
-          "costBurn": "70/80/90/100/110",
+          "costBurn": "90/100/110/120/130",
           "datavalues": {},
           "effect": [
             null,
@@ -417,36 +423,36 @@
           "id": "KayleE",
           "name": "Starfire Spellblade",
           "description": "Passive: Kayle's celestial sword, Virtue, deals bonus magic damage to enemies she attacks.<br><br>Active: Kayle's next attack smites her target with celestial fire, dealing bonus damage proportionate to their missing health.",
-          "tooltip": "<spellPassive>Passive:</spellPassive> Attacks deal <magicDamage>{{ epassivetotaldamage }} bonus magic damage</magicDamage>.<br /><br /><spellActive>Active:</spellActive> Kayle's next attack becomes ranged and deals <magicDamage>{{ activetotalexecutedamage }}</magicDamage> of the target's missing health as bonus <magicDamage>magic damage</magicDamage>. This attack upgrades when Kayle reaches <scaleLevel>Level {{ spell.kaylepassive:levelforpassiverank2 }}</scaleLevel>, causing it to explode when it hits the target, dealing damage to nearby enemies.",
+          "tooltip": "<spellPassive>Passive:</spellPassive> Kayle's Attacks deal an additional <magicDamage>{{ epassivetotaldamage }} magic damage</magicDamage>.<br /><br /><spellActive>Active:</spellActive> Kayle's next Attack becomes ranged and deals an additional <magicDamage>{{ activetotalexecutedamage }} missing Health magic damage</magicDamage>. When Kayle reaches level {{ spell.kaylepassive:levelforpassiverank2 }}, this Attack explodes on hitting the target, dealing damage to surrounding enemies.",
           "leveltip": {
             "label": [
               "Passive Damage",
               "Missing Health Damage",
-              "@AbilityResourceName@ Cost"
+              "Cooldown"
             ],
             "effect": [
               "{{ passive damage }} -> {{ passive damageNL }}",
               "{{ activeexecutepercent }}% -> {{ activeexecutepercentNL }}%",
-              "{{ cost }} -> {{ costNL }}"
+              "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
           "maxrank": 5,
           "cooldown": [
             8,
-            8,
-            8,
-            8,
-            8
+            7.5,
+            7,
+            6.5,
+            6
           ],
-          "cooldownBurn": "8",
+          "cooldownBurn": "8/7.5/7/6.5/6",
           "cost": [
-            50,
-            55,
-            60,
-            65,
-            70
+            0,
+            0,
+            0,
+            0,
+            0
           ],
-          "costBurn": "50/55/60/65/70",
+          "costBurn": "0",
           "datavalues": {},
           "effect": [
             null,
@@ -535,7 +541,7 @@
             "0"
           ],
           "vars": [],
-          "costType": " {{ abilityresourcename }}",
+          "costType": "No Cost",
           "maxammo": "-1",
           "range": [
             550,
@@ -554,13 +560,13 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} {{ abilityresourcename }}"
+          "resource": "No Cost"
         },
         {
           "id": "KayleR",
           "name": "Divine Judgment",
           "description": "Kayle makes an ally invulnerable and calls upon former Aspects of Justice to purify the area around her target with a holy rain of swords.",
-          "tooltip": "Kayle makes an allied champion invulnerable for {{ invulnduration }} seconds.<br /><br />Then, after a cast time, she purifies the area around them dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage> to nearby enemies.",
+          "tooltip": "Kayle makes an allied champion Invulnerable for {{ invulnduration }} seconds. She then purifies the area around them dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage> to nearby enemies.",
           "leveltip": {
             "label": [
               "Damage",
@@ -926,17 +932,50 @@
               ],
               "items": [
                 {
-                  "id": "3112",
+                  "id": "1056",
                   "count": 1,
                   "hideCount": false
                 },
+                {
+                  "id": "2003",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
                 {
                   "id": "1001",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "2031",
+                  "id": "4635",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1026",
                   "count": 1,
                   "hideCount": false
                 }
@@ -959,83 +998,12 @@
               ],
               "items": [
                 {
-                  "id": "3146",
+                  "id": "4633",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3006",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3115",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3124",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3089",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3100",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3135",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3091",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3046",
+                  "id": "4637",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1045,37 +1013,19 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3157",
+                  "id": "3089",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
                 },
                 {
-                  "id": "2139",
+                  "id": "3135",
                   "count": 1,
-                  "hideCount": true
+                  "hideCount": false
+                },
+                {
+                  "id": "4629",
+                  "count": 1,
+                  "hideCount": false
                 }
               ]
             }
@@ -1820,7 +1770,7 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
+              "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
                 ""
@@ -1836,39 +1786,6 @@
                 },
                 {
                   "id": "2003",
-                  "count": 2,
-                  "hideCount": false
-                },
-                {
-                  "id": "3340",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "startingjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "1041",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2031",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1886,39 +1803,6 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3144",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "1001",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3145",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "earlyjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
               "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
@@ -1929,17 +1813,17 @@
               ],
               "items": [
                 {
-                  "id": "3706",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
                   "id": "1001",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "1043",
+                  "id": "4635",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1026",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1952,39 +1836,6 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3146",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3006",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3115",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essentialjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
               "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
@@ -1995,121 +1846,12 @@
               ],
               "items": [
                 {
-                  "id": "1416",
+                  "id": "4633",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3006",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3124",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3124",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3089",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3100",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3135",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3115",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3089",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3135",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3146",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3157",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3091",
+                  "id": "4637",
                   "count": 1,
                   "hideCount": false
                 },
@@ -2119,37 +1861,19 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3046",
+                  "id": "3089",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
                 },
                 {
-                  "id": "2139",
+                  "id": "3135",
                   "count": 1,
-                  "hideCount": true
+                  "hideCount": false
+                },
+                {
+                  "id": "4629",
+                  "count": 1,
+                  "hideCount": false
                 }
               ]
             }

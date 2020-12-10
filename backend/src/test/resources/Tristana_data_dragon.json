@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "Tristana": {
       "id": "Tristana",
@@ -12,7 +12,7 @@
         "full": "Tristana.png",
         "sprite": "champion4.png",
         "group": "champion",
-        "x": 48,
+        "x": 192,
         "y": 0,
         "w": 48,
         "h": 48
@@ -140,15 +140,15 @@
           "id": "TristanaQ",
           "name": "Rapid Fire",
           "description": "Tristana fires her weapon rapidly, increasing her Attack Speed for a short time.",
-          "tooltip": "<spellPassive>Active: </spellPassive>Increases Tristana's Attack Speed by {{ e1 }}% for {{ e2 }} seconds.",
+          "tooltip": "Tristana goes full-auto, gaining <attackSpeed>{{ e1 }}% Attack Speed</attackSpeed> for {{ e2 }} seconds.",
           "leveltip": {
             "label": [
-              "Attack Speed %",
-              "Cooldown"
+              "Cooldown",
+              "Attack Speed"
             ],
             "effect": [
-              "{{ effect1amount*100.000000 }}% -> {{ effect1amountnl*100.000000 }}%",
-              "{{ cooldown }} -> {{ cooldownNL }}"
+              "{{ cooldown }} -> {{ cooldownNL }}",
+              "{{ effect1amount*100.000000 }}% -> {{ effect1amountnl*100.000000 }}%"
             ]
           },
           "maxrank": 5,
@@ -270,8 +270,8 @@
             "full": "TristanaQ.png",
             "sprite": "spell12.png",
             "group": "spell",
-            "x": 384,
-            "y": 48,
+            "x": 0,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -281,7 +281,7 @@
           "id": "TristanaW",
           "name": "Rocket Jump",
           "description": "Tristana fires at the ground to propel her to a distant location, dealing damage and slowing surrounding units for a brief period where she lands.",
-          "tooltip": "Tristana launches herself to target location, dealing {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> Magic Damage and slowing surrounding enemies by {{ e3 }}% for {{ e2 }} seconds.<br /><br />Kills, Assists, and max stack Explosive Charge detonations on Champions reset Rocket Jump's cooldown.",
+          "tooltip": "Tristana launches herself, dealing <magicDamage>{{ landingdamage }} magic damage</magicDamage> and <status>Slowing</status> by {{ e3 }}% for {{ e2 }} seconds upon landing.<br /><br />Champion takedowns and max stack <spellName>Explosive Charge</spellName> detonations on champions refresh this Ability's cooldown.",
           "leveltip": {
             "label": [
               "Damage",
@@ -398,13 +398,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.5,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -419,8 +413,8 @@
             "full": "TristanaW.png",
             "sprite": "spell12.png",
             "group": "spell",
-            "x": 432,
-            "y": 48,
+            "x": 48,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -430,21 +424,21 @@
           "id": "TristanaE",
           "name": "Explosive Charge",
           "description": "When Tristana kills a unit, her cannonballs burst into shrapnel, dealing damage to surrounding enemies. Can be activated to place a bomb on a target enemy that explodes after a short duration dealing damage to surrounding units.",
-          "tooltip": "<spellPassive>Passive: </spellPassive>Enemies explode when slain by Tristana's basic attacks, dealing <magicDamage>{{ passivedamage }} Magic Damage</magicDamage> to nearby enemies.<br /><br /><spellPassive>Active: </spellPassive>Places a bomb on an enemy or turret that explodes after {{ activeduration }} seconds, dealing <physicalDamage>{{ activedamage }} Physical Damage</physicalDamage>. Each attack and ability charges the bomb's damage by +{{ activeperstackamp*100 }}%, up to a maximum of <physicalDamage>{{ activemaxdamage }}</physicalDamage>.<br /><br />At {{ activemaxstacks }} charges, the bomb explodes immediately. The detonation radius is twice as large if used on a turret.",
+          "tooltip": "<spellPassive>Passive: </spellPassive>Tristana's Attacks that kill enemies deal <magicDamage>{{ passivedamage }} magic damage</magicDamage> to surrounding enemies.<br /><br /><spellActive>Active:</spellActive> Tristana attaches a bomb to an enemy or turret that deals <physicalDamage>{{ activedamage }} physical damage</physicalDamage> to surrounding enemies after {{ activeduration }} seconds. The damage is increased by {{ critchanceamp*100 }}% Critical Strike Chance and by {{ activeperstackamp*100 }}% each time Tristana hits an Attack or Ability (max 4 stacks).<br /><br />At {{ activemaxstacks }} stacks, the bomb explodes immediately (max <physicalDamage>{{ activemaxdamage }} physical damage</physicalDamage>).",
           "leveltip": {
             "label": [
+              "Cooldown",
+              "@AbilityResourceName@ Cost",
               "Passive Explosion Damage",
               "Base Charge Damage",
-              "@AbilityResourceName@ Cost",
-              "Attack Damage",
-              "Cooldown"
+              "Attack Damage"
             ],
             "effect": [
+              "{{ cooldown }} -> {{ cooldownNL }}",
+              "{{ cost }} -> {{ costNL }}",
               "{{ passivebasedamage }} -> {{ passivebasedamageNL }}",
               "{{ activebasedamage }} -> {{ activebasedamageNL }}",
-              "{{ cost }} -> {{ costNL }}",
-              "{{ activebadratio*100.000000 }}% -> {{ activebadrationl*100.000000 }}%",
-              "{{ cooldown }} -> {{ cooldownNL }}"
+              "{{ activebadratio*100.000000 }}% -> {{ activebadrationl*100.000000 }}%"
             ]
           },
           "maxrank": 5,
@@ -566,8 +560,8 @@
             "full": "TristanaE.png",
             "sprite": "spell12.png",
             "group": "spell",
-            "x": 0,
-            "y": 96,
+            "x": 96,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -577,17 +571,17 @@
           "id": "TristanaR",
           "name": "Buster Shot",
           "description": "Tristana loads a massive cannonball into her weapon and fires it at an enemy unit. This deals Magic Damage and knocks the target back. If the target is carrying the Explosive Charge bomb, the bomb detonation radius is doubled.",
-          "tooltip": "Tristana fires a massive cannonball at an enemy unit. This deals {{ damagecalc }} Magic Damage and knocks surrounding units back {{ knockbackdistance }} distance.",
+          "tooltip": "Tristana fires a massive cannonball, dealing <magicDamage>{{ damagecalc }} magic damage</magicDamage> to the target and <status>Knocking</status> them <status>Back</status> along with surrounding enemies.",
           "leveltip": {
             "label": [
+              "Cooldown",
               "Damage",
-              "Knockback Distance",
-              "Cooldown"
+              "Knockback Distance"
             ],
             "effect": [
+              "{{ cooldown }} -> {{ cooldownNL }}",
               "{{ basedamage }} -> {{ basedamageNL }}",
-              "{{ knockbackdistance }} -> {{ knockbackdistanceNL }}",
-              "{{ cooldown }} -> {{ cooldownNL }}"
+              "{{ knockbackdistance }} -> {{ knockbackdistanceNL }}"
             ]
           },
           "maxrank": 3,
@@ -683,8 +677,8 @@
             "full": "TristanaR.png",
             "sprite": "spell12.png",
             "group": "spell",
-            "x": 48,
-            "y": 96,
+            "x": 144,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -698,7 +692,7 @@
           "full": "Tristana_Passive.png",
           "sprite": "passive4.png",
           "group": "passive",
-          "x": 48,
+          "x": 192,
           "y": 0,
           "w": 48,
           "h": 48
@@ -887,12 +881,50 @@
               ],
               "items": [
                 {
-                  "id": "2003",
-                  "count": 2,
+                  "id": "1055",
+                  "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "1038",
+                  "id": "2003",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "1001",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "6670",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1037",
                   "count": 1,
                   "hideCount": false
                 }
@@ -920,7 +952,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3031",
+                  "id": "6672",
                   "count": 1,
                   "hideCount": false
                 },
@@ -928,65 +960,9 @@
                   "id": "3046",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
+                },
                 {
                   "id": "3094",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3036",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3087",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3812",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3139",
                   "count": 1,
                   "hideCount": false
                 },
@@ -994,39 +970,11 @@
                   "id": "3072",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
                 },
                 {
-                  "id": "2033",
+                  "id": "3026",
                   "count": 1,
                   "hideCount": false
-                },
-                {
-                  "id": "2140",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }
@@ -1750,7 +1698,7 @@
               ],
               "items": [
                 {
-                  "id": "1054",
+                  "id": "1055",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1783,17 +1731,17 @@
               ],
               "items": [
                 {
-                  "id": "1038",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2015",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
                   "id": "1001",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "6670",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1037",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1816,7 +1764,17 @@
               ],
               "items": [
                 {
-                  "id": "3095",
+                  "id": "3006",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "6672",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3046",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1826,63 +1784,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3006",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3031",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3036",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
                   "id": "3072",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3139",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1890,39 +1792,6 @@
                   "id": "3026",
                   "count": 1,
                   "hideCount": false
-                },
-                {
-                  "id": "3087",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2140",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }

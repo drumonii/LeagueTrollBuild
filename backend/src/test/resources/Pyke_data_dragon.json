@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "Pyke": {
       "id": "Pyke",
@@ -40,6 +40,12 @@
           "id": "555016",
           "num": 16,
           "name": "PROJECT: Pyke",
+          "chromas": true
+        },
+        {
+          "id": "555025",
+          "num": 25,
+          "name": "PsyOps Pyke",
           "chromas": true
         }
       ],
@@ -94,7 +100,7 @@
           "id": "PykeQ",
           "name": "Bone Skewer",
           "description": "Pyke either stabs an enemy in front of him or pulls an enemy towards him.",
-          "tooltip": "<scaleAD>Tap:</scaleAD> Pyke stabs in a direction, damaging the nearest enemy (preferring champions).<br /><br /><scaleAD>Hold: </scaleAD>Pyke throws his harpoon, pulling the first enemy struck towards him.<br /><br />",
+          "tooltip": "<tap>Tap:</tap> Pyke stabs forward, dealing <physicalDamage>{{ totaldamage }} physical damage</physicalDamage> to the first enemy hit, preferring champions.<br /><br /><hold>Hold: </hold>Pyke throws his harpoon, dealing <physicalDamage>{{ totaldamage }} physical damage</physicalDamage> to the first enemy hit and pulling them towards him. They are <status>Slowed</status> by 90% for 1 second.",
           "leveltip": {
             "label": [
               "Damage",

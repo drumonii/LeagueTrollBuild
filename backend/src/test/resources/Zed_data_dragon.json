@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "Zed": {
       "id": "Zed",
@@ -12,7 +12,7 @@
         "full": "Zed.png",
         "sprite": "champion4.png",
         "group": "champion",
-        "x": 240,
+        "x": 384,
         "y": 96,
         "w": 48,
         "h": 48
@@ -58,7 +58,13 @@
           "id": "238013",
           "num": 13,
           "name": "Galaxy Slayer Zed",
-          "chromas": false
+          "chromas": true
+        },
+        {
+          "id": "238015",
+          "num": 15,
+          "name": "PsyOps Zed",
+          "chromas": true
         }
       ],
       "lore": "Utterly ruthless and without mercy, Zed is the leader of the Order of Shadow, an organization he created with the intent of militarizing Ionia's magical and martial traditions to drive out Noxian invaders. During the war, desperation led him to unlock the secret shadow form—a malevolent spirit magic as dangerous and corrupting as it is powerful. Zed has mastered all of these forbidden techniques to destroy anything he sees as a threat to his nation, or his new order.",
@@ -110,7 +116,7 @@
           "id": "ZedQ",
           "name": "Razor Shuriken",
           "description": "Zed and his shadows throw their shurikens.<br><br>Each shuriken deals damage to every enemy hit.",
-          "tooltip": "Zed and his shadows throw their shurikens, each dealing <physicalDamage>{{ totaldamage }} physical damage</physicalDamage> to the first enemy they pass through, and <physicalDamage>{{ passthroughdamage }} physical damage</physicalDamage> to each additional enemy.",
+          "tooltip": "Zed and his <keywordMajor>Shadows</keywordMajor> throw their shurikens, each dealing <physicalDamage>{{ totaldamage }} physical damage</physicalDamage> to the first enemy they pass through, and <physicalDamage>{{ passthroughdamage }} physical damage</physicalDamage> to each additional enemy.",
           "leveltip": {
             "label": [
               "Damage",
@@ -238,10 +244,10 @@
           "rangeBurn": "900",
           "image": {
             "full": "ZedQ.png",
-            "sprite": "spell14.png",
+            "sprite": "spell15.png",
             "group": "spell",
-            "x": 192,
-            "y": 144,
+            "x": 288,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -251,7 +257,7 @@
           "id": "ZedW",
           "name": "Living Shadow",
           "description": "<font color='#FF9900'>Passive:</font> Zed gains energy whenever he and his shadows strike an enemy with the same ability. Energy can only be gained once per cast ability.<br><br><font color='#FF9900'>Active:</font> Zed's shadow dashes forward, remaining in place for a few seconds. Reactivating Living Shadow will cause Zed to switch positions with this shadow.",
-          "tooltip": "<span class=\"colorFF9900\">Passive:</span> Zed gains {{ e3 }} energy whenever he and his shadows strike an enemy with the same ability. Energy can only be gained once per cast ability.<br /><br /><span class=\"colorFF9900\">Active:</span> Zed's shadow dashes forward, remaining in place for {{ e5 }} seconds. Reactivating Living Shadow will cause Zed to switch positions with this shadow.",
+          "tooltip": "<spellPassive>Passive:</spellPassive> Zed gains {{ e3 }} Energy whenever he and his <keywordMajor>Shadows</keywordMajor> strike an enemy with the same Ability.<br /><br /><spellActive>Active:</spellActive> Zed's <keywordMajor>Shadow</keywordMajor> dashes forward, remaining in place for {{ e5 }} seconds. <recast>Recasting</recast> this Ability will cause Zed to switch positions with this <keywordMajor>Shadow</keywordMajor>.",
           "leveltip": {
             "label": [
               "Energy Return",
@@ -381,10 +387,10 @@
           "rangeBurn": "650",
           "image": {
             "full": "ZedW.png",
-            "sprite": "spell14.png",
+            "sprite": "spell15.png",
             "group": "spell",
-            "x": 240,
-            "y": 144,
+            "x": 336,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -394,7 +400,7 @@
           "id": "ZedE",
           "name": "Shadow Slash",
           "description": "Zed and his shadows slash, dealing damage to nearby enemies.",
-          "tooltip": "Zed and his shadows slash, dealing <physicalDamage>{{ totaldamage }} physical damage</physicalDamage> to nearby enemies.<br /><br />Each enemy champion hit by Zed's slash reduces Living Shadow's cooldown by {{ shadowhitcdr }} seconds.<br /><br />Enemies hit by a Shadow's slash are slowed by {{ movespeedmod*-100 }}% for {{ slowduration }} seconds. Enemies hit by multiple slashes take no additional damage but are slowed by {{ movespeedmodbonus*-100 }}% instead.",
+          "tooltip": "Zed and his <keywordMajor>Shadows</keywordMajor> slash, dealing <physicalDamage>{{ totaldamage }} physical damage</physicalDamage> to nearby enemies.<br /><br />Each enemy champion hit by Zed's slash reduces <spellName>Living Shadow</spellName>'s cooldown by {{ shadowhitcdr }} seconds.<br /><br />Enemies hit by a <keywordMajor>Shadow</keywordMajor>'s slash are <status>Slowed</status> by {{ movespeedmod*-100 }}% for {{ slowduration }} seconds. Enemies hit by multiple slashes take no additional damage but are <status>Slowed</status> by {{ movespeedmodbonus*-100 }}% instead.",
           "leveltip": {
             "label": [
               "Damage",
@@ -524,10 +530,10 @@
           "rangeBurn": "290",
           "image": {
             "full": "ZedE.png",
-            "sprite": "spell14.png",
+            "sprite": "spell15.png",
             "group": "spell",
-            "x": 288,
-            "y": 144,
+            "x": 384,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -537,7 +543,7 @@
           "id": "ZedR",
           "name": "Death Mark",
           "description": "Zed becomes untargetable and dashes to an enemy champion, marking them. After 3 seconds the mark triggers, repeating a portion of all the damage Zed dealt to the target while they were marked.",
-          "tooltip": "Zed becomes untargetable and dashes to an enemy champion, marking them. After {{ rdeathmarkduration }} seconds, the mark triggers, dealing physical damage equal to <physicalDamage>{{ rcalculateddamage }}</physicalDamage> + {{ rdamageamp*100 }}% of all damage dealt to the target by Zed while the mark was active.<br /><br />The dash leaves a shadow behind for {{ rshadowdurationdisplayed }} seconds. Reactivating Death Mark causes Zed to switch positions with this shadow.",
+          "tooltip": "Zed becomes Untargetable and dashes to an enemy champion, marking them. After {{ rdeathmarkduration }} seconds, the mark triggers, dealing <physicalDamage>{{ rcalculateddamage }} physical damage</physicalDamage> and repeating {{ rdamageamp*100 }}% of all damage dealt to the target by Zed while the mark was active.<br /><br />The dash leaves a <keywordMajor>Shadow</keywordMajor> behind for {{ rshadowdurationdisplayed }} seconds. Zed can <recast>Recast</recast> this Ability to switch positions with this <keywordMajor>Shadow</keywordMajor>.",
           "leveltip": {
             "label": [
               "Mark Detonation Damage",
@@ -639,10 +645,10 @@
           "rangeBurn": "625",
           "image": {
             "full": "ZedR.png",
-            "sprite": "spell14.png",
+            "sprite": "spell15.png",
             "group": "spell",
-            "x": 336,
-            "y": 144,
+            "x": 432,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -656,7 +662,7 @@
           "full": "shadowninja_P.png",
           "sprite": "passive4.png",
           "group": "passive",
-          "x": 240,
+          "x": 384,
           "y": 96,
           "w": 48,
           "h": 48

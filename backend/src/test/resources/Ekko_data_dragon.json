@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "Ekko": {
       "id": "Ekko",
@@ -94,7 +94,7 @@
         "hp": 585,
         "hpperlevel": 85,
         "mp": 280,
-        "mpperlevel": 50,
+        "mpperlevel": 70,
         "movespeed": 340,
         "armor": 32,
         "armorperlevel": 3,
@@ -117,21 +117,21 @@
           "id": "EkkoQ",
           "name": "Timewinder",
           "description": "Ekko throws a temporal grenade that expands into a time-distortion field upon hitting an enemy champion, slowing and damaging anyone caught inside. After a delay, the grenade rewinds back to Ekko, dealing damage on its return.",
-          "tooltip": "Ekko throws a device that deals <magicDamage>{{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage</magicDamage> to enemies it passes through. It expands into a slowing field on the first champion hit, slowing everything inside by {{ e2 }}%. It then returns to him after a delay, dealing <magicDamage>{{ e3 }} <scaleAP>(+{{ a2 }})</scaleAP> magic damage</magicDamage> to all targets hit upon return.",
+          "tooltip": "Ekko throws a device dealing <magicDamage>{{ initialdamage }} magic damage</magicDamage>. On hitting a champion or reaching the end of its range, it expands into a field that <status>Slows</status> enemies inside by {{ e2 }}%. After it expands, Ekko recalls it, dealing <magicDamage>{{ recalldamage }} magic damage</magicDamage>.",
           "leveltip": {
             "label": [
-              "Outgoing Damage",
-              "Return Damage",
-              "Slow",
               "Cooldown",
-              "@AbilityResourceName@ Cost"
+              "@AbilityResourceName@ Cost",
+              "Outgoing Damage",
+              "Slow",
+              "Return Damage"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
-              "{{ e3 }} -> {{ e3NL }}",
-              "{{ effect2amount*-100.000000 }}% -> {{ effect2amountnl*-100.000000 }}%",
               "{{ cooldown }} -> {{ cooldownNL }}",
-              "{{ cost }} -> {{ costNL }}"
+              "{{ cost }} -> {{ costNL }}",
+              "{{ e1 }} -> {{ e1NL }}",
+              "{{ effect2amount*-100.000000 }}% -> {{ effect2amountnl*-100.000000 }}%",
+              "{{ e3 }} -> {{ e3NL }}"
             ]
           },
           "maxrank": 5,
@@ -238,18 +238,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.3,
-              "key": "a1"
-            },
-            {
-              "link": "spelldamage",
-              "coeff": 0.6,
-              "key": "a2"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -275,7 +264,7 @@
           "id": "EkkoW",
           "name": "Parallel Convergence",
           "description": "Ekko's basic attacks deal bonus magic damage to low health enemies. He can cast Parallel Convergence to split the timeline, creating an anomaly after a few seconds that slows enemies caught inside. If Ekko enters the anomaly, he gains shielding and stuns enemies by suspending them in time.",
-          "tooltip": "<spellPassive>Passive:</spellPassive> Ekko's basic attacks deal <magicDamage>bonus magic damage</magicDamage> to enemies under 30% health equal to {{ e3 }}% <scaleAP>(+{{ a2 }}%)</scaleAP> of their missing health. Deals a minimum of {{ e6 }} damage, and a maximum of {{ e5 }} damage vs. minions and monsters.<br /><br /><spellPassive>Active:</spellPassive> After a 3 second delay, Ekko creates a short-lived chronosphere at the target location that slows enemies who enter by {{ e0 }}%. If Ekko enters the sphere, he will detonate it, gaining a shield that absorbs up to {{ e4 }} <scaleAP>(+{{ a1 }})</scaleAP> damage for 2 seconds. Enemies caught inside are stunned for {{ e2 }} seconds.",
+          "tooltip": "<spellPassive>Passive:</spellPassive> Ekko's Attacks against enemies below 30% Health deal <magicDamage>{{ missinghealthpercent }} missing Health magic damage</magicDamage>.<br /><br /><spellActive>Active:</spellActive> Ekko launches a chronosphere lasting 1.5 seconds after a delay that <status>Slows</status> enemies inside by {{ e0 }}%. If Ekko enters the sphere, he detonates it, <status>Stunning</status> for {{ e2 }} seconds and gaining <shield>{{ totalshield }} Shield</shield>.",
           "leveltip": {
             "label": [
               "Shield Amount",
@@ -392,18 +381,7 @@
             "2",
             "40"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.03,
-              "key": "a2"
-            },
-            {
-              "link": "spelldamage",
-              "coeff": 1.5,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -429,7 +407,7 @@
           "id": "EkkoE",
           "name": "Phase Dive",
           "description": "Ekko rolls evasively while charging up his Z-Drive. His next attack deals bonus damage and warps reality, teleporting him to his target.",
-          "tooltip": " Ekko dashes a short distance in the targeted direction. His next attack will deal <magicDamage>{{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> bonus magic damage</magicDamage> and teleport him to his target.",
+          "tooltip": "Ekko dashes and empowers his next Attack to have bonus range, teleport him to his target, and deal an additional <magicDamage>{{ totaldamage }} magic damage</magicDamage>.",
           "leveltip": {
             "label": [
               "Damage",
@@ -546,13 +524,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.4,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -578,7 +550,7 @@
           "id": "EkkoR",
           "name": "Chronobreak",
           "description": "Ekko shatters his timeline, becoming untargetable and rewinding to a more favorable point in time. He returns to whenever he was a few seconds ago, and heals for a percentage of the damage received in that duration. Enemies near his arrival zone take massive damage.",
-          "tooltip": "Ekko turns back time, going briefly untargetable and invulnerable. He teleports to where he was 4 seconds ago and deals <magicDamage>{{ totaldamage }} magic damage</magicDamage> to nearby enemies on arrival. Additionally, Ekko heals for <healing>{{ totalbaseheal }}</healing>, increased by {{ percenthealampperpercentmissinghealth }}% for each 1% of his health lost over the last 4 seconds.",
+          "tooltip": "Ekko turns back time, entering Stasis while teleporting to where he was 4 seconds ago and dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage> to nearby enemies. In addition, Ekko restores <healing>{{ totalbaseheal }} Health</healing>, increased by {{ percenthealampperpercentmissinghealth }}% for each 1% Health he lost in last 4 seconds.",
           "leveltip": {
             "label": [
               "Damage",
@@ -694,7 +666,7 @@
       ],
       "passive": {
         "name": "Z-Drive Resonance",
-        "description": "Ekko's Zero-Drive charges his spells and attacks with temporal energy. The third hit deals bonus damage and, if the target is a champion, Ekko gains accelerated movement speed.",
+        "description": "Every third attack or damaging spell on the same target deals bonus magic damage, and grants Ekko a burst of speed if the target is a champion.<br><br>",
         "image": {
           "full": "Ekko_P.png",
           "sprite": "passive0.png",
@@ -717,29 +689,20 @@
           "customPanel": null,
           "blocks": [
             {
-              "type": "beginner_starter",
+              "type": "starting",
               "recMath": false,
               "recSteps": false,
               "minSummonerLevel": -1,
-              "maxSummonerLevel": 4,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "1056",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "beginner_starter",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": 5,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
               "items": [
                 {
                   "id": "1056",
@@ -750,43 +713,29 @@
                   "id": "2003",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "beginner_advanced",
-              "recMath": true,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "1028",
-                  "count": 1,
-                  "hideCount": false
                 },
                 {
-                  "id": "1027",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3010",
+                  "id": "3340",
                   "count": 1,
                   "hideCount": false
                 }
               ]
             },
             {
-              "type": "beginner_movementspeed",
-              "recMath": true,
+              "type": "early",
+              "recMath": false,
               "recSteps": false,
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
               "items": [
                 {
                   "id": "1001",
@@ -794,23 +743,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3020",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "beginner_legendaryitem",
-              "recMath": true,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3010",
+                  "id": "4635",
                   "count": 1,
                   "hideCount": false
                 },
@@ -818,25 +751,37 @@
                   "id": "1026",
                   "count": 1,
                   "hideCount": false
-                },
-                {
-                  "id": "3027",
-                  "count": 1,
-                  "hideCount": false
                 }
               ]
             },
             {
-              "type": "beginner_morelegendaryitems",
+              "type": "essential",
               "recMath": false,
               "recSteps": false,
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
               "items": [
                 {
-                  "id": "3116",
+                  "id": "4633",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "4637",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3102",
                   "count": 1,
                   "hideCount": false
                 },
@@ -847,6 +792,11 @@
                 },
                 {
                   "id": "3135",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "4629",
                   "count": 1,
                   "hideCount": false
                 }
@@ -882,12 +832,50 @@
               ],
               "items": [
                 {
-                  "id": "3010",
+                  "id": "1056",
                   "count": 1,
                   "hideCount": false
                 },
                 {
+                  "id": "2003",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
                   "id": "1001",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "4635",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1026",
                   "count": 1,
                   "hideCount": false
                 }
@@ -910,116 +898,32 @@
               ],
               "items": [
                 {
-                  "id": "3029",
+                  "id": "4633",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3020",
+                  "id": "4637",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3100",
+                  "id": "3102",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
+                },
                 {
                   "id": "3089",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3152",
+                  "id": "3135",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3285",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3157",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3151",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3001",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2139",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2033",
+                  "id": "4629",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1802,7 +1706,7 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
+              "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
                 ""
@@ -1818,39 +1722,6 @@
                 },
                 {
                   "id": "2003",
-                  "count": 2,
-                  "hideCount": false
-                },
-                {
-                  "id": "3340",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "startingjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "1039",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2031",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1868,39 +1739,6 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3145",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "1001",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3067",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "earlyjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
               "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
@@ -1911,17 +1749,17 @@
               ],
               "items": [
                 {
-                  "id": "3706",
+                  "id": "1001",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3108",
+                  "id": "4635",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3020",
+                  "id": "1026",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1934,39 +1772,6 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3020",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3152",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3100",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essentialjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
               "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
@@ -1977,73 +1782,12 @@
               ],
               "items": [
                 {
-                  "id": "1402",
+                  "id": "4633",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3152",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3100",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3165",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3135",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3089",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3157",
+                  "id": "4637",
                   "count": 1,
                   "hideCount": false
                 },
@@ -2053,37 +1797,19 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3146",
+                  "id": "3089",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
                 },
                 {
-                  "id": "2139",
+                  "id": "3135",
                   "count": 1,
-                  "hideCount": true
+                  "hideCount": false
+                },
+                {
+                  "id": "4629",
+                  "count": 1,
+                  "hideCount": false
                 }
               ]
             }

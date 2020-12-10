@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "MasterYi": {
       "id": "MasterYi",
@@ -83,6 +83,12 @@
           "num": 24,
           "name": "Blood Moon Master Yi",
           "chromas": false
+        },
+        {
+          "id": "11033",
+          "num": 33,
+          "name": "PsyOps Master Yi",
+          "chromas": false
         }
       ],
       "lore": "Master Yi has tempered his body and sharpened his mind, so that thought and action have become almost as one. Though he chooses to enter into violence only as a last resort, the grace and speed of his blade ensures resolution is always swift. As one of the last living practitioners of the Ionian art of Wuju, Yi has devoted his life to continuing the legacy of his people—scrutinizing potential new disciples with the Seven Lenses of Insight to identify the most worthy among them.",
@@ -135,7 +141,7 @@
           "id": "AlphaStrike",
           "name": "Alpha Strike",
           "description": "Master Yi teleports across the battlefield with blinding speed, dealing physical damage to multiple units in his path, while simultaneously becoming untargetable. Alpha Strike can critically strike and deals bonus physical damage to monsters. Basic attacks reduce Alpha Strike's cooldown.",
-          "tooltip": "Master Yi becomes untargetable and teleports to rapidly strike enemies near his target, dealing {{ e1 }} <span class=\"colorFF8C00\">(+{{ a1 }})</span> physical damage to all enemies hit after {{ e8 }} hits.<br /><br /><rules>Alpha Strike can critically strike for <span class=\"colorFF8C00\">{{ f1 }}</span> additional damage.<br />Monsters take {{ e3 }} bonus damage.<br />Repeat strikes instantly deal {{ falloffmultiplier*100 }}% damage.<br />Basic attacks reduce Alpha Strike's cooldown by {{ e7 }} second.</rules><br />",
+          "tooltip": "Master Yi becomes Untargetable and teleports to rapidly strike enemies near his target, dealing <physicalDamage>{{ totaldamage }} physical damage</physicalDamage> to all enemies hit after {{ alphastrikebounces }} hits. <br /><br />This Ability can strike the same enemy repeatedly if there are no other targets, dealing <physicalDamage>{{ subesquentdamage }} physical damage</physicalDamage> for subsequent hits.",
           "leveltip": {
             "label": [
               "Damage",
@@ -144,8 +150,8 @@
               "@AbilityResourceName@ Cost"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
-              "{{ e3 }} -> {{ e3NL }}",
+              "{{ basedamage }} -> {{ basedamageNL }}",
+              "{{ bonusmonsterdamage }} -> {{ bonusmonsterdamageNL }}",
               "{{ cooldown }} -> {{ cooldownNL }}",
               "{{ cost }} -> {{ costNL }}"
             ]
@@ -171,60 +177,60 @@
           "effect": [
             null,
             [
-              25,
-              60,
-              95,
-              130,
-              165
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              50,
-              50,
-              50,
-              50,
-              50
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              75,
-              100,
-              125,
-              150,
-              175
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              1,
-              1,
-              1,
-              1,
-              1
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              0.25,
-              0.25,
-              0.25,
-              0.25,
-              0.25
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              0.6,
-              0.6,
-              0.6,
-              0.6,
-              0.6
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              1,
-              1,
-              1,
-              1,
-              1
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              4,
-              4,
-              4,
-              4,
-              4
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -243,29 +249,18 @@
           ],
           "effectBurn": [
             null,
-            "25/60/95/130/165",
-            "50",
-            "75/100/125/150/175",
-            "1",
-            "0.25",
-            "0.6",
-            "1",
-            "4",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "attackdamage",
-              "coeff": 1,
-              "key": "a1"
-            },
-            {
-              "link": "attackdamage",
-              "coeff": 0.6,
-              "key": "f1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -291,7 +286,7 @@
           "id": "Meditate",
           "name": "Meditate",
           "description": "Master Yi rejuvenates his body by focus of mind, restoring Health and taking reduced damage for a short time. In addition, Master Yi will gain stacks of Double Strike and pause the remaining duration on Wuju Style and Highlander for each second he channels.",
-          "tooltip": "Master Yi channels, reducing incoming damage by {{ e2 }}% and restoring {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> health over {{ f1.-1 }} seconds. This healing is increased by up to {{ e0 }}% based on missing health.<br /><br />In addition, Master Yi will gain stacks of Double Strike and pause the remaining duration on Wuju Style and Highlander for each second he channels.<br /><br /><rules>Meditate's damage reduction is halved against structures.</rules>",
+          "tooltip": "Master Yi channels, reducing incoming damage by {{ damagereduction*100 }}% and restoring <healing>{{ totalhealpersecondtooltiponly }} Health</healing> over {{ healduration }} seconds. This healing is increased by up to {{ maxmissinghealthpercent*100 }}% based on Master Yi's missing Health.",
           "leveltip": {
             "label": [
               "Health Restored",
@@ -330,11 +325,11 @@
               440
             ],
             [
-              60,
-              62.5,
-              65,
-              67.5,
-              70
+              0.6,
+              0.625,
+              0.65,
+              0.675,
+              0.7
             ],
             [
               0.5,
@@ -396,7 +391,7 @@
           "effectBurn": [
             null,
             "120/200/280/360/440",
-            "60/62.5/65/67.5/70",
+            "0.6/0.625/0.65/0.675/0.7",
             "0.5",
             "4",
             "0",
@@ -406,13 +401,7 @@
             "0",
             "1"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 1,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -438,7 +427,7 @@
           "id": "WujuStyle",
           "name": "Wuju Style",
           "description": "Grants bonus true damage on basic attacks.",
-          "tooltip": "Basic attacks deal {{ e3 }} <span class=\"colorFF8C00\">(+{{ f2 }})</span> bonus true damage for {{ e5 }} seconds.",
+          "tooltip": "Master Yi's Attacks deal an additional <trueDamage>{{ finaltruedamageonhittooltiponly }} true damage</trueDamage> for {{ duration }} seconds.",
           "leveltip": {
             "label": [
               "Cooldown",
@@ -553,20 +542,8 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "attackdamage",
-              "coeff": [
-                0.1,
-                0.125,
-                0.15,
-                0.175,
-                0.2
-              ],
-              "key": "f2"
-            }
-          ],
-          "costType": " {{ abilityresourcename }}",
+          "vars": [],
+          "costType": "No Cost",
           "maxammo": "-1",
           "range": [
             20,
@@ -585,13 +562,13 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} {{ abilityresourcename }}"
+          "resource": "No Cost"
         },
         {
           "id": "Highlander",
           "name": "Highlander",
           "description": "Master Yi moves with unparalleled agility, temporarily increasing his Movement and Attack Speeds as well as making him immune to all slowing effects. While active, Champion kills or assists extend Highlander's duration. Passively reduces cooldown for his other abilities on a kill or assist.",
-          "tooltip": "<span class=\"colorFF9900\">Passive:</span> Champion kills and assists reduce the remaining cooldown of Master Yi's basic abilities by {{ rcooldownrefund*100 }}%.<br /><br /><span class=\"colorFF9900\">Active:</span> Increases Movement Speed by {{ rmsbonus }}%, Attack Speed by {{ rasbonus }}%, and grants immunity to slows for {{ rduration }} seconds. While active, champion kills and assists extend the duration of Highlander by {{ rkillassistextension }} seconds.",
+          "tooltip": "<spellPassive>Passive:</spellPassive> Champion takedowns reduce the remaining cooldown of Master Yi's basic Abilities by {{ rcooldownrefund*100 }}%.<br /><br /><spellActive>Active:</spellActive> Master Yi enters a trance, gaining <speed>{{ rmsbonus }}% Move Speed</speed>, <attackSpeed>{{ rasbonus }}% Attack Speed</attackSpeed>, and immunity to <status>Slows</status> for {{ rduration }} seconds. Champion takedowns extend the duration of this Ability by {{ rkillassistextension }} seconds.",
           "leveltip": {
             "label": [
               "Attack Speed",
@@ -909,18 +886,51 @@
               ],
               "items": [
                 {
-                  "id": "1053",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "1036",
+                  "id": "1055",
                   "count": 1,
                   "hideCount": false
                 },
                 {
                   "id": "2003",
-                  "count": 3,
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "1001",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "6670",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1037",
+                  "count": 1,
                   "hideCount": false
                 }
               ]
@@ -942,108 +952,34 @@
               ],
               "items": [
                 {
-                  "id": "3153",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
                   "id": "3006",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3124",
+                  "id": "6672",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
+                },
                 {
                   "id": "3046",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3031",
+                  "id": "3094",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3087",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3053",
+                  "id": "3072",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3091",
+                  "id": "3026",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2033",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2140",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }
@@ -2100,7 +2036,7 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
+              "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
                 ""
@@ -2127,78 +2063,12 @@
               ]
             },
             {
-              "type": "startingjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "1041",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2031",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3340",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
               "type": "early",
               "recMath": false,
               "recSteps": false,
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3144",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "1001",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "1043",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "earlyjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
               "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
@@ -2209,17 +2079,17 @@
               ],
               "items": [
                 {
-                  "id": "3715",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
                   "id": "1001",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "1043",
+                  "id": "6670",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1037",
                   "count": 1,
                   "hideCount": false
                 }
@@ -2232,7 +2102,7 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
+              "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
                 ""
@@ -2247,101 +2117,22 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3153",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essentialjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "1419",
+                  "id": "6672",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3006",
+                  "id": "3046",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3153",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3124",
+                  "id": "3094",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3091",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3812",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3053",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3139",
+                  "id": "3072",
                   "count": 1,
                   "hideCount": false
                 },
@@ -2349,29 +2140,6 @@
                   "id": "3026",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2140",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }

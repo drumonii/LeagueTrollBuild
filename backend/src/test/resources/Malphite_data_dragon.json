@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "Malphite": {
       "id": "Malphite",
@@ -113,10 +113,10 @@
         "difficulty": 2
       },
       "stats": {
-        "hp": 574.2,
+        "hp": 575,
         "hpperlevel": 90,
-        "mp": 282.2,
-        "mpperlevel": 40,
+        "mp": 280,
+        "mpperlevel": 60,
         "movespeed": 335,
         "armor": 37,
         "armorperlevel": 3.75,
@@ -138,18 +138,18 @@
         {
           "id": "SeismicShard",
           "name": "Seismic Shard",
-          "description": "Using his primal elemental magic, Malphite sends a shard of the earth through the ground at his foe, dealing damage upon impact and stealing Movement Speed for 3 seconds.",
-          "tooltip": "Deals {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage and steals {{ e2 }}% of the target's movement speed for 3 seconds.",
+          "description": "Malphite sends a shard of the earth through the ground at his foe, dealing damage upon impact and stealing Movement Speed for 3 seconds.",
+          "tooltip": "Malphite launches a shard of earth at an enemy, dealing <magicDamage>{{ qdamagecalc }} magic damage</magicDamage>, and <status>Slowing</status> them and granting Malphite <speed>{{ speedsteal }}% Move Speed</speed> for {{ slowduration }} seconds.",
           "leveltip": {
             "label": [
+              "@AbilityResourceName@ Cost",
               "Damage",
-              "Movement Speed",
-              "@AbilityResourceName@ Cost"
+              "Movement Speed"
             ],
             "effect": [
+              "{{ cost }} -> {{ costNL }}",
               "{{ e1 }} -> {{ e1NL }}",
-              "{{ e2 }}% -> {{ e2NL }}%",
-              "{{ cost }} -> {{ costNL }}"
+              "{{ e2 }}% -> {{ e2NL }}%"
             ]
           },
           "maxrank": 5,
@@ -256,13 +256,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.6,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -288,19 +282,19 @@
           "id": "Obduracy",
           "name": "Thunderclap",
           "description": "Malphite attacks with such force that it creates a sonic boom. For the next few seconds, his attacks create aftershocks in front of him.",
-          "tooltip": "<spellPassive>Passive: </spellPassive>Malphite's armor is increased by {{ e1 }}% (<scaleArmor>{{ f1 }}</scaleArmor>). This effect is tripled while Granite Shield is active.<br /><br /><spellPassive>Active: </spellPassive>Malphite's basic attacks create aftershocks for the next 5 seconds, dealing {{ thunderclapsplash }} physical damage in a cone.  His first attack after activating Thunderclap deals {{ totalbonusdamage }} bonus physical damage to his target.",
+          "tooltip": "<spellPassive>Passive: </spellPassive>Malphite gains <scaleArmor>{{ bonusarmorcalc }} Armor</scaleArmor>. This effect is increased to <scaleArmor>{{ empoweredarmorcalc }}</scaleArmor> while <spellName>Granite Shield</spellName> is active.<br /><br /><spellPassive>Active: </spellPassive>Malphite's next Attack deals an additional <physicalDamage>{{ totalbonusdamage }} physical damage</physicalDamage> and creates an aftershock which deals <physicalDamage>{{ thunderclapsplash }} physical damage</physicalDamage> in their direction. His Attacks continue to create aftershocks for the next {{ thunderclapbuffduration }} seconds.",
           "leveltip": {
             "label": [
+              "@AbilityResourceName@ Cost",
               "Armor",
               "Damage",
-              "Aftershock Splash Damage",
-              "@AbilityResourceName@ Cost"
+              "Aftershock Splash Damage"
             ],
             "effect": [
+              "{{ cost }} -> {{ costNL }}",
               "{{ effect1amount*100.000000 }}% -> {{ effect1amountnl*100.000000 }}%",
               "{{ thunderclapbasedamage }} -> {{ thunderclapbasedamageNL }}",
-              "{{ thunderclapsplashdamage }} -> {{ thunderclapsplashdamageNL }}",
-              "{{ cost }} -> {{ costNL }}"
+              "{{ thunderclapsplashdamage }} -> {{ thunderclapsplashdamageNL }}"
             ]
           },
           "maxrank": 5,
@@ -324,11 +318,11 @@
           "effect": [
             null,
             [
-              10,
-              15,
-              20,
-              25,
-              30
+              0.1,
+              0.15,
+              0.2,
+              0.25,
+              0.3
             ],
             [
               20,
@@ -396,7 +390,7 @@
           ],
           "effectBurn": [
             null,
-            "10/15/20/25/30",
+            "0.1/0.15/0.2/0.25/0.3",
             "20/40/60/80/100",
             "5",
             "400",
@@ -432,18 +426,18 @@
         {
           "id": "Landslide",
           "name": "Ground Slam",
-          "description": "Malphite slams the ground, sending out a shockwave that deals magic damage based on his Armor as damage and reduces the Attack Speed of enemies for a short duration.",
-          "tooltip": "Malphite slams the ground dealing {{ e2 }} <scaleArmor>(+{{ f1 }})</scaleArmor> <scaleAP>(+{{ a1 }})</scaleAP> magic damage to surrounding enemies, reducing their Attack Speed by {{ e1 }}% for {{ e4 }} seconds.<br /><br />This ability gains damage equal to {{ e3 }}% of Malphite's Armor.",
+          "description": "Malphite slams the ground, sending out a shockwave that deals magic damage based on his Armor and reduces the Attack Speed of enemies for a short duration.",
+          "tooltip": "Malphite slams the ground, dealing <magicDamage>{{ edamagecalc }} magic damage</magicDamage> and reducing <attackSpeed>Attack Speed by {{ asreduction }}%</attackSpeed> for {{ duration }} seconds.",
           "leveltip": {
             "label": [
+              "@AbilityResourceName@ Cost",
               "Damage",
-              "Attack Speed Reduction",
-              "@AbilityResourceName@ Cost"
+              "Attack Speed Reduction"
             ],
             "effect": [
+              "{{ cost }} -> {{ costNL }}",
               "{{ e2 }} -> {{ e2NL }}",
-              "{{ e1 }}% -> {{ e1NL }}%",
-              "{{ cost }} -> {{ costNL }}"
+              "{{ e1 }}% -> {{ e1NL }}%"
             ]
           },
           "maxrank": 5,
@@ -550,18 +544,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "armor",
-              "coeff": 0.3,
-              "key": "f1"
-            },
-            {
-              "link": "spelldamage",
-              "coeff": 0.6,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -586,16 +569,16 @@
         {
           "id": "UFSlash",
           "name": "Unstoppable Force",
-          "description": "Malphite ferociously charges to a location, damaging enemies and knocking them into the air.",
-          "tooltip": "Malphite charges to target area. Upon his arrival he deals {{ e2 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage to nearby enemies and knocks them into the air for {{ e3 }} seconds.",
+          "description": "Malphite launches himself to a location at high speed, damaging enemies and knocking them into the air.",
+          "tooltip": "Malphite charges with the force of a landslide, dashing Unstoppably. At the end of the dash, Malphite <status>Knocks Up</status> for {{ knockupduration }} seconds and deals <magicDamage>{{ rdamagecalc }} magic damage</magicDamage>.",
           "leveltip": {
             "label": [
-              "Damage",
-              "Cooldown"
+              "Cooldown",
+              "Damage"
             ],
             "effect": [
-              "{{ e2 }} -> {{ e2NL }}",
-              "{{ cooldown }} -> {{ cooldownNL }}"
+              "{{ cooldown }} -> {{ cooldownNL }}",
+              "{{ e2 }} -> {{ e2NL }}"
             ]
           },
           "maxrank": 3,
@@ -678,13 +661,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.8,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -707,7 +684,7 @@
       ],
       "passive": {
         "name": "Granite Shield",
-        "description": "Malphite is shielded by a layer of rock which absorbs damage up to 10% of his maximum Health. If Malphite has not been hit for 10 seconds, this effect recharges.",
+        "description": "Malphite is shielded by a layer of rock which absorbs damage up to 10% of his maximum Health. If Malphite has not been hit for a few seconds, this effect recharges.",
         "image": {
           "full": "Malphite_GraniteShield.png",
           "sprite": "passive2.png",
@@ -889,18 +866,51 @@
               ],
               "items": [
                 {
-                  "id": "2051",
+                  "id": "1054",
                   "count": 1,
                   "hideCount": false
                 },
+                {
+                  "id": "2003",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
                 {
                   "id": "1001",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "2003",
-                  "count": 3,
+                  "id": "6660",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3105",
+                  "count": 1,
                   "hideCount": false
                 }
               ]
@@ -922,146 +932,34 @@
               ],
               "items": [
                 {
-                  "id": "3029",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3020",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3001",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3050",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3025",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
                   "id": "3068",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
+                },
                 {
-                  "id": "3742",
+                  "id": "3111",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3110",
+                  "id": "3143",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3075",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offmeta",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3285",
+                  "id": "3211",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3089",
+                  "id": "3083",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3151",
+                  "id": "3193",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2033",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2139",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }
@@ -1983,7 +1881,7 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
+              "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
                 ""
@@ -2010,78 +1908,12 @@
               ]
             },
             {
-              "type": "startingjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "1039",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2031",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3340",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
               "type": "early",
               "recMath": false,
               "recSteps": false,
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3751",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "1001",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3024",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "earlyjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
               "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
@@ -2092,17 +1924,17 @@
               ],
               "items": [
                 {
-                  "id": "3706",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
                   "id": "1001",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3751",
+                  "id": "6660",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3105",
                   "count": 1,
                   "hideCount": false
                 }
@@ -2115,7 +1947,7 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
+              "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
                 ""
@@ -2130,68 +1962,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3025",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3047",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essentialjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "1401",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3047",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3742",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3001",
+                  "id": "3111",
                   "count": 1,
                   "hideCount": false
                 },
@@ -2199,67 +1970,21 @@
                   "id": "3143",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
+                },
+                {
+                  "id": "3211",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3083",
+                  "count": 1,
+                  "hideCount": false
+                },
                 {
                   "id": "3193",
                   "count": 1,
                   "hideCount": false
-                },
-                {
-                  "id": "3194",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3110",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2138",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }

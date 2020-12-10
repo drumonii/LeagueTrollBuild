@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "Teemo": {
       "id": "Teemo",
@@ -10,10 +10,10 @@
       "title": "the Swift Scout",
       "image": {
         "full": "Teemo.png",
-        "sprite": "champion3.png",
+        "sprite": "champion4.png",
         "group": "champion",
-        "x": 432,
-        "y": 96,
+        "x": 96,
+        "y": 0,
         "w": 48,
         "h": 48
       },
@@ -76,7 +76,7 @@
           "id": "17014",
           "num": 14,
           "name": "Little Devil Teemo",
-          "chromas": false
+          "chromas": true
         },
         {
           "id": "17018",
@@ -145,17 +145,17 @@
           "id": "BlindingDart",
           "name": "Blinding Dart",
           "description": "Obscures an enemy's vision with a powerful venom, dealing damage to the target unit and blinding it for the duration.",
-          "tooltip": "Deals {{ calculateddamage }} magic damage and blinds the target for {{ blindduration }} seconds. ",
+          "tooltip": "Teemo fires a dart, <status>Blinding</status> for {{ blindduration }} seconds and dealing <magicDamage>{{ calculateddamage }} magic damage</magicDamage>.",
           "leveltip": {
             "label": [
-              "Damage",
+              "@AbilityResourceName@ Cost",
               "Duration",
-              "@AbilityResourceName@ Cost"
+              "Damage"
             ],
             "effect": [
-              "{{ basedamage }} -> {{ basedamageNL }}",
+              "{{ cost }} -> {{ costNL }}",
               "{{ blindduration }} -> {{ blinddurationNL }}",
-              "{{ cost }} -> {{ costNL }}"
+              "{{ basedamage }} -> {{ basedamageNL }}"
             ]
           },
           "maxrank": 5,
@@ -277,8 +277,8 @@
             "full": "BlindingDart.png",
             "sprite": "spell12.png",
             "group": "spell",
-            "x": 0,
-            "y": 48,
+            "x": 96,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -288,7 +288,7 @@
           "id": "MoveQuick",
           "name": "Move Quick",
           "description": "Teemo scampers around, passively increasing his Movement Speed until he is struck by an enemy champion or turret. Teemo can sprint to gain bonus Movement Speed that isn't stopped by being struck for a short time.",
-          "tooltip": "<spellPassive>Passive: </spellPassive>Teemo's Movement Speed is increased by {{ passivemsbonus*100 }}% unless he has been damaged by an enemy champion or turret in the last 5 seconds.<br /><br /><spellPassive>Active: </spellPassive>Teemo sprints, gaining twice his normal bonus for {{ msbuffduration }} seconds. This bonus is not lost when struck.",
+          "tooltip": "<spellPassive>Passive:</spellPassive> Teemo gains <speed>{{ passivemsbonus*100 }}% Move Speed</speed> while he hasn't been damaged by a champion or turret in the last 5 seconds.<br /><br /><spellActive>Active:</spellActive> Teemo sprints, gaining <speed>{{ passivemsbonus*200 }}% Move Speed</speed> that is not lost when struck for {{ msbuffduration }} seconds.",
           "leveltip": {
             "label": [
               "Movement Speed"
@@ -416,8 +416,8 @@
             "full": "MoveQuick.png",
             "sprite": "spell12.png",
             "group": "spell",
-            "x": 48,
-            "y": 48,
+            "x": 144,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -427,7 +427,7 @@
           "id": "ToxicShot",
           "name": "Toxic Shot",
           "description": "Each of Teemo's attacks will poison the target, dealing damage on impact and each second after for 4 seconds.",
-          "tooltip": "Teemo's basic attacks poison their target, dealing {{ impactcalculateddamage }} magical damage upon impact and {{ tickcalculateddamage }} magical damage each second for {{ poisonduration }} seconds.",
+          "tooltip": "<spellPassive>Passive:</spellPassive> Teemo's Attacks apply poison, dealing an additional <magicDamage>{{ impactcalculateddamage }} magic damage</magicDamage> plus <magicDamage>{{ totaldotdamage }} magic damage</magicDamage> over {{ poisonduration }} seconds.",
           "leveltip": {
             "label": [
               "Impact Damage",
@@ -557,8 +557,8 @@
             "full": "ToxicShot.png",
             "sprite": "spell12.png",
             "group": "spell",
-            "x": 96,
-            "y": 48,
+            "x": 192,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -568,7 +568,7 @@
           "id": "TeemoRCast",
           "name": "Noxious Trap",
           "description": "Teemo throws an explosive poisonous trap using one of the mushrooms stored in his pack. If an enemy steps on the trap, it will release a poisonous cloud, slowing enemies and damaging them over time. If Teemo throws a mushroom onto another mushroom it will bounce, gaining additional range.",
-          "tooltip": "Tosses a stored mushroom as a trap that detonates if an enemy steps on it, spreading poison to nearby enemies that slows Movement Speed by {{ slowamount }}%, reveals them and deals {{ totaldamage }} magic damage over {{ debuffduration }} seconds. <br /><br />Traps last {{ mushroomduration }} minutes and take {{ armtime }} second to arm and stealth. Up to {{ maxammo }} Traps can be held at once. If a thrown trap lands on another trap, it will bounce up to <span class=\"colorFFFF99\">{{ bouncedistance }}</span> Teemos further before planting.",
+          "tooltip": "Teemo tosses a mushroom trap that detonates when stepped on. The traps <status>Slow</status> by {{ slowamount }}% and deal <magicDamage>{{ totaldamage }} magic damage</magicDamage> over {{ debuffduration }} seconds. Enemies are revealed for the same duration.<br /><br />Traps last {{ mushroomduration }} minutes and are stealthed. A mushroom tossed onto another mushroom bounces before landing at its position. This Ability has {{ maxammo }} charges ({{ ammorechargetime }} second refresh)<br />",
           "leveltip": {
             "label": [
               "Damage",
@@ -678,8 +678,8 @@
             "full": "TeemoRCast.png",
             "sprite": "spell12.png",
             "group": "spell",
-            "x": 144,
-            "y": 48,
+            "x": 240,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -691,10 +691,10 @@
         "description": "If Teemo stands still and takes no actions for a short duration, he becomes Invisible indefinitely. If he's in brush, Teemo can enter and maintain his Invisibility while moving. After leaving Invisibility, Teemo gains the Element of Surprise, increasing his Attack Speed for 3 seconds.",
         "image": {
           "full": "Teemo_P.png",
-          "sprite": "passive3.png",
+          "sprite": "passive4.png",
           "group": "passive",
-          "x": 432,
-          "y": 96,
+          "x": 96,
+          "y": 0,
           "w": 48,
           "h": 48
         }
@@ -871,7 +871,7 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
+              "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
                 ""
@@ -881,52 +881,24 @@
               ],
               "items": [
                 {
-                  "id": "3802",
+                  "id": "1056",
                   "count": 1,
                   "hideCount": false
                 },
                 {
                   "id": "2003",
-                  "count": 2,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essential",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3285",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3020",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3151",
+                  "id": "3340",
                   "count": 1,
                   "hideCount": false
                 }
               ]
             },
             {
-              "type": "offensive",
+              "type": "early",
               "recMath": false,
               "recSteps": false,
               "minSummonerLevel": -1,
@@ -942,7 +914,55 @@
               ],
               "items": [
                 {
-                  "id": "3165",
+                  "id": "1001",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3802",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1026",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "essential",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "6655",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3020",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "4637",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3102",
                   "count": 1,
                   "hideCount": false
                 },
@@ -955,100 +975,6 @@
                   "id": "3135",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3116",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3157",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3102",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offmeta",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3115",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3124",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3146",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2139",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }
@@ -1850,7 +1776,7 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
+              "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
                 ""
@@ -1866,7 +1792,7 @@
                 },
                 {
                   "id": "2003",
-                  "count": 2,
+                  "count": 1,
                   "hideCount": false
                 },
                 {
@@ -1883,7 +1809,7 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
+              "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
                 ""
@@ -1898,12 +1824,12 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3136",
+                  "id": "3802",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3101",
+                  "id": "1026",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1916,7 +1842,7 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
+              "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
                 ""
@@ -1926,7 +1852,7 @@
               ],
               "items": [
                 {
-                  "id": "3151",
+                  "id": "6655",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1936,30 +1862,12 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3115",
+                  "id": "4637",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "standard",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
+                },
                 {
-                  "id": "3135",
+                  "id": "3102",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1969,202 +1877,9 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3165",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "startingjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "1041",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2031",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3340",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "earlyjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3706",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "1001",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3101",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essentialjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "1402",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3020",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3115",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "standard",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3151",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
                   "id": "3135",
                   "count": 1,
                   "hideCount": false
-                },
-                {
-                  "id": "3089",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3091",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3085",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3124",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2139",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }

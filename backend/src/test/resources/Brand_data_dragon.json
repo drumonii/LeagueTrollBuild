@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "Brand": {
       "id": "Brand",
@@ -65,6 +65,12 @@
           "num": 7,
           "name": "Arclight Brand",
           "chromas": true
+        },
+        {
+          "id": "63008",
+          "num": 8,
+          "name": "Eternal Dragon Brand",
+          "chromas": true
         }
       ],
       "lore": "Once a tribesman of the icy Freljord named Kegan Rodhe, the creature known as Brand is a lesson in the temptation of greater power. Seeking one of the legendary World Runes, Kegan betrayed his companions and seized it for himself—and, in an instant, the man was no more. His soul burned away, his body a vessel of living flame, Brand now roams Valoran in search of other Runes, swearing revenge for wrongs he could never possibly have suffered in a dozen mortal lifetimes.",
@@ -116,7 +122,7 @@
           "id": "BrandQ",
           "name": "Sear",
           "description": "Brand launches a ball of fire forward that deals magic damage. If the target is ablaze, Sear will stun the target for 1.5 seconds.",
-          "tooltip": "Brand launches a ball of fire forward that deals <magicDamage>{{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage</magicDamage>.<br /><br /><span class=\"colorDDDD77\">Blaze:</span> If the target is ablaze, Sear will stun the target for 1.5 seconds.",
+          "tooltip": "Brand launches a fireball that deals <magicDamage>{{ totaldamage }} magic damage</magicDamage> to the first enemy hit.<br /><br />If the target is <keywordMajor>Ablaze</keywordMajor>, they will be <status>Stunned</status> for 1.5 seconds.",
           "leveltip": {
             "label": [
               "Damage",
@@ -231,13 +237,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.55,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -263,7 +263,7 @@
           "id": "BrandW",
           "name": "Pillar of Flame",
           "description": "After a short delay, Brand creates a Pillar of Flame at a target area, dealing magic damage to enemy units within the area. Units that are ablaze take an additional 25% damage.",
-          "tooltip": "After a short delay, Brand creates a Pillar of Flame at a location, dealing <magicDamage>{{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage</magicDamage> to enemies.<br /><br /><span class=\"colorDDDD77\">Blaze:</span> Units that are ablaze take an additional 25% damage from Pillar of Flame.",
+          "tooltip": "Brand creates a pillar of pure fire, dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage>.<br /><br />Units that are <keywordMajor>Ablaze</keywordMajor> take <magicDamage>{{ empowereddamage }} damage</magicDamage> instead.",
           "leveltip": {
             "label": [
               "Damage",
@@ -380,13 +380,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.6,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -411,8 +405,8 @@
         {
           "id": "BrandE",
           "name": "Conflagration",
-          "description": "Brand conjures a powerful blast at his target, dealing magic damage to them. If the target is ablaze, Conflagration spreads to nearby enemies.",
-          "tooltip": "Brand conjures a powerful blast at his target, dealing <magicDamage>{{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage</magicDamage>.<br /><br /><span class=\"colorDDDD77\">Blaze:</span> If the target is ablaze, Conflagration spreads to nearby enemies. ",
+          "description": "Brand conjures a powerful blast at his target that spreads to nearby enemies, dealing magic damage. If the target is ablaze, Conflagration's spread is doubled.",
+          "tooltip": "Brand conjures a powerful blast at his target, dealing <magicDamage>{{ explosiondamage }} magic damage</magicDamage> to surrounding units.<br /><br />If the target is <keywordMajor>Ablaze</keywordMajor>, the spread range is doubled.",
           "leveltip": {
             "label": [
               "Damage",
@@ -427,13 +421,13 @@
           },
           "maxrank": 5,
           "cooldown": [
+            12,
+            11,
             10,
             9,
-            8,
-            7,
-            6
+            8
           ],
-          "cooldownBurn": "10/9/8/7/6",
+          "cooldownBurn": "12/11/10/9/8",
           "cost": [
             70,
             75,
@@ -529,13 +523,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.45,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -560,8 +548,8 @@
         {
           "id": "BrandR",
           "name": "Pyroclasm",
-          "description": "Brand unleashes a devastating torrent of fire, dealing magic damage each time it bounces, up to 5 bounces. Bounces prioritize stacking Blaze to max on Champions. If a target is ablaze, Pyroclasm will briefly slow them.",
-          "tooltip": "Brand unleashes a devastating torrent of fire, dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage> each time it bounces up to 5 bounces. Bounces prioritize stacking Blaze to max on Champions.<br /><br /><span class=\"colorDDDD77\">Blaze:</span> If the target is ablaze, Pyroclasm will briefly slow the target by {{ slowamount }}%.",
+          "description": "Brand unleashes a devastating torrent of fire that bounces up to 5 times off of Brand and nearby enemies, dealing magic damage to enemies each time bounce. Bounces prioritize stacking Blaze to max on Champions. If a target is ablaze, Pyroclasm will briefly slow them.",
+          "tooltip": "Brand unleashes a devastating torrent of fire that can bounce to Brand or another enemy up to 5 times, dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage> to enemies each bounce. Bounces prioritize stacking <keywordMajor>Blaze</keywordMajor> to max on champions.<br /><br />If the target is <keywordMajor>Ablaze</keywordMajor>, they are briefly <status>Slowed</status> by {{ slowamount }}%.",
           "leveltip": {
             "label": [
               "Damage per Bounce",
@@ -677,7 +665,7 @@
       ],
       "passive": {
         "name": "Blaze",
-        "description": "Brand's spells light his targets ablaze, dealing damage over 4 seconds, stacking up to 3 times. If Brand kills an enemy while it is ablaze he regains mana. When Blaze reaches max stacks on a Champion or large monster, it becomes unstable. It detonates in 2 seconds, applying spell effects and dealing massive damage in an area around the victim.",
+        "description": "Brand's spells light his targets ablaze, dealing damage over 4 seconds, stacking up to 3 times. If Brand kills an enemy while it is ablaze he regains mana. When Blaze reaches max stacks on a Champion, siege minion, or large monster, it becomes unstable. It detonates in 2 seconds, applying spell effects and dealing massive damage in an area around the victim.",
         "image": {
           "full": "BrandP.png",
           "sprite": "passive0.png",
@@ -822,18 +810,51 @@
               ],
               "items": [
                 {
-                  "id": "3073",
+                  "id": "1056",
                   "count": 1,
                   "hideCount": false
                 },
+                {
+                  "id": "2003",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
                 {
                   "id": "1001",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "2003",
-                  "count": 5,
+                  "id": "3802",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1026",
+                  "count": 1,
                   "hideCount": false
                 }
               ]
@@ -855,7 +876,7 @@
               ],
               "items": [
                 {
-                  "id": "3007",
+                  "id": "6655",
                   "count": 1,
                   "hideCount": false
                 },
@@ -865,63 +886,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3029",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3151",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3135",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3165",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3157",
+                  "id": "4637",
                   "count": 1,
                   "hideCount": false
                 },
@@ -931,40 +896,12 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3116",
+                  "id": "3089",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
                 },
                 {
-                  "id": "2139",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2033",
+                  "id": "3135",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1684,7 +1621,7 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
+              "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
                 ""
@@ -1700,39 +1637,6 @@
                 },
                 {
                   "id": "2003",
-                  "count": 2,
-                  "hideCount": false
-                },
-                {
-                  "id": "3340",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "startingjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "1039",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2031",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1750,39 +1654,6 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "1001",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3706",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3108",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "earlyjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
               "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
@@ -1798,12 +1669,12 @@
                   "hideCount": false
                 },
                 {
-                  "id": "1026",
+                  "id": "3802",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3802",
+                  "id": "1026",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1816,39 +1687,6 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3020",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3151",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3285",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essentialjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
               "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
@@ -1859,40 +1697,22 @@
               ],
               "items": [
                 {
+                  "id": "6655",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
                   "id": "3020",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3151",
+                  "id": "4637",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "1402",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "standard",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3135",
+                  "id": "3102",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1902,70 +1722,9 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3116",
+                  "id": "3135",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3165",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3157",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3102",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2139",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }
@@ -2000,13 +1759,13 @@
               ],
               "items": [
                 {
-                  "id": "3850",
+                  "id": "1056",
                   "count": 1,
                   "hideCount": false
                 },
                 {
                   "id": "2003",
-                  "count": 2,
+                  "count": 1,
                   "hideCount": false
                 },
                 {
@@ -2038,7 +1797,7 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3136",
+                  "id": "3802",
                   "count": 1,
                   "hideCount": false
                 },
@@ -2056,39 +1815,6 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "ItemSmiteAoE",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3020",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3151",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3916",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
               "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
@@ -2099,7 +1825,27 @@
               ],
               "items": [
                 {
-                  "id": "3116",
+                  "id": "6655",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3020",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "4637",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3102",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3089",
                   "count": 1,
                   "hideCount": false
                 },
@@ -2107,39 +1853,6 @@
                   "id": "3135",
                   "count": 1,
                   "hideCount": false
-                },
-                {
-                  "id": "3165",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2031",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2139",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }

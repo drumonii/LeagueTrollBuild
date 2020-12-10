@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "Galio": {
       "id": "Galio",
@@ -117,7 +117,7 @@
           "id": "GalioQ",
           "name": "Winds of War",
           "description": "Galio fires two windblasts that converge into a large tornado that deals damage over time.",
-          "tooltip": "Galio fires two windblasts that deal <magicDamage>{{ qmissiledamage }} magic damage</magicDamage>.<br /><br />When the windblasts meet, they combine into a giant tornado that deals {{ percentsuperqdamagett }}% of enemies' maximum Health (max {{ superqmonstermaxdamagetotal }} vs. monsters) as <magicDamage>magic damage</magicDamage> over {{ superqduration }} seconds.",
+          "tooltip": "Galio fires two windblasts that deal <magicDamage>{{ qmissiledamage }} magic damage</magicDamage> each. When the windblasts meet, they combine into a tornado that deals <magicDamage>{{ percentsuperqdamagett }}% max Health magic damage</magicDamage> over {{ superqduration }} seconds.",
           "leveltip": {
             "label": [
               "Windblast Damage",
@@ -260,7 +260,7 @@
           "id": "GalioW",
           "name": "Shield of Durand",
           "description": "Galio charges a defensive stance, moving slowly. Upon releasing the charge, Galio will taunt and damage nearby enemies.",
-          "tooltip": "<span class=\"colorFF9900\">Passive:</span> After not taking damage for {{ passiveshieldooctimer }} seconds Galio gains a shield that absorbs {{ totalpassiveshield }} magic damage.<br /><br /><span class=\"colorFF9900\">First Cast:</span> Galio starts to charge, gaining {{ e1 }} <scaleMR>(+{{ f2 }})</scaleMR><scaleAP>(+{{ f4 }})</scaleAP>% damage reduction from magic damage and {{ f5 }}% of that amount as damage reduction from physical damage. While charging, Galio slows himself by {{ e3 }}%.<br /><br /><span class=\"colorFF9900\">Second Cast:</span> Galio taunts nearby enemy champions for {{ e4 }} to {{ e7 }} seconds, deals <magicDamage>{{ minimumwbasedamage }} <scaleAP>(+{{ f9 }})</scaleAP> to {{ maximumwbasedamage }} <scaleAP>(+{{ f11 }})</scaleAP> magic damage</magicDamage>, and refreshes the damage reduction for {{ e8 }} seconds. Taunt duration, damage, and radius increase with charge time.",
+          "tooltip": "<spellPassive>Passive:</spellPassive> Gailo gains <shield>{{ totalpassiveshield }} Magic Shield</shield> after not taking damage for {{ passiveshieldooctimer }}.<br /><br /><charge>Begin Charging:</charge> Galio reduces incoming magic damage by {{ magicdamagereduction }} and incoming physical damage by {{ physicaldamagereduction }} and <status>Slows</status> himself by {{ e3 }}%.<br /><br /><release>Release:</release> Galio <status>Taunts</status> enemy champions for between {{ e4 }} to {{ e7 }} seconds, deals between <magicDamage>{{ mintotaldamage }}</magicDamage> and <magicDamage>{{ maxtotaldamage }} magic damage</magicDamage>, and refreshes the damage reduction for {{ e8 }} seconds. Taunt duration, damage, and range increase with charge time.",
           "leveltip": {
             "label": [
               "Shield Health Ratio",
@@ -407,7 +407,7 @@
           "id": "GalioE",
           "name": "Justice Punch",
           "description": "Galio will briefly step back and charge, knocking up the first enemy champion he encounters.",
-          "tooltip": "Galio lunges forward with a mighty blow, dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage> to the first champion and knocking him into the air for {{ knockupduration }} seconds. Enemies in the way take <magicDamage>{{ pvedamage }} magic damage</magicDamage>.<br /><br />Galio will stop upon hitting terrain with Justice Punch.",
+          "tooltip": "Galio lunges forward with a mighty blow, <status>Knocking Up</status> for {{ knockupduration }} seconds and dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage> to the first champion hit. Other enemies in the way take <magicDamage>{{ pvedamage }} magic damage</magicDamage>.<br /><br />Galio's dash stops on hitting terrain.",
           "leveltip": {
             "label": [
               "Damage",
@@ -548,7 +548,7 @@
           "id": "GalioR",
           "name": "Hero's Entrance",
           "description": "Galio designates an ally's position as his landing spot, granting all allies in the area a magic shield. After a delay Galio smashes down location, knocking up nearby enemies.",
-          "tooltip": "Galio designates an allied champion's current position as his landing spot, granting all allied champions in the area <spellName>Shield of Durand's</spellName> magic damage shield for {{ temporarywshieldduration }} seconds.<br /><br />When Galio lands, enemies in the area take <magicDamage>{{ totaldamage }} magic damage</magicDamage> and are knocked into the air for {{ stundurationouter }} seconds.",
+          "tooltip": "Galio designates an allied champion's position as his landing spot, granting all allied champions in the area <spellName>Shield of Durand's</spellName> passive <shield>Shield</shield> for {{ temporarywshieldduration }} seconds. Galio then flies to his landing zone.<br /><br />When Galio lands, he <status>Knocks Up</status> for {{ stundurationouter }} seconds and deals <magicDamage>{{ totaldamage }} magic damage</magicDamage>.",
           "leveltip": {
             "label": [
               "Damage",
@@ -852,12 +852,50 @@
               ],
               "items": [
                 {
-                  "id": "3010",
+                  "id": "1056",
                   "count": 1,
                   "hideCount": false
                 },
                 {
+                  "id": "2003",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
                   "id": "1001",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "4635",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1026",
                   "count": 1,
                   "hideCount": false
                 }
@@ -880,78 +918,12 @@
               ],
               "items": [
                 {
-                  "id": "3029",
+                  "id": "4633",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3111",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3285",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3089",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3151",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3135",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3001",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3157",
+                  "id": "4637",
                   "count": 1,
                   "hideCount": false
                 },
@@ -959,34 +931,21 @@
                   "id": "3102",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
                 },
                 {
-                  "id": "2139",
+                  "id": "3089",
                   "count": 1,
-                  "hideCount": true
+                  "hideCount": false
+                },
+                {
+                  "id": "3135",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "4629",
+                  "count": 1,
+                  "hideCount": false
                 }
               ]
             }
@@ -1712,7 +1671,7 @@
                 },
                 {
                   "id": "2003",
-                  "count": 2,
+                  "count": 1,
                   "hideCount": false
                 },
                 {
@@ -1744,12 +1703,12 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3145",
+                  "id": "4635",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3067",
+                  "id": "1026",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1772,12 +1731,12 @@
               ],
               "items": [
                 {
-                  "id": "3111",
+                  "id": "4633",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3152",
+                  "id": "4637",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1785,105 +1744,21 @@
                   "id": "3102",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "standard",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
+                },
                 {
-                  "id": "3151",
+                  "id": "3089",
                   "count": 1,
                   "hideCount": false
                 },
-                {
-                  "id": "3194",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3110",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
                 {
                   "id": "3135",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3285",
+                  "id": "4629",
                   "count": 1,
                   "hideCount": false
-                },
-                {
-                  "id": "3075",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3193",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2139",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }

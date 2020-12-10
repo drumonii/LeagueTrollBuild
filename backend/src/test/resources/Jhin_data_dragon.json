@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "Jhin": {
       "id": "Jhin",
@@ -393,7 +393,7 @@
           "id": "JhinE",
           "name": "Captive Audience",
           "description": "Jhin places an invisible lotus trap that blooms when walked over. It slows nearby enemies before dealing damage with an explosion of serrated petals. <br><br><font color='#FFFFFF'>Beauty in Death -</font> When Jhin kills an enemy champion, a lotus trap will bloom near their corpse.",
-          "tooltip": "<passive>Passive:</passive> Champions Jhin kills will create and detonate a Lotus Trap at their location.<br /><br /><active>Active:</active> Jhin places an invisible Lotus Trap that creates a zone that <status>Slows</status> by {{ trapslowamount*100 }}% when stepped on by an enemy. After {{ trapdetonationtime }} seconds, the trap detonates, dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage>.<br /><br />Traps last for {{ trapduration }} minutes. This ability has 2 charges.",
+          "tooltip": "<passive>Passive:</passive> Champions Jhin kills will create and detonate a Lotus Trap at their location.<br /><br /><active>Active:</active> Jhin places an invisible Lotus Trap for {{ trapduration }} minutes that creates a zone that <status>Slows</status> by {{ trapslowamount*100 }}% when stepped on by an enemy. After {{ trapdetonationtime }} seconds, the trap detonates, dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage>.<br /><br />This ability has 2 charges ({{ ammorechargeratetooltip }} second refresh).",
           "leveltip": {
             "label": [
               "Damage",
@@ -834,13 +834,51 @@
               ],
               "items": [
                 {
-                  "id": "1038",
+                  "id": "1055",
                   "count": 1,
                   "hideCount": false
                 },
                 {
                   "id": "2003",
-                  "count": 2,
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
+                {
+                  "id": "1001",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "6670",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1037",
+                  "count": 1,
                   "hideCount": false
                 }
               ]
@@ -867,7 +905,12 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3031",
+                  "id": "6672",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3046",
                   "count": 1,
                   "hideCount": false
                 },
@@ -875,138 +918,16 @@
                   "id": "3094",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
+                },
                 {
-                  "id": "3508",
+                  "id": "3072",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3095",
+                  "id": "3026",
                   "count": 1,
                   "hideCount": false
-                },
-                {
-                  "id": "3087",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3046",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3036",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3814",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3139",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offmeta",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3089",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3285",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3907",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2140",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }
@@ -1724,17 +1645,17 @@
               ],
               "items": [
                 {
-                  "id": "1038",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2015",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
                   "id": "1001",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "6670",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1037",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1757,73 +1678,12 @@
               ],
               "items": [
                 {
-                  "id": "3095",
+                  "id": "3006",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3031",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3009",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3094",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3508",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3087",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "selective",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3036",
+                  "id": "6672",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1833,7 +1693,12 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3139",
+                  "id": "3094",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3072",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1841,34 +1706,6 @@
                   "id": "3026",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2140",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }

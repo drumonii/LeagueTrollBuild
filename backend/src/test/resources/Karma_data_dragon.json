@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "Karma": {
       "id": "Karma",
@@ -77,6 +77,12 @@
           "num": 19,
           "name": "Dawnbringer Karma",
           "chromas": false
+        },
+        {
+          "id": "43026",
+          "num": 26,
+          "name": "Odyssey Karma",
+          "chromas": false
         }
       ],
       "lore": "No mortal exemplifies the spiritual traditions of Ionia more than Karma. She is the living embodiment of an ancient soul reincarnated countless times, carrying all her accumulated memories into each new life, and blessed with power that few can comprehend. She has done her best to guide her people in recent times of crisis, though she knows that peace and harmony may come only at a considerable cost—both to her, and to the land she holds most dear.",
@@ -129,7 +135,7 @@
           "id": "KarmaQ",
           "name": "Inner Flame",
           "description": "Karma sends forth a ball of spirit energy that explodes and deals damage upon hitting an enemy unit.<br><br>Mantra Bonus: In addition to the explosion, Mantra increases the destructive power of her Inner Flame, creating a cataclysm which deals damage after a short delay.",
-          "tooltip": "Fires a blast of energy that explodes upon enemy contact, dealing <magicDamage>{{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage</magicDamage> and slowing Movement Speed by {{ e2 }}% for {{ e3 }} seconds. <br /><br /><span class=\"colorFF9900\">Mantra Bonus - Soulflare:</span> Deals <magicDamage>{{ f1 }} <scaleAP>(+{{ a2 }})</scaleAP> additional magic damage</magicDamage> and leaves a circle of flame that slows enemies by {{ f3 }}%. After 1.5 seconds the circle erupts, dealing {{ f2 }} <scaleAP>(+{{ charabilitypower*1.5 }})</scaleAP> magic damage to enemies in the area.",
+          "tooltip": "Karma fires a blast of energy, dealing <magicDamage>{{ basedamage }} magic damage</magicDamage> to the first target hit and surrounding enemies, and <status>Slowing</status> them by {{ e2 }}% for {{ e3 }} seconds.",
           "leveltip": {
             "label": [
               "Damage",
@@ -244,38 +250,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.4,
-              "key": "a1"
-            },
-            {
-              "link": "@text",
-              "coeff": [
-                25,
-                75,
-                125,
-                175
-              ],
-              "key": "f1"
-            },
-            {
-              "link": "spelldamage",
-              "coeff": 0.3,
-              "key": "a2"
-            },
-            {
-              "link": "@text",
-              "coeff": [
-                50,
-                150,
-                250,
-                350
-              ],
-              "key": "f2"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -301,7 +276,7 @@
           "id": "KarmaSpiritBind",
           "name": "Focused Resolve",
           "description": "Karma creates a tether between herself and a targeted enemy, dealing damage and revealing them. If the tether is not broken, the enemy will be rooted and damaged again.<br><br>Mantra Bonus: Karma strengthens the link, healing herself and extending the root duration.",
-          "tooltip": "Links Karma to an enemy champion or monster, granting <span class=\"coloree91d7\">True Sight</span> and dealing <magicDamage>{{ effect1amount*0.5 }} <scaleAP>(+{{ f4 }}) </scaleAP>magic damage</magicDamage>. If the link is unbroken for {{ e3 }} seconds, the target is rooted for {{ e2 }} second(s) and takes an additional <magicDamage>{{ effect1amount*0.5 }} <scaleAP>(+{{ f4 }}) </scaleAP>magic damage</magicDamage>.<br /><br /><span class=\"colorFF9900\">Mantra Bonus - Renewal:</span> Karma is healed for {{ f1 }}% <scaleAP>(+{{ f3 }}%)</scaleAP> of her missing health. If the link is not broken or the target dies, the root duration is increased by {{ f2 }} second(s) and Karma is healed for {{ f1 }}% <scaleAP>(+{{ f3 }}%)</scaleAP> of her missing health.",
+          "tooltip": "Karma tethers herself to a champion or jungle monster, dealing <magicDamage>{{ initialdamage }} magic damage</magicDamage> and revealing them for 2 seconds. If the tether remains unbroken, the target takes <magicDamage>{{ initialdamage }} damage</magicDamage> again and is <status>Rooted</status> for {{ e2 }} seconds.",
           "leveltip": {
             "label": [
               "Damage",
@@ -418,28 +393,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "@text",
-              "coeff": [
-                75,
-                150,
-                225,
-                300
-              ],
-              "key": "f1"
-            },
-            {
-              "link": "@text",
-              "coeff": [
-                75,
-                150,
-                225,
-                300
-              ],
-              "key": "f1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -465,7 +419,7 @@
           "id": "KarmaSolKimShield",
           "name": "Inspire",
           "description": "Karma summons a protective shield that absorbs incoming damage and increases the Movement Speed of the protected ally.<br><br>Mantra Bonus: Energy radiates out from her target, strengthening the initial shield and applying Inspire to nearby allied champions.",
-          "tooltip": "Target ally gains a shield, granting {{ e3 }}% Movement Speed for {{ e2 }} seconds and absorbing {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> damage for {{ e4 }} seconds.<br /><br /><span class=\"colorFF9900\">Mantra Bonus - Defiance:</span> The shield overflows with energy, absorbing an additional {{ f1 }} <scaleAP>(+{{ a2 }})</scaleAP> damage. Nearby allied champions gain shields that absorb {{ f2 }}% as much as the initial target's shield. All champions shielded gain {{ f3 }}% movement speed for {{ e2 }} seconds.",
+          "tooltip": "Karma grants an allied champion <shield>{{ totalshield }} Shield</shield> for {{ e4 }} seconds and <speed>{{ e3 }}% Move Speed</speed> for {{ e2 }} seconds.",
           "leveltip": {
             "label": [
               "Shield Amount",
@@ -584,28 +538,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.5,
-              "key": "a1"
-            },
-            {
-              "link": "@text",
-              "coeff": [
-                60,
-                140,
-                220,
-                300
-              ],
-              "key": "f1"
-            },
-            {
-              "link": "spelldamage",
-              "coeff": 0.5,
-              "key": "a2"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -631,7 +564,7 @@
           "id": "KarmaMantra",
           "name": "Mantra",
           "description": "Karma empowers her next ability to do an additional effect. Mantra is available at level 1 and does not require a skill point.",
-          "tooltip": "Karma empowers her next ability within 8 seconds for an additional effect. <br /><br /><span class=\"colorFF9900\">Soulflare: </span>Deals bonus damage and leaves behind a circle of flame, slowing enemies and dealing additional damage. <br /><br /><span class=\"colorFF9900\">Renewal: </span>Karma heals for a portion of her missing health. If the link is unbroken the root is longer and Karma is healed again.<br /><br /><span class=\"colorFF9900\">Defiance: </span>The shield is stronger and allied champions around the target also gain a shield and movement speed.",
+          "tooltip": "Karma empowers her next Ability used within 8 seconds.<br /><li><spellName>Inner Flame</spellName>: Deals an additional <magicDamage>{{ rqtotalimpactdamage }} magic damage</magicDamage> and leaves behind a circle of flame, <status>Slowing</status> enemies and dealing an additional {{ rqfielddamage }} damage.  <li><spellName>Focused Resolve</spellName>: Karma will restore <healing>{{ rwhealamount }} Health</healing> at the beginning and end of the tether, and <status>Root</status> for {{ rwtotalroot }} second(s) longer.<li><spellName>Inspire</spellName>: Karma grants <shield>{{ rebonusshield }} more Shield</shield> and grants the base <shield>Shield</shield> and <speed>Move Speed</speed> in an area.",
           "leveltip": {
             "label": [
               "Soulflare Impact",
@@ -650,12 +583,12 @@
           },
           "maxrank": 4,
           "cooldown": [
-            45,
-            42,
-            39,
-            36
+            40,
+            38,
+            36,
+            34
           ],
-          "cooldownBurn": "45/42/39/36",
+          "cooldownBurn": "40/38/36/34",
           "cost": [
             0,
             0,
@@ -764,7 +697,7 @@
       ],
       "passive": {
         "name": "Gathering Fire",
-        "description": "Reduces Mantra's cooldown each time Karma damages an enemy champion with one of her abilities (Half-effect for Karma's basic attacks)",
+        "description": "Reduces Mantra's cooldown each time Karma damages an enemy champion with one of her abilities or basic attacks",
         "image": {
           "full": "Karma_Passive.png",
           "sprite": "passive1.png",
@@ -957,18 +890,51 @@
               ],
               "items": [
                 {
-                  "id": "3073",
+                  "id": "1056",
                   "count": 1,
                   "hideCount": false
                 },
+                {
+                  "id": "2003",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
                 {
                   "id": "1001",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "2003",
-                  "count": 5,
+                  "id": "3802",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1026",
+                  "count": 1,
                   "hideCount": false
                 }
               ]
@@ -990,7 +956,7 @@
               ],
               "items": [
                 {
-                  "id": "3007",
+                  "id": "6655",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1000,40 +966,17 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3174",
+                  "id": "4637",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
+                },
+                {
+                  "id": "3102",
+                  "count": 1,
+                  "hideCount": false
+                },
                 {
                   "id": "3089",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3151",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3165",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1041,105 +984,6 @@
                   "id": "3135",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3029",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3157",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3001",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3065",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "support",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3504",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3107",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3222",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2139",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }
@@ -1940,13 +1784,13 @@
               ],
               "items": [
                 {
-                  "id": "3850",
+                  "id": "1056",
                   "count": 1,
                   "hideCount": false
                 },
                 {
                   "id": "2003",
-                  "count": 2,
+                  "count": 1,
                   "hideCount": false
                 },
                 {
@@ -1978,12 +1822,12 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3028",
+                  "id": "3802",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3108",
+                  "id": "1026",
                   "count": 1,
                   "hideCount": false
                 }
@@ -2006,113 +1850,34 @@
               ],
               "items": [
                 {
-                  "id": "3174",
+                  "id": "6655",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3117",
+                  "id": "3020",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3504",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3905",
+                  "id": "4637",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "2065",
+                  "id": "3102",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3165",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3107",
+                  "id": "3089",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3222",
+                  "id": "3135",
                   "count": 1,
                   "hideCount": false
-                },
-                {
-                  "id": "3190",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2139",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }
@@ -2152,7 +1917,7 @@
                 },
                 {
                   "id": "2003",
-                  "count": 2,
+                  "count": 1,
                   "hideCount": false
                 },
                 {
@@ -2184,12 +1949,12 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3028",
+                  "id": "3802",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3108",
+                  "id": "1026",
                   "count": 1,
                   "hideCount": false
                 }
@@ -2212,45 +1977,22 @@
               ],
               "items": [
                 {
+                  "id": "6655",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
                   "id": "3020",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3165",
+                  "id": "4637",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3174",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3504",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3151",
+                  "id": "3102",
                   "count": 1,
                   "hideCount": false
                 },
@@ -2260,37 +2002,9 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3285",
+                  "id": "3135",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2031",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2139",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }

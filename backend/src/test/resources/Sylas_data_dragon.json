@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.16.1",
+  "version": "10.25.1",
   "data": {
     "Sylas": {
       "id": "Sylas",
@@ -12,7 +12,7 @@
         "full": "Sylas.png",
         "sprite": "champion3.png",
         "group": "champion",
-        "x": 144,
+        "x": 288,
         "y": 96,
         "w": 48,
         "h": 48
@@ -63,7 +63,7 @@
         "hp": 525,
         "hpperlevel": 115,
         "mp": 280,
-        "mpperlevel": 50,
+        "mpperlevel": 70,
         "movespeed": 340,
         "armor": 27,
         "armorperlevel": 4,
@@ -86,21 +86,21 @@
           "id": "SylasQ",
           "name": "Chain Lash",
           "description": "Sylas lashes his chains out, intersecting at his targeted location dealing damage to and slowing enemies. <br><br>After a delay, magical energy explodes from the intersection point dealing damage.",
-          "tooltip": "Sylas lashes his chains out in an X-shaped area, intersecting at his targeted location dealing <scaleAP>{{ damage }}</scaleAP> magic damage to and slowing enemies by {{ slowamountcalc }} for {{ slowduration }} seconds. <br /><br />After {{ detonationdelay }} seconds, magical energy explodes from the intersection point dealing <scaleAP>{{ explosiondamage }}</scaleAP>.<br /><br /><rules>The explosion deals {{ minionmonstermod*100 }}% damage to minions and monsters.</rules>",
+          "tooltip": "Sylas lashes his chains out, dealing <magicDamage>{{ damage }} magic damage</magicDamage> and <status>Slowing</status> by {{ slowamountcalc }} for {{ slowduration }} seconds. The place where the chains intersect explodes, dealing a further <magicDamage>{{ explosiondamage }} magic damage</magicDamage>.",
           "leveltip": {
             "label": [
-              "Damage",
               "Cooldown",
+              "@AbilityResourceName@ Cost",
+              "Damage",
               "Slow",
-              "Secondary Damage",
-              "@AbilityResourceName@ Cost"
+              "Secondary Damage"
             ],
             "effect": [
-              "{{ basedamage }} -> {{ basedamageNL }}",
               "{{ cooldown }} -> {{ cooldownNL }}",
+              "{{ cost }} -> {{ costNL }}",
+              "{{ basedamage }} -> {{ basedamageNL }}",
               "{{ slowamount*100.000000 }}% -> {{ slowamountnl*100.000000 }}%",
-              "{{ explosionbasedamage }} -> {{ explosionbasedamageNL }}",
-              "{{ cost }} -> {{ costNL }}"
+              "{{ explosionbasedamage }} -> {{ explosionbasedamageNL }}"
             ]
           },
           "maxrank": 5,
@@ -222,8 +222,8 @@
             "full": "SylasQ.png",
             "sprite": "spell11.png",
             "group": "spell",
-            "x": 288,
-            "y": 96,
+            "x": 384,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -233,7 +233,7 @@
           "id": "SylasW",
           "name": "Kingslayer",
           "description": "Sylas lunges at an enemy with magical force dealing execute based damage and healing himself against enemy champions.",
-          "tooltip": "Sylas lunges at an enemy with magical force dealing <scaleAP>{{ mindamage }}</scaleAP> magic damage.<br /><br />If used against a champion, Sylas heals for <scaleAP>{{ minhealing }}</scaleAP> - <scaleAP>{{ maxhealing }}</scaleAP> based on his missing health (maximum heal at {{ maxexecutethreshold*100 }}% health). ",
+          "tooltip": "Sylas lunges at an enemy with magical force dealing <scaleAP>{{ mindamage }} magic damage</scaleAP>. Against champions, Sylas restores between <healing>{{ minhealing }}</healing> and <healing>{{ maxhealing }} Health</healing> based on his missing Health (max healing at or below {{ maxexecutethreshold*100 }}% Health).",
           "leveltip": {
             "label": [
               "Damage",
@@ -367,8 +367,8 @@
             "full": "SylasW.png",
             "sprite": "spell11.png",
             "group": "spell",
-            "x": 336,
-            "y": 96,
+            "x": 432,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -378,7 +378,7 @@
           "id": "SylasE",
           "name": "Abscond / Abduct",
           "description": "Sylas dashes to a location. Sylas can recast the ability to throw his chains out, pulling himself to an enemy he hits.",
-          "tooltip": "Sylas dashes to a location.<br /><br /><span class=\"colorFF5733\">Recast:</span> Sylas throws out his chain in a direction, pulling himself to the first enemy hit dealing <scaleAP>{{ damage }}</scaleAP> magic damage and knocking them up for {{ knockupduration }} seconds.",
+          "tooltip": "Sylas quickly dashes, and prepares a <recast>Recast</recast> for 3.5 seconds.<br /><br /><recast>Recast:</recast> Sylas throws his chains, pulling himself to the first enemy hit, dealing <magicDamage>{{ damage }} magic damage</magicDamage>, and <status>Knocking Up</status> for {{ knockupduration }} seconds.",
           "leveltip": {
             "label": [
               "Damage",
@@ -506,10 +506,10 @@
           "rangeBurn": "400",
           "image": {
             "full": "SylasE.png",
-            "sprite": "spell11.png",
+            "sprite": "spell12.png",
             "group": "spell",
-            "x": 384,
-            "y": 96,
+            "x": 0,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -519,7 +519,7 @@
           "id": "SylasR",
           "name": "Hijack",
           "description": "Sylas steals the enemy's ultimate ability and can cast it freely.",
-          "tooltip": "Sylas hijacks a targeted enemy, allowing him to cast their ultimate ability as they would cast it, based on his Ultimate level and using his stats.<br /><br /><rules>Hijacking an enemy places a cooldown on them for 200% (modified by Sylas' Cooldown Reduction, minimum {{ minimumenemycooldown }} seconds) of the enemy's ultimate's cooldown, during which time Sylas cannot hijack them again.</rules><br /><br /><rules>Sylas converts non-hybrid AD ratios into AP ratios, granting him .4 AP: 1 Bonus AD and .6 AP: 1 Total AD respectively.</rules>",
+          "tooltip": "Sylas hijacks an enemy champion, allowing him to cast a copy of their ultimate Ability, based on his Ultimate level and using his stats.<br /><br />Hijacking an enemy places a cooldown on them for {{ pertargetcooldown }}% (modified by Sylas' Cooldown Reduction) of the enemy's ultimate's cooldown, with a minimum of {{ minimumenemycooldown }} seconds, during which time Sylas cannot hijack them again.",
           "leveltip": {
             "label": [
               "Cooldown"
@@ -531,10 +531,10 @@
           "maxrank": 3,
           "cooldown": [
             100,
-            80,
-            60
+            70,
+            40
           ],
-          "cooldownBurn": "100/80/60",
+          "cooldownBurn": "100/70/40",
           "cost": [
             75,
             75,
@@ -619,10 +619,10 @@
           "rangeBurn": "950",
           "image": {
             "full": "SylasR.png",
-            "sprite": "spell11.png",
+            "sprite": "spell12.png",
             "group": "spell",
-            "x": 432,
-            "y": 96,
+            "x": 48,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -636,7 +636,7 @@
           "full": "SylasP.png",
           "sprite": "passive3.png",
           "group": "passive",
-          "x": 144,
+          "x": 288,
           "y": 96,
           "w": 48,
           "h": 48
@@ -777,18 +777,51 @@
               ],
               "items": [
                 {
-                  "id": "3112",
+                  "id": "1056",
                   "count": 1,
                   "hideCount": false
                 },
+                {
+                  "id": "2003",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "3340",
+                  "count": 1,
+                  "hideCount": false
+                }
+              ]
+            },
+            {
+              "type": "early",
+              "recMath": false,
+              "recSteps": false,
+              "minSummonerLevel": -1,
+              "maxSummonerLevel": -1,
+              "showIfSummonerSpell": "",
+              "hideIfSummonerSpell": "",
+              "appendAfterSection": "",
+              "visibleWithAllOf": [
+                ""
+              ],
+              "hiddenWithAnyOf": [
+                ""
+              ],
+              "items": [
                 {
                   "id": "1001",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "2003",
-                  "count": 3,
+                  "id": "4635",
+                  "count": 1,
+                  "hideCount": false
+                },
+                {
+                  "id": "1026",
+                  "count": 1,
                   "hideCount": false
                 }
               ]
@@ -810,40 +843,17 @@
               ],
               "items": [
                 {
-                  "id": "3152",
+                  "id": "4633",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3285",
+                  "id": "4637",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3020",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3165",
+                  "id": "3102",
                   "count": 1,
                   "hideCount": false
                 },
@@ -856,65 +866,9 @@
                   "id": "3135",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3157",
-                  "count": 1,
-                  "hideCount": false
                 },
                 {
-                  "id": "3151",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3065",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2139",
+                  "id": "4629",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1621,34 +1575,6 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2033",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3340",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "startingjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
               "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
@@ -1659,12 +1585,12 @@
               ],
               "items": [
                 {
-                  "id": "1039",
+                  "id": "1056",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "2031",
+                  "id": "2003",
                   "count": 1,
                   "hideCount": false
                 },
@@ -1682,39 +1608,6 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "1001",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3802",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "1026",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "earlyjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
               "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
@@ -1730,12 +1623,12 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3706",
+                  "id": "4635",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3108",
+                  "id": "1026",
                   "count": 1,
                   "hideCount": false
                 }
@@ -1748,39 +1641,6 @@
               "minSummonerLevel": -1,
               "maxSummonerLevel": -1,
               "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3020",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3285",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3152",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essentialjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
               "hideIfSummonerSpell": "",
               "appendAfterSection": "",
               "visibleWithAllOf": [
@@ -1791,71 +1651,20 @@
               ],
               "items": [
                 {
-                  "id": "3020",
+                  "id": "4633",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "1402",
+                  "id": "4637",
                   "count": 1,
                   "hideCount": false
                 },
                 {
-                  "id": "3152",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "standard",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3157",
+                  "id": "3102",
                   "count": 1,
                   "hideCount": false
                 },
-                {
-                  "id": "3100",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3165",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
                 {
                   "id": "3089",
                   "count": 1,
@@ -1867,37 +1676,9 @@
                   "hideCount": false
                 },
                 {
-                  "id": "3065",
+                  "id": "4629",
                   "count": 1,
                   "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2139",
-                  "count": 1,
-                  "hideCount": true
                 }
               ]
             }
