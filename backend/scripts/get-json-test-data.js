@@ -78,7 +78,7 @@ function writeFile(fileName, rawData) {
   const jsonFileName = `${fileName}.json`;
   const resolvedJsonFilePath = path.resolve(__dirname, `../src/test/resources/${jsonFileName}`);
   console.log(`writing ${jsonFileName} to ${resolvedJsonFilePath}...`);
-  fs.writeFile(resolvedJsonFilePath, rawData, (err) => {
+  fs.writeFile(resolvedJsonFilePath, JSON.stringify(JSON.parse(rawData), null, 2), (err) => {
     if (err) {
       console.error(err.message);
     }
