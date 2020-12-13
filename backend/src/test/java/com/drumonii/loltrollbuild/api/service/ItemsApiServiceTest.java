@@ -93,17 +93,4 @@ class ItemsApiServiceTest {
 
     }
 
-    @Nested
-    @DisplayName("viktor only")
-    class viktorOnly {
-
-        @Test
-        void viktorOnly() {
-            apiService.viktorOnly();
-
-            verify(itemsRepository, times(1)).viktorOnly();
-        }
-
-    }
-
 }

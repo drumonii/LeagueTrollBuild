@@ -177,20 +177,6 @@ include::{snippets}/trinketItems/http-response.adoc[]
 
 include::{snippets}/trinketItems/response-fields.adoc[]
 
-[[resources-viktor-only-items]]
-=== Viktor Only Items
-A `GET` request will retrieve all starting `Item` s for only http://leagueoflegends.wikia.com/wiki/Viktor[Viktor].
-include::{snippets}/viktorOnlyItems/http-request.adoc[]
-
-==== Example Usage
-Usage with `CURL`:
-include::{snippets}/viktorOnlyItems/curl-request.adoc[]
-
-==== Response Structure
-include::{snippets}/viktorOnlyItems/http-response.adoc[]
-
-include::{snippets}/viktorOnlyItems/response-fields.adoc[]
-
 [[resources-items-troll-build]]
 === Items for Troll Build
 A `GET` request will retrieve all `Items` s eligible for the troll build and the specified <<game-modes-table, game mode>>.

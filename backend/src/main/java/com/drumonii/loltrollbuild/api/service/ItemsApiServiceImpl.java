@@ -41,9 +41,4 @@ public class ItemsApiServiceImpl implements ItemsApiService {
         return itemsRepository.trinkets(mapId);
     }
 
-    @Override
-    public List<Item> viktorOnly() {
-        return itemsRepository.viktorOnly();
-    }
-
 }

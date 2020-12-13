@@ -53,11 +53,4 @@ public interface ItemsApiService {
      */
     List<Item> trinkets(int mapId);
 
-    /**
-     * Gets all {@link Item}s that only Viktor starts with.
-     *
-     * @return the {@link List} of {@link Item}s
-     */
-    List<Item> viktorOnly();
-
 }

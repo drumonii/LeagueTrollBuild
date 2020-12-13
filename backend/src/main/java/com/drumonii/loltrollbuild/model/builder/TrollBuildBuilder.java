@@ -68,14 +68,6 @@ public final class TrollBuildBuilder {
 		return this;
 	}
 
-	public TrollBuildBuilder withViktor(List<Item> viktorOnly) {
-		if (viktorOnly != null && !viktorOnly.isEmpty()) {
-			items.remove(items.size() - 1);
-			items.add(1, RandomizeUtil.getRandom(viktorOnly));
-		}
-		return this;
-	}
-
 	public TrollBuild build() {
 		TrollBuild trollBuild = new TrollBuild();
 		trollBuild.setItems(items);
