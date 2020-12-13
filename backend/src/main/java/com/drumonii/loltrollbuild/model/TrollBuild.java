@@ -13,6 +13,10 @@ public class TrollBuild {
 
 	@JsonProperty
 	@JsonView(ApiViews.LtbApi.class)
+	private String champion;
+
+	@JsonProperty
+	@JsonView(ApiViews.LtbApi.class)
 	private List<Item> items;
 
 	@JsonProperty
@@ -26,6 +30,14 @@ public class TrollBuild {
 	@JsonProperty
 	@JsonView(ApiViews.LtbApi.class)
 	private Item trinket;
+
+	public String getChampion() {
+		return champion;
+	}
+
+	public void setChampion(String champion) {
+		this.champion = champion;
+	}
 
 	public List<Item> getItems() {
 		return items;
