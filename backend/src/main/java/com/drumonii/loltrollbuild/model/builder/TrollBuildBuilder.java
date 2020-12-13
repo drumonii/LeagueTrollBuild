@@ -1,5 +1,6 @@
 package com.drumonii.loltrollbuild.model.builder;
 
+import com.drumonii.loltrollbuild.model.Champion;
 import com.drumonii.loltrollbuild.model.Item;
 import com.drumonii.loltrollbuild.model.SummonerSpell;
 import com.drumonii.loltrollbuild.model.TrollBuild;
@@ -17,10 +18,15 @@ public final class TrollBuildBuilder {
 	static final int ITEMS_SIZE = 6;
 	static final int SPELLS_SIZE = 2;
 
+	private Champion champion;
 	private List<Item> items = new ArrayList<>();
 	private int totalGold;
 	private List<SummonerSpell> summonerSpells = new ArrayList<>();
 	private Item trinket;
+
+	public TrollBuildBuilder(Champion champion) {
+		this.champion = champion;
+	}
 
 	private TrollBuildBuilder withBoots(Item boots) {
 		if (boots != null) {
@@ -70,6 +76,7 @@ public final class TrollBuildBuilder {
 
 	public TrollBuild build() {
 		TrollBuild trollBuild = new TrollBuild();
+		trollBuild.setChampion(champion.getName());
 		trollBuild.setItems(items);
 		trollBuild.setTotalGold(totalGold);
 		trollBuild.setSummonerSpells(summonerSpells);

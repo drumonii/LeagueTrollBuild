@@ -104,7 +104,7 @@ public class ChampionsRestController {
 		Champion champion = championsApiService.find(value)
 				.orElseThrow(() -> new ResourceNotFoundException("Unable to find a Champion with value: " + value));
 
-		return new TrollBuildBuilder()
+		return new TrollBuildBuilder(champion)
 				.withBoots(itemsApiService.boots(mapId))
 				.withItems(itemsApiService.forTrollBuild(mapId))
 				.withSummonerSpells(summonerSpellsApiService.forTrollBuild(GameMapUtil

@@ -390,6 +390,8 @@ class ApiDocumentation {
 						parameterWithName("mapId")
 								.description("The Map Id. Defaults to Summoner's Rift if unspecified. See <<game-maps-table, Game Maps Table>> for Map IDs")
 								.optional()), relaxedResponseFields(
+						fieldWithPath("champion")
+								.description("The Champion of the Troll Build"),
 						fieldWithPath("trinket")
 								.description("The trinket of the Troll Build"),
 						fieldWithPath("summonerSpells")
