@@ -59,7 +59,7 @@ public interface ItemsRepository extends JpaRepository<Item, Integer>, JpaSpecif
 	 * Gets a {@link List} of {@link Item}s eligible for the troll build. That is, all purchasable (excluding items like
 	 * Muramana or Seraph's Embrace - they are non purchasable), non-consumable, and fully upgraded items found only on
 	 * the specified {@link GameMap}. This excludes boots, potions, Trinkets, items not requiring a particular champion,
-	 * items not requiring an ally champion, jungle related items, Doran's items, and Quick Charge items.
+	 * items not requiring an ally champion, jungle related items, and Doran's items.
 	 *
 	 * @param mapId the {@link GameMap}'s ID
 	 * @return a {@link List} of {@link Item}s eligible for the troll build
@@ -73,7 +73,7 @@ public interface ItemsRepository extends JpaRepository<Item, Integer>, JpaSpecif
 		   "and (i.name not like '%Trinket%' and i.description not like '%Trinket%') " +
 		   "and i.requiredAlly is null " +
 		   "and i.requiredChampion is null " +
-		   "and i.name not like 'Enchantment%' and i.name not like 'Doran%' and i.name not like '%(Quick Charge)'")
+		   "and i.name not like 'Doran%'")
 	@Cacheable(key = "{#root.methodName, #mapId}", unless = "#result.isEmpty()")
 	List<Item> forTrollBuild(@Param("mapId") int mapId);
 
