@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
+import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -28,8 +29,7 @@ import static com.drumonii.loltrollbuild.util.GameMapUtil.SUMMONERS_RIFT_SID;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.relaxedResponseFields;
-import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
-import static org.springframework.restdocs.request.RequestDocumentation.requestParameters;
+import static org.springframework.restdocs.request.RequestDocumentation.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -111,9 +111,11 @@ class ApiDocumentation {
 		SummonerSpell teleport = summonerSpellsRepository.save(summonerSpellsResponse.getSummonerSpells()
 				.get("SummonerTeleport"));
 
-		mockMvc.perform(get("/api/summoner-spells/{id}", teleport.getId()))
+		mockMvc.perform(RestDocumentationRequestBuilders.get("/api/summoner-spells/{id}", teleport.getId()))
 				.andExpect(status().isOk())
-				.andDo(document("getSummonerSpell", relaxedResponseFields(
+				.andDo(document("getSummonerSpell", pathParameters(
+						parameterWithName("id")
+								.description("The Id of the Summoner Spell")), relaxedResponseFields(
 						fieldWithPath("id")
 								.description("The Id of the Summoner Spell"),
 						fieldWithPath("name")
@@ -189,9 +191,11 @@ class ApiDocumentation {
 	void getItem() throws Exception {
 		Item warmogs = itemsRepository.save(itemsResponse.getItems().get("3083"));
 
-		mockMvc.perform(get("/api/items/{id}", warmogs.getId()))
+		mockMvc.perform(RestDocumentationRequestBuilders.get("/api/items/{id}", warmogs.getId()))
 				.andExpect(status().isOk())
-				.andDo(document("getItem", relaxedResponseFields(
+				.andDo(document("getItem", pathParameters(
+						parameterWithName("id")
+								.description("The Id of the Item")), relaxedResponseFields(
 						fieldWithPath("id")
 								.description("The Id of the Item"),
 						fieldWithPath("name")
@@ -342,9 +346,11 @@ class ApiDocumentation {
 	void getChampion() throws Exception {
 		Champion talon = championsRepository.save(championsResponse.getChampions().get("Talon"));
 
-		mockMvc.perform(get("/api/champions/{id}", talon.getId()))
+		mockMvc.perform(RestDocumentationRequestBuilders.get("/api/champions/{id}", talon.getId()))
 				.andExpect(status().isOk())
-				.andDo(document("getChampion", relaxedResponseFields(
+				.andDo(document("getChampion", pathParameters(
+						parameterWithName("id")
+								.description("The Id of the Champion")), relaxedResponseFields(
 						fieldWithPath("id")
 								.description("The Id of the Champion"),
 						fieldWithPath("key")
@@ -384,9 +390,11 @@ class ApiDocumentation {
 		itemsRepository.save(itemsResponse.getItems().get("3116")); // Rylai's Crystal Scepter
 		itemsRepository.save(itemsResponse.getItems().get("3046")); // Phantom Dancer
 
-		mockMvc.perform(get("/api/champions/{id}/troll-build", jayce.getId()))
+		mockMvc.perform(RestDocumentationRequestBuilders.get("/api/champions/{id}/troll-build", jayce.getId()))
 				.andExpect(status().isOk())
-				.andDo(document("getTrollBuildForChampion", requestParameters(
+				.andDo(document("getTrollBuildForChampion", pathParameters(
+						parameterWithName("id")
+								.description("The Id of the Champion or the Champion name")), requestParameters(
 						parameterWithName("mapId")
 								.description("The Map Id. Defaults to Summoner's Rift if unspecified. See <<game-maps-table, Game Maps Table>> for Map IDs")
 								.optional()), relaxedResponseFields(
@@ -424,9 +432,11 @@ class ApiDocumentation {
 		GameMap summonersRift = mapsResponse.getMaps().get(HOWLING_ABYSS_SID);
 		mapsRepository.save(summonersRift);
 
-		mockMvc.perform(get("/api/maps/{id}", summonersRift.getMapId()))
+		mockMvc.perform(RestDocumentationRequestBuilders.get("/api/maps/{id}", summonersRift.getMapId()))
 				.andExpect(status().isOk())
-				.andDo(document("getMap", relaxedResponseFields(
+				.andDo(document("getMap", pathParameters(
+						parameterWithName("id")
+								.description("The Id of the Map")), relaxedResponseFields(
 						fieldWithPath("mapId")
 								.description("The Id of the Map"),
 						fieldWithPath("mapName")
@@ -458,9 +468,11 @@ class ApiDocumentation {
 	void getVersion() throws Exception {
 		Version version = versionsRepository.save(versions.get(0));
 
-		mockMvc.perform(get("/api/versions/{version}/", version.getPatch()))
+		mockMvc.perform(RestDocumentationRequestBuilders.get("/api/versions/{version}", version.getPatch()))
 				.andExpect(status().isOk())
-				.andDo(document("getVersion", relaxedResponseFields(
+				.andDo(document("getVersion", pathParameters(
+						parameterWithName("version")
+								.description("The full patch version")), relaxedResponseFields(
 						fieldWithPath("patch")
 								.description("The patch number"),
 						fieldWithPath("major")
@@ -554,8 +566,10 @@ class ApiDocumentation {
 
 		mockMvc.perform(get("/api/builds/{id}", build.getId()))
 				.andExpect(status().isOk())
-				.andDo(document("getBuild", relaxedResponseFields(
-						fieldWithPath(".id")
+				.andDo(document("getBuild", pathParameters(
+						parameterWithName("id")
+								.description("The Id of the Build")), relaxedResponseFields(
+						fieldWithPath("id")
 								.description("The Id of the Build"),
 						fieldWithPath("createdDate")
 								.description("The date the Build was created"),
