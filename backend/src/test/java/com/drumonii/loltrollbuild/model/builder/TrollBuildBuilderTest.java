@@ -8,6 +8,8 @@ import com.drumonii.loltrollbuild.util.RandomizeUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.json.JsonTest;
 
@@ -50,61 +52,41 @@ class TrollBuildBuilderTest {
         assertThat(trollBuild).satisfies(new FullTrollBuild(boots));
     }
 
-    @Test
-    void buildsTrollBuildWithoutBoots() {
+    @NullAndEmptySource
+    @ParameterizedTest(name = "boots=''{0}''")
+    void buildsTrollBuildWithoutBoots(List<Item> boots) {
         TrollBuild trollBuild = new TrollBuildBuilder()
-                .withBoots(null)
-                .build();
-
-        assertThat(trollBuild).satisfies(new EmptyTrollBuild());
-
-        trollBuild = new TrollBuildBuilder()
-                .withBoots(new ArrayList<>())
+                .withBoots(boots)
                 .build();
 
         assertThat(trollBuild).satisfies(new EmptyTrollBuild());
     }
 
-    @Test
-    void buildsTrollBuildWithoutItems() {
+    @NullAndEmptySource
+    @ParameterizedTest(name = "items=''{0}''")
+    void buildsTrollBuildWithoutItems(List<Item> items) {
         TrollBuild trollBuild = new TrollBuildBuilder()
-                .withItems(null)
-                .build();
-
-        assertThat(trollBuild).satisfies(new EmptyTrollBuild());
-
-        trollBuild = new TrollBuildBuilder()
-                .withItems(new ArrayList<>())
+                .withItems(items)
                 .build();
 
         assertThat(trollBuild).satisfies(new EmptyTrollBuild());
     }
 
-    @Test
-    void buildsTrollBuildWithoutSummonerSpells() {
+    @NullAndEmptySource
+    @ParameterizedTest(name = "summonerSpells=''{0}''")
+    void buildsTrollBuildWithoutSummonerSpells(List<SummonerSpell> summonerSpells) {
         TrollBuild trollBuild = new TrollBuildBuilder()
-                .withSummonerSpells(null)
-                .build();
-
-        assertThat(trollBuild).satisfies(new EmptyTrollBuild());
-
-        trollBuild = new TrollBuildBuilder()
-                .withSummonerSpells(new ArrayList<>())
+                .withSummonerSpells(summonerSpells)
                 .build();
 
         assertThat(trollBuild).satisfies(new EmptyTrollBuild());
     }
 
-    @Test
-    void buildsTrollBuildWithoutTrinket() {
+    @NullAndEmptySource
+    @ParameterizedTest(name = "trinkets=''{0}''")
+    void buildsTrollBuildWithoutTrinket(List<Item> trinkets) {
         TrollBuild trollBuild = new TrollBuildBuilder()
-                .withTrinket(null)
-                .build();
-
-        assertThat(trollBuild).satisfies(new EmptyTrollBuild());
-
-        trollBuild = new TrollBuildBuilder()
-                .withTrinket(new ArrayList<>())
+                .withTrinket(trinkets)
                 .build();
 
         assertThat(trollBuild).satisfies(new EmptyTrollBuild());
