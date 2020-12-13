@@ -54,7 +54,7 @@ abstract class ItemsRepositoryTest {
 				.contains(1001);
 		assertThat(boots).extracting(Item::getDescription).allSatisfy(description -> {
 			assertThat(description).isNotNull();
-			assertThat(description).contains("Movement");
+			assertThat(description).contains("Move Speed");
 		});
 		assertThat(boots).extracting(Item::getMaps)
 				.extracting(input -> input.get(map))
@@ -118,13 +118,11 @@ abstract class ItemsRepositoryTest {
 		});
 		assertThat(forTrollBuild).extracting(Item::getName).allSatisfy(name -> {
 			assertThat(name).isNotNull();
-			assertThat(name).doesNotContain("Movement");
+			assertThat(name).doesNotContain("Move Speed");
 			assertThat(name).doesNotContain("Potion");
 			assertThat(name).doesNotContain("Trinket");
 			assertThat(name).doesNotContain("Flask");
-			assertThat(name).doesNotContain("Enchantment");
 			assertThat(name).doesNotContain("Doran");
-			assertThat(name).doesNotContain("Quick");
 		});
 		assertThat(forTrollBuild).extracting(Item::getGroup)
 				.filteredOn(Objects::nonNull)
