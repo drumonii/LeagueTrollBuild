@@ -113,7 +113,7 @@ class ItemsDdragonServiceTest {
 
 		@Test
 		void fromItemId() {
-			int bilgewaterCutlassId = 3144;
+			int bamisCinderId = 6660;
 
 			mockServer.expect(requestTo(versionsUri.toString()))
 					.andExpect(method(HttpMethod.GET))
@@ -123,7 +123,7 @@ class ItemsDdragonServiceTest {
 					.andExpect(method(HttpMethod.GET))
 					.andRespond(withSuccess(itemsJson, MediaType.APPLICATION_JSON));
 
-			Item item = itemsService.getItem(bilgewaterCutlassId);
+			Item item = itemsService.getItem(bamisCinderId);
 			mockServer.verify();
 
 			assertThat(item).isNotNull();
