@@ -10,7 +10,6 @@ import com.drumonii.loltrollbuild.model.Champion;
 import com.drumonii.loltrollbuild.model.TrollBuild;
 import com.drumonii.loltrollbuild.model.builder.TrollBuildBuilder;
 import com.drumonii.loltrollbuild.repository.specification.ExampleSpecification;
-import com.drumonii.loltrollbuild.util.ChampionUtil;
 import com.drumonii.loltrollbuild.util.GameMapUtil;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -111,7 +110,6 @@ public class ChampionsRestController {
 				.withSummonerSpells(summonerSpellsApiService.forTrollBuild(GameMapUtil
 						.getModeFromMap(mapsApiService.findById(mapId).orElse(null))))
 				.withTrinket(itemsApiService.trinkets(mapId))
-				.withViktor(ChampionUtil.isViktor(champion) ? itemsApiService.viktorOnly() : null)
 				.build();
 	}
 

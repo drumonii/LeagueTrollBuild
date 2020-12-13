@@ -130,23 +130,6 @@ abstract class ItemsRestControllerTest {
 	}
 
 	@Test
-	void getViktorOnly() throws Exception {
-		itemsResponse.setItems(itemsResponse.getItems().values().stream()
-				.filter(item -> item.getRequiredChampion() != null &&
-						item.getRequiredChampion().equals("Viktor"))
-				.collect(Collectors.toMap(item -> String.valueOf(item.getId()), item -> item)));
-		itemsRepository.saveAll(itemsResponse.getItems().values());
-
-		mockMvc.perform(get("/api/items/viktor-only"))
-				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-				.andExpect(jsonPath("$.[*].from").isNotEmpty())
-				.andExpect(jsonPath("$.[*].into").isNotEmpty())
-				.andExpect(jsonPath("$.[*].requiredChampion", hasItem("Viktor")))
-				.andExpect(jsonPath("$.[*].maps", hasItem(hasEntry(SUMMONERS_RIFT_SID, true))));
-	}
-
-	@Test
 	void getForTrollBuild() throws Exception {
 		itemsRepository.saveAll(itemsResponse.getItems().values());
 

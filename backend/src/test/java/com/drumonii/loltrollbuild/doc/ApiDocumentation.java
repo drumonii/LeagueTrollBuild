@@ -282,37 +282,6 @@ class ApiDocumentation {
 	}
 
 	@Test
-	void viktorOnlyItems() throws Exception {
-		itemsRepository.save(itemsResponse.getItems().get("3200"));
-
-		mockMvc.perform(get("/api/items/viktor-only"))
-				.andExpect(status().isOk())
-				.andDo(document("viktorOnlyItems", relaxedResponseFields(
-						fieldWithPath("[*].id")
-								.description("The Id of the Item"),
-						fieldWithPath("[*].name")
-								.description("The name of the Item"),
-						fieldWithPath("[*].group")
-								.description("The group of the Item"),
-						fieldWithPath("[*].consumed")
-								.description("Whether the Item is consumable"),
-						fieldWithPath("[*].description")
-								.description("The group of the Item"),
-						fieldWithPath("[*].from")
-								.description("An array of Item IDs that the Item is built from as part of the Item's recipe"),
-						fieldWithPath("[*].into")
-								.description("An array of Item IDs that the Item builds into as part of the Item's recipe"),
-						fieldWithPath("[*].requiredChampion")
-								.description("The required champion of the Item"),
-						fieldWithPath("[*].requiredAlly")
-								.description("The required ally champion of the Item"),
-						fieldWithPath("[*].maps")
-								.description("A map of Map IDs keys and boolean values whether the Item can be purchased in the Map"),
-						fieldWithPath("[*].gold")
-								.description("The gold of the Item"))));
-	}
-
-	@Test
 	void itemsForTrollBuild() throws Exception {
 		itemsRepository.save(itemsResponse.getItems().get("3065"));
 

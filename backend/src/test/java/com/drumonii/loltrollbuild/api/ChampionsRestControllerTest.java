@@ -172,57 +172,6 @@ abstract class ChampionsRestControllerTest {
 	}
 
 	@Test
-	void trollBuildForViktor() throws Exception {
-		Champion viktor = championsResponse.getChampions().get("Viktor");
-
-		// get with Viktor Id and map specified
-		mockMvc.perform(get("/api/champions/{id}/troll-build", viktor.getId())
-				.param("mapId", String.valueOf(HOWLING_ABYSS_ID)))
-				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
-				.andExpect(jsonPath("$.items").exists())
-				.andExpect(jsonPath("$.totalGold").exists())
-				.andExpect(jsonPath("$.items.length()", is(6)))
-				.andExpect(jsonPath("$.summonerSpells").exists())
-				.andExpect(jsonPath("$.summonerSpells.length()", is(2)))
-				.andExpect(jsonPath("$.trinket").exists());
-
-		// get with Viktor name and map specified
-		mockMvc.perform(get("/api/champions/{id}/troll-build", viktor.getName())
-				.param("mapId", String.valueOf(HOWLING_ABYSS_ID)))
-				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
-				.andExpect(jsonPath("$.items").exists())
-				.andExpect(jsonPath("$.totalGold").exists())
-				.andExpect(jsonPath("$.items.length()", is(6)))
-				.andExpect(jsonPath("$.summonerSpells").exists())
-				.andExpect(jsonPath("$.summonerSpells.length()", is(2)))
-				.andExpect(jsonPath("$.trinket").exists());
-
-		// get with Viktor Id and no map specified
-		mockMvc.perform(get("/api/champions/{id}/troll-build", viktor.getId()))
-				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
-				.andExpect(jsonPath("$.items").exists())
-				.andExpect(jsonPath("$.totalGold").exists())
-				.andExpect(jsonPath("$.items.length()", is(6)))
-				.andExpect(jsonPath("$.summonerSpells").exists())
-				.andExpect(jsonPath("$.summonerSpells.length()", is(2)))
-				.andExpect(jsonPath("$.trinket").exists());
-
-		// get with Viktor name and no map specified
-		mockMvc.perform(get("/api/champions/{id}/troll-build", viktor.getName()))
-				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
-				.andExpect(jsonPath("$.items").exists())
-				.andExpect(jsonPath("$.totalGold").exists())
-				.andExpect(jsonPath("$.items.length()", is(6)))
-				.andExpect(jsonPath("$.summonerSpells").exists())
-				.andExpect(jsonPath("$.summonerSpells.length()", is(2)))
-				.andExpect(jsonPath("$.trinket").exists());
-	}
-
-	@Test
 	void trollBuildWithNoItems() throws Exception {
 		itemsRepository.deleteAll();
 		summonerSpellsRepository.deleteAll();

@@ -6,7 +6,6 @@ import com.drumonii.loltrollbuild.riot.api.ItemsResponse;
 import com.drumonii.loltrollbuild.test.repository.RepositoryTest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Stream;
 
-import static com.drumonii.loltrollbuild.util.GameMapUtil.*;
+import static com.drumonii.loltrollbuild.util.GameMapUtil.HOWLING_ABYSS_ID;
+import static com.drumonii.loltrollbuild.util.GameMapUtil.SUMMONERS_RIFT_ID;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RepositoryTest
@@ -87,24 +87,6 @@ abstract class ItemsRepositoryTest {
 		}
 	}
 
-	@Test
-	void viktorOnly() {
-		List<Item> viktorOnlyItems = itemsRepository.viktorOnly();
-		assertThat(viktorOnlyItems).isNotEmpty();
-		assertThat(viktorOnlyItems).doesNotHaveDuplicates();
-		assertThat(viktorOnlyItems).extracting(Item::getDescription).allSatisfy(description -> {
-			assertThat(description).isNotNull();
-			assertThat(description).contains("Viktor");
-		});
-		assertThat(viktorOnlyItems).extracting(Item::getRequiredChampion).allSatisfy(description -> {
-			assertThat(description).isNotNull();
-			assertThat(description).contains("Viktor");
-		});
-		assertThat(viktorOnlyItems).extracting(Item::getMaps)
-				.extracting(input -> input.get(SUMMONERS_RIFT_ID))
-				.contains(true);
-	}
-
 	@ParameterizedTest(name = "map id=''{0}''")
 	@MethodSource("maps")
 	void forTrollBuild(Integer map) {
@@ -139,7 +121,6 @@ abstract class ItemsRepositoryTest {
 			assertThat(name).doesNotContain("Movement");
 			assertThat(name).doesNotContain("Potion");
 			assertThat(name).doesNotContain("Trinket");
-			assertThat(name).doesNotContain("Viktor");
 			assertThat(name).doesNotContain("Flask");
 			assertThat(name).doesNotContain("Enchantment");
 			assertThat(name).doesNotContain("Doran");

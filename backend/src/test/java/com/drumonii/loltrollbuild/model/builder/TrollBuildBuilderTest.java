@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.function.Consumer;
-import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -49,26 +48,6 @@ class TrollBuildBuilderTest {
                 .build();
 
         assertThat(trollBuild).satisfies(new FullTrollBuild(boots));
-    }
-
-    @Test
-    void buildsTrollBuildWithViktor() {
-        List<Item> viktorOnlyItems = items.stream()
-                .filter(item -> "Viktor".equals(item.getRequiredChampion()))
-                .collect(Collectors.toList());
-
-        Collection<Item> boots = RandomizeUtil.getRandoms(items, 2); // get some "boots" (don't care they aren't actually boots)
-        items.removeAll(boots);
-
-        TrollBuild trollBuild = new TrollBuildBuilder()
-                .withItems(items)
-                .withBoots(boots)
-                .withSummonerSpells(summonerSpells)
-                .withTrinket(items)
-                .withViktor(viktorOnlyItems)
-                .build();
-
-        assertThat(trollBuild).satisfies(new FullViktorTrollBuild(boots, viktorOnlyItems));
     }
 
     @Test
@@ -158,24 +137,6 @@ class TrollBuildBuilderTest {
             assertThat(trollBuild.getTotalGold()).isNotZero();
             assertThat(trollBuild.getSummonerSpells()).hasSize(TrollBuildBuilder.SPELLS_SIZE);
             assertThat(trollBuild.getTrinket()).isNotNull();
-        }
-
-    }
-
-    private class FullViktorTrollBuild extends FullTrollBuild {
-
-        private Collection<Item> viktorOnlyItems;
-
-        FullViktorTrollBuild(Collection<Item> boots, Collection<Item> viktorOnlyItems) {
-            super(boots);
-            this.viktorOnlyItems = viktorOnlyItems;
-        }
-
-        @Override
-        public void accept(TrollBuild trollBuild) {
-            super.accept(trollBuild);
-
-            assertThat(trollBuild.getItems().get(1)).isIn(viktorOnlyItems);
         }
 
     }

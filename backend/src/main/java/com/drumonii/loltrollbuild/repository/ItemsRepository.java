@@ -56,16 +56,6 @@ public interface ItemsRepository extends JpaRepository<Item, Integer>, JpaSpecif
 	List<Item> trinkets(@Param("mapId") int mapId);
 
 	/**
-	 * Gets a {@link List} of Viktor only starting {@link Item}s.
-	 *
-	 * @return a {@link List} of Viktor only {@link Item}s
-	 * @see <a href="http://leagueoflegends.wikia.com/wiki/Viktor">Viktor</a>
-	 */
-	@Query("select i from Item i where i.requiredChampion = 'Viktor'")
-	@Cacheable(key = "#root.methodName", unless = "#result.isEmpty()")
-	List<Item> viktorOnly();
-
-	/**
 	 * Gets a {@link List} of {@link Item}s eligible for the troll build. That is, all purchasable (excluding items like
 	 * Muramana or Seraph's Embrace - they are non purchasable), non-consumable, and fully upgraded items found only on
 	 * the specified {@link GameMap}. This excludes boots, potions, Trinkets, items not requiring a particular champion,

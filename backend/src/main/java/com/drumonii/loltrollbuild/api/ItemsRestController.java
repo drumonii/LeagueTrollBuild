@@ -92,18 +92,6 @@ public class ItemsRestController {
 	}
 
 	/**
-	 * Gets a {@link List} of {@link Item}s for Viktor only.
-	 * See {@link ItemsRepository#viktorOnly} for details on data retrieved.
-	 *
-	 * @return the {@link List} of {@link Item}s
-	 */
-	@JsonView(ApiViews.LtbApi.class)
-	@GetMapping("/viktor-only")
-	public List<Item> getViktorOnly() {
-		return itemsApiService.viktorOnly();
-	}
-
-	/**
 	 * Gets a {@link List} of {@link Item}s for the troll build based on the specified map ID.
 	 * See {@link ItemsRepository#forTrollBuild(int mapId)} for details on data retrieved.
 	 *
