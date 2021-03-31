@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.25.1",
+  "version": "11.7.1",
   "data": {
     "Sylas": {
       "id": "Sylas",
@@ -90,14 +90,12 @@
           "leveltip": {
             "label": [
               "Cooldown",
-              "@AbilityResourceName@ Cost",
               "Damage",
               "Slow",
               "Secondary Damage"
             ],
             "effect": [
               "{{ cooldown }} -> {{ cooldownNL }}",
-              "{{ cost }} -> {{ costNL }}",
               "{{ basedamage }} -> {{ basedamageNL }}",
               "{{ slowamount*100.000000 }}% -> {{ slowamountnl*100.000000 }}%",
               "{{ explosionbasedamage }} -> {{ explosionbasedamageNL }}"
@@ -113,13 +111,13 @@
           ],
           "cooldownBurn": "10/9/8/7/6",
           "cost": [
-            50,
             55,
-            60,
-            65,
-            70
+            55,
+            55,
+            55,
+            55
           ],
-          "costBurn": "50/55/60/65/70",
+          "costBurn": "55",
           "datavalues": {},
           "effect": [
             null,
@@ -233,7 +231,7 @@
           "id": "SylasW",
           "name": "Kingslayer",
           "description": "Sylas lunges at an enemy with magical force dealing execute based damage and healing himself against enemy champions.",
-          "tooltip": "Sylas lunges at an enemy with magical force dealing <scaleAP>{{ mindamage }} magic damage</scaleAP>. Against champions, Sylas restores between <healing>{{ minhealing }}</healing> and <healing>{{ maxhealing }} Health</healing> based on his missing Health (max healing at or below {{ maxexecutethreshold*100 }}% Health).",
+          "tooltip": "Sylas lunges at an enemy with magical force dealing <magicDamage>{{ mindamage }} magic damage</magicDamage>. Against champions, Sylas restores between <healing>{{ minhealing }}</healing> and <healing>{{ maxhealing }} Health</healing> based on his missing Health (max healing at or below {{ maxexecutethreshold*100 }}% Health).",
           "leveltip": {
             "label": [
               "Damage",
@@ -251,20 +249,20 @@
           "maxrank": 5,
           "cooldown": [
             13,
-            11.5,
-            10,
-            8.5,
-            7
+            11.25,
+            9.5,
+            7.75,
+            6
           ],
-          "cooldownBurn": "13/11.5/10/8.5/7",
+          "cooldownBurn": "13/11.25/9.5/7.75/6",
           "cost": [
+            60,
             70,
             80,
             90,
-            100,
-            110
+            100
           ],
-          "costBurn": "70/80/90/100/110",
+          "costBurn": "60/70/80/90/100",
           "datavalues": {},
           "effect": [
             null,
@@ -519,7 +517,7 @@
           "id": "SylasR",
           "name": "Hijack",
           "description": "Sylas steals the enemy's ultimate ability and can cast it freely.",
-          "tooltip": "Sylas hijacks an enemy champion, allowing him to cast a copy of their ultimate Ability, based on his Ultimate level and using his stats.<br /><br />Hijacking an enemy places a cooldown on them for {{ pertargetcooldown }}% (modified by Sylas' Cooldown Reduction) of the enemy's ultimate's cooldown, with a minimum of {{ minimumenemycooldown }} seconds, during which time Sylas cannot hijack them again.",
+          "tooltip": "Sylas hijacks an enemy champion, allowing him to cast a copy of their ultimate Ability, based on his Ultimate level and using his stats.<br /><br />Hijacking an enemy places a Cooldown on them for {{ pertargetcooldown }}% (modified by Sylas' Cooldown Reduction) of the enemy's ultimate's Cooldown, with a minimum of {{ minimumenemycooldown }} seconds, during which time Sylas cannot hijack them again.",
           "leveltip": {
             "label": [
               "Cooldown"

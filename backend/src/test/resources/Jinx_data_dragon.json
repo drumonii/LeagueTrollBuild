@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.25.1",
+  "version": "11.7.1",
   "data": {
     "Jinx": {
       "id": "Jinx",
@@ -121,16 +121,16 @@
         {
           "id": "JinxQ",
           "name": "Switcheroo!",
-          "description": "Jinx modifies her basic attacks by swapping between Pow-Pow, her minigun and Fishbones, her rocket launcher. Attacks with Pow-Pow grant Attack Speed, while attacks with Fishbones deal area of effect damage, gain increased range, and drain Mana.",
-          "tooltip": "Jinx swaps weapons between Fishbones the rocket launcher and Pow-Pow the minigun.<br /><br />While using the rocket launcher, Jinx's Attacks deal <physicalDamage>{{ rocketdamage }} physical damage</physicalDamage> to the target and nearby enemies, gain {{ e3 }} range, cost Mana, and scale {{ e5 }}% less with bonus Attack Speed.<br /><br />While using the minigun, Jinx' Attacks grant <attackSpeed>Attack Speed</attackSpeed> for 2.5 seconds, stacking up to 3 times (<attackSpeed>{{ e1 }}</attackSpeed>% Attack Speed max).",
+          "description": "Jinx modifies her basic attacks by swapping between Pow-Pow, her minigun and Fishbones, her rocket launcher. Attacks with Pow-Pow grant Attack Speed, while attacks with Fishbones deal area of effect damage, gain increased range, but drain Mana and attack slower.",
+          "tooltip": "Jinx swaps weapons between Fishbones the rocket launcher and Pow-Pow the minigun.<br /><br />While using the rocket launcher, Jinx's Attacks deal <physicalDamage>{{ rocketdamage }} physical damage</physicalDamage> to the target and nearby enemies, gain {{ rocketbonusrange }} range, cost Mana, and scale {{ rocketaspdpenalty*100 }}% less with bonus Attack Speed.<br /><br />While using the minigun, Jinx' Attacks grant <attackSpeed>Attack Speed</attackSpeed> for {{ minigunattackspeedduration }} seconds, stacking up to {{ minigunattackspeedstacks }} times (<attackSpeed>+{{ minigunattackspeedmax }}% %i:scaleAS% max</attackSpeed>).",
           "leveltip": {
             "label": [
               "Rocket Bonus Range",
               "Minigun Total Attack Speed"
             ],
             "effect": [
-              "{{ e3 }} -> {{ e3NL }}",
-              "{{ e1 }}% -> {{ e1NL }}%"
+              "{{ rocketbonusrange }} -> {{ rocketbonusrangeNL }}",
+              "{{ minigunattackspeedmax }}% -> {{ minigunattackspeedmaxNL }}%"
             ]
           },
           "maxrank": 5,
@@ -154,25 +154,11 @@
           "effect": [
             null,
             [
-              30,
-              55,
-              80,
-              105,
-              130
-            ],
-            [
-              100,
-              100,
-              100,
-              100,
-              100
-            ],
-            [
-              75,
-              100,
-              125,
-              150,
-              175
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -182,18 +168,32 @@
               0
             ],
             [
-              25,
-              25,
-              25,
-              25,
-              25
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              33.25,
-              33.25,
-              33.25,
-              33.25,
-              33.25
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -226,12 +226,12 @@
           ],
           "effectBurn": [
             null,
-            "30/55/80/105/130",
-            "100",
-            "75/100/125/150/175",
             "0",
-            "25",
-            "33.25",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
             "0",
             "0",
             "0",
@@ -429,13 +429,13 @@
           ],
           "cooldownBurn": "24/20.5/17/13.5/10",
           "cost": [
-            70,
-            70,
-            70,
-            70,
-            70
+            90,
+            90,
+            90,
+            90,
+            90
           ],
-          "costBurn": "70",
+          "costBurn": "90",
           "datavalues": {},
           "effect": [
             null,
@@ -447,25 +447,25 @@
               0
             ],
             [
-              100,
-              140,
-              180,
-              220,
-              260
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              30,
-              35,
-              40,
-              45,
-              50
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              35,
-              50,
-              65,
-              80,
-              95
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -513,9 +513,9 @@
           "effectBurn": [
             null,
             "0",
-            "100/140/180/220/260",
-            "30/35/40/45/50",
-            "35/50/65/80/95",
+            "0",
+            "0",
+            "0",
             "0",
             "0",
             "0",

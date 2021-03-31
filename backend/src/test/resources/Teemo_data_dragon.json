@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.25.1",
+  "version": "11.7.1",
   "data": {
     "Teemo": {
       "id": "Teemo",
@@ -124,7 +124,7 @@
         "mp": 334,
         "mpperlevel": 20,
         "movespeed": 330,
-        "armor": 24.3,
+        "armor": 24,
         "armorperlevel": 3.75,
         "spellblock": 30,
         "spellblockperlevel": 0.5,
@@ -145,7 +145,7 @@
           "id": "BlindingDart",
           "name": "Blinding Dart",
           "description": "Obscures an enemy's vision with a powerful venom, dealing damage to the target unit and blinding it for the duration.",
-          "tooltip": "Teemo fires a dart, <status>Blinding</status> for {{ blindduration }} seconds and dealing <magicDamage>{{ calculateddamage }} magic damage</magicDamage>.",
+          "tooltip": "Teemo fires a dart, <status>Blinding</status> the target for {{ blindduration }} seconds and dealing <magicDamage>{{ calculateddamage }} magic damage</magicDamage>.",
           "leveltip": {
             "label": [
               "@AbilityResourceName@ Cost",
@@ -291,7 +291,7 @@
           "tooltip": "<spellPassive>Passive:</spellPassive> Teemo gains <speed>{{ passivemsbonus*100 }}% Move Speed</speed> while he hasn't been damaged by a champion or turret in the last 5 seconds.<br /><br /><spellActive>Active:</spellActive> Teemo sprints, gaining <speed>{{ passivemsbonus*200 }}% Move Speed</speed> that is not lost when struck for {{ msbuffduration }} seconds.",
           "leveltip": {
             "label": [
-              "Movement Speed"
+              "Move Speed"
             ],
             "effect": [
               "{{ passivemsbonus*100.000000 }}% -> {{ passivemsbonusnl*100.000000 }}%"
@@ -568,7 +568,7 @@
           "id": "TeemoRCast",
           "name": "Noxious Trap",
           "description": "Teemo throws an explosive poisonous trap using one of the mushrooms stored in his pack. If an enemy steps on the trap, it will release a poisonous cloud, slowing enemies and damaging them over time. If Teemo throws a mushroom onto another mushroom it will bounce, gaining additional range.",
-          "tooltip": "Teemo tosses a mushroom trap that detonates when stepped on. The traps <status>Slow</status> by {{ slowamount }}% and deal <magicDamage>{{ totaldamage }} magic damage</magicDamage> over {{ debuffduration }} seconds. Enemies are revealed for the same duration.<br /><br />Traps last {{ mushroomduration }} minutes and are stealthed. A mushroom tossed onto another mushroom bounces before landing at its position. This Ability has {{ maxammo }} charges ({{ ammorechargetime }} second refresh)<br />",
+          "tooltip": "Teemo tosses a mushroom trap that detonates when stepped on. The traps <status>Slow</status> by {{ slowamount }}% and deal <magicDamage>{{ totaldamage }} magic damage</magicDamage> over {{ debuffduration }} seconds. Enemies are revealed for the same duration.<br /><br />Traps last {{ mushroomduration }} minutes and are stealthed. A mushroom tossed onto another mushroom bounces before landing at its position. This Ability has {{ maxammo }} charges ({{ ammorechargetime }} second refresh).<br />",
           "leveltip": {
             "label": [
               "Damage",

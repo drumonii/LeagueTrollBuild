@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.25.1",
+  "version": "11.7.1",
   "data": {
     "Nunu": {
       "id": "Nunu",
@@ -71,6 +71,12 @@
           "num": 8,
           "name": "Papercraft Nunu & Willump",
           "chromas": true
+        },
+        {
+          "id": "20016",
+          "num": 16,
+          "name": "Space Groove Nunu & Willump",
+          "chromas": true
         }
       ],
       "lore": "Once upon a time, there was a boy who wanted to prove he was a hero by slaying a fearsome monster—only to discover that the beast, a lonely and magical yeti, merely needed a friend. Bound together by ancient power and a shared love of snowballs, Nunu and Willump now ramble wildly across the Freljord, breathing life into imagined adventures. They hope that somewhere out there, they will find Nunu's mother. If they can save her, maybe they will be heroes after all…",
@@ -97,14 +103,14 @@
         "difficulty": 4
       },
       "stats": {
-        "hp": 570,
+        "hp": 540,
         "hpperlevel": 82,
         "mp": 280,
         "mpperlevel": 42,
-        "movespeed": 345,
+        "movespeed": 340,
         "armor": 29,
         "armorperlevel": 3,
-        "spellblock": 32.1,
+        "spellblock": 32,
         "spellblockperlevel": 1.25,
         "attackrange": 125,
         "hpregen": 5,
@@ -123,7 +129,7 @@
           "id": "NunuQ",
           "name": "Consume",
           "description": "Willump takes a bite out of a minion, monster, or enemy champion, dealing damage and healing himself.",
-          "tooltip": "Willump takes a bite of an enemy, dealing damage and healing himself.  This healing increases by {{ lowhealthhealingscalar*100 }}% when he is below {{ lowhealththreshhold*100 }}% health.<br /><br /><spellActive>Monsters and minions</spellActive>: Deals <trueDamage>{{ monsterminiondamage }} true damage</trueDamage> and heals for {{ monsterhealing }}.<br /><br /><spellActive>Champions</spellActive>: Deals <magicDamage>{{ totalchampiondamage }} magic damage</magicDamage> and heals for {{ championhealing }}.",
+          "tooltip": "Nunu asks Willump to take a bite of an enemy, dealing <trueDamage>{{ monsterminiondamage }} true damage</trueDamage> and restoring <healing>{{ monsterhealing }} Health</healing> when used against a minion or jungle monster. Against a champion, it instead deals <magicDamage>{{ totalchampiondamage }} magic damage</magicDamage> and restores <healing>{{ championhealing }} Health</healing>.<br /><br />The <healing>healing</healing> is increased by {{ lowhealthhealingscalar*100 }}% when Nunu and Willump are below {{ lowhealththreshhold*100 }}% Health.",
           "leveltip": {
             "label": [
               "Monster Damage",
@@ -268,7 +274,7 @@
           "id": "NunuW",
           "name": "Biggest Snowball Ever!",
           "description": "Willump creates a snowball that grows in size and speed as he rolls it.  The snowball damages and knocks up enemies.",
-          "tooltip": "Willump rolls a snowball that grows in size and speed.  When it collides with an enemy champion, large monster, or wall, it explodes, dealing up to <magicDamage>{{ maximumsnowballdamage }} magic damage</magicDamage> to nearby enemies and knocking them up for up to {{ maximumstunduration }}s.<br /> <br />Reactivating the ability releases the snowball and rolls it forward on a straight path.<br /><br /><rules>Holding a turn causes Willump to turn faster in that direction.</rules>",
+          "tooltip": "Nunu and Willump create a snowball that grows in size and speed as they roll it. They turn slower while rolling it, but can increase turning speed by holding the turn.<br /><br />The snowball does between <magicDamage>{{ noimpactsnowballdamage }}</magicDamage> and <magicDamage>{{ maximumsnowballdamage }} magic damage</magicDamage>, and <status>Knocks Up</status> for between {{ baseknockupduration }} and {{ maximumstunduration }} seconds when it collides with a champion, large monster or wall. These values scale up with distance rolled.<br /><br />Nunu and Willump can <recast>Recast</recast> to let the snowball go early.",
           "leveltip": {
             "label": [
               "Base Damage",
@@ -409,7 +415,7 @@
           "id": "NunuE",
           "name": "Snowball Barrage",
           "description": "Nunu throws multiple snowballs that damage enemies.  When he's finished, Willump roots any champions or large monsters that were hit by a snowball.",
-          "tooltip": "Nunu throws 3 snowballs.  Snowball Barrage can be cast two additional times to throw even more snowballs.  Enemies hit take <magicDamage>{{ totalsnowballdamage }} magic damage</magicDamage> per snowball.  Enemies hit by 3 consecutive snowballs are slowed by {{ slowamount*-100 }}% for {{ slowduration }}s.  Champions and large monsters become <span class=\"color4AA8E2\">Snowbound</span>.<br /><br /><spellActive>Willump's Turn</spellActive>: After {{ totalspellduration }} seconds, all enemies within range that are <span class=\"color4AA8E2\">Snowbound</span> take <magicDamage>{{ totalrootdamage }} magic damage</magicDamage> and become rooted for <scaleLevel>{{ rootduration }}</scaleLevel>s.<br />",
+          "tooltip": "Nunu throws three snowballs, dealing a total of <magicDamage>{{ totalsnowballdamage }} magic damage</magicDamage> and <status>Slowing</status> enemies hit by all three by {{ slowamount*-100 }}% for {{ slowduration }} seconds. Nunu can <recast>Recast</recast> this up to twice more.<br /><br />After {{ totalspellduration }} seconds, Nunu <status>Roots</status> all nearby enemies that had been <status>Slowed</status> by the snowballs for {{ rootduration }} seconds and deals an additional <magicDamage>{{ totalrootdamage }} magic damage</magicDamage>.",
           "leveltip": {
             "label": [
               "Damage",
@@ -552,7 +558,7 @@
           "id": "NunuR",
           "name": "Absolute Zero",
           "description": "Nunu & Willump create a powerful blizzard in an area that slows enemies and deals massive damage at the end.",
-          "tooltip": "Willump channels for {{ channelduration }} seconds, creating a powerful blizzard. Enemies in the blizzard are slowed by {{ slowstartamount*-100 }}%, increasing to {{ maxslowamount*-100 }}% over the duration. Nunu & Willump receive a shield that absorbs {{ totalshieldamount }} damage that decays over {{ shielddecayduration }} seconds after the blizzard ends.<br /><br />When the blizzard ends, enemies in the area take up to <magicDamage>{{ maximumdamage }} magic damage</magicDamage>, based on the blizzard's duration.",
+          "tooltip": "Nunu and Willump channel a powerful blizzard for up to {{ channelduration }} seconds. Enemies inside are <status>Slowed</status> by {{ slowstartamount*-100 }}%, increasing to {{ maxslowamount*-100 }}% over the duration. Nunu and Willump also gain <shield>{{ totalshieldamount }} Shield</shield> for the duration before decaying over {{ shielddecayduration }} seconds afterwards.<br /><br />When the blizzard ends, it detonates, dealing between <magicDamage>{{ mindamage }}</magicDamage> and <magicDamage>{{ maximumdamage }} magic damage</magicDamage> based on channel time. Nunu and Willump can <recast>Recast</recast> to end the blizzard early.",
           "leveltip": {
             "label": [
               "Damage",

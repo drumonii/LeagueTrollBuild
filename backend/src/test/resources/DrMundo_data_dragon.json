@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.25.1",
+  "version": "11.7.1",
   "data": {
     "DrMundo": {
       "id": "DrMundo",
@@ -108,14 +108,14 @@
         "difficulty": 5
       },
       "stats": {
-        "hp": 582.52,
+        "hp": 583,
         "hpperlevel": 89,
         "mp": 0,
         "mpperlevel": 0,
         "movespeed": 345,
         "armor": 36,
         "armorperlevel": 3.5,
-        "spellblock": 32.1,
+        "spellblock": 32,
         "spellblockperlevel": 1.25,
         "attackrange": 125,
         "hpregen": 8,
@@ -124,7 +124,7 @@
         "mpregenperlevel": 0,
         "crit": 0,
         "critperlevel": 0,
-        "attackdamage": 61.27,
+        "attackdamage": 61,
         "attackdamageperlevel": 3.5,
         "attackspeedperlevel": 2.8,
         "attackspeed": 0.721
@@ -134,7 +134,7 @@
           "id": "InfectedCleaverMissileCast",
           "name": "Infected Cleaver",
           "description": "Dr. Mundo hurls his cleaver, dealing damage equal to a portion of his target's current Health and slowing them for a short time. Dr. Mundo delights in the suffering of others, so he is returned a portion of the Health cost when he successfully lands a cleaver (doubled on killing blows).",
-          "tooltip": "Dr. Mundo hurls his cleaver, dealing <magicDamage>{{ e2 }}% current Health magic damage</magicDamage> (minimum {{ e1 }}) and <status>Slowing</status> by {{ e4 }}% for {{ e5 }} seconds.<br /><br />If the cleaver hits, restore <healing>{{ f1 }} Health</healing>. If it kills, restore <healing>{{ f2 }} Health</healing>.",
+          "tooltip": "Dr. Mundo hurls his cleaver, dealing <magicDamage>{{ e2 }}% current Health magic damage (minimum {{ e1 }})</magicDamage> and <status>Slowing</status> by {{ e4 }}% for {{ e5 }} seconds.<br /><br />If the cleaver hits, restore <healing>{{ f1 }} Health</healing>. If it kills, restore <healing>{{ f2 }} Health</healing>.",
           "leveltip": {
             "label": [
               "Damage",
@@ -212,18 +212,18 @@
               500
             ],
             [
-              0.4,
-              0.4,
-              0.4,
-              0.4,
-              0.4
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              0.5
             ],
             [
-              0.8,
-              0.8,
-              0.8,
-              0.8,
-              0.8
+              1,
+              1,
+              1,
+              1,
+              1
             ],
             [
               0,
@@ -248,8 +248,8 @@
             "40",
             "2",
             "300/350/400/450/500",
-            "0.4",
-            "0.8",
+            "0.5",
+            "1",
             "0",
             "0"
           ],
@@ -460,11 +460,11 @@
           "effect": [
             null,
             [
-              0.03,
-              0.035,
               0.04,
               0.045,
-              0.05
+              0.05,
+              0.055,
+              0.06
             ],
             [
               25,
@@ -532,7 +532,7 @@
           ],
           "effectBurn": [
             null,
-            "0.03/0.035/0.04/0.045/0.05",
+            "0.04/0.045/0.05/0.055/0.06",
             "25/35/45/55/65",
             "25",
             "60/90/120/150/180",
@@ -573,7 +573,7 @@
           "leveltip": {
             "label": [
               "Regeneration",
-              "Movement Speed",
+              "Move Speed",
               "Cooldown"
             ],
             "effect": [
@@ -599,9 +599,9 @@
           "effect": [
             null,
             [
-              50,
-              75,
-              100
+              60,
+              85,
+              110
             ],
             [
               12,
@@ -651,7 +651,7 @@
           ],
           "effectBurn": [
             null,
-            "50/75/100",
+            "60/85/110",
             "12",
             "15/25/35",
             "25",

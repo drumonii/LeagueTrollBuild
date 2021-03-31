@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.25.1",
+  "version": "11.7.1",
   "data": {
     "Thresh": {
       "id": "Thresh",
@@ -109,9 +109,9 @@
         "difficulty": 7
       },
       "stats": {
-        "hp": 560.52,
+        "hp": 561,
         "hpperlevel": 93,
-        "mp": 273.92,
+        "mp": 274,
         "mpperlevel": 44,
         "movespeed": 335,
         "armor": 28,
@@ -135,7 +135,7 @@
           "id": "ThreshQ",
           "name": "Death Sentence",
           "description": "Thresh binds an enemy in chains and pulls them toward him. Activating this ability a second time pulls Thresh to the enemy.",
-          "tooltip": "Thresh throws out his scythe, dealing {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage, granting <span class=\"coloree91d7\">True Sight</span> and stunning the first unit hit, pulling them in for {{ e2 }} seconds.<br /><br />Reactivating this ability will pull Thresh to the bound enemy.<br /><br />Death Sentence's cooldown is reduced by {{ e4 }} seconds if it hits an enemy.",
+          "tooltip": "Thresh throws out his scythe, <status>Stunning</status> the first unit hit and <status>Pulling</status> them towards Thresh for {{ e2 }} seconds. The scythe does <magicDamage>{{ totaldamage }} magic damage</magicDamage> and also grants <keywordStealth>True Sight</keywordStealth> for the duration.<br /><br />Thresh can <recast>Recast</recast> this Ability to pull himself to the enemy.<br /><br />If this Ability hits, its Cooldown is reduced by {{ e4 }} seconds.",
           "leveltip": {
             "label": [
               "Damage",
@@ -250,13 +250,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.5,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -282,7 +276,7 @@
           "id": "ThreshW",
           "name": "Dark Passage",
           "description": "Thresh throws out a lantern that shields nearby allied Champions from damage. Allies can click the lantern to dash to Thresh.",
-          "tooltip": "Thresh throws the Lantern to a target location. If an ally clicks on it Thresh will pull both the Lantern and his ally to him.<br /><br />The Lantern grants a shield lasting {{ e5 }} seconds that absorbs up to {{ e1 }} <span class=\"color0bf7de\">(+{{ f6 }})</span> damage to Thresh and up to one ally if they come near it. The shield amount scales with the number of <span class=\"color0bf7de\">souls</span> Thresh has collected.",
+          "tooltip": "Thresh throws his lantern, allowing an ally to click on it to dash to Thresh.<br /><br />The lantern also grants <shield>{{ totalshield }} Shield</shield> to Thresh and up to one ally champion if they come in contact with it. ",
           "leveltip": {
             "label": [
               "Shield Amount",
@@ -317,10 +311,10 @@
             null,
             [
               60,
-              100,
-              140,
-              180,
-              220
+              90,
+              120,
+              150,
+              180
             ],
             [
               1,
@@ -388,7 +382,7 @@
           ],
           "effectBurn": [
             null,
-            "60/100/140/180/220",
+            "60/90/120/150/180",
             "1",
             "0",
             "6",
@@ -425,7 +419,7 @@
           "id": "ThreshE",
           "name": "Flay",
           "description": "Thresh's attacks wind up, dealing more damage the longer he waits between attacks. When activated, Thresh sweeps his chain, knocking all enemies hit in the direction of the blow.",
-          "tooltip": "<spellPassive>Passive: </spellPassive>Thresh's basic attacks deal from <span class=\"color0bf7de\">{{ f3 }}</span> to <span class=\"color0bf7de\">{{ f3 }}</span> <scaleAD>(+{{ f2 }})</scaleAD> additional magic damage, which builds up while not attacking (total <span class=\"color0bf7de\">souls</span> collected plus up to {{ e3 }}% total Attack Damage).<br /><br /><spellPassive>Active: </spellPassive>Deals {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage in a line beginning behind Thresh. Enemies hit are pushed in the direction of the swing, then slowed by {{ e2 }}% for {{ e4 }} second.<br /><br />Cast forward to push; cast backward to pull.",
+          "tooltip": "<spellPassive>Passive:</spellPassive> Thresh's Attacks deal additional damage based on how long since he last Attacked. They deal between <magicDamage>{{ pattackdamagemin }}</magicDamage> and <magicDamage>{{ pattackdamagemax }} magic damage</magicDamage>.<br /><br /><spellActive>Active:</spellActive> Thresh whips his chains, <status>Pulling</status> or <status>Pushing</status> enemies in the direction of the swing. Enemies hit are also <status>Slowed</status> by {{ e2 }}% for {{ e4 }} second and take <magicDamage>{{ totaldamage }} magic damage</magicDamage>.",
           "leveltip": {
             "label": [
               "Passive Damage",
@@ -544,13 +538,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.4,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -576,7 +564,7 @@
           "id": "ThreshRPenta",
           "name": "The Box",
           "description": "A prison of walls that slow and deal damage if broken.",
-          "tooltip": "Thresh creates a prison of spectral walls around himself. Enemy champions who walk through a wall suffer {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage and are slowed by {{ e3 }}% for {{ e2 }} seconds, but break that wall.  <br /><br />Once one wall is broken, the remaining walls deal no damage and apply half slow duration. An enemy cannot be affected by multiple walls simultaneously.",
+          "tooltip": "Thresh creates a prison of spectral walls, <status>Slowing</status> champions by {{ e3 }}% for {{ e2 }} seconds and dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage>. Walls break after one collision, and after one is broken, the rest deal no damage and <status>Slow</status> for half duration.",
           "leveltip": {
             "label": [
               "Damage",
@@ -667,13 +655,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 1,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [

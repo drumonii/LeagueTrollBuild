@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.25.1",
+  "version": "11.7.1",
   "data": {
     "Pyke": {
       "id": "Pyke",
@@ -100,7 +100,7 @@
           "id": "PykeQ",
           "name": "Bone Skewer",
           "description": "Pyke either stabs an enemy in front of him or pulls an enemy towards him.",
-          "tooltip": "<tap>Tap:</tap> Pyke stabs forward, dealing <physicalDamage>{{ totaldamage }} physical damage</physicalDamage> to the first enemy hit, preferring champions.<br /><br /><hold>Hold: </hold>Pyke throws his harpoon, dealing <physicalDamage>{{ totaldamage }} physical damage</physicalDamage> to the first enemy hit and pulling them towards him. They are <status>Slowed</status> by 90% for 1 second.",
+          "tooltip": "<tap>Tap:</tap> Pyke stabs, dealing <physicalDamage>{{ totaldamage }} physical damage</physicalDamage> to the first enemy hit, preferring champions.<br /><br /><hold>Hold: </hold>Pyke throws his harpoon, dealing <physicalDamage>{{ totaldamage }} physical damage</physicalDamage> to the first enemy hit and <status>Pulling</status> them towards him. They are then <status>Slowed</status> by 90% for 1 second.",
           "leveltip": {
             "label": [
               "Damage",
@@ -243,7 +243,7 @@
           "id": "PykeW",
           "name": "Ghostwater Dive",
           "description": "Pyke enters Camouflage and gains significant movement speed that decays over time.",
-          "tooltip": "Pyke gains <keywordStealth>Camouflage</keywordStealth> and {{ e1 }}% <scaleLethality>(+{{ f7 }}%)</scaleLethality> decaying movement speed for {{ e0 }} seconds.<br /><br /><rules><keywordStealth><u>Stealth - Camouflage:</u></keywordStealth> Pyke is hidden from view while enemy champions remain outside his detection radius. Attacking or casting spells ends Camouflage.</rules>",
+          "tooltip": "Pyke gains <keywordStealth>Camouflage</keywordStealth> and <speed>{{ movespeed }}% Move Speed</speed> decaying over {{ e0 }} seconds.",
           "leveltip": {
             "label": [
               "Cooldown"
@@ -382,24 +382,26 @@
           "id": "PykeE",
           "name": "Phantom Undertow",
           "description": "Pyke dashes and leaves behind a phantom that will return to him, stunning enemy champions along its path.",
-          "tooltip": "Pyke dashes, leaving a drowned phantom behind him. After a short delay the phantom returns to Pyke, striking enemy champions along its path, stunning them for {{ e2 }} <scaleLethality>(+{{ f10.01 }})</scaleLethality> seconds. Champions hit also take {{ e1 }} <scaleAD>(+{{ a1 }})</scaleAD> physical damage.",
+          "tooltip": "Pyke dashes, leaving a drowned phantom behind him that returns to him shortly. The phantom <status>Stuns</status> for {{ stunduration }} seconds and deals <physicalDamage>{{ totaldamage }} physical damage</physicalDamage>.",
           "leveltip": {
             "label": [
-              "Damage"
+              "Damage",
+              "Cooldown"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}"
+              "{{ e1 }} -> {{ e1NL }}",
+              "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
           "maxrank": 5,
           "cooldown": [
             15,
-            15,
-            15,
-            15,
-            15
+            14,
+            13,
+            12,
+            11
           ],
-          "cooldownBurn": "15",
+          "cooldownBurn": "15/14/13/12/11",
           "cost": [
             40,
             40,
@@ -495,13 +497,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "bonusattackdamage",
-              "coeff": 1,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -527,7 +523,7 @@
           "id": "PykeR",
           "name": "Death From Below",
           "description": "Pyke blinks to and executes low health enemies, allowing him to cast this spell again and granting additional gold to an ally who assists.",
-          "tooltip": "Pyke strikes all enemy champions in an X, blinking to and executing targets below {{ rbasedamage }} <scaleAD>(+{{ raddamage }})</scaleAD> <scaleLethality>(+{{ rlethalitydamage }})</scaleLethality> health. Enemies not executed instead take physical damage equal to {{ reduceddamage*100 }}% of the threshold.<br /><br />When an enemy champion dies in the X from any source, Pyke and an assisting ally both receive an additional <gold>Cut</gold> equal to full kill gold, and Pyke may re-cast Death From Below again within {{ rrecastduration }} seconds.<br /><br /><rules>Total gold shared with allies: <gold>{{ f9 }}</gold><br />Total gold kept for self: <gold>{{ f10 }}</gold></rules>",
+          "tooltip": "Pyke strikes all enemy champions in an X, teleporting to and executing targets below {{ rdamage }} Health. Champions above the threshold and non-champions instead take <physicalDamage>{{ reduceddamagefinal }} physical damage</physicalDamage>. <br /><br />When an enemy champions dies inside the X, they grant the kill gold to both Pyke and an assisting ally and Pyke can <recast>Recast</recast> this Ability for free within {{ rrecastduration }} seconds.",
           "leveltip": {
             "label": [
               "Cooldown"

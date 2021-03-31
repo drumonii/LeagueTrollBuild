@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.25.1",
+  "version": "11.7.1",
   "data": {
     "Katarina": {
       "id": "Katarina",
@@ -131,9 +131,9 @@
         "mp": 0,
         "mpperlevel": 0,
         "movespeed": 340,
-        "armor": 27.88,
+        "armor": 28,
         "armorperlevel": 3.5,
-        "spellblock": 32.1,
+        "spellblock": 32,
         "spellblockperlevel": 1.25,
         "attackrange": 125,
         "hpregen": 7.5,
@@ -155,7 +155,7 @@
           "tooltip": "Katarina throws a <keywordMajor>Dagger</keywordMajor>, dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage> to the target and {{ e4 }} nearby enemies. The <keywordMajor>Dagger</keywordMajor> then ricochets onto the ground behind the primary target.",
           "leveltip": {
             "label": [
-              "Initial Damage",
+              "Base Damage",
               "Cooldown"
             ],
             "effect": [
@@ -292,11 +292,11 @@
         {
           "id": "KatarinaW",
           "name": "Preparation",
-          "description": "Katarina gains a burst of movement speed, tossing a <font color='#FFF673'>Dagger</font> into the air directly above herself.",
+          "description": "Katarina gains a burst of Move Speed, tossing a <font color='#FFF673'>Dagger</font> into the air directly above herself.",
           "tooltip": "Katarina tosses a <keywordMajor>Dagger</keywordMajor> into the air and gains <speed>{{ e4 }}% Move Speed</speed> decaying over {{ e2 }} seconds.",
           "leveltip": {
             "label": [
-              "Movement Speed",
+              "Move Speed",
               "Cooldown"
             ],
             "effect": [
@@ -434,7 +434,7 @@
           "id": "KatarinaEWrapper",
           "name": "Shunpo",
           "description": "Katarina blinks to the target, striking it if its an enemy, or striking the nearest enemy otherwise.",
-          "tooltip": "Katarina dashes in the blink of an eye to the target ally, enemy, or <keywordMajor>Dagger</keywordMajor>. If it is an enemy, Katarina strikes for <magicDamage>{{ e1 }} <scaleAD>(+{{ a1 }})</scaleAD> <scaleAP>(+{{ a2 }})</scaleAP> magic damage</magicDamage> - otherwise she strikes the nearest enemy in range. Applies %i:OnHit% <OnHit>On-Hit</OnHit> effects.<br /><br />Picking up a <keywordMajor>Dagger</keywordMajor> will reduce Shunpo's cooldown by <scaleLevel>{{ f1 }}</scaleLevel> seconds (<scaleLevel>{{ f3*100 }}%</scaleLevel>).<br /><br /><rules>Katarina can blink to any location near the target.</rules>",
+          "tooltip": "Katarina dashes in the blink of an eye to the target ally, enemy, or <keywordMajor>Dagger</keywordMajor>. If it is an enemy, Katarina strikes for <magicDamage>{{ totaldamage }} magic damage</magicDamage> - otherwise she strikes the nearest enemy in range.<br /><br />Picking up a <keywordMajor>Dagger</keywordMajor> will reduce this Ability's Cooldown by <scaleLevel>{{ f1 }}</scaleLevel> seconds (<scaleLevel>{{ f3*100 }}%</scaleLevel>).<br /><br /><rules>Katarina can blink to any location near the target.</rules>",
           "leveltip": {
             "label": [
               "Damage",
@@ -549,18 +549,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "attackdamage",
-              "coeff": 0.5,
-              "key": "a1"
-            },
-            {
-              "link": "spelldamage",
-              "coeff": 0.25,
-              "key": "a2"
-            }
-          ],
+          "vars": [],
           "costType": "No Cost",
           "maxammo": "-1",
           "range": [
@@ -586,15 +575,17 @@
           "id": "KatarinaR",
           "name": "Death Lotus",
           "description": "Katarina becomes a flurry of blades, dealing massive magic damage while she channels to the 3 nearest enemy champions.",
-          "tooltip": "Katarina becomes a flurry of blades, rapidly throwing knives at the three nearest enemy champions. Each knife deals <magicDamage>{{ damagecalc }} magic damage</magicDamage> and <physicalDamage>{{ addamagecalc }} physical damage</physicalDamage>, applies %i:OnHit% <OnHit>On-Hit</OnHit> effects at {{ onhitratio*100 }}% damage, and applies {{ grievousamount*100 }}% Grievous Wound for {{ grievousduration }} seconds.<br /><br />Total over {{ duration }} seconds to each enemy: <magicDamage>{{ totaldamagecalc }} magic damage</magicDamage> and <physicalDamage>{{ totaladdamagecalc }} physical damage</physicalDamage>.",
+          "tooltip": "Katarina becomes a flurry of blades, rapidly attacking the three nearest enemy champions with a flurry of knives. Each knife deals <magicDamage>{{ damagecalc }} magic damage</magicDamage> and <physicalDamage>{{ addamagecalc }} physical damage</physicalDamage>, and applies {{ grievousamount*100 }}% Grievous Wound for {{ grievousduration }} seconds.<br /><br />Total over {{ duration }} seconds to each enemy: <magicDamage>{{ totaldamagecalc }} magic damage</magicDamage> and <physicalDamage>{{ totaladdamagecalc }} physical damage</physicalDamage>.",
           "leveltip": {
             "label": [
               "Damage Per Knife",
-              "Cooldown"
+              "Cooldown",
+              "On Hit Damage Modifier"
             ],
             "effect": [
               "{{ damagepertick }} -> {{ damagepertickNL }}",
-              "{{ cooldown }} -> {{ cooldownNL }}"
+              "{{ cooldown }} -> {{ cooldownNL }}",
+              "{{ onhitratio*100.000000 }}% -> {{ onhitrationl*100.000000 }}%"
             ]
           },
           "maxrank": 3,

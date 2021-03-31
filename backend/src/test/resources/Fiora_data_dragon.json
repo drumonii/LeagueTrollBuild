@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.25.1",
+  "version": "11.7.1",
   "data": {
     "Fiora": {
       "id": "Fiora",
@@ -77,6 +77,18 @@
           "num": 41,
           "name": "Pulsefire Fiora",
           "chromas": false
+        },
+        {
+          "id": "114050",
+          "num": 50,
+          "name": "Lunar Beast Fiora",
+          "chromas": false
+        },
+        {
+          "id": "114051",
+          "num": 51,
+          "name": "Lunar Beast Fiora Prestige Edition",
+          "chromas": false
         }
       ],
       "lore": "The most feared duelist in all Valoran, Fiora is as renowned for her brusque manner and cunning mind as she is for the speed of her bluesteel rapier. Born to House Laurent in the kingdom of Demacia, Fiora took control of the family from her father in the wake of a scandal that nearly destroyed them. House Laurent's reputation was sundered, but Fiora bends her every effort to restore her family's honor and return them to their rightful place among the great and good of Demacia.",
@@ -108,7 +120,7 @@
         "movespeed": 345,
         "armor": 33,
         "armorperlevel": 3.5,
-        "spellblock": 32.1,
+        "spellblock": 32,
         "spellblockperlevel": 1.25,
         "attackrange": 150,
         "hpregen": 8.5,
@@ -127,7 +139,7 @@
           "id": "FioraQ",
           "name": "Lunge",
           "description": "Fiora lunges in a direction and stabs a nearby enemy, dealing physical damage and applying on-hit effects.",
-          "tooltip": "Fiora lunges in a direction and stabs the closest enemy, ward, or structure, dealing <physicalDamage>{{ totaldamage }} physical damage</physicalDamage>. The strike will prioritize <keywordMajor>Vitals</keywordMajor> and enemies it will kill.<br /><br />If Fiora strikes an enemy, this Ability's cooldown is reduced by {{ e4 }}%.",
+          "tooltip": "Fiora lunges in a direction and stabs the closest enemy, ward, or structure, dealing <physicalDamage>{{ totaldamage }} physical damage</physicalDamage>. The strike will prioritize <keywordMajor>Vitals</keywordMajor> and enemies it will kill.<br /><br />If Fiora strikes an enemy, this Ability's Cooldown is reduced by {{ e4 }}%.",
           "leveltip": {
             "label": [
               "Damage",
@@ -413,7 +425,7 @@
           "id": "FioraE",
           "name": "Bladework",
           "description": "Fiora has increased attack speed for the next two attacks. The first attack slows the target, and the second attack will critically strike.",
-          "tooltip": "Fiora gains <attackSpeed>{{ e4 }}% Attack Speed</attackSpeed> for her next two Attacks. The first Attack <status>Slows</status> by {{ e3 }}% for {{ e2 }} second. The second Attack always critically strike for <physicalDamage>{{ f4 }}% damage</physicalDamage>.",
+          "tooltip": "Fiora gains <attackSpeed>{{ e4 }}% Attack Speed</attackSpeed> for her next two Attacks. The first Attack <status>Slows</status> by {{ e3 }}% for {{ e2 }} second. The second Attack always critically strikes for <physicalDamage>{{ f4 }}% damage</physicalDamage>.",
           "leveltip": {
             "label": [
               "Critical Strike Damage",
@@ -556,7 +568,7 @@
           "id": "FioraR",
           "name": "Grand Challenge",
           "description": "Fiora reveals all four Vitals on an enemy champion and gains movement speed while near them. If Fiora hits all 4 Vitals or if the target dies after she has hit at least one, Fiora and her allies in the area are healed over the next few seconds.",
-          "tooltip": "<spellPassive>Passive:</spellPassive> <spellName>Duelist's Dance</spellName> <speed>Move Speed</speed> bonus is increased to {{ percentms }}%.<br /><br /><spellActive>Active:</spellActive> Fiora reveals all 4 <keywordMajor>Vitals</keywordMajor> on a champion for a max of <trueDamage>{{ spell.fiorapassive:rdamagetotal }} max Health true damage</trueDamage> and gains <spellName>Duelist's Dance</spellName>'s Move Speed bonus while near the target.<br /><br />If Fiora strikes all 4 <keywordMajor>Vitals</keywordMajor> within {{ markduration }} seconds of if the target dies after she has hit at least one, Fiora restores <healing>{{ healpersecondcalc }} Health per second</healing> to surrounding allied champions for between {{ minhealduration }} to {{ healduration }} seconds, scaling with the number of <keywordMajor>Vitals</keywordMajor> hit.",
+          "tooltip": "<spellPassive>Passive:</spellPassive> <spellName>Duelist's Dance</spellName> <speed>Move Speed</speed> bonus is increased to {{ percentms }}%.<br /><br /><spellActive>Active:</spellActive> Fiora reveals all 4 <keywordMajor>Vitals</keywordMajor> on a champion for a max of <trueDamage>{{ spell.fiorapassive:rdamagetotal }} max Health true damage</trueDamage> and gains <spellName>Duelist's Dance</spellName>'s Move Speed bonus while near the target.<br /><br />If Fiora strikes all 4 <keywordMajor>Vitals</keywordMajor> within {{ markduration }} seconds or if the target dies after she has hit at least one, Fiora restores <healing>{{ healpersecondcalc }} Health per second</healing> to surrounding allied champions for between {{ minhealduration }} to {{ healduration }} seconds, scaling with the number of <keywordMajor>Vitals</keywordMajor> hit.",
           "leveltip": {
             "label": [
               "Cooldown",

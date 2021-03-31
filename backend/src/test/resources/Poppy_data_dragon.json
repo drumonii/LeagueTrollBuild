@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.25.1",
+  "version": "11.7.1",
   "data": {
     "Poppy": {
       "id": "Poppy",
@@ -134,7 +134,7 @@
           "id": "PoppyQ",
           "name": "Hammer Shock",
           "description": "Poppy swings her hammer, dealing damage and creating a zone that will slow enemies and explode after a delay.",
-          "tooltip": "Poppy smashes the ground, dealing {{ e1 }} <scaleAD>(+{{ a1 }})</scaleAD> plus {{ e5 }}% of the enemies' maximum Health as physical damage, and leaving an unstable area.<br /><br />The area slows enemies inside it by {{ e3 }}% and erupts after {{ e4 }} second, dealing the initial damage again.",
+          "tooltip": "Poppy smashes the ground, dealing <physicalDamage>{{ basedamage }}</physicalDamage> plus <physicalDamage>{{ e5 }}% max Health physical damage</physicalDamage> and making the ground unstable. <br /><br />The unstable area <status>Slows</status> enemies by {{ e3 }}% and erupts after {{ e4 }} second, dealing <physicalDamage>{{ basedamage }}</physicalDamage> plus <physicalDamage>{{ e5 }}% max Health physical damage</physicalDamage> again.",
           "leveltip": {
             "label": [
               "Damage",
@@ -255,13 +255,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "bonusattackdamage",
-              "coeff": 0.9,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -287,7 +281,7 @@
           "id": "PoppyW",
           "name": "Steadfast Presence",
           "description": "Poppy passively gains Armor and Magic Resist. This bonus increases when she is low on Health. Poppy can activate Steadfast Presence to gain movement speed and stop enemy dashes around her. If a dash is stopped, the enemy is slowed and grounded.",
-          "tooltip": "<spellPassive>Passive:</spellPassive> Poppy gains <scaleArmor>{{ bonusarmor }} Armor</scaleArmor> and <scaleMR>{{ bonusmr }} Magic Resist</scaleMR>. This bonus is doubled if Poppy is below {{ passiveempoweredhealthpercent*100 }}% Health.<br /><br /><spellPassive>Active:</spellPassive> For {{ e1 }} seconds, Poppy gains {{ e2 }}% Movement Speed. During this time, she stops nearby enemy dashes, dealing {{ e5 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage, grounding and slowing them by {{ slowamount*-100 }}% for {{ groundingduration }} seconds.",
+          "tooltip": "<spellPassive>Passive:</spellPassive> Poppy gains <scaleArmor>{{ bonusarmor }} Armor</scaleArmor> and <scaleMR>{{ bonusmr }} Magic Resist</scaleMR>. This bonus is doubled if Poppy is below {{ passiveempoweredhealthpercent*100 }}% Health.<br /><br /><spellActive>Active:</spellActive> Poppy gains <speed>{{ e2 }}% Move Speed</speed> and projects a field around her for {{ e1 }} seconds that stops enemy dashes. Enemies who are stopped by the field are <status>Grounded</status> and <status>Slowed</status> by {{ slowamount*-100 }}% for {{ groundingduration }} seconds and take <magicDamage>{{ interruptdamage }} magic damage</magicDamage>.",
           "leveltip": {
             "label": [
               "Cooldown",
@@ -402,13 +396,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.7,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -434,7 +422,7 @@
           "id": "PoppyE",
           "name": "Heroic Charge",
           "description": "Poppy dashes to the target and pushes it back. If the target is pushed into a wall, it is stunned.",
-          "tooltip": "Poppy tackles an enemy, dealing {{ e1 }} <scaleAD>(+{{ a1 }})</scaleAD> physical damage and carrying them forward. If Poppy carries the target into terrain, the enemy takes {{ e2 }} <scaleAD>(+{{ a1 }})</scaleAD> additional physical damage and is stunned for {{ e3 }} seconds.",
+          "tooltip": "Poppy tackles an enemy, dealing <physicalDamage>{{ tackledamage }} physical damage</physicalDamage> and carrying them forward. If Poppy tackles them into terrain, the enemy is <status>Stunned</status> for {{ e3 }} seconds and take an additional <physicalDamage>{{ tackledamage }} physical damage</physicalDamage>.",
           "leveltip": {
             "label": [
               "Initial Damage",
@@ -553,18 +541,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "bonusattackdamage",
-              "coeff": 0.5,
-              "key": "a1"
-            },
-            {
-              "link": "bonusattackdamage",
-              "coeff": 0.5,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -590,7 +567,7 @@
           "id": "PoppyR",
           "name": "Keeper's Verdict",
           "description": "Poppy channels a hammer strike that knocks enemies very far away.",
-          "tooltip": "<spellPassive>First Cast:</spellPassive> Poppy channels for up to {{ channelmaxduration }} seconds, slowing herself by {{ selfslow }}%.<br /><br /><spellPassive>Second Cast:</spellPassive> Poppy smashes the ground, emanating a shockwave that deals <physicalDamage>{{ damage }}</physicalDamage> physical damage to enemies around the first champion hit and knocking them a large distance toward their Summoning Platform. The shockwave length and knockback distance increases with channel duration.<br /><br />An uncharged Keeper's Verdict deals half damage and knocks enemies up for {{ knockupdurationsnap }} seconds.<br /><br /><rules>Enemies hit with a charged Keeper's Verdict are untargetable.</rules>",
+          "tooltip": "<charge>Begin Casting:</charge> Poppy begins charging her hammer for up to {{ channelmaxduration }} seconds, <status>Slowing</status> herself by {{ selfslow }}%.<br /><br /><release>Release:</release> Poppy smashes the ground, creating a shockwave that deals <physicalDamage>{{ damage }} physical damage</physicalDamage> to the first champion hit and surrounding enemies, <status>Knocks</status> them <status>Back</status> towards their Nexus, and makes them Untargetable while they fly. The range and <status>Knock Back</status> distance increase with charge duration.<br /><br />An uncharged swing deals <physicalDamage>{{ halfdamage }} physical damage</physicalDamage> and <status>Knocks Up</status> for {{ knockupdurationsnap }} seconds.",
           "leveltip": {
             "label": [
               "Damage",

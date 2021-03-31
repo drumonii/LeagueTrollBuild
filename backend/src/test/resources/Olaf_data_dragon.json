@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.25.1",
+  "version": "11.7.1",
   "data": {
     "Olaf": {
       "id": "Olaf",
@@ -96,20 +96,20 @@
         "difficulty": 3
       },
       "stats": {
-        "hp": 597.24,
+        "hp": 575,
         "hpperlevel": 93,
-        "mp": 315.6,
+        "mp": 316,
         "mpperlevel": 42,
         "movespeed": 350,
         "armor": 35,
         "armorperlevel": 3,
-        "spellblock": 32.1,
+        "spellblock": 32,
         "spellblockperlevel": 1.25,
         "attackrange": 125,
         "hpregen": 8.5,
         "hpregenperlevel": 0.9,
-        "mpregen": 7.465,
-        "mpregenperlevel": 0.575,
+        "mpregen": 7.47,
+        "mpregenperlevel": 0.58,
         "crit": 0,
         "critperlevel": 0,
         "attackdamage": 68,
@@ -121,7 +121,7 @@
         {
           "id": "OlafAxeThrowCast",
           "name": "Undertow",
-          "description": "Olaf throws an axe into the ground at a target location, dealing damage to enemies it passes through and slowing their Movement Speed. If Olaf picks up the axe, the ability's cooldown is reduced by 4.5 seconds.",
+          "description": "Olaf throws an axe into the ground at a target location, dealing damage to enemies it passes through and slowing their Move Speed. If Olaf picks up the axe, the ability's cooldown is reduced by 4.5 seconds.",
           "tooltip": "Olaf throws an axe, dealing <physicalDamage>{{ totaldamage }} physical damage</physicalDamage> and <status>Slowing</status> by {{ e2 }}% for between {{ e4 }} and {{ e3 }} seconds, based on distance travelled.<br /><br />If Olaf picks up the axe, this Ability's Cooldown is reduced by 4.5 seconds.",
           "leveltip": {
             "label": [
@@ -161,10 +161,10 @@
               260
             ],
             [
-              29,
-              33,
-              37,
-              41,
+              25,
+              30,
+              35,
+              40,
               45
             ],
             [
@@ -227,7 +227,7 @@
           "effectBurn": [
             null,
             "80/125/170/215/260",
-            "29/33/37/41/45",
+            "25/30/35/40/45",
             "2.5",
             "1.5",
             "800",
@@ -263,15 +263,15 @@
           "id": "OlafFrenziedStrikes",
           "name": "Vicious Strikes",
           "description": "Olaf's Attack Speed is increased, he gains Life Steal and has increased healing from all sources based on how much Health he is missing.",
-          "tooltip": "Olaf gains {{ e2 }}% Life Steal, <attackSpeed>{{ e1 }}% Attack Speed</attackSpeed>, and increases healing received by up to <healing>50%, based on missing Health</healing> for {{ e4 }} seconds.",
+          "tooltip": "For {{ duration }} seconds, Olaf gains <lifeSteal>{{ lifesteal*100 }}% Life Steal</lifeSteal>, <attackSpeed>{{ attackspeed*100 }}% Attack Speed</attackSpeed>, and increases healing received by up to <healing>{{ healingampmax*100 }}% (based on missing Health)</healing>.",
           "leveltip": {
             "label": [
               "Attack Speed",
               "Life Steal"
             ],
             "effect": [
-              "{{ e1 }}% -> {{ e1NL }}%",
-              "{{ e2 }}% -> {{ e2NL }}%"
+              "{{ attackspeed*100.000000 }}% -> {{ attackspeednl*100.000000 }}%",
+              "{{ lifesteal*100.000000 }}% -> {{ lifestealnl*100.000000 }}%"
             ]
           },
           "maxrank": 5,
@@ -295,32 +295,32 @@
           "effect": [
             null,
             [
-              55,
-              65,
-              75,
-              85,
-              95
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              14,
-              16,
-              18,
-              20,
-              22
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              2,
-              2,
-              2,
-              2,
-              2
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              6,
-              6,
-              6,
-              6,
-              6
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -367,10 +367,10 @@
           ],
           "effectBurn": [
             null,
-            "55/65/75/85/95",
-            "14/16/18/20/22",
-            "2",
-            "6",
+            "0",
+            "0",
+            "0",
+            "0",
             "0",
             "0",
             "0",
@@ -545,12 +545,12 @@
           "id": "OlafRagnarok",
           "name": "Ragnarok",
           "description": "Olaf temporarily becomes immune to disables.",
-          "tooltip": "<spellPassive>Passive: </spellPassive>Olaf gains <scaleArmor>{{ resists }} Armor</scaleArmor> and <scaleMR>{{ resists }} Magic Resist</scaleMR>.<br /><br /><spellActive>Active: </spellActive>Olaf ends all <status>Immobilizing</status> and <status>Disabling</status> effects on himself and can't be effected by them for the next {{ duration }} seconds. While active, Olaf loses this Ability's <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> and instead gains <attackDamage>{{ ad }} Attack Damage</attackDamage>. Olaf also gains <speed>{{ haste*100 }}% Movement Speed</speed> towards enemy champions for {{ hasteduration }} second.",
+          "tooltip": "<spellPassive>Passive: </spellPassive>Olaf gains <scaleArmor>{{ resists }} Armor</scaleArmor> and <scaleMR>{{ resists }} Magic Resist</scaleMR>.<br /><br /><spellActive>Active: </spellActive>Olaf ends all <status>Immobilizing</status> and <status>Disabling</status> effects on himself and can't be affected by them for the next {{ duration }} seconds. While active, Olaf loses this Ability's <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> and instead gains <scaleAD>{{ ad }} Attack Damage</scaleAD>. Olaf also gains <speed>{{ haste*100 }}% Move Speed</speed> towards enemy champions for {{ hasteduration }} second.",
           "leveltip": {
             "label": [
               "Armor and Magic Resist",
               "Attack Damage",
-              "Movement Speed",
+              "Move Speed",
               "Cooldown"
             ],
             "effect": [
@@ -663,7 +663,7 @@
       ],
       "passive": {
         "name": "Berserker Rage",
-        "description": "Olaf's Attack Speed is increased by 1% for each 1% of his Health he is missing.",
+        "description": "Olaf gains Attack Speed based on his missing Health.",
         "image": {
           "full": "Olaf_Passive.png",
           "sprite": "passive2.png",

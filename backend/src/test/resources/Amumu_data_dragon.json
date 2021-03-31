@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.25.1",
+  "version": "11.7.1",
   "data": {
     "Amumu": {
       "id": "Amumu",
@@ -122,16 +122,16 @@
         "movespeed": 335,
         "armor": 30,
         "armorperlevel": 3.8,
-        "spellblock": 32.1,
+        "spellblock": 32,
         "spellblockperlevel": 1.25,
         "attackrange": 125,
         "hpregen": 9,
         "hpregenperlevel": 0.85,
-        "mpregen": 7.382,
-        "mpregenperlevel": 0.525,
+        "mpregen": 7.38,
+        "mpregenperlevel": 0.53,
         "crit": 0,
         "critperlevel": 0,
-        "attackdamage": 53.38,
+        "attackdamage": 53,
         "attackdamageperlevel": 3.8,
         "attackspeedperlevel": 2.18,
         "attackspeed": 0.736
@@ -164,13 +164,13 @@
           ],
           "cooldownBurn": "10/9.5/9/8.5/8",
           "cost": [
-            50,
-            55,
-            60,
-            65,
-            70
+            30,
+            35,
+            40,
+            45,
+            50
           ],
-          "costBurn": "50/55/60/65/70",
+          "costBurn": "30/35/40/45/50",
           "datavalues": {},
           "effect": [
             null,
@@ -425,7 +425,7 @@
           "id": "Tantrum",
           "name": "Tantrum",
           "description": "Permanently reduces the physical damage Amumu would take. Amumu can unleash his rage, dealing damage to surrounding enemies. Each time Amumu is hit, the cooldown on Tantrum is reduced by 0.5 seconds.",
-          "tooltip": "<spellPassive>Passive:</spellPassive> Amumu takes {{ damagereduction }} reduced physical damage. Additionally, when Amumu is hit by an Attack, this Ability's cooldown is reduced by 0.5 seconds.<br /><br /><spellActive>Active:</spellActive> Amumu throws a tantrum, dealing <magicDamage>{{ tantrumdamage }} magic damage</magicDamage> to nearby enemies.",
+          "tooltip": "<spellPassive>Passive:</spellPassive> Amumu takes {{ damagereduction }} reduced physical damage. Additionally, when Amumu is hit by an Attack, this Ability's Cooldown is reduced by 0.5 seconds.<br /><br /><spellActive>Active:</spellActive> Amumu throws a tantrum, dealing <magicDamage>{{ tantrumdamage }} magic damage</magicDamage> to nearby enemies.",
           "leveltip": {
             "label": [
               "Damage Reduced",
@@ -440,13 +440,13 @@
           },
           "maxrank": 5,
           "cooldown": [
-            10,
             9,
             8,
             7,
-            6
+            6,
+            5
           ],
-          "cooldownBurn": "10/9/8/7/6",
+          "cooldownBurn": "9/8/7/6/5",
           "cost": [
             35,
             35,
@@ -467,10 +467,10 @@
             ],
             [
               75,
-              95,
-              115,
-              135,
-              155
+              100,
+              125,
+              150,
+              175
             ],
             [
               0.5,
@@ -532,7 +532,7 @@
           "effectBurn": [
             null,
             "2/4/6/8/10",
-            "75/95/115/135/155",
+            "75/100/125/150/175",
             "0.5",
             "0",
             "0",

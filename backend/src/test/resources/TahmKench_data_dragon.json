@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.25.1",
+  "version": "11.7.1",
   "data": {
     "TahmKench": {
       "id": "TahmKench",
@@ -72,7 +72,7 @@
         "movespeed": 335,
         "armor": 47,
         "armorperlevel": 3.5,
-        "spellblock": 32.1,
+        "spellblock": 32,
         "spellblockperlevel": 1.25,
         "attackrange": 175,
         "hpregen": 6.5,
@@ -91,7 +91,7 @@
           "id": "TahmKenchQ",
           "name": "Tongue Lash",
           "description": "Tahm Kench lashes out with his tongue, damaging and slowing the first unit hit. This ability gains a stun after three stacks of An Acquired Taste.",
-          "tooltip": "Damage the first enemy hit for {{ e3 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage and slow them by {{ e4 }}% for {{ e5 }}s. Champions with 3 stacks of An Acquired Taste will also be stunned for {{ e6 }} seconds.<br /><br />Activate <span class=\"color0bf7de\">Devour</span> while your tongue is in midair to devour monsters/minions from a distance.",
+          "tooltip": "Tahm Kench reaches his tongue out, dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage> to the first enemy hit and <status>Slowing</status> by {{ e4 }}% for {{ e5 }} seconds. Champions that have 3 stacks of <keywordMajor>Acquired Taste</keywordMajor> are <status>Stunned</status> for {{ e6 }} seconds.<br /><br />Tahm Kench can activate <spellName>Devour</spellName> while his tongue is in midair to eat minions and jungle monsters from a distance.",
           "leveltip": {
             "label": [
               "Base Damage",
@@ -206,13 +206,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.7,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -238,7 +232,7 @@
           "id": "TahmKenchW",
           "name": "Devour",
           "description": "Tahm Kench devours a target, dealing a percentage of their maximum health as magic damage. He can spit devoured minions and monsters out as a skillshot that deals magic damage in an area upon impact.",
-          "tooltip": "Devour a target for {{ e1 }}s (half that for enemy champions.) Enemies are dealt {{ e7 }} (+{{ e3 }}%) <scaleAP>(+{{ a1 }}%)</scaleAP> of their maximum health as magic damage (maximum of {{ e2 }} against neutral monsters).<br /><br /><spellPassive>Enemy Champions:</spellPassive> Requires 3 stacks of An Acquired Taste to be devoured. While holding any champion, Tahm Kench is slowed by 95% and grounded.<br /><br /><spellPassive>Minions and Monsters:</spellPassive> Reactivate to spit them, dealing {{ e7 }} <scaleAP>(+{{ a2 }})</scaleAP> magic damage to targets hit.<br /><br /><rules><span class=\"color8c8c8c\">When used on an enemy, half of Devour's cooldown and mana cost are refunded.</span></rules>",
+          "tooltip": "Tahm Kench devours an ally champion or enemy.<br /><br />Enemy non-champions are put into Tahm Kench's belly for 4 seconds. Tahm Kench can <recast>Recast</recast> to spit the target out, firing them like a missile and dealing <magicDamage>{{ spitdamage }} magic damage</magicDamage> to the first target hit and surrounding enemies.<br /><br />When used on an ally or enemy champion (enemy champions require 3 stacks of <keywordMajor>Acquired Taste</keywordMajor>), they become Untargetable for up to 4 seconds (2 seconds for enemies) inside Tahm Kench's belly. Meanwhile, Tahm Kench is <status>Grounded</status> and <status>Slowed</status> by 90%. Afterwards, enemies take <magicDamage>{{ e7 }}</magicDamage> plus <magicDamage>{{ championhealthdamage }}% max Health magic damage</magicDamage>. ",
           "leveltip": {
             "label": [
               "Base Damage",
@@ -353,18 +347,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.02,
-              "key": "a1"
-            },
-            {
-              "link": "spelldamage",
-              "coeff": 0.6,
-              "key": "a2"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -390,7 +373,7 @@
           "id": "TahmKenchE",
           "name": "Thick Skin",
           "description": "Tahm Kench turns incoming damage into gray health. As gray health decays, Tahm Kench is healed for a percentage of the gray health amount. When activated, this ability turns all gray health into a shield.",
-          "tooltip": "<spellPassive>Passive:</spellPassive> {{ e3 }}% of the Damage taken while this ability is inactive is converted to gray health. If allowed to decay, {{ healthratio }} of it is regenerated as health.<br /><br /><spellPassive>Active:</spellPassive> Convert all of your gray health into a shield that lasts {{ e1 }} seconds.",
+          "tooltip": "<spellPassive>Passive:</spellPassive> {{ e3 }}% of damage taken while this Ability is inactive is stored. If allowed to decay, Tahm Kench restores <healing>{{ healthratio }} of it as Health</healing>.<br /><br /><spellPassive>Active:</spellPassive> Convert all the stored damage into a <shield>Shield</shield> that lasts {{ e1 }} seconds.",
           "leveltip": {
             "label": [
               "Damage to Gray Health Conversion"
@@ -529,7 +512,7 @@
           "id": "TahmKenchNewR",
           "name": "Abyssal Voyage",
           "description": "Tahm Kench teleports across the map, and he may bring one ally champion with him.",
-          "tooltip": "Begin to channel for up to 6 seconds. During this time, one ally champion can right click Tahm Kench to join in. Alternatively, reactivate this ability to travel alone. On reactivation or once an ally has opted in, Tahm travels to the target location.<br /><br /><rules>Taking damage from champions cancels the channel.<br />Allies in combat with champions cannot take Abyssal Voyage.</rules>",
+          "tooltip": "Tahm Kench channels for up to 6 seconds. When an ally clicks on him to join, or when he <recast>Recasts</recast>, he teleports a long distance.",
           "leveltip": {
             "label": [
               "Cooldown",

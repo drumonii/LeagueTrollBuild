@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.25.1",
+  "version": "11.7.1",
   "data": {
     "Leblanc": {
       "id": "Leblanc",
@@ -105,11 +105,11 @@
       },
       "stats": {
         "hp": 528,
-        "hpperlevel": 92,
+        "hpperlevel": 97,
         "mp": 334,
         "mpperlevel": 50,
         "movespeed": 340,
-        "armor": 21.88,
+        "armor": 22,
         "armorperlevel": 3.5,
         "spellblock": 30,
         "spellblockperlevel": 0.5,
@@ -120,7 +120,7 @@
         "mpregenperlevel": 0.8,
         "crit": 0,
         "critperlevel": 0,
-        "attackdamage": 54.88,
+        "attackdamage": 55,
         "attackdamageperlevel": 3.5,
         "attackspeedperlevel": 1.4,
         "attackspeed": 0.625
@@ -130,7 +130,7 @@
           "id": "LeblancQ",
           "name": "Sigil of Malice",
           "description": "LeBlanc projects a sigil, dealing damage and marking the target for 3.5 seconds. Damaging the marked target with an ability detonates the sigil, dealing additional damage.",
-          "tooltip": "LeBlanc projects a sigil, dealing {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage and marking the target for {{ e3 }} seconds.<br /><br />Damaging the marked target with an ability detonates the sigil, dealing {{ e2 }} <scaleAP>(+{{ a2 }})</scaleAP> magic damage.",
+          "tooltip": "LeBlanc projects a sigil to an enemy, dealing <magicDamage>{{ damage }} magic damage</magicDamage> and marking them for {{ markduration }} seconds.<br /><br />Damaging the marked enemy with an Ability detonates the sigil, dealing <magicDamage>{{ markdamage }} magic damage</magicDamage>.",
           "leveltip": {
             "label": [
               "Sigil Damage",
@@ -154,12 +154,12 @@
           "cooldownBurn": "6",
           "cost": [
             50,
+            55,
             60,
-            70,
-            80,
-            90
+            65,
+            70
           ],
-          "costBurn": "50/60/70/80/90",
+          "costBurn": "50/55/60/65/70",
           "datavalues": {},
           "effect": [
             null,
@@ -247,18 +247,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.4,
-              "key": "a1"
-            },
-            {
-              "link": "spelldamage",
-              "coeff": 0.4,
-              "key": "a2"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -284,7 +273,7 @@
           "id": "LeblancW",
           "name": "Distortion",
           "description": "LeBlanc dashes to a location, dealing damage to enemies near her destination. For the next 4 seconds, activate Distortion again to return LeBlanc to her starting location.",
-          "tooltip": "LeBlanc dashes to a location, dealing {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage to enemies near her destination.<br /><br />For the next {{ e3 }} seconds, activate Distortion again to return LeBlanc to her starting location.",
+          "tooltip": "LeBlanc dashes then deals <magicDamage>{{ totaldamage }} magic damage</magicDamage> to nearby enemies. For {{ e3 }} seconds after dashing, LeBlanc can <recast>Recast</recast>.<br /><br /><recast>Recast:</recast> LeBlanc returns to her starting location.",
           "leveltip": {
             "label": [
               "Damage",
@@ -308,12 +297,12 @@
           "cooldownBurn": "18/16/14/12/10",
           "cost": [
             60,
-            75,
+            70,
+            80,
             90,
-            105,
-            120
+            100
           ],
-          "costBurn": "60/75/90/105/120",
+          "costBurn": "60/70/80/90/100",
           "datavalues": {},
           "effect": [
             null,
@@ -401,13 +390,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.6,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -433,7 +416,7 @@
           "id": "LeblancE",
           "name": "Ethereal Chains",
           "description": "LeBlanc launches a chain that shackles the first enemy hit. If the target remains shackled for 1.5 seconds, LeBlanc roots them and deals additional damage.",
-          "tooltip": "LeBlanc launches a chain that shackles the first enemy hit, dealing {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage and granting <span class=\"coloree91d7\">True Sight</span> of the target.<br /><br />If the target remains shackled for {{ e3 }} seconds, LeBlanc roots them for {{ e4 }} seconds and deals an additional {{ e2 }} <scaleAP>(+{{ a2 }})</scaleAP> magic damage. ",
+          "tooltip": "LeBlanc launches a chain that shackles the first enemy hit, dealing <magicDamage>{{ initialdamage }} magic damage</magicDamage> and granting <keywordStealth>True Sight</keywordStealth>.<br /><br />If they remain shackled for {{ e3 }} seconds, LeBlanc <status>Roots</status> them for {{ e4 }} seconds and deals an additional <magicDamage>{{ delayeddamage }} magic damage</magicDamage>.",
           "leveltip": {
             "label": [
               "Chain Damage",
@@ -550,18 +533,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.3,
-              "key": "a1"
-            },
-            {
-              "link": "spelldamage",
-              "coeff": 0.7,
-              "key": "a2"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -587,7 +559,7 @@
           "id": "LeblancR",
           "name": "Mimic",
           "description": "LeBlanc casts a mimicked version of one of her basic spells.",
-          "tooltip": "LeBlanc mimics her most recent spell, casting it again.<br /><br />Mimicked Sigil of Malice and Ethereal Chains deal {{ rq1damage }} magic damage, plus {{ rq2damage }} magic damage from their mark and root, respectively.<br /><br />Mimicked Distortion deals {{ rwdamage }} magic damage.",
+          "tooltip": "LeBlanc mimics her most recent Ability, using it again. The mimicked Ability deals increased damage.<br /><br /><spellName>Mimicked Sigil of Malice</spellName> deals <magicDamage>{{ rq1damage }} magic damage</magicDamage> when applied, and <magicDamage>{{ rq2damage }} magic damage</magicDamage> when consumed.<br /><spellName>Mimicked Distortion</spellName> deals <magicDamage>{{ rwdamage }} magic damage</magicDamage>.<br /><spellName>Mimicked Ethereal Chains</spellName> deals <magicDamage>{{ re1damage }} magic damage</magicDamage> when shackled and <magicDamage>{{ re2damage }} magic damage</magicDamage> when <status>Rooting</status>.",
           "leveltip": {
             "label": [
               "Mimicked Sigil of Malice / Ethereal Chains Damage",
@@ -705,7 +677,7 @@
       ],
       "passive": {
         "name": "Mirror Image",
-        "description": "When LeBlanc drops below 40% health, she becomes invisible for 1 second and creates a Mirror Image that deals no damage and lasts for up to 8 seconds.",
+        "description": "When LeBlanc drops below 40% Health, she becomes invisible for 1 second and creates a Mirror Image that deals no damage and lasts for up to 8 seconds.",
         "image": {
           "full": "LeBlancP.png",
           "sprite": "passive2.png",

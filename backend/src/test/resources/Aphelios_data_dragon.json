@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.25.1",
+  "version": "11.7.1",
   "data": {
     "Aphelios": {
       "id": "Aphelios",
@@ -28,6 +28,12 @@
           "id": "523001",
           "num": 1,
           "name": "Nightbringer Aphelios",
+          "chromas": true
+        },
+        {
+          "id": "523009",
+          "num": 9,
+          "name": "Lunar Beast Aphelios",
           "chromas": true
         }
       ],
@@ -224,7 +230,7 @@
           "id": "ApheliosW",
           "name": "Phase",
           "description": "Aphelios swaps his main-hand gun with his off-hand gun, replacing his basic attack and activated ability.",
-          "tooltip": "Swap main-hand and off-hand weapons, equipping <b><i>Gravitum</i></b>.",
+          "tooltip": "Swap main-hand and off-hand weapons, equipping <b><i><span class=\"colora64dff\">Gravitum</span></i></b>.",
           "leveltip": {
             "label": [],
             "effect": []
@@ -520,7 +526,7 @@
           "id": "ApheliosR",
           "name": "Moonlight Vigil",
           "description": "Fire a concentrated blast of moonlight that explodes on enemy champions. Applies the unique effect of Aphelios' main-hand gun.",
-          "tooltip": "Fire a concentrated blast of moonlight that explodes when it hits an enemy champion to deal <physicalDamage>{{ maxdamage }} physical damage</physicalDamage> in the area.<br /><br />Then, Aphelios attacks all champions hit with his main-hand weapon. <rules>(Applies on-hits. Critical strikes deal {{ critdamagemodtooltip }} damage.)</rules>. {{ Spell_ApheliosR_WeaponMod_{{ f1 }} }}",
+          "tooltip": "Aphelios fires a concentrated blast of moonlight that explodes when it hits a champion, dealing <physicalDamage>{{ maxdamage }} physical damage</physicalDamage> to surrounding enemies.<br /><br />Then, Aphelios attacks all champions hit with his main-hand weapon. {{ Spell_ApheliosR_WeaponMod_{{ f1 }} }}",
           "leveltip": {
             "label": [
               "Damage",
@@ -638,7 +644,7 @@
       ],
       "passive": {
         "name": "The Hitman and the Seer",
-        "description": "Aphelios wields 5 Lunari Weapons made by his sister Alune. He has access to two at a time: one main-hand and one off-hand. Each weapon has a unique Basic Attack and Activated Ability. Attacks and abilities consume a weapon's ammo. When out of ammo, Aphelios discards the weapon and Alune summons the next of the 5. ",
+        "description": "Aphelios wields 5 Lunari Weapons made by his sister Alune. He has access to two at a time: one main-hand and one off-hand. Each weapon has a unique Basic Attack and Ability. Attacks and abilities consume a weapon's ammo. When out of ammo, Aphelios discards the weapon and Alune summons the next of the 5. ",
         "image": {
           "full": "ApheliosP.png",
           "sprite": "passive0.png",

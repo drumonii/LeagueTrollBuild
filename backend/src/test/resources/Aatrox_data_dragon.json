@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.25.1",
+  "version": "11.7.1",
   "data": {
     "Aatrox": {
       "id": "Aatrox",
@@ -98,7 +98,7 @@
         "movespeed": 345,
         "armor": 38,
         "armorperlevel": 3.25,
-        "spellblock": 32.1,
+        "spellblock": 32,
         "spellblockperlevel": 1.25,
         "attackrange": 175,
         "hpregen": 3,
@@ -401,15 +401,17 @@
           "id": "AatroxE",
           "name": "Umbral Dash",
           "description": "Passively, Aatrox heals when damaging enemy champions. On activation, he dashes in a direction.",
-          "tooltip": "<spellPassive>Passive:</spellPassive> Aatrox gains <lifeSteal>{{ espellvamp }}% Omnivamp</lifeSteal> against champions.<br /><br /><spellActive>Active:</spellActive> Aatrox dashes. He can use this Ability while winding up his other Abilities.",
+          "tooltip": "<spellPassive>Passive:</spellPassive> Aatrox gains <lifeSteal>{{ espellvamp }}% Omnivamp</lifeSteal> against champions, increased to <lifeSteal>{{ espellvampempowered }}% Omnivamp</lifeSteal> during <keywordMajor>World Ender</keywordMajor>.<br /><br /><spellActive>Active:</spellActive> Aatrox dashes. He can use this Ability while winding up his other Abilities.",
           "leveltip": {
             "label": [
               "Cooldown",
-              "Healing %"
+              "Healing %",
+              "Healing % during World Ender"
             ],
             "effect": [
               "{{ cooldown }} -> {{ cooldownNL }}",
-              "{{ espellvamp }}% -> {{ espellvampNL }}%"
+              "{{ espellvamp }}% -> {{ espellvampNL }}%",
+              "{{ espellvampempowered }}% -> {{ espellvampempoweredNL }}%"
             ]
           },
           "maxrank": 5,
@@ -547,7 +549,7 @@
             "label": [
               "Total Attack Damage Increase",
               "Healing Increase",
-              "Movement Speed",
+              "Move Speed",
               "Cooldown"
             ],
             "effect": [

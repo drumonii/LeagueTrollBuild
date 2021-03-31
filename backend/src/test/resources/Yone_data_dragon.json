@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.25.1",
+  "version": "11.7.1",
   "data": {
     "Yone": {
       "id": "Yone",
@@ -12,7 +12,7 @@
         "full": "Yone.png",
         "sprite": "champion4.png",
         "group": "champion",
-        "x": 192,
+        "x": 240,
         "y": 96,
         "w": 48,
         "h": 48
@@ -28,6 +28,12 @@
           "id": "777001",
           "num": 1,
           "name": "Spirit Blossom Yone",
+          "chromas": true
+        },
+        {
+          "id": "777010",
+          "num": 10,
+          "name": "Battle Academia Yone",
           "chromas": true
         }
       ],
@@ -64,7 +70,7 @@
         "crit": 0,
         "critperlevel": 0,
         "attackdamage": 60,
-        "attackdamageperlevel": 3,
+        "attackdamageperlevel": 2,
         "attackspeedperlevel": 3.5,
         "attackspeed": 0.625
       },
@@ -73,7 +79,7 @@
           "id": "YoneQ",
           "name": "Mortal Steel",
           "description": "Thrusts forward, damaging all enemies in a line.<br><br>On hit, grants a stack of Gathering Storm for a few seconds. At 2 stacks, Mortal Steel dashes Yone forward with a gust of wind knocking enemies <status>Airborne</status>.<br><br>Mortal Steel is treated as a basic attack and scales with all the same things.",
-          "tooltip": "Yone thrusts forward, dealing <physicalDamage>{{ qdamage }} physical damage</physicalDamage>.<br /><br />On hit, grants a stack for {{ buffduration }} seconds. At 2 stacks, this skill causes Yone to dash forward with a wave of wind that <status>Knocks Up</status> for {{ q3knockupduration }} seconds and deal <physicalDamage>{{ qdamage }} physical damage</physicalDamage>. ",
+          "tooltip": "Yone thrusts forward, dealing <physicalDamage>{{ qdamage }} physical damage</physicalDamage>.<br /><br />On hit, grants a stack for {{ buffduration }} seconds. At 2 stacks, this skill causes Yone to dash forward with a wave of wind that <status>Knocks Up</status> for {{ q3knockupduration }} seconds and deals <physicalDamage>{{ qdamage }} physical damage</physicalDamage>. ",
           "leveltip": {
             "label": [
               "Base Damage"
@@ -201,7 +207,7 @@
             "full": "YoneQ.png",
             "sprite": "spell14.png",
             "group": "spell",
-            "x": 0,
+            "x": 192,
             "y": 144,
             "w": 48,
             "h": 48
@@ -342,7 +348,7 @@
             "full": "YoneW.png",
             "sprite": "spell14.png",
             "group": "spell",
-            "x": 48,
+            "x": 240,
             "y": 144,
             "w": 48,
             "h": 48
@@ -353,7 +359,7 @@
           "id": "YoneE",
           "name": "Soul Unbound",
           "description": "Yone's spirit leaves his body behind, gaining movement speed. When this skill ends, Yone's spirit is forced back to his body and he repeats a portion of the damage he dealt as a spirit.",
-          "tooltip": "Yone enters a spirit form for {{ returntimer }} seconds, leaving your body behind for the duration and gaining <speed>{{ startingms*100 }}% ramping Move Speed</speed>. <br /><br />When the spirit form ends, Yone snaps back to his body and repeat {{ deathmarkpercent*100 }}% of all damage he dealt to champions during this time. You may <recast>Recast</recast> this skill during spirit form.<br /><br /><recast>Recast: </recast>End spirit form early.",
+          "tooltip": "Yone enters a spirit form for {{ returntimer }} seconds, leaving his body behind for the duration and gaining <speed>{{ startingms*100 }}% ramping Move Speed</speed>. <br /><br />When the spirit form ends, Yone snaps back to his body and repeats {{ deathmarkpercent*100 }}% of all damage he dealt to champions during this time. You may <recast>Recast</recast> this skill during spirit form.<br /><br /><recast>Recast: </recast>End spirit form early.",
           "leveltip": {
             "label": [
               "Repeated Damage",
@@ -483,7 +489,7 @@
             "full": "YoneE.png",
             "sprite": "spell14.png",
             "group": "spell",
-            "x": 96,
+            "x": 288,
             "y": 144,
             "w": 48,
             "h": 48
@@ -598,7 +604,7 @@
             "full": "YoneR.png",
             "sprite": "spell14.png",
             "group": "spell",
-            "x": 144,
+            "x": 336,
             "y": 144,
             "w": 48,
             "h": 48
@@ -613,7 +619,7 @@
           "full": "YonePassive.Yone.png",
           "sprite": "passive4.png",
           "group": "passive",
-          "x": 192,
+          "x": 240,
           "y": 96,
           "w": 48,
           "h": 48

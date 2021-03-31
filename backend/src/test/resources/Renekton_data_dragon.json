@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.25.1",
+  "version": "11.7.1",
   "data": {
     "Renekton": {
       "id": "Renekton",
@@ -121,7 +121,7 @@
         "movespeed": 345,
         "armor": 35,
         "armorperlevel": 4,
-        "spellblock": 32.1,
+        "spellblock": 32,
         "spellblockperlevel": 1.25,
         "attackrange": 125,
         "hpregen": 8,
@@ -140,7 +140,7 @@
           "id": "RenektonCleave",
           "name": "Cull the Meek",
           "description": "Renekton swings his blade, dealing moderate physical damage to all targets around him, and heals for a small portion of the damage dealt. If he has more than 50 Fury, his damage and heal are increased.",
-          "tooltip": "Renekton swings his blade, dealing {{ e1 }} <scaleAD>(+{{ a1 }})</scaleAD> physical damage to nearby enemies and healing himself for {{ e2 }} <scaleAD>(+{{ f1 }})</scaleAD> Health for each non-champion hit and {{ f2 }} <scaleAD>(+{{ f3 }})</scaleAD> Health for each champion hit, up to {{ e4 }} Health.<br /><br />He generates <span class=\"colorFF6633\">2.5 Fury</span> for each non-champion hit and <span class=\"colorFF6633\">10 Fury</span> for each champion hit, up to a maximum of <span class=\"colorFF6633\">30 Fury</span>.<br /><br /><span class=\"colorFF6633\">50 Fury Bonus:</span> Damage increased to {{ e6 }} <scaleAD>(+{{ a2 }})</scaleAD>. Heal increased to {{ e7 }} <scaleAD>(+{{ f4 }})</scaleAD> per non-champion and {{ f5 }} <scaleAD>(+{{ f6 }})</scaleAD> per champion, up to {{ e9 }}. No longer generates <span class=\"colorFF6633\">Fury</span>.",
+          "tooltip": "Renekton swings his blade, dealing <physicalDamage>{{ basicdamage }} physical damage</physicalDamage> and restoring <healing>{{ nonchamphealing }} Health</healing> per non-champion and <healing>{{ champhealing }}</healing> per champion hit (max <healing>{{ e4 }} Health</healing>). He also generates <keywordMajor>2.5 Fury</keywordMajor> per non-champion and <keywordMajor>10 Fury</keywordMajor> per champion (max <keywordMajor>30 Fury</keywordMajor>).<br /><br /><keywordMajor>Fury Bonus</keywordMajor>: Damage is increased to <physicalDamage>{{ empdamage }} physical damage</physicalDamage> and healing is increased to <healing>{{ empnonchamphealing }} Health</healing> against non-champions and <healing>{{ empchamphealing }} Health</healing> against champions (max <healing>{{ e9 }} Health</healing>). Does not generate any <keywordMajor>Fury</keywordMajor>.",
           "leveltip": {
             "label": [
               "Damage",
@@ -182,10 +182,10 @@
             ],
             [
               3,
-              4.5,
+              4,
+              5,
               6,
-              7.5,
-              9
+              7
             ],
             [
               0.04,
@@ -217,10 +217,10 @@
             ],
             [
               9,
-              13.5,
+              12,
+              15,
               18,
-              22.5,
-              27
+              21
             ],
             [
               0.12,
@@ -247,39 +247,18 @@
           "effectBurn": [
             null,
             "65/100/135/170/205",
-            "3/4.5/6/7.5/9",
+            "3/4/5/6/7",
             "0.04",
             "50/75/100/125/150",
             "400",
             "100/150/200/250/300",
-            "9/13.5/18/22.5/27",
+            "9/12/15/18/21",
             "0.12",
             "200/300/400/500/600",
             "0"
           ],
-          "vars": [
-            {
-              "link": "bonusattackdamage",
-              "coeff": 0.8,
-              "key": "a1"
-            },
-            {
-              "link": "bonusattackdamage",
-              "coeff": 0.8,
-              "key": "f1"
-            },
-            {
-              "link": "bonusattackdamage",
-              "coeff": 1.2,
-              "key": "f2"
-            },
-            {
-              "link": "bonusattackdamage",
-              "coeff": 1.2,
-              "key": "a2"
-            }
-          ],
-          "costType": " {{ abilityresourcename }}",
+          "vars": [],
+          "costType": "No Cost",
           "maxammo": "-1",
           "range": [
             325,
@@ -298,13 +277,13 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} {{ abilityresourcename }}"
+          "resource": "No Cost"
         },
         {
           "id": "RenektonPreExecute",
           "name": "Ruthless Predator",
           "description": "Renekton slashes his target twice, dealing moderate physical damage and stuns them for 0.75 seconds. If Renekton has more than 50 Fury, he slashes his target three times, destroying damage shields on the target, dealing high physical damage, and stunning them for 1.5 seconds.",
-          "tooltip": "Renekton's next attack strikes twice, stunning his target for {{ e3 }} seconds and dealing {{ e1 }} <scaleAD>(+{{ f1 }})</scaleAD> physical damage per hit ({{ e5 }} <scaleAD>(+{{ f2 }})</scaleAD> total).<br /><br />Each strike applies on-hit effects and generates <span class=\"colorFF6633\">Fury</span>. Hitting a champion generates an additional <span class=\"colorFF6633\">{{ e7 }} Fury</span>.<br /><br /><span class=\"colorFF6633\">50 Fury Bonus:</span> Renekton attacks three times, instantly destroying damage shields on the target before dealing a total of {{ e6 }} <scaleAD>(+{{ f3 }})</scaleAD> damage and stunning his target for {{ e4 }} seconds. No longer generates <span class=\"colorFF6633\">Fury</span>.",
+          "tooltip": "Renekton's next Attack strikes twice, <status>Stunning</status> for {{ e3 }} seconds and dealing a total of <physicalDamage>{{ basictotaldamage }} physical damage</physicalDamage>. Hitting a champion generates an additonal <keywordMajor>{{ e7 }} Fury</keywordMajor>.<br /><br /><keywordMajor>Fury Bonus</keywordMajor>: Renekton Attacks 3 times instead, destroying <shield>Shields</shield> before dealing <physicalDamage>{{ emptotaldamage }} physical damage</physicalDamage> and <status>Stunning</status> for {{ e4 }} seconds. Does not generate additional <keywordMajor>Fury</keywordMajor>.",
           "leveltip": {
             "label": [
               "Damage",
@@ -421,19 +400,8 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "attackdamage",
-              "coeff": 1.5,
-              "key": "f1"
-            },
-            {
-              "link": "attackdamage",
-              "coeff": 2.25,
-              "key": "f2"
-            }
-          ],
-          "costType": " {{ abilityresourcename }}",
+          "vars": [],
+          "costType": "No Cost",
           "maxammo": "-1",
           "range": [
             300,
@@ -452,13 +420,13 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} {{ abilityresourcename }}"
+          "resource": "No Cost"
         },
         {
           "id": "RenektonSliceAndDice",
           "name": "Slice and Dice",
           "description": "Renekton dashes, dealing damage to units along the way. Empowered, Renekton deals bonus damage and reduces the Armor of units hit.",
-          "tooltip": "<span class=\"colorFF6633\">Slice:</span> Renekton dashes, dealing {{ e1 }} <scaleAD>(+{{ f1 }})</scaleAD> physical damage to enemies he passes through. Hitting an enemy grants the ability to use Dice for {{ e8 }} seconds.<br /><br /><span class=\"colorFF6633\">Dice:</span> Renekton dashes, dealing {{ e1 }} <scaleAD>(+{{ f1 }})</scaleAD> physical damage to enemies he passes through.<br /><br />He generates <span class=\"colorFF6633\">{{ e4 }} Fury</span> for each non-champion hit and <span class=\"colorFF6633\">{{ e5 }} Fury</span> for each champion hit, up to a maximum of <span class=\"colorFF6633\">{{ e0 }} Fury</span>.<br /><br /><span class=\"colorFF6633\">Dice - 50 Fury Bonus:</span> Damage increased to {{ e3 }} <scaleAD>(+{{ f2 }})</scaleAD>. Enemies hit have {{ e2 }}% reduced Armor for {{ e9 }} seconds. No longer generates <span class=\"colorFF6633\">Fury</span>.",
+          "tooltip": "Renekton dashes, dealing <physicalDamage>{{ basicdamage }} physical damage</physicalDamage>. He generates <keywordMajor>{{ e4 }} Fury</keywordMajor> per non-champion and <keywordMajor>{{ e5 }} Fury</keywordMajor> per champion hit. Hitting at least one enemy allows Renekton to <recast>Recast</recast> this Ability once for {{ e8 }} seconds. <br /><br /><keywordMajor>Fury Bonus</keywordMajor>: The <recast>Recast</recast> dash deals <physicalDamage>{{ empdamage }} physical damage</physicalDamage> instead and removes <scaleArmor>{{ e2 }}% Armor</scaleArmor> for {{ e9 }} seconds. Does not generate <keywordMajor>Fury</keywordMajor>.",
           "leveltip": {
             "label": [
               "Bonus Damage",
@@ -575,24 +543,8 @@
             "4",
             "30"
           ],
-          "vars": [
-            {
-              "link": "bonusattackdamage",
-              "coeff": 0.9,
-              "key": "f1"
-            },
-            {
-              "link": "bonusattackdamage",
-              "coeff": 0.9,
-              "key": "f1"
-            },
-            {
-              "link": "bonusattackdamage",
-              "coeff": 1.35,
-              "key": "f2"
-            }
-          ],
-          "costType": " {{ abilityresourcename }}",
+          "vars": [],
+          "costType": "No Cost",
           "maxammo": "-1",
           "range": [
             450,
@@ -611,13 +563,13 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} {{ abilityresourcename }}"
+          "resource": "No Cost"
         },
         {
           "id": "RenektonReignOfTheTyrant",
           "name": "Dominus",
           "description": "Renekton transforms into the Tyrant form, gaining bonus Health and dealing damage to enemies around him. While in this form, Renekton gains Fury periodically.",
-          "tooltip": "Renekton surrounds himself with dark energies for {{ buffduration }} seconds, gaining {{ healthgain }} Health and <span class=\"colorFF6633\">{{ furyoncast }} Fury</span>. While active, he deals <magicDamage>{{ totaldamagepersecond }} magic damage</magicDamage> to nearby enemies and gains <span class=\"colorFF6633\">{{ furypersecond }} Fury</span> per second.",
+          "tooltip": "Renekton surrounds himself with dark energies for {{ buffduration }} seconds, gaining <healing>{{ healthgain }} max Health</healing> and <keywordMajor>{{ furyoncast }} Fury</keywordMajor>. While active, he deals <magicDamage>{{ totaldamagepersecond }} magic damage</magicDamage> and gains <keywordMajor>{{ furypersecond }} Fury</keywordMajor> per second.",
           "leveltip": {
             "label": [
               "Bonus Health",
@@ -709,7 +661,7 @@
             "0"
           ],
           "vars": [],
-          "costType": " {{ abilityresourcename }}",
+          "costType": "No Cost",
           "maxammo": "-1",
           "range": [
             20,
@@ -726,7 +678,7 @@
             "w": 48,
             "h": 48
           },
-          "resource": "{{ cost }} {{ abilityresourcename }}"
+          "resource": "No Cost"
         }
       ],
       "passive": {

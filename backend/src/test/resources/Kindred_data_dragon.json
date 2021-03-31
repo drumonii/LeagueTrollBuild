@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.25.1",
+  "version": "11.7.1",
   "data": {
     "Kindred": {
       "id": "Kindred",
@@ -92,7 +92,7 @@
           "id": "KindredQ",
           "name": "Dance of Arrows",
           "description": "Kindred tumbles and shoots up to three arrows at nearby targets.",
-          "tooltip": "Lamb vaults, firing up to 3 arrows at nearby enemies, dealing {{ e1 }}<scaleAD> (+{{ a1 }})</scaleAD> physical damage and gains <scaleLevel>{{ f2 }}%</scaleLevel> bonus attack speed for {{ e8 }} seconds.<br /><br />Casting <scaleLevel>Wolf's Frenzy</scaleLevel> or vaulting inside of its effect reduces the cooldown of this spell to {{ e4 }} seconds.",
+          "tooltip": "Kindred vaults, firing an arrow at up to 3 enemies, dealing <physicalDamage>{{ totaldamage }} physical damage</physicalDamage> and gaining <attackSpeed>{{ totalqattackspeed }} Attack Speed</attackSpeed> for {{ e8 }} seconds.<br /><br />While inside of <spellName>Wolf's Frenzy</spellName>, this Ability's Cooldown is reduced to {{ e4 }} seconds.",
           "leveltip": {
             "label": [
               "Damage",
@@ -207,13 +207,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "bonusattackdamage",
-              "coeff": 0.65,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -239,7 +233,7 @@
           "id": "KindredW",
           "name": "Wolf's Frenzy",
           "description": "Wolf enrages and attacks enemies around him.  Lamb passively gains stacks by moving and attacking. When fully charged, Lamb's next attack restores health.",
-          "tooltip": "<spellPassive>Passive:</spellPassive> As Kindred move and attack they build stacks of Hunter's Vigor, up to a maximum of 100. At full stacks Lamb's next basic attack restores up to <scaleLevel>{{ f1 }}</scaleLevel> health based on how much health Kindred is missing.<br /><br /><spellPassive>Active:</spellPassive> Wolf claims a territory, attacking nearby enemies inside it for {{ e4 }} seconds. Lamb can redirect Wolf to new targets by attacking them. If Lamb leaves Wolf's territory he will cease attacking and join her.<br /><br />Wolf's attacks deal magic damage equal to {{ e5 }}<scaleAD> (+{{ a1 }})</scaleAD> plus <scaleLevel>{{ f3 }}%</scaleLevel> of the target's current health.<br /><br /><rules>Wolf attacks faster based on Kindred's attack speed. His attacks maim monsters for {{ e7 }}% increased damage and reduce their Movement Speed by {{ e8 }}% for 2 seconds.</rules>",
+          "tooltip": "<spellPassive>Passive:</spellPassive> Kindred gains stacks as they move and attack. At 100 stacks, Kindred's next Attack restores up to <healing>{{ attackheal }} Health</healing> based on their missing Health.<br /><br /><spellActive>Active:</spellActive> Kindred claims a territory, ordering Wolf to bite at the last enemy Lamb Attacked. Wolf's bites deal <magicDamage>{{ basewolfdamage }}</magicDamage> plus <magicDamage>{{ percentwolfdamage }} current Health magic damage</magicDamage>.",
           "leveltip": {
             "label": [
               "Damage",
@@ -313,18 +307,18 @@
               800
             ],
             [
-              50,
-              50,
-              50,
-              50,
-              50
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              0.5
             ],
             [
-              50,
-              50,
-              50,
-              50,
-              50
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              0.5
             ],
             [
               0,
@@ -349,18 +343,12 @@
             "8.5",
             "25/30/35/40/45",
             "800",
-            "50",
-            "50",
+            "0.5",
+            "0.5",
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "bonusattackdamage",
-              "coeff": 0.2,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -386,26 +374,26 @@
           "id": "KindredEWrapper",
           "name": "Mounting Dread",
           "description": "Lamb fires a carefully placed shot, slowing the target. If Lamb attacks the target two more times, her third attack instead directs Wolf to pounce on the enemy, savaging them for massive damage.",
-          "tooltip": "Cripple an enemy, slowing their movement speed by {{ e2 }}% for {{ e8 }} second.<br /><br />After Lamb attacks the target twice, her third attack instead directs Wolf to pounce on the enemy, dealing {{ e1 }}<scaleAD> (+{{ a1 }})</scaleAD> plus <scaleLevel>{{ f2 }}%</scaleLevel> of the target's missing health as bonus physical damage.<br /><br />Wolf's attack critically strikes targets for {{ e6 }}% increased damage if they are below {{ e5 }}% <span class=\"colorFF5802\">(+{{ f3 }}%)</span> health (Increased by <span class=\"colorFF5802\">Critical Strike Chance</span>).<br /><br /><rules>[Maximum {{ e0 }} vs. monsters]</rules>",
+          "tooltip": "Kindred weakens an enemy, <status>Slowing</status> them by {{ slowamount*100 }}% for {{ slowduration }} second(s).<br /><br />Kindred's third Attack against the target within {{ totalduration }} seconds of each other directs Wolf to pounce on the enemy, dealing <physicalDamage>{{ basebitedamage }}</physicalDamage> plus <physicalDamage>{{ percentbitedamage }} missing Health physical damage</physicalDamage>.<br /><br />Wolf's pounce critically strikes for <physicalDamage>{{ basebitedamage }}</physicalDamage> plus <physicalDamage>{{ critdamage }} missing Health physical damage</physicalDamage> instead if they are below {{ healththreshold }} Health.",
           "leveltip": {
             "label": [
               "Damage",
               "Cooldown"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
+              "{{ basedamage }} -> {{ basedamageNL }}",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
           "maxrank": 5,
           "cooldown": [
-            16,
-            15,
             14,
             13,
-            12
+            12,
+            11,
+            10
           ],
-          "cooldownBurn": "16/15/14/13/12",
+          "cooldownBurn": "14/13/12/11/10",
           "cost": [
             0,
             0,
@@ -418,96 +406,90 @@
           "effect": [
             null,
             [
-              80,
-              100,
-              120,
-              140,
-              160
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              50,
-              50,
-              50,
-              50,
-              50
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              0.5,
-              0.5,
-              0.5,
-              0.5,
-              0.5
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              8,
-              8,
-              8,
-              8,
-              8
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              15,
-              15,
-              15,
-              15,
-              15
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              50,
-              50,
-              50,
-              50,
-              50
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              4,
-              4,
-              4,
-              4,
-              4
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              1,
-              1,
-              1,
-              1,
-              1
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              4,
-              4,
-              4,
-              4,
-              4
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              300,
-              300,
-              300,
-              300,
-              300
+              0,
+              0,
+              0,
+              0,
+              0
             ]
           ],
           "effectBurn": [
             null,
-            "80/100/120/140/160",
-            "50",
-            "0.5",
-            "8",
-            "15",
-            "50",
-            "4",
-            "1",
-            "4",
-            "300"
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
           ],
-          "vars": [
-            {
-              "link": "bonusattackdamage",
-              "coeff": 0.8,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -533,7 +515,7 @@
           "id": "KindredR",
           "name": "Lamb's Respite",
           "description": "Lamb grants all living things inside a zone a respite from death. Until the effect ends, nothing can die. At the end, units are healed.",
-          "tooltip": "Lamb blesses the ground underneath her for {{ e2 }} seconds, creating an area in which no living things, <scaleAP>ally</scaleAP> or <span class=\"colorFF9999\">enemy</span>, can die. Upon reaching 10% Health, units become immune to further damage or healing.<br /><br />When the blessing ends all living things inside heal for {{ e1 }}.",
+          "tooltip": "Kindred blesses the ground for {{ e2 }} seconds, allowing no unit, ally, enemy, or neutral to die while inside. Upon reaching 10% Health, units can't be damaged or healed while still inside the zone.<br /><br />When the blessing ends, all units inside heal for <healing>{{ e1 }} Health</healing>.",
           "leveltip": {
             "label": [
               "Healing",

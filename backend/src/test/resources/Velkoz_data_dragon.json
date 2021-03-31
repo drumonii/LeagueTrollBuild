@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.25.1",
+  "version": "11.7.1",
   "data": {
     "Velkoz": {
       "id": "Velkoz",
@@ -77,7 +77,7 @@
         "mp": 469,
         "mpperlevel": 21,
         "movespeed": 340,
-        "armor": 21.88,
+        "armor": 22,
         "armorperlevel": 3.5,
         "spellblock": 30,
         "spellblockperlevel": 0.5,
@@ -88,7 +88,7 @@
         "mpregenperlevel": 0.8,
         "crit": 0,
         "critperlevel": 0,
-        "attackdamage": 54.9379,
+        "attackdamage": 55,
         "attackdamageperlevel": 3.1416,
         "attackspeedperlevel": 1.36,
         "attackspeed": 0.625
@@ -98,7 +98,7 @@
           "id": "VelkozQ",
           "name": "Plasma Fission",
           "description": "Vel'Koz shoots a bolt of plasma that splits in two on reactivation or upon hitting an enemy. The bolt slows and damages on hit.",
-          "tooltip": "Vel'Koz shoots a plasma bolt that deals <magicDamage>{{ totaldamage }} magic damage</magicDamage> and <status>Slows</status> by {{ slowamount*100 }}% decaying over {{ slowduration }} second(s). At the end of it's range, on hitting a target, or on <recast>Recasting</recast>, the bolt splits and fires two new bolts at a 90 degree angle.<br /><br />Killing a unit with this refunds {{ manarefund*100 }}% of the <scaleMana>Mana</scaleMana> cost.",
+          "tooltip": "Vel'Koz shoots a plasma bolt that deals <magicDamage>{{ totaldamage }} magic damage</magicDamage> and <status>Slows</status> by {{ slowamount*100 }}% decaying over {{ slowduration }} second(s). At the end of it's range, on hitting a target, or on <recast>Recasting</recast>, the bolt splits and fires two new bolts at a 90 degree angle.<br /><br />Killing a unit with this restores <scaleMana>{{ tooltipmanarefund }} Mana</scaleMana>.",
           "leveltip": {
             "label": [
               "Total Damage",

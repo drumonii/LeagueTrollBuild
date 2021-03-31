@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.25.1",
+  "version": "11.7.1",
   "data": {
     "Lillia": {
       "id": "Lillia",
@@ -54,7 +54,7 @@
         "movespeed": 330,
         "armor": 20,
         "armorperlevel": 4,
-        "spellblock": 32.1,
+        "spellblock": 32,
         "spellblockperlevel": 0.75,
         "attackrange": 325,
         "hpregen": 9,
@@ -78,7 +78,7 @@
             "label": [
               "Magic Damage",
               "True Damage",
-              "Movement Speed"
+              "Move Speed"
             ],
             "effect": [
               "{{ flatdamagebase }} -> {{ flatdamagebaseNL }}",
@@ -513,11 +513,11 @@
           },
           "maxrank": 3,
           "cooldown": [
+            150,
             130,
-            110,
-            90
+            110
           ],
-          "cooldownBurn": "130/110/90",
+          "cooldownBurn": "150/130/110",
           "cost": [
             50,
             50,

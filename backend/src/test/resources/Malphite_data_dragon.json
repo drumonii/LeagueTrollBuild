@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.25.1",
+  "version": "11.7.1",
   "data": {
     "Malphite": {
       "id": "Malphite",
@@ -113,23 +113,23 @@
         "difficulty": 2
       },
       "stats": {
-        "hp": 575,
+        "hp": 574,
         "hpperlevel": 90,
         "mp": 280,
         "mpperlevel": 60,
         "movespeed": 335,
         "armor": 37,
         "armorperlevel": 3.75,
-        "spellblock": 32.1,
+        "spellblock": 28,
         "spellblockperlevel": 1.25,
         "attackrange": 125,
         "hpregen": 7,
         "hpregenperlevel": 0.55,
-        "mpregen": 7.324,
+        "mpregen": 7.32,
         "mpregenperlevel": 0.55,
         "crit": 0,
         "critperlevel": 0,
-        "attackdamage": 61.97,
+        "attackdamage": 62,
         "attackdamageperlevel": 4,
         "attackspeedperlevel": 3.4,
         "attackspeed": 0.736
@@ -139,12 +139,12 @@
           "id": "SeismicShard",
           "name": "Seismic Shard",
           "description": "Malphite sends a shard of the earth through the ground at his foe, dealing damage upon impact and stealing Movement Speed for 3 seconds.",
-          "tooltip": "Malphite launches a shard of earth at an enemy, dealing <magicDamage>{{ qdamagecalc }} magic damage</magicDamage>, and <status>Slowing</status> them and granting Malphite <speed>{{ speedsteal }}% Move Speed</speed> for {{ slowduration }} seconds.",
+          "tooltip": "Malphite launches a shard of earth at an enemy, dealing <magicDamage>{{ qdamagecalc }} magic damage</magicDamage> and <status>Slowing</status> them by {{ e2 }}% for {{ slowduration }} seconds. Malphite also steals the amount <status>Slowed</status>, gaining it as <speed>Move Speed</speed> for {{ slowduration }} seconds.",
           "leveltip": {
             "label": [
               "@AbilityResourceName@ Cost",
               "Damage",
-              "Movement Speed"
+              "Slow"
             ],
             "effect": [
               "{{ cost }} -> {{ costNL }}",
@@ -282,7 +282,7 @@
           "id": "Obduracy",
           "name": "Thunderclap",
           "description": "Malphite attacks with such force that it creates a sonic boom. For the next few seconds, his attacks create aftershocks in front of him.",
-          "tooltip": "<spellPassive>Passive: </spellPassive>Malphite gains <scaleArmor>{{ bonusarmorcalc }} Armor</scaleArmor>. This effect is increased to <scaleArmor>{{ empoweredarmorcalc }}</scaleArmor> while <spellName>Granite Shield</spellName> is active.<br /><br /><spellPassive>Active: </spellPassive>Malphite's next Attack deals an additional <physicalDamage>{{ totalbonusdamage }} physical damage</physicalDamage> and creates an aftershock which deals <physicalDamage>{{ thunderclapsplash }} physical damage</physicalDamage> in their direction. His Attacks continue to create aftershocks for the next {{ thunderclapbuffduration }} seconds.",
+          "tooltip": "<spellPassive>Passive: </spellPassive>Malphite gains <scaleArmor>{{ f1 }} Armor ({{ bonusarmorpassive*100 }}% %i:scaleArmor%)</scaleArmor>. This effect is increased to <scaleArmor>{{ f2 }} ({{ bonusarmorpassive*300 }}% %i:scaleArmor%)</scaleArmor> while <spellName>Granite Shield</spellName> is active.<br /><br /><spellPassive>Active: </spellPassive>Malphite's next Attack deals an additional <physicalDamage>{{ totalbonusdamage }} physical damage</physicalDamage> and creates an aftershock which deals <physicalDamage>{{ thunderclapsplash }} physical damage</physicalDamage> in their direction. His Attacks continue to create aftershocks for the next {{ thunderclapbuffduration }} seconds.",
           "leveltip": {
             "label": [
               "@AbilityResourceName@ Cost",
@@ -292,7 +292,7 @@
             ],
             "effect": [
               "{{ cost }} -> {{ costNL }}",
-              "{{ effect1amount*100.000000 }}% -> {{ effect1amountnl*100.000000 }}%",
+              "{{ bonusarmorpassive*100.000000 }}% -> {{ bonusarmorpassivenl*100.000000 }}%",
               "{{ thunderclapbasedamage }} -> {{ thunderclapbasedamageNL }}",
               "{{ thunderclapsplashdamage }} -> {{ thunderclapsplashdamageNL }}"
             ]
@@ -318,39 +318,39 @@
           "effect": [
             null,
             [
-              0.1,
-              0.15,
-              0.2,
-              0.25,
-              0.3
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              20,
-              40,
-              60,
-              80,
-              100
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              5,
-              5,
-              5,
-              5,
-              5
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              400,
-              400,
-              400,
-              400,
-              400
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              3,
-              3,
-              3,
-              3,
-              3
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -390,11 +390,11 @@
           ],
           "effectBurn": [
             null,
-            "0.1/0.15/0.2/0.25/0.3",
-            "20/40/60/80/100",
-            "5",
-            "400",
-            "3",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
             "0",
             "0",
             "0",
@@ -436,8 +436,8 @@
             ],
             "effect": [
               "{{ cost }} -> {{ costNL }}",
-              "{{ e2 }} -> {{ e2NL }}",
-              "{{ e1 }}% -> {{ e1NL }}%"
+              "{{ basedamage }} -> {{ basedamageNL }}",
+              "{{ asreduction }}% -> {{ asreductionNL }}%"
             ]
           },
           "maxrank": 5,
@@ -461,39 +461,39 @@
           "effect": [
             null,
             [
-              30,
-              35,
-              40,
-              45,
-              50
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              60,
-              95,
-              130,
-              165,
-              200
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              40,
-              40,
-              40,
-              40,
-              40
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              3,
-              3,
-              3,
-              3,
-              3
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              6,
-              6,
-              6,
-              6,
-              6
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -533,11 +533,11 @@
           ],
           "effectBurn": [
             null,
-            "30/35/40/45/50",
-            "60/95/130/165/200",
-            "40",
-            "3",
-            "6",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
             "0",
             "0",
             "0",

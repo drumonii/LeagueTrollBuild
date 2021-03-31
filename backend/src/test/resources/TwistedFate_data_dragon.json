@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.25.1",
+  "version": "11.7.1",
   "data": {
     "TwistedFate": {
       "id": "TwistedFate",
@@ -446,8 +446,8 @@
               "Attack Speed"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
-              "{{ e3 }}% -> {{ e3NL }}%"
+              "{{ damage }} -> {{ damageNL }}",
+              "{{ attackspeedbonus }}% -> {{ attackspeedbonusNL }}%"
             ]
           },
           "maxrank": 5,
@@ -555,7 +555,7 @@
             "0"
           ],
           "vars": [],
-          "costType": "&nbsp;",
+          "costType": "Passive",
           "maxammo": "-1",
           "range": [
             0,
@@ -574,7 +574,7 @@
             "w": 48,
             "h": 48
           },
-          "resource": "&nbsp;"
+          "resource": "Passive"
         },
         {
           "id": "Destiny",

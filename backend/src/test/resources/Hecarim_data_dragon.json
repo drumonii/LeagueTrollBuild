@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.25.1",
+  "version": "11.7.1",
   "data": {
     "Hecarim": {
       "id": "Hecarim",
@@ -103,12 +103,12 @@
       "stats": {
         "hp": 580,
         "hpperlevel": 90,
-        "mp": 277.2,
+        "mp": 277,
         "mpperlevel": 60,
         "movespeed": 345,
         "armor": 36,
         "armorperlevel": 4,
-        "spellblock": 32.1,
+        "spellblock": 32,
         "spellblockperlevel": 1.25,
         "attackrange": 175,
         "hpregen": 7,
@@ -127,7 +127,7 @@
           "id": "HecarimRapidSlash",
           "name": "Rampage",
           "description": "Hecarim cleaves nearby enemies dealing physical damage. If Hecarim damages at least one enemy, he increases the damage and lowers the cooldown of subsequent Rampages.",
-          "tooltip": "Hecarim cleaves nearby enemies for <physicalDamage>{{ damage }} physical damage</physicalDamage>. If this Ability hits, he gains a stack that decreases its cooldown by {{ rampagecooldownreduction }} second and increasing its damage by {{ rampagebonusratio*100 }}% for 8 seconds. Stacks up to {{ maxstacks }} times.",
+          "tooltip": "Hecarim cleaves nearby enemies for <physicalDamage>{{ damage }} physical damage</physicalDamage>. If this Ability hits, he gains a stack that decreases its Cooldown by {{ rampagecooldownreduction }} second and increasing its damage by {{ rampagebonusratio*100 }}% for 8 seconds. Stacks up to {{ maxstacks }} times.",
           "leveltip": {
             "label": [
               "Damage",
@@ -160,10 +160,10 @@
             null,
             [
               60,
-              102,
-              144,
-              186,
-              228
+              97,
+              134,
+              171,
+              208
             ],
             [
               2,
@@ -231,7 +231,7 @@
           ],
           "effectBurn": [
             null,
-            "60/102/144/186/228",
+            "60/97/134/171/208",
             "2",
             "1",
             "3",
@@ -268,7 +268,7 @@
           "id": "HecarimW",
           "name": "Spirit of Dread",
           "description": "Hecarim deals magic damage to nearby enemies for a short duration. Hecarim gains Health equal to a percentage of any damage those enemies suffer.",
-          "tooltip": "Hecarim deals <magicDamage>{{ totaldamage }} magic damge</magicDamage> over {{ e3 }} seconds to nearby enemies, and heals for <healing>{{ e1 }}% of damage</healing> these enemies take from any source.",
+          "tooltip": "Hecarim deals <magicDamage>{{ totaldamage }} magic damage</magicDamage> over {{ e3 }} seconds to nearby enemies, and heals for <healing>{{ e1 }}% of damage</healing> these enemies take from any source.",
           "leveltip": {
             "label": [
               "Damage",
@@ -482,11 +482,11 @@
               4
             ],
             [
-              0.75,
-              0.75,
-              0.75,
-              0.75,
-              0.75
+              0.65,
+              0.65,
+              0.65,
+              0.65,
+              0.65
             ],
             [
               1200,
@@ -524,7 +524,7 @@
             "70/130/190/250/310",
             "35/65/95/125/155",
             "4",
-            "0.75",
+            "0.65",
             "1200",
             "0.25",
             "2.5",

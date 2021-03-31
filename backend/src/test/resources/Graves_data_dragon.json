@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.25.1",
+  "version": "11.7.1",
   "data": {
     "Graves": {
       "id": "Graves",
@@ -122,7 +122,7 @@
         "mpregenperlevel": 0.7,
         "crit": 0,
         "critperlevel": 0,
-        "attackdamage": 68,
+        "attackdamage": 66,
         "attackdamageperlevel": 3,
         "attackspeedperlevel": 2.6,
         "attackspeed": 0.475
@@ -132,7 +132,7 @@
           "id": "GravesQLineSpell",
           "name": "End of the Line",
           "description": "Graves fires an explosive shell that detonates after 2 seconds, or 0.2 seconds if it strikes terrain.",
-          "tooltip": "Graves fires a powder round dealing <physicalDamage>{{ totaldamage }} physical damage</physicalDamage>. After 2 seconds or after colliding with terrain, it detonates, dealing <physicalDamage>{{ totaldetonationdamage }} physical damage</physicalDamage> along the travel path again and to enemies near the blast.",
+          "tooltip": "Graves fires a powder round dealing <physicalDamage>{{ totaldamage }} physical damage</physicalDamage>. After 1 second or after colliding with terrain, it detonates, dealing <physicalDamage>{{ totaldetonationdamage }} physical damage</physicalDamage> along the travel path again and to enemies near the blast.",
           "leveltip": {
             "label": [
               "Damage",
@@ -420,7 +420,7 @@
           "id": "GravesMove",
           "name": "Quickdraw",
           "description": "Graves dashes forward gaining an Armor boost for several seconds. If Graves dashes towards an enemy champion, gain two stacks of True Grit instead. Hitting enemies with basic attacks lowers the cooldown of this skill and refreshes the resistance boost.",
-          "tooltip": "Graves dashes and reloads one <keywordMajor>Shell</keywordMajor> into his shotgun. He also gains a stack for 4 seconds (max {{ e0 }} stacks) or two stacks if he dashes towards an enemy champion. Stacks grant him <scaleArmor>{{ e5 }} Armor</scaleArmor>. Stacks are refreshed when damaging a non-minion.<br /><br />Each bullet hit from Graves' Attacks reduces this Ability's cooldown by {{ e4 }} seconds.<br />",
+          "tooltip": "Graves dashes and reloads one <keywordMajor>Shell</keywordMajor> into his shotgun. He also gains a stack for 4 seconds (max {{ e0 }} stacks) or two stacks if he dashes towards an enemy champion. Stacks grant him <scaleArmor>{{ e5 }} Armor</scaleArmor>. Stacks are refreshed when damaging a non-minion.<br /><br />Each bullet hit from Graves' Attacks reduces this Ability's Cooldown by {{ e4 }} seconds.<br />",
           "leveltip": {
             "label": [
               "Armor",

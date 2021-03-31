@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.25.1",
+  "version": "11.7.1",
   "data": {
     "Taliyah": {
       "id": "Taliyah",
@@ -78,7 +78,7 @@
         "attackrange": 525,
         "hpregen": 7,
         "hpregenperlevel": 0.7,
-        "mpregen": 9.335,
+        "mpregen": 9.34,
         "mpregenperlevel": 0.85,
         "crit": 0,
         "critperlevel": 0,
@@ -92,7 +92,7 @@
           "id": "TaliyahQ",
           "name": "Threaded Volley",
           "description": "Taliyah throws a volley of missiles in a target direction, moving freely as she does. This works the ground below her. If Taliyah casts Threaded Volley on worked ground, she only throws one missile.",
-          "tooltip": "Hurls 5 rocks in a direction, each dealing {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage. Subsequent hits on the same enemy deal {{ e2 }}% reduced damage. Creates <span class=\"colora56705\">Worked Ground</span> for {{ e6 }} seconds.<br /><br />Casting Threaded Volley on <span class=\"colora56705\">Worked Ground</span> only hurls one rock but its cost is reduced to {{ e7 }} mana.<br /><br /><rules>Subsequent hits deal full damage vs. jungle monsters.</rules>",
+          "tooltip": "Taliyah hurls 5 rocks, each dealing <magicDamage>{{ rockdamage }} magic damage</magicDamage> to the first enemy hit. Subsequent hits against the same enemy deal reduced damage.<br /><br />Taliyah also weakens nearby earth for {{ e6 }} seconds. Using this Ability on weak earth instead hurls one rock, but only costs <scaleMana>{{ e7 }} Mana</scaleMana>.",
           "leveltip": {
             "label": [
               "Damage",
@@ -182,11 +182,11 @@
               450
             ],
             [
-              0,
-              0,
-              0,
-              0,
-              0
+              0.8,
+              0.8,
+              0.8,
+              0.8,
+              0.8
             ],
             [
               0,
@@ -206,16 +206,10 @@
             "45",
             "1",
             "450",
-            "0",
+            "0.8",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.45,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -241,7 +235,7 @@
           "id": "TaliyahWVC",
           "name": "Seismic Shove",
           "description": "Taliyah causes an area of ground to erupt and throws enemies within in a direction of her choosing.",
-          "tooltip": "Taliyah targets an area. After a short delay, enemies caught within the area will be <scaleLevel>pushed</scaleLevel> and dealt {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage.<br /><br />You can control the direction enemies will be <scaleLevel>pushed</scaleLevel> by clicking and dragging your mouse in a line.",
+          "tooltip": "Taliyah quakes the earth, dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage> in an area and <status>Knocking Back</status> enemies toward a chosen direction.",
           "leveltip": {
             "label": [
               "Damage",
@@ -358,13 +352,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.4,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -390,7 +378,7 @@
           "id": "TaliyahE",
           "name": "Unraveled Earth",
           "description": "Taliyah creates a slowing minefield that explodes if enemies dash through it or are pushed/pulled through it.",
-          "tooltip": "Places a field of dash-sensitive traps that deal {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage and slow enemies in the area by <scaleAP>{{ f2 }}%</scaleAP>. After {{ e3 }} seconds, the traps explode, dealing damage again.<br /><br />Enemies <scaleLevel>dashing</scaleLevel>, being <scaleLevel>pushed</scaleLevel>, or being <scaleLevel>pulled</scaleLevel> through Unraveled Earth will trigger traps, taking {{ f3 }} <scaleAP>(+{{ f1 }})</scaleAP> magic damage from each trap (maximum 4, each hit after the first deals {{ f4 }}% less damage).",
+          "tooltip": "Taliyah scatters loose stones in an area, dealing <magicDamage>{{ scatterdamage }} magic damage</magicDamage> and <status>Slowing</status> enemies hit by {{ totalslow }}. After {{ e3 }} seconds the stones shatter, dealing the damage again.<br /><br />Enemies that dash or are <status>Knocked</status> through the stones detonate them, taking <magicDamage>{{ detonationdamage }} magic damage</magicDamage> for each stone they pass through (max 4). Stones beyond the first deal reduced damage.",
           "leveltip": {
             "label": [
               "Damage",
@@ -507,13 +495,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.4,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -539,7 +521,7 @@
           "id": "TaliyahR",
           "name": "Weaver's Wall",
           "description": "Taliyah creates a very long wall and then surfs it.",
-          "tooltip": "Cast once to create a wall. Recast immediately to ride ahead of the wall. Moving or receiving damage will cause Taliyah to stop.<br /><br />Weaver's Wall lasts for {{ e1 }} seconds. Deactivate this spell to break the wall early.",
+          "tooltip": "Taliyah creates a massive earthen wall for {{ e1 }} seconds. If she immediately <recast>Recasts</recast> she will ride along it as it unravels. Moving or taking damage will end the ride.",
           "leveltip": {
             "label": [
               "Wall length",

@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.25.1",
+  "version": "11.7.1",
   "data": {
     "Darius": {
       "id": "Darius",
@@ -71,6 +71,12 @@
           "num": 16,
           "name": "High Noon Darius",
           "chromas": true
+        },
+        {
+          "id": "122024",
+          "num": 24,
+          "name": "Lunar Beast Darius",
+          "chromas": true
         }
       ],
       "lore": "There is no greater symbol of Noxian might than Darius, the nation's most feared and battle-hardened commander. Rising from humble origins to become the Hand of Noxus, he cleaves through the empire's enemies—many of them Noxians themselves. Knowing that he never doubts his cause is just, and never hesitates once his axe is raised, those who stand against the leader of the Trifarian Legion can expect no mercy.",
@@ -96,14 +102,14 @@
         "difficulty": 2
       },
       "stats": {
-        "hp": 582.24,
+        "hp": 582,
         "hpperlevel": 100,
         "mp": 263,
         "mpperlevel": 57.5,
         "movespeed": 340,
         "armor": 39,
         "armorperlevel": 4,
-        "spellblock": 32.1,
+        "spellblock": 32,
         "spellblockperlevel": 1.25,
         "attackrange": 175,
         "hpregen": 10,
@@ -267,7 +273,7 @@
           "id": "DariusNoxianTacticsONH",
           "name": "Crippling Strike",
           "description": "Darius's next attack strikes an enemy's crucial artery. As they bleed out, their Movement Speed is slowed.",
-          "tooltip": "Darius' next Attack deals <physicalDamage>{{ empoweredattackdamage }} physical damage</physicalDamage> and <status>Slows</status> by {{ e2 }}% for {{ e5 }} second.<br /><br />This Ability refunds its Mana cost and reduces its cooldown by {{ e3 }}% if it kills the target.",
+          "tooltip": "Darius' next Attack deals <physicalDamage>{{ empoweredattackdamage }} physical damage</physicalDamage> and <status>Slows</status> by {{ e2 }}% for {{ e5 }} second.<br /><br />This Ability refunds its Mana cost and reduces its Cooldown by {{ e3 }}% if it kills the target.",
           "leveltip": {
             "label": [
               "Cooldown",
@@ -551,7 +557,7 @@
           "id": "DariusExecute",
           "name": "Noxian Guillotine",
           "description": "Darius leaps to an enemy champion and strikes a lethal blow, dealing true damage. This damage is increased for each stack of Hemorrhage on the target. If Noxian Guillotine is a killing blow, its cooldown is refreshed for a brief duration.",
-          "tooltip": "Darius leaps to an enemy and strikes a lethal blow, dealing <trueDamage>{{ damage }} true damage</trueDamage>. For each <keywordMajor>Hemorrhage</keywordMajor> on the target, this Ability deals an additional {{ rdamagepercentperhemostack*100 }}% damage, up to a max of <trueDamage>{{ maximumdamage }} damage</trueDamage>.<br /><br />If this kills the target, Darius may <recast>Recast</recast> this Ability once within {{ rrecastduration }} seconds. At rank 3, this Ability has no Mana cost and kills refresh the cooldown completely.",
+          "tooltip": "Darius leaps to an enemy and strikes a lethal blow, dealing <trueDamage>{{ damage }} true damage</trueDamage>. For each <keywordMajor>Hemorrhage</keywordMajor> on the target, this Ability deals an additional {{ rdamagepercentperhemostack*100 }}% damage, up to a max of <trueDamage>{{ maximumdamage }} damage</trueDamage>.<br /><br />If this kills the target, Darius may <recast>Recast</recast> this Ability once within {{ rrecastduration }} seconds. At rank 3, this Ability has no Mana cost and kills refresh the Cooldown completely.",
           "leveltip": {
             "label": [
               "Damage",
@@ -665,7 +671,7 @@
       ],
       "passive": {
         "name": "Hemorrhage",
-        "description": "Darius's attacks and damaging abilities cause enemies to bleed for physical damage over 5 seconds, stacking up to 5 times.",
+        "description": "Darius' attacks and damaging abilities cause enemies to bleed for physical damage over 5 seconds, stacking up to 5 times. Darius enrages and gains massive Attack Damage when his target reaches max stacks.",
         "image": {
           "full": "Darius_Icon_Hemorrhage.png",
           "sprite": "passive0.png",

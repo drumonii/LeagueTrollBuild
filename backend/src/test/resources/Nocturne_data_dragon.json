@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.25.1",
+  "version": "11.7.1",
   "data": {
     "Nocturne": {
       "id": "Nocturne",
@@ -103,7 +103,7 @@
         "movespeed": 345,
         "armor": 38,
         "armorperlevel": 3.5,
-        "spellblock": 32.1,
+        "spellblock": 32,
         "spellblockperlevel": 0.75,
         "attackrange": 125,
         "hpregen": 7,
@@ -126,7 +126,7 @@
           "leveltip": {
             "label": [
               "Damage",
-              "Movement Speed",
+              "Move Speed",
               "Bonus Attack Damage",
               "@AbilityResourceName@ Cost"
             ],
@@ -139,13 +139,13 @@
           },
           "maxrank": 5,
           "cooldown": [
-            10,
-            10,
-            10,
-            10,
-            10
+            8,
+            8,
+            8,
+            8,
+            8
           ],
-          "cooldownBurn": "10",
+          "cooldownBurn": "8",
           "cost": [
             60,
             65,
@@ -408,7 +408,7 @@
           "id": "NocturneUnspeakableHorror",
           "name": "Unspeakable Horror",
           "description": "Nocturne plants a nightmare into his target's mind, dealing damage each second and applying fear to the target if they do not get out of range by the end of the duration.",
-          "tooltip": "<spellPassive>Passive:</spellPassive> Nocturne gains massively increased <speed>Move Speed</speed> toward <status>Feared</status> enemies.<br /><br /><spellActive>Active:</spellActive> Nocturne plants a nightmare tether into his target, dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage> over {{ e3 }} seconds. If the tether remains unbroken, the target is <status>Feared</status> for {{ e2 }} second(s).",
+          "tooltip": "<spellPassive>Passive:</spellPassive> Nocturne gains <speed>{{ tooltipfearms*100 }}% Move Speed</speed> toward <status>Feared</status> enemies.<br /><br /><spellActive>Active:</spellActive> Nocturne plants a nightmare tether into his target, dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage> over {{ e3 }} seconds. If the tether remains unbroken, the target is <status>Feared</status> for {{ e2 }} second(s).",
           "leveltip": {
             "label": [
               "Damage",
@@ -568,11 +568,11 @@
           },
           "maxrank": 3,
           "cooldown": [
-            150,
-            125,
-            100
+            140,
+            115,
+            90
           ],
-          "cooldownBurn": "150/125/100",
+          "cooldownBurn": "140/115/90",
           "cost": [
             100,
             100,

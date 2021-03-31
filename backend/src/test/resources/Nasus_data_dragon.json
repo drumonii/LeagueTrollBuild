@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.25.1",
+  "version": "11.7.1",
   "data": {
     "Nasus": {
       "id": "Nasus",
@@ -77,6 +77,12 @@
           "num": 16,
           "name": "Battlecast Nasus",
           "chromas": true
+        },
+        {
+          "id": "75025",
+          "num": 25,
+          "name": "Space Groove Nasus",
+          "chromas": true
         }
       ],
       "lore": "Nasus is an imposing, jackal-headed Ascended being from ancient Shurima, a heroic figure regarded as a demigod by the people of the desert. Fiercely intelligent, he was a guardian of knowledge and peerless strategist whose wisdom guided the ancient empire of Shurima to greatness for many centuries. After the fall of the empire, he went into self-imposed exile, becoming little more than a legend. Now that the ancient city of Shurima has risen once more, he has returned, determined to ensure it never falls again.",
@@ -103,14 +109,14 @@
         "difficulty": 6
       },
       "stats": {
-        "hp": 561.2,
+        "hp": 561,
         "hpperlevel": 90,
-        "mp": 325.6,
+        "mp": 326,
         "mpperlevel": 62,
         "movespeed": 350,
         "armor": 34,
         "armorperlevel": 3.5,
-        "spellblock": 32.1,
+        "spellblock": 32,
         "spellblockperlevel": 1.25,
         "attackrange": 125,
         "hpregen": 9,
@@ -129,7 +135,7 @@
           "id": "NasusQ",
           "name": "Siphoning Strike",
           "description": "Nasus strikes his foe, dealing damage and increasing the power of his future Siphoning Strikes if he slays his target.",
-          "tooltip": "Nasus' next Attack will deal an additional <physicalDamage>{{ totaldamage }} physical damage</physicalDamage>.<br /><br />Siphoning Strike permanently gains <span class=\"color5555FF\">{{ e2 }}</span> damage if it kills an enemy. This bonus is increased to <span class=\"color5555FF\">{{ e4 }}</span> against Champions, large minions and large monsters.",
+          "tooltip": "Nasus' next Attack deals <physicalDamage>{{ totaldamage }} physical damage</physicalDamage>. Killing an enemy with this Attack permanently increases its damage by {{ e2 }}, increased to {{ e4 }} against champions, large minions and large jungle monsters.",
           "leveltip": {
             "label": [
               "Base Damage",
@@ -270,7 +276,7 @@
           "id": "NasusW",
           "name": "Wither",
           "description": "Nasus ages an enemy champion, decelerating their Movement and Attack Speeds over time.",
-          "tooltip": "Nasus ages target champion over {{ e3 }} seconds, slowing their Movement Speed by {{ e2 }}%, increasing to {{ e1 }}% over the duration. The target's Attack Speed is reduced by half the amount.",
+          "tooltip": "Nasus ages a champion, <status>Slowing</status> them by {{ e2 }}%, increasing to {{ e1 }}% over {{ e3 }} seconds. Their Attack Speed is also reduced by 50% of the <status>Slow</status>.",
           "leveltip": {
             "label": [
               "Max Slow",
@@ -411,7 +417,7 @@
           "id": "NasusE",
           "name": "Spirit Fire",
           "description": "Nasus unleashes a spirit flame at a location, dealing damage and reducing the Armor of enemies who stand on it.",
-          "tooltip": "Nasus unleashes a spirit flame at target location, dealing {{ e4 }} <scaleAP>(+{{ a2 }})</scaleAP> magic damage.<br /><br />For the next {{ e3 }} seconds, enemies in the area have their Armor reduced by {{ e2 }}% and are dealt an additional {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage each second.",
+          "tooltip": "Nasus ignites a spirit flame, dealing <magicDamage>{{ initialdamage }} magic damage</magicDamage>. Enemies in the area lose <scaleArmor>{{ e2 }}% Armor</scaleArmor> and take <magicDamage>{{ totaldotdamage }} magic damage</magicDamage> over {{ e3 }} seconds.",
           "leveltip": {
             "label": [
               "Initial Damage",
@@ -530,18 +536,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.6,
-              "key": "a2"
-            },
-            {
-              "link": "spelldamage",
-              "coeff": 0.12,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -567,7 +562,7 @@
           "id": "NasusR",
           "name": "Fury of the Sands",
           "description": "Nasus unleashes a mighty sandstorm that batters nearby enemies. While the storm rages, he gains increased Health, Attack Range, damages nearby enemies, has a reduced cooldown on Siphoning Strike, and gains bonus Armor and Magic Resistance.",
-          "tooltip": "Nasus becomes empowered in the sandstorm for 15 seconds, increasing his maximum Health by {{ bonushealth }} and Armor and Magic Resistance by {{ initialresistgain }}.<br /><br />While the storm rages, he deals {{ damagecalc }} of nearby enemies' maximum Health each second as magic damage ({{ maxdamagecap }} damage max per second) and Siphoning Strike has a {{ qcdr*100 }}% reduced cooldown.",
+          "tooltip": "Nasus becomes empowered in the sandstorm for 15 seconds, increasing his <healing>maximum Health by {{ bonushealth }}</healing> and <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resistance</scaleMR> by {{ initialresistgain }}.<br /><br />While the storm rages, nearby enemies take <magicDamage>{{ damagecalc }} of their maximum Health as magic damage</magicDamage> each second and <spellName>Siphoning Strike</spellName> has a {{ qcdr*100 }}% reduced Cooldown.",
           "leveltip": {
             "label": [
               "Bonus Health",

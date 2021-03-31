@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.25.1",
+  "version": "11.7.1",
   "data": {
     "Yuumi": {
       "id": "Yuumi",
@@ -12,7 +12,7 @@
         "full": "Yuumi.png",
         "sprite": "champion4.png",
         "group": "champion",
-        "x": 288,
+        "x": 336,
         "y": 96,
         "w": 48,
         "h": 48
@@ -34,6 +34,12 @@
           "id": "350011",
           "num": 11,
           "name": "Heartseeker Yuumi",
+          "chromas": true
+        },
+        {
+          "id": "350019",
+          "num": 19,
+          "name": "Yuubee",
           "chromas": true
         }
       ],
@@ -224,10 +230,10 @@
           "rangeBurn": "1150",
           "image": {
             "full": "YuumiQ.png",
-            "sprite": "spell14.png",
+            "sprite": "spell15.png",
             "group": "spell",
-            "x": 384,
-            "y": 144,
+            "x": 96,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -237,7 +243,7 @@
           "id": "YuumiW",
           "name": "You and Me!",
           "description": "Passively, Yuumi increases her ally's Adaptive Force and her own. Actively, Yuumi dashes to a target ally, becoming untargetable from everything except turrets.",
-          "tooltip": "<spellPassive>Passive:</spellPassive> Yuumi increases her <keywordMajor>Attached</keywordMajor> ally's Adaptive Force by {{ flatadaptivestats }} + {{ adaptivestatsharing*100 }}%, and grants herself the same amount.<br /><br /><spellActive>Active:</spellActive> Yuumi dashes to an ally champion and <keywordMajor>Attaches</keywordMajor> to them. While Yuumi is <keywordMajor>Attached</keywordMajor>, she follows her partner's movement and is Untargetable except from towers.<br /><br /><status>Immobilizing</status> effects on Yuumi place <keywordName>You and Me!</keywordName> on a {{ ccattachlockout }} second cooldown.",
+          "tooltip": "<spellPassive>Passive:</spellPassive> Yuumi increases her <keywordMajor>Attached</keywordMajor> ally's Adaptive Force by {{ flatadaptivestats }} + {{ adaptivestatsharing*100 }}%, and grants herself the same amount.<br /><br /><spellActive>Active:</spellActive> Yuumi dashes to an ally champion and <keywordMajor>Attaches</keywordMajor> to them. While Yuumi is <keywordMajor>Attached</keywordMajor>, she follows her partner's movement and is Untargetable except from towers.<br /><br /><status>Immobilizing</status> effects on Yuumi place <spellName>You and Me!</spellName> on a {{ ccattachlockout }} second Cooldown.",
           "leveltip": {
             "label": [
               "Flat Adaptive Force",
@@ -365,10 +371,10 @@
           "rangeBurn": "25000",
           "image": {
             "full": "YuumiW.png",
-            "sprite": "spell14.png",
+            "sprite": "spell15.png",
             "group": "spell",
-            "x": 432,
-            "y": 144,
+            "x": 144,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -512,7 +518,7 @@
             "full": "YuumiE.png",
             "sprite": "spell15.png",
             "group": "spell",
-            "x": 0,
+            "x": 192,
             "y": 0,
             "w": 48,
             "h": 48
@@ -627,7 +633,7 @@
             "full": "YuumiR.png",
             "sprite": "spell15.png",
             "group": "spell",
-            "x": 48,
+            "x": 240,
             "y": 0,
             "w": 48,
             "h": 48
@@ -642,7 +648,7 @@
           "full": "YuumiP.png",
           "sprite": "passive4.png",
           "group": "passive",
-          "x": 288,
+          "x": 336,
           "y": 96,
           "w": 48,
           "h": 48

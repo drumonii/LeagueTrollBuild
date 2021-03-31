@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.25.1",
+  "version": "11.7.1",
   "data": {
     "Nautilus": {
       "id": "Nautilus",
@@ -59,6 +59,12 @@
           "num": 6,
           "name": "Conqueror Nautilus",
           "chromas": false
+        },
+        {
+          "id": "111009",
+          "num": 9,
+          "name": "Shan Hai Scrolls Nautilus",
+          "chromas": false
         }
       ],
       "lore": "A lonely legend as old as the first piers sunk in Bilgewater, the armored goliath known as Nautilus roams the dark waters off the coast of the Blue Flame Isles. Driven by a forgotten betrayal, he strikes without warning, swinging his enormous anchor to save the wretched, and drag the greedy to their doom. It is said he comes for those who forget to pay the “Bilgewater tithe”, pulling them down beneath the waves with him—an iron-clad reminder that none can escape the depths.",
@@ -83,19 +89,19 @@
         "difficulty": 6
       },
       "stats": {
-        "hp": 576.48,
+        "hp": 576,
         "hpperlevel": 86,
         "mp": 400,
         "mpperlevel": 47,
         "movespeed": 325,
         "armor": 39,
         "armorperlevel": 3.75,
-        "spellblock": 32.1,
+        "spellblock": 32,
         "spellblockperlevel": 1.25,
         "attackrange": 175,
         "hpregen": 8.5,
         "hpregenperlevel": 0.55,
-        "mpregen": 8.626,
+        "mpregen": 8.63,
         "mpregenperlevel": 0.5,
         "crit": 0,
         "critperlevel": 0,
@@ -538,7 +544,7 @@
           "id": "NautilusGrandLine",
           "name": "Depth Charge",
           "description": "Nautilus fires a shockwave into the earth that chases an opponent. This shockwave rips up the earth above it, knocking enemies into the air. When it reaches the opponent, the shockwave erupts, knocking his target into the air and stunning them.",
-          "tooltip": "Nautilus fires a shockwave that chases an enemy champion, dealing <magicDamage>{{ primarytargetdamage }} magic damage</magicDamage>, <status>Knocking</status> them <status>Up</status> and <status>Stunning</status> them for {{ stunduration }} seconds. Other enemies hit by the shockwave are also <magicDamage>Knocked Up</magicDamage> and <magicDamage>Stunned</magicDamage> and take <magicDamage>{{ secondarytargetdamage }} magic damage</magicDamage>.",
+          "tooltip": "Nautilus fires a shockwave that chases an enemy champion, dealing <magicDamage>{{ primarytargetdamage }} magic damage</magicDamage>, <status>Knocking</status> them <status>Up</status> and <status>Stunning</status> them for {{ stunduration }} seconds. Other enemies hit by the shockwave are also <status>Knocked Up</status> and <status>Stunned</status> and take <magicDamage>{{ secondarytargetdamage }} magic damage</magicDamage>.",
           "leveltip": {
             "label": [
               "Cooldown",

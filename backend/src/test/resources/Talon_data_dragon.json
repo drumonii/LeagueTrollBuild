@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.25.1",
+  "version": "11.7.1",
   "data": {
     "Talon": {
       "id": "Talon",
@@ -65,6 +65,12 @@
           "num": 20,
           "name": "Talon Blackwood",
           "chromas": true
+        },
+        {
+          "id": "91029",
+          "num": 29,
+          "name": "Withered Rose Talon",
+          "chromas": true
         }
       ],
       "lore": "Talon is the knife in the darkness, a merciless killer able to strike without warning and escape before any alarm is raised. He carved out a dangerous reputation on the brutal streets of Noxus, where he was forced to fight, kill, and steal to survive. Adopted by the notorious Du Couteau family, he now plies his deadly trade at the empire's command, assassinating enemy leaders, captains, and heroes… as well as any Noxian foolish enough to earn the scorn of their masters.",
@@ -116,7 +122,7 @@
           "id": "TalonQ",
           "name": "Noxian Diplomacy",
           "description": "Talon stabs the target unit. If they are within melee range, this attack deals critical damage. If they are outside melee range, Talon will leap at his target before stabbing them. Talon refunds some health and cooldown if this ability kills the target.",
-          "tooltip": "Talon leaps to a target and deals <physicalDamage>{{ leapdamage }} physical damage</physicalDamage>. If used in melee range, this Ability instead critically strikes for <physicalDamage>{{ criticaldamage }} physical damage</physicalDamage>.<br /><br />If this Ability kills the target, Talon restores <healing>{{ totalhealing }} Health</healing> and refunds {{ e5 }}% of its cooldown.",
+          "tooltip": "Talon leaps to a target and deals <physicalDamage>{{ leapdamage }} physical damage</physicalDamage>. If used in melee range, this Ability instead critically strikes for <physicalDamage>{{ criticaldamage }} physical damage</physicalDamage>.<br /><br />If this Ability kills the target, Talon restores <healing>{{ totalhealing }} Health</healing> and refunds {{ e5 }}% of its Cooldown.",
           "leveltip": {
             "label": [
               "Damage",
@@ -129,13 +135,13 @@
           },
           "maxrank": 5,
           "cooldown": [
-            0,
-            0,
-            0,
-            0,
-            0
+            8,
+            7.5,
+            7,
+            6.5,
+            6
           ],
-          "cooldownBurn": "0",
+          "cooldownBurn": "8/7.5/7/6.5/6",
           "cost": [
             40,
             40,
@@ -263,24 +269,26 @@
               "@AbilityResourceName@ Cost",
               "Initial Damage",
               "Return Damage",
-              "Slow"
+              "Slow",
+              "Cooldown"
             ],
             "effect": [
               "{{ cost }} -> {{ costNL }}",
               "{{ initialbasedamage }} -> {{ initialbasedamageNL }}",
               "{{ returnbasedamage }} -> {{ returnbasedamageNL }}",
-              "{{ movespeedslow*100.000000 }}% -> {{ movespeedslownl*100.000000 }}%"
+              "{{ movespeedslow*100.000000 }}% -> {{ movespeedslownl*100.000000 }}%",
+              "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
           "maxrank": 5,
           "cooldown": [
             9,
-            9,
-            9,
-            9,
-            9
+            8.5,
+            8,
+            7.5,
+            7
           ],
-          "cooldownBurn": "9",
+          "cooldownBurn": "9/8.5/8/7.5/7",
           "cost": [
             55,
             60,
@@ -545,7 +553,7 @@
           "leveltip": {
             "label": [
               "Damage",
-              "Movement Speed",
+              "Move Speed",
               "Cooldown"
             ],
             "effect": [

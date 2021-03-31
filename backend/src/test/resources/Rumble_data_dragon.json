@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.25.1",
+  "version": "11.7.1",
   "data": {
     "Rumble": {
       "id": "Rumble",
@@ -47,6 +47,12 @@
           "num": 4,
           "name": "Badlands Baron Rumble",
           "chromas": true
+        },
+        {
+          "id": "68013",
+          "num": 13,
+          "name": "Space Groove Rumble",
+          "chromas": true
         }
       ],
       "lore": "Rumble is a young inventor with a temper. Using nothing more than his own two hands and a heap of scrap, the feisty yordle constructed a colossal mech suit outfitted with an arsenal of electrified harpoons and incendiary rockets. Though others may scoff and sneer at his junkyard creations, Rumble doesn't mind—after all, he's the one with the flamespitter.",
@@ -80,7 +86,7 @@
         "movespeed": 345,
         "armor": 31,
         "armorperlevel": 3.5,
-        "spellblock": 32.1,
+        "spellblock": 32,
         "spellblockperlevel": 1.25,
         "attackrange": 125,
         "hpregen": 8,
@@ -99,7 +105,7 @@
           "id": "RumbleFlameThrower",
           "name": "Flamespitter",
           "description": "Rumble torches opponents in front of him, dealing magic damage in a cone for 3 seconds. While in Danger Zone this damage is increased.",
-          "tooltip": "Rumble torches his opponents, dealing {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage in a cone over {{ e9 }} seconds. This spell deals {{ e4 }}% damage to minions.<br /><br /><keywordCaution>Danger Zone Bonus:</keywordCaution> Deals {{ e5 }}% damage.",
+          "tooltip": "Rumble ignites his flamethrower, dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage> over {{ e9 }} seconds, reduced to <magicDamage>{{ miniondamage }} damage</magicDamage> against minions.<br /><br /><keywordMajor>Danger Zone:</keywordMajor> Damage is increased to <magicDamage>{{ empowereddamage }} damage</magicDamage>.",
           "leveltip": {
             "label": [
               "Damage",
@@ -154,18 +160,18 @@
               0
             ],
             [
-              60,
-              65,
-              70,
-              75,
-              80
+              0.6,
+              0.65,
+              0.7,
+              0.75,
+              0.8
             ],
             [
-              150,
-              150,
-              150,
-              150,
-              150
+              1.5,
+              1.5,
+              1.5,
+              1.5,
+              1.5
             ],
             [
               12,
@@ -208,21 +214,15 @@
             "180/220/260/300/340",
             "20",
             "0",
-            "60/65/70/75/80",
-            "150",
+            "0.6/0.65/0.7/0.75/0.8",
+            "1.5",
             "12",
             "0.25",
             "3",
             "3",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 1.1,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " Heat",
           "maxammo": "-1",
           "range": [
@@ -248,11 +248,11 @@
           "id": "RumbleShield",
           "name": "Scrap Shield",
           "description": "Rumble pulls up a shield, protecting him from damage and granting him a quick burst of speed. While in Danger Zone, the shield strength and speed bonus is increased.",
-          "tooltip": "Rumble tosses up a shield for {{ e5 }} seconds that absorbs {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> damage. Rumble also gains an additional {{ e2 }}% Movement Speed for {{ e6 }} second.<br /><br /><keywordCaution>Danger Zone Bonus:</keywordCaution> 50% increase in shield health and Movement Speed.",
+          "tooltip": "Rumble tosses up a barrier, gaining <shield>{{ totalshield }} Shield</shield> and <speed>{{ e2 }}% Move Speed</speed> for {{ e6 }} second.<br /><br /><keywordMajor>Danger Zone:</keywordMajor> The barrier grants <shield>{{ empoweredshield }} Shield</shield> and <speed>{{ empoweredms }}% Move Speed</speed> instead.",
           "leveltip": {
             "label": [
               "Shield Amount",
-              "Movement Speed"
+              "Move Speed"
             ],
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
@@ -363,13 +363,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.5,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " Heat",
           "maxammo": "-1",
           "range": [
@@ -395,7 +389,7 @@
           "id": "RumbleGrenade",
           "name": "Electro Harpoon",
           "description": "Rumble launches a harpoon, electrocuting his target with magic damage and slowing their Movement Speed. Rumble can carry 2 harpoons at a time. While in Danger Zone the damage and slow percentage is increased.",
-          "tooltip": "Rumble launches an electrified harpoon, dealing {{ e1 }}<scaleAP> (+{{ a1 }})</scaleAP> magic damage and applying a stacking slow of {{ e2 }}% for {{ e7 }} seconds. Rumble can store up to two harpoons at a time, which recharge once every {{ ammorechargetime }} seconds (modified by cooldown reduction).<br /><br /><keywordCaution>Danger Zone Bonus:</keywordCaution> Damage and slow percentage increased by 50%.",
+          "tooltip": "Rumble launches an electrified harpoon, dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage> and <status>Slowing</status> by {{ e2 }}% for {{ e7 }} seconds. Hitting an enemy who's already <status>Slowed</status> by this Ability increases the <status>Slow</status> to {{ e2 }}%.<br /><br />This Ability has 2 charges ({{ ammorechargetime }} second refresh).<br /><br /><keywordMajor>Danger Zone:</keywordMajor> The harpoon deals <magicDamage>{{ empdamage }} magic damage</magicDamage> instead and the <status>Slow</status> is increased by 50%.",
           "leveltip": {
             "label": [
               "Damage",
@@ -434,11 +428,11 @@
               160
             ],
             [
-              15,
-              20,
-              25,
               30,
-              35
+              40,
+              50,
+              60,
+              70
             ],
             [
               10,
@@ -500,7 +494,7 @@
           "effectBurn": [
             null,
             "60/85/110/135/160",
-            "15/20/25/30/35",
+            "30/40/50/60/70",
             "10",
             "0",
             "0",
@@ -510,13 +504,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.4,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " Heat",
           "maxammo": "2",
           "range": [
@@ -542,7 +530,7 @@
           "id": "RumbleCarpetBomb",
           "name": "The Equalizer",
           "description": "Rumble fires off a group of rockets, creating a wall of flames that damages and slows enemies.",
-          "tooltip": "Rumble launches a line of rockets that creates a burning trail for {{ trailduration }} seconds. Enemies in the area have their Movement Speed slowed by {{ slowamount }}% and take <magicDamage>{{ damagepersecond }} magic damage</magicDamage> each second.<br /><br /><specialRules>You can control the placement of this attack by clicking and dragging your mouse in a line.</specialRules>",
+          "tooltip": "Rumble launches a line of rockets, creating a burning trail that <status>Slows</status> by {{ slowamount }}% and deals <magicDamage>{{ totaldamage }} magic damage</magicDamage> over {{ trailduration }} seconds.<br /><br />Rumble can control the direction of the trail by clicking and dragging while casting this Ability.",
           "leveltip": {
             "label": [
               "Damage Per Second",

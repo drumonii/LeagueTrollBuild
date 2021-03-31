@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.25.1",
+  "version": "11.7.1",
   "data": {
     "Jayce": {
       "id": "Jayce",
@@ -267,7 +267,7 @@
           "id": "JayceStaticField",
           "name": "Lightning Field / Hyper Charge",
           "description": "Hammer Stance: Passive: Restores Mana per strike. Active: Creates a field of lightning damaging nearby enemies for several seconds.<br><br>Cannon Stance: Gains a burst of energy, increasing Attack Speed to maximum for several attacks.",
-          "tooltip": "<keywordMajor>Mercury Hammer - Passive:</keywordMajor> Jayce's <keywordMajor>Hammer</keywordMajor> Attacks grant {{ spell.jaycestaticfield:managain }} Mana.<br /><br /><keywordMajor>Mercury Hammer - Active:</keywordMajor> Jayce creates an electric aura dealing <magicDamage>{{ spell.jaycestaticfield:damage }} magic damage</magicDamage> over {{ spell.jaycestaticfield:duration }} seconds.",
+          "tooltip": "<keywordMajor>Mercury Hammer - Passive:</keywordMajor> Jayce's <keywordMajor>Hammer</keywordMajor> Attacks grant <scaleMana>{{ spell.jaycestaticfield:managain }} Mana</scaleMana>.<br /><br /><keywordMajor>Mercury Hammer - Active:</keywordMajor> Jayce creates an electric aura dealing <magicDamage>{{ spell.jaycestaticfield:damage }} magic damage</magicDamage> over {{ spell.jaycestaticfield:duration }} seconds.",
           "leveltip": {
             "label": [
               "Damage",
@@ -421,7 +421,7 @@
           "id": "JayceThunderingBlow",
           "name": "Thundering Blow / Acceleration Gate",
           "description": "Hammer Stance: Deals magic damage to an enemy and knocks them back a short distance.<br><br>Cannon Stance: Deploys an Acceleration Gate increasing the Movement Speed of all allied champions who pass through it. If Shock Blast is fired through the gate the missile speed, range, and damage will increase.",
-          "tooltip": "<keywordMajor>Hammer Form</keywordMajor>: Jayce swings his hammer, <status>Knocking Back</status> his target and dealing <physicalDamage>{{ spell.jaycethunderingblow:flatdamage }}</physicalDamage> plus <physicalDamage>{{ spell.jaycethunderingblow:perchpdamage*100 }}% max Health physical damage</physicalDamage>.",
+          "tooltip": "<keywordMajor>Hammer Form</keywordMajor>: Jayce swings his hammer, <status>Knocking Back</status> his target and dealing <magicDamage>{{ spell.jaycethunderingblow:flatdamage }} plus {{ spell.jaycethunderingblow:perchpdamage*100 }}% max Health magic damage</magicDamage>.",
           "leveltip": {
             "label": [
               "Max Health %",

@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.25.1",
+  "version": "11.7.1",
   "data": {
     "Annie": {
       "id": "Annie",
@@ -95,6 +95,12 @@
           "num": 12,
           "name": "Annie-Versary",
           "chromas": false
+        },
+        {
+          "id": "1013",
+          "num": 13,
+          "name": "Lunar Beast Annie",
+          "chromas": true
         }
       ],
       "lore": "Dangerous, yet disarmingly precocious, Annie is a child mage with immense pyromantic power. Even in the shadows of the mountains north of Noxus, she is a magical outlier. Her natural affinity for fire manifested early in life through unpredictable, emotional outbursts, though she eventually learned to control these “playful tricks.” Her favorite includes the summoning of her beloved teddy bear, Tibbers, as a fiery protector. Lost in the perpetual innocence of childhood, Annie wanders the dark forests, always looking for someone to play with.",
@@ -125,7 +131,7 @@
         "mp": 418,
         "mpperlevel": 25,
         "movespeed": 335,
-        "armor": 19.22,
+        "armor": 19,
         "armorperlevel": 4,
         "spellblock": 30,
         "spellblockperlevel": 0.5,
@@ -136,8 +142,8 @@
         "mpregenperlevel": 0.8,
         "crit": 0,
         "critperlevel": 0,
-        "attackdamage": 50.41,
-        "attackdamageperlevel": 2.625,
+        "attackdamage": 50,
+        "attackdamageperlevel": 2.63,
         "attackspeedperlevel": 1.36,
         "attackspeed": 0.579
       },
@@ -146,7 +152,7 @@
           "id": "AnnieQ",
           "name": "Disintegrate",
           "description": "Annie hurls a Mana infused fireball, dealing damage and refunding the Mana cost if it destroys the target.",
-          "tooltip": "Annie hurls a fireball, dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage>. If the target dies, Annie refunds the Mana cost and reduces the cooldown by 50%.",
+          "tooltip": "Annie hurls a fireball, dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage>. If the target dies, Annie refunds the Mana cost and reduces the Cooldown by 50%.",
           "leveltip": {
             "label": [
               "Damage",

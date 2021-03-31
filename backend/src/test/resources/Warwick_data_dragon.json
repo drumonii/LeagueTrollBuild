@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.25.1",
+  "version": "11.7.1",
   "data": {
     "Warwick": {
       "id": "Warwick",
@@ -12,8 +12,8 @@
         "full": "Warwick.png",
         "sprite": "champion4.png",
         "group": "champion",
-        "x": 432,
-        "y": 48,
+        "x": 0,
+        "y": 96,
         "w": 48,
         "h": 48
       },
@@ -122,13 +122,13 @@
         "movespeed": 335,
         "armor": 33,
         "armorperlevel": 3.2,
-        "spellblock": 32.1,
+        "spellblock": 32,
         "spellblockperlevel": 1.25,
         "attackrange": 125,
         "hpregen": 4,
         "hpregenperlevel": 0.75,
-        "mpregen": 7.465,
-        "mpregenperlevel": 0.575,
+        "mpregen": 7.47,
+        "mpregenperlevel": 0.58,
         "crit": 0,
         "critperlevel": 0,
         "attackdamage": 65,
@@ -273,7 +273,7 @@
             "full": "WarwickQ.png",
             "sprite": "spell14.png",
             "group": "spell",
-            "x": 0,
+            "x": 192,
             "y": 48,
             "w": 48,
             "h": 48
@@ -287,7 +287,7 @@
           "tooltip": "<spellPassive>Passive:</spellPassive> Warwick can sense champions below 50% Health, gaining <speed>{{ e1 }}% Move Speed</speed> towards them and gaining <attackSpeed>{{ e2 }}% Attack Speed</attackSpeed> against them. These bonuses are tripled against enemies below 20% Health.<br /><br /><spellActive>Active:</spellActive> Warwick can briefly sense all enemies, and gains this Ability's passive effect against the closest champion for 8 seconds, regardless of Health. Warwick cannot use this Ability while in combat with champions.",
           "leveltip": {
             "label": [
-              "Movement Speed",
+              "Move Speed",
               "Attack Speed",
               "Cooldown"
             ],
@@ -416,7 +416,7 @@
             "full": "WarwickW.png",
             "sprite": "spell14.png",
             "group": "spell",
-            "x": 48,
+            "x": 240,
             "y": 48,
             "w": 48,
             "h": 48
@@ -557,7 +557,7 @@
             "full": "WarwickE.png",
             "sprite": "spell14.png",
             "group": "spell",
-            "x": 96,
+            "x": 288,
             "y": 48,
             "w": 48,
             "h": 48
@@ -567,8 +567,8 @@
         {
           "id": "WarwickR",
           "name": "Infinite Duress",
-          "description": "Warwick leaps in a direction (scaling with his bonus movement speed), suppressing the first champion he collides with for 1.5 seconds.",
-          "tooltip": "Warwick leaps a huge distance that scales with his <speed>Move Speed</speed>, <status>Suppressing</status> the first champion he collides with while he channels for {{ rduration }} seconds. He deals <magicDamage>{{ damagecumulative }} magic damage</magicDamage> over the duration and applies On-Hit effects 3 times. Warwick restores <healing>100% of all damage dealt</healing> during the channel as Health.",
+          "description": "Warwick leaps in a direction (scaling with his bonus Move Speed), suppressing the first champion he collides with for 1.5 seconds.",
+          "tooltip": "Warwick leaps a huge distance that scales with his <speed>Move Speed</speed>, <status>Suppressing</status> the first champion he collides with while he channels for {{ rduration }} seconds. He attacks that champion 3 times over the duration, applying %i:OnHit% <OnHit>On-Hit</OnHit> effects and dealing <magicDamage>{{ damagecumulative }} magic damage</magicDamage>. Warwick restores <healing>100% of all damage dealt</healing> during the channel as Health.",
           "leveltip": {
             "label": [
               "Damage",
@@ -672,7 +672,7 @@
             "full": "WarwickR.png",
             "sprite": "spell14.png",
             "group": "spell",
-            "x": 144,
+            "x": 336,
             "y": 48,
             "w": 48,
             "h": 48
@@ -687,8 +687,8 @@
           "full": "WarwickP.png",
           "sprite": "passive4.png",
           "group": "passive",
-          "x": 432,
-          "y": 48,
+          "x": 0,
+          "y": 96,
           "w": 48,
           "h": 48
         }

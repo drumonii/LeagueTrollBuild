@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.25.1",
+  "version": "11.7.1",
   "data": {
     "Lulu": {
       "id": "Lulu",
@@ -71,6 +71,18 @@
           "num": 15,
           "name": "Pajama Guardian Lulu",
           "chromas": false
+        },
+        {
+          "id": "117026",
+          "num": 26,
+          "name": "Space Groove Lulu",
+          "chromas": true
+        },
+        {
+          "id": "117027",
+          "num": 27,
+          "name": "Space Groove Lulu Prestige Edition",
+          "chromas": false
         }
       ],
       "lore": "The yordle mage Lulu is known for conjuring dreamlike illusions and fanciful creatures as she roams Runeterra with her fairy companion Pix. Lulu shapes reality on a whim, warping the fabric of the world, and what she views as the constraints of this mundane, physical realm. While others might consider her magic at best unnatural, and at worst dangerous, she believes everyone could use a touch of enchantment.",
@@ -120,8 +132,8 @@
         {
           "id": "LuluQ",
           "name": "Glitterlance",
-          "description": "Pix and Lulu each fire a bolt of magical energy that heavily slows all enemies it hits. An enemy can only be damaged by one bolt.",
-          "tooltip": "Lulu and Pix each fire a piercing bolt dealing {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> magic damage. Enemies hit are slowed by {{ e2 }}%, decaying over the next {{ e3 }} second(s).<br /><br />Striking an enemy with both missiles will deal {{ doublehitbonus*100 }}% bonus damage.",
+          "description": "Pix and Lulu each fire a bolt of magical energy that damages and heavily slows all enemies it hits.",
+          "tooltip": "Lulu and Pix each fire a piercing bolt dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage> and <status>Slowing</status> by {{ e2 }}%, decaying over {{ e3 }} seconds.<br /><br />Enemies take {{ doublehitbonus*100 }}% more damage from additional bolts.",
           "leveltip": {
             "label": [
               "Damage",
@@ -236,13 +248,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.4,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -268,10 +274,10 @@
           "id": "LuluW",
           "name": "Whimsy",
           "description": "If cast on an ally, grants them Attack Speed and Movement Speed for a short time. If cast on an enemy, turns them into an adorable critter that can't attack or cast spells.",
-          "tooltip": "<span class=\"colorCCFF99\">On Ally Cast: </span>Target ally gains {{ e1 }} <scaleAP>(+{{ a2 }})</scaleAP>% Movement Speed and {{ e7 }}% Attack Speed for {{ e5 }} seconds.<br /><br /><span class=\"colorFF9999\">On Enemy Cast: </span>Polymorphs an enemy champion for {{ e3 }} seconds, disabling their ability to attack or cast spells and reducing their base Movement Speed by {{ e4 }}.",
+          "tooltip": "When used on an ally, Lulu grants <speed>{{ totalms }} Move Speed</speed> and <attackSpeed>{{ e7 }}% Attack Speed</attackSpeed> for {{ e5 }} seconds.<br /><br />When used on an enemy, Lulu <status>Polymorphs</status> them for {{ e3 }} seconds.",
           "leveltip": {
             "label": [
-              "Movement and Attack Speed Duration",
+              "Move Speed and Attack Speed Duration",
               "Attack Speed",
               "Polymorph Duration",
               "Cooldown"
@@ -304,11 +310,11 @@
           "effect": [
             null,
             [
-              30,
-              30,
-              30,
-              30,
-              30
+              0.3,
+              0.3,
+              0.3,
+              0.3,
+              0.3
             ],
             [
               0,
@@ -325,11 +331,11 @@
               2.25
             ],
             [
-              60,
-              60,
-              60,
-              60,
-              60
+              -60,
+              -60,
+              -60,
+              -60,
+              -60
             ],
             [
               3,
@@ -376,10 +382,10 @@
           ],
           "effectBurn": [
             null,
-            "30",
+            "0.3",
             "0",
             "1.25/1.5/1.75/2/2.25",
-            "60",
+            "-60",
             "3/3.25/3.5/3.75/4",
             "0.01",
             "20/23.75/27.5/31.25/35",
@@ -387,13 +393,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.05,
-              "key": "a2"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -419,7 +419,7 @@
           "id": "LuluE",
           "name": "Help, Pix!",
           "description": "If cast on an ally, commands Pix to jump to an ally and shield them. He then follows them and aids their attacks. If cast on an enemy, commands Pix to jump to an enemy and damage them. He then follows them and grants you vision of that enemy.",
-          "tooltip": "<span class=\"colorCCFF99\">On Ally Cast: </span>Commands Pix to jump to an ally and then follow and aid their attacks instead of Lulu's for {{ e1 }} seconds. If the ally is a champion, Pix shields them from {{ e2 }}<scaleAP> (+{{ a1 }})</scaleAP> damage for {{ e7 }} seconds.<br /><br /><span class=\"colorFF9999\">On Enemy Cast: </span>Pix deals {{ e4 }}<scaleAP> (+{{ a2 }})</scaleAP> magic damage to target enemy unit. Pix then follows and grants <span class=\"coloree91d7\">True Sight</span> of them for {{ e6 }} seconds.",
+          "tooltip": "When used on an ally, Pix jumps to them and grants <spellName>Pix, Faerie Companion</spellName> for {{ e1 }} seconds. If the ally is a champion, Pix also grants <shield>{{ totalshield }} Shield</shield> for {{ e7 }} seconds.<br /><br />When used on an enemy champion, Pix hampers them, dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage> and granting <keywordStealth>True Sight</keywordStealth> of them for {{ e6 }} seconds.",
           "leveltip": {
             "label": [
               "Shield Amount",
@@ -536,18 +536,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.6,
-              "key": "a1"
-            },
-            {
-              "link": "spelldamage",
-              "coeff": 0.4,
-              "key": "a2"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -573,7 +562,7 @@
           "id": "LuluR",
           "name": "Wild Growth",
           "description": "Lulu enlarges an ally, knocking nearby enemies into the air and granting the ally a large amount of bonus health. For the next few seconds, that ally gains an aura that slows nearby enemies.",
-          "tooltip": "Lulu enlarges her ally, knocking nearby enemies into the air. For {{ buffduration }} seconds, her ally gains <healing>{{ totalbonushealth }} bonus health</healing> and slows nearby enemies by {{ slowpercent }}%.",
+          "tooltip": "Lulu enlarges an ally, <status>Knocking Up</status> surrounding enemies for {{ knockbackduration }} seconds. The enlarged ally gains <healing>{{ totalbonushealth }} max Health</healing> and <status>Slows</status> surrounding enemies by {{ slowpercent }}% for {{ buffduration }} seconds.",
           "leveltip": {
             "label": [
               "Bonus Health",

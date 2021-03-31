@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.25.1",
+  "version": "11.7.1",
   "data": {
     "Karma": {
       "id": "Karma",
@@ -83,6 +83,12 @@
           "num": 26,
           "name": "Odyssey Karma",
           "chromas": false
+        },
+        {
+          "id": "43027",
+          "num": 27,
+          "name": "Ruined Karma",
+          "chromas": true
         }
       ],
       "lore": "No mortal exemplifies the spiritual traditions of Ionia more than Karma. She is the living embodiment of an ancient soul reincarnated countless times, carrying all her accumulated memories into each new life, and blessed with power that few can comprehend. She has done her best to guide her people in recent times of crisis, though she knows that peace and harmony may come only at a considerable cost—both to her, and to the land she holds most dear.",
@@ -121,11 +127,11 @@
         "attackrange": 525,
         "hpregen": 5.5,
         "hpregenperlevel": 0.55,
-        "mpregen": 11.5,
+        "mpregen": 13,
         "mpregenperlevel": 0.5,
         "crit": 0,
         "critperlevel": 0,
-        "attackdamage": 53.544,
+        "attackdamage": 54,
         "attackdamageperlevel": 3.3,
         "attackspeedperlevel": 2.3,
         "attackspeed": 0.625
@@ -148,21 +154,21 @@
           },
           "maxrank": 5,
           "cooldown": [
-            9,
-            8.5,
             8,
             7.5,
-            7
+            7,
+            6.5,
+            6
           ],
-          "cooldownBurn": "9/8.5/8/7.5/7",
+          "cooldownBurn": "8/7.5/7/6.5/6",
           "cost": [
-            65,
-            65,
-            65,
-            65,
-            65
+            55,
+            55,
+            55,
+            55,
+            55
           ],
-          "costBurn": "65",
+          "costBurn": "55",
           "datavalues": {},
           "effect": [
             null,
@@ -418,12 +424,12 @@
         {
           "id": "KarmaSolKimShield",
           "name": "Inspire",
-          "description": "Karma summons a protective shield that absorbs incoming damage and increases the Movement Speed of the protected ally.<br><br>Mantra Bonus: Energy radiates out from her target, strengthening the initial shield and applying Inspire to nearby allied champions.",
+          "description": "Karma summons a protective shield that absorbs incoming damage and increases the Move Speed of the protected ally.<br><br>Mantra Bonus: Energy radiates out from her target, strengthening the initial shield and applying Inspire to nearby allied champions.",
           "tooltip": "Karma grants an allied champion <shield>{{ totalshield }} Shield</shield> for {{ e4 }} seconds and <speed>{{ e3 }}% Move Speed</speed> for {{ e2 }} seconds.",
           "leveltip": {
             "label": [
               "Shield Amount",
-              "Movement Speed",
+              "Move Speed",
               "Cooldown",
               "@AbilityResourceName@ Cost"
             ],
@@ -456,10 +462,10 @@
             null,
             [
               80,
-              110,
-              140,
-              170,
-              200
+              120,
+              160,
+              200,
+              240
             ],
             [
               1.5,
@@ -527,7 +533,7 @@
           ],
           "effectBurn": [
             null,
-            "80/110/140/170/200",
+            "80/120/160/200/240",
             "1.5",
             "40/45/50/55/60",
             "2.5",

@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.25.1",
+  "version": "11.7.1",
   "data": {
     "Gragas": {
       "id": "Gragas",
@@ -83,6 +83,12 @@
           "num": 10,
           "name": "Arctic Ops Gragas",
           "chromas": false
+        },
+        {
+          "id": "79011",
+          "num": 11,
+          "name": "Warden Gragas",
+          "chromas": true
         }
       ],
       "lore": "Equal parts jolly and imposing, Gragas is a massive, rowdy brewmaster on his own quest for the perfect pint of ale. Hailing from parts unknown, he now searches for rare ingredients among the unblemished wastes of the Freljord, trying each recipe as he goes. Often intoxicated and extremely impulsive, he is legendary for the brawls he starts, which often end in all-night parties and widespread property damage. Any appearance from Gragas must surely foreshadow drinking and destruction—in that order.",
@@ -115,7 +121,7 @@
         "movespeed": 330,
         "armor": 38,
         "armorperlevel": 3.6,
-        "spellblock": 32.1,
+        "spellblock": 32,
         "spellblockperlevel": 1.25,
         "attackrange": 125,
         "hpregen": 5.5,
@@ -133,20 +139,18 @@
         {
           "id": "GragasQ",
           "name": "Barrel Roll",
-          "description": "Gragas rolls his cask to a location, which can be activated to explode or will explode on its own after 4 seconds. Enemies struck by the blast have their Movement Speed slowed.",
+          "description": "Gragas rolls his cask to a location, which can be activated to explode or will explode on its own after 4 seconds. The potency of the explosion increases over time. Enemies struck by the blast have their Move Speed slowed.",
           "tooltip": "Gragas rolls a cask that explodes after {{ e4 }} seconds, dealing between <magicDamage>{{ mindamage }} magic damage</magicDamage> and <magicDamage>{{ maxdamage }} magic damage</magicDamage> and <status>Slowing</status> for between {{ e2 }} and {{ effect2amount*1.5 }}% for {{ e3 }} seconds. The damage and <status>Slow</status> increase with time the cask spent before exploding. <br /><br />Gragas can <recast>Recast</recast> to detonate the cask early.",
           "leveltip": {
             "label": [
               "Damage",
               "Slow",
-              "Cooldown",
-              "@AbilityResourceName@ Cost"
+              "Cooldown"
             ],
             "effect": [
               "{{ e1 }} -> {{ e1NL }}",
               "{{ e2 }} -> {{ e2NL }}",
-              "{{ cooldown }} -> {{ cooldownNL }}",
-              "{{ cost }} -> {{ costNL }}"
+              "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
           "maxrank": 5,
@@ -159,13 +163,13 @@
           ],
           "cooldownBurn": "11/10/9/8/7",
           "cost": [
-            60,
-            65,
-            70,
-            75,
+            80,
+            80,
+            80,
+            80,
             80
           ],
-          "costBurn": "60/65/70/75/80",
+          "costBurn": "80",
           "datavalues": {},
           "effect": [
             null,
@@ -420,7 +424,7 @@
           "id": "GragasE",
           "name": "Body Slam",
           "description": "Gragas charges to a location and collides with the first enemy unit he comes across, dealing damage to all nearby enemy units and stunning them.",
-          "tooltip": "Gragas charges forward, colliding with the first enemy, <status>Knocking Up</status> nearby enemies for {{ e2 }} second and dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage> to them.<br /><br />This Ability's cooldown is reduced by {{ f1 }} seconds if Gragas collides with an enemy.",
+          "tooltip": "Gragas charges forward, colliding with the first enemy, <status>Knocking Up</status> nearby enemies for {{ e2 }} second and dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage> to them.<br /><br />This Ability's Cooldown is reduced by {{ f1 }} seconds if Gragas collides with an enemy.",
           "leveltip": {
             "label": [
               "Damage",

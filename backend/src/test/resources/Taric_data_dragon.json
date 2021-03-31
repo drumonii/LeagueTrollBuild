@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.25.1",
+  "version": "11.7.1",
   "data": {
     "Taric": {
       "id": "Taric",
@@ -85,7 +85,7 @@
         "movespeed": 340,
         "armor": 40,
         "armorperlevel": 3.4,
-        "spellblock": 32.1,
+        "spellblock": 32,
         "spellblockperlevel": 1.25,
         "attackrange": 150,
         "hpregen": 6,
@@ -104,7 +104,7 @@
           "id": "TaricQ",
           "name": "Starlight's Touch",
           "description": "Heals nearby allied champions based on charges stored. Bravado-empowered attacks grant a charge of Starlight's Touch.",
-          "tooltip": "Spends all charges to heal nearby allied champions for {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> <scaleHealth>(+{{ f1 }})</scaleHealth> ({{ e2 }}% of maximum Health) per charge, up to {{ e5 }} <scaleAP>(+{{ f3 }})</scaleAP> <scaleHealth>(+{{ f2 }})</scaleHealth> at maximum charges.<br />Maximum charges: {{ e6 }}<br /><br />Bravado-empowered attacks grant 1 charge of Starlight's Touch.",
+          "tooltip": "<spellPassive>Passive:</spellPassive> Gain a stack (max {{ e6 }}) every {{ stackcooldown }} seconds and when hitting a <spellName>Bravado</spellName> Attack.<br /><br /><spellActive>Active:</spellActive> Consume all stacks to restore <healing>{{ healingperstack }} Health</healing> per stack to nearby ally champions (<healing>{{ maxstackhealing }}</healing> at {{ e6 }} stacks).",
           "leveltip": {
             "label": [
               "Max Charges",
@@ -221,13 +221,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.2,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " Mana, all Charges",
           "maxammo": "-1",
           "range": [
@@ -253,7 +247,7 @@
           "id": "TaricW",
           "name": "Bastion",
           "description": "Passively increase the Armor of Taric and any allied champion with Bastion.<br><br>Actively shields an ally and grants them Bastion for as long as they remain near Taric. Taric's spells also cast off the ally with Bastion.",
-          "tooltip": "Taric's spells will also cast from a nearby ally protected by Bastion.<br /><br /><spellPassive>Passive: </spellPassive>Bastion increases Armor by <scaleArmor>{{ f1 }}</scaleArmor> ({{ e1 }}% of Taric's Armor).<br /><br /><spellPassive>Active: </spellPassive>Blesses an ally with Bastion and shields them for {{ e2 }}% of their maximum Health for {{ e3 }} seconds. Bastion lasts on the target until a new one is chosen.",
+          "tooltip": "<spellPassive>Passive: </spellPassive>Taric's Abilities also originate from his marked ally champion. Grants Taric and the marked ally <scaleArmor>{{ bonusarmor }} Armor</scaleArmor>.<br /><br /><spellPassive>Active: </spellPassive>Taric blesses an ally champion, granting them and himself <shield>{{ e2 }}% ally max Health Shield</shield> for {{ e3 }} seconds and marking them until he marks another.",
           "leveltip": {
             "label": [
               "Passive Armor",
@@ -398,7 +392,7 @@
           "id": "TaricE",
           "name": "Dazzle",
           "description": "Taric readies a beam of starlight that, after a brief delay, deals magic damage and stuns enemies.",
-          "tooltip": "Readies a beam of starlight that, after {{ e3 }} second, deals {{ e1 }} <scaleAP>(+{{ a1 }})</scaleAP> <scaleArmor>(+{{ f1 }})</scaleArmor> magic damage and stuns enemies for {{ e2 }} second(s).",
+          "tooltip": "Taric projects a beam of starlight, bursting after {{ e3 }} second to deal <magicDamage>{{ totaldamage }} magic damage</magicDamage> and <status>Stun</status> enemies for {{ e2 }} seconds.",
           "leveltip": {
             "label": [
               "Damage",
@@ -513,13 +507,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "spelldamage",
-              "coeff": 0.5,
-              "key": "a1"
-            }
-          ],
+          "vars": [],
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
@@ -545,7 +533,7 @@
           "id": "TaricR",
           "name": "Cosmic Radiance",
           "description": "Pulses cosmic energy onto nearby allied champions after a delay, making them invulnerable for a short duration.",
-          "tooltip": "After a {{ initialdelay }} second delay, pulses cosmic energy onto nearby allied champions, making them invulnerable for {{ invulnduration }} seconds.",
+          "tooltip": "Taric calls down protection from the heavens. After {{ initialdelay }} seconds, nearby ally champions become invulnerable for {{ invulnduration }} seconds.",
           "leveltip": {
             "label": [
               "Cooldown"

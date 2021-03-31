@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.25.1",
+  "version": "11.7.1",
   "data": {
     "LeeSin": {
       "id": "LeeSin",
@@ -134,7 +134,7 @@
         "movespeed": 345,
         "armor": 36,
         "armorperlevel": 3.7,
-        "spellblock": 32.1,
+        "spellblock": 32,
         "spellblockperlevel": 1.25,
         "attackrange": 125,
         "hpregen": 7.5,
@@ -170,13 +170,13 @@
           },
           "maxrank": 5,
           "cooldown": [
-            11,
             10,
             9,
             8,
-            7
+            7,
+            6
           ],
-          "cooldownBurn": "11/10/9/8/7",
+          "cooldownBurn": "10/9/8/7/6",
           "cost": [
             50,
             50,
@@ -298,7 +298,7 @@
           "id": "BlindMonkWOne",
           "name": "Safeguard / Iron Will",
           "description": "Safeguard: Lee Sin rushes to target ally, shielding himself from damage. If the ally is a champion, they are also shielded. After using Safeguard, Lee Sin can cast Iron Will for the next 3 seconds.<br>Iron Will: Lee Sin's intense training allows him to thrive in battle. For 4 seconds, Lee Sin gains Life Steal and Spell Vamp.",
-          "tooltip": "Lee Sin dashes to an ally or ward. If the target is a champion, Lee Sin grants them and himself <shield>{{ shieldamount }} Shield</shield> for {{ e3 }} seconds and reduces this Ability's cooldown by {{ e6 }}%. Lee Sin may <recast>Recast</recast> for the next {{ e9 }} seconds.<br /><br /><recast>Recast:</recast> Lee Sin gains {{ e2 }}% Life Steal and Spell Vamp for {{ e8 }} seconds.",
+          "tooltip": "Lee Sin dashes to an ally or ward. If the target is a champion, Lee Sin grants them and himself <shield>{{ shieldamount }} Shield</shield> for {{ e3 }} seconds and reduces this Ability's Cooldown by {{ e6 }}%. Lee Sin may <recast>Recast</recast> for the next {{ e9 }} seconds.<br /><br /><recast>Recast:</recast> Lee Sin gains {{ e2 }}% Life Steal and Spell Vamp for {{ e8 }} seconds.",
           "leveltip": {
             "label": [
               "Safeguard Shield Absorption",

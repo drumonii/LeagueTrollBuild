@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.25.1",
+  "version": "11.7.1",
   "data": {
     "Kalista": {
       "id": "Kalista",
@@ -41,6 +41,12 @@
           "num": 3,
           "name": "SKT T1 Kalista",
           "chromas": false
+        },
+        {
+          "id": "429005",
+          "num": 5,
+          "name": "Marauder Kalista",
+          "chromas": true
         }
       ],
       "lore": "A specter of wrath and retribution, Kalista is the undying spirit of vengeance, an armored nightmare summoned from the Shadow Isles to hunt deceivers and traitors. The betrayed may cry out in blood to be avenged, but Kalista only answers those willing to pay with their very souls. Those who become the focus of Kalista's wrath should make their final peace, for any pact sealed with this grim hunter can only end with the cold, piercing fire of her soul-spears.",
@@ -233,7 +239,7 @@
           "id": "KalistaW",
           "name": "Sentinel",
           "description": "Gain bonus damage when Kalista and her Oathsworn strike the same target. <br><br>Activate to send a soul to scout out the path, revealing the area in front of it.",
-          "tooltip": "<spellPassive>Passive:</spellPassive> When Kalista and her <keywordMajor>Oathsworn</keywordMajor> both Attack the same target, she deals <magicDamage>{{ e2 }}% max Health magic damage</magicDamage>. This effect has a {{ e7 }} second cooldown per target.<br /><br /><spellPassive>Active: </spellPassive>Kalista sends a ghost to patrol an area for three laps. Champions spotted are revealed for 4 seconds. This ability has 2 charges ({{ e4 }} second refresh).",
+          "tooltip": "<spellPassive>Passive:</spellPassive> When Kalista and her <keywordMajor>Oathsworn</keywordMajor> both Attack the same target, she deals <magicDamage>{{ e2 }}% max Health magic damage</magicDamage>. This effect has a {{ e7 }} second Cooldown per target.<br /><br /><spellPassive>Active: </spellPassive>Kalista sends a ghost to patrol an area for three laps. Champions spotted are revealed for 4 seconds. This ability has 2 charges ({{ e4 }} second refresh).",
           "leveltip": {
             "label": [
               "Damage",
@@ -374,7 +380,7 @@
           "id": "KalistaExpungeWrapper",
           "name": "Rend",
           "description": "Attacks impale their targets with spears. Activate to rip the spears out, slowing and dealing escalating damage.",
-          "tooltip": "<spellPassive>Passive: </spellPassive>Kalista's spears linger in their target for 4 seconds, stacking any number of times.<br /><br /><spellActive>Active:</spellActive> Kalista rips the spears from nearby enemies, dealing <physicalDamage>{{ normaldamage }}</physicalDamage> plus <physicalDamage>{{ additionaldamage }} physical damage</physicalDamage> per spear beyond the first. <status>Slows</status> enemies hit by {{ slowamount*100 }}% for {{ slowduration }} seconds.<br /><br />If this Ability kills at least one target, its Cooldown is refreshed and it refunds <scaleMana>{{ manarefund }}</scaleMana> mana.",
+          "tooltip": "<spellPassive>Passive: </spellPassive>Kalista's spears linger in their target for 4 seconds, stacking any number of times.<br /><br /><spellActive>Active:</spellActive> Kalista rips the spears from nearby enemies, dealing <physicalDamage>{{ normaldamage }}</physicalDamage> plus <physicalDamage>{{ additionaldamage }} physical damage</physicalDamage> per spear beyond the first. <status>Slows</status> enemies hit by {{ slowamount*100 }}% for {{ slowduration }} seconds.<br /><br />If this Ability kills at least one target, its Cooldown is refreshed and it refunds <scaleMana>{{ manarefund }} Mana</scaleMana>.",
           "leveltip": {
             "label": [
               "Damage",
@@ -519,7 +525,7 @@
           "id": "KalistaRx",
           "name": "Fate's Call",
           "description": "Kalista teleports the Oathsworn ally to herself. They gain the ability to dash toward a position, knocking enemy champions back.",
-          "tooltip": "Kalista puts her <keywordMajor>Oathsworn</keywordMajor> into Stasis and draws them to herself for up to 4 seconds. The <keywordMajor>Oathsworn</keywordMajor> can click to launch themselves, stopping at the first champion hit and <status>Knocking Back</status> all nearby enemies.",
+          "tooltip": "Kalista puts her <keywordMajor>Oathsworn</keywordMajor> into Stasis and draws them to herself for up to 4 seconds. The <keywordMajor>Oathsworn</keywordMajor> can click to launch themselves, stopping at the first champion hit and <status>Knocking Back</status> all nearby enemies. If the <keywordMajor>Oathsworn</keywordMajor> hits a champion, they are placed at their maximum attack range from it.",
           "leveltip": {
             "label": [
               "Cooldown",

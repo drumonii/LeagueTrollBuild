@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.25.1",
+  "version": "11.7.1",
   "data": {
     "Riven": {
       "id": "Riven",
@@ -127,7 +127,7 @@
         "movespeed": 340,
         "armor": 33,
         "armorperlevel": 3.2,
-        "spellblock": 32.1,
+        "spellblock": 32,
         "spellblockperlevel": 1.25,
         "attackrange": 125,
         "hpregen": 8.5,
@@ -146,7 +146,7 @@
           "id": "RivenTriCleave",
           "name": "Broken Wings",
           "description": "Riven lashes out in a series of strikes. This ability can be reactivated three times in a short time frame with the third hit knocking back nearby enemies.",
-          "tooltip": "Riven strikes out in front of her in a short line. This ability may be re-cast {{ e4 }} additional times.<br /><br /><span class=\"colorDDDD77\">1st and 2nd Use:</span> Slashes forward, dealing {{ e1 }} <scaleAD>(+{{ f1 }})</scaleAD> physical damage to all units she comes in contact with.<br /><span class=\"colorDDDD77\">3rd Use:</span> Leaps forward and slams the ground dealing {{ e1 }} <scaleAD>(+{{ f1 }})</scaleAD> physical damage and knocking nearby enemies up. This leap can cross unpathable terrain.<br /><br /><span class=\"colorDDDD77\">Riven will target the unit your cursor is hovering over, or if no targets are present, Riven will simply strike the direction she is currently facing.</span>",
+          "tooltip": "Riven dashes forward, dealing <physicalDamage>{{ firstslashdamage }} physical damage</physicalDamage>. She can <recast>Recast</recast> this Ability twice. The first <recast>Recast</recast> is the same as the original, but the second has a different effect:<br /><br /><recast>Recast</recast>: Riven leaps forward and slams, dealing <physicalDamage>{{ firstslashdamage }} physical damage</physicalDamage> and <status>Knocks Up</status> nearby enemies for 0.75 seconds.",
           "leveltip": {
             "label": [
               "Damage",
@@ -261,30 +261,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "attackdamage",
-              "coeff": [
-                0.4,
-                0.45,
-                0.5,
-                0.55,
-                0.6
-              ],
-              "key": "f1"
-            },
-            {
-              "link": "attackdamage",
-              "coeff": [
-                0.4,
-                0.45,
-                0.5,
-                0.55,
-                0.6
-              ],
-              "key": "f1"
-            }
-          ],
+          "vars": [],
           "costType": "No Cost",
           "maxammo": "-1",
           "range": [
@@ -310,7 +287,7 @@
           "id": "RivenMartyr",
           "name": "Ki Burst",
           "description": "Riven emits a Ki Burst, damaging and stunning nearby enemies.",
-          "tooltip": "Riven's sword emits a burst of runic energy that shocks nearby enemies, dealing {{ e1 }} <scaleAD>(+{{ f1 }})</scaleAD> physical damage and stunning them for {{ e5 }} seconds.",
+          "tooltip": "Riven's sword emits a burst of runic energy, dealing <physicalDamage>{{ totaldamage }} physical damage</physicalDamage> and <status>Stunning</status> for {{ e5 }} seconds.",
           "leveltip": {
             "label": [
               "Damage",
@@ -425,13 +402,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "bonusattackdamage",
-              "coeff": 1,
-              "key": "f1"
-            }
-          ],
+          "vars": [],
           "costType": "No Cost",
           "maxammo": "-1",
           "range": [
@@ -457,7 +428,7 @@
           "id": "RivenFeint",
           "name": "Valor",
           "description": "Riven steps forward a short distance and blocks incoming damage.",
-          "tooltip": "Riven does a quick dash in the direction of your cursor and becomes shielded, blocking up to {{ e2 }} <scaleAD>(+{{ f1 }})</scaleAD> incoming damage for 1.5 seconds.",
+          "tooltip": "Riven quickly dashes and gains <shield>{{ totalshield }} Shield</shield> for 1.5 seconds.",
           "leveltip": {
             "label": [
               "Shield Amount",
@@ -470,13 +441,13 @@
           },
           "maxrank": 5,
           "cooldown": [
-            12,
-            11,
             10,
             9,
-            8
+            8,
+            7,
+            6
           ],
-          "cooldownBurn": "12/11/10/9/8",
+          "cooldownBurn": "10/9/8/7/6",
           "cost": [
             0,
             0,
@@ -572,13 +543,7 @@
             "0",
             "0"
           ],
-          "vars": [
-            {
-              "link": "bonusattackdamage",
-              "coeff": 1,
-              "key": "f1"
-            }
-          ],
+          "vars": [],
           "costType": "No Cost",
           "maxammo": "-1",
           "range": [
@@ -604,7 +569,7 @@
           "id": "RivenFengShuiEngine",
           "name": "Blade of the Exile",
           "description": "Riven empowers her keepsake weapon with energy, and gains Attack Damage and Range. During this time, she also gains the ability to use Wind Slash, a powerful ranged attack, once.",
-          "tooltip": "Riven's weapon surges with spiritual energy for {{ duration }} seconds, granting her {{ percentbonusad*100 }}% extra Attack Damage ({{ bonusad }}), increased Range on her damaging spells and attacks, and the ability to use Wind Slash once.<br /><br /><span class=\"colorDDDD77\">Wind Slash:</span> Riven fires a shockwave that deals from <physicalDamage>{{ mindamage }}</physicalDamage> to <physicalDamage>{{ maxdamage }} physical damage</physicalDamage> to all enemies hit, increasing based on how much Health they are missing.",
+          "tooltip": "Riven's weapon surges with spiritual energy, granting her <physicalDamage>{{ bonusad }} Attack Damage</physicalDamage> and increased range on damaging Abilities and Attacks for {{ duration }} seconds. While active, she can <recast>Recast.</recast><br /><br /><recast>Recast:</recast> Riven fires a wind slash that deals between <physicalDamage>{{ mindamage }}</physicalDamage> and <physicalDamage>{{ maxdamage }} physical damage</physicalDamage>, based on their missing Health.",
           "leveltip": {
             "label": [
               "Minimum Shockwave Damage",

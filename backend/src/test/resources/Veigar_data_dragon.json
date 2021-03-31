@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.25.1",
+  "version": "11.7.1",
   "data": {
     "Veigar": {
       "id": "Veigar",
@@ -163,13 +163,13 @@
           ],
           "cooldownBurn": "7/6.5/6/5.5/5",
           "cost": [
+            30,
+            35,
             40,
             45,
-            50,
-            55,
-            60
+            50
           ],
-          "costBurn": "40/45/50/55/60",
+          "costBurn": "30/35/40/45/50",
           "datavalues": {},
           "effect": [
             null,
@@ -283,7 +283,7 @@
           "id": "VeigarDarkMatter",
           "name": "Dark Matter",
           "description": "Veigar calls a great mass of dark matter to fall from the sky to the target location, dealing magic damage when it lands. Stacks of Phenomenal Evil reduce Dark Matter's cooldown.",
-          "tooltip": "Veigar summons dark matter from the sky, dealing <magicDamage>{{ totaldamagetooltip }} magic damage</magicDamage>.<br /><br />Every 50 stacks of <keywordMajor>Phenomenal Evil</keywordMajor> reduce this Ability's cooldown by 10%.",
+          "tooltip": "Veigar summons dark matter from the sky, dealing <magicDamage>{{ totaldamagetooltip }} magic damage</magicDamage>.<br /><br />Every 50 stacks of <keywordMajor>Phenomenal Evil</keywordMajor> reduce this Ability's Cooldown by 10%.",
           "leveltip": {
             "label": [
               "Damage",
@@ -581,10 +581,10 @@
           "maxrank": 3,
           "cooldown": [
             120,
-            100,
-            80
+            90,
+            60
           ],
-          "cooldownBurn": "120/100/80",
+          "cooldownBurn": "120/90/60",
           "cost": [
             100,
             100,
