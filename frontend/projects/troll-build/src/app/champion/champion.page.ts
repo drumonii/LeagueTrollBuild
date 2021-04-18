@@ -42,7 +42,6 @@ export class ChampionPage implements OnInit {
       .pipe(
         tap(gameMaps => {
           this.gameMap = gameMaps.find(gameMap => gameMap.mapId === SummonersRiftId);
-          return gameMaps;
         }),
         finalize(() => this.getTrollBuild())
       );
