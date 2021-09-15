@@ -162,9 +162,9 @@ function isSnapshotVersion(buildVersion) {
 }
 
 /**
- * Prepares for the next release either by incrementing the next version as x.y.z-SNAPSHOT or removing SNAPSHOT.
+ * Entry point for preparing the next release either by incrementing the next version as x.y.z-SNAPSHOT or removing SNAPSHOT.
  */
-function prepareNextRelease() {
+(function prepareNextRelease() {
   const currentVersion = getCurrentVersion();
 
   if (isSnapshotVersion(currentVersion)) {
@@ -172,7 +172,7 @@ function prepareNextRelease() {
   } else {
     nextSnapshot(currentVersion);
   }
-}
+})();
 
 /**
  * Prepares for the next release with the next SNAPSHOT version.
@@ -206,5 +206,3 @@ function nextSnapshot(currentVersion) {
 
   promptForNextVersion(snapshotVersion);
 }
-
-prepareNextRelease();
