@@ -140,9 +140,9 @@ function checkIsNewVersion(latestVersion) {
 }
 
 /**
- * Fetches all test data from Riot's ddragon API.
+ * Entry point for fetching all test data from Riot's ddragon API.
  */
-function getTestData() {
+(function getTestData() {
   console.log('getting latest json test data from ddragon...\n');
 
   console.log('getting versions json test data...');
@@ -163,6 +163,4 @@ function getTestData() {
     getMaps(latestVersion);
     getSummonerSpells(latestVersion);
   });
-}
-
-getTestData();
+})();
