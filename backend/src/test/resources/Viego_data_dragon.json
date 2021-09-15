@@ -3,131 +3,377 @@
   "format": "standAloneComplex",
   "version": "11.18.1",
   "data": {
-    "Aatrox": {
-      "id": "Aatrox",
-      "key": "266",
-      "name": "Aatrox",
-      "title": "the Darkin Blade",
+    "Viego": {
+      "id": "Viego",
+      "key": "234",
+      "name": "Viego",
+      "title": "The Ruined King",
       "image": {
-        "full": "Aatrox.png",
-        "sprite": "champion0.png",
+        "full": "Viego.png",
+        "sprite": "champion4.png",
         "group": "champion",
-        "x": 0,
-        "y": 0,
+        "x": 384,
+        "y": 48,
         "w": 48,
         "h": 48
       },
       "skins": [
         {
-          "id": "266000",
+          "id": "234000",
           "num": 0,
           "name": "default",
           "chromas": false
         },
         {
-          "id": "266001",
+          "id": "234001",
           "num": 1,
-          "name": "Justicar Aatrox",
-          "chromas": false
-        },
-        {
-          "id": "266002",
-          "num": 2,
-          "name": "Mecha Aatrox",
+          "name": "Lunar Beast Viego",
           "chromas": true
         },
         {
-          "id": "266003",
-          "num": 3,
-          "name": "Sea Hunter Aatrox",
+          "id": "234010",
+          "num": 10,
+          "name": "Dissonance of Pentakill Viego",
           "chromas": false
-        },
-        {
-          "id": "266007",
-          "num": 7,
-          "name": "Blood Moon Aatrox",
-          "chromas": false
-        },
-        {
-          "id": "266008",
-          "num": 8,
-          "name": "Blood Moon Aatrox Prestige Edition",
-          "chromas": false
-        },
-        {
-          "id": "266009",
-          "num": 9,
-          "name": "Victorious Aatrox",
-          "chromas": true
-        },
-        {
-          "id": "266011",
-          "num": 11,
-          "name": "Odyssey Aatrox",
-          "chromas": true
         }
       ],
-      "lore": "Once honored defenders of Shurima against the Void, Aatrox and his brethren would eventually become an even greater threat to Runeterra, and were defeated only by cunning mortal sorcery. But after centuries of imprisonment, Aatrox was the first to find freedom once more, corrupting and transforming those foolish enough to try and wield the magical weapon that contained his essence. Now, with stolen flesh, he walks Runeterra in a brutal approximation of his previous form, seeking an apocalyptic and long overdue vengeance.",
-      "blurb": "Once honored defenders of Shurima against the Void, Aatrox and his brethren would eventually become an even greater threat to Runeterra, and were defeated only by cunning mortal sorcery. But after centuries of imprisonment, Aatrox was the first to find...",
-      "allytips": [
-        "Use Umbral Dash while casting The Darkin Blade to increase your chances of hitting the enemy.",
-        "Crowd Control abilities like Infernal Chains or your allies' immobilizing effects will help you set up The Darkin Blade.",
-        "Cast World Ender when you are sure you can force a fight."
-      ],
-      "enemytips": [
-        "Aatrox's attacks are very telegraphed, so use the time to dodge the hit zones.",
-        "Aatrox's Infernal Chains are easier to exit when running towards the sides or at Aatrox.",
-        "Keep your distance when Aatrox uses his Ultimate to prevent him from reviving."
-      ],
+      "lore": "Once ruler of a long-lost kingdom, Viego perished over a thousand years ago when his attempt to bring his wife back from the dead triggered the magical catastrophe known as the Ruination. Transformed into a powerful, unliving wraith tortured by an obsessive longing for his centuries-dead queen, Viego now stands as the Ruined King, controlling the deadly Harrowings as he scours Runeterra for anything that might one day restore her, and destroying all in his path as the Black Mist pours endlessly from his cruel, broken heart.",
+      "blurb": "Once ruler of a long-lost kingdom, Viego perished over a thousand years ago when his attempt to bring his wife back from the dead triggered the magical catastrophe known as the Ruination. Transformed into a powerful, unliving wraith tortured by an...",
+      "allytips": [],
+      "enemytips": [],
       "tags": [
-        "Fighter",
-        "Tank"
+        "Assassin",
+        "Fighter"
       ],
-      "partype": "Blood Well",
+      "partype": "None",
       "info": {
-        "attack": 8,
+        "attack": 6,
         "defense": 4,
-        "magic": 3,
-        "difficulty": 4
+        "magic": 2,
+        "difficulty": 5
       },
       "stats": {
-        "hp": 580,
-        "hpperlevel": 90,
-        "mp": 0,
+        "hp": 560,
+        "hpperlevel": 95,
+        "mp": 10000,
         "mpperlevel": 0,
         "movespeed": 345,
-        "armor": 38,
-        "armorperlevel": 3.25,
+        "armor": 34,
+        "armorperlevel": 4,
         "spellblock": 32,
         "spellblockperlevel": 1.25,
-        "attackrange": 175,
-        "hpregen": 3,
-        "hpregenperlevel": 1,
+        "attackrange": 200,
+        "hpregen": 7,
+        "hpregenperlevel": 0.7,
         "mpregen": 0,
         "mpregenperlevel": 0,
         "crit": 0,
         "critperlevel": 0,
-        "attackdamage": 60,
-        "attackdamageperlevel": 5,
+        "attackdamage": 57,
+        "attackdamageperlevel": 3.5,
         "attackspeedperlevel": 2.5,
-        "attackspeed": 0.651
+        "attackspeed": 0.658
       },
       "spells": [
         {
-          "id": "AatroxQ",
-          "name": "The Darkin Blade",
-          "description": "Aatrox slams his greatsword down, dealing physical damage. He can swing three times, each with a different area of effect.",
-          "tooltip": "Aatrox slams his greatsword, dealing <physicalDamage>{{ qdamage }} physical damage</physicalDamage>. If they are hit on the edge, they are briefly <status>Knocked Up</status> and they take <physicalDamage>{{ qedgedamage }}</physicalDamage> instead. This Ability can be <recast>Recast</recast> twice, each one changing shape and dealing 25% more damage than the previous one.",
+          "id": "ViegoQ",
+          "name": "Blade of the Ruined King",
+          "description": "Viego's spectral blade passively deals bonus percent current Health damage <OnHit>On-Hit</OnHit> and strikes twice vs. enemies he recently hit with an Ability, stealing Health.<br><br>Viego can activate this Ability to thrust his zweihander forward, impaling enemies in front of him.",
+          "tooltip": " <spellPassive>Passive:</spellPassive> Viego's Attacks deal an additional <physicalDamage>{{ totalpercenthealthonhit }} current Health physical damage</physicalDamage>. His first Attack against an enemy he has recently damaged with an Ability hits a second time, dealing <physicalDamage>{{ secondattackdamage }} physical damage</physicalDamage> and restoring <healing>{{ healmodvschamps*100% }}% of damage dealt as Health</healing>. These bonuses are kept during <keywordMajor>Possession</keywordMajor>.<br /><br /><spellActive>Active: </spellActive>Viego stabs forward, dealing <physicalDamage>{{ totaldamage }} physical damage</physicalDamage>.",
           "leveltip": {
             "label": [
-              "Cooldown",
               "Damage",
-              "Total AD Ratio"
+              "Current Health %",
+              "Minimum Current Health Damage",
+              "Cooldown"
             ],
             "effect": [
-              "{{ cooldown }} -> {{ cooldownNL }}",
-              "{{ qbasedamage }} -> {{ qbasedamageNL }}",
-              "{{ qtotaladratio*100.000000 }}% -> {{ qtotaladrationl*100.000000 }}%"
+              "{{ damage }} -> {{ damageNL }}",
+              "{{ percenthealthonhit }}% -> {{ percenthealthonhitNL }}%",
+              "{{ mindamageonhit }} -> {{ mindamageonhitNL }}",
+              "{{ cooldown }} -> {{ cooldownNL }}"
+            ]
+          },
+          "maxrank": 5,
+          "cooldown": [
+            5,
+            4.5,
+            4,
+            3.5,
+            3
+          ],
+          "cooldownBurn": "5/4.5/4/3.5/3",
+          "cost": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "costBurn": "0",
+          "datavalues": {},
+          "effect": [
+            null,
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "effectBurn": [
+            null,
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "vars": [],
+          "costType": "No Cost",
+          "maxammo": "-1",
+          "range": [
+            600,
+            600,
+            600,
+            600,
+            600
+          ],
+          "rangeBurn": "600",
+          "image": {
+            "full": "ViegoQ.png",
+            "sprite": "spell14.png",
+            "group": "spell",
+            "x": 336,
+            "y": 0,
+            "w": 48,
+            "h": 48
+          },
+          "resource": "No Cost"
+        },
+        {
+          "id": "ViegoW",
+          "name": "Spectral Maw",
+          "description": "Viego charges up before dashing forward, releasing a ball of concentrated Black Mist that stuns the first enemy hit.",
+          "tooltip": "<charge>Begin Charging:</charge> Viego begins gathering Mist, <status>Slowing</status> himself by {{ selfslowpercent*100 }}%.<br /><br /><release>Release:</release> Viego dashes forward and hurls the gathered Mist. Deals <magicDamage>{{ totaldamage }} magic damage</magicDamage> and <status>Stuns</status> the first enemy hit for {{ stunduration }} to {{ maxstuntt }} seconds based on charge time.<br />",
+          "leveltip": {
+            "label": [
+              "Damage"
+            ],
+            "effect": [
+              "{{ damage }} -> {{ damageNL }}"
+            ]
+          },
+          "maxrank": 5,
+          "cooldown": [
+            8,
+            8,
+            8,
+            8,
+            8
+          ],
+          "cooldownBurn": "8",
+          "cost": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "costBurn": "0",
+          "datavalues": {},
+          "effect": [
+            null,
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "effectBurn": [
+            null,
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "vars": [],
+          "costType": "No Cost",
+          "maxammo": "-1",
+          "range": [
+            400,
+            400,
+            400,
+            400,
+            400
+          ],
+          "rangeBurn": "400",
+          "image": {
+            "full": "ViegoW.png",
+            "sprite": "spell14.png",
+            "group": "spell",
+            "x": 384,
+            "y": 0,
+            "w": 48,
+            "h": 48
+          },
+          "resource": "No Cost"
+        },
+        {
+          "id": "ViegoE",
+          "name": "Harrowed Path",
+          "description": "Viego commands the Black Mist to haunt and surround a piece of terrain. Viego can hide in the Mist as a wraith, gaining camouflage, Move Speed, and Attack Speed.",
+          "tooltip": "Viego sends forth a spectre to haunt the first terrain hit, surrounding it with Mist for {{ mistduration }} seconds. Viego gains <keywordStealth>Camouflage</keywordStealth>, <speed>{{ totalmovespeed }} Move Speed</speed>, and <attackSpeed>{{ attackspeed*100 }}% Attack Speed</attackSpeed> while inside the Mist.",
+          "leveltip": {
+            "label": [
+              "Move Speed",
+              "Attack Speed",
+              "Cooldown"
+            ],
+            "effect": [
+              "{{ movespeed*100.000000 }}% -> {{ movespeednl*100.000000 }}%",
+              "{{ attackspeed*100.000000 }}% -> {{ attackspeednl*100.000000 }}%",
+              "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
           "maxrank": 5,
@@ -238,324 +484,36 @@
           "costType": "No Cost",
           "maxammo": "-1",
           "range": [
-            25000,
-            25000,
-            25000,
-            25000,
-            25000
+            750,
+            750,
+            750,
+            750,
+            750
           ],
-          "rangeBurn": "25000",
+          "rangeBurn": "750",
           "image": {
-            "full": "AatroxQ.png",
-            "sprite": "spell0.png",
+            "full": "ViegoE.png",
+            "sprite": "spell14.png",
             "group": "spell",
-            "x": 240,
-            "y": 48,
+            "x": 432,
+            "y": 0,
             "w": 48,
             "h": 48
           },
           "resource": "No Cost"
         },
         {
-          "id": "AatroxW",
-          "name": "Infernal Chains",
-          "description": "Aatrox smashes the ground, dealing damage to the first enemy hit. Champions and large monsters have to leave the impact area quickly or they will be dragged to the center and take the damage again.",
-          "tooltip": "Aatrox fires a chain, <status>Slowing</status> the first enemy hit by {{ wslowpercentage*-100 }}% for {{ wslowduration }} seconds and dealing <physicalDamage>{{ wdamage }} physical damage</physicalDamage>. Champions and large jungle monsters have {{ wslowduration }} seconds to leave the impact area or be <status>Pulled</status> back to the center and damaged again for the same amount.",
+          "id": "ViegoR",
+          "name": "Heartbreaker",
+          "description": "Viego teleports to a nearby location and executes an enemy champion on arrival, piercing their heart and causing a destructive shockwave around them that knocks away their allies.",
+          "tooltip": "Viego discards any souls he is currently <keywordMajor>Possessing</keywordMajor> and teleports. On arrival he Attacks the champion with the lowest percent Health, briefly <status>Slowing</status> them by {{ slowpercent*100 }}% and dealing <physicalDamage>{{ totaldamage }} + {{ totalpercenthealth }}% missing Health physical damage</physicalDamage>. Other nearby enemies are <status>Knocked Back</status> and take <physicalDamage>{{ totaldamage }} physical damage</physicalDamage>.",
           "leveltip": {
             "label": [
-              "Cooldown",
-              "Damage"
-            ],
-            "effect": [
-              "{{ cooldown }} -> {{ cooldownNL }}",
-              "{{ wbasedamage }} -> {{ wbasedamageNL }}"
-            ]
-          },
-          "maxrank": 5,
-          "cooldown": [
-            26,
-            23,
-            20,
-            17,
-            14
-          ],
-          "cooldownBurn": "26/23/20/17/14",
-          "cost": [
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          "costBurn": "0",
-          "datavalues": {},
-          "effect": [
-            null,
-            [
-              0,
-              0,
-              0,
-              0,
-              0
-            ],
-            [
-              0,
-              0,
-              0,
-              0,
-              0
-            ],
-            [
-              0,
-              0,
-              0,
-              0,
-              0
-            ],
-            [
-              0,
-              0,
-              0,
-              0,
-              0
-            ],
-            [
-              0,
-              0,
-              0,
-              0,
-              0
-            ],
-            [
-              0,
-              0,
-              0,
-              0,
-              0
-            ],
-            [
-              0,
-              0,
-              0,
-              0,
-              0
-            ],
-            [
-              0,
-              0,
-              0,
-              0,
-              0
-            ],
-            [
-              0,
-              0,
-              0,
-              0,
-              0
-            ],
-            [
-              0,
-              0,
-              0,
-              0,
-              0
-            ]
-          ],
-          "effectBurn": [
-            null,
-            "0",
-            "0",
-            "0",
-            "0",
-            "0",
-            "0",
-            "0",
-            "0",
-            "0",
-            "0"
-          ],
-          "vars": [],
-          "costType": "No Cost",
-          "maxammo": "-1",
-          "range": [
-            825,
-            825,
-            825,
-            825,
-            825
-          ],
-          "rangeBurn": "825",
-          "image": {
-            "full": "AatroxW.png",
-            "sprite": "spell0.png",
-            "group": "spell",
-            "x": 288,
-            "y": 48,
-            "w": 48,
-            "h": 48
-          },
-          "resource": "No Cost"
-        },
-        {
-          "id": "AatroxE",
-          "name": "Umbral Dash",
-          "description": "Passively, Aatrox heals when damaging enemy champions. On activation, he dashes in a direction.",
-          "tooltip": "<spellPassive>Passive:</spellPassive> Aatrox gains <lifeSteal>{{ espellvamp }}% Omnivamp</lifeSteal> against champions, increased to <lifeSteal>{{ espellvampempowered }}% Omnivamp</lifeSteal> during <keywordMajor>World Ender</keywordMajor>.<br /><br /><spellActive>Active:</spellActive> Aatrox dashes. He can use this Ability while winding up his other Abilities.",
-          "leveltip": {
-            "label": [
-              "Cooldown",
-              "Healing %",
-              "Healing % during World Ender"
-            ],
-            "effect": [
-              "{{ cooldown }} -> {{ cooldownNL }}",
-              "{{ espellvamp }}% -> {{ espellvampNL }}%",
-              "{{ espellvampempowered }}% -> {{ espellvampempoweredNL }}%"
-            ]
-          },
-          "maxrank": 5,
-          "cooldown": [
-            9,
-            8,
-            7,
-            6,
-            5
-          ],
-          "cooldownBurn": "9/8/7/6/5",
-          "cost": [
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          "costBurn": "0",
-          "datavalues": {},
-          "effect": [
-            null,
-            [
-              0,
-              0,
-              0,
-              0,
-              0
-            ],
-            [
-              0,
-              0,
-              0,
-              0,
-              0
-            ],
-            [
-              0,
-              0,
-              0,
-              0,
-              0
-            ],
-            [
-              0,
-              0,
-              0,
-              0,
-              0
-            ],
-            [
-              0,
-              0,
-              0,
-              0,
-              0
-            ],
-            [
-              0,
-              0,
-              0,
-              0,
-              0
-            ],
-            [
-              0,
-              0,
-              0,
-              0,
-              0
-            ],
-            [
-              0,
-              0,
-              0,
-              0,
-              0
-            ],
-            [
-              0,
-              0,
-              0,
-              0,
-              0
-            ],
-            [
-              0,
-              0,
-              0,
-              0,
-              0
-            ]
-          ],
-          "effectBurn": [
-            null,
-            "0",
-            "0",
-            "0",
-            "0",
-            "0",
-            "0",
-            "0",
-            "0",
-            "0",
-            "0"
-          ],
-          "vars": [],
-          "costType": "No Cost",
-          "maxammo": "1",
-          "range": [
-            25000,
-            25000,
-            25000,
-            25000,
-            25000
-          ],
-          "rangeBurn": "25000",
-          "image": {
-            "full": "AatroxE.png",
-            "sprite": "spell0.png",
-            "group": "spell",
-            "x": 336,
-            "y": 48,
-            "w": 48,
-            "h": 48
-          },
-          "resource": "No Cost"
-        },
-        {
-          "id": "AatroxR",
-          "name": "World Ender",
-          "description": "Aatrox unleashes his demonic form, fearing nearby enemy minions and gaining attack damage, increased healing, and movement speed. If he gets a takedown, this effect is extended.",
-          "tooltip": "Aatrox reveals his true demonic form, <status>Fearing</status> nearby minions for {{ rminionfearduration }} seconds and gaining <speed>{{ rmovementspeedbonus*100 }}% Move Speed</speed> decaying over {{ rduration }} seconds. He also gains <scaleAD>{{ rtotaladamp*100 }}% Attack Damage</scaleAD> and increases <healing>self-healing by {{ rhealingamp*100 }}%</healing> for the duration.<br /><br />Champion takedowns extend the duration of this effect by {{ rextension }} seconds and refresh the <speed>Move Speed</speed> effect.",
-          "leveltip": {
-            "label": [
-              "Total Attack Damage Increase",
-              "Healing Increase",
-              "Move Speed",
+              "Missing Health Damage",
               "Cooldown"
             ],
             "effect": [
-              "{{ rtotaladamp*100.000000 }}% -> {{ rtotaladampnl*100.000000 }}%",
-              "{{ rhealingamp*100.000000 }}% -> {{ rhealingampnl*100.000000 }}%",
-              "{{ rmovementspeedbonus*100.000000 }}% -> {{ rmovementspeedbonusnl*100.000000 }}%",
+              "{{ maxhealthdamage }}% -> {{ maxhealthdamageNL }}%",
               "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
@@ -643,16 +601,16 @@
           "costType": "No Cost",
           "maxammo": "-1",
           "range": [
-            25000,
-            25000,
-            25000
+            500,
+            500,
+            500
           ],
-          "rangeBurn": "25000",
+          "rangeBurn": "500",
           "image": {
-            "full": "AatroxR.png",
-            "sprite": "spell0.png",
+            "full": "ViegoR.png",
+            "sprite": "spell14.png",
             "group": "spell",
-            "x": 384,
+            "x": 0,
             "y": 48,
             "w": 48,
             "h": 48
@@ -661,14 +619,14 @@
         }
       ],
       "passive": {
-        "name": "Deathbringer Stance",
-        "description": "Periodically, Aatrox's next basic attack deals bonus <physicalDamage>physical damage</physicalDamage> and heals him, based on the target's max health. ",
+        "name": "Sovereign's Domination",
+        "description": "Enemies who fall before Viego become wraiths. By attacking a wraith, Viego temporarily seizes control of the dead enemy's body, healing for a percentage of his target's max health and gaining access to their basic abilities and items. He replaces their Ultimate with a free cast of his own.",
         "image": {
-          "full": "Aatrox_Passive.png",
-          "sprite": "passive0.png",
+          "full": "Viego_Passive.RuinedKing.png",
+          "sprite": "passive4.png",
           "group": "passive",
-          "x": 0,
-          "y": 0,
+          "x": 384,
+          "y": 48,
           "w": 48,
           "h": 48
         }

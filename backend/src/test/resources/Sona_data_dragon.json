@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "10.25.1",
+  "version": "11.18.1",
   "data": {
     "Sona": {
       "id": "Sona",
@@ -12,7 +12,7 @@
         "full": "Sona.png",
         "sprite": "champion3.png",
         "group": "champion",
-        "x": 144,
+        "x": 240,
         "y": 96,
         "w": 48,
         "h": 48
@@ -77,6 +77,12 @@
           "num": 17,
           "name": "PsyOps Sona",
           "chromas": true
+        },
+        {
+          "id": "37026",
+          "num": 26,
+          "name": "Pentakill III: Lost Chapter Sona",
+          "chromas": true
         }
       ],
       "lore": "Sona is Demacia's foremost virtuoso of the stringed etwahl, speaking only through her graceful chords and vibrant arias. This genteel manner has endeared her to the highborn, though others suspect her spellbinding melodies to actually emanate magic—a Demacian taboo. Silent to outsiders but somehow understood by close companions, Sona plucks her harmonies not only to soothe injured allies, but also to strike down unsuspecting enemies.",
@@ -128,7 +134,7 @@
           "id": "SonaQ",
           "name": "Hymn of Valor",
           "description": "Sona plays the Hymn of Valor, sends out bolts of sound, dealing magic damage to two nearby enemies, prioritizing champions and monsters. Sona gains a temporary aura that grants allies tagged by the zone bonus damage on their next attack against enemies.",
-          "tooltip": "Sona deals <magicDamage>{{ totaldamagett }} magic damage</magicDamage> to the nearest two enemies, prioritizing champions. She then begins a new <keywordMajor>Melody</keywordMajor>.<br /><br /><keywordMajor>Melody:</keywordMajor> Sona gains an aura for {{ e3 }} seconds, granting allied champions an additional <magicDamage>{{ attackbonusdamagett }} magic damage</magicDamage> on their next Attack. Granting an ally this effect will refund Sona <scaleMana>{{ manarefund }} Mana</scaleMana> once per cast.",
+          "tooltip": "Sona deals <magicDamage>{{ totaldamage }} magic damage</magicDamage> to the nearest two enemies, prioritizing champions. She then begins a new <keywordMajor>Melody</keywordMajor>. Gain a stack of <keywordMajor>Accelerando</keywordMajor> for every champion you damage with this.<br /><br /><keywordMajor>Melody:</keywordMajor> Sona gains an aura for {{ auraduration }} seconds, granting allied champions an additional <magicDamage>{{ totalonhitdamage }} magic damage</magicDamage> %i:OnHit% on their next Attack within {{ onhitduration }} seconds.<br /><br /><keywordMajor>Power Chord - Staccato:</keywordMajor> Power Chord bonus damage (<magicDamage>{{ totalstaccatodamage }} total magic damage</magicDamage>).",
           "leveltip": {
             "label": [
               "Damage (active)",
@@ -136,8 +142,8 @@
               "@AbilityResourceName@ Cost"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
-              "{{ e4 }} -> {{ e4NL }}",
+              "{{ basedamage }} -> {{ basedamageNL }}",
+              "{{ baseonhitdamage }} -> {{ baseonhitdamageNL }}",
               "{{ cost }} -> {{ costNL }}"
             ]
           },
@@ -151,50 +157,50 @@
           ],
           "cooldownBurn": "8",
           "cost": [
-            75,
-            80,
-            85,
-            90,
-            95
+            50,
+            55,
+            60,
+            65,
+            70
           ],
-          "costBurn": "75/80/85/90/95",
+          "costBurn": "50/55/60/65/70",
           "datavalues": {},
           "effect": [
             null,
             [
-              40,
-              70,
-              100,
-              130,
-              160
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              400,
-              400,
-              400,
-              400,
-              400
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              3,
-              3,
-              3,
-              3,
-              3
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              10,
-              15,
-              20,
-              25,
-              30
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              5,
-              5,
-              5,
-              5,
-              5
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -234,11 +240,11 @@
           ],
           "effectBurn": [
             null,
-            "40/70/100/130/160",
-            "400",
-            "3",
-            "10/15/20/25/30",
-            "5",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
             "0",
             "0",
             "0",
@@ -260,8 +266,8 @@
             "full": "SonaQ.png",
             "sprite": "spell11.png",
             "group": "spell",
-            "x": 288,
-            "y": 96,
+            "x": 240,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -271,7 +277,7 @@
           "id": "SonaW",
           "name": "Aria of Perseverance",
           "description": "Sona plays the Aria of Perseverance, sending out protective melodies, healing Sona and a nearby wounded ally. Sona gains a temporary aura that grants allies tagged by the zone a temporary shield.",
-          "tooltip": "<spellPassive>Active:</spellPassive> Sona restores <healing>{{ totalhealtt }} Health</healing> to herself and a nearby allied champion, prioritizing the most wounded. She then begins a new <keywordMajor>Melody</keywordMajor>.<br /><br /><keywordMajor>Melody:</keywordMajor> Sona gains an aura for {{ e3 }} seconds, granting allied champions <shield>{{ totalshieldtt }} Shield</shield> for {{ e5 }} seconds. Granting an ally this aura effect will refund Sona <scaleMana>{{ manarefund }} Mana</scaleMana> once per cast.",
+          "tooltip": "<spellPassive>Active:</spellPassive> Sona restores <healing>{{ totalheal }} Health</healing> to herself and a nearby allied champion, prioritizing the most wounded. She then begins a new <keywordMajor>Melody</keywordMajor>.<br /><br /><keywordMajor>Melody:</keywordMajor> Sona gains an aura for {{ auraduration }} seconds, granting allied champions <shield>{{ totalshield }} Shield</shield> for {{ shieldduration }} seconds.<br /><br />Gain a stack of <keywordMajor>Accelerando</keywordMajor> whenever you heal another injured ally and every time you protect another ally from at least {{ accelerandoshieldbreakpoint }} damage with this shield.<br /><br /><keywordMajor>Power Chord - Diminuendo:</keywordMajor> Power Chord also reduces physical and magic damage dealt by the target by {{ totaldiminuendoweakenpercent }} for {{ diminuendoduration }} seconds.",
           "leveltip": {
             "label": [
               "Heal (active)",
@@ -279,8 +285,8 @@
               "@AbilityResourceName@ Cost"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
-              "{{ e4 }} -> {{ e4NL }}",
+              "{{ baseheal }} -> {{ basehealNL }}",
+              "{{ baseshield }} -> {{ baseshieldNL }}",
               "{{ cost }} -> {{ costNL }}"
             ]
           },
@@ -294,50 +300,50 @@
           ],
           "cooldownBurn": "10",
           "cost": [
-            105,
-            110,
-            115,
-            120,
-            125
+            80,
+            85,
+            90,
+            95,
+            100
           ],
-          "costBurn": "105/110/115/120/125",
+          "costBurn": "80/85/90/95/100",
           "datavalues": {},
           "effect": [
             null,
             [
-              30,
-              50,
-              70,
-              90,
-              110
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              400,
-              400,
-              400,
-              400,
-              400
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              3,
-              3,
-              3,
-              3,
-              3
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              25,
-              50,
-              75,
-              100,
-              125
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              1.5,
-              1.5,
-              1.5,
-              1.5,
-              1.5
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -377,11 +383,11 @@
           ],
           "effectBurn": [
             null,
-            "30/50/70/90/110",
-            "400",
-            "3",
-            "25/50/75/100/125",
-            "1.5",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
             "0",
             "0",
             "0",
@@ -403,8 +409,8 @@
             "full": "SonaW.png",
             "sprite": "spell11.png",
             "group": "spell",
-            "x": 336,
-            "y": 96,
+            "x": 288,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -414,13 +420,13 @@
           "id": "SonaE",
           "name": "Song of Celerity",
           "description": "Sona plays the Song of Celerity, granting nearby allies bonus Movement Speed. Sona gains a temporary aura that grants allied champions tagged by the zone bonus Movement Speed.",
-          "tooltip": "<spellPassive>Active:</spellPassive> Sona grants herself <speed>{{ totalmstt }} Move Speed</speed> for {{ e9 }} seconds, or until damaged. She then begins a new <keywordMajor>Melody</keywordMajor>.<br /><br /><keywordMajor>Melody:</keywordMajor> Sona gains an aura for {{ e3 }} seconds that grants allied champions <speed>{{ allyms }} Move Speed</speed> for {{ e5 }} seconds. Granting an ally this effect will refund Sona <scaleMana>{{ manarefund }} Mana</scaleMana> once per cast.",
+          "tooltip": "<spellPassive>Active:</spellPassive> She begins a new <keywordMajor>Melody</keywordMajor> and grants herself <speed>{{ totalselfmovementspeed }} Move Speed</speed> for {{ selfmovementspeeddurationmin }} seconds, extended to up to {{ selfmovementspeeddurationmax }} seconds if she doesn't take damage. <br /><br /><keywordMajor>Melody:</keywordMajor> Sona gains an aura for {{ auraduration }} seconds that grants allied champions <speed>{{ totalallymovementspeed }} Move Speed</speed> for {{ allymovementspeedduration }} seconds.<br /><br /><keywordMajor>Power Chord - Tempo:</keywordMajor> Power Chord also slows the target's movement speed by {{ totaltempomovespeedslow }} for {{ tempoduration }} seconds.",
           "leveltip": {
             "label": [
-              "Movement Speed"
+              "Move Speed"
             ],
             "effect": [
-              "{{ effect4amount*100.000000 }}% -> {{ effect4amountnl*100.000000 }}%"
+              "{{ allybasemovementspeed*100.000000 }}% -> {{ allybasemovementspeednl*100.000000 }}%"
             ]
           },
           "maxrank": 5,
@@ -433,50 +439,36 @@
           ],
           "cooldownBurn": "12",
           "cost": [
-            90,
-            90,
-            90,
-            90,
-            90
+            65,
+            65,
+            65,
+            65,
+            65
           ],
-          "costBurn": "90",
+          "costBurn": "65",
           "datavalues": {},
           "effect": [
             null,
             [
-              0.2,
-              0.2,
-              0.2,
-              0.2,
-              0.2
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              400,
-              400,
-              400,
-              400,
-              400
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              3,
-              3,
-              3,
-              3,
-              3
-            ],
-            [
-              0.1,
-              0.11,
-              0.12,
-              0.13,
-              0.14
-            ],
-            [
-              3,
-              3,
-              3,
-              3,
-              3
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -500,11 +492,25 @@
               0
             ],
             [
-              7,
-              7,
-              7,
-              7,
-              7
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -516,15 +522,15 @@
           ],
           "effectBurn": [
             null,
-            "0.2",
-            "400",
-            "3",
-            "0.1/0.11/0.12/0.13/0.14",
-            "3",
             "0",
             "0",
             "0",
-            "7",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
             "0"
           ],
           "vars": [],
@@ -542,8 +548,8 @@
             "full": "SonaE.png",
             "sprite": "spell11.png",
             "group": "spell",
-            "x": 384,
-            "y": 96,
+            "x": 336,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -553,17 +559,15 @@
           "id": "SonaR",
           "name": "Crescendo",
           "description": "Sona plays her ultimate chord, stunning enemy champions and forcing them to dance and dealing magic damage to them. Each rank reduces the base cooldown of Sona's basic abilities.",
-          "tooltip": "<spellPassive>Passive: </spellPassive>The base cooldown of Sona's basic Abilities is reduced by {{ e3 }}%.<br /><br /><spellPassive>Active: </spellPassive>Sona strikes an irresistible chord, <status>Stunning</status> enemy Champions and forcing them to dance for {{ e2 }} seconds and dealing <magicDamage> {{ rdamagecalc }} magic damage</magicDamage>.",
+          "tooltip": "Sona strikes an irresistible chord, <status>Stunning</status> enemy for {{ stunduration }} seconds and dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage>.",
           "leveltip": {
             "label": [
               "Damage",
-              "Cooldown",
-              "Basic Ability Base CDR"
+              "Cooldown"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
-              "{{ cooldown }} -> {{ cooldownNL }}",
-              "{{ baseabilitycdr*-100.000000 }}% -> {{ baseabilitycdrnl*-100.000000 }}%"
+              "{{ basedamage }} -> {{ basedamageNL }}",
+              "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
           "maxrank": 3,
@@ -583,29 +587,29 @@
           "effect": [
             null,
             [
-              150,
-              250,
-              350
+              0,
+              0,
+              0
             ],
             [
-              1.5,
-              1.5,
-              1.5
+              0,
+              0,
+              0
             ],
             [
-              10,
-              25,
-              40
+              0,
+              0,
+              0
             ],
             [
-              -0.1,
-              -0.25,
-              -0.4
+              0,
+              0,
+              0
             ],
             [
-              -0.1,
-              -0.25,
-              -0.4
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -635,11 +639,11 @@
           ],
           "effectBurn": [
             null,
-            "150/250/350",
-            "1.5",
-            "10/25/40",
-            "-0.1/-0.25/-0.4",
-            "-0.1/-0.25/-0.4",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
             "0",
             "0",
             "0",
@@ -659,8 +663,8 @@
             "full": "SonaR.png",
             "sprite": "spell11.png",
             "group": "spell",
-            "x": 432,
-            "y": 96,
+            "x": 384,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -669,1259 +673,18 @@
       ],
       "passive": {
         "name": "Power Chord",
-        "description": "After 3 spell casts, Sona's next attack will deal bonus magic damage in addition to an additional effect based on what song Sona last activated.",
+        "description": "<passive>Accelerando</passive>: Sona gains non-Ultimate ability haste permanently for her basic abilities as she uses her abilities well, up to a cap. Beyond that cap, further successful uses reduce her ultimate's remaining cooldown instead.<br><br><passive>Power Chord</passive>: Every few spell casts, Sona's next attack will deal bonus magic damage in addition to an additional effect based on what basic Ability Sona last activated.",
         "image": {
           "full": "Sona_Passive_Charged.png",
           "sprite": "passive3.png",
           "group": "passive",
-          "x": 144,
+          "x": 240,
           "y": 96,
           "w": 48,
           "h": 48
         }
       },
-      "recommended": [
-        {
-          "champion": "Sona",
-          "title": "Beginner",
-          "type": "riot",
-          "map": "SR",
-          "mode": "INTRO",
-          "priority": false,
-          "blocks": [
-            {
-              "type": "beginner_Starter",
-              "maxSummonerLevel": 4,
-              "items": [
-                {
-                  "id": "1056",
-                  "count": 1
-                }
-              ]
-            },
-            {
-              "type": "beginner_Starter",
-              "minSummonerLevel": 5,
-              "items": [
-                {
-                  "id": "1056",
-                  "count": 1
-                },
-                {
-                  "id": "2003",
-                  "count": 1
-                }
-              ]
-            },
-            {
-              "type": "beginner_Advanced",
-              "recMath": true,
-              "items": [
-                {
-                  "id": "1028",
-                  "count": 1
-                },
-                {
-                  "id": "1027",
-                  "count": 1
-                },
-                {
-                  "id": "3010",
-                  "count": 1
-                }
-              ]
-            },
-            {
-              "type": "beginner_MovementSpeed",
-              "recMath": true,
-              "items": [
-                {
-                  "id": "1001",
-                  "count": 1
-                },
-                {
-                  "id": "3020",
-                  "count": 1
-                }
-              ]
-            },
-            {
-              "type": "beginner_LegendaryItem",
-              "recMath": true,
-              "items": [
-                {
-                  "id": "3010",
-                  "count": 1
-                },
-                {
-                  "id": "1026",
-                  "count": 1
-                },
-                {
-                  "id": "3027",
-                  "count": 1
-                }
-              ]
-            },
-            {
-              "type": "beginner_MoreLegendaryItems",
-              "items": [
-                {
-                  "id": "3151",
-                  "count": 1
-                },
-                {
-                  "id": "3174",
-                  "count": 1
-                },
-                {
-                  "id": "3116",
-                  "count": 1
-                },
-                {
-                  "id": "3089",
-                  "count": 1
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "champion": "Sona",
-          "title": "SonaARAM",
-          "map": "HA",
-          "mode": "ARAM",
-          "type": "riot",
-          "customTag": "",
-          "sortrank": 0,
-          "extensionPage": false,
-          "customPanel": null,
-          "blocks": [
-            {
-              "type": "starting",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3303",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3340",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "early",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "1001",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3067",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "4642",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essential",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "6617",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3009",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3504",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3107",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "6616",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3222",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "champion": "Sona",
-          "title": "SonaFIRSTBLOOD",
-          "map": "HA",
-          "mode": "FIRSTBLOOD",
-          "type": "riot",
-          "customTag": "",
-          "sortrank": 0,
-          "extensionPage": false,
-          "customPanel": null,
-          "blocks": [
-            {
-              "type": "starting",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3303",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2003",
-                  "count": 3,
-                  "hideCount": false
-                },
-                {
-                  "id": "3340",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essential",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "2301",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3020",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "ability_scaling",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3174",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3285",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3100",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3107",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3222",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3110",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3060",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2139",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "champion": "Sona",
-          "title": "SonaARAM",
-          "map": "HA",
-          "mode": "KINGPORO",
-          "type": "riot",
-          "customTag": "",
-          "sortrank": 0,
-          "extensionPage": false,
-          "customPanel": null,
-          "blocks": [
-            {
-              "type": "KingPoroSnax",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "items": [
-                {
-                  "id": "3680",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3681",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3682",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3683",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3684",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3685",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "starting",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3073",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "1001",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2003",
-                  "count": 5,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essential",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3007",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3158",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3100",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3029",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3089",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3135",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3165",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3174",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3116",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offmeta",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3107",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3504",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3222",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2139",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2033",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "champion": "Sona",
-          "title": "SonaSL",
-          "map": "NB",
-          "mode": "NEXUSBLITZ",
-          "type": "riot",
-          "customTag": "",
-          "sortrank": 0,
-          "extensionPage": false,
-          "useObviousCheckmark": false,
-          "customPanel": null,
-          "blocks": [
-            {
-              "type": "starting",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "4204",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2003",
-                  "count": 2,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "startingjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "4101",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "early",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "1001",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3073",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "earlyjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "1001",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3108",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "1027",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essential",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3020",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3007",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3174",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essentialjungle",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3020",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "4104",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3174",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "SummonerSmite",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3100",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3089",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3135",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "offensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "SummonerSmite",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3089",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3135",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3905",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "defensive",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3222",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3107",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3504",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "consumables",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": true
-                },
-                {
-                  "id": "2139",
-                  "count": 1,
-                  "hideCount": true
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "champion": "Sona",
-          "title": "SonaODYSSEY",
-          "map": "Odyssey",
-          "mode": "ODYSSEY",
-          "type": "riot",
-          "customTag": "",
-          "sortrank": 0,
-          "extensionPage": false,
-          "useObviousCheckmark": false,
-          "customPanel": null,
-          "blocks": [
-            {
-              "type": "odysona1",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3007",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3009",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3504",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3174",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "odysona2",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3285",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3020",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3100",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3115",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "odysona3",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3007",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3047",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3029",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3065",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "situational",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3001",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3110",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3089",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3107",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "champion": "Sona",
-          "title": "SonaSR",
-          "map": "SR",
-          "mode": "CLASSIC",
-          "type": "riot",
-          "customTag": "",
-          "sortrank": 0,
-          "extensionPage": false,
-          "useObviousCheckmark": false,
-          "customPanel": null,
-          "blocks": [
-            {
-              "type": "starting",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "3303",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "2003",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3340",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "early",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "1001",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3067",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "4642",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            },
-            {
-              "type": "essential",
-              "recMath": false,
-              "recSteps": false,
-              "minSummonerLevel": -1,
-              "maxSummonerLevel": -1,
-              "showIfSummonerSpell": "",
-              "hideIfSummonerSpell": "",
-              "appendAfterSection": "",
-              "visibleWithAllOf": [
-                ""
-              ],
-              "hiddenWithAnyOf": [
-                ""
-              ],
-              "items": [
-                {
-                  "id": "6617",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3009",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3504",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3107",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "6616",
-                  "count": 1,
-                  "hideCount": false
-                },
-                {
-                  "id": "3222",
-                  "count": 1,
-                  "hideCount": false
-                }
-              ]
-            }
-          ]
-        }
-      ]
+      "recommended": []
     }
   }
 }
