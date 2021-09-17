@@ -68,7 +68,7 @@ public interface ItemsRepository extends JpaRepository<Item, Integer>, JpaSpecif
 		   "where i.name is not null and i.description is not null " +
 		   "and i.gold.purchasable = true and i.consumed is null and (i.group is null or i.group <> 'FlaskGroup') " +
 		   "and i_into is null and key(m) = :mapId and m = true " +
-		   "and i.id <> 1001 and i.description not like '%Movement%' " +
+		   "and i.id <> 1001 and i.description not like '%Move Speed%' " +
 		   "and (i.name not like '%Potion%' and i.description not like '%Potion%') " +
 		   "and (i.name not like '%Trinket%' and i.description not like '%Trinket%') " +
 		   "and i.requiredAlly is null " +

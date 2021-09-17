@@ -103,10 +103,11 @@ abstract class ItemsRepositoryTest {
 				.containsNull();
 		assertThat(forTrollBuild).flatExtracting(Item::getInto)
 				.isEmpty();
-		assertThat(forTrollBuild).doesNotContain(itemsResponse.getItems().get("1001"));
+		assertThat(forTrollBuild).flatExtracting(Item::getFrom)
+				.doesNotContain(1001);
 		assertThat(forTrollBuild).extracting(Item::getDescription).allSatisfy(description -> {
 			assertThat(description).isNotNull();
-			assertThat(description).doesNotContain("Movement");
+			assertThat(description).doesNotContain("Move Speed");
 			assertThat(description).doesNotContain("Potion");
 			assertThat(description).doesNotContain("Trinket");
 		});
@@ -118,7 +119,7 @@ abstract class ItemsRepositoryTest {
 		});
 		assertThat(forTrollBuild).extracting(Item::getName).allSatisfy(name -> {
 			assertThat(name).isNotNull();
-			assertThat(name).doesNotContain("Move Speed");
+			assertThat(name).doesNotContain("Boots");
 			assertThat(name).doesNotContain("Potion");
 			assertThat(name).doesNotContain("Trinket");
 			assertThat(name).doesNotContain("Flask");
