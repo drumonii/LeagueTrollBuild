@@ -33,8 +33,8 @@ Create a run config that uses the `LeagueTrollBuildApplication` main class
 
 Optionally, pull the PostreSQL Docker image and run a PostreSQL container from the image to use as the app database:
 
-  docker pull postgres:12.2
-  docker run --name league-troll-build-pg -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=loltrollbuild -e POSTGRES_USER=postgres -p 5432:5432 -d postgres:12.2
+  docker pull postgres:12.8
+  docker run --name league-troll-build-pg -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=loltrollbuild -e POSTGRES_USER=postgres -p 5432:5432 -d postgres:12.8
 
 Add then `LTB_DB_USERNAME=postgres`, `LTB_DB_PASSWORD=postgres`, `LTB_DB_URL=jdbc:postgresql://localhost/loltrollbuild` environment variables for the run config.
 
