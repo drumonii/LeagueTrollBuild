@@ -40,7 +40,8 @@ spring:
   messages.basename: i18n/messages
   # Batch
   batch:
-    initialize-schema: never
+    jdbc:
+      initialize-schema: never
     job:
       enabled: false
   # Jackson
@@ -53,6 +54,11 @@ spring:
     properties:
       hibernate:
         jdbc.lob.non_contextual_creation: true
+  # Data
+  data:
+    jpa:
+      repositories:
+        bootstrap-mode: deferred
   # Web
   web:
     # Resources
@@ -96,6 +102,9 @@ spring:
     url: ${LTB_DB_URL}
     username: ${LTB_DB_USERNAME}
     password: ${LTB_DB_PASSWORD}
+  h2:
+    console:
+      enabled: false
 
 ---
 
@@ -108,7 +117,9 @@ spring:
     password: postgres
   jpa:
     show-sql: true
-
+  h2:
+    console:
+      enabled: false
 
 ---
 

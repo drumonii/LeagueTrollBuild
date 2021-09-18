@@ -37,9 +37,4 @@ public class ErrorController extends AbstractErrorController {
         return "forward:/troll-build/index.html";
     }
 
-    @Override
-    public String getErrorPath() {
-        return null;
-    }
-
 }

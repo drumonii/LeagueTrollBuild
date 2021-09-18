@@ -36,43 +36,43 @@ public class ValidRiotApiPropertiesConstraintValidator implements ConstraintVali
 	 * @return {@code true} whether valid, otherwise {@code false}
 	 */
 	private boolean validate(Ddragon ddragon, ConstraintValidatorContext context) {
-		if (StringUtils.isEmpty(ddragon.getBaseUrl())) {
+		if (!StringUtils.hasText(ddragon.getBaseUrl())) {
 			context.disableDefaultConstraintViolation();
 			context.buildConstraintViolationWithTemplate("Base URL must not be empty for Data Dragon API")
 					.addConstraintViolation();
 			return false;
 		}
-		if (StringUtils.isEmpty(ddragon.getLocale())) {
+		if (!StringUtils.hasText(ddragon.getLocale())) {
 			context.disableDefaultConstraintViolation();
 			context.buildConstraintViolationWithTemplate("Locale must not be empty for Data Dragon API")
 					.addConstraintViolation();
 			return false;
 		}
-		if (StringUtils.isEmpty(ddragon.getChampions())) {
+		if (!StringUtils.hasText(ddragon.getChampions())) {
 			context.disableDefaultConstraintViolation();
 			context.buildConstraintViolationWithTemplate("Champions URL must not be empty for Data Dragon API")
 					.addConstraintViolation();
 			return false;
 		}
-		if (StringUtils.isEmpty(ddragon.getChampion())) {
+		if (!StringUtils.hasText(ddragon.getChampion())) {
 			context.disableDefaultConstraintViolation();
 			context.buildConstraintViolationWithTemplate("Champion URL must not be empty for Data Dragon API")
 					.addConstraintViolation();
 			return false;
 		}
-		if (StringUtils.isEmpty(ddragon.getItems())) {
+		if (!StringUtils.hasText(ddragon.getItems())) {
 			context.disableDefaultConstraintViolation();
 			context.buildConstraintViolationWithTemplate("Items URL must not be empty for Data Dragon API")
 					.addConstraintViolation();
 			return false;
 		}
-		if (StringUtils.isEmpty(ddragon.getMaps())) {
+		if (!StringUtils.hasText(ddragon.getMaps())) {
 			context.disableDefaultConstraintViolation();
 			context.buildConstraintViolationWithTemplate("Maps URL must not be empty for Data Dragon API")
 					.addConstraintViolation();
 			return false;
 		}
-		if (StringUtils.isEmpty(ddragon.getSummonerSpells())) {
+		if (!StringUtils.hasText(ddragon.getSummonerSpells())) {
 			context.disableDefaultConstraintViolation();
 			context.buildConstraintViolationWithTemplate("Summoner Spells URL must not be empty for Data Dragon API")
 					.addConstraintViolation();
@@ -89,37 +89,37 @@ public class ValidRiotApiPropertiesConstraintValidator implements ConstraintVali
 	 * @return {@code true} whether valid, otherwise {@code false}
 	 */
 	private boolean validateImgs(Ddragon ddragon, ConstraintValidatorContext context) {
-		if (StringUtils.isEmpty(ddragon.getChampionsImg())) {
+		if (!StringUtils.hasText(ddragon.getChampionsImg())) {
 			context.disableDefaultConstraintViolation();
 			context.buildConstraintViolationWithTemplate("Champions Image URL must not be empty")
 					.addConstraintViolation();
 			return false;
 		}
-		if (StringUtils.isEmpty(ddragon.getChampionsSpellImg())) {
+		if (!StringUtils.hasText(ddragon.getChampionsSpellImg())) {
 			context.disableDefaultConstraintViolation();
 			context.buildConstraintViolationWithTemplate("Champions Spell Image URL must not be empty")
 					.addConstraintViolation();
 			return false;
 		}
-		if (StringUtils.isEmpty(ddragon.getChampionsPassiveImg())) {
+		if (!StringUtils.hasText(ddragon.getChampionsPassiveImg())) {
 			context.disableDefaultConstraintViolation();
 			context.buildConstraintViolationWithTemplate("Champions Passive Image URL must not be empty")
 					.addConstraintViolation();
 			return false;
 		}
-		if (StringUtils.isEmpty(ddragon.getItemsImg())) {
+		if (!StringUtils.hasText(ddragon.getItemsImg())) {
 			context.disableDefaultConstraintViolation();
 			context.buildConstraintViolationWithTemplate("Items Image URL must not be empty")
 					.addConstraintViolation();
 			return false;
 		}
-		if (StringUtils.isEmpty(ddragon.getMapsImg())) {
+		if (!StringUtils.hasText(ddragon.getMapsImg())) {
 			context.disableDefaultConstraintViolation();
 			context.buildConstraintViolationWithTemplate("Maps Image URL must not be empty")
 					.addConstraintViolation();
 			return false;
 		}
-		if (StringUtils.isEmpty(ddragon.getSummonerSpellsImg())) {
+		if (!StringUtils.hasText(ddragon.getSummonerSpellsImg())) {
 			context.disableDefaultConstraintViolation();
 			context.buildConstraintViolationWithTemplate("Summoner Spells Image URL must not be empty")
 					.addConstraintViolation();
