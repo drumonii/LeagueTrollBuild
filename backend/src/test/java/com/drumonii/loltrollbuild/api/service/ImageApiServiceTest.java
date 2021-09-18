@@ -26,7 +26,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 import java.util.function.Consumer;
 
-import static com.drumonii.loltrollbuild.config.Profiles.DDRAGON;
 import static com.drumonii.loltrollbuild.config.Profiles.TESTING;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
@@ -35,7 +34,7 @@ import static org.assertj.core.api.Assertions.fail;
 @Transactional
 @AutoConfigureDataJpa
 @Import(JpaConfig.class)
-@ActiveProfiles({ TESTING, DDRAGON })
+@ActiveProfiles({ TESTING })
 class ImageApiServiceTest {
 
     @Autowired

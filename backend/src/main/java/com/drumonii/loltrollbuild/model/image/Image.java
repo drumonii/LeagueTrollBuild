@@ -14,35 +14,35 @@ import java.util.Objects;
 public class Image implements Serializable {
 
 	@Column(name = "IMG_FULL", unique = true, nullable = false)
-	@JsonProperty("full")
+	@JsonProperty
 	private String full;
 
 	@Column(name = "SPRITE", nullable = false)
-	@JsonProperty("sprite")
+	@JsonProperty
 	private String sprite;
 
 	@Column(name = "IMG_GROUP", nullable = false)
-	@JsonProperty("group")
+	@JsonProperty
 	private String group;
 
 	@Column(name = "IMG_SRC", columnDefinition = "BYTEA", nullable = false)
-	@JsonProperty("imgSrc")
+	@JsonProperty
 	private byte[] imgSrc = new byte[0];
 
 	@Column(name = "X", nullable = false)
-	@JsonProperty("x")
+	@JsonProperty
 	private int x;
 
 	@Column(name = "Y", nullable = false)
-	@JsonProperty("y")
+	@JsonProperty
 	private int y;
 
 	@Column(name = "W", nullable = false)
-	@JsonProperty("w")
+	@JsonProperty
 	private int w;
 
 	@Column(name = "H", nullable = false)
-	@JsonProperty("h")
+	@JsonProperty
 	private int h;
 
 	public Image() {}

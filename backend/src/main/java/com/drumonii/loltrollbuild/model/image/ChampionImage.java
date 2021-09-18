@@ -39,6 +39,7 @@ public class ChampionImage extends Image implements Serializable {
 
 	public void setChampion(Champion champion) {
 		this.champion = champion;
+		setId(champion.getId());
 	}
 
 	@Override

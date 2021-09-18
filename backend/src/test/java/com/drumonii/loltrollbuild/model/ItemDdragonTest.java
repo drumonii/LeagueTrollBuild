@@ -10,18 +10,15 @@ import org.springframework.boot.test.autoconfigure.json.JsonTest;
 import org.springframework.boot.test.json.JacksonTester;
 import org.springframework.boot.test.json.JsonContent;
 import org.springframework.boot.test.json.ObjectContent;
-import org.springframework.test.context.ActiveProfiles;
 
 import java.io.IOException;
 import java.util.AbstractMap.SimpleEntry;
 
-import static com.drumonii.loltrollbuild.config.Profiles.DDRAGON;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.entry;
 import static org.assertj.core.api.Fail.fail;
 
 @JsonTest
-@ActiveProfiles({ DDRAGON })
 class ItemDdragonTest {
 
 	@Autowired
@@ -66,8 +63,12 @@ class ItemDdragonTest {
 			fail("Unable to serialize Item into JSON", e);
 		}
 
-		assertThat(jsonContent).hasJsonPathNumberValue("$.id");
-		assertThat(jsonContent).hasJsonPathStringValue("name");
+		assertThat(jsonContent).hasJsonPathNumberValue("$.id")
+				.extractingJsonPathNumberValue("$.id")
+				.isEqualTo(1011);
+		assertThat(jsonContent).hasJsonPathStringValue("name")
+				.extractingJsonPathStringValue("$.name")
+				.isEqualTo("Giant's Belt");
 		assertThat(jsonContent).hasJsonPathStringValue("description");
 		assertThat(jsonContent).hasJsonPathMapValue("$.image");
 		assertThat(jsonContent).hasJsonPathMapValue("$.gold");

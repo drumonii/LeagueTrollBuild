@@ -21,7 +21,6 @@ import org.springframework.test.context.ActiveProfiles;
 import java.util.ArrayList;
 
 import static com.drumonii.loltrollbuild.batch.scheduling.RetrievalJobsScheduling.LATEST_PATCH_KEY;
-import static com.drumonii.loltrollbuild.config.Profiles.DDRAGON;
 import static com.drumonii.loltrollbuild.config.Profiles.TESTING;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
@@ -30,7 +29,7 @@ import static org.mockito.BDDMockito.given;
 
 @BatchTest({ AllRetrievalsJobConfig.class, ChampionsRetrievalJobConfig.class, ItemsRetrievalJobConfig.class,
 		MapsRetrievalJobConfig.class, SummonerSpellsRetrievalJobConfig.class, VersionsRetrievalJobConfig.class })
-@ActiveProfiles({ TESTING, DDRAGON })
+@ActiveProfiles({ TESTING })
 class AllRetrievalsJobConfigTest {
 
 	@MockBean

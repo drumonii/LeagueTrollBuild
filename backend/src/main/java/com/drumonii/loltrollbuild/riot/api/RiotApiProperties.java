@@ -1,19 +1,24 @@
 package com.drumonii.loltrollbuild.riot.api;
 
-import com.drumonii.loltrollbuild.constraint.ValidRiotApiProperties;
+import org.hibernate.validator.constraints.URL;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.NestedConfigurationProperty;
 import org.springframework.validation.annotation.Validated;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import java.util.Locale;
 
 /**
  * Configuration properties for Riot's API found in config/application.yml of the resources folder.
  */
 @Validated
-@ValidRiotApiProperties
 @ConfigurationProperties(prefix = "riot")
 public class RiotApiProperties {
 
 	@NestedConfigurationProperty
+	@Valid
 	private Ddragon ddragon;
 
 	public Ddragon getDdragon() {
@@ -25,24 +30,51 @@ public class RiotApiProperties {
 	}
 
 	/**
-	 * Configuration for Riot's Data Dragon, a web service that is meant to centralize League of Legends game
-	 * data.
+	 * Configuration for Riot's Data Dragon, a web service that is meant to centralize League of Legends game data.
 	 */
 	public static class Ddragon {
 
+		@NotEmpty
+		@URL
 		private String baseUrl;
-		private String locale;
+
+		@NotNull
+		private Locale locale;
+
+		@NotEmpty
 		private String champions;
+
+		@NotEmpty
 		private String champion;
+
+		@NotEmpty
 		private String championsImg;
+
+		@NotEmpty
 		private String championsSpellImg;
+
+		@NotEmpty
 		private String championsPassiveImg;
+
+		@NotEmpty
 		private String items;
+
+		@NotEmpty
 		private String itemsImg;
+
+		@NotEmpty
 		private String maps;
+
+		@NotEmpty
 		private String mapsImg;
+
+		@NotEmpty
 		private String summonerSpells;
+
+		@NotEmpty
 		private String summonerSpellsImg;
+
+		@NotEmpty
 		private String versions;
 
 		public String getBaseUrl() {
@@ -53,11 +85,11 @@ public class RiotApiProperties {
 			this.baseUrl = baseUrl;
 		}
 
-		public String getLocale() {
+		public Locale getLocale() {
 			return locale;
 		}
 
-		public void setLocale(String locale) {
+		public void setLocale(Locale locale) {
 			this.locale = locale;
 		}
 

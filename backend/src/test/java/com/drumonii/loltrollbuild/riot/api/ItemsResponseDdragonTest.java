@@ -6,17 +6,14 @@ import org.springframework.boot.test.autoconfigure.json.JsonTest;
 import org.springframework.boot.test.json.JacksonTester;
 import org.springframework.boot.test.json.JsonContent;
 import org.springframework.boot.test.json.ObjectContent;
-import org.springframework.test.context.ActiveProfiles;
 
 import java.io.IOException;
 import java.util.LinkedHashMap;
 
-import static com.drumonii.loltrollbuild.config.Profiles.DDRAGON;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Fail.fail;
 
 @JsonTest
-@ActiveProfiles({ DDRAGON })
 class ItemsResponseDdragonTest {
 
     @Autowired

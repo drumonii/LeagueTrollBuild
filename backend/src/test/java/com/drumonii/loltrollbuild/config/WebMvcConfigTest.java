@@ -21,12 +21,11 @@ import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
 
 import java.util.Map;
 
-import static com.drumonii.loltrollbuild.config.Profiles.DDRAGON;
 import static com.drumonii.loltrollbuild.config.Profiles.TESTING;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-@ActiveProfiles({ TESTING, DDRAGON })
+@ActiveProfiles({ TESTING })
 class WebMvcConfigTest {
 
     @Autowired

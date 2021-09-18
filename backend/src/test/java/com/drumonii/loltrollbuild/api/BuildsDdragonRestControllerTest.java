@@ -6,11 +6,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.springframework.test.context.ActiveProfiles;
 
-import static com.drumonii.loltrollbuild.config.Profiles.DDRAGON;
 import static com.drumonii.loltrollbuild.config.Profiles.TESTING;
 import static com.drumonii.loltrollbuild.util.GameMapUtil.SUMMONERS_RIFT_SID;
 
-@ActiveProfiles({ TESTING, DDRAGON })
+@ActiveProfiles({ TESTING })
 @Disabled
 class BuildsDdragonRestControllerTest extends BuildsRestControllerTest {
 

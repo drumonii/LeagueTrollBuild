@@ -47,7 +47,7 @@ spring:
   # Jackson
   jackson:
     deserialization:
-      fail_on_unknown_properties: false
+      read_unknown_enum_values_using_default_value: true
   # JPA
   jpa:
     open-in-view: false

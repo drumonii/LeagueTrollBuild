@@ -6,10 +6,9 @@ import com.drumonii.loltrollbuild.test.json.JsonTestFilesUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.test.context.ActiveProfiles;
 
-import static com.drumonii.loltrollbuild.config.Profiles.DDRAGON;
 import static com.drumonii.loltrollbuild.config.Profiles.TESTING;
 
-@ActiveProfiles({ TESTING, DDRAGON })
+@ActiveProfiles({ TESTING })
 class ChampionsDdragonRestControllerTest extends ChampionsRestControllerTest {
 
 	@BeforeEach

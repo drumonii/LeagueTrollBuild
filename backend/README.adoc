@@ -16,17 +16,12 @@ Development profile that also uses PostgreSQL with the url: `jdbc:postgresql://l
 test::
 Testing profile for https://junit.org/junit5/docs/current/user-guide/[JUnit 5] tests using H2.
 
-In addition, there is one included Riot API profile:
-
-ddragon::
-Data Dragon
-
 To override an active profile, set the `spring.profiles.active` argument property such as:
 
  -Dspring.profiles.active=dev
 
-Or using the environment variable `SPRING_PROFILES_ACTIVE`. Otherwise, if a profile is not specified, the `external`
-and `ddragon` profiles will be active.
+Or by using the environment variable `SPRING_PROFILES_ACTIVE`.
+Otherwise, if a profile is not specified, the `external` profile will be active.
 
 == Running the Backend locally
 Create a run config that uses the `LeagueTrollBuildApplication` main class

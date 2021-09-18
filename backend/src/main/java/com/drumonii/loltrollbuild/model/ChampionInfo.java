@@ -23,22 +23,22 @@ public class ChampionInfo implements Serializable {
 	private int id;
 
 	@Column(name = "ATTACK", nullable = false)
-	@JsonProperty("attack")
+	@JsonProperty
 	@JsonView({ ApiViews.AllApis.class })
 	private int attack;
 
 	@Column(name = "DEFENSE", nullable = false)
-	@JsonProperty("defense")
+	@JsonProperty
 	@JsonView({ ApiViews.AllApis.class })
 	private int defense;
 
 	@Column(name = "MAGIC", nullable = false)
-	@JsonProperty("magic")
+	@JsonProperty
 	@JsonView({ ApiViews.AllApis.class })
 	private int magic;
 
 	@Column(name = "DIFFICULTY", nullable = false)
-	@JsonProperty("difficulty")
+	@JsonProperty
 	@JsonView({ ApiViews.AllApis.class })
 	private int difficulty;
 
@@ -93,6 +93,7 @@ public class ChampionInfo implements Serializable {
 
 	public void setChampion(Champion champion) {
 		this.champion = champion;
+		setId(champion.getId());
 	}
 
 	@Override

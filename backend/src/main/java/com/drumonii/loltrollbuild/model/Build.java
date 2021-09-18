@@ -29,134 +29,134 @@ public class Build implements Serializable, Validator {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "BUILD_SEQ")
     @SequenceGenerator(name = "BUILD_SEQ", sequenceName = "BUILD_SEQ", allocationSize = 1)
     @Column(name = "ID", unique = true, nullable = false)
-    @JsonProperty("id")
+    @JsonProperty
     @JsonView({ ApiViews.LtbApi.class })
     private int id;
 
     @NotNull
     @Column(name = "CHAMPION_ID", nullable = false)
-    @JsonProperty("championId")
+    @JsonProperty
     @JsonView({ ApiViews.LtbApi.class })
     private Integer championId;
 
     @NotNull
     @Column(name = "ITEM_1_ID", nullable = false)
-    @JsonProperty("item1Id")
+    @JsonProperty
     @JsonView({ ApiViews.LtbApi.class })
     private Integer item1Id;
 
     @NotNull
     @Column(name = "ITEM_2_ID", nullable = false)
-    @JsonProperty("item2Id")
+    @JsonProperty
     @JsonView({ ApiViews.LtbApi.class })
     private Integer item2Id;
 
     @NotNull
     @Column(name = "ITEM_3_ID", nullable = false)
-    @JsonProperty("item3Id")
+    @JsonProperty
     @JsonView({ ApiViews.LtbApi.class })
     private Integer item3Id;
 
     @NotNull
     @Column(name = "ITEM_4_ID", nullable = false)
-    @JsonProperty("item4Id")
+    @JsonProperty
     @JsonView({ ApiViews.LtbApi.class })
     private Integer item4Id;
 
     @NotNull
     @Column(name = "ITEM_5_ID", nullable = false)
-    @JsonProperty("item5Id")
+    @JsonProperty
     @JsonView({ ApiViews.LtbApi.class })
     private Integer item5Id;
 
     @NotNull
     @Column(name = "ITEM_6_ID", nullable = false)
-    @JsonProperty("item6Id")
+    @JsonProperty
     @JsonView({ ApiViews.LtbApi.class })
     private Integer item6Id;
 
     @NotNull
     @Column(name = "SUMMONER_SPELL_1_ID", nullable = false)
-    @JsonProperty("summonerSpell1Id")
+    @JsonProperty
     @JsonView({ ApiViews.LtbApi.class })
     private Integer summonerSpell1Id;
 
     @NotNull
     @Column(name = "SUMMONER_SPELL_2_ID", nullable = false)
-    @JsonProperty("summonerSpell2Id")
+    @JsonProperty
     @JsonView({ ApiViews.LtbApi.class })
     private Integer summonerSpell2Id;
 
     @NotNull
     @Column(name = "TRINKET_ID")
-    @JsonProperty("trinketId")
+    @JsonProperty
     @JsonView({ ApiViews.LtbApi.class })
     private Integer trinketId;
 
     @NotNull
     @Column(name = "MAP_ID", nullable = false)
-    @JsonProperty("mapId")
+    @JsonProperty
     @JsonView({ ApiViews.LtbApi.class })
     private Integer mapId;
 
     @Column(name = "CREATED_DATE", nullable = false)
     @CreatedDate
-    @JsonProperty("createdDate")
+    @JsonProperty
     @JsonView({ ApiViews.LtbApi.class })
     private LocalDateTime createdDate;
 
     @Transient
-	@JsonProperty("champion")
+	@JsonProperty
     @JsonView({ ApiViews.LtbApi.class })
     private Champion champion;
 
     @Transient
-	@JsonProperty("item1")
+	@JsonProperty
     @JsonView({ ApiViews.LtbApi.class })
     private Item item1;
 
     @Transient
-	@JsonProperty("item2")
+	@JsonProperty
     @JsonView({ ApiViews.LtbApi.class })
     private Item item2;
 
     @Transient
-	@JsonProperty("item3")
+	@JsonProperty
     @JsonView({ ApiViews.LtbApi.class })
     private Item item3;
 
     @Transient
-	@JsonProperty("item4")
+	@JsonProperty
     @JsonView({ ApiViews.LtbApi.class })
     private Item item4;
 
     @Transient
-	@JsonProperty("item5")
+	@JsonProperty
     @JsonView({ ApiViews.LtbApi.class })
     private Item item5;
 
     @Transient
-	@JsonProperty("item6")
+	@JsonProperty
     @JsonView({ ApiViews.LtbApi.class })
     private Item item6;
 
     @Transient
-	@JsonProperty("summonerSpell1")
+	@JsonProperty
     @JsonView({ ApiViews.LtbApi.class })
     private SummonerSpell summonerSpell1;
 
     @Transient
-	@JsonProperty("summonerSpell2")
+	@JsonProperty
     @JsonView({ ApiViews.LtbApi.class })
     private SummonerSpell summonerSpell2;
 
     @Transient
-	@JsonProperty("trinket")
+	@JsonProperty
     @JsonView({ ApiViews.LtbApi.class })
     private Item trinket;
 
     @Transient
-	@JsonProperty("map")
+	@JsonProperty
     @JsonView({ ApiViews.LtbApi.class })
     private GameMap map;
 

@@ -9,7 +9,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.test.autoconfigure.web.client.RestClientTest;
 import org.springframework.context.annotation.Import;
@@ -22,7 +21,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 
-import static com.drumonii.loltrollbuild.config.Profiles.DDRAGON;
 import static com.drumonii.loltrollbuild.config.Profiles.TESTING;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.client.ExpectedCount.never;
@@ -34,7 +32,7 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 @RestClientTest({ SummonerSpellsService.class, VersionsService.class })
 @Import(RiotApiConfig.class)
 @EnableConfigurationProperties(RiotApiProperties.class)
-@ActiveProfiles({ TESTING, DDRAGON })
+@ActiveProfiles({ TESTING })
 class SummonerSpellsDdragonServiceTest {
 
 	@Autowired
@@ -53,9 +51,6 @@ class SummonerSpellsDdragonServiceTest {
 
 	@Autowired
 	private ObjectMapper objectMapper;
-
-	@Value("${riot.ddragon.locale}")
-	private String locale;
 
 	private String summonerSpellsJson;
 	private String versionsJson;
@@ -84,7 +79,7 @@ class SummonerSpellsDdragonServiceTest {
 
 		@Test
 		void fromVersion() {
-			mockServer.expect(requestTo(summonerSpellsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
+			mockServer.expect(requestTo(summonerSpellsUri.buildAndExpand(latestVersion.getPatch()).toString()))
 					.andExpect(method(HttpMethod.GET))
 					.andRespond(withSuccess(summonerSpellsJson, MediaType.APPLICATION_JSON));
 
@@ -96,7 +91,7 @@ class SummonerSpellsDdragonServiceTest {
 
 		@Test
 		void fromVersionWithRestClientException() {
-			mockServer.expect(requestTo(summonerSpellsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
+			mockServer.expect(requestTo(summonerSpellsUri.buildAndExpand(latestVersion.getPatch()).toString()))
 					.andExpect(method(HttpMethod.GET))
 					.andRespond(withServerError());
 
@@ -120,7 +115,7 @@ class SummonerSpellsDdragonServiceTest {
 					.andExpect(method(HttpMethod.GET))
 					.andRespond(withSuccess(versionsJson, MediaType.parseMediaType("text/json;charset=UTF-8")));
 
-			mockServer.expect(requestTo(summonerSpellsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
+			mockServer.expect(requestTo(summonerSpellsUri.buildAndExpand(latestVersion.getPatch()).toString()))
 					.andExpect(method(HttpMethod.GET))
 					.andRespond(withSuccess(summonerSpellsJson, MediaType.APPLICATION_JSON));
 
@@ -138,7 +133,7 @@ class SummonerSpellsDdragonServiceTest {
 					.andExpect(method(HttpMethod.GET))
 					.andRespond(withSuccess(versionsJson, MediaType.parseMediaType("text/json;charset=UTF-8")));
 
-			mockServer.expect(requestTo(summonerSpellsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
+			mockServer.expect(requestTo(summonerSpellsUri.buildAndExpand(latestVersion.getPatch()).toString()))
 					.andExpect(method(HttpMethod.GET))
 					.andRespond(withServerError());
 
@@ -156,7 +151,7 @@ class SummonerSpellsDdragonServiceTest {
 					.andExpect(method(HttpMethod.GET))
 					.andRespond(withServerError());
 
-			mockServer.expect(never(), requestTo(summonerSpellsUri.buildAndExpand(latestVersion.getPatch(), locale).toString()))
+			mockServer.expect(never(), requestTo(summonerSpellsUri.buildAndExpand(latestVersion.getPatch()).toString()))
 					.andExpect(method(HttpMethod.GET));
 
 			SummonerSpell summonerSpell = summonerSpellsService.getSummonerSpell(smiteId);

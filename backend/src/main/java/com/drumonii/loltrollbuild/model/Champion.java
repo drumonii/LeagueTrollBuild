@@ -1,18 +1,15 @@
 package com.drumonii.loltrollbuild.model;
 
-import com.drumonii.loltrollbuild.model.image.ChampionImage;
 import com.drumonii.loltrollbuild.api.view.ApiViews;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonView;
+import com.drumonii.loltrollbuild.model.image.ChampionImage;
+import com.fasterxml.jackson.annotation.*;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.*;
 import javax.persistence.Version;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -32,8 +29,6 @@ public class Champion implements Serializable {
 
 	@Id
 	@Column(name = "ID", unique = true, nullable = false)
-	@JsonProperty("id")
-	@JsonView({ ApiViews.AllApis.class })
 	private int id;
 
 	@Version
@@ -42,42 +37,40 @@ public class Champion implements Serializable {
 	private Long version;
 
 	@Column(name = "CHAMPION_KEY", nullable = false)
-	@JsonProperty("key")
-	@JsonView({ ApiViews.AllApis.class })
 	private String key;
 
 	@Column(name = "NAME", nullable = false)
-	@JsonProperty("name")
+	@JsonProperty
 	@JsonView({ ApiViews.AllApis.class })
 	private String name;
 
 	@Column(name = "TITLE", nullable = false)
-	@JsonProperty("title")
+	@JsonProperty
 	@JsonView({ ApiViews.AllApis.class })
 	private String title;
 
 	@Column(name = "PARTYPE", nullable = false)
-	@JsonProperty("partype")
+	@JsonProperty
 	@JsonView({ ApiViews.AllApis.class })
 	private String partype;
 
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "champion")
 	@JsonManagedReference
-	@JsonProperty("info")
-	@JsonView({ ApiViews.RiotApi.class })
+	@JsonProperty
+	@JsonView({ ApiViews.RiotDdragonApi.class })
 	private ChampionInfo info;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "champion")
 	@Fetch(FetchMode.SELECT)
 	@JsonManagedReference
-	@JsonProperty("spells")
-	@JsonView({ ApiViews.RiotApi.class })
+	@JsonProperty
+	@JsonView({ ApiViews.RiotDdragonApi.class })
 	private List<ChampionSpell> spells;
 
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "champion")
 	@JsonManagedReference
-	@JsonProperty("passive")
-	@JsonView({ ApiViews.RiotApi.class })
+	@JsonProperty
+	@JsonView({ ApiViews.RiotDdragonApi.class })
 	private ChampionPassive passive;
 
 	@Column(name = "LAST_MODIFIED_DATE", nullable = false)
@@ -87,22 +80,26 @@ public class Champion implements Serializable {
 
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "champion")
 	@JsonManagedReference
-	@JsonProperty("image")
-	@JsonView({ ApiViews.RiotApi.class })
+	@JsonProperty
+	@JsonView({ ApiViews.RiotDdragonApi.class })
 	private ChampionImage image;
 
 	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "CHAMPION_TAG", joinColumns = @JoinColumn(name = "CHAMPION_ID"))
 	@Column(name = "TAG")
 	@OrderBy("TAG ASC")
-	@JsonProperty("tags")
+	@JsonProperty
 	@JsonView({ ApiViews.AllApis.class })
 	private SortedSet<String> tags;
 
+	@JsonGetter("id")
+	@JsonView({ ApiViews.AllApis.class })
 	public int getId() {
 		return id;
 	}
 
+	@JsonSetter("key")
+	@JsonView({ ApiViews.AllApis.class })
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -115,10 +112,14 @@ public class Champion implements Serializable {
 		this.version = version;
 	}
 
+	@JsonGetter("key")
+	@JsonView({ ApiViews.AllApis.class })
 	public String getKey() {
 		return key;
 	}
 
+	@JsonSetter("id")
+	@JsonView({ ApiViews.AllApis.class })
 	public void setKey(String key) {
 		this.key = key;
 	}
@@ -199,17 +200,23 @@ public class Champion implements Serializable {
 
 	@PostPersist
 	public void postPersist() {
-		spells = new ArrayList<>(spells);
+		if (spells != null) {
+			spells = new ArrayList<>(spells);
+		}
 	}
 
 	@PostLoad
 	public void postLoad() {
-		spells = new ArrayList<>(spells);
+		if (spells != null) {
+			spells = new ArrayList<>(spells);
+		}
 	}
 
 	@PostUpdate
 	public void postUpdate() {
-		spells = new ArrayList<>(spells);
+		if (spells != null) {
+			spells = new ArrayList<>(spells);
+		}
 	}
 
 	@Override

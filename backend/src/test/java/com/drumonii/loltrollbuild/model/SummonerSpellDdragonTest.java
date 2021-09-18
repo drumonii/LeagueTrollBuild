@@ -10,16 +10,13 @@ import org.springframework.boot.test.autoconfigure.json.JsonTest;
 import org.springframework.boot.test.json.JacksonTester;
 import org.springframework.boot.test.json.JsonContent;
 import org.springframework.boot.test.json.ObjectContent;
-import org.springframework.test.context.ActiveProfiles;
 
 import java.io.IOException;
 
-import static com.drumonii.loltrollbuild.config.Profiles.DDRAGON;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Fail.fail;
 
 @JsonTest
-@ActiveProfiles({ DDRAGON })
 class SummonerSpellDdragonTest {
 
 	@Autowired
@@ -54,8 +51,12 @@ class SummonerSpellDdragonTest {
 			fail("Unable to serialize Summoner Spell into JSON", e);
 		}
 
-		assertThat(jsonContent).hasJsonPathNumberValue("$.id");
-		assertThat(jsonContent).hasJsonPathStringValue("$.key");
+		assertThat(jsonContent).hasJsonPathNumberValue("$.id")
+				.extractingJsonPathNumberValue("$.id")
+				.isEqualTo(1);
+		assertThat(jsonContent).hasJsonPathStringValue("$.key")
+				.extractingJsonPathStringValue("$.key")
+				.isEqualTo("SummonerBoost");
 		assertThat(jsonContent).hasJsonPathStringValue("$.name");
 		assertThat(jsonContent).hasJsonPathStringValue("$.description");
 		assertThat(jsonContent).hasJsonPathMapValue("$.image");
@@ -145,7 +146,7 @@ class SummonerSpellDdragonTest {
 		assertThat(summonerSpell.getObject().getImage().getH()).isEqualTo(48);
 		assertThat(summonerSpell.getObject().getCooldown()).containsOnly(180);
 		assertThat(summonerSpell.getObject().getModes())
-				.containsExactly(GameMode.ARAM, GameMode.CLASSIC, GameMode.TUTORIAL);
+				.containsExactly(GameMode.ARAM, GameMode.CLASSIC, GameMode.TUTORIAL, GameMode.OTHER);
 	}
 
 }

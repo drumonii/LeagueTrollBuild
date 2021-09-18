@@ -2,22 +2,20 @@ package com.drumonii.loltrollbuild.model;
 
 import com.drumonii.loltrollbuild.model.builder.*;
 import com.drumonii.loltrollbuild.model.image.ChampionImage;
+import com.drumonii.loltrollbuild.model.image.ChampionSpellImage;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.json.JsonTest;
 import org.springframework.boot.test.json.JacksonTester;
 import org.springframework.boot.test.json.JsonContent;
 import org.springframework.boot.test.json.ObjectContent;
-import org.springframework.test.context.ActiveProfiles;
 
 import java.io.IOException;
 
-import static com.drumonii.loltrollbuild.config.Profiles.DDRAGON;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Fail.fail;
 
 @JsonTest
-@ActiveProfiles({ DDRAGON })
 class ChampionDdragonTest {
 
 	@Autowired
@@ -92,8 +90,12 @@ class ChampionDdragonTest {
 			fail("Unable to serialize Champion into JSON", e);
 		}
 
-		assertThat(jsonContent).hasJsonPathNumberValue("$.id");
-		assertThat(jsonContent).hasJsonPathStringValue("$.key");
+		assertThat(jsonContent).hasJsonPathNumberValue("$.id")
+				.extractingJsonPathNumberValue("$.id")
+				.isEqualTo(37);
+		assertThat(jsonContent).hasJsonPathStringValue("$.key")
+				.extractingJsonPathStringValue("$.key")
+				.isEqualTo("Sona");
 		assertThat(jsonContent).hasJsonPathStringValue("$.name");
 		assertThat(jsonContent).hasJsonPathStringValue("$.title");
 		assertThat(jsonContent).hasJsonPathStringValue("$.partype");
@@ -244,6 +246,7 @@ class ChampionDdragonTest {
 		assertThat(champion.getObject().getPassive().getName()).isEqualTo("Relentless Assault");
 		assertThat(champion.getObject().getPassive().getDescription()).isEqualTo("Jax's consecutive basic attacks continuously increase his Attack Speed.");
 		assertThat(champion.getObject().getPassive().getImage()).isNotNull();
+		assertThat(champion.getObject().getPassive().getImage().getId()).isEqualTo(24);
 		assertThat(champion.getObject().getPassive().getImage().getFull()).isEqualTo("Armsmaster_MasterOfArms.png");
 		assertThat(champion.getObject().getPassive().getImage().getSprite()).isEqualTo("passive1.png");
 		assertThat(champion.getObject().getPassive().getImage().getGroup()).isEqualTo("passive");
@@ -253,6 +256,8 @@ class ChampionDdragonTest {
 		assertThat(champion.getObject().getPassive().getImage().getH()).isEqualTo(48);
 		assertThat(champion.getObject().getSpells()).hasSize(4);
 		assertThat(champion.getObject().getSpells()).extracting(ChampionSpell::getImage).hasSize(4);
+		assertThat(champion.getObject().getSpells()).extracting(ChampionSpell::getImage)
+				.flatExtracting(ChampionSpellImage::getKey).doesNotHaveDuplicates();
 	}
 
 }

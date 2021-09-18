@@ -1,6 +1,5 @@
 package com.drumonii.loltrollbuild.riot.service;
 
-import com.drumonii.loltrollbuild.config.Profiles.Ddragon;
 import com.drumonii.loltrollbuild.model.Champion;
 import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.riot.api.ChampionsResponse;
@@ -8,7 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
@@ -22,7 +20,6 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-@Ddragon
 public class ChampionsDdragonService implements ChampionsService {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ChampionsDdragonService.class);
@@ -41,9 +38,6 @@ public class ChampionsDdragonService implements ChampionsService {
 	@Autowired
 	private VersionsService versionsService;
 
-	@Value("${riot.ddragon.locale}")
-	private String locale;
-
 	@Override
 	public List<Champion> getChampions(Version version) {
 		LOGGER.info("Getting Champions from Riot");
@@ -57,7 +51,7 @@ public class ChampionsDdragonService implements ChampionsService {
 
 	private ChampionsResponse getChampionsResponse(Version version) {
 		try {
-			return restTemplate.getForObject(championsUri.buildAndExpand(version.getPatch(), locale).toString(),
+			return restTemplate.getForObject(championsUri.buildAndExpand(version.getPatch()).toString(),
 					ChampionsResponse.class);
 		} catch (RestClientException e) {
 			LOGGER.warn("Unable to retrieve Champions from Data Dragon due to:", e);
@@ -84,7 +78,7 @@ public class ChampionsDdragonService implements ChampionsService {
 
 	private Champion getChampion(Version version, String key) {
 		LOGGER.info("Getting Champion {} from Riot", key);
-		UriComponents uriComponents = championUri.buildAndExpand(version.getPatch(), locale, key);
+		UriComponents uriComponents = championUri.buildAndExpand(version.getPatch(), key);
 		try {
 			ChampionsResponse response = restTemplate.getForObject(uriComponents.toString(), ChampionsResponse.class);
 			return response.getChampions().get(key);

@@ -1,6 +1,5 @@
 package com.drumonii.loltrollbuild.riot.service;
 
-import com.drumonii.loltrollbuild.config.Profiles.Ddragon;
 import com.drumonii.loltrollbuild.model.Version;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +18,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@Ddragon
 public class VersionsDdragonService implements VersionsService {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(VersionsDdragonService.class);

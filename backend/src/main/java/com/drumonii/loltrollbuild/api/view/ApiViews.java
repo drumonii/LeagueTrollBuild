@@ -20,6 +20,6 @@ public interface ApiViews {
     /**
      * View applicable to only Riot's ddragon API.
      */
-    interface RiotApi extends AllApis {}
+    interface RiotDdragonApi extends AllApis {}
 
 }

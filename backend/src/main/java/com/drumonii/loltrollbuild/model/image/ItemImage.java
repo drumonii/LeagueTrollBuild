@@ -39,6 +39,13 @@ public class ItemImage extends Image implements Serializable {
 
 	public void setItem(Item item) {
 		this.item = item;
+		item.setId(id);
+	}
+
+	@Override
+	public void setFull(String full) {
+		super.setFull(full);
+		setId(Integer.parseInt(full.substring(0, full.lastIndexOf('.'))));
 	}
 
 	@Override

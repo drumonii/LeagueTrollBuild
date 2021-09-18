@@ -1,7 +1,7 @@
 package com.drumonii.loltrollbuild.model;
 
-import com.drumonii.loltrollbuild.model.image.ItemImage;
 import com.drumonii.loltrollbuild.api.view.ApiViews;
+import com.drumonii.loltrollbuild.model.image.ItemImage;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -11,14 +11,11 @@ import org.hibernate.annotations.FetchMode;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.*;
 import javax.persistence.Version;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Objects;
-import java.util.SortedMap;
-import java.util.SortedSet;
+import java.util.*;
 
 /**
  * League of Legends Item.
@@ -32,7 +29,8 @@ public class Item implements Serializable {
 
 	@Id
 	@Column(name = "ID", unique = true, nullable = false)
-	@JsonView({ ApiViews.AllApis.class })
+	@JsonProperty
+	@JsonView({ ApiViews.LtbApi.class })
 	private int id;
 
 	@Version
@@ -41,22 +39,22 @@ public class Item implements Serializable {
 	private Long version;
 
 	@Column(name = "NAME")
-	@JsonProperty("name")
+	@JsonProperty
 	@JsonView({ ApiViews.AllApis.class })
 	private String name;
 
 	@Column(name = "ITEM_GROUP")
-	@JsonProperty("group")
+	@JsonProperty
 	@JsonView({ ApiViews.AllApis.class })
 	private String group;
 
 	@Column(name = "CONSUMED")
-	@JsonProperty("consumed")
+	@JsonProperty
 	@JsonView({ ApiViews.AllApis.class })
 	private Boolean consumed;
 
 	@Column(name = "DESCRIPTION")
-	@JsonProperty("description")
+	@JsonProperty
 	@JsonView({ ApiViews.AllApis.class })
 	private String description;
 
@@ -65,7 +63,7 @@ public class Item implements Serializable {
 	@Fetch(FetchMode.SELECT)
 	@Column(name = "ITEM_FROM")
 	@OrderBy("ITEM_FROM ASC")
-	@JsonProperty("from")
+	@JsonProperty
 	@JsonView({ ApiViews.AllApis.class })
 	private List<Integer> from;
 
@@ -73,17 +71,17 @@ public class Item implements Serializable {
 	@CollectionTable(name = "ITEM_INTO", joinColumns = @JoinColumn(name = "ITEM_ID"))
 	@Column(name = "ITEM_INTO")
 	@OrderBy("ITEM_INTO ASC")
-	@JsonProperty("into")
+	@JsonProperty
 	@JsonView({ ApiViews.AllApis.class })
 	private SortedSet<Integer> into;
 
 	@Column(name = "REQUIRED_CHAMPION")
-	@JsonProperty("requiredChampion")
+	@JsonProperty
 	@JsonView({ ApiViews.AllApis.class })
 	private String requiredChampion;
 
 	@Column(name = "REQUIRED_ALLY")
-	@JsonProperty("requiredAlly")
+	@JsonProperty
 	@JsonView({ ApiViews.AllApis.class })
 	private String requiredAlly;
 
@@ -96,8 +94,8 @@ public class Item implements Serializable {
 	@CollectionTable(name = "ITEM_TAG", joinColumns = @JoinColumn(name = "ITEM_ID"))
 	@Column(name = "TAG")
 	@OrderBy("TAG ASC")
-	@JsonProperty("tags")
-	@JsonView({ ApiViews.RiotApi.class })
+	@JsonProperty
+	@JsonView({ ApiViews.RiotDdragonApi.class })
 	private SortedSet<String> tags;
 
 	@ElementCollection(fetch = FetchType.EAGER)
@@ -105,19 +103,19 @@ public class Item implements Serializable {
 	@MapKeyColumn(name = "MAPS_KEY")
 	@Column(name = "MAP")
 	@OrderBy("MAPS_KEY ASC")
-	@JsonProperty("maps")
+	@JsonProperty
 	@JsonView({ ApiViews.AllApis.class })
 	private SortedMap<Integer, Boolean> maps;
 
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "item")
 	@JsonManagedReference
-	@JsonProperty("image")
-	@JsonView({ ApiViews.RiotApi.class })
+	@JsonProperty
+	@JsonView({ ApiViews.RiotDdragonApi.class })
 	private ItemImage image;
 
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "item")
 	@JsonManagedReference
-	@JsonProperty("gold")
+	@JsonProperty
 	@JsonView({ ApiViews.AllApis.class })
 	private ItemGold gold;
 
@@ -170,6 +168,9 @@ public class Item implements Serializable {
 	}
 
 	public List<Integer> getFrom() {
+		if (from == null) {
+			from = new ArrayList<>();
+		}
 		return from;
 	}
 
@@ -178,6 +179,9 @@ public class Item implements Serializable {
 	}
 
 	public SortedSet<Integer> getInto() {
+		if (into == null) {
+			into = new TreeSet<>();
+		}
 		return into;
 	}
 

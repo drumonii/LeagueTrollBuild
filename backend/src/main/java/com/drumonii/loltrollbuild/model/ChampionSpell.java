@@ -1,11 +1,8 @@
 package com.drumonii.loltrollbuild.model;
 
-import com.drumonii.loltrollbuild.model.image.ChampionSpellImage;
 import com.drumonii.loltrollbuild.api.view.ApiViews;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonView;
+import com.drumonii.loltrollbuild.model.image.ChampionSpellImage;
+import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -20,29 +17,30 @@ public class ChampionSpell implements Serializable {
 
 	@Id
 	@Column(name = "KEY", unique = true, nullable = false)
-	@JsonProperty("key")
+	@JsonProperty
+	@JsonAlias("id")
 	@JsonView({ ApiViews.AllApis.class })
 	private String key;
 
 	@Column(name = "NAME", nullable = false)
-	@JsonProperty("name")
+	@JsonProperty
 	@JsonView({ ApiViews.AllApis.class })
 	private String name;
 
 	@Column(name = "DESCRIPTION", nullable = false)
-	@JsonProperty("description")
+	@JsonProperty
 	@JsonView({ ApiViews.AllApis.class })
 	private String description;
 
 	@Column(name = "TOOLTIP", nullable = false)
-	@JsonProperty("tooltip")
+	@JsonProperty
 	@JsonView({ ApiViews.AllApis.class })
 	private String tooltip = "";
 
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "spell")
 	@JsonManagedReference
-	@JsonProperty("image")
-	@JsonView({ ApiViews.RiotApi.class })
+	@JsonProperty
+	@JsonView({ ApiViews.RiotDdragonApi.class })
 	private ChampionSpellImage image;
 
 	@ManyToOne(optional = false)

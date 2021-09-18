@@ -26,15 +26,6 @@ public class Profiles {
 	 */
 	public static final String EXTERNAL = "external";
 
-	/*
-	 * Riot API profiles
-	 */
-
-	/**
-	 * Profile for using Riot's {@code Data Dragon} API.
-	 */
-	public static final String DDRAGON = "ddragon";
-
 	/**
 	 * Profile for local development.
 	 */
@@ -97,19 +88,6 @@ public class Profiles {
 	@Retention(RetentionPolicy.RUNTIME)
 	@Profile(value = EXTERNAL)
 	public @interface External {
-	}
-
-	/*
-	 * Riot API profiles
-	 */
-
-	/**
-	 * Indicates a {@code Data Dragon} API profile.
-	 */
-	@Target(ElementType.TYPE)
-	@Retention(RetentionPolicy.RUNTIME)
-	@Profile(value = DDRAGON)
-	public @interface Ddragon {
 	}
 
 }

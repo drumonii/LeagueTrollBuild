@@ -1,6 +1,5 @@
 package com.drumonii.loltrollbuild.riot.service;
 
-import com.drumonii.loltrollbuild.config.Profiles.Ddragon;
 import com.drumonii.loltrollbuild.model.SummonerSpell;
 import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.riot.api.SummonerSpellsResponse;
@@ -8,7 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
@@ -19,7 +17,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Ddragon
 public class SummonerSpellsDdragonService implements SummonerSpellsService {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(SummonerSpellsDdragonService.class);
@@ -34,15 +31,12 @@ public class SummonerSpellsDdragonService implements SummonerSpellsService {
 	@Autowired
 	private VersionsService versionsService;
 
-	@Value("${riot.ddragon.locale}")
-	private String locale;
-
 	@Override
 	public List<SummonerSpell> getSummonerSpells(Version version) {
 		LOGGER.info("Getting Summoner Spells from Riot");
 		SummonerSpellsResponse response;
 		try {
-			response = restTemplate.getForObject(summonerSpellsUri.buildAndExpand(version.getPatch(), locale).toString(),
+			response = restTemplate.getForObject(summonerSpellsUri.buildAndExpand(version.getPatch()).toString(),
 					SummonerSpellsResponse.class);
 		} catch (RestClientException e) {
 			LOGGER.warn("Unable to retrieve Summoner Spells from Data Dragon due to:", e);

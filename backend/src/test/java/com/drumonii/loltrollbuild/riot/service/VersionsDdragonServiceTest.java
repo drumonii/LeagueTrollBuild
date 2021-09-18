@@ -19,7 +19,6 @@ import org.springframework.web.util.UriComponents;
 
 import java.util.List;
 
-import static com.drumonii.loltrollbuild.config.Profiles.DDRAGON;
 import static com.drumonii.loltrollbuild.config.Profiles.TESTING;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
@@ -30,7 +29,7 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 @RestClientTest(VersionsService.class)
 @Import(RiotApiConfig.class)
 @EnableConfigurationProperties(RiotApiProperties.class)
-@ActiveProfiles({ TESTING, DDRAGON })
+@ActiveProfiles({ TESTING })
 class VersionsDdragonServiceTest {
 
 	@Autowired

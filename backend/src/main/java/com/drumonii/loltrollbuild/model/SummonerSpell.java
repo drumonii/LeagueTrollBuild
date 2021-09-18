@@ -1,16 +1,13 @@
 package com.drumonii.loltrollbuild.model;
 
-import com.drumonii.loltrollbuild.model.image.SummonerSpellImage;
 import com.drumonii.loltrollbuild.api.view.ApiViews;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonView;
+import com.drumonii.loltrollbuild.model.image.SummonerSpellImage;
+import com.fasterxml.jackson.annotation.*;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.*;
 import javax.persistence.Version;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -28,8 +25,6 @@ public class SummonerSpell implements Serializable {
 
 	@Id
 	@Column(name = "ID", unique = true, nullable = false)
-	@JsonProperty("id")
-	@JsonView({ ApiViews.AllApis.class })
 	private int id;
 
 	@Version
@@ -38,12 +33,12 @@ public class SummonerSpell implements Serializable {
 	private Long version;
 
 	@Column(name = "NAME", nullable = false)
-	@JsonProperty("name")
+	@JsonProperty
 	@JsonView({ ApiViews.AllApis.class })
 	private String name;
 
 	@Column(name = "DESCRIPTION", nullable = false)
-	@JsonProperty("description")
+	@JsonProperty
 	@JsonView({ ApiViews.AllApis.class })
 	private String description;
 
@@ -54,21 +49,19 @@ public class SummonerSpell implements Serializable {
 
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "summonerSpell")
 	@JsonManagedReference
-	@JsonProperty("image")
-	@JsonView({ ApiViews.RiotApi.class })
+	@JsonProperty
+	@JsonView({ ApiViews.RiotDdragonApi.class })
 	private SummonerSpellImage image;
 
 	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "SUMMONER_SPELL_COOLDOWN", joinColumns = @JoinColumn(name = "SUMMONER_SPELL_ID"))
 	@Column(name = "COOLDOWN")
 	@OrderBy("COOLDOWN ASC")
-	@JsonProperty("cooldown")
+	@JsonProperty
 	@JsonView({ ApiViews.AllApis.class })
 	private SortedSet<Integer> cooldown;
 
 	@Column(name = "KEY", nullable = false)
-	@JsonProperty("key")
-	@JsonView({ ApiViews.AllApis.class })
 	private String key;
 
 	@ElementCollection(fetch = FetchType.EAGER)
@@ -76,14 +69,18 @@ public class SummonerSpell implements Serializable {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "MODE")
 	@OrderBy("MODE ASC")
-	@JsonProperty("modes")
+	@JsonProperty
 	@JsonView({ ApiViews.AllApis.class })
 	private SortedSet<GameMode> modes;
 
+	@JsonGetter("id")
+	@JsonView({ ApiViews.AllApis.class })
 	public int getId() {
 		return id;
 	}
 
+	@JsonSetter("key")
+	@JsonView({ ApiViews.AllApis.class })
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -136,10 +133,14 @@ public class SummonerSpell implements Serializable {
 		this.cooldown = cooldown;
 	}
 
+	@JsonGetter("key")
+	@JsonView({ ApiViews.AllApis.class })
 	public String getKey() {
 		return key;
 	}
 
+	@JsonSetter("id")
+	@JsonView({ ApiViews.AllApis.class })
 	public void setKey(String key) {
 		this.key = key;
 	}
@@ -154,7 +155,12 @@ public class SummonerSpell implements Serializable {
 
 	public enum GameMode {
 
-		ARAM, CLASSIC, TUTORIAL
+		ARAM,
+		CLASSIC,
+		TUTORIAL,
+
+		@JsonEnumDefaultValue
+		OTHER
 
 	}
 

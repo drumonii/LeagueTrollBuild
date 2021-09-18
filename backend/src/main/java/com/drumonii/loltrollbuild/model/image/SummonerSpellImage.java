@@ -39,6 +39,7 @@ public class SummonerSpellImage extends Image implements Serializable {
 
 	public void setSummonerSpell(SummonerSpell summonerSpell) {
 		this.summonerSpell = summonerSpell;
+		setId(summonerSpell.getId());
 	}
 
 	@Override

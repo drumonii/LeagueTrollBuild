@@ -40,19 +40,19 @@ public class Version implements Serializable, Comparable<Version> {
 
 	@Id
 	@Column(name = "PATCH", nullable = false)
-	@JsonProperty("patch")
+	@JsonProperty
 	private String patch;
 
 	@Column(name = "MAJOR", nullable = false)
-	@JsonProperty("major")
+	@JsonProperty
 	private int major;
 
 	@Column(name = "MINOR", nullable = false)
-	@JsonProperty("minor")
+	@JsonProperty
 	private int minor;
 
 	@Column(name = "REVISION", nullable = false)
-	@JsonProperty("revision")
+	@JsonProperty
 	private int revision;
 
 	public String getPatch() {

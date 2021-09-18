@@ -40,6 +40,7 @@ public class ChampionSpellImage extends Image implements Serializable {
 
 	public void setSpell(ChampionSpell spell) {
 		this.spell = spell;
+		setKey(spell.getKey());
 	}
 
 	@Override

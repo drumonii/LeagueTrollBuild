@@ -10,16 +10,13 @@ import org.springframework.boot.test.autoconfigure.json.JsonTest;
 import org.springframework.boot.test.json.JacksonTester;
 import org.springframework.boot.test.json.JsonContent;
 import org.springframework.boot.test.json.ObjectContent;
-import org.springframework.test.context.ActiveProfiles;
 
 import java.io.IOException;
 
-import static com.drumonii.loltrollbuild.config.Profiles.DDRAGON;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Fail.fail;
 
 @JsonTest
-@ActiveProfiles({ DDRAGON })
 class GameMapDdragonTest {
 
 	@Autowired
@@ -50,8 +47,12 @@ class GameMapDdragonTest {
 			fail("Unable to serialize Game Map into JSON", e);
 		}
 
-		assertThat(jsonContent).hasJsonPathNumberValue("$.mapId");
-		assertThat(jsonContent).hasJsonPathStringValue("$.mapName");
+		assertThat(jsonContent).hasJsonPathNumberValue("$.mapId")
+				.extractingJsonPathNumberValue("$.mapId")
+				.isEqualTo(10);
+		assertThat(jsonContent).hasJsonPathStringValue("$.mapName")
+				.extractingJsonPathStringValue("$.mapName")
+				.isEqualTo("The Twisted Treeline");
 		assertThat(jsonContent).hasJsonPathMapValue("$.image");
 	}
 
@@ -59,13 +60,13 @@ class GameMapDdragonTest {
 	void deserializesFromJson() {
 		String json =
 				"{" +
-				"  \"MapName\": \"SummonersRiftNew\"," +
+				"  \"MapName\": \"Summoner's Rift\"," +
 				"  \"MapId\": \"11\"," +
 				"  \"image\": {" +
 				"    \"full\": \"map11.png\"," +
 				"    \"sprite\": \"map0.png\"," +
 				"    \"group\": \"map\"," +
-				"    \"x\": 192," +
+				"    \"x\": 0," +
 				"    \"y\": 0," +
 				"    \"w\": 48," +
 				"    \"h\": 48" +
@@ -87,7 +88,7 @@ class GameMapDdragonTest {
 		assertThat(map.getObject().getImage().getFull()).isEqualTo("map11.png");
 		assertThat(map.getObject().getImage().getSprite()).isEqualTo("map0.png");
 		assertThat(map.getObject().getImage().getGroup()).isEqualTo("map");
-		assertThat(map.getObject().getImage().getX()).isEqualTo(192);
+		assertThat(map.getObject().getImage().getX()).isEqualTo(0);
 		assertThat(map.getObject().getImage().getY()).isEqualTo(0);
 		assertThat(map.getObject().getImage().getW()).isEqualTo(48);
 		assertThat(map.getObject().getImage().getH()).isEqualTo(48);

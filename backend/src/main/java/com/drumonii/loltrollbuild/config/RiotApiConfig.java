@@ -1,6 +1,5 @@
 package com.drumonii.loltrollbuild.config;
 
-import com.drumonii.loltrollbuild.config.Profiles.Ddragon;
 import com.drumonii.loltrollbuild.riot.api.RiotApiProperties;
 import com.drumonii.loltrollbuild.riot.api.RiotClientHttpRequestInterceptor;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -24,171 +23,116 @@ import java.util.Arrays;
 @EnableConfigurationProperties(RiotApiProperties.class)
 public class RiotApiConfig {
 
-	/**
-	 * Configuration for the {@code Ddragon} {@link UriComponentsBuilder}s.
-	 */
-	@Configuration
-	@Ddragon
-	static class DdragonConfig {
+	private final RiotApiProperties.Ddragon ddragon;
 
-		private final RiotApiProperties riotProperties;
-
-		public DdragonConfig(RiotApiProperties riotProperties) {
-			this.riotProperties = riotProperties;
-		}
-
-		@Bean
-		public RestTemplate restTemplate(RestTemplateBuilder builder, ObjectMapper objectMapper) {
-			MappingJackson2HttpMessageConverter textJsonMappingJackson2HttpMessageConverter =
-					new MappingJackson2HttpMessageConverter(objectMapper);
-			textJsonMappingJackson2HttpMessageConverter.setSupportedMediaTypes(Arrays.asList(
-					MediaType.APPLICATION_JSON, MediaType.APPLICATION_OCTET_STREAM,
-					MediaType.parseMediaType("binary/octet-stream"), MediaType.parseMediaType("text/json;charset=UTF-8")));
-			return builder
-					.additionalMessageConverters(textJsonMappingJackson2HttpMessageConverter)
-					.additionalInterceptors(new RiotClientHttpRequestInterceptor())
-					.build();
-		}
-
-		/*
-	     * Summoner Spells Uri Components
-	     */
-
-		@Bean
-		@Qualifier("summonerSpells")
-		public UriComponentsBuilder summonerSpellsUri() {
-			return UriComponentsBuilder.fromHttpUrl(riotProperties.getDdragon().getBaseUrl())
-					.path(riotProperties.getDdragon().getSummonerSpells());
-		}
-
-		/*
-		 * Items Uri Components
-		 */
-
-		@Bean
-		@Qualifier("items")
-		public UriComponentsBuilder itemsUri() {
-			return UriComponentsBuilder.fromHttpUrl(riotProperties.getDdragon().getBaseUrl())
-					.path(riotProperties.getDdragon().getItems());
-		}
-
-		/*
-		 * Champions Uri Components
-		 */
-
-		@Bean
-		@Qualifier("champions")
-		public UriComponentsBuilder championsUri() {
-			return UriComponentsBuilder.fromHttpUrl(riotProperties.getDdragon().getBaseUrl())
-					.path(riotProperties.getDdragon().getChampions());
-		}
-
-		/*
-		 * Champions Uri Components
-		 */
-
-		@Bean
-		@Qualifier("champion")
-		public UriComponentsBuilder championUri() {
-			return UriComponentsBuilder.fromHttpUrl(riotProperties.getDdragon().getBaseUrl())
-					.path(riotProperties.getDdragon().getChampion());
-		}
-
-		/*
-		 * Maps Uri Components
-		 */
-
-		@Bean
-		@Qualifier("maps")
-		public UriComponentsBuilder mapsUri() {
-			return UriComponentsBuilder.fromHttpUrl(riotProperties.getDdragon().getBaseUrl())
-					.path(riotProperties.getDdragon().getMaps());
-		}
-
-		/*
-		 * Versions Uri Components
-		 */
-
-		@Bean
-		@Qualifier("versions")
-		public UriComponents versionsUri() {
-			return UriComponentsBuilder.fromHttpUrl(riotProperties.getDdragon().getBaseUrl())
-					.path(riotProperties.getDdragon().getVersions())
-					.buildAndExpand();
-		}
-
+	public RiotApiConfig(RiotApiProperties riotProperties) {
+		this.ddragon = riotProperties.getDdragon();
 	}
 
-	/**
-	 * Configuration for Data Dragon image {@link UriComponentsBuilder}.
+	@Bean
+	public RestTemplate restTemplate(RestTemplateBuilder builder, ObjectMapper objectMapper) {
+		MappingJackson2HttpMessageConverter textJsonMappingJackson2HttpMessageConverter =
+				new MappingJackson2HttpMessageConverter(objectMapper);
+		textJsonMappingJackson2HttpMessageConverter.setSupportedMediaTypes(Arrays.asList(
+				MediaType.APPLICATION_JSON, MediaType.APPLICATION_OCTET_STREAM,
+				MediaType.parseMediaType("binary/octet-stream"), MediaType.parseMediaType("text/json;charset=UTF-8")));
+		return builder
+				.additionalMessageConverters(textJsonMappingJackson2HttpMessageConverter)
+				.additionalInterceptors(new RiotClientHttpRequestInterceptor())
+				.build();
+	}
+
+	/*
+	 * JSON Uri Components
 	 */
-	@Configuration
-	static class DdragonImgConfig {
 
-		private final RiotApiProperties riotProperties;
+	@Bean
+	@Qualifier("summonerSpells")
+	public UriComponentsBuilder summonerSpellsUri() {
+		return UriComponentsBuilder.fromHttpUrl(ddragon.getBaseUrl())
+				.path(ddragon.getSummonerSpells().replace("{locale}", ddragon.getLocale().toString()));
+	}
 
-		public DdragonImgConfig(RiotApiProperties riotProperties) {
-			this.riotProperties = riotProperties;
-		}
+	@Bean
+	@Qualifier("items")
+	public UriComponentsBuilder itemsUri() {
+		return UriComponentsBuilder.fromHttpUrl(ddragon.getBaseUrl())
+				.path(ddragon.getItems().replace("{locale}", ddragon.getLocale().toString()));
+	}
 
-		/*
-	     * Summoner Spells Img Uri Components
-	     */
+	@Bean
+	@Qualifier("champions")
+	public UriComponentsBuilder championsUri() {
+		return UriComponentsBuilder.fromHttpUrl(ddragon.getBaseUrl())
+				.path(ddragon.getChampions().replace("{locale}", ddragon.getLocale().toString()));
+	}
 
-		@Bean
-		@Qualifier("summonerSpellsImg")
-		public UriComponentsBuilder summonerSpellImgUri() {
-			return UriComponentsBuilder.fromHttpUrl(riotProperties.getDdragon().getBaseUrl())
-					.path(riotProperties.getDdragon().getSummonerSpellsImg());
-		}
+	@Bean
+	@Qualifier("champion")
+	public UriComponentsBuilder championUri() {
+		return UriComponentsBuilder.fromHttpUrl(ddragon.getBaseUrl())
+				.path(ddragon.getChampion().replace("{locale}", ddragon.getLocale().toString()));
+	}
 
-		/*
-		 * Items Img Uri Components
-		 */
+	@Bean
+	@Qualifier("maps")
+	public UriComponentsBuilder mapsUri() {
+		return UriComponentsBuilder.fromHttpUrl(ddragon.getBaseUrl())
+				.path(ddragon.getMaps().replace("{locale}", ddragon.getLocale().toString()));
+	}
 
-		@Bean
-		@Qualifier("itemsImg")
-		public UriComponentsBuilder itemsImgUri() {
-			return UriComponentsBuilder.fromHttpUrl(riotProperties.getDdragon().getBaseUrl())
-					.path(riotProperties.getDdragon().getItemsImg());
-		}
+	@Bean
+	@Qualifier("versions")
+	public UriComponents versionsUri() {
+		return UriComponentsBuilder.fromHttpUrl(ddragon.getBaseUrl())
+				.path(ddragon.getVersions())
+				.buildAndExpand();
+	}
 
-		/*
-		 * Champions Uri Components
-		 */
+	/*
+	 * Image Uri Components
+	 */
 
-		@Bean
-		@Qualifier("championsImg")
-		public UriComponentsBuilder championsImgUri() {
-			return UriComponentsBuilder.fromHttpUrl(riotProperties.getDdragon().getBaseUrl())
-					.path(riotProperties.getDdragon().getChampionsImg());
-		}
+	@Bean
+	@Qualifier("summonerSpellsImg")
+	public UriComponentsBuilder summonerSpellImgUri() {
+		return UriComponentsBuilder.fromHttpUrl(ddragon.getBaseUrl())
+				.path(ddragon.getSummonerSpellsImg());
+	}
 
-		@Bean
-		@Qualifier("championsSpellImg")
-		public UriComponentsBuilder championsSpellImgUri() {
-			return UriComponentsBuilder.fromHttpUrl(riotProperties.getDdragon().getBaseUrl())
-					.path(riotProperties.getDdragon().getChampionsSpellImg());
-		}
+	@Bean
+	@Qualifier("itemsImg")
+	public UriComponentsBuilder itemsImgUri() {
+		return UriComponentsBuilder.fromHttpUrl(ddragon.getBaseUrl())
+				.path(ddragon.getItemsImg());
+	}
 
-		@Bean
-		@Qualifier("championsPassiveImg")
-		public UriComponentsBuilder championsPassiveImgUri() {
-			return UriComponentsBuilder.fromHttpUrl(riotProperties.getDdragon().getBaseUrl())
-					.path(riotProperties.getDdragon().getChampionsPassiveImg());
-		}
+	@Bean
+	@Qualifier("championsImg")
+	public UriComponentsBuilder championsImgUri() {
+		return UriComponentsBuilder.fromHttpUrl(ddragon.getBaseUrl())
+				.path(ddragon.getChampionsImg());
+	}
 
-		/*
-		 * Maps Uri Components
-		 */
+	@Bean
+	@Qualifier("championsSpellImg")
+	public UriComponentsBuilder championsSpellImgUri() {
+		return UriComponentsBuilder.fromHttpUrl(ddragon.getBaseUrl())
+				.path(ddragon.getChampionsSpellImg());
+	}
 
-		@Bean
-		@Qualifier("mapsImg")
-		public UriComponentsBuilder mapsImgUri() {
-			return UriComponentsBuilder.fromHttpUrl(riotProperties.getDdragon().getBaseUrl())
-					.path(riotProperties.getDdragon().getMapsImg());
-		}
+	@Bean
+	@Qualifier("championsPassiveImg")
+	public UriComponentsBuilder championsPassiveImgUri() {
+		return UriComponentsBuilder.fromHttpUrl(ddragon.getBaseUrl())
+				.path(ddragon.getChampionsPassiveImg());
+	}
 
+	@Bean
+	@Qualifier("mapsImg")
+	public UriComponentsBuilder mapsImgUri() {
+		return UriComponentsBuilder.fromHttpUrl(ddragon.getBaseUrl())
+				.path(ddragon.getMapsImg());
 	}
 
 }

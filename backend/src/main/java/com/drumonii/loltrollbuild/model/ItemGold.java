@@ -24,19 +24,19 @@ public class ItemGold implements Serializable {
     private int id;
 
     @Column(name = "BASE", nullable = false)
-    @JsonProperty("base")
+    @JsonProperty
     private int base;
 
     @Column(name = "TOTAL", nullable = false)
-    @JsonProperty("total")
+    @JsonProperty
     private int total;
 
     @Column(name = "SELL", nullable = false)
-    @JsonProperty("sell")
+    @JsonProperty
     private int sell;
 
     @Column(name = "PURCHASABLE", nullable = false)
-    @JsonProperty("purchasable")
+    @JsonProperty
     private boolean purchasable;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
@@ -90,6 +90,7 @@ public class ItemGold implements Serializable {
 
     public void setItem(Item item) {
         this.item = item;
+        setId(item.getId());
     }
 
     @Override

@@ -7,10 +7,9 @@ import org.springframework.test.context.ActiveProfiles;
 
 import java.util.List;
 
-import static com.drumonii.loltrollbuild.config.Profiles.DDRAGON;
 import static com.drumonii.loltrollbuild.config.Profiles.TESTING;
 
-@ActiveProfiles({ TESTING, DDRAGON })
+@ActiveProfiles({ TESTING })
 class MapsDdragonRetrievalJobConfigTest extends MapsRetrievalJobConfigTest {
 
 	@BeforeEach

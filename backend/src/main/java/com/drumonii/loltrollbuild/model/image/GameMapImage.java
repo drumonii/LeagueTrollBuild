@@ -39,6 +39,7 @@ public class GameMapImage extends Image implements Serializable {
 
 	public void setMap(GameMap map) {
 		this.map = map;
+		setId(map.getMapId());
 	}
 
 	@Override

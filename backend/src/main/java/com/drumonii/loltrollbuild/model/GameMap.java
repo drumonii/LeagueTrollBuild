@@ -1,16 +1,13 @@
 package com.drumonii.loltrollbuild.model;
 
-import com.drumonii.loltrollbuild.model.image.GameMapImage;
 import com.drumonii.loltrollbuild.api.view.ApiViews;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonView;
+import com.drumonii.loltrollbuild.model.image.GameMapImage;
+import com.fasterxml.jackson.annotation.*;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.*;
 import javax.persistence.Version;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Map;
@@ -29,7 +26,8 @@ public class GameMap implements Serializable {
 
 	@Id
 	@Column(name = "ID", unique = true, nullable = false)
-	@JsonProperty("mapId")
+	@JsonProperty
+	@JsonAlias("MapId")
 	@JsonView({ ApiViews.AllApis.class })
 	private int mapId;
 
@@ -39,7 +37,8 @@ public class GameMap implements Serializable {
 	private Long version;
 
 	@Column(name = "NAME", nullable = false)
-	@JsonProperty("mapName")
+	@JsonProperty
+	@JsonAlias("MapName")
 	@JsonView({ ApiViews.AllApis.class })
 	private String mapName;
 
@@ -50,8 +49,8 @@ public class GameMap implements Serializable {
 
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "map")
 	@JsonManagedReference
-	@JsonProperty("image")
-	@JsonView({ ApiViews.RiotApi.class })
+	@JsonProperty
+	@JsonView({ ApiViews.RiotDdragonApi.class })
 	private GameMapImage image;
 
 	public int getMapId() {
