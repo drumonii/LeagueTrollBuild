@@ -112,7 +112,7 @@ function gitCommit(version) {
   console.log(`committing changes with message: '${commitMsg}'`);
 
   execSync('git reset'); // unstage any extraneous changes. commit only package json and gradle props files
-  execSync(`git add ${config.packageJson.file} ${config.packageJsonLock.file} ${config.gradleProperties.file}`);
+  execSync(`git add "${config.packageJson.file}" "${config.packageJsonLock.file}" "${config.gradleProperties.file}"`);
   execSync(`git commit -m "${commitMsg}"`);
 }
 
