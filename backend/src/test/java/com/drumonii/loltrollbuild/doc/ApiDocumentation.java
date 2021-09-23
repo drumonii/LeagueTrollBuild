@@ -17,17 +17,20 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
+import org.springframework.restdocs.payload.FieldDescriptor;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static com.drumonii.loltrollbuild.config.Profiles.TESTING;
 import static com.drumonii.loltrollbuild.util.GameMapUtil.HOWLING_ABYSS_SID;
 import static com.drumonii.loltrollbuild.util.GameMapUtil.SUMMONERS_RIFT_SID;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
-import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
-import static org.springframework.restdocs.payload.PayloadDocumentation.relaxedResponseFields;
+import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.restdocs.request.RequestDocumentation.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -84,25 +87,33 @@ class ApiDocumentation {
 	 * Summoner Spells doc
 	 */
 
+	FieldDescriptor[] summonerSpellFields = new FieldDescriptor[] {
+			fieldWithPath("id")
+					.description("The Id of the Summoner Spell"),
+			fieldWithPath("name")
+					.description("The name of the Summoner Spell"),
+			fieldWithPath("description")
+					.description("The description of the Summoner Spell"),
+			fieldWithPath("cooldown")
+					.description("An array of cooldown values of the Summoner Spell"),
+			fieldWithPath("key")
+					.description("The key of the Summoner Spell"),
+			fieldWithPath("modes")
+					.description("An array of game modes eligible with the Summoner Spell")
+	};
+
 	@Test
 	void getSummonerSpells() throws Exception {
 		summonerSpellsRepository.save(summonerSpellsResponse.getSummonerSpells().get("SummonerExhaust"));
 
 		mockMvc.perform(get("/api/summoner-spells"))
 				.andExpect(status().isOk())
-				.andDo(document("getSummonerSpells", relaxedResponseFields(
-						fieldWithPath("[*].id")
-								.description("The Id of the Summoner Spell"),
-						fieldWithPath("[*].name")
-								.description("The name of the Summoner Spell"),
-						fieldWithPath("[*].description")
-								.description("The description of the Summoner Spell"),
-						fieldWithPath("[*].cooldown")
-								.description("An array of cooldown values of the Summoner Spell"),
-						fieldWithPath("[*].key")
-								.description("The key of the Summoner Spell"),
-						fieldWithPath("[*].modes")
-								.description("An array of game modes eligible with the Summoner Spell"))));
+				.andDo(document("getSummonerSpells",
+						responseFields(
+								fieldWithPath("[]").description("An array of Summoner Spells")
+						).andWithPrefix("[].", summonerSpellFields)
+					)
+				);
 	}
 
 	@Test
@@ -112,21 +123,16 @@ class ApiDocumentation {
 
 		mockMvc.perform(RestDocumentationRequestBuilders.get("/api/summoner-spells/{id}", teleport.getId()))
 				.andExpect(status().isOk())
-				.andDo(document("getSummonerSpell", pathParameters(
-						parameterWithName("id")
-								.description("The Id of the Summoner Spell")), relaxedResponseFields(
-						fieldWithPath("id")
-								.description("The Id of the Summoner Spell"),
-						fieldWithPath("name")
-								.description("The name of the Summoner Spell"),
-						fieldWithPath("description")
-								.description("The description of the Summoner Spell"),
-						fieldWithPath("cooldown")
-								.description("An array of cooldown values of the Summoner Spell"),
-						fieldWithPath("key")
-								.description("The key of the Summoner Spell"),
-						fieldWithPath("modes")
-								.description("An array of game modes eligible with the Summoner Spell"))));
+				.andDo(document("getSummonerSpell",
+						pathParameters(
+							parameterWithName("id")
+									.description("The Id of the Summoner Spell")
+						),
+						responseFields(
+								summonerSpellFields
+						)
+					)
+				);
 	}
 
 	@Test
@@ -136,24 +142,47 @@ class ApiDocumentation {
 		mockMvc.perform(get("/api/summoner-spells/for-troll-build")
 				.param("mode", "CLASSIC"))
 				.andExpect(status().isOk())
-				.andDo(document("summonerSpellsForTrollBuild", relaxedResponseFields(
-						fieldWithPath("[*].id")
-								.description("The Id of the Summoner Spell"),
-						fieldWithPath("[*].name")
-								.description("The name of the Summoner Spell"),
-						fieldWithPath("[*].description")
-								.description("The description of the Summoner Spell"),
-						fieldWithPath("[*].cooldown")
-								.description("An array of cooldown values of the Summoner Spell"),
-						fieldWithPath("[*].key")
-								.description("The key of the Summoner Spell"),
-						fieldWithPath("[*].modes")
-								.description("An array of game modes eligible with the Summoner Spell"))));
+				.andDo(document("summonerSpellsForTrollBuild",
+						requestParameters(
+								parameterWithName("mode")
+										.description("The game mode. Defaults to CLASSIC if not specified. See <<game-modes-table, Game Modes Table>> for game modes")
+										.optional()
+						),
+						responseFields(
+								fieldWithPath("[]").description("An array of Summoner Spells")
+						).andWithPrefix("[].", summonerSpellFields)
+					)
+				);
 	}
 
 	/*
 	 * Items doc
 	 */
+
+	FieldDescriptor[] itemFields = new FieldDescriptor[] {
+			fieldWithPath("id")
+					.description("The Id of the Item"),
+			fieldWithPath("name")
+					.description("The name of the Item"),
+			fieldWithPath("group")
+					.description("The group of the Item"),
+			fieldWithPath("consumed")
+					.description("Whether the Item is consumable"),
+			fieldWithPath("description")
+					.description("The group of the Item"),
+			fieldWithPath("from")
+					.description("An array of Item IDs that the Item is built from as part of the Item's recipe"),
+			fieldWithPath("into")
+					.description("An array of Item IDs that the Item builds into as part of the Item's recipe"),
+			fieldWithPath("requiredChampion")
+					.description("The required champion of the Item"),
+			fieldWithPath("requiredAlly")
+					.description("The required ally champion of the Item"),
+			subsectionWithPath("maps")
+					.description("A map of Map IDs keys and boolean values whether the Item can be purchased in the Map"),
+			subsectionWithPath("gold")
+					.description("The gold of the Item")
+	};
 
 	@Test
 	void getItems() throws Exception {
@@ -161,29 +190,12 @@ class ApiDocumentation {
 
 		mockMvc.perform(get("/api/items"))
 				.andExpect(status().isOk())
-				.andDo(document("getItems", relaxedResponseFields(
-						fieldWithPath("[*].id")
-								.description("The Id of the Item"),
-						fieldWithPath("[*].name")
-								.description("The name of the Item"),
-						fieldWithPath("[*].group")
-								.description("The group of the Item"),
-						fieldWithPath("[*].consumed")
-								.description("Whether the Item is consumable"),
-						fieldWithPath("[*].description")
-								.description("The group of the Item"),
-						fieldWithPath("[*].from")
-								.description("An array of Item IDs that the Item is built from as part of the Item's recipe"),
-						fieldWithPath("[*].into")
-								.description("An array of Item IDs that the Item builds into as part of the Item's recipe"),
-						fieldWithPath("[*].requiredChampion")
-								.description("The required champion of the Item"),
-						fieldWithPath("[*].requiredAlly")
-								.description("The required ally champion of the Item"),
-						fieldWithPath("[*].maps")
-								.description("A map of Map IDs keys and boolean values whether the Item can be purchased in the Map"),
-						fieldWithPath("[*].gold")
-								.description("The gold of the Item"))));
+				.andDo(document("getItems",
+						responseFields(
+								fieldWithPath("[]").description("An array of Items")
+						).andWithPrefix("[].", itemFields)
+					)
+				);
 	}
 
 	@Test
@@ -192,32 +204,16 @@ class ApiDocumentation {
 
 		mockMvc.perform(RestDocumentationRequestBuilders.get("/api/items/{id}", warmogs.getId()))
 				.andExpect(status().isOk())
-				.andDo(document("getItem", pathParameters(
-						parameterWithName("id")
-								.description("The Id of the Item")), relaxedResponseFields(
-						fieldWithPath("id")
-								.description("The Id of the Item"),
-						fieldWithPath("name")
-								.description("The name of the Item"),
-						fieldWithPath("group")
-								.description("The group of the Item"),
-						fieldWithPath("consumed")
-								.description("Whether the Item is consumable"),
-						fieldWithPath("description")
-								.description("The group of the Item"),
-						fieldWithPath("from")
-								.description("An array of Item IDs that the Item is built from as part of the Item's recipe"),
-						fieldWithPath("into")
-								.description("An array of Item IDs that the Item builds into as part of the Item's recipe"),
-						fieldWithPath("requiredChampion")
-								.description("The required champion of the Item"),
-						fieldWithPath("requiredAlly")
-								.description("The required ally champion of the Item"),
-						fieldWithPath("maps")
-								.description("A map of Map IDs keys and boolean values whether the Item can be purchased in the Map"),
-						fieldWithPath("gold")
-								.description("The gold of the Item"))));
-
+				.andDo(document("getItem",
+						pathParameters(
+							parameterWithName("id")
+									.description("The Id of the Item")
+						),
+						responseFields(
+								itemFields
+						)
+					)
+				);
 	}
 
 	@Test
@@ -227,29 +223,33 @@ class ApiDocumentation {
 		mockMvc.perform(get("/api/items/boots")
 				.param("mapId", SUMMONERS_RIFT_SID))
 				.andExpect(status().isOk())
-				.andDo(document("bootsItems", relaxedResponseFields(
-						fieldWithPath("[*].id")
-								.description("The Id of the Item"),
-						fieldWithPath("[*].name")
-								.description("The name of the Item"),
-						fieldWithPath("[*].group")
-								.description("The group of the Item"),
-						fieldWithPath("[*].consumed")
-								.description("Whether the Item is consumable"),
-						fieldWithPath("[*].description")
-								.description("The group of the Item"),
-						fieldWithPath("[*].from")
-								.description("An array of Item IDs that the Item is built from as part of the Item's recipe"),
-						fieldWithPath("[*].into")
-								.description("An array of Item IDs that the Item builds into as part of the Item's recipe"),
-						fieldWithPath("[*].requiredChampion")
-								.description("The required champion of the Item"),
-						fieldWithPath("[*].requiredAlly")
-								.description("The required ally champion of the Item"),
-						fieldWithPath("[*].maps")
-								.description("A map of Map IDs keys and boolean values whether the Item can be purchased in the Map"),
-						fieldWithPath("[*].gold")
-								.description("The gold of the Item"))));
+				.andDo(document("bootsItems",
+						responseFields(
+							fieldWithPath("[].id")
+									.description("The Id of the Item"),
+							fieldWithPath("[].name")
+									.description("The name of the Item"),
+							fieldWithPath("[].group")
+									.description("The group of the Item"),
+							fieldWithPath("[].consumed")
+									.description("Whether the Item is consumable"),
+							fieldWithPath("[].description")
+									.description("The group of the Item"),
+							fieldWithPath("[].from")
+									.description("An array of Item IDs that the Item is built from as part of the Item's recipe"),
+							fieldWithPath("[].into")
+									.description("An array of Item IDs that the Item builds into as part of the Item's recipe"),
+							fieldWithPath("[].requiredChampion")
+									.description("The required champion of the Item"),
+							fieldWithPath("[].requiredAlly")
+									.description("The required ally champion of the Item"),
+							subsectionWithPath("[].maps")
+									.description("A map of Map IDs keys and boolean values whether the Item can be purchased in the Map"),
+							subsectionWithPath("[].gold")
+									.description("The gold of the Item")
+						)
+					)
+				);
 	}
 
 	@Test
@@ -259,29 +259,12 @@ class ApiDocumentation {
 		mockMvc.perform(get("/api/items/trinkets")
 				.param("mapId", SUMMONERS_RIFT_SID))
 				.andExpect(status().isOk())
-				.andDo(document("trinketItems", relaxedResponseFields(
-						fieldWithPath("[*].id")
-								.description("The ID of the Item"),
-						fieldWithPath("[*].name")
-								.description("The name of the Item"),
-						fieldWithPath("[*].group")
-								.description("The group of the Item"),
-						fieldWithPath("[*].consumed")
-								.description("Whether the Item is consumable"),
-						fieldWithPath("[*].description")
-								.description("The group of the Item"),
-						fieldWithPath("[*].from")
-								.description("An array of Item IDs that the Item is built from as part of the Item's recipe"),
-						fieldWithPath("[*].into")
-								.description("An array of Item IDs that the Item builds into as part of the Item's recipe"),
-						fieldWithPath("[*].requiredChampion")
-								.description("The required champion of the Item"),
-						fieldWithPath("[*].requiredAlly")
-								.description("The required ally champion of the Item"),
-						fieldWithPath("[*].maps")
-								.description("A map of Map IDs keys and boolean values whether the Item can be purchased in the Map"),
-						fieldWithPath("[*].gold")
-								.description("The gold of the Item"))));
+				.andDo(document("trinketItems",
+						responseFields(
+								fieldWithPath("[]").description("An array of Items")
+						).andWithPrefix("[].", itemFields)
+					)
+				);
 	}
 
 	@Test
@@ -291,34 +274,32 @@ class ApiDocumentation {
 		mockMvc.perform(get("/api/items/for-troll-build")
 				.param("mapId", SUMMONERS_RIFT_SID))
 				.andExpect(status().isOk())
-				.andDo(document("itemsForTrollBuild", relaxedResponseFields(
-						fieldWithPath("[*].id")
-								.description("The Id of the Item"),
-						fieldWithPath("[*].name")
-								.description("The name of the Item"),
-						fieldWithPath("[*].group")
-								.description("The group of the Item"),
-						fieldWithPath("[*].consumed")
-								.description("Whether the Item is consumable"),
-						fieldWithPath("[*].description")
-								.description("The group of the Item"),
-						fieldWithPath("[*].from")
-								.description("An array of Item IDs that the Item is built from as part of the Item's recipe"),
-						fieldWithPath("[*].into")
-								.description("An array of Item IDs that the Item builds into as part of the Item's recipe"),
-						fieldWithPath("[*].requiredChampion")
-								.description("The required champion of the Item"),
-						fieldWithPath("[*].requiredAlly")
-								.description("The required ally champion of the Item"),
-						fieldWithPath("[*].maps")
-								.description("A map of Map IDs keys and boolean values whether the Item can be purchased in the Map"),
-						fieldWithPath("[*].gold")
-								.description("The gold of the Item"))));
+				.andDo(document("itemsForTrollBuild",
+						responseFields(
+								fieldWithPath("[]").description("An array of Items")
+						).andWithPrefix("[].", itemFields)
+					)
+				);
 	}
 
 	/*
 	 * Champions doc
 	 */
+
+	FieldDescriptor[] championFields = new FieldDescriptor[] {
+			fieldWithPath("id")
+					.description("The Id of the Champion"),
+			fieldWithPath("key")
+					.description("The key of the Champion. Usually the same as the name"),
+			fieldWithPath("name")
+					.description("The name of the Champion"),
+			fieldWithPath("title")
+					.description("The title of the Champion"),
+			fieldWithPath("partype")
+					.description("The ability resource of the Champion"),
+			fieldWithPath("tags")
+					.description("An array of tags of the Champion")
+	};
 
 	@Test
 	void getChampions() throws Exception {
@@ -326,19 +307,12 @@ class ApiDocumentation {
 
 		mockMvc.perform(get("/api/champions"))
 				.andExpect(status().isOk())
-				.andDo(document("getChampions", relaxedResponseFields(
-						fieldWithPath("[*].id")
-								.description("The Id of the Champion"),
-						fieldWithPath("[*].key")
-								.description("The key of the Champion. Usually the same as the name"),
-						fieldWithPath("[*].name")
-								.description("The name of the Champion"),
-						fieldWithPath("[*].title")
-								.description("The title of the Champion"),
-						fieldWithPath("[*].partype")
-								.description("The ability resource of the Champion"),
-						fieldWithPath("[*].tags")
-								.description("An array of tags of the Champion"))));
+				.andDo(document("getChampions",
+						responseFields(
+								fieldWithPath("[]").description("An array of Champions")
+						).andWithPrefix("[].", championFields)
+					)
+				);
 	}
 
 	@Test
@@ -347,21 +321,16 @@ class ApiDocumentation {
 
 		mockMvc.perform(RestDocumentationRequestBuilders.get("/api/champions/{id}", talon.getId()))
 				.andExpect(status().isOk())
-				.andDo(document("getChampion", pathParameters(
-						parameterWithName("id")
-								.description("The Id of the Champion")), relaxedResponseFields(
-						fieldWithPath("id")
-								.description("The Id of the Champion"),
-						fieldWithPath("key")
-								.description("The key of the Champion. Usually the same as the name"),
-						fieldWithPath("name")
-								.description("The name of the Champion"),
-						fieldWithPath("title")
-								.description("The title of the Champion"),
-						fieldWithPath("partype")
-								.description("The ability resource of the Champion"),
-						fieldWithPath("tags")
-								.description("An array of tags of the Champion"))));
+				.andDo(document("getChampion",
+						pathParameters(
+							parameterWithName("id")
+									.description("The Id of the Champion")
+						),
+						responseFields(
+								championFields
+						)
+					)
+				);
 	}
 
 	@Test
@@ -391,27 +360,42 @@ class ApiDocumentation {
 
 		mockMvc.perform(RestDocumentationRequestBuilders.get("/api/champions/{id}/troll-build", jayce.getId()))
 				.andExpect(status().isOk())
-				.andDo(document("getTrollBuildForChampion", pathParameters(
-						parameterWithName("id")
-								.description("The Id of the Champion or the Champion name")), requestParameters(
-						parameterWithName("mapId")
-								.description("The Map Id. Defaults to Summoner's Rift if unspecified. See <<game-maps-table, Game Maps Table>> for Map IDs")
-								.optional()), relaxedResponseFields(
-						fieldWithPath("champion")
-								.description("The Champion of the Troll Build"),
-						fieldWithPath("trinket")
-								.description("The trinket of the Troll Build"),
-						fieldWithPath("summonerSpells")
-								.description("The Summoner Spells of the Troll Build"),
-						fieldWithPath("items")
-								.description("The Items of the Troll Build, with the first always a boots Item"),
-						fieldWithPath("totalGold")
-								.description("The total gold amount of the Troll Build"))));
+				.andDo(document("getTrollBuildForChampion",
+						pathParameters(
+							parameterWithName("id")
+									.description("The Id of the Champion or the Champion name")
+						),
+						requestParameters(
+							parameterWithName("mapId")
+									.description("The Map Id. Defaults to Summoner's Rift if unspecified. See <<game-maps-table, Game Maps Table>> for Map IDs")
+									.optional()
+						),
+						responseFields(
+							subsectionWithPath("champion")
+									.description("The Champion of the Troll Build"),
+							subsectionWithPath("trinket")
+									.description("The trinket of the Troll Build"),
+							subsectionWithPath("summonerSpells")
+									.description("The Summoner Spells of the Troll Build"),
+							subsectionWithPath("items")
+									.description("The Items of the Troll Build, with the first always a boots Item"),
+							subsectionWithPath("totalGold")
+									.description("The total gold amount of the Troll Build")
+						)
+					)
+				);
 	}
 
 	/*
 	 * Maps doc
 	 */
+
+	FieldDescriptor[] mapFields = new FieldDescriptor[] {
+			fieldWithPath("mapId")
+					.description("The Id of the Map"),
+			fieldWithPath("mapName")
+					.description("The name of the Map")
+	};
 
 	@Test
 	void getMaps() throws Exception {
@@ -419,11 +403,12 @@ class ApiDocumentation {
 
 		mockMvc.perform(get("/api/maps"))
 				.andExpect(status().isOk())
-				.andDo(document("getMaps", relaxedResponseFields(
-						fieldWithPath("[*].mapId")
-								.description("The Id of the Map"),
-						fieldWithPath("[*].mapName")
-								.description("The name of the Map"))));
+				.andDo(document("getMaps",
+						responseFields(
+								fieldWithPath("[]").description("An array of Game Maps")
+						).andWithPrefix("[].", mapFields)
+					)
+				);
 	}
 
 	@Test
@@ -433,18 +418,32 @@ class ApiDocumentation {
 
 		mockMvc.perform(RestDocumentationRequestBuilders.get("/api/maps/{id}", summonersRift.getMapId()))
 				.andExpect(status().isOk())
-				.andDo(document("getMap", pathParameters(
-						parameterWithName("id")
-								.description("The Id of the Map")), relaxedResponseFields(
-						fieldWithPath("mapId")
-								.description("The Id of the Map"),
-						fieldWithPath("mapName")
-								.description("The name of the Map"))));
+				.andDo(document("getMap",
+						pathParameters(
+							parameterWithName("id")
+									.description("The Id of the Map")
+						),
+						responseFields(
+								mapFields
+						)
+					)
+				);
 	}
 
 	/*
 	 * Versions doc
 	 */
+
+	FieldDescriptor[] versionFields = new FieldDescriptor[] {
+			fieldWithPath("patch")
+					.description("The patch number"),
+			fieldWithPath("major")
+					.description("The major version number of the Version"),
+			fieldWithPath("minor")
+					.description("The minor version number of the Map"),
+			fieldWithPath("revision")
+					.description("The revision version number of the Version")
+	};
 
 	@Test
 	void getVersions() throws Exception {
@@ -452,15 +451,12 @@ class ApiDocumentation {
 
 		mockMvc.perform(get("/api/versions"))
 				.andExpect(status().isOk())
-				.andDo(document("getVersions", relaxedResponseFields(
-						fieldWithPath("[*].patch")
-								.description("The patch number"),
-						fieldWithPath("[*].major")
-								.description("The major version number of the Version"),
-						fieldWithPath("[*].minor")
-								.description("The minor version number of the Map"),
-						fieldWithPath("[*].revision")
-								.description("The revision version number of the Version"))));
+				.andDo(document("getVersions",
+						responseFields(
+								fieldWithPath("[]").description("An array of Versions")
+						).andWithPrefix("[].", versionFields)
+					)
+				);
 	}
 
 	@Test
@@ -469,22 +465,75 @@ class ApiDocumentation {
 
 		mockMvc.perform(RestDocumentationRequestBuilders.get("/api/versions/{version}", version.getPatch()))
 				.andExpect(status().isOk())
-				.andDo(document("getVersion", pathParameters(
-						parameterWithName("version")
-								.description("The full patch version")), relaxedResponseFields(
-						fieldWithPath("patch")
-								.description("The patch number"),
-						fieldWithPath("major")
-								.description("The major version number of the Version"),
-						fieldWithPath("minor")
-								.description("The minor version number of the Map"),
-						fieldWithPath("revision")
-								.description("The revision version number of the Version"))));
+				.andDo(document("getVersion",
+						pathParameters(
+							parameterWithName("version")
+									.description("The full patch version")
+						),
+						responseFields(
+								versionFields
+						)
+					)
+				);
 	}
 
 	/*
 	 * Builds doc
 	 */
+
+	FieldDescriptor[] buildFields = new FieldDescriptor[] {
+			fieldWithPath("id")
+					.description("The Id of the Build"),
+			fieldWithPath("createdDate")
+					.description("The date the Build was created"),
+			fieldWithPath("championId")
+					.description("The Champion Id of the Build"),
+			fieldWithPath("item1Id")
+					.description("The Item 1 Id (boots) of the Build"),
+			fieldWithPath("item2Id")
+					.description("The Item 2 Id of the Build"),
+			fieldWithPath("item3Id")
+					.description("The Item 3 Id of the Build"),
+			fieldWithPath("item4Id")
+					.description("The Item 4 Id of the Build"),
+			fieldWithPath("item5Id")
+					.description("The Item 5 Id of the Build"),
+			fieldWithPath("item6Id")
+					.description("The Item 6 Id of the Build"),
+			fieldWithPath("summonerSpell1Id")
+					.description("The Summoner Spell 1 Id of the Build"),
+			fieldWithPath("summonerSpell2Id")
+					.description("The Summoner Spell 2 Id of the Build"),
+			fieldWithPath("trinketId")
+					.description("The Trinket Id of the Build"),
+			fieldWithPath("mapId")
+					.description("The Map Id of the Build")
+	};
+
+	FieldDescriptor[] buildDetailsFields = new FieldDescriptor[] {
+			subsectionWithPath("champion")
+					.description("The Champion of the Build"),
+			subsectionWithPath("item1")
+					.description("The Item 1 (boots) of the Build"),
+			subsectionWithPath("item2")
+					.description("The Item 2 of the Build"),
+			subsectionWithPath("item3")
+					.description("The Item 3 of the Build"),
+			subsectionWithPath("item4")
+					.description("The Item 4 of the Build"),
+			subsectionWithPath("item5")
+					.description("The Item 5 of the Build"),
+			subsectionWithPath("item6")
+					.description("The Item 6 of the Build"),
+			subsectionWithPath("summonerSpell1")
+					.description("The Summoner Spell 1 of the Build"),
+			subsectionWithPath("summonerSpell2")
+					.description("The Summoner Spell 2 of the Build"),
+			subsectionWithPath("trinket")
+					.description("The Trinket of the Build"),
+			subsectionWithPath("map")
+					.description("The Map of the Build")
+	};
 
 	@Disabled
 	@Test
@@ -492,7 +541,7 @@ class ApiDocumentation {
 		Build build = new Build();
 		build.setChampionId(championsResponse.getChampions().get("Karthus").getId());
 		build.setItem1Id(itemsResponse.getItems().get("3117").getId());
-		build.setItem2Id(itemsResponse.getItems().get("3512").getId());
+		build.setItem2Id(itemsResponse.getItems().get("3513").getId());
 		build.setItem3Id(itemsResponse.getItems().get("3135").getId());
 		build.setItem4Id(itemsResponse.getItems().get("3508").getId());
 		build.setItem5Id(itemsResponse.getItems().get("3075").getId());
@@ -503,35 +552,15 @@ class ApiDocumentation {
 		build.setMapId(mapsResponse.getMaps().get(SUMMONERS_RIFT_SID).getMapId());
 		buildsRepository.save(build);
 
-		mockMvc.perform(get("/api/builds"))
+		mockMvc.perform(RestDocumentationRequestBuilders.get("/api/builds"))
 				.andExpect(status().isOk())
-				.andDo(document("getBuilds", relaxedResponseFields(
-						fieldWithPath("content.[*].id")
-								.description("The Id of the Build"),
-						fieldWithPath("content.[*].createdDate")
-								.description("The date the Build was created"),
-						fieldWithPath("content.[*].championId")
-								.description("The Champion Id of the Build"),
-						fieldWithPath("content.[*].item1Id")
-								.description("The Item 1 Id (boots) of the Build"),
-						fieldWithPath("content.[*].item2Id")
-								.description("The Item 2 Id of the Build"),
-						fieldWithPath("content.[*].item3Id")
-								.description("The Item 3 Id of the Build"),
-						fieldWithPath("content.[*].item4Id")
-								.description("The Item 4 Id of the Build"),
-						fieldWithPath("content.[*].item5Id")
-								.description("The Item 5 Id of the Build"),
-						fieldWithPath("content.[*].item6Id")
-								.description("The Item 6 Id of the Build"),
-						fieldWithPath("content.[*].summonerSpell1Id")
-								.description("The Summoner Spell 1 Id of the Build"),
-						fieldWithPath("content.[*].summonerSpell2Id")
-								.description("The Summoner Spell 2 Id of the Build"),
-						fieldWithPath("content.[*].trinketId")
-								.description("The Trinket Id of the Build"),
-						fieldWithPath("content.[*].mapId")
-								.description("The Map Id of the Build"))));
+				.andDo(document("getBuilds",
+						relaxedResponseFields(
+								beneathPath("content"),
+								buildFields
+						).andWithPrefix("[].")
+					)
+				);
 	}
 
 	@Disabled
@@ -540,7 +569,7 @@ class ApiDocumentation {
 		Champion pantheon = championsRepository.save(championsResponse.getChampions().get("Pantheon"));
 		Item item1 = itemsRepository.save(itemsResponse.getItems().get("3091"));
 		Item item2 = itemsRepository.save(itemsResponse.getItems().get("3009"));
-		Item item3 = itemsRepository.save(itemsResponse.getItems().get("3027"));
+		Item item3 = itemsRepository.save(itemsResponse.getItems().get("3026"));
 		Item item4 = itemsRepository.save(itemsResponse.getItems().get("3050"));
 		Item item5 = itemsRepository.save(itemsResponse.getItems().get("3110"));
 		Item item6 = itemsRepository.save(itemsResponse.getItems().get("3078"));
@@ -563,37 +592,19 @@ class ApiDocumentation {
 		build.setMapId(map.getMapId());
 		build = buildsRepository.save(build);
 
-		mockMvc.perform(get("/api/builds/{id}", build.getId()))
+		mockMvc.perform(RestDocumentationRequestBuilders.get("/api/builds/{id}", build.getId()))
 				.andExpect(status().isOk())
-				.andDo(document("getBuild", pathParameters(
-						parameterWithName("id")
-								.description("The Id of the Build")), relaxedResponseFields(
-						fieldWithPath("id")
-								.description("The Id of the Build"),
-						fieldWithPath("createdDate")
-								.description("The date the Build was created"),
-						fieldWithPath("championId")
-								.description("The Champion Id of the Build"),
-						fieldWithPath("item1Id")
-								.description("The Item 1 Id (boots) of the Build"),
-						fieldWithPath("item2Id")
-								.description("The Item 2 Id of the Build"),
-						fieldWithPath("item3Id")
-								.description("The Item 3 Id of the Build"),
-						fieldWithPath("item4Id")
-								.description("The Item 4 Id of the Build"),
-						fieldWithPath("item5Id")
-								.description("The Item 5 Id of the Build"),
-						fieldWithPath("item6Id")
-								.description("The Item 6 Id of the Build"),
-						fieldWithPath("summonerSpell1Id")
-								.description("The Summoner Spell 1 Id of the Build"),
-						fieldWithPath("summonerSpell2Id")
-								.description("The Summoner Spell 2 Id of the Build"),
-						fieldWithPath("trinketId")
-								.description("The Trinket Id of the Build"),
-						fieldWithPath("mapId")
-								.description("The Map Id of the Build"))));
+				.andDo(document("getBuild",
+						pathParameters(
+							parameterWithName("id")
+									.description("The Id of the Build")
+						),
+						responseFields(
+								Stream.concat(Arrays.stream(buildFields), Arrays.stream(buildDetailsFields))
+										.collect(Collectors.toList())
+						)
+					)
+				);
 	}
 
 }
