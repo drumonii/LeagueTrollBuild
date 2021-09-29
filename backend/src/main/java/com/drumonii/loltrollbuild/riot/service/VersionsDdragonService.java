@@ -1,50 +1,45 @@
 package com.drumonii.loltrollbuild.riot.service;
 
 import com.drumonii.loltrollbuild.model.Version;
+import com.drumonii.loltrollbuild.riot.RiotApiProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestClientException;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponents;
+import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
+import reactor.core.publisher.Mono;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class VersionsDdragonService implements VersionsService {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(VersionsDdragonService.class);
 
-	@Autowired
-	private RestTemplate restTemplate;
+	private final RiotApiProperties.Ddragon ddragon;
+	private final WebClient webClient;
 
-	@Autowired
-	@Qualifier("versions")
-	private UriComponents versionsUri;
+	public VersionsDdragonService(RiotApiProperties riotProperties, WebClient webClient) {
+		this.ddragon = riotProperties.getDdragon();
+		this.webClient = webClient;
+	}
 
 	@Override
 	public List<Version> getVersions() {
 		LOGGER.info("Getting Versions from Riot");
-		List<Version> versions;
-		try {
-			versions = restTemplate.exchange(versionsUri.toString(), HttpMethod.GET, null,
-					new ParameterizedTypeReference<List<Version>>() {}).getBody();
-		} catch (RestClientException e) {
-			LOGGER.warn("Unable to retrieve Versions from Data Dragon due to:", e);
-			return new ArrayList<>();
-		}
-		versions = versions.stream()
+		return webClient.get()
+				.uri(ddragon.getVersions())
+				.retrieve()
+				.bodyToFlux(Version.class)
 				.filter(v -> v.getRevision() != 0) // filter lolpatch_7.17 style which has a 0 revision
-				.sorted(Collections.reverseOrder())
-				.collect(Collectors.toList());
-		return versions;
+				.sort(Collections.reverseOrder())
+				.collectList()
+				.onErrorResume(WebClientResponseException.class, e -> {
+					LOGGER.warn("Unable to retrieve Versions from Data Dragon due to:", e);
+					return Mono.just(Collections.emptyList());
+				})
+				.block();
 	}
 
 }

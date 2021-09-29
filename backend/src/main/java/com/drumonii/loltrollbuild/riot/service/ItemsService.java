@@ -2,6 +2,9 @@ package com.drumonii.loltrollbuild.riot.service;
 
 import com.drumonii.loltrollbuild.model.Item;
 import com.drumonii.loltrollbuild.model.Version;
+import com.drumonii.loltrollbuild.riot.api.ItemsResponse;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 
@@ -17,13 +20,5 @@ public interface ItemsService {
 	 * @return the {@link List} of {@link Item}
 	 */
 	List<Item> getItems(Version version);
-
-	/**
-	 * Returns a {@link Item} from Riot by its ID.
-	 *
-	 * @param id the ID to lookup the {@link Item} from Riot
-	 * @return the {@link Item} from Riot
-	 */
-	Item getItem(int id);
 
 }

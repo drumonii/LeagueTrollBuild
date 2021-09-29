@@ -3,63 +3,45 @@ package com.drumonii.loltrollbuild.riot.service;
 import com.drumonii.loltrollbuild.model.GameMap;
 import com.drumonii.loltrollbuild.model.Version;
 import com.drumonii.loltrollbuild.riot.api.MapsResponse;
+import com.drumonii.loltrollbuild.riot.RiotApiProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestClientException;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponentsBuilder;
+import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
+import reactor.core.publisher.Mono;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+import java.util.function.Function;
 
 @Service
 public class MapsDdragonService implements MapsService {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(MapsDdragonService.class);
 
-	@Autowired
-	private RestTemplate restTemplate;
+	private final RiotApiProperties.Ddragon ddragon;
+	private final WebClient webClient;
 
-	@Autowired
-	@Qualifier("maps")
-	private UriComponentsBuilder mapsUri;
-
-	@Autowired
-	private VersionsService versionsService;
+	public MapsDdragonService(RiotApiProperties riotProperties, WebClient webClient) {
+		this.ddragon = riotProperties.getDdragon();
+		this.webClient = webClient;
+	}
 
 	@Override
 	public List<GameMap> getMaps(Version version) {
 		LOGGER.info("Getting Maps from Riot");
-		MapsResponse response;
-		try {
-			response = restTemplate.getForObject(mapsUri.buildAndExpand(version.getPatch()).toString(),
-					MapsResponse.class);
-		} catch (RestClientException e) {
-			LOGGER.warn("Unable to retrieve Maps from Data Dragon due to:", e);
-			return new ArrayList<>();
-		}
-		return new ArrayList<>(response.getMaps().values());
-	}
-
-	private List<GameMap> getMaps() {
-		Version version = versionsService.getLatestVersion();
-		if (version == null) {
-			return new ArrayList<>();
-		}
-		return getMaps(version);
-	}
-
-	@Override
-	public GameMap getMap(int id) {
-		LOGGER.info("Getting Map with id: {} from Riot", id);
-		Optional<GameMap> map = getMaps().stream()
-				.filter(m -> m.getMapId() == id)
-				.findFirst();
-		return map.orElse(null);
+		return webClient.get()
+				.uri(ddragon.getMaps(), version.getPatch(), ddragon.getLocale())
+				.retrieve()
+				.bodyToMono(MapsResponse.class)
+				.onErrorResume(WebClientResponseException.class, e -> {
+					LOGGER.warn("Unable to retrieve Maps from Data Dragon due to:", e);
+					return Mono.just(new MapsResponse());
+				})
+				.map((Function<MapsResponse, List<GameMap>>) response ->
+						new ArrayList<>(response.getMaps().values()))
+				.block();
 	}
 
 }

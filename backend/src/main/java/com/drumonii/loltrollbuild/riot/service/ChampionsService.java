@@ -18,12 +18,4 @@ public interface ChampionsService {
 	 */
 	List<Champion> getChampions(Version version);
 
-	/**
-	 * Returns a {@link Champion} from Riot by its ID.
-	 *
-	 * @param id the ID to lookup the {@link Champion} from Riot
-	 * @return the {@link Champion} from Riot
-	 */
-	Champion getChampion(int id);
-
 }

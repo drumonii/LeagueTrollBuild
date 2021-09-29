@@ -1,7 +1,6 @@
-package com.drumonii.loltrollbuild.config;
+package com.drumonii.loltrollbuild.riot;
 
-import com.drumonii.loltrollbuild.riot.api.RiotApiProperties;
-import com.drumonii.loltrollbuild.riot.api.RiotApiProperties.Ddragon;
+import com.drumonii.loltrollbuild.riot.RiotApiProperties.Ddragon;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -11,17 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
 import org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration;
-import org.springframework.boot.autoconfigure.web.client.RestTemplateAutoConfiguration;
+import org.springframework.boot.autoconfigure.web.reactive.function.client.WebClientAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.test.context.ConfigDataApplicationContextInitializer;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Import;
-import org.springframework.http.MediaType;
-import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -30,13 +25,12 @@ import java.util.function.Consumer;
 
 import static com.drumonii.loltrollbuild.config.Profiles.TESTING;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatCode;
 
 @ExtendWith({ SpringExtension.class })
 @Import(RiotApiConfig.class)
 @ContextConfiguration(initializers = ConfigDataApplicationContextInitializer.class)
 @EnableConfigurationProperties(RiotApiProperties.class)
-@ImportAutoConfiguration({ RestTemplateAutoConfiguration.class, JacksonAutoConfiguration.class })
+@ImportAutoConfiguration({ WebClientAutoConfiguration.class, JacksonAutoConfiguration.class })
 @ActiveProfiles({ TESTING })
 class RiotApiPropertiesDdragonConfigTest {
 
@@ -53,31 +47,9 @@ class RiotApiPropertiesDdragonConfigTest {
 	}
 
 	@Nested
-	@DisplayName("RestTemplate Tests")
-	class RestTemplateTests {
-
-		@Test
-		void restTemplate(ApplicationContext applicationContext) {
-			assertThatCode(() -> {
-				RestTemplate restTemplate = applicationContext.getBean("restTemplate", RestTemplate.class);
-				assertThat(restTemplate.getInterceptors()).hasSize(1);
-				assertThat(restTemplate.getMessageConverters()).flatExtracting(HttpMessageConverter::getSupportedMediaTypes)
-						.contains(MediaType.APPLICATION_JSON, MediaType.APPLICATION_OCTET_STREAM,
-								MediaType.parseMediaType("binary/octet-stream"), MediaType.parseMediaType("text/json;charset=UTF-8"));
-			}).doesNotThrowAnyException();
-		}
-
-	}
-
-	@Nested
 	@DisplayName("Summoner Spells Uri Components Tests")
 	class SummonerSpellsUriComponentsTests {
 
-		@Test
-		void summonerSpellsUri(@Qualifier("summonerSpells") UriComponentsBuilder summonerSpellsUriBuilder) {
-			assertThat(summonerSpellsUriBuilder.build()).as("Summoner Spells URI")
-					.satisfies(new RiotApiJsonUriComponents(ddragon.getSummonerSpells()));
-		}
 
 		@Test
 		void summonerSpellImgUri(@Qualifier("summonerSpellsImg") UriComponentsBuilder summonerSpellImgBuilder) {
@@ -92,12 +64,6 @@ class RiotApiPropertiesDdragonConfigTest {
 	class ItemsUriComponentsTests {
 
 		@Test
-		void itemsUri(@Qualifier("items") UriComponentsBuilder itemsUriBuilder) {
-			assertThat(itemsUriBuilder.build()).as("Items URI")
-					.satisfies(new RiotApiJsonUriComponents(ddragon.getItems()));
-		}
-
-		@Test
 		void itemsImgUri(@Qualifier("itemsImg") UriComponentsBuilder itemsImgBuilder) {
 			assertThat(itemsImgBuilder.build()).as("Items Image URI")
 					.satisfies(new RiotApiImgUriComponents(ddragon.getItemsImg()));
@@ -108,18 +74,6 @@ class RiotApiPropertiesDdragonConfigTest {
 	@Nested
 	@DisplayName("Champions Uri Components Tests")
 	class ChampionsUriComponentsTests {
-
-		@Test
-		void championsUri(@Qualifier("champions") UriComponentsBuilder championsUriBuilder) {
-			assertThat(championsUriBuilder.build()).as("Champions URI")
-					.satisfies(new RiotApiJsonUriComponents(ddragon.getChampions()));
-		}
-
-		@Test
-		void championUri(@Qualifier("champion") UriComponentsBuilder championUriBuilder) {
-			assertThat(championUriBuilder.build()).as("Champion URI")
-					.satisfies(new RiotApiJsonUriComponents(ddragon.getChampion()));
-		}
 
 		@Test
 		void championsImgUri(@Qualifier("championsImg") UriComponentsBuilder championsImgBuilder) {
@@ -146,27 +100,9 @@ class RiotApiPropertiesDdragonConfigTest {
 	class MapsUriComponentsTests {
 
 		@Test
-		void mapsUri(@Qualifier("maps") UriComponentsBuilder mapsUriBuilder) {
-			assertThat(mapsUriBuilder.build()).as("Maps URI")
-					.satisfies(new RiotApiJsonUriComponents(ddragon.getMaps()));
-		}
-
-		@Test
 		void mapsImgUri(@Qualifier("mapsImg") UriComponentsBuilder mapsImgBuilder) {
 			assertThat(mapsImgBuilder.build()).as("Maps Image URI")
 					.satisfies(new RiotApiImgUriComponents(ddragon.getMapsImg()));
-		}
-
-	}
-
-	@Nested
-	@DisplayName("Versions Uri Components Tests")
-	class VersionsUriComponentsTests {
-
-		@Test
-		void versionsUri(@Qualifier("versions") UriComponents versionsUri) {
-			assertThat(versionsUri).as("Versions URI")
-					.satisfies(new RiotApiJsonUriComponents(ddragon.getVersions()));
 		}
 
 	}

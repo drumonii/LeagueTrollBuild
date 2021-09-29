@@ -1,6 +1,7 @@
 package com.drumonii.loltrollbuild.test.api;
 
 import com.drumonii.loltrollbuild.config.*;
+import com.drumonii.loltrollbuild.riot.RiotApiConfig;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

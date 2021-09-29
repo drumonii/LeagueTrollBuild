@@ -1,66 +1,47 @@
 package com.drumonii.loltrollbuild.riot.service;
 
-import com.drumonii.loltrollbuild.config.RiotApiConfig;
 import com.drumonii.loltrollbuild.model.Version;
-import com.drumonii.loltrollbuild.riot.api.RiotApiProperties;
+import com.drumonii.loltrollbuild.test.api.service.AbstractDdragonServiceTests;
 import com.drumonii.loltrollbuild.test.json.JsonTestFilesUtil;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.*;
+import okhttp3.mockwebserver.MockResponse;
+import okhttp3.mockwebserver.RecordedRequest;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.test.autoconfigure.web.client.RestClientTest;
-import org.springframework.context.annotation.Import;
-import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.web.client.MockRestServiceServer;
-import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
-import static com.drumonii.loltrollbuild.config.Profiles.TESTING;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
-import static org.springframework.test.web.client.response.MockRestResponseCreators.withServerError;
-import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 
 @RestClientTest(VersionsService.class)
-@Import(RiotApiConfig.class)
-@EnableConfigurationProperties(RiotApiProperties.class)
-@ActiveProfiles({ TESTING })
-class VersionsDdragonServiceTest {
+class VersionsDdragonServiceTest extends AbstractDdragonServiceTests {
 
 	@Autowired
 	private VersionsService versionsService;
 
-	@Autowired
-	private MockRestServiceServer mockServer;
-
-	@Autowired
-	@Qualifier("versions")
-	private UriComponents versionsUri;
-
-	@Autowired
-	private ObjectMapper objectMapper;
-
+	private String versionsJson;
 	private List<Version> versions;
+	private Version latestVersion;
 	private long lolpatchStyleSize;
 
 	@BeforeEach
 	void beforeEach() {
 		JsonTestFilesUtil jsonTestFilesUtil = new JsonTestFilesUtil(objectMapper);
 
+		versionsJson = JsonTestFilesUtil.getVersionsJson();
 		versions = jsonTestFilesUtil.getVersions();
+		latestVersion = versions.get(0);
 		lolpatchStyleSize = versions.stream()
 				.filter(version -> version.getRevision() == 0)
 				.count();
-	}
-
-	@AfterEach
-	void afterEach() {
-		mockServer.reset();
 	}
 
 	@Nested
@@ -69,26 +50,32 @@ class VersionsDdragonServiceTest {
 
 		@Test
 		void getsAll() throws Exception {
-			mockServer.expect(requestTo(versionsUri.toString()))
-					.andExpect(method(HttpMethod.GET))
-					.andRespond(withSuccess(objectMapper.writeValueAsString(versions), MediaType.parseMediaType("text/json;charset=UTF-8")));
+			MockResponse versionMockResponse = new MockResponse()
+					.addHeader(HttpHeaders.CONTENT_TYPE, MediaType.parseMediaType("text/json;charset=UTF-8"))
+					.setBody(versionsJson);
+
+			mockWebServer.enqueue(versionMockResponse);
 
 			List<Version> allVersions = versionsService.getVersions();
-			mockServer.verify();
-
 			assertThat(allVersions).isNotEmpty();
 			assertThat(allVersions).hasSize(versions.size() - (int) lolpatchStyleSize); // see if lolpatch_7.17 style was filtered out
+
+			RecordedRequest recordedRequest = mockWebServer.takeRequest(1, TimeUnit.SECONDS);
+			assertThat(recordedRequest).satisfies(new VersionRecordedRequest());
 		}
 
 		@Test
-		void withRestClientException() {
-			mockServer.expect(requestTo(versionsUri.toString()))
-					.andRespond(withServerError());
+		void withRestClientException() throws Exception {
+			MockResponse versionMockResponse = new MockResponse()
+					.setResponseCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+
+			mockWebServer.enqueue(versionMockResponse);
 
 			List<Version> versions = versionsService.getVersions();
-			mockServer.verify();
-
 			assertThat(versions).isEmpty();
+
+			RecordedRequest recordedRequest = mockWebServer.takeRequest(1, TimeUnit.SECONDS);
+			assertThat(recordedRequest).satisfies(new VersionRecordedRequest());
 		}
 
 	}
@@ -99,26 +86,45 @@ class VersionsDdragonServiceTest {
 
 		@Test
 		void getsLatest() throws Exception {
-			mockServer.expect(requestTo(versionsUri.toString()))
-					.andExpect(method(HttpMethod.GET))
-					.andRespond(withSuccess(objectMapper.writeValueAsString(versions), MediaType.parseMediaType("text/json;charset=UTF-8")));
+			MockResponse versionMockResponse = new MockResponse()
+					.addHeader(HttpHeaders.CONTENT_TYPE, MediaType.parseMediaType("text/json;charset=UTF-8"))
+					.setBody(versionsJson);
+
+			mockWebServer.enqueue(versionMockResponse);
 
 			Version version = versionsService.getLatestVersion();
-			mockServer.verify();
+			assertThat(version).isEqualTo(latestVersion);
 
-			assertThat(version).isNotNull();
-			assertThat(version).isEqualTo(versions.get(0));
+			RecordedRequest recordedRequest = mockWebServer.takeRequest(1, TimeUnit.SECONDS);
+			assertThat(recordedRequest).satisfies(new VersionRecordedRequest());
 		}
 
 		@Test
-		void withRestClientException() {
-			mockServer.expect(requestTo(versionsUri.toString()))
-					.andRespond(withServerError());
+		void withRestClientException() throws Exception {
+			MockResponse versionMockResponse = new MockResponse()
+					.setResponseCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+
+			mockWebServer.enqueue(versionMockResponse);
 
 			Version version = versionsService.getLatestVersion();
-			mockServer.verify();
-
 			assertThat(version).isNull();
+
+			RecordedRequest recordedRequest = mockWebServer.takeRequest(1, TimeUnit.SECONDS);
+			assertThat(recordedRequest).satisfies(new VersionRecordedRequest());
+		}
+
+	}
+
+	private class VersionRecordedRequest extends RiotApiRecordedRequest {
+
+		@Override
+		public void accept(RecordedRequest recordedRequest) {
+			super.accept(recordedRequest);
+
+			assertThat(recordedRequest.getPath()).as("Path")
+					.isEqualTo(UriComponentsBuilder.fromPath(riotApiProperties.getDdragon().getVersions())
+							.build()
+							.toString());
 		}
 
 	}

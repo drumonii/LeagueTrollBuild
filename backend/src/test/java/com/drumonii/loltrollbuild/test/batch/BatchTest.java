@@ -3,7 +3,7 @@ package com.drumonii.loltrollbuild.test.batch;
 import com.drumonii.loltrollbuild.config.BatchConfig;
 import com.drumonii.loltrollbuild.config.CacheConfig;
 import com.drumonii.loltrollbuild.config.JpaConfig;
-import com.drumonii.loltrollbuild.config.RiotApiConfig;
+import com.drumonii.loltrollbuild.riot.RiotApiConfig;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

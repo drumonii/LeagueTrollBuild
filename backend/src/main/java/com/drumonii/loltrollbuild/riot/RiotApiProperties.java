@@ -1,4 +1,4 @@
-package com.drumonii.loltrollbuild.riot.api;
+package com.drumonii.loltrollbuild.riot;
 
 import org.hibernate.validator.constraints.URL;
 import org.springframework.boot.context.properties.ConfigurationProperties;
