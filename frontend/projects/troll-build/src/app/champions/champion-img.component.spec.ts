@@ -6,7 +6,6 @@ import { By } from '@angular/platform-browser';
 import { ChampionImgModule } from './champion-img.module';
 import { ChampionImgComponent } from './champion-img.component';
 import { Champion } from '@ltb-model/champion';
-import { LazyLoadImgDirective } from '@ltb-directive/lazy-load-img.directive';
 
 describe('ChampionImgComponent', () => {
   let component: ChampionImgComponent;
@@ -61,8 +60,8 @@ describe('ChampionImgComponent', () => {
     expect(championName.nativeElement.textContent).toBe(alistar.name);
 
     const championImg = fixture.debugElement.query(By.css('[data-e2e="champion-img"]'));
-    expect(championImg.injector.get(LazyLoadImgDirective)).toBeTruthy();
     expect(championImg.nativeElement.src).toContain('assets/images/dummy_champion.png');
     expect(championImg.attributes['ng-reflect-img-src']).toBe(`/api/img/champions/${alistar.id}`);
+    expect(championImg.attributes['loading']).toBe('lazy');
   });
 });
