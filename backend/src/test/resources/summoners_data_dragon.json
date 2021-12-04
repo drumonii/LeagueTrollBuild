@@ -1,6 +1,6 @@
 {
   "type": "summoner",
-  "version": "11.18.1",
+  "version": "11.23.1",
   "data": {
     "SummonerBarrier": {
       "id": "SummonerBarrier",
@@ -995,15 +995,14 @@
       "key": "11",
       "summonerLevel": 9,
       "modes": [
-        "NEXUSBLITZ",
         "URF",
-        "PRACTICETOOL",
-        "TUTORIAL",
         "CLASSIC",
-        "DOOMBOTSTEEMO",
-        "ULTBOOK",
+        "ARSR",
         "ONEFORALL",
-        "ARSR"
+        "PRACTICETOOL",
+        "NEXUSBLITZ",
+        "TUTORIAL",
+        "DOOMBOTSTEEMO"
       ],
       "costType": "No Cost",
       "maxammo": "2",
@@ -1282,10 +1281,10 @@
       },
       "resource": "No Cost"
     },
-    "Summoner_UltBook_Placeholder": {
-      "id": "Summoner_UltBook_Placeholder",
+    "Summoner_UltBookPlaceholder": {
+      "id": "Summoner_UltBookPlaceholder",
       "name": "Placeholder",
-      "description": "",
+      "description": "This slot will be replaced by another champion's ultimate selected at the start of the game. There will be 30 seconds to select an ultimate. Be prepared!",
       "tooltip": "Will be replaced by your Ultimate Summoner Spell selection.",
       "maxrank": 1,
       "cooldown": [
@@ -1356,10 +1355,94 @@
       ],
       "rangeBurn": "400",
       "image": {
-        "full": "Summoner_UltBook_Placeholder.png",
+        "full": "Summoner_UltBookPlaceholder.png",
         "sprite": "spell0.png",
         "group": "spell",
         "x": 192,
+        "y": 48,
+        "w": 48,
+        "h": 48
+      },
+      "resource": "&nbsp;"
+    },
+    "Summoner_UltBookSmitePlaceholder": {
+      "id": "Summoner_UltBookSmitePlaceholder",
+      "name": "Placeholder and Auto-Smite",
+      "description": "This slot will be replaced by another champion's ultimate selected at the start of the game. There will be 30 seconds to select an ultimate. Be prepared!",
+      "tooltip": "Will be replaced by your Ultimate Summoner Spell.<br /><br />Gain Auto-Smite. Auto-Smite will execute Buff Monsters, Epic Monsters, and Scuttle Crabs.",
+      "maxrank": 1,
+      "cooldown": [
+        0
+      ],
+      "cooldownBurn": "0",
+      "cost": [
+        0
+      ],
+      "costBurn": "0",
+      "datavalues": {},
+      "effect": [
+        null,
+        [
+          0
+        ],
+        [
+          0
+        ],
+        [
+          0
+        ],
+        [
+          0
+        ],
+        [
+          0
+        ],
+        [
+          0
+        ],
+        [
+          0
+        ],
+        [
+          0
+        ],
+        [
+          0
+        ],
+        [
+          0
+        ]
+      ],
+      "effectBurn": [
+        null,
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "vars": [],
+      "key": "55",
+      "summonerLevel": 1,
+      "modes": [
+        "ULTBOOK"
+      ],
+      "costType": "&nbsp;",
+      "maxammo": "-1",
+      "range": [
+        400
+      ],
+      "rangeBurn": "400",
+      "image": {
+        "full": "Summoner_UltBookSmitePlaceholder.png",
+        "sprite": "spell0.png",
+        "group": "spell",
+        "x": 240,
         "y": 48,
         "w": 48,
         "h": 48

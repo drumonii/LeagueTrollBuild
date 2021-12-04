@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "11.18.1",
+  "version": "11.23.1",
   "data": {
     "Jax": {
       "id": "Jax",
@@ -279,10 +279,10 @@
           "rangeBurn": "700",
           "image": {
             "full": "JaxLeapStrike.png",
-            "sprite": "spell4.png",
+            "sprite": "spell5.png",
             "group": "spell",
-            "x": 432,
-            "y": 144,
+            "x": 0,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -292,7 +292,7 @@
           "id": "JaxEmpowerTwo",
           "name": "Empower",
           "description": "Jax charges his weapon with energy, causing his next attack to deal additional damage.",
-          "tooltip": "Jax charges his weapon with energy, causing his next Attack or <spellName>Leap Strike</spellName> to deal an additional <magicDamage>{{ totaldamage }} magic damage</magicDamage>.",
+          "tooltip": "Jax charges his weapon with energy, causing his next Attack or <spellName>Leap Strike</spellName> to deal an additional <magicDamage>{{ totaldamage }} magic damage</magicDamage>.<br /><br /><rules>This Ability triggers spell effects upon dealing damage.</rules>",
           "leveltip": {
             "label": [
               "Damage",
@@ -422,7 +422,7 @@
             "full": "JaxEmpowerTwo.png",
             "sprite": "spell5.png",
             "group": "spell",
-            "x": 0,
+            "x": 48,
             "y": 0,
             "w": 48,
             "h": 48
@@ -565,7 +565,7 @@
             "full": "JaxCounterStrike.png",
             "sprite": "spell5.png",
             "group": "spell",
-            "x": 48,
+            "x": 96,
             "y": 0,
             "w": 48,
             "h": 48
@@ -682,7 +682,7 @@
             "full": "JaxRelentlessAssault.png",
             "sprite": "spell5.png",
             "group": "spell",
-            "x": 96,
+            "x": 144,
             "y": 0,
             "w": 48,
             "h": 48

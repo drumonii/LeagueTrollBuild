@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "11.18.1",
+  "version": "11.23.1",
   "data": {
     "Hecarim": {
       "id": "Hecarim",
@@ -257,7 +257,7 @@
             "full": "HecarimRapidSlash.png",
             "sprite": "spell4.png",
             "group": "spell",
-            "x": 48,
+            "x": 96,
             "y": 48,
             "w": 48,
             "h": 48
@@ -273,25 +273,23 @@
             "label": [
               "Damage",
               "Healing Cap",
-              "Cooldown",
               "@AbilityResourceName@ Cost"
             ],
             "effect": [
               "{{ damage }} -> {{ damageNL }}",
               "{{ minionhealcap }} -> {{ minionhealcapNL }}",
-              "{{ cooldown }} -> {{ cooldownNL }}",
               "{{ cost }} -> {{ costNL }}"
             ]
           },
           "maxrank": 5,
           "cooldown": [
-            22,
-            21,
-            20,
-            19,
+            18,
+            18,
+            18,
+            18,
             18
           ],
-          "cooldownBurn": "22/21/20/19/18",
+          "cooldownBurn": "18",
           "cost": [
             50,
             60,
@@ -402,7 +400,7 @@
             "full": "HecarimW.png",
             "sprite": "spell4.png",
             "group": "spell",
-            "x": 96,
+            "x": 144,
             "y": 48,
             "w": 48,
             "h": 48
@@ -545,7 +543,7 @@
             "full": "HecarimRamp.png",
             "sprite": "spell4.png",
             "group": "spell",
-            "x": 144,
+            "x": 192,
             "y": 48,
             "w": 48,
             "h": 48
@@ -660,7 +658,7 @@
             "full": "HecarimUlt.png",
             "sprite": "spell4.png",
             "group": "spell",
-            "x": 192,
+            "x": 240,
             "y": 48,
             "w": 48,
             "h": 48

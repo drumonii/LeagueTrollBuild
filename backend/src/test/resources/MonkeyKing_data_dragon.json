@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "11.18.1",
+  "version": "11.23.1",
   "data": {
     "MonkeyKing": {
       "id": "MonkeyKing",
@@ -115,7 +115,7 @@
           "id": "MonkeyKingDoubleAttack",
           "name": "Crushing Blow",
           "description": "Wukong's next attack gains attack range, deals bonus damage, and reduces the target's armor for a few seconds.",
-          "tooltip": "Wukong and his <keywordMajor>Clone's</keywordMajor> next Attack gains {{ attackrangebonus }} range, deals an additional <physicalDamage>{{ bonusdamagett }} physical damage</physicalDamage>, and removes <scaleArmor>{{ armorshredpercent*100 }}% Armor</scaleArmor> for {{ shredduration }} seconds.<br /><br />This Ability's cooldown is reduced by {{ cooldowndecrease }} seconds every time Wukong or his <keywordMajor>Clone</keywordMajor> hit an enemy with an Attack or Ability.",
+          "tooltip": "Wukong and his <keywordMajor>Clone's</keywordMajor> next Attack gains {{ attackrangebonus }} range, deals an additional <physicalDamage>{{ bonusdamagett }} physical damage</physicalDamage>, and removes <scaleArmor>{{ armorshredpercent*100 }}% Armor</scaleArmor> for {{ shredduration }} seconds.<br /><br />This Ability's cooldown is reduced by {{ cooldowndecrease }} seconds every time Wukong or his <keywordMajor>Clone</keywordMajor> hit an enemy with an Attack or Ability.<br /><br /><rules>This Ability triggers spell effects upon dealing damage.</rules>",
           "leveltip": {
             "label": [
               "Damage",
@@ -247,10 +247,10 @@
           "rangeBurn": "250/275/300/325/350",
           "image": {
             "full": "MonkeyKingDoubleAttack.png",
-            "sprite": "spell7.png",
+            "sprite": "spell8.png",
             "group": "spell",
-            "x": 432,
-            "y": 144,
+            "x": 0,
+            "y": 0,
             "w": 48,
             "h": 48
           },
@@ -392,7 +392,7 @@
             "full": "MonkeyKingDecoy.png",
             "sprite": "spell8.png",
             "group": "spell",
-            "x": 0,
+            "x": 48,
             "y": 0,
             "w": 48,
             "h": 48
@@ -537,7 +537,7 @@
             "full": "MonkeyKingNimbus.png",
             "sprite": "spell8.png",
             "group": "spell",
-            "x": 48,
+            "x": 96,
             "y": 0,
             "w": 48,
             "h": 48
@@ -652,7 +652,7 @@
             "full": "MonkeyKingSpinToWin.png",
             "sprite": "spell8.png",
             "group": "spell",
-            "x": 96,
+            "x": 144,
             "y": 0,
             "w": 48,
             "h": 48

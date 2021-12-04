@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "11.18.1",
+  "version": "11.23.1",
   "data": {
     "Darius": {
       "id": "Darius",
@@ -268,8 +268,8 @@
             "full": "DariusCleave.png",
             "sprite": "spell2.png",
             "group": "spell",
-            "x": 432,
-            "y": 48,
+            "x": 0,
+            "y": 96,
             "w": 48,
             "h": 48
           },
@@ -279,26 +279,24 @@
           "id": "DariusNoxianTacticsONH",
           "name": "Crippling Strike",
           "description": "Darius's next attack strikes an enemy's crucial artery. As they bleed out, their Move Speed is slowed.",
-          "tooltip": "Darius' next Attack deals <physicalDamage>{{ empoweredattackdamage }} physical damage</physicalDamage> and <status>Slows</status> by {{ e2 }}% for {{ e5 }} second.<br /><br />This Ability refunds its Mana cost and reduces its Cooldown by {{ e3 }}% if it kills the target.",
+          "tooltip": "Darius' next Attack deals <physicalDamage>{{ empoweredattackdamage }} physical damage</physicalDamage> and <status>Slows</status> by {{ e2 }}% for {{ e5 }} second.<br /><br />This Ability refunds its Mana cost and reduces its Cooldown by {{ e3 }}% if it kills the target.<br /><br /><rules>This Ability triggers spell effects upon dealing damage.</rules>",
           "leveltip": {
             "label": [
-              "Cooldown",
               "Total AD Ratio"
             ],
             "effect": [
-              "{{ cooldown }} -> {{ cooldownNL }}",
               "{{ effect4amount*100.000000 }} -> {{ effect4amountnl*100.000000 }}"
             ]
           },
           "maxrank": 5,
           "cooldown": [
-            7,
-            6.5,
-            6,
-            5.5,
+            5,
+            5,
+            5,
+            5,
             5
           ],
-          "cooldownBurn": "7/6.5/6/5.5/5",
+          "cooldownBurn": "5",
           "cost": [
             40,
             40,
@@ -409,7 +407,7 @@
             "full": "DariusNoxianTacticsONH.png",
             "sprite": "spell2.png",
             "group": "spell",
-            "x": 0,
+            "x": 48,
             "y": 96,
             "w": 48,
             "h": 48
@@ -552,7 +550,7 @@
             "full": "DariusAxeGrabCone.png",
             "sprite": "spell2.png",
             "group": "spell",
-            "x": 48,
+            "x": 96,
             "y": 96,
             "w": 48,
             "h": 48
@@ -667,7 +665,7 @@
             "full": "DariusExecute.png",
             "sprite": "spell2.png",
             "group": "spell",
-            "x": 96,
+            "x": 144,
             "y": 96,
             "w": 48,
             "h": 48

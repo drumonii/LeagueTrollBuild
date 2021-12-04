@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "11.18.1",
+  "version": "11.23.1",
   "data": {
     "Kassadin": {
       "id": "Kassadin",
@@ -251,7 +251,7 @@
             "full": "NullLance.png",
             "sprite": "spell5.png",
             "group": "spell",
-            "x": 48,
+            "x": 96,
             "y": 144,
             "w": 48,
             "h": 48
@@ -394,7 +394,7 @@
             "full": "NetherBlade.png",
             "sprite": "spell5.png",
             "group": "spell",
-            "x": 96,
+            "x": 144,
             "y": 144,
             "w": 48,
             "h": 48
@@ -537,7 +537,7 @@
             "full": "ForcePulse.png",
             "sprite": "spell5.png",
             "group": "spell",
-            "x": 144,
+            "x": 192,
             "y": 144,
             "w": 48,
             "h": 48
@@ -548,7 +548,7 @@
           "id": "RiftWalk",
           "name": "Riftwalk",
           "description": "Kassadin teleports to a nearby location dealing damage to nearby enemy units. Multiple Riftwalks in a short period of time cost additional Mana but also deal additional damage.",
-          "tooltip": "Kassadin teleports to a nearby location, dealing <magicDamage>{{ basedamage }} magic damage</magicDamage>.<br /><br />Each subsequent use of this Ability within the next {{ e2 }} seconds doubles the Mana cost and deals an additional <magicDamage>{{ bonusdamage }} magic damage</magicDamage>. The cost and damage increases can stack up to {{ e6 }} times.",
+          "tooltip": "Kassadin teleports to a nearby location, dealing <magicDamage>{{ basedamage }} magic damage</magicDamage>.<br /><br />Each subsequent use of this Ability within the next {{ rstackduration }} seconds doubles the Mana cost and deals an additional <magicDamage>{{ bonusdamage }} magic damage</magicDamage>. The cost and damage increases can stack up to {{ maxstacks }} times.",
           "leveltip": {
             "label": [
               "Damage",
@@ -654,7 +654,7 @@
             "full": "RiftWalk.png",
             "sprite": "spell5.png",
             "group": "spell",
-            "x": 192,
+            "x": 240,
             "y": 144,
             "w": 48,
             "h": 48

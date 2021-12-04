@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "11.18.1",
+  "version": "11.23.1",
   "data": {
     "Galio": {
       "id": "Galio",
@@ -255,7 +255,7 @@
             "full": "GalioQ.png",
             "sprite": "spell3.png",
             "group": "spell",
-            "x": 144,
+            "x": 192,
             "y": 96,
             "w": 48,
             "h": 48
@@ -272,24 +272,26 @@
               "Shield Health Ratio",
               "Magic Damage Reduction",
               "Physical Damage Reduction",
-              "Maximum Damage"
+              "Maximum Damage",
+              "Cooldown"
             ],
             "effect": [
               "{{ passiveshieldhealthratio*100.000000 }}% -> {{ passiveshieldhealthrationl*100.000000 }}%",
               "{{ e1 }}% -> {{ e1NL }}%",
               "{{ effect1amount*0.500000 }}% -> {{ effect1amountnl*0.500000 }}%",
-              "{{ maximumwbasedamage }} -> {{ maximumwbasedamageNL }}"
+              "{{ maximumwbasedamage }} -> {{ maximumwbasedamageNL }}",
+              "{{ cooldown }} -> {{ cooldownNL }}"
             ]
           },
           "maxrank": 5,
           "cooldown": [
             18,
-            18,
-            18,
-            18,
-            18
+            17.5,
+            17,
+            16.5,
+            16
           ],
-          "cooldownBurn": "18",
+          "cooldownBurn": "18/17.5/17/16.5/16",
           "cost": [
             50,
             50,
@@ -400,7 +402,7 @@
             "full": "GalioW.png",
             "sprite": "spell3.png",
             "group": "spell",
-            "x": 192,
+            "x": 240,
             "y": 96,
             "w": 48,
             "h": 48
@@ -541,7 +543,7 @@
             "full": "GalioE.png",
             "sprite": "spell3.png",
             "group": "spell",
-            "x": 240,
+            "x": 288,
             "y": 96,
             "w": 48,
             "h": 48
@@ -658,7 +660,7 @@
             "full": "GalioR.png",
             "sprite": "spell3.png",
             "group": "spell",
-            "x": 288,
+            "x": 336,
             "y": 96,
             "w": 48,
             "h": 48

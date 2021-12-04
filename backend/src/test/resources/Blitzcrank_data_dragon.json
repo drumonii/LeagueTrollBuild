@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "11.18.1",
+  "version": "11.23.1",
   "data": {
     "Blitzcrank": {
       "id": "Blitzcrank",
@@ -94,6 +94,12 @@
           "id": "53029",
           "num": 29,
           "name": "Space Groove Blitz & Crank",
+          "chromas": true
+        },
+        {
+          "id": "53036",
+          "num": 36,
+          "name": "Victorious Blitzcrank",
           "chromas": true
         }
       ],
@@ -275,7 +281,7 @@
             "full": "RocketGrab.png",
             "sprite": "spell1.png",
             "group": "spell",
-            "x": 336,
+            "x": 384,
             "y": 96,
             "w": 48,
             "h": 48
@@ -416,7 +422,7 @@
             "full": "Overdrive.png",
             "sprite": "spell1.png",
             "group": "spell",
-            "x": 384,
+            "x": 432,
             "y": 96,
             "w": 48,
             "h": 48
@@ -427,7 +433,7 @@
           "id": "PowerFist",
           "name": "Power Fist",
           "description": "Blitzcrank charges up his fist to make his next attack deal double damage and pop his target up in the air.",
-          "tooltip": "Blitzcrank charges up his fist, causing his next Attack to <status>Knock Up</status> and deal <physicalDamage>{{ attackdamagett }} physical damage</physicalDamage>.",
+          "tooltip": "Blitzcrank charges up his fist, causing his next Attack to <status>Knock Up</status> and deal <physicalDamage>{{ attackdamagett }} physical damage</physicalDamage>.<br /><br /><rules>This Ability triggers spell effects upon dealing damage.</rules>",
           "leveltip": {
             "label": [
               "Cooldown"
@@ -555,8 +561,8 @@
             "full": "PowerFist.png",
             "sprite": "spell1.png",
             "group": "spell",
-            "x": 432,
-            "y": 96,
+            "x": 0,
+            "y": 144,
             "w": 48,
             "h": 48
           },
@@ -672,7 +678,7 @@
             "full": "StaticField.png",
             "sprite": "spell1.png",
             "group": "spell",
-            "x": 0,
+            "x": 48,
             "y": 144,
             "w": 48,
             "h": 48

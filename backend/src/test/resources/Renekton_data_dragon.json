@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "11.18.1",
+  "version": "11.23.1",
   "data": {
     "Renekton": {
       "id": "Renekton",
@@ -120,8 +120,8 @@
         "difficulty": 3
       },
       "stats": {
-        "hp": 575,
-        "hpperlevel": 87,
+        "hp": 590,
+        "hpperlevel": 92,
         "mp": 100,
         "mpperlevel": 0,
         "movespeed": 345,
@@ -278,7 +278,7 @@
             "full": "RenektonCleave.png",
             "sprite": "spell10.png",
             "group": "spell",
-            "x": 336,
+            "x": 384,
             "y": 0,
             "w": 48,
             "h": 48
@@ -289,7 +289,7 @@
           "id": "RenektonPreExecute",
           "name": "Ruthless Predator",
           "description": "Renekton slashes his target twice, dealing moderate physical damage and stuns them for 0.75 seconds. If Renekton has more than 50 Fury, he slashes his target three times, destroying damage shields on the target, dealing high physical damage, and stunning them for 1.5 seconds.",
-          "tooltip": "Renekton's next Attack strikes twice, <status>Stunning</status> for {{ e3 }} seconds and dealing a total of <physicalDamage>{{ basictotaldamage }} physical damage</physicalDamage>. Hitting a champion generates an additonal <keywordMajor>{{ e7 }} Fury</keywordMajor>.<br /><br /><keywordMajor>Fury Bonus</keywordMajor>: Renekton Attacks 3 times instead, destroying <shield>Shields</shield> before dealing <physicalDamage>{{ emptotaldamage }} physical damage</physicalDamage> and <status>Stunning</status> for {{ e4 }} second. Does not generate additional <keywordMajor>Fury</keywordMajor>.",
+          "tooltip": "Renekton's next Attack strikes twice, <status>Stunning</status> for {{ e3 }} seconds and dealing a total of <physicalDamage>{{ basictotaldamage }} physical damage</physicalDamage>. Hitting a champion generates an additonal <keywordMajor>{{ e7 }} Fury</keywordMajor>.<br /><br /><keywordMajor>Fury Bonus</keywordMajor>: Renekton Attacks 3 times instead, destroying <shield>Shields</shield> before dealing <physicalDamage>{{ emptotaldamage }} physical damage</physicalDamage> and <status>Stunning</status> for {{ e4 }} seconds. Does not generate additional <keywordMajor>Fury</keywordMajor>.",
           "leveltip": {
             "label": [
               "Damage",
@@ -344,11 +344,11 @@
               0.75
             ],
             [
-              1,
-              1,
-              1,
-              1,
-              1
+              1.5,
+              1.5,
+              1.5,
+              1.5,
+              1.5
             ],
             [
               10,
@@ -398,7 +398,7 @@
             "5/15/25/35/45",
             "0.75",
             "0.75",
-            "1",
+            "1.5",
             "10/30/50/70/90",
             "15/45/75/105/135",
             "10",
@@ -421,7 +421,7 @@
             "full": "RenektonPreExecute.png",
             "sprite": "spell10.png",
             "group": "spell",
-            "x": 384,
+            "x": 432,
             "y": 0,
             "w": 48,
             "h": 48
@@ -564,8 +564,8 @@
             "full": "RenektonSliceAndDice.png",
             "sprite": "spell10.png",
             "group": "spell",
-            "x": 432,
-            "y": 0,
+            "x": 0,
+            "y": 48,
             "w": 48,
             "h": 48
           },
@@ -679,7 +679,7 @@
             "full": "RenektonReignOfTheTyrant.png",
             "sprite": "spell10.png",
             "group": "spell",
-            "x": 0,
+            "x": 48,
             "y": 48,
             "w": 48,
             "h": 48

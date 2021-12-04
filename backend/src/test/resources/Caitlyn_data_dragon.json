@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "11.18.1",
+  "version": "11.23.1",
   "data": {
     "Caitlyn": {
       "id": "Caitlyn",
@@ -95,6 +95,12 @@
           "num": 22,
           "name": "Battle Academia Caitlyn",
           "chromas": true
+        },
+        {
+          "id": "51028",
+          "num": 28,
+          "name": "Arcane Caitlyn",
+          "chromas": false
         }
       ],
       "lore": "Renowned as its finest peacekeeper, Caitlyn is also Piltover's best shot at ridding the city of its elusive criminal elements. She is often paired with Vi, acting as a cool counterpoint to her partner's more impetuous nature. Even though she carries a one-of-a-kind hextech rifle, Caitlyn's most powerful weapon is her superior intellect, allowing her to lay elaborate traps for any lawbreakers foolish enough to operate in the City of Progress.",
@@ -142,7 +148,7 @@
       },
       "spells": [
         {
-          "id": "CaitlynPiltoverPeacemaker",
+          "id": "CaitlynQ",
           "name": "Piltover Peacemaker",
           "description": "Caitlyn revs up her rifle for 1 second to unleash a penetrating shot that deals physical damage (deals less damage to subsequent targets).",
           "tooltip": "Caitlyn revs her rifle to fire a piercing shot dealing <physicalDamage>{{ initialdamage }} physical damage</physicalDamage>. After the bolt strikes the first target, it opens into a wider shot that deals <physicalDamage>{{ secondarydamage }} physical damage</physicalDamage>.<br /><br />Enemies revealed by <spellName>Yordle Snap Trap</spellName> always take full damage.",
@@ -276,18 +282,18 @@
           ],
           "rangeBurn": "1250",
           "image": {
-            "full": "CaitlynPiltoverPeacemaker.png",
-            "sprite": "spell1.png",
+            "full": "CaitlynQ.png",
+            "sprite": "spell2.png",
             "group": "spell",
-            "x": 432,
-            "y": 144,
+            "x": 0,
+            "y": 0,
             "w": 48,
             "h": 48
           },
           "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
-          "id": "CaitlynYordleTrap",
+          "id": "CaitlynW",
           "name": "Yordle Snap Trap",
           "description": "Caitlyn sets a trap to find sneaky yordles. When sprung, the trap reveals and immobilizes the enemy champion for 1.5 seconds, granting Caitlyn an empowered Headshot.",
           "tooltip": "Caitlyn sets a trap that <status>Roots</status> the first champion that steps on it for {{ e6 }} seconds and granting <keywordStealth>True Sight</keywordStealth> of them for 3 seconds. Traps last for {{ e3 }} seconds, and {{ e5 }} traps may be active at once. This Ability has 2 charges ({{ ammorechargetime }} second refresh).",
@@ -423,10 +429,10 @@
           ],
           "rangeBurn": "800",
           "image": {
-            "full": "CaitlynYordleTrap.png",
+            "full": "CaitlynW.png",
             "sprite": "spell2.png",
             "group": "spell",
-            "x": 0,
+            "x": 48,
             "y": 0,
             "w": 48,
             "h": 48
@@ -434,7 +440,7 @@
           "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
-          "id": "CaitlynEntrapment",
+          "id": "CaitlynE",
           "name": "90 Caliber Net",
           "description": "Caitlyn fires a heavy net to slow her target. The recoil knocks Caitlyn back.",
           "tooltip": "Caitlyn fires a net, pushing her backwards. The net <status>Slows</status> the first target hit by {{ e3 }}% for {{ e2 }} seconds and deals <magicDamage>{{ netdamage }} magic damage</magicDamage>.",
@@ -564,10 +570,10 @@
           ],
           "rangeBurn": "750",
           "image": {
-            "full": "CaitlynEntrapment.png",
+            "full": "CaitlynE.png",
             "sprite": "spell2.png",
             "group": "spell",
-            "x": 48,
+            "x": 96,
             "y": 0,
             "w": 48,
             "h": 48
@@ -575,7 +581,7 @@
           "resource": "{{ cost }} {{ abilityresourcename }}"
         },
         {
-          "id": "CaitlynAceintheHole",
+          "id": "CaitlynR",
           "name": "Ace in the Hole",
           "description": "Caitlyn takes time to line up the perfect shot, dealing massive damage to a single target at a huge range. Enemy champions can intercept the bullet for their ally.",
           "tooltip": "Caitlyn takes a moment to channel and line up the perfect shot, then she fires, dealing <physicalDamage>{{ rtotaldamage }} physical damage</physicalDamage>, but other enemy champions can intercept it. This Ability grants <keywordStealth>True Sight</keywordStealth> of the target during the channel.",
@@ -679,10 +685,10 @@
           ],
           "rangeBurn": "3500",
           "image": {
-            "full": "CaitlynAceintheHole.png",
+            "full": "CaitlynR.png",
             "sprite": "spell2.png",
             "group": "spell",
-            "x": 96,
+            "x": 144,
             "y": 0,
             "w": 48,
             "h": 48
