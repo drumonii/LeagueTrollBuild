@@ -1,0 +1,15 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="run with all retrievals" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <module name="league-troll-build.backend.main" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="com.drumonii.loltrollbuild.LeagueTrollBuildApplication" />
+    <option name="ENABLE_LAUNCH_OPTIMIZATION" value="false" />
+    <option name="ENABLE_JMX_AGENT" value="false" />
+    <option name="ACTIVE_PROFILES" value="dev" />
+    <option name="VM_PARAMETERS" value="-Dspring.batch.job.enabled=true -Dspring.batch.job.names=allRetrievalsJob" />
+    <option name="ALTERNATIVE_JRE_PATH" />
+    <option name="SHORTEN_COMMAND_LINE" value="ARGS_FILE" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
