@@ -154,7 +154,7 @@ public class JsonTestFilesUtil {
 
     public List<Version> getVersions() {
         try {
-            List<Version> versions = objectMapper.readValue(getVersionsJson(), new TypeReference<List<Version>>() {});
+            List<Version> versions = objectMapper.readValue(getVersionsJson(), new TypeReference<>() {});
             versions.sort(Collections.reverseOrder());
             return versions;
         } catch (IOException e) {

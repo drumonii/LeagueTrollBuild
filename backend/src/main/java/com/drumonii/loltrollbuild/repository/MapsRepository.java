@@ -25,7 +25,12 @@ public interface MapsRepository extends JpaRepository<GameMap, Integer>, JpaSpec
 	 *
 	 * @return only the eligible {@link List} of {@link GameMap}s
 	 */
-	@Query("select m from GameMap m where m.mapId in ('10', '11', '12') order by m.mapName")
+	@Query("""
+           select m
+           from GameMap m
+           where m.mapId in ('10', '11', '12')
+           order by m.mapName
+           """)
 	@Cacheable(key = "#root.methodName", unless = "#result.isEmpty()")
 	List<GameMap> forTrollBuild();
 

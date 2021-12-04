@@ -48,7 +48,7 @@ class ErrorRestControllerTest extends AbstractRestControllerTests {
                 .satisfies(new ErrorUnauthorizedJson("/api/admin/job-instances"));
     }
 
-    private class ErrorJson implements Consumer<String> {
+    private static class ErrorJson implements Consumer<String> {
 
         @Override
         public void accept(String json) {

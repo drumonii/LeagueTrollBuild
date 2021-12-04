@@ -30,9 +30,18 @@ public interface ItemsRepository extends JpaRepository<Item, Integer>, JpaSpecif
 	 * @see <a href="http://leagueoflegends.wikia.com/wiki/Boots_of_Speed">Boots of Speed</a>
 	 * @see <a href="http://leagueoflegends.wikia.com/wiki/Advanced_item">Advanced Items</a>
 	 */
-	@Query("select distinct i from Item i join i.from f join i.maps m " +
-		   "where i.id <> 1001 and f in ('1001') " +
-		   "and (key(m) = :mapId and m = true)")
+	@Query("""
+           select distinct i
+           from Item i
+           join i.from f
+           join i.maps m
+           where i.id <> 1001
+           and f in ('1001')
+           and (
+             key(m) = :mapId
+             and m = true
+           )
+          """)
 	@Cacheable(key = "{#root.methodName, #mapId}", unless = "#result.isEmpty()")
 	List<Item> boots(@Param("mapId") int mapId);
 
@@ -46,12 +55,33 @@ public interface ItemsRepository extends JpaRepository<Item, Integer>, JpaSpecif
 	 * @return a {@link List} of Trinket {@link Item}s
 	 * @see <a href="http://leagueoflegends.wikia.com/wiki/Trinket">Trinket</a>
 	 */
-	@Query("select distinct i from Item i join i.maps m left join i.tags t " +
-		   "where i.gold.total = 0 and i.requiredChampion is null " +
-		   "and key(m) = :mapId and m = true " +
-	       "and (:mapId = 10 and i.gold.purchasable = false and i.name = 'Arcane Sweeper') " +
-	       "or (:mapId = 11 and t in ('Trinket') and i.gold.purchasable = true and i.gold.sell = 0 and i.name not like '%Snax%') " +
-	       "or (:mapId = 12 and i.gold.purchasable = false and i.name = 'Poro-Snax')")
+	@Query("""
+           select distinct i
+           from Item i
+           join i.maps m
+           left join i.tags t
+           where i.gold.total = 0
+           and i.requiredChampion is null
+           and key(m) = :mapId
+           and m = true
+           and (
+             :mapId = 10
+             and i.gold.purchasable = false
+             and i.name = 'Arcane Sweeper'
+           )
+           or (
+             :mapId = 11
+             and t in ('Trinket')
+             and i.gold.purchasable = true
+             and i.gold.sell = 0
+             and i.name not like '%Snax%'
+           )
+           or (
+             :mapId = 12
+             and i.gold.purchasable = false
+             and i.name = 'Poro-Snax'
+           )
+           """)
 	@Cacheable(key = "{#root.methodName, #mapId}", unless = "#result.isEmpty()")
 	List<Item> trinkets(@Param("mapId") int mapId);
 
@@ -64,16 +94,36 @@ public interface ItemsRepository extends JpaRepository<Item, Integer>, JpaSpecif
 	 * @param mapId the {@link GameMap}'s ID
 	 * @return a {@link List} of {@link Item}s eligible for the troll build
 	 */
-	@Query("select i from Item i left join i.into i_into join i.maps m " +
-		   "where i.name is not null and i.description is not null " +
-		   "and i.gold.purchasable = true and i.consumed is null and (i.group is null or i.group <> 'FlaskGroup') " +
-		   "and i_into is null and key(m) = :mapId and m = true " +
-		   "and i.id <> 1001 and i.description not like '%Move Speed%' " +
-		   "and (i.name not like '%Potion%' and i.description not like '%Potion%') " +
-		   "and (i.name not like '%Trinket%' and i.description not like '%Trinket%') " +
-		   "and i.requiredAlly is null " +
-		   "and i.requiredChampion is null " +
-		   "and i.name not like 'Doran%'")
+	@Query("""
+           select i
+           from Item i
+           left join i.into i_into
+           join i.maps m
+           where i.name is not null
+           and i.description is not null
+           and i.gold.purchasable = true
+           and i.consumed is null
+           and (
+             i.group is null
+             or i.group <> 'FlaskGroup'
+           )
+           and i_into is null
+           and key(m) = :mapId
+           and m = true
+           and i.id <> 1001
+           and i.description not like '%Move Speed%'
+           and (
+             i.name not like '%Potion%'
+             and i.description not like '%Potion%'
+           )
+           and (
+             i.name not like '%Trinket%'
+             and i.description not like '%Trinket%'
+           )
+           and i.requiredAlly is null
+           and i.requiredChampion is null
+           and i.name not like 'Doran%'
+           """)
 	@Cacheable(key = "{#root.methodName, #mapId}", unless = "#result.isEmpty()")
 	List<Item> forTrollBuild(@Param("mapId") int mapId);
 

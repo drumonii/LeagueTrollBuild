@@ -67,62 +67,64 @@ class SummonerSpellDdragonTest {
 	@Test
 	void deserializesFromJson() {
 		String json =
-				"{" +
-				"  \"id\": \"SummonerBarrier\"," +
-				"  \"name\": \"Barrier\"," +
-				"  \"description\": \"Shields your champion from 115-455 damage (depending on champion level) for 2 seconds.\"," +
-				"  \"tooltip\": \"Temporarily shields {{ f1 }} damage from your champion for 2 seconds.\"," +
-				"  \"maxrank\": 1," +
-				"  \"cooldown\": [" +
-				"    180" +
-				"  ]," +
-				"  \"cooldownBurn\": \"180\"," +
-				"  \"cost\": [" +
-				"    0" +
-				"  ]," +
-				"  \"costBurn\": \"0\"," +
-				"  \"effect\": [" +
-				"    null," +
-				"    [" +
-				"      95" +
-				"    ]," +
-				"    [" +
-				"      20" +
-				"    ]" +
-				"  ]," +
-				"  \"effectBurn\": [" +
-				"    null," +
-				"    \"95\"," +
-				"    \"20\"" +
-				"  ]," +
-				"  \"vars\": []," +
-				"  \"key\": \"21\"," +
-				"  \"summonerLevel\": 4," +
-				"  \"modes\": [" +
-				"    \"ARAM\"," +
-				"    \"CLASSIC\"," +
-				"    \"TUTORIAL\"," +
-				"    \"ODIN\"," +
-				"    \"ASCENSION\"," +
-				"    \"FIRSTBLOOD\"" +
-				"  ]," +
-				"  \"costType\": \"NoCost\"," +
-				"  \"maxammo\": \"-1\"," +
-				"  \"range\": [" +
-				"    1200" +
-				"  ]," +
-				"  \"rangeBurn\": \"1200\"," +
-				"  \"image\": {" +
-				"    \"full\": \"SummonerBarrier.png\"," +
-				"    \"sprite\": \"spell0.png\"," +
-				"    \"group\": \"spell\"," +
-				"    \"x\": 0," +
-				"    \"y\": 0," +
-				"    \"w\": 48," +
-				"    \"h\": 48" +
-				"  }," +
-				"  \"resource\": \"No Cost\"" +
-				"}";
+				"""
+				{
+				  "id": "SummonerBarrier",
+				  "name": "Barrier",
+				  "description": "Shields your champion from 115-455 damage (depending on champion level) for 2 seconds.",
+				  "tooltip": "Temporarily shields {{ f1 }} damage from your champion for 2 seconds.",
+				  "maxrank": 1,
+				  "cooldown": [
+					180
+				  ],
+				  "cooldownBurn": "180",
+				  "cost": [
+					0
+				  ],
+				  "costBurn": "0",
+				  "effect": [
+					null,
+					[
+					  95
+					],
+					[
+					  20
+					]
+				  ],
+				  "effectBurn": [
+					null,
+					"95",
+					"20"
+				  ],
+				  "vars": [],
+				  "key": "21",
+				  "summonerLevel": 4,
+				  "modes": [
+					"ARAM",
+					"CLASSIC",
+					"TUTORIAL",
+					"ODIN",
+					"ASCENSION",
+					"FIRSTBLOOD"
+				  ],
+				  "costType": "NoCost",
+				  "maxammo": "-1",
+				  "range": [
+					1200
+				  ],
+				  "rangeBurn": "1200",
+				  "image": {
+					"full": "SummonerBarrier.png",
+					"sprite": "spell0.png",
+					"group": "spell",
+					"x": 0,
+					"y": 0,
+					"w": 48,
+					"h": 48
+				  },
+				  "resource": "No Cost"
+				}
+				""";
 
 		ObjectContent<SummonerSpell> summonerSpell = null;
 		try {

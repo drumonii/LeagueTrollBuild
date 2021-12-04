@@ -100,7 +100,7 @@ public class ImageApiServiceImpl implements ImageApiService {
         }
     }
 
-    private class ImageRowMapper implements RowMapper<Image> {
+    private static class ImageRowMapper implements RowMapper<Image> {
 
         @Override
         public Image mapRow(ResultSet rs, int rowNum) throws SQLException {

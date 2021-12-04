@@ -12,8 +12,11 @@ import java.util.List;
  */
 public interface BatchJobInstancesRepository extends JpaRepository<BatchJobInstance, Long> {
 
-    @Query("select ji from BatchJobInstance ji " +
-            "where ji.name = 'allRetrievalsJob'")
+    @Query("""
+           select ji
+           from BatchJobInstance ji
+           where ji.name = 'allRetrievalsJob'
+           """)
     List<BatchJobInstance> getMostRecentAllRetrievalsJob(Pageable pageable);
 
 }

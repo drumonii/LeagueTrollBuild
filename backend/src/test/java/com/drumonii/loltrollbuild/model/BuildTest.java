@@ -59,21 +59,23 @@ class BuildTest {
 	@Test
 	void deserializesFromJson() {
 		String json =
-				"{ " +
-				"  \"createdDate\": \"2017-09-14T22:55:26.47\", " +
-				"  \"id\": 1, " +
-				"  \"championId\": 1, " +
-				"  \"item1Id\": 1, " +
-				"  \"item2Id\": 2, " +
-				"  \"item3Id\": 3, " +
-				"  \"item4Id\": 4, " +
-				"  \"item5Id\": 5, " +
-				"  \"item6Id\": 6, " +
-				"  \"summonerSpell1Id\": 1, " +
-				"  \"summonerSpell2Id\": 2, " +
-				"  \"trinketId\": 7, " +
-				"  \"mapId\": 1 " +
-				"}";
+				"""
+				{
+				  "createdDate": "2017-09-14T22:55:26.47",
+				  "id": 1,
+				  "championId": 1,
+				  "item1Id": 1,
+				  "item2Id": 2,
+				  "item3Id": 3,
+				  "item4Id": 4,
+				  "item5Id": 5,
+				  "item6Id": 6,
+				  "summonerSpell1Id": 1,
+				  "summonerSpell2Id": 2,
+				  "trinketId": 7,
+				  "mapId": 1
+				}
+				""";
 
 		ObjectContent<Build> build = null;
 		try {

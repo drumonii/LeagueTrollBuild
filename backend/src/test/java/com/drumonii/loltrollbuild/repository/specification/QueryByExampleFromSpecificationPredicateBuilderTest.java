@@ -230,7 +230,7 @@ class QueryByExampleFromSpecificationPredicateBuilderTest {
 		verify(cb, times(1)).and(any());
 	}
 
-	class Person {
+	static class Person {
 
 		private Integer id;
 		private String name;
@@ -271,7 +271,7 @@ class QueryByExampleFromSpecificationPredicateBuilderTest {
 
 	}
 
-	private class DummySingularAttribute<X, T> implements SingularAttribute<X, T> {
+	private static class DummySingularAttribute<X, T> implements SingularAttribute<X, T> {
 
 		private String name;
 		private Class<T> javaType;
@@ -350,7 +350,7 @@ class QueryByExampleFromSpecificationPredicateBuilderTest {
 
 	}
 
-	private class DummySingularAttributePath<X> extends AbstractPathImpl<X> {
+	private static class DummySingularAttributePath<X> extends AbstractPathImpl<X> {
 
 		private SingularAttribute<?, X> attribute;
 
@@ -387,7 +387,7 @@ class QueryByExampleFromSpecificationPredicateBuilderTest {
 
 	}
 
-	private class DummyPluralAttribute<X, C, E> implements PluralAttribute<X, C, E> {
+	private static class DummyPluralAttribute<X, C, E> implements PluralAttribute<X, C, E> {
 
 		private Class<X> ownerType;
 		private Class<C> collectionClass;
@@ -474,7 +474,7 @@ class QueryByExampleFromSpecificationPredicateBuilderTest {
 
 	}
 
-	private class DummyPluralAttributePath<X> extends AbstractPathImpl<X> {
+	private static class DummyPluralAttributePath<X> extends AbstractPathImpl<X> {
 
 		private PluralAttribute<?, X, ?> attribute;
 
@@ -510,7 +510,7 @@ class QueryByExampleFromSpecificationPredicateBuilderTest {
 
 	}
 
-	private class DummyProperty extends Property {
+	private static class DummyProperty extends Property {
 
 		private String name;
 

@@ -62,7 +62,7 @@ public class ImageFetcher {
 		try {
 			url = uriComponents == null ? null : new URL(uriComponents.toUriString());
 		} catch (MalformedURLException e) {
-			LOGGER.error("Unable to create the URL with {}", uriComponents.toString(), e);
+			LOGGER.error("Unable to create the URL with {}", uriComponents, e);
 		}
 		if (url != null) {
 			try (FastByteArrayOutputStream output = new FastByteArrayOutputStream()) {

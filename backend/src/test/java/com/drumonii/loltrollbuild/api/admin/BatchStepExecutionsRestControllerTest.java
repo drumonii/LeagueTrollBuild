@@ -60,9 +60,13 @@ class BatchStepExecutionsRestControllerTest {
 		JobExecution jobExecution = jobExecutionDao.getLastJobExecution(jobInstance);
 
 		stepExecutionDao.saveStepExecution(new StepExecution("stepName", jobExecution));
-		List<StepExecution> stepExecutions =
-				jdbcTemplate.query("SELECT * FROM BATCH_STEP_EXECUTION WHERE JOB_EXECUTION_ID = ? ORDER BY STEP_EXECUTION_ID",
-						new StepExecutionRowMapper(jobExecution), jobExecution.getId());
+		List<StepExecution> stepExecutions = jdbcTemplate.query(
+				"""
+                SELECT * FROM BATCH_STEP_EXECUTION
+                WHERE JOB_EXECUTION_ID = ?
+                ORDER BY STEP_EXECUTION_ID
+                """,
+				new StepExecutionRowMapper(jobExecution), jobExecution.getId());
 		if (stepExecutions.isEmpty()) {
 			fail("Unable to find recent StepExecution for JobExecution Id: " + jobExecution.getId());
 		}

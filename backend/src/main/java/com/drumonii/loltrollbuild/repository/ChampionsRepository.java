@@ -26,7 +26,12 @@ public interface ChampionsRepository extends JpaRepository<Champion, Integer>, J
 	 * @param name the name to lookup (non case sensitive)
 	 * @return a {@link Champion} from its name
 	 */
-	@Query("select c from Champion c where lower(c.name) = lower(:name) or lower(c.key) = lower(:name)")
+	@Query("""
+           select c
+           from Champion c
+           where lower(c.name) = lower(:name)
+           or lower(c.key) = lower(:name)
+           """)
 	@Cacheable(unless = "#result == null")
 	Optional<Champion> findByName(@Param("name") String name);
 
@@ -35,7 +40,12 @@ public interface ChampionsRepository extends JpaRepository<Champion, Integer>, J
 	 *
 	 * @return the {@link List} of string tags
 	 */
-	@Query(value = "select distinct c.tag from champion_tag c order by c.tag", nativeQuery = true)
+	@Query(nativeQuery = true, value =
+			"""
+            select distinct c.tag
+            from champion_tag c
+            order by c.tag
+			""")
 	@Cacheable(key = "#root.methodName", unless = "#result.isEmpty()")
 	List<String> getTags();
 

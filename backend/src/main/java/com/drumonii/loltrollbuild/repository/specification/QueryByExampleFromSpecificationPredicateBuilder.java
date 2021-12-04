@@ -97,21 +97,11 @@ public class QueryByExampleFromSpecificationPredicateBuilder {
 				}
 
 				switch (exampleAccessor.getStringMatcherForPath(currentPath)) {
-				case DEFAULT:
-				case EXACT:
-					predicates.add(cb.equal(expression, attributeValue));
-					break;
-				case CONTAINING:
-					predicates.add(cb.like(expression, "%" + attributeValue + "%"));
-					break;
-				case STARTING:
-					predicates.add(cb.like(expression, attributeValue + "%"));
-					break;
-				case ENDING:
-					predicates.add(cb.like(expression, "%" + attributeValue));
-					break;
-				default:
-					break;
+					case DEFAULT, EXACT -> predicates.add(cb.equal(expression, attributeValue));
+					case CONTAINING -> predicates.add(cb.like(expression, "%" + attributeValue + "%"));
+					case STARTING -> predicates.add(cb.like(expression, attributeValue + "%"));
+					case ENDING -> predicates.add(cb.like(expression, "%" + attributeValue));
+					default -> {}
 				}
 			} else {
 				predicates.add(cb.equal(root.get(attribute), attributeValue));

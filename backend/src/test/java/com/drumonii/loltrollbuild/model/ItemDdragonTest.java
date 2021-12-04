@@ -81,45 +81,47 @@ class ItemDdragonTest {
 	@Test
 	void deserializesFromJson() {
 		String json =
-				"{" +
-				"  \"name\": \"Boots of Speed\"," +
-				"  \"description\": \"<groupLimit>Limited to 1.</groupLimit><br><br><unique>UNIQUE Passive - Enhanced Movement:</unique> +25 Movement Speed\"," +
-				"  \"into\": [" +
-				"    \"3006\"," +
-				"    \"3047\"," +
-				"    \"3020\"," +
-				"    \"3158\"," +
-				"    \"3111\"," +
-				"    \"3117\"," +
-				"    \"3009\"" +
-				"  ]," +
-				"  \"image\": {" +
-				"    \"full\": \"1001.png\"," +
-				"    \"sprite\": \"item0.png\"," +
-				"    \"group\": \"item\"," +
-				"    \"x\": 0," +
-				"    \"y\": 0," +
-				"    \"w\": 48," +
-				"    \"h\": 48" +
-				"  }," +
-				"  \"gold\": {" +
-				"    \"base\": 300," +
-				"    \"purchasable\": true," +
-				"    \"total\": 300," +
-				"    \"sell\": 210" +
-				"  }," +
-				"  \"tags\": [" +
-				"    \"Boots\"" +
-				"  ]," +
-				"  \"maps\": {" +
-				"    \"1\": false," +
-				"    \"8\": true," +
-				"    \"10\": true," +
-				"    \"11\": true," +
-				"    \"12\": true," +
-				"    \"14\": false" +
-				"  }" +
-				"}";
+				"""
+				{
+				  "name": "Boots of Speed",
+				  "description": "<groupLimit>Limited to 1.</groupLimit><br><br><unique>UNIQUE Passive - Enhanced Movement:</unique> +25 Movement Speed",
+				  "into": [
+					"3006",
+					"3047",
+					"3020",
+					"3158",
+					"3111",
+					"3117",
+					"3009"
+				  ],
+				  "image": {
+					"full": "1001.png",
+					"sprite": "item0.png",
+					"group": "item",
+					"x": 0,
+					"y": 0,
+					"w": 48,
+					"h": 48
+				  },
+				  "gold": {
+					"base": 300,
+					"purchasable": true,
+					"total": 300,
+					"sell": 210
+				  },
+				  "tags": [
+					"Boots"
+				  ],
+				  "maps": {
+					"1": false,
+					"8": true,
+					"10": true,
+					"11": true,
+					"12": true,
+					"14": false
+				  }
+				}
+				""";
 
 		ObjectContent<Item> item = null;
 		try {

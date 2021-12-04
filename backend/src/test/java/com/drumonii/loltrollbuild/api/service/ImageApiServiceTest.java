@@ -171,7 +171,7 @@ class ImageApiServiceTest {
         assertThat(mapImage).isNull();
     }
 
-    private class FetchedImage implements Consumer<Image> {
+    private static class FetchedImage implements Consumer<Image> {
 
         private Image image;
 

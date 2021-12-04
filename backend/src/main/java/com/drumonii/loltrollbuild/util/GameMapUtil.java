@@ -53,18 +53,13 @@ public class GameMapUtil {
 	 * @return the map name
 	 */
 	public static String getNameFromId(int mapId) {
-		switch (mapId) {
-		case CRYSTAL_SCAR_ID:
-			return CRYSTAL_SCAR;
-		case TWISTED_TREELINE_ID:
-			return TWISTED_TREELINE;
-		case SUMMONERS_RIFT_ID:
-			return SUMMONERS_RIFT;
-		case HOWLING_ABYSS_ID:
-			return HOWLING_ABYSS;
-		default:
-			return "";
-		}
+		return switch (mapId) {
+			case CRYSTAL_SCAR_ID -> CRYSTAL_SCAR;
+			case TWISTED_TREELINE_ID -> TWISTED_TREELINE;
+			case SUMMONERS_RIFT_ID -> SUMMONERS_RIFT;
+			case HOWLING_ABYSS_ID -> HOWLING_ABYSS;
+			default -> "";
+		};
 	}
 
 }

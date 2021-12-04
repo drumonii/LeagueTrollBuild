@@ -12,7 +12,6 @@ import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.springframework.beans.factory.config.BeanDefinition.SCOPE_SINGLETON;
 
@@ -26,7 +25,7 @@ public class JobLauncherTestUtilsBeanFactoryPostProcessor implements BeanFactory
 
         List<String> jobBeanDefinitionNames = Arrays.stream(beanDefinitionNames)
                 .filter(beanDefinitionName -> beanDefinitionName.endsWith("Job"))
-                .collect(Collectors.toList());
+                .toList();
 
         for (String jobBeanDefinitionName : jobBeanDefinitionNames) {
             String jobLauncherTestUtilsBeanName = jobBeanDefinitionName.substring(0, jobBeanDefinitionName.lastIndexOf("J"))

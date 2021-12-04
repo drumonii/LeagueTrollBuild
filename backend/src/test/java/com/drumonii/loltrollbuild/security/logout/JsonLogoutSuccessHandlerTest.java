@@ -37,18 +37,20 @@ class JsonLogoutSuccessHandlerTest {
                 new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
 
         String json =
-                "{" +
-                "  \"status\": \"SUCCESS\"," +
-                "  \"message\": \"Logout success\"," +
-                "  \"userDetails\": { " +
-                "    \"name\": \"username\"," +
-                "    \"authorities\": [" +
-                "      {" +
-                "        \"authority\": \"ROLE_ADMIN\"" +
-                "      }" +
-                "    ]" +
-                "  }" +
-                "}";
+                """
+                {
+                  "status": "SUCCESS",
+                  "message": "Logout success",
+                  "userDetails": {
+                    "name": "username",
+                    "authorities": [
+                      {
+                        "authority": "ROLE_ADMIN"
+                      }
+                    ]
+                  }
+                }
+                """;
 
         given(objectMapper.writeValueAsString(any(LogoutResponse.class))).willReturn(json);
 
@@ -66,10 +68,12 @@ class JsonLogoutSuccessHandlerTest {
 
 
         String json =
-                "{" +
-                "  \"status\": \"FAILED\"," +
-                "  \"message\": \"Logout failed\"" +
-                "}";
+                """
+                {
+                  "status": "FAILED",
+                  "message": "Logout failed"
+                }
+                """;
 
         given(objectMapper.writeValueAsString(any(LogoutResponse.class))).willReturn(json);
 

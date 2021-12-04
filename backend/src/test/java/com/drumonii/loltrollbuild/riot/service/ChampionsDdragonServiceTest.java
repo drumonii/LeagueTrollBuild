@@ -20,7 +20,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.atIndex;
@@ -61,7 +60,7 @@ class ChampionsDdragonServiceTest extends AbstractDdragonServiceTests {
 
 			List<String> championKeys = championsResponse.getChampions().values().stream()
 					.map(Champion::getKey)
-					.collect(Collectors.toList());
+					.toList();
 			for (String championKey : championKeys) {
 				mockWebServer.enqueue(new MockResponse()
 						.addHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
@@ -125,7 +124,7 @@ class ChampionsDdragonServiceTest extends AbstractDdragonServiceTests {
 					.map(championKey -> UriComponentsBuilder.fromPath(riotApiProperties.getDdragon().getChampion())
 							.buildAndExpand(latestVersion.getPatch(), riotApiProperties.getDdragon().getLocale(), championKey)
 							.toString())
-					.collect(Collectors.toList());
+					.toList();
 		}
 
 		@Override

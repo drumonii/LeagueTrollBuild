@@ -12,7 +12,11 @@ import java.util.List;
  */
 public interface BatchStepExecutionsRepository extends JpaRepository<BatchStepExecution, Long> {
 
-	@Query("select e from BatchStepExecution e where e.jobExecution.jobInstance.id = :jobInstanceId")
+	@Query("""
+           select e
+           from BatchStepExecution e
+           where e.jobExecution.jobInstance.id = :jobInstanceId
+           """)
 	List<BatchStepExecution> findByJobInstanceId(@Param("jobInstanceId") long jobInstanceId);
 
 }

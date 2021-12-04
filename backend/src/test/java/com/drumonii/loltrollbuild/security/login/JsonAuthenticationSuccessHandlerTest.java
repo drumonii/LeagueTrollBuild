@@ -37,18 +37,20 @@ class JsonAuthenticationSuccessHandlerTest {
                 new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
 
         String json =
-                "{" +
-                "  \"status\": \"SUCCESS\"," +
-                "  \"message\": \"Authentication success\"," +
-                "  \"userDetails\": {" +
-                "    \"name\": \"username\"," +
-                "    \"authorities\": [" +
-                "      { " +
-                "        \"authority\": \"ROLE_ADMIN\"" +
-                "      }" +
-                "    ]" +
-                "  }" +
-                "}";
+                """
+                {
+                  "status": "SUCCESS",
+                  "message": "Authentication success",
+                  "userDetails": {
+                    "name": "username",
+                    "authorities": [
+                      {
+                        "authority": "ROLE_ADMIN"
+                      }
+                    ]
+                  }
+                }
+                """;
 
         given(objectMapper.writeValueAsString(any(LoginResponse.class))).willReturn(json);
 

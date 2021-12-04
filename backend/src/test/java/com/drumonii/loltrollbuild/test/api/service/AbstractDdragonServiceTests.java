@@ -51,7 +51,7 @@ public abstract class AbstractDdragonServiceTests {
     @Autowired
     protected RiotApiProperties riotApiProperties;
 
-    public class RiotApiRecordedRequest implements Consumer<RecordedRequest> {
+    public static class RiotApiRecordedRequest implements Consumer<RecordedRequest> {
 
         @Override
         public void accept(RecordedRequest recordedRequest) {

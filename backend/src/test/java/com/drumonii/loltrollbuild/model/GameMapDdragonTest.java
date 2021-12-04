@@ -59,19 +59,21 @@ class GameMapDdragonTest {
 	@Test
 	void deserializesFromJson() {
 		String json =
-				"{" +
-				"  \"MapName\": \"Summoner's Rift\"," +
-				"  \"MapId\": \"11\"," +
-				"  \"image\": {" +
-				"    \"full\": \"map11.png\"," +
-				"    \"sprite\": \"map0.png\"," +
-				"    \"group\": \"map\"," +
-				"    \"x\": 0," +
-				"    \"y\": 0," +
-				"    \"w\": 48," +
-				"    \"h\": 48" +
-				"  }" +
-				"}";
+				"""
+				{
+				  "MapName": "Summoner's Rift",
+				  "MapId": "11",
+				  "image": {
+					"full": "map11.png",
+					"sprite": "map0.png",
+					"group": "map",
+					"x": 0,
+					"y": 0,
+					"w": 48,
+					"h": 48
+				  }
+				}
+				""";
 
 		ObjectContent<GameMap> map = null;
 		try {

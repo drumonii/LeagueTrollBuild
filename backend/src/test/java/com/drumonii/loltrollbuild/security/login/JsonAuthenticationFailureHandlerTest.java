@@ -32,10 +32,12 @@ class JsonAuthenticationFailureHandlerTest {
         BadCredentialsException authenticationException = new BadCredentialsException("Bad Credentials");
 
         String json =
-                "{" +
-                "  \"status\": \"FAILED\"," +
-                "  \"message\": \"Bad Credentials\"" +
-                "}";
+                """
+                {
+                  "status": "FAILED",
+                  "message": "Bad Credentials"
+                }
+                """;
 
         given(objectMapper.writeValueAsString(any(LoginResponse.class))).willReturn(json);
 

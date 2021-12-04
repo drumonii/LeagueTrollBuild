@@ -134,7 +134,7 @@ public class AllRetrievalsJobConfig {
 
 	}
 
-	private class AllRetrievalsJobParametersValidator extends DefaultJobParametersValidator {
+	private static class AllRetrievalsJobParametersValidator extends DefaultJobParametersValidator {
 
 		AllRetrievalsJobParametersValidator() {
 			super(new String[] { LATEST_PATCH_KEY }, new String[0]);

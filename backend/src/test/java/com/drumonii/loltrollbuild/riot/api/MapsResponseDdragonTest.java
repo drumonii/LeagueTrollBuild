@@ -41,11 +41,13 @@ class MapsResponseDdragonTest {
     @Test
     void deserializesFromJson() {
         String json =
-                "{" +
-                "  \"type\": \"map\"," +
-                "  \"version\": \"8.16.1\"," +
-                "  \"data\": {}" +
-                "}";
+                """
+                {
+                  "type": "map",
+                  "version": "8.16.1",
+                  "data": {}
+                }
+                """;
 
         ObjectContent<MapsResponse> response = null;
         try {

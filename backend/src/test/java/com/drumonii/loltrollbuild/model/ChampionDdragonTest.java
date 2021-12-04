@@ -110,108 +110,110 @@ class ChampionDdragonTest {
 	@Test
 	void deserializesFromJson() {
 		String json =
-				"{" +
-				"  \"id\": \"Jax\"," +
-				"  \"key\": \"24\"," +
-				"  \"name\": \"Jax\"," +
-				"  \"title\": \"Grandmaster at Arms\"," +
-				"  \"image\": {" +
-				"    \"full\": \"Jax.png\"," +
-				"    \"sprite\": \"champion1.png\"," +
-				"    \"group\": \"champion\"," +
-				"    \"x\": 48," +
-				"    \"y\": 48," +
-				"    \"w\": 48," +
-				"    \"h\": 48" +
-				"  }," +
-				"  \"tags\": [" +
-				"    \"Fighter\"," +
-				"    \"Assassin\"" +
-				"  ]," +
-				"  \"partype\": \"MP\"," +
-				"  \"info\": {" +
-				"    \"attack\": 7," +
-				"    \"defense\": 5," +
-				"    \"magic\": 7," +
-				"    \"difficulty\": 5" +
-				"  }," +
-				"  \"stats\": {}," +
-				"  \"spells\": [" +
-				"    {" +
-				"      \"id\": \"JaxLeapStrike\"," +
-				"      \"name\": \"Leap Strike\"," +
-				"      \"description\": \"Jax leaps toward a unit. If they are an enemy, he strikes them with his weapon.\"," +
-				"      \"tooltip\": \"Jax leaps to target unit, dealing {{ e1 }} <span class=\\\"colorFF8C00\\\">(+{{ f1 }})</span> <span class=\\\"color99FF99\\\">(+{{ a1 }})</span> physical damage if it is an enemy.\"," +
-				"      \"image\": {" +
-				"        \"full\": \"JaxLeapStrike.png\"," +
-				"        \"sprite\": \"spell4.png\"," +
-				"        \"group\": \"spell\"," +
-				"        \"x\": 384," +
-				"        \"y\": 48," +
-				"        \"w\": 48," +
-				"        \"h\": 48" +
-				"      }" +
-				"    }," +
-				"    {" +
-				"      \"id\": \"JaxEmpowerTwo\"," +
-				"      \"name\": \"Empower\"," +
-				"      \"description\": \"Jax charges his weapon with energy, causing his next attack to deal additional damage.\"," +
-				"      \"tooltip\": \"Jax charges his weapon with energy, causing his next basic attack or Leap Strike to deal an additional {{ e1 }} <span class=\\\"color99FF99\\\">(+{{ a1 }}) </span>Magic Damage.\"," +
-				"      \"image\": {" +
-				"        \"full\": \"JaxEmpowerTwo.png\"," +
-				"        \"sprite\": \"spell4.png\"," +
-				"        \"group\": \"spell\"," +
-				"        \"x\": 432," +
-				"        \"y\": 48," +
-				"        \"w\": 48," +
-				"        \"h\": 48" +
-				"      }" +
-				"    }," +
-				"    {" +
-				"      \"id\": \"JaxCounterStrike\"," +
-				"      \"name\": \"Counter Strike\"," +
-				"      \"description\": \"Jax's combat prowess allows him to dodge all incoming attacks for a short duration and then quickly counterattack, stunning all surrounding enemies.\"," +
-				"      \"tooltip\": \"Jax enters a defensive stance for up to {{ e6 }} seconds, dodging all incoming basic attacks and taking {{ e3 }}% less damage from area of effect abilities.<br><br>After 2 seconds or if activated again, Jax stuns surrounding enemies for {{ e2 }} second and deals {{ e1 }} <span class=\\\"colorFF8C00\\\">(+{{ f2 }})</span> physical damage to them.<br><br><span class=\\\"color99FF99\\\">Counter Strike deals {{ e5 }}% more damage for each attack Jax dodged (max: {{ e4 }}% increased damage).</span>\"," +
-				"      \"image\": {" +
-				"        \"full\": \"JaxCounterStrike.png\"," +
-				"        \"sprite\": \"spell4.png\"," +
-				"        \"group\": \"spell\"," +
-				"        \"x\": 0," +
-				"        \"y\": 96," +
-				"        \"w\": 48," +
-				"        \"h\": 48" +
-				"      }" +
-				"    }," +
-				"    {" +
-				"      \"id\": \"JaxRelentlessAssault\"," +
-				"      \"name\": \"Grandmaster's Might\"," +
-				"      \"description\": \"Every third consecutive attack deals additional Magic Damage. Additionally, Jax can activate this ability to strengthen his resolve, increasing his Armor and Magic Resist for a short duration.\"," +
-				"      \"tooltip\": \"<span class=\\\"colorFF9900\\\">Passive:</span> Every third consecutive strike Jax deals {{ e1 }}<span class=\\\"color99FF99\\\"> (+{{ a1 }}) </span>additional Magic Damage.<br><br><span class=\\\"colorFF9900\\\">Active:</span> Jax strengthens his resolve, granting him <span class=\\\"colorFF8C00\\\">{{ f2 }}</span> Armor and <span class=\\\"color99FF99\\\">{{ f1 }}</span> Magic Resist for {{ e5 }} seconds.<span class=\\\"colorFF8C00\\\"><br><br>Armor bonus is equal to {{ e3 }} + {{ e6 }}% bonus Attack Damage.</span><span class=\\\"color99FF99\\\"><br>Magic Resist bonus is equal to {{ e3 }} + {{ e7 }}% Ability Power.</span>\"," +
-				"      \"image\": {" +
-				"        \"full\": \"JaxRelentlessAssault.png\"," +
-				"        \"sprite\": \"spell4.png\"," +
-				"        \"group\": \"spell\"," +
-				"        \"x\": 48," +
-				"        \"y\": 96," +
-				"        \"w\": 48," +
-				"        \"h\": 48" +
-				"      }" +
-				"    }" +
-				"  ]," +
-				"  \"passive\": {" +
-				"    \"name\": \"Relentless Assault\"," +
-				"    \"description\": \"Jax's consecutive basic attacks continuously increase his Attack Speed.\"," +
-				"    \"image\": {" +
-				"      \"full\": \"Armsmaster_MasterOfArms.png\"," +
-				"      \"sprite\": \"passive1.png\"," +
-				"      \"group\": \"passive\"," +
-				"      \"x\": 144," +
-				"      \"y\": 48," +
-				"      \"w\": 48," +
-				"      \"h\": 48" +
-				"    }" +
-				"  }" +
-				"}";
+				"""
+				{
+				  "id": "Jax",
+				  "key": "24",
+				  "name": "Jax",
+				  "title": "Grandmaster at Arms",
+				  "image": {
+					"full": "Jax.png",
+					"sprite": "champion1.png",
+					"group": "champion",
+					"x": 48,
+					"y": 48,
+					"w": 48,
+					"h": 48
+				  },
+				  "tags": [
+					"Fighter",
+					"Assassin"
+				  ],
+				  "partype": "MP",
+				  "info": {
+					"attack": 7,
+					"defense": 5,
+					"magic": 7,
+					"difficulty": 5
+				  },
+				  "stats": {},
+				  "spells": [
+					{
+					  "id": "JaxLeapStrike",
+					  "name": "Leap Strike",
+					  "description": "Jax leaps toward a unit. If they are an enemy, he strikes them with his weapon.",
+					  "tooltip": "Jax leaps to target unit, dealing {{ e1 }} <span class=\\"colorFF8C00\\">(+{{ f1 }})</span> <span class=\\"color99FF99\\">(+{{ a1 }})</span> physical damage if it is an enemy.",
+					  "image": {
+						"full": "JaxLeapStrike.png",
+						"sprite": "spell4.png",
+						"group": "spell",
+						"x": 384,
+						"y": 48,
+						"w": 48,
+						"h": 48
+					  }
+					},
+					{
+					  "id": "JaxEmpowerTwo",
+					  "name": "Empower",
+					  "description": "Jax charges his weapon with energy, causing his next attack to deal additional damage.",
+					  "tooltip": "Jax charges his weapon with energy, causing his next basic attack or Leap Strike to deal an additional {{ e1 }} <span class=\\"color99FF99\\">(+{{ a1 }}) </span>Magic Damage.",
+					  "image": {
+						"full": "JaxEmpowerTwo.png",
+						"sprite": "spell4.png",
+						"group": "spell",
+						"x": 432,
+						"y": 48,
+						"w": 48,
+						"h": 48
+					  }
+					},
+					{
+					  "id": "JaxCounterStrike",
+					  "name": "Counter Strike",
+					  "description": "Jax's combat prowess allows him to dodge all incoming attacks for a short duration and then quickly counterattack, stunning all surrounding enemies.",
+					  "tooltip": "Jax enters a defensive stance for up to {{ e6 }} seconds, dodging all incoming basic attacks and taking {{ e3 }}% less damage from area of effect abilities.<br><br>After 2 seconds or if activated again, Jax stuns surrounding enemies for {{ e2 }} second and deals {{ e1 }} <span class=\\"colorFF8C00\\">(+{{ f2 }})</span> physical damage to them.<br><br><span class=\\"color99FF99\\">Counter Strike deals {{ e5 }}% more damage for each attack Jax dodged (max: {{ e4 }}% increased damage).</span>",
+					  "image": {
+						"full": "JaxCounterStrike.png",
+						"sprite": "spell4.png",
+						"group": "spell",
+						"x": 0,
+						"y": 96,
+						"w": 48,
+						"h": 48
+					  }
+					},
+					{
+					  "id": "JaxRelentlessAssault",
+					  "name": "Grandmaster's Might",
+					  "description": "Every third consecutive attack deals additional Magic Damage. Additionally, Jax can activate this ability to strengthen his resolve, increasing his Armor and Magic Resist for a short duration.",
+					  "tooltip": "<span class=\\"colorFF9900\\">Passive:</span> Every third consecutive strike Jax deals {{ e1 }}<span class=\\"color99FF99\\"> (+{{ a1 }}) </span>additional Magic Damage.<br><br><span class=\\"colorFF9900\\">Active:</span> Jax strengthens his resolve, granting him <span class=\\"colorFF8C00\\">{{ f2 }}</span> Armor and <span class=\\"color99FF99\\">{{ f1 }}</span> Magic Resist for {{ e5 }} seconds.<span class=\\"colorFF8C00\\"><br><br>Armor bonus is equal to {{ e3 }} + {{ e6 }}% bonus Attack Damage.</span><span class=\\"color99FF99\\"><br>Magic Resist bonus is equal to {{ e3 }} + {{ e7 }}% Ability Power.</span>",
+					  "image": {
+						"full": "JaxRelentlessAssault.png",
+						"sprite": "spell4.png",
+						"group": "spell",
+						"x": 48,
+						"y": 96,
+						"w": 48,
+						"h": 48
+					  }
+					}
+				  ],
+				  "passive": {
+					"name": "Relentless Assault",
+					"description": "Jax's consecutive basic attacks continuously increase his Attack Speed.",
+					"image": {
+					  "full": "Armsmaster_MasterOfArms.png",
+					  "sprite": "passive1.png",
+					  "group": "passive",
+					  "x": 144,
+					  "y": 48,
+					  "w": 48,
+					  "h": 48
+					}
+				  }
+				}
+				""";
 
 		ObjectContent<Champion> champion = null;
 		try {

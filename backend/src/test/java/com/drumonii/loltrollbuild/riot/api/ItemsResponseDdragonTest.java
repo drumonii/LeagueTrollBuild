@@ -41,11 +41,13 @@ class ItemsResponseDdragonTest {
     @Test
     void deserializesFromJson() {
         String json =
-                "{" +
-                "  \"type\": \"item\"," +
-                "  \"version\": \"8.16.1\"," +
-                "  \"data\": {}" +
-                "}";
+                """
+                {
+                  "type": "item",
+                  "version": "8.16.1",
+                  "data": {}
+                }
+                """;
 
         ObjectContent<ItemsResponse> response = null;
         try {

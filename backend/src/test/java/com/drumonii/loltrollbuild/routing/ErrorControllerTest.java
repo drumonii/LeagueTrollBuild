@@ -52,7 +52,7 @@ class ErrorControllerTest {
                 .andExpect(forwardedUrl("/troll-build/index.html"));
     }
 
-    private class ErrorDispatcher implements RequestBuilder {
+    private static class ErrorDispatcher implements RequestBuilder {
 
         private MvcResult result;
         private String errorPath;

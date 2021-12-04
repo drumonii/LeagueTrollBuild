@@ -28,8 +28,12 @@ public interface SummonerSpellsRepository extends JpaRepository<SummonerSpell, I
 	 * @return a {@link List} of {@link SummonerSpell}s eligible for the troll build
 	 * @see <a href="http://leagueoflegends.wikia.com/wiki/Category:Game_modes">Game Modes</a>
 	 */
-	@Query("select s from SummonerSpell s join s.modes m " +
-		   "where m in (:mode)")
+	@Query("""
+           select s
+           from SummonerSpell s
+           join s.modes m
+           where m in (:mode)
+           """)
 	@Cacheable(key = "{#root.methodName, #mode}", unless = "#result.isEmpty()")
 	List<SummonerSpell> forTrollBuild(@Param("mode") GameMode mode);
 

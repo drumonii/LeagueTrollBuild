@@ -21,7 +21,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import static java.util.function.Predicate.not;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -58,7 +57,7 @@ abstract class SummonerSpellsRetrievalJobConfigTest extends AbstractBatchTests {
 
 		List<SummonerSpell> summonerSpellsWithModes = summonerSpellsResponse.getSummonerSpells().values().stream()
 				.filter(not(summonerSpell -> summonerSpell.getModes().isEmpty()))
-				.collect(Collectors.toList());
+				.toList();
 
 		JobExecution jobExecution = jobLauncherTestUtils.launchJob(getJobParameters());
 		assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
@@ -78,7 +77,7 @@ abstract class SummonerSpellsRetrievalJobConfigTest extends AbstractBatchTests {
 
 		List<SummonerSpell> summonerSpellsWithModes = summonerSpellsResponse.getSummonerSpells().values().stream()
 				.filter(not(summonerSpell -> summonerSpell.getModes().isEmpty()))
-				.collect(Collectors.toList());
+				.toList();
 
 		List<SummonerSpell> summonerSpells = summonerSpellsRepository.saveAll(summonerSpellsWithModes);
 

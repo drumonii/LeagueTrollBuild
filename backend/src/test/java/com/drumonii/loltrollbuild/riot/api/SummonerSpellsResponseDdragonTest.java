@@ -41,11 +41,13 @@ class SummonerSpellsResponseDdragonTest {
     @Test
     void deserializesFromJson() {
         String json =
-                "{" +
-                "  \"type\": \"summoner\"," +
-                "  \"version\": \"8.16.1\"," +
-                "  \"data\": {}" +
-                "}";
+                """
+                {
+                  "type": "summoner",
+                  "version": "8.16.1",
+                  "data": {}
+                }
+                """;
 
         ObjectContent<SummonerSpellsResponse> response = null;
         try {
