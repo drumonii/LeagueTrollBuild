@@ -89,6 +89,10 @@ server:
       enabled: false
   compression:
     enabled: true
+# Logging
+logging:
+  level:
+    org.flywaydb.core.internal.sqlscript: ERROR
 
 ---
 
