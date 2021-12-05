@@ -50,6 +50,10 @@ Optionally, you can use the `embedded` profile override with:
 
 Once the app starts, view http://localhost:8080[localhost:8080] on your browser.
 
+To remote debug the app, use the `-Xdebug` flag:
+
+  java -Xdebug -Xrunjdwp:server=y,transport=dt_socket,address=5005,suspend=n -jar league-troll-build.jar
+
 == Docker
 Instead of building and running the project manually, you can use Docker to do that. This assumes you have Docker already installed.
 
