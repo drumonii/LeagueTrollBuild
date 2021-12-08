@@ -123,6 +123,20 @@
             ],
             "scripts": []
           }
+        },
+        "e2e": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "devServerTarget": "admin:serve",
+            "watch": true,
+            "headless": false,
+            "configFile": "projects/admin/cypress.json"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "admin:serve:production"
+            }
+          }
         }
       }
     },
@@ -239,6 +253,20 @@
               "projects/troll-build/src/styles/ltb.scss"
             ],
             "scripts": []
+          }
+        },
+        "e2e": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "devServerTarget": "troll-build:serve",
+            "watch": true,
+            "headless": false,
+            "configFile": "projects/troll-build/cypress.json"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "troll-build:serve:production"
+            }
           }
         }
       }

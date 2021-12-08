@@ -1,14 +1,8 @@
-/* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
-  "extends": "../../../tsconfig.json",
+  "extends": "../tsconfig.app.json",
+  "include": ["**/*.ts"],
   "compilerOptions": {
-    "outDir": "../../../out-tsc/troll-build-e2e",
-    "module": "commonjs",
-    "target": "es2018",
-    "types": [
-      "jasmine",
-      "jasminewd2",
-      "node"
-    ]
+    "sourceMap": false,
+    "types": ["cypress"]
   }
 }
