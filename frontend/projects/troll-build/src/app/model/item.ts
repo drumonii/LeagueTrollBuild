@@ -6,13 +6,13 @@ import { ItemGold } from './item-gold';
 export interface Item {
   id: number;
   name: string;
-  group: string;
-  consumed: boolean;
+  group?: string;
+  consumed?: boolean;
   description: string;
   from: number[];
   into: number[];
-  requiredChampion: string;
-  requiredAlly: string;
+  requiredChampion?: string;
+  requiredAlly?: string;
   maps: ItemMap;
   gold: ItemGold;
 }

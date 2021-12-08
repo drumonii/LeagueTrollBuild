@@ -8,11 +8,11 @@ import { Champion } from '@ltb-model/champion';
 import { ChampionService } from './champion.service';
 
 @Injectable()
-export class ChampionResolver implements Resolve<Champion> {
+export class ChampionResolver implements Resolve<Champion | null> {
 
   constructor(private championService: ChampionService, private router: Router) {}
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Champion> {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Champion | null> {
     const name = route.paramMap.get('name');
 
     return this.championService.getChampion(name)

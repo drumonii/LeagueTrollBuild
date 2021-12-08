@@ -1,9 +1,9 @@
-import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
+import { ComponentFixture, inject, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { By } from '@angular/platform-browser';
 
-import { NbA11yModule } from '@nebular/theme';
+import { NbA11yModule, NbStatusService } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 
 import { of } from 'rxjs';
@@ -19,12 +19,20 @@ describe('ChampionsPage', () => {
   let component: ChampionsPage;
   let fixture: ComponentFixture<ChampionsPage>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, RouterTestingModule, NbA11yModule.forRoot(), NbEvaIconsModule, ChampionsModule],
+      providers: [
+        {
+          provide: NbStatusService,
+          useValue: {
+            isCustomStatus: () => false
+          }
+        }
+      ]
     })
     .compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ChampionsPage);

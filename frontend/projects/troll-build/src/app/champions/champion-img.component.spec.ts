@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { RouterLinkWithHref } from '@angular/router';
 import { By } from '@angular/platform-browser';
@@ -35,12 +35,12 @@ describe('ChampionImgComponent', () => {
     ]
   };
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       imports: [RouterTestingModule, ChampionImgModule]
     })
     .compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ChampionImgComponent);
@@ -60,8 +60,8 @@ describe('ChampionImgComponent', () => {
     expect(championName.nativeElement.textContent).toBe(alistar.name);
 
     const championImg = fixture.debugElement.query(By.css('[data-e2e="champion-img"]'));
-    expect(championImg.nativeElement.src).toContain('assets/images/dummy_champion.png');
-    expect(championImg.attributes['ng-reflect-img-src']).toBe(`/api/img/champions/${alistar.id}`);
+    expect(championImg.nativeElement.src).toContain(`/api/img/champions/${alistar.id}`);
+    expect(championImg.attributes['src']).toBe('assets/images/dummy_champion.png');
     expect(championImg.attributes['loading']).toBe('lazy');
   });
 });

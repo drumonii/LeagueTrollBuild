@@ -5,7 +5,7 @@ import { SummonerSpell } from '@ltb-model/summoner-spell';
  * Troll Build (random build).
  */
 export interface TrollBuild {
-  items: Item[];
-  summonerSpells: SummonerSpell[];
-  trinket: Item;
+  items: Item[] | null;
+  summonerSpells: SummonerSpell[] | null;
+  trinket: Item | null;
 }

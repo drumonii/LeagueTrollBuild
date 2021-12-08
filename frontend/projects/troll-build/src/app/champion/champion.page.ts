@@ -10,6 +10,7 @@ import { Build, BuildBuilder } from '@ltb-model/build';
 import { Champion } from '@ltb-model/champion';
 import { GameMap, SummonersRiftId } from '@ltb-model/game-map';
 import { TrollBuild } from '@ltb-model/troll-build';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'ltb-champion',
@@ -27,13 +28,13 @@ export class ChampionPage implements OnInit {
   trollBuild$: Observable<TrollBuild>;
   trollBuildLoading = true;
 
-  build$: Observable<Build>;
+  build$: Observable<Build | null>;
   buildSaving = false;
 
   constructor(private championService: ChampionService, private title: TitleService, private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.route.data.subscribe((data: { champion: Champion }) => {
+    this.route.data.subscribe((data: any) => {
       this.champion = data.champion;
       this.setTitle(data.champion.name);
     });

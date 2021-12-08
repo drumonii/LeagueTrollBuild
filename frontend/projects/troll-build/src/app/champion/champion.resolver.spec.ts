@@ -1,7 +1,7 @@
-import { async, inject, TestBed } from '@angular/core/testing';
+import { fakeAsync, inject, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { ActivatedRouteSnapshot, convertToParamMap, Router } from '@angular/router';
+import { ActivatedRouteSnapshot, convertToParamMap, Router, RouterStateSnapshot } from '@angular/router';
 
 import { of } from 'rxjs';
 
@@ -11,9 +11,11 @@ import { Champion } from '@ltb-model/champion';
 
 describe('ChampionResolver', () => {
   let resolver: ChampionResolver;
+  let route: ActivatedRouteSnapshot;
+  let state: RouterStateSnapshot;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, RouterTestingModule],
       providers: [ChampionResolver, ChampionService,
         {
@@ -21,14 +23,22 @@ describe('ChampionResolver', () => {
           useValue: {
             paramMap: convertToParamMap({ name: 'Kennen' })
           }
+        },
+        {
+          provide: RouterStateSnapshot,
+          useValue: {
+            url: '/champion/Kennen'
+          }
         }
       ]
     })
     .compileComponents();
-  }));
+  });
 
   beforeEach(inject([Router], (router: Router) => {
     resolver = TestBed.inject(ChampionResolver);
+    route = TestBed.inject(ActivatedRouteSnapshot);
+    state = TestBed.inject(RouterStateSnapshot);
 
     spyOn(router, 'navigate');
   }));
@@ -38,8 +48,7 @@ describe('ChampionResolver', () => {
   }));
 
   it('should resolve a Champion',
-    async(inject([ChampionService, Router, ActivatedRouteSnapshot],
-      (championsService: ChampionService, router: Router, route: ActivatedRouteSnapshot) => {
+    fakeAsync(inject([ChampionService, Router], (championsService: ChampionService, router: Router) => {
     const kennen: Champion = {
       id: 85,
       key: 'Kennen',
@@ -66,18 +75,17 @@ describe('ChampionResolver', () => {
     };
     spyOn(championsService, 'getChampion').and.returnValue(of(kennen));
 
-    resolver.resolve(route, null).subscribe(champion => {
+    resolver.resolve(route, state).subscribe(champion => {
       expect(champion).toEqual(kennen);
       expect(router.navigate).not.toHaveBeenCalled();
     });
   })));
 
   it('should redirect to /champions when unable to resolve a Champion',
-    async(inject([ChampionService, Router, ActivatedRouteSnapshot],
-      (championsService: ChampionService, router: Router, route: ActivatedRouteSnapshot) => {
+    fakeAsync(inject([ChampionService, Router], (championsService: ChampionService, router: Router) => {
     spyOn(championsService, 'getChampion').and.returnValue(of(null));
 
-    resolver.resolve(route, null).subscribe(champion => {
+    resolver.resolve(route, state).subscribe(champion => {
       expect(champion).toBeNull();
       expect(router.navigate).toHaveBeenCalledWith(['/champions']);
     });

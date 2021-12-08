@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Observable, of } from 'rxjs';
-
-import * as packageJson from '../../../../../../package.json';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'ltb-admin-footer',
@@ -11,16 +9,11 @@ import * as packageJson from '../../../../../../package.json';
 })
 export class AdminFooterComponent implements OnInit {
 
-  appVersion$: Observable<string>;
+  appVersion = environment.version;
 
   constructor() { }
 
   ngOnInit() {
-    this.getAppVersion();
-  }
-
-  private getAppVersion() {
-    this.appVersion$ = of(packageJson.version);
   }
 
 }

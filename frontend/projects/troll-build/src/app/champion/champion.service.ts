@@ -15,7 +15,7 @@ export class ChampionService {
 
   constructor(private logger: Logger, private httpClient: HttpClient) {}
 
-  getChampion(name: string): Observable<Champion> {
+  getChampion(name: string): Observable<Champion | null> {
     this.logger.info('GETing Champion', name);
     return this.httpClient.get<Champion>(`/champions/${name}`)
       .pipe(
@@ -57,7 +57,7 @@ export class ChampionService {
       );
   }
 
-  saveBuild(build: Build): Observable<HttpResponse<Build>> {
+  saveBuild(build: Build): Observable<HttpResponse<Build>> | null {
     this.logger.info('POSTing build', JSON.stringify(build));
     return this.httpClient.post<HttpResponse<Build>>('/builds', build,
       {

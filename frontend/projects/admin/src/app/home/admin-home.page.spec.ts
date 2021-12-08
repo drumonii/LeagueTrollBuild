@@ -1,4 +1,4 @@
-import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
+import { ComponentFixture, inject, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { By } from '@angular/platform-browser';
@@ -15,12 +15,12 @@ describe('AdminHomePage', () => {
   let component: AdminHomePage;
   let fixture: ComponentFixture<AdminHomePage>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, NoopAnimationsModule, AdminHomeModule]
     })
     .compileComponents();
-  }));
+  });
 
   beforeEach(inject([AdminTitleService], (title: AdminTitleService) => {
     fixture = TestBed.createComponent(AdminHomePage);

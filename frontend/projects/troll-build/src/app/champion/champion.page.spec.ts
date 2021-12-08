@@ -1,4 +1,4 @@
-import { async, ComponentFixture, fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { FormsModule } from '@angular/forms';
@@ -6,7 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { By } from '@angular/platform-browser';
 
-import { NbSelectComponent, NbThemeModule } from '@nebular/theme';
+import { NbSelectComponent, NbStatusService, NbThemeModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 
 import { of } from 'rxjs';
@@ -110,8 +110,8 @@ describe('ChampionPage', () => {
 
   const maps: GameMap[] = [howlingAbyss, summonersRift, twistedTreeline]; // sorted alphabetically from api
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       imports: [FormsModule, HttpClientTestingModule, RouterTestingModule, NbThemeModule.forRoot(), NbEvaIconsModule, ChampionModule],
       providers: [
         {
@@ -119,11 +119,17 @@ describe('ChampionPage', () => {
           useValue: {
             data: of({ champion: skarner })
           }
+        },
+        {
+          provide: NbStatusService,
+          useValue: {
+            isCustomStatus: () => false
+          }
         }
       ]
     })
     .compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ChampionPage);
@@ -168,16 +174,12 @@ describe('ChampionPage', () => {
         {
           id: 3020,
           name: 'Sorcerer\'s Shoes',
-          group: null,
-          consumed: null,
           description: '<groupLimit>Limited to 1 pair of boots.</groupLimit><br><br><stats>+18 <a href=\'FlatMagicPen\'>' +
             'Magic Penetration</a></stats><br><br><unique>UNIQUE Passive - Enhanced Movement:</unique> +45 Movement Speed',
           from: [
             1001
           ],
           into: [],
-          requiredChampion: null,
-          requiredAlly: null,
           maps: {
             10: true,
             11: true,
@@ -194,8 +196,6 @@ describe('ChampionPage', () => {
         {
           id: 3026,
           name: 'Guardian Angel',
-          group: null,
-          consumed: null,
           description: '<stats>+45 Attack Damage<br>+40 Armor</stats><br><br><unique>UNIQUE Passive:</unique> Upon taking ' +
             'lethal damage, restores 50% of base Health and 30% of maximum Mana after 4 seconds of stasis (300 second cooldown).',
           from: [
@@ -204,8 +204,6 @@ describe('ChampionPage', () => {
             2420
           ],
           into: [],
-          requiredChampion: null,
-          requiredAlly: null,
           maps: {
             10: false,
             11: true,
@@ -222,8 +220,6 @@ describe('ChampionPage', () => {
         {
           id: 3401,
           name: 'Remnant of the Aspect',
-          group: null,
-          consumed: null,
           description: '<stats>+350 Health<br>+200% Base Health Regen <br>+10% Cooldown Reduction<br>+1 Gold per 10 ' +
             'seconds </stats><br><br><unique>UNIQUE Passive - Spoils of War:</unique> Melee basic attacks execute minions ' +
             'below 320 (+20 per level) Health. Killing a minion heals the owner and the nearest allied champion for 50 ' +
@@ -238,8 +234,6 @@ describe('ChampionPage', () => {
             3097
           ],
           into: [],
-          requiredChampion: null,
-          requiredAlly: null,
           maps: {
             10: false,
             11: true,
@@ -256,8 +250,6 @@ describe('ChampionPage', () => {
         {
           id: 3135,
           name: 'Void Staff',
-          group: null,
-          consumed: null,
           description: '<stats>+70 Ability Power</stats><br><br><unique>UNIQUE Passive:</unique> +40% <a href=\'TotalMagicPen\'>' +
             'Magic Penetration</a>.',
           from: [
@@ -265,8 +257,6 @@ describe('ChampionPage', () => {
             1052
           ],
           into: [],
-          requiredChampion: null,
-          requiredAlly: null,
           maps: {
             10: true,
             11: true,
@@ -283,8 +273,6 @@ describe('ChampionPage', () => {
         {
           id: 3165,
           name: 'Morellonomicon',
-          group: null,
-          consumed: null,
           description: '<stats>+80 Ability Power<br>+300 Health</stats><br><br><unique>UNIQUE Passive - Touch of Death:' +
             '</unique> +15 <a href=\'FlatMagicPen\'>Magic Penetration</a><br><unique>UNIQUE Passive - Cursed Strike:' +
             '</unique> Magic damage dealt to champions inflicts them with <a href=\'GrievousWounds\'>Grievous Wounds</a> ' +
@@ -294,8 +282,6 @@ describe('ChampionPage', () => {
             3916
           ],
           into: [],
-          requiredChampion: null,
-          requiredAlly: null,
           maps: {
             10: true,
             11: true,
@@ -312,8 +298,6 @@ describe('ChampionPage', () => {
         {
           id: 3508,
           name: 'Essence Reaver',
-          group: null,
-          consumed: null,
           description: '<stats>+75 Attack Damage<br>+20% Cooldown Reduction<br><mana>+300 Mana</mana></stats><br><br><unique>' +
             'UNIQUE Passive:</unique> Basic attacks refund 1% of your missing mana.<br><unique>UNIQUE Passive:</unique> ' +
             'After you cast your ultimate, your next basic attack within 10 seconds grants you <unlockedPassive>Essence ' +
@@ -325,8 +309,6 @@ describe('ChampionPage', () => {
             3133
           ],
           into: [],
-          requiredChampion: null,
-          requiredAlly: null,
           maps: {
             10: true,
             11: true,
@@ -344,15 +326,11 @@ describe('ChampionPage', () => {
       trinket: {
         id: 3348,
         name: 'Arcane Sweeper',
-        group: null,
-        consumed: null,
         description: '<active>UNIQUE Active - Hunter\'s Sight:</active> An arcane mist grants vision in the target area ' +
           'for 5 seconds, revealing enemy champions and granting <font color=\'#ee91d7\'>True Sight</font> of traps in ' +
           'the area for 3 seconds (90 second cooldown).',
         from: [],
         into: [],
-        requiredChampion: null,
-        requiredAlly: null,
         maps: {
           10: true,
           11: false,
@@ -402,16 +380,12 @@ describe('ChampionPage', () => {
         {
           id: 3117,
           name: 'Boots of Mobility',
-          group: null,
-          consumed: null,
           description: '<groupLimit>Limited to 1 pair of boots.</groupLimit><br><br><unique>UNIQUE Passive - Enhanced ' +
             'Movement:</unique> +25 Movement Speed. Increases to +115 Movement Speed when out of combat for 5 seconds.',
           from: [
             1001
           ],
           into: [],
-          requiredChampion: null,
-          requiredAlly: null,
           maps: {
             8: true,
             10: true,
@@ -432,8 +406,6 @@ describe('ChampionPage', () => {
         {
           id: 3222,
           name: 'Mikael\'s Crucible',
-          group: null,
-          consumed: null,
           description: '<stats>+40 Magic Resist<br>+10% Cooldown Reduction<br><mana>+100% Base Mana Regen </mana></stats>' +
             '<br><br><unique>UNIQUE Passive:</unique> +20% Heal and Shield Power<br><unique>UNIQUE Passive - Harmony:' +
             '</unique> Grants bonus % Base Health Regen equal to your bonus % Base Mana Regen.<br><active>UNIQUE Active:' +
@@ -445,8 +417,6 @@ describe('ChampionPage', () => {
             3114
           ],
           into: [],
-          requiredChampion: null,
-          requiredAlly: null,
           maps: {
             8: true,
             10: true,
@@ -467,8 +437,6 @@ describe('ChampionPage', () => {
         {
           id: 3050,
           name: 'Zeke\'s Convergence',
-          group: null,
-          consumed: null,
           description: '<stats>+60 Armor<br>+30 Magic Resist<br><mana>+250 Mana</mana><br>+10% Cooldown Reduction</stats>' +
             '<br><mainText><active>UNIQUE Active - Conduit:</active> Bind to an ally without an existing Conduit.<br>' +
             '<unique>UNIQUE Passive:</unique> Casting your ultimate near your ally surrounds you with a frost storm and ' +
@@ -482,8 +450,6 @@ describe('ChampionPage', () => {
             3105
           ],
           into: [],
-          requiredChampion: null,
-          requiredAlly: null,
           maps: {
             8: true,
             10: true,
@@ -504,8 +470,6 @@ describe('ChampionPage', () => {
         {
           id: 3003,
           name: 'Archangel\'s Staff',
-          group: null,
-          consumed: null,
           description: '<stats>+50 Ability Power<br><mana>+650 Mana</mana><br>+10% Cooldown Reduction</stats><br><br>' +
             '<unique>UNIQUE Passive - Haste:</unique> This item gains an additional 10% Cooldown Reduction.<br><mana>' +
             '<unique>UNIQUE Passive - Awe:</unique> Grants Ability Power equal to 3% of maximum Mana. Refunds 25% of Mana ' +
@@ -517,8 +481,6 @@ describe('ChampionPage', () => {
             3802
           ],
           into: [],
-          requiredChampion: null,
-          requiredAlly: null,
           maps: {
             8: false,
             10: true,
@@ -539,8 +501,6 @@ describe('ChampionPage', () => {
         {
           id: 3065,
           name: 'Spirit Visage',
-          group: null,
-          consumed: null,
           description: '<stats>+450 Health<br>+55 Magic Resist<br>+100% Base Health Regen <br>+10% Cooldown Reduction' +
             '</stats><br><br><unique>UNIQUE Passive:</unique> Increases all healing received by 30%.',
           from: [
@@ -548,8 +508,6 @@ describe('ChampionPage', () => {
             3211
           ],
           into: [],
-          requiredChampion: null,
-          requiredAlly: null,
           maps: {
             8: true,
             10: true,
@@ -570,8 +528,6 @@ describe('ChampionPage', () => {
         {
           id: 3072,
           name: 'The Bloodthirster',
-          group: null,
-          consumed: null,
           description: '<stats>+80 Attack Damage</stats><br><br><unique>UNIQUE Passive:</unique> +20% Life Steal<br>' +
             '<unique>UNIQUE Passive:</unique> Your basic attacks can now overheal you. Excess life is stored as a shield ' +
             'that can block 50-350 damage, based on champion level.<br><br>This shield decays slowly if you haven\'t dealt ' +
@@ -582,8 +538,6 @@ describe('ChampionPage', () => {
             1053
           ],
           into: [],
-          requiredChampion: null,
-          requiredAlly: null,
           maps: {
             8: true,
             10: true,
@@ -605,8 +559,6 @@ describe('ChampionPage', () => {
       trinket: {
         id: 3341,
         name: 'Sweeping Lens (Trinket)',
-        group: null,
-        consumed: null,
         description: '<groupLimit>Limited to 1 Trinket.</groupLimit><br><br><active>Active:</active> Scans an area for ' +
           '6 seconds, warning against hidden hostile units and revealing invisible traps and revealing / disabling wards ' +
           '(90 to 60 second cooldown).<br><br>Cast range and sweep radius gradually improve with level.<br><br><rules> ' +
@@ -614,8 +566,6 @@ describe('ChampionPage', () => {
           '</font> use for 120 seconds.)</rules>',
         from: [],
         into: [],
-        requiredChampion: null,
-        requiredAlly: null,
         maps: {
           8: false,
           10: false,
@@ -671,16 +621,12 @@ describe('ChampionPage', () => {
         {
           id: 3117,
           name: 'Boots of Mobility',
-          group: null,
-          consumed: null,
           description: '<groupLimit>Limited to 1 pair of boots.</groupLimit><br><br><unique>UNIQUE Passive - Enhanced ' +
             'Movement:</unique> +25 Movement Speed. Increases to +115 Movement Speed when out of combat for 5 seconds.',
           from: [
             1001
           ],
           into: [],
-          requiredChampion: null,
-          requiredAlly: null,
           maps: {
             10: true,
             11: true,
@@ -697,8 +643,6 @@ describe('ChampionPage', () => {
         {
           id: 3814,
           name: 'Edge of Night',
-          group: null,
-          consumed: null,
           description: '<stats>+250 Health<br>+55 Attack Damage</stats><br><br><unique>UNIQUE Passive:</unique> +18 ' +
             '<a href=\'Lethality\'>Lethality</a><br><unique>UNIQUE Active - Night\'s Veil:</unique> Channel for 1.5 ' +
             'second to grant a spell shield that blocks the next enemy ability. Lasts for 7 seconds (40 second cooldown).' +
@@ -709,8 +653,6 @@ describe('ChampionPage', () => {
             3134
           ],
           into: [],
-          requiredChampion: null,
-          requiredAlly: null,
           maps: {
             10: true,
             11: true,
@@ -727,8 +669,6 @@ describe('ChampionPage', () => {
         {
           id: 3030,
           name: 'Hextech GLP-800',
-          group: null,
-          consumed: null,
           description: '<stats>+80 Ability Power<br><mana>+600 Mana</mana><br>+10% Cooldown Reduction</stats><br><br>' +
             '<unique>UNIQUE Passive - Haste:</unique> This item gains an additional 10% Cooldown Reduction.<br><unique>' +
             'UNIQUE Active - Frost Bolt:</unique> Fires a spray of icy bolts that explode on first unit hit, dealing ' +
@@ -740,8 +680,6 @@ describe('ChampionPage', () => {
             3802
           ],
           into: [],
-          requiredChampion: null,
-          requiredAlly: null,
           maps: {
             10: true,
             11: true,
@@ -758,15 +696,11 @@ describe('ChampionPage', () => {
         {
           id: 3683,
           name: 'Rainbow Snax Party Pack!',
-          group: null,
-          consumed: null,
           description: '<active>Active - <a href=\'FeedTheKing\'>Feed The King</a>:</active> The King tosses many Snax ' +
             'behind the enemy, attracting Poros which dash back towards him. Enemy champions hit will be knocked forwards ' +
             'and dealt <scaleLevel>230-680</scaleLevel> physical damage. (120s cooldown)',
           from: [],
           into: [],
-          requiredChampion: null,
-          requiredAlly: null,
           maps: {
             10: false,
             11: false,
@@ -783,8 +717,6 @@ describe('ChampionPage', () => {
         {
           id: 3115,
           name: 'Nashor\'s Tooth',
-          group: null,
-          consumed: null,
           description: '<stats>+50% Attack Speed<br>+80 Ability Power</stats><br><br><unique>UNIQUE Passive:</unique> +20% ' +
             'Cooldown Reduction<br><unique>UNIQUE Passive:</unique> Basic attacks deal 15 (+15% of Ability Power) bonus ' +
             'magic damage on hit.<br>',
@@ -793,8 +725,6 @@ describe('ChampionPage', () => {
             3108
           ],
           into: [],
-          requiredChampion: null,
-          requiredAlly: null,
           maps: {
             10: true,
             11: true,
@@ -811,8 +741,6 @@ describe('ChampionPage', () => {
         {
           id: 3748,
           name: 'Titanic Hydra',
-          group: null,
-          consumed: null,
           description: '<stats>+450 Health<br>+40 Attack Damage<br>+100% Base Health Regen </stats><br><br><unique>UNIQUE ' +
             'Passive - Cleave:</unique> Basic attacks deal 5 + 1% of your maximum health as bonus physical damage  to ' +
             'your target and 40 + 2.5% of your maximum health as physical damage  to other enemies in a cone on hit.' +
@@ -825,8 +753,6 @@ describe('ChampionPage', () => {
             3077
           ],
           into: [],
-          requiredChampion: null,
-          requiredAlly: null,
           maps: {
             10: true,
             11: true,
@@ -844,15 +770,12 @@ describe('ChampionPage', () => {
       trinket: {
         id: 2052,
         name: 'Poro-Snax',
-        group: null,
         consumed: true,
         description: 'This savory blend of free-range, grass-fed Avarosan game hens and organic, non-ZMO Freljordian ' +
           'herbs contains the essential nutrients necessary to keep your Poro purring with pleasure.<br><br><i>All ' +
           'proceeds will be donated towards fighting Noxian animal cruelty.</i>',
         from: [],
         into: [],
-        requiredChampion: null,
-        requiredAlly: null,
         maps: {
           10: true,
           11: true,
@@ -868,7 +791,7 @@ describe('ChampionPage', () => {
       }
     };
 
-    const trollBuilds = {
+    const trollBuilds: { [index: number]: TrollBuild } = {
       [twistedTreeline.mapId]: twistedTreelineTrollBuild,
       [summonersRift.mapId]: summonersRiftTrollBuild,
       [howlingAbyss.mapId]: howlingAbyssTrollBuild
@@ -979,13 +902,14 @@ describe('ChampionPage', () => {
 
         const selfRef = `http://localhost/api/build/${savedBuild.id}`;
 
-        buildsServiceSpy.and.returnValue(of(new HttpResponse<Build>({
+        const httpResponse = new HttpResponse<Build>({
           body: savedBuild,
           headers: new HttpHeaders({
             Location: selfRef
           }),
           status: 201
-        })));
+        });
+        buildsServiceSpy.and.returnValue(of(httpResponse));
 
         selectMap(map);
         fixture.detectChanges();
@@ -1015,7 +939,7 @@ describe('ChampionPage', () => {
 
     function selectMap(map: GameMap) {
       const cdkMapSelect = fixture.debugElement.query(By.directive(NbSelectComponent)).componentInstance;
-      const cdkMapOption = cdkMapSelect.options._results.find(option => option.value.mapId === map.mapId);
+      const cdkMapOption = cdkMapSelect.options._results.find((option: any) => option.value.mapId === map.mapId);
       cdkMapSelect.selectOption(cdkMapOption);
     }
 
@@ -1061,7 +985,11 @@ describe('ChampionPage', () => {
     const networkDelay = 1500;
 
     beforeEach(inject([ChampionService], (championService: ChampionService) => {
-      spyOn(championService, 'getTrollBuild').and.returnValue(of(null).pipe(delay(networkDelay)));
+      spyOn(championService, 'getTrollBuild').and.returnValue(of({
+        items: null,
+        summonerSpells: null,
+        trinket: null
+      }).pipe(delay(networkDelay)));
       spyOn(championService, 'mapsForTrollBuild').and.returnValue(of(maps));
     }));
 
@@ -1118,7 +1046,11 @@ describe('ChampionPage', () => {
     const networkDelay = 1500;
 
     beforeEach(inject([ChampionService], (championService: ChampionService) => {
-      spyOn(championService, 'getTrollBuild').and.returnValue(of(null));
+      spyOn(championService, 'getTrollBuild').and.returnValue(of({
+        items: null,
+        summonerSpells: null,
+        trinket: null
+      }));
       spyOn(championService, 'mapsForTrollBuild').and.returnValue(of(maps).pipe(delay(networkDelay)));
     }));
 

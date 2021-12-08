@@ -1,4 +1,4 @@
-import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
+import { ComponentFixture, inject, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { By } from '@angular/platform-browser';
 
@@ -113,12 +113,12 @@ describe('StepExecutionsDetailComponent', () => {
     }
   ];
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, StepExecutionsDetailModule]
     })
     .compileComponents();
-  }));
+  });
 
   beforeEach(inject([StepExecutionsDetailService], (batchService: StepExecutionsDetailService) => {
     fixture = TestBed.createComponent(StepExecutionsDetailComponent);

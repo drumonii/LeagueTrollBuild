@@ -10,7 +10,7 @@ export class AdminTitleService {
 
   constructor(private title: Title) {}
 
-  setTitle(contentTitle): void {
+  setTitle(contentTitle: string): void {
     this.resetTitle();
     this.title.setTitle(`${this.title.getTitle()} | ${contentTitle}`);
   }

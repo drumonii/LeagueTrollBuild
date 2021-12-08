@@ -1,4 +1,4 @@
-import { async, inject, TestBed } from '@angular/core/testing';
+import { inject, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController, RequestMatch } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
@@ -11,8 +11,8 @@ import { AdminErrorHttpInterceptor } from './admin-error.http-interceptor';
 
 describe('AdminErrorHttpInterceptor', () => {
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, RouterTestingModule],
       providers: [
         {
@@ -22,7 +22,7 @@ describe('AdminErrorHttpInterceptor', () => {
         }
       ]
     });
-  }));
+  });
 
   beforeEach(inject([Router], (router: Router) => {
     spyOn(router, 'navigate');

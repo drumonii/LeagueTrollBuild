@@ -13,6 +13,9 @@ const config = {
   },
   gradleProperties: {
     file: path.join(__dirname, '../backend/gradle.properties')
+  },
+  environments: {
+    file: path.join(__dirname, '../frontend/admin/src/environments/environment.prod.ts')
   }
 };
 
@@ -90,6 +93,17 @@ function updateGradleProperties(version) {
   }
 
   fs.writeFileSync(config.gradleProperties.file, newGradleProperties);
+}
+
+/**
+ * Updates the version property of the environments.prod.ts file.
+ *
+ * @param {string} version the release version
+ */
+function updateEnvironments(version) {
+  console.log('updating environments...');
+  const environmentsContent = fs.readFileSync(config.environments.file, 'utf8');
+
 }
 
 /**

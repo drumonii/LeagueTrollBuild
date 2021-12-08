@@ -1,4 +1,4 @@
-import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
+import { ComponentFixture, inject, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { By } from '@angular/platform-browser';
 
@@ -11,12 +11,12 @@ describe('AdminBatchPage', () => {
   let component: AdminBatchPage;
   let fixture: ComponentFixture<AdminBatchPage>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, AdminBatchModule]
     })
     .compileComponents();
-  }));
+  });
 
   beforeEach(inject([AdminTitleService], (title: AdminTitleService) => {
     fixture = TestBed.createComponent(AdminBatchPage);

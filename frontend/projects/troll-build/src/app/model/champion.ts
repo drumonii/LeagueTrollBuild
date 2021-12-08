@@ -11,8 +11,8 @@ export interface Champion {
   name: string;
   title: string;
   partype: string;
-  info: ChampionInfo;
-  spells: ChampionSpell[];
-  passive: ChampionPassive;
+  info?: ChampionInfo;
+  spells?: ChampionSpell[];
+  passive?: ChampionPassive;
   tags: string[];
 }

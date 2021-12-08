@@ -1,10 +1,10 @@
-import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
+import { ComponentFixture, inject, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ActivatedRoute, Router, RouterLinkWithHref } from '@angular/router';
 import { By } from '@angular/platform-browser';
 
-import { NbSelectComponent, NbThemeModule } from '@nebular/theme';
+import { NbSelectComponent, NbStatusService, NbThemeModule } from '@nebular/theme';
 
 import { of } from 'rxjs';
 
@@ -99,8 +99,6 @@ describe('SavedBuildsPage', () => {
     item1: {
       id: 3111,
       name: 'Mercury\'s Treads',
-      group: null,
-      consumed: null,
       description: '<groupLimit>Limited to 1 pair of boots.</groupLimit><br><br><stats>+25 Magic Resist</stats><br>' +
       '<br><unique>UNIQUE Passive - Enhanced Movement:</unique> +45 Movement Speed<br><unique>UNIQUE Passive - ' +
       'Tenacity:</unique> Reduces the duration of stuns, slows, taunts, fears, silences, blinds, polymorphs, and ' +
@@ -110,8 +108,6 @@ describe('SavedBuildsPage', () => {
         1033
       ],
       into: [],
-      requiredChampion: null,
-      requiredAlly: null,
       maps: {
         10: true,
         11: true,
@@ -127,8 +123,6 @@ describe('SavedBuildsPage', () => {
     item2: {
       id: 3748,
       name: 'Titanic Hydra',
-      group: null,
-      consumed: null,
       description: '<stats>+450 Health<br>+40 Attack Damage<br>+100% Base Health Regen </stats><br><br><unique>' +
       'UNIQUE Passive - Cleave:</unique> Basic attacks deal 5 + 1% of your maximum health as bonus physical damage ' +
       'to your target and 40 + 2.5% of your maximum health as physical damage  to other enemies in a cone on hit.' +
@@ -141,8 +135,6 @@ describe('SavedBuildsPage', () => {
         3077
       ],
       into: [],
-      requiredChampion: null,
-      requiredAlly: null,
       maps: {
         10: true,
         11: true,
@@ -158,8 +150,6 @@ describe('SavedBuildsPage', () => {
     item3: {
       id: 3194,
       name: 'Adaptive Helm',
-      group: null,
-      consumed: null,
       description: '<stats>+350 Health<br>+55 Magic Resist<br>+100% Base Health Regeneration <br>+10% Cooldown ' +
       'Reduction</stats><br><br><unique>UNIQUE Passive:</unique> Taking magic damage from a spell or effect reduces ' +
       'all subsequent magic damage from that same spell or effect by 20% for 4 seconds.',
@@ -169,8 +159,6 @@ describe('SavedBuildsPage', () => {
         3211
       ],
       into: [],
-      requiredChampion: null,
-      requiredAlly: null,
       maps: {
         10: true,
         11: true,
@@ -186,8 +174,6 @@ describe('SavedBuildsPage', () => {
     item4: {
       id: 3135,
       name: 'Void Staff',
-      group: null,
-      consumed: null,
       description: '<stats>+70 Ability Power</stats><br><br><unique>UNIQUE Passive:</unique> +40% <a href=\'TotalMagicPen\'>' +
       'Magic Penetration</a>.',
       from: [
@@ -195,8 +181,6 @@ describe('SavedBuildsPage', () => {
         1052
       ],
       into: [],
-      requiredChampion: null,
-      requiredAlly: null,
       maps: {
         10: true,
         11: true,
@@ -212,8 +196,6 @@ describe('SavedBuildsPage', () => {
     item5: {
       id: 3115,
       name: 'Nashor\'s Tooth',
-      group: null,
-      consumed: null,
       description: '<stats>+50% Attack Speed<br>+80 Ability Power</stats><br><br><unique>UNIQUE Passive:</unique>' +
       ' +20% Cooldown Reduction<br><unique>UNIQUE Passive:</unique> Basic attacks deal 15 (+15% of Ability Power) ' +
       'bonus magic damage on hit.<br>',
@@ -222,8 +204,6 @@ describe('SavedBuildsPage', () => {
         3108
       ],
       into: [],
-      requiredChampion: null,
-      requiredAlly: null,
       maps: {
         10: true,
         11: true,
@@ -239,8 +219,6 @@ describe('SavedBuildsPage', () => {
     item6: {
       id: 3401,
       name: 'Remnant of the Aspect',
-      group: null,
-      consumed: null,
       description: '<stats>+350 Health<br>+200% Base Health Regen <br>+10% Cooldown Reduction<br>+1 Gold per 10 ' +
       'seconds </stats><br><br><unique>UNIQUE Passive - Spoils of War:</unique> Melee basic attacks execute minions ' +
       'below 320 (+20 per level) Health. Killing a minion heals the owner and the nearest allied champion for 50 ' +
@@ -255,8 +233,6 @@ describe('SavedBuildsPage', () => {
         3097
       ],
       into: [],
-      requiredChampion: null,
-      requiredAlly: null,
       maps: {
         10: false,
         11: true,
@@ -301,8 +277,6 @@ describe('SavedBuildsPage', () => {
     trinket: {
       id: 3363,
       name: 'Farsight Alteration',
-      group: null,
-      consumed: null,
       description: '<levelLimit>Level 9+ required to upgrade.</levelLimit><br><groupLimit>Limited to 1 Trinket.' +
       '</groupLimit><br><br>Alters the <font color=\'#FFFFFF\'>Warding Totem</font> Trinket:<br><br><stats><font ' +
       'color=\'#00FF00\'>+</font> Massively increased cast range (+650%)<br><font color=\'#00FF00\'>+</font> ' +
@@ -313,8 +287,6 @@ describe('SavedBuildsPage', () => {
       'charges</font></stats>',
       from: [],
       into: [],
-      requiredChampion: null,
-      requiredAlly: null,
       maps: {
         10: false,
         11: true,
@@ -334,8 +306,8 @@ describe('SavedBuildsPage', () => {
   };
 
   describe('with valid Build', () => {
-    beforeEach(async(() => {
-      TestBed.configureTestingModule({
+    beforeEach(async () => {
+      await TestBed.configureTestingModule({
         imports: [HttpClientTestingModule, RouterTestingModule, NbThemeModule.forRoot(), SavedBuildsModule],
         providers: [
           {
@@ -343,11 +315,17 @@ describe('SavedBuildsPage', () => {
             useValue: {
               data: of({ build: { id: build.id, savedBuild: build } })
             }
+          },
+          {
+            provide: NbStatusService,
+            useValue: {
+              isCustomStatus: () => false
+            }
           }
         ]
       })
       .compileComponents();
-    }));
+    });
 
     beforeEach(inject([SavedBuildsService, TitleService], (buildsService: SavedBuildsService, title: TitleService) => {
       fixture = TestBed.createComponent(SavedBuildsPage);
@@ -389,8 +367,8 @@ describe('SavedBuildsPage', () => {
   });
 
   describe('with not found 404 Build', () => {
-    beforeEach(async(() => {
-      TestBed.configureTestingModule({
+    beforeEach(async () => {
+      await TestBed.configureTestingModule({
         imports: [SavedBuildsModule, HttpClientTestingModule, RouterTestingModule],
         providers: [
           {
@@ -398,11 +376,17 @@ describe('SavedBuildsPage', () => {
             useValue: {
               data: of({ build: { id: 1, savedBuild: null } })
             }
+          },
+          {
+            provide: NbStatusService,
+            useValue: {
+              isCustomStatus: () => false
+            }
           }
         ]
       })
       .compileComponents();
-    }));
+    });
 
     beforeEach(inject([SavedBuildsService, TitleService], (buildsService: SavedBuildsService, title: TitleService) => {
       fixture = TestBed.createComponent(SavedBuildsPage);
@@ -433,8 +417,8 @@ describe('SavedBuildsPage', () => {
     const invalidItemsBuild = Object.assign({}, build);
     invalidItemsBuild.item6 = null;
 
-    beforeEach(async(() => {
-      TestBed.configureTestingModule({
+    beforeEach(async () => {
+      await TestBed.configureTestingModule({
         imports: [SavedBuildsModule, HttpClientTestingModule, RouterTestingModule],
         providers: [
           {
@@ -442,11 +426,17 @@ describe('SavedBuildsPage', () => {
             useValue: {
               data: of({ build: { id: 1, savedBuild: invalidItemsBuild } })
             }
+          },
+          {
+            provide: NbStatusService,
+            useValue: {
+              isCustomStatus: () => false
+            }
           }
         ]
       })
       .compileComponents();
-    }));
+    });
 
     beforeEach(inject([SavedBuildsService, TitleService], (buildsService: SavedBuildsService, title: TitleService) => {
       fixture = TestBed.createComponent(SavedBuildsPage);
@@ -477,8 +467,8 @@ describe('SavedBuildsPage', () => {
     const invalidSummonerSpellsBuild = Object.assign({}, build);
     invalidSummonerSpellsBuild.summonerSpell2 = null;
 
-    beforeEach(async(() => {
-      TestBed.configureTestingModule({
+    beforeEach(async () => {
+      await TestBed.configureTestingModule({
         imports: [SavedBuildsModule, HttpClientTestingModule, RouterTestingModule],
         providers: [
           {
@@ -486,11 +476,17 @@ describe('SavedBuildsPage', () => {
             useValue: {
               data: of({ build: { id: 1, savedBuild: invalidSummonerSpellsBuild } })
             }
+          },
+          {
+            provide: NbStatusService,
+            useValue: {
+              isCustomStatus: () => false
+            }
           }
         ]
       })
       .compileComponents();
-    }));
+    });
 
     beforeEach(inject([SavedBuildsService, TitleService], (buildsService: SavedBuildsService, title: TitleService) => {
       fixture = TestBed.createComponent(SavedBuildsPage);
@@ -522,8 +518,8 @@ describe('SavedBuildsPage', () => {
     const invalidTrinketBuild = Object.assign({}, build);
     invalidTrinketBuild.trinket = null;
 
-    beforeEach(async(() => {
-      TestBed.configureTestingModule({
+    beforeEach(async () => {
+      await TestBed.configureTestingModule({
         imports: [SavedBuildsModule, HttpClientTestingModule, RouterTestingModule],
         providers: [
           {
@@ -531,11 +527,17 @@ describe('SavedBuildsPage', () => {
             useValue: {
               data: of({ build: { id: 1, savedBuild: invalidTrinketBuild } })
             }
+          },
+          {
+            provide: NbStatusService,
+            useValue: {
+              isCustomStatus: () => false
+            }
           }
         ]
       })
       .compileComponents();
-    }));
+    });
 
     beforeEach(inject([SavedBuildsService, TitleService], (buildsService: SavedBuildsService, title: TitleService) => {
       fixture = TestBed.createComponent(SavedBuildsPage);
@@ -616,13 +618,23 @@ describe('SavedBuildsPage', () => {
     const trollBuildTrinketImg = trollBuildTrinkets[0].query(By.css('.troll-build-object-img'));
     expect(trollBuildTrinketImg.nativeElement.src).toContain(`/api/img/items/${build.trinket.id}`);
 
-    function getItem(index: number): Item {
-      const items = { 0: build.item1, 1: build.item2, 2: build.item3, 3: build.item4, 4: build.item5, 5: build.item6 };
+    function getItem(index: number): Item | undefined {
+      const items: { [index: number]: Item | undefined } = {
+        0: build.item1,
+        1: build.item2,
+        2: build.item3,
+        3: build.item4,
+        4: build.item5,
+        5: build.item6
+      };
       return items[index];
     }
 
-    function getSummonerSpell(index: number): SummonerSpell {
-      const summonerSpells = { 0: build.summonerSpell1, 1: build.summonerSpell2 };
+    function getSummonerSpell(index: number): SummonerSpell | undefined {
+      const summonerSpells: { [index: number]: SummonerSpell | undefined } = {
+        0: build.summonerSpell1,
+        1: build.summonerSpell2
+      };
       return summonerSpells[index];
     }
   }

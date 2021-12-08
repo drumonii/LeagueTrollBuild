@@ -1,7 +1,7 @@
-import { async,  inject, TestBed } from '@angular/core/testing';
+import { fakeAsync, inject, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { ActivatedRouteSnapshot, convertToParamMap, Router } from '@angular/router';
+import { ActivatedRouteSnapshot, convertToParamMap, Router, RouterStateSnapshot } from '@angular/router';
 
 import { of } from 'rxjs';
 
@@ -11,6 +11,8 @@ import { Build } from '@ltb-model/build';
 
 describe('SavedBuildsResolver', () => {
   let resolver: SavedBuildsResolver;
+  let route: ActivatedRouteSnapshot;
+  let state: RouterStateSnapshot;
 
   const build: Build = {
     id: 9,
@@ -95,16 +97,12 @@ describe('SavedBuildsResolver', () => {
     item1: {
       id: 3020,
       name: 'Sorcerer\'s Shoes',
-      group: null,
-      consumed: null,
       description: '<groupLimit>Limited to 1 pair of boots.</groupLimit><br><br><stats>+18 <a href=\'FlatMagicPen\'>' +
         'Magic Penetration</a></stats><br><br><unique>UNIQUE Passive - Enhanced Movement:</unique> +45 Movement Speed',
       from: [
         1001
       ],
       into: [],
-      requiredChampion: null,
-      requiredAlly: null,
       maps: {
         10: true,
         11: true,
@@ -120,8 +118,6 @@ describe('SavedBuildsResolver', () => {
     item2: {
       id: 3156,
       name: 'Maw of Malmortius',
-      group: null,
-      consumed: null,
       description: '<stats>+50 Attack Damage<br>+50 Magic Resist<br>+10% Cooldown Reduction</stats><br><br><unique>' +
         'UNIQUE Passive - Lifeline:</unique> Upon taking magic damage that would reduce Health below 30%, grants a ' +
         'shield that absorbs up to 350 magic damage within 5 seconds (90 second cooldown).<br><unlockedPassive>Lifegrip:' +
@@ -132,8 +128,6 @@ describe('SavedBuildsResolver', () => {
         3155
       ],
       into: [],
-      requiredChampion: null,
-      requiredAlly: null,
       maps: {
         10: true,
         11: true,
@@ -149,8 +143,6 @@ describe('SavedBuildsResolver', () => {
     item3: {
       id: 3748,
       name: 'Titanic Hydra',
-      group: null,
-      consumed: null,
       description: '<stats>+450 Health<br>+40 Attack Damage<br>+100% Base Health Regen </stats><br><br><unique>UNIQUE ' +
         'Passive - Cleave:</unique> Basic attacks deal 5 + 1% of your maximum health as bonus physical damage  to your ' +
         'target and 40 + 2.5% of your maximum health as physical damage  to other enemies in a cone on hit.<br><active>' +
@@ -163,8 +155,6 @@ describe('SavedBuildsResolver', () => {
         3077
       ],
       into: [],
-      requiredChampion: null,
-      requiredAlly: null,
       maps: {
         10: true,
         11: true,
@@ -180,8 +170,6 @@ describe('SavedBuildsResolver', () => {
     item4: {
       id: 3004,
       name: 'Manamune',
-      group: null,
-      consumed: null,
       description: '<stats>+25 Attack Damage<br><mana>+250 Mana</mana></stats><br><br><mana><unique>UNIQUE Passive - ' +
         'Awe:</unique> Grants bonus Attack Damage equal to 2% of maximum Mana. Refunds 15% of Mana spent.<br><unique>' +
         'UNIQUE Passive - Mana Charge:</unique> Grants +5 maximum Mana (max +750 Mana) for each basic attack or Mana ' +
@@ -191,8 +179,6 @@ describe('SavedBuildsResolver', () => {
         3070
       ],
       into: [],
-      requiredChampion: null,
-      requiredAlly: null,
       maps: {
         10: true,
         11: true,
@@ -208,8 +194,6 @@ describe('SavedBuildsResolver', () => {
     item5: {
       id: 3124,
       name: 'Guinsoo\'s Rageblade',
-      group: null,
-      consumed: null,
       description: '<stats>+25 Attack Damage<br>+25 Ability Power<br>+25% Attack Speed</stats><br><br><passive>Passive: ' +
         '</passive>Basic attacks deal 5 (+10% Bonus Attack Damage) physical and 5 (+10% Ability Power) magic damage on ' +
         'hit.<br><unique>UNIQUE Passive:</unique> Basic attacks grant +8% Attack Speed, +2.5% Bonus Attack Damage, ' +
@@ -223,8 +207,6 @@ describe('SavedBuildsResolver', () => {
         1052
       ],
       into: [],
-      requiredChampion: null,
-      requiredAlly: null,
       maps: {
         10: true,
         11: true,
@@ -240,8 +222,6 @@ describe('SavedBuildsResolver', () => {
     item6: {
       id: 3053,
       name: 'Sterak\'s Gage',
-      group: null,
-      consumed: null,
       description: '<stats>+450 Health</stats><br><br><unique>UNIQUE Passive - Giant Strength:</unique> Gain 50% of ' +
         'your Base Attack Damage as Bonus Attack Damage <br><unique>UNIQUE Passive - Lifeline:</unique> Upon taking at ' +
         'least 400 to 1800 damage (based on level) within 5 seconds, gain a shield for 75% of your bonus Health. After ' +
@@ -253,8 +233,6 @@ describe('SavedBuildsResolver', () => {
         3052
       ],
       into: [],
-      requiredChampion: null,
-      requiredAlly: null,
       maps: {
         10: true,
         11: true,
@@ -299,15 +277,11 @@ describe('SavedBuildsResolver', () => {
     trinket: {
       id: 3364,
       name: 'Oracle Lens',
-      group: null,
-      consumed: null,
       description: '<groupLimit>Limited to 1 Trinket.</groupLimit><br><br><active>Active:</active> Scans around you, ' +
         'warning against hidden hostile units, and revealing invisible traps and revealing / disabling nearby wards for ' +
         '10 seconds (90 to 60 second cooldown).</maintext>',
       from: [],
       into: [],
-      requiredChampion: null,
-      requiredAlly: null,
       maps: {
         10: false,
         11: true,
@@ -327,8 +301,8 @@ describe('SavedBuildsResolver', () => {
   };
 
   describe('with build Id link parameter', () => {
-    beforeEach(async(() => {
-      TestBed.configureTestingModule({
+    beforeEach(async () => {
+      await TestBed.configureTestingModule({
         imports: [HttpClientTestingModule, RouterTestingModule],
         providers: [SavedBuildsResolver, SavedBuildsService,
           {
@@ -336,14 +310,22 @@ describe('SavedBuildsResolver', () => {
             useValue: {
               paramMap: convertToParamMap({ buildId: '1' })
             }
+          },
+          {
+            provide: RouterStateSnapshot,
+            useValue: {
+              url: '/builds/1'
+            }
           }
         ]
       })
       .compileComponents();
-    }));
+    });
 
     beforeEach(inject([SavedBuildsService, Router], (buildsService: SavedBuildsService, router: Router) => {
       resolver = TestBed.inject(SavedBuildsResolver);
+      route = TestBed.inject(ActivatedRouteSnapshot);
+      state = TestBed.inject(RouterStateSnapshot);
 
       spyOn(router, 'navigate');
       spyOn(buildsService, 'countBuilds').and.callThrough();
@@ -354,11 +336,10 @@ describe('SavedBuildsResolver', () => {
       expect(buildsService.countBuilds).not.toHaveBeenCalled();
     }));
 
-    it('should resolve a Build', async(inject([SavedBuildsService, Router, ActivatedRouteSnapshot],
-      (buildsService: SavedBuildsService, router: Router, route: ActivatedRouteSnapshot) => {
+    it('should resolve a Build', fakeAsync(inject([SavedBuildsService, Router], (buildsService: SavedBuildsService, router: Router) => {
       spyOn(buildsService, 'getBuild').and.returnValue(of(build));
 
-      resolver.resolve(route, null).subscribe(data => {
+      resolver.resolve(route, state).subscribe(data => {
         expect(data.id).toBe(1);
         expect(data.savedBuild).toEqual(build);
         expect(router.navigate).not.toHaveBeenCalled();
@@ -367,8 +348,8 @@ describe('SavedBuildsResolver', () => {
   });
 
   describe('without build Id link parameter', () => {
-    beforeEach(async(() => {
-      TestBed.configureTestingModule({
+    beforeEach(async () => {
+      await TestBed.configureTestingModule({
         imports: [HttpClientTestingModule, RouterTestingModule],
         providers: [SavedBuildsResolver, SavedBuildsService,
           {
@@ -376,14 +357,22 @@ describe('SavedBuildsResolver', () => {
             useValue: {
               paramMap: convertToParamMap({})
             }
+          },
+          {
+            provide: RouterStateSnapshot,
+            useValue: {
+              url: '/builds'
+            }
           }
         ]
       })
       .compileComponents();
-    }));
+    });
 
     beforeEach(inject([SavedBuildsService, Router], (buildsService: SavedBuildsService, router: Router) => {
       resolver = TestBed.inject(SavedBuildsResolver);
+      route = TestBed.inject(ActivatedRouteSnapshot);
+      state = TestBed.inject(RouterStateSnapshot);
 
       spyOn(router, 'navigate');
       spyOn(buildsService, 'getBuild').and.callThrough();
@@ -394,11 +383,10 @@ describe('SavedBuildsResolver', () => {
       expect(buildsService.countBuilds).toHaveBeenCalled();
     }));
 
-    it('should resolve a random Build', async(inject([SavedBuildsService, Router, ActivatedRouteSnapshot],
-      (buildsService: SavedBuildsService, router: Router, route: ActivatedRouteSnapshot) => {
+    it('should resolve a random Build', fakeAsync(inject([SavedBuildsService, Router], (buildsService: SavedBuildsService, router: Router) => {
       spyOn(buildsService, 'countBuilds').and.returnValue(of(2));
 
-      resolver.resolve(route, null).subscribe(data => {
+      resolver.resolve(route, state).subscribe(data => {
         expect(data.id).toBe(1);
         expect(data.savedBuild).toEqual(build);
         expect(router.navigate).toHaveBeenCalled();
@@ -406,11 +394,10 @@ describe('SavedBuildsResolver', () => {
       });
     })));
 
-    it('should resolve the only random Build', async(inject([SavedBuildsService, Router, ActivatedRouteSnapshot],
-      (buildsService: SavedBuildsService, router: Router, route: ActivatedRouteSnapshot) => {
+    it('should resolve the only random Build', fakeAsync(inject([SavedBuildsService, Router], (buildsService: SavedBuildsService, router: Router) => {
       spyOn(buildsService, 'countBuilds').and.returnValue(of(1));
 
-      resolver.resolve(route, null).subscribe(data => {
+      resolver.resolve(route, state).subscribe(data => {
         expect(data.id).toBe(1);
         expect(data.savedBuild).toEqual(build);
         expect(router.navigate).toHaveBeenCalled();

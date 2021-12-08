@@ -1,4 +1,4 @@
-import { async, inject, TestBed } from '@angular/core/testing';
+import { inject, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController, RequestMatch } from '@angular/common/http/testing';
 import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 
@@ -6,8 +6,8 @@ import { AdminBasePathHttpInterceptor } from './admin-base-path.http-interceptor
 
 describe('AdminBasePathHttpInterceptor', () => {
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       providers: [
         {
@@ -16,8 +16,9 @@ describe('AdminBasePathHttpInterceptor', () => {
           multi: true
         }
       ]
-    });
-  }));
+    })
+    .compileComponents();
+  });
 
   afterEach(inject([HttpTestingController], (httpMock: HttpTestingController) => {
     httpMock.verify();

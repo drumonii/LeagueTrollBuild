@@ -41,7 +41,7 @@ export class SavedBuildsPage implements OnInit {
   }
 
   private getBuild(): void {
-    this.route.data.subscribe((data: { build: SavedBuildsResolverData }) => {
+    this.route.data.subscribe((data: any) => {
       this.buildId = data.build.id;
       this.build = data.build.savedBuild;
       this.buildType = this.getBuildType(data.build.savedBuild);

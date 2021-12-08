@@ -12,6 +12,9 @@
         },
         "@schematics/angular:directive": {
           "prefix": "ltb-admin"
+        },
+        "@schematics/angular:application": {
+          "strict": true
         }
       },
       "root": "projects/admin",
@@ -26,65 +29,76 @@
             "main": "projects/admin/src/main.ts",
             "polyfills": "projects/admin/src/polyfills.ts",
             "tsConfig": "projects/admin/tsconfig.app.json",
-            "aot": true,
+            "inlineStyleLanguage": "scss",
             "assets": [
               "projects/admin/src/favicon.ico",
               "projects/admin/src/assets"
             ],
             "styles": [
               "node_modules/@clr/icons/clr-icons.min.css",
+              "node_modules/@clr/ui/clr-ui.min.css",
               "projects/admin/src/styles/ltb-admin.scss"
             ],
             "scripts": [
-              "node_modules/@webcomponents/custom-elements/custom-elements.min.js",
+              "node_modules/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js",
+              "node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js",
               "node_modules/@clr/icons/clr-icons.min.js"
-            ],
-            "deployUrl": "/admin/"
+            ]
           },
           "configurations": {
             "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "3mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
               "fileReplacements": [
                 {
                   "replace": "projects/admin/src/environments/environment.ts",
                   "with": "projects/admin/src/environments/environment.prod.ts"
                 }
               ],
-              "optimization": true,
               "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "10kb"
+              "deployUrl": "/admin/",
+              "optimization": {
+                "styles": {
+                  "inlineCritical": false
                 }
-              ]
+              }
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
             }
-          }
+          },
+          "defaultConfiguration": "production"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "admin:build",
-            "deployUrl": "/",
             "proxyConfig": "proxy.config.json",
             "port": 4201
           },
           "configurations": {
             "production": {
               "browserTarget": "admin:build:production"
+            },
+            "development": {
+              "browserTarget": "admin:build:development"
             }
-          }
+          },
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
@@ -99,45 +113,15 @@
             "polyfills": "projects/admin/src/polyfills.ts",
             "tsConfig": "projects/admin/tsconfig.spec.json",
             "karmaConfig": "projects/admin/karma.conf.js",
+            "inlineStyleLanguage": "scss",
             "assets": [
               "projects/admin/src/favicon.ico",
               "projects/admin/src/assets"
             ],
             "styles": [
-              "node_modules/@clr/icons/clr-icons.min.css",
               "projects/admin/src/styles/ltb-admin.scss"
             ],
-            "scripts": [
-              "node_modules/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js",
-              "node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js",
-              "node_modules/@clr/icons/clr-icons.min.js"
-            ]
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/admin/tsconfig.app.json",
-              "projects/admin/tsconfig.spec.json",
-              "projects/admin/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        },
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
-          "options": {
-            "protractorConfig": "projects/admin/e2e/protractor.conf.js",
-            "devServerTarget": "admin:serve",
-            "port": 4203
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "admin:serve:production"
-            }
+            "scripts": []
           }
         }
       }
@@ -151,6 +135,9 @@
         },
         "@schematics/angular:directive": {
           "prefix": "ltb"
+        },
+        "@schematics/angular:application": {
+          "strict": true
         }
       },
       "root": "projects/troll-build",
@@ -165,7 +152,7 @@
             "main": "projects/troll-build/src/main.ts",
             "polyfills": "projects/troll-build/src/polyfills.ts",
             "tsConfig": "projects/troll-build/tsconfig.app.json",
-            "aot": true,
+            "inlineStyleLanguage": "scss",
             "assets": [
               "projects/troll-build/src/favicon.ico",
               "projects/troll-build/src/assets"
@@ -173,53 +160,62 @@
             "styles": [
               "projects/troll-build/src/styles/ltb.scss"
             ],
-            "scripts": [],
-            "deployUrl": "/troll-build/"
+            "scripts": []
           },
           "configurations": {
             "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "3mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
               "fileReplacements": [
                 {
                   "replace": "projects/troll-build/src/environments/environment.ts",
                   "with": "projects/troll-build/src/environments/environment.prod.ts"
                 }
               ],
-              "optimization": true,
               "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "10kb"
+              "deployUrl": "/troll-build/",
+              "optimization": {
+                "styles": {
+                  "inlineCritical": false
                 }
-              ]
+              }
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
             }
-          }
+          },
+          "defaultConfiguration": "production"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "troll-build:build",
-            "deployUrl": "/",
             "proxyConfig": "proxy.config.json",
             "port": 4200
           },
           "configurations": {
             "production": {
               "browserTarget": "troll-build:build:production"
+            },
+            "development": {
+              "browserTarget": "troll-build:build:development"
             }
-          }
+          },
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
@@ -234,38 +230,15 @@
             "polyfills": "projects/troll-build/src/polyfills.ts",
             "tsConfig": "projects/troll-build/tsconfig.spec.json",
             "karmaConfig": "projects/troll-build/karma.conf.js",
+            "inlineStyleLanguage": "scss",
             "assets": [
               "projects/troll-build/src/favicon.ico",
               "projects/troll-build/src/assets"
             ],
-            "styles": [],
-            "scripts": []
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/troll-build/tsconfig.app.json",
-              "projects/troll-build/tsconfig.spec.json",
-              "projects/troll-build/e2e/tsconfig.json"
+            "styles": [
+              "projects/troll-build/src/styles/ltb.scss"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        },
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
-          "options": {
-            "protractorConfig": "projects/troll-build/e2e/protractor.conf.js",
-            "devServerTarget": "troll-build:serve",
-            "port": 4202
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "troll-build:serve:production"
-            }
+            "scripts": []
           }
         }
       }

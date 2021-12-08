@@ -1,4 +1,4 @@
-import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
+import { ComponentFixture, inject, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -19,12 +19,12 @@ describe('AdminLoginPage', () => {
 
   describe('admin login form', () => {
 
-    beforeEach(async(() => {
-      TestBed.configureTestingModule({
+    beforeEach(async () => {
+      await TestBed.configureTestingModule({
         imports: [HttpClientTestingModule, NoopAnimationsModule, RouterTestingModule, AdminLoginModule]
       })
       .compileComponents();
-    }));
+    });
 
     beforeEach(inject([AdminTitleService, Router], (title: AdminTitleService, router: Router) => {
       fixture = TestBed.createComponent(AdminLoginPage);
@@ -217,8 +217,8 @@ describe('AdminLoginPage', () => {
 
   describe('with logged out', () => {
 
-    beforeEach(async(() => {
-      TestBed.configureTestingModule({
+    beforeEach(async () => {
+      await TestBed.configureTestingModule({
         imports: [HttpClientTestingModule, NoopAnimationsModule, RouterTestingModule, AdminLoginModule],
         providers: [
           {
@@ -230,7 +230,7 @@ describe('AdminLoginPage', () => {
         ]
       })
       .compileComponents();
-    }));
+    });
 
     beforeEach(() => {
       fixture = TestBed.createComponent(AdminLoginPage);
