@@ -70,7 +70,7 @@ class RetrievalJobsSchedulingTest {
 		Date nextExecutionDate = cronTrigger.nextExecutionTime(triggerContext);
 
 		assertThat(nextExecutionDate)
-				.hasYear(triggerDateTime.getYear())
+				.hasYear(triggerDateTime.plusDays(1L).getYear())
 				.hasDayOfMonth(triggerDateTime.plusDays(1L).getDayOfMonth())
 				.hasHourOfDay(triggerDateTime.getHour())
 				.hasMinute(0)
