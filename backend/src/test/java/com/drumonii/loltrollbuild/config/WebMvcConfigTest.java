@@ -11,6 +11,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.server.RequestPath;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.context.ActiveProfiles;
@@ -18,6 +19,7 @@ import org.springframework.web.servlet.HandlerExecutionChain;
 import org.springframework.web.servlet.HandlerMapping;
 import org.springframework.web.servlet.handler.SimpleUrlHandlerMapping;
 import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
+import org.springframework.web.util.ServletRequestPathUtils;
 
 import java.util.Map;
 
@@ -41,12 +43,13 @@ class WebMvcConfigTest {
             Map<String, Object> handlerMap = handlerMapping.getHandlerMap();
             assertThat(handlerMap).hasSize(2);
 
-            ResourceHttpRequestHandler resourceHandler = (ResourceHttpRequestHandler) handlerMap.get("/**/index.html");
+            ResourceHttpRequestHandler resourceHandler = (ResourceHttpRequestHandler) handlerMap.get("/*/index.html");
 
             MockHttpServletRequest request = new MockHttpServletRequest();
             request.setMethod(HttpMethod.GET.name());
             request.setRequestURI("/admin/index.html");
             request.setAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE, "admin/index.html");
+            request.setAttribute(ServletRequestPathUtils.PATH_ATTRIBUTE, RequestPath.parse("/admin/index.html", ""));
 
             MockHttpServletResponse response = new MockHttpServletResponse();
 
@@ -77,6 +80,7 @@ class WebMvcConfigTest {
             request.setMethod(HttpMethod.GET.name());
             request.setRequestURI("/admin/" + resource);
             request.setAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE, "admin/" + resource);
+            request.setAttribute(ServletRequestPathUtils.PATH_ATTRIBUTE, RequestPath.parse("/admin/" + resource, ""));
 
             MockHttpServletResponse response = new MockHttpServletResponse();
 
@@ -103,12 +107,13 @@ class WebMvcConfigTest {
             Map<String, Object> handlerMap = handlerMapping.getHandlerMap();
             assertThat(handlerMap).hasSize(2);
 
-            ResourceHttpRequestHandler resourceHandler = (ResourceHttpRequestHandler) handlerMap.get("/**/index.html");
+            ResourceHttpRequestHandler resourceHandler = (ResourceHttpRequestHandler) handlerMap.get("/*/index.html");
 
             MockHttpServletRequest request = new MockHttpServletRequest();
             request.setMethod(HttpMethod.GET.name());
             request.setRequestURI("/troll-build/index.html");
             request.setAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE, "troll-build/index.html");
+            request.setAttribute(ServletRequestPathUtils.PATH_ATTRIBUTE, RequestPath.parse("/troll-build/index.html", ""));
 
             MockHttpServletResponse response = new MockHttpServletResponse();
 
@@ -139,6 +144,7 @@ class WebMvcConfigTest {
             request.setMethod(HttpMethod.GET.name());
             request.setRequestURI("/troll-build/" + resource);
             request.setAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE, "troll-build/" + resource);
+            request.setAttribute(ServletRequestPathUtils.PATH_ATTRIBUTE, RequestPath.parse("/troll-build/" + resource, ""));
 
             MockHttpServletResponse response = new MockHttpServletResponse();
 

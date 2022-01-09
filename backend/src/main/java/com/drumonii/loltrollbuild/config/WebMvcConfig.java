@@ -25,7 +25,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/**/index.html")
+        registry.addResourceHandler("/*/index.html")
                 .addResourceLocations("classpath:/public/")
                 .setCacheControl(CacheControl.noStore());
 
