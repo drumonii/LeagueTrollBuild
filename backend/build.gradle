@@ -40,7 +40,7 @@ bootJar {
     destinationDirectory = file("${rootProject.rootDir}/build")
     dependsOn asciidoctor
     dependsOn ':frontend:ngBuild', ':frontend:moveAssets'
-    from ("${asciidoctor.outputDir}/html5") {
+    from (asciidoctor.outputDir) {
         into 'static/docs'
     }
     from ("${project(':frontend').projectDir}/dist") {
