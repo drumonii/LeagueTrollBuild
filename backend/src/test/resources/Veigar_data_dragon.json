@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "11.23.1",
+  "version": "12.2.1",
   "data": {
     "Veigar": {
       "id": "Veigar",
@@ -146,7 +146,7 @@
           "id": "VeigarBalefulStrike",
           "name": "Baleful Strike",
           "description": "Veigar unleashes a bolt of dark energy that deals magic damage to the first two enemies hit. Units killed by this bolt grant Veigar some ability power permanently.",
-          "tooltip": "Veigar unleashes a bolt of dark energy, dealing <magicDamage>{{ totaldamagetooltip }} magic damage</magicDamage> to the first two enemies hit.<br /><br />If Veigar kills an enemy with this Ability, he gains a stack of <keywordMajor>Phenomenal Evil</keywordMajor>. Champions, large minions and large jungle monsters grant two.",
+          "tooltip": "Veigar unleashes a bolt of dark energy, dealing <magicDamage>{{ totaldamagetooltip }} magic damage</magicDamage> to the first two enemies hit.<br /><br />If Veigar kills an enemy with this Ability, he gains a stack of <keywordMajor>Phenomenal Evil</keywordMajor>. Champions, large minions and large jungle monsters grant {{ e3 }} additional stacks.",
           "leveltip": {
             "label": [
               "Damage",
@@ -161,13 +161,13 @@
           },
           "maxrank": 5,
           "cooldown": [
-            7,
-            6.5,
             6,
             5.5,
-            5
+            5,
+            4.5,
+            4
           ],
-          "cooldownBurn": "7/6.5/6/5.5/5",
+          "cooldownBurn": "6/5.5/5/4.5/4",
           "cost": [
             30,
             35,
@@ -194,11 +194,11 @@
               1
             ],
             [
-              1,
-              1,
-              1,
-              1,
-              1
+              2,
+              2,
+              2,
+              2,
+              2
             ],
             [
               0,
@@ -254,7 +254,7 @@
             null,
             "80/120/160/200/240",
             "1",
-            "1",
+            "2",
             "0",
             "0",
             "0",

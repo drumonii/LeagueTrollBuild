@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "11.23.1",
+  "version": "12.2.1",
   "data": {
     "Fiora": {
       "id": "Fiora",
@@ -100,7 +100,7 @@
       "lore": "The most feared duelist in all Valoran, Fiora is as renowned for her brusque manner and cunning mind as she is for the speed of her bluesteel rapier. Born to House Laurent in the kingdom of Demacia, Fiora took control of the family from her father in the wake of a scandal that nearly destroyed them. House Laurent's reputation was sundered, but Fiora bends her every effort to restore her family's honor and return them to their rightful place among the great and good of Demacia.",
       "blurb": "The most feared duelist in all Valoran, Fiora is as renowned for her brusque manner and cunning mind as she is for the speed of her bluesteel rapier. Born to House Laurent in the kingdom of Demacia, Fiora took control of the family from her father in...",
       "allytips": [
-        "Thanks to Duelist's Dance, Fiora excels at quick trades. Use the movement speed boost from striking a Vital to escape unscathed or set up for the next one.",
+        "Thanks to Duelist's Dance, Fiora excels at quick trades. Use the Move Speed boost from striking a Vital to escape unscathed or set up for the next one.",
         "Grand Challenge allows Fiora to take down even the most durable opponents and then recover if successful, so do not hesitate to attack the enemy's front line."
       ],
       "enemytips": [
@@ -573,12 +573,12 @@
         {
           "id": "FioraR",
           "name": "Grand Challenge",
-          "description": "Fiora reveals all four Vitals on an enemy champion and gains movement speed while near them. If Fiora hits all 4 Vitals or if the target dies after she has hit at least one, Fiora and her allies in the area are healed over the next few seconds.",
+          "description": "Fiora reveals all four Vitals on an enemy champion and gains Move Speed while near them. If Fiora hits all 4 Vitals or if the target dies after she has hit at least one, Fiora and her allies in the area are healed over the next few seconds.",
           "tooltip": "<spellPassive>Passive:</spellPassive> <spellName>Duelist's Dance</spellName> <speed>Move Speed</speed> bonus is increased to {{ percentms }}%.<br /><br /><spellActive>Active:</spellActive> Fiora reveals all 4 <keywordMajor>Vitals</keywordMajor> on a champion for a max of <trueDamage>{{ spell.fiorapassive:rdamagetotal }} max Health true damage</trueDamage> and gains <spellName>Duelist's Dance</spellName>'s Move Speed bonus while near the target.<br /><br />If Fiora strikes all 4 <keywordMajor>Vitals</keywordMajor> within {{ markduration }} seconds or if the target dies after she has hit at least one, Fiora restores <healing>{{ healpersecondcalc }} Health per second</healing> to surrounding allied champions for between {{ minhealduration }} to {{ healduration }} seconds, scaling with the number of <keywordMajor>Vitals</keywordMajor> hit.",
           "leveltip": {
             "label": [
               "Cooldown",
-              "Duelist Movement Speed",
+              "Duelist Move Speed",
               "Heal Per Second"
             ],
             "effect": [

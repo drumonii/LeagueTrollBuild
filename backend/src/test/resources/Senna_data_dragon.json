@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "11.23.1",
+  "version": "12.2.1",
   "data": {
     "Senna": {
       "id": "Senna",
@@ -91,7 +91,7 @@
           "id": "SennaQ",
           "name": "Piercing Darkness",
           "description": "From the twin barrels of her Relic Cannon, Senna fires a unified beam of light and shadow through a target, healing allies and damaging enemies.",
-          "tooltip": "Senna shoots a bolt of piercing shadow through an ally or enemy, dealing <physicalDamage>{{ totaldamage }} physical damage</physicalDamage> to enemies and restoring <healing>{{ totalheal }} Health</healing> to allied champions. <br /><br />Attacks reduce this Ability's Cooldown by {{ cdreductiononhit }} second.",
+          "tooltip": "Senna shoots a bolt of piercing shadow through an ally or enemy, dealing <physicalDamage>{{ totaldamage }} physical damage</physicalDamage> to enemies and <status>slowing</status> them by {{ totalslow }} for {{ slowduration }} seconds. Restores <healing>{{ totalheal }} Health</healing> to allied champions. <br /><br />Attacks reduce this Ability's Cooldown by {{ cdreductiononhit }} second.",
           "leveltip": {
             "label": [
               "Damage",

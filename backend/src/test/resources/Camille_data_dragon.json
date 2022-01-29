@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "11.23.1",
+  "version": "12.2.1",
   "data": {
     "Camille": {
       "id": "Camille",
@@ -96,7 +96,7 @@
         {
           "id": "CamilleQ",
           "name": "Precision Protocol",
-          "description": "Camille's next attack deals bonus damage and grants bonus movement speed. This spell can be recast for a short period of time, doing significantly increased bonus damage if Camille delays a period of time between the two attacks.",
+          "description": "Camille's next attack deals bonus damage and grants bonus Move Speed. This spell can be recast for a short period of time, doing significantly increased bonus damage if Camille delays a period of time between the two attacks.",
           "tooltip": "Camille's next Attack deals an additional <physicalDamage>{{ bonusdamage }} physical damage</physicalDamage> and grants her <speed>{{ msbonus*100 }}% Move Speed</speed> for {{ msduration }} second. This ability can be <recast>Recast</recast> in the next {{ qtotalrecasttime }} seconds.<br /><br />If the <recast>Recast</recast> Attack hits at least {{ qrampuptime }} seconds after the first, the bonus damage is increased to <physicalDamage>{{ empoweredbonusdamage }}</physicalDamage> and {{ damageconversionpercentage }} of the Attack's damage is converted into <trueDamage>true damage</trueDamage>.<br /><br /><rules>This Ability triggers spell effects upon dealing damage.</rules>",
           "leveltip": {
             "label": [
@@ -401,12 +401,12 @@
           "maxrank": 5,
           "cooldown": [
             16,
-            14.5,
+            15,
+            14,
             13,
-            11.5,
-            10
+            12
           ],
-          "cooldownBurn": "16/14.5/13/11.5/10",
+          "cooldownBurn": "16/15/14/13/12",
           "cost": [
             70,
             70,

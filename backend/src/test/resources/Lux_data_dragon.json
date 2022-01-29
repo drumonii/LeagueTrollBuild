@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "11.23.1",
+  "version": "12.2.1",
   "data": {
     "Lux": {
       "id": "Lux",
@@ -107,6 +107,18 @@
           "num": 19,
           "name": "Space Groove Lux",
           "chromas": true
+        },
+        {
+          "id": "99029",
+          "num": 29,
+          "name": "Porcelain Lux",
+          "chromas": true
+        },
+        {
+          "id": "99040",
+          "num": 40,
+          "name": "Porcelain Lux Prestige Edition",
+          "chromas": false
         }
       ],
       "lore": "Luxanna Crownguard hails from Demacia, an insular realm where magical abilities are viewed with fear and suspicion. Able to bend light to her will, she grew up dreading discovery and exile, and was forced to keep her power secret, in order to preserve her family's noble status. Nonetheless, Lux's optimism and resilience have led her to embrace her unique talents, and she now covertly wields them in service of her homeland.",
@@ -161,23 +173,21 @@
           "tooltip": "Lux fires a ball of light, <status>Rooting</status> the first two enemies for {{ e3 }} seconds and dealing <magicDamage>{{ totaldamagett }} magic damage</magicDamage> to each.",
           "leveltip": {
             "label": [
-              "Damage",
-              "Cooldown"
+              "Damage"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}",
-              "{{ cooldown }} -> {{ cooldownNL }}"
+              "{{ e1 }} -> {{ e1NL }}"
             ]
           },
           "maxrank": 5,
           "cooldown": [
             11,
-            10.5,
-            10,
-            9.5,
-            9
+            11,
+            11,
+            11,
+            11
           ],
-          "cooldownBurn": "11/10.5/10/9.5/9",
+          "cooldownBurn": "11",
           "cost": [
             50,
             50,
@@ -191,10 +201,10 @@
             null,
             [
               80,
-              125,
-              170,
-              215,
-              260
+              120,
+              160,
+              200,
+              240
             ],
             [
               50,
@@ -262,7 +272,7 @@
           ],
           "effectBurn": [
             null,
-            "80/125/170/215/260",
+            "80/120/160/200/240",
             "50",
             "2",
             "0",

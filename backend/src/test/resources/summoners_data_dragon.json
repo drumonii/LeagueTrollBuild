@@ -1,6 +1,6 @@
 {
   "type": "summoner",
-  "version": "11.23.1",
+  "version": "12.2.1",
   "data": {
     "SummonerBarrier": {
       "id": "SummonerBarrier",
@@ -483,8 +483,8 @@
     "SummonerHaste": {
       "id": "SummonerHaste",
       "name": "Ghost",
-      "description": "For 10 seconds, your champion can move through units and gains 24 - 48% Movement Speed (depending on champion level). Ghost extends its duration on takedown.",
-      "tooltip": "For {{ duration }} seconds, your champion can move through units and gains {{ movespeedmod }} Movement Speed.<br /><br />Ghost extends its duration by {{ takedownextension }} seconds on takedown.",
+      "description": "For 10 seconds, your champion can move through units and gains 24 - 48% Move Speed (depending on champion level). Ghost extends its duration on takedown.",
+      "tooltip": "For {{ duration }} seconds, your champion can move through units and gains {{ movespeedmod }} Move Speed.<br /><br />Ghost extends its duration by {{ takedownextension }} seconds on takedown.",
       "maxrank": 1,
       "cooldown": [
         210
@@ -582,8 +582,8 @@
     "SummonerHeal": {
       "id": "SummonerHeal",
       "name": "Heal",
-      "description": "Restores 90-345 Health (depending on champion level) and grants 30% Movement Speed for 1 second to you and target allied champion. This healing is halved for units recently affected by Summoner Heal.",
-      "tooltip": "Restores {{ f1 }} Health and grants 30% Movement Speed for 1 second to your champion and target allied champion. This healing is halved for units recently affected by Summoner Heal.<br /><br /><span class=\"colorFFFF00\">If this spell cannot find a target, it will cast on the most wounded allied champion in range.</span>",
+      "description": "Restores 90-345 Health (depending on champion level) and grants 30% Move Speed for 1 second to you and target allied champion. This healing is halved for units recently affected by Summoner Heal.",
+      "tooltip": "Restores {{ f1 }} Health and grants 30% Move Speed for 1 second to your champion and target allied champion. This healing is halved for units recently affected by Summoner Heal.<br /><br /><span class=\"colorFFFF00\">If this spell cannot find a target, it will cast on the most wounded allied champion in range.</span>",
       "maxrank": 1,
       "cooldown": [
         240
@@ -1193,8 +1193,8 @@
     "SummonerTeleport": {
       "id": "SummonerTeleport",
       "name": "Teleport",
-      "description": "After channeling for 4 seconds, teleports your champion to target allied structure, minion, or ward and grants a Move Speed boost. The cooldown of Teleport scales from 420-210 seconds depending on champion level.",
-      "tooltip": "After channeling for {{ channelduration }} seconds, your champion teleports to target allied structure, minion, or ward and grants a {{ msamount*100 }}% Move Speed boost for {{ msduration }} seconds.",
+      "description": "After channeling for 4 seconds, teleports your champion to target allied structure. Upgrades to Unleashed Teleport at 14 minutes, which teleports your champion to target allied structure, minion, or ward.",
+      "tooltip": "After channeling for {{ channelduration }} seconds, your champion teleports to target allied structure.<br /><br />Upgrades to Unleashed Teleport when Turret Plates fall at 14 minutes. Unleashed Teleport has a {{ upgradedcooldown }}s cooldown, can be used on allied structures, minions, or wards, and grants a {{ msamount*100 }}% Move Speed boost for {{ msduration }} seconds.",
       "maxrank": 1,
       "cooldown": [
         0
@@ -1367,9 +1367,9 @@
     },
     "Summoner_UltBookSmitePlaceholder": {
       "id": "Summoner_UltBookSmitePlaceholder",
-      "name": "Placeholder and Auto-Smite",
-      "description": "This slot will be replaced by another champion's ultimate selected at the start of the game. There will be 30 seconds to select an ultimate. Be prepared!",
-      "tooltip": "Will be replaced by your Ultimate Summoner Spell.<br /><br />Gain Auto-Smite. Auto-Smite will execute Buff Monsters, Epic Monsters, and Scuttle Crabs.",
+      "name": "Placeholder and Attack-Smite",
+      "description": "This slot will be replaced by another champion's ultimate and you will gain Attack-Smite. There will be 30 seconds to select an ultimate. Be prepared!",
+      "tooltip": "Will be replaced by your Ultimate Summoner Spell.<br /><br />Gain Attack-Smite. Attack-Smite will execute allied Buff Monsters, Epic Monsters, and Scuttle Crabs when you attack them.<br /><br /><attention>Attack-Smite does not have a cooldown.</attention>",
       "maxrank": 1,
       "cooldown": [
         0

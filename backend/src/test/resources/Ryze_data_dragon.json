@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "11.23.1",
+  "version": "12.2.1",
   "data": {
     "Ryze": {
       "id": "Ryze",
@@ -146,7 +146,7 @@
         {
           "id": "RyzeQWrapper",
           "name": "Overload",
-          "description": "Passively, Ryze's other basic abilities reset the cooldown of Overload and charge a rune. When Ryze casts Overload with 2 runes charged, he gains a brief burst of Movement Speed.<br><br>On cast, Ryze throws a charge of pure energy in a line, dealing damage to the first enemy struck. If the target has Flux on it, Overload deals extra damage and bounces to nearby enemies with Flux.",
+          "description": "Passively, Ryze's other basic abilities reset the cooldown of Overload and charge a rune. When Ryze casts Overload with 2 runes charged, he gains a brief burst of Move Speed.<br><br>On cast, Ryze throws a charge of pure energy in a line, dealing damage to the first enemy struck. If the target has Flux on it, Overload deals extra damage and bounces to nearby enemies with Flux.",
           "tooltip": "<spellPassive>Passive:</spellPassive> <spellName>Rune Prison</spellName> and <spellName>Spell Flux</spellName> refresh this Ability's Cooldown and charge a rune for {{ runeduration }} seconds (max {{ maximumrunes }} runes).<br /><br /><spellActive>Active:</spellActive> Ryze unleashes a blast, dealing <magicDamage>{{ qdamagecalc }} magic damage</magicDamage> to the first enemy hit. If the target has <keywordMajor>Flux</keywordMajor> on it, it is consumed, causing this Ability to deal {{ spell.ryzer:overloaddamagebonus }}% increased damage and bounces to nearby enemies with <keywordMajor>Flux</keywordMajor>.<br /><br />Ryze also discharges all runes, granting Ryze <speed>{{ movementspeedamount }}% Move Speed</speed> for {{ movementspeedduration }} seconds if {{ maximumrunes }} runes were charged.<br />",
           "leveltip": {
             "label": [

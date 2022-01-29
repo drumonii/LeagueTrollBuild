@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "11.23.1",
+  "version": "12.2.1",
   "data": {
     "Kindred": {
       "id": "Kindred",
@@ -40,6 +40,12 @@
           "id": "203003",
           "num": 3,
           "name": "Spirit Blossom Kindred",
+          "chromas": true
+        },
+        {
+          "id": "203012",
+          "num": 12,
+          "name": "Porcelain Kindred",
           "chromas": true
         }
       ],
@@ -534,11 +540,11 @@
           ],
           "cooldownBurn": "180/150/120",
           "cost": [
-            0,
-            0,
-            0
+            100,
+            100,
+            100
           ],
-          "costBurn": "0",
+          "costBurn": "100",
           "datavalues": {},
           "effect": [
             null,
@@ -559,8 +565,8 @@
             ],
             [
               400,
-              600,
-              800
+              400,
+              400
             ],
             [
               0,
@@ -598,7 +604,7 @@
             "250/325/400",
             "4",
             "530",
-            "400/600/800",
+            "400",
             "0",
             "0",
             "0",

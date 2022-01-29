@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "11.23.1",
+  "version": "12.2.1",
   "data": {
     "TahmKench": {
       "id": "TahmKench",
@@ -389,13 +389,15 @@
           "id": "TahmKenchE",
           "name": "Thick Skin",
           "description": "<passive>Passive:</passive> Tahm Kench stores a percent of the damage he takes and heals based on it while out of combat.<br><br><active>Active:</active> Convert all stored damage into a temporary shield.",
-          "tooltip": "<passive>Passive:</passive> {{ greyhealthratio*100 }}% of damage Tahm Kench takes is stored by his <spellName>Thick Skin</spellName>. If Kench has not taken damage within {{ ooctimer }} seconds, <spellName>Thick Skin</spellName> will rapidly be consumed to heal Tahm for {{ greyhealthhealingratio }} of its value.<br /><br /><active>Active:</active> Convert all your stored <spellName>Thick Skin</spellName> into a <shield>Shield</shield>, lasting {{ shieldduration }} seconds.",
+          "tooltip": "<passive>Passive:</passive> {{ greyhealthratio*100 }}% of damage Tahm Kench takes is stored by his <spellName>Thick Skin</spellName>, increased to {{ greyhealthratioenhanced*100 }}% if there are at least {{ enhancedthreshold }} nearby enemy champions. If Kench has not taken damage within {{ ooctimer }} seconds, <spellName>Thick Skin</spellName> will rapidly be consumed to heal Tahm for {{ greyhealthhealingratio }} of its value.<br /><br /><active>Active:</active> Convert all your stored <spellName>Thick Skin</spellName> into a <shield>Shield</shield>, lasting {{ shieldduration }} seconds.",
           "leveltip": {
             "label": [
-              "% Damage to Thick Skin"
+              "% Damage to Thick Skin",
+              "% Damage to Thick Skin Enhanced"
             ],
             "effect": [
-              "{{ greyhealthratio*100.000000 }}% -> {{ greyhealthrationl*100.000000 }}%"
+              "{{ greyhealthratio*100.000000 }}% -> {{ greyhealthrationl*100.000000 }}%",
+              "{{ greyhealthratioenhanced*100.000000 }}% -> {{ greyhealthratioenhancednl*100.000000 }}%"
             ]
           },
           "maxrank": 5,
@@ -506,13 +508,13 @@
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
-            1,
-            1,
-            1,
-            1,
-            1
+            2400,
+            2400,
+            2400,
+            2400,
+            2400
           ],
-          "rangeBurn": "1",
+          "rangeBurn": "2400",
           "image": {
             "full": "TahmKenchE.png",
             "sprite": "spell12.png",
@@ -528,18 +530,16 @@
           "id": "TahmKenchRWrapper",
           "name": "Devour",
           "description": "Tahm Kench devours a champion for a few seconds, dealing magic damage if they are an enemy, or shielding them if they are an ally.",
-          "tooltip": "Tahm Kench devours a champion for a few seconds. He can re-cast to spit them out.<br /><br /><specialRules>Enemy Champions:</specialRules> Require 3 stacks of <spellName>An Acquired Taste</spellName>. Are devoured for up to {{ enemyduration }} seconds and take <magicDamage>{{ basedamage }} (+{{ percenthpdamage }} of their Max Health) magic damage</magicDamage>. Tahm Kench is slowed by {{ slowamount*100 }}% and <keywordName>Grounded</keywordName> during this effect.<br /><br /><specialRules>Ally Champions:</specialRules> Are devoured for up to {{ allyduration }} seconds and are granted <shield>{{ totalshield }} Shield</shield> for up to {{ shielddurationafterexit }} seconds after being spit out. Allies can also choose to exit early. Tahm Kench is slowed by {{ allyslowamount*100 }}% and <keywordName>Grounded</keywordName> during this effect - but he can cast <keywordName>Abyssal Dive</keywordName>.",
+          "tooltip": "Tahm Kench devours a champion for a few seconds. He can re-cast to spit them out.<br /><br /><specialRules>Enemy Champions:</specialRules> Require 3 stacks of <spellName>An Acquired Taste</spellName>. Are devoured for up to {{ enemyduration }} seconds and take <magicDamage>{{ basedamage }} (+{{ percenthpdamage }} of their Max Health) magic damage</magicDamage>. Tahm Kench is slowed by {{ slowamount*100 }}% and <keywordName>Grounded</keywordName> during this effect.<br /><br /><specialRules>Ally Champions:</specialRules> Are devoured for up to {{ allyduration }} seconds and are granted <shield>{{ totalshield }} Shield</shield> for up to {{ shielddurationafterexit }} seconds after being spit out. Allies can also choose to exit early. Tahm Kench is <keywordName>Grounded</keywordName> during this effect, but can cast <keywordName>Abyssal Dive</keywordName> and gains <speed>{{ allyspeedamount*100 }}% Move Speed</speed> for {{ allyduration }} seconds.",
           "leveltip": {
             "label": [
               "Damage",
               "Shield Amount",
-              "Ally Self Slow Amount",
               "Cooldown"
             ],
             "effect": [
               "{{ basedamage }} -> {{ basedamageNL }}",
               "{{ baseshield }} -> {{ baseshieldNL }}",
-              "{{ allyslowamount*100.000000 }}% -> {{ allyslowamountnl*100.000000 }}%",
               "{{ datacooldown }} -> {{ datacooldownNL }}"
             ]
           },

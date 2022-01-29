@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "11.23.1",
+  "version": "12.2.1",
   "data": {
     "RekSai": {
       "id": "RekSai",
@@ -41,13 +41,19 @@
           "num": 9,
           "name": "Blackfrost Rek'Sai",
           "chromas": true
+        },
+        {
+          "id": "421017",
+          "num": 17,
+          "name": "Elderwood Rek'Sai",
+          "chromas": true
         }
       ],
       "lore": "An apex predator, Rek'Sai is a merciless Void-spawn that tunnels beneath the ground to ambush and devour unsuspecting prey. Her insatiable hunger has laid waste to entire regions of the once-great empire of Shurima—merchants, traders, even armed caravans, will go hundreds of miles out of their way to avoid her and her offspring's hunting grounds. All know that once Rek'Sai is seen on the horizon, death from below is all but guaranteed.",
       "blurb": "An apex predator, Rek'Sai is a merciless Void-spawn that tunnels beneath the ground to ambush and devour unsuspecting prey. Her insatiable hunger has laid waste to entire regions of the once-great empire of Shurima—merchants, traders, even armed...",
       "allytips": [
         "Keeping tunnels spread out across the map will ensure you have choices when you want to cast Void Rush.",
-        "Cast Burrow before travelling around the map to take advantage of the increased Movement Speed and the safety provided by Tremor Sense.",
+        "Cast Burrow before travelling around the map to take advantage of the increased Move Speed and the safety provided by Tremor Sense.",
         "Tremor Sense can warn you of enemies closing in, and is particularly useful when entering enemy territory."
       ],
       "enemytips": [
@@ -234,7 +240,7 @@
         {
           "id": "RekSaiW",
           "name": "Burrow / Un-burrow",
-          "description": "Rek'Sai burrows into the ground, gaining new abilities and increased Movement Speed. Her vision range is reduced and she cannot use basic attacks.<br><br>While Burrowed, Rek'Sai may cast Un-burrow to knock up and damage nearby enemies.",
+          "description": "Rek'Sai burrows into the ground, gaining new abilities and increased Move Speed. Her vision range is reduced and she cannot use basic attacks.<br><br>While Burrowed, Rek'Sai may cast Un-burrow to knock up and damage nearby enemies.",
           "tooltip": "<keywordMajor>Un-Burrowed:</keywordMajor> Rek'sai burrows into the ground, gaining access to new Abilities, and <speed>{{ spell.reksaiw:speedbonus }} Move Speed</speed>, but cannot Attack. She has reduced vision range, but nearby enemies that move and are otherwise unseen will have their positions revealed to Rek'sai and her allies.",
           "leveltip": {
             "label": [
@@ -408,11 +414,11 @@
           "effect": [
             null,
             [
-              50,
+              55,
               60,
+              65,
               70,
-              80,
-              90
+              75
             ],
             [
               0,
@@ -465,10 +471,10 @@
             ],
             [
               26,
-              23,
+              24,
+              22,
               20,
-              17,
-              14
+              18
             ],
             [
               0,
@@ -480,7 +486,7 @@
           ],
           "effectBurn": [
             null,
-            "50/60/70/80/90",
+            "55/60/65/70/75",
             "0",
             "12",
             "0",
@@ -488,7 +494,7 @@
             "8",
             "0",
             "10/8/6/4/2",
-            "26/23/20/17/14",
+            "26/24/22/20/18",
             "0"
           ],
           "vars": [],

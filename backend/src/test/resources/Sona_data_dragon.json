@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "11.23.1",
+  "version": "12.2.1",
   "data": {
     "Sona": {
       "id": "Sona",
@@ -114,7 +114,7 @@
         "mpperlevel": 45,
         "movespeed": 325,
         "armor": 26,
-        "armorperlevel": 3.3,
+        "armorperlevel": 3,
         "spellblock": 30,
         "spellblockperlevel": 0.5,
         "attackrange": 550,
@@ -419,8 +419,8 @@
         {
           "id": "SonaE",
           "name": "Song of Celerity",
-          "description": "Sona plays the Song of Celerity, granting nearby allies bonus Movement Speed. Sona gains a temporary aura that grants allied champions tagged by the zone bonus Movement Speed.",
-          "tooltip": "<spellPassive>Active:</spellPassive> She begins a new <keywordMajor>Melody</keywordMajor> and grants herself <speed>{{ totalselfmovementspeed }} Move Speed</speed> for {{ selfmovementspeeddurationmin }} seconds, extended to up to {{ selfmovementspeeddurationmax }} seconds if she doesn't take damage. <br /><br /><keywordMajor>Melody:</keywordMajor> Sona gains an aura for {{ auraduration }} seconds that grants allied champions <speed>{{ totalallymovementspeed }} Move Speed</speed> for {{ allymovementspeedduration }} seconds.<br /><br /><keywordMajor>Power Chord - Tempo:</keywordMajor> Power Chord also slows the target's movement speed by {{ totaltempomovespeedslow }} for {{ tempoduration }} seconds.",
+          "description": "Sona plays the Song of Celerity, granting nearby allies bonus Move Speed. Sona gains a temporary aura that grants allied champions tagged by the zone bonus Move Speed.",
+          "tooltip": "<spellPassive>Active:</spellPassive> She begins a new <keywordMajor>Melody</keywordMajor> and grants herself <speed>{{ totalselfmovementspeed }} Move Speed</speed> for {{ selfmovementspeeddurationmin }} seconds, extended to up to {{ selfmovementspeeddurationmax }} seconds if she doesn't take damage. <br /><br /><keywordMajor>Melody:</keywordMajor> Sona gains an aura for {{ auraduration }} seconds that grants allied champions <speed>{{ totalallymovementspeed }} Move Speed</speed> for {{ allymovementspeedduration }} seconds.<br /><br /><keywordMajor>Power Chord - Tempo:</keywordMajor> Power Chord also slows the target's Move Speed by {{ totaltempomovespeedslow }} for {{ tempoduration }} seconds.",
           "leveltip": {
             "label": [
               "Move Speed"
@@ -431,13 +431,13 @@
           },
           "maxrank": 5,
           "cooldown": [
-            12,
-            12,
-            12,
-            12,
-            12
+            14,
+            14,
+            14,
+            14,
+            14
           ],
-          "cooldownBurn": "12",
+          "cooldownBurn": "14",
           "cost": [
             65,
             65,

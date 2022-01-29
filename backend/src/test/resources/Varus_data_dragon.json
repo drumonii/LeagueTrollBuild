@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "11.23.1",
+  "version": "12.2.1",
   "data": {
     "Varus": {
       "id": "Varus",
@@ -312,11 +312,11 @@
           "effect": [
             null,
             [
-              7,
-              10.5,
-              14,
-              17.5,
-              20
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
               0.03,
@@ -384,7 +384,7 @@
           ],
           "effectBurn": [
             null,
-            "7/10.5/14/17.5/20",
+            "0",
             "0.03/0.035/0.04/0.045/0.05",
             "6",
             "3",
@@ -420,7 +420,7 @@
         {
           "id": "VarusE",
           "name": "Hail of Arrows",
-          "description": "Varus fires a hail of arrows that deal physical damage and desecrate the ground. Desecrated ground slows enemies' Movement Speed and reduces their self healing and regeneration.",
+          "description": "Varus fires a hail of arrows that deal physical damage and desecrate the ground. Desecrated ground slows enemies' Move Speed and reduces their self healing and regeneration.",
           "tooltip": "Varus fires a hail of arrows that deals <physicalDamage>{{ totaldamage }} physical damage</physicalDamage> and desecrates the ground for {{ e3 }} seconds, <status>Slowing</status> enemies by {{ e2 }}% and applying {{ grievousamount*100 }}% Grievous Wounds.",
           "leveltip": {
             "label": [
@@ -659,11 +659,11 @@
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
-            1200,
-            1200,
-            1200
+            1300,
+            1300,
+            1300
           ],
-          "rangeBurn": "1200",
+          "rangeBurn": "1300",
           "image": {
             "full": "VarusR.png",
             "sprite": "spell13.png",

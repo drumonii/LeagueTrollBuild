@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "11.23.1",
+  "version": "12.2.1",
   "data": {
     "Janna": {
       "id": "Janna",
@@ -89,6 +89,12 @@
           "num": 27,
           "name": "Battle Queen Janna",
           "chromas": true
+        },
+        {
+          "id": "40036",
+          "num": 36,
+          "name": "Crystal Rose Janna",
+          "chromas": true
         }
       ],
       "lore": "Armed with the power of Runeterra's gales, Janna is a mysterious, elemental wind spirit who protects the dispossessed of Zaun. Some believe she was brought into existence by the pleas of Runeterra's sailors who prayed for fair winds as they navigated treacherous waters and braved rough tempests. Her favor and protection has since been called into the depths of Zaun, where Janna has become a beacon of hope to those in need. No one knows where or when she will appear, but more often than not, she's come to help.",
@@ -119,21 +125,21 @@
         "hpperlevel": 70,
         "mp": 350,
         "mpperlevel": 64,
-        "movespeed": 315,
+        "movespeed": 330,
         "armor": 28,
         "armorperlevel": 3.8,
         "spellblock": 30,
         "spellblockperlevel": 0.5,
-        "attackrange": 550,
+        "attackrange": 500,
         "hpregen": 5.5,
         "hpregenperlevel": 0.55,
         "mpregen": 11.5,
         "mpregenperlevel": 0.4,
         "crit": 0,
         "critperlevel": 0,
-        "attackdamage": 46,
-        "attackdamageperlevel": 1.5,
-        "attackspeedperlevel": 2.95,
+        "attackdamage": 52,
+        "attackdamageperlevel": 3,
+        "attackspeedperlevel": 3,
         "attackspeed": 0.625
       },
       "spells": [
@@ -165,12 +171,12 @@
           "cooldownBurn": "12",
           "cost": [
             60,
+            70,
             80,
-            100,
-            120,
-            140
+            90,
+            100
           ],
-          "costBurn": "60/80/100/120/140",
+          "costBurn": "60/70/80/90/100",
           "datavalues": {},
           "effect": [
             null,
@@ -189,11 +195,11 @@
               35
             ],
             [
-              25,
-              25,
-              25,
-              25,
-              25
+              20,
+              20,
+              20,
+              20,
+              20
             ],
             [
               0.5,
@@ -224,11 +230,11 @@
               0
             ],
             [
-              1.5,
-              1.5,
-              1.5,
-              1.5,
-              1.5
+              1.25,
+              1.25,
+              1.25,
+              1.25,
+              1.25
             ],
             [
               0,
@@ -249,12 +255,12 @@
             null,
             "60/85/110/135/160",
             "15/20/25/30/35",
-            "25",
+            "20",
             "0.5",
             "0.25",
             "3",
             "0",
-            "1.5",
+            "1.25",
             "0",
             "0"
           ],
@@ -294,7 +300,7 @@
               "Cooldown"
             ],
             "effect": [
-              "{{ e1 }}% -> {{ e1NL }}%",
+              "{{ mspercent*100.000000 }}% -> {{ mspercentnl*100.000000 }}%",
               "{{ e2 }} -> {{ e2NL }}",
               "{{ e3 }}% -> {{ e3NL }}%",
               "{{ cost }} -> {{ costNL }}",
@@ -303,13 +309,13 @@
           },
           "maxrank": 5,
           "cooldown": [
-            8,
-            7.5,
-            7,
-            6.5,
-            6
+            12,
+            12,
+            12,
+            12,
+            12
           ],
-          "cooldownBurn": "8/7.5/7/6.5/6",
+          "cooldownBurn": "12",
           "cost": [
             50,
             60,
@@ -322,18 +328,18 @@
           "effect": [
             null,
             [
-              6,
-              7,
-              8,
-              9,
-              10
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             [
-              55,
-              85,
-              115,
-              145,
-              175
+              70,
+              100,
+              130,
+              160,
+              190
             ],
             [
               24,
@@ -343,11 +349,11 @@
               40
             ],
             [
-              2,
-              2,
-              2,
-              2,
-              2
+              3,
+              3,
+              3,
+              3,
+              3
             ],
             [
               0.0002,
@@ -394,10 +400,10 @@
           ],
           "effectBurn": [
             null,
-            "6/7/8/9/10",
-            "55/85/115/145/175",
+            "0",
+            "70/100/130/160/190",
             "24/28/32/36/40",
-            "2",
+            "3",
             "0",
             "0",
             "0",
@@ -409,13 +415,13 @@
           "costType": " {{ abilityresourcename }}",
           "maxammo": "-1",
           "range": [
-            550,
-            550,
-            550,
-            550,
-            550
+            650,
+            650,
+            650,
+            650,
+            650
           ],
-          "rangeBurn": "550",
+          "rangeBurn": "650",
           "image": {
             "full": "SowTheWind.png",
             "sprite": "spell4.png",
@@ -431,7 +437,7 @@
           "id": "EyeOfTheStorm",
           "name": "Eye Of The Storm",
           "description": "Janna conjures a defensive gale that shields an ally champion or turret from incoming damage and increases their Attack Damage.",
-          "tooltip": "Janna grants an ally champion or turret <shield>{{ totalshield }} Shield</shield> decaying over {{ e3 }} seconds. While shielded, they gain <scaleAD>{{ totalad }} Attack Damage</scaleAD>.<br /><br />Whenever Janna <status>Slows</status> or knocks an enemy champion <status>Airborne</status>, she reduces this Ability's Cooldown by {{ ecdrefundforcc*100 }}%.",
+          "tooltip": "<spellPassive>Passive:</spellPassive> Janna gains {{ empowerpercent*100 }}% Heal and Shield Power for {{ empowerduration }} seconds whenever she impairs an enemy champion's movement.<br /><br /><spellActive>Active:</spellActive> Janna grants an ally champion or turret <shield>{{ totalshield }} Shield</shield> decaying over {{ e3 }} seconds. While shielded, they gain <scaleAD>{{ totalad }} Attack Damage</scaleAD>.",
           "leveltip": {
             "label": [
               "Shield Health",
@@ -448,13 +454,13 @@
           },
           "maxrank": 5,
           "cooldown": [
-            16,
             15,
-            14,
-            13,
-            12
+            13.5,
+            12,
+            10.5,
+            9
           ],
-          "cooldownBurn": "16/15/14/13/12",
+          "cooldownBurn": "15/13.5/12/10.5/9",
           "cost": [
             70,
             80,
@@ -468,10 +474,10 @@
             null,
             [
               80,
-              115,
-              150,
-              185,
-              220
+              110,
+              140,
+              170,
+              200
             ],
             [
               10,
@@ -488,11 +494,11 @@
               5
             ],
             [
-              0.75,
-              0.75,
-              0.75,
-              0.75,
-              0.75
+              1.25,
+              1.25,
+              1.25,
+              1.25,
+              1.25
             ],
             [
               0.25,
@@ -539,10 +545,10 @@
           ],
           "effectBurn": [
             null,
-            "80/115/150/185/220",
+            "80/110/140/170/200",
             "10/17.5/25/32.5/40",
             "5",
-            "0.75",
+            "1.25",
             "0.25",
             "0",
             "0",
@@ -690,7 +696,7 @@
       ],
       "passive": {
         "name": "Tailwind",
-        "description": "Janna passively gains bonus Move Speed, and nearby allied champions gain this bonus when moving toward her.<br><br>Additionally, Janna's basic attacks cause additional magic damage based on her bonus Move Speed.",
+        "description": "Janna gains bonus Move Speed moving towards allied champions and nearby allied champions gain this bonus when moving toward her.",
         "image": {
           "full": "Janna_Tailwind.png",
           "sprite": "passive1.png",

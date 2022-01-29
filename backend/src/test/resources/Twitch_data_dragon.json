@@ -1,7 +1,7 @@
 {
   "type": "champion",
   "format": "standAloneComplex",
-  "version": "11.23.1",
+  "version": "12.2.1",
   "data": {
     "Twitch": {
       "id": "Twitch",
@@ -285,7 +285,7 @@
           "tooltip": "Twitch hurls a cask that adds a stack of <spellName>Deadly Venom</spellName> to all enemies struck and leaves behind a toxic cloud that persists for {{ duration }} seconds.<br /><br />Enemies that remain within the cloud are <status>Slowed</status> by {{ totalslowamount }}% and receive an additional stack of <spellName>Deadly Venom</spellName> each second.",
           "leveltip": {
             "label": [
-              "Movement Speed Slow",
+              "Move Speed Slow",
               "Cooldown"
             ],
             "effect": [
@@ -564,13 +564,13 @@
           "id": "TwitchFullAutomatic",
           "name": "Spray and Pray",
           "description": "Twitch unleashes the full power of his crossbow, shooting bolts over a great distance that pierce all enemies caught in their path.",
-          "tooltip": "Twitch unleashes his crossbow, gaining {{ e5 }} Attack Range and <scaleAD>{{ e1 }} Attack Damage</scaleAD>, and causing his Attacks to become piercing bolts for {{ e2 }} seconds. These bolts hit all enemies they pass through, but deal {{ falloffdamage*100 }}% less damage to subsequent targets, down to a minimum of {{ minimumfalloffdamage*100 }}% damage.<br />",
+          "tooltip": "Twitch unleashes his crossbow, gaining {{ bonusrange }} Attack Range and <scaleAD>{{ bonusad }} Attack Damage</scaleAD>, and causing his Attacks to become piercing bolts for {{ duration }} seconds. These bolts hit all enemies they pass through, but deal {{ falloffdamage*100 }}% less damage to subsequent targets, down to a minimum of {{ minimumfalloffdamage*100 }}% damage.<br />",
           "leveltip": {
             "label": [
               "Attack Damage"
             ],
             "effect": [
-              "{{ e1 }} -> {{ e1NL }}"
+              "{{ bonusad }} -> {{ bonusadNL }}"
             ]
           },
           "maxrank": 3,
@@ -590,29 +590,29 @@
           "effect": [
             null,
             [
-              40,
-              55,
-              70
+              0,
+              0,
+              0
             ],
             [
-              6,
-              6,
-              6
+              0,
+              0,
+              0
             ],
             [
-              10,
-              10,
-              10
+              0,
+              0,
+              0
             ],
             [
-              60,
-              60,
-              60
+              0,
+              0,
+              0
             ],
             [
-              300,
-              300,
-              300
+              0,
+              0,
+              0
             ],
             [
               0,
@@ -642,11 +642,11 @@
           ],
           "effectBurn": [
             null,
-            "40/55/70",
-            "6",
-            "10",
-            "60",
-            "300",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
             "0",
             "0",
             "0",
